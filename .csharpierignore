@@ -1,5 +1,4 @@
-e/src/mono/mono/tests/array-coop-2.cs
-/src/Compilers/Test/Core/Assert/ConditionalFactAttribute.cs
+roslyn/src/Compilers/Test/Core/Assert/ConditionalFactAttribute.cs
 roslyn/src/Compilers/Test/Core/Compilation/RuntimeUtilities.cs
 runtime/src/libraries/System.Net.Primitives/tests/FunctionalTests/SocketAddressTest.cs
 runtime/src/libraries/System.Security.Cryptography.Pkcs/tests/SignedCms/SignedDocuments.cs
