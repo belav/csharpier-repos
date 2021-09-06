@@ -5,7 +5,10 @@ using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, System.Runtime.Serialization.DataContract>;
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContract
+>;
 
 namespace System.Runtime.Serialization
 {
@@ -20,10 +23,14 @@ namespace System.Runtime.Serialization
         private IDataContractSurrogate _dataContractSurrogate;
         private Hashtable _surrogateDataTable;
 
-        internal DataContractSet(IDataContractSurrogate dataContractSurrogate) : this(dataContractSurrogate, null, null) { }
+        internal DataContractSet(IDataContractSurrogate dataContractSurrogate)
+            : this(dataContractSurrogate, null, null) { }
 
-        internal DataContractSet(IDataContractSurrogate dataContractSurrogate, ICollection<Type> referencedTypes, ICollection<Type> referencedCollectionTypes)
-        {
+        internal DataContractSet(
+            IDataContractSurrogate dataContractSurrogate,
+            ICollection<Type> referencedTypes,
+            ICollection<Type> referencedCollectionTypes
+        ) {
             _dataContractSurrogate = dataContractSurrogate;
             _referencedTypes = referencedTypes;
             _referencedCollectionTypes = referencedCollectionTypes;
@@ -33,7 +40,9 @@ namespace System.Runtime.Serialization
         internal DataContractSet(DataContractSet dataContractSet)
         {
             if (dataContractSet == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException(nameof(dataContractSet)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException(nameof(dataContractSet))
+                );
 
             //this.dataContractSurrogate = dataContractSet.dataContractSurrogate;
             _referencedTypes = dataContractSet._referencedTypes;
@@ -46,8 +55,9 @@ namespace System.Runtime.Serialization
 
             if (dataContractSet._processedContracts != null)
             {
-                foreach (KeyValuePair<DataContract, object> pair in dataContractSet._processedContracts)
-                {
+                foreach (
+                    KeyValuePair<DataContract, object> pair in dataContractSet._processedContracts
+                ) {
                     ProcessedContracts.Add(pair.Key, pair.Value);
                 }
             }
@@ -98,7 +108,9 @@ namespace System.Runtime.Serialization
         internal static void EnsureTypeNotGeneric(Type type)
         {
             if (type.ContainsGenericParameters)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.GenericTypeNotExportable, type)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(SR.Format(SR.GenericTypeNotExportable, type))
+                );
         }
 
         private void Add(DataContract dataContract)
@@ -120,12 +132,48 @@ namespace System.Runtime.Serialization
             {
                 if (!dataContractInSet.Equals(dataContract))
                 {
-                    if (dataContract.UnderlyingType == null || dataContractInSet.UnderlyingType == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.DupContractInDataContractSet, dataContract.StableName.Name, dataContract.StableName.Namespace)));
+                    if (
+                        dataContract.UnderlyingType == null
+                        || dataContractInSet.UnderlyingType == null
+                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.Format(
+                                    SR.DupContractInDataContractSet,
+                                    dataContract.StableName.Name,
+                                    dataContract.StableName.Namespace
+                                )
+                            )
+                        );
                     else
                     {
-                        bool typeNamesEqual = (DataContract.GetClrTypeFullName(dataContract.UnderlyingType) == DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType));
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.DupTypeContractInDataContractSet, (typeNamesEqual ? dataContract.UnderlyingType.AssemblyQualifiedName : DataContract.GetClrTypeFullName(dataContract.UnderlyingType)), (typeNamesEqual ? dataContractInSet.UnderlyingType.AssemblyQualifiedName : DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType)), dataContract.StableName.Name, dataContract.StableName.Namespace)));
+                        bool typeNamesEqual = (
+                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                            == DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType)
+                        );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.Format(
+                                    SR.DupTypeContractInDataContractSet,
+                                    (
+                                        typeNamesEqual
+                                            ? dataContract.UnderlyingType.AssemblyQualifiedName
+                                            : DataContract.GetClrTypeFullName(
+                                                  dataContract.UnderlyingType
+                                              )
+                                    ),
+                                    (
+                                        typeNamesEqual
+                                            ? dataContractInSet.UnderlyingType.AssemblyQualifiedName
+                                            : DataContract.GetClrTypeFullName(
+                                                  dataContractInSet.UnderlyingType
+                                              )
+                                    ),
+                                    dataContract.StableName.Name,
+                                    dataContract.StableName.Namespace
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -166,9 +214,10 @@ namespace System.Runtime.Serialization
                         if (_dataContractSurrogate != null && dataMember.MemberInfo != null)
                         {
                             object customData = DataContractSurrogateCaller.GetCustomDataToExport(
-                                                   _dataContractSurrogate,
-                                                   dataMember.MemberInfo,
-                                                   memberDataContract.UnderlyingType);
+                                _dataContractSurrogate,
+                                dataMember.MemberInfo,
+                                memberDataContract.UnderlyingType
+                            );
                             if (customData != null)
                                 SurrogateDataTable.Add(dataMember, customData);
                         }
@@ -184,7 +233,9 @@ namespace System.Runtime.Serialization
         {
             if (collectionDataContract.IsDictionary)
             {
-                ClassDataContract keyValueContract = (collectionDataContract.ItemContract as ClassDataContract)!;
+                ClassDataContract keyValueContract = (
+                    collectionDataContract.ItemContract as ClassDataContract
+                )!;
                 AddClassDataContract(keyValueContract);
             }
             else
@@ -223,9 +274,16 @@ namespace System.Runtime.Serialization
                 return dataContract;
 
 #if SUPPORT_SURROGATE
-            Type dcType = DataContractSurrogateCaller.GetDataContractType(_dataContractSurrogate, clrType);
+            Type dcType = DataContractSurrogateCaller.GetDataContractType(
+                _dataContractSurrogate,
+                clrType
+            );
             if (clrType.IsValueType != dcType.IsValueType)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)
+                    )
+                );
 #endif
             Type dcType = clrType;
             dataContract = DataContract.GetDataContract(dcType);
@@ -233,7 +291,10 @@ namespace System.Runtime.Serialization
             if (!SurrogateDataTable.Contains(dataContract))
             {
                 object customData = DataContractSurrogateCaller.GetCustomDataToExport(
-                                      _dataContractSurrogate, clrType, dcType);
+                    _dataContractSurrogate,
+                    clrType,
+                    dcType
+                );
                 if (customData != null)
                     SurrogateDataTable.Add(dataContract, customData);
             }
@@ -247,17 +308,35 @@ namespace System.Runtime.Serialization
             if (dataMember.IsGetOnlyCollection)
             {
 #if SUPPORT_SURROGATE
-                    if (_dataContractSurrogate != null)
+                if (_dataContractSurrogate != null)
+                {
+                    Type dcType = DataContractSurrogateCaller.GetDataContractType(
+                        _dataContractSurrogate,
+                        dataMemberType
+                    );
+                    if (dcType != dataMemberType)
                     {
-                        Type dcType = DataContractSurrogateCaller.GetDataContractType(_dataContractSurrogate, dataMemberType);
-                        if (dcType != dataMemberType)
-                        {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.SurrogatesWithGetOnlyCollectionsNotSupported,
-                                DataContract.GetClrTypeFullName(dataMemberType), DataContract.GetClrTypeFullName(dataMember.MemberInfo.DeclaringType), dataMember.MemberInfo.Name)));
-                        }
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupported,
+                                    DataContract.GetClrTypeFullName(dataMemberType),
+                                    DataContract.GetClrTypeFullName(
+                                        dataMember.MemberInfo.DeclaringType
+                                    ),
+                                    dataMember.MemberInfo.Name
+                                )
+                            )
+                        );
                     }
+                }
 #endif
-                return DataContract.GetGetOnlyCollectionDataContract(DataContract.GetId(dataMemberType.TypeHandle), dataMemberType.TypeHandle, dataMemberType, SerializationMode.SharedContract);
+                return DataContract.GetGetOnlyCollectionDataContract(
+                    DataContract.GetId(dataMemberType.TypeHandle),
+                    dataMemberType.TypeHandle,
+                    dataMemberType,
+                    SerializationMode.SharedContract
+                );
             }
             else
             {

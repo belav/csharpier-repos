@@ -19,10 +19,7 @@ namespace System.Net.Http
         [DisallowNull]
         public HttpMessageHandler? InnerHandler
         {
-            get
-            {
-                return _innerHandler;
-            }
+            get { return _innerHandler; }
             set
             {
                 if (value == null)
@@ -31,22 +28,23 @@ namespace System.Net.Http
                 }
                 CheckDisposedOrStarted();
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, value);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Associate(this, value);
                 _innerHandler = value;
             }
         }
 
-        protected DelegatingHandler()
-        {
-        }
+        protected DelegatingHandler() { }
 
         protected DelegatingHandler(HttpMessageHandler innerHandler)
         {
             InnerHandler = innerHandler;
         }
 
-        protected internal override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected internal override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request), SR.net_http_handler_norequest);
@@ -55,8 +53,10 @@ namespace System.Net.Http
             return _innerHandler!.Send(request, cancellationToken);
         }
 
-        protected internal override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected internal override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request), SR.net_http_handler_norequest);

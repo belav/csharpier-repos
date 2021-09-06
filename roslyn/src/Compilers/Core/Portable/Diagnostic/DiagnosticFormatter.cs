@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis
                         goto default;
                     }
 
-                    string? path, basePath;
+                    string? path,
+                        basePath;
                     if (mappedSpan.HasMappedPath)
                     {
                         path = mappedSpan.Path;
@@ -53,21 +54,30 @@ namespace Microsoft.CodeAnalysis
                         basePath = null;
                     }
 
-                    return string.Format(formatter, "{0}{1}: {2}: {3}",
-                                         FormatSourcePath(path, basePath, formatter),
-                                         FormatSourceSpan(mappedSpan.Span, formatter),
-                                         GetMessagePrefix(diagnostic),
-                                         diagnostic.GetMessage(culture));
+                    return string.Format(
+                        formatter,
+                        "{0}{1}: {2}: {3}",
+                        FormatSourcePath(path, basePath, formatter),
+                        FormatSourceSpan(mappedSpan.Span, formatter),
+                        GetMessagePrefix(diagnostic),
+                        diagnostic.GetMessage(culture)
+                    );
 
                 default:
-                    return string.Format(formatter, "{0}: {1}",
-                                         GetMessagePrefix(diagnostic),
-                                         diagnostic.GetMessage(culture));
+                    return string.Format(
+                        formatter,
+                        "{0}: {1}",
+                        GetMessagePrefix(diagnostic),
+                        diagnostic.GetMessage(culture)
+                    );
             }
         }
 
-        internal virtual string FormatSourcePath(string path, string? basePath, IFormatProvider? formatter)
-        {
+        internal virtual string FormatSourcePath(
+            string path,
+            string? basePath,
+            IFormatProvider? formatter
+        ) {
             // ignore base path
             return path;
         }

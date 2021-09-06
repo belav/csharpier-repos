@@ -15,9 +15,13 @@ namespace System.Data.Common
         private SqlDecimal[] _values = default!; // Late-initialized
 
         public SqlDecimalStorage(DataColumn column)
-        : base(column, typeof(SqlDecimal), SqlDecimal.Null, SqlDecimal.Null, StorageType.SqlDecimal)
-        {
-        }
+            : base(
+                column,
+                typeof(SqlDecimal),
+                SqlDecimal.Null,
+                SqlDecimal.Null,
+                StorageType.SqlDecimal
+            ) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -32,7 +36,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -48,14 +55,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += _values[record]; }
+                            checked
+                            {
+                                meanSum += _values[record];
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             SqlDecimal mean = 0;
-                            checked { mean = (meanSum / meanCount); }
+                            checked
+                            {
+                                mean = (meanSum / meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -73,7 +86,8 @@ namespace System.Data.Common
                             if (IsNull(record))
                                 continue;
                             dsum += _values[record].ToSqlDouble();
-                            sqrsum += (_values[record]).ToSqlDouble() * (_values[record]).ToSqlDouble();
+                            sqrsum +=
+                                (_values[record]).ToSqlDouble() * (_values[record]).ToSqlDouble();
                             count++;
                         }
 
@@ -240,8 +254,12 @@ namespace System.Data.Common
             return new SqlDecimal[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
-        {
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        ) {
             SqlDecimal[] typedStore = (SqlDecimal[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

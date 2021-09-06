@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
     internal class Http2KeepAlive
     {
         // An empty ping payload
-        internal static readonly ReadOnlySequence<byte> PingPayload = new ReadOnlySequence<byte>(new byte[8]);
+        internal static readonly ReadOnlySequence<byte> PingPayload = new ReadOnlySequence<byte>(
+            new byte[8]
+        );
 
         private readonly TimeSpan _keepAliveInterval;
         private readonly TimeSpan _keepAliveTimeout;
@@ -30,8 +32,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         // Internal for testing
         internal KeepAliveState _state;
 
-        public Http2KeepAlive(TimeSpan keepAliveInterval, TimeSpan keepAliveTimeout, ISystemClock systemClock)
-        {
+        public Http2KeepAlive(
+            TimeSpan keepAliveInterval,
+            TimeSpan keepAliveTimeout,
+            ISystemClock systemClock
+        ) {
             _keepAliveInterval = keepAliveInterval;
             _keepAliveTimeout = keepAliveTimeout;
             _systemClock = systemClock;

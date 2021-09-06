@@ -25,9 +25,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         /// </summary>
         public readonly ArrayBuilderSegment<RenderTreeEdit> Edits;
 
-        internal RenderTreeDiff(
-            int componentId,
-            ArrayBuilderSegment<RenderTreeEdit> entries)
+        internal RenderTreeDiff(int componentId, ArrayBuilderSegment<RenderTreeEdit> entries)
         {
             ComponentId = componentId;
             Edits = entries;

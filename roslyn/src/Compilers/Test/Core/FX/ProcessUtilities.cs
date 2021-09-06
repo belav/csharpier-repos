@@ -23,8 +23,8 @@ namespace Roslyn.Test.Utilities
             string workingDirectory = null,
             IEnumerable<KeyValuePair<string, string>> additionalEnvironmentVars = null,
             string stdInput = null,
-            bool redirectStandardInput = false)
-        {
+            bool redirectStandardInput = false
+        ) {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));
 
@@ -86,7 +86,11 @@ namespace Roslyn.Test.Utilities
                 // Double check the process has actually exited
                 Debug.Assert(process.HasExited);
 
-                return new ProcessResult(process.ExitCode, outputBuilder.ToString(), errorBuilder.ToString());
+                return new ProcessResult(
+                    process.ExitCode,
+                    outputBuilder.ToString(),
+                    errorBuilder.ToString()
+                );
             }
         }
 
@@ -94,8 +98,11 @@ namespace Roslyn.Test.Utilities
         /// Launch a process, and return Process object. The process continues to run asynchronously.
         /// You cannot capture the output.
         /// </summary>
-        public static Process StartProcess(string fileName, string arguments, string workingDirectory = null)
-        {
+        public static Process StartProcess(
+            string fileName,
+            string arguments,
+            string workingDirectory = null
+        ) {
             if (fileName == null)
             {
                 throw new ArgumentNullException(nameof(fileName));
@@ -117,8 +124,12 @@ namespace Roslyn.Test.Utilities
             return p;
         }
 
-        public static string RunAndGetOutput(string exeFileName, string arguments = null, int expectedRetCode = 0, string startFolder = null)
-        {
+        public static string RunAndGetOutput(
+            string exeFileName,
+            string arguments = null,
+            int expectedRetCode = 0,
+            string startFolder = null
+        ) {
             ProcessStartInfo startInfo = new ProcessStartInfo(exeFileName);
             if (arguments != null)
             {
@@ -144,7 +155,10 @@ namespace Roslyn.Test.Utilities
                 result = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
                 process.WaitForExit();
-                Assert.True(expectedRetCode == process.ExitCode, $"Unexpected exit code: {process.ExitCode} (expecting {expectedRetCode}). Process output: {result}. Process error: {error}");
+                Assert.True(
+                    expectedRetCode == process.ExitCode,
+                    $"Unexpected exit code: {process.ExitCode} (expecting {expectedRetCode}). Process output: {result}. Process error: {error}"
+                );
             }
 
             return result;

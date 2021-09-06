@@ -9,15 +9,12 @@
 using System;
 
 public class Test
-
 {
     private static int Main()
-
     {
         int[] iAr1 = null;
 
         for (int j = 10; j < 20; j++)
-
         {
             Console.WriteLine("j=" + j);
 
@@ -26,7 +23,6 @@ public class Test
             Console.WriteLine(iAr1.Length); // wrong when j=11
 
             for (int i = 0; i < j; i++)
-
             {
                 Console.Write(i + " ");
 

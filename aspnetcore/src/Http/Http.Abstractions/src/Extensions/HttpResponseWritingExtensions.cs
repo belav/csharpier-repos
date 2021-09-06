@@ -24,9 +24,16 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="text">The text to write to the response.</param>
         /// <param name="cancellationToken">Notifies when request operations should be cancelled.</param>
         /// <returns>A task that represents the completion of the write operation.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-        public static Task WriteAsync(this HttpResponse response, string text, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
+        public static Task WriteAsync(
+            this HttpResponse response,
+            string text,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -48,9 +55,17 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="encoding">The encoding to use.</param>
         /// <param name="cancellationToken">Notifies when request operations should be cancelled.</param>
         /// <returns>A task that represents the completion of the write operation.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-        public static Task WriteAsync(this HttpResponse response, string text, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
+        public static Task WriteAsync(
+            this HttpResponse response,
+            string text,
+            Encoding encoding,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             if (response == null)
             {
                 throw new ArgumentNullException(nameof(response));
@@ -72,7 +87,13 @@ namespace Microsoft.AspNetCore.Http
                 var startAsyncTask = response.StartAsync(cancellationToken);
                 if (!startAsyncTask.IsCompletedSuccessfully)
                 {
-                    return StartAndWriteAsyncAwaited(response, text, encoding, cancellationToken, startAsyncTask);
+                    return StartAndWriteAsyncAwaited(
+                        response,
+                        text,
+                        encoding,
+                        cancellationToken,
+                        startAsyncTask
+                    );
                 }
             }
 
@@ -89,8 +110,13 @@ namespace Microsoft.AspNetCore.Http
             return flushAsyncTask.AsTask();
         }
 
-        private static async Task StartAndWriteAsyncAwaited(this HttpResponse response, string text, Encoding encoding, CancellationToken cancellationToken, Task startAsyncTask)
-        {
+        private static async Task StartAndWriteAsyncAwaited(
+            this HttpResponse response,
+            string text,
+            Encoding encoding,
+            CancellationToken cancellationToken,
+            Task startAsyncTask
+        ) {
             await startAsyncTask;
             Write(response, text, encoding);
             await response.BodyWriter.FlushAsync(cancellationToken);
@@ -111,7 +137,14 @@ namespace Microsoft.AspNetCore.Http
             }
             else
             {
-                WriteMultiSegmentEncoded(pipeWriter, text, encoding, destination, encodedLength, minimumByteSize);
+                WriteMultiSegmentEncoded(
+                    pipeWriter,
+                    text,
+                    encoding,
+                    destination,
+                    encodedLength,
+                    minimumByteSize
+                );
             }
         }
 
@@ -125,8 +158,14 @@ namespace Microsoft.AspNetCore.Http
             return encoding.GetMaxByteCount(1);
         }
 
-        private static void WriteMultiSegmentEncoded(PipeWriter writer, string text, Encoding encoding, Span<byte> destination, int encodedLength, int minimumByteSize)
-        {
+        private static void WriteMultiSegmentEncoded(
+            PipeWriter writer,
+            string text,
+            Encoding encoding,
+            Span<byte> destination,
+            int encodedLength,
+            int minimumByteSize
+        ) {
             var encoder = encoding.GetEncoder();
             var source = text.AsSpan();
             var completed = false;
@@ -137,7 +176,14 @@ namespace Microsoft.AspNetCore.Http
             while (!completed || encodedLength - totalBytesUsed != 0)
             {
                 // 'text' is a complete string, the converter should always flush its buffer.
-                encoder.Convert(source, destination, flush: true, out var charsUsed, out var bytesUsed, out completed);
+                encoder.Convert(
+                    source,
+                    destination,
+                    flush: true,
+                    out var charsUsed,
+                    out var bytesUsed,
+                    out completed
+                );
                 totalBytesUsed += bytesUsed;
 
                 writer.Advance(bytesUsed);

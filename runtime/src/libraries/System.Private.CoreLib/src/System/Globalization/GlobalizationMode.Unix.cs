@@ -26,10 +26,11 @@ namespace System.Globalization
                     if (loaded == 0 && !OperatingSystem.IsBrowser())
                     {
                         // This can't go into resources, because a resource lookup requires globalization, which requires ICU
-                        string message = "Couldn't find a valid ICU package installed on the system. " +
-                                         "Please install libicu using your package manager and try again. " +
-                                         "Alternatively you can set the configuration flag System.Globalization.Invariant to true if you want to run with no globalization support. " +
-                                         "Please see https://aka.ms/dotnet-missing-libicu for more information.";
+                        string message =
+                            "Couldn't find a valid ICU package installed on the system. "
+                            + "Please install libicu using your package manager and try again. "
+                            + "Alternatively you can set the configuration flag System.Globalization.Invariant to true if you want to run with no globalization support. "
+                            + "Please see https://aka.ms/dotnet-missing-libicu for more information.";
                         Environment.FailFast(message);
                     }
 
@@ -40,9 +41,10 @@ namespace System.Globalization
             return invariantEnabled;
         }
 
-        private static void LoadAppLocalIcuCore(ReadOnlySpan<char> version, ReadOnlySpan<char> suffix)
-        {
-
+        private static void LoadAppLocalIcuCore(
+            ReadOnlySpan<char> version,
+            ReadOnlySpan<char> suffix
+        ) {
 #if TARGET_OSX
             const string extension = ".dylib";
             bool versionAtEnd = false;
@@ -55,11 +57,32 @@ namespace System.Globalization
 #if !TARGET_OSX
             // In Linux we need to load libicudata first because libicuuc and libicui18n depend on it. In order for the loader to find
             // it on the same path, we load it before loading the other two libraries.
-            LoadLibrary(CreateLibraryName("libicudata", suffixAndSeparator, extension, version, versionAtEnd), failOnLoadFailure: true);
+            LoadLibrary(
+                CreateLibraryName(
+                    "libicudata",
+                    suffixAndSeparator,
+                    extension,
+                    version,
+                    versionAtEnd
+                ),
+                failOnLoadFailure: true
+            );
 #endif
 
-            IntPtr icuucLib = LoadLibrary(CreateLibraryName("libicuuc", suffixAndSeparator, extension, version, versionAtEnd), failOnLoadFailure: true);
-            IntPtr icuinLib = LoadLibrary(CreateLibraryName("libicui18n", suffixAndSeparator, extension, version, versionAtEnd), failOnLoadFailure: true);
+            IntPtr icuucLib = LoadLibrary(
+                CreateLibraryName("libicuuc", suffixAndSeparator, extension, version, versionAtEnd),
+                failOnLoadFailure: true
+            );
+            IntPtr icuinLib = LoadLibrary(
+                CreateLibraryName(
+                    "libicui18n",
+                    suffixAndSeparator,
+                    extension,
+                    version,
+                    versionAtEnd
+                ),
+                failOnLoadFailure: true
+            );
 
             Interop.Globalization.InitICUFunctions(icuucLib, icuinLib, version, suffix);
         }

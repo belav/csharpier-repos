@@ -14,94 +14,121 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         // This is workaround for a bug in ILTrimmer.
         // Without these DynamicDependency attributes, .ctor() will be removed from the safe handles.
         // Remove once fixed: https://github.com/mono/linker/issues/1660
-        [DynamicDependency(DynamicallyAccessedMemberTypes.NonPublicConstructors, typeof(SafeMsQuicRegistrationHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.NonPublicConstructors, typeof(SafeMsQuicConfigurationHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.NonPublicConstructors, typeof(SafeMsQuicListenerHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.NonPublicConstructors, typeof(SafeMsQuicConnectionHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.NonPublicConstructors, typeof(SafeMsQuicStreamHandle))]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.NonPublicConstructors,
+            typeof(SafeMsQuicRegistrationHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.NonPublicConstructors,
+            typeof(SafeMsQuicConfigurationHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.NonPublicConstructors,
+            typeof(SafeMsQuicListenerHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.NonPublicConstructors,
+            typeof(SafeMsQuicConnectionHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.NonPublicConstructors,
+            typeof(SafeMsQuicStreamHandle)
+        )]
         private MsQuicApi(NativeApi* vtable)
         {
             uint status;
 
-            SetParamDelegate =
-                Marshal.GetDelegateForFunctionPointer<SetParamDelegate>(
-                    vtable->SetParam);
+            SetParamDelegate = Marshal.GetDelegateForFunctionPointer<SetParamDelegate>(
+                vtable->SetParam
+            );
 
-            GetParamDelegate =
-                Marshal.GetDelegateForFunctionPointer<GetParamDelegate>(
-                    vtable->GetParam);
+            GetParamDelegate = Marshal.GetDelegateForFunctionPointer<GetParamDelegate>(
+                vtable->GetParam
+            );
 
             SetCallbackHandlerDelegate =
                 Marshal.GetDelegateForFunctionPointer<SetCallbackHandlerDelegate>(
-                    vtable->SetCallbackHandler);
+                    vtable->SetCallbackHandler
+                );
 
             RegistrationOpenDelegate =
                 Marshal.GetDelegateForFunctionPointer<RegistrationOpenDelegate>(
-                    vtable->RegistrationOpen);
+                    vtable->RegistrationOpen
+                );
             RegistrationCloseDelegate =
                 Marshal.GetDelegateForFunctionPointer<RegistrationCloseDelegate>(
-                    vtable->RegistrationClose);
+                    vtable->RegistrationClose
+                );
 
             ConfigurationOpenDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConfigurationOpenDelegate>(
-                    vtable->ConfigurationOpen);
+                    vtable->ConfigurationOpen
+                );
             ConfigurationCloseDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConfigurationCloseDelegate>(
-                    vtable->ConfigurationClose);
+                    vtable->ConfigurationClose
+                );
             ConfigurationLoadCredentialDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConfigurationLoadCredentialDelegate>(
-                    vtable->ConfigurationLoadCredential);
+                    vtable->ConfigurationLoadCredential
+                );
 
-            ListenerOpenDelegate =
-                Marshal.GetDelegateForFunctionPointer<ListenerOpenDelegate>(
-                    vtable->ListenerOpen);
-            ListenerCloseDelegate =
-                Marshal.GetDelegateForFunctionPointer<ListenerCloseDelegate>(
-                    vtable->ListenerClose);
-            ListenerStartDelegate =
-                Marshal.GetDelegateForFunctionPointer<ListenerStartDelegate>(
-                    vtable->ListenerStart);
-            ListenerStopDelegate =
-                Marshal.GetDelegateForFunctionPointer<ListenerStopDelegate>(
-                    vtable->ListenerStop);
+            ListenerOpenDelegate = Marshal.GetDelegateForFunctionPointer<ListenerOpenDelegate>(
+                vtable->ListenerOpen
+            );
+            ListenerCloseDelegate = Marshal.GetDelegateForFunctionPointer<ListenerCloseDelegate>(
+                vtable->ListenerClose
+            );
+            ListenerStartDelegate = Marshal.GetDelegateForFunctionPointer<ListenerStartDelegate>(
+                vtable->ListenerStart
+            );
+            ListenerStopDelegate = Marshal.GetDelegateForFunctionPointer<ListenerStopDelegate>(
+                vtable->ListenerStop
+            );
 
-            ConnectionOpenDelegate =
-                Marshal.GetDelegateForFunctionPointer<ConnectionOpenDelegate>(
-                    vtable->ConnectionOpen);
+            ConnectionOpenDelegate = Marshal.GetDelegateForFunctionPointer<ConnectionOpenDelegate>(
+                vtable->ConnectionOpen
+            );
             ConnectionCloseDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConnectionCloseDelegate>(
-                    vtable->ConnectionClose);
+                    vtable->ConnectionClose
+                );
             ConnectionSetConfigurationDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConnectionSetConfigurationDelegate>(
-                    vtable->ConnectionSetConfiguration);
+                    vtable->ConnectionSetConfiguration
+                );
             ConnectionShutdownDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConnectionShutdownDelegate>(
-                    vtable->ConnectionShutdown);
+                    vtable->ConnectionShutdown
+                );
             ConnectionStartDelegate =
                 Marshal.GetDelegateForFunctionPointer<ConnectionStartDelegate>(
-                    vtable->ConnectionStart);
+                    vtable->ConnectionStart
+                );
 
-            StreamOpenDelegate =
-                Marshal.GetDelegateForFunctionPointer<StreamOpenDelegate>(
-                    vtable->StreamOpen);
-            StreamCloseDelegate =
-                Marshal.GetDelegateForFunctionPointer<StreamCloseDelegate>(
-                    vtable->StreamClose);
-            StreamStartDelegate =
-                Marshal.GetDelegateForFunctionPointer<StreamStartDelegate>(
-                    vtable->StreamStart);
-            StreamShutdownDelegate =
-                Marshal.GetDelegateForFunctionPointer<StreamShutdownDelegate>(
-                    vtable->StreamShutdown);
-            StreamSendDelegate =
-                Marshal.GetDelegateForFunctionPointer<StreamSendDelegate>(
-                    vtable->StreamSend);
+            StreamOpenDelegate = Marshal.GetDelegateForFunctionPointer<StreamOpenDelegate>(
+                vtable->StreamOpen
+            );
+            StreamCloseDelegate = Marshal.GetDelegateForFunctionPointer<StreamCloseDelegate>(
+                vtable->StreamClose
+            );
+            StreamStartDelegate = Marshal.GetDelegateForFunctionPointer<StreamStartDelegate>(
+                vtable->StreamStart
+            );
+            StreamShutdownDelegate = Marshal.GetDelegateForFunctionPointer<StreamShutdownDelegate>(
+                vtable->StreamShutdown
+            );
+            StreamSendDelegate = Marshal.GetDelegateForFunctionPointer<StreamSendDelegate>(
+                vtable->StreamSend
+            );
             StreamReceiveCompleteDelegate =
                 Marshal.GetDelegateForFunctionPointer<StreamReceiveCompleteDelegate>(
-                    vtable->StreamReceiveComplete);
+                    vtable->StreamReceiveComplete
+                );
             StreamReceiveSetEnabledDelegate =
                 Marshal.GetDelegateForFunctionPointer<StreamReceiveSetEnabledDelegate>(
-                    vtable->StreamReceiveSetEnabled);
+                    vtable->StreamReceiveSetEnabled
+                );
 
             var cfg = new RegistrationConfig
             {
@@ -122,14 +149,27 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         static MsQuicApi()
         {
             // TODO: Consider updating all of these delegates to instead use function pointers.
-            if (NativeLibrary.TryLoad(Interop.Libraries.MsQuic, typeof(MsQuicApi).Assembly, DllImportSearchPath.AssemblyDirectory, out IntPtr msQuicHandle))
-            {
+            if (
+                NativeLibrary.TryLoad(
+                    Interop.Libraries.MsQuic,
+                    typeof(MsQuicApi).Assembly,
+                    DllImportSearchPath.AssemblyDirectory,
+                    out IntPtr msQuicHandle
+                )
+            ) {
                 try
                 {
-                    if (NativeLibrary.TryGetExport(msQuicHandle, "MsQuicOpen", out IntPtr msQuicOpenAddress))
-                    {
+                    if (
+                        NativeLibrary.TryGetExport(
+                            msQuicHandle,
+                            "MsQuicOpen",
+                            out IntPtr msQuicOpenAddress
+                        )
+                    ) {
                         MsQuicOpenDelegate msQuicOpen =
-                            Marshal.GetDelegateForFunctionPointer<MsQuicOpenDelegate>(msQuicOpenAddress);
+                            Marshal.GetDelegateForFunctionPointer<MsQuicOpenDelegate>(
+                                msQuicOpenAddress
+                            );
                         uint status = msQuicOpen(out NativeApi* vtable);
                         if (MsQuicStatusHelper.SuccessfulStatusCode(status))
                         {
@@ -138,6 +178,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                         }
                     }
                 }
+
                 finally
                 {
                     if (!IsQuicSupported)

@@ -27,14 +27,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         public static TheoryData<object> CannotWriteNonStringsData
         {
-            get
-            {
-                return new TheoryData<object>()
-                {
-                    null,
-                    new object()
-                };
-            }
+            get { return new TheoryData<object>() { null, new object() }; }
         }
 
         [Theory]
@@ -50,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                "Thisisastring");
+                "Thisisastring"
+            );
             context.ContentType = new StringSegment(contentType);
 
             // Act
@@ -70,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                "Thisisastring");
+                "Thisisastring"
+            );
 
             // Act
             var result = formatter.CanWriteResult(context);
@@ -82,9 +77,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         [Theory]
         [MemberData(nameof(CanWriteStringsData))]
-        public void CanWriteStrings(
-            object value,
-            bool useDeclaredTypeAsString)
+        public void CanWriteStrings(object value, bool useDeclaredTypeAsString)
         {
             // Arrange
             var expectedContentType = new StringSegment("text/plain");
@@ -96,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
-                value);
+                value
+            );
             context.ContentType = new StringSegment("text/plain");
 
             // Act
@@ -118,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(object),
-                value);
+                value
+            );
             context.ContentType = new StringSegment("text/plain");
 
             // Act
@@ -146,7 +141,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 httpContext.Object,
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                @object: null);
+                @object: null
+            );
 
             // Act
             await formatter.WriteResponseBodyAsync(context, encoding);

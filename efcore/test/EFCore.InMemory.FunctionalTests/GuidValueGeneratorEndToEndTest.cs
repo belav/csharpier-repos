@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_GUIDs_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             var guids = new List<Guid>();
@@ -25,9 +24,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 for (var i = 0; i < 10; i++)
                 {
-                    guids.Add(
-                        context.Add(
-                            new Pegasus { Name = "Rainbow Dash " + i }).Entity.Id);
+                    guids.Add(context.Add(new Pegasus { Name = "Rainbow Dash " + i }).Entity.Id);
                     guidsHash.Add(guids.Last());
                 }
 
@@ -56,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore
                 _serviceProvider = serviceProvider;
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(nameof(BronieContext))
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInMemoryDatabase(nameof(BronieContext))
                     .UseInternalServiceProvider(_serviceProvider);
 
             public DbSet<Pegasus> Pegasuses { get; set; }

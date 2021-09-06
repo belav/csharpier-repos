@@ -12,8 +12,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class TestRelationalTransactionFactory : IRelationalTransactionFactory
     {
-        public TestRelationalTransactionFactory(RelationalTransactionFactoryDependencies dependencies)
-        {
+        public TestRelationalTransactionFactory(
+            RelationalTransactionFactoryDependencies dependencies
+        ) {
             Dependencies = dependencies;
         }
 
@@ -24,8 +25,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbTransaction transaction,
             Guid transactionId,
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
-            bool transactionOwned)
-            => new TestRelationalTransaction(connection, transaction, logger, transactionOwned, Dependencies.SqlGenerationHelper);
+            bool transactionOwned
+        ) =>
+            new TestRelationalTransaction(
+                connection,
+                transaction,
+                logger,
+                transactionOwned,
+                Dependencies.SqlGenerationHelper
+            );
     }
 
     public class TestRelationalTransaction : RelationalTransaction
@@ -37,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbTransaction transaction,
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
             bool transactionOwned,
-            ISqlGenerationHelper sqlGenerationHelper)
-            : base(connection, transaction, new Guid(), logger, transactionOwned, sqlGenerationHelper)
+            ISqlGenerationHelper sqlGenerationHelper
+        ) : base(connection, transaction, new Guid(), logger, transactionOwned, sqlGenerationHelper)
         {
             _testConnection = (TestSqlServerConnection)connection;
         }
@@ -60,7 +68,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     }
 
                     _testConnection.DbConnection.Close();
-                    throw SqlExceptionFactory.CreateSqlException(_testConnection.ErrorNumber, _testConnection.ConnectionId);
+                    throw SqlExceptionFactory.CreateSqlException(
+                        _testConnection.ErrorNumber,
+                        _testConnection.ConnectionId
+                    );
                 }
             }
 
@@ -84,21 +95,25 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     }
 
                     await _testConnection.DbConnection.CloseAsync();
-                    throw SqlExceptionFactory.CreateSqlException(_testConnection.ErrorNumber, _testConnection.ConnectionId);
+                    throw SqlExceptionFactory.CreateSqlException(
+                        _testConnection.ErrorNumber,
+                        _testConnection.ConnectionId
+                    );
                 }
             }
 
             await base.CommitAsync(cancellationToken);
         }
 
-        public override bool SupportsSavepoints
-            => true;
+        public override bool SupportsSavepoints => true;
 
         /// <inheritdoc />
         public override void ReleaseSavepoint(string name) { }
 
         /// <inheritdoc />
-        public override Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+        public override Task ReleaseSavepointAsync(
+            string name,
+            CancellationToken cancellationToken = default
+        ) => Task.CompletedTask;
     }
 }

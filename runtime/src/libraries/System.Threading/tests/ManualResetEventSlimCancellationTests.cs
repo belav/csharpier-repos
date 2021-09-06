@@ -36,20 +36,25 @@ namespace System.Threading.Tests
             Task.Run(
                 () =>
                 {
-                    for (int i = 0; i < 400; i++) ;
+                    for (int i = 0; i < 400; i++)
+                        ;
                     cancellationTokenSource.Cancel();
                 }
-                );
+            );
 
             //Now wait.. the wait should abort and an exception should be thrown
-            EnsureOperationCanceledExceptionThrown(() => mres.Wait(cancellationToken), cancellationToken);
-
+            EnsureOperationCanceledExceptionThrown(
+                () => mres.Wait(cancellationToken),
+                cancellationToken
+            );
             // the token should not have any listeners.
             // currently we don't expose this.. but it was verified manually
         }
 
-        private static void EnsureOperationCanceledExceptionThrown(Action action, CancellationToken token)
-        {
+        private static void EnsureOperationCanceledExceptionThrown(
+            Action action,
+            CancellationToken token
+        ) {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);
             Assert.Equal(token, operationCanceledEx.CancellationToken);

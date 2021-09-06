@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         public readonly RQType InterfaceType;
         public readonly RQOrdinaryMethodPropertyOrEventName Name;
 
-        public RQExplicitInterfaceMemberName(RQType interfaceType, RQOrdinaryMethodPropertyOrEventName name)
-        {
+        public RQExplicitInterfaceMemberName(
+            RQType interfaceType,
+            RQOrdinaryMethodPropertyOrEventName name
+        ) {
             InterfaceType = interfaceType;
             Name = name;
         }
@@ -22,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             get { return Name.OrdinaryNameValue; }
         }
 
-        public override SimpleGroupNode ToSimpleTree()
-            => new(RQNameStrings.IntfExplName, InterfaceType.ToSimpleTree(), Name.ToSimpleTree());
+        public override SimpleGroupNode ToSimpleTree() =>
+            new(RQNameStrings.IntfExplName, InterfaceType.ToSimpleTree(), Name.ToSimpleTree());
     }
 }

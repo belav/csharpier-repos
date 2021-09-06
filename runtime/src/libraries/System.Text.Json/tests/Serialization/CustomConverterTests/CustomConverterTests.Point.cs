@@ -16,8 +16,8 @@ namespace System.Text.Json.Serialization.Tests
                 Y = y;
             }
 
-            public int X { get;}
-            public int Y { get;}
+            public int X { get; }
+            public int Y { get; }
         }
 
         // Converter for a custom data type that has additional state (coordinateOffset).
@@ -32,8 +32,11 @@ namespace System.Text.Json.Serialization.Tests
                 _coordinateOffset = coordinateOffset;
             }
 
-            public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override Point Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType != JsonTokenType.String)
                 {
                     throw new JsonException();
@@ -45,8 +48,10 @@ namespace System.Text.Json.Serialization.Tests
                     throw new JsonException();
                 }
 
-                if (!int.TryParse(stringValues[0], out int x) || !int.TryParse(stringValues[1], out int y))
-                {
+                if (
+                    !int.TryParse(stringValues[0], out int x)
+                    || !int.TryParse(stringValues[1], out int y)
+                ) {
                     throw new JsonException();
                 }
 
@@ -54,8 +59,11 @@ namespace System.Text.Json.Serialization.Tests
                 return value;
             }
 
-            public override void Write(Utf8JsonWriter writer, Point value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                Point value,
+                JsonSerializerOptions options
+            ) {
                 string stringValue = $"{value.X - _coordinateOffset},{value.Y - _coordinateOffset}";
                 writer.WriteStringValue(stringValue);
             }
@@ -157,8 +165,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class PointObjectConverter : JsonConverter<Point>
         {
-            public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override Point Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
                     throw new JsonException();
@@ -182,8 +193,10 @@ namespace System.Text.Json.Serialization.Tests
                     throw new JsonException();
                 }
 
-                if (!int.TryParse(stringValues[0], out int x) || !int.TryParse(stringValues[1], out int y))
-                {
+                if (
+                    !int.TryParse(stringValues[0], out int x)
+                    || !int.TryParse(stringValues[1], out int y)
+                ) {
                     throw new JsonException();
                 }
 
@@ -198,8 +211,11 @@ namespace System.Text.Json.Serialization.Tests
                 return value;
             }
 
-            public override void Write(Utf8JsonWriter writer, Point value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                Point value,
+                JsonSerializerOptions options
+            ) {
                 writer.WriteStartObject();
 
                 string stringValue = $"{value.X},{value.Y}";

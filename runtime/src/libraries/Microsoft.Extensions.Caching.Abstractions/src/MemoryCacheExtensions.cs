@@ -49,8 +49,12 @@ namespace Microsoft.Extensions.Caching.Memory
             return value;
         }
 
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, DateTimeOffset absoluteExpiration)
-        {
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            DateTimeOffset absoluteExpiration
+        ) {
             using ICacheEntry entry = cache.CreateEntry(key);
             entry.AbsoluteExpiration = absoluteExpiration;
             entry.Value = value;
@@ -58,8 +62,12 @@ namespace Microsoft.Extensions.Caching.Memory
             return value;
         }
 
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, TimeSpan absoluteExpirationRelativeToNow)
-        {
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            TimeSpan absoluteExpirationRelativeToNow
+        ) {
             using ICacheEntry entry = cache.CreateEntry(key);
             entry.AbsoluteExpirationRelativeToNow = absoluteExpirationRelativeToNow;
             entry.Value = value;
@@ -67,8 +75,12 @@ namespace Microsoft.Extensions.Caching.Memory
             return value;
         }
 
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, IChangeToken expirationToken)
-        {
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            IChangeToken expirationToken
+        ) {
             using ICacheEntry entry = cache.CreateEntry(key);
             entry.AddExpirationToken(expirationToken);
             entry.Value = value;
@@ -76,8 +88,12 @@ namespace Microsoft.Extensions.Caching.Memory
             return value;
         }
 
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, MemoryCacheEntryOptions options)
-        {
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            MemoryCacheEntryOptions options
+        ) {
             using ICacheEntry entry = cache.CreateEntry(key);
             if (options != null)
             {
@@ -89,8 +105,11 @@ namespace Microsoft.Extensions.Caching.Memory
             return value;
         }
 
-        public static TItem GetOrCreate<TItem>(this IMemoryCache cache, object key, Func<ICacheEntry, TItem> factory)
-        {
+        public static TItem GetOrCreate<TItem>(
+            this IMemoryCache cache,
+            object key,
+            Func<ICacheEntry, TItem> factory
+        ) {
             if (!cache.TryGetValue(key, out object result))
             {
                 using ICacheEntry entry = cache.CreateEntry(key);
@@ -102,8 +121,11 @@ namespace Microsoft.Extensions.Caching.Memory
             return (TItem)result;
         }
 
-        public static async Task<TItem> GetOrCreateAsync<TItem>(this IMemoryCache cache, object key, Func<ICacheEntry, Task<TItem>> factory)
-        {
+        public static async Task<TItem> GetOrCreateAsync<TItem>(
+            this IMemoryCache cache,
+            object key,
+            Func<ICacheEntry, Task<TItem>> factory
+        ) {
             if (!cache.TryGetValue(key, out object result))
             {
                 using ICacheEntry entry = cache.CreateEntry(key);

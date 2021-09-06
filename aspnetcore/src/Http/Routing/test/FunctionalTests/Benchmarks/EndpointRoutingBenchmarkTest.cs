@@ -30,7 +30,7 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
             // Make sure we are using the right startup
             var configuration = _host.Services.GetService<IConfiguration>();
             var startupName = configuration["Startup"];
-            Assert.Equal(nameof(Benchmarks.StartupUsingEndpointRouting), startupName);           
+            Assert.Equal(nameof(Benchmarks.StartupUsingEndpointRouting), startupName);
 
             _testServer = _host.GetTestServer();
             _host.Start();

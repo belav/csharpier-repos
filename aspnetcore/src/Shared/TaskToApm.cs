@@ -94,8 +94,8 @@ namespace System.Threading.Tasks
                     // synchronously as part of the task's completion if the task completes after (the more common case).
                     _callback = callback;
                     _task.ConfigureAwait(continueOnCapturedContext: false)
-                         .GetAwaiter()
-                         .OnCompleted(InvokeCallback); // allocates a delegate, but avoids a closure
+                        .GetAwaiter()
+                        .OnCompleted(InvokeCallback); // allocates a delegate, but avoids a closure
                 }
             }
 

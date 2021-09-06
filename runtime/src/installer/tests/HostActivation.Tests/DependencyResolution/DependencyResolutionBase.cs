@@ -63,48 +63,131 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 return testApp;
             }
 
-            public TestApp CreateComponentWithNoDependencies(Action<NetCoreAppBuilder> customizer = null, string location = null)
-            {
-                TestApp componentWithNoDependencies = CreateTestApp(location, "ComponentWithNoDependencies");
-                NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(componentWithNoDependencies)
+            public TestApp CreateComponentWithNoDependencies(
+                Action<NetCoreAppBuilder> customizer = null,
+                string location = null
+            ) {
+                TestApp componentWithNoDependencies = CreateTestApp(
+                    location,
+                    "ComponentWithNoDependencies"
+                );
+                NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(
+                        componentWithNoDependencies
+                    )
                     .WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()));
                 customizer?.Invoke(builder);
 
                 return builder.Build(componentWithNoDependencies);
             }
 
-            public TestApp CreateSelfContainedAppWithMockCoreClr(string name, string version, Action<NetCoreAppBuilder> customizer = null, string location = null)
-            {
+            public TestApp CreateSelfContainedAppWithMockCoreClr(
+                string name,
+                string version,
+                Action<NetCoreAppBuilder> customizer = null,
+                string location = null
+            ) {
                 TestApp testApp = CreateTestApp(location, name);
 
-                string hostFxrFileName = RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr");
-                string hostPolicyFileName = RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostpolicy");
-                string coreclrFileName = RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("coreclr");
-                string mockCoreclrFileName = RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("mockcoreclr");
+                string hostFxrFileName =
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "hostfxr"
+                    );
+                string hostPolicyFileName =
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "hostpolicy"
+                    );
+                string coreclrFileName =
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "coreclr"
+                    );
+                string mockCoreclrFileName =
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "mockcoreclr"
+                    );
 
                 string currentRid = RepoDirectories.TargetRID;
 
                 NetCoreAppBuilder.ForNETCoreApp(name, currentRid)
-                    .WithProject(name, version, p => p
-                        .WithAssemblyGroup(null, g => g.WithMainAssembly()))
-                    .WithPackage("runtimePack.Microsoft.NETCore.App", "1.0.0", p => p
-                        .WithNativeLibraryGroup(null, g => g
-                            // ./coreclr.dll - this is a mock, will not actually run CoreClr
-                            .WithAsset((new NetCoreAppBuilder.RuntimeFileBuilder(coreclrFileName))
-                                .CopyFromFile(Path.Combine(RepoDirectories.Artifacts, "corehost_test", mockCoreclrFileName))
-                                .WithFileOnDiskPath(coreclrFileName))))
-                    .WithPackage("runtimePack.Microsoft.NETCore.DotNetHostResolver", "1.0.0", p => p
-                        .WithNativeLibraryGroup(null, g => g
-                            // ./hostfxr.dll - this is the real component and will load hostpolicy library
-                            .WithAsset((new NetCoreAppBuilder.RuntimeFileBuilder(hostFxrFileName))
-                                .CopyFromFile(Path.Combine(RepoDirectories.Artifacts, "corehost", hostFxrFileName))
-                                .WithFileOnDiskPath(hostFxrFileName))))
-                    .WithPackage("runtimePack.Microsoft.NETCore.DotNetHostPolicy", "1.0.0", p => p
-                        .WithNativeLibraryGroup(null, g => g
-                            // ./hostpolicy.dll - this is the real component and will load CoreClr library
-                            .WithAsset((new NetCoreAppBuilder.RuntimeFileBuilder(hostPolicyFileName))
-                                .CopyFromFile(Path.Combine(RepoDirectories.Artifacts, "corehost", hostPolicyFileName))
-                                .WithFileOnDiskPath(hostPolicyFileName))))
+                    .WithProject(
+                        name,
+                        version,
+                        p => p.WithAssemblyGroup(null, g => g.WithMainAssembly())
+                    )
+                    .WithPackage(
+                        "runtimePack.Microsoft.NETCore.App",
+                        "1.0.0",
+                        p =>
+                            p.WithNativeLibraryGroup(
+                                null,
+                                g =>
+                                    g
+                                    // ./coreclr.dll - this is a mock, will not actually run CoreClr
+                                    .WithAsset(
+                                        (
+                                            new NetCoreAppBuilder.RuntimeFileBuilder(
+                                                coreclrFileName
+                                            )
+                                        ).CopyFromFile(
+                                                Path.Combine(
+                                                    RepoDirectories.Artifacts,
+                                                    "corehost_test",
+                                                    mockCoreclrFileName
+                                                )
+                                            )
+                                            .WithFileOnDiskPath(coreclrFileName)
+                                    )
+                            )
+                    )
+                    .WithPackage(
+                        "runtimePack.Microsoft.NETCore.DotNetHostResolver",
+                        "1.0.0",
+                        p =>
+                            p.WithNativeLibraryGroup(
+                                null,
+                                g =>
+                                    g
+                                    // ./hostfxr.dll - this is the real component and will load hostpolicy library
+                                    .WithAsset(
+                                        (
+                                            new NetCoreAppBuilder.RuntimeFileBuilder(
+                                                hostFxrFileName
+                                            )
+                                        ).CopyFromFile(
+                                                Path.Combine(
+                                                    RepoDirectories.Artifacts,
+                                                    "corehost",
+                                                    hostFxrFileName
+                                                )
+                                            )
+                                            .WithFileOnDiskPath(hostFxrFileName)
+                                    )
+                            )
+                    )
+                    .WithPackage(
+                        "runtimePack.Microsoft.NETCore.DotNetHostPolicy",
+                        "1.0.0",
+                        p =>
+                            p.WithNativeLibraryGroup(
+                                null,
+                                g =>
+                                    g
+                                    // ./hostpolicy.dll - this is the real component and will load CoreClr library
+                                    .WithAsset(
+                                        (
+                                            new NetCoreAppBuilder.RuntimeFileBuilder(
+                                                hostPolicyFileName
+                                            )
+                                        ).CopyFromFile(
+                                                Path.Combine(
+                                                    RepoDirectories.Artifacts,
+                                                    "corehost",
+                                                    hostPolicyFileName
+                                                )
+                                            )
+                                            .WithFileOnDiskPath(hostPolicyFileName)
+                                    )
+                            )
+                    )
                     .WithCustomizer(customizer)
                     .WithRuntimeConfig(config => { })
                     .Build(testApp);

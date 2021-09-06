@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.Configuration.Ini
         /// Constructor.
         /// </summary>
         /// <param name="source">The <see cref="IniStreamConfigurationSource"/>.</param>
-        public IniStreamConfigurationProvider(IniStreamConfigurationSource source) : base(source) { }
+        public IniStreamConfigurationProvider(IniStreamConfigurationSource source) : base(source)
+        { }
 
         /// <summary>
         /// Read a stream of INI values into a key/value dictionary.
@@ -49,7 +50,8 @@ namespace Microsoft.Extensions.Configuration.Ini
                     if (line[0] == '[' && line[line.Length - 1] == ']')
                     {
                         // remove the brackets
-                        sectionPrefix = line.Substring(1, line.Length - 2) + ConfigurationPath.KeyDelimiter;
+                        sectionPrefix =
+                            line.Substring(1, line.Length - 2) + ConfigurationPath.KeyDelimiter;
                         continue;
                     }
 
@@ -57,7 +59,9 @@ namespace Microsoft.Extensions.Configuration.Ini
                     int separator = line.IndexOf('=');
                     if (separator < 0)
                     {
-                        throw new FormatException(SR.Format(SR.Error_UnrecognizedLineFormat, rawLine));
+                        throw new FormatException(
+                            SR.Format(SR.Error_UnrecognizedLineFormat, rawLine)
+                        );
                     }
 
                     string key = sectionPrefix + line.Substring(0, separator).Trim();

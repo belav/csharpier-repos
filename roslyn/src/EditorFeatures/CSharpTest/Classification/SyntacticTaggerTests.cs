@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestTagsChangedForPortionThatChanged()
         {
             var code =
-@"class Program2
+                @"class Program2
 {
     string x = @""/// <summary>$$
 /// </summary>"";
@@ -44,12 +44,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     workspace.ExportProvider.GetExportedValue<IThreadingContext>(),
                     notificationService,
                     typeMap: null,
-                    AsynchronousOperationListenerProvider.NullProvider),
+                    AsynchronousOperationListenerProvider.NullProvider
+                ),
                 subjectBuffer,
                 notificationService,
                 AsynchronousOperationListenerProvider.NullListener,
                 typeMap: null,
-                diffTimeout: TimeSpan.MaxValue);
+                diffTimeout: TimeSpan.MaxValue
+            );
 
             // Capture the expected value before the await, in case it changes.
             var expectedLength = subjectBuffer.CurrentSnapshot.Length;

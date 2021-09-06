@@ -29,7 +29,6 @@ namespace System.Xml
             Prolog,
             Fragment,
             Content,
-
             Last, // always last
         }
 
@@ -77,40 +76,30 @@ namespace System.Xml
             _settings.ReadOnly = false;
             _settings.CheckCharacters = false;
             _settings.CloseOutput = false;
-            _settings.ConformanceLevel = (_state == State.Prolog ? ConformanceLevel.Document : ConformanceLevel.Fragment);
+            _settings.ConformanceLevel = (
+                _state == State.Prolog ? ConformanceLevel.Document : ConformanceLevel.Fragment
+            );
             _settings.ReadOnly = true;
         }
 
         public XmlNamespaceManager? NamespaceManager
         {
-            set
-            {
-                _namespaceManager = value;
-            }
+            set { _namespaceManager = value; }
         }
 
         public override XmlWriterSettings Settings
         {
-            get
-            {
-                return _settings;
-            }
+            get { return _settings; }
         }
 
         public DocumentXPathNavigator? Navigator
         {
-            set
-            {
-                _navigator = value;
-            }
+            set { _navigator = value; }
         }
 
         public XmlNode EndNode
         {
-            set
-            {
-                _end = value;
-            }
+            set { _end = value; }
         }
 
         internal override void WriteXmlDeclaration(XmlStandalone standalone)
@@ -118,7 +107,11 @@ namespace System.Xml
             VerifyState(Method.WriteXmlDeclaration);
             if (standalone != XmlStandalone.Omit)
             {
-                XmlNode node = _document.CreateXmlDeclaration("1.0", string.Empty, standalone == XmlStandalone.Yes ? "yes" : "no");
+                XmlNode node = _document.CreateXmlDeclaration(
+                    "1.0",
+                    string.Empty,
+                    standalone == XmlStandalone.Yes ? "yes" : "no"
+                );
                 AddChild(node, _write);
             }
         }
@@ -126,7 +119,9 @@ namespace System.Xml
         internal override void WriteXmlDeclaration(string xmldecl)
         {
             VerifyState(Method.WriteXmlDeclaration);
-            string? version, encoding, standalone;
+            string? version,
+                encoding,
+                standalone;
             XmlLoader.ParseXmlDeclarationValue(xmldecl, out version, out encoding, out standalone);
             XmlNode node = _document.CreateXmlDeclaration(version!, encoding, standalone);
             AddChild(node, _write);
@@ -236,10 +231,7 @@ namespace System.Xml
 
         internal override bool SupportsNamespaceDeclarationInChunks
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override void WriteStartNamespaceDeclaration(string prefix)
@@ -248,11 +240,19 @@ namespace System.Xml
             XmlAttribute attr;
             if (prefix.Length == 0)
             {
-                attr = _document.CreateAttribute(prefix, _document.strXmlns, _document.strReservedXmlns);
+                attr = _document.CreateAttribute(
+                    prefix,
+                    _document.strXmlns,
+                    _document.strReservedXmlns
+                );
             }
             else
             {
-                attr = _document.CreateAttribute(_document.strXmlns, prefix, _document.strReservedXmlns);
+                attr = _document.CreateAttribute(
+                    _document.strXmlns,
+                    prefix,
+                    _document.strReservedXmlns
+                );
             }
 
             AddAttribute(attr, _write);
@@ -380,7 +380,6 @@ namespace System.Xml
                         {
                             parent.InsertAfter(_fragment[i], _start);
                         }
-
                         break;
                     case DocumentXmlWriterType.InsertSiblingBefore:
                         parent = _start.ParentNode;
@@ -393,21 +392,18 @@ namespace System.Xml
                         {
                             parent.InsertBefore(_fragment[i], _start);
                         }
-
                         break;
                     case DocumentXmlWriterType.PrependChild:
                         for (int i = _fragment.Count - 1; i >= 0; i--)
                         {
                             _start.PrependChild(_fragment[i]);
                         }
-
                         break;
                     case DocumentXmlWriterType.AppendChild:
                         for (int i = 0; i < _fragment.Count; i++)
                         {
                             _start.AppendChild(_fragment[i]);
                         }
-
                         break;
                     case DocumentXmlWriterType.AppendAttribute:
                         CloseWithAppendAttribute();
@@ -422,6 +418,7 @@ namespace System.Xml
                         break;
                 }
             }
+
             finally
             {
                 _fragment.Clear();
@@ -438,10 +435,14 @@ namespace System.Xml
                 XmlAttribute? attr = _fragment[i] as XmlAttribute;
                 Debug.Assert(attr != null);
                 int offset = attrs.FindNodeOffsetNS(attr);
-                if (offset != -1
-                    && ((XmlAttribute)attrs.nodes[offset]).Specified)
+                if (offset != -1 && ((XmlAttribute)attrs.nodes[offset]).Specified)
                 {
-                    throw new XmlException(SR.Xml_DupAttributeName, attr.Prefix.Length == 0 ? attr.LocalName : string.Concat(attr.Prefix, ":", attr.LocalName));
+                    throw new XmlException(
+                        SR.Xml_DupAttributeName,
+                        attr.Prefix.Length == 0
+                            ? attr.LocalName
+                            : string.Concat(attr.Prefix, ":", attr.LocalName)
+                    );
                 }
             }
             for (int i = 0; i < _fragment.Count; i++)
@@ -489,8 +490,9 @@ namespace System.Xml
             // nop
         }
 
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
-        {
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        ) {
             return _namespaceManager!.GetNamespacesInScope(scope);
         }
 
@@ -556,7 +558,6 @@ namespace System.Xml
                     {
                         return State.Fragment;
                     }
-
                     break;
                 case DocumentXmlWriterType.PrependChild:
                 case DocumentXmlWriterType.AppendChild:
@@ -569,7 +570,6 @@ namespace System.Xml
                     {
                         return State.Fragment;
                     }
-
                     break;
                 case DocumentXmlWriterType.AppendAttribute:
                     return State.Attribute;
@@ -579,43 +579,112 @@ namespace System.Xml
             return State.Content;
         }
 
-        private static readonly State[] s_changeState = {
-//          State.Error,    State.Attribute,State.Prolog,   State.Fragment, State.Content,
+        private static readonly State[] s_changeState =
+        {
+            //          State.Error,    State.Attribute,State.Prolog,   State.Fragment, State.Content,
 
-// Method.XmlDeclaration:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Error,
-// Method.StartDocument:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Error,
-// Method.EndDocument:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Error,
-// Method.DocType:
-            State.Error,    State.Error,    State.Prolog,   State.Error,    State.Error,
-// Method.StartElement:
-            State.Error,    State.Error,    State.Content,  State.Content,  State.Content,
-// Method.EndElement:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,
-// Method.FullEndElement:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,
-// Method.StartAttribute:
-            State.Error,    State.Content,  State.Error,    State.Error,    State.Content,
-// Method.EndAttribute:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,
-// Method.StartNamespaceDeclaration:
-            State.Error,    State.Content,  State.Error,    State.Error,    State.Content,
-// Method.EndNamespaceDeclaration:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,
-// Method.CData:
-            State.Error,    State.Error,    State.Error,    State.Content,  State.Content,
-// Method.Comment:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Content,
-// Method.ProcessingInstruction:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Content,
-// Method.EntityRef:
-            State.Error,    State.Error,    State.Error,    State.Content,  State.Content,
-// Method.Whitespace:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Content,
-// Method.String:
-            State.Error,    State.Error,    State.Error,    State.Content,  State.Content,
+            // Method.XmlDeclaration:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Error,
+            // Method.StartDocument:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            // Method.EndDocument:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            // Method.DocType:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Error,
+            State.Error,
+            // Method.StartElement:
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            // Method.EndElement:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.FullEndElement:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.StartAttribute:
+            State.Error,
+            State.Content,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.EndAttribute:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.StartNamespaceDeclaration:
+            State.Error,
+            State.Content,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.EndNamespaceDeclaration:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.CData:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            // Method.Comment:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Content,
+            // Method.ProcessingInstruction:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Content,
+            // Method.EntityRef:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            // Method.Whitespace:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Content,
+            // Method.String:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
         };
 
         private void VerifyState(Method method)

@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override void ExecuteCore(RazorCodeDocument codeDocument)
         {
-            var options = codeDocument.GetParserOptions() ??_optionsFeature.GetOptions();
+            var options = codeDocument.GetParserOptions() ?? _optionsFeature.GetOptions();
             var syntaxTree = RazorSyntaxTree.Parse(codeDocument.Source, options);
             codeDocument.SetSyntaxTree(syntaxTree);
 

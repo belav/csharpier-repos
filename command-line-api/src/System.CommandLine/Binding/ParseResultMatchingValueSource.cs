@@ -10,25 +10,23 @@ namespace System.CommandLine.Binding
         public bool TryGetValue(
             IValueDescriptor valueDescriptor,
             BindingContext? bindingContext,
-            out object? boundValue)
-        {
+            out object? boundValue
+        ) {
             if (!string.IsNullOrEmpty(valueDescriptor.ValueName))
             {
                 CommandResult? commandResult = bindingContext?.ParseResult.CommandResult;
 
                 while (commandResult != null)
                 {
-                    if (commandResult.TryGetValueForOption(valueDescriptor,
-                        out var optionValue))
+                    if (commandResult.TryGetValueForOption(valueDescriptor, out var optionValue))
                     {
                         boundValue = optionValue;
                         return true;
                     }
 
-                    if (commandResult.TryGetValueForArgument(
-                        valueDescriptor,
-                        out var argumentValue))
-                    {
+                    if (
+                        commandResult.TryGetValueForArgument(valueDescriptor, out var argumentValue)
+                    ) {
                         boundValue = argumentValue;
                         return true;
                     }

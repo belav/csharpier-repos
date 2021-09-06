@@ -304,7 +304,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 c1.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(c1.Parameters);
             Assert.Null(c1.Literals);
 
@@ -358,7 +359,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 c.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(c.Parameters);
             Assert.Null(c.Literals);
         }
@@ -402,7 +404,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 c1.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(c1.Parameters);
             Assert.Null(c1.Literals);
 
@@ -449,7 +452,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 c1.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(c1.Parameters);
             Assert.Null(c1.Literals);
 
@@ -491,8 +495,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
             BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order1_Core(builder);
         }
 
-        private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order1_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order1_Core(
+            DfaMatcherBuilder builder
+        ) {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -518,7 +523,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 b.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(b.Literals);
             Assert.Null(b.Parameters);
             Assert.NotNull(b.CatchAll);
@@ -536,14 +542,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = true;
-            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
+                builder
+            );
         }
 
         [Fact]
         public void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_DefaultBehavior()
         {
             var builder = CreateDfaMatcherBuilder();
-            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
+                builder
+            );
         }
 
         [Fact]
@@ -551,11 +561,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = false;
-            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(
+                builder
+            );
         }
 
-        private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
+            DfaMatcherBuilder builder
+        ) {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -581,7 +594,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 b.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(b.Literals);
             Assert.Null(b.Parameters);
             Assert.NotNull(b.CatchAll);
@@ -593,8 +607,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Same(catchAll, catchAll.CatchAll);
         }
 
-        private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(
+            DfaMatcherBuilder builder
+        ) {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -636,11 +651,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = true;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
+                builder
+            );
         }
 
-        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
+            DfaMatcherBuilder builder
+        ) {
             var endpoint1 = CreateEndpoint("{a}/{b}", order: 0);
             builder.AddEndpoint(endpoint1);
 
@@ -664,7 +682,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 b1.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(b1.Literals);
             Assert.Null(b1.Parameters);
             Assert.NotNull(b1.CatchAll);
@@ -680,9 +699,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Null(a2.Literals);
 
             var b2 = a2.Parameters;
-            Assert.Collection(
-                b2.Matches,
-                e => Assert.Same(endpoint1, e));
+            Assert.Collection(b2.Matches, e => Assert.Same(endpoint1, e));
             Assert.Null(b2.Literals);
             Assert.Null(b2.Parameters);
             Assert.Null(b2.CatchAll);
@@ -694,11 +711,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = true;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
+                builder
+            );
         }
 
-        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
+            DfaMatcherBuilder builder
+        ) {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -723,7 +743,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 b1.Matches,
                 e => Assert.Same(endpoint1, e),
-                e => Assert.Same(endpoint2, e));
+                e => Assert.Same(endpoint2, e)
+            );
             Assert.Null(b1.Literals);
             Assert.Null(b1.Parameters);
             Assert.NotNull(b1.CatchAll);
@@ -739,9 +760,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Null(a2.Literals);
 
             var b2 = a2.Parameters;
-            Assert.Collection(
-                b2.Matches,
-                e => Assert.Same(endpoint2, e));
+            Assert.Collection(b2.Matches, e => Assert.Same(endpoint2, e));
             Assert.Null(b2.Literals);
             Assert.Null(b2.Parameters);
             Assert.Null(b2.CatchAll);
@@ -752,7 +771,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_DefaultBehavior()
         {
             var builder = CreateDfaMatcherBuilder();
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
+                builder
+            );
         }
 
         // Regression test for https://github.com/dotnet/aspnetcore/issues/18677
@@ -761,11 +782,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = false;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(
+                builder
+            );
         }
 
-        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(
+            DfaMatcherBuilder builder
+        ) {
             // Arrange
             var endpoint1 = CreateEndpoint("{a}/{b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -798,9 +822,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Null(a2.Literals);
 
             var b2 = a2.Parameters;
-            Assert.Collection(
-                b2.Matches,
-                e => Assert.Same(endpoint1, e));
+            Assert.Collection(b2.Matches, e => Assert.Same(endpoint1, e));
             Assert.Null(b2.Literals);
             Assert.Null(b2.Parameters);
             Assert.Null(b2.CatchAll);
@@ -811,7 +833,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_DefaultBehavior()
         {
             var builder = CreateDfaMatcherBuilder();
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
+                builder
+            );
         }
 
         // Regression test for https://github.com/dotnet/aspnetcore/issues/18677
@@ -820,11 +844,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = false;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(builder);
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(
+                builder
+            );
         }
 
-        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(DfaMatcherBuilder builder)
-        {
+        private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(
+            DfaMatcherBuilder builder
+        ) {
             // Arrange
             var endpoint1 = CreateEndpoint("a/{*b}", order: 0);
             builder.AddEndpoint(endpoint1);
@@ -856,9 +883,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Null(a2.Literals);
 
             var b2 = a2.Parameters;
-            Assert.Collection(
-                b2.Matches,
-                e => Assert.Same(endpoint2, e));
+            Assert.Collection(b2.Matches, e => Assert.Same(endpoint2, e));
             Assert.Null(b2.Literals);
             Assert.Null(b2.Parameters);
             Assert.Null(b2.CatchAll);
@@ -868,9 +893,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_WithPolicies()
         {
             // Arrange
-            var builder = CreateDfaMatcherBuilder(new TestMetadata1MatcherPolicy(), new TestMetadata2MatcherPolicy());
+            var builder = CreateDfaMatcherBuilder(
+                new TestMetadata1MatcherPolicy(),
+                new TestMetadata2MatcherPolicy()
+            );
 
-            var endpoint1 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata1(0), new TestMetadata2(true), });
+            var endpoint1 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata1(0), new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint1);
 
             // Act
@@ -886,16 +917,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var a = next.Value;
             Assert.Empty(a.Matches);
             Assert.IsType<TestMetadata1MatcherPolicy>(a.NodeBuilder);
-            Assert.Collection(
-                a.PolicyEdges.OrderBy(e => e.Key),
-                e => Assert.Equal(0, e.Key));
+            Assert.Collection(a.PolicyEdges.OrderBy(e => e.Key), e => Assert.Equal(0, e.Key));
 
             var test1_0 = a.PolicyEdges[0];
             Assert.Empty(a.Matches);
             Assert.IsType<TestMetadata2MatcherPolicy>(test1_0.NodeBuilder);
             Assert.Collection(
                 test1_0.PolicyEdges.OrderBy(e => e.Key),
-                e => Assert.Equal(true, e.Key));
+                e => Assert.Equal(true, e.Key)
+            );
 
             var test2_true = test1_0.PolicyEdges[true];
             Assert.Same(endpoint1, Assert.Single(test2_true.Matches));
@@ -907,15 +937,27 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_WithPolicies_AndBranches()
         {
             // Arrange
-            var builder = CreateDfaMatcherBuilder(new TestMetadata1MatcherPolicy(), new TestMetadata2MatcherPolicy());
+            var builder = CreateDfaMatcherBuilder(
+                new TestMetadata1MatcherPolicy(),
+                new TestMetadata2MatcherPolicy()
+            );
 
-            var endpoint1 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata1(0), new TestMetadata2(true), });
+            var endpoint1 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata1(0), new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint1);
 
-            var endpoint2 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata1(1), new TestMetadata2(true), });
+            var endpoint2 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata1(1), new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint2);
 
-            var endpoint3 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata1(1), new TestMetadata2(false), });
+            var endpoint3 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata1(1), new TestMetadata2(false), }
+            );
             builder.AddEndpoint(endpoint3);
 
             // Act
@@ -934,14 +976,16 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 a.PolicyEdges.OrderBy(e => e.Key),
                 e => Assert.Equal(0, e.Key),
-                e => Assert.Equal(1, e.Key));
+                e => Assert.Equal(1, e.Key)
+            );
 
             var test1_0 = a.PolicyEdges[0];
             Assert.Empty(test1_0.Matches);
             Assert.IsType<TestMetadata2MatcherPolicy>(test1_0.NodeBuilder);
             Assert.Collection(
                 test1_0.PolicyEdges.OrderBy(e => e.Key),
-                e => Assert.Equal(true, e.Key));
+                e => Assert.Equal(true, e.Key)
+            );
 
             var test2_true = test1_0.PolicyEdges[true];
             Assert.Same(endpoint1, Assert.Single(test2_true.Matches));
@@ -954,7 +998,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 test1_1.PolicyEdges.OrderBy(e => e.Key),
                 e => Assert.Equal(false, e.Key),
-                e => Assert.Equal(true, e.Key));
+                e => Assert.Equal(true, e.Key)
+            );
 
             test2_true = test1_1.PolicyEdges[true];
             Assert.Same(endpoint2, Assert.Single(test2_true.Matches));
@@ -971,15 +1016,27 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_WithPolicies_AndBranches_FirstPolicySkipped()
         {
             // Arrange
-            var builder = CreateDfaMatcherBuilder(new TestMetadata1MatcherPolicy(), new TestMetadata2MatcherPolicy());
+            var builder = CreateDfaMatcherBuilder(
+                new TestMetadata1MatcherPolicy(),
+                new TestMetadata2MatcherPolicy()
+            );
 
-            var endpoint1 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata2(true), });
+            var endpoint1 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint1);
 
-            var endpoint2 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata2(true), });
+            var endpoint2 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint2);
 
-            var endpoint3 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata2(false), });
+            var endpoint3 = CreateEndpoint(
+                "/a",
+                metadata: new object[] { new TestMetadata2(false), }
+            );
             builder.AddEndpoint(endpoint3);
 
             // Act
@@ -998,7 +1055,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 a.PolicyEdges.OrderBy(e => e.Key),
                 e => Assert.Equal(false, e.Key),
-                e => Assert.Equal(true, e.Key));
+                e => Assert.Equal(true, e.Key)
+            );
 
             var test2_true = a.PolicyEdges[true];
             Assert.Equal(new[] { endpoint1, endpoint2, }, test2_true.Matches);
@@ -1015,7 +1073,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_WithPolicies_AndBranches_SecondSkipped()
         {
             // Arrange
-            var builder = CreateDfaMatcherBuilder(new TestMetadata1MatcherPolicy(), new TestMetadata2MatcherPolicy());
+            var builder = CreateDfaMatcherBuilder(
+                new TestMetadata1MatcherPolicy(),
+                new TestMetadata2MatcherPolicy()
+            );
 
             var endpoint1 = CreateEndpoint("/a", metadata: new object[] { new TestMetadata1(0), });
             builder.AddEndpoint(endpoint1);
@@ -1042,7 +1103,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Assert.Collection(
                 a.PolicyEdges.OrderBy(e => e.Key),
                 e => Assert.Equal(0, e.Key),
-                e => Assert.Equal(1, e.Key));
+                e => Assert.Equal(1, e.Key)
+            );
 
             var test1_0 = a.PolicyEdges[0];
             Assert.Equal(new[] { endpoint1, }, test1_0.Matches);
@@ -1087,7 +1149,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 a.PolicyEdges.OrderBy(e => e.Key),
                 e => Assert.Equal(0, e.Key),
                 e => Assert.Equal(1, e.Key),
-                e => Assert.Equal(int.MaxValue, e.Key));
+                e => Assert.Equal(int.MaxValue, e.Key)
+            );
 
             var test1_0 = a.PolicyEdges[0];
             Assert.Equal(new[] { endpoint1, }, test1_0.Matches);
@@ -1107,15 +1170,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_WithPolicies_AndBranches_BothPoliciesSkipped()
         {
             // Arrange
-            var builder = CreateDfaMatcherBuilder(new TestMetadata1MatcherPolicy(), new TestMetadata2MatcherPolicy());
+            var builder = CreateDfaMatcherBuilder(
+                new TestMetadata1MatcherPolicy(),
+                new TestMetadata2MatcherPolicy()
+            );
 
-            var endpoint1 = CreateEndpoint("/a", metadata: new object[] { });
+            var endpoint1 = CreateEndpoint("/a", metadata: new object[] {  });
             builder.AddEndpoint(endpoint1);
 
-            var endpoint2 = CreateEndpoint("/a", metadata: new object[] { });
+            var endpoint2 = CreateEndpoint("/a", metadata: new object[] {  });
             builder.AddEndpoint(endpoint2);
 
-            var endpoint3 = CreateEndpoint("/a", metadata: new object[] { });
+            var endpoint3 = CreateEndpoint("/a", metadata: new object[] {  });
             builder.AddEndpoint(endpoint3);
 
             // Act
@@ -1152,20 +1218,34 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 new TestMetadata2MatcherPolicy(),
             };
 
-            var comparer = new EndpointComparer(policies.OrderBy(p => p.Order).OfType<IEndpointComparerPolicy>().ToArray());
+            var comparer = new EndpointComparer(
+                policies.OrderBy(p => p.Order).OfType<IEndpointComparerPolicy>().ToArray()
+            );
 
             var builder = CreateDfaMatcherBuilder(policies);
 
             ((TestMetadata1MatcherPolicy)policies[0]).OnGetEdges = VerifyOrder;
             ((TestMetadata2MatcherPolicy)policies[1]).OnGetEdges = VerifyOrder;
 
-            var endpoint1 = CreateEndpoint("/a/{**b}", order: -1, metadata: new object[] { new TestMetadata1(0), new TestMetadata2(true), });
+            var endpoint1 = CreateEndpoint(
+                "/a/{**b}",
+                order: -1,
+                metadata: new object[] { new TestMetadata1(0), new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint1);
 
-            var endpoint2 = CreateEndpoint("/a/{b}/{**c}", order: 0, metadata: new object[] { new TestMetadata1(1), new TestMetadata2(true), });
+            var endpoint2 = CreateEndpoint(
+                "/a/{b}/{**c}",
+                order: 0,
+                metadata: new object[] { new TestMetadata1(1), new TestMetadata2(true), }
+            );
             builder.AddEndpoint(endpoint2);
 
-            var endpoint3 = CreateEndpoint("/a/b/{c}", order: 1, metadata: new object[] { new TestMetadata1(1), new TestMetadata2(false), });
+            var endpoint3 = CreateEndpoint(
+                "/a/b/{c}",
+                order: 1,
+                metadata: new object[] { new TestMetadata1(1), new TestMetadata2(false), }
+            );
             builder.AddEndpoint(endpoint3);
 
             // Act & Assert
@@ -1184,7 +1264,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var builder = CreateDfaMatcherBuilder();
 
-            var endpoint = CreateEndpoint("{controller}/{action}", requiredValues: new { controller = "Home", action = "Index" });
+            var endpoint = CreateEndpoint(
+                "{controller}/{action}",
+                requiredValues: new { controller = "Home", action = "Index" }
+            );
             builder.AddEndpoint(endpoint);
 
             // Act
@@ -1218,7 +1301,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoint = CreateEndpoint(
                 "{controller}/{action}",
                 defaults: new { controller = "Home", action = "Index" },
-                requiredValues: new { controller = "Home", action = "Index" });
+                requiredValues: new { controller = "Home", action = "Index" }
+            );
             builder.AddEndpoint(endpoint);
 
             // Act
@@ -1252,7 +1336,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoint = CreateSubsitutedEndpoint(
                 "{controller}/{action}",
                 defaults: new { controller = "Home", action = "Index" },
-                requiredValues: new { controller = "Login", action = "Index" });
+                requiredValues: new { controller = "Login", action = "Index" }
+            );
             builder.AddEndpoint(endpoint);
 
             // Act
@@ -1286,19 +1371,22 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoint1 = CreateSubsitutedEndpoint(
                 "{controller}/{action}/{id?}",
                 defaults: new { controller = "Home", action = "Index" },
-                requiredValues: new { controller = "Home", action = "Index" });
+                requiredValues: new { controller = "Home", action = "Index" }
+            );
             builder.AddEndpoint(endpoint1);
 
             var endpoint2 = CreateSubsitutedEndpoint(
                 "{controller}/{action}/{id?}",
                 defaults: new { controller = "Home", action = "Index" },
-                requiredValues: new { controller = "Login", action = "Index" });
+                requiredValues: new { controller = "Login", action = "Index" }
+            );
             builder.AddEndpoint(endpoint2);
 
             var endpoint3 = CreateSubsitutedEndpoint(
                 "{controller}/{action}/{id?}",
                 defaults: new { controller = "Home", action = "Index" },
-                requiredValues: new { controller = "Login", action = "ChangePassword" });
+                requiredValues: new { controller = "Login", action = "ChangePassword" }
+            );
             builder.AddEndpoint(endpoint3);
 
             // Act
@@ -1358,7 +1446,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoint = CreateEndpoint(
                 "{controller:slugify}/{action:slugify}",
                 defaults: new { controller = "RecentProducts", action = "ViewAll" },
-                requiredValues: new { controller = "RecentProducts", action = "ViewAll" });
+                requiredValues: new { controller = "RecentProducts", action = "ViewAll" }
+            );
             builder.AddEndpoint(endpoint);
 
             // Act
@@ -1391,7 +1480,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             var endpoint = CreateEndpoint(
                 "ConventionalTransformerRoute/{controller:slugify}/{action=Index}/{param:slugify?}",
-                requiredValues: new { controller = "ConventionalTransformer", action = "Index", area = (string)null, page = (string)null });
+                requiredValues: new
+                {
+                    controller = "ConventionalTransformer",
+                    action = "Index",
+                    area = (string)null,
+                    page = (string)null
+                }
+            );
             builder.AddEndpoint(endpoint);
 
             // Act
@@ -1463,7 +1559,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 candidate.Captures,
                 c => Assert.Equal(("a", 0, 0), c),
                 c => Assert.Equal(("b", 1, 1), c),
-                c => Assert.Equal(("c", 2, 2), c));
+                c => Assert.Equal(("c", 2, 2), c)
+            );
             Assert.Equal(default, candidate.CatchAll);
             Assert.Empty(candidate.ComplexSegments);
             Assert.Empty(candidate.Constraints);
@@ -1483,17 +1580,20 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Assert
             Assert.Equal(
                 Candidate.CandidateFlags.HasDefaults | Candidate.CandidateFlags.HasCaptures,
-                candidate.Flags);
+                candidate.Flags
+            );
             Assert.Collection(
                 candidate.Slots,
                 s => Assert.Equal(new KeyValuePair<string, object>("a", "aa"), s),
                 s => Assert.Equal(new KeyValuePair<string, object>("b", "bb"), s),
-                s => Assert.Equal(new KeyValuePair<string, object>("c", "cc"), s));
+                s => Assert.Equal(new KeyValuePair<string, object>("c", "cc"), s)
+            );
             Assert.Collection(
                 candidate.Captures,
                 c => Assert.Equal(("a", 0, 0), c),
                 c => Assert.Equal(("b", 1, 1), c),
-                c => Assert.Equal(("c", 2, 2), c));
+                c => Assert.Equal(("c", 2, 2), c)
+            );
             Assert.Equal(default, candidate.CatchAll);
             Assert.Empty(candidate.ComplexSegments);
             Assert.Empty(candidate.Constraints);
@@ -1512,19 +1612,22 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             // Assert
             Assert.Equal(
-                Candidate.CandidateFlags.HasDefaults |
-                    Candidate.CandidateFlags.HasCaptures |
-                    Candidate.CandidateFlags.HasCatchAll,
-                candidate.Flags);
+                Candidate.CandidateFlags.HasDefaults
+                    | Candidate.CandidateFlags.HasCaptures
+                    | Candidate.CandidateFlags.HasCatchAll,
+                candidate.Flags
+            );
             Assert.Collection(
                 candidate.Slots,
                 s => Assert.Equal(new KeyValuePair<string, object>("c", "cc"), s),
                 s => Assert.Equal(new KeyValuePair<string, object>(null, null), s),
-                s => Assert.Equal(new KeyValuePair<string, object>(null, null), s));
+                s => Assert.Equal(new KeyValuePair<string, object>(null, null), s)
+            );
             Assert.Collection(
                 candidate.Captures,
                 c => Assert.Equal(("a", 0, 1), c),
-                c => Assert.Equal(("b", 1, 2), c));
+                c => Assert.Equal(("b", 1, 2), c)
+            );
             Assert.Equal(("c", 2, 0), candidate.CatchAll);
             Assert.Empty(candidate.ComplexSegments);
             Assert.Empty(candidate.Constraints);
@@ -1545,18 +1648,21 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Assert
             Assert.Equal(
                 Candidate.CandidateFlags.HasDefaults | Candidate.CandidateFlags.HasCaptures,
-                candidate.Flags);
+                candidate.Flags
+            );
             Assert.Collection(
                 candidate.Slots,
                 s => Assert.Equal(new KeyValuePair<string, object>("a", "aa"), s),
                 s => Assert.Equal(new KeyValuePair<string, object>("d", "dd"), s),
                 s => Assert.Equal(new KeyValuePair<string, object>("c", "cc"), s),
-                s => Assert.Equal(new KeyValuePair<string, object>(null, null), s));
+                s => Assert.Equal(new KeyValuePair<string, object>(null, null), s)
+            );
             Assert.Collection(
                 candidate.Captures,
                 c => Assert.Equal(("a", 0, 0), c),
                 c => Assert.Equal(("b", 1, 3), c),
-                c => Assert.Equal(("c", 2, 2), c));
+                c => Assert.Equal(("c", 2, 2), c)
+            );
             Assert.Equal(default, candidate.CatchAll);
             Assert.Empty(candidate.ComplexSegments);
             Assert.Empty(candidate.Constraints);
@@ -1575,21 +1681,19 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             // Assert
             Assert.Equal(
-                Candidate.CandidateFlags.HasDefaults |
-                    Candidate.CandidateFlags.HasCaptures |
-                    Candidate.CandidateFlags.HasComplexSegments,
-                candidate.Flags);
+                Candidate.CandidateFlags.HasDefaults
+                    | Candidate.CandidateFlags.HasCaptures
+                    | Candidate.CandidateFlags.HasComplexSegments,
+                candidate.Flags
+            );
             Assert.Collection(
                 candidate.Slots,
                 s => Assert.Equal(new KeyValuePair<string, object>("b", "bb"), s),
-                s => Assert.Equal(new KeyValuePair<string, object>(null, null), s));
-            Assert.Collection(
-                candidate.Captures,
-                c => Assert.Equal(("c", 1, 1), c));
+                s => Assert.Equal(new KeyValuePair<string, object>(null, null), s)
+            );
+            Assert.Collection(candidate.Captures, c => Assert.Equal(("c", 1, 1), c));
             Assert.Equal(default, candidate.CatchAll);
-            Assert.Collection(
-                candidate.ComplexSegments,
-                s => Assert.Equal(0, s.segmentIndex));
+            Assert.Collection(candidate.ComplexSegments, s => Assert.Equal(0, s.segmentIndex));
             Assert.Empty(candidate.Constraints);
         }
 
@@ -1597,7 +1701,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void CreateCandidate_RouteConstraints()
         {
             // Arrange
-            var endpoint = CreateEndpoint("/a/b/c", constraints: new { a = new IntRouteConstraint(), });
+            var endpoint = CreateEndpoint(
+                "/a/b/c",
+                constraints: new { a = new IntRouteConstraint(), }
+            );
 
             var builder = CreateDfaMatcherBuilder();
 
@@ -1617,7 +1724,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void CreateCandidate_CustomParameterPolicy()
         {
             // Arrange
-            var endpoint = CreateEndpoint("/a/b/c", constraints: new { a = new CustomParameterPolicy(), });
+            var endpoint = CreateEndpoint(
+                "/a/b/c",
+                constraints: new { a = new CustomParameterPolicy(), }
+            );
 
             var builder = CreateDfaMatcherBuilder();
 
@@ -1643,15 +1753,34 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/a/b/c", constraints: new { a = new IntRouteConstraint(), }, metadata: new object[] { new TestMetadata1(), new TestMetadata2(), }),
-                CreateEndpoint("/a/b/c", constraints: new { a = new AlphaRouteConstraint(), }, metadata: new object[] { new TestMetadata1(), new TestMetadata2(), }),
-                CreateEndpoint("/a/b/c", constraints: new { a = new IntRouteConstraint(), }, metadata: new object[] { new TestMetadata1(), }),
-                CreateEndpoint("/a/b/c", constraints: new { a = new IntRouteConstraint(), }, metadata: new object[] { new TestMetadata2(), }),
-                CreateEndpoint("/a/b/c", constraints: new { }, metadata: new object[] { }),
-                CreateEndpoint("/a/b/c", constraints: new { }, metadata: new object[] { }),
+                CreateEndpoint(
+                    "/a/b/c",
+                    constraints: new { a = new IntRouteConstraint(), },
+                    metadata: new object[] { new TestMetadata1(), new TestMetadata2(), }
+                ),
+                CreateEndpoint(
+                    "/a/b/c",
+                    constraints: new { a = new AlphaRouteConstraint(), },
+                    metadata: new object[] { new TestMetadata1(), new TestMetadata2(), }
+                ),
+                CreateEndpoint(
+                    "/a/b/c",
+                    constraints: new { a = new IntRouteConstraint(), },
+                    metadata: new object[] { new TestMetadata1(), }
+                ),
+                CreateEndpoint(
+                    "/a/b/c",
+                    constraints: new { a = new IntRouteConstraint(), },
+                    metadata: new object[] { new TestMetadata2(), }
+                ),
+                CreateEndpoint("/a/b/c", constraints: new {  }, metadata: new object[] {  }),
+                CreateEndpoint("/a/b/c", constraints: new {  }, metadata: new object[] {  }),
             };
 
-            var builder = CreateDfaMatcherBuilder(new TestMetadata1MatcherPolicy(), new TestMetadata2MatcherPolicy());
+            var builder = CreateDfaMatcherBuilder(
+                new TestMetadata1MatcherPolicy(),
+                new TestMetadata2MatcherPolicy()
+            );
 
             // Act
             var candidates = builder.CreateCandidates(endpoints);
@@ -1664,7 +1793,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 c => Assert.Equal(1, c.Score),
                 c => Assert.Equal(2, c.Score),
                 c => Assert.Equal(3, c.Score),
-                c => Assert.Equal(3, c.Score));
+                c => Assert.Equal(3, c.Score)
+            );
         }
 
         private static DfaMatcherBuilder CreateDfaMatcherBuilder(params MatcherPolicy[] policies)
@@ -1675,7 +1805,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 NullLoggerFactory.Instance,
                 policyFactory,
                 Mock.Of<EndpointSelector>(),
-                policies);
+                policies
+            );
         }
 
         private static RouteEndpoint CreateSubsitutedEndpoint(
@@ -1683,26 +1814,36 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object defaults = null,
             object constraints = null,
             object requiredValues = null,
-            params object[] metadata)
-        {
+            params object[] metadata
+        ) {
             var routePattern = RoutePatternFactory.Parse(template, defaults, constraints);
 
             var policyFactory = CreateParameterPolicyFactory();
             var defaultRoutePatternTransformer = new DefaultRoutePatternTransformer(policyFactory);
 
-            routePattern = defaultRoutePatternTransformer.SubstituteRequiredValues(routePattern, requiredValues);
+            routePattern = defaultRoutePatternTransformer.SubstituteRequiredValues(
+                routePattern,
+                requiredValues
+            );
 
             return EndpointFactory.CreateRouteEndpoint(routePattern, metadata: metadata);
         }
 
-        public static RoutePattern CreateRoutePattern(RoutePattern routePattern, object requiredValues)
-        {
+        public static RoutePattern CreateRoutePattern(
+            RoutePattern routePattern,
+            object requiredValues
+        ) {
             if (requiredValues != null)
             {
                 var policyFactory = CreateParameterPolicyFactory();
-                var defaultRoutePatternTransformer = new DefaultRoutePatternTransformer(policyFactory);
+                var defaultRoutePatternTransformer = new DefaultRoutePatternTransformer(
+                    policyFactory
+                );
 
-                routePattern = defaultRoutePatternTransformer.SubstituteRequiredValues(routePattern, requiredValues);
+                routePattern = defaultRoutePatternTransformer.SubstituteRequiredValues(
+                    routePattern,
+                    requiredValues
+                );
             }
 
             return routePattern;
@@ -1712,15 +1853,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var serviceCollection = new ServiceCollection();
             var policyFactory = new DefaultParameterPolicyFactory(
-                Options.Create(new RouteOptions
-                {
-                    ConstraintMap =
+                Options.Create(
+                    new RouteOptions
                     {
-                        ["slugify"] = typeof(SlugifyParameterTransformer),
-                        ["upper-case"] = typeof(UpperCaseParameterTransform)
+                        ConstraintMap =
+                        {
+                            ["slugify"] = typeof(SlugifyParameterTransformer),
+                            ["upper-case"] = typeof(UpperCaseParameterTransform)
+                        }
                     }
-                }),
-                serviceCollection.BuildServiceProvider());
+                ),
+                serviceCollection.BuildServiceProvider()
+            );
 
             return policyFactory;
         }
@@ -1731,16 +1875,21 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object constraints = null,
             object requiredValues = null,
             int order = 0,
-            params object[] metadata)
-        {
-            return EndpointFactory.CreateRouteEndpoint(template, defaults, constraints, requiredValues, order: order, metadata: metadata);
+            params object[] metadata
+        ) {
+            return EndpointFactory.CreateRouteEndpoint(
+                template,
+                defaults,
+                constraints,
+                requiredValues,
+                order: order,
+                metadata: metadata
+            );
         }
 
         private class TestMetadata1
         {
-            public TestMetadata1()
-            {
-            }
+            public TestMetadata1() { }
 
             public TestMetadata1(int state)
             {
@@ -1750,7 +1899,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public int State { get; set; }
         }
 
-        private class TestMetadata1MatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy
+        private class TestMetadata1MatcherPolicy
+            : MatcherPolicy,
+              IEndpointComparerPolicy,
+              INodeBuilderPolicy
         {
             public override int Order => 100;
 
@@ -1763,16 +1915,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 return endpoints.Any(e => e.Metadata.GetMetadata<TestMetadata1>() != null);
             }
 
-            public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-            {
+            public PolicyJumpTable BuildJumpTable(
+                int exitDestination,
+                IReadOnlyList<PolicyJumpTableEdge> edges
+            ) {
                 throw new NotImplementedException();
             }
 
             public IReadOnlyList<PolicyNodeEdge> GetEdges(IReadOnlyList<Endpoint> endpoints)
             {
                 OnGetEdges?.Invoke(endpoints);
-                return endpoints
-                    .GroupBy(e => e.Metadata.GetMetadata<TestMetadata1>().State)
+                return endpoints.GroupBy(e => e.Metadata.GetMetadata<TestMetadata1>().State)
                     .Select(g => new PolicyNodeEdge(g.Key, g.ToArray()))
                     .ToArray();
             }
@@ -1780,9 +1933,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private class TestMetadata2
         {
-            public TestMetadata2()
-            {
-            }
+            public TestMetadata2() { }
 
             public TestMetadata2(bool state)
             {
@@ -1792,7 +1943,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
             public bool State { get; set; }
         }
 
-        private class TestMetadata2MatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy
+        private class TestMetadata2MatcherPolicy
+            : MatcherPolicy,
+              IEndpointComparerPolicy,
+              INodeBuilderPolicy
         {
             public override int Order => 101;
 
@@ -1800,28 +1954,31 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             public Action<IReadOnlyList<Endpoint>> OnGetEdges { get; set; }
 
-
             public bool AppliesToEndpoints(IReadOnlyList<Endpoint> endpoints)
             {
                 return endpoints.Any(e => e.Metadata.GetMetadata<TestMetadata2>() != null);
             }
 
-            public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-            {
+            public PolicyJumpTable BuildJumpTable(
+                int exitDestination,
+                IReadOnlyList<PolicyJumpTableEdge> edges
+            ) {
                 throw new NotImplementedException();
             }
 
             public IReadOnlyList<PolicyNodeEdge> GetEdges(IReadOnlyList<Endpoint> endpoints)
             {
                 OnGetEdges?.Invoke(endpoints);
-                return endpoints
-                    .GroupBy(e => e.Metadata.GetMetadata<TestMetadata2>().State)
+                return endpoints.GroupBy(e => e.Metadata.GetMetadata<TestMetadata2>().State)
                     .Select(g => new PolicyNodeEdge(g.Key, g.ToArray()))
                     .ToArray();
             }
         }
 
-        private class TestNonRoutePatternMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy
+        private class TestNonRoutePatternMatcherPolicy
+            : MatcherPolicy,
+              IEndpointComparerPolicy,
+              INodeBuilderPolicy
         {
             public override int Order => 100;
 
@@ -1832,19 +1989,24 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 return endpoints.Any(e => e.Metadata.GetMetadata<TestMetadata1>() != null);
             }
 
-            public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-            {
+            public PolicyJumpTable BuildJumpTable(
+                int exitDestination,
+                IReadOnlyList<PolicyJumpTableEdge> edges
+            ) {
                 throw new NotImplementedException();
             }
 
             public IReadOnlyList<PolicyNodeEdge> GetEdges(IReadOnlyList<Endpoint> endpoints)
             {
-                var edges = endpoints
-                    .GroupBy(e => e.Metadata.GetMetadata<TestMetadata1>().State)
+                var edges = endpoints.GroupBy(e => e.Metadata.GetMetadata<TestMetadata1>().State)
                     .Select(g => new PolicyNodeEdge(g.Key, g.ToArray()))
                     .ToList();
 
-                var maxValueEndpoint = new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "MaxValueEndpoint");
+                var maxValueEndpoint = new Endpoint(
+                    TestConstants.EmptyRequestDelegate,
+                    EndpointMetadataCollection.Empty,
+                    "MaxValueEndpoint"
+                );
                 edges.Add(new PolicyNodeEdge(int.MaxValue, new[] { maxValueEndpoint }));
 
                 return edges;

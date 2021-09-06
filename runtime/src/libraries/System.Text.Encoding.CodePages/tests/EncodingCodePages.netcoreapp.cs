@@ -23,7 +23,7 @@ namespace System.Text.Tests
             public string Name { get; }
         }
 
-        private static EncodingInformation [] s_defaultEncoding = new EncodingInformation []
+        private static EncodingInformation[] s_defaultEncoding = new EncodingInformation[]
         {
             new EncodingInformation(1200, "utf-16"),
             new EncodingInformation(1201, "utf-16BE"),
@@ -37,30 +37,48 @@ namespace System.Text.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void TestGetEncodings()
         {
-            RemoteExecutor.Invoke(() => {
-                EncodingInfo [] list = Encoding.GetEncodings();
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        EncodingInfo[] list = Encoding.GetEncodings();
 
-                foreach (EncodingInformation eInfo in s_defaultEncoding)
-                {
-                    Assert.NotNull(list.FirstOrDefault(o => o.CodePage == eInfo.CodePage && o.Name == eInfo.Name));
-                }
-            }).Dispose();
+                        foreach (EncodingInformation eInfo in s_defaultEncoding)
+                        {
+                            Assert.NotNull(
+                                list.FirstOrDefault(
+                                    o => o.CodePage == eInfo.CodePage && o.Name == eInfo.Name
+                                )
+                            );
+                        }
+                    }
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void TestGetEncodingsWithProvider()
         {
-            RemoteExecutor.Invoke(() => {
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-                foreach (EncodingInfo ei in Encoding.GetEncodings())
-                {
-                    Encoding encoding = ei.GetEncoding();
-                    Assert.Equal(ei.CodePage, encoding.CodePage);
+                        foreach (EncodingInfo ei in Encoding.GetEncodings())
+                        {
+                            Encoding encoding = ei.GetEncoding();
+                            Assert.Equal(ei.CodePage, encoding.CodePage);
 
-                    Assert.True(ei.Name.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase), $"Encodinginfo.Name `{ei.Name}` != Encoding.WebName `{encoding.WebName}`");
-                }
-            }).Dispose();
+                            Assert.True(
+                                ei.Name.Equals(
+                                    encoding.WebName,
+                                    StringComparison.OrdinalIgnoreCase
+                                ),
+                                $"Encodinginfo.Name `{ei.Name}` != Encoding.WebName `{encoding.WebName}`"
+                            );
+                        }
+                    }
+                )
+                .Dispose();
         }
     }
 }

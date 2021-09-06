@@ -35,10 +35,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         /// The <see cref="IHttpRequestStreamReaderFactory"/>, used to create <see cref="System.IO.TextReader"/>
         /// instances for reading the request body.
         /// </param>
-        public BodyModelBinder(IList<IInputFormatter> formatters, IHttpRequestStreamReaderFactory readerFactory)
-            : this(formatters, readerFactory, loggerFactory: null)
-        {
-        }
+        public BodyModelBinder(
+            IList<IInputFormatter> formatters,
+            IHttpRequestStreamReaderFactory readerFactory
+        ) : this(formatters, readerFactory, loggerFactory: null) { }
 
         /// <summary>
         /// Creates a new <see cref="BodyModelBinder"/>.
@@ -52,10 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public BodyModelBinder(
             IList<IInputFormatter> formatters,
             IHttpRequestStreamReaderFactory readerFactory,
-            ILoggerFactory? loggerFactory)
-            : this(formatters, readerFactory, loggerFactory, options: null)
-        {
-        }
+            ILoggerFactory? loggerFactory
+        ) : this(formatters, readerFactory, loggerFactory, options: null) { }
 
         /// <summary>
         /// Creates a new <see cref="BodyModelBinder"/>.
@@ -71,8 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IList<IInputFormatter> formatters,
             IHttpRequestStreamReaderFactory readerFactory,
             ILoggerFactory? loggerFactory,
-            MvcOptions? options)
-        {
+            MvcOptions? options
+        ) {
             if (formatters == null)
             {
                 throw new ArgumentNullException(nameof(formatters));
@@ -86,7 +84,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             _formatters = formatters;
             _readerFactory = readerFactory.CreateReader;
 
-            _logger = loggerFactory?.CreateLogger<BodyModelBinder>() ?? NullLogger<BodyModelBinder>.Instance;
+            _logger =
+                loggerFactory?.CreateLogger<BodyModelBinder>()
+                ?? NullLogger<BodyModelBinder>.Instance;
 
             _options = options;
         }
@@ -124,7 +124,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 bindingContext.ModelState,
                 bindingContext.ModelMetadata,
                 _readerFactory,
-                AllowEmptyBody);
+                AllowEmptyBody
+            );
 
             var formatter = (IInputFormatter?)null;
             for (var i = 0; i < _formatters.Count; i++)
@@ -145,9 +146,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             {
                 _logger.NoInputFormatterSelected(formatterContext);
 
-                var message = Resources.FormatUnsupportedContentType(httpContext.Request.ContentType);
+                var message = Resources.FormatUnsupportedContentType(
+                    httpContext.Request.ContentType
+                );
                 var exception = new UnsupportedContentTypeException(message);
-                bindingContext.ModelState.AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
+                bindingContext.ModelState.AddModelError(
+                    modelBindingKey,
+                    exception,
+                    bindingContext.ModelMetadata
+                );
                 _logger.DoneAttemptingToBindModel(bindingContext);
                 return;
             }
@@ -175,16 +182,19 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     // If instead the input formatter wants to treat the input as optional, it must do so by
                     // returning InputFormatterResult.Success(defaultForModelType), because input formatters
                     // are responsible for choosing a default value for the model type.
-                    var message = bindingContext
-                        .ModelMetadata
-                        .ModelBindingMessageProvider
-                        .MissingRequestBodyRequiredValueAccessor();
+                    var message =
+                        bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingRequestBodyRequiredValueAccessor();
                     bindingContext.ModelState.AddModelError(modelBindingKey, message);
                 }
             }
-            catch (Exception exception) when (exception is InputFormatterException || ShouldHandleException(formatter))
+            catch (Exception exception)
+                when (exception is InputFormatterException || ShouldHandleException(formatter))
             {
-                bindingContext.ModelState.AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
+                bindingContext.ModelState.AddModelError(
+                    modelBindingKey,
+                    exception,
+                    bindingContext.ModelMetadata
+                );
             }
 
             _logger.DoneAttemptingToBindModel(bindingContext);
@@ -193,8 +203,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         private bool ShouldHandleException(IInputFormatter formatter)
         {
             // Any explicit policy on the formatters overrides the default.
-            var policy = (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy ??
-                InputFormatterExceptionPolicy.MalformedInputExceptions;
+            var policy =
+                (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy
+                ?? InputFormatterExceptionPolicy.MalformedInputExceptions;
 
             return policy == InputFormatterExceptionPolicy.AllExceptions;
         }

@@ -22,8 +22,8 @@ namespace Roslyn.Utilities
             TimeSpan delay,
             Func<CancellationToken, Task> processAsync,
             IAsynchronousOperationListener? asyncListener,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             _processAsync = processAsync;
 
             // We use an AsyncBatchingWorkQueue with a boolean, and just always add the
@@ -33,7 +33,8 @@ namespace Roslyn.Utilities
                 OnNotifyAsync,
                 equalityComparer: EqualityComparer<bool>.Default,
                 asyncListener,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private Task OnNotifyAsync(ImmutableArray<bool> _, CancellationToken cancellationToken)

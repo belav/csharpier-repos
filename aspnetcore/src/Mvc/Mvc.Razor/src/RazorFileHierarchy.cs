@@ -20,7 +20,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             if (path[0] != '/')
             {
-                throw new ArgumentException(Resources.RazorProject_PathMustStartWithForwardSlash, nameof(path));
+                throw new ArgumentException(
+                    Resources.RazorProject_PathMustStartWithForwardSlash,
+                    nameof(path)
+                );
             }
 
             if (path.Length == 1)
@@ -31,8 +34,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var builder = new StringBuilder(path);
             var maxIterations = 255;
             var index = path.Length;
-            while (maxIterations-- > 0 && index > 1 && (index = path.LastIndexOf('/', index - 1)) != -1)
-            {
+            while (
+                maxIterations-- > 0 && index > 1 && (index = path.LastIndexOf('/', index - 1)) != -1
+            ) {
                 builder.Length = index + 1;
                 builder.Append(ViewStartFileName);
 

@@ -77,14 +77,14 @@ namespace Roslyn.Utilities
         public AsyncBatchingWorkQueue(
             TimeSpan delay,
             Func<ImmutableArray<TItem>, CancellationToken, Task> processBatchAsync,
-            CancellationToken cancellationToken)
-            : this(delay,
-                   processBatchAsync,
-                   equalityComparer: null,
-                   asyncListener: null,
-                   cancellationToken)
-        {
-        }
+            CancellationToken cancellationToken
+        ) : this(
+            delay,
+            processBatchAsync,
+            equalityComparer: null,
+            asyncListener: null,
+            cancellationToken
+        ) { }
 
         /// <param name="processBatchAsync">Callback to add the new items to the current batch.  It is legal to mutate
         /// the current batch (for example, clearing the batch or deduplicating)</param>
@@ -93,8 +93,8 @@ namespace Roslyn.Utilities
             Func<ImmutableArray<TItem>, CancellationToken, Task> processBatchAsync,
             IEqualityComparer<TItem>? equalityComparer,
             IAsynchronousOperationListener? asyncListener,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             _delay = delay;
             _processBatchAsync = processBatchAsync;
             _equalityComparer = equalityComparer;
@@ -163,12 +163,14 @@ namespace Roslyn.Utilities
                     var token = _asyncListener.BeginAsyncOperation(nameof(TryKickOffNextBatchTask));
 
                     _updateTask = _updateTask.ContinueWithAfterDelayFromAsync(
-                        _ => ProcessNextBatchAsync(_cancellationToken),
-                        _cancellationToken,
-                        (int)_delay.TotalMilliseconds,
-                        _asyncListener,
-                        TaskContinuationOptions.RunContinuationsAsynchronously,
-                        TaskScheduler.Default).CompletesAsyncOperation(token);
+                            _ => ProcessNextBatchAsync(_cancellationToken),
+                            _cancellationToken,
+                            (int)_delay.TotalMilliseconds,
+                            _asyncListener,
+                            TaskContinuationOptions.RunContinuationsAsynchronously,
+                            TaskScheduler.Default
+                        )
+                        .CompletesAsyncOperation(token);
                 }
                 else
                 {
@@ -177,7 +179,8 @@ namespace Roslyn.Utilities
                         _cancellationToken,
                         (int)_delay.TotalMilliseconds,
                         TaskContinuationOptions.RunContinuationsAsynchronously,
-                        TaskScheduler.Default);
+                        TaskScheduler.Default
+                    );
                 }
 
                 _taskInFlight = true;

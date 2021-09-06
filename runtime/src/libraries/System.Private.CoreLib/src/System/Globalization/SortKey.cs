@@ -20,8 +20,12 @@ namespace System.Globalization
         /// The following constructor is designed to be called from CompareInfo to get the
         /// the sort key of specific string for synthetic culture
         /// </summary>
-        internal SortKey(CompareInfo compareInfo, string str, CompareOptions options, byte[] keyData)
-        {
+        internal SortKey(
+            CompareInfo compareInfo,
+            string str,
+            CompareOptions options,
+            byte[] keyData
+        ) {
             _keyData = keyData;
             _compareInfo = compareInfo;
             _options = options;

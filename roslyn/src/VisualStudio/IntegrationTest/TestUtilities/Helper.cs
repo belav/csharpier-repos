@@ -43,8 +43,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <param name="delay">the amount of time to wait between retries in milliseconds</param>
         /// <typeparam name="T">type of return value</typeparam>
         /// <returns>the return value of 'action'</returns>
-        public static T Retry<T>(Func<T> action, int delay)
-            => Retry(action, TimeSpan.FromMilliseconds(delay));
+        public static T Retry<T>(Func<T> action, int delay) =>
+            Retry(action, TimeSpan.FromMilliseconds(delay));
 
         /// <summary>
         /// This method will retry the action represented by the 'action' argument,
@@ -55,8 +55,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <param name="delay">the amount of time to wait between retries in milliseconds</param>
         /// <typeparam name="T">type of return value</typeparam>
         /// <returns>the return value of 'action'</returns>
-        public static T RetryIgnoringExceptions<T>(Func<T> action, int delay)
-            => RetryIgnoringExceptions(action, TimeSpan.FromMilliseconds(delay));
+        public static T RetryIgnoringExceptions<T>(Func<T> action, int delay) =>
+            RetryIgnoringExceptions(action, TimeSpan.FromMilliseconds(delay));
 
         /// <summary>
         /// This method will retry the action represented by the 'action' argument,
@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <returns>the return value of 'action'</returns>
         public static T Retry<T>(Func<T> action, TimeSpan delay, int retryCount = -1)
         {
-            return RetryHelper(() =>
+            return RetryHelper(
+                () =>
                 {
                     try
                     {
@@ -82,7 +83,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     }
                 },
                 delay,
-                retryCount);
+                retryCount
+            );
         }
 
         /// <summary>
@@ -96,19 +98,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <returns>the return value of <paramref name="action"/></returns>
         public static Task<T> RetryAsync<T>(Func<Task<T>> action, TimeSpan delay)
         {
-            return RetryAsyncHelper(async () =>
-            {
-                try
+            return RetryAsyncHelper(
+                async () =>
                 {
-                    return await action();
-                }
-                catch (COMException)
-                {
-                    // Devenv can throw COMExceptions if it's busy when we make DTE calls.
-                    return default;
-                }
-            },
-                delay);
+                    try
+                    {
+                        return await action();
+                    }
+                    catch (COMException)
+                    {
+                        // Devenv can throw COMExceptions if it's busy when we make DTE calls.
+                        return default;
+                    }
+                },
+                delay
+            );
         }
 
         /// <summary>
@@ -120,9 +124,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <param name="delay">the amount of time to wait between retries in milliseconds</param>
         /// <typeparam name="T">type of return value</typeparam>
         /// <returns>the return value of 'action'</returns>
-        public static T RetryIgnoringExceptions<T>(Func<T> action, TimeSpan delay, int retryCount = -1)
-        {
-            return RetryHelper(() =>
+        public static T RetryIgnoringExceptions<T>(
+            Func<T> action,
+            TimeSpan delay,
+            int retryCount = -1
+        ) {
+            return RetryHelper(
+                () =>
                 {
                     try
                     {
@@ -134,7 +142,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     }
                 },
                 delay,
-                retryCount);
+                retryCount
+            );
         }
 
         private static T RetryHelper<T>(Func<T> action, TimeSpan delay, int retryCount)

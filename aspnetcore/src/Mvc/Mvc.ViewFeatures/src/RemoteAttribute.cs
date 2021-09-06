@@ -25,8 +25,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <remarks>
         /// Intended for subclasses that support URL generation with no route, action, or controller names.
         /// </remarks>
-        protected RemoteAttribute()
-        { }
+        protected RemoteAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteAttribute"/> class.
@@ -37,8 +36,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <remarks>
         /// Finds the <paramref name="routeName"/> in any area of the application.
         /// </remarks>
-        public RemoteAttribute(string routeName)
-            : this()
+        public RemoteAttribute(string routeName) : this()
         {
             RouteName = routeName;
         }
@@ -59,8 +57,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// </para>
         /// <para>Finds the <paramref name="controller"/> in the current area.</para>
         /// </remarks>
-        public RemoteAttribute(string action, string controller)
-            : this()
+        public RemoteAttribute(string action, string controller) : this()
         {
             if (action != null)
             {
@@ -98,7 +95,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             RouteData["area"] = areaName;
         }
-        
+
         /// <summary>
         /// Gets or sets the route name used when generating the URL where client should send a validation request.
         /// </summary>
@@ -116,11 +113,9 @@ namespace Microsoft.AspNetCore.Mvc
             var factory = services.GetRequiredService<IUrlHelperFactory>();
             var urlHelper = factory.GetUrlHelper(context.ActionContext);
 
-            var url = urlHelper.RouteUrl(new UrlRouteContext()
-            {
-                RouteName = RouteName,
-                Values = RouteData,
-            });
+            var url = urlHelper.RouteUrl(
+                new UrlRouteContext() { RouteName = RouteName, Values = RouteData, }
+            );
 
             if (url == null)
             {

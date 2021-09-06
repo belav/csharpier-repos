@@ -61,7 +61,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// <summary>
         /// "Casts" a strongly type ID representing a derived type to a base type.
         /// </summary>
-        public static Id<TOut> As<TIn, TOut>(this Id<TIn> id) where TOut : Element where TIn : TOut
+        public static Id<TOut> As<TIn, TOut>(this Id<TIn> id)
+            where TOut : Element
+            where TIn : TOut
         {
             return new Id<TOut>(id.NumericId);
         }

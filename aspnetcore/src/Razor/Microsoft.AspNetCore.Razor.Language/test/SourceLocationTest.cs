@@ -31,7 +31,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             var characterIndex = 12;
 
             // Act
-            var sourceLocation = new SourceLocation(filePath, absoluteIndex, lineIndex, characterIndex);
+            var sourceLocation = new SourceLocation(
+                filePath,
+                absoluteIndex,
+                lineIndex,
+                characterIndex
+            );
 
             // Assert
             Assert.Equal(filePath, sourceLocation.FilePath);

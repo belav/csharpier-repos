@@ -44,8 +44,18 @@ namespace System.IO
 
                 using (DisableMediaInsertionPrompt.Create())
                 {
-                    if (!Interop.Kernel32.GetVolumeInformation(name, null, 0, null, null, out int fileSystemFlags, null, 0))
-                    {
+                    if (
+                        !Interop.Kernel32.GetVolumeInformation(
+                            name,
+                            null,
+                            0,
+                            null,
+                            null,
+                            out int fileSystemFlags,
+                            null,
+                            0
+                        )
+                    ) {
                         errorCode = Marshal.GetLastWin32Error();
                         throw Win32Marshal.GetExceptionForWin32Error(errorCode, name);
                     }

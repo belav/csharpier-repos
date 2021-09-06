@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             Assert.Equal<byte>(data, Base32.FromBase32(Base32.ToBase32(data)));
 
             int length;
-            do {
+            do
+            {
                 length = GetRandomByteArray(1)[0];
             } while (length % 5 == 0);
             data = GetRandomByteArray(length);
@@ -27,14 +28,13 @@ namespace Microsoft.AspNetCore.Identity.Test
             Assert.Equal<byte>(data, Base32.FromBase32(Base32.ToBase32(data)));
         }
 
-
         private static readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
 
-        private static byte[] GetRandomByteArray(int length) {
+        private static byte[] GetRandomByteArray(int length)
+        {
             byte[] bytes = new byte[length];
             _rng.GetBytes(bytes);
             return bytes;
         }
     }
-
 }

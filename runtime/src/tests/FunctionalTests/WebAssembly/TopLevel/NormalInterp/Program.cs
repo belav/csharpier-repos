@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
+
 await Task.Delay(1);
 Console.WriteLine("Hello From Wasm!");
 return 42;

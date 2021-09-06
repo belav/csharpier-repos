@@ -10,9 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             node.Accept(this);
         }
 
-        public virtual void VisitDefault(IntermediateNode node)
-        {
-        }
+        public virtual void VisitDefault(IntermediateNode node) { }
 
         public virtual void VisitToken(IntermediateToken node)
         {
@@ -54,13 +52,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             VisitDefault(node);
         }
 
-        public virtual void VisitCSharpExpressionAttributeValue(CSharpExpressionAttributeValueIntermediateNode node)
-        {
+        public virtual void VisitCSharpExpressionAttributeValue(
+            CSharpExpressionAttributeValueIntermediateNode node
+        ) {
             VisitDefault(node);
         }
 
-        public virtual void VisitCSharpCodeAttributeValue(CSharpCodeAttributeValueIntermediateNode node)
-        {
+        public virtual void VisitCSharpCodeAttributeValue(
+            CSharpCodeAttributeValueIntermediateNode node
+        ) {
             VisitDefault(node);
         }
 
@@ -124,8 +124,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             VisitDefault(node);
         }
 
-        public virtual void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
-        {
+        public virtual void VisitTagHelperDirectiveAttribute(
+            TagHelperDirectiveAttributeIntermediateNode node
+        ) {
             VisitDefault(node);
         }
 
@@ -134,8 +135,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             VisitDefault(node);
         }
 
-        public virtual void VisitTagHelperDirectiveAttributeParameter(TagHelperDirectiveAttributeParameterIntermediateNode node)
-        {
+        public virtual void VisitTagHelperDirectiveAttributeParameter(
+            TagHelperDirectiveAttributeParameterIntermediateNode node
+        ) {
             VisitDefault(node);
         }
 
@@ -159,8 +161,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             VisitDefault(node);
         }
 
-        public virtual void VisitComponentTypeInferenceMethod(ComponentTypeInferenceMethodIntermediateNode node)
-        {
+        public virtual void VisitComponentTypeInferenceMethod(
+            ComponentTypeInferenceMethodIntermediateNode node
+        ) {
             VisitDefault(node);
         }
 

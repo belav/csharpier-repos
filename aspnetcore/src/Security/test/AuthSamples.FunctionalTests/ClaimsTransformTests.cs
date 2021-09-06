@@ -9,7 +9,8 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests
 {
-    public class ClaimsTransformTests : IClassFixture<WebApplicationFactory<ClaimsTransformer.Startup>>
+    public class ClaimsTransformTests
+        : IClassFixture<WebApplicationFactory<ClaimsTransformer.Startup>>
     {
         public ClaimsTransformTests(WebApplicationFactory<ClaimsTransformer.Startup> fixture)
         {
@@ -38,7 +39,10 @@ namespace AuthSamples.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims", response.Headers.Location.ToString());
+            Assert.Equal(
+                "http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims",
+                response.Headers.Location.ToString()
+            );
         }
     }
 }

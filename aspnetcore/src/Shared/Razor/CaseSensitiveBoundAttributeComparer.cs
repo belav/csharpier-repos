@@ -13,9 +13,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers.Testing
         public readonly static CaseSensitiveTagHelperAttributeComparer Default =
             new CaseSensitiveTagHelperAttributeComparer();
 
-        private CaseSensitiveTagHelperAttributeComparer()
-        {
-        }
+        private CaseSensitiveTagHelperAttributeComparer() { }
 
         public bool Equals(TagHelperAttribute attributeX, TagHelperAttribute attributeY)
         {
@@ -25,11 +23,13 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers.Testing
             }
 
             // Normal comparer (TagHelperAttribute.Equals()) doesn't care about the Name case, in tests we do.
-            return attributeX != null &&
-                string.Equals(attributeX.Name, attributeY.Name, StringComparison.Ordinal) &&
-                attributeX.ValueStyle == attributeY.ValueStyle &&
-                (attributeX.ValueStyle == HtmlAttributeValueStyle.Minimized ||
-                 string.Equals(GetString(attributeX.Value), GetString(attributeY.Value)));
+            return attributeX != null
+                && string.Equals(attributeX.Name, attributeY.Name, StringComparison.Ordinal)
+                && attributeX.ValueStyle == attributeY.ValueStyle
+                && (
+                    attributeX.ValueStyle == HtmlAttributeValueStyle.Minimized
+                    || string.Equals(GetString(attributeX.Value), GetString(attributeY.Value))
+                );
         }
 
         public int GetHashCode(TagHelperAttribute attribute)

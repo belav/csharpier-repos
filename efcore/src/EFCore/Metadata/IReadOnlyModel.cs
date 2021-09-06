@@ -42,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the EF Core assembly version used to build this model.
         /// </summary>
-        string? GetProductVersion()
-            => this[CoreAnnotationNames.ProductVersion] as string;
+        string? GetProductVersion() => this[CoreAnnotationNames.ProductVersion] as string;
 
         /// <summary>
         ///     Gets a value indicating whether the CLR type is used by shared type entities in the model.
@@ -78,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IReadOnlyEntityType? FindEntityType(
             string name,
             string definingNavigationName,
-            IReadOnlyEntityType definingEntityType);
+            IReadOnlyEntityType definingEntityType
+        );
 
         /// <summary>
         ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no entity type with
@@ -100,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IReadOnlyEntityType? FindEntityType(
             Type type,
             string definingNavigationName,
-            IReadOnlyEntityType definingEntityType);
+            IReadOnlyEntityType definingEntityType
+        );
 
         /// <summary>
         ///     Gets the entity types matching the given type.
@@ -117,8 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> List of entity types corresponding to the least derived types from the given. </returns>
         IEnumerable<IReadOnlyEntityType> FindLeastDerivedEntityTypes(
             Type type,
-            Func<IReadOnlyEntityType, bool>? condition = null)
-        {
+            Func<IReadOnlyEntityType, bool>? condition = null
+        ) {
             var derivedLevels = new Dictionary<Type, int> { [type] = 0 };
 
             var leastDerivedTypesGroups = GetEntityTypes()
@@ -174,8 +175,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options"> Options for generating the string. </param>
         /// <param name="indent"> The number of indent spaces to use before each new line. </param>
         /// <returns> A human-readable representation. </returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
-        {
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        ) {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 

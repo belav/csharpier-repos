@@ -14,15 +14,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         private readonly string _max;
         private readonly string _min;
 
-        public RangeAttributeAdapter(RangeAttribute attribute, IStringLocalizer? stringLocalizer)
-            : base(attribute, stringLocalizer)
+        public RangeAttributeAdapter(
+            RangeAttribute attribute,
+            IStringLocalizer? stringLocalizer
+        ) : base(attribute, stringLocalizer)
         {
             // This will trigger the conversion of Attribute.Minimum and Attribute.Maximum.
             // This is needed, because the attribute is stateful and will convert from a string like
             // "100m" to the decimal value 100.
             //
             // Validate a randomly selected number.
-            attribute.IsValid(3); 
+            attribute.IsValid(3);
 
             _max = Convert.ToString(Attribute.Maximum, CultureInfo.InvariantCulture)!;
             _min = Convert.ToString(Attribute.Minimum, CultureInfo.InvariantCulture)!;
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 validationContext.ModelMetadata,
                 validationContext.ModelMetadata.GetDisplayName(),
                 Attribute.Minimum,
-                Attribute.Maximum);
+                Attribute.Maximum
+            );
         }
     }
 }

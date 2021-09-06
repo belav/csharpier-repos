@@ -9,25 +9,26 @@ class test
 {
     public static int Main()
     {
-        try
-        {
-        }
+        try { }
+
         finally
         {
             System.Console.WriteLine("just before call");
 
-            VarArgFunction(__arglist(
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     "string"    // <-- ensure this is passed on the stack even for IA64
-                     ));
+            VarArgFunction(
+                __arglist(
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    "string" // <-- ensure this is passed on the stack even for IA64
+                )
+            );
 
             System.Console.WriteLine("just after call");
         }

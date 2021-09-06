@@ -86,7 +86,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 this.alignment = (ulong)alignment;
             }
 
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -110,8 +111,9 @@ namespace JIT.HardwareIntrinsics.Arm
                 return testStruct;
             }
 
-            public void RunStructFldScenario(DuplicateUnaryOpTest__DuplicateToVector64_SByte testClass)
-            {
+            public void RunStructFldScenario(
+                DuplicateUnaryOpTest__DuplicateToVector64_SByte testClass
+            ) {
                 var result = AdvSimd.DuplicateToVector64(_fld);
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);
@@ -120,7 +122,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
 
         private static SByte _data;
 
@@ -165,10 +168,17 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.DuplicateToVector64), new Type[] { typeof(SByte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<SByte>(ref Unsafe.As<SByte, byte>(ref _data))
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.DuplicateToVector64),
+                    new Type[] { typeof(SByte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<SByte>(ref Unsafe.As<SByte, byte>(ref _data))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<SByte>)(result));
             ValidateResult(_data, _dataTable.outArrayPtr);
@@ -178,9 +188,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd.DuplicateToVector64(
-                _clsVar
-            );
+            var result = AdvSimd.DuplicateToVector64(_clsVar);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -261,12 +269,19 @@ namespace JIT.HardwareIntrinsics.Arm
         private void ValidateResult(SByte data, void* result, [CallerMemberName] string method = "")
         {
             SByte[] outArray = new SByte[RetElementCount];
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector64<SByte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
             ValidateResult(data, outArray, method);
         }
 
-        private void ValidateResult(SByte data, SByte[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            SByte data,
+            SByte[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             if (result[0] != data)
@@ -287,9 +302,13 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector64)}<SByte>(SByte): DuplicateToVector64 failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector64)}<SByte>(SByte): DuplicateToVector64 failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

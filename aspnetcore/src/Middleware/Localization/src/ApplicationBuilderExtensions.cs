@@ -37,8 +37,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
         public static IApplicationBuilder UseRequestLocalization(
             this IApplicationBuilder app,
-            RequestLocalizationOptions options)
-        {
+            RequestLocalizationOptions options
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -64,8 +64,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
         public static IApplicationBuilder UseRequestLocalization(
             this IApplicationBuilder app,
-            Action<RequestLocalizationOptions> optionsAction)
-        {
+            Action<RequestLocalizationOptions> optionsAction
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -94,8 +94,8 @@ namespace Microsoft.AspNetCore.Builder
         /// </remarks>
         public static IApplicationBuilder UseRequestLocalization(
             this IApplicationBuilder app,
-            params string[] cultures)
-        {
+            params string[] cultures
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -111,8 +111,7 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentException(Resources.Exception_CulturesShouldNotBeEmpty);
             }
 
-            var options = new RequestLocalizationOptions()
-                .AddSupportedCultures(cultures)
+            var options = new RequestLocalizationOptions().AddSupportedCultures(cultures)
                 .AddSupportedUICultures(cultures)
                 .SetDefaultCulture(cultures[0]);
 

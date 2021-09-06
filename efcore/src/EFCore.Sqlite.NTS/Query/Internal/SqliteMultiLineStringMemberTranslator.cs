@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteMultiLineStringMemberTranslator : IMemberTranslator
     {
-        private static readonly MemberInfo _isClosed = typeof(MultiLineString).GetRequiredRuntimeProperty(nameof(MultiLineString.IsClosed));
+        private static readonly MemberInfo _isClosed =
+            typeof(MultiLineString).GetRequiredRuntimeProperty(nameof(MultiLineString.IsClosed));
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>
@@ -43,14 +44,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            if (Equals(member, _isClosed)
-                && instance != null)
+            if (Equals(member, _isClosed) && instance != null)
             {
                 return _sqlExpressionFactory.Case(
                     new[]
@@ -62,9 +62,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                 new[] { instance },
                                 nullable: false,
                                 argumentsPropagateNullability: new[] { false },
-                                returnType))
+                                returnType
+                            )
+                        )
                     },
-                    null);
+                    null
+                );
             }
 
             return null;

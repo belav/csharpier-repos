@@ -11,13 +11,20 @@ namespace System.Web.Razor.Generator
     {
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
-            string generatedCode = context.BuildCodeString(cw =>
-            {
-                cw.WriteSnippet(target.Content);
-            });
+            string generatedCode = context.BuildCodeString(
+                cw =>
+                {
+                    cw.WriteSnippet(target.Content);
+                }
+            );
 
             int paddingCharCount;
-            string paddedCode = CodeGeneratorPaddingHelper.Pad(context.Host, generatedCode, target, out paddingCharCount);
+            string paddedCode = CodeGeneratorPaddingHelper.Pad(
+                context.Host,
+                generatedCode,
+                target,
+                out paddingCharCount
+            );
 
             Contract.Assert(paddingCharCount > 0);
 
@@ -25,7 +32,8 @@ namespace System.Web.Razor.Generator
                 new CodeSnippetTypeMember(paddedCode)
                 {
                     LinePragma = context.GenerateLinePragma(target, paddingCharCount)
-                });
+                }
+            );
         }
 
         public override string ToString()

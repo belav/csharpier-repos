@@ -5,13 +5,17 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components
 {
-    internal class ComponentReferenceCaptureLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+    internal class ComponentReferenceCaptureLoweringPass
+        : ComponentIntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         // Run after component lowering pass
         public override int Order => 50;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -25,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 return;
             }
 
-            var references = documentNode.FindDescendantReferences<TagHelperDirectiveAttributeIntermediateNode>();
+            var references =
+                documentNode.FindDescendantReferences<TagHelperDirectiveAttributeIntermediateNode>();
             for (var i = 0; i < references.Count; i++)
             {
                 var reference = references[i];
@@ -38,8 +43,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        private IntermediateNode RewriteUsage(ClassDeclarationIntermediateNode classNode, IntermediateNode parent, TagHelperDirectiveAttributeIntermediateNode node)
-        {
+        private IntermediateNode RewriteUsage(
+            ClassDeclarationIntermediateNode classNode,
+            IntermediateNode parent,
+            TagHelperDirectiveAttributeIntermediateNode node
+        ) {
             // If we can't get a nonempty attribute name, do nothing because there will
             // already be a diagnostic for empty values
             var identifierToken = DetermineIdentifierToken(node);
@@ -53,7 +61,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             var componentTagHelper = (parent as ComponentIntermediateNode)?.Component;
             if (componentTagHelper != null)
             {
-                return new ReferenceCaptureIntermediateNode(identifierToken, componentTagHelper.GetTypeName());
+                return new ReferenceCaptureIntermediateNode(
+                    identifierToken,
+                    componentTagHelper.GetTypeName()
+                );
             }
             else
             {
@@ -61,8 +72,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        private IntermediateToken DetermineIdentifierToken(TagHelperDirectiveAttributeIntermediateNode attributeNode)
-        {
+        private IntermediateToken DetermineIdentifierToken(
+            TagHelperDirectiveAttributeIntermediateNode attributeNode
+        ) {
             IntermediateToken foundToken = null;
 
             if (attributeNode.Children.Count == 1)
@@ -79,7 +91,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     }
                 }
             }
-            
+
             return !string.IsNullOrWhiteSpace(foundToken?.Content) ? foundToken : null;
         }
     }

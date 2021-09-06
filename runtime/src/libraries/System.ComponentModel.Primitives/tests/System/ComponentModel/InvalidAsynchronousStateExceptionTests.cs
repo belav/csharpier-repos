@@ -42,7 +42,10 @@ namespace System.ComponentModel.Tests
             Assert.Null(exception.ParamName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void Ctor_SerializationInfo_StreamingContext()
         {
             using (var stream = new MemoryStream())
@@ -51,7 +54,9 @@ namespace System.ComponentModel.Tests
                 binaryFormatter.Serialize(stream, new InvalidAsynchronousStateException());
 
                 stream.Seek(0, SeekOrigin.Begin);
-                Assert.IsType<InvalidAsynchronousStateException>(binaryFormatter.Deserialize(stream));
+                Assert.IsType<InvalidAsynchronousStateException>(
+                    binaryFormatter.Deserialize(stream)
+                );
             }
         }
     }

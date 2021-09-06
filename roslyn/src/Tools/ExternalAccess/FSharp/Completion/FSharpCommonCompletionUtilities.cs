@@ -12,9 +12,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
 {
     internal static class FSharpCommonCompletionUtilities
     {
-        public static bool IsStartingNewWord(SourceText text, int characterPosition, Func<char, bool> isWordStartCharacter, Func<char, bool> isWordCharacter)
-        {
-            return CommonCompletionUtilities.IsStartingNewWord(text, characterPosition, isWordStartCharacter, isWordCharacter);
+        public static bool IsStartingNewWord(
+            SourceText text,
+            int characterPosition,
+            Func<char, bool> isWordStartCharacter,
+            Func<char, bool> isWordCharacter
+        ) {
+            return CommonCompletionUtilities.IsStartingNewWord(
+                text,
+                characterPosition,
+                isWordStartCharacter,
+                isWordCharacter
+            );
         }
     }
 }

@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         private FixAllProviderInfo(
             FixAllProvider fixAllProvider,
-            ImmutableArray<FixAllScope> supportedScopes)
-        {
+            ImmutableArray<FixAllScope> supportedScopes
+        ) {
             FixAllProvider = fixAllProvider;
             SupportedScopes = supportedScopes;
         }
@@ -67,8 +67,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// <summary>
         /// Gets an optional <see cref="FixAllProviderInfo"/> for the given suppression fix provider.
         /// </summary>
-        private static FixAllProviderInfo? CreateWithSuppressionFixer(IConfigurationFixProvider provider)
-        {
+        private static FixAllProviderInfo? CreateWithSuppressionFixer(
+            IConfigurationFixProvider provider
+        ) {
             var fixAllProvider = provider.GetFixAllProvider();
             if (fixAllProvider == null)
             {
@@ -93,14 +94,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             public CodeFixerFixAllProviderInfo(
                 FixAllProvider fixAllProvider,
                 IEnumerable<string> supportedDiagnosticIds,
-                ImmutableArray<FixAllScope> supportedScopes)
-                : base(fixAllProvider, supportedScopes)
+                ImmutableArray<FixAllScope> supportedScopes
+            ) : base(fixAllProvider, supportedScopes)
             {
                 _supportedDiagnosticIds = supportedDiagnosticIds;
             }
 
-            public override bool CanBeFixed(Diagnostic diagnostic)
-                => _supportedDiagnosticIds.Contains(diagnostic.Id);
+            public override bool CanBeFixed(Diagnostic diagnostic) =>
+                _supportedDiagnosticIds.Contains(diagnostic.Id);
         }
 
         private class SuppressionFixerFixAllProviderInfo : FixAllProviderInfo
@@ -110,14 +111,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             public SuppressionFixerFixAllProviderInfo(
                 FixAllProvider fixAllProvider,
                 IConfigurationFixProvider suppressionFixer,
-                ImmutableArray<FixAllScope> supportedScopes)
-                : base(fixAllProvider, supportedScopes)
+                ImmutableArray<FixAllScope> supportedScopes
+            ) : base(fixAllProvider, supportedScopes)
             {
                 _canBeSuppressedOrUnsuppressed = suppressionFixer.IsFixableDiagnostic;
             }
 
-            public override bool CanBeFixed(Diagnostic diagnostic)
-                => _canBeSuppressedOrUnsuppressed(diagnostic);
+            public override bool CanBeFixed(Diagnostic diagnostic) =>
+                _canBeSuppressedOrUnsuppressed(diagnostic);
         }
     }
 }

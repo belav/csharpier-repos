@@ -9,7 +9,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
 {
-
     public sealed class MSBuildTheoryDiscoverer : IXunitTestCaseDiscoverer
     {
         private readonly TheoryDiscoverer _theoryDiscoverer;
@@ -22,10 +21,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
         public IEnumerable<IXunitTestCase> Discover(
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
-            IAttributeInfo factAttribute)
-        {
-            return _theoryDiscoverer
-                .Discover(discoveryOptions, testMethod, factAttribute)
+            IAttributeInfo factAttribute
+        ) {
+            return _theoryDiscoverer.Discover(discoveryOptions, testMethod, factAttribute)
                 .Select(testCase => new MSBuildTestCase(testCase));
         }
     }

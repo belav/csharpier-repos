@@ -31,14 +31,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             _service = service;
         }
 
-        public async Task<IEnumerable<INavigableItem>> FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
-        {
-            var items = await _service.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+        public async Task<IEnumerable<INavigableItem>> FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) {
+            var items = await _service.FindDefinitionsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             return items?.Select(x => new InternalFSharpNavigableItem(x));
         }
 
-        public bool TryGoToDefinition(Document document, int position, CancellationToken cancellationToken)
-        {
+        public bool TryGoToDefinition(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) {
             return _service.TryGoToDefinition(document, position, cancellationToken);
         }
     }

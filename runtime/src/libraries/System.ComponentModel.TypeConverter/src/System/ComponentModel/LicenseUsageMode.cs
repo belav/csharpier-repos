@@ -12,7 +12,6 @@ namespace System.ComponentModel
         /// Used during runtime.
         /// </summary>
         Runtime,
-
         /// <summary>
         /// Used during design time by a visual designer or the compiler.
         /// </summary>

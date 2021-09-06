@@ -38,10 +38,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
         public string this[string key]
         {
-            get
-            {
-                return _secrets[key];
-            }
+            get { return _secrets[key]; }
         }
 
         public int Count => _secrets.Count;
@@ -80,8 +77,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
         protected virtual IDictionary<string, string> Load(string userSecretsId)
         {
-            return new ConfigurationBuilder()
-                .AddJsonFile(_secretsFilePath, optional: true)
+            return new ConfigurationBuilder().AddJsonFile(_secretsFilePath, optional: true)
                 .Build()
                 .AsEnumerable()
                 .Where(i => i.Value != null)

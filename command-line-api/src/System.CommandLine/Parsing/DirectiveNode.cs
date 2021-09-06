@@ -9,7 +9,8 @@ namespace System.CommandLine.Parsing
             Token token,
             RootCommandNode parent,
             string name,
-            string? value) : base(token, parent)
+            string? value
+        ) : base(token, parent)
         {
             if (token.Type != TokenType.Directive)
             {

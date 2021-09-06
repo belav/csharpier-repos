@@ -21,16 +21,14 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         {
             public int Id { get; set; }
 
-            public override string ToString()
-                => Id.ToString();
+            public override string ToString() => Id.ToString();
         }
 
         private class Edge
         {
             public int Id { get; set; }
 
-            public override string ToString()
-                => Id.ToString();
+            public override string ToString() => Id.ToString();
         }
 
         private class A
@@ -83,13 +81,16 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 {
                     foreach (var foreignKey in entityType.GetForeignKeys())
                     {
-                        AddEdge(foreignKey.PrincipalEntityType, foreignKey.DeclaringEntityType, foreignKey);
+                        AddEdge(
+                            foreignKey.PrincipalEntityType,
+                            foreignKey.DeclaringEntityType,
+                            foreignKey
+                        );
                     }
                 }
             }
 
-            protected override string ToString(IReadOnlyEntityType vertex)
-                => vertex.DisplayName();
+            protected override string ToString(IReadOnlyEntityType vertex) => vertex.DisplayName();
         }
 
         #endregion
@@ -122,7 +123,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             graph.AddVertices(new[] { vertexTwo, vertexThree });
 
             Assert.Equal(3, graph.Vertices.Count());
-            Assert.Equal(3, graph.Vertices.Intersect(new[] { vertexOne, vertexTwo, vertexThree }).Count());
+            Assert.Equal(
+                3,
+                graph.Vertices.Intersect(new[] { vertexOne, vertexTwo, vertexThree }).Count()
+            );
         }
 
         [ConditionalFact]
@@ -144,7 +148,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Empty(graph.GetEdges(vertexTwo, vertexOne));
             Assert.Equal(2, graph.GetEdges(vertexOne, vertexTwo).Count());
-            Assert.Equal(2, graph.GetEdges(vertexOne, vertexTwo).Intersect(new[] { edgeOne, edgeTwo }).Count());
+            Assert.Equal(
+                2,
+                graph.GetEdges(vertexOne, vertexTwo).Intersect(new[] { edgeOne, edgeTwo }).Count()
+            );
         }
 
         [ConditionalFact]
@@ -165,10 +172,20 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             graph.AddEdge(vertexTwo, vertexThree, edgeThree);
 
             Assert.Equal(2, graph.GetOutgoingNeighbors(vertexOne).Count());
-            Assert.Equal(2, graph.GetOutgoingNeighbors(vertexOne).Intersect(new[] { vertexTwo, vertexThree }).Count());
+            Assert.Equal(
+                2,
+                graph.GetOutgoingNeighbors(vertexOne)
+                    .Intersect(new[] { vertexTwo, vertexThree })
+                    .Count()
+            );
 
             Assert.Equal(2, graph.GetIncomingNeighbors(vertexThree).Count());
-            Assert.Equal(2, graph.GetIncomingNeighbors(vertexThree).Intersect(new[] { vertexOne, vertexTwo }).Count());
+            Assert.Equal(
+                2,
+                graph.GetIncomingNeighbors(vertexThree)
+                    .Intersect(new[] { vertexOne, vertexTwo })
+                    .Count()
+            );
         }
 
         [ConditionalFact]
@@ -206,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 new[] { vertexTwo, vertexOne, vertexThree },
-                graph.TopologicalSort().ToArray());
+                graph.TopologicalSort().ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -231,7 +249,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 new[] { vertexOne, vertexThree, vertexTwo },
-                graph.TopologicalSort().ToArray());
+                graph.TopologicalSort().ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -250,10 +269,13 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 new[] { vertexOne },
                 graph.TopologicalSort(
-                    (from, to, edges) =>
-                        (from == vertexOne)
-                        && (to == vertexOne)
-                        && (edges.Intersect(new[] { edgeOne }).Count() == 1)).ToArray());
+                        (from, to, edges) =>
+                            (from == vertexOne)
+                            && (to == vertexOne)
+                            && (edges.Intersect(new[] { edgeOne }).Count() == 1)
+                    )
+                    .ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -280,10 +302,13 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 new[] { vertexOne, vertexTwo, vertexThree },
                 graph.TopologicalSort(
-                    (from, to, edges) =>
-                        (from == vertexThree)
-                        && (to == vertexOne)
-                        && (edges.Single() == edgeThree)).ToArray());
+                        (from, to, edges) =>
+                            (from == vertexThree)
+                            && (to == vertexOne)
+                            && (edges.Single() == edgeThree)
+                    )
+                    .ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -320,11 +345,14 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 new[] { vertexTwo, vertexThree, vertexOne, vertexFour, vertexFive },
                 graph.TopologicalSort(
-                    (from, to, edges) =>
-                    {
-                        var edge = edges.Single();
-                        return (edge == edgeOne) || (edge == edgeSix);
-                    }).ToArray());
+                        (from, to, edges) =>
+                        {
+                            var edge = edges.Single();
+                            return (edge == edgeOne) || (edge == edgeSix);
+                        }
+                    )
+                    .ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -350,8 +378,15 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(
-                    string.Join(" ->" + Environment.NewLine, new[] { vertexOne, vertexTwo, vertexThree, vertexOne }.Select(v => v.ToString()))),
-                Assert.Throws<InvalidOperationException>(() => graph.TopologicalSort()).Message);
+                    string.Join(
+                        " ->" + Environment.NewLine,
+                        new[] { vertexOne, vertexTwo, vertexThree, vertexOne }.Select(
+                            v => v.ToString()
+                        )
+                    )
+                ),
+                Assert.Throws<InvalidOperationException>(() => graph.TopologicalSort()).Message
+            );
         }
 
         [ConditionalFact]
@@ -387,7 +422,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
-                Assert.Throws<InvalidOperationException>(() => graph.TopologicalSort(formatter)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.TopologicalSort(formatter)
+                ).Message
+            );
 
             Assert.Equal(3, cycleData.Count());
 
@@ -434,7 +472,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort(formatter)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort(formatter)
+                ).Message
+            );
 
             Assert.Equal(3, cycleData.Count());
 
@@ -485,7 +526,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort(formatter)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort(formatter)
+                ).Message
+            );
 
             Assert.Equal(2, cycleData.Count);
 
@@ -511,15 +555,24 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // B -> A -> C
-            entityTypeC.AddForeignKey(entityTypeC.AddProperty(C.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
+            entityTypeC.AddForeignKey(
+                entityTypeC.AddProperty(C.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC);
 
             Assert.Equal(
                 new[] { entityTypeB.Name, entityTypeA.Name, entityTypeC.Name },
-                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray());
+                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -537,15 +590,24 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // C -> B -> A
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty(B.PProperty), entityTypeC.FindPrimaryKey(), entityTypeC);
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty(B.PProperty),
+                entityTypeC.FindPrimaryKey(),
+                entityTypeC
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC);
 
             Assert.Equal(
                 new[] { entityTypeC.Name, entityTypeB.Name, entityTypeA.Name },
-                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray());
+                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -563,31 +625,35 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // B -> A -> C
-            entityTypeC.AddForeignKey(entityTypeC.AddProperty(C.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
+            entityTypeC.AddForeignKey(
+                entityTypeC.AddProperty(C.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC);
 
             Assert.Equal(
                 new[] { entityTypeB.Name, entityTypeA.Name, entityTypeC.Name },
-                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray());
+                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray()
+            );
 
-            Assert.Equal(
-                new[] { entityTypeA, entityTypeB, entityTypeC },
-                graph.Vertices);
+            Assert.Equal(new[] { entityTypeA, entityTypeB, entityTypeC }, graph.Vertices);
 
-            Assert.Equal(
-                new[] { entityTypeC },
-                graph.GetOutgoingNeighbors(entityTypeA));
+            Assert.Equal(new[] { entityTypeC }, graph.GetOutgoingNeighbors(entityTypeA));
 
-            Assert.Equal(
-                new[] { entityTypeA },
-                graph.GetOutgoingNeighbors(entityTypeB));
+            Assert.Equal(new[] { entityTypeA }, graph.GetOutgoingNeighbors(entityTypeB));
 
             Assert.Equal(
                 new[] { entityTypeB.Name, entityTypeA.Name, entityTypeC.Name },
-                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray());
+                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -605,16 +671,29 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // A -> B, A -> C, C -> B
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty(B.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
-            entityTypeC.AddForeignKey(entityTypeC.AddProperty(C.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty("P2", typeof(int)), entityTypeC.FindPrimaryKey(), entityTypeC);
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty(B.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
+            entityTypeC.AddForeignKey(
+                entityTypeC.AddProperty(C.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty("P2", typeof(int)),
+                entityTypeC.FindPrimaryKey(),
+                entityTypeC
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC);
 
             Assert.Equal(
                 new[] { entityTypeA.Name, entityTypeC.Name, entityTypeB.Name },
-                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray());
+                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -637,7 +716,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 new[] { entityTypeC.Name, entityTypeA.Name, entityTypeB.Name },
-                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray());
+                graph.BatchingTopologicalSort().SelectMany(e => e).Select(e => e.Name).ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -650,14 +730,21 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeA.SetPrimaryKey(property);
 
             // A -> A
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA);
 
             Assert.Equal(
                 CoreStrings.CircularDependency(nameof(A) + " ->" + Environment.NewLine + nameof(A)),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort()).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -675,15 +762,34 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // C, A -> B -> A
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty(B.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty(B.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeC, entityTypeA, entityTypeB);
 
             Assert.Equal(
-                CoreStrings.CircularDependency(nameof(A) + " ->" + Environment.NewLine + nameof(B) + " ->" + Environment.NewLine + nameof(A)),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort()).Message);
+                CoreStrings.CircularDependency(
+                    nameof(A)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(B)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(A)
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -701,19 +807,42 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // A -> C -> B -> A
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty(B.PProperty), entityTypeC.FindPrimaryKey(), entityTypeC);
-            entityTypeC.AddForeignKey(entityTypeC.AddProperty(C.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty(B.PProperty),
+                entityTypeC.FindPrimaryKey(),
+                entityTypeC
+            );
+            entityTypeC.AddForeignKey(
+                entityTypeC.AddProperty(C.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC);
 
             Assert.Equal(
-                CoreStrings.CircularDependency(nameof(A) + " ->" + Environment.NewLine
-                + nameof(C) + " ->" + Environment.NewLine
-                + nameof(B) + " ->" + Environment.NewLine
-                + nameof(A)),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort()).Message);
+                CoreStrings.CircularDependency(
+                    nameof(A)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(C)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(B)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(A)
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -737,24 +866,59 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeE.SetPrimaryKey(entityTypeE.AddProperty("Id", typeof(int)));
 
             // A -> C -> B -> A
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty(B.PProperty), entityTypeC.FindPrimaryKey(), entityTypeC);
-            entityTypeC.AddForeignKey(entityTypeC.AddProperty(C.PProperty), entityTypeA.FindPrimaryKey(), entityTypeA);
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty(B.PProperty),
+                entityTypeC.FindPrimaryKey(),
+                entityTypeC
+            );
+            entityTypeC.AddForeignKey(
+                entityTypeC.AddProperty(C.PProperty),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
 
             // A -> E -> D -> A
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty("P2", typeof(int)), entityTypeD.FindPrimaryKey(), entityTypeD);
-            entityTypeD.AddForeignKey(entityTypeD.AddProperty("P2", typeof(int)), entityTypeE.FindPrimaryKey(), entityTypeE);
-            entityTypeE.AddForeignKey(entityTypeE.AddProperty("P2", typeof(int)), entityTypeA.FindPrimaryKey(), entityTypeA);
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty("P2", typeof(int)),
+                entityTypeD.FindPrimaryKey(),
+                entityTypeD
+            );
+            entityTypeD.AddForeignKey(
+                entityTypeD.AddProperty("P2", typeof(int)),
+                entityTypeE.FindPrimaryKey(),
+                entityTypeE
+            );
+            entityTypeE.AddForeignKey(
+                entityTypeE.AddProperty("P2", typeof(int)),
+                entityTypeA.FindPrimaryKey(),
+                entityTypeA
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC, entityTypeD, entityTypeE);
 
             Assert.Equal(
-                CoreStrings.CircularDependency(nameof(A) + " ->" + Environment.NewLine
-                + nameof(C) + " ->" + Environment.NewLine
-                + nameof(B) + " ->" + Environment.NewLine
-                + nameof(A)),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort()).Message);
+                CoreStrings.CircularDependency(
+                    nameof(A)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(C)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(B)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(A)
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -772,19 +936,41 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             entityTypeC.SetPrimaryKey(entityTypeC.AddProperty("Id", typeof(int)));
 
             // C -> B -> C -> A
-            entityTypeB.AddForeignKey(entityTypeB.AddProperty(B.PProperty), entityTypeC.FindPrimaryKey(), entityTypeC);
-            entityTypeC.AddForeignKey(entityTypeC.AddProperty(C.PProperty), entityTypeB.FindPrimaryKey(), entityTypeB);
-            entityTypeA.AddForeignKey(entityTypeA.AddProperty(A.PProperty), entityTypeC.FindPrimaryKey(), entityTypeC);
+            entityTypeB.AddForeignKey(
+                entityTypeB.AddProperty(B.PProperty),
+                entityTypeC.FindPrimaryKey(),
+                entityTypeC
+            );
+            entityTypeC.AddForeignKey(
+                entityTypeC.AddProperty(C.PProperty),
+                entityTypeB.FindPrimaryKey(),
+                entityTypeB
+            );
+            entityTypeA.AddForeignKey(
+                entityTypeA.AddProperty(A.PProperty),
+                entityTypeC.FindPrimaryKey(),
+                entityTypeC
+            );
 
             var graph = new EntityTypeGraph();
             graph.Populate(entityTypeA, entityTypeB, entityTypeC);
 
             Assert.Equal(
-                CoreStrings.CircularDependency(nameof(C) + " ->" + Environment.NewLine + nameof(B) + " ->" + Environment.NewLine + nameof(C)),
-                Assert.Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort()).Message);
+                CoreStrings.CircularDependency(
+                    nameof(C)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(B)
+                        + " ->"
+                        + Environment.NewLine
+                        + nameof(C)
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => graph.BatchingTopologicalSort()
+                ).Message
+            );
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
     }
 }

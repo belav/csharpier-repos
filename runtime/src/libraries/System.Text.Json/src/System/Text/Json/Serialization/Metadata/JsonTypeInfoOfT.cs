@@ -13,9 +13,11 @@ namespace System.Text.Json.Serialization.Metadata
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class JsonTypeInfo<T> : JsonTypeInfo
     {
-        internal JsonTypeInfo(Type type, JsonSerializerOptions options, ConverterStrategy converterStrategy) :
-            base(type, options, converterStrategy)
-        { }
+        internal JsonTypeInfo(
+            Type type,
+            JsonSerializerOptions options,
+            ConverterStrategy converterStrategy
+        ) : base(type, options, converterStrategy) { }
 
         internal JsonTypeInfo()
         {

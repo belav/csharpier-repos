@@ -19,15 +19,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public ErrorNotificationTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
             // On WebAssembly, page reloads are expensive so skip if possible
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
             Browser.MountTestComponent<ErrorComponent>();
             Browser.Exists(By.Id("blazor-error-ui"));
             Browser.Exists(By.Id("throw-simple-exception"));
@@ -42,7 +43,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var causeErrorButton = Browser.Exists(By.Id("throw-simple-exception"));
             causeErrorButton.Click();
 
-            Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+            Browser.Exists(
+                By.CssSelector("#blazor-error-ui[style='display: block;']"),
+                TimeSpan.FromSeconds(10)
+            );
 
             var reload = Browser.Exists(By.ClassName("reload"));
             reload.Click();

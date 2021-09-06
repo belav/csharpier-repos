@@ -5,18 +5,16 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class ManyToManyFieldsLoadInMemoryTest : ManyToManyFieldsLoadTestBase<
-        ManyToManyFieldsLoadInMemoryTest.ManyToManyFieldsLoadInMemoryFixture>
+    public class ManyToManyFieldsLoadInMemoryTest
+        : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadInMemoryTest.ManyToManyFieldsLoadInMemoryFixture>
     {
         public ManyToManyFieldsLoadInMemoryTest(ManyToManyFieldsLoadInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class ManyToManyFieldsLoadInMemoryFixture : ManyToManyFieldsLoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => InMemoryTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                InMemoryTestStoreFactory.Instance;
         }
     }
 }

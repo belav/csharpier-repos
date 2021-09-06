@@ -5,11 +5,14 @@ namespace System.Text
 {
     internal ref partial struct ValueStringBuilder
     {
-        public void AppendFormat(string format, object? arg0) => AppendFormatHelper(null, format, new ParamsArray(arg0));
+        public void AppendFormat(string format, object? arg0) =>
+            AppendFormatHelper(null, format, new ParamsArray(arg0));
 
-        public void AppendFormat(string format, object? arg0, object? arg1) => AppendFormatHelper(null, format, new ParamsArray(arg0, arg1));
+        public void AppendFormat(string format, object? arg0, object? arg1) =>
+            AppendFormatHelper(null, format, new ParamsArray(arg0, arg1));
 
-        public void AppendFormat(string format, object? arg0, object? arg1, object? arg2) => AppendFormatHelper(null, format, new ParamsArray(arg0, arg1, arg2));
+        public void AppendFormat(string format, object? arg0, object? arg1, object? arg2) =>
+            AppendFormatHelper(null, format, new ParamsArray(arg0, arg1, arg2));
 
         public void AppendFormat(string format, params object?[] args)
         {
@@ -24,11 +27,23 @@ namespace System.Text
             AppendFormatHelper(null, format, new ParamsArray(args));
         }
 
-        public void AppendFormat(IFormatProvider? provider, string format, object? arg0) => AppendFormatHelper(provider, format, new ParamsArray(arg0));
+        public void AppendFormat(IFormatProvider? provider, string format, object? arg0) =>
+            AppendFormatHelper(provider, format, new ParamsArray(arg0));
 
-        public void AppendFormat(IFormatProvider? provider, string format, object? arg0, object? arg1) => AppendFormatHelper(provider, format, new ParamsArray(arg0, arg1));
+        public void AppendFormat(
+            IFormatProvider? provider,
+            string format,
+            object? arg0,
+            object? arg1
+        ) => AppendFormatHelper(provider, format, new ParamsArray(arg0, arg1));
 
-        public void AppendFormat(IFormatProvider? provider, string format, object? arg0, object? arg1, object? arg2) => AppendFormatHelper(provider, format, new ParamsArray(arg0, arg1, arg2));
+        public void AppendFormat(
+            IFormatProvider? provider,
+            string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        ) => AppendFormatHelper(provider, format, new ParamsArray(arg0, arg1, arg2));
 
         public void AppendFormat(IFormatProvider? provider, string format, params object?[] args)
         {
@@ -43,7 +58,8 @@ namespace System.Text
             AppendFormatHelper(provider, format, new ParamsArray(args));
         }
 
-        internal void AppendSpanFormattable<T>(T value, string? format, IFormatProvider? provider) where T : ISpanFormattable
+        internal void AppendSpanFormattable<T>(T value, string? format, IFormatProvider? provider)
+            where T : ISpanFormattable
         {
             if (value.TryFormat(_chars.Slice(_pos), out int charsWritten, format, provider))
             {
@@ -129,7 +145,8 @@ namespace System.Text
                 pos++;
                 // If reached end of text then error (Unexpected end of text)
                 // or character is not a digit then error (Unexpected Character)
-                if (pos == len || (ch = format[pos]) < '0' || ch > '9') ThrowFormatError();
+                if (pos == len || (ch = format[pos]) < '0' || ch > '9')
+                    ThrowFormatError();
                 int index = 0;
                 do
                 {
@@ -142,8 +159,7 @@ namespace System.Text
                     }
                     ch = format[pos];
                     // so long as character is digit and value of the index is less than 1000000 ( index limit )
-                }
-                while (ch >= '0' && ch <= '9' && index < IndexLimit);
+                } while (ch >= '0' && ch <= '9' && index < IndexLimit);
 
                 // If value of index is not within the range of the arguments passed in then error (Index out of range)
                 if (index >= args.Length)
@@ -152,7 +168,8 @@ namespace System.Text
                 }
 
                 // Consume optional whitespace.
-                while (pos < len && (ch = format[pos]) == ' ') pos++;
+                while (pos < len && (ch = format[pos]) == ' ')
+                    pos++;
                 // End of parsing index parameter.
 
                 //
@@ -167,7 +184,8 @@ namespace System.Text
                     pos++;
 
                     // Consume Optional whitespace
-                    while (pos < len && format[pos] == ' ') pos++;
+                    while (pos < len && format[pos] == ' ')
+                        pos++;
 
                     // If reached the end of the text then error (Unexpected end of text)
                     if (pos == len)
@@ -207,13 +225,13 @@ namespace System.Text
                         }
                         ch = format[pos];
                         // So long a current character is a digit and the value of width is less than 100000 ( width limit )
-                    }
-                    while (ch >= '0' && ch <= '9' && width < WidthLimit);
+                    } while (ch >= '0' && ch <= '9' && width < WidthLimit);
                     // end of parsing Argument Alignment
                 }
 
                 // Consume optional whitespace
-                while (pos < len && (ch = format[pos]) == ' ') pos++;
+                while (pos < len && (ch = format[pos]) == ' ')
+                    pos++;
 
                 //
                 // Start of parsing of optional formatting parameter.
@@ -279,10 +297,16 @@ namespace System.Text
                 {
                     // If arg is ISpanFormattable and the beginning doesn't need padding,
                     // try formatting it into the remaining current chunk.
-                    if (arg is ISpanFormattable spanFormattableArg &&
-                        (leftJustify || width == 0) &&
-                        spanFormattableArg.TryFormat(_chars.Slice(_pos), out int charsWritten, itemFormatSpan, provider))
-                    {
+                    if (
+                        arg is ISpanFormattable spanFormattableArg
+                        && (leftJustify || width == 0)
+                        && spanFormattableArg.TryFormat(
+                            _chars.Slice(_pos),
+                            out int charsWritten,
+                            itemFormatSpan,
+                            provider
+                        )
+                    ) {
                         _pos += charsWritten;
 
                         // Pad the end, if needed.
@@ -291,7 +315,6 @@ namespace System.Text
                         {
                             Append(' ', padding);
                         }
-
                         // Continue to parse other characters.
                         continue;
                     }

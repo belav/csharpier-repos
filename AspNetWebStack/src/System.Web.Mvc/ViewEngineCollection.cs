@@ -13,17 +13,14 @@ namespace System.Web.Mvc
         private IViewEngine[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ViewEngineCollection()
-        {
-        }
+        public ViewEngineCollection() { }
 
-        public ViewEngineCollection(IList<IViewEngine> list)
-            : base(list)
-        {
-        }
+        public ViewEngineCollection(IList<IViewEngine> list) : base(list) { }
 
-        internal ViewEngineCollection(IList<IViewEngine> list, IDependencyResolver dependencyResolver)
-            : base(list)
+        internal ViewEngineCollection(
+            IList<IViewEngine> list,
+            IDependencyResolver dependencyResolver
+        ) : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }
@@ -35,7 +32,10 @@ namespace System.Web.Mvc
                 IViewEngine[] combinedItems = _combinedItems;
                 if (combinedItems == null)
                 {
-                    combinedItems = MultiServiceResolver.GetCombined<IViewEngine>(Items, _dependencyResolver);
+                    combinedItems = MultiServiceResolver.GetCombined<IViewEngine>(
+                        Items,
+                        _dependencyResolver
+                    );
                     _combinedItems = combinedItems;
                 }
                 return combinedItems;
@@ -74,16 +74,20 @@ namespace System.Web.Mvc
             base.SetItem(index, item);
         }
 
-        private ViewEngineResult Find(Func<IViewEngine, ViewEngineResult> cacheLocator, Func<IViewEngine, ViewEngineResult> locator)
-        {
+        private ViewEngineResult Find(
+            Func<IViewEngine, ViewEngineResult> cacheLocator,
+            Func<IViewEngine, ViewEngineResult> locator
+        ) {
             // First, look up using the cacheLocator and do not track the searched paths in non-matching view engines
             // Then, look up using the normal locator and track the searched paths so that an error view engine can be returned
             return Find(cacheLocator, trackSearchedPaths: false)
-                   ?? Find(locator, trackSearchedPaths: true);
+                ?? Find(locator, trackSearchedPaths: true);
         }
 
-        private ViewEngineResult Find(Func<IViewEngine, ViewEngineResult> lookup, bool trackSearchedPaths)
-        {
+        private ViewEngineResult Find(
+            Func<IViewEngine, ViewEngineResult> lookup,
+            bool trackSearchedPaths
+        ) {
             // Returns
             //    1st result
             // OR list of searched paths (if trackSearchedPaths == true)
@@ -125,8 +129,10 @@ namespace System.Web.Mvc
             }
         }
 
-        public virtual ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName)
-        {
+        public virtual ViewEngineResult FindPartialView(
+            ControllerContext controllerContext,
+            string partialViewName
+        ) {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -136,12 +142,17 @@ namespace System.Web.Mvc
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "partialViewName");
             }
 
-            return Find(e => e.FindPartialView(controllerContext, partialViewName, true),
-                        e => e.FindPartialView(controllerContext, partialViewName, false));
+            return Find(
+                e => e.FindPartialView(controllerContext, partialViewName, true),
+                e => e.FindPartialView(controllerContext, partialViewName, false)
+            );
         }
 
-        public virtual ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName)
-        {
+        public virtual ViewEngineResult FindView(
+            ControllerContext controllerContext,
+            string viewName,
+            string masterName
+        ) {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -151,8 +162,10 @@ namespace System.Web.Mvc
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "viewName");
             }
 
-            return Find(e => e.FindView(controllerContext, viewName, masterName, true),
-                        e => e.FindView(controllerContext, viewName, masterName, false));
+            return Find(
+                e => e.FindView(controllerContext, viewName, masterName, true),
+                e => e.FindView(controllerContext, viewName, masterName, false)
+            );
         }
     }
 }

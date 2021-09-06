@@ -41,13 +41,17 @@ namespace Newtonsoft.Json.Linq
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
-        public override async Task WriteToAsync(JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
-        {
+        public override async Task WriteToAsync(
+            JsonWriter writer,
+            CancellationToken cancellationToken,
+            params JsonConverter[] converters
+        ) {
             await writer.WriteStartArrayAsync(cancellationToken).ConfigureAwait(false);
 
             for (int i = 0; i < _values.Count; i++)
             {
-                await _values[i].WriteToAsync(writer, cancellationToken, converters).ConfigureAwait(false);
+                await _values[i].WriteToAsync(writer, cancellationToken, converters)
+                    .ConfigureAwait(false);
             }
 
             await writer.WriteEndArrayAsync(cancellationToken).ConfigureAwait(false);
@@ -60,8 +64,10 @@ namespace Newtonsoft.Json.Linq
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous load. The <see cref="Task{TResult}.Result"/> property contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static Task<JArray> LoadAsync(JsonReader reader, CancellationToken cancellationToken = default)
-        {
+        public new static Task<JArray> LoadAsync(
+            JsonReader reader,
+            CancellationToken cancellationToken = default
+        ) {
             return LoadAsync(reader, null, cancellationToken);
         }
 
@@ -73,13 +79,19 @@ namespace Newtonsoft.Json.Linq
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous load. The <see cref="Task{TResult}.Result"/> property contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static async Task<JArray> LoadAsync(JsonReader reader, JsonLoadSettings? settings, CancellationToken cancellationToken = default)
-        {
+        public new static async Task<JArray> LoadAsync(
+            JsonReader reader,
+            JsonLoadSettings? settings,
+            CancellationToken cancellationToken = default
+        ) {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
-                    throw JsonReaderException.Create(reader, "Error reading JArray from JsonReader.");
+                    throw JsonReaderException.Create(
+                        reader,
+                        "Error reading JArray from JsonReader."
+                    );
                 }
             }
 
@@ -87,7 +99,13 @@ namespace Newtonsoft.Json.Linq
 
             if (reader.TokenType != JsonToken.StartArray)
             {
-                throw JsonReaderException.Create(reader, "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             JArray a = new JArray();

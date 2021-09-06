@@ -23,27 +23,23 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public TestSqlServerRetryingExecutionStrategy()
             : base(
                 new DbContext(
-                    new DbContextOptionsBuilder()
-                        .EnableServiceProviderCaching(false)
-                        .UseSqlServer(TestEnvironment.DefaultConnection).Options),
-                DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers)
-        {
-        }
+                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                        .UseSqlServer(TestEnvironment.DefaultConnection).Options
+                ),
+                DefaultMaxRetryCount,
+                DefaultMaxDelay,
+                _additionalErrorNumbers
+            ) { }
 
         public TestSqlServerRetryingExecutionStrategy(DbContext context)
-            : base(context, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers)
-        {
-        }
+            : base(context, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers) { }
 
         public TestSqlServerRetryingExecutionStrategy(DbContext context, TimeSpan maxDelay)
-            : base(context, DefaultMaxRetryCount, maxDelay, _additionalErrorNumbers)
-        {
-        }
+            : base(context, DefaultMaxRetryCount, maxDelay, _additionalErrorNumbers) { }
 
-        public TestSqlServerRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies)
-            : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers)
-        {
-        }
+        public TestSqlServerRetryingExecutionStrategy(
+            ExecutionStrategyDependencies dependencies
+        ) : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, _additionalErrorNumbers) { }
 
         protected override bool ShouldRetryOn(Exception exception)
         {
@@ -52,8 +48,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return true;
             }
 
-            if (ErrorNumberDebugMode
-                && exception is SqlException sqlException)
+            if (ErrorNumberDebugMode && exception is SqlException sqlException)
             {
                 var message = "Didn't retry on";
                 foreach (SqlError err in sqlException.Errors)
@@ -66,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
 
             return exception is InvalidOperationException invalidOperationException
-                && invalidOperationException.Message == "Internal .Net Framework Data Provider error 6.";
+                && invalidOperationException.Message
+                    == "Internal .Net Framework Data Provider error 6.";
         }
 
         public new virtual TimeSpan? GetNextDelay(Exception lastException)

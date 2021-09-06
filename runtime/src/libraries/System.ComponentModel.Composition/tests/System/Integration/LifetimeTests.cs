@@ -18,7 +18,6 @@ namespace Tests.Integration
         [Export]
         public class AnyPartSimple
         {
-
         }
 
         [Export]
@@ -96,7 +95,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<AnyPartSimple>());
+                container.GetExportedValue<AnyPartSimple>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -112,7 +112,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<AnyPartDisposable>());
+                container.GetExportedValue<AnyPartDisposable>()
+            );
 
             GC.KeepAlive(container);
         }
@@ -147,7 +148,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<AnyPartRecomposable>());
+                container.GetExportedValue<AnyPartRecomposable>()
+            );
             refTracker.CollectAndAssert();
 
             // Lets make sure recomposition doesn't blow anything up here.
@@ -157,7 +159,9 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue = (AnyPartRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
+            var exportedValue = (AnyPartRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
+                0
+            ].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
@@ -178,7 +182,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<AnyPartDisposableRecomposable>());
+                container.GetExportedValue<AnyPartDisposableRecomposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -189,21 +194,26 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue = (AnyPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
+            var exportedValue =
+                (AnyPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
+                    0
+                ].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
 
             container.Dispose();
 
-            Assert.True(exportedValue.IsDisposed, "Any parts should be disposed with the container!");
+            Assert.True(
+                exportedValue.IsDisposed,
+                "Any parts should be disposed with the container!"
+            );
         }
 
         [Export]
         [PartCreationPolicy(CreationPolicy.Shared)]
         public class SharedPartSimple
         {
-
         }
 
         [Export]
@@ -250,7 +260,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<SharedPartSimple>());
+                container.GetExportedValue<SharedPartSimple>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -266,7 +277,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<SharedPartDisposable>());
+                container.GetExportedValue<SharedPartDisposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -303,7 +315,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<SharedPartRecomposable>());
+                container.GetExportedValue<SharedPartRecomposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -314,7 +327,8 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue = (SharedPartRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
+            var exportedValue =
+                (SharedPartRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
@@ -335,7 +349,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<SharedPartDisposableRecomposable>());
+                container.GetExportedValue<SharedPartDisposableRecomposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -346,19 +361,24 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue = (SharedPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
+            var exportedValue =
+                (SharedPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
+                    0
+                ].Target;
             Assert.Equal(42, exportedValue.Value);
 
             container.Dispose();
 
-            Assert.True(exportedValue.IsDisposed, "Any parts should be disposed with the container!");
+            Assert.True(
+                exportedValue.IsDisposed,
+                "Any parts should be disposed with the container!"
+            );
         }
 
         [Export]
         [PartCreationPolicy(CreationPolicy.NonShared)]
         public class NonSharedPartSimple
         {
-
         }
 
         [Export]
@@ -421,7 +441,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<NonSharedPartDisposable>());
+                container.GetExportedValue<NonSharedPartDisposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -490,7 +511,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesNotExpectedToBeCollected(
-                container.GetExportedValue<NonSharedPartDisposableRecomposable>());
+                container.GetExportedValue<NonSharedPartDisposableRecomposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -501,7 +523,10 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue = (NonSharedPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
+            var exportedValue =
+                (NonSharedPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
+                    0
+                ].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
@@ -523,7 +548,10 @@ namespace Tests.Integration
         public class NonSharedState
         {
             [Import(AllowRecomposition = true)]
-            public SharedState State { set { ExportState = value; } }
+            public SharedState State
+            {
+                set { ExportState = value; }
+            }
 
             [Export("SharedFromNonShared")]
             public SharedState ExportState { get; private set; }
@@ -581,7 +609,8 @@ namespace Tests.Integration
         private static CompositionContainer GetContainer()
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(LifetimeTests).GetNestedTypes(BindingFlags.Public));
+                typeof(LifetimeTests).GetNestedTypes(BindingFlags.Public)
+            );
             CompositionBatch batch = new CompositionBatch();
             batch.AddExportedValue("Value", 21);
             container.Compose(batch);
@@ -799,19 +828,24 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
 
             CompositionAssert.ThrowsError(
-                              ErrorId.ImportEngine_PartCannotActivate,         // Cannot activate part because
-                              ErrorId.ReflectionModel_ImportThrewException,         // Import threw an exception
-                              RetryMode.DoNotRetry,
-                              () =>
-            {
-                container.Compose(batch);
-            });
+                ErrorId.ImportEngine_PartCannotActivate, // Cannot activate part because
+                ErrorId.ReflectionModel_ImportThrewException, // Import threw an exception
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Export]
         public class MyImporter
         {
-            [Import(AllowDefault = true, AllowRecomposition = true, RequiredCreationPolicy = CreationPolicy.NonShared)]
+            [Import(
+                AllowDefault = true,
+                AllowRecomposition = true,
+                RequiredCreationPolicy = CreationPolicy.NonShared
+            )]
             public AnyPartDisposable AnyPartDisposable { get; set; }
         }
 
@@ -842,10 +876,12 @@ namespace Tests.Integration
 
         private static CompositionContainer CreateParentChildContainerWithNonSharedImporter()
         {
-            var parentCat = CatalogFactory.CreateAttributed(typeof(AnyPartDisposable),
-                                      typeof(AnyPartDisposableRecomposable),
-                                      typeof(AnyPartRecomposable),
-                                      typeof(AnyPartSimple));
+            var parentCat = CatalogFactory.CreateAttributed(
+                typeof(AnyPartDisposable),
+                typeof(AnyPartDisposableRecomposable),
+                typeof(AnyPartRecomposable),
+                typeof(AnyPartSimple)
+            );
             var parent = new CompositionContainer(parentCat);
             CompositionBatch batch = new CompositionBatch();
             batch.AddExportedValue("Value", 21);
@@ -913,7 +949,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesExpectedToBeCollected(
-                container.GetExportedValue<NonSharedPartSimple>());
+                container.GetExportedValue<NonSharedPartSimple>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -939,7 +976,8 @@ namespace Tests.Integration
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             export = null;
             exportedValue = null;
@@ -969,14 +1007,14 @@ namespace Tests.Integration
 
             var refTracker = new ReferenceTracker();
 
-            refTracker.AddReferencesExpectedToBeCollected(
-             exportedValue);
+            refTracker.AddReferencesExpectedToBeCollected(exportedValue);
 
             refTracker.AddReferencesNotExpectedToBeCollected(
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             part = null;
             exportedValue = null;
@@ -1011,7 +1049,8 @@ namespace Tests.Integration
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             part = null;
             exportedValue = null;
@@ -1040,7 +1079,8 @@ namespace Tests.Integration
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             export = null;
             exportedValue = null;
@@ -1065,12 +1105,14 @@ namespace Tests.Integration
             refTracker.AddReferencesExpectedToBeCollected(
                 exportedValue,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             // Disposable references in the chain should NOT be GC'ed
             refTracker.AddReferencesNotExpectedToBeCollected(
                 exportedValue.AnyPartDisposable,
-                exportedValue.AnyPartDisposableRecomposable);
+                exportedValue.AnyPartDisposableRecomposable
+            );
 
             export = null;
             exportedValue = null;
@@ -1093,14 +1135,16 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesExpectedToBeCollected(
-                exportedValue,                // object in child
-                exportedValue.AnyPartSimple,  // No reference parent so collected.
-                exportedValue.AnyPartRecomposable);
+                exportedValue, // object in child
+                exportedValue.AnyPartSimple, // No reference parent so collected.
+                exportedValue.AnyPartRecomposable
+            );
 
             // These are in the parent and will not be cleaned out
             refTracker.AddReferencesNotExpectedToBeCollected(
                 exportedValue.AnyPartDisposable,
-                exportedValue.AnyPartDisposableRecomposable);
+                exportedValue.AnyPartDisposableRecomposable
+            );
 
             exportedValue = null;
 
@@ -1127,7 +1171,8 @@ namespace Tests.Integration
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             export = null;
             exportedValue = null;
@@ -1153,7 +1198,8 @@ namespace Tests.Integration
             var refTracker = new ReferenceTracker();
 
             refTracker.AddReferencesExpectedToBeCollected(
-                container.GetExportedValue<NonSharedPartRecomposable>());
+                container.GetExportedValue<NonSharedPartRecomposable>()
+            );
 
             refTracker.CollectAndAssert();
 
@@ -1192,7 +1238,8 @@ namespace Tests.Integration
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             part = null;
             exportedValue = null;
@@ -1215,14 +1262,14 @@ namespace Tests.Integration
 
             var refTracker = new ReferenceTracker();
 
-            refTracker.AddReferencesExpectedToBeCollected(
-                exportedValue);
+            refTracker.AddReferencesExpectedToBeCollected(exportedValue);
 
             refTracker.AddReferencesNotExpectedToBeCollected(
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             export = null;
             exportedValue = null;
@@ -1250,7 +1297,8 @@ namespace Tests.Integration
                 exportedValue.AnyPartDisposable,
                 exportedValue.AnyPartDisposableRecomposable,
                 exportedValue.AnyPartRecomposable,
-                exportedValue.AnyPartSimple);
+                exportedValue.AnyPartSimple
+            );
 
             export = null;
             exportedValue = null;

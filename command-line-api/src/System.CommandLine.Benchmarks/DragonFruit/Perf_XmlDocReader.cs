@@ -39,14 +39,12 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
             var testAssembly = Assembly.Load(File.ReadAllBytes(_testAssemblyFilePath));
 
-            _mainMethodInfo = testAssembly
-                .GetType("RenderingPlayground.Program", false, false)
+            _mainMethodInfo = testAssembly.GetType("RenderingPlayground.Program", false, false)
                 .GetTypeInfo()
                 .GetDeclaredMethod("Main");
 
             _xmlDocsStreamReader = new StreamReader(
-                new MemoryStream(File.ReadAllBytes(_testAssemblyXmlDocsFilePath)
-                )
+                new MemoryStream(File.ReadAllBytes(_testAssemblyXmlDocsFilePath))
             );
         }
 

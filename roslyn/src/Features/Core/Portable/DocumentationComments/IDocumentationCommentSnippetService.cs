@@ -21,27 +21,36 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SourceText text,
             int position,
             DocumentOptionSet options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         DocumentationCommentSnippet? GetDocumentationCommentSnippetOnCommandInvoke(
             SyntaxTree syntaxTree,
             SourceText text,
             int position,
             DocumentOptionSet options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         DocumentationCommentSnippet? GetDocumentationCommentSnippetOnEnterTyped(
             SyntaxTree syntaxTree,
             SourceText text,
             int position,
             DocumentOptionSet options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         DocumentationCommentSnippet? GetDocumentationCommentSnippetFromPreviousLine(
             DocumentOptionSet options,
             TextLine currentLine,
-            TextLine previousLine);
+            TextLine previousLine
+        );
 
-        bool IsValidTargetMember(SyntaxTree syntaxTree, SourceText text, int caretPosition, CancellationToken cancellationToken);
+        bool IsValidTargetMember(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int caretPosition,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -52,12 +52,12 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                         "{0}.{1} ({2})",
                         TypeNameHelper.GetTypeDisplayName(ControllerTypeInfo),
                         MethodInfo.Name,
-                        ControllerTypeInfo.Assembly.GetName().Name);
+                        ControllerTypeInfo.Assembly.GetName().Name
+                    );
                 }
 
                 return base.DisplayName!;
             }
-
             set
             {
                 if (value == null)

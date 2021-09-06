@@ -20,9 +20,12 @@ namespace AutoMapper.UnitTests.Bug
 
         public class NullableDateTimeOffsetConverter : ITypeConverter<DateTimeOffset?, DateTime?>
         {
-            public DateTime? Convert(DateTimeOffset? source, DateTime? destination, ResolutionContext context)
-            {
-                if(source.HasValue)
+            public DateTime? Convert(
+                DateTimeOffset? source,
+                DateTime? destination,
+                ResolutionContext context
+            ) {
+                if (source.HasValue)
                 {
                     return source.Value.DateTime;
                 }
@@ -30,11 +33,15 @@ namespace AutoMapper.UnitTests.Bug
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.CreateMap<Source, Destination>();
-            c.CreateMap<DateTimeOffset?, DateTime?>().ConvertUsing<NullableDateTimeOffsetConverter>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateMap<Source, Destination>();
+                    c.CreateMap<DateTimeOffset?, DateTime?>()
+                        .ConvertUsing<NullableDateTimeOffsetConverter>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -54,7 +61,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public bool Convert(int? source, bool destination, ResolutionContext context)
             {
-                if(source == null)
+                if (source == null)
                     return false;
 
                 return source == 1;
@@ -120,17 +127,19 @@ namespace AutoMapper.UnitTests.Bug
                 IntProperty = value;
             }
         }
-    
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<int, bool>().ConvertUsing<IntToBoolConverter>();
-            cfg.CreateMap<bool, int>().ConvertUsing<BoolToIntConverter>();
-            cfg.CreateMap<int?, bool>().ConvertUsing<NullableIntToBoolConverter>();
-            cfg.CreateMap<bool, int?>().ConvertUsing<BoolToNullableIntConverter>();
-            cfg.CreateMap<IntEntity, BoolModel>().ReverseMap();
-            cfg.CreateMap<NullableIntEntity, BoolModel>().ReverseMap();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<int, bool>().ConvertUsing<IntToBoolConverter>();
+                    cfg.CreateMap<bool, int>().ConvertUsing<BoolToIntConverter>();
+                    cfg.CreateMap<int?, bool>().ConvertUsing<NullableIntToBoolConverter>();
+                    cfg.CreateMap<bool, int?>().ConvertUsing<BoolToNullableIntConverter>();
+                    cfg.CreateMap<IntEntity, BoolModel>().ReverseMap();
+                    cfg.CreateMap<NullableIntEntity, BoolModel>().ReverseMap();
+                }
+            );
 
         [Fact]
         public void CheckConverters()

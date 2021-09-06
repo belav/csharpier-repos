@@ -58,11 +58,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Serialize()
         {
-            Dict d = new Dict(new Dictionary<string, object>
-            {
-                ["prop1"] = 1,
-                ["prop2"] = 2
-            });
+            Dict d = new Dict(new Dictionary<string, object> { ["prop1"] = 1, ["prop2"] = 2 });
 
             string json = JsonConvert.SerializeObject(d);
             Assert.AreEqual(@"{""prop1"":1,""prop2"":2}", json);
@@ -88,8 +84,10 @@ namespace Newtonsoft.Json.Tests.Issues
             public IEnumerable<object> Values => _dict.Values;
             public int Count => _dict.Count;
             public bool ContainsKey(string key) => _dict.ContainsKey(key);
-            public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _dict.GetEnumerator();
-            public bool TryGetValue(string key, out object value) => _dict.TryGetValue(key, out value);
+            public IEnumerator<KeyValuePair<string, object>> GetEnumerator() =>
+                _dict.GetEnumerator();
+            public bool TryGetValue(string key, out object value) =>
+                _dict.TryGetValue(key, out value);
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }

@@ -14,8 +14,15 @@ namespace System.Reflection
         internal MarshalAsAttribute? marshalAs;
 
         // Called by the runtime
-        internal RuntimeParameterInfo(string name, Type type, int position, int attrs, object defaultValue, MemberInfo member, MarshalAsAttribute marshalAs)
-        {
+        internal RuntimeParameterInfo(
+            string name,
+            Type type,
+            int position,
+            int attrs,
+            object defaultValue,
+            MemberInfo member,
+            MarshalAsAttribute marshalAs
+        ) {
             NameImpl = name;
             ClassImpl = type;
             PositionImpl = position;
@@ -25,8 +32,11 @@ namespace System.Reflection
             this.marshalAs = marshalAs;
         }
 
-        internal static void FormatParameters(StringBuilder sb, ParameterInfo[] p, CallingConventions callingConvention)
-        {
+        internal static void FormatParameters(
+            StringBuilder sb,
+            ParameterInfo[] p,
+            CallingConventions callingConvention
+        ) {
             for (int i = 0; i < p.Length; ++i)
             {
                 if (i > 0)
@@ -58,14 +68,18 @@ namespace System.Reflection
             }
         }
 
-        internal RuntimeParameterInfo(ParameterBuilder? pb, Type? type, MemberInfo member, int position)
-        {
+        internal RuntimeParameterInfo(
+            ParameterBuilder? pb,
+            Type? type,
+            MemberInfo member,
+            int position
+        ) {
             this.ClassImpl = type;
             this.MemberImpl = member;
             if (pb != null)
             {
                 this.NameImpl = pb.Name;
-                this.PositionImpl = pb.Position - 1;    // ParameterInfo.Position is zero-based
+                this.PositionImpl = pb.Position - 1; // ParameterInfo.Position is zero-based
                 this.AttrsImpl = (ParameterAttributes)pb.Attributes;
             }
             else
@@ -76,14 +90,22 @@ namespace System.Reflection
             }
         }
 
-        internal static ParameterInfo New(ParameterBuilder? pb, Type? type, MemberInfo member, int position)
-        {
+        internal static ParameterInfo New(
+            ParameterBuilder? pb,
+            Type? type,
+            MemberInfo member,
+            int position
+        ) {
             return new RuntimeParameterInfo(pb, type, member, position);
         }
 
         /*FIXME this constructor looks very broken in the position parameter*/
-        internal RuntimeParameterInfo(ParameterInfo? pinfo, Type? type, MemberInfo member, int position)
-        {
+        internal RuntimeParameterInfo(
+            ParameterInfo? pinfo,
+            Type? type,
+            MemberInfo member,
+            int position
+        ) {
             this.ClassImpl = type;
             this.MemberImpl = member;
             if (pinfo != null)
@@ -121,22 +143,29 @@ namespace System.Reflection
             this.marshalAs = marshalAs;
         }
 
-        public override
-        object? DefaultValue
+        public override object? DefaultValue
         {
             get
             {
                 if (ClassImpl == typeof(decimal) || ClassImpl == typeof(decimal?))
                 {
                     /* default values for decimals are encoded using a custom attribute */
-                    DecimalConstantAttribute[] attrs = (DecimalConstantAttribute[])GetCustomAttributes(typeof(DecimalConstantAttribute), false);
+                    DecimalConstantAttribute[] attrs =
+                        (DecimalConstantAttribute[])GetCustomAttributes(
+                            typeof(DecimalConstantAttribute),
+                            false
+                        );
                     if (attrs.Length > 0)
                         return attrs[0].Value;
                 }
                 else if (ClassImpl == typeof(DateTime) || ClassImpl == typeof(DateTime?))
                 {
                     /* default values for DateTime are encoded using a custom attribute */
-                    DateTimeConstantAttribute[] attrs = (DateTimeConstantAttribute[])GetCustomAttributes(typeof(DateTimeConstantAttribute), false);
+                    DateTimeConstantAttribute[] attrs =
+                        (DateTimeConstantAttribute[])GetCustomAttributes(
+                            typeof(DateTimeConstantAttribute),
+                            false
+                        );
                     if (attrs.Length > 0)
                         return attrs[0].Value;
                 }
@@ -144,8 +173,7 @@ namespace System.Reflection
             }
         }
 
-        public override
-        object? RawDefaultValue
+        public override object? RawDefaultValue
         {
             get
             {
@@ -156,9 +184,7 @@ namespace System.Reflection
             }
         }
 
-        public
-        override
-        int MetadataToken
+        public override int MetadataToken
         {
             get
             {
@@ -172,34 +198,32 @@ namespace System.Reflection
                 {
                     return GetMetadataToken();
                 }
-                throw new ArgumentException("Can't produce MetadataToken for member of type " + MemberImpl.GetType());
+                throw new ArgumentException(
+                    "Can't produce MetadataToken for member of type " + MemberImpl.GetType()
+                );
             }
         }
 
-
-        public
-        override
-        object[] GetCustomAttributes(bool inherit)
+        public override object[] GetCustomAttributes(bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
 
-        public
-        override
-        object[] GetCustomAttributes(Type attributeType, bool inherit)
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
         }
 
         internal static object? GetDefaultValueImpl(ParameterInfo pinfo)
         {
-            FieldInfo field = typeof(ParameterInfo).GetField("DefaultValueImpl", BindingFlags.Instance | BindingFlags.NonPublic)!;
+            FieldInfo field = typeof(ParameterInfo).GetField(
+                "DefaultValueImpl",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )!;
             return field.GetValue(pinfo);
         }
 
-        public
-        override
-        bool IsDefined(Type attributeType, bool inherit)
+        public override bool IsDefined(Type attributeType, bool inherit)
         {
             return CustomAttribute.IsDefined(this, attributeType, inherit);
         }
@@ -266,18 +290,28 @@ namespace System.Reflection
             count = 0;
 
             if (IsIn)
-                attrsData[count++] = new CustomAttributeData((typeof(InAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new CustomAttributeData(
+                    (typeof(InAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
             if (IsOut)
-                attrsData[count++] = new CustomAttributeData((typeof(OutAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new CustomAttributeData(
+                    (typeof(OutAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
             if (IsOptional)
-                attrsData[count++] = new CustomAttributeData((typeof(OptionalAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new CustomAttributeData(
+                    (typeof(OptionalAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
             if (marshalAs != null)
             {
-                var ctorArgs = new CustomAttributeTypedArgument[] { new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value) };
+                var ctorArgs = new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value)
+                };
                 attrsData[count++] = new CustomAttributeData(
                     (typeof(MarshalAsAttribute)).GetConstructor(new[] { typeof(UnmanagedType) })!,
                     ctorArgs,
-                    Array.Empty<CustomAttributeNamedArgument>());//FIXME Get named params
+                    Array.Empty<CustomAttributeNamedArgument>()
+                ); //FIXME Get named params
             }
 
             return attrsData;
@@ -293,7 +327,10 @@ namespace System.Reflection
                 if (defaultValue == null)
                     return true;
 
-                if (defaultValue.GetType() == typeof(DBNull) || defaultValue.GetType() == typeof(Missing))
+                if (
+                    defaultValue.GetType() == typeof(DBNull)
+                    || defaultValue.GetType() == typeof(Missing)
+                )
                     return false;
 
                 return true;
@@ -301,10 +338,19 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern Type[] GetTypeModifiers(Type type, MemberInfo member, int position, bool optional);
+        internal static extern Type[] GetTypeModifiers(
+            Type type,
+            MemberInfo member,
+            int position,
+            bool optional
+        );
 
-        internal static ParameterInfo New(ParameterInfo pinfo, Type? type, MemberInfo member, int position)
-        {
+        internal static ParameterInfo New(
+            ParameterInfo pinfo,
+            Type? type,
+            MemberInfo member,
+            int position
+        ) {
             return new RuntimeParameterInfo(pinfo, type, member, position);
         }
 
@@ -313,11 +359,15 @@ namespace System.Reflection
             return new RuntimeParameterInfo(pinfo, member);
         }
 
-        internal static ParameterInfo New(Type type, MemberInfo member, MarshalAsAttribute marshalAs)
-        {
+        internal static ParameterInfo New(
+            Type type,
+            MemberInfo member,
+            MarshalAsAttribute marshalAs
+        ) {
             return new RuntimeParameterInfo(type, member, marshalAs);
         }
 
-        private Type[] GetCustomModifiers(bool optional) => GetTypeModifiers(ParameterType, Member, Position, optional) ?? Type.EmptyTypes;
+        private Type[] GetCustomModifiers(bool optional) =>
+            GetTypeModifiers(ParameterType, Member, Position, optional) ?? Type.EmptyTypes;
     }
 }

@@ -16,7 +16,9 @@ namespace System.Collections.Specialized
     ///  </para>
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class HybridDictionary : IDictionary
     {
         // These numbers have been carefully tested to be optimal. Please don't change them
@@ -30,13 +32,9 @@ namespace System.Collections.Specialized
         private Hashtable? hashtable; // Do not rename (binary serialization)
         private readonly bool caseInsensitive; // Do not rename (binary serialization)
 
-        public HybridDictionary()
-        {
-        }
+        public HybridDictionary() { }
 
-        public HybridDictionary(int initialSize) : this(initialSize, false)
-        {
-        }
+        public HybridDictionary(int initialSize) : this(initialSize, false) { }
 
         public HybridDictionary(bool caseInsensitive)
         {
@@ -108,7 +106,9 @@ namespace System.Collections.Specialized
                 }
                 else
                 {
-                    list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+                    list = new ListDictionary(
+                        caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                    );
                     list[key] = value;
                 }
             }
@@ -120,7 +120,9 @@ namespace System.Collections.Specialized
             {
                 if (list == null)
                 {
-                    list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+                    list = new ListDictionary(
+                        caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                    );
                 }
                 return list;
             }
@@ -188,34 +190,22 @@ namespace System.Collections.Specialized
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public ICollection Values
@@ -243,7 +233,9 @@ namespace System.Collections.Specialized
             {
                 if (list == null)
                 {
-                    list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+                    list = new ListDictionary(
+                        caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                    );
                     list.Add(key, value);
                 }
                 else if (list.Count + 1 >= CutoverPoint)
@@ -314,7 +306,9 @@ namespace System.Collections.Specialized
             }
             if (list == null)
             {
-                list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+                list = new ListDictionary(
+                    caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                );
             }
             return list.GetEnumerator();
         }
@@ -327,7 +321,9 @@ namespace System.Collections.Specialized
             }
             if (list == null)
             {
-                list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+                list = new ListDictionary(
+                    caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                );
             }
             return list.GetEnumerator();
         }

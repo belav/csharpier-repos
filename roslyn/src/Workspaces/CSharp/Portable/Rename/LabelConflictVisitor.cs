@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
     {
         private readonly ConflictingIdentifierTracker _tracker;
 
-        public LabelConflictVisitor(SyntaxToken tokenBeingRenamed)
-            => _tracker = new ConflictingIdentifierTracker(tokenBeingRenamed, StringComparer.Ordinal);
+        public LabelConflictVisitor(SyntaxToken tokenBeingRenamed) =>
+            _tracker = new ConflictingIdentifierTracker(tokenBeingRenamed, StringComparer.Ordinal);
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -34,8 +34,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             // We want to collect any labels and add them all at once for this scope
             foreach (var statement in node.Statements)
             {
-                if (statement.IsKind(SyntaxKind.LabeledStatement, out LabeledStatementSyntax declarationStatement))
-                {
+                if (
+                    statement.IsKind(
+                        SyntaxKind.LabeledStatement,
+                        out LabeledStatementSyntax declarationStatement
+                    )
+                ) {
                     tokens.Add(declarationStatement.Identifier);
                 }
             }
@@ -47,10 +51,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
         public IEnumerable<SyntaxToken> ConflictingTokens
         {
-            get
-            {
-                return _tracker.ConflictingTokens;
-            }
+            get { return _tracker.ConflictingTokens; }
         }
     }
 }

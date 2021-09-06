@@ -12,12 +12,10 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
 {
     internal sealed partial class FolderWorkspace : Workspace
     {
-        private static Encoding DefaultEncoding => new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+        private static Encoding DefaultEncoding =>
+            new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
-        private FolderWorkspace(HostServices hostServices)
-            : base(hostServices, "Folder")
-        {
-        }
+        private FolderWorkspace(HostServices hostServices) : base(hostServices, "Folder") { }
 
         public static FolderWorkspace Create()
         {
@@ -33,7 +31,10 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
         {
             if (string.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath))
             {
-                throw new ArgumentException($"Folder '{folderPath}' does not exist.", nameof(folderPath));
+                throw new ArgumentException(
+                    $"Folder '{folderPath}' does not exist.",
+                    nameof(folderPath)
+                );
             }
 
             ClearSolution();
@@ -61,8 +62,12 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             }
         }
 
-        private void SaveDocumentText(DocumentId id, string fullPath, SourceText newText, Encoding encoding)
-        {
+        private void SaveDocumentText(
+            DocumentId id,
+            string fullPath,
+            SourceText newText,
+            Encoding encoding
+        ) {
             try
             {
                 using var writer = new StreamWriter(fullPath, append: false, encoding);
@@ -70,7 +75,9 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             }
             catch (IOException exception)
             {
-                OnWorkspaceFailed(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, id));
+                OnWorkspaceFailed(
+                    new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, id)
+                );
             }
         }
     }

@@ -17,23 +17,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
 {
     public class KeywordCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(KeywordCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(KeywordCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
-        public async Task IsCommitCharacterTest()
-            => await VerifyCommonCommitCharactersAsync("$$", textTypedSoFar: "");
+        public async Task IsCommitCharacterTest() =>
+            await VerifyCommonCommitCharactersAsync("$$", textTypedSoFar: "");
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
-        public void IsTextualTriggerCharacterTest()
-            => TestCommonIsTextualTriggerCharacter();
+        public void IsTextualTriggerCharacterTest() => TestCommonIsTextualTriggerCharacter();
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task SendEnterThroughToEditorTest()
         {
-            await VerifySendEnterThroughToEnterAsync("$$", "class", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync("$$", "class", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync("$$", "class", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                "$$",
+                "class",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                "$$",
+                "class",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                "$$",
+                "class",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
@@ -47,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInInactiveCode()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -60,7 +74,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInCharLiteral()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -73,7 +88,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInUnterminatedCharLiteral()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -85,7 +101,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInUnterminatedCharLiteralAtEndOfFile()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -97,7 +114,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInString()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -118,7 +136,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInUnterminatedString()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -138,7 +157,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInUnterminatedStringAtEndOfFile()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -150,7 +170,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInVerbatimString()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -165,7 +186,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInUnterminatedVerbatimString()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -179,7 +201,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInUnterminatedVerbatimStringAtEndOfFile()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -191,7 +214,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInSingleLineComment()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -204,7 +228,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInSingleLineCommentAtEndOfFile()
         {
-            var markup = @"namespace A
+            var markup =
+                @"namespace A
 {
 }// $$";
 
@@ -214,7 +239,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task NotInMutliLineComment()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M()
     {
@@ -230,7 +256,8 @@ $$
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task UnionOfItemsFromBothContexts()
         {
-            var markup = @"<Workspace>
+            var markup =
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"" PreprocessorSymbols=""GOO"">
         <Document FilePath=""CurrentDocument.cs""><![CDATA[
 class C
@@ -261,18 +288,25 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task FormattingAfterCompletionCommit_AfterGetAccessorInSingleLineIncompleteProperty()
         {
-            var markupBeforeCommit = @"class Program
+            var markupBeforeCommit =
+                @"class Program
 {
     int P {g$$
     void Main() { }
 }";
 
-            var expectedCodeAfterCommit = @"class Program
+            var expectedCodeAfterCommit =
+                @"class Program
 {
     int P {get;
     void Main() { }
 }";
-            await VerifyProviderCommitAsync(markupBeforeCommit, "get", expectedCodeAfterCommit, commitChar: ';');
+            await VerifyProviderCommitAsync(
+                markupBeforeCommit,
+                "get",
+                expectedCodeAfterCommit,
+                commitChar: ';'
+            );
         }
 
         [WorkItem(7768, "https://github.com/dotnet/roslyn/issues/7768")]
@@ -280,18 +314,25 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task FormattingAfterCompletionCommit_AfterBothAccessorsInSingleLineIncompleteProperty()
         {
-            var markupBeforeCommit = @"class Program
+            var markupBeforeCommit =
+                @"class Program
 {
     int P {get;set$$
     void Main() { }
 }";
 
-            var expectedCodeAfterCommit = @"class Program
+            var expectedCodeAfterCommit =
+                @"class Program
 {
     int P {get;set;
     void Main() { }
 }";
-            await VerifyProviderCommitAsync(markupBeforeCommit, "set", expectedCodeAfterCommit, commitChar: ';');
+            await VerifyProviderCommitAsync(
+                markupBeforeCommit,
+                "set",
+                expectedCodeAfterCommit,
+                commitChar: ';'
+            );
         }
 
         [WorkItem(7768, "https://github.com/dotnet/roslyn/issues/7768")]
@@ -299,25 +340,33 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task FormattingAfterCompletionCommit_InSingleLineMethod()
         {
-            var markupBeforeCommit = @"class Program
+            var markupBeforeCommit =
+                @"class Program
 {
     public static void Test() { return$$
     void Main() { }
 }";
 
-            var expectedCodeAfterCommit = @"class Program
+            var expectedCodeAfterCommit =
+                @"class Program
 {
     public static void Test() { return;
     void Main() { }
 }";
-            await VerifyProviderCommitAsync(markupBeforeCommit, "return", expectedCodeAfterCommit, commitChar: ';');
+            await VerifyProviderCommitAsync(
+                markupBeforeCommit,
+                "return",
+                expectedCodeAfterCommit,
+                commitChar: ';'
+            );
         }
 
         [WorkItem(14218, "https://github.com/dotnet/roslyn/issues/14218")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PredefinedTypeKeywordsShouldBeRecommendedAfterCaseInASwitch()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     public static void Test()
@@ -339,7 +388,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PrivateOrProtectedModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
 $$
@@ -352,7 +402,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PrivateProtectedModifier()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     private $$
@@ -364,7 +415,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ProtectedPrivateModifier()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     protected $$
@@ -378,7 +430,7 @@ class C
         public async Task DontSuggestEventAfterReadonlyInClass()
         {
             var markup =
-@"class C {
+                @"class C {
     readonly $$
 }
 ";
@@ -390,7 +442,7 @@ class C
         public async Task DontSuggestEventAfterReadonlyInInterface()
         {
             var markup =
-@"interface C {
+                @"interface C {
     readonly $$
 }
 ";
@@ -402,7 +454,7 @@ class C
         public async Task SuggestEventAfterReadonlyInStruct()
         {
             var markup =
-@"struct C {
+                @"struct C {
     readonly $$
 }
 ";
@@ -416,9 +468,8 @@ class C
         [InlineData("interface", false)]
         public async Task SuggestReadonlyPropertyAccessor(string declarationType, bool present)
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     int X {{
         $$
     }}
@@ -439,11 +490,12 @@ $@"{declarationType} C {{
         [InlineData("struct", true)]
         [InlineData("class", false)]
         [InlineData("interface", false)]
-        public async Task SuggestReadonlyBeforePropertyAccessor(string declarationType, bool present)
-        {
-
+        public async Task SuggestReadonlyBeforePropertyAccessor(
+            string declarationType,
+            bool present
+        ) {
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     int X {{
         $$ get;
     }}
@@ -466,9 +518,8 @@ $@"{declarationType} C {{
         [InlineData("interface", false)]
         public async Task SuggestReadonlyIndexerAccessor(string declarationType, bool present)
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     int this[int i] {{
         $$
     }}
@@ -491,9 +542,8 @@ $@"{declarationType} C {{
         [InlineData("interface", false)]
         public async Task SuggestReadonlyEventAccessor(string declarationType, bool present)
         {
-
             var markup =
-$@"{declarationType} C {{
+                $@"{declarationType} C {{
     event System.Action E {{
         $$
     }}
@@ -514,7 +564,7 @@ $@"{declarationType} C {{
         public async Task SuggestAccessorAfterReadonlyInStruct()
         {
             var markup =
-@"struct C {
+                @"struct C {
     int X {
         readonly $$
     }
@@ -529,9 +579,8 @@ $@"{declarationType} C {{
         [WorkItem(39265, "https://github.com/dotnet/roslyn/issues/39265")]
         public async Task SuggestReadonlyMethodInStruct()
         {
-
             var markup =
-@"struct C {
+                @"struct C {
     public $$ void M() {}
 }
 ";

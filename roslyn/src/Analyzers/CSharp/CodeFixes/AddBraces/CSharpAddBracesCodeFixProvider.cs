@@ -20,17 +20,25 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddBraces), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddBraces
+        ),
+        Shared
+    ]
     internal sealed class CSharpAddBracesCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpAddBracesCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpAddBracesCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.AddBracesDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.AddBracesDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -38,15 +46,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
         {
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             var root = editor.OriginalRoot;
             foreach (var diagnostic in diagnostics)
             {
@@ -56,11 +67,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 // of other replace calls.  i.e. we may have statements nested in statements,
                 // we need to make sure that any inner edits are seen when we make the outer
                 // replacement.
-                editor.ReplaceNode(statement, (currentStatement, g) =>
-                {
-                    var embeddedStatement = currentStatement.GetEmbeddedStatement();
-                    return currentStatement.ReplaceNode(embeddedStatement, SyntaxFactory.Block(embeddedStatement));
-                });
+                editor.ReplaceNode(
+                    statement,
+                    (currentStatement, g) =>
+                    {
+                        var embeddedStatement = currentStatement.GetEmbeddedStatement();
+                        return currentStatement.ReplaceNode(
+                            embeddedStatement,
+                            SyntaxFactory.Block(embeddedStatement)
+                        );
+                    }
+                );
             }
 
             return Task.CompletedTask;
@@ -68,10 +85,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
 
         private sealed class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Add_braces, createChangedDocument, CSharpAnalyzersResources.Add_braces)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                CSharpAnalyzersResources.Add_braces,
+                createChangedDocument,
+                CSharpAnalyzersResources.Add_braces
+            ) { }
         }
     }
 }

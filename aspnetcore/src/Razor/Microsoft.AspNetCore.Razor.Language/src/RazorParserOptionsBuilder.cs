@@ -21,8 +21,6 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public abstract RazorParserOptions Build();
 
-        public virtual void SetDesignTime(bool designTime)
-        {
-        }
+        public virtual void SetDesignTime(bool designTime) { }
     }
 }

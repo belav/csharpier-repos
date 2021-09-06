@@ -14,7 +14,10 @@ namespace Test
 
         static int m_nStaticFld;
 
-        public int Method1() { return 0; }
+        public int Method1()
+        {
+            return 0;
+        }
 
         static void Static1(ref AA[] param4, int param5)
         {

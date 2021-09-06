@@ -36,8 +36,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="user">The user whose password should be validated.</param>
         /// <param name="password">The password supplied for validation</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public virtual Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password)
-        {
+        public virtual Task<IdentityResult> ValidateAsync(
+            UserManager<TUser> manager,
+            TUser user,
+            string password
+        ) {
             if (password == null)
             {
                 throw new ArgumentNullException(nameof(password));
@@ -68,14 +71,15 @@ namespace Microsoft.AspNetCore.Identity
             {
                 errors.Add(Describer.PasswordRequiresUpper());
             }
-            if (options.RequiredUniqueChars >= 1 && password.Distinct().Count() < options.RequiredUniqueChars)
-            {
+            if (
+                options.RequiredUniqueChars >= 1
+                && password.Distinct().Count() < options.RequiredUniqueChars
+            ) {
                 errors.Add(Describer.PasswordRequiresUniqueChars(options.RequiredUniqueChars));
             }
-            return
-                Task.FromResult(errors.Count == 0
-                    ? IdentityResult.Success
-                    : IdentityResult.Failed(errors.ToArray()));
+            return Task.FromResult(
+                errors.Count == 0 ? IdentityResult.Success : IdentityResult.Failed(errors.ToArray())
+            );
         }
 
         /// <summary>

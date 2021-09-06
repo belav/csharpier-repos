@@ -21,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : ConfigurationDbContextTestBase<TFixture>.ConfigurationDbContextFixtureBase
     {
-        protected ConfigurationDbContextTestBase(ConfigurationDbContextFixtureBase fixture)
-            => Fixture = fixture;
+        protected ConfigurationDbContextTestBase(ConfigurationDbContextFixtureBase fixture) =>
+            Fixture = fixture;
 
         protected ConfigurationDbContextFixtureBase Fixture { get; }
 
@@ -38,7 +38,12 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                    Assert.Equal(2, (await store.FindApiScopesByNameAsync(new[] { "ApiScope2", "ApiScope1" })).Count());
+                    Assert.Equal(
+                        2,
+                        (
+                            await store.FindApiScopesByNameAsync(new[] { "ApiScope2", "ApiScope1" })
+                        ).Count()
+                    );
                 }
             );
         }
@@ -75,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore
                     Emphasize = true,
                     UserClaims = new List<ApiScopeClaim>(),
                     Properties = new List<ApiScopeProperty>(),
-                });
+                }
+            );
 
             await context.SaveChangesAsync();
         }
@@ -87,18 +93,10 @@ namespace Microsoft.EntityFrameworkCore
                 async context =>
                 {
                     context.AddRange(
-                        new Client
-                        {
-                            ClientId = "C1", Description = "D1",
-                        },
-                        new Client
-                        {
-                            ClientId = "C2", Description = "D2",
-                        },
-                        new Client
-                        {
-                            ClientId = "C3", Description = "D3",
-                        });
+                        new Client { ClientId = "C1", Description = "D1", },
+                        new Client { ClientId = "C2", Description = "D2", },
+                        new Client { ClientId = "C3", Description = "D3", }
+                    );
 
                     await context.SaveChangesAsync();
                 },
@@ -124,7 +122,13 @@ namespace Microsoft.EntityFrameworkCore
                     var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
                     Assert.Equal(
-                        2, (await store.FindIdentityResourcesByScopeNameAsync(new[] { "IdentityResource2", "IdentityResource1" })).Count());
+                        2,
+                        (
+                            await store.FindIdentityResourcesByScopeNameAsync(
+                                new[] { "IdentityResource2", "IdentityResource1" }
+                            )
+                        ).Count()
+                    );
                 }
             );
         }
@@ -141,7 +145,10 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                    Assert.Equal(2, (await store.FindApiResourcesByScopeNameAsync(new[] { "S1", "S4" })).Count());
+                    Assert.Equal(
+                        2,
+                        (await store.FindApiResourcesByScopeNameAsync(new[] { "S1", "S4" })).Count()
+                    );
                 }
             );
         }
@@ -195,7 +202,8 @@ namespace Microsoft.EntityFrameworkCore
                     Description = "IdentityResource 3",
                     Required = true,
                     Emphasize = true
-                });
+                }
+            );
 
             await context.SaveChangesAsync();
         }
@@ -208,21 +216,30 @@ namespace Microsoft.EntityFrameworkCore
                     Name = "ApiResource1",
                     DisplayName = "ApiResource 1",
                     Description = "ApiResource 1",
-                    Scopes = new List<ApiResourceScope> { new() { Scope = "S1" }, new() { Scope = "S2" } }
+                    Scopes = new List<ApiResourceScope>
+                    {
+                        new() { Scope = "S1" },
+                        new() { Scope = "S2" }
+                    }
                 },
                 new ApiResource
                 {
                     Name = "ApiResource2",
                     DisplayName = "ApiResource 2",
                     Description = "ApiResource 2",
-                    Scopes = new List<ApiResourceScope> { new() { Scope = "S4" }, new() { Scope = "S5" } }
+                    Scopes = new List<ApiResourceScope>
+                    {
+                        new() { Scope = "S4" },
+                        new() { Scope = "S5" }
+                    }
                 },
                 new ApiResource
                 {
                     Name = "ApiResource3",
                     DisplayName = "ApiResource 3",
                     Description = "ApiResource 3"
-                });
+                }
+            );
 
             await context.SaveChangesAsync();
         }
@@ -239,7 +256,14 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                    Assert.Equal(2, (await store.FindApiResourcesByNameAsync(new[] { "ApiResource2", "ApiResource1" })).Count());
+                    Assert.Equal(
+                        2,
+                        (
+                            await store.FindApiResourcesByNameAsync(
+                                new[] { "ApiResource2", "ApiResource1" }
+                            )
+                        ).Count()
+                    );
                 }
             );
         }
@@ -249,14 +273,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var entityTypeMappings = context.Model.GetEntityTypes().Select(e => new EntityTypeMapping(e)).ToList();
+                var entityTypeMappings = context.Model.GetEntityTypes()
+                    .Select(e => new EntityTypeMapping(e))
+                    .ToList();
 
                 EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);
             }
         }
 
-        protected virtual List<EntityTypeMapping> ExpectedMappings
-            => new()
+        protected virtual List<EntityTypeMapping> ExpectedMappings =>
+            new()
             {
                 new EntityTypeMapping()
                 {
@@ -302,7 +328,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ApiResourceClaim {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: UserClaims ToPrincipal: ApiResource Cascade",
                     },
-                    Navigations = { "Navigation: ApiResourceClaim.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: UserClaims", },
+                    Navigations =
+                    {
+                        "Navigation: ApiResourceClaim.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: UserClaims",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -342,7 +371,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ApiResourceScope {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: Scopes ToPrincipal: ApiResource Cascade",
                     },
-                    Navigations = { "Navigation: ApiResourceScope.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Scopes", },
+                    Navigations =
+                    {
+                        "Navigation: ApiResourceScope.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Scopes",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -364,7 +396,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ApiResourceSecret {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: Secrets ToPrincipal: ApiResource Cascade",
                     },
-                    Navigations = { "Navigation: ApiResourceSecret.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Secrets", },
+                    Navigations =
+                    {
+                        "Navigation: ApiResourceSecret.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Secrets",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -405,7 +440,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ApiScopeClaim {'ScopeId'} -> ApiScope {'Id'} ToDependent: UserClaims ToPrincipal: Scope Cascade",
                     },
-                    Navigations = { "Navigation: ApiScopeClaim.Scope (ApiScope) ToPrincipal ApiScope Inverse: UserClaims", },
+                    Navigations =
+                    {
+                        "Navigation: ApiScopeClaim.Scope (ApiScope) ToPrincipal ApiScope Inverse: UserClaims",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -424,7 +462,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ApiScopeProperty {'ScopeId'} -> ApiScope {'Id'} ToDependent: Properties ToPrincipal: Scope Cascade",
                     },
-                    Navigations = { "Navigation: ApiScopeProperty.Scope (ApiScope) ToPrincipal ApiScope Inverse: Properties", },
+                    Navigations =
+                    {
+                        "Navigation: ApiScopeProperty.Scope (ApiScope) ToPrincipal ApiScope Inverse: Properties",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -505,8 +546,14 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: ClientClaim.Value (string) Required MaxLength(250)",
                     },
                     Indexes = { "{'ClientId'} ", },
-                    FKs = { "ForeignKey: ClientClaim {'ClientId'} -> Client {'Id'} ToDependent: Claims ToPrincipal: Client Cascade", },
-                    Navigations = { "Navigation: ClientClaim.Client (Client) ToPrincipal Client Inverse: Claims", },
+                    FKs =
+                    {
+                        "ForeignKey: ClientClaim {'ClientId'} -> Client {'Id'} ToDependent: Claims ToPrincipal: Client Cascade",
+                    },
+                    Navigations =
+                    {
+                        "Navigation: ClientClaim.Client (Client) ToPrincipal Client Inverse: Claims",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -524,7 +571,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ClientCorsOrigin {'ClientId'} -> Client {'Id'} ToDependent: AllowedCorsOrigins ToPrincipal: Client Cascade",
                     },
-                    Navigations = { "Navigation: ClientCorsOrigin.Client (Client) ToPrincipal Client Inverse: AllowedCorsOrigins", },
+                    Navigations =
+                    {
+                        "Navigation: ClientCorsOrigin.Client (Client) ToPrincipal Client Inverse: AllowedCorsOrigins",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -542,7 +592,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ClientGrantType {'ClientId'} -> Client {'Id'} ToDependent: AllowedGrantTypes ToPrincipal: Client Cascade",
                     },
-                    Navigations = { "Navigation: ClientGrantType.Client (Client) ToPrincipal Client Inverse: AllowedGrantTypes", },
+                    Navigations =
+                    {
+                        "Navigation: ClientGrantType.Client (Client) ToPrincipal Client Inverse: AllowedGrantTypes",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -603,7 +656,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ClientProperty {'ClientId'} -> Client {'Id'} ToDependent: Properties ToPrincipal: Client Cascade",
                     },
-                    Navigations = { "Navigation: ClientProperty.Client (Client) ToPrincipal Client Inverse: Properties", },
+                    Navigations =
+                    {
+                        "Navigation: ClientProperty.Client (Client) ToPrincipal Client Inverse: Properties",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -621,7 +677,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ClientRedirectUri {'ClientId'} -> Client {'Id'} ToDependent: RedirectUris ToPrincipal: Client Cascade",
                     },
-                    Navigations = { "Navigation: ClientRedirectUri.Client (Client) ToPrincipal Client Inverse: RedirectUris", },
+                    Navigations =
+                    {
+                        "Navigation: ClientRedirectUri.Client (Client) ToPrincipal Client Inverse: RedirectUris",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -639,7 +698,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ClientScope {'ClientId'} -> Client {'Id'} ToDependent: AllowedScopes ToPrincipal: Client Cascade",
                     },
-                    Navigations = { "Navigation: ClientScope.Client (Client) ToPrincipal Client Inverse: AllowedScopes", },
+                    Navigations =
+                    {
+                        "Navigation: ClientScope.Client (Client) ToPrincipal Client Inverse: AllowedScopes",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -661,7 +723,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "ForeignKey: ClientSecret {'ClientId'} -> Client {'Id'} ToDependent: ClientSecrets ToPrincipal: Client Cascade",
                     },
-                    Navigations = { "Navigation: ClientSecret.Client (Client) ToPrincipal Client Inverse: ClientSecrets", },
+                    Navigations =
+                    {
+                        "Navigation: ClientSecret.Client (Client) ToPrincipal Client Inverse: ClientSecrets",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -734,38 +799,47 @@ namespace Microsoft.EntityFrameworkCore
                 },
             };
 
-        protected ConfigurationDbContext CreateContext()
-            => Fixture.CreateContext();
+        protected ConfigurationDbContext CreateContext() => Fixture.CreateContext();
 
         protected virtual Task ExecuteWithStrategyInTransactionAsync(
             Func<ConfigurationDbContext, Task> testOperation,
             Func<ConfigurationDbContext, Task> nestedTestOperation1 = null,
             Func<ConfigurationDbContext, Task> nestedTestOperation2 = null,
-            Func<ConfigurationDbContext, Task> nestedTestOperation3 = null)
-            => TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                CreateContext, UseTransaction,
-                testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+            Func<ConfigurationDbContext, Task> nestedTestOperation3 = null
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransactionAsync(
+                CreateContext,
+                UseTransaction,
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2,
+                nestedTestOperation3
+            );
 
-        protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected virtual void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-        public abstract class ConfigurationDbContextFixtureBase : SharedStoreFixtureBase<ConfigurationDbContext>
+        public abstract class ConfigurationDbContextFixtureBase
+            : SharedStoreFixtureBase<ConfigurationDbContext>
         {
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection)
-                    .AddSingleton<ConfigurationStoreOptions>();
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) => base.AddServices(serviceCollection).AddSingleton<ConfigurationStoreOptions>();
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder)
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder)
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging()
                     .ConfigureWarnings(
-                        b => b.Default(WarningBehavior.Throw)
-                            .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                            .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+                        b =>
+                            b.Default(WarningBehavior.Throw)
+                                .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                                .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                    );
 
-            protected override bool UsePooling
-                => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
+            protected override bool UsePooling => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
         }
     }
 }

@@ -10,16 +10,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SynthesizedRecordConstructor : SourceConstructorSymbolBase
     {
         public SynthesizedRecordConstructor(
-             SourceMemberContainerTypeSymbol containingType,
-             RecordDeclarationSyntax syntax) :
-             base(containingType, syntax.Identifier.GetLocation(), syntax, isIterator: false)
+            SourceMemberContainerTypeSymbol containingType,
+            RecordDeclarationSyntax syntax
+        ) : base(containingType, syntax.Identifier.GetLocation(), syntax, isIterator: false)
         {
             this.MakeFlags(
                 MethodKind.Constructor,
-                containingType.IsAbstract ? DeclarationModifiers.Protected : DeclarationModifiers.Public,
+                containingType.IsAbstract
+                    ? DeclarationModifiers.Protected
+                    : DeclarationModifiers.Public,
                 returnsVoid: true,
                 isExtensionMethod: false,
-                isNullableAnalysisEnabled: false); // IsNullableAnalysisEnabled uses containing type instead.
+                isNullableAnalysisEnabled: false
+            ); // IsNullableAnalysisEnabled uses containing type instead.
         }
 
         internal RecordDeclarationSyntax GetSyntax()
@@ -41,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsNullableAnalysisEnabled()
         {
-            return ((SourceMemberContainerTypeSymbol)ContainingType).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
+            return (
+                (SourceMemberContainerTypeSymbol)ContainingType
+            ).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
         }
 
         protected override bool IsWithinExpressionOrBlockBody(int position, out int offset)
@@ -50,11 +55,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override ExecutableCodeBinder TryGetBodyBinder(BinderFactory? binderFactoryOpt = null, bool ignoreAccessibility = false)
-        {
+        internal override ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory? binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        ) {
             TypeDeclarationSyntax typeDecl = GetSyntax();
-            InMethodBinder result = (binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(typeDecl.SyntaxTree)).GetRecordConstructorInMethodBinder(this);
-            return new ExecutableCodeBinder(SyntaxNode, this, result.WithAdditionalFlags(ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None));
+            InMethodBinder result = (
+                binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(typeDecl.SyntaxTree)
+            ).GetRecordConstructorInMethodBinder(this);
+            return new ExecutableCodeBinder(
+                SyntaxNode,
+                this,
+                result.WithAdditionalFlags(
+                    ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None
+                )
+            );
         }
     }
 }

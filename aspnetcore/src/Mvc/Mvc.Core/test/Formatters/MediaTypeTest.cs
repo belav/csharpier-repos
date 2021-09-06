@@ -36,7 +36,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     new[] { "application/json+", "json", "" },
                     new[] { "application/+json", "", "json" },
                     new[] { "application/entitytype+json", "entitytype", "json" },
-                    new[] { "  application /  vnd.com-pany.some+entity!.v2+js.#$&^_n  ; q=\"0.3+1\"", "vnd.com-pany.some+entity!.v2", "js.#$&^_n" },
+                    new[]
+                    {
+                        "  application /  vnd.com-pany.some+entity!.v2+js.#$&^_n  ; q=\"0.3+1\"",
+                        "vnd.com-pany.some+entity!.v2",
+                        "js.#$&^_n"
+                    },
                 };
             }
         }
@@ -46,13 +51,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void Constructor_CanParseSuffixedMediaTypes(
             string mediaType,
             string expectedSubTypeWithoutSuffix,
-            string expectedSubtypeSuffix)
-        {
+            string expectedSubtypeSuffix
+        ) {
             // Arrange & Act
             var result = new MediaType(mediaType);
 
             // Assert
-            Assert.Equal(new StringSegment(expectedSubTypeWithoutSuffix), result.SubTypeWithoutSuffix);
+            Assert.Equal(
+                new StringSegment(expectedSubTypeWithoutSuffix),
+                result.SubTypeWithoutSuffix
+            );
             Assert.Equal(new StringSegment(expectedSubtypeSuffix), result.SubTypeSuffix);
         }
 
@@ -117,14 +125,20 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void Constructor_NegativeOffset_Throws(int offset)
         {
             // Arrange, Act and Assert
-            Assert.Throws<ArgumentOutOfRangeException>("offset", () => new MediaType("media", offset, 5));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => new MediaType("media", offset, 5)
+            );
         }
 
         [Fact]
         public void Constructor_NegativeLength_Throws()
         {
             // Arrange, Act and Assert
-            Assert.Throws<ArgumentOutOfRangeException>("length", () => new MediaType("media", 0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => new MediaType("media", 0, -1)
+            );
         }
 
         [Fact]
@@ -203,8 +217,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/json;q=0.8", "application/json;q=0.9")]
         [InlineData("application/json;q=0.8;charset=utf-7", "application/json;charset=utf-8;q=0.9")]
         [InlineData("application/json", "application/json;format=indent;charset=utf-8")]
-        [InlineData("application/json;format=indent;charset=utf-8", "application/json;format=indent;charset=utf-8")]
-        [InlineData("application/json;charset=utf-8;format=indent", "application/json;format=indent;charset=utf-8")]
+        [InlineData(
+            "application/json;format=indent;charset=utf-8",
+            "application/json;format=indent;charset=utf-8"
+        )]
+        [InlineData(
+            "application/json;charset=utf-8;format=indent",
+            "application/json;format=indent;charset=utf-8"
+        )]
         [InlineData("application/*", "application/json")]
         [InlineData("application/*", "application/entitytype+json;v=2")]
         [InlineData("application/*;v=2", "application/entitytype+json;v=2")]
@@ -232,7 +252,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [Theory]
         [InlineData("application/json;charset=utf-8", "application/json")]
         [InlineData("application/json;format=indent;charset=utf-8", "application/json")]
-        [InlineData("application/json;format=indent;charset=utf-8", "application/json;charset=utf-8")]
+        [InlineData(
+            "application/json;format=indent;charset=utf-8",
+            "application/json;charset=utf-8"
+        )]
         [InlineData("application/*", "text/json")]
         [InlineData("application/*;v=2", "application/json")]
         [InlineData("application/*;v=2", "application/json;v=1")]
@@ -322,8 +345,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("text/*+*", true)]
         [InlineData("text/json+suffix", false)]
         [InlineData("*/json+*", false)]
-        public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(string value, bool expectedReturnValue)
-        {
+        public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(
+            string value,
+            bool expectedReturnValue
+        ) {
             // Arrange
             var mediaType = new MediaType(value);
 

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_ActionCounts_RenameOnly()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class Class1[||]
     {
@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_AvailableBeforeHeader()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     [||]
     class Class1
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_AvailableBeforeAttributeOnHeader()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     [||][X]
     class Class1
@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_AvailableOnHeaderIncludingWhitespaceAndAttribute()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {[|
     [X]
     class Class1
@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_AvailableAfterHeader()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class Class1
     [||]{
@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_AvailableIncludingDocumentationCommentAndHeader()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     [|/// <summary>
     /// Documentation comment.
@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoveType_AvailableIncludingDocumentationCommentAndAttributeAndHeader()
         {
             var code =
-@"using System;
+                @"using System;
 namespace N1
 {
     [|/// <summary>
@@ -120,7 +120,7 @@ namespace N1
         public async Task MoveType_NotAvailableBeforeType()
         {
             var code =
-@"[|namespace N1
+                @"[|namespace N1
 {|]
     class Class1
     {
@@ -133,7 +133,7 @@ namespace N1
         public async Task MoveType_NotAvailableInsideType()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class Class1
     {[|
@@ -149,7 +149,7 @@ namespace N1
         public async Task MoveType_NotAvailableAfterType()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class Class1
     {
@@ -169,7 +169,7 @@ namespace N1
         public async Task MoveType_NotAvailableAroundDocumentationCommentAboveHeader()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     [|/// <summary>
     /// Documentation comment.
@@ -185,7 +185,7 @@ namespace N1
         public async Task MoveType_NotAvailableAroundAttributeAboveHeader()
         {
             var code =
-@"using System;
+                @"using System;
 namespace N1
 {
     [|[Obsolete]|]
@@ -200,7 +200,7 @@ namespace N1
         public async Task MoveType_NotAvailableAroundDocumentationCommentAndAttributeAboveHeader()
         {
             var code =
-@"using System;
+                @"using System;
 namespace N1
 {
     [|/// <summary>
@@ -218,7 +218,7 @@ namespace N1
         public async Task MoveType_NotAvailableInsideDocumentationCommentAndAttributeAboveHeader()
         {
             var code =
-@"using System;
+                @"using System;
 namespace N1
 {
     /// <summary>
@@ -236,7 +236,7 @@ namespace N1
         public async Task MoveType_ActionCounts_MoveOnly()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class Class1[||]
     {
@@ -254,7 +254,7 @@ namespace N1
         public async Task MoveType_ActionCounts_RenameAndMove()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class Class1[||]
     {
@@ -272,7 +272,7 @@ namespace N1
         public async Task MoveType_ActionCounts_All()
         {
             var code =
-@"namespace N1
+                @"namespace N1
 {
     class OuterType
     {

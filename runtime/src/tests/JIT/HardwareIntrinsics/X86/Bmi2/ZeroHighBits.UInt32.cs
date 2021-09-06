@@ -131,11 +131,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi2).GetMethod(nameof(Bmi2.ZeroHighBits), new Type[] { typeof(UInt32), typeof(UInt32) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data2))
-                                     });
+            var result = typeof(Bmi2).GetMethod(
+                    nameof(Bmi2.ZeroHighBits),
+                    new Type[] { typeof(UInt32), typeof(UInt32) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt32)result);
         }
@@ -144,10 +151,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Bmi2.ZeroHighBits(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Bmi2.ZeroHighBits(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,15 +224,22 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt32 left, UInt32 right, UInt32 result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt32 left,
+            UInt32 right,
+            UInt32 result,
+            [CallerMemberName] string method = ""
+        ) {
             var isUnexpectedResult = false;
 
-            uint expectedResult = 0xFFFF; isUnexpectedResult = (expectedResult != result);
+            uint expectedResult = 0xFFFF;
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi2)}.{nameof(Bmi2.ZeroHighBits)}<UInt32>(UInt32, UInt32): ZeroHighBits failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi2)}.{nameof(Bmi2.ZeroHighBits)}<UInt32>(UInt32, UInt32): ZeroHighBits failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

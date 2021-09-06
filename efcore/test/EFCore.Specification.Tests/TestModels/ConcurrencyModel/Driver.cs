@@ -10,9 +10,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
         private readonly ILazyLoader _loader;
         private Team _team;
 
-        public Driver()
-        {
-        }
+        public Driver() { }
 
         protected Driver(
             ILazyLoader loader,
@@ -25,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             int podiums,
             int poles,
             int fastestLaps,
-            int teamId)
-        {
+            int teamId
+        ) {
             _loader = loader;
 
             Id = id;

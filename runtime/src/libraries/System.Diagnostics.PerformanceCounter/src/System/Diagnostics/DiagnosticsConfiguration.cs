@@ -60,13 +60,20 @@ namespace System.Diagnostics
 
         private static SystemDiagnosticsSection GetConfigSection()
         {
-            SystemDiagnosticsSection configSection = (SystemDiagnosticsSection)ConfigurationManager.GetSection("system.diagnostics");
+            SystemDiagnosticsSection configSection =
+                (SystemDiagnosticsSection)ConfigurationManager.GetSection("system.diagnostics");
             return configSection;
         }
 
         internal static bool CanInitialize()
         {
-            bool setConfigurationSystemInProgress = (bool)(typeof(ConfigurationManager).GetProperty("SetConfigurationSystemInProgress", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null));
+            bool setConfigurationSystemInProgress = (bool)(
+                typeof(ConfigurationManager).GetProperty(
+                        "SetConfigurationSystemInProgress",
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )
+                    .GetValue(null)
+            );
             return (s_initState != InitState.Initializing) && !setConfigurationSystemInProgress;
         }
 
@@ -83,7 +90,13 @@ namespace System.Diagnostics
                 // because some of the code used to load config also uses diagnostics
                 // we can't block them while we initialize from config. Therefore we just
                 // return immediately and they just use the default values.
-                bool setConfigurationSystemInProgress = (bool)(typeof(ConfigurationManager).GetProperty("SetConfigurationSystemInProgress", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null));
+                bool setConfigurationSystemInProgress = (bool)(
+                    typeof(ConfigurationManager).GetProperty(
+                            "SetConfigurationSystemInProgress",
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        .GetValue(null)
+                );
                 if (s_initState != InitState.NotInitialized || setConfigurationSystemInProgress)
                 {
                     return;
@@ -94,6 +107,7 @@ namespace System.Diagnostics
                 {
                     s_configSection = GetConfigSection();
                 }
+
                 finally
                 {
                     s_initState = InitState.Initialized;

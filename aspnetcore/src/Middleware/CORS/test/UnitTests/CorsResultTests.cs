@@ -30,15 +30,18 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             var result = new CorsResult();
 
             // Act
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                result.PreflightMaxAge = TimeSpan.FromSeconds(-1);
-            });
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    result.PreflightMaxAge = TimeSpan.FromSeconds(-1);
+                }
+            );
 
             // Assert
             Assert.Equal(
                 $"PreflightMaxAge must be greater than or equal to 0. (Parameter 'value')",
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -61,9 +64,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
 
             // Assert
             Assert.Equal(
-                @"AllowCredentials: True, PreflightMaxAge: 30, AllowOrigin: *," +
-                " AllowExposedHeaders: {foo}, AllowHeaders: {bar,baz}, AllowMethods: {GET}",
-                result);
+                @"AllowCredentials: True, PreflightMaxAge: 30, AllowOrigin: *,"
+                    + " AllowExposedHeaders: {foo}, AllowHeaders: {bar,baz}, AllowMethods: {GET}",
+                result
+            );
         }
     }
 }

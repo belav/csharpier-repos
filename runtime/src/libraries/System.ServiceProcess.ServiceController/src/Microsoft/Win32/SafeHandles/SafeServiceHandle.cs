@@ -18,7 +18,11 @@ namespace Microsoft.Win32.SafeHandles
 
         public override bool IsInvalid
         {
-            get { return DangerousGetHandle() == IntPtr.Zero || DangerousGetHandle() == new IntPtr(-1); }
+            get
+            {
+                return DangerousGetHandle() == IntPtr.Zero
+                    || DangerousGetHandle() == new IntPtr(-1);
+            }
         }
 
         protected override bool ReleaseHandle()

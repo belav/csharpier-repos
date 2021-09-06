@@ -27,15 +27,19 @@ namespace Microsoft.AspNetCore.Routing.Internal
             // Arrange
             var graphWriter = CreateGraphWriter();
             var writer = new StringWriter();
-            var endpointsDataSource = new DefaultEndpointDataSource(new Endpoint((context) => null, EndpointMetadataCollection.Empty, string.Empty));
+            var endpointsDataSource = new DefaultEndpointDataSource(
+                new Endpoint((context) => null, EndpointMetadataCollection.Empty, string.Empty)
+            );
 
             // Act
             graphWriter.Write(endpointsDataSource, writer);
 
             // Assert
-            Assert.Equal(String.Join(Environment.NewLine, @"digraph DFA {",
-@"0 [label=""/""]",
-"}") + Environment.NewLine, writer.ToString());
+            Assert.Equal(
+                String.Join(Environment.NewLine, @"digraph DFA {", @"0 [label=""/""]", "}")
+                    + Environment.NewLine,
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -50,15 +54,19 @@ namespace Microsoft.AspNetCore.Routing.Internal
                     RoutePatternFactory.Parse("/"),
                     0,
                     new EndpointMetadataCollection(new SuppressMatchingMetadata()),
-                    string.Empty));
+                    string.Empty
+                )
+            );
 
             // Act
             graphWriter.Write(endpointsDataSource, writer);
 
             // Assert
-            Assert.Equal(String.Join(Environment.NewLine, @"digraph DFA {",
-@"0 [label=""/""]",
-@"}") + Environment.NewLine, writer.ToString());
+            Assert.Equal(
+                String.Join(Environment.NewLine, @"digraph DFA {", @"0 [label=""/""]", @"}")
+                    + Environment.NewLine,
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -73,20 +81,28 @@ namespace Microsoft.AspNetCore.Routing.Internal
                     RoutePatternFactory.Parse("/"),
                     0,
                     new EndpointMetadataCollection(new HttpMethodMetadata(new[] { "GET" })),
-                    string.Empty));
+                    string.Empty
+                )
+            );
 
             // Act
             graphWriter.Write(endpointsDataSource, writer);
 
             // Assert
             var sdf = writer.ToString();
-            Assert.Equal(String.Join(Environment.NewLine, @"digraph DFA {",
-@"0 [label=""/ HTTP: GET""]",
-@"1 [label=""/ HTTP: *""]",
-@"2 -> 0 [label=""HTTP: GET""]",
-@"2 -> 1 [label=""HTTP: *""]",
-@"2 [label=""/""]",
-@"}") + Environment.NewLine, sdf);
+            Assert.Equal(
+                String.Join(
+                    Environment.NewLine,
+                    @"digraph DFA {",
+                    @"0 [label=""/ HTTP: GET""]",
+                    @"1 [label=""/ HTTP: *""]",
+                    @"2 -> 0 [label=""HTTP: GET""]",
+                    @"2 -> 1 [label=""HTTP: *""]",
+                    @"2 [label=""/""]",
+                    @"}"
+                ) + Environment.NewLine,
+                sdf
+            );
         }
     }
 }

@@ -20,11 +20,17 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqlitePolygonMemberTranslator : IMemberTranslator
     {
-        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName
-            = new Dictionary<MemberInfo, string>
+        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName =
+            new Dictionary<MemberInfo, string>
             {
-                { typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.ExteriorRing)), "ExteriorRing" },
-                { typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.NumInteriorRings)), "NumInteriorRing" }
+                {
+                    typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.ExteriorRing)),
+                    "ExteriorRing"
+                },
+                {
+                    typeof(Polygon).GetRequiredRuntimeProperty(nameof(Polygon.NumInteriorRings)),
+                    "NumInteriorRing"
+                }
             };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -50,19 +56,20 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
             return _memberToFunctionName.TryGetValue(member, out var functionName)
                 ? _sqlExpressionFactory.Function(
-                    functionName,
-                    new[] { instance! },
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { true },
-                    returnType)
+                      functionName,
+                      new[] { instance! },
+                      nullable: true,
+                      argumentsPropagateNullability: new[] { true },
+                      returnType
+                  )
                 : null;
         }
     }

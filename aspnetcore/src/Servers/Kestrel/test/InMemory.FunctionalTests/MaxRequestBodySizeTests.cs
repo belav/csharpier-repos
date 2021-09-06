@@ -26,18 +26,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             BadHttpRequestException requestRejectedEx = null;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            await using (var server = new TestServer(async context =>
-            {
-                Assert.True(context.Request.CanHaveBody());
-                var buffer = new byte[1];
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        Assert.True(context.Request.CanHaveBody());
+                        var buffer = new byte[1];
 #pragma warning disable CS0618 // Type or member is obsolete
-                requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
+                        requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                    async () => await context.Request.Body.ReadAsync(buffer, 0, 1));
-                throw requestRejectedEx;
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = globalMaxRequestBodySize } } }))
-            {
+                            async () => await context.Request.Body.ReadAsync(buffer, 0, 1)
+                        );
+                        throw requestRejectedEx;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions =
+                        {
+                            Limits = { MaxRequestBodySize = globalMaxRequestBodySize }
+                        }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -45,14 +55,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Content-Length: " + (globalMaxRequestBodySize + 1),
                         "",
-                        "");
+                        ""
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 413 Payload Too Large",
                         "Connection: close",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
@@ -71,23 +83,33 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             BadHttpRequestException requestRejectedEx = null;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            await using (var server = new TestServer(async context =>
-            {
-                var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(globalMaxRequestBodySize, feature.MaxRequestBodySize);
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                        Assert.Equal(globalMaxRequestBodySize, feature.MaxRequestBodySize);
 
-                // Disable the MaxRequestBodySize prior to calling Request.Body.ReadAsync();
-                feature.MaxRequestBodySize = perRequestMaxRequestBodySize;
+                        // Disable the MaxRequestBodySize prior to calling Request.Body.ReadAsync();
+                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize;
 
-                var buffer = new byte[1];
+                        var buffer = new byte[1];
 #pragma warning disable CS0618 // Type or member is obsolete
-                requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
+                        requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                    async () => await context.Request.Body.ReadAsync(buffer, 0, 1));
-                throw requestRejectedEx;
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = globalMaxRequestBodySize } } }))
-            {
+                            async () => await context.Request.Body.ReadAsync(buffer, 0, 1)
+                        );
+                        throw requestRejectedEx;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions =
+                        {
+                            Limits = { MaxRequestBodySize = globalMaxRequestBodySize }
+                        }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -95,14 +117,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Content-Length: " + (perRequestMaxRequestBodySize + 1),
                         "",
-                        "");
+                        ""
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 413 Payload Too Large",
                         "Connection: close",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
@@ -113,39 +137,41 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [Fact]
         public async Task DoesNotRejectRequestWithContentLengthHeaderExceedingGlobalLimitIfLimitDisabledPerRequest()
         {
-            await using (var server = new TestServer(async context =>
-            {
-                var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(0, feature.MaxRequestBodySize);
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                        Assert.Equal(0, feature.MaxRequestBodySize);
 
-                // Disable the MaxRequestBodySize prior to calling Request.Body.ReadAsync();
-                feature.MaxRequestBodySize = null;
+                        // Disable the MaxRequestBodySize prior to calling Request.Body.ReadAsync();
+                        feature.MaxRequestBodySize = null;
 
-                var buffer = new byte[1];
+                        var buffer = new byte[1];
 
-                Assert.Equal(1, await context.Request.Body.ReadAsync(buffer, 0, 1));
-                Assert.Equal(buffer[0], (byte)'A');
-                Assert.Equal(0, await context.Request.Body.ReadAsync(buffer, 0, 1));
+                        Assert.Equal(1, await context.Request.Body.ReadAsync(buffer, 0, 1));
+                        Assert.Equal(buffer[0], (byte)'A');
+                        Assert.Equal(0, await context.Request.Body.ReadAsync(buffer, 0, 1));
 
-                context.Response.ContentLength = 1;
-                await context.Response.Body.WriteAsync(buffer, 0, 1);
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = 0 } } }))
-            {
+                        context.Response.ContentLength = 1;
+                        await context.Response.Body.WriteAsync(buffer, 0, 1);
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.Send(
-                        "POST / HTTP/1.1",
-                        "Host:",
-                        "Content-Length: 1",
-                        "",
-                        "A");
+                    await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "A");
                     await connection.Receive(
                         "HTTP/1.1 200 OK",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 1",
                         "",
-                        "A");
+                        "A"
+                    );
                 }
             }
         }
@@ -153,9 +179,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [Fact]
         public async Task DoesNotRejectBodylessGetRequestWithZeroMaxRequestBodySize()
         {
-            await using (var server = new TestServer(context => context.Request.Body.CopyToAsync(Stream.Null),
-                new TestServiceContext { ServerOptions = { Limits = { MaxRequestBodySize = 0 } } }))
-            {
+            await using (
+                var server = new TestServer(
+                    context => context.Request.Body.CopyToAsync(Stream.Null),
+                    new TestServiceContext
+                    {
+                        ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -166,7 +198,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Content-Length: 1",
                         "",
-                        "");
+                        ""
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 200 OK",
                         $"Date: {server.Context.DateHeaderValue}",
@@ -177,7 +210,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -190,20 +224,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var payload = new string('A', payloadSize);
             InvalidOperationException invalidOpEx = null;
 
-            await using (var server = new TestServer(async context =>
-            {
-                var buffer = new byte[1];
-                Assert.Equal(1, await context.Request.Body.ReadAsync(buffer, 0, 1));
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var buffer = new byte[1];
+                        Assert.Equal(1, await context.Request.Body.ReadAsync(buffer, 0, 1));
 
-                var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(new KestrelServerLimits().MaxRequestBodySize, feature.MaxRequestBodySize);
-                Assert.True(feature.IsReadOnly);
+                        var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                        Assert.Equal(
+                            new KestrelServerLimits().MaxRequestBodySize,
+                            feature.MaxRequestBodySize
+                        );
+                        Assert.True(feature.IsReadOnly);
 
-                invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                    feature.MaxRequestBodySize = perRequestMaxRequestBodySize);
-                throw invalidOpEx;
-            }, new TestServiceContext(LoggerFactory)))
-            {
+                        invalidOpEx = Assert.Throws<InvalidOperationException>(
+                            () => feature.MaxRequestBodySize = perRequestMaxRequestBodySize
+                        );
+                        throw invalidOpEx;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -211,18 +253,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Content-Length: " + payloadSize,
                         "",
-                        payload);
+                        payload
+                    );
                     await connection.Receive(
                         "HTTP/1.1 500 Internal Server Error",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
             Assert.NotNull(invalidOpEx);
-            Assert.Equal(CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead, invalidOpEx.Message);
+            Assert.Equal(
+                CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead,
+                invalidOpEx.Message
+            );
         }
 
         [Fact]
@@ -230,38 +277,47 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         {
             InvalidOperationException invalidOpEx = null;
 
-            await using (var server = new TestServer(async context =>
-            {
-                var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
-                var stream = await upgradeFeature.UpgradeAsync();
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
+                        var stream = await upgradeFeature.UpgradeAsync();
 
-                var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(new KestrelServerLimits().MaxRequestBodySize, feature.MaxRequestBodySize);
-                Assert.True(feature.IsReadOnly);
+                        var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                        Assert.Equal(
+                            new KestrelServerLimits().MaxRequestBodySize,
+                            feature.MaxRequestBodySize
+                        );
+                        Assert.True(feature.IsReadOnly);
 
-                invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                    feature.MaxRequestBodySize = 0x10);
-                throw invalidOpEx;
-            }, new TestServiceContext(LoggerFactory)))
-            {
+                        invalidOpEx = Assert.Throws<InvalidOperationException>(
+                            () => feature.MaxRequestBodySize = 0x10
+                        );
+                        throw invalidOpEx;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.Send("GET / HTTP/1.1",
-                        "Host:",
-                        "Connection: Upgrade",
-                        "",
-                        "");
-                    await connection.Receive("HTTP/1.1 101 Switching Protocols",
+                    await connection.Send("GET / HTTP/1.1", "Host:", "Connection: Upgrade", "", "");
+                    await connection.Receive(
+                        "HTTP/1.1 101 Switching Protocols",
                         "Connection: Upgrade",
                         $"Date: {server.Context.DateHeaderValue}",
                         "",
-                        "");
+                        ""
+                    );
                     await connection.ReceiveEnd();
                 }
             }
 
             Assert.NotNull(invalidOpEx);
-            Assert.Equal(CoreStrings.MaxRequestBodySizeCannotBeModifiedForUpgradedRequests, invalidOpEx.Message);
+            Assert.Equal(
+                CoreStrings.MaxRequestBodySizeCannotBeModifiedForUpgradedRequests,
+                invalidOpEx.Message
+            );
         }
 
         [Fact]
@@ -272,19 +328,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             BadHttpRequestException requestRejectedEx2 = null;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            await using (var server = new TestServer(async context =>
-            {
-                var buffer = new byte[1];
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var buffer = new byte[1];
 #pragma warning disable CS0618 // Type or member is obsolete
-                requestRejectedEx1 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () => await context.Request.Body.ReadAsync(buffer, 0, 1));
-                requestRejectedEx2 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () => await context.Request.Body.ReadAsync(buffer, 0, 1));
+                        requestRejectedEx1 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                            async () => await context.Request.Body.ReadAsync(buffer, 0, 1)
+                        );
+                        requestRejectedEx2 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                            async () => await context.Request.Body.ReadAsync(buffer, 0, 1)
+                        );
 #pragma warning restore CS0618 // Type or member is obsolete
-                throw requestRejectedEx2;
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = 0 } } }))
-            {
+                        throw requestRejectedEx2;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -292,14 +356,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Content-Length: " + (new KestrelServerLimits().MaxRequestBodySize + 1),
                         "",
-                        "");
+                        ""
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 413 Payload Too Large",
                         "Connection: close",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
@@ -318,24 +384,35 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             BadHttpRequestException requestRejectedEx = null;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            await using (var server = new TestServer(async context =>
-            {
-                var buffer = new byte[11];
-#pragma warning disable CS0618 // Type or member is obsolete
-                requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
-#pragma warning restore CS0618 // Type or member is obsolete
-                {
-                    var count = 0;
-                    do
+            await using (
+                var server = new TestServer(
+                    async context =>
                     {
-                        count = await context.Request.Body.ReadAsync(buffer, 0, 11);
-                    } while (count != 0);
-                });
+                        var buffer = new byte[11];
+#pragma warning disable CS0618 // Type or member is obsolete
+                        requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
+                            async () =>
+#pragma warning restore CS0618 // Type or member is obsolete
+                            {
+                                var count = 0;
+                                do
+                                {
+                                    count = await context.Request.Body.ReadAsync(buffer, 0, 11);
+                                } while (count != 0);
+                            }
+                        );
 
-                throw requestRejectedEx;
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = globalMaxRequestBodySize } } }))
-            {
+                        throw requestRejectedEx;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions =
+                        {
+                            Limits = { MaxRequestBodySize = globalMaxRequestBodySize }
+                        }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -343,14 +420,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Transfer-Encoding: chunked",
                         "",
-                        chunkedPayload);
+                        chunkedPayload
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 413 Payload Too Large",
                         "Connection: close",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
@@ -365,23 +444,39 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var trailingHeaders = "Trailing-Header: trailing-value\r\n\r\n";
             var globalMaxRequestBodySize = chunkedPayload.Length;
 
-            await using (var server = new TestServer(async context =>
-            {
-                var offset = 0;
-                var count = 0;
-                var buffer = new byte[11];
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var offset = 0;
+                        var count = 0;
+                        var buffer = new byte[11];
 
-                do
-                {
-                    count = await context.Request.Body.ReadAsync(buffer, offset, 11 - offset);
-                    offset += count;
-                } while (count != 0);
+                        do
+                        {
+                            count = await context.Request.Body.ReadAsync(
+                                buffer,
+                                offset,
+                                11 - offset
+                            );
+                            offset += count;
+                        } while (count != 0);
 
-                Assert.Equal("Hello World", Encoding.ASCII.GetString(buffer));
-                Assert.Equal("trailing-value", context.Request.GetTrailer("Trailing-Header").ToString());
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = globalMaxRequestBodySize } } }))
-            {
+                        Assert.Equal("Hello World", Encoding.ASCII.GetString(buffer));
+                        Assert.Equal(
+                            "trailing-value",
+                            context.Request.GetTrailer("Trailing-Header").ToString()
+                        );
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions =
+                        {
+                            Limits = { MaxRequestBodySize = globalMaxRequestBodySize }
+                        }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -389,13 +484,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Transfer-Encoding: chunked",
                         "",
-                        chunkedPayload + trailingHeaders);
+                        chunkedPayload + trailingHeaders
+                    );
                     await connection.Receive(
                         "HTTP/1.1 200 OK",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -410,41 +507,52 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             BadHttpRequestException requestRejectedEx = null;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            await using (var server = new TestServer(async context =>
-            {
-                var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(globalMaxRequestBodySize, feature.MaxRequestBodySize);
-
-                var buffer = new byte[11];
-                var count = 0;
-
-                if (firstRequest)
-                {
-                    firstRequest = false;
-                    feature.MaxRequestBodySize = chunkedPayload.Length;
-
-                    do
+            await using (
+                var server = new TestServer(
+                    async context =>
                     {
-                        count = await context.Request.Body.ReadAsync(buffer, 0, 11);
-                    } while (count != 0);
-                }
-                else
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
-#pragma warning restore CS0618 // Type or member is obsolete
-                    {
-                        do
+                        var feature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                        Assert.Equal(globalMaxRequestBodySize, feature.MaxRequestBodySize);
+
+                        var buffer = new byte[11];
+                        var count = 0;
+
+                        if (firstRequest)
                         {
-                            count = await context.Request.Body.ReadAsync(buffer, 0, 11);
-                        } while (count != 0);
-                    });
+                            firstRequest = false;
+                            feature.MaxRequestBodySize = chunkedPayload.Length;
 
-                    throw requestRejectedEx;
-                }
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = globalMaxRequestBodySize } } }))
-            {
+                            do
+                            {
+                                count = await context.Request.Body.ReadAsync(buffer, 0, 11);
+                            } while (count != 0);
+                        }
+                        else
+                        {
+#pragma warning disable CS0618 // Type or member is obsolete
+                            requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
+                                async () =>
+#pragma warning restore CS0618 // Type or member is obsolete
+                                {
+                                    do
+                                    {
+                                        count = await context.Request.Body.ReadAsync(buffer, 0, 11);
+                                    } while (count != 0);
+                                }
+                            );
+
+                            throw requestRejectedEx;
+                        }
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions =
+                        {
+                            Limits = { MaxRequestBodySize = globalMaxRequestBodySize }
+                        }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -456,7 +564,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Transfer-Encoding: chunked",
                         "",
-                        chunkedPayload);
+                        chunkedPayload
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 200 OK",
                         $"Date: {server.Context.DateHeaderValue}",
@@ -467,7 +576,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
@@ -483,19 +593,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             BadHttpRequestException requestRejectedEx2 = null;
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            await using (var server = new TestServer(async context =>
-            {
-                var buffer = new byte[1];
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        var buffer = new byte[1];
 #pragma warning disable CS0618 // Type or member is obsolete
-                requestRejectedEx1 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () => await context.Request.Body.ReadAsync(buffer, 0, 1));
-                requestRejectedEx2 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () => await context.Request.Body.ReadAsync(buffer, 0, 1));
+                        requestRejectedEx1 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                            async () => await context.Request.Body.ReadAsync(buffer, 0, 1)
+                        );
+                        requestRejectedEx2 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                            async () => await context.Request.Body.ReadAsync(buffer, 0, 1)
+                        );
 #pragma warning restore CS0618 // Type or member is obsolete
-                throw requestRejectedEx2;
-            },
-            new TestServiceContext(LoggerFactory) { ServerOptions = { Limits = { MaxRequestBodySize = 0 } } }))
-            {
+                        throw requestRejectedEx2;
+                    },
+                    new TestServiceContext(LoggerFactory)
+                    {
+                        ServerOptions = { Limits = { MaxRequestBodySize = 0 } }
+                    }
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send(
@@ -503,14 +621,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Transfer-Encoding: chunked",
                         "",
-                        "1\r\n");
+                        "1\r\n"
+                    );
                     await connection.ReceiveEnd(
                         "HTTP/1.1 413 Payload Too Large",
                         "Connection: close",
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 route: new Mock<IRouter>().Object,
                 routeKey: "controller",
                 values: values,
-                routeDirection: RouteDirection.IncomingRequest);
+                routeDirection: RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.True(match);
@@ -40,11 +41,12 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             var values = new RouteValueDictionary(new { controller = "home" });
 
             var match = constraint.Match(
-              new DefaultHttpContext(),
-              route: new Mock<IRouter>().Object,
-              routeKey: "controller",
-              values: values,
-              routeDirection: RouteDirection.UrlGeneration);
+                new DefaultHttpContext(),
+                route: new Mock<IRouter>().Object,
+                routeKey: "controller",
+                values: values,
+                routeDirection: RouteDirection.UrlGeneration
+            );
 
             // Assert
             Assert.True(match);
@@ -64,7 +66,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 route: new Mock<IRouter>().Object,
                 routeKey: "controller",
                 values: values,
-                routeDirection: RouteDirection.IncomingRequest);
+                routeDirection: RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(match);
@@ -84,7 +87,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 route: new Mock<IRouter>().Object,
                 routeKey: "controller",
                 values: values,
-                routeDirection: RouteDirection.UrlGeneration);
+                routeDirection: RouteDirection.UrlGeneration
+            );
 
             // Assert
             Assert.False(match);
@@ -104,7 +108,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 route: new Mock<IRouter>().Object,
                 routeKey: "action",
                 values: values,
-                routeDirection: RouteDirection.IncomingRequest);
+                routeDirection: RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(match);
@@ -124,7 +129,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 route: new Mock<IRouter>().Object,
                 routeKey: "action",
                 values: values,
-                routeDirection: RouteDirection.UrlGeneration);
+                routeDirection: RouteDirection.UrlGeneration
+            );
 
             // Assert
             Assert.False(match);
@@ -135,8 +141,11 @@ namespace Microsoft.AspNetCore.Routing.Constraints
         [InlineData("User.Admin", "User.Admin", true)]
         [InlineData(@"User\Admin", "User\\Admin", true)]
         [InlineData(null, "user", false)]
-        public void StringRouteConstraintEscapingCaseSensitiveAndRouteNullTest(string routeValue, string constraintValue, bool expected)
-        {
+        public void StringRouteConstraintEscapingCaseSensitiveAndRouteNullTest(
+            string routeValue,
+            string constraintValue,
+            bool expected
+        ) {
             // Arrange
             var constraint = new StringRouteConstraint(constraintValue);
 
@@ -148,7 +157,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 route: new Mock<IRouter>().Object,
                 routeKey: "controller",
                 values: values,
-                routeDirection: RouteDirection.IncomingRequest);
+                routeDirection: RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.Equal(expected, match);

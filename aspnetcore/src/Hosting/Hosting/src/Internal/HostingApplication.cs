@@ -24,10 +24,14 @@ namespace Microsoft.AspNetCore.Hosting
             ILogger logger,
             DiagnosticListener diagnosticSource,
             ActivitySource activitySource,
-            IHttpContextFactory httpContextFactory)
-        {
+            IHttpContextFactory httpContextFactory
+        ) {
             _application = application;
-            _diagnostics = new HostingApplicationDiagnostics(logger, diagnosticSource, activitySource);
+            _diagnostics = new HostingApplicationDiagnostics(
+                logger,
+                diagnosticSource,
+                activitySource
+            );
             if (httpContextFactory is DefaultHttpContextFactory factory)
             {
                 _defaultHttpContextFactory = factory;
@@ -116,7 +120,6 @@ namespace Microsoft.AspNetCore.Hosting
             // Reset the context as it may be pooled
             context.Reset();
         }
-
 
         internal class Context
         {

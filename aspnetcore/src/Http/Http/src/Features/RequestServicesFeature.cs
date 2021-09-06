@@ -43,7 +43,6 @@ namespace Microsoft.AspNetCore.Http.Features
                 }
                 return _requestServices!;
             }
-
             set
             {
                 _requestServices = value;

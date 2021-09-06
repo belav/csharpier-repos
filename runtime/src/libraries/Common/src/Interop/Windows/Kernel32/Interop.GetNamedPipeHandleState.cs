@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [DllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
+        [DllImport(
+            Libraries.Kernel32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
         internal static extern unsafe bool GetNamedPipeHandleStateW(
             SafePipeHandle hNamedPipe,
             uint* lpState,
@@ -16,6 +21,7 @@ internal static partial class Interop
             uint* lpMaxCollectionCount,
             uint* lpCollectDataTimeout,
             char* lpUserName,
-            uint nMaxUserNameSize);
+            uint nMaxUserNameSize
+        );
     }
 }

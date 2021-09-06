@@ -17,7 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _stringToUtf8Converter.ConvertToProviderExpression.Compile();
 
-            Assert.Equal(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }, converter("Spın̈al Tap"));
+            Assert.Equal(
+                new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 },
+                converter("Spın̈al Tap")
+            );
             Assert.Equal(Array.Empty<byte>(), converter(""));
             Assert.Null(converter(null));
         }
@@ -27,7 +30,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _stringToUtf8Converter.ConvertFromProviderExpression.Compile();
 
-            Assert.Equal("Spın̈al Tap", converter(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 }));
+            Assert.Equal(
+                "Spın̈al Tap",
+                converter(new byte[] { 83, 112, 196, 177, 110, 204, 136, 97, 108, 32, 84, 97, 112 })
+            );
             Assert.Equal("", converter(Array.Empty<byte>()));
             Assert.Null(converter(null));
         }

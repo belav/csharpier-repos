@@ -19,7 +19,11 @@ namespace System.Net.Connections
         public override bool CanSeek => false;
         public override bool CanWrite => true;
         public override long Length => throw new NotSupportedException();
-        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
 
         public DuplexPipeStream(IDuplexPipe pipe)
         {
@@ -51,7 +55,8 @@ namespace System.Net.Connections
         public override async Task FlushAsync(CancellationToken cancellationToken)
         {
             FlushResult r = await _writer.FlushAsync(cancellationToken).ConfigureAwait(false);
-            if (r.IsCanceled) throw new OperationCanceledException(cancellationToken);
+            if (r.IsCanceled)
+                throw new OperationCanceledException(cancellationToken);
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -59,20 +64,24 @@ namespace System.Net.Connections
             ValidateBufferArguments(buffer, offset, count);
 
             ValueTask<int> t = ReadAsync(buffer.AsMemory(offset, count));
-            return
-                t.IsCompleted ? t.GetAwaiter().GetResult() :
-                t.AsTask().GetAwaiter().GetResult();
+            return t.IsCompleted ? t.GetAwaiter().GetResult() : t.AsTask().GetAwaiter().GetResult();
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
 
             return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             ReadResult result = await _reader.ReadAsync(cancellationToken).ConfigureAwait(false);
 
             if (result.IsCanceled)
@@ -90,7 +99,8 @@ namespace System.Net.Connections
                 {
                     int actual = (int)Math.Min(bufferLength, buffer.Length);
 
-                    ReadOnlySequence<byte> slice = actual == bufferLength ? sequence : sequence.Slice(0, actual);
+                    ReadOnlySequence<byte> slice =
+                        actual == bufferLength ? sequence : sequence.Slice(0, actual);
                     consumed = slice.End;
                     slice.CopyTo(buffer.Span);
 
@@ -102,6 +112,7 @@ namespace System.Net.Connections
                     return 0;
                 }
             }
+
             finally
             {
                 _reader.AdvanceTo(consumed);
@@ -112,8 +123,13 @@ namespace System.Net.Connections
             throw new InvalidOperationException(SR.net_connections_zero_byte_pipe_read);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -137,21 +153,34 @@ namespace System.Net.Connections
             WriteAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
 
             return WriteAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
-            FlushResult r = await _writer.WriteAsync(buffer, cancellationToken).ConfigureAwait(false);
-            if (r.IsCanceled) throw new OperationCanceledException(cancellationToken);
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
+            FlushResult r = await _writer.WriteAsync(buffer, cancellationToken)
+                .ConfigureAwait(false);
+            if (r.IsCanceled)
+                throw new OperationCanceledException(cancellationToken);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 
@@ -160,8 +189,11 @@ namespace System.Net.Connections
             TaskToApm.End(asyncResult);
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             ValidateCopyToArguments(destination, bufferSize);
 
             return _reader.CopyToAsync(destination, cancellationToken);

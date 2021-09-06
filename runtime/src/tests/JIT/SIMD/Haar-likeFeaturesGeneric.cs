@@ -8,8 +8,8 @@ namespace VectorMathTests
 {
     class Program
     {
-		const float EPS = Single.Epsilon * 5;
-		
+        const float EPS = Single.Epsilon * 5;
+
         static float NextFloat(Random random)
         {
             double mantissa = (random.NextDouble() * 2.0) - 1.0;
@@ -107,7 +107,6 @@ namespace VectorMathTests
             double[] res = new double[N];
             for (int i = 0; i < N; ++i)
             {
-
                 if (mask[i] == 0)
                 {
                     res[i] = 0;

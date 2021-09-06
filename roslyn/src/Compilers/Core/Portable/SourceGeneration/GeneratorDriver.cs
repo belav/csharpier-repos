@@ -37,33 +37,62 @@ namespace Microsoft.CodeAnalysis
 
         internal GeneratorDriver(GeneratorDriverState state)
         {
-            Debug.Assert(state.Generators.GroupBy(s => s.GetType()).Count() == state.Generators.Length); // ensure we don't have duplicate generator types
+            Debug.Assert(
+                state.Generators.GroupBy(s => s.GetType()).Count() == state.Generators.Length
+            ); // ensure we don't have duplicate generator types
             _state = state;
         }
 
-        internal GeneratorDriver(ParseOptions parseOptions, ImmutableArray<ISourceGenerator> generators, AnalyzerConfigOptionsProvider optionsProvider, ImmutableArray<AdditionalText> additionalTexts)
-        {
-            _state = new GeneratorDriverState(parseOptions, optionsProvider, generators, additionalTexts, ImmutableArray.Create(new GeneratorState[generators.Length]), ImmutableArray<PendingEdit>.Empty, editsFailed: true);
+        internal GeneratorDriver(
+            ParseOptions parseOptions,
+            ImmutableArray<ISourceGenerator> generators,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<AdditionalText> additionalTexts
+        ) {
+            _state = new GeneratorDriverState(
+                parseOptions,
+                optionsProvider,
+                generators,
+                additionalTexts,
+                ImmutableArray.Create(new GeneratorState[generators.Length]),
+                ImmutableArray<PendingEdit>.Empty,
+                editsFailed: true
+            );
         }
 
-        public GeneratorDriver RunGenerators(Compilation compilation, CancellationToken cancellationToken = default)
-        {
+        public GeneratorDriver RunGenerators(
+            Compilation compilation,
+            CancellationToken cancellationToken = default
+        ) {
             var state = RunGeneratorsCore(compilation, diagnosticsBag: null, cancellationToken); //don't directly collect diagnostics on this path
             return FromState(state);
         }
 
-        public GeneratorDriver RunGeneratorsAndUpdateCompilation(Compilation compilation, out Compilation outputCompilation, out ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken = default)
-        {
+        public GeneratorDriver RunGeneratorsAndUpdateCompilation(
+            Compilation compilation,
+            out Compilation outputCompilation,
+            out ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken = default
+        ) {
             var diagnosticsBag = DiagnosticBag.GetInstance();
             var state = RunGeneratorsCore(compilation, diagnosticsBag, cancellationToken);
 
-            // build the final state, and return 
+            // build the final state, and return
             diagnostics = diagnosticsBag.ToReadOnlyAndFree();
-            return BuildFinalCompilation(compilation, out outputCompilation, state, cancellationToken);
+            return BuildFinalCompilation(
+                compilation,
+                out outputCompilation,
+                state,
+                cancellationToken
+            );
         }
 
-        internal GeneratorDriver TryApplyEdits(Compilation compilation, out Compilation outputCompilation, out bool success, CancellationToken cancellationToken = default)
-        {
+        internal GeneratorDriver TryApplyEdits(
+            Compilation compilation,
+            out Compilation outputCompilation,
+            out bool success,
+            CancellationToken cancellationToken = default
+        ) {
             // if we can't apply any partial edits, just instantly return
             if (_state.EditsFailed || _state.Edits.Length == 0)
             {
@@ -89,13 +118,24 @@ namespace Microsoft.CodeAnalysis
             compilation = RemoveGeneratedSyntaxTrees(_state, compilation);
 
             success = true;
-            return BuildFinalCompilation(compilation, out outputCompilation, state, cancellationToken);
+            return BuildFinalCompilation(
+                compilation,
+                out outputCompilation,
+                state,
+                cancellationToken
+            );
         }
 
         public GeneratorDriver AddGenerators(ImmutableArray<ISourceGenerator> generators)
         {
             // set editsFailed true, as we won't be able to apply edits with a new generator
-            var newState = _state.With(generators: _state.Generators.AddRange(generators), generatorStates: _state.GeneratorStates.AddRange(new GeneratorState[generators.Length]), editsFailed: true);
+            var newState = _state.With(
+                generators: _state.Generators.AddRange(generators),
+                generatorStates: _state.GeneratorStates.AddRange(
+                    new GeneratorState[generators.Length]
+                ),
+                editsFailed: true
+            );
             return FromState(newState);
         }
 
@@ -118,30 +158,41 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriver AddAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts)
         {
-            var newState = _state.With(additionalTexts: _state.AdditionalTexts.AddRange(additionalTexts));
+            var newState = _state.With(
+                additionalTexts: _state.AdditionalTexts.AddRange(additionalTexts)
+            );
             return FromState(newState);
         }
 
         public GeneratorDriver RemoveAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts)
         {
-            var newState = _state.With(additionalTexts: _state.AdditionalTexts.RemoveRange(additionalTexts));
+            var newState = _state.With(
+                additionalTexts: _state.AdditionalTexts.RemoveRange(additionalTexts)
+            );
             return FromState(newState);
         }
 
         public GeneratorDriverRunResult GetRunResult()
         {
             var results = _state.Generators.ZipAsArray(
-                            _state.GeneratorStates,
-                            (generator, generatorState)
-                                => new GeneratorRunResult(generator,
-                                                          diagnostics: generatorState.Diagnostics,
-                                                          exception: generatorState.Exception,
-                                                          generatedSources: getGeneratorSources(generatorState)));
+                _state.GeneratorStates,
+                (generator, generatorState) =>
+                    new GeneratorRunResult(
+                        generator,
+                        diagnostics: generatorState.Diagnostics,
+                        exception: generatorState.Exception,
+                        generatedSources: getGeneratorSources(generatorState)
+                    )
+            );
             return new GeneratorDriverRunResult(results);
 
-            static ImmutableArray<GeneratedSourceResult> getGeneratorSources(GeneratorState generatorState)
-            {
-                ArrayBuilder<GeneratedSourceResult> sources = ArrayBuilder<GeneratedSourceResult>.GetInstance(generatorState.PostInitTrees.Length + generatorState.GeneratedTrees.Length);
+            static ImmutableArray<GeneratedSourceResult> getGeneratorSources(
+                GeneratorState generatorState
+            ) {
+                ArrayBuilder<GeneratedSourceResult> sources =
+                    ArrayBuilder<GeneratedSourceResult>.GetInstance(
+                        generatorState.PostInitTrees.Length + generatorState.GeneratedTrees.Length
+                    );
                 foreach (var tree in generatorState.PostInitTrees)
                 {
                     sources.Add(new GeneratedSourceResult(tree.Tree, tree.Text, tree.HintName));
@@ -154,8 +205,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal GeneratorDriverState RunGeneratorsCore(Compilation compilation, DiagnosticBag? diagnosticsBag, CancellationToken cancellationToken = default)
-        {
+        internal GeneratorDriverState RunGeneratorsCore(
+            Compilation compilation,
+            DiagnosticBag? diagnosticsBag,
+            CancellationToken cancellationToken = default
+        ) {
             // with no generators, there is no work to do
             if (_state.Generators.IsEmpty)
             {
@@ -166,7 +220,10 @@ namespace Microsoft.CodeAnalysis
             var state = StateWithPendingEditsApplied(_state);
             var stateBuilder = ArrayBuilder<GeneratorState>.GetInstance(state.Generators.Length);
             var constantSourcesBuilder = ArrayBuilder<SyntaxTree>.GetInstance();
-            var walkerBuilder = ArrayBuilder<GeneratorSyntaxWalker?>.GetInstance(state.Generators.Length, fillWithValue: null); // we know there is at max 1 per generator
+            var walkerBuilder = ArrayBuilder<GeneratorSyntaxWalker?>.GetInstance(
+                state.Generators.Length,
+                fillWithValue: null
+            ); // we know there is at max 1 per generator
             int receiverCount = 0;
 
             for (int i = 0; i < state.Generators.Length; i++)
@@ -183,19 +240,30 @@ namespace Microsoft.CodeAnalysis
                     {
                         generator.Initialize(context);
                     }
-                    catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                    catch (Exception e)
+                        when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                     {
                         ex = e;
                     }
                     generatorState = ex is null
-                                     ? new GeneratorState(context.InfoBuilder.ToImmutable())
-                                     : SetGeneratorException(MessageProvider, GeneratorState.Uninitialized, generator, ex, diagnosticsBag, isInit: true);
+                        ? new GeneratorState(context.InfoBuilder.ToImmutable())
+                        : SetGeneratorException(
+                              MessageProvider,
+                              GeneratorState.Uninitialized,
+                              generator,
+                              ex,
+                              diagnosticsBag,
+                              isInit: true
+                          );
 
                     // invoke the post init callback if requested
                     if (generatorState.Info.PostInitCallback is object)
                     {
                         var sourcesCollection = this.CreateSourcesCollection();
-                        var postContext = new GeneratorPostInitializationContext(sourcesCollection, cancellationToken);
+                        var postContext = new GeneratorPostInitializationContext(
+                            sourcesCollection,
+                            cancellationToken
+                        );
                         try
                         {
                             generatorState.Info.PostInitCallback(postContext);
@@ -206,14 +274,30 @@ namespace Microsoft.CodeAnalysis
                         }
 
                         generatorState = ex is null
-                                         ? new GeneratorState(generatorState.Info, ParseAdditionalSources(generator, sourcesCollection.ToImmutableAndFree(), cancellationToken))
-                                         : SetGeneratorException(MessageProvider, generatorState, generator, ex, diagnosticsBag, isInit: true);
+                            ? new GeneratorState(
+                                  generatorState.Info,
+                                  ParseAdditionalSources(
+                                      generator,
+                                      sourcesCollection.ToImmutableAndFree(),
+                                      cancellationToken
+                                  )
+                              )
+                            : SetGeneratorException(
+                                  MessageProvider,
+                                  generatorState,
+                                  generator,
+                                  ex,
+                                  diagnosticsBag,
+                                  isInit: true
+                              );
                     }
                 }
 
                 // create the syntax receiver if requested
-                if (generatorState.Info.SyntaxContextReceiverCreator is object && generatorState.Exception is null)
-                {
+                if (
+                    generatorState.Info.SyntaxContextReceiverCreator is object
+                    && generatorState.Exception is null
+                ) {
                     ISyntaxContextReceiver? rx = null;
                     try
                     {
@@ -221,7 +305,13 @@ namespace Microsoft.CodeAnalysis
                     }
                     catch (Exception e)
                     {
-                        generatorState = SetGeneratorException(MessageProvider, generatorState, generator, e, diagnosticsBag);
+                        generatorState = SetGeneratorException(
+                            MessageProvider,
+                            generatorState,
+                            generator,
+                            e,
+                            diagnosticsBag
+                        );
                     }
 
                     if (rx is object)
@@ -235,7 +325,9 @@ namespace Microsoft.CodeAnalysis
                 // record any constant sources
                 if (generatorState.Exception is null && generatorState.PostInitTrees.Length > 0)
                 {
-                    constantSourcesBuilder.AddRange(generatorState.PostInitTrees.Select(t => t.Tree));
+                    constantSourcesBuilder.AddRange(
+                        generatorState.PostInitTrees.Select(t => t.Tree)
+                    );
                 }
 
                 stateBuilder.Add(generatorState);
@@ -268,7 +360,13 @@ namespace Microsoft.CodeAnalysis
                             }
                             catch (Exception e)
                             {
-                                stateBuilder[i] = SetGeneratorException(MessageProvider, stateBuilder[i], state.Generators[i], e, diagnosticsBag);
+                                stateBuilder[i] = SetGeneratorException(
+                                    MessageProvider,
+                                    stateBuilder[i],
+                                    state.Generators[i],
+                                    e,
+                                    diagnosticsBag
+                                );
                                 walkerBuilder.SetItem(i, null); // don't re-visit this walker for any other trees
                             }
                         }
@@ -290,22 +388,47 @@ namespace Microsoft.CodeAnalysis
                 }
                 Debug.Assert(generatorState.Info.Initialized);
 
-                // we create a new context for each run of the generator. We'll never re-use existing state, only replace anything we have 
-                var context = new GeneratorExecutionContext(compilation, state.ParseOptions, state.AdditionalTexts.NullToEmpty(), state.OptionsProvider, generatorState.SyntaxReceiver, CreateSourcesCollection(), cancellationToken);
+                // we create a new context for each run of the generator. We'll never re-use existing state, only replace anything we have
+                var context = new GeneratorExecutionContext(
+                    compilation,
+                    state.ParseOptions,
+                    state.AdditionalTexts.NullToEmpty(),
+                    state.OptionsProvider,
+                    generatorState.SyntaxReceiver,
+                    CreateSourcesCollection(),
+                    cancellationToken
+                );
                 try
                 {
                     generator.Execute(context);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                 {
-                    stateBuilder[i] = SetGeneratorException(MessageProvider, generatorState, generator, e, diagnosticsBag);
+                    stateBuilder[i] = SetGeneratorException(
+                        MessageProvider,
+                        generatorState,
+                        generator,
+                        e,
+                        diagnosticsBag
+                    );
                     continue;
                 }
 
                 (var sources, var generatorDiagnostics) = context.ToImmutableAndFree();
-                generatorDiagnostics = FilterDiagnostics(compilation, generatorDiagnostics, driverDiagnostics: diagnosticsBag, cancellationToken);
+                generatorDiagnostics = FilterDiagnostics(
+                    compilation,
+                    generatorDiagnostics,
+                    driverDiagnostics: diagnosticsBag,
+                    cancellationToken
+                );
 
-                stateBuilder[i] = new GeneratorState(generatorState.Info, generatorState.PostInitTrees, ParseAdditionalSources(generator, sources, cancellationToken), generatorDiagnostics);
+                stateBuilder[i] = new GeneratorState(
+                    generatorState.Info,
+                    generatorState.PostInitTrees,
+                    ParseAdditionalSources(generator, sources, cancellationToken),
+                    generatorDiagnostics
+                );
             }
             state = state.With(generatorStates: stateBuilder.ToImmutableAndFree());
             return state;
@@ -318,8 +441,11 @@ namespace Microsoft.CodeAnalysis
             return FromState(newState);
         }
 
-        private GeneratorDriverState ApplyPartialEdit(GeneratorDriverState state, PendingEdit edit, CancellationToken cancellationToken = default)
-        {
+        private GeneratorDriverState ApplyPartialEdit(
+            GeneratorDriverState state,
+            PendingEdit edit,
+            CancellationToken cancellationToken = default
+        ) {
             var initialState = state;
 
             // see if any generators accept this particular edit
@@ -344,7 +470,21 @@ namespace Microsoft.CodeAnalysis
 
                     // update the state with the new edits
                     var additionalSources = previousSources.ToImmutableAndFree();
-                    state = state.With(generatorStates: state.GeneratorStates.SetItem(i, new GeneratorState(generatorState.Info, generatorState.PostInitTrees, generatedTrees: ParseAdditionalSources(generator, additionalSources, cancellationToken), diagnostics: ImmutableArray<Diagnostic>.Empty)));
+                    state = state.With(
+                        generatorStates: state.GeneratorStates.SetItem(
+                            i,
+                            new GeneratorState(
+                                generatorState.Info,
+                                generatorState.PostInitTrees,
+                                generatedTrees: ParseAdditionalSources(
+                                    generator,
+                                    additionalSources,
+                                    cancellationToken
+                                ),
+                                diagnostics: ImmutableArray<Diagnostic>.Empty
+                            )
+                        )
+                    );
                 }
             }
             state = edit.Commit(state);
@@ -365,15 +505,19 @@ namespace Microsoft.CodeAnalysis
             return state.With(edits: ImmutableArray<PendingEdit>.Empty, editsFailed: false);
         }
 
-        private static Compilation RemoveGeneratedSyntaxTrees(GeneratorDriverState state, Compilation compilation)
-        {
+        private static Compilation RemoveGeneratedSyntaxTrees(
+            GeneratorDriverState state,
+            Compilation compilation
+        ) {
             ArrayBuilder<SyntaxTree> trees = ArrayBuilder<SyntaxTree>.GetInstance();
             foreach (var generatorState in state.GeneratorStates)
             {
                 foreach (var generatedTree in generatorState.GeneratedTrees)
                 {
-                    if (generatedTree.Tree is object && compilation.ContainsSyntaxTree(generatedTree.Tree))
-                    {
+                    if (
+                        generatedTree.Tree is object
+                        && compilation.ContainsSyntaxTree(generatedTree.Tree)
+                    ) {
                         trees.Add(generatedTree.Tree);
                     }
                 }
@@ -384,21 +528,32 @@ namespace Microsoft.CodeAnalysis
             return comp;
         }
 
-        private ImmutableArray<GeneratedSyntaxTree> ParseAdditionalSources(ISourceGenerator generator, ImmutableArray<GeneratedSourceText> generatedSources, CancellationToken cancellationToken)
-        {
+        private ImmutableArray<GeneratedSyntaxTree> ParseAdditionalSources(
+            ISourceGenerator generator,
+            ImmutableArray<GeneratedSourceText> generatedSources,
+            CancellationToken cancellationToken
+        ) {
             var trees = ArrayBuilder<GeneratedSyntaxTree>.GetInstance(generatedSources.Length);
             var type = generator.GetType();
             var prefix = GetFilePathPrefixForGenerator(generator);
             foreach (var source in generatedSources)
             {
-                var tree = ParseGeneratedSourceText(source, Path.Combine(prefix, source.HintName), cancellationToken);
+                var tree = ParseGeneratedSourceText(
+                    source,
+                    Path.Combine(prefix, source.HintName),
+                    cancellationToken
+                );
                 trees.Add(new GeneratedSyntaxTree(source.HintName, source.Text, tree));
             }
             return trees.ToImmutableAndFree();
         }
 
-        private GeneratorDriver BuildFinalCompilation(Compilation compilation, out Compilation outputCompilation, GeneratorDriverState state, CancellationToken cancellationToken)
-        {
+        private GeneratorDriver BuildFinalCompilation(
+            Compilation compilation,
+            out Compilation outputCompilation,
+            GeneratorDriverState state,
+            CancellationToken cancellationToken
+        ) {
             ArrayBuilder<SyntaxTree> trees = ArrayBuilder<SyntaxTree>.GetInstance();
             foreach (var generatorState in state.GeneratorStates)
             {
@@ -408,20 +563,30 @@ namespace Microsoft.CodeAnalysis
             outputCompilation = compilation.AddSyntaxTrees(trees);
             trees.Free();
 
-            state = state.With(edits: ImmutableArray<PendingEdit>.Empty,
-                               editsFailed: false);
+            state = state.With(edits: ImmutableArray<PendingEdit>.Empty, editsFailed: false);
             return FromState(state);
         }
 
-        private static GeneratorState SetGeneratorException(CommonMessageProvider provider, GeneratorState generatorState, ISourceGenerator generator, Exception e, DiagnosticBag? diagnosticBag, bool isInit = false)
-        {
-            var errorCode = isInit ? provider.WRN_GeneratorFailedDuringInitialization : provider.WRN_GeneratorFailedDuringGeneration;
+        private static GeneratorState SetGeneratorException(
+            CommonMessageProvider provider,
+            GeneratorState generatorState,
+            ISourceGenerator generator,
+            Exception e,
+            DiagnosticBag? diagnosticBag,
+            bool isInit = false
+        ) {
+            var errorCode = isInit
+                ? provider.WRN_GeneratorFailedDuringInitialization
+                : provider.WRN_GeneratorFailedDuringGeneration;
 
             // ISSUE: Diagnostics don't currently allow descriptions with arguments, so we have to manually create the diagnostic description
             // ISSUE: Exceptions also don't support IFormattable, so will always be in the current UI Culture.
             // ISSUE: See https://github.com/dotnet/roslyn/issues/46939
 
-            var description = string.Format(provider.GetDescription(errorCode).ToString(CultureInfo.CurrentUICulture), e);
+            var description = string.Format(
+                provider.GetDescription(errorCode).ToString(CultureInfo.CurrentUICulture),
+                e
+            );
 
             var descriptor = new DiagnosticDescriptor(
                 provider.GetIdForErrorCode(errorCode),
@@ -431,16 +596,27 @@ namespace Microsoft.CodeAnalysis
                 category: "Compiler",
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: WellKnownDiagnosticTags.AnalyzerException);
+                customTags: WellKnownDiagnosticTags.AnalyzerException
+            );
 
-            var diagnostic = Diagnostic.Create(descriptor, Location.None, generator.GetType().Name, e.GetType().Name, e.Message);
+            var diagnostic = Diagnostic.Create(
+                descriptor,
+                Location.None,
+                generator.GetType().Name,
+                e.GetType().Name,
+                e.Message
+            );
 
             diagnosticBag?.Add(diagnostic);
             return new GeneratorState(generatorState.Info, e, diagnostic);
         }
 
-        private static ImmutableArray<Diagnostic> FilterDiagnostics(Compilation compilation, ImmutableArray<Diagnostic> generatorDiagnostics, DiagnosticBag? driverDiagnostics, CancellationToken cancellationToken)
-        {
+        private static ImmutableArray<Diagnostic> FilterDiagnostics(
+            Compilation compilation,
+            ImmutableArray<Diagnostic> generatorDiagnostics,
+            DiagnosticBag? driverDiagnostics,
+            CancellationToken cancellationToken
+        ) {
             ArrayBuilder<Diagnostic> filteredDiagnostics = ArrayBuilder<Diagnostic>.GetInstance();
             foreach (var diag in generatorDiagnostics)
             {
@@ -464,7 +640,11 @@ namespace Microsoft.CodeAnalysis
 
         internal abstract GeneratorDriver FromState(GeneratorDriverState state);
 
-        internal abstract SyntaxTree ParseGeneratedSourceText(GeneratedSourceText input, string fileName, CancellationToken cancellationToken);
+        internal abstract SyntaxTree ParseGeneratedSourceText(
+            GeneratedSourceText input,
+            string fileName,
+            CancellationToken cancellationToken
+        );
 
         internal abstract AdditionalSourcesCollection CreateSourcesCollection();
     }

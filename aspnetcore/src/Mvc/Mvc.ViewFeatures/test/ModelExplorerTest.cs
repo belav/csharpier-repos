@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var provider = new EmptyModelMetadataProvider();
-            var modelExplorer = provider.GetModelExplorerForType(typeof(BaseClass), new DerivedClass());
+            var modelExplorer = provider.GetModelExplorerForType(
+                typeof(BaseClass),
+                new DerivedClass()
+            );
 
             // Act
             var modelType = modelExplorer.ModelType;
@@ -42,7 +45,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var provider = new EmptyModelMetadataProvider();
-            var modelExplorer = provider.GetModelExplorerForType(typeof(BaseClass), new DerivedClass());
+            var modelExplorer = provider.GetModelExplorerForType(
+                typeof(BaseClass),
+                new DerivedClass()
+            );
 
             // Act
             var properties = modelExplorer.Properties.ToArray();
@@ -55,7 +61,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Equal(typeof(DerivedClass), baseProperty.Metadata.ContainerType);
             Assert.Same(modelExplorer, baseProperty.Container);
 
-            var derivedProperty = Assert.Single(properties, p => p.Metadata.PropertyName == "Derived1");
+            var derivedProperty = Assert.Single(
+                properties,
+                p => p.Metadata.PropertyName == "Derived1"
+            );
             Assert.Equal(typeof(string), derivedProperty.Metadata.ModelType);
             Assert.Equal(typeof(DerivedClass), derivedProperty.Metadata.ContainerType);
             Assert.Same(modelExplorer, derivedProperty.Container);
@@ -84,10 +93,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetPropertyExplorer_DeferredModelAccess()
         {
             // Arrange
-            var model = new DerivedClass()
-            {
-                Base1 = 5,
-            };
+            var model = new DerivedClass() { Base1 = 5, };
 
             var provider = new EmptyModelMetadataProvider();
             var modelExplorer = provider.GetModelExplorerForType(typeof(BaseClass), model);
@@ -123,10 +129,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void GetPropertyExplorer_ReturnsNull_ForPropertyNotFound()
         {
             // Arrange
-            var model = new DerivedClass()
-            {
-                Base1 = 5,
-            };
+            var model = new DerivedClass() { Base1 = 5, };
 
             var provider = new EmptyModelMetadataProvider();
             var modelExplorer = provider.GetModelExplorerForType(typeof(BaseClass), model);

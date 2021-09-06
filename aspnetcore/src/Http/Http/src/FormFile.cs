@@ -28,8 +28,13 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="length">The length of the form file.</param>
         /// <param name="name">The name of the form file from the <c>Content-Disposition</c> header.</param>
         /// <param name="fileName">The file name from the <c>Content-Disposition</c> header.</param>
-        public FormFile(Stream baseStream, long baseStreamOffset, long length, string name, string fileName)
-        {
+        public FormFile(
+            Stream baseStream,
+            long baseStreamOffset,
+            long length,
+            string name,
+            string fileName
+        ) {
             _baseStream = baseStream;
             _baseStreamOffset = baseStreamOffset;
             Length = length;
@@ -105,8 +110,10 @@ namespace Microsoft.AspNetCore.Http
         /// </summary>
         /// <param name="target">The stream to copy the file contents to.</param>
         /// <param name="cancellationToken"></param>
-        public async Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async Task CopyToAsync(
+            Stream target,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             if (target == null)
             {
                 throw new ArgumentNullException(nameof(target));

@@ -20,14 +20,31 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal sealed class ObsoleteAttributeData
     {
-        public static readonly ObsoleteAttributeData Uninitialized = new ObsoleteAttributeData(ObsoleteAttributeKind.Uninitialized, message: null, isError: false, diagnosticId: null, urlFormat: null);
-        public static readonly ObsoleteAttributeData Experimental = new ObsoleteAttributeData(ObsoleteAttributeKind.Experimental, message: null, isError: false, diagnosticId: null, urlFormat: null);
+        public static readonly ObsoleteAttributeData Uninitialized = new ObsoleteAttributeData(
+            ObsoleteAttributeKind.Uninitialized,
+            message: null,
+            isError: false,
+            diagnosticId: null,
+            urlFormat: null
+        );
+        public static readonly ObsoleteAttributeData Experimental = new ObsoleteAttributeData(
+            ObsoleteAttributeKind.Experimental,
+            message: null,
+            isError: false,
+            diagnosticId: null,
+            urlFormat: null
+        );
 
         public const string DiagnosticIdPropertyName = "DiagnosticId";
         public const string UrlFormatPropertyName = "UrlFormat";
 
-        public ObsoleteAttributeData(ObsoleteAttributeKind kind, string? message, bool isError, string? diagnosticId, string? urlFormat)
-        {
+        public ObsoleteAttributeData(
+            ObsoleteAttributeKind kind,
+            string? message,
+            bool isError,
+            string? diagnosticId,
+            string? urlFormat
+        ) {
             Kind = kind;
             Message = message;
             IsError = isError;

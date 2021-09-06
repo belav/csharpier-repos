@@ -20,8 +20,11 @@ namespace System.Composition.Hosting
     public class ContainerConfiguration
     {
         private AttributedModelProvider _defaultAttributeContext;
-        private readonly IList<ExportDescriptorProvider> _addedSources = new List<ExportDescriptorProvider>();
-        private readonly IList<Tuple<IEnumerable<Type>, AttributedModelProvider>> _types = new List<Tuple<IEnumerable<Type>, AttributedModelProvider>>();
+        private readonly IList<ExportDescriptorProvider> _addedSources =
+            new List<ExportDescriptorProvider>();
+        private readonly IList<Tuple<IEnumerable<Type>, AttributedModelProvider>> _types = new List<
+            Tuple<IEnumerable<Type>, AttributedModelProvider>
+        >();
 
         /// <summary>
         /// Create the container. The value returned from this method provides
@@ -47,9 +50,11 @@ namespace System.Composition.Hosting
         /// </summary>
         /// <param name="exportDescriptorProvider">An export descriptor provider.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
-        public ContainerConfiguration WithProvider(ExportDescriptorProvider exportDescriptorProvider)
-        {
-            if (exportDescriptorProvider == null) throw new ArgumentNullException(nameof(exportDescriptorProvider));
+        public ContainerConfiguration WithProvider(
+            ExportDescriptorProvider exportDescriptorProvider
+        ) {
+            if (exportDescriptorProvider == null)
+                throw new ArgumentNullException(nameof(exportDescriptorProvider));
             _addedSources.Add(exportDescriptorProvider);
             return this;
         }
@@ -63,7 +68,8 @@ namespace System.Composition.Hosting
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithDefaultConventions(AttributedModelProvider conventions)
         {
-            if (conventions == null) throw new ArgumentNullException(nameof(conventions));
+            if (conventions == null)
+                throw new ArgumentNullException(nameof(conventions));
 
             if (_defaultAttributeContext != null)
                 throw new InvalidOperationException(SR.ContainerConfiguration_DefaultConventionSet);
@@ -92,7 +98,8 @@ namespace System.Composition.Hosting
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithPart(Type partType, AttributedModelProvider conventions)
         {
-            if (partType == null) throw new ArgumentNullException(nameof(partType));
+            if (partType == null)
+                throw new ArgumentNullException(nameof(partType));
             return WithParts(new[] { partType }, conventions);
         }
 
@@ -148,9 +155,12 @@ namespace System.Composition.Hosting
         /// <param name="partTypes">The part types.</param>
         /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
-        public ContainerConfiguration WithParts(IEnumerable<Type> partTypes, AttributedModelProvider conventions)
-        {
-            if (partTypes == null) throw new ArgumentNullException(nameof(partTypes));
+        public ContainerConfiguration WithParts(
+            IEnumerable<Type> partTypes,
+            AttributedModelProvider conventions
+        ) {
+            if (partTypes == null)
+                throw new ArgumentNullException(nameof(partTypes));
             _types.Add(Tuple.Create(partTypes, conventions));
             return this;
         }
@@ -173,8 +183,10 @@ namespace System.Composition.Hosting
         /// <param name="assembly">The assembly from which to add part types.</param>
         /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
-        public ContainerConfiguration WithAssembly(Assembly assembly, AttributedModelProvider conventions)
-        {
+        public ContainerConfiguration WithAssembly(
+            Assembly assembly,
+            AttributedModelProvider conventions
+        ) {
             return WithAssemblies(new[] { assembly }, conventions);
         }
 
@@ -196,10 +208,16 @@ namespace System.Composition.Hosting
         /// <param name="assemblies">Assemblies containing part types.</param>
         /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
-        public ContainerConfiguration WithAssemblies(IEnumerable<Assembly> assemblies, AttributedModelProvider conventions)
-        {
-            if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
-            return WithParts(assemblies.SelectMany(a => a.DefinedTypes.Select(dt => dt.AsType())), conventions);
+        public ContainerConfiguration WithAssemblies(
+            IEnumerable<Assembly> assemblies,
+            AttributedModelProvider conventions
+        ) {
+            if (assemblies == null)
+                throw new ArgumentNullException(nameof(assemblies));
+            return WithParts(
+                assemblies.SelectMany(a => a.DefinedTypes.Select(dt => dt.AsType())),
+                conventions
+            );
         }
 
         internal ExportDescriptorProvider[] DebugGetAddedExportDescriptorProviders()

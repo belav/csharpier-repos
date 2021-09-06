@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 string pattern,
                 CultureInfo culture,
                 bool includeMatchedSpans,
-                bool allowFuzzyMatching)
-                : base(includeMatchedSpans, culture, allowFuzzyMatching)
+                bool allowFuzzyMatching
+            ) : base(includeMatchedSpans, culture, allowFuzzyMatching)
             {
                 pattern = pattern.Trim();
 
@@ -47,8 +47,18 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     return false;
                 }
 
-                return MatchPatternSegment(candidate, _fullPatternSegment, matches, fuzzyMatch: false) ||
-                       MatchPatternSegment(candidate, _fullPatternSegment, matches, fuzzyMatch: true);
+                return MatchPatternSegment(
+                        candidate,
+                        _fullPatternSegment,
+                        matches,
+                        fuzzyMatch: false
+                    )
+                    || MatchPatternSegment(
+                        candidate,
+                        _fullPatternSegment,
+                        matches,
+                        fuzzyMatch: true
+                    );
             }
         }
     }

@@ -19,7 +19,9 @@ public class BringUpTest
     public static int Main()
     {
         bool y = Ne1(1);
-        if (y == false) return Pass;
-        else return Fail;
+        if (y == false)
+            return Pass;
+        else
+            return Fail;
     }
 }

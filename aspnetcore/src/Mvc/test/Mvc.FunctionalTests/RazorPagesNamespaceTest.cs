@@ -9,11 +9,15 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RazorPagesNamespaceTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
+    public class RazorPagesNamespaceTest
+        : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
     {
-        public RazorPagesNamespaceTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
-        {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        public RazorPagesNamespaceTest(
+            MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
+        ) {
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -36,7 +40,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task Page_ImportedNamespace_UsedFromViewImports()
         {
             // Arrange & Act
-            var content = await Client.GetStringAsync("http://localhost/Pages/Namespace/Nested/Folder");
+            var content = await Client.GetStringAsync(
+                "http://localhost/Pages/Namespace/Nested/Folder"
+            );
 
             // Assert
             Assert.Equal("CustomNamespace.Nested.Folder", content.Trim());
@@ -46,7 +52,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task Page_OverrideNamespace_SetByPage()
         {
             // Arrange & Act
-            var content = await Client.GetStringAsync("http://localhost/Pages/Namespace/Nested/Override");
+            var content = await Client.GetStringAsync(
+                "http://localhost/Pages/Namespace/Nested/Override"
+            );
 
             // Assert
             Assert.Equal("Override", content.Trim());

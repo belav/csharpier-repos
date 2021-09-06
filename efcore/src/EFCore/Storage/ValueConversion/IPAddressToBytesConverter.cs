@@ -24,14 +24,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
                 v => v == null ? default! : v.GetAddressBytes(),
                 v => v == null ? default! : new IPAddress(v),
-                _defaultHints.With(mappingHints))
-        {
-        }
+                _defaultHints.With(mappingHints)
+            ) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(IPAddress), typeof(byte[]), i => new IPAddressToBytesConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(IPAddress),
+                typeof(byte[]),
+                i => new IPAddressToBytesConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

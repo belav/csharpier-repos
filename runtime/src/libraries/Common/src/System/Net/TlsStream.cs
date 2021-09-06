@@ -14,9 +14,18 @@ namespace System.Net
         private readonly string _host;
         private readonly X509CertificateCollection? _clientCertificates;
 
-        public TlsStream(NetworkStream stream, Socket socket, string host, X509CertificateCollection? clientCertificates) : base(socket)
+        public TlsStream(
+            NetworkStream stream,
+            Socket socket,
+            string host,
+            X509CertificateCollection? clientCertificates
+        ) : base(socket)
         {
-            _sslStream = new SslStream(stream, false, ServicePointManager.ServerCertificateValidationCallback);
+            _sslStream = new SslStream(
+                stream,
+                false,
+                ServicePointManager.ServerCertificateValidationCallback
+            );
             _host = host;
             _clientCertificates = clientCertificates;
         }
@@ -27,7 +36,8 @@ namespace System.Net
                 _host,
                 _clientCertificates,
                 (SslProtocols)ServicePointManager.SecurityProtocol, // enums use same values
-                ServicePointManager.CheckCertificateRevocationList);
+                ServicePointManager.CheckCertificateRevocationList
+            );
         }
 
         public IAsyncResult BeginAuthenticateAsClient(AsyncCallback? asyncCallback, object? state)
@@ -38,7 +48,8 @@ namespace System.Net
                 (SslProtocols)ServicePointManager.SecurityProtocol, // enums use same values
                 ServicePointManager.CheckCertificateRevocationList,
                 asyncCallback,
-                state);
+                state
+            );
         }
 
         public void EndAuthenticateAsClient(IAsyncResult asyncResult)
@@ -46,8 +57,13 @@ namespace System.Net
             _sslStream.EndAuthenticateAsClient(asyncResult);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        ) {
             return _sslStream.BeginWrite(buffer, offset, size, callback, state);
         }
 
@@ -66,8 +82,13 @@ namespace System.Net
             return _sslStream.Read(buffer, offset, size);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             return _sslStream.BeginRead(buffer, offset, count, callback, state);
         }
 

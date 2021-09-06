@@ -21,12 +21,18 @@ namespace System.Security.Cryptography.Xml
         {
             int tmp;
             string nsPrefix = Utils.GetNamespacePrefix(attr);
-            return _inclusivePrefixSet.ContainsKey(nsPrefix) &&
-                Utils.IsNonRedundantNamespaceDecl(attr, GetNearestRenderedNamespaceWithMatchingPrefix(nsPrefix, out tmp));
+            return _inclusivePrefixSet.ContainsKey(nsPrefix)
+                && Utils.IsNonRedundantNamespaceDecl(
+                    attr,
+                    GetNearestRenderedNamespaceWithMatchingPrefix(nsPrefix, out tmp)
+                );
         }
 
-        private void GatherNamespaceToRender(string nsPrefix, SortedList nsListToRender, Hashtable nsLocallyDeclared)
-        {
+        private void GatherNamespaceToRender(
+            string nsPrefix,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        ) {
             foreach (object a in nsListToRender.GetKeyList())
             {
                 if (Utils.HasNamespacePrefix((XmlAttribute)a, nsPrefix))
@@ -35,7 +41,10 @@ namespace System.Security.Cryptography.Xml
 
             int rDepth;
             XmlAttribute local = (XmlAttribute)nsLocallyDeclared[nsPrefix];
-            XmlAttribute rAncestral = GetNearestRenderedNamespaceWithMatchingPrefix(nsPrefix, out rDepth);
+            XmlAttribute rAncestral = GetNearestRenderedNamespaceWithMatchingPrefix(
+                nsPrefix,
+                out rDepth
+            );
 
             if (local != null)
             {
@@ -48,16 +57,26 @@ namespace System.Security.Cryptography.Xml
             else
             {
                 int uDepth;
-                XmlAttribute uAncestral = GetNearestUnrenderedNamespaceWithMatchingPrefix(nsPrefix, out uDepth);
-                if (uAncestral != null && uDepth > rDepth && Utils.IsNonRedundantNamespaceDecl(uAncestral, rAncestral))
-                {
+                XmlAttribute uAncestral = GetNearestUnrenderedNamespaceWithMatchingPrefix(
+                    nsPrefix,
+                    out uDepth
+                );
+                if (
+                    uAncestral != null
+                    && uDepth > rDepth
+                    && Utils.IsNonRedundantNamespaceDecl(uAncestral, rAncestral)
+                ) {
                     nsListToRender.Add(uAncestral, null);
                 }
             }
         }
 
-        internal override void GetNamespacesToRender(XmlElement element, SortedList attrListToRender, SortedList nsListToRender, Hashtable nsLocallyDeclared)
-        {
+        internal override void GetNamespacesToRender(
+            XmlElement element,
+            SortedList attrListToRender,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        ) {
             GatherNamespaceToRender(element.Prefix, nsListToRender, nsLocallyDeclared);
             foreach (object attr in attrListToRender.GetKeyList())
             {
@@ -67,8 +86,11 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        internal override void TrackNamespaceNode(XmlAttribute attr, SortedList nsListToRender, Hashtable nsLocallyDeclared)
-        {
+        internal override void TrackNamespaceNode(
+            XmlAttribute attr,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        ) {
             if (!Utils.IsXmlPrefixDefinitionNode(attr))
             {
                 if (HasNonRedundantInclusivePrefix(attr))
@@ -78,8 +100,12 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        internal override void TrackXmlNamespaceNode(XmlAttribute attr, SortedList nsListToRender, SortedList attrListToRender, Hashtable nsLocallyDeclared)
-        {
+        internal override void TrackXmlNamespaceNode(
+            XmlAttribute attr,
+            SortedList nsListToRender,
+            SortedList attrListToRender,
+            Hashtable nsLocallyDeclared
+        ) {
             // exclusive canonicalization treats Xml namespaces as simple attributes. They are not propagated.
             attrListToRender.Add(attr, null);
         }

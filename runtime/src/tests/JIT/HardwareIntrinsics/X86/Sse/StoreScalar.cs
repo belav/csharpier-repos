@@ -21,16 +21,25 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 3 }, new float[4]))
-                {
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 3 },
+                        new float[4]
+                    )
+                ) {
                     var vf = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     Sse.StoreScalar((float*)(floatTable.outArrayPtr), vf);
 
-                    if (!floatTable.CheckResult((x, y) => BitConverter.SingleToInt32Bits(x[0]) == BitConverter.SingleToInt32Bits(y[0])
-                                                       && BitConverter.SingleToInt32Bits(y[1]) == 0
-                                                       && BitConverter.SingleToInt32Bits(y[2]) == 0
-                                                       && BitConverter.SingleToInt32Bits(y[3]) == 0))
-                    {
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.SingleToInt32Bits(x[0])
+                                    == BitConverter.SingleToInt32Bits(y[0])
+                                && BitConverter.SingleToInt32Bits(y[1]) == 0
+                                && BitConverter.SingleToInt32Bits(y[2]) == 0
+                                && BitConverter.SingleToInt32Bits(y[3]) == 0
+                        )
+                    ) {
                         Console.WriteLine("SSE StoreScalar failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -74,6 +83,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

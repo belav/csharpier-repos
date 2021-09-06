@@ -39,7 +39,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     internal class JsonSchemaBuilder
     {
         private readonly IList<JsonSchema> _stack;
@@ -110,7 +112,8 @@ namespace Newtonsoft.Json.Schema
                 {
                     if (locationReference)
                     {
-                        string[] escapedParts = schema.DeferredReference.TrimStart('#').Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] escapedParts = schema.DeferredReference.TrimStart('#')
+                            .Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                         JToken currentToken = _rootSchema;
                         foreach (string escapedPart in escapedParts)
                         {
@@ -120,10 +123,15 @@ namespace Newtonsoft.Json.Schema
                             {
                                 currentToken = currentToken[part];
                             }
-                            else if (currentToken.Type == JTokenType.Array || currentToken.Type == JTokenType.Constructor)
-                            {
-                                if (int.TryParse(part, out int index) && index >= 0 && index < currentToken.Count())
-                                {
+                            else if (
+                                currentToken.Type == JTokenType.Array
+                                || currentToken.Type == JTokenType.Constructor
+                            ) {
+                                if (
+                                    int.TryParse(part, out int index)
+                                    && index >= 0
+                                    && index < currentToken.Count()
+                                ) {
                                     currentToken = currentToken[index];
                                 }
                                 else
@@ -146,7 +154,12 @@ namespace Newtonsoft.Json.Schema
 
                     if (resolvedSchema == null)
                     {
-                        throw new JsonException("Could not resolve schema reference '{0}'.".FormatWith(CultureInfo.InvariantCulture, schema.DeferredReference));
+                        throw new JsonException(
+                            "Could not resolve schema reference '{0}'.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                schema.DeferredReference
+                            )
+                        );
                     }
                 }
 
@@ -183,9 +196,15 @@ namespace Newtonsoft.Json.Schema
 
             if (schema.PatternProperties != null)
             {
-                foreach (KeyValuePair<string, JsonSchema> patternProperty in schema.PatternProperties.ToList())
-                {
-                    schema.PatternProperties[patternProperty.Key] = ResolveReferences(patternProperty.Value);
+                foreach (
+                    KeyValuePair<
+                        string,
+                        JsonSchema
+                    > patternProperty in schema.PatternProperties.ToList()
+                ) {
+                    schema.PatternProperties[patternProperty.Key] = ResolveReferences(
+                        patternProperty.Value
+                    );
                 }
             }
 
@@ -209,18 +228,31 @@ namespace Newtonsoft.Json.Schema
         {
             if (!(token is JObject schemaObject))
             {
-                throw JsonException.Create(token, token.Path, "Expected object while parsing schema object, got {0}.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                throw JsonException.Create(
+                    token,
+                    token.Path,
+                    "Expected object while parsing schema object, got {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        token.Type
+                    )
+                );
             }
 
-            if (schemaObject.TryGetValue(JsonTypeReflector.RefPropertyName, out JToken referenceToken))
-            {
+            if (
+                schemaObject.TryGetValue(
+                    JsonTypeReflector.RefPropertyName,
+                    out JToken referenceToken
+                )
+            ) {
                 JsonSchema deferredSchema = new JsonSchema();
                 deferredSchema.DeferredReference = (string)referenceToken;
 
                 return deferredSchema;
             }
 
-            string location = token.Path.Replace(".", "/").Replace("[", "/").Replace("]", string.Empty);
+            string location = token.Path.Replace(".", "/")
+                .Replace("[", "/")
+                .Replace("]", string.Empty);
             if (!StringUtils.IsNullOrEmpty(location))
             {
                 location = "/" + location;
@@ -366,7 +398,14 @@ namespace Newtonsoft.Json.Schema
         {
             if (token.Type != JTokenType.Array)
             {
-                throw JsonException.Create(token, token.Path, "Expected Array token while parsing enum values, got {0}.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                throw JsonException.Create(
+                    token,
+                    token.Path,
+                    "Expected Array token while parsing enum values, got {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        token.Type
+                    )
+                );
             }
 
             CurrentSchema.Enum = new List<JToken>();
@@ -407,14 +446,26 @@ namespace Newtonsoft.Json.Schema
 
             if (token.Type != JTokenType.Object)
             {
-                throw JsonException.Create(token, token.Path, "Expected Object token while parsing schema properties, got {0}.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                throw JsonException.Create(
+                    token,
+                    token.Path,
+                    "Expected Object token while parsing schema properties, got {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        token.Type
+                    )
+                );
             }
 
             foreach (JProperty propertyToken in token)
             {
                 if (properties.ContainsKey(propertyToken.Name))
                 {
-                    throw new JsonException("Property {0} has already been defined in schema.".FormatWith(CultureInfo.InvariantCulture, propertyToken.Name));
+                    throw new JsonException(
+                        "Property {0} has already been defined in schema.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            propertyToken.Name
+                        )
+                    );
                 }
 
                 properties.Add(propertyToken.Name, BuildSchema(propertyToken.Value));
@@ -441,7 +492,14 @@ namespace Newtonsoft.Json.Schema
                     }
                     break;
                 default:
-                    throw JsonException.Create(token, token.Path, "Expected array or JSON schema object, got {0}.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                    throw JsonException.Create(
+                        token,
+                        token.Path,
+                        "Expected array or JSON schema object, got {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            token.Type
+                        )
+                    );
             }
         }
 
@@ -457,7 +515,14 @@ namespace Newtonsoft.Json.Schema
                     {
                         if (typeToken.Type != JTokenType.String)
                         {
-                            throw JsonException.Create(typeToken, typeToken.Path, "Expected JSON schema type string token, got {0}.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                            throw JsonException.Create(
+                                typeToken,
+                                typeToken.Path,
+                                "Expected JSON schema type string token, got {0}.".FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    token.Type
+                                )
+                            );
                         }
 
                         type = type | MapType((string)typeToken);
@@ -467,15 +532,28 @@ namespace Newtonsoft.Json.Schema
                 case JTokenType.String:
                     return MapType((string)token);
                 default:
-                    throw JsonException.Create(token, token.Path, "Expected array or JSON schema type string token, got {0}.".FormatWith(CultureInfo.InvariantCulture, token.Type));
+                    throw JsonException.Create(
+                        token,
+                        token.Path,
+                        "Expected array or JSON schema type string token, got {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            token.Type
+                        )
+                    );
             }
         }
 
         internal static JsonSchemaType MapType(string type)
         {
-            if (!JsonSchemaConstants.JsonSchemaTypeMapping.TryGetValue(type, out JsonSchemaType mappedType))
-            {
-                throw new JsonException("Invalid JSON schema type: {0}".FormatWith(CultureInfo.InvariantCulture, type));
+            if (
+                !JsonSchemaConstants.JsonSchemaTypeMapping.TryGetValue(
+                    type,
+                    out JsonSchemaType mappedType
+                )
+            ) {
+                throw new JsonException(
+                    "Invalid JSON schema type: {0}".FormatWith(CultureInfo.InvariantCulture, type)
+                );
             }
 
             return mappedType;

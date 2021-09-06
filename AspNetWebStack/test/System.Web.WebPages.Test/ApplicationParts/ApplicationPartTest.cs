@@ -14,8 +14,14 @@ namespace System.Web.WebPages.Test
             // Arrange
             var assembly = new Mock<TestResourceAssembly>().Object;
 
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ApplicationPart(assembly, rootVirtualPath: null), "rootVirtualPath");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ApplicationPart(assembly, rootVirtualPath: String.Empty), "rootVirtualPath");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ApplicationPart(assembly, rootVirtualPath: null),
+                "rootVirtualPath"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ApplicationPart(assembly, rootVirtualPath: String.Empty),
+                "rootVirtualPath"
+            );
         }
 
         [Fact]
@@ -70,7 +76,7 @@ namespace System.Web.WebPages.Test
             var moduleName = "my-module";
             var path = "foo.baz";
 
-            // Act 
+            // Act
             var name = ApplicationPart.GetResourceNameFromVirtualPath(moduleName, path);
 
             // Assert
@@ -84,7 +90,7 @@ namespace System.Web.WebPages.Test
             var moduleName = "my-module";
             var path = "/bar/foo";
 
-            // Act 
+            // Act
             var name = ApplicationPart.GetResourceNameFromVirtualPath(moduleName, path);
 
             // Assert
@@ -98,7 +104,7 @@ namespace System.Web.WebPages.Test
             var moduleName = "my-module";
             var path = "/program files/data files/my file .foo";
 
-            // Act 
+            // Act
             var name = ApplicationPart.GetResourceNameFromVirtualPath(moduleName, path);
 
             // Assert

@@ -18,8 +18,14 @@ namespace Microsoft.AspNetCore.Identity.Test
 
             // Act
             // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>("manager", async () => await validator.ValidateAsync(null, null));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await validator.ValidateAsync(manager, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "manager",
+                async () => await validator.ValidateAsync(null, null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await validator.ValidateAsync(manager, null)
+            );
         }
 
         [Theory]
@@ -30,13 +36,16 @@ namespace Microsoft.AspNetCore.Identity.Test
             // Setup
             var validator = new RoleValidator<PocoRole>();
             var manager = MockHelpers.TestRoleManager<PocoRole>();
-            var user = new PocoRole {Name = input};
+            var user = new PocoRole { Name = input };
 
             // Act
             var result = await validator.ValidateAsync(manager, user);
 
             // Assert
-            IdentityResultAssert.IsFailure(result, new IdentityErrorDescriber().InvalidRoleName(input));
+            IdentityResultAssert.IsFailure(
+                result,
+                new IdentityErrorDescriber().InvalidRoleName(input)
+            );
         }
     }
 }

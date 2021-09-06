@@ -17,8 +17,11 @@ namespace Microsoft.AspNetCore.Diagnostics
         /// <param name="context">The <see cref="HttpContext"/>.</param>
         /// <param name="options">The configured <see cref="StatusCodePagesOptions"/>.</param>
         /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
-        public StatusCodeContext(HttpContext context, StatusCodePagesOptions options, RequestDelegate next)
-        {
+        public StatusCodeContext(
+            HttpContext context,
+            StatusCodePagesOptions options,
+            RequestDelegate next
+        ) {
             HttpContext = context;
             Options = options;
             Next = next;

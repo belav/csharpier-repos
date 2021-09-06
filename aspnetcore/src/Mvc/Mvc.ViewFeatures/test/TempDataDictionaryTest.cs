@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_Load_CreatesEmptyDictionaryIfProviderReturnsNull()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
 
             // Act
             tempData.Load();
@@ -27,7 +30,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_Save_RemovesKeysThatWereRead()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -44,7 +50,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_EnumeratingDictionary_MarksKeysForDeletion()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -64,7 +73,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [Fact]
         public void TempData_TryGetValue_MarksKeyForDeletion()
         {
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             object value;
             tempData["Foo"] = "Foo";
 
@@ -80,7 +92,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_Keep_RetainsAllKeysWhenSavingDictionary()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -97,7 +112,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_Keep_RetainsSpecificKeysWhenSavingDictionary()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -116,7 +134,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_Peek_DoesNotMarkKeyForDeletion()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             tempData["Bar"] = "barValue";
 
             // Act
@@ -132,7 +153,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void TempData_CompareIsOrdinalIgnoreCase()
         {
             // Arrange
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             var item = new object();
 
             // Act
@@ -166,7 +190,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [Fact]
         public void TempData_RemovalOfKeysAreCaseInsensitive()
         {
-            var tempData = new TempDataDictionary(new DefaultHttpContext(), new NullTempDataProvider());
+            var tempData = new TempDataDictionary(
+                new DefaultHttpContext(),
+                new NullTempDataProvider()
+            );
             tempData["Foo"] = "Foo";
             tempData["Bar"] = "Bar";
 
@@ -187,9 +214,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return null;
             }
 
-            public void SaveTempData(HttpContext context, IDictionary<string, object> values)
-            {
-            }
+            public void SaveTempData(HttpContext context, IDictionary<string, object> values) { }
         }
 
         private class TestTempDataProvider : ITempDataProvider
@@ -206,9 +231,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return _data;
             }
 
-            public void SaveTempData(HttpContext context, IDictionary<string, object> values)
-            {
-            }
+            public void SaveTempData(HttpContext context, IDictionary<string, object> values) { }
         }
     }
 }

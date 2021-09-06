@@ -18,28 +18,40 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolMappingServiceFactory()
-        {
-        }
+        public SymbolMappingServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new SymbolMappingService();
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new SymbolMappingService();
 
         private sealed class SymbolMappingService : ISymbolMappingService
         {
-            public Task<SymbolMappingResult?> MapSymbolAsync(Document document, SymbolKey symbolId, CancellationToken cancellationToken)
-            {
+            public Task<SymbolMappingResult?> MapSymbolAsync(
+                Document document,
+                SymbolKey symbolId,
+                CancellationToken cancellationToken
+            ) {
                 if (!(document.Project.Solution.Workspace is MetadataAsSourceWorkspace workspace))
                 {
-                    throw new ArgumentException(FeaturesResources.Document_must_be_contained_in_the_workspace_that_created_this_service, nameof(document));
+                    throw new ArgumentException(
+                        FeaturesResources.Document_must_be_contained_in_the_workspace_that_created_this_service,
+                        nameof(document)
+                    );
                 }
 
                 return workspace.FileService.MapSymbolAsync(document, symbolId, cancellationToken);
             }
 
-            public async Task<SymbolMappingResult?> MapSymbolAsync(Document document, ISymbol symbol, CancellationToken cancellationToken)
-            {
-                return await MapSymbolAsync(document, SymbolKey.Create(symbol, cancellationToken), cancellationToken).ConfigureAwait(false);
+            public async Task<SymbolMappingResult?> MapSymbolAsync(
+                Document document,
+                ISymbol symbol,
+                CancellationToken cancellationToken
+            ) {
+                return await MapSymbolAsync(
+                        document,
+                        SymbolKey.Create(symbol, cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

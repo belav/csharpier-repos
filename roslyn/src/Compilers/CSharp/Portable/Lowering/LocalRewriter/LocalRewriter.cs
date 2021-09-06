@@ -37,7 +37,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private Instrumenter _instrumenter;
         private readonly BoundStatement _rootStatement;
 
-        private Dictionary<BoundValuePlaceholderBase, BoundExpression>? _placeholderReplacementMapDoNotUseDirectly;
+        private Dictionary<
+            BoundValuePlaceholderBase,
+            BoundExpression
+        >? _placeholderReplacementMapDoNotUseDirectly;
 
         private LocalRewriter(
             CSharpCompilation compilation,
@@ -49,12 +52,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             SynthesizedSubmissionFields previousSubmissionFields,
             bool allowOmissionOfConditionalCalls,
             BindingDiagnosticBag diagnostics,
-            Instrumenter instrumenter)
-        {
+            Instrumenter instrumenter
+        ) {
             _compilation = compilation;
             _factory = factory;
             _factory.CurrentFunction = containingMethod;
-            Debug.Assert(TypeSymbol.Equals(factory.CurrentType, (containingType ?? containingMethod.ContainingType), TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    factory.CurrentType,
+                    (containingType ?? containingMethod.ContainingType),
+                    TypeCompareKind.ConsiderEverything2
+                )
+            );
             _dynamicFactory = new LoweredDynamicOperationFactory(factory, containingMethodOrdinal);
             _previousSubmissionFields = previousSubmissionFields;
             _allowOmissionOfConditionalCalls = allowOmissionOfConditionalCalls;
@@ -88,20 +97,46 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             out bool sawLambdas,
             out bool sawLocalFunctions,
-            out bool sawAwaitInExceptionHandler)
-        {
+            out bool sawAwaitInExceptionHandler
+        ) {
             Debug.Assert(statement != null);
             Debug.Assert(compilationState != null);
 
             try
             {
-                var factory = new SyntheticBoundNodeFactory(method, statement.Syntax, compilationState, diagnostics);
-                DynamicAnalysisInjector? dynamicInstrumenter = instrumentForDynamicAnalysis ? DynamicAnalysisInjector.TryCreate(method, statement, factory, diagnostics, debugDocumentProvider, Instrumenter.NoOp) : null;
+                var factory = new SyntheticBoundNodeFactory(
+                    method,
+                    statement.Syntax,
+                    compilationState,
+                    diagnostics
+                );
+                DynamicAnalysisInjector? dynamicInstrumenter = instrumentForDynamicAnalysis
+                    ? DynamicAnalysisInjector.TryCreate(
+                          method,
+                          statement,
+                          factory,
+                          diagnostics,
+                          debugDocumentProvider,
+                          Instrumenter.NoOp
+                      )
+                    : null;
 
                 // We don’t want IL to differ based upon whether we write the PDB to a file/stream or not.
                 // Presence of sequence points in the tree affects final IL, therefore, we always generate them.
-                var localRewriter = new LocalRewriter(compilation, method, methodOrdinal, statement, containingType, factory, previousSubmissionFields, allowOmissionOfConditionalCalls, diagnostics,
-                                                      dynamicInstrumenter != null ? new DebugInfoInjector(dynamicInstrumenter) : DebugInfoInjector.Singleton);
+                var localRewriter = new LocalRewriter(
+                    compilation,
+                    method,
+                    methodOrdinal,
+                    statement,
+                    containingType,
+                    factory,
+                    previousSubmissionFields,
+                    allowOmissionOfConditionalCalls,
+                    diagnostics,
+                    dynamicInstrumenter != null
+                        ? new DebugInfoInjector(dynamicInstrumenter)
+                        : DebugInfoInjector.Singleton
+                );
 
                 statement.CheckLocalsDefined();
                 var loweredStatement = localRewriter.VisitStatement(statement);
@@ -114,7 +149,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (localRewriter._needsSpilling && !loweredStatement.HasErrors)
                 {
                     // Move spill sequences to a top-level statement. This handles "lifting" await and the switch expression.
-                    var spilledStatement = SpillSequenceSpiller.Rewrite(loweredStatement, method, compilationState, diagnostics);
+                    var spilledStatement = SpillSequenceSpiller.Rewrite(
+                        loweredStatement,
+                        method,
+                        compilationState,
+                        diagnostics
+                    );
                     spilledStatement.CheckLocalsDefined();
                     loweredStatement = spilledStatement;
                 }
@@ -132,16 +172,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 diagnostics.Add(ex.Diagnostic);
                 sawLambdas = sawLocalFunctions = sawAwaitInExceptionHandler = false;
-                return new BoundBadStatement(statement.Syntax, ImmutableArray.Create<BoundNode>(statement), hasErrors: true);
+                return new BoundBadStatement(
+                    statement.Syntax,
+                    ImmutableArray.Create<BoundNode>(statement),
+                    hasErrors: true
+                );
             }
         }
 
         private bool Instrument
         {
-            get
-            {
-                return !_inExpressionLambda;
-            }
+            get { return !_inExpressionLambda; }
         }
 
         private PEModuleBuilder? EmitModule
@@ -212,15 +253,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             // statement means that this constraint is not violated).
             // Dynamic type will be erased in emit phase. It is considered equivalent to Object in lowered bound trees.
             // Unused deconstructions are lowered to produce a return value that isn't a tuple type.
-            Debug.Assert(visited == null || visited.HasErrors || ReferenceEquals(visited.Type, node.Type) ||
-                    visited.Type is { } && visited.Type.Equals(node.Type, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes) ||
-                    IsUnusedDeconstruction(node));
+            Debug.Assert(
+                visited == null
+                    || visited.HasErrors
+                    || ReferenceEquals(visited.Type, node.Type)
+                    || visited.Type is { }
+                        && visited.Type.Equals(
+                            node.Type,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
+                    || IsUnusedDeconstruction(node)
+            );
 
-            if (visited != null &&
-                visited != node &&
-                node.Kind != BoundKind.ImplicitReceiver &&
-                node.Kind != BoundKind.ObjectOrCollectionValuePlaceholder)
-            {
+            if (
+                visited != null
+                && visited != node
+                && node.Kind != BoundKind.ImplicitReceiver
+                && node.Kind != BoundKind.ObjectOrCollectionValuePlaceholder
+            ) {
                 if (!CanBePassedByReference(node) && CanBePassedByReference(visited))
                 {
                     visited = RefAccessMustMakeCopy(visited);
@@ -232,17 +283,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static BoundExpression RefAccessMustMakeCopy(BoundExpression visited)
         {
-            visited = new BoundPassByCopy(
-                        visited.Syntax,
-                        visited,
-                        type: visited.Type);
+            visited = new BoundPassByCopy(visited.Syntax, visited, type: visited.Type);
 
             return visited;
         }
 
         private static bool IsUnusedDeconstruction(BoundExpression node)
         {
-            return node.Kind == BoundKind.DeconstructionAssignmentOperator && !((BoundDeconstructionAssignmentOperator)node).IsUsed;
+            return node.Kind == BoundKind.DeconstructionAssignmentOperator
+                && !((BoundDeconstructionAssignmentOperator)node).IsUsed;
         }
 
         public override BoundNode VisitLambda(BoundLambda node)
@@ -256,6 +305,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _factory.CurrentFunction = node.Symbol;
                 return base.VisitLambda(node)!;
             }
+
             finally
             {
                 _factory.CurrentFunction = oldContainingSymbol;
@@ -277,25 +327,44 @@ namespace Microsoft.CodeAnalysis.CSharp
                     moduleBuilder.EnsureIsUnmanagedAttributeExists();
                 }
 
-                if (hasReturnTypeOrParameter(localFunction, t => t.ContainsNativeInteger()) ||
-                    typeParameters.Any(t => t.ConstraintTypesNoUseSiteDiagnostics.Any(t => t.ContainsNativeInteger())))
-                {
+                if (
+                    hasReturnTypeOrParameter(localFunction, t => t.ContainsNativeInteger())
+                    || typeParameters.Any(
+                        t =>
+                            t.ConstraintTypesNoUseSiteDiagnostics.Any(
+                                t => t.ContainsNativeInteger()
+                            )
+                    )
+                ) {
                     moduleBuilder.EnsureNativeIntegerAttributeExists();
                 }
 
-                if (_factory.CompilationState.Compilation.ShouldEmitNullableAttributes(localFunction))
-                {
+                if (
+                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(
+                        localFunction
+                    )
+                ) {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(
-                       typeParameter => ((SourceTypeParameterSymbolBase)typeParameter).ConstraintsNeedNullableAttribute());
+                        typeParameter =>
+                            (
+                                (SourceTypeParameterSymbolBase)typeParameter
+                            ).ConstraintsNeedNullableAttribute()
+                    );
 
-                    if (constraintsNeedNullableAttribute || hasReturnTypeOrParameter(localFunction, t => t.NeedsNullableAttribute()))
-                    {
+                    if (
+                        constraintsNeedNullableAttribute
+                        || hasReturnTypeOrParameter(localFunction, t => t.NeedsNullableAttribute())
+                    ) {
                         moduleBuilder.EnsureNullableAttributeExists();
                     }
                 }
 
-                static bool hasReturnTypeOrParameter(LocalFunctionSymbol localFunction, Func<TypeWithAnnotations, bool> predicate) =>
-                    predicate(localFunction.ReturnTypeWithAnnotations) || localFunction.ParameterTypesWithAnnotations.Any(predicate);
+                static bool hasReturnTypeOrParameter(
+                    LocalFunctionSymbol localFunction,
+                    Func<TypeWithAnnotations, bool> predicate
+                ) =>
+                    predicate(localFunction.ReturnTypeWithAnnotations)
+                    || localFunction.ParameterTypesWithAnnotations.Any(predicate);
             }
 
             var oldContainingSymbol = _factory.CurrentFunction;
@@ -311,14 +380,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (localFunction.IsGenericMethod)
                 {
-                    // Each generic local function gets its own dynamic factory because it 
+                    // Each generic local function gets its own dynamic factory because it
                     // needs its own container to cache dynamic call-sites. That type (the container) "inherits"
                     // local function's type parameters as well as type parameters of all containing methods.
-                    _dynamicFactory = new LoweredDynamicOperationFactory(_factory, _dynamicFactory.MethodOrdinal, localFunctionOrdinal);
+                    _dynamicFactory = new LoweredDynamicOperationFactory(
+                        _factory,
+                        _dynamicFactory.MethodOrdinal,
+                        localFunctionOrdinal
+                    );
                 }
 
                 return base.VisitLocalFunctionStatement(node)!;
             }
+
             finally
             {
                 _factory.CurrentFunction = oldContainingSymbol;
@@ -331,9 +405,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             switch (instrumenter)
             {
-                case DynamicAnalysisInjector { Previous: var previous }:
+                case DynamicAnalysisInjector
+                {
+                    Previous: var previous
+                }:
                     return RemoveDynamicAnalysisInjectors(previous);
-                case DebugInfoInjector { Previous: var previous } injector:
+                case DebugInfoInjector
+                {
+                    Previous: var previous
+                } injector:
                     var newPrevious = RemoveDynamicAnalysisInjectors(previous);
                     if ((object)newPrevious == previous)
                     {
@@ -363,18 +443,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable;
         }
 
-        public override BoundNode VisitUnconvertedObjectCreationExpression(BoundUnconvertedObjectCreationExpression node)
-        {
+        public override BoundNode VisitUnconvertedObjectCreationExpression(
+            BoundUnconvertedObjectCreationExpression node
+        ) {
             throw ExceptionUtilities.Unreachable;
         }
 
-        public override BoundNode VisitDeconstructValuePlaceholder(BoundDeconstructValuePlaceholder node)
-        {
+        public override BoundNode VisitDeconstructValuePlaceholder(
+            BoundDeconstructValuePlaceholder node
+        ) {
             return PlaceholderReplacement(node);
         }
 
-        public override BoundNode VisitObjectOrCollectionValuePlaceholder(BoundObjectOrCollectionValuePlaceholder node)
-        {
+        public override BoundNode VisitObjectOrCollectionValuePlaceholder(
+            BoundObjectOrCollectionValuePlaceholder node
+        ) {
             if (_inExpressionLambda)
             {
                 // Expression trees do not include the 'this' argument for members.
@@ -397,9 +480,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         [Conditional("DEBUG")]
-        private static void AssertPlaceholderReplacement(BoundValuePlaceholderBase placeholder, BoundExpression value)
-        {
-            Debug.Assert(value.Type is { } && value.Type.Equals(placeholder.Type, TypeCompareKind.AllIgnoreOptions));
+        private static void AssertPlaceholderReplacement(
+            BoundValuePlaceholderBase placeholder,
+            BoundExpression value
+        ) {
+            Debug.Assert(
+                value.Type is { }
+                    && value.Type.Equals(placeholder.Type, TypeCompareKind.AllIgnoreOptions)
+            );
         }
 
         /// <summary>
@@ -407,13 +495,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Each occurrence of the placeholder node is replaced with the node returned.
         /// Throws if there is already a substitution.
         /// </summary>
-        private void AddPlaceholderReplacement(BoundValuePlaceholderBase placeholder, BoundExpression value)
-        {
+        private void AddPlaceholderReplacement(
+            BoundValuePlaceholderBase placeholder,
+            BoundExpression value
+        ) {
             AssertPlaceholderReplacement(placeholder, value);
 
             if (_placeholderReplacementMapDoNotUseDirectly is null)
             {
-                _placeholderReplacementMapDoNotUseDirectly = new Dictionary<BoundValuePlaceholderBase, BoundExpression>();
+                _placeholderReplacementMapDoNotUseDirectly = new Dictionary<
+                    BoundValuePlaceholderBase,
+                    BoundExpression
+                >();
             }
 
             _placeholderReplacementMapDoNotUseDirectly.Add(placeholder, value);
@@ -432,14 +525,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(removed);
         }
 
-        public sealed override BoundNode VisitOutDeconstructVarPendingInference(OutDeconstructVarPendingInference node)
-        {
+        public sealed override BoundNode VisitOutDeconstructVarPendingInference(
+            OutDeconstructVarPendingInference node
+        ) {
             // OutDeconstructVarPendingInference nodes are only used within initial binding, but don't survive past that stage
             throw ExceptionUtilities.Unreachable;
         }
 
-        public override BoundNode VisitDeconstructionVariablePendingInference(DeconstructionVariablePendingInference node)
-        {
+        public override BoundNode VisitDeconstructionVariablePendingInference(
+            DeconstructionVariablePendingInference node
+        ) {
             // DeconstructionVariablePendingInference nodes are only used within initial binding, but don't survive past that stage
             throw ExceptionUtilities.Unreachable;
         }
@@ -457,26 +552,55 @@ namespace Microsoft.CodeAnalysis.CSharp
             return BadExpression(node.Syntax, node.Type, ImmutableArray.Create(node));
         }
 
-        private static BoundExpression BadExpression(SyntaxNode syntax, TypeSymbol resultType, BoundExpression child)
-        {
+        private static BoundExpression BadExpression(
+            SyntaxNode syntax,
+            TypeSymbol resultType,
+            BoundExpression child
+        ) {
             return BadExpression(syntax, resultType, ImmutableArray.Create(child));
         }
 
-        private static BoundExpression BadExpression(SyntaxNode syntax, TypeSymbol resultType, BoundExpression child1, BoundExpression child2)
-        {
+        private static BoundExpression BadExpression(
+            SyntaxNode syntax,
+            TypeSymbol resultType,
+            BoundExpression child1,
+            BoundExpression child2
+        ) {
             return BadExpression(syntax, resultType, ImmutableArray.Create(child1, child2));
         }
 
-        private static BoundExpression BadExpression(SyntaxNode syntax, TypeSymbol resultType, ImmutableArray<BoundExpression> children)
-        {
-            return new BoundBadExpression(syntax, LookupResultKind.NotReferencable, ImmutableArray<Symbol?>.Empty, children, resultType);
+        private static BoundExpression BadExpression(
+            SyntaxNode syntax,
+            TypeSymbol resultType,
+            ImmutableArray<BoundExpression> children
+        ) {
+            return new BoundBadExpression(
+                syntax,
+                LookupResultKind.NotReferencable,
+                ImmutableArray<Symbol?>.Empty,
+                children,
+                resultType
+            );
         }
 
-        private bool TryGetWellKnownTypeMember<TSymbol>(SyntaxNode? syntax, WellKnownMember member, out TSymbol symbol, bool isOptional = false, Location? location = null) where TSymbol : Symbol
+        private bool TryGetWellKnownTypeMember<TSymbol>(
+            SyntaxNode? syntax,
+            WellKnownMember member,
+            out TSymbol symbol,
+            bool isOptional = false,
+            Location? location = null
+        ) where TSymbol : Symbol
         {
             Debug.Assert((syntax != null) ^ (location != null));
 
-            symbol = (TSymbol)Binder.GetWellKnownTypeMember(_compilation, member, _diagnostics, syntax: syntax, isOptional: isOptional, location: location);
+            symbol = (TSymbol)Binder.GetWellKnownTypeMember(
+                _compilation,
+                member,
+                _diagnostics,
+                syntax: syntax,
+                isOptional: isOptional,
+                location: location
+            );
             return symbol is { };
         }
 
@@ -485,8 +609,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Recommendation: Do not use, use <see cref="TryGetSpecialTypeMethod(SyntaxNode, SpecialMember, out MethodSymbol)"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
-        private MethodSymbol UnsafeGetSpecialTypeMethod(SyntaxNode syntax, SpecialMember specialMember)
-        {
+        private MethodSymbol UnsafeGetSpecialTypeMethod(
+            SyntaxNode syntax,
+            SpecialMember specialMember
+        ) {
             return UnsafeGetSpecialTypeMethod(syntax, specialMember, _compilation, _diagnostics);
         }
 
@@ -495,11 +621,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Recommendation: Do not use, use <see cref="TryGetSpecialTypeMethod(SyntaxNode, SpecialMember, CSharpCompilation, BindingDiagnosticBag, out MethodSymbol)"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
-        private static MethodSymbol UnsafeGetSpecialTypeMethod(SyntaxNode syntax, SpecialMember specialMember, CSharpCompilation compilation, BindingDiagnosticBag diagnostics)
-        {
+        private static MethodSymbol UnsafeGetSpecialTypeMethod(
+            SyntaxNode syntax,
+            SpecialMember specialMember,
+            CSharpCompilation compilation,
+            BindingDiagnosticBag diagnostics
+        ) {
             MethodSymbol method;
-            if (TryGetSpecialTypeMethod(syntax, specialMember, compilation, diagnostics, out method))
-            {
+            if (
+                TryGetSpecialTypeMethod(syntax, specialMember, compilation, diagnostics, out method)
+            ) {
                 return method;
             }
             else
@@ -507,19 +638,44 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MemberDescriptor descriptor = SpecialMembers.GetDescriptor(specialMember);
                 SpecialType type = (SpecialType)descriptor.DeclaringTypeId;
                 TypeSymbol container = compilation.Assembly.GetSpecialType(type);
-                TypeSymbol returnType = new ExtendedErrorTypeSymbol(compilation: compilation, name: descriptor.Name, errorInfo: null, arity: descriptor.Arity);
+                TypeSymbol returnType = new ExtendedErrorTypeSymbol(
+                    compilation: compilation,
+                    name: descriptor.Name,
+                    errorInfo: null,
+                    arity: descriptor.Arity
+                );
                 return new ErrorMethodSymbol(container, returnType, "Missing");
             }
         }
 
-        private bool TryGetSpecialTypeMethod(SyntaxNode syntax, SpecialMember specialMember, out MethodSymbol method)
-        {
-            return TryGetSpecialTypeMethod(syntax, specialMember, _compilation, _diagnostics, out method);
+        private bool TryGetSpecialTypeMethod(
+            SyntaxNode syntax,
+            SpecialMember specialMember,
+            out MethodSymbol method
+        ) {
+            return TryGetSpecialTypeMethod(
+                syntax,
+                specialMember,
+                _compilation,
+                _diagnostics,
+                out method
+            );
         }
 
-        private static bool TryGetSpecialTypeMethod(SyntaxNode syntax, SpecialMember specialMember, CSharpCompilation compilation, BindingDiagnosticBag diagnostics, out MethodSymbol method)
-        {
-            return Binder.TryGetSpecialTypeMember(compilation, specialMember, syntax, diagnostics, out method);
+        private static bool TryGetSpecialTypeMethod(
+            SyntaxNode syntax,
+            SpecialMember specialMember,
+            CSharpCompilation compilation,
+            BindingDiagnosticBag diagnostics,
+            out MethodSymbol method
+        ) {
+            return Binder.TryGetSpecialTypeMember(
+                compilation,
+                specialMember,
+                syntax,
+                diagnostics,
+                out method
+            );
         }
 
         public override BoundNode VisitTypeOfOperator(BoundTypeOfOperator node)
@@ -532,9 +688,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Emit needs this helper
             MethodSymbol getTypeFromHandle;
-            if (!TryGetWellKnownTypeMember(node.Syntax, WellKnownMember.System_Type__GetTypeFromHandle, out getTypeFromHandle))
-            {
-                return new BoundTypeOfOperator(node.Syntax, sourceType, null, type, hasErrors: true);
+            if (
+                !TryGetWellKnownTypeMember(
+                    node.Syntax,
+                    WellKnownMember.System_Type__GetTypeFromHandle,
+                    out getTypeFromHandle
+                )
+            ) {
+                return new BoundTypeOfOperator(
+                    node.Syntax,
+                    sourceType,
+                    null,
+                    type,
+                    hasErrors: true
+                );
             }
 
             return node.Update(sourceType, getTypeFromHandle, type);
@@ -549,16 +716,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Emit needs this helper
             MethodSymbol getTypeFromHandle;
-            if (!TryGetWellKnownTypeMember(node.Syntax, WellKnownMember.System_Type__GetTypeFromHandle, out getTypeFromHandle))
-            {
+            if (
+                !TryGetWellKnownTypeMember(
+                    node.Syntax,
+                    WellKnownMember.System_Type__GetTypeFromHandle,
+                    out getTypeFromHandle
+                )
+            ) {
                 return new BoundRefTypeOperator(node.Syntax, operand, null, type, hasErrors: true);
             }
 
             return node.Update(operand, getTypeFromHandle, type);
         }
 
-        public override BoundNode VisitTypeOrInstanceInitializers(BoundTypeOrInstanceInitializers node)
-        {
+        public override BoundNode VisitTypeOrInstanceInitializers(
+            BoundTypeOrInstanceInitializers node
+        ) {
             ImmutableArray<BoundStatement> originalStatements = node.Statements;
             var statements = ArrayBuilder<BoundStatement?>.GetInstance(node.Statements.Length);
             foreach (var initializer in originalStatements)
@@ -568,13 +741,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (initializer.Kind == BoundKind.Block)
                     {
                         var block = (BoundBlock)initializer;
-                        var statement = RewriteExpressionStatement((BoundExpressionStatement)block.Statements.Single(), suppressInstrumentation: true);
+                        var statement = RewriteExpressionStatement(
+                            (BoundExpressionStatement)block.Statements.Single(),
+                            suppressInstrumentation: true
+                        );
                         Debug.Assert(statement is { });
-                        statements.Add(block.Update(block.Locals, block.LocalFunctions, ImmutableArray.Create(statement)));
+                        statements.Add(
+                            block.Update(
+                                block.Locals,
+                                block.LocalFunctions,
+                                ImmutableArray.Create(statement)
+                            )
+                        );
                     }
                     else
                     {
-                        statements.Add(RewriteExpressionStatement((BoundExpressionStatement)initializer, suppressInstrumentation: true));
+                        statements.Add(
+                            RewriteExpressionStatement(
+                                (BoundExpressionStatement)initializer,
+                                suppressInstrumentation: true
+                            )
+                        );
                     }
                 }
                 else
@@ -589,8 +776,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             for (int i = 0; i < statements.Count; i++)
             {
                 var stmt = statements[i];
-                if (stmt == null || (optimize && IsFieldOrPropertyInitializer(originalStatements[i]) && ShouldOptimizeOutInitializer(stmt)))
-                {
+                if (
+                    stmt == null
+                    || (
+                        optimize
+                        && IsFieldOrPropertyInitializer(originalStatements[i])
+                        && ShouldOptimizeOutInitializer(stmt)
+                    )
+                ) {
                     optimizedInitializers++;
                     if (_factory.CurrentFunction?.IsStatic == false)
                     {
@@ -623,7 +816,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             BoundStatement original = originalStatements[i];
                             if (Instrument && !original.WasCompilerGenerated)
                             {
-                                rewritten = _instrumenter.InstrumentFieldOrPropertyInitializer(original, rewritten);
+                                rewritten = _instrumenter.InstrumentFieldOrPropertyInitializer(
+                                    original,
+                                    rewritten
+                                );
                             }
                         }
 
@@ -657,49 +853,59 @@ namespace Microsoft.CodeAnalysis.CSharp
             var F = _factory;
 
             BoundNode resultExpr;
-            if (TypeSymbol.Equals(
-                indexType,
-                _compilation.GetWellKnownType(WellKnownType.System_Index),
-                TypeCompareKind.ConsiderEverything))
-            {
+            if (
+                TypeSymbol.Equals(
+                    indexType,
+                    _compilation.GetWellKnownType(WellKnownType.System_Index),
+                    TypeCompareKind.ConsiderEverything
+                )
+            ) {
                 // array[Index] is treated like a pattern-based System.Index indexing
                 // expression, except that array indexers don't actually exist (they
                 // don't have symbols)
 
                 var arrayLocal = F.StoreToTemp(
                     VisitExpression(node.Expression),
-                    out BoundAssignmentOperator arrayAssign);
+                    out BoundAssignmentOperator arrayAssign
+                );
 
                 var indexOffsetExpr = MakePatternIndexOffsetExpression(
                     node.Indices[0],
                     F.ArrayLength(arrayLocal),
-                    out _);
+                    out _
+                );
 
                 resultExpr = F.Sequence(
                     ImmutableArray.Create(arrayLocal.LocalSymbol),
                     ImmutableArray.Create<BoundExpression>(arrayAssign),
-                    F.ArrayAccess(
-                        arrayLocal,
-                        ImmutableArray.Create(indexOffsetExpr)));
+                    F.ArrayAccess(arrayLocal, ImmutableArray.Create(indexOffsetExpr))
+                );
             }
-            else if (TypeSymbol.Equals(
-                indexType,
-                _compilation.GetWellKnownType(WellKnownType.System_Range),
-                TypeCompareKind.ConsiderEverything))
-            {
+            else if (
+                TypeSymbol.Equals(
+                    indexType,
+                    _compilation.GetWellKnownType(WellKnownType.System_Range),
+                    TypeCompareKind.ConsiderEverything
+                )
+            ) {
                 // array[Range] is compiled to:
                 // System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray(array, Range)
 
                 Debug.Assert(node.Expression.Type is { TypeKind: TypeKind.Array });
-                var elementType = ((ArrayTypeSymbol)node.Expression.Type).ElementTypeWithAnnotations;
+                var elementType =
+                    ((ArrayTypeSymbol)node.Expression.Type).ElementTypeWithAnnotations;
 
                 resultExpr = F.Call(
                     receiver: null,
-                    F.WellKnownMethod(WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__GetSubArray_T)
+                    F.WellKnownMethod(
+                            WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__GetSubArray_T
+                        )
                         .Construct(ImmutableArray.Create(elementType)),
                     ImmutableArray.Create(
                         VisitExpression(node.Expression),
-                        VisitExpression(node.Indices[0])));
+                        VisitExpression(node.Indices[0])
+                    )
+                );
             }
             else
             {
@@ -718,7 +924,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            if (syntax is ExpressionSyntax { Parent: { } parent } && parent.Kind() == SyntaxKind.EqualsValueClause) // Should be the initial value.
+            if (
+                syntax is ExpressionSyntax { Parent:  { } parent }
+                && parent.Kind() == SyntaxKind.EqualsValueClause
+            ) // Should be the initial value.
             {
                 Debug.Assert(parent.Parent is { });
                 switch (parent.Parent.Kind())
@@ -741,8 +950,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 break;
 
                             case BoundKind.ExpressionStatement:
-                                return ((BoundExpressionStatement)initializer).Expression.Kind == BoundKind.AssignmentOperator;
-
+                                return ((BoundExpressionStatement)initializer).Expression.Kind
+                                    == BoundKind.AssignmentOperator;
                         }
                         break;
                 }
@@ -763,7 +972,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            BoundAssignmentOperator? assignment = ((BoundExpressionStatement)statement).Expression as BoundAssignmentOperator;
+            BoundAssignmentOperator? assignment =
+                ((BoundExpressionStatement)statement).Expression as BoundAssignmentOperator;
             if (assignment == null)
             {
                 return false;
@@ -930,8 +1140,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckRefReadOnlySymbols(MethodSymbol symbol)
         {
-            if (symbol.ReturnsByRefReadonly ||
-                symbol.Parameters.Any(p => p.RefKind == RefKind.In))
+            if (symbol.ReturnsByRefReadonly || symbol.Parameters.Any(p => p.RefKind == RefKind.In))
             {
                 _factory.CompilationState.ModuleBuilderOpt?.EnsureIsReadOnlyAttributeExists();
             }
@@ -946,7 +1155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Note: do not use a static/singleton instance of this type, as it holds state.
         /// </summary>
-        private sealed class LocalRewritingValidator : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        private sealed class LocalRewritingValidator
+            : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
             /// <summary>
             /// Asserts that no unexpected nodes survived local rewriting.
@@ -981,27 +1191,33 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            public override BoundNode? VisitDeconstructionVariablePendingInference(DeconstructionVariablePendingInference node)
-            {
+            public override BoundNode? VisitDeconstructionVariablePendingInference(
+                DeconstructionVariablePendingInference node
+            ) {
                 Fail(node);
                 return null;
             }
 
-            public override BoundNode? VisitDeconstructValuePlaceholder(BoundDeconstructValuePlaceholder node)
-            {
+            public override BoundNode? VisitDeconstructValuePlaceholder(
+                BoundDeconstructValuePlaceholder node
+            ) {
                 Fail(node);
                 return null;
             }
 
-            public override BoundNode? VisitDisposableValuePlaceholder(BoundDisposableValuePlaceholder node)
-            {
+            public override BoundNode? VisitDisposableValuePlaceholder(
+                BoundDisposableValuePlaceholder node
+            ) {
                 Fail(node);
                 return null;
             }
 
             private void Fail(BoundNode node)
             {
-                Debug.Assert(false, $"Bound nodes of kind {node.Kind} should not survive past local rewriting");
+                Debug.Assert(
+                    false,
+                    $"Bound nodes of kind {node.Kind} should not survive past local rewriting"
+                );
             }
         }
 #endif

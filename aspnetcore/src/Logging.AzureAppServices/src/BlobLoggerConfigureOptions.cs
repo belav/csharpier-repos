@@ -7,13 +7,17 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices
 {
-    internal class BlobLoggerConfigureOptions : BatchLoggerConfigureOptions, IConfigureOptions<AzureBlobLoggerOptions>
+    internal class BlobLoggerConfigureOptions
+        : BatchLoggerConfigureOptions,
+          IConfigureOptions<AzureBlobLoggerOptions>
     {
         private readonly IConfiguration _configuration;
         private readonly IWebAppContext _context;
 
-        public BlobLoggerConfigureOptions(IConfiguration configuration, IWebAppContext context)
-            : base(configuration, "AzureBlobEnabled")
+        public BlobLoggerConfigureOptions(
+            IConfiguration configuration,
+            IWebAppContext context
+        ) : base(configuration, "AzureBlobEnabled")
         {
             _configuration = configuration;
             _context = context;
@@ -22,7 +26,9 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         public void Configure(AzureBlobLoggerOptions options)
         {
             base.Configure(options);
-            options.ContainerUrl = _configuration.GetSection("APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL")?.Value;
+            options.ContainerUrl = _configuration.GetSection(
+                "APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL"
+            )?.Value;
             options.ApplicationName = _context.SiteName;
             options.ApplicationInstanceId = _context.SiteInstanceId;
         }

@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
         protected AbstractOrderModifiersCodeFixProvider(
             ISyntaxFacts syntaxFacts,
             Option2<CodeStyleOption2<string>> option,
-            AbstractOrderModifiersHelpers helpers)
-        {
+            AbstractOrderModifiersHelpers helpers
+        ) {
             _syntaxFacts = syntaxFacts;
             _option = option;
             _helpers = helpers;
@@ -39,29 +39,39 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
 
         protected abstract ImmutableArray<string> FixableCompilerErrorIds { get; }
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => FixableCompilerErrorIds.Add(IDEDiagnosticIds.OrderModifiersDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            FixableCompilerErrorIds.Add(IDEDiagnosticIds.OrderModifiersDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var syntaxTree = await context.Document.GetSyntaxTreeAsync(context.CancellationToken).ConfigureAwait(false);
-            var syntaxNode = Location.Create(syntaxTree, context.Span).FindNode(context.CancellationToken);
+            var syntaxTree = await context.Document.GetSyntaxTreeAsync(context.CancellationToken)
+                .ConfigureAwait(false);
+            var syntaxNode = Location.Create(syntaxTree, context.Span)
+                .FindNode(context.CancellationToken);
 
             if (_syntaxFacts.GetModifiers(syntaxNode) != default)
             {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                    context.Diagnostics);
+                    context.Diagnostics
+                );
             }
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var option = document.Project.AnalyzerOptions.GetOption(_option, tree, cancellationToken);
+            var option = document.Project.AnalyzerOptions.GetOption(
+                _option,
+                tree,
+                cancellationToken
+            );
             if (!_helpers.TryGetOrComputePreferredOrder(option.Value, out var preferredOrder))
             {
                 return;
@@ -71,35 +81,44 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             {
                 var memberDeclaration = diagnostic.Location.FindNode(cancellationToken);
 
-                editor.ReplaceNode(memberDeclaration, (currentNode, _) =>
-                {
-                    var modifiers = _syntaxFacts.GetModifiers(currentNode);
-                    var orderedModifiers = new SyntaxTokenList(
-                        modifiers.OrderBy(CompareModifiers)
-                                 .Select((t, i) => t.WithTriviaFrom(modifiers[i])));
+                editor.ReplaceNode(
+                    memberDeclaration,
+                    (currentNode, _) =>
+                    {
+                        var modifiers = _syntaxFacts.GetModifiers(currentNode);
+                        var orderedModifiers = new SyntaxTokenList(
+                            modifiers.OrderBy(CompareModifiers)
+                                .Select((t, i) => t.WithTriviaFrom(modifiers[i]))
+                        );
 
-                    var updatedMemberDeclaration = _syntaxFacts.WithModifiers(currentNode, orderedModifiers);
-                    return updatedMemberDeclaration;
-                });
+                        var updatedMemberDeclaration = _syntaxFacts.WithModifiers(
+                            currentNode,
+                            orderedModifiers
+                        );
+                        return updatedMemberDeclaration;
+                    }
+                );
             }
 
             return;
 
             // Local functions
 
-            int CompareModifiers(SyntaxToken t1, SyntaxToken t2)
-                => GetOrder(t1) - GetOrder(t2);
+            int CompareModifiers(SyntaxToken t1, SyntaxToken t2) => GetOrder(t1) - GetOrder(t2);
 
-            int GetOrder(SyntaxToken token)
-                => preferredOrder.TryGetValue(token.RawKind, out var value) ? value : int.MaxValue;
+            int GetOrder(SyntaxToken token) =>
+                preferredOrder.TryGetValue(token.RawKind, out var value) ? value : int.MaxValue;
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Order_modifiers, createChangedDocument, AnalyzersResources.Order_modifiers)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                AnalyzersResources.Order_modifiers,
+                createChangedDocument,
+                AnalyzersResources.Order_modifiers
+            ) { }
         }
     }
 }

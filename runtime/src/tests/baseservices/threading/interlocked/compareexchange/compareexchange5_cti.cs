@@ -10,7 +10,7 @@ using System.Threading;
 
 // Tests that CompareExchange(object, object, object)
 // plays nicely with another thread accessing shared state directly
-// Also includes a test for when location = comparand = null (should 
+// Also includes a test for when location = comparand = null (should
 // switch).
 public class InterlockedCompareExchange5
 {
@@ -54,7 +54,10 @@ public class InterlockedCompareExchange5
             // globalValue and state should be "changedValue"
             if (globalValue.ToString() != "changedValue" && state != (object)("changedValue"))
             {
-                TestLibrary.TestFramework.LogError("001", "The method did not works, the result is" + globalValue + " " + state);
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "The method did not works, the result is" + globalValue + " " + state
+                );
                 retVal = false;
             }
         }
@@ -88,7 +91,10 @@ public class InterlockedCompareExchange5
             // globalValue and state should NOT be -100
             if (((myClass)globalValue).a != -100 && ((myClass)state).a != -100)
             {
-                TestLibrary.TestFramework.LogError("003", "The method did not works, the result is" + globalValue + " " + state);
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "The method did not works, the result is" + globalValue + " " + state
+                );
                 retVal = false;
             }
         }
@@ -124,7 +130,10 @@ public class InterlockedCompareExchange5
             // globalValue should equal value now
             if (globalValue != value)
             {
-                TestLibrary.TestFramework.LogError("005", "The method did not works, the result is" + globalValue + " " + state);
+                TestLibrary.TestFramework.LogError(
+                    "005",
+                    "The method did not works, the result is" + globalValue + " " + state
+                );
                 retVal = false;
             }
         }
@@ -179,7 +188,7 @@ public class InterlockedCompareExchange5
                 threadB.Join();
             }
             // first ten iterations, globalValue does not
-            // equal comparand, so it keeps returning 
+            // equal comparand, so it keeps returning
             // the contents of globalValue without
             // poking value into it
             // after ten, Thread B kicks in, and
@@ -217,7 +226,7 @@ public class InterlockedCompareExchange5
                 threadB.Join();
             }
             // first ten iterations, globalValue does not
-            // equal comparand, so it keeps returning 
+            // equal comparand, so it keeps returning
             // the contents of globalValue without
             // poking value into it
             // after ten, Thread B kicks in, and

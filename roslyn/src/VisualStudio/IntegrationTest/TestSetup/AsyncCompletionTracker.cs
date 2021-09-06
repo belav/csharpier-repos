@@ -25,8 +25,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AsyncCompletionTracker(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            IAsyncCompletionBroker asyncCompletionBroker)
-        {
+            IAsyncCompletionBroker asyncCompletionBroker
+        ) {
             // Store the listener provider, but delay accessing the listener itself since tracking could still be
             // disabled during the initialization sequence for integration tests.
             _asynchronousOperationListenerProvider = asynchronousOperationListenerProvider;
@@ -45,8 +45,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
 
         private void HandleAsyncCompletionTriggered(object sender, CompletionTriggeredEventArgs e)
         {
-            var listener = _asynchronousOperationListenerProvider.GetListener(FeatureAttribute.CompletionSet);
-            var token = listener.BeginAsyncOperation(nameof(IAsyncCompletionBroker.CompletionTriggered));
+            var listener = _asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.CompletionSet
+            );
+            var token = listener.BeginAsyncOperation(
+                nameof(IAsyncCompletionBroker.CompletionTriggered)
+            );
 
             e.CompletionSession.Dismissed += ReleaseToken;
             e.CompletionSession.ItemCommitted += ReleaseToken;
@@ -55,8 +59,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             return;
 
             // Local function
-            void ReleaseToken(object sender, EventArgs e)
-                => Interlocked.Exchange(ref token, null)?.Dispose();
+            void ReleaseToken(object sender, EventArgs e) =>
+                Interlocked.Exchange(ref token, null)?.Dispose();
         }
     }
 }

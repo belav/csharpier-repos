@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
             JsonReader reader,
             Type objectType,
             object existingValue,
-            JsonSerializer serializer)
-        {
+            JsonSerializer serializer
+        ) {
             try
             {
                 if (reader.TokenType == JsonToken.Null)
@@ -50,7 +50,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
                 serializer.Populate(jObjectReader, targetOperations);
 
                 // container target: the typed JsonPatchDocument.
-                var container = Activator.CreateInstance(objectType, targetOperations, JsonPatchDocumentConverter.DefaultContractResolver);
+                var container = Activator.CreateInstance(
+                    objectType,
+                    targetOperations,
+                    JsonPatchDocumentConverter.DefaultContractResolver
+                );
 
                 return container;
             }

@@ -34,13 +34,14 @@ namespace Microsoft.AspNetCore.Authorization
         /// </summary>
         /// <param name="failure">Contains information about why authorization failed.</param>
         /// <returns>The <see cref="AuthorizationResult"/>.</returns>
-        public static AuthorizationResult Failed(AuthorizationFailure failure) => new AuthorizationResult { Failure = failure };
+        public static AuthorizationResult Failed(AuthorizationFailure failure) =>
+            new AuthorizationResult { Failure = failure };
 
         /// <summary>
         /// Creates a failed authorization result.
         /// </summary>
         /// <returns>The <see cref="AuthorizationResult"/>.</returns>
-        public static AuthorizationResult Failed() => new AuthorizationResult { Failure = AuthorizationFailure.ExplicitFail() };
-
+        public static AuthorizationResult Failed() =>
+            new AuthorizationResult { Failure = AuthorizationFailure.ExplicitFail() };
     }
 }

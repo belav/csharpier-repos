@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Contains(
                 CoreStrings.InvalidMemberExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message
+            );
         }
 
         [ConditionalFact]
@@ -44,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Contains(
                 CoreStrings.InvalidMemberExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccess()).Message
+            );
         }
 
         [ConditionalFact]
@@ -101,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Contains(
                 CoreStrings.InvalidMembersExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message
+            );
         }
 
         [ConditionalFact]
@@ -113,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Contains(
                 CoreStrings.InvalidMembersExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetPropertyAccessList()).Message
+            );
         }
 
         [ConditionalFact]
@@ -130,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         [ConditionalFact]
         public void Get_member_access_should_return_field_info_when_valid_field_access_expression()
         {
-            Expression<Func<ModelBuilderTest.EntityWithFields, int>> fieldExpression = e => e.CompanyId;
+            Expression<Func<ModelBuilderTest.EntityWithFields, int>> fieldExpression = e =>
+                e.CompanyId;
             var memberInfo = fieldExpression.GetMemberAccess();
 
             Assert.NotNull(memberInfo);
@@ -145,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Contains(
                 CoreStrings.InvalidMemberExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message
+            );
         }
 
         [ConditionalFact]
@@ -158,18 +164,21 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 TenantId = 200
             };
 
-            Expression<Func<ModelBuilderTest.EntityWithFields, int>> expression = e => closure.CompanyId;
+            Expression<Func<ModelBuilderTest.EntityWithFields, int>> expression = e =>
+                closure.CompanyId;
 
             Assert.Contains(
                 CoreStrings.InvalidMemberExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetMemberAccess()).Message
+            );
         }
 
         [ConditionalFact]
         public void Get_member_access_should_handle_convert()
         {
             // Note: CompanyId is an int, so we are converting int -> long
-            Expression<Func<ModelBuilderTest.EntityWithFields, long>> fieldExpression = e => e.CompanyId;
+            Expression<Func<ModelBuilderTest.EntityWithFields, long>> fieldExpression = e =>
+                e.CompanyId;
 
             var memberInfo = fieldExpression.GetMemberAccess();
 
@@ -180,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         [ConditionalFact]
         public void Get_member_access_list_should_handle_convert()
         {
-            Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e => new { e.Id, e.CompanyId };
+            Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e =>
+                new { e.Id, e.CompanyId };
 
             var memberInfos = expression.GetMemberAccessList();
 
@@ -193,11 +203,13 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         [ConditionalFact]
         public void Get_member_access_list_should_throw_when_invalid_expression()
         {
-            Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e => new { P = e.Id + e.CompanyId };
+            Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e =>
+                new { P = e.Id + e.CompanyId };
 
             Assert.Contains(
                 CoreStrings.InvalidMembersExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message
+            );
         }
 
         [ConditionalFact]
@@ -210,11 +222,13 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 TenantId = 200
             };
 
-            Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e => new { e.Id, closure.CompanyId };
+            Expression<Func<ModelBuilderTest.EntityWithFields, object>> expression = e =>
+                new { e.Id, closure.CompanyId };
 
             Assert.Contains(
                 CoreStrings.InvalidMembersExpression(expression),
-                Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message);
+                Assert.Throws<ArgumentException>(() => expression.GetMemberAccessList()).Message
+            );
         }
     }
 }

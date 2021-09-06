@@ -19,14 +19,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpOrganizing(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpOrganizing))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpOrganizing)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Organizing)]
         public void RemoveAndSort()
         {
-            SetUpEditor(@"$$
+            SetUpEditor(
+                @"$$
 using C;
 using B;
 using A;
@@ -38,9 +37,11 @@ class Test
 }
 namespace A { public class CA { } }
 namespace B { public class CB { } }
-namespace C { public class CC { } }");
+namespace C { public class CC { } }"
+            );
             VisualStudio.ExecuteCommand("Edit.RemoveAndSort");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 using A;
 using C;
 
@@ -51,8 +52,8 @@ class Test
 }
 namespace A { public class CA { } }
 namespace B { public class CB { } }
-namespace C { public class CC { } }");
-
+namespace C { public class CC { } }"
+            );
         }
     }
 }

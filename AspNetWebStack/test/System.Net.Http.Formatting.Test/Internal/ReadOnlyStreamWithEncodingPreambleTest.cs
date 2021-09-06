@@ -18,9 +18,12 @@ namespace System.Net.Http.Internal
             using (MemoryStream inputStream = new MemoryStream())
             {
                 // Arrange
-                string message = "Hello, world" + Environment.NewLine     // English
-                               + "こんにちは、世界" + Environment.NewLine  // Japanese
-                               + "مرحبا، العالم";                       // Arabic
+                string message =
+                    "Hello, world"
+                    + Environment.NewLine // English
+                    + "こんにちは、世界"
+                    + Environment.NewLine // Japanese
+                    + "مرحبا، العالم"; // Arabic
 
                 byte[] preamble = encoding.GetPreamble();
                 byte[] encodedMessage = encoding.GetBytes(message);
@@ -38,15 +41,21 @@ namespace System.Net.Http.Internal
 
                 inputStream.Seek(0, SeekOrigin.Begin);
 
-                using (ReadOnlyStreamWithEncodingPreamble wrapperStream = new ReadOnlyStreamWithEncodingPreamble(inputStream, encoding))
-                {
+                using (
+                    ReadOnlyStreamWithEncodingPreamble wrapperStream =
+                        new ReadOnlyStreamWithEncodingPreamble(inputStream, encoding)
+                ) {
                     // Act
                     int totalRead = 0;
                     byte[] readBuffer = new byte[expectedBytes.Length];
 
                     while (totalRead < readBuffer.Length)
                     {
-                        int read = wrapperStream.Read(readBuffer, totalRead, readBuffer.Length - totalRead);
+                        int read = wrapperStream.Read(
+                            readBuffer,
+                            totalRead,
+                            readBuffer.Length - totalRead
+                        );
                         totalRead += read;
 
                         if (read == 0)
@@ -56,17 +65,27 @@ namespace System.Net.Http.Internal
                     // Assert
                     Assert.Equal(expectedBytes.Length, totalRead);
                     Assert.Equal(expectedBytes, readBuffer);
-                    Assert.Equal(0, wrapperStream.Read(readBuffer, 0, 1));  // Make sure there are no stray bytes left in the stream
+                    Assert.Equal(0, wrapperStream.Read(readBuffer, 0, 1)); // Make sure there are no stray bytes left in the stream
                 }
             }
         }
 
         class EncodingDataAttribute : DataAttribute
         {
-            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
-            {
+            public override IEnumerable<object[]> GetData(
+                MethodInfo methodUnderTest,
+                Type[] parameterTypes
+            ) {
                 return new MatrixTheoryDataSet<Encoding, bool>(
-                    new[] { Encoding.UTF7, Encoding.UTF8, Encoding.BigEndianUnicode, Encoding.Unicode, Encoding.UTF32, Encoding.ASCII },
+                    new[]
+                    {
+                        Encoding.UTF7,
+                        Encoding.UTF8,
+                        Encoding.BigEndianUnicode,
+                        Encoding.Unicode,
+                        Encoding.UTF32,
+                        Encoding.ASCII
+                    },
                     new[] { false, true }
                 );
             }

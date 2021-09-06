@@ -7,10 +7,7 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
 {
     public class AdventureWorksContext : PoolableDbContext
     {
-        public AdventureWorksContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public AdventureWorksContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,36 +15,37 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
                 entity =>
                 {
                     entity.HasIndex(
-                        e => new
-                        {
-                            e.AddressLine1,
-                            e.AddressLine2,
-                            e.City,
-                            e.StateProvince,
-                            e.PostalCode,
-                            e.CountryRegion
-                        },
-                        "IX_Address_AddressLine1_AddressLine2_City_StateProvince_PostalCode_CountryRegion");
+                        e =>
+                            new
+                            {
+                                e.AddressLine1,
+                                e.AddressLine2,
+                                e.City,
+                                e.StateProvince,
+                                e.PostalCode,
+                                e.CountryRegion
+                            },
+                        "IX_Address_AddressLine1_AddressLine2_City_StateProvince_PostalCode_CountryRegion"
+                    );
 
                     entity.HasIndex(e => e.StateProvince, "IX_Address_StateProvince");
 
-                    entity.HasIndex(e => e.rowguid, "AK_Address_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_Address_rowguid").IsUnique();
 
                     entity.Property(e => e.ModifiedDate)
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<Customer>(
                 entity =>
                 {
                     entity.HasIndex(e => e.EmailAddress, "IX_Customer_EmailAddress");
 
-                    entity.HasIndex(e => e.rowguid, "AK_Customer_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_Customer_rowguid").IsUnique();
 
                     entity.Property(e => e.ModifiedDate)
                         .HasColumnType("datetime")
@@ -58,36 +56,33 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
                     entity.Property(e => e.PasswordSalt).HasColumnType("varchar(10)");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<CustomerAddress>(
                 entity =>
                 {
-                    entity.HasKey(
-                            e => new { e.CustomerID, e.AddressID })
+                    entity.HasKey(e => new { e.CustomerID, e.AddressID })
                         .HasName("PK_CustomerAddress_CustomerID_AddressID");
 
-                    entity.HasIndex(e => e.rowguid, "AK_CustomerAddress_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_CustomerAddress_rowguid").IsUnique();
 
                     entity.Property(e => e.ModifiedDate)
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<Product>(
                 entity =>
                 {
-                    entity.HasIndex(e => e.ProductNumber, "AK_Product_ProductNumber")
-                        .IsUnique();
+                    entity.HasIndex(e => e.ProductNumber, "AK_Product_ProductNumber").IsUnique();
 
-                    entity.HasIndex(e => e.rowguid, "AK_Product_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_Product_rowguid").IsUnique();
 
-                    entity.HasIndex(e => e.Name, "AK_Product_Name")
-                        .IsUnique();
+                    entity.HasIndex(e => e.Name, "AK_Product_Name").IsUnique();
 
                     entity.Property(e => e.DiscontinuedDate).HasColumnType("datetime");
 
@@ -108,64 +103,59 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
                     entity.Property(e => e.Weight).HasColumnType("decimal");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductCategory>(
                 entity =>
                 {
-                    entity.HasIndex(e => e.Name, "AK_ProductCategory_Name")
-                        .IsUnique();
+                    entity.HasIndex(e => e.Name, "AK_ProductCategory_Name").IsUnique();
 
-                    entity.HasIndex(e => e.rowguid, "AK_ProductCategory_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_ProductCategory_rowguid").IsUnique();
 
                     entity.Property(e => e.ModifiedDate)
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductDescription>(
                 entity =>
                 {
-                    entity.HasIndex(e => e.rowguid, "AK_ProductDescription_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_ProductDescription_rowguid").IsUnique();
 
                     entity.Property(e => e.ModifiedDate)
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductModel>(
                 entity =>
                 {
-                    entity.HasIndex(e => e.Name, "AK_ProductModel_Name")
-                        .IsUnique();
+                    entity.HasIndex(e => e.Name, "AK_ProductModel_Name").IsUnique();
 
-                    entity.HasIndex(e => e.rowguid, "AK_ProductModel_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_ProductModel_rowguid").IsUnique();
 
                     entity.Property(e => e.ModifiedDate)
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductModelProductDescription>(
                 entity =>
                 {
-                    entity.HasKey(
-                            e => new
-                            {
-                                e.ProductModelID,
-                                e.ProductDescriptionID,
-                                e.Culture
-                            })
-                        .HasName("PK_ProductModelProductDescription_ProductModelID_ProductDescriptionID_Culture");
+                    entity.HasKey(e => new { e.ProductModelID, e.ProductDescriptionID, e.Culture })
+                        .HasName(
+                            "PK_ProductModelProductDescription_ProductModelID_ProductDescriptionID_Culture"
+                        );
 
                     entity.HasIndex(e => e.rowguid, "AK_ProductModelProductDescription_rowguid")
                         .IsUnique();
@@ -177,19 +167,18 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
                         .HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesOrderDetail>(
                 entity =>
                 {
-                    entity.HasKey(
-                            e => new { e.SalesOrderID, e.SalesOrderDetailID })
+                    entity.HasKey(e => new { e.SalesOrderID, e.SalesOrderDetailID })
                         .HasName("PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID");
 
                     entity.HasIndex(e => e.ProductID, "IX_SalesOrderDetail_ProductID");
 
-                    entity.HasIndex(e => e.rowguid, "AK_SalesOrderDetail_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_SalesOrderDetail_rowguid").IsUnique();
 
                     entity.Property(e => e.SalesOrderDetailID).ValueGeneratedOnAdd();
 
@@ -208,25 +197,20 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
                         .HasDefaultValueSql("0.0");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesOrder>(
                 entity =>
                 {
-                    entity.HasKey(e => e.SalesOrderID)
-                        .HasName("PK_SalesOrderHeader_SalesOrderID");
+                    entity.HasKey(e => e.SalesOrderID).HasName("PK_SalesOrderHeader_SalesOrderID");
 
                     entity.HasIndex(e => e.CustomerID, "IX_SalesOrderHeader_CustomerID");
 
-                    entity.HasIndex(
-                            e => e.SalesOrderNumber,
-                            "AK_SalesOrderHeader_SalesOrderNumber")
+                    entity.HasIndex(e => e.SalesOrderNumber, "AK_SalesOrderHeader_SalesOrderNumber")
                         .IsUnique();
 
-                    entity.HasIndex(
-                            e => e.rowguid,
-                            "AK_SalesOrderHeader_rowguid")
-                        .IsUnique();
+                    entity.HasIndex(e => e.rowguid, "AK_SalesOrderHeader_rowguid").IsUnique();
 
                     entity.Property(e => e.SalesOrderID).UseHiLo("SalesOrderNumber", "SalesLT");
 
@@ -267,7 +251,8 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure.Model
                         .ValueGeneratedOnAddOrUpdate();
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.HasSequence<int>("SalesOrderNumber", "SalesLT");
         }

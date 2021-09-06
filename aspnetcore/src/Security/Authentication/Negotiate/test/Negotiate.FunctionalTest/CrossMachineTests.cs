@@ -24,18 +24,15 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         private const string ClientAddress =
             // "http://chrross-udesk:5004";
             "https://localhost:5005";
-        private const string ServerName =
-            "chrross-dc";
-            // "chrross-udesk";
-        private static readonly string ServerPersistAddress = $"http://{ServerName}.CRKerberos.com:5000";
-        private static readonly string ServerNonPersistAddress = $"http://{ServerName}.CRKerberos.com:5002";
+        private const string ServerName = "chrross-dc";
+        // "chrross-udesk";
+        private static readonly string ServerPersistAddress =
+            $"http://{ServerName}.CRKerberos.com:5000";
+        private static readonly string ServerNonPersistAddress =
+            $"http://{ServerName}.CRKerberos.com:5002";
 
         public static IEnumerable<object[]> Http11And2 =>
-            new List<object[]>
-            {
-                new object[] { Http11Version },
-                new object[] { Http2Version },
-            };
+            new List<object[]> { new object[] { Http11Version }, new object[] { Http2Version }, };
 
         [ConditionalTheory(Skip = "Manual testing only")]
         [MemberData(nameof(Http11And2))]
@@ -69,23 +66,44 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         [ConditionalTheory(Skip = "Manual testing only")]
         [MemberData(nameof(HttpOrders))]
         // AuthorizedRequestAfterAuth_ReUses1WithPersistence would give the same results
-        public Task UrestrictedRequestAfterAuth_ReUses1WithPersistence(string protocol1, string protocol2)
-        {
-            return RunTest(ServerPersistAddress, protocol1, protocol2, "/AfterAuth/Unrestricted/Persist");
+        public Task UrestrictedRequestAfterAuth_ReUses1WithPersistence(
+            string protocol1,
+            string protocol2
+        ) {
+            return RunTest(
+                ServerPersistAddress,
+                protocol1,
+                protocol2,
+                "/AfterAuth/Unrestricted/Persist"
+            );
         }
 
         [ConditionalTheory(Skip = "Manual testing only")]
         [MemberData(nameof(HttpOrders))]
-        public Task UrestrictedRequestAfterAuth_AnonymousWhenNotPersisted(string protocol1, string protocol2)
-        {
-            return RunTest(ServerNonPersistAddress, protocol1, protocol2, "/AfterAuth/Unrestricted/NonPersist");
+        public Task UrestrictedRequestAfterAuth_AnonymousWhenNotPersisted(
+            string protocol1,
+            string protocol2
+        ) {
+            return RunTest(
+                ServerNonPersistAddress,
+                protocol1,
+                protocol2,
+                "/AfterAuth/Unrestricted/NonPersist"
+            );
         }
 
         [ConditionalTheory(Skip = "Manual testing only")]
         [MemberData(nameof(HttpOrders))]
-        public Task AuthorizedRequestAfterAuth_ReauthenticatesWhenNotPersisted(string protocol1, string protocol2)
-        {
-            return RunTest(ServerNonPersistAddress, protocol1, protocol2, "/AfterAuth/Authorized/NonPersist");
+        public Task AuthorizedRequestAfterAuth_ReauthenticatesWhenNotPersisted(
+            string protocol1,
+            string protocol2
+        ) {
+            return RunTest(
+                ServerNonPersistAddress,
+                protocol1,
+                protocol2,
+                "/AfterAuth/Authorized/NonPersist"
+            );
         }
 
         [ConditionalTheory(Skip = "Manual testing only")]
@@ -137,11 +155,13 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
         private static HttpClient CreateClient(string address)
         {
-            return new HttpClient(new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-            })
-            {
+            return new HttpClient(
+                new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback =
+                        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+                }
+            ) {
                 BaseAddress = new Uri(address),
                 DefaultRequestVersion = new Version(2, 0),
             };

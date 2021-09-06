@@ -80,8 +80,7 @@ namespace SerializationTestTypes
         [DataMember]
         public KT1Base BData;
 
-        public KT1Base()
-        { }
+        public KT1Base() { }
         public KT1Base(bool init)
         {
             BData = new KT1Derived();
@@ -95,11 +94,18 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             KT1Base kt1 = obj as KT1Base;
-            if (kt1 == null) return false;
+            if (kt1 == null)
+                return false;
             if (this.BData == null || kt1.BData == null)
             {
-                if (this.BData == null && kt1.BData == null) { return true; }
-                else { return false; }
+                if (this.BData == null && kt1.BData == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -127,8 +133,10 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             KT1Derived kt1 = obj as KT1Derived;
-            if (kt1 == null) return false;
-            if (this.DData != kt1.DData) return false;
+            if (kt1 == null)
+                return false;
+            if (this.DData != kt1.DData)
+                return false;
             return true;
         }
 
@@ -145,8 +153,7 @@ namespace SerializationTestTypes
         [DataMember]
         public KT2Base BData;
 
-        public KT2Base()
-        { }
+        public KT2Base() { }
         public KT2Base(bool init)
         {
             BData = new KT2Derived();
@@ -160,7 +167,8 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             KT2Base kt1 = obj as KT2Base;
-            if (kt1 == null) return false;
+            if (kt1 == null)
+                return false;
             if (this.BData == null || kt1.BData == null)
             {
                 if (this.BData == null && kt1.BData == null)
@@ -191,8 +199,7 @@ namespace SerializationTestTypes
         [DataMember]
         public KT3BaseKTMReturnsPrivateType BData;
 
-        public KT3BaseKTMReturnsPrivateType()
-        { }
+        public KT3BaseKTMReturnsPrivateType() { }
         public KT3BaseKTMReturnsPrivateType(bool init)
         {
             BData = new KT3DerivedPrivate();
@@ -206,11 +213,18 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             KT3BaseKTMReturnsPrivateType kt1 = obj as KT3BaseKTMReturnsPrivateType;
-            if (kt1 == null) return false;
+            if (kt1 == null)
+                return false;
             if (this.BData == null || kt1.BData == null)
             {
-                if (this.BData == null && kt1.BData == null) { return true; }
-                else { return false; }
+                if (this.BData == null && kt1.BData == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -238,8 +252,10 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             KT3DerivedPrivate kt1 = obj as KT3DerivedPrivate;
-            if (kt1 == null) return false;
-            if (this.DData != kt1.DData) return false;
+            if (kt1 == null)
+                return false;
+            if (this.DData != kt1.DData)
+                return false;
             return true;
         }
 
@@ -263,8 +279,10 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             KT2Derived kt1 = obj as KT2Derived;
-            if (kt1 == null) return false;
-            if (this.DData != kt1.DData) return false;
+            if (kt1 == null)
+                return false;
+            if (this.DData != kt1.DData)
+                return false;
             return true;
         }
 
@@ -414,7 +432,10 @@ namespace SerializationTestTypes
         public DCHashtableContainerPublic(bool init)
         {
             this.List.Add(new Guid("2838c886-08d4-4cb4-9995-45f79b4359fe"), new PublicDC());
-            this.List.Add(new Guid("881d2d4c-1342-48ee-8403-7ca8ca5b3d18"), new PublicDCClassPublicDM(true));
+            this.List.Add(
+                new Guid("881d2d4c-1342-48ee-8403-7ca8ca5b3d18"),
+                new PublicDCClassPublicDM(true)
+            );
             this.List.Add(int.MaxValue, int.MinValue);
             this.List.Add("null", null);
             this.List.Add(DateTime.MinValue, DateTime.MaxValue);
@@ -449,19 +470,55 @@ namespace SerializationTestTypes
         public DCHashtableContainerMixedTypes(bool init)
         {
             this.List.Add(new Guid("00000000-0000-0000-0000-000000000000"), new PublicDC());
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000001"), new PublicDCClassPublicDM(true));
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000002"), new PublicDCClassPrivateDM_DerivedDCClassPublic());
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000001"),
+                new PublicDCClassPublicDM(true)
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000002"),
+                new PublicDCClassPrivateDM_DerivedDCClassPublic()
+            );
 
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000003"), new PrivateDCClassPublicDM_DerivedDCClassPrivate());
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000004"), new PrivateDCClassPrivateDM(true));
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000005"), new PrivateCallBackSample_IDeserializationCallback());
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000006"), new PrivateCallBackSample_OnDeserialized());
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000007"), new PrivateCallBackSample_OnSerialized());
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000008"), new PrivateDCStruct(true));
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000009"), new PrivateDefaultCtorIXmlSerializables(true));
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000010"), new PrivateIXmlSerializables());
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000011"), new Derived_Override_Prop_GetPrivate_Private(true));
-            this.List.Add(new Guid("00000000-0000-0000-0000-000000000012"), new DerivedFromPriC(100));
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000003"),
+                new PrivateDCClassPublicDM_DerivedDCClassPrivate()
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000004"),
+                new PrivateDCClassPrivateDM(true)
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000005"),
+                new PrivateCallBackSample_IDeserializationCallback()
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000006"),
+                new PrivateCallBackSample_OnDeserialized()
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000007"),
+                new PrivateCallBackSample_OnSerialized()
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000008"),
+                new PrivateDCStruct(true)
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000009"),
+                new PrivateDefaultCtorIXmlSerializables(true)
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000010"),
+                new PrivateIXmlSerializables()
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000011"),
+                new Derived_Override_Prop_GetPrivate_Private(true)
+            );
+            this.List.Add(
+                new Guid("00000000-0000-0000-0000-000000000012"),
+                new DerivedFromPriC(100)
+            );
 
             this.List.Add(string.Empty, string.Empty);
             this.List.Add("null", null);
@@ -483,21 +540,28 @@ namespace SerializationTestTypes
     public class CustomGenericContainerPrivateType2
     {
         [DataMember]
-        private CustomGeneric2<PrivateDC, PrivateDC> _data1 = new CustomGeneric2<PrivateDC, PrivateDC>();
+        private CustomGeneric2<PrivateDC, PrivateDC> _data1 = new CustomGeneric2<
+            PrivateDC,
+            PrivateDC
+        >();
     }
 
     [DataContract(IsReference = true)]
     public class CustomGenericContainerPrivateType3
     {
         [DataMember]
-        private CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPrivate> _data1 = new CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPrivate>();
+        private CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPrivate> _data1 =
+            new CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPrivate>();
     }
 
     [DataContract(IsReference = true)]
     public class CustomGenericContainerPrivateType4
     {
         [DataMember]
-        private CustomGeneric2<PublicDC, PublicDCClassPrivateDM> _data1 = new CustomGeneric2<PublicDC, PublicDCClassPrivateDM>();
+        private CustomGeneric2<PublicDC, PublicDCClassPrivateDM> _data1 = new CustomGeneric2<
+            PublicDC,
+            PublicDCClassPrivateDM
+        >();
     }
 
     [DataContract(IsReference = true)]
@@ -518,14 +582,18 @@ namespace SerializationTestTypes
     public class CustomGenericContainerPublicType3
     {
         [DataMember]
-        public CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPublic> data1 = new CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPublic>();
+        public CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPublic> data1 =
+            new CustomGeneric2<PublicDC, PublicDCClassPublicDM_DerivedDCClassPublic>();
     }
 
     [DataContract(IsReference = true)]
     public class CustomGenericContainerPublicType4
     {
         [DataMember]
-        public CustomGeneric2<PublicDC, PublicDCClassPublicDM> data1 = new CustomGeneric2<PublicDC, PublicDCClassPublicDM>();
+        public CustomGeneric2<PublicDC, PublicDCClassPublicDM> data1 = new CustomGeneric2<
+            PublicDC,
+            PublicDCClassPublicDM
+        >();
     }
 
     [DataContract(IsReference = true)]
@@ -554,9 +622,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public object GenericData;
-        public GenericContainer()
-        {
-        }
+        public GenericContainer() { }
         public GenericContainer(bool init)
         {
             GenericData = new GenericBase<SimpleBaseContainer>();
@@ -614,8 +680,7 @@ namespace SerializationTestTypes
         [DataMember]
         public object Base2;
 
-        public SimpleBaseContainer()
-        { }
+        public SimpleBaseContainer() { }
         public SimpleBaseContainer(bool init)
         {
             Base1 = new SimpleBaseDerived();
@@ -629,7 +694,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public List<object> ListData = new List<object>();
-        public DCListPrivateTContainer2() { ListData.Add(new PrivateDC()); }
+        public DCListPrivateTContainer2()
+        {
+            ListData.Add(new PrivateDC());
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -637,7 +705,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private List<PrivateDC> _listData = new List<PrivateDC>();
-        public DCListPrivateTContainer() { _listData.Add(new PrivateDC()); }
+        public DCListPrivateTContainer()
+        {
+            _listData.Add(new PrivateDC());
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -645,7 +716,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public List<PublicDC> ListData = new List<PublicDC>();
-        public DCListPublicTContainer() { ListData.Add(new PublicDC()); }
+        public DCListPublicTContainer()
+        {
+            ListData.Add(new PublicDC());
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -729,19 +803,11 @@ namespace SerializationTestTypes
 
         public object this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -829,19 +895,11 @@ namespace SerializationTestTypes
 
         public object this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -864,7 +922,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListImplicitWithCDC1", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListImplicitWithCDC1",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleListImplicitWithCDC : IList
     {
         private List<object> _internalList = new List<object>();
@@ -929,19 +992,11 @@ namespace SerializationTestTypes
 
         public object this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -1027,19 +1082,11 @@ namespace SerializationTestTypes
 
         object IList.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -1126,19 +1173,11 @@ namespace SerializationTestTypes
 
         object IList.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -1161,7 +1200,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListExplicitWithCDC2", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListExplicitWithCDC2",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleListExplicitWithCDC : IList
     {
         private List<object> _internalList = new List<object>();
@@ -1224,19 +1268,11 @@ namespace SerializationTestTypes
 
         object IList.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -1259,7 +1295,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListExplicitWithCDCContainsPrivateDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListExplicitWithCDCContainsPrivateDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     [KnownType(typeof(PrivateDC))]
     public class SampleListExplicitWithCDCContainsPrivateDC : IList
     {
@@ -1324,19 +1365,11 @@ namespace SerializationTestTypes
 
         object IList.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -1390,14 +1423,8 @@ namespace SerializationTestTypes
 
         public DC this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         public void Add(DC item)
@@ -1476,14 +1503,8 @@ namespace SerializationTestTypes
 
         public DC this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         public void Add(DC item)
@@ -1532,7 +1553,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListTImplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListTImplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleListTImplicitWithCDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
@@ -1562,14 +1588,8 @@ namespace SerializationTestTypes
 
         public DC this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         public void Add(DC item)
@@ -1648,14 +1668,8 @@ namespace SerializationTestTypes
 
         DC IList<DC>.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         void ICollection<DC>.Add(DC item)
@@ -1734,14 +1748,8 @@ namespace SerializationTestTypes
 
         DC IList<DC>.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         void ICollection<DC>.Add(DC item)
@@ -1790,7 +1798,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListTExplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListTExplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleListTExplicitWithCDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
@@ -1820,14 +1833,8 @@ namespace SerializationTestTypes
 
         DC IList<DC>.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         void ICollection<DC>.Add(DC item)
@@ -1876,8 +1883,14 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM", Namespace = "Test", ItemName = "Item")]
-    public class SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM : IList<PublicDCClassPrivateDM>
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
+    public class SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM
+        : IList<PublicDCClassPrivateDM>
     {
         private List<PublicDCClassPrivateDM> _internalList = new List<PublicDCClassPrivateDM>();
         public SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM() { }
@@ -1906,14 +1919,8 @@ namespace SerializationTestTypes
 
         PublicDCClassPrivateDM IList<PublicDCClassPrivateDM>.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         void ICollection<PublicDCClassPrivateDM>.Add(PublicDCClassPrivateDM item)
@@ -1931,8 +1938,10 @@ namespace SerializationTestTypes
             return _internalList.Contains(item);
         }
 
-        void ICollection<PublicDCClassPrivateDM>.CopyTo(PublicDCClassPrivateDM[] array, int arrayIndex)
-        {
+        void ICollection<PublicDCClassPrivateDM>.CopyTo(
+            PublicDCClassPrivateDM[] array,
+            int arrayIndex
+        ) {
             _internalList.CopyTo(array, arrayIndex);
         }
 
@@ -1962,7 +1971,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListTExplicitWithCDCContainsPrivateDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListTExplicitWithCDCContainsPrivateDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleListTExplicitWithCDCContainsPrivateDC : IList<PrivateDC>
     {
         private List<PrivateDC> _internalList = new List<PrivateDC>();
@@ -1992,14 +2006,8 @@ namespace SerializationTestTypes
 
         PrivateDC IList<PrivateDC>.this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         void ICollection<PrivateDC>.Add(PrivateDC item)
@@ -2167,7 +2175,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleICollectionTImplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleICollectionTImplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleICollectionTImplicitWithCDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
@@ -2344,7 +2357,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleICollectionTExplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleICollectionTExplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleICollectionTExplicitWithCDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
@@ -2403,7 +2421,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleICollectionTExplicitWithCDCContainsPrivateDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleICollectionTExplicitWithCDCContainsPrivateDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleICollectionTExplicitWithCDCContainsPrivateDC : ICollection<PrivateDC>
     {
         private List<PrivateDC> _internalList = new List<PrivateDC>();
@@ -2516,7 +2539,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleIEnumerableTImplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleIEnumerableTImplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleIEnumerableTImplicitWithCDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
@@ -2598,7 +2626,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleIEnumerableTExplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleIEnumerableTExplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleIEnumerableTExplicitWithCDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
@@ -2627,7 +2660,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleIEnumerableTExplicitWithCDCContainsPrivateDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleIEnumerableTExplicitWithCDCContainsPrivateDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleIEnumerableTExplicitWithCDCContainsPrivateDC : IEnumerable<PrivateDC>
     {
         private List<PrivateDC> _internalList = new List<PrivateDC>();
@@ -2678,9 +2716,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -2724,9 +2760,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -2749,7 +2783,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListImplicitWithCDC2", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListImplicitWithCDC2",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleICollectionImplicitWithCDC : ICollection
     {
         private List<object> _internalList = new List<object>();
@@ -2770,9 +2809,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -2815,9 +2852,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -2862,9 +2897,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -2887,7 +2920,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListExplicitWithCDC1", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListExplicitWithCDC1",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleICollectionExplicitWithCDC : ICollection
     {
         private List<object> _internalList = new List<object>();
@@ -2908,9 +2946,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -2933,14 +2969,17 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleICollectionExplicitWithCDCContainsPrivateDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleICollectionExplicitWithCDCContainsPrivateDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     [KnownType(typeof(PrivateDC))]
     public class SampleICollectionExplicitWithCDCContainsPrivateDC : ICollection
     {
         private List<object> _internalList = new List<object>();
-        public SampleICollectionExplicitWithCDCContainsPrivateDC()
-        {
-        }
+        public SampleICollectionExplicitWithCDCContainsPrivateDC() { }
 
         public SampleICollectionExplicitWithCDCContainsPrivateDC(bool init)
         {
@@ -2959,9 +2998,7 @@ namespace SerializationTestTypes
             return _internalList.Count;
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-        }
+        void ICollection.CopyTo(Array array, int index) { }
 
         int ICollection.Count
         {
@@ -3040,7 +3077,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleListImplicitWithCDC3", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleListImplicitWithCDC3",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleIEnumerableImplicitWithCDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
@@ -3122,7 +3164,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleIEnumerableExplicitWithCDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleIEnumerableExplicitWithCDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     public class SampleIEnumerableExplicitWithCDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
@@ -3149,7 +3196,12 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, Name = "SampleIEnumerableExplicitWithCDCContainsPrivateDC", Namespace = "Test", ItemName = "Item")]
+    [CollectionDataContract(
+        IsReference = true,
+        Name = "SampleIEnumerableExplicitWithCDCContainsPrivateDC",
+        Namespace = "Test",
+        ItemName = "Item"
+    )]
     [KnownType(typeof(PrivateDC))]
     public class SampleIEnumerableExplicitWithCDCContainsPrivateDC : IEnumerable
     {
@@ -3178,15 +3230,20 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, ItemName = "DictItem", KeyName = "DictKey", Name = "MyIDictionary4", Namespace = "MyDictNS1", ValueName = "DictValue")]
+    [CollectionDataContract(
+        IsReference = true,
+        ItemName = "DictItem",
+        KeyName = "DictKey",
+        Name = "MyIDictionary4",
+        Namespace = "MyDictNS1",
+        ValueName = "DictValue"
+    )]
     [KnownType(typeof(PublicDC))]
     public class MyIDictionaryContainsPublicDC : IDictionary
     {
         private Dictionary<object, object> _data = new Dictionary<object, object>();
 
-        public MyIDictionaryContainsPublicDC()
-        {
-        }
+        public MyIDictionaryContainsPublicDC() { }
         public MyIDictionaryContainsPublicDC(bool init)
         {
             _data.Add(new PublicDC(), new PublicDC());
@@ -3239,19 +3296,15 @@ namespace SerializationTestTypes
 
         public object this[object key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
         {
-            throw new Exception("TEST EXCEPTION!!!!: CopyTo method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!!!: CopyTo method or operation is not implemented."
+            );
         }
 
         public int Count
@@ -3275,15 +3328,20 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, ItemName = "DictItem", KeyName = "DictKey", Name = "MyIDictionary2", Namespace = "MyDictNS1", ValueName = "DictValue")]
+    [CollectionDataContract(
+        IsReference = true,
+        ItemName = "DictItem",
+        KeyName = "DictKey",
+        Name = "MyIDictionary2",
+        Namespace = "MyDictNS1",
+        ValueName = "DictValue"
+    )]
     [KnownType(typeof(PublicDC))]
     public class MyIDictionaryContainsPublicDCExplicit : IDictionary
     {
         private Dictionary<object, object> _data = new Dictionary<object, object>();
 
-        public MyIDictionaryContainsPublicDCExplicit()
-        {
-        }
+        public MyIDictionaryContainsPublicDCExplicit() { }
 
         public MyIDictionaryContainsPublicDCExplicit(bool init)
         {
@@ -3337,19 +3395,15 @@ namespace SerializationTestTypes
 
         object IDictionary.this[object key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         void ICollection.CopyTo(Array array, int index)
         {
-            throw new Exception("TEST EXCEPTION!!!!: CopyTo method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!!!: CopyTo method or operation is not implemented."
+            );
         }
 
         int ICollection.Count
@@ -3373,15 +3427,21 @@ namespace SerializationTestTypes
         }
     }
 
-    [CollectionDataContract(IsReference = true, ItemName = "DictItem", KeyName = "DictKey", Name = "MyIDictionary3", Namespace = "MyDictNS2", ValueName = "DictValue")]
+    [CollectionDataContract(
+        IsReference = true,
+        ItemName = "DictItem",
+        KeyName = "DictKey",
+        Name = "MyIDictionary3",
+        Namespace = "MyDictNS2",
+        ValueName = "DictValue"
+    )]
     [KnownType(typeof(PrivateDC))]
     [KnownType(typeof(PublicDCClassPrivateDM))]
     public class MyIDictionaryContainsPrivateDC : IDictionary
     {
         private Dictionary<object, object> _data = new Dictionary<object, object>();
 
-        public MyIDictionaryContainsPrivateDC()
-        { }
+        public MyIDictionaryContainsPrivateDC() { }
         public MyIDictionaryContainsPrivateDC(bool init)
         {
             _data.Add(new PrivateDC(), new PrivateDC());
@@ -3435,19 +3495,15 @@ namespace SerializationTestTypes
 
         public object this[object key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
         {
-            throw new Exception("TEST EXCEPTION!!!!: CopyTo method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!!!: CopyTo method or operation is not implemented."
+            );
         }
 
         public int Count
@@ -3476,8 +3532,7 @@ namespace SerializationTestTypes
     {
         private Dictionary<PublicDC, PublicDC> _data = new Dictionary<PublicDC, PublicDC>();
 
-        public MyGenericIDictionaryKVContainsPublicDC()
-        { }
+        public MyGenericIDictionaryKVContainsPublicDC() { }
         public MyGenericIDictionaryKVContainsPublicDC(bool init)
         {
             _data.Add(new PublicDC(), new PublicDC());
@@ -3530,19 +3585,15 @@ namespace SerializationTestTypes
 
         public PublicDC this[PublicDC key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
         {
-            throw new Exception("TEST EXCEPTION!!!!: CopyTo method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!!!: CopyTo method or operation is not implemented."
+            );
         }
 
         public int Count
@@ -3592,14 +3643,8 @@ namespace SerializationTestTypes
 
         PublicDC IDictionary<PublicDC, PublicDC>.this[PublicDC key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void Add(KeyValuePair<PublicDC, PublicDC> item)
@@ -3614,7 +3659,9 @@ namespace SerializationTestTypes
 
         public void CopyTo(KeyValuePair<PublicDC, PublicDC>[] array, int arrayIndex)
         {
-            throw new Exception("TEST EXCEPTION!!: CopyTO: method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!: CopyTO: method or operation is not implemented."
+            );
         }
 
         public bool Remove(KeyValuePair<PublicDC, PublicDC> item)
@@ -3622,7 +3669,9 @@ namespace SerializationTestTypes
             return _data.Remove(item.Key);
         }
 
-        IEnumerator<KeyValuePair<PublicDC, PublicDC>> IEnumerable<KeyValuePair<PublicDC, PublicDC>>.GetEnumerator()
+        IEnumerator<KeyValuePair<PublicDC, PublicDC>> IEnumerable<
+            KeyValuePair<PublicDC, PublicDC>
+        >.GetEnumerator()
         {
             return _data.GetEnumerator();
         }
@@ -3633,9 +3682,7 @@ namespace SerializationTestTypes
     {
         private Dictionary<PublicDC, PublicDC> _data = new Dictionary<PublicDC, PublicDC>();
 
-        public MyGenericIDictionaryKVContainsPublicDCExplicit()
-        {
-        }
+        public MyGenericIDictionaryKVContainsPublicDCExplicit() { }
         public MyGenericIDictionaryKVContainsPublicDCExplicit(bool init)
         {
             _data.Add(new PublicDC(), new PublicDC());
@@ -3678,19 +3725,15 @@ namespace SerializationTestTypes
 
         public PublicDC this[PublicDC key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
         {
-            throw new Exception("TEST EXCEPTION!!!!: CopyTo method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!!!: CopyTo method or operation is not implemented."
+            );
         }
 
         int ICollection<KeyValuePair<PublicDC, PublicDC>>.Count
@@ -3740,51 +3783,59 @@ namespace SerializationTestTypes
 
         PublicDC IDictionary<PublicDC, PublicDC>.this[PublicDC key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
-        void ICollection<KeyValuePair<PublicDC, PublicDC>>.Add(KeyValuePair<PublicDC, PublicDC> item)
-        {
+        void ICollection<KeyValuePair<PublicDC, PublicDC>>.Add(
+            KeyValuePair<PublicDC, PublicDC> item
+        ) {
             _data.Add(item.Key, item.Value);
         }
 
-        bool ICollection<KeyValuePair<PublicDC, PublicDC>>.Contains(KeyValuePair<PublicDC, PublicDC> item)
-        {
+        bool ICollection<KeyValuePair<PublicDC, PublicDC>>.Contains(
+            KeyValuePair<PublicDC, PublicDC> item
+        ) {
             return _data.ContainsKey(item.Key);
         }
 
-        void ICollection<KeyValuePair<PublicDC, PublicDC>>.CopyTo(KeyValuePair<PublicDC, PublicDC>[] array, int arrayIndex)
-        {
-            throw new Exception("TEST EXCEPTION!!: CopyTO: method or operation is not implemented.");
+        void ICollection<KeyValuePair<PublicDC, PublicDC>>.CopyTo(
+            KeyValuePair<PublicDC, PublicDC>[] array,
+            int arrayIndex
+        ) {
+            throw new Exception(
+                "TEST EXCEPTION!!: CopyTO: method or operation is not implemented."
+            );
         }
 
-        bool ICollection<KeyValuePair<PublicDC, PublicDC>>.Remove(KeyValuePair<PublicDC, PublicDC> item)
-        {
+        bool ICollection<KeyValuePair<PublicDC, PublicDC>>.Remove(
+            KeyValuePair<PublicDC, PublicDC> item
+        ) {
             return _data.Remove(item.Key);
         }
 
-        IEnumerator<KeyValuePair<PublicDC, PublicDC>> IEnumerable<KeyValuePair<PublicDC, PublicDC>>.GetEnumerator()
+        IEnumerator<KeyValuePair<PublicDC, PublicDC>> IEnumerable<
+            KeyValuePair<PublicDC, PublicDC>
+        >.GetEnumerator()
         {
             return _data.GetEnumerator();
         }
     }
 
-    [CollectionDataContract(IsReference = true, ItemName = "DictItem", KeyName = "DictKey", Name = "MyGenericIDictionaryKVContainsPrivateDC", Namespace = "MyDictNS", ValueName = "DictValue")]
+    [CollectionDataContract(
+        IsReference = true,
+        ItemName = "DictItem",
+        KeyName = "DictKey",
+        Name = "MyGenericIDictionaryKVContainsPrivateDC",
+        Namespace = "MyDictNS",
+        ValueName = "DictValue"
+    )]
     [KnownType(typeof(PrivateDC))]
     public class MyGenericIDictionaryKVContainsPrivateDC : IDictionary<object, object>
     {
         private Dictionary<object, object> _data = new Dictionary<object, object>();
 
-        public MyGenericIDictionaryKVContainsPrivateDC()
-        {
-        }
+        public MyGenericIDictionaryKVContainsPrivateDC() { }
 
         public MyGenericIDictionaryKVContainsPrivateDC(bool init)
         {
@@ -3838,19 +3889,15 @@ namespace SerializationTestTypes
 
         public object this[object key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
         {
-            throw new Exception("TEST EXCEPTION!!!!: CopyTo method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!!!: CopyTo method or operation is not implemented."
+            );
         }
 
         public int Count
@@ -3900,14 +3947,8 @@ namespace SerializationTestTypes
 
         object IDictionary<object, object>.this[object key]
         {
-            get
-            {
-                return _data[key];
-            }
-            set
-            {
-                _data[key] = value;
-            }
+            get { return _data[key]; }
+            set { _data[key] = value; }
         }
 
         public void Add(KeyValuePair<object, object> item)
@@ -3922,7 +3963,9 @@ namespace SerializationTestTypes
 
         public void CopyTo(KeyValuePair<object, object>[] array, int arrayIndex)
         {
-            throw new Exception("TEST EXCEPTION!!: CopyTO: method or operation is not implemented.");
+            throw new Exception(
+                "TEST EXCEPTION!!: CopyTO: method or operation is not implemented."
+            );
         }
 
         public bool Remove(KeyValuePair<object, object> item)
@@ -3930,7 +3973,9 @@ namespace SerializationTestTypes
             return _data.Remove(item.Key);
         }
 
-        IEnumerator<KeyValuePair<object, object>> IEnumerable<KeyValuePair<object, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<object, object>> IEnumerable<
+            KeyValuePair<object, object>
+        >.GetEnumerator()
         {
             return _data.GetEnumerator();
         }
@@ -3941,7 +3986,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<PrivateDC, PrivateDC> _dictData = new Dictionary<PrivateDC, PrivateDC>();
-        public DCDictionaryPrivateKTContainer() { _dictData.Add(new PrivateDC(), new PrivateDC()); }
+        public DCDictionaryPrivateKTContainer()
+        {
+            _dictData.Add(new PrivateDC(), new PrivateDC());
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -3949,7 +3997,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Dictionary<PublicDC, PublicDC> DictData = new Dictionary<PublicDC, PublicDC>();
-        public DCDictionaryPublicKTContainer() { DictData.Add(new PublicDC(), new PublicDC()); }
+        public DCDictionaryPublicKTContainer()
+        {
+            DictData.Add(new PublicDC(), new PublicDC());
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -3980,7 +4031,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<PublicDC, PrivateDC> _dictData = new Dictionary<PublicDC, PrivateDC>();
-        public DCDictionaryMixedKTContainer2() { _dictData.Add(new PublicDC(), new PrivateDC()); }
+        public DCDictionaryMixedKTContainer2()
+        {
+            _dictData.Add(new PublicDC(), new PrivateDC());
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -3988,80 +4042,136 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<PrivateDC, PublicDC> _dictData = new Dictionary<PrivateDC, PublicDC>();
-        public DCDictionaryMixedKTContainer3() { _dictData.Add(new PrivateDC(), new PublicDC()); }
+        public DCDictionaryMixedKTContainer3()
+        {
+            _dictData.Add(new PrivateDC(), new PublicDC());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer4
     {
         [DataMember]
-        public Dictionary<PublicDCDerivedPublic, PublicDC> DictData = new Dictionary<PublicDCDerivedPublic, PublicDC>();
-        public DCDictionaryMixedKTContainer4() { DictData.Add(new PublicDCDerivedPublic(), new PublicDC()); }
+        public Dictionary<PublicDCDerivedPublic, PublicDC> DictData = new Dictionary<
+            PublicDCDerivedPublic,
+            PublicDC
+        >();
+        public DCDictionaryMixedKTContainer4()
+        {
+            DictData.Add(new PublicDCDerivedPublic(), new PublicDC());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer5
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPrivate, PublicDC> _dictData = new Dictionary<PublicDCDerivedPrivate, PublicDC>();
-        public DCDictionaryMixedKTContainer5() { _dictData.Add(new PublicDCDerivedPrivate(), new PublicDC()); }
+        private Dictionary<PublicDCDerivedPrivate, PublicDC> _dictData = new Dictionary<
+            PublicDCDerivedPrivate,
+            PublicDC
+        >();
+        public DCDictionaryMixedKTContainer5()
+        {
+            _dictData.Add(new PublicDCDerivedPrivate(), new PublicDC());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer6
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPublic, PrivateDC> _dictData = new Dictionary<PublicDCDerivedPublic, PrivateDC>();
-        public DCDictionaryMixedKTContainer6() { _dictData.Add(new PublicDCDerivedPublic(), new PrivateDC()); }
+        private Dictionary<PublicDCDerivedPublic, PrivateDC> _dictData = new Dictionary<
+            PublicDCDerivedPublic,
+            PrivateDC
+        >();
+        public DCDictionaryMixedKTContainer6()
+        {
+            _dictData.Add(new PublicDCDerivedPublic(), new PrivateDC());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer7
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPrivate, PrivateDC> _dictData = new Dictionary<PublicDCDerivedPrivate, PrivateDC>();
-        public DCDictionaryMixedKTContainer7() { _dictData.Add(new PublicDCDerivedPrivate(), new PrivateDC()); }
+        private Dictionary<PublicDCDerivedPrivate, PrivateDC> _dictData = new Dictionary<
+            PublicDCDerivedPrivate,
+            PrivateDC
+        >();
+        public DCDictionaryMixedKTContainer7()
+        {
+            _dictData.Add(new PublicDCDerivedPrivate(), new PrivateDC());
+        }
     }
-
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer8
     {
         [DataMember]
-        public Dictionary<PublicDCDerivedPublic, PublicDCDerivedPublic> DictData = new Dictionary<PublicDCDerivedPublic, PublicDCDerivedPublic>();
-        public DCDictionaryMixedKTContainer8() { DictData.Add(new PublicDCDerivedPublic(), new PublicDCDerivedPublic()); }
+        public Dictionary<PublicDCDerivedPublic, PublicDCDerivedPublic> DictData = new Dictionary<
+            PublicDCDerivedPublic,
+            PublicDCDerivedPublic
+        >();
+        public DCDictionaryMixedKTContainer8()
+        {
+            DictData.Add(new PublicDCDerivedPublic(), new PublicDCDerivedPublic());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer9
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPrivate> _dictData = new Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPrivate>();
-        public DCDictionaryMixedKTContainer9() { _dictData.Add(new PublicDCDerivedPrivate(), new PublicDCDerivedPrivate()); }
+        private Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPrivate> _dictData =
+            new Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPrivate>();
+        public DCDictionaryMixedKTContainer9()
+        {
+            _dictData.Add(new PublicDCDerivedPrivate(), new PublicDCDerivedPrivate());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer10
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPublic, PublicDCDerivedPrivate> _dictData = new Dictionary<PublicDCDerivedPublic, PublicDCDerivedPrivate>();
-        public DCDictionaryMixedKTContainer10() { _dictData.Add(new PublicDCDerivedPublic(), new PublicDCDerivedPrivate()); }
+        private Dictionary<PublicDCDerivedPublic, PublicDCDerivedPrivate> _dictData =
+            new Dictionary<PublicDCDerivedPublic, PublicDCDerivedPrivate>();
+        public DCDictionaryMixedKTContainer10()
+        {
+            _dictData.Add(new PublicDCDerivedPublic(), new PublicDCDerivedPrivate());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer11
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPublic> _dictData = new Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPublic>();
-        public DCDictionaryMixedKTContainer11() { _dictData.Add(new PublicDCDerivedPrivate(), new PublicDCDerivedPublic()); }
+        private Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPublic> _dictData =
+            new Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPublic>();
+        public DCDictionaryMixedKTContainer11()
+        {
+            _dictData.Add(new PublicDCDerivedPrivate(), new PublicDCDerivedPublic());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer12
     {
         [DataMember]
-        private Dictionary<PublicDCClassPrivateDM, PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM> _dictData = new Dictionary<PublicDCClassPrivateDM, PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM>();
-        public DCDictionaryMixedKTContainer12() { _dictData.Add(new PublicDCClassPrivateDM(), new PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM()); }
+        private Dictionary<
+            PublicDCClassPrivateDM,
+            PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
+        > _dictData = new Dictionary<
+            PublicDCClassPrivateDM,
+            PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
+        >();
+        public DCDictionaryMixedKTContainer12()
+        {
+            _dictData.Add(
+                new PublicDCClassPrivateDM(),
+                new PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM()
+            );
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4069,14 +4179,29 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<KT1Base, KT2Base> _dictData = new Dictionary<KT1Base, KT2Base>();
-        public DCDictionaryMixedKTContainer13() { _dictData.Add(new KT1Base(), new KT2Base()); }
+        public DCDictionaryMixedKTContainer13()
+        {
+            _dictData.Add(new KT1Base(), new KT2Base());
+        }
     }
 
     [DataContract(IsReference = true)]
     public class DCDictionaryMixedKTContainer14
     {
-        private Dictionary<PrivateIXmlSerializables, PrivateDefaultCtorIXmlSerializables> _dictData = new Dictionary<PrivateIXmlSerializables, PrivateDefaultCtorIXmlSerializables>();
-        public DCDictionaryMixedKTContainer14() { _dictData.Add(new PrivateIXmlSerializables(), new PrivateDefaultCtorIXmlSerializables(true)); }
+        private Dictionary<
+            PrivateIXmlSerializables,
+            PrivateDefaultCtorIXmlSerializables
+        > _dictData = new Dictionary<
+            PrivateIXmlSerializables,
+            PrivateDefaultCtorIXmlSerializables
+        >();
+        public DCDictionaryMixedKTContainer14()
+        {
+            _dictData.Add(
+                new PrivateIXmlSerializables(),
+                new PrivateDefaultCtorIXmlSerializables(true)
+            );
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4088,8 +4213,12 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             PrivateDC other = obj as PrivateDC;
-            if (other == null) return false;
-            if (string.IsNullOrEmpty(other.Data) && string.IsNullOrEmpty(Data)) { return true; }
+            if (other == null)
+                return false;
+            if (string.IsNullOrEmpty(other.Data) && string.IsNullOrEmpty(Data))
+            {
+                return true;
+            }
             return other.Data.Equals(Data);
         }
         public override int GetHashCode()
@@ -4108,8 +4237,12 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             PublicDC other = obj as PublicDC;
-            if (other == null) return false;
-            if (string.IsNullOrEmpty(other.Data) && string.IsNullOrEmpty(Data)) { return true; }
+            if (other == null)
+                return false;
+            if (string.IsNullOrEmpty(other.Data) && string.IsNullOrEmpty(Data))
+            {
+                return true;
+            }
             return other.Data.Equals(Data);
         }
         public override int GetHashCode()
@@ -4162,14 +4295,24 @@ namespace SerializationTestTypes
 
             if (_bits.Length != readLen)
             {
-                throw new Exception("Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readLen + " Original: " + _bits.Length);
+                throw new Exception(
+                    "Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                        + readLen
+                        + " Original: "
+                        + _bits.Length
+                );
             }
 
             for (int i = 0; i < readLen; i++)
             {
                 if (readBits[i] != _bits[i])
                 {
-                    throw new Exception("Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readBits[i] + " Original: " + _bits[i]);
+                    throw new Exception(
+                        "Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                            + readBits[i]
+                            + " Original: "
+                            + _bits[i]
+                    );
                 }
             }
         }
@@ -4182,8 +4325,12 @@ namespace SerializationTestTypes
 
         public override bool Equals(object obj)
         {
-            IReadWriteXmlWriteBinHex_EqualityDefined other = obj as IReadWriteXmlWriteBinHex_EqualityDefined;
-            if (other == null) { return false; }
+            IReadWriteXmlWriteBinHex_EqualityDefined other =
+                obj as IReadWriteXmlWriteBinHex_EqualityDefined;
+            if (other == null)
+            {
+                return false;
+            }
             for (int i = 0; i < _bits.Length; i++)
             {
                 if (other._bits[i] != _bits[i])
@@ -4217,14 +4364,24 @@ namespace SerializationTestTypes
 
             if (_bits.Length != readLen)
             {
-                throw new Exception("Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readLen + " Original: " + _bits.Length);
+                throw new Exception(
+                    "Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                        + readLen
+                        + " Original: "
+                        + _bits.Length
+                );
             }
 
             for (int i = 0; i < readLen; i++)
             {
                 if (readBits[i] != _bits[i])
                 {
-                    throw new Exception("Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readBits[i] + " Original: " + _bits[i]);
+                    throw new Exception(
+                        "Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                            + readBits[i]
+                            + " Original: "
+                            + _bits[i]
+                    );
                 }
             }
         }
@@ -4256,14 +4413,24 @@ namespace SerializationTestTypes
 
             if (_bits.Length != readLen)
             {
-                throw new Exception("Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readLen + " Original: " + _bits.Length);
+                throw new Exception(
+                    "Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                        + readLen
+                        + " Original: "
+                        + _bits.Length
+                );
             }
 
             for (int i = 0; i < readLen; i++)
             {
                 if (readBits[i] != _bits[i])
                 {
-                    throw new Exception("Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readBits[i] + " Original: " + _bits[i]);
+                    throw new Exception(
+                        "Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                            + readBits[i]
+                            + " Original: "
+                            + _bits[i]
+                    );
                 }
             }
         }
@@ -4298,14 +4465,24 @@ namespace SerializationTestTypes
 
             if (_bits.Length != readLen)
             {
-                throw new Exception("Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readLen + " Original: " + _bits.Length);
+                throw new Exception(
+                    "Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                        + readLen
+                        + " Original: "
+                        + _bits.Length
+                );
             }
 
             for (int i = 0; i < readLen; i++)
             {
                 if (readBits[i] != _bits[i])
                 {
-                    throw new Exception("Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readBits[i] + " Original: " + _bits[i]);
+                    throw new Exception(
+                        "Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                            + readBits[i]
+                            + " Original: "
+                            + _bits[i]
+                    );
                 }
             }
         }
@@ -4340,14 +4517,24 @@ namespace SerializationTestTypes
 
             if (_bits.Length != readLen)
             {
-                throw new Exception("Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readLen + " Original: " + _bits.Length);
+                throw new Exception(
+                    "Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                        + readLen
+                        + " Original: "
+                        + _bits.Length
+                );
             }
 
             for (int i = 0; i < readLen; i++)
             {
                 if (readBits[i] != _bits[i])
                 {
-                    throw new Exception("Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readBits[i] + " Original: " + _bits[i]);
+                    throw new Exception(
+                        "Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                            + readBits[i]
+                            + " Original: "
+                            + _bits[i]
+                    );
                 }
             }
         }
@@ -4382,14 +4569,24 @@ namespace SerializationTestTypes
 
             if (_bits.Length != readLen)
             {
-                throw new Exception("Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readLen + " Original: " + _bits.Length);
+                throw new Exception(
+                    "Test Code Exception: read content length didnt match expected in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                        + readLen
+                        + " Original: "
+                        + _bits.Length
+                );
             }
 
             for (int i = 0; i < readLen; i++)
             {
                 if (readBits[i] != _bits[i])
                 {
-                    throw new Exception("Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: " + readBits[i] + " Original: " + _bits[i]);
+                    throw new Exception(
+                        "Test Code Exception: read xml content is not correct in IReadWriteXmlWriteBinHex.ReadXml. Read: "
+                            + readBits[i]
+                            + " Original: "
+                            + _bits[i]
+                    );
                 }
             }
         }
@@ -4408,7 +4605,10 @@ namespace SerializationTestTypes
         public string Data = "Data";
 
         public PrivateDCClassPublicDM() { }
-        public PrivateDCClassPublicDM(bool init) { Data = "No change"; }
+        public PrivateDCClassPublicDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4417,8 +4617,14 @@ namespace SerializationTestTypes
         [DataMember]
         private string _data;
 
-        public PrivateDCClassPrivateDM() { _data = string.Empty; }
-        public PrivateDCClassPrivateDM(bool init) { _data = "No change"; }
+        public PrivateDCClassPrivateDM()
+        {
+            _data = string.Empty;
+        }
+        public PrivateDCClassPrivateDM(bool init)
+        {
+            _data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4428,7 +4634,10 @@ namespace SerializationTestTypes
         public string Data;
 
         public PublicDCClassPublicDM() { }
-        public PublicDCClassPublicDM(bool init) { Data = "No change"; }
+        public PublicDCClassPublicDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4437,8 +4646,14 @@ namespace SerializationTestTypes
         [DataMember]
         private string _data;
 
-        public PublicDCClassPrivateDM() { _data = string.Empty; }
-        public PublicDCClassPrivateDM(bool init) { _data = "No change"; }
+        public PublicDCClassPrivateDM()
+        {
+            _data = string.Empty;
+        }
+        public PublicDCClassPrivateDM(bool init)
+        {
+            _data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4448,7 +4663,10 @@ namespace SerializationTestTypes
         internal string Data;
 
         public PublicDCClassInternalDM() { }
-        public PublicDCClassInternalDM(bool init) { Data = "No change"; }
+        public PublicDCClassInternalDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4464,7 +4682,10 @@ namespace SerializationTestTypes
         internal string Data3 = string.Empty;
 
         public PublicDCClassMixedDM() { }
-        public PublicDCClassMixedDM(bool init) { Data1 = "No change"; }
+        public PublicDCClassMixedDM(bool init)
+        {
+            Data1 = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4514,7 +4735,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM() { }
-        public Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init) { Data = new PublicDCClassPrivateDM(); }
+        public Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init)
+        {
+            Data = new PublicDCClassPrivateDM();
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4529,7 +4753,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM() { }
-        public Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init) { Data = new PublicDCClassPrivateDM(); }
+        public Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init)
+        {
+            Data = new PublicDCClassPrivateDM();
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4544,7 +4771,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM() { }
-        public Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init) { Data = new PublicDCClassPrivateDM(); }
+        public Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init)
+        {
+            Data = new PublicDCClassPrivateDM();
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4560,7 +4790,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PrivateDCClassPublicDM() { }
-        public Prop_PrivateDCClassPublicDM(bool init) { Data = "No change"; }
+        public Prop_PrivateDCClassPublicDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4575,7 +4808,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PrivateDCClassPrivateDM() { }
-        public Prop_PrivateDCClassPrivateDM(bool init) { Data = "No change"; }
+        public Prop_PrivateDCClassPrivateDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4590,7 +4826,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassPublicDM() { }
-        public Prop_PublicDCClassPublicDM(bool init) { Data = "No change"; }
+        public Prop_PublicDCClassPublicDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4605,7 +4844,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassPrivateDM() { }
-        public Prop_PublicDCClassPrivateDM(bool init) { Data = "No change"; }
+        public Prop_PublicDCClassPrivateDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4620,7 +4862,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassInternalDM() { }
-        public Prop_PublicDCClassInternalDM(bool init) { Data = "No change"; }
+        public Prop_PublicDCClassInternalDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4652,7 +4897,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassMixedDM() { }
-        public Prop_PublicDCClassMixedDM(bool init) { Data1 = "No change"; }
+        public Prop_PublicDCClassMixedDM(bool init)
+        {
+            Data1 = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4666,7 +4914,8 @@ namespace SerializationTestTypes
     }
 
     [DataContract(IsReference = true)]
-    public class Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM : Prop_PublicDCClassPublicDM
+    public class Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
+        : Prop_PublicDCClassPublicDM
     {
         [DataMember]
         private string _derivedData1 = string.Empty;
@@ -4687,7 +4936,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_SetPrivate_PublicDCClassPublicDM() { }
-        public Prop_SetPrivate_PublicDCClassPublicDM(bool init) { Data = "No change"; }
+        public Prop_SetPrivate_PublicDCClassPublicDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4702,7 +4954,10 @@ namespace SerializationTestTypes
         }
 
         public Prop_GetPrivate_PublicDCClassPublicDM() { }
-        public Prop_GetPrivate_PublicDCClassPublicDM(bool init) { Data = "No change"; }
+        public Prop_GetPrivate_PublicDCClassPublicDM(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4716,7 +4971,10 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_All_Public() { }
-        public Derived_Override_Prop_All_Public(bool init) { Data = "No change"; }
+        public Derived_Override_Prop_All_Public(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4730,7 +4988,10 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_Private() { }
-        public Derived_Override_Prop_Private(bool init) { Data = "No change"; }
+        public Derived_Override_Prop_Private(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4744,7 +5005,10 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_GetPrivate_All_Public() { }
-        public Derived_Override_Prop_GetPrivate_All_Public(bool init) { Data = "No change"; }
+        public Derived_Override_Prop_GetPrivate_All_Public(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(IsReference = true)]
@@ -4758,7 +5022,10 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_GetPrivate_Private() { }
-        public Derived_Override_Prop_GetPrivate_Private(bool init) { Data = "No change"; }
+        public Derived_Override_Prop_GetPrivate_Private(bool init)
+        {
+            Data = "No change";
+        }
     }
 
     [DataContract(Name = "DC1_Version")]
@@ -4807,14 +5074,8 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
@@ -4825,14 +5086,8 @@ namespace SerializationTestTypes
 
         ExtensionDataObject IExtensibleDataObject.ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
@@ -4913,7 +5168,9 @@ namespace SerializationTestTypes
         public string Data;
 
         [OnDeserialized]
-        protected internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context) { }
+        protected internal void OnDeserialized(
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
     }
 
     [DataContract(IsReference = true)]
@@ -4922,9 +5179,7 @@ namespace SerializationTestTypes
         [DataMember]
         public string Data;
 
-        public void OnDeserialization(object sender)
-        {
-        }
+        public void OnDeserialization(object sender) { }
     }
 
     [DataContract(IsReference = true)]
@@ -4933,9 +5188,7 @@ namespace SerializationTestTypes
         [DataMember]
         public string Data;
 
-        void IDeserializationCallback.OnDeserialization(object sender)
-        {
-        }
+        void IDeserializationCallback.OnDeserialization(object sender) { }
     }
 
     [DataContract(IsReference = true)]
@@ -4955,7 +5208,9 @@ namespace SerializationTestTypes
         public string Data = "Data";
 
         [OnDeserialized]
-        protected internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context) { }
+        protected internal void OnDeserialized(
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
     }
 
     [DataContract(IsReference = true)]
@@ -4964,9 +5219,7 @@ namespace SerializationTestTypes
         [DataMember]
         public string Data = "Data";
 
-        public void OnDeserialization(object sender)
-        {
-        }
+        public void OnDeserialization(object sender) { }
     }
 
     [DataContract(IsReference = true)]
@@ -4976,22 +5229,19 @@ namespace SerializationTestTypes
         public string Data = "string";
 
         [OnDeserialized]
-        private void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
-        {
-        }
+        private void OnDeserialized(System.Runtime.Serialization.StreamingContext context) { }
     }
 
     [DataContract(IsReference = true)]
-    public class CallBackSample_OnDeserialized_Public_Derived : CallBackSample_OnDeserialized_Private_Base
+    public class CallBackSample_OnDeserialized_Public_Derived
+        : CallBackSample_OnDeserialized_Private_Base
     {
         [DataMember]
         public string Data2 = "string";
 
         public CallBackSample_OnDeserialized_Public_Derived() { }
         [OnDeserialized]
-        public void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
-        {
-        }
+        public void OnDeserialized(System.Runtime.Serialization.StreamingContext context) { }
     }
 
     [CollectionDataContract(IsReference = true)]
@@ -5016,14 +5266,8 @@ namespace SerializationTestTypes
 
         public string this[int index]
         {
-            get
-            {
-                return _innerList[index];
-            }
-            set
-            {
-                _innerList[index] = value;
-            }
+            get { return _innerList[index]; }
+            set { _innerList[index] = value; }
         }
 
         public void Add(string item)
@@ -5101,14 +5345,8 @@ namespace SerializationTestTypes
 
         public string this[int index]
         {
-            get
-            {
-                return _innerList[index];
-            }
-            set
-            {
-                _innerList[index] = value;
-            }
+            get { return _innerList[index]; }
+            set { _innerList[index] = value; }
         }
 
         private void Add(string item)
@@ -5170,13 +5408,9 @@ namespace SerializationTestTypes
     {
         private List<string> _innerList = new List<string>();
 
-        private CDC_PrivateDefaultCtor()
-        {
-        }
+        private CDC_PrivateDefaultCtor() { }
 
-        public CDC_PrivateDefaultCtor(bool init)
-        {
-        }
+        public CDC_PrivateDefaultCtor(bool init) { }
 
         public int IndexOf(string item)
         {
@@ -5195,14 +5429,8 @@ namespace SerializationTestTypes
 
         public string this[int index]
         {
-            get
-            {
-                return _innerList[index];
-            }
-            set
-            {
-                _innerList[index] = value;
-            }
+            get { return _innerList[index]; }
+            set { _innerList[index] = value; }
         }
 
         public void Add(string item)
@@ -5273,14 +5501,8 @@ namespace SerializationTestTypes
 
         public string this[int index]
         {
-            get
-            {
-                return _innerList[index];
-            }
-            set
-            {
-                _innerList[index] = value;
-            }
+            get { return _innerList[index]; }
+            set { _innerList[index] = value; }
         }
 
         public virtual void Add(string item)
@@ -5393,8 +5615,10 @@ namespace SerializationTestTypes
             throw new NotImplementedException();
         }
 
-        public object GetCustomDataToExport(System.Reflection.MemberInfo memberInfo, Type dataContractType)
-        {
+        public object GetCustomDataToExport(
+            System.Reflection.MemberInfo memberInfo,
+            Type dataContractType
+        ) {
             throw new NotImplementedException();
         }
 
@@ -5416,9 +5640,7 @@ namespace SerializationTestTypes
             return obj;
         }
 
-        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
-        {
-        }
+        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
 
         public object GetObjectToSerialize(object obj, Type membertype)
         {
@@ -5429,13 +5651,18 @@ namespace SerializationTestTypes
             return obj;
         }
 
-        public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
-        {
+        public Type GetReferencedTypeOnImport(
+            string typeName,
+            string typeNamespace,
+            object customData
+        ) {
             throw new NotImplementedException();
         }
 
-        public System.CodeDom.CodeTypeDeclaration ProcessImportedType(System.CodeDom.CodeTypeDeclaration typeDeclaration, System.CodeDom.CodeCompileUnit compileUnit)
-        {
+        public System.CodeDom.CodeTypeDeclaration ProcessImportedType(
+            System.CodeDom.CodeTypeDeclaration typeDeclaration,
+            System.CodeDom.CodeCompileUnit compileUnit
+        ) {
             throw new NotImplementedException();
         }
     }
@@ -5450,15 +5677,21 @@ namespace SerializationTestTypes
             }
         }
 
-        public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
-        {
+        public object SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        ) {
             if (obj is PersonSurrogated)
             {
                 return new NonDCPerson(obj as PersonSurrogated);
             }
             else if (obj is NonDCPerson)
             {
-                return new NonDCPerson(info.GetValue("data", typeof(PersonSurrogated)) as PersonSurrogated);
+                return new NonDCPerson(
+                    info.GetValue("data", typeof(PersonSurrogated)) as PersonSurrogated
+                );
             }
             else
             {
@@ -5474,8 +5707,10 @@ namespace SerializationTestTypes
             throw new NotImplementedException();
         }
 
-        private object GetCustomDataToExport(System.Reflection.MemberInfo memberInfo, Type dataContractType)
-        {
+        private object GetCustomDataToExport(
+            System.Reflection.MemberInfo memberInfo,
+            Type dataContractType
+        ) {
             throw new NotImplementedException();
         }
 
@@ -5497,9 +5732,7 @@ namespace SerializationTestTypes
             return obj;
         }
 
-        private void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
-        {
-        }
+        private void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
 
         private object GetObjectToSerialize(object obj, Type membertype)
         {
@@ -5510,36 +5743,50 @@ namespace SerializationTestTypes
             return obj;
         }
 
-        private Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
-        {
+        private Type GetReferencedTypeOnImport(
+            string typeName,
+            string typeNamespace,
+            object customData
+        ) {
             throw new NotImplementedException();
         }
 
-        private System.CodeDom.CodeTypeDeclaration ProcessImportedType(System.CodeDom.CodeTypeDeclaration typeDeclaration, System.CodeDom.CodeCompileUnit compileUnit)
-        {
+        private System.CodeDom.CodeTypeDeclaration ProcessImportedType(
+            System.CodeDom.CodeTypeDeclaration typeDeclaration,
+            System.CodeDom.CodeCompileUnit compileUnit
+        ) {
             throw new NotImplementedException();
         }
     }
 
     public class SerSurrogateExplicit : ISerializationSurrogate
     {
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
-        {
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        ) {
             if (obj is NonDCPerson)
             {
                 info.AddValue("data", new PersonSurrogated(obj as NonDCPerson));
             }
         }
 
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
-        {
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        ) {
             if (obj is PersonSurrogated)
             {
                 return new NonDCPerson(obj as PersonSurrogated);
             }
             else if (obj is NonDCPerson)
             {
-                return new NonDCPerson(info.GetValue("data", typeof(PersonSurrogated)) as PersonSurrogated);
+                return new NonDCPerson(
+                    info.GetValue("data", typeof(PersonSurrogated)) as PersonSurrogated
+                );
             }
             else
             {
@@ -5555,8 +5802,10 @@ namespace SerializationTestTypes
             throw new NotImplementedException();
         }
 
-        public object GetCustomDataToExport(System.Reflection.MemberInfo memberInfo, Type dataContractType)
-        {
+        public object GetCustomDataToExport(
+            System.Reflection.MemberInfo memberInfo,
+            Type dataContractType
+        ) {
             throw new NotImplementedException();
         }
 
@@ -5578,9 +5827,7 @@ namespace SerializationTestTypes
             return obj;
         }
 
-        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
-        {
-        }
+        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
 
         public object GetObjectToSerialize(object obj, Type membertype)
         {
@@ -5591,13 +5838,18 @@ namespace SerializationTestTypes
             return obj;
         }
 
-        public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
-        {
+        public Type GetReferencedTypeOnImport(
+            string typeName,
+            string typeNamespace,
+            object customData
+        ) {
             throw new NotImplementedException();
         }
 
-        public System.CodeDom.CodeTypeDeclaration ProcessImportedType(System.CodeDom.CodeTypeDeclaration typeDeclaration, System.CodeDom.CodeCompileUnit compileUnit)
-        {
+        public System.CodeDom.CodeTypeDeclaration ProcessImportedType(
+            System.CodeDom.CodeTypeDeclaration typeDeclaration,
+            System.CodeDom.CodeCompileUnit compileUnit
+        ) {
             throw new NotImplementedException();
         }
     }
@@ -5612,8 +5864,12 @@ namespace SerializationTestTypes
             }
         }
 
-        public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
-        {
+        public object SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        ) {
             if (obj is PrivateDC)
             {
                 return new NonDCPerson();
@@ -5631,9 +5887,7 @@ namespace SerializationTestTypes
         [DataMember]
         public Nullable<PublicDCStruct> Data = new PublicDCStruct(true);
 
-        public NullableContainerContainsValue()
-        {
-        }
+        public NullableContainerContainsValue() { }
     }
 
     [DataContract(IsReference = true)]
@@ -5642,9 +5896,7 @@ namespace SerializationTestTypes
         [DataMember]
         public Nullable<PublicDCStruct> Data = null;
 
-        public NullableContainerContainsNull()
-        {
-        }
+        public NullableContainerContainsNull() { }
     }
 
     [DataContract]
@@ -5665,9 +5917,7 @@ namespace SerializationTestTypes
         [DataMember]
         public object Data = new Nullable<PrivateDCStruct>(new PrivateDCStruct(true));
 
-        public NullablePrivateContainerContainsValue()
-        {
-        }
+        public NullablePrivateContainerContainsValue() { }
     }
 
     [DataContract(IsReference = true)]
@@ -5677,9 +5927,7 @@ namespace SerializationTestTypes
         [DataMember]
         public object Data = new Nullable<PrivateDCStruct>(new PrivateDCStruct(true));
 
-        public NullablePrivateContainerContainsNull()
-        {
-        }
+        public NullablePrivateContainerContainsNull() { }
     }
 
     [DataContract]
@@ -5698,11 +5946,10 @@ namespace SerializationTestTypes
     public class NullablePrivateDataInDMContainerContainsValue
     {
         [DataMember]
-        public Nullable<PublicDCStructContainsPrivateDataInDM> Data = new PublicDCStructContainsPrivateDataInDM(true);
+        public Nullable<PublicDCStructContainsPrivateDataInDM> Data =
+            new PublicDCStructContainsPrivateDataInDM(true);
 
-        public NullablePrivateDataInDMContainerContainsValue()
-        {
-        }
+        public NullablePrivateDataInDMContainerContainsValue() { }
     }
 
     [DataContract(IsReference = true)]
@@ -5710,11 +5957,11 @@ namespace SerializationTestTypes
     public class NullablePrivateDataInDMContainerContainsNull
     {
         [DataMember]
-        public object Data = new Nullable<PublicDCStructContainsPrivateDataInDM>(new PublicDCStructContainsPrivateDataInDM(true));
+        public object Data = new Nullable<PublicDCStructContainsPrivateDataInDM>(
+            new PublicDCStructContainsPrivateDataInDM(true)
+        );
 
-        public NullablePrivateDataInDMContainerContainsNull()
-        {
-        }
+        public NullablePrivateDataInDMContainerContainsNull() { }
     }
 
     [DataContract]
@@ -5744,9 +5991,7 @@ namespace SerializationTestTypes
         [DataMember]
         public DataTable dataTable2;
 
-        public DCPublicDatasetPublic()
-        {
-        }
+        public DCPublicDatasetPublic() { }
         public DCPublicDatasetPublic(bool init)
         {
             dataSet = new DataSet("MyData");
@@ -5771,9 +6016,7 @@ namespace SerializationTestTypes
         [DataMember]
         public DataTable dataTable;
 
-        public DCPublicDatasetPrivate()
-        {
-        }
+        public DCPublicDatasetPrivate() { }
 
         public DCPublicDatasetPrivate(bool init)
         {
@@ -5795,9 +6038,7 @@ namespace SerializationTestTypes
 
         public DataTable dataTable;
 
-        public SerPublicDatasetPublic()
-        {
-        }
+        public SerPublicDatasetPublic() { }
 
         public SerPublicDatasetPublic(bool init)
         {
@@ -5826,9 +6067,7 @@ namespace SerializationTestTypes
         [DataMember]
         public DataTable dataTable;
 
-        public SerPublicDatasetPrivate()
-        {
-        }
+        public SerPublicDatasetPrivate() { }
 
         public SerPublicDatasetPrivate(bool init)
         {
@@ -5880,7 +6119,10 @@ namespace SerializationTestTypes
         public List<DateTimeOffset> lDTO = new List<DateTimeOffset>();
 
         [DataMember]
-        public Dictionary<DateTimeOffset, DateTimeOffset> dictDTO = new Dictionary<DateTimeOffset, DateTimeOffset>();
+        public Dictionary<DateTimeOffset, DateTimeOffset> dictDTO = new Dictionary<
+            DateTimeOffset,
+            DateTimeOffset
+        >();
 
         [DataMember]
         public DateTimeOffset[] arrayDTO;

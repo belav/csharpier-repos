@@ -12,15 +12,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
 {
     internal static class FSharpVisualStudioWorkspaceExtensions
     {
-        public static Metadata GetMetadata(this VisualStudioWorkspace workspace, string fullPath, DateTime snapshotTimestamp)
-        {
-            var metadataReferenceProvider = workspace.Services.GetService<VisualStudioMetadataReferenceManager>();
+        public static Metadata GetMetadata(
+            this VisualStudioWorkspace workspace,
+            string fullPath,
+            DateTime snapshotTimestamp
+        ) {
+            var metadataReferenceProvider =
+                workspace.Services.GetService<VisualStudioMetadataReferenceManager>();
             return metadataReferenceProvider.GetMetadata(fullPath, snapshotTimestamp);
         }
 
         [Obsolete("When Roslyn/ProjectSystem integration is finished, don't use this.")]
-        public static bool TryGetProjectIdByBinPath(this VisualStudioWorkspace workspace, string filePath, out ProjectId projectId)
-        {
+        public static bool TryGetProjectIdByBinPath(
+            this VisualStudioWorkspace workspace,
+            string filePath,
+            out ProjectId projectId
+        ) {
             if (workspace is VisualStudioWorkspaceImpl)
             {
                 var impl = workspace as VisualStudioWorkspaceImpl;
@@ -40,19 +47,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
         }
 
         [Obsolete("When Roslyn/ProjectSystem integration is finished, don't use this.")]
-        public static ProjectId GetOrCreateProjectIdForPath(this VisualStudioWorkspace workspace, string filePath, string projectDisplayName)
-        {
+        public static ProjectId GetOrCreateProjectIdForPath(
+            this VisualStudioWorkspace workspace,
+            string filePath,
+            string projectDisplayName
+        ) {
             if (workspace is VisualStudioWorkspaceImpl)
             {
                 var impl = workspace as VisualStudioWorkspaceImpl;
-                return impl.ProjectTracker.GetOrCreateProjectIdForPath(filePath, projectDisplayName);
+                return impl.ProjectTracker.GetOrCreateProjectIdForPath(
+                    filePath,
+                    projectDisplayName
+                );
             }
             return null;
         }
 
         [Obsolete("When Roslyn/ProjectSystem integration is finished, don't use this.")]
-        public static string GetProjectFilePath(this VisualStudioWorkspace workspace, ProjectId projectId)
-        {
+        public static string GetProjectFilePath(
+            this VisualStudioWorkspace workspace,
+            ProjectId projectId
+        ) {
             if (workspace is VisualStudioWorkspaceImpl)
             {
                 var impl = workspace as VisualStudioWorkspaceImpl;

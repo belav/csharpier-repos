@@ -11,7 +11,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 {
-    internal abstract class KestrelConnection : IConnectionHeartbeatFeature, IConnectionCompleteFeature, IConnectionLifetimeNotificationFeature
+    internal abstract class KestrelConnection
+        : IConnectionHeartbeatFeature,
+          IConnectionCompleteFeature,
+          IConnectionLifetimeNotificationFeature
     {
         private List<(Action<object> handler, object state)>? _heartbeatHandlers;
         private readonly object _heartbeatLock = new object();
@@ -19,17 +22,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private Stack<KeyValuePair<Func<object, Task>, object>>? _onCompleted;
         private bool _completed;
 
-        private readonly CancellationTokenSource _connectionClosingCts = new CancellationTokenSource();
-        private readonly TaskCompletionSource _completionTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly CancellationTokenSource _connectionClosingCts =
+            new CancellationTokenSource();
+        private readonly TaskCompletionSource _completionTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         protected readonly long _id;
         protected readonly ServiceContext _serviceContext;
         protected readonly TransportConnectionManager _transportConnectionManager;
 
-        public KestrelConnection(long id,
-                                 ServiceContext serviceContext,
-                                 TransportConnectionManager transportConnectionManager,
-                                 IKestrelTrace logger)
-        {
+        public KestrelConnection(
+            long id,
+            ServiceContext serviceContext,
+            TransportConnectionManager transportConnectionManager,
+            IKestrelTrace logger
+        ) {
             _id = id;
             _serviceContext = serviceContext;
             _transportConnectionManager = transportConnectionManager;
@@ -106,8 +113,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             return CompleteAsyncMayAwait(onCompleted);
         }
 
-        private Task CompleteAsyncMayAwait(Stack<KeyValuePair<Func<object, Task>, object>> onCompleted)
-        {
+        private Task CompleteAsyncMayAwait(
+            Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
+        ) {
             while (onCompleted.TryPop(out var entry))
             {
                 try
@@ -120,22 +128,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                    Logger.LogError(
+                        ex,
+                        "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                    );
                 }
             }
 
             return Task.CompletedTask;
         }
 
-        private async Task CompleteAsyncAwaited(Task currentTask, Stack<KeyValuePair<Func<object, Task>, object>> onCompleted)
-        {
+        private async Task CompleteAsyncAwaited(
+            Task currentTask,
+            Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
+        ) {
             try
             {
                 await currentTask;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                Logger.LogError(
+                    ex,
+                    "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                );
             }
 
             while (onCompleted.TryPop(out var entry))
@@ -146,7 +162,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                    Logger.LogError(
+                        ex,
+                        "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                    );
                 }
             }
         }

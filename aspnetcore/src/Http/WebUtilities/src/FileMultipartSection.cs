@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="section">The section from which to create the <see cref="FileMultipartSection"/></param>
         /// <remarks>Reparses the content disposition header</remarks>
         public FileMultipartSection(MultipartSection section)
-            :this(section, section.GetContentDispositionHeader())
-        {
-        }
+            : this(section, section.GetContentDispositionHeader()) { }
 
         /// <summary>
         /// Creates a new instance of the <see cref="FileMultipartSection"/> class
@@ -41,9 +39,11 @@ namespace Microsoft.AspNetCore.WebUtilities
 
             Name = HeaderUtilities.RemoveQuotes(_contentDispositionHeader.Name).ToString();
             FileName = HeaderUtilities.RemoveQuotes(
-                    _contentDispositionHeader.FileNameStar.HasValue ?
-                        _contentDispositionHeader.FileNameStar :
-                        _contentDispositionHeader.FileName).ToString();
+                    _contentDispositionHeader.FileNameStar.HasValue
+                        ? _contentDispositionHeader.FileNameStar
+                        : _contentDispositionHeader.FileName
+                )
+                .ToString();
         }
 
         /// <summary>
@@ -65,6 +65,5 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// Gets the name of the file from the section
         /// </summary>
         public string FileName { get; }
-
     }
 }

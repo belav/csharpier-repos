@@ -20,8 +20,8 @@ namespace System.IO.Enumeration
             Interop.NtDll.FILE_FULL_DIR_INFORMATION* info,
             ReadOnlySpan<char> directory,
             ReadOnlySpan<char> rootDirectory,
-            ReadOnlySpan<char> originalRootDirectory)
-        {
+            ReadOnlySpan<char> originalRootDirectory
+        ) {
             entry._info = info;
             entry.Directory = directory;
             entry.RootDirectory = rootDirectory;
@@ -78,13 +78,12 @@ namespace System.IO.Enumeration
         /// </summary>
         public bool IsHidden => (Attributes & FileAttributes.Hidden) != 0;
 
-        public FileSystemInfo ToFileSystemInfo()
-            => FileSystemInfo.Create(Path.Join(Directory, FileName), ref this);
+        public FileSystemInfo ToFileSystemInfo() =>
+            FileSystemInfo.Create(Path.Join(Directory, FileName), ref this);
 
         /// <summary>
         /// Returns the full path of the find result.
         /// </summary>
-        public string ToFullPath() =>
-            Path.Join(Directory, FileName);
+        public string ToFullPath() => Path.Join(Directory, FileName);
     }
 }

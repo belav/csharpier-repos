@@ -40,17 +40,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual IServiceProvider Create(string[] args)
         {
-            _reporter.WriteVerbose(DesignStrings.FindingServiceProvider(_startupAssembly.GetName().Name));
+            _reporter.WriteVerbose(
+                DesignStrings.FindingServiceProvider(_startupAssembly.GetName().Name)
+            );
 
-            return CreateFromHosting(args)
-                ?? CreateEmptyServiceProvider();
+            return CreateFromHosting(args) ?? CreateEmptyServiceProvider();
         }
 
         private IServiceProvider? CreateFromHosting(string[] args)
         {
             _reporter.WriteVerbose(DesignStrings.FindingHostingServices);
 
-            var serviceProviderFactory = HostFactoryResolver.ResolveServiceProviderFactory(_startupAssembly);
+            var serviceProviderFactory = HostFactoryResolver.ResolveServiceProviderFactory(
+                _startupAssembly
+            );
             if (serviceProviderFactory == null)
             {
                 _reporter.WriteVerbose(DesignStrings.NoCreateHostBuilder);
@@ -58,11 +61,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 return null;
             }
 
-            var aspnetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var aspnetCoreEnvironment = Environment.GetEnvironmentVariable(
+                "ASPNETCORE_ENVIRONMENT"
+            );
             var dotnetEnvironment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-            var environment = aspnetCoreEnvironment
-                ?? dotnetEnvironment
-                ?? "Development";
+            var environment = aspnetCoreEnvironment ?? dotnetEnvironment ?? "Development";
             if (aspnetCoreEnvironment == null)
             {
                 Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", environment);

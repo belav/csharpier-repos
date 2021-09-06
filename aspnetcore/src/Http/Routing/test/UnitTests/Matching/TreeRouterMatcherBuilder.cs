@@ -34,13 +34,20 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = new TreeRouteBuilder(
                 NullLoggerFactory.Instance,
-                new DefaultObjectPool<UriBuildingContext>(new UriBuilderContextPooledObjectPolicy()),
-                new DefaultInlineConstraintResolver(Options.Create(new RouteOptions()), new TestServiceProvider()));
+                new DefaultObjectPool<UriBuildingContext>(
+                    new UriBuilderContextPooledObjectPolicy()
+                ),
+                new DefaultInlineConstraintResolver(
+                    Options.Create(new RouteOptions()),
+                    new TestServiceProvider()
+                )
+            );
 
             var selector = new DefaultEndpointSelector();
 
-            var groups = _endpoints
-                .GroupBy(e => (e.Order, e.RoutePattern.InboundPrecedence, e.RoutePattern.RawText))
+            var groups = _endpoints.GroupBy(
+                    e => (e.Order, e.RoutePattern.InboundPrecedence, e.RoutePattern.RawText)
+                )
                 .OrderBy(g => g.Key.Order)
                 .ThenBy(g => g.Key.InboundPrecedence);
 
@@ -68,7 +75,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     new SelectorRouter(selector, candidates),
                     new RouteTemplate(endpoint.RoutePattern),
                     routeName: null,
-                    order: endpoint.Order);
+                    order: endpoint.Order
+                );
             }
 
             return new TreeRouterMatcher(builder.Build());
@@ -100,7 +108,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 // This is needed due to a quirk of our tests - they reuse the endpoint feature.
                 routeContext.HttpContext.SetEndpoint(null);
 
-                await _selector.SelectAsync(routeContext.HttpContext, new CandidateSet(_candidates, _values, _scores));
+                await _selector.SelectAsync(
+                    routeContext.HttpContext,
+                    new CandidateSet(_candidates, _values, _scores)
+                );
                 if (routeContext.HttpContext.GetEndpoint() != null)
                 {
                     routeContext.Handler = (_) => Task.CompletedTask;

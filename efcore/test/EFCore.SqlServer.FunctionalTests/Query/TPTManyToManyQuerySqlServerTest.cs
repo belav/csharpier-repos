@@ -6,17 +6,19 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class TPTManyToManyQuerySqlServerTest : TPTManyToManyQueryRelationalTestBase<TPTManyToManyQuerySqlServerFixture>
+    public class TPTManyToManyQuerySqlServerTest
+        : TPTManyToManyQueryRelationalTestBase<TPTManyToManyQuerySqlServerFixture>
     {
-        public TPTManyToManyQuerySqlServerTest(TPTManyToManyQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public TPTManyToManyQuerySqlServerTest(
+            TPTManyToManyQuerySqlServerFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
-        protected override bool CanExecuteQueryString
-            => true;
+        protected override bool CanExecuteQueryString => true;
 
         public override async Task Skip_navigation_all(bool async)
         {
@@ -29,7 +31,8 @@ WHERE NOT EXISTS (
     SELECT 1
     FROM [JoinOneToTwo] AS [j]
     INNER JOIN [EntityTwos] AS [e0] ON [j].[TwoId] = [e0].[Id]
-    WHERE ([e].[Id] = [j].[OneId]) AND NOT ([e0].[Name] LIKE N'%B%'))");
+    WHERE ([e].[Id] = [j].[OneId]) AND NOT ([e0].[Name] LIKE N'%B%'))"
+            );
         }
 
         public override async Task Skip_navigation_any_without_predicate(bool async)
@@ -43,7 +46,8 @@ WHERE EXISTS (
     SELECT 1
     FROM [JoinOneToThreePayloadFull] AS [j]
     INNER JOIN [EntityThrees] AS [e0] ON [j].[ThreeId] = [e0].[Id]
-    WHERE ([e].[Id] = [j].[OneId]) AND ([e0].[Name] LIKE N'%B%'))");
+    WHERE ([e].[Id] = [j].[OneId]) AND ([e0].[Name] LIKE N'%B%'))"
+            );
         }
 
         public override async Task Skip_navigation_any_with_predicate(bool async)
@@ -57,7 +61,8 @@ WHERE EXISTS (
     SELECT 1
     FROM [EntityOneEntityTwo] AS [e0]
     INNER JOIN [EntityTwos] AS [e1] ON [e0].[EntityTwoId] = [e1].[Id]
-    WHERE ([e].[Id] = [e0].[EntityOneId]) AND ([e1].[Name] LIKE N'%B%'))");
+    WHERE ([e].[Id] = [e0].[EntityOneId]) AND ([e1].[Name] LIKE N'%B%'))"
+            );
         }
 
         public override async Task Skip_navigation_contains(bool async)
@@ -71,7 +76,8 @@ WHERE EXISTS (
     SELECT 1
     FROM [JoinOneToThreePayloadFullShared] AS [j]
     INNER JOIN [EntityThrees] AS [e0] ON [j].[ThreeId] = [e0].[Id]
-    WHERE ([e].[Id] = [j].[OneId]) AND ([e0].[Id] = 1))");
+    WHERE ([e].[Id] = [j].[OneId]) AND ([e0].[Id] = 1))"
+            );
         }
 
         public override async Task Skip_navigation_count_without_predicate(bool async)
@@ -85,7 +91,8 @@ WHERE (
     SELECT COUNT(*)
     FROM [JoinOneSelfPayload] AS [j]
     INNER JOIN [EntityOnes] AS [e0] ON [j].[LeftId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[RightId]) > 0");
+    WHERE [e].[Id] = [j].[RightId]) > 0"
+            );
         }
 
         public override async Task Skip_navigation_count_with_predicate(bool async)
@@ -106,7 +113,8 @@ ORDER BY (
         INNER JOIN [Branches] AS [b] ON [r].[Id] = [b].[Id]
         LEFT JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]
     ) AS [t] ON [j].[EntityBranchId] = [t].[Id]
-    WHERE ([e].[Id] = [j].[EntityOneId]) AND ([t].[Name] IS NOT NULL AND ([t].[Name] LIKE N'L%'))), [e].[Id]");
+    WHERE ([e].[Id] = [j].[EntityOneId]) AND ([t].[Name] IS NOT NULL AND ([t].[Name] LIKE N'L%'))), [e].[Id]"
+            );
         }
 
         public override async Task Skip_navigation_long_count_without_predicate(bool async)
@@ -120,7 +128,8 @@ WHERE (
     SELECT COUNT_BIG(*)
     FROM [JoinTwoToThree] AS [j]
     INNER JOIN [EntityThrees] AS [e0] ON [j].[ThreeId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[TwoId]) > CAST(0 AS bigint)");
+    WHERE [e].[Id] = [j].[TwoId]) > CAST(0 AS bigint)"
+            );
         }
 
         public override async Task Skip_navigation_long_count_with_predicate(bool async)
@@ -134,7 +143,8 @@ ORDER BY (
     SELECT COUNT_BIG(*)
     FROM [JoinTwoSelfShared] AS [j]
     INNER JOIN [EntityTwos] AS [e0] ON [j].[LeftId] = [e0].[Id]
-    WHERE ([e].[Id] = [j].[RightId]) AND ([e0].[Name] IS NOT NULL AND ([e0].[Name] LIKE N'L%'))) DESC, [e].[Id]");
+    WHERE ([e].[Id] = [j].[RightId]) AND ([e0].[Name] IS NOT NULL AND ([e0].[Name] LIKE N'L%'))) DESC, [e].[Id]"
+            );
         }
 
         public override async Task Skip_navigation_select_many_average(bool async)
@@ -148,7 +158,8 @@ INNER JOIN (
     SELECT [e0].[Key1], [j].[TwoId]
     FROM [JoinTwoToCompositeKeyShared] AS [j]
     INNER JOIN [EntityCompositeKeys] AS [e0] ON (([j].[CompositeId1] = [e0].[Key1]) AND ([j].[CompositeId2] = [e0].[Key2])) AND ([j].[CompositeId3] = [e0].[Key3])
-) AS [t] ON [e].[Id] = [t].[TwoId]");
+) AS [t] ON [e].[Id] = [t].[TwoId]"
+            );
         }
 
         public override async Task Skip_navigation_select_many_max(bool async)
@@ -162,7 +173,8 @@ INNER JOIN (
     SELECT [e0].[Key1], [j].[ThreeId]
     FROM [JoinThreeToCompositeKeyFull] AS [j]
     INNER JOIN [EntityCompositeKeys] AS [e0] ON (([j].[CompositeId1] = [e0].[Key1]) AND ([j].[CompositeId2] = [e0].[Key2])) AND ([j].[CompositeId3] = [e0].[Key3])
-) AS [t] ON [e].[Id] = [t].[ThreeId]");
+) AS [t] ON [e].[Id] = [t].[ThreeId]"
+            );
         }
 
         public override async Task Skip_navigation_select_many_min(bool async)
@@ -179,7 +191,8 @@ INNER JOIN (
         SELECT [r].[Id]
         FROM [Roots] AS [r]
     ) AS [t] ON [e0].[EntityRootId] = [t].[Id]
-) AS [t0] ON [e].[Id] = [t0].[EntityThreeId]");
+) AS [t0] ON [e].[Id] = [t0].[EntityThreeId]"
+            );
         }
 
         public override async Task Skip_navigation_select_many_sum(bool async)
@@ -193,7 +206,8 @@ INNER JOIN (
     SELECT [e].[Key1], [j].[RootId]
     FROM [JoinCompositeKeyToRootShared] AS [j]
     INNER JOIN [EntityCompositeKeys] AS [e] ON (([j].[CompositeId1] = [e].[Key1]) AND ([j].[CompositeId2] = [e].[Key2])) AND ([j].[CompositeId3] = [e].[Key3])
-) AS [t] ON [r].[Id] = [t].[RootId]");
+) AS [t] ON [r].[Id] = [t].[RootId]"
+            );
         }
 
         public override async Task Skip_navigation_select_subquery_average(bool async)
@@ -208,7 +222,8 @@ INNER JOIN (
     WHERE [r].[Id] = [j].[LeafId])
 FROM [Roots] AS [r]
 INNER JOIN [Branches] AS [b] ON [r].[Id] = [b].[Id]
-INNER JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]");
+INNER JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]"
+            );
         }
 
         public override async Task Skip_navigation_select_subquery_max(bool async)
@@ -221,7 +236,8 @@ INNER JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]");
     FROM [JoinOneToTwo] AS [j]
     INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e].[Id] = [j].[TwoId])
-FROM [EntityTwos] AS [e]");
+FROM [EntityTwos] AS [e]"
+            );
         }
 
         public override async Task Skip_navigation_select_subquery_min(bool async)
@@ -234,7 +250,8 @@ FROM [EntityTwos] AS [e]");
     FROM [JoinOneToThreePayloadFull] AS [j]
     INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e].[Id] = [j].[ThreeId])
-FROM [EntityThrees] AS [e]");
+FROM [EntityThrees] AS [e]"
+            );
         }
 
         public override async Task Skip_navigation_select_subquery_sum(bool async)
@@ -247,7 +264,8 @@ FROM [EntityThrees] AS [e]");
     FROM [EntityOneEntityTwo] AS [e0]
     INNER JOIN [EntityOnes] AS [e1] ON [e0].[EntityOneId] = [e1].[Id]
     WHERE [e].[Id] = [e0].[EntityTwoId])
-FROM [EntityTwos] AS [e]");
+FROM [EntityTwos] AS [e]"
+            );
         }
 
         public override async Task Skip_navigation_order_by_first_or_default(bool async)
@@ -265,7 +283,8 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     ) AS [t]
     WHERE [t].[row] <= 1
-) AS [t0] ON [e].[Id] = [t0].[ThreeId]");
+) AS [t0] ON [e].[Id] = [t0].[ThreeId]"
+            );
         }
 
         public override async Task Skip_navigation_order_by_single_or_default(bool async)
@@ -285,7 +304,8 @@ OUTER APPLY (
         ORDER BY [e0].[Id]
     ) AS [t]
     ORDER BY [t].[Id]
-) AS [t0]");
+) AS [t0]"
+            );
         }
 
         public override async Task Skip_navigation_order_by_last_or_default(bool async)
@@ -304,7 +324,8 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] AS [e] ON [j].[EntityOneId] = [e].[Id]
     ) AS [t]
     WHERE [t].[row] <= 1
-) AS [t0] ON [r].[Id] = [t0].[EntityBranchId]");
+) AS [t0] ON [r].[Id] = [t0].[EntityBranchId]"
+            );
         }
 
         public override async Task Skip_navigation_order_by_reverse_first_or_default(bool async)
@@ -322,7 +343,8 @@ LEFT JOIN (
         INNER JOIN [EntityTwos] AS [e0] ON [j].[TwoId] = [e0].[Id]
     ) AS [t]
     WHERE [t].[row] <= 1
-) AS [t0] ON [e].[Id] = [t0].[ThreeId]");
+) AS [t0] ON [e].[Id] = [t0].[ThreeId]"
+            );
         }
 
         public override async Task Skip_navigation_cast(bool async)
@@ -342,7 +364,8 @@ LEFT JOIN (
         INNER JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]
     ) AS [t] ON [j].[LeafId] = [t].[Id]
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[LeafId], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[LeafId], [t0].[Id]"
+            );
         }
 
         public override async Task Skip_navigation_of_type(bool async)
@@ -366,7 +389,8 @@ LEFT JOIN (
     ) AS [t] ON [j].[RootId] = [t].[Id]
     WHERE [t].[Discriminator] = N'EntityLeaf'
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[RootId], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[RootId], [t0].[Id]"
+            );
         }
 
         public override async Task Join_with_skip_navigation(bool async)
@@ -381,7 +405,8 @@ INNER JOIN [EntityTwos] AS [e0] ON [e].[Id] = (
     FROM [JoinTwoSelfShared] AS [j]
     INNER JOIN [EntityTwos] AS [e1] ON [j].[RightId] = [e1].[Id]
     WHERE [e0].[Id] = [j].[LeftId]
-    ORDER BY [e1].[Id])");
+    ORDER BY [e1].[Id])"
+            );
         }
 
         public override async Task Left_join_with_skip_navigation(bool async)
@@ -402,7 +427,8 @@ LEFT JOIN [EntityCompositeKeys] AS [e0] ON (
     INNER JOIN [EntityThrees] AS [e2] ON [j0].[ThreeId] = [e2].[Id]
     WHERE (([e0].[Key1] = [j0].[CompositeId1]) AND ([e0].[Key2] = [j0].[CompositeId2])) AND ([e0].[Key3] = [j0].[CompositeId3])
     ORDER BY [e2].[Id])
-ORDER BY [e].[Key1], [e0].[Key1], [e].[Key2], [e0].[Key2]");
+ORDER BY [e].[Key1], [e0].[Key1], [e].[Key2], [e0].[Key2]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation(bool async)
@@ -416,7 +442,8 @@ INNER JOIN (
     SELECT [e0].[Id], [e0].[CollectionInverseId], [e0].[Name], [e0].[ReferenceInverseId], [e].[EntityRootId]
     FROM [EntityRootEntityThree] AS [e]
     INNER JOIN [EntityThrees] AS [e0] ON [e].[EntityThreeId] = [e0].[Id]
-) AS [t] ON [r].[Id] = [t].[EntityRootId]");
+) AS [t] ON [r].[Id] = [t].[EntityRootId]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation_where(bool async)
@@ -430,7 +457,8 @@ LEFT JOIN (
     SELECT [e0].[Id], [e0].[CollectionInverseId], [e0].[ExtraId], [e0].[Name], [e0].[ReferenceInverseId], [j].[OneId]
     FROM [JoinOneToTwo] AS [j]
     INNER JOIN [EntityTwos] AS [e0] ON [j].[TwoId] = [e0].[Id]
-) AS [t] ON [e].[Id] = [t].[OneId]");
+) AS [t] ON [e].[Id] = [t].[OneId]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation_order_by_skip(bool async)
@@ -448,7 +476,8 @@ INNER JOIN (
         INNER JOIN [EntityThrees] AS [e0] ON [j].[ThreeId] = [e0].[Id]
     ) AS [t]
     WHERE 2 < [t].[row]
-) AS [t0] ON [e].[Id] = [t0].[OneId]");
+) AS [t0] ON [e].[Id] = [t0].[OneId]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation_order_by_take(bool async)
@@ -466,7 +495,8 @@ INNER JOIN (
         INNER JOIN [EntityTwos] AS [e1] ON [e0].[EntityTwoId] = [e1].[Id]
     ) AS [t]
     WHERE [t].[row] <= 2
-) AS [t0] ON [e].[Id] = [t0].[EntityOneId]");
+) AS [t0] ON [e].[Id] = [t0].[EntityOneId]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation_order_by_skip_take(bool async)
@@ -484,7 +514,8 @@ INNER JOIN (
         INNER JOIN [EntityThrees] AS [e0] ON [j].[ThreeId] = [e0].[Id]
     ) AS [t]
     WHERE (2 < [t].[row]) AND ([t].[row] <= 5)
-) AS [t0] ON [e].[Id] = [t0].[OneId]");
+) AS [t0] ON [e].[Id] = [t0].[OneId]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation_of_type(bool async)
@@ -507,7 +538,8 @@ INNER JOIN (
         LEFT JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]
     ) AS [t] ON [e0].[EntityRootId] = [t].[Id]
     WHERE [t].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')
-) AS [t0] ON [e].[Id] = [t0].[EntityThreeId]");
+) AS [t0] ON [e].[Id] = [t0].[EntityThreeId]"
+            );
         }
 
         public override async Task Select_many_over_skip_navigation_cast(bool async)
@@ -528,7 +560,8 @@ INNER JOIN (
         INNER JOIN [Branches] AS [b] ON [r].[Id] = [b].[Id]
         LEFT JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]
     ) AS [t] ON [j].[EntityBranchId] = [t].[Id]
-) AS [t0] ON [e].[Id] = [t0].[EntityOneId]");
+) AS [t0] ON [e].[Id] = [t0].[EntityOneId]"
+            );
         }
 
         public override async Task Select_skip_navigation(bool async)
@@ -543,7 +576,8 @@ LEFT JOIN (
     FROM [JoinOneSelfPayload] AS [j]
     INNER JOIN [EntityOnes] AS [e0] ON [j].[LeftId] = [e0].[Id]
 ) AS [t] ON [e].[Id] = [t].[RightId]
-ORDER BY [e].[Id], [t].[LeftId], [t].[RightId], [t].[Id]");
+ORDER BY [e].[Id], [t].[LeftId], [t].[RightId], [t].[Id]"
+            );
         }
 
         public override async Task Select_skip_navigation_multiple(bool async)
@@ -568,7 +602,8 @@ LEFT JOIN (
     FROM [JoinTwoToCompositeKeyShared] AS [j1]
     INNER JOIN [EntityCompositeKeys] AS [e2] ON (([j1].[CompositeId1] = [e2].[Key1]) AND ([j1].[CompositeId2] = [e2].[Key2])) AND ([j1].[CompositeId3] = [e2].[Key3])
 ) AS [t1] ON [e].[Id] = [t1].[TwoId]
-ORDER BY [e].[Id], [t].[ThreeId], [t].[TwoId], [t].[Id], [t0].[LeftId], [t0].[RightId], [t0].[Id], [t1].[TwoId], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[Key1], [t1].[Key2], [t1].[Key3]");
+ORDER BY [e].[Id], [t].[ThreeId], [t].[TwoId], [t].[Id], [t0].[LeftId], [t0].[RightId], [t0].[Id], [t1].[TwoId], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[Key1], [t1].[Key2], [t1].[Key3]"
+            );
         }
 
         public override async Task Select_skip_navigation_first_or_default(bool async)
@@ -587,7 +622,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE [t].[row] <= 1
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id]");
+ORDER BY [e].[Id]"
+            );
         }
 
         public override async Task Include_skip_navigation(bool async)
@@ -610,7 +646,8 @@ LEFT JOIN (
         LEFT JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]
     ) AS [t] ON [j].[RootId] = [t].[Id]
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[RootId], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[RootId], [t0].[Id]"
+            );
         }
 
         public override async Task Include_skip_navigation_then_reference(bool async)
@@ -626,7 +663,8 @@ LEFT JOIN (
     INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     LEFT JOIN [EntityTwos] AS [e1] ON [e0].[Id] = [e1].[ReferenceInverseId]
 ) AS [t] ON [e].[Id] = [t].[TwoId]
-ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]");
+ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]"
+            );
         }
 
         public override async Task Include_skip_navigation_then_include_skip_navigation(bool async)
@@ -651,11 +689,13 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] AS [e0] ON [j0].[EntityOneId] = [e0].[Id]
     ) AS [t0] ON [t].[Id] = [t0].[EntityBranchId]
 ) AS [t1] ON (([e].[Key1] = [t1].[CompositeId1]) AND ([e].[Key2] = [t1].[CompositeId2])) AND ([e].[Key3] = [t1].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[LeafId], [t1].[Id], [t1].[EntityBranchId], [t1].[EntityOneId], [t1].[Id0]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[LeafId], [t1].[Id], [t1].[EntityBranchId], [t1].[EntityOneId], [t1].[Id0]"
+            );
         }
 
-        public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation(bool async)
-        {
+        public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation(
+            bool async
+        ) {
             await base.Include_skip_navigation_then_include_reference_and_skip_navigation(async);
 
             AssertSql(
@@ -672,7 +712,8 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] AS [e2] ON [j0].[RightId] = [e2].[Id]
     ) AS [t] ON [e0].[Id] = [t].[LeftId]
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0], [t0].[LeftId], [t0].[RightId], [t0].[Id1]");
+ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0], [t0].[LeftId], [t0].[RightId], [t0].[Id1]"
+            );
         }
 
         public override async Task Include_skip_navigation_and_reference(bool async)
@@ -688,7 +729,8 @@ LEFT JOIN (
     FROM [EntityOneEntityTwo] AS [e1]
     INNER JOIN [EntityOnes] AS [e2] ON [e1].[EntityOneId] = [e2].[Id]
 ) AS [t] ON [e].[Id] = [t].[EntityTwoId]
-ORDER BY [e].[Id], [e0].[Id], [t].[EntityOneId], [t].[EntityTwoId], [t].[Id]");
+ORDER BY [e].[Id], [e0].[Id], [t].[EntityOneId], [t].[EntityTwoId], [t].[Id]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_where(bool async)
@@ -704,7 +746,8 @@ LEFT JOIN (
     INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e0].[Id] < 10
 ) AS [t] ON [e].[Id] = [t].[ThreeId]
-ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]");
+ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by(bool async)
@@ -719,7 +762,8 @@ LEFT JOIN (
     FROM [JoinTwoToThree] AS [j]
     INNER JOIN [EntityTwos] AS [e0] ON [j].[TwoId] = [e0].[Id]
 ) AS [t] ON [e].[Id] = [t].[ThreeId]
-ORDER BY [e].[Id], [t].[Id], [t].[ThreeId], [t].[TwoId]");
+ORDER BY [e].[Id], [t].[Id], [t].[ThreeId], [t].[TwoId]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by_skip(bool async)
@@ -738,7 +782,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE 2 < [t].[row]
 ) AS [t0] ON [e].[Id] = [t0].[LeftId]
-ORDER BY [e].[Id], [t0].[LeftId], [t0].[Id], [t0].[RightId]");
+ORDER BY [e].[Id], [t0].[LeftId], [t0].[Id], [t0].[RightId]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by_take(bool async)
@@ -757,7 +802,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE [t].[row] <= 2
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id], [t0].[TwoId]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id], [t0].[TwoId]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by_skip_take(bool async)
@@ -776,7 +822,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE (1 < [t].[row]) AND ([t].[row] <= 3)
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0], [t0].[Id]"
+            );
         }
 
         public override async Task Filtered_then_include_skip_navigation_where(bool async)
@@ -802,11 +849,13 @@ LEFT JOIN (
         WHERE [e1].[Id] < 10
     ) AS [t] ON [e0].[Id] = [t].[ThreeId]
 ) AS [t0] ON [r].[Id] = [t0].[EntityRootId]
-ORDER BY [r].[Id], [t0].[EntityRootId], [t0].[EntityThreeId], [t0].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id0]");
+ORDER BY [r].[Id], [t0].[EntityRootId], [t0].[EntityThreeId], [t0].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id0]"
+            );
         }
 
-        public override async Task Filtered_then_include_skip_navigation_order_by_skip_take(bool async)
-        {
+        public override async Task Filtered_then_include_skip_navigation_order_by_skip_take(
+            bool async
+        ) {
             await base.Filtered_then_include_skip_navigation_order_by_skip_take(async);
 
             AssertSql(
@@ -831,11 +880,13 @@ LEFT JOIN (
         WHERE (1 < [t].[row]) AND ([t].[row] <= 3)
     ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
 ) AS [t1] ON [r].[Id] = [t1].[RootId]
-ORDER BY [r].[Id], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[RootId], [t1].[Key1], [t1].[Key2], [t1].[Key3], [t1].[CompositeId10], [t1].[CompositeId20], [t1].[CompositeId30], [t1].[Id0], [t1].[Id]");
+ORDER BY [r].[Id], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[RootId], [t1].[Key1], [t1].[Key2], [t1].[Key3], [t1].[CompositeId10], [t1].[CompositeId20], [t1].[CompositeId30], [t1].[Id0], [t1].[Id]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation(bool async)
-        {
+        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation(
+            bool async
+        ) {
             await base.Filtered_include_skip_navigation_where_then_include_skip_navigation(async);
 
             AssertSql(
@@ -854,12 +905,16 @@ LEFT JOIN (
     ) AS [t] ON (([e].[Key1] = [t].[CompositeId1]) AND ([e].[Key2] = [t].[CompositeId2])) AND ([e].[Key3] = [t].[CompositeId3])
     WHERE [e].[Key1] < 5
 ) AS [t0] ON [r].[Id] = [t0].[LeafId]
-ORDER BY [r].[Id], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[LeafId], [t0].[Key1], [t0].[Key2], [t0].[Key3], [t0].[TwoId], [t0].[CompositeId10], [t0].[CompositeId20], [t0].[CompositeId30], [t0].[Id]");
+ORDER BY [r].[Id], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[LeafId], [t0].[Key1], [t0].[Key2], [t0].[Key3], [t0].[TwoId], [t0].[CompositeId10], [t0].[CompositeId20], [t0].[CompositeId30], [t0].[Id]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(bool async)
-        {
-            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(async);
+        public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
+            bool async
+        ) {
+            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [t1].[OneId], [t1].[TwoId], [t1].[JoinOneToTwoExtraId], [t1].[Id], [t1].[CollectionInverseId], [t1].[ExtraId], [t1].[Name], [t1].[ReferenceInverseId], [t1].[ThreeId], [t1].[TwoId0], [t1].[Id0], [t1].[CollectionInverseId0], [t1].[Name0], [t1].[ReferenceInverseId0]
@@ -881,12 +936,16 @@ OUTER APPLY (
         WHERE [e1].[Id] < 10
     ) AS [t0] ON [t].[Id] = [t0].[TwoId]
 ) AS [t1]
-ORDER BY [e].[Id], [t1].[Id], [t1].[OneId], [t1].[TwoId], [t1].[ThreeId], [t1].[TwoId0], [t1].[Id0]");
+ORDER BY [e].[Id], [t1].[Id], [t1].[OneId], [t1].[TwoId], [t1].[ThreeId], [t1].[TwoId0], [t1].[Id0]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(bool async)
-        {
-            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(async);
+        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
+            bool async
+        ) {
+            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [t1].[OneId], [t1].[TwoId], [t1].[JoinOneToTwoExtraId], [t1].[Id], [t1].[CollectionInverseId], [t1].[ExtraId], [t1].[Name], [t1].[ReferenceInverseId], [t1].[ThreeId], [t1].[TwoId0], [t1].[Id0], [t1].[CollectionInverseId0], [t1].[Name0], [t1].[ReferenceInverseId0]
@@ -906,7 +965,8 @@ LEFT JOIN (
     ) AS [t0] ON [e0].[Id] = [t0].[TwoId]
     WHERE [e0].[Id] < 10
 ) AS [t1] ON [e].[Id] = [t1].[OneId]
-ORDER BY [e].[Id], [t1].[OneId], [t1].[TwoId], [t1].[Id], [t1].[TwoId0], [t1].[Id0], [t1].[ThreeId]");
+ORDER BY [e].[Id], [t1].[OneId], [t1].[TwoId], [t1].[Id], [t1].[TwoId0], [t1].[Id0], [t1].[ThreeId]"
+            );
         }
 
         public override async Task Filter_include_on_skip_navigation_combined(bool async)
@@ -924,12 +984,16 @@ LEFT JOIN (
     LEFT JOIN [EntityTwos] AS [e2] ON [e0].[Id] = [e2].[CollectionInverseId]
     WHERE [e0].[Id] < 10
 ) AS [t] ON [e].[Id] = [t].[TwoId]
-ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0], [t].[Id1]");
+ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0], [t].[Id1]"
+            );
         }
 
-        public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes(bool async)
-        {
-            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes(async);
+        public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes(
+            bool async
+        ) {
+            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId], [t3].[OneId], [t3].[ThreeId], [t3].[Payload], [t3].[Id], [t3].[Name], [t3].[OneId0], [t3].[TwoId], [t3].[JoinOneToTwoExtraId], [t3].[Id0], [t3].[CollectionInverseId], [t3].[ExtraId], [t3].[Name0], [t3].[ReferenceInverseId], [t3].[EntityBranchId], [t3].[EntityOneId], [t3].[Id1], [t3].[Name1], [t3].[Number], [t3].[IsGreen], [t3].[Discriminator]
@@ -962,12 +1026,16 @@ LEFT JOIN (
     ) AS [t1] ON [e0].[Id] = [t1].[EntityOneId]
     WHERE [e0].[Id] < 10
 ) AS [t3] ON [e].[Id] = [t3].[ThreeId]
-ORDER BY [e].[Id], [t3].[OneId], [t3].[ThreeId], [t3].[Id], [t3].[OneId0], [t3].[Id0], [t3].[TwoId], [t3].[EntityBranchId], [t3].[EntityOneId], [t3].[Id1]");
+ORDER BY [e].[Id], [t3].[OneId], [t3].[ThreeId], [t3].[Id], [t3].[OneId0], [t3].[Id0], [t3].[TwoId], [t3].[EntityBranchId], [t3].[EntityOneId], [t3].[Id1]"
+            );
         }
 
-        public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(bool async)
-        {
-            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(async);
+        public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(
+            bool async
+        ) {
+            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId], [t0].[OneId], [t0].[ThreeId], [t0].[Payload], [t0].[Id], [t0].[Name], [t0].[Id0], [t0].[CollectionInverseId], [t0].[ExtraId], [t0].[Name0], [t0].[ReferenceInverseId]
@@ -983,12 +1051,16 @@ LEFT JOIN (
     ) AS [t] ON [e0].[Id] = [t].[CollectionInverseId]
     WHERE [e0].[Id] > 15
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0]");
+ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0]"
+            );
         }
 
-        public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(bool async)
-        {
-            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(async);
+        public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(
+            bool async
+        ) {
+            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [t0].[Id], [t0].[CollectionInverseId], [t0].[ExtraId], [t0].[Name], [t0].[ReferenceInverseId], [t0].[ThreeId], [t0].[TwoId], [t0].[Id0], [t0].[CollectionInverseId0], [t0].[Name0], [t0].[ReferenceInverseId0]
@@ -1004,7 +1076,8 @@ LEFT JOIN (
     ) AS [t] ON [e0].[Id] = [t].[TwoId]
     WHERE [e0].[Id] > 15
 ) AS [t0] ON [e].[Id] = [t0].[CollectionInverseId]
-ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId], [t0].[Id0]");
+ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId], [t0].[Id0]"
+            );
         }
 
         public override async Task Includes_accessed_via_different_path_are_merged(bool async)
@@ -1014,8 +1087,9 @@ ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId], [t0].[Id0]");
             AssertSql(" ");
         }
 
-        public override async Task Filered_includes_accessed_via_different_path_are_merged(bool async)
-        {
+        public override async Task Filered_includes_accessed_via_different_path_are_merged(
+            bool async
+        ) {
             await base.Filered_includes_accessed_via_different_path_are_merged(async);
 
             AssertSql(" ");
@@ -1045,7 +1119,8 @@ INNER JOIN (
         LEFT JOIN [Leaves] AS [l] ON [r].[Id] = [l].[Id]
     ) AS [t] ON [j].[RootId] = [t].[Id]
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3]"
+            );
         }
 
         public override async Task Include_skip_navigation_then_reference_split(bool async)
@@ -1065,11 +1140,13 @@ INNER JOIN (
     INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     LEFT JOIN [EntityTwos] AS [e1] ON [e0].[Id] = [e1].[ReferenceInverseId]
 ) AS [t] ON [e].[Id] = [t].[TwoId]
-ORDER BY [e].[Id]");
+ORDER BY [e].[Id]"
+            );
         }
 
-        public override async Task Include_skip_navigation_then_include_skip_navigation_split(bool async)
-        {
+        public override async Task Include_skip_navigation_then_include_skip_navigation_split(
+            bool async
+        ) {
             await base.Include_skip_navigation_then_include_skip_navigation_split(async);
 
             AssertSql(
@@ -1108,12 +1185,16 @@ INNER JOIN (
     FROM [JoinOneToBranch] AS [j0]
     INNER JOIN [EntityOnes] AS [e0] ON [j0].[EntityOneId] = [e0].[Id]
 ) AS [t1] ON [t0].[Id] = [t1].[EntityBranchId]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[LeafId], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[LeafId], [t0].[Id]"
+            );
         }
 
-        public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation_split(bool async)
-        {
-            await base.Include_skip_navigation_then_include_reference_and_skip_navigation_split(async);
+        public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation_split(
+            bool async
+        ) {
+            await base.Include_skip_navigation_then_include_reference_and_skip_navigation_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId]
@@ -1143,7 +1224,8 @@ INNER JOIN (
     FROM [JoinOneSelfPayload] AS [j0]
     INNER JOIN [EntityOnes] AS [e2] ON [j0].[RightId] = [e2].[Id]
 ) AS [t0] ON [t].[Id] = [t0].[LeftId]
-ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id], [t].[Id0]");
+ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id], [t].[Id0]"
+            );
         }
 
         public override async Task Include_skip_navigation_and_reference_split(bool async)
@@ -1164,7 +1246,8 @@ INNER JOIN (
     FROM [EntityOneEntityTwo] AS [e1]
     INNER JOIN [EntityOnes] AS [e2] ON [e1].[EntityOneId] = [e2].[Id]
 ) AS [t] ON [e].[Id] = [t].[EntityTwoId]
-ORDER BY [e].[Id], [e0].[Id]");
+ORDER BY [e].[Id], [e0].[Id]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_where_split(bool async)
@@ -1184,7 +1267,8 @@ INNER JOIN (
     INNER JOIN [EntityOnes] AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e0].[Id] < 10
 ) AS [t] ON [e].[Id] = [t].[ThreeId]
-ORDER BY [e].[Id]");
+ORDER BY [e].[Id]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by_split(bool async)
@@ -1207,7 +1291,8 @@ INNER JOIN (
     ) AS [t]
     WHERE 0 < [t].[row]
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id], [t0].[ThreeId], [t0].[Id]");
+ORDER BY [e].[Id], [t0].[ThreeId], [t0].[Id]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by_skip_split(bool async)
@@ -1230,7 +1315,8 @@ INNER JOIN (
     ) AS [t]
     WHERE 2 < [t].[row]
 ) AS [t0] ON [e].[Id] = [t0].[LeftId]
-ORDER BY [e].[Id], [t0].[LeftId], [t0].[Id]");
+ORDER BY [e].[Id], [t0].[LeftId], [t0].[Id]"
+            );
         }
 
         public override async Task Filtered_include_skip_navigation_order_by_take_split(bool async)
@@ -1253,11 +1339,13 @@ INNER JOIN (
     ) AS [t]
     WHERE [t].[row] <= 2
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_order_by_skip_take_split(bool async)
-        {
+        public override async Task Filtered_include_skip_navigation_order_by_skip_take_split(
+            bool async
+        ) {
             await base.Filtered_include_skip_navigation_order_by_skip_take_split(async);
 
             AssertSql(
@@ -1276,7 +1364,8 @@ INNER JOIN (
     ) AS [t]
     WHERE (1 < [t].[row]) AND ([t].[row] <= 3)
 ) AS [t0] ON (([e].[Key1] = [t0].[CompositeId1]) AND ([e].[Key2] = [t0].[CompositeId2])) AND ([e].[Key3] = [t0].[CompositeId3])
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0]"
+            );
         }
 
         public override async Task Filtered_then_include_skip_navigation_where_split(bool async)
@@ -1315,11 +1404,13 @@ INNER JOIN (
     INNER JOIN [EntityOnes] AS [e1] ON [j].[OneId] = [e1].[Id]
     WHERE [e1].[Id] < 10
 ) AS [t0] ON [t].[Id] = [t0].[ThreeId]
-ORDER BY [r].[Id], [t].[EntityRootId], [t].[EntityThreeId], [t].[Id]");
+ORDER BY [r].[Id], [t].[EntityRootId], [t].[EntityThreeId], [t].[Id]"
+            );
         }
 
-        public override async Task Filtered_then_include_skip_navigation_order_by_skip_take_split(bool async)
-        {
+        public override async Task Filtered_then_include_skip_navigation_order_by_skip_take_split(
+            bool async
+        ) {
             await base.Filtered_then_include_skip_navigation_order_by_skip_take_split(async);
 
             AssertSql(
@@ -1357,12 +1448,16 @@ INNER JOIN (
     ) AS [t1]
     WHERE (1 < [t1].[row]) AND ([t1].[row] <= 3)
 ) AS [t0] ON (([t].[Key1] = [t0].[CompositeId1]) AND ([t].[Key2] = [t0].[CompositeId2])) AND ([t].[Key3] = [t0].[CompositeId3])
-ORDER BY [r].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [t].[RootId], [t].[Key1], [t].[Key2], [t].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0]");
+ORDER BY [r].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [t].[RootId], [t].[Key1], [t].[Key2], [t].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_split(bool async)
-        {
-            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_split(async);
+        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_split(
+            bool async
+        ) {
+            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [r].[Id], [r].[Name], [b].[Number], [l].[IsGreen]
@@ -1398,12 +1493,16 @@ INNER JOIN (
     FROM [JoinTwoToCompositeKeyShared] AS [j0]
     INNER JOIN [EntityTwos] AS [e0] ON [j0].[TwoId] = [e0].[Id]
 ) AS [t0] ON (([t].[Key1] = [t0].[CompositeId1]) AND ([t].[Key2] = [t0].[CompositeId2])) AND ([t].[Key3] = [t0].[CompositeId3])
-ORDER BY [r].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [t].[LeafId], [t].[Key1], [t].[Key2], [t].[Key3]");
+ORDER BY [r].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [t].[LeafId], [t].[Key1], [t].[Key2], [t].[Key3]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(bool async)
-        {
-            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(async);
+        public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(
+            bool async
+        ) {
+            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name]
@@ -1440,12 +1539,16 @@ INNER JOIN (
     INNER JOIN [EntityThrees] AS [e1] ON [j0].[ThreeId] = [e1].[Id]
     WHERE [e1].[Id] < 10
 ) AS [t1] ON [t0].[Id] = [t1].[TwoId]
-ORDER BY [e].[Id], [t0].[OneId], [t0].[TwoId], [t0].[Id]");
+ORDER BY [e].[Id], [t0].[OneId], [t0].[TwoId], [t0].[Id]"
+            );
         }
 
-        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(bool async)
-        {
-            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(async);
+        public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(
+            bool async
+        ) {
+            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name]
@@ -1479,7 +1582,8 @@ INNER JOIN (
     ) AS [t1]
     WHERE (1 < [t1].[row]) AND ([t1].[row] <= 3)
 ) AS [t0] ON [t].[Id] = [t0].[TwoId]
-ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t0].[TwoId], [t0].[Id]");
+ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t0].[TwoId], [t0].[Id]"
+            );
         }
 
         public override async Task Filter_include_on_skip_navigation_combined_split(bool async)
@@ -1512,12 +1616,16 @@ INNER JOIN (
     WHERE [e0].[Id] < 10
 ) AS [t] ON [e].[Id] = [t].[TwoId]
 INNER JOIN [EntityTwos] AS [e2] ON [t].[Id] = [e2].[CollectionInverseId]
-ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]");
+ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]"
+            );
         }
 
-        public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(bool async)
-        {
-            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(async);
+        public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(
+            bool async
+        ) {
+            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId]
@@ -1574,12 +1682,16 @@ INNER JOIN (
     ) AS [t1] ON [j0].[EntityBranchId] = [t1].[Id]
     WHERE [t1].[Id] < 20
 ) AS [t0] ON [t].[Id] = [t0].[EntityOneId]
-ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]");
+ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
+            );
         }
 
-        public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(bool async)
-        {
-            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(async);
+        public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(
+            bool async
+        ) {
+            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId]
@@ -1609,12 +1721,16 @@ INNER JOIN (
     FROM [EntityTwos] AS [e1]
     WHERE [e1].[Id] < 5
 ) AS [t0] ON [t].[Id] = [t0].[CollectionInverseId]
-ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]");
+ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
+            );
         }
 
-        public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(bool async)
-        {
-            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(async);
+        public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(
+            bool async
+        ) {
+            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name]
@@ -1643,10 +1759,11 @@ INNER JOIN (
     INNER JOIN [EntityThrees] AS [e1] ON [j].[ThreeId] = [e1].[Id]
     WHERE [e1].[Id] < 5
 ) AS [t0] ON [t].[Id] = [t0].[TwoId]
-ORDER BY [e].[Id], [t].[Id]");
+ORDER BY [e].[Id], [t].[Id]"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

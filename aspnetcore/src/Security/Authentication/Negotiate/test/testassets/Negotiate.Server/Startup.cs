@@ -23,12 +23,14 @@ namespace Negotiate.Server
         {
             services.AddControllers();
             services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                .AddNegotiate(options =>
-                {
-                    var persist = string.Equals("true", Configuration["Persist"]);
-                    options.PersistKerberosCredentials = persist;
-                    options.PersistNtlmCredentials = persist;
-                });
+                .AddNegotiate(
+                    options =>
+                    {
+                        var persist = string.Equals("true", Configuration["Persist"]);
+                        options.PersistKerberosCredentials = persist;
+                        options.PersistNtlmCredentials = persist;
+                    }
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,10 +42,12 @@ namespace Negotiate.Server
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                }
+            );
         }
     }
 }

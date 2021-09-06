@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
     /// <summary>
     /// Stream wrapper that create specific compression stream only if necessary.
     /// </summary>
-    internal class ResponseCompressionBody : Stream, IHttpResponseBodyFeature, IHttpsCompressionFeature
+    internal class ResponseCompressionBody
+        : Stream,
+          IHttpResponseBodyFeature,
+          IHttpsCompressionFeature
     {
         private readonly HttpContext _context;
         private readonly IResponseCompressionProvider _provider;
@@ -32,9 +35,11 @@ namespace Microsoft.AspNetCore.ResponseCompression
         private bool _autoFlush;
         private bool _complete;
 
-        internal ResponseCompressionBody(HttpContext context, IResponseCompressionProvider provider,
-            IHttpResponseBodyFeature innerBodyFeature)
-        {
+        internal ResponseCompressionBody(
+            HttpContext context,
+            IResponseCompressionProvider provider,
+            IHttpResponseBodyFeature innerBodyFeature
+        ) {
             _context = context;
             _provider = provider;
             _innerBodyFeature = innerBodyFeature;
@@ -67,7 +72,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
             }
         }
 
-        HttpsCompressionMode IHttpsCompressionFeature.Mode { get; set; } = HttpsCompressionMode.Default;
+        HttpsCompressionMode IHttpsCompressionFeature.Mode { get; set; } =
+            HttpsCompressionMode.Default;
 
         public override bool CanRead => false;
 
@@ -94,7 +100,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
             {
                 if (_pipeAdapter == null)
                 {
-                    _pipeAdapter = PipeWriter.Create(Stream, new StreamPipeWriterOptions(leaveOpen: true));
+                    _pipeAdapter = PipeWriter.Create(
+                        Stream,
+                        new StreamPipeWriterOptions(leaveOpen: true)
+                    );
                 }
 
                 return _pipeAdapter;
@@ -173,14 +182,27 @@ namespace Microsoft.AspNetCore.ResponseCompression
             }
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-            => TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) =>
+            TaskToApm.Begin(
+                WriteAsync(buffer, offset, count, CancellationToken.None),
+                callback,
+                state
+            );
 
-        public override void EndWrite(IAsyncResult asyncResult)
-            => TaskToApm.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             OnWrite();
 
             if (_compressionStream != null)
@@ -202,13 +224,20 @@ namespace Microsoft.AspNetCore.ResponseCompression
             if (_provider.ShouldCompressResponse(_context))
             {
                 // If the MIME type indicates that the response could be compressed, caches will need to vary by the Accept-Encoding header
-                var varyValues = _context.Response.Headers.GetCommaSeparatedValues(HeaderNames.Vary);
+                var varyValues = _context.Response.Headers.GetCommaSeparatedValues(
+                    HeaderNames.Vary
+                );
                 var varyByAcceptEncoding = false;
 
                 for (var i = 0; i < varyValues.Length; i++)
                 {
-                    if (string.Equals(varyValues[i], HeaderNames.AcceptEncoding, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            varyValues[i],
+                            HeaderNames.AcceptEncoding,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         varyByAcceptEncoding = true;
                         break;
                     }
@@ -222,7 +251,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 var compressionProvider = ResolveCompressionProvider();
                 if (compressionProvider != null)
                 {
-                    _context.Response.Headers.Append(HeaderNames.ContentEncoding, compressionProvider.EncodingName);
+                    _context.Response.Headers.Append(
+                        HeaderNames.ContentEncoding,
+                        compressionProvider.EncodingName
+                    );
                     _context.Response.Headers.Remove(HeaderNames.ContentMD5); // Reset the MD5 because the content changed.
                     _context.Response.Headers.Remove(HeaderNames.ContentLength);
                 }
@@ -271,8 +303,12 @@ namespace Microsoft.AspNetCore.ResponseCompression
             _innerBodyFeature.DisableBuffering();
         }
 
-        public Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellation)
-        {
+        public Task SendFileAsync(
+            string path,
+            long offset,
+            long? count,
+            CancellationToken cancellation
+        ) {
             OnWrite();
 
             if (_compressionStream != null)

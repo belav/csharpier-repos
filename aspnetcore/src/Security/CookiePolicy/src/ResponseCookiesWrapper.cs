@@ -17,8 +17,12 @@ namespace Microsoft.AspNetCore.CookiePolicy
         private bool? _isConsentNeeded;
         private bool? _hasConsent;
 
-        public ResponseCookiesWrapper(HttpContext context, CookiePolicyOptions options, IResponseCookiesFeature feature, ILogger logger)
-        {
+        public ResponseCookiesWrapper(
+            HttpContext context,
+            CookiePolicyOptions options,
+            IResponseCookiesFeature feature,
+            ILogger logger
+        ) {
             Context = context;
             Feature = feature;
             Options = options;
@@ -39,8 +43,10 @@ namespace Microsoft.AspNetCore.CookiePolicy
             {
                 if (!_isConsentNeeded.HasValue)
                 {
-                    _isConsentNeeded = Options.CheckConsentNeeded == null ? false
-                        : Options.CheckConsentNeeded(Context);
+                    _isConsentNeeded =
+                        Options.CheckConsentNeeded == null
+                            ? false
+                            : Options.CheckConsentNeeded(Context);
                     _logger.NeedsConsent(_isConsentNeeded.Value);
                 }
 
@@ -101,16 +107,16 @@ namespace Microsoft.AspNetCore.CookiePolicy
 
             var setCookieHeaderValue = new Net.Http.Headers.SetCookieHeaderValue(
                 Uri.EscapeDataString(key),
-                Uri.EscapeDataString(value))
-                {
-                    Domain = options.Domain,
-                    Path = options.Path,
-                    Expires = options.Expires,
-                    MaxAge = options.MaxAge,
-                    Secure = options.Secure,
-                    SameSite = (Net.Http.Headers.SameSiteMode)options.SameSite,
-                    HttpOnly = options.HttpOnly
-                };
+                Uri.EscapeDataString(value)
+            ) {
+                Domain = options.Domain,
+                Path = options.Path,
+                Expires = options.Expires,
+                MaxAge = options.MaxAge,
+                Secure = options.Secure,
+                SameSite = (Net.Http.Headers.SameSiteMode)options.SameSite,
+                HttpOnly = options.HttpOnly
+            };
 
             return setCookieHeaderValue.ToString();
         }
@@ -263,7 +269,9 @@ namespace Microsoft.AspNetCore.CookiePolicy
                 case HttpOnlyPolicy.None:
                     break;
                 default:
-                    throw new InvalidOperationException($"Unrecognized {nameof(HttpOnlyPolicy)} value {Options.HttpOnly.ToString()}");
+                    throw new InvalidOperationException(
+                        $"Unrecognized {nameof(HttpOnlyPolicy)} value {Options.HttpOnly.ToString()}"
+                    );
             }
         }
     }

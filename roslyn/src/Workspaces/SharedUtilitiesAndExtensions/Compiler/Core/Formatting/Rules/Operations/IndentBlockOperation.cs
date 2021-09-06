@@ -12,8 +12,13 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     /// </summary>
     internal sealed class IndentBlockOperation
     {
-        internal IndentBlockOperation(SyntaxToken startToken, SyntaxToken endToken, TextSpan textSpan, int indentationDelta, IndentBlockOption option)
-        {
+        internal IndentBlockOperation(
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            TextSpan textSpan,
+            int indentationDelta,
+            IndentBlockOption option
+        ) {
             Contract.ThrowIfFalse(option.IsMaskOn(IndentBlockOption.PositionMask));
 
             Contract.ThrowIfTrue(textSpan.Start < 0 || textSpan.Length < 0);
@@ -31,8 +36,14 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             this.IndentationDeltaOrPosition = indentationDelta;
         }
 
-        internal IndentBlockOperation(SyntaxToken baseToken, SyntaxToken startToken, SyntaxToken endToken, TextSpan textSpan, int indentationDelta, IndentBlockOption option)
-        {
+        internal IndentBlockOperation(
+            SyntaxToken baseToken,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            TextSpan textSpan,
+            int indentationDelta,
+            IndentBlockOption option
+        ) {
             Contract.ThrowIfFalse(option.IsMaskOn(IndentBlockOption.PositionMask));
 
             Contract.ThrowIfFalse(option.IsMaskOn(IndentBlockOption.RelativePositionMask));
@@ -65,8 +76,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         public int IndentationDeltaOrPosition { get; }
 
 #if DEBUG
-        public override string ToString()
-            => $"Indent {TextSpan} from '{StartToken}' to '{EndToken}', by {IndentationDeltaOrPosition}, with base token '{BaseToken}'";
+        public override string ToString() =>
+            $"Indent {TextSpan} from '{StartToken}' to '{EndToken}', by {IndentationDeltaOrPosition}, with base token '{BaseToken}'";
 #endif
     }
 }

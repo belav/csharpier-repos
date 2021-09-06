@@ -40,7 +40,11 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static ViewComponentContext GetViewComponentContext(IView view, Stream stream)
         {
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
             var viewContext = new ViewContext(
                 actionContext,
@@ -48,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc
                 viewData,
                 new TempDataDictionary(actionContext.HttpContext, Mock.Of<ITempDataProvider>()),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             var writer = new StreamWriter(stream) { AutoFlush = true };
 
@@ -62,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc
                 new Dictionary<string, object>(),
                 new HtmlTestEncoder(),
                 viewContext,
-                writer);
+                writer
+            );
 
             return viewComponentContext;
         }

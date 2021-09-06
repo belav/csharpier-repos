@@ -19,26 +19,28 @@ namespace Microsoft.Data.Sqlite.Utilities
             {
                 assembly = Assembly.Load(new AssemblyName("SQLitePCLRaw.batteries_v2"));
             }
-            catch
-            {
-            }
+            catch { }
 
             if (assembly != null)
             {
-                assembly.GetType("SQLitePCL.Batteries_V2", throwOnError: true)!.GetMethod("Init", Type.EmptyTypes)!
-                    .Invoke(null, null);
+                assembly.GetType("SQLitePCL.Batteries_V2", throwOnError: true)!.GetMethod(
+                    "Init",
+                    Type.EmptyTypes
+                )!.Invoke(null, null);
             }
 
             if (ApplicationDataHelper.CurrentApplicationData != null)
             {
                 var rc = sqlite3_win32_set_directory(
                     SQLITE_WIN32_DATA_DIRECTORY_TYPE,
-                    ApplicationDataHelper.LocalFolderPath);
+                    ApplicationDataHelper.LocalFolderPath
+                );
                 SqliteException.ThrowExceptionForRC(rc, db: null);
 
                 rc = sqlite3_win32_set_directory(
                     SQLITE_WIN32_TEMP_DIRECTORY_TYPE,
-                    ApplicationDataHelper.TemporaryFolderPath);
+                    ApplicationDataHelper.TemporaryFolderPath
+                );
                 SqliteException.ThrowExceptionForRC(rc, db: null);
             }
         }

@@ -18,8 +18,15 @@ class BindHandleInvalid3
     }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    public static extern IntPtr CreateFile(String FileName, uint Access, uint Share, int Atts, uint Dispo, uint Flags, int Template);
-
+    public static extern IntPtr CreateFile(
+        String FileName,
+        uint Access,
+        uint Share,
+        int Atts,
+        uint Dispo,
+        uint Flags,
+        int Template
+    );
 
     int RunTest()
     {
@@ -27,9 +34,12 @@ class BindHandleInvalid3
         {
             try
             {
-                using (SafeFileHandle sfh = new SafeFileHandle(CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x80, 0), true))
-                {
-
+                using (
+                    SafeFileHandle sfh = new SafeFileHandle(
+                        CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x80, 0),
+                        true
+                    )
+                ) {
                     ThreadPool.BindHandle(sfh);
                 }
             }
@@ -46,6 +56,7 @@ class BindHandleInvalid3
                 }
             }
         }
+
         finally
         {
             if (File.Exists("test.txt"))
@@ -56,6 +67,4 @@ class BindHandleInvalid3
         Console.WriteLine("Didn't get argument null exception");
         return (99);
     }
-
-
 }

@@ -26,11 +26,17 @@ namespace Roslyn.Test.Utilities
         public static ISymUnmanagedReader3 CreateSymReader(this CompilationVerifier verifier)
         {
             var pdbStream = new ImmutableMemoryStream(verifier.EmittedAssemblyPdb);
-            return SymReaderFactory.CreateReader(pdbStream, metadataReaderOpt: null, metadataMemoryOwnerOpt: null);
+            return SymReaderFactory.CreateReader(
+                pdbStream,
+                metadataReaderOpt: null,
+                metadataMemoryOwnerOpt: null
+            );
         }
 
-        public static unsafe EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(this ISymUnmanagedReader3 symReader, MethodDefinitionHandle handle)
-        {
+        public static unsafe EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(
+            this ISymUnmanagedReader3 symReader,
+            MethodDefinitionHandle handle
+        ) {
             const int S_OK = 0;
 
             if (symReader is ISymUnmanagedReader4 symReader4)
@@ -43,26 +49,44 @@ namespace Roslyn.Test.Utilities
                     var pdbReader = new MetadataReader(metadata, size);
 
                     ImmutableArray<byte> GetCdiBytes(Guid kind) =>
-                        TryGetCustomDebugInformation(pdbReader, handle, kind, out var info) ? pdbReader.GetBlobContent(info.Value) : default(ImmutableArray<byte>);
+                        TryGetCustomDebugInformation(pdbReader, handle, kind, out var info)
+                            ? pdbReader.GetBlobContent(info.Value)
+                            : default(ImmutableArray<byte>);
 
                     return EditAndContinueMethodDebugInformation.Create(
-                        compressedSlotMap: GetCdiBytes(PortableCustomDebugInfoKinds.EncLocalSlotMap),
-                        compressedLambdaMap: GetCdiBytes(PortableCustomDebugInfoKinds.EncLambdaAndClosureMap));
+                        compressedSlotMap: GetCdiBytes(
+                            PortableCustomDebugInfoKinds.EncLocalSlotMap
+                        ),
+                        compressedLambdaMap: GetCdiBytes(
+                            PortableCustomDebugInfoKinds.EncLambdaAndClosureMap
+                        )
+                    );
                 }
             }
 
-            var cdi = CustomDebugInfoUtilities.GetCustomDebugInfoBytes(symReader, handle, methodVersion: 1);
+            var cdi = CustomDebugInfoUtilities.GetCustomDebugInfoBytes(
+                symReader,
+                handle,
+                methodVersion: 1
+            );
             if (cdi == null)
             {
-                return EditAndContinueMethodDebugInformation.Create(default(ImmutableArray<byte>), default(ImmutableArray<byte>));
+                return EditAndContinueMethodDebugInformation.Create(
+                    default(ImmutableArray<byte>),
+                    default(ImmutableArray<byte>)
+                );
             }
 
             return GetEncMethodDebugInfo(cdi);
         }
 
         /// <exception cref="BadImageFormatException">Invalid data format.</exception>
-        private static bool TryGetCustomDebugInformation(MetadataReader reader, EntityHandle handle, Guid kind, out CustomDebugInformation customDebugInfo)
-        {
+        private static bool TryGetCustomDebugInformation(
+            MetadataReader reader,
+            EntityHandle handle,
+            Guid kind,
+            out CustomDebugInformation customDebugInfo
+        ) {
             bool foundAny = false;
             customDebugInfo = default(CustomDebugInformation);
             foreach (var infoHandle in reader.GetCustomDebugInformation(handle))
@@ -82,11 +106,13 @@ namespace Roslyn.Test.Utilities
             return foundAny;
         }
 
-        public static EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(byte[] customDebugInfoBlob)
-        {
+        public static EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(
+            byte[] customDebugInfoBlob
+        ) {
             return EditAndContinueMethodDebugInformation.Create(
                 CustomDebugInfoUtilities.GetEditAndContinueLocalSlotMapRecord(customDebugInfoBlob),
-                CustomDebugInfoUtilities.GetEditAndContinueLambdaMapRecord(customDebugInfoBlob));
+                CustomDebugInfoUtilities.GetEditAndContinueLambdaMapRecord(customDebugInfoBlob)
+            );
         }
 
         public static string GetTokenToLocationMap(Compilation compilation, bool maskToken = false)

@@ -21,7 +21,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
 {
-    [ExportQuickInfoProvider(QuickInfoProviderNames.DiagnosticAnalyzer, LanguageNames.CSharp), Shared]
+    [
+        ExportQuickInfoProvider(QuickInfoProviderNames.DiagnosticAnalyzer, LanguageNames.CSharp),
+        Shared
+    ]
     // This provider needs to run before the semantic quick info provider, because of the SuppressMessage attribute handling
     // If it runs after it, BuildQuickInfoAsync is not called. This is not covered by a test.
     [ExtensionOrder(Before = QuickInfoProviderNames.Semantic)]
@@ -30,19 +33,31 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpDiagnosticAnalyzerQuickInfoProvider(IDiagnosticAnalyzerService diagnosticAnalyzerService)
-        {
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpDiagnosticAnalyzerQuickInfoProvider(
+            IDiagnosticAnalyzerService diagnosticAnalyzerService
+        ) {
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
         }
 
         protected override async Task<QuickInfoItem?> BuildQuickInfoAsync(
             Document document,
             SyntaxToken token,
-            CancellationToken cancellationToken)
-        {
-            return GetQuickinfoForPragmaWarning(document, token) ??
-                (await GetQuickInfoForSuppressMessageAttributeAsync(document, token, cancellationToken).ConfigureAwait(false));
+            CancellationToken cancellationToken
+        ) {
+            return GetQuickinfoForPragmaWarning(document, token)
+                ?? (
+                    await GetQuickInfoForSuppressMessageAttributeAsync(
+                            document,
+                            token,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
         }
 
         private QuickInfoItem? GetQuickinfoForPragmaWarning(Document document, SyntaxToken token)
@@ -50,9 +65,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             var errorCodeNode = token.Parent switch
             {
                 PragmaWarningDirectiveTriviaSyntax directive
-                    => token.IsKind(SyntaxKind.EndOfDirectiveToken)
-                        ? directive.ErrorCodes.LastOrDefault()
-                        : directive.ErrorCodes.FirstOrDefault(),
+                  => token.IsKind(SyntaxKind.EndOfDirectiveToken)
+                      ? directive.ErrorCodes.LastOrDefault()
+                      : directive.ErrorCodes.FirstOrDefault(),
                 { Parent: PragmaWarningDirectiveTriviaSyntax } node => node,
                 _ => null,
             };
@@ -70,10 +85,12 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
                 // case 0219 or 219:
                 // Take the number and add the "CS" prefix.
-                LiteralExpressionSyntax { RawKind: (int)SyntaxKind.NumericLiteralExpression } literal
-                    => int.TryParse(literal.Token.ValueText, out var errorCodeNumber)
-                        ? $"CS{errorCodeNumber:0000}"
-                        : literal.Token.ValueText,
+                LiteralExpressionSyntax{
+                    RawKind: (int)SyntaxKind.NumericLiteralExpression
+                } literal
+                  => int.TryParse(literal.Token.ValueText, out var errorCodeNumber)
+                      ? $"CS{errorCodeNumber:0000}"
+                      : literal.Token.ValueText,
                 _ => null,
             };
             if (errorCode is null)
@@ -81,57 +98,73 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 return null;
             }
 
-            return GetQuickInfoFromSupportedDiagnosticsOfProjectAnalyzers(document, errorCode, errorCodeNode.Span);
+            return GetQuickInfoFromSupportedDiagnosticsOfProjectAnalyzers(
+                document,
+                errorCode,
+                errorCodeNode.Span
+            );
         }
 
         private async Task<QuickInfoItem?> GetQuickInfoForSuppressMessageAttributeAsync(
             Document document,
             SyntaxToken token,
-            CancellationToken cancellationToken)
-        {
-            // SuppressMessageAttribute docs 
+            CancellationToken cancellationToken
+        ) {
+            // SuppressMessageAttribute docs
             // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.suppressmessageattribute
             var suppressMessageCheckIdArgument = token.GetAncestor<AttributeArgumentSyntax>() switch
             {
-                AttributeArgumentSyntax
-                {
+                AttributeArgumentSyntax{
                     Parent: AttributeArgumentListSyntax
                     {
                         Arguments: var arguments,
-                        Parent: AttributeSyntax
-                        {
-                            Name: var attributeName
-                        }
+                        Parent: AttributeSyntax{ Name: var attributeName }
                     }
-                } argument when
-                    attributeName.IsSuppressMessageAttribute() &&
-                    (argument.NameColon is null
-                        ? arguments.IndexOf(argument) == 1 // Positional argument "checkId"
-                        : argument.NameColon.Name.Identifier.ValueText == "checkId") // Named argument "checkId"
-                    => argument,
+                } argument
+                    when attributeName.IsSuppressMessageAttribute()
+                        && (
+                            argument.NameColon is null
+                                ? arguments.IndexOf(argument) == 1 // Positional argument "checkId"
+                                : argument.NameColon.Name.Identifier.ValueText == "checkId"
+                        ) // Named argument "checkId"
+                  => argument,
                 _ => null,
             };
 
             if (suppressMessageCheckIdArgument != null)
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var checkIdObject = semanticModel.GetConstantValue(suppressMessageCheckIdArgument.Expression, cancellationToken);
+                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var checkIdObject = semanticModel.GetConstantValue(
+                    suppressMessageCheckIdArgument.Expression,
+                    cancellationToken
+                );
                 if (checkIdObject.HasValue && checkIdObject.Value is string checkId)
                 {
                     var errorCode = checkId.ExtractErrorCodeFromCheckId();
-                    return GetQuickInfoFromSupportedDiagnosticsOfProjectAnalyzers(document, errorCode, suppressMessageCheckIdArgument.Span);
+                    return GetQuickInfoFromSupportedDiagnosticsOfProjectAnalyzers(
+                        document,
+                        errorCode,
+                        suppressMessageCheckIdArgument.Span
+                    );
                 }
             }
 
             return null;
         }
 
-        private QuickInfoItem? GetQuickInfoFromSupportedDiagnosticsOfProjectAnalyzers(Document document,
-            string errorCode, TextSpan location)
-        {
+        private QuickInfoItem? GetQuickInfoFromSupportedDiagnosticsOfProjectAnalyzers(
+            Document document,
+            string errorCode,
+            TextSpan location
+        ) {
             var infoCache = _diagnosticAnalyzerService.AnalyzerInfoCache;
             var hostAnalyzers = document.Project.Solution.State.Analyzers;
-            var groupedDiagnostics = hostAnalyzers.GetDiagnosticDescriptorsPerReference(infoCache, document.Project).Values;
+            var groupedDiagnostics =
+                hostAnalyzers.GetDiagnosticDescriptorsPerReference(
+                    infoCache,
+                    document.Project
+                ).Values;
             var supportedDiagnostics = groupedDiagnostics.SelectMany(d => d);
             var diagnosticDescriptor = supportedDiagnostics.FirstOrDefault(d => d.Id == errorCode);
             if (diagnosticDescriptor != null)
@@ -142,27 +175,42 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return null;
         }
 
-        private static QuickInfoItem CreateQuickInfo(TextSpan location, DiagnosticDescriptor descriptor,
-            params TextSpan[] relatedSpans)
-        {
+        private static QuickInfoItem CreateQuickInfo(
+            TextSpan location,
+            DiagnosticDescriptor descriptor,
+            params TextSpan[] relatedSpans
+        ) {
             var description =
-                descriptor.Title.ToStringOrNull() ??
-                descriptor.Description.ToStringOrNull() ??
-                descriptor.MessageFormat.ToStringOrNull() ??
-                descriptor.Id;
+                descriptor.Title.ToStringOrNull()
+                ?? descriptor.Description.ToStringOrNull()
+                ?? descriptor.MessageFormat.ToStringOrNull()
+                ?? descriptor.Id;
             var idTag = !string.IsNullOrWhiteSpace(descriptor.HelpLinkUri)
-                ? new TaggedText(TextTags.Text, descriptor.Id, TaggedTextStyle.None, descriptor.HelpLinkUri, descriptor.HelpLinkUri)
+                ? new TaggedText(
+                      TextTags.Text,
+                      descriptor.Id,
+                      TaggedTextStyle.None,
+                      descriptor.HelpLinkUri,
+                      descriptor.HelpLinkUri
+                  )
                 : new TaggedText(TextTags.Text, descriptor.Id);
-            return QuickInfoItem.Create(location, sections: new[]
+            return QuickInfoItem.Create(
+                location,
+                sections: new[]
                 {
-                    QuickInfoSection.Create(QuickInfoSectionKinds.Description, new[]
-                    {
-                        idTag,
-                        new TaggedText(TextTags.Punctuation, ":"),
-                        new TaggedText(TextTags.Space, " "),
-                        new TaggedText(TextTags.Text, description)
-                    }.ToImmutableArray())
-                }.ToImmutableArray(), relatedSpans: relatedSpans.ToImmutableArray());
+                    QuickInfoSection.Create(
+                        QuickInfoSectionKinds.Description,
+                        new[]
+                        {
+                            idTag,
+                            new TaggedText(TextTags.Punctuation, ":"),
+                            new TaggedText(TextTags.Space, " "),
+                            new TaggedText(TextTags.Text, description)
+                        }.ToImmutableArray()
+                    )
+                }.ToImmutableArray(),
+                relatedSpans: relatedSpans.ToImmutableArray()
+            );
         }
     }
 }

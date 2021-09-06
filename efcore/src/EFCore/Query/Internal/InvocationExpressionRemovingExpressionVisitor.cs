@@ -35,20 +35,25 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
         private Expression StripTrivialConversions(Expression expression)
         {
-            while (expression is UnaryExpression unaryExpression
+            while (
+                expression is UnaryExpression unaryExpression
                 && unaryExpression.NodeType == ExpressionType.Convert
                 && expression.Type == unaryExpression.Operand.Type
-                && unaryExpression.Method == null)
-            {
+                && unaryExpression.Method == null
+            ) {
                 expression = unaryExpression.Operand;
             }
 
             return expression;
         }
 
-        private Expression InlineLambdaExpression(LambdaExpression lambdaExpression, ReadOnlyCollection<Expression> arguments)
-            => new ReplacingExpressionVisitor(
-                    lambdaExpression.Parameters.ToArray<Expression>(), arguments.ToArray())
-                .Visit(lambdaExpression.Body);
+        private Expression InlineLambdaExpression(
+            LambdaExpression lambdaExpression,
+            ReadOnlyCollection<Expression> arguments
+        ) =>
+            new ReplacingExpressionVisitor(
+                lambdaExpression.Parameters.ToArray<Expression>(),
+                arguments.ToArray()
+            ).Visit(lambdaExpression.Body);
     }
 }

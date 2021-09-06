@@ -11,9 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private bool _visitedFirstTokenStart = false;
         private SourceLocation _firstTokenVisitLocation = SourceLocation.Undefined;
 
-        public DirectiveHtmlTokenizer(ITextDocument source) : base(source)
-        {
-        }
+        public DirectiveHtmlTokenizer(ITextDocument source) : base(source) { }
 
         protected override StateResult Dispatch()
         {
@@ -34,8 +32,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             Debug.Assert(Buffer.Length == 0);
             StartToken();
 
-            if (EndOfFile || (_visitedFirstTokenStart && _firstTokenVisitLocation != CurrentLocation))
-            {
+            if (
+                EndOfFile
+                || (_visitedFirstTokenStart && _firstTokenVisitLocation != CurrentLocation)
+            ) {
                 // We also need to make sure we are currently past the position where we found the first token.
                 // If the position is equal, that means the parser put the token back for later parsing.
                 return null;
@@ -51,12 +51,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         private bool IsValidTokenType(SyntaxKind kind)
         {
-            return kind != SyntaxKind.Whitespace &&
-                kind != SyntaxKind.NewLine &&
-                kind != SyntaxKind.RazorCommentLiteral &&
-                kind != SyntaxKind.RazorCommentStar &&
-                kind != SyntaxKind.RazorCommentTransition &&
-                kind != SyntaxKind.Transition;
+            return kind != SyntaxKind.Whitespace
+                && kind != SyntaxKind.NewLine
+                && kind != SyntaxKind.RazorCommentLiteral
+                && kind != SyntaxKind.RazorCommentStar
+                && kind != SyntaxKind.RazorCommentTransition
+                && kind != SyntaxKind.Transition;
         }
     }
 }

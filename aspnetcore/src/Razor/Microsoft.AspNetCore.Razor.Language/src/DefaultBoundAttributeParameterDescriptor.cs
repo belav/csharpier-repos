@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string displayName,
             bool caseSensitive,
             Dictionary<string, string> metadata,
-            RazorDiagnostic[] diagnostics)
-            : base(kind)
+            RazorDiagnostic[] diagnostics
+        ) : base(kind)
         {
             Name = name;
             TypeName = typeName;

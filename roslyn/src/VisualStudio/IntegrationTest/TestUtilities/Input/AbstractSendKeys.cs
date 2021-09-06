@@ -25,8 +25,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             {
                 if (key is string s)
                 {
-                    var text = s.Replace("\r\n", "\r")
-                                .Replace("\n", "\r");
+                    var text = s.Replace("\r\n", "\r").Replace("\n", "\r");
 
                     foreach (var ch in text)
                     {
@@ -51,7 +50,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
                 }
                 else
                 {
-                    throw new ArgumentException($"Unexpected type encountered: {key.GetType()}", nameof(keys));
+                    throw new ArgumentException(
+                        $"Unexpected type encountered: {key.GetType()}",
+                        nameof(keys)
+                    );
                 }
             }
 
@@ -113,10 +115,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             inputs.Add(keyUpInput);
         }
 
-        private static void AddInputs(List<NativeMethods.INPUT> inputs, VirtualKey virtualKey, uint dwFlags)
-        {
+        private static void AddInputs(
+            List<NativeMethods.INPUT> inputs,
+            VirtualKey virtualKey,
+            uint dwFlags
+        ) {
             NativeMethods.INPUT input;
-            var scanCode = NativeMethods.MapVirtualKey((uint)virtualKey, NativeMethods.MAPVK_VK_TO_VSC);
+            var scanCode = NativeMethods.MapVirtualKey(
+                (uint)virtualKey,
+                NativeMethods.MAPVK_VK_TO_VSC
+            );
             if (scanCode != 0)
             {
                 input = new NativeMethods.INPUT
@@ -162,16 +170,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             inputs.Add(input);
         }
 
-        private static bool IsExtendedKey(VirtualKey virtualKey)
-            => (virtualKey >= VirtualKey.PageUp && virtualKey <= VirtualKey.Down)
+        private static bool IsExtendedKey(VirtualKey virtualKey) =>
+            (virtualKey >= VirtualKey.PageUp && virtualKey <= VirtualKey.Down)
             || virtualKey == VirtualKey.Insert
             || virtualKey == VirtualKey.Delete;
 
-        private static void AddInputs(List<NativeMethods.INPUT> inputs, KeyPress keyPress)
-            => AddInputs(inputs, keyPress.VirtualKey, keyPress.ShiftState);
+        private static void AddInputs(List<NativeMethods.INPUT> inputs, KeyPress keyPress) =>
+            AddInputs(inputs, keyPress.VirtualKey, keyPress.ShiftState);
 
-        private static void AddInputs(List<NativeMethods.INPUT> inputs, VirtualKey virtualKey, ShiftState shiftState = 0)
-        {
+        private static void AddInputs(
+            List<NativeMethods.INPUT> inputs,
+            VirtualKey virtualKey,
+            ShiftState shiftState = 0
+        ) {
             if ((shiftState & ShiftState.Shift) != 0)
             {
                 AddInputs(inputs, VirtualKey.Shift, NativeMethods.KEYEVENTF_NONE);

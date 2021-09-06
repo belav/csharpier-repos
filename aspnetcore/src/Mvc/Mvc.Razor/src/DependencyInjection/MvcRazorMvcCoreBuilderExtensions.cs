@@ -49,8 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddRazorViewEngine(
             this IMvcCoreBuilder builder,
-            Action<RazorViewEngineOptions> setupAction)
-        {
+            Action<RazorViewEngineOptions> setupAction
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -118,8 +118,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/> instance this method extends.</returns>
         public static IMvcCoreBuilder InitializeTagHelper<TTagHelper>(
             this IMvcCoreBuilder builder,
-            Action<TTagHelper, ViewContext> initialize)
-            where TTagHelper : ITagHelper
+            Action<TTagHelper, ViewContext> initialize
+        ) where TTagHelper : ITagHelper
         {
             if (builder == null)
             {
@@ -142,10 +142,18 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static void AddRazorViewEngineServices(IServiceCollection services)
         {
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IConfigureOptions<MvcViewOptions>, MvcRazorMvcViewOptionsSetup>());
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<MvcViewOptions>,
+                    MvcRazorMvcViewOptionsSetup
+                >()
+            );
 
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IConfigureOptions<RazorViewEngineOptions>, RazorViewEngineOptionsSetup>());
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<RazorViewEngineOptions>,
+                    RazorViewEngineOptionsSetup
+                >()
+            );
 
             services.TryAddSingleton<IRazorViewEngine, RazorViewEngine>();
             services.TryAddSingleton<IViewCompilerProvider, DefaultViewCompilerProvider>();
@@ -159,7 +167,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Only want one ITagHelperActivator and ITagHelperComponentPropertyActivator so it can cache Type activation information. Types won't conflict.
             services.TryAddSingleton<ITagHelperActivator, DefaultTagHelperActivator>();
-            services.TryAddSingleton<ITagHelperComponentPropertyActivator, TagHelperComponentPropertyActivator>();
+            services.TryAddSingleton<
+                ITagHelperComponentPropertyActivator,
+                TagHelperComponentPropertyActivator
+            >();
 
             services.TryAddSingleton<ITagHelperFactory, DefaultTagHelperFactory>();
 

@@ -14,11 +14,12 @@ namespace Internal.Cryptography.Pal
     internal sealed class SecTrustChainPal : IChainPal
     {
         private const X509ChainStatusFlags RevocationRelevantFlags =
-            X509ChainStatusFlags.RevocationStatusUnknown |
-            X509ChainStatusFlags.Revoked |
-            X509ChainStatusFlags.OfflineRevocation;
+            X509ChainStatusFlags.RevocationStatusUnknown
+            | X509ChainStatusFlags.Revoked
+            | X509ChainStatusFlags.OfflineRevocation;
 
-        private static readonly SafeCreateHandle s_emptyArray = Interop.CoreFoundation.CFArrayCreate(Array.Empty<IntPtr>(), UIntPtr.Zero);
+        private static readonly SafeCreateHandle s_emptyArray =
+            Interop.CoreFoundation.CFArrayCreate(Array.Empty<IntPtr>(), UIntPtr.Zero);
         private Stack<SafeHandle> _extraHandles;
         private SafeX509ChainHandle? _chainHandle;
         public X509ChainElement[]? ChainElements { get; private set; }
@@ -38,11 +39,18 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection? extraStore,
             X509RevocationMode revocationMode,
             X509Certificate2Collection customTrustStore,
-            X509ChainTrustMode trustMode)
-        {
+            X509ChainTrustMode trustMode
+        ) {
             _revocationMode = revocationMode;
-            SafeCreateHandle policiesArray = PreparePoliciesArray(revocationMode != X509RevocationMode.NoCheck);
-            SafeCreateHandle certsArray = PrepareCertsArray(leafCert, extraStore, customTrustStore, trustMode);
+            SafeCreateHandle policiesArray = PreparePoliciesArray(
+                revocationMode != X509RevocationMode.NoCheck
+            );
+            SafeCreateHandle certsArray = PrepareCertsArray(
+                leafCert,
+                extraStore,
+                customTrustStore,
+                trustMode
+            );
 
             int osStatus;
 
@@ -51,7 +59,8 @@ namespace Internal.Cryptography.Pal
                 certsArray,
                 policiesArray,
                 out chain,
-                out osStatus);
+                out osStatus
+            );
 
             if (ret == 1)
             {
@@ -65,12 +74,16 @@ namespace Internal.Cryptography.Pal
 
                     try
                     {
-                        int error = Interop.AppleCrypto.X509ChainSetTrustAnchorCertificates(chain, customCertsArray);
+                        int error = Interop.AppleCrypto.X509ChainSetTrustAnchorCertificates(
+                            chain,
+                            customCertsArray
+                        );
                         if (error != 0)
                         {
                             throw Interop.AppleCrypto.CreateExceptionForOSStatus(error);
                         }
                     }
+
                     finally
                     {
                         if (customCertsArray != s_emptyArray)
@@ -140,8 +153,10 @@ namespace Internal.Cryptography.Pal
                 policies[1] = revPolicy.DangerousGetHandle();
             }
 
-            SafeCreateHandle policiesArray =
-                Interop.CoreFoundation.CFArrayCreate(policies, (UIntPtr)policies.Length);
+            SafeCreateHandle policiesArray = Interop.CoreFoundation.CFArrayCreate(
+                policies,
+                (UIntPtr)policies.Length
+            );
 
             _extraHandles.Push(policiesArray);
             return policiesArray;
@@ -151,9 +166,12 @@ namespace Internal.Cryptography.Pal
             ICertificatePal cert,
             X509Certificate2Collection? extraStore,
             X509Certificate2Collection customTrustStore,
-            X509ChainTrustMode trustMode)
-        {
-            List<SafeHandle> safeHandles = new List<SafeHandle> { ((AppleCertificatePal)cert).CertificateHandle };
+            X509ChainTrustMode trustMode
+        ) {
+            List<SafeHandle> safeHandles = new List<SafeHandle>
+            {
+                ((AppleCertificatePal)cert).CertificateHandle
+            };
 
             if (extraStore != null)
             {
@@ -169,9 +187,14 @@ namespace Internal.Cryptography.Pal
                 {
                     // Only adds non self issued certs to the untrusted certs array. Trusted self signed
                     // certs will be added to the custom certs array.
-                    if (!customTrustStore[i].SubjectName.RawData.ContentsEqual(customTrustStore[i].IssuerName.RawData))
-                    {
-                        safeHandles.Add(((AppleCertificatePal)customTrustStore[i].Pal).CertificateHandle);
+                    if (
+                        !customTrustStore[i].SubjectName.RawData.ContentsEqual(
+                            customTrustStore[i].IssuerName.RawData
+                        )
+                    ) {
+                        safeHandles.Add(
+                            ((AppleCertificatePal)customTrustStore[i].Pal).CertificateHandle
+                        );
                     }
                 }
             }
@@ -179,8 +202,9 @@ namespace Internal.Cryptography.Pal
             return GetCertsArray(safeHandles);
         }
 
-        private SafeCreateHandle PrepareCustomCertsArray(X509Certificate2Collection customTrustStore)
-        {
+        private SafeCreateHandle PrepareCustomCertsArray(
+            X509Certificate2Collection customTrustStore
+        ) {
             List<SafeHandle> rootCertificates = new List<SafeHandle>();
             foreach (X509Certificate2 cert in customTrustStore)
             {
@@ -211,10 +235,14 @@ namespace Internal.Cryptography.Pal
 
                 // Creating the array has the effect of calling CFRetain() on all of the pointers, so the native
                 // resource is safe even if we DangerousRelease=>ReleaseHandle them.
-                SafeCreateHandle certsArray = Interop.CoreFoundation.CFArrayCreate(ptrs, (UIntPtr)ptrs.Length);
+                SafeCreateHandle certsArray = Interop.CoreFoundation.CFArrayCreate(
+                    ptrs,
+                    (UIntPtr)ptrs.Length
+                );
                 _extraHandles.Push(certsArray);
                 return certsArray;
             }
+
             finally
             {
                 for (idx--; idx >= 0; idx--)
@@ -229,21 +257,25 @@ namespace Internal.Cryptography.Pal
             bool allowNetwork,
             OidCollection applicationPolicy,
             OidCollection certificatePolicy,
-            X509RevocationFlag revocationFlag)
-        {
+            X509RevocationFlag revocationFlag
+        ) {
             int osStatus;
 
             // Save the time code for determining which message to load for NotTimeValid.
             _verificationTime = verificationTime;
             int ret;
 
-            using (SafeCFDateHandle cfEvaluationTime = Interop.CoreFoundation.CFDateCreate(verificationTime))
-            {
+            using (
+                SafeCFDateHandle cfEvaluationTime = Interop.CoreFoundation.CFDateCreate(
+                    verificationTime
+                )
+            ) {
                 ret = Interop.AppleCrypto.AppleCryptoNative_X509ChainEvaluate(
                     _chainHandle!,
                     cfEvaluationTime,
                     allowNetwork,
-                    out osStatus);
+                    out osStatus
+                );
             }
 
             if (ret == 0)
@@ -264,7 +296,10 @@ namespace Internal.Cryptography.Pal
                 {
                     (X509Certificate2, int) currentValue = elements[i];
 
-                    elements[i] = (currentValue.Item1, currentValue.Item2 | (int)X509ChainStatusFlags.NotValidForUsage);
+                    elements[i] = (
+                        currentValue.Item1,
+                        currentValue.Item2 | (int)X509ChainStatusFlags.NotValidForUsage
+                    );
                 }
             }
 
@@ -274,8 +309,8 @@ namespace Internal.Cryptography.Pal
 
         private static (X509Certificate2, int)[] ParseResults(
             SafeX509ChainHandle chainHandle,
-            X509RevocationMode revocationMode)
-        {
+            X509RevocationMode revocationMode
+        ) {
             long elementCount = Interop.AppleCrypto.X509ChainGetChainSize(chainHandle);
             var elements = new (X509Certificate2, int)[elementCount];
 
@@ -283,11 +318,17 @@ namespace Internal.Cryptography.Pal
             {
                 for (long elementIdx = 0; elementIdx < elementCount; elementIdx++)
                 {
-                    IntPtr certHandle =
-                        Interop.AppleCrypto.X509ChainGetCertificateAtIndex(chainHandle, elementIdx);
+                    IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(
+                        chainHandle,
+                        elementIdx
+                    );
 
                     int dwStatus;
-                    int ret = Interop.AppleCrypto.X509ChainGetStatusAtIndex(trustResults, elementIdx, out dwStatus);
+                    int ret = Interop.AppleCrypto.X509ChainGetStatusAtIndex(
+                        trustResults,
+                        elementIdx,
+                        out dwStatus
+                    );
 
                     // A return value of zero means no errors happened in locating the status (negative) or in
                     // parsing the status (positive).
@@ -311,8 +352,8 @@ namespace Internal.Cryptography.Pal
         private bool IsPolicyMatch(
             (X509Certificate2, int)[] elements,
             OidCollection applicationPolicy,
-            OidCollection certificatePolicy)
-        {
+            OidCollection certificatePolicy
+        ) {
             if (applicationPolicy?.Count > 0 || certificatePolicy?.Count > 0)
             {
                 List<X509Certificate2> certsToRead = new List<X509Certificate2>();
@@ -365,8 +406,8 @@ namespace Internal.Cryptography.Pal
 
         private static void FixupRevocationStatus(
             (X509Certificate2, int)[] elements,
-            X509RevocationFlag revocationFlag)
-        {
+            X509RevocationFlag revocationFlag
+        ) {
             if (revocationFlag == X509RevocationFlag.ExcludeRoot)
             {
                 // When requested
@@ -403,8 +444,8 @@ namespace Internal.Cryptography.Pal
         private static void FixupStatus(
             X509Certificate2 cert,
             X509RevocationMode revocationMode,
-            ref int dwStatus)
-        {
+            ref int dwStatus
+        ) {
             X509ChainStatusFlags flags = (X509ChainStatusFlags)dwStatus;
 
             if ((flags & X509ChainStatusFlags.UntrustedRoot) != 0)
@@ -483,9 +524,10 @@ namespace Internal.Cryptography.Pal
                         const int errSecCertificateExpired = -67818;
                         const int errSecCertificateNotValidYet = -67819;
 
-                        osStatus = cert != null && cert.NotBefore > _verificationTime ?
-                            errSecCertificateNotValidYet :
-                            errSecCertificateExpired;
+                        osStatus =
+                            cert != null && cert.NotBefore > _verificationTime
+                                ? errSecCertificateNotValidYet
+                                : errSecCertificateExpired;
                         errorString = Interop.AppleCrypto.GetSecErrorString(osStatus);
                     }
                     else
@@ -499,7 +541,8 @@ namespace Internal.Cryptography.Pal
                         {
                             Status = mapping.ChainStatusFlag,
                             StatusInformation = errorString
-                        });
+                        }
+                    );
                 }
             }
 
@@ -600,8 +643,8 @@ namespace Internal.Cryptography.Pal
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
-        {
+            bool disableAia
+        ) {
             // If the time was given in Universal, it will stay Universal.
             // If the time was given in Local, it will be converted.
             // If the time was given in Unspecified, it will be assumed local, and converted.
@@ -624,14 +667,16 @@ namespace Internal.Cryptography.Pal
                     extraStore,
                     revocationMode,
                     customTrustStore,
-                    trustMode);
+                    trustMode
+                );
 
                 chainPal.Execute(
                     verificationTime,
                     allowNetwork: !disableAia || revocationRequiresNetwork,
                     applicationPolicy,
                     certificatePolicy,
-                    revocationFlag);
+                    revocationFlag
+                );
             }
             catch
             {

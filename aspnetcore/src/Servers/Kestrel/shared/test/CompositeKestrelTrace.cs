@@ -25,8 +25,13 @@ namespace Microsoft.AspNetCore.Testing
             _trace2 = kestrelTrace1;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) {
             _trace1.Log(logLevel, eventId, state, exception, formatter);
             _trace2.Log(logLevel, eventId, state, exception, formatter);
         }
@@ -107,8 +112,10 @@ namespace Microsoft.AspNetCore.Testing
             _trace2.NotAllConnectionsClosedGracefully();
         }
 
-        public void ConnectionBadRequest(string connectionId, Microsoft.AspNetCore.Http.BadHttpRequestException ex)
-        {
+        public void ConnectionBadRequest(
+            string connectionId,
+            Microsoft.AspNetCore.Http.BadHttpRequestException ex
+        ) {
             _trace1.ConnectionBadRequest(connectionId, ex);
             _trace2.ConnectionBadRequest(connectionId, ex);
         }
@@ -161,8 +168,11 @@ namespace Microsoft.AspNetCore.Testing
             _trace2.RequestBodyDrainTimedOut(connectionId, traceIdentifier);
         }
 
-        public void RequestBodyMinimumDataRateNotSatisfied(string connectionId, string traceIdentifier, double rate)
-        {
+        public void RequestBodyMinimumDataRateNotSatisfied(
+            string connectionId,
+            string traceIdentifier,
+            double rate
+        ) {
             _trace1.RequestBodyMinimumDataRateNotSatisfied(connectionId, traceIdentifier, rate);
             _trace2.RequestBodyMinimumDataRateNotSatisfied(connectionId, traceIdentifier, rate);
         }
@@ -203,8 +213,11 @@ namespace Microsoft.AspNetCore.Testing
             _trace2.HPackEncodingError(connectionId, streamId, ex);
         }
 
-        public void Http2StreamResetAbort(string traceIdentifier, Http2ErrorCode error, ConnectionAbortedException abortReason)
-        {
+        public void Http2StreamResetAbort(
+            string traceIdentifier,
+            Http2ErrorCode error,
+            ConnectionAbortedException abortReason
+        ) {
             _trace1.Http2StreamResetAbort(traceIdentifier, error, abortReason);
             _trace2.Http2StreamResetAbort(traceIdentifier, error, abortReason);
         }
@@ -263,8 +276,11 @@ namespace Microsoft.AspNetCore.Testing
             _trace2.Http3ConnectionClosed(connectionId, highestOpenedStreamId);
         }
 
-        public void Http3StreamAbort(string traceIdentifier, Http3ErrorCode error, ConnectionAbortedException abortReason)
-        {
+        public void Http3StreamAbort(
+            string traceIdentifier,
+            Http3ErrorCode error,
+            ConnectionAbortedException abortReason
+        ) {
             _trace1.Http3StreamAbort(traceIdentifier, error, abortReason);
             _trace2.Http3StreamAbort(traceIdentifier, error, abortReason);
         }

@@ -13,8 +13,10 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
         [Theory]
         [InlineData("http", "OFF")]
         [InlineData("https", "ON")]
-        public void IsHttps_AssertCorrectBehaviorWhenProvidedHttpContext(string input, string expected)
-        {
+        public void IsHttps_AssertCorrectBehaviorWhenProvidedHttpContext(
+            string input,
+            string expected
+        ) {
             // Arrange
             var segement = new IsHttpsUrlSegment();
             var context = new RewriteContext { HttpContext = new DefaultHttpContext() };

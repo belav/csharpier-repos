@@ -19,11 +19,20 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SingleQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>, IRelationalQueryingEnumerable
+    public class SingleQueryingEnumerable<T>
+        : IEnumerable<T>,
+          IAsyncEnumerable<T>,
+          IRelationalQueryingEnumerable
     {
         private readonly RelationalQueryContext _relationalQueryContext;
         private readonly RelationalCommandCache _relationalCommandCache;
-        private readonly Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, T> _shaper;
+        private readonly Func<
+            QueryContext,
+            DbDataReader,
+            ResultContext,
+            SingleQueryResultCoordinator,
+            T
+        > _shaper;
         private readonly Type _contextType;
         private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
         private readonly bool _standAloneStateManager;
@@ -43,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             Type contextType,
             bool standAloneStateManager,
             bool detailedErrorsEnabled,
-            bool concurrencyDetectionEnabled)
-        {
+            bool concurrencyDetectionEnabled
+        ) {
             _relationalQueryContext = relationalQueryContext;
             _relationalCommandCache = relationalCommandCache;
             _shaper = shaper;
@@ -61,8 +70,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-        {
+        public virtual IAsyncEnumerator<T> GetAsyncEnumerator(
+            CancellationToken cancellationToken = default
+        ) {
             _relationalQueryContext.CancellationToken = cancellationToken;
 
             return new AsyncEnumerator(this);
@@ -74,8 +84,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerator<T> GetEnumerator()
-            => new Enumerator(this);
+        public virtual IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -83,8 +92,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -92,18 +100,19 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DbCommand CreateDbCommand()
-            => _relationalCommandCache
-                .GetRelationalCommand(_relationalQueryContext.ParameterValues)
+        public virtual DbCommand CreateDbCommand() =>
+            _relationalCommandCache.GetRelationalCommand(_relationalQueryContext.ParameterValues)
                 .CreateDbCommand(
                     new RelationalCommandParameterObject(
                         _relationalQueryContext.Connection,
                         _relationalQueryContext.ParameterValues,
                         null,
                         null,
-                        null),
+                        null
+                    ),
                     Guid.Empty,
-                    (DbCommandMethod)(-1));
+                    (DbCommandMethod)(-1)
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -121,7 +130,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             private readonly RelationalQueryContext _relationalQueryContext;
             private readonly RelationalCommandCache _relationalCommandCache;
-            private readonly Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, T> _shaper;
+            private readonly Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SingleQueryResultCoordinator,
+                T
+            > _shaper;
             private readonly Type _contextType;
             private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
             private readonly bool _standAloneStateManager;
@@ -150,8 +165,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public T Current { get; private set; }
 
-            object IEnumerator.Current
-                => Current!;
+            object IEnumerator.Current => Current!;
 
             public bool MoveNext()
             {
@@ -164,7 +178,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         if (_dataReader == null)
                         {
                             _relationalQueryContext.ExecutionStrategyFactory.Create()
-                                .Execute(this, (_, enumerator) => InitializeReader(enumerator), null);
+                                .Execute(
+                                    this,
+                                    (_, enumerator) => InitializeReader(enumerator),
+                                    null
+                                );
                         }
 
                         var hasNext = _resultCoordinator!.HasNext ?? _dataReader!.Read();
@@ -177,8 +195,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 _resultCoordinator.ResultReady = true;
                                 _resultCoordinator.HasNext = null;
                                 Current = _shaper(
-                                    _relationalQueryContext, _dataReader!.DbDataReader, _resultCoordinator.ResultContext,
-                                    _resultCoordinator);
+                                    _relationalQueryContext,
+                                    _dataReader!.DbDataReader,
+                                    _resultCoordinator.ResultContext,
+                                    _resultCoordinator
+                                );
                                 if (_resultCoordinator.ResultReady)
                                 {
                                     // We generated a result so null out previously stored values
@@ -192,9 +213,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     // Enumeration has ended, materialize last element
                                     _resultCoordinator.ResultReady = true;
                                     Current = _shaper(
-                                        _relationalQueryContext, _dataReader.DbDataReader, _resultCoordinator.ResultContext,
-                                        _resultCoordinator);
-
+                                        _relationalQueryContext,
+                                        _dataReader.DbDataReader,
+                                        _resultCoordinator.ResultContext,
+                                        _resultCoordinator
+                                    );
                                     break;
                                 }
                             }
@@ -202,6 +225,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         return hasNext;
                     }
+
                     finally
                     {
                         _concurrencyDetector?.ExitCriticalSection();
@@ -219,10 +243,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                var relationalCommandTemplate = enumerator._relationalCommandCache.GetRelationalCommand(
-                    enumerator._relationalQueryContext.ParameterValues);
+                var relationalCommandTemplate =
+                    enumerator._relationalCommandCache.GetRelationalCommand(
+                        enumerator._relationalQueryContext.ParameterValues
+                    );
 
-                var relationalCommand = enumerator._relationalCommand = enumerator._relationalQueryContext.Connection.RentCommand();
+                var relationalCommand = enumerator._relationalCommand =
+                    enumerator._relationalQueryContext.Connection.RentCommand();
                 relationalCommand.PopulateFromTemplate(relationalCommandTemplate);
 
                 enumerator._dataReader = relationalCommand.ExecuteReader(
@@ -232,11 +259,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         enumerator._relationalCommandCache.ReaderColumns,
                         enumerator._relationalQueryContext.Context,
                         enumerator._relationalQueryContext.CommandLogger,
-                        enumerator._detailedErrorsEnabled));
+                        enumerator._detailedErrorsEnabled
+                    )
+                );
 
                 enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-                enumerator._relationalQueryContext.InitializeStateManager(enumerator._standAloneStateManager);
+                enumerator._relationalQueryContext.InitializeStateManager(
+                    enumerator._standAloneStateManager
+                );
 
                 return false;
             }
@@ -251,15 +282,21 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
             }
 
-            public void Reset()
-                => throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
+            public void Reset() =>
+                throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
         }
 
         private sealed class AsyncEnumerator : IAsyncEnumerator<T>
         {
             private readonly RelationalQueryContext _relationalQueryContext;
             private readonly RelationalCommandCache _relationalCommandCache;
-            private readonly Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, T> _shaper;
+            private readonly Func<
+                QueryContext,
+                DbDataReader,
+                ResultContext,
+                SingleQueryResultCoordinator,
+                T
+            > _shaper;
             private readonly Type _contextType;
             private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
             private readonly bool _standAloneStateManager;
@@ -301,14 +338,20 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             await _relationalQueryContext.ExecutionStrategyFactory.Create()
                                 .ExecuteAsync(
                                     this,
-                                    (_, enumerator, cancellationToken) => InitializeReaderAsync(enumerator, cancellationToken),
+                                    (_, enumerator, cancellationToken) =>
+                                        InitializeReaderAsync(enumerator, cancellationToken),
                                     null,
-                                    _relationalQueryContext.CancellationToken)
+                                    _relationalQueryContext.CancellationToken
+                                )
                                 .ConfigureAwait(false);
                         }
 
-                        var hasNext = _resultCoordinator!.HasNext
-                            ?? await _dataReader!.ReadAsync(_relationalQueryContext.CancellationToken).ConfigureAwait(false);
+                        var hasNext =
+                            _resultCoordinator!.HasNext
+                            ?? await _dataReader!.ReadAsync(
+                                    _relationalQueryContext.CancellationToken
+                                )
+                                .ConfigureAwait(false);
                         Current = default!;
 
                         if (hasNext)
@@ -318,8 +361,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 _resultCoordinator.ResultReady = true;
                                 _resultCoordinator.HasNext = null;
                                 Current = _shaper(
-                                    _relationalQueryContext, _dataReader!.DbDataReader, _resultCoordinator.ResultContext,
-                                    _resultCoordinator);
+                                    _relationalQueryContext,
+                                    _dataReader!.DbDataReader,
+                                    _resultCoordinator.ResultContext,
+                                    _resultCoordinator
+                                );
                                 if (_resultCoordinator.ResultReady)
                                 {
                                     // We generated a result so null out previously stored values
@@ -327,15 +373,21 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     break;
                                 }
 
-                                if (!await _dataReader.ReadAsync(_relationalQueryContext.CancellationToken).ConfigureAwait(false))
-                                {
+                                if (
+                                    !await _dataReader.ReadAsync(
+                                            _relationalQueryContext.CancellationToken
+                                        )
+                                        .ConfigureAwait(false)
+                                ) {
                                     _resultCoordinator.HasNext = false;
                                     // Enumeration has ended, materialize last element
                                     _resultCoordinator.ResultReady = true;
                                     Current = _shaper(
-                                        _relationalQueryContext, _dataReader.DbDataReader, _resultCoordinator.ResultContext,
-                                        _resultCoordinator);
-
+                                        _relationalQueryContext,
+                                        _dataReader.DbDataReader,
+                                        _resultCoordinator.ResultContext,
+                                        _resultCoordinator
+                                    );
                                     break;
                                 }
                             }
@@ -343,6 +395,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         return hasNext;
                     }
+
                     finally
                     {
                         _concurrencyDetector?.ExitCriticalSection();
@@ -356,30 +409,39 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
             }
 
-            private static async Task<bool> InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
-            {
+            private static async Task<bool> InitializeReaderAsync(
+                AsyncEnumerator enumerator,
+                CancellationToken cancellationToken
+            ) {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                var relationalCommandTemplate = enumerator._relationalCommandCache.GetRelationalCommand(
-                    enumerator._relationalQueryContext.ParameterValues);
+                var relationalCommandTemplate =
+                    enumerator._relationalCommandCache.GetRelationalCommand(
+                        enumerator._relationalQueryContext.ParameterValues
+                    );
 
-                var relationalCommand = enumerator._relationalCommand = enumerator._relationalQueryContext.Connection.RentCommand();
+                var relationalCommand = enumerator._relationalCommand =
+                    enumerator._relationalQueryContext.Connection.RentCommand();
                 relationalCommand.PopulateFromTemplate(relationalCommandTemplate);
 
                 enumerator._dataReader = await relationalCommand.ExecuteReaderAsync(
-                    new RelationalCommandParameterObject(
-                        enumerator._relationalQueryContext.Connection,
-                        enumerator._relationalQueryContext.ParameterValues,
-                        enumerator._relationalCommandCache.ReaderColumns,
-                        enumerator._relationalQueryContext.Context,
-                        enumerator._relationalQueryContext.CommandLogger,
-                        enumerator._detailedErrorsEnabled),
-                    cancellationToken)
+                        new RelationalCommandParameterObject(
+                            enumerator._relationalQueryContext.Connection,
+                            enumerator._relationalQueryContext.ParameterValues,
+                            enumerator._relationalCommandCache.ReaderColumns,
+                            enumerator._relationalQueryContext.Context,
+                            enumerator._relationalQueryContext.CommandLogger,
+                            enumerator._detailedErrorsEnabled
+                        ),
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-                enumerator._relationalQueryContext.InitializeStateManager(enumerator._standAloneStateManager);
+                enumerator._relationalQueryContext.InitializeStateManager(
+                    enumerator._standAloneStateManager
+                );
 
                 return false;
             }

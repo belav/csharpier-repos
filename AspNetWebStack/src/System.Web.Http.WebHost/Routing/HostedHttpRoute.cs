@@ -10,12 +10,27 @@ namespace System.Web.Http.WebHost.Routing
 {
     internal class HostedHttpRoute : IHttpRoute
     {
-        public HostedHttpRoute(string uriTemplate, IDictionary<string, object> defaults, IDictionary<string, object> constraints, IDictionary<string, object> dataTokens, HttpMessageHandler handler)
-        {
-            RouteValueDictionary routeDefaults = defaults != null ? new RouteValueDictionary(defaults) : null;
-            RouteValueDictionary routeConstraints = constraints != null ? new RouteValueDictionary(constraints) : null;
-            RouteValueDictionary routeDataTokens = dataTokens != null ? new RouteValueDictionary(dataTokens) : null;
-            OriginalRoute = new HttpWebRoute(uriTemplate, routeDefaults, routeConstraints, routeDataTokens, HttpControllerRouteHandler.Instance, this);
+        public HostedHttpRoute(
+            string uriTemplate,
+            IDictionary<string, object> defaults,
+            IDictionary<string, object> constraints,
+            IDictionary<string, object> dataTokens,
+            HttpMessageHandler handler
+        ) {
+            RouteValueDictionary routeDefaults =
+                defaults != null ? new RouteValueDictionary(defaults) : null;
+            RouteValueDictionary routeConstraints =
+                constraints != null ? new RouteValueDictionary(constraints) : null;
+            RouteValueDictionary routeDataTokens =
+                dataTokens != null ? new RouteValueDictionary(dataTokens) : null;
+            OriginalRoute = new HttpWebRoute(
+                uriTemplate,
+                routeDefaults,
+                routeConstraints,
+                routeDataTokens,
+                HttpControllerRouteHandler.Instance,
+                this
+            );
             Handler = handler;
         }
 
@@ -70,8 +85,10 @@ namespace System.Web.Http.WebHost.Routing
             return null;
         }
 
-        public IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, IDictionary<string, object> values)
-        {
+        public IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            IDictionary<string, object> values
+        ) {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -83,8 +100,14 @@ namespace System.Web.Http.WebHost.Routing
                 HostedHttpRouteData routeData = request.GetRouteData() as HostedHttpRouteData;
                 if (routeData != null)
                 {
-                    RequestContext requestContext = new RequestContext(httpContextBase, routeData.OriginalRouteData);
-                    VirtualPathData virtualPathData = OriginalRoute.GetVirtualPath(requestContext, new RouteValueDictionary(values));
+                    RequestContext requestContext = new RequestContext(
+                        httpContextBase,
+                        routeData.OriginalRouteData
+                    );
+                    VirtualPathData virtualPathData = OriginalRoute.GetVirtualPath(
+                        requestContext,
+                        new RouteValueDictionary(values)
+                    );
                     if (virtualPathData != null)
                     {
                         return new HostedHttpVirtualPathData(virtualPathData, routeData.Route);

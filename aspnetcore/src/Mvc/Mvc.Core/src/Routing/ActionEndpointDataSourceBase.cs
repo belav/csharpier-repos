@@ -51,7 +51,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         }
 
         // Will be called with the lock.
-        protected abstract List<Endpoint> CreateEndpoints(IReadOnlyList<ActionDescriptor> actions, IReadOnlyList<Action<EndpointBuilder>> conventions);
+        protected abstract List<Endpoint> CreateEndpoints(
+            IReadOnlyList<ActionDescriptor> actions,
+            IReadOnlyList<Action<EndpointBuilder>> conventions
+        );
 
         protected void Subscribe()
         {
@@ -64,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 _disposable = ChangeToken.OnChange(
                     () => collectionProviderWithChangeToken.GetChangeToken(),
-                    UpdateEndpoints);
+                    UpdateEndpoints
+                );
             }
         }
 

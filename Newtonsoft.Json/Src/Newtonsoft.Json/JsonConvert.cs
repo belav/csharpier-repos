@@ -103,7 +103,11 @@ namespace Newtonsoft.Json
         /// <returns>A JSON string representation of the <see cref="DateTime"/>.</returns>
         public static string ToString(DateTime value)
         {
-            return ToString(value, DateFormatHandling.IsoDateFormat, DateTimeZoneHandling.RoundtripKind);
+            return ToString(
+                value,
+                DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling.RoundtripKind
+            );
         }
 
         /// <summary>
@@ -113,14 +117,23 @@ namespace Newtonsoft.Json
         /// <param name="format">The format the date will be converted to.</param>
         /// <param name="timeZoneHandling">The time zone handling when the date is converted to a string.</param>
         /// <returns>A JSON string representation of the <see cref="DateTime"/>.</returns>
-        public static string ToString(DateTime value, DateFormatHandling format, DateTimeZoneHandling timeZoneHandling)
-        {
+        public static string ToString(
+            DateTime value,
+            DateFormatHandling format,
+            DateTimeZoneHandling timeZoneHandling
+        ) {
             DateTime updatedDateTime = DateTimeUtils.EnsureDateTime(value, timeZoneHandling);
 
             using (StringWriter writer = StringUtils.CreateStringWriter(64))
             {
                 writer.Write('"');
-                DateTimeUtils.WriteDateTimeString(writer, updatedDateTime, format, null, CultureInfo.InvariantCulture);
+                DateTimeUtils.WriteDateTimeString(
+                    writer,
+                    updatedDateTime,
+                    format,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
                 writer.Write('"');
                 return writer.ToString();
             }
@@ -148,7 +161,13 @@ namespace Newtonsoft.Json
             using (StringWriter writer = StringUtils.CreateStringWriter(64))
             {
                 writer.Write('"');
-                DateTimeUtils.WriteDateTimeOffsetString(writer, value, format, null, CultureInfo.InvariantCulture);
+                DateTimeUtils.WriteDateTimeOffsetString(
+                    writer,
+                    value,
+                    format,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
                 writer.Write('"');
                 return writer.ToString();
             }
@@ -265,15 +284,32 @@ namespace Newtonsoft.Json
             return EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture));
         }
 
-        internal static string ToString(float value, FloatFormatHandling floatFormatHandling, char quoteChar, bool nullable)
-        {
-            return EnsureFloatFormat(value, EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture)), floatFormatHandling, quoteChar, nullable);
+        internal static string ToString(
+            float value,
+            FloatFormatHandling floatFormatHandling,
+            char quoteChar,
+            bool nullable
+        ) {
+            return EnsureFloatFormat(
+                value,
+                EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture)),
+                floatFormatHandling,
+                quoteChar,
+                nullable
+            );
         }
 
-        private static string EnsureFloatFormat(double value, string text, FloatFormatHandling floatFormatHandling, char quoteChar, bool nullable)
-        {
-            if (floatFormatHandling == FloatFormatHandling.Symbol || !(double.IsInfinity(value) || double.IsNaN(value)))
-            {
+        private static string EnsureFloatFormat(
+            double value,
+            string text,
+            FloatFormatHandling floatFormatHandling,
+            char quoteChar,
+            bool nullable
+        ) {
+            if (
+                floatFormatHandling == FloatFormatHandling.Symbol
+                || !(double.IsInfinity(value) || double.IsNaN(value))
+            ) {
                 return text;
             }
 
@@ -295,15 +331,30 @@ namespace Newtonsoft.Json
             return EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture));
         }
 
-        internal static string ToString(double value, FloatFormatHandling floatFormatHandling, char quoteChar, bool nullable)
-        {
-            return EnsureFloatFormat(value, EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture)), floatFormatHandling, quoteChar, nullable);
+        internal static string ToString(
+            double value,
+            FloatFormatHandling floatFormatHandling,
+            char quoteChar,
+            bool nullable
+        ) {
+            return EnsureFloatFormat(
+                value,
+                EnsureDecimalPlace(value, value.ToString("R", CultureInfo.InvariantCulture)),
+                floatFormatHandling,
+                quoteChar,
+                nullable
+            );
         }
 
         private static string EnsureDecimalPlace(double value, string text)
         {
-            if (double.IsNaN(value) || double.IsInfinity(value) || text.IndexOf('.') != -1 || text.IndexOf('E') != -1 || text.IndexOf('e') != -1)
-            {
+            if (
+                double.IsNaN(value)
+                || double.IsInfinity(value)
+                || text.IndexOf('.') != -1
+                || text.IndexOf('E') != -1
+                || text.IndexOf('e') != -1
+            ) {
                 return text;
             }
 
@@ -439,14 +490,25 @@ namespace Newtonsoft.Json
         /// <param name="delimiter">The string delimiter character.</param>
         /// <param name="stringEscapeHandling">The string escape handling.</param>
         /// <returns>A JSON string representation of the <see cref="String"/>.</returns>
-        public static string ToString(string? value, char delimiter, StringEscapeHandling stringEscapeHandling)
-        {
+        public static string ToString(
+            string? value,
+            char delimiter,
+            StringEscapeHandling stringEscapeHandling
+        ) {
             if (delimiter != '"' && delimiter != '\'')
             {
-                throw new ArgumentException("Delimiter must be a single or double quote.", nameof(delimiter));
+                throw new ArgumentException(
+                    "Delimiter must be a single or double quote.",
+                    nameof(delimiter)
+                );
             }
 
-            return JavaScriptUtils.ToEscapedJavaScriptString(value, delimiter, true, stringEscapeHandling);
+            return JavaScriptUtils.ToEscapedJavaScriptString(
+                value,
+                delimiter,
+                true,
+                stringEscapeHandling
+            );
         }
 
         /// <summary>
@@ -515,7 +577,12 @@ namespace Newtonsoft.Json
 #endif
             }
 
-            throw new ArgumentException("Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
+            throw new ArgumentException(
+                "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    value.GetType()
+                )
+            );
         }
 
         #region Serialize
@@ -553,9 +620,10 @@ namespace Newtonsoft.Json
         [DebuggerStepThrough]
         public static string SerializeObject(object? value, params JsonConverter[] converters)
         {
-            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
-                ? new JsonSerializerSettings { Converters = converters }
-                : null;
+            JsonSerializerSettings? settings =
+                (converters != null && converters.Length > 0)
+                    ? new JsonSerializerSettings { Converters = converters }
+                    : null;
 
             return SerializeObject(value, null, settings);
         }
@@ -568,11 +636,15 @@ namespace Newtonsoft.Json
         /// <param name="converters">A collection of converters used while serializing.</param>
         /// <returns>A JSON string representation of the object.</returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(object? value, Formatting formatting, params JsonConverter[] converters)
-        {
-            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
-                ? new JsonSerializerSettings { Converters = converters }
-                : null;
+        public static string SerializeObject(
+            object? value,
+            Formatting formatting,
+            params JsonConverter[] converters
+        ) {
+            JsonSerializerSettings? settings =
+                (converters != null && converters.Length > 0)
+                    ? new JsonSerializerSettings { Converters = converters }
+                    : null;
 
             return SerializeObject(value, null, formatting, settings);
         }
@@ -607,8 +679,11 @@ namespace Newtonsoft.Json
         /// A JSON string representation of the object.
         /// </returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(object? value, Type? type, JsonSerializerSettings? settings)
-        {
+        public static string SerializeObject(
+            object? value,
+            Type? type,
+            JsonSerializerSettings? settings
+        ) {
             JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
 
             return SerializeObjectInternal(value, type, jsonSerializer);
@@ -625,8 +700,11 @@ namespace Newtonsoft.Json
         /// A JSON string representation of the object.
         /// </returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(object? value, Formatting formatting, JsonSerializerSettings? settings)
-        {
+        public static string SerializeObject(
+            object? value,
+            Formatting formatting,
+            JsonSerializerSettings? settings
+        ) {
             return SerializeObject(value, null, formatting, settings);
         }
 
@@ -646,16 +724,23 @@ namespace Newtonsoft.Json
         /// A JSON string representation of the object.
         /// </returns>
         [DebuggerStepThrough]
-        public static string SerializeObject(object? value, Type? type, Formatting formatting, JsonSerializerSettings? settings)
-        {
+        public static string SerializeObject(
+            object? value,
+            Type? type,
+            Formatting formatting,
+            JsonSerializerSettings? settings
+        ) {
             JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
             jsonSerializer.Formatting = formatting;
 
             return SerializeObjectInternal(value, type, jsonSerializer);
         }
 
-        private static string SerializeObjectInternal(object? value, Type? type, JsonSerializer jsonSerializer)
-        {
+        private static string SerializeObjectInternal(
+            object? value,
+            Type? type,
+            JsonSerializer jsonSerializer
+        ) {
             StringBuilder sb = new StringBuilder(256);
             StringWriter sw = new StringWriter(sb, CultureInfo.InvariantCulture);
             using (JsonTextWriter jsonWriter = new JsonTextWriter(sw))
@@ -753,8 +838,11 @@ namespace Newtonsoft.Json
         /// </param>
         /// <returns>The deserialized anonymous type from the JSON string.</returns>
         [DebuggerStepThrough]
-        public static T? DeserializeAnonymousType<T>(string value, T anonymousTypeObject, JsonSerializerSettings settings)
-        {
+        public static T? DeserializeAnonymousType<T>(
+            string value,
+            T anonymousTypeObject,
+            JsonSerializerSettings settings
+        ) {
             return DeserializeObject<T>(value, settings);
         }
 
@@ -795,11 +883,15 @@ namespace Newtonsoft.Json
         /// <param name="converters">Converters to use while deserializing.</param>
         /// <returns>The deserialized object from the JSON string.</returns>
         [DebuggerStepThrough]
-        public static object? DeserializeObject(string value, Type type, params JsonConverter[] converters)
-        {
-            JsonSerializerSettings? settings = (converters != null && converters.Length > 0)
-                ? new JsonSerializerSettings { Converters = converters }
-                : null;
+        public static object? DeserializeObject(
+            string value,
+            Type type,
+            params JsonConverter[] converters
+        ) {
+            JsonSerializerSettings? settings =
+                (converters != null && converters.Length > 0)
+                    ? new JsonSerializerSettings { Converters = converters }
+                    : null;
 
             return DeserializeObject(value, type, settings);
         }
@@ -814,8 +906,11 @@ namespace Newtonsoft.Json
         /// If this is <c>null</c>, default serialization settings will be used.
         /// </param>
         /// <returns>The deserialized object from the JSON string.</returns>
-        public static object? DeserializeObject(string value, Type? type, JsonSerializerSettings? settings)
-        {
+        public static object? DeserializeObject(
+            string value,
+            Type? type,
+            JsonSerializerSettings? settings
+        ) {
             ValidationUtils.ArgumentNotNull(value, nameof(value));
 
             JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
@@ -854,8 +949,11 @@ namespace Newtonsoft.Json
         /// The <see cref="JsonSerializerSettings"/> used to deserialize the object.
         /// If this is <c>null</c>, default serialization settings will be used.
         /// </param>
-        public static void PopulateObject(string value, object target, JsonSerializerSettings? settings)
-        {
+        public static void PopulateObject(
+            string value,
+            object target,
+            JsonSerializerSettings? settings
+        ) {
             JsonSerializer jsonSerializer = JsonSerializer.CreateDefault(settings);
 
             using (JsonReader jsonReader = new JsonTextReader(new StringReader(value)))
@@ -868,7 +966,10 @@ namespace Newtonsoft.Json
                     {
                         if (jsonReader.TokenType != JsonToken.Comment)
                         {
-                            throw JsonSerializationException.Create(jsonReader, "Additional text found in JSON string after finishing deserializing object.");
+                            throw JsonSerializationException.Create(
+                                jsonReader,
+                                "Additional text found in JSON string after finishing deserializing object."
+                            );
                         }
                     }
                 }
@@ -908,8 +1009,11 @@ namespace Newtonsoft.Json
         /// <param name="formatting">Indicates how the output should be formatted.</param>
         /// <param name="omitRootObject">Omits writing the root object.</param>
         /// <returns>A JSON string of the <see cref="XmlNode"/>.</returns>
-        public static string SerializeXmlNode(XmlNode? node, Formatting formatting, bool omitRootObject)
-        {
+        public static string SerializeXmlNode(
+            XmlNode? node,
+            Formatting formatting,
+            bool omitRootObject
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter { OmitRootObject = omitRootObject };
 
             return SerializeObject(node, formatting, converter);
@@ -931,8 +1035,10 @@ namespace Newtonsoft.Json
         /// <param name="value">The JSON string.</param>
         /// <param name="deserializeRootElementName">The name of the root element to append when deserializing.</param>
         /// <returns>The deserialized <see cref="XmlNode"/>.</returns>
-        public static XmlDocument? DeserializeXmlNode(string value, string? deserializeRootElementName)
-        {
+        public static XmlDocument? DeserializeXmlNode(
+            string value,
+            string? deserializeRootElementName
+        ) {
             return DeserializeXmlNode(value, deserializeRootElementName, false);
         }
 
@@ -947,9 +1053,17 @@ namespace Newtonsoft.Json
         /// This attribute helps preserve arrays when converting the written XML back to JSON.
         /// </param>
         /// <returns>The deserialized <see cref="XmlNode"/>.</returns>
-        public static XmlDocument? DeserializeXmlNode(string value, string? deserializeRootElementName, bool writeArrayAttribute)
-        {
-            return DeserializeXmlNode(value, deserializeRootElementName, writeArrayAttribute, false);
+        public static XmlDocument? DeserializeXmlNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute
+        ) {
+            return DeserializeXmlNode(
+                value,
+                deserializeRootElementName,
+                writeArrayAttribute,
+                false
+            );
         }
 
         /// <summary>
@@ -969,8 +1083,12 @@ namespace Newtonsoft.Json
         /// as part of the XML element name.
         /// </param>
         /// <returns>The deserialized <see cref="XmlNode"/>.</returns>
-        public static XmlDocument? DeserializeXmlNode(string value, string? deserializeRootElementName, bool writeArrayAttribute, bool encodeSpecialCharacters)
-        {
+        public static XmlDocument? DeserializeXmlNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute,
+            bool encodeSpecialCharacters
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter();
             converter.DeserializeRootElementName = deserializeRootElementName;
             converter.WriteArrayAttribute = writeArrayAttribute;
@@ -1009,8 +1127,11 @@ namespace Newtonsoft.Json
         /// <param name="formatting">Indicates how the output should be formatted.</param>
         /// <param name="omitRootObject">Omits writing the root object.</param>
         /// <returns>A JSON string of the <see cref="XNode"/>.</returns>
-        public static string SerializeXNode(XObject? node, Formatting formatting, bool omitRootObject)
-        {
+        public static string SerializeXNode(
+            XObject? node,
+            Formatting formatting,
+            bool omitRootObject
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter { OmitRootObject = omitRootObject };
 
             return SerializeObject(node, formatting, converter);
@@ -1048,8 +1169,11 @@ namespace Newtonsoft.Json
         /// This attribute helps preserve arrays when converting the written XML back to JSON.
         /// </param>
         /// <returns>The deserialized <see cref="XNode"/>.</returns>
-        public static XDocument? DeserializeXNode(string value, string? deserializeRootElementName, bool writeArrayAttribute)
-        {
+        public static XDocument? DeserializeXNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute
+        ) {
             return DeserializeXNode(value, deserializeRootElementName, writeArrayAttribute, false);
         }
 
@@ -1070,8 +1194,12 @@ namespace Newtonsoft.Json
         /// as part of the XML element name.
         /// </param>
         /// <returns>The deserialized <see cref="XNode"/>.</returns>
-        public static XDocument? DeserializeXNode(string value, string? deserializeRootElementName, bool writeArrayAttribute, bool encodeSpecialCharacters)
-        {
+        public static XDocument? DeserializeXNode(
+            string value,
+            string? deserializeRootElementName,
+            bool writeArrayAttribute,
+            bool encodeSpecialCharacters
+        ) {
             XmlNodeConverter converter = new XmlNodeConverter();
             converter.DeserializeRootElementName = deserializeRootElementName;
             converter.WriteArrayAttribute = writeArrayAttribute;

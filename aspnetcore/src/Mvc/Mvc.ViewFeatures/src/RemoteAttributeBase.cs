@@ -17,7 +17,6 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Resources;
 
-
 namespace Microsoft.AspNetCore.Mvc
 {
     /// <summary>
@@ -69,7 +68,7 @@ namespace Microsoft.AspNetCore.Mvc
                     .ToArray();
             }
         }
-        
+
         /// <summary>
         /// Formats <paramref name="property"/> and <see cref="AdditionalFields"/> for use in generated HTML.
         /// </summary>
@@ -85,7 +84,10 @@ namespace Microsoft.AspNetCore.Mvc
         {
             if (string.IsNullOrEmpty(property))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(property));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(property)
+                );
             }
 
             var delimitedAdditionalFields = string.Join(",", _additionalFieldsSplit);
@@ -94,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc
                 delimitedAdditionalFields = "," + delimitedAdditionalFields;
             }
 
-            var formattedString = FormatPropertyForClientValidation(property) + delimitedAdditionalFields;
+            var formattedString =
+                FormatPropertyForClientValidation(property) + delimitedAdditionalFields;
 
             return formattedString;
         }
@@ -109,7 +112,10 @@ namespace Microsoft.AspNetCore.Mvc
         {
             if (string.IsNullOrEmpty(property))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(property));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(property)
+                );
             }
 
             return "*." + property;
@@ -121,7 +127,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="context">The <see cref="ClientModelValidationContext"/> used to generate the URL.</param>
         /// <returns>The URL where the client should send a validation request.</returns>
         protected abstract string GetUrl(ClientModelValidationContext context);
-        
+
         /// <inheritdoc />
         public override string FormatErrorMessage(string name)
         {
@@ -167,20 +173,32 @@ namespace Microsoft.AspNetCore.Mvc
                 MergeAttribute(context.Attributes, "data-val-remote-type", HttpMethod);
             }
 
-            var additionalFields = FormatAdditionalFieldsForClientValidation(context.ModelMetadata.PropertyName!);
-            MergeAttribute(context.Attributes, "data-val-remote-additionalfields", additionalFields);
+            var additionalFields = FormatAdditionalFieldsForClientValidation(
+                context.ModelMetadata.PropertyName!
+            );
+            MergeAttribute(
+                context.Attributes,
+                "data-val-remote-additionalfields",
+                additionalFields
+            );
         }
 
-        private static void MergeAttribute(IDictionary<string, string> attributes, string key, string value)
-        {
+        private static void MergeAttribute(
+            IDictionary<string, string> attributes,
+            string key,
+            string value
+        ) {
             if (!attributes.ContainsKey(key))
             {
                 attributes.Add(key, value);
             }
         }
 
-        private static IEnumerable<string> SplitAndTrimPropertyNames(string? original)
-            => original?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+        private static IEnumerable<string> SplitAndTrimPropertyNames(string? original) =>
+            original?.Split(
+                ',',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+            ) ?? Array.Empty<string>();
 
         private void CheckForLocalizer(ClientModelValidationContext context)
         {
@@ -189,7 +207,9 @@ namespace Microsoft.AspNetCore.Mvc
                 _checkedForLocalizer = true;
 
                 var services = context.ActionContext.HttpContext.RequestServices;
-                var options = services.GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+                var options = services.GetRequiredService<
+                    IOptions<MvcDataAnnotationsLocalizationOptions>
+                >();
                 var factory = services.GetService<IStringLocalizerFactory>();
 
                 var provider = options.Value.DataAnnotationLocalizerProvider;
@@ -197,18 +217,20 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     _stringLocalizer = provider(
                         context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                        factory);
+                        factory
+                    );
                 }
             }
         }
 
         private string GetErrorMessage(string displayName)
         {
-            if (_stringLocalizer != null &&
-                !string.IsNullOrEmpty(ErrorMessage) &&
-                string.IsNullOrEmpty(ErrorMessageResourceName) &&
-                ErrorMessageResourceType == null)
-            {
+            if (
+                _stringLocalizer != null
+                && !string.IsNullOrEmpty(ErrorMessage)
+                && string.IsNullOrEmpty(ErrorMessageResourceName)
+                && ErrorMessageResourceType == null
+            ) {
                 return _stringLocalizer[ErrorMessage, displayName];
             }
 

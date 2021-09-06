@@ -26,6 +26,7 @@ namespace System.Runtime.InteropServices
                 {
                     // intentionally empty to avoid ThreadAbortException in netfx runtimes
                 }
+
                 finally
                 {
                     SetHandle(Marshal.AllocHGlobal((nint)cb));

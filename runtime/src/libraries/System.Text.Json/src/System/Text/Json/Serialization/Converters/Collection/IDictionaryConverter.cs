@@ -12,17 +12,21 @@ namespace System.Text.Json.Serialization.Converters
     /// representing the dictionary element key and value.
     /// </summary>
     internal sealed class IDictionaryConverter<TCollection>
-        : DictionaryDefaultConverter<TCollection, string, object?>
-        where TCollection : IDictionary
+        : DictionaryDefaultConverter<TCollection, string, object?> where TCollection : IDictionary
     {
-        protected override void Add(string key, in object? value, JsonSerializerOptions options, ref ReadStack state)
-        {
+        protected override void Add(
+            string key,
+            in object? value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        ) {
             TCollection collection = (TCollection)state.Current.ReturnValue!;
             collection[key] = value;
             if (IsValueType)
             {
                 state.Current.ReturnValue = collection;
-            };
+            }
+            ;
         }
 
         protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state)
@@ -33,7 +37,11 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (!TypeToConvert.IsAssignableFrom(RuntimeType))
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 // Strings are intentionally used as keys when deserializing non-generic dictionaries.
@@ -43,22 +51,34 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (typeInfo.CreateObject == null)
                 {
-                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 TCollection returnValue = (TCollection)typeInfo.CreateObject()!;
 
                 if (returnValue.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = returnValue;
             }
         }
 
-        protected internal override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        protected internal override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             IDictionaryEnumerator enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

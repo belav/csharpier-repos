@@ -22,12 +22,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         private bool _disposed;
 
         public LibuvConnectionListener(LibuvTransportContext context, EndPoint endPoint)
-            : this(new LibuvFunctions(), context, endPoint)
-        { }
+            : this(new LibuvFunctions(), context, endPoint) { }
 
         // For testing
-        public LibuvConnectionListener(LibuvFunctions uv, LibuvTransportContext context, EndPoint endPoint)
-        {
+        public LibuvConnectionListener(
+            LibuvFunctions uv,
+            LibuvTransportContext context,
+            EndPoint endPoint
+        ) {
             Libuv = uv;
             TransportContext = context;
 
@@ -47,8 +49,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         public EndPoint EndPoint { get; set; }
 
-        public async ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
-        {
+        public async ValueTask<ConnectionContext> AcceptAsync(
+            CancellationToken cancellationToken = default
+        ) {
             if (_disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
@@ -72,14 +75,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
             _stopped = true;
 
-            var disposeTasks = _listeners.Select(listener => ((IAsyncDisposable)listener).DisposeAsync()).ToArray();
+            var disposeTasks = _listeners.Select(
+                    listener => ((IAsyncDisposable)listener).DisposeAsync()
+                )
+                .ToArray();
 
-            if (!await WaitAsync(Task.WhenAll(disposeTasks), TimeSpan.FromSeconds(5)).ConfigureAwait(false))
-            {
+            if (
+                !await WaitAsync(Task.WhenAll(disposeTasks), TimeSpan.FromSeconds(5))
+                    .ConfigureAwait(false)
+            ) {
                 Log.LogError(0, null, "Disposing listeners failed");
             }
         }
-
 
         public async ValueTask DisposeAsync()
         {
@@ -106,7 +113,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         {
             try
             {
-                await Task.WhenAll(Threads.Select(thread => thread.StopAsync(TimeSpan.FromSeconds(5))).ToArray())
+                await Task.WhenAll(
+                        Threads.Select(thread => thread.StopAsync(TimeSpan.FromSeconds(5)))
+                            .ToArray()
+                    )
                     .ConfigureAwait(false);
             }
             catch (AggregateException aggEx)
@@ -159,19 +169,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 }
                 else
                 {
-                    var pipeName = (Libuv.IsWindows ? @"\\.\pipe\kestrel_" : "/tmp/kestrel_") + Guid.NewGuid().ToString("n");
+                    var pipeName =
+                        (Libuv.IsWindows ? @"\\.\pipe\kestrel_" : "/tmp/kestrel_")
+                        + Guid.NewGuid().ToString("n");
                     var pipeMessage = Guid.NewGuid().ToByteArray();
 
                     var listenerPrimary = new ListenerPrimary(TransportContext);
                     _listeners.Add(listenerPrimary);
-                    await listenerPrimary.StartAsync(pipeName, pipeMessage, EndPoint, Threads[0]).ConfigureAwait(false);
+                    await listenerPrimary.StartAsync(pipeName, pipeMessage, EndPoint, Threads[0])
+                        .ConfigureAwait(false);
                     EndPoint = listenerPrimary.EndPoint;
 
                     foreach (var thread in Threads.Skip(1))
                     {
                         var listenerSecondary = new ListenerSecondary(TransportContext);
                         _listeners.Add(listenerSecondary);
-                        await listenerSecondary.StartAsync(pipeName, pipeMessage, EndPoint, thread).ConfigureAwait(false);
+                        await listenerSecondary.StartAsync(pipeName, pipeMessage, EndPoint, thread)
+                            .ConfigureAwait(false);
                     }
                 }
                 _acceptEnumerator = AcceptConnections();
@@ -223,8 +237,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 }
             }
 
-            static async Task<(LibuvConnection, int)> AcceptAsync(ListenerContext listener, int slot)
-            {
+            static async Task<(LibuvConnection, int)> AcceptAsync(
+                ListenerContext listener,
+                int slot
+            ) {
                 return (await listener.AcceptAsync(), slot);
             }
         }

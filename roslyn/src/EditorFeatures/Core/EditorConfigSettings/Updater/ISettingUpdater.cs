@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
     internal interface ISettingUpdater<TSetting, TValue>
     {
         Task<bool> QueueUpdateAsync(TSetting setting, TValue value);
-        Task<SourceText?> GetChangedEditorConfigAsync(SourceText sourceText, CancellationToken token);
+        Task<SourceText?> GetChangedEditorConfigAsync(
+            SourceText sourceText,
+            CancellationToken token
+        );
         Task<bool> HasAnyChangesAsync();
     }
 }

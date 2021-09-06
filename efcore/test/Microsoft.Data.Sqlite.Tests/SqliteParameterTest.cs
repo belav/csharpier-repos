@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -43,10 +43,7 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void ParameterName_coalesces_to_empty()
         {
-            var parameter = new SqliteParameter
-            {
-                ParameterName = null
-            };
+            var parameter = new SqliteParameter { ParameterName = null };
 
             Assert.Empty(parameter.ParameterName);
         }
@@ -62,10 +59,7 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void SourceColumn_coalesces_to_empty()
         {
-            var parameter = new SqliteParameter
-            {
-                SourceColumn = null
-            };
+            var parameter = new SqliteParameter { SourceColumn = null };
 
             Assert.Empty(parameter.SourceColumn);
         }
@@ -102,14 +96,23 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void Direction_validates_value()
         {
-            var ex = Assert.Throws<ArgumentException>(() => new SqliteParameter().Direction = ParameterDirection.Output);
-            Assert.Equal(Resources.InvalidParameterDirection(ParameterDirection.Output), ex.Message);
+            var ex = Assert.Throws<ArgumentException>(
+                () => new SqliteParameter().Direction = ParameterDirection.Output
+            );
+            Assert.Equal(
+                Resources.InvalidParameterDirection(ParameterDirection.Output),
+                ex.Message
+            );
         }
 
         [Fact]
         public void ResetDbType_works()
         {
-            var parameter = new SqliteParameter { DbType = DbType.Int64, SqliteType = SqliteType.Integer };
+            var parameter = new SqliteParameter
+            {
+                DbType = DbType.Int64,
+                SqliteType = SqliteType.Integer
+            };
 
             parameter.ResetDbType();
 
@@ -120,7 +123,11 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void ResetSqliteType_works()
         {
-            var parameter = new SqliteParameter { DbType = DbType.Int64, SqliteType = SqliteType.Integer };
+            var parameter = new SqliteParameter
+            {
+                DbType = DbType.Int64,
+                SqliteType = SqliteType.Integer
+            };
 
             parameter.ResetSqliteType();
 
@@ -239,64 +246,82 @@ namespace Microsoft.Data.Sqlite
         }
 
         [Fact]
-        public void Bind_works_when_DateTime()
-            => Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), "2014-04-14 11:13:59");
+        public void Bind_works_when_DateTime() =>
+            Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), "2014-04-14 11:13:59");
 
         [Fact]
-        public void Bind_works_when_DateTime_with_SqliteType_Real()
-            => Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), 2456761.9680439816, SqliteType.Real);
+        public void Bind_works_when_DateTime_with_SqliteType_Real() =>
+            Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), 2456761.9680439816, SqliteType.Real);
 
         [Fact]
-        public void Bind_works_when_DateTimeOffset()
-            => Bind_works(new DateTimeOffset(2014, 4, 14, 11, 13, 59, new TimeSpan(-8, 0, 0)), "2014-04-14 11:13:59-08:00");
+        public void Bind_works_when_DateTimeOffset() =>
+            Bind_works(
+                new DateTimeOffset(2014, 4, 14, 11, 13, 59, new TimeSpan(-8, 0, 0)),
+                "2014-04-14 11:13:59-08:00"
+            );
 
         [Fact]
-        public void Bind_works_when_DateTimeOffset_with_SqliteType_Real()
-            => Bind_works(
+        public void Bind_works_when_DateTimeOffset_with_SqliteType_Real() =>
+            Bind_works(
                 new DateTimeOffset(new DateTime(2014, 4, 14, 11, 13, 59)),
                 2456761.9680439816,
-                SqliteType.Real);
+                SqliteType.Real
+            );
 
         [Fact]
-        public void Bind_works_when_DBNull()
-            => Bind_works(DBNull.Value, DBNull.Value);
+        public void Bind_works_when_DBNull() => Bind_works(DBNull.Value, DBNull.Value);
 
         [Fact]
-        public void Bind_works_when_decimal()
-            => Bind_works(3.14m, "3.14");
+        public void Bind_works_when_decimal() => Bind_works(3.14m, "3.14");
 
         [Fact]
-        public void Bind_works_when_decimal_with_integral_value()
-            => Bind_works(3m, "3.0");
+        public void Bind_works_when_decimal_with_integral_value() => Bind_works(3m, "3.0");
 
         [Fact]
-        public void Bind_works_when_Enum()
-            => Bind_works(MyEnum.One, 1L);
+        public void Bind_works_when_Enum() => Bind_works(MyEnum.One, 1L);
 
         [Fact]
-        public void Bind_works_when_Guid_with_SqliteType_Blob()
-            => Bind_works(
+        public void Bind_works_when_Guid_with_SqliteType_Blob() =>
+            Bind_works(
                 new Guid("1c902ddb-f4b6-4945-af38-0dc1b0760465"),
-                new byte[] { 0xDB, 0x2D, 0x90, 0x1C, 0xB6, 0xF4, 0x45, 0x49, 0xAF, 0x38, 0x0D, 0xC1, 0xB0, 0x76, 0x04, 0x65 },
-                SqliteType.Blob);
+                new byte[]
+                {
+                    0xDB,
+                    0x2D,
+                    0x90,
+                    0x1C,
+                    0xB6,
+                    0xF4,
+                    0x45,
+                    0x49,
+                    0xAF,
+                    0x38,
+                    0x0D,
+                    0xC1,
+                    0xB0,
+                    0x76,
+                    0x04,
+                    0x65
+                },
+                SqliteType.Blob
+            );
 
         [Fact]
-        public void Bind_works_when_Guid()
-            => Bind_works(
+        public void Bind_works_when_Guid() =>
+            Bind_works(
                 new Guid("1c902ddb-f4b6-4945-af38-0dc1b0760465"),
-                "1C902DDB-F4B6-4945-AF38-0DC1B0760465");
+                "1C902DDB-F4B6-4945-AF38-0DC1B0760465"
+            );
 
         [Fact]
-        public void Bind_works_when_Nullable()
-            => Bind_works((int?)1, 1L);
+        public void Bind_works_when_Nullable() => Bind_works((int?)1, 1L);
 
         [Fact]
-        public void Bind_works_when_TimeSpan()
-            => Bind_works(new TimeSpan(11, 19, 32), "11:19:32");
+        public void Bind_works_when_TimeSpan() => Bind_works(new TimeSpan(11, 19, 32), "11:19:32");
 
         [Fact]
-        public void Bind_works_when_TimeSpan_with_SqliteType_Real()
-            => Bind_works(new TimeSpan(11, 19, 32), 0.47189814814814812, SqliteType.Real);
+        public void Bind_works_when_TimeSpan_with_SqliteType_Real() =>
+            Bind_works(new TimeSpan(11, 19, 32), 0.47189814814814812, SqliteType.Real);
 
         [Fact]
         public void Bind_throws_when_unknown()

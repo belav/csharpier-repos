@@ -14,24 +14,34 @@ namespace System.Security.Cryptography
     {
         private static readonly byte[] s_nonEmpty = new byte[1];
 
-        public static byte[] Protect(byte[] userData, byte[]? optionalEntropy, DataProtectionScope scope)
-        {
+        public static byte[] Protect(
+            byte[] userData,
+            byte[]? optionalEntropy,
+            DataProtectionScope scope
+        ) {
             if (userData == null)
                 throw new ArgumentNullException(nameof(userData));
 
             return ProtectOrUnprotect(userData, optionalEntropy, scope, protect: true);
         }
 
-        public static byte[] Unprotect(byte[] encryptedData, byte[]? optionalEntropy, DataProtectionScope scope)
-        {
+        public static byte[] Unprotect(
+            byte[] encryptedData,
+            byte[]? optionalEntropy,
+            DataProtectionScope scope
+        ) {
             if (encryptedData == null)
                 throw new ArgumentNullException(nameof(encryptedData));
 
             return ProtectOrUnprotect(encryptedData, optionalEntropy, scope, protect: false);
         }
 
-        private static byte[] ProtectOrUnprotect(byte[] inputData, byte[]? optionalEntropy, DataProtectionScope scope, bool protect)
-        {
+        private static byte[] ProtectOrUnprotect(
+            byte[] inputData,
+            byte[]? optionalEntropy,
+            DataProtectionScope scope,
+            bool protect
+        ) {
             unsafe
             {
                 // The Win32 API will reject pbData == nullptr, and the fixed statement
@@ -39,13 +49,21 @@ namespace System.Security.Cryptography
                 // different array, but still assign cbData to 0.
                 byte[] relevantData = inputData.Length == 0 ? s_nonEmpty : inputData;
 
-                fixed (byte* pInputData = relevantData, pOptionalEntropy = optionalEntropy)
-                {
-                    DATA_BLOB userDataBlob = new DATA_BLOB((IntPtr)pInputData, (uint)(inputData.Length));
+                fixed (
+                    byte* pInputData = relevantData,
+                        pOptionalEntropy = optionalEntropy
+                ) {
+                    DATA_BLOB userDataBlob = new DATA_BLOB(
+                        (IntPtr)pInputData,
+                        (uint)(inputData.Length)
+                    );
                     DATA_BLOB optionalEntropyBlob = default(DATA_BLOB);
                     if (optionalEntropy != null)
                     {
-                        optionalEntropyBlob = new DATA_BLOB((IntPtr)pOptionalEntropy, (uint)(optionalEntropy.Length));
+                        optionalEntropyBlob = new DATA_BLOB(
+                            (IntPtr)pOptionalEntropy,
+                            (uint)(optionalEntropy.Length)
+                        );
                     }
 
                     // For .NET Framework compat, we ignore unknown bits in the "scope" value rather than throwing.
@@ -58,14 +76,32 @@ namespace System.Security.Cryptography
                     DATA_BLOB outputBlob = default(DATA_BLOB);
                     try
                     {
-                        bool success = protect ?
-                            Interop.Crypt32.CryptProtectData(ref userDataBlob, null, ref optionalEntropyBlob, IntPtr.Zero, IntPtr.Zero, flags, out outputBlob) :
-                            Interop.Crypt32.CryptUnprotectData(ref userDataBlob, IntPtr.Zero, ref optionalEntropyBlob, IntPtr.Zero, IntPtr.Zero, flags, out outputBlob);
+                        bool success = protect
+                            ? Interop.Crypt32.CryptProtectData(
+                                  ref userDataBlob,
+                                  null,
+                                  ref optionalEntropyBlob,
+                                  IntPtr.Zero,
+                                  IntPtr.Zero,
+                                  flags,
+                                  out outputBlob
+                              )
+                            : Interop.Crypt32.CryptUnprotectData(
+                                  ref userDataBlob,
+                                  IntPtr.Zero,
+                                  ref optionalEntropyBlob,
+                                  IntPtr.Zero,
+                                  IntPtr.Zero,
+                                  flags,
+                                  out outputBlob
+                              );
                         if (!success)
                         {
                             int lastWin32Error = Marshal.GetLastWin32Error();
                             if (protect && ErrorMayBeCausedByUnloadedProfile(lastWin32Error))
-                                throw new CryptographicException(SR.Cryptography_DpApi_ProfileMayNotBeLoaded);
+                                throw new CryptographicException(
+                                    SR.Cryptography_DpApi_ProfileMayNotBeLoaded
+                                );
                             else
                                 throw lastWin32Error.ToCryptographicException();
                         }
@@ -79,6 +115,7 @@ namespace System.Security.Cryptography
                         Marshal.Copy(outputBlob.pbData, outputBytes, 0, length);
                         return outputBytes;
                     }
+
                     finally
                     {
                         if (outputBlob.pbData != IntPtr.Zero)
@@ -101,8 +138,8 @@ namespace System.Security.Cryptography
         private static bool ErrorMayBeCausedByUnloadedProfile(int errorCode)
         {
             // CAPI returns a file not found error if the user profile is not yet loaded
-            return errorCode == HResults.E_FILENOTFOUND ||
-                   errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND;
+            return errorCode == HResults.E_FILENOTFOUND
+                || errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND;
         }
     }
 }

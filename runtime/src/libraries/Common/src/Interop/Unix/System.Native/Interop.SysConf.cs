@@ -13,7 +13,11 @@ internal static partial class Interop
             _SC_PAGESIZE = 2
         }
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_SysConf", SetLastError = true)]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SysConf",
+            SetLastError = true
+        )]
         internal static extern long SysConf(SysConfName name);
     }
 }

@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// Use this helper to register multiple refactorings (<paramref name="actions"/>).
         /// </summary>
         internal static void RegisterRefactorings<TCodeAction>(
-            this CodeRefactoringContext context, ImmutableArray<TCodeAction> actions, TextSpan? applicableToSpan = null)
-            where TCodeAction : CodeAction
+            this CodeRefactoringContext context,
+            ImmutableArray<TCodeAction> actions,
+            TextSpan? applicableToSpan = null
+        ) where TCodeAction : CodeAction
         {
             if (!actions.IsDefault)
             {
@@ -38,28 +40,44 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             }
         }
 
-        internal static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(this CodeRefactoringContext context)
-            where TSyntaxNode : SyntaxNode
-            => TryGetRelevantNodeAsync<TSyntaxNode>(context.Document, context.Span, context.CancellationToken);
+        internal static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
+            this CodeRefactoringContext context
+        ) where TSyntaxNode : SyntaxNode =>
+            TryGetRelevantNodeAsync<TSyntaxNode>(
+                context.Document,
+                context.Span,
+                context.CancellationToken
+            );
 
-        internal static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(this CodeRefactoringContext context)
-            where TSyntaxNode : SyntaxNode
-            => GetRelevantNodesAsync<TSyntaxNode>(context.Document, context.Span, context.CancellationToken);
+        internal static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
+            this CodeRefactoringContext context
+        ) where TSyntaxNode : SyntaxNode =>
+            GetRelevantNodesAsync<TSyntaxNode>(
+                context.Document,
+                context.Span,
+                context.CancellationToken
+            );
 
         internal static async Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
             this Document document,
             TextSpan span,
-            CancellationToken cancellationToken)
-            where TSyntaxNode : SyntaxNode
+            CancellationToken cancellationToken
+        ) where TSyntaxNode : SyntaxNode
         {
-            var potentialNodes = await GetRelevantNodesAsync<TSyntaxNode>(document, span, cancellationToken).ConfigureAwait(false);
+            var potentialNodes = await GetRelevantNodesAsync<TSyntaxNode>(
+                    document,
+                    span,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return potentialNodes.FirstOrDefault();
         }
 
         internal static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
             this Document document,
             TextSpan span,
-            CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            CancellationToken cancellationToken
+        ) where TSyntaxNode : SyntaxNode
         {
             var helpers = document.GetRequiredLanguageService<IRefactoringHelpersService>();
             return helpers.GetRelevantNodesAsync<TSyntaxNode>(document, span, cancellationToken);

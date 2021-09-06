@@ -30,9 +30,12 @@ namespace Internal.Cryptography.Pal
             return ((OpenSslX509CertificateReader)certificatePal).GetECDiffieHellmanPublicKey();
         }
 
-
-        public AsymmetricAlgorithm DecodePublicKey(Oid oid, byte[] encodedKeyValue, byte[] encodedParameters, ICertificatePal? certificatePal)
-        {
+        public AsymmetricAlgorithm DecodePublicKey(
+            Oid oid,
+            byte[] encodedKeyValue,
+            byte[] encodedParameters,
+            ICertificatePal? certificatePal
+        ) {
             switch (oid.Value)
             {
                 case Oids.Rsa:
@@ -45,13 +48,21 @@ namespace Internal.Cryptography.Pal
             throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
         }
 
-        public string X500DistinguishedNameDecode(byte[] encodedDistinguishedName, X500DistinguishedNameFlags flags)
-        {
-            return X500NameEncoder.X500DistinguishedNameDecode(encodedDistinguishedName, true, flags);
+        public string X500DistinguishedNameDecode(
+            byte[] encodedDistinguishedName,
+            X500DistinguishedNameFlags flags
+        ) {
+            return X500NameEncoder.X500DistinguishedNameDecode(
+                encodedDistinguishedName,
+                true,
+                flags
+            );
         }
 
-        public byte[] X500DistinguishedNameEncode(string distinguishedName, X500DistinguishedNameFlags flag)
-        {
+        public byte[] X500DistinguishedNameEncode(
+            string distinguishedName,
+            X500DistinguishedNameFlags flag
+        ) {
             return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
         }
 
@@ -60,8 +71,11 @@ namespace Internal.Cryptography.Pal
             return X500NameEncoder.X500DistinguishedNameDecode(
                 encodedDistinguishedName,
                 true,
-                multiLine ? X500DistinguishedNameFlags.UseNewLines : X500DistinguishedNameFlags.None,
-                multiLine);
+                multiLine
+                    ? X500DistinguishedNameFlags.UseNewLines
+                    : X500DistinguishedNameFlags.None,
+                multiLine
+            );
         }
 
         public X509ContentType GetCertContentType(ReadOnlySpan<byte> rawData)
@@ -69,9 +83,10 @@ namespace Internal.Cryptography.Pal
             {
                 ICertificatePal? certPal;
 
-                if (OpenSslX509CertificateReader.TryReadX509Der(rawData, out certPal) ||
-                    OpenSslX509CertificateReader.TryReadX509Pem(rawData, out certPal))
-                {
+                if (
+                    OpenSslX509CertificateReader.TryReadX509Der(rawData, out certPal)
+                    || OpenSslX509CertificateReader.TryReadX509Pem(rawData, out certPal)
+                ) {
                     certPal.Dispose();
 
                     return X509ContentType.Cert;
@@ -166,10 +181,16 @@ namespace Internal.Cryptography.Pal
             throw new CryptographicException();
         }
 
-        public override void DecodeX509KeyUsageExtension(byte[] encoded, out X509KeyUsageFlags keyUsages)
-        {
-            using (SafeAsn1BitStringHandle bitString = Interop.Crypto.DecodeAsn1BitString(encoded, encoded.Length))
-            {
+        public override void DecodeX509KeyUsageExtension(
+            byte[] encoded,
+            out X509KeyUsageFlags keyUsages
+        ) {
+            using (
+                SafeAsn1BitStringHandle bitString = Interop.Crypto.DecodeAsn1BitString(
+                    encoded,
+                    encoded.Length
+                )
+            ) {
                 Interop.Crypto.CheckValidOpenSslHandle(bitString);
 
                 byte[] decoded = Interop.Crypto.GetAsn1StringBytes(bitString.DangerousGetHandle());
@@ -223,25 +244,33 @@ namespace Internal.Cryptography.Pal
             byte[] encoded,
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
-            out int pathLengthConstraint)
-        {
-            if (!Interop.Crypto.DecodeX509BasicConstraints2Extension(
-                encoded,
-                encoded.Length,
-                out certificateAuthority,
-                out hasPathLengthConstraint,
-                out pathLengthConstraint))
-            {
+            out int pathLengthConstraint
+        ) {
+            if (
+                !Interop.Crypto.DecodeX509BasicConstraints2Extension(
+                    encoded,
+                    encoded.Length,
+                    out certificateAuthority,
+                    out hasPathLengthConstraint,
+                    out pathLengthConstraint
+                )
+            ) {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
         }
 
-        public override void DecodeX509EnhancedKeyUsageExtension(byte[] encoded, out OidCollection usages)
-        {
+        public override void DecodeX509EnhancedKeyUsageExtension(
+            byte[] encoded,
+            out OidCollection usages
+        ) {
             OidCollection oids = new OidCollection();
 
-            using (SafeEkuExtensionHandle eku = Interop.Crypto.DecodeExtendedKeyUsage(encoded, encoded.Length))
-            {
+            using (
+                SafeEkuExtensionHandle eku = Interop.Crypto.DecodeExtendedKeyUsage(
+                    encoded,
+                    encoded.Length
+                )
+            ) {
                 Interop.Crypto.CheckValidOpenSslHandle(eku);
 
                 int count = Interop.Crypto.GetX509EkuFieldCount(eku);
@@ -283,7 +312,11 @@ namespace Internal.Cryptography.Pal
         {
             SubjectPublicKeyInfoAsn spki = new SubjectPublicKeyInfoAsn
             {
-                Algorithm = new AlgorithmIdentifierAsn { Algorithm = Oids.Dsa, Parameters = encodedParameters },
+                Algorithm = new AlgorithmIdentifierAsn
+                {
+                    Algorithm = Oids.Dsa,
+                    Parameters = encodedParameters
+                },
                 SubjectPublicKey = encodedKeyValue,
             };
 

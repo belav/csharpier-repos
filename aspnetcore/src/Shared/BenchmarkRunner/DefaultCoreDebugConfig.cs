@@ -16,8 +16,7 @@ namespace BenchmarkDotNet.Attributes
             AddLogger(ConsoleLogger.Default);
             AddValidator(JitOptimizationsValidator.DontFailOnError);
 
-            AddJob(Job.InProcess
-                .WithStrategy(RunStrategy.Throughput));
+            AddJob(Job.InProcess.WithStrategy(RunStrategy.Throughput));
         }
     }
 }

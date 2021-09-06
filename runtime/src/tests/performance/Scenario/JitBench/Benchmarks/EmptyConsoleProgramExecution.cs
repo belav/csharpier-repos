@@ -16,26 +16,46 @@ namespace JitBench
             ExePath = ExecutableName;
         }
 
-        public override async Task Setup(DotNetInstallation dotNetInstall, string outputDir, bool useExistingSetup, ITestOutputHelper output)
-        {
+        public override async Task Setup(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            bool useExistingSetup,
+            ITestOutputHelper output
+        ) {
             if (!useExistingSetup)
             {
                 using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
                 {
-                    await SetupSourceToCompile(outputDir, dotNetInstall.FrameworkDir, useExistingSetup, setupSection);
-                    RetargetProjects(dotNetInstall, GetRootDir(outputDir), new string[] { "console.csproj" });
+                    await SetupSourceToCompile(
+                        outputDir,
+                        dotNetInstall.FrameworkDir,
+                        useExistingSetup,
+                        setupSection
+                    );
+                    RetargetProjects(
+                        dotNetInstall,
+                        GetRootDir(outputDir),
+                        new string[] { "console.csproj" }
+                    );
                     await Publish(dotNetInstall, outputDir, setupSection);
                 }
             }
 
-            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(dotNetInstall.FrameworkVersion);
+            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
+                dotNetInstall.FrameworkVersion
+            );
             WorkingDirPath = GetAppPublishDirectory(dotNetInstall, outputDir, tfm);
             EnvironmentVariables.Add("DOTNET_MULTILEVEL_LOOKUP", "0");
             EnvironmentVariables.Add("UseSharedCompilation", "false");
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        private async Task SetupSourceToCompile(string intermediateOutputDir, string runtimeDirPath, bool useExistingSetup, ITestOutputHelper output)
+        private async Task SetupSourceToCompile(
+            string intermediateOutputDir,
+            string runtimeDirPath,
+            bool useExistingSetup,
+            ITestOutputHelper output
+        )
 #pragma warning restore CS1998
         {
             const string sourceFile = "Program.cs";
@@ -45,34 +65,49 @@ namespace JitBench
             FileTasks.DeleteDirectory(consoleProjectMainDir, output);
             FileTasks.CreateDirectory(consoleProjectMainDir, output);
 
-            File.WriteAllLines(Path.Combine(consoleProjectMainDir, sourceFile), new[] {
-                "using System;",
-                "public static class Program",
-                "{",
-                "    public static int Main(string[] args) => 0;",
-                "}"
-            });
+            File.WriteAllLines(
+                Path.Combine(consoleProjectMainDir, sourceFile),
+                new[]
+                {
+                    "using System;",
+                    "public static class Program",
+                    "{",
+                    "    public static int Main(string[] args) => 0;",
+                    "}"
+                }
+            );
 
-            File.WriteAllLines(Path.Combine(consoleProjectMainDir, csprojFile), new[] {
-                @"<Project Sdk=""Microsoft.NET.Sdk"">",
-                @"  <PropertyGroup>",
-                @"    <OutputType>Exe</OutputType>",
-                @"    <TargetFramework>netcoreapp2.1</TargetFramework>",
-                @"  </PropertyGroup>",
-                @"</Project>",
-            });
+            File.WriteAllLines(
+                Path.Combine(consoleProjectMainDir, csprojFile),
+                new[]
+                {
+                    @"<Project Sdk=""Microsoft.NET.Sdk"">",
+                    @"  <PropertyGroup>",
+                    @"    <OutputType>Exe</OutputType>",
+                    @"    <TargetFramework>netcoreapp2.1</TargetFramework>",
+                    @"  </PropertyGroup>",
+                    @"</Project>",
+                }
+            );
         }
 
-        private async Task<string> Publish(DotNetInstallation dotNetInstall, string outputDir, ITestOutputHelper output)
-        {
-            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(dotNetInstall.FrameworkVersion);
+        private async Task<string> Publish(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            ITestOutputHelper output
+        ) {
+            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
+                dotNetInstall.FrameworkVersion
+            );
             string publishDir = GetAppPublishDirectory(dotNetInstall, outputDir, tfm);
             if (publishDir != null)
                 FileTasks.DeleteDirectory(publishDir, output);
 
             string dotNetExePath = dotNetInstall.DotNetExe;
-            await new ProcessRunner(dotNetExePath, $"publish -c Release -f {tfm}")
-                .WithWorkingDirectory(GetAppSrcDirectory(outputDir))
+            await new ProcessRunner(
+                dotNetExePath,
+                $"publish -c Release -f {tfm}"
+            ).WithWorkingDirectory(GetAppSrcDirectory(outputDir))
                 .WithEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .WithEnvironmentVariable("UseSharedCompilation", "false")
                 .WithLog(output)
@@ -84,9 +119,19 @@ namespace JitBench
             return publishDir;
         }
 
-        private string GetAppPublishDirectory(DotNetInstallation dotNetInstall, string outputDir, string tfm)
-        {
-            string dir = Path.Combine(GetAppSrcDirectory(outputDir), "bin", dotNetInstall.Architecture, "Release", tfm, "publish");
+        private string GetAppPublishDirectory(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            string tfm
+        ) {
+            string dir = Path.Combine(
+                GetAppSrcDirectory(outputDir),
+                "bin",
+                dotNetInstall.Architecture,
+                "Release",
+                tfm,
+                "publish"
+            );
             if (Directory.Exists(dir))
                 return dir;
 

@@ -14,9 +14,7 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="entry">The entry to set the priority for.</param>
         /// <param name="priority">The <see cref="CacheItemPriority"/> to set on the entry.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
-        public static ICacheEntry SetPriority(
-            this ICacheEntry entry,
-            CacheItemPriority priority)
+        public static ICacheEntry SetPriority(this ICacheEntry entry, CacheItemPriority priority)
         {
             entry.Priority = priority;
             return entry;
@@ -30,8 +28,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
         public static ICacheEntry AddExpirationToken(
             this ICacheEntry entry,
-            IChangeToken expirationToken)
-        {
+            IChangeToken expirationToken
+        ) {
             if (expirationToken == null)
             {
                 throw new ArgumentNullException(nameof(expirationToken));
@@ -47,9 +45,7 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
         /// <param name="relative">The <see cref="TimeSpan"/> representing the expiration time relative to now.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
-        public static ICacheEntry SetAbsoluteExpiration(
-            this ICacheEntry entry,
-            TimeSpan relative)
+        public static ICacheEntry SetAbsoluteExpiration(this ICacheEntry entry, TimeSpan relative)
         {
             entry.AbsoluteExpirationRelativeToNow = relative;
             return entry;
@@ -63,8 +59,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
         public static ICacheEntry SetAbsoluteExpiration(
             this ICacheEntry entry,
-            DateTimeOffset absolute)
-        {
+            DateTimeOffset absolute
+        ) {
             entry.AbsoluteExpiration = absolute;
             return entry;
         }
@@ -76,9 +72,7 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
         /// <param name="offset">A <see cref="TimeSpan"/> representing a sliding expiration.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
-        public static ICacheEntry SetSlidingExpiration(
-            this ICacheEntry entry,
-            TimeSpan offset)
+        public static ICacheEntry SetSlidingExpiration(this ICacheEntry entry, TimeSpan offset)
         {
             entry.SlidingExpiration = offset;
             return entry;
@@ -92,8 +86,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
         public static ICacheEntry RegisterPostEvictionCallback(
             this ICacheEntry entry,
-            PostEvictionDelegate callback)
-        {
+            PostEvictionDelegate callback
+        ) {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));
@@ -112,18 +106,20 @@ namespace Microsoft.Extensions.Caching.Memory
         public static ICacheEntry RegisterPostEvictionCallback(
             this ICacheEntry entry,
             PostEvictionDelegate callback,
-            object state)
-        {
+            object state
+        ) {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));
             }
 
-            entry.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = callback,
-                State = state
-            });
+            entry.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = callback,
+                    State = state
+                }
+            );
             return entry;
         }
 
@@ -133,9 +129,7 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
         /// <param name="value">The value to set on the <paramref name="entry"/>.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
-        public static ICacheEntry SetValue(
-            this ICacheEntry entry,
-            object value)
+        public static ICacheEntry SetValue(this ICacheEntry entry, object value)
         {
             entry.Value = value;
             return entry;
@@ -147,13 +141,15 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
         /// <param name="size">The size to set on the <paramref name="entry"/>.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
-        public static ICacheEntry SetSize(
-            this ICacheEntry entry,
-            long size)
+        public static ICacheEntry SetSize(this ICacheEntry entry, long size)
         {
             if (size < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), size, $"{nameof(size)} must be non-negative.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    size,
+                    $"{nameof(size)} must be non-negative."
+                );
             }
 
             entry.Size = size;
@@ -166,8 +162,10 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
         /// <param name="options">Set the values of these options on the <paramref name="entry"/>.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
-        public static ICacheEntry SetOptions(this ICacheEntry entry, MemoryCacheEntryOptions options)
-        {
+        public static ICacheEntry SetOptions(
+            this ICacheEntry entry,
+            MemoryCacheEntryOptions options
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -184,9 +182,13 @@ namespace Microsoft.Extensions.Caching.Memory
                 entry.AddExpirationToken(expirationToken);
             }
 
-            foreach (PostEvictionCallbackRegistration postEvictionCallback in options.PostEvictionCallbacks)
-            {
-                entry.RegisterPostEvictionCallback(postEvictionCallback.EvictionCallback, postEvictionCallback.State);
+            foreach (
+                PostEvictionCallbackRegistration postEvictionCallback in options.PostEvictionCallbacks
+            ) {
+                entry.RegisterPostEvictionCallback(
+                    postEvictionCallback.EvictionCallback,
+                    postEvictionCallback.State
+                );
             }
 
             return entry;

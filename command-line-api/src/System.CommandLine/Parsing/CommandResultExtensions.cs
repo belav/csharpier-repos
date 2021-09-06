@@ -9,8 +9,8 @@ namespace System.CommandLine.Parsing
         internal static bool TryGetValueForArgument(
             this CommandResult commandResult,
             IValueDescriptor valueDescriptor,
-            out object? value)
-        {
+            out object? value
+        ) {
             var arguments = commandResult.Command.Arguments;
 
             for (var i = 0; i < arguments.Count; i++)
@@ -38,21 +38,22 @@ namespace System.CommandLine.Parsing
         internal static bool TryGetValueForOption(
             this CommandResult commandResult,
             IValueDescriptor valueDescriptor,
-            out object? value)
-        {
+            out object? value
+        ) {
             var options = commandResult.Command.Options;
 
             for (var i = 0; i < options.Count; i++)
             {
-                var option = (Option) options[i];
+                var option = (Option)options[i];
 
-                if (!option.DisallowBinding &&
-                    valueDescriptor.ValueName.IsMatch(option))
+                if (!option.DisallowBinding && valueDescriptor.ValueName.IsMatch(option))
                 {
                     var optionResult = commandResult.FindResultFor(option);
 
-                    if (optionResult?.ConvertIfNeeded(valueDescriptor.ValueType) is SuccessfulArgumentConversionResult successful)
-                    {
+                    if (
+                        optionResult?.ConvertIfNeeded(valueDescriptor.ValueType)
+                        is SuccessfulArgumentConversionResult successful
+                    ) {
                         value = successful.Value;
                         return true;
                     }

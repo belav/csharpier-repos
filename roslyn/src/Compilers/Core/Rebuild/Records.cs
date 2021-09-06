@@ -14,13 +14,15 @@ namespace Microsoft.CodeAnalysis.Rebuild
     public sealed record EmbeddedSourceTextInfo(
         SourceTextInfo SourceTextInfo,
         SourceText SourceText,
-        ImmutableArray<byte> CompressedHash);
+        ImmutableArray<byte> CompressedHash
+    );
 
     public sealed record SourceTextInfo(
         string OriginalSourceFilePath,
         SourceHashAlgorithm HashAlgorithm,
         ImmutableArray<byte> Hash,
-        Encoding SourceTextEncoding);
+        Encoding SourceTextEncoding
+    );
 
     public sealed record MetadataReferenceInfo(
         string FileName,
@@ -29,5 +31,6 @@ namespace Microsoft.CodeAnalysis.Rebuild
         MetadataImageKind ImageKind,
         bool EmbedInteropTypes,
         int Timestamp,
-        int ImageSize);
+        int ImageSize
+    );
 }

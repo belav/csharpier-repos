@@ -47,9 +47,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         protected int AA_property5 { get; private set; }
         protected int AA_property6 { private get; set; }
 
-        public AATestClass()
-        {
-        }
+        public AATestClass() { }
 
         public AATestClass(int f)
         {

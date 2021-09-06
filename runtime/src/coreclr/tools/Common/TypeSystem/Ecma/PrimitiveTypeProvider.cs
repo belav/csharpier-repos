@@ -8,8 +8,10 @@ namespace Internal.TypeSystem.Ecma
 {
     public static class PrimitiveTypeProvider
     {
-        public static TypeDesc GetPrimitiveType(TypeSystemContext context, PrimitiveTypeCode typeCode)
-        {
+        public static TypeDesc GetPrimitiveType(
+            TypeSystemContext context,
+            PrimitiveTypeCode typeCode
+        ) {
             WellKnownType wkt;
 
             switch (typeCode)

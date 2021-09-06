@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.TaskList;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    // TODO: Remove. This is only needed to support Solution Explorer Analyzer node population. 
+    // TODO: Remove. This is only needed to support Solution Explorer Analyzer node population.
     // Analyzers should not be loaded in devenv process (see https://github.com/dotnet/roslyn/issues/43008).
     internal sealed class VisualStudioAnalyzer : IDisposable
     {
@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         // NOTE: It is important that we share the same shadow copy assembly loader for all VisualStudioAnalyzer instances.
         // This is required to ensure that shadow copied analyzer dependencies are correctly loaded.
         private static readonly IAnalyzerAssemblyLoader s_analyzerAssemblyLoader =
-            new ShadowCopyAnalyzerAssemblyLoader(Path.Combine(Path.GetTempPath(), "VS", "AnalyzerAssemblyLoader"));
+            new ShadowCopyAnalyzerAssemblyLoader(
+                Path.Combine(Path.GetTempPath(), "VS", "AnalyzerAssemblyLoader")
+            );
 
         private readonly ProjectId _projectId;
         private readonly HostDiagnosticUpdateSource _hostDiagnosticUpdateSource;
@@ -28,10 +30,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         // these 2 are mutable states that must be guarded under the _gate.
         private readonly object _gate = new();
         private AnalyzerReference? _analyzerReference;
-        private ImmutableArray<DiagnosticData> _analyzerLoadErrors = ImmutableArray<DiagnosticData>.Empty;
+        private ImmutableArray<DiagnosticData> _analyzerLoadErrors =
+            ImmutableArray<DiagnosticData>.Empty;
 
-        public VisualStudioAnalyzer(string fullPath, HostDiagnosticUpdateSource hostDiagnosticUpdateSource, ProjectId projectId, string language)
-        {
+        public VisualStudioAnalyzer(
+            string fullPath,
+            HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
+            ProjectId projectId,
+            string language
+        ) {
             FullPath = fullPath;
             _hostDiagnosticUpdateSource = hostDiagnosticUpdateSource;
             _projectId = projectId;
@@ -49,7 +56,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // TODO: ensure the file watcher is subscribed
                     // (tracked by https://devdiv.visualstudio.com/DevDiv/_workitems/edit/661546)
 
-                    var analyzerFileReference = new AnalyzerFileReference(FullPath, s_analyzerAssemblyLoader);
+                    var analyzerFileReference = new AnalyzerFileReference(
+                        FullPath,
+                        s_analyzerAssemblyLoader
+                    );
                     analyzerFileReference.AnalyzerLoadFailed += OnAnalyzerLoadError;
                     _analyzerReference = analyzerFileReference;
                 }
@@ -60,12 +70,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         private void OnAnalyzerLoadError(object sender, AnalyzerLoadFailureEventArgs e)
         {
-            var data = AnalyzerHelper.CreateAnalyzerLoadFailureDiagnostic(e, FullPath, _projectId, _language);
+            var data = AnalyzerHelper.CreateAnalyzerLoadFailureDiagnostic(
+                e,
+                FullPath,
+                _projectId,
+                _language
+            );
 
             lock (_gate)
             {
                 _analyzerLoadErrors = _analyzerLoadErrors.Add(data);
-                _hostDiagnosticUpdateSource.UpdateDiagnosticsForProject(_projectId, this, _analyzerLoadErrors);
+                _hostDiagnosticUpdateSource.UpdateDiagnosticsForProject(
+                    _projectId,
+                    this,
+                    _analyzerLoadErrors
+                );
             }
         }
 
@@ -82,12 +101,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _hostDiagnosticUpdateSource.ClearDiagnosticsForProject(_projectId, this);
                 }
 
-                _hostDiagnosticUpdateSource.ClearAnalyzerReferenceDiagnostics(fileReference, _language, _projectId);
+                _hostDiagnosticUpdateSource.ClearAnalyzerReferenceDiagnostics(
+                    fileReference,
+                    _language,
+                    _projectId
+                );
             }
         }
 
-        private void ResetReferenceAndErrors(out AnalyzerReference? reference, out ImmutableArray<DiagnosticData> loadErrors)
-        {
+        private void ResetReferenceAndErrors(
+            out AnalyzerReference? reference,
+            out ImmutableArray<DiagnosticData> loadErrors
+        ) {
             lock (_gate)
             {
                 loadErrors = _analyzerLoadErrors;

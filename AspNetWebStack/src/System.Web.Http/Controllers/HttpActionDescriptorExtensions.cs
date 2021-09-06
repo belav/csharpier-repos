@@ -19,8 +19,10 @@ namespace System.Web.Http.Controllers
             return value as bool? ?? false;
         }
 
-        public static void SetIsAttributeRouted(this HttpActionDescriptor actionDescriptor, bool value)
-        {
+        public static void SetIsAttributeRouted(
+            this HttpActionDescriptor actionDescriptor,
+            bool value
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException("actionDescriptor");

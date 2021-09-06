@@ -24,9 +24,7 @@ namespace System.Reflection.Emit
         private List<int> _stack = new List<int>();
         private int _stackIdx;
 
-        private TypeNameBuilder()
-        {
-        }
+        private TypeNameBuilder() { }
 
         private void OpenGenericArguments()
         {
@@ -313,21 +311,28 @@ namespace System.Reflection.Emit
                 Type enclosingType = nestings[i];
                 string name = enclosingType.Name;
 
-                if (i == nestings.Count - 1 && enclosingType.Namespace != null && enclosingType.Namespace.Length != 0)
+                if (
+                    i == nestings.Count - 1
+                    && enclosingType.Namespace != null
+                    && enclosingType.Namespace.Length != 0
+                )
                     name = enclosingType.Namespace + "." + name;
 
                 AddName(name);
             }
 
             // Append generic arguments
-            if (rootType.IsGenericType && (!rootType.IsGenericTypeDefinition || format == Format.ToString))
-            {
+            if (
+                rootType.IsGenericType
+                && (!rootType.IsGenericTypeDefinition || format == Format.ToString)
+            ) {
                 Type[] genericArguments = rootType.GetGenericArguments();
 
                 OpenGenericArguments();
                 for (int i = 0; i < genericArguments.Length; i++)
                 {
-                    Format genericArgumentsFormat = format == Format.FullName ? Format.AssemblyQualifiedName : format;
+                    Format genericArgumentsFormat =
+                        format == Format.FullName ? Format.AssemblyQualifiedName : format;
 
                     OpenGenericArgument();
                     AddAssemblyQualifiedName(genericArguments[i], genericArgumentsFormat);

@@ -97,8 +97,10 @@ namespace Microsoft.AspNetCore.Components.Lifetime
                 return Task.CompletedTask;
             }
 
-            static Task ExecuteCallback(ComponentApplicationState.OnPersistingCallback callback, ILogger<ComponentApplicationLifetime> logger)
-            {
+            static Task ExecuteCallback(
+                ComponentApplicationState.OnPersistingCallback callback,
+                ILogger<ComponentApplicationLifetime> logger
+            ) {
                 try
                 {
                     var current = callback();
@@ -113,7 +115,11 @@ namespace Microsoft.AspNetCore.Components.Lifetime
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(new EventId(1000, "PersistenceCallbackError"), ex, "There was an error executing a callback while pausing the application.");
+                    logger.LogError(
+                        new EventId(1000, "PersistenceCallbackError"),
+                        ex,
+                        "There was an error executing a callback while pausing the application."
+                    );
                     return Task.CompletedTask;
                 }
 
@@ -125,7 +131,11 @@ namespace Microsoft.AspNetCore.Components.Lifetime
                     }
                     catch (Exception ex)
                     {
-                        logger.LogError(new EventId(1000, "PersistenceCallbackError"), ex, "There was an error executing a callback while pausing the application.");
+                        logger.LogError(
+                            new EventId(1000, "PersistenceCallbackError"),
+                            ex,
+                            "There was an error executing a callback while pausing the application."
+                        );
                         return;
                     }
                 }

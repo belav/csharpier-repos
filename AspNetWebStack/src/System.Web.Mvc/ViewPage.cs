@@ -56,7 +56,11 @@ namespace System.Web.Mvc
 
         public ViewContext ViewContext { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the mechanism by which the ViewPage gets its ViewDataDictionary object.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is the mechanism by which the ViewPage gets its ViewDataDictionary object."
+        )]
         public ViewDataDictionary ViewData
         {
             get
@@ -109,13 +113,18 @@ namespace System.Web.Mvc
             {
                 base.Render(writer);
             }
+
             finally
             {
                 Writer = null;
             }
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The object is disposed in the finally block of the method")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The object is disposed in the finally block of the method"
+        )]
         public virtual void RenderView(ViewContext viewContext)
         {
             ViewContext = viewContext;
@@ -142,8 +151,13 @@ namespace System.Web.Mvc
                         try
                         {
                             _nextId = 0;
-                            viewContext.HttpContext.Server.Execute(HttpHandlerUtil.WrapForServerExecute(this), switchWriter, true /* preserveForm */);
+                            viewContext.HttpContext.Server.Execute(
+                                HttpHandlerUtil.WrapForServerExecute(this),
+                                switchWriter,
+                                true /* preserveForm */
+                            );
                         }
+
                         finally
                         {
                             // Restore the original _nextId in case this isn't actually the outermost view, since resetting
@@ -157,6 +171,7 @@ namespace System.Web.Mvc
                     }
                 }
             }
+
             finally
             {
                 if (createdSwitchWriter)
@@ -166,9 +181,21 @@ namespace System.Web.Mvc
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "textWriter", Justification = "This method existed in MVC 1.0 and has been deprecated.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This method existed in MVC 1.0 and has been deprecated.")]
-        [Obsolete("The TextWriter is now provided by the ViewContext object passed to the RenderView method.", true /* error */)]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "textWriter",
+            Justification = "This method existed in MVC 1.0 and has been deprecated."
+        )]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This method existed in MVC 1.0 and has been deprecated."
+        )]
+        [Obsolete(
+            "The TextWriter is now provided by the ViewContext object passed to the RenderView method.",
+            true /* error */
+        )]
         public void SetTextWriter(TextWriter textWriter)
         {
             // this is now a no-op
@@ -181,10 +208,7 @@ namespace System.Web.Mvc
 
         internal class SwitchWriter : TextWriter
         {
-            public SwitchWriter()
-                : base(CultureInfo.CurrentCulture)
-            {
-            }
+            public SwitchWriter() : base(CultureInfo.CurrentCulture) { }
 
             public override Encoding Encoding
             {

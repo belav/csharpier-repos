@@ -41,9 +41,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="addedExports"/> or <paramref name="removedExports"/> is <see langword="null"/>.
         /// </exception>
-        public ExportsChangeEventArgs(IEnumerable<ExportDefinition> addedExports,
-                IEnumerable<ExportDefinition> removedExports, AtomicComposition? atomicComposition)
-        {
+        public ExportsChangeEventArgs(
+            IEnumerable<ExportDefinition> addedExports,
+            IEnumerable<ExportDefinition> removedExports,
+            AtomicComposition? atomicComposition
+        ) {
             Requires.NotNull(addedExports, nameof(addedExports));
             Requires.NotNull(removedExports, nameof(removedExports));
 
@@ -99,8 +101,7 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (_changedContractNames == null)
                 {
-                    _changedContractNames = AddedExports
-                        .Concat(RemovedExports)
+                    _changedContractNames = AddedExports.Concat(RemovedExports)
                         .Select(export => export.ContractName)
                         .Distinct()
                         .ToArray();

@@ -13,8 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class CSharpNamer<T>
-        where T : notnull
+    public class CSharpNamer<T> where T : notnull
     {
         private readonly Func<T, string> _nameGetter;
         private readonly ICSharpUtilities _cSharpUtilities;
@@ -37,8 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public CSharpNamer(
             Func<T, string> nameGetter,
             ICSharpUtilities cSharpUtilities,
-            Func<string, string>? singularizePluralizer)
-        {
+            Func<string, string>? singularizePluralizer
+        ) {
             Check.NotNull(nameGetter, nameof(nameGetter));
             Check.NotNull(cSharpUtilities, nameof(cSharpUtilities));
 
@@ -63,7 +62,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             }
 
             var name = _cSharpUtilities.GenerateCSharpIdentifier(
-                _nameGetter(item), existingIdentifiers: null, singularizePluralizer: _singularizePluralizer);
+                _nameGetter(item),
+                existingIdentifiers: null,
+                singularizePluralizer: _singularizePluralizer
+            );
             NameCache.Add(item, name);
             return name;
         }

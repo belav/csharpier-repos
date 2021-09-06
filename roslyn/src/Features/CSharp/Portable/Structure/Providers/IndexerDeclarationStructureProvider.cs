@@ -9,22 +9,28 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class IndexerDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<IndexerDeclarationSyntax>
+    internal class IndexerDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<IndexerDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             IndexerDeclarationSyntax indexerDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
-        {
-            CSharpStructureHelpers.CollectCommentBlockSpans(indexerDeclaration, ref spans, optionProvider);
+            CancellationToken cancellationToken
+        ) {
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                indexerDeclaration,
+                ref spans,
+                optionProvider
+            );
 
             // fault tolerance
-            if (indexerDeclaration.AccessorList == null ||
-                indexerDeclaration.AccessorList.IsMissing ||
-                indexerDeclaration.AccessorList.OpenBraceToken.IsMissing ||
-                indexerDeclaration.AccessorList.CloseBraceToken.IsMissing)
-            {
+            if (
+                indexerDeclaration.AccessorList == null
+                || indexerDeclaration.AccessorList.IsMissing
+                || indexerDeclaration.AccessorList.OpenBraceToken.IsMissing
+                || indexerDeclaration.AccessorList.CloseBraceToken.IsMissing
+            ) {
                 return;
             }
 
@@ -34,16 +40,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             // Check IsNode to compress blank lines after this node if it is the last child of the parent.
             //
             // Indexers are grouped together with properties in Metadata as Source.
-            var compressEmptyLines = optionProvider.IsMetadataAsSource
-                && (!nextSibling.IsNode || nextSibling.IsKind(SyntaxKind.IndexerDeclaration) || nextSibling.IsKind(SyntaxKind.PropertyDeclaration));
+            var compressEmptyLines =
+                optionProvider.IsMetadataAsSource
+                && (
+                    !nextSibling.IsNode
+                    || nextSibling.IsKind(SyntaxKind.IndexerDeclaration)
+                    || nextSibling.IsKind(SyntaxKind.PropertyDeclaration)
+                );
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                indexerDeclaration,
-                indexerDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
-                compressEmptyLines: compressEmptyLines,
-                autoCollapse: true,
-                type: BlockTypes.Member,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    indexerDeclaration,
+                    indexerDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
+                    compressEmptyLines: compressEmptyLines,
+                    autoCollapse: true,
+                    type: BlockTypes.Member,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

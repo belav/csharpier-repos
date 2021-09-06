@@ -20,10 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public UniqueConstraint(
-            string name,
-            Table table,
-            IReadOnlyList<Column> columns)
+        public UniqueConstraint(string name, Table table, IReadOnlyList<Column> columns)
         {
             Name = name;
             Table = table;
@@ -71,19 +68,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((IUniqueConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IUniqueConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <inheritdoc />
-        ITable IUniqueConstraint.Table
-            => Table;
+        ITable IUniqueConstraint.Table => Table;
 
         /// <inheritdoc />
-        IReadOnlyList<IColumn> IUniqueConstraint.Columns
-            => Columns;
+        IReadOnlyList<IColumn> IUniqueConstraint.Columns => Columns;
 
         /// <inheritdoc />
-        IEnumerable<IKey> IUniqueConstraint.MappedKeys
-            => MappedKeys;
+        IEnumerable<IKey> IUniqueConstraint.MappedKeys => MappedKeys;
     }
 }

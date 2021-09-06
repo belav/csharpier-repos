@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         [Fact]
         public void VarPatternInfersNullableType()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 public class C
 {
     public string Field = null!;
@@ -45,7 +46,8 @@ public class C
     }
     void Deconstruct(out string s) => throw null!;
 }
-");
+"
+            );
 
             c.VerifyDiagnostics();
         }
@@ -53,7 +55,8 @@ public class C
         [Fact]
         public void ConditionalBranching_IsConstantPattern_Null()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -68,19 +71,21 @@ class C
         }
     }
 }
-");
+"
+            );
 
             c.VerifyDiagnostics(
                 // (8,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(8, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsConstantPattern_NullInverted()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -95,18 +100,20 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (12,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(12, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsConstantPattern_NonNull()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -122,18 +129,20 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (13,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(13, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsConstantPattern_NullConstant()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -149,18 +158,20 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (9,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(9, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsConstantPattern_NonConstant()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -172,7 +183,8 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (7,18): error CS0150: A constant value is expected
                 //         if (x is nonConstant)
@@ -180,13 +192,14 @@ class C
                 // (9,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString();
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(9, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsConstantPattern_Null_AlreadyTestedAsNonNull()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -204,18 +217,20 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (10,17): warning CS8602: Dereference of a possibly null reference.
                 //                 x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(10, 17)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsConstantPattern_Null_AlreadyTestedAsNull()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test(object? x)
@@ -233,18 +248,20 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (10,17): warning CS8602: Dereference of a possibly null reference.
                 //                 x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(10, 17)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsDeclarationPattern_02()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test1(object? x)
@@ -272,18 +289,20 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (13,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(13, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsVarDeclarationPattern()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test1(object? x)
@@ -312,7 +331,8 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyTypes();
             c.VerifyDiagnostics(
                 // (8,13): warning CS8602: Dereference of a possibly null reference.
@@ -321,13 +341,14 @@ class C
                 // (9,13): warning CS8602: Dereference of a possibly null reference.
                 //             c /*T:object?*/ .ToString(); // warn 2
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c").WithLocation(9, 13)
-                );
+            );
         }
 
         [Fact]
         public void ConditionalBranching_IsVarDeclarationPattern_Discard()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test1(object? x)
@@ -353,20 +374,22 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyTypes();
             c.VerifyDiagnostics(
                 // (8,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // 1
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(8, 13)
-                );
+            );
         }
 
         [Fact]
         [WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public void ConditionalBranching_IsVarDeclarationPattern_AlreadyTestedAsNonNull()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class C
 {
     void Test1(object? x)
@@ -392,7 +415,8 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyTypes();
             c.VerifyDiagnostics();
         }
@@ -401,7 +425,7 @@ class C
         public void IsPattern_01()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(object x) { }
     static void G(string s)
@@ -418,7 +442,7 @@ class C
         public void IsPattern_02()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(string s) { }
     static void G(string? s)
@@ -438,7 +462,7 @@ class C
         public void IsPattern_AffectsNullConditionalOperator_DeclarationPattern()
         {
             var source =
-@"class C
+                @"class C
 {
     static void G1(string? s)
     {
@@ -470,14 +494,15 @@ class C
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(11, 13),
                 // (22,13): warning CS8602: Dereference of a possibly null reference.
                 //             s.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(22, 13));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(22, 13)
+            );
         }
 
         [Fact]
         public void IsPattern_AffectsNullConditionalOperator_NullableValueType()
         {
             var source =
-@"class C
+                @"class C
 {
     static void G1(int? i)
     {
@@ -522,13 +547,15 @@ class C
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "i").WithLocation(11, 13),
                 // (23,13): warning CS8629: Nullable value type may be null.
                 //             i.Value.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "i").WithLocation(23, 13));
+                Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "i").WithLocation(23, 13)
+            );
         }
 
         [Fact]
         public void IsPattern_AffectsNullConditionalOperator_NullableValueType_Nested()
         {
-            var source = @"
+            var source =
+                @"
 public struct S
 {
     public int? field;
@@ -556,15 +583,16 @@ class C
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "s").WithLocation(17, 13),
                 // (18,13): warning CS8629: Nullable value type may be null.
                 //             s.Value.field.Value.ToString(); // warn
-                Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "s.Value.field").WithLocation(18, 13)
-                );
+                Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "s.Value.field")
+                    .WithLocation(18, 13)
+            );
         }
 
         [Fact, WorkItem(28798, "https://github.com/dotnet/roslyn/issues/28798")]
         public void IsPattern_AffectsNullConditionalOperator_VarPattern()
         {
             var source =
-@"class C
+                @"class C
 {
     static void G(string? s)
     {
@@ -583,14 +611,14 @@ class C
                 // (7,13): warning CS8602: Dereference of a possibly null reference.
                 //             s.ToString(); // 1
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(7, 13)
-                );
+            );
         }
 
         [Fact]
         public void IsPattern_AffectsNullConditionalOperator_NullConstantPattern()
         {
             var source =
-@"class C
+                @"class C
 {
     static void G(string? s)
     {
@@ -609,7 +637,7 @@ class C
                 // (7,13): warning CS8602: Dereference of a possibly null reference.
                 //             s.ToString(); // warn
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(7, 13)
-                );
+            );
         }
 
         [Fact]
@@ -618,7 +646,7 @@ class C
         public void PatternSwitch()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(object o) { }
     static void G(object? x)
@@ -647,14 +675,17 @@ class C
             comp.VerifyDiagnostics(
                 // (18,19): warning CS8604: Possible null reference argument for parameter 'o' in 'void C.F(object o)'.
                 //                 F(x); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceArgument, "x").WithArguments("o", "void C.F(object o)").WithLocation(18, 19));
+                Diagnostic(ErrorCode.WRN_NullReferenceArgument, "x")
+                    .WithArguments("o", "void C.F(object o)")
+                    .WithLocation(18, 19)
+            );
         }
 
         [Fact]
         public void IsDeclarationPattern_01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void F1(object x1)
     {
@@ -702,10 +733,12 @@ class C
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x2").WithLocation(19, 9),
                 // (23,14): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         x3 = null; // 2
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(23, 14),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(23, 14),
                 // (29,9): warning CS8602: Dereference of a possibly null reference.
                 //         x3.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x3").WithLocation(29, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x3").WithLocation(29, 9)
+            );
             comp.VerifyTypes();
         }
 
@@ -714,7 +747,7 @@ class C
         public void IsDeclarationPattern_02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void F1<T, U>(T t1)
         where T : class
@@ -770,17 +803,19 @@ class C
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t2").WithLocation(23, 9),
                 // (29,14): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         t3 = null; // 2
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(29, 14),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(29, 14),
                 // (35,9): warning CS8602: Dereference of a possibly null reference.
                 //         t3.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t3").WithLocation(35, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t3").WithLocation(35, 9)
+            );
         }
 
         [Fact]
         public void IsDeclarationPattern_03()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void F1<T, U>(T t1)
     {
@@ -806,14 +841,15 @@ class C
             comp.VerifyDiagnostics(
                 // (10,9): warning CS8602: Dereference of a possibly null reference.
                 //         t1.ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t1").WithLocation(10, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t1").WithLocation(10, 9)
+            );
         }
 
         [Fact]
         public void IsDeclarationPattern_NeverNull_01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void F1(object x1)
     {
@@ -845,14 +881,15 @@ class C
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x1").WithLocation(12, 9),
                 // (23,9): warning CS8602: Dereference of a possibly null reference.
                 //         x2.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x2").WithLocation(23, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x2").WithLocation(23, 9)
+            );
         }
 
         [Fact]
         public void IsDeclarationPattern_Unassigned_01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void F1(object x1)
     {
@@ -905,32 +942,42 @@ class C
             comp.VerifyDiagnostics(
                 // (11,13): error CS0165: Use of unassigned local variable 'y1'
                 //             y1.ToString(); // 1
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y1").WithArguments("y1").WithLocation(11, 13),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(11, 13),
                 // (21,13): warning CS8602: Dereference of a possibly null reference.
                 //             x2.ToString(); // 2
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x2").WithLocation(21, 13),
                 // (22,13): error CS0165: Use of unassigned local variable 'y2'
                 //             y2.ToString(); // 3
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y2").WithArguments("y2").WithLocation(22, 13),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(22, 13),
                 // (27,14): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         x3 = null; // 4
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(27, 14),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(27, 14),
                 // (33,13): warning CS8602: Dereference of a possibly null reference.
                 //             x3.ToString(); // 5
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x3").WithLocation(33, 13),
                 // (34,13): error CS0165: Use of unassigned local variable 'y3'
                 //             y3.ToString(); // 6
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y3").WithArguments("y3").WithLocation(34, 13),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(34, 13),
                 // (46,13): error CS0165: Use of unassigned local variable 'y4'
                 //             y4.ToString(); // 7
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y4").WithArguments("y4").WithLocation(46, 13));
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(46, 13)
+            );
         }
 
         [Fact]
         public void IsDeclarationPattern_Unassigned_02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void F1(object x1)
     {
@@ -963,32 +1010,42 @@ class C
             comp.VerifyDiagnostics(
                 // (7,9): error CS0165: Use of unassigned local variable 'y1'
                 //         y1.ToString(); // 1
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y1").WithArguments("y1").WithLocation(7, 9),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(7, 9),
                 // (12,9): warning CS8602: Dereference of a possibly null reference.
                 //         x2.ToString(); // 2
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x2").WithLocation(12, 9),
                 // (13,9): error CS0165: Use of unassigned local variable 'y2'
                 //         y2.ToString(); // 3
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y2").WithArguments("y2").WithLocation(13, 9),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(13, 9),
                 // (17,14): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         x3 = null; // 4
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(17, 14),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(17, 14),
                 // (19,9): warning CS8602: Dereference of a possibly null reference.
                 //         x3.ToString(); // 5
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x3").WithLocation(19, 9),
                 // (20,9): error CS0165: Use of unassigned local variable 'y3'
                 //         y3.ToString(); // 6
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y3").WithArguments("y3").WithLocation(20, 9),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(20, 9),
                 // (27,9): error CS0165: Use of unassigned local variable 'y4'
                 //         y4.ToString(); // 7
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "y4").WithArguments("y4").WithLocation(27, 9));
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(27, 9)
+            );
         }
 
         [Fact]
         public void UnconstrainedTypeParameter_PatternMatching()
         {
             var source =
-@"
+                @"
 class C
 {
     static void F1<T>(object o, T tin)
@@ -1019,7 +1076,11 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(source, options: WithNullableEnable(), parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source,
+                options: WithNullableEnable(),
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics(
                 // (15,9): warning CS8602: Dereference of a possibly null reference.
                 //         t1.ToString(); // 1
@@ -1027,14 +1088,15 @@ class C
                 // (25,9): warning CS8602: Dereference of a possibly null reference.
                 //         t2.ToString(); // 2
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t2").WithLocation(25, 9)
-                );
+            );
         }
 
         [WorkItem(32503, "https://github.com/dotnet/roslyn/issues/32503")]
         [Fact]
         public void PatternDeclarationBreaksNullableAnalysis()
         {
-            var source = @"
+            var source =
+                @"
 class A { }
 class B : A
 {
@@ -1053,7 +1115,8 @@ class B : A
         [Fact]
         public void InferenceWithITuplePattern()
         {
-            var source = @"
+            var source =
+                @"
 class A { }
 class B : A
 {
@@ -1072,7 +1135,8 @@ class B : A
         [Fact]
         public void RecursivePatternNullInferenceWithDowncast_01()
         {
-            var source = @"
+            var source =
+                @"
 class Base
 {
     public object Value = """";
@@ -1096,7 +1160,8 @@ class Program
         [Fact]
         public void RecursivePatternNullInferenceWithDowncast_02()
         {
-            var source = @"
+            var source =
+                @"
 class Base
 {
     public object Value = """";
@@ -1116,13 +1181,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (14,13): warning CS8602: Dereference of a possibly null reference.
                 //             b.Value.ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Value").WithLocation(14, 13));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Value").WithLocation(14, 13)
+            );
         }
 
         [Fact]
         public void TuplePatternNullInference_01()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void M((object, object) t)
@@ -1141,13 +1208,15 @@ class Program
             comp.VerifyDiagnostics(
                 // (11,13): warning CS8602: Dereference of a possibly null reference.
                 //             t.Item2.ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t.Item2").WithLocation(11, 13));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "t.Item2").WithLocation(11, 13)
+            );
         }
 
         [Fact]
         public void MultiplePathsThroughDecisionDag_01()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     bool M1(object? o, bool cond = true)
@@ -1222,7 +1291,8 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "o").WithLocation(28, 27),
                 // (58,17): warning CS8602: Dereference of a possibly null reference.
                 //                 q.ToString(); // 3 (!?)
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "q").WithLocation(58, 17));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "q").WithLocation(58, 17)
+            );
         }
 
         [Fact]
@@ -1230,7 +1300,8 @@ class Program
         [WorkItem(32414, "https://github.com/dotnet/roslyn/issues/32414")]
         public void NotExhaustiveForNull_01()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void M0(object o)
@@ -1323,25 +1394,40 @@ class Program
             comp.VerifyDiagnostics(
                 // (18,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 1 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(18, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(18, 15),
                 // (27,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 2 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(27, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(27, 15),
                 // (36,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(not null, null)' is not covered.
                 //         _ = t switch // 3 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(not null, null)").WithLocation(36, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(not null, null)")
+                    .WithLocation(36, 15),
                 // (46,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 4 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(46, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(46, 15),
                 // (55,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 5 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(55, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(55, 15),
                 // (64,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(not null, null)' is not covered.
                 //         _ = t switch // 6 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(not null, null)").WithLocation(64, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(not null, null)")
+                    .WithLocation(64, 15),
                 // (73,15): warning CS8847: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered. However, a pattern with a 'when' clause might successfully match this value.
                 //         _ = o switch // 7 not exhaustive
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNullWithWhen, "switch").WithArguments("null").WithLocation(73, 15));
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNullWithWhen, "switch")
+                    .WithArguments("null")
+                    .WithLocation(73, 15)
+            );
         }
 
         [Fact]
@@ -1349,7 +1435,8 @@ class Program
         [WorkItem(32414, "https://github.com/dotnet/roslyn/issues/32414")]
         public void NotExhaustiveForNull_02()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     int M1(string s1, string s2)
@@ -1388,22 +1475,32 @@ class Test
             comp.VerifyDiagnostics(
                 // (12,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         return (s1, s2) switch { // 1
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(12, 25),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(12, 25),
                 // (18,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         return (s1, s2) switch { // 2
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(18, 25),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(18, 25),
                 // (24,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         return (s1, s2) switch { // 3
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, _)").WithLocation(24, 25),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, _)")
+                    .WithLocation(24, 25),
                 // (30,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, "")' is not covered.
                 //         return (s1, s2) switch { // 4
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch").WithArguments("(null, \"\")").WithLocation(30, 25));
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
+                    .WithArguments("(null, \"\")")
+                    .WithLocation(30, 25)
+            );
         }
 
         [Fact, WorkItem(31881, "https://github.com/dotnet/roslyn/issues/31881")]
         public void NullableVsPattern_31881()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class C
@@ -1439,7 +1536,8 @@ public class C
         [WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public void PatternVariablesAreNotOblivious_33499()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     static void M(object o)
@@ -1452,14 +1550,16 @@ class Test
             comp.VerifyDiagnostics(
                 // (7,13): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         s = null;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(7, 13)
-                );
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(7, 13)
+            );
         }
 
         [Fact]
         public void IsPatternAlwaysFalse()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     void M1(ref object o)
@@ -1472,14 +1572,17 @@ class Test
             comp.VerifyDiagnostics(
                 // (6,13): warning CS8519: The given expression never matches the provided pattern.
                 //         if (2 is 3)
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "2 is 3").WithLocation(6, 13));
+                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "2 is 3")
+                    .WithLocation(6, 13)
+            );
         }
 
         [Fact]
         [WorkItem(29619, "https://github.com/dotnet/roslyn/issues/29619")]
         public void StructWithNotBackedProperty()
         {
-            var source = @"
+            var source =
+                @"
 struct Point
 {
     public object X, Y;
@@ -1493,7 +1596,8 @@ struct Point
         [Fact]
         public void LearnFromNullPattern_01()
         {
-            var source = @"
+            var source =
+                @"
 class Node
 {
     public Node Next = null!;
@@ -1527,13 +1631,15 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(16, 9),
                 // (21,9): warning CS8602: Dereference of a possibly null reference.
                 //         n.Next.Next.Next.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(21, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(21, 9)
+            );
         }
 
         [Fact]
         public void LearnFromNullPattern_02()
         {
-            var source = @"
+            var source =
+                @"
 class Node
 {
     public Node Next = null!;
@@ -1567,13 +1673,15 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(16, 9),
                 // (21,9): warning CS8602: Dereference of a possibly null reference.
                 //         n.Next.Next.Next.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(21, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(21, 9)
+            );
         }
 
         [Fact]
         public void LearnFromNullPattern_03()
         {
-            var source = @"
+            var source =
+                @"
 class Node
 {
     public Node Next = null!;
@@ -1607,13 +1715,15 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(16, 9),
                 // (21,9): warning CS8602: Dereference of a possibly null reference.
                 //         n.Next.Next.Next.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(21, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(21, 9)
+            );
         }
 
         [Fact]
         public void LearnFromNullPattern_04()
         {
-            var source = @"
+            var source =
+                @"
 #nullable disable
 class Node
 {
@@ -1655,13 +1765,15 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(22, 9),
                 // (29,9): warning CS8602: Dereference of a possibly null reference.
                 //         n.Next.Next.Next.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(29, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(29, 9)
+            );
         }
 
         [Fact]
         public void LearnFromNullPattern_05()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void M1((string s1, string s2) n)
@@ -1691,13 +1803,15 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.s2").WithLocation(11, 9),
                 // (16,26): warning CS8602: Dereference of a possibly null reference.
                 //             (null, _) => n.s1.ToString(), // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.s1").WithLocation(16, 26));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.s1").WithLocation(16, 26)
+            );
         }
 
         [Fact]
         public void LearnFromNonNullPattern_01()
         {
-            var source = @"
+            var source =
+                @"
 class Node
 {
     public Node? Next = null;
@@ -1731,13 +1845,16 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(16, 13),
                 // (21,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.Next.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next").WithLocation(21, 13));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next")
+                    .WithLocation(21, 13)
+            );
         }
 
         [Fact]
         public void LearnFromNonNullPattern_02()
         {
-            var source = @"
+            var source =
+                @"
 class Node
 {
     public Node? Next = null;
@@ -1774,13 +1891,16 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(17, 13),
                 // (23,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.Next.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next").WithLocation(23, 13));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next")
+                    .WithLocation(23, 13)
+            );
         }
 
         [Fact]
         public void LearnFromNonNullPattern_03()
         {
-            var source = @"
+            var source =
+                @"
 class Node
 {
     public Node? Next = null;
@@ -1817,13 +1937,16 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(17, 13),
                 // (23,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.Next.ToString(), // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next").WithLocation(23, 13));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next")
+                    .WithLocation(23, 13)
+            );
         }
 
         [Fact]
         public void LearnFromNonNullPattern_04()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void M1((string? s1, string? s2)? n)
@@ -1880,14 +2003,16 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s2").WithLocation(28, 26),
                 // (31,26): warning CS8629: Nullable value type may be null.
                 //             _         => n.Value.ToString(), // 7: n
-                Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "n").WithLocation(31, 26));
+                Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "n").WithLocation(31, 26)
+            );
         }
 
         [Fact]
         [WorkItem(34246, "https://github.com/dotnet/roslyn/issues/34246")]
         public void LearnFromConstantPattern_01()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void M(string? s)
@@ -1909,7 +2034,8 @@ class Program
         [WorkItem(39888, "https://github.com/dotnet/roslyn/issues/39888")]
         public void SwitchExpressionResultType_01()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 class Test
 {
     void Test1(int i, object? x, object y)
@@ -1967,7 +2093,8 @@ class D {}
 public interface I<T> { }
 public interface IIn<in T> { }
 public interface IOut<out T> { }
-");
+"
+            );
             c.VerifyTypes();
             c.VerifyDiagnostics(
                 // (33,15): error CS8506: No best type was found for the switch expression.
@@ -1978,10 +2105,14 @@ public interface IOut<out T> { }
                 Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(34, 15),
                 // (39,37): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't match target type 'I<string>'.
                 //         _ = i switch { 6 => x, _ => y }/*T:I<string!>!*/; // 3
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y").WithArguments("I<string?>", "I<string>").WithLocation(39, 37),
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y")
+                    .WithArguments("I<string?>", "I<string>")
+                    .WithLocation(39, 37),
                 // (40,29): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't match target type 'I<string>'.
                 //         _ = i switch { 6 => y, _ => x }/*T:I<string!>!*/; // 4
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y").WithArguments("I<string?>", "I<string>").WithLocation(40, 29)
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y")
+                    .WithArguments("I<string?>", "I<string>")
+                    .WithLocation(40, 29)
             );
         }
 
@@ -1989,7 +2120,8 @@ public interface IOut<out T> { }
         [WorkItem(39264, "https://github.com/dotnet/roslyn/issues/39264")]
         public void IsPatternSplitState_01()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 #nullable enable
 class C
 {
@@ -2038,19 +2170,21 @@ class C
         c.otherField.ToString(); // W
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (47,9): warning CS8602: Dereference of a possibly null reference.
                 //         c.otherField.ToString(); // W
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.otherField").WithLocation(47, 9)
-                );
+            );
         }
 
         [Fact]
         [WorkItem(39264, "https://github.com/dotnet/roslyn/issues/39264")]
         public void IsPatternSplitState_02()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 #nullable enable
 class C
 {
@@ -2067,21 +2201,24 @@ class C
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (13,17): warning CS8602: Dereference of a possibly null reference.
                 //                 c.c.c.c.ToString();
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.c.c").WithLocation(13, 17),
                 // (13,17): warning CS8602: Dereference of a possibly null reference.
                 //                 c.c.c.c.ToString();
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.c.c.c").WithLocation(13, 17));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.c.c.c").WithLocation(13, 17)
+            );
         }
 
         [Fact]
         [WorkItem(39264, "https://github.com/dotnet/roslyn/issues/39264")]
         public void IsPatternSplitState_03()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 #nullable enable
 public class C {
     C? c = null;
@@ -2104,19 +2241,21 @@ public class C {
         }
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (19,17): warning CS8602: Dereference of a possibly null reference.
                 //                 c.c.c.ToString(); // warning
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.c.c").WithLocation(19, 17)
-                );
+            );
         }
 
         [Fact]
         [WorkItem(40629, "https://github.com/dotnet/roslyn/issues/40629")]
         public void NullTestInSwitch_01()
         {
-            CSharpCompilation c = CreateNullableCompilation(@"
+            CSharpCompilation c = CreateNullableCompilation(
+                @"
 #nullable enable
 class C
 {
@@ -2131,7 +2270,8 @@ class C
         p.ToString();
     }
 }
-");
+"
+            );
             c.VerifyDiagnostics();
         }
 
@@ -2139,7 +2279,7 @@ class C
         public void NotNullIsAPureNullTest()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 class C
 {
     void M1(C? x)
@@ -2211,7 +2351,10 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.RegularWithPatternCombinators);
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             comp.VerifyDiagnostics(
                 // (8,9): warning CS8602: Dereference of a possibly null reference.
                 //         x.ToString(); // 1
@@ -2221,25 +2364,33 @@ class C
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(14, 9),
                 // (18,13): warning CS8794: An expression of type 'C' always matches the provided pattern.
                 //         if (x is not null or _)
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is not null or _").WithArguments("C").WithLocation(18, 13),
+                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is not null or _")
+                    .WithArguments("C")
+                    .WithLocation(18, 13),
                 // (19,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(19, 13),
                 // (24,13): warning CS8794: An expression of type 'C' always matches the provided pattern.
                 //         if (x is null or _)
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is null or _").WithArguments("C").WithLocation(24, 13),
+                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is null or _")
+                    .WithArguments("C")
+                    .WithLocation(24, 13),
                 // (25,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // 4
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(25, 13),
                 // (30,13): warning CS8794: An expression of type 'C' always matches the provided pattern.
                 //         if (x is _ or not null)
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is _ or not null").WithArguments("C").WithLocation(30, 13),
+                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is _ or not null")
+                    .WithArguments("C")
+                    .WithLocation(30, 13),
                 // (31,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // 5
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(31, 13),
                 // (36,13): warning CS8794: An expression of type 'C' always matches the provided pattern.
                 //         if (x is _ or null)
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is _ or null").WithArguments("C").WithLocation(36, 13),
+                Diagnostic(ErrorCode.WRN_IsPatternAlways, "x is _ or null")
+                    .WithArguments("C")
+                    .WithLocation(36, 13),
                 // (37,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // 6
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(37, 13),
@@ -2258,7 +2409,7 @@ class C
                 // (67,13): warning CS8602: Dereference of a possibly null reference.
                 //             x.ToString(); // 11
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x").WithLocation(67, 13)
-                );
+            );
         }
 
         [Fact]
@@ -2266,7 +2417,7 @@ class C
         public void NestedPattern_Field_01()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 class E
 {
     public E F = new E();
@@ -2286,7 +2437,8 @@ class Test
             comp.VerifyDiagnostics(
                 // (14,9): warning CS8602: Dereference of a possibly null reference.
                 //         e.F.F.F.F.ToString();
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "e.F.F.F.F").WithLocation(14, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "e.F.F.F.F").WithLocation(14, 9)
+            );
         }
 
         [Fact]
@@ -2294,7 +2446,7 @@ class Test
         public void NestedPattern_Field_02()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 class E
 {
     public E F = new E();
@@ -2320,7 +2472,7 @@ class Test
         public void NestedPattern_Property_01()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 class E
 {
     public E P => new E();
@@ -2340,7 +2492,8 @@ class Test
             comp.VerifyDiagnostics(
                 // (14,9): warning CS8602: Dereference of a possibly null reference.
                 //         e.P.P.P.P.ToString();
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "e.P.P.P.P").WithLocation(14, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "e.P.P.P.P").WithLocation(14, 9)
+            );
         }
 
         [Fact]
@@ -2348,7 +2501,7 @@ class Test
         public void NestedPattern_Property_02()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 class E
 {
     public E P => new E();
@@ -2372,7 +2525,8 @@ class Test
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void NestedLambdaArm_DoesNotObserveStateFromOtherArms()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2384,7 +2538,9 @@ class C
         };
     }
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics(
                 // (8,29): warning CS8602: Dereference of a possibly null reference.
@@ -2396,7 +2552,8 @@ class C
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_01()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2406,7 +2563,9 @@ class C
         Func<string> a = b switch { true => () => s.ToString(), false => () => s?.ToString() };
     }
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics(
                 // (8,51): warning CS8602: Dereference of a possibly null reference.
@@ -2421,7 +2580,8 @@ class C
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_02()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2431,7 +2591,9 @@ class C
         var a = (Func<string>)(b switch { true => () => s.ToString(), false => () => s?.ToString() });
     }
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics(
                 // (8,57): warning CS8602: Dereference of a possibly null reference.
@@ -2446,7 +2608,8 @@ class C
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_03()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2456,7 +2619,9 @@ class C
         Func<object>? a = (b switch { true => s = null, false => () => s() });
     }
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics();
         }
@@ -2464,7 +2629,8 @@ class C
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_04()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2474,7 +2640,9 @@ class C
         Func<object>? a = (b switch { true => () => s(), false => s = null });
     }
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics();
         }
@@ -2482,7 +2650,8 @@ class C
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_05()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C
 {
     static void M(bool b)
@@ -2495,25 +2664,32 @@ class C
         };
     }
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics(
                 // (9,21): error CS1660: Cannot convert lambda expression to type 'object' because it is not a delegate type
                 //             true => () => s.ToString(),
-                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "() => s.ToString()").WithArguments("lambda expression", "object").WithLocation(9, 21),
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "() => s.ToString()")
+                    .WithArguments("lambda expression", "object")
+                    .WithLocation(9, 21),
                 // (9,27): warning CS8602: Dereference of a possibly null reference.
                 //             true => () => s.ToString(),
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(9, 27),
                 // (10,22): error CS1660: Cannot convert lambda expression to type 'object' because it is not a delegate type
                 //             false => () => s?.ToString()
-                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "() => s?.ToString()").WithArguments("lambda expression", "object").WithLocation(10, 22)
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "() => s?.ToString()")
+                    .WithArguments("lambda expression", "object")
+                    .WithLocation(10, 22)
             );
         }
 
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_06()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2530,7 +2706,9 @@ class C
 
     static T M1<T>(T t1, Func<T> t2) => t1;
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics(
                 // (11,34): warning CS8602: Dereference of a possibly null reference.
@@ -2545,7 +2723,8 @@ class C
         [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461")]
         public void TargetTypedSwitch_07()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 interface I {}
 class A : I {}
 class B : I {}
@@ -2558,26 +2737,40 @@ class C
 
     static T M1<T>(T t1, T t2) => t1;
 }
-", options: WithNullableEnable());
+",
+                options: WithNullableEnable()
+            );
 
             comp.VerifyDiagnostics(
                 // (9,15): warning CS8604: Possible null reference argument for parameter 't2' in 'I C.M1<I>(I t1, I t2)'.
                 //         M1(i, @bool switch { true => a, false => b }).ToString();
-                Diagnostic(ErrorCode.WRN_NullReferenceArgument, "@bool switch { true => a, false => b }").WithArguments("t2", "I C.M1<I>(I t1, I t2)").WithLocation(9, 15)
+                Diagnostic(
+                        ErrorCode.WRN_NullReferenceArgument,
+                        "@bool switch { true => a, false => b }"
+                    )
+                    .WithArguments("t2", "I C.M1<I>(I t1, I t2)")
+                    .WithLocation(9, 15)
             );
         }
 
-        [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461"), WorkItem(49735, "https://github.com/dotnet/roslyn/issues/49735")]
+        [
+            Fact,
+            WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461"),
+            WorkItem(49735, "https://github.com/dotnet/roslyn/issues/49735")
+        ]
         public void TargetTypedSwitch_08()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 C? c = """".Length switch { > 0 => new A(), _ => new B() };
 c.ToString();
 
 class C { }
 class A { public static implicit operator C?(A a) => null; }
 class B { public static implicit operator C?(B b) => null; }
-", options: WithNullableEnable(TestOptions.ReleaseExe));
+",
+                options: WithNullableEnable(TestOptions.ReleaseExe)
+            );
 
             comp.VerifyDiagnostics(
                 // (3,1): warning CS8602: Dereference of a possibly null reference.
@@ -2586,32 +2779,46 @@ class B { public static implicit operator C?(B b) => null; }
             );
         }
 
-        [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461"), WorkItem(49735, "https://github.com/dotnet/roslyn/issues/49735")]
+        [
+            Fact,
+            WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461"),
+            WorkItem(49735, "https://github.com/dotnet/roslyn/issues/49735")
+        ]
         public void TargetTypedSwitch_09()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 C? c = true switch { true => new A(), false => new B() };
 c.ToString();
 
 class C { }
 class A { public static implicit operator C(A a) => new C(); }
 class B { public static implicit operator C?(B b) => null; }
-", options: WithNullableEnable(TestOptions.ReleaseExe));
+",
+                options: WithNullableEnable(TestOptions.ReleaseExe)
+            );
 
             comp.VerifyDiagnostics();
         }
 
-        [Fact, WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461"), WorkItem(49735, "https://github.com/dotnet/roslyn/issues/49735")]
+        [
+            Fact,
+            WorkItem(51461, "https://github.com/dotnet/roslyn/issues/51461"),
+            WorkItem(49735, "https://github.com/dotnet/roslyn/issues/49735")
+        ]
         public void TargetTypedSwitch_10()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 C? c = false switch { true => new A(), false => new B() };
 c.ToString();
 
 class C { }
 class A { public static implicit operator C?(A a) => null; }
 class B { public static implicit operator C(B b) => new C(); }
-", options: WithNullableEnable(TestOptions.ReleaseExe));
+",
+                options: WithNullableEnable(TestOptions.ReleaseExe)
+            );
 
             comp.VerifyDiagnostics();
         }

@@ -27,10 +27,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public void TestNameMetadataIsPresent(Type providerType)
         {
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
-            var exportedProviders = FindComposedPartsWithExport(configuration, providerType.FullName).ToArray();
+            var exportedProviders = FindComposedPartsWithExport(
+                    configuration,
+                    providerType.FullName
+                )
+                .ToArray();
 
             var failureMessage = new StringBuilder();
-            failureMessage.AppendLine($"The following {providerType.Name}s exported without Name metadata:");
+            failureMessage.AppendLine(
+                $"The following {providerType.Name}s exported without Name metadata:"
+            );
             var passLength = failureMessage.Length;
 
             foreach (var (providerPart, providerExport) in exportedProviders)
@@ -54,14 +60,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public void TestNameMetadataIsUniqueAmongProviders(Type providerType, string language)
         {
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
-            var exportedProviders = FindComposedPartsWithExportForLanguage(configuration, providerType.FullName, language);
+            var exportedProviders = FindComposedPartsWithExportForLanguage(
+                configuration,
+                providerType.FullName,
+                language
+            );
 
             var failureMessage = new StringBuilder();
-            failureMessage.AppendLine($"The following {providerType.Name}s are exported for {language} without unique Name metadata:");
+            failureMessage.AppendLine(
+                $"The following {providerType.Name}s are exported for {language} without unique Name metadata:"
+            );
             var passLength = failureMessage.Length;
 
             var exportedProvidersByName = exportedProviders.GroupBy(
-                exportedProvider => TryGetExportName(exportedProvider.Export, out var name) ? name : string.Empty);
+                exportedProvider =>
+                    TryGetExportName(exportedProvider.Export, out var name) ? name : string.Empty
+            );
 
             foreach (var namedGroup in exportedProvidersByName)
             {
@@ -75,8 +89,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     continue;
                 }
 
-                var providerNames = string.Join(", ", namedGroup.Select(exportedProvider => exportedProvider.Part.Definition.Type.FullName));
-                failureMessage.AppendLine($"'{namedGroup.Key}' is used by the following providers: {providerNames}");
+                var providerNames = string.Join(
+                    ", ",
+                    namedGroup.Select(
+                        exportedProvider => exportedProvider.Part.Definition.Type.FullName
+                    )
+                );
+                failureMessage.AppendLine(
+                    $"'{namedGroup.Key}' is used by the following providers: {providerNames}"
+                );
             }
 
             Assert.True(failureMessage.Length == passLength, failureMessage.ToString());
@@ -84,24 +105,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         [Theory]
         [InlineData(typeof(CodeFixProvider), typeof(PredefinedCodeFixProviderNames))]
-        [InlineData(typeof(CodeRefactoringProvider), typeof(PredefinedCodeRefactoringProviderNames))]
-        [InlineData(typeof(IConfigurationFixProvider), typeof(PredefinedConfigurationFixProviderNames))]
+        [InlineData(
+            typeof(CodeRefactoringProvider),
+            typeof(PredefinedCodeRefactoringProviderNames)
+        )]
+        [InlineData(
+            typeof(IConfigurationFixProvider),
+            typeof(PredefinedConfigurationFixProviderNames)
+        )]
         public void TestNameMetadataIsInPredefinedNames(Type providerType, Type predefinedNamesType)
         {
             var predefinedNames = GetPredefinedNamesFromType(predefinedNamesType);
 
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
-            var exportedProviders = FindComposedPartsWithExport(configuration, providerType.FullName).ToArray();
+            var exportedProviders = FindComposedPartsWithExport(
+                    configuration,
+                    providerType.FullName
+                )
+                .ToArray();
 
             var failureMessage = new StringBuilder();
-            failureMessage.AppendLine($"The following providers were exported with a Name not present in Predefined{providerType.Name}Names:");
+            failureMessage.AppendLine(
+                $"The following providers were exported with a Name not present in Predefined{providerType.Name}Names:"
+            );
             var passLength = failureMessage.Length;
 
             foreach (var (providerPart, providerExport) in exportedProviders)
             {
-                if (TryGetExportName(providerExport, out var name)
-                    && !predefinedNames.Contains(name))
-                {
+                if (
+                    TryGetExportName(providerExport, out var name)
+                    && !predefinedNames.Contains(name)
+                ) {
                     failureMessage.AppendLine(providerPart.Definition.Type.FullName);
                 }
             }
@@ -111,20 +145,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         [Theory]
         [InlineData(typeof(CodeFixProvider), typeof(PredefinedCodeFixProviderNames))]
-        [InlineData(typeof(CodeRefactoringProvider), typeof(PredefinedCodeRefactoringProviderNames))]
-        [InlineData(typeof(IConfigurationFixProvider), typeof(PredefinedConfigurationFixProviderNames))]
-        public void TestAllPredefinedNamesUsedAsNameMetadata(Type providerType, Type predefinedNamesType)
-        {
+        [InlineData(
+            typeof(CodeRefactoringProvider),
+            typeof(PredefinedCodeRefactoringProviderNames)
+        )]
+        [InlineData(
+            typeof(IConfigurationFixProvider),
+            typeof(PredefinedConfigurationFixProviderNames)
+        )]
+        public void TestAllPredefinedNamesUsedAsNameMetadata(
+            Type providerType,
+            Type predefinedNamesType
+        ) {
             var predefinedNames = GetPredefinedNamesFromType(predefinedNamesType);
 
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
-            var exportedProviders = FindComposedPartsWithExport(configuration, providerType.FullName);
-            var providerNames = exportedProviders
-                .Select(exportedProvider => TryGetExportName(exportedProvider.Export, out var name) ? name : string.Empty)
+            var exportedProviders = FindComposedPartsWithExport(
+                configuration,
+                providerType.FullName
+            );
+            var providerNames = exportedProviders.Select(
+                    exportedProvider =>
+                        TryGetExportName(exportedProvider.Export, out var name)
+                            ? name
+                            : string.Empty
+                )
                 .ToImmutableHashSet();
 
             var failureMessage = new StringBuilder();
-            failureMessage.AppendLine($"The following Predefined{providerType.Name}Names are not used as Name metadata:");
+            failureMessage.AppendLine(
+                $"The following Predefined{providerType.Name}Names are not used as Name metadata:"
+            );
             var passLength = failureMessage.Length;
 
             var unusedPredefinedNames = predefinedNames.Except(providerNames);
@@ -136,11 +187,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             Assert.True(failureMessage.Length == passLength, failureMessage.ToString());
         }
 
-        private static bool TryGetExportName(ExportDefinition export, [NotNullWhen(returnValue: true)] out string? name)
-        {
-            if (!export.Metadata.TryGetValue("Name", out var nameObj)
-                || nameObj is string { Length: 0 })
-            {
+        private static bool TryGetExportName(
+            ExportDefinition export,
+            [NotNullWhen(returnValue: true)] out string? name
+        ) {
+            if (
+                !export.Metadata.TryGetValue("Name", out var nameObj)
+                || nameObj is string { Length: 0 }
+            ) {
                 name = null;
                 return false;
             }
@@ -151,7 +205,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         private static ImmutableHashSet<string> GetPredefinedNamesFromType(Type namesType)
         {
-            return namesType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public)
+            return namesType.GetFields(
+                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
+                )
                 .Where(field => field.FieldType == typeof(string))
                 .Select(field => (string)field.GetValue(null))
                 .ToImmutableHashSet();
@@ -159,12 +215,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         private static IEnumerable<(ComposedPart Part, ExportDefinition Export)> FindComposedPartsWithExport(
             CompositionConfiguration configuration,
-            string exportedTypeName)
-        {
+            string exportedTypeName
+        ) {
             foreach (var part in configuration.Parts)
             {
-                var export = part.Definition.ExportedTypes
-                    .FirstOrDefault(exportedType => exportedTypeName.Equals(exportedType.ContractName));
+                var export = part.Definition.ExportedTypes.FirstOrDefault(
+                    exportedType => exportedTypeName.Equals(exportedType.ContractName)
+                );
 
                 if (export != null)
                 {
@@ -176,8 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         private static IEnumerable<(ComposedPart Part, ExportDefinition Export)> FindComposedPartsWithExportForLanguage(
             CompositionConfiguration configuration,
             string exportedTypeName,
-            string language)
-        {
+            string language
+        ) {
             return FindComposedPartsWithExport(configuration, exportedTypeName)
                 .Where(part => ((string[])part.Export.Metadata["Languages"]).Contains(language));
         }

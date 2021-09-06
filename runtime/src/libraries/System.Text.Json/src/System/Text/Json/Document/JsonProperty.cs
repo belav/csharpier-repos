@@ -135,7 +135,7 @@ namespace System.Text.Json
             return Value.GetPropertyRawText();
         }
 
-        private string DebuggerDisplay
-            => Value.ValueKind == JsonValueKind.Undefined ? "<Undefined>" : $"\"{ToString()}\"";
+        private string DebuggerDisplay =>
+            Value.ValueKind == JsonValueKind.Undefined ? "<Undefined>" : $"\"{ToString()}\"";
     }
 }

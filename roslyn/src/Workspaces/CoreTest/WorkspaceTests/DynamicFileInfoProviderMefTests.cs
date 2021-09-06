@@ -29,25 +29,35 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestInvalidArgument1()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new ExportDynamicFileInfoProviderAttribute();
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new ExportDynamicFileInfoProviderAttribute();
+                }
+            );
         }
 
         [Fact]
         public void TestInvalidArgument2()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new FileExtensionsMetadata();
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new FileExtensionsMetadata();
+                }
+            );
         }
 
-        internal static Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata> GetDynamicFileInfoProvider()
+        internal static Lazy<
+            IDynamicFileInfoProvider,
+            FileExtensionsMetadata
+        > GetDynamicFileInfoProvider()
         {
-            var composition = TestComposition.Empty.AddParts(typeof(TestDynamicFileInfoProviderThatProducesNoFiles));
-            return composition.ExportProviderFactory.CreateExportProvider().GetExport<IDynamicFileInfoProvider, FileExtensionsMetadata>();
+            var composition = TestComposition.Empty.AddParts(
+                typeof(TestDynamicFileInfoProviderThatProducesNoFiles)
+            );
+            return composition.ExportProviderFactory.CreateExportProvider()
+                .GetExport<IDynamicFileInfoProvider, FileExtensionsMetadata>();
         }
     }
 }

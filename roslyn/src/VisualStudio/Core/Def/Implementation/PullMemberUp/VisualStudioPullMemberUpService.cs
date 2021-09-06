@@ -1,6 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.  
+// See the LICENSE file in the project root for more information.
 
 #nullable disable
 
@@ -28,35 +28,54 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioPullMemberUpService(IGlyphService glyphService, IWaitIndicator waitIndicator)
-        {
+        public VisualStudioPullMemberUpService(
+            IGlyphService glyphService,
+            IWaitIndicator waitIndicator
+        ) {
             _glyphService = glyphService;
             _waitIndicator = waitIndicator;
         }
 
-        public PullMembersUpOptions GetPullMemberUpOptions(Document document, ISymbol selectedMember)
-        {
-            var membersInType = selectedMember.ContainingType.GetMembers().
-                WhereAsArray(member => MemberAndDestinationValidator.IsMemberValid(member));
-            var memberViewModels = membersInType
-                .SelectAsArray(member =>
+        public PullMembersUpOptions GetPullMemberUpOptions(
+            Document document,
+            ISymbol selectedMember
+        ) {
+            var membersInType = selectedMember.ContainingType.GetMembers()
+                .WhereAsArray(member => MemberAndDestinationValidator.IsMemberValid(member));
+            var memberViewModels = membersInType.SelectAsArray(
+                member =>
                     new PullMemberUpSymbolViewModel(member, _glyphService)
                     {
                         // The member user selected will be checked at the beginning.
-                        IsChecked = SymbolEquivalenceComparer.Instance.Equals(selectedMember, member),
+                        IsChecked = SymbolEquivalenceComparer.Instance.Equals(
+                            selectedMember,
+                            member
+                        ),
                         MakeAbstract = false,
-                        IsMakeAbstractCheckable = !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
+                        IsMakeAbstractCheckable =
+                            !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
                         IsCheckable = true
-                    });
+                    }
+            );
 
             using var cancellationTokenSource = new CancellationTokenSource();
             var baseTypeRootViewModel = BaseTypeTreeNodeViewModel.CreateBaseTypeTree(
                 _glyphService,
                 document.Project.Solution,
                 selectedMember.ContainingType,
-                cancellationTokenSource.Token);
-            var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(membersInType, document.Project, cancellationTokenSource.Token);
-            var viewModel = new PullMemberUpDialogViewModel(_waitIndicator, memberViewModels, baseTypeRootViewModel, memberToDependentsMap);
+                cancellationTokenSource.Token
+            );
+            var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(
+                membersInType,
+                document.Project,
+                cancellationTokenSource.Token
+            );
+            var viewModel = new PullMemberUpDialogViewModel(
+                _waitIndicator,
+                memberViewModels,
+                baseTypeRootViewModel,
+                memberToDependentsMap
+            );
             var dialog = new PullMemberUpDialog(viewModel);
             var result = dialog.ShowModal();
 

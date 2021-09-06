@@ -8,8 +8,10 @@ namespace Microsoft.VisualBasic
 {
     internal sealed partial class VBCodeGenerator
     {
-        protected override CompilerResults FromFileBatch(CompilerParameters options, string[] fileNames)
-        {
+        protected override CompilerResults FromFileBatch(
+            CompilerParameters options,
+            string[] fileNames
+        ) {
             throw new PlatformNotSupportedException();
         }
     }

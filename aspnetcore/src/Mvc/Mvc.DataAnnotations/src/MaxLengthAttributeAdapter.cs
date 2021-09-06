@@ -13,8 +13,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     {
         private readonly string _max;
 
-        public MaxLengthAttributeAdapter(MaxLengthAttribute attribute, IStringLocalizer? stringLocalizer)
-            : base(attribute, stringLocalizer)
+        public MaxLengthAttributeAdapter(
+            MaxLengthAttribute attribute,
+            IStringLocalizer? stringLocalizer
+        ) : base(attribute, stringLocalizer)
         {
             _max = Attribute.Length.ToString(CultureInfo.InvariantCulture);
         }
@@ -42,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return GetErrorMessage(
                 validationContext.ModelMetadata,
                 validationContext.ModelMetadata.GetDisplayName(),
-                Attribute.Length);
+                Attribute.Length
+            );
         }
     }
 }

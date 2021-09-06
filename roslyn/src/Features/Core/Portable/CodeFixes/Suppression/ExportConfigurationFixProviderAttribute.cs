@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         public ExportConfigurationFixProviderAttribute(
             string name,
-            params string[] languages)
-            : base(typeof(IConfigurationFixProvider))
+            params string[] languages
+        ) : base(typeof(IConfigurationFixProvider))
         {
             if (languages == null)
             {

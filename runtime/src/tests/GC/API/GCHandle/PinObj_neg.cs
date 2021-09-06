@@ -32,7 +32,6 @@ public class Test
             return 2;
         }
 
-
         Console.WriteLine("Test failed!");
         return 1;
     }

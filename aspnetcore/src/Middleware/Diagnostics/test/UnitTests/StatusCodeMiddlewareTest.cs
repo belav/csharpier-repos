@@ -22,38 +22,58 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             var expectedStatusCode = 432;
             var destination = "/location";
-            using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+            using var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseStatusCodePagesWithRedirects("/errorPage?id={0}");
+                        webHostBuilder.UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseStatusCodePagesWithRedirects("/errorPage?id={0}");
 
-                        app.Map(destination, (innerAppBuilder) =>
-                        {
-                            innerAppBuilder.Run((httpContext) =>
-                            {
-                                httpContext.Response.StatusCode = expectedStatusCode;
-                                return Task.FromResult(1);
-                            });
-                        });
+                                    app.Map(
+                                        destination,
+                                        (innerAppBuilder) =>
+                                        {
+                                            innerAppBuilder.Run(
+                                                (httpContext) =>
+                                                {
+                                                    httpContext.Response.StatusCode =
+                                                        expectedStatusCode;
+                                                    return Task.FromResult(1);
+                                                }
+                                            );
+                                        }
+                                    );
 
-                        app.Map("/errorPage", (innerAppBuilder) =>
-                        {
-                            innerAppBuilder.Run(async (httpContext) =>
-                            {
-                                await httpContext.Response.WriteAsync(httpContext.Request.QueryString.Value);
-                            });
-                        });
+                                    app.Map(
+                                        "/errorPage",
+                                        (innerAppBuilder) =>
+                                        {
+                                            innerAppBuilder.Run(
+                                                async (httpContext) =>
+                                                {
+                                                    await httpContext.Response.WriteAsync(
+                                                        httpContext.Request.QueryString.Value
+                                                    );
+                                                }
+                                            );
+                                        }
+                                    );
 
-                        app.Run((context) =>
-                        {
-                            throw new InvalidOperationException($"Invalid input provided. {context.Request.Path}");
-                        });
-                    });
-                }).Build();
+                                    app.Run(
+                                        (context) =>
+                                        {
+                                            throw new InvalidOperationException(
+                                                $"Invalid input provided. {context.Request.Path}"
+                                            );
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -63,7 +83,10 @@ namespace Microsoft.AspNetCore.Diagnostics
             var client = server.CreateClient();
             var response = await client.GetAsync(destination);
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
-            Assert.Equal(expectedUri, response.Headers.First(s => s.Key == "Location").Value.First());
+            Assert.Equal(
+                expectedUri,
+                response.Headers.First(s => s.Key == "Location").Value.First()
+            );
 
             response = await client.GetAsync(expectedUri);
             var content = await response.Content.ReadAsStringAsync();
@@ -76,52 +99,77 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             var expectedStatusCode = 432;
             var destination = "/location";
-            using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+            using var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.Use(async (context, next) =>
-                        {
-                            var beforeNext = context.Request.QueryString;
-                            await next();
-                            var afterNext = context.Request.QueryString;
+                        webHostBuilder.UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Use(
+                                        async (context, next) =>
+                                        {
+                                            var beforeNext = context.Request.QueryString;
+                                            await next();
+                                            var afterNext = context.Request.QueryString;
 
-                            Assert.Equal(beforeNext, afterNext);
-                        });
-                        app.UseStatusCodePagesWithReExecute(pathFormat: "/errorPage", queryFormat: "?id={0}");
+                                            Assert.Equal(beforeNext, afterNext);
+                                        }
+                                    );
+                                    app.UseStatusCodePagesWithReExecute(
+                                        pathFormat: "/errorPage",
+                                        queryFormat: "?id={0}"
+                                    );
 
-                        app.Map(destination, (innerAppBuilder) =>
-                        {
-                            innerAppBuilder.Run((httpContext) =>
-                            {
-                                httpContext.Response.StatusCode = expectedStatusCode;
-                                return Task.FromResult(1);
-                            });
-                        });
+                                    app.Map(
+                                        destination,
+                                        (innerAppBuilder) =>
+                                        {
+                                            innerAppBuilder.Run(
+                                                (httpContext) =>
+                                                {
+                                                    httpContext.Response.StatusCode =
+                                                        expectedStatusCode;
+                                                    return Task.FromResult(1);
+                                                }
+                                            );
+                                        }
+                                    );
 
-                        app.Map("/errorPage", (innerAppBuilder) =>
-                        {
-                            innerAppBuilder.Run(async (httpContext) =>
-                            {
-                                var statusCodeReExecuteFeature = httpContext.Features.Get<IStatusCodeReExecuteFeature>();
-                                await httpContext.Response.WriteAsync(
-                                    httpContext.Request.QueryString.Value
-                                    + ", "
-                                    + statusCodeReExecuteFeature.OriginalPath
-                                    + ", "
-                                    + statusCodeReExecuteFeature.OriginalQueryString);
-                            });
-                        });
+                                    app.Map(
+                                        "/errorPage",
+                                        (innerAppBuilder) =>
+                                        {
+                                            innerAppBuilder.Run(
+                                                async (httpContext) =>
+                                                {
+                                                    var statusCodeReExecuteFeature =
+                                                        httpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                                                    await httpContext.Response.WriteAsync(
+                                                        httpContext.Request.QueryString.Value
+                                                            + ", "
+                                                            + statusCodeReExecuteFeature.OriginalPath
+                                                            + ", "
+                                                            + statusCodeReExecuteFeature.OriginalQueryString
+                                                    );
+                                                }
+                                            );
+                                        }
+                                    );
 
-                        app.Run((context) =>
-                        {
-                            throw new InvalidOperationException("Invalid input provided.");
-                        });
-                    });
-                }).Build();
+                                    app.Run(
+                                        (context) =>
+                                        {
+                                            throw new InvalidOperationException(
+                                                "Invalid input provided."
+                                            );
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -137,53 +185,84 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             var expectedStatusCode = 432;
             var destination = "/location";
-            using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+            using var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseStatusCodePagesWithReExecute(pathFormat: "/errorPage", queryFormat: "?id={0}");
+                        webHostBuilder.UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseStatusCodePagesWithReExecute(
+                                        pathFormat: "/errorPage",
+                                        queryFormat: "?id={0}"
+                                    );
 
-                        app.Use((context, next) =>
-                        {
-                            Assert.Empty(context.Request.RouteValues);
-                            Assert.Null(context.GetEndpoint());
-                            return next();
-                        });
+                                    app.Use(
+                                        (context, next) =>
+                                        {
+                                            Assert.Empty(context.Request.RouteValues);
+                                            Assert.Null(context.GetEndpoint());
+                                            return next();
+                                        }
+                                    );
 
-                        app.Map(destination, (innerAppBuilder) =>
-                        {
-                            innerAppBuilder.Run((httpContext) =>
-                            {
-                                httpContext.SetEndpoint(new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test"));
-                                httpContext.Request.RouteValues["John"] = "Doe";
-                                httpContext.Response.StatusCode = expectedStatusCode;
-                                return Task.CompletedTask;
-                            });
-                        });
+                                    app.Map(
+                                        destination,
+                                        (innerAppBuilder) =>
+                                        {
+                                            innerAppBuilder.Run(
+                                                (httpContext) =>
+                                                {
+                                                    httpContext.SetEndpoint(
+                                                        new Endpoint(
+                                                            (_) => Task.CompletedTask,
+                                                            new EndpointMetadataCollection(),
+                                                            "Test"
+                                                        )
+                                                    );
+                                                    httpContext.Request.RouteValues["John"] = "Doe";
+                                                    httpContext.Response.StatusCode =
+                                                        expectedStatusCode;
+                                                    return Task.CompletedTask;
+                                                }
+                                            );
+                                        }
+                                    );
 
-                        app.Map("/errorPage", (innerAppBuilder) =>
-                        {
-                            innerAppBuilder.Run(async (httpContext) =>
-                            {
-                                var statusCodeReExecuteFeature = httpContext.Features.Get<IStatusCodeReExecuteFeature>();
-                                await httpContext.Response.WriteAsync(
-                                    httpContext.Request.QueryString.Value
-                                    + ", "
-                                    + statusCodeReExecuteFeature.OriginalPath
-                                    + ", "
-                                    + statusCodeReExecuteFeature.OriginalQueryString);
-                            });
-                        });
+                                    app.Map(
+                                        "/errorPage",
+                                        (innerAppBuilder) =>
+                                        {
+                                            innerAppBuilder.Run(
+                                                async (httpContext) =>
+                                                {
+                                                    var statusCodeReExecuteFeature =
+                                                        httpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                                                    await httpContext.Response.WriteAsync(
+                                                        httpContext.Request.QueryString.Value
+                                                            + ", "
+                                                            + statusCodeReExecuteFeature.OriginalPath
+                                                            + ", "
+                                                            + statusCodeReExecuteFeature.OriginalQueryString
+                                                    );
+                                                }
+                                            );
+                                        }
+                                    );
 
-                        app.Run((context) =>
-                        {
-                            throw new InvalidOperationException("Invalid input provided.");
-                        });
-                    });
-                }).Build();
+                                    app.Run(
+                                        (context) =>
+                                        {
+                                            throw new InvalidOperationException(
+                                                "Invalid input provided."
+                                            );
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 

@@ -34,10 +34,7 @@ namespace System.Xml.Schema
 
         public bool this[int index]
         {
-            get
-            {
-                return Get(index);
-            }
+            get { return Get(index); }
         }
 
         public void Clear()
@@ -55,7 +52,6 @@ namespace System.Xml.Schema
             EnsureLength(nBitSlot + 1);
             _bits[nBitSlot] |= (uint)1 << (index & bitSlotMask);
         }
-
 
         public bool Get(int index)
         {
@@ -123,7 +119,6 @@ namespace System.Xml.Schema
             }
         }
 
-
         public void Or(BitSet other)
         {
             if (this == other)
@@ -147,7 +142,6 @@ namespace System.Xml.Schema
             }
             return (int)((h >> 32) ^ h);
         }
-
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
@@ -199,7 +193,6 @@ namespace System.Xml.Schema
         {
             return new BitSet(_count, (uint[])_bits.Clone());
         }
-
 
         public bool IsEmpty
         {

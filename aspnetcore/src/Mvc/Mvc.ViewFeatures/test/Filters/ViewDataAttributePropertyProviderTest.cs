@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 {
                     Assert.Equal(nameof(BaseController.BaseProperty), property.PropertyInfo.Name);
                     Assert.Equal(nameof(BaseController.BaseProperty), property.Key);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -53,8 +54,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             // Assert
             Assert.Collection(
                 result.OrderBy(p => p.Key),
-                property => Assert.Equal(nameof(BaseController.BaseProperty), property.PropertyInfo.Name),
-                property => Assert.Equal(nameof(DerivedController.DerivedProperty), property.PropertyInfo.Name));
+                property =>
+                    Assert.Equal(nameof(BaseController.BaseProperty), property.PropertyInfo.Name),
+                property =>
+                    Assert.Equal(
+                        nameof(DerivedController.DerivedProperty),
+                        property.PropertyInfo.Name
+                    )
+            );
         }
 
         [Fact]
@@ -71,9 +78,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 result.OrderBy(p => p.Key),
                 property =>
                 {
-                    Assert.Equal(nameof(PropertyWithKeyController.Different), property.PropertyInfo.Name);
+                    Assert.Equal(
+                        nameof(PropertyWithKeyController.Different),
+                        property.PropertyInfo.Name
+                    );
                     Assert.Equal("Test", property.Key);
-                });
+                }
+            );
         }
 
         public class TestController_NoViewDataProperties

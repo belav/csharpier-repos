@@ -13,15 +13,24 @@ namespace System.DirectoryServices.AccountManagement.Tests
     public class AccountManagementTests
     {
         internal static bool IsLdapConfigurationExist => LdapConfiguration.Configuration != null;
-        internal static bool IsActiveDirectoryServer => IsLdapConfigurationExist && LdapConfiguration.Configuration.IsActiveDirectoryServer;
-        internal static bool IsDomainJoinedClient => !Environment.MachineName.Equals(Environment.UserDomainName, StringComparison.OrdinalIgnoreCase);
+        internal static bool IsActiveDirectoryServer =>
+            IsLdapConfigurationExist && LdapConfiguration.Configuration.IsActiveDirectoryServer;
+        internal static bool IsDomainJoinedClient =>
+            !Environment.MachineName.Equals(
+                Environment.UserDomainName,
+                StringComparison.OrdinalIgnoreCase
+            );
 
         [ConditionalFact(nameof(IsActiveDirectoryServer))]
         public void TestCurrentUser()
         {
             using (PrincipalContext context = DomainContext)
-            using (UserPrincipal p = FindUser(LdapConfiguration.Configuration.UserNameWithNoDomain, context))
-            {
+            using (
+                UserPrincipal p = FindUser(
+                    LdapConfiguration.Configuration.UserNameWithNoDomain,
+                    context
+                )
+            ) {
                 Assert.NotNull(p);
                 Assert.Equal(LdapConfiguration.Configuration.UserNameWithNoDomain, p.Name);
             }
@@ -31,7 +40,12 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public void TestCurrentUserContext()
         {
             using (PrincipalContext context = DomainContext)
-            using (UserPrincipal p = FindUser(LdapConfiguration.Configuration.UserNameWithNoDomain, context))
+            using (
+                UserPrincipal p = FindUser(
+                    LdapConfiguration.Configuration.UserNameWithNoDomain,
+                    context
+                )
+            )
             using (UserPrincipal cu = UserPrincipal.Current)
             {
                 Assert.NotEqual(cu.Context.Name, p.Context.Name);
@@ -42,8 +56,12 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public void TestCurrentUserUsingSearchFilter()
         {
             using (PrincipalContext context = DomainContext)
-            using (UserPrincipal p = FindUserUsingFilter(LdapConfiguration.Configuration.UserNameWithNoDomain, context))
-            {
+            using (
+                UserPrincipal p = FindUserUsingFilter(
+                    LdapConfiguration.Configuration.UserNameWithNoDomain,
+                    context
+                )
+            ) {
                 Assert.NotNull(p);
                 Assert.Equal(LdapConfiguration.Configuration.UserNameWithNoDomain, p.Name);
             }
@@ -92,6 +110,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     ValidateUserUsingPrincipal(context, p3);
                 }
             }
+
             finally
             {
                 DeleteUser(u1.Name);
@@ -131,6 +150,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     ValidateGroupUsingPrincipal(context, p3);
                 }
             }
+
             finally
             {
                 DeleteGroup(gd1.Name);
@@ -180,6 +200,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     Assert.False(group.Members.Contains(user));
                 }
             }
+
             finally
             {
                 DeleteUser(u1.Name);
@@ -200,8 +221,14 @@ namespace System.DirectoryServices.AccountManagement.Tests
             {
                 using (PrincipalContext context = DomainContext)
                 {
-                    using (UserPrincipal up = FindUser(u1.Name, context)) { Assert.Null(up); }
-                    using (GroupPrincipal gp = FindGroup(g1.Name, context)) { Assert.Null(gp); }
+                    using (UserPrincipal up = FindUser(u1.Name, context))
+                    {
+                        Assert.Null(up);
+                    }
+                    using (GroupPrincipal gp = FindGroup(g1.Name, context))
+                    {
+                        Assert.Null(gp);
+                    }
 
                     using (UserPrincipal user = CreateUser(context, u1))
                     using (GroupPrincipal group = CreateGroup(context, g1))
@@ -218,10 +245,17 @@ namespace System.DirectoryServices.AccountManagement.Tests
                         }
                     }
 
-                    using (UserPrincipal up = FindUser(u1.Name, context)) { Assert.Null(up); }
-                    using (GroupPrincipal gp = FindGroup(g1.Name, context)) { Assert.Null(gp); }
+                    using (UserPrincipal up = FindUser(u1.Name, context))
+                    {
+                        Assert.Null(up);
+                    }
+                    using (GroupPrincipal gp = FindGroup(g1.Name, context))
+                    {
+                        Assert.Null(gp);
+                    }
                 }
             }
+
             finally
             {
                 DeleteUser(u1.Name);
@@ -240,10 +274,30 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
             try
             {
-                Assert.Throws<InvalidEnumArgumentException>(() => new PrincipalContext((ContextType) 768, null, null, null));
-                Assert.Throws<PrincipalServerDownException>(() => new PrincipalContext(ContextType.Domain, "InvalidDomainName", null, null));
-                Assert.Throws<ArgumentException>(() => new PrincipalContext(ContextType.Domain, LdapConfiguration.Configuration.ServerName, "InvalidTestUserName", null));
-                Assert.Throws<ArgumentException>(() => new PrincipalContext(ContextType.Domain, LdapConfiguration.Configuration.ServerName, LdapConfiguration.Configuration.UserName, null));
+                Assert.Throws<InvalidEnumArgumentException>(
+                    () => new PrincipalContext((ContextType)768, null, null, null)
+                );
+                Assert.Throws<PrincipalServerDownException>(
+                    () => new PrincipalContext(ContextType.Domain, "InvalidDomainName", null, null)
+                );
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        new PrincipalContext(
+                            ContextType.Domain,
+                            LdapConfiguration.Configuration.ServerName,
+                            "InvalidTestUserName",
+                            null
+                        )
+                );
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        new PrincipalContext(
+                            ContextType.Domain,
+                            LdapConfiguration.Configuration.ServerName,
+                            LdapConfiguration.Configuration.UserName,
+                            null
+                        )
+                );
                 Assert.Throws<ArgumentException>(() => new UserPrincipal(null));
                 Assert.Throws<ArgumentException>(() => new GroupPrincipal(null));
 
@@ -257,7 +311,9 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
                         group.Members.Add(context, IdentityType.Name, user.Name);
                         group.Save();
-                        Assert.Throws<PrincipalExistsException>(() => group.Members.Add(context, IdentityType.Name, user.Name));
+                        Assert.Throws<PrincipalExistsException>(
+                            () => group.Members.Add(context, IdentityType.Name, user.Name)
+                        );
                         group.Members.Remove(context, IdentityType.Name, user.Name);
                         group.Save();
 
@@ -271,6 +327,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     }
                 }
             }
+
             finally
             {
                 DeleteUser(u1.Name);
@@ -289,8 +346,9 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     PrincipalSearcher ps = new PrincipalSearcher();
                     ps.QueryFilter = cp;
                     using (ComputerPrincipal r1 = ps.FindOne() as ComputerPrincipal)
-                    using (ComputerPrincipal r2 = ComputerPrincipal.FindByIdentity(context, r1.Name))
-                    {
+                    using (
+                        ComputerPrincipal r2 = ComputerPrincipal.FindByIdentity(context, r1.Name)
+                    ) {
                         Assert.Equal(r2.AccountExpirationDate, r1.AccountExpirationDate);
                         Assert.Equal(r2.Description, r1.Description);
                         Assert.Equal(r2.DisplayName, r1.DisplayName);
@@ -321,18 +379,31 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 using (UserPrincipal user = CreateUser(context, u1))
                 using (GroupPrincipal group = CreateGroup(context, g1))
                 {
-                    using (UserPrincipal up = FindUser(u1.Name, context)) { Assert.Equal(user.DisplayName, up.DisplayName); }
-                    using (GroupPrincipal gp = FindGroup(g1.Name, context)) { Assert.Equal(group.DisplayName, gp.DisplayName); }
+                    using (UserPrincipal up = FindUser(u1.Name, context))
+                    {
+                        Assert.Equal(user.DisplayName, up.DisplayName);
+                    }
+                    using (GroupPrincipal gp = FindGroup(g1.Name, context))
+                    {
+                        Assert.Equal(group.DisplayName, gp.DisplayName);
+                    }
 
                     user.DisplayName = "Updated CoreFx Test Child User 4";
                     user.Save();
                     group.DisplayName = "Updated CoreFX Test Group Container 4";
                     group.Save();
 
-                    using (UserPrincipal up = FindUser(u1.Name, context)) { Assert.Equal("Updated CoreFx Test Child User 4", up.DisplayName); }
-                    using (GroupPrincipal gp = FindGroup(g1.Name, context)) { Assert.Equal("Updated CoreFX Test Group Container 4", gp.DisplayName); }
+                    using (UserPrincipal up = FindUser(u1.Name, context))
+                    {
+                        Assert.Equal("Updated CoreFx Test Child User 4", up.DisplayName);
+                    }
+                    using (GroupPrincipal gp = FindGroup(g1.Name, context))
+                    {
+                        Assert.Equal("Updated CoreFX Test Group Container 4", gp.DisplayName);
+                    }
                 }
             }
+
             finally
             {
                 DeleteUser(u1.Name);
@@ -353,12 +424,19 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 using (UserPrincipal p1 = CreateUser(context, u1))
                 {
                     Assert.True(context.ValidateCredentials(u1.Name, u1.Password));
-                    Assert.True(context.ValidateCredentials(u1.Name, u1.Password, ContextOptions.ServerBind));
+                    Assert.True(
+                        context.ValidateCredentials(u1.Name, u1.Password, ContextOptions.ServerBind)
+                    );
 
-                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(() => context.ValidateCredentials(u1.Name, "WrongPassword"));
-                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(() => context.ValidateCredentials("WrongUser", u1.Password));
+                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(
+                        () => context.ValidateCredentials(u1.Name, "WrongPassword")
+                    );
+                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(
+                        () => context.ValidateCredentials("WrongUser", u1.Password)
+                    );
                 }
             }
+
             finally
             {
                 DeleteUser(u1.Name);
@@ -374,7 +452,10 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 Assert.Equal(userData.FirstName, p.GivenName);
                 Assert.Equal(userData.LastName, p.Surname);
                 Assert.Equal(userData.DisplayName, p.DisplayName);
-                Assert.True(p.DistinguishedName.IndexOf(userData.Name, StringComparison.OrdinalIgnoreCase) >= 0);
+                Assert.True(
+                    p.DistinguishedName.IndexOf(userData.Name, StringComparison.OrdinalIgnoreCase)
+                        >= 0
+                );
                 Assert.Equal(userData.Name, p.SamAccountName);
             }
         }
@@ -388,7 +469,10 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 Assert.Equal(groupData.Description, p.Description);
                 Assert.Equal(groupData.DisplayName, p.DisplayName);
                 Assert.Equal(groupData.Name, p.SamAccountName);
-                Assert.True(p.DistinguishedName.IndexOf(groupData.Name, StringComparison.OrdinalIgnoreCase) >= 0);
+                Assert.True(
+                    p.DistinguishedName.IndexOf(groupData.Name, StringComparison.OrdinalIgnoreCase)
+                        >= 0
+                );
             }
         }
 
@@ -501,11 +585,13 @@ namespace System.DirectoryServices.AccountManagement.Tests
             return searcher.FindOne() as UserPrincipal;
         }
 
-        private PrincipalContext DomainContext => new PrincipalContext(
-                                                        ContextType.Domain,
-                                                        LdapConfiguration.Configuration.ServerName,
-                                                        LdapConfiguration.Configuration.UserName,
-                                                        LdapConfiguration.Configuration.Password);
+        private PrincipalContext DomainContext =>
+            new PrincipalContext(
+                ContextType.Domain,
+                LdapConfiguration.Configuration.ServerName,
+                LdapConfiguration.Configuration.UserName,
+                LdapConfiguration.Configuration.Password
+            );
     }
 
     internal class UserData
@@ -521,10 +607,10 @@ namespace System.DirectoryServices.AccountManagement.Tests
             return ud;
         }
 
-        internal string Name        { get; set; }
-        internal string Password    { get; set; }
-        internal string FirstName   { get; set; }
-        internal string LastName    { get; set; }
+        internal string Name { get; set; }
+        internal string Password { get; set; }
+        internal string FirstName { get; set; }
+        internal string LastName { get; set; }
         internal string DisplayName { get; set; }
     }
 
@@ -539,7 +625,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
             return gd;
         }
 
-        internal string Name        { get; set; }
+        internal string Name { get; set; }
         internal string Description { get; set; }
         internal string DisplayName { get; set; }
     }
@@ -553,7 +639,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
         public void SetUserNameFilter(string name)
         {
-            ((CustomFilter) AdvancedSearchFilter).SetFilter(name);
+            ((CustomFilter)AdvancedSearchFilter).SetFilter(name);
         }
 
         public override AdvancedFilters AdvancedSearchFilter

@@ -55,26 +55,29 @@ namespace RoutingWebSite
 
                 default:
                     Console.WriteLine($"unknown scenario {scenario}");
-                    Console.WriteLine($"usage: dotnet run -- ({EndpointRoutingScenario}|{RouterScenario})");
+                    Console.WriteLine(
+                        $"usage: dotnet run -- ({EndpointRoutingScenario}|{RouterScenario})"
+                    );
                     throw new InvalidOperationException();
-
             }
 
-            return new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseIISIntegration()
-                        .UseContentRoot(Environment.CurrentDirectory)
-                        .UseStartup(startupType)
-                        .UseTestServer();
-                })
-                .ConfigureLogging(b =>
-                {
-                    b.AddConsole();
-                    b.SetMinimumLevel(LogLevel.Critical);
-                });
+            return new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseKestrel()
+                            .UseIISIntegration()
+                            .UseContentRoot(Environment.CurrentDirectory)
+                            .UseStartup(startupType)
+                            .UseTestServer();
+                    }
+                )
+                .ConfigureLogging(
+                    b =>
+                    {
+                        b.AddConsole();
+                        b.SetMinimumLevel(LogLevel.Critical);
+                    }
+                );
         }
     }
 }

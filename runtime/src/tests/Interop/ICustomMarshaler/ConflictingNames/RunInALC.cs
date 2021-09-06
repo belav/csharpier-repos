@@ -39,23 +39,26 @@ public class RunInALC
 
     static void Run(AssemblyLoadContext context)
     {
-        string currentAssemblyDirectory = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath);
-        Assembly inContextAssembly = context.LoadFromAssemblyPath(Path.Combine(currentAssemblyDirectory, "CustomMarshaler.dll"));
+        string currentAssemblyDirectory = Path.GetDirectoryName(
+            new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath
+        );
+        Assembly inContextAssembly = context.LoadFromAssemblyPath(
+            Path.Combine(currentAssemblyDirectory, "CustomMarshaler.dll")
+        );
         Type inContextType = inContextAssembly.GetType("CustomMarshalers.CustomMarshalerTest");
         object instance = Activator.CreateInstance(inContextType);
-        MethodInfo parseIntMethod = inContextType.GetMethod("ParseInt", BindingFlags.Instance | BindingFlags.Public);
-        Assert.AreEqual(1234, (int)parseIntMethod.Invoke(instance, new object[]{"1234"}));
+        MethodInfo parseIntMethod = inContextType.GetMethod(
+            "ParseInt",
+            BindingFlags.Instance | BindingFlags.Public
+        );
+        Assert.AreEqual(1234, (int)parseIntMethod.Invoke(instance, new object[] { "1234" }));
         GC.KeepAlive(context);
     }
 }
 
 class UnloadableLoadContext : AssemblyLoadContext
 {
-    public UnloadableLoadContext()
-        :base(true)
-    {
-        
-    }
+    public UnloadableLoadContext() : base(true) { }
 
     protected override Assembly Load(AssemblyName assemblyName)
     {

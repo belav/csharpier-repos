@@ -25,42 +25,92 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
         [InlineData(302, 443, 2592000, false, false, "max-age=2592000", "https://localhost/")]
         [InlineData(301, 5050, 2592000, false, false, "max-age=2592000", "https://localhost:5050/")]
         [InlineData(301, 443, 2592000, false, false, "max-age=2592000", "https://localhost/")]
-        [InlineData(301, 443, 2592000, true, false, "max-age=2592000; includeSubDomains", "https://localhost/")]
-        [InlineData(301, 443, 2592000, false, true, "max-age=2592000; preload", "https://localhost/")]
-        [InlineData(301, 443, 2592000, true, true, "max-age=2592000; includeSubDomains; preload", "https://localhost/")]
-        [InlineData(302, 5050, 2592000, true, true, "max-age=2592000; includeSubDomains; preload", "https://localhost:5050/")]
-        public async Task SetsBothHstsAndHttpsRedirection_RedirectOnFirstRequest_HstsOnSecondRequest(int statusCode, int? tlsPort, int maxAge, bool includeSubDomains, bool preload, string expectedHstsHeader, string expectedUrl)
-        {
-            using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .ConfigureServices(services =>
+        [InlineData(
+            301,
+            443,
+            2592000,
+            true,
+            false,
+            "max-age=2592000; includeSubDomains",
+            "https://localhost/"
+        )]
+        [InlineData(
+            301,
+            443,
+            2592000,
+            false,
+            true,
+            "max-age=2592000; preload",
+            "https://localhost/"
+        )]
+        [InlineData(
+            301,
+            443,
+            2592000,
+            true,
+            true,
+            "max-age=2592000; includeSubDomains; preload",
+            "https://localhost/"
+        )]
+        [InlineData(
+            302,
+            5050,
+            2592000,
+            true,
+            true,
+            "max-age=2592000; includeSubDomains; preload",
+            "https://localhost:5050/"
+        )]
+        public async Task SetsBothHstsAndHttpsRedirection_RedirectOnFirstRequest_HstsOnSecondRequest(
+            int statusCode,
+            int? tlsPort,
+            int maxAge,
+            bool includeSubDomains,
+            bool preload,
+            string expectedHstsHeader,
+            string expectedUrl
+        ) {
+            using var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        services.Configure<HttpsRedirectionOptions>(options =>
-                        {
-                            options.RedirectStatusCode = statusCode;
-                            options.HttpsPort = tlsPort;
-                        });
-                        services.Configure<HstsOptions>(options =>
-                        {
-                            options.IncludeSubDomains = includeSubDomains;
-                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
-                            options.Preload = preload;
-                            options.ExcludedHosts.Clear(); // allowing localhost for testing
-                        });
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseHttpsRedirection();
-                        app.UseHsts();
-                        app.Run(context =>
-                        {
-                            return context.Response.WriteAsync("Hello world");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder.UseTestServer()
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.Configure<HttpsRedirectionOptions>(
+                                        options =>
+                                        {
+                                            options.RedirectStatusCode = statusCode;
+                                            options.HttpsPort = tlsPort;
+                                        }
+                                    );
+                                    services.Configure<HstsOptions>(
+                                        options =>
+                                        {
+                                            options.IncludeSubDomains = includeSubDomains;
+                                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
+                                            options.Preload = preload;
+                                            options.ExcludedHosts.Clear(); // allowing localhost for testing
+                                        }
+                                    );
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseHttpsRedirection();
+                                    app.UseHsts();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            return context.Response.WriteAsync("Hello world");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -80,7 +130,10 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             request = new HttpRequestMessage(HttpMethod.Get, expectedUrl);
             response = await client.SendAsync(request);
 
-            Assert.Equal(expectedHstsHeader, response.Headers.GetValues(HeaderNames.StrictTransportSecurity).FirstOrDefault());
+            Assert.Equal(
+                expectedHstsHeader,
+                response.Headers.GetValues(HeaderNames.StrictTransportSecurity).FirstOrDefault()
+            );
         }
     }
 }

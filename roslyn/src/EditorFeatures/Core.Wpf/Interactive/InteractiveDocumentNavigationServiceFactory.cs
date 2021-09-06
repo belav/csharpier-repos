@@ -12,17 +12,23 @@ using Microsoft.CodeAnalysis.Navigation;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
 {
-    [ExportWorkspaceServiceFactory(typeof(IDocumentNavigationService), WorkspaceKind.Interactive), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IDocumentNavigationService),
+            WorkspaceKind.Interactive
+        ),
+        Shared
+    ]
     internal sealed class InteractiveDocumentNavigationServiceFactory : IWorkspaceServiceFactory
     {
         private readonly IDocumentNavigationService _singleton;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InteractiveDocumentNavigationServiceFactory()
-            => _singleton = new InteractiveDocumentNavigationService();
+        public InteractiveDocumentNavigationServiceFactory() =>
+            _singleton = new InteractiveDocumentNavigationService();
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
     }
 }

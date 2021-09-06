@@ -17,11 +17,12 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
         private readonly ILogger<DataProtectionHostedService> _logger;
 
         public DataProtectionHostedService(IKeyRingProvider keyRingProvider)
-            : this(keyRingProvider, NullLoggerFactory.Instance)
-        { }
+            : this(keyRingProvider, NullLoggerFactory.Instance) { }
 
-        public DataProtectionHostedService(IKeyRingProvider keyRingProvider, ILoggerFactory loggerFactory)
-        {
+        public DataProtectionHostedService(
+            IKeyRingProvider keyRingProvider,
+            ILoggerFactory loggerFactory
+        ) {
             _keyRingProvider = keyRingProvider;
             _logger = loggerFactory.CreateLogger<DataProtectionHostedService>();
         }

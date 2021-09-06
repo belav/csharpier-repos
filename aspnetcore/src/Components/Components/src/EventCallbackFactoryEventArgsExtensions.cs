@@ -19,8 +19,11 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="receiver">The event receiver.</param>
         /// <param name="callback">The event callback.</param>
         /// <returns>The <see cref="EventCallback"/>.</returns>
-        public static EventCallback<EventArgs> Create(this EventCallbackFactory factory, object receiver, Action<EventArgs> callback)
-        {
+        public static EventCallback<EventArgs> Create(
+            this EventCallbackFactory factory,
+            object receiver,
+            Action<EventArgs> callback
+        ) {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -37,8 +40,11 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="receiver">The event receiver.</param>
         /// <param name="callback">The event callback.</param>
         /// <returns>The <see cref="EventCallback"/>.</returns>
-        public static EventCallback<EventArgs> Create(this EventCallbackFactory factory, object receiver, Func<EventArgs, Task> callback)
-        {
+        public static EventCallback<EventArgs> Create(
+            this EventCallbackFactory factory,
+            object receiver,
+            Func<EventArgs, Task> callback
+        ) {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -55,8 +61,11 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="receiver">The event receiver.</param>
         /// <param name="callback">The event callback.</param>
         /// <returns>The <see cref="EventCallback"/>.</returns>
-        public static EventCallback<ChangeEventArgs> Create(this EventCallbackFactory factory, object receiver, Action<ChangeEventArgs> callback)
-        {
+        public static EventCallback<ChangeEventArgs> Create(
+            this EventCallbackFactory factory,
+            object receiver,
+            Action<ChangeEventArgs> callback
+        ) {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -73,8 +82,11 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="receiver">The event receiver.</param>
         /// <param name="callback">The event callback.</param>
         /// <returns>The <see cref="EventCallback"/>.</returns>
-        public static EventCallback<ChangeEventArgs> Create(this EventCallbackFactory factory, object receiver, Func<ChangeEventArgs, Task> callback)
-        {
+        public static EventCallback<ChangeEventArgs> Create(
+            this EventCallbackFactory factory,
+            object receiver,
+            Func<ChangeEventArgs, Task> callback
+        ) {
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));

@@ -12,7 +12,12 @@ namespace System.Text.Json.Serialization.Metadata
         public override JsonTypeInfo.ConstructorDelegate? CreateConstructor(Type type)
         {
             Debug.Assert(type != null);
-            ConstructorInfo? realMethod = type.GetConstructor(BindingFlags.Public | BindingFlags.Instance, binder: null, Type.EmptyTypes, modifiers: null);
+            ConstructorInfo? realMethod = type.GetConstructor(
+                BindingFlags.Public | BindingFlags.Instance,
+                binder: null,
+                Type.EmptyTypes,
+                modifiers: null
+            );
 
             if (type.IsAbstract)
             {
@@ -27,12 +32,18 @@ namespace System.Text.Json.Serialization.Metadata
             return () => Activator.CreateInstance(type, nonPublic: false);
         }
 
-        public override JsonTypeInfo.ParameterizedConstructorDelegate<T>? CreateParameterizedConstructor<T>(ConstructorInfo constructor)
-        {
+        public override JsonTypeInfo.ParameterizedConstructorDelegate<T>? CreateParameterizedConstructor<T>(
+            ConstructorInfo constructor
+        ) {
             Type type = typeof(T);
 
             Debug.Assert(!type.IsAbstract);
-            Debug.Assert(Array.IndexOf(type.GetConstructors(BindingFlags.Public | BindingFlags.Instance), constructor) >= 0);
+            Debug.Assert(
+                Array.IndexOf(
+                    type.GetConstructors(BindingFlags.Public | BindingFlags.Instance),
+                    constructor
+                ) >= 0
+            );
 
             int parameterCount = constructor.GetParameters().Length;
 
@@ -66,13 +77,24 @@ namespace System.Text.Json.Serialization.Metadata
             };
         }
 
-        public override JsonTypeInfo.ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>?
-            CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(ConstructorInfo constructor)
-        {
+        public override JsonTypeInfo.ParameterizedConstructorDelegate<
+            T,
+            TArg0,
+            TArg1,
+            TArg2,
+            TArg3
+        >? CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(
+            ConstructorInfo constructor
+        ) {
             Type type = typeof(T);
 
             Debug.Assert(!type.IsAbstract);
-            Debug.Assert(Array.IndexOf(type.GetConstructors(BindingFlags.Public | BindingFlags.Instance), constructor) >= 0);
+            Debug.Assert(
+                Array.IndexOf(
+                    type.GetConstructors(BindingFlags.Public | BindingFlags.Instance),
+                    constructor
+                ) >= 0
+            );
 
             int parameterCount = constructor.GetParameters().Length;
 
@@ -114,56 +136,78 @@ namespace System.Text.Json.Serialization.Metadata
             Type elementType = JsonTypeInfo.ObjectType;
 
             // We verified this won't be null when we created the converter for the collection type.
-            MethodInfo addMethod = (collectionType.GetMethod("Push") ?? collectionType.GetMethod("Enqueue"))!;
+            MethodInfo addMethod = (
+                collectionType.GetMethod("Push") ?? collectionType.GetMethod("Enqueue")
+            )!;
 
-            return delegate (TCollection collection, object? element)
+            return delegate(TCollection collection, object? element)
             {
                 addMethod.Invoke(collection, new object[] { element! });
             };
         }
 
-        public override Func<IEnumerable<TElement>, TCollection> CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>()
+        public override Func<
+            IEnumerable<TElement>,
+            TCollection
+        > CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>()
         {
-            MethodInfo createRange = typeof(TCollection).GetImmutableEnumerableCreateRangeMethod(typeof(TElement));
+            MethodInfo createRange = typeof(TCollection).GetImmutableEnumerableCreateRangeMethod(
+                typeof(TElement)
+            );
             return (Func<IEnumerable<TElement>, TCollection>)createRange.CreateDelegate(
-                typeof(Func<IEnumerable<TElement>, TCollection>));
+                typeof(Func<IEnumerable<TElement>, TCollection>)
+            );
         }
 
-        public override Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection> CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>()
+        public override Func<
+            IEnumerable<KeyValuePair<TKey, TValue>>,
+            TCollection
+        > CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>()
         {
-            MethodInfo createRange = typeof(TCollection).GetImmutableDictionaryCreateRangeMethod(typeof(TKey), typeof(TValue));
-            return (Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>)createRange.CreateDelegate(
-                typeof(Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>));
+            MethodInfo createRange = typeof(TCollection).GetImmutableDictionaryCreateRangeMethod(
+                typeof(TKey),
+                typeof(TValue)
+            );
+            return (Func<
+                IEnumerable<KeyValuePair<TKey, TValue>>,
+                TCollection
+            >)createRange.CreateDelegate(
+                typeof(Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>)
+            );
         }
 
-        public override Func<object, TProperty> CreatePropertyGetter<TProperty>(PropertyInfo propertyInfo)
-        {
+        public override Func<object, TProperty> CreatePropertyGetter<TProperty>(
+            PropertyInfo propertyInfo
+        ) {
             MethodInfo getMethodInfo = propertyInfo.GetMethod!;
 
-            return delegate (object obj)
+            return delegate(object obj)
             {
                 return (TProperty)getMethodInfo.Invoke(obj, null)!;
             };
         }
 
-        public override Action<object, TProperty> CreatePropertySetter<TProperty>(PropertyInfo propertyInfo)
-        {
+        public override Action<object, TProperty> CreatePropertySetter<TProperty>(
+            PropertyInfo propertyInfo
+        ) {
             MethodInfo setMethodInfo = propertyInfo.SetMethod!;
 
-            return delegate (object obj, TProperty value)
+            return delegate(object obj, TProperty value)
             {
                 setMethodInfo.Invoke(obj, new object[] { value! });
             };
         }
 
         public override Func<object, TProperty> CreateFieldGetter<TProperty>(FieldInfo fieldInfo) =>
-            delegate (object obj)
+            delegate(object obj)
             {
                 return (TProperty)fieldInfo.GetValue(obj)!;
             };
 
-        public override Action<object, TProperty> CreateFieldSetter<TProperty>(FieldInfo fieldInfo) =>
-            delegate (object obj, TProperty value)
+        public override Action<object, TProperty> CreateFieldSetter<TProperty>(
+            FieldInfo fieldInfo
+        ) =>
+            delegate(object obj, TProperty value)
             {
                 fieldInfo.SetValue(obj, value);
             };

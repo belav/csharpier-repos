@@ -22,7 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var model = new Model();
             var modelBuilder = new InternalModelBuilder(model);
             var entityBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit);
-            var builder = entityBuilder.Property(Customer.NameProperty.Name, ConfigurationSource.Convention);
+            var builder = entityBuilder.Property(
+                Customer.NameProperty.Name,
+                ConfigurationSource.Convention
+            );
             var property = builder.Metadata;
 
             Assert.Equal(typeof(string), property.ClrType);
@@ -52,7 +55,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             metadata.IsConcurrencyToken = true;
             var builder = metadata.Builder;
 
-            Assert.Equal(ConfigurationSource.Explicit, metadata.GetIsConcurrencyTokenConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                metadata.GetIsConcurrencyTokenConfigurationSource()
+            );
             Assert.NotNull(builder.IsConcurrencyToken(true, ConfigurationSource.DataAnnotation));
             Assert.Null(builder.IsConcurrencyToken(false, ConfigurationSource.DataAnnotation));
 
@@ -68,12 +74,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var builder = CreateInternalPropertyBuilder();
             var metadata = builder.Metadata;
 
-            Assert.NotNull(builder.ValueGenerated(ValueGenerated.OnAddOrUpdate, ConfigurationSource.DataAnnotation));
-            Assert.NotNull(builder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.ValueGenerated(
+                    ValueGenerated.OnAddOrUpdate,
+                    ConfigurationSource.DataAnnotation
+                )
+            );
+            Assert.NotNull(
+                builder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.DataAnnotation)
+            );
 
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
 
-            Assert.Null(builder.ValueGenerated(ValueGenerated.OnAddOrUpdate, ConfigurationSource.Convention));
+            Assert.Null(
+                builder.ValueGenerated(ValueGenerated.OnAddOrUpdate, ConfigurationSource.Convention)
+            );
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
         }
 
@@ -85,13 +100,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             metadata.ValueGenerated = ValueGenerated.OnAddOrUpdate;
             var builder = metadata.Builder;
 
-            Assert.Equal(ConfigurationSource.Explicit, metadata.GetValueGeneratedConfigurationSource());
-            Assert.NotNull(builder.ValueGenerated(ValueGenerated.OnAddOrUpdate, ConfigurationSource.DataAnnotation));
-            Assert.Null(builder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.DataAnnotation));
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                metadata.GetValueGeneratedConfigurationSource()
+            );
+            Assert.NotNull(
+                builder.ValueGenerated(
+                    ValueGenerated.OnAddOrUpdate,
+                    ConfigurationSource.DataAnnotation
+                )
+            );
+            Assert.Null(
+                builder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.DataAnnotation)
+            );
 
             Assert.Equal(ValueGenerated.OnAddOrUpdate, metadata.ValueGenerated);
 
-            Assert.NotNull(builder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.Explicit));
+            Assert.NotNull(
+                builder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.Explicit)
+            );
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
         }
 
@@ -194,13 +221,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var builder = CreateInternalPropertyBuilder();
             var metadata = builder.Metadata;
 
-            Assert.NotNull(builder.HasValueGenerator((p, e) => new CustomValueGenerator1(), ConfigurationSource.DataAnnotation));
-            Assert.NotNull(builder.HasValueGenerator((p, e) => new CustomValueGenerator2(), ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    (p, e) => new CustomValueGenerator1(),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    (p, e) => new CustomValueGenerator2(),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
 
             Assert.IsType<CustomValueGenerator2>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.True(metadata.RequiresValueGenerator());
 
-            Assert.Null(builder.HasValueGenerator((p, e) => new CustomValueGenerator1(), ConfigurationSource.Convention));
+            Assert.Null(
+                builder.HasValueGenerator(
+                    (p, e) => new CustomValueGenerator1(),
+                    ConfigurationSource.Convention
+                )
+            );
             Assert.IsType<CustomValueGenerator2>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.True(metadata.RequiresValueGenerator());
         }
@@ -208,20 +250,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Can_only_override_existing_CustomValueGenerator_factory_explicitly()
         {
-            ValueGenerator factory(IReadOnlyProperty p, IReadOnlyEntityType e)
-                => new CustomValueGenerator1();
+            ValueGenerator factory(IReadOnlyProperty p, IReadOnlyEntityType e) =>
+                new CustomValueGenerator1();
 
             var metadata = CreateProperty();
             metadata.SetValueGeneratorFactory(factory, ConfigurationSource.Explicit);
             var builder = metadata.Builder;
 
             Assert.NotNull(builder.HasValueGenerator(factory, ConfigurationSource.DataAnnotation));
-            Assert.Null(builder.HasValueGenerator((p, e) => new CustomValueGenerator2(), ConfigurationSource.DataAnnotation));
+            Assert.Null(
+                builder.HasValueGenerator(
+                    (p, e) => new CustomValueGenerator2(),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
 
             Assert.IsType<CustomValueGenerator1>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.True(metadata.RequiresValueGenerator());
 
-            Assert.NotNull(builder.HasValueGenerator((p, e) => new CustomValueGenerator2(), ConfigurationSource.Explicit));
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    (p, e) => new CustomValueGenerator2(),
+                    ConfigurationSource.Explicit
+                )
+            );
             Assert.IsType<CustomValueGenerator2>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.True(metadata.RequiresValueGenerator());
         }
@@ -232,19 +284,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var metadata = CreateProperty();
             var builder = metadata.Builder;
 
-            Assert.NotNull(builder.HasValueGenerator((p, e) => new CustomValueGenerator1(), ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    (p, e) => new CustomValueGenerator1(),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
 
             Assert.IsType<CustomValueGenerator1>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
             Assert.True(metadata.RequiresValueGenerator());
 
-            Assert.Null(builder.HasValueGenerator((Func<IReadOnlyProperty, IReadOnlyEntityType, ValueGenerator>)null, ConfigurationSource.Convention));
+            Assert.Null(
+                builder.HasValueGenerator(
+                    (Func<IReadOnlyProperty, IReadOnlyEntityType, ValueGenerator>)null,
+                    ConfigurationSource.Convention
+                )
+            );
 
             Assert.IsType<CustomValueGenerator1>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
             Assert.True(metadata.RequiresValueGenerator());
 
-            Assert.NotNull(builder.HasValueGenerator((Func<IReadOnlyProperty, IReadOnlyEntityType, ValueGenerator>)null, ConfigurationSource.Explicit));
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    (Func<IReadOnlyProperty, IReadOnlyEntityType, ValueGenerator>)null,
+                    ConfigurationSource.Explicit
+                )
+            );
 
             Assert.Null(metadata.GetValueGeneratorFactory());
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
@@ -257,13 +324,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var builder = CreateInternalPropertyBuilder();
             var metadata = builder.Metadata;
 
-            Assert.NotNull(builder.HasValueGenerator(typeof(CustomValueGenerator1), ConfigurationSource.DataAnnotation));
-            Assert.NotNull(builder.HasValueGenerator(typeof(CustomValueGenerator2), ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    typeof(CustomValueGenerator1),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    typeof(CustomValueGenerator2),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
 
             Assert.IsType<CustomValueGenerator2>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.True(metadata.RequiresValueGenerator());
 
-            Assert.Null(builder.HasValueGenerator(typeof(CustomValueGenerator1), ConfigurationSource.Convention));
+            Assert.Null(
+                builder.HasValueGenerator(
+                    typeof(CustomValueGenerator1),
+                    ConfigurationSource.Convention
+                )
+            );
             Assert.IsType<CustomValueGenerator2>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.True(metadata.RequiresValueGenerator());
         }
@@ -274,7 +356,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var metadata = CreateProperty();
             var builder = metadata.Builder;
 
-            Assert.NotNull(builder.HasValueGenerator(typeof(CustomValueGenerator1), ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.HasValueGenerator(
+                    typeof(CustomValueGenerator1),
+                    ConfigurationSource.DataAnnotation
+                )
+            );
 
             Assert.IsType<CustomValueGenerator1>(metadata.GetValueGeneratorFactory()(null, null));
             Assert.Equal(ValueGenerated.Never, metadata.ValueGenerated);
@@ -300,8 +387,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new NotImplementedException();
             }
 
-            public override bool GeneratesTemporaryValues
-                => false;
+            public override bool GeneratesTemporaryValues => false;
         }
 
         private class CustomValueGenerator2 : ValueGenerator<string>
@@ -311,8 +397,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new NotImplementedException();
             }
 
-            public override bool GeneratesTemporaryValues
-                => false;
+            public override bool GeneratesTemporaryValues => false;
         }
 
         [ConditionalFact]
@@ -383,14 +468,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Cannot_set_required_to_false_if_nonnullable()
         {
             var modelBuilder = new InternalModelBuilder(new Model());
-            var entityBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Convention);
-            var builder = entityBuilder.Property(typeof(int), nameof(Customer.Id), ConfigurationSource.Convention);
+            var entityBuilder = modelBuilder.Entity(
+                typeof(Customer),
+                ConfigurationSource.Convention
+            );
+            var builder = entityBuilder.Property(
+                typeof(int),
+                nameof(Customer.Id),
+                ConfigurationSource.Convention
+            );
 
             Assert.Null(builder.IsRequired(false, ConfigurationSource.DataAnnotation));
 
             Assert.Equal(
                 CoreStrings.CannotBeNullable(nameof(Customer.Id), typeof(Customer).Name, "int"),
-                Assert.Throws<InvalidOperationException>(() => builder.IsRequired(false, ConfigurationSource.Explicit)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => builder.IsRequired(false, ConfigurationSource.Explicit)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -399,12 +494,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var builder = CreateInternalPropertyBuilder();
             var metadata = builder.Metadata;
 
-            Assert.NotNull(builder.BeforeSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation));
-            Assert.NotNull(builder.BeforeSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.BeforeSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation)
+            );
+            Assert.NotNull(
+                builder.BeforeSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation)
+            );
 
             Assert.Equal(PropertySaveBehavior.Ignore, metadata.GetBeforeSaveBehavior());
 
-            Assert.Null(builder.BeforeSave(PropertySaveBehavior.Save, ConfigurationSource.Convention));
+            Assert.Null(
+                builder.BeforeSave(PropertySaveBehavior.Save, ConfigurationSource.Convention)
+            );
             Assert.Equal(PropertySaveBehavior.Ignore, metadata.GetBeforeSaveBehavior());
         }
 
@@ -413,16 +514,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var metadata = CreateProperty();
             Assert.Null(metadata.GetBeforeSaveBehaviorConfigurationSource());
-            metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw, ConfigurationSource.Explicit);
+            metadata.SetBeforeSaveBehavior(
+                PropertySaveBehavior.Throw,
+                ConfigurationSource.Explicit
+            );
             var builder = metadata.Builder;
 
-            Assert.Equal(ConfigurationSource.Explicit, metadata.GetBeforeSaveBehaviorConfigurationSource());
-            Assert.NotNull(builder.BeforeSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation));
-            Assert.Null(builder.BeforeSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation));
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                metadata.GetBeforeSaveBehaviorConfigurationSource()
+            );
+            Assert.NotNull(
+                builder.BeforeSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation)
+            );
+            Assert.Null(
+                builder.BeforeSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation)
+            );
 
             Assert.Equal(PropertySaveBehavior.Throw, metadata.GetBeforeSaveBehavior());
 
-            Assert.NotNull(builder.BeforeSave(PropertySaveBehavior.Ignore, ConfigurationSource.Explicit));
+            Assert.NotNull(
+                builder.BeforeSave(PropertySaveBehavior.Ignore, ConfigurationSource.Explicit)
+            );
             Assert.Equal(PropertySaveBehavior.Ignore, metadata.GetBeforeSaveBehavior());
         }
 
@@ -432,12 +545,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var builder = CreateInternalPropertyBuilder();
             var metadata = builder.Metadata;
 
-            Assert.NotNull(builder.AfterSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation));
-            Assert.NotNull(builder.AfterSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation));
+            Assert.NotNull(
+                builder.AfterSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation)
+            );
+            Assert.NotNull(
+                builder.AfterSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation)
+            );
 
             Assert.Equal(PropertySaveBehavior.Ignore, metadata.GetAfterSaveBehavior());
 
-            Assert.Null(builder.AfterSave(PropertySaveBehavior.Save, ConfigurationSource.Convention));
+            Assert.Null(
+                builder.AfterSave(PropertySaveBehavior.Save, ConfigurationSource.Convention)
+            );
             Assert.Equal(PropertySaveBehavior.Ignore, metadata.GetAfterSaveBehavior());
         }
 
@@ -449,26 +568,38 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw, ConfigurationSource.Explicit);
             var builder = metadata.Builder;
 
-            Assert.Equal(ConfigurationSource.Explicit, metadata.GetAfterSaveBehaviorConfigurationSource());
-            Assert.NotNull(builder.AfterSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation));
-            Assert.Null(builder.AfterSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation));
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                metadata.GetAfterSaveBehaviorConfigurationSource()
+            );
+            Assert.NotNull(
+                builder.AfterSave(PropertySaveBehavior.Throw, ConfigurationSource.DataAnnotation)
+            );
+            Assert.Null(
+                builder.AfterSave(PropertySaveBehavior.Ignore, ConfigurationSource.DataAnnotation)
+            );
 
             Assert.Equal(PropertySaveBehavior.Throw, metadata.GetAfterSaveBehavior());
 
-            Assert.NotNull(builder.AfterSave(PropertySaveBehavior.Ignore, ConfigurationSource.Explicit));
+            Assert.NotNull(
+                builder.AfterSave(PropertySaveBehavior.Ignore, ConfigurationSource.Explicit)
+            );
             Assert.Equal(PropertySaveBehavior.Ignore, metadata.GetAfterSaveBehavior());
         }
 
         private InternalPropertyBuilder CreateInternalPropertyBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)
-                InMemoryTestHelpers.Instance.CreateConventionBuilder().GetInfrastructure();
-            var entityBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Convention);
+            var modelBuilder =
+                (InternalModelBuilder)InMemoryTestHelpers.Instance.CreateConventionBuilder()
+                    .GetInfrastructure();
+            var entityBuilder = modelBuilder.Entity(
+                typeof(Customer),
+                ConfigurationSource.Convention
+            );
             return entityBuilder.Property(Customer.NameProperty, ConfigurationSource.Convention);
         }
 
-        private Property CreateProperty()
-            => CreateInternalPropertyBuilder().Metadata;
+        private Property CreateProperty() => CreateInternalPropertyBuilder().Metadata;
 
         private class Customer
         {

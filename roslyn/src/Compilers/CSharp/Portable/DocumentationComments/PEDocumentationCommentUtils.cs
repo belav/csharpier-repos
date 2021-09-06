@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             PEModuleSymbol containingPEModule,
             CultureInfo preferredCulture,
             CancellationToken cancellationToken,
-            ref Tuple<CultureInfo, string> lazyDocComment)
-        {
+            ref Tuple<CultureInfo, string> lazyDocComment
+        ) {
             // Have we cached anything?
             if (lazyDocComment == null)
             {
@@ -31,8 +31,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                     Tuple.Create(
                         preferredCulture,
                         containingPEModule.DocumentationProvider.GetDocumentationForSymbol(
-                            symbol.GetDocumentationCommentId(), preferredCulture, cancellationToken)),
-                    null);
+                            symbol.GetDocumentationCommentId(),
+                            preferredCulture,
+                            cancellationToken
+                        )
+                    ),
+                    null
+                );
             }
 
             // Does the cached version match the culture we asked for?
@@ -43,7 +48,10 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
             // We've already cached a different culture - create a fresh version.
             return containingPEModule.DocumentationProvider.GetDocumentationForSymbol(
-                symbol.GetDocumentationCommentId(), preferredCulture, cancellationToken);
+                symbol.GetDocumentationCommentId(),
+                preferredCulture,
+                cancellationToken
+            );
         }
     }
 }

@@ -14,32 +14,47 @@ namespace CookieSample
         public void ConfigureServices(IServiceCollection services)
         {
             // This can be removed after https://github.com/aspnet/IISIntegration/issues/371
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie();
+            services.AddAuthentication(
+                    options =>
+                    {
+                        options.DefaultAuthenticateScheme =
+                            CookieAuthenticationDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme =
+                            CookieAuthenticationDefaults.AuthenticationScheme;
+                    }
+                )
+                .AddCookie();
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseAuthentication();
 
-            app.Run(async context =>
-            {
-                if (!context.User.Identities.Any(identity => identity.IsAuthenticated))
+            app.Run(
+                async context =>
                 {
-                    var user = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, "bob") }, CookieAuthenticationDefaults.AuthenticationScheme));
-                    await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, user);
+                    if (!context.User.Identities.Any(identity => identity.IsAuthenticated))
+                    {
+                        var user = new ClaimsPrincipal(
+                            new ClaimsIdentity(
+                                new[] { new Claim(ClaimTypes.Name, "bob") },
+                                CookieAuthenticationDefaults.AuthenticationScheme
+                            )
+                        );
+                        await context.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            user
+                        );
+
+                        context.Response.ContentType = "text/plain";
+                        await context.Response.WriteAsync("Hello First timer");
+                        return;
+                    }
 
                     context.Response.ContentType = "text/plain";
-                    await context.Response.WriteAsync("Hello First timer");
-                    return;
+                    await context.Response.WriteAsync("Hello old timer");
                 }
-
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("Hello old timer");
-            });
+            );
         }
     }
 }

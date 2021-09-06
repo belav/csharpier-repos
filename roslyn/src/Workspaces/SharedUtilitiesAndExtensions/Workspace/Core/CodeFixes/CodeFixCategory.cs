@@ -13,17 +13,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Fixes code to adhere to code style.
         /// </summary>
         CodeStyle,
-
         /// <summary>
         /// Fixes code to improve code quality.
         /// </summary>
         CodeQuality,
-
         /// <summary>
         /// Fixes code to fix compiler diagnostics.
         /// </summary>
         Compile,
-
         /// <summary>
         /// Custom category for fix.
         /// </summary>

@@ -35,8 +35,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             return ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -45,22 +50,31 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             return TaskToApm.End<int>(asyncResult);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateState(cancellationToken);
 
-            return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> destination,
+            CancellationToken cancellationToken = default
+        ) {
             ValidateState(cancellationToken);
 
             return ReadAsyncInternal(destination, cancellationToken);
         }
 
-        private async ValueTask<int> ReadAsyncInternal(Memory<byte> buffer, CancellationToken cancellationToken)
-        {
+        private async ValueTask<int> ReadAsyncInternal(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 Debug.Assert(_body != null, "Stream must be accepting reads.");
@@ -72,8 +86,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             }
         }
 
-        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override async Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 Debug.Assert(_body != null, "Stream must be accepting reads.");

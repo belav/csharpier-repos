@@ -7,6 +7,6 @@ namespace ApiExplorerWebSite
 {
     public class WellKnownChangeToken
     {
-       public CancellationTokenSource TokenSource { get; } = new CancellationTokenSource();
+        public CancellationTokenSource TokenSource { get; } = new CancellationTokenSource();
     }
 }

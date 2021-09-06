@@ -18,9 +18,13 @@ namespace Microsoft.AspNetCore.TestHost
         /// <param name="assembly">The assembly to look for an <see cref="IWebHostBuilder"/> in.</param>
         /// <param name="args">The arguments to use when creating the <see cref="IWebHostBuilder"/> instance.</param>
         /// <returns>An <see cref="IWebHostBuilder"/> instance retrieved from the assembly in <paramref name="assembly"/>.</returns>
-        public static IWebHostBuilder? CreateFromAssemblyEntryPoint(Assembly assembly, string[] args)
-        {
-            var factory = HostFactoryResolver.ResolveWebHostBuilderFactory<IWebHostBuilder>(assembly);
+        public static IWebHostBuilder? CreateFromAssemblyEntryPoint(
+            Assembly assembly,
+            string[] args
+        ) {
+            var factory = HostFactoryResolver.ResolveWebHostBuilderFactory<IWebHostBuilder>(
+                assembly
+            );
             return factory?.Invoke(args);
         }
 

@@ -13,8 +13,10 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Given the metadata for an event and an event payload, decode and deserialize the event payload.
         /// </summary>
-        internal static object[] DecodePayload(ref EventSource.EventMetadata metadata, ReadOnlySpan<byte> payload)
-        {
+        internal static object[] DecodePayload(
+            ref EventSource.EventMetadata metadata,
+            ReadOnlySpan<byte> payload
+        ) {
             ParameterInfo[] parameters = metadata.Parameters;
             object[] decodedFields = new object[parameters.Length];
             for (int i = 0; i < parameters.Length; i++)
@@ -82,12 +84,16 @@ namespace System.Diagnostics.Tracing
                 }
                 else if (parameterType == typeof(float))
                 {
-                    decodedFields[i] = BitConverter.Int32BitsToSingle(BinaryPrimitives.ReadInt32LittleEndian(payload));
+                    decodedFields[i] = BitConverter.Int32BitsToSingle(
+                        BinaryPrimitives.ReadInt32LittleEndian(payload)
+                    );
                     payload = payload.Slice(sizeof(float));
                 }
                 else if (parameterType == typeof(double))
                 {
-                    decodedFields[i] = BitConverter.Int64BitsToDouble(BinaryPrimitives.ReadInt64LittleEndian(payload));
+                    decodedFields[i] = BitConverter.Int64BitsToDouble(
+                        BinaryPrimitives.ReadInt64LittleEndian(payload)
+                    );
                     payload = payload.Slice(sizeof(double));
                 }
                 else if (parameterType == typeof(bool))
@@ -130,10 +136,14 @@ namespace System.Diagnostics.Tracing
                     }
                     else
                     {
-                        charPayload = MemoryMarshal.Cast<byte, char>(payload.Slice(0, byteCount - 2));
+                        charPayload = MemoryMarshal.Cast<byte, char>(
+                            payload.Slice(0, byteCount - 2)
+                        );
                         payload = payload.Slice(byteCount);
                     }
-                    decodedFields[i] = BitConverter.IsLittleEndian ? new string(charPayload) : Encoding.Unicode.GetString(MemoryMarshal.Cast<char, byte>(charPayload));
+                    decodedFields[i] = BitConverter.IsLittleEndian
+                        ? new string(charPayload)
+                        : Encoding.Unicode.GetString(MemoryMarshal.Cast<char, byte>(charPayload));
                 }
                 else
                 {

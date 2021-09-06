@@ -29,15 +29,13 @@ namespace RazorPagesWebSite
     {
         public void OnPageHandlerSelected(PageHandlerSelectedContext context)
         {
-            context.HandlerMethod = context.ActionDescriptor.HandlerMethods.First(m => m.Name == "Edit");
+            context.HandlerMethod = context.ActionDescriptor.HandlerMethods.First(
+                m => m.Name == "Edit"
+            );
         }
 
-        public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
-        {            
-        }
+        public void OnPageHandlerExecuting(PageHandlerExecutingContext context) { }
 
-        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-        {
-        }
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
     }
 }

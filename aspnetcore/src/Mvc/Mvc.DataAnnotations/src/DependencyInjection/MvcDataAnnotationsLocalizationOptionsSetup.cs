@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <summary>
     /// Sets up default options for <see cref="MvcDataAnnotationsLocalizationOptions"/>.
     /// </summary>
-    internal class MvcDataAnnotationsLocalizationOptionsSetup : IConfigureOptions<MvcDataAnnotationsLocalizationOptions>
+    internal class MvcDataAnnotationsLocalizationOptionsSetup
+        : IConfigureOptions<MvcDataAnnotationsLocalizationOptions>
     {
         /// <inheritdoc />
         public void Configure(MvcDataAnnotationsLocalizationOptions options)

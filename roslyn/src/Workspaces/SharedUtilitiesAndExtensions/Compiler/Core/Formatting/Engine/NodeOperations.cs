@@ -19,8 +19,12 @@ namespace Microsoft.CodeAnalysis.Formatting
         public List<AlignTokensOperation> AlignmentOperation { get; }
         public List<AnchorIndentationOperation> AnchorIndentationOperations { get; }
 
-        public NodeOperations(List<IndentBlockOperation> indentBlockOperation, List<SuppressOperation> suppressOperation, List<AnchorIndentationOperation> anchorIndentationOperations, List<AlignTokensOperation> alignmentOperation)
-        {
+        public NodeOperations(
+            List<IndentBlockOperation> indentBlockOperation,
+            List<SuppressOperation> suppressOperation,
+            List<AnchorIndentationOperation> anchorIndentationOperations,
+            List<AlignTokensOperation> alignmentOperation
+        ) {
             this.IndentBlockOperation = indentBlockOperation;
             this.SuppressOperation = suppressOperation;
             this.AlignmentOperation = alignmentOperation;

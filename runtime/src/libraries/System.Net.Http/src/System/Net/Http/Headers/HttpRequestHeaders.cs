@@ -35,20 +35,53 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> Accept =>
-            GetSpecializedCollection(AcceptSlot, static thisRef => new HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue>(KnownHeaders.Accept.Descriptor, thisRef));
+            GetSpecializedCollection(
+                AcceptSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue>(
+                        KnownHeaders.Accept.Descriptor,
+                        thisRef
+                    )
+            );
 
         public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptCharset =>
-            GetSpecializedCollection(AcceptCharsetSlot, static thisRef => new HttpHeaderValueCollection<StringWithQualityHeaderValue>(KnownHeaders.AcceptCharset.Descriptor, thisRef));
+            GetSpecializedCollection(
+                AcceptCharsetSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
+                        KnownHeaders.AcceptCharset.Descriptor,
+                        thisRef
+                    )
+            );
 
         public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptEncoding =>
-            GetSpecializedCollection(AcceptEncodingSlot, static thisRef => new HttpHeaderValueCollection<StringWithQualityHeaderValue>(KnownHeaders.AcceptEncoding.Descriptor, thisRef));
+            GetSpecializedCollection(
+                AcceptEncodingSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
+                        KnownHeaders.AcceptEncoding.Descriptor,
+                        thisRef
+                    )
+            );
 
         public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptLanguage =>
-            GetSpecializedCollection(AcceptLanguageSlot, static thisRef => new HttpHeaderValueCollection<StringWithQualityHeaderValue>(KnownHeaders.AcceptLanguage.Descriptor, thisRef));
+            GetSpecializedCollection(
+                AcceptLanguageSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<StringWithQualityHeaderValue>(
+                        KnownHeaders.AcceptLanguage.Descriptor,
+                        thisRef
+                    )
+            );
 
         public AuthenticationHeaderValue? Authorization
         {
-            get { return (AuthenticationHeaderValue?)GetParsedValues(KnownHeaders.Authorization.Descriptor); }
+            get
+            {
+                return (AuthenticationHeaderValue?)GetParsedValues(
+                    KnownHeaders.Authorization.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.Authorization.Descriptor, value); }
         }
 
@@ -62,8 +95,13 @@ namespace System.Net.Http.Headers
             get
             {
                 // ExpectCore will force the collection into existence, so avoid accessing it if possible.
-                if (_expectContinueSet || ContainsParsedValue(KnownHeaders.Expect.Descriptor, HeaderUtilities.ExpectContinue))
-                {
+                if (
+                    _expectContinueSet
+                    || ContainsParsedValue(
+                        KnownHeaders.Expect.Descriptor,
+                        HeaderUtilities.ExpectContinue
+                    )
+                ) {
                     if (ExpectCore.IsSpecialValueSet)
                     {
                         return true;
@@ -121,8 +159,12 @@ namespace System.Net.Http.Headers
                     value = null;
                 }
 
-                if ((value != null) && (HttpRuleParser.GetHostLength(value, 0, false, out string? _) != value.Length))
-                {
+                if (
+                    (value != null)
+                    && (
+                        HttpRuleParser.GetHostLength(value, 0, false, out string? _) != value.Length
+                    )
+                ) {
                     throw new FormatException(SR.net_http_headers_invalid_host_header);
                 }
                 SetOrRemoveParsedValue(KnownHeaders.Host.Descriptor, value);
@@ -130,26 +172,55 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<EntityTagHeaderValue> IfMatch =>
-            GetSpecializedCollection(IfMatchSlot, static thisRef => new HttpHeaderValueCollection<EntityTagHeaderValue>(KnownHeaders.IfMatch.Descriptor, thisRef));
+            GetSpecializedCollection(
+                IfMatchSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<EntityTagHeaderValue>(
+                        KnownHeaders.IfMatch.Descriptor,
+                        thisRef
+                    )
+            );
 
         public DateTimeOffset? IfModifiedSince
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.IfModifiedSince.Descriptor, this); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.IfModifiedSince.Descriptor,
+                    this
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.IfModifiedSince.Descriptor, value); }
         }
 
         public HttpHeaderValueCollection<EntityTagHeaderValue> IfNoneMatch =>
-            GetSpecializedCollection(IfNoneMatchSlot, static thisRef => new HttpHeaderValueCollection<EntityTagHeaderValue>(KnownHeaders.IfNoneMatch.Descriptor, thisRef));
+            GetSpecializedCollection(
+                IfNoneMatchSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<EntityTagHeaderValue>(
+                        KnownHeaders.IfNoneMatch.Descriptor,
+                        thisRef
+                    )
+            );
 
         public RangeConditionHeaderValue? IfRange
         {
-            get { return (RangeConditionHeaderValue?)GetParsedValues(KnownHeaders.IfRange.Descriptor); }
+            get
+            {
+                return (RangeConditionHeaderValue?)GetParsedValues(KnownHeaders.IfRange.Descriptor);
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.IfRange.Descriptor, value); }
         }
 
         public DateTimeOffset? IfUnmodifiedSince
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.IfUnmodifiedSince.Descriptor, this); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.IfUnmodifiedSince.Descriptor,
+                    this
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.IfUnmodifiedSince.Descriptor, value); }
         }
 
@@ -167,10 +238,14 @@ namespace System.Net.Http.Headers
             set { SetOrRemoveParsedValue(KnownHeaders.MaxForwards.Descriptor, value); }
         }
 
-
         public AuthenticationHeaderValue? ProxyAuthorization
         {
-            get { return (AuthenticationHeaderValue?)GetParsedValues(KnownHeaders.ProxyAuthorization.Descriptor); }
+            get
+            {
+                return (AuthenticationHeaderValue?)GetParsedValues(
+                    KnownHeaders.ProxyAuthorization.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ProxyAuthorization.Descriptor, value); }
         }
 
@@ -187,13 +262,31 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue> TE =>
-            GetSpecializedCollection(TransferEncodingSlot, static thisRef => new HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue>(KnownHeaders.TE.Descriptor, thisRef));
+            GetSpecializedCollection(
+                TransferEncodingSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue>(
+                        KnownHeaders.TE.Descriptor,
+                        thisRef
+                    )
+            );
 
         public HttpHeaderValueCollection<ProductInfoHeaderValue> UserAgent =>
-            GetSpecializedCollection(UserAgentSlot, static thisRef => new HttpHeaderValueCollection<ProductInfoHeaderValue>(KnownHeaders.UserAgent.Descriptor, thisRef));
+            GetSpecializedCollection(
+                UserAgentSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<ProductInfoHeaderValue>(
+                        KnownHeaders.UserAgent.Descriptor,
+                        thisRef
+                    )
+            );
 
         private HttpHeaderValueCollection<NameValueWithParametersHeaderValue> ExpectCore =>
-            _expect ??= new HttpHeaderValueCollection<NameValueWithParametersHeaderValue>(KnownHeaders.Expect.Descriptor, this, HeaderUtilities.ExpectContinue);
+            _expect ??= new HttpHeaderValueCollection<NameValueWithParametersHeaderValue>(
+                KnownHeaders.Expect.Descriptor,
+                this,
+                HeaderUtilities.ExpectContinue
+            );
 
         #endregion
 
@@ -261,14 +354,17 @@ namespace System.Net.Http.Headers
         #endregion
 
         internal HttpRequestHeaders()
-            : base(HttpHeaderType.General | HttpHeaderType.Request | HttpHeaderType.Custom, HttpHeaderType.Response)
-        {
-        }
+            : base(
+                HttpHeaderType.General | HttpHeaderType.Request | HttpHeaderType.Custom,
+                HttpHeaderType.Response
+            ) { }
 
         internal HttpRequestHeaders(bool forceHeaderStoreItems)
-            : base(HttpHeaderType.General | HttpHeaderType.Request | HttpHeaderType.Custom, HttpHeaderType.Response, forceHeaderStoreItems)
-        {
-        }
+            : base(
+                HttpHeaderType.General | HttpHeaderType.Request | HttpHeaderType.Custom,
+                HttpHeaderType.Response,
+                forceHeaderStoreItems
+            ) { }
 
         internal override void AddHeaders(HttpHeaders sourceHeaders)
         {
@@ -289,6 +385,7 @@ namespace System.Net.Http.Headers
             }
         }
 
-        private HttpGeneralHeaders GeneralHeaders => _generalHeaders ?? (_generalHeaders = new HttpGeneralHeaders(this));
+        private HttpGeneralHeaders GeneralHeaders =>
+            _generalHeaders ?? (_generalHeaders = new HttpGeneralHeaders(this));
     }
 }

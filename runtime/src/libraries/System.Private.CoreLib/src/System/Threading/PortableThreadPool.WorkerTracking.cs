@@ -26,7 +26,10 @@ namespace System.Threading
                 }
 
                 CountsOfThreadsProcessingUserCallbacks countsBeforeUpdate =
-                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(newCounts, counts);
+                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(
+                        newCounts,
+                        counts
+                    );
                 if (countsBeforeUpdate == counts)
                 {
                     break;
@@ -45,9 +48,14 @@ namespace System.Threading
                 newCounts.ResetHighWatermark();
 
                 CountsOfThreadsProcessingUserCallbacks countsBeforeUpdate =
-                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(newCounts, counts);
-                if (countsBeforeUpdate == counts || countsBeforeUpdate.HighWatermark == countsBeforeUpdate.Current)
-                {
+                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(
+                        newCounts,
+                        counts
+                    );
+                if (
+                    countsBeforeUpdate == counts
+                    || countsBeforeUpdate.HighWatermark == countsBeforeUpdate.Current
+                ) {
                     return countsBeforeUpdate.HighWatermark;
                 }
 
@@ -69,7 +77,8 @@ namespace System.Threading
 
             private short GetInt16Value(byte shift) => (short)(_data >> shift);
             private void SetInt16Value(short value, byte shift) =>
-                _data = (_data & ~((uint)ushort.MaxValue << shift)) | ((uint)(ushort)value << shift);
+                _data =
+                    (_data & ~((uint)ushort.MaxValue << shift)) | ((uint)(ushort)value << shift);
 
             /// <summary>
             /// Number of threads currently processing user callbacks
@@ -105,19 +114,21 @@ namespace System.Threading
 
             public CountsOfThreadsProcessingUserCallbacks InterlockedCompareExchange(
                 CountsOfThreadsProcessingUserCallbacks newCounts,
-                CountsOfThreadsProcessingUserCallbacks oldCounts)
-            {
-                return
-                    new CountsOfThreadsProcessingUserCallbacks(
-                        Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data));
+                CountsOfThreadsProcessingUserCallbacks oldCounts
+            ) {
+                return new CountsOfThreadsProcessingUserCallbacks(
+                    Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data)
+                );
             }
 
             public static bool operator ==(
                 CountsOfThreadsProcessingUserCallbacks lhs,
-                CountsOfThreadsProcessingUserCallbacks rhs) => lhs._data == rhs._data;
+                CountsOfThreadsProcessingUserCallbacks rhs
+            ) => lhs._data == rhs._data;
             public static bool operator !=(
                 CountsOfThreadsProcessingUserCallbacks lhs,
-                CountsOfThreadsProcessingUserCallbacks rhs) => lhs._data != rhs._data;
+                CountsOfThreadsProcessingUserCallbacks rhs
+            ) => lhs._data != rhs._data;
 
             public override bool Equals([NotNullWhen(true)] object? obj) =>
                 obj is CountsOfThreadsProcessingUserCallbacks other && _data == other._data;

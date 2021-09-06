@@ -63,9 +63,15 @@ namespace System.Reflection.Metadata
             }
         }
 
-        public MethodSignature<TType> DecodeSignature<TType, TGenericContext>(ISignatureTypeProvider<TType, TGenericContext> provider, TGenericContext genericContext)
-        {
-            var decoder = new SignatureDecoder<TType, TGenericContext>(provider, _reader, genericContext);
+        public MethodSignature<TType> DecodeSignature<TType, TGenericContext>(
+            ISignatureTypeProvider<TType, TGenericContext> provider,
+            TGenericContext genericContext
+        ) {
+            var decoder = new SignatureDecoder<TType, TGenericContext>(
+                provider,
+                _reader,
+                genericContext
+            );
             var blobReader = _reader.GetBlobReader(Signature);
             return decoder.DecodeMethodSignature(ref blobReader);
         }
@@ -162,8 +168,10 @@ namespace System.Reflection.Metadata
             MethodAttributes flags = _reader.MethodDefTable.GetFlags(Handle);
             MethodDefTreatment treatment = Treatment;
 
-            if ((treatment & MethodDefTreatment.KindMask) == MethodDefTreatment.HiddenInterfaceImplementation)
-            {
+            if (
+                (treatment & MethodDefTreatment.KindMask)
+                == MethodDefTreatment.HiddenInterfaceImplementation
+            ) {
                 flags = (flags & ~MethodAttributes.MemberAccessMask) | MethodAttributes.Private;
             }
 
@@ -176,7 +184,6 @@ namespace System.Reflection.Metadata
             {
                 flags = (flags & ~MethodAttributes.MemberAccessMask) | MethodAttributes.Public;
             }
-
 
             return flags | MethodAttributes.HideBySig;
         }

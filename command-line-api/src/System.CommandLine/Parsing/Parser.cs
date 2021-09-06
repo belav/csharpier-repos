@@ -12,25 +12,17 @@ namespace System.CommandLine.Parsing
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-        public Parser(params Symbol[] symbols) : this(new CommandLineConfiguration(symbols))
-        {
-        }
+        public Parser(params Symbol[] symbols) : this(new CommandLineConfiguration(symbols)) { }
 
-        public Parser() : this(new RootCommand())
-        {
-        }
+        public Parser() : this(new RootCommand()) { }
 
         public CommandLineConfiguration Configuration { get; }
 
-        public ParseResult Parse(
-            IReadOnlyList<string> arguments,
-            string? rawInput = null)
+        public ParseResult Parse(IReadOnlyList<string> arguments, string? rawInput = null)
         {
             var tokenizeResult = arguments.Tokenize(Configuration);
 
-            var operation = new ParseOperation(
-                tokenizeResult,
-                Configuration);
+            var operation = new ParseOperation(tokenizeResult, Configuration);
 
             operation.Parse();
 
@@ -40,7 +32,8 @@ namespace System.CommandLine.Parsing
                 operation.UnparsedTokens,
                 operation.UnmatchedTokens,
                 operation.Errors,
-                rawInput);
+                rawInput
+            );
 
             visitor.Visit(operation.RootCommandNode!);
 

@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading;
 using Xunit;
 
-
 public class SyncTextWriter
 {
     [Fact]
@@ -31,8 +30,8 @@ public class SyncTextWriter
 
             Console.Write("{0}", 32);
             Assert.True(newWriter.WriteFormatCalled);
-
         }
+
         finally
         {
             Console.SetOut(oldWriter);
@@ -46,8 +45,10 @@ public class SyncTextWriter
         public bool WriteCharCalled;
         public bool WriteFormatCalled;
 
-
-        public override Encoding Encoding { get { return Encoding.UTF8; } }
+        public override Encoding Encoding
+        {
+            get { return Encoding.UTF8; }
+        }
 
         public override void Write(char value)
         {

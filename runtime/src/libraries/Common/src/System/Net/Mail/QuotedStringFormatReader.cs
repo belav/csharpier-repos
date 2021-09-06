@@ -32,11 +32,22 @@ namespace System.Net.Mail
         // - A Unicode character is encountered and Unicode has not been allowed.
         // - The final double quote is not found.
         //
-        internal static bool TryReadReverseQuoted(string data, int index, bool permitUnicode, out int outIndex, bool throwExceptionIfFail)
-        {
-            Debug.Assert(0 <= index && index < data.Length, "Index out of range: " + index + ", " + data.Length);
+        internal static bool TryReadReverseQuoted(
+            string data,
+            int index,
+            bool permitUnicode,
+            out int outIndex,
+            bool throwExceptionIfFail
+        ) {
+            Debug.Assert(
+                0 <= index && index < data.Length,
+                "Index out of range: " + index + ", " + data.Length
+            );
             // Check for the first bounding quote
-            Debug.Assert(data[index] == MailBnfHelper.Quote, "Initial char at index " + index + " was not a quote.");
+            Debug.Assert(
+                data[index] == MailBnfHelper.Quote,
+                "Initial char at index " + index + " was not a quote."
+            );
 
             // Skip the bounding quote
             index--;
@@ -44,8 +55,14 @@ namespace System.Net.Mail
             do
             {
                 // Check for valid whitespace
-                if (!WhitespaceReader.TryReadFwsReverse(data, index, out index, throwExceptionIfFail))
-                {
+                if (
+                    !WhitespaceReader.TryReadFwsReverse(
+                        data,
+                        index,
+                        out index,
+                        throwExceptionIfFail
+                    )
+                ) {
                     outIndex = default;
                     return false;
                 }
@@ -56,8 +73,15 @@ namespace System.Net.Mail
                 }
 
                 // Check for escaped characters
-                if (!QuotedPairReader.TryCountQuotedChars(data, index, permitUnicode, out int quotedCharCount, throwExceptionIfFail))
-                {
+                if (
+                    !QuotedPairReader.TryCountQuotedChars(
+                        data,
+                        index,
+                        permitUnicode,
+                        out int quotedCharCount,
+                        throwExceptionIfFail
+                    )
+                ) {
                     outIndex = default;
                     return false;
                 }
@@ -79,7 +103,9 @@ namespace System.Net.Mail
                 {
                     if (throwExceptionIfFail)
                     {
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index])
+                        );
                     }
                     else
                     {
@@ -92,13 +118,14 @@ namespace System.Net.Mail
                 {
                     index--;
                 }
-            }
-            while (index >= 0);
+            } while (index >= 0);
 
             if (throwExceptionIfFail)
             {
                 // We started with a quote, but did not end with one
-                throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.Quote));
+                throw new FormatException(
+                    SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.Quote)
+                );
             }
             else
             {
@@ -123,15 +150,30 @@ namespace System.Net.Mail
         // - A non-escaped character is encountered that is not valid in a quoted string.  This includes double quotes.
         // - A Unicode character is encountered and Unicode has not been allowed.
         //
-        internal static bool TryReadReverseUnQuoted(string data, int index, bool permitUnicode, bool expectCommaDelimiter, out int outIndex, bool throwExceptionIfFail)
-        {
-            Debug.Assert(0 <= index && index < data.Length, "Index out of range: " + index + ", " + data.Length);
+        internal static bool TryReadReverseUnQuoted(
+            string data,
+            int index,
+            bool permitUnicode,
+            bool expectCommaDelimiter,
+            out int outIndex,
+            bool throwExceptionIfFail
+        ) {
+            Debug.Assert(
+                0 <= index && index < data.Length,
+                "Index out of range: " + index + ", " + data.Length
+            );
 
             do
             {
                 // Check for valid whitespace
-                if (!WhitespaceReader.TryReadFwsReverse(data, index, out index, throwExceptionIfFail))
-                {
+                if (
+                    !WhitespaceReader.TryReadFwsReverse(
+                        data,
+                        index,
+                        out index,
+                        throwExceptionIfFail
+                    )
+                ) {
                     outIndex = default;
                     return false;
                 }
@@ -141,8 +183,15 @@ namespace System.Net.Mail
                     break;
                 }
                 // Check for escaped characters
-                if (!QuotedPairReader.TryCountQuotedChars(data, index, permitUnicode, out int quotedCharCount, throwExceptionIfFail))
-                {
+                if (
+                    !QuotedPairReader.TryCountQuotedChars(
+                        data,
+                        index,
+                        permitUnicode,
+                        out int quotedCharCount,
+                        throwExceptionIfFail
+                    )
+                ) {
                     outIndex = default;
                     return false;
                 }
@@ -161,7 +210,9 @@ namespace System.Net.Mail
                 {
                     if (throwExceptionIfFail)
                     {
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index])
+                        );
                     }
                     else
                     {
@@ -174,8 +225,7 @@ namespace System.Net.Mail
                 {
                     index--;
                 }
-            }
-            while (index >= 0);
+            } while (index >= 0);
 
             outIndex = index;
             return true;

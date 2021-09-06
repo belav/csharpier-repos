@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     internal static partial class ExpressionSyntaxExtensions
     {
         public static ExpressionSyntax Parenthesize(
-            this ExpressionSyntax expression, bool includeElasticTrivia = true, bool addSimplifierAnnotation = true)
-        {
+            this ExpressionSyntax expression,
+            bool includeElasticTrivia = true,
+            bool addSimplifierAnnotation = true
+        ) {
             // a 'ref' expression should never be parenthesized.  It fundamentally breaks the code.
             // This is because, from the language's perspective there is no such thing as a ref
-            // expression.  instead, there are constructs like ```return ref expr``` or 
-            // ```x ? ref expr1 : ref expr2```, or ```ref int a = ref expr``` in these cases, the 
+            // expression.  instead, there are constructs like ```return ref expr``` or
+            // ```x ? ref expr1 : ref expr2```, or ```ref int a = ref expr``` in these cases, the
             // ref's do not belong to the exprs, but instead belong to the parent construct. i.e.
-            // ```return ref``` or ``` ? ref  ... : ref ... ``` or ``` ... = ref ...```.  For 
+            // ```return ref``` or ``` ? ref  ... : ref ... ``` or ``` ... = ref ...```.  For
             // parsing convenience, and to prevent having to update all these constructs, we settled
             // on a ref-expression node.  But this node isn't a true expression that be operated
             // on like with everything else.
@@ -51,29 +53,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         private static ExpressionSyntax ParenthesizeWorker(
-            this ExpressionSyntax expression, bool includeElasticTrivia)
-        {
+            this ExpressionSyntax expression,
+            bool includeElasticTrivia
+        ) {
             var withoutTrivia = expression.WithoutTrivia();
             var parenthesized = includeElasticTrivia
                 ? SyntaxFactory.ParenthesizedExpression(withoutTrivia)
                 : SyntaxFactory.ParenthesizedExpression(
-                    SyntaxFactory.Token(SyntaxTriviaList.Empty, SyntaxKind.OpenParenToken, SyntaxTriviaList.Empty),
-                    withoutTrivia,
-                    SyntaxFactory.Token(SyntaxTriviaList.Empty, SyntaxKind.CloseParenToken, SyntaxTriviaList.Empty));
+                      SyntaxFactory.Token(
+                          SyntaxTriviaList.Empty,
+                          SyntaxKind.OpenParenToken,
+                          SyntaxTriviaList.Empty
+                      ),
+                      withoutTrivia,
+                      SyntaxFactory.Token(
+                          SyntaxTriviaList.Empty,
+                          SyntaxKind.CloseParenToken,
+                          SyntaxTriviaList.Empty
+                      )
+                  );
 
             return parenthesized.WithTriviaFrom(expression);
         }
 
         public static PatternSyntax Parenthesize(
-            this PatternSyntax pattern, bool includeElasticTrivia = true, bool addSimplifierAnnotation = true)
-        {
+            this PatternSyntax pattern,
+            bool includeElasticTrivia = true,
+            bool addSimplifierAnnotation = true
+        ) {
             var withoutTrivia = pattern.WithoutTrivia();
             var parenthesized = includeElasticTrivia
                 ? SyntaxFactory.ParenthesizedPattern(withoutTrivia)
                 : SyntaxFactory.ParenthesizedPattern(
-                    SyntaxFactory.Token(SyntaxTriviaList.Empty, SyntaxKind.OpenParenToken, SyntaxTriviaList.Empty),
-                    withoutTrivia,
-                    SyntaxFactory.Token(SyntaxTriviaList.Empty, SyntaxKind.CloseParenToken, SyntaxTriviaList.Empty));
+                      SyntaxFactory.Token(
+                          SyntaxTriviaList.Empty,
+                          SyntaxKind.OpenParenToken,
+                          SyntaxTriviaList.Empty
+                      ),
+                      withoutTrivia,
+                      SyntaxFactory.Token(
+                          SyntaxTriviaList.Empty,
+                          SyntaxKind.CloseParenToken,
+                          SyntaxTriviaList.Empty
+                      )
+                  );
 
             var result = parenthesized.WithTriviaFrom(pattern);
             return addSimplifierAnnotation
@@ -83,11 +106,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static CastExpressionSyntax Cast(
             this ExpressionSyntax expression,
-            ITypeSymbol targetType)
-        {
+            ITypeSymbol targetType
+        ) {
             var parenthesized = expression.Parenthesize();
             var castExpression = SyntaxFactory.CastExpression(
-                targetType.GenerateTypeSyntax(), parenthesized.WithoutTrivia()).WithTriviaFrom(parenthesized);
+                    targetType.GenerateTypeSyntax(),
+                    parenthesized.WithoutTrivia()
+                )
+                .WithTriviaFrom(parenthesized);
 
             return castExpression.WithAdditionalAnnotations(Simplifier.Annotation);
         }
@@ -101,8 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             ITypeSymbol targetType,
             int position,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             if (targetType.ContainsAnonymousType())
             {
                 return expression;
@@ -114,10 +140,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             var typeSyntax = targetType.GenerateTypeSyntax();
-            var type = semanticModel.GetSpeculativeTypeInfo(
-                position,
-                typeSyntax,
-                SpeculativeBindingOption.BindAsTypeOrNamespace).Type;
+            var type =
+                semanticModel.GetSpeculativeTypeInfo(
+                    position,
+                    typeSyntax,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                ).Type;
 
             if (!targetType.Equals(type))
             {
@@ -127,7 +155,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var castExpression = expression.Cast(targetType);
 
             // Ensure that inserting the cast doesn't change the semantics.
-            var specAnalyzer = new SpeculationAnalyzer(expression, castExpression, semanticModel, cancellationToken);
+            var specAnalyzer = new SpeculationAnalyzer(
+                expression,
+                castExpression,
+                semanticModel,
+                cancellationToken
+            );
             var speculativeSemanticModel = specAnalyzer.SpeculativeSemanticModel;
             if (speculativeSemanticModel == null)
             {
@@ -135,8 +168,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             var speculatedCastExpression = (CastExpressionSyntax)specAnalyzer.ReplacedExpression;
-            if (!CastSimplifier.IsUnnecessaryCast(speculatedCastExpression, speculativeSemanticModel, cancellationToken))
-            {
+            if (
+                !CastSimplifier.IsUnnecessaryCast(
+                    speculatedCastExpression,
+                    speculativeSemanticModel,
+                    cancellationToken
+                )
+            ) {
                 return expression;
             }
 

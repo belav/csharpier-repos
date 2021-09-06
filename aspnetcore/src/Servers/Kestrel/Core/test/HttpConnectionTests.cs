@@ -25,25 +25,38 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 serviceContext: new TestServiceContext(),
                 connectionContext: mockConnectionContext.Object,
                 connectionFeatures: new FeatureCollection(),
-                transport: new DuplexPipe(Mock.Of<PipeReader>(), Mock.Of<PipeWriter>()));
+                transport: new DuplexPipe(Mock.Of<PipeReader>(), Mock.Of<PipeWriter>())
+            );
 
             var httpConnection = new HttpConnection(httpConnectionContext);
 
-            var aborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var aborted = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var http1Connection = new Http1Connection(httpConnectionContext);
 
             httpConnection.Initialize(http1Connection);
             http1Connection.Reset();
-            http1Connection.RequestAborted.Register(() =>
-            {
-                aborted.SetResult();
-            });
+            http1Connection.RequestAborted.Register(
+                () =>
+                {
+                    aborted.SetResult();
+                }
+            );
 
             httpConnection.OnTimeout(TimeoutReason.WriteDataRate);
 
-            mockConnectionContext
-                .Verify(c => c.Abort(It.Is<ConnectionAbortedException>(ex => ex.Message == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied)),
-                    Times.Once);
+            mockConnectionContext.Verify(
+                c =>
+                    c.Abort(
+                        It.Is<ConnectionAbortedException>(
+                            ex =>
+                                ex.Message
+                                == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                        )
+                    ),
+                Times.Once
+            );
 
             await aborted.Task.DefaultTimeout();
         }

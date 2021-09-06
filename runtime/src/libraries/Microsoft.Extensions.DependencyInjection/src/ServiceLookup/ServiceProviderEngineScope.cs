@@ -8,7 +8,10 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
-    internal sealed class ServiceProviderEngineScope : IServiceScope, IServiceProvider, IAsyncDisposable
+    internal sealed class ServiceProviderEngineScope
+        : IServiceScope,
+          IServiceProvider,
+          IAsyncDisposable
     {
         // For testing only
         internal Action<object> _captureDisposableCallback;
@@ -47,8 +50,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             _captureDisposableCallback?.Invoke(service);
 
-            if (ReferenceEquals(this, service) || !(service is IDisposable || service is IAsyncDisposable))
-            {
+            if (
+                ReferenceEquals(this, service)
+                || !(service is IDisposable || service is IAsyncDisposable)
+            ) {
                 return service;
             }
 
@@ -63,7 +68,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     else
                     {
                         // sync over async, for the rare case that an object only implements IAsyncDisposable and may end up starving the thread pool.
-                        Task.Run(() => ((IAsyncDisposable)service).DisposeAsync().AsTask()).GetAwaiter().GetResult();
+                        Task.Run(() => ((IAsyncDisposable)service).DisposeAsync().AsTask())
+                            .GetAwaiter()
+                            .GetResult();
                     }
 
                     ThrowHelper.ThrowObjectDisposedException();
@@ -91,7 +98,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.Format(SR.AsyncDisposableServiceDispose, TypeNameHelper.GetTypeDisplayName(toDispose[i])));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.AsyncDisposableServiceDispose,
+                                TypeNameHelper.GetTypeDisplayName(toDispose[i])
+                            )
+                        );
                     }
                 }
             }

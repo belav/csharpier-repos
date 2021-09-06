@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 allowUsingVariableDeclarations,
                 allowConditionalDataDashAttributes,
                 allowCSharpInMarkupAttributeArea,
-                allowNullableForgivenessOperator);
+                allowNullableForgivenessOperator
+            );
         }
 
         public abstract bool AllowMinimizedBooleanTagHelperAttributes { get; }
@@ -87,8 +88,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 bool allowUsingVariableDeclarations,
                 bool allowConditionalDataDashAttributesInComponents,
                 bool allowCSharpInMarkupAttributeArea,
-                bool allowNullableForgivenessOperator)
-            {
+                bool allowNullableForgivenessOperator
+            ) {
                 AllowMinimizedBooleanTagHelperAttributes = allowMinimizedBooleanTagHelperAttributes;
                 AllowHtmlCommentsInTagHelpers = allowHtmlCommentsInTagHelpers;
                 AllowComponentFileKind = allowComponentFileKind;

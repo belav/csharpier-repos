@@ -20,8 +20,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private readonly DynamicControllerEndpointSelectorCache _selectorCache;
         private readonly EndpointMetadataComparer _comparer;
 
-        public DynamicControllerEndpointMatcherPolicy(DynamicControllerEndpointSelectorCache selectorCache, EndpointMetadataComparer comparer)
-        {
+        public DynamicControllerEndpointMatcherPolicy(
+            DynamicControllerEndpointSelectorCache selectorCache,
+            EndpointMetadataComparer comparer
+        ) {
             if (selectorCache == null)
             {
                 throw new ArgumentNullException(nameof(selectorCache));
@@ -59,8 +61,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     return true;
                 }
 
-                if (endpoints[i].Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>() != null)
-                {
+                if (
+                    endpoints[
+                        i
+                    ].Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>() != null
+                ) {
                     // Found a dynamic controller endpoint
                     return true;
                 }
@@ -101,8 +106,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                 // We don't expect both of these to be provided, and they are internal so there's
                 // no realistic way this could happen.
-                var dynamicControllerMetadata = endpoint.Metadata.GetMetadata<DynamicControllerMetadata>();
-                var transformerMetadata = endpoint.Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
+                var dynamicControllerMetadata =
+                    endpoint.Metadata.GetMetadata<DynamicControllerMetadata>();
+                var transformerMetadata =
+                    endpoint.Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
 
                 DynamicRouteValueTransformer? transformer = null;
                 if (dynamicControllerMetadata != null)
@@ -111,10 +118,17 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 }
                 else if (transformerMetadata != null)
                 {
-                    transformer = (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(transformerMetadata.SelectorType);
+                    transformer =
+                        (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(
+                            transformerMetadata.SelectorType
+                        );
                     if (transformer.State != null)
                     {
-                        throw new InvalidOperationException(Resources.FormatStateShouldBeNullForRouteValueTransformers(transformerMetadata.SelectorType.Name));
+                        throw new InvalidOperationException(
+                            Resources.FormatStateShouldBeNullForRouteValueTransformers(
+                                transformerMetadata.SelectorType.Name
+                            )
+                        );
                     }
                     transformer.State = transformerMetadata.State;
 
@@ -140,8 +154,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     // Naving no match for a fallback is a configuration error. We can't really check
                     // during startup that the action you configured exists, so this is the best we can do.
                     throw new InvalidOperationException(
-                        "Cannot find the fallback endpoint specified by route values: " +
-                        "{ " + string.Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")) + " }.");
+                        "Cannot find the fallback endpoint specified by route values: "
+                            + "{ "
+                            + string.Join(
+                                ", ",
+                                dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")
+                            )
+                            + " }."
+                    );
                 }
                 else if (endpoints.Count == 0)
                 {
@@ -180,8 +200,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             }
         }
 
-        private DynamicControllerEndpointSelector ResolveSelector(DynamicControllerEndpointSelector? currentSelector, Endpoint endpoint)
-        {
+        private DynamicControllerEndpointSelector ResolveSelector(
+            DynamicControllerEndpointSelector? currentSelector,
+            Endpoint endpoint
+        ) {
             var selector = _selectorCache.GetEndpointSelector(endpoint);
 
             Debug.Assert(currentSelector == null || ReferenceEquals(currentSelector, selector));

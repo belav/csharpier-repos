@@ -12,7 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures the OnDelete behavior for foreign keys on the join entity type for
     ///     self-referencing skip navigations
     /// </summary>
-    public class SqlServerOnDeleteConvention : CascadeDeleteConvention, ISkipNavigationForeignKeyChangedConvention
+    public class SqlServerOnDeleteConvention
+        : CascadeDeleteConvention,
+          ISkipNavigationForeignKeyChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerOnDeleteConvention" />.
@@ -21,18 +23,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public SqlServerOnDeleteConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies) { }
 
         /// <inheritdoc />
         public virtual void ProcessSkipNavigationForeignKeyChanged(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionForeignKey? foreignKey,
             IConventionForeignKey? oldForeignKey,
-            IConventionContext<IConventionForeignKey> context)
-        {
+            IConventionContext<IConventionForeignKey> context
+        ) {
             if (foreignKey is not null && foreignKey.IsInModel)
             {
                 foreignKey.Builder.OnDelete(GetTargetDeleteBehavior(foreignKey));
@@ -54,19 +54,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             var selfReferencingSkipNavigation = foreignKey.GetReferencingSkipNavigations()
-                .FirstOrDefault(s => s.Inverse != null && s.TargetEntityType == s.DeclaringEntityType);
+                .FirstOrDefault(
+                    s => s.Inverse != null && s.TargetEntityType == s.DeclaringEntityType
+                );
             if (selfReferencingSkipNavigation == null)
             {
                 return deleteBehavior;
             }
 
-            if (selfReferencingSkipNavigation
-                == selfReferencingSkipNavigation.DeclaringEntityType.GetDeclaredSkipNavigations()
-                    .First(s => s == selfReferencingSkipNavigation || s == selfReferencingSkipNavigation.Inverse)
-                && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse)
-            {
+            if (
+                selfReferencingSkipNavigation
+                    == selfReferencingSkipNavigation.DeclaringEntityType.GetDeclaredSkipNavigations()
+                        .First(
+                            s =>
+                                s == selfReferencingSkipNavigation
+                                || s == selfReferencingSkipNavigation.Inverse
+                        )
+                && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse
+            ) {
                 selfReferencingSkipNavigation.Inverse!.ForeignKey?.Builder.OnDelete(
-                    GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey));
+                    GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
+                );
                 return DeleteBehavior.ClientCascade;
             }
 

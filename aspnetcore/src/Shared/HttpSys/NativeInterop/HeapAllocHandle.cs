@@ -11,10 +11,7 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         private static readonly IntPtr ProcessHeap = UnsafeNclNativeMethods.GetProcessHeap();
 
         // Called by P/Invoke when returning SafeHandles
-        private HeapAllocHandle()
-            : base(ownsHandle: true)
-        {
-        }
+        private HeapAllocHandle() : base(ownsHandle: true) { }
 
         // Do not provide a finalizer - SafeHandle's critical finalizer will call ReleaseHandle for you.
         protected override bool ReleaseHandle()

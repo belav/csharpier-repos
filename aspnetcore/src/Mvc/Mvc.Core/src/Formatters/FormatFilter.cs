@@ -111,13 +111,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // type than requested e.g. OK if "text/*" requested and action supports "text/plain".
             if (!IsSuperSetOfAnySupportedMediaType(contentType, supportedMediaTypes))
             {
-                _logger.ActionDoesNotSupportFormatFilterContentType(contentType, supportedMediaTypes);
+                _logger.ActionDoesNotSupportFormatFilterContentType(
+                    contentType,
+                    supportedMediaTypes
+                );
                 context.Result = new NotFoundResult();
             }
         }
 
-        private bool IsSuperSetOfAnySupportedMediaType(string contentType, MediaTypeCollection supportedMediaTypes)
-        {
+        private bool IsSuperSetOfAnySupportedMediaType(
+            string contentType,
+            MediaTypeCollection supportedMediaTypes
+        ) {
             var parsedContentType = new MediaType(contentType);
             for (var i = 0; i < supportedMediaTypes.Count; i++)
             {
@@ -132,9 +137,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         }
 
         /// <inheritdoc />
-        public void OnResourceExecuted(ResourceExecutedContext context)
-        {
-        }
+        public void OnResourceExecuted(ResourceExecutedContext context) { }
 
         /// <summary>
         /// Sets a Content Type on an  <see cref="ObjectResult" />  using a format value from the request.
@@ -161,9 +164,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // If the action sets a single content type, then it takes precedence over the user
             // supplied content type based on format mapping.
-            if (objectResult.ContentTypes.Count == 1 ||
-                !string.IsNullOrEmpty(context.HttpContext.Response.ContentType))
-            {
+            if (
+                objectResult.ContentTypes.Count == 1
+                || !string.IsNullOrEmpty(context.HttpContext.Response.ContentType)
+            ) {
                 _logger.CannotApplyFormatFilterContentType(format);
                 return;
             }
@@ -177,8 +181,6 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         }
 
         /// <inheritdoc />
-        public void OnResultExecuted(ResultExecutedContext context)
-        {
-        }
+        public void OnResultExecuted(ResultExecutedContext context) { }
     }
 }

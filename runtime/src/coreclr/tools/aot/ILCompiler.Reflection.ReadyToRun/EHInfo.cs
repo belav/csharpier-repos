@@ -19,15 +19,17 @@ namespace ILCompiler.Reflection.ReadyToRun
     [Flags]
     public enum CorExceptionFlag
     {
-        COR_ILEXCEPTION_CLAUSE_NONE,                    // This is a typed handler
-        COR_ILEXCEPTION_CLAUSE_OFFSETLEN = 0x0000,      // Deprecated
-        COR_ILEXCEPTION_CLAUSE_DEPRECATED = 0x0000,     // Deprecated
-        COR_ILEXCEPTION_CLAUSE_FILTER = 0x0001,         // If this bit is on, then this EH entry is for a filter
-        COR_ILEXCEPTION_CLAUSE_FINALLY = 0x0002,        // This clause is a finally clause
-        COR_ILEXCEPTION_CLAUSE_FAULT = 0x0004,          // Fault clause (finally that is called on exception only)
-        COR_ILEXCEPTION_CLAUSE_DUPLICATED = 0x0008,     // duplicated clause. This clause was duplicated to a funclet which was pulled out of line
-
-        COR_ILEXCEPTION_CLAUSE_KIND_MASK = COR_ILEXCEPTION_CLAUSE_FILTER | COR_ILEXCEPTION_CLAUSE_FINALLY | COR_ILEXCEPTION_CLAUSE_FAULT,
+        COR_ILEXCEPTION_CLAUSE_NONE, // This is a typed handler
+        COR_ILEXCEPTION_CLAUSE_OFFSETLEN = 0x0000, // Deprecated
+        COR_ILEXCEPTION_CLAUSE_DEPRECATED = 0x0000, // Deprecated
+        COR_ILEXCEPTION_CLAUSE_FILTER = 0x0001, // If this bit is on, then this EH entry is for a filter
+        COR_ILEXCEPTION_CLAUSE_FINALLY = 0x0002, // This clause is a finally clause
+        COR_ILEXCEPTION_CLAUSE_FAULT = 0x0004, // Fault clause (finally that is called on exception only)
+        COR_ILEXCEPTION_CLAUSE_DUPLICATED = 0x0008, // duplicated clause. This clause was duplicated to a funclet which was pulled out of line
+        COR_ILEXCEPTION_CLAUSE_KIND_MASK =
+            COR_ILEXCEPTION_CLAUSE_FILTER
+            | COR_ILEXCEPTION_CLAUSE_FINALLY
+            | COR_ILEXCEPTION_CLAUSE_FAULT,
     }
 
     /// <summary>
@@ -85,15 +87,23 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// <param name="offset">Offset of the EH clause in the image</param>
         public EHClause(ReadyToRunReader reader, int offset)
         {
-            Flags = (CorExceptionFlag)BitConverter.ToUInt32(reader.Image, offset + 0 * sizeof(uint));
+            Flags = (CorExceptionFlag)BitConverter.ToUInt32(
+                reader.Image,
+                offset + 0 * sizeof(uint)
+            );
             TryOffset = BitConverter.ToUInt32(reader.Image, offset + 1 * sizeof(uint));
             TryEnd = BitConverter.ToUInt32(reader.Image, offset + 2 * sizeof(uint));
             HandlerOffset = BitConverter.ToUInt32(reader.Image, offset + 3 * sizeof(uint));
             HandlerEnd = BitConverter.ToUInt32(reader.Image, offset + 4 * sizeof(uint));
-            ClassTokenOrFilterOffset = BitConverter.ToUInt32(reader.Image, offset + 5 * sizeof(uint));
+            ClassTokenOrFilterOffset = BitConverter.ToUInt32(
+                reader.Image,
+                offset + 5 * sizeof(uint)
+            );
 
-            if ((Flags & CorExceptionFlag.COR_ILEXCEPTION_CLAUSE_KIND_MASK) == CorExceptionFlag.COR_ILEXCEPTION_CLAUSE_NONE)
-            {
+            if (
+                (Flags & CorExceptionFlag.COR_ILEXCEPTION_CLAUSE_KIND_MASK)
+                == CorExceptionFlag.COR_ILEXCEPTION_CLAUSE_NONE
+            ) {
                 if (reader.Composite)
                 {
                     // TODO: EH clauses in composite mode
@@ -101,7 +111,10 @@ namespace ILCompiler.Reflection.ReadyToRun
                 }
                 else
                 {
-                    ClassName = MetadataNameFormatter.FormatHandle(reader.GetGlobalMetadata()?.MetadataReader, MetadataTokens.Handle((int)ClassTokenOrFilterOffset));
+                    ClassName = MetadataNameFormatter.FormatHandle(
+                        reader.GetGlobalMetadata()?.MetadataReader,
+                        MetadataTokens.Handle((int)ClassTokenOrFilterOffset)
+                    );
                 }
             }
         }
@@ -203,8 +216,13 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// <param name="methodRva">Starting RVA of the runtime function</param>
         /// <param name="offset">File offset of the EH info</param>
         /// <param name="clauseCount">Number of EH info clauses</param>
-        public EHInfo(ReadyToRunReader reader, int ehInfoRva, int methodRva, int offset, int clauseCount)
-        {
+        public EHInfo(
+            ReadyToRunReader reader,
+            int ehInfoRva,
+            int methodRva,
+            int offset,
+            int clauseCount
+        ) {
             _readyToRunReader = reader;
             RelativeVirtualAddress = ehInfoRva;
             MethodRelativeVirtualAddress = methodRva;
@@ -221,7 +239,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             _clauses = new List<EHClause>();
             for (int clauseIndex = 0; clauseIndex < _clauseCount; clauseIndex++)
             {
-                _clauses.Add(new EHClause(_readyToRunReader, _offset + clauseIndex * EHClause.Length));
+                _clauses.Add(
+                    new EHClause(_readyToRunReader, _offset + clauseIndex * EHClause.Length)
+                );
             }
         }
 

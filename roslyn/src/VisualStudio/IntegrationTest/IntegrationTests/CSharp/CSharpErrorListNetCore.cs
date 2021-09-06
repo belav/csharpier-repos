@@ -16,9 +16,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpErrorListNetCore : CSharpErrorListCommon
     {
         public CSharpErrorListNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary) { }
 
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.ErrorList)]

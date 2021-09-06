@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class HtmlAttributeValueIntermediateNode : IntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public string Prefix { get; set; }
 

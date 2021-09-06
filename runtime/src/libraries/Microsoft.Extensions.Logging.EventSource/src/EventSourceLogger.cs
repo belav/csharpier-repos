@@ -26,8 +26,12 @@ namespace Microsoft.Extensions.Logging.EventSource
         private readonly LoggingEventSource _eventSource;
         private readonly int _factoryID;
 
-        public EventSourceLogger(string categoryName, int factoryID, LoggingEventSource eventSource, EventSourceLogger next)
-        {
+        public EventSourceLogger(
+            string categoryName,
+            int factoryID,
+            LoggingEventSource eventSource,
+            EventSourceLogger next
+        ) {
             CategoryName = categoryName;
 
             // Default is to turn on all the logging
@@ -50,8 +54,13 @@ namespace Microsoft.Extensions.Logging.EventSource
             return logLevel != LogLevel.None && logLevel >= Level;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -59,8 +68,12 @@ namespace Microsoft.Extensions.Logging.EventSource
             string message = null;
 
             // See if they want the formatted message
-            if (_eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.FormattedMessage))
-            {
+            if (
+                _eventSource.IsEnabled(
+                    EventLevel.Critical,
+                    LoggingEventSource.Keywords.FormattedMessage
+                )
+            ) {
                 message = formatter(state, exception);
                 _eventSource.FormattedMessage(
                     logLevel,
@@ -68,7 +81,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                     CategoryName,
                     eventId.Id,
                     eventId.Name,
-                    message);
+                    message
+                );
             }
 
             // See if they want the message as its component parts.
@@ -84,12 +98,14 @@ namespace Microsoft.Extensions.Logging.EventSource
                     eventId.Id,
                     eventId.Name,
                     exceptionInfo,
-                    arguments);
+                    arguments
+                );
             }
 
             // See if they want the json message
-            if (_eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.JsonMessage))
-            {
+            if (
+                _eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.JsonMessage)
+            ) {
                 string exceptionJson = "{}";
                 if (exception != null)
                 {
@@ -98,8 +114,14 @@ namespace Microsoft.Extensions.Logging.EventSource
                     {
                         new KeyValuePair<string, string>("TypeName", exceptionInfo.TypeName),
                         new KeyValuePair<string, string>("Message", exceptionInfo.Message),
-                        new KeyValuePair<string, string>("HResult", exceptionInfo.HResult.ToString()),
-                        new KeyValuePair<string, string>("VerboseMessage", exceptionInfo.VerboseMessage),
+                        new KeyValuePair<string, string>(
+                            "HResult",
+                            exceptionInfo.HResult.ToString()
+                        ),
+                        new KeyValuePair<string, string>(
+                            "VerboseMessage",
+                            exceptionInfo.VerboseMessage
+                        ),
                     };
                     exceptionJson = ToJson(exceptionInfoData);
                 }
@@ -113,7 +135,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                     eventId.Name,
                     exceptionJson,
                     ToJson(arguments),
-                    message);
+                    message
+                );
             }
         }
 
@@ -127,16 +150,21 @@ namespace Microsoft.Extensions.Logging.EventSource
             int id = Interlocked.Increment(ref _activityIds);
 
             // If JsonMessage is on, use JSON format
-            if (_eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.JsonMessage))
-            {
+            if (
+                _eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.JsonMessage)
+            ) {
                 IReadOnlyList<KeyValuePair<string, string>> arguments = GetProperties(state);
                 _eventSource.ActivityJsonStart(id, _factoryID, CategoryName, ToJson(arguments));
                 return new ActivityScope(_eventSource, CategoryName, id, _factoryID, true);
             }
 
-            if (_eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.Message) ||
-                _eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.FormattedMessage))
-            {
+            if (
+                _eventSource.IsEnabled(EventLevel.Critical, LoggingEventSource.Keywords.Message)
+                || _eventSource.IsEnabled(
+                    EventLevel.Critical,
+                    LoggingEventSource.Keywords.FormattedMessage
+                )
+            ) {
                 IReadOnlyList<KeyValuePair<string, string>> arguments = GetProperties(state);
                 _eventSource.ActivityStart(id, _factoryID, CategoryName, arguments);
                 return new ActivityScope(_eventSource, CategoryName, id, _factoryID, false);
@@ -157,8 +185,13 @@ namespace Microsoft.Extensions.Logging.EventSource
             private readonly bool _isJsonStop;
             private readonly LoggingEventSource _eventSource;
 
-            public ActivityScope(LoggingEventSource eventSource, string categoryName, int activityID, int factoryID, bool isJsonStop)
-            {
+            public ActivityScope(
+                LoggingEventSource eventSource,
+                string categoryName,
+                int activityID,
+                int factoryID,
+                bool isJsonStop
+            ) {
                 _categoryName = categoryName;
                 _activityID = activityID;
                 _factoryID = factoryID;
@@ -201,7 +234,10 @@ namespace Microsoft.Extensions.Logging.EventSource
                 for (int i = 0; i < keyValuePairs.Count; i++)
                 {
                     KeyValuePair<string, object> keyValuePair = keyValuePairs[i];
-                    arguments[i] = new KeyValuePair<string, string>(keyValuePair.Key, keyValuePair.Value?.ToString());
+                    arguments[i] = new KeyValuePair<string, string>(
+                        keyValuePair.Key,
+                        keyValuePair.Value?.ToString()
+                    );
                 }
                 return arguments;
             }

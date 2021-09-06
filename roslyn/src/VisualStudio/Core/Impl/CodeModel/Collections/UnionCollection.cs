@@ -21,8 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         internal static EnvDTE.CodeElements Create(
             CodeModelState state,
             AbstractCodeElement parent,
-            params ICodeElements[] collections)
-        {
+            params ICodeElements[] collections
+        ) {
             var collection = new UnionCollection(state, parent, collections);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
@@ -32,8 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private UnionCollection(
             CodeModelState state,
             AbstractCodeElement parent,
-            ICodeElements[] collections)
-            : base(state, parent)
+            ICodeElements[] collections
+        ) : base(state, parent)
         {
             _collections = collections;
         }
@@ -48,7 +48,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 if (index < currentIndex + count)
                 {
                     // Note: We use index + 1 because CodeModel expects 1-based indices
-                    return ErrorHandler.Succeeded(collection.Item(index - currentIndex + 1, out element));
+                    return ErrorHandler.Succeeded(
+                        collection.Item(index - currentIndex + 1, out element)
+                    );
                 }
 
                 currentIndex += count;

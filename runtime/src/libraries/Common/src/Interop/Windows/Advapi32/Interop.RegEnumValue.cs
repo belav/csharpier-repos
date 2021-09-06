@@ -13,7 +13,13 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, BestFitMapping = false, EntryPoint = "RegEnumValueW", ExactSpelling = true)]
+        [DllImport(
+            Libraries.Advapi32,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            EntryPoint = "RegEnumValueW",
+            ExactSpelling = true
+        )]
         internal static extern int RegEnumValue(
             SafeRegistryHandle hKey,
             int dwIndex,
@@ -22,6 +28,7 @@ internal static partial class Interop
             IntPtr lpReserved_MustBeZero,
             int[]? lpType,
             byte[]? lpData,
-            int[]? lpcbData);
+            int[]? lpcbData
+        );
     }
 }

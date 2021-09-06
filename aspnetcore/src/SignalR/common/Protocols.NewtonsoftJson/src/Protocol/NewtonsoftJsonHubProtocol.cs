@@ -45,9 +45,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <summary>
         /// Initializes a new instance of the <see cref="NewtonsoftJsonHubProtocol"/> class.
         /// </summary>
-        public NewtonsoftJsonHubProtocol() : this(Options.Create(new NewtonsoftJsonHubProtocolOptions()))
-        {
-        }
+        public NewtonsoftJsonHubProtocol()
+            : this(Options.Create(new NewtonsoftJsonHubProtocolOptions())) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewtonsoftJsonHubProtocol"/> class.
@@ -74,8 +73,11 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         }
 
         /// <inheritdoc />
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, [NotNullWhen(true)] out HubMessage? message)
-        {
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            [NotNullWhen(true)] out HubMessage? message
+        ) {
             if (!TextMessageParser.TryParseMessage(ref input, out var payload))
             {
                 message = null;
@@ -88,6 +90,7 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             {
                 message = ParseMessage(textReader, binder);
             }
+
             finally
             {
                 Utf8BufferTextReader.Return(textReader);
@@ -155,31 +158,46 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                 switch (memberName)
                                 {
                                     case TypePropertyName:
-                                        var messageType = JsonUtils.ReadAsInt32(reader, TypePropertyName);
+                                        var messageType = JsonUtils.ReadAsInt32(
+                                            reader,
+                                            TypePropertyName
+                                        );
 
                                         if (messageType == null)
                                         {
-                                            throw new InvalidDataException($"Missing required property '{TypePropertyName}'.");
+                                            throw new InvalidDataException(
+                                                $"Missing required property '{TypePropertyName}'."
+                                            );
                                         }
 
                                         type = messageType.Value;
                                         break;
                                     case InvocationIdPropertyName:
-                                        invocationId = JsonUtils.ReadAsString(reader, InvocationIdPropertyName);
+                                        invocationId = JsonUtils.ReadAsString(
+                                            reader,
+                                            InvocationIdPropertyName
+                                        );
                                         break;
                                     case StreamIdsPropertyName:
                                         JsonUtils.CheckRead(reader);
 
                                         if (reader.TokenType != JsonToken.StartArray)
                                         {
-                                            throw new InvalidDataException($"Expected '{StreamIdsPropertyName}' to be of type {JTokenType.Array}.");
+                                            throw new InvalidDataException(
+                                                $"Expected '{StreamIdsPropertyName}' to be of type {JTokenType.Array}."
+                                            );
                                         }
 
                                         var newStreamIds = new List<string>();
                                         reader.Read();
                                         while (reader.TokenType != JsonToken.EndArray)
                                         {
-                                            newStreamIds.Add(reader.Value?.ToString() ?? throw new InvalidDataException($"Null value for '{StreamIdsPropertyName}' is not valid."));
+                                            newStreamIds.Add(
+                                                reader.Value?.ToString()
+                                                    ?? throw new InvalidDataException(
+                                                        $"Null value for '{StreamIdsPropertyName}' is not valid."
+                                                    )
+                                            );
                                             reader.Read();
                                         }
 
@@ -192,7 +210,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                         error = JsonUtils.ReadAsString(reader, ErrorPropertyName);
                                         break;
                                     case AllowReconnectPropertyName:
-                                        allowReconnect = JsonUtils.ReadAsBoolean(reader, AllowReconnectPropertyName);
+                                        allowReconnect = JsonUtils.ReadAsBoolean(
+                                            reader,
+                                            AllowReconnectPropertyName
+                                        );
                                         break;
                                     case ResultPropertyName:
                                         hasResult = true;
@@ -211,17 +232,21 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
 
                                             if (!JsonUtils.ReadForType(reader, returnType))
                                             {
-                                                throw new JsonReaderException("Unexpected end when reading JSON");
+                                                throw new JsonReaderException(
+                                                    "Unexpected end when reading JSON"
+                                                );
                                             }
 
-                                            result = PayloadSerializer.Deserialize(reader, returnType);
+                                            result = PayloadSerializer.Deserialize(
+                                                reader,
+                                                returnType
+                                            );
                                         }
                                         break;
                                     case ItemPropertyName:
                                         JsonUtils.CheckRead(reader);
 
                                         hasItem = true;
-
 
                                         string? id = null;
                                         if (!string.IsNullOrEmpty(invocationId))
@@ -242,7 +267,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                         }
                                         catch (Exception ex)
                                         {
-                                            return new StreamBindingFailureMessage(id, ExceptionDispatchInfo.Capture(ex));
+                                            return new StreamBindingFailureMessage(
+                                                id,
+                                                ExceptionDispatchInfo.Capture(ex)
+                                            );
                                         }
                                         break;
                                     case ArgumentsPropertyName:
@@ -251,7 +279,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                         int initialDepth = reader.Depth;
                                         if (reader.TokenType != JsonToken.StartArray)
                                         {
-                                            throw new InvalidDataException($"Expected '{ArgumentsPropertyName}' to be of type {JTokenType.Array}.");
+                                            throw new InvalidDataException(
+                                                $"Expected '{ArgumentsPropertyName}' to be of type {JTokenType.Array}."
+                                            );
                                         }
 
                                         hasArguments = true;
@@ -270,13 +300,16 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                             }
                                             catch (Exception ex)
                                             {
-                                                argumentBindingException = ExceptionDispatchInfo.Capture(ex);
+                                                argumentBindingException =
+                                                    ExceptionDispatchInfo.Capture(ex);
 
                                                 // Could be at any point in argument array JSON when an error is thrown
                                                 // Read until the end of the argument JSON array
-                                                while (reader.Depth == initialDepth && reader.TokenType == JsonToken.StartArray ||
-                                                       reader.Depth > initialDepth)
-                                                {
+                                                while (
+                                                    reader.Depth == initialDepth
+                                                        && reader.TokenType == JsonToken.StartArray
+                                                    || reader.Depth > initialDepth
+                                                ) {
                                                     JsonUtils.CheckRead(reader);
                                                 }
                                             }
@@ -298,8 +331,7 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                 completed = true;
                                 break;
                         }
-                    }
-                    while (!completed && JsonUtils.CheckRead(reader));
+                    } while (!completed && JsonUtils.CheckRead(reader));
                 }
 
                 HubMessage message;
@@ -307,10 +339,13 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 switch (type)
                 {
                     case HubProtocolConstants.InvocationMessageType:
+
                         {
                             if (target is null)
                             {
-                                throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                                throw new InvalidDataException(
+                                    $"Missing required property '{TargetPropertyName}'."
+                                );
                             }
 
                             if (argumentsToken != null)
@@ -327,16 +362,31 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                 }
                             }
 
-                            message = argumentBindingException != null
-                                ? new InvocationBindingFailureMessage(invocationId, target, argumentBindingException)
-                                : BindInvocationMessage(invocationId, target, arguments, hasArguments, streamIds, binder);
+                            message =
+                                argumentBindingException != null
+                                    ? new InvocationBindingFailureMessage(
+                                          invocationId,
+                                          target,
+                                          argumentBindingException
+                                      )
+                                    : BindInvocationMessage(
+                                          invocationId,
+                                          target,
+                                          arguments,
+                                          hasArguments,
+                                          streamIds,
+                                          binder
+                                      );
                         }
                         break;
                     case HubProtocolConstants.StreamInvocationMessageType:
+
                         {
                             if (target is null)
                             {
-                                throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                                throw new InvalidDataException(
+                                    $"Missing required property '{TargetPropertyName}'."
+                                );
                             }
 
                             if (argumentsToken != null)
@@ -353,15 +403,29 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                 }
                             }
 
-                            message = argumentBindingException != null
-                                ? new InvocationBindingFailureMessage(invocationId, target, argumentBindingException)
-                                : BindStreamInvocationMessage(invocationId, target, arguments, hasArguments, streamIds, binder);
+                            message =
+                                argumentBindingException != null
+                                    ? new InvocationBindingFailureMessage(
+                                          invocationId,
+                                          target,
+                                          argumentBindingException
+                                      )
+                                    : BindStreamInvocationMessage(
+                                          invocationId,
+                                          target,
+                                          arguments,
+                                          hasArguments,
+                                          streamIds,
+                                          binder
+                                      );
                         }
                         break;
                     case HubProtocolConstants.StreamItemMessageType:
                         if (invocationId is null)
                         {
-                            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{InvocationIdPropertyName}'."
+                            );
                         }
 
                         if (itemToken != null)
@@ -373,9 +437,13 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             }
                             catch (Exception ex)
                             {
-                                message =  new StreamBindingFailureMessage(invocationId, ExceptionDispatchInfo.Capture(ex));
+                                message = new StreamBindingFailureMessage(
+                                    invocationId,
+                                    ExceptionDispatchInfo.Capture(ex)
+                                );
                                 break;
-                            };
+                            }
+                            ;
                         }
 
                         message = BindStreamItemMessage(invocationId, item, hasItem, binder);
@@ -383,7 +451,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     case HubProtocolConstants.CompletionMessageType:
                         if (invocationId is null)
                         {
-                            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{InvocationIdPropertyName}'."
+                            );
                         }
 
                         if (resultToken != null)
@@ -392,7 +462,13 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             result = resultToken.ToObject(returnType, PayloadSerializer);
                         }
 
-                        message = BindCompletionMessage(invocationId, error, result, hasResult, binder);
+                        message = BindCompletionMessage(
+                            invocationId,
+                            error,
+                            result,
+                            hasResult,
+                            binder
+                        );
                         break;
                     case HubProtocolConstants.CancelInvocationMessageType:
                         message = BindCancelInvocationMessage(invocationId);
@@ -402,7 +478,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     case HubProtocolConstants.CloseMessageType:
                         return BindCloseMessage(error, allowReconnect);
                     case null:
-                        throw new InvalidDataException($"Missing required property '{TypePropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{TypePropertyName}'."
+                        );
                     default:
                         // Future protocol changes can add message types, old clients can ignore them
                         return null;
@@ -422,7 +500,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
 
             if (reader.TokenType != JsonToken.StartObject)
             {
-                throw new InvalidDataException($"Expected '{HeadersPropertyName}' to be of type {JTokenType.Object}.");
+                throw new InvalidDataException(
+                    $"Expected '{HeadersPropertyName}' to be of type {JTokenType.Object}."
+                );
             }
 
             while (reader.Read())
@@ -436,7 +516,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
 
                         if (reader.TokenType != JsonToken.String)
                         {
-                            throw new InvalidDataException($"Expected header '{propertyName}' to be of type {JTokenType.String}.");
+                            throw new InvalidDataException(
+                                $"Expected header '{propertyName}' to be of type {JTokenType.String}."
+                            );
                         }
 
                         headers[propertyName] = reader.Value.ToString()!;
@@ -467,7 +549,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             WriteInvocationMessage(m, writer);
                             break;
                         case StreamInvocationMessage m:
-                            WriteMessageType(writer, HubProtocolConstants.StreamInvocationMessageType);
+                            WriteMessageType(
+                                writer,
+                                HubProtocolConstants.StreamInvocationMessageType
+                            );
                             WriteHeaders(writer, m);
                             WriteStreamInvocationMessage(m, writer);
                             break;
@@ -482,7 +567,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             WriteCompletionMessage(m, writer);
                             break;
                         case CancelInvocationMessage m:
-                            WriteMessageType(writer, HubProtocolConstants.CancelInvocationMessageType);
+                            WriteMessageType(
+                                writer,
+                                HubProtocolConstants.CancelInvocationMessageType
+                            );
                             WriteHeaders(writer, m);
                             WriteCancelInvocationMessage(m, writer);
                             break;
@@ -494,12 +582,15 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                             WriteCloseMessage(m, writer);
                             break;
                         default:
-                            throw new InvalidOperationException($"Unsupported message type: {message.GetType().FullName}");
+                            throw new InvalidOperationException(
+                                $"Unsupported message type: {message.GetType().FullName}"
+                            );
                     }
                     writer.WriteEndObject();
                     writer.Flush();
                 }
             }
+
             finally
             {
                 Utf8BufferTextWriter.Return(textWriter);
@@ -536,8 +627,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
         }
 
-        private void WriteCancelInvocationMessage(CancelInvocationMessage message, JsonTextWriter writer)
-        {
+        private void WriteCancelInvocationMessage(
+            CancelInvocationMessage message,
+            JsonTextWriter writer
+        ) {
             WriteInvocationId(message, writer);
         }
 
@@ -559,8 +652,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             WriteStreamIds(message.StreamIds, writer);
         }
 
-        private void WriteStreamInvocationMessage(StreamInvocationMessage message, JsonTextWriter writer)
-        {
+        private void WriteStreamInvocationMessage(
+            StreamInvocationMessage message,
+            JsonTextWriter writer
+        ) {
             WriteInvocationId(message, writer);
             writer.WritePropertyName(TargetPropertyName);
             writer.WriteValue(message.Target);
@@ -632,22 +727,33 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         {
             if (string.IsNullOrEmpty(invocationId))
             {
-                throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{InvocationIdPropertyName}'."
+                );
             }
 
             return new CancelInvocationMessage(invocationId);
         }
 
-        private HubMessage BindCompletionMessage(string invocationId, string? error, object? result, bool hasResult, IInvocationBinder binder)
-        {
+        private HubMessage BindCompletionMessage(
+            string invocationId,
+            string? error,
+            object? result,
+            bool hasResult,
+            IInvocationBinder binder
+        ) {
             if (string.IsNullOrEmpty(invocationId))
             {
-                throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{InvocationIdPropertyName}'."
+                );
             }
 
             if (error != null && hasResult)
             {
-                throw new InvalidDataException("The 'error' and 'result' properties are mutually exclusive.");
+                throw new InvalidDataException(
+                    "The 'error' and 'result' properties are mutually exclusive."
+                );
             }
 
             if (hasResult)
@@ -658,11 +764,17 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             return new CompletionMessage(invocationId, error, result: null, hasResult: false);
         }
 
-        private HubMessage BindStreamItemMessage(string invocationId, object? item, bool hasItem, IInvocationBinder binder)
-        {
+        private HubMessage BindStreamItemMessage(
+            string invocationId,
+            object? item,
+            bool hasItem,
+            IInvocationBinder binder
+        ) {
             if (string.IsNullOrEmpty(invocationId))
             {
-                throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{InvocationIdPropertyName}'."
+                );
             }
 
             if (!hasItem)
@@ -673,21 +785,33 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             return new StreamItemMessage(invocationId, item);
         }
 
-        private HubMessage BindStreamInvocationMessage(string? invocationId, string target, object?[]? arguments, bool hasArguments, string[]? streamIds, IInvocationBinder binder)
-        {
+        private HubMessage BindStreamInvocationMessage(
+            string? invocationId,
+            string target,
+            object?[]? arguments,
+            bool hasArguments,
+            string[]? streamIds,
+            IInvocationBinder binder
+        ) {
             if (string.IsNullOrEmpty(invocationId))
             {
-                throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{InvocationIdPropertyName}'."
+                );
             }
 
             if (!hasArguments)
             {
-                throw new InvalidDataException($"Missing required property '{ArgumentsPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{ArgumentsPropertyName}'."
+                );
             }
 
             if (string.IsNullOrEmpty(target))
             {
-                throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{TargetPropertyName}'."
+                );
             }
 
             Debug.Assert(arguments != null);
@@ -695,16 +819,26 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             return new StreamInvocationMessage(invocationId, target, arguments, streamIds);
         }
 
-        private HubMessage BindInvocationMessage(string? invocationId, string target, object?[]? arguments, bool hasArguments, string[]? streamIds, IInvocationBinder binder)
-        {
+        private HubMessage BindInvocationMessage(
+            string? invocationId,
+            string target,
+            object?[]? arguments,
+            bool hasArguments,
+            string[]? streamIds,
+            IInvocationBinder binder
+        ) {
             if (string.IsNullOrEmpty(target))
             {
-                throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{TargetPropertyName}'."
+                );
             }
 
             if (!hasArguments)
             {
-                throw new InvalidDataException($"Missing required property '{ArgumentsPropertyName}'.");
+                throw new InvalidDataException(
+                    $"Missing required property '{ArgumentsPropertyName}'."
+                );
             }
 
             Debug.Assert(arguments != null);
@@ -712,8 +846,11 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             return new InvocationMessage(invocationId, target, arguments, streamIds);
         }
 
-        private bool ReadArgumentAsType(JsonTextReader reader, IReadOnlyList<Type> paramTypes, int paramIndex)
-        {
+        private bool ReadArgumentAsType(
+            JsonTextReader reader,
+            IReadOnlyList<Type> paramTypes,
+            int paramIndex
+        ) {
             if (paramIndex < paramTypes.Count)
             {
                 var paramType = paramTypes[paramIndex];
@@ -737,7 +874,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 {
                     if (argumentsCount != paramCount)
                     {
-                        throw new InvalidDataException($"Invocation provides {argumentsCount} argument(s) but target expects {paramCount}.");
+                        throw new InvalidDataException(
+                            $"Invocation provides {argumentsCount} argument(s) but target expects {paramCount}."
+                        );
                     }
 
                     return arguments ?? Array.Empty<object?>();
@@ -752,7 +891,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 {
                     if (paramIndex < paramCount)
                     {
-                        arguments[paramIndex] = PayloadSerializer.Deserialize(reader, paramTypes[paramIndex]);
+                        arguments[paramIndex] = PayloadSerializer.Deserialize(
+                            reader,
+                            paramTypes[paramIndex]
+                        );
                     }
                     else
                     {
@@ -764,7 +906,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidDataException("Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.", ex);
+                    throw new InvalidDataException(
+                        "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
+                        ex
+                    );
                 }
             }
 
@@ -788,7 +933,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             var argCount = args.Count;
             if (paramCount != argCount)
             {
-                throw new InvalidDataException($"Invocation provides {argCount} argument(s) but target expects {paramCount}.");
+                throw new InvalidDataException(
+                    $"Invocation provides {argCount} argument(s) but target expects {paramCount}."
+                );
             }
 
             if (paramCount == 0)
@@ -810,7 +957,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
             catch (Exception ex)
             {
-                throw new InvalidDataException("Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.", ex);
+                throw new InvalidDataException(
+                    "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
+                    ex
+                );
             }
         }
 
@@ -826,7 +976,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
 
         internal static JsonSerializerSettings CreateDefaultSerializerSettings()
         {
-            return new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            return new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
         }
     }
 }

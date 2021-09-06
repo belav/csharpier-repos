@@ -20,9 +20,12 @@ namespace AutoMapper.QueryableExtensions.Impl
         private readonly Stack<object> _newTree = new Stack<object>();
         private readonly MemberAccessQueryMapperVisitor _memberVisitor;
 
-
-        internal QueryMapperVisitor(Type sourceType, Type destinationType, IQueryable destQuery, IGlobalConfiguration config)
-        {
+        internal QueryMapperVisitor(
+            Type sourceType,
+            Type destinationType,
+            IQueryable destQuery,
+            IGlobalConfiguration config
+        ) {
             _sourceType = sourceType;
             _destinationType = destinationType;
             _destQuery = destQuery;
@@ -30,9 +33,17 @@ namespace AutoMapper.QueryableExtensions.Impl
             _memberVisitor = new MemberAccessQueryMapperVisitor(this, config);
         }
 
-        public static IQueryable<TDestination> Map<TSource, TDestination>(IQueryable<TSource> sourceQuery, IQueryable<TDestination> destQuery, IGlobalConfiguration config)
-        {
-            var visitor = new QueryMapperVisitor(typeof(TSource), typeof(TDestination), destQuery, config);
+        public static IQueryable<TDestination> Map<TSource, TDestination>(
+            IQueryable<TSource> sourceQuery,
+            IQueryable<TDestination> destQuery,
+            IGlobalConfiguration config
+        ) {
+            var visitor = new QueryMapperVisitor(
+                typeof(TSource),
+                typeof(TDestination),
+                destQuery,
+                config
+            );
             var expr = visitor.Visit(sourceQuery.Expression);
 
             var newDestQuery = destQuery.Provider.CreateQuery<TDestination>(expr);
@@ -52,7 +63,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             return newNode;
         }
 
-        protected override Expression VisitParameter(ParameterExpression node) => _instanceParameter;
+        protected override Expression VisitParameter(ParameterExpression node) =>
+            _instanceParameter;
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
@@ -71,7 +83,11 @@ namespace AutoMapper.QueryableExtensions.Impl
             // It is needed when PropertyMap is changing type of property
             if (left.Type != right.Type && right.NodeType == ExpressionType.Constant)
             {
-                var value = Convert.ChangeType(((ConstantExpression)right).Value, left.Type, CultureInfo.CurrentCulture);
+                var value = Convert.ChangeType(
+                    ((ConstantExpression)right).Value,
+                    left.Type,
+                    CultureInfo.CurrentCulture
+                );
 
                 right = Expression.Constant(value, left.Type);
             }
@@ -92,9 +108,12 @@ namespace AutoMapper.QueryableExtensions.Impl
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (node.Method.Name == "OrderBy" || node.Method.Name == "OrderByDescending" ||
-                    node.Method.Name == "ThenBy" || node.Method.Name == "ThenByDescending")
-            {
+            if (
+                node.Method.Name == "OrderBy"
+                || node.Method.Name == "OrderByDescending"
+                || node.Method.Name == "ThenBy"
+                || node.Method.Name == "ThenByDescending"
+            ) {
                 return VisitOrderBy(node);
             }
 
@@ -115,17 +134,18 @@ namespace AutoMapper.QueryableExtensions.Impl
             var newOrderByExpr = Visit(orderByExpr);
             var newObject = Visit(node.Object);
 
-
-
             var genericMethod = node.Method.GetGenericMethodDefinition();
             var methodArgs = node.Method.GetGenericArguments();
             methodArgs[0] = methodArgs[0].ReplaceItemType(_sourceType, _destinationType);
 
-            // for typical orderby expression, a unaryexpression is used that contains a 
+            // for typical orderby expression, a unaryexpression is used that contains a
             // func which in turn defines the type of the field that has to be used for ordering/sorting
             if (newOrderByExpr is UnaryExpression unary && unary.Operand.Type.IsGenericType)
             {
-                methodArgs[1] = methodArgs[1].ReplaceItemType(typeof(string), unary.Operand.Type.GenericTypeArguments.Last());
+                methodArgs[1] = methodArgs[1].ReplaceItemType(
+                    typeof(string),
+                    unary.Operand.Type.GenericTypeArguments.Last()
+                );
             }
             else
             {
@@ -136,7 +156,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             return Expression.Call(newObject, orderByMethod, newQuery, newOrderByExpr);
         }
 
-        protected override Expression VisitMember(MemberExpression node) => _memberVisitor.Visit(node);
+        protected override Expression VisitMember(MemberExpression node) =>
+            _memberVisitor.Visit(node);
 
         private MethodInfo ChangeMethodArgTypeFormSourceToDest(MethodInfo mi)
         {
@@ -144,9 +165,9 @@ namespace AutoMapper.QueryableExtensions.Impl
                 return mi;
             var genericMethod = mi.GetGenericMethodDefinition();
             var methodArgs = mi.GetGenericArguments();
-            methodArgs = methodArgs.Select(t => t.ReplaceItemType(_sourceType, _destinationType)).ToArray();
+            methodArgs = methodArgs.Select(t => t.ReplaceItemType(_sourceType, _destinationType))
+                .ToArray();
             return genericMethod.MakeGenericMethod(methodArgs);
-
         }
 
         private Type ChangeLambdaArgTypeFormSourceToDest(Type lambdaType, Type returnType)
@@ -154,7 +175,10 @@ namespace AutoMapper.QueryableExtensions.Impl
             if (lambdaType.IsGenericType)
             {
                 var genArgs = lambdaType.GetTypeInfo().GenericTypeArguments;
-                var newGenArgs = genArgs.Select(t => t.ReplaceItemType(_sourceType, _destinationType)).ToArray();
+                var newGenArgs = genArgs.Select(
+                        t => t.ReplaceItemType(_sourceType, _destinationType)
+                    )
+                    .ToArray();
                 var genericTypeDef = lambdaType.GetGenericTypeDefinition();
                 if (genericTypeDef.FullName.StartsWith("System.Func"))
                 {
@@ -170,8 +194,10 @@ namespace AutoMapper.QueryableExtensions.Impl
         private readonly ExpressionVisitor _rootVisitor;
         private readonly IGlobalConfiguration _config;
 
-        public MemberAccessQueryMapperVisitor(ExpressionVisitor rootVisitor, IGlobalConfiguration config)
-        {
+        public MemberAccessQueryMapperVisitor(
+            ExpressionVisitor rootVisitor,
+            IGlobalConfiguration config
+        ) {
             _rootVisitor = rootVisitor;
             _config = config;
         }
@@ -183,7 +209,10 @@ namespace AutoMapper.QueryableExtensions.Impl
             {
                 var propertyMap = _config.GetPropertyMap(node.Member, parentExpr.Type);
 
-                var newMember = Expression.MakeMemberAccess(parentExpr, propertyMap.DestinationMember);
+                var newMember = Expression.MakeMemberAccess(
+                    parentExpr,
+                    propertyMap.DestinationMember
+                );
 
                 return newMember;
             }
@@ -219,13 +248,22 @@ namespace AutoMapper.QueryableExtensions.Impl
             return targetType;
         }
 
-        public static PropertyMap GetPropertyMap(this IGlobalConfiguration config, MemberInfo sourceMemberInfo, Type destinationMemberType)
-        {
-            var typeMap = config.CheckIfMapExists(sourceMemberInfo.DeclaringType, destinationMemberType);
+        public static PropertyMap GetPropertyMap(
+            this IGlobalConfiguration config,
+            MemberInfo sourceMemberInfo,
+            Type destinationMemberType
+        ) {
+            var typeMap = config.CheckIfMapExists(
+                sourceMemberInfo.DeclaringType,
+                destinationMemberType
+            );
 
-            var propertyMap = typeMap.PropertyMaps
-                .FirstOrDefault(pm => pm.CanResolveValue &&
-                                      pm.SourceMember != null && pm.SourceMember.Name == sourceMemberInfo.Name);
+            var propertyMap = typeMap.PropertyMaps.FirstOrDefault(
+                pm =>
+                    pm.CanResolveValue
+                    && pm.SourceMember != null
+                    && pm.SourceMember.Name == sourceMemberInfo.Name
+            );
 
             if (propertyMap == null)
                 throw PropertyConfigurationException(typeMap, sourceMemberInfo.Name);
@@ -233,8 +271,11 @@ namespace AutoMapper.QueryableExtensions.Impl
             return propertyMap;
         }
 
-        public static TypeMap CheckIfMapExists(this IGlobalConfiguration config, Type sourceType, Type destinationType)
-        {
+        public static TypeMap CheckIfMapExists(
+            this IGlobalConfiguration config,
+            Type sourceType,
+            Type destinationType
+        ) {
             var typeMap = config.ResolveTypeMap(sourceType, destinationType);
             if (typeMap == null)
             {
@@ -243,13 +284,27 @@ namespace AutoMapper.QueryableExtensions.Impl
             return typeMap;
         }
 
-        public static Exception PropertyConfigurationException(TypeMap typeMap, params string[] unmappedPropertyNames)
-            => new AutoMapperConfigurationException(new[] { new AutoMapperConfigurationException.TypeMapConfigErrors(typeMap, unmappedPropertyNames, true) });
+        public static Exception PropertyConfigurationException(
+            TypeMap typeMap,
+            params string[] unmappedPropertyNames
+        ) =>
+            new AutoMapperConfigurationException(
+                new[]
+                {
+                    new AutoMapperConfigurationException.TypeMapConfigErrors(
+                        typeMap,
+                        unmappedPropertyNames,
+                        true
+                    )
+                }
+            );
 
-        public static Exception MissingMapException(in TypePair types)
-            => MissingMapException(types.SourceType, types.DestinationType);
+        public static Exception MissingMapException(in TypePair types) =>
+            MissingMapException(types.SourceType, types.DestinationType);
 
-        public static Exception MissingMapException(Type sourceType, Type destinationType)
-            => new InvalidOperationException($"Missing map from {sourceType} to {destinationType}. Create using CreateMap<{sourceType.Name}, {destinationType.Name}>.");
+        public static Exception MissingMapException(Type sourceType, Type destinationType) =>
+            new InvalidOperationException(
+                $"Missing map from {sourceType} to {destinationType}. Create using CreateMap<{sourceType.Name}, {destinationType.Name}>."
+            );
     }
 }

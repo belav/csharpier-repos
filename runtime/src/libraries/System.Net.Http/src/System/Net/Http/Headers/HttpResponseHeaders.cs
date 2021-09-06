@@ -25,7 +25,9 @@ namespace System.Net.Http.Headers
             // 5 properties each lazily allocate a collection to store the value(s) for that property.
             // Rather than having a field for each of these, store them untyped in an array that's lazily
             // allocated.  Then we only pay for the 45 bytes for those fields when any is actually accessed.
-            object[] collections = _specialCollectionsSlots ?? (_specialCollectionsSlots = new object[NumCollectionsSlots]);
+            object[] collections =
+                _specialCollectionsSlots
+                ?? (_specialCollectionsSlots = new object[NumCollectionsSlots]);
             object result = collections[slot];
             if (result == null)
             {
@@ -35,7 +37,15 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<string> AcceptRanges =>
-            GetSpecializedCollection(AcceptRangesSlot, static thisRef => new HttpHeaderValueCollection<string>(KnownHeaders.AcceptRanges.Descriptor, thisRef, HeaderUtilities.TokenValidator));
+            GetSpecializedCollection(
+                AcceptRangesSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<string>(
+                        KnownHeaders.AcceptRanges.Descriptor,
+                        thisRef,
+                        HeaderUtilities.TokenValidator
+                    )
+            );
 
         public TimeSpan? Age
         {
@@ -56,22 +66,56 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<AuthenticationHeaderValue> ProxyAuthenticate =>
-            GetSpecializedCollection(ProxyAuthenticateSlot, static thisRef => new HttpHeaderValueCollection<AuthenticationHeaderValue>(KnownHeaders.ProxyAuthenticate.Descriptor, thisRef));
+            GetSpecializedCollection(
+                ProxyAuthenticateSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<AuthenticationHeaderValue>(
+                        KnownHeaders.ProxyAuthenticate.Descriptor,
+                        thisRef
+                    )
+            );
 
         public RetryConditionHeaderValue? RetryAfter
         {
-            get { return (RetryConditionHeaderValue?)GetParsedValues(KnownHeaders.RetryAfter.Descriptor); }
+            get
+            {
+                return (RetryConditionHeaderValue?)GetParsedValues(
+                    KnownHeaders.RetryAfter.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.RetryAfter.Descriptor, value); }
         }
 
         public HttpHeaderValueCollection<ProductInfoHeaderValue> Server =>
-            GetSpecializedCollection(ServerSlot, static thisRef => new HttpHeaderValueCollection<ProductInfoHeaderValue>(KnownHeaders.Server.Descriptor, thisRef));
+            GetSpecializedCollection(
+                ServerSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<ProductInfoHeaderValue>(
+                        KnownHeaders.Server.Descriptor,
+                        thisRef
+                    )
+            );
 
         public HttpHeaderValueCollection<string> Vary =>
-            GetSpecializedCollection(VarySlot, static thisRef => new HttpHeaderValueCollection<string>(KnownHeaders.Vary.Descriptor, thisRef, HeaderUtilities.TokenValidator));
+            GetSpecializedCollection(
+                VarySlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<string>(
+                        KnownHeaders.Vary.Descriptor,
+                        thisRef,
+                        HeaderUtilities.TokenValidator
+                    )
+            );
 
         public HttpHeaderValueCollection<AuthenticationHeaderValue> WwwAuthenticate =>
-            GetSpecializedCollection(WwwAuthenticateSlot, static thisRef => new HttpHeaderValueCollection<AuthenticationHeaderValue>(KnownHeaders.WWWAuthenticate.Descriptor, thisRef));
+            GetSpecializedCollection(
+                WwwAuthenticateSlot,
+                static thisRef =>
+                    new HttpHeaderValueCollection<AuthenticationHeaderValue>(
+                        KnownHeaders.WWWAuthenticate.Descriptor,
+                        thisRef
+                    )
+            );
 
         #endregion
 
@@ -139,9 +183,12 @@ namespace System.Net.Http.Headers
         #endregion
 
         internal HttpResponseHeaders(bool containsTrailingHeaders = false)
-            : base(containsTrailingHeaders ? HttpHeaderType.All ^ HttpHeaderType.Request : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
-                  HttpHeaderType.Request)
-        {
+            : base(
+                containsTrailingHeaders
+                    ? HttpHeaderType.All ^ HttpHeaderType.Request
+                    : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
+                HttpHeaderType.Request
+            ) {
             _containsTrailingHeaders = containsTrailingHeaders;
         }
 
@@ -172,6 +219,7 @@ namespace System.Net.Http.Headers
             return (knownHeader.HeaderType & HttpHeaderType.NonTrailing) == 0;
         }
 
-        private HttpGeneralHeaders GeneralHeaders => _generalHeaders ?? (_generalHeaders = new HttpGeneralHeaders(this));
+        private HttpGeneralHeaders GeneralHeaders =>
+            _generalHeaders ?? (_generalHeaders = new HttpGeneralHeaders(this));
     }
 }

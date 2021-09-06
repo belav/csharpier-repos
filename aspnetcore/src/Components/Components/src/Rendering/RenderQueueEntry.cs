@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         public RenderQueueEntry(ComponentState componentState, RenderFragment renderFragment)
         {
             ComponentState = componentState;
-            RenderFragment = renderFragment ?? throw new ArgumentNullException(nameof(renderFragment));
+            RenderFragment =
+                renderFragment ?? throw new ArgumentNullException(nameof(renderFragment));
         }
     }
 }

@@ -21,11 +21,14 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             var services = new ServiceCollection();
 
-            services
-                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
-                .AddDbContext<IdentityDbContext>(o =>
-                    o.UseSqlite(fixture.Connection)
-                        .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+            services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
+                .AddDbContext<IdentityDbContext>(
+                    o =>
+                        o.UseSqlite(fixture.Connection)
+                            .ConfigureWarnings(
+                                b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                            )
+                )
                 .AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>();
 
@@ -34,17 +37,22 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             var provider = services.BuildServiceProvider();
             _builder = new ApplicationBuilder(provider);
 
-            using(var scoped = provider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var scoped = provider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                scoped.ServiceProvider.GetRequiredService<IdentityDbContext>().Database.EnsureCreated();
+                scoped.ServiceProvider.GetRequiredService<IdentityDbContext>()
+                    .Database.EnsureCreated();
             }
         }
 
         [ConditionalFact]
         public async Task EnsureStartupUsageWorks()
         {
-            var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-            var userManager = _builder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
+            var userStore = _builder.ApplicationServices.GetRequiredService<
+                IUserStore<IdentityUser>
+            >();
+            var userManager = _builder.ApplicationServices.GetRequiredService<
+                UserManager<IdentityUser>
+            >();
 
             Assert.NotNull(userStore);
             Assert.NotNull(userManager);

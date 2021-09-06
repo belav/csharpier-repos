@@ -35,15 +35,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             }
         }
 
-        private static IFileProvider GetCompositeFileProvider(MvcRazorRuntimeCompilationOptions options)
-        {
+        private static IFileProvider GetCompositeFileProvider(
+            MvcRazorRuntimeCompilationOptions options
+        ) {
             var fileProviders = options.FileProviders;
             if (fileProviders.Count == 0)
             {
                 var message = Resources.FormatFileProvidersAreRequired(
                     typeof(MvcRazorRuntimeCompilationOptions).FullName,
                     nameof(MvcRazorRuntimeCompilationOptions.FileProviders),
-                    typeof(IFileProvider).FullName);
+                    typeof(IFileProvider).FullName
+                );
                 throw new InvalidOperationException(message);
             }
             else if (fileProviders.Count == 1)

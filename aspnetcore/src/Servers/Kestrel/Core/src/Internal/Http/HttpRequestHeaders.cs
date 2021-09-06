@@ -21,10 +21,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public bool ReuseHeaderValues { get; set; }
         public Func<string, Encoding?> EncodingSelector { get; set; }
 
-        public HttpRequestHeaders(bool reuseHeaderValues = true, Func<string, Encoding?>? encodingSelector = null)
-        {
+        public HttpRequestHeaders(
+            bool reuseHeaderValues = true,
+            Func<string, Encoding?>? encodingSelector = null
+        ) {
             ReuseHeaderValues = reuseHeaderValues;
-            EncodingSelector = encodingSelector ?? KestrelServerOptions.DefaultRequestHeaderEncodingSelector;
+            EncodingSelector =
+                encodingSelector ?? KestrelServerOptions.DefaultRequestHeaderEncodingSelector;
         }
 
         public void OnHeadersComplete()
@@ -62,7 +65,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             // Mark no headers as currently in use
             _bits = 0;
-            // Clear ContentLength and any unknown headers as we will never reuse them 
+            // Clear ContentLength and any unknown headers as we will never reuse them
             _contentLength = null;
             MaybeUnknown?.Clear();
         }
@@ -71,7 +74,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         {
             if (!HeaderUtilities.TryParseNonNegativeInt64(value, out var parsed))
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidContentLength, value);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidContentLength,
+                    value
+                );
             }
 
             return parsed;
@@ -85,19 +91,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 KestrelBadHttpRequestException.Throw(RequestRejectionReason.MultipleContentLengths);
             }
 
-            if (!Utf8Parser.TryParse(value, out long parsed, out var consumed) ||
-                parsed < 0 ||
-                consumed != value.Length)
-            {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidContentLength, value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector));
+            if (
+                !Utf8Parser.TryParse(value, out long parsed, out var consumed)
+                || parsed < 0
+                || consumed != value.Length
+            ) {
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidContentLength,
+                    value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector)
+                );
             }
 
             _contentLength = parsed;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void AppendContentLengthCustomEncoding(ReadOnlySpan<byte> value, Encoding? customEncoding)
-        {
+        private void AppendContentLengthCustomEncoding(
+            ReadOnlySpan<byte> value,
+            Encoding? customEncoding
+        ) {
             if (_contentLength.HasValue)
             {
                 KestrelBadHttpRequestException.Throw(RequestRejectionReason.MultipleContentLengths);
@@ -108,11 +120,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             var numChars = customEncoding!.GetChars(value, decodedChars);
             long parsed = -1;
 
-            if (numChars > 19 ||
-                !long.TryParse(decodedChars.Slice(0, numChars), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) ||
-                parsed < 0)
-            {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidContentLength, value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector));
+            if (
+                numChars > 19
+                || !long.TryParse(
+                    decodedChars.Slice(0, numChars),
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out parsed
+                )
+                || parsed < 0
+            ) {
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidContentLength,
+                    value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector)
+                );
             }
 
             _contentLength = parsed;
@@ -179,9 +200,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             object IEnumerator.Current => _current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {

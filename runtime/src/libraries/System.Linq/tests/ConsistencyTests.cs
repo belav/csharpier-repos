@@ -15,19 +15,33 @@ namespace System.Linq.Tests
         [Fact]
         public static void MatchSequencePattern()
         {
-            MethodInfo enumerableNotInQueryable = GetMissingExtensionMethod(typeof(Enumerable), typeof(Queryable), GetExcludedMethods());
+            MethodInfo enumerableNotInQueryable = GetMissingExtensionMethod(
+                typeof(Enumerable),
+                typeof(Queryable),
+                GetExcludedMethods()
+            );
 
-            Assert.True(enumerableNotInQueryable == null, string.Format("Enumerable method {0} not defined by Queryable", enumerableNotInQueryable));
+            Assert.True(
+                enumerableNotInQueryable == null,
+                string.Format(
+                    "Enumerable method {0} not defined by Queryable",
+                    enumerableNotInQueryable
+                )
+            );
 
             MethodInfo queryableNotInEnumerable = GetMissingExtensionMethod(
                 typeof(Queryable),
                 typeof(Enumerable),
-                 new[] {
-                     nameof(Queryable.AsQueryable)
-                 }
-                );
+                new[] { nameof(Queryable.AsQueryable) }
+            );
 
-            Assert.True(queryableNotInEnumerable == null, string.Format("Queryable method {0} not defined by Enumerable", queryableNotInEnumerable));
+            Assert.True(
+                queryableNotInEnumerable == null,
+                string.Format(
+                    "Queryable method {0} not defined by Enumerable",
+                    queryableNotInEnumerable
+                )
+            );
         }
 
         // If a change to Enumerable has required a change to the exception list in this test
@@ -50,18 +64,24 @@ namespace System.Linq.Tests
             return result;
         }
 
-        private static MethodInfo GetMissingExtensionMethod(Type a, Type b, IEnumerable<string> excludedMethods)
-        {
+        private static MethodInfo GetMissingExtensionMethod(
+            Type a,
+            Type b,
+            IEnumerable<string> excludedMethods
+        ) {
             var dex = new HashSet<string>(excludedMethods);
 
-            var aMethods =
-                a.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute)))
+            var aMethods = a.GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .Where(
+                    m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
+                )
                 .ToLookup(m => m.Name);
 
             MethodComparer mc = new MethodComparer();
             var bMethods = b.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute)))
+                .Where(
+                    m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
+                )
                 .ToLookup(m => m, mc);
 
             foreach (var group in aMethods.Where(g => !dex.Contains(g.Key)))

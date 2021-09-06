@@ -8,18 +8,16 @@ namespace Microsoft.EntityFrameworkCore
     public class PersistedGrantDbContextSqliteTest
         : PersistedGrantDbContextTestBase<PersistedGrantDbContextSqliteTest.PersistedGrantDbContextSqliteFixture>
     {
-        public PersistedGrantDbContextSqliteTest(PersistedGrantDbContextSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public PersistedGrantDbContextSqliteTest(
+            PersistedGrantDbContextSqliteFixture fixture
+        ) : base(fixture) { }
 
         public class PersistedGrantDbContextSqliteFixture : PersistedGrantDbContextFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
-            protected override string StoreName
-                => "PersistedGrantDbContext";
+            protected override string StoreName => "PersistedGrantDbContext";
         }
     }
 }

@@ -12,12 +12,10 @@ namespace System.ComponentModel
         /// The code generator will not produce code for the object.
         /// </summary>
         Hidden,
-
         /// <summary>
         /// The code generator will produce code for the object.
         /// </summary>
         Visible,
-
         /// <summary>
         /// The code generator will produce code for the contents of the object, rather than for the object itself.
         /// </summary>

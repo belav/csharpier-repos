@@ -28,8 +28,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private readonly object _gate = new();
         private readonly RegistryKey _registryKey;
 
-        public LocalUserRegistryOptionPersister(IThreadingContext threadingContext, IServiceProvider serviceProvider)
-        {
+        public LocalUserRegistryOptionPersister(
+            IThreadingContext threadingContext,
+            IServiceProvider serviceProvider
+        ) {
             // Starting with Dev16, the ILocalRegistry service is expected to be free-threaded, and aquiring it from the
             // global service provider is expected to complete without any UI thread marshaling requirements. However,
             // since none of this is publicly documented, we keep this assertion for maximum compatibility assurance.
@@ -38,12 +40,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             // https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.shell.interop.slocalregistry
             threadingContext.ThrowIfNotOnUIThread();
 
-            this._registryKey = VSRegistry.RegistryRoot(serviceProvider, __VsLocalRegistryType.RegType_UserSettings, writable: true);
+            this._registryKey = VSRegistry.RegistryRoot(
+                serviceProvider,
+                __VsLocalRegistryType.RegType_UserSettings,
+                writable: true
+            );
         }
 
         private static bool TryGetKeyPathAndName(IOption option, out string path, out string key)
         {
-            var serialization = option.StorageLocations.OfType<LocalUserProfileStorageLocation>().SingleOrDefault();
+            var serialization = option.StorageLocations.OfType<LocalUserProfileStorageLocation>()
+                .SingleOrDefault();
 
             if (serialization == null)
             {
@@ -80,22 +87,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 // Options that are of type bool have to be serialized as integers
                 if (optionKey.Option.Type == typeof(bool))
                 {
-                    value = subKey.GetValue(key, defaultValue: (bool)optionKey.Option.DefaultValue ? 1 : 0).Equals(1);
+                    value = subKey.GetValue(
+                            key,
+                            defaultValue: (bool)optionKey.Option.DefaultValue ? 1 : 0
+                        )
+                        .Equals(1);
                     return true;
                 }
                 else if (optionKey.Option.Type == typeof(long))
                 {
-                    var untypedValue = subKey.GetValue(key, defaultValue: optionKey.Option.DefaultValue);
+                    var untypedValue = subKey.GetValue(
+                        key,
+                        defaultValue: optionKey.Option.DefaultValue
+                    );
                     switch (untypedValue)
                     {
                         case string stringValue:
-                            {
-                                // Due to a previous bug we were accidentally serializing longs as strings.
-                                // Gracefully convert those back.
-                                var suceeded = long.TryParse(stringValue, out var longValue);
-                                value = longValue;
-                                return suceeded;
-                            }
+                        {
+                            // Due to a previous bug we were accidentally serializing longs as strings.
+                            // Gracefully convert those back.
+                            var suceeded = long.TryParse(stringValue, out var longValue);
+                            value = longValue;
+                            return suceeded;
+                        }
 
                         case long longValue:
                             value = longValue;
@@ -104,17 +118,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 }
                 else if (optionKey.Option.Type == typeof(int))
                 {
-                    var untypedValue = subKey.GetValue(key, defaultValue: optionKey.Option.DefaultValue);
+                    var untypedValue = subKey.GetValue(
+                        key,
+                        defaultValue: optionKey.Option.DefaultValue
+                    );
                     switch (untypedValue)
                     {
                         case string stringValue:
-                            {
-                                // Due to a previous bug we were accidentally serializing ints as strings. 
-                                // Gracefully convert those back.
-                                var suceeded = int.TryParse(stringValue, out var intValue);
-                                value = intValue;
-                                return suceeded;
-                            }
+                        {
+                            // Due to a previous bug we were accidentally serializing ints as strings.
+                            // Gracefully convert those back.
+                            var suceeded = int.TryParse(stringValue, out var intValue);
+                            value = intValue;
+                            return suceeded;
+                        }
 
                         case int intValue:
                             value = intValue;
@@ -162,8 +179,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 else if (optionKey.Option.Type.IsEnum)
                 {
                     // If the enum is larger than an int, store as a QWord
-                    if (Marshal.SizeOf(Enum.GetUnderlyingType(optionKey.Option.Type)) > Marshal.SizeOf(typeof(int)))
-                    {
+                    if (
+                        Marshal.SizeOf(Enum.GetUnderlyingType(optionKey.Option.Type))
+                        > Marshal.SizeOf(typeof(int))
+                    ) {
                         subKey.SetValue(key, (long)value, RegistryValueKind.QWord);
                     }
                     else

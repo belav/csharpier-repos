@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         {
             get
             {
-                var descriptor = this.GetAnnotationValue(DirectiveDescriptorKey) as DirectiveDescriptor;
+                var descriptor =
+                    this.GetAnnotationValue(DirectiveDescriptorKey) as DirectiveDescriptor;
                 return descriptor;
             }
         }

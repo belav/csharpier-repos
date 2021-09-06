@@ -42,9 +42,20 @@ namespace System.IO.Pipes
             int outBufferSize,
             PipeSecurity? pipeSecurity,
             HandleInheritability inheritability = HandleInheritability.None,
-            PipeAccessRights additionalAccessRights = default)
-        {
-            return new NamedPipeServerStream(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize, outBufferSize, pipeSecurity, inheritability, additionalAccessRights);
+            PipeAccessRights additionalAccessRights = default
+        ) {
+            return new NamedPipeServerStream(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                pipeSecurity,
+                inheritability,
+                additionalAccessRights
+            );
         }
     }
 }

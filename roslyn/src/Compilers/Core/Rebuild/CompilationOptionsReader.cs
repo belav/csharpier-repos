@@ -25,20 +25,56 @@ namespace Microsoft.CodeAnalysis.Rebuild
     public class CompilationOptionsReader
     {
         // GUIDs specified in https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#document-table-0x30
-        public static readonly Guid HashAlgorithmSha1 = unchecked(new Guid((int)0xff1816ec, (short)0xaa5e, 0x4d10, 0x87, 0xf7, 0x6f, 0x49, 0x63, 0x83, 0x34, 0x60));
-        public static readonly Guid HashAlgorithmSha256 = unchecked(new Guid((int)0x8829d00f, 0x11b8, 0x4213, 0x87, 0x8b, 0x77, 0x0e, 0x85, 0x97, 0xac, 0x16));
+        public static readonly Guid HashAlgorithmSha1 = unchecked(
+            new Guid(
+                (int)0xff1816ec,
+                (short)0xaa5e,
+                0x4d10,
+                0x87,
+                0xf7,
+                0x6f,
+                0x49,
+                0x63,
+                0x83,
+                0x34,
+                0x60
+            )
+        );
+        public static readonly Guid HashAlgorithmSha256 = unchecked(
+            new Guid(
+                (int)0x8829d00f,
+                0x11b8,
+                0x4213,
+                0x87,
+                0x8b,
+                0x77,
+                0x0e,
+                0x85,
+                0x97,
+                0xac,
+                0x16
+            )
+        );
 
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#compilation-metadata-references-c-and-vb-compilers
-        public static readonly Guid MetadataReferenceInfoGuid = new Guid("7E4D4708-096E-4C5C-AEDA-CB10BA6A740D");
+        public static readonly Guid MetadataReferenceInfoGuid = new Guid(
+            "7E4D4708-096E-4C5C-AEDA-CB10BA6A740D"
+        );
 
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#compilation-options-c-and-vb-compilers
-        public static readonly Guid CompilationOptionsGuid = new Guid("B5FEEC05-8CD0-4A83-96DA-466284BB4BD8");
+        public static readonly Guid CompilationOptionsGuid = new Guid(
+            "B5FEEC05-8CD0-4A83-96DA-466284BB4BD8"
+        );
 
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#embedded-source-c-and-vb-compilers
-        public static readonly Guid EmbeddedSourceGuid = new Guid("0E8A571B-6926-466E-B4AD-8AB04611F5FE");
+        public static readonly Guid EmbeddedSourceGuid = new Guid(
+            "0E8A571B-6926-466E-B4AD-8AB04611F5FE"
+        );
 
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#source-link-c-and-vb-compilers
-        public static readonly Guid SourceLinkGuid = new Guid("CC110556-A091-4D38-9FEC-25AB9A351A6A");
+        public static readonly Guid SourceLinkGuid = new Guid(
+            "CC110556-A091-4D38-9FEC-25AB9A351A6A"
+        );
 
         public MetadataReader PdbReader { get; }
         public PEReader PeReader { get; }
@@ -65,16 +101,23 @@ namespace Microsoft.CodeAnalysis.Rebuild
         {
             if (!TryGetMetadataCompilationOptionsBlobReader(out var reader))
             {
-                throw new InvalidOperationException("Does not contain metadata compilation options");
+                throw new InvalidOperationException(
+                    "Does not contain metadata compilation options"
+                );
             }
             return reader;
         }
 
-        internal bool TryGetMetadataCompilationOptions([NotNullWhen(true)] out MetadataCompilationOptions? options)
-        {
-            if (_metadataCompilationOptions is null && TryGetMetadataCompilationOptionsBlobReader(out var optionsBlob))
-            {
-                _metadataCompilationOptions = new MetadataCompilationOptions(ParseCompilationOptions(optionsBlob));
+        internal bool TryGetMetadataCompilationOptions(
+            [NotNullWhen(true)] out MetadataCompilationOptions? options
+        ) {
+            if (
+                _metadataCompilationOptions is null
+                && TryGetMetadataCompilationOptionsBlobReader(out var optionsBlob)
+            ) {
+                _metadataCompilationOptions = new MetadataCompilationOptions(
+                    ParseCompilationOptions(optionsBlob)
+                );
             }
 
             options = _metadataCompilationOptions;
@@ -86,7 +129,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
             if (_metadataCompilationOptions is null)
             {
                 var optionsBlob = GetMetadataCompilationOptionsBlobReader();
-                _metadataCompilationOptions = new MetadataCompilationOptions(ParseCompilationOptions(optionsBlob));
+                _metadataCompilationOptions = new MetadataCompilationOptions(
+                    ParseCompilationOptions(optionsBlob)
+                );
             }
 
             return _metadataCompilationOptions;
@@ -98,8 +143,12 @@ namespace Microsoft.CodeAnalysis.Rebuild
         public string GetLanguageName()
         {
             var pdbCompilationOptions = GetMetadataCompilationOptions();
-            if (!pdbCompilationOptions.TryGetUniqueOption(CompilationOptionNames.Language, out var language))
-            {
+            if (
+                !pdbCompilationOptions.TryGetUniqueOption(
+                    CompilationOptionNames.Language,
+                    out var language
+                )
+            ) {
                 throw new Exception("Invalid language name");
             }
 
@@ -111,8 +160,16 @@ namespace Microsoft.CodeAnalysis.Rebuild
             using var scope = _logger.BeginScope("Encoding");
 
             var optionsReader = GetMetadataCompilationOptions();
-            optionsReader.TryGetUniqueOption(_logger, CompilationOptionNames.DefaultEncoding, out var defaultEncoding);
-            optionsReader.TryGetUniqueOption(_logger, CompilationOptionNames.FallbackEncoding, out var fallbackEncoding);
+            optionsReader.TryGetUniqueOption(
+                _logger,
+                CompilationOptionNames.DefaultEncoding,
+                out var defaultEncoding
+            );
+            optionsReader.TryGetUniqueOption(
+                _logger,
+                CompilationOptionNames.FallbackEncoding,
+                out var fallbackEncoding
+            );
 
             var encodingString = defaultEncoding ?? fallbackEncoding;
             var encoding = encodingString is null
@@ -124,8 +181,10 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         public byte[]? GetSourceLinkUTF8()
         {
-            if (_sourceLinkUTF8 is null && TryGetCustomDebugInformationBlobReader(SourceLinkGuid, out var optionsBlob))
-            {
+            if (
+                _sourceLinkUTF8 is null
+                && TryGetCustomDebugInformationBlobReader(SourceLinkGuid, out var optionsBlob)
+            ) {
                 _sourceLinkUTF8 = optionsBlob.ReadBytes(optionsBlob.Length);
             }
             return _sourceLinkUTF8;
@@ -135,8 +194,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         public (string MainTypeName, string MainMethodName)? GetMainMethodInfo()
         {
-            if (!(PdbReader.DebugMetadataHeader is { } header) ||
-                header.EntryPoint.IsNil)
+            if (!(PdbReader.DebugMetadataHeader is { } header) || header.EntryPoint.IsNil)
             {
                 return null;
             }
@@ -165,11 +223,14 @@ namespace Microsoft.CodeAnalysis.Rebuild
             return (typeName, methodName);
         }
 
-        private int GetSourceFileCount()
-            => int.Parse(GetMetadataCompilationOptions().GetUniqueOption(CompilationOptionNames.SourceFileCount));
+        private int GetSourceFileCount() =>
+            int.Parse(
+                GetMetadataCompilationOptions()
+                    .GetUniqueOption(CompilationOptionNames.SourceFileCount)
+            );
 
-        public IEnumerable<EmbeddedSourceTextInfo> GetEmbeddedSourceTextInfo()
-            => GetSourceTextInfoCore()
+        public IEnumerable<EmbeddedSourceTextInfo> GetEmbeddedSourceTextInfo() =>
+            GetSourceTextInfoCore()
                 .Select(x => ResolveEmbeddedSource(x.DocumentHandle, x.SourceTextInfo))
                 .WhereNotNull();
 
@@ -184,22 +245,33 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
                 var hashAlgorithmGuid = PdbReader.GetGuid(document.HashAlgorithm);
                 var hashAlgorithm =
-                    hashAlgorithmGuid == HashAlgorithmSha1 ? SourceHashAlgorithm.Sha1
-                    : hashAlgorithmGuid == HashAlgorithmSha256 ? SourceHashAlgorithm.Sha256
-                    : SourceHashAlgorithm.None;
+                    hashAlgorithmGuid == HashAlgorithmSha1
+                        ? SourceHashAlgorithm.Sha1
+                        : hashAlgorithmGuid == HashAlgorithmSha256
+                            ? SourceHashAlgorithm.Sha256
+                            : SourceHashAlgorithm.None;
 
                 var hash = PdbReader.GetBlobBytes(document.Hash);
-                var sourceTextInfo = new SourceTextInfo(name, hashAlgorithm, hash.ToImmutableArray(), encoding);
+                var sourceTextInfo = new SourceTextInfo(
+                    name,
+                    hashAlgorithm,
+                    hash.ToImmutableArray(),
+                    encoding
+                );
                 yield return (documentHandle, sourceTextInfo);
             }
         }
 
-        private EmbeddedSourceTextInfo? ResolveEmbeddedSource(DocumentHandle document, SourceTextInfo sourceTextInfo)
-        {
-            byte[] bytes = (from handle in PdbReader.GetCustomDebugInformation(document)
-                            let cdi = PdbReader.GetCustomDebugInformation(handle)
-                            where PdbReader.GetGuid(cdi.Kind) == EmbeddedSourceGuid
-                            select PdbReader.GetBlobBytes(cdi.Value)).SingleOrDefault();
+        private EmbeddedSourceTextInfo? ResolveEmbeddedSource(
+            DocumentHandle document,
+            SourceTextInfo sourceTextInfo
+        ) {
+            byte[] bytes = (
+                from handle in PdbReader.GetCustomDebugInformation(document)
+                let cdi = PdbReader.GetCustomDebugInformation(handle)
+                where PdbReader.GetGuid(cdi.Kind) == EmbeddedSourceGuid
+                select PdbReader.GetBlobBytes(cdi.Value)
+            ).SingleOrDefault();
 
             if (bytes is null)
             {
@@ -212,7 +284,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
             byte[]? compressedHash = null;
             if (uncompressedSize != 0)
             {
-                using var algorithm = CryptographicHashProvider.TryGetAlgorithm(sourceTextInfo.HashAlgorithm) ?? throw new InvalidOperationException();
+                using var algorithm =
+                    CryptographicHashProvider.TryGetAlgorithm(sourceTextInfo.HashAlgorithm)
+                    ?? throw new InvalidOperationException();
                 compressedHash = algorithm.ComputeHash(bytes);
 
                 var decompressed = new MemoryStream(uncompressedSize);
@@ -233,8 +307,17 @@ namespace Microsoft.CodeAnalysis.Rebuild
             using (stream)
             {
                 // todo: IVT and EncodedStringText.Create?
-                var embeddedText = SourceText.From(stream, encoding: sourceTextInfo.SourceTextEncoding, checksumAlgorithm: sourceTextInfo.HashAlgorithm, canBeEmbedded: true);
-                return new EmbeddedSourceTextInfo(sourceTextInfo, embeddedText, compressedHash?.ToImmutableArray() ?? ImmutableArray<byte>.Empty);
+                var embeddedText = SourceText.From(
+                    stream,
+                    encoding: sourceTextInfo.SourceTextEncoding,
+                    checksumAlgorithm: sourceTextInfo.HashAlgorithm,
+                    canBeEmbedded: true
+                );
+                return new EmbeddedSourceTextInfo(
+                    sourceTextInfo,
+                    embeddedText,
+                    compressedHash?.ToImmutableArray() ?? ImmutableArray<byte>.Empty
+                );
             }
         }
 
@@ -259,35 +342,48 @@ namespace Microsoft.CodeAnalysis.Rebuild
         public unsafe ResourceDescription[]? GetManifestResources()
         {
             var metadataReader = PeReader.GetMetadataReader();
-            if (PeReader.PEHeaders.CorHeader is not { } corHeader
-                || !PeReader.PEHeaders.TryGetDirectoryOffset(corHeader.ResourcesDirectory, out var resourcesOffset))
-            {
+            if (
+                PeReader.PEHeaders.CorHeader is not  { } corHeader
+                || !PeReader.PEHeaders.TryGetDirectoryOffset(
+                    corHeader.ResourcesDirectory,
+                    out var resourcesOffset
+                )
+            ) {
                 return null;
             }
 
-            var result = metadataReader.ManifestResources.Select(handle =>
-            {
-                var resource = metadataReader.GetManifestResource(handle);
-                var name = metadataReader.GetString(resource.Name);
+            var result = metadataReader.ManifestResources.Select(
+                    handle =>
+                    {
+                        var resource = metadataReader.GetManifestResource(handle);
+                        var name = metadataReader.GetString(resource.Name);
 
-                var resourceStart = PeReader.GetEntireImage().Pointer + resourcesOffset + resource.Offset;
-                var length = *(int*)resourceStart;
-                var contentPtr = resourceStart + sizeof(int);
-                var content = new byte[length];
-                Marshal.Copy(new IntPtr(contentPtr), content, 0, length);
+                        var resourceStart =
+                            PeReader.GetEntireImage().Pointer + resourcesOffset + resource.Offset;
+                        var length = *(int*)resourceStart;
+                        var contentPtr = resourceStart + sizeof(int);
+                        var content = new byte[length];
+                        Marshal.Copy(new IntPtr(contentPtr), content, 0, length);
 
-                var isPublic = (resource.Attributes & ManifestResourceAttributes.Public) != 0;
-                var description = new ResourceDescription(name, dataProvider: () => new MemoryStream(content), isPublic);
-                return description;
-            }).ToArray();
+                        var isPublic =
+                            (resource.Attributes & ManifestResourceAttributes.Public) != 0;
+                        var description = new ResourceDescription(
+                            name,
+                            dataProvider: () => new MemoryStream(content),
+                            isPublic
+                        );
+                        return description;
+                    }
+                )
+                .ToArray();
 
             return result;
         }
 
         public (ImmutableArray<SyntaxTree> SyntaxTrees, ImmutableArray<MetadataReference> MetadataReferences) ResolveArtifacts(
             IRebuildArtifactResolver resolver,
-            Func<string, SourceText, SyntaxTree> createSyntaxTreeFunc)
-        {
+            Func<string, SourceText, SyntaxTree> createSyntaxTreeFunc
+        ) {
             var syntaxTrees = ResolveSyntaxTrees();
             var metadataReferences = ResolveMetadataReferences();
             return (syntaxTrees, metadataReferences);
@@ -299,8 +395,10 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 foreach (var (documentHandle, sourceTextInfo) in GetSourceTextInfoCore())
                 {
                     SourceText sourceText;
-                    if (ResolveEmbeddedSource(documentHandle, sourceTextInfo) is { } embeddedSourceTextInfo)
-                    {
+                    if (
+                        ResolveEmbeddedSource(documentHandle, sourceTextInfo)
+                        is { } embeddedSourceTextInfo
+                    ) {
                         sourceText = embeddedSourceTextInfo.SourceText;
                     }
                     else
@@ -312,7 +410,10 @@ namespace Microsoft.CodeAnalysis.Rebuild
                         }
                     }
 
-                    var syntaxTree = createSyntaxTreeFunc(sourceTextInfo.OriginalSourceFilePath, sourceText);
+                    var syntaxTree = createSyntaxTreeFunc(
+                        sourceTextInfo.OriginalSourceFilePath,
+                        sourceText
+                    );
                     builder.Add(syntaxTree);
                 }
 
@@ -324,17 +425,28 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 var builder = ImmutableArray.CreateBuilder<MetadataReference>();
                 foreach (var metadataReferenceInfo in GetMetadataReferenceInfo())
                 {
-                    var metadataReference = resolver.ResolveMetadataReference(metadataReferenceInfo);
-                    if (metadataReference.Properties.EmbedInteropTypes != metadataReferenceInfo.EmbedInteropTypes)
-                    {
+                    var metadataReference = resolver.ResolveMetadataReference(
+                        metadataReferenceInfo
+                    );
+                    if (
+                        metadataReference.Properties.EmbedInteropTypes
+                        != metadataReferenceInfo.EmbedInteropTypes
+                    ) {
                         throw new InvalidOperationException();
                     }
 
-                    if (!(
-                        (metadataReferenceInfo.ExternAlias is null && metadataReference.Properties.Aliases.IsEmpty) ||
-                        (metadataReferenceInfo.ExternAlias == metadataReference.Properties.Aliases.SingleOrDefault())
-                        ))
-                    {
+                    if (
+                        !(
+                            (
+                                metadataReferenceInfo.ExternAlias is null
+                                && metadataReference.Properties.Aliases.IsEmpty
+                            )
+                            || (
+                                metadataReferenceInfo.ExternAlias
+                                == metadataReference.Properties.Aliases.SingleOrDefault()
+                            )
+                        )
+                    ) {
                         throw new InvalidOperationException();
                     }
 
@@ -347,8 +459,12 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         public IEnumerable<MetadataReferenceInfo> GetMetadataReferenceInfo()
         {
-            if (!TryGetCustomDebugInformationBlobReader(MetadataReferenceInfoGuid, out var blobReader))
-            {
+            if (
+                !TryGetCustomDebugInformationBlobReader(
+                    MetadataReferenceInfoGuid,
+                    out var blobReader
+                )
+            ) {
                 throw new InvalidOperationException();
             }
 
@@ -377,17 +493,20 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
                 var embedInteropTypesAndKind = blobReader.ReadByte();
 
-                // Only the last two bits are used, verify nothing else in the 
-                // byte has data. 
+                // Only the last two bits are used, verify nothing else in the
+                // byte has data.
                 if ((embedInteropTypesAndKind & 0b11111100) != 0)
                 {
-                    throw new InvalidDataException($"Unexpected value for EmbedInteropTypes/MetadataImageKind {embedInteropTypesAndKind}");
+                    throw new InvalidDataException(
+                        $"Unexpected value for EmbedInteropTypes/MetadataImageKind {embedInteropTypesAndKind}"
+                    );
                 }
 
                 var embedInteropTypes = (embedInteropTypesAndKind & 0b10) == 0b10;
-                var kind = (embedInteropTypesAndKind & 0b1) == 0b1
-                    ? MetadataImageKind.Assembly
-                    : MetadataImageKind.Module;
+                var kind =
+                    (embedInteropTypesAndKind & 0b1) == 0b1
+                        ? MetadataImageKind.Assembly
+                        : MetadataImageKind.Module;
 
                 var timestamp = blobReader.ReadInt32();
                 var imageSize = blobReader.ReadInt32();
@@ -402,13 +521,14 @@ namespace Microsoft.CodeAnalysis.Rebuild
                         kind,
                         embedInteropTypes,
                         timestamp,
-                        imageSize);
+                        imageSize
+                    );
                 }
                 else
                 {
                     foreach (var alias in externAliases.Split(','))
                     {
-                        // The "global" alias is an invention of the tooling on top of the compiler. 
+                        // The "global" alias is an invention of the tooling on top of the compiler.
                         // The compiler itself just sees "global" as a reference without any aliases
                         // and we need to mimic that here.
                         yield return new MetadataReferenceInfo(
@@ -418,18 +538,22 @@ namespace Microsoft.CodeAnalysis.Rebuild
                             kind,
                             embedInteropTypes,
                             timestamp,
-                            imageSize);
+                            imageSize
+                        );
                     }
                 }
             }
         }
 
-        private bool TryGetCustomDebugInformationBlobReader(Guid infoGuid, out BlobReader blobReader)
-        {
-            var blobs = from cdiHandle in PdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
-                        let cdi = PdbReader.GetCustomDebugInformation(cdiHandle)
-                        where PdbReader.GetGuid(cdi.Kind) == infoGuid
-                        select PdbReader.GetBlobReader(cdi.Value);
+        private bool TryGetCustomDebugInformationBlobReader(
+            Guid infoGuid,
+            out BlobReader blobReader
+        ) {
+            var blobs =
+                from cdiHandle in PdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
+                let cdi = PdbReader.GetCustomDebugInformation(cdiHandle)
+                where PdbReader.GetGuid(cdi.Kind) == infoGuid
+                select PdbReader.GetBlobReader(cdi.Value);
 
             if (blobs.Any())
             {
@@ -441,15 +565,17 @@ namespace Microsoft.CodeAnalysis.Rebuild
             return false;
         }
 
-        public bool HasEmbeddedPdb => PeReader.ReadDebugDirectory().Any(entry => entry.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+        public bool HasEmbeddedPdb =>
+            PeReader.ReadDebugDirectory()
+                .Any(entry => entry.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
 
-        private static ImmutableArray<(string, string)> ParseCompilationOptions(BlobReader blobReader)
-        {
-
+        private static ImmutableArray<(string, string)> ParseCompilationOptions(
+            BlobReader blobReader
+        ) {
             // Compiler flag bytes are UTF-8 null-terminated key-value pairs
             string? key = null;
             List<(string, string)> options = new List<(string, string)>();
-            for (; ; )
+            for (;;)
             {
                 var nullIndex = blobReader.IndexOf(0);
                 if (nullIndex == -1)
@@ -465,7 +591,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 {
                     if (value is null or { Length: 0 })
                     {
-                        throw new InvalidDataException("Encountered null or empty key for compilation options pairs");
+                        throw new InvalidDataException(
+                            "Encountered null or empty key for compilation options pairs"
+                        );
                     }
 
                     key = value;

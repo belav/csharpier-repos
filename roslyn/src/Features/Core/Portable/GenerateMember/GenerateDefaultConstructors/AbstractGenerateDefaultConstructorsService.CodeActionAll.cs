@@ -15,10 +15,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             public CodeActionAll(
                 Document document,
                 State state,
-                IList<IMethodSymbol> constructors)
-                : base(document, state, constructors, FeaturesResources.Generate_all)
-            {
-            }
+                IList<IMethodSymbol> constructors
+            ) : base(document, state, constructors, FeaturesResources.Generate_all) { }
         }
     }
 }

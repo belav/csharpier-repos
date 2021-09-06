@@ -79,7 +79,9 @@ internal static partial class Interop
         internal static extern SafeX509Handle PemReadX509FromBioAux(SafeBioHandle bio);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509GetSerialNumber")]
-        private static extern SafeSharedAsn1IntegerHandle X509GetSerialNumber_private(SafeX509Handle x);
+        private static extern SafeSharedAsn1IntegerHandle X509GetSerialNumber_private(
+            SafeX509Handle x
+        );
 
         internal static SafeSharedAsn1IntegerHandle X509GetSerialNumber(SafeX509Handle x)
         {
@@ -87,7 +89,8 @@ internal static partial class Interop
 
             return SafeInteriorHandle.OpenInteriorHandle(
                 handle => X509GetSerialNumber_private(handle),
-                x);
+                x
+            );
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509GetIssuerName")]
@@ -106,16 +109,20 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative)]
         private static extern SafeSharedAsn1OctetStringHandle CryptoNative_X509FindExtensionData(
             SafeX509Handle x,
-            int extensionNid);
+            int extensionNid
+        );
 
-        internal static SafeSharedAsn1OctetStringHandle X509FindExtensionData(SafeX509Handle x, int extensionNid)
-        {
+        internal static SafeSharedAsn1OctetStringHandle X509FindExtensionData(
+            SafeX509Handle x,
+            int extensionNid
+        ) {
             CheckValidOpenSslHandle(x);
 
             return SafeInteriorHandle.OpenInteriorHandle(
                 (handle, arg) => CryptoNative_X509FindExtensionData(handle, arg),
                 x,
-                extensionNid);
+                extensionNid
+            );
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509GetExtCount")]
@@ -139,10 +146,15 @@ internal static partial class Interop
         internal static extern bool X509ExtensionGetCritical(IntPtr ex);
 
         [DllImport(Libraries.CryptoNative)]
-        private static extern SafeX509StoreHandle CryptoNative_X509ChainNew(SafeX509StackHandle systemTrust, SafeX509StackHandle userTrust);
+        private static extern SafeX509StoreHandle CryptoNative_X509ChainNew(
+            SafeX509StackHandle systemTrust,
+            SafeX509StackHandle userTrust
+        );
 
-        internal static SafeX509StoreHandle X509ChainNew(SafeX509StackHandle systemTrust, SafeX509StackHandle userTrust)
-        {
+        internal static SafeX509StoreHandle X509ChainNew(
+            SafeX509StackHandle systemTrust,
+            SafeX509StackHandle userTrust
+        ) {
             SafeX509StoreHandle store = CryptoNative_X509ChainNew(systemTrust, userTrust);
 
             if (store.IsInvalid)
@@ -162,10 +174,15 @@ internal static partial class Interop
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreSetRevocationFlag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool CryptoNative_X509StoreSetRevocationFlag(SafeX509StoreHandle ctx, X509RevocationFlag revocationFlag);
+        private static extern bool CryptoNative_X509StoreSetRevocationFlag(
+            SafeX509StoreHandle ctx,
+            X509RevocationFlag revocationFlag
+        );
 
-        internal static void X509StoreSetRevocationFlag(SafeX509StoreHandle ctx, X509RevocationFlag revocationFlag)
-        {
+        internal static void X509StoreSetRevocationFlag(
+            SafeX509StoreHandle ctx,
+            X509RevocationFlag revocationFlag
+        ) {
             if (!CryptoNative_X509StoreSetRevocationFlag(ctx, revocationFlag))
             {
                 throw CreateOpenSslCryptographicException();
@@ -178,7 +195,8 @@ internal static partial class Interop
             SafeX509StoreCtxHandle ctx,
             SafeX509StoreHandle store,
             SafeX509Handle x509,
-            SafeX509StackHandle extraCerts);
+            SafeX509StackHandle extraCerts
+        );
 
         [DllImport(Libraries.CryptoNative)]
         private static extern int CryptoNative_X509VerifyCert(SafeX509StoreCtxHandle ctx);
@@ -196,7 +214,9 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetError")]
-        internal static extern X509VerifyStatusCode X509StoreCtxGetError(SafeX509StoreCtxHandle ctx);
+        internal static extern X509VerifyStatusCode X509StoreCtxGetError(
+            SafeX509StoreCtxHandle ctx
+        );
 
         [DllImport(Libraries.CryptoNative)]
         private static extern int CryptoNative_X509StoreCtxReset(SafeX509StoreCtxHandle ctx);
@@ -227,8 +247,14 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetErrorDepth")]
         internal static extern int X509StoreCtxGetErrorDepth(SafeX509StoreCtxHandle ctx);
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxSetVerifyCallback")]
-        internal static extern void X509StoreCtxSetVerifyCallback(SafeX509StoreCtxHandle ctx, X509StoreVerifyCallback callback);
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_X509StoreCtxSetVerifyCallback"
+        )]
+        internal static extern void X509StoreCtxSetVerifyCallback(
+            SafeX509StoreCtxHandle ctx,
+            X509StoreVerifyCallback callback
+        );
 
         internal static string GetX509VerifyCertErrorString(int n)
         {
@@ -247,10 +273,16 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_PemReadBioX509Crl")]
         internal static extern SafeX509CrlHandle PemReadBioX509Crl(SafeBioHandle bio);
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509SubjectPublicKeyInfoDerSize")]
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetX509SubjectPublicKeyInfoDerSize"
+        )]
         internal static extern int GetX509SubjectPublicKeyInfoDerSize(SafeX509Handle x509);
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EncodeX509SubjectPublicKeyInfo")]
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EncodeX509SubjectPublicKeyInfo"
+        )]
         internal static extern int EncodeX509SubjectPublicKeyInfo(SafeX509Handle x509, byte[] buf);
 
         internal enum X509VerifyStatusCodeUniversal
@@ -279,7 +311,6 @@ internal static partial class Interop
             X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE = 21,
             X509_V_ERR_CERT_CHAIN_TOO_LONG = 22,
             X509_V_ERR_CERT_REVOKED = 23,
-
             // Code 24 varies.
 
             X509_V_ERR_PATH_LENGTH_EXCEEDED = 25,
@@ -325,7 +356,6 @@ internal static partial class Interop
         internal enum X509VerifyStatusCode102
         {
             X509_V_ERR_INVALID_CA = 24,
-
             X509_V_ERR_INVALID_CALL = 65,
             X509_V_ERR_STORE_LOOKUP = 66,
             X509_V_ERR_PROXY_SUBJECT_NAME_VIOLATION = 67,
@@ -334,7 +364,6 @@ internal static partial class Interop
         internal enum X509VerifyStatusCode111
         {
             X509_V_ERR_INVALID_CA = 24,
-
             X509_V_ERR_DANE_NO_MATCH = 65,
             X509_V_ERR_EE_KEY_TOO_SMALL = 66,
             X509_V_ERR_CA_KEY_TOO_SMALL = 67,
@@ -355,7 +384,6 @@ internal static partial class Interop
         internal enum X509VerifyStatusCode30
         {
             X509_V_ERR_NO_ISSUER_PUBLIC_KEY = 24,
-
             X509_V_ERR_DANE_NO_MATCH = 65,
             X509_V_ERR_EE_KEY_TOO_SMALL = 66,
             X509_V_ERR_CA_KEY_TOO_SMALL = 67,
@@ -390,7 +418,8 @@ internal static partial class Interop
 
         internal readonly struct X509VerifyStatusCode : IEquatable<X509VerifyStatusCode>
         {
-            internal static readonly X509VerifyStatusCode X509_V_OK = X509VerifyStatusCodeUniversal.X509_V_OK;
+            internal static readonly X509VerifyStatusCode X509_V_OK =
+                X509VerifyStatusCodeUniversal.X509_V_OK;
 
             public int Code { get; }
 
@@ -399,20 +428,24 @@ internal static partial class Interop
                 Code = code;
             }
 
-            public X509VerifyStatusCodeUniversal UniversalCode => (X509VerifyStatusCodeUniversal)Code;
+            public X509VerifyStatusCodeUniversal UniversalCode =>
+                (X509VerifyStatusCodeUniversal)Code;
             public X509VerifyStatusCode102 Code102 => (X509VerifyStatusCode102)Code;
             public X509VerifyStatusCode111 Code111 => (X509VerifyStatusCode111)Code;
             public X509VerifyStatusCode30 Code30 => (X509VerifyStatusCode30)Code;
 
             public bool Equals(X509VerifyStatusCode other) => Code == other.Code;
 
-            public override bool Equals(object? obj) => obj is X509VerifyStatusCode other && Equals(other);
+            public override bool Equals(object? obj) =>
+                obj is X509VerifyStatusCode other && Equals(other);
 
             public override int GetHashCode() => Code.GetHashCode();
 
-            public static bool operator ==(X509VerifyStatusCode left, X509VerifyStatusCode right) => left.Equals(right);
+            public static bool operator ==(X509VerifyStatusCode left, X509VerifyStatusCode right) =>
+                left.Equals(right);
 
-            public static bool operator !=(X509VerifyStatusCode left, X509VerifyStatusCode right) => !left.Equals(right);
+            public static bool operator !=(X509VerifyStatusCode left, X509VerifyStatusCode right) =>
+                !left.Equals(right);
 
             public static explicit operator X509VerifyStatusCode(int code)
             {

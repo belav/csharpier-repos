@@ -18,25 +18,40 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal sealed class MessagePackFormatters
     {
-        private static readonly ImmutableArray<IMessagePackFormatter> s_formatters = ImmutableArray.Create<IMessagePackFormatter>(
-            SolutionIdFormatter.Instance,
-            ProjectIdFormatter.Instance,
-            DocumentIdFormatter.Instance);
+        private static readonly ImmutableArray<IMessagePackFormatter> s_formatters =
+            ImmutableArray.Create<IMessagePackFormatter>(
+                SolutionIdFormatter.Instance,
+                ProjectIdFormatter.Instance,
+                DocumentIdFormatter.Instance
+            );
 
-        private static readonly ImmutableArray<IFormatterResolver> s_resolvers = ImmutableArray.Create<IFormatterResolver>(
-            StandardResolverAllowPrivate.Instance);
+        private static readonly ImmutableArray<IFormatterResolver> s_resolvers =
+            ImmutableArray.Create<IFormatterResolver>(StandardResolverAllowPrivate.Instance);
 
-        internal static readonly IFormatterResolver DefaultResolver = CompositeResolver.Create(s_formatters, s_resolvers);
+        internal static readonly IFormatterResolver DefaultResolver = CompositeResolver.Create(
+            s_formatters,
+            s_resolvers
+        );
 
-        internal static IFormatterResolver CreateResolver(ImmutableArray<IMessagePackFormatter> additionalFormatters, ImmutableArray<IFormatterResolver> additionalResolvers)
-            => (additionalFormatters.IsEmpty && additionalResolvers.IsEmpty) ? DefaultResolver : CompositeResolver.Create(s_formatters.AddRange(additionalFormatters), s_resolvers.AddRange(additionalResolvers));
+        internal static IFormatterResolver CreateResolver(
+            ImmutableArray<IMessagePackFormatter> additionalFormatters,
+            ImmutableArray<IFormatterResolver> additionalResolvers
+        ) =>
+            (additionalFormatters.IsEmpty && additionalResolvers.IsEmpty)
+                ? DefaultResolver
+                : CompositeResolver.Create(
+                      s_formatters.AddRange(additionalFormatters),
+                      s_resolvers.AddRange(additionalResolvers)
+                  );
 
         internal sealed class SolutionIdFormatter : IMessagePackFormatter<SolutionId?>
         {
             public static readonly SolutionIdFormatter Instance = new SolutionIdFormatter();
 
-            public SolutionId? Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
-            {
+            public SolutionId? Deserialize(
+                ref MessagePackReader reader,
+                MessagePackSerializerOptions options
+            ) {
                 try
                 {
                     if (reader.TryReadNil())
@@ -56,8 +71,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
             }
 
-            public void Serialize(ref MessagePackWriter writer, SolutionId? value, MessagePackSerializerOptions options)
-            {
+            public void Serialize(
+                ref MessagePackWriter writer,
+                SolutionId? value,
+                MessagePackSerializerOptions options
+            ) {
                 try
                 {
                     if (value is null)
@@ -82,8 +100,10 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             public static readonly ProjectIdFormatter Instance = new ProjectIdFormatter();
 
-            public ProjectId? Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
-            {
+            public ProjectId? Deserialize(
+                ref MessagePackReader reader,
+                MessagePackSerializerOptions options
+            ) {
                 try
                 {
                     if (reader.TryReadNil())
@@ -103,8 +123,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
             }
 
-            public void Serialize(ref MessagePackWriter writer, ProjectId? value, MessagePackSerializerOptions options)
-            {
+            public void Serialize(
+                ref MessagePackWriter writer,
+                ProjectId? value,
+                MessagePackSerializerOptions options
+            ) {
                 try
                 {
                     if (value is null)
@@ -129,8 +152,10 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             public static readonly DocumentIdFormatter Instance = new DocumentIdFormatter();
 
-            public DocumentId? Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
-            {
+            public DocumentId? Deserialize(
+                ref MessagePackReader reader,
+                MessagePackSerializerOptions options
+            ) {
                 try
                 {
                     if (reader.TryReadNil())
@@ -154,8 +179,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
             }
 
-            public void Serialize(ref MessagePackWriter writer, DocumentId? value, MessagePackSerializerOptions options)
-            {
+            public void Serialize(
+                ref MessagePackWriter writer,
+                DocumentId? value,
+                MessagePackSerializerOptions options
+            ) {
                 try
                 {
                     if (value is null)

@@ -11,15 +11,20 @@ namespace Microsoft.CodeAnalysis.Razor
 
         public const string IDictionary = "System.Collections.Generic.IDictionary`2";
 
-        public const string HtmlAttributeNameAttribute = "Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute";
+        public const string HtmlAttributeNameAttribute =
+            "Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute";
 
-        public const string HtmlAttributeNotBoundAttribute = "Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNotBoundAttribute";
+        public const string HtmlAttributeNotBoundAttribute =
+            "Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNotBoundAttribute";
 
-        public const string HtmlTargetElementAttribute = "Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute";
+        public const string HtmlTargetElementAttribute =
+            "Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute";
 
-        public const string OutputElementHintAttribute = "Microsoft.AspNetCore.Razor.TagHelpers.OutputElementHintAttribute";
+        public const string OutputElementHintAttribute =
+            "Microsoft.AspNetCore.Razor.TagHelpers.OutputElementHintAttribute";
 
-        public const string RestrictChildrenAttribute = "Microsoft.AspNetCore.Razor.TagHelpers.RestrictChildrenAttribute";
+        public const string RestrictChildrenAttribute =
+            "Microsoft.AspNetCore.Razor.TagHelpers.RestrictChildrenAttribute";
 
         public static class HtmlAttributeName
         {

@@ -10,7 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     public class PhysicalAddressToBytesConverterTest
     {
-        private static readonly PhysicalAddressToBytesConverter _physicalAddressToBytes            = new();
+        private static readonly PhysicalAddressToBytesConverter _physicalAddressToBytes = new();
 
         [ConditionalTheory]
         [MemberData(nameof(Data))]
@@ -49,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Null(converter(null));
         }
 
-        public static IEnumerable<object[]> Data
-            => new List<object[]>
+        public static IEnumerable<object[]> Data =>
+            new List<object[]>
             {
                 new object[] { "1D-4E-55-D6-92-73-D6" },
                 new object[] { "24-80-B7-38-4A-68-D6" },

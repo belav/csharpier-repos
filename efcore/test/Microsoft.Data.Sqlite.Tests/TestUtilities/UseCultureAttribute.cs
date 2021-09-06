@@ -14,10 +14,7 @@ namespace Microsoft.Data.Sqlite.TestUtilities
         private CultureInfo? _originalCulture;
         private CultureInfo? _originalUICulture;
 
-        public UseCultureAttribute(string culture)
-            : this(culture, culture)
-        {
-        }
+        public UseCultureAttribute(string culture) : this(culture, culture) { }
 
         public UseCultureAttribute(string culture, string uiCulture)
         {

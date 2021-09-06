@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
     internal sealed class OptionsCollection : IReadOnlyCollection<KeyValuePair<OptionKey2, object?>>
     {
-        private readonly Dictionary<OptionKey2, object?> _options = new Dictionary<OptionKey2, object?>();
+        private readonly Dictionary<OptionKey2, object?> _options = new Dictionary<
+            OptionKey2,
+            object?
+        >();
         private readonly string _languageName;
 
         public OptionsCollection(string languageName)
@@ -28,26 +31,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         public int Count => _options.Count;
 
-        public void Set<T>(Option2<T> option, T value)
-            => _options[new OptionKey2(option)] = value;
+        public void Set<T>(Option2<T> option, T value) => _options[new OptionKey2(option)] = value;
 
-        public void Add<T>(Option2<T> option, T value)
-            => _options.Add(new OptionKey2(option), value);
+        public void Add<T>(Option2<T> option, T value) =>
+            _options.Add(new OptionKey2(option), value);
 
-        public void Add<T>(Option2<CodeStyleOption2<T>> option, T value)
-            => Add(option, value, option.DefaultValue.Notification);
+        public void Add<T>(Option2<CodeStyleOption2<T>> option, T value) =>
+            Add(option, value, option.DefaultValue.Notification);
 
-        public void Add<T>(Option2<CodeStyleOption2<T>> option, T value, NotificationOption2 notification)
-            => _options.Add(new OptionKey2(option), new CodeStyleOption2<T>(value, notification));
+        public void Add<T>(
+            Option2<CodeStyleOption2<T>> option,
+            T value,
+            NotificationOption2 notification
+        ) => _options.Add(new OptionKey2(option), new CodeStyleOption2<T>(value, notification));
 
-        public void Add<T>(PerLanguageOption2<T> option, T value)
-            => _options.Add(new OptionKey2(option, _languageName), value);
+        public void Add<T>(PerLanguageOption2<T> option, T value) =>
+            _options.Add(new OptionKey2(option, _languageName), value);
 
-        public void Add<T>(PerLanguageOption2<CodeStyleOption2<T>> option, T value)
-            => Add(option, value, option.DefaultValue.Notification);
+        public void Add<T>(PerLanguageOption2<CodeStyleOption2<T>> option, T value) =>
+            Add(option, value, option.DefaultValue.Notification);
 
-        public void Add<T>(PerLanguageOption2<CodeStyleOption2<T>> option, T value, NotificationOption2 notification)
-            => _options.Add(new OptionKey2(option, _languageName), new CodeStyleOption2<T>(value, notification));
+        public void Add<T>(
+            PerLanguageOption2<CodeStyleOption2<T>> option,
+            T value,
+            NotificationOption2 notification
+        ) =>
+            _options.Add(
+                new OptionKey2(option, _languageName),
+                new CodeStyleOption2<T>(value, notification)
+            );
 
         public void AddRange(OptionsCollection options)
         {
@@ -57,10 +69,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             }
         }
 
-        public IEnumerator<KeyValuePair<OptionKey2, object?>> GetEnumerator()
-            => _options.GetEnumerator();
+        public IEnumerator<KeyValuePair<OptionKey2, object?>> GetEnumerator() =>
+            _options.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

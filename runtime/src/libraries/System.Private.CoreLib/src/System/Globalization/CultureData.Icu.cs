@@ -11,7 +11,7 @@ namespace System.Globalization
     {
         // ICU constants
         private const int ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY = 100; // max size of keyword or value
-        private const int ICU_ULOC_FULLNAME_CAPACITY = 157;           // max size of locale name
+        private const int ICU_ULOC_FULLNAME_CAPACITY = 157; // max size of locale name
 
         /// <summary>
         /// This method uses the sRealName field (which is initialized by the constructor before this is called) to
@@ -36,7 +36,11 @@ namespace System.Globalization
             if (index > 0)
             {
                 alternateSortName = realNameBuffer.AsSpan(index + 1);
-                realNameBuffer = string.Concat(realNameBuffer.AsSpan(0, index), ICU_COLLATION_KEYWORD, alternateSortName);
+                realNameBuffer = string.Concat(
+                    realNameBuffer.AsSpan(0, index),
+                    ICU_COLLATION_KEYWORD,
+                    alternateSortName
+                );
             }
 
             // Get the locale name from ICU
@@ -64,7 +68,9 @@ namespace System.Globalization
                 _iLanguage = CultureInfo.LOCALE_CUSTOM_UNSPECIFIED;
             }
             _bNeutral = TwoLetterISOCountryName.Length == 0;
-            _sSpecificCulture = _bNeutral ? IcuLocaleData.GetSpecificCultureName(_sRealName) : _sRealName;
+            _sSpecificCulture = _bNeutral
+                ? IcuLocaleData.GetSpecificCultureName(_sRealName)
+                : _sRealName;
             // Remove the sort from sName unless custom culture
             if (index > 0 && !_bNeutral && !IsCustomCultureId(_iLanguage))
             {
@@ -77,8 +83,9 @@ namespace System.Globalization
         {
             // Get the locale name from ICU
             char* buffer = stackalloc char[ICU_ULOC_FULLNAME_CAPACITY];
-            if (!Interop.Globalization.GetLocaleName(localeName, buffer, ICU_ULOC_FULLNAME_CAPACITY))
-            {
+            if (
+                !Interop.Globalization.GetLocaleName(localeName, buffer, ICU_ULOC_FULLNAME_CAPACITY)
+            ) {
                 windowsName = null;
                 return false; // fail
             }
@@ -88,8 +95,9 @@ namespace System.Globalization
             return true;
         }
 
-        internal static unsafe bool GetDefaultLocaleName([NotNullWhen(true)] out string? windowsName)
-        {
+        internal static unsafe bool GetDefaultLocaleName(
+            [NotNullWhen(true)] out string? windowsName
+        ) {
             // Get the default (system) locale name from ICU
             char* buffer = stackalloc char[ICU_ULOC_FULLNAME_CAPACITY];
             if (!Interop.Globalization.GetDefaultLocaleName(buffer, ICU_ULOC_FULLNAME_CAPACITY))
@@ -107,7 +115,10 @@ namespace System.Globalization
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
-            Debug.Assert(_sWindowsName != null, "[CultureData.IcuGetLocaleInfo] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.IcuGetLocaleInfo] Expected _sWindowsName to be populated already"
+            );
             return IcuGetLocaleInfo(_sWindowsName, type);
         }
 
@@ -116,18 +127,26 @@ namespace System.Globalization
         private unsafe string IcuGetLocaleInfo(string localeName, LocaleStringData type)
         {
             Debug.Assert(!GlobalizationMode.UseNls);
-            Debug.Assert(localeName != null, "[CultureData.IcuGetLocaleInfo] Expected localeName to be not be null");
+            Debug.Assert(
+                localeName != null,
+                "[CultureData.IcuGetLocaleInfo] Expected localeName to be not be null"
+            );
 
             switch (type)
             {
                 case LocaleStringData.NegativeInfinitySymbol:
                     // not an equivalent in ICU; prefix the PositiveInfinitySymbol with NegativeSign
-                    return IcuGetLocaleInfo(localeName, LocaleStringData.NegativeSign) +
-                        IcuGetLocaleInfo(localeName, LocaleStringData.PositiveInfinitySymbol);
+                    return IcuGetLocaleInfo(localeName, LocaleStringData.NegativeSign)
+                        + IcuGetLocaleInfo(localeName, LocaleStringData.PositiveInfinitySymbol);
             }
 
             char* buffer = stackalloc char[ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY];
-            bool result = Interop.Globalization.GetLocaleInfoString(localeName, (uint)type, buffer, ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY);
+            bool result = Interop.Globalization.GetLocaleInfoString(
+                localeName,
+                (uint)type,
+                buffer,
+                ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY
+            );
             if (!result)
             {
                 // Failed, just use empty string
@@ -141,7 +160,10 @@ namespace System.Globalization
         {
             Debug.Assert(!GlobalizationMode.UseNls);
 
-            Debug.Assert(_sWindowsName != null, "[CultureData.IcuGetLocaleInfo(LocaleNumberData)] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.IcuGetLocaleInfo(LocaleNumberData)] Expected _sWindowsName to be populated already"
+            );
 
             switch (type)
             {
@@ -150,9 +172,12 @@ namespace System.Globalization
                     return 0;
             }
 
-
             int value = 0;
-            bool result = Interop.Globalization.GetLocaleInfoInt(_sWindowsName, (uint)type, ref value);
+            bool result = Interop.Globalization.GetLocaleInfoInt(
+                _sWindowsName,
+                (uint)type,
+                ref value
+            );
             if (!result)
             {
                 // Failed, just use 0
@@ -165,11 +190,19 @@ namespace System.Globalization
         private int[] IcuGetLocaleInfo(LocaleGroupingData type)
         {
             Debug.Assert(!GlobalizationMode.UseNls);
-            Debug.Assert(_sWindowsName != null, "[CultureData.IcuGetLocaleInfo(LocaleGroupingData)] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.IcuGetLocaleInfo(LocaleGroupingData)] Expected _sWindowsName to be populated already"
+            );
 
             int primaryGroupingSize = 0;
             int secondaryGroupingSize = 0;
-            bool result = Interop.Globalization.GetLocaleInfoGroupingSizes(_sWindowsName, (uint)type, ref primaryGroupingSize, ref secondaryGroupingSize);
+            bool result = Interop.Globalization.GetLocaleInfoGroupingSizes(
+                _sWindowsName,
+                (uint)type,
+                ref primaryGroupingSize,
+                ref secondaryGroupingSize
+            );
             if (!result)
             {
                 Debug.Fail("[CultureData.IcuGetLocaleInfo(LocaleGroupingData type)] failed");
@@ -188,11 +221,19 @@ namespace System.Globalization
         private unsafe string IcuGetTimeFormatString(bool shortFormat)
         {
             Debug.Assert(!GlobalizationMode.UseNls);
-            Debug.Assert(_sWindowsName != null, "[CultureData.GetTimeFormatString(bool shortFormat)] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.GetTimeFormatString(bool shortFormat)] Expected _sWindowsName to be populated already"
+            );
 
             char* buffer = stackalloc char[ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY];
 
-            bool result = Interop.Globalization.GetLocaleTimeFormat(_sWindowsName, shortFormat, buffer, ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY);
+            bool result = Interop.Globalization.GetLocaleTimeFormat(
+                _sWindowsName,
+                shortFormat,
+                buffer,
+                ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY
+            );
             if (!result)
             {
                 // Failed, just use empty string
@@ -212,7 +253,10 @@ namespace System.Globalization
 
         private static string IcuGetLanguageDisplayName(string cultureName)
         {
-            return new CultureInfo(cultureName)._cultureData.IcuGetLocaleInfo(cultureName, LocaleStringData.LocalizedDisplayName);
+            return new CultureInfo(cultureName)._cultureData.IcuGetLocaleInfo(
+                cultureName,
+                LocaleStringData.LocalizedDisplayName
+            );
         }
 
         private static string? IcuGetRegionDisplayName()
@@ -276,7 +320,6 @@ namespace System.Globalization
                             result[resultPos++] = 't';
                         }
                         break;
-
                 }
             }
 
@@ -295,18 +338,26 @@ namespace System.Globalization
         private static int IcuGetGeoId(string cultureName)
         {
             Debug.Assert(!GlobalizationMode.UseNls);
-            int geoId = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.GeoId);
+            int geoId = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.GeoId
+            );
             return geoId == -1 ? CultureData.Invariant.GeoId : geoId;
         }
 
         private const uint DigitSubstitutionMask = 0x0000FFFF;
-        private const uint ListSeparatorMask     = 0xFFFF0000;
+        private const uint ListSeparatorMask = 0xFFFF0000;
 
         private static int IcuGetDigitSubstitution(string cultureName)
         {
             Debug.Assert(!GlobalizationMode.UseNls);
-            int digitSubstitution = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.DigitSubstitutionOrListSeparator);
-            return digitSubstitution == -1 ? (int) DigitShapes.None : (int)(digitSubstitution & DigitSubstitutionMask);
+            int digitSubstitution = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.DigitSubstitutionOrListSeparator
+            );
+            return digitSubstitution == -1
+                ? (int)DigitShapes.None
+                : (int)(digitSubstitution & DigitSubstitutionMask);
         }
 
         private static string IcuGetListSeparator(string? cultureName)
@@ -314,7 +365,10 @@ namespace System.Globalization
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(cultureName != null);
 
-            int separator = IcuLocaleData.GetLocaleDataNumericPart(cultureName, IcuLocaleDataParts.DigitSubstitutionOrListSeparator);
+            int separator = IcuLocaleData.GetLocaleDataNumericPart(
+                cultureName,
+                IcuLocaleDataParts.DigitSubstitutionOrListSeparator
+            );
             if (separator != -1)
             {
                 switch (separator & ListSeparatorMask)
@@ -335,7 +389,10 @@ namespace System.Globalization
                         return ",,";
 
                     default:
-                        Debug.Assert(false, "[CultureData.IcuGetListSeparator] Unexpected ListSeparator value.");
+                        Debug.Assert(
+                            false,
+                            "[CultureData.IcuGetListSeparator] Unexpected ListSeparator value."
+                        );
                         break;
                 }
             }
@@ -346,7 +403,9 @@ namespace System.Globalization
         private static string IcuGetThreeLetterWindowsLanguageName(string cultureName)
         {
             Debug.Assert(!GlobalizationMode.UseNls);
-            return IcuLocaleData.GetThreeLetterWindowsLanguageName(cultureName) ?? "ZZZ" /* default lang name */;
+            return IcuLocaleData.GetThreeLetterWindowsLanguageName(cultureName)
+                ?? "ZZZ" /* default lang name */
+            ;
         }
 
         private static CultureInfo[] IcuEnumCultures(CultureTypes types)
@@ -365,7 +424,7 @@ namespace System.Globalization
                 return Array.Empty<CultureInfo>();
             }
 
-            char [] chars = new char[bufferLength];
+            char[] chars = new char[bufferLength];
 
             bufferLength = Interop.Globalization.GetLocales(chars, bufferLength);
             if (bufferLength <= 0)
@@ -373,7 +432,7 @@ namespace System.Globalization
                 return Array.Empty<CultureInfo>();
             }
 
-            bool enumNeutrals   = (types & CultureTypes.NeutralCultures) != 0;
+            bool enumNeutrals = (types & CultureTypes.NeutralCultures) != 0;
             bool enumSpecificss = (types & CultureTypes.SpecificCultures) != 0;
 
             List<CultureInfo> list = new List<CultureInfo>();
@@ -385,12 +444,14 @@ namespace System.Globalization
             int index = 0;
             while (index < bufferLength)
             {
-                int length = (int) chars[index++];
+                int length = (int)chars[index++];
                 if (index + length <= bufferLength)
                 {
                     CultureInfo ci = CultureInfo.GetCultureInfo(new string(chars, index, length));
-                    if ((enumNeutrals && ci.IsNeutralCulture) || (enumSpecificss && !ci.IsNeutralCulture))
-                    {
+                    if (
+                        (enumNeutrals && ci.IsNeutralCulture)
+                        || (enumSpecificss && !ci.IsNeutralCulture)
+                    ) {
                         list.Add(ci);
                     }
                 }
@@ -428,26 +489,35 @@ namespace System.Globalization
         {
             indexOfUnderscore = -1;
 
-            if (subject.Length == 0) return true; // Invariant Culture
-            if (subject.Length == 1 || subject.Length > LocaleNameMaxLength) return false;
+            if (subject.Length == 0)
+                return true; // Invariant Culture
+            if (subject.Length == 1 || subject.Length > LocaleNameMaxLength)
+                return false;
 
             bool seenUnderscore = false;
             for (int i = 0; i < subject.Length; ++i)
             {
                 char c = subject[i];
 
-                if ((uint)(c - 'A') <= ('Z' - 'A') || (uint)(c - 'a') <= ('z' - 'a') || (uint)(c - '0') <= ('9' - '0') || c == '\0')
-                {
+                if (
+                    (uint)(c - 'A') <= ('Z' - 'A')
+                    || (uint)(c - 'a') <= ('z' - 'a')
+                    || (uint)(c - '0') <= ('9' - '0')
+                    || c == '\0'
+                ) {
                     continue;
                 }
 
                 if (c == '_' || c == '-')
                 {
-                    if (i == 0 || i == subject.Length - 1) return false;
-                    if (subject[i - 1] == '_' || subject[i - 1] == '-') return false;
+                    if (i == 0 || i == subject.Length - 1)
+                        return false;
+                    if (subject[i - 1] == '_' || subject[i - 1] == '-')
+                        return false;
                     if (c == '_')
                     {
-                        if (seenUnderscore) return false; // only one _ is allowed
+                        if (seenUnderscore)
+                            return false; // only one _ is allowed
                         seenUnderscore = true;
                         indexOfUnderscore = i;
                     }

@@ -100,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             public IFormFile? GetFile(string name) => null;
 
-            IReadOnlyList<IFormFile> IFormFileCollection.GetFiles(string name) => Array.Empty<IFormFile>();
+            IReadOnlyList<IFormFile> IFormFileCollection.GetFiles(string name) =>
+                Array.Empty<IFormFile>();
         }
     }
 }

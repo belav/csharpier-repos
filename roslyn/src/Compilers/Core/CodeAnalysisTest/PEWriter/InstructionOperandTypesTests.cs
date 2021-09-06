@@ -22,10 +22,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             var TwoByteOperandTypes = new byte[0x1f];
 
             var typeOfOpCode = typeof(OpCode);
-            var reserved = new[] { "Prefix1", "Prefix2", "Prefix3", "Prefix4", "Prefix5", "Prefix6", "Prefix7", "Prefixref" };
-
-            foreach (FieldInfo fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static).Where(f => !reserved.Contains(f.Name)))
+            var reserved = new[]
             {
+                "Prefix1",
+                "Prefix2",
+                "Prefix3",
+                "Prefix4",
+                "Prefix5",
+                "Prefix6",
+                "Prefix7",
+                "Prefixref"
+            };
+
+            foreach (
+                FieldInfo fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static)
+                    .Where(f => !reserved.Contains(f.Name))
+            ) {
                 if (fi.FieldType != typeOfOpCode)
                 {
                     continue;

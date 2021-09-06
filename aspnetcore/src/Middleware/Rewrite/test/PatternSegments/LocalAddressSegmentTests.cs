@@ -35,7 +35,7 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
             var results = segement.Evaluate(context, null, null);
 
             // Assert
-            Assert.Null( results);
+            Assert.Null(results);
         }
     }
 }

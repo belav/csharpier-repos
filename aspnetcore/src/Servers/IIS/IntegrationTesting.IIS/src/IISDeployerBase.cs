@@ -18,8 +18,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         public IISDeploymentParameters IISDeploymentParameters { get; }
 
-        public IISDeployerBase(IISDeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-            : base(deploymentParameters, loggerFactory)
+        public IISDeployerBase(
+            IISDeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        ) : base(deploymentParameters, loggerFactory)
         {
             IISDeploymentParameters = deploymentParameters;
         }
@@ -34,10 +36,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
             if (!DeploymentParameters.PublishApplicationBeforeDeployment)
             {
-                throw new InvalidOperationException("Cannot modify web.config file if no published output.");
+                throw new InvalidOperationException(
+                    "Cannot modify web.config file if no published output."
+                );
             }
 
-            var path = Path.Combine(DeploymentParameters.PublishedApplicationRootPath, "web.config");
+            var path = Path.Combine(
+                DeploymentParameters.PublishedApplicationRootPath,
+                "web.config"
+            );
             var webconfig = XDocument.Load(path);
 
             foreach (var action in actions)
@@ -88,15 +95,25 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             // There are issues with having multiple dlls copy to the same location in both build and publish
             // It's inherently racy. Therefore, we have two different copy locations and when trying verify backwards compat tests,
             // we select the version of ANCM in a different folder.
-            var basePath = File.Exists(Path.Combine(AppContext.BaseDirectory, "x64", "aspnetcorev2.dll")) ? "" : @"ANCM\";
-            var arch = DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x64 ? $@"{basePath}x64\{ancmDllName}" : $@"{basePath}x86\{ancmDllName}";
+            var basePath = File.Exists(
+                Path.Combine(AppContext.BaseDirectory, "x64", "aspnetcorev2.dll")
+            )
+                ? ""
+                : @"ANCM\";
+            var arch =
+                DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x64
+                    ? $@"{basePath}x64\{ancmDllName}"
+                    : $@"{basePath}x86\{ancmDllName}";
             var ancmFile = Path.Combine(AppContext.BaseDirectory, arch);
             if (!File.Exists(Environment.ExpandEnvironmentVariables(ancmFile)))
             {
                 ancmFile = Path.Combine(AppContext.BaseDirectory, ancmDllName);
                 if (!File.Exists(Environment.ExpandEnvironmentVariables(ancmFile)))
                 {
-                    throw new FileNotFoundException("AspNetCoreModuleV2 could not be found.", ancmFile);
+                    throw new FileNotFoundException(
+                        "AspNetCoreModuleV2 could not be found.",
+                        ancmFile
+                    );
                 }
             }
 
@@ -105,8 +122,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         private void AddWebConfigEnvironmentVariables(XElement element, string contentRoot)
         {
-            var environmentVariables = element
-                .Descendants("system.webServer")
+            var environmentVariables = element.Descendants("system.webServer")
                 .Single()
                 .RequiredElement("aspNetCore")
                 .GetOrAdd("environmentVariables");
@@ -120,8 +136,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         private void AddHandlerSettings(XElement element, string contentRoot)
         {
-            var handlerSettings = element
-                .Descendants("system.webServer")
+            var handlerSettings = element.Descendants("system.webServer")
                 .Single()
                 .RequiredElement("aspNetCore")
                 .GetOrAdd("handlerSettings");
@@ -135,23 +150,19 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
         protected void ConfigureModuleAndBinding(XElement config, string contentRoot, int port)
         {
-            var siteElement = config
-                .RequiredElement("system.applicationHost")
+            var siteElement = config.RequiredElement("system.applicationHost")
                 .RequiredElement("sites")
                 .RequiredElement("site");
 
-            siteElement
-                .RequiredElement("application")
+            siteElement.RequiredElement("application")
                 .RequiredElement("virtualDirectory")
                 .SetAttributeValue("physicalPath", contentRoot);
 
-            siteElement
-                .RequiredElement("bindings")
+            siteElement.RequiredElement("bindings")
                 .RequiredElement("binding")
                 .SetAttributeValue("bindingInformation", $":{port}:localhost");
 
-            config
-                .RequiredElement("system.webServer")
+            config.RequiredElement("system.webServer")
                 .RequiredElement("globalModules")
                 .GetOrAdd("add", "name", AspNetCoreModuleV2ModuleName)
                 .SetAttributeValue("image", GetAncmLocation());

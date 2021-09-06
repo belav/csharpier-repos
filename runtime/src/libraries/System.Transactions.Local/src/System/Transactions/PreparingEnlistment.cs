@@ -5,11 +5,7 @@ namespace System.Transactions
 {
     public class PreparingEnlistment : Enlistment
     {
-        internal PreparingEnlistment(
-            InternalEnlistment enlistment
-            ) : base(enlistment)
-        {
-        }
+        internal PreparingEnlistment(InternalEnlistment enlistment) : base(enlistment) { }
 
         public void Prepared()
         {
@@ -86,6 +82,7 @@ namespace System.Transactions
                     return _internalEnlistment.State.RecoveryInformation(_internalEnlistment);
                 }
             }
+
             finally
             {
                 if (etwLog.IsEnabled())

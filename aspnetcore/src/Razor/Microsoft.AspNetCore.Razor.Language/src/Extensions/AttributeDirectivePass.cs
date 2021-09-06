@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     internal class AttributeDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
     {
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             var @namespace = documentNode.FindPrimaryNamespace();
             var @class = documentNode.FindPrimaryClass();
             if (@namespace == null || @class == null)
@@ -18,22 +20,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
 
             var classIndex = @namespace.Children.IndexOf(@class);
-            foreach (var attribute in documentNode.FindDirectiveReferences(AttributeDirective.Directive))
-            {
+            foreach (
+                var attribute in documentNode.FindDirectiveReferences(AttributeDirective.Directive)
+            ) {
                 var token = ((DirectiveIntermediateNode)attribute.Node).Tokens.FirstOrDefault();
                 if (token != null)
                 {
-                    var node = new CSharpCodeIntermediateNode
-                    {
-                        Source = token.Source
-                    };
+                    var node = new CSharpCodeIntermediateNode { Source = token.Source };
 
-                    node.Children.Add(new IntermediateToken()
-                    {
-                        Content = token.Content,
-                        Source = token.Source,
-                        Kind = TokenKind.CSharp,
-                    });
+                    node.Children.Add(
+                        new IntermediateToken()
+                        {
+                            Content = token.Content,
+                            Source = token.Source,
+                            Kind = TokenKind.CSharp,
+                        }
+                    );
 
                     @namespace.Children.Insert(classIndex++, node);
                 }

@@ -10,7 +10,11 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
     {
         public override object Model { get; } = new byte[30];
 
-        [Benchmark(Baseline = true, Description = "validation for byte arrays baseline", OperationsPerInvoke = Iterations)]
+        [Benchmark(
+            Baseline = true,
+            Description = "validation for byte arrays baseline",
+            OperationsPerInvoke = Iterations
+        )]
         public void Baseline()
         {
             // Baseline for validating a byte array of size 30, without the ModelMetadata.HasValidators optimization.
@@ -20,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 CompositeModelValidatorProvider,
                 ValidatorCache,
                 BaselineModelMetadataProvider,
-                new ValidationStateDictionary());
+                new ValidationStateDictionary()
+            );
 
             validationVisitor.Validate(BaselineModelMetadata, "key", Model);
         }
@@ -34,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 CompositeModelValidatorProvider,
                 ValidatorCache,
                 ModelMetadataProvider,
-                new ValidationStateDictionary());
+                new ValidationStateDictionary()
+            );
 
             validationVisitor.Validate(ModelMetadata, "key", Model);
         }

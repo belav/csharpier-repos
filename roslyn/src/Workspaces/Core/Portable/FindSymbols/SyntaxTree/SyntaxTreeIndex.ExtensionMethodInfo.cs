@@ -15,13 +15,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             // We divide extension methods into two categories, simple and complex, for filtering purpose.
             // Whether a method is simple is determined based on if we can determine it's receiver type easily
-            // with a pure text matching. For complex methods, we will need to rely on symbol to decide if it's 
+            // with a pure text matching. For complex methods, we will need to rely on symbol to decide if it's
             // feasible.
             //
             // Complex methods include:
             // - Method declared in the document which includes using alias directive
             // - Generic method where the receiver type is a type-paramter (e.g. List<T> would be considered simple, not complex)
-            // - If the receiver type name is Pointer type (i.e. name of the type for the first parameter) 
+            // - If the receiver type name is Pointer type (i.e. name of the type for the first parameter)
             //
             // The rest of methods are considered simple.
 
@@ -39,12 +39,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             /// T (where T is a type parameter) => ""
             /// T[,] (where T is a type parameter) => "T[]"
             /// </summary>
-            public readonly ImmutableDictionary<string, ImmutableArray<int>> ReceiverTypeNameToExtensionMethodMap { get; }
+            public readonly ImmutableDictionary<
+                string,
+                ImmutableArray<int>
+            > ReceiverTypeNameToExtensionMethodMap { get; }
 
             public bool ContainsExtensionMethod => !ReceiverTypeNameToExtensionMethodMap.IsEmpty;
 
-            public ExtensionMethodInfo(ImmutableDictionary<string, ImmutableArray<int>> receiverTypeNameToExtensionMethodMap)
-            {
+            public ExtensionMethodInfo(
+                ImmutableDictionary<
+                    string,
+                    ImmutableArray<int>
+                > receiverTypeNameToExtensionMethodMap
+            ) {
                 ReceiverTypeNameToExtensionMethodMap = receiverTypeNameToExtensionMethodMap;
             }
 
@@ -66,7 +73,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 try
                 {
-                    var receiverTypeNameToExtensionMethodMapBuilder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<int>>();
+                    var receiverTypeNameToExtensionMethodMapBuilder =
+                        ImmutableDictionary.CreateBuilder<string, ImmutableArray<int>>();
                     var count = reader.ReadInt32();
 
                     for (var i = 0; i < count; ++i)
@@ -81,14 +89,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             arrayBuilder.Add(declaredSymbolInfoIndex);
                         }
 
-                        receiverTypeNameToExtensionMethodMapBuilder[typeName] = arrayBuilder.ToImmutableAndFree();
+                        receiverTypeNameToExtensionMethodMapBuilder[typeName] =
+                            arrayBuilder.ToImmutableAndFree();
                     }
 
-                    return new ExtensionMethodInfo(receiverTypeNameToExtensionMethodMapBuilder.ToImmutable());
+                    return new ExtensionMethodInfo(
+                        receiverTypeNameToExtensionMethodMapBuilder.ToImmutable()
+                    );
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return null;
             }

@@ -31,8 +31,12 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.Copy(values, 2, ptr, values.Length - 4);
                 IntPtr[] array2 = new IntPtr[values.Length];
                 Marshal.Copy(ptr, array2, 2, values.Length - 4);
-                Assert.Equal<IntPtr>(values.AsSpan(2, values.Length - 4).ToArray(), array2.AsSpan(2, values.Length - 4).ToArray());
+                Assert.Equal<IntPtr>(
+                    values.AsSpan(2, values.Length - 4).ToArray(),
+                    array2.AsSpan(2, values.Length - 4).ToArray()
+                );
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -42,15 +46,27 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void CopyTo_NullDestination_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("destination", () => Marshal.Copy(new IntPtr[10], 0, IntPtr.Zero, 0));
-            AssertExtensions.Throws<ArgumentNullException>("destination", () => Marshal.Copy(new IntPtr(1), (IntPtr[])null, 0, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destination",
+                () => Marshal.Copy(new IntPtr[10], 0, IntPtr.Zero, 0)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destination",
+                () => Marshal.Copy(new IntPtr(1), (IntPtr[])null, 0, 0)
+            );
         }
 
         [Fact]
         public void CopyTo_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Marshal.Copy((IntPtr[])null, 0, new IntPtr(1), 0));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Marshal.Copy(IntPtr.Zero, new IntPtr[10], 0, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Marshal.Copy((IntPtr[])null, 0, new IntPtr(1), 0)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Marshal.Copy(IntPtr.Zero, new IntPtr[10], 0, 0)
+            );
         }
 
         [Fact]
@@ -60,9 +76,16 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocCoTaskMem(IntPtr.Size * array.Length);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () => Marshal.Copy(array, -1, ptr, 10));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => Marshal.Copy(ptr, array, -1, 10));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    null,
+                    () => Marshal.Copy(array, -1, ptr, 10)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "startIndex",
+                    () => Marshal.Copy(ptr, array, -1, 10)
+                );
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -76,9 +99,16 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocCoTaskMem(IntPtr.Size * array.Length);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () => Marshal.Copy(array, 0, ptr, -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => Marshal.Copy(ptr, array, 0, -1));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    null,
+                    () => Marshal.Copy(array, 0, ptr, -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "length",
+                    () => Marshal.Copy(ptr, array, 0, -1)
+                );
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -89,15 +119,24 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(0, 11)]
         [InlineData(11, 1)]
         [InlineData(2, 10)]
-        public void CopyTo_InvalidStartIndexLength_ThrowsArgumentOutOfRangeException(int startIndex, int length)
-        {
+        public void CopyTo_InvalidStartIndexLength_ThrowsArgumentOutOfRangeException(
+            int startIndex,
+            int length
+        ) {
             IntPtr[] array = new IntPtr[10];
             IntPtr ptr = Marshal.AllocCoTaskMem(IntPtr.Size * array.Length);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () => Marshal.Copy(array, startIndex, ptr, length));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () => Marshal.Copy(ptr, array, startIndex, length));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    null,
+                    () => Marshal.Copy(array, startIndex, ptr, length)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    null,
+                    () => Marshal.Copy(ptr, array, startIndex, length)
+                );
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

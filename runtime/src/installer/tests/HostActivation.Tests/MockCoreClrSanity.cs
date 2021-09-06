@@ -20,9 +20,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             _dotnetDir = Path.Combine(TestArtifact.TestArtifactsPath, "mockCoreclrSanity");
 
-            DotNet = new DotNetBuilder(_dotnetDir, Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"), "exe")
-                .AddMicrosoftNETCoreAppFrameworkMockCoreClr("9999.0.0")
-                .Build();
+            DotNet = new DotNetBuilder(
+                _dotnetDir,
+                Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
+                "exe"
+            ).AddMicrosoftNETCoreAppFrameworkMockCoreClr("9999.0.0").Build();
         }
 
         public void Dispose()
@@ -40,7 +42,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0");
         }
 
@@ -55,10 +58,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdErr()
                 .MultilevelLookup(false)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("mock coreclr_initialize() called")
                 .And.HaveStdOutContaining("mock property[TRUSTED_PLATFORM_ASSEMBLIES]")
-                .And.HaveStdOutContaining($"Microsoft.NETCore.App{sep}9999.0.0{sep}Microsoft.NETCore.App.deps.json")
+                .And.HaveStdOutContaining(
+                    $"Microsoft.NETCore.App{sep}9999.0.0{sep}Microsoft.NETCore.App.deps.json"
+                )
                 .And.HaveStdOutContaining("mock coreclr_execute_assembly() called")
                 .And.HaveStdOutContaining("mock argc:2")
                 .And.HaveStdOutContaining($"mock managedAssemblyPath:{appDll}")

@@ -24,26 +24,38 @@ namespace Templates.Test.Helpers
     {
         private const string _urls = "http://127.0.0.1:0;https://127.0.0.1:0";
 
-        public static string ArtifactsLogDir => (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT")))
-            ? GetAssemblyMetadata("ArtifactsLogDir")
-            : Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
+        public static string ArtifactsLogDir =>
+            (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT")))
+                ? GetAssemblyMetadata("ArtifactsLogDir")
+                : Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
 
-        public static string DotNetEfFullPath => (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DotNetEfFullPath")))
-            ? typeof(ProjectFactoryFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                .First(attribute => attribute.Key == "DotNetEfFullPath")
-                .Value
-            : Environment.GetEnvironmentVariable("DotNetEfFullPath");
+        public static string DotNetEfFullPath =>
+            (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DotNetEfFullPath")))
+                ? typeof(ProjectFactoryFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                      .First(attribute => attribute.Key == "DotNetEfFullPath").Value
+                : Environment.GetEnvironmentVariable("DotNetEfFullPath");
 
         public string ProjectName { get; set; }
         public string ProjectArguments { get; set; }
         public string ProjectGuid { get; set; }
         public string TemplateOutputDir { get; set; }
-        public string TargetFramework { get; set; } = GetAssemblyMetadata("Test.DefaultTargetFramework");
+        public string TargetFramework { get; set; } =
+            GetAssemblyMetadata("Test.DefaultTargetFramework");
         public string RuntimeIdentifier { get; set; } = string.Empty;
-        public static DevelopmentCertificate DevCert { get; } = DevelopmentCertificate.Create(AppContext.BaseDirectory);
+        public static DevelopmentCertificate DevCert { get; } =
+            DevelopmentCertificate.Create(AppContext.BaseDirectory);
 
-        public string TemplateBuildDir => Path.Combine(TemplateOutputDir, "bin", "Debug", TargetFramework, RuntimeIdentifier);
-        public string TemplatePublishDir => Path.Combine(TemplateOutputDir, "bin", "Release", TargetFramework, RuntimeIdentifier, "publish");
+        public string TemplateBuildDir =>
+            Path.Combine(TemplateOutputDir, "bin", "Debug", TargetFramework, RuntimeIdentifier);
+        public string TemplatePublishDir =>
+            Path.Combine(
+                TemplateOutputDir,
+                "bin",
+                "Release",
+                TargetFramework,
+                RuntimeIdentifier,
+                "publish"
+            );
 
         public ITestOutputHelper Output { get; set; }
         public IMessageSink DiagnosticsMessageSink { get; set; }
@@ -56,8 +68,8 @@ namespace Templates.Test.Helpers
             bool noHttps = false,
             string[] args = null,
             // Used to set special options in MSBuild
-            IDictionary<string, string> environmentVariables = null)
-        {
+            IDictionary<string, string> environmentVariables = null
+        ) {
             var hiveArg = $"--debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\"";
             var argString = $"new {templateName} {hiveArg}";
             environmentVariables ??= new Dictionary<string, string>();
@@ -104,10 +116,17 @@ namespace Templates.Test.Helpers
                 Output.WriteLine("Acquired DotNetNewLock");
                 // Temporary while investigating why this process occasionally never runs or exits on Debian 9
                 environmentVariables.Add("COREHOST_TRACE", "1");
-                using var execution = ProcessEx.Run(Output, AppContext.BaseDirectory, DotNetMuxer.MuxerPathOrDefault(), argString, environmentVariables);
+                using var execution = ProcessEx.Run(
+                    Output,
+                    AppContext.BaseDirectory,
+                    DotNetMuxer.MuxerPathOrDefault(),
+                    argString,
+                    environmentVariables
+                );
                 await execution.Exited;
                 return new ProcessResult(execution);
             }
+
             finally
             {
                 DotNetNewLock.Release();
@@ -115,8 +134,11 @@ namespace Templates.Test.Helpers
             }
         }
 
-        internal async Task<ProcessResult> RunDotNetPublishAsync(IDictionary<string, string> packageOptions = null, string additionalArgs = null, bool noRestore = true)
-        {
+        internal async Task<ProcessResult> RunDotNetPublishAsync(
+            IDictionary<string, string> packageOptions = null,
+            string additionalArgs = null,
+            bool noRestore = true
+        ) {
             Output.WriteLine("Publishing ASP.NET Core application...");
 
             // Avoid restoring as part of build or publish. These projects should have already restored as part of running dotnet new. Explicitly disabling restore
@@ -124,27 +146,43 @@ namespace Templates.Test.Helpers
 
             var restoreArgs = noRestore ? "--no-restore" : null;
 
-            using var result = ProcessEx.Run(Output, TemplateOutputDir, DotNetMuxer.MuxerPathOrDefault(), $"publish {restoreArgs} -c Release /bl {additionalArgs}", packageOptions);
+            using var result = ProcessEx.Run(
+                Output,
+                TemplateOutputDir,
+                DotNetMuxer.MuxerPathOrDefault(),
+                $"publish {restoreArgs} -c Release /bl {additionalArgs}",
+                packageOptions
+            );
             await result.Exited;
             CaptureBinLogOnFailure(result);
             return new ProcessResult(result);
         }
 
-        internal async Task<ProcessResult> RunDotNetBuildAsync(IDictionary<string, string> packageOptions = null, string additionalArgs = null)
-        {
+        internal async Task<ProcessResult> RunDotNetBuildAsync(
+            IDictionary<string, string> packageOptions = null,
+            string additionalArgs = null
+        ) {
             Output.WriteLine("Building ASP.NET Core application...");
 
             // Avoid restoring as part of build or publish. These projects should have already restored as part of running dotnet new. Explicitly disabling restore
             // should avoid any global contention and we can execute a build or publish in a lock-free way
 
-            using var result = ProcessEx.Run(Output, TemplateOutputDir, DotNetMuxer.MuxerPathOrDefault(), $"build --no-restore -c Debug /bl {additionalArgs}", packageOptions);
+            using var result = ProcessEx.Run(
+                Output,
+                TemplateOutputDir,
+                DotNetMuxer.MuxerPathOrDefault(),
+                $"build --no-restore -c Debug /bl {additionalArgs}",
+                packageOptions
+            );
             await result.Exited;
             CaptureBinLogOnFailure(result);
             return new ProcessResult(result);
         }
 
-        internal AspNetProcess StartBuiltProjectAsync(bool hasListeningUri = true, ILogger logger = null)
-        {
+        internal AspNetProcess StartBuiltProjectAsync(
+            bool hasListeningUri = true,
+            ILogger logger = null
+        ) {
             var environment = new Dictionary<string, string>
             {
                 ["ASPNETCORE_URLS"] = _urls,
@@ -155,7 +193,11 @@ namespace Templates.Test.Helpers
                 ["ASPNETCORE_Logging__Console__FormatterOptions__IncludeScopes"] = "true",
             };
 
-            var launchSettingsJson = Path.Combine(TemplateOutputDir, "Properties", "launchSettings.json");
+            var launchSettingsJson = Path.Combine(
+                TemplateOutputDir,
+                "Properties",
+                "launchSettings.json"
+            );
             if (File.Exists(launchSettingsJson))
             {
                 // When executing "dotnet run", the launch urls specified in the app's launchSettings.json have higher precedence
@@ -163,7 +205,8 @@ namespace Templates.Test.Helpers
                 var original = File.ReadAllText(launchSettingsJson);
                 var updated = original.Replace(
                     "\"applicationUrl\": \"https://localhost:5001;http://localhost:5000\"",
-                    $"\"applicationUrl\": \"{_urls}\"");
+                    $"\"applicationUrl\": \"{_urls}\""
+                );
 
                 if (updated == original)
                 {
@@ -181,11 +224,22 @@ namespace Templates.Test.Helpers
             }
 
             var projectDll = Path.Combine(TemplateBuildDir, $"{ProjectName}.dll");
-            return new AspNetProcess(DevCert, Output, TemplateOutputDir, projectDll, environment, published: false, hasListeningUri: hasListeningUri, logger: logger);
+            return new AspNetProcess(
+                DevCert,
+                Output,
+                TemplateOutputDir,
+                projectDll,
+                environment,
+                published: false,
+                hasListeningUri: hasListeningUri,
+                logger: logger
+            );
         }
 
-        internal AspNetProcess StartPublishedProjectAsync(bool hasListeningUri = true, bool usePublishedAppHost = false)
-        {
+        internal AspNetProcess StartPublishedProjectAsync(
+            bool hasListeningUri = true,
+            bool usePublishedAppHost = false
+        ) {
             var environment = new Dictionary<string, string>
             {
                 ["ASPNETCORE_URLS"] = _urls,
@@ -196,7 +250,16 @@ namespace Templates.Test.Helpers
             };
 
             var projectDll = Path.Combine(TemplatePublishDir, $"{ProjectName}.dll");
-            return new AspNetProcess(DevCert, Output, TemplatePublishDir, projectDll, environment, published: true, hasListeningUri: hasListeningUri, usePublishedAppHost: usePublishedAppHost);
+            return new AspNetProcess(
+                DevCert,
+                Output,
+                TemplatePublishDir,
+                projectDll,
+                environment,
+                published: true,
+                hasListeningUri: hasListeningUri,
+                usePublishedAppHost: usePublishedAppHost
+            );
         }
 
         internal async Task<ProcessResult> RunDotNetEfCreateMigrationAsync(string migrationName)
@@ -223,6 +286,7 @@ namespace Templates.Test.Helpers
                 await result.Exited;
                 return new ProcessResult(result);
             }
+
             finally
             {
                 DotNetNewLock.Release();
@@ -256,6 +320,7 @@ namespace Templates.Test.Helpers
                 await result.Exited;
                 return new ProcessResult(result);
             }
+
             finally
             {
                 DotNetNewLock.Release();
@@ -267,12 +332,15 @@ namespace Templates.Test.Helpers
         public void AssertEmptyMigration(string migration)
         {
             var fullPath = Path.Combine(TemplateOutputDir, "Data/Migrations");
-            var file = Directory.EnumerateFiles(fullPath).Where(f => f.EndsWith($"{migration}.cs", StringComparison.Ordinal)).FirstOrDefault();
+            var file = Directory.EnumerateFiles(fullPath)
+                .Where(f => f.EndsWith($"{migration}.cs", StringComparison.Ordinal))
+                .FirstOrDefault();
 
             Assert.NotNull(file);
             var contents = File.ReadAllText(file);
 
-            var emptyMigration = @"protected override void Up(MigrationBuilder migrationBuilder)
+            var emptyMigration =
+                @"protected override void Up(MigrationBuilder migrationBuilder)
         {
 
         }
@@ -322,12 +390,14 @@ namespace Templates.Test.Helpers
                     Output,
                     AppContext.BaseDirectory,
                     DotNetMuxer.MuxerPathOrDefault(),
-                    arguments +
-                        $" --debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\"" +
-                        $" -o {TemplateOutputDir}");
+                    arguments
+                        + $" --debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\""
+                        + $" -o {TemplateOutputDir}"
+                );
                 await result.Exited;
                 return result;
             }
+
             finally
             {
                 DotNetNewLock.Release();
@@ -344,8 +414,11 @@ namespace Templates.Test.Helpers
         {
             const int NumAttempts = 10;
 
-            for (var numAttemptsRemaining = NumAttempts; numAttemptsRemaining > 0; numAttemptsRemaining--)
-            {
+            for (
+                var numAttemptsRemaining = NumAttempts;
+                numAttemptsRemaining > 0;
+                numAttemptsRemaining--
+            ) {
                 try
                 {
                     Directory.Delete(TemplateOutputDir, true);
@@ -355,12 +428,20 @@ namespace Templates.Test.Helpers
                 {
                     if (numAttemptsRemaining > 1)
                     {
-                        DiagnosticsMessageSink.OnMessage(new DiagnosticMessage($"Failed to delete directory {TemplateOutputDir} because of error {ex.Message}. Will try again {numAttemptsRemaining - 1} more time(s)."));
+                        DiagnosticsMessageSink.OnMessage(
+                            new DiagnosticMessage(
+                                $"Failed to delete directory {TemplateOutputDir} because of error {ex.Message}. Will try again {numAttemptsRemaining - 1} more time(s)."
+                            )
+                        );
                         Thread.Sleep(3000);
                     }
                     else
                     {
-                        DiagnosticsMessageSink.OnMessage(new DiagnosticMessage($"Giving up trying to delete directory {TemplateOutputDir} after {NumAttempts} attempts. Most recent error was: {ex.StackTrace}"));
+                        DiagnosticsMessageSink.OnMessage(
+                            new DiagnosticMessage(
+                                $"Giving up trying to delete directory {TemplateOutputDir} after {NumAttempts} attempts. Most recent error was: {ex.StackTrace}"
+                            )
+                        );
                     }
                 }
             }
@@ -415,11 +496,11 @@ namespace Templates.Test.Helpers
                 {
                     if (_dotNetLockTaken)
                     {
-
                         DotnetLock.Release();
                         _dotNetLockTaken = false;
                     }
                 }
+
                 finally
                 {
                     if (_nodeLockTaken)
@@ -436,7 +517,10 @@ namespace Templates.Test.Helpers
             if (result.ExitCode != 0 && !string.IsNullOrEmpty(ArtifactsLogDir))
             {
                 var sourceFile = Path.Combine(TemplateOutputDir, "msbuild.binlog");
-                Assert.True(File.Exists(sourceFile), $"Log for '{ProjectName}' not found in '{sourceFile}'.");
+                Assert.True(
+                    File.Exists(sourceFile),
+                    $"Log for '{ProjectName}' not found in '{sourceFile}'."
+                );
                 var destination = Path.Combine(ArtifactsLogDir, ProjectName + ".binlog");
                 File.Move(sourceFile, destination);
             }
@@ -446,12 +530,15 @@ namespace Templates.Test.Helpers
 
         private static string GetAssemblyMetadata(string key)
         {
-            var attribute = typeof(Project).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                .FirstOrDefault(a => a.Key == key);
+            var attribute =
+                typeof(Project).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .FirstOrDefault(a => a.Key == key);
 
             if (attribute is null)
             {
-                throw new ArgumentException($"AssemblyMetadataAttribute with key {key} was not found.");
+                throw new ArgumentException(
+                    $"AssemblyMetadataAttribute with key {key} was not found."
+                );
             }
 
             return attribute.Value;

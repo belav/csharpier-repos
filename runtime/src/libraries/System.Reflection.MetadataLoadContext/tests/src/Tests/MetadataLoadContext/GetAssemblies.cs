@@ -12,8 +12,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void GetAssemblies_EmptyMetadataLoadContext()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly[] loadedAssemblies = lc.GetAssemblies().ToArray();
                 Assert.Equal(1, loadedAssemblies.Length);
             }
@@ -22,8 +25,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void GetAssemblies()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly[] loadedAssemblies = lc.GetAssemblies().ToArray();
                 Assert.Equal(1, loadedAssemblies.Length);
 
@@ -43,7 +49,7 @@ namespace System.Reflection.Tests
             Assembly a1 = null;
 
             var resolver = new FuncMetadataAssemblyResolver(
-                delegate (MetadataLoadContext context, AssemblyName refName)
+                delegate(MetadataLoadContext context, AssemblyName refName)
                 {
                     if (a1 == null)
                     {
@@ -51,7 +57,8 @@ namespace System.Reflection.Tests
                         return a1 = context.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                     }
                     return null;
-                });
+                }
+            );
 
             using (MetadataLoadContext lc = new MetadataLoadContext(resolver))
             {

@@ -17,9 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AddImports
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(PredefinedCommandHandlerNames.AddImportsPaste)]
     // Order is important here, this command needs to execute before PasteTracking
-    // since it may modify the pasted span. Paste tracking dismisses if 
+    // since it may modify the pasted span. Paste tracking dismisses if
     // the span is modified. It doesn't need to be before FormatDocument, but
-    // this helps the order of execution be more constant in case there 
+    // this helps the order of execution be more constant in case there
     // are problems that arise. This command will always execute the next
     // command before doing operations.
     [Order(After = PredefinedCommandHandlerNames.PasteTrackingPaste)]
@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AddImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddImportsPasteCommandHandler(IThreadingContext threadingContext) : base(threadingContext)
-        {
-        }
+        public CSharpAddImportsPasteCommandHandler(IThreadingContext threadingContext)
+            : base(threadingContext) { }
 
         public override string DisplayName => CSharpEditorResources.Add_Missing_Usings_on_Paste;
         protected override string DialogText => CSharpEditorResources.Adding_missing_usings;

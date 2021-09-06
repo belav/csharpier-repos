@@ -14,10 +14,15 @@ using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal partial class AbstractLanguageService<TPackage, TLanguageService> : IVsLanguageDebugInfo
+    internal partial class AbstractLanguageService<TPackage, TLanguageService>
+        : IVsLanguageDebugInfo
     {
-        int IVsLanguageDebugInfo.GetLanguageID(IVsTextBuffer pBuffer, int iLine, int iCol, out Guid pguidLanguageID)
-        {
+        int IVsLanguageDebugInfo.GetLanguageID(
+            IVsTextBuffer pBuffer,
+            int iLine,
+            int iCol,
+            out Guid pguidLanguageID
+        ) {
             try
             {
                 return LanguageDebugInfo.GetLanguageID(pBuffer, iLine, iCol, out pguidLanguageID);
@@ -28,11 +33,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        int IVsLanguageDebugInfo.GetLocationOfName(string pszName, out string pbstrMkDoc, out TextSpan pspanLocation)
-        {
+        int IVsLanguageDebugInfo.GetLocationOfName(
+            string pszName,
+            out string pbstrMkDoc,
+            out TextSpan pspanLocation
+        ) {
             try
             {
-                return LanguageDebugInfo.GetLocationOfName(pszName, out pbstrMkDoc, out pspanLocation);
+                return LanguageDebugInfo.GetLocationOfName(
+                    pszName,
+                    out pbstrMkDoc,
+                    out pspanLocation
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e) && false)
             {
@@ -40,11 +52,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        int IVsLanguageDebugInfo.GetNameOfLocation(IVsTextBuffer pBuffer, int iLine, int iCol, out string pbstrName, out int piLineOffset)
-        {
+        int IVsLanguageDebugInfo.GetNameOfLocation(
+            IVsTextBuffer pBuffer,
+            int iLine,
+            int iCol,
+            out string pbstrName,
+            out int piLineOffset
+        ) {
             try
             {
-                return LanguageDebugInfo.GetNameOfLocation(pBuffer, iLine, iCol, out pbstrName, out piLineOffset);
+                return LanguageDebugInfo.GetNameOfLocation(
+                    pBuffer,
+                    iLine,
+                    iCol,
+                    out pbstrName,
+                    out piLineOffset
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e) && false)
             {
@@ -52,11 +75,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        int IVsLanguageDebugInfo.GetProximityExpressions(IVsTextBuffer pBuffer, int iLine, int iCol, int cLines, out IVsEnumBSTR ppEnum)
-        {
+        int IVsLanguageDebugInfo.GetProximityExpressions(
+            IVsTextBuffer pBuffer,
+            int iLine,
+            int iCol,
+            int cLines,
+            out IVsEnumBSTR ppEnum
+        ) {
             try
             {
-                return LanguageDebugInfo.GetProximityExpressions(pBuffer, iLine, iCol, cLines, out ppEnum);
+                return LanguageDebugInfo.GetProximityExpressions(
+                    pBuffer,
+                    iLine,
+                    iCol,
+                    cLines,
+                    out ppEnum
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e) && false)
             {
@@ -76,8 +110,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        int IVsLanguageDebugInfo.ResolveName(string pszName, uint dwFlags, out IVsEnumDebugName ppNames)
-        {
+        int IVsLanguageDebugInfo.ResolveName(
+            string pszName,
+            uint dwFlags,
+            out IVsEnumDebugName ppNames
+        ) {
             try
             {
                 return LanguageDebugInfo.ResolveName(pszName, dwFlags, out ppNames);
@@ -88,11 +125,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        int IVsLanguageDebugInfo.ValidateBreakpointLocation(IVsTextBuffer pBuffer, int iLine, int iCol, TextSpan[] pCodeSpan)
-        {
+        int IVsLanguageDebugInfo.ValidateBreakpointLocation(
+            IVsTextBuffer pBuffer,
+            int iLine,
+            int iCol,
+            TextSpan[] pCodeSpan
+        ) {
             try
             {
-                return LanguageDebugInfo.ValidateBreakpointLocation(pBuffer, iLine, iCol, pCodeSpan);
+                return LanguageDebugInfo.ValidateBreakpointLocation(
+                    pBuffer,
+                    iLine,
+                    iCol,
+                    pCodeSpan
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e) && false)
             {

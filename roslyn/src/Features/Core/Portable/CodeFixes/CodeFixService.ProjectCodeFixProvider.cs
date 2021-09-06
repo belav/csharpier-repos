@@ -16,20 +16,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private class ProjectCodeFixProvider
             : AbstractProjectExtensionProvider<CodeFixProvider, ExportCodeFixProviderAttribute>
         {
-            public ProjectCodeFixProvider(AnalyzerReference reference)
-                : base(reference)
-            {
-            }
+            public ProjectCodeFixProvider(AnalyzerReference reference) : base(reference) { }
 
-            protected override bool SupportsLanguage(ExportCodeFixProviderAttribute exportAttribute, string language)
-            {
+            protected override bool SupportsLanguage(
+                ExportCodeFixProviderAttribute exportAttribute,
+                string language
+            ) {
                 return exportAttribute.Languages == null
                     || exportAttribute.Languages.Length == 0
                     || exportAttribute.Languages.Contains(language);
             }
 
-            protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<CodeFixProvider> extensions)
-            {
+            protected override bool TryGetExtensionsFromReference(
+                AnalyzerReference reference,
+                out ImmutableArray<CodeFixProvider> extensions
+            ) {
                 // check whether the analyzer reference knows how to return fixers directly.
                 if (reference is ICodeFixProviderFactory codeFixProviderFactory)
                 {

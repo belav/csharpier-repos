@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DocumentationComments
 {
-    internal abstract class AbstractDocumentationCommentFormattingService : IDocumentationCommentFormattingService
+    internal abstract class AbstractDocumentationCommentFormattingService
+        : IDocumentationCommentFormattingService
     {
         private enum DocumentationCommentListType
         {
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             private static readonly TaggedText s_spacePart = new(TextTags.Space, " ");
             private static readonly TaggedText s_newlinePart = new(TextTags.LineBreak, "\r\n");
 
-            internal readonly ImmutableArray<TaggedText>.Builder Builder = ImmutableArray.CreateBuilder<TaggedText>();
+            internal readonly ImmutableArray<TaggedText>.Builder Builder =
+                ImmutableArray.CreateBuilder<TaggedText>();
 
             /// <summary>
             /// Defines the containing lists for the current formatting state. The last item in the list is the
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             /// </item>
             /// </list>
             /// </summary>
-            private readonly List<(DocumentationCommentListType type, int index, bool renderedItem)> _listStack = new();
+            private readonly List<(DocumentationCommentListType type, int index, bool renderedItem)> _listStack =
+                new();
 
             /// <summary>
             /// The top item of the stack indicates the hyperlink to apply to text rendered at the current location. It
@@ -85,10 +88,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             public bool AtBeginning
             {
-                get
-                {
-                    return Builder.Count == 0;
-                }
+                get { return Builder.Count == 0; }
             }
 
             public SymbolDisplayFormat Format { get; internal set; }
@@ -96,14 +96,21 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             internal (string target, string hint) NavigationTarget => _navigationTargetStack.Peek();
             internal TaggedTextStyle Style => _styleStack.Peek();
 
-            public void AppendSingleSpace()
-                => _pendingSingleSpace = true;
+            public void AppendSingleSpace() => _pendingSingleSpace = true;
 
             public void AppendString(string s)
             {
                 EmitPendingChars();
 
-                Builder.Add(new TaggedText(TextTags.Text, s, Style, NavigationTarget.target, NavigationTarget.hint));
+                Builder.Add(
+                    new TaggedText(
+                        TextTags.Text,
+                        s,
+                        Style,
+                        NavigationTarget.target,
+                        NavigationTarget.hint
+                    )
+                );
 
                 _anyNonWhitespaceSinceLastPara = true;
             }
@@ -161,17 +168,15 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 MarkBeginOrEndPara();
             }
 
-            public void PushNavigationTarget(string target, string hint)
-                => _navigationTargetStack.Push((target, hint));
+            public void PushNavigationTarget(string target, string hint) =>
+                _navigationTargetStack.Push((target, hint));
 
-            public void PopNavigationTarget()
-                => _navigationTargetStack.Pop();
+            public void PopNavigationTarget() => _navigationTargetStack.Pop();
 
-            public void PushStyle(TaggedTextStyle style)
-                => _styleStack.Push(_styleStack.Peek() | style);
+            public void PushStyle(TaggedTextStyle style) =>
+                _styleStack.Push(_styleStack.Peek() | style);
 
-            public void PopStyle()
-                => _styleStack.Pop();
+            public void PopStyle() => _styleStack.Pop();
 
             public void MarkBeginOrEndPara()
             {
@@ -210,8 +215,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 _anyNonWhitespaceSinceLastPara = false;
             }
 
-            public string GetText()
-                => Builder.GetFullText();
+            public string GetText() => Builder.GetFullText();
 
             private void EmitPendingChars()
             {
@@ -247,7 +251,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                             break;
 
                         case DocumentationCommentListType.Number:
-                            Builder.Add(new TaggedText(TextTags.ContainerStart, $"{_listStack[i].index}. "));
+                            Builder.Add(
+                                new TaggedText(TextTags.ContainerStart, $"{_listStack[i].index}. ")
+                            );
                             break;
 
                         case DocumentationCommentListType.Table:
@@ -282,15 +288,27 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             return state.GetText();
         }
 
-        public ImmutableArray<TaggedText> Format(string rawXmlText, ISymbol symbol, SemanticModel semanticModel, int position, SymbolDisplayFormat format, CancellationToken cancellationToken)
-        {
+        public ImmutableArray<TaggedText> Format(
+            string rawXmlText,
+            ISymbol symbol,
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat format,
+            CancellationToken cancellationToken
+        ) {
             if (rawXmlText is null)
             {
                 return ImmutableArray<TaggedText>.Empty;
             }
             //symbol = symbol.OriginalDefinition;
 
-            var state = new FormatterState() { SemanticModel = semanticModel, Position = position, Format = format, TypeResolutionSymbol = symbol };
+            var state = new FormatterState()
+            {
+                SemanticModel = semanticModel,
+                Position = position,
+                Format = format,
+                TypeResolutionSymbol = symbol
+            };
 
             // In case the XML is a fragment (that is, a series of elements without a parent)
             // wrap it up in a single tag. This makes parsing it much, much easier.
@@ -303,8 +321,11 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             return state.Builder.ToImmutable();
         }
 
-        private static void AppendTextFromNode(FormatterState state, XNode node, Compilation compilation)
-        {
+        private static void AppendTextFromNode(
+            FormatterState state,
+            XNode node,
+            Compilation compilation
+        ) {
             if (node.NodeType == XmlNodeType.Text)
             {
                 AppendTextFromTextNode(state, (XText)node);
@@ -321,43 +342,67 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             var needPopStyle = false;
             (string target, string hint)? navigationTarget = null;
 
-            if (name == DocumentationCommentXmlNames.SeeElementName ||
-                name == DocumentationCommentXmlNames.SeeAlsoElementName ||
-                name == "a")
-            {
+            if (
+                name == DocumentationCommentXmlNames.SeeElementName
+                || name == DocumentationCommentXmlNames.SeeAlsoElementName
+                || name == "a"
+            ) {
                 if (element.IsEmpty || element.FirstNode == null)
                 {
                     foreach (var attribute in element.Attributes())
                     {
-                        AppendTextFromAttribute(state, attribute, attributeNameToParse: DocumentationCommentXmlNames.CrefAttributeName, SymbolDisplayPartKind.Text);
+                        AppendTextFromAttribute(
+                            state,
+                            attribute,
+                            attributeNameToParse: DocumentationCommentXmlNames.CrefAttributeName,
+                            SymbolDisplayPartKind.Text
+                        );
                     }
 
                     return;
                 }
                 else
                 {
-                    navigationTarget = GetNavigationTarget(element, state.SemanticModel, state.Position, state.Format);
+                    navigationTarget = GetNavigationTarget(
+                        element,
+                        state.SemanticModel,
+                        state.Position,
+                        state.Format
+                    );
                     if (navigationTarget is object)
                     {
-                        state.PushNavigationTarget(navigationTarget.Value.target, navigationTarget.Value.hint);
+                        state.PushNavigationTarget(
+                            navigationTarget.Value.target,
+                            navigationTarget.Value.hint
+                        );
                     }
                 }
             }
-            else if (name == DocumentationCommentXmlNames.ParameterReferenceElementName ||
-                     name == DocumentationCommentXmlNames.TypeParameterReferenceElementName)
-            {
-                var kind = name == DocumentationCommentXmlNames.ParameterReferenceElementName ? SymbolDisplayPartKind.ParameterName : SymbolDisplayPartKind.TypeParameterName;
+            else if (
+                name == DocumentationCommentXmlNames.ParameterReferenceElementName
+                || name == DocumentationCommentXmlNames.TypeParameterReferenceElementName
+            ) {
+                var kind =
+                    name == DocumentationCommentXmlNames.ParameterReferenceElementName
+                        ? SymbolDisplayPartKind.ParameterName
+                        : SymbolDisplayPartKind.TypeParameterName;
                 foreach (var attribute in element.Attributes())
                 {
-                    AppendTextFromAttribute(state, attribute, attributeNameToParse: DocumentationCommentXmlNames.NameAttributeName, kind);
+                    AppendTextFromAttribute(
+                        state,
+                        attribute,
+                        attributeNameToParse: DocumentationCommentXmlNames.NameAttributeName,
+                        kind
+                    );
                 }
 
                 return;
             }
-            else if (name == DocumentationCommentXmlNames.CElementName
+            else if (
+                name == DocumentationCommentXmlNames.CElementName
                 || name == DocumentationCommentXmlNames.CodeElementName
-                || name == "tt")
-            {
+                || name == "tt"
+            ) {
                 needPopStyle = true;
                 state.PushStyle(TaggedTextStyle.Code);
             }
@@ -366,8 +411,11 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 needPopStyle = true;
                 state.PushStyle(TaggedTextStyle.Emphasis);
             }
-            else if (name == "strong" || name == "b" || name == DocumentationCommentXmlNames.TermElementName)
-            {
+            else if (
+                name == "strong"
+                || name == "b"
+                || name == DocumentationCommentXmlNames.TermElementName
+            ) {
                 needPopStyle = true;
                 state.PushStyle(TaggedTextStyle.Strong);
             }
@@ -379,7 +427,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             if (name == DocumentationCommentXmlNames.ListElementName)
             {
-                var rawListType = element.Attribute(DocumentationCommentXmlNames.TypeAttributeName)?.Value;
+                var rawListType = element.Attribute(
+                    DocumentationCommentXmlNames.TypeAttributeName
+                )?.Value;
                 var listType = rawListType switch
                 {
                     "table" => DocumentationCommentListType.Table,
@@ -394,9 +444,10 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 state.NextListItem();
             }
 
-            if (name == DocumentationCommentXmlNames.ParaElementName
-                || name == DocumentationCommentXmlNames.CodeElementName)
-            {
+            if (
+                name == DocumentationCommentXmlNames.ParaElementName
+                || name == DocumentationCommentXmlNames.CodeElementName
+            ) {
                 state.MarkBeginOrEndPara();
             }
             else if (name == "br")
@@ -409,9 +460,10 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 AppendTextFromNode(state, childNode, compilation);
             }
 
-            if (name == DocumentationCommentXmlNames.ParaElementName
-                || name == DocumentationCommentXmlNames.CodeElementName)
-            {
+            if (
+                name == DocumentationCommentXmlNames.ParaElementName
+                || name == DocumentationCommentXmlNames.CodeElementName
+            ) {
                 state.MarkBeginOrEndPara();
             }
 
@@ -437,17 +489,31 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             }
         }
 
-        private static (string target, string hint)? GetNavigationTarget(XElement element, SemanticModel semanticModel, int position, SymbolDisplayFormat format)
-        {
+        private static (string target, string hint)? GetNavigationTarget(
+            XElement element,
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat format
+        ) {
             var crefAttribute = element.Attribute(DocumentationCommentXmlNames.CrefAttributeName);
             if (crefAttribute is object)
             {
                 if (semanticModel is object)
                 {
-                    var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(crefAttribute.Value, semanticModel.Compilation);
+                    var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(
+                        crefAttribute.Value,
+                        semanticModel.Compilation
+                    );
                     if (symbol is object)
                     {
-                        return (target: SymbolKey.CreateString(symbol), hint: symbol.ToMinimalDisplayString(semanticModel, position, format ?? SymbolDisplayFormat.MinimallyQualifiedFormat));
+                        return (
+                            target: SymbolKey.CreateString(symbol),
+                            hint: symbol.ToMinimalDisplayString(
+                                semanticModel,
+                                position,
+                                format ?? SymbolDisplayFormat.MinimallyQualifiedFormat
+                            )
+                        );
                     }
                 }
             }
@@ -461,50 +527,86 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             return null;
         }
 
-        private static void AppendTextFromAttribute(FormatterState state, XAttribute attribute, string attributeNameToParse, SymbolDisplayPartKind kind)
-        {
+        private static void AppendTextFromAttribute(
+            FormatterState state,
+            XAttribute attribute,
+            string attributeNameToParse,
+            SymbolDisplayPartKind kind
+        ) {
             var attributeName = attribute.Name.LocalName;
             if (attributeNameToParse == attributeName)
             {
                 if (kind == SymbolDisplayPartKind.TypeParameterName)
                 {
                     state.AppendParts(
-                        TypeParameterRefToSymbolDisplayParts(attribute.Value, state.TypeResolutionSymbol, state.Position, state.SemanticModel, state.Format).ToTaggedText(state.Style));
+                        TypeParameterRefToSymbolDisplayParts(
+                                attribute.Value,
+                                state.TypeResolutionSymbol,
+                                state.Position,
+                                state.SemanticModel,
+                                state.Format
+                            )
+                            .ToTaggedText(state.Style)
+                    );
                 }
                 else
                 {
                     state.AppendParts(
-                        CrefToSymbolDisplayParts(attribute.Value, state.Position, state.SemanticModel, state.Format, kind).ToTaggedText(state.Style));
+                        CrefToSymbolDisplayParts(
+                                attribute.Value,
+                                state.Position,
+                                state.SemanticModel,
+                                state.Format,
+                                kind
+                            )
+                            .ToTaggedText(state.Style)
+                    );
                 }
             }
             else
             {
-                var displayKind = attributeName == DocumentationCommentXmlNames.LangwordAttributeName
-                    ? TextTags.Keyword
-                    : TextTags.Text;
+                var displayKind =
+                    attributeName == DocumentationCommentXmlNames.LangwordAttributeName
+                        ? TextTags.Keyword
+                        : TextTags.Text;
                 var text = attribute.Value;
                 var style = state.Style;
-                var navigationTarget = attributeName == DocumentationCommentXmlNames.HrefAttributeName
-                    ? attribute.Value
-                    : null;
+                var navigationTarget =
+                    attributeName == DocumentationCommentXmlNames.HrefAttributeName
+                        ? attribute.Value
+                        : null;
                 var navigationHint = navigationTarget;
-                state.AppendParts(SpecializedCollections.SingletonEnumerable(new TaggedText(displayKind, text, style, navigationTarget, navigationHint)));
+                state.AppendParts(
+                    SpecializedCollections.SingletonEnumerable(
+                        new TaggedText(displayKind, text, style, navigationTarget, navigationHint)
+                    )
+                );
             }
         }
 
         internal static IEnumerable<SymbolDisplayPart> CrefToSymbolDisplayParts(
-            string crefValue, int position, SemanticModel semanticModel, SymbolDisplayFormat format = null, SymbolDisplayPartKind kind = SymbolDisplayPartKind.Text)
-        {
+            string crefValue,
+            int position,
+            SemanticModel semanticModel,
+            SymbolDisplayFormat format = null,
+            SymbolDisplayPartKind kind = SymbolDisplayPartKind.Text
+        ) {
             // first try to parse the symbol
             if (semanticModel != null)
             {
-                var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(crefValue, semanticModel.Compilation);
+                var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(
+                    crefValue,
+                    semanticModel.Compilation
+                );
                 if (symbol != null)
                 {
                     format ??= SymbolDisplayFormat.MinimallyQualifiedFormat;
                     if (symbol.IsConstructor())
                     {
-                        format = format.WithMemberOptions(SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeExplicitInterface);
+                        format = format.WithMemberOptions(
+                            SymbolDisplayMemberOptions.IncludeParameters
+                                | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                        );
                     }
 
                     return symbol.ToMinimalDisplayParts(semanticModel, position, format);
@@ -513,28 +615,44 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             // if any of that fails fall back to just displaying the raw text
             return SpecializedCollections.SingletonEnumerable(
-                new SymbolDisplayPart(kind, symbol: null, text: TrimCrefPrefix(crefValue)));
+                new SymbolDisplayPart(kind, symbol: null, text: TrimCrefPrefix(crefValue))
+            );
         }
 
         internal static IEnumerable<SymbolDisplayPart> TypeParameterRefToSymbolDisplayParts(
-            string crefValue, ISymbol typeResolutionSymbol, int position, SemanticModel semanticModel, SymbolDisplayFormat format)
-        {
+            string crefValue,
+            ISymbol typeResolutionSymbol,
+            int position,
+            SemanticModel semanticModel,
+            SymbolDisplayFormat format
+        ) {
             if (semanticModel != null)
             {
-                var typeParameterIndex = typeResolutionSymbol.OriginalDefinition.GetAllTypeParameters().IndexOf(tp => tp.Name == crefValue);
+                var typeParameterIndex =
+                    typeResolutionSymbol.OriginalDefinition.GetAllTypeParameters()
+                        .IndexOf(tp => tp.Name == crefValue);
                 if (typeParameterIndex >= 0)
                 {
                     var typeArgs = typeResolutionSymbol.GetAllTypeArguments();
                     if (typeArgs.Length > typeParameterIndex)
                     {
-                        return typeArgs[typeParameterIndex].ToMinimalDisplayParts(semanticModel, position, format);
+                        return typeArgs[typeParameterIndex].ToMinimalDisplayParts(
+                            semanticModel,
+                            position,
+                            format
+                        );
                     }
                 }
             }
 
             // if any of that fails fall back to just displaying the raw text
             return SpecializedCollections.SingletonEnumerable(
-                new SymbolDisplayPart(SymbolDisplayPartKind.TypeParameterName, symbol: null, text: TrimCrefPrefix(crefValue)));
+                new SymbolDisplayPart(
+                    SymbolDisplayPartKind.TypeParameterName,
+                    symbol: null,
+                    text: TrimCrefPrefix(crefValue)
+                )
+            );
         }
 
         private static string TrimCrefPrefix(string value)

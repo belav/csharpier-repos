@@ -52,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         public CosmosDatabaseWrapper(
             DatabaseDependencies dependencies,
             ICosmosClientWrapper cosmosClient,
-            ILoggingOptions loggingOptions)
-            : base(dependencies)
+            ILoggingOptions loggingOptions
+        ) : base(dependencies)
         {
             _cosmosClient = cosmosClient;
 
@@ -89,16 +89,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     // #16707
                     var root = GetRootDocument((InternalEntityEntry)entry);
 #pragma warning restore EF1001 // Internal EF Core API usage.
-                    if (!entriesSaved.Contains(root)
+                    if (
+                        !entriesSaved.Contains(root)
                         && rootEntriesToSave.Add(root)
-                        && root.EntityState == EntityState.Unchanged)
-                    {
+                        && root.EntityState == EntityState.Unchanged
+                    ) {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
                         ((InternalEntityEntry)root).SetEntityState(EntityState.Modified);
 #pragma warning restore EF1001 // Internal EF Core API usage.
                     }
-
                     continue;
                 }
 
@@ -119,8 +119,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             foreach (var rootEntry in rootEntriesToSave)
             {
-                if (!entriesSaved.Contains(rootEntry)
-                    && Save(rootEntry))
+                if (!entriesSaved.Contains(rootEntry) && Save(rootEntry))
                 {
                     rowsAffected++;
                 }
@@ -137,8 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         /// </summary>
         public override async Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             var rowsAffected = 0;
             var entriesSaved = new HashSet<IUpdateEntry>();
             var rootEntriesToSave = new HashSet<IUpdateEntry>();
@@ -154,16 +153,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 if (!entityType.IsDocumentRoot())
                 {
                     var root = GetRootDocument((InternalEntityEntry)entry);
-                    if (!entriesSaved.Contains(root)
+                    if (
+                        !entriesSaved.Contains(root)
                         && rootEntriesToSave.Add(root)
-                        && root.EntityState == EntityState.Unchanged)
-                    {
+                        && root.EntityState == EntityState.Unchanged
+                    ) {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
                         ((InternalEntityEntry)root).SetEntityState(EntityState.Modified);
 #pragma warning restore EF1001 // Internal EF Core API usage.
                     }
-
                     continue;
                 }
 
@@ -183,9 +182,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             foreach (var rootEntry in rootEntriesToSave)
             {
-                if (!entriesSaved.Contains(rootEntry)
-                    && await SaveAsync(rootEntry, cancellationToken).ConfigureAwait(false))
-                {
+                if (
+                    !entriesSaved.Contains(rootEntry)
+                    && await SaveAsync(rootEntry, cancellationToken).ConfigureAwait(false)
+                ) {
                     rowsAffected++;
                 }
             }
@@ -241,19 +241,30 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     {
                         document = documentSource.CreateDocument(entry);
 
-                        var propertyName = entityType.FindDiscriminatorProperty()?.GetJsonPropertyName();
+                        var propertyName =
+                            entityType.FindDiscriminatorProperty()?.GetJsonPropertyName();
                         if (propertyName != null)
                         {
-                            document[propertyName] =
-                                JToken.FromObject(entityType.GetDiscriminatorValue(), CosmosClientWrapper.Serializer);
+                            document[propertyName] = JToken.FromObject(
+                                entityType.GetDiscriminatorValue(),
+                                CosmosClientWrapper.Serializer
+                            );
                         }
                     }
 
                     return _cosmosClient.ReplaceItem(
-                        collectionId, documentSource.GetId(entry.SharedIdentityEntry ?? entry), document, entry);
+                        collectionId,
+                        documentSource.GetId(entry.SharedIdentityEntry ?? entry),
+                        document,
+                        entry
+                    );
 
                 case EntityState.Deleted:
-                    return _cosmosClient.DeleteItem(collectionId, documentSource.GetId(entry), entry);
+                    return _cosmosClient.DeleteItem(
+                        collectionId,
+                        documentSource.GetId(entry),
+                        entry
+                    );
 
                 default:
                     return false;
@@ -294,7 +305,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     }
 
                     return _cosmosClient.CreateItemAsync(
-                        collectionId, newDocument, entry, cancellationToken);
+                        collectionId,
+                        newDocument,
+                        entry,
+                        cancellationToken
+                    );
 
                 case EntityState.Modified:
                     var document = documentSource.GetCurrentDocument(entry);
@@ -309,11 +324,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     {
                         document = documentSource.CreateDocument(entry);
 
-                        var propertyName = entityType.FindDiscriminatorProperty()?.GetJsonPropertyName();
+                        var propertyName =
+                            entityType.FindDiscriminatorProperty()?.GetJsonPropertyName();
                         if (propertyName != null)
                         {
-                            document[propertyName] =
-                                JToken.FromObject(entityType.GetDiscriminatorValue(), CosmosClientWrapper.Serializer);
+                            document[propertyName] = JToken.FromObject(
+                                entityType.GetDiscriminatorValue(),
+                                CosmosClientWrapper.Serializer
+                            );
                         }
                     }
 
@@ -322,11 +340,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         documentSource.GetId(entry.SharedIdentityEntry ?? entry),
                         document,
                         entry,
-                        cancellationToken);
+                        cancellationToken
+                    );
 
                 case EntityState.Deleted:
                     return _cosmosClient.DeleteItemAsync(
-                        collectionId, documentSource.GetId(entry), entry, cancellationToken);
+                        collectionId,
+                        documentSource.GetId(entry),
+                        entry,
+                        cancellationToken
+                    );
 
                 default:
                     return Task.FromResult(false);
@@ -344,7 +367,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             if (!_documentCollections.TryGetValue(entityType, out var documentSource))
             {
                 _documentCollections.Add(
-                    entityType, documentSource = new DocumentSource(entityType, this));
+                    entityType,
+                    documentSource = new DocumentSource(entityType, this)
+                );
             }
 
             return documentSource;
@@ -365,13 +390,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         CosmosStrings.OrphanedNestedDocumentSensitive(
                             entry.EntityType.DisplayName(),
                             ownership.PrincipalEntityType.DisplayName(),
-                            entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties)));
+                            entry.BuildCurrentValuesString(
+                                entry.EntityType.FindPrimaryKey()!.Properties
+                            )
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
                     CosmosStrings.OrphanedNestedDocument(
                         entry.EntityType.DisplayName(),
-                        ownership.PrincipalEntityType.DisplayName()));
+                        ownership.PrincipalEntityType.DisplayName()
+                    )
+                );
             }
 
             return principal.EntityType.IsDocumentRoot() ? principal : GetRootDocument(principal);
@@ -384,10 +415,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var id = documentSource.GetId(entry.SharedIdentityEntry ?? entry);
             throw exception.StatusCode switch
             {
-                HttpStatusCode.PreconditionFailed =>
-                    new DbUpdateConcurrencyException(CosmosStrings.UpdateConflict(id), exception, new[] { entry }),
-                HttpStatusCode.Conflict =>
-                    new DbUpdateException(CosmosStrings.UpdateConflict(id), exception, new[] { entry }),
+                HttpStatusCode.PreconditionFailed
+                  => new DbUpdateConcurrencyException(
+                      CosmosStrings.UpdateConflict(id),
+                      exception,
+                      new[] { entry }
+                  ),
+                HttpStatusCode.Conflict
+                  => new DbUpdateException(
+                      CosmosStrings.UpdateConflict(id),
+                      exception,
+                      new[] { entry }
+                  ),
                 _ => Rethrow(exception),
             };
         }

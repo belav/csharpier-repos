@@ -24,10 +24,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             this IReadOnlyKey key,
             IReadOnlyKey duplicateKey,
             in StoreObjectIdentifier storeObject,
-            bool shouldThrow)
-        {
-            if (key.IsClustered(storeObject)
-                != duplicateKey.IsClustered(storeObject))
+            bool shouldThrow
+        ) {
+            if (key.IsClustered(storeObject) != duplicateKey.IsClustered(storeObject))
             {
                 if (shouldThrow)
                 {
@@ -38,7 +37,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             duplicateKey.Properties.Format(),
                             duplicateKey.DeclaringEntityType.DisplayName(),
                             storeObject.DisplayName(),
-                            key.GetName(storeObject)));
+                            key.GetName(storeObject)
+                        )
+                    );
                 }
 
                 return false;

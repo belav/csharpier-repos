@@ -160,14 +160,12 @@ namespace System.Management
         IgnoreFlavor = 0x20
     };
 
-
     internal enum QualifierType
     {
         ObjectQualifier,
         PropertyQualifier,
         MethodQualifier
     }
-
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//
     /// <summary>
@@ -206,10 +204,7 @@ namespace System.Management
                 }
                 return _wbemObject;
             }
-            set
-            {
-                _wbemObject = value;
-            }
+            set { _wbemObject = value; }
         }
 
         internal IWbemClassObjectFreeThreaded _wbemObject;
@@ -259,7 +254,6 @@ namespace System.Management
             return (IntPtr)managementObject.wbemObject;
         }
 
-
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new PlatformNotSupportedException();
@@ -278,8 +272,8 @@ namespace System.Management
         /// <param name="scope"> The scope</param>
         internal static ManagementBaseObject GetBaseObject(
             IWbemClassObjectFreeThreaded wbemObject,
-            ManagementScope scope)
-        {
+            ManagementScope scope
+        ) {
             ManagementBaseObject newObject = null;
 
             if (_IsClass(wbemObject))
@@ -417,14 +411,32 @@ namespace System.Management
                 int propertyFlavor = 0;
                 int status = (int)ManagementStatus.NoError;
 
-                status = wbemObject.Get_("__SERVER", 0, ref serverName, ref propertyType, ref propertyFlavor);
+                status = wbemObject.Get_(
+                    "__SERVER",
+                    0,
+                    ref serverName,
+                    ref propertyType,
+                    ref propertyFlavor
+                );
 
                 if (status == (int)ManagementStatus.NoError)
                 {
-                    status = wbemObject.Get_("__NAMESPACE", 0, ref scopeName, ref propertyType, ref propertyFlavor);
+                    status = wbemObject.Get_(
+                        "__NAMESPACE",
+                        0,
+                        ref scopeName,
+                        ref propertyType,
+                        ref propertyFlavor
+                    );
 
                     if (status == (int)ManagementStatus.NoError)
-                        status = wbemObject.Get_("__CLASS", 0, ref className, ref propertyType, ref propertyFlavor);
+                        status = wbemObject.Get_(
+                            "__CLASS",
+                            0,
+                            ref className,
+                            ref propertyType,
+                            ref propertyFlavor
+                        );
                 }
 
                 if (status < 0)
@@ -449,14 +461,11 @@ namespace System.Management
                     classPath.NamespacePath = (string)(scopeName is System.DBNull ? "" : scopeName);
                     classPath.ClassName = (string)(className is System.DBNull ? "" : className);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 return classPath;
             }
         }
-
 
         //
         //Methods
@@ -540,7 +549,6 @@ namespace System.Management
             Qualifiers[qualifierName].Value = qualifierValue;
         }
 
-
         //******************************************************
         //GetPropertyQualifierValue
         //******************************************************
@@ -566,9 +574,11 @@ namespace System.Management
         /// <param name='propertyName'>The name of the property to which the qualifier belongs.</param>
         /// <param name='qualifierName'>The name of the property qualifier of interest.</param>
         /// <param name='qualifierValue'>The new value for the qualifier.</param>
-        public void SetPropertyQualifierValue(string propertyName, string qualifierName,
-            object qualifierValue)
-        {
+        public void SetPropertyQualifierValue(
+            string propertyName,
+            string qualifierName,
+            object qualifierValue
+        ) {
             Properties[propertyName].Qualifiers[qualifierName].Value = qualifierValue;
         }
 
@@ -620,17 +630,24 @@ namespace System.Management
 
                     if (wbemTextSrc != null)
                     {
-                        status = wbemTextSrc.GetText_(0,
-                            (IWbemClassObject_DoNotMarshal)(Marshal.GetObjectForIUnknown(wbemObject)),
+                        status = wbemTextSrc.GetText_(
+                            0,
+                            (IWbemClassObject_DoNotMarshal)(
+                                Marshal.GetObjectForIUnknown(wbemObject)
+                            ),
                             (uint)format, //note: this assumes the format enum has the same values as the underlying WMI enum !!
                             ctx,
-                            out objText);
+                            out objText
+                        );
                         if (status < 0)
                         {
                             if ((status & 0xfffff000) == 0x80041000)
                                 ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
                             else
-                                Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
+                                Marshal.ThrowExceptionForHR(
+                                    status,
+                                    WmiNetUtilsHelper.GetErrorInfo_f()
+                                );
                         }
                     }
 
@@ -677,9 +694,11 @@ namespace System.Management
 
                     if (this is ManagementObject && obj is ManagementObject)
                     {
-                        int compareRes = string.Compare(((ManagementObject)this).Path.Path,
+                        int compareRes = string.Compare(
+                            ((ManagementObject)this).Path.Path,
                             ((ManagementObject)obj).Path.Path,
-                            StringComparison.OrdinalIgnoreCase);
+                            StringComparison.OrdinalIgnoreCase
+                        );
                         return (compareRes == 0);
                     }
                 }
@@ -768,7 +787,8 @@ namespace System.Management
             get
             {
                 object val = null;
-                int dummy1 = 0, dummy2 = 0;
+                int dummy1 = 0,
+                    dummy2 = 0;
                 int status = (int)ManagementStatus.NoError;
 
                 status = wbemObject.Get_("__CLASS", 0, ref val, ref dummy1, ref dummy2);
@@ -791,7 +811,8 @@ namespace System.Management
         private static bool _IsClass(IWbemClassObjectFreeThreaded wbemObject)
         {
             object val = null;
-            int dummy1 = 0, dummy2 = 0;
+            int dummy1 = 0,
+                dummy2 = 0;
 
             int status = wbemObject.Get_("__GENUS", 0, ref val, ref dummy1, ref dummy2);
 
@@ -808,10 +829,7 @@ namespace System.Management
 
         internal bool IsClass
         {
-            get
-            {
-                return _IsClass(wbemObject);
-            }
+            get { return _IsClass(wbemObject); }
         }
 
         /// <summary>
@@ -819,9 +837,7 @@ namespace System.Management
         /// </summary>
         /// <param name='propertyName'>The name of the property to be changed.</param>
         /// <param name='propertyValue'>The new value for this property.</param>
-        public void SetPropertyValue(
-            string propertyName,
-            object propertyValue)
+        public void SetPropertyValue(string propertyName, object propertyValue)
         {
             if (null == propertyName)
                 throw new ArgumentNullException(nameof(propertyName));
@@ -832,6 +848,5 @@ namespace System.Management
             else
                 Properties[propertyName].Value = propertyValue;
         }
-
-    }//ManagementBaseObject
+    } //ManagementBaseObject
 }

@@ -94,21 +94,24 @@ namespace Microsoft.AspNetCore.JsonPatch
             var patchDocument = new JsonPatchDocument<SimpleObject>();
 
             // Act
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-            {
-                patchDocument.GetPath(p => p.IntegerValue >= 4, null);
-            });
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    patchDocument.GetPath(p => p.IntegerValue >= 4, null);
+                }
+            );
 
             // Assert
-            Assert.Equal("The expression '(p.IntegerValue >= 4)' is not supported. Supported expressions include member access and indexer expressions.", exception.Message);
+            Assert.Equal(
+                "The expression '(p.IntegerValue >= 4)' is not supported. Supported expressions include member access and indexer expressions.",
+                exception.Message
+            );
         }
     }
 
     internal class DerivedClass : BaseClass
     {
-        public DerivedClass()
-        {
-        }
+        public DerivedClass() { }
     }
 
     internal class NestedObjectWithDerivedClass

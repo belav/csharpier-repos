@@ -13,9 +13,7 @@ namespace System.Data.Common
     {
         private List<DataColumnMapping>? _items; // delay creation until AddWithoutEvents, Insert, CopyTo, GetEnumerator
 
-        public DataColumnMappingCollection()
-        {
-        }
+        public DataColumnMappingCollection() { }
 
         // explicit ICollection implementation
         bool ICollection.IsSynchronized
@@ -38,10 +36,7 @@ namespace System.Data.Common
         }
         object? IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get { return this[index]; }
             set
             {
                 ValidateType(value);
@@ -52,18 +47,17 @@ namespace System.Data.Common
         // explicit IColumnMappingCollection implementation
         object IColumnMappingCollection.this[string index]
         {
-            get
-            {
-                return this[index];
-            }
+            get { return this[index]; }
             set
             {
                 ValidateType(value);
                 this[index] = (DataColumnMapping)value;
             }
         }
-        IColumnMapping IColumnMappingCollection.Add(string? sourceColumnName, string? dataSetColumnName)
-        {
+        IColumnMapping IColumnMappingCollection.Add(
+            string? sourceColumnName,
+            string? dataSetColumnName
+        ) {
             return Add(sourceColumnName, dataSetColumnName);
         }
         IColumnMapping IColumnMappingCollection.GetByDataSetColumn(string dataSetColumnName)
@@ -75,10 +69,7 @@ namespace System.Data.Common
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Count
         {
-            get
-            {
-                return ((null != _items) ? _items.Count : 0);
-            }
+            get { return ((null != _items) ? _items.Count : 0); }
         }
 
         private Type ItemType
@@ -347,7 +338,10 @@ namespace System.Data.Common
 
         private void RemoveIndex(int index)
         {
-            Debug.Assert((null != _items) && (0 <= index) && (index < Count), "RemoveIndex, invalid");
+            Debug.Assert(
+                (null != _items) && (0 <= index) && (index < Count),
+                "RemoveIndex, invalid"
+            );
             _items[index].Parent = null;
             _items.RemoveAt(index);
         }
@@ -378,7 +372,10 @@ namespace System.Data.Common
 
         private void Replace(int index, DataColumnMapping newValue)
         {
-            Debug.Assert((null != _items) && (0 <= index) && (index < Count), "RemoveIndex, invalid");
+            Debug.Assert(
+                (null != _items) && (0 <= index) && (index < Count),
+                "RemoveIndex, invalid"
+            );
             Validate(index, newValue);
             _items[index].Parent = null;
             newValue.Parent = this;
@@ -421,7 +418,9 @@ namespace System.Data.Common
                 index = 1;
                 do
                 {
-                    name = ADP.SourceColumn + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    name =
+                        ADP.SourceColumn
+                        + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
                     index++;
                 } while (-1 != IndexOf(name));
                 value.SourceColumn = name;
@@ -442,14 +441,24 @@ namespace System.Data.Common
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public static DataColumn? GetDataColumn(DataColumnMappingCollection? columnMappings, string sourceColumn, Type? dataType, DataTable dataTable, MissingMappingAction mappingAction, MissingSchemaAction schemaAction)
-        {
+        public static DataColumn? GetDataColumn(
+            DataColumnMappingCollection? columnMappings,
+            string sourceColumn,
+            Type? dataType,
+            DataTable dataTable,
+            MissingMappingAction mappingAction,
+            MissingSchemaAction schemaAction
+        ) {
             if (null != columnMappings)
             {
                 int index = columnMappings.IndexOf(sourceColumn);
                 if (-1 != index)
                 {
-                    return columnMappings._items![index].GetDataColumnBySchemaAction(dataTable, dataType, schemaAction);
+                    return columnMappings._items![index].GetDataColumnBySchemaAction(
+                        dataTable,
+                        dataType,
+                        schemaAction
+                    );
                 }
             }
             if (string.IsNullOrEmpty(sourceColumn))
@@ -459,7 +468,13 @@ namespace System.Data.Common
             switch (mappingAction)
             {
                 case MissingMappingAction.Passthrough:
-                    return DataColumnMapping.GetDataColumnBySchemaAction(sourceColumn, sourceColumn, dataTable, dataType, schemaAction);
+                    return DataColumnMapping.GetDataColumnBySchemaAction(
+                        sourceColumn,
+                        sourceColumn,
+                        dataTable,
+                        dataType,
+                        schemaAction
+                    );
 
                 case MissingMappingAction.Ignore:
                     return null;
@@ -471,8 +486,11 @@ namespace System.Data.Common
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public static DataColumnMapping? GetColumnMappingBySchemaAction(DataColumnMappingCollection? columnMappings, string sourceColumn, MissingMappingAction mappingAction)
-        {
+        public static DataColumnMapping? GetColumnMappingBySchemaAction(
+            DataColumnMappingCollection? columnMappings,
+            string sourceColumn,
+            MissingMappingAction mappingAction
+        ) {
             if (null != columnMappings)
             {
                 int index = columnMappings.IndexOf(sourceColumn);

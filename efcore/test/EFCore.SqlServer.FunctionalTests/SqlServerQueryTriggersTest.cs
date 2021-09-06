@@ -9,10 +9,10 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public class SqlServerQueryTriggersTest : IClassFixture<SqlServerQueryTriggersTest.SqlServerTriggersFixture>
+    public class SqlServerQueryTriggersTest
+        : IClassFixture<SqlServerQueryTriggersTest.SqlServerTriggersFixture>
     {
-        public SqlServerQueryTriggersTest(SqlServerTriggersFixture fixture)
-            => Fixture = fixture;
+        public SqlServerQueryTriggersTest(SqlServerTriggersFixture fixture) => Fixture = fixture;
 
         private SqlServerTriggersFixture Fixture { get; }
 
@@ -79,15 +79,12 @@ namespace Microsoft.EntityFrameworkCore
             context.SaveChanges();
         }
 
-        protected QueryTriggersContext CreateContext()
-            => (QueryTriggersContext)Fixture.CreateContext();
+        protected QueryTriggersContext CreateContext() =>
+            (QueryTriggersContext)Fixture.CreateContext();
 
         protected class QueryTriggersContext : PoolableDbContext
         {
-            public QueryTriggersContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public QueryTriggersContext(DbContextOptions options) : base(options) { }
 
             public virtual DbSet<Product> Products { get; set; }
 
@@ -100,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore
                             .HasDefaultValue(0)
                             .ValueGeneratedOnAddOrUpdate();
                         eb.ToTable("UpdatedProducts");
-                    });
+                    }
+                );
             }
         }
 
@@ -117,8 +115,8 @@ namespace Microsoft.EntityFrameworkCore
             protected override string StoreName { get; } = "SqlServerQueryTriggers";
             protected override Type ContextType { get; } = typeof(QueryTriggersContext);
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
             protected override void Seed(DbContext context)
             {
@@ -136,7 +134,8 @@ BEGIN
 
     UPDATE UpdatedProducts set StoreUpdated = StoreUpdated + 1
     WHERE Id IN(SELECT INSERTED.Id FROM INSERTED);
-END");
+END"
+                );
             }
         }
     }

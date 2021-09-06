@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System.Net.Mail
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SmtpFailedRecipientException : SmtpException, ISerializable
     {
         private readonly string? _failedRecipient;
@@ -21,43 +23,59 @@ namespace System.Net.Mail
 
         public SmtpFailedRecipientException(string? message) : base(message) { }
 
-        public SmtpFailedRecipientException(string? message, Exception? innerException) : base(message, innerException) { }
+        public SmtpFailedRecipientException(string? message, Exception? innerException)
+            : base(message, innerException) { }
 
-        protected SmtpFailedRecipientException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected SmtpFailedRecipientException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context)
         {
             _failedRecipient = info.GetString("failedRecipient");
         }
 
-        public SmtpFailedRecipientException(SmtpStatusCode statusCode, string? failedRecipient) : base(statusCode)
+        public SmtpFailedRecipientException(
+            SmtpStatusCode statusCode,
+            string? failedRecipient
+        ) : base(statusCode)
         {
             _failedRecipient = failedRecipient;
         }
 
-        public SmtpFailedRecipientException(SmtpStatusCode statusCode, string? failedRecipient, string? serverResponse) : base(statusCode, serverResponse, true)
+        public SmtpFailedRecipientException(
+            SmtpStatusCode statusCode,
+            string? failedRecipient,
+            string? serverResponse
+        ) : base(statusCode, serverResponse, true)
         {
             _failedRecipient = failedRecipient;
         }
 
-        public SmtpFailedRecipientException(string? message, string? failedRecipient, Exception? innerException) : base(message, innerException)
+        public SmtpFailedRecipientException(
+            string? message,
+            string? failedRecipient,
+            Exception? innerException
+        ) : base(message, innerException)
         {
             _failedRecipient = failedRecipient;
         }
 
         public string? FailedRecipient
         {
-            get
-            {
-                return _failedRecipient;
-            }
+            get { return _failedRecipient; }
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             GetObjectData(serializationInfo, streamingContext);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             base.GetObjectData(serializationInfo, streamingContext);
             serializationInfo.AddValue("failedRecipient", _failedRecipient, typeof(string));
         }

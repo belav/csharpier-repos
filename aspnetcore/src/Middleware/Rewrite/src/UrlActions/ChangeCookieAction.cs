@@ -11,10 +11,7 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
         private readonly Func<DateTimeOffset> _timeSource;
         private CookieOptions? _cachedOptions;
 
-        public ChangeCookieAction(string name)
-            : this(name, () => DateTimeOffset.UtcNow)
-        {
-        }
+        public ChangeCookieAction(string name) : this(name, () => DateTimeOffset.UtcNow) { }
 
         // for testing
         internal ChangeCookieAction(string name, Func<DateTimeOffset> timeSource)
@@ -37,8 +34,11 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
         public bool Secure { get; set; }
         public bool HttpOnly { get; set; }
 
-        public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
-        {
+        public override void ApplyAction(
+            RewriteContext context,
+            BackReferenceCollection? ruleBackReferences,
+            BackReferenceCollection? conditionBackReferences
+        ) {
             var options = GetOrCreateOptions();
             context.HttpContext.Response.Cookies.Append(Name, Value ?? string.Empty, options);
         }

@@ -20,15 +20,20 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        internal WithParametersBinder(ImmutableArray<ParameterSymbol> parameters, Binder next)
-            : base(next)
+        internal WithParametersBinder(
+            ImmutableArray<ParameterSymbol> parameters,
+            Binder next
+        ) : base(next)
         {
             Debug.Assert(!parameters.IsDefaultOrEmpty);
             _parameters = parameters;
         }
 
-        protected override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
-        {
+        protected override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        ) {
             if (options.CanConsiderLocals())
             {
                 foreach (var parameter in _parameters)
@@ -42,10 +47,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
-        {
-            if ((options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.MustBeInvocableIfMember)) != 0)
-            {
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) {
+            if (
+                (
+                    options
+                    & (LookupOptions.NamespaceAliasesOnly | LookupOptions.MustBeInvocableIfMember)
+                ) != 0
+            ) {
                 return;
             }
 
@@ -55,7 +71,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (parameter.Name == name)
                 {
-                    result.MergeEqual(originalBinder.CheckViability(parameter, arity, options, null, diagnose, ref useSiteInfo));
+                    result.MergeEqual(
+                        originalBinder.CheckViability(
+                            parameter,
+                            arity,
+                            options,
+                            null,
+                            diagnose,
+                            ref useSiteInfo
+                        )
+                    );
                 }
             }
         }

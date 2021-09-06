@@ -13,7 +13,8 @@ namespace System.Threading.Tasks
     internal class RendezvousAwaitable<TResult> : ICriticalNotifyCompletion
     {
         /// <summary>Sentinel object indicating that the operation has completed prior to OnCompleted being called.</summary>
-        private static readonly Action s_completionSentinel = static () => Debug.Fail("Completion sentinel should never be invoked");
+        private static readonly Action s_completionSentinel = static () =>
+            Debug.Fail("Completion sentinel should never be invoked");
 
         /// <summary>
         /// The continuation to invoke when the operation completes, or <see cref="s_completionSentinel"/> if the operation
@@ -85,7 +86,11 @@ namespace System.Threading.Tasks
         /// <summary>Set that the operation was canceled.</summary>
         public void SetCanceled(CancellationToken token = default(CancellationToken))
         {
-            SetException(token.IsCancellationRequested ? new OperationCanceledException(token) : new OperationCanceledException());
+            SetException(
+                token.IsCancellationRequested
+                    ? new OperationCanceledException(token)
+                    : new OperationCanceledException()
+            );
         }
 
         /// <summary>Set the failure for the operation.</summary>
@@ -101,7 +106,9 @@ namespace System.Threading.Tasks
         /// <summary>Alerts any awaiter that the operation has completed.</summary>
         private void NotifyAwaiter()
         {
-            Action? c = _continuation ?? Interlocked.CompareExchange(ref _continuation, s_completionSentinel, null);
+            Action? c =
+                _continuation
+                ?? Interlocked.CompareExchange(ref _continuation, s_completionSentinel, null);
             if (c != null)
             {
                 Debug.Assert(c != s_completionSentinel);
@@ -122,7 +129,8 @@ namespace System.Threading.Tasks
         {
             Debug.Assert(continuation != null);
 
-            Action? c = _continuation ?? Interlocked.CompareExchange(ref _continuation, continuation, null);
+            Action? c =
+                _continuation ?? Interlocked.CompareExchange(ref _continuation, continuation, null);
             if (c != null)
             {
                 Debug.Assert(c == s_completionSentinel);

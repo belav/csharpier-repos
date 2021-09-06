@@ -12,6 +12,5 @@ namespace UserCodeDependency
         {
             Console.WriteLine("[Second User Event Handler] Event called with " + x + ":" + y);
         }
-
     }
 }

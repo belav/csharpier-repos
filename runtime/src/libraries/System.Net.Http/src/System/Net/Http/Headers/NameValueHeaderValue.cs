@@ -14,7 +14,8 @@ namespace System.Net.Http.Headers
     // name-only values in addition to name/value pairs.
     public class NameValueHeaderValue : ICloneable
     {
-        private static readonly Func<NameValueHeaderValue> s_defaultNameValueCreator = CreateNameValue;
+        private static readonly Func<NameValueHeaderValue> s_defaultNameValueCreator =
+            CreateNameValue;
 
         private string _name = null!; // Name always set after default constructor used
         private string? _value;
@@ -34,14 +35,9 @@ namespace System.Net.Http.Headers
             }
         }
 
-        internal NameValueHeaderValue()
-        {
-        }
+        internal NameValueHeaderValue() { }
 
-        public NameValueHeaderValue(string name)
-            : this(name, null)
-        {
-        }
+        public NameValueHeaderValue(string name) : this(name, null) { }
 
         public NameValueHeaderValue(string name, string? value)
         {
@@ -118,16 +114,27 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (NameValueHeaderValue)GenericHeaderParser.SingleValueNameValueParser.ParseValue(
-                input, null, ref index);
+                input,
+                null,
+                ref index
+            );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out NameValueHeaderValue? parsedValue)
-        {
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out NameValueHeaderValue? parsedValue
+        ) {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueNameValueParser.TryParseValue(input, null, ref index, out object? output))
-            {
+            if (
+                GenericHeaderParser.SingleValueNameValueParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            ) {
                 parsedValue = (NameValueHeaderValue)output!;
                 return true;
             }
@@ -164,9 +171,12 @@ namespace System.Net.Http.Headers
             }
         }
 
-        internal static void ToString(ObjectCollection<NameValueHeaderValue>? values, char separator, bool leadingSeparator,
-            StringBuilder destination)
-        {
+        internal static void ToString(
+            ObjectCollection<NameValueHeaderValue>? values,
+            char separator,
+            bool leadingSeparator,
+            StringBuilder destination
+        ) {
             Debug.Assert(destination != null);
 
             if ((values == null) || (values.Count == 0))
@@ -200,14 +210,25 @@ namespace System.Net.Http.Headers
             return result;
         }
 
-        internal static int GetNameValueLength(string input, int startIndex, out NameValueHeaderValue? parsedValue)
-        {
-            return GetNameValueLength(input, startIndex, s_defaultNameValueCreator, out parsedValue);
+        internal static int GetNameValueLength(
+            string input,
+            int startIndex,
+            out NameValueHeaderValue? parsedValue
+        ) {
+            return GetNameValueLength(
+                input,
+                startIndex,
+                s_defaultNameValueCreator,
+                out parsedValue
+            );
         }
 
-        internal static int GetNameValueLength(string input, int startIndex,
-            Func<NameValueHeaderValue> nameValueCreator, out NameValueHeaderValue? parsedValue)
-        {
+        internal static int GetNameValueLength(
+            string input,
+            int startIndex,
+            Func<NameValueHeaderValue> nameValueCreator,
+            out NameValueHeaderValue? parsedValue
+        ) {
             Debug.Assert(input != null);
             Debug.Assert(startIndex >= 0);
             Debug.Assert(nameValueCreator != null);
@@ -264,9 +285,12 @@ namespace System.Net.Http.Headers
 
         // Returns the length of a name/value list, separated by 'delimiter'. E.g. "a=b, c=d, e=f" adds 3
         // name/value pairs to 'nameValueCollection' if 'delimiter' equals ','.
-        internal static int GetNameValueListLength(string? input, int startIndex, char delimiter,
-            ObjectCollection<NameValueHeaderValue> nameValueCollection)
-        {
+        internal static int GetNameValueListLength(
+            string? input,
+            int startIndex,
+            char delimiter,
+            ObjectCollection<NameValueHeaderValue> nameValueCollection
+        ) {
             Debug.Assert(nameValueCollection != null);
             Debug.Assert(startIndex >= 0);
 
@@ -279,8 +303,12 @@ namespace System.Net.Http.Headers
             while (true)
             {
                 NameValueHeaderValue? parameter;
-                int nameValueLength = NameValueHeaderValue.GetNameValueLength(input, current,
-                    s_defaultNameValueCreator, out parameter);
+                int nameValueLength = NameValueHeaderValue.GetNameValueLength(
+                    input,
+                    current,
+                    s_defaultNameValueCreator,
+                    out parameter
+                );
 
                 if (nameValueLength == 0)
                 {
@@ -303,8 +331,10 @@ namespace System.Net.Http.Headers
             }
         }
 
-        internal static NameValueHeaderValue? Find(ObjectCollection<NameValueHeaderValue>? values, string name)
-        {
+        internal static NameValueHeaderValue? Find(
+            ObjectCollection<NameValueHeaderValue>? values,
+            string name
+        ) {
             Debug.Assert((name != null) && (name.Length > 0));
 
             if ((values == null) || (values.Count == 0))
@@ -336,8 +366,10 @@ namespace System.Net.Http.Headers
             if (valueLength == 0)
             {
                 // A value can either be a token or a quoted string. Check if it is a quoted string.
-                if (HttpRuleParser.GetQuotedStringLength(input, startIndex, out valueLength) != HttpParseResult.Parsed)
-                {
+                if (
+                    HttpRuleParser.GetQuotedStringLength(input, startIndex, out valueLength)
+                    != HttpParseResult.Parsed
+                ) {
                     // We have an invalid value. Reset the name and return.
                     return 0;
                 }
@@ -362,16 +394,34 @@ namespace System.Net.Http.Headers
             // Trailing/leading space are not allowed
             if (value[0] == ' ' || value[0] == '\t' || value[^1] == ' ' || value[^1] == '\t')
             {
-                throw new FormatException(SR.Format(System.Globalization.CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, value));
+                throw new FormatException(
+                    SR.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        value
+                    )
+                );
             }
 
             // If it's not a token we check if it's a valid quoted string
             if (HttpRuleParser.GetTokenLength(value, 0) == 0)
             {
-                HttpParseResult parseResult = HttpRuleParser.GetQuotedStringLength(value, 0, out int valueLength);
-                if ((parseResult == HttpParseResult.Parsed && valueLength != value.Length) || parseResult != HttpParseResult.Parsed)
-                {
-                    throw new FormatException(SR.Format(System.Globalization.CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, value));
+                HttpParseResult parseResult = HttpRuleParser.GetQuotedStringLength(
+                    value,
+                    0,
+                    out int valueLength
+                );
+                if (
+                    (parseResult == HttpParseResult.Parsed && valueLength != value.Length)
+                    || parseResult != HttpParseResult.Parsed
+                ) {
+                    throw new FormatException(
+                        SR.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            SR.net_http_headers_invalid_value,
+                            value
+                        )
+                    );
                 }
             }
         }

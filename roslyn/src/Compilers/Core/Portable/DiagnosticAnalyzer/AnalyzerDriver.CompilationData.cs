@@ -13,15 +13,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         internal class CompilationData
         {
-            private readonly Dictionary<SyntaxReference, DeclarationAnalysisData> _declarationAnalysisDataMap;
+            private readonly Dictionary<
+                SyntaxReference,
+                DeclarationAnalysisData
+            > _declarationAnalysisDataMap;
 
             public CompilationData(Compilation compilation)
             {
                 Debug.Assert(compilation.SemanticModelProvider is CachingSemanticModelProvider);
 
-                SemanticModelProvider = (CachingSemanticModelProvider)compilation.SemanticModelProvider;
+                SemanticModelProvider =
+                    (CachingSemanticModelProvider)compilation.SemanticModelProvider;
                 this.SuppressMessageAttributeState = new SuppressMessageAttributeState(compilation);
-                _declarationAnalysisDataMap = new Dictionary<SyntaxReference, DeclarationAnalysisData>();
+                _declarationAnalysisDataMap = new Dictionary<
+                    SyntaxReference,
+                    DeclarationAnalysisData
+                >();
             }
 
             public CachingSemanticModelProvider SemanticModelProvider { get; }
@@ -30,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             internal DeclarationAnalysisData GetOrComputeDeclarationAnalysisData(
                 SyntaxReference declaration,
                 Func<DeclarationAnalysisData> computeDeclarationAnalysisData,
-                bool cacheAnalysisData)
-            {
+                bool cacheAnalysisData
+            ) {
                 if (!cacheAnalysisData)
                 {
                     return computeDeclarationAnalysisData();

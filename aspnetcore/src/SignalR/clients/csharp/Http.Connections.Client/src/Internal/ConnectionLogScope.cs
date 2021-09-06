@@ -59,7 +59,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             {
                 if (!string.IsNullOrEmpty(ConnectionId))
                 {
-                    _cachedToString = FormattableString.Invariant($"{ClientConnectionIdKey}:{ConnectionId}");
+                    _cachedToString = FormattableString.Invariant(
+                        $"{ClientConnectionIdKey}:{ConnectionId}"
+                    );
                 }
             }
 

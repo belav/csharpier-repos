@@ -24,7 +24,8 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            Type[] actualTypes = ValueProviderFactories.Factories.Select(p => p.GetType()).ToArray();
+            Type[] actualTypes = ValueProviderFactories.Factories.Select(p => p.GetType())
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedTypes, actualTypes);

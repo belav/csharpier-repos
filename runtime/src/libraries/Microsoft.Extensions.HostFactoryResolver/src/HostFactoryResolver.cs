@@ -10,7 +10,12 @@ namespace Microsoft.Extensions.Hosting
 {
     internal sealed class HostFactoryResolver
     {
-        private const BindingFlags DeclaredOnlyLookup = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+        private const BindingFlags DeclaredOnlyLookup =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.DeclaredOnly;
 
         public static readonly string BuildWebHost = nameof(BuildWebHost);
         public static readonly string CreateWebHostBuilder = nameof(CreateWebHostBuilder);
@@ -21,13 +26,17 @@ namespace Microsoft.Extensions.Hosting
             return ResolveFactory<TWebHost>(assembly, BuildWebHost);
         }
 
-        public static Func<string[], TWebHostBuilder>? ResolveWebHostBuilderFactory<TWebHostBuilder>(Assembly assembly)
+        public static Func<
+            string[],
+            TWebHostBuilder
+        >? ResolveWebHostBuilderFactory<TWebHostBuilder>(Assembly assembly)
         {
             return ResolveFactory<TWebHostBuilder>(assembly, CreateWebHostBuilder);
         }
 
-        public static Func<string[], THostBuilder>? ResolveHostBuilderFactory<THostBuilder>(Assembly assembly)
-        {
+        public static Func<string[], THostBuilder>? ResolveHostBuilderFactory<THostBuilder>(
+            Assembly assembly
+        ) {
             return ResolveFactory<THostBuilder>(assembly, CreateHostBuilder);
         }
 
@@ -58,8 +67,9 @@ namespace Microsoft.Extensions.Hosting
         }
 
         // Used by EF tooling without any Hosting references. Looses some return type safety checks.
-        public static Func<string[], IServiceProvider?>? ResolveServiceProviderFactory(Assembly assembly)
-        {
+        public static Func<string[], IServiceProvider?>? ResolveServiceProviderFactory(
+            Assembly assembly
+        ) {
             // Prefer the older patterns by default for back compat.
             var webHostFactory = ResolveWebHostFactory<object>(assembly);
             if (webHostFactory != null)

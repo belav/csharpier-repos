@@ -40,14 +40,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            if (member.DeclaringType?.IsNullableValueType() == true
-                && instance != null)
+            if (member.DeclaringType?.IsNullableValueType() == true && instance != null)
             {
                 switch (member.Name)
                 {

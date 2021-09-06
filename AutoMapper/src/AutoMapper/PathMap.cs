@@ -11,7 +11,8 @@ namespace AutoMapper
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class PathMap : MemberMap
     {
-        public PathMap(PathMap pathMap, TypeMap typeMap, IncludedMember includedMember) : this(pathMap.DestinationExpression, pathMap.MemberPath, typeMap)
+        public PathMap(PathMap pathMap, TypeMap typeMap, IncludedMember includedMember)
+            : this(pathMap.DestinationExpression, pathMap.MemberPath, typeMap)
         {
             IncludedMember = includedMember.Chain(pathMap.IncludedMember);
             CustomMapExpression = pathMap.CustomMapExpression;
@@ -19,8 +20,11 @@ namespace AutoMapper
             Ignored = pathMap.Ignored;
         }
 
-        public PathMap(LambdaExpression destinationExpression, MemberPath memberPath, TypeMap typeMap)
-        {
+        public PathMap(
+            LambdaExpression destinationExpression,
+            MemberPath memberPath,
+            TypeMap typeMap
+        ) {
             MemberPath = memberPath;
             TypeMap = typeMap;
             DestinationExpression = destinationExpression;

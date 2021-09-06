@@ -30,20 +30,27 @@ namespace Microsoft.AspNetCore.Testing
 
         public ConcurrentQueue<object> Scopes { get; } = new ConcurrentQueue<object>();
 
-        public int TotalErrorsLogged => Messages.Count(message => message.LogLevel == LogLevel.Error);
+        public int TotalErrorsLogged =>
+            Messages.Count(message => message.LogLevel == LogLevel.Error);
 
-        public int CriticalErrorsLogged => Messages.Count(message => message.LogLevel == LogLevel.Critical);
+        public int CriticalErrorsLogged =>
+            Messages.Count(message => message.LogLevel == LogLevel.Critical);
 
-        public int ApplicationErrorsLogged => Messages.Count(message => message.EventId.Id == ApplicationErrorEventId);
+        public int ApplicationErrorsLogged =>
+            Messages.Count(message => message.EventId.Id == ApplicationErrorEventId);
 
         public Task<LogMessage> WaitForMessage(Func<LogMessage, bool> messageFilter)
         {
             if (_messageFilterTcs != null)
             {
-                throw new InvalidOperationException($"{nameof(WaitForMessage)} cannot be called concurrently.");
+                throw new InvalidOperationException(
+                    $"{nameof(WaitForMessage)} cannot be called concurrently."
+                );
             }
 
-            _messageFilterTcs = new TaskCompletionSource<LogMessage>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _messageFilterTcs = new TaskCompletionSource<LogMessage>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             _messageFilter = messageFilter;
 
             return _messageFilterTcs.Task;
@@ -53,7 +60,12 @@ namespace Microsoft.AspNetCore.Testing
         {
             Scopes.Enqueue(state);
 
-            return new Disposable(() => { Scopes.TryDequeue(out _); });
+            return new Disposable(
+                () =>
+                {
+                    Scopes.TryDequeue(out _);
+                }
+            );
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -61,8 +73,13 @@ namespace Microsoft.AspNetCore.Testing
             return true;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) {
             var exceptionIsIgnored = IgnoredExceptions.Contains(exception?.GetType());
 
             if (logLevel == LogLevel.Critical && ThrowOnCriticalErrors && !exceptionIsIgnored)
@@ -78,10 +95,19 @@ namespace Microsoft.AspNetCore.Testing
             }
 
             // Fail tests where not all the connections close during server shutdown.
-            if (ThrowOnUngracefulShutdown &&
-                ((eventId.Id == 16 && eventId.Name == nameof(KestrelTrace.NotAllConnectionsClosedGracefully)) ||
-                 (eventId.Id == 21 && eventId.Name == nameof(KestrelTrace.NotAllConnectionsAborted))))
-            {
+            if (
+                ThrowOnUngracefulShutdown
+                && (
+                    (
+                        eventId.Id == 16
+                        && eventId.Name == nameof(KestrelTrace.NotAllConnectionsClosedGracefully)
+                    )
+                    || (
+                        eventId.Id == 21
+                        && eventId.Name == nameof(KestrelTrace.NotAllConnectionsAborted)
+                    )
+                )
+            ) {
                 var log = $"Log {logLevel}[{eventId}]: {formatter(state, exception)} {exception}";
                 throw new Exception($"Shutdown failure. {log}");
             }

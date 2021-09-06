@@ -10,8 +10,11 @@ namespace System.CodeDom
 
         public CodeDelegateCreateExpression() { }
 
-        public CodeDelegateCreateExpression(CodeTypeReference delegateType, CodeExpression targetObject, string methodName)
-        {
+        public CodeDelegateCreateExpression(
+            CodeTypeReference delegateType,
+            CodeExpression targetObject,
+            string methodName
+        ) {
             _delegateType = delegateType;
             TargetObject = targetObject;
             _methodName = methodName;

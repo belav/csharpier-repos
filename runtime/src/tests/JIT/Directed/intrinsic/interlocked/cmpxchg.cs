@@ -10,7 +10,7 @@ public class CMPXCHG
     public static int g_static = -1;
     public static void Function(int bit, bool value)
     {
-        for (; ;)
+        for (;;)
         {
             int oldData = g_static;
             int newData;

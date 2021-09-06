@@ -15,16 +15,15 @@ namespace Microsoft.CodeAnalysis.Completion
 {
     internal abstract partial class CommonCompletionService : CompletionServiceWithProviders
     {
-        protected CommonCompletionService(Workspace workspace)
-            : base(workspace)
-        {
-        }
+        protected CommonCompletionService(Workspace workspace) : base(workspace) { }
 
-        protected override CompletionItem GetBetterItem(CompletionItem item, CompletionItem existingItem)
-        {
-            // We've constructed the export order of completion providers so 
+        protected override CompletionItem GetBetterItem(
+            CompletionItem item,
+            CompletionItem existingItem
+        ) {
+            // We've constructed the export order of completion providers so
             // that snippets are exported after everything else. That way,
-            // when we choose a single item per display text, snippet 
+            // when we choose a single item per display text, snippet
             // glyphs appear by snippets. This breaks preselection of items
             // whose display text is also a snippet (workitem 852578),
             // the snippet item doesn't have its preselect bit set.
@@ -44,19 +43,29 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles,
             OptionSet options,
-            CancellationToken cancellationToken)
-        {
-            return GetCompletionsWithAvailabilityOfExpandedItemsAsync(document, caretPosition, trigger, roles, options, cancellationToken);
+            CancellationToken cancellationToken
+        ) {
+            return GetCompletionsWithAvailabilityOfExpandedItemsAsync(
+                document,
+                caretPosition,
+                trigger,
+                roles,
+                options,
+                cancellationToken
+            );
         }
 
-        protected static bool IsKeywordItem(CompletionItem item)
-            => item.Tags.Contains(WellKnownTags.Keyword);
+        protected static bool IsKeywordItem(CompletionItem item) =>
+            item.Tags.Contains(WellKnownTags.Keyword);
 
-        protected static bool IsSnippetItem(CompletionItem item)
-            => item.Tags.Contains(WellKnownTags.Snippet);
+        protected static bool IsSnippetItem(CompletionItem item) =>
+            item.Tags.Contains(WellKnownTags.Snippet);
 
-        internal override ImmutableArray<CompletionItem> FilterItems(Document document, ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch, string filterText)
-        {
+        internal override ImmutableArray<CompletionItem> FilterItems(
+            Document document,
+            ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
+            string filterText
+        ) {
             var helper = CompletionHelper.GetHelper(document);
             return CompletionService.FilterItems(helper, itemsWithPatternMatch);
         }

@@ -22,8 +22,20 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void Setup()
         {
             _default = new SingleEntryJumpTable(0, -1, "hello-world", 1);
-            _trie = new ILEmitTrieJumpTable(0, -1, new[] { ("hello-world", 1), }, vectorize: false, _default);
-            _vectorTrie = new ILEmitTrieJumpTable(0, -1, new[] { ("hello-world", 1), }, vectorize: true, _default);
+            _trie = new ILEmitTrieJumpTable(
+                0,
+                -1,
+                new[] { ("hello-world", 1), },
+                vectorize: false,
+                _default
+            );
+            _vectorTrie = new ILEmitTrieJumpTable(
+                0,
+                -1,
+                new[] { ("hello-world", 1), },
+                vectorize: true,
+                _default
+            );
             _ascii = new SingleEntryAsciiJumpTable(0, -1, "hello-world", 1);
 
             _strings = new string[]
@@ -72,7 +84,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         "hello-world",
                         0,
                         segment.Length,
-                        StringComparison.OrdinalIgnoreCase);
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
             }
 

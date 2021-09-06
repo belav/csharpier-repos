@@ -16,8 +16,16 @@ namespace Internal.Cryptography
         private readonly bool _encrypting;
         private SafeEvpCipherCtxHandle _ctx;
 
-        public OpenSslCipher(IntPtr algorithm, CipherMode cipherMode, int blockSizeInBytes, int paddingSizeInBytes, byte[] key, int effectiveKeyLength, byte[]? iv, bool encrypting)
-            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+        public OpenSslCipher(
+            IntPtr algorithm,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            int paddingSizeInBytes,
+            byte[] key,
+            int effectiveKeyLength,
+            byte[]? iv,
+            bool encrypting
+        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             Debug.Assert(algorithm != IntPtr.Zero);
 
@@ -58,6 +66,7 @@ namespace Internal.Cryptography
                     tmpSpan.Slice(0, written).CopyTo(output);
                     return written;
                 }
+
                 finally
                 {
                     CryptoPool.Return(tmp, written);
@@ -90,11 +99,14 @@ namespace Internal.Cryptography
                 {
                     written = CipherUpdate(input, rented);
                     Span<byte> outputSpan = rented.AsSpan(written);
-                    CheckBoolReturn(Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten));
+                    CheckBoolReturn(
+                        Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten)
+                    );
                     written += finalWritten;
                     rented.AsSpan(0, written).CopyTo(output);
                     return written;
                 }
+
                 finally
                 {
                     CryptoPool.Return(rented, clearSize: written);
@@ -104,7 +116,9 @@ namespace Internal.Cryptography
             {
                 int written = CipherUpdate(input, output);
                 Span<byte> outputSpan = output.Slice(written);
-                CheckBoolReturn(Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten));
+                CheckBoolReturn(
+                    Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten)
+                );
                 written += finalWritten;
                 return written;
             }
@@ -112,11 +126,7 @@ namespace Internal.Cryptography
 
         private int CipherUpdate(ReadOnlySpan<byte> input, Span<byte> output)
         {
-            Interop.Crypto.EvpCipherUpdate(
-                _ctx,
-                output,
-                out int bytesWritten,
-                input);
+            Interop.Crypto.EvpCipherUpdate(_ctx, output, out int bytesWritten, input);
 
             return bytesWritten;
         }
@@ -130,7 +140,8 @@ namespace Internal.Cryptography
                 key.Length * 8,
                 effectiveKeyLength,
                 ref MemoryMarshal.GetReference(IV.AsSpan()),
-                _encrypting ? 1 : 0);
+                _encrypting ? 1 : 0
+            );
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctx);
 

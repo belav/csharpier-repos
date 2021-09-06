@@ -23,9 +23,24 @@ namespace System.Globalization.Tests
 
             var enUSFormat = new CultureInfo("en-US").DateTimeFormat;
             yield return new object[] { enUSFormat, DateTimeFormatInfoData.EnUSEraName(), 1 };
-            yield return new object[] { enUSFormat, DateTimeFormatInfoData.EnUSEraName().ToLower(), 1 };
-            yield return new object[] { enUSFormat, DateTimeFormatInfoData.EnUSAbbreviatedEraName(), 1 };
-            yield return new object[] { enUSFormat, DateTimeFormatInfoData.EnUSAbbreviatedEraName().ToLower(), 1 };
+            yield return new object[]
+            {
+                enUSFormat,
+                DateTimeFormatInfoData.EnUSEraName().ToLower(),
+                1
+            };
+            yield return new object[]
+            {
+                enUSFormat,
+                DateTimeFormatInfoData.EnUSAbbreviatedEraName(),
+                1
+            };
+            yield return new object[]
+            {
+                enUSFormat,
+                DateTimeFormatInfoData.EnUSAbbreviatedEraName().ToLower(),
+                1
+            };
             yield return new object[] { enUSFormat, "C.E", -1 };
             yield return new object[] { enUSFormat, "CE", -1 };
             yield return new object[] { enUSFormat, "B.C", -1 };
@@ -51,8 +66,11 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(GetEra_TestData))]
-        public void GetEra_Invoke_ReturnsExpected(DateTimeFormatInfo format, string eraName, int expected)
-        {
+        public void GetEra_Invoke_ReturnsExpected(
+            DateTimeFormatInfo format,
+            string eraName,
+            int expected
+        ) {
             Assert.Equal(expected, format.GetEra(eraName));
         }
 

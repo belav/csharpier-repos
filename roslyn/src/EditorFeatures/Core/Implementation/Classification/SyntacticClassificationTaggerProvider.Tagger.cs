@@ -25,18 +25,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
-            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(NormalizedSnapshotSpanCollection spans)
-            {
+            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            ) {
                 if (_tagComputer == null)
                 {
-                    throw new ObjectDisposedException("AbstractSyntacticClassificationTaggerProvider.Tagger");
+                    throw new ObjectDisposedException(
+                        "AbstractSyntacticClassificationTaggerProvider.Tagger"
+                    );
                 }
 
                 return _tagComputer.GetTags(spans);
             }
 
-            private void OnTagsChanged(object sender, SnapshotSpanEventArgs e)
-                => TagsChanged?.Invoke(this, e);
+            private void OnTagsChanged(object sender, SnapshotSpanEventArgs e) =>
+                TagsChanged?.Invoke(this, e);
 
             public void Dispose()
             {

@@ -20,15 +20,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Log
             string id,
             bool description,
             bool telemetry,
-            string uri)
-        {
-            Logger.Log(FunctionId.Diagnostics_HyperLink, KeyValueLogMessage.Create(m =>
-            {
-                m[From] = from;
-                m[Id] = telemetry ? id : id.GetHashCode().ToString();
-                m[HasDescription] = description;
-                m[Uri] = telemetry ? uri : uri.GetHashCode().ToString();
-            }));
+            string uri
+        ) {
+            Logger.Log(
+                FunctionId.Diagnostics_HyperLink,
+                KeyValueLogMessage.Create(
+                    m =>
+                    {
+                        m[From] = from;
+                        m[Id] = telemetry ? id : id.GetHashCode().ToString();
+                        m[HasDescription] = description;
+                        m[Uri] = telemetry ? uri : uri.GetHashCode().ToString();
+                    }
+                )
+            );
         }
     }
 }

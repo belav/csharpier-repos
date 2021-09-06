@@ -13,13 +13,18 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal class ControlFlowPass : AbstractFlowPass<ControlFlowPass.LocalState, ControlFlowPass.LocalFunctionState>
+    internal class ControlFlowPass
+        : AbstractFlowPass<ControlFlowPass.LocalState, ControlFlowPass.LocalFunctionState>
     {
-        private readonly PooledDictionary<LabelSymbol, BoundBlock> _labelsDefined = PooledDictionary<LabelSymbol, BoundBlock>.GetInstance();
-        private readonly PooledHashSet<LabelSymbol> _labelsUsed = PooledHashSet<LabelSymbol>.GetInstance();
-        protected bool _convertInsufficientExecutionStackExceptionToCancelledByStackGuardException = false; // By default, just let the original exception to bubble up.
+        private readonly PooledDictionary<LabelSymbol, BoundBlock> _labelsDefined =
+            PooledDictionary<LabelSymbol, BoundBlock>.GetInstance();
+        private readonly PooledHashSet<LabelSymbol> _labelsUsed =
+            PooledHashSet<LabelSymbol>.GetInstance();
+        protected bool _convertInsufficientExecutionStackExceptionToCancelledByStackGuardException =
+            false; // By default, just let the original exception to bubble up.
 
-        private readonly ArrayBuilder<(LocalSymbol symbol, BoundBlock block)> _usingDeclarations = ArrayBuilder<(LocalSymbol, BoundBlock)>.GetInstance();
+        private readonly ArrayBuilder<(LocalSymbol symbol, BoundBlock block)> _usingDeclarations =
+            ArrayBuilder<(LocalSymbol, BoundBlock)>.GetInstance();
         private BoundBlock _currentBlock = null;
 
         protected override void Free()
@@ -30,15 +35,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             base.Free();
         }
 
-        internal ControlFlowPass(CSharpCompilation compilation, Symbol member, BoundNode node)
-            : base(compilation, member, node)
-        {
-        }
+        internal ControlFlowPass(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node
+        ) : base(compilation, member, node) { }
 
-        internal ControlFlowPass(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
-            : base(compilation, member, node, firstInRegion, lastInRegion)
-        {
-        }
+        internal ControlFlowPass(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
         internal struct LocalState : ILocalState
         {
@@ -69,11 +78,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal sealed class LocalFunctionState : AbstractLocalFunctionState
         {
             public LocalFunctionState(LocalState unreachableState)
-                : base(unreachableState.Clone(), unreachableState.Clone())
-            { }
+                : base(unreachableState.Clone(), unreachableState.Clone()) { }
         }
 
-        protected override LocalFunctionState CreateLocalFunctionState(LocalFunctionSymbol symbol) => new LocalFunctionState(UnreachableState());
+        protected override LocalFunctionState CreateLocalFunctionState(
+            LocalFunctionSymbol symbol
+        ) => new LocalFunctionState(UnreachableState());
 
         protected override bool Meet(ref LocalState self, ref LocalState other)
         {
@@ -131,7 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override ImmutableArray<PendingBranch> Scan(ref bool badRegion)
         {
-            this.Diagnostics.Clear();  // clear reported diagnostics
+            this.Diagnostics.Clear(); // clear reported diagnostics
             var result = base.Scan(ref badRegion);
             foreach (var label in _labelsDefined.Keys)
             {
@@ -148,13 +158,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Perform control flow analysis, reporting all necessary diagnostics.  Returns true if the end of
         /// the body might be reachable...
         /// </summary>
-        public static bool Analyze(CSharpCompilation compilation, Symbol member, BoundBlock block, DiagnosticBag diagnostics)
-        {
+        public static bool Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundBlock block,
+            DiagnosticBag diagnostics
+        ) {
             var walker = new ControlFlowPass(compilation, member, block);
 
             if (diagnostics != null)
             {
-                walker._convertInsufficientExecutionStackExceptionToCancelledByStackGuardException = true;
+                walker._convertInsufficientExecutionStackExceptionToCancelledByStackGuardException =
+                    true;
             }
 
             try
@@ -211,20 +226,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (pending.Branch.Kind)
                 {
                     case BoundKind.GotoStatement:
-                        {
-                            var leave = pending.Branch;
-                            var loc = new SourceLocation(leave.Syntax.GetFirstToken());
-                            Diagnostics.Add(ErrorCode.ERR_LabelNotFound, loc, ((BoundGotoStatement)pending.Branch).Label.Name);
-                            break;
-                        }
+                    {
+                        var leave = pending.Branch;
+                        var loc = new SourceLocation(leave.Syntax.GetFirstToken());
+                        Diagnostics.Add(
+                            ErrorCode.ERR_LabelNotFound,
+                            loc,
+                            ((BoundGotoStatement)pending.Branch).Label.Name
+                        );
+                        break;
+                    }
                     case BoundKind.BreakStatement:
                     case BoundKind.ContinueStatement:
-                        {
-                            var leave = pending.Branch;
-                            var loc = new SourceLocation(leave.Syntax.GetFirstToken());
-                            Diagnostics.Add(ErrorCode.ERR_BadDelegateLeave, loc);
-                            break;
-                        }
+                    {
+                        var leave = pending.Branch;
+                        var loc = new SourceLocation(leave.Syntax.GetFirstToken());
+                        Diagnostics.Add(ErrorCode.ERR_BadDelegateLeave, loc);
+                        break;
+                    }
                     case BoundKind.ReturnStatement:
                         break;
                     default:
@@ -257,19 +276,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckReachable(BoundStatement statement)
         {
-            if (!this.State.Alive &&
-                !this.State.Reported &&
-                !statement.WasCompilerGenerated &&
-                statement.Syntax.Span.Length != 0)
-            {
+            if (
+                !this.State.Alive
+                && !this.State.Reported
+                && !statement.WasCompilerGenerated
+                && statement.Syntax.Span.Length != 0
+            ) {
                 var firstToken = statement.Syntax.GetFirstToken();
                 Diagnostics.Add(ErrorCode.WRN_UnreachableCode, new SourceLocation(firstToken));
                 this.State.Reported = true;
             }
         }
 
-        protected override void VisitTryBlock(BoundStatement tryBlock, BoundTryStatement node, ref LocalState tryState)
-        {
+        protected override void VisitTryBlock(
+            BoundStatement tryBlock,
+            BoundTryStatement node,
+            ref LocalState tryState
+        ) {
             if (node.CatchBlocks.IsEmpty)
             {
                 base.VisitTryBlock(tryBlock, node, ref tryState);
@@ -281,22 +304,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             RestorePending(oldPending);
         }
 
-        protected override void VisitCatchBlock(BoundCatchBlock catchBlock, ref LocalState finallyState)
-        {
+        protected override void VisitCatchBlock(
+            BoundCatchBlock catchBlock,
+            ref LocalState finallyState
+        ) {
             var oldPending = SavePending(); // we do not support branches into a catch block
             base.VisitCatchBlock(catchBlock, ref finallyState);
             RestorePending(oldPending);
         }
 
-        protected override void VisitFinallyBlock(BoundStatement finallyBlock, ref LocalState endState)
-        {
+        protected override void VisitFinallyBlock(
+            BoundStatement finallyBlock,
+            ref LocalState endState
+        ) {
             var oldPending1 = SavePending(); // we do not support branches into a finally block
             var oldPending2 = SavePending(); // track only the branches out of the finally block
             base.VisitFinallyBlock(finallyBlock, ref endState);
             RestorePending(oldPending2); // resolve branches that remain within the finally block
             foreach (var branch in PendingBranches)
             {
-                if (branch.Branch == null) continue; // a tracked exception
+                if (branch.Branch == null)
+                    continue; // a tracked exception
                 var location = new SourceLocation(branch.Branch.Syntax.GetFirstToken());
                 switch (branch.Branch.Kind)
                 {
@@ -373,8 +401,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (this.State.Alive)
             {
                 var syntax = node.SwitchLabels.Last().Syntax;
-                Diagnostics.Add(isLastSection ? ErrorCode.ERR_SwitchFallOut : ErrorCode.ERR_SwitchFallThrough,
-                                new SourceLocation(syntax), syntax.ToString());
+                Diagnostics.Add(
+                    isLastSection ? ErrorCode.ERR_SwitchFallOut : ErrorCode.ERR_SwitchFallThrough,
+                    new SourceLocation(syntax),
+                    syntax.ToString()
+                );
             }
         }
 

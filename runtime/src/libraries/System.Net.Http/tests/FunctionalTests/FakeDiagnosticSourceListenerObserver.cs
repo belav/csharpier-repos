@@ -12,18 +12,15 @@ namespace System.Net.Http.Functional.Tests
         {
             private readonly Action<KeyValuePair<string, object>> _writeCallback;
 
-            public FakeDiagnosticSourceWriteObserver(Action<KeyValuePair<string, object>> writeCallback)
-            {
+            public FakeDiagnosticSourceWriteObserver(
+                Action<KeyValuePair<string, object>> writeCallback
+            ) {
                 _writeCallback = writeCallback;
             }
 
-            public void OnCompleted()
-            {
-            }
+            public void OnCompleted() { }
 
-            public void OnError(Exception error)
-            {
-            }
+            public void OnError(Exception error) { }
 
             public void OnNext(KeyValuePair<string, object> value)
             {
@@ -33,20 +30,17 @@ namespace System.Net.Http.Functional.Tests
 
         private readonly Action<KeyValuePair<string, object>> _writeCallback;
 
-        private Func<string, object, object, bool> _writeObserverEnabled = (name, arg1, arg2) => false;
+        private Func<string, object, object, bool> _writeObserverEnabled = (name, arg1, arg2) =>
+            false;
 
         public FakeDiagnosticListenerObserver(Action<KeyValuePair<string, object>> writeCallback)
         {
             _writeCallback = writeCallback;
         }
 
-        public void OnCompleted()
-        {
-        }
+        public void OnCompleted() { }
 
-        public void OnError(Exception error)
-        {
-        }
+        public void OnError(Exception error) { }
 
         public void OnNext(DiagnosticListener value)
         {

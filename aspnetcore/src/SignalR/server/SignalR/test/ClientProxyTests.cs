@@ -23,8 +23,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendUserAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<string, string, object[], CancellationToken>((userId, methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendUserAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<string, string, object[], CancellationToken>(
+                    (userId, methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new UserProxy<FakeHub>(o.Object, string.Empty);
@@ -33,7 +46,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             await proxy.SendAsync("Method", data);
 
             Assert.NotNull(resultArgs);
-            var arg = (byte[]) Assert.Single(resultArgs);
+            var arg = (byte[])Assert.Single(resultArgs);
 
             Assert.Same(data, arg);
         }
@@ -44,8 +57,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendUsersAsync(It.IsAny<IReadOnlyList<string>>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<IReadOnlyList<string>, string, object[], CancellationToken>((userIds, methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendUsersAsync(
+                            It.IsAny<IReadOnlyList<string>>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<IReadOnlyList<string>, string, object[], CancellationToken>(
+                    (userIds, methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new MultipleUserProxy<FakeHub>(o.Object, new List<string>());
@@ -65,8 +91,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendGroupAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<string, string, object[], CancellationToken>((groupName, methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendGroupAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<string, string, object[], CancellationToken>(
+                    (groupName, methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new GroupProxy<FakeHub>(o.Object, string.Empty);
@@ -86,8 +125,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendGroupsAsync(It.IsAny<IReadOnlyList<string>>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<IReadOnlyList<string>, string, object[], CancellationToken>((groupNames, methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendGroupsAsync(
+                            It.IsAny<IReadOnlyList<string>>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<IReadOnlyList<string>, string, object[], CancellationToken>(
+                    (groupNames, methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new MultipleGroupProxy<FakeHub>(o.Object, new List<string>());
@@ -107,8 +159,22 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendGroupExceptAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<IReadOnlyList<string>>(), It.IsAny<CancellationToken>()))
-                .Callback<string, string, object[], IReadOnlyList<string>, CancellationToken>((groupName, methodName, args, excludedConnectionIds, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendGroupExceptAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<IReadOnlyList<string>>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<string, string, object[], IReadOnlyList<string>, CancellationToken>(
+                    (groupName, methodName, args, excludedConnectionIds, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new GroupExceptProxy<FakeHub>(o.Object, string.Empty, new List<string>());
@@ -128,8 +194,20 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendAllAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<string, object[], CancellationToken>((methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendAllAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<string, object[], CancellationToken>(
+                    (methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new AllClientProxy<FakeHub>(o.Object);
@@ -149,8 +227,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendAllExceptAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<IReadOnlyList<string>>(), It.IsAny<CancellationToken>()))
-                .Callback<string, object[], IReadOnlyList<string>, CancellationToken>((methodName, args, excludedConnectionIds, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendAllExceptAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<IReadOnlyList<string>>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<string, object[], IReadOnlyList<string>, CancellationToken>(
+                    (methodName, args, excludedConnectionIds, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new AllClientsExceptProxy<FakeHub>(o.Object, new List<string>());
@@ -170,8 +261,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendConnectionAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<string, string, object[], CancellationToken>((connectionId, methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendConnectionAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<string, string, object[], CancellationToken>(
+                    (connectionId, methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new SingleClientProxy<FakeHub>(o.Object, string.Empty);
@@ -191,8 +295,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             object[] resultArgs = null;
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
-            o.Setup(m => m.SendConnectionsAsync(It.IsAny<IReadOnlyList<string>>(), It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback<IReadOnlyList<string>, string, object[], CancellationToken>((connectionIds, methodName, args, _) => { resultArgs = args; })
+            o.Setup(
+                    m =>
+                        m.SendConnectionsAsync(
+                            It.IsAny<IReadOnlyList<string>>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback<IReadOnlyList<string>, string, object[], CancellationToken>(
+                    (connectionIds, methodName, args, _) =>
+                    {
+                        resultArgs = args;
+                    }
+                )
                 .Returns(Task.CompletedTask);
 
             var proxy = new MultipleClientProxy<FakeHub>(o.Object, new List<string>());

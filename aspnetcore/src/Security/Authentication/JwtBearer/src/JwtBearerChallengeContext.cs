@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             HttpContext context,
             AuthenticationScheme scheme,
             JwtBearerOptions options,
-            AuthenticationProperties properties)
-            : base(context, scheme, options, properties) { }
+            AuthenticationProperties properties
+        ) : base(context, scheme, options, properties) { }
 
         /// <summary>
         /// Any failures encountered during the authentication process.

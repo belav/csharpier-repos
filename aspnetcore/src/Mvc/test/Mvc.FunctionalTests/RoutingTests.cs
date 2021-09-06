@@ -12,10 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
     public class RoutingTests : RoutingTestsBase<RoutingWebSite.StartupWithoutEndpointRouting>
     {
-        public RoutingTests(MvcTestFixture<RoutingWebSite.StartupWithoutEndpointRouting> fixture)
-            : base(fixture)
-        {
-        }
+        public RoutingTests(
+            MvcTestFixture<RoutingWebSite.StartupWithoutEndpointRouting> fixture
+        ) : base(fixture) { }
 
         [Fact]
         public async override Task HasEndpointMatch()
@@ -40,7 +39,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var url = "http://localhost/api/v1/Maps";
 
             // Act
-            var response = await Client.SendAsync(new HttpRequestMessage(new HttpMethod("POST"), url));
+            var response = await Client.SendAsync(
+                new HttpRequestMessage(new HttpMethod("POST"), url)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -65,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                     typeof(Route).FullName,
                     "Microsoft.AspNetCore.Mvc.Routing.MvcRouteHandler",
                 },
-                result.Routers);
+                result.Routers
+            );
         }
 
         [Fact]
@@ -80,13 +82,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var body = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResultData>(body);
 
-            Assert.Equal(new string[]
+            Assert.Equal(
+                new string[]
                 {
                     typeof(RouteCollection).FullName,
                     "Microsoft.AspNetCore.Mvc.Routing.AttributeRoute",
                     "Microsoft.AspNetCore.Mvc.Routing.MvcAttributeRouteHandler",
                 },
-                result.Routers);
+                result.Routers
+            );
         }
     }
 }

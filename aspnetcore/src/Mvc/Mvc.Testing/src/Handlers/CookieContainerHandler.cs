@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         /// <summary>
         /// Creates a new instance of <see cref="CookieContainerHandler"/>.
         /// </summary>
-        public CookieContainerHandler()
-            : this(new CookieContainer())
-        {
-        }
+        public CookieContainerHandler() : this(new CookieContainer()) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="CookieContainerHandler"/>.
@@ -40,8 +37,10 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         public CookieContainer Container { get; }
 
         /// <inheritdoc />
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             var cookieHeader = Container.GetCookieHeader(request.RequestUri);
 
             if (!string.IsNullOrEmpty(cookieHeader))

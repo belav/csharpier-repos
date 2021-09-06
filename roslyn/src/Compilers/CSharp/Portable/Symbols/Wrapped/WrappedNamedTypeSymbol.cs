@@ -27,8 +27,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         protected readonly NamedTypeSymbol _underlyingType;
 
-        public WrappedNamedTypeSymbol(NamedTypeSymbol underlyingType, TupleExtraData tupleData)
-            : base(tupleData)
+        public WrappedNamedTypeSymbol(
+            NamedTypeSymbol underlyingType,
+            TupleExtraData tupleData
+        ) : base(tupleData)
         {
             Debug.Assert((object)underlyingType != null);
             _underlyingType = underlyingType;
@@ -36,10 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public NamedTypeSymbol UnderlyingNamedType
         {
-            get
-            {
-                return _underlyingType;
-            }
+            get { return _underlyingType; }
         }
 
         public override bool IsImplicitlyDeclared
@@ -49,79 +48,59 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override int Arity
         {
-            get
-            {
-                return _underlyingType.Arity;
-            }
+            get { return _underlyingType.Arity; }
         }
 
         public override bool MightContainExtensionMethods
         {
-            get
-            {
-                return _underlyingType.MightContainExtensionMethods;
-            }
+            get { return _underlyingType.MightContainExtensionMethods; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _underlyingType.Name;
-            }
+            get { return _underlyingType.Name; }
         }
 
         public override string MetadataName
         {
-            get
-            {
-                return _underlyingType.MetadataName;
-            }
+            get { return _underlyingType.MetadataName; }
         }
 
         internal override bool HasSpecialName
         {
-            get
-            {
-                return _underlyingType.HasSpecialName;
-            }
+            get { return _underlyingType.HasSpecialName; }
         }
 
         internal override bool MangleName
         {
-            get
-            {
-                return _underlyingType.MangleName;
-            }
+            get { return _underlyingType.MangleName; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return _underlyingType.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
+            return _underlyingType.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return _underlyingType.DeclaredAccessibility;
-            }
+            get { return _underlyingType.DeclaredAccessibility; }
         }
 
         public override TypeKind TypeKind
         {
-            get
-            {
-                return _underlyingType.TypeKind;
-            }
+            get { return _underlyingType.TypeKind; }
         }
 
         internal override bool IsInterface
         {
-            get
-            {
-                return _underlyingType.IsInterface;
-            }
+            get { return _underlyingType.IsInterface; }
         }
 
         public override ImmutableArray<Location> Locations
@@ -152,45 +131,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override bool IsStatic
         {
-            get
-            {
-                return _underlyingType.IsStatic;
-            }
+            get { return _underlyingType.IsStatic; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return _underlyingType.IsAbstract;
-            }
+            get { return _underlyingType.IsAbstract; }
         }
 
         internal override bool IsMetadataAbstract
         {
-            get
-            {
-                return _underlyingType.IsMetadataAbstract;
-            }
+            get { return _underlyingType.IsMetadataAbstract; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return _underlyingType.IsSealed;
-            }
+            get { return _underlyingType.IsSealed; }
         }
 
         internal override bool IsMetadataSealed
         {
-            get
-            {
-                return _underlyingType.IsMetadataSealed;
-            }
+            get { return _underlyingType.IsMetadataSealed; }
         }
 
-        internal override bool HasCodeAnalysisEmbeddedAttribute => _underlyingType.HasCodeAnalysisEmbeddedAttribute;
+        internal override bool HasCodeAnalysisEmbeddedAttribute =>
+            _underlyingType.HasCodeAnalysisEmbeddedAttribute;
 
         internal override ObsoleteAttributeData ObsoleteAttributeData
         {

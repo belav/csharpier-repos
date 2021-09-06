@@ -22,19 +22,23 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         public sealed override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
-            context.RegisterCompilationStartAction(compilationContext =>
-            {
-                var analyzerContext = new ViewFeaturesAnalyzerContext(compilationContext);
-
-                // Only do work if we can locate IHtmlHelper.
-                if (analyzerContext.HtmlHelperType == null)
+            context.ConfigureGeneratedCodeAnalysis(
+                GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+            );
+            context.RegisterCompilationStartAction(
+                compilationContext =>
                 {
-                    return;
-                }
+                    var analyzerContext = new ViewFeaturesAnalyzerContext(compilationContext);
 
-                InitializeWorker(analyzerContext);
-            });
+                    // Only do work if we can locate IHtmlHelper.
+                    if (analyzerContext.HtmlHelperType == null)
+                    {
+                        return;
+                    }
+
+                    InitializeWorker(analyzerContext);
+                }
+            );
         }
 
         protected abstract void InitializeWorker(ViewFeaturesAnalyzerContext analyzerContext);

@@ -27,11 +27,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(ExecuteCommandParams request)
-            => ((JToken)request.Arguments.First()).ToObject<TextDocumentIdentifier>();
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            ExecuteCommandParams request
+        ) => ((JToken)request.Arguments.First()).ToObject<TextDocumentIdentifier>();
 
-        public override async Task<object> HandleRequestAsync(ExecuteCommandParams request, RequestContext context, CancellationToken cancellationToken)
-        {
+        public override async Task<object> HandleRequestAsync(
+            ExecuteCommandParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) {
             Contract.ThrowIfNull(request.Arguments);
 
             var document = context.Document;
@@ -40,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return false;
             }
 
-            var commandService = document.Project.LanguageServices.GetService<IXamlCommandService>();
+            var commandService =
+                document.Project.LanguageServices.GetService<IXamlCommandService>();
             if (commandService == null)
             {
                 return false;
@@ -49,8 +54,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             // request.Arguments has two argument for CreateEventHandlerCommand
             // Arguments[0]: TextDocumentIdentifier
             // Arguments[1]: XamlEventDescription
-            var arguments = new object[] { ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>() };
-            return await commandService.ExecuteCommandAsync(document, request.Command, arguments, cancellationToken).ConfigureAwait(false);
+            var arguments = new object[]
+            {
+                ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>()
+            };
+            return await commandService.ExecuteCommandAsync(
+                    document,
+                    request.Command,
+                    arguments,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

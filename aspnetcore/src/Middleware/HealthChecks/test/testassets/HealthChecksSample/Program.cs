@@ -34,8 +34,7 @@ namespace HealthChecksSample
 
         public static IHost BuildWebHost(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+            var config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .AddCommandLine(args)
@@ -47,22 +46,23 @@ namespace HealthChecksSample
                 startupType = typeof(BasicStartup);
             }
 
-            return new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseConfiguration(config)
-                    .ConfigureLogging(builder =>
+            return new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        builder.SetMinimumLevel(LogLevel.Trace);
-                        builder.AddConfiguration(config);
-                        builder.AddConsole();
-                    })
-                    .UseKestrel()
-                    .UseStartup(startupType);
-                })
+                        webHostBuilder.UseConfiguration(config)
+                            .ConfigureLogging(
+                                builder =>
+                                {
+                                    builder.SetMinimumLevel(LogLevel.Trace);
+                                    builder.AddConfiguration(config);
+                                    builder.AddConsole();
+                                }
+                            )
+                            .UseKestrel()
+                            .UseStartup(startupType);
+                    }
+                )
                 .Build();
         }
-
     }
 }

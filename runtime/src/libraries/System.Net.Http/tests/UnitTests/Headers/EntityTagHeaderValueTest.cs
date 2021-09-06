@@ -16,14 +16,26 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ETagNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentException>("tag", () => { new EntityTagHeaderValue(null); });
+            AssertExtensions.Throws<ArgumentException>(
+                "tag",
+                () =>
+                {
+                    new EntityTagHeaderValue(null);
+                }
+            );
         }
 
         [Fact]
         public void Ctor_ETagEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>("tag", () => { new EntityTagHeaderValue(string.Empty); });
+            AssertExtensions.Throws<ArgumentException>(
+                "tag",
+                () =>
+                {
+                    new EntityTagHeaderValue(string.Empty);
+                }
+            );
         }
 
         [Fact]
@@ -129,7 +141,10 @@ namespace System.Net.Http.Tests
         {
             EntityTagHeaderValue result = null;
 
-            Assert.Equal(6, EntityTagHeaderValue.GetEntityTagLength("\"ta\u4F1Ag\"", 0, out result));
+            Assert.Equal(
+                6,
+                EntityTagHeaderValue.GetEntityTagLength("\"ta\u4F1Ag\"", 0, out result)
+            );
             Assert.Equal("\"ta\u4F1Ag\"", result.Tag);
             Assert.False(result.IsWeak);
 
@@ -140,7 +155,10 @@ namespace System.Net.Http.Tests
             // Note that even if after a valid tag & whitespace there are invalid characters, GetEntityTagLength()
             // will return the length of the valid tag and ignore the invalid characters at the end. It is the callers
             // responsibility to consider the whole string invalid if after a valid ETag there are invalid chars.
-            Assert.Equal(11, EntityTagHeaderValue.GetEntityTagLength("\"tag\"  \r\n  !!", 0, out result));
+            Assert.Equal(
+                11,
+                EntityTagHeaderValue.GetEntityTagLength("\"tag\"  \r\n  !!", 0, out result)
+            );
             Assert.Equal("\"tag\"", result.Tag);
             Assert.False(result.IsWeak);
 
@@ -255,7 +273,12 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { EntityTagHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    EntityTagHeaderValue.Parse(input);
+                }
+            );
         }
 
         private void CheckValidTryParse(string input, EntityTagHeaderValue expectedResult)
@@ -274,7 +297,12 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string tag)
         {
-            Assert.Throws<FormatException>(() => { new EntityTagHeaderValue(tag); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new EntityTagHeaderValue(tag);
+                }
+            );
         }
         #endregion
     }

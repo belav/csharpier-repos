@@ -94,7 +94,13 @@ namespace Newtonsoft.Json
                     case State.Finished:
                         return ReadFromFinishedAsync(cancellationToken);
                     default:
-                        throw JsonReaderException.Create(this, "Unexpected state: {0}.".FormatWith(CultureInfo.InvariantCulture, CurrentState));
+                        throw JsonReaderException.Create(
+                            this,
+                            "Unexpected state: {0}.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                CurrentState
+                            )
+                        );
                 }
             }
         }
@@ -109,8 +115,10 @@ namespace Newtonsoft.Json
             return await DoReadAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        private async Task<bool> ParsePostValueAsync(bool ignoreComments, CancellationToken cancellationToken)
-        {
+        private async Task<bool> ParsePostValueAsync(
+            bool ignoreComments,
+            CancellationToken cancellationToken
+        ) {
             MiscellaneousUtils.Assert(_chars != null);
 
             while (true)
@@ -122,8 +130,10 @@ namespace Newtonsoft.Json
                     case '\0':
                         if (_charsUsed == _charPos)
                         {
-                            if (await ReadDataAsync(false, cancellationToken).ConfigureAwait(false) == 0)
-                            {
+                            if (
+                                await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
                                 _currentState = State.Finished;
                                 return false;
                             }
@@ -132,7 +142,6 @@ namespace Newtonsoft.Json
                         {
                             _charPos++;
                         }
-
                         break;
                     case '}':
                         _charPos++;
@@ -147,7 +156,8 @@ namespace Newtonsoft.Json
                         SetToken(JsonToken.EndConstructor);
                         return true;
                     case '/':
-                        await ParseCommentAsync(!ignoreComments, cancellationToken).ConfigureAwait(false);
+                        await ParseCommentAsync(!ignoreComments, cancellationToken)
+                            .ConfigureAwait(false);
                         if (!ignoreComments)
                         {
                             return true;
@@ -166,7 +176,8 @@ namespace Newtonsoft.Json
                         _charPos++;
                         break;
                     case StringUtils.CarriageReturn:
-                        await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(false, cancellationToken)
+                            .ConfigureAwait(false);
                         break;
                     case StringUtils.LineFeed:
                         ProcessLineFeed();
@@ -186,9 +197,14 @@ namespace Newtonsoft.Json
                                 return false;
                             }
 
-                            throw JsonReaderException.Create(this, "After parsing a value an unexpected character was encountered: {0}.".FormatWith(CultureInfo.InvariantCulture, currentChar));
+                            throw JsonReaderException.Create(
+                                this,
+                                "After parsing a value an unexpected character was encountered: {0}.".FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    currentChar
+                                )
+                            );
                         }
-
                         break;
                 }
             }
@@ -213,7 +229,13 @@ namespace Newtonsoft.Json
                     return true;
                 }
 
-                throw JsonReaderException.Create(this, "Additional text encountered after finished reading JSON content: {0}.".FormatWith(CultureInfo.InvariantCulture, _chars[_charPos]));
+                throw JsonReaderException.Create(
+                    this,
+                    "Additional text encountered after finished reading JSON content: {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _chars[_charPos]
+                    )
+                );
             }
 
             SetToken(JsonToken.None);
@@ -225,8 +247,11 @@ namespace Newtonsoft.Json
             return ReadDataAsync(append, 0, cancellationToken);
         }
 
-        private async Task<int> ReadDataAsync(bool append, int charsRequired, CancellationToken cancellationToken)
-        {
+        private async Task<int> ReadDataAsync(
+            bool append,
+            int charsRequired,
+            CancellationToken cancellationToken
+        ) {
             MiscellaneousUtils.Assert(_chars != null);
 
             if (_isEndOfFile)
@@ -236,7 +261,13 @@ namespace Newtonsoft.Json
 
             PrepareBufferForReadData(append, charsRequired);
 
-            int charsRead = await _reader.ReadAsync(_chars, _charsUsed, _chars.Length - _charsUsed - 1, cancellationToken).ConfigureAwait(false);
+            int charsRead = await _reader.ReadAsync(
+                    _chars,
+                    _charsUsed,
+                    _chars.Length - _charsUsed - 1,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             _charsUsed += charsRead;
 
@@ -262,8 +293,10 @@ namespace Newtonsoft.Json
                     case '\0':
                         if (_charsUsed == _charPos)
                         {
-                            if (await ReadDataAsync(false, cancellationToken).ConfigureAwait(false) == 0)
-                            {
+                            if (
+                                await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
                                 return false;
                             }
                         }
@@ -271,11 +304,11 @@ namespace Newtonsoft.Json
                         {
                             _charPos++;
                         }
-
                         break;
                     case '"':
                     case '\'':
-                        await ParseStringAsync(currentChar, ReadType.Read, cancellationToken).ConfigureAwait(false);
+                        await ParseStringAsync(currentChar, ReadType.Read, cancellationToken)
+                            .ConfigureAwait(false);
                         return true;
                     case 't':
                         await ParseTrueAsync(cancellationToken).ConfigureAwait(false);
@@ -284,15 +317,17 @@ namespace Newtonsoft.Json
                         await ParseFalseAsync(cancellationToken).ConfigureAwait(false);
                         return true;
                     case 'n':
-                        if (await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false))
-                        {
+                        if (
+                            await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false)
+                        ) {
                             switch (_chars[_charPos + 1])
                             {
                                 case 'u':
                                     await ParseNullAsync(cancellationToken).ConfigureAwait(false);
                                     break;
                                 case 'e':
-                                    await ParseConstructorAsync(cancellationToken).ConfigureAwait(false);
+                                    await ParseConstructorAsync(cancellationToken)
+                                        .ConfigureAwait(false);
                                     break;
                                 default:
                                     throw CreateUnexpectedCharacterException(_chars[_charPos]);
@@ -306,19 +341,25 @@ namespace Newtonsoft.Json
 
                         return true;
                     case 'N':
-                        await ParseNumberNaNAsync(ReadType.Read, cancellationToken).ConfigureAwait(false);
+                        await ParseNumberNaNAsync(ReadType.Read, cancellationToken)
+                            .ConfigureAwait(false);
                         return true;
                     case 'I':
-                        await ParseNumberPositiveInfinityAsync(ReadType.Read, cancellationToken).ConfigureAwait(false);
+                        await ParseNumberPositiveInfinityAsync(ReadType.Read, cancellationToken)
+                            .ConfigureAwait(false);
                         return true;
                     case '-':
-                        if (await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false) && _chars[_charPos + 1] == 'I')
-                        {
-                            await ParseNumberNegativeInfinityAsync(ReadType.Read, cancellationToken).ConfigureAwait(false);
+                        if (
+                            await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false)
+                            && _chars[_charPos + 1] == 'I'
+                        ) {
+                            await ParseNumberNegativeInfinityAsync(ReadType.Read, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                         else
                         {
-                            await ParseNumberAsync(ReadType.Read, cancellationToken).ConfigureAwait(false);
+                            await ParseNumberAsync(ReadType.Read, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                         return true;
                     case '/':
@@ -350,7 +391,8 @@ namespace Newtonsoft.Json
                         SetToken(JsonToken.EndConstructor);
                         return true;
                     case StringUtils.CarriageReturn:
-                        await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(false, cancellationToken)
+                            .ConfigureAwait(false);
                         break;
                     case StringUtils.LineFeed:
                         ProcessLineFeed();
@@ -371,7 +413,8 @@ namespace Newtonsoft.Json
 
                         if (char.IsNumber(currentChar) || currentChar == '-' || currentChar == '.')
                         {
-                            await ParseNumberAsync(ReadType.Read, cancellationToken).ConfigureAwait(false);
+                            await ParseNumberAsync(ReadType.Read, cancellationToken)
+                                .ConfigureAwait(false);
                             return true;
                         }
 
@@ -380,8 +423,10 @@ namespace Newtonsoft.Json
             }
         }
 
-        private async Task ReadStringIntoBufferAsync(char quote, CancellationToken cancellationToken)
-        {
+        private async Task ReadStringIntoBufferAsync(
+            char quote,
+            CancellationToken cancellationToken
+        ) {
             MiscellaneousUtils.Assert(_chars != null);
 
             int charPos = _charPos;
@@ -398,19 +443,34 @@ namespace Newtonsoft.Json
                         {
                             charPos--;
 
-                            if (await ReadDataAsync(true, cancellationToken).ConfigureAwait(false) == 0)
-                            {
+                            if (
+                                await ReadDataAsync(true, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
                                 _charPos = charPos;
-                                throw JsonReaderException.Create(this, "Unterminated string. Expected delimiter: {0}.".FormatWith(CultureInfo.InvariantCulture, quote));
+                                throw JsonReaderException.Create(
+                                    this,
+                                    "Unterminated string. Expected delimiter: {0}.".FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        quote
+                                    )
+                                );
                             }
                         }
-
                         break;
                     case '\\':
                         _charPos = charPos;
-                        if (!await EnsureCharsAsync(0, true, cancellationToken).ConfigureAwait(false))
-                        {
-                            throw JsonReaderException.Create(this, "Unterminated string. Expected delimiter: {0}.".FormatWith(CultureInfo.InvariantCulture, quote));
+                        if (
+                            !await EnsureCharsAsync(0, true, cancellationToken)
+                                .ConfigureAwait(false)
+                        ) {
+                            throw JsonReaderException.Create(
+                                this,
+                                "Unterminated string. Expected delimiter: {0}.".FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    quote
+                                )
+                            );
                         }
 
                         // start of escape sequence
@@ -448,7 +508,8 @@ namespace Newtonsoft.Json
                                 break;
                             case 'u':
                                 _charPos = charPos;
-                                writeChar = await ParseUnicodeAsync(cancellationToken).ConfigureAwait(false);
+                                writeChar = await ParseUnicodeAsync(cancellationToken)
+                                    .ConfigureAwait(false);
 
                                 if (StringUtils.IsLowSurrogate(writeChar))
                                 {
@@ -465,12 +526,17 @@ namespace Newtonsoft.Json
                                         anotherHighSurrogate = false;
 
                                         // potential start of a surrogate pair
-                                        if (await EnsureCharsAsync(2, true, cancellationToken).ConfigureAwait(false) && _chars[_charPos] == '\\' && _chars[_charPos + 1] == 'u')
-                                        {
+                                        if (
+                                            await EnsureCharsAsync(2, true, cancellationToken)
+                                                .ConfigureAwait(false)
+                                            && _chars[_charPos] == '\\'
+                                            && _chars[_charPos + 1] == 'u'
+                                        ) {
                                             char highSurrogate = writeChar;
 
                                             _charPos += 2;
-                                            writeChar = await ParseUnicodeAsync(cancellationToken).ConfigureAwait(false);
+                                            writeChar = await ParseUnicodeAsync(cancellationToken)
+                                                .ConfigureAwait(false);
 
                                             if (StringUtils.IsLowSurrogate(writeChar))
                                             {
@@ -490,7 +556,11 @@ namespace Newtonsoft.Json
 
                                             EnsureBufferNotEmpty();
 
-                                            WriteCharToBuffer(highSurrogate, lastWritePosition, escapeStartPos);
+                                            WriteCharToBuffer(
+                                                highSurrogate,
+                                                lastWritePosition,
+                                                escapeStartPos
+                                            );
                                             lastWritePosition = _charPos;
                                         }
                                         else
@@ -506,7 +576,13 @@ namespace Newtonsoft.Json
                                 break;
                             default:
                                 _charPos = charPos;
-                                throw JsonReaderException.Create(this, "Bad JSON escape sequence: {0}.".FormatWith(CultureInfo.InvariantCulture, @"\" + currentChar));
+                                throw JsonReaderException.Create(
+                                    this,
+                                    "Bad JSON escape sequence: {0}.".FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        @"\" + currentChar
+                                    )
+                                );
                         }
 
                         EnsureBufferNotEmpty();
@@ -516,7 +592,8 @@ namespace Newtonsoft.Json
                         break;
                     case StringUtils.CarriageReturn:
                         _charPos = charPos - 1;
-                        await ProcessCarriageReturnAsync(true, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(true, cancellationToken)
+                            .ConfigureAwait(false);
                         charPos = _charPos;
                         break;
                     case StringUtils.LineFeed:
@@ -528,10 +605,13 @@ namespace Newtonsoft.Json
                     case '\'':
                         if (_chars[charPos - 1] == quote)
                         {
-                            FinishReadStringIntoBuffer(charPos - 1, initialPosition, lastWritePosition);
+                            FinishReadStringIntoBuffer(
+                                charPos - 1,
+                                initialPosition,
+                                lastWritePosition
+                            );
                             return;
                         }
-
                         break;
                 }
             }
@@ -558,11 +638,16 @@ namespace Newtonsoft.Json
 
         private async Task<char> ParseUnicodeAsync(CancellationToken cancellationToken)
         {
-            return ConvertUnicode(await EnsureCharsAsync(4, true, cancellationToken).ConfigureAwait(false));
+            return ConvertUnicode(
+                await EnsureCharsAsync(4, true, cancellationToken).ConfigureAwait(false)
+            );
         }
 
-        private Task<bool> EnsureCharsAsync(int relativePosition, bool append, CancellationToken cancellationToken)
-        {
+        private Task<bool> EnsureCharsAsync(
+            int relativePosition,
+            bool append,
+            CancellationToken cancellationToken
+        ) {
             if (_charPos + relativePosition < _charsUsed)
             {
                 return AsyncUtils.True;
@@ -576,15 +661,19 @@ namespace Newtonsoft.Json
             return ReadCharsAsync(relativePosition, append, cancellationToken);
         }
 
-        private async Task<bool> ReadCharsAsync(int relativePosition, bool append, CancellationToken cancellationToken)
-        {
+        private async Task<bool> ReadCharsAsync(
+            int relativePosition,
+            bool append,
+            CancellationToken cancellationToken
+        ) {
             int charsRequired = _charPos + relativePosition - _charsUsed + 1;
 
             // it is possible that the TextReader doesn't return all data at once
             // repeat read until the required text is returned or the reader is out of content
             do
             {
-                int charsRead = await ReadDataAsync(append, charsRequired, cancellationToken).ConfigureAwait(false);
+                int charsRead = await ReadDataAsync(append, charsRequired, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // no more content
                 if (charsRead == 0)
@@ -611,8 +700,10 @@ namespace Newtonsoft.Json
                     case '\0':
                         if (_charsUsed == _charPos)
                         {
-                            if (await ReadDataAsync(false, cancellationToken).ConfigureAwait(false) == 0)
-                            {
+                            if (
+                                await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
                                 return false;
                             }
                         }
@@ -620,7 +711,6 @@ namespace Newtonsoft.Json
                         {
                             _charPos++;
                         }
-
                         break;
                     case '}':
                         SetToken(JsonToken.EndObject);
@@ -630,7 +720,8 @@ namespace Newtonsoft.Json
                         await ParseCommentAsync(true, cancellationToken).ConfigureAwait(false);
                         return true;
                     case StringUtils.CarriageReturn:
-                        await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(false, cancellationToken)
+                            .ConfigureAwait(false);
                         break;
                     case StringUtils.LineFeed:
                         ProcessLineFeed();
@@ -649,9 +740,9 @@ namespace Newtonsoft.Json
                         }
                         else
                         {
-                            return await ParsePropertyAsync(cancellationToken).ConfigureAwait(false);
+                            return await ParsePropertyAsync(cancellationToken)
+                                .ConfigureAwait(false);
                         }
-
                         break;
                 }
             }
@@ -681,7 +772,13 @@ namespace Newtonsoft.Json
             }
             else
             {
-                throw JsonReaderException.Create(this, "Error parsing comment. Expected: *, got {0}.".FormatWith(CultureInfo.InvariantCulture, _chars[_charPos]));
+                throw JsonReaderException.Create(
+                    this,
+                    "Error parsing comment. Expected: *, got {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _chars[_charPos]
+                    )
+                );
             }
 
             _charPos++;
@@ -695,11 +792,16 @@ namespace Newtonsoft.Json
                     case '\0':
                         if (_charsUsed == _charPos)
                         {
-                            if (await ReadDataAsync(true, cancellationToken).ConfigureAwait(false) == 0)
-                            {
+                            if (
+                                await ReadDataAsync(true, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
                                 if (!singlelineComment)
                                 {
-                                    throw JsonReaderException.Create(this, "Unexpected end while parsing comment.");
+                                    throw JsonReaderException.Create(
+                                        this,
+                                        "Unexpected end while parsing comment."
+                                    );
                                 }
 
                                 EndComment(setToken, initialPosition, _charPos);
@@ -710,15 +812,16 @@ namespace Newtonsoft.Json
                         {
                             _charPos++;
                         }
-
                         break;
                     case '*':
                         _charPos++;
 
                         if (!singlelineComment)
                         {
-                            if (await EnsureCharsAsync(0, true, cancellationToken).ConfigureAwait(false))
-                            {
+                            if (
+                                await EnsureCharsAsync(0, true, cancellationToken)
+                                    .ConfigureAwait(false)
+                            ) {
                                 if (_chars[_charPos] == '/')
                                 {
                                     EndComment(setToken, initialPosition, _charPos - 1);
@@ -728,7 +831,6 @@ namespace Newtonsoft.Json
                                 }
                             }
                         }
-
                         break;
                     case StringUtils.CarriageReturn:
                         if (singlelineComment)
@@ -737,7 +839,8 @@ namespace Newtonsoft.Json
                             return;
                         }
 
-                        await ProcessCarriageReturnAsync(true, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(true, cancellationToken)
+                            .ConfigureAwait(false);
                         break;
                     case StringUtils.LineFeed:
                         if (singlelineComment)
@@ -768,8 +871,10 @@ namespace Newtonsoft.Json
                     case '\0':
                         if (_charsUsed == _charPos)
                         {
-                            if (await ReadDataAsync(false, cancellationToken).ConfigureAwait(false) == 0)
-                            {
+                            if (
+                                await ReadDataAsync(false, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
                                 return;
                             }
                         }
@@ -779,7 +884,8 @@ namespace Newtonsoft.Json
                         }
                         break;
                     case StringUtils.CarriageReturn:
-                        await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(false, cancellationToken)
+                            .ConfigureAwait(false);
                         break;
                     case StringUtils.LineFeed:
                         ProcessLineFeed();
@@ -798,8 +904,11 @@ namespace Newtonsoft.Json
             }
         }
 
-        private async Task ParseStringAsync(char quote, ReadType readType, CancellationToken cancellationToken)
-        {
+        private async Task ParseStringAsync(
+            char quote,
+            ReadType readType,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             _charPos++;
 
@@ -810,11 +919,17 @@ namespace Newtonsoft.Json
 
         private async Task<bool> MatchValueAsync(string value, CancellationToken cancellationToken)
         {
-            return MatchValue(await EnsureCharsAsync(value.Length - 1, true, cancellationToken).ConfigureAwait(false), value);
+            return MatchValue(
+                await EnsureCharsAsync(value.Length - 1, true, cancellationToken)
+                    .ConfigureAwait(false),
+                value
+            );
         }
 
-        private async Task<bool> MatchValueWithTrailingSeparatorAsync(string value, CancellationToken cancellationToken)
-        {
+        private async Task<bool> MatchValueWithTrailingSeparatorAsync(
+            string value,
+            CancellationToken cancellationToken
+        ) {
             MiscellaneousUtils.Assert(_chars != null);
 
             // will match value and then move to the next character, checking that it is a separator character
@@ -831,15 +946,24 @@ namespace Newtonsoft.Json
             return IsSeparator(_chars[_charPos]) || _chars[_charPos] == '\0';
         }
 
-        private async Task MatchAndSetAsync(string value, JsonToken newToken, object? tokenValue, CancellationToken cancellationToken)
-        {
-            if (await MatchValueWithTrailingSeparatorAsync(value, cancellationToken).ConfigureAwait(false))
-            {
+        private async Task MatchAndSetAsync(
+            string value,
+            JsonToken newToken,
+            object? tokenValue,
+            CancellationToken cancellationToken
+        ) {
+            if (
+                await MatchValueWithTrailingSeparatorAsync(value, cancellationToken)
+                    .ConfigureAwait(false)
+            ) {
                 SetToken(newToken, tokenValue);
             }
             else
             {
-                throw JsonReaderException.Create(this, "Error parsing " + newToken.ToString().ToLowerInvariant() + " value.");
+                throw JsonReaderException.Create(
+                    this,
+                    "Error parsing " + newToken.ToString().ToLowerInvariant() + " value."
+                );
             }
         }
 
@@ -862,8 +986,10 @@ namespace Newtonsoft.Json
         {
             MiscellaneousUtils.Assert(_chars != null);
 
-            if (await MatchValueWithTrailingSeparatorAsync("new", cancellationToken).ConfigureAwait(false))
-            {
+            if (
+                await MatchValueWithTrailingSeparatorAsync("new", cancellationToken)
+                    .ConfigureAwait(false)
+            ) {
                 await EatWhitespaceAsync(cancellationToken).ConfigureAwait(false);
 
                 int initialPosition = _charPos;
@@ -876,9 +1002,14 @@ namespace Newtonsoft.Json
                     {
                         if (_charsUsed == _charPos)
                         {
-                            if (await ReadDataAsync(true, cancellationToken).ConfigureAwait(false) == 0)
-                            {
-                                throw JsonReaderException.Create(this, "Unexpected end while parsing constructor.");
+                            if (
+                                await ReadDataAsync(true, cancellationToken).ConfigureAwait(false)
+                                == 0
+                            ) {
+                                throw JsonReaderException.Create(
+                                    this,
+                                    "Unexpected end while parsing constructor."
+                                );
                             }
                         }
                         else
@@ -895,7 +1026,8 @@ namespace Newtonsoft.Json
                     else if (currentChar == StringUtils.CarriageReturn)
                     {
                         endPosition = _charPos;
-                        await ProcessCarriageReturnAsync(true, cancellationToken).ConfigureAwait(false);
+                        await ProcessCarriageReturnAsync(true, cancellationToken)
+                            .ConfigureAwait(false);
                         break;
                     }
                     else if (currentChar == StringUtils.LineFeed)
@@ -917,18 +1049,34 @@ namespace Newtonsoft.Json
                     }
                     else
                     {
-                        throw JsonReaderException.Create(this, "Unexpected character while parsing constructor: {0}.".FormatWith(CultureInfo.InvariantCulture, currentChar));
+                        throw JsonReaderException.Create(
+                            this,
+                            "Unexpected character while parsing constructor: {0}.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                currentChar
+                            )
+                        );
                     }
                 }
 
-                _stringReference = new StringReference(_chars, initialPosition, endPosition - initialPosition);
+                _stringReference = new StringReference(
+                    _chars,
+                    initialPosition,
+                    endPosition - initialPosition
+                );
                 string constructorName = _stringReference.ToString();
 
                 await EatWhitespaceAsync(cancellationToken).ConfigureAwait(false);
 
                 if (_chars[_charPos] != '(')
                 {
-                    throw JsonReaderException.Create(this, "Unexpected character while parsing constructor: {0}.".FormatWith(CultureInfo.InvariantCulture, _chars[_charPos]));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Unexpected character while parsing constructor: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            _chars[_charPos]
+                        )
+                    );
                 }
 
                 _charPos++;
@@ -943,19 +1091,43 @@ namespace Newtonsoft.Json
             }
         }
 
-        private async Task<object> ParseNumberNaNAsync(ReadType readType, CancellationToken cancellationToken)
-        {
-            return ParseNumberNaN(readType, await MatchValueWithTrailingSeparatorAsync(JsonConvert.NaN, cancellationToken).ConfigureAwait(false));
+        private async Task<object> ParseNumberNaNAsync(
+            ReadType readType,
+            CancellationToken cancellationToken
+        ) {
+            return ParseNumberNaN(
+                readType,
+                await MatchValueWithTrailingSeparatorAsync(JsonConvert.NaN, cancellationToken)
+                    .ConfigureAwait(false)
+            );
         }
 
-        private async Task<object> ParseNumberPositiveInfinityAsync(ReadType readType, CancellationToken cancellationToken)
-        {
-            return ParseNumberPositiveInfinity(readType, await MatchValueWithTrailingSeparatorAsync(JsonConvert.PositiveInfinity, cancellationToken).ConfigureAwait(false));
+        private async Task<object> ParseNumberPositiveInfinityAsync(
+            ReadType readType,
+            CancellationToken cancellationToken
+        ) {
+            return ParseNumberPositiveInfinity(
+                readType,
+                await MatchValueWithTrailingSeparatorAsync(
+                        JsonConvert.PositiveInfinity,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
         }
 
-        private async Task<object> ParseNumberNegativeInfinityAsync(ReadType readType, CancellationToken cancellationToken)
-        {
-            return ParseNumberNegativeInfinity(readType, await MatchValueWithTrailingSeparatorAsync(JsonConvert.NegativeInfinity, cancellationToken).ConfigureAwait(false));
+        private async Task<object> ParseNumberNegativeInfinityAsync(
+            ReadType readType,
+            CancellationToken cancellationToken
+        ) {
+            return ParseNumberNegativeInfinity(
+                readType,
+                await MatchValueWithTrailingSeparatorAsync(
+                        JsonConvert.NegativeInfinity,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
         }
 
         private async Task ParseNumberAsync(ReadType readType, CancellationToken cancellationToken)
@@ -974,7 +1146,12 @@ namespace Newtonsoft.Json
 
         private Task ParseUndefinedAsync(CancellationToken cancellationToken)
         {
-            return MatchAndSetAsync(JsonConvert.Undefined, JsonToken.Undefined, null, cancellationToken);
+            return MatchAndSetAsync(
+                JsonConvert.Undefined,
+                JsonToken.Undefined,
+                null,
+                cancellationToken
+            );
         }
 
         private async Task<bool> ParsePropertyAsync(CancellationToken cancellationToken)
@@ -999,14 +1176,25 @@ namespace Newtonsoft.Json
             }
             else
             {
-                throw JsonReaderException.Create(this, "Invalid property identifier character: {0}.".FormatWith(CultureInfo.InvariantCulture, _chars[_charPos]));
+                throw JsonReaderException.Create(
+                    this,
+                    "Invalid property identifier character: {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _chars[_charPos]
+                    )
+                );
             }
 
             string propertyName;
 
             if (PropertyNameTable != null)
             {
-                propertyName = PropertyNameTable.Get(_stringReference.Chars, _stringReference.StartIndex, _stringReference.Length)
+                propertyName =
+                    PropertyNameTable.Get(
+                        _stringReference.Chars,
+                        _stringReference.StartIndex,
+                        _stringReference.Length
+                    )
                     // no match in name table
                     ?? _stringReference.ToString();
             }
@@ -1019,7 +1207,13 @@ namespace Newtonsoft.Json
 
             if (_chars[_charPos] != ':')
             {
-                throw JsonReaderException.Create(this, "Invalid character after parsing property name. Expected ':' but got: {0}.".FormatWith(CultureInfo.InvariantCulture, _chars[_charPos]));
+                throw JsonReaderException.Create(
+                    this,
+                    "Invalid character after parsing property name. Expected ':' but got: {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _chars[_charPos]
+                    )
+                );
             }
 
             _charPos++;
@@ -1083,13 +1277,19 @@ namespace Newtonsoft.Json
                     {
                         if (await ReadDataAsync(true, cancellationToken).ConfigureAwait(false) == 0)
                         {
-                            throw JsonReaderException.Create(this, "Unexpected end while parsing unquoted property name.");
+                            throw JsonReaderException.Create(
+                                this,
+                                "Unexpected end while parsing unquoted property name."
+                            );
                         }
-
                         continue;
                     }
 
-                    _stringReference = new StringReference(_chars, initialPosition, _charPos - initialPosition);
+                    _stringReference = new StringReference(
+                        _chars,
+                        initialPosition,
+                        _charPos - initialPosition
+                    );
                     return;
                 }
 
@@ -1157,15 +1357,23 @@ namespace Newtonsoft.Json
                 }
                 else
                 {
-                    throw JsonReaderException.Create(this, "Additional text encountered after finished reading JSON content: {0}.".FormatWith(CultureInfo.InvariantCulture, _chars[_charPos]));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Additional text encountered after finished reading JSON content: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            _chars[_charPos]
+                        )
+                    );
                 }
             }
 
             SetToken(JsonToken.None);
         }
 
-        private async Task<object?> ReadStringValueAsync(ReadType readType, CancellationToken cancellationToken)
-        {
+        private async Task<object?> ReadStringValueAsync(
+            ReadType readType,
+            CancellationToken cancellationToken
+        ) {
             EnsureBuffer();
             MiscellaneousUtils.Assert(_chars != null);
 
@@ -1190,25 +1398,30 @@ namespace Newtonsoft.Json
                         switch (currentChar)
                         {
                             case '\0':
-                                if (await ReadNullCharAsync(cancellationToken).ConfigureAwait(false))
-                                {
+                                if (
+                                    await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
+                                ) {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
-
                                 break;
                             case '"':
                             case '\'':
-                                await ParseStringAsync(currentChar, readType, cancellationToken).ConfigureAwait(false);
+                                await ParseStringAsync(currentChar, readType, cancellationToken)
+                                    .ConfigureAwait(false);
                                 return FinishReadQuotedStringValue(readType);
                             case '-':
-                                if (await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false) && _chars[_charPos + 1] == 'I')
-                                {
+                                if (
+                                    await EnsureCharsAsync(1, true, cancellationToken)
+                                        .ConfigureAwait(false)
+                                    && _chars[_charPos + 1] == 'I'
+                                ) {
                                     return ParseNumberNegativeInfinity(readType);
                                 }
                                 else
                                 {
-                                    await ParseNumberAsync(readType, cancellationToken).ConfigureAwait(false);
+                                    await ParseNumberAsync(readType, cancellationToken)
+                                        .ConfigureAwait(false);
                                     return Value;
                                 }
                             case '.':
@@ -1228,7 +1441,8 @@ namespace Newtonsoft.Json
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
 
-                                await ParseNumberAsync(ReadType.ReadAsString, cancellationToken).ConfigureAwait(false);
+                                await ParseNumberAsync(ReadType.ReadAsString, cancellationToken)
+                                    .ConfigureAwait(false);
                                 return Value;
                             case 't':
                             case 'f':
@@ -1238,38 +1452,54 @@ namespace Newtonsoft.Json
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
 
-                                string expected = currentChar == 't' ? JsonConvert.True : JsonConvert.False;
-                                if (!await MatchValueWithTrailingSeparatorAsync(expected, cancellationToken).ConfigureAwait(false))
-                                {
+                                string expected =
+                                    currentChar == 't' ? JsonConvert.True : JsonConvert.False;
+                                if (
+                                    !await MatchValueWithTrailingSeparatorAsync(
+                                            expected,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false)
+                                ) {
                                     throw CreateUnexpectedCharacterException(_chars[_charPos]);
                                 }
 
                                 SetToken(JsonToken.String, expected);
                                 return expected;
                             case 'I':
-                                return await ParseNumberPositiveInfinityAsync(readType, cancellationToken).ConfigureAwait(false);
+                                return await ParseNumberPositiveInfinityAsync(
+                                        readType,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
                             case 'N':
-                                return await ParseNumberNaNAsync(readType, cancellationToken).ConfigureAwait(false);
+                                return await ParseNumberNaNAsync(readType, cancellationToken)
+                                    .ConfigureAwait(false);
                             case 'n':
                                 await HandleNullAsync(cancellationToken).ConfigureAwait(false);
                                 return null;
                             case '/':
-                                await ParseCommentAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ParseCommentAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case ',':
                                 ProcessValueComma();
                                 break;
                             case ']':
                                 _charPos++;
-                                if (_currentState == State.Array || _currentState == State.ArrayStart || _currentState == State.PostValue)
-                                {
+                                if (
+                                    _currentState == State.Array
+                                    || _currentState == State.ArrayStart
+                                    || _currentState == State.PostValue
+                                ) {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
 
                                 throw CreateUnexpectedCharacterException(currentChar);
                             case StringUtils.CarriageReturn:
-                                await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ProcessCarriageReturnAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case StringUtils.LineFeed:
                                 ProcessLineFeed();
@@ -1287,7 +1517,6 @@ namespace Newtonsoft.Json
                                 {
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
-
                                 // eat
                                 break;
                         }
@@ -1296,12 +1525,20 @@ namespace Newtonsoft.Json
                     await ReadFinishedAsync(cancellationToken).ConfigureAwait(false);
                     return null;
                 default:
-                    throw JsonReaderException.Create(this, "Unexpected state: {0}.".FormatWith(CultureInfo.InvariantCulture, CurrentState));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Unexpected state: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            CurrentState
+                        )
+                    );
             }
         }
 
-        private async Task<object?> ReadNumberValueAsync(ReadType readType, CancellationToken cancellationToken)
-        {
+        private async Task<object?> ReadNumberValueAsync(
+            ReadType readType,
+            CancellationToken cancellationToken
+        ) {
             EnsureBuffer();
             MiscellaneousUtils.Assert(_chars != null);
 
@@ -1326,32 +1563,46 @@ namespace Newtonsoft.Json
                         switch (currentChar)
                         {
                             case '\0':
-                                if (await ReadNullCharAsync(cancellationToken).ConfigureAwait(false))
-                                {
+                                if (
+                                    await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
+                                ) {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
-
                                 break;
                             case '"':
                             case '\'':
-                                await ParseStringAsync(currentChar, readType, cancellationToken).ConfigureAwait(false);
+                                await ParseStringAsync(currentChar, readType, cancellationToken)
+                                    .ConfigureAwait(false);
                                 return FinishReadQuotedNumber(readType);
                             case 'n':
                                 await HandleNullAsync(cancellationToken).ConfigureAwait(false);
                                 return null;
                             case 'N':
-                                return await ParseNumberNaNAsync(readType, cancellationToken).ConfigureAwait(false);
+                                return await ParseNumberNaNAsync(readType, cancellationToken)
+                                    .ConfigureAwait(false);
                             case 'I':
-                                return await ParseNumberPositiveInfinityAsync(readType, cancellationToken).ConfigureAwait(false);
+                                return await ParseNumberPositiveInfinityAsync(
+                                        readType,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
                             case '-':
-                                if (await EnsureCharsAsync(1, true, cancellationToken).ConfigureAwait(false) && _chars[_charPos + 1] == 'I')
-                                {
-                                    return await ParseNumberNegativeInfinityAsync(readType, cancellationToken).ConfigureAwait(false);
+                                if (
+                                    await EnsureCharsAsync(1, true, cancellationToken)
+                                        .ConfigureAwait(false)
+                                    && _chars[_charPos + 1] == 'I'
+                                ) {
+                                    return await ParseNumberNegativeInfinityAsync(
+                                            readType,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
                                 }
                                 else
                                 {
-                                    await ParseNumberAsync(readType, cancellationToken).ConfigureAwait(false);
+                                    await ParseNumberAsync(readType, cancellationToken)
+                                        .ConfigureAwait(false);
                                     return Value;
                                 }
                             case '.':
@@ -1365,25 +1616,31 @@ namespace Newtonsoft.Json
                             case '7':
                             case '8':
                             case '9':
-                                await ParseNumberAsync(readType, cancellationToken).ConfigureAwait(false);
+                                await ParseNumberAsync(readType, cancellationToken)
+                                    .ConfigureAwait(false);
                                 return Value;
                             case '/':
-                                await ParseCommentAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ParseCommentAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case ',':
                                 ProcessValueComma();
                                 break;
                             case ']':
                                 _charPos++;
-                                if (_currentState == State.Array || _currentState == State.ArrayStart || _currentState == State.PostValue)
-                                {
+                                if (
+                                    _currentState == State.Array
+                                    || _currentState == State.ArrayStart
+                                    || _currentState == State.PostValue
+                                ) {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
 
                                 throw CreateUnexpectedCharacterException(currentChar);
                             case StringUtils.CarriageReturn:
-                                await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ProcessCarriageReturnAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case StringUtils.LineFeed:
                                 ProcessLineFeed();
@@ -1401,7 +1658,6 @@ namespace Newtonsoft.Json
                                 {
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
-
                                 // eat
                                 break;
                         }
@@ -1410,7 +1666,13 @@ namespace Newtonsoft.Json
                     await ReadFinishedAsync(cancellationToken).ConfigureAwait(false);
                     return null;
                 default:
-                    throw JsonReaderException.Create(this, "Unexpected state: {0}.".FormatWith(CultureInfo.InvariantCulture, CurrentState));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Unexpected state: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            CurrentState
+                        )
+                    );
             }
         }
 
@@ -1422,9 +1684,12 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="Nullable{T}"/> of <see cref="bool"/>. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<bool?> ReadAsBooleanAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsBooleanAsync(cancellationToken) : base.ReadAsBooleanAsync(cancellationToken);
+        public override Task<bool?> ReadAsBooleanAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsBooleanAsync(cancellationToken)
+                : base.ReadAsBooleanAsync(cancellationToken);
         }
 
         internal async Task<bool?> DoReadAsBooleanAsync(CancellationToken cancellationToken)
@@ -1453,16 +1718,21 @@ namespace Newtonsoft.Json
                         switch (currentChar)
                         {
                             case '\0':
-                                if (await ReadNullCharAsync(cancellationToken).ConfigureAwait(false))
-                                {
+                                if (
+                                    await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
+                                ) {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
-
                                 break;
                             case '"':
                             case '\'':
-                                await ParseStringAsync(currentChar, ReadType.Read, cancellationToken).ConfigureAwait(false);
+                                await ParseStringAsync(
+                                        currentChar,
+                                        ReadType.Read,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
                                 return ReadBooleanString(_stringReference.ToString());
                             case 'n':
                                 await HandleNullAsync(cancellationToken).ConfigureAwait(false);
@@ -1479,8 +1749,10 @@ namespace Newtonsoft.Json
                             case '7':
                             case '8':
                             case '9':
-                                await ParseNumberAsync(ReadType.Read, cancellationToken).ConfigureAwait(false);
+                                await ParseNumberAsync(ReadType.Read, cancellationToken)
+                                    .ConfigureAwait(false);
                                 bool b;
+
 #if HAVE_BIG_INTEGER
                                 if (Value is BigInteger i)
                                 {
@@ -1496,30 +1768,40 @@ namespace Newtonsoft.Json
                             case 't':
                             case 'f':
                                 bool isTrue = currentChar == 't';
-                                if (!await MatchValueWithTrailingSeparatorAsync(isTrue ? JsonConvert.True : JsonConvert.False, cancellationToken).ConfigureAwait(false))
-                                {
+                                if (
+                                    !await MatchValueWithTrailingSeparatorAsync(
+                                            isTrue ? JsonConvert.True : JsonConvert.False,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false)
+                                ) {
                                     throw CreateUnexpectedCharacterException(_chars[_charPos]);
                                 }
 
                                 SetToken(JsonToken.Boolean, isTrue);
                                 return isTrue;
                             case '/':
-                                await ParseCommentAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ParseCommentAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case ',':
                                 ProcessValueComma();
                                 break;
                             case ']':
                                 _charPos++;
-                                if (_currentState == State.Array || _currentState == State.ArrayStart || _currentState == State.PostValue)
-                                {
+                                if (
+                                    _currentState == State.Array
+                                    || _currentState == State.ArrayStart
+                                    || _currentState == State.PostValue
+                                ) {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
 
                                 throw CreateUnexpectedCharacterException(currentChar);
                             case StringUtils.CarriageReturn:
-                                await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ProcessCarriageReturnAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case StringUtils.LineFeed:
                                 ProcessLineFeed();
@@ -1537,7 +1819,6 @@ namespace Newtonsoft.Json
                                 {
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
-
                                 // eat
                                 break;
                         }
@@ -1546,7 +1827,13 @@ namespace Newtonsoft.Json
                     await ReadFinishedAsync(cancellationToken).ConfigureAwait(false);
                     return null;
                 default:
-                    throw JsonReaderException.Create(this, "Unexpected state: {0}.".FormatWith(CultureInfo.InvariantCulture, CurrentState));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Unexpected state: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            CurrentState
+                        )
+                    );
             }
         }
 
@@ -1558,9 +1845,12 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="byte"/>[]. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<byte[]?> ReadAsBytesAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsBytesAsync(cancellationToken) : base.ReadAsBytesAsync(cancellationToken);
+        public override Task<byte[]?> ReadAsBytesAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsBytesAsync(cancellationToken)
+                : base.ReadAsBytesAsync(cancellationToken);
         }
 
         internal async Task<byte[]?> DoReadAsBytesAsync(CancellationToken cancellationToken)
@@ -1591,23 +1881,35 @@ namespace Newtonsoft.Json
                         switch (currentChar)
                         {
                             case '\0':
-                                if (await ReadNullCharAsync(cancellationToken).ConfigureAwait(false))
-                                {
+                                if (
+                                    await ReadNullCharAsync(cancellationToken).ConfigureAwait(false)
+                                ) {
                                     SetToken(JsonToken.None, null, false);
                                     return null;
                                 }
-
                                 break;
                             case '"':
                             case '\'':
-                                await ParseStringAsync(currentChar, ReadType.ReadAsBytes, cancellationToken).ConfigureAwait(false);
+                                await ParseStringAsync(
+                                        currentChar,
+                                        ReadType.ReadAsBytes,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
                                 byte[]? data = (byte[]?)Value;
                                 if (isWrapped)
                                 {
-                                    await ReaderReadAndAssertAsync(cancellationToken).ConfigureAwait(false);
+                                    await ReaderReadAndAssertAsync(cancellationToken)
+                                        .ConfigureAwait(false);
                                     if (TokenType != JsonToken.EndObject)
                                     {
-                                        throw JsonReaderException.Create(this, "Error reading bytes. Unexpected token: {0}.".FormatWith(CultureInfo.InvariantCulture, TokenType));
+                                        throw JsonReaderException.Create(
+                                            this,
+                                            "Error reading bytes. Unexpected token: {0}.".FormatWith(
+                                                CultureInfo.InvariantCulture,
+                                                TokenType
+                                            )
+                                        );
                                     }
 
                                     SetToken(JsonToken.Bytes, data, false);
@@ -1617,33 +1919,40 @@ namespace Newtonsoft.Json
                             case '{':
                                 _charPos++;
                                 SetToken(JsonToken.StartObject);
-                                await ReadIntoWrappedTypeObjectAsync(cancellationToken).ConfigureAwait(false);
+                                await ReadIntoWrappedTypeObjectAsync(cancellationToken)
+                                    .ConfigureAwait(false);
                                 isWrapped = true;
                                 break;
                             case '[':
                                 _charPos++;
                                 SetToken(JsonToken.StartArray);
-                                return await ReadArrayIntoByteArrayAsync(cancellationToken).ConfigureAwait(false);
+                                return await ReadArrayIntoByteArrayAsync(cancellationToken)
+                                    .ConfigureAwait(false);
                             case 'n':
                                 await HandleNullAsync(cancellationToken).ConfigureAwait(false);
                                 return null;
                             case '/':
-                                await ParseCommentAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ParseCommentAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case ',':
                                 ProcessValueComma();
                                 break;
                             case ']':
                                 _charPos++;
-                                if (_currentState == State.Array || _currentState == State.ArrayStart || _currentState == State.PostValue)
-                                {
+                                if (
+                                    _currentState == State.Array
+                                    || _currentState == State.ArrayStart
+                                    || _currentState == State.PostValue
+                                ) {
                                     SetToken(JsonToken.EndArray);
                                     return null;
                                 }
 
                                 throw CreateUnexpectedCharacterException(currentChar);
                             case StringUtils.CarriageReturn:
-                                await ProcessCarriageReturnAsync(false, cancellationToken).ConfigureAwait(false);
+                                await ProcessCarriageReturnAsync(false, cancellationToken)
+                                    .ConfigureAwait(false);
                                 break;
                             case StringUtils.LineFeed:
                                 ProcessLineFeed();
@@ -1661,7 +1970,6 @@ namespace Newtonsoft.Json
                                 {
                                     throw CreateUnexpectedCharacterException(currentChar);
                                 }
-
                                 // eat
                                 break;
                         }
@@ -1670,7 +1978,13 @@ namespace Newtonsoft.Json
                     await ReadFinishedAsync(cancellationToken).ConfigureAwait(false);
                     return null;
                 default:
-                    throw JsonReaderException.Create(this, "Unexpected state: {0}.".FormatWith(CultureInfo.InvariantCulture, CurrentState));
+                    throw JsonReaderException.Create(
+                        this,
+                        "Unexpected state: {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            CurrentState
+                        )
+                    );
             }
         }
 
@@ -1680,8 +1994,10 @@ namespace Newtonsoft.Json
             if (Value != null && Value.ToString() == JsonTypeReflector.TypePropertyName)
             {
                 await ReaderReadAndAssertAsync(cancellationToken).ConfigureAwait(false);
-                if (Value != null && Value.ToString().StartsWith("System.Byte[]", StringComparison.Ordinal))
-                {
+                if (
+                    Value != null
+                    && Value.ToString().StartsWith("System.Byte[]", StringComparison.Ordinal)
+                ) {
                     await ReaderReadAndAssertAsync(cancellationToken).ConfigureAwait(false);
                     if (Value.ToString() == JsonTypeReflector.ValuePropertyName)
                     {
@@ -1690,7 +2006,13 @@ namespace Newtonsoft.Json
                 }
             }
 
-            throw JsonReaderException.Create(this, "Error reading bytes. Unexpected token: {0}.".FormatWith(CultureInfo.InvariantCulture, JsonToken.StartObject));
+            throw JsonReaderException.Create(
+                this,
+                "Error reading bytes. Unexpected token: {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    JsonToken.StartObject
+                )
+            );
         }
 
         /// <summary>
@@ -1701,14 +2023,18 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="Nullable{T}"/> of <see cref="DateTime"/>. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<DateTime?> ReadAsDateTimeAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsDateTimeAsync(cancellationToken) : base.ReadAsDateTimeAsync(cancellationToken);
+        public override Task<DateTime?> ReadAsDateTimeAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsDateTimeAsync(cancellationToken)
+                : base.ReadAsDateTimeAsync(cancellationToken);
         }
 
         internal async Task<DateTime?> DoReadAsDateTimeAsync(CancellationToken cancellationToken)
         {
-            return (DateTime?)await ReadStringValueAsync(ReadType.ReadAsDateTime, cancellationToken).ConfigureAwait(false);
+            return (DateTime?)await ReadStringValueAsync(ReadType.ReadAsDateTime, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1719,14 +2045,22 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<DateTimeOffset?> ReadAsDateTimeOffsetAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsDateTimeOffsetAsync(cancellationToken) : base.ReadAsDateTimeOffsetAsync(cancellationToken);
+        public override Task<DateTimeOffset?> ReadAsDateTimeOffsetAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsDateTimeOffsetAsync(cancellationToken)
+                : base.ReadAsDateTimeOffsetAsync(cancellationToken);
         }
 
-        internal async Task<DateTimeOffset?> DoReadAsDateTimeOffsetAsync(CancellationToken cancellationToken)
-        {
-            return (DateTimeOffset?)await ReadStringValueAsync(ReadType.ReadAsDateTimeOffset, cancellationToken).ConfigureAwait(false);
+        internal async Task<DateTimeOffset?> DoReadAsDateTimeOffsetAsync(
+            CancellationToken cancellationToken
+        ) {
+            return (DateTimeOffset?)await ReadStringValueAsync(
+                    ReadType.ReadAsDateTimeOffset,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1737,14 +2071,18 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="Nullable{T}"/> of <see cref="decimal"/>. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<decimal?> ReadAsDecimalAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsDecimalAsync(cancellationToken) : base.ReadAsDecimalAsync(cancellationToken);
+        public override Task<decimal?> ReadAsDecimalAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsDecimalAsync(cancellationToken)
+                : base.ReadAsDecimalAsync(cancellationToken);
         }
 
         internal async Task<decimal?> DoReadAsDecimalAsync(CancellationToken cancellationToken)
         {
-            return (decimal?)await ReadNumberValueAsync(ReadType.ReadAsDecimal, cancellationToken).ConfigureAwait(false);
+            return (decimal?)await ReadNumberValueAsync(ReadType.ReadAsDecimal, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1755,14 +2093,18 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="Nullable{T}"/> of <see cref="double"/>. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<double?> ReadAsDoubleAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsDoubleAsync(cancellationToken) : base.ReadAsDoubleAsync(cancellationToken);
+        public override Task<double?> ReadAsDoubleAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsDoubleAsync(cancellationToken)
+                : base.ReadAsDoubleAsync(cancellationToken);
         }
 
         internal async Task<double?> DoReadAsDoubleAsync(CancellationToken cancellationToken)
         {
-            return (double?)await ReadNumberValueAsync(ReadType.ReadAsDouble, cancellationToken).ConfigureAwait(false);
+            return (double?)await ReadNumberValueAsync(ReadType.ReadAsDouble, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1775,12 +2117,15 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<int?> ReadAsInt32Async(CancellationToken cancellationToken = default)
         {
-            return _safeAsync ? DoReadAsInt32Async(cancellationToken) : base.ReadAsInt32Async(cancellationToken);
+            return _safeAsync
+                ? DoReadAsInt32Async(cancellationToken)
+                : base.ReadAsInt32Async(cancellationToken);
         }
 
         internal async Task<int?> DoReadAsInt32Async(CancellationToken cancellationToken)
         {
-            return (int?)await ReadNumberValueAsync(ReadType.ReadAsInt32, cancellationToken).ConfigureAwait(false);
+            return (int?)await ReadNumberValueAsync(ReadType.ReadAsInt32, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1791,14 +2136,18 @@ namespace Newtonsoft.Json
         /// property returns the <see cref="string"/>. This result will be <c>null</c> at the end of an array.</returns>
         /// <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
         /// execute synchronously, returning an already-completed task.</remarks>
-        public override Task<string?> ReadAsStringAsync(CancellationToken cancellationToken = default)
-        {
-            return _safeAsync ? DoReadAsStringAsync(cancellationToken) : base.ReadAsStringAsync(cancellationToken);
+        public override Task<string?> ReadAsStringAsync(
+            CancellationToken cancellationToken = default
+        ) {
+            return _safeAsync
+                ? DoReadAsStringAsync(cancellationToken)
+                : base.ReadAsStringAsync(cancellationToken);
         }
 
         internal async Task<string?> DoReadAsStringAsync(CancellationToken cancellationToken)
         {
-            return (string?)await ReadStringValueAsync(ReadType.ReadAsString, cancellationToken).ConfigureAwait(false);
+            return (string?)await ReadStringValueAsync(ReadType.ReadAsString, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

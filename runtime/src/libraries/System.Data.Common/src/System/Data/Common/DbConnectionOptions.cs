@@ -33,8 +33,11 @@ namespace System.Data.Common
 
         // synonyms hashtable is meant to be read-only translation of parsed string
         // keywords/synonyms to a known keyword string
-        public DbConnectionOptions(string? connectionString, Dictionary<string, string>? synonyms, bool useOdbcRules)
-        {
+        public DbConnectionOptions(
+            string? connectionString,
+            Dictionary<string, string>? synonyms,
+            bool useOdbcRules
+        ) {
             _useOdbcRules = useOdbcRules;
             _parsetable = new Dictionary<string, string?>();
             _usersConnectionString = ((null != connectionString) ? connectionString : "");
@@ -42,9 +45,19 @@ namespace System.Data.Common
             // first pass on parsing, initial syntax check
             if (0 < _usersConnectionString.Length)
             {
-                _keyChain = ParseInternal(_parsetable, _usersConnectionString, true, synonyms, _useOdbcRules);
-                _hasPasswordKeyword = (_parsetable.ContainsKey(KEY.Password) || _parsetable.ContainsKey(SYNONYM.Pwd));
-                _hasUserIdKeyword = (_parsetable.ContainsKey(KEY.User_ID) || _parsetable.ContainsKey(SYNONYM.UID));
+                _keyChain = ParseInternal(
+                    _parsetable,
+                    _usersConnectionString,
+                    true,
+                    synonyms,
+                    _useOdbcRules
+                );
+                _hasPasswordKeyword = (
+                    _parsetable.ContainsKey(KEY.Password) || _parsetable.ContainsKey(SYNONYM.Pwd)
+                );
+                _hasUserIdKeyword = (
+                    _parsetable.ContainsKey(KEY.User_ID) || _parsetable.ContainsKey(SYNONYM.UID)
+                );
             }
         }
 
@@ -52,8 +65,12 @@ namespace System.Data.Common
 
         public string? this[string keyword] => _parsetable[keyword];
 
-        internal static void AppendKeyValuePairBuilder(StringBuilder builder, string keyName, string? keyValue, bool useOdbcRules)
-        {
+        internal static void AppendKeyValuePairBuilder(
+            StringBuilder builder,
+            string keyName,
+            string? keyValue,
+            bool useOdbcRules
+        ) {
             ADP.CheckArgumentNull(builder, nameof(builder));
             ADP.CheckArgumentLength(keyName, nameof(keyName));
 
@@ -86,11 +103,21 @@ namespace System.Data.Common
                 // else <keyword>=;
                 if (useOdbcRules)
                 {
-                    if ((0 < keyValue.Length) &&
+                    if (
+                        (0 < keyValue.Length)
+                        &&
                         // string.Contains(char) is .NetCore2.1+ specific
-                        (('{' == keyValue[0]) || (0 <= keyValue.IndexOf(';')) || string.Equals(DbConnectionStringKeywords.Driver, keyName, StringComparison.OrdinalIgnoreCase)) &&
-                        !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue))
-                    {
+                        (
+                            ('{' == keyValue[0])
+                            || (0 <= keyValue.IndexOf(';'))
+                            || string.Equals(
+                                DbConnectionStringKeywords.Driver,
+                                keyName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        && !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
+                    ) {
                         // always quote Driver value (required for ODBC Version 2.65 and earlier)
                         // always quote values that contain a ';'
                         builder.Append('{').Append(keyValue.Replace("}", "}}")).Append('}');
@@ -143,7 +170,12 @@ namespace System.Data.Common
                 {
                     // only replace the parse end-result value instead of all values
                     // so that when duplicate-keywords occur other original values remain in place
-                    AppendKeyValuePairBuilder(builder, current.Name, replacementValue, _useOdbcRules);
+                    AppendKeyValuePairBuilder(
+                        builder,
+                        current.Name,
+                        replacementValue,
+                        _useOdbcRules
+                    );
                     builder.Append(';');
                     expanded = true;
                 }
@@ -163,8 +195,11 @@ namespace System.Data.Common
         }
 
         [Conditional("DEBUG")]
-        static partial void DebugTraceKeyValuePair(string keyname, string? keyvalue, Dictionary<string, string>? synonyms)
-        {
+        static partial void DebugTraceKeyValuePair(
+            string keyname,
+            string? keyvalue,
+            Dictionary<string, string>? synonyms
+        ) {
             Debug.Assert(keyname == keyname.ToLowerInvariant(), "missing ToLower");
 
             string realkeyname = ((null != synonyms) ? (string)synonyms[keyname] : keyname);
@@ -173,11 +208,18 @@ namespace System.Data.Common
                 // don't trace passwords ever!
                 if (null != keyvalue)
                 {
-                    DataCommonEventSource.Log.Trace("<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}', KeyValue='{1}'", keyname, keyvalue);
+                    DataCommonEventSource.Log.Trace(
+                        "<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}', KeyValue='{1}'",
+                        keyname,
+                        keyvalue
+                    );
                 }
                 else
                 {
-                    DataCommonEventSource.Log.Trace("<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}'", keyname);
+                    DataCommonEventSource.Log.Trace(
+                        "<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}'",
+                        keyname
+                    );
                 }
             }
         }

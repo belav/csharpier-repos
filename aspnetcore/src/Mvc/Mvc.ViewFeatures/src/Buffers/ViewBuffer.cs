@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         private readonly IViewBufferScope _bufferScope;
         private readonly string _name;
         private readonly int _pageSize;
-        private ViewBufferPage _currentPage;         // Limits allocation if the ViewBuffer has only one page (frequent case).
+        private ViewBufferPage _currentPage; // Limits allocation if the ViewBuffer has only one page (frequent case).
         private List<ViewBufferPage> _multiplePages; // Allocated only if necessary
 
         /// <summary>
@@ -356,36 +356,37 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             {
                 var page = this[i];
 
-                var destinationPage = destination.Count == 0 ? null : destination[destination.Count - 1];
+                var destinationPage =
+                    destination.Count == 0 ? null : destination[destination.Count - 1];
 
                 // If the source page is less or equal to than half full, let's copy it's content to the destination
                 // page if possible.
                 var isLessThanHalfFull = 2 * page.Count <= page.Capacity;
-                if (isLessThanHalfFull &&
-                    destinationPage != null &&
-                    destinationPage.Capacity - destinationPage.Count >= page.Count)
-                {
+                if (
+                    isLessThanHalfFull
+                    && destinationPage != null
+                    && destinationPage.Capacity - destinationPage.Count >= page.Count
+                ) {
                     // We have room, let's copy the items.
                     Array.Copy(
                         sourceArray: page.Buffer,
                         sourceIndex: 0,
                         destinationArray: destinationPage.Buffer,
                         destinationIndex: destinationPage.Count,
-                        length: page.Count);
+                        length: page.Count
+                    );
 
                     destinationPage.Count += page.Count;
 
                     // Now we can return the source page, and it can be reused in the scope of this request.
                     Array.Clear(page.Buffer, 0, page.Count);
                     _bufferScope.ReturnSegment(page.Buffer);
-
                 }
                 else
                 {
                     // Otherwise, let's just add the source page to the other buffer.
                     destination.AddPage(page);
                 }
-
             }
 
             Clear();

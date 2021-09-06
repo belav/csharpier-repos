@@ -23,10 +23,18 @@ namespace AutoMapper.Internal
             Type = type;
             Config = config;
         }
-        private ConstructorParameters[] GetConstructors() => 
-            GetConstructors(Type, Config).Where(c=>c.ParametersCount > 0).OrderByDescending(c => c.ParametersCount).ToArray();
-        public static IEnumerable<ConstructorParameters> GetConstructors(Type type, ProfileMap profileMap) =>
-            type.GetDeclaredConstructors().Where(profileMap.ShouldUseConstructor).Select(c => new ConstructorParameters(c));
+        private ConstructorParameters[] GetConstructors() =>
+            GetConstructors(Type, Config)
+                .Where(c => c.ParametersCount > 0)
+                .OrderByDescending(c => c.ParametersCount)
+                .ToArray();
+        public static IEnumerable<ConstructorParameters> GetConstructors(
+            Type type,
+            ProfileMap profileMap
+        ) =>
+            type.GetDeclaredConstructors()
+                .Where(profileMap.ShouldUseConstructor)
+                .Select(c => new ConstructorParameters(c));
         public MemberInfo GetMember(string name)
         {
             _nameToMember ??= PossibleNames();
@@ -34,7 +42,10 @@ namespace AutoMapper.Internal
         }
         private SourceMembers PossibleNames()
         {
-            var nameToMember = new SourceMembers(ReadAccessors.Length, StringComparer.OrdinalIgnoreCase);
+            var nameToMember = new SourceMembers(
+                ReadAccessors.Length,
+                StringComparer.OrdinalIgnoreCase
+            );
             IEnumerable<MemberInfo> accessors = ReadAccessors;
             if (Config.MethodMappingEnabled)
             {
@@ -57,21 +68,27 @@ namespace AutoMapper.Internal
         private IEnumerable<MemberInfo> AddMethods(IEnumerable<MemberInfo> accessors)
         {
             var publicNoArgMethods = GetPublicNoArgMethods();
-            var publicNoArgExtensionMethods = GetPublicNoArgExtensionMethods(Config.SourceExtensionMethods.Where(Config.ShouldMapMethod));
+            var publicNoArgExtensionMethods = GetPublicNoArgExtensionMethods(
+                Config.SourceExtensionMethods.Where(Config.ShouldMapMethod)
+            );
             return accessors.Concat(publicNoArgMethods).Concat(publicNoArgExtensionMethods);
         }
         private void CheckPrePostfixes(SourceMembers nameToMember, MemberInfo member)
         {
-            foreach (var memberName in PossibleNames(member.Name, Config.Prefixes, Config.Postfixes))
-            {
+            foreach (
+                var memberName in PossibleNames(member.Name, Config.Prefixes, Config.Postfixes)
+            ) {
                 if (!nameToMember.ContainsKey(memberName))
                 {
                     nameToMember.Add(memberName, member);
                 }
             }
         }
-        public static IEnumerable<string> PossibleNames(string memberName, List<string> prefixes, List<string> postfixes)
-        {
+        public static IEnumerable<string> PossibleNames(
+            string memberName,
+            List<string> prefixes,
+            List<string> postfixes
+        ) {
             foreach (var prefix in prefixes)
             {
                 if (!memberName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
@@ -106,16 +123,18 @@ namespace AutoMapper.Internal
         public MemberInfo[] ReadAccessors => _readAccessors ??= BuildReadAccessors();
         public MemberInfo[] WriteAccessors => _writeAccessors ??= BuildWriteAccessors();
         public ConstructorParameters[] Constructors => _constructors ??= GetConstructors();
-        private IEnumerable<MethodInfo> GetPublicNoArgExtensionMethods(IEnumerable<MethodInfo> sourceExtensionMethodSearch)
-        {
-            var explicitExtensionMethods = sourceExtensionMethodSearch.Where(method => method.GetParameters()[0].ParameterType.IsAssignableFrom(Type));
+        private IEnumerable<MethodInfo> GetPublicNoArgExtensionMethods(
+            IEnumerable<MethodInfo> sourceExtensionMethodSearch
+        ) {
+            var explicitExtensionMethods = sourceExtensionMethodSearch.Where(
+                method => method.GetParameters()[0].ParameterType.IsAssignableFrom(Type)
+            );
             var genericInterfaces = Type.GetInterfaces().Where(t => t.IsGenericType);
             if (Type.IsInterface && Type.IsGenericType)
             {
                 genericInterfaces = genericInterfaces.Union(new[] { Type });
             }
-            return explicitExtensionMethods.Union
-            (
+            return explicitExtensionMethods.Union(
                 from genericInterface in genericInterfaces
                 let genericInterfaceArguments = genericInterface.GenericTypeArguments
                 let matchedMethods = (
@@ -124,12 +143,15 @@ namespace AutoMapper.Internal
                     select extensionMethod
                 ).Concat(
                     from extensionMethod in sourceExtensionMethodSearch
-                    where extensionMethod.IsGenericMethodDefinition
-                        && extensionMethod.GetGenericArguments().Length == genericInterfaceArguments.Length
+                    where
+                        extensionMethod.IsGenericMethodDefinition
+                        && extensionMethod.GetGenericArguments().Length
+                            == genericInterfaceArguments.Length
                     select extensionMethod.MakeGenericMethod(genericInterfaceArguments)
                 )
                 from methodMatch in matchedMethods
-                where methodMatch.GetParameters()[0].ParameterType.IsAssignableFrom(genericInterface)
+                where
+                    methodMatch.GetParameters()[0].ParameterType.IsAssignableFrom(genericInterface)
                 select methodMatch
             );
         }
@@ -159,16 +181,44 @@ namespace AutoMapper.Internal
         }
         private static bool PropertyReadable(PropertyInfo propertyInfo) => propertyInfo.CanRead;
         private static bool FieldReadable(FieldInfo fieldInfo) => true;
-        private static bool PropertyWritable(PropertyInfo propertyInfo) => propertyInfo.CanWrite || propertyInfo.PropertyType.IsCollection();
+        private static bool PropertyWritable(PropertyInfo propertyInfo) =>
+            propertyInfo.CanWrite || propertyInfo.PropertyType.IsCollection();
         private static bool FieldWritable(FieldInfo fieldInfo) => !fieldInfo.IsInitOnly;
-        private IEnumerable<Type> GetTypeInheritance() => Type.IsInterface ? new[] { Type }.Concat(Type.GetInterfaces()) : Type.GetTypeInheritance();
-        private IEnumerable<PropertyInfo> GetProperties(Func<PropertyInfo, bool> propertyAvailableFor) =>
-            GetTypeInheritance().SelectMany(type => type.GetProperties(TypeExtensions.InstanceFlags).Where(property => propertyAvailableFor(property) && Config.ShouldMapProperty(property)));
+        private IEnumerable<Type> GetTypeInheritance() =>
+            Type.IsInterface
+                ? new[] { Type }.Concat(Type.GetInterfaces())
+                : Type.GetTypeInheritance();
+        private IEnumerable<PropertyInfo> GetProperties(
+            Func<PropertyInfo, bool> propertyAvailableFor
+        ) =>
+            GetTypeInheritance()
+                .SelectMany(
+                    type =>
+                        type.GetProperties(TypeExtensions.InstanceFlags)
+                            .Where(
+                                property =>
+                                    propertyAvailableFor(property)
+                                    && Config.ShouldMapProperty(property)
+                            )
+                );
         private IEnumerable<MemberInfo> GetFields(Func<FieldInfo, bool> fieldAvailableFor) =>
-            GetTypeInheritance().SelectMany(type => type.GetFields(TypeExtensions.InstanceFlags).Where(field => fieldAvailableFor(field) && Config.ShouldMapField(field)));
+            GetTypeInheritance()
+                .SelectMany(
+                    type =>
+                        type.GetFields(TypeExtensions.InstanceFlags)
+                            .Where(
+                                field => fieldAvailableFor(field) && Config.ShouldMapField(field)
+                            )
+                );
         private IEnumerable<MethodInfo> GetPublicNoArgMethods() =>
             Type.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-            .Where(m => m.DeclaringType != typeof(object) && m.ReturnType != typeof(void) && Config.ShouldMapMethod(m) && m.GetParameters().Length == 0);
+                .Where(
+                    m =>
+                        m.DeclaringType != typeof(object)
+                        && m.ReturnType != typeof(void)
+                        && Config.ShouldMapMethod(m)
+                        && m.GetParameters().Length == 0
+                );
     }
     public readonly struct ConstructorParameters
     {

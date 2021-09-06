@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 {
     public class BsonTempDataSerializerTest : TempDataSerializerTestBase
     {
-        protected override TempDataSerializer GetTempDataSerializer() => new BsonTempDataSerializer();
+        protected override TempDataSerializer GetTempDataSerializer() =>
+            new BsonTempDataSerializer();
 
         public static TheoryData<object, Type> InvalidTypes
         {
@@ -29,19 +30,25 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
         [Theory]
         [MemberData(nameof(InvalidTypes))]
-        public void EnsureObjectCanBeSerialized_ThrowsException_OnInvalidType(object value, Type type)
-        {
+        public void EnsureObjectCanBeSerialized_ThrowsException_OnInvalidType(
+            object value,
+            Type type
+        ) {
             // Arrange
             var testProvider = new BsonTempDataSerializer();
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-            {
-                testProvider.EnsureObjectCanBeSerialized(value);
-            });
-            Assert.Equal($"The '{typeof(BsonTempDataSerializer).FullName}' cannot serialize " +
-                $"an object of type '{type}'.",
-                exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    testProvider.EnsureObjectCanBeSerialized(value);
+                }
+            );
+            Assert.Equal(
+                $"The '{typeof(BsonTempDataSerializer).FullName}' cannot serialize "
+                    + $"an object of type '{type}'.",
+                exception.Message
+            );
         }
 
         public static TheoryData<object, Type> InvalidDictionaryTypes
@@ -60,19 +67,25 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
         [Theory]
         [MemberData(nameof(InvalidDictionaryTypes))]
-        public void EnsureObjectCanBeSerialized_ThrowsException_OnInvalidDictionaryType(object value, Type type)
-        {
+        public void EnsureObjectCanBeSerialized_ThrowsException_OnInvalidDictionaryType(
+            object value,
+            Type type
+        ) {
             // Arrange
             var testProvider = new BsonTempDataSerializer();
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-            {
-                testProvider.EnsureObjectCanBeSerialized(value);
-            });
-            Assert.Equal($"The '{typeof(BsonTempDataSerializer).FullName}' cannot serialize a dictionary " +
-                $"with a key of type '{type}'. The key must be of type 'System.String'.",
-                exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    testProvider.EnsureObjectCanBeSerialized(value);
+                }
+            );
+            Assert.Equal(
+                $"The '{typeof(BsonTempDataSerializer).FullName}' cannot serialize a dictionary "
+                    + $"with a key of type '{type}'. The key must be of type 'System.String'.",
+                exception.Message
+            );
         }
 
         public static TheoryData<object> ValidTypes
@@ -82,7 +95,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 return new TheoryData<object>
                 {
                     { 10 },
-                    { new int[]{ 10, 20 } },
+                    { new int[] { 10, 20 } },
                     { "FooValue" },
                     { new Uri("http://Foo") },
                     { Guid.NewGuid() },
@@ -103,10 +116,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             var key = "test-key";
             var value = new[] { 1, -2, 3 };
             var testProvider = GetTempDataSerializer();
-            var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+            var input = new Dictionary<string, object> { { key, value }, };
 
             // Act
             var bytes = testProvider.Serialize(input);
@@ -124,10 +134,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             var key = "test-key";
             var value = new DateTime(2007, 1, 1);
             var testProvider = GetTempDataSerializer();
-            var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+            var input = new Dictionary<string, object> { { key, value }, };
 
             // Act
             var bytes = testProvider.Serialize(input);
@@ -145,10 +152,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             var key = "test-key";
             var value = Guid.NewGuid();
             var testProvider = GetTempDataSerializer();
-            var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+            var input = new Dictionary<string, object> { { key, value }, };
 
             // Act
             var bytes = testProvider.Serialize(input);
@@ -167,10 +171,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             // Arrange
             var key = "test-key";
             var testProvider = GetTempDataSerializer();
-            var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+            var input = new Dictionary<string, object> { { key, value }, };
 
             // Act
             var bytes = testProvider.Serialize(input);
@@ -188,10 +189,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             var key = "test-key";
             var value = 10d;
             var testProvider = GetTempDataSerializer();
-            var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+            var input = new Dictionary<string, object> { { key, value }, };
 
             // Act
             var bytes = testProvider.Serialize(input);
@@ -221,10 +219,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             var key = "test-key";
             var testProvider = GetTempDataSerializer();
             var value = Guid.NewGuid();
-            var input = new Dictionary<string, object>
-            {
-                { key, value.ToString() }
-            };
+            var input = new Dictionary<string, object> { { key, value.ToString() } };
 
             // Act
             var bytes = testProvider.Serialize(input);
@@ -242,16 +237,9 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             var key = "test-key";
             var dateTime = new DateTime(2007, 1, 1);
             var testProvider = GetTempDataSerializer();
-            var value = new List<DateTime>
-            {
-                dateTime,
-                dateTime.AddDays(3),
-            };
+            var value = new List<DateTime> { dateTime, dateTime.AddDays(3), };
 
-            var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+            var input = new Dictionary<string, object> { { key, value } };
 
             // Act
             var bytes = testProvider.Serialize(input);

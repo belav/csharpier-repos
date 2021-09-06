@@ -25,7 +25,9 @@ namespace DefaultNamespace
                 Console.WriteLine("ushort comparison looked good...");
 
             if (((UInt16)v) != UInt16.MaxValue)
-                throw new Exception("UInt16.MaxValue from Object as UInt16 wasn't right!  " + (UInt16)v);
+                throw new Exception(
+                    "UInt16.MaxValue from Object as UInt16 wasn't right!  " + (UInt16)v
+                );
             Console.WriteLine("pass");
             return 100;
         }

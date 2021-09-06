@@ -7,8 +7,11 @@ namespace Internal.Cryptography.Pal
 {
     internal sealed partial class FindPal
     {
-        internal static IFindPal OpenPal(X509Certificate2Collection findFrom, X509Certificate2Collection copyTo, bool validOnly)
-        {
+        internal static IFindPal OpenPal(
+            X509Certificate2Collection findFrom,
+            X509Certificate2Collection copyTo,
+            bool validOnly
+        ) {
             return new OpenSslCertificateFinder(findFrom, copyTo, validOnly);
         }
     }

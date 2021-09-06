@@ -31,7 +31,11 @@ namespace System.DirectoryServices.AccountManagement
             _enumerator = src.GetEnumerator();
         }
 
-        internal ADEntriesSet(SearchResultCollection src, ADStoreCtx storeCtx, object discriminant) : this(src, storeCtx)
+        internal ADEntriesSet(
+            SearchResultCollection src,
+            ADStoreCtx storeCtx,
+            object discriminant
+        ) : this(src, storeCtx)
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADEntriesSet", "Ctor");
 
@@ -106,6 +110,7 @@ namespace System.DirectoryServices.AccountManagement
                     _disposed = true;
                 }
             }
+
             finally
             {
                 base.Dispose();

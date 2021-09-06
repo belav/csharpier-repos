@@ -39,8 +39,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.extension002.extension002
 {
     // <Title>Return type</Title>
@@ -76,8 +74,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.generic001.generic001
 {
@@ -116,8 +112,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.generic002.generic002
 {
     // <Title>Return type for generic method</Title>
@@ -154,8 +148,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.generic003.generic003
 {
@@ -194,8 +186,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.generic004.generic004
 {
     // <Title>Return type for generic method</Title>
@@ -232,8 +222,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.generic005.generic005
 {
@@ -272,8 +260,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.regular001.regular001
 {
     // <Title>Return type</Title>
@@ -309,8 +295,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.regular002.regular002
 {
@@ -348,8 +332,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.errorverifier.errorverifier
 {
@@ -533,8 +515,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.regular004.regular004
 {
     // <Title>Return type</Title>
@@ -578,8 +558,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.regular005.regular005
 {
@@ -625,8 +603,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.regular006.regular006
 {
     // <Title>Return type</Title>
@@ -671,8 +647,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.static001.static001
 {
     // <Title>Return type</Title>
@@ -707,8 +681,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.static002.static002
 {
@@ -745,8 +717,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.basic.static003.static003
 {

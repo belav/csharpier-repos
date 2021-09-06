@@ -50,8 +50,8 @@ namespace Microsoft.AspNetCore.Components.Server
             CircuitFactory circuitFactory,
             CircuitIdFactory circuitIdFactory,
             CircuitRegistry circuitRegistry,
-            ILogger<ComponentHub> logger)
-        {
+            ILogger<ComponentHub> logger
+        ) {
             _serverComponentSerializer = serializer;
             _dataProtectionProvider = dataProtectionProvider;
             _circuitFactory = circuitFactory;
@@ -78,24 +78,32 @@ namespace Microsoft.AspNetCore.Components.Server
             return _circuitRegistry.DisconnectAsync(circuitHost, Context.ConnectionId);
         }
 
-        public async ValueTask<string> StartCircuit(string baseUri, string uri, string serializedComponentRecords, string applicationState)
-        {
+        public async ValueTask<string> StartCircuit(
+            string baseUri,
+            string uri,
+            string serializedComponentRecords,
+            string applicationState
+        ) {
             var circuitHost = GetCircuit();
             if (circuitHost != null)
             {
                 // This is an error condition and an attempt to bind multiple circuits to a single connection.
                 // We can reject this and terminate the connection.
                 Log.CircuitAlreadyInitialized(_logger, circuitHost.CircuitId);
-                await NotifyClientError(Clients.Caller, $"The circuit host '{circuitHost.CircuitId}' has already been initialized.");
+                await NotifyClientError(
+                    Clients.Caller,
+                    $"The circuit host '{circuitHost.CircuitId}' has already been initialized."
+                );
                 Context.Abort();
                 return null;
             }
 
-            if (baseUri == null ||
-                uri == null ||
-                !Uri.TryCreate(baseUri, UriKind.Absolute, out _) ||
-                !Uri.TryCreate(uri, UriKind.Absolute, out _))
-            {
+            if (
+                baseUri == null
+                || uri == null
+                || !Uri.TryCreate(baseUri, UriKind.Absolute, out _)
+                || !Uri.TryCreate(uri, UriKind.Absolute, out _)
+            ) {
                 // We do some really minimal validation here to prevent obviously wrong data from getting in
                 // without duplicating too much logic.
                 //
@@ -107,10 +115,17 @@ namespace Microsoft.AspNetCore.Components.Server
                 return null;
             }
 
-            if (!_serverComponentSerializer.TryDeserializeComponentDescriptorCollection(serializedComponentRecords, out var components))
-            {
+            if (
+                !_serverComponentSerializer.TryDeserializeComponentDescriptorCollection(
+                    serializedComponentRecords,
+                    out var components
+                )
+            ) {
                 Log.InvalidInputData(_logger);
-                await NotifyClientError(Clients.Caller, $"The list of component records is not valid.");
+                await NotifyClientError(
+                    Clients.Caller,
+                    $"The list of component records is not valid."
+                );
                 Context.Abort();
                 return null;
             }
@@ -118,9 +133,12 @@ namespace Microsoft.AspNetCore.Components.Server
             try
             {
                 var circuitClient = new CircuitClientProxy(Clients.Caller, Context.ConnectionId);
-                var store = !string.IsNullOrEmpty(applicationState) ?
-                    new ProtectedPrerenderComponentApplicationStore(applicationState, _dataProtectionProvider) :
-                    new ProtectedPrerenderComponentApplicationStore(_dataProtectionProvider);
+                var store = !string.IsNullOrEmpty(applicationState)
+                    ? new ProtectedPrerenderComponentApplicationStore(
+                          applicationState,
+                          _dataProtectionProvider
+                      )
+                    : new ProtectedPrerenderComponentApplicationStore(_dataProtectionProvider);
 
                 circuitHost = await _circuitFactory.CreateCircuitHostAsync(
                     components,
@@ -128,7 +146,8 @@ namespace Microsoft.AspNetCore.Components.Server
                     baseUri,
                     uri,
                     Context.User,
-                    store);
+                    store
+                );
 
                 // Fire-and-forget the initialization process, because we can't block the
                 // SignalR message loop (we'd get a deadlock if any of the initialization
@@ -144,7 +163,12 @@ namespace Microsoft.AspNetCore.Components.Server
                 // Returning the secret here so the client can reconnect.
                 //
                 // Logging the secret and circuit ID here so we can associate them with just logs (if TRACE level is on).
-                Log.CreatedCircuit(_logger, circuitHost.CircuitId, circuitHost.CircuitId.Secret, Context.ConnectionId);
+                Log.CreatedCircuit(
+                    _logger,
+                    circuitHost.CircuitId,
+                    circuitHost.CircuitId.Secret,
+                    Context.ConnectionId
+                );
                 return circuitHost.CircuitId.Secret;
             }
             catch (Exception ex)
@@ -173,7 +197,8 @@ namespace Microsoft.AspNetCore.Components.Server
                 circuitId,
                 Clients.Caller,
                 Context.ConnectionId,
-                Context.ConnectionAborted);
+                Context.ConnectionAborted
+            );
             if (circuitHost != null)
             {
                 SetCircuit(circuitHost);
@@ -187,19 +212,33 @@ namespace Microsoft.AspNetCore.Components.Server
             return false;
         }
 
-        public async ValueTask BeginInvokeDotNetFromJS(string callId, string assemblyName, string methodIdentifier, long dotNetObjectId, string argsJson)
-        {
+        public async ValueTask BeginInvokeDotNetFromJS(
+            string callId,
+            string assemblyName,
+            string methodIdentifier,
+            long dotNetObjectId,
+            string argsJson
+        ) {
             var circuitHost = await GetActiveCircuitAsync();
             if (circuitHost == null)
             {
                 return;
             }
 
-            _ = circuitHost.BeginInvokeDotNetFromJS(callId, assemblyName, methodIdentifier, dotNetObjectId, argsJson);
+            _ = circuitHost.BeginInvokeDotNetFromJS(
+                callId,
+                assemblyName,
+                methodIdentifier,
+                dotNetObjectId,
+                argsJson
+            );
         }
 
-        public async ValueTask EndInvokeJSFromDotNet(long asyncHandle, bool succeeded, string arguments)
-        {
+        public async ValueTask EndInvokeJSFromDotNet(
+            long asyncHandle,
+            bool succeeded,
+            string arguments
+        ) {
             var circuitHost = await GetActiveCircuitAsync();
             if (circuitHost == null)
             {
@@ -249,8 +288,9 @@ namespace Microsoft.AspNetCore.Components.Server
         // Using a handle allows the CircuitHost to clear this reference in the background.
         //
         // See comment on error handling on the class definition.
-        private async ValueTask<CircuitHost> GetActiveCircuitAsync([CallerMemberName] string callSite = "")
-        {
+        private async ValueTask<CircuitHost> GetActiveCircuitAsync(
+            [CallerMemberName] string callSite = ""
+        ) {
             var handle = (CircuitHandle)Context.Items[CircuitKey];
             var circuitHost = handle?.CircuitHost;
             if (handle != null && circuitHost == null)
@@ -285,48 +325,105 @@ namespace Microsoft.AspNetCore.Components.Server
             Context.Items[CircuitKey] = circuitHost?.Handle;
         }
 
-        private static Task NotifyClientError(IClientProxy client, string error) => client.SendAsync("JS.Error", error);
+        private static Task NotifyClientError(IClientProxy client, string error) =>
+            client.SendAsync("JS.Error", error);
 
         private static class Log
         {
             private static readonly Action<ILogger, long, Exception> _receivedConfirmationForBatch =
-                LoggerMessage.Define<long>(LogLevel.Debug, new EventId(1, "ReceivedConfirmationForBatch"), "Received confirmation for batch {BatchId}");
+                LoggerMessage.Define<long>(
+                    LogLevel.Debug,
+                    new EventId(1, "ReceivedConfirmationForBatch"),
+                    "Received confirmation for batch {BatchId}"
+                );
 
-            private static readonly Action<ILogger, CircuitId, Exception> _circuitAlreadyInitialized =
-                LoggerMessage.Define<CircuitId>(LogLevel.Debug, new EventId(2, "CircuitAlreadyInitialized"), "The circuit host '{CircuitId}' has already been initialized");
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _circuitAlreadyInitialized = LoggerMessage.Define<CircuitId>(
+                LogLevel.Debug,
+                new EventId(2, "CircuitAlreadyInitialized"),
+                "The circuit host '{CircuitId}' has already been initialized"
+            );
 
             private static readonly Action<ILogger, string, Exception> _circuitHostNotInitialized =
-                LoggerMessage.Define<string>(LogLevel.Debug, new EventId(3, "CircuitHostNotInitialized"), "Call to '{CallSite}' received before the circuit host initialization");
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(3, "CircuitHostNotInitialized"),
+                    "Call to '{CallSite}' received before the circuit host initialization"
+                );
 
             private static readonly Action<ILogger, string, Exception> _circuitHostShutdown =
-                LoggerMessage.Define<string>(LogLevel.Debug, new EventId(4, "CircuitHostShutdown"), "Call to '{CallSite}' received after the circuit was shut down");
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(4, "CircuitHostShutdown"),
+                    "Call to '{CallSite}' received after the circuit was shut down"
+                );
 
             private static readonly Action<ILogger, string, Exception> _invalidInputData =
-                LoggerMessage.Define<string>(LogLevel.Debug, new EventId(5, "InvalidInputData"), "Call to '{CallSite}' received invalid input data");
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(5, "InvalidInputData"),
+                    "Call to '{CallSite}' received invalid input data"
+                );
 
             private static readonly Action<ILogger, Exception> _circuitInitializationFailed =
-                LoggerMessage.Define(LogLevel.Debug, new EventId(6, "CircuitInitializationFailed"), "Circuit initialization failed");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    new EventId(6, "CircuitInitializationFailed"),
+                    "Circuit initialization failed"
+                );
 
-            private static readonly Action<ILogger, CircuitId, string, string, Exception> _createdCircuit =
-                LoggerMessage.Define<CircuitId, string, string>(LogLevel.Debug, new EventId(7, "CreatedCircuit"), "Created circuit '{CircuitId}' with secret '{CircuitIdSecret}' for '{ConnectionId}'");
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                string,
+                string,
+                Exception
+            > _createdCircuit = LoggerMessage.Define<CircuitId, string, string>(
+                LogLevel.Debug,
+                new EventId(7, "CreatedCircuit"),
+                "Created circuit '{CircuitId}' with secret '{CircuitIdSecret}' for '{ConnectionId}'"
+            );
 
             private static readonly Action<ILogger, string, Exception> _invalidCircuitId =
-                LoggerMessage.Define<string>(LogLevel.Debug, new EventId(8, "InvalidCircuitId"), "ConnectAsync received an invalid circuit id '{CircuitIdSecret}'");
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(8, "InvalidCircuitId"),
+                    "ConnectAsync received an invalid circuit id '{CircuitIdSecret}'"
+                );
 
-            public static void ReceivedConfirmationForBatch(ILogger logger, long batchId) => _receivedConfirmationForBatch(logger, batchId, null);
+            public static void ReceivedConfirmationForBatch(ILogger logger, long batchId) =>
+                _receivedConfirmationForBatch(logger, batchId, null);
 
-            public static void CircuitAlreadyInitialized(ILogger logger, CircuitId circuitId) => _circuitAlreadyInitialized(logger, circuitId, null);
+            public static void CircuitAlreadyInitialized(ILogger logger, CircuitId circuitId) =>
+                _circuitAlreadyInitialized(logger, circuitId, null);
 
-            public static void CircuitHostNotInitialized(ILogger logger, [CallerMemberName] string callSite = "") => _circuitHostNotInitialized(logger, callSite, null);
+            public static void CircuitHostNotInitialized(
+                ILogger logger,
+                [CallerMemberName] string callSite = ""
+            ) => _circuitHostNotInitialized(logger, callSite, null);
 
-            public static void CircuitHostShutdown(ILogger logger, [CallerMemberName] string callSite = "") => _circuitHostShutdown(logger, callSite, null);
+            public static void CircuitHostShutdown(
+                ILogger logger,
+                [CallerMemberName] string callSite = ""
+            ) => _circuitHostShutdown(logger, callSite, null);
 
-            public static void InvalidInputData(ILogger logger, [CallerMemberName] string callSite = "") => _invalidInputData(logger, callSite, null);
+            public static void InvalidInputData(
+                ILogger logger,
+                [CallerMemberName] string callSite = ""
+            ) => _invalidInputData(logger, callSite, null);
 
-            public static void CircuitInitializationFailed(ILogger logger, Exception exception) => _circuitInitializationFailed(logger, exception);
+            public static void CircuitInitializationFailed(ILogger logger, Exception exception) =>
+                _circuitInitializationFailed(logger, exception);
 
-            public static void CreatedCircuit(ILogger logger, CircuitId circuitId, string circuitSecret, string connectionId)
-            {
+            public static void CreatedCircuit(
+                ILogger logger,
+                CircuitId circuitId,
+                string circuitSecret,
+                string connectionId
+            ) {
                 // Redact the secret unless tracing is on.
                 if (!logger.IsEnabled(LogLevel.Trace))
                 {

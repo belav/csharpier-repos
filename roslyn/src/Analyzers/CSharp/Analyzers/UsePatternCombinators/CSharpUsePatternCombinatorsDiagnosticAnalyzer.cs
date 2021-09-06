@@ -15,29 +15,42 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
     using static AnalyzedPattern;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpUsePatternCombinatorsDiagnosticAnalyzer :
-        AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class CSharpUsePatternCombinatorsDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUsePatternCombinatorsDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UsePatternCombinatorsDiagnosticId,
+            : base(
+                IDEDiagnosticIds.UsePatternCombinatorsDiagnosticId,
                 EnforceOnBuildValues.UsePatternCombinators,
                 CSharpCodeStyleOptions.PreferPatternMatching,
                 LanguageNames.CSharp,
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_pattern_matching), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_pattern_matching), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_pattern_matching),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_pattern_matching),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeNode,
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeNode,
                 SyntaxKind.LogicalAndExpression,
                 SyntaxKind.LogicalOrExpression,
-                SyntaxKind.LogicalNotExpression);
+                SyntaxKind.LogicalNotExpression
+            );
 
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var expression = (ExpressionSyntax)context.Node;
-            if (expression.GetDiagnostics().Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
+            if (
+                expression.GetDiagnostics()
+                    .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+            )
                 return;
 
             // Bail if this is not a topmost expression
@@ -50,12 +63,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 return;
 
             var cancellationToken = context.CancellationToken;
-            var styleOption = context.Options.GetOption(CSharpCodeStyleOptions.PreferPatternMatching, syntaxTree, cancellationToken);
+            var styleOption = context.Options.GetOption(
+                CSharpCodeStyleOptions.PreferPatternMatching,
+                syntaxTree,
+                cancellationToken
+            );
             if (!styleOption.Value)
                 return;
 
             var semanticModel = context.SemanticModel;
-            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
+            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
+                "System.Linq.Expressions.Expression`1"
+            );
             if (expression.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken))
                 return;
 
@@ -76,16 +95,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             if (HasIllegalPatternVariables(pattern, isTopLevel: true))
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                expression.GetLocation(),
-                styleOption.Notification.Severity,
-                additionalLocations: null,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    expression.GetLocation(),
+                    styleOption.Notification.Severity,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
         }
 
-        private static bool HasIllegalPatternVariables(AnalyzedPattern pattern, bool permitDesignations = true, bool isTopLevel = false)
-        {
+        private static bool HasIllegalPatternVariables(
+            AnalyzedPattern pattern,
+            bool permitDesignations = true,
+            bool isTopLevel = false
+        ) {
             switch (pattern)
             {
                 case Not p:
@@ -93,8 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 case Binary p:
                     if (p.IsDisjunctive)
                         permitDesignations = false;
-                    return HasIllegalPatternVariables(p.Left, permitDesignations) ||
-                           HasIllegalPatternVariables(p.Right, permitDesignations);
+                    return HasIllegalPatternVariables(p.Left, permitDesignations)
+                        || HasIllegalPatternVariables(p.Right, permitDesignations);
                 case Source p when !permitDesignations:
                     return p.PatternSyntax.DescendantNodes()
                         .OfType<SingleVariableDesignationSyntax>()
@@ -120,15 +145,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             return pattern switch
             {
-                Not { Pattern: Constant _ } => true,
-                Not { Pattern: Source { PatternSyntax: ConstantPatternSyntax _ } } => true,
+                Not{ Pattern: Constant _ } => true,
+                Not{ Pattern: Source{ PatternSyntax: ConstantPatternSyntax _ } } => true,
                 Not _ => false,
                 Binary _ => false,
                 _ => true
             };
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

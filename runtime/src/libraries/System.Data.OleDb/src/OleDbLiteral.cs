@@ -26,7 +26,6 @@ namespace System.Data.OleDb
         Text_Command = 18,
         User_Name = 19,
         View_Name = 20,
-
         // MDAC 2.0
         Cube_Name = 21,
         Dimension_Name = 22,
@@ -36,7 +35,6 @@ namespace System.Data.OleDb
         Property_Name = 26,
         Schema_Separator = 27,
         Quote_Suffix = 28,
-
         // MDAC 2.1
         Escape_Percent_Suffix = 29,
         Escape_Underscore_Suffix = 30,

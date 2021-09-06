@@ -23,8 +23,9 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <param name="actionContext">The context.</param>
         /// <returns>An <see cref="ModelMetadataProvider"/> instance.</returns>
-        public static ModelMetadataProvider GetMetadataProvider(this HttpActionContext actionContext)
-        {
+        public static ModelMetadataProvider GetMetadataProvider(
+            this HttpActionContext actionContext
+        ) {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -38,8 +39,9 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <param name="actionContext">The context.</param>
         /// <returns>A collection of <see cref="ModelValidatorProvider"/> instances.</returns>
-        public static IEnumerable<ModelValidatorProvider> GetValidatorProviders(this HttpActionContext actionContext)
-        {
+        public static IEnumerable<ModelValidatorProvider> GetValidatorProviders(
+            this HttpActionContext actionContext
+        ) {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -54,8 +56,10 @@ namespace System.Web.Http.Controllers
         /// <param name="actionContext">The context.</param>
         /// <param name="metadata">The metadata.</param>
         /// <returns>A collection of registered <see cref="ModelValidator"/> instances.</returns>
-        public static IEnumerable<ModelValidator> GetValidators(this HttpActionContext actionContext, ModelMetadata metadata)
-        {
+        public static IEnumerable<ModelValidator> GetValidators(
+            this HttpActionContext actionContext,
+            ModelMetadata metadata
+        ) {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -65,8 +69,11 @@ namespace System.Web.Http.Controllers
             return actionContext.GetValidators(metadata, validatorCache);
         }
 
-        internal static IEnumerable<ModelValidator> GetValidators(this HttpActionContext actionContext, ModelMetadata metadata, IModelValidatorCache validatorCache)
-        {
+        internal static IEnumerable<ModelValidator> GetValidators(
+            this HttpActionContext actionContext,
+            ModelMetadata metadata,
+            IModelValidatorCache validatorCache
+        ) {
             if (validatorCache == null)
             {
                 // slow path: there is no validator cache on the configuration
@@ -86,24 +93,35 @@ namespace System.Web.Http.Controllers
             return configuration.Services.GetModelValidatorCache();
         }
 
-        public static bool TryBindStrongModel<TModel>(this HttpActionContext actionContext, ModelBindingContext parentBindingContext, string propertyName, ModelMetadataProvider metadataProvider, out TModel model)
-        {
+        public static bool TryBindStrongModel<TModel>(
+            this HttpActionContext actionContext,
+            ModelBindingContext parentBindingContext,
+            string propertyName,
+            ModelMetadataProvider metadataProvider,
+            out TModel model
+        ) {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
             }
 
-            ModelBindingContext propertyBindingContext = new ModelBindingContext(parentBindingContext)
-            {
+            ModelBindingContext propertyBindingContext = new ModelBindingContext(
+                parentBindingContext
+            ) {
                 ModelMetadata = metadataProvider.GetMetadataForType(null, typeof(TModel)),
-                ModelName = ModelBindingHelper.CreatePropertyModelName(parentBindingContext.ModelName, propertyName)
+                ModelName = ModelBindingHelper.CreatePropertyModelName(
+                    parentBindingContext.ModelName,
+                    propertyName
+                )
             };
 
             if (actionContext.Bind(propertyBindingContext))
             {
                 object untypedModel = propertyBindingContext.Model;
                 model = ModelBindingHelper.CastOrDefault<TModel>(untypedModel);
-                parentBindingContext.ValidationNode.ChildNodes.Add(propertyBindingContext.ValidationNode);
+                parentBindingContext.ValidationNode.ChildNodes.Add(
+                    propertyBindingContext.ValidationNode
+                );
                 return true;
             }
 
@@ -112,13 +130,16 @@ namespace System.Web.Http.Controllers
         }
 
         // Pulls binders from the config
-        public static bool Bind(this HttpActionContext actionContext, ModelBindingContext bindingContext)
-        {
+        public static bool Bind(
+            this HttpActionContext actionContext,
+            ModelBindingContext bindingContext
+        ) {
             Type modelType = bindingContext.ModelType;
             HttpConfiguration config = actionContext.ControllerContext.Configuration;
 
-            IEnumerable<IModelBinder> binders = from provider in config.Services.GetModelBinderProviders()
-                                                select provider.GetBinder(config, modelType);
+            IEnumerable<IModelBinder> binders =
+                from provider in config.Services.GetModelBinderProviders()
+                select provider.GetBinder(config, modelType);
 
             return Bind(actionContext, bindingContext, binders);
         }
@@ -130,8 +151,11 @@ namespace System.Web.Http.Controllers
         /// <param name="bindingContext">The binding context.</param>
         /// <param name="binders">set of binders to use for binding</param>
         /// <returns>True if the bind was successful, else false.</returns>
-        public static bool Bind(this HttpActionContext actionContext, ModelBindingContext bindingContext, IEnumerable<IModelBinder> binders)
-        {
+        public static bool Bind(
+            this HttpActionContext actionContext,
+            ModelBindingContext bindingContext,
+            IEnumerable<IModelBinder> binders
+        ) {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");

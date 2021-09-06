@@ -14,13 +14,15 @@ namespace System.Runtime.InteropServices.JavaScript
         private GCHandle AnyRefHandle;
         public int JSHandle => (int)handle;
 
-        internal AnyRef(int jsHandle, bool ownsHandle) : this((IntPtr)jsHandle, ownsHandle)
-        { }
+        internal AnyRef(int jsHandle, bool ownsHandle) : this((IntPtr)jsHandle, ownsHandle) { }
 
         internal AnyRef(IntPtr jsHandle, bool ownsHandle) : base(ownsHandle)
         {
             SetHandle(jsHandle);
-            AnyRefHandle = GCHandle.Alloc(this, ownsHandle ? GCHandleType.Weak : GCHandleType.Normal);
+            AnyRefHandle = GCHandle.Alloc(
+                this,
+                ownsHandle ? GCHandleType.Weak : GCHandleType.Normal
+            );
         }
         internal int Int32Handle => (int)(IntPtr)AnyRefHandle;
 
@@ -38,7 +40,10 @@ namespace System.Runtime.InteropServices.JavaScript
 
         internal void Release()
         {
-            Debug.Assert(_refCount > 0, "AnyRefSafeHandle: Release() called more times than AddRef");
+            Debug.Assert(
+                _refCount > 0,
+                "AnyRefSafeHandle: Release() called more times than AddRef"
+            );
             Interlocked.Decrement(ref _refCount);
         }
 

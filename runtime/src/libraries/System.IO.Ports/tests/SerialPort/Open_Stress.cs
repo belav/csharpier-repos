@@ -18,8 +18,11 @@ namespace System.IO.Ports.Tests
             using (CancellationTokenSource cts = new CancellationTokenSource())
             {
                 var workerTask = new Task(() => OpenReceiveData_WorkerThread(cts.Token));
-                using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-                {
+                using (
+                    SerialPort com = new SerialPort(
+                        TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                    )
+                ) {
                     Debug.WriteLine("Open and Close port while the port is receiving data");
 
                     workerTask.Start();
@@ -34,6 +37,7 @@ namespace System.IO.Ports.Tests
                             com.Close();
                         }
                     }
+
                     finally
                     {
                         cts.Cancel();
@@ -47,8 +51,11 @@ namespace System.IO.Ports.Tests
         private void OpenReceiveData_WorkerThread(object token)
         {
             CancellationToken ct = (CancellationToken)token;
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 byte[] xmitBytes = new byte[16];
 
                 for (int i = 0; i < xmitBytes.Length; ++i)
@@ -69,9 +76,14 @@ namespace System.IO.Ports.Tests
             using (CancellationTokenSource cts = new CancellationTokenSource())
             {
                 var workerTask = new Task(() => OpenReceiveDataAndRTS_WorkerThread(cts.Token));
-                using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-                {
-                    Debug.WriteLine("Open and Close port while the port is recieving data and the RTS pin is changing states");
+                using (
+                    SerialPort com = new SerialPort(
+                        TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                    )
+                ) {
+                    Debug.WriteLine(
+                        "Open and Close port while the port is recieving data and the RTS pin is changing states"
+                    );
 
                     workerTask.Start();
 
@@ -105,14 +117,16 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void OpenReceiveDataAndRTS_WorkerThread(object token)
         {
             CancellationToken ct = (CancellationToken)token;
             try
             {
-                using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-                {
+                using (
+                    SerialPort com = new SerialPort(
+                        TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                    )
+                ) {
                     byte[] xmitBytes = new byte[16];
 
                     for (int i = 0; i < xmitBytes.Length; ++i)

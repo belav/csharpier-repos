@@ -15,8 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public PageActionEndpointDataSourceFactory(
             PageActionEndpointDataSourceIdProvider dataSourceIdProvider,
             IActionDescriptorCollectionProvider actions,
-            ActionEndpointFactory endpointFactory)
-        {
+            ActionEndpointFactory endpointFactory
+        ) {
             _dataSourceIdProvider = dataSourceIdProvider;
             _actions = actions;
             _endpointFactory = endpointFactory;
@@ -24,7 +24,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public PageActionEndpointDataSource Create(OrderedEndpointsSequenceProvider orderProvider)
         {
-            return new PageActionEndpointDataSource(_dataSourceIdProvider, _actions, _endpointFactory, orderProvider);
+            return new PageActionEndpointDataSource(
+                _dataSourceIdProvider,
+                _actions,
+                _endpointFactory,
+                orderProvider
+            );
         }
     }
 }

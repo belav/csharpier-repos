@@ -25,7 +25,10 @@ public class DynamicGenerator<G> : IDynGen
     static int mcount = 0;
     public DynamicGenerator()
     {
-        asmb = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName("tempasm" + (tcount++)), AssemblyBuilderAccess.Run);
+        asmb = AppDomain.CurrentDomain.DefineDynamicAssembly(
+            new AssemblyName("tempasm" + (tcount++)),
+            AssemblyBuilderAccess.Run
+        );
         modb = asmb.DefineDynamicModule("tempasm.dll");
         typeb = modb.DefineType("t" + mcount);
         typeb2 = modb.DefineType("t2" + mcount);
@@ -37,12 +40,17 @@ public class DynamicGenerator<G> : IDynGen
         MethodInfo dm = null;
         if (useLCG)
         {
-            dm = new DynamicMethod("dmset", typeof(G), new Type[] {}, typeof(Test).Module, true);
+            dm = new DynamicMethod("dmset", typeof(G), new Type[] {  }, typeof(Test).Module, true);
             ilgen = ((DynamicMethod)dm).GetILGenerator();
         }
         else
         {
-            dm = typeb.DefineMethod("mset_" + mcount, MethodAttributes.Public | MethodAttributes.Static, typeof(G), new Type[] {});
+            dm = typeb.DefineMethod(
+                "mset_" + mcount,
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(G),
+                new Type[] {  }
+            );
             ilgen = ((MethodBuilder)dm).GetILGenerator();
         }
         ilgen.Emit(OpCodes.Ldsfld, fi);
@@ -63,12 +71,23 @@ public class DynamicGenerator<G> : IDynGen
         MethodInfo dm = null;
         if (useLCG)
         {
-            dm = new DynamicMethod("dmget", typeof(void), new Type[] {typeof(G)}, typeof(Test).Module, true);
+            dm = new DynamicMethod(
+                "dmget",
+                typeof(void),
+                new Type[] { typeof(G) },
+                typeof(Test).Module,
+                true
+            );
             ilgen = ((DynamicMethod)dm).GetILGenerator();
         }
         else
         {
-            dm = typeb2.DefineMethod("mget_" + mcount, MethodAttributes.Public | MethodAttributes.Static, typeof(void), new Type[] {typeof(G)});
+            dm = typeb2.DefineMethod(
+                "mget_" + mcount,
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(void),
+                new Type[] { typeof(G) }
+            );
             ilgen = ((MethodBuilder)dm).GetILGenerator();
         }
         ilgen.Emit(OpCodes.Ldnull);
@@ -84,6 +103,5 @@ public class DynamicGenerator<G> : IDynGen
             MethodInfo mi = t.GetMethod("mget_" + (mcount++));
             return Delegate.CreateDelegate(typeof(DynSetValue), mi);
         }
-
     }
 }

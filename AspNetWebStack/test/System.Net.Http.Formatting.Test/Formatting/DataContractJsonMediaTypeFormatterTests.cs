@@ -22,7 +22,8 @@ namespace System.Net.Http.Formatting
         }
     }
 
-    public class DataContractJsonMediaTypeFormatterTests : MediaTypeFormatterTestBase<DataContractJsonMediaTypeFormatter>
+    public class DataContractJsonMediaTypeFormatterTests
+        : MediaTypeFormatterTestBase<DataContractJsonMediaTypeFormatter>
     {
         public override IEnumerable<MediaTypeHeaderValue> ExpectedSupportedMediaTypes
         {
@@ -53,7 +54,8 @@ namespace System.Net.Http.Formatting
             Assert.Reflection.BooleanProperty(
                 new XmlMediaTypeFormatter(),
                 c => c.Indent,
-                expectedDefaultValue: false);
+                expectedDefaultValue: false
+            );
         }
 
         [Fact]
@@ -67,11 +69,15 @@ namespace System.Net.Http.Formatting
                 illegalLowerValue: 0,
                 maxLegalValue: null,
                 illegalUpperValue: null,
-                roundTripTestValue: 256);
+                roundTripTestValue: 256
+            );
         }
 
         [Theory]
-        [TestDataSet(typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection")]
+        [TestDataSet(
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection"
+        )]
         public void CanReadType_ReturnsExpectedValues(Type variationType, object testData)
         {
             TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter();
@@ -80,11 +86,17 @@ namespace System.Net.Http.Formatting
             bool canSupport = formatter.CanReadTypeProxy(variationType);
 
             // If we don't agree, we assert only if the DCJ serializer says it cannot support something we think it should
-            Assert.False(isSerializable != canSupport && isSerializable, String.Format("CanReadType returned wrong value for '{0}'.", variationType));
+            Assert.False(
+                isSerializable != canSupport && isSerializable,
+                String.Format("CanReadType returned wrong value for '{0}'.", variationType)
+            );
 
             // Ask a 2nd time to probe whether the cached result is treated the same
             canSupport = formatter.CanReadTypeProxy(variationType);
-            Assert.False(isSerializable != canSupport && isSerializable, String.Format("2nd CanReadType returned wrong value for '{0}'.", variationType));
+            Assert.False(
+                isSerializable != canSupport && isSerializable,
+                String.Format("2nd CanReadType returned wrong value for '{0}'.", variationType)
+            );
         }
 
         [Fact]
@@ -104,9 +116,7 @@ namespace System.Net.Http.Formatting
         public class InvalidDataContract
         {
             // removing the default ctor makes this invalid
-            public InvalidDataContract(string s)
-            {
-            }
+            public InvalidDataContract(string s) { }
         }
 
         [Theory]
@@ -117,42 +127,80 @@ namespace System.Net.Http.Formatting
             JsonMediaTypeFormatter xmlFormatter = new DataContractJsonMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(xmlFormatter.WriteToStreamAsync(type, null, memoryStream, content, transportContext: null));
+            await Assert.Task.SucceedsAsync(
+                xmlFormatter.WriteToStreamAsync(
+                    type,
+                    null,
+                    memoryStream,
+                    content,
+                    transportContext: null
+                )
+            );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
-            Assert.True(serializedString.Contains("null"), "Using Json formatter to serialize null should emit 'null'.");
+            Assert.True(
+                serializedString.Contains("null"),
+                "Using Json formatter to serialize null should emit 'null'."
+            );
         }
 
         [Theory]
-        [TestDataSet(typeof(JsonMediaTypeFormatterTests), "ValueAndRefTypeTestDataCollectionExceptULong", RoundTripDataVariations)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(Type variationType, object testData)
-        {
+        [TestDataSet(
+            typeof(JsonMediaTypeFormatterTests),
+            "ValueAndRefTypeTestDataCollectionExceptULong",
+            RoundTripDataVariations
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(
+            Type variationType,
+            object testData
+        ) {
             // Guard
-            bool canSerialize = IsTypeSerializableWithJsonSerializer(variationType, testData) && Assert.Http.CanRoundTrip(variationType);
+            bool canSerialize =
+                IsTypeSerializableWithJsonSerializer(variationType, testData)
+                && Assert.Http.CanRoundTrip(variationType);
             if (canSerialize)
             {
                 // Arrange
                 TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter();
 
                 // Arrange & Act & Assert
-                object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+                object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                    formatter,
+                    variationType,
+                    testData
+                );
                 Assert.Equal(testData, readObj);
             }
         }
 
         [Theory]
-        [TestDataSet(typeof(XmlMediaTypeFormatterTests), "BunchOfTypedObjectsTestDataCollection", RoundTripDataVariations)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_KnownTypes(Type variationType, object testData)
-        {
+        [TestDataSet(
+            typeof(XmlMediaTypeFormatterTests),
+            "BunchOfTypedObjectsTestDataCollection",
+            RoundTripDataVariations
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_KnownTypes(
+            Type variationType,
+            object testData
+        ) {
             // Guard
-            bool canSerialize = IsTypeSerializableWithJsonSerializer(variationType, testData) && Assert.Http.CanRoundTrip(variationType);
+            bool canSerialize =
+                IsTypeSerializableWithJsonSerializer(variationType, testData)
+                && Assert.Http.CanRoundTrip(variationType);
             if (canSerialize)
             {
                 // Arrange
-                TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter { AddDBNullKnownType = true, };
+                TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter
+                {
+                    AddDBNullKnownType = true,
+                };
 
                 // Arrange & Act & Assert
-                object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+                object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                    formatter,
+                    variationType,
+                    testData
+                );
                 Assert.Equal(testData, readObj);
             }
         }
@@ -168,7 +216,11 @@ namespace System.Net.Http.Formatting
             object testData = DBNull.Value;
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // DBNull.Value round-trips as either Object or DBNull because serialization includes its type
             Assert.Equal(testData, readObj);
@@ -178,12 +230,19 @@ namespace System.Net.Http.Formatting
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsEmptyString()
         {
             // Arrange
-            TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter { AddDBNullKnownType = true, };
+            TestJsonMediaTypeFormatter formatter = new TestJsonMediaTypeFormatter
+            {
+                AddDBNullKnownType = true,
+            };
             Type variationType = typeof(string);
             object testData = DBNull.Value;
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // Lower levels convert DBNull.Value to empty string on read
             Assert.Equal(String.Empty, readObj);
@@ -193,29 +252,51 @@ namespace System.Net.Http.Formatting
         [Fact]
         public async Task UseDataContractJsonSerializer_Default()
         {
-            DataContractJsonMediaTypeFormatter jsonFormatter = new DataContractJsonMediaTypeFormatter();
+            DataContractJsonMediaTypeFormatter jsonFormatter =
+                new DataContractJsonMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(jsonFormatter.WriteToStreamAsync(typeof(SampleType), new SampleType(), memoryStream, content, transportContext: null));
+            await Assert.Task.SucceedsAsync(
+                jsonFormatter.WriteToStreamAsync(
+                    typeof(SampleType),
+                    new SampleType(),
+                    memoryStream,
+                    content,
+                    transportContext: null
+                )
+            );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
-            Assert.False(serializedString.Contains("\r\n"), "Using DCJS should emit data without indentation by default.");
+            Assert.False(
+                serializedString.Contains("\r\n"),
+                "Using DCJS should emit data without indentation by default."
+            );
         }
 
         [Fact]
         public void UseDataContractJsonSerializer_True_Indent_Throws()
         {
-            DataContractJsonMediaTypeFormatter jsonFormatter = new DataContractJsonMediaTypeFormatter { Indent = true };
+            DataContractJsonMediaTypeFormatter jsonFormatter =
+                new DataContractJsonMediaTypeFormatter { Indent = true };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
             Assert.Throws<NotSupportedException>(
-                () => jsonFormatter.WriteToStreamAsync(typeof(SampleType),
-                    new SampleType(),
-                    memoryStream, content, transportContext: null));
+                () =>
+                    jsonFormatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+            );
         }
 
-        public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(string content, string encoding, bool isDefaultEncoding)
-        {
+        public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(
+            string content,
+            string encoding,
+            bool isDefaultEncoding
+        ) {
             if (!isDefaultEncoding)
             {
                 // XmlDictionaryReader/Writer only supports utf-8 and 16
@@ -229,11 +310,20 @@ namespace System.Net.Http.Formatting
 
             // Act & assert
             return ReadContentUsingCorrectCharacterEncodingHelperAsync(
-                formatter, content, formattedContent, mediaType, encoding, isDefaultEncoding);
+                formatter,
+                content,
+                formattedContent,
+                mediaType,
+                encoding,
+                isDefaultEncoding
+            );
         }
 
-        public override Task WriteToStreamAsync_UsesCorrectCharacterEncoding(string content, string encoding, bool isDefaultEncoding)
-        {
+        public override Task WriteToStreamAsync_UsesCorrectCharacterEncoding(
+            string content,
+            string encoding,
+            bool isDefaultEncoding
+        ) {
             // DataContractJsonSerializer does not honor the value of byteOrderMark in the UnicodeEncoding ctor.
             // It doesn't include the BOM when byteOrderMark is set to true.
             if (!isDefaultEncoding || encoding != "utf-8")
@@ -249,7 +339,13 @@ namespace System.Net.Http.Formatting
 
             // Act & assert
             return WriteContentUsingCorrectCharacterEncodingHelperAsync(
-                formatter, content, formattedContent, mediaType, encoding, isDefaultEncoding);
+                formatter,
+                content,
+                formattedContent,
+                mediaType,
+                encoding,
+                isDefaultEncoding
+            );
         }
 
         public class TestJsonMediaTypeFormatter : DataContractJsonMediaTypeFormatter
@@ -294,7 +390,11 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            return !Assert.Http.IsKnownUnserializable(type, obj, (t) => typeof(INotJsonSerializable).IsAssignableFrom(t));
+            return !Assert.Http.IsKnownUnserializable(
+                type,
+                obj,
+                (t) => typeof(INotJsonSerializable).IsAssignableFrom(t)
+            );
         }
     }
 }

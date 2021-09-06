@@ -23,15 +23,10 @@ namespace BasicWebSite
 
         public int Order
         {
-            get
-            {
-                return -1000 - 100;
-            }
+            get { return -1000 - 100; }
         }
 
-        public void OnProvidersExecuting(ActionDescriptorProviderContext context)
-        {
-        }
+        public void OnProvidersExecuting(ActionDescriptorProviderContext context) { }
 
         public void OnProvidersExecuted(ActionDescriptorProviderContext context)
         {

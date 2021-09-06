@@ -12,7 +12,11 @@ using System.Text;
 
 namespace System.Data.Odbc
 {
-    public sealed partial class OdbcParameter : DbParameter, ICloneable, IDataParameter, IDbDataParameter
+    public sealed partial class OdbcParameter
+        : DbParameter,
+          ICloneable,
+          IDataParameter,
+          IDbDataParameter
     {
         private bool _hasChanged;
         private bool _userSpecifiedType;
@@ -41,15 +45,14 @@ namespace System.Data.Odbc
         private byte _scale;
         private bool _hasScale;
 
-
         private ODBC32.SQL_C _boundSqlCType;
-        private ODBC32.SQL_TYPE _boundParameterType;       // if we bound already that is the type we used
+        private ODBC32.SQL_TYPE _boundParameterType; // if we bound already that is the type we used
         private int _boundSize;
         private int _boundScale;
         private IntPtr _boundBuffer;
         private IntPtr _boundIntbuffer;
-        private TypeMap? _originalbindtype;         // the original type in case we had to change the bindtype
-                                                   // (e.g. decimal to string)
+        private TypeMap? _originalbindtype; // the original type in case we had to change the bindtype
+        // (e.g. decimal to string)
         private byte _internalPrecision;
         private bool _internalShouldSerializeSize;
         private int _internalSize;
@@ -100,19 +103,19 @@ namespace System.Data.Odbc
             SourceColumn = sourcecolumn;
         }
 
-
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        public OdbcParameter(string? parameterName,
-                             OdbcType odbcType,
-                             int size,
-                             ParameterDirection parameterDirection,
-                             bool isNullable,
-                             byte precision,
-                             byte scale,
-                             string? srcColumn,
-                             DataRowVersion srcVersion,
-                             object? value
-                             ) : this()
+        public OdbcParameter(
+            string? parameterName,
+            OdbcType odbcType,
+            int size,
+            ParameterDirection parameterDirection,
+            bool isNullable,
+            byte precision,
+            byte scale,
+            string? srcColumn,
+            DataRowVersion srcVersion,
+            object? value
+        ) : this()
         { // V1.0 everything
             this.ParameterName = parameterName;
             this.OdbcType = odbcType;
@@ -127,12 +130,18 @@ namespace System.Data.Odbc
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        public OdbcParameter(string? parameterName,
-                                 OdbcType odbcType, int size,
-                                 ParameterDirection parameterDirection,
-                                 byte precision, byte scale,
-                                 string? sourceColumn, DataRowVersion sourceVersion, bool sourceColumnNullMapping,
-                                 object? value) : this()
+        public OdbcParameter(
+            string? parameterName,
+            OdbcType odbcType,
+            int size,
+            ParameterDirection parameterDirection,
+            byte precision,
+            byte scale,
+            string? sourceColumn,
+            DataRowVersion sourceVersion,
+            bool sourceColumnNullMapping,
+            object? value
+        ) : this()
         { // V2.0 everything - round trip all browsable properties + precision/scale
             this.ParameterName = parameterName;
             this.OdbcType = odbcType;
@@ -173,8 +182,8 @@ namespace System.Data.Odbc
         }
 
         [
-        DefaultValue(OdbcType.NChar),
-        System.Data.Common.DbProviderSpecificTypePropertyAttribute(true),
+            DefaultValue(OdbcType.NChar),
+            System.Data.Common.DbProviderSpecificTypePropertyAttribute(true),
         ]
         public OdbcType OdbcType
         {
@@ -206,18 +215,12 @@ namespace System.Data.Odbc
 
         internal bool HasChanged
         {
-            set
-            {
-                _hasChanged = value;
-            }
+            set { _hasChanged = value; }
         }
 
         internal bool UserSpecifiedType
         {
-            get
-            {
-                return _userSpecifiedType;
-            }
+            get { return _userSpecifiedType; }
         }
 
         [AllowNull]
@@ -240,14 +243,8 @@ namespace System.Data.Odbc
 
         public new byte Precision
         {
-            get
-            {
-                return PrecisionInternal;
-            }
-            set
-            {
-                PrecisionInternal = value;
-            }
+            get { return PrecisionInternal; }
+            set { PrecisionInternal = value; }
         }
         internal byte PrecisionInternal
         {
@@ -276,14 +273,8 @@ namespace System.Data.Odbc
 
         public new byte Scale
         {
-            get
-            {
-                return ScaleInternal;
-            }
-            set
-            {
-                ScaleInternal = value;
-            }
+            get { return ScaleInternal; }
+            set { ScaleInternal = value; }
         }
         internal byte ScaleInternal
         {
@@ -327,16 +318,22 @@ namespace System.Data.Odbc
             {
                 if (ODBC32.SQL_C.NUMERIC == _typemap!._sql_c)
                 {
-                    cch = 62;  // (DecimalMaxPrecision+sign+terminator)*BytesPerUnicodeCharacter
+                    cch = 62; // (DecimalMaxPrecision+sign+terminator)*BytesPerUnicodeCharacter
                 }
                 else
                 {
                     cch = _internalSize;
                     if (!_internalShouldSerializeSize || 0x3fffffff <= cch || cch < 0)
                     {
-                        Debug.Assert((ODBC32.SQL_C.WCHAR == _bindtype._sql_c) || (ODBC32.SQL_C.BINARY == _bindtype._sql_c), "not wchar or binary");
-                        if (!_internalShouldSerializeSize && (0 != (ParameterDirection.Output & _internalDirection)))
-                        {
+                        Debug.Assert(
+                            (ODBC32.SQL_C.WCHAR == _bindtype._sql_c)
+                                || (ODBC32.SQL_C.BINARY == _bindtype._sql_c),
+                            "not wchar or binary"
+                        );
+                        if (
+                            !_internalShouldSerializeSize
+                            && (0 != (ParameterDirection.Output & _internalDirection))
+                        ) {
                             throw ADP.UninitializedParameterSize(ordinal, _bindtype._type);
                         }
                         if ((null == value) || Convert.IsDBNull(value))
@@ -347,13 +344,14 @@ namespace System.Data.Odbc
                         {
                             cch = ((string)value).Length - offset;
 
-                            if ((0 != (ParameterDirection.Output & _internalDirection)) && (0x3fffffff <= _internalSize))
-                            {
+                            if (
+                                (0 != (ParameterDirection.Output & _internalDirection))
+                                && (0x3fffffff <= _internalSize)
+                            ) {
                                 // restrict output parameters when user set Size to Int32.MaxValue
                                 // to the greater of intput size or 8K
                                 cch = Math.Max(cch, 4 * 1024); // MDAC 69224
                             }
-
 
                             // the following code causes failure against SQL 6.5
                             // ERROR [HY104] [Microsoft][ODBC SQL Server Driver]Invalid precision value
@@ -364,24 +362,28 @@ namespace System.Data.Odbc
                             // MDAC 76227: Code is required for japanese client/server tests.
                             // If this causes regressions with Jet please doc here including bug#. ([....])
                             //
-                            if ((ODBC32.SQL_TYPE.CHAR == _bindtype._sql_type)
+                            if (
+                                (ODBC32.SQL_TYPE.CHAR == _bindtype._sql_type)
                                 || (ODBC32.SQL_TYPE.VARCHAR == _bindtype._sql_type)
-                                || (ODBC32.SQL_TYPE.LONGVARCHAR == _bindtype._sql_type))
-                            {
+                                || (ODBC32.SQL_TYPE.LONGVARCHAR == _bindtype._sql_type)
+                            ) {
                                 cch = System.Text.Encoding.Default.GetMaxByteCount(cch);
                             }
                         }
                         else if (value is char[])
                         {
                             cch = ((char[])value).Length - offset;
-                            if ((0 != (ParameterDirection.Output & _internalDirection)) && (0x3fffffff <= _internalSize))
-                            {
+                            if (
+                                (0 != (ParameterDirection.Output & _internalDirection))
+                                && (0x3fffffff <= _internalSize)
+                            ) {
                                 cch = Math.Max(cch, 4 * 1024); // MDAC 69224
                             }
-                            if ((ODBC32.SQL_TYPE.CHAR == _bindtype._sql_type)
+                            if (
+                                (ODBC32.SQL_TYPE.CHAR == _bindtype._sql_type)
                                 || (ODBC32.SQL_TYPE.VARCHAR == _bindtype._sql_type)
-                                || (ODBC32.SQL_TYPE.LONGVARCHAR == _bindtype._sql_type))
-                            {
+                                || (ODBC32.SQL_TYPE.LONGVARCHAR == _bindtype._sql_type)
+                            ) {
                                 cch = System.Text.Encoding.Default.GetMaxByteCount(cch);
                             }
                         }
@@ -389,15 +391,20 @@ namespace System.Data.Odbc
                         {
                             cch = ((byte[])value).Length - offset;
 
-                            if ((0 != (ParameterDirection.Output & _internalDirection)) && (0x3fffffff <= _internalSize))
-                            {
+                            if (
+                                (0 != (ParameterDirection.Output & _internalDirection))
+                                && (0x3fffffff <= _internalSize)
+                            ) {
                                 // restrict output parameters when user set Size to Int32.MaxValue
                                 // to the greater of intput size or 8K
                                 cch = Math.Max(cch, 8 * 1024); // MDAC 69224
                             }
                         }
 #if DEBUG
-                        else { Debug.Fail("not expecting this"); }
+                        else
+                        {
+                            Debug.Fail("not expecting this");
+                        }
 #endif
                         // Note: ColumnSize should never be 0,
                         // this represents the size of the column on the backend.
@@ -408,11 +415,12 @@ namespace System.Data.Odbc
                     }
                 }
             }
-            Debug.Assert((0 <= cch) && (cch < 0x3fffffff), $"GetColumnSize: cch = {cch} out of range, _internalShouldSerializeSize = {_internalShouldSerializeSize}, _internalSize = {_internalSize}");
+            Debug.Assert(
+                (0 <= cch) && (cch < 0x3fffffff),
+                $"GetColumnSize: cch = {cch} out of range, _internalShouldSerializeSize = {_internalShouldSerializeSize}, _internalSize = {_internalSize}"
+            );
             return cch;
         }
-
-
 
         // Return the count of bytes for the data (size in bytes for the native buffer)
         //
@@ -444,8 +452,12 @@ namespace System.Data.Odbc
                 {
                     cch = 0;
                 }
-                if (_internalShouldSerializeSize && (_internalSize >= 0) && (_internalSize < cch) && (_bindtype == _originalbindtype))
-                {
+                if (
+                    _internalShouldSerializeSize
+                    && (_internalSize >= 0)
+                    && (_internalSize < cch)
+                    && (_bindtype == _originalbindtype)
+                ) {
                     cch = _internalSize;
                 }
                 if (twobytesperunit)
@@ -453,7 +465,10 @@ namespace System.Data.Odbc
                     cch *= 2;
                 }
             }
-            Debug.Assert((0 <= cch) && (cch < 0x3fffffff), $"GetValueSize: cch = {cch} out of range, _internalShouldSerializeSize = {_internalShouldSerializeSize}, _internalSize = {_internalSize}");
+            Debug.Assert(
+                (0 <= cch) && (cch < 0x3fffffff),
+                $"GetValueSize: cch = {cch} out of range, _internalShouldSerializeSize = {_internalShouldSerializeSize}, _internalSize = {_internalSize}"
+            );
             return cch;
         }
 
@@ -473,7 +488,11 @@ namespace System.Data.Odbc
                     ccb = _internalSize;
                     if (!_internalShouldSerializeSize || (0x3fffffff <= ccb) || (ccb < 0))
                     {
-                        Debug.Assert((ODBC32.SQL_C.WCHAR == _bindtype._sql_c) || (ODBC32.SQL_C.BINARY == _bindtype._sql_c), "not wchar or binary");
+                        Debug.Assert(
+                            (ODBC32.SQL_C.WCHAR == _bindtype._sql_c)
+                                || (ODBC32.SQL_C.BINARY == _bindtype._sql_c),
+                            "not wchar or binary"
+                        );
                         if ((ccb <= 0) && (0 != (ParameterDirection.Output & _internalDirection)))
                         {
                             throw ADP.UninitializedParameterSize(ordinal, _bindtype._type);
@@ -502,10 +521,15 @@ namespace System.Data.Odbc
                             ccb = ((byte[])value).Length - offset;
                         }
 #if DEBUG
-                        else { Debug.Fail("not expecting this"); }
-#endif
-                        if ((0 != (ParameterDirection.Output & _internalDirection)) && (0x3fffffff <= _internalSize))
+                        else
                         {
+                            Debug.Fail("not expecting this");
+                        }
+#endif
+                        if (
+                            (0 != (ParameterDirection.Output & _internalDirection))
+                            && (0x3fffffff <= _internalSize)
+                        ) {
                             // restrict output parameters when user set Size to Int32.MaxValue
                             // to the greater of intput size or 8K
                             ccb = Math.Max(ccb, 8 * 1024); // MDAC 69224
@@ -513,15 +537,21 @@ namespace System.Data.Odbc
                     }
                     else if (ODBC32.SQL_C.WCHAR == _bindtype._sql_c)
                     {
-                        if ((value is string) && (ccb < ((string)value).Length) && (_bindtype == _originalbindtype))
-                        {
+                        if (
+                            (value is string)
+                            && (ccb < ((string)value).Length)
+                            && (_bindtype == _originalbindtype)
+                        ) {
                             // silently truncate ... MDAC 84408 ... do not truncate upgraded values ... MDAC 84706
                             ccb = ((string)value).Length;
                         }
                         ccb = (ccb * 2) + 2; // allow for null termination
                     }
-                    else if ((value is byte[]) && (ccb < ((byte[])value).Length) && (_bindtype == _originalbindtype))
-                    {
+                    else if (
+                        (value is byte[])
+                        && (ccb < ((byte[])value).Length)
+                        && (_bindtype == _originalbindtype)
+                    ) {
                         // silently truncate ... MDAC 84408 ... do not truncate upgraded values ... MDAC 84706
                         ccb = ((byte[])value).Length;
                     }
@@ -544,7 +574,7 @@ namespace System.Data.Odbc
                         // devnote: If the userspecified precision (_internalPrecision) is less than the actual values precision
                         // we silently adjust the userspecified precision to the values precision.
                         byte precision = ((SqlDecimal)(decimal)value).Precision;
-                        _internalPrecision = Math.Max(_internalPrecision, precision);   // silently adjust the precision
+                        _internalPrecision = Math.Max(_internalPrecision, precision); // silently adjust the precision
                     }
                     return _internalPrecision;
                 }
@@ -556,7 +586,6 @@ namespace System.Data.Odbc
             }
             return 0;
         }
-
 
         private byte GetParameterScale(object? value)
         {
@@ -589,7 +618,9 @@ namespace System.Data.Odbc
         {
             _internalValue = Value;
             // we should coerce the parameter value at this time.
-            _internalPrecision = ShouldSerializePrecision() ? PrecisionInternal : ValuePrecision(_internalValue);
+            _internalPrecision = ShouldSerializePrecision()
+                ? PrecisionInternal
+                : ValuePrecision(_internalValue);
             _internalShouldSerializeSize = ShouldSerializeSize();
             _internalSize = _internalShouldSerializeSize ? Size : ValueSize(_internalValue);
             _internalDirection = Direction;
@@ -618,8 +649,11 @@ namespace System.Data.Odbc
             _bindtype = null;
         }
 
-        internal void PrepareForBind(OdbcCommand command, short ordinal, ref int parameterBufferSize)
-        {
+        internal void PrepareForBind(
+            OdbcCommand command,
+            short ordinal,
+            ref int parameterBufferSize
+        ) {
             Debug.Assert(command.Connection != null);
 
             // make a snapshot of the current properties. Properties may change while we work on them
@@ -630,7 +664,6 @@ namespace System.Data.Odbc
             int offset = _internalOffset;
             int size = _internalSize;
             ODBC32.SQL_C sql_c_type;
-
 
             // offset validation based on the values type
             //
@@ -672,11 +705,10 @@ namespace System.Data.Odbc
                 case ODBC32.SQL_TYPE.DECIMAL:
                 case ODBC32.SQL_TYPE.NUMERIC:
                     if (
-                        !command.Connection.IsV3Driver                                      // for non V3 driver we always do the conversion
-                        || !command.Connection.TestTypeSupport(ODBC32.SQL_TYPE.NUMERIC)     // otherwise we convert if the driver does not support numeric
-                        || command.Connection.TestRestrictedSqlBindType(_bindtype._sql_type)// or the type is not supported
-                    )
-                    {
+                        !command.Connection.IsV3Driver // for non V3 driver we always do the conversion
+                        || !command.Connection.TestTypeSupport(ODBC32.SQL_TYPE.NUMERIC) // otherwise we convert if the driver does not support numeric
+                        || command.Connection.TestRestrictedSqlBindType(_bindtype._sql_type) // or the type is not supported
+                    ) {
                         // No support for NUMERIC
                         // Change the type
                         _bindtype = TypeMap._VarChar;
@@ -715,8 +747,14 @@ namespace System.Data.Odbc
                     {
                         // No support for WCHAR, WVARCHAR or WLONGVARCHAR
                         // Change the type
-                        if (ODBC32.SQL_TYPE.WCHAR == _bindtype._sql_type) { _bindtype = TypeMap._Char; }
-                        else if (ODBC32.SQL_TYPE.WVARCHAR == _bindtype._sql_type) { _bindtype = TypeMap._VarChar; }
+                        if (ODBC32.SQL_TYPE.WCHAR == _bindtype._sql_type)
+                        {
+                            _bindtype = TypeMap._Char;
+                        }
+                        else if (ODBC32.SQL_TYPE.WVARCHAR == _bindtype._sql_type)
+                        {
+                            _bindtype = TypeMap._VarChar;
+                        }
                         else if (ODBC32.SQL_TYPE.WLONGVARCHAR == _bindtype._sql_type)
                         {
                             _bindtype = TypeMap._Text;
@@ -742,13 +780,16 @@ namespace System.Data.Odbc
                         {
                             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
                             CultureInfo culInfo = new CultureInfo(lcid);
-                            Encoding cpe = System.Text.Encoding.GetEncoding(culInfo.TextInfo.ANSICodePage);
+                            Encoding cpe = System.Text.Encoding.GetEncoding(
+                                culInfo.TextInfo.ANSICodePage
+                            );
                             value = cpe.GetBytes(value.ToString()!);
                             size = ((byte[])value).Length;
                         }
                     }
                 }
-            };
+            }
+            ;
 
             int cbParameterSize = GetParameterSize(value, offset, ordinal); // count of bytes for the data, for SQLBindParameter
 
@@ -788,8 +829,13 @@ namespace System.Data.Odbc
             parameterBufferSize += (cbParameterSize + IntPtr.Size);
         }
 
-        internal void Bind(OdbcStatementHandle hstmt, OdbcCommand command, short ordinal, CNativeBuffer parameterBuffer, bool allowReentrance)
-        {
+        internal void Bind(
+            OdbcStatementHandle hstmt,
+            OdbcCommand command,
+            short ordinal,
+            CNativeBuffer parameterBuffer,
+            bool allowReentrance
+        ) {
             Debug.Assert(command.Connection != null);
 
             ODBC32.RetCode retcode;
@@ -799,13 +845,16 @@ namespace System.Data.Odbc
             int offset = _preparedOffset;
             int size = _preparedSize;
             object? value = _preparedValue;
-            int cbValueSize = GetValueSize(value, offset);             // count of bytes for the data
-            int cchSize = GetColumnSize(value, offset, ordinal);   // count of bytes for the data, used to allocate the buffer length
+            int cbValueSize = GetValueSize(value, offset); // count of bytes for the data
+            int cchSize = GetColumnSize(value, offset, ordinal); // count of bytes for the data, used to allocate the buffer length
             byte precision = GetParameterPrecision(value);
             byte scale = GetParameterScale(value);
             int cbActual;
 
-            HandleRef valueBuffer = parameterBuffer.PtrOffset(_preparedValueOffset, _preparedBufferSize);
+            HandleRef valueBuffer = parameterBuffer.PtrOffset(
+                _preparedValueOffset,
+                _preparedBufferSize
+            );
             HandleRef intBuffer = parameterBuffer.PtrOffset(_preparedIntOffset, IntPtr.Size);
 
             // for the numeric datatype we need to do some special case handling ...
@@ -833,7 +882,10 @@ namespace System.Data.Odbc
                 //
                 if (ODBC32.SQL_PARAM.INPUT != sqldirection)
                 {
-                    parameterBuffer.WriteInt16(_preparedValueOffset, (short)(((ushort)scale << 8) | (ushort)precision));
+                    parameterBuffer.WriteInt16(
+                        _preparedValueOffset,
+                        (short)(((ushort)scale << 8) | (ushort)precision)
+                    );
                 }
             }
             else
@@ -841,35 +893,35 @@ namespace System.Data.Odbc
                 SetInputValue(value, sql_c_type, cbValueSize, size, offset, parameterBuffer);
             }
 
-
             // Try to reuse existing bindings if
             //  the binding is valid (means we already went through binding all parameters)
             //  the parametercollection is bound already
             //  the bindtype ParameterType did not change (forced upgrade)
 
-            if (!_hasChanged
+            if (
+                !_hasChanged
                 && (_boundSqlCType == sql_c_type)
                 && (_boundParameterType == _bindtype!._sql_type)
                 && (_boundSize == cchSize)
                 && (_boundScale == scale)
                 && (_boundBuffer == valueBuffer.Handle)
                 && (_boundIntbuffer == intBuffer.Handle)
-            )
-            {
+            ) {
                 return;
             }
 
             //SQLBindParameter
             retcode = hstmt.BindParameter(
-                                    ordinal,                    // Parameter Number
-                                    (short)sqldirection,        // InputOutputType
-                                    sql_c_type,                 // ValueType
-                                    _bindtype!._sql_type,        // ParameterType
-                                    (IntPtr)cchSize,            // ColumnSize
-                                    (IntPtr)scale,              // DecimalDigits
-                                    valueBuffer,                // ParameterValuePtr
-                                    (IntPtr)_preparedBufferSize,
-                                    intBuffer);                 // StrLen_or_IndPtr
+                ordinal, // Parameter Number
+                (short)sqldirection, // InputOutputType
+                sql_c_type, // ValueType
+                _bindtype!._sql_type, // ParameterType
+                (IntPtr)cchSize, // ColumnSize
+                (IntPtr)scale, // DecimalDigits
+                valueBuffer, // ParameterValuePtr
+                (IntPtr)_preparedBufferSize,
+                intBuffer
+            ); // StrLen_or_IndPtr
 
             if (ODBC32.RetCode.SUCCESS != retcode)
             {
@@ -894,37 +946,49 @@ namespace System.Data.Odbc
 
             if (ODBC32.SQL_C.NUMERIC == sql_c_type)
             {
-                OdbcDescriptorHandle hdesc = command.GetDescriptorHandle(ODBC32.SQL_ATTR.APP_PARAM_DESC);
+                OdbcDescriptorHandle hdesc = command.GetDescriptorHandle(
+                    ODBC32.SQL_ATTR.APP_PARAM_DESC
+                );
                 // descriptor handle is cached on command wrapper, don't release it
 
                 // Set descriptor Type
                 //
                 //SQLSetDescField(hdesc, i+1, SQL_DESC_TYPE, (void *)SQL_C_NUMERIC, 0);
-                retcode = hdesc.SetDescriptionField1(ordinal, ODBC32.SQL_DESC.TYPE, (IntPtr)ODBC32.SQL_C.NUMERIC);
+                retcode = hdesc.SetDescriptionField1(
+                    ordinal,
+                    ODBC32.SQL_DESC.TYPE,
+                    (IntPtr)ODBC32.SQL_C.NUMERIC
+                );
 
                 if (ODBC32.RetCode.SUCCESS != retcode)
                 {
                     command.Connection.HandleError(hstmt, retcode);
                 }
-
 
                 // Set precision
                 //
                 cbActual = (int)precision;
                 //SQLSetDescField(hdesc, i+1, SQL_DESC_PRECISION, (void *)precision, 0);
-                retcode = hdesc.SetDescriptionField1(ordinal, ODBC32.SQL_DESC.PRECISION, (IntPtr)cbActual);
+                retcode = hdesc.SetDescriptionField1(
+                    ordinal,
+                    ODBC32.SQL_DESC.PRECISION,
+                    (IntPtr)cbActual
+                );
 
                 if (ODBC32.RetCode.SUCCESS != retcode)
                 {
                     command.Connection.HandleError(hstmt, retcode);
                 }
 
-
                 // Set scale
                 //
                 // SQLSetDescField(hdesc, i+1, SQL_DESC_SCALE,  (void *)llen, 0);
                 cbActual = (int)scale;
-                retcode = hdesc.SetDescriptionField1(ordinal, ODBC32.SQL_DESC.SCALE, (IntPtr)cbActual);
+                retcode = hdesc.SetDescriptionField1(
+                    ordinal,
+                    ODBC32.SQL_DESC.SCALE,
+                    (IntPtr)cbActual
+                );
 
                 if (ODBC32.RetCode.SUCCESS != retcode)
                 {
@@ -934,7 +998,11 @@ namespace System.Data.Odbc
                 // Set data pointer
                 //
                 // SQLSetDescField(hdesc, i+1, SQL_DESC_DATA_PTR,  (void *)&numeric, 0);
-                retcode = hdesc.SetDescriptionField2(ordinal, ODBC32.SQL_DESC.DATA_PTR, valueBuffer);
+                retcode = hdesc.SetDescriptionField2(
+                    ordinal,
+                    ODBC32.SQL_DESC.DATA_PTR,
+                    valueBuffer
+                );
 
                 if (ODBC32.RetCode.SUCCESS != retcode)
                 {
@@ -947,7 +1015,8 @@ namespace System.Data.Odbc
         { //Handle any output params
             // No value is available if the user fiddles with the parameters properties
             //
-            if (_hasChanged) return;
+            if (_hasChanged)
+                return;
 
             if ((null != _bindtype) && (_internalDirection != ParameterDirection.Input))
             {
@@ -961,7 +1030,11 @@ namespace System.Data.Odbc
                 }
                 else if ((0 <= cbActual) || (cbActual == ODBC32.SQL_NTS))
                 { // safeguard
-                    Value = parameterBuffer.MarshalToManaged(_preparedValueOffset, _boundSqlCType, cbActual);
+                    Value = parameterBuffer.MarshalToManaged(
+                        _preparedValueOffset,
+                        _boundSqlCType,
+                        cbActual
+                    );
 
                     if (_boundSqlCType == ODBC32.SQL_C.CHAR)
                     {
@@ -969,15 +1042,24 @@ namespace System.Data.Odbc
                         {
                             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
                             CultureInfo culInfo = new CultureInfo(lcid);
-                            Encoding cpe = System.Text.Encoding.GetEncoding(culInfo.TextInfo.ANSICodePage);
+                            Encoding cpe = System.Text.Encoding.GetEncoding(
+                                culInfo.TextInfo.ANSICodePage
+                            );
                             Value = cpe.GetString((byte[])Value);
                         }
                     }
 
-                    if ((typemap != _typemap) && (null != Value) && !Convert.IsDBNull(Value) && (Value.GetType() != _typemap!._type))
-                    {
+                    if (
+                        (typemap != _typemap)
+                        && (null != Value)
+                        && !Convert.IsDBNull(Value)
+                        && (Value.GetType() != _typemap!._type)
+                    ) {
                         Debug.Assert(ODBC32.SQL_C.NUMERIC == _typemap._sql_c, "unexpected");
-                        Value = decimal.Parse((string)Value, System.Globalization.CultureInfo.CurrentCulture);
+                        Value = decimal.Parse(
+                            (string)Value,
+                            System.Globalization.CultureInfo.CurrentCulture
+                        );
                     }
                 }
             }
@@ -1046,16 +1128,27 @@ namespace System.Data.Odbc
             //CoercedValue = null;
         }
 
-        internal void SetInputValue(object? value, ODBC32.SQL_C sql_c_type, int cbsize, int sizeorprecision, int offset, CNativeBuffer parameterBuffer)
-        { //Handle any input params
-            if ((ParameterDirection.Input == _internalDirection) || (ParameterDirection.InputOutput == _internalDirection))
-            {
+        internal void SetInputValue(
+            object? value,
+            ODBC32.SQL_C sql_c_type,
+            int cbsize,
+            int sizeorprecision,
+            int offset,
+            CNativeBuffer parameterBuffer
+        ) { //Handle any input params
+            if (
+                (ParameterDirection.Input == _internalDirection)
+                || (ParameterDirection.InputOutput == _internalDirection)
+            ) {
                 //Note: (lang) "null" means to use the servers default (not DBNull).
                 //We probably should just not have bound this parameter, period, but that
                 //would mess up the users question marks, etc...
                 if ((null == value))
                 {
-                    parameterBuffer.WriteIntPtr(_preparedIntOffset, (IntPtr)ODBC32.SQL_DEFAULT_PARAM);
+                    parameterBuffer.WriteIntPtr(
+                        _preparedIntOffset,
+                        (IntPtr)ODBC32.SQL_DEFAULT_PARAM
+                    );
                 }
                 else if (Convert.IsDBNull(value))
                 {
@@ -1077,7 +1170,13 @@ namespace System.Data.Odbc
                     }
 
                     //Place the input param value into the native buffer
-                    parameterBuffer.MarshalToNative(_preparedValueOffset, value, sql_c_type, sizeorprecision, offset);
+                    parameterBuffer.MarshalToNative(
+                        _preparedValueOffset,
+                        value,
+                        sql_c_type,
+                        sizeorprecision,
+                        offset
+                    );
                 }
             }
             else
@@ -1113,10 +1212,7 @@ namespace System.Data.Odbc
 
         public override object? Value
         { // V1.2.3300, XXXParameter V1.0.3300
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
             set
             {
                 _coercedValue = null;

@@ -32,8 +32,8 @@ namespace Generators
         //         }
         //     }
 
-        public void Initialize(GeneratorInitializationContext context)
-            => context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
+        public void Initialize(GeneratorInitializationContext context) =>
+            context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
 
         public void Execute(GeneratorExecutionContext context)
         {
@@ -44,7 +44,11 @@ namespace Generators
                 return;
             }
 
-            Parser? p = new Parser(context.Compilation, context.ReportDiagnostic, context.CancellationToken);
+            Parser? p = new Parser(
+                context.Compilation,
+                context.ReportDiagnostic,
+                context.CancellationToken
+            );
             EventSourceClass[]? eventSources = p.GetEventSourceClasses(receiver.CandidateClasses);
 
             if (eventSources?.Length > 0)
@@ -77,15 +81,19 @@ namespace Generators
                         {
                             // Check if Span length matches before allocating the string to check more
                             int length = ca.Name.Span.Length;
-                            if (length != EventSourceAttribute.Length && length != EventSourceAttributeShort.Length)
-                            {
+                            if (
+                                length != EventSourceAttribute.Length
+                                && length != EventSourceAttributeShort.Length
+                            ) {
                                 continue;
                             }
 
                             // Possible match, now check the string value
                             string attrName = ca.Name.ToString();
-                            if (attrName == EventSourceAttribute || attrName == EventSourceAttributeShort)
-                            {
+                            if (
+                                attrName == EventSourceAttribute
+                                || attrName == EventSourceAttributeShort
+                            ) {
                                 // Match add to candidates
                                 _candidateClasses ??= new List<ClassDeclarationSyntax>();
                                 _candidateClasses.Add(classDeclaration);

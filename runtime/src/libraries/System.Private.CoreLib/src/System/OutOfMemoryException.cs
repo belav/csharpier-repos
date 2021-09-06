@@ -9,22 +9,23 @@ namespace System
     /// The exception class for OOM.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class OutOfMemoryException : SystemException
     {
-        public OutOfMemoryException() : base(
+        public OutOfMemoryException()
+            : base(
 #if CORECLR
-            GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
+                GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
 #else
-            SR.Arg_OutOfMemoryException
+                SR.Arg_OutOfMemoryException
 #endif
-            )
-        {
+            ) {
             HResult = HResults.COR_E_OUTOFMEMORY;
         }
 
-        public OutOfMemoryException(string? message)
-            : base(message)
+        public OutOfMemoryException(string? message) : base(message)
         {
             HResult = HResults.COR_E_OUTOFMEMORY;
         }
@@ -35,8 +36,7 @@ namespace System
             HResult = HResults.COR_E_OUTOFMEMORY;
         }
 
-        protected OutOfMemoryException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected OutOfMemoryException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -8,10 +8,14 @@ namespace System.Collections.Concurrent.Tests
     {
         public static TValue GetOrAdd<TKey, TValue, TArg>(
             this ConcurrentDictionary<TKey, TValue> dictionary,
-            TKey key, Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument)
-        {
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (valueFactory == null) throw new ArgumentNullException(nameof(valueFactory));
+            TKey key,
+            Func<TKey, TArg, TValue> valueFactory,
+            TArg factoryArgument
+        ) {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (valueFactory == null)
+                throw new ArgumentNullException(nameof(valueFactory));
 
             while (true)
             {
@@ -27,11 +31,17 @@ namespace System.Collections.Concurrent.Tests
 
         public static TValue AddOrUpdate<TKey, TValue, TArg>(
             this ConcurrentDictionary<TKey, TValue> dictionary,
-            TKey key, Func<TKey, TArg, TValue> addValueFactory, Func<TKey, TValue, TArg, TValue> updateValueFactory, TArg factoryArgument)
-        {
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (addValueFactory == null) throw new ArgumentNullException(nameof(addValueFactory));
-            if (updateValueFactory == null) throw new ArgumentNullException(nameof(updateValueFactory));
+            TKey key,
+            Func<TKey, TArg, TValue> addValueFactory,
+            Func<TKey, TValue, TArg, TValue> updateValueFactory,
+            TArg factoryArgument
+        ) {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (addValueFactory == null)
+                throw new ArgumentNullException(nameof(addValueFactory));
+            if (updateValueFactory == null)
+                throw new ArgumentNullException(nameof(updateValueFactory));
 
             while (true)
             {

@@ -102,7 +102,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var dictionary = new ModelStateDictionary();
             var exception = new Exception();
             var provider = new TestModelMetadataProvider();
-            var metadata = provider.GetMetadataForProperty(typeof(TestModel), nameof(TestModel.Text));
+            var metadata = provider.GetMetadataForProperty(
+                typeof(TestModel),
+                nameof(TestModel.Text)
+            );
 
             // Act
             dictionary.AddModelError<TestModel>(model => model.Text, exception, metadata);
@@ -140,7 +143,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var dictionary = new ModelStateDictionary();
             var exception = new Exception();
             var provider = new TestModelMetadataProvider();
-            var metadata = provider.GetMetadataForProperty(typeof(ChildModel), nameof(ChildModel.Text));
+            var metadata = provider.GetMetadataForProperty(
+                typeof(ChildModel),
+                nameof(ChildModel.Text)
+            );
 
             // Act
             dictionary.AddModelError<TestModel>(model => model.Child.Text, exception, metadata);
@@ -178,7 +184,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var dictionary = new ModelStateDictionary();
             var exception = new Exception();
             var provider = new TestModelMetadataProvider();
-            var metadata = provider.GetMetadataForProperty(typeof(ChildModel), nameof(ChildModel.Value));
+            var metadata = provider.GetMetadataForProperty(
+                typeof(ChildModel),
+                nameof(ChildModel.Value)
+            );
 
             // Act
             dictionary.AddModelError<TestModel>(model => model.Child.Value, exception, metadata);

@@ -36,7 +36,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void ComplexExpressionsTest273()
         {
             var xml = "books.xml";
-            var testExpression = @"local-name(/bookstore/magazine[3]/articles/story1/text()/following::*)";
+            var testExpression =
+                @"local-name(/bookstore/magazine[3]/articles/story1/text()/following::*)";
             var expected = @"details";
 
             Utils.XPathStringTest(xml, testExpression, expected);
@@ -54,7 +55,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"local-name(child::*/following::*[last()])";
             var expected = @"title";
 
-            Utils.XPathStringTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -65,7 +71,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void ComplexExpressionsTest275()
         {
             var xml = "books.xml";
-            var testExpression = @"name(/bookstore/magazine[3]/articles/story1/text()/following::*)";
+            var testExpression =
+                @"name(/bookstore/magazine[3]/articles/story1/text()/following::*)";
             var expected = @"details";
 
             Utils.XPathStringTest(xml, testExpression, expected);
@@ -83,7 +90,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"name(child::*/following::*[last()])";
             var expected = @"my:title";
 
-            Utils.XPathStringTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -94,7 +106,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void ComplexExpressionsTest277()
         {
             var xml = "books.xml";
-            var testExpression = @"namespace-uri(/bookstore/magazine[3]/articles/story1/text()/following::*)";
+            var testExpression =
+                @"namespace-uri(/bookstore/magazine[3]/articles/story1/text()/following::*)";
             var expected = @"";
 
             Utils.XPathStringTest(xml, testExpression, expected);
@@ -112,7 +125,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"namespace-uri(child::*/following::*[last()])";
             var expected = @"urn:http//www.placeholder-name-here.com/schema/";
 
-            Utils.XPathStringTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>

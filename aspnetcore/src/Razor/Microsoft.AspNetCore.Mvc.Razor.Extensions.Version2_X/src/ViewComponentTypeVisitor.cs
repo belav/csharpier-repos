@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public ViewComponentTypeVisitor(
             INamedTypeSymbol viewComponentAttribute,
             INamedTypeSymbol nonViewComponentAttribute,
-            List<INamedTypeSymbol> results)
-        {
+            List<INamedTypeSymbol> results
+        ) {
             _viewComponentAttribute = viewComponentAttribute;
             _nonViewComponentAttribute = nonViewComponentAttribute;
             _results = results;
@@ -56,20 +56,25 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                 return false;
             }
 
-            if (symbol.DeclaredAccessibility != Accessibility.Public ||
-                symbol.IsAbstract ||
-                symbol.IsGenericType ||
-                AttributeIsDefined(symbol, _nonViewComponentAttribute))
-            {
+            if (
+                symbol.DeclaredAccessibility != Accessibility.Public
+                || symbol.IsAbstract
+                || symbol.IsGenericType
+                || AttributeIsDefined(symbol, _nonViewComponentAttribute)
+            ) {
                 return false;
             }
 
-            return symbol.Name.EndsWith(ViewComponentTypes.ViewComponentSuffix, StringComparison.Ordinal) ||
-                AttributeIsDefined(symbol, _viewComponentAttribute);
+            return symbol.Name.EndsWith(
+                    ViewComponentTypes.ViewComponentSuffix,
+                    StringComparison.Ordinal
+                ) || AttributeIsDefined(symbol, _viewComponentAttribute);
         }
 
-        private static bool AttributeIsDefined(INamedTypeSymbol type, INamedTypeSymbol queryAttribute)
-        {
+        private static bool AttributeIsDefined(
+            INamedTypeSymbol type,
+            INamedTypeSymbol queryAttribute
+        ) {
             if (type == null || queryAttribute == null)
             {
                 return false;

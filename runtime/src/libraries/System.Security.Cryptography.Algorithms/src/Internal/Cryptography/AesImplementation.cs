@@ -66,7 +66,16 @@ namespace Internal.Cryptography
                 ValidateCFBFeedbackSize(FeedbackSize);
             }
 
-            return CreateTransformCore(Mode, Padding, rgbKey, rgbIV, BlockSize / BitsPerByte, this.GetPaddingSize(), FeedbackSize / BitsPerByte, encrypting);
+            return CreateTransformCore(
+                Mode,
+                Padding,
+                rgbKey,
+                rgbIV,
+                BlockSize / BitsPerByte,
+                this.GetPaddingSize(),
+                FeedbackSize / BitsPerByte,
+                encrypting
+            );
         }
 
         private static void ValidateCFBFeedbackSize(int feedback)
@@ -74,7 +83,13 @@ namespace Internal.Cryptography
             // only 8bits/128bits feedback would be valid.
             if (feedback != 8 && feedback != 128)
             {
-                throw new CryptographicException(string.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB));
+                throw new CryptographicException(
+                    string.Format(
+                        SR.Cryptography_CipherModeFeedbackNotSupported,
+                        feedback,
+                        CipherMode.CFB
+                    )
+                );
             }
         }
 

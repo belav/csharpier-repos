@@ -29,6 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ParameterBinding? FindParameter(
             IEntityType entityType,
             Type parameterType,
-            string parameterName);
+            string parameterName
+        );
     }
 }

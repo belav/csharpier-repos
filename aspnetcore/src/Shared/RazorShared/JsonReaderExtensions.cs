@@ -10,8 +10,11 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
 {
     internal static class JsonReaderExtensions
     {
-        public static bool ReadTokenAndAdvance(this JsonReader reader, JsonToken expectedTokenType, out object value)
-        {
+        public static bool ReadTokenAndAdvance(
+            this JsonReader reader,
+            JsonToken expectedTokenType,
+            out object value
+        ) {
             value = reader.Value;
             return reader.TokenType == expectedTokenType && reader.Read();
         }
@@ -52,7 +55,9 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
                 }
             }
 
-            throw new JsonSerializationException($"Could not find string property '{propertyName}'.");
+            throw new JsonSerializationException(
+                $"Could not find string property '{propertyName}'."
+            );
         }
     }
 }

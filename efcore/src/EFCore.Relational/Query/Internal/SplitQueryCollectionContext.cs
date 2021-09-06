@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public SplitQueryCollectionContext(
             object? parent,
             object? collection,
-            object[] parentIdentifier)
-        {
+            object[] parentIdentifier
+        ) {
             Parent = parent;
             Collection = collection;
             ParentIdentifier = parentIdentifier;

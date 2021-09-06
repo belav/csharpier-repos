@@ -9,7 +9,16 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [DllImport(Libraries.Advapi32, EntryPoint = "OpenServiceW", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern IntPtr OpenService(SafeServiceHandle? databaseHandle, string serviceName, int access);
+        [DllImport(
+            Libraries.Advapi32,
+            EntryPoint = "OpenServiceW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
+        internal static extern IntPtr OpenService(
+            SafeServiceHandle? databaseHandle,
+            string serviceName,
+            int access
+        );
     }
 }

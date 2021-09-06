@@ -11,8 +11,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     internal static partial class IIncrementalAnalyzerExtensions
     {
-        public static BackgroundAnalysisScope GetOverriddenBackgroundAnalysisScope(this IIncrementalAnalyzer incrementalAnalyzer, OptionSet options, BackgroundAnalysisScope defaultBackgroundAnalysisScope)
-        {
+        public static BackgroundAnalysisScope GetOverriddenBackgroundAnalysisScope(
+            this IIncrementalAnalyzer incrementalAnalyzer,
+            OptionSet options,
+            BackgroundAnalysisScope defaultBackgroundAnalysisScope
+        ) {
             // Unit testing analyzer has special semantics for analysis scope.
             if (incrementalAnalyzer is UnitTestingIncrementalAnalyzer)
             {

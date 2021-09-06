@@ -32,8 +32,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/>.</param>
         /// <param name="options">The <see cref="IOptions{DatabaseErrorPageOptions}"/>.</param>
-        public DatabaseDeveloperPageExceptionFilter(ILogger<DatabaseDeveloperPageExceptionFilter> logger, IOptions<DatabaseErrorPageOptions> options)
-        {
+        public DatabaseDeveloperPageExceptionFilter(
+            ILogger<DatabaseDeveloperPageExceptionFilter> logger,
+            IOptions<DatabaseErrorPageOptions> options
+        ) {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         }
@@ -42,8 +44,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         /// Handle <see cref="DbException"/> errors and output an HTML response with additional details.
         /// </summary>
         /// <inheritdoc />
-        public async Task HandleExceptionAsync(ErrorContext errorContext, Func<ErrorContext, Task> next)
-        {
+        public async Task HandleExceptionAsync(
+            ErrorContext errorContext,
+            Func<ErrorContext, Task> next
+        ) {
             if (!(errorContext.Exception is DbException))
             {
                 await next(errorContext);
@@ -52,9 +56,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             try
             {
                 // Look for DbContext classes registered in the service provider
-                var registeredContexts = errorContext.HttpContext.RequestServices.GetServices<DbContextOptions>()
-                    .Select(o => o.ContextType)
-                    .Distinct(); // Workaround for https://github.com/dotnet/efcore/issues/22341
+                var registeredContexts =
+                    errorContext.HttpContext.RequestServices.GetServices<DbContextOptions>()
+                        .Select(o => o.ContextType)
+                        .Distinct(); // Workaround for https://github.com/dotnet/efcore/issues/22341
 
                 if (registeredContexts.Any())
                 {
@@ -62,7 +67,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 
                     foreach (var registeredContext in registeredContexts)
                     {
-                        var details = await errorContext.HttpContext.GetContextDetailsAsync(registeredContext, _logger);
+                        var details = await errorContext.HttpContext.GetContextDetailsAsync(
+                            registeredContext,
+                            _logger
+                        );
 
                         if (details != null)
                         {
@@ -74,7 +82,12 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
                     {
                         var page = new DatabaseErrorPage
                         {
-                            Model = new DatabaseErrorPageModel(errorContext.Exception, contextDetails, _options, errorContext.HttpContext.Request.PathBase)
+                            Model = new DatabaseErrorPageModel(
+                                errorContext.Exception,
+                                contextDetails,
+                                _options,
+                                errorContext.HttpContext.Request.PathBase
+                            )
                         };
 
                         await page.ExecuteAsync(errorContext.HttpContext);

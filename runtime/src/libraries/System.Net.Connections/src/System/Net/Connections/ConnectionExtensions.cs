@@ -19,9 +19,12 @@ namespace System.Net.Connections
         /// <param name="properties">The connection properties to retrieve a property from.</param>
         /// <param name="property">If <paramref name="properties"/> contains a property of type <typeparamref name="T"/>, receives the property. Otherwise, default.</param>
         /// <returns>If <paramref name="properties"/> contains a property of type <typeparamref name="T"/>, true. Otherwise, false.</returns>
-        public static bool TryGet<T>(this IConnectionProperties properties, [MaybeNullWhen(false)] out T property)
-        {
-            if (properties == null) throw new ArgumentNullException(nameof(properties));
+        public static bool TryGet<T>(
+            this IConnectionProperties properties,
+            [MaybeNullWhen(false)] out T property
+        ) {
+            if (properties == null)
+                throw new ArgumentNullException(nameof(properties));
 
             if (properties.TryGet(typeof(T), out object? obj) && obj is T propertyValue)
             {
@@ -41,41 +44,72 @@ namespace System.Net.Connections
         /// <param name="factory">The factory to be filtered.</param>
         /// <param name="filter">The connection-level filter to apply on top of <paramref name="factory"/>.</param>
         /// <returns>A new filtered <see cref="ConnectionFactory"/>.</returns>
-        public static ConnectionFactory Filter(this ConnectionFactory factory, Func<Connection, IConnectionProperties?, CancellationToken, ValueTask<Connection>> filter)
-        {
-            if (factory == null) throw new ArgumentNullException(nameof(factory));
-            if (filter == null) throw new ArgumentNullException(nameof(filter));
+        public static ConnectionFactory Filter(
+            this ConnectionFactory factory,
+            Func<
+                Connection,
+                IConnectionProperties?,
+                CancellationToken,
+                ValueTask<Connection>
+            > filter
+        ) {
+            if (factory == null)
+                throw new ArgumentNullException(nameof(factory));
+            if (filter == null)
+                throw new ArgumentNullException(nameof(filter));
             return new ConnectionFilteringFactory(factory, filter);
         }
 
         private sealed class ConnectionFilteringFactory : ConnectionFactory
         {
             private readonly ConnectionFactory _baseFactory;
-            private readonly Func<Connection, IConnectionProperties?, CancellationToken, ValueTask<Connection>> _filter;
+            private readonly Func<
+                Connection,
+                IConnectionProperties?,
+                CancellationToken,
+                ValueTask<Connection>
+            > _filter;
 
-            public ConnectionFilteringFactory(ConnectionFactory baseFactory, Func<Connection, IConnectionProperties?, CancellationToken, ValueTask<Connection>> filter)
-            {
+            public ConnectionFilteringFactory(
+                ConnectionFactory baseFactory,
+                Func<
+                    Connection,
+                    IConnectionProperties?,
+                    CancellationToken,
+                    ValueTask<Connection>
+                > filter
+            ) {
                 _baseFactory = baseFactory;
                 _filter = filter;
             }
 
-            public override async ValueTask<Connection> ConnectAsync(EndPoint? endPoint, IConnectionProperties? options = null, CancellationToken cancellationToken = default)
-            {
-                Connection con = await _baseFactory.ConnectAsync(endPoint, options, cancellationToken).ConfigureAwait(false);
+            public override async ValueTask<Connection> ConnectAsync(
+                EndPoint? endPoint,
+                IConnectionProperties? options = null,
+                CancellationToken cancellationToken = default
+            ) {
+                Connection con = await _baseFactory.ConnectAsync(
+                        endPoint,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 try
                 {
                     return await _filter(con, options, cancellationToken).ConfigureAwait(false);
                 }
                 catch
                 {
-                    await con.CloseAsync(ConnectionCloseMethod.Abort, cancellationToken).ConfigureAwait(false);
+                    await con.CloseAsync(ConnectionCloseMethod.Abort, cancellationToken)
+                        .ConfigureAwait(false);
                     throw;
                 }
             }
 
             protected override void Dispose(bool disposing)
             {
-                if (disposing) _baseFactory.Dispose();
+                if (disposing)
+                    _baseFactory.Dispose();
             }
 
             protected override ValueTask DisposeAsyncCore()

@@ -24,26 +24,34 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DateTimeOffset expirationDate,
             IInternalXmlKeyManager keyManager,
             XElement keyElement,
-            IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories)
-            : base(keyId,
-                  creationDate,
-                  activationDate,
-                  expirationDate,
-                  new Lazy<IAuthenticatedEncryptorDescriptor>(GetLazyDescriptorDelegate(keyManager, keyElement)),
-                  encryptorFactories)
-        {
-        }
+            IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories
+        ) : base(
+            keyId,
+            creationDate,
+            activationDate,
+            expirationDate,
+            new Lazy<IAuthenticatedEncryptorDescriptor>(
+                GetLazyDescriptorDelegate(keyManager, keyElement)
+            ),
+            encryptorFactories
+        ) { }
 
-        private static Func<IAuthenticatedEncryptorDescriptor> GetLazyDescriptorDelegate(IInternalXmlKeyManager keyManager, XElement keyElement)
-        {
+        private static Func<IAuthenticatedEncryptorDescriptor> GetLazyDescriptorDelegate(
+            IInternalXmlKeyManager keyManager,
+            XElement keyElement
+        ) {
             // The <key> element will be held around in memory for a potentially lengthy period
             // of time. Since it might contain sensitive information, we should protect it.
             var encryptedKeyElement = keyElement.ToSecret();
 
             try
             {
-                return () => keyManager.DeserializeDescriptorFromKeyElement(encryptedKeyElement.ToXElement());
+                return () =>
+                    keyManager.DeserializeDescriptorFromKeyElement(
+                        encryptedKeyElement.ToXElement()
+                    );
             }
+
             finally
             {
                 // It's important that the lambda above doesn't capture 'descriptorElement'. Clearing the reference here

@@ -17,15 +17,18 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected override INamedTypeSymbol CommonAttributeClass => _attributeClass;
         protected override IMethodSymbol CommonAttributeConstructor => null;
-        protected override ImmutableArray<TypedConstant> CommonConstructorArguments => _constructorArguments;
-        protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments => _namedArguments;
+        protected override ImmutableArray<TypedConstant> CommonConstructorArguments =>
+            _constructorArguments;
+        protected override ImmutableArray<
+            KeyValuePair<string, TypedConstant>
+        > CommonNamedArguments => _namedArguments;
         protected override SyntaxReference CommonApplicationSyntaxReference => null;
 
         public CodeGenerationAttributeData(
             INamedTypeSymbol attributeClass,
             ImmutableArray<TypedConstant> constructorArguments,
-            ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments)
-        {
+            ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
+        ) {
             _attributeClass = attributeClass;
             _constructorArguments = constructorArguments.NullToEmpty();
             _namedArguments = namedArguments.NullToEmpty();

@@ -28,8 +28,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return GetDocuments(solution, documentUri, clientName: null);
         }
 
-        public static ImmutableArray<Document> GetDocuments(this Solution solution, Uri documentUri, string? clientName)
-        {
+        public static ImmutableArray<Document> GetDocuments(
+            this Solution solution,
+            Uri documentUri,
+            string? clientName
+        ) {
             var documentIds = GetDocumentIds(solution, documentUri);
 
             var documents = documentIds.SelectAsArray(id => solution.GetRequiredDocument(id));
@@ -37,8 +40,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return FilterDocumentsByClientName(documents, clientName);
         }
 
-        public static ImmutableArray<DocumentId> GetDocumentIds(this Solution solution, Uri documentUri)
-        {
+        public static ImmutableArray<DocumentId> GetDocumentIds(
+            this Solution solution,
+            Uri documentUri
+        ) {
             // TODO: we need to normalize this. but for now, we check both absolute and local path
             //       right now, based on who calls this, solution might has "/" or "\\" as directory
             //       separator
@@ -52,8 +57,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documentIds;
         }
 
-        private static ImmutableArray<Document> FilterDocumentsByClientName(ImmutableArray<Document> documents, string? clientName)
-        {
+        private static ImmutableArray<Document> FilterDocumentsByClientName(
+            ImmutableArray<Document> documents,
+            string? clientName
+        ) {
             // If we don't have a client name, then we're done filtering
             if (clientName == null)
             {
@@ -61,23 +68,31 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
 
             // We have a client name, so we need to filter to only documents that match that name
-            return documents.WhereAsArray(document =>
-            {
-                var documentPropertiesService = document.Services.GetService<DocumentPropertiesService>();
+            return documents.WhereAsArray(
+                document =>
+                {
+                    var documentPropertiesService =
+                        document.Services.GetService<DocumentPropertiesService>();
 
-                // When a client name is specified, only return documents that have a matching client name.
-                // Allows the razor lsp server to return results only for razor documents.
-                // This workaround should be removed when https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1106064/
-                // is fixed (so that the razor language server is only asked about razor buffers).
-                return Equals(documentPropertiesService?.DiagnosticsLspClientName, clientName);
-            });
+                    // When a client name is specified, only return documents that have a matching client name.
+                    // Allows the razor lsp server to return results only for razor documents.
+                    // This workaround should be removed when https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1106064/
+                    // is fixed (so that the razor language server is only asked about razor buffers).
+                    return Equals(documentPropertiesService?.DiagnosticsLspClientName, clientName);
+                }
+            );
         }
 
-        public static Document? GetDocument(this Solution solution, TextDocumentIdentifier documentIdentifier)
-            => solution.GetDocument(documentIdentifier, clientName: null);
+        public static Document? GetDocument(
+            this Solution solution,
+            TextDocumentIdentifier documentIdentifier
+        ) => solution.GetDocument(documentIdentifier, clientName: null);
 
-        public static Document? GetDocument(this Solution solution, TextDocumentIdentifier documentIdentifier, string? clientName)
-        {
+        public static Document? GetDocument(
+            this Solution solution,
+            TextDocumentIdentifier documentIdentifier,
+            string? clientName
+        ) {
             var documents = solution.GetDocuments(documentIdentifier.Uri, clientName);
             if (documents.Length == 0)
             {
@@ -87,7 +102,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documents.FindDocumentInProjectContext(documentIdentifier);
         }
 
-        public static T FindDocumentInProjectContext<T>(this ImmutableArray<T> documents, TextDocumentIdentifier documentIdentifier) where T : TextDocument
+        public static T FindDocumentInProjectContext<T>(
+            this ImmutableArray<T> documents,
+            TextDocumentIdentifier documentIdentifier
+        ) where T : TextDocument
         {
             if (documents.Length > 1)
             {
@@ -96,8 +114,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 {
                     if (vsDocumentIdentifier.ProjectContext != null)
                     {
-                        var projectId = ProtocolConversions.ProjectContextToProjectId(vsDocumentIdentifier.ProjectContext);
-                        var matchingDocument = documents.FirstOrDefault(d => d.Project.Id == projectId);
+                        var projectId = ProtocolConversions.ProjectContextToProjectId(
+                            vsDocumentIdentifier.ProjectContext
+                        );
+                        var matchingDocument = documents.FirstOrDefault(
+                            d => d.Project.Id == projectId
+                        );
 
                         if (matchingDocument != null)
                         {
@@ -113,8 +135,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documents[0];
         }
 
-        public static async Task<int> GetPositionFromLinePositionAsync(this TextDocument document, LinePosition linePosition, CancellationToken cancellationToken)
-        {
+        public static async Task<int> GetPositionFromLinePositionAsync(
+            this TextDocument document,
+            LinePosition linePosition,
+            CancellationToken cancellationToken
+        ) {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return text.Lines.GetPosition(linePosition);
         }
@@ -142,12 +167,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 case "TypeScript":
                     return "typescript";
                 default:
-                    throw new ArgumentException(string.Format("Document project language {0} is not valid", document.Project.Language));
+                    throw new ArgumentException(
+                        string.Format(
+                            "Document project language {0} is not valid",
+                            document.Project.Language
+                        )
+                    );
             }
         }
 
-        public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition)
-            => new ClassifiedTextElement(definition.DisplayParts.Select(part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)));
+        public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition) =>
+            new ClassifiedTextElement(
+                definition.DisplayParts.Select(
+                    part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)
+                )
+            );
 
         public static bool IsRazorDocument(this Document document)
         {

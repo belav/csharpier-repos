@@ -18,10 +18,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
     public class ShutdownTests : LoggedTest
     {
         private static readonly string StartedMessage = "Started";
-        private static readonly string CompletionMessage = "Stopping firing\n" +
-                                                            "Stopping end\n" +
-                                                            "Stopped firing\n" +
-                                                            "Stopped end";
+        private static readonly string CompletionMessage =
+            "Stopping firing\n" + "Stopping end\n" + "Stopped firing\n" + "Stopped end";
 
         public ShutdownTests(ITestOutputHelper output) : base(output) { }
 
@@ -48,18 +46,22 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
             {
                 var logger = loggerFactory.CreateLogger(testName);
 
-// https://github.com/dotnet/aspnetcore/issues/8247
+                // https://github.com/dotnet/aspnetcore/issues/8247
 #pragma warning disable 0618
-                var applicationPath = Path.Combine(TestPathUtilities.GetSolutionRootDirectory("Hosting"), "test", "testassets",
-                    "Microsoft.AspNetCore.Hosting.TestSites");
+                var applicationPath = Path.Combine(
+                    TestPathUtilities.GetSolutionRootDirectory("Hosting"),
+                    "test",
+                    "testassets",
+                    "Microsoft.AspNetCore.Hosting.TestSites"
+                );
 #pragma warning restore 0618
 
                 var deploymentParameters = new DeploymentParameters(
                     applicationPath,
                     ServerType.Kestrel,
                     RuntimeFlavor.CoreClr,
-                    RuntimeArchitecture.x64)
-                {
+                    RuntimeArchitecture.x64
+                ) {
                     EnvironmentName = "Shutdown",
                     TargetFramework = Tfm.Default,
                     ApplicationType = ApplicationType.Portable,
@@ -67,18 +69,25 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                     StatusMessagesEnabled = false
                 };
 
-                deploymentParameters.EnvironmentVariables["ASPNETCORE_STARTMECHANIC"] = shutdownMechanic;
+                deploymentParameters.EnvironmentVariables["ASPNETCORE_STARTMECHANIC"] =
+                    shutdownMechanic;
 
                 using (var deployer = new SelfHostDeployer(deploymentParameters, loggerFactory))
                 {
-                    var startedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-                    var completedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var startedTcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
+                    var completedTcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     var output = string.Empty;
 
                     deployer.ProcessOutputListener = (data) =>
                     {
-                        if (!string.IsNullOrEmpty(data) && data.StartsWith(StartedMessage, StringComparison.Ordinal))
-                        {
+                        if (
+                            !string.IsNullOrEmpty(data)
+                            && data.StartsWith(StartedMessage, StringComparison.Ordinal)
+                        ) {
                             startedTcs.TrySetResult();
                             output += data.Substring(StartedMessage.Length) + '\n';
                         }
@@ -101,7 +110,10 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                     }
                     catch (TimeoutException ex)
                     {
-                        throw new InvalidOperationException("Timeout while waiting for host process to output started message.", ex);
+                        throw new InvalidOperationException(
+                            "Timeout while waiting for host process to output started message.",
+                            ex
+                        );
                     }
 
                     SendSIGINT(deployer.HostProcess.Id);
@@ -114,7 +126,10 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                     }
                     catch (TimeoutException ex)
                     {
-                        throw new InvalidOperationException($"Timeout while waiting for host process to output completion message. The received output is: {output}", ex);
+                        throw new InvalidOperationException(
+                            $"Timeout while waiting for host process to output completion message. The received output is: {output}",
+                            ex
+                        );
                     }
 
                     output = output.Trim('\n');

@@ -23,15 +23,23 @@ namespace Microsoft.AspNetCore.Razor.Language
             return CreateToken(kind, optional, name: null, description: null);
         }
 
-        public static DirectiveTokenDescriptor CreateToken(DirectiveTokenKind kind, bool optional, string name, string description)
-        {
+        public static DirectiveTokenDescriptor CreateToken(
+            DirectiveTokenKind kind,
+            bool optional,
+            string name,
+            string description
+        ) {
             return new DefaultDirectiveTokenDescriptor(kind, optional, name, description);
         }
 
         private class DefaultDirectiveTokenDescriptor : DirectiveTokenDescriptor
         {
-            public DefaultDirectiveTokenDescriptor(DirectiveTokenKind kind, bool optional, string name, string description)
-            {
+            public DefaultDirectiveTokenDescriptor(
+                DirectiveTokenKind kind,
+                bool optional,
+                string name,
+                string description
+            ) {
                 Kind = kind;
                 Optional = optional;
                 Name = name;

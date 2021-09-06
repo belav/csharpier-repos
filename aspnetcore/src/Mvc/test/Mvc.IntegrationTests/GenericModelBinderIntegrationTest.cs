@@ -33,10 +33,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.index=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.index=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -71,10 +73,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(List<IFormCollection>)
             };
             // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?index=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?index=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -110,10 +114,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             // Without a key here so the GenericModelBinder will not recurse to bind elements.
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -138,14 +144,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 "Address",
                 displayName: "Address",
                 isGreedy: true,
-                isFromRequest: true);
+                isFromRequest: true
+            );
 
             public BindingSource BindingSource
             {
-                get
-                {
-                    return Source;
-                }
+                get { return Source; }
             }
         }
 
@@ -177,9 +181,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 Debug.Assert(bindingContext.Result == ModelBindingResult.Failed());
 
                 var allowedBindingSource = bindingContext.BindingSource;
-                if (allowedBindingSource == null ||
-                    !allowedBindingSource.CanAcceptDataFrom(BindAddressAttribute.Source))
-                {
+                if (
+                    allowedBindingSource == null
+                    || !allowedBindingSource.CanAcceptDataFrom(BindAddressAttribute.Source)
+                ) {
                     // Binding Sources are opt-in. This model either didn't specify one or specified something
                     // incompatible so let other binders run.
                     return Task.CompletedTask;
@@ -198,12 +203,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString = new QueryString("?parameter.index=0"));
+                request => request.QueryString = new QueryString("?parameter.index=0")
+            );
 
             var modelState = testContext.ModelState;
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
                 testContext.MvcOptions,
-                new AddressBinderProvider());
+                new AddressBinderProvider()
+            );
 
             var parameter = new ParameterDescriptor()
             {
@@ -241,7 +248,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString = new QueryString("?parameter.index=0"));
+                request => request.QueryString = new QueryString("?parameter.index=0")
+            );
 
             var modelState = testContext.ModelState;
 
@@ -273,10 +281,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0][0].Key=key0&parameter[0][0].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0][0].Key=key0&parameter[0][0].Value=10"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -318,10 +330,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0][0].Key=key0&[0][0].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?[0][0].Key=key0&[0][0].Value=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -363,10 +377,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -398,10 +414,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0].Key=key0&parameter[0].Value=10"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -442,10 +462,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0].Key=key0&[0].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?[0].Key=key0&[0].Value=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -486,10 +508,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -521,11 +545,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, List<int>>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0].Key=key0&parameter[0].Value[0]=10&parameter[0].Value[1]=11");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0].Key=key0&parameter[0].Value[0]=10&parameter[0].Value[1]=11"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -570,10 +597,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, List<int>>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0].Key=key0&[0].Value[0]=10&[0].Value[1]=11");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?[0].Key=key0&[0].Value[0]=10&[0].Value[1]=11"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -618,10 +649,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, List<int>>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 

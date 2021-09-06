@@ -36,8 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IModelBinderFactory modelBinderFactory,
             IObjectModelValidator validator,
             IOptions<MvcOptions> mvcOptions,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             if (modelMetadataProvider == null)
             {
                 throw new ArgumentNullException(nameof(modelMetadataProvider));
@@ -90,8 +90,18 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IValueProvider valueProvider,
             ParameterDescriptor parameter,
             ModelMetadata metadata,
-            object? value)
-            => BindModelAsync(actionContext, modelBinder, valueProvider, parameter, metadata, value, container: null).AsTask();
+            object? value
+        ) =>
+            BindModelAsync(
+                    actionContext,
+                    modelBinder,
+                    valueProvider,
+                    parameter,
+                    metadata,
+                    value,
+                    container: null
+                )
+                .AsTask();
 
         /// <summary>
         /// Binds a model specified by <paramref name="parameter"/> using <paramref name="value"/> as the initial value.
@@ -111,8 +121,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ParameterDescriptor parameter,
             ModelMetadata metadata,
             object? value,
-            object? container)
-        {
+            object? container
+        ) {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -151,10 +161,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 valueProvider,
                 metadata,
                 parameter.BindingInfo,
-                parameter.Name);
+                parameter.Name
+            );
             modelBindingContext.Model = value;
 
-            var parameterModelName = parameter.BindingInfo?.BinderModelName ?? metadata.BinderModelName;
+            var parameterModelName =
+                parameter.BindingInfo?.BinderModelName ?? metadata.BinderModelName;
             if (parameterModelName != null)
             {
                 // The name was set explicitly, always use that as the prefix.
@@ -188,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     metadata,
                     modelBindingContext,
                     modelBindingResult,
-                    container);
+                    container
+                );
 
                 Logger.DoneAttemptingToValidateParameterOrProperty(parameter, metadata);
             }
@@ -203,7 +216,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                         actionContext,
                         modelBindingContext.ValidationState,
                         modelBindingContext.ModelName,
-                        modelBindingResult.Model);
+                        modelBindingResult.Model
+                    );
                 }
             }
 
@@ -217,15 +231,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelMetadata metadata,
             ModelBindingContext modelBindingContext,
             ModelBindingResult modelBindingResult,
-            object? container)
-        {
+            object? container
+        ) {
             RecalculateModelMetadata(parameter, modelBindingResult, ref metadata);
 
             if (!modelBindingResult.IsModelSet && metadata.IsBindingRequired)
             {
                 // Enforce BindingBehavior.Required (e.g., [BindRequired])
                 var modelName = modelBindingContext.FieldName;
-                var message = metadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(modelName);
+                var message = metadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
+                    modelName
+                );
                 actionContext.ModelState.TryAddModelError(modelName, message);
             }
             else if (modelBindingResult.IsModelSet)
@@ -237,7 +253,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     modelBindingContext.ModelName,
                     modelBindingResult.Model,
                     metadata,
-                    container);
+                    container
+                );
             }
             else if (metadata.IsRequired)
             {
@@ -252,9 +269,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 // original problem being worked around that regressed #7503.
                 var modelName = modelBindingContext.ModelName;
 
-                if (string.IsNullOrEmpty(modelBindingContext.ModelName) &&
-                    parameter.BindingInfo?.BinderModelName == null)
-                {
+                if (
+                    string.IsNullOrEmpty(modelBindingContext.ModelName)
+                    && parameter.BindingInfo?.BinderModelName == null
+                ) {
                     // If we get here then this is a fallback case. The model name wasn't explicitly set
                     // and we ended up with an empty prefix.
                     modelName = modelBindingContext.FieldName;
@@ -267,23 +285,25 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     modelName,
                     modelBindingResult.Model,
                     metadata,
-                    container);
+                    container
+                );
             }
         }
 
         private void RecalculateModelMetadata(
             ParameterDescriptor parameter,
             ModelBindingResult modelBindingResult,
-            ref ModelMetadata metadata)
-        {
+            ref ModelMetadata metadata
+        ) {
             // Attempt to recalculate ModelMetadata for top level parameters and properties using the actual
             // model type. This ensures validation uses a combination of top-level validation metadata
             // as well as metadata on the actual, rather than declared, model type.
 
-            if (!modelBindingResult.IsModelSet ||
-                modelBindingResult.Model == null ||
-                _modelMetadataProvider is not ModelMetadataProvider modelMetadataProvider)
-            {
+            if (
+                !modelBindingResult.IsModelSet
+                || modelBindingResult.Model == null
+                || _modelMetadataProvider is not ModelMetadataProvider modelMetadataProvider
+            ) {
                 return;
             }
 
@@ -293,7 +313,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 var parameterInfo = parameterInfoParameter.ParameterInfo;
                 if (modelType != parameterInfo.ParameterType)
                 {
-                    metadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo, modelType);
+                    metadata = modelMetadataProvider.GetMetadataForParameter(
+                        parameterInfo,
+                        modelType
+                    );
                 }
             }
             else if (parameter is IPropertyInfoParameterDescriptor propertyInfoParameter)
@@ -301,7 +324,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 var propertyInfo = propertyInfoParameter.PropertyInfo;
                 if (modelType != propertyInfo.PropertyType)
                 {
-                    metadata = modelMetadataProvider.GetMetadataForProperty(propertyInfo, modelType);
+                    metadata = modelMetadataProvider.GetMetadataForProperty(
+                        propertyInfo,
+                        modelType
+                    );
                 }
             }
         }

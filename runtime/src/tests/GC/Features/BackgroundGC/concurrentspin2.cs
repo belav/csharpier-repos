@@ -18,11 +18,14 @@ class PriorityTest
     private int medTime;
     private int youngTime;
 
-
-    public PriorityTest(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
-    {
+    public PriorityTest(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    ) {
         rand = new Random(314159);
         this.oldDataSize = oldDataSize;
         this.medDataSize = medDataSize;
@@ -51,11 +54,14 @@ class PriorityTest
 
     // churns data in the heap by replacing byte arrays with new ones of random length
     // this should induce concurrent GCs
-    void SteadyState(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
-    {
-
+    void SteadyState(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    ) {
         for (int i = 0; i < iterCount; i++)
         {
             byte[] newarray = new byte[meanAllocSize];
@@ -82,22 +88,20 @@ class PriorityTest
         {
             AllocTest(oldDataSize, medDataSize, meanAllocSize);
 
-            SteadyState(oldDataSize, medDataSize,
-                iterCount, meanAllocSize,
-                medTime, youngTime);
+            SteadyState(oldDataSize, medDataSize, iterCount, meanAllocSize, medTime, youngTime);
 
             if (((iteration + 1) % 20) == 0)
-                Console.WriteLine("Thread: {1} Finished iteration {0}", iteration, System.Threading.Thread.CurrentThread.Name);
+                Console.WriteLine(
+                    "Thread: {1} Finished iteration {0}",
+                    iteration,
+                    System.Threading.Thread.CurrentThread.Name
+                );
         }
-
     }
-
 }
-
 
 class ConcurrentRepro
 {
-
     public static void Usage()
     {
         Console.WriteLine("Usage:");
@@ -134,15 +138,13 @@ class ConcurrentRepro
             return parameters;
         }
 
-        // incorrect number of arguments        
+        // incorrect number of arguments
         Usage();
         return null;
     }
 
-
     public static int Main(string[] args)
     {
-
         // parse arguments
         int[] parameters = ParseArgs(args);
         if (parameters == null)

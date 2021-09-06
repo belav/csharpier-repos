@@ -26,8 +26,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Http2PeerSettings serverPeerSettings,
             Http2FrameWriter frameWriter,
             InputFlowControl connectionInputFlowControl,
-            OutputFlowControl connectionOutputFlowControl) : base(connectionId, protocols, connectionContext: null!, serviceContext, connectionFeatures, memoryPool, localEndPoint, remoteEndPoint, transport: null!)
-        {
+            OutputFlowControl connectionOutputFlowControl
+        ) : base(
+            connectionId,
+            protocols,
+            connectionContext: null!,
+            serviceContext,
+            connectionFeatures,
+            memoryPool,
+            localEndPoint,
+            remoteEndPoint,
+            transport: null!
+        ) {
             StreamId = streamId;
             StreamLifetimeHandler = streamLifetimeHandler;
             ClientPeerSettings = clientPeerSettings;

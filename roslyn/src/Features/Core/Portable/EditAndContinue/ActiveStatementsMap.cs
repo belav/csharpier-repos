@@ -11,13 +11,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     internal readonly struct ActiveStatementsMap
     {
         public static readonly ActiveStatementsMap Empty =
-            new(ImmutableDictionary<DocumentId, ImmutableArray<ActiveStatement>>.Empty, ImmutableDictionary<ManagedInstructionId, ActiveStatement>.Empty);
+            new(
+                ImmutableDictionary<DocumentId, ImmutableArray<ActiveStatement>>.Empty,
+                ImmutableDictionary<ManagedInstructionId, ActiveStatement>.Empty
+            );
 
         /// <summary>
         /// Groups active statements by document. 
         /// Multiple documents point to the same set of active statements if they are linked to the same underlying source file.
         /// </summary>
-        public readonly IReadOnlyDictionary<DocumentId, ImmutableArray<ActiveStatement>> DocumentMap;
+        public readonly IReadOnlyDictionary<
+            DocumentId,
+            ImmutableArray<ActiveStatement>
+        > DocumentMap;
 
         /// <summary>
         /// Active statements by instruction id.
@@ -26,8 +32,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         public ActiveStatementsMap(
             IReadOnlyDictionary<DocumentId, ImmutableArray<ActiveStatement>> documentMap,
-            IReadOnlyDictionary<ManagedInstructionId, ActiveStatement> instructionMap)
-        {
+            IReadOnlyDictionary<ManagedInstructionId, ActiveStatement> instructionMap
+        ) {
             DocumentMap = documentMap;
             InstructionMap = instructionMap;
         }

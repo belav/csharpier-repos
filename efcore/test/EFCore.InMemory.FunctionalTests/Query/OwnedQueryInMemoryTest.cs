@@ -8,18 +8,21 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class OwnedQueryInMemoryTest : OwnedQueryTestBase<OwnedQueryInMemoryTest.OwnedQueryInMemoryFixture>
+    public class OwnedQueryInMemoryTest
+        : OwnedQueryTestBase<OwnedQueryInMemoryTest.OwnedQueryInMemoryFixture>
     {
-        public OwnedQueryInMemoryTest(OwnedQueryInMemoryFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public OwnedQueryInMemoryTest(
+            OwnedQueryInMemoryFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }
 
         public class OwnedQueryInMemoryFixture : OwnedQueryFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => InMemoryTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                InMemoryTestStoreFactory.Instance;
         }
     }
 }

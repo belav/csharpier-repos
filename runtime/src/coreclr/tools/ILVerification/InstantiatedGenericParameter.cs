@@ -15,10 +15,7 @@ namespace Internal.TypeSystem
 
         public GenericParameterDesc GenericParameter
         {
-            get
-            {
-                return _genericParam;
-            }
+            get { return _genericParam; }
         }
 
         internal static Instantiation CreateGenericTypeInstantiaton(Instantiation instantiation)
@@ -34,8 +31,10 @@ namespace Internal.TypeSystem
             return genericInstantiation;
         }
 
-        internal static Instantiation CreateGenericMethodInstantiation(Instantiation typeInstantiation, Instantiation methodInstantiation)
-        {
+        internal static Instantiation CreateGenericMethodInstantiation(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        ) {
             if (methodInstantiation.Length == 0)
                 return methodInstantiation;
 
@@ -55,7 +54,9 @@ namespace Internal.TypeSystem
         {
             var parameters = new TypeDesc[fromInstantiation.Length];
             for (int i = 0; i < fromInstantiation.Length; ++i)
-                parameters[i] = new InstantiatedGenericParameter((GenericParameterDesc)fromInstantiation[i]);
+                parameters[i] = new InstantiatedGenericParameter(
+                    (GenericParameterDesc)fromInstantiation[i]
+                );
 
             return new Instantiation(parameters);
         }
@@ -82,7 +83,10 @@ namespace Internal.TypeSystem
             {
                 foreach (var constraint in _genericParam.TypeConstraints)
                 {
-                    yield return constraint.InstantiateSignature(_typeInstantiation, _methodInstantiation);
+                    yield return constraint.InstantiateSignature(
+                        _typeInstantiation,
+                        _methodInstantiation
+                    );
                 }
             }
         }

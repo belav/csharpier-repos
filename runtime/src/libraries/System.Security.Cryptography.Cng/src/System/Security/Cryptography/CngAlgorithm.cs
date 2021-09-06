@@ -20,7 +20,10 @@ namespace System.Security.Cryptography
             if (algorithm == null)
                 throw new ArgumentNullException(nameof(algorithm));
             if (algorithm.Length == 0)
-                throw new ArgumentException(SR.Format(SR.Cryptography_InvalidAlgorithmName, algorithm), nameof(algorithm));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_InvalidAlgorithmName, algorithm),
+                    nameof(algorithm)
+                );
 
             _algorithm = algorithm;
         }
@@ -30,10 +33,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string Algorithm
         {
-            get
-            {
-                return _algorithm;
-            }
+            get { return _algorithm; }
         }
 
         public static bool operator ==(CngAlgorithm? left, CngAlgorithm? right)

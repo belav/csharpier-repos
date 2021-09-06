@@ -48,8 +48,10 @@ namespace JIT.HardwareIntrinsics.X86
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector256<UInt16>>() / sizeof(UInt16);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector256<UInt16>>() / sizeof(UInt16);
 
         private static UInt16[] _data = new UInt16[Op1ElementCount];
 
@@ -59,8 +61,15 @@ namespace JIT.HardwareIntrinsics.X86
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetUInt16(); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<UInt16, UInt16>(_data, new UInt16[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetUInt16();
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<UInt16, UInt16>(
+                _data,
+                new UInt16[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Avx2.IsSupported;
@@ -71,9 +80,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Avx2.BroadcastScalarToVector256(
-                (UInt16*)(_dataTable.inArrayPtr)
-            );
+            var result = Avx2.BroadcastScalarToVector256((UInt16*)(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -83,10 +90,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx2).GetMethod(nameof(Avx2.BroadcastScalarToVector256), new Type[] { typeof(UInt16*) })
-                                     .Invoke(null, new object[] {
-                                        Pointer.Box(_dataTable.inArrayPtr, typeof(UInt16*))
-                                     });
+            var result = typeof(Avx2).GetMethod(
+                    nameof(Avx2.BroadcastScalarToVector256),
+                    new Type[] { typeof(UInt16*) }
+                )
+                .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(UInt16*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -108,30 +116,51 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<UInt16> firstOp, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<UInt16> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<UInt16>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<UInt16>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(UInt16[] firstOp, UInt16[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt16[] firstOp,
+            UInt16[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             if (firstOp[0] != result[0])
@@ -152,9 +181,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Avx2)}.{nameof(Avx2.BroadcastScalarToVector256)}<UInt16>(Vector128<UInt16>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx2)}.{nameof(Avx2.BroadcastScalarToVector256)}<UInt16>(Vector128<UInt16>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

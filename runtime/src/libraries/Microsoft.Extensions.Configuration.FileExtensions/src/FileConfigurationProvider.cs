@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.Configuration
                     {
                         Thread.Sleep(Source.ReloadDelay);
                         Load(reload: true);
-                    });
+                    }
+                );
             }
         }
 
@@ -52,8 +53,8 @@ namespace Microsoft.Extensions.Configuration
         /// Generates a string representing this provider name and relevant details.
         /// </summary>
         /// <returns> The configuration name. </returns>
-        public override string ToString()
-            => $"{GetType().Name} for '{Source.Path}' ({(Source.Optional ? "Optional" : "Required")})";
+        public override string ToString() =>
+            $"{GetType().Name} for '{Source.Path}' ({(Source.Optional ? "Optional" : "Required")})";
 
         private void Load(bool reload)
         {
@@ -66,12 +67,16 @@ namespace Microsoft.Extensions.Configuration
                 }
                 else
                 {
-                    var error = new StringBuilder($"The configuration file '{Source.Path}' was not found and is not optional.");
+                    var error = new StringBuilder(
+                        $"The configuration file '{Source.Path}' was not found and is not optional."
+                    );
                     if (!string.IsNullOrEmpty(file?.PhysicalPath))
                     {
                         error.Append($" The physical path is '{file.PhysicalPath}'.");
                     }
-                    HandleException(ExceptionDispatchInfo.Capture(new FileNotFoundException(error.ToString())));
+                    HandleException(
+                        ExceptionDispatchInfo.Capture(new FileNotFoundException(error.ToString()))
+                    );
                 }
             }
             else
@@ -89,7 +94,8 @@ namespace Microsoft.Extensions.Configuration
                             FileAccess.Read,
                             FileShare.ReadWrite,
                             bufferSize: 1,
-                            FileOptions.SequentialScan);
+                            FileOptions.SequentialScan
+                        );
                     }
 
                     return fileInfo.CreateReadStream();

@@ -23,11 +23,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             var rewrittenBody = VisitStatement(node.Body);
             Debug.Assert(rewrittenBody is { });
 
-            // EnC: We need to insert a hidden sequence point to handle function remapping in case 
+            // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.
             if (rewrittenCondition != null && this.Instrument)
             {
-                rewrittenCondition = _instrumenter.InstrumentForStatementCondition(node, rewrittenCondition, _factory);
+                rewrittenCondition = _instrumenter.InstrumentForStatementCondition(
+                    node,
+                    rewrittenCondition,
+                    _factory
+                );
             }
 
             return RewriteForStatement(
@@ -35,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenInitializer,
                 rewrittenCondition,
                 rewrittenIncrement,
-                rewrittenBody);
+                rewrittenBody
+            );
         }
 
         private BoundStatement RewriteForStatementWithoutInnerLocals(
@@ -47,13 +52,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement rewrittenBody,
             GeneratedLabelSymbol breakLabel,
             GeneratedLabelSymbol continueLabel,
-            bool hasErrors)
-        {
-            Debug.Assert(original.Kind == BoundKind.ForStatement || original.Kind == BoundKind.ForEachStatement);
+            bool hasErrors
+        ) {
+            Debug.Assert(
+                original.Kind == BoundKind.ForStatement
+                    || original.Kind == BoundKind.ForEachStatement
+            );
             Debug.Assert(rewrittenBody != null);
 
             // The sequence point behavior exhibited here is different from that of the native compiler.  In the native
-            // compiler, if you have something like 
+            // compiler, if you have something like
             //
             // for([|int i = 0, j = 0|]; ; [|i++, j++|])
             //
@@ -108,7 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Mark the initial jump as hidden.
                 // We do it to tell that this is not a part of previous statement.
-                // This jump may be a target of another jump (for example if loops are nested) and that will make 
+                // This jump may be a target of another jump (for example if loops are nested) and that will make
                 // impression of the previous statement being re-executed
                 gotoEnd = BoundSequencePoint.CreateHidden(gotoEnd);
             }
@@ -135,7 +143,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement? branchBack = null;
             if (rewrittenCondition != null)
             {
-                branchBack = new BoundConditionalGoto(rewrittenCondition.Syntax, rewrittenCondition, true, startLabel);
+                branchBack = new BoundConditionalGoto(
+                    rewrittenCondition.Syntax,
+                    rewrittenCondition,
+                    true,
+                    startLabel
+                );
             }
             else
             {
@@ -147,10 +160,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (original.Kind)
                 {
                     case BoundKind.ForEachStatement:
-                        branchBack = _instrumenter.InstrumentForEachStatementConditionalGotoStart((BoundForEachStatement)original, branchBack);
+                        branchBack = _instrumenter.InstrumentForEachStatementConditionalGotoStart(
+                            (BoundForEachStatement)original,
+                            branchBack
+                        );
                         break;
                     case BoundKind.ForStatement:
-                        branchBack = _instrumenter.InstrumentForStatementConditionalGotoStartOrBreak((BoundForStatement)original, branchBack);
+                        branchBack =
+                            _instrumenter.InstrumentForStatementConditionalGotoStartOrBreak(
+                                (BoundForStatement)original,
+                                branchBack
+                            );
                         break;
                     default:
                         throw ExceptionUtilities.UnexpectedValue(original.Kind);
@@ -171,8 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement? rewrittenInitializer,
             BoundExpression? rewrittenCondition,
             BoundStatement? rewrittenIncrement,
-            BoundStatement rewrittenBody)
-        {
+            BoundStatement rewrittenBody
+        ) {
             if (node.InnerLocals.IsEmpty)
             {
                 return RewriteForStatementWithoutInnerLocals(
@@ -183,7 +203,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     rewrittenIncrement,
                     rewrittenBody,
                     node.BreakLabel,
-                    node.ContinueLabel, node.HasErrors);
+                    node.ContinueLabel,
+                    node.HasErrors
+                );
             }
 
             // We need to enter inner_scope-block from the top, that is where an instance of a display class will be created
@@ -235,11 +257,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             // GotoIfFalse condition break;
             if (rewrittenCondition != null)
             {
-                BoundStatement ifNotConditionGotoBreak = new BoundConditionalGoto(rewrittenCondition.Syntax, rewrittenCondition, false, node.BreakLabel);
+                BoundStatement ifNotConditionGotoBreak = new BoundConditionalGoto(
+                    rewrittenCondition.Syntax,
+                    rewrittenCondition,
+                    false,
+                    node.BreakLabel
+                );
 
                 if (this.Instrument)
                 {
-                    ifNotConditionGotoBreak = _instrumenter.InstrumentForStatementConditionalGotoStartOrBreak(node, ifNotConditionGotoBreak);
+                    ifNotConditionGotoBreak =
+                        _instrumenter.InstrumentForStatementConditionalGotoStartOrBreak(
+                            node,
+                            ifNotConditionGotoBreak
+                        );
                 }
 
                 blockBuilder.Add(ifNotConditionGotoBreak);
@@ -259,7 +290,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // goto start;
             blockBuilder.Add(new BoundGotoStatement(syntax, startLabel));
 
-            statementBuilder.Add(new BoundBlock(syntax, node.InnerLocals, blockBuilder.ToImmutableAndFree()));
+            statementBuilder.Add(
+                new BoundBlock(syntax, node.InnerLocals, blockBuilder.ToImmutableAndFree())
+            );
 
             // break:
             statementBuilder.Add(new BoundLabelStatement(syntax, node.BreakLabel));

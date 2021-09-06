@@ -36,13 +36,25 @@ namespace Microsoft.CodeAnalysis.Rename
                 _analysis = analysis;
             }
 
-            public override string GetDescription(CultureInfo? culture)
-                => WorkspacesResources.ResourceManager.GetString("Sync_namespace_to_folder_structure", culture ?? WorkspacesResources.Culture)!;
+            public override string GetDescription(CultureInfo? culture) =>
+                WorkspacesResources.ResourceManager.GetString(
+                    "Sync_namespace_to_folder_structure",
+                    culture ?? WorkspacesResources.Culture
+                )!;
 
-            internal override async Task<Solution> GetModifiedSolutionAsync(Document document, OptionSet _, CancellationToken cancellationToken)
-            {
-                var changeNamespaceService = document.GetRequiredLanguageService<IChangeNamespaceService>();
-                var solution = await changeNamespaceService.TryChangeTopLevelNamespacesAsync(document, _analysis.TargetNamespace, cancellationToken).ConfigureAwait(false);
+            internal override async Task<Solution> GetModifiedSolutionAsync(
+                Document document,
+                OptionSet _,
+                CancellationToken cancellationToken
+            ) {
+                var changeNamespaceService =
+                    document.GetRequiredLanguageService<IChangeNamespaceService>();
+                var solution = await changeNamespaceService.TryChangeTopLevelNamespacesAsync(
+                        document,
+                        _analysis.TargetNamespace,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // If the solution fails to update fail silently. The user will see no large
                 // negative impact from not doing this modification, and it's possible the document
@@ -50,8 +62,11 @@ namespace Microsoft.CodeAnalysis.Rename
                 return solution ?? document.Project.Solution;
             }
 
-            public static SyncNamespaceDocumentAction? TryCreate(Document document, IReadOnlyList<string> newFolders, CancellationToken _)
-            {
+            public static SyncNamespaceDocumentAction? TryCreate(
+                Document document,
+                IReadOnlyList<string> newFolders,
+                CancellationToken _
+            ) {
                 var analysisResult = Analyze(document, newFolders);
 
                 if (analysisResult.HasValue)
@@ -62,14 +77,20 @@ namespace Microsoft.CodeAnalysis.Rename
                 return null;
             }
 
-            private static AnalysisResult? Analyze(Document document, IReadOnlyCollection<string> newFolders)
-            {
+            private static AnalysisResult? Analyze(
+                Document document,
+                IReadOnlyCollection<string> newFolders
+            ) {
                 // https://github.com/dotnet/roslyn/issues/41841
                 // VB implementation is incomplete for sync namespace
                 if (document.Project.Language == LanguageNames.CSharp)
                 {
                     var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    var targetNamespace = PathMetadataUtilities.TryBuildNamespaceFromFolders(newFolders, syntaxFacts, document.Project.DefaultNamespace);
+                    var targetNamespace = PathMetadataUtilities.TryBuildNamespaceFromFolders(
+                        newFolders,
+                        syntaxFacts,
+                        document.Project.DefaultNamespace
+                    );
 
                     if (targetNamespace is null)
                     {

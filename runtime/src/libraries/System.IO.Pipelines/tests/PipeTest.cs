@@ -13,8 +13,10 @@ namespace System.IO.Pipelines.Tests
 
         protected Pipe Pipe;
 
-        protected PipeTest(int pauseWriterThreshold = MaximumSizeHigh, int resumeWriterThreshold = MaximumSizeLow)
-        {
+        protected PipeTest(
+            int pauseWriterThreshold = MaximumSizeHigh,
+            int resumeWriterThreshold = MaximumSizeLow
+        ) {
             _pool = new TestMemoryPool();
             Pipe = new Pipe(
                 new PipeOptions(
@@ -24,7 +26,8 @@ namespace System.IO.Pipelines.Tests
                     readerScheduler: PipeScheduler.Inline,
                     writerScheduler: PipeScheduler.Inline,
                     useSynchronizationContext: false
-                ));
+                )
+            );
         }
 
         public void Dispose()

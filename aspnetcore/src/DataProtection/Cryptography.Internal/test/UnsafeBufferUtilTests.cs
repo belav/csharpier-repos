@@ -53,7 +53,11 @@ namespace Microsoft.AspNetCore.Cryptography
             var testHandle = LocalAlloc(cbExpected);
 
             // Act
-            UnsafeBufferUtil.BlockCopy(from: controlHandle, to: testHandle, length: (IntPtr)cbExpected);
+            UnsafeBufferUtil.BlockCopy(
+                from: controlHandle,
+                to: testHandle,
+                length: (IntPtr)cbExpected
+            );
 
             // Assert
             string actual = new string((char*)testHandle.DangerousGetHandle(), 0, expected.Length);
@@ -93,7 +97,11 @@ namespace Microsoft.AspNetCore.Cryptography
             // Act
             fixed (char* pExpected = expected)
             {
-                UnsafeBufferUtil.BlockCopy(from: pExpected, to: testHandle, byteCount: (uint)cbExpected);
+                UnsafeBufferUtil.BlockCopy(
+                    from: pExpected,
+                    to: testHandle,
+                    byteCount: (uint)cbExpected
+                );
             }
 
             // Assert

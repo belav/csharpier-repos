@@ -104,7 +104,10 @@ namespace Fragment
                     if (nreqsToSteady == 0)
                     {
                         nreqsToSteady = totalReqs;
-                        Console.WriteLine("Took {0} iterations to reach steady state", nreqsToSteady);
+                        Console.WriteLine(
+                            "Took {0} iterations to reach steady state",
+                            nreqsToSteady
+                        );
                     }
                     else if (totalReqs == steadyStateFactor * nreqsToSteady)
                     {
@@ -119,13 +122,13 @@ namespace Fragment
             }
         }
 
-
         public static void Usage()
         {
             Console.WriteLine("Usage:");
-            Console.WriteLine("Fragment <num iterations> <num requests> <allocation volume> [random seed]");
+            Console.WriteLine(
+                "Fragment <num iterations> <num requests> <allocation volume> [random seed]"
+            );
         }
-
 
         static public int Main(string[] args)
         {
@@ -140,15 +143,20 @@ namespace Fragment
                     NumRequests = 1200;
                     AllocationVolume = 100000;
                     randomSeed = (int)DateTime.Now.Ticks;
-                    Console.WriteLine("Using defaults: {0} {1} {2}", numIterations, NumRequests, AllocationVolume);
-
+                    Console.WriteLine(
+                        "Using defaults: {0} {1} {2}",
+                        numIterations,
+                        NumRequests,
+                        AllocationVolume
+                    );
                     break;
                 case 3:
                 case 4:
-                    if ((!Int32.TryParse(args[0], out numIterations)) ||
-                         (!Int32.TryParse(args[1], out NumRequests)) ||
-                         (!Int32.TryParse(args[2], out AllocationVolume)))
-                    {
+                    if (
+                        (!Int32.TryParse(args[0], out numIterations))
+                        || (!Int32.TryParse(args[1], out NumRequests))
+                        || (!Int32.TryParse(args[2], out AllocationVolume))
+                    ) {
                         goto default;
                     }
 
@@ -163,7 +171,6 @@ namespace Fragment
                     {
                         randomSeed = (int)DateTime.Now.Ticks;
                     }
-
                     break;
                 default:
                     Usage();

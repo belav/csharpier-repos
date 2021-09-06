@@ -18,14 +18,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
         public VisualBasicResetInteractiveMenuCommand(
             OleMenuCommandService menuCommandService,
             IVsMonitorSelection monitorSelection,
-            IComponentModel componentModel)
-            : base(ContentTypeNames.VisualBasicContentType, menuCommandService, monitorSelection, componentModel)
-        {
-        }
+            IComponentModel componentModel
+        ) : base(
+            ContentTypeNames.VisualBasicContentType,
+            menuCommandService,
+            monitorSelection,
+            componentModel
+        ) { }
 
         protected override string ProjectKind => VSLangProj.PrjKind.prjKindVBProject;
 
-        protected override CommandID GetResetInteractiveFromProjectCommandID()
-            => new(ID.InteractiveCommands.VisualBasicInteractiveCommandSetId, ID.InteractiveCommands.ResetInteractiveFromProject);
+        protected override CommandID GetResetInteractiveFromProjectCommandID() =>
+            new(
+                ID.InteractiveCommands.VisualBasicInteractiveCommandSetId,
+                ID.InteractiveCommands.ResetInteractiveFromProject
+            );
     }
 }

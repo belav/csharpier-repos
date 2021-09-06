@@ -50,8 +50,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints
 
             if (minLength > maxLength)
             {
-                var errorMessage =
-                    Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax("minLength", "maxLength");
+                var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax(
+                    "minLength",
+                    "maxLength"
+                );
                 throw new ArgumentOutOfRangeException(nameof(minLength), minLength, errorMessage);
             }
 
@@ -75,8 +77,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
-        {
+            RouteDirection routeDirection
+        ) {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));

@@ -22,10 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public TestUIThreadOperationContext()
-            : this(int.MaxValue)
-        {
-        }
+        public TestUIThreadOperationContext() : this(int.MaxValue) { }
 
         public int Updates
         {
@@ -37,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             get { return _cancellationTokenSource.Token; }
         }
 
-        protected override void OnScopeProgressChanged(IUIThreadOperationScope changedScope)
-            => UpdateProgress();
+        protected override void OnScopeProgressChanged(IUIThreadOperationScope changedScope) =>
+            UpdateProgress();
 
         private void UpdateProgress()
         {

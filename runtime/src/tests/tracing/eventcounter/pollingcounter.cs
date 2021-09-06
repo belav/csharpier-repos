@@ -32,7 +32,7 @@ namespace BasicEventSourceTests
             private readonly string _targetSourceName;
             private readonly EventLevel _level;
             private Dictionary<string, string> args;
-            
+
             public int FailureEventCount { get; private set; } = 0;
             public int SuccessEventCount { get; private set; } = 0;
             public bool Failed = false;
@@ -45,7 +45,7 @@ namespace BasicEventSourceTests
                 args = new Dictionary<string, string>();
                 args.Add("EventCounterIntervalSec", "1");
             }
-            
+
             protected override void OnEventSourceCreated(EventSource source)
             {
                 if (source.Name.Equals(_targetSourceName))
@@ -60,9 +60,9 @@ namespace BasicEventSourceTests
                 {
                     for (int i = 0; i < eventData.Payload.Count; i++)
                     {
-
                         // Decode the payload
-                        IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                        IDictionary<string, object> eventPayload =
+                            eventData.Payload[i] as IDictionary<string, object>;
 
                         string name = "";
                         string min = "";
@@ -80,7 +80,6 @@ namespace BasicEventSourceTests
                                 else if (name.Equals("successCount"))
                                     SuccessEventCount++;
                             }
-
                             else if (payload.Key.Equals("Min"))
                             {
                                 min = payload.Value.ToString();
@@ -102,9 +101,11 @@ namespace BasicEventSourceTests
                         // Check if the mean is what we expect it to be
                         if (name.Equals("failureCount"))
                         {
-                            if (Int32.Parse(mean) != successCountCalled)  
+                            if (Int32.Parse(mean) != successCountCalled)
                             {
-                                Console.WriteLine($"Mean is not what we expected: {mean} vs {successCountCalled}");
+                                Console.WriteLine(
+                                    $"Mean is not what we expected: {mean} vs {successCountCalled}"
+                                );
                                 Failed = true;
                             }
                         }
@@ -112,7 +113,9 @@ namespace BasicEventSourceTests
                         {
                             if (Int32.Parse(mean) != mockedCountCalled)
                             {
-                                Console.WriteLine($"Mean is not what we expected: {mean} vs {mockedCountCalled}");
+                                Console.WriteLine(
+                                    $"Mean is not what we expected: {mean} vs {mockedCountCalled}"
+                                );
                             }
                         }
 
@@ -123,7 +126,7 @@ namespace BasicEventSourceTests
                             Failed = true;
                         }
 
-                        // In PollingCounter, stdev should always be 0 since we aggregate value only once per counter. 
+                        // In PollingCounter, stdev should always be 0 since we aggregate value only once per counter.
                         if (!stdev.Equals("0"))
                         {
                             Console.WriteLine("standard deviation is not 0");
@@ -133,7 +136,6 @@ namespace BasicEventSourceTests
                 }
             }
         }
-
 
         public static int mockedCountCalled = 0;
         public static int successCountCalled = 0;
@@ -153,17 +155,28 @@ namespace BasicEventSourceTests
         public static int Main(string[] args)
         {
             // Create an EventListener.
-            using (SimpleEventListener myListener = new SimpleEventListener("SimpleEventSource", EventLevel.Verbose))
-            {
-                SimpleEventSource eventSource = new SimpleEventSource(getMockedCount, getSuccessCount);
+            using (
+                SimpleEventListener myListener = new SimpleEventListener(
+                    "SimpleEventSource",
+                    EventLevel.Verbose
+                )
+            ) {
+                SimpleEventSource eventSource = new SimpleEventSource(
+                    getMockedCount,
+                    getSuccessCount
+                );
 
                 // Want to sleep for 5000 ms to get some counters piling up.
                 Thread.Sleep(5000);
 
-                if (myListener.FailureEventCount > 0 && myListener.SuccessEventCount > 0 && !myListener.Failed && (mockedCountCalled > 0 && successCountCalled > 0))
-                {
+                if (
+                    myListener.FailureEventCount > 0
+                    && myListener.SuccessEventCount > 0
+                    && !myListener.Failed
+                    && (mockedCountCalled > 0 && successCountCalled > 0)
+                ) {
                     Console.WriteLine("Test Passed");
-                    return 100;    
+                    return 100;
                 }
                 else
                 {

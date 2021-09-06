@@ -107,7 +107,11 @@ namespace System.Drawing.Text.Tests
         {
             using (var fontCollection = new PrivateFontCollection())
             {
-                AssertExtensions.Throws<ArgumentNullException>("filename", "path", () => fontCollection.AddFontFile(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "filename",
+                    "path",
+                    () => fontCollection.AddFontFile(null)
+                );
             }
         }
 
@@ -116,7 +120,11 @@ namespace System.Drawing.Text.Tests
         {
             using (var fontCollection = new PrivateFontCollection())
             {
-                AssertExtensions.Throws<ArgumentException>("path", null, () => fontCollection.AddFontFile(string.Empty));
+                AssertExtensions.Throws<ArgumentException>(
+                    "path",
+                    null,
+                    () => fontCollection.AddFontFile(string.Empty)
+                );
             }
         }
 
@@ -139,12 +147,14 @@ namespace System.Drawing.Text.Tests
                 if (PlatformDetection.IsNetFramework)
                 {
                     Assert.Throws<PathTooLongException>(
-                        () => fontCollection.AddFontFile(new string('a', 261)));
+                        () => fontCollection.AddFontFile(new string('a', 261))
+                    );
                 }
                 else
                 {
                     Assert.Throws<FileNotFoundException>(
-                        () => fontCollection.AddFontFile(new string('a', 261)));
+                        () => fontCollection.AddFontFile(new string('a', 261))
+                    );
                 }
             }
         }
@@ -154,7 +164,9 @@ namespace System.Drawing.Text.Tests
         {
             using (var fontCollection = new PrivateFontCollection())
             {
-                AssertExtensions.Throws<FileNotFoundException, ExternalException>(() => fontCollection.AddFontFile(AppContext.BaseDirectory));
+                AssertExtensions.Throws<FileNotFoundException, ExternalException>(
+                    () => fontCollection.AddFontFile(AppContext.BaseDirectory)
+                );
             }
         }
 
@@ -165,7 +177,10 @@ namespace System.Drawing.Text.Tests
             var fontCollection = new PrivateFontCollection();
             fontCollection.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontCollection.AddFontFile("fileName"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontCollection.AddFontFile("fileName")
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -184,6 +199,7 @@ namespace System.Drawing.Text.Tests
                     FontFamily font = Assert.Single(fontCollection.Families);
                     Assert.Equal("Code New Roman", font.Name);
                 }
+
                 finally
                 {
                     Marshal.FreeCoTaskMem(fontBuffer);
@@ -196,7 +212,10 @@ namespace System.Drawing.Text.Tests
         {
             using (var fontCollection = new PrivateFontCollection())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => fontCollection.AddMemoryFont(IntPtr.Zero, 100));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => fontCollection.AddMemoryFont(IntPtr.Zero, 100)
+                );
             }
         }
 
@@ -220,8 +239,12 @@ namespace System.Drawing.Text.Tests
                 try
                 {
                     Marshal.Copy(data, 0, fontBuffer, data.Length);
-                    AssertExtensions.Throws<ArgumentException>(null, () => fontCollection.AddMemoryFont(fontBuffer, length));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => fontCollection.AddMemoryFont(fontBuffer, length)
+                    );
                 }
+
                 finally
                 {
                     Marshal.FreeCoTaskMem(fontBuffer);
@@ -236,7 +259,10 @@ namespace System.Drawing.Text.Tests
             var fontCollection = new PrivateFontCollection();
             fontCollection.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontCollection.AddMemoryFont((IntPtr)10, 100));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontCollection.AddMemoryFont((IntPtr)10, 100)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]

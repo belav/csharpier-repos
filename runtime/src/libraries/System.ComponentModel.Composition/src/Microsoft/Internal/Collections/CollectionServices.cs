@@ -38,8 +38,13 @@ namespace Microsoft.Internal.Collections
                 return null;
             }
 
-            if (ReflectionServices.TryGetGenericInterfaceType(type, IEnumerableOfTType, out Type? closedType))
-            {
+            if (
+                ReflectionServices.TryGetGenericInterfaceType(
+                    type,
+                    IEnumerableOfTType,
+                    out Type? closedType
+                )
+            ) {
                 return closedType.GetGenericArguments()[0];
             }
 
@@ -48,8 +53,13 @@ namespace Microsoft.Internal.Collections
 
         public static Type? GetCollectionElementType(Type type)
         {
-            if (ReflectionServices.TryGetGenericInterfaceType(type, ICollectionOfTType, out Type? closedType))
-            {
+            if (
+                ReflectionServices.TryGetGenericInterfaceType(
+                    type,
+                    ICollectionOfTType,
+                    out Type? closedType
+                )
+            ) {
                 return closedType.GetGenericArguments()[0];
             }
 
@@ -66,8 +76,10 @@ namespace Microsoft.Internal.Collections
             return new ReadOnlyCollection<T>(source.AsArray());
         }
 
-        public static IEnumerable<T>? ConcatAllowingNull<T>(this IEnumerable<T>? source, IEnumerable<T>? second)
-        {
+        public static IEnumerable<T>? ConcatAllowingNull<T>(
+            this IEnumerable<T>? source,
+            IEnumerable<T>? second
+        ) {
             if (second == null || !second.Any())
             {
                 return source;
@@ -81,8 +93,10 @@ namespace Microsoft.Internal.Collections
             return source.Concat(second);
         }
 
-        public static ICollection<T>? ConcatAllowingNull<T>(this ICollection<T>? source, ICollection<T>? second)
-        {
+        public static ICollection<T>? ConcatAllowingNull<T>(
+            this ICollection<T>? source,
+            ICollection<T>? second
+        ) {
             if (second == null || (second.Count == 0))
             {
                 return source;
@@ -99,8 +113,10 @@ namespace Microsoft.Internal.Collections
             return result;
         }
 
-        public static List<T>? FastAppendToListAllowNulls<T>(this List<T>? source, IEnumerable<T>? second)
-        {
+        public static List<T>? FastAppendToListAllowNulls<T>(
+            this List<T>? source,
+            IEnumerable<T>? second
+        ) {
             if (second == null)
             {
                 return source;
@@ -129,7 +145,6 @@ namespace Microsoft.Internal.Collections
             // last resort - nothing is null, need to append
             source.AddRange(second);
             return source;
-
         }
 
         private static List<T> FastAppendToListAllowNulls<T>(this List<T>? source, T value)
@@ -144,9 +159,10 @@ namespace Microsoft.Internal.Collections
         }
 
         public static List<T>? FastAppendToListAllowNulls<T>(
-                        this List<T>? source, T? value,
-                        IEnumerable<T>? second)
-            where T : class
+            this List<T>? source,
+            T? value,
+            IEnumerable<T>? second
+        ) where T : class
         {
             if (second == null)
             {

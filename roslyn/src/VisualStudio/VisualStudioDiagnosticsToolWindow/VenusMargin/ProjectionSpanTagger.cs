@@ -25,9 +25,7 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ProjectionSpanTaggerProvider()
-        {
-        }
+        public ProjectionSpanTaggerProvider() { }
 
         public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
         {
@@ -50,7 +48,11 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
             private void OnProjectionBufferMarginSelectionChanged(object sender, EventArgs e)
             {
                 var snapshot = _textView.TextBuffer.CurrentSnapshot;
-                RaiseTagsChanged(new SnapshotSpanEventArgs(new SnapshotSpan(snapshot, new Span(0, snapshot.Length))));
+                RaiseTagsChanged(
+                    new SnapshotSpanEventArgs(
+                        new SnapshotSpan(snapshot, new Span(0, snapshot.Length))
+                    )
+                );
             }
 
             private void RaiseTagsChanged(SnapshotSpanEventArgs args)
@@ -58,16 +60,22 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
                 this.TagsChanged?.Invoke(this, args);
             }
 
-            public IEnumerable<ITagSpan<TextMarkerTag>> GetTags(NormalizedSnapshotSpanCollection spans)
-            {
+            public IEnumerable<ITagSpan<TextMarkerTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            ) {
                 if (!_textView.Properties.TryGetProperty(PropertyName, out List<Span> allSpans))
                 {
                     return null;
                 }
 
-                return allSpans
-                    .Where(s => spans.Any(ss => ss.IntersectsWith(s)))
-                    .Select(s => new TagSpan<TextMarkerTag>(new SnapshotSpan(spans.First().Snapshot, s), ProjectionSpanTag.Instance));
+                return allSpans.Where(s => spans.Any(ss => ss.IntersectsWith(s)))
+                    .Select(
+                        s =>
+                            new TagSpan<TextMarkerTag>(
+                                new SnapshotSpan(spans.First().Snapshot, s),
+                                ProjectionSpanTag.Instance
+                            )
+                    );
             }
 
             public void Dispose()

@@ -23,11 +23,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         public VSTelemetryLogger(TelemetrySession session)
         {
             _session = session;
-            _pendingScopes = new ConcurrentDictionary<int, object>(concurrencyLevel: 2, capacity: 10);
+            _pendingScopes = new ConcurrentDictionary<int, object>(
+                concurrencyLevel: 2,
+                capacity: 10
+            );
         }
 
-        public bool IsEnabled(FunctionId functionId)
-            => _session.IsOptedIn;
+        public bool IsEnabled(FunctionId functionId) => _session.IsOptedIn;
 
         public void Log(FunctionId functionId, LogMessage logMessage)
         {
@@ -48,13 +50,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 var telemetryEvent = CreateTelemetryEvent(functionId, kvLogMessage);
                 _session.PostEvent(telemetryEvent);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int blockId, CancellationToken cancellationToken)
-        {
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            CancellationToken cancellationToken
+        ) {
             if (!(logMessage is KeyValueLogMessage kvLogMessage))
             {
                 return;
@@ -65,13 +69,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 // guard us from exception thrown by telemetry
                 _pendingScopes[blockId] = CreateAndStartScope(kvLogMessage.Kind, functionId);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int blockId, int delta, CancellationToken cancellationToken)
-        {
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            int delta,
+            CancellationToken cancellationToken
+        ) {
             if (!(logMessage is KeyValueLogMessage kvLogMessage))
             {
                 return;
@@ -84,22 +91,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 switch (kind)
                 {
                     case LogType.Trace:
-                        EndScope<OperationEvent>(functionId, blockId, kvLogMessage, cancellationToken);
+                        EndScope<OperationEvent>(
+                            functionId,
+                            blockId,
+                            kvLogMessage,
+                            cancellationToken
+                        );
                         return;
                     case LogType.UserAction:
-                        EndScope<UserTaskEvent>(functionId, blockId, kvLogMessage, cancellationToken);
+                        EndScope<UserTaskEvent>(
+                            functionId,
+                            blockId,
+                            kvLogMessage,
+                            cancellationToken
+                        );
                         return;
                     default:
                         throw ExceptionUtilities.UnexpectedValue(kind);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        private void EndScope<T>(FunctionId functionId, int blockId, KeyValueLogMessage kvLogMessage, CancellationToken cancellationToken)
-            where T : OperationEvent
+        private void EndScope<T>(
+            FunctionId functionId,
+            int blockId,
+            KeyValueLogMessage kvLogMessage,
+            CancellationToken cancellationToken
+        ) where T : OperationEvent
         {
             if (!_pendingScopes.TryRemove(blockId, out var value))
             {
@@ -110,12 +129,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             var operation = (TelemetryScope<T>)value;
 
             AppendProperties(operation.EndEvent, functionId, kvLogMessage);
-            operation.End(cancellationToken.IsCancellationRequested ? TelemetryResult.UserCancel : TelemetryResult.Success);
+            operation.End(
+                cancellationToken.IsCancellationRequested
+                    ? TelemetryResult.UserCancel
+                    : TelemetryResult.Success
+            );
         }
 
         private object CreateAndStartScope(LogType kind, FunctionId functionId)
         {
-            // use object since TelemetryScope<UserTask> and 
+            // use object since TelemetryScope<UserTask> and
             // TelemetryScope<Operation> can't be shared
             var eventName = functionId.GetEventName();
 
@@ -127,14 +150,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             };
         }
 
-        private static TelemetryEvent CreateTelemetryEvent(FunctionId functionId, KeyValueLogMessage logMessage)
-        {
+        private static TelemetryEvent CreateTelemetryEvent(
+            FunctionId functionId,
+            KeyValueLogMessage logMessage
+        ) {
             var eventName = functionId.GetEventName();
             return AppendProperties(new TelemetryEvent(eventName), functionId, logMessage);
         }
 
-        private static T AppendProperties<T>(T @event, FunctionId functionId, KeyValueLogMessage logMessage)
-            where T : TelemetryEvent
+        private static T AppendProperties<T>(
+            T @event,
+            FunctionId functionId,
+            KeyValueLogMessage logMessage
+        ) where T : TelemetryEvent
         {
             if (!logMessage.ContainsProperty)
             {
@@ -147,7 +175,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
                 // call SetProperty. VS telemetry will take care of finding correct
                 // API based on given object type for us.
-                // 
+                //
                 // numeric data will show up in ES with measurement prefix.
                 @event.Properties.Add(propertyName, kv.Value);
             }

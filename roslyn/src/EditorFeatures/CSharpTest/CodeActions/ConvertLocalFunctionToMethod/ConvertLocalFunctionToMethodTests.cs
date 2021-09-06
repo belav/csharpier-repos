@@ -17,14 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
 {
     public class ConvertLocalFunctionToMethodTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertLocalFunctionToMethodCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertLocalFunctionToMethodCodeRefactoringProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestCaptures1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void Use<T>(T a) {}
     static void Use<T>(ref T a) {}
@@ -50,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
         System.Action x = LocalFunction;
     }
 }",
-@"class C
+                @"class C
 {
     static void Use<T>(T a) {}
     static void Use<T>(ref T a) {}
@@ -78,14 +80,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLoca
         Use(this);
         LocalFunction1(param1, ref param2, local1, ref local2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestCaptures2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static void M()
     {
@@ -98,7 +101,7 @@ struct S
 {
     public int Value;
 }",
-@"class C
+                @"class C
 {
     public static void M()
     {
@@ -111,14 +114,15 @@ struct S
 struct S
 {
     public int Value;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestCaptures3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static void M()
     {
@@ -129,7 +133,7 @@ struct S
         }
     }
 }",
-@"class C
+                @"class C
 {
     public static void M()
     {
@@ -140,14 +144,15 @@ struct S
     {
         System.Func<int> x = () => value;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestCaptures4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static void M(int i, int j)
     {
@@ -156,7 +161,7 @@ struct S
         int LocalFunction2() => j;
     }
 }",
-@"class C
+                @"class C
 {
     public static void M(int i, int j)
     {
@@ -165,14 +170,15 @@ struct S
     }
 
     private static int LocalFunction1(int i) => i;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestCaptures5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static void M()
     {
@@ -184,7 +190,7 @@ struct S
         }
     }
 }",
-@"class C
+                @"class C
 {
     public static void M()
     {
@@ -196,14 +202,15 @@ struct S
         int value = 123;
         System.Func<int> x = () => value;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestTypeParameters1()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T0>
+                @"class C<T0>
 {
     static void LocalFunction() {} // trigger rename
 
@@ -226,7 +233,7 @@ struct S
         }
     }
 }",
-@"class C<T0>
+                @"class C<T0>
 {
     static void LocalFunction() {} // trigger rename
 
@@ -250,14 +257,15 @@ struct S
         LocalFunction1<T2, T4, T5, T6>(a, b);
         System.Action<T5, T6> x = (T5 a1, T6 b1) => LocalFunction1<T2, T4, T5, T6>(a1, b1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestTypeParameters2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -265,7 +273,7 @@ struct S
         LocalFunction(2, 3);
     }
 }",
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -273,14 +281,15 @@ struct S
     }
 
     private static int LocalFunction<T1, T2>(T1 a, T2 b, int i) => i;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestNameConflict()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -291,7 +300,7 @@ struct S
         System.Action x = LocalFunction;
     }
 }",
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -302,14 +311,15 @@ struct S
     }
 
     private void LocalFunction1() => M();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestNamedArguments1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -323,7 +333,7 @@ struct S
         LocalFunction(i: 0);
     }
 }",
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -337,14 +347,18 @@ struct S
     {
         return var;
     }
-}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2));
+}",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp7_2
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestNamedArguments2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -358,7 +372,7 @@ struct S
         LocalFunction(i: 0);
     }
 }",
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -372,14 +386,18 @@ struct S
     {
         return var;
     }
-}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7));
+}",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp7
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestDelegate1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -389,7 +407,7 @@ struct S
         System.Func<int> x = LocalFunction;
     }
 }",
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
 
@@ -399,14 +417,15 @@ struct S
     }
 
     private static int LocalFunction1(int i) => i;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestDelegate2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
     delegate int D(int a, ref string b);
@@ -416,7 +435,7 @@ struct S
         var x = (D)LocalFunction;
     }
 }",
-@"class C
+                @"class C
 {
     void LocalFunction() {} // trigger rename
     delegate int D(int a, ref string b);
@@ -426,14 +445,15 @@ struct S
     }
 
     private static int LocalFunction1(int a, ref string b, ref int i, int j) => i = j;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestAsyncFunction1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 class C
@@ -448,7 +468,7 @@ class C
         M(LocalFunction);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 class C
@@ -463,14 +483,15 @@ class C
     {
         return await task;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         public async Task TestAsyncFunction2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 class C
@@ -485,7 +506,7 @@ class C
         M(LocalFunction);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 class C
@@ -500,7 +521,8 @@ class C
     {
         await task;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -523,7 +545,7 @@ class C
             async Task TestAsync(string signature)
             {
                 await TestInRegularAndScriptAsync(
-$@"class C
+                    $@"class C
 {{
     void M()
     {{
@@ -533,7 +555,7 @@ $@"class C
         }}
     }}
 }}",
-@"class C
+                    @"class C
 {
     void M()
     {
@@ -543,13 +565,14 @@ $@"class C
     {
         return null;
     }
-}");
+}"
+                );
             }
 
             async Task TestMissingAsync(string signature)
             {
                 await this.TestMissingAsync(
-$@"class C
+                    $@"class C
 {{
     void M()
     {{
@@ -558,7 +581,8 @@ $@"class C
             return null;
         }}
     }}
-}}");
+}}"
+                );
             }
         }
 
@@ -567,7 +591,7 @@ $@"class C
         public async Task TestMethodBlockSelection1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -577,7 +601,7 @@ $@"class C
         }|]
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -587,16 +611,16 @@ $@"class C
     {
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection2()
         {
-
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -605,7 +629,8 @@ $@"class C
             return null;
         }|]
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -613,8 +638,7 @@ $@"class C
         public async Task TestMethodBlockSelection3()
         {
             await TestInRegularAndScriptAsync(
-
-@"class C
+                @"class C
 {
     void M()
     {
@@ -626,7 +650,7 @@ $@"class C
         |]
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -637,16 +661,16 @@ $@"class C
     {
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection4()
         {
-
             await this.TestMissingAsync(
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -658,16 +682,16 @@ $@"class C
         
         }|]
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection5()
         {
-
             await this.TestMissingAsync(
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -680,16 +704,16 @@ $@"class C
         }
         object|] a = null
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection6()
         {
-
             await this.TestMissingAsync(
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -703,7 +727,8 @@ $@"class C
         
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -711,7 +736,7 @@ $@"class C
         public async Task TestMethodBlockSelection7()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -720,7 +745,8 @@ $@"class C
             [|return null;|]
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -728,7 +754,7 @@ $@"class C
         public async Task TestMethodBlockSelection8()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -738,7 +764,7 @@ $@"class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -748,7 +774,8 @@ $@"class C
     {
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -756,7 +783,7 @@ $@"class C
         public async Task TestMethodBlockSelection9()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -766,7 +793,7 @@ $@"class C
         }[||]
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -776,7 +803,8 @@ $@"class C
     {
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -784,7 +812,7 @@ $@"class C
         public async Task TestMethodBlockSelection10()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -794,7 +822,7 @@ $@"class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -804,14 +832,15 @@ $@"class C
     {
         return null;
     }
-}");
+}"
+            );
         }
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection11()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -821,7 +850,8 @@ $@"class C
             return null;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -829,7 +859,7 @@ $@"class C
         public async Task TestUnsafeLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public unsafe void UnsafeFunction()
     {
@@ -841,7 +871,7 @@ $@"class C
         var aReference = GetPtr(&b);
     }
 }",
-@"class C
+                @"class C
 {
     public unsafe void UnsafeFunction()
     {
@@ -853,7 +883,8 @@ $@"class C
     {
         return bytePt;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -861,7 +892,7 @@ $@"class C
         public async Task TestUnsafeLocalFunctionInUnsafeMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public unsafe void UnsafeFunction()
     {
@@ -873,7 +904,7 @@ $@"class C
         var aReference = GetPtr(&b);
     }
 }",
-@"class C
+                @"class C
 {
     public unsafe void UnsafeFunction()
     {
@@ -885,7 +916,8 @@ $@"class C
     {
         return bytePt;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
@@ -893,7 +925,7 @@ $@"class C
         public async Task TestLocalFunctionInUnsafeMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public unsafe void UnsafeFunction()
     {
@@ -905,7 +937,7 @@ $@"class C
         var aReference = GetPtr(b);
     }
 }",
-@"class C
+                @"class C
 {
     public unsafe void UnsafeFunction()
     {
@@ -917,7 +949,8 @@ $@"class C
     {
         return bytePt;
     }
-}");
+}"
+            );
         }
     }
 }

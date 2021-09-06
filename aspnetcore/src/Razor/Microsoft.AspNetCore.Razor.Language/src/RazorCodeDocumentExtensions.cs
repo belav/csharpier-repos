@@ -26,8 +26,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return (TagHelperDocumentContext)document.Items[typeof(TagHelperDocumentContext)];
         }
 
-        public static void SetTagHelperContext(this RazorCodeDocument document, TagHelperDocumentContext context)
-        {
+        public static void SetTagHelperContext(
+            this RazorCodeDocument document,
+            TagHelperDocumentContext context
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -36,8 +38,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             document.Items[typeof(TagHelperDocumentContext)] = context;
         }
 
-        internal static IReadOnlyList<TagHelperDescriptor> GetTagHelpers(this RazorCodeDocument document)
-        {
+        internal static IReadOnlyList<TagHelperDescriptor> GetTagHelpers(
+            this RazorCodeDocument document
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -46,8 +49,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return (document.Items[typeof(TagHelpersHolder)] as TagHelpersHolder)?.TagHelpers;
         }
 
-        internal static void SetTagHelpers(this RazorCodeDocument document, IReadOnlyList<TagHelperDescriptor> tagHelpers)
-        {
+        internal static void SetTagHelpers(
+            this RazorCodeDocument document,
+            IReadOnlyList<TagHelperDescriptor> tagHelpers
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -66,8 +71,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return document.Items[typeof(RazorSyntaxTree)] as RazorSyntaxTree;
         }
 
-        public static void SetSyntaxTree(this RazorCodeDocument document, RazorSyntaxTree syntaxTree)
-        {
+        public static void SetSyntaxTree(
+            this RazorCodeDocument document,
+            RazorSyntaxTree syntaxTree
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -76,28 +83,36 @@ namespace Microsoft.AspNetCore.Razor.Language
             document.Items[typeof(RazorSyntaxTree)] = syntaxTree;
         }
 
-        public static IReadOnlyList<RazorSyntaxTree> GetImportSyntaxTrees(this RazorCodeDocument document)
-        {
+        public static IReadOnlyList<RazorSyntaxTree> GetImportSyntaxTrees(
+            this RazorCodeDocument document
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
             }
 
-            return (document.Items[typeof(ImportSyntaxTreesHolder)] as ImportSyntaxTreesHolder)?.SyntaxTrees;
+            return (
+                document.Items[typeof(ImportSyntaxTreesHolder)] as ImportSyntaxTreesHolder
+            )?.SyntaxTrees;
         }
 
-        public static void SetImportSyntaxTrees(this RazorCodeDocument document, IReadOnlyList<RazorSyntaxTree> syntaxTrees)
-        {
+        public static void SetImportSyntaxTrees(
+            this RazorCodeDocument document,
+            IReadOnlyList<RazorSyntaxTree> syntaxTrees
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
             }
 
-            document.Items[typeof(ImportSyntaxTreesHolder)] = new ImportSyntaxTreesHolder(syntaxTrees);
+            document.Items[typeof(ImportSyntaxTreesHolder)] = new ImportSyntaxTreesHolder(
+                syntaxTrees
+            );
         }
 
-        public static DocumentIntermediateNode GetDocumentIntermediateNode(this RazorCodeDocument document)
-        {
+        public static DocumentIntermediateNode GetDocumentIntermediateNode(
+            this RazorCodeDocument document
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -106,8 +121,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return document.Items[typeof(DocumentIntermediateNode)] as DocumentIntermediateNode;
         }
 
-        public static void SetDocumentIntermediateNode(this RazorCodeDocument document, DocumentIntermediateNode documentNode)
-        {
+        public static void SetDocumentIntermediateNode(
+            this RazorCodeDocument document,
+            DocumentIntermediateNode documentNode
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -147,8 +164,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return (RazorCSharpDocument)document.Items[typeof(RazorCSharpDocument)];
         }
 
-        public static void SetCSharpDocument(this RazorCodeDocument document, RazorCSharpDocument csharp)
-        {
+        public static void SetCSharpDocument(
+            this RazorCodeDocument document,
+            RazorCSharpDocument csharp
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -167,8 +186,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return (RazorParserOptions)document.Items[typeof(RazorParserOptions)];
         }
 
-        public static void SetParserOptions(this RazorCodeDocument document, RazorParserOptions parserOptions)
-        {
+        public static void SetParserOptions(
+            this RazorCodeDocument document,
+            RazorParserOptions parserOptions
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -177,8 +198,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             document.Items[typeof(RazorParserOptions)] = parserOptions;
         }
 
-        public static RazorCodeGenerationOptions GetCodeGenerationOptions(this RazorCodeDocument document)
-        {
+        public static RazorCodeGenerationOptions GetCodeGenerationOptions(
+            this RazorCodeDocument document
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -187,8 +209,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return (RazorCodeGenerationOptions)document.Items[typeof(RazorCodeGenerationOptions)];
         }
 
-        public static void SetCodeGenerationOptions(this RazorCodeDocument document, RazorCodeGenerationOptions codeGenerationOptions)
-        {
+        public static void SetCodeGenerationOptions(
+            this RazorCodeDocument document,
+            RazorCodeGenerationOptions codeGenerationOptions
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -240,10 +264,13 @@ namespace Microsoft.AspNetCore.Razor.Language
         // In general documents will have a relative path (relative to the project root).
         // We can only really compute a nice namespace when we know a relative path.
         //
-        // However all kinds of thing are possible in tools. We shouldn't barf here if the document isn't 
+        // However all kinds of thing are possible in tools. We shouldn't barf here if the document isn't
         // set up correctly.
-        public static bool TryComputeNamespace(this RazorCodeDocument document, bool fallbackToRootNamespace, out string @namespace)
-        {
+        public static bool TryComputeNamespace(
+            this RazorCodeDocument document,
+            bool fallbackToRootNamespace,
+            out string @namespace
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -269,8 +296,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 // ImportSyntaxTrees is usually set. Just being defensive.
                 foreach (var importSyntaxTree in importSyntaxTrees)
                 {
-                    if (importSyntaxTree != null && NamespaceVisitor.TryGetLastNamespaceDirective(importSyntaxTree, out var importNamespaceContent, out var importNamespaceLocation))
-                    {
+                    if (
+                        importSyntaxTree != null
+                        && NamespaceVisitor.TryGetLastNamespaceDirective(
+                            importSyntaxTree,
+                            out var importNamespaceContent,
+                            out var importNamespaceLocation
+                        )
+                    ) {
                         lastNamespaceContent = importNamespaceContent;
                         lastNamespaceLocation = importNamespaceLocation;
                     }
@@ -278,8 +311,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             var syntaxTree = document.GetSyntaxTree();
-            if (syntaxTree != null && NamespaceVisitor.TryGetLastNamespaceDirective(syntaxTree, out var namespaceContent, out var namespaceLocation))
-            {
+            if (
+                syntaxTree != null
+                && NamespaceVisitor.TryGetLastNamespaceDirective(
+                    syntaxTree,
+                    out var namespaceContent,
+                    out var namespaceLocation
+                )
+            ) {
                 lastNamespaceContent = namespaceContent;
                 lastNamespaceLocation = namespaceLocation;
             }
@@ -292,9 +331,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var directiveLocationDirectory = NormalizeDirectory(lastNamespaceLocation.FilePath);
 
                 // We're specifically using OrdinalIgnoreCase here because Razor treats all paths as case-insensitive.
-                if (!document.Source.FilePath.StartsWith(directiveLocationDirectory, StringComparison.OrdinalIgnoreCase) ||
-                    document.Source.FilePath.Length <= directiveLocationDirectory.Length)
-                {
+                if (
+                    !document.Source.FilePath.StartsWith(
+                        directiveLocationDirectory,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || document.Source.FilePath.Length <= directiveLocationDirectory.Length
+                ) {
                     // The most relevant directive is not from the directory hierarchy, can't compute a suffix.
                     appendSuffix = false;
                 }
@@ -302,12 +345,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     // We know that the document containing the namespace directive is in the current document's heirarchy.
                     // Let's compute the actual relative path that we'll use to compute the namespace suffix.
-                    relativePath = document.Source.FilePath.Substring(directiveLocationDirectory.Length);
+                    relativePath = document.Source.FilePath.Substring(
+                        directiveLocationDirectory.Length
+                    );
                 }
             }
             else if (fallbackToRootNamespace)
             {
-                var options = document.GetCodeGenerationOptions() ?? document.GetDocumentIntermediateNode()?.Options;
+                var options =
+                    document.GetCodeGenerationOptions()
+                    ?? document.GetDocumentIntermediateNode()?.Options;
                 baseNamespace = options?.RootNamespace;
                 appendSuffix = true;
             }
@@ -322,7 +369,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             var builder = new StringBuilder();
 
             // Sanitize the base namespace, but leave the dots.
-            var segments = baseNamespace.Split(NamespaceSeparators, StringSplitOptions.RemoveEmptyEntries);
+            var segments = baseNamespace.Split(
+                NamespaceSeparators,
+                StringSplitOptions.RemoveEmptyEntries
+            );
             builder.Append(CSharpIdentifier.SanitizeIdentifier(segments[0]));
             for (var i = 1; i < segments.Length; i++)
             {
@@ -333,7 +383,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (appendSuffix)
             {
                 // If we get here, we already have a base namespace and the relative path that should be used as the namespace suffix.
-                segments = relativePath.Split(PathSeparators, StringSplitOptions.RemoveEmptyEntries);
+                segments = relativePath.Split(
+                    PathSeparators,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
 
                 // Skip the last segment because it's the FileName.
                 for (var i = 0; i < segments.Length - 1; i++)
@@ -354,7 +407,7 @@ namespace Microsoft.AspNetCore.Razor.Language
             // both 'view engine' style paths and absolute paths.
             //
             // We also don't normalize the separators here. We expect that all documents are using a consistent style of path.
-            // 
+            //
             // If we can't normalize the path, we just return null so it will be ignored.
             string NormalizeDirectory(string path)
             {
@@ -428,8 +481,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             public static bool TryGetLastNamespaceDirective(
                 RazorSyntaxTree syntaxTree,
                 out string namespaceDirectiveContent,
-                out SourceSpan namespaceDirectiveSpan)
-            {
+                out SourceSpan namespaceDirectiveSpan
+            ) {
                 var visitor = new NamespaceVisitor(syntaxTree.Source);
                 visitor.Visit(syntaxTree.Root);
                 if (string.IsNullOrEmpty(visitor.LastNamespaceContent))
@@ -451,9 +504,17 @@ namespace Microsoft.AspNetCore.Razor.Language
                     var directiveContent = node.Body?.GetContent();
 
                     // In practice, this should never be null and always start with 'namespace'. Just being defensive here.
-                    if (directiveContent != null && directiveContent.StartsWith(NamespaceDirective.Directive.Directive, StringComparison.Ordinal))
-                    {
-                        LastNamespaceContent = directiveContent.Substring(NamespaceDirective.Directive.Directive.Length).Trim();
+                    if (
+                        directiveContent != null
+                        && directiveContent.StartsWith(
+                            NamespaceDirective.Directive.Directive,
+                            StringComparison.Ordinal
+                        )
+                    ) {
+                        LastNamespaceContent = directiveContent.Substring(
+                                NamespaceDirective.Directive.Directive.Length
+                            )
+                            .Trim();
                         LastNamespaceLocation = node.GetSourceSpan(_source);
                     }
                 }

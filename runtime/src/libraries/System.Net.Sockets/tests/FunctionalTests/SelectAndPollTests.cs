@@ -12,27 +12,43 @@ namespace System.Net.Sockets.Tests
     public class SelectAndPollTests
     {
         private const int SelectTimeout = 100;
-        private const int SelectSuccessTimeoutMicroseconds = 5*1000*1000; // 5 seconds
+        private const int SelectSuccessTimeoutMicroseconds = 5 * 1000 * 1000; // 5 seconds
 
         [Fact]
         public void SelectNone_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => Socket.Select(null, null, null, SelectSuccessTimeoutMicroseconds));
+            Assert.Throws<ArgumentNullException>(
+                () => Socket.Select(null, null, null, SelectSuccessTimeoutMicroseconds)
+            );
         }
 
         [Fact]
         public void Select_Read_NotASocket_Throws()
         {
             var list = new List<object> { new object() };
-            AssertExtensions.Throws<ArgumentException>("socketList", () => Socket.Select(list, null, null, SelectSuccessTimeoutMicroseconds));
+            AssertExtensions.Throws<ArgumentException>(
+                "socketList",
+                () => Socket.Select(list, null, null, SelectSuccessTimeoutMicroseconds)
+            );
         }
 
         [Fact]
         public void SelectRead_Single_Success()
         {
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 int receiverPort = receiver.BindToAnonymousPort(IPAddress.Loopback);
                 var receiverEndpoint = new IPEndPoint(IPAddress.Loopback, receiverPort);
 
@@ -49,8 +65,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectRead_Single_Timeout()
         {
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 var list = new List<Socket> { receiver };
@@ -63,10 +84,27 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectRead_Multiple_Success()
         {
-            using (var firstReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var secondReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var firstReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var secondReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 int firstReceiverPort = firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
                 var firstReceiverEndpoint = new IPEndPoint(IPAddress.Loopback, firstReceiverPort);
 
@@ -77,28 +115,56 @@ namespace System.Net.Sockets.Tests
                 sender.SendTo(new byte[1], SocketFlags.None, secondReceiverEndpoint);
 
                 var sw = Stopwatch.StartNew();
-                Assert.True(SpinWait.SpinUntil(() =>
-                {
-                    var list = new List<Socket> { firstReceiver, secondReceiver };
-                    Socket.Select(list, null, null, Math.Max((int)(SelectSuccessTimeoutMicroseconds - (sw.Elapsed.TotalSeconds * 1000000)), 0));
-                    Assert.True(list.Count <= 2);
-                    if (list.Count == 2)
-                    {
-                        Assert.Equal(firstReceiver, list[0]);
-                        Assert.Equal(secondReceiver, list[1]);
-                        return true;
-                    }
-                    return false;
-                }, SelectSuccessTimeoutMicroseconds / 1000), "Failed to select both items within allotted time");
+                Assert.True(
+                    SpinWait.SpinUntil(
+                        () =>
+                        {
+                            var list = new List<Socket> { firstReceiver, secondReceiver };
+                            Socket.Select(
+                                list,
+                                null,
+                                null,
+                                Math.Max(
+                                    (int)(
+                                        SelectSuccessTimeoutMicroseconds
+                                        - (sw.Elapsed.TotalSeconds * 1000000)
+                                    ),
+                                    0
+                                )
+                            );
+                            Assert.True(list.Count <= 2);
+                            if (list.Count == 2)
+                            {
+                                Assert.Equal(firstReceiver, list[0]);
+                                Assert.Equal(secondReceiver, list[1]);
+                                return true;
+                            }
+                            return false;
+                        },
+                        SelectSuccessTimeoutMicroseconds / 1000
+                    ),
+                    "Failed to select both items within allotted time"
+                );
             }
         }
 
         [Fact]
         public void SelectRead_Multiple_Timeout()
         {
-            using (var firstReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var secondReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var firstReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var secondReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
                 secondReceiver.BindToAnonymousPort(IPAddress.Loopback);
 
@@ -112,10 +178,27 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectRead_Multiple_Mixed()
         {
-            using (var firstReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var secondReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var firstReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var secondReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 int secondReceiverPort = secondReceiver.BindToAnonymousPort(IPAddress.Loopback);
@@ -135,14 +218,22 @@ namespace System.Net.Sockets.Tests
         public void Select_Write_NotASocket_Throws()
         {
             var list = new List<object> { new object() };
-            AssertExtensions.Throws<ArgumentException>("socketList", () => Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds));
+            AssertExtensions.Throws<ArgumentException>(
+                "socketList",
+                () => Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds)
+            );
         }
 
         [Fact]
         public void SelectWrite_Single_Success()
         {
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 var list = new List<Socket> { sender };
                 Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds);
 
@@ -154,8 +245,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectWrite_Single_Timeout()
         {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
                 listener.AcceptAsync();
@@ -170,9 +266,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectWrite_Multiple_Success()
         {
-            using (var firstSender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var secondSender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var firstSender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var secondSender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 var list = new List<Socket> { firstSender, secondSender };
                 Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds);
 
@@ -185,9 +292,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectWrite_Multiple_Timeout()
         {
-            using (var firstListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var secondListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var firstListener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var secondListener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 firstListener.BindToAnonymousPort(IPAddress.Loopback);
                 firstListener.Listen(1);
                 firstListener.AcceptAsync();
@@ -206,9 +324,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectWrite_Multiple_Mixed()
         {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
                 listener.AcceptAsync();
@@ -225,14 +354,22 @@ namespace System.Net.Sockets.Tests
         public void Select_Error_NotASocket_Throws()
         {
             var list = new List<object> { new object() };
-            AssertExtensions.Throws<ArgumentException>("socketList", () => Socket.Select(null, null, list, SelectSuccessTimeoutMicroseconds));
+            AssertExtensions.Throws<ArgumentException>(
+                "socketList",
+                () => Socket.Select(null, null, list, SelectSuccessTimeoutMicroseconds)
+            );
         }
 
         [Fact]
         public void SelectError_Single_Timeout()
         {
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 var list = new List<Socket> { receiver };
@@ -245,9 +382,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SelectError_Multiple_Timeout()
         {
-            using (var firstReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var secondReceiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var firstReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var secondReceiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 firstReceiver.BindToAnonymousPort(IPAddress.Loopback);
                 secondReceiver.BindToAnonymousPort(IPAddress.Loopback);
 
@@ -261,9 +409,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void PollRead_Single_Success()
         {
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 int receiverPort = receiver.BindToAnonymousPort(IPAddress.Loopback);
                 var receiverEndpoint = new IPEndPoint(IPAddress.Loopback, receiverPort);
 
@@ -276,8 +435,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void PollRead_Single_Timeout()
         {
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 Assert.False(receiver.Poll(SelectTimeout, SelectMode.SelectRead));
@@ -287,8 +451,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void PollWrite_Single_Success()
         {
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 Assert.True(sender.Poll(SelectSuccessTimeoutMicroseconds, SelectMode.SelectWrite));
             }
         }
@@ -296,8 +465,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void PollWrite_Single_Timeout()
         {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.BindToAnonymousPort(IPAddress.Loopback);
                 listener.Listen(1);
                 listener.AcceptAsync();
@@ -309,8 +483,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void PollError_Single_Timeout()
         {
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 Assert.False(receiver.Poll(SelectTimeout, SelectMode.SelectError));

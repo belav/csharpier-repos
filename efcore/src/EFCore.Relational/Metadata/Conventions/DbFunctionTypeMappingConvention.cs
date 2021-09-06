@@ -24,19 +24,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public DbFunctionTypeMappingConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-        {
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
-            _relationalTypeMappingSource = (IRelationalTypeMappingSource)dependencies.TypeMappingSource;
+            _relationalTypeMappingSource =
+                (IRelationalTypeMappingSource)dependencies.TypeMappingSource;
         }
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
+            IConventionContext<IConventionModelBuilder> context
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(context, nameof(context));
 
@@ -49,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     parameter.Builder!.HasTypeMapping(
                         !string.IsNullOrEmpty(parameter.StoreType)
                             ? _relationalTypeMappingSource.FindMapping(parameter.StoreType)
-                            : _relationalTypeMappingSource.FindMapping(parameter.ClrType));
+                            : _relationalTypeMappingSource.FindMapping(parameter.ClrType)
+                    );
                 }
 
                 if (dbFunction.IsScalar)
@@ -57,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     dbFunction.Builder.HasTypeMapping(
                         !string.IsNullOrEmpty(dbFunction.StoreType)
                             ? _relationalTypeMappingSource.FindMapping(dbFunction.StoreType)
-                            : _relationalTypeMappingSource.FindMapping(dbFunction.ReturnType));
+                            : _relationalTypeMappingSource.FindMapping(dbFunction.ReturnType)
+                    );
                 }
             }
         }

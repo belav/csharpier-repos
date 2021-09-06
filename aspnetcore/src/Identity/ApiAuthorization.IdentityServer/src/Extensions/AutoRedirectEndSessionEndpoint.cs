@@ -31,8 +31,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             ILogger<AutoRedirectEndSessionEndpoint> logger,
             IEndSessionRequestValidator requestValidator,
             IOptions<IdentityServerOptions> identityServerOptions,
-            IUserSession session)
-        {
+            IUserSession session
+        ) {
             _logger = logger;
             _session = session;
             _identityServerOptions = identityServerOptions;
@@ -52,15 +52,24 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var result = await _requestvalidator.ValidateAsync(parameters, user);
             if (result.IsError)
             {
-                _logger.LogError(LoggerEventIds.EndingSessionFailed, "Error ending session {Error}", result.Error);
+                _logger.LogError(
+                    LoggerEventIds.EndingSessionFailed,
+                    "Error ending session {Error}",
+                    result.Error
+                );
                 return new RedirectResult(_identityServerOptions.Value.UserInteraction.ErrorUrl);
             }
 
             var client = result.ValidatedRequest?.Client;
-            if (client != null &&
-                client.Properties.TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type))
-            {
-                var signInScheme = _identityServerOptions.Value.Authentication.CookieAuthenticationScheme;
+            if (
+                client != null
+                && client.Properties.TryGetValue(
+                    ApplicationProfilesPropertyNames.Profile,
+                    out var type
+                )
+            ) {
+                var signInScheme =
+                    _identityServerOptions.Value.Authentication.CookieAuthenticationScheme;
                 if (signInScheme != null)
                 {
                     await ctx.SignOutAsync(signInScheme);
@@ -73,7 +82,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 var postLogOutUri = result.ValidatedRequest.PostLogOutUri;
                 if (result.ValidatedRequest.State != null)
                 {
-                    postLogOutUri = QueryHelpers.AddQueryString(postLogOutUri, OpenIdConnectParameterNames.State, result.ValidatedRequest.State);
+                    postLogOutUri = QueryHelpers.AddQueryString(
+                        postLogOutUri,
+                        OpenIdConnectParameterNames.State,
+                        result.ValidatedRequest.State
+                    );
                 }
 
                 return new RedirectResult(postLogOutUri);
@@ -104,9 +117,14 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 return new StatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (HttpMethods.IsPost(request.Method) &&
-                !string.Equals(request.ContentType, "application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                HttpMethods.IsPost(request.Method)
+                && !string.Equals(
+                    request.ContentType,
+                    "application/x-www-form-urlencoded",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return new StatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -115,7 +133,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         internal class RedirectResult : IEndpointResult
         {
-
             public RedirectResult(string url)
             {
                 Url = url;

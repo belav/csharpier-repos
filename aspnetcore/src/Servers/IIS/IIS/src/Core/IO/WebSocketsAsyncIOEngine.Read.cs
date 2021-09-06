@@ -14,9 +14,14 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
         internal class WebSocketReadOperation : AsyncIOOperation
         {
             [UnmanagedCallersOnly]
-            public static NativeMethods.REQUEST_NOTIFICATION_STATUS ReadCallback(IntPtr httpContext, IntPtr completionInfo, IntPtr completionContext)
-            {
-                var context = (WebSocketReadOperation)GCHandle.FromIntPtr(completionContext).Target!;
+            public static NativeMethods.REQUEST_NOTIFICATION_STATUS ReadCallback(
+                IntPtr httpContext,
+                IntPtr completionInfo,
+                IntPtr completionContext
+            ) {
+                var context = (WebSocketReadOperation)GCHandle.FromIntPtr(
+                    completionContext
+                ).Target!;
 
                 NativeMethods.HttpGetCompletionInfo(completionInfo, out var cbBytes, out var hr);
 
@@ -52,7 +57,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                     &ReadCallback,
                     (IntPtr)_thisHandle,
                     out bytes,
-                    out var completionExpected);
+                    out var completionExpected
+                );
 
                 return !completionExpected;
             }
@@ -82,7 +88,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 _engine.ReturnOperation(this);
             }
 
-            protected override bool IsSuccessfulResult(int hr) => hr == NativeMethods.ERROR_HANDLE_EOF;
+            protected override bool IsSuccessfulResult(int hr) =>
+                hr == NativeMethods.ERROR_HANDLE_EOF;
         }
     }
 }

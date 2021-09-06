@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             string fileName,
             string typeName,
             bool sameFile,
-            ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults)
-        {
+            ImmutableArray<ExtractClassMemberAnalysisResult> memberAnalysisResults
+        ) {
             FileName = fileName;
             TypeName = typeName;
             MemberAnalysisResults = memberAnalysisResults;
@@ -41,9 +41,7 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         /// </summary>
         public bool MakeAbstract { get; }
 
-        public ExtractClassMemberAnalysisResult(
-            ISymbol member,
-            bool makeAbstract)
+        public ExtractClassMemberAnalysisResult(ISymbol member, bool makeAbstract)
         {
             Member = member;
             MakeAbstract = makeAbstract;

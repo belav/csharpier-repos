@@ -26,14 +26,27 @@ namespace StaticTestGenerator
         public static void Main(string[] args)
         {
             // Validate the command line and parse out the relevant pieces.
-            if (!TryParseCommandLine(args, out string testAssemblyPath, out string runtimeAssembliesPath, out string outputPath, out Xunit.ConsoleClient.CommandLine? xunitCommandLine))
-            {
+            if (
+                !TryParseCommandLine(
+                    args,
+                    out string testAssemblyPath,
+                    out string runtimeAssembliesPath,
+                    out string outputPath,
+                    out Xunit.ConsoleClient.CommandLine? xunitCommandLine
+                )
+            ) {
                 return;
             }
 
             // Set up an assembly resolving event handler to help locate helper assemblies that are needed
             // to process the test assembly, such as xunit assemblies and .NET Core test helpers.
-            string[] probingPaths = new string[] { Path.GetDirectoryName(testAssemblyPath)!, runtimeAssembliesPath, outputPath, AppContext.BaseDirectory };
+            string[] probingPaths = new string[]
+            {
+                Path.GetDirectoryName(testAssemblyPath)!,
+                runtimeAssembliesPath,
+                outputPath,
+                AppContext.BaseDirectory
+            };
             AppDomain.CurrentDomain.AssemblyResolve += (object? sender, ResolveEventArgs args) =>
             {
                 // Clean up the dll name.
@@ -64,10 +77,17 @@ namespace StaticTestGenerator
             };
 
             // Discover all of the test methods in the test assembly, and find all theory inputs.
-            DiscoverTestMethods(testAssemblyPath, out Assembly testAssembly, out TestDiscoverySink sink);
-            Dictionary<IXunitTestCase, List<TestCase>> testCaseData = ComputeTestMethodTestCases(sink);
+            DiscoverTestMethods(
+                testAssemblyPath,
+                out Assembly testAssembly,
+                out TestDiscoverySink sink
+            );
+            Dictionary<IXunitTestCase, List<TestCase>> testCaseData = ComputeTestMethodTestCases(
+                sink
+            );
 
-            int numUnsupported = 0, numCalls = 0;
+            int numUnsupported = 0,
+                numCalls = 0;
             XunitFilters xunitFilters = xunitCommandLine!.Project.Filters;
             var sb = new StringBuilder();
 
@@ -125,7 +145,9 @@ namespace StaticTestGenerator
                 for (int i = 0; i < testCases.Count; i++)
                 {
                     TestCase test = testCases[i];
-                    MethodInfo? mi = test.MemberDataMember as MethodInfo ?? (test.MemberDataMember as PropertyInfo)?.GetGetMethod();
+                    MethodInfo? mi =
+                        test.MemberDataMember as MethodInfo
+                        ?? (test.MemberDataMember as PropertyInfo)?.GetGetMethod();
 
                     // Skip theory data we can't support.
 
@@ -133,14 +155,18 @@ namespace StaticTestGenerator
                     {
                         if (!mi.IsPublic || !mi.IsStatic)
                         {
-                            Log($"Unsupported {t.Name}.{testCase.Method.Name}. Non-public MemberData {mi.Name}.");
+                            Log(
+                                $"Unsupported {t.Name}.{testCase.Method.Name}. Non-public MemberData {mi.Name}."
+                            );
                             numUnsupported++;
                             continue;
                         }
 
                         if (m.IsGenericMethod)
                         {
-                            Log($"Unsupported {t.Name}.{testCase.Method.Name}. Generic method requires reflection invoke.");
+                            Log(
+                                $"Unsupported {t.Name}.{testCase.Method.Name}. Generic method requires reflection invoke."
+                            );
                             numUnsupported++;
                             continue;
                         }
@@ -148,16 +174,26 @@ namespace StaticTestGenerator
 
                     if (test.MemberDataMember is FieldInfo fi && (!fi.IsPublic || !fi.IsStatic))
                     {
-                        Log($"Unsupported {t.Name}.{testCase.Method.Name}. Non-public MemberData field {fi.Name}.");
+                        Log(
+                            $"Unsupported {t.Name}.{testCase.Method.Name}. Non-public MemberData field {fi.Name}."
+                        );
                         numUnsupported++;
                         continue;
                     }
 
                     if (test.Values != null)
                     {
-                        if (!test.Values.All(v => v == null || (v is Type t && IsPublic(t)) || IsPublic(v.GetType())))
-                        {
-                            Log($"Unsupported {t.Name}.{testCase.Method.Name}. Non-public theory argument.");
+                        if (
+                            !test.Values.All(
+                                v =>
+                                    v == null
+                                    || (v is Type t && IsPublic(t))
+                                    || IsPublic(v.GetType())
+                            )
+                        ) {
+                            Log(
+                                $"Unsupported {t.Name}.{testCase.Method.Name}. Non-public theory argument."
+                            );
                             numUnsupported++;
                             continue;
                         }
@@ -194,17 +230,26 @@ namespace StaticTestGenerator
 
             // Write out the .cs file
             string csPath = Path.Combine(outputPath, "Program.cs");
-            File.WriteAllText(csPath, CSharpSyntaxTree.ParseText(sb.ToString()).GetRoot().NormalizeWhitespace().ToString());
+            File.WriteAllText(
+                csPath,
+                CSharpSyntaxTree.ParseText(sb.ToString()).GetRoot().NormalizeWhitespace().ToString()
+            );
             Log($"Wrote {csPath}");
 
             // Write out the associated .csproj
-            string csprojPath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(testAssemblyPath) + "-runner.csproj");
+            string csprojPath = Path.Combine(
+                outputPath,
+                Path.GetFileNameWithoutExtension(testAssemblyPath) + "-runner.csproj"
+            );
             File.WriteAllText(
                 csprojPath,
-                CSProjTemplate
-                .Replace("#HelperAssemblyLocation#", Path.GetDirectoryName(testAssemblyPath) + Path.DirectorySeparatorChar)
-                .Replace("#TestAssembly#", Path.GetFullPath(testAssemblyPath))
-                .Replace("#TestAssemblyLocation#", testAssemblyPath));
+                CSProjTemplate.Replace(
+                        "#HelperAssemblyLocation#",
+                        Path.GetDirectoryName(testAssemblyPath) + Path.DirectorySeparatorChar
+                    )
+                    .Replace("#TestAssembly#", Path.GetFullPath(testAssemblyPath))
+                    .Replace("#TestAssemblyLocation#", testAssemblyPath)
+            );
             Log($"Wrote {csprojPath}");
         }
 
@@ -220,18 +265,21 @@ namespace StaticTestGenerator
             out string testAssemblyPath,
             out string runtimeAssembliesPath,
             out string outputPath,
-            out Xunit.ConsoleClient.CommandLine? xunitCommandLine)
-        {
+            out Xunit.ConsoleClient.CommandLine? xunitCommandLine
+        ) {
             if (args.Length >= 3)
             {
                 static string EnsureEndsWithSeparator(string path) =>
-                    !path.EndsWith(Path.DirectorySeparatorChar) && !path.EndsWith(Path.AltDirectorySeparatorChar) ?
-                    path + Path.DirectorySeparatorChar :
-                    path;
+                    !path.EndsWith(Path.DirectorySeparatorChar)
+                    && !path.EndsWith(Path.AltDirectorySeparatorChar)
+                        ? path + Path.DirectorySeparatorChar
+                        : path;
 
                 runtimeAssembliesPath = EnsureEndsWithSeparator(args[1]);
                 testAssemblyPath = Path.GetFullPath(args[2]);
-                outputPath = EnsureEndsWithSeparator(Path.Combine(args[0], Path.GetFileNameWithoutExtension(testAssemblyPath)));
+                outputPath = EnsureEndsWithSeparator(
+                    Path.Combine(args[0], Path.GetFileNameWithoutExtension(testAssemblyPath))
+                );
 
                 // Gather arguments for xunit.
                 var argsForXunit = new List<string>();
@@ -241,10 +289,12 @@ namespace StaticTestGenerator
                     // If an argument is a response file, load its contents and add that instead.
                     if (extraArg.StartsWith("@"))
                     {
-                        argsForXunit.AddRange(from line in File.ReadAllLines(extraArg.Substring(1))
-                                              where line.Length > 0 && line[0] != '#'
-                                              from part in line.Split(' ')
-                                              select part);
+                        argsForXunit.AddRange(
+                            from line in File.ReadAllLines(extraArg.Substring(1))
+                            where line.Length > 0 && line[0] != '#'
+                            from part in line.Split(' ')
+                            select part
+                        );
                     }
                     else
                     {
@@ -271,9 +321,13 @@ namespace StaticTestGenerator
             }
 
             // Invalid command line arguments.
-            Console.WriteLine("Usage: <output_directory> <helper_assemblies_directory> <test_assembly_path> <xunit_console_options>");
+            Console.WriteLine(
+                "Usage: <output_directory> <helper_assemblies_directory> <test_assembly_path> <xunit_console_options>"
+            );
             Console.WriteLine("    Example:");
-            Console.WriteLine(@"   dotnet run d:\tmpoutput d:\repos\runtime\artifacts\bin\testhost\net6.0-windows-Debug-x64\shared\Microsoft.NETCore.App\6.0.0\ d:\repos\runtime\artifacts\bin\System.Runtime.Tests\net6.0-windows-Debug\System.Runtime.Tests.dll");
+            Console.WriteLine(
+                @"   dotnet run d:\tmpoutput d:\repos\runtime\artifacts\bin\testhost\net6.0-windows-Debug-x64\shared\Microsoft.NETCore.App\6.0.0\ d:\repos\runtime\artifacts\bin\System.Runtime.Tests\net6.0-windows-Debug\System.Runtime.Tests.dll"
+            );
             testAssemblyPath = string.Empty;
             runtimeAssembliesPath = string.Empty;
             outputPath = string.Empty;
@@ -285,8 +339,11 @@ namespace StaticTestGenerator
         /// <param name="testAssemblyPath">The path to the test assembly.</param>
         /// <param name="testAssembly">The loaded test assembly.</param>
         /// <param name="sink">The discovered tests.</param>
-        private static void DiscoverTestMethods(string testAssemblyPath, out Assembly testAssembly, out TestDiscoverySink sink)
-        {
+        private static void DiscoverTestMethods(
+            string testAssemblyPath,
+            out Assembly testAssembly,
+            out TestDiscoverySink sink
+        ) {
             // Load the test assembly.
             testAssembly = Assembly.LoadFrom(testAssemblyPath);
             Log($"Loaded {testAssembly.GetName().Name} from {testAssembly.Location}");
@@ -298,17 +355,24 @@ namespace StaticTestGenerator
                 new ReflectionAssemblyInfo(testAssembly),
                 xunitExecutionAssemblyPath: null,
                 shadowCopyFolder: null,
-                new Xunit.NullMessageSink());
+                new Xunit.NullMessageSink()
+            );
 
             sink = new TestDiscoverySink();
 
-            discoverer.Find(includeSourceInformation: false, sink, TestFrameworkOptions.ForDiscovery(new TestAssemblyConfiguration()
-            {
-                DiagnosticMessages = false,
-                InternalDiagnosticMessages = false,
-                PreEnumerateTheories = false,
-                StopOnFail = false
-            }));
+            discoverer.Find(
+                includeSourceInformation: false,
+                sink,
+                TestFrameworkOptions.ForDiscovery(
+                    new TestAssemblyConfiguration()
+                    {
+                        DiagnosticMessages = false,
+                        InternalDiagnosticMessages = false,
+                        PreEnumerateTheories = false,
+                        StopOnFail = false
+                    }
+                )
+            );
 
             // Wait for the find to complete.
             sink.Finished.WaitOne();
@@ -318,145 +382,229 @@ namespace StaticTestGenerator
         /// <summary>Find all test cases associated with the found tests (e.g. one test case per theory input to each test).</summary>
         /// <param name="sink">The sink containing the discovered tests.</param>
         /// <returns>A dictionary of all tests and their associated test cases.</returns>
-        private static Dictionary<IXunitTestCase, List<TestCase>> ComputeTestMethodTestCases(TestDiscoverySink sink)
-        {
+        private static Dictionary<IXunitTestCase, List<TestCase>> ComputeTestMethodTestCases(
+            TestDiscoverySink sink
+        ) {
             // Create the dictionary containing all tests and associated test cases.
-            Dictionary<IXunitTestCase, List<TestCase>> testCases = sink
-                .TestCases
-                .Cast<IXunitTestCase>()
-                .Select(tc =>
-                {
-                    MethodInfo testMethod = ((ReflectionMethodInfo)tc.Method).MethodInfo;
-                    Type testMethodType = testMethod.ReflectedType!;
-
-                    var cases = new List<TestCase>();
-
-                    if (testMethod.GetParameters().Length > 0)
-                    {
-                        // The test method has arguments, so look for all of the standard data attributes we can use to invoke the theory.
-                        foreach (DataAttribute attr in testMethod.GetCustomAttributes<DataAttribute>(inherit: true))
+            Dictionary<IXunitTestCase, List<TestCase>> testCases =
+                sink.TestCases.Cast<IXunitTestCase>()
+                    .Select(
+                        tc =>
                         {
-                            try
+                            MethodInfo testMethod = ((ReflectionMethodInfo)tc.Method).MethodInfo;
+                            Type testMethodType = testMethod.ReflectedType!;
+
+                            var cases = new List<TestCase>();
+
+                            if (testMethod.GetParameters().Length > 0)
                             {
-                                // DataAttributes can themselves be marked to be skipped.  Ignore the attribute if it is.
-                                if (!string.IsNullOrWhiteSpace(attr.Skip))
-                                {
-                                    continue;
+                                // The test method has arguments, so look for all of the standard data attributes we can use to invoke the theory.
+                                foreach (
+                                    DataAttribute attr in testMethod.GetCustomAttributes<DataAttribute>(
+                                        inherit: true
+                                    )
+                                ) {
+                                    try
+                                    {
+                                        // DataAttributes can themselves be marked to be skipped.  Ignore the attribute if it is.
+                                        if (!string.IsNullOrWhiteSpace(attr.Skip))
+                                        {
+                                            continue;
+                                        }
+
+                                        switch (attr)
+                                        {
+                                            case MemberDataAttribute memberData:
+                                                // For a [MemberData(...)], it might point to a method, property, or field; get the right
+                                                // piece of metadata.  Also, for methods, there might be data to pass to the method
+                                                // when invoking it; store that as well.
+                                                Type memberDataType =
+                                                    memberData.MemberType
+                                                    ?? testMethod.DeclaringType!;
+
+                                                MethodInfo? testDataMethod =
+                                                    memberDataType.GetMethod(
+                                                        memberData.MemberName,
+                                                        BindingFlags.Public
+                                                            | BindingFlags.NonPublic
+                                                            | BindingFlags.Static
+                                                            | BindingFlags.FlattenHierarchy
+                                                    );
+                                                if (testDataMethod != null)
+                                                {
+                                                    cases.Add(
+                                                        new TestCase
+                                                        {
+                                                            MemberDataMember = testDataMethod,
+                                                            Values = memberData.Parameters
+                                                        }
+                                                    );
+                                                    break;
+                                                }
+
+                                                PropertyInfo? testDataProperty =
+                                                    memberDataType.GetProperty(
+                                                        memberData.MemberName,
+                                                        BindingFlags.Public
+                                                            | BindingFlags.NonPublic
+                                                            | BindingFlags.Static
+                                                            | BindingFlags.FlattenHierarchy
+                                                    );
+                                                if (testDataProperty != null)
+                                                {
+                                                    cases.Add(
+                                                        new TestCase
+                                                        {
+                                                            MemberDataMember = testDataProperty
+                                                        }
+                                                    );
+                                                    break;
+                                                }
+
+                                                FieldInfo? testDataField = memberDataType.GetField(
+                                                    memberData.MemberName,
+                                                    BindingFlags.Public
+                                                        | BindingFlags.NonPublic
+                                                        | BindingFlags.Static
+                                                        | BindingFlags.FlattenHierarchy
+                                                );
+                                                if (testDataField != null)
+                                                {
+                                                    cases.Add(
+                                                        new TestCase
+                                                        {
+                                                            MemberDataMember = testDataField
+                                                        }
+                                                    );
+                                                    break;
+                                                }
+
+                                                Log(
+                                                    $"Error finding {memberData.MemberName} in MemberData on {testMethod.Name}"
+                                                );
+                                                break;
+
+                                            case ClassDataAttribute classData:
+                                                if (classData.Class != null)
+                                                {
+                                                    cases.Add(
+                                                        new TestCase
+                                                        {
+                                                            MemberDataMember = classData.Class
+                                                        }
+                                                    );
+                                                }
+                                                break;
+
+                                            case InlineDataAttribute inlineData:
+                                                cases.AddRange(
+                                                    from values in attr.GetData(testMethod)
+                                                    select new TestCase { Values = values }
+                                                );
+                                                break;
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Log(
+                                            $"Error processing {attr} on test method {testMethod.Name}: {e.Message}."
+                                        );
+                                    }
                                 }
 
-                                switch (attr)
-                                {
-                                    case MemberDataAttribute memberData:
-                                        // For a [MemberData(...)], it might point to a method, property, or field; get the right
-                                        // piece of metadata.  Also, for methods, there might be data to pass to the method
-                                        // when invoking it; store that as well.
-                                        Type memberDataType = memberData.MemberType ?? testMethod.DeclaringType!;
+                                // There may also be custom data attributes.  We can't just use their GetData methods, as they
+                                // may return data we can't serialize into the .cs file.  That means we need to be able to serialize
+                                // the construction of the attribute itself into the source file, so that we can effectively treat it
+                                // like we do a member info.  To do that, we enumerate attribute datas.
+                                foreach (
+                                    CustomAttributeData cad in testMethod.GetCustomAttributesData()
+                                ) {
+                                    try
+                                    {
+                                        Type attrType = cad.AttributeType;
 
-                                        MethodInfo? testDataMethod = memberDataType.GetMethod(memberData.MemberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-                                        if (testDataMethod != null)
+                                        if (!attrType.IsSubclassOf(typeof(DataAttribute)))
                                         {
-                                            cases.Add(new TestCase { MemberDataMember = testDataMethod, Values = memberData.Parameters });
-                                            break;
+                                            // We only care about DataAttribute-derived types.
+                                            continue;
                                         }
 
-                                        PropertyInfo? testDataProperty = memberDataType.GetProperty(memberData.MemberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-                                        if (testDataProperty != null)
-                                        {
-                                            cases.Add(new TestCase { MemberDataMember = testDataProperty });
-                                            break;
+                                        if (
+                                            typeof(MemberDataAttribute).IsAssignableFrom(attrType)
+                                            || typeof(ClassDataAttribute).IsAssignableFrom(attrType)
+                                            || typeof(InlineDataAttribute).IsAssignableFrom(
+                                                attrType
+                                            )
+                                        ) {
+                                            // Already handled these in the previous loop.
+                                            continue;
                                         }
 
-                                        FieldInfo? testDataField = memberDataType.GetField(memberData.MemberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-                                        if (testDataField != null)
-                                        {
-                                            cases.Add(new TestCase { MemberDataMember = testDataField });
-                                            break;
+                                        // Skip attributes we can't handle
+                                        if (
+                                            !attrType.IsPublic
+                                            || !cad.Constructor.IsPublic
+                                            || !cad.ConstructorArguments.All(
+                                                c => c.ArgumentType.IsPublic
+                                            )
+                                        ) {
+                                            Log(
+                                                $"Unsupported custom data attribute {cad.AttributeType} on test method {testMethod.Name}."
+                                            );
+                                            continue;
                                         }
 
-                                        Log($"Error finding {memberData.MemberName} in MemberData on {testMethod.Name}");
-                                        break;
-
-                                    case ClassDataAttribute classData:
-                                        if (classData.Class != null)
-                                        {
-                                            cases.Add(new TestCase { MemberDataMember = classData.Class });
-                                        }
-                                        break;
-
-                                    case InlineDataAttribute inlineData:
-                                        cases.AddRange(from values in attr.GetData(testMethod) select new TestCase { Values = values });
-                                        break;
+                                        // Store the attribute type and the ctor values for it.
+                                        object[] values =
+                                            (object[])UnwrapCustomAttributeTypedArguments(
+                                                typeof(object),
+                                                cad.ConstructorArguments
+                                            );
+                                        cases.Add(
+                                            new TestCase
+                                            {
+                                                MemberDataMember = cad.Constructor,
+                                                Values = values
+                                            }
+                                        );
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Log(
+                                            $"Error processing {cad.AttributeType} on test method {testMethod.Name}: {e.Message}."
+                                        );
+                                    }
                                 }
                             }
-                            catch (Exception e)
+                            else
                             {
-                                Log($"Error processing {attr} on test method {testMethod.Name}: {e.Message}.");
+                                // There are no arguments to the method, so we just add a single test case to represent invoking the method.
+                                cases.Add(new TestCase());
                             }
+
+                            return KeyValuePair.Create(tc, cases);
                         }
-
-                        // There may also be custom data attributes.  We can't just use their GetData methods, as they
-                        // may return data we can't serialize into the .cs file.  That means we need to be able to serialize
-                        // the construction of the attribute itself into the source file, so that we can effectively treat it
-                        // like we do a member info.  To do that, we enumerate attribute datas.
-                        foreach (CustomAttributeData cad in testMethod.GetCustomAttributesData())
-                        {
-                            try
-                            {
-                                Type attrType = cad.AttributeType;
-
-                                if (!attrType.IsSubclassOf(typeof(DataAttribute)))
-                                {
-                                    // We only care about DataAttribute-derived types.
-                                    continue;
-                                }
-
-                                if (typeof(MemberDataAttribute).IsAssignableFrom(attrType) ||
-                                    typeof(ClassDataAttribute).IsAssignableFrom(attrType) ||
-                                    typeof(InlineDataAttribute).IsAssignableFrom(attrType))
-                                {
-                                    // Already handled these in the previous loop.
-                                    continue;
-                                }
-
-                                // Skip attributes we can't handle
-                                if (!attrType.IsPublic || !cad.Constructor.IsPublic || !cad.ConstructorArguments.All(c => c.ArgumentType.IsPublic))
-                                {
-                                    Log($"Unsupported custom data attribute {cad.AttributeType} on test method {testMethod.Name}.");
-                                    continue;
-                                }
-
-                                // Store the attribute type and the ctor values for it.
-                                object[] values = (object[])UnwrapCustomAttributeTypedArguments(typeof(object), cad.ConstructorArguments);
-                                cases.Add(new TestCase { MemberDataMember = cad.Constructor, Values = values });
-                            }
-                            catch (Exception e)
-                            {
-                                Log($"Error processing {cad.AttributeType} on test method {testMethod.Name}: {e.Message}.");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // There are no arguments to the method, so we just add a single test case to represent invoking the method.
-                        cases.Add(new TestCase());
-                    }
-
-                    return KeyValuePair.Create(tc, cases);
-                }).ToDictionary(k => k.Key, k => k.Value);
+                    )
+                    .ToDictionary(k => k.Key, k => k.Value);
 
             return testCases;
         }
 
-        private static Array UnwrapCustomAttributeTypedArguments(Type elementType, IList<CustomAttributeTypedArgument> args)
-        {
+        private static Array UnwrapCustomAttributeTypedArguments(
+            Type elementType,
+            IList<CustomAttributeTypedArgument> args
+        ) {
             Array result = Array.CreateInstance(elementType, args.Count);
 
             for (int i = 0; i < args.Count; i++)
             {
                 CustomAttributeTypedArgument cata = args[i];
-                object? newArg = cata.Value is IReadOnlyCollection<CustomAttributeTypedArgument> roc ?
-                    UnwrapCustomAttributeTypedArguments(cata.ArgumentType.GetElementType()!, roc.ToArray()) :
-                    cata.Value;
+                object? newArg = cata.Value is IReadOnlyCollection<CustomAttributeTypedArgument> roc
+                    ? UnwrapCustomAttributeTypedArguments(
+                          cata.ArgumentType.GetElementType()!,
+                          roc.ToArray()
+                      )
+                    : cata.Value;
                 try
                 {
                     result.SetValue(newArg, i);
@@ -477,8 +625,12 @@ namespace StaticTestGenerator
         /// <param name="testMethod">The test method.</param>
         /// <param name="testCase">The test case.</param>
         private static void GenerateTestCaseCode(
-            StringBuilder sb, string testCaseDisplayName, Type testMethodType, MethodInfo testMethod, TestCase testCase)
-        {
+            StringBuilder sb,
+            string testCaseDisplayName,
+            Type testMethodType,
+            MethodInfo testMethod,
+            TestCase testCase
+        ) {
             // Writes out ".MethodName(arg1, arg2, ...)" when all arguments are statically available.
             // The arguments are written as literals.
             void WriteArgumentListStatic(object?[]? arguments, ParameterInfo[] parameters)
@@ -533,7 +685,9 @@ namespace StaticTestGenerator
                         sb.Append(", ");
                     }
 
-                    sb.Append($"Cast<{GetTypeName(parameters[i].ParameterType)}>({argumentsName}[{i}])");
+                    sb.Append(
+                        $"Cast<{GetTypeName(parameters[i].ParameterType)}>({argumentsName}[{i}])"
+                    );
                 }
                 sb.Append(")");
             }
@@ -555,9 +709,10 @@ namespace StaticTestGenerator
                             return string.Empty;
 
                         case 1:
-                            string typeName = parameters[0].ParameterType.Name == "ITestOutputHelper" ?
-                                "DefaultTestOutputHelper" :
-                                GetTypeName(parameters[0].ParameterType);
+                            string typeName =
+                                parameters[0].ParameterType.Name == "ITestOutputHelper"
+                                    ? "DefaultTestOutputHelper"
+                                    : GetTypeName(parameters[0].ParameterType);
                             return $"new {typeName}()";
                     }
                 }
@@ -571,20 +726,26 @@ namespace StaticTestGenerator
             {
                 if (testMethod.IsStatic)
                 {
-                    sb.Append($"Execute(\"{testCaseDisplayName}\", () => {GetTypeName(testMethodType)}.{testMethod.Name}");
+                    sb.Append(
+                        $"Execute(\"{testCaseDisplayName}\", () => {GetTypeName(testMethodType)}.{testMethod.Name}"
+                    );
                     WriteArgumentListStatic(arguments, parameters);
                     sb.AppendLine(");");
                 }
                 else if (testMethodType.GetInterface("IDisposable") != null)
                 {
-                    sb.AppendLine($"using (var inst = new {GetTypeName(testMethodType)}({GetConstructorArgs()}))");
+                    sb.AppendLine(
+                        $"using (var inst = new {GetTypeName(testMethodType)}({GetConstructorArgs()}))"
+                    );
                     sb.Append($"Execute(\"{testCaseDisplayName}\", () => inst.{testMethod.Name}");
                     WriteArgumentListStatic(arguments, parameters);
                     sb.AppendLine(");");
                 }
                 else
                 {
-                    sb.Append($"Execute(\"{testCaseDisplayName}\", () => new {GetTypeName(testMethodType)}({GetConstructorArgs()}).{testMethod.Name}");
+                    sb.Append(
+                        $"Execute(\"{testCaseDisplayName}\", () => new {GetTypeName(testMethodType)}({GetConstructorArgs()}).{testMethod.Name}"
+                    );
                     WriteArgumentListStatic(arguments, parameters);
                     sb.AppendLine(");");
                 }
@@ -595,20 +756,26 @@ namespace StaticTestGenerator
             {
                 if (testMethod.IsStatic)
                 {
-                    sb.Append($"Execute(\"{testCaseDisplayName}\", () => {GetTypeName(testMethodType)}.{testMethod.Name}");
+                    sb.Append(
+                        $"Execute(\"{testCaseDisplayName}\", () => {GetTypeName(testMethodType)}.{testMethod.Name}"
+                    );
                     WriteArgumentListDynamic(argumentsName, parameters);
                     sb.AppendLine(");");
                 }
                 else if (testMethodType.GetInterface("IDisposable") != null)
                 {
-                    sb.AppendLine($"using (var inst = new {GetTypeName(testMethodType)}({GetConstructorArgs()}))");
+                    sb.AppendLine(
+                        $"using (var inst = new {GetTypeName(testMethodType)}({GetConstructorArgs()}))"
+                    );
                     sb.Append($"Execute(\"{testCaseDisplayName}\", () => inst.{testMethod.Name}");
                     WriteArgumentListDynamic(argumentsName, parameters);
                     sb.AppendLine(");");
                 }
                 else
                 {
-                    sb.Append($"Execute(\"{testCaseDisplayName}\", () => new {GetTypeName(testMethodType)}({GetConstructorArgs()}).{testMethod.Name}");
+                    sb.Append(
+                        $"Execute(\"{testCaseDisplayName}\", () => new {GetTypeName(testMethodType)}({GetConstructorArgs()}).{testMethod.Name}"
+                    );
                     WriteArgumentListDynamic(argumentsName, parameters);
                     sb.AppendLine(");");
                 }
@@ -634,29 +801,42 @@ namespace StaticTestGenerator
                             {
                                 argsSb.Append(", ");
                             }
-                            argsSb.Append(EncodeLiteral(testCase.Values[i], memberDataParameters[i].ParameterType));
+                            argsSb.Append(
+                                EncodeLiteral(
+                                    testCase.Values[i],
+                                    memberDataParameters[i].ParameterType
+                                )
+                            );
                         }
                         memberDataArgs = argsSb.ToString();
                     }
-                    sb.AppendLine($"foreach (object[] row in {GetTypeName(mi.ReflectedType!)}.{mi.Name}({memberDataArgs}))");
+                    sb.AppendLine(
+                        $"foreach (object[] row in {GetTypeName(mi.ReflectedType!)}.{mi.Name}({memberDataArgs}))"
+                    );
                     WriteInvocationDynamic("row", parameters);
                     break;
 
                 case PropertyInfo pi:
                     // This is a theory with data coming from a MemberData property.
-                    sb.AppendLine($"foreach (object[] row in {GetTypeName(pi.ReflectedType!)}.{pi.Name})");
+                    sb.AppendLine(
+                        $"foreach (object[] row in {GetTypeName(pi.ReflectedType!)}.{pi.Name})"
+                    );
                     WriteInvocationDynamic("row", parameters);
                     break;
 
                 case FieldInfo fi:
                     // This is a theory with data coming from a MemberData field.
-                    sb.AppendLine($"foreach (object[] row in {GetTypeName(fi.ReflectedType!)}.{fi.Name})");
+                    sb.AppendLine(
+                        $"foreach (object[] row in {GetTypeName(fi.ReflectedType!)}.{fi.Name})"
+                    );
                     WriteInvocationDynamic("row", parameters);
                     break;
 
                 case Type ti:
                     // This is a theory with data coming from a ClassData data attribute.
-                    sb.AppendLine($"foreach (object[] row in ((IEnumerable<object[]>)new {GetTypeName(ti)}())");
+                    sb.AppendLine(
+                        $"foreach (object[] row in ((IEnumerable<object[]>)new {GetTypeName(ti)}())"
+                    );
                     WriteInvocationDynamic("row", parameters);
                     break;
 
@@ -696,11 +876,13 @@ namespace StaticTestGenerator
             if (literal is Array arr)
             {
                 Type elementType = literal.GetType().GetElementType()!;
-                return
-                    $"new {GetTypeName(elementType)}[]" +
-                    "{" +
-                    string.Join(",", arr.Cast<object>().Select(o => EncodeLiteral(o, elementType))) +
-                    "}";
+                return $"new {GetTypeName(elementType)}[]"
+                    + "{"
+                    + string.Join(
+                        ",",
+                        arr.Cast<object>().Select(o => EncodeLiteral(o, elementType))
+                    )
+                    + "}";
             }
 
             if (literal is Guid guid)
@@ -722,7 +904,8 @@ namespace StaticTestGenerator
 
             if (literal is Enum e)
             {
-                result = $"({GetTypeName(e.GetType())})({e.ToString("D")}{(Convert.GetTypeCode(literal) == TypeCode.UInt64 ? "UL" : "L")})";
+                result =
+                    $"({GetTypeName(e.GetType())})({e.ToString("D")}{(Convert.GetTypeCode(literal) == TypeCode.UInt64 ? "UL" : "L")})";
             }
             else
             {
@@ -762,18 +945,22 @@ namespace StaticTestGenerator
                         result = $"({literal.ToString()}M)";
                         break;
                     case TypeCode.Single:
-                        result =
-                            float.IsNegativeInfinity((float)literal) ? "float.NegativeInfinity" :
-                            float.IsInfinity((float)literal) ? "float.PositiveInfinity" :
-                            float.IsNaN((float)literal) ? "float.NaN" :
-                            $"(float)({((float)literal).ToString("R")}F)";
+                        result = float.IsNegativeInfinity((float)literal)
+                            ? "float.NegativeInfinity"
+                            : float.IsInfinity((float)literal)
+                                ? "float.PositiveInfinity"
+                                : float.IsNaN((float)literal)
+                                    ? "float.NaN"
+                                    : $"(float)({((float)literal).ToString("R")}F)";
                         break;
                     case TypeCode.Double:
-                        result =
-                            double.IsNegativeInfinity((double)literal) ? "double.NegativeInfinity" :
-                            double.IsInfinity((double)literal) ? "double.PositiveInfinity" :
-                            double.IsNaN((double)literal) ? "double.NaN" :
-                            $"(double)({((double)literal).ToString("R")}D)";
+                        result = double.IsNegativeInfinity((double)literal)
+                            ? "double.NegativeInfinity"
+                            : double.IsInfinity((double)literal)
+                                ? "double.PositiveInfinity"
+                                : double.IsNaN((double)literal)
+                                    ? "double.NaN"
+                                    : $"(double)({((double)literal).ToString("R")}D)";
                         break;
                     case TypeCode.String:
                         var sb = new StringBuilder();
@@ -806,11 +993,12 @@ namespace StaticTestGenerator
                 }
             }
 
-            if (expectedType != null &&
-                Nullable.GetUnderlyingType(expectedType) == null &&
-                literal.GetType() != expectedType &&
-                !expectedType.IsGenericParameter)
-            {
+            if (
+                expectedType != null
+                && Nullable.GetUnderlyingType(expectedType) == null
+                && literal.GetType() != expectedType
+                && !expectedType.IsGenericParameter
+            ) {
                 result = $"({GetTypeName(expectedType)})({result})";
             }
 
@@ -836,26 +1024,43 @@ namespace StaticTestGenerator
             {
                 switch (Type.GetTypeCode(type))
                 {
-                    case TypeCode.Boolean: return "bool";
-                    case TypeCode.Byte: return "byte";
-                    case TypeCode.Char: return "char";
-                    case TypeCode.Decimal: return "decimal";
-                    case TypeCode.Double: return "double";
-                    case TypeCode.Int16: return "short";
-                    case TypeCode.Int32: return "int";
-                    case TypeCode.Int64: return "long";
-                    case TypeCode.SByte: return "sbyte";
-                    case TypeCode.Single: return "float";
-                    case TypeCode.String: return "string";
-                    case TypeCode.UInt16: return "ushort";
-                    case TypeCode.UInt32: return "uint";
-                    case TypeCode.UInt64: return "ulong";
+                    case TypeCode.Boolean:
+                        return "bool";
+                    case TypeCode.Byte:
+                        return "byte";
+                    case TypeCode.Char:
+                        return "char";
+                    case TypeCode.Decimal:
+                        return "decimal";
+                    case TypeCode.Double:
+                        return "double";
+                    case TypeCode.Int16:
+                        return "short";
+                    case TypeCode.Int32:
+                        return "int";
+                    case TypeCode.Int64:
+                        return "long";
+                    case TypeCode.SByte:
+                        return "sbyte";
+                    case TypeCode.Single:
+                        return "float";
+                    case TypeCode.String:
+                        return "string";
+                    case TypeCode.UInt16:
+                        return "ushort";
+                    case TypeCode.UInt32:
+                        return "uint";
+                    case TypeCode.UInt64:
+                        return "ulong";
                 }
             }
 
             if (type.IsArray)
             {
-                return GetTypeName(type.GetElementType()!) + "[" + new string(',', type.GetArrayRank() - 1) + "]";
+                return GetTypeName(type.GetElementType()!)
+                    + "["
+                    + new string(',', type.GetArrayRank() - 1)
+                    + "]";
             }
 
             if (type.IsPointer)
@@ -869,11 +1074,16 @@ namespace StaticTestGenerator
 
             if (type.IsNested)
             {
-                if (type.DeclaringType!.IsGenericType &&
-                    !type.DeclaringType.IsConstructedGenericType &&
-                    type.IsConstructedGenericType)
-                {
-                    name = GetTypeName(type.DeclaringType.MakeGenericType(genericArgs.Take(parentGenericArgs.Length).ToArray()));
+                if (
+                    type.DeclaringType!.IsGenericType
+                    && !type.DeclaringType.IsConstructedGenericType
+                    && type.IsConstructedGenericType
+                ) {
+                    name = GetTypeName(
+                        type.DeclaringType.MakeGenericType(
+                            genericArgs.Take(parentGenericArgs.Length).ToArray()
+                        )
+                    );
                 }
                 else
                 {
@@ -909,11 +1119,14 @@ namespace StaticTestGenerator
                 genericArgs = genericArgs.Skip(parentGenericArgs.Length).ToArray();
             }
 
-            return
-                name +
-                "<" +
-                (type.IsConstructedGenericType ? string.Join(", ", genericArgs.Select(g => GetTypeName(g))) : new string(',', genericArgs.Length - 1)) +
-                ">";
+            return name
+                + "<"
+                + (
+                    type.IsConstructedGenericType
+                        ? string.Join(", ", genericArgs.Select(g => GetTypeName(g)))
+                        : new string(',', genericArgs.Length - 1)
+                )
+                + ">";
         }
 
         /// <summary>Determines whether the type has public visibility such that we can emit calls into it.</summary>
@@ -958,8 +1171,10 @@ namespace StaticTestGenerator
                         // If the test class takes a type that has a public ctor we can
                         // use to create it, then we're also fine.
                         Type ctorArgType = parameters[0].ParameterType;
-                        if (IsPublic(ctorArgType) && ctorArgType.GetConstructor(Type.EmptyTypes) != null)
-                        {
+                        if (
+                            IsPublic(ctorArgType)
+                            && ctorArgType.GetConstructor(Type.EmptyTypes) != null
+                        ) {
                             return true;
                         }
                         break;
@@ -1016,16 +1231,21 @@ namespace StaticTestGenerator
         /// <summary>Default options to use when constructing xunit options if no additional options are provided.</summary>
         private static readonly string[] s_defaultXunitOptions = new string[]
         {
-            "-notrait", "category=nonnetcoreapptests",
-            "-notrait", "category=nonwindowstests",
-            "-notrait", "category=IgnoreForCI",
-            "-notrait", "category=failing",
-            "-notrait", "category=OuterLoop"
+            "-notrait",
+            "category=nonnetcoreapptests",
+            "-notrait",
+            "category=nonwindowstests",
+            "-notrait",
+            "category=IgnoreForCI",
+            "-notrait",
+            "category=failing",
+            "-notrait",
+            "category=OuterLoop"
         };
 
         /// <summary>The code to write out to the output file before all of the test cases.</summary>
         private const string CodeTemplateStart =
-@"using System;
+            @"using System;
 using System.Threading.Tasks;
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit.Abstractions;
@@ -1055,7 +1275,7 @@ public static class Test
 
         /// <summary>The code to write out to the output file after all of the test cases.</summary>
         private const string CodeTemplateEnd =
-@"
+            @"
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.Yellow;
         int total = s_succeeded + s_failed;
@@ -1129,7 +1349,7 @@ public static class Test
 
         /// <summary>The template for the .csproj.</summary>
         private const string CSProjTemplate =
-@"<Project Sdk=""Microsoft.NET.Sdk"">
+            @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>

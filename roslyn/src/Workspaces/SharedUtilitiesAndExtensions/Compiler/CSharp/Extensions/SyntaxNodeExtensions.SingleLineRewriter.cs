@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             private readonly bool _useElasticTrivia;
             private bool _lastTokenEndedInWhitespace;
 
-            public SingleLineRewriter(bool useElasticTrivia)
-                => this._useElasticTrivia = useElasticTrivia;
+            public SingleLineRewriter(bool useElasticTrivia) =>
+                this._useElasticTrivia = useElasticTrivia;
 
             public override SyntaxToken VisitToken(SyntaxToken token)
             {
@@ -57,17 +57,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     _lastTokenEndedInWhitespace = false;
                 }
 
-                if (token.Kind() == SyntaxKind.StringLiteralToken ||
-                    token.Kind() == SyntaxKind.InterpolatedStringTextToken)
-                {
+                if (
+                    token.Kind() == SyntaxKind.StringLiteralToken
+                    || token.Kind() == SyntaxKind.InterpolatedStringTextToken
+                ) {
                     if (s_newlinePattern.IsMatch(token.Text))
                     {
                         var newText = s_newlinePattern.Replace(token.Text, " ");
                         token = SyntaxFactory.Token(
                             token.LeadingTrivia,
                             token.Kind(),
-                            newText, newText,
-                            token.TrailingTrivia);
+                            newText,
+                            newText,
+                            token.TrailingTrivia
+                        );
                     }
                 }
 

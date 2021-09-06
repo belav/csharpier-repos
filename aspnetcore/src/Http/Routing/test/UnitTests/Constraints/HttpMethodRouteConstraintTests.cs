@@ -12,8 +12,9 @@ namespace Microsoft.AspNetCore.Routing.Constraints
         [Theory]
         [InlineData("GET")]
         [InlineData("PosT")]
-        public void HttpMethodRouteConstraint_IncomingRequest_AcceptsAllowedMethods(string httpMethod)
-        {
+        public void HttpMethodRouteConstraint_IncomingRequest_AcceptsAllowedMethods(
+            string httpMethod
+        ) {
             // Arrange
             var constraint = new HttpMethodRouteConstraint("GET", "post");
 
@@ -21,10 +22,16 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             httpContext.Request.Method = httpMethod;
             var route = Mock.Of<IRouter>();
 
-            var values = new RouteValueDictionary(new { });
+            var values = new RouteValueDictionary(new {  });
 
             // Act
-            var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext,
+                route,
+                "httpMethod",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.True(result);
@@ -42,10 +49,16 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             httpContext.Request.Method = httpMethod;
             var route = Mock.Of<IRouter>();
 
-            var values = new RouteValueDictionary(new { });
+            var values = new RouteValueDictionary(new {  });
 
             // Act
-            var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext,
+                route,
+                "httpMethod",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(result);
@@ -65,7 +78,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             var values = new RouteValueDictionary(new { httpMethod = httpMethod });
 
             // Act
-            var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.UrlGeneration);
+            var result = constraint.Match(
+                httpContext,
+                route,
+                "httpMethod",
+                values,
+                RouteDirection.UrlGeneration
+            );
 
             // Assert
             Assert.True(result);
@@ -85,7 +104,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             var values = new RouteValueDictionary(new { httpMethod = httpMethod });
 
             // Act
-            var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.UrlGeneration);
+            var result = constraint.Match(
+                httpContext,
+                route,
+                "httpMethod",
+                values,
+                RouteDirection.UrlGeneration
+            );
 
             // Assert
             Assert.False(result);

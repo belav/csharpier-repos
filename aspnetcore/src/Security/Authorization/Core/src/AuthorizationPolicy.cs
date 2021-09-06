@@ -25,8 +25,10 @@ namespace Microsoft.AspNetCore.Authorization
         /// <param name="authenticationSchemes">
         /// The authentication schemes the <paramref name="requirements"/> are evaluated against.
         /// </param>
-        public AuthorizationPolicy(IEnumerable<IAuthorizationRequirement> requirements, IEnumerable<string> authenticationSchemes)
-        {
+        public AuthorizationPolicy(
+            IEnumerable<IAuthorizationRequirement> requirements,
+            IEnumerable<string> authenticationSchemes
+        ) {
             if (requirements == null)
             {
                 throw new ArgumentNullException(nameof(requirements));
@@ -108,8 +110,10 @@ namespace Microsoft.AspNetCore.Authorization
         /// A new <see cref="AuthorizationPolicy"/> which represents the combination of the
         /// authorization policies provided by the specified <paramref name="policyProvider"/>.
         /// </returns>
-        public static async Task<AuthorizationPolicy?> CombineAsync(IAuthorizationPolicyProvider policyProvider, IEnumerable<IAuthorizeData> authorizeData)
-        {
+        public static async Task<AuthorizationPolicy?> CombineAsync(
+            IAuthorizationPolicyProvider policyProvider,
+            IEnumerable<IAuthorizeData> authorizeData
+        ) {
             if (policyProvider == null)
             {
                 throw new ArgumentNullException(nameof(policyProvider));
@@ -143,7 +147,11 @@ namespace Microsoft.AspNetCore.Authorization
                         var policy = await policyProvider.GetPolicyAsync(authorizeDatum.Policy);
                         if (policy == null)
                         {
-                            throw new InvalidOperationException(Resources.FormatException_AuthorizationPolicyNotFound(authorizeDatum.Policy));
+                            throw new InvalidOperationException(
+                                Resources.FormatException_AuthorizationPolicyNotFound(
+                                    authorizeDatum.Policy
+                                )
+                            );
                         }
                         policyBuilder.Combine(policy);
                         useDefaultPolicy = false;
@@ -152,7 +160,8 @@ namespace Microsoft.AspNetCore.Authorization
                     var rolesSplit = authorizeDatum.Roles?.Split(',');
                     if (rolesSplit?.Length > 0)
                     {
-                        var trimmedRolesSplit = rolesSplit.Where(r => !string.IsNullOrWhiteSpace(r)).Select(r => r.Trim());
+                        var trimmedRolesSplit = rolesSplit.Where(r => !string.IsNullOrWhiteSpace(r))
+                            .Select(r => r.Trim());
                         policyBuilder.RequireRole(trimmedRolesSplit);
                         useDefaultPolicy = false;
                     }

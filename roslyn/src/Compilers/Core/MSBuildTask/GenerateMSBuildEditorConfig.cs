@@ -65,19 +65,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             foreach (var prop in PropertyItems)
             {
                 builder.Append("build_property.")
-                       .Append(prop.ItemSpec)
-                       .Append(" = ")
-                       .AppendLine(prop.GetMetadata("Value"));
+                    .Append(prop.ItemSpec)
+                    .Append(" = ")
+                    .AppendLine(prop.GetMetadata("Value"));
             }
 
             // group the metadata items by their full path
-            var groupedItems = MetadataItems.GroupBy(i => NormalizeWithForwardSlash(i.GetMetadata("FullPath")));
+            var groupedItems = MetadataItems.GroupBy(
+                i => NormalizeWithForwardSlash(i.GetMetadata("FullPath"))
+            );
 
             foreach (var group in groupedItems)
             {
                 // write the section for this item
-                builder.AppendLine()
-                       .Append("[");
+                builder.AppendLine().Append("[");
                 EncodeString(builder, group.Key);
                 builder.AppendLine("]");
 
@@ -85,14 +86,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 {
                     string itemType = item.GetMetadata("ItemType");
                     string metadataName = item.GetMetadata("MetadataName");
-                    if (!string.IsNullOrWhiteSpace(itemType) && !string.IsNullOrWhiteSpace(metadataName))
-                    {
+                    if (
+                        !string.IsNullOrWhiteSpace(itemType)
+                        && !string.IsNullOrWhiteSpace(metadataName)
+                    ) {
                         builder.Append("build_metadata.")
-                               .Append(itemType)
-                               .Append(".")
-                               .Append(metadataName)
-                               .Append(" = ")
-                               .AppendLine(item.GetMetadata(metadataName));
+                            .Append(itemType)
+                            .Append(".")
+                            .Append(metadataName)
+                            .Append(" = ")
+                            .AppendLine(item.GetMetadata(metadataName));
                     }
                 }
             }
@@ -126,7 +129,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Equivalent to Roslyn.Utilities.PathUtilities.NormalizeWithForwardSlash
         /// Both methods should be kept in sync.
         /// </remarks>
-        private static string NormalizeWithForwardSlash(string p)
-            => PlatformInformation.IsUnix ? p : p.Replace('\\', '/');
+        private static string NormalizeWithForwardSlash(string p) =>
+            PlatformInformation.IsUnix ? p : p.Replace('\\', '/');
     }
 }

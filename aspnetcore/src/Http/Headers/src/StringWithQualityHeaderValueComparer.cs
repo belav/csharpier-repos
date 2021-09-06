@@ -16,14 +16,13 @@ namespace Microsoft.Net.Http.Headers
     /// </summary>
     public class StringWithQualityHeaderValueComparer : IComparer<StringWithQualityHeaderValue>
     {
-        private StringWithQualityHeaderValueComparer()
-        {
-        }
+        private StringWithQualityHeaderValueComparer() { }
 
         /// <summary>
         /// Gets the default instance of <see cref="StringWithQualityHeaderValueComparer"/>.
         /// </summary>
-        public static StringWithQualityHeaderValueComparer QualityComparer { get; } = new StringWithQualityHeaderValueComparer();
+        public static StringWithQualityHeaderValueComparer QualityComparer { get; } =
+            new StringWithQualityHeaderValueComparer();
 
         /// <summary>
         /// Compares two <see cref="StringWithQualityHeaderValue"/> based on their quality value
@@ -38,8 +37,8 @@ namespace Microsoft.Net.Http.Headers
         /// <returns>The result of the comparison.</returns>
         public int Compare(
             StringWithQualityHeaderValue? stringWithQuality1,
-            StringWithQualityHeaderValue? stringWithQuality2)
-        {
+            StringWithQualityHeaderValue? stringWithQuality2
+        ) {
             if (stringWithQuality1 == null)
             {
                 throw new ArgumentNullException(nameof(stringWithQuality1));
@@ -62,14 +61,20 @@ namespace Microsoft.Net.Http.Headers
                 return 1;
             }
 
-            if (!StringSegment.Equals(stringWithQuality1.Value, stringWithQuality2.Value, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                !StringSegment.Equals(
+                    stringWithQuality1.Value,
+                    stringWithQuality2.Value,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 if (StringSegment.Equals(stringWithQuality1.Value, "*", StringComparison.Ordinal))
                 {
                     return -1;
                 }
-                else if (StringSegment.Equals(stringWithQuality2.Value, "*", StringComparison.Ordinal))
-                {
+                else if (
+                    StringSegment.Equals(stringWithQuality2.Value, "*", StringComparison.Ordinal)
+                ) {
                     return 1;
                 }
             }

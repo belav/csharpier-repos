@@ -15,12 +15,14 @@ namespace System.Web.Mvc.Test
         public void GetMetadataForPropertyInvalidPropertyNameThrows()
         {
             // Arrange
-            MockableCachedAssociatedMetadataProvider provider = new MockableCachedAssociatedMetadataProvider();
+            MockableCachedAssociatedMetadataProvider provider =
+                new MockableCachedAssociatedMetadataProvider();
 
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => provider.GetMetadataForProperty(null, typeof(object), "BadPropertyName"),
-                "The property System.Object.BadPropertyName could not be found.");
+                "The property System.Object.BadPropertyName could not be found."
+            );
         }
 
         [Fact]
@@ -84,13 +86,26 @@ namespace System.Web.Mvc.Test
             provider.Object.GetMetadataForProperty(() => 3, typeof(string), "Length");
 
             // Assert
-            provider.Verify(p => p.CreateMetadataPrototypeImpl(It.IsAny<IEnumerable<Attribute>>(),
-                                                               typeof(string) /* containerType */,
-                                                               typeof(int) /* modelType */,
-                                                               "Length" /* propertyName */));
-            provider.Object.Cache.Verify(c => c.Add(provider.Object.GetCacheKey(typeof(string), "Length"),
-                                                    provider.Object.PrototypeMetadata,
-                                                    provider.Object.CacheItemPolicy, null));
+            provider.Verify(
+                p =>
+                    p.CreateMetadataPrototypeImpl(
+                        It.IsAny<IEnumerable<Attribute>>(),
+                        typeof(string) /* containerType */
+                        ,
+                        typeof(int) /* modelType */
+                        ,
+                        "Length" /* propertyName */
+                    )
+            );
+            provider.Object.Cache.Verify(
+                c =>
+                    c.Add(
+                        provider.Object.GetCacheKey(typeof(string), "Length"),
+                        provider.Object.PrototypeMetadata,
+                        provider.Object.CacheItemPolicy,
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -104,7 +119,9 @@ namespace System.Web.Mvc.Test
             provider.Object.GetMetadataForProperty(accessor, typeof(string), "Length");
 
             // Assert
-            provider.Verify(p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor));
+            provider.Verify(
+                p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor)
+            );
         }
 
         [Fact]
@@ -112,10 +129,15 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             MemoryCache memoryCache = new MemoryCache("testCache");
-            MockableCachedAssociatedMetadataProvider provider = new MockableCachedAssociatedMetadataProvider(memoryCache);
+            MockableCachedAssociatedMetadataProvider provider =
+                new MockableCachedAssociatedMetadataProvider(memoryCache);
 
             // Act
-            ModelMetadata metadata = provider.GetMetadataForProperty(null, typeof(ClassWithMetaDataAwareAttributes), "PropertyWithAdditionalValue");
+            ModelMetadata metadata = provider.GetMetadataForProperty(
+                null,
+                typeof(ClassWithMetaDataAwareAttributes),
+                "PropertyWithAdditionalValue"
+            );
 
             // Assert
             Assert.True(metadata.AdditionalValues["baz"].Equals("biz"));
@@ -133,19 +155,34 @@ namespace System.Web.Mvc.Test
             provider.Object.GetMetadataForProperty(accessor, typeof(string), "Length");
 
             // Assert
-            provider.Verify(p => p.CreateMetadataPrototypeImpl(It.IsAny<IEnumerable<Attribute>>(),
-                                                               typeof(string) /* containerType */,
-                                                               typeof(int) /* modelType */,
-                                                               "Length" /* propertyName */),
-                            Times.Once());
+            provider.Verify(
+                p =>
+                    p.CreateMetadataPrototypeImpl(
+                        It.IsAny<IEnumerable<Attribute>>(),
+                        typeof(string) /* containerType */
+                        ,
+                        typeof(int) /* modelType */
+                        ,
+                        "Length" /* propertyName */
+                    ),
+                Times.Once()
+            );
 
-            provider.Verify(p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor),
-                            Times.Exactly(2));
+            provider.Verify(
+                p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor),
+                Times.Exactly(2)
+            );
 
-            provider.Object.Cache.Verify(c => c.Add(provider.Object.GetCacheKey(typeof(string), "Length"),
-                                                    provider.Object.PrototypeMetadata,
-                                                    provider.Object.CacheItemPolicy, null),
-                                         Times.Once());
+            provider.Object.Cache.Verify(
+                c =>
+                    c.Add(
+                        provider.Object.GetCacheKey(typeof(string), "Length"),
+                        provider.Object.PrototypeMetadata,
+                        provider.Object.CacheItemPolicy,
+                        null
+                    ),
+                Times.Once()
+            );
         }
 
         // GetMetadataForType
@@ -160,13 +197,26 @@ namespace System.Web.Mvc.Test
             provider.Object.GetMetadataForType(() => "foo", typeof(string));
 
             // Assert
-            provider.Verify(p => p.CreateMetadataPrototypeImpl(It.IsAny<IEnumerable<Attribute>>(),
-                                                               null /* containerType */,
-                                                               typeof(string) /* modelType */,
-                                                               null /* propertyName */));
-            provider.Object.Cache.Verify(c => c.Add(provider.Object.GetCacheKey(typeof(string), null),
-                                                    provider.Object.PrototypeMetadata,
-                                                    provider.Object.CacheItemPolicy, null));
+            provider.Verify(
+                p =>
+                    p.CreateMetadataPrototypeImpl(
+                        It.IsAny<IEnumerable<Attribute>>(),
+                        null /* containerType */
+                        ,
+                        typeof(string) /* modelType */
+                        ,
+                        null /* propertyName */
+                    )
+            );
+            provider.Object.Cache.Verify(
+                c =>
+                    c.Add(
+                        provider.Object.GetCacheKey(typeof(string), null),
+                        provider.Object.PrototypeMetadata,
+                        provider.Object.CacheItemPolicy,
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -180,7 +230,9 @@ namespace System.Web.Mvc.Test
             provider.Object.GetMetadataForType(accessor, typeof(string));
 
             // Assert
-            provider.Verify(p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor));
+            provider.Verify(
+                p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor)
+            );
         }
 
         [Fact]
@@ -188,10 +240,14 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             MemoryCache memoryCache = new MemoryCache("testCache");
-            MockableCachedAssociatedMetadataProvider provider = new MockableCachedAssociatedMetadataProvider(memoryCache);
+            MockableCachedAssociatedMetadataProvider provider =
+                new MockableCachedAssociatedMetadataProvider(memoryCache);
 
             // Act
-            ModelMetadata metadata = provider.GetMetadataForType(null, typeof(ClassWithMetaDataAwareAttributes));
+            ModelMetadata metadata = provider.GetMetadataForType(
+                null,
+                typeof(ClassWithMetaDataAwareAttributes)
+            );
 
             // Assert
             Assert.True(metadata.AdditionalValues["foo"].Equals("bar"));
@@ -209,33 +265,46 @@ namespace System.Web.Mvc.Test
             provider.Object.GetMetadataForType(accessor, typeof(string));
 
             // Assert
-            provider.Verify(p => p.CreateMetadataPrototypeImpl(It.IsAny<IEnumerable<Attribute>>(),
-                                                               null /* containerType */,
-                                                               typeof(string) /* modelType */,
-                                                               null /* propertyName */),
-                            Times.Once());
+            provider.Verify(
+                p =>
+                    p.CreateMetadataPrototypeImpl(
+                        It.IsAny<IEnumerable<Attribute>>(),
+                        null /* containerType */
+                        ,
+                        typeof(string) /* modelType */
+                        ,
+                        null /* propertyName */
+                    ),
+                Times.Once()
+            );
 
-            provider.Verify(p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor),
-                            Times.Exactly(2));
+            provider.Verify(
+                p => p.CreateMetadataFromPrototypeImpl(provider.Object.PrototypeMetadata, accessor),
+                Times.Exactly(2)
+            );
 
-            provider.Object.Cache.Verify(c => c.Add(provider.Object.GetCacheKey(typeof(string), null),
-                                                    provider.Object.PrototypeMetadata,
-                                                    provider.Object.CacheItemPolicy, null),
-                                         Times.Once());
+            provider.Object.Cache.Verify(
+                c =>
+                    c.Add(
+                        provider.Object.GetCacheKey(typeof(string), null),
+                        provider.Object.PrototypeMetadata,
+                        provider.Object.CacheItemPolicy,
+                        null
+                    ),
+                Times.Once()
+            );
         }
 
         // Helpers
 
-        public class MockableCachedAssociatedMetadataProvider : CachedAssociatedMetadataProvider<ModelMetadata>
+        public class MockableCachedAssociatedMetadataProvider
+            : CachedAssociatedMetadataProvider<ModelMetadata>
         {
             public Mock<MemoryCache> Cache;
             public ModelMetadata PrototypeMetadata;
             public ModelMetadata RealMetadata;
 
-            public MockableCachedAssociatedMetadataProvider()
-                : this(null)
-            {
-            }
+            public MockableCachedAssociatedMetadataProvider() : this(null) { }
 
             public MockableCachedAssociatedMetadataProvider(MemoryCache memoryCache = null)
             {
@@ -246,23 +315,40 @@ namespace System.Web.Mvc.Test
                 PrototypeCache = memoryCache ?? Cache.Object;
             }
 
-            public virtual ModelMetadata CreateMetadataPrototypeImpl(IEnumerable<Attribute> attributes, Type containerType, Type modelType, string propertyName)
-            {
+            public virtual ModelMetadata CreateMetadataPrototypeImpl(
+                IEnumerable<Attribute> attributes,
+                Type containerType,
+                Type modelType,
+                string propertyName
+            ) {
                 return PrototypeMetadata;
             }
 
-            public virtual ModelMetadata CreateMetadataFromPrototypeImpl(ModelMetadata prototype, Func<object> modelAccessor)
-            {
+            public virtual ModelMetadata CreateMetadataFromPrototypeImpl(
+                ModelMetadata prototype,
+                Func<object> modelAccessor
+            ) {
                 return RealMetadata;
             }
 
-            protected override ModelMetadata CreateMetadataPrototype(IEnumerable<Attribute> attributes, Type containerType, Type modelType, string propertyName)
-            {
-                return CreateMetadataPrototypeImpl(attributes, containerType, modelType, propertyName);
+            protected override ModelMetadata CreateMetadataPrototype(
+                IEnumerable<Attribute> attributes,
+                Type containerType,
+                Type modelType,
+                string propertyName
+            ) {
+                return CreateMetadataPrototypeImpl(
+                    attributes,
+                    containerType,
+                    modelType,
+                    propertyName
+                );
             }
 
-            protected override ModelMetadata CreateMetadataFromPrototype(ModelMetadata prototype, Func<object> modelAccessor)
-            {
+            protected override ModelMetadata CreateMetadataFromPrototype(
+                ModelMetadata prototype,
+                Func<object> modelAccessor
+            ) {
                 return CreateMetadataFromPrototypeImpl(prototype, modelAccessor);
             }
         }

@@ -15,10 +15,12 @@ namespace ComponentsApp.Server
         {
             services.AddMvc();
             services.AddSingleton<CircuitHandler, LoggingCircuitHandler>();
-            services.AddServerSideBlazor(options =>
-            {
-                options.DetailedErrors = true;
-            });
+            services.AddServerSideBlazor(
+                options =>
+                {
+                    options.DetailedErrors = true;
+                }
+            );
 
             services.AddSingleton<WeatherForecastService, DefaultWeatherForecastService>();
         }
@@ -34,13 +36,15 @@ namespace ComponentsApp.Server
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapControllers();
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_Host");
+                }
+            );
         }
     }
 }

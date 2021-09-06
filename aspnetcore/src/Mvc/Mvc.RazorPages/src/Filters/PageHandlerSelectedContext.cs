@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public PageHandlerSelectedContext(
             PageContext pageContext,
             IList<IFilterMetadata> filters,
-            object handlerInstance)
-            : base(pageContext, filters)
+            object handlerInstance
+        ) : base(pageContext, filters)
         {
             if (handlerInstance == null)
             {
@@ -38,7 +38,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// <summary>
         /// Gets the descriptor associated with the current page.
         /// </summary>
-        public new virtual CompiledPageActionDescriptor ActionDescriptor => 
+        public new virtual CompiledPageActionDescriptor ActionDescriptor =>
             (CompiledPageActionDescriptor)base.ActionDescriptor;
 
         /// <summary>

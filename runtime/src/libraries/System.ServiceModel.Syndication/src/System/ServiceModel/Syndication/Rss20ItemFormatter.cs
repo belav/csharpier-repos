@@ -16,9 +16,7 @@ namespace System.ServiceModel.Syndication
         private bool _preserveElementExtensions = true;
         private bool _serializeExtensionsAsAtom;
 
-        public Rss20ItemFormatter() : this(typeof(SyndicationItem))
-        {
-        }
+        public Rss20ItemFormatter() : this(typeof(SyndicationItem)) { }
 
         public Rss20ItemFormatter(Type itemTypeToCreate) : base()
         {
@@ -28,7 +26,14 @@ namespace System.ServiceModel.Syndication
             }
             if (!typeof(SyndicationItem).IsAssignableFrom(itemTypeToCreate))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidObjectTypePassed, nameof(itemTypeToCreate), nameof(SyndicationItem)), nameof(itemTypeToCreate));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.InvalidObjectTypePassed,
+                        nameof(itemTypeToCreate),
+                        nameof(SyndicationItem)
+                    ),
+                    nameof(itemTypeToCreate)
+                );
             }
 
             _feedSerializer = new Rss20FeedFormatter
@@ -38,11 +43,12 @@ namespace System.ServiceModel.Syndication
             ItemType = itemTypeToCreate;
         }
 
-        public Rss20ItemFormatter(SyndicationItem itemToWrite) : this(itemToWrite, true)
-        {
-        }
+        public Rss20ItemFormatter(SyndicationItem itemToWrite) : this(itemToWrite, true) { }
 
-        public Rss20ItemFormatter(SyndicationItem itemToWrite, bool serializeExtensionsAsAtom) : base(itemToWrite)
+        public Rss20ItemFormatter(
+            SyndicationItem itemToWrite,
+            bool serializeExtensionsAsAtom
+        ) : base(itemToWrite)
         {
             _feedSerializer = new Rss20FeedFormatter
             {
@@ -121,7 +127,9 @@ namespace System.ServiceModel.Syndication
         {
             if (!CanRead(reader))
             {
-                throw new XmlException(SR.Format(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI));
+                throw new XmlException(
+                    SR.Format(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
+                );
             }
 
             ReadItem(reader);
@@ -160,19 +168,17 @@ namespace System.ServiceModel.Syndication
     }
 
     [XmlRoot(ElementName = Rss20Constants.ItemTag, Namespace = Rss20Constants.Rss20Namespace)]
-    public class Rss20ItemFormatter<TSyndicationItem> : Rss20ItemFormatter, IXmlSerializable where TSyndicationItem : SyndicationItem, new()
+    public class Rss20ItemFormatter<TSyndicationItem> : Rss20ItemFormatter, IXmlSerializable
+        where TSyndicationItem : SyndicationItem, new()
     {
-        public Rss20ItemFormatter() : base(typeof(TSyndicationItem))
-        {
-        }
+        public Rss20ItemFormatter() : base(typeof(TSyndicationItem)) { }
 
-        public Rss20ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite)
-        {
-        }
+        public Rss20ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite) { }
 
-        public Rss20ItemFormatter(TSyndicationItem itemToWrite, bool serializeExtensionsAsAtom) : base(itemToWrite, serializeExtensionsAsAtom)
-        {
-        }
+        public Rss20ItemFormatter(
+            TSyndicationItem itemToWrite,
+            bool serializeExtensionsAsAtom
+        ) : base(itemToWrite, serializeExtensionsAsAtom) { }
 
         protected override SyndicationItem CreateItemInstance() => new TSyndicationItem();
     }

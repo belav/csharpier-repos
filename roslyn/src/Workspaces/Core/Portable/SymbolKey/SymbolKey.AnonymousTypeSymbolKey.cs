@@ -29,32 +29,44 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteLocationArray(propertyLocations);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
-                using var propertyTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(out var propertyTypesFailureReason);
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
+                using var propertyTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(
+                    out var propertyTypesFailureReason
+                );
 #pragma warning disable IDE0007 // Use implicit type
                 using PooledArrayBuilder<string> propertyNames = reader.ReadStringArray()!;
 #pragma warning restore IDE0007 // Use implicit type
                 using var propertyIsReadOnly = reader.ReadBooleanArray();
-                var propertyLocations = ReadPropertyLocations(reader, out var propertyLocationsFailureReason);
+                var propertyLocations = ReadPropertyLocations(
+                    reader,
+                    out var propertyLocationsFailureReason
+                );
 
                 if (propertyTypesFailureReason != null)
                 {
-                    failureReason = $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyTypes)} failed -> {propertyTypesFailureReason})";
+                    failureReason =
+                        $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyTypes)} failed -> {propertyTypesFailureReason})";
                     return default;
                 }
 
                 if (propertyLocationsFailureReason != null)
                 {
-                    failureReason = $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyLocations)} failed -> {propertyLocationsFailureReason})";
+                    failureReason =
+                        $"({nameof(AnonymousTypeSymbolKey)} {nameof(propertyLocations)} failed -> {propertyLocationsFailureReason})";
                     return default;
                 }
 
                 if (!propertyTypes.IsDefault)
                 {
                     var anonymousType = reader.Compilation.CreateAnonymousTypeSymbol(
-                        propertyTypes.ToImmutable(), propertyNames.ToImmutable(),
-                        propertyIsReadOnly.ToImmutable(), propertyLocations);
+                        propertyTypes.ToImmutable(),
+                        propertyNames.ToImmutable(),
+                        propertyIsReadOnly.ToImmutable(),
+                        propertyLocations
+                    );
                     failureReason = null;
                     return new SymbolKeyResolution(anonymousType);
                 }
@@ -63,8 +75,10 @@ namespace Microsoft.CodeAnalysis
                 return new SymbolKeyResolution(reader.Compilation.ObjectType);
             }
 
-            private static ImmutableArray<Location> ReadPropertyLocations(SymbolKeyReader reader, out string? failureReason)
-            {
+            private static ImmutableArray<Location> ReadPropertyLocations(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
                 using var propertyLocations = reader.ReadLocationArray(out failureReason);
                 if (failureReason != null)
                     return default;

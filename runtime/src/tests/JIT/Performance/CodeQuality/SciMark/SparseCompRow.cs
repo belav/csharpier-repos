@@ -18,9 +18,9 @@ namespace SciMark2
 {
     public class SparseCompRow
     {
-        // multiple iterations used to make kernel 
-        // have roughly same granulairty as other 
-        // Scimark kernels	
+        // multiple iterations used to make kernel
+        // have roughly same granulairty as other
+        // Scimark kernels
         public static double num_flops(int N, int nz, int num_iterations)
         {
             /* Note that if nz does not divide N evenly, then the
@@ -36,9 +36,15 @@ namespace SciMark2
         ///  in MxN with nz nonzeros, then the val[] is the nz nonzeros,
         ///  with its ith entry in column col[i].  The integer vector row[]
         ///  is of size M+1 and row[i] points to the beginning of the
-        ///  ith row in col[].  
-        public static void matmult(double[] y, double[] val, int[] row, int[] col, double[] x, int NUM_ITERATIONS)
-        {
+        ///  ith row in col[].
+        public static void matmult(
+            double[] y,
+            double[] val,
+            int[] row,
+            int[] col,
+            double[] x,
+            int NUM_ITERATIONS
+        ) {
             int M = row.Length - 1;
 
             for (int reps = 0; reps < NUM_ITERATIONS; reps++)

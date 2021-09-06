@@ -37,9 +37,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
             [ViewContext]
             public ViewContext ViewContext { get; set; }
 
-            public void Init(TagHelperContext context)
-            {
-            }
+            public void Init(TagHelperContext context) { }
 
             public Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
             {
@@ -51,9 +49,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
         {
             var httpContext = new DefaultHttpContext()
             {
-                RequestServices = new ServiceCollection()
-                .AddSingleton<ITagHelperComponentPropertyActivator>(new TagHelperComponentPropertyActivator())
-                .BuildServiceProvider()
+                RequestServices =
+                    new ServiceCollection().AddSingleton<ITagHelperComponentPropertyActivator>(
+                            new TagHelperComponentPropertyActivator()
+                        )
+                        .BuildServiceProvider()
             };
 
             var viewContext = Mock.Of<ViewContext>(vc => vc.HttpContext == httpContext);

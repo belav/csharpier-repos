@@ -12,42 +12,34 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// C# or VB namespace import.
         /// </summary>
         Namespace,
-
         /// <summary>
         /// C# or VB type import.
         /// </summary>
         Type,
-
         /// <summary>
         /// VB namespace or type alias target (not specified).
         /// </summary>
         NamespaceOrType,
-
         /// <summary>
         /// C# extern alias.
         /// </summary>
         Assembly,
-
         /// <summary>
         /// VB XML import.
         /// </summary>
         XmlNamespace,
-
         /// <summary>
         /// VB forwarding information (i.e. another method has the imports for this one).
         /// </summary>
         MethodToken,
-
         /// <summary>
         /// VB containing namespace (not an import).
         /// </summary>
         CurrentNamespace,
-
         /// <summary>
         /// VB root namespace (not an import).
         /// </summary>
         DefaultNamespace,
-
         /// <summary>
         /// A kind that is no longer used.
         /// </summary>

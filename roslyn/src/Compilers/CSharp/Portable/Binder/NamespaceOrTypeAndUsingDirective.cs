@@ -16,8 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly UsingDirectiveSyntax UsingDirective;
         public readonly ImmutableArray<AssemblySymbol> Dependencies;
 
-        public NamespaceOrTypeAndUsingDirective(NamespaceOrTypeSymbol namespaceOrType, UsingDirectiveSyntax usingDirective, ImmutableArray<AssemblySymbol> dependencies)
-        {
+        public NamespaceOrTypeAndUsingDirective(
+            NamespaceOrTypeSymbol namespaceOrType,
+            UsingDirectiveSyntax usingDirective,
+            ImmutableArray<AssemblySymbol> dependencies
+        ) {
             this.NamespaceOrType = namespaceOrType;
             this.UsingDirective = usingDirective;
             this.Dependencies = dependencies.NullToEmpty();

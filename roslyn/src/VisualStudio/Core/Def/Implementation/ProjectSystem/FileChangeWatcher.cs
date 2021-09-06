@@ -20,7 +20,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     /// </summary>
     internal sealed class FileChangeWatcher
     {
-        internal const uint FileChangeFlags = (uint)(_VSFILECHANGEFLAGS.VSFILECHG_Time | _VSFILECHANGEFLAGS.VSFILECHG_Add | _VSFILECHANGEFLAGS.VSFILECHG_Del | _VSFILECHANGEFLAGS.VSFILECHG_Size);
+        internal const uint FileChangeFlags = (uint)(
+            _VSFILECHANGEFLAGS.VSFILECHG_Time
+            | _VSFILECHANGEFLAGS.VSFILECHG_Add
+            | _VSFILECHANGEFLAGS.VSFILECHG_Del
+            | _VSFILECHANGEFLAGS.VSFILECHG_Size
+        );
 
         /// <summary>
         /// Gate that is used to guard modifications to <see cref="_taskQueue"/>.
@@ -37,27 +42,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// the end of the queue.
         /// </summary>
         private Task<IVsAsyncFileChangeEx> _taskQueue;
-        private static readonly Func<Task<IVsAsyncFileChangeEx>, object, Task<IVsAsyncFileChangeEx>> _executeActionDelegate =
-            async (precedingTask, state) =>
-            {
-                var action = (Func<IVsAsyncFileChangeEx, Task>)state;
-                await action(precedingTask.Result).ConfigureAwait(false);
-                return precedingTask.Result;
-            };
+        private static readonly Func<
+            Task<IVsAsyncFileChangeEx>,
+            object,
+            Task<IVsAsyncFileChangeEx>
+        > _executeActionDelegate = async (precedingTask, state) =>
+        {
+            var action = (Func<IVsAsyncFileChangeEx, Task>)state;
+            await action(precedingTask.Result).ConfigureAwait(false);
+            return precedingTask.Result;
+        };
 
-        public FileChangeWatcher(Task<IVsAsyncFileChangeEx> fileChangeService)
-            => _taskQueue = fileChangeService;
+        public FileChangeWatcher(Task<IVsAsyncFileChangeEx> fileChangeService) =>
+            _taskQueue = fileChangeService;
 
         private void EnqueueWork(Func<IVsAsyncFileChangeEx, Task> action)
         {
             lock (_taskQueueGate)
             {
                 _taskQueue = _taskQueue.ContinueWith(
-                    _executeActionDelegate,
-                    action,
-                    CancellationToken.None,
-                    TaskContinuationOptions.None,
-                    TaskScheduler.Default).Unwrap();
+                        _executeActionDelegate,
+                        action,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    )
+                    .Unwrap();
             }
         }
 
@@ -105,7 +115,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 if (extensionFilter != null && !extensionFilter.StartsWith("."))
                 {
-                    throw new ArgumentException($"{nameof(extensionFilter)} should start with a period.", nameof(extensionFilter));
+                    throw new ArgumentException(
+                        $"{nameof(extensionFilter)} should start with a period.",
+                        nameof(extensionFilter)
+                    );
                 }
 
                 Path = path;
@@ -171,8 +184,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// </remarks>
             private readonly List<uint> _directoryWatchCookies = new();
 
-            public Context(FileChangeWatcher fileChangeWatcher, ImmutableArray<WatchedDirectory> watchedDirectories)
-            {
+            public Context(
+                FileChangeWatcher fileChangeWatcher,
+                ImmutableArray<WatchedDirectory> watchedDirectories
+            ) {
                 _fileChangeWatcher = fileChangeWatcher;
                 _watchedDirectories = watchedDirectories;
                 _noOpFileWatchingToken = new FileWatchingToken();
@@ -182,14 +197,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _fileChangeWatcher.EnqueueWork(
                         async service =>
                         {
-                            var cookie = await service.AdviseDirChangeAsync(watchedDirectory.Path, watchSubdirectories: true, this).ConfigureAwait(false);
+                            var cookie = await service.AdviseDirChangeAsync(
+                                    watchedDirectory.Path,
+                                    watchSubdirectories: true,
+                                    this
+                                )
+                                .ConfigureAwait(false);
                             _directoryWatchCookies.Add(cookie);
 
                             if (watchedDirectory.ExtensionFilter != null)
                             {
-                                await service.FilterDirectoryChangesAsync(cookie, new string[] { watchedDirectory.ExtensionFilter }, CancellationToken.None).ConfigureAwait(false);
+                                await service.FilterDirectoryChangesAsync(
+                                        cookie,
+                                        new string[] { watchedDirectory.ExtensionFilter },
+                                        CancellationToken.None
+                                    )
+                                    .ConfigureAwait(false);
                             }
-                        });
+                        }
+                    );
                 }
             }
 
@@ -224,9 +250,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         // Since this runs after disposal, no lock is needed for _activeFileWatchingTokens
                         foreach (var token in _activeFileWatchingTokens)
                         {
-                            await UnsubscribeFileChangeEventsAsync(service, token).ConfigureAwait(false);
+                            await UnsubscribeFileChangeEventsAsync(service, token)
+                                .ConfigureAwait(false);
                         }
-                    });
+                    }
+                );
             }
 
             public IFileWatchingToken EnqueueWatchingFile(string filePath)
@@ -239,8 +267,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         // If ExtensionFilter is null, then we're watching for all files in the directory so the prior check
                         // of the directory containment was sufficient. If it isn't null, then we have to check the extension
                         // matches.
-                        if (watchedDirectory.ExtensionFilter == null || filePath.EndsWith(watchedDirectory.ExtensionFilter))
-                        {
+                        if (
+                            watchedDirectory.ExtensionFilter == null
+                            || filePath.EndsWith(watchedDirectory.ExtensionFilter)
+                        ) {
                             return _noOpFileWatchingToken;
                         }
                     }
@@ -253,10 +283,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _activeFileWatchingTokens.Add(token);
                 }
 
-                _fileChangeWatcher.EnqueueWork(async service =>
-                {
-                    token.Cookie = await service.AdviseFileChangeAsync(filePath, _VSFILECHANGEFLAGS.VSFILECHG_Size | _VSFILECHANGEFLAGS.VSFILECHG_Time, this).ConfigureAwait(false);
-                });
+                _fileChangeWatcher.EnqueueWork(
+                    async service =>
+                    {
+                        token.Cookie = await service.AdviseFileChangeAsync(
+                                filePath,
+                                _VSFILECHANGEFLAGS.VSFILECHG_Size
+                                    | _VSFILECHANGEFLAGS.VSFILECHG_Time,
+                                this
+                            )
+                            .ConfigureAwait(false);
+                    }
+                );
 
                 return token;
             }
@@ -265,7 +303,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 var typedToken = token as FileWatchingToken;
 
-                Contract.ThrowIfNull(typedToken, "The token passed did not originate from this service.");
+                Contract.ThrowIfNull(
+                    typedToken,
+                    "The token passed did not originate from this service."
+                );
 
                 if (typedToken == _noOpFileWatchingToken)
                 {
@@ -275,19 +316,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 lock (_gate)
                 {
-                    Contract.ThrowIfFalse(_activeFileWatchingTokens.Remove(typedToken), "This token was no longer being watched.");
+                    Contract.ThrowIfFalse(
+                        _activeFileWatchingTokens.Remove(typedToken),
+                        "This token was no longer being watched."
+                    );
                 }
 
-                _fileChangeWatcher.EnqueueWork(service => UnsubscribeFileChangeEventsAsync(service, typedToken));
+                _fileChangeWatcher.EnqueueWork(
+                    service => UnsubscribeFileChangeEventsAsync(service, typedToken)
+                );
             }
 
-            private Task UnsubscribeFileChangeEventsAsync(IVsAsyncFileChangeEx service, FileWatchingToken typedToken)
-                => service.UnadviseFileChangeAsync(typedToken.Cookie!.Value);
+            private Task UnsubscribeFileChangeEventsAsync(
+                IVsAsyncFileChangeEx service,
+                FileWatchingToken typedToken
+            ) => service.UnadviseFileChangeAsync(typedToken.Cookie!.Value);
 
             public event EventHandler<string>? FileChanged;
 
-            int IVsFreeThreadedFileChangeEvents.FilesChanged(uint cChanges, string[] rgpszFile, uint[] rggrfChange)
-            {
+            int IVsFreeThreadedFileChangeEvents.FilesChanged(
+                uint cChanges,
+                string[] rgpszFile,
+                uint[] rggrfChange
+            ) {
                 for (var i = 0; i < cChanges; i++)
                 {
                     FileChanged?.Invoke(this, rgpszFile[i]);
@@ -298,24 +349,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             int IVsFreeThreadedFileChangeEvents.DirectoryChanged(string pszDirectory)
             {
-                Debug.Fail("Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called.");
+                Debug.Fail(
+                    "Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called."
+                );
                 return VSConstants.E_NOTIMPL;
             }
 
             int IVsFreeThreadedFileChangeEvents2.DirectoryChanged(string pszDirectory)
             {
-                Debug.Fail("Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called.");
+                Debug.Fail(
+                    "Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called."
+                );
                 return VSConstants.E_NOTIMPL;
             }
 
-            int IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx(string pszDirectory, string pszFile)
-            {
-                Debug.Fail("Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called.");
+            int IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx(
+                string pszDirectory,
+                string pszFile
+            ) {
+                Debug.Fail(
+                    "Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called."
+                );
                 return VSConstants.E_NOTIMPL;
             }
 
-            int IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2(string pszDirectory, uint cChanges, string[] rgpszFile, uint[] rggrfChange)
-            {
+            int IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2(
+                string pszDirectory,
+                uint cChanges,
+                string[] rgpszFile,
+                uint[] rggrfChange
+            ) {
                 for (var i = 0; i < cChanges; i++)
                 {
                     FileChanged?.Invoke(this, rgpszFile[i]);
@@ -324,14 +387,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return VSConstants.S_OK;
             }
 
-            int IVsFileChangeEvents.FilesChanged(uint cChanges, string[] rgpszFile, uint[] rggrfChange)
-            {
-                Debug.Fail("Since we're implementing IVsFreeThreadedFileChangeEvents2.FilesChanged, this should not be called.");
+            int IVsFileChangeEvents.FilesChanged(
+                uint cChanges,
+                string[] rgpszFile,
+                uint[] rggrfChange
+            ) {
+                Debug.Fail(
+                    "Since we're implementing IVsFreeThreadedFileChangeEvents2.FilesChanged, this should not be called."
+                );
                 return VSConstants.E_NOTIMPL;
             }
 
-            int IVsFileChangeEvents.DirectoryChanged(string pszDirectory)
-                => VSConstants.E_NOTIMPL;
+            int IVsFileChangeEvents.DirectoryChanged(string pszDirectory) => VSConstants.E_NOTIMPL;
 
             public class FileWatchingToken : IFileWatchingToken
             {
@@ -345,8 +412,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 public uint? Cookie;
             }
 
-            int IVsFreeThreadedFileChangeEvents2.FilesChanged(uint cChanges, string[] rgpszFile, uint[] rggrfChange)
-            {
+            int IVsFreeThreadedFileChangeEvents2.FilesChanged(
+                uint cChanges,
+                string[] rgpszFile,
+                uint[] rggrfChange
+            ) {
                 for (var i = 0; i < cChanges; i++)
                 {
                     FileChanged?.Invoke(this, rgpszFile[i]);
@@ -355,9 +425,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return VSConstants.S_OK;
             }
 
-            int IVsFreeThreadedFileChangeEvents.DirectoryChangedEx(string pszDirectory, string pszFile)
-            {
-                Debug.Fail("Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called.");
+            int IVsFreeThreadedFileChangeEvents.DirectoryChangedEx(
+                string pszDirectory,
+                string pszFile
+            ) {
+                Debug.Fail(
+                    "Since we're implementing IVsFreeThreadedFileChangeEvents2.DirectoryChangedEx2, this should not be called."
+                );
                 return VSConstants.E_NOTIMPL;
             }
         }

@@ -25,8 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Update
             using var context = new TestContext();
             var connection = SetupConnection(context);
 
-            context.Add(
-                new Foo { Id = "1" });
+            context.Add(new Foo { Id = "1" });
 
             if (async)
             {
@@ -50,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Update
             var transaction = new FakeDbTransaction(connection);
             context.Database.UseTransaction(transaction);
 
-            context.Add(
-                new Foo { Id = "1" });
+            context.Add(new Foo { Id = "1" });
 
             if (async)
             {
@@ -69,28 +67,34 @@ namespace Microsoft.EntityFrameworkCore.Update
         private static FakeDbConnection SetupConnection(TestContext context)
         {
             var dataReader = new FakeDbDataReader(
-                new[] { "RowsAffected" }, new List<object[]> { new object[] { 1 } });
+                new[] { "RowsAffected" },
+                new List<object[]> { new object[] { 1 } }
+            );
 
             var connection = new FakeDbConnection(
-                "A=B", new FakeCommandExecutor(
+                "A=B",
+                new FakeCommandExecutor(
                     executeReader: (c, b) => dataReader,
-                    executeReaderAsync: (c, b, ct) => Task.FromResult<DbDataReader>(dataReader)));
+                    executeReaderAsync: (c, b, ct) => Task.FromResult<DbDataReader>(dataReader)
+                )
+            );
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(connection);
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+                connection
+            );
             return connection;
         }
 
         private class TestContext : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider
-                = FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(
-                        new ServiceCollection())
+            private static readonly IServiceProvider _serviceProvider =
+                FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(
+                        new ServiceCollection()
+                    )
                     .BuildServiceProvider();
 
             public TestContext()
-                : base(RelationalTestHelpers.Instance.CreateOptions(_serviceProvider))
-            {
-            }
+                : base(RelationalTestHelpers.Instance.CreateOptions(_serviceProvider)) { }
 
             public DbSet<Foo> Foos { get; set; }
         }

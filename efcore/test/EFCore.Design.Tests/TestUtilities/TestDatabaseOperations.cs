@@ -15,9 +15,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string projectDir,
             string rootNamespace,
             string language,
-            string[] args)
-            : base(reporter, assembly, startupAssembly, projectDir, rootNamespace, language, args)
-        {
-        }
+            string[] args
+        ) : base(reporter, assembly, startupAssembly, projectDir, rootNamespace, language, args) { }
     }
 }

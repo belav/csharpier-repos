@@ -13,8 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     public class ValueConverterSelectorTest
     {
-        private readonly IValueConverterSelector _selector
-            = new ValueConverterSelector(new ValueConverterSelectorDependencies());
+        private readonly IValueConverterSelector _selector = new ValueConverterSelector(
+            new ValueConverterSelectorDependencies()
+        );
 
         [ConditionalFact]
         public void Can_get_converters_for_int_enums()
@@ -25,7 +26,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(EnumToNumberConverter<Queen, long>), default),
                 (typeof(EnumToNumberConverter<Queen, decimal>), default),
                 (typeof(EnumToStringConverter<Queen>), default),
-                (typeof(CompositeValueConverter<Queen, int, byte[]>), new ConverterMappingHints(size: 4)),
+                (
+                    typeof(CompositeValueConverter<Queen, int, byte[]>),
+                    new ConverterMappingHints(size: 4)
+                ),
                 (typeof(EnumToNumberConverter<Queen, short>), default),
                 (typeof(EnumToNumberConverter<Queen, byte>), default),
                 (typeof(EnumToNumberConverter<Queen, ulong>), default),
@@ -33,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(EnumToNumberConverter<Queen, ushort>), default),
                 (typeof(EnumToNumberConverter<Queen, sbyte>), default),
                 (typeof(EnumToNumberConverter<Queen, double>), default),
-                (typeof(EnumToNumberConverter<Queen, float>), default));
+                (typeof(EnumToNumberConverter<Queen, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -42,9 +47,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             AssertConverters(
                 _selector.Select(typeof(Gnr)).ToList(),
                 (typeof(EnumToNumberConverter<Gnr, ulong>), default),
-                (typeof(EnumToNumberConverter<Gnr, decimal>), new ConverterMappingHints(precision: 20, scale: 0)),
+                (
+                    typeof(EnumToNumberConverter<Gnr, decimal>),
+                    new ConverterMappingHints(precision: 20, scale: 0)
+                ),
                 (typeof(EnumToStringConverter<Gnr>), default),
-                (typeof(CompositeValueConverter<Gnr, ulong, byte[]>), new ConverterMappingHints(size: 8)),
+                (
+                    typeof(CompositeValueConverter<Gnr, ulong, byte[]>),
+                    new ConverterMappingHints(size: 8)
+                ),
                 (typeof(EnumToNumberConverter<Gnr, int>), default),
                 (typeof(EnumToNumberConverter<Gnr, long>), default),
                 (typeof(EnumToNumberConverter<Gnr, short>), default),
@@ -53,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(EnumToNumberConverter<Gnr, ushort>), default),
                 (typeof(EnumToNumberConverter<Gnr, sbyte>), default),
                 (typeof(EnumToNumberConverter<Gnr, double>), default),
-                (typeof(EnumToNumberConverter<Gnr, float>), default));
+                (typeof(EnumToNumberConverter<Gnr, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -62,9 +74,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             AssertConverters(
                 _selector.Select(typeof(Velvets)).ToList(),
                 (typeof(EnumToNumberConverter<Velvets, long>), default),
-                (typeof(EnumToNumberConverter<Velvets, decimal>), new ConverterMappingHints(precision: 20, scale: 0)),
+                (
+                    typeof(EnumToNumberConverter<Velvets, decimal>),
+                    new ConverterMappingHints(precision: 20, scale: 0)
+                ),
                 (typeof(EnumToStringConverter<Velvets>), default),
-                (typeof(CompositeValueConverter<Velvets, long, byte[]>), new ConverterMappingHints(size: 8)),
+                (
+                    typeof(CompositeValueConverter<Velvets, long, byte[]>),
+                    new ConverterMappingHints(size: 8)
+                ),
                 (typeof(EnumToNumberConverter<Velvets, int>), default),
                 (typeof(EnumToNumberConverter<Velvets, short>), default),
                 (typeof(EnumToNumberConverter<Velvets, byte>), default),
@@ -73,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(EnumToNumberConverter<Velvets, ushort>), default),
                 (typeof(EnumToNumberConverter<Velvets, sbyte>), default),
                 (typeof(EnumToNumberConverter<Velvets, double>), default),
-                (typeof(EnumToNumberConverter<Velvets, float>), default));
+                (typeof(EnumToNumberConverter<Velvets, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -90,10 +109,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(EnumToNumberConverter<Nwa, ulong>), default),
                 (typeof(EnumToNumberConverter<Nwa, decimal>), default),
                 (typeof(EnumToStringConverter<Nwa>), default),
-                (typeof(CompositeValueConverter<Nwa, byte, byte[]>), new ConverterMappingHints(size: 1)),
+                (
+                    typeof(CompositeValueConverter<Nwa, byte, byte[]>),
+                    new ConverterMappingHints(size: 1)
+                ),
                 (typeof(EnumToNumberConverter<Nwa, sbyte>), default),
                 (typeof(EnumToNumberConverter<Nwa, double>), default),
-                (typeof(EnumToNumberConverter<Nwa, float>), default));
+                (typeof(EnumToNumberConverter<Nwa, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -101,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Queen), typeof(string)).ToList(),
-                (typeof(EnumToStringConverter<Queen>), default));
+                (typeof(EnumToStringConverter<Queen>), default)
+            );
         }
 
         [ConditionalFact]
@@ -109,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Queen), typeof(int)).ToList(),
-                (typeof(EnumToNumberConverter<Queen, int>), default));
+                (typeof(EnumToNumberConverter<Queen, int>), default)
+            );
         }
 
         [ConditionalFact]
@@ -117,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Queen), typeof(sbyte)).ToList(),
-                (typeof(EnumToNumberConverter<Queen, sbyte>), default));
+                (typeof(EnumToNumberConverter<Queen, sbyte>), default)
+            );
         }
 
         [ConditionalFact]
@@ -125,7 +151,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Queen), typeof(byte[])).ToList(),
-                (typeof(CompositeValueConverter<Queen, int, byte[]>), new ConverterMappingHints(size: 4)));
+                (
+                    typeof(CompositeValueConverter<Queen, int, byte[]>),
+                    new ConverterMappingHints(size: 4)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -144,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<int, ushort>), default),
                 (typeof(CastingConverter<int, sbyte>), default),
                 (typeof(CastingConverter<int, double>), default),
-                (typeof(CastingConverter<int, float>), default));
+                (typeof(CastingConverter<int, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -163,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<uint, ushort>), default),
                 (typeof(CastingConverter<uint, sbyte>), default),
                 (typeof(CastingConverter<uint, double>), default),
-                (typeof(CastingConverter<uint, float>), default));
+                (typeof(CastingConverter<uint, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -182,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<sbyte, uint>), default),
                 (typeof(CastingConverter<sbyte, ushort>), default),
                 (typeof(CastingConverter<sbyte, double>), default),
-                (typeof(CastingConverter<sbyte, float>), default));
+                (typeof(CastingConverter<sbyte, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -201,7 +234,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(NumberToBytesConverter<byte>), new ConverterMappingHints(size: 1)),
                 (typeof(CastingConverter<byte, sbyte>), default),
                 (typeof(CastingConverter<byte, double>), default),
-                (typeof(CastingConverter<byte, float>), default));
+                (typeof(CastingConverter<byte, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -209,7 +243,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(double)).ToList(),
-                (typeof(CastingConverter<double, decimal>), new ConverterMappingHints(precision: 38, scale: 17)),
+                (
+                    typeof(CastingConverter<double, decimal>),
+                    new ConverterMappingHints(precision: 38, scale: 17)
+                ),
                 (typeof(NumberToStringConverter<double>), new ConverterMappingHints(size: 64)),
                 (typeof(NumberToBytesConverter<double>), new ConverterMappingHints(size: 8)),
                 (typeof(CastingConverter<double, int>), default),
@@ -220,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<double, uint>), default),
                 (typeof(CastingConverter<double, ushort>), default),
                 (typeof(CastingConverter<double, sbyte>), default),
-                (typeof(CastingConverter<double, float>), default));
+                (typeof(CastingConverter<double, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -229,7 +267,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             AssertConverters(
                 _selector.Select(typeof(float)).ToList(),
                 (typeof(CastingConverter<float, double>), default),
-                (typeof(CastingConverter<float, decimal>), new ConverterMappingHints(precision: 38, scale: 17)),
+                (
+                    typeof(CastingConverter<float, decimal>),
+                    new ConverterMappingHints(precision: 38, scale: 17)
+                ),
                 (typeof(NumberToStringConverter<float>), new ConverterMappingHints(size: 64)),
                 (typeof(NumberToBytesConverter<float>), new ConverterMappingHints(size: 4)),
                 (typeof(CastingConverter<float, int>), default),
@@ -239,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<float, ulong>), default),
                 (typeof(CastingConverter<float, uint>), default),
                 (typeof(CastingConverter<float, ushort>), default),
-                (typeof(CastingConverter<float, sbyte>), default));
+                (typeof(CastingConverter<float, sbyte>), default)
+            );
         }
 
         [ConditionalFact]
@@ -258,7 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<decimal, ushort>), default),
                 (typeof(CastingConverter<decimal, sbyte>), default),
                 (typeof(CastingConverter<decimal, double>), default),
-                (typeof(CastingConverter<decimal, float>), default));
+                (typeof(CastingConverter<decimal, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -266,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(double), typeof(float)).ToList(),
-                (typeof(CastingConverter<double, float>), default));
+                (typeof(CastingConverter<double, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -274,7 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(float), typeof(double)).ToList(),
-                (typeof(CastingConverter<float, double>), default));
+                (typeof(CastingConverter<float, double>), default)
+            );
         }
 
         [ConditionalFact]
@@ -308,8 +353,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     else
                     {
                         Assert.Equal(
-                            typeof(CastingConverter<,>).MakeGenericType(fromType, toType),
-                            converterInfos.Single().Create().GetType());
+                            typeof(CastingConverter<, >).MakeGenericType(fromType, toType),
+                            converterInfos.Single().Create().GetType()
+                        );
                     }
                 }
             }
@@ -332,7 +378,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(CastingConverter<char, byte>), default),
                 (typeof(CastingConverter<char, sbyte>), default),
                 (typeof(CastingConverter<char, double>), default),
-                (typeof(CastingConverter<char, float>), default));
+                (typeof(CastingConverter<char, float>), default)
+            );
         }
 
         [ConditionalFact]
@@ -340,7 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(char), typeof(string)).ToList(),
-                (typeof(CharToStringConverter), new ConverterMappingHints(size: 1)));
+                (typeof(CharToStringConverter), new ConverterMappingHints(size: 1))
+            );
         }
 
         [ConditionalFact]
@@ -348,7 +396,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(char), typeof(byte[])).ToList(),
-                (typeof(NumberToBytesConverter<char>), new ConverterMappingHints(size: 2)));
+                (typeof(NumberToBytesConverter<char>), new ConverterMappingHints(size: 2))
+            );
         }
 
         [ConditionalFact]
@@ -356,7 +405,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(char), typeof(ushort)).ToList(),
-                (typeof(CastingConverter<char, ushort>), default));
+                (typeof(CastingConverter<char, ushort>), default)
+            );
         }
 
         [ConditionalFact]
@@ -376,7 +426,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (typeof(BoolToZeroOneConverter<double>), default),
                 (typeof(BoolToZeroOneConverter<float>), default),
                 (typeof(BoolToStringConverter), new ConverterMappingHints(size: 1)),
-                (typeof(CompositeValueConverter<bool, byte, byte[]>), new ConverterMappingHints(size: 1)));
+                (
+                    typeof(CompositeValueConverter<bool, byte, byte[]>),
+                    new ConverterMappingHints(size: 1)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -385,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             AssertConverters(
                 _selector.Select(typeof(Guid)).ToList(),
                 (typeof(GuidToBytesConverter), new ConverterMappingHints(size: 16)),
-                (typeof(GuidToStringConverter), new ConverterMappingHints(size: 36)));
+                (typeof(GuidToStringConverter), new ConverterMappingHints(size: 36))
+            );
         }
 
         [ConditionalFact]
@@ -393,7 +448,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Guid), typeof(string)).ToList(),
-                (typeof(GuidToStringConverter), new ConverterMappingHints(size: 36)));
+                (typeof(GuidToStringConverter), new ConverterMappingHints(size: 36))
+            );
         }
 
         [ConditionalFact]
@@ -401,7 +457,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Guid), typeof(byte[])).ToList(),
-                (typeof(GuidToBytesConverter), new ConverterMappingHints(size: 16)));
+                (typeof(GuidToBytesConverter), new ConverterMappingHints(size: 16))
+            );
         }
 
         [ConditionalFact]
@@ -409,7 +466,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string)).ToList(),
-                (typeof(StringToBytesConverter), default));
+                (typeof(StringToBytesConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -417,7 +475,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(int)).ToList(),
-                (typeof(StringToNumberConverter<int>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<int>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -425,7 +484,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(long)).ToList(),
-                (typeof(StringToNumberConverter<long>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<long>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -433,7 +493,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(short)).ToList(),
-                (typeof(StringToNumberConverter<short>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<short>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -441,7 +502,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(byte)).ToList(),
-                (typeof(StringToNumberConverter<byte>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<byte>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -449,7 +511,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(ulong)).ToList(),
-                (typeof(StringToNumberConverter<ulong>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<ulong>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -457,7 +520,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(uint)).ToList(),
-                (typeof(StringToNumberConverter<uint>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<uint>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -465,7 +529,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(ushort)).ToList(),
-                (typeof(StringToNumberConverter<ushort>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<ushort>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -473,7 +538,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(sbyte)).ToList(),
-                (typeof(StringToNumberConverter<sbyte>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<sbyte>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -481,7 +547,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(decimal)).ToList(),
-                (typeof(StringToNumberConverter<decimal>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<decimal>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -489,7 +556,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(double)).ToList(),
-                (typeof(StringToNumberConverter<double>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<double>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -497,7 +565,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(float)).ToList(),
-                (typeof(StringToNumberConverter<float>), new ConverterMappingHints(size: 64)));
+                (typeof(StringToNumberConverter<float>), new ConverterMappingHints(size: 64))
+            );
         }
 
         [ConditionalFact]
@@ -505,7 +574,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(Queen)).ToList(),
-                (typeof(StringToEnumConverter<Queen>), default));
+                (typeof(StringToEnumConverter<Queen>), default)
+            );
         }
 
         [ConditionalFact]
@@ -513,7 +583,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(DateTime)).ToList(),
-                (typeof(StringToDateTimeConverter), new ConverterMappingHints(size: 48)));
+                (typeof(StringToDateTimeConverter), new ConverterMappingHints(size: 48))
+            );
         }
 
         [ConditionalFact]
@@ -521,7 +592,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(DateTimeOffset)).ToList(),
-                (typeof(StringToDateTimeOffsetConverter), new ConverterMappingHints(size: 48)));
+                (typeof(StringToDateTimeOffsetConverter), new ConverterMappingHints(size: 48))
+            );
         }
 
         [ConditionalFact]
@@ -529,7 +601,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(TimeSpan)).ToList(),
-                (typeof(StringToTimeSpanConverter), new ConverterMappingHints(size: 48)));
+                (typeof(StringToTimeSpanConverter), new ConverterMappingHints(size: 48))
+            );
         }
 
         [ConditionalFact]
@@ -537,7 +610,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(Guid)).ToList(),
-                (typeof(StringToGuidConverter), new ConverterMappingHints(size: 36)));
+                (typeof(StringToGuidConverter), new ConverterMappingHints(size: 36))
+            );
         }
 
         [ConditionalFact]
@@ -545,7 +619,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(Uri)).ToList(),
-                (typeof(StringToUriConverter), default));
+                (typeof(StringToUriConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -553,7 +628,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(bool)).ToList(),
-                (typeof(StringToBoolConverter), default));
+                (typeof(StringToBoolConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -561,7 +637,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(char)).ToList(),
-                (typeof(StringToCharConverter), new ConverterMappingHints(size: 1)));
+                (typeof(StringToCharConverter), new ConverterMappingHints(size: 1))
+            );
         }
 
         [ConditionalFact]
@@ -569,7 +646,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(string), typeof(byte[])).ToList(),
-                (typeof(StringToBytesConverter), default));
+                (typeof(StringToBytesConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -577,7 +655,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(byte[])).ToList(),
-                (typeof(BytesToStringConverter), default));
+                (typeof(BytesToStringConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -585,7 +664,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(byte[]), typeof(string)).ToList(),
-                (typeof(BytesToStringConverter), default));
+                (typeof(BytesToStringConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -595,7 +675,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 _selector.Select(typeof(DateTime)).ToList(),
                 (typeof(DateTimeToStringConverter), new ConverterMappingHints(size: 48)),
                 (typeof(DateTimeToBinaryConverter), default),
-                (typeof(CompositeValueConverter<DateTime, long, byte[]>), new ConverterMappingHints(size: 8)));
+                (
+                    typeof(CompositeValueConverter<DateTime, long, byte[]>),
+                    new ConverterMappingHints(size: 8)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -603,7 +687,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(DateTime), typeof(byte[])).ToList(),
-                (typeof(CompositeValueConverter<DateTime, long, byte[]>), new ConverterMappingHints(size: 8)));
+                (
+                    typeof(CompositeValueConverter<DateTime, long, byte[]>),
+                    new ConverterMappingHints(size: 8)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -611,7 +699,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(DateTime), typeof(string)).ToList(),
-                (typeof(DateTimeToStringConverter), new ConverterMappingHints(size: 48)));
+                (typeof(DateTimeToStringConverter), new ConverterMappingHints(size: 48))
+            );
         }
 
         [ConditionalFact]
@@ -619,7 +708,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(DateTime), typeof(long)).ToList(),
-                (typeof(DateTimeToBinaryConverter), default));
+                (typeof(DateTimeToBinaryConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -629,7 +719,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 _selector.Select(typeof(DateTimeOffset)).ToList(),
                 (typeof(DateTimeOffsetToStringConverter), new ConverterMappingHints(size: 48)),
                 (typeof(DateTimeOffsetToBinaryConverter), default),
-                (typeof(DateTimeOffsetToBytesConverter), new ConverterMappingHints(size: 12)));
+                (typeof(DateTimeOffsetToBytesConverter), new ConverterMappingHints(size: 12))
+            );
         }
 
         [ConditionalFact]
@@ -637,7 +728,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(DateTimeOffset), typeof(byte[])).ToList(),
-                (typeof(DateTimeOffsetToBytesConverter), new ConverterMappingHints(size: 12)));
+                (typeof(DateTimeOffsetToBytesConverter), new ConverterMappingHints(size: 12))
+            );
         }
 
         [ConditionalFact]
@@ -645,7 +737,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(DateTimeOffset), typeof(string)).ToList(),
-                (typeof(DateTimeOffsetToStringConverter), new ConverterMappingHints(size: 48)));
+                (typeof(DateTimeOffsetToStringConverter), new ConverterMappingHints(size: 48))
+            );
         }
 
         [ConditionalFact]
@@ -653,7 +746,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(DateTimeOffset), typeof(long)).ToList(),
-                (typeof(DateTimeOffsetToBinaryConverter), default));
+                (typeof(DateTimeOffsetToBinaryConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -663,7 +757,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 _selector.Select(typeof(TimeSpan)).ToList(),
                 (typeof(TimeSpanToStringConverter), new ConverterMappingHints(size: 48)),
                 (typeof(TimeSpanToTicksConverter), default),
-                (typeof(CompositeValueConverter<TimeSpan, long, byte[]>), new ConverterMappingHints(size: 8)));
+                (
+                    typeof(CompositeValueConverter<TimeSpan, long, byte[]>),
+                    new ConverterMappingHints(size: 8)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -671,7 +769,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(TimeSpan), typeof(byte[])).ToList(),
-                (typeof(CompositeValueConverter<TimeSpan, long, byte[]>), new ConverterMappingHints(size: 8)));
+                (
+                    typeof(CompositeValueConverter<TimeSpan, long, byte[]>),
+                    new ConverterMappingHints(size: 8)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -679,7 +781,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(TimeSpan), typeof(string)).ToList(),
-                (typeof(TimeSpanToStringConverter), new ConverterMappingHints(size: 48)));
+                (typeof(TimeSpanToStringConverter), new ConverterMappingHints(size: 48))
+            );
         }
 
         [ConditionalFact]
@@ -687,7 +790,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(TimeSpan), typeof(long)).ToList(),
-                (typeof(TimeSpanToTicksConverter), default));
+                (typeof(TimeSpanToTicksConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -695,7 +799,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Uri), typeof(string)).ToList(),
-                (typeof(UriToStringConverter), default));
+                (typeof(UriToStringConverter), default)
+            );
         }
 
         [ConditionalFact]
@@ -703,7 +808,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(IPAddress), typeof(string)).ToList(),
-                (typeof(IPAddressToStringConverter), new ConverterMappingHints(size: 45)));
+                (typeof(IPAddressToStringConverter), new ConverterMappingHints(size: 45))
+            );
         }
 
         [ConditionalFact]
@@ -711,13 +817,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(IPAddress), typeof(byte[])).ToList(),
-                (typeof(IPAddressToBytesConverter), new ConverterMappingHints(size: 16)));
+                (typeof(IPAddressToBytesConverter), new ConverterMappingHints(size: 16))
+            );
         }
 
         private static void AssertConverters(
             IList<ValueConverterInfo> converterInfos,
-            params (Type InfoType, ConverterMappingHints Hints)[] converterTypes)
-        {
+            params (Type InfoType, ConverterMappingHints Hints)[] converterTypes
+        ) {
             Assert.Equal(converterTypes.Length, converterInfos.Count);
 
             for (var i = 0; i < converterTypes.Length; i++)
@@ -729,8 +836,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
         }
 
-        private static void AssertHints(ConverterMappingHints expected, ConverterMappingHints actual)
-        {
+        private static void AssertHints(
+            ConverterMappingHints expected,
+            ConverterMappingHints actual
+        ) {
             Assert.Equal(actual?.IsUnicode, expected?.IsUnicode);
             Assert.Equal(actual?.Precision, expected?.Precision);
             Assert.Equal(actual?.Scale, expected?.Scale);

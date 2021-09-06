@@ -49,7 +49,9 @@ namespace Microsoft.Data.Sqlite
             {
                 connection.Open();
 
-                var ex = Assert.Throws<ArgumentException>(() => connection.BeginTransaction(isolationLevel));
+                var ex = Assert.Throws<ArgumentException>(
+                    () => connection.BeginTransaction(isolationLevel)
+                );
 
                 Assert.Equal(Resources.InvalidIsolationLevel(isolationLevel), ex.Message);
             }
@@ -66,7 +68,9 @@ namespace Microsoft.Data.Sqlite
                 connection1.Open();
                 connection2.Open();
 
-                connection1.ExecuteNonQuery("CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
+                connection1.ExecuteNonQuery(
+                    "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                );
 
                 using (connection1.BeginTransaction())
                 using (connection2.BeginTransaction(IsolationLevel.ReadUncommitted))
@@ -91,7 +95,9 @@ namespace Microsoft.Data.Sqlite
                 connection1.Open();
                 connection2.Open();
 
-                connection1.ExecuteNonQuery("CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
+                connection1.ExecuteNonQuery(
+                    "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                );
 
                 using (connection1.BeginTransaction())
                 {
@@ -106,7 +112,8 @@ namespace Microsoft.Data.Sqlite
                             {
                                 connection2.ExecuteScalar<long>("SELECT * FROM Data;");
                             }
-                        });
+                        }
+                    );
 
                     Assert.Equal(SQLITE_LOCKED, ex.SqliteErrorCode);
                     Assert.Equal(SQLITE_LOCKED_SHAREDCACHE, ex.SqliteExtendedErrorCode);
@@ -125,7 +132,9 @@ namespace Microsoft.Data.Sqlite
                 connection1.Open();
                 connection2.Open();
 
-                connection1.ExecuteNonQuery("CREATE TABLE Data (Value); INSERT INTO Data VALUES (42);");
+                connection1.ExecuteNonQuery(
+                    "CREATE TABLE Data (Value); INSERT INTO Data VALUES (42);"
+                );
 
                 using (connection1.BeginTransaction(deferred: true))
                 {
@@ -382,7 +391,8 @@ namespace Microsoft.Data.Sqlite
                 @"
                 CREATE TABLE TestTable (
                     TestColumn INTEGER
-                )");
+                )"
+            );
         }
     }
 }

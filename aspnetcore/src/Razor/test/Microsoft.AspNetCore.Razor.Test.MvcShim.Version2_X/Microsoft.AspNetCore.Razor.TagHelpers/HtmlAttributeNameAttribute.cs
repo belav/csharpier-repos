@@ -22,9 +22,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <see cref="System.Collections.Generic.IDictionary{TKey, TValue}"/> where <c>TKey</c> is
         /// <see cref="string"/>.
         /// </remarks>
-        public HtmlAttributeNameAttribute()
-        {
-        }
+        public HtmlAttributeNameAttribute() { }
 
         /// <summary>
         /// Instantiates a new instance of the <see cref="HtmlAttributeNameAttribute"/> class.
@@ -71,10 +69,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </value>
         public string DictionaryAttributePrefix
         {
-            get
-            {
-                return _dictionaryAttributePrefix;
-            }
+            get { return _dictionaryAttributePrefix; }
             set
             {
                 _dictionaryAttributePrefix = value;

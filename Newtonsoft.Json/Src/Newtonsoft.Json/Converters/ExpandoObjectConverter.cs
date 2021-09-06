@@ -59,8 +59,12 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-        {
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        ) {
             return ReadValue(reader);
         }
 
@@ -68,7 +72,10 @@ namespace Newtonsoft.Json.Converters
         {
             if (!reader.MoveToContent())
             {
-                throw JsonSerializationException.Create(reader, "Unexpected end when reading ExpandoObject.");
+                throw JsonSerializationException.Create(
+                    reader,
+                    "Unexpected end when reading ExpandoObject."
+                );
             }
 
             switch (reader.TokenType)
@@ -83,7 +90,13 @@ namespace Newtonsoft.Json.Converters
                         return reader.Value;
                     }
 
-                    throw JsonSerializationException.Create(reader, "Unexpected token when converting ExpandoObject: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                    throw JsonSerializationException.Create(
+                        reader,
+                        "Unexpected token when converting ExpandoObject: {0}".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            reader.TokenType
+                        )
+                    );
             }
         }
 
@@ -107,7 +120,10 @@ namespace Newtonsoft.Json.Converters
                 }
             }
 
-            throw JsonSerializationException.Create(reader, "Unexpected end when reading ExpandoObject.");
+            throw JsonSerializationException.Create(
+                reader,
+                "Unexpected end when reading ExpandoObject."
+            );
         }
 
         private object ReadObject(JsonReader reader)
@@ -123,7 +139,10 @@ namespace Newtonsoft.Json.Converters
 
                         if (!reader.Read())
                         {
-                            throw JsonSerializationException.Create(reader, "Unexpected end when reading ExpandoObject.");
+                            throw JsonSerializationException.Create(
+                                reader,
+                                "Unexpected end when reading ExpandoObject."
+                            );
                         }
 
                         object? v = ReadValue(reader);
@@ -137,7 +156,10 @@ namespace Newtonsoft.Json.Converters
                 }
             }
 
-            throw JsonSerializationException.Create(reader, "Unexpected end when reading ExpandoObject.");
+            throw JsonSerializationException.Create(
+                reader,
+                "Unexpected end when reading ExpandoObject."
+            );
         }
 
         /// <summary>

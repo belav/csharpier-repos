@@ -41,6 +41,7 @@ class BindHandleInvalid3
                 }
             }
         }
+
         finally
         {
             if (File.Exists("test.txt"))
@@ -51,6 +52,4 @@ class BindHandleInvalid3
         Console.WriteLine("Didn't get argument null exception");
         return (99);
     }
-
-
 }

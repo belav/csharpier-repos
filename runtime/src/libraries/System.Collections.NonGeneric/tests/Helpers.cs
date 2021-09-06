@@ -8,19 +8,39 @@ namespace System.Collections.Tests
     internal static class Helpers
     {
         public static string[] TestCultureNames =>
-            PlatformDetection.IsInvariantGlobalization ? 
-                new string[] { "" } :
-                new string[]
-                {
-                    "cs-CZ","da-DK","de-DE","el-GR","en-US",
-                    "es-ES","fi-FI","fr-FR","hu-HU","it-IT",
-                    "ja-JP","ko-KR","nb-NO","nl-NL","pl-PL",
-                    "pt-BR","pt-PT","ru-RU","sv-SE","tr-TR",
-                    "zh-CN","zh-HK","zh-TW"
-                };
+            PlatformDetection.IsInvariantGlobalization
+                ? new string[] { "" }
+                : new string[]
+                  {
+                      "cs-CZ",
+                      "da-DK",
+                      "de-DE",
+                      "el-GR",
+                      "en-US",
+                      "es-ES",
+                      "fi-FI",
+                      "fr-FR",
+                      "hu-HU",
+                      "it-IT",
+                      "ja-JP",
+                      "ko-KR",
+                      "nb-NO",
+                      "nl-NL",
+                      "pl-PL",
+                      "pt-BR",
+                      "pt-PT",
+                      "ru-RU",
+                      "sv-SE",
+                      "tr-TR",
+                      "zh-CN",
+                      "zh-HK",
+                      "zh-TW"
+                  };
 
-        public static void PerformActionOnAllHashtableWrappers(Hashtable hashtable, Action<Hashtable> action)
-        {
+        public static void PerformActionOnAllHashtableWrappers(
+            Hashtable hashtable,
+            Action<Hashtable> action
+        ) {
             // Synchronized returns a slightly different version of Hashtable
             Hashtable[] hashtableTypes =
             {
@@ -61,8 +81,10 @@ namespace System.Collections.Tests
             return hashtable;
         }
 
-        public static void PerformActionOnAllArrayListWrappers(ArrayList arrList, Action<ArrayList> action)
-        {
+        public static void PerformActionOnAllArrayListWrappers(
+            ArrayList arrList,
+            Action<ArrayList> action
+        ) {
             // Adapter, GetRange, Synchronized, ReadOnly returns a slightly different version of ArrayList.
             // The following variable contains each one of these types of array lists
             ArrayList[] arrayListTypes =
@@ -81,8 +103,11 @@ namespace System.Collections.Tests
             }
         }
 
-        public static ArrayList CreateStringArrayList(int count, int start = 0, string optionalString = null)
-        {
+        public static ArrayList CreateStringArrayList(
+            int count,
+            int start = 0,
+            string optionalString = null
+        ) {
             var arrayList = new ArrayList();
 
             for (int i = start; i < start + count; i++)
@@ -108,11 +133,7 @@ namespace System.Collections.Tests
         public static void PerformActionOnAllQueueWrappers(Queue queue, Action<Queue> action)
         {
             // Synchronized returns a slightly different version of Queue
-            Queue[] queueTypes =
-            {
-                (Queue)queue.Clone(),
-                Queue.Synchronized(queue)
-            };
+            Queue[] queueTypes = { (Queue)queue.Clone(), Queue.Synchronized(queue) };
 
             foreach (Queue queueType in queueTypes)
             {
@@ -135,11 +156,7 @@ namespace System.Collections.Tests
         public static void PerformActionOnAllStackWrappers(Stack stack, Action<Stack> action)
         {
             // Synchronized returns a slightly different version of Stack
-            Stack[] stackTypes =
-            {
-                (Stack)stack.Clone(),
-                Stack.Synchronized(stack)
-            };
+            Stack[] stackTypes = { (Stack)stack.Clone(), Stack.Synchronized(stack) };
 
             foreach (Stack stackType in stackTypes)
             {
@@ -159,8 +176,10 @@ namespace System.Collections.Tests
             return stack;
         }
 
-        public static void PerformActionOnAllSortedListWrappers(SortedList sortedList, Action<SortedList> action)
-        {
+        public static void PerformActionOnAllSortedListWrappers(
+            SortedList sortedList,
+            Action<SortedList> action
+        ) {
             // Synchronized returns a slightly different version of Stack
             SortedList[] sortedListTypes =
             {

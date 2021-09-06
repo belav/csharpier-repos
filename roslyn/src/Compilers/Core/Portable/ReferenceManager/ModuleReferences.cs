@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis
         public ModuleReferences(
             ImmutableArray<AssemblyIdentity> identities,
             ImmutableArray<TAssemblySymbol> symbols,
-            ImmutableArray<UnifiedAssembly<TAssemblySymbol>> unifiedAssemblies)
-        {
+            ImmutableArray<UnifiedAssembly<TAssemblySymbol>> unifiedAssemblies
+        ) {
             Debug.Assert(!identities.IsDefault);
             Debug.Assert(!symbols.IsDefault);
             Debug.Assert(identities.Length == symbols.Length);

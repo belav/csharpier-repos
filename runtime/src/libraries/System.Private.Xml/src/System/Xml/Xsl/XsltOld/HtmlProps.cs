@@ -20,8 +20,15 @@ namespace System.Xml.Xsl.XsltOld
         private bool _head;
         private bool _nameParent;
 
-        public static HtmlElementProps Create(bool empty, bool abrParent, bool uriParent, bool noEntities, bool blockWS, bool head, bool nameParent)
-        {
+        public static HtmlElementProps Create(
+            bool empty,
+            bool abrParent,
+            bool uriParent,
+            bool noEntities,
+            bool blockWS,
+            bool head,
+            bool nameParent
+        ) {
             HtmlElementProps props = new HtmlElementProps();
             props._empty = empty;
             props._abrParent = abrParent;
@@ -32,13 +39,30 @@ namespace System.Xml.Xsl.XsltOld
             props._nameParent = nameParent;
             return props;
         }
-        public bool Empty { get { return _empty; } }
-        public bool AbrParent { get { return _abrParent; } }
-        public bool UriParent { get { return _uriParent; } }
-        public bool NoEntities { get { return _noEntities; } }
-        public bool Head { get { return _head; } }
-        public bool NameParent { get { return _nameParent; } }
-
+        public bool Empty
+        {
+            get { return _empty; }
+        }
+        public bool AbrParent
+        {
+            get { return _abrParent; }
+        }
+        public bool UriParent
+        {
+            get { return _uriParent; }
+        }
+        public bool NoEntities
+        {
+            get { return _noEntities; }
+        }
+        public bool Head
+        {
+            get { return _head; }
+        }
+        public bool NameParent
+        {
+            get { return _nameParent; }
+        }
 
         private static readonly Hashtable s_table = CreatePropsTable();
         //        private static HtmlElementProps  s_otherElements = Create(false, false, false, false, false, false, false);
@@ -53,7 +77,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private static Hashtable CreatePropsTable()
         {
-            bool o = false, X = true;
+            bool o = false,
+                X = true;
             Hashtable table = new Hashtable(71, StringComparer.OrdinalIgnoreCase);
             {
                 //                                EMPTY    ABR     URI    NO_ENT  NO_WS   HEAD   NAME
@@ -147,9 +172,18 @@ namespace System.Xml.Xsl.XsltOld
             props._name = name;
             return props;
         }
-        public bool Abr { get { return _abr; } }
-        public bool Uri { get { return _uri; } }
-        public bool Name { get { return _name; } }
+        public bool Abr
+        {
+            get { return _abr; }
+        }
+        public bool Uri
+        {
+            get { return _uri; }
+        }
+        public bool Name
+        {
+            get { return _name; }
+        }
 
         private static readonly Hashtable s_table = CreatePropsTable();
         //      private static HtmlElementProps  s_otherAttributes = Create(false, false, false);
@@ -164,7 +198,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private static Hashtable CreatePropsTable()
         {
-            bool o = false, X = true;
+            bool o = false,
+                X = true;
             Hashtable table = new Hashtable(26, StringComparer.OrdinalIgnoreCase);
             {
                 //                               ABR     URI    NAME

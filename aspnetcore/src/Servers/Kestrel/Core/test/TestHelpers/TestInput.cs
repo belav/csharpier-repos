@@ -24,7 +24,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public TestInput(IKestrelTrace log = null, ITimeoutControl timeoutControl = null)
         {
             _memoryPool = PinnedBlockMemoryPoolFactory.Create();
-            var options = new PipeOptions(pool: _memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                pool: _memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
             var pair = DuplexPipe.CreateConnectionPair(options, options);
             Transport = pair.Transport;
             Application = pair.Application;
@@ -33,15 +38,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             connectionFeatures.Set(Mock.Of<IConnectionLifetimeFeature>());
 
             Http1ConnectionContext = TestContextFactory.CreateHttpConnectionContext(
-                serviceContext: new TestServiceContext
-                {
-                    Log = log ?? Mock.Of<IKestrelTrace>()
-                },
+                serviceContext: new TestServiceContext { Log = log ?? Mock.Of<IKestrelTrace>() },
                 connectionContext: Mock.Of<ConnectionContext>(),
                 transport: Transport,
                 timeoutControl: timeoutControl ?? Mock.Of<ITimeoutControl>(),
                 memoryPool: _memoryPool,
-                connectionFeatures: connectionFeatures);
+                connectionFeatures: connectionFeatures
+            );
 
             Http1Connection = new Http1Connection(Http1ConnectionContext);
             Http1Connection.HttpResponseControl = Mock.Of<IHttpResponseControl>();

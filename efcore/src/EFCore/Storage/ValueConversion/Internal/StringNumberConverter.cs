@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class StringNumberConverter<TModel, TProvider, TNumber> : ValueConverter<TModel, TProvider>
+    public class StringNumberConverter<TModel, TProvider, TNumber>
+        : ValueConverter<TModel, TProvider>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,10 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         public StringNumberConverter(
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-            : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,13 +50,29 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
             CheckTypeSupported(
                 type,
                 typeof(StringNumberConverter<TModel, TProvider, TNumber>),
-                typeof(int), typeof(long), typeof(short), typeof(byte),
-                typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte),
-                typeof(decimal), typeof(float), typeof(double));
+                typeof(int),
+                typeof(long),
+                typeof(short),
+                typeof(byte),
+                typeof(uint),
+                typeof(ulong),
+                typeof(ushort),
+                typeof(sbyte),
+                typeof(decimal),
+                typeof(float),
+                typeof(double)
+            );
 
             var tryParseMethod = type.GetMethod(
                 nameof(int.TryParse),
-                new[] { typeof(string), typeof(NumberStyles), typeof(IFormatProvider), type.MakeByRefType() })!;
+                new[]
+                {
+                    typeof(string),
+                    typeof(NumberStyles),
+                    typeof(IFormatProvider),
+                    type.MakeByRefType()
+                }
+            )!;
 
             var parsedVariable = Expression.Variable(type, "parsed");
             var param = Expression.Parameter(typeof(string), "v");
@@ -71,13 +86,20 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
                             tryParseMethod,
                             param,
                             Expression.Constant(NumberStyles.Any),
-                            Expression.Constant(CultureInfo.InvariantCulture, typeof(IFormatProvider)),
-                            parsedVariable),
+                            Expression.Constant(
+                                CultureInfo.InvariantCulture,
+                                typeof(IFormatProvider)
+                            ),
+                            parsedVariable
+                        ),
                         typeof(TNumber).IsNullableType()
                             ? (Expression)Expression.Convert(parsedVariable, typeof(TNumber))
                             : parsedVariable,
-                        Expression.Constant(default(TNumber), typeof(TNumber)))),
-                param);
+                        Expression.Constant(default(TNumber), typeof(TNumber))
+                    )
+                ),
+                param
+            );
         }
 
         /// <summary>
@@ -93,17 +115,28 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
             CheckTypeSupported(
                 type,
                 typeof(StringNumberConverter<TModel, TProvider, TNumber>),
-                typeof(int), typeof(long), typeof(short), typeof(byte),
-                typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte),
-                typeof(decimal), typeof(float), typeof(double));
+                typeof(int),
+                typeof(long),
+                typeof(short),
+                typeof(byte),
+                typeof(uint),
+                typeof(ulong),
+                typeof(ushort),
+                typeof(sbyte),
+                typeof(decimal),
+                typeof(float),
+                typeof(double)
+            );
 
             // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-            return v => v == null
-                ? null!
-                : string.Format(
-                    CultureInfo.InvariantCulture,
-                    type == typeof(float) || type == typeof(double) ? "{0:R}" : "{0}",
-                    v);
+            return v =>
+                v == null
+                    ? null!
+                    : string.Format(
+                          CultureInfo.InvariantCulture,
+                          type == typeof(float) || type == typeof(double) ? "{0:R}" : "{0}",
+                          v
+                      );
         }
     }
 }

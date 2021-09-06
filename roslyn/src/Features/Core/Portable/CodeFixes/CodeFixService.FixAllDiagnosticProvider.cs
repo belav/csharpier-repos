@@ -19,9 +19,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             private readonly ImmutableHashSet<string>? _diagnosticIds;
             private readonly bool _includeSuppressedDiagnostics;
 
-            public FixAllDiagnosticProvider(CodeFixService codeFixService, ImmutableHashSet<string>? diagnosticIds, bool includeSuppressedDiagnostics)
-            {
-                Debug.Assert(diagnosticIds == null || !diagnosticIds.Contains(IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId));
+            public FixAllDiagnosticProvider(
+                CodeFixService codeFixService,
+                ImmutableHashSet<string>? diagnosticIds,
+                bool includeSuppressedDiagnostics
+            ) {
+                Debug.Assert(
+                    diagnosticIds == null
+                        || !diagnosticIds.Contains(
+                            IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
+                        )
+                );
                 Debug.Assert(!includeSuppressedDiagnostics || diagnosticIds == null);
 
                 _codeFixService = codeFixService;
@@ -29,14 +37,40 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 _includeSuppressedDiagnostics = includeSuppressedDiagnostics;
             }
 
-            public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken)
-                => _codeFixService.GetDocumentDiagnosticsAsync(document, _diagnosticIds, _includeSuppressedDiagnostics, cancellationToken);
+            public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) =>
+                _codeFixService.GetDocumentDiagnosticsAsync(
+                    document,
+                    _diagnosticIds,
+                    _includeSuppressedDiagnostics,
+                    cancellationToken
+                );
 
-            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-                => _codeFixService.GetProjectDiagnosticsAsync(project, true, _diagnosticIds, _includeSuppressedDiagnostics, cancellationToken);
+            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) =>
+                _codeFixService.GetProjectDiagnosticsAsync(
+                    project,
+                    true,
+                    _diagnosticIds,
+                    _includeSuppressedDiagnostics,
+                    cancellationToken
+                );
 
-            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-                => _codeFixService.GetProjectDiagnosticsAsync(project, false, _diagnosticIds, _includeSuppressedDiagnostics, cancellationToken);
+            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) =>
+                _codeFixService.GetProjectDiagnosticsAsync(
+                    project,
+                    false,
+                    _diagnosticIds,
+                    _includeSuppressedDiagnostics,
+                    cancellationToken
+                );
         }
     }
 }

@@ -34,7 +34,11 @@ namespace System.Web.Razor
 
         private int _tabSize = 4;
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The code path is safe, it is a property setter and not dependent on other state")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The code path is safe, it is a property setter and not dependent on other state"
+        )]
         protected RazorEngineHost()
         {
             GeneratedClassContext = GeneratedClassContext.Default;
@@ -50,13 +54,17 @@ namespace System.Web.Razor
         /// </summary>
         /// <param name="codeLanguage">The code language to use</param>
         public RazorEngineHost(RazorCodeLanguage codeLanguage)
-            : this(codeLanguage, () => new HtmlMarkupParser())
-        {
-        }
+            : this(codeLanguage, () => new HtmlMarkupParser()) { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The code path is safe, it is a property setter and not dependent on other state")]
-        public RazorEngineHost(RazorCodeLanguage codeLanguage, Func<ParserBase> markupParserFactory)
-            : this()
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The code path is safe, it is a property setter and not dependent on other state"
+        )]
+        public RazorEngineHost(
+            RazorCodeLanguage codeLanguage,
+            Func<ParserBase> markupParserFactory
+        ) : this()
         {
             if (codeLanguage == null)
             {
@@ -131,15 +139,8 @@ namespace System.Web.Razor
         /// </summary>
         public virtual int TabSize
         {
-            get
-            {
-                return _tabSize;
-            }
-
-            set
-            {
-                _tabSize = Math.Max(value, 1);
-            }
+            get { return _tabSize; }
+            set { _tabSize = Math.Max(value, 1); }
         }
 
         /// <summary>
@@ -192,8 +193,9 @@ namespace System.Web.Razor
         /// </summary>
         /// <param name="incomingCodeGenerator">The code generator</param>
         /// <returns>Either the same code generator, after modifications, or a different code generator</returns>
-        public virtual RazorCodeGenerator DecorateCodeGenerator(RazorCodeGenerator incomingCodeGenerator)
-        {
+        public virtual RazorCodeGenerator DecorateCodeGenerator(
+            RazorCodeGenerator incomingCodeGenerator
+        ) {
             if (incomingCodeGenerator == null)
             {
                 throw new ArgumentNullException("incomingCodeGenerator");
@@ -212,13 +214,24 @@ namespace System.Web.Razor
         public virtual void PostProcessGeneratedCode(CodeGeneratorContext context)
         {
 #pragma warning disable 0618
-            PostProcessGeneratedCode(context.CompileUnit, context.Namespace, context.GeneratedClass, context.TargetMethod);
+            PostProcessGeneratedCode(
+                context.CompileUnit,
+                context.Namespace,
+                context.GeneratedClass,
+                context.TargetMethod
+            );
 #pragma warning restore 0618
         }
 
-        [Obsolete("This method is obsolete, use the override which takes a CodeGeneratorContext instead")]
-        public virtual void PostProcessGeneratedCode(CodeCompileUnit codeCompileUnit, CodeNamespace generatedNamespace, CodeTypeDeclaration generatedClass, CodeMemberMethod executeMethod)
-        {
+        [Obsolete(
+            "This method is obsolete, use the override which takes a CodeGeneratorContext instead"
+        )]
+        public virtual void PostProcessGeneratedCode(
+            CodeCompileUnit codeCompileUnit,
+            CodeNamespace generatedNamespace,
+            CodeTypeDeclaration generatedClass,
+            CodeMemberMethod executeMethod
+        ) {
             if (codeCompileUnit == null)
             {
                 throw new ArgumentNullException("codeCompileUnit");

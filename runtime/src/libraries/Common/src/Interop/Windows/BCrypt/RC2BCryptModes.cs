@@ -9,7 +9,10 @@ namespace Internal.Cryptography
 {
     internal static class RC2BCryptModes
     {
-        internal static SafeAlgorithmHandle GetHandle(CipherMode cipherMode, int effectiveKeyLength) =>
+        internal static SafeAlgorithmHandle GetHandle(
+            CipherMode cipherMode,
+            int effectiveKeyLength
+        ) =>
             // Windows 8 added support to set CipherMode and EffectiveKeyLength on a key,
             // but Windows 7 requires that they be set on the algorithm before key creation.
             // Unlike the other SymmetricAlgorithm types that cache the algorithm based on CipherMode,
@@ -21,9 +24,15 @@ namespace Internal.Cryptography
                 _ => throw new NotSupportedException(),
             };
 
-        private static SafeAlgorithmHandle OpenRC2Algorithm(string cipherMode, int effectiveKeyLength)
-        {
-            SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(Cng.BCRYPT_RC2_ALGORITHM, null, Cng.OpenAlgorithmProviderFlags.NONE);
+        private static SafeAlgorithmHandle OpenRC2Algorithm(
+            string cipherMode,
+            int effectiveKeyLength
+        ) {
+            SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
+                Cng.BCRYPT_RC2_ALGORITHM,
+                null,
+                Cng.OpenAlgorithmProviderFlags.NONE
+            );
             hAlg.SetCipherMode(cipherMode);
 
             if (effectiveKeyLength != 0)

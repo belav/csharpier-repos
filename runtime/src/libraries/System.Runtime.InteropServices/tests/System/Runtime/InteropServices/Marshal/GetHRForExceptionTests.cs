@@ -17,6 +17,7 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.InRange(Marshal.GetHRForException(e), int.MinValue, -1);
                 Assert.Equal(e.HResult, Marshal.GetHRForException(e));
             }
+
             finally
             {
                 // This GetExceptionForHR call is needed to 'eat' the IErrorInfo put to TLS by

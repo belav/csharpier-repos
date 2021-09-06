@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
                 _ctxHandle,
                 key,
                 Span<byte>.Empty,
-                Interop.Crypto.EvpCipherDirection.NoChange);
+                Interop.Crypto.EvpCipherDirection.NoChange
+            );
             Interop.Crypto.CipherSetNonceLength(_ctxHandle, NonceSize);
         }
 
@@ -31,9 +32,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
-        {
-
+            ReadOnlySpan<byte> associatedData = default
+        ) {
             if (!Interop.Crypto.CipherSetTagLength(_ctxHandle, tag.Length))
             {
                 throw new CryptographicException();
@@ -43,7 +43,8 @@ namespace System.Security.Cryptography
                 _ctxHandle,
                 Span<byte>.Empty,
                 nonce,
-                Interop.Crypto.EvpCipherDirection.Encrypt);
+                Interop.Crypto.EvpCipherDirection.Encrypt
+            );
 
             if (associatedData.Length != 0)
             {
@@ -66,16 +67,24 @@ namespace System.Security.Cryptography
                     ciphertextAndTag = new Span<byte>(rented, 0, ciphertext.Length + tag.Length);
                 }
 
-                if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, ciphertextAndTag, out int ciphertextBytesWritten, plaintext))
-                {
+                if (
+                    !Interop.Crypto.EvpCipherUpdate(
+                        _ctxHandle,
+                        ciphertextAndTag,
+                        out int ciphertextBytesWritten,
+                        plaintext
+                    )
+                ) {
                     throw new CryptographicException();
                 }
 
-                if (!Interop.Crypto.EvpCipherFinalEx(
-                    _ctxHandle,
-                    ciphertextAndTag.Slice(ciphertextBytesWritten),
-                    out int bytesWritten))
-                {
+                if (
+                    !Interop.Crypto.EvpCipherFinalEx(
+                        _ctxHandle,
+                        ciphertextAndTag.Slice(ciphertextBytesWritten),
+                        out int bytesWritten
+                    )
+                ) {
                     throw new CryptographicException();
                 }
 
@@ -85,13 +94,16 @@ namespace System.Security.Cryptography
 
                 if (ciphertextBytesWritten != ciphertextAndTag.Length)
                 {
-                    Debug.Fail($"GCM encrypt wrote {ciphertextBytesWritten} of {ciphertextAndTag.Length} bytes.");
+                    Debug.Fail(
+                        $"GCM encrypt wrote {ciphertextBytesWritten} of {ciphertextAndTag.Length} bytes."
+                    );
                     throw new CryptographicException();
                 }
 
                 ciphertextAndTag[..ciphertext.Length].CopyTo(ciphertext);
                 ciphertextAndTag[ciphertext.Length..].CopyTo(tag);
             }
+
             finally
             {
                 if (rented != null)
@@ -106,8 +118,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData)
-        {
+            ReadOnlySpan<byte> associatedData
+        ) {
             if (!Interop.Crypto.CipherSetTagLength(_ctxHandle, tag.Length))
             {
                 throw new CryptographicException();
@@ -117,32 +129,47 @@ namespace System.Security.Cryptography
                 _ctxHandle,
                 ReadOnlySpan<byte>.Empty,
                 nonce,
-                Interop.Crypto.EvpCipherDirection.Decrypt);
+                Interop.Crypto.EvpCipherDirection.Decrypt
+            );
 
             if (associatedData.Length != 0)
             {
                 Interop.Crypto.CipherUpdateAAD(_ctxHandle, associatedData);
             }
 
-            if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, plaintext, out int plaintextBytesWritten, ciphertext))
-            {
+            if (
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    plaintext,
+                    out int plaintextBytesWritten,
+                    ciphertext
+                )
+            ) {
                 CryptographicOperations.ZeroMemory(plaintext);
                 throw new CryptographicException();
             }
 
-            if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, plaintext.Slice(plaintextBytesWritten), out int bytesWritten, tag))
-            {
+            if (
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    plaintext.Slice(plaintextBytesWritten),
+                    out int bytesWritten,
+                    tag
+                )
+            ) {
                 CryptographicOperations.ZeroMemory(plaintext);
                 throw new CryptographicException();
             }
 
             plaintextBytesWritten += bytesWritten;
 
-            if (!Interop.Crypto.EvpCipherFinalEx(
-                _ctxHandle,
-                plaintext.Slice(plaintextBytesWritten),
-                out bytesWritten))
-            {
+            if (
+                !Interop.Crypto.EvpCipherFinalEx(
+                    _ctxHandle,
+                    plaintext.Slice(plaintextBytesWritten),
+                    out bytesWritten
+                )
+            ) {
                 CryptographicOperations.ZeroMemory(plaintext);
                 throw new CryptographicException(SR.Cryptography_AuthTagMismatch);
             }
@@ -151,7 +178,9 @@ namespace System.Security.Cryptography
 
             if (plaintextBytesWritten != plaintext.Length)
             {
-                Debug.Fail($"GCM decrypt wrote {plaintextBytesWritten} of {plaintext.Length} bytes.");
+                Debug.Fail(
+                    $"GCM decrypt wrote {plaintextBytesWritten} of {plaintext.Length} bytes."
+                );
                 throw new CryptographicException();
             }
         }
@@ -160,10 +189,10 @@ namespace System.Security.Cryptography
         {
             return keySizeInBits switch
             {
-                 128 => Interop.Crypto.EvpAes128Gcm(),
-                 192 => Interop.Crypto.EvpAes192Gcm(),
-                 256 => Interop.Crypto.EvpAes256Gcm(),
-                 _ => IntPtr.Zero
+                128 => Interop.Crypto.EvpAes128Gcm(),
+                192 => Interop.Crypto.EvpAes192Gcm(),
+                256 => Interop.Crypto.EvpAes256Gcm(),
+                _ => IntPtr.Zero
             };
         }
 

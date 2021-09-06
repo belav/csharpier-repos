@@ -20,32 +20,39 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportCompletionProvider(nameof(ExplicitInterfaceMemberCompletionProvider), LanguageNames.CSharp), Shared]
+    [
+        ExportCompletionProvider(
+            nameof(ExplicitInterfaceMemberCompletionProvider),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = nameof(UnnamedSymbolCompletionProvider))]
     internal partial class ExplicitInterfaceMemberCompletionProvider : LSPCompletionProvider
     {
         private static readonly SymbolDisplayFormat s_signatureDisplayFormat =
-            new(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions:
-                    SymbolDisplayMemberOptions.IncludeParameters,
-                parameterOptions:
-                    SymbolDisplayParameterOptions.IncludeName |
-                    SymbolDisplayParameterOptions.IncludeType |
-                    SymbolDisplayParameterOptions.IncludeParamsRefOut,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+            new(
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+                memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeName
+                    | SymbolDisplayParameterOptions.IncludeType
+                    | SymbolDisplayParameterOptions.IncludeParamsRefOut,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExplicitInterfaceMemberCompletionProvider()
-        {
-        }
+        public ExplicitInterfaceMemberCompletionProvider() { }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-            => text[characterPosition] == '.';
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) => text[characterPosition] == '.';
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = ImmutableHashSet.Create('.');
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            ImmutableHashSet.Create('.');
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
@@ -55,32 +62,54 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var position = context.Position;
                 var cancellationToken = context.CancellationToken;
 
-                var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
                 var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
 
-                if (syntaxFacts.IsInNonUserCode(syntaxTree, position, cancellationToken) ||
-                    syntaxFacts.IsPreProcessorDirectiveContext(syntaxTree, position, cancellationToken))
-                {
+                if (
+                    syntaxFacts.IsInNonUserCode(syntaxTree, position, cancellationToken)
+                    || syntaxFacts.IsPreProcessorDirectiveContext(
+                        syntaxTree,
+                        position,
+                        cancellationToken
+                    )
+                ) {
                     return;
                 }
 
                 var targetToken = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)
-                                            .GetPreviousTokenIfTouchingWord(position);
+                    .GetPreviousTokenIfTouchingWord(position);
 
-                if (!syntaxTree.IsRightOfDotOrArrowOrColonColon(position, targetToken, cancellationToken))
+                if (
+                    !syntaxTree.IsRightOfDotOrArrowOrColonColon(
+                        position,
+                        targetToken,
+                        cancellationToken
+                    )
+                )
                     return;
 
                 var node = targetToken.Parent;
-                if (!node.IsKind(SyntaxKind.ExplicitInterfaceSpecifier, out ExplicitInterfaceSpecifierSyntax? specifierNode))
+                if (
+                    !node.IsKind(
+                        SyntaxKind.ExplicitInterfaceSpecifier,
+                        out ExplicitInterfaceSpecifierSyntax? specifierNode
+                    )
+                )
                     return;
 
                 // Bind the interface name which is to the left of the dot
                 var name = specifierNode.Name;
 
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-                var symbol = semanticModel.GetSymbolInfo(name, cancellationToken).Symbol as ITypeSymbol;
+                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
+                        position,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var symbol =
+                    semanticModel.GetSymbolInfo(name, cancellationToken).Symbol as ITypeSymbol;
                 if (symbol?.TypeKind != TypeKind.Interface)
                     return;
 
@@ -91,26 +120,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     if (!member.IsAbstract && !member.IsVirtual)
                         continue;
 
-                    if (member.IsAccessor() ||
-                        member.Kind == SymbolKind.NamedType ||
-                        !semanticModel.IsAccessible(node.SpanStart, member))
-                    {
+                    if (
+                        member.IsAccessor()
+                        || member.Kind == SymbolKind.NamedType
+                        || !semanticModel.IsAccessible(node.SpanStart, member)
+                    ) {
                         continue;
                     }
 
-                    var memberString = member.ToMinimalDisplayString(semanticModel, namePosition, s_signatureDisplayFormat);
+                    var memberString = member.ToMinimalDisplayString(
+                        semanticModel,
+                        namePosition,
+                        s_signatureDisplayFormat
+                    );
 
                     // Split the member string into two parts (generally the name, and the signature portion). We want
                     // the split so that other features (like spell-checking), only look at the name portion.
                     var (displayText, displayTextSuffix) = SplitMemberName(memberString);
 
-                    context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                        displayText,
-                        displayTextSuffix,
-                        insertionText: memberString,
-                        symbols: ImmutableArray.Create<ISymbol>(member),
-                        contextPosition: position,
-                        rules: CompletionItemRules.Default));
+                    context.AddItem(
+                        SymbolCompletionItem.CreateWithSymbolId(
+                            displayText,
+                            displayTextSuffix,
+                            insertionText: memberString,
+                            symbols: ImmutableArray.Create<ISymbol>(member),
+                            contextPosition: position,
+                            rules: CompletionItemRules.Default
+                        )
+                    );
                 }
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e))
@@ -130,20 +167,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return (memberString, "");
         }
 
-        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
+        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
 
         public override Task<TextChange?> GetTextChangeAsync(
-            Document document, CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
-        {
+            Document document,
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        ) {
             // If the user is typing a punctuation portion of the signature, then just emit the name.  i.e. if the
             // member is `Contains<T>(string key)`, then typing `<` should just emit `Contains` and not
             // `Contains<T>(string key)<`
-            return Task.FromResult<TextChange?>(new TextChange(
-                selectedItem.Span,
-                ch == '(' || ch == '[' || ch == '<'
-                    ? selectedItem.DisplayText
-                    : SymbolCompletionItem.GetInsertionText(selectedItem)));
+            return Task.FromResult<TextChange?>(
+                new TextChange(
+                    selectedItem.Span,
+                    ch == '(' || ch == '[' || ch == '<'
+                        ? selectedItem.DisplayText
+                        : SymbolCompletionItem.GetInsertionText(selectedItem)
+                )
+            );
         }
     }
 }

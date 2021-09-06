@@ -30,7 +30,6 @@ namespace Microsoft.Win32.SafeHandles
 
         internal ThreadPoolBoundHandle? ThreadPoolBinding { get; set; }
 
-        protected override bool ReleaseHandle() =>
-            Interop.Kernel32.CloseHandle(handle);
+        protected override bool ReleaseHandle() => Interop.Kernel32.CloseHandle(handle);
     }
 }

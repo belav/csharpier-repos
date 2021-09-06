@@ -11,15 +11,18 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindAggregateOperatorsQueryInMemoryTest : NorthwindAggregateOperatorsQueryTestBase<
-        NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+    public class NorthwindAggregateOperatorsQueryInMemoryTest
+        : NorthwindAggregateOperatorsQueryTestBase<
+              NorthwindQueryInMemoryFixture<NoopModelCustomizer>
+          >
     {
         public NorthwindAggregateOperatorsQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-            ITestOutputHelper testOutputHelper)
+            ITestOutputHelper testOutputHelper
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
-            : base(fixture)
+          : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }
@@ -32,7 +35,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 Assert.Throws<InvalidOperationException>(
-                    () => context.Customers.Select(c => c.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID)).ToList()).Message);
+                    () =>
+                        context.Customers.Select(
+                                c => c.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID)
+                            )
+                            .ToList()
+                ).Message
+            );
         }
 
         public override void Max_no_data_subquery()
@@ -42,7 +51,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 Assert.Throws<InvalidOperationException>(
-                    () => context.Customers.Select(c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID)).ToList()).Message);
+                    () =>
+                        context.Customers.Select(
+                                c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID)
+                            )
+                            .ToList()
+                ).Message
+            );
         }
 
         public override void Min_no_data_subquery()
@@ -52,21 +67,32 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 Assert.Throws<InvalidOperationException>(
-                    () => context.Customers.Select(c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID)).ToList()).Message);
+                    () =>
+                        context.Customers.Select(
+                                c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID)
+                            )
+                            .ToList()
+                ).Message
+            );
         }
 
         public override async Task Average_on_nav_subquery_in_projection(bool isAsync)
         {
             Assert.Equal(
                 "Sequence contains no elements",
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Average_on_nav_subquery_in_projection(isAsync))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Average_on_nav_subquery_in_projection(isAsync)
+                    )
+                ).Message
+            );
         }
 
         public override Task Collection_Last_member_access_in_projection_translated(bool async)
         {
             return Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Collection_Last_member_access_in_projection_translated(async));
+                () => base.Collection_Last_member_access_in_projection_translated(async)
+            );
         }
 
         [ConditionalFact(Skip = "Issue#20023")]

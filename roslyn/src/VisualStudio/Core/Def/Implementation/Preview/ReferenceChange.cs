@@ -20,16 +20,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private readonly string _projectName;
         private readonly bool _isAddedReference;
 
-        protected ReferenceChange(ProjectId projectId, string projectName, bool isAddedReference, PreviewEngine engine)
-            : base(engine)
+        protected ReferenceChange(
+            ProjectId projectId,
+            string projectName,
+            bool isAddedReference,
+            PreviewEngine engine
+        ) : base(engine)
         {
             _projectId = projectId;
             _projectName = projectName;
             _isAddedReference = isAddedReference;
         }
 
-        public static void AppendReferenceChanges(IEnumerable<ProjectChanges> projectChangesList, PreviewEngine engine, ArrayBuilder<AbstractChange> builder)
-        {
+        public static void AppendReferenceChanges(
+            IEnumerable<ProjectChanges> projectChangesList,
+            PreviewEngine engine,
+            ArrayBuilder<AbstractChange> builder
+        ) {
             foreach (var projectChanges in projectChangesList)
             {
                 var projectId = projectChanges.ProjectId;
@@ -38,43 +45,102 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 var projectName = oldSolution.GetProject(projectId).Name;
 
                 // Metadata references
-                var addedMetadataReferenceChanges = projectChanges
-                    .GetAddedMetadataReferences()
-                    .Select(r => new MetadataReferenceChange(r, projectId, projectName, isAdded: true, engine: engine));
+                var addedMetadataReferenceChanges = projectChanges.GetAddedMetadataReferences()
+                    .Select(
+                        r =>
+                            new MetadataReferenceChange(
+                                r,
+                                projectId,
+                                projectName,
+                                isAdded: true,
+                                engine: engine
+                            )
+                    );
                 builder.AddRange(addedMetadataReferenceChanges);
 
-                var removedMetadataReferenceChanges = projectChanges
-                    .GetRemovedMetadataReferences()
-                    .Select(r => new MetadataReferenceChange(r, projectId, projectName, isAdded: false, engine: engine));
+                var removedMetadataReferenceChanges = projectChanges.GetRemovedMetadataReferences()
+                    .Select(
+                        r =>
+                            new MetadataReferenceChange(
+                                r,
+                                projectId,
+                                projectName,
+                                isAdded: false,
+                                engine: engine
+                            )
+                    );
                 builder.AddRange(removedMetadataReferenceChanges);
 
                 // Project references
-                var addedProjectReferenceChanges = projectChanges
-                    .GetAddedProjectReferences()
-                    .Select(r => new ProjectReferenceChange(r, newSolution.GetProject(r.ProjectId).Name, projectId, projectName, isAdded: true, engine: engine));
+                var addedProjectReferenceChanges = projectChanges.GetAddedProjectReferences()
+                    .Select(
+                        r =>
+                            new ProjectReferenceChange(
+                                r,
+                                newSolution.GetProject(r.ProjectId).Name,
+                                projectId,
+                                projectName,
+                                isAdded: true,
+                                engine: engine
+                            )
+                    );
                 builder.AddRange(addedProjectReferenceChanges);
 
-                var removedProjectReferenceChanges = projectChanges
-                    .GetRemovedProjectReferences()
-                    .Select(r => new ProjectReferenceChange(r, oldSolution.GetProject(r.ProjectId).Name, projectId, projectName, isAdded: false, engine: engine));
+                var removedProjectReferenceChanges = projectChanges.GetRemovedProjectReferences()
+                    .Select(
+                        r =>
+                            new ProjectReferenceChange(
+                                r,
+                                oldSolution.GetProject(r.ProjectId).Name,
+                                projectId,
+                                projectName,
+                                isAdded: false,
+                                engine: engine
+                            )
+                    );
                 builder.AddRange(removedProjectReferenceChanges);
 
                 // Analyzer references
-                var addedAnalyzerReferenceChanges = projectChanges
-                    .GetAddedAnalyzerReferences()
-                    .Select(r => new AnalyzerReferenceChange(r, projectId, projectName, isAdded: true, engine: engine));
+                var addedAnalyzerReferenceChanges = projectChanges.GetAddedAnalyzerReferences()
+                    .Select(
+                        r =>
+                            new AnalyzerReferenceChange(
+                                r,
+                                projectId,
+                                projectName,
+                                isAdded: true,
+                                engine: engine
+                            )
+                    );
                 builder.AddRange(addedAnalyzerReferenceChanges);
 
-                var removedAnalyzerReferenceChanges = projectChanges
-                    .GetRemovedAnalyzerReferences()
-                    .Select(r => new AnalyzerReferenceChange(r, projectId, projectName, isAdded: false, engine: engine));
+                var removedAnalyzerReferenceChanges = projectChanges.GetRemovedAnalyzerReferences()
+                    .Select(
+                        r =>
+                            new AnalyzerReferenceChange(
+                                r,
+                                projectId,
+                                projectName,
+                                isAdded: false,
+                                engine: engine
+                            )
+                    );
                 builder.AddRange(removedAnalyzerReferenceChanges);
             }
         }
 
-        protected ProjectId ProjectId { get { return _projectId; } }
-        internal bool IsAddedReference { get { return _isAddedReference; } }
-        protected string ProjectName { get { return _projectName; } }
+        protected ProjectId ProjectId
+        {
+            get { return _projectId; }
+        }
+        internal bool IsAddedReference
+        {
+            get { return _isAddedReference; }
+        }
+        protected string ProjectName
+        {
+            get { return _projectName; }
+        }
 
         protected abstract string GetDisplayText();
         internal abstract Solution AddToSolution(Solution solution);
@@ -106,8 +172,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         public sealed override int OnRequestSource(object pIUnknownTextView)
         {
             // When adding a project reference `Children` can be null, so check before looking at `Changes`
-            if (pIUnknownTextView != null && Children?.Changes != null && Children.Changes.Length > 0)
-            {
+            if (
+                pIUnknownTextView != null
+                && Children?.Changes != null
+                && Children.Changes.Length > 0
+            ) {
                 engine.SetTextView(pIUnknownTextView);
                 UpdatePreview();
             }
@@ -120,7 +189,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             // Don't need any preview updates for reference changes.
         }
 
-        internal sealed override void GetDisplayData(VSTREEDISPLAYDATA[] pData)
-            => pData[0].Image = pData[0].SelectedImage = (ushort)StandardGlyphGroup.GlyphReference;
+        internal sealed override void GetDisplayData(VSTREEDISPLAYDATA[] pData) =>
+            pData[0].Image = pData[0].SelectedImage = (ushort)StandardGlyphGroup.GlyphReference;
     }
 }

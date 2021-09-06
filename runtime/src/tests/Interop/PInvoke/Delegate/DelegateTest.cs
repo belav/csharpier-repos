@@ -16,10 +16,12 @@ class DelegateTest
         int TestFunction() => expectedValue;
 
         Assert.IsTrue(ValidateDelegateReturnsExpected(expectedValue, TestFunction));
-        
+
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.IsTrue(ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue));
+            Assert.IsTrue(
+                ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue)
+            );
             Assert.AreEqual(newExpectedValue, localDelegate());
         }
 
@@ -66,10 +68,12 @@ class DelegateTest
         int TestFunction() => expectedValue;
 
         Assert.IsTrue(ValidateDelegateValueMatchesExpected(expectedValue, TestFunction));
-        
+
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.IsTrue(ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate));
+            Assert.IsTrue(
+                ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate)
+            );
             Assert.AreEqual(null, localDelegate);
         }
 
@@ -131,8 +135,8 @@ class DelegateTest
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Test Failure: {e}"); 
-            return 101; 
+            Console.WriteLine($"Test Failure: {e}");
+            return 101;
         }
         return 100;
     }

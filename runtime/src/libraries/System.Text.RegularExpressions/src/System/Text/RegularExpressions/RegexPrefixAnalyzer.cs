@@ -26,9 +26,9 @@ namespace System.Text.RegularExpressions
         public const int ECMABoundary = 0x0080;
 
         private readonly List<RegexFC> _fcStack;
-        private ValueListBuilder<int> _intStack;    // must not be readonly
-        private bool _skipAllChildren;              // don't process any more children at the current level
-        private bool _skipchild;                    // don't process the current child.
+        private ValueListBuilder<int> _intStack; // must not be readonly
+        private bool _skipAllChildren; // don't process any more children at the current level
+        private bool _skipchild; // don't process the current child.
         private bool _failed;
 
         private RegexPrefixAnalyzer(Span<int> intStack)
@@ -81,13 +81,19 @@ namespace System.Text.RegularExpressions
 
                         if (curNode.M > 0 && curNode.M < Cutoff)
                         {
-                            return (new string(curNode.Ch, curNode.M), (curNode.Options & RegexOptions.IgnoreCase) != 0);
+                            return (
+                                new string(curNode.Ch, curNode.M),
+                                (curNode.Options & RegexOptions.IgnoreCase) != 0
+                            );
                         }
 
                         return (string.Empty, false);
 
                     case RegexNode.One:
-                        return (curNode.Ch.ToString(), (curNode.Options & RegexOptions.IgnoreCase) != 0);
+                        return (
+                            curNode.Ch.ToString(),
+                            (curNode.Options & RegexOptions.IgnoreCase) != 0
+                        );
 
                     case RegexNode.Multi:
                         return (curNode.Str!, (curNode.Options & RegexOptions.IgnoreCase) != 0);
@@ -120,8 +126,9 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Computes a character class for the first character in <paramref name="tree"/>.</summary>
         /// <remarks>true if a character class could be computed; otherwise, false.</remarks>
-        public static (string CharClass, bool CaseInsensitive)[]? ComputeFirstCharClass(RegexTree tree)
-        {
+        public static (string CharClass, bool CaseInsensitive)[]? ComputeFirstCharClass(
+            RegexTree tree
+        ) {
             var s = new RegexPrefixAnalyzer(stackalloc int[StackBufferSize]);
             RegexFC? fc = s.RegexFCFromRegexTree(tree);
             s.Dispose();
@@ -133,7 +140,11 @@ namespace System.Text.RegularExpressions
 
             if (fc.CaseInsensitive)
             {
-                fc.AddLowercase(((tree.Options & RegexOptions.CultureInvariant) != 0) ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture);
+                fc.AddLowercase(
+                    ((tree.Options & RegexOptions.CultureInvariant) != 0)
+                        ? CultureInfo.InvariantCulture
+                        : CultureInfo.CurrentCulture
+                );
             }
 
             return new[] { (fc.GetFirstChars(), fc.CaseInsensitive) };
@@ -147,8 +158,10 @@ namespace System.Text.RegularExpressions
         /// alternation itself.  As this computation is intended primarily to handle global alternations, it's currently
         /// a reasonable tradeoff between simplicity, performance, and the fullness of potential optimizations.
         /// </remarks>
-        public static (string CharClass, bool CaseInsensitive)[]? ComputeMultipleCharClasses(RegexTree tree, int maxChars)
-        {
+        public static (string CharClass, bool CaseInsensitive)[]? ComputeMultipleCharClasses(
+            RegexTree tree,
+            int maxChars
+        ) {
             Debug.Assert(maxChars > 1);
 
             if ((tree.Options & RegexOptions.RightToLeft) != 0)
@@ -209,26 +222,38 @@ namespace System.Text.RegularExpressions
                         continue;
 
                     case RegexNode.Concatenate:
+
                         {
                             int classPos = 0;
                             int concatChildren = alternateBranch.ChildCount();
                             for (int i = 0; i < concatChildren && classPos < classes.Length; i++)
                             {
                                 RegexNode concatChild = alternateBranch.Child(i);
-                                caseInsensitive |= (concatChild.Options & RegexOptions.IgnoreCase) != 0;
+                                caseInsensitive |=
+                                    (concatChild.Options & RegexOptions.IgnoreCase) != 0;
 
                                 switch (concatChild.Type)
                                 {
                                     case RegexNode.One:
-                                        (classes[classPos++] ??= new RegexCharClass()).AddChar(concatChild.Ch);
+                                        (classes[classPos++] ??= new RegexCharClass()).AddChar(
+                                            concatChild.Ch
+                                        );
                                         break;
                                     case RegexNode.Set:
-                                        (classes[classPos++] ??= new RegexCharClass()).AddCharClass(RegexCharClass.Parse(concatChild.Str!));
+                                        (classes[classPos++] ??= new RegexCharClass()).AddCharClass(
+                                            RegexCharClass.Parse(concatChild.Str!)
+                                        );
                                         break;
                                     case RegexNode.Multi:
-                                        for (int c = 0; c < concatChild.Str!.Length && classPos < classes.Length; c++)
-                                        {
-                                            (classes[classPos++] ??= new RegexCharClass()).AddChar(concatChild.Str[c]);
+                                        for (
+                                            int c = 0;
+                                            c < concatChild.Str!.Length
+                                                && classPos < classes.Length;
+                                            c++
+                                        ) {
+                                            (classes[classPos++] ??= new RegexCharClass()).AddChar(
+                                                concatChild.Str[c]
+                                            );
                                         }
                                         break;
 
@@ -273,7 +298,10 @@ namespace System.Text.RegularExpressions
             CultureInfo? ci = null;
             if (caseInsensitive)
             {
-                ci = (tree.Options & RegexOptions.CultureInvariant) != 0 ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture;
+                ci =
+                    (tree.Options & RegexOptions.CultureInvariant) != 0
+                        ? CultureInfo.InvariantCulture
+                        : CultureInfo.CurrentCulture;
             }
 
             for (int i = 0; i < prefixes.Length; i++)
@@ -361,18 +389,24 @@ namespace System.Text.RegularExpressions
         {
             var sb = new StringBuilder();
 
-            if ((anchors & Beginning) != 0) sb.Append(", Beginning");
-            if ((anchors & Start) != 0) sb.Append(", Start");
-            if ((anchors & Bol) != 0) sb.Append(", Bol");
-            if ((anchors & Boundary) != 0) sb.Append(", Boundary");
-            if ((anchors & ECMABoundary) != 0) sb.Append(", ECMABoundary");
-            if ((anchors & Eol) != 0) sb.Append(", Eol");
-            if ((anchors & End) != 0) sb.Append(", End");
-            if ((anchors & EndZ) != 0) sb.Append(", EndZ");
+            if ((anchors & Beginning) != 0)
+                sb.Append(", Beginning");
+            if ((anchors & Start) != 0)
+                sb.Append(", Start");
+            if ((anchors & Bol) != 0)
+                sb.Append(", Bol");
+            if ((anchors & Boundary) != 0)
+                sb.Append(", Boundary");
+            if ((anchors & ECMABoundary) != 0)
+                sb.Append(", ECMABoundary");
+            if ((anchors & Eol) != 0)
+                sb.Append(", Eol");
+            if ((anchors & End) != 0)
+                sb.Append(", End");
+            if ((anchors & EndZ) != 0)
+                sb.Append(", EndZ");
 
-            return sb.Length >= 2 ?
-                sb.ToString(2, sb.Length - 2) :
-                "None";
+            return sb.Length >= 2 ? sb.ToString(2, sb.Length - 2) : "None";
         }
 #endif
 
@@ -612,7 +646,12 @@ namespace System.Text.RegularExpressions
                     break;
 
                 default:
-                    throw new ArgumentException(SR.Format(SR.UnexpectedOpcode, NodeType.ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.UnexpectedOpcode,
+                            NodeType.ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
             }
         }
     }

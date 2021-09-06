@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.InlineHints
 {
-
     /// <summary>
     /// The service to locate the positions in which the adornments should appear
     /// as well as associate the adornments back to the parameter name
@@ -23,16 +22,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInlineParameterNameHintsService()
-        {
-        }
+        public CSharpInlineParameterNameHintsService() { }
 
         protected override void AddAllParameterNameHintLocations(
-             SemanticModel semanticModel,
-             SyntaxNode node,
-             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
-             CancellationToken cancellationToken)
-        {
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
+            CancellationToken cancellationToken
+        ) {
             if (node is BaseArgumentListSyntax argumentList)
             {
                 AddArguments(semanticModel, buffer, argumentList, cancellationToken);
@@ -47,14 +44,17 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             SemanticModel semanticModel,
             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
             AttributeArgumentListSyntax argumentList,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             foreach (var argument in argumentList.Arguments)
             {
                 if (argument.NameEquals != null || argument.NameColon != null)
                     continue;
 
-                var parameter = argument.DetermineParameter(semanticModel, cancellationToken: cancellationToken);
+                var parameter = argument.DetermineParameter(
+                    semanticModel,
+                    cancellationToken: cancellationToken
+                );
                 buffer.Add((argument.Span.Start, parameter, GetKind(argument.Expression)));
             }
         }
@@ -63,27 +63,33 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             SemanticModel semanticModel,
             ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)> buffer,
             BaseArgumentListSyntax argumentList,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             foreach (var argument in argumentList.Arguments)
             {
                 if (argument.NameColon != null)
                     continue;
 
-                var parameter = argument.DetermineParameter(semanticModel, cancellationToken: cancellationToken);
+                var parameter = argument.DetermineParameter(
+                    semanticModel,
+                    cancellationToken: cancellationToken
+                );
                 buffer.Add((argument.Span.Start, parameter, GetKind(argument.Expression)));
             }
         }
 
-        private static HintKind GetKind(ExpressionSyntax arg)
-            => arg switch
+        private static HintKind GetKind(ExpressionSyntax arg) =>
+            arg switch
             {
                 LiteralExpressionSyntax or InterpolatedStringExpressionSyntax => HintKind.Literal,
                 ObjectCreationExpressionSyntax => HintKind.ObjectCreation,
                 CastExpressionSyntax cast => GetKind(cast.Expression),
                 PrefixUnaryExpressionSyntax prefix => GetKind(prefix.Operand),
                 // Treat `expr!` the same as `expr` (i.e. treat `!` as if it's just trivia).
-                PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.SuppressNullableWarningExpression } postfix => GetKind(postfix.Operand),
+                PostfixUnaryExpressionSyntax{
+                    RawKind: (int)SyntaxKind.SuppressNullableWarningExpression
+                } postfix
+                  => GetKind(postfix.Operand),
                 _ => HintKind.Other,
             };
     }

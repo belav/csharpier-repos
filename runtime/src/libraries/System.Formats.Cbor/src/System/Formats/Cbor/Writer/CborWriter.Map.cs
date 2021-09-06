@@ -90,13 +90,22 @@ namespace System.Formats.Cbor
 
         private void WriteStartMapIndefiniteLength()
         {
-            if (!ConvertIndefiniteLengthEncodings && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
-            {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+            if (
+                !ConvertIndefiniteLengthEncodings
+                && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+            ) {
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                        ConformanceMode
+                    )
+                );
             }
 
             EnsureWriteCapacity(1);
-            WriteInitialByte(new CborInitialByte(CborMajorType.Map, CborAdditionalInfo.IndefiniteLength));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Map, CborAdditionalInfo.IndefiniteLength)
+            );
             PushDataItem(CborMajorType.Map, definiteLength: null);
             _currentKeyOffset = _offset;
         }
@@ -113,7 +122,10 @@ namespace System.Formats.Cbor
             {
                 HashSet<(int Offset, int Length)> keyEncodingRanges = GetKeyEncodingRanges();
 
-                (int Offset, int Length) currentKey = (_currentKeyOffset.Value, _offset - _currentKeyOffset.Value);
+                (int Offset, int Length) currentKey = (
+                    _currentKeyOffset.Value,
+                    _offset - _currentKeyOffset.Value
+                );
 
                 if (!keyEncodingRanges.Add(currentKey))
                 {
@@ -121,7 +133,9 @@ namespace System.Formats.Cbor
                     _buffer.AsSpan(currentKey.Offset, _offset).Clear();
                     _offset = currentKey.Offset;
 
-                    throw new InvalidOperationException(SR.Format(SR.Cbor_ConformanceMode_ContainsDuplicateKeys, ConformanceMode));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cbor_ConformanceMode_ContainsDuplicateKeys, ConformanceMode)
+                    );
                 }
             }
 
@@ -135,12 +149,14 @@ namespace System.Formats.Cbor
 
             if (CborConformanceModeHelpers.RequiresSortedKeys(ConformanceMode))
             {
-                List<KeyValuePairEncodingRange> keyValuePairEncodingRanges = GetKeyValueEncodingRanges();
+                List<KeyValuePairEncodingRange> keyValuePairEncodingRanges =
+                    GetKeyValueEncodingRanges();
 
                 var currentKeyValueRange = new KeyValuePairEncodingRange(
                     offset: _currentKeyOffset.Value,
                     keyLength: _currentValueOffset.Value - _currentKeyOffset.Value,
-                    totalLength: _offset - _currentKeyOffset.Value);
+                    totalLength: _offset - _currentKeyOffset.Value
+                );
 
                 // Check that the keys are written in sorted order.
                 // Once invalidated, declare that the map requires sorting,
@@ -148,8 +164,11 @@ namespace System.Formats.Cbor
                 if (!_keysRequireSorting && keyValuePairEncodingRanges.Count > 0)
                 {
                     KeyEncodingComparer comparer = GetKeyEncodingComparer();
-                    KeyValuePairEncodingRange previousKeyValueRange = keyValuePairEncodingRanges[keyValuePairEncodingRanges.Count - 1];
-                    _keysRequireSorting = comparer.Compare(previousKeyValueRange, currentKeyValueRange) > 0;
+                    KeyValuePairEncodingRange previousKeyValueRange = keyValuePairEncodingRanges[
+                        keyValuePairEncodingRanges.Count - 1
+                    ];
+                    _keysRequireSorting =
+                        comparer.Compare(previousKeyValueRange, currentKeyValueRange) > 0;
                 }
 
                 keyValuePairEncodingRanges.Add(currentKeyValueRange);
@@ -179,7 +198,10 @@ namespace System.Formats.Cbor
                 Span<byte> s = tmpSpan;
                 foreach (KeyValuePairEncodingRange range in _keyValuePairEncodingRanges)
                 {
-                    ReadOnlySpan<byte> keyValuePairEncoding = source.Slice(range.Offset, range.TotalLength);
+                    ReadOnlySpan<byte> keyValuePairEncoding = source.Slice(
+                        range.Offset,
+                        range.TotalLength
+                    );
                     keyValuePairEncoding.CopyTo(s);
                     s = s.Slice(keyValuePairEncoding.Length);
                 }
@@ -203,16 +225,18 @@ namespace System.Formats.Cbor
                 return _keyEncodingRanges;
             }
 
-            if (_pooledKeyEncodingRangeSets != null &&
-                _pooledKeyEncodingRangeSets.TryPop(out HashSet<(int Offset, int Length)>? result))
-            {
+            if (
+                _pooledKeyEncodingRangeSets != null
+                && _pooledKeyEncodingRangeSets.TryPop(out HashSet<(int Offset, int Length)>? result)
+            ) {
                 result.Clear();
                 return _keyEncodingRanges = result;
             }
 
-            return _keyEncodingRanges = new HashSet<(int Offset, int Length)>(GetKeyEncodingComparer());
+            return _keyEncodingRanges = new HashSet<(int Offset, int Length)>(
+                GetKeyEncodingComparer()
+            );
         }
-
 
         // Gets or initializes a list containing all key/value encoding ranges for the current CBOR map context
         private void ReturnKeyEncodingRangeAllocation()
@@ -232,9 +256,12 @@ namespace System.Formats.Cbor
                 return _keyValuePairEncodingRanges;
             }
 
-            if (_pooledKeyValuePairEncodingRangeLists != null &&
-                _pooledKeyValuePairEncodingRangeLists.TryPop(out List<KeyValuePairEncodingRange>? result))
-            {
+            if (
+                _pooledKeyValuePairEncodingRangeLists != null
+                && _pooledKeyValuePairEncodingRangeLists.TryPop(
+                    out List<KeyValuePairEncodingRange>? result
+                )
+            ) {
                 result.Clear();
                 return _keyValuePairEncodingRanges = result;
             }
@@ -246,7 +273,9 @@ namespace System.Formats.Cbor
         {
             if (_keyValuePairEncodingRanges != null)
             {
-                _pooledKeyValuePairEncodingRangeLists ??= new Stack<List<KeyValuePairEncodingRange>>();
+                _pooledKeyValuePairEncodingRangeLists ??= new Stack<
+                    List<KeyValuePairEncodingRange>
+                >();
                 _pooledKeyValuePairEncodingRangeLists.Push(_keyValuePairEncodingRanges);
                 _keyValuePairEncodingRanges = null;
             }
@@ -272,8 +301,9 @@ namespace System.Formats.Cbor
         }
 
         // Defines order and equality semantics for a key/value encoding range pair up to key encoding
-        private sealed class KeyEncodingComparer : IComparer<KeyValuePairEncodingRange>,
-                                            IEqualityComparer<(int Offset, int Length)>
+        private sealed class KeyEncodingComparer
+            : IComparer<KeyValuePairEncodingRange>,
+              IEqualityComparer<(int Offset, int Length)>
         {
             private readonly CborWriter _writer;
 
@@ -299,12 +329,19 @@ namespace System.Formats.Cbor
 
             public bool Equals((int Offset, int Length) x, (int Offset, int Length) y)
             {
-                return CborConformanceModeHelpers.AreEqualKeyEncodings(GetKeyEncoding(x), GetKeyEncoding(y));
+                return CborConformanceModeHelpers.AreEqualKeyEncodings(
+                    GetKeyEncoding(x),
+                    GetKeyEncoding(y)
+                );
             }
 
             public int Compare(KeyValuePairEncodingRange x, KeyValuePairEncodingRange y)
             {
-                return CborConformanceModeHelpers.CompareKeyEncodings(GetKeyEncoding(in x), GetKeyEncoding(in y), _writer.ConformanceMode);
+                return CborConformanceModeHelpers.CompareKeyEncodings(
+                    GetKeyEncoding(in x),
+                    GetKeyEncoding(in y),
+                    _writer.ConformanceMode
+                );
             }
         }
     }

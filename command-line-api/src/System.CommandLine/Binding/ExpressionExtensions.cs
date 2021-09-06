@@ -5,8 +5,9 @@ namespace System.CommandLine.Binding
 {
     internal static class ExpressionExtensions
     {
-        internal static (Type memberType, string memberName) MemberTypeAndName<T, TValue>(this Expression<Func<T, TValue>> expression)
-        {
+        internal static (Type memberType, string memberName) MemberTypeAndName<T, TValue>(
+            this Expression<Func<T, TValue>> expression
+        ) {
             if (expression is null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -18,16 +19,18 @@ namespace System.CommandLine.Binding
             }
 
             // when the return type of the expression is a value type, it contains a call to Convert, resulting in boxing, so we get a UnaryExpression instead
-            if (expression.Body is UnaryExpression unaryExpression &&
-                unaryExpression.Operand is MemberExpression operandMemberExpression)
-            {
+            if (
+                expression.Body is UnaryExpression unaryExpression
+                && unaryExpression.Operand is MemberExpression operandMemberExpression
+            ) {
                 return TypeAndName(operandMemberExpression);
             }
 
             throw new ArgumentException($"Expression {expression} does not specify a member.");
 
-            static (Type memberType, string memberName) TypeAndName(MemberExpression memberExpression)
-            {
+            static (Type memberType, string memberName) TypeAndName(
+                MemberExpression memberExpression
+            ) {
                 return (memberExpression.Member.ReturnType(), memberExpression.Member.Name);
             }
         }

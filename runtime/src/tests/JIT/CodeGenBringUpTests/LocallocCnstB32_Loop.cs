@@ -12,7 +12,8 @@ public class BringUpTest
 
     // Reduce all values to byte
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static unsafe bool CHECK(byte check, byte expected) {
+    public static unsafe bool CHECK(byte check, byte expected)
+    {
         return check == expected;
     }
 
@@ -24,12 +25,13 @@ public class BringUpTest
             byte* a = stackalloc byte[32];
             for (int i = 0; i < 5; i++)
             {
-                a[i] = (byte) (i + j);
+                a[i] = (byte)(i + j);
             }
 
             for (int i = 0; i < 5; i++)
             {
-                if (!CHECK(a[i], (byte) (i + j))) return i + j * 100;
+                if (!CHECK(a[i], (byte)(i + j)))
+                    return i + j * 100;
             }
         }
         return -1;
@@ -40,7 +42,8 @@ public class BringUpTest
         int ret;
 
         ret = LocallocCnstB32_Loop(4);
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocCnstB32_Loop: Failed on index: " + ret);
             return Fail;
         }

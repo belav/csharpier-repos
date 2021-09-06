@@ -13,18 +13,27 @@ namespace Microsoft.CodeAnalysis.Debugging
         public string? LocationNameOpt { get; }
         public bool IsLineBreakpoint { get; }
 
-        private BreakpointResolutionResult(Document document, TextSpan textSpan, string? locationNameOpt, bool isLineBreakpoint)
-        {
+        private BreakpointResolutionResult(
+            Document document,
+            TextSpan textSpan,
+            string? locationNameOpt,
+            bool isLineBreakpoint
+        ) {
             Document = document;
             TextSpan = textSpan;
             LocationNameOpt = locationNameOpt;
             IsLineBreakpoint = isLineBreakpoint;
         }
 
-        internal static BreakpointResolutionResult CreateSpanResult(Document document, TextSpan textSpan, string? locationNameOpt = null)
-            => new(document, textSpan, locationNameOpt, isLineBreakpoint: false);
+        internal static BreakpointResolutionResult CreateSpanResult(
+            Document document,
+            TextSpan textSpan,
+            string? locationNameOpt = null
+        ) => new(document, textSpan, locationNameOpt, isLineBreakpoint: false);
 
-        internal static BreakpointResolutionResult CreateLineResult(Document document, string? locationNameOpt = null)
-            => new(document, new TextSpan(), locationNameOpt, isLineBreakpoint: true);
+        internal static BreakpointResolutionResult CreateLineResult(
+            Document document,
+            string? locationNameOpt = null
+        ) => new(document, new TextSpan(), locationNameOpt, isLineBreakpoint: true);
     }
 }

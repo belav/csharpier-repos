@@ -29,7 +29,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal readonly ImmutableArray<AnonymousTypePropertySymbol> Properties;
 
             /// <summary> Maps member names to symbol(s) </summary>
-            private readonly MultiDictionary<string, Symbol> _nameToSymbols = new MultiDictionary<string, Symbol>();
+            private readonly MultiDictionary<string, Symbol> _nameToSymbols = new MultiDictionary<
+                string,
+                Symbol
+            >();
 
             /// <summary> Anonymous type manager owning this template </summary>
             internal readonly AnonymousTypeManager Manager;
@@ -37,15 +40,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             /// <summary> Anonymous type descriptor </summary>
             internal readonly AnonymousTypeDescriptor TypeDescriptor;
 
-            internal AnonymousTypePublicSymbol(AnonymousTypeManager manager, AnonymousTypeDescriptor typeDescr)
-            {
+            internal AnonymousTypePublicSymbol(
+                AnonymousTypeManager manager,
+                AnonymousTypeDescriptor typeDescr
+            ) {
                 typeDescr.AssertIsGood();
 
                 this.Manager = manager;
                 this.TypeDescriptor = typeDescr;
 
                 var fields = typeDescr.Fields;
-                var properties = fields.SelectAsArray((field, i, type) => new AnonymousTypePropertySymbol(type, field, i), this);
+                var properties = fields.SelectAsArray(
+                    (field, i, type) => new AnonymousTypePropertySymbol(type, field, i),
+                    this
+                );
 
                 //  members
                 int membersCount = fields.Length * 2 + 1;
@@ -72,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-                => throw ExceptionUtilities.Unreachable;
+            protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+                throw ExceptionUtilities.Unreachable;
 
             public override ImmutableArray<Symbol> GetMembers()
             {
@@ -204,8 +212,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return Accessibility.Internal; }
             }
 
-            internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
-            {
+            internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+                ConsList<TypeSymbol> basesBeingResolved
+            ) {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
@@ -214,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 throw ExceptionUtilities.Unreachable;
             }
 
-            internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics => this.Manager.System_Object;
+            internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+                this.Manager.System_Object;
 
             public override TypeKind TypeKind
             {
@@ -235,7 +245,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 get
                 {
-                    return GetDeclaringSyntaxReferenceHelper<AnonymousObjectCreationExpressionSyntax>(this.Locations);
+                    return GetDeclaringSyntaxReferenceHelper<AnonymousObjectCreationExpressionSyntax>(
+                        this.Locations
+                    );
                 }
             }
 
@@ -314,17 +326,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return AttributeUsageInfo.Null;
             }
 
-            internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
-            {
+            internal override NamedTypeSymbol GetDeclaredBaseType(
+                ConsList<TypeSymbol> basesBeingResolved
+            ) {
                 return this.Manager.System_Object;
             }
 
-            internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
-            {
+            internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+                ConsList<TypeSymbol> basesBeingResolved
+            ) {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable;
+            internal sealed override NamedTypeSymbol AsNativeInteger() =>
+                throw ExceptionUtilities.Unreachable;
 
             internal sealed override NamedTypeSymbol NativeIntegerUnderlyingType => null;
 
@@ -338,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 var other = t2 as AnonymousTypePublicSymbol;
-                return (object)other != null && this.TypeDescriptor.Equals(other.TypeDescriptor, comparison);
+                return (object)other != null
+                    && this.TypeDescriptor.Equals(other.TypeDescriptor, comparison);
             }
 
             public override int GetHashCode()

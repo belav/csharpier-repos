@@ -15,7 +15,9 @@ namespace System.Threading
             // See https://github.com/dotnet/runtime/issues/48720
             if (name != null)
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_NamedSynchronizationPrimitives
+                );
             }
 
             SafeWaitHandle = WaitSubsystem.NewMutex(initiallyOwned);
@@ -24,7 +26,9 @@ namespace System.Threading
 
         private static OpenExistingResult OpenExistingWorker(string name, out Mutex? result)
         {
-            throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+            throw new PlatformNotSupportedException(
+                SR.PlatformNotSupported_NamedSynchronizationPrimitives
+            );
         }
 
         public void ReleaseMutex()
@@ -42,6 +46,7 @@ namespace System.Threading
             {
                 WaitSubsystem.ReleaseMutex(waitHandle.DangerousGetHandle());
             }
+
             finally
             {
                 waitHandle.DangerousRelease();

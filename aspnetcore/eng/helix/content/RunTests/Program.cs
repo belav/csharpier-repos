@@ -32,7 +32,7 @@ namespace RunTests
                 {
                     keepGoing = await runner.InstallPlaywrightAsync();
                 }
-#else                
+#else
                 Console.WriteLine("Playwright install skipped.");
 #endif
 

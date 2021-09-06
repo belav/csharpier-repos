@@ -38,8 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public ConstructorBindingFactory(
             IPropertyParameterBindingFactory propertyFactory,
-            IParameterBindingFactories factories)
-        {
+            IParameterBindingFactories factories
+        ) {
             _propertyFactory = propertyFactory;
             _factories = factories;
         }
@@ -53,12 +53,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void GetBindings(
             IConventionEntityType entityType,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding)
-            => GetBindings(
+            out InstantiationBinding? serviceOnlyBinding
+        ) =>
+            GetBindings(
                 entityType,
                 static (f, e, p, n) => f?.Bind((IConventionEntityType)e, p, n),
                 out constructorBinding,
-                out serviceOnlyBinding);
+                out serviceOnlyBinding
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,12 +71,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void GetBindings(
             IMutableEntityType entityType,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding)
-            => GetBindings(
+            out InstantiationBinding? serviceOnlyBinding
+        ) =>
+            GetBindings(
                 entityType,
                 static (f, e, p, n) => f?.Bind((IMutableEntityType)e, p, n),
                 out constructorBinding,
-                out serviceOnlyBinding);
+                out serviceOnlyBinding
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,19 +89,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void GetBindings(
             IReadOnlyEntityType entityType,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding)
-            => GetBindings(
+            out InstantiationBinding? serviceOnlyBinding
+        ) =>
+            GetBindings(
                 entityType,
                 static (f, e, p, n) => f?.Bind(e, p, n),
                 out constructorBinding,
-                out serviceOnlyBinding);
+                out serviceOnlyBinding
+            );
 
         private void GetBindings(
             IReadOnlyEntityType entityType,
-            Func<IParameterBindingFactory?, IReadOnlyEntityType, Type, string, ParameterBinding?> bind,
+            Func<
+                IParameterBindingFactory?,
+                IReadOnlyEntityType,
+                Type,
+                string,
+                ParameterBinding?
+            > bind,
             out InstantiationBinding constructorBinding,
-            out InstantiationBinding? serviceOnlyBinding)
-        {
+            out InstantiationBinding? serviceOnlyBinding
+        ) {
             var maxServiceParams = 0;
             var maxServiceOnlyParams = 0;
             var minPropertyParams = int.MaxValue;
@@ -105,16 +117,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var foundServiceOnlyBindings = new List<InstantiationBinding>();
             var bindingFailures = new List<IEnumerable<ParameterInfo>>();
 
-            foreach (var constructor in entityType.ClrType.GetTypeInfo()
-                .DeclaredConstructors
-                .Where(c => !c.IsStatic))
-            {
+            foreach (
+                var constructor in entityType.ClrType.GetTypeInfo()
+                    .DeclaredConstructors.Where(c => !c.IsStatic)
+            ) {
                 // Trying to find the constructor with the most service properties
                 // followed by the least scalar property parameters
-                if (TryBindConstructor(
-                    entityType, constructor, bind, out var binding, out var failures))
-                {
-                    var serviceParamCount = binding.ParameterBindings.OfType<ServiceParameterBinding>().Count();
+                if (
+                    TryBindConstructor(
+                        entityType,
+                        constructor,
+                        bind,
+                        out var binding,
+                        out var failures
+                    )
+                ) {
+                    var serviceParamCount =
+                        binding.ParameterBindings.OfType<ServiceParameterBinding>().Count();
                     var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
 
                     if (propertyParamCount == 0)
@@ -132,9 +151,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         }
                     }
 
-                    if (serviceParamCount == maxServiceParams
-                        && propertyParamCount == minPropertyParams)
-                    {
+                    if (
+                        serviceParamCount == maxServiceParams
+                        && propertyParamCount == minPropertyParams
+                    ) {
                         foundBindings.Add(binding);
                     }
                     else if (serviceParamCount > maxServiceParams)
@@ -165,22 +185,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var constructorErrors = bindingFailures.SelectMany(f => f)
                     .GroupBy(f => (ConstructorInfo)f.Member)
                     .Select(
-                        x => CoreStrings.ConstructorBindingFailed(
-                            string.Join("', '", x.Select(f => f.Name)),
-                            entityType.DisplayName()
-                            + "("
-                            + string.Join(
-                                ", ", x.Key.GetParameters().Select(
-                                    y => y.ParameterType.ShortDisplayName() + " " + y.Name)
+                        x =>
+                            CoreStrings.ConstructorBindingFailed(
+                                string.Join("', '", x.Select(f => f.Name)),
+                                entityType.DisplayName()
+                                    + "("
+                                    + string.Join(
+                                        ", ",
+                                        x.Key.GetParameters()
+                                            .Select(
+                                                y =>
+                                                    y.ParameterType.ShortDisplayName()
+                                                    + " "
+                                                    + y.Name
+                                            )
+                                    )
+                                    + ")"
                             )
-                            + ")"
-                        )
                     );
 
                 throw new InvalidOperationException(
                     CoreStrings.ConstructorNotFound(
                         entityType.DisplayName(),
-                        string.Join("; ", constructorErrors)));
+                        string.Join("; ", constructorErrors)
+                    )
+                );
             }
 
             if (foundBindings.Count > 1)
@@ -188,7 +217,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new InvalidOperationException(
                     CoreStrings.ConstructorConflict(
                         FormatConstructorString(entityType, foundBindings[0]),
-                        FormatConstructorString(entityType, foundBindings[1])));
+                        FormatConstructorString(entityType, foundBindings[1])
+                    )
+                );
             }
 
             constructorBinding = foundBindings[0];
@@ -212,13 +243,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IMutableEntityType entityType,
             ConstructorInfo constructor,
             [NotNullWhen(true)] out InstantiationBinding? binding,
-            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters)
-            => TryBindConstructor(
+            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters
+        ) =>
+            TryBindConstructor(
                 entityType,
                 constructor,
                 static (f, e, p, n) => f?.Bind((IMutableEntityType)e, p, n),
                 out binding,
-                out unboundParameters);
+                out unboundParameters
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -230,27 +263,50 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IConventionEntityType entityType,
             ConstructorInfo constructor,
             [NotNullWhen(true)] out InstantiationBinding? binding,
-            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters)
-            => TryBindConstructor(
+            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters
+        ) =>
+            TryBindConstructor(
                 entityType,
                 constructor,
                 static (f, e, p, n) => f?.Bind((IConventionEntityType)e, p, n),
                 out binding,
-                out unboundParameters);
+                out unboundParameters
+            );
 
         private bool TryBindConstructor(
             IReadOnlyEntityType entityType,
             ConstructorInfo constructor,
-            Func<IParameterBindingFactory?, IReadOnlyEntityType, Type, string, ParameterBinding?> bind,
+            Func<
+                IParameterBindingFactory?,
+                IReadOnlyEntityType,
+                Type,
+                string,
+                ParameterBinding?
+            > bind,
             [NotNullWhen(true)] out InstantiationBinding? binding,
-            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters)
-        {
-            IEnumerable<(ParameterInfo Parameter, ParameterBinding? Binding)> bindings
-                = constructor.GetParameters().Select(
-                        p => (p, string.IsNullOrEmpty(p.Name)
-                            ? null
-                            : _propertyFactory.FindParameter((IEntityType)entityType, p.ParameterType, p.Name)
-                            ?? bind(_factories.FindFactory(p.ParameterType, p.Name), entityType, p.ParameterType, p.Name)))
+            [NotNullWhen(false)] out IEnumerable<ParameterInfo>? unboundParameters
+        ) {
+            IEnumerable<(ParameterInfo Parameter, ParameterBinding? Binding)> bindings =
+                constructor.GetParameters()
+                    .Select(
+                        p =>
+                            (
+                                p,
+                                string.IsNullOrEmpty(p.Name)
+                                    ? null
+                                    : _propertyFactory.FindParameter(
+                                          (IEntityType)entityType,
+                                          p.ParameterType,
+                                          p.Name
+                                      )
+                                      ?? bind(
+                                          _factories.FindFactory(p.ParameterType, p.Name),
+                                          entityType,
+                                          p.ParameterType,
+                                          p.Name
+                                      )
+                            )
+                    )
                     .ToList();
 
             if (bindings.Any(b => b.Binding == null))
@@ -262,15 +318,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             unboundParameters = null;
-            binding = new ConstructorBinding(constructor, bindings.Select(b => b.Binding).ToList()!);
+            binding = new ConstructorBinding(
+                constructor,
+                bindings.Select(b => b.Binding).ToList()!
+            );
 
             return true;
         }
 
-        private static string FormatConstructorString(IReadOnlyEntityType entityType, InstantiationBinding binding)
-            => entityType.ClrType.ShortDisplayName()
-                + "("
-                + string.Join(", ", binding.ParameterBindings.Select(b => b.ParameterType.ShortDisplayName()))
-                + ")";
+        private static string FormatConstructorString(
+            IReadOnlyEntityType entityType,
+            InstantiationBinding binding
+        ) =>
+            entityType.ClrType.ShortDisplayName()
+            + "("
+            + string.Join(
+                ", ",
+                binding.ParameterBindings.Select(b => b.ParameterType.ShortDisplayName())
+            )
+            + ")";
     }
 }

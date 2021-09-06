@@ -17,7 +17,10 @@ namespace System.IO
         /// <summary>Creates a pair of streams that are connected for unidirectional communication.</summary>
         /// <remarks>Writing to one stream produces data readable by the either.</remarks>
         public static (Stream Writer, Stream Reader) CreateUnidirectional() =>
-            CreateUnidirectional(StreamBuffer.DefaultInitialBufferSize, StreamBuffer.DefaultMaxBufferSize);
+            CreateUnidirectional(
+                StreamBuffer.DefaultInitialBufferSize,
+                StreamBuffer.DefaultMaxBufferSize
+            );
 
         /// <summary>Creates a pair of streams that are connected for unidirectional communication.</summary>
         /// <param name="initialBufferSize">The initial buffer size to use when storing data in the connection.</param>
@@ -32,8 +35,10 @@ namespace System.IO
         /// writes will block until additional space becomes available.
         /// </param>
         /// <remarks>Writing to one stream produces data readable by the either.</remarks>
-        public static (Stream Writer, Stream Reader) CreateUnidirectional(int initialBufferSize, int maxBufferSize)
-        {
+        public static (Stream Writer, Stream Reader) CreateUnidirectional(
+            int initialBufferSize,
+            int maxBufferSize
+        ) {
             var buffer = new StreamBuffer(initialBufferSize, maxBufferSize);
 
             // The StreamBuffer is shared between the streams: we don't want to dispose of the underlying storage
@@ -41,13 +46,19 @@ namespace System.IO
             // when both streams have been disposed.  To share the same integer, it's put onto the heap.
             var refCount = new StrongBox<int>(2);
 
-            return (new UnidirectionalStreamBufferStream(buffer, reader: false, refCount), new UnidirectionalStreamBufferStream(buffer, reader: true, refCount));
+            return (
+                new UnidirectionalStreamBufferStream(buffer, reader: false, refCount),
+                new UnidirectionalStreamBufferStream(buffer, reader: true, refCount)
+            );
         }
 
         /// <summary>Creates a pair of streams that are connected for bidirectional communication.</summary>
         /// <remarks>Writing to one stream produces data readable by the either, and vice versa.</remarks>
         public static (Stream Stream1, Stream Stream2) CreateBidirectional() =>
-            CreateBidirectional(StreamBuffer.DefaultInitialBufferSize, StreamBuffer.DefaultMaxBufferSize);
+            CreateBidirectional(
+                StreamBuffer.DefaultInitialBufferSize,
+                StreamBuffer.DefaultMaxBufferSize
+            );
 
         /// <summary>Creates a pair of streams that are connected for bidirectional communication.</summary>
         /// <param name="initialBufferSize">The initial buffer size to use when storing data in the connection.</param>
@@ -62,8 +73,10 @@ namespace System.IO
         /// writes will block until additional space becomes available.
         /// </param>
         /// <remarks>Writing to one stream produces data readable by the either, and vice versa.</remarks>
-        public static (Stream Stream1, Stream Stream2) CreateBidirectional(int initialBufferSize, int maxBufferSize)
-        {
+        public static (Stream Stream1, Stream Stream2) CreateBidirectional(
+            int initialBufferSize,
+            int maxBufferSize
+        ) {
             // Each direction needs a buffer; one stream will use b1 for reading and b2 for writing,
             // and the other stream will do the inverse.
             var b1 = new StreamBuffer(initialBufferSize, maxBufferSize);
@@ -74,7 +87,10 @@ namespace System.IO
             // when both streams have been disposed.  To share the same integer, it's put onto the heap.
             var refCount = new StrongBox<int>(2);
 
-            return (new BidirectionalStreamBufferStream(b1, b2, refCount), new BidirectionalStreamBufferStream(b2, b1, refCount));
+            return (
+                new BidirectionalStreamBufferStream(b1, b2, refCount),
+                new BidirectionalStreamBufferStream(b2, b1, refCount)
+            );
         }
 
         private sealed class UnidirectionalStreamBufferStream : Stream
@@ -84,8 +100,11 @@ namespace System.IO
             private readonly bool _reader;
             private bool _disposed;
 
-            internal UnidirectionalStreamBufferStream(StreamBuffer buffer, bool reader, StrongBox<int> refCount)
-            {
+            internal UnidirectionalStreamBufferStream(
+                StreamBuffer buffer,
+                bool reader,
+                StrongBox<int> refCount
+            ) {
                 _buffer = buffer;
                 _reader = reader;
                 _refCount = refCount;
@@ -159,8 +178,13 @@ namespace System.IO
                 return _buffer.Read(buffer);
             }
 
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-                TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) => TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
 
             public override int EndRead(IAsyncResult asyncResult)
             {
@@ -170,17 +194,24 @@ namespace System.IO
                 return TaskToApm.End<int>(asyncResult);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 ThrowIfReadingNotSupported();
 
-                return _buffer.ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+                return _buffer.ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken)
+                    .AsTask();
             }
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-            {
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken = default
+            ) {
                 ThrowIfDisposed();
                 ThrowIfReadingNotSupported();
 
@@ -212,25 +243,40 @@ namespace System.IO
                 _buffer.Write(buffer);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 ThrowIfWritingNotSupported();
 
-                return _buffer.WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+                return _buffer.WriteAsync(
+                        new ReadOnlyMemory<byte>(buffer, offset, count),
+                        cancellationToken
+                    )
+                    .AsTask();
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-            {
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            ) {
                 ThrowIfDisposed();
                 ThrowIfWritingNotSupported();
 
                 return _buffer.WriteAsync(buffer, cancellationToken);
             }
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-                TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) => TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
 
             public override void EndWrite(IAsyncResult asyncResult)
             {
@@ -241,8 +287,13 @@ namespace System.IO
             }
 
             public override long Length => throw new NotSupportedException();
-            public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
-            public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+            public override long Position
+            {
+                get => throw new NotSupportedException();
+                set => throw new NotSupportedException();
+            }
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw new NotSupportedException();
             public override void SetLength(long value) => throw new NotSupportedException();
 
             private void ThrowIfDisposed()
@@ -251,7 +302,8 @@ namespace System.IO
                     ThrowDisposedException();
 
                 [StackTraceHidden]
-                static void ThrowDisposedException() => throw new ObjectDisposedException(nameof(ConnectedStreams));
+                static void ThrowDisposedException() =>
+                    throw new ObjectDisposedException(nameof(ConnectedStreams));
             }
 
             private void ThrowIfReadingNotSupported()
@@ -271,8 +323,7 @@ namespace System.IO
             }
 
             [DoesNotReturn]
-            private static void ThrowNotSupportedException() =>
-                throw new NotSupportedException();
+            private static void ThrowNotSupportedException() => throw new NotSupportedException();
         }
 
         private sealed class BidirectionalStreamBufferStream : Stream
@@ -282,8 +333,11 @@ namespace System.IO
             private readonly StrongBox<int> _refCount;
             private bool _disposed;
 
-            internal BidirectionalStreamBufferStream(StreamBuffer readBuffer, StreamBuffer writeBuffer, StrongBox<int> refCount)
-            {
+            internal BidirectionalStreamBufferStream(
+                StreamBuffer readBuffer,
+                StreamBuffer writeBuffer,
+                StrongBox<int> refCount
+            ) {
                 _readBuffer = readBuffer;
                 _writeBuffer = writeBuffer;
                 _refCount = refCount;
@@ -348,8 +402,13 @@ namespace System.IO
                 return _readBuffer.Read(buffer);
             }
 
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-                TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) => TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
 
             public override int EndRead(IAsyncResult asyncResult)
             {
@@ -357,15 +416,25 @@ namespace System.IO
                 return TaskToApm.End<int>(asyncResult);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
-                return _readBuffer.ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+                return _readBuffer.ReadAsync(
+                        new Memory<byte>(buffer, offset, count),
+                        cancellationToken
+                    )
+                    .AsTask();
             }
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-            {
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken = default
+            ) {
                 ThrowIfDisposed();
                 return _readBuffer.ReadAsync(buffer, cancellationToken);
             }
@@ -389,21 +458,36 @@ namespace System.IO
                 _writeBuffer.Write(buffer);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
-                return _writeBuffer.WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+                return _writeBuffer.WriteAsync(
+                        new ReadOnlyMemory<byte>(buffer, offset, count),
+                        cancellationToken
+                    )
+                    .AsTask();
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-            {
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            ) {
                 ThrowIfDisposed();
                 return _writeBuffer.WriteAsync(buffer, cancellationToken);
             }
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-                TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) => TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
 
             public override void EndWrite(IAsyncResult asyncResult)
             {
@@ -412,8 +496,13 @@ namespace System.IO
             }
 
             public override long Length => throw new NotSupportedException();
-            public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
-            public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+            public override long Position
+            {
+                get => throw new NotSupportedException();
+                set => throw new NotSupportedException();
+            }
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw new NotSupportedException();
             public override void SetLength(long value) => throw new NotSupportedException();
 
             private void ThrowIfDisposed()
@@ -422,7 +511,8 @@ namespace System.IO
                     ThrowDisposedException();
 
                 [StackTraceHidden]
-                static void ThrowDisposedException() => throw new ObjectDisposedException(nameof(ConnectedStreams));
+                static void ThrowDisposedException() =>
+                    throw new ObjectDisposedException(nameof(ConnectedStreams));
             }
         }
     }

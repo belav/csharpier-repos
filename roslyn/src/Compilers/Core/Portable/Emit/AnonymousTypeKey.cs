@@ -42,9 +42,12 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public bool Equals(AnonymousTypeKeyField other)
         {
-            return IsKey == other.IsKey &&
-                   IgnoreCase == other.IgnoreCase &&
-                   (IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal).Equals(Name, other.Name);
+            return IsKey == other.IsKey
+                && IgnoreCase == other.IgnoreCase
+                && (IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal).Equals(
+                    Name,
+                    other.Name
+                );
         }
 
         public override bool Equals(object obj)
@@ -54,9 +57,15 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public override int GetHashCode()
         {
-            return Hash.Combine(IsKey,
-                   Hash.Combine(IgnoreCase,
-                   (IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal).GetHashCode(Name)));
+            return Hash.Combine(
+                IsKey,
+                Hash.Combine(
+                    IgnoreCase,
+                    (
+                        IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal
+                    ).GetHashCode(Name)
+                )
+            );
         }
     }
 
@@ -66,8 +75,10 @@ namespace Microsoft.CodeAnalysis.Emit
         internal readonly bool IsDelegate;
         internal readonly ImmutableArray<AnonymousTypeKeyField> Fields;
 
-        internal AnonymousTypeKey(ImmutableArray<AnonymousTypeKeyField> fields, bool isDelegate = false)
-        {
+        internal AnonymousTypeKey(
+            ImmutableArray<AnonymousTypeKeyField> fields,
+            bool isDelegate = false
+        ) {
             this.IsDelegate = isDelegate;
             this.Fields = fields;
         }

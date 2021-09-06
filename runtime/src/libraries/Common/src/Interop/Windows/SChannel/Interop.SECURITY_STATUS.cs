@@ -13,7 +13,6 @@ internal static partial class Interop
         ContextExpired = unchecked((int)0x00090317),
         CredentialsNeeded = unchecked((int)0x00090320),
         Renegotiate = unchecked((int)0x00090321),
-
         // Errors
         OutOfMemory = unchecked((int)0x80090300),
         InvalidHandle = unchecked((int)0x80090301),

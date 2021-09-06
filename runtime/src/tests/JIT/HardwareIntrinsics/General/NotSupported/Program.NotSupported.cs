@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Vector64Zero"] = Vector64Zero,
                 ["Vector64AllBitsSet"] = Vector64AllBitsSet,
                 ["Vector64BooleanAsGeneric_Boolean"] = Vector64BooleanAsGeneric_Boolean,

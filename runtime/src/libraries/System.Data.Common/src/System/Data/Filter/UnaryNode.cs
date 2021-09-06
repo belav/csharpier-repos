@@ -131,7 +131,7 @@ namespace System.Data
                         {
                             return SqlBoolean.False;
                         }
-                        throw ExprException.UnsupportedOperator(op);  // or should the result of not SQLNull  be SqlNull ?
+                        throw ExprException.UnsupportedOperator(op); // or should the result of not SQLNull  be SqlNull ?
                     }
                     else
                     {
@@ -169,7 +169,6 @@ namespace System.Data
         {
             return (_right.DependsOn(column));
         }
-
 
         internal override ExpressionNode Optimize()
         {

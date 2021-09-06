@@ -25,7 +25,7 @@ namespace System.Threading.Tests
             new Semaphore(initialCount, maximumCount, null).Dispose();
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // named semaphores aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // named semaphores aren't supported on Unix
         [Theory]
         [MemberData(nameof(GetValidNames))]
         public void Ctor_ValidName_Windows(string name)
@@ -37,7 +37,7 @@ namespace System.Threading.Tests
             Assert.True(createdNew);
         }
 
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // named semaphores aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // named semaphores aren't supported on Unix
         [ActiveIssue("https://github.com/mono/mono/issues/15161", TestRuntimes.Mono)]
         [Fact]
         public void Ctor_NamesArentSupported_Unix()
@@ -46,11 +46,13 @@ namespace System.Threading.Tests
 
             Assert.Throws<PlatformNotSupportedException>(() => new Semaphore(0, 1, name));
 
-            Assert.Throws<PlatformNotSupportedException>(() =>
-            {
-                bool createdNew;
-                new Semaphore(0, 1, name, out createdNew).Dispose();
-            });
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                {
+                    bool createdNew;
+                    new Semaphore(0, 1, name, out createdNew).Dispose();
+                }
+            );
         }
 
         [Fact]
@@ -58,20 +60,50 @@ namespace System.Threading.Tests
         {
             bool createdNew;
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () => new Semaphore(-1, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () => new Semaphore(-2, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumCount", () => new Semaphore(0, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCount",
+                () => new Semaphore(-1, 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCount",
+                () => new Semaphore(-2, 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maximumCount",
+                () => new Semaphore(0, 0)
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => new Semaphore(2, 1));
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () => new Semaphore(-1, 1, null));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () => new Semaphore(-2, 1, null));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumCount", () => new Semaphore(0, 0, null));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCount",
+                () => new Semaphore(-1, 1, null)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCount",
+                () => new Semaphore(-2, 1, null)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maximumCount",
+                () => new Semaphore(0, 0, null)
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => new Semaphore(2, 1, null));
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () => new Semaphore(-1, 1, "CtorSemaphoreTest", out createdNew));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () => new Semaphore(-2, 1, "CtorSemaphoreTest", out createdNew));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumCount", () => new Semaphore(0, 0, "CtorSemaphoreTest", out createdNew));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Semaphore(2, 1, "CtorSemaphoreTest", out createdNew));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCount",
+                () => new Semaphore(-1, 1, "CtorSemaphoreTest", out createdNew)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCount",
+                () => new Semaphore(-2, 1, "CtorSemaphoreTest", out createdNew)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maximumCount",
+                () => new Semaphore(0, 0, "CtorSemaphoreTest", out createdNew)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Semaphore(2, 1, "CtorSemaphoreTest", out createdNew)
+            );
         }
 
         [Fact]
@@ -126,7 +158,10 @@ namespace System.Threading.Tests
             using (Semaphore s = new Semaphore(0, 10))
             {
                 Assert.Throws<SemaphoreFullException>(() => s.Release(11));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("releaseCount", () => s.Release(-1));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "releaseCount",
+                    () => s.Release(-1)
+                );
             }
 
             using (Semaphore s = new Semaphore(0, 10))
@@ -146,18 +181,29 @@ namespace System.Threading.Tests
             {
                 const int NumItems = 5;
                 Task.WaitAll(
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < NumItems; i++)
-                            Assert.True(s.WaitOne(FailedWaitTimeout));
-                        Assert.False(s.WaitOne(0));
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default),
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < NumItems; i++)
-                            s.Release();
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
-        }
+                    Task.Factory.StartNew(
+                        () =>
+                        {
+                            for (int i = 0; i < NumItems; i++)
+                                Assert.True(s.WaitOne(FailedWaitTimeout));
+                            Assert.False(s.WaitOne(0));
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    ),
+                    Task.Factory.StartNew(
+                        () =>
+                        {
+                            for (int i = 0; i < NumItems; i++)
+                                s.Release();
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                );
+            }
         }
 
         [PlatformSpecific(TestPlatforms.Windows)] // named semaphores aren't supported on Unix
@@ -168,45 +214,67 @@ namespace System.Threading.Tests
             const int NumItems = 5;
             var b = new Barrier(2);
             Task.WaitAll(
-                Task.Factory.StartNew(() =>
-                {
-                    using (var s = new Semaphore(0, int.MaxValue, name))
+                Task.Factory.StartNew(
+                    () =>
                     {
-                        Assert.True(b.SignalAndWait(FailedWaitTimeout));
-                        for (int i = 0; i < NumItems; i++)
-                            Assert.True(s.WaitOne(FailedWaitTimeout));
-                        Assert.False(s.WaitOne(0));
-                    }
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default),
-                Task.Factory.StartNew(() =>
-                {
-                    using (var s = new Semaphore(0, int.MaxValue, name))
+                        using (var s = new Semaphore(0, int.MaxValue, name))
+                        {
+                            Assert.True(b.SignalAndWait(FailedWaitTimeout));
+                            for (int i = 0; i < NumItems; i++)
+                                Assert.True(s.WaitOne(FailedWaitTimeout));
+                            Assert.False(s.WaitOne(0));
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                ),
+                Task.Factory.StartNew(
+                    () =>
                     {
-                        Assert.True(b.SignalAndWait(FailedWaitTimeout));
-                        for (int i = 0; i < NumItems; i++)
-                            s.Release();
-                    }
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+                        using (var s = new Semaphore(0, int.MaxValue, name))
+                        {
+                            Assert.True(b.SignalAndWait(FailedWaitTimeout));
+                            for (int i = 0; i < NumItems; i++)
+                                s.Release();
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                )
+            );
         }
 
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // named semaphores aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // named semaphores aren't supported on Unix
         [ActiveIssue("https://github.com/mono/mono/issues/15160", TestRuntimes.Mono)]
         [Fact]
         public void OpenExisting_NotSupported_Unix()
         {
             Assert.Throws<PlatformNotSupportedException>(() => Semaphore.OpenExisting(null));
-            Assert.Throws<PlatformNotSupportedException>(() => Semaphore.OpenExisting(string.Empty));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Semaphore.OpenExisting(string.Empty)
+            );
             Assert.Throws<PlatformNotSupportedException>(() => Semaphore.OpenExisting("anything"));
             Semaphore semaphore;
-            Assert.Throws<PlatformNotSupportedException>(() => Semaphore.TryOpenExisting("anything", out semaphore));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Semaphore.TryOpenExisting("anything", out semaphore)
+            );
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // named semaphores aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // named semaphores aren't supported on Unix
         [Fact]
         public void OpenExisting_InvalidNames_Windows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => Semaphore.OpenExisting(null));
-            AssertExtensions.Throws<ArgumentException>("name", null, () => Semaphore.OpenExisting(string.Empty));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => Semaphore.OpenExisting(null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => Semaphore.OpenExisting(string.Empty)
+            );
         }
 
         [PlatformSpecific(TestPlatforms.Windows)] // named semaphores aren't supported on Unix
@@ -226,7 +294,9 @@ namespace System.Threading.Tests
             string name = Guid.NewGuid().ToString("N");
             using (Mutex mtx = new Mutex(true, name))
             {
-                Assert.Throws<WaitHandleCannotBeOpenedException>(() => Semaphore.OpenExisting(name));
+                Assert.Throws<WaitHandleCannotBeOpenedException>(
+                    () => Semaphore.OpenExisting(name)
+                );
                 Semaphore ignored;
                 Assert.False(Semaphore.TryOpenExisting(name, out ignored));
             }
@@ -281,8 +351,13 @@ namespace System.Threading.Tests
             // Create the two semaphores and the other process with which to synchronize
             using (var inbound = new Semaphore(1, 1, inboundName))
             using (var outbound = new Semaphore(0, 1, outboundName))
-            using (var remote = RemoteExecutor.Invoke(new Action<string, string>(PingPong_OtherProcess), outboundName, inboundName))
-            {
+            using (
+                var remote = RemoteExecutor.Invoke(
+                    new Action<string, string>(PingPong_OtherProcess),
+                    outboundName,
+                    inboundName
+                )
+            ) {
                 // Repeatedly wait for count in one semaphore and then release count into the other
                 for (int i = 0; i < 10; i++)
                 {
@@ -309,7 +384,7 @@ namespace System.Threading.Tests
 
         public static TheoryData<string> GetValidNames()
         {
-            var names  =  new TheoryData<string>() { Guid.NewGuid().ToString("N") };
+            var names = new TheoryData<string>() { Guid.NewGuid().ToString("N") };
             names.Add(Guid.NewGuid().ToString("N") + new string('a', 1000));
 
             return names;

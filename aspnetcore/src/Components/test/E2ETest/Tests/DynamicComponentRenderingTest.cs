@@ -13,7 +13,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class DynamicComponentRenderingTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+    public class DynamicComponentRenderingTest
+        : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     {
         private IWebElement app;
         private SelectElement testCasePicker;
@@ -21,16 +22,19 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public DynamicComponentRenderingTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
             app = Browser.MountTestComponent<DynamicComponentRendering>();
-            testCasePicker = new SelectElement(app.FindElement(By.Id("dynamic-component-case-picker")));
+            testCasePicker = new SelectElement(
+                app.FindElement(By.Id("dynamic-component-case-picker"))
+            );
         }
 
         [Fact]
@@ -70,13 +74,22 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var dynamicChild = app.FindElement(By.Id("dynamic-child"));
 
             // Regular parameters work
-            Browser.Equal("Hello 123", () => dynamicChild.FindElement(By.CssSelector(".Param1 li")).Text);
+            Browser.Equal(
+                "Hello 123",
+                () => dynamicChild.FindElement(By.CssSelector(".Param1 li")).Text
+            );
 
             // Derived parameters work
-            Browser.Equal("Goodbye Derived", () => dynamicChild.FindElement(By.CssSelector(".Param2")).Text);
+            Browser.Equal(
+                "Goodbye Derived",
+                () => dynamicChild.FindElement(By.CssSelector(".Param2")).Text
+            );
 
             // Catch-all parameters work
-            Browser.Equal("unmatchedParam This is the unmatched param value", () => dynamicChild.FindElement(By.CssSelector(".Param3 li")).Text);
+            Browser.Equal(
+                "unmatchedParam This is the unmatched param value",
+                () => dynamicChild.FindElement(By.CssSelector(".Param3 li")).Text
+            );
         }
 
         [Fact]
@@ -84,7 +97,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             testCasePicker.SelectByText("Component with parameters");
             var dynamicChild = app.FindElement(By.Id("dynamic-child"));
-            Browser.Equal("Component With Parameters", () => dynamicChild.FindElement(By.TagName("h3")).Text);
+            Browser.Equal(
+                "Component With Parameters",
+                () => dynamicChild.FindElement(By.TagName("h3")).Text
+            );
 
             testCasePicker.SelectByText("Counter");
             Browser.Equal("Counter", () => dynamicChild.FindElement(By.TagName("h1")).Text);

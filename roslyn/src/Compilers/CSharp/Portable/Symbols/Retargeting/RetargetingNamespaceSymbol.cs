@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
     /// another NamespaceSymbol that is responsible for retargeting symbols from one assembly to another. 
     /// It can retarget symbols for multiple assemblies at the same time.
     /// </summary>
-    internal sealed class RetargetingNamespaceSymbol
-        : NamespaceSymbol
+    internal sealed class RetargetingNamespaceSymbol : NamespaceSymbol
     {
         /// <summary>
         /// Owning RetargetingModuleSymbol.
@@ -36,8 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// </summary>
         private readonly NamespaceSymbol _underlyingNamespace;
 
-        public RetargetingNamespaceSymbol(RetargetingModuleSymbol retargetingModule, NamespaceSymbol underlyingNamespace)
-        {
+        public RetargetingNamespaceSymbol(
+            RetargetingModuleSymbol retargetingModule,
+            NamespaceSymbol underlyingNamespace
+        ) {
             Debug.Assert((object)retargetingModule != null);
             Debug.Assert((object)underlyingNamespace != null);
             Debug.Assert(!(underlyingNamespace is RetargetingNamespaceSymbol));
@@ -48,26 +49,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private RetargetingModuleSymbol.RetargetingSymbolTranslator RetargetingTranslator
         {
-            get
-            {
-                return _retargetingModule.RetargetingTranslator;
-            }
+            get { return _retargetingModule.RetargetingTranslator; }
         }
 
         public NamespaceSymbol UnderlyingNamespace
         {
-            get
-            {
-                return _underlyingNamespace;
-            }
+            get { return _underlyingNamespace; }
         }
 
         internal override NamespaceExtent Extent
         {
-            get
-            {
-                return new NamespaceExtent(_retargetingModule);
-            }
+            get { return new NamespaceExtent(_retargetingModule); }
         }
 
         public override ImmutableArray<Symbol> GetMembers()
@@ -82,8 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             foreach (Symbol s in underlyingMembers)
             {
                 // Skip explicitly declared local types.
-                if (s.Kind == SymbolKind.NamedType && ((NamedTypeSymbol)s).IsExplicitDefinitionOfNoPiaLocalType)
-                {
+                if (
+                    s.Kind == SymbolKind.NamedType
+                    && ((NamedTypeSymbol)s).IsExplicitDefinitionOfNoPiaLocalType
+                ) {
                     continue;
                 }
 
@@ -113,8 +107,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             return RetargetTypeMembers(_underlyingNamespace.GetTypeMembers());
         }
 
-        private ImmutableArray<NamedTypeSymbol> RetargetTypeMembers(ImmutableArray<NamedTypeSymbol> underlyingMembers)
-        {
+        private ImmutableArray<NamedTypeSymbol> RetargetTypeMembers(
+            ImmutableArray<NamedTypeSymbol> underlyingMembers
+        ) {
             var builder = ArrayBuilder<NamedTypeSymbol>.GetInstance(underlyingMembers.Length);
 
             foreach (NamedTypeSymbol t in underlyingMembers)
@@ -126,7 +121,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 }
 
                 Debug.Assert(t.PrimitiveTypeCode == Cci.PrimitiveTypeCode.NotPrimitive);
-                builder.Add(this.RetargetingTranslator.Retarget(t, RetargetOptions.RetargetPrimitiveTypesByName));
+                builder.Add(
+                    this.RetargetingTranslator.Retarget(
+                        t,
+                        RetargetOptions.RetargetPrimitiveTypesByName
+                    )
+                );
             }
 
             return builder.ToImmutableAndFree();
@@ -152,55 +152,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _retargetingModule.Locations;
-            }
+            get { return _retargetingModule.Locations; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return _underlyingNamespace.DeclaringSyntaxReferences;
-            }
+            get { return _underlyingNamespace.DeclaringSyntaxReferences; }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _retargetingModule.ContainingAssembly;
-            }
+            get { return _retargetingModule.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
         public override bool IsGlobalNamespace
         {
-            get
-            {
-                return _underlyingNamespace.IsGlobalNamespace;
-            }
+            get { return _underlyingNamespace.IsGlobalNamespace; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _underlyingNamespace.Name;
-            }
+            get { return _underlyingNamespace.Name; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return _underlyingNamespace.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
+            return _underlyingNamespace.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         internal override NamedTypeSymbol LookupMetadataType(ref MetadataTypeName typeName)
@@ -210,7 +199,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             // UnitTests.Symbols.Metadata.PE.NoPia.LocalTypeSubstitution2.
             NamedTypeSymbol underlying = _underlyingNamespace.LookupMetadataType(ref typeName);
 
-            Debug.Assert((object)underlying.ContainingModule == (object)_retargetingModule.UnderlyingModule);
+            Debug.Assert(
+                (object)underlying.ContainingModule == (object)_retargetingModule.UnderlyingModule
+            );
 
             if (!underlying.IsErrorType() && underlying.IsExplicitDefinitionOfNoPiaLocalType)
             {
@@ -218,11 +209,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 return new MissingMetadataTypeSymbol.TopLevel(_retargetingModule, ref typeName);
             }
 
-            return this.RetargetingTranslator.Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
+            return this.RetargetingTranslator.Retarget(
+                underlying,
+                RetargetOptions.RetargetPrimitiveTypesByName
+            );
         }
 
-        internal override void GetExtensionMethods(ArrayBuilder<MethodSymbol> methods, string nameOpt, int arity, LookupOptions options)
-        {
+        internal override void GetExtensionMethods(
+            ArrayBuilder<MethodSymbol> methods,
+            string nameOpt,
+            int arity,
+            LookupOptions options
+        ) {
             var underlyingMethods = ArrayBuilder<MethodSymbol>.GetInstance();
             _underlyingNamespace.GetExtensionMethods(underlyingMethods, nameOpt, arity, options);
             foreach (var underlyingMethod in underlyingMethods)

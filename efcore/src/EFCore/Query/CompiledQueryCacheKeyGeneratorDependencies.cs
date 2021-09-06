@@ -61,8 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public CompiledQueryCacheKeyGeneratorDependencies(
             IModel model,
             ICurrentDbContext currentContext,
-            IExecutionStrategyFactory executionStrategyFactory)
-        {
+            IExecutionStrategyFactory executionStrategyFactory
+        ) {
             Check.NotNull(model, nameof(model));
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(executionStrategyFactory, nameof(executionStrategyFactory));

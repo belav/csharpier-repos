@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
         public DefinitionsAndReferences(
             ImmutableArray<DefinitionItem> definitions,
-            ImmutableArray<SourceReferenceItem> references)
-        {
+            ImmutableArray<SourceReferenceItem> references
+        ) {
             var definitionSet = definitions.ToSet();
             for (int i = 0, n = references.Length; i < n; i++)
             {
@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 if (!definitionSet.Contains(reference.Definition))
                 {
                     throw new ArgumentException(
-                        $"{nameof(references)}[{i}].{nameof(reference.Definition)} not found in '{nameof(definitions)}'");
+                        $"{nameof(references)}[{i}].{nameof(reference.Definition)} not found in '{nameof(definitions)}'"
+                    );
                 }
             }
 

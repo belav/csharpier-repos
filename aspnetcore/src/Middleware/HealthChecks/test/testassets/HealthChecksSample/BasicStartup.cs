@@ -17,7 +17,7 @@ namespace HealthChecksSample
         public void Configure(IApplicationBuilder app)
         {
             // This will register the health checks middleware at the URL /health.
-            // 
+            //
             // By default health checks will return a 200 with 'Healthy'.
             // - No health checks are registered by default, the app is healthy if it is reachable
             // - The default response writer writes the HealthCheckStatus as text/plain content
@@ -26,10 +26,12 @@ namespace HealthChecksSample
             // that want to check for 'liveness' of an application.
             app.UseHealthChecks("/health");
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Go to /health to see the health status");
-            });
+            app.Run(
+                async (context) =>
+                {
+                    await context.Response.WriteAsync("Go to /health to see the health status");
+                }
+            );
         }
     }
 }

@@ -13,116 +13,145 @@ namespace Microsoft.AspNetCore.Razor.Language
             get
             {
                 // requiredAttributeDescriptor, attributeName, attributeValue, expectedResult
-                return new TheoryData<Action<RequiredAttributeDescriptorBuilder>, string, string, bool>
+                return new TheoryData<
+                    Action<RequiredAttributeDescriptorBuilder>,
+                    string,
+                    string,
+                    bool
+                >
                 {
+                    { builder => builder.Name("key"), "KeY", "value", true },
+                    { builder => builder.Name("key"), "keys", "value", false },
                     {
-                        builder => builder.Name("key"),
-                        "KeY",
-                        "value",
-                        true
-                    },
-                    {
-                        builder => builder.Name("key"),
-                        "keys",
-                        "value",
-                        false
-                    },
-                    {
-                        builder => builder
-                            .Name("route-")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch),
+                        builder =>
+                            builder.Name("route-")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                                ),
                         "ROUTE-area",
                         "manage",
                         true
                     },
                     {
-                        builder => builder
-                            .Name("route-")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch),
+                        builder =>
+                            builder.Name("route-")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                                ),
                         "routearea",
                         "manage",
                         false
                     },
                     {
-                        builder => builder
-                            .Name("route-")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch),
+                        builder =>
+                            builder.Name("route-")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                                ),
                         "route-",
                         "manage",
                         false
                     },
                     {
-                        builder => builder
-                            .Name("key")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch),
+                        builder =>
+                            builder.Name("key")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                ),
                         "KeY",
                         "value",
                         true
                     },
                     {
-                        builder => builder
-                            .Name("key")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch),
+                        builder =>
+                            builder.Name("key")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                ),
                         "keys",
                         "value",
                         false
                     },
                     {
-                        builder => builder
-                            .Name("key")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
-                            .Value("value")
-                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch),
+                        builder =>
+                            builder.Name("key")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                )
+                                .Value("value")
+                                .ValueComparisonMode(
+                                    RequiredAttributeDescriptor.ValueComparisonMode.FullMatch
+                                ),
                         "key",
                         "value",
                         true
                     },
                     {
-                        builder => builder
-                            .Name("key")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
-                            .Value("value")
-                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch),
+                        builder =>
+                            builder.Name("key")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                )
+                                .Value("value")
+                                .ValueComparisonMode(
+                                    RequiredAttributeDescriptor.ValueComparisonMode.FullMatch
+                                ),
                         "key",
                         "Value",
                         false
                     },
                     {
-                        builder => builder
-                            .Name("class")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
-                            .Value("btn")
-                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch),
+                        builder =>
+                            builder.Name("class")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                )
+                                .Value("btn")
+                                .ValueComparisonMode(
+                                    RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch
+                                ),
                         "class",
                         "btn btn-success",
                         true
                     },
                     {
-                        builder => builder
-                            .Name("class")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
-                            .Value("btn")
-                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch),
+                        builder =>
+                            builder.Name("class")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                )
+                                .Value("btn")
+                                .ValueComparisonMode(
+                                    RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch
+                                ),
                         "class",
                         "BTN btn-success",
                         false
                     },
                     {
-                        builder => builder
-                            .Name("href")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
-                            .Value("#navigate")
-                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.SuffixMatch),
+                        builder =>
+                            builder.Name("href")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                )
+                                .Value("#navigate")
+                                .ValueComparisonMode(
+                                    RequiredAttributeDescriptor.ValueComparisonMode.SuffixMatch
+                                ),
                         "href",
                         "/home/index#navigate",
                         true
                     },
                     {
-                        builder => builder
-                            .Name("href")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
-                            .Value("#navigate")
-                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.SuffixMatch),
+                        builder =>
+                            builder.Name("href")
+                                .NameComparisonMode(
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                )
+                                .Value("#navigate")
+                                .ValueComparisonMode(
+                                    RequiredAttributeDescriptor.ValueComparisonMode.SuffixMatch
+                                ),
                         "href",
                         "/home/index#NAVigate",
                         false
@@ -137,11 +166,17 @@ namespace Microsoft.AspNetCore.Razor.Language
             Action<RequiredAttributeDescriptorBuilder> configure,
             string attributeName,
             string attributeValue,
-            bool expectedResult)
-        {
+            bool expectedResult
+        ) {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
+            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(
+                tagHelperBuilder
+            );
             var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
             configure(builder);
@@ -149,7 +184,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var requiredAttibute = builder.Build();
 
             // Act
-            var result = TagHelperMatchingConventions.SatisfiesRequiredAttribute(attributeName, attributeValue, requiredAttibute);
+            var result = TagHelperMatchingConventions.SatisfiesRequiredAttribute(
+                attributeName,
+                attributeValue,
+                requiredAttibute
+            );
 
             // Assert
             Assert.Equal(expectedResult, result);

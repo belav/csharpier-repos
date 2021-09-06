@@ -16,30 +16,81 @@ namespace System.Net.NetworkInformation
             _prefixLength = prefixLength;
         }
 
-        public override IPAddress Address { get { return _address; } }
+        public override IPAddress Address
+        {
+            get { return _address; }
+        }
 
         /// Gets a bool value that indicates whether the Internet Protocol (IP) address is legal to appear in a Domain Name System (DNS) server database.
-        public override bool IsDnsEligible { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDnsEligible
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         /// Gets a bool value that indicates whether the Internet Protocol (IP) address is transient.
-        public override bool IsTransient { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsTransient
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         /// [To be supplied.]
-        public override long AddressPreferredLifetime { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long AddressPreferredLifetime
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         /// [To be supplied.]
-        public override long AddressValidLifetime { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long AddressValidLifetime
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         /// Specifies the amount of time remaining on the Dynamic Host Configuration Protocol (DHCP) lease for this IP address.
-        public override long DhcpLeaseLifetime { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long DhcpLeaseLifetime
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         /// Gets a value that indicates the state of the duplicate address detection algorithm.
-        public override DuplicateAddressDetectionState DuplicateAddressDetectionState { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override DuplicateAddressDetectionState DuplicateAddressDetectionState
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
         /// Gets a value that identifies the source of a unicast IP address prefix.
-        public override PrefixOrigin PrefixOrigin { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override PrefixOrigin PrefixOrigin
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         /// Gets a value that identifies the source of a unicast IP address suffix.
-        public override SuffixOrigin SuffixOrigin { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override SuffixOrigin SuffixOrigin
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         public override IPAddress IPv4Mask
         {
@@ -56,6 +107,9 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        public override int PrefixLength { get { return _prefixLength; } }
+        public override int PrefixLength
+        {
+            get { return _prefixLength; }
+        }
     }
 }

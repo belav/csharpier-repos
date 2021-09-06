@@ -16,16 +16,16 @@ namespace ILCompiler
     public enum MethodProfilingDataFlags
     {
         // Important: update toolbox\ibcmerge\ibcmerge.cs if you change these
-        ReadMethodCode = 0,  // 0x00001  // Also means the method was executed
-        ReadMethodDesc = 1,  // 0x00002
-        RunOnceMethod = 2,  // 0x00004
-        RunNeverMethod = 3,  // 0x00008
-                             //  MethodStoredDataAccess        = 4,  // 0x00010  // obsolete
-        WriteMethodDesc = 5,  // 0x00020
-                              //  ReadFCallHash                 = 6,  // 0x00040  // obsolete
-        ReadGCInfo = 7,  // 0x00080
-        CommonReadGCInfo = 8,  // 0x00100
-                               //  ReadMethodDefRidMap           = 9,  // 0x00200  // obsolete
+        ReadMethodCode = 0, // 0x00001  // Also means the method was executed
+        ReadMethodDesc = 1, // 0x00002
+        RunOnceMethod = 2, // 0x00004
+        RunNeverMethod = 3, // 0x00008
+        //  MethodStoredDataAccess        = 4,  // 0x00010  // obsolete
+        WriteMethodDesc = 5, // 0x00020
+        //  ReadFCallHash                 = 6,  // 0x00040  // obsolete
+        ReadGCInfo = 7, // 0x00080
+        CommonReadGCInfo = 8, // 0x00100
+        //  ReadMethodDefRidMap           = 9,  // 0x00200  // obsolete
         ReadCerMethodList = 10, // 0x00400
         ReadMethodPrecode = 11, // 0x00800
         WriteMethodPrecode = 12, // 0x01000
@@ -36,8 +36,14 @@ namespace ILCompiler
 
     public class MethodProfileData
     {
-        public MethodProfileData(MethodDesc method, MethodProfilingDataFlags flags, double exclusiveWeight, Dictionary<MethodDesc, int> callWeights, uint scenarioMask, PgoSchemaElem[] schemaData)
-        {
+        public MethodProfileData(
+            MethodDesc method,
+            MethodProfilingDataFlags flags,
+            double exclusiveWeight,
+            Dictionary<MethodDesc, int> callWeights,
+            uint scenarioMask,
+            PgoSchemaElem[] schemaData
+        ) {
             if (method == null)
                 throw new ArgumentNullException("method");
 
@@ -64,8 +70,11 @@ namespace ILCompiler
         public abstract IEnumerable<MethodProfileData> GetAllMethodProfileData();
         public abstract byte[] GetMethodBlockCount(MethodDesc m);
 
-        public static void MergeProfileData(ref bool partialNgen, Dictionary<MethodDesc, MethodProfileData> mergedProfileData, ProfileData profileData)
-        {
+        public static void MergeProfileData(
+            ref bool partialNgen,
+            Dictionary<MethodDesc, MethodProfileData> mergedProfileData,
+            ProfileData profileData
+        ) {
             if (profileData.PartialNGen)
                 partialNgen = true;
 
@@ -111,9 +120,18 @@ namespace ILCompiler
                         // Actually merge
                         schemaElemMergerArray[0] = dataToMerge.SchemaData;
                         schemaElemMergerArray[1] = data.SchemaData;
-                        mergedSchemaData = PgoProcessor.Merge<TypeSystemEntityOrUnknown>(schemaElemMergerArray);
+                        mergedSchemaData = PgoProcessor.Merge<TypeSystemEntityOrUnknown>(
+                            schemaElemMergerArray
+                        );
                     }
-                    mergedProfileData[data.Method] = new MethodProfileData(data.Method, dataToMerge.Flags | data.Flags, data.ExclusiveWeight + dataToMerge.ExclusiveWeight, mergedCallWeights, dataToMerge.ScenarioMask | data.ScenarioMask, mergedSchemaData);
+                    mergedProfileData[data.Method] = new MethodProfileData(
+                        data.Method,
+                        dataToMerge.Flags | data.Flags,
+                        data.ExclusiveWeight + dataToMerge.ExclusiveWeight,
+                        mergedCallWeights,
+                        dataToMerge.ScenarioMask | data.ScenarioMask,
+                        mergedSchemaData
+                    );
                 }
                 else
                 {
@@ -127,9 +145,7 @@ namespace ILCompiler
     {
         private static readonly EmptyProfileData s_singleton = new EmptyProfileData();
 
-        private EmptyProfileData()
-        {
-        }
+        private EmptyProfileData() { }
 
         public override bool PartialNGen => false;
 

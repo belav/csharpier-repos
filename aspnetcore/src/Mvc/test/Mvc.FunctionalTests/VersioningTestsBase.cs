@@ -12,11 +12,14 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public abstract class VersioningTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+    public abstract class VersioningTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
+        where TStartup : class
     {
         protected VersioningTestsBase(MvcTestFixture<TStartup> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -34,7 +37,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AttributeRoutedAction_WithVersionedRoutes_IsNotAmbiguous(string version)
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Addresses?version=" + version);
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/api/Addresses?version=" + version
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -53,11 +59,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("1")]
         [InlineData("2")]
-        public async Task AttributeRoutedAction_WithAmbiguousVersionedRoutes_CanBeDisambiguatedUsingOrder(string version)
-        {
+        public async Task AttributeRoutedAction_WithAmbiguousVersionedRoutes_CanBeDisambiguatedUsingOrder(
+            string version
+        ) {
             // Arrange
             var query = "?version=" + version;
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Addresses/All" + query);
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/api/Addresses/All" + query
+            );
 
             // Act
 
@@ -99,7 +109,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachV1Operations_OnTheSameController_WithVersionSpecified()
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Tickets?version=2");
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Tickets?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -137,7 +150,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheSameController_WithVersionSpecified()
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Tickets/5?version=2");
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Tickets/5?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -152,19 +168,21 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("GetById", result.Action);
             Assert.NotEmpty(result.RouteValues);
 
-            Assert.Contains(
-               new KeyValuePair<string, object>("id", "5"),
-               result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("id", "5"), result.RouteValues);
         }
 
         [Theory]
         [InlineData("2")]
         [InlineData("3")]
         [InlineData("4")]
-        public async Task VersionedApi_CanReachOtherVersionOperations_OnTheSameController(string version)
-        {
+        public async Task VersionedApi_CanReachOtherVersionOperations_OnTheSameController(
+            string version
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Tickets?version=" + version);
+            var message = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Tickets?version=" + version
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -179,9 +197,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Post", result.Action);
             Assert.NotEmpty(result.RouteValues);
 
-            Assert.DoesNotContain(
-               new KeyValuePair<string, object>("id", "5"),
-               result.RouteValues);
+            Assert.DoesNotContain(new KeyValuePair<string, object>("id", "5"), result.RouteValues);
         }
 
         [Fact]
@@ -210,10 +226,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachOtherVersionOperationsWithParameters_OnTheSameController(
             string method,
             string action,
-            string version)
-        {
+            string version
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Tickets/5?version=" + version);
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/Tickets/5?version=" + version
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -228,18 +247,20 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(action, result.Action);
             Assert.NotEmpty(result.RouteValues);
 
-            Assert.Contains(
-               new KeyValuePair<string, object>("id", "5"),
-               result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("id", "5"), result.RouteValues);
         }
 
         [Theory]
         [InlineData("PUT")]
         [InlineData("DELETE")]
-        public async Task VersionedApi_CanNotReachOtherVersionOperationsWithParameters_OnTheSameController_WithNoVersionSpecified(string method)
-        {
+        public async Task VersionedApi_CanNotReachOtherVersionOperationsWithParameters_OnTheSameController_WithNoVersionSpecified(
+            string method
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Tickets/5");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/Tickets/5"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -255,10 +276,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("3")]
         [InlineData("4")]
         [InlineData("5")]
-        public async Task VersionedApi_CanUseOrderToDisambiguate_OverlappingVersionRanges(string version)
-        {
+        public async Task VersionedApi_CanUseOrderToDisambiguate_OverlappingVersionRanges(
+            string version
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Books?version=" + version);
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Books?version=" + version
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -277,10 +302,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("1")]
         [InlineData("2")]
         [InlineData("6")]
-        public async Task VersionedApi_OverlappingVersionRanges_FallsBackToLowerOrderAction(string version)
-        {
+        public async Task VersionedApi_OverlappingVersionRanges_FallsBackToLowerOrderAction(
+            string version
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Books?version=" + version);
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Books?version=" + version
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -295,12 +324,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Get", result.Action);
         }
 
-
         [Theory]
         [InlineData("GET", "Get")]
         [InlineData("POST", "Post")]
-        public async Task VersionedApi_CanReachV1Operations_OnTheOriginalController_WithNoVersionSpecified(string method, string action)
-        {
+        public async Task VersionedApi_CanReachV1Operations_OnTheOriginalController_WithNoVersionSpecified(
+            string method,
+            string action
+        ) {
             // Arrange
             var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Movies");
 
@@ -320,10 +350,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("GET", "Get")]
         [InlineData("POST", "Post")]
-        public async Task VersionedApi_CanReachV1Operations_OnTheOriginalController_WithVersionSpecified(string method, string action)
-        {
+        public async Task VersionedApi_CanReachV1Operations_OnTheOriginalController_WithVersionSpecified(
+            string method,
+            string action
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Movies?version=2");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/Movies?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -342,10 +377,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("GET", "GetById")]
         [InlineData("PUT", "Put")]
         [InlineData("DELETE", "Delete")]
-        public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheOriginalController(string method, string action)
-        {
+        public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheOriginalController(
+            string method,
+            string action
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Movies/5");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/Movies/5"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -363,10 +403,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("GET", "GetById")]
         [InlineData("DELETE", "Delete")]
-        public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheOriginalController_WithVersionSpecified(string method, string action)
-        {
+        public async Task VersionedApi_CanReachV1OperationsWithParameters_OnTheOriginalController_WithVersionSpecified(
+            string method,
+            string action
+        ) {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Movies/5?version=2");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/Movies/5?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -385,7 +430,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task VersionedApi_CanReachOtherVersionOperationsWithParameters_OnTheV2Controller()
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Put, "http://localhost/Movies/5?version=2");
+            var message = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://localhost/Movies/5?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -404,8 +452,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("v1/Pets")]
         [InlineData("v2/Pets")]
-        public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnTheSameAction(string url)
-        {
+        public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnTheSameAction(
+            string url
+        ) {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/" + url);
 
@@ -425,8 +474,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("v1/Pets/5", "V1")]
         [InlineData("v2/Pets/5", "V2")]
-        public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnDifferentActions(string url, string version)
-        {
+        public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnDifferentActions(
+            string url,
+            string version
+        ) {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/" + url);
 
@@ -446,8 +497,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("v1/Pets", "V1")]
         [InlineData("v2/Pets", "V2")]
-        public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnDifferentActions_WithInlineConstraint(string url, string version)
-        {
+        public async Task VersionedApi_CanHaveTwoRoutesWithVersionOnTheUrl_OnDifferentActions_WithInlineConstraint(
+            string url,
+            string version
+        ) {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Post, "http://localhost/" + url);
 
@@ -470,8 +523,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("Customers/5", "?version=3", "GetV3ToV5")]
         [InlineData("Customers/5", "?version=4", "GetV3ToV5")]
         [InlineData("Customers/5", "?version=5", "GetV3ToV5")]
-        public async Task VersionedApi_CanProvideVersioningInformation_UsingPlainActionConstraint(string url, string query, string actionName)
-        {
+        public async Task VersionedApi_CanProvideVersioningInformation_UsingPlainActionConstraint(
+            string url,
+            string query,
+            string actionName
+        ) {
             // Arrange
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/" + url + query);
 
@@ -492,7 +548,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task VersionedApi_ConstraintOrder_IsRespected()
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Post, "http://localhost/" + "Customers?version=2");
+            var message = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/" + "Customers?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -511,7 +570,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task VersionedApi_CanUseConstraintOrder_ToChangeSelectedAction()
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Delete, "http://localhost/" + "Customers/5?version=2");
+            var message = new HttpRequestMessage(
+                HttpMethod.Delete,
+                "http://localhost/" + "Customers/5?version=2"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -529,8 +591,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("1")]
         [InlineData("2")]
-        public async Task VersionedApi_MultipleVersionsUsingAttributeRouting_OnTheSameMethod(string version)
-        {
+        public async Task VersionedApi_MultipleVersionsUsingAttributeRouting_OnTheSameMethod(
+            string version
+        ) {
             // Arrange
             var path = "/" + version + "/Vouchers?version=" + version;
             var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost" + path);

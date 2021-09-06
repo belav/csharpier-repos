@@ -8,8 +8,12 @@ namespace Internal.CommandLine
 {
     public abstract class Argument
     {
-        internal Argument(ArgumentCommand command, IEnumerable<string> names, bool isOption, bool isRequired)
-        {
+        internal Argument(
+            ArgumentCommand command,
+            IEnumerable<string> names,
+            bool isOption,
+            bool isRequired
+        ) {
             var nameArray = names.ToArray();
             Command = command;
             Name = nameArray.First();

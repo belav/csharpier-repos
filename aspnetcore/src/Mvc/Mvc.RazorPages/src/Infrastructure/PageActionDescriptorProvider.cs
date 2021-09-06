@@ -31,14 +31,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public PageActionDescriptorProvider(
             IEnumerable<IPageRouteModelProvider> pageRouteModelProviders,
             IOptions<MvcOptions> mvcOptionsAccessor,
-            IOptions<RazorPagesOptions> pagesOptionsAccessor)
-        {
+            IOptions<RazorPagesOptions> pagesOptionsAccessor
+        ) {
             _routeModelProviders = pageRouteModelProviders.OrderBy(p => p.Order).ToArray();
             _mvcOptions = mvcOptionsAccessor.Value;
 
-            _conventions = pagesOptionsAccessor.Value.Conventions
-                .OfType<IPageRouteModelConvention>()
-                .ToArray();
+            _conventions =
+                pagesOptionsAccessor.Value.Conventions.OfType<IPageRouteModelConvention>()
+                    .ToArray();
         }
 
         /// <inheritdoc/>
@@ -77,9 +77,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         }
 
         /// <inheritdoc/>
-        public void OnProvidersExecuted(ActionDescriptorProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
 
         private void AddActionDescriptors(IList<ActionDescriptor> actions, PageRouteModel model)
         {
@@ -99,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         Name = selector.AttributeRouteModel.Name,
                         Order = selector.AttributeRouteModel.Order ?? 0,
                         Template = TransformPageRoute(model, selector),
-                        SuppressLinkGeneration = selector.AttributeRouteModel.SuppressLinkGeneration,
+                        SuppressLinkGeneration =
+                            selector.AttributeRouteModel.SuppressLinkGeneration,
                         SuppressPathMatching = selector.AttributeRouteModel.SuppressPathMatching,
                     },
                     DisplayName = $"Page: {model.ViewEnginePath}",
@@ -135,7 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 return selectorModel.AttributeRouteModel.Template;
             }
 
-            var pageRouteMetadata = selectorModel.EndpointMetadata.OfType<PageRouteMetadata>().SingleOrDefault();
+            var pageRouteMetadata = selectorModel.EndpointMetadata.OfType<PageRouteMetadata>()
+                .SingleOrDefault();
             if (pageRouteMetadata == null)
             {
                 // Selector does not have expected metadata
@@ -153,7 +153,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var transformedPageRoute = string.Join("/", segments);
 
             // Combine transformed page route with template
-            return AttributeRouteModel.CombineTemplates(transformedPageRoute, pageRouteMetadata.RouteTemplate);
+            return AttributeRouteModel.CombineTemplates(
+                transformedPageRoute,
+                pageRouteMetadata.RouteTemplate
+            );
         }
     }
 }

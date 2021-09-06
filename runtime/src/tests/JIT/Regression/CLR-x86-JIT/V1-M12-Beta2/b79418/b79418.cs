@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 
 public class PInvokeTest
 {
-
     static String foo = "foo";
     static String bar = "bar";
 

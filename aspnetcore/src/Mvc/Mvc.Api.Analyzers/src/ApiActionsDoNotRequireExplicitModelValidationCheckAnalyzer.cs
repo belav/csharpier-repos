@@ -13,130 +13,155 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : DiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(
-            ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(
+                ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck
+            );
 
         public override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-            context.RegisterCompilationStartAction(compilationStartAnalysisContext =>
-            {
-                if (!ApiControllerSymbolCache.TryCreate(compilationStartAnalysisContext.Compilation, out var symbolCache))
+            context.RegisterCompilationStartAction(
+                compilationStartAnalysisContext =>
                 {
-                    // No-op if we can't find types we care about.
-                    return;
-                }
+                    if (
+                        !ApiControllerSymbolCache.TryCreate(
+                            compilationStartAnalysisContext.Compilation,
+                            out var symbolCache
+                        )
+                    ) {
+                        // No-op if we can't find types we care about.
+                        return;
+                    }
 
-                InitializeWorker(compilationStartAnalysisContext, symbolCache);
-            });
+                    InitializeWorker(compilationStartAnalysisContext, symbolCache);
+                }
+            );
         }
 
-        private void InitializeWorker(CompilationStartAnalysisContext context, ApiControllerSymbolCache symbolCache)
-        {
-            context.RegisterOperationAction(operationAnalysisContext =>
-            {
-                var ifOperation = (IConditionalOperation)operationAnalysisContext.Operation;
-                if (!(ifOperation.Syntax is IfStatementSyntax ifStatement))
+        private void InitializeWorker(
+            CompilationStartAnalysisContext context,
+            ApiControllerSymbolCache symbolCache
+        ) {
+            context.RegisterOperationAction(
+                operationAnalysisContext =>
                 {
-                    return;
-                }
+                    var ifOperation = (IConditionalOperation)operationAnalysisContext.Operation;
+                    if (!(ifOperation.Syntax is IfStatementSyntax ifStatement))
+                    {
+                        return;
+                    }
 
-                if (ifOperation.WhenTrue == null || ifOperation.WhenFalse != null)
-                {
-                    // We only support expressions of the format
-                    // if (!ModelState.IsValid)
-                    // or
-                    // if (ModelState.IsValid == false)
-                    // If the conditional is missing a true condition or has an else expression, skip this operation.
-                    return;
-                }
+                    if (ifOperation.WhenTrue == null || ifOperation.WhenFalse != null)
+                    {
+                        // We only support expressions of the format
+                        // if (!ModelState.IsValid)
+                        // or
+                        // if (ModelState.IsValid == false)
+                        // If the conditional is missing a true condition or has an else expression, skip this operation.
+                        return;
+                    }
 
-                var parent = ifOperation.Parent;
-                if (parent == null)
-                {
-                    // No parent, nothing to do
-                    return;
-                }
+                    var parent = ifOperation.Parent;
+                    if (parent == null)
+                    {
+                        // No parent, nothing to do
+                        return;
+                    }
 
-                if (parent.Kind == OperationKind.Block && parent.Parent != null)
-                {
-                    parent = parent.Parent;
-                }
+                    if (parent.Kind == OperationKind.Block && parent.Parent != null)
+                    {
+                        parent = parent.Parent;
+                    }
 
-                if (parent.Kind != OperationKind.MethodBodyOperation)
-                {
-                    // Only support top-level ModelState IsValid checks.
-                    return;
-                }
+                    if (parent.Kind != OperationKind.MethodBodyOperation)
+                    {
+                        // Only support top-level ModelState IsValid checks.
+                        return;
+                    }
 
-                var trueStatement = UnwrapSingleStatementBlock(ifOperation.WhenTrue);
-                if (trueStatement.Kind != OperationKind.Return)
-                {
-                    // We need to verify that the if statement does a ModelState.IsValid check and that the block inside contains
-                    // a single return statement returning a 400. We'l get to it in just a bit
-                    return;
-                }
+                    var trueStatement = UnwrapSingleStatementBlock(ifOperation.WhenTrue);
+                    if (trueStatement.Kind != OperationKind.Return)
+                    {
+                        // We need to verify that the if statement does a ModelState.IsValid check and that the block inside contains
+                        // a single return statement returning a 400. We'l get to it in just a bit
+                        return;
+                    }
 
-                if (!(parent.Syntax is MethodDeclarationSyntax methodSyntax))
-                {
-                    return;
-                }
+                    if (!(parent.Syntax is MethodDeclarationSyntax methodSyntax))
+                    {
+                        return;
+                    }
 
 #pragma warning disable RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer
-                var semanticModel = operationAnalysisContext.Compilation.GetSemanticModel(methodSyntax.SyntaxTree);
+                    var semanticModel = operationAnalysisContext.Compilation.GetSemanticModel(
+                        methodSyntax.SyntaxTree
+                    );
 #pragma warning restore RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer
-                var methodSymbol = semanticModel.GetDeclaredSymbol(methodSyntax, operationAnalysisContext.CancellationToken);
+                    var methodSymbol = semanticModel.GetDeclaredSymbol(
+                        methodSyntax,
+                        operationAnalysisContext.CancellationToken
+                    );
 
-                if (!ApiControllerFacts.IsApiControllerAction(symbolCache, methodSymbol))
-                {
-                    // Not a ApiController. Nothing to do here.
-                    return;
-                }
+                    if (!ApiControllerFacts.IsApiControllerAction(symbolCache, methodSymbol))
+                    {
+                        // Not a ApiController. Nothing to do here.
+                        return;
+                    }
 
-                if (!IsModelStateIsValidCheck(symbolCache, ifOperation.Condition))
-                {
-                    return;
-                }
+                    if (!IsModelStateIsValidCheck(symbolCache, ifOperation.Condition))
+                    {
+                        return;
+                    }
 
-                var returnOperation = (IReturnOperation)trueStatement;
+                    var returnOperation = (IReturnOperation)trueStatement;
 
-                var returnValue = returnOperation.ReturnedValue;
-                if (returnValue == null ||
-                    !symbolCache.IActionResult.IsAssignableFrom(returnValue.Type))
-                {
-                    return;
-                }
+                    var returnValue = returnOperation.ReturnedValue;
+                    if (
+                        returnValue == null
+                        || !symbolCache.IActionResult.IsAssignableFrom(returnValue.Type)
+                    ) {
+                        return;
+                    }
 
-                var returnStatementSyntax = (ReturnStatementSyntax)returnOperation.Syntax;
-                var actualMetadata = ActualApiResponseMetadataFactory.InspectReturnStatementSyntax(
-                    symbolCache,
-                    semanticModel,
-                    returnStatementSyntax,
-                    operationAnalysisContext.CancellationToken);
+                    var returnStatementSyntax = (ReturnStatementSyntax)returnOperation.Syntax;
+                    var actualMetadata =
+                        ActualApiResponseMetadataFactory.InspectReturnStatementSyntax(
+                            symbolCache,
+                            semanticModel,
+                            returnStatementSyntax,
+                            operationAnalysisContext.CancellationToken
+                        );
 
-                if (actualMetadata == null || actualMetadata.Value.StatusCode != 400)
-                {
-                    return;
-                }
+                    if (actualMetadata == null || actualMetadata.Value.StatusCode != 400)
+                    {
+                        return;
+                    }
 
-                var additionalLocations = new[]
-                {
-                    ifStatement.GetLocation(),
-                    returnStatementSyntax.GetLocation(),
-                };
-
-                operationAnalysisContext.ReportDiagnostic(
-                    Diagnostic.Create(
-                        ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck,
+                    var additionalLocations = new[]
+                    {
                         ifStatement.GetLocation(),
-                        additionalLocations: additionalLocations));
-            }, OperationKind.Conditional);
+                        returnStatementSyntax.GetLocation(),
+                    };
+
+                    operationAnalysisContext.ReportDiagnostic(
+                        Diagnostic.Create(
+                            ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck,
+                            ifStatement.GetLocation(),
+                            additionalLocations: additionalLocations
+                        )
+                    );
+                },
+                OperationKind.Conditional
+            );
         }
 
-        private bool IsModelStateIsValidCheck(in ApiControllerSymbolCache symbolCache, IOperation condition)
-        {
+        private bool IsModelStateIsValidCheck(
+            in ApiControllerSymbolCache symbolCache,
+            IOperation condition
+        ) {
             switch (condition.Kind)
             {
                 case OperationKind.UnaryOperator:
@@ -148,14 +173,34 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     if (binaryOperation.OperatorKind == BinaryOperatorKind.Equals)
                     {
                         // (ModelState.IsValid == false) OR (false == ModelState.IsValid)
-                        return EvaluateBinaryOperator(symbolCache, binaryOperation.LeftOperand, binaryOperation.RightOperand, false) ||
-                            EvaluateBinaryOperator(symbolCache, binaryOperation.RightOperand, binaryOperation.LeftOperand, false);
+                        return EvaluateBinaryOperator(
+                                symbolCache,
+                                binaryOperation.LeftOperand,
+                                binaryOperation.RightOperand,
+                                false
+                            )
+                            || EvaluateBinaryOperator(
+                                symbolCache,
+                                binaryOperation.RightOperand,
+                                binaryOperation.LeftOperand,
+                                false
+                            );
                     }
                     else if (binaryOperation.OperatorKind == BinaryOperatorKind.NotEquals)
                     {
                         // (ModelState.IsValid != true) OR (true != ModelState.IsValid)
-                        return EvaluateBinaryOperator(symbolCache, binaryOperation.LeftOperand, binaryOperation.RightOperand, true) ||
-                            EvaluateBinaryOperator(symbolCache, binaryOperation.RightOperand, binaryOperation.LeftOperand, true);
+                        return EvaluateBinaryOperator(
+                                symbolCache,
+                                binaryOperation.LeftOperand,
+                                binaryOperation.RightOperand,
+                                true
+                            )
+                            || EvaluateBinaryOperator(
+                                symbolCache,
+                                binaryOperation.RightOperand,
+                                binaryOperation.LeftOperand,
+                                true
+                            );
                     }
                     return false;
 
@@ -168,26 +213,29 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             in ApiControllerSymbolCache symbolCache,
             IOperation operation,
             IOperation otherOperation,
-            bool expectedConstantValue)
-        {
+            bool expectedConstantValue
+        ) {
             if (operation.Kind != OperationKind.Literal)
             {
                 return false;
             }
 
             var constantValue = ((ILiteralOperation)operation).ConstantValue;
-            if (!constantValue.HasValue ||
-                !(constantValue.Value is bool boolConstantValue) ||
-                boolConstantValue != expectedConstantValue)
-            {
+            if (
+                !constantValue.HasValue
+                || !(constantValue.Value is bool boolConstantValue)
+                || boolConstantValue != expectedConstantValue
+            ) {
                 return false;
             }
 
             return IsModelStateIsValidPropertyAccessor(symbolCache, otherOperation);
         }
 
-        private static bool IsModelStateIsValidPropertyAccessor(in ApiControllerSymbolCache symbolCache, IOperation operation)
-        {
+        private static bool IsModelStateIsValidPropertyAccessor(
+            in ApiControllerSymbolCache symbolCache,
+            IOperation operation
+        ) {
             if (operation.Kind != OperationKind.PropertyReference)
             {
                 return false;
@@ -199,8 +247,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return false;
             }
 
-            if (!SymbolEqualityComparer.Default.Equals(propertyReference.Member.ContainingType, symbolCache.ModelStateDictionary))
-            {
+            if (
+                !SymbolEqualityComparer.Default.Equals(
+                    propertyReference.Member.ContainingType,
+                    symbolCache.ModelStateDictionary
+                )
+            ) {
                 return false;
             }
 
@@ -210,7 +262,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return false;
             }
 
-            var modelStatePropertyReference = (IPropertyReferenceOperation)propertyReference.Instance;
+            var modelStatePropertyReference =
+                (IPropertyReferenceOperation)propertyReference.Instance;
             if (modelStatePropertyReference.Instance?.Kind != OperationKind.InstanceReference)
             {
                 return false;
@@ -221,9 +274,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         private static IOperation UnwrapSingleStatementBlock(IOperation statement)
         {
-            return statement is IBlockOperation block && block.Operations.Length == 1 ?
-                block.Operations[0] :
-                statement;
+            return statement is IBlockOperation block && block.Operations.Length == 1
+                ? block.Operations[0]
+                : statement;
         }
     }
 }

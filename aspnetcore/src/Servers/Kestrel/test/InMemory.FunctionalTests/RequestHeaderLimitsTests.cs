@@ -22,12 +22,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData(5, 0)]
         [InlineData(5, 1)]
         [InlineData(5, 1337)]
-        public async Task ServerAcceptsRequestWithHeaderTotalSizeWithinLimit(int headerCount, int extraLimit)
-        {
+        public async Task ServerAcceptsRequestWithHeaderTotalSizeWithinLimit(
+            int headerCount,
+            int extraLimit
+        ) {
             var headers = MakeHeaders(headerCount);
 
-            await using (var server = CreateServer(maxRequestHeadersTotalSize: headers.Length + extraLimit))
-            {
+            await using (
+                var server = CreateServer(maxRequestHeadersTotalSize: headers.Length + extraLimit)
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.Send($"GET / HTTP/1.1\r\n{headers}\r\n");
@@ -40,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "hello, world",
                         "0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -54,8 +58,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData(5, 5)]
         [InlineData(5, 6)]
         [InlineData(5, 1337)]
-        public async Task ServerAcceptsRequestWithHeaderCountWithinLimit(int headerCount, int maxHeaderCount)
-        {
+        public async Task ServerAcceptsRequestWithHeaderCountWithinLimit(
+            int headerCount,
+            int maxHeaderCount
+        ) {
             var headers = MakeHeaders(headerCount);
 
             await using (var server = CreateServer(maxRequestHeaderCount: maxHeaderCount))
@@ -72,7 +78,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "hello, world",
                         "0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -95,7 +102,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -104,8 +112,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [InlineData(2, 1)]
         [InlineData(5, 1)]
         [InlineData(5, 4)]
-        public async Task ServerRejectsRequestWithHeaderCountOverLimit(int headerCount, int maxHeaderCount)
-        {
+        public async Task ServerRejectsRequestWithHeaderCountOverLimit(
+            int headerCount,
+            int maxHeaderCount
+        ) {
             var headers = MakeHeaders(headerCount);
 
             await using (var server = CreateServer(maxRequestHeaderCount: maxHeaderCount))
@@ -119,7 +129,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -127,16 +138,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private static string MakeHeaders(int count)
         {
             const string host = "Host:\r\n";
-            if (count <= 1) return host;
+            if (count <= 1)
+                return host;
 
-            return string.Join("", new[] { host }
-                .Concat(Enumerable
-                .Range(0, count -1)
-                .Select(i => $"Header-{i}: value{i}\r\n")));
+            return string.Join(
+                "",
+                new[] { host }.Concat(
+                    Enumerable.Range(0, count - 1).Select(i => $"Header-{i}: value{i}\r\n")
+                )
+            );
         }
 
-        private TestServer CreateServer(int? maxRequestHeaderCount = null, int? maxRequestHeadersTotalSize = null)
-        {
+        private TestServer CreateServer(
+            int? maxRequestHeaderCount = null,
+            int? maxRequestHeadersTotalSize = null
+        ) {
             var options = new KestrelServerOptions { AddServerHeader = false };
 
             if (maxRequestHeaderCount.HasValue)
@@ -149,10 +165,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 options.Limits.MaxRequestHeadersTotalSize = maxRequestHeadersTotalSize.Value;
             }
 
-            return new TestServer(async httpContext => await httpContext.Response.WriteAsync("hello, world"), new TestServiceContext(LoggerFactory)
-            {
-                ServerOptions = options
-            });
+            return new TestServer(
+                async httpContext => await httpContext.Response.WriteAsync("hello, world"),
+                new TestServiceContext(LoggerFactory) { ServerOptions = options }
+            );
         }
     }
 }

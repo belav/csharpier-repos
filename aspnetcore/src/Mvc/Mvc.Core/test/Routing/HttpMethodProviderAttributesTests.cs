@@ -13,13 +13,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         [MemberData(nameof(HttpMethodProviderTestData))]
         public void HttpMethodProviderAttributes_ReturnsCorrectHttpMethodSequence(
             IActionHttpMethodProvider httpMethodProvider,
-            IEnumerable<string> expectedHttpMethods)
-        {
+            IEnumerable<string> expectedHttpMethods
+        ) {
             // Act & Assert
             Assert.Equal(expectedHttpMethods, httpMethodProvider.HttpMethods);
         }
 
-        public static TheoryData<IActionHttpMethodProvider, IEnumerable<string>> HttpMethodProviderTestData
+        public static TheoryData<
+            IActionHttpMethodProvider,
+            IEnumerable<string>
+        > HttpMethodProviderTestData
         {
             get
             {
@@ -31,7 +34,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 data.Add(new HttpDeleteAttribute(), new[] { "DELETE" });
                 data.Add(new HttpHeadAttribute(), new[] { "HEAD" });
                 data.Add(new HttpOptionsAttribute(), new[] { "OPTIONS" });
-                data.Add(new AcceptVerbsAttribute("MERGE", "OPTIONS"), new[] { "MERGE", "OPTIONS" });
+                data.Add(
+                    new AcceptVerbsAttribute("MERGE", "OPTIONS"),
+                    new[] { "MERGE", "OPTIONS" }
+                );
 
                 return data;
             }

@@ -36,10 +36,7 @@ namespace System.Text
                 // We don't want to do this because it violates the invariants we have set for the sealed type.
                 // Instead, we'll create a new instance of the base ASCIIEncoding type and mark it mutable.
 
-                return new ASCIIEncoding()
-                {
-                    IsReadOnly = false
-                };
+                return new ASCIIEncoding() { IsReadOnly = false };
             }
         }
 
@@ -47,9 +44,7 @@ namespace System.Text
         // The initialization code will not be run until a static member of the class is referenced
         internal static readonly ASCIIEncodingSealed s_default = new ASCIIEncodingSealed();
 
-        public ASCIIEncoding() : base(Encoding.CodePageASCII)
-        {
-        }
+        public ASCIIEncoding() : base(Encoding.CodePageASCII) { }
 
         internal sealed override void SetDefaultFallbacks()
         {
@@ -81,17 +76,26 @@ namespace System.Text
 
             if (chars is null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.chars, ExceptionResource.ArgumentNull_Array);
+                ThrowHelper.ThrowArgumentNullException(
+                    ExceptionArgument.chars,
+                    ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((index | count) < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException((index < 0) ? ExceptionArgument.index : ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    (index < 0) ? ExceptionArgument.index : ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (chars!.Length - index < count)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.chars, ExceptionResource.ArgumentOutOfRange_IndexCountBuffer);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.chars,
+                    ExceptionResource.ArgumentOutOfRange_IndexCountBuffer
+                );
             }
 
             fixed (char* pChars = chars)
@@ -136,7 +140,10 @@ namespace System.Text
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return GetByteCountCommon(chars, count);
@@ -159,11 +166,19 @@ namespace System.Text
             // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
 
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
-            Debug.Assert(pChars != null || charCount == 0, "Input pointer shouldn't be null if non-zero length specified.");
+            Debug.Assert(
+                pChars != null || charCount == 0,
+                "Input pointer shouldn't be null if non-zero length specified."
+            );
 
             // First call into the fast path.
 
-            int totalByteCount = GetByteCountFast(pChars, charCount, EncoderFallback, out int charsConsumed);
+            int totalByteCount = GetByteCountFast(
+                pChars,
+                charCount,
+                EncoderFallback,
+                out int charsConsumed
+            );
 
             if (charsConsumed != charCount)
             {
@@ -182,8 +197,12 @@ namespace System.Text
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // called directly by GetByteCountCommon
-        private protected sealed override unsafe int GetByteCountFast(char* pChars, int charsLength, EncoderFallback? fallback, out int charsConsumed)
-        {
+        private protected sealed override unsafe int GetByteCountFast(
+            char* pChars,
+            int charsLength,
+            EncoderFallback? fallback,
+            out int charsConsumed
+        ) {
             // First: Can we short-circuit the entire calculation?
             // If an EncoderReplacementFallback is in use, all non-ASCII chars
             // (including surrogate halves) are replaced with the default string.
@@ -192,13 +211,19 @@ namespace System.Text
 
             int byteCount = charsLength;
 
-            if (!(fallback is EncoderReplacementFallback replacementFallback
-                && replacementFallback.MaxCharCount == 1
-                && replacementFallback.DefaultString[0] <= 0x7F))
-            {
+            if (
+                !(
+                    fallback is EncoderReplacementFallback replacementFallback
+                    && replacementFallback.MaxCharCount == 1
+                    && replacementFallback.DefaultString[0] <= 0x7F
+                )
+            ) {
                 // Unrecognized fallback mechanism - count chars manually.
 
-                byteCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiChar(pChars, (uint)charsLength);
+                byteCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiChar(
+                    pChars,
+                    (uint)charsLength
+                );
             }
 
             charsConsumed = byteCount;
@@ -210,39 +235,57 @@ namespace System.Text
         // So if you fix this, fix the others.  Currently those include:
         // EncodingNLS, UTF7Encoding, UTF8Encoding, UTF32Encoding, ASCIIEncoding, UnicodeEncoding
 
-        public override unsafe int GetBytes(string chars, int charIndex, int charCount,
-                                              byte[] bytes, int byteIndex)
-        {
+        public override unsafe int GetBytes(
+            string chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        ) {
             // Validate Parameters
 
             if (chars is null || bytes is null)
             {
                 ThrowHelper.ThrowArgumentNullException(
                     argument: (chars is null) ? ExceptionArgument.chars : ExceptionArgument.bytes,
-                    resource: ExceptionResource.ArgumentNull_Array);
+                    resource: ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((charIndex | charCount) < 0)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
-                    argument: (charIndex < 0) ? ExceptionArgument.charIndex : ExceptionArgument.charCount,
-                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    argument: (charIndex < 0)
+                        ? ExceptionArgument.charIndex
+                        : ExceptionArgument.charCount,
+                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (chars!.Length - charIndex < charCount)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.chars, ExceptionResource.ArgumentOutOfRange_IndexCount);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.chars,
+                    ExceptionResource.ArgumentOutOfRange_IndexCount
+                );
             }
 
             if ((uint)byteIndex > bytes!.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.byteIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.byteIndex,
+                    ExceptionResource.ArgumentOutOfRange_Index
+                );
             }
 
-            fixed (char* pChars = chars)
-            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)fixed (byte* pBytes = bytes)
             {
-                return GetBytesCommon(pChars + charIndex, charCount, pBytes + byteIndex, bytes.Length - byteIndex);
+                return GetBytesCommon(
+                    pChars + charIndex,
+                    charCount,
+                    pBytes + byteIndex,
+                    bytes.Length - byteIndex
+                );
             }
         }
 
@@ -260,39 +303,57 @@ namespace System.Text
         // EncodingNLS, UTF7Encoding, UTF8Encoding, UTF32Encoding, ASCIIEncoding, UnicodeEncoding
         // parent method is safe
 
-        public override unsafe int GetBytes(char[] chars, int charIndex, int charCount,
-                                               byte[] bytes, int byteIndex)
-        {
+        public override unsafe int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        ) {
             // Validate parameters
 
             if (chars is null || bytes is null)
             {
                 ThrowHelper.ThrowArgumentNullException(
                     argument: (chars is null) ? ExceptionArgument.chars : ExceptionArgument.bytes,
-                    resource: ExceptionResource.ArgumentNull_Array);
+                    resource: ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((charIndex | charCount) < 0)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
-                    argument: (charIndex < 0) ? ExceptionArgument.charIndex : ExceptionArgument.charCount,
-                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    argument: (charIndex < 0)
+                        ? ExceptionArgument.charIndex
+                        : ExceptionArgument.charCount,
+                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (chars!.Length - charIndex < charCount)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.chars, ExceptionResource.ArgumentOutOfRange_IndexCount);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.chars,
+                    ExceptionResource.ArgumentOutOfRange_IndexCount
+                );
             }
 
             if ((uint)byteIndex > bytes!.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.byteIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.byteIndex,
+                    ExceptionResource.ArgumentOutOfRange_Index
+                );
             }
 
-            fixed (char* pChars = chars)
-            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)fixed (byte* pBytes = bytes)
             {
-                return GetBytesCommon(pChars + charIndex, charCount, pBytes + byteIndex, bytes.Length - byteIndex);
+                return GetBytesCommon(
+                    pChars + charIndex,
+                    charCount,
+                    pBytes + byteIndex,
+                    bytes.Length - byteIndex
+                );
             }
         }
 
@@ -309,14 +370,18 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentNullException(
                     argument: (chars is null) ? ExceptionArgument.chars : ExceptionArgument.bytes,
-                    resource: ExceptionResource.ArgumentNull_Array);
+                    resource: ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((charCount | byteCount) < 0)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
-                    argument: (charCount < 0) ? ExceptionArgument.charCount : ExceptionArgument.byteCount,
-                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    argument: (charCount < 0)
+                        ? ExceptionArgument.charCount
+                        : ExceptionArgument.byteCount,
+                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return GetBytesCommon(chars, charCount, bytes, byteCount);
@@ -326,9 +391,9 @@ namespace System.Text
         {
             // It's ok for us to operate on null / empty spans.
 
-            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
-            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
-            {
+            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
+                byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
+            ) {
                 return GetBytesCommon(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -340,13 +405,25 @@ namespace System.Text
             // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
 
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
-            Debug.Assert(pChars != null || charCount == 0, "Input pointer shouldn't be null if non-zero length specified.");
+            Debug.Assert(
+                pChars != null || charCount == 0,
+                "Input pointer shouldn't be null if non-zero length specified."
+            );
             Debug.Assert(byteCount >= 0, "Caller shouldn't specify negative length buffer.");
-            Debug.Assert(pBytes != null || byteCount == 0, "Input pointer shouldn't be null if non-zero length specified.");
+            Debug.Assert(
+                pBytes != null || byteCount == 0,
+                "Input pointer shouldn't be null if non-zero length specified."
+            );
 
             // First call into the fast path.
 
-            int bytesWritten = GetBytesFast(pChars, charCount, pBytes, byteCount, out int charsConsumed);
+            int bytesWritten = GetBytesFast(
+                pChars,
+                charCount,
+                pBytes,
+                byteCount,
+                out int charsConsumed
+            );
 
             if (charsConsumed == charCount)
             {
@@ -358,37 +435,60 @@ namespace System.Text
             {
                 // Simple narrowing conversion couldn't operate on entire buffer - invoke fallback.
 
-                return GetBytesWithFallback(pChars, charCount, pBytes, byteCount, charsConsumed, bytesWritten);
+                return GetBytesWithFallback(
+                    pChars,
+                    charCount,
+                    pBytes,
+                    byteCount,
+                    charsConsumed,
+                    bytesWritten
+                );
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // called directly by GetBytesCommon
-        private protected sealed override unsafe int GetBytesFast(char* pChars, int charsLength, byte* pBytes, int bytesLength, out int charsConsumed)
-        {
-            int bytesWritten = (int)ASCIIUtility.NarrowUtf16ToAscii(pChars, pBytes, (uint)Math.Min(charsLength, bytesLength));
+        private protected sealed override unsafe int GetBytesFast(
+            char* pChars,
+            int charsLength,
+            byte* pBytes,
+            int bytesLength,
+            out int charsConsumed
+        ) {
+            int bytesWritten = (int)ASCIIUtility.NarrowUtf16ToAscii(
+                pChars,
+                pBytes,
+                (uint)Math.Min(charsLength, bytesLength)
+            );
 
             charsConsumed = bytesWritten;
             return bytesWritten;
         }
 
-        private protected sealed override unsafe int GetBytesWithFallback(ReadOnlySpan<char> chars, int originalCharsLength, Span<byte> bytes, int originalBytesLength, EncoderNLS? encoder)
-        {
+        private protected sealed override unsafe int GetBytesWithFallback(
+            ReadOnlySpan<char> chars,
+            int originalCharsLength,
+            Span<byte> bytes,
+            int originalBytesLength,
+            EncoderNLS? encoder
+        ) {
             // We special-case EncoderReplacementFallback if it's telling us to write a single ASCII char,
             // since we believe this to be relatively common and we can handle it more efficiently than
             // the base implementation.
 
-            if (((encoder is null) ? this.EncoderFallback : encoder.Fallback) is EncoderReplacementFallback replacementFallback
+            if (
+                ((encoder is null) ? this.EncoderFallback : encoder.Fallback)
+                    is EncoderReplacementFallback replacementFallback
                 && replacementFallback.MaxCharCount == 1
-                && replacementFallback.DefaultString[0] <= 0x7F)
-            {
+                && replacementFallback.DefaultString[0] <= 0x7F
+            ) {
                 byte replacementByte = (byte)replacementFallback.DefaultString[0];
 
                 int numElementsToConvert = Math.Min(chars.Length, bytes.Length);
                 int idx = 0;
 
-                fixed (char* pChars = &MemoryMarshal.GetReference(chars))
-                fixed (byte* pBytes = &MemoryMarshal.GetReference(bytes))
-                {
+                fixed (char* pChars = &MemoryMarshal.GetReference(chars))fixed (
+                    byte* pBytes = &MemoryMarshal.GetReference(bytes)
+                ) {
                     // In a loop, replace the non-convertible data, then bulk-convert as much as we can.
 
                     while (idx < numElementsToConvert)
@@ -397,10 +497,17 @@ namespace System.Text
 
                         if (idx < numElementsToConvert)
                         {
-                            idx += (int)ASCIIUtility.NarrowUtf16ToAscii(&pChars[idx], &pBytes[idx], (uint)(numElementsToConvert - idx));
+                            idx += (int)ASCIIUtility.NarrowUtf16ToAscii(
+                                &pChars[idx],
+                                &pBytes[idx],
+                                (uint)(numElementsToConvert - idx)
+                            );
                         }
 
-                        Debug.Assert(idx <= numElementsToConvert, "Somehow went beyond bounds of source or destination buffer?");
+                        Debug.Assert(
+                            idx <= numElementsToConvert,
+                            "Somehow went beyond bounds of source or destination buffer?"
+                        );
                     }
                 }
 
@@ -420,7 +527,13 @@ namespace System.Text
             }
             else
             {
-                return base.GetBytesWithFallback(chars, originalCharsLength, bytes, originalBytesLength, encoder);
+                return base.GetBytesWithFallback(
+                    chars,
+                    originalCharsLength,
+                    bytes,
+                    originalBytesLength,
+                    encoder
+                );
             }
         }
 
@@ -438,17 +551,26 @@ namespace System.Text
 
             if (bytes is null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.bytes, ExceptionResource.ArgumentNull_Array);
+                ThrowHelper.ThrowArgumentNullException(
+                    ExceptionArgument.bytes,
+                    ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((index | count) < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException((index < 0) ? ExceptionArgument.index : ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    (index < 0) ? ExceptionArgument.index : ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (bytes!.Length - index < count)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.bytes, ExceptionResource.ArgumentOutOfRange_IndexCountBuffer);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.bytes,
+                    ExceptionResource.ArgumentOutOfRange_IndexCountBuffer
+                );
             }
 
             fixed (byte* pBytes = bytes)
@@ -468,12 +590,18 @@ namespace System.Text
 
             if (bytes == null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.bytes, ExceptionResource.ArgumentNull_Array);
+                ThrowHelper.ThrowArgumentNullException(
+                    ExceptionArgument.bytes,
+                    ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return GetCharCountCommon(bytes, count);
@@ -496,11 +624,19 @@ namespace System.Text
             // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
 
             Debug.Assert(byteCount >= 0, "Caller shouldn't specify negative length buffer.");
-            Debug.Assert(pBytes != null || byteCount == 0, "Input pointer shouldn't be null if non-zero length specified.");
+            Debug.Assert(
+                pBytes != null || byteCount == 0,
+                "Input pointer shouldn't be null if non-zero length specified."
+            );
 
             // First call into the fast path.
 
-            int totalCharCount = GetCharCountFast(pBytes, byteCount, DecoderFallback, out int bytesConsumed);
+            int totalCharCount = GetCharCountFast(
+                pBytes,
+                byteCount,
+                DecoderFallback,
+                out int bytesConsumed
+            );
 
             if (bytesConsumed != byteCount)
             {
@@ -519,8 +655,12 @@ namespace System.Text
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // called directly by GetCharCountCommon
-        private protected sealed override unsafe int GetCharCountFast(byte* pBytes, int bytesLength, DecoderFallback? fallback, out int bytesConsumed)
-        {
+        private protected sealed override unsafe int GetCharCountFast(
+            byte* pBytes,
+            int bytesLength,
+            DecoderFallback? fallback,
+            out int bytesConsumed
+        ) {
             // First: Can we short-circuit the entire calculation?
             // If a DecoderReplacementFallback is in use, all non-ASCII bytes are replaced with
             // the default string. If the default string consists of a single BMP value, then we
@@ -528,11 +668,16 @@ namespace System.Text
 
             int charCount = bytesLength;
 
-            if (!(fallback is DecoderReplacementFallback replacementFallback) || replacementFallback.MaxCharCount != 1)
-            {
+            if (
+                !(fallback is DecoderReplacementFallback replacementFallback)
+                || replacementFallback.MaxCharCount != 1
+            ) {
                 // Unrecognized fallback mechanism - count bytes manually.
 
-                charCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiByte(pBytes, (uint)bytesLength);
+                charCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiByte(
+                    pBytes,
+                    (uint)bytesLength
+                );
             }
 
             bytesConsumed = charCount;
@@ -544,39 +689,57 @@ namespace System.Text
         // EncodingNLS, UTF7Encoding, UTF8Encoding, UTF32Encoding, ASCIIEncoding, UnicodeEncoding
         // parent method is safe
 
-        public override unsafe int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                                              char[] chars, int charIndex)
-        {
+        public override unsafe int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        ) {
             // Validate Parameters
 
             if (bytes is null || chars is null)
             {
                 ThrowHelper.ThrowArgumentNullException(
                     argument: (bytes is null) ? ExceptionArgument.bytes : ExceptionArgument.chars,
-                    resource: ExceptionResource.ArgumentNull_Array);
+                    resource: ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((byteIndex | byteCount) < 0)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
-                    argument: (byteIndex < 0) ? ExceptionArgument.byteIndex : ExceptionArgument.byteCount,
-                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    argument: (byteIndex < 0)
+                        ? ExceptionArgument.byteIndex
+                        : ExceptionArgument.byteCount,
+                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (bytes!.Length - byteIndex < byteCount)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.bytes, ExceptionResource.ArgumentOutOfRange_IndexCountBuffer);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.bytes,
+                    ExceptionResource.ArgumentOutOfRange_IndexCountBuffer
+                );
             }
 
             if ((uint)charIndex > (uint)chars!.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.charIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.charIndex,
+                    ExceptionResource.ArgumentOutOfRange_Index
+                );
             }
 
-            fixed (byte* pBytes = bytes)
-            fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)
             {
-                return GetCharsCommon(pBytes + byteIndex, byteCount, pChars + charIndex, chars.Length - charIndex);
+                return GetCharsCommon(
+                    pBytes + byteIndex,
+                    byteCount,
+                    pChars + charIndex,
+                    chars.Length - charIndex
+                );
             }
         }
 
@@ -593,14 +756,18 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentNullException(
                     argument: (bytes is null) ? ExceptionArgument.bytes : ExceptionArgument.chars,
-                    resource: ExceptionResource.ArgumentNull_Array);
+                    resource: ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((byteCount | charCount) < 0)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
-                    argument: (byteCount < 0) ? ExceptionArgument.byteCount : ExceptionArgument.charCount,
-                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    argument: (byteCount < 0)
+                        ? ExceptionArgument.byteCount
+                        : ExceptionArgument.charCount,
+                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             return GetCharsCommon(bytes, byteCount, chars, charCount);
@@ -610,9 +777,9 @@ namespace System.Text
         {
             // It's ok for us to pass null pointers down to the workhorse below.
 
-            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
-            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
-            {
+            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
+                char* charsPtr = &MemoryMarshal.GetReference(chars)
+            ) {
                 return GetCharsCommon(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }
@@ -624,13 +791,25 @@ namespace System.Text
             // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
 
             Debug.Assert(byteCount >= 0, "Caller shouldn't specify negative length buffer.");
-            Debug.Assert(pBytes != null || byteCount == 0, "Input pointer shouldn't be null if non-zero length specified.");
+            Debug.Assert(
+                pBytes != null || byteCount == 0,
+                "Input pointer shouldn't be null if non-zero length specified."
+            );
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
-            Debug.Assert(pChars != null || charCount == 0, "Input pointer shouldn't be null if non-zero length specified.");
+            Debug.Assert(
+                pChars != null || charCount == 0,
+                "Input pointer shouldn't be null if non-zero length specified."
+            );
 
             // First call into the fast path.
 
-            int charsWritten = GetCharsFast(pBytes, byteCount, pChars, charCount, out int bytesConsumed);
+            int charsWritten = GetCharsFast(
+                pBytes,
+                byteCount,
+                pChars,
+                charCount,
+                out int bytesConsumed
+            );
 
             if (bytesConsumed == byteCount)
             {
@@ -642,36 +821,59 @@ namespace System.Text
             {
                 // Simple narrowing conversion couldn't operate on entire buffer - invoke fallback.
 
-                return GetCharsWithFallback(pBytes, byteCount, pChars, charCount, bytesConsumed, charsWritten);
+                return GetCharsWithFallback(
+                    pBytes,
+                    byteCount,
+                    pChars,
+                    charCount,
+                    bytesConsumed,
+                    charsWritten
+                );
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // called directly by GetCharsCommon
-        private protected sealed override unsafe int GetCharsFast(byte* pBytes, int bytesLength, char* pChars, int charsLength, out int bytesConsumed)
-        {
-            int charsWritten = (int)ASCIIUtility.WidenAsciiToUtf16(pBytes, pChars, (uint)Math.Min(bytesLength, charsLength));
+        private protected sealed override unsafe int GetCharsFast(
+            byte* pBytes,
+            int bytesLength,
+            char* pChars,
+            int charsLength,
+            out int bytesConsumed
+        ) {
+            int charsWritten = (int)ASCIIUtility.WidenAsciiToUtf16(
+                pBytes,
+                pChars,
+                (uint)Math.Min(bytesLength, charsLength)
+            );
 
             bytesConsumed = charsWritten;
             return charsWritten;
         }
 
-        private protected sealed override unsafe int GetCharsWithFallback(ReadOnlySpan<byte> bytes, int originalBytesLength, Span<char> chars, int originalCharsLength, DecoderNLS? decoder)
-        {
+        private protected sealed override unsafe int GetCharsWithFallback(
+            ReadOnlySpan<byte> bytes,
+            int originalBytesLength,
+            Span<char> chars,
+            int originalCharsLength,
+            DecoderNLS? decoder
+        ) {
             // We special-case DecoderReplacementFallback if it's telling us to write a single BMP char,
             // since we believe this to be relatively common and we can handle it more efficiently than
             // the base implementation.
 
-            if ((decoder is null ? DecoderFallback : decoder.Fallback) is DecoderReplacementFallback replacementFallback
-                && replacementFallback.MaxCharCount == 1)
-            {
+            if (
+                (decoder is null ? DecoderFallback : decoder.Fallback)
+                    is DecoderReplacementFallback replacementFallback
+                && replacementFallback.MaxCharCount == 1
+            ) {
                 char replacementChar = replacementFallback.DefaultString[0];
 
                 int numElementsToConvert = Math.Min(bytes.Length, chars.Length);
                 int idx = 0;
 
-                fixed (byte* pBytes = &MemoryMarshal.GetReference(bytes))
-                fixed (char* pChars = &MemoryMarshal.GetReference(chars))
-                {
+                fixed (byte* pBytes = &MemoryMarshal.GetReference(bytes))fixed (
+                    char* pChars = &MemoryMarshal.GetReference(chars)
+                ) {
                     // In a loop, replace the non-convertible data, then bulk-convert as much as we can.
 
                     while (idx < numElementsToConvert)
@@ -680,10 +882,17 @@ namespace System.Text
 
                         if (idx < numElementsToConvert)
                         {
-                            idx += (int)ASCIIUtility.WidenAsciiToUtf16(&pBytes[idx], &pChars[idx], (uint)(numElementsToConvert - idx));
+                            idx += (int)ASCIIUtility.WidenAsciiToUtf16(
+                                &pBytes[idx],
+                                &pChars[idx],
+                                (uint)(numElementsToConvert - idx)
+                            );
                         }
 
-                        Debug.Assert(idx <= numElementsToConvert, "Somehow went beyond bounds of source or destination buffer?");
+                        Debug.Assert(
+                            idx <= numElementsToConvert,
+                            "Somehow went beyond bounds of source or destination buffer?"
+                        );
                     }
                 }
 
@@ -703,7 +912,13 @@ namespace System.Text
             }
             else
             {
-                return base.GetCharsWithFallback(bytes, originalBytesLength, chars, originalCharsLength, decoder);
+                return base.GetCharsWithFallback(
+                    bytes,
+                    originalBytesLength,
+                    chars,
+                    originalCharsLength,
+                    decoder
+                );
             }
         }
 
@@ -721,19 +936,28 @@ namespace System.Text
 
             if (bytes is null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.bytes, ExceptionResource.ArgumentNull_Array);
+                ThrowHelper.ThrowArgumentNullException(
+                    ExceptionArgument.bytes,
+                    ExceptionResource.ArgumentNull_Array
+                );
             }
 
             if ((byteIndex | byteCount) < 0)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
-                    argument: (byteIndex < 0) ? ExceptionArgument.byteIndex : ExceptionArgument.byteCount,
-                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    argument: (byteIndex < 0)
+                        ? ExceptionArgument.byteIndex
+                        : ExceptionArgument.byteCount,
+                    resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (bytes!.Length - byteIndex < byteCount)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.bytes, ExceptionResource.ArgumentOutOfRange_IndexCountBuffer);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.bytes,
+                    ExceptionResource.ArgumentOutOfRange_IndexCountBuffer
+                );
             }
 
             // Avoid problems with empty input buffer
@@ -768,8 +992,11 @@ namespace System.Text
             }
         }
 
-        internal sealed override OperationStatus EncodeRune(Rune value, Span<byte> bytes, out int bytesWritten)
-        {
+        internal sealed override OperationStatus EncodeRune(
+            Rune value,
+            Span<byte> bytes,
+            out int bytesWritten
+        ) {
             if (value.IsAscii)
             {
                 if (!bytes.IsEmpty)
@@ -791,8 +1018,11 @@ namespace System.Text
             }
         }
 
-        internal sealed override OperationStatus DecodeFirstRune(ReadOnlySpan<byte> bytes, out Rune value, out int bytesConsumed)
-        {
+        internal sealed override OperationStatus DecodeFirstRune(
+            ReadOnlySpan<byte> bytes,
+            out Rune value,
+            out int bytesConsumed
+        ) {
             if (!bytes.IsEmpty)
             {
                 byte b = bytes[0];
@@ -830,8 +1060,10 @@ namespace System.Text
         public override int GetMaxByteCount(int charCount)
         {
             if (charCount < 0)
-                throw new ArgumentOutOfRangeException(nameof(charCount),
-                     SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // Characters would be # of characters + 1 in case high surrogate is ? * max fallback
             long byteCount = (long)charCount + 1;
@@ -842,16 +1074,20 @@ namespace System.Text
             // 1 to 1 for most characters.  Only surrogates with fallbacks have less.
 
             if (byteCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException(nameof(charCount), SR.ArgumentOutOfRange_GetByteCountOverflow);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.ArgumentOutOfRange_GetByteCountOverflow
+                );
             return (int)byteCount;
         }
-
 
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0)
-                throw new ArgumentOutOfRangeException(nameof(byteCount),
-                     SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // Just return length, SBCS stay the same length because they don't map to surrogate
             long charCount = (long)byteCount;
@@ -861,7 +1097,10 @@ namespace System.Text
                 charCount *= DecoderFallback.MaxCharCount;
 
             if (charCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.ArgumentOutOfRange_GetCharCountOverflow);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.ArgumentOutOfRange_GetCharCountOverflow
+                );
 
             return (int)charCount;
         }
@@ -871,7 +1110,6 @@ namespace System.Text
         public override bool IsSingleByte => true;
 
         public override Decoder GetDecoder() => new DecoderNLS(this);
-
 
         public override Encoder GetEncoder() => new EncoderNLS(this);
     }

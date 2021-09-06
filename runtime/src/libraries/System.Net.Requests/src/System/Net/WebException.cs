@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 namespace System.Net
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class WebException : InvalidOperationException, ISerializable
     {
         private const WebExceptionStatus DefaultStatus = WebExceptionStatus.UnknownError;
@@ -18,30 +20,22 @@ namespace System.Net
         private readonly WebExceptionStatus _status = DefaultStatus;
         private readonly WebResponse? _response;
 
-        public WebException()
-        {
-        }
+        public WebException() { }
 
-        public WebException(string? message) :
-            base(message)
-        {
-        }
+        public WebException(string? message) : base(message) { }
 
-        public WebException(string? message, Exception? innerException) :
-            this(message, innerException, DefaultStatus, null)
-        {
-        }
+        public WebException(string? message, Exception? innerException)
+            : this(message, innerException, DefaultStatus, null) { }
 
-        public WebException(string? message, WebExceptionStatus status) :
-            this(message, null, status, null)
-        {
-        }
+        public WebException(string? message, WebExceptionStatus status)
+            : this(message, null, status, null) { }
 
-        public WebException(string? message,
-                            Exception? innerException,
-                            WebExceptionStatus status,
-                            WebResponse? response) :
-            base(message, innerException)
+        public WebException(
+            string? message,
+            Exception? innerException,
+            WebExceptionStatus status,
+            WebResponse? response
+        ) : base(message, innerException)
         {
             _status = status;
             _response = response;
@@ -52,22 +46,26 @@ namespace System.Net
             }
         }
 
-        protected WebException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext)
-        {
-        }
+        protected WebException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext) { }
 
         public WebExceptionStatus Status => _status;
 
         public WebResponse? Response => _response;
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
@@ -80,7 +78,8 @@ namespace System.Net
                     exception.Message,
                     exception,
                     GetStatusFromException(hre),
-                    null);
+                    null
+                );
             }
             else if (exception is TaskCanceledException)
             {
@@ -88,7 +87,8 @@ namespace System.Net
                     SR.net_webstatus_Timeout,
                     null,
                     WebExceptionStatus.Timeout,
-                    null);
+                    null
+                );
             }
 
             return exception;

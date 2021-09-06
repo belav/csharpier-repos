@@ -27,9 +27,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private const int MaxRetries = 1000;
         private static int NextPortIndex;
 
-        internal UrlPrefixCollection()
-        {
-        }
+        internal UrlPrefixCollection() { }
 
         /// <inheritdoc />
         public int Count
@@ -85,8 +83,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
         }
 
-        internal bool TryMatchLongestPrefix(bool isHttps, string host, string originalPath, [NotNullWhen(true)] out string? pathBase, [NotNullWhen(true)] out string? remainingPath)
-        {
+        internal bool TryMatchLongestPrefix(
+            bool isHttps,
+            string host,
+            string originalPath,
+            [NotNullWhen(true)] out string? pathBase,
+            [NotNullWhen(true)] out string? remainingPath
+        ) {
             var originalPathString = new PathString(originalPath);
             var found = false;
             pathBase = null;
@@ -97,13 +100,26 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 {
                     // The scheme, host, port, and start of path must match.
                     // Note this does not currently handle prefixes with wildcard subdomains.
-                    if (isHttps == prefix.IsHttps
-                        && string.Equals(host, prefix.HostAndPort, StringComparison.OrdinalIgnoreCase)
-                        && originalPathString.StartsWithSegments(new PathString(prefix.PathWithoutTrailingSlash), StringComparison.OrdinalIgnoreCase, out var remainder)
-                        && (!found || remainder.Value!.Length < remainingPath!.Length)) // Longest match
+                    if (
+                        isHttps == prefix.IsHttps
+                        && string.Equals(
+                            host,
+                            prefix.HostAndPort,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        && originalPathString.StartsWithSegments(
+                            new PathString(prefix.PathWithoutTrailingSlash),
+                            StringComparison.OrdinalIgnoreCase,
+                            out var remainder
+                        )
+                        && (!found || remainder.Value!.Length < remainingPath!.Length)
+                    ) // Longest match
                     {
                         found = true;
-                        pathBase = originalPath.Substring(0, prefix.PathWithoutTrailingSlash.Length); // Maintain the input casing
+                        pathBase = originalPath.Substring(
+                            0,
+                            prefix.PathWithoutTrailingSlash.Length
+                        ); // Maintain the input casing
                         remainingPath = remainder.Value;
                     }
                 }
@@ -204,7 +220,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     {
                         if (urlPrefix.IsHttps)
                         {
-                            throw new InvalidOperationException("Cannot bind to port 0 with https.");
+                            throw new InvalidOperationException(
+                                "Cannot bind to port 0 with https."
+                            );
                         }
 
                         FindHttpPortUnsynchronized(pair.Key, urlPrefix);
@@ -232,7 +250,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
                     Debug.Assert(port >= 5000 || port < 8000);
 
-                    var newPrefix = UrlPrefix.Create(urlPrefix.Scheme, urlPrefix.Host, port, urlPrefix.Path);
+                    var newPrefix = UrlPrefix.Create(
+                        urlPrefix.Scheme,
+                        urlPrefix.Host,
+                        port,
+                        urlPrefix.Path
+                    );
                     _urlGroup.RegisterPrefix(newPrefix.FullPrefix, key);
                     _prefixes[key] = newPrefix;
 
@@ -241,10 +264,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 }
                 catch (HttpSysException ex)
                 {
-                    if ((ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED
-                        && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
-                        && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS) || index == MaxRetries - 1)
-                    {
+                    if (
+                        (
+                            ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED
+                            && ex.ErrorCode
+                                != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
+                            && ex.ErrorCode
+                                != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS
+                        )
+                        || index == MaxRetries - 1
+                    ) {
                         throw;
                     }
                 }

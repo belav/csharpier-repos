@@ -24,15 +24,18 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         /// </summary>
         /// <param name="options">The connection options.</param>
         /// <param name="loggerFactory">The logger factory.</param>
-        public HttpConnectionFactory(IOptions<HttpConnectionOptions> options, ILoggerFactory loggerFactory)
-        {
+        public HttpConnectionFactory(
+            IOptions<HttpConnectionOptions> options,
+            ILoggerFactory loggerFactory
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
             _httpConnectionOptions = options.Value;
-            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _loggerFactory =
+                loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
         /// <summary>
@@ -43,8 +46,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         /// <returns>
         /// A <see cref="ValueTask{TResult}" /> that represents the asynchronous connect, yielding the <see cref="ConnectionContext" /> for the new connection when completed.
         /// </returns>
-        public async ValueTask<ConnectionContext> ConnectAsync(EndPoint endPoint, CancellationToken cancellationToken = default)
-        {
+        public async ValueTask<ConnectionContext> ConnectAsync(
+            EndPoint endPoint,
+            CancellationToken cancellationToken = default
+        ) {
             if (endPoint == null)
             {
                 throw new ArgumentNullException(nameof(endPoint));
@@ -52,12 +57,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
 
             if (!(endPoint is UriEndPoint uriEndPoint))
             {
-                throw new NotSupportedException($"The provided {nameof(EndPoint)} must be of type {nameof(UriEndPoint)}.");
+                throw new NotSupportedException(
+                    $"The provided {nameof(EndPoint)} must be of type {nameof(UriEndPoint)}."
+                );
             }
 
             if (_httpConnectionOptions.Url != null && _httpConnectionOptions.Url != uriEndPoint.Uri)
             {
-                throw new InvalidOperationException($"If {nameof(HttpConnectionOptions)}.{nameof(HttpConnectionOptions.Url)} was set, it must match the {nameof(UriEndPoint)}.{nameof(UriEndPoint.Uri)} passed to {nameof(ConnectAsync)}.");
+                throw new InvalidOperationException(
+                    $"If {nameof(HttpConnectionOptions)}.{nameof(HttpConnectionOptions.Url)} was set, it must match the {nameof(UriEndPoint)}.{nameof(UriEndPoint.Uri)} passed to {nameof(ConnectAsync)}."
+                );
             }
 
             // Shallow copy before setting the Url property so we don't mutate the user-defined options object.
@@ -80,8 +89,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         }
 
         // Internal for testing
-        internal static HttpConnectionOptions ShallowCopyHttpConnectionOptions(HttpConnectionOptions options)
-        {
+        internal static HttpConnectionOptions ShallowCopyHttpConnectionOptions(
+            HttpConnectionOptions options
+        ) {
             var newOptions = new HttpConnectionOptions
             {
                 HttpMessageHandlerFactory = options.HttpMessageHandlerFactory,

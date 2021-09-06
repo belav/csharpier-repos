@@ -14,12 +14,13 @@ namespace FormatterWebSite
             return objectType == typeof(IModel);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return new DerivedModel
-            {
-                DerivedProperty = reader.Value.ToString(),
-            };
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
+            return new DerivedModel { DerivedProperty = reader.Value.ToString(), };
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

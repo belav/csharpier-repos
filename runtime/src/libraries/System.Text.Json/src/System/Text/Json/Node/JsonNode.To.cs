@@ -15,8 +15,12 @@ namespace System.Text.Json.Node
         public string ToJsonString(JsonSerializerOptions? options = null)
         {
             var output = new ArrayBufferWriter<byte>();
-            using (var writer = new Utf8JsonWriter(output, options == null ? default(JsonWriterOptions) : options.GetWriterOptions()))
-            {
+            using (
+                var writer = new Utf8JsonWriter(
+                    output,
+                    options == null ? default(JsonWriterOptions) : options.GetWriterOptions()
+                )
+            ) {
                 WriteTo(writer, options);
             }
             return JsonHelpers.Utf8GetString(output.WrittenSpan);
@@ -36,9 +40,10 @@ namespace System.Text.Json.Node
                     return jsonString.Value;
                 }
 
-                if (this is JsonValue<JsonElement> jsonElement &&
-                    jsonElement.Value.ValueKind == JsonValueKind.String)
-                {
+                if (
+                    this is JsonValue<JsonElement> jsonElement
+                    && jsonElement.Value.ValueKind == JsonValueKind.String
+                ) {
                     return jsonElement.Value.GetString()!;
                 }
             }

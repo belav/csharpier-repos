@@ -23,23 +23,28 @@ namespace Microsoft.CodeAnalysis.Editor.GoToImplementation
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToImplementation)]
-    internal class GoToImplementationCommandHandler : AbstractGoToCommandHandler<IFindUsagesService, GoToImplementationCommandArgs>
+    internal class GoToImplementationCommandHandler
+        : AbstractGoToCommandHandler<IFindUsagesService, GoToImplementationCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public GoToImplementationCommandHandler(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter) : base(threadingContext, streamingPresenter)
-        {
-        }
+            IStreamingFindUsagesPresenter streamingPresenter
+        ) : base(threadingContext, streamingPresenter) { }
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Implementation;
 
-        protected override string ScopeDescription => EditorFeaturesResources.Locating_implementations;
+        protected override string ScopeDescription =>
+            EditorFeaturesResources.Locating_implementations;
 
         protected override FunctionId FunctionId => FunctionId.CommandHandler_GoToImplementation;
 
-        protected override Task FindActionAsync(IFindUsagesService service, Document document, int caretPosition, IFindUsagesContext context)
-            => service.FindImplementationsAsync(document, caretPosition, context);
+        protected override Task FindActionAsync(
+            IFindUsagesService service,
+            Document document,
+            int caretPosition,
+            IFindUsagesContext context
+        ) => service.FindImplementationsAsync(document, caretPosition, context);
     }
 }

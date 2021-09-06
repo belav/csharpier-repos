@@ -2,7 +2,8 @@
 {
     [ApiController]
     [Route("/api/[controller]")]
-    public class NoDiagnosticsAreReturned_ForApiActionsReturning400FromNonModelStateIsValidBlocks : ControllerBase
+    public class NoDiagnosticsAreReturned_ForApiActionsReturning400FromNonModelStateIsValidBlocks
+        : ControllerBase
     {
         public IActionResult Method(int id)
         {

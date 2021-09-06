@@ -32,8 +32,9 @@ namespace System.Security.Cryptography
                 return DeriveKeyFromHash(otherPartyPublicKey, HashAlgorithmName.SHA256);
             }
 
-            private SafeNCryptSecretHandle DeriveSecretAgreementHandle(ECDiffieHellmanPublicKey otherPartyPublicKey)
-            {
+            private SafeNCryptSecretHandle DeriveSecretAgreementHandle(
+                ECDiffieHellmanPublicKey otherPartyPublicKey
+            ) {
                 if (otherPartyPublicKey == null)
                 {
                     throw new ArgumentNullException(nameof(otherPartyPublicKey));
@@ -41,23 +42,34 @@ namespace System.Security.Cryptography
 
                 ECParameters otherPartyParameters = otherPartyPublicKey.ExportParameters();
 
-                using (ECDiffieHellmanCng otherPartyCng = (ECDiffieHellmanCng)Create(otherPartyParameters))
-                using (SafeNCryptKeyHandle otherPartyHandle = otherPartyCng.GetDuplicatedKeyHandle())
-                {
-                    string? importedKeyAlgorithmGroup =
-                        CngKeyLite.GetPropertyAsString(
-                            otherPartyHandle,
-                            CngKeyLite.KeyPropertyName.AlgorithmGroup,
-                            CngPropertyOptions.None);
+                using (
+                    ECDiffieHellmanCng otherPartyCng = (ECDiffieHellmanCng)Create(
+                        otherPartyParameters
+                    )
+                )
+                using (
+                    SafeNCryptKeyHandle otherPartyHandle = otherPartyCng.GetDuplicatedKeyHandle()
+                ) {
+                    string? importedKeyAlgorithmGroup = CngKeyLite.GetPropertyAsString(
+                        otherPartyHandle,
+                        CngKeyLite.KeyPropertyName.AlgorithmGroup,
+                        CngPropertyOptions.None
+                    );
 
                     if (importedKeyAlgorithmGroup != BCryptNative.AlgorithmName.ECDH)
                     {
-                        throw new ArgumentException(SR.Cryptography_ArgECDHRequiresECDHKey, nameof(otherPartyPublicKey));
+                        throw new ArgumentException(
+                            SR.Cryptography_ArgECDHRequiresECDHKey,
+                            nameof(otherPartyPublicKey)
+                        );
                     }
 
                     if (CngKeyLite.GetKeyLength(otherPartyHandle) != KeySize)
                     {
-                        throw new ArgumentException(SR.Cryptography_ArgECDHKeySizeMismatch, nameof(otherPartyPublicKey));
+                        throw new ArgumentException(
+                            SR.Cryptography_ArgECDHKeySizeMismatch,
+                            nameof(otherPartyPublicKey)
+                        );
                     }
 
                     using (SafeNCryptKeyHandle localHandle = GetDuplicatedKeyHandle())

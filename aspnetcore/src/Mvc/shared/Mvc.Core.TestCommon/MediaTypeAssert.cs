@@ -35,10 +35,11 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new EqualException(left.ToString(), right.ToString());
             }
 
-            if (!MediaTypeHeaderValue.TryParse(left.Value, out var leftMediaType) ||
-                !MediaTypeHeaderValue.TryParse(right.Value, out var rightMediaType) ||
-                !leftMediaType.Equals(rightMediaType))
-            {
+            if (
+                !MediaTypeHeaderValue.TryParse(left.Value, out var leftMediaType)
+                || !MediaTypeHeaderValue.TryParse(right.Value, out var rightMediaType)
+                || !leftMediaType.Equals(rightMediaType)
+            ) {
                 throw new EqualException(left.ToString(), right.ToString());
             }
         }

@@ -10,8 +10,10 @@ namespace Microsoft.CodeAnalysis
 {
     public partial class ProjectDependencyGraph
     {
-        internal ProjectDependencyGraph WithProjectReferenceRemoved(ProjectId projectId, ProjectId referencedProjectId)
-        {
+        internal ProjectDependencyGraph WithProjectReferenceRemoved(
+            ProjectId projectId,
+            ProjectId referencedProjectId
+        ) {
             Contract.ThrowIfFalse(_projectIds.Contains(projectId));
             Contract.ThrowIfFalse(_referencesMap[projectId].Contains(referencedProjectId));
 
@@ -19,10 +21,28 @@ namespace Microsoft.CodeAnalysis
             var projectIds = _projectIds;
 
             // Incrementally update the graph
-            var referencesMap = ComputeNewReferencesMapForRemovedProjectReference(_referencesMap, projectId, referencedProjectId);
-            var reverseReferencesMap = ComputeNewReverseReferencesMapForRemovedProjectReference(_lazyReverseReferencesMap, projectId, referencedProjectId);
-            var transitiveReferencesMap = ComputeNewTransitiveReferencesMapForRemovedProjectReference(_transitiveReferencesMap, projectId, referencedProjectId);
-            var reverseTransitiveReferencesMap = ComputeNewReverseTransitiveReferencesMapForRemovedProjectReference(_reverseTransitiveReferencesMap, projectId, referencedProjectId);
+            var referencesMap = ComputeNewReferencesMapForRemovedProjectReference(
+                _referencesMap,
+                projectId,
+                referencedProjectId
+            );
+            var reverseReferencesMap = ComputeNewReverseReferencesMapForRemovedProjectReference(
+                _lazyReverseReferencesMap,
+                projectId,
+                referencedProjectId
+            );
+            var transitiveReferencesMap =
+                ComputeNewTransitiveReferencesMapForRemovedProjectReference(
+                    _transitiveReferencesMap,
+                    projectId,
+                    referencedProjectId
+                );
+            var reverseTransitiveReferencesMap =
+                ComputeNewReverseTransitiveReferencesMapForRemovedProjectReference(
+                    _reverseTransitiveReferencesMap,
+                    projectId,
+                    referencedProjectId
+                );
 
             return new ProjectDependencyGraph(
                 projectIds,
@@ -31,14 +51,21 @@ namespace Microsoft.CodeAnalysis
                 transitiveReferencesMap,
                 reverseTransitiveReferencesMap,
                 topologicallySortedProjects: default,
-                dependencySets: default);
+                dependencySets: default
+            );
         }
 
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> ComputeNewReferencesMapForRemovedProjectReference(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingForwardReferencesMap,
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        > ComputeNewReferencesMapForRemovedProjectReference(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            > existingForwardReferencesMap,
             ProjectId projectId,
-            ProjectId referencedProjectId)
-        {
+            ProjectId referencedProjectId
+        ) {
             return existingForwardReferencesMap.MultiRemove(projectId, referencedProjectId);
         }
 
@@ -51,11 +78,17 @@ namespace Microsoft.CodeAnalysis
         /// <param name="referencedProjectId">The target of the project reference which is being removed.</param>
         /// <returns>The updated (complete) reverse references map, or <see langword="null"/> if the reverse references
         /// map could not be incrementally updated.</returns>
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>? ComputeNewReverseReferencesMapForRemovedProjectReference(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>? existingReverseReferencesMap,
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        >? ComputeNewReverseReferencesMapForRemovedProjectReference(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            >? existingReverseReferencesMap,
             ProjectId projectId,
-            ProjectId referencedProjectId)
-        {
+            ProjectId referencedProjectId
+        ) {
             if (existingReverseReferencesMap is null)
             {
                 return null;
@@ -64,11 +97,17 @@ namespace Microsoft.CodeAnalysis
             return existingReverseReferencesMap.MultiRemove(referencedProjectId, projectId);
         }
 
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> ComputeNewTransitiveReferencesMapForRemovedProjectReference(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingTransitiveReferencesMap,
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        > ComputeNewTransitiveReferencesMapForRemovedProjectReference(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            > existingTransitiveReferencesMap,
             ProjectId projectId,
-            ProjectId referencedProjectId)
-        {
+            ProjectId referencedProjectId
+        ) {
             var builder = existingTransitiveReferencesMap.ToBuilder();
 
             // Invalidate the transitive references from every project referencing the changed project (transitively)
@@ -91,11 +130,17 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> ComputeNewReverseTransitiveReferencesMapForRemovedProjectReference(
-            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> existingReverseTransitiveReferencesMap,
+        private static ImmutableDictionary<
+            ProjectId,
+            ImmutableHashSet<ProjectId>
+        > ComputeNewReverseTransitiveReferencesMapForRemovedProjectReference(
+            ImmutableDictionary<
+                ProjectId,
+                ImmutableHashSet<ProjectId>
+            > existingReverseTransitiveReferencesMap,
             ProjectId projectId,
-            ProjectId referencedProjectId)
-        {
+            ProjectId referencedProjectId
+        ) {
             var builder = existingReverseTransitiveReferencesMap.ToBuilder();
 
             // Invalidate the transitive reverse references from every project previously referenced by the original

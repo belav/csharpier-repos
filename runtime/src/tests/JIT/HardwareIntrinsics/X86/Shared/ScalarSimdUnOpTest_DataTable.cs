@@ -33,7 +33,8 @@ namespace JIT.HardwareIntrinsics.X86
             this.alignment = (ulong)alignment;
         }
 
-        public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* outArrayPtr =>
+            Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
         public void Dispose()
         {

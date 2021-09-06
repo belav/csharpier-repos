@@ -42,11 +42,13 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
         // The second case is applied if control flow quits from inside the body.
 
-        protected sealed override int GetLogicalExpressionKind(ISyntaxKindsService syntaxKinds)
-            => syntaxKinds.LogicalOrExpression;
+        protected sealed override int GetLogicalExpressionKind(ISyntaxKindsService syntaxKinds) =>
+            syntaxKinds.LogicalOrExpression;
 
-        protected sealed override CodeAction CreateCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument, string ifKeywordText)
-            => new MyCodeAction(createChangedDocument, ifKeywordText);
+        protected sealed override CodeAction CreateCodeAction(
+            Func<CancellationToken, Task<Document>> createChangedDocument,
+            string ifKeywordText
+        ) => new MyCodeAction(createChangedDocument, ifKeywordText);
 
         protected sealed override async Task<SyntaxNode> GetChangedRootAsync(
             Document document,
@@ -54,8 +56,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             SyntaxNode leftCondition,
             SyntaxNode rightCondition,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
             var generator = document.GetLanguageService<SyntaxGenerator>();
@@ -65,10 +67,21 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
             var editor = new SyntaxEditor(root, generator);
 
-            editor.ReplaceNode(ifOrElseIf, (currentNode, _) => ifGenerator.WithCondition(currentNode, leftCondition));
+            editor.ReplaceNode(
+                ifOrElseIf,
+                (currentNode, _) => ifGenerator.WithCondition(currentNode, leftCondition)
+            );
 
-            if (await CanBeSeparateStatementsAsync(document, syntaxFacts, ifGenerator, ifOrElseIf, cancellationToken).ConfigureAwait(false))
-            {
+            if (
+                await CanBeSeparateStatementsAsync(
+                        document,
+                        syntaxFacts,
+                        ifGenerator,
+                        ifOrElseIf,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            ) {
                 // Generate:
                 // if (a)
                 //     return;
@@ -85,7 +98,10 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 if (!syntaxFacts.IsExecutableBlock(ifOrElseIf.Parent))
                 {
                     // In order to insert a new statement, we have to be inside a block.
-                    editor.ReplaceNode(ifOrElseIf, (currentNode, _) => generator.ScopeBlock(ImmutableArray.Create(currentNode)));
+                    editor.ReplaceNode(
+                        ifOrElseIf,
+                        (currentNode, _) => generator.ScopeBlock(ImmutableArray.Create(currentNode))
+                    );
                 }
 
                 editor.InsertAfter(ifOrElseIf, secondIfStatement);
@@ -101,7 +117,10 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 // If the if statement is not an else-if clause, we convert it to an else-if clause first (for VB).
                 // Then we insert it right after our current if statement or else-if clause.
 
-                var elseIfClause = ifGenerator.WithCondition(ifGenerator.ToElseIfClause(ifOrElseIf), rightCondition);
+                var elseIfClause = ifGenerator.WithCondition(
+                    ifGenerator.ToElseIfClause(ifOrElseIf),
+                    rightCondition
+                );
 
                 ifGenerator.InsertElseIfClause(editor, ifOrElseIf, elseIfClause);
             }
@@ -114,8 +133,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             ISyntaxFactsService syntaxFacts,
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode ifOrElseIf,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // In order to make separate statements, ifOrElseIf must be an if statement, not an else-if clause.
             if (ifGenerator.IsElseIfClause(ifOrElseIf, out _))
             {
@@ -144,8 +163,12 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 // and in the case that both conditions are true, run the same statements twice).
                 // This will typically look like a single return, break, continue or a throw statement.
 
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var controlFlow = semanticModel.AnalyzeControlFlow(insideStatements[0], insideStatements[insideStatements.Count - 1]);
+                var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var controlFlow = semanticModel.AnalyzeControlFlow(
+                    insideStatements[0],
+                    insideStatements[insideStatements.Count - 1]
+                );
 
                 return !controlFlow.EndPointIsReachable;
             }
@@ -153,10 +176,13 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
         private sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument, string ifKeywordText)
-                : base(string.Format(FeaturesResources.Split_into_consecutive_0_statements, ifKeywordText), createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument,
+                string ifKeywordText
+            ) : base(
+                string.Format(FeaturesResources.Split_into_consecutive_0_statements, ifKeywordText),
+                createChangedDocument
+            ) { }
         }
     }
 }

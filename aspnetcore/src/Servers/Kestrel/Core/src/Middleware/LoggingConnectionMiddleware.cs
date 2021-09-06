@@ -26,13 +26,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
             try
             {
-                await using (var loggingDuplexPipe = new LoggingDuplexPipe(context.Transport, _logger))
-                {
+                await using (
+                    var loggingDuplexPipe = new LoggingDuplexPipe(context.Transport, _logger)
+                ) {
                     context.Transport = loggingDuplexPipe;
 
                     await _next(context);
                 }
             }
+
             finally
             {
                 context.Transport = oldTransport;

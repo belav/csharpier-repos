@@ -27,7 +27,9 @@ namespace Microsoft.AspNetCore.Hosting
         /// The <see cref="IConfiguration"/> and <see cref="ILoggerFactory"/> on the <see cref="WebHostBuilderContext"/> are uninitialized at this stage.
         /// The <see cref="IConfigurationBuilder"/> is pre-populated with the settings of the <see cref="IWebHostBuilder"/>.
         /// </remarks>
-        IWebHostBuilder ConfigureAppConfiguration(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate);
+        IWebHostBuilder ConfigureAppConfiguration(
+            Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
+        );
 
         /// <summary>
         /// Adds a delegate for configuring additional services for the host or web application. This may be called
@@ -43,7 +45,9 @@ namespace Microsoft.AspNetCore.Hosting
         /// </summary>
         /// <param name="configureServices">A delegate for configuring the <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-        IWebHostBuilder ConfigureServices(Action<WebHostBuilderContext, IServiceCollection> configureServices);
+        IWebHostBuilder ConfigureServices(
+            Action<WebHostBuilderContext, IServiceCollection> configureServices
+        );
 
         /// <summary>
         /// Get the setting value from the configuration.

@@ -175,8 +175,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         {
             var cosmosOptions = options.FindExtension<CosmosOptionsExtension>();
 
-            if (cosmosOptions != null
-                && (AccountEndpoint != cosmosOptions.AccountEndpoint
+            if (
+                cosmosOptions != null
+                && (
+                    AccountEndpoint != cosmosOptions.AccountEndpoint
                     || AccountKey != cosmosOptions.AccountKey
                     || ConnectionString != cosmosOptions.ConnectionString
                     || Region != cosmosOptions.Region
@@ -190,12 +192,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                     || MaxTcpConnectionsPerEndpoint != cosmosOptions.MaxTcpConnectionsPerEndpoint
                     || MaxRequestsPerTcpConnection != cosmosOptions.MaxRequestsPerTcpConnection
                     || EnableContentResponseOnWrite != cosmosOptions.EnableContentResponseOnWrite
-                    ))
-            {
+                )
+            ) {
                 throw new InvalidOperationException(
                     CoreStrings.SingletonOptionChanged(
                         nameof(CosmosDbContextOptionsExtensions.UseCosmos),
-                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                    )
+                );
             }
         }
     }

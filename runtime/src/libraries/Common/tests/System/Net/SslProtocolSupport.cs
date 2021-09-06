@@ -12,11 +12,15 @@ namespace System.Net.Test.Common
     {
         public const SslProtocols DefaultSslProtocols =
 #if !NETSTANDARD2_0
-            SslProtocols.Tls13 |
+            SslProtocols.Tls13
+            |
 #endif
-            SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
+            SslProtocols.Tls12
+            | SslProtocols.Tls11
+            | SslProtocols.Tls;
 
-        public const SslProtocols NonTls13Protocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
+        public const SslProtocols NonTls13Protocols =
+            SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
 
         public static SslProtocols SupportedSslProtocols
         {
@@ -61,8 +65,10 @@ namespace System.Net.Test.Common
             {
                 foreach (SslProtocols protocol in Enum.GetValues(typeof(SslProtocols)))
                 {
-                    if (protocol != SslProtocols.None && (protocol & SupportedSslProtocols) == protocol)
-                    {
+                    if (
+                        protocol != SslProtocols.None
+                        && (protocol & SupportedSslProtocols) == protocol
+                    ) {
                         yield return new object[] { protocol };
                     }
                 }

@@ -21,17 +21,22 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
 
             private readonly IVsActivityLog _activityLog;
 
-            public LogService(IThreadingContext threadingContext, IVsActivityLog activityLog)
-                : base(threadingContext)
+            public LogService(
+                IThreadingContext threadingContext,
+                IVsActivityLog activityLog
+            ) : base(threadingContext)
             {
                 _activityLog = activityLog;
             }
 
-            public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken)
-                => LogAsync(text, __ACTIVITYLOG_ENTRYTYPE.ALE_INFORMATION);
+            public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken) =>
+                LogAsync(text, __ACTIVITYLOG_ENTRYTYPE.ALE_INFORMATION);
 
-            public ValueTask LogExceptionAsync(string exception, string text, CancellationToken cancellationToken)
-                => LogAsync(text + ". " + exception, __ACTIVITYLOG_ENTRYTYPE.ALE_ERROR);
+            public ValueTask LogExceptionAsync(
+                string exception,
+                string text,
+                CancellationToken cancellationToken
+            ) => LogAsync(text + ". " + exception, __ACTIVITYLOG_ENTRYTYPE.ALE_ERROR);
 
             private ValueTask LogAsync(string text, __ACTIVITYLOG_ENTRYTYPE type)
             {

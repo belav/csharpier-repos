@@ -42,12 +42,17 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="response"></param>
         /// <param name="trailerName"></param>
         /// <param name="trailerValues"></param>
-        public static void AppendTrailer(this HttpResponse response, string trailerName, StringValues trailerValues)
-        {
+        public static void AppendTrailer(
+            this HttpResponse response,
+            string trailerName,
+            StringValues trailerValues
+        ) {
             var feature = response.HttpContext.Features.Get<IHttpResponseTrailersFeature>();
             if (feature?.Trailers == null || feature.Trailers.IsReadOnly)
             {
-                throw new InvalidOperationException("Trailers are not supported for this response.");
+                throw new InvalidOperationException(
+                    "Trailers are not supported for this response."
+                );
             }
 
             feature.Trailers.Append(trailerName, trailerValues);

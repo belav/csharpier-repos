@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
     /// <summary>
     /// A default implementation of <see cref="IViewComponentDescriptorCollectionProvider"/>
     /// </summary>
-    public class DefaultViewComponentDescriptorCollectionProvider : IViewComponentDescriptorCollectionProvider
+    public class DefaultViewComponentDescriptorCollectionProvider
+        : IViewComponentDescriptorCollectionProvider
     {
         private readonly IViewComponentDescriptorProvider _descriptorProvider;
         private ViewComponentDescriptorCollection _viewComponents;
@@ -17,8 +18,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         /// Creates a new instance of <see cref="DefaultViewComponentDescriptorCollectionProvider"/>.
         /// </summary>
         /// <param name="descriptorProvider">The <see cref="IViewComponentDescriptorProvider"/>.</param>
-        public DefaultViewComponentDescriptorCollectionProvider(IViewComponentDescriptorProvider descriptorProvider)
-        {
+        public DefaultViewComponentDescriptorCollectionProvider(
+            IViewComponentDescriptorProvider descriptorProvider
+        ) {
             _descriptorProvider = descriptorProvider;
         }
 

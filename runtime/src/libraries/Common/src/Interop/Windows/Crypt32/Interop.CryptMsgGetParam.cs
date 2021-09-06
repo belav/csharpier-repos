@@ -15,7 +15,8 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             out int pvData,
-            [In, Out] ref int pcbData);
+            [In, Out] ref int pcbData
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool CryptMsgGetParam(
@@ -23,7 +24,8 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             out CryptMsgType pvData,
-            [In, Out] ref int pcbData);
+            [In, Out] ref int pcbData
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool CryptMsgGetParam(
@@ -31,7 +33,8 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             [Out] byte[]? pvData,
-            [In, Out] ref int pcbData);
+            [In, Out] ref int pcbData
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool CryptMsgGetParam(
@@ -39,6 +42,7 @@ internal static partial class Interop
             CryptMsgParamType dwParamType,
             int dwIndex,
             IntPtr pvData,
-            [In, Out] ref int pcbData);
+            [In, Out] ref int pcbData
+        );
     }
 }

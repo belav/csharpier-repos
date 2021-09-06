@@ -18,16 +18,16 @@ namespace Microsoft.Web.Mvc.Test
             // Arrange
             Mock<MvcSerializer> mockSerializer = new Mock<MvcSerializer>();
             mockSerializer.Setup(o => o.Deserialize("some-value")).Returns(42);
-            DeserializeAttribute attr = new DeserializeAttribute() { Serializer = mockSerializer.Object };
+            DeserializeAttribute attr = new DeserializeAttribute()
+            {
+                Serializer = mockSerializer.Object
+            };
 
             IModelBinder binder = attr.GetBinder();
             ModelBindingContext mbContext = new ModelBindingContext
             {
                 ModelName = "someKey",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "someKey", "some-value" }
-                }
+                ValueProvider = new SimpleValueProvider { { "someKey", "some-value" } }
             };
 
             // Act
@@ -65,7 +65,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { binder.BindModel(null, null); }, "bindingContext");
+                delegate
+                {
+                    binder.BindModel(null, null);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]
@@ -73,22 +78,27 @@ namespace Microsoft.Web.Mvc.Test
         {
             // Arrange
             Mock<MvcSerializer> mockSerializer = new Mock<MvcSerializer>();
-            mockSerializer.Setup(o => o.Deserialize(It.IsAny<string>())).Throws(new SerializationException());
-            DeserializeAttribute attr = new DeserializeAttribute { Serializer = mockSerializer.Object };
+            mockSerializer.Setup(o => o.Deserialize(It.IsAny<string>()))
+                .Throws(new SerializationException());
+            DeserializeAttribute attr = new DeserializeAttribute
+            {
+                Serializer = mockSerializer.Object
+            };
 
             IModelBinder binder = attr.GetBinder();
             ModelBindingContext mbContext = new ModelBindingContext
             {
                 ModelName = "someKey",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "someKey", "This data is corrupted." }
-                }
+                ValueProvider = new SimpleValueProvider { { "someKey", "This data is corrupted." } }
             };
 
             // Act & assert
             Exception exception = Assert.Throws<SerializationException>(
-                delegate { binder.BindModel(null, mbContext); });
+                delegate
+                {
+                    binder.BindModel(null, mbContext);
+                }
+            );
         }
     }
 }

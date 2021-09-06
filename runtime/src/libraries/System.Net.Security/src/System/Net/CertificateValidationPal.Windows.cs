@@ -19,13 +19,15 @@ namespace System.Net
             X509Certificate2 remoteCertificate,
             bool checkCertName,
             bool isServer,
-            string? hostName)
-        {
+            string? hostName
+        ) {
             SslPolicyErrors sslPolicyErrors = SslPolicyErrors.None;
 
             bool chainBuildResult = chain.Build(remoteCertificate);
-            if (!chainBuildResult       // Build failed on handle or on policy.
-                && chain.SafeHandle!.DangerousGetHandle() == IntPtr.Zero)   // Build failed to generate a valid handle.
+            if (
+                !chainBuildResult // Build failed on handle or on policy.
+                && chain.SafeHandle!.DangerousGetHandle() == IntPtr.Zero
+            ) // Build failed to generate a valid handle.
             {
                 throw new CryptographicException(Marshal.GetLastWin32Error());
             }
@@ -40,7 +42,9 @@ namespace System.Net
                     {
                         cbSize = (uint)sizeof(Interop.Crypt32.SSL_EXTRA_CERT_CHAIN_POLICY_PARA),
                         // Authenticate the remote party: (e.g. when operating in server mode, authenticate the client).
-                        dwAuthType = isServer ? Interop.Crypt32.AuthType.AUTHTYPE_CLIENT : Interop.Crypt32.AuthType.AUTHTYPE_SERVER,
+                        dwAuthType = isServer
+                            ? Interop.Crypt32.AuthType.AUTHTYPE_CLIENT
+                            : Interop.Crypt32.AuthType.AUTHTYPE_SERVER,
                         fdwChecks = 0,
                         pwszServerName = null
                     };
@@ -55,9 +59,10 @@ namespace System.Net
                     fixed (char* namePtr = hostName)
                     {
                         eppStruct.pwszServerName = namePtr;
-                        cppStruct.dwFlags |=
-                            (Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_ALL &
-                             ~Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG);
+                        cppStruct.dwFlags |= (
+                            Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_ALL
+                            & ~Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG
+                        );
 
                         SafeX509ChainHandle chainContext = chain.SafeHandle!;
                         status = Verify(chainContext, ref cppStruct);
@@ -81,15 +86,25 @@ namespace System.Net
         // Extracts a remote certificate upon request.
         //
 
-        internal static X509Certificate2? GetRemoteCertificate(SafeDeleteContext? securityContext) =>
-            GetRemoteCertificate(securityContext, retrieveCollection: false, out _);
+        internal static X509Certificate2? GetRemoteCertificate(
+            SafeDeleteContext? securityContext
+        ) => GetRemoteCertificate(securityContext, retrieveCollection: false, out _);
 
-        internal static X509Certificate2? GetRemoteCertificate(SafeDeleteContext? securityContext, out X509Certificate2Collection? remoteCertificateCollection) =>
-            GetRemoteCertificate(securityContext, retrieveCollection: true, out remoteCertificateCollection);
+        internal static X509Certificate2? GetRemoteCertificate(
+            SafeDeleteContext? securityContext,
+            out X509Certificate2Collection? remoteCertificateCollection
+        ) =>
+            GetRemoteCertificate(
+                securityContext,
+                retrieveCollection: true,
+                out remoteCertificateCollection
+            );
 
         private static X509Certificate2? GetRemoteCertificate(
-            SafeDeleteContext? securityContext, bool retrieveCollection, out X509Certificate2Collection? remoteCertificateCollection)
-        {
+            SafeDeleteContext? securityContext,
+            bool retrieveCollection,
+            out X509Certificate2Collection? remoteCertificateCollection
+        ) {
             remoteCertificateCollection = null;
 
             if (securityContext == null)
@@ -101,26 +116,34 @@ namespace System.Net
             SafeFreeCertContext? remoteContext = null;
             try
             {
-                remoteContext = SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CONTEXT(GlobalSSPI.SSPISecureChannel, securityContext);
+                remoteContext = SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CONTEXT(
+                    GlobalSSPI.SSPISecureChannel,
+                    securityContext
+                );
                 if (remoteContext != null && !remoteContext.IsInvalid)
                 {
                     result = new X509Certificate2(remoteContext.DangerousGetHandle());
                 }
             }
+
             finally
             {
                 if (remoteContext != null && !remoteContext.IsInvalid)
                 {
                     if (retrieveCollection)
                     {
-                        remoteCertificateCollection = UnmanagedCertificateContext.GetRemoteCertificatesFromStoreContext(remoteContext);
+                        remoteCertificateCollection =
+                            UnmanagedCertificateContext.GetRemoteCertificatesFromStoreContext(
+                                remoteContext
+                            );
                     }
 
                     remoteContext.Dispose();
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Log.RemoteCertificate(result);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Log.RemoteCertificate(result);
             return result;
         }
 
@@ -130,7 +153,12 @@ namespace System.Net
         internal static string[] GetRequestCertificateAuthorities(SafeDeleteContext securityContext)
         {
             Interop.SspiCli.SecPkgContext_IssuerListInfoEx issuerList = default;
-            bool success = SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_ISSUER_LIST_EX(GlobalSSPI.SSPISecureChannel, securityContext, ref issuerList, out SafeHandle? sspiHandle);
+            bool success = SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_ISSUER_LIST_EX(
+                GlobalSSPI.SSPISecureChannel,
+                securityContext,
+                ref issuerList,
+                out SafeHandle? sspiHandle
+            );
 
             string[] issuers = Array.Empty<string>();
             try
@@ -140,21 +168,35 @@ namespace System.Net
                     unsafe
                     {
                         issuers = new string[issuerList.cIssuers];
-                        var elements = new Span<Interop.SspiCli.CERT_CHAIN_ELEMENT>((void*)sspiHandle!.DangerousGetHandle(), issuers.Length);
+                        var elements = new Span<Interop.SspiCli.CERT_CHAIN_ELEMENT>(
+                            (void*)sspiHandle!.DangerousGetHandle(),
+                            issuers.Length
+                        );
                         for (int i = 0; i < elements.Length; ++i)
                         {
-                            Debug.Assert(elements[i].cbSize > 0, $"Interop.SspiCli._CERT_CHAIN_ELEMENT size is not positive: {elements[i].cbSize}");
+                            Debug.Assert(
+                                elements[i].cbSize > 0,
+                                $"Interop.SspiCli._CERT_CHAIN_ELEMENT size is not positive: {elements[i].cbSize}"
+                            );
                             if (elements[i].cbSize > 0)
                             {
-                                byte[] x = new Span<byte>((byte*)elements[i].pCertContext, checked((int)elements[i].cbSize)).ToArray();
+                                byte[] x = new Span<byte>(
+                                    (byte*)elements[i].pCertContext,
+                                    checked((int)elements[i].cbSize)
+                                ).ToArray();
                                 var x500DistinguishedName = new X500DistinguishedName(x);
                                 issuers[i] = x500DistinguishedName.Name;
-                                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(securityContext, $"IssuerListEx[{issuers[i]}]");
+                                if (NetEventSource.Log.IsEnabled())
+                                    NetEventSource.Info(
+                                        securityContext,
+                                        $"IssuerListEx[{issuers[i]}]"
+                                    );
                             }
                         }
                     }
                 }
             }
+
             finally
             {
                 sspiHandle?.Dispose();
@@ -173,10 +215,13 @@ namespace System.Net
             // For app-compat We want to ensure the store is opened under the **process** account.
             try
             {
-                WindowsIdentity.RunImpersonated(SafeAccessTokenHandle.InvalidHandle, () =>
-                {
-                    store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                });
+                WindowsIdentity.RunImpersonated(
+                    SafeAccessTokenHandle.InvalidHandle,
+                    () =>
+                    {
+                        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                    }
+                );
             }
             catch
             {
@@ -186,19 +231,25 @@ namespace System.Net
             return store;
         }
 
-        private static unsafe uint Verify(SafeX509ChainHandle chainContext, ref Interop.Crypt32.CERT_CHAIN_POLICY_PARA cpp)
-        {
+        private static unsafe uint Verify(
+            SafeX509ChainHandle chainContext,
+            ref Interop.Crypt32.CERT_CHAIN_POLICY_PARA cpp
+        ) {
             Interop.Crypt32.CERT_CHAIN_POLICY_STATUS status = default;
             status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
 
-            bool errorCode =
-                Interop.Crypt32.CertVerifyCertificateChainPolicy(
-                    (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
-                    chainContext,
-                    ref cpp,
-                    ref status);
+            bool errorCode = Interop.Crypt32.CertVerifyCertificateChainPolicy(
+                (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
+                chainContext,
+                ref cpp,
+                ref status
+            );
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(chainContext, $"CertVerifyCertificateChainPolicy returned: {errorCode}. Status: {status.dwError}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    chainContext,
+                    $"CertVerifyCertificateChainPolicy returned: {errorCode}. Status: {status.dwError}"
+                );
             return status.dwError;
         }
     }

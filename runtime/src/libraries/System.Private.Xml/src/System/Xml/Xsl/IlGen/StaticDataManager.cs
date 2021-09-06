@@ -51,7 +51,6 @@ namespace System.Xml.Xsl.IlGen
         }
     }
 
-
     /// <summary>
     /// Manages all static data that is used by the runtime.  This includes:
     ///   1. All NCName and QName atoms that will be used at run-time
@@ -127,7 +126,10 @@ namespace System.Xml.Xsl.IlGen
                 Debug.Assert(ndNmspDecl != null);
                 Debug.Assert(ndNmspDecl.Left is QilLiteral && ndNmspDecl.Right is QilLiteral);
 
-                prefixMappings[i] = new StringPair((string)(QilLiteral)ndNmspDecl.Left, (string)(QilLiteral)ndNmspDecl.Right);
+                prefixMappings[i] = new StringPair(
+                    (string)(QilLiteral)ndNmspDecl.Left,
+                    (string)(QilLiteral)ndNmspDecl.Right
+                );
             }
 
             // Add mappings to list and return index
@@ -173,8 +175,13 @@ namespace System.Xml.Xsl.IlGen
         /// Add early bound information to a list that is used by this query.  Return the index of
         /// the early bound information in the list.
         /// </summary>
-        public int DeclareEarlyBound(string namespaceUri, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type ebType)
-        {
+        public int DeclareEarlyBound(
+            string namespaceUri,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type ebType
+        ) {
             if (_earlyInfo == null)
                 _earlyInfo = new UniqueList<EarlyBoundInfo>();
 

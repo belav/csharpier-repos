@@ -15,13 +15,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [Theory]
         [InlineData(new object[] { new[] { "required-attr" } })]
         [InlineData(new object[] { new[] { "first-attr", "second-attr" } })]
-        public void TryDetermineMode_ReturnsFalseIfNoAttributeMatchesAllRequiredAttributes(string[] modeAttributes)
-        {
+        public void TryDetermineMode_ReturnsFalseIfNoAttributeMatchesAllRequiredAttributes(
+            string[] modeAttributes
+        ) {
             // Arrange
-            var modeInfos = new[]
-            {
-                new ModeAttributes<Mode>(Mode.A, modeAttributes)
-            };
+            var modeInfos = new[] { new ModeAttributes<Mode>(Mode.A, modeAttributes) };
             var attributes = new TagHelperAttributeList
             {
                 new TagHelperAttribute("first-attr", "value"),
@@ -31,7 +29,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Act
             Mode result;
-            var modeMatch = AttributeMatcher.TryDetermineMode(context, modeInfos, Compare, out result);
+            var modeMatch = AttributeMatcher.TryDetermineMode(
+                context,
+                modeInfos,
+                Compare,
+                out result
+            );
 
             // Assert
             Assert.False(modeMatch);
@@ -57,7 +60,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Act
             Mode result;
-            var modeMatch = AttributeMatcher.TryDetermineMode(context, modeInfos, Compare, out result);
+            var modeMatch = AttributeMatcher.TryDetermineMode(
+                context,
+                modeInfos,
+                Compare,
+                out result
+            );
 
             // Assert
             Assert.True(modeMatch);
@@ -73,7 +81,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new ModeAttributes<Mode>(Mode.A, new[] { "first-attr" }),
                 new ModeAttributes<Mode>(Mode.B, new[] { "first-attr", "second-attr" }),
                 new ModeAttributes<Mode>(Mode.D, new[] { "second-attr", "third-attr" }),
-                new ModeAttributes<Mode>(Mode.C, new[] { "first-attr", "second-attr", "third-attr" }),
+                new ModeAttributes<Mode>(
+                    Mode.C,
+                    new[] { "first-attr", "second-attr", "third-attr" }
+                ),
             };
             var attributes = new TagHelperAttributeList
             {
@@ -86,7 +97,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Act
             Mode result;
-            var modeMatch = AttributeMatcher.TryDetermineMode(context, modeInfos, Compare, out result);
+            var modeMatch = AttributeMatcher.TryDetermineMode(
+                context,
+                modeInfos,
+                Compare,
+                out result
+            );
 
             // Assert
             Assert.True(modeMatch);
@@ -99,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "test",
                 allAttributes: attributes,
                 items: new Dictionary<object, object>(),
-                uniqueId: Guid.NewGuid().ToString("N"));
+                uniqueId: Guid.NewGuid().ToString("N")
+            );
         }
 
         private enum Mode

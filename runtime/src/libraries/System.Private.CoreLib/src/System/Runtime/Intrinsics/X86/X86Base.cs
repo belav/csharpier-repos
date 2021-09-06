@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal X86Base() { }
 
-        public static bool IsSupported { get => IsSupported; }
+        public static bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public abstract class X64
         {
             internal X64() { }
 
-            public static bool IsSupported { get => IsSupported; }
+            public static bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             /// unsigned char _BitScanForward64 (unsigned __int32* index, unsigned __int64 a)
@@ -72,8 +78,10 @@ namespace System.Runtime.Intrinsics.X86
         /// void __cpuidex(int cpuInfo[4], int function_id, int subfunction_id);
         ///   CPUID
         /// </summary>
-        public static unsafe (int Eax, int Ebx, int Ecx, int Edx) CpuId(int functionId, int subFunctionId)
-        {
+        public static unsafe (int Eax, int Ebx, int Ecx, int Edx) CpuId(
+            int functionId,
+            int subFunctionId
+        ) {
             int* cpuInfo = stackalloc int[4];
             __cpuidex(cpuInfo, functionId, subFunctionId);
             return (cpuInfo[0], cpuInfo[1], cpuInfo[2], cpuInfo[3]);

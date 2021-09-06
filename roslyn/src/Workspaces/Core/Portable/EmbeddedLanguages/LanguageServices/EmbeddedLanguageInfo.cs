@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices
             int interpolatedTextTokenKind,
             ISyntaxFacts syntaxFacts,
             ISemanticFactsService semanticFacts,
-            IVirtualCharService virtualCharService)
-        {
+            IVirtualCharService virtualCharService
+        ) {
             CharLiteralTokenKind = charLiteralTokenKind;
             StringLiteralTokenKind = stringLiteralTokenKind;
             InterpolatedTextTokenKind = interpolatedTextTokenKind;

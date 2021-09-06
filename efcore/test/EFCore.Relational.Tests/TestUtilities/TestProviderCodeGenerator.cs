@@ -9,17 +9,21 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     public class TestProviderCodeGenerator : ProviderCodeGenerator
     {
         public TestProviderCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         public override MethodCallCodeFragment GenerateUseProvider(
             string connectionString,
-            MethodCallCodeFragment providerOptions)
-            => new(
+            MethodCallCodeFragment providerOptions
+        ) =>
+            new(
                 "UseTestProvider",
                 providerOptions == null
                     ? new object[] { connectionString }
-                    : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+                    : new object[]
+                      {
+                          connectionString,
+                          new NestedClosureCodeFragment("x", providerOptions)
+                      }
+            );
     }
 }

@@ -30,8 +30,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// </summary>
         /// <param name="descriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
         /// <returns>The delegate used to release the created Razor Page model asynchronously.</returns>
-        Func<PageContext, object, ValueTask> CreateAsyncModelDisposer(CompiledPageActionDescriptor descriptor)
-        {
+        Func<PageContext, object, ValueTask> CreateAsyncModelDisposer(
+            CompiledPageActionDescriptor descriptor
+        ) {
             var releaser = CreateModelDisposer(descriptor);
             return (context, model) =>
             {

@@ -59,53 +59,95 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 };
 
                 Storage = storage;
-                _select_rowid_from_main_table_where_0 = $@"select rowid from {main}.{dataTableName} where ""{DataIdColumnName}"" = ?";
-                _select_rowid_from_writecache_table_where_0 = $@"select rowid from {writeCache}.{dataTableName} where ""{DataIdColumnName}"" = ?";
-                _insert_or_replace_into_writecache_table_values_0_1_2 = $@"insert or replace into {writeCache}.{dataTableName}(""{DataIdColumnName}"",""{ChecksumColumnName}"",""{DataColumnName}"") values (?,?,?)";
+                _select_rowid_from_main_table_where_0 =
+                    $@"select rowid from {main}.{dataTableName} where ""{DataIdColumnName}"" = ?";
+                _select_rowid_from_writecache_table_where_0 =
+                    $@"select rowid from {writeCache}.{dataTableName} where ""{DataIdColumnName}"" = ?";
+                _insert_or_replace_into_writecache_table_values_0_1_2 =
+                    $@"insert or replace into {writeCache}.{dataTableName}(""{DataIdColumnName}"",""{ChecksumColumnName}"",""{DataColumnName}"") values (?,?,?)";
                 _delete_from_writecache_table = $"delete from {writeCache}.{dataTableName};";
-                _insert_or_replace_into_main_table_select_star_from_writecache_table = $"insert or replace into {main}.{dataTableName} select * from {writeCache}.{dataTableName};";
+                _insert_or_replace_into_main_table_select_star_from_writecache_table =
+                    $"insert or replace into {main}.{dataTableName} select * from {writeCache}.{dataTableName};";
             }
 
             protected abstract Table Table { get; }
 
-            protected abstract bool TryGetDatabaseId(SqlConnection connection, TKey key, out TDatabaseId dataId);
+            protected abstract bool TryGetDatabaseId(
+                SqlConnection connection,
+                TKey key,
+                out TDatabaseId dataId
+            );
             protected abstract void BindFirstParameter(SqlStatement statement, TDatabaseId dataId);
             protected abstract TWriteQueueKey GetWriteQueueKey(TKey key);
-            protected abstract bool TryGetRowId(SqlConnection connection, Database database, TDatabaseId dataId, out long rowId);
+            protected abstract bool TryGetRowId(
+                SqlConnection connection,
+                Database database,
+                TDatabaseId dataId,
+                out long rowId
+            );
 
-            [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", AllowCaptures = false)]
-            public Task<bool> ChecksumMatchesAsync(TKey key, Checksum checksum, CancellationToken cancellationToken)
-                => Storage.PerformReadAsync(
+            [PerformanceSensitive(
+                "https://github.com/dotnet/roslyn/issues/36114",
+                AllowCaptures = false
+            )]
+            public Task<bool> ChecksumMatchesAsync(
+                TKey key,
+                Checksum checksum,
+                CancellationToken cancellationToken
+            ) =>
+                Storage.PerformReadAsync(
                     static t => t.self.ChecksumMatches(t.key, t.checksum, t.cancellationToken),
-                    (self: this, key, checksum, cancellationToken), cancellationToken);
+                    (self: this, key, checksum, cancellationToken),
+                    cancellationToken
+                );
 
-            private bool ChecksumMatches(TKey key, Checksum checksum, CancellationToken cancellationToken)
-            {
+            private bool ChecksumMatches(
+                TKey key,
+                Checksum checksum,
+                CancellationToken cancellationToken
+            ) {
                 var hashData = ReadChecksumColumn(key, cancellationToken);
                 return hashData != null && checksum == hashData.Value;
             }
 
-            [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", AllowCaptures = false)]
-            public Task<Stream?> ReadStreamAsync(TKey key, Checksum? checksum, CancellationToken cancellationToken)
-                => Storage.PerformReadAsync(
+            [PerformanceSensitive(
+                "https://github.com/dotnet/roslyn/issues/36114",
+                AllowCaptures = false
+            )]
+            public Task<Stream?> ReadStreamAsync(
+                TKey key,
+                Checksum? checksum,
+                CancellationToken cancellationToken
+            ) =>
+                Storage.PerformReadAsync(
                     static t => t.self.ReadStream(t.key, t.checksum, t.cancellationToken),
-                    (self: this, key, checksum, cancellationToken), cancellationToken);
+                    (self: this, key, checksum, cancellationToken),
+                    cancellationToken
+                );
 
-            [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", AllowCaptures = false)]
-            private Stream? ReadStream(TKey key, Checksum? checksum, CancellationToken cancellationToken)
-                => ReadDataBlobColumn(key, checksum, cancellationToken);
+            [PerformanceSensitive(
+                "https://github.com/dotnet/roslyn/issues/36114",
+                AllowCaptures = false
+            )]
+            private Stream? ReadStream(
+                TKey key,
+                Checksum? checksum,
+                CancellationToken cancellationToken
+            ) => ReadDataBlobColumn(key, checksum, cancellationToken);
 
             private Optional<T> ReadColumn<T, TData>(
                 TKey key,
                 Func<TData, SqlConnection, Database, long, Optional<T>> readColumn,
                 TData data,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage._connectionPool.Target.GetPooledConnection(out var connection);
+                    using var _ = Storage._connectionPool.Target.GetPooledConnection(
+                        out var connection
+                    );
                     if (TryGetDatabaseId(connection, key, out var dataId))
                     {
                         try
@@ -113,7 +155,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                             // First, try to see if there was a write to this key in our in-memory db.
                             // If it wasn't in the in-memory write-cache.  Check the full on-disk file.
 
-                            var optional = ReadColumnHelper(connection, Database.WriteCache, dataId);
+                            var optional = ReadColumnHelper(
+                                connection,
+                                Database.WriteCache,
+                                dataId
+                            );
                             if (optional.HasValue)
                                 return optional;
 
@@ -130,8 +176,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 return default;
 
-                Optional<T> ReadColumnHelper(SqlConnection connection, Database database, TDatabaseId dataId)
-                {
+                Optional<T> ReadColumnHelper(
+                    SqlConnection connection,
+                    Database database,
+                    TDatabaseId dataId
+                ) {
                     // Note: it's possible that someone may write to this row between when we get the row ID
                     // above and now.  That's fine.  We'll just read the new bytes that have been written to
                     // this location.  Note that only the data for a row in our system can change, the ID will
@@ -144,40 +193,63 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             }
 
             private Stream? ReadDataBlobColumn(
-                TKey key, Checksum? checksum, CancellationToken cancellationToken)
-            {
+                TKey key,
+                Checksum? checksum,
+                CancellationToken cancellationToken
+            ) {
                 var optional = ReadColumn(
                     key,
-                    static (t, connection, database, rowId) => t.self.ReadDataBlob(connection, database, rowId, t.checksum),
+                    static (t, connection, database, rowId) =>
+                        t.self.ReadDataBlob(connection, database, rowId, t.checksum),
                     (self: this, checksum),
-                    cancellationToken);
+                    cancellationToken
+                );
 
                 Contract.ThrowIfTrue(optional.HasValue && optional.Value == null);
                 return optional.HasValue ? optional.Value : null;
             }
 
-            private Checksum.HashData? ReadChecksumColumn(TKey key, CancellationToken cancellationToken)
-            {
+            private Checksum.HashData? ReadChecksumColumn(
+                TKey key,
+                CancellationToken cancellationToken
+            ) {
                 var optional = ReadColumn(
                     key,
-                    static (self, connection, database, rowId) => self.ReadChecksum(connection, database, rowId),
-                    this, cancellationToken);
+                    static (self, connection, database, rowId) =>
+                        self.ReadChecksum(connection, database, rowId),
+                    this,
+                    cancellationToken
+                );
 
                 return optional.HasValue ? optional.Value : null;
             }
 
-            public Task<bool> WriteStreamAsync(TKey key, Stream stream, Checksum? checksum, CancellationToken cancellationToken)
-                => Storage.PerformWriteAsync(
-                    static t => t.self.WriteStream(t.key, t.stream, t.checksum, t.cancellationToken),
-                    (self: this, key, stream, checksum, cancellationToken), cancellationToken);
+            public Task<bool> WriteStreamAsync(
+                TKey key,
+                Stream stream,
+                Checksum? checksum,
+                CancellationToken cancellationToken
+            ) =>
+                Storage.PerformWriteAsync(
+                    static t =>
+                        t.self.WriteStream(t.key, t.stream, t.checksum, t.cancellationToken),
+                    (self: this, key, stream, checksum, cancellationToken),
+                    cancellationToken
+                );
 
-            private bool WriteStream(TKey key, Stream stream, Checksum? checksum, CancellationToken cancellationToken)
-            {
+            private bool WriteStream(
+                TKey key,
+                Stream stream,
+                Checksum? checksum,
+                CancellationToken cancellationToken
+            ) {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage._connectionPool.Target.GetPooledConnection(out var connection);
+                    using var _ = Storage._connectionPool.Target.GetPooledConnection(
+                        out var connection
+                    );
 
                     // Determine the appropriate data-id to store this stream at.
                     if (TryGetDatabaseId(connection, key, out var dataId))
@@ -191,9 +263,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                         // Write the information into the in-memory write-cache.  Later on a background task
                         // will move it from the in-memory cache to the on-disk db in a bulk transaction.
                         InsertOrReplaceBlobIntoWriteCache(
-                            connection, dataId,
+                            connection,
+                            dataId,
                             checksumBytes,
-                            new ReadOnlySpan<byte>(dataBytes, 0, dataLength));
+                            new ReadOnlySpan<byte>(dataBytes, 0, dataLength)
+                        );
 
                         if (dataPooled)
                             ReturnPooledBytes(dataBytes);
@@ -206,8 +280,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             }
 
             private Optional<Stream> ReadDataBlob(
-                SqlConnection connection, Database database, long rowId, Checksum? checksum)
-            {
+                SqlConnection connection,
+                Database database,
+                long rowId,
+                Checksum? checksum
+            ) {
                 // Have to run the blob reading in a transaction.  This is necessary
                 // for two reasons.  First, blob reading outside a transaction is not
                 // safe to do with the sqlite API.  It may produce corrupt bits if
@@ -221,36 +298,68 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                         // If we were passed a checksum, make sure it matches what we have
                         // stored in the table already.  If they don't match, don't read
                         // out the data value at all.
-                        if (t.checksum != null &&
-                            !t.self.ChecksumsMatch_MustRunInTransaction(t.connection, t.database, t.rowId, t.checksum))
-                        {
+                        if (
+                            t.checksum != null
+                            && !t.self.ChecksumsMatch_MustRunInTransaction(
+                                t.connection,
+                                t.database,
+                                t.rowId,
+                                t.checksum
+                            )
+                        ) {
                             return default;
                         }
 
-                        return t.connection.ReadDataBlob_MustRunInTransaction(t.database, t.self.Table, t.rowId);
+                        return t.connection.ReadDataBlob_MustRunInTransaction(
+                            t.database,
+                            t.self.Table,
+                            t.rowId
+                        );
                     },
-                    (self: this, connection, database, checksum, rowId));
+                    (self: this, connection, database, checksum, rowId)
+                );
             }
 
             private Optional<Checksum.HashData> ReadChecksum(
-                SqlConnection connection, Database database, long rowId)
-            {
+                SqlConnection connection,
+                Database database,
+                long rowId
+            ) {
                 // Have to run the checksum reading in a transaction.  This is necessary as blob reading outside a
                 // transaction is not safe to do with the sqlite API.  It may produce corrupt bits if another thread is
                 // writing to the blob.
                 return connection.RunInTransaction(
-                    static t => t.connection.ReadChecksum_MustRunInTransaction(t.database, t.self.Table, t.rowId),
-                    (self: this, connection, database, rowId));
+                    static t =>
+                        t.connection.ReadChecksum_MustRunInTransaction(
+                            t.database,
+                            t.self.Table,
+                            t.rowId
+                        ),
+                    (self: this, connection, database, rowId)
+                );
             }
 
-            private bool ChecksumsMatch_MustRunInTransaction(SqlConnection connection, Database database, long rowId, Checksum checksum)
-            {
-                var storedChecksum = connection.ReadChecksum_MustRunInTransaction(database, Table, rowId);
+            private bool ChecksumsMatch_MustRunInTransaction(
+                SqlConnection connection,
+                Database database,
+                long rowId,
+                Checksum checksum
+            ) {
+                var storedChecksum = connection.ReadChecksum_MustRunInTransaction(
+                    database,
+                    Table,
+                    rowId
+                );
                 return storedChecksum.HasValue && checksum == storedChecksum.Value;
             }
 
 #pragma warning disable CA1822 // Mark members as static - instance members used in Debug
-            protected bool GetAndVerifyRowId(SqlConnection connection, Database database, long dataId, out long rowId)
+            protected bool GetAndVerifyRowId(
+                SqlConnection connection,
+                Database database,
+                long dataId,
+                out long rowId
+            )
 #pragma warning restore CA1822 // Mark members as static
             {
                 // For the Document and Project tables, our dataId is our rowId:
@@ -265,8 +374,14 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // make sure that if we actually request the rowId from the database that it
                 // is equal to our data id.  Only do this in debug as this can be expensive
                 // and we definitely do not want to do this in release.
-                if (GetActualRowIdFromDatabase(connection, database, (TDatabaseId)(object)dataId, out rowId))
-                {
+                if (
+                    GetActualRowIdFromDatabase(
+                        connection,
+                        database,
+                        (TDatabaseId)(object)dataId,
+                        out rowId
+                    )
+                ) {
                     Debug.Assert(dataId == rowId);
                 }
 #endif
@@ -277,8 +392,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 return true;
             }
 
-            protected bool GetActualRowIdFromDatabase(SqlConnection connection, Database database, TDatabaseId dataId, out long rowId)
-            {
+            protected bool GetActualRowIdFromDatabase(
+                SqlConnection connection,
+                Database database,
+                TDatabaseId dataId,
+                out long rowId
+            ) {
                 // See https://sqlite.org/autoinc.html
                 // > In SQLite, table rows normally have a 64-bit signed integer ROWID which is
                 // unique among all rows in the same table. (WITHOUT ROWID tables are the exception.)
@@ -287,9 +406,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // ROWID, _ROWID_, or OID. Except if you declare an ordinary table column to use one
                 // of those special names, then the use of that name will refer to the declared column
                 // not to the internal ROWID.
-                using var resettableStatement = connection.GetResettableStatement(database == Database.WriteCache
-                    ? _select_rowid_from_writecache_table_where_0
-                    : _select_rowid_from_main_table_where_0);
+                using var resettableStatement = connection.GetResettableStatement(
+                    database == Database.WriteCache
+                        ? _select_rowid_from_writecache_table_where_0
+                        : _select_rowid_from_main_table_where_0
+                );
 
                 var statement = resettableStatement.Statement;
 
@@ -307,15 +428,22 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             }
 
             private void InsertOrReplaceBlobIntoWriteCache(
-                SqlConnection connection, TDatabaseId dataId,
+                SqlConnection connection,
+                TDatabaseId dataId,
                 ReadOnlySpan<byte> checksumBytes,
-                ReadOnlySpan<byte> dataBytes)
-            {
+                ReadOnlySpan<byte> dataBytes
+            ) {
                 // We're writing.  This better always be under the exclusive scheduler.
-                Contract.ThrowIfFalse(TaskScheduler.Current == Storage._connectionPoolService.Scheduler.ExclusiveScheduler);
+                Contract.ThrowIfFalse(
+                    TaskScheduler.Current
+                        == Storage._connectionPoolService.Scheduler.ExclusiveScheduler
+                );
 
-                using (var resettableStatement = connection.GetResettableStatement(_insert_or_replace_into_writecache_table_values_0_1_2))
-                {
+                using (
+                    var resettableStatement = connection.GetResettableStatement(
+                        _insert_or_replace_into_writecache_table_values_0_1_2
+                    )
+                ) {
                     var statement = resettableStatement.Statement;
 
                     // Binding indices are 1 based.
@@ -335,19 +463,25 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             {
                 if (!connection.IsInTransaction)
                 {
-                    throw new InvalidOperationException("Must flush tables within a transaction to ensure consistency");
+                    throw new InvalidOperationException(
+                        "Must flush tables within a transaction to ensure consistency"
+                    );
                 }
 
                 // Efficient call to sqlite to just fully copy all data from one table to the
                 // other.  No need to actually do any reading/writing of the data ourselves.
-                using (var statement = connection.GetResettableStatement(_insert_or_replace_into_main_table_select_star_from_writecache_table))
-                {
+                using (
+                    var statement = connection.GetResettableStatement(
+                        _insert_or_replace_into_main_table_select_star_from_writecache_table
+                    )
+                ) {
                     statement.Statement.Step();
                 }
 
                 // Now, just delete all the data from the write cache.
-                using (var statement = connection.GetResettableStatement(_delete_from_writecache_table))
-                {
+                using (
+                    var statement = connection.GetResettableStatement(_delete_from_writecache_table)
+                ) {
                     statement.Statement.Step();
                 }
             }

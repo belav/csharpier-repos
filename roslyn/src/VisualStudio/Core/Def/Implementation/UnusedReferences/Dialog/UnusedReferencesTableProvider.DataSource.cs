@@ -23,19 +23,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             public string? DisplayName => null;
 
             private ImmutableList<SinkManager> _managers = ImmutableList<SinkManager>.Empty;
-            private ImmutableArray<UnusedReferencesEntry> _currentEntries = ImmutableArray<UnusedReferencesEntry>.Empty;
+            private ImmutableArray<UnusedReferencesEntry> _currentEntries =
+                ImmutableArray<UnusedReferencesEntry>.Empty;
 
             public IDisposable Subscribe(ITableDataSink sink)
             {
                 return new SinkManager(this, sink);
             }
 
-            public void AddTableData(Solution solution, string projectFilePath, ImmutableArray<ReferenceUpdate> referenceUpdates)
-            {
+            public void AddTableData(
+                Solution solution,
+                string projectFilePath,
+                ImmutableArray<ReferenceUpdate> referenceUpdates
+            ) {
                 var solutionName = Path.GetFileName(solution.FilePath);
-                var project = solution.Projects.First(project => projectFilePath.Equals(project.FilePath, StringComparison.OrdinalIgnoreCase));
-                var entries = referenceUpdates
-                    .Select(update => new UnusedReferencesEntry(solutionName, project.Name, project.Language, update))
+                var project = solution.Projects.First(
+                    project =>
+                        projectFilePath.Equals(project.FilePath, StringComparison.OrdinalIgnoreCase)
+                );
+                var entries = referenceUpdates.Select(
+                        update =>
+                            new UnusedReferencesEntry(
+                                solutionName,
+                                project.Name,
+                                project.Language,
+                                update
+                            )
+                    )
                     .ToImmutableArray();
 
                 foreach (var manager in _managers)
@@ -73,8 +87,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 internal readonly UnusedReferencesDataSource UnusedReferencesDataSource;
                 internal readonly ITableDataSink Sink;
 
-                internal SinkManager(UnusedReferencesDataSource unusedReferencesDataSource, ITableDataSink sink)
-                {
+                internal SinkManager(
+                    UnusedReferencesDataSource unusedReferencesDataSource,
+                    ITableDataSink sink
+                ) {
                     UnusedReferencesDataSource = unusedReferencesDataSource;
                     Sink = sink;
 
@@ -96,8 +112,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
                 public object Identity => ReferenceUpdate;
 
-                public UnusedReferencesEntry(string solutionName, string projectName, string language, ReferenceUpdate referenceUpdate)
-                {
+                public UnusedReferencesEntry(
+                    string solutionName,
+                    string projectName,
+                    string language,
+                    ReferenceUpdate referenceUpdate
+                ) {
                     SolutionName = solutionName;
                     ProjectName = projectName;
                     Language = language;
@@ -140,8 +160,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
                 public bool TrySetValue(string keyName, object content)
                 {
-                    if (keyName != UnusedReferencesTableKeyNames.UpdateAction || content is not UpdateAction action)
-                    {
+                    if (
+                        keyName != UnusedReferencesTableKeyNames.UpdateAction
+                        || content is not UpdateAction action
+                    ) {
                         return false;
                     }
 

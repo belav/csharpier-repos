@@ -67,7 +67,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Property name can be null if the model metadata represents a type (rather than a property or parameter).
             var headerName = bindingContext.FieldName;
 
-            // Do not set ModelBindingResult to Failed on not finding the value in the header as we want the inner 
+            // Do not set ModelBindingResult to Failed on not finding the value in the header as we want the inner
             // ModelBinder to do that. This would give a chance to the inner binder to add more useful information.
             // For example, SimpleTypeModelBinder adds a model error when binding to let's say an integer and the
             // model is null.
@@ -91,12 +91,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Create a new binding scope in order to supply the HeaderValueProvider so that the binders like
             // SimpleTypeModelBinder can find values from header.
             ModelBindingResult result;
-            using (bindingContext.EnterNestedScope(
+            using (
+                bindingContext.EnterNestedScope(
                     bindingContext.ModelMetadata,
                     fieldName: bindingContext.FieldName,
                     modelName: bindingContext.ModelName,
-                    model: bindingContext.Model))
-            {
+                    model: bindingContext.Model
+                )
+            ) {
                 bindingContext.IsTopLevelObject = isTopLevelObject;
                 bindingContext.ValueProvider = headerValueProvider;
 
@@ -109,8 +111,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             _logger.DoneAttemptingToBindModel(bindingContext);
         }
 
-        private HeaderValueProvider GetHeaderValueProvider(string headerName, ModelBindingContext bindingContext)
-        {
+        private HeaderValueProvider GetHeaderValueProvider(
+            string headerName,
+            ModelBindingContext bindingContext
+        ) {
             var request = bindingContext.HttpContext.Request;
 
             // Prevent breaking existing users in scenarios where they are binding to a 'string' property
@@ -166,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 bindingContext.ModelState.SetModelValue(
                     bindingContext.ModelName,
                     request.Headers.GetCommaSeparatedValues(headerName),
-                    request.Headers[headerName]);
+                    request.Headers[headerName]
+                );
 
                 bindingContext.Result = ModelBindingResult.Success(model);
             }
@@ -174,8 +179,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             _logger.DoneAttemptingToBindModel(bindingContext);
         }
 
-        private static object? GetCompatibleCollection(ModelBindingContext bindingContext, string[] values)
-        {
+        private static object? GetCompatibleCollection(
+            ModelBindingContext bindingContext,
+            string[] values
+        ) {
             // Almost-always success if IsTopLevelObject.
             if (!bindingContext.IsTopLevelObject && values.Length == 0)
             {
@@ -188,7 +195,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 return values;
             }
 
-            var collection = ModelBindingHelper.GetCompatibleCollection<string>(bindingContext, values.Length);
+            var collection = ModelBindingHelper.GetCompatibleCollection<string>(
+                bindingContext,
+                values.Length
+            );
             for (var i = 0; i < values.Length; i++)
             {
                 collection.Add(values[i]);

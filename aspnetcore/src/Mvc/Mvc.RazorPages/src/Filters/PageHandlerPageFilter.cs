@@ -14,8 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// </remarks>t
         public int Order => int.MinValue;
 
-        public Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
-        {
+        public Task OnPageHandlerExecutionAsync(
+            PageHandlerExecutingContext context,
+            PageHandlerExecutionDelegate next
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -29,9 +31,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var handlerInstance = context.HandlerInstance;
             if (handlerInstance == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(context.HandlerInstance),
-                    nameof(PageHandlerExecutedContext)));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(context.HandlerInstance),
+                        nameof(PageHandlerExecutedContext)
+                    )
+                );
             }
 
             if (handlerInstance is IAsyncPageFilter asyncPageFilter)
@@ -70,8 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private static async Task ExecuteSyncFilter(
             PageHandlerExecutingContext context,
             PageHandlerExecutionDelegate next,
-            IPageFilter pageFilter)
-        {
+            IPageFilter pageFilter
+        ) {
             pageFilter.OnPageHandlerExecuting(context);
             if (context.Result == null)
             {

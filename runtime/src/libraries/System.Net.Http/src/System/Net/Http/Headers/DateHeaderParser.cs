@@ -12,10 +12,7 @@ namespace System.Net.Http.Headers
     {
         internal static readonly DateHeaderParser Parser = new DateHeaderParser();
 
-        private DateHeaderParser()
-            : base(false)
-        {
-        }
+        private DateHeaderParser() : base(false) { }
 
         public override string ToString(object value)
         {
@@ -24,8 +21,12 @@ namespace System.Net.Http.Headers
             return HttpDateParser.DateToString((DateTimeOffset)value);
         }
 
-        public override bool TryParseValue([NotNullWhen(true)] string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
-        {
+        public override bool TryParseValue(
+            [NotNullWhen(true)] string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        ) {
             parsedValue = null;
 
             // Some headers support empty/null values. This one doesn't.

@@ -18,7 +18,6 @@ namespace Microsoft.AspNetCore.Razor.Language
             return directory?.EnumerateItems() ?? Enumerable.Empty<RazorProjectItem>();
         }
 
-
         public override RazorProjectItem GetItem(string path)
         {
             return GetItem(path, fileKind: null);

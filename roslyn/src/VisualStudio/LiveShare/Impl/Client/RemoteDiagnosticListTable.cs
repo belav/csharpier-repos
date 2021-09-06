@@ -28,10 +28,17 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         private bool _workspaceDiagnosticsPresent = false;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
+        )]
         public RemoteDiagnosticListTable(
-            SVsServiceProvider serviceProvider, RemoteLanguageServiceWorkspace workspace, IDiagnosticService diagnosticService, ITableManagerProvider provider) :
-            base(workspace, provider)
+            SVsServiceProvider serviceProvider,
+            RemoteLanguageServiceWorkspace workspace,
+            IDiagnosticService diagnosticService,
+            ITableManagerProvider provider
+        ) : base(workspace, provider)
         {
             _source = new LiveTableDataSource(workspace, diagnosticService, IdentifierString);
             AddInitialTableSource(workspace.CurrentSolution, _source);
@@ -39,8 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             ConnectWorkspaceEvents();
         }
 
-        public void UpdateWorkspaceDiagnosticsPresent(bool diagnosticsPresent)
-            => _workspaceDiagnosticsPresent = diagnosticsPresent;
+        public void UpdateWorkspaceDiagnosticsPresent(bool diagnosticsPresent) =>
+            _workspaceDiagnosticsPresent = diagnosticsPresent;
 
         protected override void AddTableSourceIfNecessary(Solution solution)
         {
@@ -67,7 +74,6 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             TableManager.RemoveSource(_source);
         }
 
-        protected override void ShutdownSource()
-            => _source.Shutdown();
+        protected override void ShutdownSource() => _source.Shutdown();
     }
 }

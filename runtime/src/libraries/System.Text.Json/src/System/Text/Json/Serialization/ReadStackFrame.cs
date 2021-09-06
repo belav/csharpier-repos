@@ -8,7 +8,9 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    [DebuggerDisplay("ConverterStrategy.{JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo.Type.Name}")]
+    [DebuggerDisplay(
+        "ConverterStrategy.{JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo.Type.Name}"
+    )]
     internal struct ReadStackFrame
     {
         // Current property values.
@@ -62,7 +64,6 @@ namespace System.Text.Json
             JsonPropertyNameAsString = null;
             PropertyState = StackFramePropertyState.None;
             ValidateEndTokenOnArray = false;
-
             // No need to clear these since they are overwritten each time:
             //  NumberHandling
             //  UseExtensionProperty
@@ -79,7 +80,10 @@ namespace System.Text.Json
         /// </summary>
         public bool IsProcessingDictionary()
         {
-            return (JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy & ConverterStrategy.Dictionary) != 0;
+            return (
+                    JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy
+                    & ConverterStrategy.Dictionary
+                ) != 0;
         }
 
         /// <summary>
@@ -87,7 +91,10 @@ namespace System.Text.Json
         /// </summary>
         public bool IsProcessingEnumerable()
         {
-            return (JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy & ConverterStrategy.Enumerable) != 0;
+            return (
+                    JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy
+                    & ConverterStrategy.Enumerable
+                ) != 0;
         }
 
         public void Reset()

@@ -40,8 +40,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonConverter converter,
             JsonIgnoreCondition? ignoreCondition,
             JsonNumberHandling? parentTypeNumberHandling,
-            JsonSerializerOptions options)
-        {
+            JsonSerializerOptions options
+        ) {
             base.Initialize(
                 parentClassType,
                 declaredPropertyType,
@@ -51,62 +51,62 @@ namespace System.Text.Json.Serialization.Metadata
                 converter,
                 ignoreCondition,
                 parentTypeNumberHandling,
-                options);
+                options
+            );
 
             switch (memberInfo)
             {
                 case PropertyInfo propertyInfo:
+                {
+                    bool useNonPublicAccessors =
+                        GetAttribute<JsonIncludeAttribute>(propertyInfo) != null;
+
+                    MethodInfo? getMethod = propertyInfo.GetMethod;
+                    if (getMethod != null && (getMethod.IsPublic || useNonPublicAccessors))
                     {
-                        bool useNonPublicAccessors = GetAttribute<JsonIncludeAttribute>(propertyInfo) != null;
-
-                        MethodInfo? getMethod = propertyInfo.GetMethod;
-                        if (getMethod != null && (getMethod.IsPublic || useNonPublicAccessors))
-                        {
-                            HasGetter = true;
-                            Get = options.MemberAccessorStrategy.CreatePropertyGetter<T>(propertyInfo);
-                        }
-
-                        MethodInfo? setMethod = propertyInfo.SetMethod;
-                        if (setMethod != null && (setMethod.IsPublic || useNonPublicAccessors))
-                        {
-                            HasSetter = true;
-                            Set = options.MemberAccessorStrategy.CreatePropertySetter<T>(propertyInfo);
-                        }
-
-                        MemberType = MemberTypes.Property;
-
-                        break;
+                        HasGetter = true;
+                        Get = options.MemberAccessorStrategy.CreatePropertyGetter<T>(propertyInfo);
                     }
+
+                    MethodInfo? setMethod = propertyInfo.SetMethod;
+                    if (setMethod != null && (setMethod.IsPublic || useNonPublicAccessors))
+                    {
+                        HasSetter = true;
+                        Set = options.MemberAccessorStrategy.CreatePropertySetter<T>(propertyInfo);
+                    }
+
+                    MemberType = MemberTypes.Property;
+                    break;
+                }
 
                 case FieldInfo fieldInfo:
+                {
+                    Debug.Assert(fieldInfo.IsPublic);
+
+                    HasGetter = true;
+                    Get = options.MemberAccessorStrategy.CreateFieldGetter<T>(fieldInfo);
+
+                    if (!fieldInfo.IsInitOnly)
                     {
-                        Debug.Assert(fieldInfo.IsPublic);
-
-                        HasGetter = true;
-                        Get = options.MemberAccessorStrategy.CreateFieldGetter<T>(fieldInfo);
-
-                        if (!fieldInfo.IsInitOnly)
-                        {
-                            HasSetter = true;
-                            Set = options.MemberAccessorStrategy.CreateFieldSetter<T>(fieldInfo);
-                        }
-
-                        MemberType = MemberTypes.Field;
-
-                        break;
+                        HasSetter = true;
+                        Set = options.MemberAccessorStrategy.CreateFieldSetter<T>(fieldInfo);
                     }
+
+                    MemberType = MemberTypes.Field;
+                    break;
+                }
 
                 default:
-                    {
-                        IsForTypeInfo = true;
-                        HasGetter = true;
-                        HasSetter = true;
-
-                        break;
-                    }
+                {
+                    IsForTypeInfo = true;
+                    HasGetter = true;
+                    HasSetter = true;
+                    break;
+                }
             }
 
-            _converterIsExternalAndPolymorphic = !converter.IsInternalConverter && DeclaredPropertyType != converter.TypeToConvert;
+            _converterIsExternalAndPolymorphic =
+                !converter.IsInternalConverter && DeclaredPropertyType != converter.TypeToConvert;
             PropertyTypeCanBeNull = DeclaredPropertyType.CanBeNull();
             _propertyTypeEqualsTypeToConvert = typeof(T) == DeclaredPropertyType;
 
@@ -124,8 +124,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonIgnoreCondition ignoreCondition,
             JsonNumberHandling numberHandling,
             string propertyName,
-            JsonEncodedText jsonPropertyName)
-        {
+            JsonEncodedText jsonPropertyName
+        ) {
             Options = options;
             ClrName = propertyName;
 
@@ -133,8 +133,11 @@ namespace System.Text.Json.Serialization.Metadata
             string encodedNameAsStr = jsonPropertyName._value;
 
             // Property name settings.
-            if (encodedName != null && options.PropertyNamingPolicy == null && options.Encoder == null)
-            {
+            if (
+                encodedName != null
+                && options.PropertyNamingPolicy == null
+                && options.Encoder == null
+            ) {
                 NameAsString = encodedNameAsStr;
                 NameAsUtf8Bytes = encodedName;
 
@@ -160,12 +163,18 @@ namespace System.Text.Json.Serialization.Metadata
                     NameAsString = options.PropertyNamingPolicy.ConvertName(ClrName);
                     if (NameAsString == null)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameNull(DeclaringType, this);
+                        ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameNull(
+                            DeclaringType,
+                            this
+                        );
                     }
                 }
 
                 NameAsUtf8Bytes ??= Encoding.UTF8.GetBytes(NameAsString!);
-                EscapedNameSection ??= JsonHelpers.GetEscapedPropertyNameSection(NameAsUtf8Bytes, Options.Encoder);
+                EscapedNameSection ??= JsonHelpers.GetEscapedPropertyNameSection(
+                    NameAsUtf8Bytes,
+                    Options.Encoder
+                );
             }
 
             if (ignoreCondition == JsonIgnoreCondition.Always)
@@ -187,14 +196,19 @@ namespace System.Text.Json.Serialization.Metadata
                 IgnoreCondition = ignoreCondition;
                 MemberType = isProperty ? MemberTypes.Property : MemberTypes.Field;
 
-                _converterIsExternalAndPolymorphic = !converter.IsInternalConverter && DeclaredPropertyType != converter.TypeToConvert;
+                _converterIsExternalAndPolymorphic =
+                    !converter.IsInternalConverter
+                    && DeclaredPropertyType != converter.TypeToConvert;
                 PropertyTypeCanBeNull = typeof(T).CanBeNull();
                 _propertyTypeEqualsTypeToConvert = converter.TypeToConvert == typeof(T);
                 ConverterStrategy = Converter!.ConverterStrategy;
                 RuntimePropertyType = DeclaredPropertyType;
                 DetermineIgnoreCondition(IgnoreCondition);
                 // TODO: this method needs to also take the number handling option for the declaring type.
-                DetermineNumberHandlingForProperty(numberHandling, declaringTypeNumberHandling: null);
+                DetermineNumberHandlingForProperty(
+                    numberHandling,
+                    declaringTypeNumberHandling: null
+                );
                 DetermineSerializationCapabilities(IgnoreCondition);
             }
         }
@@ -207,8 +221,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type declaredPropertyType,
             JsonTypeInfo runtimeTypeInfo,
             JsonConverter converter,
-            JsonSerializerOptions options)
-        {
+            JsonSerializerOptions options
+        ) {
             JsonPropertyInfo<T> jsonPropertyInfo = new JsonPropertyInfo<T>();
             jsonPropertyInfo.DeclaredPropertyType = declaredPropertyType;
             jsonPropertyInfo.RuntimePropertyType = declaredPropertyType;
@@ -220,7 +234,8 @@ namespace System.Text.Json.Serialization.Metadata
             jsonPropertyInfo.HasGetter = true;
             jsonPropertyInfo.HasSetter = true;
             // TODO (perf): can we pre-compute some of these values during source gen?
-            jsonPropertyInfo._converterIsExternalAndPolymorphic = !converter.IsInternalConverter && declaredPropertyType != converter.TypeToConvert;
+            jsonPropertyInfo._converterIsExternalAndPolymorphic =
+                !converter.IsInternalConverter && declaredPropertyType != converter.TypeToConvert;
             jsonPropertyInfo.PropertyTypeCanBeNull = declaredPropertyType.CanBeNull();
             jsonPropertyInfo._propertyTypeEqualsTypeToConvert = typeof(T) == declaredPropertyType;
             return jsonPropertyInfo;
@@ -228,10 +243,7 @@ namespace System.Text.Json.Serialization.Metadata
 
         internal override JsonConverter ConverterBase
         {
-            get
-            {
-                return Converter;
-            }
+            get { return Converter; }
             set
             {
                 Debug.Assert(value is JsonConverter<T>);
@@ -250,14 +262,19 @@ namespace System.Text.Json.Serialization.Metadata
             return Get!(obj);
         }
 
-        internal override bool GetMemberAndWriteJson(object obj, ref WriteStack state, Utf8JsonWriter writer)
-        {
+        internal override bool GetMemberAndWriteJson(
+            object obj,
+            ref WriteStack state,
+            Utf8JsonWriter writer
+        ) {
             T value = Get!(obj);
 
-            if (Options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles &&
-                !Converter.IsValueType && value != null &&
-                state.ReferenceResolver.ContainsReferenceForCycleDetection(value))
-            {
+            if (
+                Options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles
+                && !Converter.IsValueType
+                && value != null
+                && state.ReferenceResolver.ContainsReferenceForCycleDetection(value)
+            ) {
                 // If a reference cycle is detected, treat value as null.
                 value = default!;
                 Debug.Assert(value == null);
@@ -335,8 +352,11 @@ namespace System.Text.Json.Serialization.Metadata
             }
         }
 
-        internal override bool GetMemberAndWriteJsonExtensionData(object obj, ref WriteStack state, Utf8JsonWriter writer)
-        {
+        internal override bool GetMemberAndWriteJsonExtensionData(
+            object obj,
+            ref WriteStack state,
+            Utf8JsonWriter writer
+        ) {
             bool success;
             T value = Get!(obj);
 
@@ -346,14 +366,22 @@ namespace System.Text.Json.Serialization.Metadata
             }
             else
             {
-                success = Converter.TryWriteDataExtensionProperty(writer, value, Options, ref state);
+                success = Converter.TryWriteDataExtensionProperty(
+                    writer,
+                    value,
+                    Options,
+                    ref state
+                );
             }
 
             return success;
         }
 
-        internal override bool ReadJsonAndSetMember(object obj, ref ReadStack state, ref Utf8JsonReader reader)
-        {
+        internal override bool ReadJsonAndSetMember(
+            object obj,
+            ref ReadStack state,
+            ref Utf8JsonReader reader
+        ) {
             bool success;
 
             bool isNullToken = reader.TokenType == JsonTokenType.Null;
@@ -361,7 +389,9 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 if (!PropertyTypeCanBeNull)
                 {
-                    ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Converter.TypeToConvert);
+                    ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
+                        Converter.TypeToConvert
+                    );
                 }
 
                 Debug.Assert(default(T) == null);
@@ -391,9 +421,19 @@ namespace System.Text.Json.Serialization.Metadata
             else
             {
                 success = true;
-                if (!isNullToken || !IgnoreDefaultValuesOnRead || !PropertyTypeCanBeNull || state.IsContinuation)
-                {
-                    success = Converter.TryRead(ref reader, RuntimePropertyType!, Options, ref state, out T? value);
+                if (
+                    !isNullToken
+                    || !IgnoreDefaultValuesOnRead
+                    || !PropertyTypeCanBeNull
+                    || state.IsContinuation
+                ) {
+                    success = Converter.TryRead(
+                        ref reader,
+                        RuntimePropertyType!,
+                        Options,
+                        ref state,
+                        out T? value
+                    );
                     if (success)
                     {
 #if !DEBUG
@@ -405,12 +445,17 @@ namespace System.Text.Json.Serialization.Metadata
                                 Type typeOfValue = value.GetType();
                                 if (!DeclaredPropertyType.IsAssignableFrom(typeOfValue))
                                 {
-                                    ThrowHelper.ThrowInvalidCastException_DeserializeUnableToAssignValue(typeOfValue, DeclaredPropertyType);
+                                    ThrowHelper.ThrowInvalidCastException_DeserializeUnableToAssignValue(
+                                        typeOfValue,
+                                        DeclaredPropertyType
+                                    );
                                 }
                             }
                             else if (!PropertyTypeCanBeNull)
                             {
-                                ThrowHelper.ThrowInvalidOperationException_DeserializeUnableToAssignNull(DeclaredPropertyType);
+                                ThrowHelper.ThrowInvalidOperationException_DeserializeUnableToAssignNull(
+                                    DeclaredPropertyType
+                                );
                             }
                         }
 
@@ -422,15 +467,20 @@ namespace System.Text.Json.Serialization.Metadata
             return success;
         }
 
-        internal override bool ReadJsonAsObject(ref ReadStack state, ref Utf8JsonReader reader, out object? value)
-        {
+        internal override bool ReadJsonAsObject(
+            ref ReadStack state,
+            ref Utf8JsonReader reader,
+            out object? value
+        ) {
             bool success;
             bool isNullToken = reader.TokenType == JsonTokenType.Null;
             if (isNullToken && !Converter.HandleNullOnRead && !state.IsContinuation)
             {
                 if (!PropertyTypeCanBeNull)
                 {
-                    ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Converter.TypeToConvert);
+                    ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
+                        Converter.TypeToConvert
+                    );
                 }
 
                 value = default(T);
@@ -449,7 +499,13 @@ namespace System.Text.Json.Serialization.Metadata
                 }
                 else
                 {
-                    success = Converter.TryRead(ref reader, RuntimePropertyType!, Options, ref state, out T? typedValue);
+                    success = Converter.TryRead(
+                        ref reader,
+                        RuntimePropertyType!,
+                        Options,
+                        ref state,
+                        out T? typedValue
+                    );
                     value = typedValue;
                 }
             }

@@ -12,6 +12,7 @@ namespace Test
         public static int Main()
         {
             try { }
+
             finally
             {
                 try

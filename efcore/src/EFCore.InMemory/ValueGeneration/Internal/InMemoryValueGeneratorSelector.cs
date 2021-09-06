@@ -37,8 +37,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
         /// </summary>
         public InMemoryValueGeneratorSelector(
             ValueGeneratorSelectorDependencies dependencies,
-            IInMemoryDatabase inMemoryDatabase)
-            : base(dependencies)
+            IInMemoryDatabase inMemoryDatabase
+        ) : base(dependencies)
         {
             _inMemoryStore = inMemoryDatabase.Store;
         }
@@ -55,10 +55,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
             Check.NotNull(entityType, nameof(entityType));
 
             return property.GetValueGeneratorFactory() == null
-                && property.ClrType.IsInteger()
-                && property.ClrType.UnwrapNullableType() != typeof(char)
-                    ? GetOrCreate(property)
-                    : base.Select(property, entityType);
+            && property.ClrType.IsInteger()
+            && property.ClrType.UnwrapNullableType() != typeof(char)
+                ? GetOrCreate(property)
+                : base.Select(property, entityType);
         }
 
         /// <summary>
@@ -115,7 +115,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
 
             throw new ArgumentException(
                 CoreStrings.InvalidValueGeneratorFactoryProperty(
-                    "InMemoryIntegerValueGeneratorFactory", property.Name, property.DeclaringEntityType.DisplayName()));
+                    "InMemoryIntegerValueGeneratorFactory",
+                    property.Name,
+                    property.DeclaringEntityType.DisplayName()
+                )
+            );
         }
     }
 }

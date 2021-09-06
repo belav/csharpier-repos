@@ -13,17 +13,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class BuildSource
     {
-        public ICollection<BuildReference> References { get; } = new List<BuildReference>
-        {
-            BuildReference.ByName("netstandard"),
-            BuildReference.ByName("System.Collections"),
-            BuildReference.ByName("System.ComponentModel.Annotations"),
-            BuildReference.ByName("System.Data.Common"),
-            BuildReference.ByName("System.Linq.Expressions"),
-            BuildReference.ByName("System.Runtime"),
-            BuildReference.ByName("System.Runtime.Extensions"),
-            BuildReference.ByName("System.Text.RegularExpressions")
-        };
+        public ICollection<BuildReference> References { get; } =
+            new List<BuildReference>
+            {
+                BuildReference.ByName("netstandard"),
+                BuildReference.ByName("System.Collections"),
+                BuildReference.ByName("System.ComponentModel.Annotations"),
+                BuildReference.ByName("System.Data.Common"),
+                BuildReference.ByName("System.Linq.Expressions"),
+                BuildReference.ByName("System.Runtime"),
+                BuildReference.ByName("System.Runtime.Extensions"),
+                BuildReference.ByName("System.Text.RegularExpressions")
+            };
 
         public string TargetDir { get; set; }
         public ICollection<string> Sources { get; set; } = new List<string>();
@@ -39,10 +40,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 {
                     if (string.IsNullOrEmpty(reference.Path))
                     {
-                        throw new InvalidOperationException("Could not find path for reference " + reference);
+                        throw new InvalidOperationException(
+                            "Could not find path for reference " + reference
+                        );
                     }
 
-                    File.Copy(reference.Path, Path.Combine(TargetDir, Path.GetFileName(reference.Path)), overwrite: true);
+                    File.Copy(
+                        reference.Path,
+                        Path.Combine(TargetDir, Path.GetFileName(reference.Path)),
+                        overwrite: true
+                    );
                 }
 
                 references.AddRange(reference.References);
@@ -52,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 projectName,
                 Sources.Select(s => SyntaxFactory.ParseSyntaxTree(s)),
                 references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
             var targetPath = Path.Combine(TargetDir ?? Path.GetTempPath(), projectName + ".dll");
 
@@ -62,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (!result.Success)
                 {
                     throw new InvalidOperationException(
-                        $"Build failed. Diagnostics: {string.Join(Environment.NewLine, result.Diagnostics)}");
+                        $"Build failed. Diagnostics: {string.Join(Environment.NewLine, result.Diagnostics)}"
+                    );
                 }
             }
 
@@ -83,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 projectName,
                 Sources.Select(s => SyntaxFactory.ParseSyntaxTree(s)),
                 references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
             Assembly assembly;
             using (var stream = new MemoryStream())
@@ -92,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (!result.Success)
                 {
                     throw new InvalidOperationException(
-                        $"Build failed. Diagnostics: {string.Join(Environment.NewLine, result.Diagnostics)}");
+                        $"Build failed. Diagnostics: {string.Join(Environment.NewLine, result.Diagnostics)}"
+                    );
                 }
 
                 assembly = Assembly.Load(stream.ToArray());

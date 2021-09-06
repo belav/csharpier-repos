@@ -10,7 +10,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
     {
         private readonly StringComparison _comparisonType;
 
-        public bool CanProduceStem { get { return false; } }
+        public bool CanProduceStem
+        {
+            get { return false; }
+        }
 
         public LiteralPathSegment(string value, StringComparison comparisonType)
         {
@@ -35,9 +38,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
         {
             var other = obj as LiteralPathSegment;
 
-            return other != null &&
-                _comparisonType == other._comparisonType &&
-                string.Equals(other.Value, Value, _comparisonType);
+            return other != null
+                && _comparisonType == other._comparisonType
+                && string.Equals(other.Value, Value, _comparisonType);
         }
 
         public override int GetHashCode()

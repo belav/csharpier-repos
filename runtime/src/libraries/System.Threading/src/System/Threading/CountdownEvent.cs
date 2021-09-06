@@ -33,8 +33,8 @@ namespace System.Threading
         // wait.
 
         private int _initialCount; // The original # of signals the latch was instantiated with.
-        private volatile int _currentCount;  // The # of outstanding signals before the latch transitions to a signaled state.
-        private readonly ManualResetEventSlim _event;   // An event used to manage blocking and signaling.
+        private volatile int _currentCount; // The # of outstanding signals before the latch transitions to a signaled state.
+        private readonly ManualResetEventSlim _event; // An event used to manage blocking and signaling.
         private volatile bool _disposed; // Whether the latch has been disposed.
 
         /// <summary>
@@ -236,8 +236,13 @@ namespace System.Threading
                     throw new InvalidOperationException(SR.CountdownEvent_Decrement_BelowZero);
                 }
 
-                if (Interlocked.CompareExchange(ref _currentCount, observedCount - signalCount, observedCount) == observedCount)
-                {
+                if (
+                    Interlocked.CompareExchange(
+                        ref _currentCount,
+                        observedCount - signalCount,
+                        observedCount
+                    ) == observedCount
+                ) {
                     break;
                 }
 
@@ -346,8 +351,13 @@ namespace System.Threading
                     throw new InvalidOperationException(SR.CountdownEvent_Increment_AlreadyMax);
                 }
 
-                if (Interlocked.CompareExchange(ref _currentCount, observedCount + signalCount, observedCount) == observedCount)
-                {
+                if (
+                    Interlocked.CompareExchange(
+                        ref _currentCount,
+                        observedCount + signalCount,
+                        observedCount
+                    ) == observedCount
+                ) {
                     break;
                 }
 
@@ -420,7 +430,6 @@ namespace System.Threading
         {
             Wait(Timeout.Infinite, CancellationToken.None);
         }
-
 
         /// <summary>
         /// Blocks the current thread until the <see cref="System.Threading.CountdownEvent"/> is set, while

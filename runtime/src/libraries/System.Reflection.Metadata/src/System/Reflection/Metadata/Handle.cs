@@ -26,7 +26,10 @@ namespace System.Reflection.Metadata
         /// </summary>
         internal static Handle FromVToken(uint vToken)
         {
-            return new Handle((byte)(vToken >> TokenTypeIds.RowIdBitCount), (int)(vToken & TokenTypeIds.RIDMask));
+            return new Handle(
+                (byte)(vToken >> TokenTypeIds.RowIdBitCount),
+                (int)(vToken & TokenTypeIds.RIDMask)
+            );
         }
 
         internal Handle(byte vType, int value)
@@ -41,8 +44,10 @@ namespace System.Reflection.Metadata
             // We limit the size of #Blob, #String and #GUID heaps to 2^29 (max compressed integer) in order
             // to keep the sizes of corresponding handles to 32 bit. As a result we don't support reading metadata
             // files with heaps larger than 0.5GB.
-            Debug.Assert(IsHeapHandle && value <= HeapHandleType.OffsetMask ||
-                         !IsHeapHandle && value <= TokenTypeIds.RIDMask);
+            Debug.Assert(
+                IsHeapHandle && value <= HeapHandleType.OffsetMask
+                    || !IsHeapHandle && value <= TokenTypeIds.RIDMask
+            );
         }
 
         // for entity handles:
@@ -101,7 +106,8 @@ namespace System.Reflection.Metadata
             get
             {
                 Debug.Assert((_value & TokenTypeIds.RIDMask) == _value);
-                return (_vType & HandleType.VirtualBit) << TokenTypeIds.RowIdBitCount | (uint)_value;
+                return (_vType & HandleType.VirtualBit) << TokenTypeIds.RowIdBitCount
+                    | (uint)_value;
             }
         }
 
@@ -189,10 +195,15 @@ namespace System.Reflection.Metadata
             // All virtual tokens will be sorted after non-virtual tokens.
             // The order of handles that differ in kind is undefined,
             // but we include it so that we ensure consistency with == and != operators.
-            return ((long)(uint)left._value | (long)left._vType << 32).CompareTo((long)(uint)right._value | (long)right._vType << 32);
+            return ((long)(uint)left._value | (long)left._vType << 32).CompareTo(
+                (long)(uint)right._value | (long)right._vType << 32
+            );
         }
 
-        public static readonly ModuleDefinitionHandle ModuleDefinition = new ModuleDefinitionHandle(1);
-        public static readonly AssemblyDefinitionHandle AssemblyDefinition = new AssemblyDefinitionHandle(1);
+        public static readonly ModuleDefinitionHandle ModuleDefinition = new ModuleDefinitionHandle(
+            1
+        );
+        public static readonly AssemblyDefinitionHandle AssemblyDefinition =
+            new AssemblyDefinitionHandle(1);
     }
 }

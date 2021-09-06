@@ -12,11 +12,20 @@ namespace System.Text.Json.Serialization.Converters
         : IEnumerableDefaultConverter<TAsyncEnumerable, TElement>
         where TAsyncEnumerable : IAsyncEnumerable<TElement>
     {
-        internal override bool OnTryRead(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options, ref ReadStack state, out TAsyncEnumerable value)
-        {
+        internal override bool OnTryRead(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            ref ReadStack state,
+            out TAsyncEnumerable value
+        ) {
             if (!typeToConvert.IsAssignableFrom(typeof(IAsyncEnumerable<TElement>)))
             {
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    TypeToConvert,
+                    ref reader,
+                    ref state
+                );
             }
 
             return base.OnTryRead(ref reader, typeToConvert, options, ref state, out value!);
@@ -27,24 +36,41 @@ namespace System.Text.Json.Serialization.Converters
             ((BufferedAsyncEnumerable)state.Current.ReturnValue!)._buffer.Add(value);
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
-        {
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        ) {
             state.Current.ReturnValue = new BufferedAsyncEnumerable();
         }
 
-        internal override bool OnTryWrite(Utf8JsonWriter writer, TAsyncEnumerable value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        internal override bool OnTryWrite(
+            Utf8JsonWriter writer,
+            TAsyncEnumerable value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             if (!state.SupportContinuation)
             {
-                ThrowHelper.ThrowNotSupportedException_TypeRequiresAsyncSerialization(TypeToConvert);
+                ThrowHelper.ThrowNotSupportedException_TypeRequiresAsyncSerialization(
+                    TypeToConvert
+                );
             }
 
             return base.OnTryWrite(writer, value, options, ref state);
         }
 
-        [Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2012:Use ValueTasks correctly", Justification = "Converter needs to consume ValueTask's in a non-async context")]
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TAsyncEnumerable value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        [Diagnostics.CodeAnalysis.SuppressMessage(
+            "Reliability",
+            "CA2012:Use ValueTasks correctly",
+            Justification = "Converter needs to consume ValueTask's in a non-async context"
+        )]
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TAsyncEnumerable value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             IAsyncEnumerator<TElement> enumerator;
             ValueTask<bool> moveNextTask;
 

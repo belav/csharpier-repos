@@ -49,7 +49,10 @@ namespace System.Runtime.CompilerServices
         {
             RuntimeType rt = type.GetRuntimeType();
             if (rt is null)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(type));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(type)
+                );
 
             RunClassConstructor(new QCallTypeHandle(ref rt));
         }
@@ -69,7 +72,10 @@ namespace System.Runtime.CompilerServices
         {
             RuntimeModule rm = module.GetRuntimeModule();
             if (rm is null)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(module));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(module)
+                );
 
             RunModuleConstructor(new QCallModule(ref rm));
         }
@@ -78,20 +84,32 @@ namespace System.Runtime.CompilerServices
         internal static extern void CompileMethod(RuntimeMethodHandleInternal method);
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern unsafe void PrepareMethod(RuntimeMethodHandleInternal method, IntPtr* pInstantiation, int cInstantiation);
+        private static extern unsafe void PrepareMethod(
+            RuntimeMethodHandleInternal method,
+            IntPtr* pInstantiation,
+            int cInstantiation
+        );
 
         public static void PrepareMethod(RuntimeMethodHandle method) => PrepareMethod(method, null);
 
-        public static unsafe void PrepareMethod(RuntimeMethodHandle method, RuntimeTypeHandle[]? instantiation)
-        {
+        public static unsafe void PrepareMethod(
+            RuntimeMethodHandle method,
+            RuntimeTypeHandle[]? instantiation
+        ) {
             IRuntimeMethodInfo methodInfo = method.GetMethodInfo();
             if (methodInfo == null)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(method));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(method)
+                );
 
             // defensive copy of user-provided array, per CopyRuntimeTypeHandles contract
             instantiation = (RuntimeTypeHandle[]?)instantiation?.Clone();
 
-            IntPtr[]? instantiationHandles = RuntimeTypeHandle.CopyRuntimeTypeHandles(instantiation, out int length);
+            IntPtr[]? instantiationHandles = RuntimeTypeHandle.CopyRuntimeTypeHandles(
+                instantiation,
+                out int length
+            );
             fixed (IntPtr* pInstantiation = instantiationHandles)
             {
                 PrepareMethod(methodInfo.Value, pInstantiation, length);
@@ -148,9 +166,12 @@ namespace System.Runtime.CompilerServices
             // This obviously won't cover a type with no constructor. Reference types with no
             // constructor are an academic problem. Valuetypes with no constructors are a problem,
             // but IL Linker currently treats them as always implicitly boxed.
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        ) {
             if (type is not RuntimeType rt)
             {
                 if (type is null)
@@ -162,12 +183,18 @@ namespace System.Runtime.CompilerServices
             }
 
             object? obj = null;
-            GetUninitializedObject(new QCallTypeHandle(ref rt), ObjectHandleOnStack.Create(ref obj));
+            GetUninitializedObject(
+                new QCallTypeHandle(ref rt),
+                ObjectHandleOnStack.Create(ref obj)
+            );
             return obj!;
         }
 
         [DllImport(RuntimeHelpers.QCall)]
-        private static extern void GetUninitializedObject(QCallTypeHandle type, ObjectHandleOnStack retObject);
+        private static extern void GetUninitializedObject(
+            QCallTypeHandle type,
+            ObjectHandleOnStack retObject
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern object AllocateUninitializedClone(object obj);
@@ -209,8 +236,7 @@ namespace System.Runtime.CompilerServices
             return x.CompareTo(y);
         }
 
-        internal static ref byte GetRawData(this object obj) =>
-            ref Unsafe.As<RawData>(obj).Data;
+        internal static ref byte GetRawData(this object obj) => ref Unsafe.As<RawData>(obj).Data;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static unsafe nuint GetRawObjectDataSize(object obj)
@@ -230,7 +256,10 @@ namespace System.Runtime.CompilerServices
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static unsafe ref byte GetRawArrayData(this Array array) =>
             // See comment on RawArrayData for details
-            ref Unsafe.AddByteOffset(ref Unsafe.As<RawData>(array).Data, (nuint)GetMethodTable(array)->BaseSize - (nuint)(2 * sizeof(IntPtr)));
+            ref Unsafe.AddByteOffset(
+                ref Unsafe.As<RawData>(array).Data,
+                (nuint)GetMethodTable(array)->BaseSize - (nuint)(2 * sizeof(IntPtr))
+            );
 
         internal static unsafe ushort GetElementSize(this Array array)
         {
@@ -282,7 +311,7 @@ namespace System.Runtime.CompilerServices
             // The body of this function will be replaced by the EE with unsafe code
             // See getILIntrinsicImplementationForRuntimeHelpers for how this happens.
 
-            return (MethodTable *)Unsafe.Add(ref Unsafe.As<byte, IntPtr>(ref obj.GetRawData()), -1);
+            return (MethodTable*)Unsafe.Add(ref Unsafe.As<byte, IntPtr>(ref obj.GetRawData()), -1);
         }
 
         /// <summary>
@@ -311,14 +340,17 @@ namespace System.Runtime.CompilerServices
         private static extern IntPtr AllocTailCallArgBuffer(int size, IntPtr gcDesc);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern unsafe TailCallTls* GetTailCallInfo(IntPtr retAddrSlot, IntPtr* retAddr);
+        private static extern unsafe TailCallTls* GetTailCallInfo(
+            IntPtr retAddrSlot,
+            IntPtr* retAddr
+        );
 
         [StackTraceHidden]
         private static unsafe void DispatchTailCalls(
             IntPtr callersRetAddrSlot,
-            delegate*<IntPtr, IntPtr, PortableTailCallFrame*, void> callTarget,
-            IntPtr retVal)
-        {
+            delegate* <IntPtr, IntPtr, PortableTailCallFrame*, void> callTarget,
+            IntPtr retVal
+        ) {
             IntPtr callersRetAddr;
             TailCallTls* tls = GetTailCallInfo(callersRetAddrSlot, &callersRetAddr);
             PortableTailCallFrame* prevFrame = tls->Frame;
@@ -344,14 +376,18 @@ namespace System.Runtime.CompilerServices
                     callTarget = newFrame.NextCall;
                 } while (callTarget != null);
             }
+
             finally
             {
                 tls->Frame = prevFrame;
 
                 // If the arg buffer is reporting inst argument, it is safe to abandon it now
-                if (tls->ArgBuffer != IntPtr.Zero && *(int*)tls->ArgBuffer == 1 /* TAILCALLARGBUFFER_INSTARG_ONLY */)
-                {
-                    *(int*)tls->ArgBuffer = 2 /* TAILCALLARGBUFFER_ABANDONED */;
+                if (
+                    tls->ArgBuffer != IntPtr.Zero && *(int*)tls->ArgBuffer == 1 /* TAILCALLARGBUFFER_INSTARG_ONLY */
+                ) {
+                    *(int*)tls->ArgBuffer =
+                        2 /* TAILCALLARGBUFFER_ABANDONED */
+                    ;
                 }
             }
         }
@@ -410,10 +446,11 @@ namespace System.Runtime.CompilerServices
         private const uint enum_flag_HasComponentSize = 0x80000000;
         private const uint enum_flag_HasTypeEquivalence = 0x02000000;
         // Types that require non-trivial interface cast have this bit set in the category
-        private const uint enum_flag_NonTrivialInterfaceCast = 0x00080000 // enum_flag_Category_Array
-                                                             | 0x40000000 // enum_flag_ComObject
-                                                             | 0x00400000 // enum_flag_ICastable;
-                                                             | 0x00200000;// enum_flag_IDynamicInterfaceCastable;
+        private const uint enum_flag_NonTrivialInterfaceCast =
+            0x00080000 // enum_flag_Category_Array
+            | 0x40000000 // enum_flag_ComObject
+            | 0x00400000 // enum_flag_ICastable;
+            | 0x00200000; // enum_flag_IDynamicInterfaceCastable;
 
         private const int DebugClassNamePtr = // adjust for debug_m_szClassName
 #if DEBUG
@@ -425,7 +462,7 @@ namespace System.Runtime.CompilerServices
 #else
             0
 #endif
-            ;
+        ;
 
         private const int ParentMethodTableOffset = 0x10 + DebugClassNamePtr;
 
@@ -443,34 +480,22 @@ namespace System.Runtime.CompilerServices
 
         public bool HasComponentSize
         {
-            get
-            {
-                return (Flags & enum_flag_HasComponentSize) != 0;
-            }
+            get { return (Flags & enum_flag_HasComponentSize) != 0; }
         }
 
         public bool ContainsGCPointers
         {
-            get
-            {
-                return (Flags & enum_flag_ContainsPointers) != 0;
-            }
+            get { return (Flags & enum_flag_ContainsPointers) != 0; }
         }
 
         public bool NonTrivialInterfaceCast
         {
-            get
-            {
-                return (Flags & enum_flag_NonTrivialInterfaceCast) != 0;
-            }
+            get { return (Flags & enum_flag_NonTrivialInterfaceCast) != 0; }
         }
 
         public bool HasTypeEquivalence
         {
-            get
-            {
-                return (Flags & enum_flag_HasTypeEquivalence) != 0;
-            }
+            get { return (Flags & enum_flag_HasTypeEquivalence) != 0; }
         }
 
         public bool IsMultiDimensionalArray
@@ -503,7 +528,7 @@ namespace System.Runtime.CompilerServices
     {
         public PortableTailCallFrame* Prev;
         public IntPtr TailCallAwareReturnAddress;
-        public delegate*<IntPtr, IntPtr, PortableTailCallFrame*, void> NextCall;
+        public delegate* <IntPtr, IntPtr, PortableTailCallFrame*, void> NextCall;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -512,5 +537,4 @@ namespace System.Runtime.CompilerServices
         public PortableTailCallFrame* Frame;
         public IntPtr ArgBuffer;
     }
-
 }

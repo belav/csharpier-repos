@@ -29,8 +29,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
 
         public WebAssemblyConsoleLogger(IJSRuntime jsRuntime)
             : this(string.Empty, (WebAssemblyJSRuntime)jsRuntime) // Cast for DI
-        {
-        }
+        { }
 
         public WebAssemblyConsoleLogger(string name, WebAssemblyJSRuntime jsRuntime)
         {
@@ -48,8 +47,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             return logLevel != LogLevel.None;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-        {
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        ) {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -68,13 +72,25 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             }
         }
 
-        private void WriteMessage(LogLevel logLevel, string logName, int eventId, string message, Exception? exception)
-        {
+        private void WriteMessage(
+            LogLevel logLevel,
+            string logName,
+            int eventId,
+            string message,
+            Exception? exception
+        ) {
             lock (_logBuilder)
             {
                 try
                 {
-                    CreateDefaultLogMessage(_logBuilder, logLevel, logName, eventId, message, exception);
+                    CreateDefaultLogMessage(
+                        _logBuilder,
+                        logLevel,
+                        logName,
+                        eventId,
+                        message,
+                        exception
+                    );
                     var formattedMessage = _logBuilder.ToString();
 
                     switch (logLevel)
@@ -99,14 +115,21 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
                             _jsRuntime.InvokeVoid("console.error", formattedMessage);
                             break;
                         case LogLevel.Critical:
-                            _jsRuntime.InvokeUnmarshalled<string, object>("Blazor._internal.dotNetCriticalError", formattedMessage);
+                            _jsRuntime.InvokeUnmarshalled<string, object>(
+                                "Blazor._internal.dotNetCriticalError",
+                                formattedMessage
+                            );
                             break;
                         default: // invalid enum values
-                            Debug.Assert(logLevel != LogLevel.None, "This method is never called with LogLevel.None.");
+                            Debug.Assert(
+                                logLevel != LogLevel.None,
+                                "This method is never called with LogLevel.None."
+                            );
                             _jsRuntime.InvokeVoid("console.log", formattedMessage);
                             break;
                     }
                 }
+
                 finally
                 {
                     _logBuilder.Clear();
@@ -114,8 +137,14 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             }
         }
 
-        private void CreateDefaultLogMessage(StringBuilder logBuilder, LogLevel logLevel, string logName, int eventId, string message, Exception? exception)
-        {
+        private void CreateDefaultLogMessage(
+            StringBuilder logBuilder,
+            LogLevel logLevel,
+            string logName,
+            int eventId,
+            string message,
+            Exception? exception
+        ) {
             logBuilder.Append(GetLogLevelString(logLevel));
             logBuilder.Append(_loglevelPadding);
             logBuilder.Append(logName);
@@ -131,7 +160,12 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
 
                 var len = logBuilder.Length;
                 logBuilder.Append(message);
-                logBuilder.Replace(Environment.NewLine, _newLineWithMessagePadding, len, message.Length);
+                logBuilder.Replace(
+                    Environment.NewLine,
+                    _newLineWithMessagePadding,
+                    len,
+                    message.Length
+                );
             }
 
             // Example:

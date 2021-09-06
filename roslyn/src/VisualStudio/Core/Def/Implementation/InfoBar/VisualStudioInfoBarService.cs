@@ -33,8 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
             IForegroundNotificationService foregroundNotificationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext)
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
             _foregroundNotificationService = foregroundNotificationService;
@@ -46,13 +46,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ThisCanBeCalledOnAnyThread();
 
             // We can be called from any thread since errors can occur anywhere, however we can only construct and InfoBar from the UI thread.
-            _foregroundNotificationService.RegisterNotification(() =>
-            {
-                if (TryGetInfoBarData(out var infoBarHost))
+            _foregroundNotificationService.RegisterNotification(
+                () =>
                 {
-                    CreateInfoBar(infoBarHost, message, items);
-                }
-            }, _listener.BeginAsyncOperation(nameof(ShowInfoBar)), ThreadingContext.DisposalToken);
+                    if (TryGetInfoBarData(out var infoBarHost))
+                    {
+                        CreateInfoBar(infoBarHost, message, items);
+                    }
+                },
+                _listener.BeginAsyncOperation(nameof(ShowInfoBar)),
+                ThreadingContext.DisposalToken
+            );
         }
 
         private bool TryGetInfoBarData(out IVsInfoBarHost infoBarHost)
@@ -62,9 +66,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             infoBarHost = null;
 
             // global error info, show it on main window info bar
-            if (_serviceProvider.GetService(typeof(SVsShell)) is not IVsShell shell ||
-                ErrorHandler.Failed(shell.GetProperty((int)__VSSPROPID7.VSSPROPID_MainWindowInfoBarHost, out var globalInfoBar)))
-            {
+            if (
+                _serviceProvider.GetService(typeof(SVsShell)) is not IVsShell shell
+                || ErrorHandler.Failed(
+                    shell.GetProperty(
+                        (int)__VSSPROPID7.VSSPROPID_MainWindowInfoBarHost,
+                        out var globalInfoBar
+                    )
+                )
+            ) {
                 return false;
             }
 
@@ -74,16 +84,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         private void CreateInfoBar(IVsInfoBarHost infoBarHost, string message, InfoBarUI[] items)
         {
-            if (!(_serviceProvider.GetService(typeof(SVsInfoBarUIFactory)) is IVsInfoBarUIFactory factory))
-            {
+            if (
+                !(
+                    _serviceProvider.GetService(typeof(SVsInfoBarUIFactory))
+                    is IVsInfoBarUIFactory factory
+                )
+            ) {
                 // no info bar factory, don't do anything
                 return;
             }
 
-            var textSpans = new List<IVsInfoBarTextSpan>()
-            {
-                new InfoBarTextSpan(message)
-            };
+            var textSpans = new List<IVsInfoBarTextSpan>() { new InfoBarTextSpan(message) };
 
             // create action item list
             var actionItems = new List<IVsInfoBarActionItem>();
@@ -109,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 textSpans,
                 actionItems.ToArray(),
                 KnownMonikers.StatusInformation,
-                isCloseButtonVisible: true);
+                isCloseButtonVisible: true
+            );
 
             if (!TryCreateInfoBarUI(factory, infoBarModel, out var infoBarUI))
             {
@@ -117,16 +129,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
 
             uint? infoBarCookie = null;
-            var eventSink = new InfoBarEvents(items, () =>
-            {
-                // run given onClose action if there is one.
-                items.FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close).Action?.Invoke();
-
-                if (infoBarCookie.HasValue)
+            var eventSink = new InfoBarEvents(
+                items,
+                () =>
                 {
-                    infoBarUI.Unadvise(infoBarCookie.Value);
+                    // run given onClose action if there is one.
+                    items.FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close).Action?.Invoke();
+
+                    if (infoBarCookie.HasValue)
+                    {
+                        infoBarUI.Unadvise(infoBarCookie.Value);
+                    }
                 }
-            });
+            );
 
             infoBarUI.Advise(eventSink, out var cookie);
             infoBarCookie = cookie;
@@ -147,8 +162,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _onClose = onClose;
             }
 
-            public void OnActionItemClicked(IVsInfoBarUIElement infoBarUIElement, IVsInfoBarActionItem actionItem)
-            {
+            public void OnActionItemClicked(
+                IVsInfoBarUIElement infoBarUIElement,
+                IVsInfoBarActionItem actionItem
+            ) {
                 var item = _items.FirstOrDefault(i => i.Title == actionItem.Text);
                 if (item.IsDefault)
                 {
@@ -165,12 +182,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 infoBarUIElement.Close();
             }
 
-            public void OnClosed(IVsInfoBarUIElement infoBarUIElement)
-                => _onClose();
+            public void OnClosed(IVsInfoBarUIElement infoBarUIElement) => _onClose();
         }
 
-        private static bool TryCreateInfoBarUI(IVsInfoBarUIFactory infoBarUIFactory, IVsInfoBar infoBar, out IVsInfoBarUIElement uiElement)
-        {
+        private static bool TryCreateInfoBarUI(
+            IVsInfoBarUIFactory infoBarUIFactory,
+            IVsInfoBar infoBar,
+            out IVsInfoBarUIElement uiElement
+        ) {
             uiElement = infoBarUIFactory.CreateInfoBar(infoBar);
             return uiElement != null;
         }

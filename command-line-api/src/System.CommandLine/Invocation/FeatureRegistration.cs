@@ -9,7 +9,8 @@ namespace System.CommandLine.Invocation
 {
     internal class FeatureRegistration
     {
-        private static readonly string _assemblyName = (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).FullName;
+        private static readonly string _assemblyName =
+            (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).FullName;
         private readonly FileInfo _sentinelFile;
 
         public FeatureRegistration(string featureName)
@@ -18,7 +19,9 @@ namespace System.CommandLine.Invocation
                 Path.Combine(
                     Path.GetTempPath(),
                     "system-commandline-sentinel-files",
-                    $"{featureName}-{_assemblyName}"));
+                    $"{featureName}-{_assemblyName}"
+                )
+            );
         }
 
         public async Task EnsureRegistered(Func<Task<string>> onInitialize)
@@ -34,9 +37,7 @@ namespace System.CommandLine.Invocation
                 {
                     var message = await onInitialize();
 
-                    File.WriteAllText(
-                        _sentinelFile.FullName,
-                        message);
+                    File.WriteAllText(_sentinelFile.FullName, message);
                 }
                 catch (Exception)
                 {

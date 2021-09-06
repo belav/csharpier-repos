@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Design
     ///         can handle the new scope, and that it does not cause issue for services that depend on it.
     ///     </para>
     /// </summary>
-    public class EntityFrameworkRelationalDesignServicesBuilder : EntityFrameworkDesignServicesBuilder
+    public class EntityFrameworkRelationalDesignServicesBuilder
+        : EntityFrameworkDesignServicesBuilder
     {
         /// <summary>
         ///     <para>
@@ -39,12 +40,21 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public static readonly IDictionary<Type, ServiceCharacteristics> RelationalServices
-            = new Dictionary<Type, ServiceCharacteristics>
+        public static readonly IDictionary<Type, ServiceCharacteristics> RelationalServices =
+            new Dictionary<Type, ServiceCharacteristics>
             {
-                { typeof(IAnnotationCodeGenerator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IProviderConfigurationCodeGenerator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IDatabaseModelFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) }
+                {
+                    typeof(IAnnotationCodeGenerator),
+                    new ServiceCharacteristics(ServiceLifetime.Singleton)
+                },
+                {
+                    typeof(IProviderConfigurationCodeGenerator),
+                    new ServiceCharacteristics(ServiceLifetime.Singleton)
+                },
+                {
+                    typeof(IDatabaseModelFactory),
+                    new ServiceCharacteristics(ServiceLifetime.Singleton)
+                }
             };
 
         /// <summary>
@@ -52,10 +62,9 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     registration of provider services.
         /// </summary>
         /// <param name="serviceCollection"> The collection to which services will be registered. </param>
-        public EntityFrameworkRelationalDesignServicesBuilder(IServiceCollection serviceCollection)
-            : base(serviceCollection)
-        {
-        }
+        public EntityFrameworkRelationalDesignServicesBuilder(
+            IServiceCollection serviceCollection
+        ) : base(serviceCollection) { }
 
         /// <summary>
         ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
@@ -63,8 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="serviceType"> The type that defines the service API. </param>
         /// <returns> The <see cref="ServiceCharacteristics" /> for the type. </returns>
         /// <exception cref="InvalidOperationException"> when the type is not an EF service. </exception>
-        protected override ServiceCharacteristics GetServiceCharacteristics(Type serviceType)
-            => RelationalServices.TryGetValue(serviceType, out var characteristics)
+        protected override ServiceCharacteristics GetServiceCharacteristics(Type serviceType) =>
+            RelationalServices.TryGetValue(serviceType, out var characteristics)
                 ? characteristics
                 : base.GetServiceCharacteristics(serviceType);
 

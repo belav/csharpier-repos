@@ -13,23 +13,30 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 {
     internal class DefaultControllerPropertyActivator : IControllerPropertyActivator
     {
-        private static readonly Func<Type, PropertyActivator<ControllerContext>[]> _getPropertiesToActivate =
-            GetPropertiesToActivate;
+        private static readonly Func<
+            Type,
+            PropertyActivator<ControllerContext>[]
+        > _getPropertiesToActivate = GetPropertiesToActivate;
         private object _initializeLock = new object();
         private bool _initialized;
-        private ConcurrentDictionary<Type, PropertyActivator<ControllerContext>[]>? _activateActions;
+        private ConcurrentDictionary<
+            Type,
+            PropertyActivator<ControllerContext>[]
+        >? _activateActions;
 
         public void Activate(ControllerContext context, object controller)
         {
             LazyInitializer.EnsureInitialized(
                 ref _activateActions,
                 ref _initialized,
-                ref _initializeLock);
+                ref _initializeLock
+            );
 
             var controllerType = controller.GetType();
             var propertiesToActivate = _activateActions!.GetOrAdd(
                 controllerType,
-                _getPropertiesToActivate);
+                _getPropertiesToActivate
+            );
 
             for (var i = 0; i < propertiesToActivate.Length; i++)
             {
@@ -38,8 +45,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             }
         }
 
-        public Action<ControllerContext, object> GetActivatorDelegate(ControllerActionDescriptor actionDescriptor)
-        {
+        public Action<ControllerContext, object> GetActivatorDelegate(
+            ControllerActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -48,10 +56,13 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controllerType = actionDescriptor.ControllerTypeInfo?.AsType();
             if (controllerType == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(actionDescriptor.ControllerTypeInfo),
-                    nameof(actionDescriptor)),
-                    nameof(actionDescriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(actionDescriptor.ControllerTypeInfo),
+                        nameof(actionDescriptor)
+                    ),
+                    nameof(actionDescriptor)
+                );
             }
 
             var propertiesToActivate = GetPropertiesToActivate(controllerType);
@@ -73,12 +84,16 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             activators = PropertyActivator<ControllerContext>.GetPropertiesToActivate(
                 type,
                 typeof(ActionContextAttribute),
-                p => new PropertyActivator<ControllerContext>(p, c => c));
+                p => new PropertyActivator<ControllerContext>(p, c => c)
+            );
 
-            activators = activators.Concat(PropertyActivator<ControllerContext>.GetPropertiesToActivate(
-                type,
-                typeof(ControllerContextAttribute),
-                p => new PropertyActivator<ControllerContext>(p, c => c)));
+            activators = activators.Concat(
+                PropertyActivator<ControllerContext>.GetPropertiesToActivate(
+                    type,
+                    typeof(ControllerContextAttribute),
+                    p => new PropertyActivator<ControllerContext>(p, c => c)
+                )
+            );
 
             return activators.ToArray();
         }

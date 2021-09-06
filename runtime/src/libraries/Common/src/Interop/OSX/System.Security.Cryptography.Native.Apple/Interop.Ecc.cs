@@ -16,16 +16,20 @@ internal static partial class Interop
             SafeKeychainHandle tempKeychain,
             out SafeSecKeyRefHandle pPublicKey,
             out SafeSecKeyRefHandle pPrivateKey,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
-        [DllImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_EccGetKeySizeInBits")]
+        [DllImport(
+            Libraries.AppleCryptoNative,
+            EntryPoint = "AppleCryptoNative_EccGetKeySizeInBits"
+        )]
         internal static extern long EccGetKeySizeInBits(SafeSecKeyRefHandle publicKey);
 
         internal static void EccGenerateKey(
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
-            out SafeSecKeyRefHandle pPrivateKey)
-        {
+            out SafeSecKeyRefHandle pPrivateKey
+        ) {
             using (SafeTemporaryKeychainHandle tempKeychain = CreateTemporaryKeychain())
             {
                 SafeSecKeyRefHandle keychainPublic;
@@ -37,7 +41,8 @@ internal static partial class Interop
                     tempKeychain,
                     out keychainPublic,
                     out keychainPrivate,
-                    out osStatus);
+                    out osStatus
+                );
 
                 if (result == 1)
                 {
@@ -54,7 +59,9 @@ internal static partial class Interop
                         throw CreateExceptionForOSStatus(osStatus);
                     }
 
-                    Debug.Fail($"Unexpected result from AppleCryptoNative_EccGenerateKey: {result}");
+                    Debug.Fail(
+                        $"Unexpected result from AppleCryptoNative_EccGenerateKey: {result}"
+                    );
                     throw new CryptographicException();
                 }
             }

@@ -7,8 +7,10 @@ namespace System.Net.Internals
 {
     internal static partial class SocketExceptionFactory
     {
-        public static SocketException CreateSocketException(SocketError socketError, int nativeErrorCode)
-        {
+        public static SocketException CreateSocketException(
+            SocketError socketError,
+            int nativeErrorCode
+        ) {
             return new ExtendedSocketException(socketError, nativeErrorCode);
         }
     }

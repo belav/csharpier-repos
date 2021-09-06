@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace System.Speech.Internal.GrammarBuilding
 {
-
     internal class IdentifierCollection
     {
         #region Constructors
@@ -46,7 +45,6 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Protected Fields
 
         protected List<string> _identifiers;
-
         #endregion
     }
 }

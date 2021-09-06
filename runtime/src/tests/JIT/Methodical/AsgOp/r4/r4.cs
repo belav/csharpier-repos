@@ -181,7 +181,6 @@ internal class test
         return x;
     }
 
-
     public static int Main()
     {
         float x;

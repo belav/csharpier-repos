@@ -12,16 +12,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         /// </summary>
         public CSharpSyntaxNode Body => Block ?? (CSharpSyntaxNode)ExpressionBody!;
 
-        public AnonymousFunctionExpressionSyntax WithBody(CSharpSyntaxNode body)
-            => body is BlockSyntax block
+        public AnonymousFunctionExpressionSyntax WithBody(CSharpSyntaxNode body) =>
+            body is BlockSyntax block
                 ? WithBlock(block).WithExpressionBody(null)
                 : WithExpressionBody((ExpressionSyntax)body).WithBlock(null);
 
         public abstract SyntaxToken AsyncKeyword { get; }
 
-        public AnonymousFunctionExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword)
-            => WithAsyncKeywordCore(asyncKeyword);
+        public AnonymousFunctionExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword) =>
+            WithAsyncKeywordCore(asyncKeyword);
 
-        internal abstract AnonymousFunctionExpressionSyntax WithAsyncKeywordCore(SyntaxToken asyncKeyword);
+        internal abstract AnonymousFunctionExpressionSyntax WithAsyncKeywordCore(
+            SyntaxToken asyncKeyword
+        );
     }
 }

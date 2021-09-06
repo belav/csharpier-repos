@@ -27,8 +27,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class CompletionDataRequest
     {
-        public CompletionDataRequest(string text, int cursorPosition, string dataSource, string project)
-        {
+        public CompletionDataRequest(
+            string text,
+            int cursorPosition,
+            string dataSource,
+            string project
+        ) {
             Text = text;
             CursorPosition = cursorPosition;
             DataSource = dataSource;

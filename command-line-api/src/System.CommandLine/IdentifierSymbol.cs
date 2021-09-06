@@ -15,7 +15,7 @@ namespace System.CommandLine
             Description = description;
         }
 
-        protected IdentifierSymbol(string name, string? description = null) 
+        protected IdentifierSymbol(string name, string? description = null)
         {
             Name = name;
             Description = description;
@@ -30,7 +30,10 @@ namespace System.CommandLine
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));
+                    throw new ArgumentException(
+                        "Value cannot be null or whitespace.",
+                        nameof(value)
+                    );
                 }
 
                 if (_specifiedName is { })

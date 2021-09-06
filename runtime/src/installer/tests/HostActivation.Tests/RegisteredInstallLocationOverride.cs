@@ -41,8 +41,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 //
                 // Note: If you want to inspect the values written by the test and/or modify them manually
                 //   you have to navigate to HKCU\Software\Classes\Wow6432Node\Interface on a 64-bit OS.
-                using (RegistryKey hkcu = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32))
-                {
+                using (
+                    RegistryKey hkcu = RegistryKey.OpenBaseKey(
+                        RegistryHive.CurrentUser,
+                        RegistryView.Registry32
+                    )
+                ) {
                     parentKey = hkcu.CreateSubKey(@"Software\Classes\Interface");
                     keyName = "_DOTNET_Test" + Process.GetCurrentProcess().Id.ToString();
                     key = parentKey.CreateSubKey(keyName);
@@ -54,9 +58,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 // On Linux/macOS the install location is registered in a file which is normally
                 // located in /etc/dotnet/install_location
                 // So we need to redirect it to a different place here.
-                string directory = Path.Combine(TestArtifact.TestArtifactsPath, "installLocationOverride");
+                string directory = Path.Combine(
+                    TestArtifact.TestArtifactsPath,
+                    "installLocationOverride"
+                );
                 Directory.CreateDirectory(directory);
-                PathValueOverride = Path.Combine(directory, "install_location." + Process.GetCurrentProcess().Id.ToString());
+                PathValueOverride = Path.Combine(
+                    directory,
+                    "install_location." + Process.GetCurrentProcess().Id.ToString()
+                );
                 File.WriteAllText(PathValueOverride, "");
             }
         }
@@ -65,8 +75,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                using (RegistryKey dotnetLocationKey = key.CreateSubKey($@"Setup\InstalledVersions\{architecture}"))
-                {
+                using (
+                    RegistryKey dotnetLocationKey = key.CreateSubKey(
+                        $@"Setup\InstalledVersions\{architecture}"
+                    )
+                ) {
                     dotnetLocationKey.SetValue("InstallLocation", installLocation);
                 }
             }
@@ -103,8 +116,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
     {
         public static Command ApplyRegisteredInstallLocationOverride(
             this Command command,
-            RegisteredInstallLocationOverride registeredInstallLocationOverride)
-        {
+            RegisteredInstallLocationOverride registeredInstallLocationOverride
+        ) {
             if (registeredInstallLocationOverride == null)
             {
                 return command;
@@ -114,13 +127,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 return command.EnvironmentVariable(
                     Constants.TestOnlyEnvironmentVariables.RegistryPath,
-                    registeredInstallLocationOverride.PathValueOverride);
+                    registeredInstallLocationOverride.PathValueOverride
+                );
             }
             else
             {
                 return command.EnvironmentVariable(
                     Constants.TestOnlyEnvironmentVariables.InstallLocationFilePath,
-                    registeredInstallLocationOverride.PathValueOverride);
+                    registeredInstallLocationOverride.PathValueOverride
+                );
             }
         }
     }

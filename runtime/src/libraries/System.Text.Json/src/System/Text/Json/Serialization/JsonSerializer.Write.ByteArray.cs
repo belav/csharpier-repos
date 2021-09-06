@@ -17,9 +17,9 @@ namespace System.Text.Json
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
-        public static byte[] SerializeToUtf8Bytes<[DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue>(
-            TValue value,
-            JsonSerializerOptions? options = null)
+        public static byte[] SerializeToUtf8Bytes<
+            [DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue
+        >(TValue value, JsonSerializerOptions? options = null)
         {
             return WriteCoreBytes<TValue>(value, typeof(TValue), options);
         }
@@ -44,8 +44,8 @@ namespace System.Text.Json
         public static byte[] SerializeToUtf8Bytes(
             object? value,
             [DynamicallyAccessedMembers(MembersAccessedOnWrite)] Type inputType,
-            JsonSerializerOptions? options = null)
-        {
+            JsonSerializerOptions? options = null
+        ) {
             if (inputType == null)
             {
                 throw new ArgumentNullException(nameof(inputType));
@@ -59,8 +59,11 @@ namespace System.Text.Json
             return WriteCoreBytes<object>(value!, inputType, options);
         }
 
-        private static byte[] WriteCoreBytes<TValue>(in TValue value, Type inputType, JsonSerializerOptions? options)
-        {
+        private static byte[] WriteCoreBytes<TValue>(
+            in TValue value,
+            Type inputType,
+            JsonSerializerOptions? options
+        ) {
             if (options == null)
             {
                 options = JsonSerializerOptions.s_defaultOptions;

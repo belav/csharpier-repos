@@ -12,13 +12,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 {
     internal class ConnectionManager
     {
-        private readonly ConcurrentDictionary<long, ConnectionReference> _connectionReferences = new ConcurrentDictionary<long, ConnectionReference>();
+        private readonly ConcurrentDictionary<long, ConnectionReference> _connectionReferences =
+            new ConcurrentDictionary<long, ConnectionReference>();
         private readonly IKestrelTrace _trace;
 
         public ConnectionManager(IKestrelTrace trace, long? upgradedConnectionLimit)
-            : this(trace, GetCounter(upgradedConnectionLimit))
-        {
-        }
+            : this(trace, GetCounter(upgradedConnectionLimit)) { }
 
         public ConnectionManager(IKestrelTrace trace, ResourceCounter upgradedConnections)
         {
@@ -69,14 +68,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     _trace.ApplicationNeverCompleted(reference.ConnectionId);
                     reference.StopTrasnsportTracking();
                 }
-
                 // If both conditions are false, the connection was removed during the heartbeat.
             }
         }
 
-        private static ResourceCounter GetCounter(long? number)
-            => number.HasValue
-                ? ResourceCounter.Quota(number.Value)
-                : ResourceCounter.Unlimited;
+        private static ResourceCounter GetCounter(long? number) =>
+            number.HasValue ? ResourceCounter.Quota(number.Value) : ResourceCounter.Unlimited;
     }
 }

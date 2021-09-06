@@ -20,8 +20,10 @@ internal unsafe class test
     private static unsafe bool CheckDoubleAlignment1(VT* p)
     {
         Console.WriteLine("Address {0}", (IntPtr)p);
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || (RuntimeInformation.ProcessArchitecture != Architecture.X86))
-        {
+        if (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
+        ) {
             if ((int)(long)p % sizeof(double) != 0)
             {
                 Console.WriteLine("not double aligned");

@@ -44,8 +44,11 @@ namespace System.Xml.Schema
         {
             if (_hashCode == 0)
             {
-                _hashCode = unchecked(targetNS.GetHashCode() + chameleonLocation.GetHashCode() +
-                    (originalSchema == null ? 0 : originalSchema.GetHashCode()));
+                _hashCode = unchecked(
+                    targetNS.GetHashCode()
+                    + chameleonLocation.GetHashCode()
+                    + (originalSchema == null ? 0 : originalSchema.GetHashCode())
+                );
             }
             return _hashCode;
         }
@@ -63,10 +66,13 @@ namespace System.Xml.Schema
                 // If the location is empty (but only then) we also want to compare the original schema instance.
                 // As noted above the originalSchema is null if the chameleonLocation is non-empty. As a result we
                 // can simply compare the reference to the original schema always (regardless of the schemalocation).
-                Debug.Assert((chameleonLocation.OriginalString.Length == 0 && originalSchema != null)
-                    || (chameleonLocation.OriginalString.Length != 0 && originalSchema == null));
-                return this.targetNS.Equals(cKey.targetNS) && this.chameleonLocation.Equals(cKey.chameleonLocation) &&
-                    Ref.ReferenceEquals(originalSchema, cKey.originalSchema);
+                Debug.Assert(
+                    (chameleonLocation.OriginalString.Length == 0 && originalSchema != null)
+                        || (chameleonLocation.OriginalString.Length != 0 && originalSchema == null)
+                );
+                return this.targetNS.Equals(cKey.targetNS)
+                    && this.chameleonLocation.Equals(cKey.chameleonLocation)
+                    && Ref.ReferenceEquals(originalSchema, cKey.originalSchema);
             }
             return false;
         }

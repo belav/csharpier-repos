@@ -25,6 +25,7 @@ namespace Microsoft.AspNetCore.HttpOverrides
         /// <remarks>
         /// This defaults to a conversion from a base64 encoded string.
         /// </remarks>
-        public Func<string, X509Certificate2> HeaderConverter = (headerValue) => new X509Certificate2(Convert.FromBase64String(headerValue));
+        public Func<string, X509Certificate2> HeaderConverter = (headerValue) =>
+            new X509Certificate2(Convert.FromBase64String(headerValue));
     }
 }

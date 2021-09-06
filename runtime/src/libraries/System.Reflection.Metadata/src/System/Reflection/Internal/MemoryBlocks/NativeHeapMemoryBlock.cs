@@ -25,7 +25,9 @@ namespace System.Reflection.Internal
                 // make sure the current thread isn't aborted in between allocating and storing the pointer
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try
-                { /* intentionally left blank */ }
+                { /* intentionally left blank */
+                }
+
                 finally
 #endif
                 {
@@ -39,7 +41,9 @@ namespace System.Reflection.Internal
                 // make sure the current thread isn't aborted in between zeroing the pointer and freeing the memory
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try
-                { /* intentionally left blank */ }
+                { /* intentionally left blank */
+                }
+
                 finally
 #endif
                 {

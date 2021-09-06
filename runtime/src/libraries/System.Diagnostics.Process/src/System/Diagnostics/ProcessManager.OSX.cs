@@ -28,10 +28,7 @@ namespace System.Diagnostics
                 throw new ArgumentOutOfRangeException(nameof(pid));
             }
 
-            ProcessInfo procInfo = new ProcessInfo()
-            {
-                ProcessId = pid
-            };
+            ProcessInfo procInfo = new ProcessInfo() { ProcessId = pid };
 
             // Try to get the task info. This can fail if the user permissions don't permit
             // this user context to query the specified process
@@ -40,7 +37,10 @@ namespace System.Diagnostics
             {
                 // Set the values we have; all the other values don't have meaning or don't exist on OSX
                 Interop.libproc.proc_taskallinfo temp = info.Value;
-                unsafe { procInfo.ProcessName = Marshal.PtrToStringAnsi(new IntPtr(temp.pbsd.pbi_comm))!; }
+                unsafe
+                {
+                    procInfo.ProcessName = Marshal.PtrToStringAnsi(new IntPtr(temp.pbsd.pbi_comm))!;
+                }
                 procInfo.BasePriority = temp.pbsd.pbi_nice;
                 procInfo.VirtualBytes = (long)temp.ptinfo.pti_virtual_size;
                 procInfo.WorkingSet = (long)temp.ptinfo.pti_resident_size;
@@ -52,7 +52,8 @@ namespace System.Diagnostics
                 procInfo.SessionId = sessionId;
 
             // Create a threadinfo for each thread in the process
-            List<KeyValuePair<ulong, Interop.libproc.proc_threadinfo?>> lstThreads = Interop.libproc.GetAllThreadsInProcess(pid);
+            List<KeyValuePair<ulong, Interop.libproc.proc_threadinfo?>> lstThreads =
+                Interop.libproc.GetAllThreadsInProcess(pid);
             foreach (KeyValuePair<ulong, Interop.libproc.proc_threadinfo?> t in lstThreads)
             {
                 var ti = new ThreadInfo()
@@ -67,8 +68,12 @@ namespace System.Diagnostics
                 if (t.Value.HasValue)
                 {
                     ti._currentPriority = t.Value.Value.pth_curpri;
-                    ti._threadState = ConvertOsxThreadRunStateToThreadState((Interop.libproc.ThreadRunState)t.Value.Value.pth_run_state);
-                    ti._threadWaitReason = ConvertOsxThreadFlagsToWaitReason((Interop.libproc.ThreadFlags)t.Value.Value.pth_flags);
+                    ti._threadState = ConvertOsxThreadRunStateToThreadState(
+                        (Interop.libproc.ThreadRunState)t.Value.Value.pth_run_state
+                    );
+                    ti._threadWaitReason = ConvertOsxThreadFlagsToWaitReason(
+                        (Interop.libproc.ThreadFlags)t.Value.Value.pth_flags
+                    );
                 }
 
                 procInfo._threadInfoList.Add(ti);
@@ -81,8 +86,9 @@ namespace System.Diagnostics
         // ---- Unix PAL layer ends here ----
         // ----------------------------------
 
-        private static System.Diagnostics.ThreadState ConvertOsxThreadRunStateToThreadState(Interop.libproc.ThreadRunState state)
-        {
+        private static System.Diagnostics.ThreadState ConvertOsxThreadRunStateToThreadState(
+            Interop.libproc.ThreadRunState state
+        ) {
             switch (state)
             {
                 case Interop.libproc.ThreadRunState.TH_STATE_RUNNING:
@@ -100,10 +106,14 @@ namespace System.Diagnostics
             }
         }
 
-        private static System.Diagnostics.ThreadWaitReason ConvertOsxThreadFlagsToWaitReason(Interop.libproc.ThreadFlags flags)
-        {
+        private static System.Diagnostics.ThreadWaitReason ConvertOsxThreadFlagsToWaitReason(
+            Interop.libproc.ThreadFlags flags
+        ) {
             // Since ThreadWaitReason isn't a flag, we have to do a mapping and will lose some information.
-            if ((flags & Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED) == Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED)
+            if (
+                (flags & Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED)
+                == Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED
+            )
                 return System.Diagnostics.ThreadWaitReason.PageOut;
             else
                 return System.Diagnostics.ThreadWaitReason.Unknown; // There isn't a good mapping for anything else

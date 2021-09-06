@@ -54,7 +54,10 @@ namespace System.Xml.Tests
                 XmlSchemaSet sc = new XmlSchemaSet();
                 sc.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
                 sc.XmlResolver = null;
-                XmlSchema Schema = sc.Add(null, Path.Combine(TestData._Root, "XmlResolver", "File", "simpledtd.xml"));
+                XmlSchema Schema = sc.Add(
+                    null,
+                    Path.Combine(TestData._Root, "XmlResolver", "File", "simpledtd.xml")
+                );
             }
             catch (Exception)
             {

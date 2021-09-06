@@ -43,13 +43,13 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 throw new ArgumentNullException(nameof(context));
             }
-            
+
             var services = context.ActionContext.HttpContext.RequestServices;
             var factory = services.GetRequiredService<IUrlHelperFactory>();
             var urlHelper = factory.GetUrlHelper(context.ActionContext);
 
             var url = urlHelper.Page(PageName, PageHandler, RouteData);
-            
+
             if (url == null)
             {
                 throw new InvalidOperationException(Resources.RemoteAttribute_NoUrlFound);

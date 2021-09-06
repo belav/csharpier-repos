@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         void ProcessForeignKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
-            IConventionContext<IConventionForeignKey> context);
+            IConventionContext<IConventionForeignKey> context
+        );
     }
 }

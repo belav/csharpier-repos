@@ -51,8 +51,8 @@ namespace Tests.Integration
             [ImportingConstructor]
             public ExportFactoryImporter(
                 ExportFactory<IId> idCreatorTCtor,
-                ExportFactory<IId, IIdTypeMetadata> idCreatorTMCtor)
-            {
+                ExportFactory<IId, IIdTypeMetadata> idCreatorTMCtor
+            ) {
                 this._idCreatorTCtor = idCreatorTCtor;
                 this._idCreatorTMCtor = idCreatorTMCtor;
             }
@@ -110,7 +110,10 @@ namespace Tests.Integration
 
                 val1.Dispose();
 
-                Assert.True(val1.Value.Id < 0, "Disposal of the value should set the id to negative");
+                Assert.True(
+                    val1.Value.Id < 0,
+                    "Disposal of the value should set the id to negative"
+                );
 
                 return creator.CreateExport().Value.Id;
             }
@@ -120,7 +123,10 @@ namespace Tests.Integration
                 var val = VerifyExportFactory((ExportFactory<IId>)creator);
 
                 Assert.Equal("PostiveIncrement", creator.Metadata.IdType);
-                Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(ComposablePartDefinition)), creator.Metadata.ExportTypeIdentity);
+                Assert.Equal(
+                    AttributedModelServices.GetTypeIdentity(typeof(ComposablePartDefinition)),
+                    creator.Metadata.ExportTypeIdentity
+                );
 
                 return val;
             }
@@ -129,7 +135,10 @@ namespace Tests.Integration
         [Fact]
         public void ExportFactoryStandardImports_ShouldWorkProperly()
         {
-            var container = CreateWithAttributedCatalog(typeof(UniqueExport), typeof(ExportFactoryImporter));
+            var container = CreateWithAttributedCatalog(
+                typeof(UniqueExport),
+                typeof(ExportFactoryImporter)
+            );
             var partCreatorImporter = container.GetExportedValue<ExportFactoryImporter>();
 
             partCreatorImporter.AssertValid();
@@ -165,11 +174,11 @@ namespace Tests.Integration
 
             var fooFactory = container.GetExportedValue<SimpleExportFactoryImporter>();
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                aggCat.Catalogs.Remove(typeCat));
+            Assert.Throws<ChangeRejectedException>(() => aggCat.Catalogs.Remove(typeCat));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                aggCat.Catalogs.Add(new TypeCatalog(typeof(Foo))));
+            Assert.Throws<ChangeRejectedException>(
+                () => aggCat.Catalogs.Add(new TypeCatalog(typeof(Foo)))
+            );
         }
 
         [Export]
@@ -289,7 +298,10 @@ namespace Tests.Integration
             var container = CreateWithAttributedCatalog(typeof(Foo));
 
             var importDef = ReflectionModelServicesEx.CreateImportDefinition(
-                new LazyMemberInfo(MemberTypes.Field, () => new MemberInfo[] { typeof(ExportFactoryTests) }), // Give it a bogus member
+                new LazyMemberInfo(
+                    MemberTypes.Field,
+                    () => new MemberInfo[] { typeof(ExportFactoryTests) }
+                ), // Give it a bogus member
                 AttributedModelServices.GetContractName(typeof(Foo)),
                 AttributedModelServices.GetTypeIdentity(typeof(Foo)),
                 Enumerable.Empty<KeyValuePair<string, Type>>(),
@@ -297,7 +309,8 @@ namespace Tests.Integration
                 true,
                 CreationPolicy.Any,
                 true, // isExportFactory
-                null);
+                null
+            );
 
             var exports = container.GetExports(importDef);
 
@@ -364,7 +377,9 @@ namespace Tests.Integration
         [Export]
         class Tree : IDisposable
         {
-            private List<ExportLifetimeContext<Apple>> grownApples = new List<ExportLifetimeContext<Apple>>();
+            private List<ExportLifetimeContext<Apple>> grownApples = new List<
+                ExportLifetimeContext<Apple>
+            >();
 
             [Import]
             private ExportFactory<Apple> AppleFactory { get; set; }
@@ -400,6 +415,5 @@ namespace Tests.Integration
             var apple = tree.GrowApple();
             container.Dispose();
         }
-
     }
 }

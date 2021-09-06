@@ -27,10 +27,7 @@ namespace System.Text.Json.Serialization
 
         public JsonConverter this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
             set
             {
                 if (value == null)

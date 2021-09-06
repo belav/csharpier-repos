@@ -17,9 +17,7 @@ namespace System.Diagnostics
         /// Initializes a new instance of the <see cref="ActivityEvent"/> class.
         /// </summary>
         /// <param name="name">Event name.</param>
-        public ActivityEvent(string name) : this(name, DateTimeOffset.UtcNow, s_emptyTags)
-        {
-        }
+        public ActivityEvent(string name) : this(name, DateTimeOffset.UtcNow, s_emptyTags) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActivityEvent"/> class.
@@ -27,8 +25,11 @@ namespace System.Diagnostics
         /// <param name="name">Event name.</param>
         /// <param name="timestamp">Event timestamp. Timestamp MUST only be used for the events that happened in the past, not at the moment of this call.</param>
         /// <param name="tags">Event Tags.</param>
-        public ActivityEvent(string name, DateTimeOffset timestamp = default, ActivityTagsCollection? tags = null)
-        {
+        public ActivityEvent(
+            string name,
+            DateTimeOffset timestamp = default,
+            ActivityTagsCollection? tags = null
+        ) {
             Name = name ?? string.Empty;
             Tags = tags ?? s_emptyTags;
             Timestamp = timestamp != default ? timestamp : DateTimeOffset.UtcNow;

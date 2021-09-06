@@ -23,13 +23,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 "/Views/Shared/{0}.cshtml",
             };
 
-            var razorPagesOptions = new RazorPagesOptions
-            {
-                RootDirectory = "/"
-            };
+            var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/" };
             var viewEngineOptions = GetViewEngineOptions();
             var setup = new RazorPagesRazorViewEngineOptionsSetup(
-                Options.Options.Create(razorPagesOptions));
+                Options.Options.Create(razorPagesOptions)
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -52,7 +50,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var razorPagesOptions = new RazorPagesOptions();
             var viewEngineOptions = GetViewEngineOptions();
             var setup = new RazorPagesRazorViewEngineOptionsSetup(
-                Options.Options.Create(razorPagesOptions));
+                Options.Options.Create(razorPagesOptions)
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -77,7 +76,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var razorPagesOptions = new RazorPagesOptions();
             var viewEngineOptions = GetViewEngineOptions();
             var setup = new RazorPagesRazorViewEngineOptionsSetup(
-                Options.Options.Create(razorPagesOptions));
+                Options.Options.Create(razorPagesOptions)
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -99,13 +99,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 "/Views/Shared/{0}.cshtml",
             };
 
-            var razorPagesOptions = new RazorPagesOptions
-            {
-                RootDirectory = "/RazorFiles/",
-            };
+            var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/RazorFiles/", };
             var viewEngineOptions = GetViewEngineOptions();
             var setup = new RazorPagesRazorViewEngineOptionsSetup(
-                Options.Options.Create(razorPagesOptions));
+                Options.Options.Create(razorPagesOptions)
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -125,13 +123,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 "/PagesRoot/Shared/{0}.cshtml",
             };
 
-            var razorPagesOptions = new RazorPagesOptions
-            {
-                RootDirectory = "/PagesRoot",
-            };
+            var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/PagesRoot", };
             var viewEngineOptions = GetViewEngineOptions();
             var setup = new RazorPagesRazorViewEngineOptionsSetup(
-                Options.Options.Create(razorPagesOptions));
+                Options.Options.Create(razorPagesOptions)
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -152,13 +148,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 "/PagesRoot/Shared/{0}.cshtml",
             };
 
-            var razorPagesOptions = new RazorPagesOptions
-            {
-                RootDirectory = "/PagesRoot",
-            };
+            var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/PagesRoot", };
             var viewEngineOptions = GetViewEngineOptions();
             var setup = new RazorPagesRazorViewEngineOptionsSetup(
-                Options.Options.Create(razorPagesOptions));
+                Options.Options.Create(razorPagesOptions)
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -172,7 +166,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var viewEngineOptions = GetViewEngineOptions();
-            var setup = new RazorPagesRazorViewEngineOptionsSetup(Options.Options.Create(new RazorPagesOptions()));
+            var setup = new RazorPagesRazorViewEngineOptionsSetup(
+                Options.Options.Create(new RazorPagesOptions())
+            );
 
             // Act
             setup.Configure(viewEngineOptions);
@@ -180,7 +176,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // Assert
             Assert.Collection(
                 viewEngineOptions.ViewLocationExpanders,
-                expander => Assert.IsType<PageViewLocationExpander>(expander));
+                expander => Assert.IsType<PageViewLocationExpander>(expander)
+            );
         }
 
         private static RazorViewEngineOptions GetViewEngineOptions()

@@ -16,8 +16,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var model = modelBuilder
-                .Model;
+            var model = modelBuilder.Model;
 
             Assert.Null(model.GetDatabaseMaxSize());
             Assert.Null(((IConventionModel)model).GetDatabaseMaxSizeConfigurationSource());
@@ -25,12 +24,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ((IConventionModel)model).SetDatabaseMaxSize("1 GB", fromDataAnnotation: true);
 
             Assert.Equal("1 GB", model.GetDatabaseMaxSize());
-            Assert.Equal(ConfigurationSource.DataAnnotation, ((IConventionModel)model).GetDatabaseMaxSizeConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                ((IConventionModel)model).GetDatabaseMaxSizeConfigurationSource()
+            );
 
             model.SetDatabaseMaxSize("10 GB");
 
             Assert.Equal("10 GB", model.GetDatabaseMaxSize());
-            Assert.Equal(ConfigurationSource.Explicit, ((IConventionModel)model).GetDatabaseMaxSizeConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                ((IConventionModel)model).GetDatabaseMaxSizeConfigurationSource()
+            );
 
             model.SetDatabaseMaxSize(null);
 
@@ -43,8 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var model = modelBuilder
-                .Model;
+            var model = modelBuilder.Model;
 
             Assert.Null(model.GetServiceTierSql());
             Assert.Null(((IConventionModel)model).GetDatabaseMaxSizeConfigurationSource());
@@ -52,12 +56,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ((IConventionModel)model).SetServiceTierSql("basic", fromDataAnnotation: true);
 
             Assert.Equal("basic", model.GetServiceTierSql());
-            Assert.Equal(ConfigurationSource.DataAnnotation, ((IConventionModel)model).GetServiceTierSqlConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                ((IConventionModel)model).GetServiceTierSqlConfigurationSource()
+            );
 
             model.SetServiceTierSql("standard");
 
             Assert.Equal("standard", model.GetServiceTierSql());
-            Assert.Equal(ConfigurationSource.Explicit, ((IConventionModel)model).GetServiceTierSqlConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                ((IConventionModel)model).GetServiceTierSqlConfigurationSource()
+            );
 
             model.SetServiceTierSql(null);
 
@@ -70,8 +80,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var model = modelBuilder
-                .Model;
+            var model = modelBuilder.Model;
 
             Assert.Null(model.GetPerformanceLevelSql());
             Assert.Null(((IConventionModel)model).GetPerformanceLevelSqlConfigurationSource());
@@ -79,12 +88,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ((IConventionModel)model).SetPerformanceLevelSql("S0", fromDataAnnotation: true);
 
             Assert.Equal("S0", model.GetPerformanceLevelSql());
-            Assert.Equal(ConfigurationSource.DataAnnotation, ((IConventionModel)model).GetPerformanceLevelSqlConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                ((IConventionModel)model).GetPerformanceLevelSqlConfigurationSource()
+            );
 
             model.SetPerformanceLevelSql("ELASTIC_POOL (name = elastic_pool)");
 
             Assert.Equal("ELASTIC_POOL (name = elastic_pool)", model.GetPerformanceLevelSql());
-            Assert.Equal(ConfigurationSource.Explicit, ((IConventionModel)model).GetPerformanceLevelSqlConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                ((IConventionModel)model).GetPerformanceLevelSqlConfigurationSource()
+            );
 
             model.SetPerformanceLevelSql(null);
 
@@ -97,10 +112,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Equal("Name", property.GetColumnBaseName());
             Assert.Null(((IConventionProperty)property).GetColumnNameConfigurationSource());
@@ -108,13 +120,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ((IConventionProperty)property).SetColumnName("Eman", fromDataAnnotation: true);
 
             Assert.Equal("Eman", property.GetColumnBaseName());
-            Assert.Equal(ConfigurationSource.DataAnnotation, ((IConventionProperty)property).GetColumnNameConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                ((IConventionProperty)property).GetColumnNameConfigurationSource()
+            );
 
             property.SetColumnName("MyNameIs");
 
             Assert.Equal("Name", property.Name);
             Assert.Equal("MyNameIs", property.GetColumnBaseName());
-            Assert.Equal(ConfigurationSource.Explicit, ((IConventionProperty)property).GetColumnNameConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                ((IConventionProperty)property).GetColumnNameConfigurationSource()
+            );
 
             property.SetColumnName(null);
 
@@ -127,10 +145,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var key = modelBuilder
-                .Entity<Customer>()
-                .HasKey(e => e.Id)
-                .Metadata;
+            var key = modelBuilder.Entity<Customer>().HasKey(e => e.Id).Metadata;
 
             Assert.Equal("PK_Customer", key.GetName());
 
@@ -152,10 +167,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var index = modelBuilder
-                .Entity<Customer>()
-                .HasIndex(e => e.Id)
-                .Metadata;
+            var index = modelBuilder.Entity<Customer>().HasIndex(e => e.Id).Metadata;
 
             Assert.Null(index.IsClustered());
 
@@ -173,10 +185,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var key = modelBuilder
-                .Entity<Customer>()
-                .HasKey(e => e.Id)
-                .Metadata;
+            var key = modelBuilder.Entity<Customer>().HasKey(e => e.Id).Metadata;
 
             Assert.Null(key.IsClustered());
 
@@ -195,11 +204,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var modelBuilder = GetModelBuilder();
             var model = modelBuilder.Model;
 
-            Assert.Equal(SqlServerValueGenerationStrategy.IdentityColumn, model.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.IdentityColumn,
+                model.GetValueGenerationStrategy()
+            );
 
             model.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
 
-            Assert.Equal(SqlServerValueGenerationStrategy.SequenceHiLo, model.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.SequenceHiLo,
+                model.GetValueGenerationStrategy()
+            );
 
             model.SetValueGenerationStrategy(null);
 
@@ -218,7 +233,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             model.SetHiLoSequenceName(null);
 
-            Assert.Equal(SqlServerModelExtensions.DefaultHiLoSequenceName, model.GetHiLoSequenceName());
+            Assert.Equal(
+                SqlServerModelExtensions.DefaultHiLoSequenceName,
+                model.GetHiLoSequenceName()
+            );
         }
 
         [ConditionalFact]
@@ -244,22 +262,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var modelBuilder = GetModelBuilder();
             modelBuilder.Model.SetValueGenerationStrategy(null);
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Id).Metadata;
 
-            Assert.Equal(SqlServerValueGenerationStrategy.None, property.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.None,
+                property.GetValueGenerationStrategy()
+            );
             Assert.Equal(ValueGenerated.OnAdd, property.ValueGenerated);
 
             property.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
 
-            Assert.Equal(SqlServerValueGenerationStrategy.SequenceHiLo, property.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.SequenceHiLo,
+                property.GetValueGenerationStrategy()
+            );
             Assert.Equal(ValueGenerated.OnAdd, property.ValueGenerated);
 
             property.SetValueGenerationStrategy(null);
 
-            Assert.Equal(SqlServerValueGenerationStrategy.None, property.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.None,
+                property.GetValueGenerationStrategy()
+            );
             Assert.Equal(ValueGenerated.OnAdd, property.ValueGenerated);
         }
 
@@ -268,20 +292,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.NullableInt).ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>()
+                    .Property(e => e.NullableInt)
+                    .ValueGeneratedOnAdd().Metadata;
 
-            Assert.Equal(SqlServerValueGenerationStrategy.IdentityColumn, property.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.IdentityColumn,
+                property.GetValueGenerationStrategy()
+            );
 
             property.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
 
-            Assert.Equal(SqlServerValueGenerationStrategy.SequenceHiLo, property.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.SequenceHiLo,
+                property.GetValueGenerationStrategy()
+            );
 
             property.SetValueGenerationStrategy(null);
 
-            Assert.Equal(SqlServerValueGenerationStrategy.IdentityColumn, property.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.IdentityColumn,
+                property.GetValueGenerationStrategy()
+            );
         }
 
         [ConditionalFact]
@@ -289,15 +322,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Equal(
                 SqlServerStrings.SequenceBadType("Name", nameof(Customer), "string"),
                 Assert.Throws<ArgumentException>(
-                    () => property.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo)).Message);
+                    () =>
+                        property.SetValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.SequenceHiLo
+                        )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -305,15 +340,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Equal(
                 SqlServerStrings.IdentityBadType("Name", nameof(Customer), "string"),
                 Assert.Throws<ArgumentException>(
-                    () => property.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.IdentityColumn)).Message);
+                    () =>
+                        property.SetValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.IdentityColumn
+                        )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -321,10 +358,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Id).Metadata;
 
             Assert.Null(property.GetHiLoSequenceName());
             Assert.Null(property.GetHiLoSequenceName());
@@ -343,10 +377,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Id).Metadata;
 
             Assert.Null(property.GetHiLoSequenceSchema());
 
@@ -364,11 +395,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
             property.SetHiLoSequenceName("DaneelOlivaw");
@@ -382,14 +410,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
-            modelBuilder.Model.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             property.SetHiLoSequenceName("DaneelOlivaw");
 
             Assert.Equal("DaneelOlivaw", property.FindHiLoSequence().Name);
@@ -400,11 +427,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
@@ -414,19 +438,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         }
 
         [ConditionalFact]
-        public void
-            TryGetSequence_returns_sequence_property_is_marked_for_default_generation_and_model_is_marked_for_sequence_generation_and_model_has_name()
+        public void TryGetSequence_returns_sequence_property_is_marked_for_default_generation_and_model_is_marked_for_sequence_generation_and_model_has_name()
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
-            modelBuilder.Model.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
 
             Assert.Equal("DaneelOlivaw", property.FindHiLoSequence().Name);
@@ -437,11 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
             property.SetHiLoSequenceName("DaneelOlivaw");
@@ -457,14 +476,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-            modelBuilder.Model.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             property.SetHiLoSequenceName("DaneelOlivaw");
             property.SetHiLoSequenceSchema("R");
 
@@ -477,11 +495,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
@@ -497,14 +512,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property =
+                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-            modelBuilder.Model.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
             modelBuilder.Model.SetHiLoSequenceSchema("R");
 
@@ -512,8 +526,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal("R", property.FindHiLoSequence().Schema);
         }
 
-        private static ModelBuilder GetModelBuilder()
-            => SqlServerTestHelpers.Instance.CreateConventionBuilder();
+        private static ModelBuilder GetModelBuilder() =>
+            SqlServerTestHelpers.Instance.CreateConventionBuilder();
 
         // ReSharper disable once ClassNeverInstantiated.Local
         private class Customer

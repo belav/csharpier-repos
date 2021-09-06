@@ -1,10 +1,10 @@
-// Copyright (c) Microsoft. All rights reserved.
+﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 // Method:  Simulate a bouncing ball based on the laws of physics.
 //          The general principles:
 //            The velocity of a falling ball is : (½) m v^2 = m g d è v = sqrt(2 * g * d)
-//            The non-ellastic collision will shoot the ball in 
+//            The non-ellastic collision will shoot the ball in
 //              the opposite direction at       : v2 = e v = e * sqrt(2 * g * d)
 //              Where e is the coeficient of restitution
 //            The height the ball will travel up: d2 = (1/2) g t^2 = v2^2 / (2 * g)
@@ -39,7 +39,6 @@ class Ball
             Distance += D;
             S = Coef * Math.Sqrt(2 * g * D);
             D = 0.0;
-
             // bouncing
         }
         else if (D == 0.0 && S > 0.0)
@@ -60,10 +59,7 @@ class Ball
 
     public double Height
     {
-        get
-        {
-            return D;
-        }
+        get { return D; }
     }
 
     public double DistanceTraveled()

@@ -13,7 +13,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
             {
                 return 0L;
             }
-
             checked
             {
                 // StatusCode
@@ -24,7 +23,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 {
                     foreach (var item in cachedResponse.Headers)
                     {
-                        size += (item.Key.Length * sizeof(char)) + EstimateStringValuesSize(item.Value);
+                        size +=
+                            (item.Key.Length * sizeof(char)) + EstimateStringValuesSize(item.Value);
                     }
                 }
 
@@ -44,7 +44,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
             {
                 return 0L;
             }
-
             checked
             {
                 var size = 0L;

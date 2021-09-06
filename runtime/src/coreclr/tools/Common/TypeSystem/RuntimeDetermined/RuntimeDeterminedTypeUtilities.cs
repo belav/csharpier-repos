@@ -7,8 +7,11 @@ namespace Internal.TypeSystem
 {
     internal static class RuntimeDeterminedTypeUtilities
     {
-        public static Instantiation ConvertInstantiationToSharedRuntimeForm(Instantiation instantiation, Instantiation openInstantiation, out bool changed)
-        {
+        public static Instantiation ConvertInstantiationToSharedRuntimeForm(
+            Instantiation instantiation,
+            Instantiation openInstantiation,
+            out bool changed
+        ) {
             Debug.Assert(instantiation.Length == openInstantiation.Length);
 
             TypeDesc[] sharedInstantiation = null;
@@ -20,8 +23,11 @@ namespace Internal.TypeSystem
             {
                 startLoopPolicy = currentPolicy;
 
-                for (int instantiationIndex = 0; instantiationIndex < instantiation.Length; instantiationIndex++)
-                {
+                for (
+                    int instantiationIndex = 0;
+                    instantiationIndex < instantiation.Length;
+                    instantiationIndex++
+                ) {
                     TypeDesc typeToConvert = instantiation[instantiationIndex];
                     TypeSystemContext context = typeToConvert.Context;
                     TypeDesc canonForm = context.ConvertToCanon(typeToConvert, ref currentPolicy);
@@ -40,7 +46,9 @@ namespace Internal.TypeSystem
                         }
 
                         runtimeDeterminedForm = context.GetRuntimeDeterminedType(
-                            (DefType)canonForm, (GenericParameterDesc)openInstantiation[instantiationIndex]);
+                            (DefType)canonForm,
+                            (GenericParameterDesc)openInstantiation[instantiationIndex]
+                        );
                     }
 
                     if (sharedInstantiation != null)
@@ -55,7 +63,6 @@ namespace Internal.TypeSystem
                 {
                     break;
                 }
-
             } while (currentPolicy != startLoopPolicy);
 
             changed = sharedInstantiation != null;

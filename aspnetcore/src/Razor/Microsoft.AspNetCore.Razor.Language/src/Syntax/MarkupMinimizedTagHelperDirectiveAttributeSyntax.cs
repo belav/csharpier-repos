@@ -7,13 +7,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     internal sealed partial class MarkupMinimizedTagHelperDirectiveAttributeSyntax
     {
-        private static readonly string TagHelperAttributeInfoKey = typeof(TagHelperAttributeInfo).Name;
+        private static readonly string TagHelperAttributeInfoKey =
+            typeof(TagHelperAttributeInfo).Name;
 
         public TagHelperAttributeInfo TagHelperAttributeInfo
         {
             get
             {
-                var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
+                var tagHelperAttributeInfo =
+                    this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
                 return tagHelperAttributeInfo;
             }
         }
@@ -26,13 +28,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     Transition.GetContent(),
                     Name.GetContent(),
                     Colon?.GetContent() ?? string.Empty,
-                    ParameterName?.GetContent() ?? string.Empty);
+                    ParameterName?.GetContent() ?? string.Empty
+                );
                 return fullName;
             }
         }
 
-        public MarkupMinimizedTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
-        {
+        public MarkupMinimizedTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(
+            TagHelperAttributeInfo info
+        ) {
             var annotations = new List<SyntaxAnnotation>(GetAnnotations())
             {
                 new SyntaxAnnotation(TagHelperAttributeInfoKey, info)
@@ -40,7 +44,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
 
-            return (MarkupMinimizedTagHelperDirectiveAttributeSyntax)newGreen.CreateRed(Parent, Position);
+            return (MarkupMinimizedTagHelperDirectiveAttributeSyntax)newGreen.CreateRed(
+                Parent,
+                Position
+            );
         }
     }
 }

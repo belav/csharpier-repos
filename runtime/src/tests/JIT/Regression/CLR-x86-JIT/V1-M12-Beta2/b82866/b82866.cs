@@ -33,6 +33,7 @@ public class AA
         {
             throw new NullReferenceException();
         }
+
         finally
         {
             bool local19 = true;

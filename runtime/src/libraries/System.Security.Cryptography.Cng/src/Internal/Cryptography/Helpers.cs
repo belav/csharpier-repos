@@ -60,7 +60,11 @@ namespace Internal.Cryptography
         {
             string providerName = provider.Provider;
             SafeNCryptProviderHandle providerHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(out providerHandle, providerName, 0);
+            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(
+                out providerHandle,
+                providerName,
+                0
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
             return providerHandle;
@@ -73,12 +77,22 @@ namespace Internal.Cryptography
         /// null - if property not defined on key.
         /// throws - for any other type of error.
         /// </returns>
-        public static byte[]? GetProperty(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
-        {
+        public static byte[]? GetProperty(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        ) {
             unsafe
             {
                 int numBytesNeeded;
-                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(ncryptHandle, propertyName, null, 0, out numBytesNeeded, options);
+                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                    ncryptHandle,
+                    propertyName,
+                    null,
+                    0,
+                    out numBytesNeeded,
+                    options
+                );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -87,7 +101,14 @@ namespace Internal.Cryptography
                 byte[] propertyValue = new byte[numBytesNeeded];
                 fixed (byte* pPropertyValue = propertyValue)
                 {
-                    errorCode = Interop.NCrypt.NCryptGetProperty(ncryptHandle, propertyName, pPropertyValue, propertyValue.Length, out numBytesNeeded, options);
+                    errorCode = Interop.NCrypt.NCryptGetProperty(
+                        ncryptHandle,
+                        propertyName,
+                        pPropertyValue,
+                        propertyValue.Length,
+                        out numBytesNeeded,
+                        options
+                    );
                 }
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
@@ -103,11 +124,14 @@ namespace Internal.Cryptography
         /// Retrieve a well-known CNG string property. (Note: .NET Framework compat: this helper likes to return special values rather than throw exceptions for missing
         /// or ill-formatted property values. Only use it for well-known properties that are unlikely to be ill-formatted.)
         /// </summary>
-        public static string? GetPropertyAsString(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
-        {
+        public static string? GetPropertyAsString(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        ) {
             byte[]? value = ncryptHandle.GetProperty(propertyName, options);
             if (value == null)
-                return null;   // .NET Framework compat: return null if key not present.
+                return null; // .NET Framework compat: return null if key not present.
             if (value.Length == 0)
                 return string.Empty; // .NET Framework compat: return empty if property value is 0-length.
             unsafe
@@ -124,11 +148,14 @@ namespace Internal.Cryptography
         /// Retrieve a well-known CNG dword property. (Note: .NET Framework compat: this helper likes to return special values rather than throw exceptions for missing
         /// or ill-formatted property values. Only use it for well-known properties that are unlikely to be ill-formatted.)
         /// </summary>
-        public static int GetPropertyAsDword(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
-        {
+        public static int GetPropertyAsDword(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        ) {
             byte[]? value = ncryptHandle.GetProperty(propertyName, options);
             if (value == null)
-                return 0;   // .NET Framework compat: return 0 if key not present.
+                return 0; // .NET Framework compat: return 0 if key not present.
             return BitConverter.ToInt32(value, 0);
         }
 
@@ -136,13 +163,23 @@ namespace Internal.Cryptography
         /// Retrieve a well-known CNG pointer property. (Note: .NET Framework compat: this helper likes to return special values rather than throw exceptions for missing
         /// or ill-formatted property values. Only use it for well-known properties that are unlikely to be ill-formatted.)
         /// </summary>
-        public static IntPtr GetPropertyAsIntPtr(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
-        {
+        public static IntPtr GetPropertyAsIntPtr(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        ) {
             unsafe
             {
                 int numBytesNeeded;
                 IntPtr value;
-                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(ncryptHandle, propertyName, &value, IntPtr.Size, out numBytesNeeded, options);
+                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                    ncryptHandle,
+                    propertyName,
+                    &value,
+                    IntPtr.Size,
+                    out numBytesNeeded,
+                    options
+                );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return IntPtr.Zero;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -154,11 +191,19 @@ namespace Internal.Cryptography
         /// <summary>
         ///     Modify a CNG key's export policy.
         /// </summary>
-        public static void SetExportPolicy(this SafeNCryptKeyHandle keyHandle, CngExportPolicies exportPolicy)
-        {
+        public static void SetExportPolicy(
+            this SafeNCryptKeyHandle keyHandle,
+            CngExportPolicies exportPolicy
+        ) {
             unsafe
             {
-                ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(keyHandle, KeyPropertyName.ExportPolicy, &exportPolicy, sizeof(CngExportPolicies), CngPropertyOptions.Persist);
+                ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                    keyHandle,
+                    KeyPropertyName.ExportPolicy,
+                    &exportPolicy,
+                    sizeof(CngExportPolicies),
+                    CngPropertyOptions.Persist
+                );
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                     throw errorCode.ToCryptographicException();
             }

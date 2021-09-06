@@ -21,9 +21,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             _state = HttpStreamState.Open;
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
@@ -40,8 +38,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             return 0;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateState(cancellationToken);
 
             return Task.FromResult(0);

@@ -93,10 +93,7 @@ namespace System.Speech.Internal.SapiInterop
         }
         public void Stat(out STATSTG pstatstg, int grfStatFlag)
         {
-            pstatstg = new STATSTG
-            {
-                cbSize = _stream.Length
-            };
+            pstatstg = new STATSTG { cbSize = _stream.Length };
         }
 
         public void Clone(out IStream ppstm)
@@ -112,7 +109,6 @@ namespace System.Speech.Internal.SapiInterop
 
         private Stream _stream;
         protected long _endOfStreamPosition = -1;
-
         #endregion
     }
 }

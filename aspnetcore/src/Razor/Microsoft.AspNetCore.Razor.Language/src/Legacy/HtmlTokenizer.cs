@@ -12,8 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     {
         private const char TransitionChar = '@';
 
-        public HtmlTokenizer(ITextDocument source)
-            : base(source)
+        public HtmlTokenizer(ITextDocument source) : base(source)
         {
             base.CurrentState = StartState;
         }
@@ -37,8 +36,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             get { return SyntaxKind.RazorCommentStar; }
         }
 
-        protected override SyntaxToken CreateToken(string content, SyntaxKind type, RazorDiagnostic[] errors)
-        {
+        protected override SyntaxToken CreateToken(
+            string content,
+            SyntaxKind type,
+            RazorDiagnostic[] errors
+        ) {
             return SyntaxFactory.Token(type, content, errors);
         }
 
@@ -140,14 +142,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 {
                     return Transition(
                         HtmlTokenizerState.AfterRazorCommentTransition,
-                        EndToken(SyntaxKind.RazorCommentTransition));
+                        EndToken(SyntaxKind.RazorCommentTransition)
+                    );
                 }
                 else if (CurrentCharacter == '@')
                 {
                     // Could be escaped comment transition
                     return Transition(
                         HtmlTokenizerState.EscapedRazorCommentTransition,
-                        EndToken(SyntaxKind.Transition));
+                        EndToken(SyntaxKind.Transition)
+                    );
                 }
 
                 return Stay(EndToken(SyntaxKind.Transition));
@@ -171,10 +175,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private StateResult Text()
         {
             var prev = '\0';
-            while (!EndOfFile &&
-                !(ParserHelpers.IsWhitespace(CurrentCharacter) || ParserHelpers.IsNewLine(CurrentCharacter)) &&
-                !AtToken())
-            {
+            while (
+                !EndOfFile
+                && !(
+                    ParserHelpers.IsWhitespace(CurrentCharacter)
+                    || ParserHelpers.IsNewLine(CurrentCharacter)
+                )
+                && !AtToken()
+            ) {
                 prev = CurrentCharacter;
                 TakeCurrent();
             }
@@ -182,9 +190,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (CurrentCharacter == '@')
             {
                 var next = Peek();
-                if ((ParserHelpers.IsLetter(prev) || ParserHelpers.IsDecimalDigit(prev)) &&
-                    (ParserHelpers.IsLetter(next) || ParserHelpers.IsDecimalDigit(next)))
-                {
+                if (
+                    (ParserHelpers.IsLetter(prev) || ParserHelpers.IsDecimalDigit(prev))
+                    && (ParserHelpers.IsLetter(next) || ParserHelpers.IsDecimalDigit(next))
+                ) {
                     TakeCurrent(); // Take the "@"
                     return Stay(); // Stay in the Text state
                 }
@@ -290,10 +299,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             Data,
             Text,
-
             // Razor Comments - need to be the same for HTML and CSharp
             AfterRazorCommentTransition = RazorCommentTokenizerState.AfterRazorCommentTransition,
-            EscapedRazorCommentTransition = RazorCommentTokenizerState.EscapedRazorCommentTransition,
+            EscapedRazorCommentTransition =
+                RazorCommentTokenizerState.EscapedRazorCommentTransition,
             RazorCommentBody = RazorCommentTokenizerState.RazorCommentBody,
             StarAfterRazorCommentBody = RazorCommentTokenizerState.StarAfterRazorCommentBody,
             AtTokenAfterRazorCommentBody = RazorCommentTokenizerState.AtTokenAfterRazorCommentBody,

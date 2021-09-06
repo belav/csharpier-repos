@@ -7,19 +7,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     internal sealed partial class MarkupTagHelperAttributeSyntax
     {
-        private static readonly string TagHelperAttributeInfoKey = typeof(TagHelperAttributeInfo).Name;
+        private static readonly string TagHelperAttributeInfoKey =
+            typeof(TagHelperAttributeInfo).Name;
 
         public TagHelperAttributeInfo TagHelperAttributeInfo
         {
             get
             {
-                var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
+                var tagHelperAttributeInfo =
+                    this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
                 return tagHelperAttributeInfo;
             }
         }
 
-        public MarkupTagHelperAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
-        {
+        public MarkupTagHelperAttributeSyntax WithTagHelperAttributeInfo(
+            TagHelperAttributeInfo info
+        ) {
             var annotations = new List<SyntaxAnnotation>(GetAnnotations())
             {
                 new SyntaxAnnotation(TagHelperAttributeInfoKey, info)

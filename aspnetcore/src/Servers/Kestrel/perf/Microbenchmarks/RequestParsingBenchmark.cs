@@ -25,14 +25,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         public void Setup()
         {
             _memoryPool = PinnedBlockMemoryPoolFactory.Create();
-            var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                _memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
             var pair = DuplexPipe.CreateConnectionPair(options, options);
 
             var serviceContext = TestContextFactory.CreateServiceContext(
                 serverOptions: new KestrelServerOptions(),
                 httpParser: new HttpParser<Http1ParsingHandler>(),
                 dateHeaderValueManager: new DateHeaderValueManager(),
-                log: new MockTrace());
+                log: new MockTrace()
+            );
 
             var connectionContext = TestContextFactory.CreateHttpConnectionContext(
                 serviceContext: serviceContext,
@@ -40,7 +46,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 transport: pair.Transport,
                 memoryPool: _memoryPool,
                 connectionFeatures: new FeatureCollection(),
-                timeoutControl: new TimeoutControl(timeoutHandler: null));
+                timeoutControl: new TimeoutControl(timeoutHandler: null)
+            );
 
             var http1Connection = new Http1Connection(connectionContext);
 
@@ -70,7 +77,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             }
         }
 
-        [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+        [Benchmark(
+            OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+        )]
         public void PipelinedPlaintextTechEmpower()
         {
             for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -80,7 +89,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             }
         }
 
-        [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+        [Benchmark(
+            OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+        )]
         public void PipelinedPlaintextTechEmpowerDrainBuffer()
         {
             for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -100,7 +111,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             }
         }
 
-        [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+        [Benchmark(
+            OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+        )]
         public void PipelinedLiveAspNet()
         {
             for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -120,7 +133,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             }
         }
 
-        [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+        [Benchmark(
+            OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+        )]
         public void UnicodePipelined()
         {
             for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -161,8 +176,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 {
                     ErrorUtilities.ThrowInvalidRequestHeaders();
                 }
-            }
-            while (!reader.End);
+            } while (!reader.End);
 
             Pipe.Reader.AdvanceTo(readableBuffer.End);
         }
@@ -199,10 +213,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                     ErrorUtilities.ThrowInvalidRequestHeaders();
                 }
                 Pipe.Reader.AdvanceTo(reader.Position, reader.Position);
-            }
-            while (true);
+            } while (true);
         }
-
 
         [IterationCleanup]
         public void Cleanup()

@@ -86,26 +86,82 @@ namespace System.Runtime.Serialization
 #pragma warning disable CS8775 // Member must have a non-null value when exiting in some condition.
         [MemberNotNullWhen(true, nameof(_xmlNodeReader))]
         [MemberNotNullWhen(false, nameof(_element))]
-        private bool IsXmlDataNode { get { return (_internalNodeType == ExtensionDataNodeType.Xml); } }
+        private bool IsXmlDataNode
+        {
+            get { return (_internalNodeType == ExtensionDataNodeType.Xml); }
+        }
 #pragma warning restore CS8775 // Member must have a non-null value when exiting in some condition.
 
-        public override XmlNodeType NodeType { get { return IsXmlDataNode ? _xmlNodeReader.NodeType : _nodeType; } }
-        public override string LocalName { get { return IsXmlDataNode ? _xmlNodeReader.LocalName : _localName!; } }
-        public override string NamespaceURI { get { return IsXmlDataNode ? _xmlNodeReader.NamespaceURI : _ns!; } }
-        public override string Prefix { get { return IsXmlDataNode ? _xmlNodeReader.Prefix : _prefix!; } }
-        public override string Value { get { return IsXmlDataNode ? _xmlNodeReader.Value : _value!; } }
-        public override int Depth { get { return IsXmlDataNode ? _xmlNodeReader.Depth : _depth; } }
-        public override int AttributeCount { get { return IsXmlDataNode ? _xmlNodeReader.AttributeCount : _attributeCount; } }
-        public override bool EOF { get { return IsXmlDataNode ? _xmlNodeReader.EOF : (_readState == ReadState.EndOfFile); } }
-        public override ReadState ReadState { get { return IsXmlDataNode ? _xmlNodeReader.ReadState : _readState; } }
-        public override bool IsEmptyElement { get { return IsXmlDataNode ? _xmlNodeReader.IsEmptyElement : false; } }
-        public override bool IsDefault { get { return IsXmlDataNode ? _xmlNodeReader.IsDefault : base.IsDefault; } }
+        public override XmlNodeType NodeType
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.NodeType : _nodeType; }
+        }
+        public override string LocalName
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.LocalName : _localName!; }
+        }
+        public override string NamespaceURI
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.NamespaceURI : _ns!; }
+        }
+        public override string Prefix
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.Prefix : _prefix!; }
+        }
+        public override string Value
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.Value : _value!; }
+        }
+        public override int Depth
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.Depth : _depth; }
+        }
+        public override int AttributeCount
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.AttributeCount : _attributeCount; }
+        }
+        public override bool EOF
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.EOF : (_readState == ReadState.EndOfFile); }
+        }
+        public override ReadState ReadState
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.ReadState : _readState; }
+        }
+        public override bool IsEmptyElement
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.IsEmptyElement : false; }
+        }
+        public override bool IsDefault
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.IsDefault : base.IsDefault; }
+        }
         //public override char QuoteChar { get { return IsXmlDataNode ? xmlNodeReader.QuoteChar : base.QuoteChar; } }
-        public override XmlSpace XmlSpace { get { return IsXmlDataNode ? _xmlNodeReader.XmlSpace : base.XmlSpace; } }
-        public override string XmlLang { get { return IsXmlDataNode ? _xmlNodeReader.XmlLang : base.XmlLang; } }
-        public override string this[int i] { get { return IsXmlDataNode ? _xmlNodeReader[i] : GetAttribute(i); } }
-        public override string? this[string name] { get { return IsXmlDataNode ? _xmlNodeReader[name] : GetAttribute(name); } }
-        public override string? this[string name, string? namespaceURI] { get { return IsXmlDataNode ? _xmlNodeReader[name, namespaceURI] : GetAttribute(name, namespaceURI); } }
+        public override XmlSpace XmlSpace
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.XmlSpace : base.XmlSpace; }
+        }
+        public override string XmlLang
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.XmlLang : base.XmlLang; }
+        }
+        public override string this[int i]
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader[i] : GetAttribute(i); }
+        }
+        public override string? this[string name]
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader[name] : GetAttribute(name); }
+        }
+        public override string? this[string name, string? namespaceURI]
+        {
+            get
+            {
+                return IsXmlDataNode
+                    ? _xmlNodeReader[name, namespaceURI]
+                    : GetAttribute(name, namespaceURI);
+            }
+        }
 
         public override bool MoveToFirstAttribute()
         {
@@ -245,9 +301,11 @@ namespace System.Runtime.Serialization
 
         private bool IsElementNode(ExtensionDataNodeType nodeType)
         {
-            return (nodeType == ExtensionDataNodeType.Element ||
-                nodeType == ExtensionDataNodeType.ReferencedElement ||
-                nodeType == ExtensionDataNodeType.NullElement);
+            return (
+                nodeType == ExtensionDataNodeType.Element
+                || nodeType == ExtensionDataNodeType.ReferencedElement
+                || nodeType == ExtensionDataNodeType.NullElement
+            );
         }
 
         protected override void Dispose(bool disposing)
@@ -331,7 +389,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.Name;
                 }
-                Fx.Assert("ExtensionDataReader Name property should only be called for IXmlSerializable");
+                Fx.Assert(
+                    "ExtensionDataReader Name property should only be called for IXmlSerializable"
+                );
                 return string.Empty;
             }
         }
@@ -344,7 +404,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.HasValue;
                 }
-                Fx.Assert("ExtensionDataReader HasValue property should only be called for IXmlSerializable");
+                Fx.Assert(
+                    "ExtensionDataReader HasValue property should only be called for IXmlSerializable"
+                );
                 return false;
             }
         }
@@ -357,7 +419,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.BaseURI;
                 }
-                Fx.Assert("ExtensionDataReader BaseURI property should only be called for IXmlSerializable");
+                Fx.Assert(
+                    "ExtensionDataReader BaseURI property should only be called for IXmlSerializable"
+                );
                 return string.Empty;
             }
         }
@@ -370,7 +434,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.NameTable;
                 }
-                Fx.Assert("ExtensionDataReader NameTable property should only be called for IXmlSerializable");
+                Fx.Assert(
+                    "ExtensionDataReader NameTable property should only be called for IXmlSerializable"
+                );
                 return null;
             }
         }
@@ -381,7 +447,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.GetAttribute(name);
             }
-            Fx.Assert("ExtensionDataReader GetAttribute method should only be called for IXmlSerializable");
+            Fx.Assert(
+                "ExtensionDataReader GetAttribute method should only be called for IXmlSerializable"
+            );
             return null;
         }
 
@@ -391,7 +459,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.GetAttribute(i);
             }
-            Fx.Assert("ExtensionDataReader GetAttribute method should only be called for IXmlSerializable");
+            Fx.Assert(
+                "ExtensionDataReader GetAttribute method should only be called for IXmlSerializable"
+            );
             return null;
         }
 
@@ -401,7 +471,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.MoveToAttribute(name);
             }
-            Fx.Assert("ExtensionDataReader MoveToAttribute method should only be called for IXmlSerializable");
+            Fx.Assert(
+                "ExtensionDataReader MoveToAttribute method should only be called for IXmlSerializable"
+            );
             return false;
         }
 
@@ -413,7 +485,9 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                Fx.Assert("ExtensionDataReader ResolveEntity method should only be called for IXmlSerializable");
+                Fx.Assert(
+                    "ExtensionDataReader ResolveEntity method should only be called for IXmlSerializable"
+                );
             }
         }
 
@@ -423,7 +497,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.ReadAttributeValue();
             }
-            Fx.Assert("ExtensionDataReader ReadAttributeValue method should only be called for IXmlSerializable");
+            Fx.Assert(
+                "ExtensionDataReader ReadAttributeValue method should only be called for IXmlSerializable"
+            );
             return false;
         }
 
@@ -478,8 +554,11 @@ namespace System.Runtime.Serialization
         private ElementData? GetNextElement()
         {
             int nextDepth = _depth + 1;
-            return (_elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null)
-                ? new ElementData() : _elements[nextDepth];
+            return (
+                _elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null
+            )
+                ? new ElementData()
+                : _elements[nextDepth];
         }
 
         internal static string GetPrefix(string? ns)

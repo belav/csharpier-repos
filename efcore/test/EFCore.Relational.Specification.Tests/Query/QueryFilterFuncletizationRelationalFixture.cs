@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class QueryFilterFuncletizationRelationalFixture : QueryFilterFuncletizationFixtureBase
+    public abstract class QueryFilterFuncletizationRelationalFixture
+        : QueryFilterFuncletizationFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

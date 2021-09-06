@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="phoneNumber">The telephone number to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetPhoneNumberAsync(TUser user, string phoneNumber, CancellationToken cancellationToken);
+        Task SetPhoneNumberAsync(
+            TUser user,
+            string phoneNumber,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Gets the telephone number, if any, for the specified <paramref name="user"/>.
@@ -47,6 +51,10 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="confirmed">A flag indicating whether the user's telephone number has been confirmed.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken);
+        Task SetPhoneNumberConfirmedAsync(
+            TUser user,
+            bool confirmed,
+            CancellationToken cancellationToken
+        );
     }
 }

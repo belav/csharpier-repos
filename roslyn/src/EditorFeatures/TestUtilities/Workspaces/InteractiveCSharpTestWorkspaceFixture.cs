@@ -11,19 +11,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
     public class InteractiveCSharpTestWorkspaceFixture : CSharpTestWorkspaceFixture
     {
-        internal static TestWorkspace CreateInteractiveWorkspace(string fileContent, ExportProvider exportProvider)
-        {
-            var workspaceDefinition = $@"
+        internal static TestWorkspace CreateInteractiveWorkspace(
+            string fileContent,
+            ExportProvider exportProvider
+        ) {
+            var workspaceDefinition =
+                $@"
 <Workspace>
     <Submission Language=""C#"" CommonReferences=""true"">
 <![CDATA[{fileContent}]]>
     </Submission>
 </Workspace>
 ";
-            return TestWorkspace.Create(XElement.Parse(workspaceDefinition), exportProvider: exportProvider, workspaceKind: WorkspaceKind.Interactive);
+            return TestWorkspace.Create(
+                XElement.Parse(workspaceDefinition),
+                exportProvider: exportProvider,
+                workspaceKind: WorkspaceKind.Interactive
+            );
         }
 
-        protected override TestWorkspace CreateWorkspace(ExportProvider exportProvider = null)
-            => CreateInteractiveWorkspace(fileContent: "", exportProvider);
+        protected override TestWorkspace CreateWorkspace(ExportProvider exportProvider = null) =>
+            CreateInteractiveWorkspace(fileContent: "", exportProvider);
     }
 }

@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
+            IConventionContext<IConventionModelBuilder> context
+        ) {
             foreach (var setInfo in Dependencies.SetFinder.FindSets(Dependencies.ContextType))
             {
                 modelBuilder.Entity(setInfo.Type, fromDataAnnotation: true);

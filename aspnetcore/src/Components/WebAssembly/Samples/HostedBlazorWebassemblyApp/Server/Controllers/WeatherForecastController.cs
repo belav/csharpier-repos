@@ -12,13 +12,24 @@ namespace HostedBlazorWebassemblyApp.Server.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing",
+            "Bracing",
+            "Chilly",
+            "Cool",
+            "Mild",
+            "Warm",
+            "Balmy",
+            "Hot",
+            "Sweltering",
+            "Scorching"
         };
         private readonly IWeatherForecastService _forecastService;
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService forecastService)
-        {
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
+            IWeatherForecastService forecastService
+        ) {
             _forecastService = forecastService;
             _logger = logger;
         }

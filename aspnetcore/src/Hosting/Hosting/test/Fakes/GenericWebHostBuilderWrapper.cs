@@ -9,7 +9,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
 {
-    public class GenericWebHostBuilderWrapper : IWebHostBuilder, ISupportsStartup, ISupportsUseDefaultServiceProvider
+    public class GenericWebHostBuilderWrapper
+        : IWebHostBuilder,
+          ISupportsStartup,
+          ISupportsUseDefaultServiceProvider
     {
         private readonly GenericWebHostBuilder _builder;
         private readonly HostBuilder _hostBuilder;
@@ -23,18 +26,22 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
         // This is the only one that doesn't pass through
         public IWebHost Build()
         {
-            _hostBuilder.ConfigureServices((context, services) => services.AddHostedService<GenericWebHostService>());
+            _hostBuilder.ConfigureServices(
+                (context, services) => services.AddHostedService<GenericWebHostService>()
+            );
             return new GenericWebHost(_hostBuilder.Build());
         }
 
-        public IWebHostBuilder Configure(Action<WebHostBuilderContext, IApplicationBuilder> configure)
-        {
+        public IWebHostBuilder Configure(
+            Action<WebHostBuilderContext, IApplicationBuilder> configure
+        ) {
             _builder.Configure(configure);
             return this;
         }
 
-        public IWebHostBuilder ConfigureAppConfiguration(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate)
-        {
+        public IWebHostBuilder ConfigureAppConfiguration(
+            Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
+        ) {
             _builder.ConfigureAppConfiguration(configureDelegate);
             return this;
         }
@@ -45,8 +52,9 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
             return this;
         }
 
-        public IWebHostBuilder ConfigureServices(Action<WebHostBuilderContext, IServiceCollection> configureServices)
-        {
+        public IWebHostBuilder ConfigureServices(
+            Action<WebHostBuilderContext, IServiceCollection> configureServices
+        ) {
             _builder.ConfigureServices(configureServices);
             return this;
         }
@@ -56,8 +64,9 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
             return _builder.GetSetting(key);
         }
 
-        public IWebHostBuilder UseDefaultServiceProvider(Action<WebHostBuilderContext, ServiceProviderOptions> configure)
-        {
+        public IWebHostBuilder UseDefaultServiceProvider(
+            Action<WebHostBuilderContext, ServiceProviderOptions> configure
+        ) {
             _builder.UseDefaultServiceProvider(configure);
             return this;
         }
@@ -74,8 +83,9 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
             return this;
         }
 
-        public IWebHostBuilder UseStartup<TStartup>(Func<WebHostBuilderContext, TStartup> startupFactory)
-        {
+        public IWebHostBuilder UseStartup<TStartup>(
+            Func<WebHostBuilderContext, TStartup> startupFactory
+        ) {
             _builder.UseStartup(startupFactory);
             return this;
         }

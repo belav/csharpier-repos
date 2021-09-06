@@ -16,37 +16,42 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal abstract class AbstractRemoveUnnecessaryImportsCodeFixProvider : CodeFixProvider
     {
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer.DiagnosticFixableId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer.DiagnosticFixableId
+            );
 
-        public sealed override FixAllProvider GetFixAllProvider()
-            => WellKnownFixAllProviders.BatchFixer;
+        public sealed override FixAllProvider GetFixAllProvider() =>
+            WellKnownFixAllProviders.BatchFixer;
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             context.RegisterCodeFix(
                 new MyCodeAction(
                     GetTitle(),
-                    c => RemoveUnnecessaryImportsAsync(context.Document, c)),
-                context.Diagnostics);
+                    c => RemoveUnnecessaryImportsAsync(context.Document, c)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected abstract string GetTitle();
 
         private static Task<Document> RemoveUnnecessaryImportsAsync(
-            Document document, CancellationToken cancellationToken)
-        {
+            Document document,
+            CancellationToken cancellationToken
+        ) {
             var service = document.GetLanguageService<IRemoveUnnecessaryImportsService>();
             return service.RemoveUnnecessaryImportsAsync(document, cancellationToken);
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument) { }
         }
     }
 }

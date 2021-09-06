@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [Fact]
         public void TestGetTypeByNameAndArity()
         {
-            string source1 = @"
+            string source1 =
+                @"
 namespace System
 {
     public class TestClass
@@ -38,7 +39,8 @@ namespace System
 }
 ";
 
-            string source2 = @"
+            string source2 =
+                @"
 namespace System
 {
     public class TestClass
@@ -47,9 +49,11 @@ namespace System
 }
 ";
 
-            var c1 = CSharpCompilation.Create("Test1",
+            var c1 = CSharpCompilation.Create(
+                "Test1",
                 syntaxTrees: new[] { Parse(source1) },
-                references: new[] { Net40.mscorlib });
+                references: new[] { Net40.mscorlib }
+            );
 
             Assert.Null(c1.GetTypeByMetadataName("DoesntExist"));
             Assert.Null(c1.GetTypeByMetadataName("DoesntExist`1"));
@@ -61,37 +65,47 @@ namespace System
             Assert.NotNull(c1TestClassT);
             Assert.Null(c1.GetTypeByMetadataName("System.TestClass`2"));
 
-            var c2 = CSharpCompilation.Create("Test2",
+            var c2 = CSharpCompilation.Create(
+                "Test2",
                 syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(source2) },
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(c1),
                     Net40.mscorlib
-                });
+                }
+            );
 
             NamedTypeSymbol c2TestClass = c2.GetTypeByMetadataName("System.TestClass");
             Assert.Same(c2.Assembly, c2TestClass.ContainingAssembly);
 
-            var c3 = CSharpCompilation.Create("Test3",
+            var c3 = CSharpCompilation.Create(
+                "Test3",
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(c2),
                     Net40.mscorlib
-                });
+                }
+            );
 
             NamedTypeSymbol c3TestClass = c3.GetTypeByMetadataName("System.TestClass");
             Assert.NotSame(c2TestClass, c3TestClass);
-            Assert.True(c3TestClass.ContainingAssembly.RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(c2TestClass.ContainingAssembly));
+            Assert.True(
+                c3TestClass.ContainingAssembly.RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                    c2TestClass.ContainingAssembly
+                )
+            );
 
             Assert.Null(c3.GetTypeByMetadataName("System.TestClass`1"));
 
-            var c4 = CSharpCompilation.Create("Test4",
+            var c4 = CSharpCompilation.Create(
+                "Test4",
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(c1),
                     new CSharpCompilationReference(c2),
                     Net40.mscorlib
-                });
+                }
+            );
 
             NamedTypeSymbol c4TestClass = c4.GetTypeByMetadataName("System.TestClass");
             Assert.Null(c4TestClass);
@@ -115,32 +129,55 @@ namespace System
         [ConditionalFact(typeof(ClrOnly), typeof(DesktopOnly))]
         public void TypeSymbolFromReflectionType()
         {
-            var c = CSharpCompilation.Create("TypeSymbolFromReflectionType",
+            var c = CSharpCompilation.Create(
+                "TypeSymbolFromReflectionType",
                 syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree("class C { }") },
-                references: new[] {
+                references: new[]
+                {
                     MscorlibRef,
-                    MetadataReference.CreateFromImage(File.ReadAllBytes(typeof(TypeTests).GetTypeInfo().Assembly.Location))
-                });
+                    MetadataReference.CreateFromImage(
+                        File.ReadAllBytes(typeof(TypeTests).GetTypeInfo().Assembly.Location)
+                    )
+                }
+            );
 
             var intSym = c.Assembly.GetTypeByReflectionType(typeof(int), includeReferences: true);
             Assert.NotNull(intSym);
             Assert.Equal(SpecialType.System_Int32, intSym.SpecialType);
 
-            var strcmpSym = c.Assembly.GetTypeByReflectionType(typeof(StringComparison), includeReferences: true);
+            var strcmpSym = c.Assembly.GetTypeByReflectionType(
+                typeof(StringComparison),
+                includeReferences: true
+            );
             Assert.NotNull(strcmpSym);
             Assert.Equal("System.StringComparison", strcmpSym.ToDisplayString());
 
-            var arraySym = c.Assembly.GetTypeByReflectionType(typeof(List<int>[][,,]), includeReferences: true);
+            var arraySym = c.Assembly.GetTypeByReflectionType(
+                typeof(List<int>[][,,]),
+                includeReferences: true
+            );
             Assert.NotNull(arraySym);
-            Assert.Equal("System.Collections.Generic.List<int>[][*,*,*]", arraySym.ToDisplayString());
+            Assert.Equal(
+                "System.Collections.Generic.List<int>[][*,*,*]",
+                arraySym.ToDisplayString()
+            );
 
-            var ptrSym = c.Assembly.GetTypeByReflectionType(typeof(char).MakePointerType().MakePointerType(), includeReferences: true);
+            var ptrSym = c.Assembly.GetTypeByReflectionType(
+                typeof(char).MakePointerType().MakePointerType(),
+                includeReferences: true
+            );
             Assert.NotNull(ptrSym);
             Assert.Equal("char**", ptrSym.ToDisplayString());
 
-            string testType1 = typeof(C<,>).DeclaringType.FullName;
-            var nestedSym1 = c.Assembly.GetTypeByReflectionType(typeof(C<int, bool>.D.E<double, float>.F<byte>), includeReferences: true);
-            Assert.Equal(testType1 + ".C<int, bool>.D.E<double, float>.F<byte>", nestedSym1.ToDisplayString());
+            string testType1 = typeof(C<, >).DeclaringType.FullName;
+            var nestedSym1 = c.Assembly.GetTypeByReflectionType(
+                typeof(C<int, bool>.D.E<double, float>.F<byte>),
+                includeReferences: true
+            );
+            Assert.Equal(
+                testType1 + ".C<int, bool>.D.E<double, float>.F<byte>",
+                nestedSym1.ToDisplayString()
+            );
 
             // Not supported atm:
             //string testType2 = typeof(C<,>).DeclaringType.FullName;
@@ -148,16 +185,25 @@ namespace System
             //Assert.Equal(testType2 + ".C<int, bool>.D.E<double, float>.F<byte>", nestedSym2.ToDisplayString());
 
             // Process is defined in System, which isn't referenced:
-            var err = c.Assembly.GetTypeByReflectionType(typeof(C<Process, bool>.D.E<double, float>.F<byte>), includeReferences: true);
+            var err = c.Assembly.GetTypeByReflectionType(
+                typeof(C<Process, bool>.D.E<double, float>.F<byte>),
+                includeReferences: true
+            );
             Assert.Null(err);
 
-            err = c.Assembly.GetTypeByReflectionType(typeof(C<int, bool>.D.E<double, Process>.F<byte>), includeReferences: true);
+            err = c.Assembly.GetTypeByReflectionType(
+                typeof(C<int, bool>.D.E<double, Process>.F<byte>),
+                includeReferences: true
+            );
             Assert.Null(err);
 
             err = c.Assembly.GetTypeByReflectionType(typeof(Process[]), includeReferences: true);
             Assert.Null(err);
 
-            err = c.Assembly.GetTypeByReflectionType(typeof(SyntaxKind).MakePointerType(), includeReferences: true);
+            err = c.Assembly.GetTypeByReflectionType(
+                typeof(SyntaxKind).MakePointerType(),
+                includeReferences: true
+            );
             Assert.Null(err);
         }
 
@@ -165,13 +211,22 @@ namespace System
         public void AmbiguousNestedTypeSymbolFromMetadata()
         {
             var code = "class A { class B { } }";
-            var c1 = CSharpCompilation.Create("Asm1", syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(code) });
-            var c2 = CSharpCompilation.Create("Asm2", syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(code) });
-            var c3 = CSharpCompilation.Create("Asm3",
-                references: new[] {
+            var c1 = CSharpCompilation.Create(
+                "Asm1",
+                syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(code) }
+            );
+            var c2 = CSharpCompilation.Create(
+                "Asm2",
+                syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(code) }
+            );
+            var c3 = CSharpCompilation.Create(
+                "Asm3",
+                references: new[]
+                {
                     new CSharpCompilationReference(c1),
                     new CSharpCompilationReference(c2)
-                });
+                }
+            );
 
             Assert.Null(c3.GetTypeByMetadataName("A+B"));
         }
@@ -180,8 +235,10 @@ namespace System
         public void DuplicateNestedTypeSymbol()
         {
             var code = "class A { class B { } class B { } }";
-            var c1 = CSharpCompilation.Create("Asm1",
-                syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(code) });
+            var c1 = CSharpCompilation.Create(
+                "Asm1",
+                syntaxTrees: new[] { SyntaxFactory.ParseSyntaxTree(code) }
+            );
 
             Assert.Equal("A.B", c1.GetTypeByMetadataName("A+B").ToTestDisplayString());
         }

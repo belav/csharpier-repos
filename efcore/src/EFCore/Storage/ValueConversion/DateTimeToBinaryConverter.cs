@@ -19,17 +19,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public DateTimeToBinaryConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                v => v.ToBinary(),
-                v => DateTime.FromBinary(v),
-                mappingHints)
-        {
-        }
+            : base(v => v.ToBinary(), v => DateTime.FromBinary(v), mappingHints) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(DateTime), typeof(long), i => new DateTimeToBinaryConverter(i.MappingHints));
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(typeof(DateTime), typeof(long), i => new DateTimeToBinaryConverter(i.MappingHints));
     }
 }

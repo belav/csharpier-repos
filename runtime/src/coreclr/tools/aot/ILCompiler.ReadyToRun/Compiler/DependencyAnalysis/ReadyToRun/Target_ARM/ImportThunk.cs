@@ -15,8 +15,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public partial class ImportThunk
     {
-        protected override void EmitCode(NodeFactory factory, ref ARM.ARMEmitter instructionEncoder, bool relocsOnly)
-        {
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARM.ARMEmitter instructionEncoder,
+            bool relocsOnly
+        ) {
             switch (_thunkKind)
             {
                 case Kind.Eager:

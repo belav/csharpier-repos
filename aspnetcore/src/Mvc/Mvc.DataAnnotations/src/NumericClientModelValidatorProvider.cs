@@ -23,10 +23,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var typeToValidate = context.ModelMetadata.UnderlyingOrModelType;
 
             // Check only the numeric types for which we set type='text'.
-            if (typeToValidate == typeof(float) ||
-                typeToValidate == typeof(double) ||
-                typeToValidate == typeof(decimal))
-            {
+            if (
+                typeToValidate == typeof(float)
+                || typeToValidate == typeof(double)
+                || typeToValidate == typeof(decimal)
+            ) {
                 var results = context.Results;
                 // Read interface .Count once rather than per iteration
                 var resultsCount = results.Count;
@@ -40,11 +41,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     }
                 }
 
-                results.Add(new ClientValidatorItem
-                {
-                    Validator = new NumericClientModelValidator(),
-                    IsReusable = true
-                });
+                results.Add(
+                    new ClientValidatorItem
+                    {
+                        Validator = new NumericClientModelValidator(),
+                        IsReusable = true
+                    }
+                );
             }
         }
     }

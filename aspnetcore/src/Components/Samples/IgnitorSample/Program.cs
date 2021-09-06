@@ -15,7 +15,8 @@ namespace IgnitorSample
     class Program
     {
         private static readonly string ServerUrl = "https://localhost:5001";
-        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        private static readonly JsonSerializerOptions jsonSerializerOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
         static async Task Main(string[] args)
         {
@@ -37,9 +38,17 @@ namespace IgnitorSample
 
     static class BlazorClientExtensions
     {
-        public static Task NavigateAsync(this BlazorClient client, string url, CancellationToken cancellationToken = default)
-        {
-            return client.HubConnection.InvokeAsync("OnLocationChanged", url, false, cancellationToken);
+        public static Task NavigateAsync(
+            this BlazorClient client,
+            string url,
+            CancellationToken cancellationToken = default
+        ) {
+            return client.HubConnection.InvokeAsync(
+                "OnLocationChanged",
+                url,
+                false,
+                cancellationToken
+            );
         }
     }
 }

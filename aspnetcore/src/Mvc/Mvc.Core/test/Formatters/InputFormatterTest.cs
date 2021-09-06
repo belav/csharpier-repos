@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -67,8 +68,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [Theory]
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
-        public void MultipartFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(string requestContentType)
-        {
+        public void MultipartFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new MultipartFormatter();
             var httpContext = new DefaultHttpContext();
@@ -81,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -98,8 +101,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/xml")]
         [InlineData("application/xml-dtd; undefined=ignored")]
         [InlineData("text/html")]
-        public void MultipartFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
-        {
+        public void MultipartFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new MultipartFormatter();
             var httpContext = new DefaultHttpContext();
@@ -112,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -132,8 +137,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [Theory]
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
-        public void MultipartMixedFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(string requestContentType)
-        {
+        public void MultipartMixedFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new MultipartMixedFormatter();
             var httpContext = new DefaultHttpContext();
@@ -146,7 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -163,8 +170,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/xml")]
         [InlineData("application/xml-dtd; undefined=ignored")]
         [InlineData("text/html")]
-        public void MultipartMixedFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
-        {
+        public void MultipartMixedFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new MultipartMixedFormatter();
             var httpContext = new DefaultHttpContext();
@@ -177,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -190,8 +199,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             public MathMLFormatter()
             {
-                SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/mathml-content+xml"));
-                SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/mathml-presentation+xml"));
+                SupportedMediaTypes.Add(
+                    MediaTypeHeaderValue.Parse("application/mathml-content+xml")
+                );
+                SupportedMediaTypes.Add(
+                    MediaTypeHeaderValue.Parse("application/mathml-presentation+xml")
+                );
                 SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/mathml+xml"));
             }
         }
@@ -200,8 +213,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/mathml-content+xml")]
         [InlineData("application/mathml-presentation+xml")]
         [InlineData("application/mathml+xml; undefined=ignored")]
-        public void MathMLFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(string requestContentType)
-        {
+        public void MathMLFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new MathMLFormatter();
             var httpContext = new DefaultHttpContext();
@@ -214,7 +228,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -230,8 +245,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
         [InlineData("text/html")]
-        public void MathMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
-        {
+        public void MathMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new MathMLFormatter();
             var httpContext = new DefaultHttpContext();
@@ -244,7 +260,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -268,8 +285,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/mathml-content+xml")]
         [InlineData("application/mathml-presentation+xml")]
         [InlineData("application/mathml+xml; test=value")]
-        public void XMLFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(string requestContentType)
-        {
+        public void XMLFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new XmlFormatter();
             var httpContext = new DefaultHttpContext();
@@ -282,7 +300,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -297,8 +316,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
         [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
         [InlineData("text/html")]
-        public void XMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
-        {
+        public void XMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+            string requestContentType
+        ) {
             // Arrange
             var formatter = new XmlFormatter();
             var httpContext = new DefaultHttpContext();
@@ -311,7 +331,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelName: string.Empty,
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
-                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+                readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+            );
 
             // Act
             var result = formatter.CanRead(context);
@@ -329,7 +350,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             formatter.SupportedTypes.Add(typeof(string));
 
             // Act
-            var results = formatter.GetSupportedContentTypes(contentType: null, objectType: typeof(int));
+            var results = formatter.GetSupportedContentTypes(
+                contentType: null,
+                objectType: typeof(int)
+            );
 
             // Assert
             Assert.Null(results);
@@ -344,7 +368,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             formatter.SupportedTypes.Add(typeof(string));
 
             // Act
-            var results = formatter.GetSupportedContentTypes(contentType: null, objectType: typeof(string));
+            var results = formatter.GetSupportedContentTypes(
+                contentType: null,
+                objectType: typeof(string)
+            );
 
             // Assert
             Assert.Collection(results, c => Assert.Equal("text/xml", c));
@@ -359,13 +386,17 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             formatter.SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/xml"));
 
             // Act
-            var results = formatter.GetSupportedContentTypes(contentType: null, objectType: typeof(string));
+            var results = formatter.GetSupportedContentTypes(
+                contentType: null,
+                objectType: typeof(string)
+            );
 
             // Assert
             Assert.Collection(
                 results.OrderBy(c => c.ToString()),
                 c => Assert.Equal("application/xml", c),
-                c => Assert.Equal("text/xml", c));
+                c => Assert.Equal("text/xml", c)
+            );
         }
 
         [Fact]
@@ -393,7 +424,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 string.Empty,
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (s, e) => new StreamReader(s, e));
+                (s, e) => new StreamReader(s, e)
+            );
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => formatter.CanRead(context));
@@ -407,14 +439,17 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                () => formatter.GetSupportedContentTypes("application/json", typeof(object)));
+                () => formatter.GetSupportedContentTypes("application/json", typeof(object))
+            );
         }
 
         [Theory]
         [InlineData(true, true)]
         [InlineData(false, false)]
-        public async Task ReadAsync_WithEmptyRequest_ReturnsNoValueResultWhenExpected(bool allowEmptyInputValue, bool expectedIsModelSet)
-        {
+        public async Task ReadAsync_WithEmptyRequest_ReturnsNoValueResultWhenExpected(
+            bool allowEmptyInputValue,
+            bool expectedIsModelSet
+        ) {
             // Arrange
             var formatter = new TestFormatter();
             var context = new InputFormatterContext(
@@ -423,7 +458,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
                 (s, e) => new StreamReader(s, e),
-                allowEmptyInputValue);
+                allowEmptyInputValue
+            );
             context.HttpContext.Request.ContentLength = 0;
 
             // Act
@@ -437,8 +473,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         private class BadConfigurationFormatter : InputFormatter
         {
-            public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
-            {
+            public override Task<InputFormatterResult> ReadRequestBodyAsync(
+                InputFormatterContext context
+            ) {
                 throw new NotImplementedException();
             }
         }
@@ -452,8 +489,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 return SupportedTypes.Count == 0 ? true : SupportedTypes.Contains(type);
             }
 
-            public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
-            {
+            public override Task<InputFormatterResult> ReadRequestBodyAsync(
+                InputFormatterContext context
+            ) {
                 throw new NotImplementedException();
             }
         }

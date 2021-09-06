@@ -20,11 +20,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             using (ECDsa leafKey = ECDsa.Create(ECCurve.NamedCurves.nistP256))
             using (ECDsa leafPubKey = ECDsa.Create(leafKey.ExportParameters(false)))
             {
-                CreateAndTestChain(
-                    rootKey,
-                    intermed1Key,
-                    intermed2Key,
-                    leafPubKey);
+                CreateAndTestChain(rootKey, intermed1Key, intermed2Key, leafPubKey);
             }
         }
 
@@ -39,11 +35,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             {
                 leafPubKey.ImportParameters(leafKey.ExportParameters(false));
 
-                CreateAndTestChain(
-                    rootKey,
-                    intermed1Key,
-                    intermed2Key,
-                    leafPubKey);
+                CreateAndTestChain(rootKey, intermed1Key, intermed2Key, leafPubKey);
             }
         }
 
@@ -54,13 +46,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             using (RSA intermed1Key = RSA.Create(2048))
             using (RSA intermed2Key = RSA.Create(2048))
             using (ECDiffieHellman leafKey = ECDiffieHellman.Create(ECCurve.NamedCurves.nistP256))
-            using (ECDiffieHellman leafPubKey = ECDiffieHellman.Create(leafKey.ExportParameters(false)))
-            {
-                CreateAndTestChain(
-                    rootKey,
-                    intermed1Key,
-                    intermed2Key,
-                    leafPubKey);
+            using (
+                ECDiffieHellman leafPubKey = ECDiffieHellman.Create(leafKey.ExportParameters(false))
+            ) {
+                CreateAndTestChain(rootKey, intermed1Key, intermed2Key, leafPubKey);
             }
         }
 
@@ -69,31 +58,64 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [InlineData(false, null, X509KeyUsageFlags.None, false)]
         [InlineData(false, null, X509KeyUsageFlags.KeyCertSign, false)]
         [InlineData(false, null, X509KeyUsageFlags.DigitalSignature, false)]
-        [InlineData(false, null, X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature, false)]
+        [InlineData(
+            false,
+            null,
+            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+            false
+        )]
         [InlineData(false, false, X509KeyUsageFlags.None, false)]
         [InlineData(false, false, X509KeyUsageFlags.KeyCertSign, false)]
         [InlineData(false, false, X509KeyUsageFlags.DigitalSignature, false)]
-        [InlineData(false, false, X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature, false)]
+        [InlineData(
+            false,
+            false,
+            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+            false
+        )]
         [InlineData(false, true, X509KeyUsageFlags.None, true)]
         [InlineData(false, true, X509KeyUsageFlags.KeyCertSign, true)]
         [InlineData(false, true, X509KeyUsageFlags.DigitalSignature, false)]
-        [InlineData(false, true, X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature, true)]
-
+        [InlineData(
+            false,
+            true,
+            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+            true
+        )]
         // An intermediate doing the issuing
         [InlineData(true, null, X509KeyUsageFlags.None, false)]
         [InlineData(true, null, X509KeyUsageFlags.KeyCertSign, false)]
         [InlineData(true, null, X509KeyUsageFlags.DigitalSignature, false)]
-        [InlineData(true, null, X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature, false)]
+        [InlineData(
+            true,
+            null,
+            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+            false
+        )]
         [InlineData(true, false, X509KeyUsageFlags.None, false)]
         [InlineData(true, false, X509KeyUsageFlags.KeyCertSign, false)]
         [InlineData(true, false, X509KeyUsageFlags.DigitalSignature, false)]
-        [InlineData(true, false, X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature, false)]
+        [InlineData(
+            true,
+            false,
+            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+            false
+        )]
         [InlineData(true, true, X509KeyUsageFlags.None, true)]
         [InlineData(true, true, X509KeyUsageFlags.KeyCertSign, true)]
         [InlineData(true, true, X509KeyUsageFlags.DigitalSignature, false)]
-        [InlineData(true, true, X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature, true)]
-        public static void ChainCertRequirements(bool useIntermed, bool? isCA, X509KeyUsageFlags keyUsage, bool expectSuccess)
-        {
+        [InlineData(
+            true,
+            true,
+            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+            true
+        )]
+        public static void ChainCertRequirements(
+            bool useIntermed,
+            bool? isCA,
+            X509KeyUsageFlags keyUsage,
+            bool expectSuccess
+        ) {
             HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA384;
 
             ECDsa rootKey = null;
@@ -113,10 +135,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 if (useIntermed || isCA.HasValue)
                 {
                     request.CertificateExtensions.Add(
-                        new X509BasicConstraintsExtension(useIntermed || isCA.Value, false, 0, true));
+                        new X509BasicConstraintsExtension(useIntermed || isCA.Value, false, 0, true)
+                    );
                 }
 
-                X509KeyUsageFlags rootFlags = useIntermed ? X509KeyUsageFlags.KeyCertSign : keyUsage;
+                X509KeyUsageFlags rootFlags = useIntermed
+                    ? X509KeyUsageFlags.KeyCertSign
+                    : keyUsage;
 
                 if (rootFlags != X509KeyUsageFlags.None)
                 {
@@ -138,16 +163,25 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     if (isCA.HasValue)
                     {
                         request.CertificateExtensions.Add(
-                            new X509BasicConstraintsExtension(isCA.Value, false, 0, true));
+                            new X509BasicConstraintsExtension(isCA.Value, false, 0, true)
+                        );
                     }
 
                     if (keyUsage != X509KeyUsageFlags.None)
                     {
-                        request.CertificateExtensions.Add(new X509KeyUsageExtension(keyUsage, true));
+                        request.CertificateExtensions.Add(
+                            new X509KeyUsageExtension(keyUsage, true)
+                        );
                     }
 
-                    using (X509Certificate2 tmp = request.Create(rootCert, start, end, new byte[] { 6, 0, 2, 2, 10, 23 }))
-                    {
+                    using (
+                        X509Certificate2 tmp = request.Create(
+                            rootCert,
+                            start,
+                            end,
+                            new byte[] { 6, 0, 2, 2, 10, 23 }
+                        )
+                    ) {
                         intermedCert = tmp.CopyWithPrivateKey(intermedKey);
                     }
 
@@ -166,7 +200,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         () =>
                         {
                             request.Create(signerCert, start, end, leafSerialNumber)?.Dispose();
-                        });
+                        }
+                    );
 
                     return;
                 }
@@ -189,6 +224,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     DisposeChainCerts(chain);
                 }
             }
+
             finally
             {
                 leafCert?.Dispose();
@@ -203,15 +239,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         private static CertificateRequest OpenCertRequest(
             string dn,
             AsymmetricAlgorithm key,
-            HashAlgorithmName hashAlgorithm)
-        {
+            HashAlgorithmName hashAlgorithm
+        ) {
             X500DistinguishedName x500dn = new X500DistinguishedName(dn);
-            return key switch {
-                RSA rsa => new CertificateRequest(x500dn, rsa, hashAlgorithm, RSASignaturePadding.Pkcs1),
+            return key switch
+            {
+                RSA rsa
+                  => new CertificateRequest(x500dn, rsa, hashAlgorithm, RSASignaturePadding.Pkcs1),
                 ECDsa ecdsa => new CertificateRequest(x500dn, ecdsa, hashAlgorithm),
-                ECDiffieHellman ecdh => new CertificateRequest(x500dn, new PublicKey(ecdh), hashAlgorithm),
-                _ => throw new InvalidOperationException(
-                    $"Had no handler for key of type {key?.GetType().FullName ?? "null"}")
+                ECDiffieHellman ecdh
+                  => new CertificateRequest(x500dn, new PublicKey(ecdh), hashAlgorithm),
+                _
+                  => throw new InvalidOperationException(
+                      $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
+                  )
             };
         }
 
@@ -228,7 +269,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 return X509SignatureGenerator.CreateForECDsa(ecdsa);
 
             throw new InvalidOperationException(
-                $"Had no handler for key of type {key?.GetType().FullName ?? "null"}");
+                $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
+            );
         }
 
         private static CertificateRequest CreateChainRequest(
@@ -236,14 +278,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             AsymmetricAlgorithm key,
             HashAlgorithmName hashAlgorithm,
             bool isCa,
-            int? pathLen)
-        {
-            const X509KeyUsageFlags CAFlags = X509KeyUsageFlags.CrlSign | X509KeyUsageFlags.KeyCertSign;
+            int? pathLen
+        ) {
+            const X509KeyUsageFlags CAFlags =
+                X509KeyUsageFlags.CrlSign | X509KeyUsageFlags.KeyCertSign;
             const X509KeyUsageFlags EEFlags =
-                X509KeyUsageFlags.DataEncipherment |
-                X509KeyUsageFlags.KeyEncipherment |
-                X509KeyUsageFlags.DigitalSignature |
-                X509KeyUsageFlags.NonRepudiation;
+                X509KeyUsageFlags.DataEncipherment
+                | X509KeyUsageFlags.KeyEncipherment
+                | X509KeyUsageFlags.DigitalSignature
+                | X509KeyUsageFlags.NonRepudiation;
 
             CertificateRequest request = OpenCertRequest(dn, key, hashAlgorithm);
 
@@ -251,19 +294,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 new X509SubjectKeyIdentifierExtension(
                     request.PublicKey,
                     X509SubjectKeyIdentifierHashAlgorithm.Sha1,
-                    false));
+                    false
+                )
+            );
 
             request.CertificateExtensions.Add(
-                new X509KeyUsageExtension(
-                    isCa ? CAFlags : EEFlags,
-                    true));
+                new X509KeyUsageExtension(isCa ? CAFlags : EEFlags, true)
+            );
 
             request.CertificateExtensions.Add(
                 new X509BasicConstraintsExtension(
                     isCa,
                     pathLen.HasValue,
                     pathLen.GetValueOrDefault(),
-                    true));
+                    true
+                )
+            );
 
             return request;
         }
@@ -272,8 +318,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X509Chain chain,
             X509Certificate2 cert,
             bool expectSuccess,
-            string msg)
-        {
+            string msg
+        ) {
             bool success = chain.Build(cert);
 
             FormattableString errMsg = null;
@@ -286,8 +332,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     if (element.ChainElementStatus.Length != 0)
                     {
-                        X509ChainStatusFlags flags =
-                            element.ChainElementStatus.Select(ces => ces.Status).Aggregate((a, b) => a | b);
+                        X509ChainStatusFlags flags = element.ChainElementStatus.Select(
+                                ces => ces.Status
+                            )
+                            .Aggregate((a, b) => a | b);
 
                         errMsg = $"{msg}: Initial chain error at depth {i}: {flags}";
                         break;
@@ -322,8 +370,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             }
         }
 
-        private static X509Certificate2 CloneWithPrivateKey(X509Certificate2 cert, AsymmetricAlgorithm key)
-        {
+        private static X509Certificate2 CloneWithPrivateKey(
+            X509Certificate2 cert,
+            AsymmetricAlgorithm key
+        ) {
             RSA rsa = key as RSA;
 
             if (rsa != null)
@@ -340,34 +390,59 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 return cert.CopyWithPrivateKey(dsa);
 
             throw new InvalidOperationException(
-                $"Had no handler for key of type {key?.GetType().FullName ?? "null"}");
+                $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
+            );
         }
 
         private static void CreateAndTestChain(
             AsymmetricAlgorithm rootPrivKey,
             AsymmetricAlgorithm intermed1PrivKey,
             AsymmetricAlgorithm intermed2PrivKey,
-            AsymmetricAlgorithm leafPubKey)
-        {
+            AsymmetricAlgorithm leafPubKey
+        ) {
             const string RootDN = "CN=Experimental Root Certificate";
             const string Intermed1DN = "CN=First Intermediate Certificate, O=Experimental";
             const string Intermed2DN = "CN=Second Intermediate Certificate, O=Experimental";
             const string LeafDN = "CN=End-Entity Certificate, O=Experimental";
 
-            CertificateRequest rootRequest =
-                CreateChainRequest(RootDN, rootPrivKey, HashAlgorithmName.SHA512, true, null);
+            CertificateRequest rootRequest = CreateChainRequest(
+                RootDN,
+                rootPrivKey,
+                HashAlgorithmName.SHA512,
+                true,
+                null
+            );
 
-            CertificateRequest intermed1Request =
-                CreateChainRequest(Intermed1DN, intermed1PrivKey, HashAlgorithmName.SHA384, true, null);
+            CertificateRequest intermed1Request = CreateChainRequest(
+                Intermed1DN,
+                intermed1PrivKey,
+                HashAlgorithmName.SHA384,
+                true,
+                null
+            );
 
-            CertificateRequest intermed2Request =
-                CreateChainRequest(Intermed2DN, intermed2PrivKey, HashAlgorithmName.SHA384, true, 0);
+            CertificateRequest intermed2Request = CreateChainRequest(
+                Intermed2DN,
+                intermed2PrivKey,
+                HashAlgorithmName.SHA384,
+                true,
+                0
+            );
 
-            CertificateRequest leafRequest =
-                CreateChainRequest(LeafDN, leafPubKey, HashAlgorithmName.SHA256, false, null);
+            CertificateRequest leafRequest = CreateChainRequest(
+                LeafDN,
+                leafPubKey,
+                HashAlgorithmName.SHA256,
+                false,
+                null
+            );
 
             leafRequest.CertificateExtensions.Add(
-                new X509EnhancedKeyUsageExtension(new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") }, false));
+                new X509EnhancedKeyUsageExtension(
+                    new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                    false
+                )
+            );
 
             X509SignatureGenerator rootGenerator = OpenGenerator(rootPrivKey);
             X509SignatureGenerator intermed2Generator = OpenGenerator(intermed2PrivKey);
@@ -400,11 +475,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 RandomNumberGenerator.Fill(intermed2Serial.Slice(2));
                 RandomNumberGenerator.Fill(leafSerial.Slice(2));
 
-                X509Certificate2 intermed1Tmp =
-                    intermed1Request.Create(rootCertWithKey.SubjectName, rootGenerator, now, intermedEnd, intermed1Serial);
+                X509Certificate2 intermed1Tmp = intermed1Request.Create(
+                    rootCertWithKey.SubjectName,
+                    rootGenerator,
+                    now,
+                    intermedEnd,
+                    intermed1Serial
+                );
 
-                X509Certificate2 intermed2Tmp =
-                    intermed2Request.Create(rootCertWithKey.SubjectName, rootGenerator, now, intermedEnd, intermed1Serial);
+                X509Certificate2 intermed2Tmp = intermed2Request.Create(
+                    rootCertWithKey.SubjectName,
+                    rootGenerator,
+                    now,
+                    intermedEnd,
+                    intermed1Serial
+                );
 
                 intermed1CertWithKey = CloneWithPrivateKey(intermed1Tmp, intermed1PrivKey);
                 intermed2CertWithKey = CloneWithPrivateKey(intermed2Tmp, intermed2PrivKey);
@@ -413,7 +498,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 intermed2Tmp.Dispose();
 
                 leafCert = leafRequest.Create(
-                    intermed2CertWithKey.SubjectName, intermed2Generator, now, leafEnd, leafSerial);
+                    intermed2CertWithKey.SubjectName,
+                    intermed2Generator,
+                    now,
+                    leafEnd,
+                    leafSerial
+                );
 
                 using (X509Chain chain = new X509Chain())
                 {
@@ -435,6 +525,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         Assert.Equal(Intermed2DN, chain.ChainElements[1].Certificate.Subject);
                         Assert.Equal(RootDN, chain.ChainElements[2].Certificate.Subject);
                     }
+
                     finally
                     {
                         DisposeChainCerts(chain);
@@ -451,6 +542,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     DisposeChainCerts(chain);
                 }
             }
+
             finally
             {
                 leafCert?.Dispose();
@@ -479,25 +571,48 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 try
                 {
-                    request = new CertificateRequest("CN=Root", rootKey, HashAlgorithmName.SHA512, padding);
+                    request = new CertificateRequest(
+                        "CN=Root",
+                        rootKey,
+                        HashAlgorithmName.SHA512,
+                        padding
+                    );
                     request.CertificateExtensions.Add(
-                        new X509BasicConstraintsExtension(true, false, 0, true));
+                        new X509BasicConstraintsExtension(true, false, 0, true)
+                    );
 
                     rootCertWithKey = request.CreateSelfSigned(notBefore, notAfter);
 
                     byte[] intermedSerial = { 1, 2, 3, 5, 7, 11, 13 };
 
-                    request = new CertificateRequest("CN=Intermediate", intermedKey, HashAlgorithmName.SHA384, padding);
+                    request = new CertificateRequest(
+                        "CN=Intermediate",
+                        intermedKey,
+                        HashAlgorithmName.SHA384,
+                        padding
+                    );
                     request.CertificateExtensions.Add(
-                        new X509BasicConstraintsExtension(true, true, 1, true));
+                        new X509BasicConstraintsExtension(true, true, 1, true)
+                    );
 
-                    X509Certificate2 intermedPublic = request.Create(rootCertWithKey, notBefore, notAfter, intermedSerial);
+                    X509Certificate2 intermedPublic = request.Create(
+                        rootCertWithKey,
+                        notBefore,
+                        notAfter,
+                        intermedSerial
+                    );
                     intermedCertWithKey = intermedPublic.CopyWithPrivateKey(intermedKey);
                     intermedPublic.Dispose();
 
-                    request = new CertificateRequest("CN=Leaf", leafKey, HashAlgorithmName.SHA256, padding);
+                    request = new CertificateRequest(
+                        "CN=Leaf",
+                        leafKey,
+                        HashAlgorithmName.SHA256,
+                        padding
+                    );
                     request.CertificateExtensions.Add(
-                        new X509BasicConstraintsExtension(false, false, 0, true));
+                        new X509BasicConstraintsExtension(false, false, 0, true)
+                    );
 
                     byte[] leafSerial = { 1, 1, 2, 6, 12, 60, 60, };
 
@@ -515,6 +630,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         DisposeChainCerts(chain);
                     }
                 }
+
                 finally
                 {
                     leafCert?.Dispose();
@@ -533,12 +649,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 return false;
             }
 
-            using (X509Certificate2 cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
+            using (
+                X509Certificate2 cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword
+                )
+            )
             using (RSA rsa = cert.GetRSAPrivateKey())
             {
                 try
                 {
-                    rsa.SignData(Array.Empty<byte>(), HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+                    rsa.SignData(
+                        Array.Empty<byte>(),
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pss
+                    );
                 }
                 catch (CryptographicException)
                 {

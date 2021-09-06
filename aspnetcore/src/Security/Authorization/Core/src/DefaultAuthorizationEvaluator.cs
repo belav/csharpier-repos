@@ -13,11 +13,13 @@ namespace Microsoft.AspNetCore.Authorization
         /// </summary>
         /// <param name="context">The authorization information.</param>
         /// <returns>The <see cref="AuthorizationResult"/>.</returns>
-        public AuthorizationResult Evaluate(AuthorizationHandlerContext context)
-            => context.HasSucceeded
+        public AuthorizationResult Evaluate(AuthorizationHandlerContext context) =>
+            context.HasSucceeded
                 ? AuthorizationResult.Success()
-                : AuthorizationResult.Failed(context.HasFailed
-                    ? AuthorizationFailure.ExplicitFail()
-                    : AuthorizationFailure.Failed(context.PendingRequirements));
+                : AuthorizationResult.Failed(
+                      context.HasFailed
+                          ? AuthorizationFailure.ExplicitFail()
+                          : AuthorizationFailure.Failed(context.PendingRequirements)
+                  );
     }
 }

@@ -6,7 +6,11 @@ using System.Security.Permissions;
 namespace System.Diagnostics
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class EventLogPermission : ResourcePermissionBase
     {

@@ -12,13 +12,38 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static class DiagnosticCustomTags
     {
-        private static readonly string s_enforceOnBuildNeverTag = EnforceOnBuild.Never.ToCustomTag();
+        private static readonly string s_enforceOnBuildNeverTag =
+            EnforceOnBuild.Never.ToCustomTag();
 
-        private static readonly string[] s_microsoftCustomTags = new string[] { WellKnownDiagnosticTags.Telemetry };
-        private static readonly string[] s_editAndContinueCustomTags = new string[] { WellKnownDiagnosticTags.EditAndContinue, WellKnownDiagnosticTags.Telemetry, WellKnownDiagnosticTags.NotConfigurable, s_enforceOnBuildNeverTag };
-        private static readonly string[] s_unnecessaryCustomTags = new string[] { WellKnownDiagnosticTags.Unnecessary, WellKnownDiagnosticTags.Telemetry };
-        private static readonly string[] s_notConfigurableCustomTags = new string[] { WellKnownDiagnosticTags.NotConfigurable, s_enforceOnBuildNeverTag, WellKnownDiagnosticTags.Telemetry };
-        private static readonly string[] s_unnecessaryAndNotConfigurableCustomTags = new string[] { WellKnownDiagnosticTags.Unnecessary, WellKnownDiagnosticTags.NotConfigurable, s_enforceOnBuildNeverTag, WellKnownDiagnosticTags.Telemetry };
+        private static readonly string[] s_microsoftCustomTags = new string[]
+        {
+            WellKnownDiagnosticTags.Telemetry
+        };
+        private static readonly string[] s_editAndContinueCustomTags = new string[]
+        {
+            WellKnownDiagnosticTags.EditAndContinue,
+            WellKnownDiagnosticTags.Telemetry,
+            WellKnownDiagnosticTags.NotConfigurable,
+            s_enforceOnBuildNeverTag
+        };
+        private static readonly string[] s_unnecessaryCustomTags = new string[]
+        {
+            WellKnownDiagnosticTags.Unnecessary,
+            WellKnownDiagnosticTags.Telemetry
+        };
+        private static readonly string[] s_notConfigurableCustomTags = new string[]
+        {
+            WellKnownDiagnosticTags.NotConfigurable,
+            s_enforceOnBuildNeverTag,
+            WellKnownDiagnosticTags.Telemetry
+        };
+        private static readonly string[] s_unnecessaryAndNotConfigurableCustomTags = new string[]
+        {
+            WellKnownDiagnosticTags.Unnecessary,
+            WellKnownDiagnosticTags.NotConfigurable,
+            s_enforceOnBuildNeverTag,
+            WellKnownDiagnosticTags.Telemetry
+        };
 
         public static string[] Microsoft
         {
@@ -33,7 +58,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             get
             {
-                Assert(s_editAndContinueCustomTags, WellKnownDiagnosticTags.EditAndContinue, WellKnownDiagnosticTags.Telemetry, WellKnownDiagnosticTags.NotConfigurable, s_enforceOnBuildNeverTag);
+                Assert(
+                    s_editAndContinueCustomTags,
+                    WellKnownDiagnosticTags.EditAndContinue,
+                    WellKnownDiagnosticTags.Telemetry,
+                    WellKnownDiagnosticTags.NotConfigurable,
+                    s_enforceOnBuildNeverTag
+                );
                 return s_editAndContinueCustomTags;
             }
         }
@@ -42,7 +73,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             get
             {
-                Assert(s_unnecessaryCustomTags, WellKnownDiagnosticTags.Unnecessary, WellKnownDiagnosticTags.Telemetry);
+                Assert(
+                    s_unnecessaryCustomTags,
+                    WellKnownDiagnosticTags.Unnecessary,
+                    WellKnownDiagnosticTags.Telemetry
+                );
                 return s_unnecessaryCustomTags;
             }
         }
@@ -51,7 +86,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             get
             {
-                Assert(s_notConfigurableCustomTags, WellKnownDiagnosticTags.NotConfigurable, s_enforceOnBuildNeverTag, WellKnownDiagnosticTags.Telemetry);
+                Assert(
+                    s_notConfigurableCustomTags,
+                    WellKnownDiagnosticTags.NotConfigurable,
+                    s_enforceOnBuildNeverTag,
+                    WellKnownDiagnosticTags.Telemetry
+                );
                 return s_notConfigurableCustomTags;
             }
         }
@@ -60,7 +100,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             get
             {
-                Assert(s_unnecessaryAndNotConfigurableCustomTags, WellKnownDiagnosticTags.Unnecessary, WellKnownDiagnosticTags.NotConfigurable, s_enforceOnBuildNeverTag, WellKnownDiagnosticTags.Telemetry);
+                Assert(
+                    s_unnecessaryAndNotConfigurableCustomTags,
+                    WellKnownDiagnosticTags.Unnecessary,
+                    WellKnownDiagnosticTags.NotConfigurable,
+                    s_enforceOnBuildNeverTag,
+                    WellKnownDiagnosticTags.Telemetry
+                );
                 return s_unnecessaryAndNotConfigurableCustomTags;
             }
         }
@@ -76,8 +122,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        internal static string[] Create(bool isUnnecessary, bool isConfigurable, EnforceOnBuild enforceOnBuild)
-        {
+        internal static string[] Create(
+            bool isUnnecessary,
+            bool isConfigurable,
+            EnforceOnBuild enforceOnBuild
+        ) {
             Debug.Assert(isConfigurable || enforceOnBuild == EnforceOnBuild.Never);
 
             var customTagsBuilder = ImmutableArray.CreateBuilder<string>();

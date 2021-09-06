@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// <param name="additionalLanguages">Additional languages to which the code fix provider applies. See <see cref="LanguageNames"/>.</param>
         public ExportCodeFixProviderAttribute(
             string firstLanguage,
-            params string[] additionalLanguages)
-            : base(typeof(CodeFixProvider))
+            params string[] additionalLanguages
+        ) : base(typeof(CodeFixProvider))
         {
             if (additionalLanguages == null)
             {

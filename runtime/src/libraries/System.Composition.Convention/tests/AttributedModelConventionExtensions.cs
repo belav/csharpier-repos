@@ -11,14 +11,22 @@ namespace System.Composition.Convention.Tests
     /// </summary>
     internal static class AttributedModelConventionExtensions
     {
-        public static Attribute[] GetDeclaredAttributes(this AttributedModelProvider convention, Type reflectedType, MemberInfo member)
-        {
+        public static Attribute[] GetDeclaredAttributes(
+            this AttributedModelProvider convention,
+            Type reflectedType,
+            MemberInfo member
+        ) {
             return convention.GetCustomAttributes(reflectedType, member).ToArray();
         }
 
-        public static Attribute[] GetDeclaredAttributes(this AttributedModelProvider convention, Type reflectedType, ParameterInfo parameter)
-        {
-            return convention.GetCustomAttributes(reflectedType, parameter).OfType<Attribute>().ToArray();
+        public static Attribute[] GetDeclaredAttributes(
+            this AttributedModelProvider convention,
+            Type reflectedType,
+            ParameterInfo parameter
+        ) {
+            return convention.GetCustomAttributes(reflectedType, parameter)
+                .OfType<Attribute>()
+                .ToArray();
         }
     }
 }

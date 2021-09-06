@@ -42,12 +42,12 @@ namespace System.Data.SqlTypes
         //      - m_lCurLen must be x_lNull.
         // 5) SqlBytes contains a Lazy Materialized Blob (ie, StorageState.Delayed)
         //
-        internal byte[]? _rgbBuf;   // Data buffer
+        internal byte[]? _rgbBuf; // Data buffer
         private long _lCurLen; // Current data length
         internal Stream? _stream;
         private SqlBytesCharsState _state;
 
-        private byte[]? _rgbWorkBuf;    // A 1-byte work buffer.
+        private byte[]? _rgbWorkBuf; // A 1-byte work buffer.
 
         // The max data length that we support at this time.
         private const long x_lMaxLen = int.MaxValue;
@@ -86,9 +86,7 @@ namespace System.Data.SqlTypes
         }
 
         // Create a SqlBytes from a SqlBinary
-        public SqlBytes(SqlBinary value) : this(value.IsNull ? null : value.Value!)
-        {
-        }
+        public SqlBytes(SqlBinary value) : this(value.IsNull ? null : value.Value!) { }
 
         public SqlBytes(Stream? s)
         {
@@ -103,7 +101,6 @@ namespace System.Data.SqlTypes
             AssertValid();
         }
 
-
         // --------------------------------------------------------------
         //      Public properties
         // --------------------------------------------------------------
@@ -111,10 +108,7 @@ namespace System.Data.SqlTypes
         // INullable
         public bool IsNull
         {
-            get
-            {
-                return _state == SqlBytesCharsState.Null;
-            }
+            get { return _state == SqlBytesCharsState.Null; }
         }
 
         // Property: the in-memory buffer of SqlBytes
@@ -231,10 +225,7 @@ namespace System.Data.SqlTypes
 
         public Stream Stream
         {
-            get
-            {
-                return FStream() ? _stream! : new StreamOnSqlBytes(this);
-            }
+            get { return FStream() ? _stream! : new StreamOnSqlBytes(this); }
             set
             {
                 _lCurLen = x_lNull;
@@ -279,7 +270,6 @@ namespace System.Data.SqlTypes
 
                 if (value > _rgbBuf.Length)
                     throw new ArgumentOutOfRangeException(nameof(value));
-
                 else if (IsNull)
                     // At this point we know that value is small enough
                     // Go back in buffer mode
@@ -431,9 +421,7 @@ namespace System.Data.SqlTypes
         {
             Debug.Assert(_state >= SqlBytesCharsState.Null && _state <= SqlBytesCharsState.Stream);
 
-            if (IsNull)
-            {
-            }
+            if (IsNull) { }
             else
             {
                 Debug.Assert((_lCurLen >= 0 && _lCurLen <= x_lMaxLen) || FStream());
@@ -544,7 +532,6 @@ namespace System.Data.SqlTypes
             return new XmlQualifiedName("base64Binary", XmlSchema.Namespace);
         }
 
-
         // --------------------------------------------------------------
         //         Serialization using ISerializable
         // --------------------------------------------------------------
@@ -564,10 +551,7 @@ namespace System.Data.SqlTypes
         // Since SqlBytes is mutable, have to be property and create a new one each time.
         public static SqlBytes Null
         {
-            get
-            {
-                return new SqlBytes((byte[]?)null);
-            }
+            get { return new SqlBytes((byte[]?)null); }
         }
     } // class SqlBytes
 
@@ -582,7 +566,7 @@ namespace System.Data.SqlTypes
         //      Data members
         // --------------------------------------------------------------
 
-        private SqlBytes _sb;      // the SqlBytes object
+        private SqlBytes _sb; // the SqlBytes object
         private long _lPosition;
 
         // --------------------------------------------------------------
@@ -604,26 +588,17 @@ namespace System.Data.SqlTypes
 
         public override bool CanRead
         {
-            get
-            {
-                return _sb != null && !_sb.IsNull;
-            }
+            get { return _sb != null && !_sb.IsNull; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return _sb != null;
-            }
+            get { return _sb != null; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _sb != null && (!_sb.IsNull || _sb._rgbBuf != null);
-            }
+            get { return _sb != null && (!_sb.IsNull || _sb._rgbBuf != null); }
         }
 
         public override long Length
@@ -762,6 +737,7 @@ namespace System.Data.SqlTypes
             {
                 _sb = null!;
             }
+
             finally
             {
                 base.Dispose(disposing);

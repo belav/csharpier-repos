@@ -20,15 +20,12 @@ namespace Tracing.Tests.EventSourceError
     // that error over EventPipe.
     class IllegalTypesEventSource : EventSource
     {
-        public IllegalTypesEventSource()
-        {
-
-        }
+        public IllegalTypesEventSource() { }
 
         [Event(1, Level = EventLevel.LogAlways)]
         public void SimpleArrayEvent(int[] simpleArray)
         {
-           WriteEvent(1, simpleArray);
+            WriteEvent(1, simpleArray);
         }
 
         [Event(2, Level = EventLevel.LogAlways)]
@@ -55,11 +52,23 @@ namespace Tracing.Tests.EventSourceError
                 new Provider("IllegalTypesEventSource")
             };
 
-            var configuration = new SessionConfiguration(circularBufferSizeMB: 1024, format: EventPipeSerializationFormat.NetTrace,  providers: providers);
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, configuration, _DoesRundownContainMethodEvents);
+            var configuration = new SessionConfiguration(
+                circularBufferSizeMB: 1024,
+                format: EventPipeSerializationFormat.NetTrace,
+                providers: providers
+            );
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                configuration,
+                _DoesRundownContainMethodEvents
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "IllegalTypesEventSource", 1 }
         };
@@ -73,26 +82,33 @@ namespace Tracing.Tests.EventSourceError
             eventSource.SimpleArrayEvent(new int[] { 12 });
         };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (
+            source
+        ) =>
         {
             int eventCount = 0;
             bool sawEvent = false;
             source.Dynamic.All += (TraceEvent traceEvent) =>
             {
-                if (traceEvent.ProviderName == "SentinelEventSource"
+                if (
+                    traceEvent.ProviderName == "SentinelEventSource"
                     || traceEvent.ProviderName == "Microsoft-Windows-DotNETRuntime"
                     || traceEvent.ProviderName == "Microsoft-Windows-DotNETRuntimeRundown"
-                    || traceEvent.ProviderName == "Microsoft-DotNETCore-EventPipe")
-                {
+                    || traceEvent.ProviderName == "Microsoft-DotNETCore-EventPipe"
+                ) {
                     return;
                 }
 
                 ++eventCount;
 
-                if (traceEvent.ProviderName == "IllegalTypesEventSource"
+                if (
+                    traceEvent.ProviderName == "IllegalTypesEventSource"
                     && traceEvent.EventName == "EventSourceMessage"
-                    && traceEvent.FormattedMessage.StartsWith("ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource", StringComparison.OrdinalIgnoreCase))
-                {
+                    && traceEvent.FormattedMessage.StartsWith(
+                        "ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     sawEvent = true;
                 }
                 else

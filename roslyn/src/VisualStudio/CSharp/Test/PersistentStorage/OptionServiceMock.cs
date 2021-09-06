@@ -58,8 +58,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             throw new NotImplementedException();
         }
 
-        public SerializableOptionSet GetSerializableOptionsSnapshot(ImmutableHashSet<string> languages)
-        {
+        public SerializableOptionSet GetSerializableOptionsSnapshot(
+            ImmutableHashSet<string> languages
+        ) {
             throw new NotImplementedException();
         }
 
@@ -68,13 +69,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             throw new NotImplementedException();
         }
 
-        public bool TryMapEditorConfigKeyToOption(string key, string language, [NotNullWhen(true)] out IEditorConfigStorageLocation2 storageLocation, out OptionKey optionKey)
-        {
+        public bool TryMapEditorConfigKeyToOption(
+            string key,
+            string language,
+            [NotNullWhen(true)] out IEditorConfigStorageLocation2 storageLocation,
+            out OptionKey optionKey
+        ) {
             throw new NotImplementedException();
         }
 
-        public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(ImmutableHashSet<string> languages)
-        {
+        public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
+            ImmutableHashSet<string> languages
+        ) {
             throw new NotImplementedException();
         }
 
@@ -84,13 +90,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             throw new NotImplementedException();
         }
 
-        public void RegisterDocumentOptionsProvider(IDocumentOptionsProvider documentOptionsProvider)
-        {
+        public void RegisterDocumentOptionsProvider(
+            IDocumentOptionsProvider documentOptionsProvider
+        ) {
             throw new NotImplementedException();
         }
 
-        public Task<OptionSet> GetUpdatedOptionSetForDocumentAsync(Document document, OptionSet optionSet, CancellationToken cancellationToken)
-        {
+        public Task<OptionSet> GetUpdatedOptionSetForDocumentAsync(
+            Document document,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        ) {
             throw new NotImplementedException();
         }
 

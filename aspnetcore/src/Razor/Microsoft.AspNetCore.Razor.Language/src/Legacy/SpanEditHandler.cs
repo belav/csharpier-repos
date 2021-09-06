@@ -13,13 +13,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     {
         private static readonly int TypeHashCode = typeof(SpanEditHandler).GetHashCode();
 
-        public SpanEditHandler(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer)
-            : this(tokenizer, AcceptedCharactersInternal.Any)
-        {
-        }
+        public SpanEditHandler(
+            Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
+        ) : this(tokenizer, AcceptedCharactersInternal.Any) { }
 
-        public SpanEditHandler(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer, AcceptedCharactersInternal accepted)
-        {
+        public SpanEditHandler(
+            Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,
+            AcceptedCharactersInternal accepted
+        ) {
             AcceptedCharacters = accepted;
             Tokenizer = tokenizer;
         }
@@ -33,8 +34,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return CreateDefault(c => Enumerable.Empty<Syntax.InternalSyntax.SyntaxToken>());
         }
 
-        public static SpanEditHandler CreateDefault(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer)
-        {
+        public static SpanEditHandler CreateDefault(
+            Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
+        ) {
             return new SpanEditHandler(tokenizer);
         }
 
@@ -52,8 +54,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             }
 
             // If the change is accepted then apply the change
-            if ((result & PartialParseResultInternal.Accepted) == PartialParseResultInternal.Accepted)
-            {
+            if (
+                (result & PartialParseResultInternal.Accepted)
+                == PartialParseResultInternal.Accepted
+            ) {
                 return new EditResult(result, UpdateSpan(target, change));
             }
             return new EditResult(result, target);
@@ -63,19 +67,27 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             var end = target.EndPosition;
             var changeOldEnd = change.Span.AbsoluteIndex + change.Span.Length;
-            return change.Span.AbsoluteIndex >= target.Position &&
-                   (changeOldEnd < end || (changeOldEnd == end && AcceptedCharacters != AcceptedCharactersInternal.None));
+            return change.Span.AbsoluteIndex >= target.Position
+                && (
+                    changeOldEnd < end
+                    || (
+                        changeOldEnd == end && AcceptedCharacters != AcceptedCharactersInternal.None
+                    )
+                );
         }
 
-        protected virtual PartialParseResultInternal CanAcceptChange(SyntaxNode target, SourceChange change)
-        {
+        protected virtual PartialParseResultInternal CanAcceptChange(
+            SyntaxNode target,
+            SourceChange change
+        ) {
             return PartialParseResultInternal.Rejected;
         }
 
         protected virtual SyntaxNode UpdateSpan(SyntaxNode target, SourceChange change)
         {
             var newContent = change.GetEditedContent(target);
-            var builder = Syntax.InternalSyntax.SyntaxListBuilder<Syntax.InternalSyntax.SyntaxToken>.Create();
+            var builder =
+                Syntax.InternalSyntax.SyntaxListBuilder<Syntax.InternalSyntax.SyntaxToken>.Create();
             foreach (var token in Tokenizer(newContent))
             {
                 builder.Add(token);
@@ -84,31 +96,48 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxNode newTarget = null;
             if (target is RazorMetaCodeSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.RazorMetaCode(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.RazorMetaCode(builder.ToList())
+                    .CreateRed(target.Parent, target.Position);
             }
             else if (target is MarkupTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.MarkupTextLiteral(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.MarkupTextLiteral(builder.ToList())
+                    .CreateRed(target.Parent, target.Position);
             }
             else if (target is MarkupEphemeralTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.MarkupEphemeralTextLiteral(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.MarkupEphemeralTextLiteral(
+                        builder.ToList()
+                    )
+                    .CreateRed(target.Parent, target.Position);
             }
             else if (target is CSharpStatementLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpStatementLiteral(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpStatementLiteral(
+                        builder.ToList()
+                    )
+                    .CreateRed(target.Parent, target.Position);
             }
             else if (target is CSharpExpressionLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpExpressionLiteral(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpExpressionLiteral(
+                        builder.ToList()
+                    )
+                    .CreateRed(target.Parent, target.Position);
             }
             else if (target is CSharpEphemeralTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpEphemeralTextLiteral(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpEphemeralTextLiteral(
+                        builder.ToList()
+                    )
+                    .CreateRed(target.Parent, target.Position);
             }
             else if (target is UnclassifiedTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.UnclassifiedTextLiteral(builder.ToList()).CreateRed(target.Parent, target.Position);
+                newTarget = Syntax.InternalSyntax.SyntaxFactory.UnclassifiedTextLiteral(
+                        builder.ToList()
+                    )
+                    .CreateRed(target.Parent, target.Position);
             }
             else
             {
@@ -123,8 +152,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         protected internal static bool IsAtEndOfFirstLine(SyntaxNode target, SourceChange change)
         {
-            var endOfFirstLine = target.GetContent().IndexOfAny(new char[] { (char)0x000d, (char)0x000a, (char)0x2028, (char)0x2029 });
-            return (endOfFirstLine == -1 || (change.Span.AbsoluteIndex - target.Position) <= endOfFirstLine);
+            var endOfFirstLine = target.GetContent()
+                .IndexOfAny(new char[] { (char)0x000d, (char)0x000a, (char)0x2028, (char)0x2029 });
+            return (
+                endOfFirstLine == -1
+                || (change.Span.AbsoluteIndex - target.Position) <= endOfFirstLine
+            );
         }
 
         /// <summary>
@@ -155,9 +188,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public override bool Equals(object obj)
         {
-            return obj is SpanEditHandler other &&
-                GetType() == other.GetType() &&
-                AcceptedCharacters == other.AcceptedCharacters;
+            return obj is SpanEditHandler other
+                && GetType() == other.GetType()
+                && AcceptedCharacters == other.AcceptedCharacters;
         }
 
         public override int GetHashCode()

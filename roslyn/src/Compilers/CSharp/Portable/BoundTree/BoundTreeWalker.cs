@@ -9,9 +9,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract partial class BoundTreeWalker : BoundTreeVisitor
     {
-        protected BoundTreeWalker()
-        {
-        }
+        protected BoundTreeWalker() { }
 
         public void VisitList<T>(ImmutableArray<T> list) where T : BoundNode
         {
@@ -33,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // variable.  So that we can make sense of x in this
             // context, we store the unoptimized form and visit this extra argument.
             var qc = unoptimizedForm as BoundQueryClause;
-            if (qc != null) unoptimizedForm = qc.Value;
+            if (qc != null)
+                unoptimizedForm = qc.Value;
             var call = unoptimizedForm as BoundCall;
             if (call != null && (object)call.Method != null)
             {
@@ -57,8 +56,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private int _recursionDepth;
 
-        protected BoundTreeWalkerWithStackGuard()
-        { }
+        protected BoundTreeWalkerWithStackGuard() { }
 
         protected BoundTreeWalkerWithStackGuard(int recursionDepth)
         {
@@ -83,8 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitExpressionWithStackGuard(ref _recursionDepth, node);
         }
 
-        protected sealed override BoundExpression VisitExpressionWithoutStackGuard(BoundExpression node)
-        {
+        protected sealed override BoundExpression VisitExpressionWithoutStackGuard(
+            BoundExpression node
+        ) {
             return (BoundExpression)base.Visit(node);
         }
     }
@@ -92,14 +91,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// Note: do not use a static/singleton instance of this type, as it holds state.
     /// </summary>
-    internal abstract class BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator : BoundTreeWalkerWithStackGuard
+    internal abstract class BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        : BoundTreeWalkerWithStackGuard
     {
-        protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator()
-        { }
+        protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator() { }
 
-        protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(int recursionDepth)
-            : base(recursionDepth)
-        { }
+        protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(
+            int recursionDepth
+        ) : base(recursionDepth) { }
 
         public sealed override BoundNode? VisitBinaryOperator(BoundBinaryOperator node)
         {

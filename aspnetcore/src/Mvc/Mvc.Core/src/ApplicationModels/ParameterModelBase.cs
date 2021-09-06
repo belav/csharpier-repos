@@ -20,12 +20,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </summary>
         /// <param name="parameterType">The type.</param>
         /// <param name="attributes">The attributes.</param>
-        protected ParameterModelBase(
-            Type parameterType,
-            IReadOnlyList<object> attributes)
+        protected ParameterModelBase(Type parameterType, IReadOnlyList<object> attributes)
         {
             ParameterType = parameterType ?? throw new ArgumentNullException(nameof(parameterType));
-            Attributes = new List<object>(attributes ?? throw new ArgumentNullException(nameof(attributes)));
+            Attributes = new List<object>(
+                attributes ?? throw new ArgumentNullException(nameof(attributes))
+            );
 
             Properties = new Dictionary<object, object>();
         }

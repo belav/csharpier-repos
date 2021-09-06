@@ -40,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         /// </summary>
         public LazyLoader(
             ICurrentDbContext currentContext,
-            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
+        ) {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(logger, nameof(logger));
 
@@ -58,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         public virtual void SetLoaded(
             object entity,
             [CallerMemberName] string navigationName = "",
-            bool loaded = true)
-        {
+            bool loaded = true
+        ) {
             if (_loadedStates == null)
             {
                 _loadedStates = new Dictionary<string, bool>();
@@ -111,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         public virtual Task LoadAsync(
             object entity,
             CancellationToken cancellationToken = default,
-            [CallerMemberName] string navigationName = "")
-        {
+            [CallerMemberName] string navigationName = ""
+        ) {
             Check.NotNull(entity, nameof(entity));
             Check.NotEmpty(navigationName, nameof(navigationName));
 
@@ -121,12 +121,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
                 : Task.CompletedTask;
         }
 
-        private bool ShouldLoad(object entity, string navigationName, [NotNullWhen(true)] out NavigationEntry? navigationEntry)
-        {
-            if (_loadedStates != null
+        private bool ShouldLoad(
+            object entity,
+            string navigationName,
+            [NotNullWhen(true)] out NavigationEntry? navigationEntry
+        ) {
+            if (
+                _loadedStates != null
                 && _loadedStates.TryGetValue(navigationName, out var loaded)
-                && loaded)
-            {
+                && loaded
+            ) {
                 navigationEntry = null;
                 return false;
             }
@@ -167,7 +171,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Dispose()
-            => _disposed = true;
+        public virtual void Dispose() => _disposed = true;
     }
 }

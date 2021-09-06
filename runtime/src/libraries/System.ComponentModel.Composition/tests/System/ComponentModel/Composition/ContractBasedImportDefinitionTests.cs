@@ -71,51 +71,111 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_NullAsContractNameArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("contractName", () =>
-            {
-                new ContractBasedImportDefinition((string)null, (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "contractName",
+                () =>
+                {
+                    new ContractBasedImportDefinition(
+                        (string)null,
+                        (string)null,
+                        Enumerable.Empty<KeyValuePair<string, Type>>(),
+                        ImportCardinality.ExactlyOne,
+                        false,
+                        false,
+                        CreationPolicy.Any
+                    );
+                }
+            );
         }
 
         [Fact]
         public void Constructor2_EmptyStringAsContractNameArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>("contractName", () =>
-            {
-                new ContractBasedImportDefinition("", (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
-            });
+            Assert.Throws<ArgumentException>(
+                "contractName",
+                () =>
+                {
+                    new ContractBasedImportDefinition(
+                        "",
+                        (string)null,
+                        Enumerable.Empty<KeyValuePair<string, Type>>(),
+                        ImportCardinality.ExactlyOne,
+                        false,
+                        false,
+                        CreationPolicy.Any
+                    );
+                }
+            );
         }
 
         [Fact]
         public void RequiredMetadata_ArrayWithNullKeyAsRequiredMetadataArgument_ShouldThrowInvalidOperation()
         {
-            var requiredMetadata = new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>(null, typeof(object)) };
-
-            var import = new ContractBasedImportDefinition("requiredMetadata", (string)null, requiredMetadata, ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
-
-            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            var requiredMetadata = new KeyValuePair<string, Type>[]
             {
-                var m = import.RequiredMetadata;
-            });
+                new KeyValuePair<string, Type>(null, typeof(object))
+            };
+
+            var import = new ContractBasedImportDefinition(
+                "requiredMetadata",
+                (string)null,
+                requiredMetadata,
+                ImportCardinality.ExactlyOne,
+                false,
+                false,
+                CreationPolicy.Any
+            );
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var m = import.RequiredMetadata;
+                }
+            );
         }
 
         [Fact]
         public void RequiredMetadata_ArrayWithNullValueAsRequiredMetadataArgument_ShouldThrowInvalidOperation()
         {
-            var requiredMetadata = new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>("key", null) };
-            var import = new ContractBasedImportDefinition("requiredMetadata", (string)null, requiredMetadata, ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
-
-            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            var requiredMetadata = new KeyValuePair<string, Type>[]
             {
-                var m = import.RequiredMetadata;
-            });
+                new KeyValuePair<string, Type>("key", null)
+            };
+            var import = new ContractBasedImportDefinition(
+                "requiredMetadata",
+                (string)null,
+                requiredMetadata,
+                ImportCardinality.ExactlyOne,
+                false,
+                false,
+                CreationPolicy.Any
+            );
+
+            ExceptionAssert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var m = import.RequiredMetadata;
+                }
+            );
         }
 
         [Fact]
         public void Constructor2_NullAsMetadataArgument_ShouldSetRequiredMetadataToEmptyEnumerable()
         {
-            var requiredMetadata = new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>("key", null) };
-            var definition = new ContractBasedImportDefinition("metadata", (string)null, requiredMetadata, ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any, null);
+            var requiredMetadata = new KeyValuePair<string, Type>[]
+            {
+                new KeyValuePair<string, Type>("key", null)
+            };
+            var definition = new ContractBasedImportDefinition(
+                "metadata",
+                (string)null,
+                requiredMetadata,
+                ImportCardinality.ExactlyOne,
+                false,
+                false,
+                CreationPolicy.Any,
+                null
+            );
 
             Assert.Empty(definition.Metadata);
         }
@@ -123,7 +183,15 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_NullAsRequiredMetadataArgument_ShouldSetRequiredMetadataToEmptyEnumerable()
         {
-            var definition = new ContractBasedImportDefinition("requiredMetadata", (string)null, (IEnumerable<KeyValuePair<string, Type>>)null, ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
+            var definition = new ContractBasedImportDefinition(
+                "requiredMetadata",
+                (string)null,
+                (IEnumerable<KeyValuePair<string, Type>>)null,
+                ImportCardinality.ExactlyOne,
+                false,
+                false,
+                CreationPolicy.Any
+            );
 
             Assert.Empty(definition.RequiredMetadata);
         }
@@ -135,10 +203,21 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                Assert.Throws<ArgumentException>("cardinality", () =>
-                {
-                    new ContractBasedImportDefinition("ContractName", (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), e, false, false, CreationPolicy.Any);
-                });
+                Assert.Throws<ArgumentException>(
+                    "cardinality",
+                    () =>
+                    {
+                        new ContractBasedImportDefinition(
+                            "ContractName",
+                            (string)null,
+                            Enumerable.Empty<KeyValuePair<string, Type>>(),
+                            e,
+                            false,
+                            false,
+                            CreationPolicy.Any
+                        );
+                    }
+                );
             }
         }
 
@@ -149,7 +228,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), e, false, false, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    e,
+                    false,
+                    false,
+                    CreationPolicy.Any
+                );
 
                 Assert.Equal(e, definition.Cardinality);
             }
@@ -162,7 +249,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition(e, (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    e,
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false,
+                    CreationPolicy.Any
+                );
 
                 Assert.Equal(e, definition.ContractName);
             }
@@ -175,7 +270,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, e, ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    e,
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false,
+                    CreationPolicy.Any
+                );
 
                 Assert.Equal(e, definition.RequiredMetadata);
             }
@@ -188,7 +291,16 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, null, ImportCardinality.ExactlyOne, false, false, CreationPolicy.Any, e);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    null,
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false,
+                    CreationPolicy.Any,
+                    e
+                );
 
                 Assert.Equal(e, definition.Metadata);
             }
@@ -201,7 +313,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), ImportCardinality.ExactlyOne, e, false, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    ImportCardinality.ExactlyOne,
+                    e,
+                    false,
+                    CreationPolicy.Any
+                );
 
                 Assert.Equal(e, definition.IsRecomposable);
             }
@@ -214,7 +334,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), ImportCardinality.ExactlyOne, false, e, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    e,
+                    CreationPolicy.Any
+                );
 
                 Assert.Equal(e, definition.IsPrerequisite);
             }
@@ -227,7 +355,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, Enumerable.Empty<KeyValuePair<string, Type>>(), ImportCardinality.ExactlyOne, false, false, e);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false,
+                    e
+                );
 
                 Assert.Equal(e, definition.RequiredCreationPolicy);
             }
@@ -240,7 +376,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition(e, (string)null, (IEnumerable<KeyValuePair<string, Type>>)null, ImportCardinality.ExactlyOne, true, false, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    e,
+                    (string)null,
+                    (IEnumerable<KeyValuePair<string, Type>>)null,
+                    ImportCardinality.ExactlyOne,
+                    true,
+                    false,
+                    CreationPolicy.Any
+                );
 
                 ConstraintAssert.Contains(definition.Constraint, e);
             }
@@ -253,7 +397,15 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ContractBasedImportDefinition("ContractName", (string)null, e, ImportCardinality.ExactlyOne, true, false, CreationPolicy.Any);
+                var definition = new ContractBasedImportDefinition(
+                    "ContractName",
+                    (string)null,
+                    e,
+                    ImportCardinality.ExactlyOne,
+                    true,
+                    false,
+                    CreationPolicy.Any
+                );
 
                 ConstraintAssert.Contains(definition.Constraint, "ContractName", e);
             }
@@ -289,7 +441,12 @@ namespace System.ComponentModel.Composition
         public void IsConstraintSatisfiedBy_ContractNameMatch()
         {
             var export = CreateSimpleExport();
-            var import = CreateSimpleImport("ContractName", "ContractName", new string[0], new Type[0]);
+            var import = CreateSimpleImport(
+                "ContractName",
+                "ContractName",
+                new string[0],
+                new Type[0]
+            );
             Assert.True(import.IsConstraintSatisfiedBy(export));
         }
 
@@ -297,7 +454,12 @@ namespace System.ComponentModel.Composition
         public void IsConstraintSatisfiedBy_ContractNameMismatch()
         {
             var export = CreateSimpleExport();
-            var import = CreateSimpleImport("NonContractName", "ContractName", new string[0], new Type[0]);
+            var import = CreateSimpleImport(
+                "NonContractName",
+                "ContractName",
+                new string[0],
+                new Type[0]
+            );
             Assert.False(import.IsConstraintSatisfiedBy(export));
         }
 
@@ -305,7 +467,12 @@ namespace System.ComponentModel.Composition
         public void IsConstraintSatisfiedBy_TypeIdentityMismatch()
         {
             var export = CreateSimpleExport();
-            var import = CreateSimpleImport("ContractName", "NonContractName", new string[0], new Type[0]);
+            var import = CreateSimpleImport(
+                "ContractName",
+                "NonContractName",
+                new string[0],
+                new Type[0]
+            );
             Assert.False(import.IsConstraintSatisfiedBy(export));
         }
 
@@ -313,7 +480,12 @@ namespace System.ComponentModel.Composition
         public void IsConstraintSatisfiedBy_MetadataMatch()
         {
             var export = CreateSimpleExport();
-            var import = CreateSimpleImport("ContractName", "ContractName", new string[]{"Int", "String", "Type"}, new Type[]{typeof(int), typeof(string), typeof(Type)});
+            var import = CreateSimpleImport(
+                "ContractName",
+                "ContractName",
+                new string[] { "Int", "String", "Type" },
+                new Type[] { typeof(int), typeof(string), typeof(Type) }
+            );
             Assert.True(import.IsConstraintSatisfiedBy(export));
         }
 
@@ -321,7 +493,12 @@ namespace System.ComponentModel.Composition
         public void IsConstraintSatisfiedBy_MetadataKeyMismatch()
         {
             var export = CreateSimpleExport();
-            var import = CreateSimpleImport("ContractName", "ContractName", new string[] { "Int", "String1", "Type" }, new Type[] { typeof(int), typeof(string), typeof(Type) });
+            var import = CreateSimpleImport(
+                "ContractName",
+                "ContractName",
+                new string[] { "Int", "String1", "Type" },
+                new Type[] { typeof(int), typeof(string), typeof(Type) }
+            );
             Assert.False(import.IsConstraintSatisfiedBy(export));
         }
 
@@ -329,7 +506,12 @@ namespace System.ComponentModel.Composition
         public void IsConstraintSatisfiedBy_MetadataTypeMatch()
         {
             var export = CreateSimpleExport();
-            var import = CreateSimpleImport("ContractName", "ContractName", new string[] { "Int", "String", "Type" }, new Type[] { typeof(int), typeof(string), typeof(int) });
+            var import = CreateSimpleImport(
+                "ContractName",
+                "ContractName",
+                new string[] { "Int", "String", "Type" },
+                new Type[] { typeof(int), typeof(string), typeof(int) }
+            );
             Assert.False(import.IsConstraintSatisfiedBy(export));
         }
 
@@ -343,23 +525,32 @@ namespace System.ComponentModel.Composition
             return new ExportDefinition("ContractName", metadata);
         }
 
-        private static ContractBasedImportDefinition CreateSimpleImport(string contractName, string typeIdentity, string[] metadataKeys, Type[] metadataTypes)
-        {
+        private static ContractBasedImportDefinition CreateSimpleImport(
+            string contractName,
+            string typeIdentity,
+            string[] metadataKeys,
+            Type[] metadataTypes
+        ) {
             Dictionary<string, Type> requiredMetadata = new Dictionary<string, Type>();
             Assert.Equal(metadataKeys.Length, metadataTypes.Length);
-            for (int i=0; i< metadataKeys.Length; i++)
+            for (int i = 0; i < metadataKeys.Length; i++)
             {
                 requiredMetadata[metadataKeys[i]] = metadataTypes[i];
             }
-            return new ContractBasedImportDefinition(contractName, typeIdentity, requiredMetadata, ImportCardinality.ZeroOrMore, false, false, CreationPolicy.Any);
-
+            return new ContractBasedImportDefinition(
+                contractName,
+                typeIdentity,
+                requiredMetadata,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false,
+                CreationPolicy.Any
+            );
         }
 
         private class NoOverridesContractBasedImportDefinition : ContractBasedImportDefinition
         {
-            public NoOverridesContractBasedImportDefinition()
-            {
-            }
+            public NoOverridesContractBasedImportDefinition() { }
         }
 
         private class DerivedContractBasedImportDefinition : ContractBasedImportDefinition
@@ -372,8 +563,10 @@ namespace System.ComponentModel.Composition
                 _contractName = contractName;
             }
 
-            public DerivedContractBasedImportDefinition(string contractName, IEnumerable<KeyValuePair<string, Type>> requiredMetadata)
-            {
+            public DerivedContractBasedImportDefinition(
+                string contractName,
+                IEnumerable<KeyValuePair<string, Type>> requiredMetadata
+            ) {
                 _contractName = contractName;
                 _requiredMetadata = requiredMetadata;
             }

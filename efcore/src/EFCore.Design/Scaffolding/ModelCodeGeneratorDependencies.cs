@@ -44,8 +44,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public ModelCodeGeneratorDependencies()
-        {
-        }
+        public ModelCodeGeneratorDependencies() { }
     }
 }

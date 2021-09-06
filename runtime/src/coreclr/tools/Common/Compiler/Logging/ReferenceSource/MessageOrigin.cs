@@ -39,14 +39,16 @@ namespace Mono.Linker
 
         public override string ToString()
         {
-            int sourceLine = SourceLine, sourceColumn = SourceColumn;
+            int sourceLine = SourceLine,
+                sourceColumn = SourceColumn;
             string fileName = FileName;
-            if (MemberDefinition is MethodDefinition method &&
-                method.DebugInformation.HasSequencePoints)
-            {
+            if (
+                MemberDefinition is MethodDefinition method
+                && method.DebugInformation.HasSequencePoints
+            ) {
                 var offset = ILOffset ?? 0;
-                SequencePoint correspondingSequencePoint = method.DebugInformation.SequencePoints
-                    .Where(s => s.Offset <= offset)?.Last();
+                SequencePoint correspondingSequencePoint =
+                    method.DebugInformation.SequencePoints.Where(s => s.Offset <= offset)?.Last();
                 if (correspondingSequencePoint != null)
                 {
                     fileName = correspondingSequencePoint.Document.Url;
@@ -72,10 +74,13 @@ namespace Mono.Linker
         }
 
         public bool Equals(MessageOrigin other) =>
-            (FileName, MemberDefinition, SourceLine, SourceColumn) == (other.FileName, other.MemberDefinition, other.SourceLine, other.SourceColumn);
+            (FileName, MemberDefinition, SourceLine, SourceColumn)
+            == (other.FileName, other.MemberDefinition, other.SourceLine, other.SourceColumn);
 
-        public override bool Equals(object obj) => obj is MessageOrigin messageOrigin && Equals(messageOrigin);
-        public override int GetHashCode() => (FileName, MemberDefinition, SourceLine, SourceColumn).GetHashCode();
+        public override bool Equals(object obj) =>
+            obj is MessageOrigin messageOrigin && Equals(messageOrigin);
+        public override int GetHashCode() =>
+            (FileName, MemberDefinition, SourceLine, SourceColumn).GetHashCode();
         public static bool operator ==(MessageOrigin lhs, MessageOrigin rhs) => lhs.Equals(rhs);
         public static bool operator !=(MessageOrigin lhs, MessageOrigin rhs) => !lhs.Equals(rhs);
 
@@ -83,8 +88,17 @@ namespace Mono.Linker
         {
             if (MemberDefinition != null && other.MemberDefinition != null)
             {
-                return (MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name, MemberDefinition.DeclaringType?.Name, MemberDefinition?.Name).CompareTo
-                    ((other.MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name, other.MemberDefinition.DeclaringType?.Name, other.MemberDefinition?.Name));
+                return (
+                    MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name,
+                    MemberDefinition.DeclaringType?.Name,
+                    MemberDefinition?.Name
+                ).CompareTo(
+                    (
+                        other.MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name,
+                        other.MemberDefinition.DeclaringType?.Name,
+                        other.MemberDefinition?.Name
+                    )
+                );
             }
             else if (MemberDefinition == null && other.MemberDefinition == null)
             {
@@ -94,7 +108,9 @@ namespace Mono.Linker
                 }
                 else if (FileName == null && other.FileName == null)
                 {
-                    return (SourceLine, SourceColumn).CompareTo((other.SourceLine, other.SourceColumn));
+                    return (SourceLine, SourceColumn).CompareTo(
+                        (other.SourceLine, other.SourceColumn)
+                    );
                 }
 
                 return (FileName == null) ? 1 : -1;

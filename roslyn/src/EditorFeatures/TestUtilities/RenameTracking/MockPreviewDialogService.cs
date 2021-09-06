@@ -12,7 +12,11 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 {
-    [ExportWorkspaceService(typeof(IPreviewDialogService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IPreviewDialogService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class MockPreviewDialogService : IPreviewDialogService, IWorkspaceServiceFactory
     {
         public bool ReturnsNull;
@@ -26,12 +30,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockPreviewDialogService()
-        {
-        }
+        public MockPreviewDialogService() { }
 
-        public Solution PreviewChanges(string title, string helpString, string description, string topLevelName, Glyph topLevelGlyph, Solution newSolution, Solution oldSolution, bool showCheckBoxes = true)
-        {
+        public Solution PreviewChanges(
+            string title,
+            string helpString,
+            string description,
+            string topLevelName,
+            Glyph topLevelGlyph,
+            Solution newSolution,
+            Solution oldSolution,
+            bool showCheckBoxes = true
+        ) {
             Called = true;
             Title = title;
             HelpString = helpString;
@@ -43,7 +53,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             return ReturnsNull ? null : newSolution;
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => this;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => this;
     }
 }

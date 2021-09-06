@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventId eventId,
             LogLevel level,
             string eventIdCode,
-            Func<LogLevel, Action<ILogger, TParam1, TParam2, Exception?>> logActionFunc)
-            : base(loggingOptions, eventId, level, eventIdCode)
+            Func<LogLevel, Action<ILogger, TParam1, TParam2, Exception?>> logActionFunc
+        ) : base(loggingOptions, eventId, level, eventIdCode)
         {
             Check.NotNull(logActionFunc, nameof(logActionFunc));
 
@@ -45,9 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <param name="arg1"> The first message argument. </param>
         /// <param name="arg2"> The second message argument. </param>
         /// <returns> The message string. </returns>
-        public virtual string GenerateMessage(
-            TParam1 arg1,
-            TParam2 arg2)
+        public virtual string GenerateMessage(TParam1 arg1, TParam2 arg2)
         {
             var extractor = new MessageExtractingLogger();
             _logAction(extractor, arg1, arg2, null);
@@ -64,8 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual void Log<TLoggerCategory>(
             IDiagnosticsLogger<TLoggerCategory> logger,
             TParam1 arg1,
-            TParam2 arg2)
-            where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+            TParam2 arg2
+        ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
         {
             switch (WarningBehavior)
             {

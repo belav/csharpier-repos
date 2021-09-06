@@ -10,17 +10,14 @@ namespace Microsoft.CodeAnalysis.Emit
         /// No change.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Node value was updated.
         /// </summary>
         Update = 1,
-
         /// <summary>
         /// Node was inserted.
         /// </summary>
         Insert = 2,
-
         /// <summary>
         /// Node was deleted.
         /// </summary>

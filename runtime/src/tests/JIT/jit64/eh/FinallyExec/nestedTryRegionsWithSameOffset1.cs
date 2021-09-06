@@ -5,7 +5,6 @@ using System;
 
 class Program
 {
-
     private static TestUtil.TestLog testLog;
 
     static Program()
@@ -35,14 +34,17 @@ class Program
                     try
                     {
                         Console.WriteLine("  in try");
-                        if (count-- == 0) break;
+                        if (count-- == 0)
+                            break;
                     }
+
                     finally
                     {
                         Console.WriteLine("  in finally");
                     }
                 }
             }
+
             finally
             {
                 Console.WriteLine("in finally");

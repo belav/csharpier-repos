@@ -10,22 +10,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Diagnostics
         /// Represents an error.
         /// </summary>
         Error,
-
         /// <summary>
         /// Represent a warning.
         /// </summary>
         Warning,
-
         /// <summary>
         /// Represents an informational note.
         /// </summary>
         Message,
-
         /// <summary>
         /// Represents a hidden note.
         /// </summary>
         Hidden,
-
         /// <summary>
         /// Represents a hinted suggestion.
         /// </summary>

@@ -16,6 +16,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
     internal interface IGenerateDefaultConstructorsService : ILanguageService
     {
         Task<ImmutableArray<CodeAction>> GenerateDefaultConstructorsAsync(
-            Document document, TextSpan textSpan, CancellationToken cancellationToken);
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
     }
 }

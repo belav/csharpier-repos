@@ -15,9 +15,15 @@ namespace System.Security.Cryptography.Cng.Tests
             return key;
         }
 
-        protected override void VerifyMatch(ECDiffieHellmanCng exported, ECDiffieHellmanCng imported)
-        {
-            using (ECDiffieHellmanCng other = new ECDiffieHellmanCng(exported.ExportParameters(false).Curve))
+        protected override void VerifyMatch(
+            ECDiffieHellmanCng exported,
+            ECDiffieHellmanCng imported
+        ) {
+            using (
+                ECDiffieHellmanCng other = new ECDiffieHellmanCng(
+                    exported.ExportParameters(false).Curve
+                )
+            )
             using (ECDiffieHellmanPublicKey otherPub = other.PublicKey)
             {
                 byte[] a = imported.DeriveKeyFromHash(otherPub, HashAlgorithmName.SHA256);

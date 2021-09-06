@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             bool selectionInExpression,
             SemanticDocument document,
             SyntaxAnnotation firstTokenAnnotation,
-            SyntaxAnnotation lastTokenAnnotation)
-        {
+            SyntaxAnnotation lastTokenAnnotation
+        ) {
             Status = status;
 
             OriginalSpan = originalSpan;
@@ -49,7 +49,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SemanticDocument = document;
         }
 
-        protected abstract bool UnderAnonymousOrLocalMethod(SyntaxToken token, SyntaxToken firstToken, SyntaxToken lastToken);
+        protected abstract bool UnderAnonymousOrLocalMethod(
+            SyntaxToken token,
+            SyntaxToken firstToken,
+            SyntaxToken lastToken
+        );
 
         public abstract bool ContainingScopeHasAsyncKeyword();
 
@@ -80,17 +84,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         public bool ContainsValidContext
         {
-            get
-            {
-                return SemanticDocument != null;
-            }
+            get { return SemanticDocument != null; }
         }
 
-        public SyntaxToken GetFirstTokenInSelection()
-            => SemanticDocument.GetTokenWithAnnotation(FirstTokenAnnotation);
+        public SyntaxToken GetFirstTokenInSelection() =>
+            SemanticDocument.GetTokenWithAnnotation(FirstTokenAnnotation);
 
-        public SyntaxToken GetLastTokenInSelection()
-            => SemanticDocument.GetTokenWithAnnotation(LastTokenAnnotation);
+        public SyntaxToken GetLastTokenInSelection() =>
+            SemanticDocument.GetTokenWithAnnotation(LastTokenAnnotation);
 
         public TNode GetContainingScopeOf<TNode>() where TNode : SyntaxNode
         {
@@ -119,19 +120,22 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var firstToken = GetFirstTokenInSelection();
             var lastToken = GetLastTokenInSelection();
 
-            for (var currentToken = firstToken;
+            for (
+                var currentToken = firstToken;
                 currentToken.Span.End < lastToken.SpanStart;
-                currentToken = currentToken.GetNextToken())
-            {
+                currentToken = currentToken.GetNextToken()
+            ) {
                 // [|
                 //     async () => await ....
                 // |]
                 //
                 // for the case above, even if the selection contains "await", it doesn't belong to the enclosing block
                 // which extract method is applied to
-                if (SemanticDocument.Project.LanguageServices.GetService<ISyntaxFactsService>().IsAwaitKeyword(currentToken)
-                    && !UnderAnonymousOrLocalMethod(currentToken, firstToken, lastToken))
-                {
+                if (
+                    SemanticDocument.Project.LanguageServices.GetService<ISyntaxFactsService>()
+                        .IsAwaitKeyword(currentToken)
+                    && !UnderAnonymousOrLocalMethod(currentToken, firstToken, lastToken)
+                ) {
                     return true;
                 }
             }
@@ -153,8 +157,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     continue;
                 }
 
-                if (IsConfigureAwaitFalse(node) && !UnderAnonymousOrLocalMethod(node.GetFirstToken(), firstToken, lastToken))
-                {
+                if (
+                    IsConfigureAwaitFalse(node)
+                    && !UnderAnonymousOrLocalMethod(node.GetFirstToken(), firstToken, lastToken)
+                ) {
                     return true;
                 }
             }
@@ -164,7 +170,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         private bool IsConfigureAwaitFalse(SyntaxNode node)
         {
-            var syntaxFacts = SemanticDocument.Project.LanguageServices.GetService<ISyntaxFactsService>();
+            var syntaxFacts =
+                SemanticDocument.Project.LanguageServices.GetService<ISyntaxFactsService>();
             if (!syntaxFacts.IsInvocationExpression(node))
             {
                 return false;
@@ -178,8 +185,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             var name = syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression);
             var identifier = syntaxFacts.GetIdentifierOfSimpleName(name);
-            if (!syntaxFacts.StringComparer.Equals(identifier.ValueText, nameof(Task.ConfigureAwait)))
-            {
+            if (
+                !syntaxFacts.StringComparer.Equals(
+                    identifier.ValueText,
+                    nameof(Task.ConfigureAwait)
+                )
+            ) {
                 return false;
             }
 
@@ -198,7 +209,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         {
             get
             {
-                return Options.GetOption(ExtractMethodOptions.DontPutOutOrRefOnStruct, SemanticDocument.Project.Language);
+                return Options.GetOption(
+                    ExtractMethodOptions.DontPutOutOrRefOnStruct,
+                    SemanticDocument.Project.Language
+                );
             }
         }
     }

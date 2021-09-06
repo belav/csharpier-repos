@@ -16,7 +16,14 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<TService, TExpressionSyntax, TTypeSyntax, TTypeDeclarationSyntax, TQueryExpressionSyntax, TNameSyntax>
+    internal partial class AbstractIntroduceVariableService<
+        TService,
+        TExpressionSyntax,
+        TTypeSyntax,
+        TTypeDeclarationSyntax,
+        TQueryExpressionSyntax,
+        TNameSyntax
+    >
     {
         private partial class State
         {
@@ -47,11 +54,13 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 TService service,
                 SemanticDocument document,
                 TextSpan textSpan,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 var state = new State(service, document);
-                if (!await state.TryInitializeAsync(document, textSpan, cancellationToken).ConfigureAwait(false))
-                {
+                if (
+                    !await state.TryInitializeAsync(document, textSpan, cancellationToken)
+                        .ConfigureAwait(false)
+                ) {
                     return null;
                 }
 
@@ -61,20 +70,27 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             private async Task<bool> TryInitializeAsync(
                 SemanticDocument document,
                 TextSpan textSpan,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return false;
                 }
 
-                Expression = await document.Document.TryGetRelevantNodeAsync<TExpressionSyntax>(textSpan, cancellationToken).ConfigureAwait(false);
-                if (Expression == null || CodeRefactoringHelpers.IsNodeUnderselected(Expression, textSpan))
-                {
+                Expression = await document.Document.TryGetRelevantNodeAsync<TExpressionSyntax>(
+                        textSpan,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                if (
+                    Expression == null
+                    || CodeRefactoringHelpers.IsNodeUnderselected(Expression, textSpan)
+                ) {
                     return false;
                 }
 
-                var expressionType = Document.SemanticModel.GetTypeInfo(Expression, cancellationToken).Type;
+                var expressionType =
+                    Document.SemanticModel.GetTypeInfo(Expression, cancellationToken).Type;
                 if (expressionType is IErrorTypeSymbol)
                 {
                     return false;
@@ -97,10 +113,15 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     return false;
                 }
 
-                IsConstant = IsExpressionConstant(Document, Expression, _service, cancellationToken);
+                IsConstant = IsExpressionConstant(
+                    Document,
+                    Expression,
+                    _service,
+                    cancellationToken
+                );
 
-                // Note: the ordering of these clauses are important.  They go, generally, from 
-                // innermost to outermost order.  
+                // Note: the ordering of these clauses are important.  They go, generally, from
+                // innermost to outermost order.
                 if (IsInQueryContext(cancellationToken))
                 {
                     if (CanGenerateInto<TQueryExpressionSyntax>(cancellationToken))
@@ -127,7 +148,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 if (enclosingBlocks.Any())
                 {
                     // If we're inside a block, then don't even try the other options (like field,
-                    // constructor initializer, etc.).  This is desirable behavior.  If we're in a 
+                    // constructor initializer, etc.).  This is desirable behavior.  If we're in a
                     // block in a field, then we're in a lambda, and we want to offer to generate
                     // a local, and not a field.
                     if (IsInBlockContext(cancellationToken))
@@ -141,7 +162,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
                 /* NOTE: All checks from this point forward are intentionally ordered to be AFTER the check for Block Context. */
 
-                // If we are inside a block within an Expression bodied member we should generate inside the block, 
+                // If we are inside a block within an Expression bodied member we should generate inside the block,
                 // instead of rewriting a concise expression bodied member to its equivalent that has a body with a block.
                 if (_service.IsInExpressionBodiedMember(Expression))
                 {
@@ -186,17 +207,34 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
                 return false;
 
-                static bool IsExpressionConstant(SemanticDocument document, TExpressionSyntax expression, TService service, CancellationToken cancellationToken)
-                {
-                    if (document.SemanticModel.GetConstantValue(expression, cancellationToken) is { HasValue: true, Value: var value })
-                    {
-                        var syntaxKindsService = document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
-                        if (syntaxKindsService.InterpolatedStringExpression == expression.RawKind && value is string)
+                static bool IsExpressionConstant(
+                    SemanticDocument document,
+                    TExpressionSyntax expression,
+                    TService service,
+                    CancellationToken cancellationToken
+                ) {
+                    if (
+                        document.SemanticModel.GetConstantValue(expression, cancellationToken)
+                        is
                         {
+                            HasValue: true,
+                            Value: var value
+                        }
+                    ) {
+                        var syntaxKindsService =
+                            document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
+                        if (
+                            syntaxKindsService.InterpolatedStringExpression == expression.RawKind
+                            && value is string
+                        ) {
                             // Interpolated strings can have constant values, but if it's being converted to a FormattableString
                             // or IFormattable then we cannot treat it as one
-                            var typeInfo = document.SemanticModel.GetTypeInfo(expression, cancellationToken);
-                            return typeInfo.ConvertedType?.IsFormattableStringOrIFormattable() != true;
+                            var typeInfo = document.SemanticModel.GetTypeInfo(
+                                expression,
+                                cancellationToken
+                            );
+                            return typeInfo.ConvertedType?.IsFormattableStringOrIFormattable()
+                                != true;
                         }
                         else
                         {
@@ -212,13 +250,14 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             public SemanticMap GetSemanticMap(CancellationToken cancellationToken)
             {
-                _semanticMap ??= Document.SemanticModel.GetSemanticMap(Expression, cancellationToken);
+                _semanticMap ??= Document.SemanticModel.GetSemanticMap(
+                    Expression,
+                    cancellationToken
+                );
                 return _semanticMap;
             }
 
-            private bool CanIntroduceVariable(
-                bool isSpanEmpty,
-                CancellationToken cancellationToken)
+            private bool CanIntroduceVariable(bool isSpanEmpty, CancellationToken cancellationToken)
             {
                 if (!_service.CanIntroduceVariableFor(Expression))
                 {
@@ -245,8 +284,13 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 //
                 // In essence, this says "i can be replaced with an expression as long as I'm not being
                 // written to".
-                var semanticFacts = Document.Project.LanguageServices.GetService<ISemanticFactsService>();
-                return semanticFacts.CanReplaceWithRValue(Document.SemanticModel, Expression, cancellationToken);
+                var semanticFacts =
+                    Document.Project.LanguageServices.GetService<ISemanticFactsService>();
+                return semanticFacts.CanReplaceWithRValue(
+                    Document.SemanticModel,
+                    Expression,
+                    cancellationToken
+                );
             }
 
             private bool CanGenerateInto<TSyntax>(CancellationToken cancellationToken)

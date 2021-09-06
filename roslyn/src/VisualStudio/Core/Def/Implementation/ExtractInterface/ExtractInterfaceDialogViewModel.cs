@@ -30,8 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             List<string> conflictingTypeNames,
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
-            string languageName)
-        {
+            string languageName
+        ) {
             _notificationService = notificationService;
 
             DestinationViewModel = new NewTypeDestinationSelectionViewModel(
@@ -40,9 +40,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
                 defaultNamespace,
                 generatedNameTypeParameterSuffix,
                 conflictingTypeNames.ToImmutableArray(),
-                syntaxFactsService);
+                syntaxFactsService
+            );
 
-            MemberContainers = extractableMembers.Select(m => new MemberSymbolViewModel(m, glyphService)).OrderBy(s => s.SymbolName).ToList();
+            MemberContainers = extractableMembers.Select(
+                    m => new MemberSymbolViewModel(m, glyphService)
+                )
+                .OrderBy(s => s.SymbolName)
+                .ToList();
         }
 
         internal bool TrySubmit()
@@ -64,8 +69,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             return true;
         }
 
-        private void SendFailureNotification(string message)
-            => _notificationService.SendNotification(message, severity: NotificationSeverity.Information);
+        private void SendFailureNotification(string message) =>
+            _notificationService.SendNotification(
+                message,
+                severity: NotificationSeverity.Information
+            );
 
         internal void DeselectAll()
         {
@@ -89,9 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
         internal class MemberSymbolViewModel : SymbolViewModel<ISymbol>
         {
-            public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService) : base(symbol, glyphService)
-            {
-            }
+            public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService)
+                : base(symbol, glyphService) { }
         }
     }
 }

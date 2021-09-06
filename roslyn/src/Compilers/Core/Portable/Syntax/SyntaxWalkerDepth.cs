@@ -13,17 +13,14 @@ namespace Microsoft.CodeAnalysis
         /// descend into only nodes
         /// </summary>
         Node = 0,
-
         /// <summary>
         /// descend into nodes and tokens
         /// </summary>
         Token = 1,
-
         /// <summary>
         /// descend into nodes, tokens and trivia
         /// </summary>
         Trivia = 2,
-
         /// <summary>
         /// descend into everything
         /// </summary>

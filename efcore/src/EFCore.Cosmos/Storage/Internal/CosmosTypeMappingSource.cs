@@ -29,12 +29,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         public CosmosTypeMappingSource(TypeMappingSourceDependencies dependencies)
             : base(dependencies)
         {
-            _clrTypeMappings
-                = new Dictionary<Type, CosmosTypeMapping>
+            _clrTypeMappings = new Dictionary<Type, CosmosTypeMapping>
+            {
                 {
-                    { typeof(byte[]), new CosmosTypeMapping(typeof(byte[]), keyComparer: new ArrayStructuralComparer<byte>()) },
-                    { typeof(JObject), new CosmosTypeMapping(typeof(JObject)) }
-                };
+                    typeof(byte[]),
+                    new CosmosTypeMapping(
+                        typeof(byte[]),
+                        keyComparer: new ArrayStructuralComparer<byte>()
+                    )
+                },
+                { typeof(JObject), new CosmosTypeMapping(typeof(JObject)) }
+            };
         }
 
         /// <summary>
@@ -53,9 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 return mapping;
             }
 
-            if ((clrType.IsValueType
-                    && !clrType.IsEnum)
-                || clrType == typeof(string))
+            if ((clrType.IsValueType && !clrType.IsEnum) || clrType == typeof(string))
             {
                 return new CosmosTypeMapping(clrType);
             }

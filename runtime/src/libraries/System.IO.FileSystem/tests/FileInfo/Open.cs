@@ -14,8 +14,12 @@ namespace System.IO.Tests
 
         public override void FileModeAppend(string streamSpecifier)
         {
-            using (FileStream fs = CreateFileStream(GetTestFilePath() + streamSpecifier, FileMode.Append))
-            {
+            using (
+                FileStream fs = CreateFileStream(
+                    GetTestFilePath() + streamSpecifier,
+                    FileMode.Append
+                )
+            ) {
                 Assert.False(fs.CanRead);
                 Assert.True(fs.CanWrite);
             }
@@ -47,11 +51,17 @@ namespace System.IO.Tests
     {
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
-            return new FileInfo(path).Open(mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite);
+            return new FileInfo(path).Open(
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
+            );
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
-        {
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        ) {
             return new FileInfo(path).Open(mode, access);
         }
     }
@@ -60,24 +70,38 @@ namespace System.IO.Tests
     {
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
-            return new FileInfo(path).Open(mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            return new FileInfo(path).Open(
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
+                FileShare.ReadWrite | FileShare.Delete
+            );
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
-        {
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        ) {
             return new FileInfo(path).Open(mode, access, FileShare.ReadWrite | FileShare.Delete);
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share)
-        {
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        ) {
             return new FileInfo(path).Open(mode, access, share);
         }
     }
 
     public class FileInfo_OpenSpecial : FileStream_ctor_str_fm_fa_fs
     {
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
-        {
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        ) {
             if (mode == FileMode.Open && access == FileAccess.Read)
                 return new FileInfo(path).OpenRead();
             else if (mode == FileMode.OpenOrCreate && access == FileAccess.Write)
@@ -86,11 +110,19 @@ namespace System.IO.Tests
                 return new FileInfo(path).Open(mode, access);
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share)
-        {
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        ) {
             if (mode == FileMode.Open && access == FileAccess.Read && share == FileShare.Read)
                 return new FileInfo(path).OpenRead();
-            else if (mode == FileMode.OpenOrCreate && access == FileAccess.Write && share == FileShare.None)
+            else if (
+                mode == FileMode.OpenOrCreate
+                && access == FileAccess.Write
+                && share == FileShare.None
+            )
                 return new FileInfo(path).OpenWrite();
             else
                 return new FileInfo(path).Open(mode, access, share);

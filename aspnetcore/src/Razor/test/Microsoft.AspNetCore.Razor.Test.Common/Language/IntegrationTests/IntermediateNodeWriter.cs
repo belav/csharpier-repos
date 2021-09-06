@@ -15,11 +15,10 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 {
     // Serializes single IR nodes (shallow).
-    public class IntermediateNodeWriter :
-        IntermediateNodeVisitor,
-        IExtensionIntermediateNodeVisitor<SectionIntermediateNode>,
-        IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>
-
+    public class IntermediateNodeWriter
+        : IntermediateNodeVisitor,
+          IExtensionIntermediateNodeVisitor<SectionIntermediateNode>,
+          IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>
     {
         private readonly TextWriter _writer;
 
@@ -54,13 +53,15 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             WriteContentNode(node, entries.ToArray());
         }
 
-        public override void VisitCSharpExpressionAttributeValue(CSharpExpressionAttributeValueIntermediateNode node)
-        {
+        public override void VisitCSharpExpressionAttributeValue(
+            CSharpExpressionAttributeValueIntermediateNode node
+        ) {
             WriteContentNode(node, node.Prefix);
         }
 
-        public override void VisitCSharpCodeAttributeValue(CSharpCodeAttributeValueIntermediateNode node)
-        {
+        public override void VisitCSharpCodeAttributeValue(
+            CSharpCodeAttributeValueIntermediateNode node
+        ) {
             WriteContentNode(node, node.Prefix);
         }
 
@@ -86,7 +87,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitFieldDeclaration(FieldDeclarationIntermediateNode node)
         {
-            WriteContentNode(node, string.Join(" ", node.Modifiers), node.FieldType, node.FieldName);
+            WriteContentNode(
+                node,
+                string.Join(" ", node.Modifiers),
+                node.FieldType,
+                node.FieldName
+            );
         }
 
         public override void VisitHtmlAttribute(HtmlAttributeIntermediateNode node)
@@ -106,7 +112,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitMethodDeclaration(MethodDeclarationIntermediateNode node)
         {
-            WriteContentNode(node, string.Join(" ", node.Modifiers), node.ReturnType, node.MethodName);
+            WriteContentNode(
+                node,
+                string.Join(" ", node.Modifiers),
+                node.ReturnType,
+                node.MethodName
+            );
         }
 
         public override void VisitUsingDirective(UsingDirectiveIntermediateNode node)
@@ -116,27 +127,73 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitTagHelper(TagHelperIntermediateNode node)
         {
-            WriteContentNode(node, node.TagName, string.Format(CultureInfo.InvariantCulture, "{0}.{1}", nameof(TagMode), node.TagMode));
+            WriteContentNode(
+                node,
+                node.TagName,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.{1}",
+                    nameof(TagMode),
+                    node.TagMode
+                )
+            );
         }
 
         public override void VisitTagHelperProperty(TagHelperPropertyIntermediateNode node)
         {
-            WriteContentNode(node, node.AttributeName, node.BoundAttribute.DisplayName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+            WriteContentNode(
+                node,
+                node.AttributeName,
+                node.BoundAttribute.DisplayName,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "HtmlAttributeValueStyle.{0}",
+                    node.AttributeStructure
+                )
+            );
         }
 
-        public override void VisitTagHelperHtmlAttribute(TagHelperHtmlAttributeIntermediateNode node)
-        {
-            WriteContentNode(node, node.AttributeName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        public override void VisitTagHelperHtmlAttribute(
+            TagHelperHtmlAttributeIntermediateNode node
+        ) {
+            WriteContentNode(
+                node,
+                node.AttributeName,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "HtmlAttributeValueStyle.{0}",
+                    node.AttributeStructure
+                )
+            );
         }
 
-        public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
-        {
-            WriteContentNode(node, node.AttributeName, node.BoundAttribute.DisplayName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        public override void VisitTagHelperDirectiveAttribute(
+            TagHelperDirectiveAttributeIntermediateNode node
+        ) {
+            WriteContentNode(
+                node,
+                node.AttributeName,
+                node.BoundAttribute.DisplayName,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "HtmlAttributeValueStyle.{0}",
+                    node.AttributeStructure
+                )
+            );
         }
 
-        public override void VisitTagHelperDirectiveAttributeParameter(TagHelperDirectiveAttributeParameterIntermediateNode node)
-        {
-            WriteContentNode(node, node.AttributeName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        public override void VisitTagHelperDirectiveAttributeParameter(
+            TagHelperDirectiveAttributeParameterIntermediateNode node
+        ) {
+            WriteContentNode(
+                node,
+                node.AttributeName,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "HtmlAttributeValueStyle.{0}",
+                    node.AttributeStructure
+                )
+            );
         }
 
         public override void VisitComponent(ComponentIntermediateNode node)
@@ -146,7 +203,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
         public override void VisitComponentAttribute(ComponentAttributeIntermediateNode node)
         {
-            WriteContentNode(node, node.AttributeName, node.PropertyName, string.Format(CultureInfo.InvariantCulture, "AttributeStructure.{0}", node.AttributeStructure));
+            WriteContentNode(
+                node,
+                node.AttributeName,
+                node.PropertyName,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "AttributeStructure.{0}",
+                    node.AttributeStructure
+                )
+            );
         }
 
         public override void VisitComponentChildContent(ComponentChildContentIntermediateNode node)
@@ -159,8 +225,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             WriteContentNode(node, node.TypeParameterName);
         }
 
-        public override void VisitComponentTypeInferenceMethod(ComponentTypeInferenceMethodIntermediateNode node)
-        {
+        public override void VisitComponentTypeInferenceMethod(
+            ComponentTypeInferenceMethodIntermediateNode node
+        ) {
             WriteContentNode(node, node.FullTypeName, node.MethodName);
         }
 
@@ -184,8 +251,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             WriteContentNode(node, node.KeyValueToken?.Content);
         }
 
-        void IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>.VisitExtension(RouteAttributeExtensionNode node)
-        {
+        void IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>.VisitExtension(
+            RouteAttributeExtensionNode node
+        ) {
             WriteContentNode(node, node.Template);
         }
 
@@ -197,13 +265,33 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     WriteContentNode(n, n.VariableName);
                     break;
                 case PreallocatedTagHelperHtmlAttributeValueIntermediateNode n:
-                    WriteContentNode(n, n.VariableName, n.AttributeName, n.Value, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                    WriteContentNode(
+                        n,
+                        n.VariableName,
+                        n.AttributeName,
+                        n.Value,
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "HtmlAttributeValueStyle.{0}",
+                            n.AttributeStructure
+                        )
+                    );
                     break;
                 case PreallocatedTagHelperPropertyIntermediateNode n:
                     WriteContentNode(n, n.VariableName, n.AttributeName, n.PropertyName);
                     break;
                 case PreallocatedTagHelperPropertyValueIntermediateNode n:
-                    WriteContentNode(n, n.VariableName, n.AttributeName, n.Value, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                    WriteContentNode(
+                        n,
+                        n.VariableName,
+                        n.AttributeName,
+                        n.Value,
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "HtmlAttributeValueStyle.{0}",
+                            n.AttributeStructure
+                        )
+                    );
                     break;
                 case DefaultTagHelperCreateIntermediateNode n:
                     WriteContentNode(n, n.TypeName);
@@ -212,10 +300,27 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     WriteBasicNode(n);
                     break;
                 case DefaultTagHelperHtmlAttributeIntermediateNode n:
-                    WriteContentNode(n, n.AttributeName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                    WriteContentNode(
+                        n,
+                        n.AttributeName,
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "HtmlAttributeValueStyle.{0}",
+                            n.AttributeStructure
+                        )
+                    );
                     break;
                 case DefaultTagHelperPropertyIntermediateNode n:
-                    WriteContentNode(n, n.AttributeName, n.BoundAttribute.DisplayName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                    WriteContentNode(
+                        n,
+                        n.AttributeName,
+                        n.BoundAttribute.DisplayName,
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "HtmlAttributeValueStyle.{0}",
+                            n.AttributeStructure
+                        )
+                    );
                     break;
                 case DefaultTagHelperRuntimeIntermediateNode n:
                     WriteBasicNode(n);
@@ -309,7 +414,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             if (sourceRange.FilePath != null)
             {
-                var fileName = sourceRange.FilePath.Substring(sourceRange.FilePath.LastIndexOf('/') + 1);
+                var fileName = sourceRange.FilePath.Substring(
+                    sourceRange.FilePath.LastIndexOf('/') + 1
+                );
                 _writer.Write(fileName);
             }
 
@@ -332,7 +439,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     _writer.Write(diagnostic.Id);
                     _writer.Write(": ");
 
-                    // Purposefully not writing out the entire message to ensure readable IR and because messages 
+                    // Purposefully not writing out the entire message to ensure readable IR and because messages
                     // can span multiple lines. Not using string.GetHashCode because we can't have any collisions.
                     using (var md5 = MD5.Create())
                     {
@@ -343,7 +450,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
                         for (var j = 0; j < messageHash.Length; j++)
                         {
-                            stringHashBuilder.Append(messageHash[j].ToString("x2", CultureInfo.InvariantCulture));
+                            stringHashBuilder.Append(
+                                messageHash[j].ToString("x2", CultureInfo.InvariantCulture)
+                            );
                         }
 
                         var stringHash = stringHashBuilder.ToString();
@@ -364,7 +473,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             // We explicitly escape newlines in node content so that the IR can be compared line-by-line. The escaped
             // newline cannot be platform specific so we need to drop the windows \r.
             // Also, escape our separator so we can search for ` - `to find delimiters.
-            _writer.Write(content.Replace("\r", string.Empty).Replace("\n", "\\n").Replace(" - ", "\\-"));
+            _writer.Write(
+                content.Replace("\r", string.Empty).Replace("\n", "\\n").Replace(" - ", "\\-")
+            );
         }
     }
 }

@@ -18,9 +18,7 @@ namespace System.Data.Common
         private string? _dataSetTableName;
         private string? _sourceTableName;
 
-        public DataTableMapping()
-        {
-        }
+        public DataTableMapping() { }
 
         public DataTableMapping(string? sourceTable, string? dataSetTable)
         {
@@ -28,8 +26,11 @@ namespace System.Data.Common
             DataSetTable = dataSetTable;
         }
 
-        public DataTableMapping(string? sourceTable, string? dataSetTable, DataColumnMapping[]? columnMappings)
-        {
+        public DataTableMapping(
+            string? sourceTable,
+            string? dataSetTable,
+            DataColumnMapping[]? columnMappings
+        ) {
             SourceTable = sourceTable;
             DataSetTable = dataSetTable;
             if ((null != columnMappings) && (0 < columnMappings.Length))
@@ -69,14 +70,8 @@ namespace System.Data.Common
 
         internal DataTableMappingCollection? Parent
         {
-            get
-            {
-                return _parent;
-            }
-            set
-            {
-                _parent = value;
-            }
+            get { return _parent; }
+            set { _parent = value; }
         }
 
         [DefaultValue("")]
@@ -112,20 +107,40 @@ namespace System.Data.Common
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public DataColumn? GetDataColumn(string sourceColumn, Type? dataType, DataTable dataTable, MissingMappingAction mappingAction, MissingSchemaAction schemaAction)
-        {
-            return DataColumnMappingCollection.GetDataColumn(_columnMappings, sourceColumn, dataType, dataTable, mappingAction, schemaAction);
+        public DataColumn? GetDataColumn(
+            string sourceColumn,
+            Type? dataType,
+            DataTable dataTable,
+            MissingMappingAction mappingAction,
+            MissingSchemaAction schemaAction
+        ) {
+            return DataColumnMappingCollection.GetDataColumn(
+                _columnMappings,
+                sourceColumn,
+                dataType,
+                dataTable,
+                mappingAction,
+                schemaAction
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public DataColumnMapping? GetColumnMappingBySchemaAction(string sourceColumn, MissingMappingAction mappingAction)
-        {
-            return DataColumnMappingCollection.GetColumnMappingBySchemaAction(_columnMappings, sourceColumn, mappingAction);
+        public DataColumnMapping? GetColumnMappingBySchemaAction(
+            string sourceColumn,
+            MissingMappingAction mappingAction
+        ) {
+            return DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                _columnMappings,
+                sourceColumn,
+                mappingAction
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public DataTable? GetDataTableBySchemaAction(DataSet dataSet, MissingSchemaAction schemaAction)
-        {
+        public DataTable? GetDataTableBySchemaAction(
+            DataSet dataSet,
+            MissingSchemaAction schemaAction
+        ) {
             if (null == dataSet)
             {
                 throw ADP.ArgumentNull(nameof(dataSet));
@@ -162,12 +177,11 @@ namespace System.Data.Common
             return SourceTable;
         }
 
-        internal sealed class DataTableMappingConverter : System.ComponentModel.ExpandableObjectConverter
+        internal sealed class DataTableMappingConverter
+            : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public DataTableMappingConverter()
-            {
-            }
+            public DataTableMappingConverter() { }
 
             public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
@@ -178,8 +192,12 @@ namespace System.Data.Common
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-            {
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            ) {
                 if (null == destinationType)
                 {
                     throw ADP.ArgumentNull(nameof(destinationType));
@@ -189,10 +207,22 @@ namespace System.Data.Common
                 {
                     DataTableMapping mapping = (DataTableMapping)value;
 
-                    DataColumnMapping[] columnMappings = new DataColumnMapping[mapping.ColumnMappings.Count];
+                    DataColumnMapping[] columnMappings = new DataColumnMapping[
+                        mapping.ColumnMappings.Count
+                    ];
                     mapping.ColumnMappings.CopyTo(columnMappings, 0);
-                    object[] values = new object[] { mapping.SourceTable, mapping.DataSetTable, columnMappings };
-                    Type[] types = new Type[] { typeof(string), typeof(string), typeof(DataColumnMapping[]) };
+                    object[] values = new object[]
+                    {
+                        mapping.SourceTable,
+                        mapping.DataSetTable,
+                        columnMappings
+                    };
+                    Type[] types = new Type[]
+                    {
+                        typeof(string),
+                        typeof(string),
+                        typeof(DataColumnMapping[])
+                    };
 
                     ConstructorInfo ctor = typeof(DataTableMapping).GetConstructor(types)!;
                     return new InstanceDescriptor(ctor, values);

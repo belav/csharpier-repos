@@ -25,16 +25,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         /// create caret preserving edit transaction with automatic code change undo merging policy
         /// </summary>
         public static CaretPreservingEditTransaction CreateEditTransaction(
-            this ITextView view, string description, ITextUndoHistoryRegistry registry, IEditorOperationsFactoryService service)
-        {
+            this ITextView view,
+            string description,
+            ITextUndoHistoryRegistry registry,
+            IEditorOperationsFactoryService service
+        ) {
             return new CaretPreservingEditTransaction(description, view, registry, service)
             {
                 MergePolicy = AutomaticCodeChangeMergePolicy.Instance
             };
         }
 
-        public static SyntaxToken FindToken(this ITextSnapshot snapshot, int position, CancellationToken cancellationToken)
-        {
+        public static SyntaxToken FindToken(
+            this ITextSnapshot snapshot,
+            int position,
+            CancellationToken cancellationToken
+        ) {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -48,29 +54,51 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         /// <summary>
         /// insert text to workspace and get updated version of the document
         /// </summary>
-        public static Document InsertText(this Document document, int position, string text, CancellationToken cancellationToken = default)
-            => document.ReplaceText(new TextSpan(position, 0), text, cancellationToken);
+        public static Document InsertText(
+            this Document document,
+            int position,
+            string text,
+            CancellationToken cancellationToken = default
+        ) => document.ReplaceText(new TextSpan(position, 0), text, cancellationToken);
 
         /// <summary>
         /// replace text to workspace and get updated version of the document
         /// </summary>
-        public static Document ReplaceText(this Document document, TextSpan span, string text, CancellationToken cancellationToken)
-            => document.ApplyTextChange(new TextChange(span, text), cancellationToken);
+        public static Document ReplaceText(
+            this Document document,
+            TextSpan span,
+            string text,
+            CancellationToken cancellationToken
+        ) => document.ApplyTextChange(new TextChange(span, text), cancellationToken);
 
         /// <summary>
         /// apply text changes to workspace and get updated version of the document
         /// </summary>
-        public static Document ApplyTextChange(this Document document, TextChange textChange, CancellationToken cancellationToken)
-            => document.ApplyTextChanges(SpecializedCollections.SingletonEnumerable(textChange), cancellationToken);
+        public static Document ApplyTextChange(
+            this Document document,
+            TextChange textChange,
+            CancellationToken cancellationToken
+        ) =>
+            document.ApplyTextChanges(
+                SpecializedCollections.SingletonEnumerable(textChange),
+                cancellationToken
+            );
 
         /// <summary>
         /// apply text changes to workspace and get updated version of the document
         /// </summary>
-        public static Document ApplyTextChanges(this Document document, IEnumerable<TextChange> textChanges, CancellationToken cancellationToken)
-        {
+        public static Document ApplyTextChanges(
+            this Document document,
+            IEnumerable<TextChange> textChanges,
+            CancellationToken cancellationToken
+        ) {
             // here assumption is that text change are based on current solution
             var oldSolution = document.Project.Solution;
-            var newSolution = oldSolution.UpdateDocument(document.Id, textChanges, cancellationToken);
+            var newSolution = oldSolution.UpdateDocument(
+                document.Id,
+                textChanges,
+                cancellationToken
+            );
 
             if (oldSolution.Workspace.TryApplyChanges(newSolution))
             {
@@ -83,10 +111,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         /// <summary>
         /// Update the solution so that the document with the Id has the text changes
         /// </summary>
-        public static Solution UpdateDocument(this Solution solution, DocumentId id, IEnumerable<TextChange> textChanges, CancellationToken cancellationToken = default)
-        {
+        public static Solution UpdateDocument(
+            this Solution solution,
+            DocumentId id,
+            IEnumerable<TextChange> textChanges,
+            CancellationToken cancellationToken = default
+        ) {
             var oldDocument = solution.GetDocument(id);
-            var newText = oldDocument.GetTextSynchronously(cancellationToken).WithChanges(textChanges);
+            var newText = oldDocument.GetTextSynchronously(cancellationToken)
+                .WithChanges(textChanges);
             return solution.WithDocumentText(id, newText);
         }
 
@@ -99,11 +132,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             return new SnapshotSpan(open, close);
         }
 
-        public static SnapshotPoint? GetCaretPosition(this IBraceCompletionSession session)
-            => GetCaretPoint(session, session.SubjectBuffer);
+        public static SnapshotPoint? GetCaretPosition(this IBraceCompletionSession session) =>
+            GetCaretPoint(session, session.SubjectBuffer);
 
         // get the caret position within the given buffer
-        private static SnapshotPoint? GetCaretPoint(this IBraceCompletionSession session, ITextBuffer buffer)
-            => session.TextView.Caret.Position.Point.GetPoint(buffer, PositionAffinity.Predecessor);
+        private static SnapshotPoint? GetCaretPoint(
+            this IBraceCompletionSession session,
+            ITextBuffer buffer
+        ) => session.TextView.Caret.Position.Point.GetPoint(buffer, PositionAffinity.Predecessor);
     }
 }

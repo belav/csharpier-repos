@@ -19,8 +19,8 @@ namespace Microsoft.Extensions.Logging.Testing
         public static void Contains(
             string key,
             object value,
-            IEnumerable<KeyValuePair<string, object>> actualValues)
-        {
+            IEnumerable<KeyValuePair<string, object>> actualValues
+        ) {
             Contains(new[] { new KeyValuePair<string, object>(key, value) }, actualValues);
         }
 
@@ -32,8 +32,8 @@ namespace Microsoft.Extensions.Logging.Testing
         /// <param name="actualValues">Actual set of values</param>
         public static void Contains(
             IEnumerable<KeyValuePair<string, object>> expectedValues,
-            IEnumerable<KeyValuePair<string, object>> actualValues)
-        {
+            IEnumerable<KeyValuePair<string, object>> actualValues
+        ) {
             if (expectedValues == null)
             {
                 throw new ArgumentNullException(nameof(expectedValues));
@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.Logging.Testing
                 {
                     throw new EqualException(
                         expected: GetString(expectedValues),
-                        actual: GetString(actualValues));
+                        actual: GetString(actualValues)
+                    );
                 }
             }
         }

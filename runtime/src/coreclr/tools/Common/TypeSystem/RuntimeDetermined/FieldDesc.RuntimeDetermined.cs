@@ -5,13 +5,22 @@ namespace Internal.TypeSystem
 {
     partial class FieldDesc
     {
-        public FieldDesc GetNonRuntimeDeterminedFieldFromRuntimeDeterminedFieldViaSubstitution(Instantiation typeInstantiation, Instantiation methodInstantiation)
-        {
+        public FieldDesc GetNonRuntimeDeterminedFieldFromRuntimeDeterminedFieldViaSubstitution(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        ) {
             DefType owningType = OwningType;
-            TypeDesc owningTypeInstantiated = owningType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(typeInstantiation, methodInstantiation);
+            TypeDesc owningTypeInstantiated =
+                owningType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+                    typeInstantiation,
+                    methodInstantiation
+                );
             if (owningTypeInstantiated != owningType)
             {
-                return Context.GetFieldForInstantiatedType(GetTypicalFieldDefinition(), (InstantiatedType)owningTypeInstantiated);
+                return Context.GetFieldForInstantiatedType(
+                    GetTypicalFieldDefinition(),
+                    (InstantiatedType)owningTypeInstantiated
+                );
             }
 
             return this;

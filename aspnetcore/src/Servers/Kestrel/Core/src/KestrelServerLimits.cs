@@ -60,7 +60,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value.HasValue && value.Value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.NonNegativeNumberOrNullRequired
+                    );
                 }
                 _maxResponseBufferSize = value;
             }
@@ -80,7 +83,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value.HasValue && value.Value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveNumberOrNullRequired
+                    );
                 }
                 _maxRequestBufferSize = value;
             }
@@ -101,7 +107,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveNumberRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveNumberRequired
+                    );
                 }
                 _maxRequestLineSize = value;
             }
@@ -120,7 +129,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveNumberRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveNumberRequired
+                    );
                 }
                 _maxRequestHeadersTotalSize = value;
             }
@@ -139,7 +151,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveNumberRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveNumberRequired
+                    );
                 }
                 _maxRequestHeaderCount = value;
             }
@@ -161,7 +176,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.NonNegativeNumberOrNullRequired
+                    );
                 }
                 _maxRequestBodySize = value;
             }
@@ -180,7 +198,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveTimeSpanRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveTimeSpanRequired
+                    );
                 }
                 _keepAliveTimeout = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
             }
@@ -199,9 +220,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveTimeSpanRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveTimeSpanRequired
+                    );
                 }
-                _requestHeadersTimeout = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
+                _requestHeadersTimeout =
+                    value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
             }
         }
 
@@ -224,7 +249,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value.HasValue && value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.PositiveNumberOrNullRequired
+                    );
                 }
                 _maxConcurrentConnections = value;
             }
@@ -250,7 +278,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value.HasValue && value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.NonNegativeNumberOrNullRequired
+                    );
                 }
                 _maxConcurrentUpgradedConnections = value;
             }

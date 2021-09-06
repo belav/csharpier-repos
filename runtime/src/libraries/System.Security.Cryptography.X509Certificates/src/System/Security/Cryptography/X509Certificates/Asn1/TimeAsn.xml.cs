@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -77,8 +79,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out TimeAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out TimeAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -89,8 +94,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out TimeAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out TimeAsn decoded
+        ) {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
 
@@ -106,7 +114,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 {
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }
-
             }
             else
             {

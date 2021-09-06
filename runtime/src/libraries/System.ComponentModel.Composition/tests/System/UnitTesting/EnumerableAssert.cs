@@ -48,8 +48,10 @@ namespace System.UnitTesting
             Assert.Equal(0, actualList.Count);
         }
 
-        public static void AreEqual<TKey, TValue>(IDictionary<TKey, TValue> expected, IDictionary<TKey, TValue> actual)
-        {
+        public static void AreEqual<TKey, TValue>(
+            IDictionary<TKey, TValue> expected,
+            IDictionary<TKey, TValue> actual
+        ) {
             Assert.Equal(expected.Count, actual.Count);
 
             foreach (KeyValuePair<TKey, TValue> kvp in expected)
@@ -61,9 +63,14 @@ namespace System.UnitTesting
                     throw new NotImplementedException();
                 }
 
-                if ((firstValue is IDictionary<TKey, TValue>) && (secondValue is IDictionary<TKey, TValue>))
-                {
-                    AreEqual((IDictionary<TKey, TValue>)firstValue, (IDictionary<TKey, TValue>)secondValue);
+                if (
+                    (firstValue is IDictionary<TKey, TValue>)
+                    && (secondValue is IDictionary<TKey, TValue>)
+                ) {
+                    AreEqual(
+                        (IDictionary<TKey, TValue>)firstValue,
+                        (IDictionary<TKey, TValue>)secondValue
+                    );
                     continue;
                 }
 

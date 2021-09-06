@@ -11,8 +11,11 @@ namespace System.Buffers.Text
         //   -----------------------------
         //   Tue, 03 Jan 2017 08:08:05 GMT
         //
-        private static bool TryFormatDateTimeR(DateTime value, Span<byte> destination, out int bytesWritten)
-        {
+        private static bool TryFormatDateTimeR(
+            DateTime value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             // Writing the check in this fashion elides all bounds checks on 'buffer'
             // for the remainder of the method.
             if ((uint)28 >= (uint)destination.Length)

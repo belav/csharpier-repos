@@ -5,17 +5,15 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class LazyLoadProxyInMemoryTest : LazyLoadProxyTestBase<LazyLoadProxyInMemoryTest.LoadInMemoryFixture>
+    public class LazyLoadProxyInMemoryTest
+        : LazyLoadProxyTestBase<LazyLoadProxyInMemoryTest.LoadInMemoryFixture>
     {
-        public LazyLoadProxyInMemoryTest(LoadInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+        public LazyLoadProxyInMemoryTest(LoadInMemoryFixture fixture) : base(fixture) { }
 
         public class LoadInMemoryFixture : LoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => InMemoryTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                InMemoryTestStoreFactory.Instance;
         }
     }
 }

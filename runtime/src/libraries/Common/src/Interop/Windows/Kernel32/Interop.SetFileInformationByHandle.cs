@@ -10,6 +10,11 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [DllImport(Libraries.Kernel32, SetLastError = true, ExactSpelling = true)]
-        internal static extern unsafe bool SetFileInformationByHandle(SafeFileHandle hFile, int FileInformationClass, void* lpFileInformation, uint dwBufferSize);
+        internal static extern unsafe bool SetFileInformationByHandle(
+            SafeFileHandle hFile,
+            int FileInformationClass,
+            void* lpFileInformation,
+            uint dwBufferSize
+        );
     }
 }

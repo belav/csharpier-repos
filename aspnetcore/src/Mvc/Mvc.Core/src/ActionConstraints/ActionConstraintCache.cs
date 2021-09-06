@@ -20,10 +20,11 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
 
         public ActionConstraintCache(
             IActionDescriptorCollectionProvider collectionProvider,
-            IEnumerable<IActionConstraintProvider> actionConstraintProviders)
-        {
+            IEnumerable<IActionConstraintProvider> actionConstraintProviders
+        ) {
             _collectionProvider = collectionProvider;
-            _actionConstraintProviders = actionConstraintProviders.OrderBy(item => item.Order).ToArray();
+            _actionConstraintProviders = actionConstraintProviders.OrderBy(item => item.Order)
+                .ToArray();
         }
 
         internal InnerCache CurrentCache
@@ -43,8 +44,10 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             }
         }
 
-        public IReadOnlyList<IActionConstraint>? GetActionConstraints(HttpContext httpContext, ActionDescriptor action)
-        {
+        public IReadOnlyList<IActionConstraint>? GetActionConstraints(
+            HttpContext httpContext,
+            ActionDescriptor action
+        ) {
             var cache = CurrentCache;
 
             if (cache.Entries.TryGetValue(action, out var entry))
@@ -91,8 +94,11 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             return actionConstraints;
         }
 
-        private IReadOnlyList<IActionConstraint>? GetActionConstraintsFromEntry(CacheEntry entry, HttpContext httpContext, ActionDescriptor action)
-        {
+        private IReadOnlyList<IActionConstraint>? GetActionConstraintsFromEntry(
+            CacheEntry entry,
+            HttpContext httpContext,
+            ActionDescriptor action
+        ) {
             Debug.Assert(entry.ActionConstraints != null || entry.Items != null);
 
             if (entry.ActionConstraints != null)
@@ -119,8 +125,11 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             return ExtractActionConstraints(items);
         }
 
-        private void ExecuteProviders(HttpContext httpContext, ActionDescriptor action, List<ActionConstraintItem> items)
-        {
+        private void ExecuteProviders(
+            HttpContext httpContext,
+            ActionDescriptor action,
+            List<ActionConstraintItem> items
+        ) {
             var context = new ActionConstraintProviderContext(httpContext, action, items);
 
             for (var i = 0; i < _actionConstraintProviders.Length; i++)
@@ -134,8 +143,9 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             }
         }
 
-        private IReadOnlyList<IActionConstraint>? ExtractActionConstraints(List<ActionConstraintItem> items)
-        {
+        private IReadOnlyList<IActionConstraint>? ExtractActionConstraints(
+            List<ActionConstraintItem> items
+        ) {
             var count = 0;
             for (var i = 0; i < items.Count; i++)
             {

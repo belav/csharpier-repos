@@ -64,25 +64,28 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             out int bytesWritten,
-            Asn1Tag? expectedTag = null)
-        {
+            Asn1Tag? expectedTag = null
+        ) {
             if (source.Overlaps(destination))
             {
                 throw new ArgumentException(
                     SR.Argument_SourceOverlapsDestination,
-                    nameof(destination));
+                    nameof(destination)
+                );
             }
 
-            if (TryReadPrimitiveOctetStringCore(
-                source,
-                ruleSet,
-                expectedTag ?? Asn1Tag.PrimitiveOctetString,
-                UniversalTagNumber.OctetString,
-                out int? contentLength,
-                out int headerLength,
-                out ReadOnlySpan<byte> contents,
-                out int consumed))
-            {
+            if (
+                TryReadPrimitiveOctetStringCore(
+                    source,
+                    ruleSet,
+                    expectedTag ?? Asn1Tag.PrimitiveOctetString,
+                    UniversalTagNumber.OctetString,
+                    out int? contentLength,
+                    out int headerLength,
+                    out ReadOnlySpan<byte> contents,
+                    out int consumed
+                )
+            ) {
                 if (contents.Length > destination.Length)
                 {
                     bytesWritten = 0;
@@ -102,7 +105,8 @@ namespace System.Formats.Asn1
                 destination,
                 contentLength == null,
                 out int bytesRead,
-                out bytesWritten);
+                out bytesWritten
+            );
 
             if (copied)
             {
@@ -158,8 +162,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
-        {
+            Asn1Tag? expectedTag = null
+        ) {
             byte[]? rented = null;
 
             ReadOnlySpan<byte> contents = GetOctetStringContents(
@@ -168,7 +172,8 @@ namespace System.Formats.Asn1
                 expectedTag ?? Asn1Tag.PrimitiveOctetString,
                 UniversalTagNumber.OctetString,
                 out int consumed,
-                ref rented);
+                ref rented
+            );
 
             byte[] ret = contents.ToArray();
 
@@ -189,9 +194,14 @@ namespace System.Formats.Asn1
             out int? contentLength,
             out int headerLength,
             out ReadOnlySpan<byte> contents,
-            out int bytesConsumed)
-        {
-            Asn1Tag actualTag = ReadTagAndLength(source, ruleSet, out contentLength, out headerLength);
+            out int bytesConsumed
+        ) {
+            Asn1Tag actualTag = ReadTagAndLength(
+                source,
+                ruleSet,
+                out contentLength,
+                out headerLength
+            );
             CheckExpectedTag(actualTag, expectedTag, universalTagNumber);
 
             // Ensure the length makes sense.
@@ -269,8 +279,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out ReadOnlySpan<byte> value,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
-        {
+            Asn1Tag? expectedTag = null
+        ) {
             return TryReadPrimitiveOctetStringCore(
                 source,
                 ruleSet,
@@ -279,21 +289,23 @@ namespace System.Formats.Asn1
                 contentLength: out _,
                 headerLength: out _,
                 out value,
-                out bytesConsumed);
+                out bytesConsumed
+            );
         }
 
         private static int CountConstructedOctetString(
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
-            bool isIndefinite)
-        {
+            bool isIndefinite
+        ) {
             int contentLength = CopyConstructedOctetString(
                 source,
                 ruleSet,
                 Span<byte>.Empty,
                 false,
                 isIndefinite,
-                out _);
+                out _
+            );
 
             // T-REC-X.690-201508 sec 9.2
             if (ruleSet == AsnEncodingRules.CER && contentLength <= MaxCERSegmentSize)
@@ -310,15 +322,16 @@ namespace System.Formats.Asn1
             Span<byte> destination,
             bool isIndefinite,
             out int bytesRead,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             bytesWritten = CopyConstructedOctetString(
                 source,
                 ruleSet,
                 destination,
                 true,
                 isIndefinite,
-                out bytesRead);
+                out bytesRead
+            );
         }
 
         private static int CopyConstructedOctetString(
@@ -327,8 +340,8 @@ namespace System.Formats.Asn1
             Span<byte> destination,
             bool write,
             bool isIndefinite,
-            out int bytesRead)
-        {
+            out int bytesRead
+        ) {
             bytesRead = 0;
             int lastSegmentLength = MaxCERSegmentSize;
 
@@ -346,10 +359,14 @@ namespace System.Formats.Asn1
 
                     if (tag == Asn1Tag.PrimitiveOctetString)
                     {
-                        if (ruleSet == AsnEncodingRules.CER && lastSegmentLength != MaxCERSegmentSize)
-                        {
+                        if (
+                            ruleSet == AsnEncodingRules.CER
+                            && lastSegmentLength != MaxCERSegmentSize
+                        ) {
                             // T-REC-X.690-201508 sec 9.2
-                            throw new AsnContentException(SR.ContentException_InvalidUnderCerOrDer_TryBer);
+                            throw new AsnContentException(
+                                SR.ContentException_InvalidUnderCerOrDer_TryBer
+                            );
                         }
 
                         Debug.Assert(length != null);
@@ -365,10 +382,13 @@ namespace System.Formats.Asn1
                         totalLength += contents.Length;
                         lastSegmentLength = contents.Length;
 
-                        if (ruleSet == AsnEncodingRules.CER && lastSegmentLength > MaxCERSegmentSize)
-                        {
+                        if (
+                            ruleSet == AsnEncodingRules.CER && lastSegmentLength > MaxCERSegmentSize
+                        ) {
                             // T-REC-X.690-201508 sec 9.2
-                            throw new AsnContentException(SR.ContentException_InvalidUnderCerOrDer_TryBer);
+                            throw new AsnContentException(
+                                SR.ContentException_InvalidUnderCerOrDer_TryBer
+                            );
                         }
 
                         if (write)
@@ -385,7 +405,12 @@ namespace System.Formats.Asn1
 
                         if (readerStack?.Count > 0)
                         {
-                            (int topOffset, int topLength, bool wasIndefinite, int pushedBytesRead) = readerStack.Pop();
+                            (
+                                int topOffset,
+                                int topLength,
+                                bool wasIndefinite,
+                                int pushedBytesRead
+                            ) = readerStack.Pop();
                             ReadOnlySpan<byte> topSpan = source.Slice(topOffset, topLength);
                             cur = topSpan.Slice(bytesRead);
 
@@ -403,7 +428,9 @@ namespace System.Formats.Asn1
                         if (ruleSet == AsnEncodingRules.CER)
                         {
                             // T-REC-X.690-201508 sec 9.2
-                            throw new AsnContentException(SR.ContentException_InvalidUnderCerOrDer_TryBer);
+                            throw new AsnContentException(
+                                SR.ContentException_InvalidUnderCerOrDer_TryBer
+                            );
                         }
 
                         if (readerStack == null)
@@ -437,7 +464,8 @@ namespace System.Formats.Asn1
 
                 if (readerStack?.Count > 0)
                 {
-                    (int topOffset, int topLength, bool wasIndefinite, int pushedBytesRead) = readerStack.Pop();
+                    (int topOffset, int topLength, bool wasIndefinite, int pushedBytesRead) =
+                        readerStack.Pop();
                     ReadOnlySpan<byte> topSpan = source.Slice(topOffset, topLength);
 
                     cur = topSpan.Slice(bytesRead);
@@ -458,8 +486,8 @@ namespace System.Formats.Asn1
             Span<byte> dest,
             bool isIndefinite,
             out int bytesRead,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             bytesRead = 0;
 
             int contentLength = CountConstructedOctetString(source, ruleSet, isIndefinite);
@@ -470,7 +498,14 @@ namespace System.Formats.Asn1
                 return false;
             }
 
-            CopyConstructedOctetString(source, ruleSet, dest, isIndefinite, out bytesRead, out bytesWritten);
+            CopyConstructedOctetString(
+                source,
+                ruleSet,
+                dest,
+                isIndefinite,
+                out bytesRead,
+                out bytesWritten
+            );
 
             Debug.Assert(bytesWritten == contentLength);
             return true;
@@ -483,20 +518,22 @@ namespace System.Formats.Asn1
             UniversalTagNumber universalTagNumber,
             out int bytesConsumed,
             ref byte[]? rented,
-            Span<byte> tmpSpace = default)
-        {
+            Span<byte> tmpSpace = default
+        ) {
             Debug.Assert(rented == null);
 
-            if (TryReadPrimitiveOctetStringCore(
-                source,
-                ruleSet,
-                expectedTag,
-                universalTagNumber,
-                out int? contentLength,
-                out int headerLength,
-                out ReadOnlySpan<byte> contents,
-                out bytesConsumed))
-            {
+            if (
+                TryReadPrimitiveOctetStringCore(
+                    source,
+                    ruleSet,
+                    expectedTag,
+                    universalTagNumber,
+                    out int? contentLength,
+                    out int headerLength,
+                    out ReadOnlySpan<byte> contents,
+                    out bytesConsumed
+                )
+            ) {
                 return contents;
             }
 
@@ -518,14 +555,16 @@ namespace System.Formats.Asn1
                 tmpSpace = rented;
             }
 
-            if (TryCopyConstructedOctetStringContents(
-                Slice(source, headerLength, contentLength),
-                ruleSet,
-                tmpSpace,
-                contentLength == null,
-                out int bytesRead,
-                out int bytesWritten))
-            {
+            if (
+                TryCopyConstructedOctetStringContents(
+                    Slice(source, headerLength, contentLength),
+                    ruleSet,
+                    tmpSpace,
+                    contentLength == null,
+                    out int bytesRead,
+                    out int bytesWritten
+                )
+            ) {
                 bytesConsumed = headerLength + bytesRead;
                 return tmpSpace.Slice(0, bytesWritten);
             }
@@ -575,15 +614,16 @@ namespace System.Formats.Asn1
         public bool TryReadOctetString(
             Span<byte> destination,
             out int bytesWritten,
-            Asn1Tag? expectedTag = null)
-        {
+            Asn1Tag? expectedTag = null
+        ) {
             bool ret = AsnDecoder.TryReadOctetString(
                 _data.Span,
                 destination,
                 RuleSet,
                 out int bytesConsumed,
                 out bytesWritten,
-                expectedTag);
+                expectedTag
+            );
 
             if (ret)
             {
@@ -624,7 +664,12 @@ namespace System.Formats.Asn1
         /// <seealso cref="TryReadOctetString"/>
         public byte[] ReadOctetString(Asn1Tag? expectedTag = null)
         {
-            byte[] ret = AsnDecoder.ReadOctetString(_data.Span, RuleSet, out int consumed, expectedTag);
+            byte[] ret = AsnDecoder.ReadOctetString(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
             _data = _data.Slice(consumed);
             return ret;
         }
@@ -660,14 +705,17 @@ namespace System.Formats.Asn1
         ///   the method.
         /// </exception>
         /// <seealso cref="TryReadOctetString"/>
-        public bool TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents, Asn1Tag? expectedTag = null)
-        {
+        public bool TryReadPrimitiveOctetString(
+            out ReadOnlyMemory<byte> contents,
+            Asn1Tag? expectedTag = null
+        ) {
             bool ret = AsnDecoder.TryReadPrimitiveOctetString(
                 _data.Span,
                 RuleSet,
                 out ReadOnlySpan<byte> span,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             if (ret)
             {

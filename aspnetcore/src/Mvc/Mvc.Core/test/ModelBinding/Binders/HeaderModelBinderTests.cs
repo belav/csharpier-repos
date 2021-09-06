@@ -70,8 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(LinkedList<string>))]
         [InlineData(typeof(StringList))]
         public async Task HeaderBinder_BindsHeaders_ForCollectionsItCanCreate_WithoutInnerModelBinder(
-            Type destinationType)
-        {
+            Type destinationType
+        ) {
             // Arrange
             var header = "Accept";
             var headerValue = "application/json,text/json";
@@ -87,7 +87,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Assert
             Assert.True(bindingContext.Result.IsModelSet);
             Assert.IsAssignableFrom(destinationType, bindingContext.Result.Model);
-            Assert.Equal(headerValue.Split(','), bindingContext.Result.Model as IEnumerable<string>);
+            Assert.Equal(
+                headerValue.Split(','),
+                bindingContext.Result.Model as IEnumerable<string>
+            );
         }
 
         [Fact]
@@ -128,9 +131,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     { guid.ToString(), typeof(Guid), guid },
                     { "foo", typeof(string), "foo" },
                     { "foo, bar", typeof(string), "foo, bar" },
-                    { "foo, bar", typeof(string[]), new[]{ "foo", "bar" } },
-                    { "foo, \"bar\"", typeof(string[]), new[]{ "foo", "bar" } },
-                    { "\"foo,bar\"", typeof(string[]), new[]{ "foo,bar" } }
+                    { "foo, bar", typeof(string[]), new[] { "foo", "bar" } },
+                    { "foo, \"bar\"", typeof(string[]), new[] { "foo", "bar" } },
+                    { "\"foo,bar\"", typeof(string[]), new[] { "foo,bar" } }
                 };
             }
         }
@@ -140,8 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task HeaderBinder_BindsHeaders_ToSimpleTypes(
             string headerValue,
             Type modelType,
-            object expectedModel)
-        {
+            object expectedModel
+        ) {
             // Arrange
             var bindingContext = CreateContext(modelType);
             var binder = CreateBinder(bindingContext);
@@ -179,8 +182,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [Theory]
         [InlineData(typeof(string[]))]
         [InlineData(typeof(IEnumerable<string>))]
-        public async Task HeaderBinder_DoesNotCreateEmptyCollection_ForNonTopLevelObjects(Type modelType)
-        {
+        public async Task HeaderBinder_DoesNotCreateEmptyCollection_ForNonTopLevelObjects(
+            Type modelType
+        ) {
             // Arrange
             var bindingContext = CreateContext(modelType);
             bindingContext.IsTopLevelObject = false;
@@ -216,7 +220,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Assert
             Assert.True(bindingContext.Result.IsModelSet);
             Assert.IsAssignableFrom(destinationType, bindingContext.Result.Model);
-            Assert.Equal(headerValue.Split(','), bindingContext.Result.Model as IEnumerable<string>);
+            Assert.Equal(
+                headerValue.Split(','),
+                bindingContext.Result.Model as IEnumerable<string>
+            );
         }
 
         [Fact]
@@ -240,7 +247,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var expectedValueProvider = Mock.Of<IValueProvider>();
-            var bindingContext = CreateContext(GetMetadataForType(typeof(string)), expectedValueProvider);
+            var bindingContext = CreateContext(
+                GetMetadataForType(typeof(string)),
+                expectedValueProvider
+            );
             var binder = CreateBinder(bindingContext);
             bindingContext.HttpContext.Request.Headers.Add("Header", "application/json,text/json");
 
@@ -258,13 +268,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var testValueProvider = new Mock<IValueProvider>();
-            testValueProvider
-                .Setup(vp => vp.ContainsPrefix(It.IsAny<string>()))
-                .Returns(true);
-            testValueProvider
-                .Setup(vp => vp.GetValue(It.IsAny<string>()))
+            testValueProvider.Setup(vp => vp.ContainsPrefix(It.IsAny<string>())).Returns(true);
+            testValueProvider.Setup(vp => vp.GetValue(It.IsAny<string>()))
                 .Returns(new ValueProviderResult(new StringValues("foo,bar")));
-            var bindingContext = CreateContext(GetMetadataForType(typeof(string)), testValueProvider.Object);
+            var bindingContext = CreateContext(
+                GetMetadataForType(typeof(string)),
+                testValueProvider.Object
+            );
             var binder = CreateBinder(bindingContext);
             bindingContext.HttpContext.Request.Headers.Add("Header", "application/json,text/json");
 
@@ -283,8 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(CarType?), "boo")]
         public async Task HeaderBinder_BindModelAsync_AddsErrorToModelState_OnInvalidInput(
             Type modelType,
-            string headerValue)
-        {
+            string headerValue
+        ) {
             // Arrange
             var bindingContext = CreateContext(modelType);
             var binder = CreateBinder(bindingContext);
@@ -306,8 +316,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(ICollection<CarType>), "a, b")]
         public async Task HeaderBinder_BindModelAsync_AddsErrorToModelState_OnInvalid_CollectionInput(
             Type modelType,
-            string headerValue)
-        {
+            string headerValue
+        ) {
             // Arrange
             var headerValues = headerValue.Split(',').Select(s => s.Trim()).ToArray();
             var bindingContext = CreateContext(modelType);
@@ -321,8 +331,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var entry = bindingContext.ModelState["someprefix.Header"];
             Assert.NotNull(entry);
             Assert.Equal(2, entry.Errors.Count);
-            Assert.Equal($"The value '{headerValues[0]}' is not valid.", entry.Errors[0].ErrorMessage);
-            Assert.Equal($"The value '{headerValues[1]}' is not valid.", entry.Errors[1].ErrorMessage);
+            Assert.Equal(
+                $"The value '{headerValues[0]}' is not valid.",
+                entry.Errors[0].ErrorMessage
+            );
+            Assert.Equal(
+                $"The value '{headerValues[1]}' is not valid.",
+                entry.Errors[1].ErrorMessage
+            );
         }
 
         private static DefaultModelBindingContext CreateContext(Type modelType)
@@ -332,8 +348,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         private static DefaultModelBindingContext CreateContext(
             ModelMetadata metadata,
-            IValueProvider valueProvider = null)
-        {
+            IValueProvider valueProvider = null
+        ) {
             if (valueProvider == null)
             {
                 valueProvider = Mock.Of<IValueProvider>();
@@ -356,20 +372,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 ModelMetadata = metadata,
                 BinderModelName = metadata.BinderModelName,
                 BindingSource = metadata.BindingSource,
-
                 // HeaderModelBinder must always use the field name when getting the values from header value provider
                 // but add keys into ModelState using the ModelName. This is for back compat reasons.
                 ModelName = $"somePrefix.{headerName}",
                 FieldName = headerName,
-
                 ValueProvider = valueProvider,
                 ModelState = new ModelStateDictionary(),
                 ActionContext = new ActionContext()
                 {
-                    HttpContext = new DefaultHttpContext()
-                    {
-                        RequestServices = serviceProvider
-                    }
+                    HttpContext = new DefaultHttpContext() { RequestServices = serviceProvider }
                 },
             };
         }
@@ -378,35 +389,40 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             var factory = TestModelBinderFactory.Create(bindingContext.HttpContext.RequestServices);
             var metadata = bindingContext.ModelMetadata;
-            return factory.CreateBinder(new ModelBinderFactoryContext()
-            {
-                Metadata = metadata,
-                BindingInfo = new BindingInfo()
+            return factory.CreateBinder(
+                new ModelBinderFactoryContext()
                 {
-                    BinderModelName = metadata.BinderModelName,
-                    BinderType = metadata.BinderType,
-                    BindingSource = metadata.BindingSource,
-                    PropertyFilterProvider = metadata.PropertyFilterProvider,
-                },
-            });
+                    Metadata = metadata,
+                    BindingInfo = new BindingInfo()
+                    {
+                        BinderModelName = metadata.BinderModelName,
+                        BinderType = metadata.BinderType,
+                        BindingSource = metadata.BindingSource,
+                        PropertyFilterProvider = metadata.PropertyFilterProvider,
+                    },
+                }
+            );
         }
 
         private static ModelMetadata GetMetadataForType(Type modelType)
         {
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType(modelType).BindingDetails(d => d.BindingSource = BindingSource.Header);
+            metadataProvider.ForType(modelType)
+                .BindingDetails(d => d.BindingSource = BindingSource.Header);
             return metadataProvider.GetMetadataForType(modelType);
         }
 
         private static ModelMetadata GetMetadataForReadOnlyArray()
         {
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForProperty<ModelWithReadOnlyArray>(nameof(ModelWithReadOnlyArray.ArrayProperty))
+            metadataProvider.ForProperty<ModelWithReadOnlyArray>(
+                    nameof(ModelWithReadOnlyArray.ArrayProperty)
+                )
                 .BindingDetails(bd => bd.BindingSource = BindingSource.Header);
             return metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithReadOnlyArray),
-                nameof(ModelWithReadOnlyArray.ArrayProperty));
+                nameof(ModelWithReadOnlyArray.ArrayProperty)
+            );
         }
 
         private class ModelWithReadOnlyArray

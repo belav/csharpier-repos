@@ -30,10 +30,16 @@ namespace Internal.TypeSystem
 
         public static void Validate(MetadataType type, ComputedInstanceFieldLayout layout)
         {
-            ExplicitLayoutValidator validator = new ExplicitLayoutValidator(type, layout.ByteCountUnaligned.AsInt);
+            ExplicitLayoutValidator validator = new ExplicitLayoutValidator(
+                type,
+                layout.ByteCountUnaligned.AsInt
+            );
             foreach (FieldAndOffset fieldAndOffset in layout.Offsets)
             {
-                validator.AddToFieldLayout(fieldAndOffset.Offset.AsInt, fieldAndOffset.Field.FieldType);
+                validator.AddToFieldLayout(
+                    fieldAndOffset.Offset.AsInt,
+                    fieldAndOffset.Field.FieldType
+                );
             }
         }
 
@@ -79,7 +85,10 @@ namespace Internal.TypeSystem
                     MarkORefLocations(mdType, fieldORefMap, offset: 0);
                     for (int index = 0; index < fieldSize; index++)
                     {
-                        SetFieldLayout(offset + index, fieldORefMap[index] ? FieldLayoutTag.ORef : FieldLayoutTag.NonORef);
+                        SetFieldLayout(
+                            offset + index,
+                            fieldORefMap[index] ? FieldLayoutTag.ORef : FieldLayoutTag.NonORef
+                        );
                     }
                 }
             }
@@ -148,7 +157,11 @@ namespace Internal.TypeSystem
 
         private void ThrowFieldLayoutError(int offset)
         {
-            ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadExplicitLayout, _typeBeingValidated, offset.ToStringInvariant());
+            ThrowHelper.ThrowTypeLoadException(
+                ExceptionStringID.ClassLoadExplicitLayout,
+                _typeBeingValidated,
+                offset.ToStringInvariant()
+            );
         }
     }
 }

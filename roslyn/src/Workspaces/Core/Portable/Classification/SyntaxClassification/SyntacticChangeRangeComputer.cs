@@ -39,34 +39,60 @@ namespace Microsoft.CodeAnalysis.Classification
         private static readonly ObjectPool<Stack<SyntaxNodeOrToken>> s_pool = new(() => new());
 
         public static async ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
-            Document oldDocument, Document newDocument, TimeSpan timeout, CancellationToken cancellationToken)
-        {
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        ) {
             // If they're the same doc, there is no change.
             if (oldDocument == newDocument)
                 return new TextChangeRange();
 
             var stopwatch = SharedStopwatch.StartNew();
 
-            var oldRoot = await oldDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var oldRoot = await oldDocument.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // If we ran out of time, we have to assume both are completely different.
             if (stopwatch.Elapsed > timeout)
                 return null;
 
-            var newRoot = await newDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var newRoot = await newDocument.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             if (stopwatch.Elapsed > timeout)
                 return null;
 
-            return ComputeSyntacticChangeRange(oldRoot, newRoot, timeout, stopwatch, cancellationToken);
+            return ComputeSyntacticChangeRange(
+                oldRoot,
+                newRoot,
+                timeout,
+                stopwatch,
+                cancellationToken
+            );
         }
 
-        public static TextChangeRange ComputeSyntacticChangeRange(SyntaxNode oldRoot, SyntaxNode newRoot, TimeSpan timeout, CancellationToken cancellationToken)
-            => ComputeSyntacticChangeRange(oldRoot, newRoot, timeout, SharedStopwatch.StartNew(), cancellationToken);
+        public static TextChangeRange ComputeSyntacticChangeRange(
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        ) =>
+            ComputeSyntacticChangeRange(
+                oldRoot,
+                newRoot,
+                timeout,
+                SharedStopwatch.StartNew(),
+                cancellationToken
+            );
 
         private static TextChangeRange ComputeSyntacticChangeRange(
-            SyntaxNode oldRoot, SyntaxNode newRoot, TimeSpan timeout, SharedStopwatch stopwatch, CancellationToken cancellationToken)
-        {
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            SharedStopwatch stopwatch,
+            CancellationToken cancellationToken
+        ) {
             if (oldRoot == newRoot)
                 return default;
 
@@ -128,7 +154,10 @@ namespace Microsoft.CodeAnalysis.Classification
             // Only compute the right side if we have time for it.  Otherwise, assume there is nothing in common there.
             var commonRightWidth = 0;
             if (stopwatch.Elapsed < timeout)
-                commonRightWidth = ComputeCommonRightWidth(rightOldStack.Object, rightNewStack.Object);
+                commonRightWidth = ComputeCommonRightWidth(
+                    rightOldStack.Object,
+                    rightNewStack.Object
+                );
 
             var oldRootWidth = oldRoot.FullWidth();
             var newRootWidth = newRoot.FullWidth();
@@ -139,13 +168,17 @@ namespace Microsoft.CodeAnalysis.Classification
             Contract.ThrowIfTrue(commonRightWidth > newRootWidth);
 
             return new TextChangeRange(
-                TextSpan.FromBounds(start: commonLeftWidth.Value, end: oldRootWidth - commonRightWidth),
-                newRootWidth - commonLeftWidth.Value - commonRightWidth);
+                TextSpan.FromBounds(
+                    start: commonLeftWidth.Value,
+                    end: oldRootWidth - commonRightWidth
+                ),
+                newRootWidth - commonLeftWidth.Value - commonRightWidth
+            );
 
             int? ComputeCommonLeftWidth(
                 Stack<SyntaxNodeOrToken> oldStack,
-                Stack<SyntaxNodeOrToken> newStack)
-            {
+                Stack<SyntaxNodeOrToken> newStack
+            ) {
                 while (oldStack.Count > 0 && newStack.Count > 0)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -172,10 +205,14 @@ namespace Microsoft.CodeAnalysis.Classification
                     // want to see and skip.  Crumble the node and deal with its left side.
                     //
                     // Reverse so that we process the leftmost child first and walk left to right.
-                    foreach (var nodeOrToken in currentOld.AsNode()!.ChildNodesAndTokens().Reverse())
+                    foreach (
+                        var nodeOrToken in currentOld.AsNode()!.ChildNodesAndTokens().Reverse()
+                    )
                         oldStack.Push(nodeOrToken);
 
-                    foreach (var nodeOrToken in currentNew.AsNode()!.ChildNodesAndTokens().Reverse())
+                    foreach (
+                        var nodeOrToken in currentNew.AsNode()!.ChildNodesAndTokens().Reverse()
+                    )
                         newStack.Push(nodeOrToken);
                 }
 
@@ -193,8 +230,8 @@ namespace Microsoft.CodeAnalysis.Classification
 
             int ComputeCommonRightWidth(
                 Stack<SyntaxNodeOrToken> oldStack,
-                Stack<SyntaxNodeOrToken> newStack)
-            {
+                Stack<SyntaxNodeOrToken> newStack
+            ) {
                 while (oldStack.Count > 0 && newStack.Count > 0)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -202,8 +239,10 @@ namespace Microsoft.CodeAnalysis.Classification
                     var currentNew = newStack.Pop();
 
                     // The width on the right we've moved past on both old/new should be the same.
-                    Contract.ThrowIfFalse((oldRoot.FullSpan.End - currentOld.FullSpan.End) ==
-                                          (newRoot.FullSpan.End - currentNew.FullSpan.End));
+                    Contract.ThrowIfFalse(
+                        (oldRoot.FullSpan.End - currentOld.FullSpan.End)
+                            == (newRoot.FullSpan.End - currentNew.FullSpan.End)
+                    );
 
                     // If the two nodes/tokens were the same just skip past them.  They're part of the common right width.
                     // Critically though, we can only skip past if this wasn't already something we consumed when determining
@@ -213,10 +252,11 @@ namespace Microsoft.CodeAnalysis.Classification
                     // This can occur in incremental settings when the similar tokens are written successsively.
                     // Because the parser can reuse underlying token data, it may end up with many incrementally
                     // identical tokens in a row.
-                    if (currentOld.IsIncrementallyIdenticalTo(currentNew) &&
-                        currentOld.FullSpan.Start >= commonLeftWidth &&
-                        currentNew.FullSpan.Start >= commonLeftWidth)
-                    {
+                    if (
+                        currentOld.IsIncrementallyIdenticalTo(currentNew)
+                        && currentOld.FullSpan.Start >= commonLeftWidth
+                        && currentNew.FullSpan.Start >= commonLeftWidth
+                    ) {
                         continue;
                     }
 

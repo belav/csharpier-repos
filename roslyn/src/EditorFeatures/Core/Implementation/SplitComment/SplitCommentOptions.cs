@@ -13,9 +13,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
 {
     internal class SplitCommentOptions
     {
-        public static PerLanguageOption2<bool> Enabled =
-           new PerLanguageOption2<bool>(nameof(SplitCommentOptions), nameof(Enabled), defaultValue: true,
-               storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.SplitComments"));
+        public static PerLanguageOption2<bool> Enabled = new PerLanguageOption2<bool>(
+            nameof(SplitCommentOptions),
+            nameof(Enabled),
+            defaultValue: true,
+            storageLocations: new RoamingProfileStorageLocation(
+                "TextEditor.%LANGUAGE%.Specific.SplitComments"
+            )
+        );
     }
 
     [ExportOptionProvider, Shared]
@@ -23,11 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SplitCommentOptionsProvider()
-        {
-        }
+        public SplitCommentOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            SplitCommentOptions.Enabled);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(SplitCommentOptions.Enabled);
     }
 }

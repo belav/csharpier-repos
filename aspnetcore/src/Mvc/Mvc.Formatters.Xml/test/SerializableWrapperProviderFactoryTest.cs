@@ -13,11 +13,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void Creates_WrapperProvider_ForSerializableErrorType(bool isSerialization)
         {
             // Arrange
-            var serializableErrorWrapperProviderFactory = new SerializableErrorWrapperProviderFactory();
+            var serializableErrorWrapperProviderFactory =
+                new SerializableErrorWrapperProviderFactory();
 
             // Act
             var wrapperProvider = serializableErrorWrapperProviderFactory.GetProvider(
-                                        new WrapperProviderContext(typeof(SerializableError), isSerialization));
+                new WrapperProviderContext(typeof(SerializableError), isSerialization)
+            );
 
             // Assert
             Assert.NotNull(wrapperProvider);
@@ -28,11 +30,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void ReturnsNullFor_NonSerializableErrorTypes()
         {
             // Arrange
-            var serializableErrorWrapperProviderFactory = new SerializableErrorWrapperProviderFactory();
+            var serializableErrorWrapperProviderFactory =
+                new SerializableErrorWrapperProviderFactory();
 
             // Act
             var wrapperProvider = serializableErrorWrapperProviderFactory.GetProvider(
-                                        new WrapperProviderContext(typeof(Person), isSerialization: true));
+                new WrapperProviderContext(typeof(Person), isSerialization: true)
+            );
 
             // Assert
             Assert.Null(wrapperProvider);

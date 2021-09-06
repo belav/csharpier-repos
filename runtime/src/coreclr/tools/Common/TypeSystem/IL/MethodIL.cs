@@ -8,7 +8,7 @@ using Internal.TypeSystem;
 namespace Internal.IL
 {
     //
-    // This duplicates types from System.Reflection.Metadata to avoid layering issues, and 
+    // This duplicates types from System.Reflection.Metadata to avoid layering issues, and
     // because of the System.Reflection.Metadata constructors are not public anyway.
     //
 
@@ -37,8 +37,8 @@ namespace Internal.IL
             int handlerOffset,
             int handlerLength,
             int classToken,
-            int filterOffset)
-        {
+            int filterOffset
+        ) {
             Kind = kind;
             TryOffset = tryOffset;
             TryLength = tryLength;
@@ -86,7 +86,10 @@ namespace Internal.IL
         /// (typically a <see cref="MethodDesc"/>, <see cref="FieldDesc"/>, <see cref="TypeDesc"/>,
         /// or <see cref="MethodSignature"/>).
         /// </summary>
-        public abstract Object GetObject(int token, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw);
+        public abstract Object GetObject(
+            int token,
+            NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+        );
 
         /// <summary>
         /// Gets a list of exception regions this method body defines.

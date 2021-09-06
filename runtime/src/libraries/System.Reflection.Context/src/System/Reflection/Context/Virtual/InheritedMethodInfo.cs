@@ -11,8 +11,7 @@ namespace System.Reflection.Context.Virtual
     {
         private readonly Type _reflectedType;
 
-        public InheritedMethodInfo(MethodInfo baseMethod, Type reflectedType)
-            : base(baseMethod)
+        public InheritedMethodInfo(MethodInfo baseMethod, Type reflectedType) : base(baseMethod)
         {
             Debug.Assert(reflectedType != null);
             Debug.Assert(reflectedType.IsSubclassOf(baseMethod.DeclaringType));
@@ -26,19 +25,16 @@ namespace System.Reflection.Context.Virtual
 
         public override Type ReflectedType
         {
-            get
-            {
-                return _reflectedType;
-            }
+            get { return _reflectedType; }
         }
 
         public override bool Equals(object o)
         {
             var other = o as InheritedMethodInfo;
 
-            return other != null &&
-                   UnderlyingMethod.Equals(other.UnderlyingMethod) &&
-                   ReflectedType.Equals(other.ReflectedType);
+            return other != null
+                && UnderlyingMethod.Equals(other.UnderlyingMethod)
+                && ReflectedType.Equals(other.ReflectedType);
         }
 
         public override int GetHashCode()

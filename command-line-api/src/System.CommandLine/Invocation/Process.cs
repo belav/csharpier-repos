@@ -10,13 +10,17 @@ namespace System.CommandLine.Invocation
     {
         public static async Task<int> CompleteAsync(
             this Diagnostics.Process process,
-            CancellationToken? cancellationToken = null) =>
-            await Task.Run(() =>
-            {
-                process.WaitForExit();
+            CancellationToken? cancellationToken = null
+        ) =>
+            await Task.Run(
+                () =>
+                {
+                    process.WaitForExit();
 
-                return Task.FromResult(process.ExitCode);
-            }, cancellationToken ?? CancellationToken.None);
+                    return Task.FromResult(process.ExitCode);
+                },
+                cancellationToken ?? CancellationToken.None
+            );
 
         public static Diagnostics.Process StartProcess(
             string command,
@@ -24,8 +28,8 @@ namespace System.CommandLine.Invocation
             string? workingDir = null,
             Action<string>? stdOut = null,
             Action<string>? stdErr = null,
-            params (string key, string value)[] environmentVariables)
-        {
+            params (string key, string value)[] environmentVariables
+        ) {
             args ??= "";
 
             var process = new Diagnostics.Process

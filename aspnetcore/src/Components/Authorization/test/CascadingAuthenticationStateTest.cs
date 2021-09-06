@@ -21,16 +21,21 @@ namespace Microsoft.AspNetCore.Components.Authorization
         {
             // Arrange
             var renderer = new TestRenderer();
-            var component = new AutoRenderFragmentComponent(builder =>
-            {
-                builder.OpenComponent<CascadingAuthenticationState>(0);
-                builder.CloseComponent();
-            });
+            var component = new AutoRenderFragmentComponent(
+                builder =>
+                {
+                    builder.OpenComponent<CascadingAuthenticationState>(0);
+                    builder.CloseComponent();
+                }
+            );
 
             // Act/Assert
             renderer.AssignRootComponentId(component);
             var ex = Assert.Throws<InvalidOperationException>(() => component.TriggerRender());
-            Assert.Contains($"There is no registered service of type '{typeof(AuthenticationStateProvider).FullName}'.", ex.Message);
+            Assert.Contains(
+                $"There is no registered service of type '{typeof(AuthenticationStateProvider).FullName}'.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -54,15 +59,20 @@ namespace Microsoft.AspNetCore.Components.Authorization
 
             // Assert
             var batch = renderer.Batches.Single();
-            var receiveAuthStateId = batch.GetComponentFrames<ReceiveAuthStateComponent>().Single().ComponentId;
+            var receiveAuthStateId =
+                batch.GetComponentFrames<ReceiveAuthStateComponent>().Single().ComponentId;
             var receiveAuthStateDiff = batch.DiffsByComponentId[receiveAuthStateId].Single();
-            Assert.Collection(receiveAuthStateDiff.Edits, edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: True; Name: Bert; Pending: False; Renders: 1");
-            });
+            Assert.Collection(
+                receiveAuthStateDiff.Edits,
+                edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+                    AssertFrame.Text(
+                        batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Authenticated: True; Name: Bert; Pending: False; Renders: 1"
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -87,17 +97,23 @@ namespace Microsoft.AspNetCore.Components.Authorization
 
             // Assert 1: Empty state
             var batch1 = renderer.Batches.Single();
-            var receiveAuthStateFrame = batch1.GetComponentFrames<ReceiveAuthStateComponent>().Single();
+            var receiveAuthStateFrame = batch1.GetComponentFrames<ReceiveAuthStateComponent>()
+                .Single();
             var receiveAuthStateId = receiveAuthStateFrame.ComponentId;
-            var receiveAuthStateComponent = (ReceiveAuthStateComponent)receiveAuthStateFrame.Component;
+            var receiveAuthStateComponent =
+                (ReceiveAuthStateComponent)receiveAuthStateFrame.Component;
             var receiveAuthStateDiff1 = batch1.DiffsByComponentId[receiveAuthStateId].Single();
-            Assert.Collection(receiveAuthStateDiff1.Edits, edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch1.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: False; Name: ; Pending: True; Renders: 1");
-            });
+            Assert.Collection(
+                receiveAuthStateDiff1.Edits,
+                edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+                    AssertFrame.Text(
+                        batch1.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Authenticated: False; Name: ; Pending: True; Renders: 1"
+                    );
+                }
+            );
 
             // Act/Assert 2: Auth state fetch task completes in background
             // No new renders yet, because the cascading parameter itself hasn't changed
@@ -109,13 +125,17 @@ namespace Microsoft.AspNetCore.Components.Authorization
             Assert.Equal(2, renderer.Batches.Count);
             var batch2 = renderer.Batches.Last();
             var receiveAuthStateDiff2 = batch2.DiffsByComponentId[receiveAuthStateId].Single();
-            Assert.Collection(receiveAuthStateDiff2.Edits, edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                AssertFrame.Text(
-                    batch2.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: True; Name: Bert; Pending: False; Renders: 2");
-            });
+            Assert.Collection(
+                receiveAuthStateDiff2.Edits,
+                edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                    AssertFrame.Text(
+                        batch2.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Authenticated: True; Name: Bert; Pending: False; Renders: 2"
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -134,31 +154,39 @@ namespace Microsoft.AspNetCore.Components.Authorization
             var component = new UseCascadingAuthenticationStateComponent();
             renderer.AssignRootComponentId(component);
             component.TriggerRender();
-            var receiveAuthStateId = renderer.Batches.Single()
-                .GetComponentFrames<ReceiveAuthStateComponent>().Single().ComponentId;
+            var receiveAuthStateId =
+                renderer.Batches.Single()
+                    .GetComponentFrames<ReceiveAuthStateComponent>()
+                    .Single().ComponentId;
 
             // Act 2: AuthenticationStateProvider issues notification
             authStateProvider.TriggerAuthenticationStateChanged(
-                Task.FromResult(CreateAuthenticationState("Bert")));
+                Task.FromResult(CreateAuthenticationState("Bert"))
+            );
 
             // Assert 2: Re-renders content
             Assert.Equal(2, renderer.Batches.Count);
             var batch = renderer.Batches.Last();
             var receiveAuthStateDiff = batch.DiffsByComponentId[receiveAuthStateId].Single();
-            Assert.Collection(receiveAuthStateDiff.Edits, edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: True; Name: Bert; Pending: False; Renders: 2");
-            });
+            Assert.Collection(
+                receiveAuthStateDiff.Edits,
+                edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                    AssertFrame.Text(
+                        batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Authenticated: True; Name: Bert; Pending: False; Renders: 2"
+                    );
+                }
+            );
         }
 
         class ReceiveAuthStateComponent : AutoRenderComponent
         {
             int numRenders;
 
-            [CascadingParameter] Task<AuthenticationState> AuthStateTask { get; set; }
+            [CascadingParameter]
+            Task<AuthenticationState> AuthStateTask { get; set; }
 
             protected override void BuildRenderTree(RenderTreeBuilder builder)
             {
@@ -167,11 +195,17 @@ namespace Microsoft.AspNetCore.Components.Authorization
                 if (AuthStateTask.IsCompleted)
                 {
                     var identity = AuthStateTask.Result.User.Identity;
-                    builder.AddContent(0, $"Authenticated: {identity.IsAuthenticated}; Name: {identity.Name}; Pending: False; Renders: {numRenders}");
+                    builder.AddContent(
+                        0,
+                        $"Authenticated: {identity.IsAuthenticated}; Name: {identity.Name}; Pending: False; Renders: {numRenders}"
+                    );
                 }
                 else
                 {
-                    builder.AddContent(0, $"Authenticated: False; Name: ; Pending: True; Renders: {numRenders}");
+                    builder.AddContent(
+                        0,
+                        $"Authenticated: False; Name: ; Pending: True; Renders: {numRenders}"
+                    );
                 }
             }
         }
@@ -181,19 +215,29 @@ namespace Microsoft.AspNetCore.Components.Authorization
             protected override void BuildRenderTree(RenderTreeBuilder builder)
             {
                 builder.OpenComponent<CascadingAuthenticationState>(0);
-                builder.AddAttribute(1, "ChildContent", new RenderFragment(childBuilder =>
-                {
-                    childBuilder.OpenComponent<ReceiveAuthStateComponent>(0);
-                    childBuilder.CloseComponent();
-                }));
+                builder.AddAttribute(
+                    1,
+                    "ChildContent",
+                    new RenderFragment(
+                        childBuilder =>
+                        {
+                            childBuilder.OpenComponent<ReceiveAuthStateComponent>(0);
+                            childBuilder.CloseComponent();
+                        }
+                    )
+                );
                 builder.CloseComponent();
             }
         }
 
-        public static AuthenticationState CreateAuthenticationState(string username)
-            => new AuthenticationState(new ClaimsPrincipal(username == null
-                ? new ClaimsIdentity()
-                : (IIdentity)new TestIdentity { Name = username }));
+        public static AuthenticationState CreateAuthenticationState(string username) =>
+            new AuthenticationState(
+                new ClaimsPrincipal(
+                    username == null
+                        ? new ClaimsIdentity()
+                        : (IIdentity)new TestIdentity { Name = username }
+                )
+            );
 
         class TestIdentity : IIdentity
         {

@@ -37,9 +37,9 @@ namespace System.Xml.Xsl.XsltOld
         private int _recordState;
         private int _recordDepth;
 
-        private const int NoRecord = 0;      // No part of a new record was generated (old record was cleared out)
-        private const int SomeRecord = 1;      // Record was generated partially        (can be eventually record)
-        private const int HaveRecord = 2;      // Record was fully generated
+        private const int NoRecord = 0; // No part of a new record was generated (old record was cleared out)
+        private const int SomeRecord = 1; // Record was generated partially        (can be eventually record)
+        private const int HaveRecord = 2; // Record was fully generated
 
         private const char s_Minus = '-';
         private const char s_Space = ' ';
@@ -124,8 +124,16 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        internal Processor.OutputResult BeginEvent(int state, XPathNodeType nodeType, string? prefix, string? name, string? nspace, bool empty, object? htmlProps, bool search)
-        {
+        internal Processor.OutputResult BeginEvent(
+            int state,
+            XPathNodeType nodeType,
+            string? prefix,
+            string? name,
+            string? nspace,
+            bool empty,
+            object? htmlProps,
+            bool search
+        ) {
             if (!CanOutput(state))
             {
                 return Processor.OutputResult.Overflow;
@@ -176,8 +184,11 @@ namespace System.Xml.Xsl.XsltOld
             return CheckRecordBegin(state);
         }
 
-        internal Processor.OutputResult TextEvent(int state, string? text, bool disableOutputEscaping)
-        {
+        internal Processor.OutputResult TextEvent(
+            int state,
+            string? text,
+            bool disableOutputEscaping
+        ) {
             if (!CanOutput(state))
             {
                 return Processor.OutputResult.Overflow;
@@ -258,7 +269,9 @@ namespace System.Xml.Xsl.XsltOld
 
             for (int attrib = 0; attrib < _attributeCount; attrib++)
             {
-                Debug.Assert(_attributeList[attrib] != null && _attributeList[attrib] is BuilderInfo);
+                Debug.Assert(
+                    _attributeList[attrib] != null && _attributeList[attrib] is BuilderInfo
+                );
 
                 BuilderInfo attribute = (BuilderInfo)_attributeList[attrib]!;
 
@@ -315,8 +328,13 @@ namespace System.Xml.Xsl.XsltOld
             return _attributeCount++;
         }
 
-        private void BeginAttribute(string prefix, string name, string nspace, object? htmlAttrProps, bool search)
-        {
+        private void BeginAttribute(
+            string prefix,
+            string name,
+            string nspace,
+            object? htmlAttrProps,
+            bool search
+        ) {
             int attrib = FindAttribute(name, nspace, ref prefix);
 
             if (attrib == -1)
@@ -481,7 +499,6 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-
         private void AnalyzeSpaceLang()
         {
             Debug.Assert(_mainNode.NodeType == XmlNodeType.Element);
@@ -536,7 +553,7 @@ namespace System.Xml.Xsl.XsltOld
                     if (!Ref.Equal(_mainNode.NamespaceURI, nspace))
                     {
                         if (thisScope)
-                        {    // Prefix conflict
+                        { // Prefix conflict
                             _mainNode.Prefix = GetPrefixForNamespace(_mainNode.NamespaceURI);
                         }
                         else
@@ -561,7 +578,6 @@ namespace System.Xml.Xsl.XsltOld
             {
                 Debug.Assert(_attributeList[attr] is BuilderInfo);
                 BuilderInfo info = (BuilderInfo)_attributeList[attr]!;
-
 
                 if (Ref.Equal(info.NamespaceURI, _atoms.Empty))
                 {
@@ -617,7 +633,8 @@ namespace System.Xml.Xsl.XsltOld
             StringBuilder? newComment = null;
             string comment = _mainNode.Value;
             bool minus = false;
-            int index = 0, begin = 0;
+            int index = 0,
+                begin = 0;
 
             for (; index < comment.Length; index++)
             {
@@ -627,7 +644,12 @@ namespace System.Xml.Xsl.XsltOld
                         if (minus)
                         {
                             if (newComment == null)
-                                newComment = new StringBuilder(comment, begin, index, 2 * comment.Length);
+                                newComment = new StringBuilder(
+                                    comment,
+                                    begin,
+                                    index,
+                                    2 * comment.Length
+                                );
                             else
                                 newComment.Append(comment, begin, index - begin);
 
@@ -660,13 +682,17 @@ namespace System.Xml.Xsl.XsltOld
 
         private void AnalyzeProcessingInstruction()
         {
-            Debug.Assert(_mainNode.NodeType == XmlNodeType.ProcessingInstruction || _mainNode.NodeType == XmlNodeType.XmlDeclaration);
+            Debug.Assert(
+                _mainNode.NodeType == XmlNodeType.ProcessingInstruction
+                    || _mainNode.NodeType == XmlNodeType.XmlDeclaration
+            );
             //Debug.Assert((object) this.currentInfo == (object) this.mainNode);
 
             StringBuilder? newPI = null;
             string pi = _mainNode.Value;
             bool question = false;
-            int index = 0, begin = 0;
+            int index = 0,
+                begin = 0;
 
             for (; index < pi.Length; index++)
             {

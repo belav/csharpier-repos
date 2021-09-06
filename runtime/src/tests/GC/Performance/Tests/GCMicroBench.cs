@@ -17,9 +17,8 @@ namespace GC_Microbenchmarks
         Small = 8000,
         SmallFinal = 8500, // small finalizable object
         Large = 85000,
-        ExtraLarge = 20*1024*1024
+        ExtraLarge = 20 * 1024 * 1024
     }
-
 
     // the condition to satisfy before ending the benchmark
     public enum AllocationCondition
@@ -29,7 +28,6 @@ namespace GC_Microbenchmarks
         Segments,
         Objects
     }
-
 
     // the object that gets allocated
     public class Node
@@ -42,21 +40,14 @@ namespace GC_Microbenchmarks
         public byte[] data;
     }
 
-
     // the finalizable object that gets allocated
     public class FNode : Node
     {
-        public FNode(int dataSize)
-            : base(dataSize)
-        {
-        }
+        public FNode(int dataSize) : base(dataSize) { }
 
         // puts object on finalization list
-        ~FNode()
-        {
-        }
+        ~FNode() { }
     }
-
 
     public class GCMicroBench
     {
@@ -68,11 +59,10 @@ namespace GC_Microbenchmarks
         public const string AmountParam = "/amount:";
 
         // test members
-        private List<Node> m_list = new List<Node>();     // holds the allocated objects
+        private List<Node> m_list = new List<Node>(); // holds the allocated objects
         private ObjectType m_objType = ObjectType.Undefined;
         private AllocationCondition m_allocCondition = AllocationCondition.Undefined;
         private long m_amount = 0;
-
 
         // outputs the usage information for the app
         public static void Usage()
@@ -81,7 +71,9 @@ namespace GC_Microbenchmarks
             Console.WriteLine("where");
             Console.WriteLine("\tobjtype = [small|smallfinal|large|extralarge]");
             Console.WriteLine("\tcondition = [heapsize|segments|objects]");
-            Console.WriteLine("\tamount = the number that satisfies the condition (ex: number of objects)");
+            Console.WriteLine(
+                "\tamount = the number that satisfies the condition (ex: number of objects)"
+            );
         }
 
         public static void Main(string[] args)
@@ -93,9 +85,7 @@ namespace GC_Microbenchmarks
                 return;
             }
             test.RunTest();
-
         }
-
 
         public bool ParseArgs(string[] args)
         {
@@ -110,7 +100,6 @@ namespace GC_Microbenchmarks
 
                 if (args[i].StartsWith(ObjTypeParam))
                 {
-
                     if (m_objType != ObjectType.Undefined)
                     {
                         return false;
@@ -118,7 +107,6 @@ namespace GC_Microbenchmarks
 
                     switch (args[i].Substring(ObjTypeParam.Length))
                     {
-
                         case "small":
                             m_objType = ObjectType.Small;
                             break;
@@ -137,7 +125,6 @@ namespace GC_Microbenchmarks
                 }
                 else if (args[i].StartsWith(ConditionParam))
                 {
-
                     if (m_allocCondition != AllocationCondition.Undefined)
                     {
                         return false;
@@ -145,7 +132,6 @@ namespace GC_Microbenchmarks
 
                     switch (args[i].Substring(ConditionParam.Length))
                     {
-
                         case "heapsize":
                             m_allocCondition = AllocationCondition.HeapSize;
                             break;
@@ -161,35 +147,35 @@ namespace GC_Microbenchmarks
                 }
                 else if (args[i].StartsWith(AmountParam))
                 {
-
                     if (m_amount != 0)
                     {
                         return false;
                     }
 
-                    if ((!Int64.TryParse(args[i].Substring(AmountParam.Length), out m_amount)) || (m_amount <= 0))
-                    {
+                    if (
+                        (!Int64.TryParse(args[i].Substring(AmountParam.Length), out m_amount))
+                        || (m_amount <= 0)
+                    ) {
                         Console.WriteLine("amount must be greater than 0");
                         return false;
                     }
 
-                    if ( (m_allocCondition == AllocationCondition.HeapSize) && ( m_amount <= GC.GetTotalMemory(false) ) )
-                    {
+                    if (
+                        (m_allocCondition == AllocationCondition.HeapSize)
+                        && (m_amount <= GC.GetTotalMemory(false))
+                    ) {
                         Console.WriteLine("amount must be greater than current heap size");
                         return false;
                     }
-
                 }
                 else
                 {
                     return false;
                 }
-
             }
 
             return true;
         }
-
 
         public void RunTest()
         {
@@ -222,8 +208,10 @@ namespace GC_Microbenchmarks
                     do
                     {
                         Allocate();
-                    }
-                    while (Math.Abs(Process.GetCurrentProcess().VirtualMemorySize64 - reservedMem) < MinSegmentSize);
+                    } while (
+                        Math.Abs(Process.GetCurrentProcess().VirtualMemorySize64 - reservedMem)
+                        < MinSegmentSize
+                    );
                 }
             }
 
@@ -231,10 +219,8 @@ namespace GC_Microbenchmarks
             Deallocate();
         }
 
-
         public void Allocate()
         {
-
             Node n;
 
             // create new finalizable object
@@ -248,9 +234,7 @@ namespace GC_Microbenchmarks
             }
 
             m_list.Add(n);
-
         }
-
 
         public bool ClearList()
         {
@@ -258,11 +242,10 @@ namespace GC_Microbenchmarks
             {
                 m_list.Clear();
                 m_list = null;
-                return ( (m_list.Count > 0) && (m_list[0] is FNode));
+                return ((m_list.Count > 0) && (m_list[0] is FNode));
             }
             return false;
         }
-
 
         // releases references to allocated objects
         // times GC.Collect()
@@ -278,9 +261,6 @@ namespace GC_Microbenchmarks
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
             }
-
         }
-
-
     }
 }

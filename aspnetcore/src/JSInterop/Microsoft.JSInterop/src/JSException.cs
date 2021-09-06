@@ -14,9 +14,7 @@ namespace Microsoft.JSInterop
         /// Constructs an instance of <see cref="JSException"/>.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        public JSException(string message) : base(message)
-        {
-        }
+        public JSException(string message) : base(message) { }
 
         /// <summary>
         /// Constructs an instance of <see cref="JSException"/>.
@@ -24,7 +22,6 @@ namespace Microsoft.JSInterop
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The inner exception.</param>
         public JSException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+        { }
     }
 }

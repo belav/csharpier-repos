@@ -13,21 +13,25 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
 {
     internal class BraceCompletionOptions
     {
-        public static readonly PerLanguageOption2<bool> AutoFormattingOnCloseBrace = new(
-            nameof(BraceCompletionOptions), nameof(AutoFormattingOnCloseBrace), defaultValue: true,
-            storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.Auto Formatting On Close Brace"));
+        public static readonly PerLanguageOption2<bool> AutoFormattingOnCloseBrace =
+            new(
+                nameof(BraceCompletionOptions),
+                nameof(AutoFormattingOnCloseBrace),
+                defaultValue: true,
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.Auto Formatting On Close Brace"
+                )
+            );
 
         [ExportOptionProvider, Shared]
         internal class BraceCompletionOptionsProvider : IOptionProvider
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public BraceCompletionOptionsProvider()
-            {
-            }
+            public BraceCompletionOptionsProvider() { }
 
-            public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-                BraceCompletionOptions.AutoFormattingOnCloseBrace);
+            public ImmutableArray<IOption> Options { get; } =
+                ImmutableArray.Create<IOption>(BraceCompletionOptions.AutoFormattingOnCloseBrace);
         }
     }
 }

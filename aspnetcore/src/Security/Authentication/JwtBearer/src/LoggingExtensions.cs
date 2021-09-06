@@ -16,24 +16,27 @@ namespace Microsoft.Extensions.Logging
             _tokenValidationFailed = LoggerMessage.Define(
                 eventId: new EventId(1, "TokenValidationFailed"),
                 logLevel: LogLevel.Information,
-                formatString: "Failed to validate the token.");
+                formatString: "Failed to validate the token."
+            );
             _tokenValidationSucceeded = LoggerMessage.Define(
                 eventId: new EventId(2, "TokenValidationSucceeded"),
                 logLevel: LogLevel.Information,
-                formatString: "Successfully validated the token.");
+                formatString: "Successfully validated the token."
+            );
             _errorProcessingMessage = LoggerMessage.Define(
                 eventId: new EventId(3, "ProcessingMessageFailed"),
                 logLevel: LogLevel.Error,
-                formatString: "Exception occurred while processing message.");
+                formatString: "Exception occurred while processing message."
+            );
         }
 
-        public static void TokenValidationFailed(this ILogger logger, Exception ex)
-            => _tokenValidationFailed(logger, ex);
+        public static void TokenValidationFailed(this ILogger logger, Exception ex) =>
+            _tokenValidationFailed(logger, ex);
 
-        public static void TokenValidationSucceeded(this ILogger logger)
-            => _tokenValidationSucceeded(logger, null);
+        public static void TokenValidationSucceeded(this ILogger logger) =>
+            _tokenValidationSucceeded(logger, null);
 
-        public static void ErrorProcessingMessage(this ILogger logger, Exception ex)
-            => _errorProcessingMessage(logger, ex);
+        public static void ErrorProcessingMessage(this ILogger logger, Exception ex) =>
+            _errorProcessingMessage(logger, ex);
     }
 }

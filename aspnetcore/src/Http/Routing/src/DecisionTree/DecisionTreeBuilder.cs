@@ -72,33 +72,34 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
     //  }
     internal static class DecisionTreeBuilder<TItem>
     {
-        public static DecisionTreeNode<TItem> GenerateTree(IReadOnlyList<TItem> items, IClassifier<TItem> classifier)
-        {
+        public static DecisionTreeNode<TItem> GenerateTree(
+            IReadOnlyList<TItem> items,
+            IClassifier<TItem> classifier
+        ) {
             var itemCount = items.Count;
             var itemDescriptors = new List<ItemDescriptor<TItem>>(itemCount);
             for (var i = 0; i < itemCount; i++)
             {
                 var item = items[i];
-                itemDescriptors.Add(new ItemDescriptor<TItem>()
-                {
-                    Criteria = classifier.GetCriteria(item),
-                    Index = i,
-                    Item = item,
-                });
+                itemDescriptors.Add(
+                    new ItemDescriptor<TItem>()
+                    {
+                        Criteria = classifier.GetCriteria(item),
+                        Index = i,
+                        Item = item,
+                    }
+                );
             }
 
             var comparer = new DecisionCriterionValueEqualityComparer(classifier.ValueComparer);
-            return GenerateNode(
-                new TreeBuilderContext(),
-                comparer,
-                itemDescriptors);
+            return GenerateNode(new TreeBuilderContext(), comparer, itemDescriptors);
         }
 
         private static DecisionTreeNode<TItem> GenerateNode(
             TreeBuilderContext context,
             DecisionCriterionValueEqualityComparer comparer,
-            List<ItemDescriptor<TItem>> items)
-        {
+            List<ItemDescriptor<TItem>> items
+        ) {
             // The extreme use of generics here is intended to reduce the number of intermediate
             // allocations of wrapper classes. Performance testing found that building these trees allocates
             // significant memory that we can avoid and that it has a real impact on startup.
@@ -152,7 +153,9 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
             var reducedCriteria = new List<DecisionCriterion<TItem>>();
             foreach (var criterion in criteria.OrderByDescending(c => c.Value.Count))
             {
-                var reducedBranches = new Dictionary<object, DecisionTreeNode<TItem>>(comparer.InnerComparer);
+                var reducedBranches = new Dictionary<object, DecisionTreeNode<TItem>>(
+                    comparer.InnerComparer
+                );
 
                 foreach (var branch in criterion.Value)
                 {
@@ -188,11 +191,7 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
                 }
             }
 
-            return new DecisionTreeNode<TItem>()
-            {
-                Criteria = reducedCriteria,
-                Matches = matches,
-            };
+            return new DecisionTreeNode<TItem>() { Criteria = reducedCriteria, Matches = matches, };
         }
 
         private class TreeBuilderContext
@@ -205,7 +204,10 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
 
             public TreeBuilderContext(TreeBuilderContext other)
             {
-                CurrentCriteria = new HashSet<string>(other.CurrentCriteria, StringComparer.OrdinalIgnoreCase);
+                CurrentCriteria = new HashSet<string>(
+                    other.CurrentCriteria,
+                    StringComparer.OrdinalIgnoreCase
+                );
                 MatchedItems = new HashSet<ItemDescriptor<TItem>>();
             }
 
@@ -217,10 +219,7 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
         // Subclass just to give a logical name to a mess of generics
         private class Criterion : Dictionary<DecisionCriterionValue, List<ItemDescriptor<TItem>>>
         {
-            public Criterion(DecisionCriterionValueEqualityComparer comparer)
-                : base(comparer)
-            {
-            }
+            public Criterion(DecisionCriterionValueEqualityComparer comparer) : base(comparer) { }
         }
     }
 }

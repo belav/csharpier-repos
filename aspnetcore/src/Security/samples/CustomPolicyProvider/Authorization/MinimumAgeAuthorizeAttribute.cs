@@ -26,10 +26,7 @@ namespace CustomPolicyProvider
                 }
                 return default(int);
             }
-            set
-            {
-                Policy = $"{POLICY_PREFIX}{value}";
-            }
+            set { Policy = $"{POLICY_PREFIX}{value}"; }
         }
     }
 }

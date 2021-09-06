@@ -22,6 +22,7 @@ namespace System.Net.Tests
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
                 Assert.Equal(orig, ServicePointManager.SecurityProtocol);
             }
+
             finally
             {
                 ServicePointManager.SecurityProtocol = orig;

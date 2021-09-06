@@ -12,16 +12,19 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class LinkGenerationTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class LinkGenerationTests
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
     {
         // Some tests require comparing the actual response body against an expected response baseline
         // so they require a reference to the assembly on which the resources are located, in order to
         // make the tests less verbose, we get a reference to the assembly with the resources and we
         // use it on all the rest of the tests.
-        private static readonly Assembly _resourcesAssembly = typeof(LinkGenerationTests).GetTypeInfo().Assembly;
+        private static readonly Assembly _resourcesAssembly =
+            typeof(LinkGenerationTests).GetTypeInfo().Assembly;
 
-        public LinkGenerationTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
-        {
+        public LinkGenerationTests(
+            MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+        ) {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -33,10 +36,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             {
                 return new TheoryData<string, string>
                 {
-                    { "http://localhost/Home/RedirectToActionReturningTaskAction", "/Home/ActionReturningTask" },
-                    { "http://localhost/Home/RedirectToRouteActionAsMethodAction", "/Home/ActionReturningTask" },
+                    {
+                        "http://localhost/Home/RedirectToActionReturningTaskAction",
+                        "/Home/ActionReturningTask"
+                    },
+                    {
+                        "http://localhost/Home/RedirectToRouteActionAsMethodAction",
+                        "/Home/ActionReturningTask"
+                    },
                     { "http://localhost/Home/RedirectToRouteUsingRouteName", "/api/orders/10" },
-                    { "http://pingüino/Home/RedirectToRouteUsingRouteName", "/api/orders/10" },
+                    { "http://pingA1ino/Home/RedirectToRouteUsingRouteName", "/api/orders/10" },
                 };
             }
         }
@@ -45,8 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [MemberData(nameof(RelativeLinksData))]
         public async Task GeneratedLinksWithActionResults_AreRelativeLinks_WhenSetOnLocationHeader(
             string url,
-            string expected)
-        {
+            string expected
+        ) {
             // Act
             var response = await Client.GetAsync(url);
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -56,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Location.ToString() in mono returns file://url. (https://github.com/aspnet/External/issues/21)
             Assert.Equal(
                 TestPlatformHelper.IsMono ? new Uri(expected) : new Uri(expected, UriKind.Relative),
-                response.Headers.Location);
+                response.Headers.Location
+            );
         }
 
         [Fact]
@@ -65,8 +75,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Arrange
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
             var outputFile = "compiler/resources/BasicWebSite.Home.ActionLinkView.html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             // The host is not important as everything runs in memory and tests are isolated from each other.
@@ -77,7 +90,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile,
+                expectedContent,
+                responseContent
+            );
         }
     }
 }

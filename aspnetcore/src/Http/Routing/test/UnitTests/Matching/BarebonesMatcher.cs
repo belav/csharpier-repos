@@ -64,17 +64,23 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 while ((end = path.IndexOf('/', start)) >= 0)
                 {
                     var comparand = _segments.Length > segment ? _segments[segment] : null;
-                    if ((comparand == null && end - start == 0) ||
-                        (comparand != null &&
-                            (comparand.Length != end - start ||
-                            string.Compare(
-                                path,
-                                start,
-                                comparand,
-                                0,
-                                comparand.Length,
-                                StringComparison.OrdinalIgnoreCase) != 0)))
-                    {
+                    if (
+                        (comparand == null && end - start == 0)
+                        || (
+                            comparand != null
+                            && (
+                                comparand.Length != end - start
+                                || string.Compare(
+                                    path,
+                                    start,
+                                    comparand,
+                                    0,
+                                    comparand.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) != 0
+                            )
+                        )
+                    ) {
                         return false;
                     }
 
@@ -87,16 +93,20 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 if (length > 0)
                 {
                     var comparand = _segments.Length > segment ? _segments[segment] : null;
-                    if (comparand != null &&
-                        (comparand.Length != length ||
-                        string.Compare(
-                            path,
-                            start,
-                            comparand,
-                            0,
-                            comparand.Length,
-                            StringComparison.OrdinalIgnoreCase) != 0))
-                    {
+                    if (
+                        comparand != null
+                        && (
+                            comparand.Length != length
+                            || string.Compare(
+                                path,
+                                start,
+                                comparand,
+                                0,
+                                comparand.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) != 0
+                        )
+                    ) {
                         return false;
                     }
 

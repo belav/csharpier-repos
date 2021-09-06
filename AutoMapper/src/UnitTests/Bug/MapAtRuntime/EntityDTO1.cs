@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OmmitedDTOModel3
-{   
+{
     public class EntityDTO1 : BaseEntity
     {
         public EntityDTO1()

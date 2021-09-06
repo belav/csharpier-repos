@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     internal static class ApiControllerFacts
     {
-        public static bool IsApiControllerAction(ApiControllerSymbolCache symbolCache, IMethodSymbol method)
-        {
+        public static bool IsApiControllerAction(
+            ApiControllerSymbolCache symbolCache,
+            IMethodSymbol method
+        ) {
             if (method == null)
             {
                 return false;
@@ -20,19 +22,30 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return false;
             }
 
-            if (!MvcFacts.IsController(method.ContainingType, symbolCache.ControllerAttribute, symbolCache.NonControllerAttribute))
-            {
+            if (
+                !MvcFacts.IsController(
+                    method.ContainingType,
+                    symbolCache.ControllerAttribute,
+                    symbolCache.NonControllerAttribute
+                )
+            ) {
                 return false;
             }
 
-            if (!method.ContainingType.HasAttribute(symbolCache.IApiBehaviorMetadata, inherit: true) &&
-                !method.ContainingAssembly.HasAttribute(symbolCache.IApiBehaviorMetadata))
-            {
+            if (
+                !method.ContainingType.HasAttribute(symbolCache.IApiBehaviorMetadata, inherit: true)
+                && !method.ContainingAssembly.HasAttribute(symbolCache.IApiBehaviorMetadata)
+            ) {
                 return false;
             }
 
-            if (!MvcFacts.IsControllerAction(method, symbolCache.NonActionAttribute, symbolCache.IDisposableDispose))
-            {
+            if (
+                !MvcFacts.IsControllerAction(
+                    method,
+                    symbolCache.NonActionAttribute,
+                    symbolCache.IDisposableDispose
+                )
+            ) {
                 return false;
             }
 

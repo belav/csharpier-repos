@@ -46,8 +46,9 @@ namespace Microsoft.AspNetCore.Owin
             return new ClaimsPrincipal(principal);
         }
 
-        internal static IHeaderDictionary MakeHeaderDictionary(IDictionary<string, string[]> dictionary)
-        {
+        internal static IHeaderDictionary MakeHeaderDictionary(
+            IDictionary<string, string[]> dictionary
+        ) {
             var wrapper = dictionary as DictionaryStringArrayWrapper;
             if (wrapper != null)
             {
@@ -56,8 +57,9 @@ namespace Microsoft.AspNetCore.Owin
             return new DictionaryStringValuesWrapper(dictionary);
         }
 
-        internal static IDictionary<string, string[]> MakeDictionaryStringArray(IHeaderDictionary dictionary)
-        {
+        internal static IDictionary<string, string[]> MakeDictionaryStringArray(
+            IHeaderDictionary dictionary
+        ) {
             var wrapper = dictionary as DictionaryStringValuesWrapper;
             if (wrapper != null)
             {

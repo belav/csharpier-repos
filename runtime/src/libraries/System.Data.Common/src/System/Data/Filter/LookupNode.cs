@@ -8,7 +8,7 @@ namespace System.Data
 {
     internal sealed class LookupNode : ExpressionNode
     {
-        private readonly string? _relationName;    // can be null
+        private readonly string? _relationName; // can be null
         private readonly string _columnName;
 
         private DataColumn? _column;
@@ -23,7 +23,7 @@ namespace System.Data
         internal override void Bind(DataTable table, List<DataColumn> list)
         {
             BindTable(table);
-            _column = null;  // clear for rebinding (if original binding was valid)
+            _column = null; // clear for rebinding (if original binding was valid)
             _relation = null;
 
             if (table == null)

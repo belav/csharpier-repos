@@ -21,9 +21,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("MemoryStreamWithContentType", "text/html")]
         [InlineData("MemoryStreamWithContentTypeFromProduces", "text/plain")]
         [InlineData("MemoryStreamWithContentTypeFromProducesWithMultipleValues", "text/html")]
-        [InlineData("MemoryStreamOverridesProducesContentTypeWithResponseContentType", "text/plain")]
-        public async Task StreamOutputFormatter_ReturnsAppropriateContentAndContentType(string actionName, string contentType)
-        {
+        [InlineData(
+            "MemoryStreamOverridesProducesContentTypeWithResponseContentType",
+            "text/plain"
+        )]
+        public async Task StreamOutputFormatter_ReturnsAppropriateContentAndContentType(
+            string actionName,
+            string contentType
+        ) {
             // Arrange & Act
             var response = await Client.GetAsync("http://localhost/Stream/" + actionName);
             var body = await response.Content.ReadAsStringAsync();

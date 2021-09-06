@@ -10,8 +10,7 @@ namespace MvcSample.Web.Components
         public IViewComponentResult Invoke()
         {
             var region = (string)ViewData["Locale"];
-            var model = region == "North" ? "NorthWest Store":
-                                            "Nationwide Store";
+            var model = region == "North" ? "NorthWest Store" : "Nationwide Store";
 
             return View(model: model);
         }

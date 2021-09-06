@@ -11,7 +11,10 @@ namespace System.ConfigurationTests
         [Fact]
         public void CollectionType_EqualsAddRemoveClearMap()
         {
-            Assert.Equal(ConfigurationElementCollectionType.AddRemoveClearMap, new NameValueConfigurationCollection().CollectionType);
+            Assert.Equal(
+                ConfigurationElementCollectionType.AddRemoveClearMap,
+                new NameValueConfigurationCollection().CollectionType
+            );
         }
 
         [Fact]
@@ -24,7 +27,9 @@ namespace System.ConfigurationTests
         public void Add_NullKeyValue_Throws()
         {
             var element = new NameValueConfigurationElement(null, null);
-            Assert.Throws<ConfigurationErrorsException>(() => new NameValueConfigurationCollection().Add(element));
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new NameValueConfigurationCollection().Add(element)
+            );
         }
 
         [Fact]

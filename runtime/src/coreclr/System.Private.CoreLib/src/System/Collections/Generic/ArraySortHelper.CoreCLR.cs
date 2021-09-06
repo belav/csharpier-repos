@@ -13,10 +13,10 @@ namespace System.Collections.Generic
     }
 
     [TypeDependency("System.Collections.Generic.GenericArraySortHelper`1")]
-    internal sealed partial class ArraySortHelper<T>
-        : IArraySortHelper<T>
+    internal sealed partial class ArraySortHelper<T> : IArraySortHelper<T>
     {
-        private static readonly IArraySortHelper<T> s_defaultArraySortHelper = CreateArraySortHelper();
+        private static readonly IArraySortHelper<T> s_defaultArraySortHelper =
+            CreateArraySortHelper();
 
         public static IArraySortHelper<T> Default => s_defaultArraySortHelper;
 
@@ -27,7 +27,11 @@ namespace System.Collections.Generic
 
             if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
             {
-                defaultArraySortHelper = (IArraySortHelper<T>)RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(GenericArraySortHelper<string>), (RuntimeType)typeof(T));
+                defaultArraySortHelper =
+                    (IArraySortHelper<T>)RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                        (RuntimeType)typeof(GenericArraySortHelper<string>),
+                        (RuntimeType)typeof(T)
+                    );
             }
             else
             {
@@ -37,8 +41,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<T>
-        : IArraySortHelper<T>
+    internal sealed partial class GenericArraySortHelper<T> : IArraySortHelper<T>
     {
     }
 
@@ -48,21 +51,29 @@ namespace System.Collections.Generic
     }
 
     [TypeDependency("System.Collections.Generic.GenericArraySortHelper`2")]
-    internal sealed partial class ArraySortHelper<TKey, TValue>
-        : IArraySortHelper<TKey, TValue>
+    internal sealed partial class ArraySortHelper<TKey, TValue> : IArraySortHelper<TKey, TValue>
     {
-        private static readonly IArraySortHelper<TKey, TValue> s_defaultArraySortHelper = CreateArraySortHelper();
+        private static readonly IArraySortHelper<TKey, TValue> s_defaultArraySortHelper =
+            CreateArraySortHelper();
 
         public static IArraySortHelper<TKey, TValue> Default => s_defaultArraySortHelper;
 
-        [DynamicDependency("#ctor", typeof(GenericArraySortHelper<,>))]
+        [DynamicDependency("#ctor", typeof(GenericArraySortHelper<, >))]
         private static IArraySortHelper<TKey, TValue> CreateArraySortHelper()
         {
             IArraySortHelper<TKey, TValue> defaultArraySortHelper;
 
             if (typeof(IComparable<TKey>).IsAssignableFrom(typeof(TKey)))
             {
-                defaultArraySortHelper = (IArraySortHelper<TKey, TValue>)RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(GenericArraySortHelper<string, string>), (RuntimeType)typeof(TKey), (RuntimeType)typeof(TValue));
+                defaultArraySortHelper =
+                    (IArraySortHelper<
+                        TKey,
+                        TValue
+                    >)RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                        (RuntimeType)typeof(GenericArraySortHelper<string, string>),
+                        (RuntimeType)typeof(TKey),
+                        (RuntimeType)typeof(TValue)
+                    );
             }
             else
             {

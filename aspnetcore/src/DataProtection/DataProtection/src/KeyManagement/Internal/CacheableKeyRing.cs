@@ -16,13 +16,18 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement.Internal
     {
         private readonly CancellationToken _expirationToken;
 
-        internal CacheableKeyRing(CancellationToken expirationToken, DateTimeOffset expirationTime, IKey defaultKey, IEnumerable<IKey> allKeys)
-            : this(expirationToken, expirationTime, keyRing: new KeyRing(defaultKey, allKeys))
-        {
-        }
+        internal CacheableKeyRing(
+            CancellationToken expirationToken,
+            DateTimeOffset expirationTime,
+            IKey defaultKey,
+            IEnumerable<IKey> allKeys
+        ) : this(expirationToken, expirationTime, keyRing: new KeyRing(defaultKey, allKeys)) { }
 
-        internal CacheableKeyRing(CancellationToken expirationToken, DateTimeOffset expirationTime, IKeyRing keyRing)
-        {
+        internal CacheableKeyRing(
+            CancellationToken expirationToken,
+            DateTimeOffset expirationTime,
+            IKeyRing keyRing
+        ) {
             _expirationToken = expirationToken;
             ExpirationTimeUtc = expirationTime.UtcDateTime;
             KeyRing = keyRing;

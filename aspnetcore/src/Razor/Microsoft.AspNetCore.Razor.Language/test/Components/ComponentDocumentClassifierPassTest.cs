@@ -14,41 +14,47 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void Execute_SetsDocumentKind()
         {
             // Arrange
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.razor"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("some-content", "Test.razor")
+            );
             codeDocument.SetFileKind(FileKinds.Component);
 
             var projectEngine = CreateProjectEngine();
             var irDocument = CreateIRDocument(projectEngine, codeDocument);
-            var pass = new ComponentDocumentClassifierPass
-            {
-                Engine = projectEngine.Engine
-            };
+            var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
 
             // Act
             pass.Execute(codeDocument, irDocument);
 
             // Assert
-            Assert.Equal(ComponentDocumentClassifierPass.ComponentDocumentKind, irDocument.DocumentKind);
+            Assert.Equal(
+                ComponentDocumentClassifierPass.ComponentDocumentKind,
+                irDocument.DocumentKind
+            );
         }
 
         [Fact]
         public void ComponentDocumentClassifierPass_SetsNamespace()
         {
             // Arrange
-            var properties = new RazorSourceDocumentProperties(filePath: "/MyApp/Test.razor", relativePath: "Test.razor");
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+            var properties = new RazorSourceDocumentProperties(
+                filePath: "/MyApp/Test.razor",
+                relativePath: "Test.razor"
+            );
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("some-content", properties)
+            );
             codeDocument.SetFileKind(FileKinds.Component);
 
-            var projectEngine = CreateProjectEngine(b =>
-            {
-                b.SetRootNamespace("MyApp");
-            });
+            var projectEngine = CreateProjectEngine(
+                b =>
+                {
+                    b.SetRootNamespace("MyApp");
+                }
+            );
 
             var irDocument = CreateIRDocument(projectEngine, codeDocument);
-            var pass = new ComponentDocumentClassifierPass
-            {
-                Engine = projectEngine.Engine
-            };
+            var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
 
             // Act
             pass.Execute(codeDocument, irDocument);
@@ -63,20 +69,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void ComponentDocumentClassifierPass_SetsClass()
         {
             // Arrange
-            var properties = new RazorSourceDocumentProperties(filePath: "/MyApp/Test.razor", relativePath: "Test.razor");
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+            var properties = new RazorSourceDocumentProperties(
+                filePath: "/MyApp/Test.razor",
+                relativePath: "Test.razor"
+            );
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("some-content", properties)
+            );
             codeDocument.SetFileKind(FileKinds.Component);
 
-            var projectEngine = CreateProjectEngine(b =>
-            {
-                b.SetRootNamespace("MyApp");
-            });
+            var projectEngine = CreateProjectEngine(
+                b =>
+                {
+                    b.SetRootNamespace("MyApp");
+                }
+            );
 
             var irDocument = CreateIRDocument(projectEngine, codeDocument);
-            var pass = new ComponentDocumentClassifierPass
-            {
-                Engine = projectEngine.Engine
-            };
+            var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
 
             // Act
             pass.Execute(codeDocument, irDocument);
@@ -94,20 +104,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         {
             // Arrange
             var relativePath = "/Pages/Announcements/Banner.razor";
-            var properties = new RazorSourceDocumentProperties(filePath: $"/MyApp{relativePath}", relativePath: relativePath);
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+            var properties = new RazorSourceDocumentProperties(
+                filePath: $"/MyApp{relativePath}",
+                relativePath: relativePath
+            );
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("some-content", properties)
+            );
             codeDocument.SetFileKind(FileKinds.Component);
 
-            var projectEngine = CreateProjectEngine(b =>
-            {
-                b.SetRootNamespace("MyApp");
-            });
+            var projectEngine = CreateProjectEngine(
+                b =>
+                {
+                    b.SetRootNamespace("MyApp");
+                }
+            );
 
             var irDocument = CreateIRDocument(projectEngine, codeDocument);
-            var pass = new ComponentDocumentClassifierPass
-            {
-                Engine = projectEngine.Engine
-            };
+            var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
 
             // Act
             pass.Execute(codeDocument, irDocument);
@@ -123,20 +137,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void ComponentDocumentClassifierPass_SanitizesClassName()
         {
             // Arrange
-            var properties = new RazorSourceDocumentProperties(filePath: @"x:\My.+App\path.with+invalid-chars.razor", relativePath: "path.with+invalid-chars.razor");
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+            var properties = new RazorSourceDocumentProperties(
+                filePath: @"x:\My.+App\path.with+invalid-chars.razor",
+                relativePath: "path.with+invalid-chars.razor"
+            );
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("some-content", properties)
+            );
             codeDocument.SetFileKind(FileKinds.Component);
 
-            var projectEngine = CreateProjectEngine(b =>
-            {
-                b.SetRootNamespace("My.+App");
-            });
+            var projectEngine = CreateProjectEngine(
+                b =>
+                {
+                    b.SetRootNamespace("My.+App");
+                }
+            );
 
             var irDocument = CreateIRDocument(projectEngine, codeDocument);
-            var pass = new ComponentDocumentClassifierPass
-            {
-                Engine = projectEngine.Engine
-            };
+            var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
 
             // Act
             pass.Execute(codeDocument, irDocument);
@@ -152,15 +170,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void ComponentDocumentClassifierPass_SetsUpMainMethod()
         {
             // Arrange
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.razor"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("some-content", "Test.razor")
+            );
             codeDocument.SetFileKind(FileKinds.Component);
 
             var projectEngine = CreateProjectEngine();
             var irDocument = CreateIRDocument(projectEngine, codeDocument);
-            var pass = new ComponentDocumentClassifierPass
-            {
-                Engine = projectEngine.Engine
-            };
+            var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
 
             // Act
             pass.Execute(codeDocument, irDocument);
@@ -173,8 +190,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             Assert.Equal(new[] { "protected", "override" }, visitor.Method.Modifiers);
         }
 
-        private DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
-        {
+        private DocumentIntermediateNode CreateIRDocument(
+            RazorProjectEngine projectEngine,
+            RazorCodeDocument codeDocument
+        ) {
             for (var i = 0; i < projectEngine.Phases.Count; i++)
             {
                 var phase = projectEngine.Phases[i];
@@ -202,8 +221,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 Method = node;
             }
 
-            public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
-            {
+            public override void VisitNamespaceDeclaration(
+                NamespaceDeclarationIntermediateNode node
+            ) {
                 Namespace = node;
                 base.VisitNamespaceDeclaration(node);
             }
@@ -217,8 +237,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         private class TestComponentDocumentClassifierPass : ComponentDocumentClassifierPass
         {
-            public new bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-                => base.IsMatch(codeDocument, documentNode);
+            public new bool IsMatch(
+                RazorCodeDocument codeDocument,
+                DocumentIntermediateNode documentNode
+            ) => base.IsMatch(codeDocument, documentNode);
         }
     }
 }

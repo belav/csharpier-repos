@@ -23,8 +23,11 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <param name="databaseFactory">The delegate used to create <see cref="IDatabase"/> instances.</param>
         /// <param name="key">The <see cref="RedisKey"/> used to store key list.</param>
         /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
-        public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(this IDataProtectionBuilder builder, Func<IDatabase> databaseFactory, RedisKey key)
-        {
+        public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
+            this IDataProtectionBuilder builder,
+            Func<IDatabase> databaseFactory,
+            RedisKey key
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -42,9 +45,15 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <param name="builder">The builder instance to modify.</param>
         /// <param name="connectionMultiplexer">The <see cref="IConnectionMultiplexer"/> for database access.</param>
         /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
-        public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(this IDataProtectionBuilder builder, IConnectionMultiplexer connectionMultiplexer)
-        {
-            return PersistKeysToStackExchangeRedis(builder, connectionMultiplexer, DataProtectionKeysName);
+        public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
+            this IDataProtectionBuilder builder,
+            IConnectionMultiplexer connectionMultiplexer
+        ) {
+            return PersistKeysToStackExchangeRedis(
+                builder,
+                connectionMultiplexer,
+                DataProtectionKeysName
+            );
         }
 
         /// <summary>
@@ -54,8 +63,11 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <param name="connectionMultiplexer">The <see cref="IConnectionMultiplexer"/> for database access.</param>
         /// <param name="key">The <see cref="RedisKey"/> used to store key list.</param>
         /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
-        public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(this IDataProtectionBuilder builder, IConnectionMultiplexer connectionMultiplexer, RedisKey key)
-        {
+        public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
+            this IDataProtectionBuilder builder,
+            IConnectionMultiplexer connectionMultiplexer,
+            RedisKey key
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -64,15 +76,24 @@ namespace Microsoft.AspNetCore.DataProtection
             {
                 throw new ArgumentNullException(nameof(connectionMultiplexer));
             }
-            return PersistKeysToStackExchangeRedisInternal(builder, () => connectionMultiplexer.GetDatabase(), key);
+            return PersistKeysToStackExchangeRedisInternal(
+                builder,
+                () => connectionMultiplexer.GetDatabase(),
+                key
+            );
         }
 
-        private static IDataProtectionBuilder PersistKeysToStackExchangeRedisInternal(IDataProtectionBuilder builder, Func<IDatabase> databaseFactory, RedisKey key)
-        {
-            builder.Services.Configure<KeyManagementOptions>(options =>
-            {
-                options.XmlRepository = new RedisXmlRepository(databaseFactory, key);
-            });
+        private static IDataProtectionBuilder PersistKeysToStackExchangeRedisInternal(
+            IDataProtectionBuilder builder,
+            Func<IDatabase> databaseFactory,
+            RedisKey key
+        ) {
+            builder.Services.Configure<KeyManagementOptions>(
+                options =>
+                {
+                    options.XmlRepository = new RedisXmlRepository(databaseFactory, key);
+                }
+            );
             return builder;
         }
     }

@@ -31,8 +31,11 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         /// <param name="protectionDescriptorRule">The rule string from which to create the protection descriptor.</param>
         /// <param name="flags">Flags controlling the creation of the protection descriptor.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-        public DpapiNGXmlEncryptor(string protectionDescriptorRule, DpapiNGProtectionDescriptorFlags flags, ILoggerFactory loggerFactory)
-        {
+        public DpapiNGXmlEncryptor(
+            string protectionDescriptorRule,
+            DpapiNGProtectionDescriptorFlags flags,
+            ILoggerFactory loggerFactory
+        ) {
             if (protectionDescriptorRule == null)
             {
                 throw new ArgumentNullException(nameof(protectionDescriptorRule));
@@ -40,7 +43,11 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
             CryptoUtil.AssertPlatformIsWindows8OrLater();
 
-            var ntstatus = UnsafeNativeMethods.NCryptCreateProtectionDescriptor(protectionDescriptorRule, (uint)flags, out _protectionDescriptorHandle);
+            var ntstatus = UnsafeNativeMethods.NCryptCreateProtectionDescriptor(
+                protectionDescriptorRule,
+                (uint)flags,
+                out _protectionDescriptorHandle
+            );
             UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
             CryptoUtil.AssertSafeHandleIsValid(_protectionDescriptorHandle);
 
@@ -63,8 +70,11 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                 throw new ArgumentNullException(nameof(plaintextElement));
             }
 
-            var protectionDescriptorRuleString = _protectionDescriptorHandle.GetProtectionDescriptorRuleString();
-            _logger.EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(protectionDescriptorRuleString);
+            var protectionDescriptorRuleString =
+                _protectionDescriptorHandle.GetProtectionDescriptorRuleString();
+            _logger.EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(
+                protectionDescriptorRuleString
+            );
 
             // Convert the XML element to a binary secret so that it can be run through DPAPI
             byte[] cngDpapiEncryptedData;
@@ -72,7 +82,10 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             {
                 using (var plaintextElementAsSecret = plaintextElement.ToSecret())
                 {
-                    cngDpapiEncryptedData = DpapiSecretSerializerHelper.ProtectWithDpapiNG(plaintextElementAsSecret, _protectionDescriptorHandle);
+                    cngDpapiEncryptedData = DpapiSecretSerializerHelper.ProtectWithDpapiNG(
+                        plaintextElementAsSecret,
+                        _protectionDescriptorHandle
+                    );
                 }
             }
             catch (Exception ex)
@@ -87,11 +100,12 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             //   <value>{base64}</value>
             // </encryptedKey>
 
-            var element = new XElement("encryptedKey",
+            var element = new XElement(
+                "encryptedKey",
                 new XComment(" This key is encrypted with Windows DPAPI-NG. "),
                 new XComment(" Rule: " + protectionDescriptorRuleString + " "),
-                new XElement("value",
-                    Convert.ToBase64String(cngDpapiEncryptedData)));
+                new XElement("value", Convert.ToBase64String(cngDpapiEncryptedData))
+            );
 
             return new EncryptedXmlInfo(element, typeof(DpapiNGXmlDecryptor));
         }
@@ -109,7 +123,11 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             using (var currentIdentity = WindowsIdentity.GetCurrent())
             {
                 // use the SID to create an SDDL string
-                return string.Format(CultureInfo.InvariantCulture, "SID={0}", currentIdentity?.User?.Value);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "SID={0}",
+                    currentIdentity?.User?.Value
+                );
             }
         }
     }

@@ -31,7 +31,6 @@ namespace Microsoft.Test.ModuleCore
         }
     }
 
-
     ////////////////////////////////////////////////////////////////
     // InsensitiveHashtable
     //
@@ -39,10 +38,7 @@ namespace Microsoft.Test.ModuleCore
     internal class InsensitiveDictionary : Dictionary<string, string>
     {
         //Case-insensitive
-        public InsensitiveDictionary(int capacity)
-            : base(capacity)
-        {
-        }
+        public InsensitiveDictionary(int capacity) : base(capacity) { }
 
         //Helpers
         public void Update(string key, string value)

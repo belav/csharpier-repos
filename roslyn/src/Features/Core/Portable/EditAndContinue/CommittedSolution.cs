@@ -30,27 +30,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal enum DocumentState
         {
             None = 0,
-
             /// <summary>
             /// The current document content does not match the content the module was compiled with.
             /// This document state may change to <see cref="MatchesBuildOutput"/> or <see cref="DesignTimeOnly"/>.
             /// </summary>
             OutOfSync = 1,
-
             /// <summary>
             /// It hasn't been possible to determine whether the current document content does matches the content 
             /// the module was compiled with due to error while reading the PDB or the source file.
             /// This document state may change to <see cref="MatchesBuildOutput"/> or <see cref="DesignTimeOnly"/>.
             /// </summary>
             Indeterminate = 2,
-
             /// <summary>
             /// The document is not compiled into the module. It's only included in the project
             /// to support design-time features such as completion, etc.
             /// This is a final state. Once a document is in this state it won't switch to a different one.
             /// </summary>
             DesignTimeOnly = 3,
-
             /// <summary>
             /// The current document content matches the content the built module was compiled with.
             /// This is a final state. Once a document is in this state it won't switch to a different one.
@@ -88,8 +84,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private readonly object _guard = new();
 
-        public CommittedSolution(DebuggingSession debuggingSession, Solution solution, IEnumerable<KeyValuePair<DocumentId, DocumentState>> initialDocumentStates)
-        {
+        public CommittedSolution(
+            DebuggingSession debuggingSession,
+            Solution solution,
+            IEnumerable<KeyValuePair<DocumentId, DocumentState>> initialDocumentStates
+        ) {
             _solution = solution;
             _debuggingSession = debuggingSession;
             _documentState = new Dictionary<DocumentId, DocumentState>();
@@ -114,17 +113,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public bool HasNoChanges(Solution solution)
-            => _solution == solution;
+        public bool HasNoChanges(Solution solution) => _solution == solution;
 
-        public Project? GetProject(ProjectId id)
-            => _solution.GetProject(id);
+        public Project? GetProject(ProjectId id) => _solution.GetProject(id);
 
-        public ImmutableArray<DocumentId> GetDocumentIdsWithFilePath(string path)
-            => _solution.GetDocumentIdsWithFilePath(path);
+        public ImmutableArray<DocumentId> GetDocumentIdsWithFilePath(string path) =>
+            _solution.GetDocumentIdsWithFilePath(path);
 
-        public bool ContainsDocument(DocumentId documentId)
-            => _solution.ContainsDocument(documentId);
+        public bool ContainsDocument(DocumentId documentId) =>
+            _solution.ContainsDocument(documentId);
 
         /// <summary>
         /// Captures the content of a file that is about to be overwritten by saving an open document,
@@ -132,8 +129,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// If we didn't capture the content before the save we might never be able to find a document
         /// snapshot that matches the PDB.
         /// </summary>
-        public Task OnSourceFileUpdatedAsync(Document document, CancellationToken cancellationToken)
-            => GetDocumentAndStateAsync(document.Id, document, cancellationToken, reloadOutOfSyncDocument: true);
+        public Task OnSourceFileUpdatedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            GetDocumentAndStateAsync(
+                document.Id,
+                document,
+                cancellationToken,
+                reloadOutOfSyncDocument: true
+            );
 
         /// <summary>
         /// Returns a document snapshot for given <see cref="Document"/> whose content exactly matches
@@ -142,8 +147,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// 
         /// The result is cached and the next lookup uses the cached value, including failures unless <paramref name="reloadOutOfSyncDocument"/> is true.
         /// </summary>
-        public async Task<(Document? Document, DocumentState State)> GetDocumentAndStateAsync(DocumentId documentId, Document? currentDocument, CancellationToken cancellationToken, bool reloadOutOfSyncDocument = false)
-        {
+        public async Task<(Document? Document, DocumentState State)> GetDocumentAndStateAsync(
+            DocumentId documentId,
+            Document? currentDocument,
+            CancellationToken cancellationToken,
+            bool reloadOutOfSyncDocument = false
+        ) {
             Contract.ThrowIfFalse(currentDocument == null || documentId == currentDocument.Id);
 
             Solution solution;
@@ -184,7 +193,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                     if (committedDocument == null)
                     {
-                        var sourceGeneratedDocument = await solution.GetSourceGeneratedDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+                        var sourceGeneratedDocument =
+                            await solution.GetSourceGeneratedDocumentAsync(
+                                    documentId,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                         if (sourceGeneratedDocument != null)
                         {
                             // source generated files are never out-of-date:
@@ -197,7 +211,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             return (null, DocumentState.MatchesBuildOutput);
                         }
                     }
-
                     break;
             }
 
@@ -216,31 +229,49 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var sourceTextVersion = (committedDocument == null) ? await document.GetTextVersionAsync(cancellationToken).ConfigureAwait(false) : default;
+            var sourceTextVersion =
+                (committedDocument == null)
+                    ? await document.GetTextVersionAsync(cancellationToken).ConfigureAwait(false)
+                    : default;
 
             // run file IO on a background thread:
-            var (matchingSourceText, pdbHasDocument) = await Task.Run(() =>
-            {
-                var compilationOutputs = _debuggingSession.GetCompilationOutputs(document.Project);
-                using var debugInfoReaderProvider = GetMethodDebugInfoReader(compilationOutputs, document.Project.Name);
-                if (debugInfoReaderProvider == null)
-                {
-                    return (null, null);
-                }
+            var (matchingSourceText, pdbHasDocument) = await Task.Run(
+                    () =>
+                    {
+                        var compilationOutputs = _debuggingSession.GetCompilationOutputs(
+                            document.Project
+                        );
+                        using var debugInfoReaderProvider = GetMethodDebugInfoReader(
+                            compilationOutputs,
+                            document.Project.Name
+                        );
+                        if (debugInfoReaderProvider == null)
+                        {
+                            return (null, null);
+                        }
 
-                var debugInfoReader = debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
+                        var debugInfoReader =
+                            debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
 
-                Contract.ThrowIfNull(document.FilePath);
-                return TryGetPdbMatchingSourceText(debugInfoReader, document.FilePath, sourceText.Encoding);
-            }, cancellationToken).ConfigureAwait(false);
+                        Contract.ThrowIfNull(document.FilePath);
+                        return TryGetPdbMatchingSourceText(
+                            debugInfoReader,
+                            document.FilePath,
+                            sourceText.Encoding
+                        );
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             lock (_guard)
             {
                 // only listed document states can be changed:
-                if (_documentState.TryGetValue(documentId, out documentState) &&
-                    documentState != DocumentState.OutOfSync &&
-                    documentState != DocumentState.Indeterminate)
-                {
+                if (
+                    _documentState.TryGetValue(documentId, out documentState)
+                    && documentState != DocumentState.OutOfSync
+                    && documentState != DocumentState.Indeterminate
+                ) {
                     return (document, documentState);
                 }
 
@@ -259,7 +290,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     // It could either be a newly added document or a design-time-only document (e.g. WPF .g.i.cs files).
                     // We can't distinguish between newly added document and newly added design-time-only document.
                     matchingDocument = null;
-                    newState = (committedDocument != null) ? DocumentState.DesignTimeOnly : DocumentState.MatchesBuildOutput;
+                    newState =
+                        (committedDocument != null)
+                            ? DocumentState.DesignTimeOnly
+                            : DocumentState.MatchesBuildOutput;
                 }
                 else
                 {
@@ -267,27 +301,42 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     // Add the document to the committed solution with its current (possibly out-of-sync) text.
                     if (committedDocument == null)
                     {
-                        _solution = _solution.AddDocument(DocumentInfo.Create(
-                            documentId,
-                            name: document.Name,
-                            folders: document.Folders,
-                            sourceCodeKind: document.SourceCodeKind,
-                            loader: TextLoader.From(TextAndVersion.Create(sourceText, sourceTextVersion, document.Name)),
-                            filePath: document.FilePath,
-                            isGenerated: document.State.Attributes.IsGenerated,
-                            designTimeOnly: document.State.Attributes.DesignTimeOnly,
-                            documentServiceProvider: document.State.Services));
+                        _solution = _solution.AddDocument(
+                            DocumentInfo.Create(
+                                documentId,
+                                name: document.Name,
+                                folders: document.Folders,
+                                sourceCodeKind: document.SourceCodeKind,
+                                loader: TextLoader.From(
+                                    TextAndVersion.Create(
+                                        sourceText,
+                                        sourceTextVersion,
+                                        document.Name
+                                    )
+                                ),
+                                filePath: document.FilePath,
+                                isGenerated: document.State.Attributes.IsGenerated,
+                                designTimeOnly: document.State.Attributes.DesignTimeOnly,
+                                documentServiceProvider: document.State.Services
+                            )
+                        );
                     }
 
                     if (matchingSourceText != null)
                     {
-                        if (committedDocument != null && sourceText.ContentEquals(matchingSourceText))
-                        {
+                        if (
+                            committedDocument != null
+                            && sourceText.ContentEquals(matchingSourceText)
+                        ) {
                             matchingDocument = document;
                         }
                         else
                         {
-                            _solution = _solution.WithDocumentText(documentId, matchingSourceText, PreservationMode.PreserveValue);
+                            _solution = _solution.WithDocumentText(
+                                documentId,
+                                matchingSourceText,
+                                PreservationMode.PreserveValue
+                            );
                             matchingDocument = _solution.GetDocument(documentId);
                         }
 
@@ -305,60 +354,84 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        internal static async Task<IEnumerable<KeyValuePair<DocumentId, CommittedSolution.DocumentState>>> GetMatchingDocumentsAsync(Solution solution, Func<Project, CompilationOutputs> compilationOutputsProvider, CancellationToken cancellationToken)
-        {
-            var projectTasks = solution.Projects.Select(async project =>
-            {
-                using var debugInfoReaderProvider = GetMethodDebugInfoReader(compilationOutputsProvider(project), project.Name);
-                if (debugInfoReaderProvider == null)
+        internal static async Task<
+            IEnumerable<KeyValuePair<DocumentId, CommittedSolution.DocumentState>>
+        > GetMatchingDocumentsAsync(
+            Solution solution,
+            Func<Project, CompilationOutputs> compilationOutputsProvider,
+            CancellationToken cancellationToken
+        ) {
+            var projectTasks = solution.Projects.Select(
+                async project =>
                 {
-                    return Array.Empty<DocumentId?>();
-                }
-
-                // Skip projects that do not support Roslyn EnC (e.g. F#, etc).
-                // Source files of these do not even need to be captured in the solution snapshot.
-                if (!EditAndContinueWorkspaceService.SupportsEditAndContinue(project))
-                {
-                    return Array.Empty<DocumentId?>();
-                }
-
-                var debugInfoReader = debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
-
-                var documentTasks = project.State.DocumentStates.States.Select(async documentState =>
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    if (EditAndContinueWorkspaceService.SupportsEditAndContinue(documentState))
+                    using var debugInfoReaderProvider = GetMethodDebugInfoReader(
+                        compilationOutputsProvider(project),
+                        project.Name
+                    );
+                    if (debugInfoReaderProvider == null)
                     {
-                        var sourceFilePath = documentState.FilePath;
-                        Contract.ThrowIfNull(sourceFilePath);
-
-                        // Hydrate the solution snapshot with the content of the file.
-                        // It's important to do this before we start watching for changes so that we have a baseline we can compare future snapshots to.
-                        var sourceText = await documentState.GetTextAsync(cancellationToken).ConfigureAwait(false);
-
-                        // TODO: https://github.com/dotnet/roslyn/issues/51993
-                        // avoid rereading the file in common case - the workspace should create source texts with the right checksum algorithm and encoding
-                        var (source, hasDocument) = TryGetPdbMatchingSourceText(debugInfoReader, sourceFilePath, sourceText.Encoding);
-                        if (source != null)
-                        {
-                            return documentState.Id;
-                        }
+                        return Array.Empty<DocumentId?>();
                     }
 
-                    return null;
-                });
+                    // Skip projects that do not support Roslyn EnC (e.g. F#, etc).
+                    // Source files of these do not even need to be captured in the solution snapshot.
+                    if (!EditAndContinueWorkspaceService.SupportsEditAndContinue(project))
+                    {
+                        return Array.Empty<DocumentId?>();
+                    }
 
-                return await Task.WhenAll(documentTasks).ConfigureAwait(false);
-            });
+                    var debugInfoReader =
+                        debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
+
+                    var documentTasks = project.State.DocumentStates.States.Select(
+                        async documentState =>
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+
+                            if (
+                                EditAndContinueWorkspaceService.SupportsEditAndContinue(
+                                    documentState
+                                )
+                            ) {
+                                var sourceFilePath = documentState.FilePath;
+                                Contract.ThrowIfNull(sourceFilePath);
+
+                                // Hydrate the solution snapshot with the content of the file.
+                                // It's important to do this before we start watching for changes so that we have a baseline we can compare future snapshots to.
+                                var sourceText = await documentState.GetTextAsync(cancellationToken)
+                                    .ConfigureAwait(false);
+
+                                // TODO: https://github.com/dotnet/roslyn/issues/51993
+                                // avoid rereading the file in common case - the workspace should create source texts with the right checksum algorithm and encoding
+                                var (source, hasDocument) = TryGetPdbMatchingSourceText(
+                                    debugInfoReader,
+                                    sourceFilePath,
+                                    sourceText.Encoding
+                                );
+                                if (source != null)
+                                {
+                                    return documentState.Id;
+                                }
+                            }
+
+                            return null;
+                        }
+                    );
+
+                    return await Task.WhenAll(documentTasks).ConfigureAwait(false);
+                }
+            );
 
             var documentIdArrays = await Task.WhenAll(projectTasks).ConfigureAwait(false);
 
-            return documentIdArrays.SelectMany(ids => ids.WhereNotNull()).Select(id => KeyValuePairUtil.Create(id, DocumentState.MatchesBuildOutput));
+            return documentIdArrays.SelectMany(ids => ids.WhereNotNull())
+                .Select(id => KeyValuePairUtil.Create(id, DocumentState.MatchesBuildOutput));
         }
 
-        private static DebugInformationReaderProvider? GetMethodDebugInfoReader(CompilationOutputs compilationOutputs, string projectName)
-        {
+        private static DebugInformationReaderProvider? GetMethodDebugInfoReader(
+            CompilationOutputs compilationOutputs,
+            string projectName
+        ) {
             DebugInformationReaderProvider? debugInfoReaderProvider;
             try
             {
@@ -366,14 +439,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 if (debugInfoReaderProvider == null)
                 {
-                    EditAndContinueWorkspaceService.Log.Write("Source file of project '{0}' doesn't match output PDB: PDB '{1}' not found", projectName, compilationOutputs.PdbDisplayPath);
+                    EditAndContinueWorkspaceService.Log.Write(
+                        "Source file of project '{0}' doesn't match output PDB: PDB '{1}' not found",
+                        projectName,
+                        compilationOutputs.PdbDisplayPath
+                    );
                 }
 
                 return debugInfoReaderProvider;
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write("Source file of project '{0}' doesn't match output PDB: error opening PDB '{1}': {2}", projectName, compilationOutputs.PdbDisplayPath, e.Message);
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Source file of project '{0}' doesn't match output PDB: error opening PDB '{1}': {2}",
+                    projectName,
+                    compilationOutputs.PdbDisplayPath,
+                    e.Message
+                );
                 return null;
             }
         }
@@ -386,9 +468,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        private static (SourceText? Source, bool? HasDocument) TryGetPdbMatchingSourceText(EditAndContinueMethodDebugInfoReader debugInfoReader, string sourceFilePath, Encoding? encoding)
-        {
-            var hasDocument = TryReadSourceFileChecksumFromPdb(debugInfoReader, sourceFilePath, out var symChecksum, out var algorithm);
+        private static (SourceText? Source, bool? HasDocument) TryGetPdbMatchingSourceText(
+            EditAndContinueMethodDebugInfoReader debugInfoReader,
+            string sourceFilePath,
+            Encoding? encoding
+        ) {
+            var hasDocument = TryReadSourceFileChecksumFromPdb(
+                debugInfoReader,
+                sourceFilePath,
+                out var symChecksum,
+                out var algorithm
+            );
             if (hasDocument != true)
             {
                 return (Source: null, hasDocument);
@@ -396,13 +486,22 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             try
             {
-                using var fileStream = new FileStream(sourceFilePath, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete);
+                using var fileStream = new FileStream(
+                    sourceFilePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read | FileShare.Delete
+                );
 
                 // We must use the encoding of the document as determined by the IDE (the editor).
-                // This might differ from the encoding that the compiler chooses, so if we just relied on the compiler we 
-                // might end up updating the committed solution with a document that has a different encoding than 
+                // This might differ from the encoding that the compiler chooses, so if we just relied on the compiler we
+                // might end up updating the committed solution with a document that has a different encoding than
                 // the one that's in the workspace, resulting in false document changes when we compare the two.
-                var sourceText = SourceText.From(fileStream, encoding, checksumAlgorithm: algorithm);
+                var sourceText = SourceText.From(
+                    fileStream,
+                    encoding,
+                    checksumAlgorithm: algorithm
+                );
                 var fileChecksum = sourceText.GetChecksum();
 
                 if (fileChecksum.SequenceEqual(symChecksum))
@@ -410,12 +509,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return (sourceText, hasDocument);
                 }
 
-                EditAndContinueWorkspaceService.Log.Write("Checksum differs for source file '{0}'", sourceFilePath);
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Checksum differs for source file '{0}'",
+                    sourceFilePath
+                );
                 return (Source: null, hasDocument);
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write("Error calculating checksum for source file '{0}': '{1}'", sourceFilePath, e.Message);
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Error calculating checksum for source file '{0}': '{1}'",
+                    sourceFilePath,
+                    e.Message
+                );
                 return (Source: null, HasDocument: null);
             }
         }
@@ -426,16 +532,28 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// False if the document is not found in the PDB.
         /// Null if it can't be determined because the PDB is not available or an error occurred while reading the PDB.
         /// </summary>
-        private static bool? TryReadSourceFileChecksumFromPdb(EditAndContinueMethodDebugInfoReader debugInfoReader, string sourceFilePath, out ImmutableArray<byte> checksum, out SourceHashAlgorithm algorithm)
-        {
+        private static bool? TryReadSourceFileChecksumFromPdb(
+            EditAndContinueMethodDebugInfoReader debugInfoReader,
+            string sourceFilePath,
+            out ImmutableArray<byte> checksum,
+            out SourceHashAlgorithm algorithm
+        ) {
             checksum = default;
             algorithm = default;
 
             try
             {
-                if (!debugInfoReader.TryGetDocumentChecksum(sourceFilePath, out checksum, out var algorithmId))
-                {
-                    EditAndContinueWorkspaceService.Log.Write("Source '{0}' doesn't match output PDB: no document", sourceFilePath);
+                if (
+                    !debugInfoReader.TryGetDocumentChecksum(
+                        sourceFilePath,
+                        out checksum,
+                        out var algorithmId
+                    )
+                ) {
+                    EditAndContinueWorkspaceService.Log.Write(
+                        "Source '{0}' doesn't match output PDB: no document",
+                        sourceFilePath
+                    );
                     return false;
                 }
 
@@ -443,14 +561,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 if (algorithm == SourceHashAlgorithm.None)
                 {
                     // This can only happen if the PDB was post-processed by a misbehaving tool.
-                    EditAndContinueWorkspaceService.Log.Write("Source '{0}' doesn't match PDB: unknown checksum alg", sourceFilePath);
+                    EditAndContinueWorkspaceService.Log.Write(
+                        "Source '{0}' doesn't match PDB: unknown checksum alg",
+                        sourceFilePath
+                    );
                 }
 
                 return true;
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write("Source '{0}' doesn't match output PDB: error reading symbols: {1}", sourceFilePath, e.Message);
+                EditAndContinueWorkspaceService.Log.Write(
+                    "Source '{0}' doesn't match output PDB: error reading symbols: {1}",
+                    sourceFilePath,
+                    e.Message
+                );
             }
 
             return null;

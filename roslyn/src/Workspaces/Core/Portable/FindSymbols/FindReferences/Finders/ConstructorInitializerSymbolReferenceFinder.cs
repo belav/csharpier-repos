@@ -12,83 +12,118 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal class ConstructorInitializerSymbolReferenceFinder : AbstractReferenceFinder<IMethodSymbol>
+    internal class ConstructorInitializerSymbolReferenceFinder
+        : AbstractReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind == MethodKind.Constructor;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.Constructor;
 
         protected override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
-            return FindDocumentsAsync(project, documents, async (d, c) =>
-            {
-                var index = await SyntaxTreeIndex.GetRequiredIndexAsync(d, c).ConfigureAwait(false);
-                if (index.ContainsBaseConstructorInitializer)
+            CancellationToken cancellationToken
+        ) {
+            return FindDocumentsAsync(
+                project,
+                documents,
+                async (d, c) =>
                 {
-                    return true;
-                }
-
-                if (index.ProbablyContainsIdentifier(symbol.ContainingType.Name))
-                {
-                    if (index.ContainsThisConstructorInitializer)
+                    var index = await SyntaxTreeIndex.GetRequiredIndexAsync(d, c)
+                        .ConfigureAwait(false);
+                    if (index.ContainsBaseConstructorInitializer)
                     {
                         return true;
                     }
-                    else if (project.Language == LanguageNames.VisualBasic && index.ProbablyContainsIdentifier("New"))
-                    {
-                        // "New" can be explicitly accessed in xml doc comments to reference a constructor.
-                        return true;
-                    }
-                }
 
-                return false;
-            }, cancellationToken);
+                    if (index.ProbablyContainsIdentifier(symbol.ContainingType.Name))
+                    {
+                        if (index.ContainsThisConstructorInitializer)
+                        {
+                            return true;
+                        }
+                        else if (
+                            project.Language == LanguageNames.VisualBasic
+                            && index.ProbablyContainsIdentifier("New")
+                        ) {
+                            // "New" can be explicitly accessed in xml doc comments to reference a constructor.
+                            return true;
+                        }
+                    }
+
+                    return false;
+                },
+                cancellationToken
+            );
         }
 
-        protected override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             IMethodSymbol methodSymbol,
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var typeName = methodSymbol.ContainingType.Name;
 
-            var tokens = await document.GetConstructorInitializerTokensAsync(semanticModel, cancellationToken).ConfigureAwait(false);
+            var tokens = await document.GetConstructorInitializerTokensAsync(
+                    semanticModel,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (semanticModel.Language == LanguageNames.VisualBasic)
             {
-                tokens = tokens.Concat(await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
-                    document, semanticModel, "New", cancellationToken).ConfigureAwait(false)).Distinct();
+                tokens = tokens.Concat(
+                        await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
+                                document,
+                                semanticModel,
+                                "New",
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
+                    .Distinct();
             }
 
             return await FindReferencesInTokensAsync(
-                 methodSymbol,
-                 document,
-                 semanticModel,
-                 tokens,
-                 TokensMatch,
-                 cancellationToken).ConfigureAwait(false);
+                    methodSymbol,
+                    document,
+                    semanticModel,
+                    tokens,
+                    TokensMatch,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // local functions
             bool TokensMatch(SyntaxToken t)
             {
                 if (syntaxFactsService.IsBaseConstructorInitializer(t))
                 {
-                    var containingType = semanticModel.GetEnclosingNamedType(t.SpanStart, cancellationToken);
-                    return containingType != null && containingType.BaseType != null && containingType.BaseType.Name == typeName;
+                    var containingType = semanticModel.GetEnclosingNamedType(
+                        t.SpanStart,
+                        cancellationToken
+                    );
+                    return containingType != null
+                        && containingType.BaseType != null
+                        && containingType.BaseType.Name == typeName;
                 }
                 else if (syntaxFactsService.IsThisConstructorInitializer(t))
                 {
-                    var containingType = semanticModel.GetEnclosingNamedType(t.SpanStart, cancellationToken);
+                    var containingType = semanticModel.GetEnclosingNamedType(
+                        t.SpanStart,
+                        cancellationToken
+                    );
                     return containingType != null && containingType.Name == typeName;
                 }
-                else if (semanticModel.Language == LanguageNames.VisualBasic && t.IsPartOfStructuredTrivia())
-                {
+                else if (
+                    semanticModel.Language == LanguageNames.VisualBasic
+                    && t.IsPartOfStructuredTrivia()
+                ) {
                     return true;
                 }
 

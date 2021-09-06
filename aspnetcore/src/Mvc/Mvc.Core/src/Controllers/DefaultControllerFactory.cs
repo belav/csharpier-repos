@@ -29,8 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         /// </param>
         public DefaultControllerFactory(
             IControllerActivator controllerActivator,
-            IEnumerable<IControllerPropertyActivator> propertyActivators)
-        {
+            IEnumerable<IControllerPropertyActivator> propertyActivators
+        ) {
             if (controllerActivator == null)
             {
                 throw new ArgumentNullException(nameof(controllerActivator));
@@ -55,9 +55,12 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
             if (context.ActionDescriptor == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(ControllerContext.ActionDescriptor),
-                    nameof(ControllerContext)));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(ControllerContext.ActionDescriptor),
+                        nameof(ControllerContext)
+                    )
+                );
             }
 
             var controller = _controllerActivator.Create(context);

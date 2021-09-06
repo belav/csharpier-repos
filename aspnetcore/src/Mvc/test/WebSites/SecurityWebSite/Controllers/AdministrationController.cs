@@ -24,8 +24,11 @@ namespace SecurityWebSite.Controllers
         [Authorize(AuthenticationSchemes = "Cookie2")]
         public IActionResult EitherCookie()
         {
-            var countEvaluator = (CountingPolicyEvaluator)HttpContext.RequestServices.GetRequiredService<IPolicyEvaluator>();
-            return Content("Administration.EitherCookie:AuthorizeCount="+countEvaluator.AuthorizeCount);
+            var countEvaluator =
+                (CountingPolicyEvaluator)HttpContext.RequestServices.GetRequiredService<IPolicyEvaluator>();
+            return Content(
+                "Administration.EitherCookie:AuthorizeCount=" + countEvaluator.AuthorizeCount
+            );
         }
 
         [AllowAnonymous]
@@ -37,9 +40,11 @@ namespace SecurityWebSite.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> SignInCookie2()
         {
-            await HttpContext.SignInAsync("Cookie2", new ClaimsPrincipal(new ClaimsIdentity("Cookie2")));
+            await HttpContext.SignInAsync(
+                "Cookie2",
+                new ClaimsPrincipal(new ClaimsIdentity("Cookie2"))
+            );
             return Content("SignInCookie2");
         }
-
     }
 }

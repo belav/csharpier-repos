@@ -22,12 +22,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The type mapping to be used. </returns>
         public static RelationalTypeMapping GetMappingForValue(
             this IRelationalTypeMappingSource? typeMappingSource,
-            object? value)
-            => value == null
-                || value == DBNull.Value
-                || typeMappingSource == null
-                    ? RelationalTypeMapping.NullMapping
-                    : typeMappingSource.GetMapping(value.GetType());
+            object? value
+        ) =>
+            value == null || value == DBNull.Value || typeMappingSource == null
+                ? RelationalTypeMapping.NullMapping
+                : typeMappingSource.GetMapping(value.GetType());
 
         /// <summary>
         ///     Gets the relational database type for a given property, throwing if no mapping is found.
@@ -37,8 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The type mapping to be used. </returns>
         public static RelationalTypeMapping GetMapping(
             this IRelationalTypeMappingSource typeMappingSource,
-            IProperty property)
-        {
+            IProperty property
+        ) {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(property, nameof(property));
 
@@ -53,7 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 RelationalStrings.UnsupportedPropertyType(
                     property.DeclaringEntityType.DisplayName(),
                     property.Name,
-                    property.ClrType.ShortDisplayName()));
+                    property.ClrType.ShortDisplayName()
+                )
+            );
         }
 
         /// <summary>
@@ -64,8 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The type mapping to be used. </returns>
         public static RelationalTypeMapping GetMapping(
             this IRelationalTypeMappingSource typeMappingSource,
-            Type clrType)
-        {
+            Type clrType
+        ) {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(clrType, nameof(clrType));
 
@@ -75,7 +76,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 return mapping;
             }
 
-            throw new InvalidOperationException(RelationalStrings.UnsupportedType(clrType.ShortDisplayName()));
+            throw new InvalidOperationException(
+                RelationalStrings.UnsupportedType(clrType.ShortDisplayName())
+            );
         }
 
         /// <summary>
@@ -91,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The type mapping to be used. </returns>
         public static RelationalTypeMapping GetMapping(
             this IRelationalTypeMappingSource typeMappingSource,
-            string typeName)
-        {
+            string typeName
+        ) {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             // Note: Empty string is allowed for store type name because SQLite
             Check.NotNull(typeName, nameof(typeName));

@@ -21,11 +21,20 @@ namespace Microsoft.Extensions.DependencyInjection
         public static ISignalRServerBuilder AddSignalRCore(this IServiceCollection services)
         {
             services.TryAddSingleton<SignalRCoreMarkerService>();
-            services.TryAddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultHubLifetimeManager<>));
-            services.TryAddSingleton(typeof(IHubProtocolResolver), typeof(DefaultHubProtocolResolver));
+            services.TryAddSingleton(
+                typeof(HubLifetimeManager<>),
+                typeof(DefaultHubLifetimeManager<>)
+            );
+            services.TryAddSingleton(
+                typeof(IHubProtocolResolver),
+                typeof(DefaultHubProtocolResolver)
+            );
             services.TryAddSingleton(typeof(IHubContext<>), typeof(HubContext<>));
-            services.TryAddSingleton(typeof(IHubContext<,>), typeof(HubContext<,>));
-            services.TryAddSingleton(typeof(HubConnectionHandler<>), typeof(HubConnectionHandler<>));
+            services.TryAddSingleton(typeof(IHubContext<, >), typeof(HubContext<, >));
+            services.TryAddSingleton(
+                typeof(HubConnectionHandler<>),
+                typeof(HubConnectionHandler<>)
+            );
             services.TryAddSingleton(typeof(IUserIdProvider), typeof(DefaultUserIdProvider));
             services.TryAddSingleton(typeof(HubDispatcher<>), typeof(DefaultHubDispatcher<>));
             services.TryAddScoped(typeof(IHubActivator<>), typeof(DefaultHubActivator<>));

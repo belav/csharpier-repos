@@ -30,11 +30,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             var taskItem = new Mock<ITaskItem>(MockBehavior.Strict);
             taskItem.Setup(x => x.ItemSpec).Returns(fileName);
-            taskItem.Setup(x => x.GetMetadata(It.IsAny<string>())).Returns<string>(s => s switch
-            {
-                "FullPath" => fileName,
-                _ => metadata.ContainsKey(s) ? metadata[s] : string.Empty
-            });
+            taskItem.Setup(x => x.GetMetadata(It.IsAny<string>()))
+                .Returns<string>(
+                    s =>
+                        s switch
+                        {
+                            "FullPath" => fileName,
+                            _ => metadata.ContainsKey(s) ? metadata[s] : string.Empty
+                        }
+                );
             return taskItem.Object;
         }
     }

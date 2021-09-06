@@ -17,43 +17,68 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal sealed class ServiceDescriptor : ServiceJsonRpcDescriptor
     {
-        private static readonly JsonRpcTargetOptions s_jsonRpcTargetOptions = new()
-        {
-            // Do not allow JSON-RPC to automatically subscribe to events and remote their calls.
-            NotifyClientOfEvents = false,
-
-            // Only allow public methods (may be on internal types) to be invoked remotely.
-            AllowNonPublicInvocation = false
-        };
+        private static readonly JsonRpcTargetOptions s_jsonRpcTargetOptions =
+            new()
+            {
+                // Do not allow JSON-RPC to automatically subscribe to events and remote their calls.
+                NotifyClientOfEvents = false,
+                // Only allow public methods (may be on internal types) to be invoked remotely.
+                AllowNonPublicInvocation = false
+            };
 
         private readonly Func<string, string> _featureDisplayNameProvider;
         private readonly RemoteSerializationOptions _serializationOptions;
 
-        private ServiceDescriptor(ServiceMoniker serviceMoniker, RemoteSerializationOptions serializationOptions, Func<string, string> displayNameProvider, Type? clientInterface)
-            : base(serviceMoniker, clientInterface, serializationOptions.Formatter, serializationOptions.MessageDelimiters, serializationOptions.MultiplexingStreamOptions)
-        {
+        private ServiceDescriptor(
+            ServiceMoniker serviceMoniker,
+            RemoteSerializationOptions serializationOptions,
+            Func<string, string> displayNameProvider,
+            Type? clientInterface
+        ) : base(
+            serviceMoniker,
+            clientInterface,
+            serializationOptions.Formatter,
+            serializationOptions.MessageDelimiters,
+            serializationOptions.MultiplexingStreamOptions
+        ) {
             _featureDisplayNameProvider = displayNameProvider;
             _serializationOptions = serializationOptions;
         }
 
-        private ServiceDescriptor(ServiceDescriptor copyFrom)
-          : base(copyFrom)
+        private ServiceDescriptor(ServiceDescriptor copyFrom) : base(copyFrom)
         {
             _featureDisplayNameProvider = copyFrom._featureDisplayNameProvider;
             _serializationOptions = copyFrom._serializationOptions;
         }
 
-        public static ServiceDescriptor CreateRemoteServiceDescriptor(string serviceName, RemoteSerializationOptions options, Func<string, string> featureDisplayNameProvider, Type? clientInterface)
-            => new(new ServiceMoniker(serviceName), options, featureDisplayNameProvider, clientInterface);
+        public static ServiceDescriptor CreateRemoteServiceDescriptor(
+            string serviceName,
+            RemoteSerializationOptions options,
+            Func<string, string> featureDisplayNameProvider,
+            Type? clientInterface
+        ) =>
+            new(
+                new ServiceMoniker(serviceName),
+                options,
+                featureDisplayNameProvider,
+                clientInterface
+            );
 
-        public static ServiceDescriptor CreateInProcServiceDescriptor(string serviceName, Func<string, string> featureDisplayNameProvider)
-            => new(new ServiceMoniker(serviceName), RemoteSerializationOptions.Default, featureDisplayNameProvider, clientInterface: null);
+        public static ServiceDescriptor CreateInProcServiceDescriptor(
+            string serviceName,
+            Func<string, string> featureDisplayNameProvider
+        ) =>
+            new(
+                new ServiceMoniker(serviceName),
+                RemoteSerializationOptions.Default,
+                featureDisplayNameProvider,
+                clientInterface: null
+            );
 
-        protected override ServiceRpcDescriptor Clone()
-            => new ServiceDescriptor(this);
+        protected override ServiceRpcDescriptor Clone() => new ServiceDescriptor(this);
 
-        protected override IJsonRpcMessageFormatter CreateFormatter()
-            => _serializationOptions.ConfigureFormatter(base.CreateFormatter());
+        protected override IJsonRpcMessageFormatter CreateFormatter() =>
+            _serializationOptions.ConfigureFormatter(base.CreateFormatter());
 
         protected override JsonRpcConnection CreateConnection(JsonRpc jsonRpc)
         {
@@ -63,7 +88,6 @@ namespace Microsoft.CodeAnalysis.Remote
             return connection;
         }
 
-        internal string GetFeatureDisplayName()
-            => _featureDisplayNameProvider(Moniker.Name);
+        internal string GetFeatureDisplayName() => _featureDisplayNameProvider(Moniker.Name);
     }
 }

@@ -17,9 +17,8 @@ namespace Microsoft.Extensions.Logging.Test
             var expected = typeof(TestType).FullName;
 
             var factory = new Mock<ILoggerFactory>();
-            factory.Setup(f => f.CreateLogger(
-                It.IsAny<string>()))
-            .Returns(new Mock<ILogger>().Object);
+            factory.Setup(f => f.CreateLogger(It.IsAny<string>()))
+                .Returns(new Mock<ILogger>().Object);
 
             // Act
             factory.Object.CreateLogger<TestType>();
@@ -34,9 +33,18 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var factory = new Mock<ILoggerFactory>();
-            factory.Setup(f => f.CreateLogger(It.Is<string>(
-                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType>"))))
-            .Returns(new Mock<ILogger>().Object);
+            factory.Setup(
+                    f =>
+                        f.CreateLogger(
+                            It.Is<string>(
+                                x =>
+                                    x.Equals(
+                                        "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType>"
+                                    )
+                            )
+                        )
+                )
+                .Returns(new Mock<ILogger>().Object);
 
             var logger = factory.Object.CreateLogger<GenericClass<TestType>>();
 
@@ -50,9 +58,18 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var factory = new Mock<ILoggerFactory>();
-            factory.Setup(f => f.CreateLogger(It.Is<string>(
-                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType, Microsoft.Extensions.Logging.Test.SecondTestType>"))))
-            .Returns(new Mock<ILogger>().Object);
+            factory.Setup(
+                    f =>
+                        f.CreateLogger(
+                            It.Is<string>(
+                                x =>
+                                    x.Equals(
+                                        "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType, Microsoft.Extensions.Logging.Test.SecondTestType>"
+                                    )
+                            )
+                        )
+                )
+                .Returns(new Mock<ILogger>().Object);
 
             var logger = factory.Object.CreateLogger<GenericClass<TestType, SecondTestType>>();
 
@@ -82,7 +99,8 @@ namespace Microsoft.Extensions.Logging.Test
         public void CreatesLoggerName_OnNestedGenericType_CreatesWithoutGenericTypeArgumentsInformation()
         {
             // Arrange
-            var fullName = typeof(GenericClass<GenericClass<string>>).GetGenericTypeDefinition().FullName;
+            var fullName =
+                typeof(GenericClass<GenericClass<string>>).GetGenericTypeDefinition().FullName;
             var fullNameWithoutBacktick = fullName.Substring(0, fullName.IndexOf('`'));
             var testSink = new TestSink();
             var factory = new TestLoggerFactory(testSink, enabled: true);
@@ -114,7 +132,6 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(fullNameWithoutBacktick, sinkWrite.LoggerName);
         }
 
-
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/34091", TestRuntimes.Mono)]
         public void LoggerFactoryCreate_CallsCreateWithCorrectName()
@@ -123,9 +140,8 @@ namespace Microsoft.Extensions.Logging.Test
             var expected = typeof(TestType).FullName;
 
             var factory = new Mock<ILoggerFactory>();
-            factory.Setup(f => f.CreateLogger(
-                It.IsAny<string>()))
-            .Returns(new Mock<ILogger>().Object);
+            factory.Setup(f => f.CreateLogger(It.IsAny<string>()))
+                .Returns(new Mock<ILogger>().Object);
 
             // Act
             factory.Object.CreateLogger(typeof(TestType));
@@ -140,9 +156,15 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var factory = new Mock<ILoggerFactory>();
-            factory.Setup(f => f.CreateLogger(It.Is<string>(
-                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass"))))
-            .Returns(new Mock<ILogger>().Object);
+            factory.Setup(
+                    f =>
+                        f.CreateLogger(
+                            It.Is<string>(
+                                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
+                            )
+                        )
+                )
+                .Returns(new Mock<ILogger>().Object);
 
             var logger = factory.Object.CreateLogger(typeof(GenericClass<TestType>));
 
@@ -156,11 +178,19 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var factory = new Mock<ILoggerFactory>();
-            factory.Setup(f => f.CreateLogger(It.Is<string>(
-                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass"))))
-            .Returns(new Mock<ILogger>().Object);
+            factory.Setup(
+                    f =>
+                        f.CreateLogger(
+                            It.Is<string>(
+                                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
+                            )
+                        )
+                )
+                .Returns(new Mock<ILogger>().Object);
 
-            var logger = factory.Object.CreateLogger(typeof(GenericClass<TestType, SecondTestType>));
+            var logger = factory.Object.CreateLogger(
+                typeof(GenericClass<TestType, SecondTestType>)
+            );
 
             // Assert
             Assert.NotNull(logger);
@@ -177,7 +207,9 @@ namespace Microsoft.Extensions.Logging.Test
         // intentionally holds nothing
     }
 
-    internal class GenericClass<X, Y> where X : class where Y : class
+    internal class GenericClass<X, Y>
+        where X : class
+        where Y : class
     {
         // intentionally holds nothing
     }

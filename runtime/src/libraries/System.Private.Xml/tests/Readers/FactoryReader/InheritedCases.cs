@@ -34,8 +34,6 @@ namespace System.Xml.Tests
         }
     }
 
-
-
     ////////////////////////////////////////////////////////////////
     // FactoryReader factory
     //
@@ -93,8 +91,7 @@ namespace System.Xml.Tests
                 return reader;
             }
 
-            throw new
-                CTestFailedException("Factory Reader not created");
+            throw new CTestFailedException("Factory Reader not created");
         }
     }
 
@@ -178,7 +175,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "FactoryReader")]
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "FactoryReader"
+    )]
     internal class TCMoveToAttributeReader : TCMoveToAttribute
     {
     }
@@ -188,7 +188,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "FactoryReader")]
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "FactoryReader"
+    )]
     internal class TCGetAttributeNameReader : TCGetAttributeName
     {
     }

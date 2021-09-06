@@ -10,8 +10,12 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> NativeName_TestData()
         {
-            yield return new object[] { CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.NativeName };
-            
+            yield return new object[]
+            {
+                CultureInfo.CurrentCulture.Name,
+                CultureInfo.CurrentCulture.NativeName
+            };
+
             if (PlatformDetection.IsNotUsingLimitedCultures)
             {
                 yield return new object[] { "en-US", "English (United States)" };

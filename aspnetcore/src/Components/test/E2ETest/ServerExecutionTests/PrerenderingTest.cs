@@ -18,15 +18,14 @@ using Xunit.Abstractions;
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
 {
     [Collection("auth")] // Because auth uses cookies, this can't run in parallel with other auth tests
-    public class PrerenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<PrerenderedStartup>>
+    public class PrerenderingTest
+        : ServerTestBase<BasicTestAppServerSiteFixture<PrerenderedStartup>>
     {
         public PrerenderingTest(
             BrowserFixture browserFixture,
             BasicTestAppServerSiteFixture<PrerenderedStartup> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         [Fact]
         public void CanTransitionFromPrerenderedToInteractiveMode()
@@ -51,7 +50,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             Navigate("/prerendered/prerendered-async-disposal");
 
             // Prerendered output shows "not connected"
-            Browser.Equal("After async disposal", () => Browser.Exists(By.Id("disposal-message")).Text);
+            Browser.Equal(
+                "After async disposal",
+                () => Browser.Exists(By.Id("disposal-message")).Text
+            );
         }
 
         [Fact]
@@ -61,13 +63,22 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
 
             // Prerendered output can't use JSInterop
             Browser.Equal("No value yet", () => Browser.Exists(By.Id("val-get-by-interop")).Text);
-            Browser.Equal(string.Empty, () => Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value"));
+            Browser.Equal(
+                string.Empty,
+                () => Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value")
+            );
 
             BeginInteractivity();
 
             // Once connected, we can
-            Browser.Equal("Hello from interop call", () => Browser.Exists(By.Id("val-get-by-interop")).Text);
-            Browser.Equal("Hello from interop call", () => Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value"));
+            Browser.Equal(
+                "Hello from interop call",
+                () => Browser.Exists(By.Id("val-get-by-interop")).Text
+            );
+            Browser.Equal(
+                "Hello from interop call",
+                () => Browser.Exists(By.Id("val-set-by-interop")).GetAttribute("value")
+            );
         }
 
         [Fact]
@@ -79,7 +90,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
 
             button.Click();
 
-            AssertLogDoesNotContainCriticalMessages("Could not load file or assembly 'Newtonsoft.Json");
+            AssertLogDoesNotContainCriticalMessages(
+                "Could not load file or assembly 'Newtonsoft.Json"
+            );
         }
 
         [Fact]
@@ -93,24 +106,29 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             Navigate(url);
             Browser.Equal(
                 _serverFixture.RootUri + urlWithoutHash,
-                () => Browser.Exists(By.TagName("strong")).Text);
+                () => Browser.Exists(By.TagName("strong")).Text
+            );
 
             // Once connected, you do have access to the full URL
             BeginInteractivity();
             Browser.Equal(
                 _serverFixture.RootUri + url,
-                () => Browser.Exists(By.TagName("strong")).Text);
+                () => Browser.Exists(By.TagName("strong")).Text
+            );
         }
 
         [Theory]
         [InlineData("base/relative", "prerendered/base/relative")]
         [InlineData("/root/relative", "/root/relative")]
         [InlineData("http://absolute/url", "http://absolute/url")]
-        public async Task CanRedirectDuringPrerendering(string destinationParam, string expectedRedirectionLocation)
-        {
+        public async Task CanRedirectDuringPrerendering(
+            string destinationParam,
+            string expectedRedirectionLocation
+        ) {
             var requestUri = new Uri(
                 _serverFixture.RootUri,
-                "prerendered/prerendered-redirection?destination=" + destinationParam);
+                "prerendered/prerendered-redirection?destination=" + destinationParam
+            );
 
             var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
             var response = await httpClient.GetAsync(requestUri);
@@ -125,17 +143,25 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
         [InlineData(null, "Bert")]
         [InlineData("Bert", null)]
         [InlineData("Bert", "Treb")]
-        public void CanAccessAuthenticationStateDuringStaticPrerendering(string initialUsername, string interactiveUsername)
-        {
+        public void CanAccessAuthenticationStateDuringStaticPrerendering(
+            string initialUsername,
+            string interactiveUsername
+        ) {
             // See that the authentication state is usable during the initial prerendering
             SignInAs(initialUsername, null);
             Navigate("/prerendered/prerendered-transition");
-            Browser.Equal($"Hello, {initialUsername ?? "anonymous"}!", () => Browser.Exists(By.TagName("h1")).Text);
+            Browser.Equal(
+                $"Hello, {initialUsername ?? "anonymous"}!",
+                () => Browser.Exists(By.TagName("h1")).Text
+            );
 
             // See that during connection, we update to whatever the latest authentication state now is
             SignInAs(interactiveUsername, null, useSeparateTab: true);
             BeginInteractivity();
-            Browser.Equal($"Hello, {interactiveUsername ?? "anonymous"}!", () => Browser.Exists(By.TagName("h1")).Text);
+            Browser.Equal(
+                $"Hello, {interactiveUsername ?? "anonymous"}!",
+                () => Browser.Exists(By.TagName("h1")).Text
+            );
         }
 
         private void BeginInteractivity()
@@ -148,15 +174,22 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             var log = Browser.Manage().Logs.GetLog(LogType.Browser);
             foreach (var message in messages)
             {
-                Assert.DoesNotContain(log, entry =>
-                {
-                    return entry.Level == LogLevel.Severe
-                    && entry.Message.Contains(message);
-                });
+                Assert.DoesNotContain(
+                    log,
+                    entry =>
+                    {
+                        return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+                    }
+                );
             }
         }
 
         private void SignInAs(string userName, string roles, bool useSeparateTab = false) =>
-            Browser.SignInAs(new Uri(_serverFixture.RootUri, "/prerendered/"), userName, roles, useSeparateTab);
+            Browser.SignInAs(
+                new Uri(_serverFixture.RootUri, "/prerendered/"),
+                userName,
+                roles,
+                useSeparateTab
+            );
     }
 }

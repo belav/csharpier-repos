@@ -59,14 +59,16 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public T Value { get; set; }
 
         object? ICodeStyleOption.Value => this.Value;
-        ICodeStyleOption ICodeStyleOption.WithValue(object value) => new CodeStyleOption2<T>((T)value, Notification);
-        ICodeStyleOption ICodeStyleOption.WithNotification(NotificationOption2 notification) => new CodeStyleOption2<T>(Value, notification);
+        ICodeStyleOption ICodeStyleOption.WithValue(object value) =>
+            new CodeStyleOption2<T>((T)value, Notification);
+        ICodeStyleOption ICodeStyleOption.WithNotification(NotificationOption2 notification) =>
+            new CodeStyleOption2<T>(Value, notification);
 
 #if CODE_STYLE
         ICodeStyleOption ICodeStyleOption.AsCodeStyleOption<TCodeStyleOption>() => this;
 #else
-        ICodeStyleOption ICodeStyleOption.AsCodeStyleOption<TCodeStyleOption>()
-            => this is TCodeStyleOption ? this : (ICodeStyleOption)new CodeStyleOption<T>(this);
+        ICodeStyleOption ICodeStyleOption.AsCodeStyleOption<TCodeStyleOption>() =>
+            this is TCodeStyleOption ? this : (ICodeStyleOption)new CodeStyleOption<T>(this);
         ICodeStyleOption ICodeStyleOption.AsPublicCodeStyleOption() => new CodeStyleOption<T>(this);
 #endif
 
@@ -79,11 +81,16 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         }
 
         public XElement ToXElement() =>
-            new("CodeStyleOption", // Ensure that we use "CodeStyleOption" as the name for back compat.
+            new(
+                "CodeStyleOption", // Ensure that we use "CodeStyleOption" as the name for back compat.
                 new XAttribute(nameof(SerializationVersion), SerializationVersion),
                 new XAttribute("Type", GetTypeNameForSerialization()),
                 new XAttribute(nameof(Value), GetValueForSerialization()),
-                new XAttribute(nameof(DiagnosticSeverity), Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden));
+                new XAttribute(
+                    nameof(DiagnosticSeverity),
+                    Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden
+                )
+            );
 
         private object GetValueForSerialization()
         {
@@ -148,16 +155,22 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             var parser = GetParser(typeAttribute.Value);
             var value = parser(valueAttribute.Value);
-            var severity = (DiagnosticSeverity)Enum.Parse(typeof(DiagnosticSeverity), severityAttribute.Value);
+            var severity = (DiagnosticSeverity)Enum.Parse(
+                typeof(DiagnosticSeverity),
+                severityAttribute.Value
+            );
 
-            return new CodeStyleOption2<T>(value, severity switch
-            {
-                DiagnosticSeverity.Hidden => NotificationOption2.Silent,
-                DiagnosticSeverity.Info => NotificationOption2.Suggestion,
-                DiagnosticSeverity.Warning => NotificationOption2.Warning,
-                DiagnosticSeverity.Error => NotificationOption2.Error,
-                _ => throw new ArgumentException(nameof(element)),
-            });
+            return new CodeStyleOption2<T>(
+                value,
+                severity switch
+                {
+                    DiagnosticSeverity.Hidden => NotificationOption2.Silent,
+                    DiagnosticSeverity.Info => NotificationOption2.Suggestion,
+                    DiagnosticSeverity.Warning => NotificationOption2.Warning,
+                    DiagnosticSeverity.Error => NotificationOption2.Error,
+                    _ => throw new ArgumentException(nameof(element)),
+                }
+            );
         }
 
         public bool ShouldReuseInSerialization => false;
@@ -165,7 +178,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public void WriteTo(ObjectWriter writer)
         {
             writer.WriteValue(GetValueForSerialization());
-            writer.WriteInt32((int)(Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden));
+            writer.WriteInt32(
+                (int)(Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden)
+            );
         }
 
         public static CodeStyleOption2<object> ReadFrom(ObjectReader reader)
@@ -179,17 +194,19 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     DiagnosticSeverity.Warning => NotificationOption2.Warning,
                     DiagnosticSeverity.Error => NotificationOption2.Error,
                     var v => throw ExceptionUtilities.UnexpectedValue(v),
-                });
+                }
+            );
         }
 
-        private static Func<string, T> GetParser(string type)
-            => type switch
+        private static Func<string, T> GetParser(string type) =>
+            type switch
             {
-                nameof(Boolean) =>
-                    // Try to map a boolean value.  Either map it to true/false if we're a 
-                    // CodeStyleOption<bool> or map it to the 0 or 1 value for an enum if we're
-                    // a CodeStyleOption<SomeEnumType>.
-                    (Func<string, T>)(v => Convert(bool.Parse(v))),
+                nameof(Boolean)
+                  =>
+                  // Try to map a boolean value.  Either map it to true/false if we're a
+                  // CodeStyleOption<bool> or map it to the 0 or 1 value for an enum if we're
+                  // a CodeStyleOption<SomeEnumType>.
+                  (Func<string, T>)(v => Convert(bool.Parse(v))),
                 nameof(Int32) => v => Convert(int.Parse(v)),
                 nameof(String) => v => (T)(object)v,
                 _ => throw new ArgumentException(nameof(type)),
@@ -226,11 +243,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 && Notification == other.Notification;
         }
 
-        public override bool Equals(object? obj)
-            => obj is CodeStyleOption2<T> option &&
-               Equals(option);
+        public override bool Equals(object? obj) =>
+            obj is CodeStyleOption2<T> option && Equals(option);
 
-        public override int GetHashCode()
-            => unchecked((Notification.GetHashCode() * (int)0xA5555529) + EqualityComparer<T>.Default.GetHashCode(Value!));
+        public override int GetHashCode() =>
+            unchecked(
+                (Notification.GetHashCode() * (int)0xA5555529)
+                + EqualityComparer<T>.Default.GetHashCode(Value!)
+            );
     }
 }

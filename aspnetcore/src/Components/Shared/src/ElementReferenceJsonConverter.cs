@@ -18,8 +18,11 @@ namespace Microsoft.AspNetCore.Components
             _elementReferenceContext = elementReferenceContext;
         }
 
-        public override ElementReference Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override ElementReference Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             string? id = null;
             while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
             {
@@ -32,7 +35,9 @@ namespace Microsoft.AspNetCore.Components
                     }
                     else
                     {
-                        throw new JsonException($"Unexpected JSON property '{reader.GetString()}'.");
+                        throw new JsonException(
+                            $"Unexpected JSON property '{reader.GetString()}'."
+                        );
                     }
                 }
                 else
@@ -49,8 +54,11 @@ namespace Microsoft.AspNetCore.Components
             return new ElementReference(id, _elementReferenceContext);
         }
 
-        public override void Write(Utf8JsonWriter writer, ElementReference value, JsonSerializerOptions options)
-        {
+        public override void Write(
+            Utf8JsonWriter writer,
+            ElementReference value,
+            JsonSerializerOptions options
+        ) {
             writer.WriteStartObject();
             writer.WriteString(IdProperty, value.Id);
             writer.WriteEndObject();

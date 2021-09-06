@@ -16,10 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     {
         private class Rewriter : AbstractReductionRewriter
         {
-            public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
-            {
-            }
+            public Rewriter(ObjectPool<IReductionRewriter> pool) : base(pool) { }
 
             public override SyntaxNode VisitPredefinedType(PredefinedTypeSyntax node)
             {
@@ -32,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitPredefinedType(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -50,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitAliasQualifiedName(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -68,15 +67,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitQualifiedName(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
                 return result;
             }
 
-            public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
-            {
+            public override SyntaxNode VisitMemberAccessExpression(
+                MemberAccessExpressionSyntax node
+            ) {
                 var oldAlwaysSimplify = this.alwaysSimplify;
                 if (!this.alwaysSimplify)
                 {
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitMemberAccessExpression(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -104,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitIdentifierName(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitGenericName(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -140,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitQualifiedCref(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -158,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitArrayType(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -176,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitNullableType(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -194,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 var result = SimplifyExpression(
                     node,
                     newNode: base.VisitTupleType(node),
-                    simplifier: s_simplifyName);
+                    simplifier: s_simplifyName
+                );
 
                 this.alwaysSimplify = oldAlwaysSimplify;
 
@@ -203,7 +211,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
             {
-                var isOrAsNode = node.Kind() == SyntaxKind.AsExpression || node.Kind() == SyntaxKind.IsExpression;
+                var isOrAsNode =
+                    node.Kind() == SyntaxKind.AsExpression
+                    || node.Kind() == SyntaxKind.IsExpression;
 
                 var result = (ExpressionSyntax)base.VisitBinaryExpression(node);
 

@@ -22,11 +22,14 @@ namespace Test
         public int m_iField5;
         public static TestEnum[] m_axStatic1;
 
-        public void Break() { throw new Exception(); }
+        public void Break()
+        {
+            throw new Exception();
+        }
         public ulong Method1()
         {
-            String[] local1 = new String[] { };
-            byte[] local2 = new byte[] { };
+            String[] local1 = new String[] {  };
+            byte[] local2 = new byte[] {  };
             bool local3 = true;
             TypedReference local4 = __makeref(App.m_xFwd1);
             String[] local5 = new String[] { "120", "70", "105" };
@@ -43,7 +46,7 @@ namespace Test
                         int[] local11 = new int[] { 98, 126, 35 };
                         for (new TestEnum(); local3; new sbyte())
                         {
-                            int[] local12 = new int[] { };
+                            int[] local12 = new int[] {  };
                             String[] local13 = (new String[9]);
                             ulong[] local14 = (new ulong[56]);
                             App.m_asuFwd3 = (new sbyte[116]);
@@ -65,8 +68,7 @@ namespace Test
                             TestEnum local14 = TestEnum.red;
                             return App.m_ulFwd5;
                         }
-                    }
-                    while (local3);
+                    } while (local3);
                 }
             else
                 goto label1;
@@ -91,8 +93,7 @@ namespace Test
                         TestEnum local18 = 0;
                         local10 = local10;
                     }
-                }
-                while (local3);
+                } while (local3);
             }
             if (local3)
                 try
@@ -103,6 +104,7 @@ namespace Test
                     uint local9 = 1u;
                     throw new InvalidOperationException();
                 }
+
                 finally
                 {
                     double local6 = 61.0;
@@ -111,7 +113,7 @@ namespace Test
                     char[] local9 = (new char[17]);
                     for (App.m_iFwd7 = App.m_iFwd7; local3; local7 = local7)
                     {
-                        char[] local10 = new char[] { };
+                        char[] local10 = new char[] {  };
                         sbyte[] local11 = (new sbyte[39]);
                         object[] local12 = (new object[50]);
                         Array[] local13 = App.m_axFwd8;

@@ -44,19 +44,42 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-        Eval(new GenClass<FooClass>().TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(new GenClass<FooStruct>().TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            new GenClass<FooClass>().TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            new GenClass<FooStruct>().TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
-        Eval(new GenClass<FooClass>().VirtTransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(new GenClass<FooStruct>().VirtTransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            new GenClass<FooClass>().VirtTransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            new GenClass<FooStruct>().VirtTransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
-        Eval(new GenStruct<FooClass>().TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(new GenStruct<FooStruct>().TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            new GenStruct<FooClass>().TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            new GenStruct<FooStruct>().TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
         if (result)
         {
@@ -69,6 +92,5 @@ public class Test
             return 1;
         }
     }
-
 }
 

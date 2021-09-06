@@ -19,15 +19,20 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter<VerifyMethodFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter<VerifyMethodFilter>();
+                            }
+                        );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
                 await AssertMethodsCalled(serviceProvider, tcsService);
             }
@@ -39,13 +44,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new VerifyMethodFilter(tcsService));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter(new VerifyMethodFilter(tcsService));
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
                 await AssertMethodsCalled(serviceProvider, tcsService);
             }
@@ -57,13 +67,19 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR().AddHubOptions<MethodHub>(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new VerifyMethodFilter(tcsService));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR()
+                            .AddHubOptions<MethodHub>(
+                                options =>
+                                {
+                                    options.AddFilter(new VerifyMethodFilter(tcsService));
+                                }
+                            );
+                    },
+                    LoggerFactory
+                );
 
                 await AssertMethodsCalled(serviceProvider, tcsService);
             }
@@ -75,15 +91,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR().AddHubOptions<MethodHub>(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter<VerifyMethodFilter>();
-                    });
+                        services.AddSignalR()
+                            .AddHubOptions<MethodHub>(
+                                options =>
+                                {
+                                    options.AddFilter<VerifyMethodFilter>();
+                                }
+                            );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
                 await AssertMethodsCalled(serviceProvider, tcsService);
             }
@@ -95,22 +117,30 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR().AddHubOptions<MethodHub>(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(typeof(VerifyMethodFilter));
-                    });
+                        services.AddSignalR()
+                            .AddHubOptions<MethodHub>(
+                                options =>
+                                {
+                                    options.AddFilter(typeof(VerifyMethodFilter));
+                                }
+                            );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
                 await AssertMethodsCalled(serviceProvider, tcsService);
             }
         }
 
-        private async Task AssertMethodsCalled(IServiceProvider serviceProvider, TcsService tcsService)
-        {
+        private async Task AssertMethodsCalled(
+            IServiceProvider serviceProvider,
+            TcsService tcsService
+        ) {
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
 
             using (var client = new TestClient())
@@ -122,7 +152,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await tcsService.EndMethod.Task.DefaultTimeout();
 
                 tcsService.Reset();
-                var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                    .DefaultTimeout();
                 await tcsService.EndMethod.Task.DefaultTimeout();
                 tcsService.Reset();
 
@@ -142,16 +173,23 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR().AddHubOptions<DynamicTestHub>(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(typeof(EmptyFilter));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR()
+                            .AddHubOptions<DynamicTestHub>(
+                                options =>
+                                {
+                                    options.AddFilter(typeof(EmptyFilter));
+                                }
+                            );
+                    },
+                    LoggerFactory
+                );
 
-
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<DynamicTestHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<DynamicTestHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -177,16 +215,23 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 var tcsService1 = new TcsService();
                 var tcsService2 = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new VerifyMethodFilter(tcsService1));
-                        options.AddFilter(new VerifyMethodFilter(tcsService2));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter(new VerifyMethodFilter(tcsService1));
+                                options.AddFilter(new VerifyMethodFilter(tcsService2));
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -200,7 +245,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     tcsService1.Reset();
                     tcsService2.Reset();
-                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                        .DefaultTimeout();
                     await tcsService1.EndMethod.Task.DefaultTimeout();
                     await tcsService2.EndMethod.Task.DefaultTimeout();
                     tcsService1.Reset();
@@ -225,18 +271,25 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 var tcsService1 = new TcsService();
                 var tcsService2 = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new VerifyMethodFilter(tcsService1));
-                        options.AddFilter<VerifyMethodFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter(new VerifyMethodFilter(tcsService1));
+                                options.AddFilter<VerifyMethodFilter>();
+                            }
+                        );
 
-                    services.AddSingleton(tcsService2);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService2);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -250,7 +303,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     tcsService1.Reset();
                     tcsService2.Reset();
-                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                        .DefaultTimeout();
                     await tcsService1.EndMethod.Task.DefaultTimeout();
                     await tcsService2.EndMethod.Task.DefaultTimeout();
                     tcsService1.Reset();
@@ -275,19 +329,26 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 var tcsService1 = new TcsService();
                 var tcsService2 = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR()
-                    .AddHubOptions<MethodHub>(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new VerifyMethodFilter(tcsService1));
-                        options.AddFilter<VerifyMethodFilter>();
-                    });
+                        services.AddSignalR()
+                            .AddHubOptions<MethodHub>(
+                                options =>
+                                {
+                                    options.AddFilter(new VerifyMethodFilter(tcsService1));
+                                    options.AddFilter<VerifyMethodFilter>();
+                                }
+                            );
 
-                    services.AddSingleton(tcsService2);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService2);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -301,7 +362,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     tcsService1.Reset();
                     tcsService2.Reset();
-                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                        .DefaultTimeout();
                     await tcsService1.EndMethod.Task.DefaultTimeout();
                     await tcsService2.EndMethod.Task.DefaultTimeout();
                     tcsService1.Reset();
@@ -326,16 +388,23 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 var syncPoint1 = SyncPoint.Create(3, out var syncPoints1);
                 var syncPoint2 = SyncPoint.Create(3, out var syncPoints2);
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new SyncPointFilter(syncPoints1));
-                        options.AddFilter(new SyncPointFilter(syncPoints2));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter(new SyncPointFilter(syncPoints1));
+                                options.AddFilter(new SyncPointFilter(syncPoints2));
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -385,17 +454,24 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 var syncPoint1 = SyncPoint.Create(3, out var syncPoints1);
                 var syncPoint2 = SyncPoint.Create(3, out var syncPoints2);
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR()
-                    .AddHubOptions<MethodHub>(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new SyncPointFilter(syncPoints1));
-                        options.AddFilter(new SyncPointFilter(syncPoints2));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR()
+                            .AddHubOptions<MethodHub>(
+                                options =>
+                                {
+                                    options.AddFilter(new SyncPointFilter(syncPoints1));
+                                    options.AddFilter(new SyncPointFilter(syncPoints2));
+                                }
+                            );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -445,19 +521,28 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 var syncPoint1 = SyncPoint.Create(3, out var syncPoints1);
                 var syncPoint2 = SyncPoint.Create(3, out var syncPoints2);
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new SyncPointFilter(syncPoints1));
-                    })
-                    .AddHubOptions<MethodHub>(options =>
-                    {
-                        options.AddFilter(new SyncPointFilter(syncPoints2));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                                options =>
+                                {
+                                    options.AddFilter(new SyncPointFilter(syncPoints1));
+                                }
+                            )
+                            .AddHubOptions<MethodHub>(
+                                options =>
+                                {
+                                    options.AddFilter(new SyncPointFilter(syncPoints2));
+                                }
+                            );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -506,16 +591,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter<VerifyMethodFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter<VerifyMethodFilter>();
+                            }
+                        );
 
-                    // If this instance wasn't resolved, then the tcsService.StartedMethod waits would never trigger and fail the test
-                    services.AddSingleton(new VerifyMethodFilter(tcsService));
-                }, LoggerFactory);
+                        // If this instance wasn't resolved, then the tcsService.StartedMethod waits would never trigger and fail the test
+                        services.AddSingleton(new VerifyMethodFilter(tcsService));
+                    },
+                    LoggerFactory
+                );
 
                 await AssertMethodsCalled(serviceProvider, tcsService);
             }
@@ -527,17 +617,24 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var counter = new FilterCounter();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter<CounterFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter<CounterFilter>();
+                            }
+                        );
 
-                    services.AddSingleton(counter);
-                }, LoggerFactory);
+                        services.AddSingleton(counter);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -549,7 +646,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     Assert.Equal(0, counter.InvokeMethodAsyncCount);
                     Assert.Equal(0, counter.OnDisconnectedAsyncCount);
 
-                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                        .DefaultTimeout();
                     // Filter is transient, so these counts are reset every time the filter is created
                     Assert.Equal(0, counter.OnConnectedAsyncCount);
                     Assert.Equal(1, counter.InvokeMethodAsyncCount);
@@ -575,18 +673,25 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var counter = new FilterCounter();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter<CounterFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter<CounterFilter>();
+                            }
+                        );
 
-                    services.AddSingleton<CounterFilter>();
-                    services.AddSingleton(counter);
-                }, LoggerFactory);
+                        services.AddSingleton<CounterFilter>();
+                        services.AddSingleton(counter);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -597,7 +702,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     Assert.Equal(0, counter.InvokeMethodAsyncCount);
                     Assert.Equal(0, counter.OnDisconnectedAsyncCount);
 
-                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                        .DefaultTimeout();
                     Assert.Equal(1, counter.OnConnectedAsyncCount);
                     Assert.Equal(1, counter.InvokeMethodAsyncCount);
                     Assert.Equal(0, counter.OnDisconnectedAsyncCount);
@@ -620,16 +726,23 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter<NoExceptionFilter>();
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter<NoExceptionFilter>();
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<OnConnectedThrowsHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<OnConnectedThrowsHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -637,7 +750,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Verify connection still connected, can't invoke a method if the connection is disconnected
                     var message = await client.InvokeAsync("Method");
-                    Assert.Equal("Failed to invoke 'Method' due to an error on the server. HubException: Method does not exist.", message.Error);
+                    Assert.Equal(
+                        "Failed to invoke 'Method' due to an error on the server. HubException: Method does not exist.",
+                        message.Error
+                    );
 
                     client.Dispose();
 
@@ -651,16 +767,23 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter(new SkipNextFilter(skipOnConnected: true));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter(new SkipNextFilter(skipOnConnected: true));
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -668,7 +791,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Verify connection still connected, can't invoke a method if the connection is disconnected
                     var message = await client.InvokeAsync("Method");
-                    Assert.Equal("Failed to invoke 'Method' due to an error on the server. HubException: Method does not exist.", message.Error);
+                    Assert.Equal(
+                        "Failed to invoke 'Method' due to an error on the server. HubException: Method does not exist.",
+                        message.Error
+                    );
 
                     client.Dispose();
 
@@ -682,15 +808,22 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.AddFilter(new SkipNextFilter(skipInvoke: true));
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.AddFilter(new SkipNextFilter(skipInvoke: true));
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -698,7 +831,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     await client.Connected.DefaultTimeout();
 
-                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!").DefaultTimeout();
+                    var message = await client.InvokeAsync(nameof(MethodHub.Echo), "Hello world!")
+                        .DefaultTimeout();
 
                     Assert.Null(message.Error);
                     Assert.Null(message.Result);
@@ -716,18 +850,25 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter<DisposableFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter<DisposableFilter>();
+                            }
+                        );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -757,18 +898,25 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter(new DisposableFilter(tcsService));
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter(new DisposableFilter(tcsService));
+                            }
+                        );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -792,18 +940,25 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter<AsyncDisposableFilter>();
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter<AsyncDisposableFilter>();
+                            }
+                        );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -833,18 +988,25 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 var tcsService = new TcsService();
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter(new AsyncDisposableFilter(tcsService));
-                    });
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter(new AsyncDisposableFilter(tcsService));
+                            }
+                        );
 
-                    services.AddSingleton(tcsService);
-                }, LoggerFactory);
+                        services.AddSingleton(tcsService);
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
@@ -867,29 +1029,40 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
-                return writeContext.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher" &&
-                       writeContext.EventId.Name == "FailedInvokingHubMethod";
+                return writeContext.LoggerName
+                        == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                    && writeContext.EventId.Name == "FailedInvokingHubMethod";
             }
 
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
-                {
-                    services.AddSignalR(options =>
+                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
+                    services =>
                     {
-                        options.EnableDetailedErrors = true;
-                        options.AddFilter<ChangeMethodFilter>();
-                    });
-                }, LoggerFactory);
+                        services.AddSignalR(
+                            options =>
+                            {
+                                options.EnableDetailedErrors = true;
+                                options.AddFilter<ChangeMethodFilter>();
+                            }
+                        );
+                    },
+                    LoggerFactory
+                );
 
-                var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
+                var connectionHandler = serviceProvider.GetService<
+                    HubConnectionHandler<MethodHub>
+                >();
 
                 using (var client = new TestClient())
                 {
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     var message = await client.InvokeAsync("Echo", "Hello");
-                    Assert.Equal("An unexpected error occurred invoking 'Echo' on the server. HubException: Unknown hub method 'BaseMethod'", message.Error);
+                    Assert.Equal(
+                        "An unexpected error occurred invoking 'Echo' on the server. HubException: Unknown hub method 'BaseMethod'",
+                        message.Error
+                    );
 
                     client.Dispose();
 

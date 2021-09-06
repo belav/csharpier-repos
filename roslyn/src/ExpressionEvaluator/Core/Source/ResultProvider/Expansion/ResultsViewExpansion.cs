@@ -18,8 +18,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     {
         private const string ResultsFormatSpecifier = "results";
 
-        internal static ResultsViewExpansion CreateExpansion(DkmInspectionContext inspectionContext, DkmClrValue value, ResultProvider resultProvider)
-        {
+        internal static ResultsViewExpansion CreateExpansion(
+            DkmInspectionContext inspectionContext,
+            DkmClrValue value,
+            ResultProvider resultProvider
+        ) {
             var enumerableType = GetEnumerableType(value);
             if (enumerableType == null)
             {
@@ -36,8 +39,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType declaredType,
             DkmClrCustomTypeInfo declaredTypeInfo,
             DkmClrValue value,
-            ResultProvider resultProvider)
-        {
+            ResultProvider resultProvider
+        ) {
             string errorMessage;
             if (value.IsError())
             {
@@ -52,7 +55,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 var enumerableType = GetEnumerableType(value);
                 if (enumerableType != null)
                 {
-                    var expansion = CreateExpansion(inspectionContext, value, enumerableType, resultProvider);
+                    var expansion = CreateExpansion(
+                        inspectionContext,
+                        value,
+                        enumerableType,
+                        resultProvider
+                    );
                     if (expansion != null)
                     {
                         return expansion.CreateResultsViewRow(
@@ -63,7 +71,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             new TypeAndCustomInfo(declaredType, declaredTypeInfo),
                             value,
                             includeResultsFormatSpecifier: true,
-                            fullNameProvider: resultProvider.FullNameProvider);
+                            fullNameProvider: resultProvider.FullNameProvider
+                        );
                     }
                     errorMessage = Resources.ResultsViewNoSystemCore;
                 }
@@ -89,21 +98,30 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrType declaredType,
             DkmClrCustomTypeInfo declaredTypeInfo,
             DkmClrValue value,
-            ResultProvider resultProvider)
-        {
+            ResultProvider resultProvider
+        ) {
             if ((value.ValueFlags & DkmClrValueFlags.Synthetic) == 0)
             {
                 return null;
             }
 
             // Must be declared as IEnumerable or IEnumerable<T>, not a derived type.
-            var enumerableType = GetEnumerableType(value, declaredType, requireExactInterface: true);
+            var enumerableType = GetEnumerableType(
+                value,
+                declaredType,
+                requireExactInterface: true
+            );
             if (enumerableType == null)
             {
                 return null;
             }
 
-            var expansion = CreateExpansion(inspectionContext, value, enumerableType, resultProvider);
+            var expansion = CreateExpansion(
+                inspectionContext,
+                value,
+                enumerableType,
+                resultProvider
+            );
             if (expansion == null)
             {
                 return null;
@@ -117,7 +135,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 new TypeAndCustomInfo(declaredType, declaredTypeInfo),
                 value,
                 includeResultsFormatSpecifier: false,
-                fullNameProvider: resultProvider.FullNameProvider);
+                fullNameProvider: resultProvider.FullNameProvider
+            );
         }
 
         private static DkmClrType GetEnumerableType(DkmClrValue value)
@@ -140,8 +159,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return !type.IsString() && !type.IsArray;
         }
 
-        private static DkmClrType GetEnumerableType(DkmClrValue value, DkmClrType valueType, bool requireExactInterface)
-        {
+        private static DkmClrType GetEnumerableType(
+            DkmClrValue value,
+            DkmClrType valueType,
+            bool requireExactInterface
+        ) {
             if (!IsEnumerableCandidate(value))
             {
                 return null;
@@ -169,8 +191,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return DkmClrType.Create(valueType.AppDomain, enumerableType);
         }
 
-        private static ResultsViewExpansion CreateExpansion(DkmInspectionContext inspectionContext, DkmClrValue value, DkmClrType enumerableType, ResultProvider resultProvider)
-        {
+        private static ResultsViewExpansion CreateExpansion(
+            DkmInspectionContext inspectionContext,
+            DkmClrValue value,
+            DkmClrType enumerableType,
+            ResultProvider resultProvider
+        ) {
             var proxyValue = value.InstantiateResultsViewProxy(inspectionContext, enumerableType);
             // InstantiateResultsViewProxy may return null (if required assembly is missing, for instance).
             if (proxyValue == null)
@@ -186,7 +212,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 predicate: TypeHelpers.IsPublic,
                 resultProvider: resultProvider,
                 isProxyType: false,
-                supportsFavorites: false);
+                supportsFavorites: false
+            );
             return new ResultsViewExpansion(proxyValue, proxyMembers);
         }
 
@@ -211,11 +238,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
-        {
+            ref int index
+        ) {
             if (InRange(startIndex, count, index))
             {
-                rows.Add(CreateResultsViewRow(inspectionContext, parent, resultProvider.FullNameProvider));
+                rows.Add(
+                    CreateResultsViewRow(inspectionContext, parent, resultProvider.FullNameProvider)
+                );
             }
 
             index++;
@@ -224,18 +253,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private EvalResult CreateResultsViewRow(
             DkmInspectionContext inspectionContext,
             EvalResultDataItem parent,
-            IDkmClrFullNameProvider fullNameProvider)
-        {
+            IDkmClrFullNameProvider fullNameProvider
+        ) {
             Debug.Assert(parent != null);
             var proxyTypeAndInfo = new TypeAndCustomInfo(_proxyValue.Type);
             var fullName = parent.ChildFullNamePrefix;
-            var childFullNamePrefix = (fullName == null) ?
-                null :
-                fullNameProvider.GetClrObjectCreationExpression(
-                    inspectionContext,
-                    proxyTypeAndInfo.ClrType,
-                    proxyTypeAndInfo.Info,
-                    new[] { fullName });
+            var childFullNamePrefix =
+                (fullName == null)
+                    ? null
+                    : fullNameProvider.GetClrObjectCreationExpression(
+                          inspectionContext,
+                          proxyTypeAndInfo.ClrType,
+                          proxyTypeAndInfo.Info,
+                          new[] { fullName }
+                      );
             return new EvalResult(
                 ExpansionKind.ResultsView,
                 Resources.ResultsView,
@@ -248,11 +279,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 childShouldParenthesize: false,
                 fullName: fullName,
                 childFullNamePrefixOpt: childFullNamePrefix,
-                formatSpecifiers: Formatter.AddFormatSpecifier(parent.FormatSpecifiers, ResultsFormatSpecifier),
+                formatSpecifiers: Formatter.AddFormatSpecifier(
+                    parent.FormatSpecifiers,
+                    ResultsFormatSpecifier
+                ),
                 category: DkmEvaluationResultCategory.Method,
-                flags: DkmEvaluationResultFlags.ReadOnly | DkmEvaluationResultFlags.ExpansionHasSideEffects,
+                flags: DkmEvaluationResultFlags.ReadOnly
+                    | DkmEvaluationResultFlags.ExpansionHasSideEffects,
                 editableValue: null,
-                inspectionContext: inspectionContext);
+                inspectionContext: inspectionContext
+            );
         }
 
         private EvalResult CreateResultsViewRow(
@@ -263,17 +299,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeAndCustomInfo declaredTypeAndInfo,
             DkmClrValue value,
             bool includeResultsFormatSpecifier,
-            IDkmClrFullNameProvider fullNameProvider)
-        {
+            IDkmClrFullNameProvider fullNameProvider
+        ) {
             if (includeResultsFormatSpecifier)
             {
-                formatSpecifiers = Formatter.AddFormatSpecifier(formatSpecifiers, ResultsFormatSpecifier);
+                formatSpecifiers = Formatter.AddFormatSpecifier(
+                    formatSpecifiers,
+                    ResultsFormatSpecifier
+                );
             }
             var childFullNamePrefix = fullNameProvider.GetClrObjectCreationExpression(
                 inspectionContext,
                 _proxyValue.Type,
                 customTypeInfo: null,
-                arguments: new[] { fullName });
+                arguments: new[] { fullName }
+            );
             return new EvalResult(
                 ExpansionKind.Default,
                 name,
@@ -290,7 +330,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 category: DkmEvaluationResultCategory.Method,
                 flags: DkmEvaluationResultFlags.ReadOnly,
                 editableValue: null,
-                inspectionContext: inspectionContext);
+                inspectionContext: inspectionContext
+            );
         }
 
         private sealed class IndirectExpansion : Expansion
@@ -313,8 +354,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 int startIndex,
                 int count,
                 bool visitAll,
-                ref int index)
-            {
+                ref int index
+            ) {
                 _expansion.GetRows(
                     resultProvider,
                     rows,
@@ -324,7 +365,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     startIndex: startIndex,
                     count: count,
                     visitAll: visitAll,
-                    index: ref index);
+                    index: ref index
+                );
             }
         }
     }

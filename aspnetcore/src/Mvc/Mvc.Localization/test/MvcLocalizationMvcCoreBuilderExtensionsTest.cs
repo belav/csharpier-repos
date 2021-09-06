@@ -26,17 +26,17 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             builder2.AddMvcLocalization(LanguageViewLocationExpanderFormat.SubFolder);
 
             var builder3 = new TestMvcCoreBuilder();
-            builder3.AddMvcLocalization(localizationOptionsSetupAction: l => l.ResourcesPath = "Resources");
+            builder3.AddMvcLocalization(
+                localizationOptionsSetupAction: l => l.ResourcesPath = "Resources"
+            );
 
             var builder4 = new TestMvcCoreBuilder();
             builder4.AddMvcLocalization(
                 localizationOptionsSetupAction: l => l.ResourcesPath = "Resources",
-                format: LanguageViewLocationExpanderFormat.SubFolder);
+                format: LanguageViewLocationExpanderFormat.SubFolder
+            );
 
-            return new TheoryData<IMvcCoreBuilder>()
-            {
-                builder1, builder2, builder3, builder4
-            };
+            return new TheoryData<IMvcCoreBuilder>() { builder1, builder2, builder3, builder4 };
         }
 
         [Theory]
@@ -47,29 +47,35 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             var services = mvcCoreBuilder.Services;
             // Base localization services
             var service = services.FirstOrDefault(
-                sd => sd.ServiceType == typeof(IStringLocalizerFactory));
+                sd => sd.ServiceType == typeof(IStringLocalizerFactory)
+            );
             Assert.NotNull(service);
             Assert.Equal(ServiceLifetime.Singleton, service.Lifetime);
             Assert.Equal(typeof(ResourceManagerStringLocalizerFactory), service.ImplementationType);
 
-            service = services.FirstOrDefault(
-                sd => sd.ServiceType == typeof(IStringLocalizer<>));
+            service = services.FirstOrDefault(sd => sd.ServiceType == typeof(IStringLocalizer<>));
             Assert.NotNull(service);
             Assert.Equal(ServiceLifetime.Transient, service.Lifetime);
             Assert.Equal(typeof(StringLocalizer<>), service.ImplementationType);
 
             // View localization services
             service = services.FirstOrDefault(
-                sd => sd.ServiceType == typeof(IConfigureOptions<MvcDataAnnotationsLocalizationOptions>));
+                sd =>
+                    sd.ServiceType
+                    == typeof(IConfigureOptions<MvcDataAnnotationsLocalizationOptions>)
+            );
             Assert.NotNull(service);
             Assert.Equal(ServiceLifetime.Transient, service.Lifetime);
 
             service = services.FirstOrDefault(
-                sd => sd.ServiceType == typeof(IConfigureOptions<RazorViewEngineOptions>));
+                sd => sd.ServiceType == typeof(IConfigureOptions<RazorViewEngineOptions>)
+            );
             Assert.NotNull(service);
             Assert.Equal(ServiceLifetime.Transient, service.Lifetime);
 
-            service = services.FirstOrDefault(sd => sd.ServiceType == typeof(IHtmlLocalizerFactory));
+            service = services.FirstOrDefault(
+                sd => sd.ServiceType == typeof(IHtmlLocalizerFactory)
+            );
             Assert.NotNull(service);
             Assert.Equal(typeof(HtmlLocalizerFactory), service.ImplementationType);
             Assert.Equal(ServiceLifetime.Singleton, service.Lifetime);
@@ -93,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
 
             // Act
             builder.AddMvcLocalization(
-                localizationOptionsSetupAction: options => options.ResourcesPath = "TestResources");
+                localizationOptionsSetupAction: options => options.ResourcesPath = "TestResources"
+            );
 
             // Assert
             var serviceProvider = builder.Services.BuildServiceProvider();
@@ -109,20 +116,32 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
 
             builder.Services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
 
-            var dataAnnotationLocalizerProvider = new Func<Type, IStringLocalizerFactory, IStringLocalizer>((type, factory) =>
-            {
-                return null;
-            });
+            var dataAnnotationLocalizerProvider = new Func<
+                Type,
+                IStringLocalizerFactory,
+                IStringLocalizer
+            >(
+                (type, factory) =>
+                {
+                    return null;
+                }
+            );
 
             // Act
             builder.AddMvcLocalization(
-                dataAnnotationsLocalizationOptionsSetupAction: options
-                => options.DataAnnotationLocalizerProvider = dataAnnotationLocalizerProvider);
+                dataAnnotationsLocalizationOptionsSetupAction: options =>
+                    options.DataAnnotationLocalizerProvider = dataAnnotationLocalizerProvider
+            );
 
             // Assert
             var serviceProvider = builder.Services.BuildServiceProvider();
-            var actualOptions = serviceProvider.GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
-            Assert.Same(dataAnnotationLocalizerProvider, actualOptions.Value.DataAnnotationLocalizerProvider);
+            var actualOptions = serviceProvider.GetRequiredService<
+                IOptions<MvcDataAnnotationsLocalizationOptions>
+            >();
+            Assert.Same(
+                dataAnnotationLocalizerProvider,
+                actualOptions.Value.DataAnnotationLocalizerProvider
+            );
         }
 
         private ServiceDescriptor GetService(IServiceCollection services, Type serviceType)

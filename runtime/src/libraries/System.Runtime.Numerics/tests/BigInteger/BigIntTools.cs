@@ -40,7 +40,9 @@ namespace BigIntTools
             {
                 if (s_lazyInternalCalculator == null)
                 {
-                    Type t = typeof(BigInteger).Assembly.GetType("System.Numerics.BigIntegerCalculator");
+                    Type t = typeof(BigInteger).Assembly.GetType(
+                        "System.Numerics.BigIntegerCalculator"
+                    );
                     if (t != null)
                     {
                         s_lazyInternalCalculator = t.GetTypeInfo();
@@ -65,6 +67,7 @@ namespace BigIntTools
             {
                 action();
             }
+
             finally
             {
                 field.SetValue(null, lastValue);

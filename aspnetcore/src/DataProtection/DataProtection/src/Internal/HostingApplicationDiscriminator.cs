@@ -11,9 +11,7 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
         private readonly IHostEnvironment? _hosting;
 
         // the optional constructor for when IHostingEnvironment is not available from DI
-        public HostingApplicationDiscriminator()
-        {
-        }
+        public HostingApplicationDiscriminator() { }
 
         public HostingApplicationDiscriminator(IHostEnvironment hosting)
         {

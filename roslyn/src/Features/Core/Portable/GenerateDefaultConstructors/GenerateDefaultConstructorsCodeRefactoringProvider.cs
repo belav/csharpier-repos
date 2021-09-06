@@ -25,15 +25,23 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
     /// for a type based on the fields/properties of that type. Both of those are handled by other 
     /// services.
     /// </summary>
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.GenerateDefaultConstructors), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.GenerateDefaultConstructors
+        ),
+        Shared
+    ]
     internal class GenerateDefaultConstructorsCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateDefaultConstructorsCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateDefaultConstructorsCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -52,7 +60,12 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             }
 
             var service = document.GetLanguageService<IGenerateDefaultConstructorsService>();
-            var actions = await service.GenerateDefaultConstructorsAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var actions = await service.GenerateDefaultConstructorsAsync(
+                    document,
+                    textSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
     }

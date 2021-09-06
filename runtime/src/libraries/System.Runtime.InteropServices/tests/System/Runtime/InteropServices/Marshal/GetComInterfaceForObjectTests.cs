@@ -16,11 +16,15 @@ namespace System.Runtime.InteropServices.Tests
         public void GetComInterfaceForObject_GenericWithValidClass_ReturnsExpected()
         {
             var o = new ClassWithInterface();
-            IntPtr iUnknown = Marshal.GetComInterfaceForObject<ClassWithInterface, INonGenericInterface>(o);
+            IntPtr iUnknown = Marshal.GetComInterfaceForObject<
+                ClassWithInterface,
+                INonGenericInterface
+            >(o);
             try
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -32,11 +36,15 @@ namespace System.Runtime.InteropServices.Tests
         public void GetComInterfaceForObject_GenericWithValidStruct_ReturnsExpected()
         {
             var o = new StructWithInterface();
-            IntPtr iUnknown = Marshal.GetComInterfaceForObject<StructWithInterface, INonGenericInterface>(o);
+            IntPtr iUnknown = Marshal.GetComInterfaceForObject<
+                StructWithInterface,
+                INonGenericInterface
+            >(o);
             try
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -53,6 +61,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -69,6 +78,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -81,14 +91,20 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(CustomQueryInterfaceMode.Allow + 1)]
         [InlineData(CustomQueryInterfaceMode.Ignore - 1)]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void GetComInterfaceForObject_NonGenericCustomQueryInterfaceModeWithValidClass_ReturnsExpected(CustomQueryInterfaceMode mode)
-        {
+        public void GetComInterfaceForObject_NonGenericCustomQueryInterfaceModeWithValidClass_ReturnsExpected(
+            CustomQueryInterfaceMode mode
+        ) {
             var o = new ClassWithInterface();
-            IntPtr iUnknown = Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface), mode);
+            IntPtr iUnknown = Marshal.GetComInterfaceForObject(
+                o,
+                typeof(INonGenericInterface),
+                mode
+            );
             try
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -101,14 +117,20 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(CustomQueryInterfaceMode.Allow + 1)]
         [InlineData(CustomQueryInterfaceMode.Ignore - 1)]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void GetComInterfaceForObject_NonGenericCustomQueryInterfaceModeWithValidStruct_ReturnsExpected(CustomQueryInterfaceMode mode)
-        {
+        public void GetComInterfaceForObject_NonGenericCustomQueryInterfaceModeWithValidStruct_ReturnsExpected(
+            CustomQueryInterfaceMode mode
+        ) {
             var o = new StructWithInterface();
-            IntPtr iUnknown = Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface), mode);
+            IntPtr iUnknown = Marshal.GetComInterfaceForObject(
+                o,
+                typeof(INonGenericInterface),
+                mode
+            );
             try
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -122,26 +144,57 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetComInterfaceForObject_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetComInterfaceForObject(null, null));
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetComInterfaceForObject(null, null, CustomQueryInterfaceMode.Allow));
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetComInterfaceForObject<int, int>(1));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetComInterfaceForObject(null, null)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetComInterfaceForObject(null, null, CustomQueryInterfaceMode.Allow)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetComInterfaceForObject<int, int>(1)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetComInterfaceForObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.GetComInterfaceForObject(null, typeof(INonGenericInterface)));
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.GetComInterfaceForObject(null, typeof(INonGenericInterface), CustomQueryInterfaceMode.Allow));
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.GetComInterfaceForObject<string, string>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.GetComInterfaceForObject(null, typeof(INonGenericInterface))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () =>
+                    Marshal.GetComInterfaceForObject(
+                        null,
+                        typeof(INonGenericInterface),
+                        CustomQueryInterfaceMode.Allow
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.GetComInterfaceForObject<string, string>(null)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetComInterfaceForObject_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("T", () => Marshal.GetComInterfaceForObject(new object(), null));
-            AssertExtensions.Throws<ArgumentNullException>("T", () => Marshal.GetComInterfaceForObject(new object(), null, CustomQueryInterfaceMode.Allow));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "T",
+                () => Marshal.GetComInterfaceForObject(new object(), null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "T",
+                () =>
+                    Marshal.GetComInterfaceForObject(
+                        new object(),
+                        null,
+                        CustomQueryInterfaceMode.Allow
+                    )
+            );
         }
 
         public static IEnumerable<object[]> GetComInterfaceForObject_InvalidType_TestData()
@@ -160,9 +213,15 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<>) };
             yield return new object[] { typeof(IGenericInterface<string>) };
 
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+            };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             yield return new object[] { typeBuilder };
@@ -171,9 +230,17 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(NonComVisibleStruct) };
             yield return new object[] { typeof(INonComVisibleInterface) };
 
-            AssemblyBuilder collectibleAssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
-            ModuleBuilder collectibleModuleBuilder = collectibleAssemblyBuilder.DefineDynamicModule("Module");
-            TypeBuilder collectibleTypeBuilder = collectibleModuleBuilder.DefineType("Type", TypeAttributes.Interface | TypeAttributes.Abstract);
+            AssemblyBuilder collectibleAssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
+            ModuleBuilder collectibleModuleBuilder = collectibleAssemblyBuilder.DefineDynamicModule(
+                "Module"
+            );
+            TypeBuilder collectibleTypeBuilder = collectibleModuleBuilder.DefineType(
+                "Type",
+                TypeAttributes.Interface | TypeAttributes.Abstract
+            );
             Type collectibleType = collectibleTypeBuilder.CreateType();
             yield return new object[] { collectibleType };
         }
@@ -183,8 +250,19 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetComInterfaceForObject_InvalidType_ThrowsArgumentException(Type type)
         {
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetComInterfaceForObject(new object(), type));
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetComInterfaceForObject(new object(), type, CustomQueryInterfaceMode.Allow));
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.GetComInterfaceForObject(new object(), type)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () =>
+                    Marshal.GetComInterfaceForObject(
+                        new object(),
+                        type,
+                        CustomQueryInterfaceMode.Allow
+                    )
+            );
         }
 
         public static IEnumerable<object[]> GetComInterfaceForObject_InvalidObject_TestData()
@@ -198,18 +276,43 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetComInterfaceForObject_InvalidObject_ThrowsArgumentException(object o)
         {
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface)));
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface), CustomQueryInterfaceMode.Allow));
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.GetComInterfaceForObject<object, INonGenericInterface>(o));
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () => Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () =>
+                    Marshal.GetComInterfaceForObject(
+                        o,
+                        typeof(INonGenericInterface),
+                        CustomQueryInterfaceMode.Allow
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () => Marshal.GetComInterfaceForObject<object, INonGenericInterface>(o)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetTypedObjectForIUnknown_UncastableType_ThrowsInvalidCastException()
         {
-            Assert.Throws<InvalidCastException>(() => Marshal.GetComInterfaceForObject(new object(), typeof(INonGenericInterface)));
-            Assert.Throws<InvalidCastException>(() => Marshal.GetComInterfaceForObject(new object(), typeof(INonGenericInterface), CustomQueryInterfaceMode.Allow));
-            Assert.Throws<InvalidCastException>(() => Marshal.GetComInterfaceForObject<object, INonGenericInterface>(new object()));
+            Assert.Throws<InvalidCastException>(
+                () => Marshal.GetComInterfaceForObject(new object(), typeof(INonGenericInterface))
+            );
+            Assert.Throws<InvalidCastException>(
+                () =>
+                    Marshal.GetComInterfaceForObject(
+                        new object(),
+                        typeof(INonGenericInterface),
+                        CustomQueryInterfaceMode.Allow
+                    )
+            );
+            Assert.Throws<InvalidCastException>(
+                () => Marshal.GetComInterfaceForObject<object, INonGenericInterface>(new object())
+            );
         }
     }
 }

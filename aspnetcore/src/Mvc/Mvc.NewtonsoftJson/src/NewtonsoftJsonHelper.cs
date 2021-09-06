@@ -29,8 +29,10 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
         /// The <see cref="ArrayPool{Char}"/> for use with custom <see cref="JsonSerializerSettings"/> (see
         /// <see cref="Serialize(object, JsonSerializerSettings)"/>).
         /// </param>
-        public NewtonsoftJsonHelper(IOptions<MvcNewtonsoftJsonOptions> options, ArrayPool<char> charPool)
-        {
+        public NewtonsoftJsonHelper(
+            IOptions<MvcNewtonsoftJsonOptions> options,
+            ArrayPool<char> charPool
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -41,7 +43,9 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 throw new ArgumentNullException(nameof(charPool));
             }
 
-            _defaultSettingsJsonSerializer = CreateHtmlSafeSerializer(options.Value.SerializerSettings);
+            _defaultSettingsJsonSerializer = CreateHtmlSafeSerializer(
+                options.Value.SerializerSettings
+            );
             _charPool = new JsonArrayPool<char>(charPool);
         }
 
@@ -65,10 +69,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
         {
             using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
             {
-                var jsonWriter = new JsonTextWriter(stringWriter)
-                {
-                    ArrayPool = _charPool,
-                };
+                var jsonWriter = new JsonTextWriter(stringWriter) { ArrayPool = _charPool, };
 
                 using (jsonWriter)
                 {
@@ -79,8 +80,9 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             }
         }
 
-        private static JsonSerializer CreateHtmlSafeSerializer(JsonSerializerSettings serializerSettings)
-        {
+        private static JsonSerializer CreateHtmlSafeSerializer(
+            JsonSerializerSettings serializerSettings
+        ) {
             var jsonSerializer = JsonSerializer.Create(serializerSettings);
             // Ignore the user configured StringEscapeHandling and always escape it.
             jsonSerializer.StringEscapeHandling = StringEscapeHandling.EscapeHtml;

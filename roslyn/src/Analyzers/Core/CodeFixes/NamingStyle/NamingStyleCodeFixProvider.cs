@@ -28,19 +28,27 @@ using Microsoft.CodeAnalysis.CodeActions.WorkspaceServices;
 namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
 {
 #if !CODE_STYLE  // https://github.com/dotnet/roslyn/issues/42218 tracks enabling this fixer in CodeStyle layer.
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeFixProviderNames.ApplyNamingStyle), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.ApplyNamingStyle
+        ),
+        Shared
+    ]
 #endif
     internal class NamingStyleCodeFixProvider : CodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public NamingStyleCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public NamingStyleCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; }
-            = ImmutableArray.Create(IDEDiagnosticIds.NamingRuleId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.NamingRuleId);
 
         public override FixAllProvider GetFixAllProvider()
         {
@@ -57,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             var document = context.Document;
             var span = context.Span;
 
-            var root = await document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await document.GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             var node = root.FindNode(span);
 
             if (document.GetLanguageService<ISyntaxFactsService>().IsIdentifierName(node))
@@ -70,11 +79,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                 node = node.Parent;
             }
 
-            var model = await document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var model = await document.GetSemanticModelAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             var symbol = model.GetDeclaredSymbol(node, context.CancellationToken);
 
             // TODO: We should always be able to find the symbol that generated this diagnostic,
-            // but this cannot always be done by simply asking for the declared symbol on the node 
+            // but this cannot always be done by simply asking for the declared symbol on the node
             // from the symbol's declaration location.
             // See https://github.com/dotnet/roslyn/issues/16588
 
@@ -95,18 +105,27 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
 #endif
                         string.Format(CodeFixesResources.Fix_Name_Violation_colon_0, fixedName),
                         c => FixAsync(document, symbol, fixedName, c),
-                        equivalenceKey: nameof(NamingStyleCodeFixProvider)),
-                    diagnostic);
+                        equivalenceKey: nameof(NamingStyleCodeFixProvider)
+                    ),
+                    diagnostic
+                );
             }
         }
 
         private static async Task<Solution> FixAsync(
-            Document document, ISymbol symbol, string fixedName, CancellationToken cancellationToken)
-        {
+            Document document,
+            ISymbol symbol,
+            string fixedName,
+            CancellationToken cancellationToken
+        ) {
             return await Renamer.RenameSymbolAsync(
-                document.Project.Solution, symbol, fixedName,
-                await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false),
-                cancellationToken).ConfigureAwait(false);
+                    document.Project.Solution,
+                    symbol,
+                    fixedName,
+                    await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private class FixNameCodeAction : CodeAction
@@ -129,8 +148,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
 #endif
                 string title,
                 Func<CancellationToken, Task<Solution>> createChangedSolutionAsync,
-                string equivalenceKey)
-            {
+                string equivalenceKey
+            ) {
 #if !CODE_STYLE
                 _startingSolution = startingSolution;
                 _symbol = symbol;
@@ -141,24 +160,37 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                 _equivalenceKey = equivalenceKey;
             }
 
-            protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
+            protected override async Task<
+                IEnumerable<CodeActionOperation>
+            > ComputePreviewOperationsAsync(CancellationToken cancellationToken)
             {
                 return SpecializedCollections.SingletonEnumerable(
-                    new ApplyChangesOperation(await _createChangedSolutionAsync(cancellationToken).ConfigureAwait(false)));
+                    new ApplyChangesOperation(
+                        await _createChangedSolutionAsync(cancellationToken).ConfigureAwait(false)
+                    )
+                );
             }
-            protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-            {
-                var newSolution = await _createChangedSolutionAsync(cancellationToken).ConfigureAwait(false);
+            protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+                CancellationToken cancellationToken
+            ) {
+                var newSolution = await _createChangedSolutionAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var codeAction = new ApplyChangesOperation(newSolution);
 
 #if CODE_STYLE  // https://github.com/dotnet/roslyn/issues/42218 tracks removing this conditional code.
                 return SpecializedCollections.SingletonEnumerable(codeAction);
 #else
-                var factory = _startingSolution.Workspace.Services.GetRequiredService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
+                var factory =
+                    _startingSolution.Workspace.Services.GetRequiredService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
                 return new CodeActionOperation[]
                 {
                     codeAction,
-                    factory.CreateSymbolRenamedOperation(_symbol, _newName, _startingSolution, newSolution)
+                    factory.CreateSymbolRenamedOperation(
+                        _symbol,
+                        _newName,
+                        _startingSolution,
+                        newSolution
+                    )
                 }.AsEnumerable();
 #endif
             }

@@ -22,8 +22,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             public ManagedDecryptorPal(
                 byte[] dataCopy,
                 EnvelopedDataAsn envelopedDataAsn,
-                RecipientInfoCollection recipientInfos)
-                : base(recipientInfos)
+                RecipientInfoCollection recipientInfos
+            ) : base(recipientInfos)
             {
                 _dataCopy = dataCopy;
                 _envelopedData = envelopedDataAsn;
@@ -35,8 +35,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 AsymmetricAlgorithm? privateKey,
                 X509Certificate2Collection originatorCerts,
                 X509Certificate2Collection extraStore,
-                out Exception? exception)
-            {
+                out Exception? exception
+            ) {
                 // When encryptedContent is null Windows seems to decrypt the CEK first,
                 // then return a 0 byte answer.
 
@@ -48,7 +48,9 @@ namespace Internal.Cryptography.Pal.AnyOS
 
                     if (privateKey != null && key == null)
                     {
-                        exception = new CryptographicException(SR.Cryptography_Cms_Ktri_RSARequired);
+                        exception = new CryptographicException(
+                            SR.Cryptography_Cms_Ktri_RSARequired
+                        );
                         return null;
                     }
 
@@ -68,8 +70,10 @@ namespace Internal.Cryptography.Pal.AnyOS
                                 _envelopedData.EncryptedContentInfo.ContentType,
                                 _envelopedData.EncryptedContentInfo.EncryptedContent,
                                 _envelopedData.EncryptedContentInfo.ContentEncryptionAlgorithm,
-                                out exception);
+                                out exception
+                            );
                         }
+
                         finally
                         {
                             if (cek != null)
@@ -83,7 +87,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 {
                     exception = new CryptographicException(
                         SR.Cryptography_Cms_RecipientType_NotSupported,
-                        recipientInfo.Type.ToString());
+                        recipientInfo.Type.ToString()
+                    );
 
                     return null;
                 }
@@ -94,18 +99,21 @@ namespace Internal.Cryptography.Pal.AnyOS
                 string contentType,
                 ReadOnlyMemory<byte>? content,
                 AlgorithmIdentifierAsn contentEncryptionAlgorithm,
-                out Exception? exception)
-            {
+                out Exception? exception
+            ) {
                 if (content == null)
                 {
                     exception = null;
 
-                    return new ContentInfo(
-                        new Oid(contentType),
-                        Array.Empty<byte>());
+                    return new ContentInfo(new Oid(contentType), Array.Empty<byte>());
                 }
 
-                byte[]? decrypted = DecryptContent(content.Value, cek, contentEncryptionAlgorithm, out exception);
+                byte[]? decrypted = DecryptContent(
+                    content.Value,
+                    cek,
+                    contentEncryptionAlgorithm,
+                    out exception
+                );
 
                 if (exception != null)
                 {
@@ -121,11 +129,13 @@ namespace Internal.Cryptography.Pal.AnyOS
                     {
                         try
                         {
-                            decrypted = AsnDecoder.ReadOctetString(decrypted, AsnEncodingRules.BER, out _);
+                            decrypted = AsnDecoder.ReadOctetString(
+                                decrypted,
+                                AsnEncodingRules.BER,
+                                out _
+                            );
                         }
-                        catch (AsnContentException)
-                        {
-                        }
+                        catch (AsnContentException) { }
                     }
                 }
                 else
@@ -134,9 +144,7 @@ namespace Internal.Cryptography.Pal.AnyOS
                 }
 
                 exception = null;
-                return new ContentInfo(
-                    new Oid(contentType),
-                    decrypted!);
+                return new ContentInfo(new Oid(contentType), decrypted!);
             }
 
             private static byte[] GetAsnSequenceWithContentNoValidation(ReadOnlySpan<byte> content)
@@ -159,8 +167,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 ReadOnlyMemory<byte> encryptedContent,
                 byte[] cek,
                 AlgorithmIdentifierAsn contentEncryptionAlgorithm,
-                out Exception? exception)
-            {
+                out Exception? exception
+            ) {
                 exception = null;
                 int encryptedContentLength = encryptedContent.Length;
                 byte[]? encryptedContentArray = CryptoPool.Rent(encryptedContentLength);
@@ -181,7 +189,10 @@ namespace Internal.Cryptography.Pal.AnyOS
                         {
                             // Decrypting or deriving the symmetric key with the wrong key may still succeed
                             // but produce a symmetric key that is not the correct length.
-                            throw new CryptographicException(SR.Cryptography_Cms_InvalidSymmetricKey, ae);
+                            throw new CryptographicException(
+                                SR.Cryptography_Cms_InvalidSymmetricKey,
+                                ae
+                            );
                         }
 
                         using (decryptor)
@@ -193,7 +204,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                             return decryptor.OneShot(
                                 encryptedContentArray,
                                 0,
-                                encryptedContentLength);
+                                encryptedContentLength
+                            );
                         }
                     }
                 }
@@ -209,9 +221,7 @@ namespace Internal.Cryptography.Pal.AnyOS
                 }
             }
 
-            public override void Dispose()
-            {
-            }
+            public override void Dispose() { }
         }
     }
 }

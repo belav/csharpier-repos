@@ -81,8 +81,9 @@ namespace JIT.HardwareIntrinsics.X86
                 return testStruct;
             }
 
-            public void RunStructFldScenario(ScalarTernOpBinResTest__MultiplyNoFlagsUInt32 testClass)
-            {
+            public void RunStructFldScenario(
+                ScalarTernOpBinResTest__MultiplyNoFlagsUInt32 testClass
+            ) {
                 UInt32 buffer = 0;
                 var result = Bmi2.MultiplyNoFlags(_fld1, _fld2, &buffer);
                 testClass.ValidateResult(_fld1, _fld2, buffer, result);
@@ -146,12 +147,19 @@ namespace JIT.HardwareIntrinsics.X86
 
             UInt32 buffer = 0;
 
-            var result = typeof(Bmi2).GetMethod(nameof(Bmi2.MultiplyNoFlags), new Type[] { typeof(UInt32), typeof(UInt32), typeof(UInt32*) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data2)),
-                                        Pointer.Box(&buffer, typeof(UInt32*))
-                                     });
+            var result = typeof(Bmi2).GetMethod(
+                    nameof(Bmi2.MultiplyNoFlags),
+                    new Type[] { typeof(UInt32), typeof(UInt32), typeof(UInt32*) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data2)),
+                        Pointer.Box(&buffer, typeof(UInt32*))
+                    }
+                );
 
             ValidateResult(_data1, _data2, buffer, (UInt32)result);
         }
@@ -160,11 +168,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
             UInt32 buffer = 0;
-            var result = Bmi2.MultiplyNoFlags(
-                _clsVar1,
-                _clsVar2,
-                &buffer
-            );
+            var result = Bmi2.MultiplyNoFlags(_clsVar1, _clsVar2, &buffer);
 
             ValidateResult(_clsVar1, _clsVar2, buffer, result);
         }
@@ -242,15 +246,24 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt32 op1, UInt32 op2, UInt32 lower, UInt32 higher, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt32 op1,
+            UInt32 op2,
+            UInt32 lower,
+            UInt32 higher,
+            [CallerMemberName] string method = ""
+        ) {
             var isUnexpectedResult = false;
 
-            uint expectedHigher = 4294967294, expectedLower = 1; isUnexpectedResult = (expectedHigher != higher) || (expectedLower != lower);
+            uint expectedHigher = 4294967294,
+                expectedLower = 1;
+            isUnexpectedResult = (expectedHigher != higher) || (expectedLower != lower);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi2)}.{nameof(Bmi2.MultiplyNoFlags)}<UInt32>(UInt32, UInt32, UInt32): MultiplyNoFlags failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi2)}.{nameof(Bmi2.MultiplyNoFlags)}<UInt32>(UInt32, UInt32, UInt32): MultiplyNoFlags failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($" lower: {lower}");

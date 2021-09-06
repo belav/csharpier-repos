@@ -10,6 +10,12 @@ internal static partial class Interop
     internal static partial class Sys
     {
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_Receive")]
-        internal static extern unsafe Error Receive(SafeHandle socket, byte* buffer, int bufferLen, SocketFlags flags, int* received);
+        internal static extern unsafe Error Receive(
+            SafeHandle socket,
+            byte* buffer,
+            int bufferLen,
+            SocketFlags flags,
+            int* received
+        );
     }
 }

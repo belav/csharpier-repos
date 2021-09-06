@@ -70,11 +70,12 @@ namespace System.Security.Cryptography
 
             byte[] rgbOddParityKey = rgbKey.FixupKeyParity();
             ulong key = BinaryPrimitives.ReadUInt64BigEndian(rgbOddParityKey);
-            if ((key == 0x0101010101010101) ||
-                (key == 0xfefefefefefefefe) ||
-                (key == 0x1f1f1f1f0e0e0e0e) ||
-                (key == 0xe0e0e0e0f1f1f1f1))
-            {
+            if (
+                (key == 0x0101010101010101)
+                || (key == 0xfefefefefefefefe)
+                || (key == 0x1f1f1f1f0e0e0e0e)
+                || (key == 0xe0e0e0e0f1f1f1f1)
+            ) {
                 return true;
             }
 
@@ -88,19 +89,20 @@ namespace System.Security.Cryptography
 
             byte[] rgbOddParityKey = rgbKey.FixupKeyParity();
             ulong key = BinaryPrimitives.ReadUInt64BigEndian(rgbOddParityKey);
-            if ((key == 0x01fe01fe01fe01fe) ||
-                (key == 0xfe01fe01fe01fe01) ||
-                (key == 0x1fe01fe00ef10ef1) ||
-                (key == 0xe01fe01ff10ef10e) ||
-                (key == 0x01e001e001f101f1) ||
-                (key == 0xe001e001f101f101) ||
-                (key == 0x1ffe1ffe0efe0efe) ||
-                (key == 0xfe1ffe1ffe0efe0e) ||
-                (key == 0x011f011f010e010e) ||
-                (key == 0x1f011f010e010e01) ||
-                (key == 0xe0fee0fef1fef1fe) ||
-                (key == 0xfee0fee0fef1fef1))
-            {
+            if (
+                (key == 0x01fe01fe01fe01fe)
+                || (key == 0xfe01fe01fe01fe01)
+                || (key == 0x1fe01fe00ef10ef1)
+                || (key == 0xe01fe01ff10ef10e)
+                || (key == 0x01e001e001f101f1)
+                || (key == 0xe001e001f101f101)
+                || (key == 0x1ffe1ffe0efe0efe)
+                || (key == 0xfe1ffe1ffe0efe0e)
+                || (key == 0x011f011f010e010e)
+                || (key == 0x1f011f010e010e01)
+                || (key == 0xe0fee0fef1fef1fe)
+                || (key == 0xfee0fee0fef1fef1)
+            ) {
                 return true;
             }
 

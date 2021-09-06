@@ -10,19 +10,21 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private class DebuggerSyntaxTree : ParsedSyntaxTree
         {
-            public DebuggerSyntaxTree(CSharpSyntaxNode root, SourceText text, CSharpParseOptions options)
-                : base(
-                    text,
-                    text.Encoding,
-                    text.ChecksumAlgorithm,
-                    path: "",
-                    options: options,
-                    root: root,
-                    directives: Syntax.InternalSyntax.DirectiveStack.Empty,
-                    diagnosticOptions: null,
-                    cloneRoot: true)
-            {
-            }
+            public DebuggerSyntaxTree(
+                CSharpSyntaxNode root,
+                SourceText text,
+                CSharpParseOptions options
+            ) : base(
+                text,
+                text.Encoding,
+                text.ChecksumAlgorithm,
+                path: "",
+                options: options,
+                root: root,
+                directives: Syntax.InternalSyntax.DirectiveStack.Empty,
+                diagnosticOptions: null,
+                cloneRoot: true
+            ) { }
 
             internal override bool SupportsLocations
             {

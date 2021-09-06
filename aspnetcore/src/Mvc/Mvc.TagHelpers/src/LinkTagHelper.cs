@@ -25,24 +25,62 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
     /// <remarks>
     /// The tag helper won't process for cases with just the 'href' attribute.
     /// </remarks>
-    [HtmlTargetElement("link", Attributes = HrefIncludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = HrefExcludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = FallbackHrefAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = FallbackHrefIncludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = FallbackHrefExcludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = FallbackTestClassAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = FallbackTestPropertyAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = FallbackTestValueAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-    [HtmlTargetElement("link", Attributes = AppendVersionAttributeName, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement(
+        "link",
+        Attributes = HrefIncludeAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = HrefExcludeAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = FallbackHrefAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = FallbackHrefIncludeAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = FallbackHrefExcludeAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = FallbackTestClassAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = FallbackTestPropertyAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = FallbackTestValueAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
+    [HtmlTargetElement(
+        "link",
+        Attributes = AppendVersionAttributeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
     public class LinkTagHelper : UrlResolutionTagHelper
     {
         private static readonly string FallbackJavaScriptResourceName =
-            typeof(LinkTagHelper).Namespace + ".compiler.resources.LinkTagHelper_FallbackJavaScript.js";
+            typeof(LinkTagHelper).Namespace
+            + ".compiler.resources.LinkTagHelper_FallbackJavaScript.js";
 
         private const string HrefIncludeAttributeName = "asp-href-include";
         private const string HrefExcludeAttributeName = "asp-href-exclude";
         private const string FallbackHrefAttributeName = "asp-fallback-href";
-        private const string SuppressFallbackIntegrityAttributeName = "asp-suppress-fallback-integrity";
+        private const string SuppressFallbackIntegrityAttributeName =
+            "asp-suppress-fallback-integrity";
         private const string FallbackHrefIncludeAttributeName = "asp-fallback-href-include";
         private const string FallbackHrefExcludeAttributeName = "asp-fallback-href-exclude";
         private const string FallbackTestClassAttributeName = "asp-fallback-test-class";
@@ -54,13 +92,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private const string IntegrityAttributeName = "integrity";
         private static readonly Func<Mode, Mode, int> Compare = (a, b) => a - b;
 
-        private static readonly ModeAttributes<Mode>[] ModeDetails = new[] {
+        private static readonly ModeAttributes<Mode>[] ModeDetails = new[]
+        {
             // Regular src with file version alone
             new ModeAttributes<Mode>(Mode.AppendVersion, new[] { AppendVersionAttributeName }),
             // Globbed Href (include only) no static href
-            new ModeAttributes<Mode>(Mode.GlobbedHref, new [] { HrefIncludeAttributeName }),
+            new ModeAttributes<Mode>(Mode.GlobbedHref, new[] { HrefIncludeAttributeName }),
             // Globbed Href (include & exclude), no static href
-            new ModeAttributes<Mode>(Mode.GlobbedHref, new [] { HrefIncludeAttributeName, HrefExcludeAttributeName }),
+            new ModeAttributes<Mode>(
+                Mode.GlobbedHref,
+                new[] { HrefIncludeAttributeName, HrefExcludeAttributeName }
+            ),
             // Fallback with static href
             new ModeAttributes<Mode>(
                 Mode.Fallback,
@@ -70,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     FallbackTestClassAttributeName,
                     FallbackTestPropertyAttributeName,
                     FallbackTestValueAttributeName
-                }),
+                }
+            ),
             // Fallback with globbed href (include only)
             new ModeAttributes<Mode>(
                 Mode.Fallback,
@@ -80,7 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     FallbackTestClassAttributeName,
                     FallbackTestPropertyAttributeName,
                     FallbackTestValueAttributeName
-                }),
+                }
+            ),
             // Fallback with globbed href (include & exclude)
             new ModeAttributes<Mode>(
                 Mode.Fallback,
@@ -91,7 +135,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     FallbackTestClassAttributeName,
                     FallbackTestPropertyAttributeName,
                     FallbackTestValueAttributeName
-                }),
+                }
+            ),
         };
         private StringWriter _stringWriter;
 
@@ -112,8 +157,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             IFileVersionProvider fileVersionProvider,
             HtmlEncoder htmlEncoder,
             JavaScriptEncoder javaScriptEncoder,
-            IUrlHelperFactory urlHelperFactory)
-            : base(urlHelperFactory, htmlEncoder)
+            IUrlHelperFactory urlHelperFactory
+        ) : base(urlHelperFactory, htmlEncoder)
         {
             HostingEnvironment = hostingEnvironment;
             JavaScriptEncoder = javaScriptEncoder;
@@ -290,16 +335,22 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var existingAttribute = output.Attributes[index];
                     output.Attributes[index] = new TagHelperAttribute(
                         existingAttribute.Name,
-                        FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Href),
-                        existingAttribute.ValueStyle);
+                        FileVersionProvider.AddFileVersionToPath(
+                            ViewContext.HttpContext.Request.PathBase,
+                            Href
+                        ),
+                        existingAttribute.ValueStyle
+                    );
                 }
             }
 
             var builder = output.PostElement;
             builder.Clear();
 
-            if (mode == Mode.GlobbedHref || mode == Mode.Fallback && !string.IsNullOrEmpty(HrefInclude))
-            {
+            if (
+                mode == Mode.GlobbedHref
+                || mode == Mode.Fallback && !string.IsNullOrEmpty(HrefInclude)
+            ) {
                 BuildGlobbedLinkTags(output.Attributes, builder);
                 if (string.IsNullOrEmpty(Href))
                 {
@@ -320,8 +371,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             }
         }
 
-        private void BuildGlobbedLinkTags(TagHelperAttributeList attributes, TagHelperContent builder)
-        {
+        private void BuildGlobbedLinkTags(
+            TagHelperAttributeList attributes,
+            TagHelperContent builder
+        ) {
             EnsureGlobbingUrlBuilder();
 
             // Build a <link /> tag for each matched href.
@@ -349,7 +402,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var fallbackHrefs = GlobbingUrlBuilder.BuildUrlList(
                 FallbackHref,
                 FallbackHrefInclude,
-                FallbackHrefExclude);
+                FallbackHrefExclude
+            );
 
             if (fallbackHrefs.Count == 0)
             {
@@ -359,8 +413,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             builder.AppendHtml(HtmlString.NewLine);
 
             // Build the <meta /> tag that's used to test for the presence of the stylesheet
-            builder
-                .AppendHtml("<meta name=\"x-stylesheet-fallback-test\" content=\"\" class=\"")
+            builder.AppendHtml("<meta name=\"x-stylesheet-fallback-test\" content=\"\" class=\"")
                 .Append(FallbackTestClass)
                 .AppendHtml("\" />");
 
@@ -368,9 +421,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // <link /> tag to load the fallback stylesheet if the test CSS property value is found to be false,
             // indicating that the primary stylesheet failed to load.
             // GetEmbeddedJavaScript returns JavaScript to which we add '"{0}","{1}",{2});'
-            builder
-                .AppendHtml("<script>")
-                .AppendHtml(JavaScriptResources.GetEmbeddedJavaScript(FallbackJavaScriptResourceName))
+            builder.AppendHtml("<script>")
+                .AppendHtml(
+                    JavaScriptResources.GetEmbeddedJavaScript(FallbackJavaScriptResourceName)
+                )
                 .AppendHtml("\"")
                 .AppendHtml(JavaScriptEncoder.Encode(FallbackTestProperty))
                 .AppendHtml("\",\"")
@@ -386,13 +440,24 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             for (var i = 0; i < attributesCount; i++)
             {
                 var attribute = attributes[i];
-                if (string.Equals(attribute.Name, HrefAttributeName, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    string.Equals(
+                        attribute.Name,
+                        HrefAttributeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     continue;
                 }
 
-                if (SuppressFallbackIntegrity && string.Equals(attribute.Name, IntegrityAttributeName, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    SuppressFallbackIntegrity
+                    && string.Equals(
+                        attribute.Name,
+                        IntegrityAttributeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     continue;
                 }
 
@@ -411,9 +476,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
         private bool HasStyleSheetLinkType(TagHelperAttributeList attributes)
         {
-            if (!attributes.TryGetAttribute(RelAttributeName, out var relAttribute) ||
-                relAttribute.Value == null)
-            {
+            if (
+                !attributes.TryGetAttribute(RelAttributeName, out var relAttribute)
+                || relAttribute.Value == null
+            ) {
                 return false;
             }
 
@@ -432,13 +498,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 stringValue = Convert.ToString(attributeValue, CultureInfo.InvariantCulture);
             }
 
-            var hasRelStylesheet = string.Equals("stylesheet", stringValue, StringComparison.Ordinal);
+            var hasRelStylesheet = string.Equals(
+                "stylesheet",
+                stringValue,
+                StringComparison.Ordinal
+            );
 
             return hasRelStylesheet;
         }
 
-        private void AppendFallbackHrefs(TagHelperContent builder, IReadOnlyList<string> fallbackHrefs)
-        {
+        private void AppendFallbackHrefs(
+            TagHelperContent builder,
+            IReadOnlyList<string> fallbackHrefs
+        ) {
             builder.AppendHtml("[");
             var firstAdded = false;
 
@@ -462,7 +534,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 var valueToWrite = fallbackHrefs[i];
                 if (AppendVersion == true)
                 {
-                    valueToWrite = FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, fallbackHrefs[i]);
+                    valueToWrite = FileVersionProvider.AddFileVersionToPath(
+                        ViewContext.HttpContext.Request.PathBase,
+                        fallbackHrefs[i]
+                    );
                 }
 
                 // Must HTML-encode the href attribute value to ensure the written <link/> element is valid. Must also
@@ -483,7 +558,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 GlobbingUrlBuilder = new GlobbingUrlBuilder(
                     HostingEnvironment.WebRootFileProvider,
                     Cache,
-                    ViewContext.HttpContext.Request.PathBase);
+                    ViewContext.HttpContext.Request.PathBase
+                );
             }
         }
 
@@ -491,12 +567,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             if (FileVersionProvider == null)
             {
-                FileVersionProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+                FileVersionProvider =
+                    ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
             }
         }
 
-        private void BuildLinkTag(string href, TagHelperAttributeList attributes, TagHelperContent builder)
-        {
+        private void BuildLinkTag(
+            string href,
+            TagHelperAttributeList attributes,
+            TagHelperContent builder
+        ) {
             builder.AppendHtml("<link ");
 
             var addHref = true;
@@ -507,8 +587,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             {
                 var attribute = attributes[i];
 
-                if (string.Equals(attribute.Name, HrefAttributeName, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    string.Equals(
+                        attribute.Name,
+                        HrefAttributeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     addHref = false;
 
                     AppendVersionedHref(attribute.Name, href, builder);
@@ -528,18 +613,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             builder.AppendHtml("/>");
         }
 
-        private void AppendVersionedHref(string hrefName, string hrefValue, TagHelperContent builder)
-        {
+        private void AppendVersionedHref(
+            string hrefName,
+            string hrefValue,
+            TagHelperContent builder
+        ) {
             if (AppendVersion == true)
             {
-                hrefValue = FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, hrefValue);
+                hrefValue = FileVersionProvider.AddFileVersionToPath(
+                    ViewContext.HttpContext.Request.PathBase,
+                    hrefValue
+                );
             }
 
-            builder
-                .AppendHtml(hrefName)
-                .AppendHtml("=\"")
-                .Append(hrefValue)
-                .AppendHtml("\" ");
+            builder.AppendHtml(hrefName).AppendHtml("=\"").Append(hrefValue).AppendHtml("\" ");
         }
 
         private enum Mode
@@ -548,12 +635,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             /// Just adding a file version for the generated urls.
             /// </summary>
             AppendVersion = 0,
-
             /// <summary>
             /// Just performing file globbing search for the href, rendering a separate &lt;link&gt; for each match.
             /// </summary>
             GlobbedHref = 1,
-
             /// <summary>
             /// Rendering a fallback block if primary stylesheet fails to load. Will also do globbing for both the
             /// primary and fallback hrefs if the appropriate properties are set.

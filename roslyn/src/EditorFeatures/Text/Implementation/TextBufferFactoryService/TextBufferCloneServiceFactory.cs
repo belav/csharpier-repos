@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.Text.Implementation.TextBufferFactoryService
             _singleton = textBufferCloneService;
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
 
         [Export(typeof(ITextBufferCloneService)), Shared]
         private class TextBufferCloneService : ITextBufferCloneService
@@ -36,22 +36,26 @@ namespace Microsoft.CodeAnalysis.Text.Implementation.TextBufferFactoryService
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TextBufferCloneService(ITextBufferFactoryService3 textBufferFactoryService, IContentTypeRegistryService contentTypeRegistryService)
-            {
+            public TextBufferCloneService(
+                ITextBufferFactoryService3 textBufferFactoryService,
+                IContentTypeRegistryService contentTypeRegistryService
+            ) {
                 _textBufferFactoryService = textBufferFactoryService;
 
-                _roslynContentType = contentTypeRegistryService.GetContentType(ContentTypeNames.RoslynContentType);
+                _roslynContentType = contentTypeRegistryService.GetContentType(
+                    ContentTypeNames.RoslynContentType
+                );
                 _unknownContentType = contentTypeRegistryService.UnknownContentType;
             }
 
-            public ITextBuffer CloneWithUnknownContentType(SnapshotSpan span)
-                => _textBufferFactoryService.CreateTextBuffer(span, _unknownContentType);
+            public ITextBuffer CloneWithUnknownContentType(SnapshotSpan span) =>
+                _textBufferFactoryService.CreateTextBuffer(span, _unknownContentType);
 
-            public ITextBuffer CloneWithUnknownContentType(ITextImage textImage)
-                => Clone(textImage, _unknownContentType);
+            public ITextBuffer CloneWithUnknownContentType(ITextImage textImage) =>
+                Clone(textImage, _unknownContentType);
 
-            public ITextBuffer CloneWithRoslynContentType(SourceText sourceText)
-                => Clone(sourceText, _roslynContentType);
+            public ITextBuffer CloneWithRoslynContentType(SourceText sourceText) =>
+                Clone(sourceText, _roslynContentType);
 
             public ITextBuffer Clone(SourceText sourceText, IContentType contentType)
             {
@@ -63,11 +67,14 @@ namespace Microsoft.CodeAnalysis.Text.Implementation.TextBufferFactoryService
                 }
 
                 // we can't, so do it more expensive way
-                return _textBufferFactoryService.CreateTextBuffer(sourceText.ToString(), contentType);
+                return _textBufferFactoryService.CreateTextBuffer(
+                    sourceText.ToString(),
+                    contentType
+                );
             }
 
-            private ITextBuffer Clone(ITextImage textImage, IContentType contentType)
-                => _textBufferFactoryService.CreateTextBuffer(textImage, contentType);
+            private ITextBuffer Clone(ITextImage textImage, IContentType contentType) =>
+                _textBufferFactoryService.CreateTextBuffer(textImage, contentType);
         }
     }
 }

@@ -17,20 +17,22 @@ namespace ServerComparison.TestSites
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddCommandLine(args)
+            var config = new ConfigurationBuilder().AddCommandLine(args)
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
 
-            var builder = new WebHostBuilder()
-                .UseServer(new NoopServer())
+            var builder = new WebHostBuilder().UseServer(new NoopServer())
                 .UseConfiguration(config)
                 .SuppressStatusMessages(true)
-                .ConfigureLogging((_, factory) =>
-                {
-                    factory.AddConsole();
-                    factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning);
-                })
+                .ConfigureLogging(
+                    (_, factory) =>
+                    {
+                        factory.AddConsole();
+                        factory.AddFilter<ConsoleLoggerProvider>(
+                            level => level >= LogLevel.Warning
+                        );
+                    }
+                )
                 .UseStartup("Microsoft.AspNetCore.Hosting.TestSites");
 
             if (config["STARTMECHANIC"] == "Run")
@@ -57,14 +59,14 @@ namespace ServerComparison.TestSites
 
     public class NoopServer : IServer
     {
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public IFeatureCollection Features { get; } = new FeatureCollection();
 
-        public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
-        {
+        public Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        ) {
             return Task.CompletedTask;
         }
 

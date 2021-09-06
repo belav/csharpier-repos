@@ -41,9 +41,7 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// </summary>
             private readonly ImmutableArray<TextChange> _textChanges;
 
-            protected AddImportCodeAction(
-                Document originalDocument,
-                AddImportFixData fixData)
+            protected AddImportCodeAction(Document originalDocument, AddImportFixData fixData)
             {
                 OriginalDocument = originalDocument;
                 FixData = fixData;
@@ -54,9 +52,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                 _textChanges = fixData.TextChanges.ToImmutableArrayOrEmpty();
             }
 
-            protected async Task<Document> GetUpdatedDocumentAsync(CancellationToken cancellationToken)
-            {
-                var oldText = await OriginalDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            protected async Task<Document> GetUpdatedDocumentAsync(
+                CancellationToken cancellationToken
+            ) {
+                var oldText = await OriginalDocument.GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var newText = oldText.WithChanges(_textChanges);
                 var newDocument = OriginalDocument.WithText(newText);
 

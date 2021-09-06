@@ -26,50 +26,84 @@ namespace System.Transactions
         private static object? s_classSyncObject;
 
         internal static VolatileEnlistmentActive VolatileEnlistmentActive =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentActive, ref s_classSyncObject, () => new VolatileEnlistmentActive());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentActive,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentActive()
+            );
 
         protected static VolatileEnlistmentPreparing VolatileEnlistmentPreparing =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentPreparing, ref s_classSyncObject, () => new VolatileEnlistmentPreparing());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentPreparing,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentPreparing()
+            );
 
         protected static VolatileEnlistmentPrepared VolatileEnlistmentPrepared =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentPrepared, ref s_classSyncObject, () => new VolatileEnlistmentPrepared());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentPrepared,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentPrepared()
+            );
 
         protected static VolatileEnlistmentSPC VolatileEnlistmentSPC =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentSPC, ref s_classSyncObject, () => new VolatileEnlistmentSPC());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentSPC,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentSPC()
+            );
 
         protected static VolatileEnlistmentPreparingAborting VolatileEnlistmentPreparingAborting =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentPreparingAborting, ref s_classSyncObject, () => new VolatileEnlistmentPreparingAborting());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentPreparingAborting,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentPreparingAborting()
+            );
 
         protected static VolatileEnlistmentAborting VolatileEnlistmentAborting =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentAborting, ref s_classSyncObject, () => new VolatileEnlistmentAborting());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentAborting,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentAborting()
+            );
 
         protected static VolatileEnlistmentCommitting VolatileEnlistmentCommitting =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentCommitting, ref s_classSyncObject, () => new VolatileEnlistmentCommitting());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentCommitting,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentCommitting()
+            );
 
         protected static VolatileEnlistmentInDoubt VolatileEnlistmentInDoubt =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentInDoubt, ref s_classSyncObject, () => new VolatileEnlistmentInDoubt());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentInDoubt,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentInDoubt()
+            );
 
         protected static VolatileEnlistmentEnded VolatileEnlistmentEnded =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentEnded, ref s_classSyncObject, () => new VolatileEnlistmentEnded());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentEnded,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentEnded()
+            );
 
         protected static VolatileEnlistmentDone VolatileEnlistmentDone =>
-            LazyInitializer.EnsureInitialized(ref s_volatileEnlistmentDone, ref s_classSyncObject, () => new VolatileEnlistmentDone());
-
+            LazyInitializer.EnsureInitialized(
+                ref s_volatileEnlistmentDone,
+                ref s_classSyncObject,
+                () => new VolatileEnlistmentDone()
+            );
 
         // Override of get_RecoveryInformation to be more specific with the exception string.
         internal override byte[] RecoveryInformation(InternalEnlistment enlistment)
         {
-            throw TransactionException.CreateInvalidOperationException(TraceSourceType.TraceSourceLtm,
-                SR.VolEnlistNoRecoveryInfo, null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateInvalidOperationException(
+                TraceSourceType.TraceSourceLtm,
+                SR.VolEnlistNoRecoveryInfo,
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
     }
 
@@ -83,7 +117,6 @@ namespace System.Transactions
         {
             // Set the enlistment state
             enlistment.State = this;
-
             // Yeah it's active.
         }
 
@@ -107,12 +140,10 @@ namespace System.Transactions
             VolatileEnlistmentPreparing.EnterState(enlistment);
         }
 
-
         internal override void ChangeStateSinglePhaseCommit(InternalEnlistment enlistment)
         {
             VolatileEnlistmentSPC.EnterState(enlistment);
         }
-
 
         #endregion
 
@@ -123,7 +154,6 @@ namespace System.Transactions
             // Change the enlistment state to aborting.
             VolatileEnlistmentAborting.EnterState(enlistment);
         }
-
         #endregion
     }
 
@@ -147,6 +177,7 @@ namespace System.Transactions
                 Debug.Assert(enlistment.EnlistmentNotification != null);
                 enlistment.EnlistmentNotification.Prepare(enlistment.PreparingEnlistment);
             }
+
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -220,9 +251,12 @@ namespace System.Transactions
             try // Don't hold this lock while calling into the application code.
             {
                 Debug.Assert(enlistment.SinglePhaseNotification != null);
-                enlistment.SinglePhaseNotification.SinglePhaseCommit(enlistment.SinglePhaseEnlistment);
+                enlistment.SinglePhaseNotification.SinglePhaseCommit(
+                    enlistment.SinglePhaseEnlistment
+                );
                 spcCommitted = true;
             }
+
             finally
             {
                 if (!spcCommitted)
@@ -280,7 +314,6 @@ namespace System.Transactions
         {
             // Set the enlistment state
             enlistment.State = this;
-
             // Wait for Committed
         }
 
@@ -375,6 +408,7 @@ namespace System.Transactions
                 Debug.Assert(enlistment.EnlistmentNotification != null);
                 enlistment.EnlistmentNotification.Rollback(enlistment.SinglePhaseEnlistment);
             }
+
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -419,6 +453,7 @@ namespace System.Transactions
                 // Forward the notification to the enlistment
                 enlistment.EnlistmentNotification.Commit(enlistment.Enlistment);
             }
+
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -453,6 +488,7 @@ namespace System.Transactions
                 // Forward the notification to the enlistment
                 enlistment.EnlistmentNotification.InDoubt(enlistment.PreparingEnlistment);
             }
+
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -475,7 +511,6 @@ namespace System.Transactions
         {
             // Set the enlistment state
             enlistment.State = this;
-
             // Nothing to do.
         }
 
@@ -516,7 +551,6 @@ namespace System.Transactions
         {
             // Set the enlistment state
             enlistment.State = this;
-
             // Nothing to do.
         }
 

@@ -20,8 +20,11 @@ namespace Internal.Cryptography
         //
         // Attempts to map a friendly name to an OID. Returns null if not a known name.
         //
-        public static string? ToFriendlyName(string oid, OidGroup oidGroup, bool fallBackToAllGroups)
-        {
+        public static string? ToFriendlyName(
+            string oid,
+            OidGroup oidGroup,
+            bool fallBackToAllGroups
+        ) {
             if (oid == null)
                 throw new ArgumentNullException(nameof(oid));
 
@@ -35,10 +38,11 @@ namespace Internal.Cryptography
             // out the answer based on the group criteria.
             if (shouldUseCache)
             {
-                if (s_oidToFriendlyName.TryGetValue(oid, out mappedName) ||
-                    s_compatOids.TryGetValue(oid, out mappedName) ||
-                    s_lateBoundOidToFriendlyName.TryGetValue(oid, out mappedName))
-                {
+                if (
+                    s_oidToFriendlyName.TryGetValue(oid, out mappedName)
+                    || s_compatOids.TryGetValue(oid, out mappedName)
+                    || s_lateBoundOidToFriendlyName.TryGetValue(oid, out mappedName)
+                ) {
                     return mappedName;
                 }
             }
@@ -48,7 +52,6 @@ namespace Internal.Cryptography
             if (shouldUseCache && mappedName != null)
             {
                 s_lateBoundOidToFriendlyName.TryAdd(oid, mappedName);
-
                 // Don't add the reverse here.  Just because oid => name doesn't mean name => oid.
                 // And don't bother doing the reverse lookup proactively, just wait until they ask for it.
             }
@@ -59,8 +62,11 @@ namespace Internal.Cryptography
         //
         // Attempts to retrieve the friendly name for an OID. Returns null if not a known or valid OID.
         //
-        public static string? ToOid(string friendlyName, OidGroup oidGroup, bool fallBackToAllGroups)
-        {
+        public static string? ToOid(
+            string friendlyName,
+            OidGroup oidGroup,
+            bool fallBackToAllGroups
+        ) {
             if (friendlyName == null)
                 throw new ArgumentNullException(nameof(friendlyName));
             if (friendlyName.Length == 0)
@@ -71,9 +77,10 @@ namespace Internal.Cryptography
 
             if (shouldUseCache)
             {
-                if (s_friendlyNameToOid.TryGetValue(friendlyName, out mappedOid) ||
-                    s_lateBoundFriendlyNameToOid.TryGetValue(friendlyName, out mappedOid))
-                {
+                if (
+                    s_friendlyNameToOid.TryGetValue(friendlyName, out mappedOid)
+                    || s_lateBoundFriendlyNameToOid.TryGetValue(friendlyName, out mappedOid)
+                ) {
                     return mappedOid;
                 }
             }
@@ -83,7 +90,6 @@ namespace Internal.Cryptography
             if (shouldUseCache)
             {
                 s_lateBoundFriendlyNameToOid.TryAdd(friendlyName, mappedOid);
-
                 // Don't add the reverse here.  Friendly Name => OID is a case insensitive search,
                 // so the casing provided as input here may not be the 'correct' one.  Just let
                 // ToFriendlyName capture the response and cache it itself.
@@ -104,37 +110,47 @@ namespace Internal.Cryptography
         /// <summary>Expected size of <see cref="s_oidToFriendlyName"/>.</summary>
         private const int OidToFriendlyNameCount = 103;
 
-        private static readonly Dictionary<string, string> s_friendlyNameToOid =
-            new Dictionary<string, string>(FriendlyNameToOidCount, StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, string> s_friendlyNameToOid = new Dictionary<
+            string,
+            string
+        >(FriendlyNameToOidCount, StringComparer.OrdinalIgnoreCase);
 
-        private static readonly Dictionary<string, string> s_oidToFriendlyName =
-            new Dictionary<string, string>(OidToFriendlyNameCount, StringComparer.Ordinal);
+        private static readonly Dictionary<string, string> s_oidToFriendlyName = new Dictionary<
+            string,
+            string
+        >(OidToFriendlyNameCount, StringComparer.Ordinal);
 
-        private static readonly Dictionary<string, string> s_compatOids =
-            new Dictionary<string, string>
-            {
-                { "1.2.840.113549.1.3.1", "DH" },
-                { "1.3.14.3.2.12", "DSA" },
-                { "1.3.14.3.2.13", "sha1DSA" },
-                { "1.3.14.3.2.15", "shaRSA" },
-                { "1.3.14.3.2.18", "sha" },
-                { "1.3.14.3.2.2", "md4RSA" },
-                { "1.3.14.3.2.22", "RSA_KEYX" },
-                { "1.3.14.3.2.29", "sha1RSA" },
-                { "1.3.14.3.2.3", "md5RSA" },
-                { "1.3.14.3.2.4", "md4RSA" },
-                { "1.3.14.7.2.3.1", "md2RSA" },
-            };
+        private static readonly Dictionary<string, string> s_compatOids = new Dictionary<
+            string,
+            string
+        >
+        {
+            { "1.2.840.113549.1.3.1", "DH" },
+            { "1.3.14.3.2.12", "DSA" },
+            { "1.3.14.3.2.13", "sha1DSA" },
+            { "1.3.14.3.2.15", "shaRSA" },
+            { "1.3.14.3.2.18", "sha" },
+            { "1.3.14.3.2.2", "md4RSA" },
+            { "1.3.14.3.2.22", "RSA_KEYX" },
+            { "1.3.14.3.2.29", "sha1RSA" },
+            { "1.3.14.3.2.3", "md5RSA" },
+            { "1.3.14.3.2.4", "md4RSA" },
+            { "1.3.14.7.2.3.1", "md2RSA" },
+        };
 
         static OidLookup()
         {
             InitializeLookupDictionaries();
 #if DEBUG
             // Validate we hardcoded the right dictionary size
-            Debug.Assert(s_friendlyNameToOid.Count == FriendlyNameToOidCount,
-                $"Expected {nameof(s_friendlyNameToOid)}.{nameof(s_friendlyNameToOid.Count)} == {FriendlyNameToOidCount}, got {s_friendlyNameToOid.Count}");
-            Debug.Assert(s_oidToFriendlyName.Count == OidToFriendlyNameCount,
-                $"Expected {nameof(s_oidToFriendlyName)}.{nameof(s_oidToFriendlyName.Count)} == {OidToFriendlyNameCount}, got {s_oidToFriendlyName.Count}");
+            Debug.Assert(
+                s_friendlyNameToOid.Count == FriendlyNameToOidCount,
+                $"Expected {nameof(s_friendlyNameToOid)}.{nameof(s_friendlyNameToOid.Count)} == {FriendlyNameToOidCount}, got {s_friendlyNameToOid.Count}"
+            );
+            Debug.Assert(
+                s_oidToFriendlyName.Count == OidToFriendlyNameCount,
+                $"Expected {nameof(s_oidToFriendlyName)}.{nameof(s_oidToFriendlyName.Count)} == {OidToFriendlyNameCount}, got {s_oidToFriendlyName.Count}"
+            );
 
             ExtraStaticDebugValidation();
 #endif
@@ -142,8 +158,11 @@ namespace Internal.Cryptography
 
         private static void InitializeLookupDictionaries()
         {
-            static void AddEntry(string oid, string primaryFriendlyName, string[]? additionalFriendlyNames = null)
-            {
+            static void AddEntry(
+                string oid,
+                string primaryFriendlyName,
+                string[]? additionalFriendlyNames = null
+            ) {
                 s_oidToFriendlyName.Add(oid, primaryFriendlyName);
                 s_friendlyNameToOid.Add(primaryFriendlyName, oid);
 
@@ -209,7 +228,11 @@ namespace Internal.Cryptography
             AddEntry("1.3.133.16.840.63.0.2", "ECDH_STD_SHA1_KDF");
             AddEntry("1.3.132.1.11.1", "ECDH_STD_SHA256_KDF");
             AddEntry("1.3.132.1.11.2", "ECDH_STD_SHA384_KDF");
-            AddEntry("1.2.840.10045.3.1.7", "ECDSA_P256", new[] { "nistP256", "secP256r1", "x962P256v1" } );
+            AddEntry(
+                "1.2.840.10045.3.1.7",
+                "ECDSA_P256",
+                new[] { "nistP256", "secP256r1", "x962P256v1" }
+            );
             AddEntry("1.3.132.0.34", "ECDSA_P384", new[] { "nistP384", "secP384r1" });
             AddEntry("1.3.132.0.35", "ECDSA_P521", new[] { "nistP521", "secP521r1" });
             AddEntry("1.2.840.113549.1.9.16.3.5", "ESDH");

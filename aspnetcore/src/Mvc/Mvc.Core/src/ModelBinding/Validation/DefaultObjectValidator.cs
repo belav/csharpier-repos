@@ -23,8 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public DefaultObjectValidator(
             IModelMetadataProvider modelMetadataProvider,
             IList<IModelValidatorProvider> validatorProviders,
-            MvcOptions mvcOptions)
-            : base(modelMetadataProvider, validatorProviders)
+            MvcOptions mvcOptions
+        ) : base(modelMetadataProvider, validatorProviders)
         {
             _mvcOptions = mvcOptions;
         }
@@ -34,17 +34,18 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             IModelValidatorProvider validatorProvider,
             ValidatorCache validatorCache,
             IModelMetadataProvider metadataProvider,
-            ValidationStateDictionary? validationState)
-        {
+            ValidationStateDictionary? validationState
+        ) {
             var visitor = new ValidationVisitor(
                 actionContext,
                 validatorProvider,
                 validatorCache,
                 metadataProvider,
-                validationState)
-            {
+                validationState
+            ) {
                 MaxValidationDepth = _mvcOptions.MaxValidationDepth,
-                ValidateComplexTypesIfChildValidationFails = _mvcOptions.ValidateComplexTypesIfChildValidationFails,
+                ValidateComplexTypesIfChildValidationFails =
+                    _mvcOptions.ValidateComplexTypesIfChildValidationFails,
             };
 
             return visitor;

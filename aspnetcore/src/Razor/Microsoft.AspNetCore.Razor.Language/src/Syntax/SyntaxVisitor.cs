@@ -63,8 +63,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             DefaultVisit(trivia);
         }
 
-        public virtual void DefaultVisit(SyntaxNode node)
-        {
-        }
+        public virtual void DefaultVisit(SyntaxNode node) { }
     }
 }

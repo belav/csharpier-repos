@@ -22,11 +22,18 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             End = end;
         }
 
-        public static Range FromTextSpan(TextSpan textSpan, SourceText sourceText, IdFactory idFactory)
-        {
+        public static Range FromTextSpan(
+            TextSpan textSpan,
+            SourceText sourceText,
+            IdFactory idFactory
+        ) {
             var linePositionSpan = sourceText.Lines.GetLinePositionSpan(textSpan);
 
-            return new Range(start: ConvertLinePositionToPosition(linePositionSpan.Start), end: ConvertLinePositionToPosition(linePositionSpan.End), idFactory);
+            return new Range(
+                start: ConvertLinePositionToPosition(linePositionSpan.Start),
+                end: ConvertLinePositionToPosition(linePositionSpan.End),
+                idFactory
+            );
         }
 
         internal static Position ConvertLinePositionToPosition(LinePosition linePosition)

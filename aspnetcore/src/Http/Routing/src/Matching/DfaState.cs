@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Candidate[] candidates,
             IEndpointSelectorPolicy[] policies,
             JumpTable pathTransitions,
-            PolicyJumpTable policyTransitions)
-        {
+            PolicyJumpTable policyTransitions
+        ) {
             Candidates = candidates;
             Policies = policies;
             PathTransitions = pathTransitions;
@@ -27,10 +27,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         public string DebuggerToString()
         {
-            return
-                $"matches: {Candidates?.Length ?? 0}, " +
-                $"path: ({PathTransitions?.DebuggerToString()}), " +
-                $"policy: ({PolicyTransitions?.DebuggerToString()})";
+            return $"matches: {Candidates?.Length ?? 0}, "
+                + $"path: ({PathTransitions?.DebuggerToString()}), "
+                + $"policy: ({PolicyTransitions?.DebuggerToString()})";
         }
     }
 }

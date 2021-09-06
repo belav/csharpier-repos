@@ -13,7 +13,10 @@ namespace Microsoft.WebAssembly.Diagnostics
 {
     internal class InspectorClient : DevToolsClient
     {
-        Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<MessageId, TaskCompletionSource<Result>>();
+        Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<
+            MessageId,
+            TaskCompletionSource<Result>
+        >();
         Func<string, JObject, CancellationToken, Task> onEvent;
         int next_cmd_id;
 
@@ -37,8 +40,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         public async Task Connect(
             Uri uri,
             Func<string, JObject, CancellationToken, Task> onEvent,
-            CancellationToken token)
-        {
+            CancellationToken token
+        ) {
             this.onEvent = onEvent;
 
             RunLoopStopped += (_, args) =>
@@ -59,21 +62,20 @@ namespace Microsoft.WebAssembly.Diagnostics
             await ConnectWithMainLoops(uri, HandleMessage, token);
         }
 
-        public Task<Result> SendCommand(string method, JObject args, CancellationToken token)
-            => SendCommand(new SessionId(null), method, args, token);
+        public Task<Result> SendCommand(string method, JObject args, CancellationToken token) =>
+            SendCommand(new SessionId(null), method, args, token);
 
-        public Task<Result> SendCommand(SessionId sessionId, string method, JObject args, CancellationToken token)
-        {
+        public Task<Result> SendCommand(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             int id = ++next_cmd_id;
             if (args == null)
                 args = new JObject();
 
-            var o = JObject.FromObject(new
-            {
-                id = id,
-                method = method,
-                @params = args
-            });
+            var o = JObject.FromObject(new { id = id, method = method, @params = args });
 
             var tcs = new TaskCompletionSource<Result>();
             pending_cmds[new MessageId(sessionId.sessionId, id)] = tcs;

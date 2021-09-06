@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 var message = Resources.FormatValidatableObjectAdapter_IncompatibleType(
                     typeof(IValidatableObject).Name,
-                    model.GetType());
+                    model.GetType()
+                );
 
                 throw new InvalidOperationException(message);
             }
@@ -35,8 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var validationContext = new ValidationContext(
                 instance: validatable,
                 serviceProvider: context.ActionContext?.HttpContext?.RequestServices,
-                items: null)
-            {
+                items: null
+            ) {
                 DisplayName = context.ModelMetadata.GetDisplayName(),
                 MemberName = context.ModelMetadata.Name,
             };
@@ -44,15 +45,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return ConvertResults(validatable.Validate(validationContext));
         }
 
-        private IEnumerable<ModelValidationResult> ConvertResults(IEnumerable<ValidationResult> results)
-        {
+        private IEnumerable<ModelValidationResult> ConvertResults(
+            IEnumerable<ValidationResult> results
+        ) {
             foreach (var result in results)
             {
                 if (result != ValidationResult.Success)
                 {
                     if (result.MemberNames == null || !result.MemberNames.Any())
                     {
-                        yield return new ModelValidationResult(memberName: null, message: result.ErrorMessage);
+                        yield return new ModelValidationResult(
+                            memberName: null,
+                            message: result.ErrorMessage
+                        );
                     }
                     else
                     {

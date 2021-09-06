@@ -13,8 +13,8 @@ namespace Microsoft.NET.HostModel.AppHost
             MemoryMappedViewAccessor accessor,
             byte[] searchPattern,
             byte[] patternToReplace,
-            bool pad0s = true)
-        {
+            bool pad0s = true
+        ) {
             byte* pointer = null;
 
             try
@@ -32,13 +32,15 @@ namespace Microsoft.NET.HostModel.AppHost
                     position: position,
                     array: patternToReplace,
                     offset: 0,
-                    count: patternToReplace.Length);
+                    count: patternToReplace.Length
+                );
 
                 if (pad0s)
                 {
                     Pad0(searchPattern, patternToReplace, bytes, position);
                 }
             }
+
             finally
             {
                 if (pointer != null)
@@ -48,8 +50,12 @@ namespace Microsoft.NET.HostModel.AppHost
             }
         }
 
-        private static unsafe void Pad0(byte[] searchPattern, byte[] patternToReplace, byte* bytes, int offset)
-        {
+        private static unsafe void Pad0(
+            byte[] searchPattern,
+            byte[] patternToReplace,
+            byte* bytes,
+            int offset
+        ) {
             if (patternToReplace.Length < searchPattern.Length)
             {
                 for (int i = patternToReplace.Length; i < searchPattern.Length; i++)
@@ -63,8 +69,8 @@ namespace Microsoft.NET.HostModel.AppHost
             string filePath,
             byte[] searchPattern,
             byte[] patternToReplace,
-            bool pad0s = true)
-        {
+            bool pad0s = true
+        ) {
             using (var mappedFile = MemoryMappedFile.CreateFromFile(filePath))
             {
                 using (var accessor = mappedFile.CreateViewAccessor())
@@ -74,18 +80,25 @@ namespace Microsoft.NET.HostModel.AppHost
             }
         }
 
-        internal static unsafe int SearchInFile(MemoryMappedViewAccessor accessor, byte[] searchPattern)
-        {
+        internal static unsafe int SearchInFile(
+            MemoryMappedViewAccessor accessor,
+            byte[] searchPattern
+        ) {
             var safeBuffer = accessor.SafeMemoryMappedViewHandle;
-            return KMPSearch(searchPattern, (byte*)safeBuffer.DangerousGetHandle(), (int)safeBuffer.ByteLength);
+            return KMPSearch(
+                searchPattern,
+                (byte*)safeBuffer.DangerousGetHandle(),
+                (int)safeBuffer.ByteLength
+            );
         }
 
         public static unsafe int SearchInFile(string filePath, byte[] searchPattern)
         {
             using (var mappedFile = MemoryMappedFile.CreateFromFile(filePath))
             {
-                using (var accessor = mappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read))
-                {
+                using (
+                    var accessor = mappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read)
+                ) {
                     return SearchInFile(accessor, searchPattern);
                 }
             }
@@ -174,8 +187,11 @@ namespace Microsoft.NET.HostModel.AppHost
             File.Copy(sourcePath, destinationPath, overwrite: true);
         }
 
-        internal static void WriteToStream(MemoryMappedViewAccessor sourceViewAccessor, FileStream fileStream, long length)
-        {
+        internal static void WriteToStream(
+            MemoryMappedViewAccessor sourceViewAccessor,
+            FileStream fileStream,
+            long length
+        ) {
             int pos = 0;
             int bufSize = 16384; //16K
 
@@ -195,8 +211,7 @@ namespace Microsoft.NET.HostModel.AppHost
                     fileStream.Write(buf, 0, bytesRead);
                     pos += bytesRead;
                 }
-            }
-            while (true);
+            } while (true);
         }
     }
 }

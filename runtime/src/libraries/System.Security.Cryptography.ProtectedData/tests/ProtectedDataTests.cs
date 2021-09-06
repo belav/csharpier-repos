@@ -19,8 +19,13 @@ namespace System.Security.Cryptography.ProtectedDataTests
         [InlineData(new byte[] { 4, 5, 6 })]
         public static void RoundTrip(byte[] entropy)
         {
-            foreach (DataProtectionScope scope in new DataProtectionScope[] { DataProtectionScope.CurrentUser, DataProtectionScope.LocalMachine })
-            {
+            foreach (
+                DataProtectionScope scope in new DataProtectionScope[]
+                {
+                    DataProtectionScope.CurrentUser,
+                    DataProtectionScope.LocalMachine
+                }
+            ) {
                 byte[] plain = { 1, 2, 3 };
                 byte[] encrypted = ProtectedData.Protect(plain, entropy, scope);
                 Assert.NotEqual<byte>(plain, encrypted);
@@ -52,9 +57,13 @@ namespace System.Security.Cryptography.ProtectedDataTests
         {
             // Passing a zero-length array as entropy is equivalent to passing null as entropy.
             byte[] plain = { 1, 2, 3 };
-            byte[] nullEntropy = { };
+            byte[] nullEntropy = {  };
             byte[] encrypted = ProtectedData.Protect(plain, null, DataProtectionScope.CurrentUser);
-            byte[] recovered = ProtectedData.Unprotect(encrypted, nullEntropy, DataProtectionScope.CurrentUser);
+            byte[] recovered = ProtectedData.Unprotect(
+                encrypted,
+                nullEntropy,
+                DataProtectionScope.CurrentUser
+            );
             Assert.Equal<byte>(plain, recovered);
         }
 
@@ -63,9 +72,17 @@ namespace System.Security.Cryptography.ProtectedDataTests
         {
             // Passing a zero-length array as entropy is equivalent to passing null as entropy.
             byte[] plain = { 1, 2, 3 };
-            byte[] nullEntropy = { };
-            byte[] encrypted = ProtectedData.Protect(plain, nullEntropy, DataProtectionScope.CurrentUser);
-            byte[] recovered = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
+            byte[] nullEntropy = {  };
+            byte[] encrypted = ProtectedData.Protect(
+                plain,
+                nullEntropy,
+                DataProtectionScope.CurrentUser
+            );
+            byte[] recovered = ProtectedData.Unprotect(
+                encrypted,
+                null,
+                DataProtectionScope.CurrentUser
+            );
             Assert.Equal<byte>(plain, recovered);
         }
 
@@ -76,11 +93,18 @@ namespace System.Security.Cryptography.ProtectedDataTests
         [InlineData(new byte[] { 4, 5, 6 }, new byte[] { 4, 5, 7 })]
         public static void WrongEntropy(byte[] entropy1, byte[] entropy2)
         {
-            foreach (DataProtectionScope scope in new DataProtectionScope[] { DataProtectionScope.CurrentUser, DataProtectionScope.LocalMachine })
-            {
+            foreach (
+                DataProtectionScope scope in new DataProtectionScope[]
+                {
+                    DataProtectionScope.CurrentUser,
+                    DataProtectionScope.LocalMachine
+                }
+            ) {
                 byte[] plain = { 1, 2, 3 };
                 byte[] encrypted = ProtectedData.Protect(plain, entropy1, scope);
-                Assert.ThrowsAny<CryptographicException>(() => ProtectedData.Unprotect(encrypted, entropy2, scope));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => ProtectedData.Unprotect(encrypted, entropy2, scope)
+                );
             }
         }
     }

@@ -57,8 +57,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         }
 
         /// <inheritdoc />
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
     }
 }

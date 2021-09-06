@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             INavigationBase navigationBase,
             object? oldValue,
-            object? newValue);
+            object? newValue
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry entry,
             INavigationBase navigationBase,
             IEnumerable<object> added,
-            IEnumerable<object> removed);
+            IEnumerable<object> removed
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -91,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IEnumerable<IKey> containingPrincipalKeys,
             IEnumerable<IForeignKey> containingForeignKeys,
             object? oldValue,
-            object? newValue);
+            object? newValue
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,9 +110,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        void StateChanged(
-            InternalEntityEntry entry,
-            EntityState oldState,
-            bool fromQuery);
+        void StateChanged(InternalEntityEntry entry, EntityState oldState, bool fromQuery);
     }
 }

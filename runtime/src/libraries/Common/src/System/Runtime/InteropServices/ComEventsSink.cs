@@ -111,8 +111,13 @@ namespace System.Runtime.InteropServices
             throw new NotImplementedException();
         }
 
-        void IDispatch.GetIDsOfNames(ref Guid iid, string[] names, int cNames, int lcid, int[] rgDispId)
-        {
+        void IDispatch.GetIDsOfNames(
+            ref Guid iid,
+            string[] names,
+            int cNames,
+            int lcid,
+            int[] rgDispId
+        ) {
             throw new NotImplementedException();
         }
 
@@ -146,8 +151,8 @@ namespace System.Runtime.InteropServices
             ref ComTypes.DISPPARAMS pDispParams,
             IntPtr pVarResult,
             IntPtr pExcepInfo,
-            IntPtr puArgErr)
-        {
+            IntPtr puArgErr
+        ) {
             ComEventsMethod? method = FindMethod(dispid);
             if (method == null)
             {
@@ -237,7 +242,11 @@ namespace System.Runtime.InteropServices
             ppv = IntPtr.Zero;
             if (iid == _iidSourceItf || iid == typeof(IDispatch).GUID)
             {
-                ppv = Marshal.GetComInterfaceForObject(this, typeof(IDispatch), CustomQueryInterfaceMode.Ignore);
+                ppv = Marshal.GetComInterfaceForObject(
+                    this,
+                    typeof(IDispatch),
+                    CustomQueryInterfaceMode.Ignore
+                );
                 return CustomQueryInterfaceResult.Handled;
             }
 

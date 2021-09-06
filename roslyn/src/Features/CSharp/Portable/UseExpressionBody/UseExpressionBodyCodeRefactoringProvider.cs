@@ -21,17 +21,25 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp,
-        Name = PredefinedCodeRefactoringProviderNames.UseExpressionBody), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.UseExpressionBody
+        ),
+        Shared
+    ]
     internal class UseExpressionBodyCodeRefactoringProvider : CodeRefactoringProvider
     {
-        private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers = UseExpressionBodyHelper.Helpers;
+        private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers =
+            UseExpressionBodyHelper.Helpers;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseExpressionBodyCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseExpressionBodyCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -40,12 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 return;
 
             var position = textSpan.Start;
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var node = root.FindToken(position).Parent!;
 
             var containingLambda = node.FirstAncestorOrSelf<LambdaExpressionSyntax>();
-            if (containingLambda != null &&
-                node.AncestorsAndSelf().Contains(containingLambda.Body))
+            if (containingLambda != null && node.AncestorsAndSelf().Contains(containingLambda.Body))
             {
                 // don't offer inside a lambda.  Lambdas can be quite large, and it will be very noisy
                 // inside the body of one to be offering to use a block/expression body for the containing
@@ -62,15 +70,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 if (declaration == null)
                     continue;
 
-                var succeeded = TryComputeRefactoring(context, root, declaration, optionSet, helper);
+                var succeeded = TryComputeRefactoring(
+                    context,
+                    root,
+                    declaration,
+                    optionSet,
+                    helper
+                );
                 if (succeeded)
                     return;
             }
         }
 
         private static SyntaxNode? TryGetDeclaration(
-            UseExpressionBodyHelper helper, SourceText text, SyntaxNode node, int position)
-        {
+            UseExpressionBodyHelper helper,
+            SourceText text,
+            SyntaxNode node,
+            int position
+        ) {
             var declaration = GetDeclaration(node, helper);
             if (declaration == null)
                 return null;
@@ -89,33 +106,57 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         }
 
         private static bool TryComputeRefactoring(
-            CodeRefactoringContext context, SyntaxNode root, SyntaxNode declaration,
-            OptionSet optionSet, UseExpressionBodyHelper helper)
-        {
+            CodeRefactoringContext context,
+            SyntaxNode root,
+            SyntaxNode declaration,
+            OptionSet optionSet,
+            UseExpressionBodyHelper helper
+        ) {
             var document = context.Document;
 
             var succeeded = false;
             if (helper.CanOfferUseExpressionBody(optionSet, declaration, forAnalyzer: false))
             {
-                context.RegisterRefactoring(new MyCodeAction(
-                    helper.UseExpressionBodyTitle.ToString(),
-                    c => UpdateDocumentAsync(
-                        document, root, declaration, helper,
-                        useExpressionBody: true, cancellationToken: c)),
-                    declaration.Span);
+                context.RegisterRefactoring(
+                    new MyCodeAction(
+                        helper.UseExpressionBodyTitle.ToString(),
+                        c =>
+                            UpdateDocumentAsync(
+                                document,
+                                root,
+                                declaration,
+                                helper,
+                                useExpressionBody: true,
+                                cancellationToken: c
+                            )
+                    ),
+                    declaration.Span
+                );
                 succeeded = true;
             }
 
-            var (canOffer, _) = helper.CanOfferUseBlockBody(optionSet, declaration, forAnalyzer: false);
+            var (canOffer, _) = helper.CanOfferUseBlockBody(
+                optionSet,
+                declaration,
+                forAnalyzer: false
+            );
             if (canOffer)
             {
                 context.RegisterRefactoring(
                     new MyCodeAction(
                         helper.UseBlockBodyTitle.ToString(),
-                        c => UpdateDocumentAsync(
-                            document, root, declaration, helper,
-                            useExpressionBody: false, cancellationToken: c)),
-                    declaration.Span);
+                        c =>
+                            UpdateDocumentAsync(
+                                document,
+                                root,
+                                declaration,
+                                helper,
+                                useExpressionBody: false,
+                                cancellationToken: c
+                            )
+                    ),
+                    declaration.Span
+                );
                 succeeded = true;
             }
 
@@ -134,19 +175,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         }
 
         private static async Task<Document> UpdateDocumentAsync(
-            Document document, SyntaxNode root, SyntaxNode declaration,
-            UseExpressionBodyHelper helper, bool useExpressionBody,
-            CancellationToken cancellationToken)
-        {
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            Document document,
+            SyntaxNode root,
+            SyntaxNode declaration,
+            UseExpressionBodyHelper helper,
+            bool useExpressionBody,
+            CancellationToken cancellationToken
+        ) {
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var updatedDeclaration = helper.Update(semanticModel, declaration, useExpressionBody);
 
-            var parent = declaration is AccessorDeclarationSyntax
-                ? declaration.Parent
-                : declaration;
+            var parent =
+                declaration is AccessorDeclarationSyntax ? declaration.Parent : declaration;
             RoslynDebug.Assert(parent is object);
             var updatedParent = parent.ReplaceNode(declaration, updatedDeclaration)
-                                      .WithAdditionalAnnotations(Formatter.Annotation);
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             var newRoot = root.ReplaceNode(parent, updatedParent);
             return document.WithSyntaxRoot(newRoot);
@@ -154,10 +198,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument) { }
         }
     }
 }

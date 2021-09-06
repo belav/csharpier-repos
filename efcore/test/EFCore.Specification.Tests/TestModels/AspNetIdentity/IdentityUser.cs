@@ -13,8 +13,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
             SecurityStamp = Guid.NewGuid().ToString();
         }
 
-        public IdentityUser(string userName)
-            : this()
+        public IdentityUser(string userName) : this()
         {
             UserName = userName;
         }

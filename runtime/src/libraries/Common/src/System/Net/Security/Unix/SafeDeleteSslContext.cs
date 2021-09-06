@@ -19,16 +19,18 @@ namespace System.Net.Security
 
         public SafeSslHandle SslContext
         {
-            get
-            {
-                return _sslContext;
-            }
+            get { return _sslContext; }
         }
 
-        public SafeDeleteSslContext(SafeFreeSslCredentials credential, SslAuthenticationOptions sslAuthenticationOptions)
-            : base(credential)
+        public SafeDeleteSslContext(
+            SafeFreeSslCredentials credential,
+            SslAuthenticationOptions sslAuthenticationOptions
+        ) : base(credential)
         {
-            Debug.Assert((null != credential) && !credential.IsInvalid, "Invalid credential used in SafeDeleteSslContext");
+            Debug.Assert(
+                (null != credential) && !credential.IsInvalid,
+                "Invalid credential used in SafeDeleteSslContext"
+            );
 
             try
             {
@@ -37,7 +39,8 @@ namespace System.Net.Security
                     credential.CertHandle,
                     credential.CertKeyHandle,
                     credential.Policy,
-                    sslAuthenticationOptions);
+                    sslAuthenticationOptions
+                );
             }
             catch (Exception ex)
             {
@@ -49,10 +52,7 @@ namespace System.Net.Security
 
         public override bool IsInvalid
         {
-            get
-            {
-                return (null == _sslContext) || _sslContext.IsInvalid;
-            }
+            get { return (null == _sslContext) || _sslContext.IsInvalid; }
         }
 
         protected override void Dispose(bool disposing)

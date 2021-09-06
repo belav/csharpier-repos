@@ -12,8 +12,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
             Expression = expression;
         }
 
-        public override IEnumerable<JToken> ExecuteFilter(JToken root, IEnumerable<JToken> current, JsonSelectSettings? settings)
-        {
+        public override IEnumerable<JToken> ExecuteFilter(
+            JToken root,
+            IEnumerable<JToken> current,
+            JsonSelectSettings? settings
+        ) {
             foreach (JToken t in current)
             {
                 if (t is JContainer c)

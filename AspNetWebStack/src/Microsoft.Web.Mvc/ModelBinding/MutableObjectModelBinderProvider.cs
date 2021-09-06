@@ -7,8 +7,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class MutableObjectModelBinderProvider : ModelBinderProvider
     {
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-        {
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        ) {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             if (!bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))

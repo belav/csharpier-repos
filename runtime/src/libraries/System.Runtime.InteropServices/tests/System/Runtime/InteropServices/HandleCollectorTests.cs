@@ -28,8 +28,11 @@ namespace System.Runtime.InteropServices
         [InlineData(null, 0, 0)]
         [InlineData("", 10, 15)]
         [InlineData("InitialThreshold", 1, 2)]
-        public void Ctor_Name_InitialThreshold_MaximumThreshold(string name, int initialThreshold, int maximumThreshold)
-        {
+        public void Ctor_Name_InitialThreshold_MaximumThreshold(
+            string name,
+            int initialThreshold,
+            int maximumThreshold
+        ) {
             var handleCollector = new HandleCollector(name, initialThreshold, maximumThreshold);
             Assert.Equal(0, handleCollector.Count);
             Assert.Equal(name ?? string.Empty, handleCollector.Name);
@@ -40,20 +43,33 @@ namespace System.Runtime.InteropServices
         [Fact]
         public void Ctor_NegativeInitialThreshold_ThrowsArgumentOufORangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialThreshold", () => new HandleCollector("NegativeInitial", -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialThreshold", () => new HandleCollector("NegativeInitial", -1, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialThreshold",
+                () => new HandleCollector("NegativeInitial", -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialThreshold",
+                () => new HandleCollector("NegativeInitial", -1, 0)
+            );
         }
 
         [Fact]
         public static void Ctor_NegativeMaximumThreshold_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumThreshold", () => new HandleCollector("NegativeMax", 0, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maximumThreshold",
+                () => new HandleCollector("NegativeMax", 0, -1)
+            );
         }
 
         [Fact]
         public static void Ctor_InitialThresholdGreaterThanMaximumThreshold_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("initialThreshold", null, () => new HandleCollector("InitialGreaterThanMax", 100, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "initialThreshold",
+                null,
+                () => new HandleCollector("InitialGreaterThanMax", 100, 1)
+            );
         }
 
         [Fact]
@@ -104,8 +120,9 @@ namespace System.Runtime.InteropServices
                 // Jump HandleCollector instance forward until it almost overflows
                 TypeInfo type = typeof(HandleCollector).GetTypeInfo();
                 FieldInfo handleCount =
-                    type.GetDeclaredField("_handleCount") ?? // .NET Core
-                    type.GetDeclaredField("handleCount");    // .NET Framework
+                    type.GetDeclaredField("_handleCount")
+                    ?? // .NET Core
+                    type.GetDeclaredField("handleCount"); // .NET Framework
                 Assert.NotNull(handleCount);
                 handleCount.SetValue(collector, int.MaxValue - ToAdd);
             }
@@ -121,27 +138,53 @@ namespace System.Runtime.InteropServices
         [Fact]
         public static void TestHandleCollector()
         {
-            (int gen0, int gen1, int gen2) initialGcState = (GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
+            (int gen0, int gen1, int gen2) initialGcState = (
+                GC.CollectionCount(0),
+                GC.CollectionCount(1),
+                GC.CollectionCount(2)
+            );
 
-            HandleCollector lowLimitCollector = new HandleCollector("LowLimit.Collector", LowLimitSize);
+            HandleCollector lowLimitCollector = new HandleCollector(
+                "LowLimit.Collector",
+                LowLimitSize
+            );
             for (int i = 0; i < LowLimitSize + 1; ++i)
             {
                 HandleLimitTester hlt = new HandleLimitTester(lowLimitCollector);
             }
 
-            (int gen0, int gen1, int gen2) postLowLimitState = (GC.CollectionCount(0),GC.CollectionCount(1), GC.CollectionCount(2));
+            (int gen0, int gen1, int gen2) postLowLimitState = (
+                GC.CollectionCount(0),
+                GC.CollectionCount(1),
+                GC.CollectionCount(2)
+            );
 
-            Assert.True(initialGcState.gen0 + initialGcState.gen1 + initialGcState.gen2 < postLowLimitState.gen0 + postLowLimitState.gen1 + postLowLimitState.gen2, "Low limit handle did not trigger a GC");
+            Assert.True(
+                initialGcState.gen0 + initialGcState.gen1 + initialGcState.gen2
+                    < postLowLimitState.gen0 + postLowLimitState.gen1 + postLowLimitState.gen2,
+                "Low limit handle did not trigger a GC"
+            );
 
-            HandleCollector highLimitCollector = new HandleCollector("HighLimit.Collector", HighLimitSize);
+            HandleCollector highLimitCollector = new HandleCollector(
+                "HighLimit.Collector",
+                HighLimitSize
+            );
             for (int i = 0; i < HighLimitSize + 10; ++i)
             {
                 HandleLimitTester hlt = new HandleLimitTester(highLimitCollector);
             }
 
-            (int gen0, int gen1, int gen2) postHighLimitState = (GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
+            (int gen0, int gen1, int gen2) postHighLimitState = (
+                GC.CollectionCount(0),
+                GC.CollectionCount(1),
+                GC.CollectionCount(2)
+            );
 
-            Assert.True(postLowLimitState.gen0 + postLowLimitState.gen1 + postLowLimitState.gen2 < postHighLimitState.gen0 + postHighLimitState.gen1 + postHighLimitState.gen2, "High limit handle did not trigger a GC");
+            Assert.True(
+                postLowLimitState.gen0 + postLowLimitState.gen1 + postLowLimitState.gen2
+                    < postHighLimitState.gen0 + postHighLimitState.gen1 + postHighLimitState.gen2,
+                "High limit handle did not trigger a GC"
+            );
         }
 
         private sealed class HandleLimitTester

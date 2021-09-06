@@ -14,7 +14,16 @@ namespace System.IO.Pipelines.Tests
         public BackpressureTests()
         {
             _pool = new TestMemoryPool();
-            _pipe = new Pipe(new PipeOptions(_pool, resumeWriterThreshold: ResumeWriterThreshold, pauseWriterThreshold: PauseWriterThreshold, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+            _pipe = new Pipe(
+                new PipeOptions(
+                    _pool,
+                    resumeWriterThreshold: ResumeWriterThreshold,
+                    pauseWriterThreshold: PauseWriterThreshold,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    useSynchronizationContext: false
+                )
+            );
         }
 
         public void Dispose()
@@ -210,9 +219,13 @@ namespace System.IO.Pipelines.Tests
 
             PipeWriter writableBuffer = _pipe.Writer.WriteEmpty(PauseWriterThreshold);
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await writableBuffer.FlushAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await writableBuffer.FlushAsync()
+                );
             Assert.Equal("Reader failed", invalidOperationException.Message);
-            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(async () => await writableBuffer.FlushAsync());
+            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await writableBuffer.FlushAsync()
+            );
             Assert.Equal("Reader failed", invalidOperationException.Message);
         }
     }

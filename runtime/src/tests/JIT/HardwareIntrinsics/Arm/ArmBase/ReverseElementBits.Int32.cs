@@ -97,7 +97,6 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Succeeded = true;
 
-            
             _fld = TestLibrary.Generator.GetInt32();
             _data = TestLibrary.Generator.GetInt32();
         }
@@ -121,10 +120,17 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase).GetMethod(nameof(ArmBase.ReverseElementBits), new Type[] { typeof(Int32) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<Int32>(ref Unsafe.As<Int32, byte>(ref _data))
-                                     });
+            var result = typeof(ArmBase).GetMethod(
+                    nameof(ArmBase.ReverseElementBits),
+                    new Type[] { typeof(Int32) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<Int32>(ref Unsafe.As<Int32, byte>(ref _data))
+                    }
+                );
 
             ValidateResult(_data, (Int32)result);
         }
@@ -133,9 +139,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = ArmBase.ReverseElementBits(
-                _clsVar
-            );
+            var result = ArmBase.ReverseElementBits(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -215,7 +219,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<Int32>(Int32): ReverseElementBits failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<Int32>(Int32): ReverseElementBits failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

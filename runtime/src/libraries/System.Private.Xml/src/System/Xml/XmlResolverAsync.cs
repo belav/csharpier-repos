@@ -7,10 +7,11 @@ namespace System.Xml
 {
     public abstract partial class XmlResolver
     {
-        public virtual Task<object> GetEntityAsync(Uri absoluteUri,
-                                             string? role,
-                                             Type? ofObjectToReturn)
-        {
+        public virtual Task<object> GetEntityAsync(
+            Uri absoluteUri,
+            string? role,
+            Type? ofObjectToReturn
+        ) {
             throw new NotImplementedException();
         }
     }

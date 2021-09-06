@@ -19,11 +19,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.DevServer
             app.Commands.Add(new ServeCommand(app));
 
             // A command is always required
-            app.OnExecute(() =>
-            {
-                app.ShowHelp();
-                return 0;
-            });
+            app.OnExecute(
+                () =>
+                {
+                    app.ShowHelp();
+                    return 0;
+                }
+            );
 
             try
             {

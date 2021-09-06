@@ -8,25 +8,30 @@ namespace System.IO.Tests
 {
     public class FileStream_ctor_sfh_fa_buffer : FileStream_ctor_sfh_fa
     {
-        protected sealed override FileStream CreateFileStream(SafeFileHandle handle, FileAccess access)
-        {
+        protected sealed override FileStream CreateFileStream(
+            SafeFileHandle handle,
+            FileAccess access
+        ) {
             return CreateFileStream(handle, access, 4096);
         }
 
-        protected virtual FileStream CreateFileStream(SafeFileHandle handle, FileAccess access, int bufferSize)
-        {
+        protected virtual FileStream CreateFileStream(
+            SafeFileHandle handle,
+            FileAccess access,
+            int bufferSize
+        ) {
             return new FileStream(handle, access, bufferSize);
         }
 
-
-        [Theory,
-            InlineData(0),
-            InlineData(-1)]
+        [Theory, InlineData(0), InlineData(-1)]
         public void InvalidBufferSize_Throws(int size)
         {
             using (var handle = new SafeFileHandle(new IntPtr(1), ownsHandle: false))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => CreateFileStream(handle, FileAccess.Read, size));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "bufferSize",
+                    () => CreateFileStream(handle, FileAccess.Read, size)
+                );
             }
         }
 
@@ -35,7 +40,9 @@ namespace System.IO.Tests
         {
             using (var handle = new SafeFileHandle(new IntPtr(1), ownsHandle: false))
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => CreateFileStream(handle, FileAccess.Read, -1));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => CreateFileStream(handle, FileAccess.Read, -1)
+                );
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 Assert.False(handle.IsClosed);
@@ -47,8 +54,13 @@ namespace System.IO.Tests
         {
             using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create))
             {
-                using (FileStream fsw = CreateFileStream(fs.SafeFileHandle, FileAccess.Write, 64 * 1024))
-                { }
+                using (
+                    FileStream fsw = CreateFileStream(
+                        fs.SafeFileHandle,
+                        FileAccess.Write,
+                        64 * 1024
+                    )
+                ) { }
             }
         }
     }

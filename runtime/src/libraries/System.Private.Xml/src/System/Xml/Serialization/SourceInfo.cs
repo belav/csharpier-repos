@@ -16,18 +16,20 @@ namespace System.Xml.Serialization
     {
         //a[ia]
         //((global::System.Xml.Serialization.XmlSerializerNamespaces)p[0])
-        private static readonly Regex s_regex = new Regex("([(][(](?<t>[^)]+)[)])?(?<a>[^[]+)[[](?<ia>.+)[]][)]?");
+        private static readonly Regex s_regex = new Regex(
+            "([(][(](?<t>[^)]+)[)])?(?<a>[^[]+)[[](?<ia>.+)[]][)]?"
+        );
         //((global::Microsoft.CFx.Test.Common.TypeLibrary.IXSType_9)o), @"IXSType_9", @"", true, true);
-        private static readonly Regex s_regex2 = new Regex("[(][(](?<cast>[^)]+)[)](?<arg>[^)]+)[)]");
+        private static readonly Regex s_regex2 = new Regex(
+            "[(][(](?<cast>[^)]+)[)](?<arg>[^)]+)[)]"
+        );
 
         private static readonly Lazy<MethodInfo> s_iListGetItemMethod = new Lazy<MethodInfo>(
             () =>
             {
-                return typeof(IList).GetMethod(
-                    "get_Item",
-                    new Type[] { typeof(int) }
-                )!;
-            });
+                return typeof(IList).GetMethod("get_Item", new Type[] { typeof(int) })!;
+            }
+        );
 
         public string Source;
         public readonly string Arg;
@@ -37,9 +39,13 @@ namespace System.Xml.Serialization
         public readonly Type? Type;
         public readonly CodeGenerator ILG;
 
-        public SourceInfo(string source, string? arg, MemberInfo? memberInfo,
-            [DynamicallyAccessedMembers(TrimmerConstants.AllMethods)] Type? type, CodeGenerator ilg)
-        {
+        public SourceInfo(
+            string source,
+            string? arg,
+            MemberInfo? memberInfo,
+            [DynamicallyAccessedMembers(TrimmerConstants.AllMethods)] Type? type,
+            CodeGenerator ilg
+        ) {
             this.Source = source;
             this.Arg = arg ?? source;
             this.MemberInfo = memberInfo;
@@ -49,7 +55,13 @@ namespace System.Xml.Serialization
 
         public SourceInfo CastTo(TypeDesc td)
         {
-            return new SourceInfo("((" + td.CSharpName + ")" + Source + ")", Arg, MemberInfo, td.Type!, ILG);
+            return new SourceInfo(
+                "((" + td.CSharpName + ")" + Source + ")",
+                Arg,
+                MemberInfo,
+                td.Type!,
+                ILG
+            );
         }
 
         [RequiresUnreferencedCode("calls InternalLoad")]
@@ -107,7 +119,7 @@ namespace System.Xml.Serialization
                         "get_Item",
                         CodeGenerator.InstanceBindingFlags,
                         new Type[] { typeof(int) }
-                        )!;
+                    )!;
 
                     if (get_Item == null && typeof(IList).IsAssignableFrom(varType))
                     {
@@ -124,9 +136,19 @@ namespace System.Xml.Serialization
                         ILG.Ldloca(localTmp);
                         ConvertNullableValue(eType, elementType!);
                     }
-                    else if ((elementType != null) && !(eType.IsAssignableFrom(elementType) || elementType.IsAssignableFrom(eType)))
-                    {
-                        throw new CodeGeneratorConversionException(eType, elementType, asAddress, "IsNotAssignableFrom");
+                    else if (
+                        (elementType != null)
+                        && !(
+                            eType.IsAssignableFrom(elementType)
+                            || elementType.IsAssignableFrom(eType)
+                        )
+                    ) {
+                        throw new CodeGeneratorConversionException(
+                            eType,
+                            elementType,
+                            asAddress,
+                            "IsNotAssignableFrom"
+                        );
                     }
                     else
                     {
@@ -144,7 +166,9 @@ namespace System.Xml.Serialization
                 Type varType;
                 if (Arg.StartsWith("o.@", StringComparison.Ordinal) || MemberInfo != null)
                 {
-                    var = ILG.GetVariable(Arg.StartsWith("o.@", StringComparison.Ordinal) ? "o" : Arg);
+                    var = ILG.GetVariable(
+                        Arg.StartsWith("o.@", StringComparison.Ordinal) ? "o" : Arg
+                    );
                     varType = ILG.GetVariableType(var);
                     if (varType.IsValueType)
                         ILG.LoadAddress(var);
@@ -156,9 +180,10 @@ namespace System.Xml.Serialization
                     var = ILG.GetVariable(Arg);
                     varType = ILG.GetVariableType(var);
 
-                    if (CodeGenerator.IsNullableGenericType(varType) &&
-                        varType.GetGenericArguments()[0] == elementType)
-                    {
+                    if (
+                        CodeGenerator.IsNullableGenericType(varType)
+                        && varType.GetGenericArguments()[0] == elementType
+                    ) {
                         ILG.LoadAddress(var);
                         ConvertNullableValue(varType, elementType);
                     }
@@ -173,8 +198,10 @@ namespace System.Xml.Serialization
 
                 if (MemberInfo != null)
                 {
-                    Type memberType = (MemberInfo is FieldInfo) ?
-                        ((FieldInfo)MemberInfo).FieldType : ((PropertyInfo)MemberInfo).PropertyType;
+                    Type memberType =
+                        (MemberInfo is FieldInfo)
+                            ? ((FieldInfo)MemberInfo).FieldType
+                            : ((PropertyInfo)MemberInfo).PropertyType;
                     if (CodeGenerator.IsNullableGenericType(memberType))
                     {
                         ILG.LoadMemberAddress(MemberInfo);
@@ -192,7 +219,9 @@ namespace System.Xml.Serialization
                     if (match.Success)
                     {
                         Debug.Assert(match.Groups["arg"].Value == Arg);
-                        Debug.Assert(match.Groups["cast"].Value == CodeIdentifier.GetCSharpName(Type!));
+                        Debug.Assert(
+                            match.Groups["cast"].Value == CodeIdentifier.GetCSharpName(Type!)
+                        );
                         if (asAddress)
                             ILG.ConvertAddress(varType, Type!);
                         else
@@ -216,17 +245,24 @@ namespace System.Xml.Serialization
         }
 
         private void ConvertNullableValue(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type nullableType, Type targetType)
-        {
-            System.Diagnostics.Debug.Assert(targetType == nullableType || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0]));
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type nullableType,
+            Type targetType
+        ) {
+            System.Diagnostics.Debug.Assert(
+                targetType == nullableType
+                    || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0])
+            );
             if (targetType != nullableType)
             {
                 MethodInfo Nullable_get_Value = nullableType.GetMethod(
                     "get_Value",
                     CodeGenerator.InstanceBindingFlags,
                     Type.EmptyTypes
-                    )!;
+                )!;
                 ILG.Call(Nullable_get_Value);
                 if (targetType != null)
                 {

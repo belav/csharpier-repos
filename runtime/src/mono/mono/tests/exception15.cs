@@ -1,24 +1,32 @@
 using System;
 
-class Tests {
-	public static int Main(){
-		int i = 0;
-		try{
-			try {
-				throw new NotImplementedException();
-			}
-			finally {
-				i++;
-				Console.WriteLine("Finally called");
-			}
-		} catch(NotImplementedException){
-			i++;
-			Console.WriteLine("Exception ignored");
-		}
+class Tests
+{
+    public static int Main()
+    {
+        int i = 0;
+        try
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
 
-		if (i != 2)
-			return 1;
+            finally
+            {
+                i++;
+                Console.WriteLine("Finally called");
+            }
+        }
+        catch (NotImplementedException)
+        {
+            i++;
+            Console.WriteLine("Exception ignored");
+        }
 
-		return 0;
-	}
+        if (i != 2)
+            return 1;
+
+        return 0;
+    }
 }

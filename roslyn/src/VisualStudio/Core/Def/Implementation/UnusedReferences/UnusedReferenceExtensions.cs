@@ -11,18 +11,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 {
     internal static class UnusedReferenceExtensions
     {
-        public static ReferenceInfo ToReferenceInfo(this ProjectSystemReferenceInfo projectSystemReference)
-        {
+        public static ReferenceInfo ToReferenceInfo(
+            this ProjectSystemReferenceInfo projectSystemReference
+        ) {
             return new ReferenceInfo(
                 (ReferenceType)projectSystemReference.ReferenceType,
                 projectSystemReference.ItemSpecification,
                 projectSystemReference.TreatAsUsed,
                 ImmutableArray<string>.Empty,
-                ImmutableArray<ReferenceInfo>.Empty);
+                ImmutableArray<ReferenceInfo>.Empty
+            );
         }
 
-        public static ProjectSystemReferenceUpdate ToProjectSystemReferenceUpdate(this ReferenceUpdate referenceUpdate)
-        {
+        public static ProjectSystemReferenceUpdate ToProjectSystemReferenceUpdate(
+            this ReferenceUpdate referenceUpdate
+        ) {
             var updateAction = referenceUpdate.Action switch
             {
                 UpdateAction.TreatAsUsed => ProjectSystemUpdateAction.SetTreatAsUsed,
@@ -32,15 +35,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             };
             return new ProjectSystemReferenceUpdate(
                 updateAction,
-                referenceUpdate.ReferenceInfo.ToProjectSystemReferenceInfo());
+                referenceUpdate.ReferenceInfo.ToProjectSystemReferenceInfo()
+            );
         }
 
-        public static ProjectSystemReferenceInfo ToProjectSystemReferenceInfo(this ReferenceInfo reference)
-        {
+        public static ProjectSystemReferenceInfo ToProjectSystemReferenceInfo(
+            this ReferenceInfo reference
+        ) {
             return new ProjectSystemReferenceInfo(
                 (ProjectSystemReferenceType)reference.ReferenceType,
                 reference.ItemSpecification,
-                reference.TreatAsUsed);
+                reference.TreatAsUsed
+            );
         }
     }
 }

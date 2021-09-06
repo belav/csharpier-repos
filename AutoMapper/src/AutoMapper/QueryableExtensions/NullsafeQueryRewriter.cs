@@ -40,9 +40,11 @@ namespace AutoMapper.QueryableExtensions
     /// </remarks>
     internal class NullsafeQueryRewriter : ExpressionVisitor
     {
-        static readonly LockingConcurrentDictionary<Type, Expression> Cache = new LockingConcurrentDictionary<Type, Expression>(Fallback);
+        static readonly LockingConcurrentDictionary<Type, Expression> Cache =
+            new LockingConcurrentDictionary<Type, Expression>(Fallback);
 
-        public static Expression NullCheck(Expression expression) => new NullsafeQueryRewriter().Visit(expression);
+        public static Expression NullCheck(Expression expression) =>
+            new NullsafeQueryRewriter().Visit(expression);
 
         /// <inheritdoc />
         protected override Expression VisitMember(MemberExpression node)
@@ -80,21 +82,28 @@ namespace AutoMapper.QueryableExtensions
             if (IsExtensionMethod(node.Method) && !IsSafe(arguments[0]))
             {
                 // insert null-check before invoking extension method
-                return BeSafe(arguments[0], node.Update(null, arguments), fallback =>
-                {
-                    var args = new Expression[arguments.Count];
-                    arguments.CopyTo(args, 0);
-                    args[0] = fallback;
+                return BeSafe(
+                    arguments[0],
+                    node.Update(null, arguments),
+                    fallback =>
+                    {
+                        var args = new Expression[arguments.Count];
+                        arguments.CopyTo(args, 0);
+                        args[0] = fallback;
 
-                    return node.Update(null, args);
-                });
+                        return node.Update(null, args);
+                    }
+                );
             }
 
             return node.Update(target, arguments);
         }
 
-        static Expression BeSafe(Expression target, Expression expression, Func<Expression, Expression> update)
-        {
+        static Expression BeSafe(
+            Expression target,
+            Expression expression,
+            Func<Expression, Expression> update
+        ) {
             var fallback = Cache.GetOrAdd(target.Type);
 
             if (fallback != null)
@@ -108,9 +117,14 @@ namespace AutoMapper.QueryableExtensions
 
             // expression can be default or null, which is basically the same...
             var expressionFallback = !IsNullableOrReferenceType(expression.Type)
-                ? (Expression)Expression.Default(expression.Type) : Expression.Constant(null, expression.Type);
+                ? (Expression)Expression.Default(expression.Type)
+                : Expression.Constant(null, expression.Type);
 
-            return Expression.Condition(Expression.Equal(target, targetFallback), expressionFallback, expression);
+            return Expression.Condition(
+                Expression.Equal(target, targetFallback),
+                expressionFallback,
+                expression
+            );
         }
 
         static bool IsSafe(Expression expression)

@@ -186,7 +186,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             if (end < start)
             {
-                throw new ArgumentOutOfRangeException(nameof(end), "end must not be less than start");
+                throw new ArgumentOutOfRangeException(
+                    nameof(end),
+                    "end must not be less than start"
+                );
             }
 
             return new TextSpan(start, end - start);

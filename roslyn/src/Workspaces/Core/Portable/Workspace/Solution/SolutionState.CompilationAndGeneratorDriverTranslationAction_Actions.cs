@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis
     {
         private abstract partial class CompilationAndGeneratorDriverTranslationAction
         {
-            internal sealed class TouchDocumentAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class TouchDocumentAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
                 private readonly DocumentState _oldState;
                 private readonly DocumentState _newState;
@@ -25,15 +26,23 @@ namespace Microsoft.CodeAnalysis
                     _newState = newState;
                 }
 
-                public override Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-                {
-                    return UpdateDocumentInCompilationAsync(oldCompilation, _oldState, _newState, cancellationToken);
+                public override Task<Compilation> TransformCompilationAsync(
+                    Compilation oldCompilation,
+                    CancellationToken cancellationToken
+                ) {
+                    return UpdateDocumentInCompilationAsync(
+                        oldCompilation,
+                        _oldState,
+                        _newState,
+                        cancellationToken
+                    );
                 }
 
                 public DocumentId DocumentId => _newState.Attributes.Id;
             }
 
-            internal sealed class TouchAdditionalDocumentAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class TouchAdditionalDocumentAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
 #pragma warning disable IDE0052 // Remove unread private members
                 // https://github.com/dotnet/roslyn/issues/44161: right now there is no way to tell a GeneratorDriver that an additional document changed
@@ -41,14 +50,17 @@ namespace Microsoft.CodeAnalysis
                 private readonly TextDocumentState _newState;
 #pragma warning restore IDE0052 // Remove unread private members
 
-                public TouchAdditionalDocumentAction(TextDocumentState oldState, TextDocumentState newState)
-                {
+                public TouchAdditionalDocumentAction(
+                    TextDocumentState oldState,
+                    TextDocumentState newState
+                ) {
                     _oldState = oldState;
                     _newState = newState;
                 }
             }
 
-            internal sealed class RemoveDocumentsAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class RemoveDocumentsAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
                 private readonly ImmutableArray<DocumentState> _documents;
 
@@ -57,20 +69,26 @@ namespace Microsoft.CodeAnalysis
                     _documents = documents;
                 }
 
-                public override async Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-                {
+                public override async Task<Compilation> TransformCompilationAsync(
+                    Compilation oldCompilation,
+                    CancellationToken cancellationToken
+                ) {
                     var syntaxTrees = new List<SyntaxTree>(_documents.Length);
                     foreach (var document in _documents)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        syntaxTrees.Add(await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false));
+                        syntaxTrees.Add(
+                            await document.GetSyntaxTreeAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        );
                     }
 
                     return oldCompilation.RemoveSyntaxTrees(syntaxTrees);
                 }
             }
 
-            internal sealed class AddDocumentsAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class AddDocumentsAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
                 private readonly ImmutableArray<DocumentState> _documents;
 
@@ -79,20 +97,26 @@ namespace Microsoft.CodeAnalysis
                     _documents = documents;
                 }
 
-                public override async Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-                {
+                public override async Task<Compilation> TransformCompilationAsync(
+                    Compilation oldCompilation,
+                    CancellationToken cancellationToken
+                ) {
                     var syntaxTrees = new List<SyntaxTree>(capacity: _documents.Length);
                     foreach (var document in _documents)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        syntaxTrees.Add(await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false));
+                        syntaxTrees.Add(
+                            await document.GetSyntaxTreeAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        );
                     }
 
                     return oldCompilation.AddSyntaxTrees(syntaxTrees);
                 }
             }
 
-            internal sealed class ReplaceAllSyntaxTreesAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class ReplaceAllSyntaxTreesAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
                 private readonly ProjectState _state;
 
@@ -101,21 +125,28 @@ namespace Microsoft.CodeAnalysis
                     _state = state;
                 }
 
-                public override async Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-                {
+                public override async Task<Compilation> TransformCompilationAsync(
+                    Compilation oldCompilation,
+                    CancellationToken cancellationToken
+                ) {
                     var syntaxTrees = new List<SyntaxTree>(capacity: _state.DocumentStates.Count);
 
-                    foreach (var documentState in _state.DocumentStates.GetStatesInCompilationOrder())
-                    {
+                    foreach (
+                        var documentState in _state.DocumentStates.GetStatesInCompilationOrder()
+                    ) {
                         cancellationToken.ThrowIfCancellationRequested();
-                        syntaxTrees.Add(await documentState.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false));
+                        syntaxTrees.Add(
+                            await documentState.GetSyntaxTreeAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        );
                     }
 
                     return oldCompilation.RemoveAllSyntaxTrees().AddSyntaxTrees(syntaxTrees);
                 }
             }
 
-            internal sealed class ProjectCompilationOptionsAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class ProjectCompilationOptionsAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
                 private readonly CompilationOptions _options;
 
@@ -124,13 +155,16 @@ namespace Microsoft.CodeAnalysis
                     _options = options;
                 }
 
-                public override Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-                {
+                public override Task<Compilation> TransformCompilationAsync(
+                    Compilation oldCompilation,
+                    CancellationToken cancellationToken
+                ) {
                     return Task.FromResult(oldCompilation.WithOptions(_options));
                 }
             }
 
-            internal sealed class ProjectAssemblyNameAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class ProjectAssemblyNameAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
                 private readonly string _assemblyName;
 
@@ -139,13 +173,16 @@ namespace Microsoft.CodeAnalysis
                     _assemblyName = assemblyName;
                 }
 
-                public override Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-                {
+                public override Task<Compilation> TransformCompilationAsync(
+                    Compilation oldCompilation,
+                    CancellationToken cancellationToken
+                ) {
                     return Task.FromResult(oldCompilation.WithAssemblyName(_assemblyName));
                 }
             }
 
-            internal sealed class AddAnalyzerReferencesAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class AddAnalyzerReferencesAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
 #pragma warning disable IDE0052 // Remove unread private members
                 // https://github.com/dotnet/roslyn/issues/44161: right now there is no way to tell a GeneratorDriver that an analyzer reference has been added
@@ -153,14 +190,17 @@ namespace Microsoft.CodeAnalysis
                 private readonly string _language;
 #pragma warning restore IDE0052 // Remove unread private members
 
-                public AddAnalyzerReferencesAction(ImmutableArray<AnalyzerReference> analyzerReferences, string language)
-                {
+                public AddAnalyzerReferencesAction(
+                    ImmutableArray<AnalyzerReference> analyzerReferences,
+                    string language
+                ) {
                     _analyzerReferences = analyzerReferences;
                     _language = language;
                 }
             }
 
-            internal sealed class RemoveAnalyzerReferencesAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class RemoveAnalyzerReferencesAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
 #pragma warning disable IDE0052 // Remove unread private members
                 // https://github.com/dotnet/roslyn/issues/44161: right now there is no way to tell a GeneratorDriver that an analyzer reference has been removed
@@ -168,35 +208,41 @@ namespace Microsoft.CodeAnalysis
                 private readonly string _language;
 #pragma warning restore IDE0052 // Remove unread private members
 
-                public RemoveAnalyzerReferencesAction(ImmutableArray<AnalyzerReference> analyzerReferences, string language)
-                {
+                public RemoveAnalyzerReferencesAction(
+                    ImmutableArray<AnalyzerReference> analyzerReferences,
+                    string language
+                ) {
                     _analyzerReferences = analyzerReferences;
                     _language = language;
                 }
             }
 
-            internal sealed class AddAdditionalDocumentsAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class AddAdditionalDocumentsAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
 #pragma warning disable IDE0052 // Remove unread private members
                 // https://github.com/dotnet/roslyn/issues/44161: right now there is no way to tell a GeneratorDriver that an additional file has been added
                 private readonly ImmutableArray<TextDocumentState> _additionalDocuments;
 #pragma warning restore IDE0052 // Remove unread private members
 
-                public AddAdditionalDocumentsAction(ImmutableArray<TextDocumentState> additionalDocuments)
-                {
+                public AddAdditionalDocumentsAction(
+                    ImmutableArray<TextDocumentState> additionalDocuments
+                ) {
                     _additionalDocuments = additionalDocuments;
                 }
             }
 
-            internal sealed class RemoveAdditionalDocumentsAction : CompilationAndGeneratorDriverTranslationAction
+            internal sealed class RemoveAdditionalDocumentsAction
+                : CompilationAndGeneratorDriverTranslationAction
             {
 #pragma warning disable IDE0052 // Remove unread private members
                 // https://github.com/dotnet/roslyn/issues/44161: right now there is no way to tell a GeneratorDriver that an additional file has been added
                 private readonly ImmutableArray<TextDocumentState> _additionalDocuments;
 #pragma warning restore IDE0052 // Remove unread private members
 
-                public RemoveAdditionalDocumentsAction(ImmutableArray<TextDocumentState> additionalDocuments)
-                {
+                public RemoveAdditionalDocumentsAction(
+                    ImmutableArray<TextDocumentState> additionalDocuments
+                ) {
                     _additionalDocuments = additionalDocuments;
                 }
             }

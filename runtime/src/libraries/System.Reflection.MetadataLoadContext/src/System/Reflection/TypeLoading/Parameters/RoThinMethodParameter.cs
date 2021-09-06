@@ -12,8 +12,11 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal sealed class RoThinMethodParameter : RoMethodParameter
     {
-        internal RoThinMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType)
-            : base(roMethodBase, position, parameterType)
+        internal RoThinMethodParameter(
+            IRoMethodBase roMethodBase,
+            int position,
+            Type parameterType
+        ) : base(roMethodBase, position, parameterType)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);
@@ -22,7 +25,8 @@ namespace System.Reflection.TypeLoading
         public sealed override string? Name => null;
         public sealed override ParameterAttributes Attributes => ParameterAttributes.None;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
 
         public sealed override int MetadataToken => 0x08000000; // nil ParamDef token
 

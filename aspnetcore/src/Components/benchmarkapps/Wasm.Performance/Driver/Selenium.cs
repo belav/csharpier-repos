@@ -18,8 +18,10 @@ namespace Wasm.Performance.Driver
 
         static bool PoolForBrowserLogs = true;
 
-        private static async ValueTask<Uri> WaitForServerAsync(int port, CancellationToken cancellationToken)
-        {
+        private static async ValueTask<Uri> WaitForServerAsync(
+            int port,
+            CancellationToken cancellationToken
+        ) {
             var uri = new UriBuilder("http", "localhost", port, "/wd/hub/").Uri;
             var httpClient = new HttpClient
             {
@@ -37,7 +39,9 @@ namespace Wasm.Performance.Driver
                 retries++;
                 try
                 {
-                    var response = (await httpClient.GetAsync("status", cancellationToken)).EnsureSuccessStatusCode();
+                    var response = (
+                        await httpClient.GetAsync("status", cancellationToken)
+                    ).EnsureSuccessStatusCode();
                     Console.WriteLine("Connected to Selenium");
                     return uri;
                 }
@@ -45,7 +49,9 @@ namespace Wasm.Performance.Driver
                 {
                     if (retries == 1)
                     {
-                        Console.WriteLine("Could not connect to selenium-server. Has it been started as yet?");
+                        Console.WriteLine(
+                            "Could not connect to selenium-server. Has it been started as yet?"
+                        );
                     }
                 }
 
@@ -55,8 +61,10 @@ namespace Wasm.Performance.Driver
             throw new Exception($"Unable to connect to selenium-server at {uri}");
         }
 
-        public static async Task<RemoteWebDriver> CreateBrowser(CancellationToken cancellationToken, bool captureBrowserMemory = false)
-        {
+        public static async Task<RemoteWebDriver> CreateBrowser(
+            CancellationToken cancellationToken,
+            bool captureBrowserMemory = false
+        ) {
             var uri = await WaitForServerAsync(SeleniumPort, cancellationToken);
 
             var options = new ChromeOptions();
@@ -86,7 +94,8 @@ namespace Wasm.Performance.Driver
                     var driver = new RemoteWebDriver(
                         uri,
                         options.ToCapabilities(),
-                        TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60)));
+                        TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60))
+                    );
 
                     driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
 
@@ -94,19 +103,23 @@ namespace Wasm.Performance.Driver
                     {
                         // Run in background.
                         var logs = new RemoteLogs(driver);
-                        _ = Task.Run(async () =>
-                        {
-                            while (!cancellationToken.IsCancellationRequested)
+                        _ = Task.Run(
+                            async () =>
                             {
-                                await Task.Delay(TimeSpan.FromSeconds(3));
-
-                                var consoleLogs = logs.GetLog(LogType.Browser);
-                                foreach (var entry in consoleLogs)
+                                while (!cancellationToken.IsCancellationRequested)
                                 {
-                                    Console.WriteLine($"[Browser Log]: {entry.Timestamp}: {entry.Message}");
+                                    await Task.Delay(TimeSpan.FromSeconds(3));
+
+                                    var consoleLogs = logs.GetLog(LogType.Browser);
+                                    foreach (var entry in consoleLogs)
+                                    {
+                                        Console.WriteLine(
+                                            $"[Browser Log]: {entry.Timestamp}: {entry.Message}"
+                                        );
+                                    }
                                 }
                             }
-                        });
+                        );
                     }
 
                     return driver;
@@ -117,10 +130,11 @@ namespace Wasm.Performance.Driver
                 }
 
                 attempt++;
-
             } while (attempt < MaxAttempts);
 
-            throw new InvalidOperationException("Couldn't create a Selenium remote driver client. The server is irresponsive");
+            throw new InvalidOperationException(
+                "Couldn't create a Selenium remote driver client. The server is irresponsive"
+            );
         }
     }
 }

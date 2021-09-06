@@ -19,7 +19,6 @@ class Z
         s.y = -1;
         return s;
     }
-
 }
 
 class X
@@ -32,10 +31,12 @@ class X
     public static int Main()
     {
         int result = Test();
-        if (result == 100) {
+        if (result == 100)
+        {
             Console.WriteLine("SUCCESS");
         }
-        else {
+        else
+        {
             Console.WriteLine("FAILURE");
         }
         return result;

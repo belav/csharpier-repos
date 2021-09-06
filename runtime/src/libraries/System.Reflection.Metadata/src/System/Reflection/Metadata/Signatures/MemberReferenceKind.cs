@@ -12,7 +12,6 @@ namespace System.Reflection.Metadata
         /// The <see cref="MemberReference"/> references a method.
         /// </summary>
         Method,
-
         /// <summary>
         /// The <see cref="MemberReference"/> references a field.
         /// </summary>

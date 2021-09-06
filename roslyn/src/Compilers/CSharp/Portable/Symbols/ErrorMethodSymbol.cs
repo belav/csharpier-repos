@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal sealed class ErrorMethodSymbol : MethodSymbol
     {
-        public static readonly ErrorMethodSymbol UnknownMethod = new ErrorMethodSymbol(ErrorTypeSymbol.UnknownResultType, ErrorTypeSymbol.UnknownResultType, string.Empty);
+        public static readonly ErrorMethodSymbol UnknownMethod = new ErrorMethodSymbol(
+            ErrorTypeSymbol.UnknownResultType,
+            ErrorTypeSymbol.UnknownResultType,
+            string.Empty
+        );
 
         private readonly TypeSymbol _containingType;
         private readonly TypeSymbol _returnType;
@@ -80,7 +84,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return null; }
         }
 
-        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(bool forceComplete) => null;
+        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => null;
 
         public override Accessibility DeclaredAccessibility
         {
@@ -94,10 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public override Symbol ContainingSymbol
@@ -169,11 +172,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return this.ReturnType.IsVoidType(); }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
         public override bool IsVararg
         {
@@ -210,22 +216,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal sealed override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
-        {
+        internal sealed override bool IsMetadataNewSlot(
+            bool ignoreInterfaceImplementationChanges = false
+        ) {
             return false;
         }
 
-        internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
-        {
+        internal sealed override bool IsMetadataVirtual(
+            bool ignoreInterfaceImplementationChanges = false
+        ) {
             return false;
         }
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override bool RequiresSecurityObject

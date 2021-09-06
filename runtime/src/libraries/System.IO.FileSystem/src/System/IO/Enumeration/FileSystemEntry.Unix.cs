@@ -9,7 +9,7 @@ namespace System.IO.Enumeration
     /// Lower level view of FileSystemInfo used for processing and filtering find results.
     /// </summary>
     public unsafe ref partial struct FileSystemEntry
-   {
+    {
         internal Interop.Sys.DirectoryEntry _directoryEntry;
         private FileStatus _status;
         private Span<char> _pathBuffer;
@@ -24,8 +24,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> directory,
             ReadOnlySpan<char> rootDirectory,
             ReadOnlySpan<char> originalRootDirectory,
-            Span<char> pathBuffer)
-        {
+            Span<char> pathBuffer
+        ) {
             entry._directoryEntry = directoryEntry;
             entry.Directory = directory;
             entry.RootDirectory = rootDirectory;
@@ -46,12 +46,17 @@ namespace System.IO.Enumeration
             // Some operating systems don't have the inode type in the dirent structure,
             // so we use DT_UNKNOWN as a sentinel value. As such, check if the dirent is a
             // directory.
-            else if ((directoryEntry.InodeType == Interop.Sys.NodeType.DT_LNK
-                || directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN)
-                && Interop.Sys.Stat(entry.FullPath, out Interop.Sys.FileStatus targetStatus) >= 0)
-            {
+            else if (
+                (
+                    directoryEntry.InodeType == Interop.Sys.NodeType.DT_LNK
+                    || directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN
+                )
+                && Interop.Sys.Stat(entry.FullPath, out Interop.Sys.FileStatus targetStatus) >= 0
+            ) {
                 // Symlink or unknown: Stat to it to see if we can resolve it to a directory.
-                isDirectory = (targetStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
+                isDirectory =
+                    (targetStatus.Mode & Interop.Sys.FileTypes.S_IFMT)
+                    == Interop.Sys.FileTypes.S_IFDIR;
             }
             // Same idea as the directory check, just repeated for (and tweaked due to the
             // nature of) symlinks.
@@ -59,10 +64,16 @@ namespace System.IO.Enumeration
             {
                 isSymlink = true;
             }
-            else if ((directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN)
-                && (Interop.Sys.LStat(entry.FullPath, out Interop.Sys.FileStatus linkTargetStatus) >= 0))
-            {
-                isSymlink = (linkTargetStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFLNK;
+            else if (
+                (directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN)
+                && (
+                    Interop.Sys.LStat(entry.FullPath, out Interop.Sys.FileStatus linkTargetStatus)
+                    >= 0
+                )
+            ) {
+                isSymlink =
+                    (linkTargetStatus.Mode & Interop.Sys.FileTypes.S_IFMT)
+                    == Interop.Sys.FileTypes.S_IFLNK;
             }
 
             entry._status = default;
@@ -89,8 +100,10 @@ namespace System.IO.Enumeration
             {
                 if (_fullPath.Length == 0)
                 {
-                    Debug.Assert(Directory.Length + FileName.Length < _pathBuffer.Length,
-                        $"directory ({Directory.Length} chars) & name ({Directory.Length} chars) too long for buffer ({_pathBuffer.Length} chars)");
+                    Debug.Assert(
+                        Directory.Length + FileName.Length < _pathBuffer.Length,
+                        $"directory ({Directory.Length} chars) & name ({Directory.Length} chars) too long for buffer ({_pathBuffer.Length} chars)"
+                    );
                     Path.TryJoin(Directory, FileName, _pathBuffer, out int charsWritten);
                     Debug.Assert(charsWritten > 0, "didn't write any chars to buffer");
                     _fullPath = _pathBuffer.Slice(0, charsWritten);
@@ -107,7 +120,10 @@ namespace System.IO.Enumeration
                 {
                     fixed (char* c = _fileNameBuffer)
                     {
-                        Span<char> buffer = new Span<char>(c, Interop.Sys.DirectoryEntry.NameBufferSize);
+                        Span<char> buffer = new Span<char>(
+                            c,
+                            Interop.Sys.DirectoryEntry.NameBufferSize
+                        );
                         _fileName = _directoryEntry.GetName(buffer);
                     }
                 }
@@ -136,12 +152,17 @@ namespace System.IO.Enumeration
 
         public FileAttributes Attributes
             // It would be hard to rationalize if the attributes change after our initial find.
-            => _initialAttributes | (_status.IsReadOnly(FullPath, continueOnError: true) ? FileAttributes.ReadOnly : 0);
+            =>
+            _initialAttributes
+            | (_status.IsReadOnly(FullPath, continueOnError: true) ? FileAttributes.ReadOnly : 0);
 
         public long Length => _status.GetLength(FullPath, continueOnError: true);
-        public DateTimeOffset CreationTimeUtc => _status.GetCreationTime(FullPath, continueOnError: true);
-        public DateTimeOffset LastAccessTimeUtc => _status.GetLastAccessTime(FullPath, continueOnError: true);
-        public DateTimeOffset LastWriteTimeUtc => _status.GetLastWriteTime(FullPath, continueOnError: true);
+        public DateTimeOffset CreationTimeUtc =>
+            _status.GetCreationTime(FullPath, continueOnError: true);
+        public DateTimeOffset LastAccessTimeUtc =>
+            _status.GetLastAccessTime(FullPath, continueOnError: true);
+        public DateTimeOffset LastWriteTimeUtc =>
+            _status.GetLastWriteTime(FullPath, continueOnError: true);
         public bool IsDirectory => _status.InitiallyDirectory;
         public bool IsHidden => _directoryEntry.Name[0] == '.';
 
@@ -154,7 +175,6 @@ namespace System.IO.Enumeration
         /// <summary>
         /// Returns the full path of the find result.
         /// </summary>
-        public string ToFullPath() =>
-            new string(FullPath);
+        public string ToFullPath() => new string(FullPath);
     }
 }

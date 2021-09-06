@@ -92,8 +92,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultSpan,
             CompletionTrigger trigger,
             OptionSet options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             Provider = provider ?? throw new ArgumentNullException(nameof(provider));
             Document = document ?? throw new ArgumentNullException(nameof(document));
             Position = position;
@@ -142,11 +142,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         public CompletionItem SuggestionModeItem
         {
-            get
-            {
-                return _suggestionModeItem;
-            }
-
+            get { return _suggestionModeItem; }
             set
             {
                 _suggestionModeItem = value;

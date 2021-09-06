@@ -23,15 +23,33 @@ namespace Microsoft.Web.Mvc.ModelBinding
             set { _metadataProvider = value; }
         }
 
-        public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-        {
-            ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(KeyValuePair<TKey, TValue>), true /* allowNullModel */);
+        public bool BindModel(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        ) {
+            ModelBinderUtil.ValidateBindingContext(
+                bindingContext,
+                typeof(KeyValuePair<TKey, TValue>),
+                true /* allowNullModel */
+            );
 
             TKey key;
-            bool keyBindingSucceeded = KeyValuePairModelBinderUtil.TryBindStrongModel(controllerContext, bindingContext, "key", MetadataProvider, out key);
+            bool keyBindingSucceeded = KeyValuePairModelBinderUtil.TryBindStrongModel(
+                controllerContext,
+                bindingContext,
+                "key",
+                MetadataProvider,
+                out key
+            );
 
             TValue value;
-            bool valueBindingSucceeded = KeyValuePairModelBinderUtil.TryBindStrongModel(controllerContext, bindingContext, "value", MetadataProvider, out value);
+            bool valueBindingSucceeded = KeyValuePairModelBinderUtil.TryBindStrongModel(
+                controllerContext,
+                bindingContext,
+                "value",
+                MetadataProvider,
+                out value
+            );
 
             if (keyBindingSucceeded && valueBindingSucceeded)
             {

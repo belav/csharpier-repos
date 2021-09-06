@@ -53,7 +53,8 @@ namespace SocialWeather.Pipe
         public async Task WriteAsync(WeatherReport report, Stream stream)
         {
             var sw = new StreamWriter(stream);
-            var line = $"{report.Temperature}|{report.ReportTime}|{(int)report.Weather}|{report.ZipCode ?? string.Empty}";
+            var line =
+                $"{report.Temperature}|{report.ReportTime}|{(int)report.Weather}|{report.ZipCode ?? string.Empty}";
 
             var utf8 = Encoding.UTF8;
             var encodedBytes = utf8.GetBytes(line);

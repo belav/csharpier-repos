@@ -14,7 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
     /// <summary>
     /// A <see cref="TagHelper"/> that renders a Razor component.
     /// </summary>
-    [HtmlTargetElement(TagHelperName, Attributes = ComponentTypeName, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement(
+        TagHelperName,
+        Attributes = ComponentTypeName,
+        TagStructure = TagStructure.WithoutEndTag
+    )]
     public sealed class ComponentTagHelper : TagHelper
     {
         private const string TagHelperName = "component";
@@ -35,7 +39,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <summary>
         /// Gets or sets values for component parameters.
         /// </summary>
-        [HtmlAttributeName(ComponentParameterName, DictionaryAttributePrefix = ComponentParameterPrefix)]
+        [HtmlAttributeName(
+            ComponentParameterName,
+            DictionaryAttributePrefix = ComponentParameterPrefix
+        )]
         public IDictionary<string, object> Parameters
         {
             get
@@ -76,8 +83,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             message: Resources.FormatInvalidEnumArgument(
                                 nameof(value),
                                 value,
-                                typeof(RenderMode).FullName),
-                            paramName: nameof(value));
+                                typeof(RenderMode).FullName
+                            ),
+                            paramName: nameof(value)
+                        );
                 }
             }
         }
@@ -97,12 +106,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             if (_renderMode is null)
             {
-                throw new ArgumentException(Resources.FormatAttributeIsRequired(RenderModeName, TagHelperName), nameof(RenderMode));
+                throw new ArgumentException(
+                    Resources.FormatAttributeIsRequired(RenderModeName, TagHelperName),
+                    nameof(RenderMode)
+                );
             }
 
             var requestServices = ViewContext.HttpContext.RequestServices;
             var componentRenderer = requestServices.GetRequiredService<IComponentRenderer>();
-            var result = await componentRenderer.RenderComponentAsync(ViewContext, ComponentType, RenderMode, _parameters);
+            var result = await componentRenderer.RenderComponentAsync(
+                ViewContext,
+                ComponentType,
+                RenderMode,
+                _parameters
+            );
 
             // Reset the TagName. We don't want `component` to render.
             output.TagName = null;

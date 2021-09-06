@@ -25,7 +25,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="database"> The facade from <see cref="DbContext.Database" />. </param>
         /// <returns> <see langword="true" /> if the in-memory database is being used. </returns>
-        public static bool IsInMemory(this DatabaseFacade database)
-            => database.ProviderName == typeof(InMemoryOptionsExtension).Assembly.GetName().Name;
+        public static bool IsInMemory(this DatabaseFacade database) =>
+            database.ProviderName == typeof(InMemoryOptionsExtension).Assembly.GetName().Name;
     }
 }

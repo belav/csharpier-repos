@@ -39,34 +39,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override int Ordinal
         {
-            get
-            {
-                return ordinal;
-            }
+            get { return ordinal; }
         }
 
         internal override Machine Machine
         {
-            get
-            {
-                return Machine.I386;
-            }
+            get { return Machine.I386; }
         }
 
         internal override bool Bit32Required
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override bool IsMissing
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override string Name
@@ -80,26 +68,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return assembly;
-            }
+            get { return assembly; }
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return assembly;
-            }
+            get { return assembly; }
         }
 
         public override NamespaceSymbol GlobalNamespace
         {
-            get
-            {
-                return globalNamespace;
-            }
+            get { return globalNamespace; }
         }
 
         public override int GetHashCode()
@@ -121,30 +100,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
         internal override ICollection<string> NamespaceNames
         {
-            get
-            {
-                return SpecializedCollections.EmptyCollection<string>();
-            }
+            get { return SpecializedCollections.EmptyCollection<string>(); }
         }
 
         internal override ICollection<string> TypeNames
         {
-            get
-            {
-                return SpecializedCollections.EmptyCollection<string>();
-            }
+            get { return SpecializedCollections.EmptyCollection<string>(); }
         }
 
-        internal override NamedTypeSymbol LookupTopLevelMetadataType(ref MetadataTypeName emittedName)
-        {
+        internal override NamedTypeSymbol LookupTopLevelMetadataType(
+            ref MetadataTypeName emittedName
+        ) {
             return new MissingMetadataTypeSymbol.TopLevel(this, ref emittedName);
         }
 
@@ -158,8 +129,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ImmutableArray<AssemblySymbol>.Empty;
         }
 
-        internal override void SetReferences(ModuleReferences<AssemblySymbol> moduleReferences, SourceAssemblySymbol originatingSourceAssemblyDebugOnly)
-        {
+        internal override void SetReferences(
+            ModuleReferences<AssemblySymbol> moduleReferences,
+            SourceAssemblySymbol originatingSourceAssemblyDebugOnly
+        ) {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -168,8 +141,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return false; }
         }
 
-        internal override bool GetUnificationUseSiteDiagnostic(ref DiagnosticInfo result, TypeSymbol dependentType)
-        {
+        internal override bool GetUnificationUseSiteDiagnostic(
+            ref DiagnosticInfo result,
+            TypeSymbol dependentType
+        ) {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -210,15 +185,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(assembly.GetHashCode(), StringComparer.OrdinalIgnoreCase.GetHashCode(_name));
+            return Hash.Combine(
+                assembly.GetHashCode(),
+                StringComparer.OrdinalIgnoreCase.GetHashCode(_name)
+            );
         }
 
         public override bool Equals(Symbol obj, TypeCompareKind compareKind)
@@ -230,7 +205,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             MissingModuleSymbolWithName other = obj as MissingModuleSymbolWithName;
 
-            return (object)other != null && assembly.Equals(other.assembly, compareKind) && string.Equals(_name, other._name, StringComparison.OrdinalIgnoreCase);
+            return (object)other != null
+                && assembly.Equals(other.assembly, compareKind)
+                && string.Equals(_name, other._name, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

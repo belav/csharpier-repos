@@ -7,8 +7,9 @@ namespace System.Transactions
     {
         // Create a transaction with the given settings
         //
-        public SubordinateTransaction(IsolationLevel isoLevel, ISimpleTransactionSuperior superior) : base(isoLevel, superior)
-        {
-        }
+        public SubordinateTransaction(
+            IsolationLevel isoLevel,
+            ISimpleTransactionSuperior superior
+        ) : base(isoLevel, superior) { }
     }
 }

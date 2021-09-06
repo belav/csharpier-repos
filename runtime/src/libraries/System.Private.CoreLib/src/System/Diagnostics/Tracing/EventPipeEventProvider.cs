@@ -13,8 +13,8 @@ namespace System.Diagnostics.Tracing
             EventSource eventSource,
             Interop.Advapi32.EtwEnableCallback enableCallback,
             void* callbackContext,
-            ref long registrationHandle)
-        {
+            ref long registrationHandle
+        ) {
             uint returnStatus = 0;
             m_provHandle = EventPipeInternal.CreateProvider(eventSource.Name, enableCallback);
             if (m_provHandle != IntPtr.Zero)
@@ -47,13 +47,19 @@ namespace System.Diagnostics.Tracing
             Guid* activityId,
             Guid* relatedActivityId,
             int userDataCount,
-            EventProvider.EventData* userData)
-        {
+            EventProvider.EventData* userData
+        ) {
             if (eventHandle != IntPtr.Zero)
             {
                 if (userDataCount == 0)
                 {
-                    EventPipeInternal.WriteEventData(eventHandle, null, 0, activityId, relatedActivityId);
+                    EventPipeInternal.WriteEventData(
+                        eventHandle,
+                        null,
+                        0,
+                        activityId,
+                        relatedActivityId
+                    );
                     return EventProvider.WriteEventErrorCode.NoError;
                 }
 
@@ -66,29 +72,53 @@ namespace System.Diagnostics.Tracing
                     userDataCount -= 3;
                     Debug.Assert(userDataCount >= 0);
                 }
-                EventPipeInternal.WriteEventData(eventHandle, userData, (uint)userDataCount, activityId, relatedActivityId);
+                EventPipeInternal.WriteEventData(
+                    eventHandle,
+                    userData,
+                    (uint)userDataCount,
+                    activityId,
+                    relatedActivityId
+                );
             }
 
             return EventProvider.WriteEventErrorCode.NoError;
         }
 
         // Get or set the per-thread activity ID.
-        int IEventProvider.EventActivityIdControl(Interop.Advapi32.ActivityControl ControlCode, ref Guid ActivityId)
-        {
+        int IEventProvider.EventActivityIdControl(
+            Interop.Advapi32.ActivityControl ControlCode,
+            ref Guid ActivityId
+        ) {
             return EventActivityIdControl(ControlCode, ref ActivityId);
         }
 
         // Define an EventPipeEvent handle.
-        unsafe IntPtr IEventProvider.DefineEventHandle(uint eventID, string eventName, long keywords, uint eventVersion, uint level,
-            byte *pMetadata, uint metadataLength)
-        {
-            IntPtr eventHandlePtr = EventPipeInternal.DefineEvent(m_provHandle, eventID, keywords, eventVersion, level, pMetadata, metadataLength);
+        unsafe IntPtr IEventProvider.DefineEventHandle(
+            uint eventID,
+            string eventName,
+            long keywords,
+            uint eventVersion,
+            uint level,
+            byte* pMetadata,
+            uint metadataLength
+        ) {
+            IntPtr eventHandlePtr = EventPipeInternal.DefineEvent(
+                m_provHandle,
+                eventID,
+                keywords,
+                eventVersion,
+                level,
+                pMetadata,
+                metadataLength
+            );
             return eventHandlePtr;
         }
 
         // Get or set the per-thread activity ID.
-        internal static int EventActivityIdControl(Interop.Advapi32.ActivityControl ControlCode, ref Guid ActivityId)
-        {
+        internal static int EventActivityIdControl(
+            Interop.Advapi32.ActivityControl ControlCode,
+            ref Guid ActivityId
+        ) {
             return EventPipeInternal.EventActivityIdControl((uint)ControlCode, ref ActivityId);
         }
     }

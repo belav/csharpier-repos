@@ -58,6 +58,9 @@ namespace Microsoft.AspNetCore.Http
         /// </summary>
         /// <param name="target">The stream to copy the file contents to.</param>
         /// <param name="cancellationToken"></param>
-        Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken));
+        Task CopyToAsync(
+            Stream target,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
     }
 }

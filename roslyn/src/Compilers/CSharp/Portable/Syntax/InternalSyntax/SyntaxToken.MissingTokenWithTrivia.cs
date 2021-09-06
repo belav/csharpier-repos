@@ -13,27 +13,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     {
         internal class MissingTokenWithTrivia : SyntaxTokenWithTrivia
         {
-            internal MissingTokenWithTrivia(SyntaxKind kind, GreenNode leading, GreenNode trailing)
-                : base(kind, leading, trailing)
+            internal MissingTokenWithTrivia(
+                SyntaxKind kind,
+                GreenNode leading,
+                GreenNode trailing
+            ) : base(kind, leading, trailing)
             {
                 this.flags &= ~NodeFlags.IsNotMissing;
             }
 
-            internal MissingTokenWithTrivia(SyntaxKind kind, GreenNode leading, GreenNode trailing, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
-                : base(kind, leading, trailing, diagnostics, annotations)
+            internal MissingTokenWithTrivia(
+                SyntaxKind kind,
+                GreenNode leading,
+                GreenNode trailing,
+                DiagnosticInfo[] diagnostics,
+                SyntaxAnnotation[] annotations
+            ) : base(kind, leading, trailing, diagnostics, annotations)
             {
                 this.flags &= ~NodeFlags.IsNotMissing;
             }
 
-            internal MissingTokenWithTrivia(ObjectReader reader)
-                : base(reader)
+            internal MissingTokenWithTrivia(ObjectReader reader) : base(reader)
             {
                 this.flags &= ~NodeFlags.IsNotMissing;
             }
 
             static MissingTokenWithTrivia()
             {
-                ObjectBinder.RegisterTypeReader(typeof(MissingTokenWithTrivia), r => new MissingTokenWithTrivia(r));
+                ObjectBinder.RegisterTypeReader(
+                    typeof(MissingTokenWithTrivia),
+                    r => new MissingTokenWithTrivia(r)
+                );
             }
 
             public override string Text
@@ -57,22 +67,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new MissingTokenWithTrivia(this.Kind, trivia, this.TrailingField, this.GetDiagnostics(), this.GetAnnotations());
+                return new MissingTokenWithTrivia(
+                    this.Kind,
+                    trivia,
+                    this.TrailingField,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new MissingTokenWithTrivia(this.Kind, this.LeadingField, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new MissingTokenWithTrivia(
+                    this.Kind,
+                    this.LeadingField,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
             {
-                return new MissingTokenWithTrivia(this.Kind, this.LeadingField, this.TrailingField, diagnostics, this.GetAnnotations());
+                return new MissingTokenWithTrivia(
+                    this.Kind,
+                    this.LeadingField,
+                    this.TrailingField,
+                    diagnostics,
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new MissingTokenWithTrivia(this.Kind, this.LeadingField, this.TrailingField, this.GetDiagnostics(), annotations);
+                return new MissingTokenWithTrivia(
+                    this.Kind,
+                    this.LeadingField,
+                    this.TrailingField,
+                    this.GetDiagnostics(),
+                    annotations
+                );
             }
         }
     }

@@ -19,7 +19,6 @@ public struct X
     public SingleInt f;
 }
 
-
 public class SingleInt
 {
     public int i1;
