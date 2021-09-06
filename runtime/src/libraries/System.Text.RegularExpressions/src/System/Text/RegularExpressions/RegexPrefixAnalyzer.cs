@@ -142,8 +142,8 @@ namespace System.Text.RegularExpressions
             {
                 fc.AddLowercase(
                     ((tree.Options & RegexOptions.CultureInvariant) != 0)
-                        ? CultureInfo.InvariantCulture
-                        : CultureInfo.CurrentCulture
+                      ? CultureInfo.InvariantCulture
+                      : CultureInfo.CurrentCulture
                 );
             }
 

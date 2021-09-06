@@ -98,8 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax,
                 receiverOpt: null,
                 operatorKind.Operator() == BinaryOperatorKind.And
-                    ? node.FalseOperator
-                    : node.TrueOperator,
+                  ? node.FalseOperator
+                  : node.TrueOperator,
                 boundTemp
             );
 
@@ -2171,11 +2171,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntax: syntax,
                     rewrittenCondition: neverNull,
                     rewrittenConsequence: kind == BinaryOperatorKind.LiftedBoolAnd
-                        ? nullBool
-                        : newNullBool,
+                      ? nullBool
+                      : newNullBool,
                     rewrittenAlternative: kind == BinaryOperatorKind.LiftedBoolAnd
-                        ? newNullBool
-                        : nullBool,
+                      ? newNullBool
+                      : nullBool,
                     constantValueOpt: null,
                     rewrittenType: alwaysNull.Type,
                     isRef: false

@@ -49,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     parameter.Builder!.HasTypeMapping(
                         !string.IsNullOrEmpty(parameter.StoreType)
-                            ? _relationalTypeMappingSource.FindMapping(parameter.StoreType)
-                            : _relationalTypeMappingSource.FindMapping(parameter.ClrType)
+                          ? _relationalTypeMappingSource.FindMapping(parameter.StoreType)
+                          : _relationalTypeMappingSource.FindMapping(parameter.ClrType)
                     );
                 }
 
@@ -58,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     dbFunction.Builder.HasTypeMapping(
                         !string.IsNullOrEmpty(dbFunction.StoreType)
-                            ? _relationalTypeMappingSource.FindMapping(dbFunction.StoreType)
-                            : _relationalTypeMappingSource.FindMapping(dbFunction.ReturnType)
+                          ? _relationalTypeMappingSource.FindMapping(dbFunction.StoreType)
+                          : _relationalTypeMappingSource.FindMapping(dbFunction.ReturnType)
                     );
                 }
             }

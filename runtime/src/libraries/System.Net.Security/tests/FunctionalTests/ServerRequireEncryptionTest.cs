@@ -155,8 +155,8 @@ namespace System.Net.Security.Tests
                 ) {
                     await Assert.ThrowsAsync(
                         TestConfiguration.SupportsHandshakeAlerts
-                            ? typeof(AuthenticationException)
-                            : typeof(IOException),
+                          ? typeof(AuthenticationException)
+                          : typeof(IOException),
                         () =>
                             sslStream.AuthenticateAsClientAsync(
                                 "localhost",

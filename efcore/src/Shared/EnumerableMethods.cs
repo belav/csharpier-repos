@@ -917,8 +917,8 @@ namespace Microsoft.EntityFrameworkCore
                             .SequenceEqual(
                                 parameterGenerator(
                                     mi.IsGenericMethod
-                                        ? mi.GetGenericArguments()
-                                        : Array.Empty<Type>()
+                                      ? mi.GetGenericArguments()
+                                      : Array.Empty<Type>()
                                 )
                             )
                 );

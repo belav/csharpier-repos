@@ -535,8 +535,8 @@ namespace System.Net.Sockets
             // Set Time To Live (TTL).
             _clientSocket.SetSocketOption(
                 (_family == AddressFamily.InterNetwork)
-                    ? SocketOptionLevel.IP
-                    : SocketOptionLevel.IPv6,
+                  ? SocketOptionLevel.IP
+                  : SocketOptionLevel.IPv6,
                 SocketOptionName.MulticastTimeToLive,
                 timeToLive
             );
@@ -653,8 +653,8 @@ namespace System.Net.Sockets
                     new ArraySegment<byte>(_buffer, 0, MaxUDPSize),
                     SocketFlags.None,
                     _family == AddressFamily.InterNetwork
-                        ? IPEndPointStatics.Any
-                        : IPEndPointStatics.IPv6Any
+                      ? IPEndPointStatics.Any
+                      : IPEndPointStatics.IPv6Any
                 )
             );
 

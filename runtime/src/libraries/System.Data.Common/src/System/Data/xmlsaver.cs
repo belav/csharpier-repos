@@ -3491,8 +3491,8 @@ namespace System.Data
                     {
                         throw ExceptionBuilder.MultipleParentRows(
                             tempTable.Namespace.Length == 0
-                                ? tempTable.TableName
-                                : tempTable.Namespace + tempTable.TableName
+                              ? tempTable.TableName
+                              : tempTable.Namespace + tempTable.TableName
                         );
                         // At all times a nested row can only have 0 or 1 parents, never more than 1
                     }

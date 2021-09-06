@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 args,
                 diagnostics,
                 typeArgs: typeArgs.IsDefault
-                    ? default(ImmutableArray<TypeWithAnnotations>)
-                    : typeArgs.SelectAsArray(t => TypeWithAnnotations.Create(t)),
+                  ? default(ImmutableArray<TypeWithAnnotations>)
+                  : typeArgs.SelectAsArray(t => TypeWithAnnotations.Create(t)),
                 allowFieldsAndProperties: false,
                 allowUnexpandedForm: allowUnexpandedForm
             );
@@ -1827,8 +1827,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return WellKnownMethod(
                 (methodContainer.AllTypeArgumentCount() == 0 && !methodContainer.IsAnonymousType)
-                    ? CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle
-                    : CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle2
+                  ? CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle
+                  : CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle2
             );
         }
 
@@ -1836,8 +1836,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return WellKnownMethod(
                 (fieldContainer.AllTypeArgumentCount() == 0)
-                    ? CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle
-                    : CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle2
+                  ? CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle
+                  : CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle2
             );
         }
 

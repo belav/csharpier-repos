@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                 editor.SetStatements(
                     functionDeclaration,
                     statementToAddAfterOpt == null
-                        ? ImmutableArray.Create(statement, convertedStatement)
-                        : ImmutableArray.Create(convertedStatement, statement)
+                      ? ImmutableArray.Create(statement, convertedStatement)
+                      : ImmutableArray.Create(convertedStatement, statement)
                 );
             }
             else if (body is BlockSyntax block)

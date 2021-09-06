@@ -363,11 +363,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         expr.Syntax,
                         methodGroup.ResultKind,
                         (object)otherSymbol == null
-                            ? ImmutableArray<Symbol>.Empty
-                            : ImmutableArray.Create(otherSymbol),
+                          ? ImmutableArray<Symbol>.Empty
+                          : ImmutableArray.Create(otherSymbol),
                         receiver == null
-                            ? ImmutableArray<BoundExpression>.Empty
-                            : ImmutableArray.Create(receiver),
+                          ? ImmutableArray<BoundExpression>.Empty
+                          : ImmutableArray.Create(receiver),
                         GetNonMethodMemberType(otherSymbol)
                     );
                 }
@@ -1421,8 +1421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Error(
                         diagnostics,
                         valueKind == BindValueKind.RefOrOut
-                            ? ErrorCode.ERR_RefProperty
-                            : GetStandardLvalueError(valueKind),
+                          ? ErrorCode.ERR_RefProperty
+                          : GetStandardLvalueError(valueKind),
                         node,
                         propertySymbol
                     );

@@ -1411,8 +1411,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                    ? CoreStrings.SeedDatumDuplicateSensitive(nameof(D), $"{nameof(A.Id)}:1")
-                    : CoreStrings.SeedDatumDuplicate(nameof(D), $"{{'{nameof(A.Id)}'}}"),
+                  ? CoreStrings.SeedDatumDuplicateSensitive(nameof(D), $"{nameof(A.Id)}:1")
+                  : CoreStrings.SeedDatumDuplicate(nameof(D), $"{{'{nameof(A.Id)}'}}"),
                 modelBuilder.Model,
                 sensitiveDataLoggingEnabled
             );
@@ -1433,17 +1433,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                    ? CoreStrings.SeedDatumIncompatibleValueSensitive(
-                          nameof(A),
-                          "invalid",
-                          nameof(A.P0),
-                          "System.Nullable<int>"
-                      )
-                    : CoreStrings.SeedDatumIncompatibleValue(
-                          nameof(A),
-                          nameof(A.P0),
-                          "System.Nullable<int>"
-                      ),
+                  ? CoreStrings.SeedDatumIncompatibleValueSensitive(
+                        nameof(A),
+                        "invalid",
+                        nameof(A.P0),
+                        "System.Nullable<int>"
+                    )
+                  : CoreStrings.SeedDatumIncompatibleValue(
+                        nameof(A),
+                        nameof(A.P0),
+                        "System.Nullable<int>"
+                    ),
                 modelBuilder.Model,
                 sensitiveDataLoggingEnabled
             );
@@ -1470,19 +1470,19 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                    ? CoreStrings.SeedDatumNavigationSensitive(
-                          nameof(SampleEntity),
-                          $"{nameof(SampleEntity.Id)}:1",
-                          nameof(SampleEntity.ReferencedEntity),
-                          nameof(ReferencedEntity),
-                          $"{{'{nameof(ReferencedEntity.SampleEntityId)}'}}"
-                      )
-                    : CoreStrings.SeedDatumNavigation(
-                          nameof(SampleEntity),
-                          nameof(SampleEntity.ReferencedEntity),
-                          nameof(ReferencedEntity),
-                          $"{{'{nameof(ReferencedEntity.SampleEntityId)}'}}"
-                      ),
+                  ? CoreStrings.SeedDatumNavigationSensitive(
+                        nameof(SampleEntity),
+                        $"{nameof(SampleEntity.Id)}:1",
+                        nameof(SampleEntity.ReferencedEntity),
+                        nameof(ReferencedEntity),
+                        $"{{'{nameof(ReferencedEntity.SampleEntityId)}'}}"
+                    )
+                  : CoreStrings.SeedDatumNavigation(
+                        nameof(SampleEntity),
+                        nameof(SampleEntity.ReferencedEntity),
+                        nameof(ReferencedEntity),
+                        $"{{'{nameof(ReferencedEntity.SampleEntityId)}'}}"
+                    ),
                 modelBuilder.Model,
                 sensitiveDataLoggingEnabled
             );
@@ -1505,19 +1505,19 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                    ? CoreStrings.SeedDatumNavigationSensitive(
-                          nameof(Order),
-                          $"{nameof(Order.Id)}:1",
-                          nameof(Order.Products),
-                          "OrderProduct (Dictionary<string, object>)",
-                          "{'OrdersId'}"
-                      )
-                    : CoreStrings.SeedDatumNavigation(
-                          nameof(Order),
-                          nameof(Order.Products),
-                          "OrderProduct (Dictionary<string, object>)",
-                          "{'OrdersId'}"
-                      ),
+                  ? CoreStrings.SeedDatumNavigationSensitive(
+                        nameof(Order),
+                        $"{nameof(Order.Id)}:1",
+                        nameof(Order.Products),
+                        "OrderProduct (Dictionary<string, object>)",
+                        "{'OrdersId'}"
+                    )
+                  : CoreStrings.SeedDatumNavigation(
+                        nameof(Order),
+                        nameof(Order.Products),
+                        "OrderProduct (Dictionary<string, object>)",
+                        "{'OrdersId'}"
+                    ),
                 modelBuilder.Model,
                 sensitiveDataLoggingEnabled
             );
@@ -1547,19 +1547,19 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                    ? CoreStrings.SeedDatumNavigationSensitive(
-                          nameof(SampleEntity),
-                          $"{nameof(SampleEntity.Id)}:1",
-                          nameof(SampleEntity.OtherSamples),
-                          nameof(SampleEntity),
-                          "{'SampleEntityId'}"
-                      )
-                    : CoreStrings.SeedDatumNavigation(
-                          nameof(SampleEntity),
-                          nameof(SampleEntity.OtherSamples),
-                          nameof(SampleEntity),
-                          "{'SampleEntityId'}"
-                      ),
+                  ? CoreStrings.SeedDatumNavigationSensitive(
+                        nameof(SampleEntity),
+                        $"{nameof(SampleEntity.Id)}:1",
+                        nameof(SampleEntity.OtherSamples),
+                        nameof(SampleEntity),
+                        "{'SampleEntityId'}"
+                    )
+                  : CoreStrings.SeedDatumNavigation(
+                        nameof(SampleEntity),
+                        nameof(SampleEntity.OtherSamples),
+                        nameof(SampleEntity),
+                        "{'SampleEntityId'}"
+                    ),
                 modelBuilder.Model,
                 sensitiveDataLoggingEnabled
             );

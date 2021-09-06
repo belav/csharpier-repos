@@ -586,11 +586,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return Expression.Condition(
                         conditionalExpression.Test,
                         binaryTest.NodeType == ExpressionType.Equal
-                            ? nullExpression
-                            : nonNullExpression,
+                          ? nullExpression
+                          : nonNullExpression,
                         binaryTest.NodeType == ExpressionType.Equal
-                            ? nonNullExpression
-                            : nullExpression
+                          ? nonNullExpression
+                          : nullExpression
                     );
                 }
             }

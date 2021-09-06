@@ -211,8 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 string text = i == 0 ? "" : _indentations[i - 1].ToString() + _indentWhitespace;
                 _indentations.Add(
                     _useElasticTrivia
-                        ? SyntaxFactory.ElasticWhitespace(text)
-                        : SyntaxFactory.Whitespace(text)
+                      ? SyntaxFactory.ElasticWhitespace(text)
+                      : SyntaxFactory.Whitespace(text)
                 );
             }
 

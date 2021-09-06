@@ -492,8 +492,8 @@ namespace JIT.HardwareIntrinsics.X86
                 BitConverter.SingleToInt32Bits(result[0])
                 != BitConverter.SingleToInt32Bits(
                     (BitConverter.SingleToInt32Bits(left[0]) < 0)
-                        ? right[0]
-                        : BitConverter.SingleToInt32Bits(result[0])
+                      ? right[0]
+                      : BitConverter.SingleToInt32Bits(result[0])
                 )
             ) {
                 succeeded = false;
@@ -506,8 +506,8 @@ namespace JIT.HardwareIntrinsics.X86
                         BitConverter.SingleToInt32Bits(result[i])
                         != BitConverter.SingleToInt32Bits(
                             (BitConverter.SingleToInt32Bits(left[i]) < 0)
-                                ? right[i]
-                                : BitConverter.SingleToInt32Bits(result[i])
+                              ? right[i]
+                              : BitConverter.SingleToInt32Bits(result[i])
                         )
                     ) {
                         succeeded = false;

@@ -57,8 +57,8 @@ namespace System.IO.Pipes.Tests
                         new Action<string, string>(ConnectClientFromRemoteInvoker),
                         pipeName,
                         clientPipeOptions == PipeOptions.CurrentUserOnly && !isRoot
-                            ? "true"
-                            : "false",
+                          ? "true"
+                          : "false",
                         new RemoteInvokeOptions { RunAsSudo = true }
                     )
                 ) { }

@@ -578,8 +578,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 fixedArguments.Add(
                     IsUnfixed(iParam)
-                        ? TypeWithAnnotations.Create(_methodTypeParameters[iParam])
-                        : _fixedResults[iParam]
+                      ? TypeWithAnnotations.Create(_methodTypeParameters[iParam])
+                      : _fixedResults[iParam]
                 );
             }
 

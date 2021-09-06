@@ -481,8 +481,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
                         "{0}&{1}",
                         Uri.EscapeDataString(consumerSecret),
                         string.IsNullOrEmpty(tokenSecret)
-                            ? string.Empty
-                            : Uri.EscapeDataString(tokenSecret)
+                          ? string.Empty
+                          : Uri.EscapeDataString(tokenSecret)
                     )
                 );
                 var hash = algorithm.ComputeHash(Encoding.ASCII.GetBytes(signatureData));

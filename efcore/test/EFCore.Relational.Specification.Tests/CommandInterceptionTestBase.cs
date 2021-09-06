@@ -1427,8 +1427,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 ResultReplacingScalarCommandInterceptor.InterceptedResult,
                 async
-                    ? await command.ExecuteScalarAsync(commandParameterObject)
-                    : command.ExecuteScalar(commandParameterObject)
+                  ? await command.ExecuteScalarAsync(commandParameterObject)
+                  : command.ExecuteScalar(commandParameterObject)
             );
         }
 
@@ -1456,8 +1456,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(
                     7,
                     async
-                        ? await context.Database.ExecuteSqlRawAsync(nonQuery)
-                        : context.Database.ExecuteSqlRaw(nonQuery)
+                      ? await context.Database.ExecuteSqlRawAsync(nonQuery)
+                      : context.Database.ExecuteSqlRaw(nonQuery)
                 );
             }
         }

@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         this.AddError(
                             (_builder.Length != 0)
-                                ? ErrorCode.ERR_TooManyCharsInConst
-                                : ErrorCode.ERR_EmptyCharConst
+                              ? ErrorCode.ERR_TooManyCharsInConst
+                              : ErrorCode.ERR_EmptyCharConst
                         );
                     }
 
@@ -388,8 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             position,
                             1,
                             isVerbatim
-                                ? ErrorCode.ERR_UnterminatedStringLit
-                                : ErrorCode.ERR_NewlineInConst
+                              ? ErrorCode.ERR_UnterminatedStringLit
+                              : ErrorCode.ERR_NewlineInConst
                         );
                     }
 

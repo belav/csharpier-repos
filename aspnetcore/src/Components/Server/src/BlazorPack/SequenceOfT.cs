@@ -249,8 +249,8 @@ namespace Nerdbank.Streams
                     segment.Assign(
                         this.arrayPool.Rent(
                             minBufferSize.Value == -1
-                                ? DefaultLengthFromArrayPool
-                                : minBufferSize.Value
+                              ? DefaultLengthFromArrayPool
+                              : minBufferSize.Value
                         )
                     );
                 }

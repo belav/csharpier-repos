@@ -50,8 +50,8 @@ namespace System
                     int errorCode = Marshal.GetLastWin32Error();
                     throw Win32Marshal.GetExceptionForWin32Error(
                         errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
-                            ? Interop.Errors.ERROR_PATH_NOT_FOUND
-                            : errorCode,
+                          ? Interop.Errors.ERROR_PATH_NOT_FOUND
+                          : errorCode,
                         value
                     );
                 }

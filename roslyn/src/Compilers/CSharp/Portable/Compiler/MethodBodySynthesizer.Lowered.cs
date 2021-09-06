@@ -472,8 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             BoundExpression invocation = F.Call(
                 useBaseReference
-                    ? (BoundExpression)F.Base(baseType: methodToInvoke.ContainingType)
-                    : F.This(),
+                  ? (BoundExpression)F.Base(baseType: methodToInvoke.ContainingType)
+                  : F.This(),
                 methodToInvoke,
                 argBuilder.ToImmutableAndFree()
             );

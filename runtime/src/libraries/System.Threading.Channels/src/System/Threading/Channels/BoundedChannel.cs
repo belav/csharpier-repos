@@ -60,8 +60,8 @@ namespace System.Threading.Channels
             _itemDropped = itemDropped;
             _completion = new TaskCompletionSource(
                 runContinuationsAsynchronously
-                    ? TaskCreationOptions.RunContinuationsAsynchronously
-                    : TaskCreationOptions.None
+                  ? TaskCreationOptions.RunContinuationsAsynchronously
+                  : TaskCreationOptions.None
             );
             Reader = new BoundedChannelReader(this);
             Writer = new BoundedChannelWriter(this);

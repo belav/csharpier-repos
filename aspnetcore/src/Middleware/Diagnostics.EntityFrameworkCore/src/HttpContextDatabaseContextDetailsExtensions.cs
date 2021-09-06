@@ -76,8 +76,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
                         context.GetService<IDesignTimeModel>().Model.GetRelationalModel()
                     ),
                 pendingMigrations: databaseExists
-                    ? await context.Database.GetPendingMigrationsAsync()
-                    : context.Database.GetMigrations()
+                  ? await context.Database.GetPendingMigrationsAsync()
+                  : context.Database.GetMigrations()
             );
         }
     }

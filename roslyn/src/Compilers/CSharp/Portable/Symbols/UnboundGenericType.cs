@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ? original
                     : original.AsMember(
                           originalContainingType.IsGenericType
-                              ? originalContainingType.AsUnboundGenericType()
-                              : originalContainingType
+                            ? originalContainingType.AsUnboundGenericType()
+                            : originalContainingType
                       );
             if (n == 0)
             {

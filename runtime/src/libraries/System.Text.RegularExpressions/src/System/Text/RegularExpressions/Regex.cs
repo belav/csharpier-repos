@@ -508,8 +508,8 @@ namespace System.Text.RegularExpressions
                       new RegexInterpreter(
                           _code!,
                           UseOptionInvariant()
-                              ? CultureInfo.InvariantCulture
-                              : CultureInfo.CurrentCulture
+                            ? CultureInfo.InvariantCulture
+                            : CultureInfo.CurrentCulture
                       )
             );
 

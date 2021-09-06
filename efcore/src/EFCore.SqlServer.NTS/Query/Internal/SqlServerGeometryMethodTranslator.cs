@@ -256,8 +256,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             _sqlExpressionFactory.ApplyTypeMapping(
                                 argument,
                                 typeof(Geometry).IsAssignableFrom(argument.Type)
-                                    ? _typeMappingSource.FindMapping(argument.Type, storeType)
-                                    : _typeMappingSource.FindMapping(argument.Type)
+                                  ? _typeMappingSource.FindMapping(argument.Type, storeType)
+                                  : _typeMappingSource.FindMapping(argument.Type)
                             )
                         );
                     }
@@ -321,8 +321,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             _sqlExpressionFactory.ApplyTypeMapping(
                                 argument,
                                 typeof(Geometry).IsAssignableFrom(argument.Type)
-                                    ? _typeMappingSource.FindMapping(argument.Type, storeType)
-                                    : _typeMappingSource.FindMapping(argument.Type)
+                                  ? _typeMappingSource.FindMapping(argument.Type, storeType)
+                                  : _typeMappingSource.FindMapping(argument.Type)
                             )
                         );
                     }

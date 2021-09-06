@@ -534,8 +534,8 @@ internal static partial class Interop
                         TestControl.WinHttpWriteData.Wait();
                         fakeHandle.InvokeCallback(
                             aborted
-                                ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
-                                : Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
+                              ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
+                              : Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
                             asyncResult
                         );
                     }

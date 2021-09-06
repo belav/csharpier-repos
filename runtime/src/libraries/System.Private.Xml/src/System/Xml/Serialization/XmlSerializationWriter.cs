@@ -454,8 +454,8 @@ namespace System.Xml.Serialization
                 return null;
             return GetQualifiedName(
                 EscapeName
-                    ? XmlConvert.EncodeLocalName(xmlQualifiedName.Name)
-                    : xmlQualifiedName.Name,
+                  ? XmlConvert.EncodeLocalName(xmlQualifiedName.Name)
+                  : xmlQualifiedName.Name,
                 xmlQualifiedName.Namespace
             );
         }
@@ -4545,11 +4545,8 @@ namespace System.Xml.Serialization
                         Writer.Write("if (");
                         Writer.Write(
                             enumUseReflection
-                                ? RaCodeGen.GetStringForEnumLongValue(
-                                      enumSource!,
-                                      enumUseReflection
-                                  )
-                                : enumSource
+                              ? RaCodeGen.GetStringForEnumLongValue(enumSource!, enumUseReflection)
+                              : enumSource
                         );
                         Writer.Write(" == ");
                         Writer.Write(enumFullName);
@@ -4654,11 +4651,11 @@ namespace System.Xml.Serialization
                             Writer.Write("if (");
                             Writer.Write(
                                 enumUseReflection
-                                    ? RaCodeGen.GetStringForEnumLongValue(
-                                          enumSource!,
-                                          enumUseReflection
-                                      )
-                                    : enumSource
+                                  ? RaCodeGen.GetStringForEnumLongValue(
+                                        enumSource!,
+                                        enumUseReflection
+                                    )
+                                  : enumSource
                             );
                             Writer.Write(" == ");
                             Writer.Write(enumFullName);
@@ -5032,8 +5029,8 @@ namespace System.Xml.Serialization
                     string suffixRaw = mapping.TypeDesc!.XmlEncodingNotRequired ? "Raw" : "";
                     WritePrimitive(
                         element.IsNullable
-                            ? ("WriteNullableString" + suffixNullable + suffixRaw)
-                            : ("WriteElementString" + suffixRaw),
+                          ? ("WriteNullableString" + suffixNullable + suffixRaw)
+                          : ("WriteElementString" + suffixRaw),
                         name,
                         ns,
                         element.Default,

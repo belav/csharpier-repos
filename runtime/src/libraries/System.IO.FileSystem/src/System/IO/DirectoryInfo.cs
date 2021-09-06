@@ -68,8 +68,8 @@ namespace System.IO
                 // but don't mangle the root.
                 string? parentName = Path.GetDirectoryName(
                     PathInternal.IsRoot(FullPath.AsSpan())
-                        ? FullPath
-                        : Path.TrimEndingDirectorySeparator(FullPath)
+                      ? FullPath
+                      : Path.TrimEndingDirectorySeparator(FullPath)
                 );
                 return parentName != null
                     ? new DirectoryInfo(parentName, isNormalized: true)

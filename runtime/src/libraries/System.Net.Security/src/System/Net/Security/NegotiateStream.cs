@@ -1327,8 +1327,8 @@ namespace System.Net.Security
             {
                 exception = new InvalidCredentialException(
                     IsServer
-                        ? SR.net_auth_bad_client_creds
-                        : SR.net_auth_bad_client_creds_or_target_mismatch,
+                      ? SR.net_auth_bad_client_creds
+                      : SR.net_auth_bad_client_creds_or_target_mismatch,
                     exception
                 );
             }

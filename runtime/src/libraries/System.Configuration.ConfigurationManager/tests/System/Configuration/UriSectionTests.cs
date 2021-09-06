@@ -43,8 +43,8 @@ namespace System.ConfigurationTests
             using (
                 var temp = new TempConfig(
                     PlatformDetection.IsNetFramework
-                        ? UriSectionConfiguration_NetFX
-                        : UriSectionConfiguration_Core
+                      ? UriSectionConfiguration_NetFX
+                      : UriSectionConfiguration_Core
                 )
             ) {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
@@ -60,8 +60,8 @@ namespace System.ConfigurationTests
             using (
                 var temp = new TempConfig(
                     PlatformDetection.IsNetFramework
-                        ? UriSectionConfiguration_NetFX
-                        : UriSectionConfiguration_Core
+                      ? UriSectionConfiguration_NetFX
+                      : UriSectionConfiguration_Core
                 )
             ) {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);

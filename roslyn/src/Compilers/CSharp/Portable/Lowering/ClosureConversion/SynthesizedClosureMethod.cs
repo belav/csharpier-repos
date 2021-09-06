@@ -39,14 +39,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             blockSyntax,
             originalMethod.DeclaringSyntaxReferences[0].GetLocation(),
             originalMethod is LocalFunctionSymbol
-                ? MakeName(
-                      topLevelMethod.Name,
-                      originalMethod.Name,
-                      topLevelMethodId,
-                      closureKind,
-                      lambdaId
-                  )
-                : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
+              ? MakeName(
+                    topLevelMethod.Name,
+                    originalMethod.Name,
+                    topLevelMethodId,
+                    closureKind,
+                    lambdaId
+                )
+              : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
             MakeDeclarationModifiers(closureKind, originalMethod)
         ) {
             TopLevelMethod = topLevelMethod;

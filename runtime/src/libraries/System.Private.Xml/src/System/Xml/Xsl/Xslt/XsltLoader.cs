@@ -2443,11 +2443,11 @@ namespace System.Xml.Xsl.Xslt
             Debug.Assert(nodeType != XslNodeType.Unknown);
             ContextInfo ctxInfo = _input.GetAttributes(
                 nodeType == XslNodeType.Variable
-                    ? _variableAttributes
-                    : nodeType == XslNodeType.Param
-                        ? _paramAttributes
-                        :
-                          /*default:*/_withParamAttributes
+                  ? _variableAttributes
+                  : nodeType == XslNodeType.Param
+                      ? _paramAttributes
+                      :
+                        /*default:*/_withParamAttributes
             );
 
             QilName? name = ParseQNameAttribute(0);

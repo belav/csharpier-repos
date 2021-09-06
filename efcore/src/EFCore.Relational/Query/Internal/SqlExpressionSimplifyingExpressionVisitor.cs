@@ -471,8 +471,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         inner.ConstantValue,
                         inner.TypeMapping,
                         inner.OperationType == ExpressionType.Equal
-                            ? ExpressionType.NotEqual
-                            : ExpressionType.Equal
+                          ? ExpressionType.NotEqual
+                          : ExpressionType.Equal
                     );
 
                     return true;

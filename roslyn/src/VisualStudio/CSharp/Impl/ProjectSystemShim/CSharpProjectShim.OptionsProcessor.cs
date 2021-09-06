@@ -174,8 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     )
                     .WithOptimizationLevel(
                         GetBooleanOption(CompilerOptions.OPTID_OPTIMIZATIONS)
-                            ? OptimizationLevel.Release
-                            : OptimizationLevel.Debug
+                          ? OptimizationLevel.Release
+                          : OptimizationLevel.Debug
                     )
                     .WithOutputKind(_outputKind)
                     .WithPlatform(platform)

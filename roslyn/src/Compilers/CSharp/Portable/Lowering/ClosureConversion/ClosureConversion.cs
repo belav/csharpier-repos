@@ -1985,8 +1985,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // If we are generating the field into a display class created exclusively for the lambda the lambdaOrdinal itself is unique already,
                             // no need to include the top-level method ordinal in the field name.
                             (closureKind == ClosureKind.General)
-                                ? -1
-                                : topLevelMethodId.Ordinal,
+                              ? -1
+                              : topLevelMethodId.Ordinal,
                             topLevelMethodId.Generation,
                             lambdaId.Ordinal,
                             lambdaId.Generation

@@ -242,8 +242,8 @@ namespace Internal.TypeSystem.Ecma
                 MetadataReaderOptions.None /* MetadataReaderOptions.ApplyWindowsRuntimeProjections */
                 ,
                 (stringDecoderProvider != null)
-                    ? stringDecoderProvider.GetMetadataStringDecoder()
-                    : null
+                  ? stringDecoderProvider.GetMetadataStringDecoder()
+                  : null
             );
 
             return metadataReader;

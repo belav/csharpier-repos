@@ -482,8 +482,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -563,8 +563,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -654,8 +654,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"Test.M1
+                  ? null
+                  : @"Test.M1
 Test.M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -745,8 +745,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"Test.M1
+                  ? null
+                  : @"Test.M1
 Test.M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -1042,8 +1042,8 @@ class Test2 : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -1105,8 +1105,8 @@ class Test2 : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -1178,8 +1178,8 @@ class Test2 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"Test2.M1
+                  ? null
+                  : @"Test2.M1
 2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -1251,8 +1251,8 @@ class Test2 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"Test2.M1
+                  ? null
+                  : @"Test2.M1
 2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
@@ -1999,8 +1999,8 @@ class Test1 : I2, I1<string?>
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I1.M1
 I1.M1
 ",
@@ -2102,8 +2102,8 @@ class Test1 : I1<string?>, I2
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I1.M1
 I1.M1
 ",
@@ -2209,8 +2209,8 @@ class Test1 : I2, I3
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I1.M1
 I1.M1
 ",
@@ -2316,8 +2316,8 @@ class Test1 : I3, I2
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I1.M1
 I1.M1
 ",
@@ -3038,8 +3038,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"1
+                  ? null
+                  : @"1
 2
 3
 4
@@ -3166,8 +3166,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"1
+                  ? null
+                  : @"1
 2
 3
 4
@@ -3358,8 +3358,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"100
+                  ? null
+                  : @"100
 200
 300
 400
@@ -3550,8 +3550,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"100
+                  ? null
+                  : @"100
 200
 300
 400
@@ -4898,8 +4898,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"1
+                  ? null
+                  : @"1
 2
 3
 4
@@ -5028,8 +5028,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"1
+                  ? null
+                  : @"1
 2
 3
 4
@@ -5290,8 +5290,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"100
+                  ? null
+                  : @"100
 200
 300
 400
@@ -5484,8 +5484,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"100
+                  ? null
+                  : @"100
 200
 300
 400
@@ -6572,8 +6572,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E1
+                  ? null
+                  : @"add E1
 remove E1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -6613,8 +6613,8 @@ class Test2 : I1
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E1
+                  ? null
+                  : @"add E1
 remove E1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -6636,8 +6636,8 @@ remove E1
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E1
+                  ? null
+                  : @"add E1
 remove E1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -6966,8 +6966,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E7
+                  ? null
+                  : @"add E7
 remove E7
 add E8
 remove E8",
@@ -7063,8 +7063,8 @@ class Test : I1 {}
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E7
+                  ? null
+                  : @"add E7
 remove E7
 add E8
 remove E8",
@@ -7178,8 +7178,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E7
+                  ? null
+                  : @"add E7
 remove E7
 add E8
 remove E8",
@@ -7293,8 +7293,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"add E7
+                  ? null
+                  : @"add E7
 remove E7
 add E8
 remove E8",
@@ -8030,8 +8030,8 @@ class Test1 : I2
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M2
+                  ? null
+                  : @"I2.M2
 123
 I1.M1
 I1.get_P1
@@ -8317,8 +8317,8 @@ class Test1 : I2
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M2
+                  ? null
+                  : @"I2.M2
 123
 I1.M1
 I1.get_P1
@@ -9048,8 +9048,8 @@ class Test1 : I1
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 M2
 M3",
                 symbolValidator: Validate
@@ -9244,8 +9244,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M4
+                  ? null
+                  : @"M4
 M1",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: Validate
@@ -11588,8 +11588,8 @@ class Test2 : System.Attribute
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M2
+                  ? null
+                  : @"M2
 M2"
             );
 
@@ -11701,8 +11701,8 @@ class Test2 : System.Attribute
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M2
+                  ? null
+                  : @"M2
 M2",
                 verify: VerifyOnMonoOrCoreClr
             );
@@ -12395,8 +12395,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 M2
 M3",
                 symbolValidator: validate,
@@ -12481,8 +12481,8 @@ class Test1
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"M1
+                      ? null
+                      : @"M1
 M2",
                     verify: VerifyOnMonoOrCoreClr
                 );
@@ -15239,8 +15239,8 @@ class Test1 : I1
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 get_P3
@@ -15675,8 +15675,8 @@ class Test1 : I1, I2, I3, I4, I5, I6, I7
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 get_P2
 set_P2
 set_P3
@@ -16353,8 +16353,8 @@ class Test1 : I1
                     targetFramework == TargetFramework.Standard
                     || ExecutionConditionUtil.IsMonoOrCoreClr
                 )
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: ValidatePropertyImplementation_11
@@ -16396,8 +16396,8 @@ set_P1",
                             targetFramework == TargetFramework.Standard
                             || ExecutionConditionUtil.IsMonoOrCoreClr
                         )
-                            ? null
-                            : @"get_P1
+                          ? null
+                          : @"get_P1
 set_P1",
                         verify: VerifyOnMonoOrCoreClr,
                         symbolValidator: ValidatePropertyImplementation_11
@@ -17357,8 +17357,8 @@ class Test7 : I7
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 get_P2
 set_P2
 set_P3
@@ -18862,8 +18862,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -18943,8 +18943,8 @@ set_P1
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -18964,8 +18964,8 @@ set_P1
             CompileAndVerify(
                 compilation4,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -19173,8 +19173,8 @@ class Test1 : I1, I2, I3, I4
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 set_P2
@@ -19243,8 +19243,8 @@ set_P4
                         Assert.Equal(access, accessor.DeclaredAccessibility);
                         Assert.Same(
                             accessor.DeclaredAccessibility == Accessibility.Private
-                                ? null
-                                : accessor,
+                              ? null
+                              : accessor,
                             test1.FindImplementationForInterfaceMember(accessor)
                         );
                     }
@@ -19865,8 +19865,8 @@ set_P6
                     CompileAndVerify(
                         compilation3,
                         expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                            ? null
-                            : expectedOutput,
+                          ? null
+                          : expectedOutput,
                         verify: VerifyOnMonoOrCoreClr,
                         symbolValidator: Validate1
                     );
@@ -21327,8 +21327,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -21408,8 +21408,8 @@ set_P1
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -21429,8 +21429,8 @@ set_P1
             CompileAndVerify(
                 compilation4,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -21890,8 +21890,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 set_P2
@@ -21935,8 +21935,8 @@ class Test1
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P2
+                  ? null
+                  : @"get_P2
 set_P2
 set_P4
 get_P5
@@ -22024,8 +22024,8 @@ class Test1
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"get_P1
+                      ? null
+                      : @"get_P1
 set_P1
 get_P2
 set_P2
@@ -22049,8 +22049,8 @@ set_P6
                 CompileAndVerify(
                     compilation5,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"set_P4
+                      ? null
+                      : @"set_P4
 get_P5
 set_P6
 ",
@@ -30037,8 +30037,8 @@ class Test1 : I1
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 get_P3
@@ -30410,8 +30410,8 @@ class Test1 : I1, I2
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 set_P2
@@ -31087,8 +31087,8 @@ class Test1 : I1
                     targetFramework == TargetFramework.Standard
                     || ExecutionConditionUtil.IsMonoOrCoreClr
                 )
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: ValidateEventImplementation_11
@@ -31130,8 +31130,8 @@ set_P1",
                             targetFramework == TargetFramework.Standard
                             || ExecutionConditionUtil.IsMonoOrCoreClr
                         )
-                            ? null
-                            : @"get_P1
+                          ? null
+                          : @"get_P1
 set_P1",
                         verify: VerifyOnMonoOrCoreClr,
                         symbolValidator: ValidateEventImplementation_11
@@ -31983,8 +31983,8 @@ class Test2 : I2
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 set_P2
@@ -33503,8 +33503,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -33582,8 +33582,8 @@ set_P1
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -33603,8 +33603,8 @@ set_P1
             CompileAndVerify(
                 compilation4,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -33775,8 +33775,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P1
+                  ? null
+                  : @"get_P1
 set_P1
 get_P2
 set_P2
@@ -33810,8 +33810,8 @@ class Test1
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"get_P2
+                  ? null
+                  : @"get_P2
 set_P2",
                 verify: VerifyOnMonoOrCoreClr
             );
@@ -33873,8 +33873,8 @@ class Test1
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"get_P1
+                      ? null
+                      : @"get_P1
 set_P1
 get_P2
 set_P2",
@@ -34517,8 +34517,8 @@ class Test1 : I1.T1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !execute
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 I1+T2
 I1+T3
 B
@@ -34869,8 +34869,8 @@ class Test1
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"M1
+                      ? null
+                      : @"M1
 I1+T2
 I1+T3
 B
@@ -35059,8 +35059,8 @@ class Test1
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"M1
+                      ? null
+                      : @"M1
 I1+T2
 I1+T3
 B
@@ -35917,8 +35917,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -35940,8 +35940,8 @@ I4.M1
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -35962,8 +35962,8 @@ I4.M1
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -36937,8 +36937,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -36960,8 +36960,8 @@ I4.M1
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -36982,8 +36982,8 @@ I4.M1
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -37334,8 +37334,8 @@ class Test12 : I8
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.I1.M1
+                      ? null
+                      : @"I2.I1.M1
 I5.I1.M1
 I5.I1.M1
 ",
@@ -37456,8 +37456,8 @@ I5.I1.M1
                     CompileAndVerify(
                         compilation5,
                         expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                            ? null
-                            : @"Test8.I1.M1
+                          ? null
+                          : @"Test8.I1.M1
 Test9.I1.M1
 Test10.M1
 Test11.M1
@@ -37747,8 +37747,8 @@ class Test2 : I2<long>
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1
+                  ? null
+                  : @"I1.M1
 I1.M2
 I2.I1.M1
 I2.I1.M2
@@ -37772,8 +37772,8 @@ I2.I1.M2
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1
+                  ? null
+                  : @"I1.M1
 I1.M2
 I2.I1.M1
 I2.I1.M2
@@ -37796,8 +37796,8 @@ I2.I1.M2
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1
+                  ? null
+                  : @"I1.M1
 I1.M2
 I2.I1.M1
 I2.I1.M2
@@ -38624,8 +38624,8 @@ class Test1 : I2, I3
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I3.M1
 I3.M1
 ",
@@ -38740,8 +38740,8 @@ class Test1 : I3, I2
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I3.M1
 I3.M1
 ",
@@ -38871,8 +38871,8 @@ class Test1 : I3, I4
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I2.M1
 I2.M1
 ",
@@ -39002,8 +39002,8 @@ class Test1 : I4, I3
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I2.M1
 I2.M1
 ",
@@ -39098,8 +39098,8 @@ class Test1 : I2
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I2.M1
 I2.M1
 ",
@@ -39188,8 +39188,8 @@ class Test1 : I2, I1<string?>
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I2.M1
 I2.M1
 ",
@@ -39269,8 +39269,8 @@ class Test1 : I2, I1<string?>
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I2.M1
 I2.M1
 ",
@@ -39422,8 +39422,8 @@ class Test1 : I2<string>, I3<string>, I4
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 I4.M1
 I4.M1
 ",
@@ -39508,8 +39508,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -39538,8 +39538,8 @@ I4.M1
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -39578,8 +39578,8 @@ I4.M1
                 CompileAndVerify(
                     compilation5,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -39664,8 +39664,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -39694,8 +39694,8 @@ I4.M1
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -39734,8 +39734,8 @@ I4.M1
                 CompileAndVerify(
                     compilation5,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -39820,8 +39820,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -39850,8 +39850,8 @@ I4.M1
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -40033,8 +40033,8 @@ class Test1 : I1
                 CompileAndVerify(
                     compilation1,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -40056,8 +40056,8 @@ I4.M1
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -40078,8 +40078,8 @@ I4.M1
                 CompileAndVerify(
                     compilation3,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 ",
                     verify: VerifyOnMonoOrCoreClr,
@@ -40167,8 +40167,8 @@ I4.M1
                 {
                     Assert.Same(
                         interfaceAccessor.DeclaredAccessibility == Accessibility.Private
-                            ? null
-                            : accessor,
+                          ? null
+                          : accessor,
                         implementingType.FindImplementationForInterfaceMember(interfaceAccessor)
                     );
                 }
@@ -41262,8 +41262,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1
+                  ? null
+                  : @"I2.M1
 I4.M1
 I4.M1.set
 ",
@@ -41293,8 +41293,8 @@ I4.M1.set
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1
+                      ? null
+                      : @"I2.M1
 I4.M1
 I4.M1.set
 ",
@@ -41337,8 +41337,8 @@ I4.M1.set
                     CompileAndVerify(
                         compilation5,
                         expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                            ? null
-                            : @"I2.M1
+                          ? null
+                          : @"I2.M1
 I4.M1
 I4.M1.set
 ",
@@ -41748,8 +41748,8 @@ class Test5 : I8
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.I1.M1.get
+                      ? null
+                      : @"I2.I1.M1.get
 I2.I1.M1.set
 I5.I1.M1.get
 I5.I1.M1.set
@@ -41854,8 +41854,8 @@ I5.I1.M1.set
                     CompileAndVerify(
                         compilation5,
                         expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                            ? null
-                            : @"Test8.I1.M1.get
+                          ? null
+                          : @"Test8.I1.M1.get
 Test8.I1.M1.set
 Test9.I1.M1.get
 Test9.I1.M1.set
@@ -42092,8 +42092,8 @@ class Test2 : I2<long>
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1.get
+                  ? null
+                  : @"I1.M1.get
 I1.M1.set
 I2.I1.M1.get
 I2.I1.M1.set
@@ -42117,8 +42117,8 @@ I2.I1.M1.set
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1.get
+                  ? null
+                  : @"I1.M1.get
 I1.M1.set
 I2.I1.M1.get
 I2.I1.M1.set
@@ -42141,8 +42141,8 @@ I2.I1.M1.set
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1.get
+                  ? null
+                  : @"I1.M1.get
 I1.M1.set
 I2.I1.M1.get
 I2.I1.M1.set
@@ -42774,8 +42774,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -42799,8 +42799,8 @@ I4.M1.remove
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -42823,8 +42823,8 @@ I4.M1.remove
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -43748,8 +43748,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -43773,8 +43773,8 @@ I4.M1.remove
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -43797,8 +43797,8 @@ I4.M1.remove
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -44208,8 +44208,8 @@ class Test12 : I8
                 CompileAndVerify(
                     compilation4,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.I1.M1.add
+                      ? null
+                      : @"I2.I1.M1.add
 I2.I1.M1.remove
 I5.I1.M1.add
 I5.I1.M1.remove
@@ -44338,8 +44338,8 @@ I5.I1.M1.remove
                     CompileAndVerify(
                         compilation5,
                         expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                            ? null
-                            : @"Test8.I1.M1.add
+                          ? null
+                          : @"Test8.I1.M1.add
 Test8.I1.M1.remove
 Test9.I1.M1.add
 Test9.I1.M1.remove
@@ -44572,8 +44572,8 @@ class Test2 : I2<long>
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1.add
+                  ? null
+                  : @"I1.M1.add
 I1.M1.remove
 I2.I1.M1.add
 I2.I1.M1.remove
@@ -44597,8 +44597,8 @@ I2.I1.M1.remove
             CompileAndVerify(
                 compilation2,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1.add
+                  ? null
+                  : @"I1.M1.add
 I1.M1.remove
 I2.I1.M1.add
 I2.I1.M1.remove
@@ -44621,8 +44621,8 @@ I2.I1.M1.remove
             CompileAndVerify(
                 compilation3,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1.M1.add
+                  ? null
+                  : @"I1.M1.add
 I1.M1.remove
 I2.I1.M1.add
 I2.I1.M1.remove
@@ -44718,8 +44718,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -44750,8 +44750,8 @@ I4.M1.remove
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1.add
+                      ? null
+                      : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -44792,8 +44792,8 @@ I4.M1.remove
                 CompileAndVerify(
                     compilation5,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1.add
+                      ? null
+                      : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -44890,8 +44890,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -44922,8 +44922,8 @@ I4.M1.remove
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1.add
+                      ? null
+                      : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -44964,8 +44964,8 @@ I4.M1.remove
                 CompileAndVerify(
                     compilation5,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1.add
+                      ? null
+                      : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -45062,8 +45062,8 @@ class Test1 : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I2.M1.add
+                  ? null
+                  : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -45094,8 +45094,8 @@ I4.M1.remove
                 CompileAndVerify(
                     compilation2,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"I2.M1.add
+                      ? null
+                      : @"I2.M1.add
 I2.M1.remove
 I4.M1.add
 I4.M1.remove
@@ -47078,8 +47078,8 @@ class Test2
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"123
+                  ? null
+                  : @"123
 -2
 ",
                 verify: VerifyOnMonoOrCoreClr,
@@ -47661,8 +47661,8 @@ interface I1
                 symbolValidator: ValidateConstructor,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1
+                  ? null
+                  : @"I1
 Main
 "
             );
@@ -47717,8 +47717,8 @@ interface I1
                 symbolValidator: ValidateConstructor,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"F
+                  ? null
+                  : @"F
 Main
 "
             );
@@ -47761,8 +47761,8 @@ interface I1
                 symbolValidator: ValidateConstructor,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"F
+                  ? null
+                  : @"F
 I1
 Main
 "
@@ -47896,8 +47896,8 @@ class Test : I1
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1..cctor
+                  ? null
+                  : @"I1..cctor
 I1.M1
 Test.I1
 "
@@ -47948,8 +47948,8 @@ class Test : I1
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I1..cctor
+                  ? null
+                  : @"I1..cctor
 I1.M1
 I1.I1
 ",
@@ -49402,8 +49402,8 @@ class Test4 : Test1
                     compilation2,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"1
+                      ? null
+                      : @"1
 P2
 2
 M3
@@ -49428,8 +49428,8 @@ C6.M
                     compilation3,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"P20
+                      ? null
+                      : @"P20
 20
 M30
 add E40
@@ -51028,8 +51028,8 @@ class Test2 : I1
                 compilation4,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"
+                  ? null
+                  : @"
 False
 True
 "
@@ -70417,8 +70417,8 @@ interface I101 : I100
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I100.C100.Test1
+                  ? null
+                  : @"I100.C100.Test1
 I100.C100.Test2",
                 verify: VerifyOnMonoOrCoreClr
             );
@@ -70467,8 +70467,8 @@ interface I101 : I100
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I100.C100.Test1
+                  ? null
+                  : @"I100.C100.Test1
 I100.C100.Test2",
                 verify: VerifyOnMonoOrCoreClr
             );
@@ -70517,8 +70517,8 @@ interface I101 : I100
             CompileAndVerify(
                 compilation1,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"I100.C100.Test1
+                  ? null
+                  : @"I100.C100.Test1
 I100.C100.Test2",
                 verify: VerifyOnMonoOrCoreClr
             );
@@ -72236,8 +72236,8 @@ class C1 : I1<C1, C1, C1>, I1<C1, object, C1>.I2
                     compilation2,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"M1
+                      ? null
+                      : @"M1
 M2
 M3
 M4
@@ -72297,8 +72297,8 @@ class C1 : I1<C1, C1>
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"M1
+                  ? null
+                  : @"M1
 M2"
             );
         }
@@ -72378,8 +72378,8 @@ interface I2<out T1, in T2>
                 compilation1,
                 verify: VerifyOnMonoOrCoreClr,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? null
-                    : @"a
+                  ? null
+                  : @"a
 b"
             );
         }
@@ -72456,8 +72456,8 @@ class C1 : I1<C1, C1>
                     compilation2,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"M1
+                      ? null
+                      : @"M1
 M2"
                 );
             }
@@ -72550,8 +72550,8 @@ interface I2<out T1, in T2>
                     compilation1,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"a
+                      ? null
+                      : @"a
 b"
                 )
                 .VerifyDiagnostics();
@@ -72620,8 +72620,8 @@ interface I2<out T1, in T2>
                     compilation1,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"a
+                      ? null
+                      : @"a
 b"
                 )
                 .VerifyDiagnostics();
@@ -72700,8 +72700,8 @@ interface I2<out T1, in T2>
                     compilation1,
                     verify: VerifyOnMonoOrCoreClr,
                     expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                        ? null
-                        : @"a
+                      ? null
+                      : @"a
 b"
                 )
                 .VerifyDiagnostics();

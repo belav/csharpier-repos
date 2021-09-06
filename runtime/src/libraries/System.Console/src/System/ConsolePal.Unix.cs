@@ -116,14 +116,14 @@ namespace System
                 Stream inputStream = OpenStandardInput();
                 return SyncTextReader.GetSynchronizedTextReader(
                     inputStream == Stream.Null
-                        ? StreamReader.Null
-                        : new StreamReader(
-                              stream: inputStream,
-                              encoding: Console.InputEncoding,
-                              detectEncodingFromByteOrderMarks: false,
-                              bufferSize: Console.ReadBufferSize,
-                              leaveOpen: true
-                          )
+                      ? StreamReader.Null
+                      : new StreamReader(
+                            stream: inputStream,
+                            encoding: Console.InputEncoding,
+                            detectEncodingFromByteOrderMarks: false,
+                            bufferSize: Console.ReadBufferSize,
+                            leaveOpen: true
+                        )
                 );
             }
             else
@@ -445,8 +445,8 @@ namespace System
                 {
                     WriteStdoutAnsiString(
                         value
-                            ? TerminalFormatStrings.Instance.CursorVisible
-                            : TerminalFormatStrings.Instance.CursorInvisible
+                          ? TerminalFormatStrings.Instance.CursorVisible
+                          : TerminalFormatStrings.Instance.CursorInvisible
                     );
                 }
             }

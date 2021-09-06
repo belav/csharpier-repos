@@ -974,22 +974,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         var anchorPoint = new VirtualSnapshotPoint(
                             textView.TextSnapshot,
                             _anchor.HasValue
-                            && _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.Keys.Any(
-                                s => s.OverlapsWith(anchorSpan)
-                            )
-                                ? GetNewEndpoint(_anchorSpan) - _anchor.Value
-                                : selection.AnchorPoint.Position
+                                && _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.Keys.Any(
+                                    s => s.OverlapsWith(anchorSpan)
+                                )
+                              ? GetNewEndpoint(_anchorSpan) - _anchor.Value
+                              : selection.AnchorPoint.Position
                         );
 
                         var activeSpan = _activeSpan;
                         var activePoint = new VirtualSnapshotPoint(
                             textView.TextSnapshot,
                             _active.HasValue
-                            && _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.Keys.Any(
-                                s => s.OverlapsWith(activeSpan)
-                            )
-                                ? GetNewEndpoint(_activeSpan) - _active.Value
-                                : selection.ActivePoint.Position
+                                && _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.Keys.Any(
+                                    s => s.OverlapsWith(activeSpan)
+                                )
+                              ? GetNewEndpoint(_activeSpan) - _active.Value
+                              : selection.ActivePoint.Position
                         );
 
                         textView.SetSelection(anchorPoint, activePoint);

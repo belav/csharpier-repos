@@ -119,8 +119,8 @@ namespace Microsoft.Extensions.DependencyInjection
             AddDbContext<TContextService, TContextImplementation>(
                 serviceCollection,
                 optionsAction == null
-                    ? (Action<IServiceProvider, DbContextOptionsBuilder>?)null
-                    : (p, b) => optionsAction(b),
+                  ? (Action<IServiceProvider, DbContextOptionsBuilder>?)null
+                  : (p, b) => optionsAction(b),
                 contextLifetime,
                 optionsLifetime
             );
@@ -716,8 +716,8 @@ namespace Microsoft.Extensions.DependencyInjection
             AddDbContextFactory<TContext, TFactory>(
                 serviceCollection,
                 optionsAction == null
-                    ? (Action<IServiceProvider, DbContextOptionsBuilder>?)null
-                    : (p, b) => optionsAction(b),
+                  ? (Action<IServiceProvider, DbContextOptionsBuilder>?)null
+                  : (p, b) => optionsAction(b),
                 lifetime
             );
 

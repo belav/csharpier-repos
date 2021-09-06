@@ -985,8 +985,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             {
                 separators.Add(
                     i < arguments.SeparatorCount
-                        ? arguments.GetSeparator(i)
-                        : CommaTokenWithElasticSpace()
+                      ? arguments.GetSeparator(i)
+                      : CommaTokenWithElasticSpace()
                 );
             }
 
@@ -1070,16 +1070,16 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         var argument = generateAttributeArguments
                             ? Generator.AttributeArgument(
                                   name: seenNamedArguments
-                                  || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
-                                      ? addedParameter.Name
-                                      : null,
+                                      || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
+                                    ? addedParameter.Name
+                                    : null,
                                   expression: expression
                               )
                             : Generator.Argument(
                                   name: seenNamedArguments
-                                  || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
-                                      ? addedParameter.Name
-                                      : null,
+                                      || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
+                                    ? addedParameter.Name
+                                    : null,
                                   refKind: RefKind.None,
                                   expression: expression
                               );

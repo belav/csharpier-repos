@@ -822,44 +822,44 @@ namespace System
                             char c = format[pos];
                             stack.Push(
                                 c == '+'
-                                    ? (first + second)
-                                    : c == '-'
-                                        ? (first - second)
-                                        : c == '*'
-                                            ? (first * second)
-                                            : c == '/'
-                                                ? (first / second)
-                                                : c == 'm'
-                                                    ? (first % second)
-                                                    : c == '^'
-                                                        ? (first ^ second)
-                                                        : c == '&'
-                                                            ? (first & second)
-                                                            : c == '|'
-                                                                ? (first | second)
-                                                                : c == '='
-                                                                    ? AsInt(first == second)
-                                                                    : c == '>'
-                                                                        ? AsInt(first > second)
-                                                                        : c == '<'
-                                                                            ? AsInt(first < second)
-                                                                            : c == 'A'
-                                                                                ? AsInt(
-                                                                                      AsBool(first)
-                                                                                          && AsBool(
-                                                                                              second
-                                                                                          )
-                                                                                  )
-                                                                                : c == 'O'
-                                                                                    ? AsInt(
-                                                                                          AsBool(
-                                                                                              first
-                                                                                          )
-                                                                                              || AsBool(
-                                                                                                  second
-                                                                                              )
-                                                                                      )
-                                                                                    : 0
+                                  ? (first + second)
+                                  : c == '-'
+                                      ? (first - second)
+                                      : c == '*'
+                                          ? (first * second)
+                                          : c == '/'
+                                              ? (first / second)
+                                              : c == 'm'
+                                                  ? (first % second)
+                                                  : c == '^'
+                                                      ? (first ^ second)
+                                                      : c == '&'
+                                                          ? (first & second)
+                                                          : c == '|'
+                                                              ? (first | second)
+                                                              : c == '='
+                                                                  ? AsInt(first == second)
+                                                                  : c == '>'
+                                                                      ? AsInt(first > second)
+                                                                      : c == '<'
+                                                                          ? AsInt(first < second)
+                                                                          : c == 'A'
+                                                                              ? AsInt(
+                                                                                    AsBool(first)
+                                                                                        && AsBool(
+                                                                                            second
+                                                                                        )
+                                                                                )
+                                                                              : c == 'O'
+                                                                                  ? AsInt(
+                                                                                        AsBool(
+                                                                                            first
+                                                                                        )
+                                                                                            || AsBool(
+                                                                                                second
+                                                                                            )
+                                                                                    )
+                                                                                  : 0
                             ); // not possible; we just validated above
                             break;
 

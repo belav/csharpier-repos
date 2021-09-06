@@ -79,8 +79,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             {
                 fragments.Add(
                     isSparse
-                        ? new(nameof(SqlServerPropertyBuilderExtensions.IsSparse))
-                        : new(nameof(SqlServerPropertyBuilderExtensions.IsSparse), false)
+                      ? new(nameof(SqlServerPropertyBuilderExtensions.IsSparse))
+                      : new(nameof(SqlServerPropertyBuilderExtensions.IsSparse), false)
                 );
             }
 
@@ -196,8 +196,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                         ?? 1;
                     return new(
                         onModel
-                            ? nameof(SqlServerModelBuilderExtensions.UseIdentityColumns)
-                            : nameof(SqlServerPropertyBuilderExtensions.UseIdentityColumn),
+                          ? nameof(SqlServerModelBuilderExtensions.UseIdentityColumns)
+                          : nameof(SqlServerPropertyBuilderExtensions.UseIdentityColumn),
                         (seed, increment) switch
                         {
                             (1, 1) => Array.Empty<object>(),

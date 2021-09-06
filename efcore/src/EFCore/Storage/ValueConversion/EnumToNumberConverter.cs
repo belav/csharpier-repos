@@ -83,8 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return Expression.Lambda<Func<TEnum, TNumber>>(
                 Expression.Convert(
                     typeof(TNumber) == typeof(decimal)
-                        ? Expression.Convert(param, typeof(long))
-                        : (Expression)param,
+                      ? Expression.Convert(param, typeof(long))
+                      : (Expression)param,
                     typeof(TNumber)
                 ),
                 param
@@ -97,8 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return Expression.Lambda<Func<TNumber, TEnum>>(
                 Expression.Convert(
                     typeof(TNumber) == typeof(decimal)
-                        ? Expression.Convert(param, typeof(long))
-                        : (Expression)param,
+                      ? Expression.Convert(param, typeof(long))
+                      : (Expression)param,
                     typeof(TEnum)
                 ),
                 param

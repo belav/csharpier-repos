@@ -97,8 +97,8 @@ namespace RoutingWebSite
                                 var endpoint = httpContext.GetEndpoint();
                                 return httpContext.Response.WriteAsync(
                                     (endpoint.Metadata.GetMetadata<CustomMetadata>() != null)
-                                        ? "Has metadata"
-                                        : "No metadata"
+                                      ? "Has metadata"
+                                      : "No metadata"
                                 );
                             }
                         )

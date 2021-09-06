@@ -96,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             argumentsPropagateNullability: new[] { false, true },
                             returnType,
                             declaringType == typeof(DateTime)
-                                ? instance!.TypeMapping
-                                : _typeMappingSource.FindMapping(typeof(DateTime))
+                              ? instance!.TypeMapping
+                              : _typeMappingSource.FindMapping(typeof(DateTime))
                         );
 
                     case nameof(DateTime.TimeOfDay):

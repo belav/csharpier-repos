@@ -469,8 +469,8 @@ namespace Microsoft.AspNetCore.Testing
                     propertyFactory.CreateProperty(
                         "TimestampOffset",
                         _logStart.HasValue
-                            ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
-                            : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture)
+                          ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
+                          : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture)
                     )
                 );
         }

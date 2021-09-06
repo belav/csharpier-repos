@@ -999,8 +999,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 typesArray,
                 locationsArray,
                 elementNames == null
-                    ? default(ImmutableArray<string>)
-                    : elementNames.ToImmutableAndFree(),
+                  ? default(ImmutableArray<string>)
+                  : elementNames.ToImmutableAndFree(),
                 this.Compilation,
                 this.ShouldCheckConstraints,
                 includeNullability: this.ShouldCheckConstraints && includeNullability,

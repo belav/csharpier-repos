@@ -445,31 +445,31 @@ namespace System.Net.Sockets.Tests
                         EndPoint ep = server.LocalEndPoint;
                         Assert.False(
                             receiveFrom
-                                ? client.BeginReceiveFrom(
-                                      new byte[1],
-                                      0,
-                                      1,
-                                      SocketFlags.None,
-                                      ref ep,
-                                      iar =>
-                                      {
-                                          client.EndReceiveFrom(iar, ref ep);
-                                          tcs.SetResult(asyncLocal.Value);
-                                      },
-                                      null
-                                  ).CompletedSynchronously
-                                : client.BeginReceive(
-                                      new byte[1],
-                                      0,
-                                      1,
-                                      SocketFlags.None,
-                                      iar =>
-                                      {
-                                          client.EndReceive(iar);
-                                          tcs.SetResult(asyncLocal.Value);
-                                      },
-                                      null
-                                  ).CompletedSynchronously
+                              ? client.BeginReceiveFrom(
+                                    new byte[1],
+                                    0,
+                                    1,
+                                    SocketFlags.None,
+                                    ref ep,
+                                    iar =>
+                                    {
+                                        client.EndReceiveFrom(iar, ref ep);
+                                        tcs.SetResult(asyncLocal.Value);
+                                    },
+                                    null
+                                ).CompletedSynchronously
+                              : client.BeginReceive(
+                                    new byte[1],
+                                    0,
+                                    1,
+                                    SocketFlags.None,
+                                    iar =>
+                                    {
+                                        client.EndReceive(iar);
+                                        tcs.SetResult(asyncLocal.Value);
+                                    },
+                                    null
+                                ).CompletedSynchronously
                         );
                     }
 

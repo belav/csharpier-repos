@@ -1082,8 +1082,8 @@ namespace Microsoft.CodeAnalysis
             return FindTargetAttribute(
                 token,
                 ignoreCase
-                    ? AttributeDescription.CaseInsensitiveExtensionAttribute
-                    : AttributeDescription.CaseSensitiveExtensionAttribute
+                  ? AttributeDescription.CaseInsensitiveExtensionAttribute
+                  : AttributeDescription.CaseSensitiveExtensionAttribute
             ).HasValue;
         }
 

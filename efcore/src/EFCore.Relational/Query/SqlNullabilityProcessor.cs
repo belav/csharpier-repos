@@ -1674,8 +1674,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             return SimplifyLogicalSqlBinaryExpression(
                                 _sqlExpressionFactory.MakeBinary(
                                     sqlBinaryOperand.OperatorType == ExpressionType.AndAlso
-                                        ? ExpressionType.OrElse
-                                        : ExpressionType.AndAlso,
+                                      ? ExpressionType.OrElse
+                                      : ExpressionType.AndAlso,
                                     left,
                                     right,
                                     sqlBinaryOperand.TypeMapping
@@ -1872,8 +1872,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return SimplifyLogicalSqlBinaryExpression(
                         _sqlExpressionFactory.MakeBinary(
                             sqlUnaryExpression.OperatorType == ExpressionType.Equal
-                                ? ExpressionType.OrElse
-                                : ExpressionType.AndAlso,
+                              ? ExpressionType.OrElse
+                              : ExpressionType.AndAlso,
                             left,
                             right,
                             sqlUnaryExpression.TypeMapping
@@ -1918,8 +1918,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             return SimplifyLogicalSqlBinaryExpression(
                                 _sqlExpressionFactory.MakeBinary(
                                     sqlUnaryExpression.OperatorType == ExpressionType.Equal
-                                        ? ExpressionType.AndAlso
-                                        : ExpressionType.OrElse,
+                                      ? ExpressionType.AndAlso
+                                      : ExpressionType.OrElse,
                                     left,
                                     right,
                                     sqlUnaryExpression.TypeMapping
@@ -1981,8 +1981,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     (r, e) =>
                                         SimplifyLogicalSqlBinaryExpression(
                                             sqlUnaryExpression.OperatorType == ExpressionType.Equal
-                                                ? _sqlExpressionFactory.OrElse(r, e)
-                                                : _sqlExpressionFactory.AndAlso(r, e)
+                                              ? _sqlExpressionFactory.OrElse(r, e)
+                                              : _sqlExpressionFactory.AndAlso(r, e)
                                         )
                                 );
 

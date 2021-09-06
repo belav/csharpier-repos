@@ -1334,10 +1334,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 joinEntry.SetEntityState(
                     arguments.SetModified
-                    || arguments.Entry.EntityState == EntityState.Added
-                    || arguments.OtherEntry.EntityState == EntityState.Added
-                        ? EntityState.Added
-                        : EntityState.Unchanged
+                        || arguments.Entry.EntityState == EntityState.Added
+                        || arguments.OtherEntry.EntityState == EntityState.Added
+                      ? EntityState.Added
+                      : EntityState.Unchanged
                 );
             }
             else

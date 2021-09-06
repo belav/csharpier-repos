@@ -183,8 +183,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 syntaxGenerator,
                 methodParametersInfo.ParametersToGenerateFreshVariablesFor,
                 methodParametersInfo.MergeInlineContentAndVariableDeclarationArgument
-                    ? ImmutableArray<(IParameterSymbol, string)>.Empty
-                    : methodParametersInfo.ParametersWithVariableDeclarationArgument,
+                  ? ImmutableArray<(IParameterSymbol, string)>.Empty
+                  : methodParametersInfo.ParametersWithVariableDeclarationArgument,
                 renameTable
             );
 

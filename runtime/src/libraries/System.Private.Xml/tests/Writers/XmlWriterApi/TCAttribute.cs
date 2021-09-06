@@ -184,8 +184,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                            ? WriteState.Element
-                            : WriteState.Error,
+                          ? WriteState.Element
+                          : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -213,8 +213,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                            ? WriteState.Element
-                            : WriteState.Error,
+                          ? WriteState.Element
+                          : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;

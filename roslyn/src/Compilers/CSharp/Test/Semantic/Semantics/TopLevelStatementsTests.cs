@@ -8882,15 +8882,15 @@ class B : A
                     case "System.Console.WriteLine(1);":
                         Interlocked.Increment(
                             ref context.ContainingSymbol.Kind == SymbolKind.Namespace
-                                ? ref FireCount5
-                                : ref FireCount3
+                              ? ref FireCount5
+                              : ref FireCount3
                         );
                         break;
                     case "System.Console.WriteLine(2);":
                         Interlocked.Increment(
                             ref context.ContainingSymbol.Kind == SymbolKind.Namespace
-                                ? ref FireCount6
-                                : ref FireCount4
+                              ? ref FireCount6
+                              : ref FireCount4
                         );
                         break;
                     default:

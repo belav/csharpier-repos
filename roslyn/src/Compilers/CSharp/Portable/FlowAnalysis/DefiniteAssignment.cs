@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             member,
             node,
             strictAnalysis
-                ? EmptyStructTypeCache.CreatePrecise()
-                : EmptyStructTypeCache.CreateForDev12Compatibility(compilation),
+              ? EmptyStructTypeCache.CreatePrecise()
+              : EmptyStructTypeCache.CreateForDev12Compatibility(compilation),
             trackUnassignments
         ) {
             this.initiallyAssignedVariables = null;
@@ -2046,8 +2046,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Diagnostics.Add(
                         assigned && _writtenVariables.Contains(symbol)
-                            ? ErrorCode.WRN_UnreferencedVarAssg
-                            : ErrorCode.WRN_UnreferencedVar,
+                          ? ErrorCode.WRN_UnreferencedVarAssg
+                          : ErrorCode.WRN_UnreferencedVar,
                         symbol.Locations.FirstOrNone(),
                         symbol.Name
                     );
@@ -2599,10 +2599,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             builder.Append(
                 bit == 0
-                    ? "<unreachable>"
-                    : string.IsNullOrEmpty(id.Symbol.Name)
-                        ? "<anon>" + id.Symbol.GetHashCode()
-                        : id.Symbol.Name
+                  ? "<unreachable>"
+                  : string.IsNullOrEmpty(id.Symbol.Name)
+                      ? "<anon>" + id.Symbol.GetHashCode()
+                      : id.Symbol.Name
             );
         }
 

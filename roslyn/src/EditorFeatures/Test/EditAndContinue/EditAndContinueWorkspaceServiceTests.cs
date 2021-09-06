@@ -4202,8 +4202,8 @@ class C { int Y => 1; }
                 service,
                 solution,
                 isOutOfSync
-                    ? CommittedSolution.DocumentState.OutOfSync
-                    : CommittedSolution.DocumentState.MatchesBuildOutput
+                  ? CommittedSolution.DocumentState.OutOfSync
+                  : CommittedSolution.DocumentState.MatchesBuildOutput
             );
 
             var moduleId = Guid.NewGuid();

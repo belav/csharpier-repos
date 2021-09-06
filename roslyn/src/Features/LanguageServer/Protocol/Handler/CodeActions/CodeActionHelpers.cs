@@ -91,11 +91,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                             ),
                             setPriority: set.Priority,
                             applicableRange: set.ApplicableToSpan.HasValue
-                                ? ProtocolConversions.TextSpanToRange(
-                                      set.ApplicableToSpan.Value,
-                                      documentText
-                                  )
-                                : null,
+                              ? ProtocolConversions.TextSpanToRange(
+                                    set.ApplicableToSpan.Value,
+                                    documentText
+                                )
+                              : null,
                             currentSetNumber: currentSetNumber,
                             currentHighestSetNumber: ref currentHighestSetNumber
                         )
@@ -183,11 +183,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                                 codeActionKind,
                                 nestedActionSet.Priority,
                                 applicableRange: nestedActionSet.ApplicableToSpan.HasValue
-                                    ? ProtocolConversions.TextSpanToRange(
-                                          nestedActionSet.ApplicableToSpan.Value,
-                                          documentText
-                                      )
-                                    : null,
+                                  ? ProtocolConversions.TextSpanToRange(
+                                        nestedActionSet.ApplicableToSpan.Value,
+                                        documentText
+                                    )
+                                  : null,
                                 nestedSetNumber,
                                 ref currentHighestSetNumber,
                                 currentTitle

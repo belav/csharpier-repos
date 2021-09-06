@@ -832,8 +832,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 diagnostics.Add(
                     delegateOrFunctionPointerType.IsFunctionPointer()
-                        ? ErrorCode.ERR_FuncPtrRefMismatch
-                        : ErrorCode.ERR_DelegateRefMismatch,
+                      ? ErrorCode.ERR_FuncPtrRefMismatch
+                      : ErrorCode.ERR_DelegateRefMismatch,
                     location,
                     mismatch.Member,
                     delegateOrFunctionPointerType

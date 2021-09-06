@@ -719,21 +719,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     {
                         Dependencies.Logger.MultipleNavigationProperties(
                             relationshipCandidate.NavigationProperties.Count == 0
-                                ? new[]
-                                  {
-                                      new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType)
-                                  }
-                                : relationshipCandidate.NavigationProperties.Select(
-                                      n => new Tuple<MemberInfo?, Type>(n, entityType.ClrType)
-                                  ),
+                              ? new[]
+                                {
+                                    new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType)
+                                }
+                              : relationshipCandidate.NavigationProperties.Select(
+                                    n => new Tuple<MemberInfo?, Type>(n, entityType.ClrType)
+                                ),
                             relationshipCandidate.InverseProperties.Count == 0
-                                ? new[]
-                                  {
-                                      new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType)
-                                  }
-                                : relationshipCandidate.InverseProperties.Select(
-                                      n => new Tuple<MemberInfo?, Type>(n, targetEntityType.ClrType)
-                                  )
+                              ? new[]
+                                {
+                                    new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType)
+                                }
+                              : relationshipCandidate.InverseProperties.Select(
+                                    n => new Tuple<MemberInfo?, Type>(n, targetEntityType.ClrType)
+                                )
                         );
                     }
 

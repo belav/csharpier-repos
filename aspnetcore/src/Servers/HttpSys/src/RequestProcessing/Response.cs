@@ -358,8 +358,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             IntPtr.Zero,
                             0,
                             asyncResult == null
-                                ? SafeNativeOverlapped.Zero
-                                : asyncResult.NativeOverlapped!,
+                              ? SafeNativeOverlapped.Zero
+                              : asyncResult.NativeOverlapped!,
                             IntPtr.Zero
                         );
 
@@ -379,8 +379,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                 IntPtr.Zero,
                                 0,
                                 asyncResult == null
-                                    ? SafeNativeOverlapped.Zero
-                                    : asyncResult.NativeOverlapped!,
+                                  ? SafeNativeOverlapped.Zero
+                                  : asyncResult.NativeOverlapped!,
                                 IntPtr.Zero
                             );
 

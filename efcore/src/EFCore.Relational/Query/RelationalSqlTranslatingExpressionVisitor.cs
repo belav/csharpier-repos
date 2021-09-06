@@ -379,11 +379,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 && TryRewriteEntityEquality(
                     binaryExpression.NodeType,
                     visitedLeft == QueryCompilationContext.NotTranslatedExpression
-                        ? left
-                        : visitedLeft,
+                      ? left
+                      : visitedLeft,
                     visitedRight == QueryCompilationContext.NotTranslatedExpression
-                        ? right
-                        : visitedRight,
+                      ? right
+                      : visitedRight,
                     equalsMethod: false,
                     out var result
                 )
@@ -903,11 +903,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                     TryRewriteEntityEquality(
                         ExpressionType.Equal,
                         left == QueryCompilationContext.NotTranslatedExpression
-                            ? methodCallExpression.Object
-                            : left,
+                          ? methodCallExpression.Object
+                          : left,
                         right == QueryCompilationContext.NotTranslatedExpression
-                            ? methodCallExpression.Arguments[0]
-                            : right,
+                          ? methodCallExpression.Arguments[0]
+                          : right,
                         equalsMethod: true,
                         out var result
                     )
@@ -949,11 +949,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                     TryRewriteEntityEquality(
                         ExpressionType.Equal,
                         left == QueryCompilationContext.NotTranslatedExpression
-                            ? methodCallExpression.Arguments[0]
-                            : left,
+                          ? methodCallExpression.Arguments[0]
+                          : left,
                         right == QueryCompilationContext.NotTranslatedExpression
-                            ? methodCallExpression.Arguments[1]
-                            : right,
+                          ? methodCallExpression.Arguments[1]
+                          : right,
                         equalsMethod: true,
                         out var result
                     )
@@ -981,8 +981,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     TryRewriteContainsEntity(
                         enumerable,
                         item == QueryCompilationContext.NotTranslatedExpression
-                            ? methodCallExpression.Arguments[1]
-                            : item,
+                          ? methodCallExpression.Arguments[1]
+                          : item,
                         out var result
                     )
                 ) {
@@ -1007,8 +1007,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     TryRewriteContainsEntity(
                         enumerable!,
                         item == QueryCompilationContext.NotTranslatedExpression
-                            ? methodCallExpression.Arguments[0]
-                            : item,
+                          ? methodCallExpression.Arguments[0]
+                          : item,
                         out var result
                     )
                 ) {
@@ -1693,8 +1693,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     throw new InvalidOperationException(
                         CoreStrings.EntityEqualityOnKeylessEntityNotSupported(
                             nodeType == ExpressionType.Equal
-                                ? equalsMethod ? nameof(object.Equals) : "=="
-                                : equalsMethod ? "!" + nameof(object.Equals) : "!=",
+                              ? equalsMethod ? nameof(object.Equals) : "=="
+                              : equalsMethod ? "!" + nameof(object.Equals) : "!=",
                             entityType1.DisplayName()
                         )
                     );
@@ -1756,8 +1756,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnKeylessEntityNotSupported(
                         nodeType == ExpressionType.Equal
-                            ? equalsMethod ? nameof(object.Equals) : "=="
-                            : equalsMethod ? "!" + nameof(object.Equals) : "!=",
+                          ? equalsMethod ? nameof(object.Equals) : "=="
+                          : equalsMethod ? "!" + nameof(object.Equals) : "!=",
                         entityType.DisplayName()
                     )
                 );
@@ -1773,8 +1773,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnCompositeKeyEntitySubqueryNotSupported(
                         nodeType == ExpressionType.Equal
-                            ? equalsMethod ? nameof(object.Equals) : "=="
-                            : equalsMethod ? "!" + nameof(object.Equals) : "!=",
+                          ? equalsMethod ? nameof(object.Equals) : "=="
+                          : equalsMethod ? "!" + nameof(object.Equals) : "!=",
                         entityType.DisplayName()
                     )
                 );
@@ -1819,8 +1819,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 case SqlConstantExpression sqlConstantExpression:
                     return Expression.Constant(
                         sqlConstantExpression.Value is null
-                            ? null
-                            : property.GetGetter().GetClrValue(sqlConstantExpression.Value),
+                          ? null
+                          : property.GetGetter().GetClrValue(sqlConstantExpression.Value),
                         property.ClrType.MakeNullable()
                     );
 

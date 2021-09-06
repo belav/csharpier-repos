@@ -225,8 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                             name.ToIdentifierToken(),
                             null,
                             initializer != null
-                                ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
-                                : null
+                              ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
+                              : null
                         )
                     )
                 )
@@ -245,8 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 (TypeSyntax)type,
                 name.ToIdentifierToken(),
                 initializer != null
-                    ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
-                    : null
+                  ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
+                  : null
             );
         }
 
@@ -281,8 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 attributeLists: default,
                 modifiers: AsModifierList(accessibility, modifiers, SyntaxKind.MethodDeclaration),
                 returnType: returnType != null
-                    ? (TypeSyntax)returnType
-                    : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
+                  ? (TypeSyntax)returnType
+                  : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
                 explicitInterfaceSpecifier: null,
                 identifier: name.ToIdentifierToken(),
                 typeParameterList: AsTypeParameterList(typeParameters),
@@ -400,15 +400,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 (name ?? "ctor").ToIdentifierToken(),
                 AsParameterList(parameters),
                 baseConstructorArguments != null
-                    ? SyntaxFactory.ConstructorInitializer(
-                          SyntaxKind.BaseConstructorInitializer,
-                          SyntaxFactory.ArgumentList(
-                              SyntaxFactory.SeparatedList(
-                                  baseConstructorArguments.Select(AsArgument)
-                              )
-                          )
-                      )
-                    : null,
+                  ? SyntaxFactory.ConstructorInitializer(
+                        SyntaxKind.BaseConstructorInitializer,
+                        SyntaxFactory.ArgumentList(
+                            SyntaxFactory.SeparatedList(baseConstructorArguments.Select(AsArgument))
+                        )
+                    )
+                  : null,
                 CreateBlock(statements)
             );
         }
@@ -861,8 +859,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 name.ToIdentifierToken(),
                 AsTypeParameterList(typeParameters),
                 baseTypes != null
-                    ? SyntaxFactory.BaseList(SyntaxFactory.SeparatedList(baseTypes))
-                    : null,
+                  ? SyntaxFactory.BaseList(SyntaxFactory.SeparatedList(baseTypes))
+                  : null,
                 default,
                 this.AsClassMembers(name, members)
             );
@@ -1051,14 +1049,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 AsModifierList(accessibility, modifiers, SyntaxKind.EnumDeclaration),
                 name.ToIdentifierToken(),
                 underlyingType != null
-                    ? SyntaxFactory.BaseList(
-                          SyntaxFactory.SingletonSeparatedList(
-                              (BaseTypeSyntax)SyntaxFactory.SimpleBaseType(
-                                  (TypeSyntax)underlyingType
-                              )
-                          )
-                      )
-                    : null,
+                  ? SyntaxFactory.BaseList(
+                        SyntaxFactory.SingletonSeparatedList(
+                            (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)underlyingType)
+                        )
+                    )
+                  : null,
                 this.AsEnumMembers(members)
             );
         }
@@ -1069,8 +1065,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 default,
                 name.ToIdentifierToken(),
                 expression != null
-                    ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
-                    : null
+                  ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
+                  : null
             );
         }
 
@@ -1120,8 +1116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 default,
                 AsModifierList(accessibility, modifiers),
                 returnType != null
-                    ? (TypeSyntax)returnType
-                    : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
+                  ? (TypeSyntax)returnType
+                  : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
                 name.ToIdentifierToken(),
                 AsTypeParameterList(typeParameters),
                 AsParameterList(parameters),
@@ -1660,13 +1656,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return recordDeclaration.WithSemicolonToken(default)
                     .WithOpenBraceToken(
                         recordDeclaration.OpenBraceToken == default
-                            ? SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
-                            : recordDeclaration.OpenBraceToken
+                          ? SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
+                          : recordDeclaration.OpenBraceToken
                     )
                     .WithCloseBraceToken(
                         recordDeclaration.CloseBraceToken == default
-                            ? SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
-                            : recordDeclaration.CloseBraceToken
+                          ? SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
+                          : recordDeclaration.CloseBraceToken
                     );
             }
 
@@ -3801,8 +3797,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     CreateBlock(trueStatements),
                     SyntaxFactory.ElseClause(
                         falseArray.Count == 1 && falseArray[0] is IfStatementSyntax
-                            ? (StatementSyntax)falseArray[0]
-                            : CreateBlock(falseArray)
+                          ? (StatementSyntax)falseArray[0]
+                          : CreateBlock(falseArray)
                     )
                 );
             }
@@ -4377,11 +4373,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return SyntaxFactory.TryStatement(
                 CreateBlock(tryStatements),
                 catchClauses != null
-                    ? SyntaxFactory.List(catchClauses.Cast<CatchClauseSyntax>())
-                    : default,
+                  ? SyntaxFactory.List(catchClauses.Cast<CatchClauseSyntax>())
+                  : default,
                 finallyStatements != null
-                    ? SyntaxFactory.FinallyClause(CreateBlock(finallyStatements))
-                    : null
+                  ? SyntaxFactory.FinallyClause(CreateBlock(finallyStatements))
+                  : null
             );
         }
 

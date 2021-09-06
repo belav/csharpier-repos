@@ -265,8 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 displayParts.Add(
                     new SymbolDisplayPart(
                         namedParameter is IFieldSymbol
-                            ? SymbolDisplayPartKind.FieldName
-                            : SymbolDisplayPartKind.PropertyName,
+                          ? SymbolDisplayPartKind.FieldName
+                          : SymbolDisplayPartKind.PropertyName,
                         namedParameter,
                         namedParameter.Name.ToIdentifierToken().ToString()
                     )

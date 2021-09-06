@@ -314,8 +314,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualDirectives);
                 Assert.Same(
                     generateDirectivesCallCount == 0
-                        ? member.StartDirectives
-                        : member.EndDirectives,
+                      ? member.StartDirectives
+                      : member.EndDirectives,
                     actualDirectives
                 );
                 writer.Write(
@@ -2934,8 +2934,8 @@ namespace System.CodeDom.Compiler.Tests
                         baseMethod(actualDirectives);
                         Assert.Same(
                             generateDirectivesCallCount == 0
-                                ? type.StartDirectives
-                                : type.EndDirectives,
+                              ? type.StartDirectives
+                              : type.EndDirectives,
                             actualDirectives
                         );
                         writer.Write(

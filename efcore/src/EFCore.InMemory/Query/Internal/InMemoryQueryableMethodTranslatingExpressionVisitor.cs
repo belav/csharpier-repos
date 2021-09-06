@@ -506,8 +506,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 predicate,
                 returnType,
                 returnDefault
-                    ? EnumerableMethods.FirstOrDefaultWithoutPredicate
-                    : EnumerableMethods.FirstWithoutPredicate
+                  ? EnumerableMethods.FirstOrDefaultWithoutPredicate
+                  : EnumerableMethods.FirstWithoutPredicate
             );
         }
 
@@ -877,8 +877,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 predicate,
                 returnType,
                 returnDefault
-                    ? EnumerableMethods.LastOrDefaultWithoutPredicate
-                    : EnumerableMethods.LastWithoutPredicate
+                  ? EnumerableMethods.LastOrDefaultWithoutPredicate
+                  : EnumerableMethods.LastWithoutPredicate
             );
         }
 
@@ -1315,8 +1315,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 predicate,
                 returnType,
                 returnDefault
-                    ? EnumerableMethods.SingleOrDefaultWithoutPredicate
-                    : EnumerableMethods.SingleWithoutPredicate
+                  ? EnumerableMethods.SingleOrDefaultWithoutPredicate
+                  : EnumerableMethods.SingleWithoutPredicate
             );
         }
 
@@ -1722,14 +1722,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                     var outerKey = entityShaperExpression.CreateKeyValuesExpression(
                         navigation.IsOnDependent
-                            ? foreignKey.Properties
-                            : foreignKey.PrincipalKey.Properties,
+                          ? foreignKey.Properties
+                          : foreignKey.PrincipalKey.Properties,
                         makeNullable
                     );
                     var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
                         navigation.IsOnDependent
-                            ? foreignKey.PrincipalKey.Properties
-                            : foreignKey.Properties,
+                          ? foreignKey.PrincipalKey.Properties
+                          : foreignKey.Properties,
                         makeNullable
                     );
 
@@ -1742,22 +1742,22 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var predicate = makeNullable
                         ? Expression.AndAlso(
                               outerKey is NewArrayExpression newArrayExpression
-                                  ? newArrayExpression.Expressions.Select(
-                                            e =>
-                                            {
-                                                var left = (e as UnaryExpression)?.Operand ?? e;
+                                ? newArrayExpression.Expressions.Select(
+                                          e =>
+                                          {
+                                              var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                                return Expression.NotEqual(
-                                                    left,
-                                                    Expression.Constant(null, left.Type)
-                                                );
-                                            }
-                                        )
-                                        .Aggregate((l, r) => Expression.AndAlso(l, r))
-                                  : Expression.NotEqual(
-                                        outerKey,
-                                        Expression.Constant(null, outerKey.Type)
-                                    ),
+                                              return Expression.NotEqual(
+                                                  left,
+                                                  Expression.Constant(null, left.Type)
+                                              );
+                                          }
+                                      )
+                                      .Aggregate((l, r) => Expression.AndAlso(l, r))
+                                : Expression.NotEqual(
+                                      outerKey,
+                                      Expression.Constant(null, outerKey.Type)
+                                  ),
                               keyComparison
                           )
                         : (Expression)keyComparison;
@@ -1814,14 +1814,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                     var outerKey = entityShaperExpression.CreateKeyValuesExpression(
                         navigation.IsOnDependent
-                            ? foreignKey.Properties
-                            : foreignKey.PrincipalKey.Properties,
+                          ? foreignKey.Properties
+                          : foreignKey.PrincipalKey.Properties,
                         makeNullable
                     );
                     var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
                         navigation.IsOnDependent
-                            ? foreignKey.PrincipalKey.Properties
-                            : foreignKey.Properties,
+                          ? foreignKey.PrincipalKey.Properties
+                          : foreignKey.Properties,
                         makeNullable
                     );
 

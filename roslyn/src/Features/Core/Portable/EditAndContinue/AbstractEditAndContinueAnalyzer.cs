@@ -1482,8 +1482,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             diagnostics.Add(
                                 new RudeEditDiagnostic(
                                     isNonLeaf
-                                        ? RudeEditKind.ActiveStatementUpdate
-                                        : RudeEditKind.PartiallyExecutedActiveStatementUpdate,
+                                      ? RudeEditKind.ActiveStatementUpdate
+                                      : RudeEditKind.PartiallyExecutedActiveStatementUpdate,
                                     newSpan
                                 )
                             );
@@ -1530,8 +1530,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             diagnostics.Add(
                                 new RudeEditDiagnostic(
                                     isNonLeaf
-                                        ? RudeEditKind.DeleteActiveStatement
-                                        : RudeEditKind.PartiallyExecutedActiveStatementDelete,
+                                      ? RudeEditKind.DeleteActiveStatement
+                                      : RudeEditKind.PartiallyExecutedActiveStatementDelete,
                                     GetDeletedNodeDiagnosticSpan(match.Matches, oldStatementSyntax),
                                     arguments: new[] { FeaturesResources.code }
                                 )
@@ -1580,8 +1580,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 diagnostics.Add(
                     new RudeEditDiagnostic(
                         (e is OutOfMemoryException)
-                            ? RudeEditKind.MemberBodyTooBig
-                            : RudeEditKind.MemberBodyInternalError,
+                          ? RudeEditKind.MemberBodyTooBig
+                          : RudeEditKind.MemberBodyInternalError,
                         GetBodyDiagnosticSpan(newBody, EditKind.Update),
                         newBody,
                         arguments: new[] { GetBodyDisplayName(newBody) }
@@ -1967,8 +1967,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             diagnostics.Add(
                 new RudeEditDiagnostic(
                     aroundActiveStatement
-                        ? RudeEditKind.InsertAroundActiveStatement
-                        : RudeEditKind.Insert,
+                      ? RudeEditKind.InsertAroundActiveStatement
+                      : RudeEditKind.Insert,
                     GetDiagnosticSpan(insertedSuspensionPoint, EditKind.Insert),
                     insertedSuspensionPoint,
                     new[]
@@ -2690,8 +2690,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                     var triviaSpan = TextSpan.FromBounds(
                         previousNewToken.HasTrailingTrivia
-                            ? previousNewToken.Span.End
-                            : currentToken.FullSpan.Start,
+                          ? previousNewToken.Span.End
+                          : currentToken.FullSpan.Start,
                         currentToken.SpanStart
                     );
 
@@ -3136,8 +3136,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                                     GetDisplayName(edit.OldNode, EditKind.Delete),
                                                     oldSymbol.ToDisplayString(
                                                         diagnosticSpan.IsEmpty
-                                                            ? s_fullyQualifiedMemberDisplayFormat
-                                                            : s_unqualifiedMemberDisplayFormat
+                                                          ? s_fullyQualifiedMemberDisplayFormat
+                                                          : s_unqualifiedMemberDisplayFormat
                                                     )
                                                 )
                                             }
@@ -4010,8 +4010,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             diagnostics.Add(
                 new RudeEditDiagnostic(
                     intoStruct
-                        ? RudeEditKind.InsertIntoStruct
-                        : RudeEditKind.InsertIntoClassWithLayout,
+                      ? RudeEditKind.InsertIntoStruct
+                      : RudeEditKind.InsertIntoClassWithLayout,
                     syntax.Span,
                     syntax,
                     new[]
@@ -4427,8 +4427,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 syntaxMapToUse,
                                 syntaxMapTree: isPartialEdit ? newSyntaxTree : null,
                                 partialType: isPartialEdit
-                                    ? SymbolKey.Create(newType, cancellationToken)
-                                    : null
+                                  ? SymbolKey.Create(newType, cancellationToken)
+                                  : null
                             )
                         );
                     }

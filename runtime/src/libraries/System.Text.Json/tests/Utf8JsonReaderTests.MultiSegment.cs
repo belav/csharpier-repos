@@ -1495,8 +1495,8 @@ namespace System.Text.Json.Tests
                     builder.Append(
                         Encoding.UTF8.GetString(
                             json.HasValueSequence
-                                ? json.ValueSequence.ToArray()
-                                : json.ValueSpan.ToArray()
+                              ? json.ValueSequence.ToArray()
+                              : json.ValueSpan.ToArray()
                         )
                     );
                     if (json.HasValueSequence)
@@ -1529,8 +1529,8 @@ namespace System.Text.Json.Tests
                     builder.Append(
                         Encoding.UTF8.GetString(
                             json.HasValueSequence
-                                ? json.ValueSequence.ToArray()
-                                : json.ValueSpan.ToArray()
+                              ? json.ValueSequence.ToArray()
+                              : json.ValueSpan.ToArray()
                         )
                     );
                     if (json.HasValueSequence)
@@ -1590,8 +1590,8 @@ namespace System.Text.Json.Tests
                         expectedString,
                         Encoding.UTF8.GetString(
                             json.HasValueSequence
-                                ? json.ValueSequence.ToArray()
-                                : json.ValueSpan.ToArray()
+                              ? json.ValueSequence.ToArray()
+                              : json.ValueSpan.ToArray()
                         )
                     );
 

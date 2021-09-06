@@ -811,9 +811,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ) {
                 resultKind = resultKind.WorseResultKind(
                     memberResolutionResult.IsValid
-                    && !IsConstructorAccessible(memberResolutionResult.Member, ref useSiteInfo)
-                        ? LookupResultKind.Inaccessible
-                        : LookupResultKind.OverloadResolutionFailure
+                        && !IsConstructorAccessible(memberResolutionResult.Member, ref useSiteInfo)
+                      ? LookupResultKind.Inaccessible
+                      : LookupResultKind.OverloadResolutionFailure
                 );
                 constructorArguments = BuildArgumentsForErrorRecovery(
                     boundConstructorArguments,

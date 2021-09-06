@@ -50,8 +50,8 @@ namespace System.Xml
                 // If we have been defoliated, we should have stayed that way
                 Debug.Assert(
                     (oldState == ElementState.Defoliated)
-                        ? (_rowElement.ElementState == ElementState.Defoliated)
-                        : true
+                      ? (_rowElement.ElementState == ElementState.Defoliated)
+                      : true
                 );
                 // Rollback foliation
                 _rowElement.ElementState = oldState;
@@ -84,8 +84,8 @@ namespace System.Xml
                 // If we have been defoliated, we should have stayed that way
                 Debug.Assert(
                     (oldState == ElementState.Defoliated)
-                        ? (_rowElement.ElementState == ElementState.Defoliated)
-                        : true
+                      ? (_rowElement.ElementState == ElementState.Defoliated)
+                      : true
                 );
                 // Rollback foliation
                 _rowElement.ElementState = oldState;
@@ -106,8 +106,8 @@ namespace System.Xml
                 // If we have been defoliated, we should have stayed that way
                 Debug.Assert(
                     (oldState == ElementState.Defoliated)
-                        ? (_rowElement.ElementState == ElementState.Defoliated)
-                        : true
+                      ? (_rowElement.ElementState == ElementState.Defoliated)
+                      : true
                 );
 
                 // Rollback foliation
@@ -121,8 +121,8 @@ namespace System.Xml
             // If we have been defoliated, we should have stayed that way
             Debug.Assert(
                 (oldState == ElementState.Defoliated)
-                    ? (_rowElement.ElementState == ElementState.Defoliated)
-                    : true
+                  ? (_rowElement.ElementState == ElementState.Defoliated)
+                  : true
             );
 
             // Rollback foliation
@@ -163,8 +163,8 @@ namespace System.Xml
                 // If we have been defoliated, we should have stayed that way
                 Debug.Assert(
                     (oldState == ElementState.Defoliated)
-                        ? (_rowElement.ElementState == ElementState.Defoliated)
-                        : true
+                      ? (_rowElement.ElementState == ElementState.Defoliated)
+                      : true
                 );
 
                 // Rollback eventual foliation
@@ -177,8 +177,8 @@ namespace System.Xml
             // If we have been defoliated, we should have stayed that way
             Debug.Assert(
                 (oldState == ElementState.Defoliated)
-                    ? (_rowElement.ElementState == ElementState.Defoliated)
-                    : true
+                  ? (_rowElement.ElementState == ElementState.Defoliated)
+                  : true
             );
 
             // Rollback eventual foliation

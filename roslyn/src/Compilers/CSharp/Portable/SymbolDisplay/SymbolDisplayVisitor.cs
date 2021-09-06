@@ -160,8 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     containingNamespace.Accept(this.NotFirstVisitor);
                     AddPunctuation(
                         containingNamespace.IsGlobalNamespace
-                            ? SyntaxKind.ColonColonToken
-                            : SyntaxKind.DotToken
+                          ? SyntaxKind.ColonColonToken
+                          : SyntaxKind.DotToken
                     );
                 }
             }

@@ -1125,9 +1125,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if !DEBUG
                 // Don't optimize in DEBUG for better coverage for the GetInterfaceLocation function.
                 useSiteInfo.Diagnostics is null
-                || !implementingTypeImplementsInterface
-                    ? Location.None
-                    :
+                    || !implementingTypeImplementsInterface
+                  ? Location.None
+                  :
 #endif
                 GetInterfaceLocation(interfaceMember, implementingType),
                 useSiteInfo
@@ -2190,8 +2190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 // into diagnostics
                                 diagnostics.Add(
                                     topLevel
-                                        ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnExplicitImplementation
-                                        : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnExplicitImplementation,
+                                      ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnExplicitImplementation
+                                      : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnExplicitImplementation,
                                     implementingMethod.Locations[0],
                                     new FormattedSymbol(
                                         implementedMethod.ConstructedFrom,
@@ -2203,8 +2203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             {
                                 diagnostics.Add(
                                     topLevel
-                                        ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnImplicitImplementation
-                                        : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnImplicitImplementation,
+                                      ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnImplicitImplementation
+                                      : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnImplicitImplementation,
                                     GetImplicitImplementationDiagnosticLocation(
                                         implementedMethod,
                                         arg.implementingType,
@@ -2236,8 +2236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             {
                                 diagnostics.Add(
                                     topLevel
-                                        ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnExplicitImplementation
-                                        : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnExplicitImplementation,
+                                      ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnExplicitImplementation
+                                      : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnExplicitImplementation,
                                     implementingMethod.Locations[0],
                                     new FormattedSymbol(
                                         implementingParameter,
@@ -2253,8 +2253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             {
                                 diagnostics.Add(
                                     topLevel
-                                        ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation
-                                        : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnImplicitImplementation,
+                                      ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation
+                                      : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnImplicitImplementation,
                                     GetImplicitImplementationDiagnosticLocation(
                                         implementedMethod,
                                         arg.implementingType,
@@ -2300,8 +2300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         || implementingProperty.GetOwnOrInheritedSetMethod()?.AssociatedSymbol
                                             != implementingProperty
                                     )
-                                        ? reportMismatchInParameterType
-                                        : null,
+                                      ? reportMismatchInParameterType
+                                      : null,
                                     (implementingType, isExplicit)
                                 );
                             }

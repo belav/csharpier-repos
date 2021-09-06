@@ -249,8 +249,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 ? ImmutableArray.Create(
                       syntaxFactory.MemberAccessExpression(
                           objectName != null
-                              ? syntaxFactory.IdentifierName(objectName)
-                              : syntaxFactory.ThisExpression(),
+                            ? syntaxFactory.IdentifierName(objectName)
+                            : syntaxFactory.ThisExpression(),
                           syntaxFactory.IdentifierName(nameOfEvent)
                       )
                   )

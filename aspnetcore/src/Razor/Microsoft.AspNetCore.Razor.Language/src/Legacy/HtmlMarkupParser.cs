@@ -36,8 +36,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public HtmlMarkupParser(ParserContext context)
             : base(
                 context.ParseLeadingDirectives
-                    ? FirstDirectiveHtmlLanguageCharacteristics.Instance
-                    : HtmlLanguageCharacteristics.Instance,
+                  ? FirstDirectiveHtmlLanguageCharacteristics.Instance
+                  : HtmlLanguageCharacteristics.Instance,
                 context
             ) { }
 
@@ -798,8 +798,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
                             new SourceSpan(
                                 tagName.Length == 0
-                                    ? tagStartLocation
-                                    : SourceLocationTracker.Advance(tagStartLocation, "<"),
+                                  ? tagStartLocation
+                                  : SourceLocationTracker.Advance(tagStartLocation, "<"),
                                 Math.Max(tagName.Length, 1)
                             ),
                             tagName

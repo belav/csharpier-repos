@@ -293,8 +293,8 @@ namespace System.Runtime.Serialization
                 {
                     _rootContract = DataContract.GetDataContract(
                         (_serializationSurrogateProvider == null)
-                            ? _rootType
-                            : GetSurrogatedType(_serializationSurrogateProvider, _rootType)
+                          ? _rootType
+                          : GetSurrogatedType(_serializationSurrogateProvider, _rootType)
                     );
                     _needsContractNsAtRoot = CheckIfNeedsContractNsAtRoot(
                         _rootName,

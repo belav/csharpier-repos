@@ -31,44 +31,44 @@ namespace System.Drawing.Tests
                 ValidateImageContent(
                     image,
                     PlatformDetection.IsWindows
-                        ? new byte[]
-                          {
-                              0x8e,
-                              0xc2,
-                              0xfb,
-                              0xb4,
-                              0xde,
-                              0x5d,
-                              0xdc,
-                              0xd2,
-                              0x31,
-                              0xbd,
-                              0xd3,
-                              0x9a,
-                              0xcf,
-                              0xc1,
-                              0xd4,
-                              0xad
-                          }
-                        : new byte[]
-                          {
-                              0x55,
-                              0x40,
-                              0xd8,
-                              0xaa,
-                              0xc7,
-                              0x36,
-                              0x06,
-                              0x18,
-                              0x1a,
-                              0x57,
-                              0x2b,
-                              0xa9,
-                              0x5a,
-                              0xff,
-                              0x2b,
-                              0xb2
-                          }
+                      ? new byte[]
+                        {
+                            0x8e,
+                            0xc2,
+                            0xfb,
+                            0xb4,
+                            0xde,
+                            0x5d,
+                            0xdc,
+                            0xd2,
+                            0x31,
+                            0xbd,
+                            0xd3,
+                            0x9a,
+                            0xcf,
+                            0xc1,
+                            0xd4,
+                            0xad
+                        }
+                      : new byte[]
+                        {
+                            0x55,
+                            0x40,
+                            0xd8,
+                            0xaa,
+                            0xc7,
+                            0x36,
+                            0x06,
+                            0x18,
+                            0x1a,
+                            0x57,
+                            0x2b,
+                            0xa9,
+                            0x5a,
+                            0xff,
+                            0x2b,
+                            0xb2
+                        }
                 );
             }
         }
@@ -97,44 +97,44 @@ namespace System.Drawing.Tests
                 ValidateImageContent(
                     image,
                     PlatformDetection.IsWindows
-                        ? new byte[]
-                          {
-                              0x8e,
-                              0xc2,
-                              0xfb,
-                              0xb4,
-                              0xde,
-                              0x5d,
-                              0xdc,
-                              0xd2,
-                              0x31,
-                              0xbd,
-                              0xd3,
-                              0x9a,
-                              0xcf,
-                              0xc1,
-                              0xd4,
-                              0xad
-                          }
-                        : new byte[]
-                          {
-                              0x55,
-                              0x40,
-                              0xd8,
-                              0xaa,
-                              0xc7,
-                              0x36,
-                              0x06,
-                              0x18,
-                              0x1a,
-                              0x57,
-                              0x2b,
-                              0xa9,
-                              0x5a,
-                              0xff,
-                              0x2b,
-                              0xb2
-                          }
+                      ? new byte[]
+                        {
+                            0x8e,
+                            0xc2,
+                            0xfb,
+                            0xb4,
+                            0xde,
+                            0x5d,
+                            0xdc,
+                            0xd2,
+                            0x31,
+                            0xbd,
+                            0xd3,
+                            0x9a,
+                            0xcf,
+                            0xc1,
+                            0xd4,
+                            0xad
+                        }
+                      : new byte[]
+                        {
+                            0x55,
+                            0x40,
+                            0xd8,
+                            0xaa,
+                            0xc7,
+                            0x36,
+                            0x06,
+                            0x18,
+                            0x1a,
+                            0x57,
+                            0x2b,
+                            0xa9,
+                            0x5a,
+                            0xff,
+                            0x2b,
+                            0xb2
+                        }
                 );
             }
         }

@@ -942,8 +942,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         operationContext,
                         initializer.Syntax,
                         initializer.Kind == OperationKind.FieldReference
-                            ? DoNotUseFieldInitializerDescriptor
-                            : DoNotUsePropertyInitializerDescriptor
+                          ? DoNotUseFieldInitializerDescriptor
+                          : DoNotUsePropertyInitializerDescriptor
                     );
                 },
                 OperationKind.FieldReference,
@@ -1274,8 +1274,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     operationContext.ReportDiagnostic(
                         Diagnostic.Create(
                             instanceReference.IsImplicit
-                                ? ImplicitInstanceDescriptor
-                                : ExplicitInstanceDescriptor,
+                              ? ImplicitInstanceDescriptor
+                              : ExplicitInstanceDescriptor,
                             instanceReference.Syntax.GetLocation()
                         )
                     );
@@ -1392,8 +1392,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     operationContext.ReportDiagnostic(
                         Diagnostic.Create(
                             eventAssignment.Adds
-                                ? HandlerAddedDescriptor
-                                : HandlerRemovedDescriptor,
+                              ? HandlerAddedDescriptor
+                              : HandlerRemovedDescriptor,
                             operationContext.Operation.Syntax.GetLocation()
                         )
                     );

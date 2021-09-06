@@ -234,10 +234,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             FeaturesResources.Type_parameter_0_is_hidden_by_another_type_parameter_1,
                             typeParameter.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                             currentType == null
-                                ? string.Empty
-                                : currentType.ToDisplayString(
-                                      SymbolDisplayFormat.FullyQualifiedFormat
-                                  )
+                              ? string.Empty
+                              : currentType.ToDisplayString(
+                                    SymbolDisplayFormat.FullyQualifiedFormat
+                                )
                         )
                     );
                 }

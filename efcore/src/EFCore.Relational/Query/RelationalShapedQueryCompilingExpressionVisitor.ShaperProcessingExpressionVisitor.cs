@@ -183,8 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _parentVisitor = parentVisitor;
                 _resultCoordinatorParameter = Expression.Parameter(
                     splitQuery
-                        ? typeof(SplitQueryResultCoordinator)
-                        : typeof(SingleQueryResultCoordinator),
+                      ? typeof(SplitQueryResultCoordinator)
+                      : typeof(SingleQueryResultCoordinator),
                     "resultCoordinator"
                 );
                 _executionStrategyParameter = splitQuery
@@ -847,17 +847,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Expression.Constant(
                                         relatedDataLoaders?.Compile(),
                                         _isAsync
-                                            ? typeof(Func<
-                                                  QueryContext,
-                                                  IExecutionStrategy,
-                                                  SplitQueryResultCoordinator,
-                                                  Task
-                                              >)
-                                            : typeof(Action<
-                                                  QueryContext,
-                                                  IExecutionStrategy,
-                                                  SplitQueryResultCoordinator
-                                              >)
+                                          ? typeof(Func<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator,
+                                                Task
+                                            >)
+                                          : typeof(Action<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator
+                                            >)
                                     ),
                                     Expression.Constant(inverseNavigation, typeof(INavigationBase)),
                                     Expression.Constant(
@@ -1155,17 +1155,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Expression.Constant(
                                         relatedDataLoaders?.Compile(),
                                         _isAsync
-                                            ? typeof(Func<
-                                                  QueryContext,
-                                                  IExecutionStrategy,
-                                                  SplitQueryResultCoordinator,
-                                                  Task
-                                              >)
-                                            : typeof(Action<
-                                                  QueryContext,
-                                                  IExecutionStrategy,
-                                                  SplitQueryResultCoordinator
-                                              >)
+                                          ? typeof(Func<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator,
+                                                Task
+                                            >)
+                                          : typeof(Action<
+                                                QueryContext,
+                                                IExecutionStrategy,
+                                                SplitQueryResultCoordinator
+                                            >)
                                     )
                                 )
                             );
@@ -1252,16 +1252,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     expressions.Add(
                         inverseNavigation.IsCollection
-                            ? AddToCollectionNavigation(
-                                  relatedEntityParameter,
-                                  entityParameter,
-                                  inverseNavigation
-                              )
-                            : AssignReferenceNavigation(
-                                  relatedEntityParameter,
-                                  entityParameter,
-                                  inverseNavigation
-                              )
+                          ? AddToCollectionNavigation(
+                                relatedEntityParameter,
+                                entityParameter,
+                                inverseNavigation
+                            )
+                          : AssignReferenceNavigation(
+                                relatedEntityParameter,
+                                entityParameter,
+                                inverseNavigation
+                            )
                     );
                 }
 
@@ -1343,8 +1343,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 Expression valueExpression = Expression.Call(
                     getMethod.DeclaringType != typeof(DbDataReader)
-                        ? Expression.Convert(dbDataReader, getMethod.DeclaringType!)
-                        : (Expression)dbDataReader,
+                      ? Expression.Convert(dbDataReader, getMethod.DeclaringType!)
+                      : (Expression)dbDataReader,
                     getMethod,
                     indexExpression
                 );
@@ -1378,12 +1378,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             bufferedColumnType,
                             nullable,
                             _indexMapParameter != null
-                                ? (
-                                      (ColumnExpression)_selectExpression.Projection[
-                                          index
-                                      ].Expression
-                                  ).Name
-                                : null,
+                              ? (
+                                    (ColumnExpression)_selectExpression.Projection[index].Expression
+                                ).Name
+                              : null,
                             property,
                             Expression.Lambda(
                                     bufferedReaderLambdaExpression,

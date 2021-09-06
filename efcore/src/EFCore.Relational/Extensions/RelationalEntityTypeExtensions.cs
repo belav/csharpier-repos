@@ -714,8 +714,8 @@ namespace Microsoft.EntityFrameworkCore
                 name,
                 sql,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
         }
 

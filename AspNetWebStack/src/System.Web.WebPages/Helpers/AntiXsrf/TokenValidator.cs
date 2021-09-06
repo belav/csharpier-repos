@@ -149,8 +149,8 @@ namespace System.Web.Helpers.AntiXsrf
                     fieldToken.Username,
                     currentUsername,
                     (useCaseSensitiveUsernameComparison)
-                        ? StringComparison.Ordinal
-                        : StringComparison.OrdinalIgnoreCase
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
                 )
             ) {
                 throw HttpAntiForgeryException.CreateUsernameMismatchException(

@@ -64,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var contextNamespace = options.ContextNamespace ?? options.ModelNamespace;
             var context = (DbContext)assembly.CreateInstance(
                 !string.IsNullOrEmpty(contextNamespace)
-                    ? contextNamespace + "." + options.ContextName
-                    : options.ContextName
+                  ? contextNamespace + "." + options.ContextName
+                  : options.ContextName
             );
 
             if (assertModel != null)

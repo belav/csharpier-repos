@@ -309,12 +309,12 @@ namespace System.Transactions
             Guid distributedTxId
         ) : base(
             IncludeDistributedTxId(distributedTxId)
-                ? SR.Format(
-                      SR.DistributedTxIDInTransactionException,
-                      SR.TransactionAborted,
-                      distributedTxId
-                  )
-                : SR.TransactionAborted,
+              ? SR.Format(
+                    SR.DistributedTxIDInTransactionException,
+                    SR.TransactionAborted,
+                    distributedTxId
+                )
+              : SR.TransactionAborted,
             innerException
         ) { }
 

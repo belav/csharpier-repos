@@ -1107,8 +1107,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     ((CheckConstraint)constraint).UpdateConfigurationSource(
                         fromDataAnnotation
-                            ? ConfigurationSource.DataAnnotation
-                            : ConfigurationSource.Convention
+                          ? ConfigurationSource.DataAnnotation
+                          : ConfigurationSource.Convention
                     );
                     return entityTypeBuilder;
                 }

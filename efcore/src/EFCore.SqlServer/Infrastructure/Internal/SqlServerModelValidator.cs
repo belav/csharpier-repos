@@ -221,8 +221,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                             SqlServerStrings.IncludePropertyNotFound(
                                 notFound,
                                 index.Name == null
-                                    ? index.Properties.Format()
-                                    : "'" + index.Name + "'",
+                                  ? index.Properties.Format()
+                                  : "'" + index.Name + "'",
                                 index.DeclaringEntityType.DisplayName()
                             )
                         );
@@ -240,8 +240,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                                 index.DeclaringEntityType.DisplayName(),
                                 duplicateProperty,
                                 index.Name == null
-                                    ? index.Properties.Format()
-                                    : "'" + index.Name + "'"
+                                  ? index.Properties.Format()
+                                  : "'" + index.Name + "'"
                             )
                         );
                     }
@@ -257,8 +257,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                                 index.DeclaringEntityType.DisplayName(),
                                 coveredProperty,
                                 index.Name == null
-                                    ? index.Properties.Format()
-                                    : "'" + index.Name + "'"
+                                  ? index.Properties.Format()
+                                  : "'" + index.Name + "'"
                             )
                         );
                     }
@@ -291,11 +291,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                             firstMappedType.DisplayName(),
                             otherMappedType.DisplayName(),
                             isMemoryOptimized
-                                ? firstMappedType.DisplayName()
-                                : otherMappedType.DisplayName(),
+                              ? firstMappedType.DisplayName()
+                              : otherMappedType.DisplayName(),
                             !isMemoryOptimized
-                                ? firstMappedType.DisplayName()
-                                : otherMappedType.DisplayName()
+                              ? firstMappedType.DisplayName()
+                              : otherMappedType.DisplayName()
                         )
                     );
                 }

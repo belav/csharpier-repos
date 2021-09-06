@@ -457,8 +457,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     isUnique: shouldBeUnique,
                     removeCurrent: shouldInvert == true || changeRelatedTypes,
                     principalEndConfigurationSource: shouldInvert != null
-                        ? configurationSource
-                        : (ConfigurationSource?)null,
+                      ? configurationSource
+                      : (ConfigurationSource?)null,
                     oldRelationshipInverted: shouldInvert == true
                 );
 
@@ -4728,8 +4728,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         dependentProperties,
                         dependentEntityType,
                         principalProperties.Count != 0
-                            ? principalProperties
-                            : Metadata.PrincipalKey.Properties,
+                          ? principalProperties
+                          : Metadata.PrincipalKey.Properties,
                         principalEntityType,
                         configurationSource,
                         out var resetPrincipalKey
@@ -5161,8 +5161,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (EntityType)principalEntityType,
                 (EntityType)dependentEntityType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5176,8 +5176,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (EntityType)principalEntityType,
                 (EntityType)dependentEntityType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5189,8 +5189,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanInvert(
                 (IReadOnlyList<Property>?)newForeignKeyProperties,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5202,8 +5202,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasForeignKey(
                 properties,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5215,8 +5215,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasForeignKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5228,8 +5228,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetForeignKey(
                 properties,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5241,8 +5241,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetForeignKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5254,8 +5254,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasPrincipalKey(
                 properties,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5267,8 +5267,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasPrincipalKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5280,8 +5280,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPrincipalKey(
                 properties,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5293,8 +5293,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPrincipalKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5308,8 +5308,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 pointsToPrincipal,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5323,8 +5323,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 property,
                 pointsToPrincipal,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5338,8 +5338,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipalName,
                 navigationToDependentName,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5353,8 +5353,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipal,
                 navigationToDependent,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5368,8 +5368,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 property,
                 pointsToPrincipal,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5383,8 +5383,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 pointsToPrincipal,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5398,8 +5398,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipal,
                 navigationToDependent,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5413,8 +5413,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipalName,
                 navigationToDependentName,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5426,8 +5426,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsRequired(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5439,8 +5439,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsRequired(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5452,8 +5452,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsRequiredDependent(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5465,8 +5465,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsRequiredDependent(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5483,8 +5483,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsOwnership(
                 ownership,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5501,8 +5501,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsOwnership(
                 ownership,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5519,8 +5519,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             OnDelete(
                 deleteBehavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5537,8 +5537,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetDeleteBehavior(
                 deleteBehavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5555,8 +5555,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsUnique(
                 unique,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5570,8 +5570,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsUnique(
                 unique,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

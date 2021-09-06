@@ -349,8 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 {
                     return new RecommendedSymbols(
                         usingDirective.StaticKeyword.IsKind(SyntaxKind.StaticKeyword)
-                            ? symbols.WhereAsArray(s => !s.IsDelegateType() && !s.IsInterfaceType())
-                            : symbols.WhereAsArray(s => s.IsNamespace())
+                          ? symbols.WhereAsArray(s => !s.IsDelegateType() && !s.IsInterfaceType())
+                          : symbols.WhereAsArray(s => s.IsNamespace())
                     );
                 }
 

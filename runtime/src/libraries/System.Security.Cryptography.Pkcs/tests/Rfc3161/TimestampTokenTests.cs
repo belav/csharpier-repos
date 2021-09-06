@@ -381,8 +381,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 SigningCertificateOption.Omit,
                 v2Option,
                 hashAlgName == null
-                    ? default(HashAlgorithmName)
-                    : new HashAlgorithmName(hashAlgName),
+                  ? default(HashAlgorithmName)
+                  : new HashAlgorithmName(hashAlgName),
                 includeOption
             );
         }
@@ -404,8 +404,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 SigningCertificateOption.Omit,
                 SigningCertificateOption.InvalidHashNoName,
                 hashAlgName == null
-                    ? default(HashAlgorithmName)
-                    : new HashAlgorithmName(hashAlgName),
+                  ? default(HashAlgorithmName)
+                  : new HashAlgorithmName(hashAlgName),
                 includeOption: includeOption
             );
         }
@@ -471,8 +471,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 SigningCertificateOption.Omit,
                 v2Option,
                 hashAlgName == null
-                    ? default(HashAlgorithmName)
-                    : new HashAlgorithmName(hashAlgName),
+                  ? default(HashAlgorithmName)
+                  : new HashAlgorithmName(hashAlgName),
                 includeOption: includeOption,
                 identifierType: identifierType
             );
@@ -587,8 +587,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 v1Option,
                 v2Option,
                 hashAlgName == null
-                    ? default(HashAlgorithmName)
-                    : new HashAlgorithmName(hashAlgName),
+                  ? default(HashAlgorithmName)
+                  : new HashAlgorithmName(hashAlgName),
                 includeOption
             );
         }
@@ -642,8 +642,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 v1Option,
                 v2Option,
                 hashAlgName == null
-                    ? default(HashAlgorithmName)
-                    : new HashAlgorithmName(hashAlgName),
+                  ? default(HashAlgorithmName)
+                  : new HashAlgorithmName(hashAlgName),
                 includeOption: includeOption,
                 identifierType: identifierType
             );

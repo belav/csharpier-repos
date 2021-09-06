@@ -8626,8 +8626,8 @@ class Module1
             {
                 Assert.Equal(
                     leftType.IsDynamic() || rightType.IsDynamic()
-                        ? CandidateReason.LateBound
-                        : CandidateReason.None,
+                      ? CandidateReason.LateBound
+                      : CandidateReason.None,
                     info1.CandidateReason
                 );
                 Assert.Equal(0, info1.CandidateSymbols.Length);

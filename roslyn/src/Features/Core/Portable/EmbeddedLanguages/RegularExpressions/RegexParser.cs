@@ -359,17 +359,17 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 // that spans from the start of the first node to the end of the last node.
                 final.Add(
                     startTextNode == lastTextNode
-                        ? startTextNode
-                        : new RegexTextNode(
-                              CreateToken(
-                                  RegexKind.TextToken,
-                                  startTextNode.TextToken.LeadingTrivia,
-                                  VirtualCharSequence.FromBounds(
-                                      startTextNode.TextToken.VirtualChars,
-                                      lastTextNode.TextToken.VirtualChars
-                                  )
-                              )
-                          )
+                      ? startTextNode
+                      : new RegexTextNode(
+                            CreateToken(
+                                RegexKind.TextToken,
+                                startTextNode.TextToken.LeadingTrivia,
+                                VirtualCharSequence.FromBounds(
+                                    startTextNode.TextToken.VirtualChars,
+                                    lastTextNode.TextToken.VirtualChars
+                                )
+                            )
+                        )
                 );
 
                 return index;
@@ -1232,8 +1232,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 
             return CreateMissingToken(
                 openToken.Kind == RegexKind.LessThanToken
-                    ? RegexKind.GreaterThanToken
-                    : RegexKind.SingleQuoteToken
+                  ? RegexKind.GreaterThanToken
+                  : RegexKind.SingleQuoteToken
             );
         }
 

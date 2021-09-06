@@ -66,8 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool containsAwait = AwaitDetector.ContainsAwait(bodyWithAwaitLifted);
                 diagnostics.Add(
                     containsAwait
-                        ? ErrorCode.ERR_PossibleAsyncIteratorWithoutYield
-                        : ErrorCode.ERR_PossibleAsyncIteratorWithoutYieldOrAwait,
+                      ? ErrorCode.ERR_PossibleAsyncIteratorWithoutYield
+                      : ErrorCode.ERR_PossibleAsyncIteratorWithoutYieldOrAwait,
                     method.Locations[0],
                     method.ReturnTypeWithAnnotations
                 );
@@ -349,16 +349,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bodyBuilder.Add(
                 method.IsAsyncReturningVoid()
-                    ? F.Return()
-                    : F.Return(
-                          F.Property(
-                              F.Field(
-                                  F.Local(stateMachineVariable),
-                                  _builderField.AsMember(frameType)
-                              ),
-                              methodScopeAsyncMethodBuilderMemberCollection.Task
-                          )
-                      )
+                  ? F.Return()
+                  : F.Return(
+                        F.Property(
+                            F.Field(
+                                F.Local(stateMachineVariable),
+                                _builderField.AsMember(frameType)
+                            ),
+                            methodScopeAsyncMethodBuilderMemberCollection.Task
+                        )
+                    )
             );
 
             return F.Block(bodyBuilder.ToImmutableAndFree());

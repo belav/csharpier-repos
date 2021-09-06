@@ -997,8 +997,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 case ACCESSERROR.ACCESSERROR_NOACCESS:
                     throw ErrorHandling.Error(
                         mwt.Meth().isSetAccessor()
-                            ? ErrorCode.ERR_InaccessibleSetter
-                            : ErrorCode.ERR_InaccessibleGetter,
+                          ? ErrorCode.ERR_InaccessibleSetter
+                          : ErrorCode.ERR_InaccessibleGetter,
                         pwtSlot
                     );
             }
@@ -1064,8 +1064,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     Debug.Assert(field.FieldWithType.Field().isReadOnly);
                     throw ErrorHandling.Error(
                         field.FieldWithType.Field().isStatic
-                            ? ErrorCode.ERR_AssgReadonlyStatic
-                            : ErrorCode.ERR_AssgReadonly
+                          ? ErrorCode.ERR_AssgReadonlyStatic
+                          : ErrorCode.ERR_AssgReadonly
                     );
 
                 default:

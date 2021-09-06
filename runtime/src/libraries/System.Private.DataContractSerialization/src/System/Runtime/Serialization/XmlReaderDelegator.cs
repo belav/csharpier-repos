@@ -212,8 +212,8 @@ namespace System.Runtime.Serialization
             return new InvalidDataContractException(
                 SR.Format(
                     type.IsInterface
-                        ? SR.InterfaceTypeCannotBeCreated
-                        : SR.InvalidPrimitiveType_Serialization,
+                      ? SR.InterfaceTypeCannotBeCreated
+                      : SR.InvalidPrimitiveType_Serialization,
                     DataContract.GetClrTypeFullName(type)
                 )
             );

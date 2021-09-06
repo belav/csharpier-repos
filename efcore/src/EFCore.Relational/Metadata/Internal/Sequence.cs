@@ -690,8 +690,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetStartValue(
                 startValue,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -705,8 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIncrementBy(
                 incrementBy,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -720,8 +720,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetMinValue(
                 minValue,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -735,8 +735,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetMaxValue(
                 maxValue,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -750,8 +750,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetType(
                 type,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -765,8 +765,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetType(
                 type,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -780,8 +780,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsCyclic(
                 cyclic,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         [Obsolete("Don't use this in any new code")]

@@ -75,8 +75,8 @@ namespace Newtonsoft.Json.Converters
 
                     writer.WritePropertyName(
                         (resolver != null)
-                            ? resolver.GetResolvedPropertyName(column.ColumnName)
-                            : column.ColumnName
+                          ? resolver.GetResolvedPropertyName(column.ColumnName)
+                          : column.ColumnName
                     );
                     serializer.Serialize(writer, columnValue);
                 }

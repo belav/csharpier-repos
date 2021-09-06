@@ -474,8 +474,8 @@ namespace Microsoft.EntityFrameworkCore
             var left =
                 context.Attach(
                     ExpectLazyLoading
-                        ? context.CreateProxy<EntityOne>(b => b.Id = 999)
-                        : new EntityOne { Id = 999 }
+                      ? context.CreateProxy<EntityOne>(b => b.Id = 999)
+                      : new EntityOne { Id = 999 }
                 ).Entity;
 
             ClearLog();
@@ -527,8 +527,8 @@ namespace Microsoft.EntityFrameworkCore
             var left =
                 context.Attach(
                     ExpectLazyLoading
-                        ? context.CreateProxy<EntityOne>(b => b.Id = 999)
-                        : new EntityOne { Id = 999 }
+                      ? context.CreateProxy<EntityOne>(b => b.Id = 999)
+                      : new EntityOne { Id = 999 }
                 ).Entity;
 
             ClearLog();

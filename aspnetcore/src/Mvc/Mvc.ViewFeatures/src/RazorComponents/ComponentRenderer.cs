@@ -115,8 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 {
                     result = new InvokedRenderModes(
                         mode is RenderMode.ServerPrerendered
-                            ? InvokedRenderModes.Mode.Server
-                            : InvokedRenderModes.Mode.WebAssembly
+                          ? InvokedRenderModes.Mode.Server
+                          : InvokedRenderModes.Mode.WebAssembly
                     );
 
                     viewContext.Items[InvokedRenderModesKey] = result;

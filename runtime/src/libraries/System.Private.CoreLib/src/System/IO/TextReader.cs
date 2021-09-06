@@ -268,18 +268,18 @@ namespace System.IO
         ) =>
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
-                    ? ReadAsync(array.Array!, array.Offset, array.Count)
-                    : Task<int>.Factory.StartNew(
-                          static state =>
-                          {
-                              var t = (TupleSlim<TextReader, Memory<char>>)state!;
-                              return t.Item1.Read(t.Item2.Span);
-                          },
-                          new TupleSlim<TextReader, Memory<char>>(this, buffer),
-                          cancellationToken,
-                          TaskCreationOptions.DenyChildAttach,
-                          TaskScheduler.Default
-                      )
+                  ? ReadAsync(array.Array!, array.Offset, array.Count)
+                  : Task<int>.Factory.StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextReader, Memory<char>>)state!;
+                            return t.Item1.Read(t.Item2.Span);
+                        },
+                        new TupleSlim<TextReader, Memory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    )
             );
 
         internal virtual ValueTask<int> ReadAsyncInternal(
@@ -327,18 +327,18 @@ namespace System.IO
         ) =>
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
-                    ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
-                    : Task<int>.Factory.StartNew(
-                          static state =>
-                          {
-                              var t = (TupleSlim<TextReader, Memory<char>>)state!;
-                              return t.Item1.ReadBlock(t.Item2.Span);
-                          },
-                          new TupleSlim<TextReader, Memory<char>>(this, buffer),
-                          cancellationToken,
-                          TaskCreationOptions.DenyChildAttach,
-                          TaskScheduler.Default
-                      )
+                  ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
+                  : Task<int>.Factory.StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextReader, Memory<char>>)state!;
+                            return t.Item1.ReadBlock(t.Item2.Span);
+                        },
+                        new TupleSlim<TextReader, Memory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    )
             );
 
         internal async ValueTask<int> ReadBlockAsyncInternal(

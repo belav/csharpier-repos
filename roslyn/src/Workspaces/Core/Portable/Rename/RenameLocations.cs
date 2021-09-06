@@ -200,10 +200,10 @@ namespace Microsoft.CodeAnalysis.Rename
                 {
                     mergedLocations.AddRange(
                         renameMethodGroupReferences
-                            ? result.Locations
-                            : result.Locations.Where(
-                                  x => x.CandidateReason != CandidateReason.MemberGroup
-                              )
+                          ? result.Locations
+                          : result.Locations.Where(
+                                x => x.CandidateReason != CandidateReason.MemberGroup
+                            )
                     );
 
                     mergedImplicitLocations.AddRange(result.ImplicitLocations);

@@ -408,20 +408,20 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 // Create marker to insert
                 var startMarker = new SpanMarker(
                     type: (previousToken.RawKind == 0)
-                        ? SpanMarkerType.BeginningOfFile
-                        : SpanMarkerType.Normal,
+                      ? SpanMarkerType.BeginningOfFile
+                      : SpanMarkerType.Normal,
                     oppositeMarkerType: (nextToken.RawKind == 0)
-                        ? SpanMarkerType.EndOfFile
-                        : SpanMarkerType.Normal
+                      ? SpanMarkerType.EndOfFile
+                      : SpanMarkerType.Normal
                 );
 
                 var endMarker = new SpanMarker(
                     type: (nextToken.RawKind == 0)
-                        ? SpanMarkerType.EndOfFile
-                        : SpanMarkerType.Normal,
+                      ? SpanMarkerType.EndOfFile
+                      : SpanMarkerType.Normal,
                     oppositeMarkerType: (previousToken.RawKind == 0)
-                        ? SpanMarkerType.BeginningOfFile
-                        : SpanMarkerType.Normal
+                      ? SpanMarkerType.BeginningOfFile
+                      : SpanMarkerType.Normal
                 );
 
                 // Set proper tokens

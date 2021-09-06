@@ -304,8 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -324,8 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetStoreType(
                 storeType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

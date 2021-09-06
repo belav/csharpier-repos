@@ -402,8 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetInverse(
                 inverseName,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         [DebuggerStepThrough]
@@ -414,8 +414,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetInverse(
                 inverse,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         IConventionNavigationBuilder IConventionNavigation.Builder

@@ -339,8 +339,8 @@ namespace System.IO
             if (path1 == null || path2 == null || path3 == null)
                 throw new ArgumentNullException(
                     (path1 == null)
-                        ? nameof(path1)
-                        : (path2 == null) ? nameof(path2) : nameof(path3)
+                      ? nameof(path1)
+                      : (path2 == null) ? nameof(path2) : nameof(path3)
                 );
 
             return CombineInternal(path1, path2, path3);
@@ -351,10 +351,10 @@ namespace System.IO
             if (path1 == null || path2 == null || path3 == null || path4 == null)
                 throw new ArgumentNullException(
                     (path1 == null)
-                        ? nameof(path1)
-                        : (path2 == null)
-                            ? nameof(path2)
-                            : (path3 == null) ? nameof(path3) : nameof(path4)
+                      ? nameof(path1)
+                      : (path2 == null)
+                          ? nameof(path2)
+                          : (path3 == null) ? nameof(path3) : nameof(path4)
                 );
 
             return CombineInternal(path1, path2, path3, path4);

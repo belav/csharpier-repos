@@ -554,8 +554,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                     parameters: ImmutableArray<IParameterSymbol>.Empty,
                     getMethod: CreateGet(fieldName, field, factory),
                     setMethod: field.IsReadOnly || field.IsConst
-                        ? null
-                        : CreateSet(fieldName, field, factory)
+                      ? null
+                      : CreateSet(fieldName, field, factory)
                 )
             );
 

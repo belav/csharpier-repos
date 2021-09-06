@@ -233,8 +233,8 @@ namespace System.Threading.Tasks.Sources.Tests
                 null,
                 0,
                 flowContext
-                    ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
-                    : ValueTaskSourceOnCompletedFlags.None
+                  ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                  : ValueTaskSourceOnCompletedFlags.None
             );
 
             await tcs.Task;
@@ -262,8 +262,8 @@ namespace System.Threading.Tasks.Sources.Tests
                 null,
                 0,
                 flowContext
-                    ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
-                    : ValueTaskSourceOnCompletedFlags.None
+                  ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                  : ValueTaskSourceOnCompletedFlags.None
             );
 
             mrvts.SetResult(1);
@@ -411,8 +411,8 @@ namespace System.Threading.Tasks.Sources.Tests
                         null,
                         0,
                         captureSyncCtx
-                            ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                            : ValueTaskSourceOnCompletedFlags.None
+                          ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                          : ValueTaskSourceOnCompletedFlags.None
                     );
                     SynchronizationContext.SetSynchronizationContext(null);
 
@@ -465,8 +465,8 @@ namespace System.Threading.Tasks.Sources.Tests
                                 null,
                                 0,
                                 captureTaskScheduler
-                                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                    : ValueTaskSourceOnCompletedFlags.None
+                                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                  : ValueTaskSourceOnCompletedFlags.None
                             );
                         },
                         CancellationToken.None,

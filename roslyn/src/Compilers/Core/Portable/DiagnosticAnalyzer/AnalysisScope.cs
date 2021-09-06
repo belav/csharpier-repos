@@ -87,11 +87,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool categorizeDiagnostics
         ) : this(
             filterFile.SourceTree != null
-                ? SpecializedCollections.SingletonEnumerable(filterFile.SourceTree)
-                : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
+              ? SpecializedCollections.SingletonEnumerable(filterFile.SourceTree)
+              : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
             filterFile.AdditionalFile != null
-                ? SpecializedCollections.SingletonEnumerable(filterFile.AdditionalFile)
-                : SpecializedCollections.EmptyEnumerable<AdditionalText>(),
+              ? SpecializedCollections.SingletonEnumerable(filterFile.AdditionalFile)
+              : SpecializedCollections.EmptyEnumerable<AdditionalText>(),
             analyzers,
             isPartialAnalysis: true,
             filterFile,

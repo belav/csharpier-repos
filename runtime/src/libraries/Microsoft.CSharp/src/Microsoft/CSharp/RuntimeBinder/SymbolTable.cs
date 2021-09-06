@@ -1422,8 +1422,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                             m,
                             type,
                             m.Name == SpecialNames.Invoke
-                                ? MethodKindEnum.Invoke
-                                : MethodKindEnum.Actual
+                              ? MethodKindEnum.Invoke
+                              : MethodKindEnum.Actual
                         );
                     }
                 }

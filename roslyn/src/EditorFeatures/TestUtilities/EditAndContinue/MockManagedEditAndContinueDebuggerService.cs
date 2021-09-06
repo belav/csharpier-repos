@@ -39,10 +39,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             {
                 return Task.FromResult(
                     LoadedModules.TryGetValue(mvid, out var result)
-                        ? result
-                        : new ManagedEditAndContinueAvailability(
-                              ManagedEditAndContinueAvailabilityStatus.ModuleNotLoaded
-                          )
+                      ? result
+                      : new ManagedEditAndContinueAvailability(
+                            ManagedEditAndContinueAvailabilityStatus.ModuleNotLoaded
+                        )
                 );
             }
 

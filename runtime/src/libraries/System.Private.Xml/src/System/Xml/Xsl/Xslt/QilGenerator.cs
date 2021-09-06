@@ -1909,22 +1909,22 @@ namespace System.Xml.Xsl.Xslt
                                 _f.Eq(dt, _f.String(DtText)),
                                 _f.True(),
                                 fwdCompat
-                                    ? _f.True()
-                                    : _f.Loop(
-                                          qname = _f.Let(
-                                              ResolveQNameDynamic( /*ignoreDefaultNs:*/
-                                                  true,
-                                                  dt
-                                              )
-                                          ),
-                                          _f.Error(
-                                              _lastScope!.SourceLine,
-                                              SR.Xslt_BistateAttribute,
-                                              "data-type",
-                                              DtText,
-                                              DtNumber
-                                          )
-                                      )
+                                  ? _f.True()
+                                  : _f.Loop(
+                                        qname = _f.Let(
+                                            ResolveQNameDynamic( /*ignoreDefaultNs:*/
+                                                true,
+                                                dt
+                                            )
+                                        ),
+                                        _f.Error(
+                                            _lastScope!.SourceLine,
+                                            SR.Xslt_BistateAttribute,
+                                            "data-type",
+                                            DtText,
+                                            DtNumber
+                                        )
+                                    )
                             )
                         )
                     );
@@ -2003,18 +2003,18 @@ namespace System.Xml.Xsl.Xslt
                             _f.Eq(i, _f.String(value1)),
                             _f.String("1"),
                             fwdCompat
-                                ? _f.String("0")
-                                : _f.Conditional(
-                                      _f.Eq(i, _f.String(value0)),
-                                      _f.String("0"),
-                                      _f.Error(
-                                          _lastScope!.SourceLine,
-                                          SR.Xslt_BistateAttribute,
-                                          attName,
-                                          value0,
-                                          value1
-                                      )
-                                  )
+                              ? _f.String("0")
+                              : _f.Conditional(
+                                    _f.Eq(i, _f.String(value0)),
+                                    _f.String("0"),
+                                    _f.Error(
+                                        _lastScope!.SourceLine,
+                                        SR.Xslt_BistateAttribute,
+                                        attName,
+                                        value0,
+                                        value1
+                                    )
+                                )
                         )
                     );
                 }
@@ -2393,14 +2393,14 @@ namespace System.Xml.Xsl.Xslt
                             ),
                             i,
                             fwdCompat
-                                ? _f.String(Default)
-                                : _f.Error(
-                                      _lastScope!.SourceLine,
-                                      SR.Xslt_BistateAttribute,
-                                      "letter-value",
-                                      Alphabetic,
-                                      Traditional
-                                  )
+                              ? _f.String(Default)
+                              : _f.Error(
+                                    _lastScope!.SourceLine,
+                                    SR.Xslt_BistateAttribute,
+                                    "letter-value",
+                                    Alphabetic,
+                                    Traditional
+                                )
                         )
                     );
                 }
@@ -2442,12 +2442,12 @@ namespace System.Xml.Xsl.Xslt
                         _f.Eq(_f.StrLength(i), _f.Int32(1)),
                         i,
                         fwdCompat
-                            ? _f.String(string.Empty)
-                            : _f.Error(
-                                  _lastScope!.SourceLine,
-                                  SR.Xslt_CharAttribute,
-                                  "grouping-separator"
-                              )
+                          ? _f.String(string.Empty)
+                          : _f.Error(
+                                _lastScope!.SourceLine,
+                                SR.Xslt_CharAttribute,
+                                "grouping-separator"
+                            )
                     )
                 );
             }

@@ -362,8 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.Arity,
                 Hash.Combine(
                     (object?)this.ContainingSymbol != null
-                        ? this.ContainingSymbol.GetHashCode()
-                        : 0,
+                      ? this.ContainingSymbol.GetHashCode()
+                      : 0,
                     this.Name != null ? this.Name.GetHashCode() : 0
                 )
             );

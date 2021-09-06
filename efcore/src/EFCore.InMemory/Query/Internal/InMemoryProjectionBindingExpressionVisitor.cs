@@ -366,8 +366,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var expression = Visit(memberExpression.Expression);
             Expression updatedMemberExpression = memberExpression.Update(
                 expression != null
-                    ? MatchTypes(expression, memberExpression.Expression!.Type)
-                    : expression
+                  ? MatchTypes(expression, memberExpression.Expression!.Type)
+                  : expression
             );
 
             if (expression?.Type.IsNullableValueType() == true)

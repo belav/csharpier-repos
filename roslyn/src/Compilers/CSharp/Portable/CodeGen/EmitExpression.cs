@@ -688,8 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     var unexpectedTemp = EmitAddress(
                         argument,
                         refKind == RefKindExtensions.StrictIn
-                            ? AddressKind.ReadOnlyStrict
-                            : AddressKind.Writeable
+                          ? AddressKind.ReadOnlyStrict
+                          : AddressKind.Writeable
                     );
                     if (unexpectedTemp != null)
                     {
@@ -1705,8 +1705,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     tempOpt = EmitReceiverRef(
                         receiver,
                         callKind == CallKind.ConstrainedCallVirt
-                            ? AddressKind.Constrained
-                            : AddressKind.Writeable
+                          ? AddressKind.Constrained
+                          : AddressKind.Writeable
                     );
                 }
             }
@@ -1791,8 +1791,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 actualMethodTargetedByTheCall,
                 call.Syntax,
                 actualMethodTargetedByTheCall.IsVararg
-                    ? (BoundArgListOperator)call.Arguments[call.Arguments.Length - 1]
-                    : null
+                  ? (BoundArgListOperator)call.Arguments[call.Arguments.Length - 1]
+                  : null
             );
 
             EmitCallCleanup(call.Syntax, useKind, method);
@@ -2125,10 +2125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     constructor,
                     expression.Syntax,
                     constructor.IsVararg
-                        ? (BoundArgListOperator)expression.Arguments[
-                              expression.Arguments.Length - 1
-                          ]
-                        : null
+                      ? (BoundArgListOperator)expression.Arguments[expression.Arguments.Length - 1]
+                      : null
                 );
 
                 EmitPopIfUnused(used);
@@ -2447,8 +2445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 constructor,
                 objCreation.Syntax,
                 constructor.IsVararg
-                    ? (BoundArgListOperator)objCreation.Arguments[objCreation.Arguments.Length - 1]
-                    : null
+                  ? (BoundArgListOperator)objCreation.Arguments[objCreation.Arguments.Length - 1]
+                  : null
             );
 
             if (used)
@@ -2747,8 +2745,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 LocalDefinition temp = EmitAddress(
                     assignmentOperator.Right,
                     lhs.GetRefKind() == RefKind.RefReadOnly
-                        ? AddressKind.ReadOnlyStrict
-                        : AddressKind.Writeable
+                      ? AddressKind.ReadOnlyStrict
+                      : AddressKind.Writeable
                 );
 
                 // Generally taking a ref for the purpose of ref assignment should not be done on homeless values
@@ -2813,8 +2811,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         assignmentOperator.Left.Type,
                         assignmentOperator.Left.Syntax,
                         assignmentOperator.IsRef
-                            ? LocalSlotConstraints.ByRef
-                            : LocalSlotConstraints.None
+                          ? LocalSlotConstraints.ByRef
+                          : LocalSlotConstraints.None
                     );
                     _builder.EmitLocalStore(temp);
                 }

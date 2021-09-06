@@ -847,8 +847,8 @@ ref int x = ref true ? $$",
                 ),
                 absent: false,
                 options: sourceCodeKind == SourceCodeKind.Script
-                    ? Options.Script
-                    : CSharp9ParseOptions
+                  ? Options.Script
+                  : CSharp9ParseOptions
             );
         }
 
@@ -875,8 +875,8 @@ ref int y = ref true ? ref x : $$",
                 ),
                 absent: false,
                 options: sourceCodeKind == SourceCodeKind.Script
-                    ? Options.Script
-                    : CSharp9ParseOptions
+                  ? Options.Script
+                  : CSharp9ParseOptions
             );
         }
 

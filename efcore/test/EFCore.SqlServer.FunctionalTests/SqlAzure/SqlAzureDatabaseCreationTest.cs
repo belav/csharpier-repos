@@ -171,8 +171,8 @@ SELECT DATABASEPROPERTYEX('{storeName}', 'EDITION'),
             Assert.Equal(
                 maxSize,
                 await reader.IsDBNullAsync(2)
-                    ? (long?)null
-                    : await reader.GetFieldValueAsync<long>(2)
+                  ? (long?)null
+                  : await reader.GetFieldValueAsync<long>(2)
             );
         }
 

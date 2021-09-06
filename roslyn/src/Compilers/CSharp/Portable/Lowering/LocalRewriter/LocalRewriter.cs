@@ -134,8 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     allowOmissionOfConditionalCalls,
                     diagnostics,
                     dynamicInstrumenter != null
-                        ? new DebugInfoInjector(dynamicInstrumenter)
-                        : DebugInfoInjector.Singleton
+                      ? new DebugInfoInjector(dynamicInstrumenter)
+                      : DebugInfoInjector.Singleton
                 );
 
                 statement.CheckLocalsDefined();

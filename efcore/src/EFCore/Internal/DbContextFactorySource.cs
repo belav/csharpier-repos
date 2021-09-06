@@ -69,11 +69,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                                 Expression.New(
                                     constructors[0],
                                     isGeneric
-                                        ? optionsParam
-                                        : (Expression)Expression.Convert(
-                                              optionsParam,
-                                              typeof(DbContextOptions)
-                                          )
+                                      ? optionsParam
+                                      : (Expression)Expression.Convert(
+                                            optionsParam,
+                                            typeof(DbContextOptions)
+                                        )
                                 ),
                                 providerParam,
                                 optionsParam

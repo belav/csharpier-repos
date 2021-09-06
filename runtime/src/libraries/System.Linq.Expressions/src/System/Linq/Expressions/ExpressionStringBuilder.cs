@@ -846,8 +846,8 @@ namespace System.Linq.Expressions
             // For Extension nodes, print the class name.
             Out(
                 node.NodeType == ExpressionType.Extension
-                    ? node.GetType().FullName
-                    : node.NodeType.ToString()
+                  ? node.GetType().FullName
+                  : node.NodeType.ToString()
             );
             Out(']');
             return node;

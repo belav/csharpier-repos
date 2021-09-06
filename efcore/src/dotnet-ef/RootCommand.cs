@@ -229,8 +229,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             {
                 throw new CommandException(
                     projectPath != null
-                        ? Resources.MultipleProjectsInDirectory(projectPath)
-                        : Resources.MultipleProjects
+                      ? Resources.MultipleProjectsInDirectory(projectPath)
+                      : Resources.MultipleProjects
                 );
             }
 
@@ -238,8 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             {
                 throw new CommandException(
                     startupProjectPath != null
-                        ? Resources.MultipleProjectsInDirectory(startupProjectPath)
-                        : Resources.MultipleStartupProjects
+                      ? Resources.MultipleProjectsInDirectory(startupProjectPath)
+                      : Resources.MultipleStartupProjects
                 );
             }
 

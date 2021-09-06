@@ -217,8 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     ) {
                         Dependencies.Logger.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
                             fkPropertiesOnDependentToPrincipal != null
-                                ? relationshipBuilder.Metadata.DependentToPrincipal!
-                                : relationshipBuilder.Metadata.PrincipalToDependent!,
+                              ? relationshipBuilder.Metadata.DependentToPrincipal!
+                              : relationshipBuilder.Metadata.PrincipalToDependent!,
                             fkProperty!
                         );
 

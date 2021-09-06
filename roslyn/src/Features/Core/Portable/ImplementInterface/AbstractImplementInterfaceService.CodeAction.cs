@@ -582,8 +582,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     accessibility: accessibility,
                     modifiers: modifiers,
                     explicitInterfaceImplementations: useExplicitInterfaceSymbol
-                        ? ImmutableArray.Create(@event)
-                        : default,
+                      ? ImmutableArray.Create(@event)
+                      : default,
                     name: memberName,
                     addMethod: GetAddOrRemoveMethod(
                         @event,

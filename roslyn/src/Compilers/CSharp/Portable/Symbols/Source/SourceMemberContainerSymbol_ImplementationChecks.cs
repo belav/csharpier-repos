@@ -1724,8 +1724,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) =>
             diagnostics.Add(
                 topLevel
-                    ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride
-                    : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride,
+                  ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride
+                  : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride,
                 location
             );
 
@@ -1739,8 +1739,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) =>
             diagnostics.Add(
                 topLevel
-                    ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnOverride
-                    : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnOverride,
+                  ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnOverride
+                  : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnOverride,
                 location,
                 new FormattedSymbol(overridingParameter, SymbolDisplayFormat.ShortFormat)
             );

@@ -1550,8 +1550,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         Expression.Equal(resultVariable, Expression.Default(nullableResultType)),
                         returnValueForNull,
                         resultType != resultVariable.Type
-                            ? Expression.Convert(resultVariable, resultType)
-                            : (Expression)resultVariable
+                          ? Expression.Convert(resultVariable, resultType)
+                          : (Expression)resultVariable
                     )
                 );
             }

@@ -4230,8 +4230,8 @@ namespace System.Xml
             {
                 Debug.Assert(
                     (_index > 0)
-                        ? _nextParsingFunction == ParsingFunction.ElementContent
-                        : _nextParsingFunction == ParsingFunction.DocumentContent
+                      ? _nextParsingFunction == ParsingFunction.ElementContent
+                      : _nextParsingFunction == ParsingFunction.DocumentContent
                 );
                 return SkipPartialTextValueAsync();
             }
@@ -4256,8 +4256,8 @@ namespace System.Xml
             {
                 Debug.Assert(
                     (_index > 0)
-                        ? _nextParsingFunction == ParsingFunction.ElementContent
-                        : _nextParsingFunction == ParsingFunction.DocumentContent
+                      ? _nextParsingFunction == ParsingFunction.ElementContent
+                      : _nextParsingFunction == ParsingFunction.DocumentContent
                 );
                 await SkipPartialTextValueAsync().ConfigureAwait(false);
             }
@@ -5856,8 +5856,8 @@ namespace System.Xml
                 Throw(
                     new XmlException(
                         entityName == null
-                            ? SR.Xml_ErrorOpeningExternalDtd
-                            : SR.Xml_ErrorOpeningExternalEntity,
+                          ? SR.Xml_ErrorOpeningExternalDtd
+                          : SR.Xml_ErrorOpeningExternalEntity,
                         new string[] { uri.ToString(), innerMessage },
                         e,
                         0,
@@ -5878,8 +5878,8 @@ namespace System.Xml
             {
                 Throw(
                     _dtdProcessing == DtdProcessing.Ignore
-                        ? SR.Xml_CannotResolveEntityDtdIgnored
-                        : SR.Xml_CannotResolveEntity,
+                      ? SR.Xml_CannotResolveEntityDtdIgnored
+                      : SR.Xml_CannotResolveEntity,
                     entityName
                 );
             }

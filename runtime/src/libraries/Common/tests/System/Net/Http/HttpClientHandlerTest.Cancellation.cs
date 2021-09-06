@@ -209,8 +209,8 @@ namespace System.Net.Http.Functional.Tests
                                 var headers = new List<HttpHeaderData>();
                                 headers.Add(
                                     chunkedTransfer
-                                        ? new HttpHeaderData("Transfer-Encoding", "chunked")
-                                        : new HttpHeaderData("Content-Length", "20")
+                                      ? new HttpHeaderData("Transfer-Encoding", "chunked")
+                                      : new HttpHeaderData("Content-Length", "20")
                                 );
                                 if (connectionClose)
                                 {
@@ -298,8 +298,8 @@ namespace System.Net.Http.Functional.Tests
                                 var headers = new List<HttpHeaderData>();
                                 headers.Add(
                                     chunkedTransfer
-                                        ? new HttpHeaderData("Transfer-Encoding", "chunked")
-                                        : new HttpHeaderData("Content-Length", "20")
+                                      ? new HttpHeaderData("Transfer-Encoding", "chunked")
+                                      : new HttpHeaderData("Content-Length", "20")
                                 );
                                 if (connectionClose)
                                 {

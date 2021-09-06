@@ -147,28 +147,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return Expression.Lambda<Func<IUpdateEntry, TProperty>>(
                     originalValuesIndex >= 0
-                        ? (Expression)Expression.Call(
-                              entryParameter,
-                              InternalEntityEntry.ReadOriginalValueMethod.MakeGenericMethod(
-                                  typeof(TProperty)
-                              ),
-                              Expression.Constant(property),
-                              Expression.Constant(originalValuesIndex)
-                          )
-                        : Expression.Block(
-                              Expression.Throw(
-                                  Expression.Constant(
-                                      new InvalidOperationException(
-                                          CoreStrings.OriginalValueNotTracked(
-                                              property.Name,
-                                              property.DeclaringEntityType.DisplayName()
-                                          )
-                                      )
-                                  )
-                              ),
+                      ? (Expression)Expression.Call(
+                            entryParameter,
+                            InternalEntityEntry.ReadOriginalValueMethod.MakeGenericMethod(
+                                typeof(TProperty)
+                            ),
+                            Expression.Constant(property),
+                            Expression.Constant(originalValuesIndex)
+                        )
+                      : Expression.Block(
+                            Expression.Throw(
+                                Expression.Constant(
+                                    new InvalidOperationException(
+                                        CoreStrings.OriginalValueNotTracked(
+                                            property.Name,
+                                            property.DeclaringEntityType.DisplayName()
+                                        )
+                                    )
+                                )
+                            ),
 #pragma warning disable IDE0034 // Simplify 'default' expression - default infer to default(object) instead of default(TProperty)
-                              Expression.Constant(default(TProperty), typeof(TProperty))
-                          ),
+                            Expression.Constant(default(TProperty), typeof(TProperty))
+                        ),
 #pragma warning restore IDE0034 // Simplify 'default' expression
                     updateParameter
                 )
@@ -184,21 +184,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return Expression.Lambda<Func<IUpdateEntry, TProperty>>(
                     relationshipIndex >= 0
-                        ? Expression.Call(
-                              entryParameter,
-                              InternalEntityEntry.ReadRelationshipSnapshotValueMethod.MakeGenericMethod(
-                                  typeof(TProperty)
-                              ),
-                              Expression.Constant(propertyBase),
-                              Expression.Constant(relationshipIndex)
-                          )
-                        : Expression.Call(
-                              entryParameter,
-                              InternalEntityEntry.GetCurrentValueMethod.MakeGenericMethod(
-                                  typeof(TProperty)
-                              ),
-                              Expression.Constant(propertyBase)
-                          ),
+                      ? Expression.Call(
+                            entryParameter,
+                            InternalEntityEntry.ReadRelationshipSnapshotValueMethod.MakeGenericMethod(
+                                typeof(TProperty)
+                            ),
+                            Expression.Constant(propertyBase),
+                            Expression.Constant(relationshipIndex)
+                        )
+                      : Expression.Call(
+                            entryParameter,
+                            InternalEntityEntry.GetCurrentValueMethod.MakeGenericMethod(
+                                typeof(TProperty)
+                            ),
+                            Expression.Constant(propertyBase)
+                        ),
                     updateParameter
                 )
                 .Compile();

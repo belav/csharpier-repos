@@ -156,8 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     parameterValue.Key,
                     Expression.Lambda(
                         remappedLambdaBody.Type.IsValueType
-                            ? Expression.Convert(remappedLambdaBody, typeof(object))
-                            : remappedLambdaBody,
+                          ? Expression.Convert(remappedLambdaBody, typeof(object))
+                          : remappedLambdaBody,
                         QueryCompilationContext.QueryContextParameter
                     )
                 );

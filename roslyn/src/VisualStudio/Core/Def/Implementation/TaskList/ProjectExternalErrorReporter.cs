@@ -362,8 +362,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 isEnabledByDefault: true,
                 warningLevel: (severity == DiagnosticSeverity.Error) ? 0 : 1,
                 customTags: IsCompilerDiagnostic(errorId)
-                    ? CompilerDiagnosticCustomTags
-                    : CustomTags,
+                  ? CompilerDiagnosticCustomTags
+                  : CustomTags,
                 properties: DiagnosticData.PropertiesForBuildDiagnostic,
                 projectId: projectId,
                 location: new DiagnosticDataLocation(

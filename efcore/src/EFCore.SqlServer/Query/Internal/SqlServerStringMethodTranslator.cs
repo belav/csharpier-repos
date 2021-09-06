@@ -515,8 +515,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                           instance,
                           _sqlExpressionFactory.Constant(
                               startsWith
-                                  ? EscapeLikePattern(patternValue) + '%'
-                                  : '%' + EscapeLikePattern(patternValue)
+                                ? EscapeLikePattern(patternValue) + '%'
+                                : '%' + EscapeLikePattern(patternValue)
                           ),
                           _sqlExpressionFactory.Constant(LikeEscapeString)
                       )

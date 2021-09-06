@@ -356,22 +356,22 @@ namespace System.Data
             PropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                    ? new ListChangedEventArgs(
-                          ListChangedType.PropertyDescriptorAdded,
-                          new DataTablePropertyDescriptor((System.Data.DataTable)e.Element)
-                      )
-                    : e.Action == CollectionChangeAction.Refresh
-                        ? new ListChangedEventArgs(
-                              ListChangedType.PropertyDescriptorChanged,
-                              NullProp
-                          )
-                        : e.Action == CollectionChangeAction.Remove
-                            ? new ListChangedEventArgs(
-                                  ListChangedType.PropertyDescriptorDeleted,
-                                  new DataTablePropertyDescriptor((System.Data.DataTable)e.Element)
-                              )
-                            :
-                              /*default*/null! // TODO: This is very likely wrong
+                  ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataTablePropertyDescriptor((System.Data.DataTable)e.Element)
+                    )
+                  : e.Action == CollectionChangeAction.Refresh
+                      ? new ListChangedEventArgs(
+                            ListChangedType.PropertyDescriptorChanged,
+                            NullProp
+                        )
+                      : e.Action == CollectionChangeAction.Remove
+                          ? new ListChangedEventArgs(
+                                ListChangedType.PropertyDescriptorDeleted,
+                                new DataTablePropertyDescriptor((System.Data.DataTable)e.Element)
+                            )
+                          :
+                            /*default*/null! // TODO: This is very likely wrong
             );
         }
 
@@ -380,24 +380,24 @@ namespace System.Data
             DataRelationPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                    ? new ListChangedEventArgs(
-                          ListChangedType.PropertyDescriptorAdded,
-                          new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element)
-                      )
-                    : e.Action == CollectionChangeAction.Refresh
-                        ? new ListChangedEventArgs(
-                              ListChangedType.PropertyDescriptorChanged,
-                              NullProp
-                          )
-                        : e.Action == CollectionChangeAction.Remove
-                            ? new ListChangedEventArgs(
-                                  ListChangedType.PropertyDescriptorDeleted,
-                                  new DataRelationPropertyDescriptor(
-                                      (System.Data.DataRelation)e.Element
-                                  )
-                              )
-                            :
-                              /*default*/null! // TODO: This is very likely wrong
+                  ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element)
+                    )
+                  : e.Action == CollectionChangeAction.Refresh
+                      ? new ListChangedEventArgs(
+                            ListChangedType.PropertyDescriptorChanged,
+                            NullProp
+                        )
+                      : e.Action == CollectionChangeAction.Remove
+                          ? new ListChangedEventArgs(
+                                ListChangedType.PropertyDescriptorDeleted,
+                                new DataRelationPropertyDescriptor(
+                                    (System.Data.DataRelation)e.Element
+                                )
+                            )
+                          :
+                            /*default*/null! // TODO: This is very likely wrong
             );
         }
     }

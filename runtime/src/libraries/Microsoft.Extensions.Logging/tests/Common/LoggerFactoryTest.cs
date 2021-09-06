@@ -115,8 +115,8 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 sb.Append(
                     sb.Length > 0
-                        ? $", TraceId:{activity.GetTraceId()}"
-                        : $"TraceId:{activity.GetTraceId()}"
+                      ? $", TraceId:{activity.GetTraceId()}"
+                      : $"TraceId:{activity.GetTraceId()}"
                 );
             }
 
@@ -124,8 +124,8 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 sb.Append(
                     sb.Length > 0
-                        ? $", ParentId:{activity.GetParentId()}"
-                        : $"ParentId:{activity.GetParentId()}"
+                      ? $", ParentId:{activity.GetParentId()}"
+                      : $"ParentId:{activity.GetParentId()}"
                 );
             }
 
@@ -133,8 +133,8 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 sb.Append(
                     sb.Length > 0
-                        ? $", TraceState:{activity.TraceStateString}"
-                        : $"TraceState:{activity.TraceStateString}"
+                      ? $", TraceState:{activity.TraceStateString}"
+                      : $"TraceState:{activity.TraceStateString}"
                 );
             }
 
@@ -142,8 +142,8 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 sb.Append(
                     sb.Length > 0
-                        ? $", TraceFlags:{activity.ActivityTraceFlags}"
-                        : $"TraceFlags:{activity.ActivityTraceFlags}"
+                      ? $", TraceFlags:{activity.ActivityTraceFlags}"
+                      : $"TraceFlags:{activity.ActivityTraceFlags}"
                 );
             }
 

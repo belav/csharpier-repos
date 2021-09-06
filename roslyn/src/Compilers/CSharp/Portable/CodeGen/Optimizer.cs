@@ -753,8 +753,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             return node.Update(
                 node.Locals,
                 rewrittenSideeffects != null
-                    ? rewrittenSideeffects.ToImmutableAndFree()
-                    : sideeffects,
+                  ? rewrittenSideeffects.ToImmutableAndFree()
+                  : sideeffects,
                 value,
                 node.Type
             );
@@ -1846,8 +1846,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             return node.Update(
                 rewrittenInitializers != null
-                    ? rewrittenInitializers.ToImmutableAndFree()
-                    : initializers
+                  ? rewrittenInitializers.ToImmutableAndFree()
+                  : initializers
             );
         }
 

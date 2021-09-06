@@ -496,8 +496,8 @@ namespace ILVerify
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
             var assemblyName = metadataReader.GetString(
                 metadataReader.IsAssembly
-                    ? metadataReader.GetAssemblyDefinition().Name
-                    : metadataReader.GetModuleDefinition().Name
+                  ? metadataReader.GetAssemblyDefinition().Name
+                  : metadataReader.GetModuleDefinition().Name
             );
 
             StringBuilder builder = new StringBuilder();
@@ -528,8 +528,8 @@ namespace ILVerify
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
             var assemblyName = metadataReader.GetString(
                 metadataReader.IsAssembly
-                    ? metadataReader.GetAssemblyDefinition().Name
-                    : metadataReader.GetModuleDefinition().Name
+                  ? metadataReader.GetAssemblyDefinition().Name
+                  : metadataReader.GetModuleDefinition().Name
             );
 
             StringBuilder builder = new StringBuilder();

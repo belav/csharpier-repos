@@ -1030,8 +1030,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             Assert.Equal(
                 httpProtocols.HasFlag(HttpProtocols.Http2)
-                    ? SslApplicationProtocol.Http2
-                    : SslApplicationProtocol.Http11,
+                  ? SslApplicationProtocol.Http2
+                  : SslApplicationProtocol.Http11,
                 stream.NegotiatedApplicationProtocol
             );
         }

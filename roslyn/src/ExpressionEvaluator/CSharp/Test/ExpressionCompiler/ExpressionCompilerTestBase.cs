@@ -431,8 +431,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 source,
                 parseOptions: SyntaxHelpers.ParseOptions,
                 options: (outputKind == OutputKind.DynamicallyLinkedLibrary)
-                    ? TestOptions.DebugDll
-                    : TestOptions.DebugExe
+                  ? TestOptions.DebugDll
+                  : TestOptions.DebugExe
             );
 
             return Evaluate(

@@ -311,8 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                         GetFullyQualifiedContainerName(node.Parent),
                         method.Modifiers.Any(SyntaxKind.PartialKeyword),
                         IsExtensionMethod(method)
-                            ? DeclaredSymbolInfoKind.ExtensionMethod
-                            : DeclaredSymbolInfoKind.Method,
+                          ? DeclaredSymbolInfoKind.ExtensionMethod
+                          : DeclaredSymbolInfoKind.Method,
                         GetAccessibility(method, method.Modifiers),
                         method.Identifier.Span,
                         inheritanceNames: ImmutableArray<string>.Empty,

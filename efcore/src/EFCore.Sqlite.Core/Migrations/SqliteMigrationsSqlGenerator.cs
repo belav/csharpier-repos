@@ -465,8 +465,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 column.Name,
                                 out var renameColumnOperation
                             )
-                                ? renameColumnOperation.Name
-                                : column.Name
+                              ? renameColumnOperation.Name
+                              : column.Name
                         )
                     );
 

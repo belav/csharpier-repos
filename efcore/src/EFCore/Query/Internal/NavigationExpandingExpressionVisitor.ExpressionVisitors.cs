@@ -299,8 +299,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var outerKeyparameter = Expression.Parameter(sourceElementType);
                         var outerKey = outerKeyparameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                                ? secondaryForeignKey.Properties
-                                : secondaryForeignKey.PrincipalKey.Properties,
+                              ? secondaryForeignKey.Properties
+                              : secondaryForeignKey.PrincipalKey.Properties,
                             makeNullable: true
                         );
                         var outerKeySelector = Expression.Lambda(outerKey, outerKeyparameter);
@@ -309,8 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var innerKeyParameter = Expression.Parameter(innerSourceElementType);
                         var innerKey = innerKeyParameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                                ? secondaryForeignKey.PrincipalKey.Properties
-                                : secondaryForeignKey.Properties,
+                              ? secondaryForeignKey.PrincipalKey.Properties
+                              : secondaryForeignKey.Properties,
                             makeNullable: true
                         );
                         var innerKeySelector = Expression.Lambda(innerKey, innerKeyParameter);
@@ -364,8 +364,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var outersourceParameter = Expression.Parameter(sourceElementType);
                         var outerKey = outersourceParameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                                ? secondaryForeignKey.Properties
-                                : secondaryForeignKey.PrincipalKey.Properties,
+                              ? secondaryForeignKey.Properties
+                              : secondaryForeignKey.PrincipalKey.Properties,
                             makeNullable: true
                         );
 
@@ -373,8 +373,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var innerSourceParameter = Expression.Parameter(innerSourceElementType);
                         var innerKey = innerSourceParameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                                ? secondaryForeignKey.PrincipalKey.Properties
-                                : secondaryForeignKey.Properties,
+                              ? secondaryForeignKey.PrincipalKey.Properties
+                              : secondaryForeignKey.Properties,
                             makeNullable: true
                         );
 
@@ -514,22 +514,19 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     // Since outerKey's reference could change if a reference navigation is expanded afterwards
                     var predicateBody = Expression.AndAlso(
                         outerKey is NewArrayExpression newArrayExpression
-                            ? newArrayExpression.Expressions.Select(
-                                      e =>
-                                      {
-                                          var left = (e as UnaryExpression)?.Operand ?? e;
+                          ? newArrayExpression.Expressions.Select(
+                                    e =>
+                                    {
+                                        var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                          return Expression.NotEqual(
-                                              left,
-                                              Expression.Constant(null, left.Type)
-                                          );
-                                      }
-                                  )
-                                  .Aggregate((l, r) => Expression.AndAlso(l, r))
-                            : Expression.NotEqual(
-                                  outerKey,
-                                  Expression.Constant(null, outerKey.Type)
-                              ),
+                                        return Expression.NotEqual(
+                                            left,
+                                            Expression.Constant(null, left.Type)
+                                        );
+                                    }
+                                )
+                                .Aggregate((l, r) => Expression.AndAlso(l, r))
+                          : Expression.NotEqual(outerKey, Expression.Constant(null, outerKey.Type)),
                         Expression.Call(
                             _objectEqualsMethodInfo,
                             AddConvertToObject(outerKey),

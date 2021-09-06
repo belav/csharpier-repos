@@ -500,8 +500,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // Convert the symbol to Func<...> or Action<...>
                 var delegateType = compilation.GetTypeByMetadataName(
                     method.ReturnsVoid
-                        ? WithArity("System.Action", count)
-                        : WithArity("System.Func", count + 1)
+                      ? WithArity("System.Action", count)
+                      : WithArity("System.Func", count + 1)
                 );
 
                 if (delegateType != null)

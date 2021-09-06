@@ -976,8 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             {
                 result.Add(
                     index < oldArguments.Count
-                        ? TransferLeadingWhitespaceTrivia(newArgument, oldArguments[index])
-                        : newArgument
+                      ? TransferLeadingWhitespaceTrivia(newArgument, oldArguments[index])
+                      : newArgument
                 );
 
                 index++;

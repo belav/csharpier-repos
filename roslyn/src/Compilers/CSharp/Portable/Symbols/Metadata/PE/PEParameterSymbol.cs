@@ -981,14 +981,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             _handle,
                             out paramArrayAttribute,
                             filterOutParamArrayAttribute
-                                ? AttributeDescription.ParamArrayAttribute
-                                : default,
+                              ? AttributeDescription.ParamArrayAttribute
+                              : default,
                             out constantAttribute,
                             filterOutConstantAttributeDescription,
                             out isReadOnlyAttribute,
                             filterIsReadOnlyAttribute
-                                ? AttributeDescription.IsReadOnlyAttribute
-                                : default,
+                              ? AttributeDescription.IsReadOnlyAttribute
+                              : default,
                             out _,
                             default
                         );

@@ -174,8 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetParameterBinding(
                 parameterBinding,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>

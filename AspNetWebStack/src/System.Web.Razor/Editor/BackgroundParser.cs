@@ -422,10 +422,10 @@ namespace System.Web.Razor.Editor
                                             RazorResources.Trace_ParseComplete,
                                             fileNameOnly,
                                             elapsedMs.HasValue
-                                                ? elapsedMs.Value.ToString(
-                                                      CultureInfo.InvariantCulture
-                                                  )
-                                                : "?"
+                                              ? elapsedMs.Value.ToString(
+                                                    CultureInfo.InvariantCulture
+                                                )
+                                              : "?"
                                         );
 
                                         if (
@@ -456,10 +456,10 @@ namespace System.Web.Razor.Editor
                                                 RazorResources.Trace_TreesCompared,
                                                 fileNameOnly,
                                                 elapsedMs.HasValue
-                                                    ? elapsedMs.Value.ToString(
-                                                          CultureInfo.InvariantCulture
-                                                      )
-                                                    : "?",
+                                                  ? elapsedMs.Value.ToString(
+                                                        CultureInfo.InvariantCulture
+                                                    )
+                                                  : "?",
                                                 treeStructureChanged
                                             );
 

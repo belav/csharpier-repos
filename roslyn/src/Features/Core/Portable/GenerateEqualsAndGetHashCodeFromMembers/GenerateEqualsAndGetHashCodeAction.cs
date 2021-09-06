@@ -188,14 +188,14 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 var parameters = ImmutableArray.Create(
                     CodeGenerationSymbolFactory.CreateParameterSymbol(
                         _containingType.IsValueType
-                            ? _containingType
-                            : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
+                          ? _containingType
+                          : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
                         LeftName
                     ),
                     CodeGenerationSymbolFactory.CreateParameterSymbol(
                         _containingType.IsValueType
-                            ? _containingType
-                            : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
+                          ? _containingType
+                          : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
                         RightName
                     )
                 );

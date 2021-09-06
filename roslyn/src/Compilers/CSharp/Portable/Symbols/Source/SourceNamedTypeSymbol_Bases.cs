@@ -980,8 +980,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             diagnostics.Add(
                 useSiteInfo.Diagnostics.IsNullOrEmpty()
-                    ? Location.None
-                    : (FindBaseRefSyntax(declaredBase) ?? Locations[0]),
+                  ? Location.None
+                  : (FindBaseRefSyntax(declaredBase) ?? Locations[0]),
                 useSiteInfo
             );
 

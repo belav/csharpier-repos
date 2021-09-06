@@ -740,8 +740,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ExprFactory(
                     "Call",
                     method.RequiresInstanceReceiver
-                        ? Visit(node.ReceiverOpt)
-                        : _bound.Null(ExpressionType),
+                      ? Visit(node.ReceiverOpt)
+                      : _bound.Null(ExpressionType),
                     _bound.MethodInfo(method),
                     Expressions(node.Arguments)
                 );

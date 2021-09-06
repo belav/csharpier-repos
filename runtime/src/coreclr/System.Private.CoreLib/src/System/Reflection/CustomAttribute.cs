@@ -1907,8 +1907,8 @@ namespace System.Reflection
                 RuntimeMethodHandle.IsCAVisibleFromDecoratedType(
                     new QCallTypeHandle(ref attributeTypeHandle),
                     ctorWithParameters != null
-                        ? ctorWithParameters.Value
-                        : RuntimeMethodHandleInternal.EmptyHandle,
+                      ? ctorWithParameters.Value
+                      : RuntimeMethodHandleInternal.EmptyHandle,
                     new QCallTypeHandle(ref parentTypeHandle),
                     new QCallModule(ref decoratedModule)
                 ) != Interop.BOOL.FALSE;

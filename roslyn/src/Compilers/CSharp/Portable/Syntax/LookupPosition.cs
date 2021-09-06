@@ -247,8 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                       position,
                       initializerOpt.ColonToken,
                       constructorDecl.SemicolonToken.Kind() == SyntaxKind.None
-                          ? constructorDecl.Body!.CloseBraceToken
-                          : constructorDecl.SemicolonToken
+                        ? constructorDecl.Body!.CloseBraceToken
+                        : constructorDecl.SemicolonToken
                   );
         }
 

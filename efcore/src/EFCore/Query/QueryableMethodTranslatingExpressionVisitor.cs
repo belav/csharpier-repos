@@ -106,11 +106,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return translated
                     ?? throw new InvalidOperationException(
                         TranslationErrorDetails == null
-                            ? CoreStrings.TranslationFailed(methodCallExpression.Print())
-                            : CoreStrings.TranslationFailedWithDetails(
-                                  methodCallExpression.Print(),
-                                  TranslationErrorDetails
-                              )
+                          ? CoreStrings.TranslationFailed(methodCallExpression.Print())
+                          : CoreStrings.TranslationFailedWithDetails(
+                                methodCallExpression.Print(),
+                                TranslationErrorDetails
+                            )
                     );
             }
 

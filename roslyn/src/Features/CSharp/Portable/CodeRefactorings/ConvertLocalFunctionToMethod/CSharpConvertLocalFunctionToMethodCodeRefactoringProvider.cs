@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                         CodeGenerationSymbolFactory.CreateParameterSymbol(
                             attributes: default,
                             refKind: dataFlow.WrittenInside.Contains(capture)
-                                ? RefKind.Ref
-                                : RefKind.None,
+                              ? RefKind.Ref
+                              : RefKind.None,
                             isParams: false,
                             type: capture.GetSymbolType(),
                             name: capture.Name

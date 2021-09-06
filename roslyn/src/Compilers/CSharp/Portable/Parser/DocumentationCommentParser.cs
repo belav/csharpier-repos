@@ -638,8 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             SyntaxToken openQuote = EatToken(
                 this.CurrentToken.Kind == SyntaxKind.SingleQuoteToken
-                    ? SyntaxKind.SingleQuoteToken
-                    : SyntaxKind.DoubleQuoteToken
+                  ? SyntaxKind.SingleQuoteToken
+                  : SyntaxKind.DoubleQuoteToken
             );
 
             // NOTE: Don't need to save mode, since we're already using a reset point.
@@ -685,8 +685,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var saveMode = this.SetMode(
                     quoteKind == SyntaxKind.SingleQuoteToken
-                        ? LexerMode.XmlCrefQuote
-                        : LexerMode.XmlCrefDoubleQuote
+                      ? LexerMode.XmlCrefQuote
+                      : LexerMode.XmlCrefDoubleQuote
                 );
 
                 cref = this.ParseCrefAttributeValue();
@@ -708,8 +708,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var saveMode = this.SetMode(
                     quoteKind == SyntaxKind.SingleQuoteToken
-                        ? LexerMode.XmlNameQuote
-                        : LexerMode.XmlNameDoubleQuote
+                      ? LexerMode.XmlNameQuote
+                      : LexerMode.XmlNameDoubleQuote
                 );
 
                 identifier = this.ParseNameAttributeValue();
@@ -738,8 +738,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var saveMode = this.SetMode(
                     quoteKind == SyntaxKind.SingleQuoteToken
-                        ? LexerMode.XmlAttributeTextQuote
-                        : LexerMode.XmlAttributeTextDoubleQuote
+                      ? LexerMode.XmlAttributeTextQuote
+                      : LexerMode.XmlAttributeTextDoubleQuote
                 );
 
                 while (

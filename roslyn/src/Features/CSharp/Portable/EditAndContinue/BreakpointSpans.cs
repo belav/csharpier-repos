@@ -212,8 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     TextSpan createSpanForSwitchArm(SwitchExpressionArmSyntax switchArm) =>
                         CreateSpan(
                             (position <= switchArm.WhenClause?.FullSpan.End == true)
-                                ? switchArm.WhenClause
-                                : (SyntaxNode)switchArm.Expression
+                              ? switchArm.WhenClause
+                              : (SyntaxNode)switchArm.Expression
                         );
 
                 case SyntaxKind.SwitchExpression
@@ -603,8 +603,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return CreateSpan(
                         switchStatement,
                         (switchStatement.CloseParenToken != default)
-                            ? switchStatement.CloseParenToken
-                            : switchStatement.Expression.GetLastToken()
+                          ? switchStatement.CloseParenToken
+                          : switchStatement.Expression.GetLastToken()
                     );
 
                 case SyntaxKind.TryStatement:

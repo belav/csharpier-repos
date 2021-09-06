@@ -113,11 +113,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         cref,
                         binder,
                         diagnose
-                            ? _diagnostics
-                            : new BindingDiagnosticBag(
-                                  diagnosticBag: null,
-                                  _diagnostics.DependenciesBag
-                              )
+                          ? _diagnostics
+                          : new BindingDiagnosticBag(
+                                diagnosticBag: null,
+                                _diagnostics.DependenciesBag
+                            )
                     );
 
                     if (_writer != null)

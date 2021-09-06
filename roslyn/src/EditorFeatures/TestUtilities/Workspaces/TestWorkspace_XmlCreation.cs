@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 parseOptions == null ? null : CreateDocumentationModeAttribute(parseOptions),
                 parseOptions == null ? null : CreateFeaturesAttribute(parseOptions),
                 compilationOptions == null
-                    ? null
-                    : CreateCompilationOptionsElement(compilationOptions),
+                  ? null
+                  : CreateCompilationOptionsElement(compilationOptions),
                 elements
             );
         }

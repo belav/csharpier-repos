@@ -172,8 +172,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                     rawStream,
                     leaveInnerStreamOpen: false,
                     userCertificateValidationCallback: validateCertificate
-                        ? null
-                        : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
+                      ? null
+                      : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
                 );
 
                 await sslStream.AuthenticateAsClientAsync(

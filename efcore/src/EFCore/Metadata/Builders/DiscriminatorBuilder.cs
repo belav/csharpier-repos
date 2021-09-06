@@ -198,8 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IsComplete(
                 complete,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -223,8 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 EntityTypeBuilder,
                 value,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -238,8 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 (InternalEntityTypeBuilder?)entityType.Builder,
                 value,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />

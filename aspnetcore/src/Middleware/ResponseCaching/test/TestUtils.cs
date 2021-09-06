@@ -251,8 +251,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 next,
                 Options.Create(options),
                 testSink == null
-                    ? (ILoggerFactory)NullLoggerFactory.Instance
-                    : new TestLoggerFactory(testSink, true),
+                  ? (ILoggerFactory)NullLoggerFactory.Instance
+                  : new TestLoggerFactory(testSink, true),
                 policyProvider,
                 cache,
                 keyProvider

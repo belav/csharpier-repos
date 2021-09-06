@@ -191,8 +191,8 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
             source = source.Replace(
                 "<<betterOverload>>",
                 (betterOverload != null)
-                    ? "static string " + betterOverload + " => \"better\";"
-                    : ""
+                  ? "static string " + betterOverload + " => \"better\";"
+                  : ""
             );
             source = source.Replace(
                 "<<worseOverload>>",
@@ -201,14 +201,14 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
             source = source.Replace(
                 "<<implicitConversionToTask>>",
                 implicitConversionToTask
-                    ? "public static implicit operator Task(ValueTask t) => Task.FromResult(0);"
-                    : ""
+                  ? "public static implicit operator Task(ValueTask t) => Task.FromResult(0);"
+                  : ""
             );
             source = source.Replace(
                 "<<implicitConversionToTaskT>>",
                 implicitConversionToTask
-                    ? "public static implicit operator Task<T>(ValueTask<T> t) => Task.FromResult<T>(t._result);"
-                    : ""
+                  ? "public static implicit operator Task<T>(ValueTask<T> t) => Task.FromResult<T>(t._result);"
+                  : ""
             );
             if (isError)
             {

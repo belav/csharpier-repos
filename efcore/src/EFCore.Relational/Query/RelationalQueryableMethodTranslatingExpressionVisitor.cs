@@ -146,11 +146,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                             throw new InvalidOperationException(
                                 TranslationErrorDetails == null
-                                    ? CoreStrings.TranslationFailed(call)
-                                    : CoreStrings.TranslationFailedWithDetails(
-                                          call,
-                                          TranslationErrorDetails
-                                      )
+                                  ? CoreStrings.TranslationFailed(call)
+                                  : CoreStrings.TranslationFailedWithDetails(
+                                        call,
+                                        TranslationErrorDetails
+                                    )
                             );
                         }
 
@@ -1655,14 +1655,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     var outerKey = entityShaperExpression.CreateKeyValuesExpression(
                         navigation.IsOnDependent
-                            ? foreignKey.Properties
-                            : foreignKey.PrincipalKey.Properties,
+                          ? foreignKey.Properties
+                          : foreignKey.PrincipalKey.Properties,
                         makeNullable
                     );
                     var innerKey = correlationPredicateParameter.CreateKeyValuesExpression(
                         navigation.IsOnDependent
-                            ? foreignKey.PrincipalKey.Properties
-                            : foreignKey.Properties,
+                          ? foreignKey.PrincipalKey.Properties
+                          : foreignKey.Properties,
                         makeNullable
                     );
 
@@ -1675,22 +1675,22 @@ namespace Microsoft.EntityFrameworkCore.Query
                     var predicate = makeNullable
                         ? Expression.AndAlso(
                               outerKey is NewArrayExpression newArrayExpression
-                                  ? newArrayExpression.Expressions.Select(
-                                            e =>
-                                            {
-                                                var left = (e as UnaryExpression)?.Operand ?? e;
+                                ? newArrayExpression.Expressions.Select(
+                                          e =>
+                                          {
+                                              var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                                return Expression.NotEqual(
-                                                    left,
-                                                    Expression.Constant(null, left.Type)
-                                                );
-                                            }
-                                        )
-                                        .Aggregate((l, r) => Expression.AndAlso(l, r))
-                                  : Expression.NotEqual(
-                                        outerKey,
-                                        Expression.Constant(null, outerKey.Type)
-                                    ),
+                                              return Expression.NotEqual(
+                                                  left,
+                                                  Expression.Constant(null, left.Type)
+                                              );
+                                          }
+                                      )
+                                      .Aggregate((l, r) => Expression.AndAlso(l, r))
+                                : Expression.NotEqual(
+                                      outerKey,
+                                      Expression.Constant(null, outerKey.Type)
+                                  ),
                               keyComparison
                           )
                         : (Expression)keyComparison;
@@ -1797,14 +1797,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                         var outerKey = entityShaperExpression.CreateKeyValuesExpression(
                             navigation.IsOnDependent
-                                ? foreignKey.Properties
-                                : foreignKey.PrincipalKey.Properties,
+                              ? foreignKey.Properties
+                              : foreignKey.PrincipalKey.Properties,
                             makeNullable
                         );
                         var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
                             navigation.IsOnDependent
-                                ? foreignKey.PrincipalKey.Properties
-                                : foreignKey.Properties,
+                              ? foreignKey.PrincipalKey.Properties
+                              : foreignKey.Properties,
                             makeNullable
                         );
 
@@ -2018,8 +2018,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Expression.Equal(resultVariable, Expression.Default(nullableResultType)),
                         returnValueForNull,
                         resultType != resultVariable.Type
-                            ? Expression.Convert(resultVariable, resultType)
-                            : (Expression)resultVariable
+                          ? Expression.Convert(resultVariable, resultType)
+                          : (Expression)resultVariable
                     )
                 );
             }

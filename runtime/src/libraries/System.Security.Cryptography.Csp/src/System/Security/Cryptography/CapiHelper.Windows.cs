@@ -924,8 +924,8 @@ namespace Internal.NativeCrypto
             {
                 parameters = new CspParameters(
                     keyType == CspAlgorithmType.Dss
-                        ? DefaultDssProviderType
-                        : DefaultRsaProviderType,
+                      ? DefaultDssProviderType
+                      : DefaultRsaProviderType,
                     null,
                     null,
                     defaultFlags

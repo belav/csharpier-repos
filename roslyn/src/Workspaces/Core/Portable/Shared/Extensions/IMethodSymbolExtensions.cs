@@ -221,8 +221,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var unusableNames = parameterNames.Concat(outerTypeParameterNames)
                 .ToSet(
                     syntaxFacts.IsCaseSensitive
-                        ? StringComparer.Ordinal
-                        : StringComparer.OrdinalIgnoreCase
+                      ? StringComparer.Ordinal
+                      : StringComparer.OrdinalIgnoreCase
                 );
 
             var newTypeParameterNames = NameGenerator.EnsureUniqueness(

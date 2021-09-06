@@ -523,15 +523,15 @@ namespace System.Xml.Xsl.XPath
                     filter.Body = _f.And(
                         filter.Body,
                         name != null && nsUri != null
-                            ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
-                            : // ns:bar || bar
-                              nsUri != null
-                                ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
-                                : // ns:*
-                                  name != null
-                                    ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
-                                    : // *:foo
-                                      /*name  == nsUri == null*/_f.True() // *
+                          ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
+                          : // ns:bar || bar
+                            nsUri != null
+                              ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
+                              : // ns:*
+                                name != null
+                                  ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
+                                  : // *:foo
+                                    /*name  == nsUri == null*/_f.True() // *
                     );
                     return filter;
                 }
@@ -540,15 +540,15 @@ namespace System.Xml.Xsl.XPath
             return _f.Filter(
                 itr = _f.For(qilAxis),
                 name != null && nsUri != null
-                    ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
-                    : // ns:bar || bar
-                      nsUri != null
-                        ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
-                        : // ns:*
-                          name != null
-                            ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
-                            : // *:foo
-                              /*name  == nsUri == null*/_f.True() // *
+                  ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
+                  : // ns:bar || bar
+                    nsUri != null
+                      ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
+                      : // ns:*
+                        name != null
+                          ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
+                          : // *:foo
+                            /*name  == nsUri == null*/_f.True() // *
             );
         }
 

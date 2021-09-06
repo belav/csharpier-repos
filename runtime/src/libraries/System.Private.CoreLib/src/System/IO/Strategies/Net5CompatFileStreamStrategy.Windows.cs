@@ -1074,10 +1074,10 @@ namespace System.IO.Strategies
             Task writeTask = WriteAsyncInternalCore(source, cancellationToken);
             return new ValueTask(
                 (flushTask == null || flushTask.Status == TaskStatus.RanToCompletion)
-                    ? writeTask
-                    : (writeTask.Status == TaskStatus.RanToCompletion)
-                        ? flushTask
-                        : Task.WhenAll(flushTask, writeTask)
+                  ? writeTask
+                  : (writeTask.Status == TaskStatus.RanToCompletion)
+                      ? flushTask
+                      : Task.WhenAll(flushTask, writeTask)
             );
         }
 

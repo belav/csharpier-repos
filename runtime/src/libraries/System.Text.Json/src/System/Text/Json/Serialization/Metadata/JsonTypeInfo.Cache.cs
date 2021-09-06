@@ -645,8 +645,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             PropertyCache = new Dictionary<string, JsonPropertyInfo>(
                 Options.PropertyNameCaseInsensitive
-                    ? StringComparer.OrdinalIgnoreCase
-                    : StringComparer.Ordinal
+                  ? StringComparer.OrdinalIgnoreCase
+                  : StringComparer.Ordinal
             );
 
             for (int i = 0; i < PropertyCacheArray!.Length; i++)

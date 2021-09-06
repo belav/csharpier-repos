@@ -1094,8 +1094,8 @@ namespace System.Threading.Tasks.Dataflow
                     poppedInitially = postponed.PopRange(postponedTemp, 0, _batchSize);
                     Debug.Assert(
                         allowFewerThanBatchSize
-                            ? poppedInitially > 0
-                            : poppedInitially == _batchSize,
+                          ? poppedInitially > 0
+                          : poppedInitially == _batchSize,
                         "We received fewer than we expected based on the previous check."
                     );
                 } // Release the lock.  We must not hold it while calling Reserve/Consume/Release.

@@ -1786,8 +1786,8 @@ namespace System
                         _string,
                         obj._string,
                         IsUncOrDosPath
-                            ? StringComparison.OrdinalIgnoreCase
-                            : StringComparison.Ordinal
+                          ? StringComparison.OrdinalIgnoreCase
+                          : StringComparison.Ordinal
                     )
                 ) {
                     return true;
@@ -2974,8 +2974,8 @@ namespace System
                                 '/',
                                 '\\',
                                 InFact(Flags.UserEscaped)
-                                    ? UnescapeMode.Unescape
-                                    : UnescapeMode.EscapeUnescape,
+                                  ? UnescapeMode.Unescape
+                                  : UnescapeMode.EscapeUnescape,
                                 _syntax,
                                 isQuery: false
                             );
@@ -5149,8 +5149,8 @@ namespace System
                                 '.',
                                 '/',
                                 _syntax.InFact(UriSyntaxFlags.ConvertPathSlashes)
-                                    ? '\\'
-                                    : c_DummyChar
+                                  ? '\\'
+                                  : c_DummyChar
                             );
                             dest.Length = end;
                         }
@@ -5242,8 +5242,8 @@ namespace System
                                 '.',
                                 '/',
                                 _syntax.InFact(UriSyntaxFlags.ConvertPathSlashes)
-                                    ? '\\'
-                                    : c_DummyChar
+                                  ? '\\'
+                                  : c_DummyChar
                             );
                             dest.Length = end;
                         }

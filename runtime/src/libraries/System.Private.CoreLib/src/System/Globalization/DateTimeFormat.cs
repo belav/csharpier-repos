@@ -686,8 +686,8 @@ namespace System
                                         dtfi.InternalGetMonthName(
                                             month,
                                             IsUseGenitiveForm(format, i, tokenLen, 'd')
-                                                ? MonthNameStyles.Genitive
-                                                : MonthNameStyles.Regular,
+                                              ? MonthNameStyles.Genitive
+                                              : MonthNameStyles.Regular,
                                             tokenLen == 3
                                         )
                                     );

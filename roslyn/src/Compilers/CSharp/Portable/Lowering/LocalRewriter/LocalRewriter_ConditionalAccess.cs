@@ -171,12 +171,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         node.Syntax,
                         loweredReceiver,
                         receiverType.IsNullableType()
-                            ? UnsafeGetNullableMethod(
-                                  node.Syntax,
-                                  loweredReceiver.Type,
-                                  SpecialMember.System_Nullable_T_get_HasValue
-                              )
-                            : null,
+                          ? UnsafeGetNullableMethod(
+                                node.Syntax,
+                                loweredReceiver.Type,
+                                SpecialMember.System_Nullable_T_get_HasValue
+                            )
+                          : null,
                         loweredAccessExpression,
                         null,
                         currentConditionalAccessID,

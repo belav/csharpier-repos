@@ -1188,8 +1188,8 @@ namespace System.Xml.Tests
                     || IsXmlValidatingReader()
                     || IsXPathNavigatorReader()
                 )
-                    ? "123"
-                    : "3",
+                  ? "123"
+                  : "3",
                 "value"
             );
             DataReader.Close();

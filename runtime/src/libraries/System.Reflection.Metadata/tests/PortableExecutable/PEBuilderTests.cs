@@ -76,8 +76,8 @@ namespace System.Reflection.PortableExecutable.Tests
         ) {
             var peHeaderBuilder = new PEHeaderBuilder(
                 imageCharacteristics: entryPointHandle.IsNil
-                    ? Characteristics.Dll
-                    : Characteristics.ExecutableImage,
+                  ? Characteristics.Dll
+                  : Characteristics.ExecutableImage,
                 machine: machine
             );
 

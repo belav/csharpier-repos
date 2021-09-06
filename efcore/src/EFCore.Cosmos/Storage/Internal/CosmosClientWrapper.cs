@@ -686,8 +686,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return await container.ReadItemStreamAsync(
                     resourceId,
                     string.IsNullOrEmpty(partitionKey)
-                        ? PartitionKey.None
-                        : new PartitionKey(partitionKey),
+                      ? PartitionKey.None
+                      : new PartitionKey(partitionKey),
                     cancellationToken: cancellationToken
                 )
                 .ConfigureAwait(false);

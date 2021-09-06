@@ -73,14 +73,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         documentName: documentName,
                         sourceSpan: text.Lines.GetLinePositionSpan(span).ToSourceSpan(),
                         flags: (flags != null)
-                            ? flags[index]
-                            : (
-                                  (
-                                      id == 0
-                                          ? ActiveStatementFlags.IsLeafFrame
-                                          : ActiveStatementFlags.IsNonLeafFrame
-                                  ) | ActiveStatementFlags.MethodUpToDate
-                              )
+                          ? flags[index]
+                          : (
+                                (
+                                    id == 0
+                                        ? ActiveStatementFlags.IsLeafFrame
+                                        : ActiveStatementFlags.IsNonLeafFrame
+                                ) | ActiveStatementFlags.MethodUpToDate
+                            )
                     );
 
                     index++;

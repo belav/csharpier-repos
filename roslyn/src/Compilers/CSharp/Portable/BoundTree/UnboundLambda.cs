@@ -207,8 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 returnType,
                 parameterTypes,
                 parameterRefKinds.IsDefault
-                    ? Enumerable.Repeat(RefKind.None, parameterTypes.Length).ToImmutableArray()
-                    : parameterRefKinds,
+                  ? Enumerable.Repeat(RefKind.None, parameterTypes.Length).ToImmutableArray()
+                  : parameterRefKinds,
                 refKind
             );
 
@@ -310,8 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bestType,
                 useSiteInfo.Diagnostics.AsImmutableOrEmpty(),
                 useSiteInfo.AccumulatesDependencies
-                    ? useSiteInfo.Dependencies.AsImmutableOrEmpty()
-                    : ImmutableArray<AssemblySymbol>.Empty
+                  ? useSiteInfo.Dependencies.AsImmutableOrEmpty()
+                  : ImmutableArray<AssemblySymbol>.Empty
             );
         }
 

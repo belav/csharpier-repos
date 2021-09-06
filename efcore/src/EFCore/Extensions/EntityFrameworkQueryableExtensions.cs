@@ -2370,21 +2370,21 @@ namespace Microsoft.EntityFrameworkCore
 
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                          Expression.Call(
-                              instance: null,
-                              method: IncludeMethodInfo.MakeGenericMethod(
-                                  typeof(TEntity),
-                                  typeof(TProperty)
-                              ),
-                              arguments: new[]
-                              {
-                                  source.Expression,
-                                  Expression.Quote(navigationPropertyPath)
-                              }
-                          )
-                      )
-                    : source
+                  ? source.Provider.CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: IncludeMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
             );
         }
 
@@ -2399,21 +2399,21 @@ namespace Microsoft.EntityFrameworkCore
         {
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                          Expression.Call(
-                              instance: null,
-                              method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
-                                  typeof(TEntity),
-                                  typeof(TProperty)
-                              ),
-                              arguments: new[]
-                              {
-                                  source.Expression,
-                                  Expression.Quote(navigationPropertyPath)
-                              }
-                          )
-                      )
-                    : source
+                  ? source.Provider.CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
             );
         }
 
@@ -2493,22 +2493,22 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                          Expression.Call(
-                              instance: null,
-                              method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
-                                  typeof(TEntity),
-                                  typeof(TPreviousProperty),
-                                  typeof(TProperty)
-                              ),
-                              arguments: new[]
-                              {
-                                  source.Expression,
-                                  Expression.Quote(navigationPropertyPath)
-                              }
-                          )
-                      )
-                    : source
+                  ? source.Provider.CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TPreviousProperty),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
             );
 
         /// <summary>
@@ -2559,22 +2559,22 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                          Expression.Call(
-                              instance: null,
-                              method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
-                                  typeof(TEntity),
-                                  typeof(TPreviousProperty),
-                                  typeof(TProperty)
-                              ),
-                              arguments: new[]
-                              {
-                                  source.Expression,
-                                  Expression.Quote(navigationPropertyPath)
-                              }
-                          )
-                      )
-                    : source
+                  ? source.Provider.CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TPreviousProperty),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
             );
 
         private sealed class IncludableQueryable<TEntity, TProperty>
@@ -3220,8 +3220,8 @@ namespace Microsoft.EntityFrameworkCore
                         instance: null,
                         method: operatorMethodInfo,
                         arguments: expression == null
-                            ? new[] { source.Expression }
-                            : new[] { source.Expression, expression }
+                          ? new[] { source.Expression }
+                          : new[] { source.Expression, expression }
                     ),
                     cancellationToken
                 );

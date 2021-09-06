@@ -408,8 +408,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // not to the internal ROWID.
                 using var resettableStatement = connection.GetResettableStatement(
                     database == Database.WriteCache
-                        ? _select_rowid_from_writecache_table_where_0
-                        : _select_rowid_from_main_table_where_0
+                      ? _select_rowid_from_writecache_table_where_0
+                      : _select_rowid_from_main_table_where_0
                 );
 
                 var statement = resettableStatement.Statement;

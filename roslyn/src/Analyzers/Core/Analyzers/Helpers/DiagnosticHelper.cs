@@ -291,9 +291,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 descriptor.DefaultSeverity,
                 descriptor.IsEnabledByDefault,
                 warningLevel: effectiveSeverity.WithDefaultSeverity(descriptor.DefaultSeverity)
-                == ReportDiagnostic.Error
-                    ? 0
-                    : 1,
+                    == ReportDiagnostic.Error
+                  ? 0
+                  : 1,
                 effectiveSeverity == ReportDiagnostic.Suppress,
                 descriptor.Title,
                 descriptor.Description,

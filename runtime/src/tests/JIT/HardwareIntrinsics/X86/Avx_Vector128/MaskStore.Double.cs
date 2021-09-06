@@ -492,8 +492,8 @@ namespace JIT.HardwareIntrinsics.X86
                 BitConverter.DoubleToInt64Bits(result[0])
                 != BitConverter.DoubleToInt64Bits(
                     (BitConverter.DoubleToInt64Bits(left[0]) < 0)
-                        ? right[0]
-                        : BitConverter.DoubleToInt64Bits(result[0])
+                      ? right[0]
+                      : BitConverter.DoubleToInt64Bits(result[0])
                 )
             ) {
                 succeeded = false;
@@ -506,8 +506,8 @@ namespace JIT.HardwareIntrinsics.X86
                         BitConverter.DoubleToInt64Bits(result[i])
                         != BitConverter.DoubleToInt64Bits(
                             (BitConverter.DoubleToInt64Bits(left[i]) < 0)
-                                ? right[i]
-                                : BitConverter.DoubleToInt64Bits(result[i])
+                              ? right[i]
+                              : BitConverter.DoubleToInt64Bits(result[i])
                         )
                     ) {
                         succeeded = false;

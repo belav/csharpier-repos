@@ -268,8 +268,8 @@ namespace System.Text.Unicode.Tests
                     replaceInvalidSequences: false,
                     isFinalChunk: false,
                     expectedOperationStatus: (i == enumeratedScalars.Length - 1)
-                        ? OperationStatus.Done
-                        : OperationStatus.DestinationTooSmall,
+                      ? OperationStatus.Done
+                      : OperationStatus.DestinationTooSmall,
                     expectedNumCharsRead: expectedNumCharsConsumed,
                     expectedUtf8Transcoding: concatenatedUtf8
                 );
@@ -397,11 +397,11 @@ namespace System.Text.Unicode.Tests
                 replaceInvalidSequences: true,
                 isFinalChunk: false,
                 expectedOperationStatus: (isFinalCharHighSurrogate)
-                    ? OperationStatus.NeedMoreData
-                    : OperationStatus.Done,
+                  ? OperationStatus.NeedMoreData
+                  : OperationStatus.Done,
                 expectedNumCharsRead: (isFinalCharHighSurrogate)
-                    ? (utf16Input.Length - 1)
-                    : utf16Input.Length,
+                  ? (utf16Input.Length - 1)
+                  : utf16Input.Length,
                 expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex)
             );
 
@@ -721,8 +721,8 @@ namespace System.Text.Unicode.Tests
                 replaceInvalidSequences: false,
                 isFinalChunk: false,
                 expectedOperationStatus: (utf8Input.Length == 0)
-                    ? OperationStatus.Done
-                    : OperationStatus.DestinationTooSmall,
+                  ? OperationStatus.Done
+                  : OperationStatus.DestinationTooSmall,
                 expectedNumBytesRead: 0,
                 expectedUtf16Transcoding: ReadOnlySpan<char>.Empty
             );
@@ -760,8 +760,8 @@ namespace System.Text.Unicode.Tests
                     replaceInvalidSequences: false,
                     isFinalChunk: false,
                     expectedOperationStatus: (i == enumeratedScalars.Length - 1)
-                        ? OperationStatus.Done
-                        : OperationStatus.DestinationTooSmall,
+                      ? OperationStatus.Done
+                      : OperationStatus.DestinationTooSmall,
                     expectedNumBytesRead: expectedNumBytesConsumed,
                     expectedUtf16Transcoding: concatenatedUtf16
                 );

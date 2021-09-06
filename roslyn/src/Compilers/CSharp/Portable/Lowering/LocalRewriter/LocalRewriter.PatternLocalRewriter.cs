@@ -318,8 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             d.Syntax,
                             input,
                             input.Type.IsNullableType()
-                                ? BinaryOperatorKind.NullableNullNotEqual
-                                : BinaryOperatorKind.NotEqual
+                              ? BinaryOperatorKind.NullableNullNotEqual
+                              : BinaryOperatorKind.NotEqual
                         );
 
                     case BoundDagTypeTest d:
@@ -331,8 +331,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             d.Syntax,
                             input,
                             input.Type.IsNullableType()
-                                ? BinaryOperatorKind.NullableNullEqual
-                                : BinaryOperatorKind.Equal
+                              ? BinaryOperatorKind.NullableNullEqual
+                              : BinaryOperatorKind.Equal
                         );
 
                     case BoundDagValueTest d:

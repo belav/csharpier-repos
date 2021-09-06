@@ -869,11 +869,11 @@ namespace Microsoft.Cci
             documentHandle = _debugMetadataOpt.AddDocument(
                 name: _debugMetadataOpt.GetOrAddDocumentName(document.Location),
                 hashAlgorithm: info.Checksum.IsDefault
-                    ? default(GuidHandle)
-                    : _debugMetadataOpt.GetOrAddGuid(info.ChecksumAlgorithmId),
+                  ? default(GuidHandle)
+                  : _debugMetadataOpt.GetOrAddGuid(info.ChecksumAlgorithmId),
                 hash: info.Checksum.IsDefault
-                    ? default(BlobHandle)
-                    : _debugMetadataOpt.GetOrAddBlob(info.Checksum),
+                  ? default(BlobHandle)
+                  : _debugMetadataOpt.GetOrAddBlob(info.Checksum),
                 language: _debugMetadataOpt.GetOrAddGuid(document.Language)
             );
 

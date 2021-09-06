@@ -131,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                     var diagnosticLogger = scopeServiceProvider.GetRequiredService(
                         isExtensionMethod
-                            ? typeof(IDiagnosticsLogger<>).MakeGenericType(category)
-                            : loggerMethod.DeclaringType
+                          ? typeof(IDiagnosticsLogger<>).MakeGenericType(category)
+                          : loggerMethod.DeclaringType
                     );
 
                     var args = new object[loggerParameters.Length];

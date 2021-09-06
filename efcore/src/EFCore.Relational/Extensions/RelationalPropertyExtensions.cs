@@ -289,8 +289,8 @@ namespace Microsoft.EntityFrameworkCore
                 .SetColumnName(
                     name,
                     fromDataAnnotation
-                        ? ConfigurationSource.DataAnnotation
-                        : ConfigurationSource.Convention
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
                 );
 
         /// <summary>

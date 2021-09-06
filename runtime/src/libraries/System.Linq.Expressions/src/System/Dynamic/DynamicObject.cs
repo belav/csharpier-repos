@@ -725,11 +725,11 @@ namespace System.Dynamic
                         new TrueReadOnlyCollection<ParameterExpression>(result, callArgs),
                         new TrueReadOnlyCollection<Expression>(
                             method != DynamicObject_TryBinaryOperation
-                                ? Expression.Assign(
-                                      callArgs,
-                                      Expression.NewArrayInit(typeof(object), callArgsValue)
-                                  )
-                                : Expression.Assign(callArgs, callArgsValue[0]),
+                              ? Expression.Assign(
+                                    callArgs,
+                                    Expression.NewArrayInit(typeof(object), callArgsValue)
+                                )
+                              : Expression.Assign(callArgs, callArgsValue[0]),
                             Expression.Condition(
                                 Expression.Call(
                                     GetLimitedSelf(),
@@ -738,8 +738,8 @@ namespace System.Dynamic
                                 ),
                                 Expression.Block(
                                     method != DynamicObject_TryBinaryOperation
-                                        ? ReferenceArgAssign(callArgs, args)
-                                        : AstUtils.Empty,
+                                      ? ReferenceArgAssign(callArgs, args)
+                                      : AstUtils.Empty,
                                     resultMO.Expression
                                 ),
                                 fallbackResult.Expression,

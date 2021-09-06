@@ -141,8 +141,8 @@ namespace Microsoft.Win32
             return CreateSubKey(
                 subkey,
                 writable
-                    ? RegistryKeyPermissionCheck.ReadWriteSubTree
-                    : RegistryKeyPermissionCheck.ReadSubTree,
+                  ? RegistryKeyPermissionCheck.ReadWriteSubTree
+                  : RegistryKeyPermissionCheck.ReadSubTree,
                 RegistryOptions.None
             );
         }
@@ -152,8 +152,8 @@ namespace Microsoft.Win32
             return CreateSubKey(
                 subkey,
                 writable
-                    ? RegistryKeyPermissionCheck.ReadWriteSubTree
-                    : RegistryKeyPermissionCheck.ReadSubTree,
+                  ? RegistryKeyPermissionCheck.ReadWriteSubTree
+                  : RegistryKeyPermissionCheck.ReadSubTree,
                 options
             );
         }

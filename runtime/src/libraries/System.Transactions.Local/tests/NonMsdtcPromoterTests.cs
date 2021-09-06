@@ -232,8 +232,8 @@ namespace System.Transactions.Tests
 
             clone = tx.DependentClone(
                 blocking
-                    ? DependentCloneOption.BlockCommitUntilComplete
-                    : DependentCloneOption.RollbackIfNotComplete
+                  ? DependentCloneOption.BlockCommitUntilComplete
+                  : DependentCloneOption.RollbackIfNotComplete
             );
 
             return clone;

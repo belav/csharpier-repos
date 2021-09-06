@@ -599,8 +599,8 @@ namespace System.Collections.Specialized
                 return new OrderedDictionaryEnumerator(
                     _objects,
                     _isKeys == true
-                        ? OrderedDictionaryEnumerator.Keys
-                        : OrderedDictionaryEnumerator.Values
+                      ? OrderedDictionaryEnumerator.Keys
+                      : OrderedDictionaryEnumerator.Values
                 );
             }
         }

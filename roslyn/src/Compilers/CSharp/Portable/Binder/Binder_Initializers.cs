@@ -216,8 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new LocalScopeBinder(binder).WithAdditionalFlagsAndContainingMemberOrLambda(
                 suppressBinderFlagsFieldInitializer
-                    ? BinderFlags.None
-                    : BinderFlags.FieldInitializer,
+                  ? BinderFlags.None
+                  : BinderFlags.FieldInitializer,
                 fieldSymbol
             );
         }

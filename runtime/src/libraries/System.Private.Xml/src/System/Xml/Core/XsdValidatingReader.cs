@@ -2441,8 +2441,8 @@ namespace System.Xml
                             Debug.Assert(_nsManager != null);
                             _nsManager.AddNamespace(
                                 _coreReader.Prefix.Length == 0
-                                    ? string.Empty
-                                    : _coreReader.LocalName,
+                                  ? string.Empty
+                                  : _coreReader.LocalName,
                                 _coreReader.Value
                             );
                         }

@@ -70,8 +70,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
             Combine(
                 GetContextOptions(browser.ToString()),
                 ContextOptions.TryGetValue(contextName, out var context)
-                    ? context
-                    : throw new InvalidOperationException("Invalid context name")
+                  ? context
+                  : throw new InvalidOperationException("Invalid context name")
             );
 
         public BrowserContextOptions GetContextOptions(
@@ -133,8 +133,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
                     browserKind,
                     LoadBrowserLaunchOptions(browser),
                     defaultContextOptionsSection.Exists()
-                        ? LoadContextOptions(defaultContextOptionsSection)
-                        : null
+                      ? LoadContextOptions(defaultContextOptionsSection)
+                      : null
                 );
 
                 BrowserOptions.Add(browserName, browserOptions);

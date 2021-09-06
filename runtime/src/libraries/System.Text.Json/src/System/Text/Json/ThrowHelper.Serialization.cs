@@ -362,8 +362,8 @@ namespace System.Text.Json
                         SR.NumberHandlingConverterMustBeBuiltIn,
                         jsonPropertyInfo.ConverterBase.GetType(),
                         jsonPropertyInfo.IsForTypeInfo
-                            ? jsonPropertyInfo.DeclaredPropertyType
-                            : memberInfo!.DeclaringType
+                          ? jsonPropertyInfo.DeclaredPropertyType
+                          : memberInfo!.DeclaringType
                     )
                 );
             }

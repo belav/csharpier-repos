@@ -382,11 +382,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         label,
                         pattern,
                         matchLabelSyntax.WhenClause != null
-                            ? sectionBinder.BindBooleanExpression(
-                                  matchLabelSyntax.WhenClause.Condition,
-                                  diagnostics
-                              )
-                            : null,
+                          ? sectionBinder.BindBooleanExpression(
+                                matchLabelSyntax.WhenClause.Condition,
+                                diagnostics
+                            )
+                          : null,
                         node.HasErrors
                     );
                 }

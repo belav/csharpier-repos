@@ -82,8 +82,8 @@ namespace Newtonsoft.Json.Serialization
 
                     PopulateList(
                         (arrayContract.ShouldCreateWrapper)
-                            ? arrayContract.CreateWrapper(target)
-                            : (IList)target,
+                          ? arrayContract.CreateWrapper(target)
+                          : (IList)target,
                         reader,
                         arrayContract,
                         null,
@@ -125,8 +125,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonDictionaryContract dictionaryContract = (JsonDictionaryContract)contract;
                     PopulateDictionary(
                         (dictionaryContract.ShouldCreateWrapper)
-                            ? dictionaryContract.CreateWrapper(target)
-                            : (IDictionary)target,
+                          ? dictionaryContract.CreateWrapper(target)
+                          : (IDictionary)target,
                         reader,
                         dictionaryContract,
                         null,
@@ -804,9 +804,9 @@ namespace Newtonsoft.Json.Serialization
                     {
                         targetDictionary = PopulateDictionary(
                             dictionaryContract.ShouldCreateWrapper
-                            || !(existingValue is IDictionary)
-                                ? dictionaryContract.CreateWrapper(existingValue)
-                                : (IDictionary)existingValue,
+                                || !(existingValue is IDictionary)
+                              ? dictionaryContract.CreateWrapper(existingValue)
+                              : (IDictionary)existingValue,
                             reader,
                             dictionaryContract,
                             member,
@@ -1408,8 +1408,8 @@ namespace Newtonsoft.Json.Serialization
 
                 value = PopulateList(
                     (arrayContract.ShouldCreateWrapper || !(existingValue is IList list))
-                        ? arrayContract.CreateWrapper(existingValue)
-                        : list,
+                      ? arrayContract.CreateWrapper(existingValue)
+                      : list,
                     reader,
                     arrayContract,
                     member,

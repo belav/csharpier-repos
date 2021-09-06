@@ -178,8 +178,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 name,
                 parameters: method.Parameters.Select(p => ParameterDeclaration(p)),
                 returnType: method.ReturnType.IsSystemVoid()
-                    ? null
-                    : TypeExpression(method.ReturnType),
+                  ? null
+                  : TypeExpression(method.ReturnType),
                 accessibility: method.DeclaredAccessibility,
                 modifiers: DeclarationModifiers.From(method),
                 statements: statements
@@ -231,8 +231,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 GetOperatorKind(method),
                 parameters: method.Parameters.Select(p => ParameterDeclaration(p)),
                 returnType: method.ReturnType.IsSystemVoid()
-                    ? null
-                    : TypeExpression(method.ReturnType),
+                  ? null
+                  : TypeExpression(method.ReturnType),
                 accessibility: method.DeclaredAccessibility,
                 modifiers: DeclarationModifiers.From(method),
                 statements: statements
@@ -481,8 +481,8 @@ namespace Microsoft.CodeAnalysis.Editing
         ) {
             return ConstructorDeclaration(
                 constructorMethod.ContainingType != null
-                    ? constructorMethod.ContainingType.Name
-                    : "New",
+                  ? constructorMethod.ContainingType.Name
+                  : "New",
                 constructorMethod.Parameters.Select(p => ParameterDeclaration(p)),
                 constructorMethod.DeclaredAccessibility,
                 DeclarationModifiers.From(constructorMethod),
@@ -690,8 +690,8 @@ namespace Microsoft.CodeAnalysis.Editing
                             declaration = EnumDeclaration(
                                 type.Name,
                                 type.EnumUnderlyingType?.SpecialType == SpecialType.System_Int32
-                                    ? null
-                                    : TypeExpression(type.EnumUnderlyingType.SpecialType),
+                                  ? null
+                                  : TypeExpression(type.EnumUnderlyingType.SpecialType),
                                 accessibility: type.DeclaredAccessibility,
                                 members: type.GetMembers()
                                     .Where(s => s.Kind == SymbolKind.Field)

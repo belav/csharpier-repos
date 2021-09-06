@@ -763,8 +763,8 @@ namespace Newtonsoft.Json
                 _writeBuffer,
                 pos,
                 (DateFormatHandling == DateFormatHandling.IsoDateFormat)
-                    ? value.DateTime
-                    : value.UtcDateTime,
+                  ? value.DateTime
+                  : value.UtcDateTime,
                 value.Offset,
                 DateTimeKind.Local,
                 DateFormatHandling

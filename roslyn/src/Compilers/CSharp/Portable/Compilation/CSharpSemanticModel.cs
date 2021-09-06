@@ -1109,8 +1109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argumentList.OpenParenToken,
                     argumentList.CloseParenToken
                 )
-                    ? position
-                    : argumentList.OpenParenToken.SpanStart
+                  ? position
+                  : argumentList.OpenParenToken.SpanStart
             );
             if (binder != null)
             {

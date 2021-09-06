@@ -1389,10 +1389,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node,
                     methodGroup.Name,
                     invokedAsExtensionMethod
-                    && analyzedArguments.Arguments.Count > 0
-                    && (object)methodGroup.Receiver == (object)analyzedArguments.Arguments[0]
-                        ? null
-                        : methodGroup.Receiver,
+                        && analyzedArguments.Arguments.Count > 0
+                        && (object)methodGroup.Receiver == (object)analyzedArguments.Arguments[0]
+                      ? null
+                      : methodGroup.Receiver,
                     GetOriginalMethods(result),
                     methodGroup.ResultKind,
                     methodGroup.TypeArguments.ToImmutable(),
@@ -1598,8 +1598,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     WarnOnAccessOfOffDefault(
                         node.Kind() == SyntaxKind.InvocationExpression
-                            ? ((InvocationExpressionSyntax)node).Expression
-                            : node,
+                          ? ((InvocationExpressionSyntax)node).Expression
+                          : node,
                         receiver,
                         diagnostics
                     );
@@ -2040,8 +2040,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         conversion,
                         isCast,
                         isCast
-                            ? new ConversionGroup(conversion, parameter.TypeWithAnnotations)
-                            : null,
+                          ? new ConversionGroup(conversion, parameter.TypeWithAnnotations)
+                          : null,
                         parameterType,
                         diagnostics
                     );
@@ -2208,8 +2208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     constructedMethods.Add(
                         m.ConstructedFrom == m && m.Arity == typeArgumentsWithAnnotations.Length
-                            ? m.Construct(typeArgumentsWithAnnotations)
-                            : m
+                          ? m.Construct(typeArgumentsWithAnnotations)
+                          : m
                     );
                 }
 

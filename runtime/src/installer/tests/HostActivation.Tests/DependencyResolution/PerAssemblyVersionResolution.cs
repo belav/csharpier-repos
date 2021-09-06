@@ -165,8 +165,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             string expectedTestAssemblyPath = Path.Combine(
                 appWins
-                    ? app.Location
-                    : SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
+                  ? app.Location
+                  : SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
                 testAssemblyName + ".dll"
             );
 

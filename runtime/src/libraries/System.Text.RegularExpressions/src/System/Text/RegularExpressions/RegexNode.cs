@@ -1086,15 +1086,15 @@ namespace System.Text.RegularExpressions
                 var concat = new RegexNode(Concatenate, Options); // use same options as the Alternate
                 concat.AddChild(
                     startingSpan.Length == 1
-                        ? // use same options as the branches
-                          new RegexNode(One, startingNodeOptions) { Ch = startingSpan[0] }
-                        : new RegexNode(Multi, startingNodeOptions)
-                          {
-                              Str =
-                                  originalStartingString?.Length == startingSpan.Length
-                                      ? originalStartingString
-                                      : startingSpan.ToString()
-                          }
+                      ? // use same options as the branches
+                        new RegexNode(One, startingNodeOptions) { Ch = startingSpan[0] }
+                      : new RegexNode(Multi, startingNodeOptions)
+                        {
+                            Str =
+                                originalStartingString?.Length == startingSpan.Length
+                                    ? originalStartingString
+                                    : startingSpan.ToString()
+                        }
                 );
                 concat.AddChild(this); // this will re-reduce the node, allowing for newly exposed possible optimizations in what came after the prefix
                 return concat;
@@ -2015,12 +2015,12 @@ namespace System.Text.RegularExpressions
                 case Lazyloop:
                     sb.Append(
                         (M == 0 && N == int.MaxValue)
-                            ? "*"
-                            : (M == 0 && N == 1)
-                                ? "?"
-                                : (M == 1 && N == int.MaxValue)
-                                    ? "+"
-                                    : (N == int.MaxValue) ? $"{{{M}, *}}" : $"{{{M}, {N}}}"
+                          ? "*"
+                          : (M == 0 && N == 1)
+                              ? "?"
+                              : (M == 1 && N == int.MaxValue)
+                                  ? "+"
+                                  : (N == int.MaxValue) ? $"{{{M}, *}}" : $"{{{M}, {N}}}"
                     );
                     break;
             }

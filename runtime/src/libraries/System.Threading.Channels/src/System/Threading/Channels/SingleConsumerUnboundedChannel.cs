@@ -45,8 +45,8 @@ namespace System.Threading.Channels
             _runContinuationsAsynchronously = runContinuationsAsynchronously;
             _completion = new TaskCompletionSource(
                 runContinuationsAsynchronously
-                    ? TaskCreationOptions.RunContinuationsAsynchronously
-                    : TaskCreationOptions.None
+                  ? TaskCreationOptions.RunContinuationsAsynchronously
+                  : TaskCreationOptions.None
             );
 
             Reader = new UnboundedChannelReader(this);

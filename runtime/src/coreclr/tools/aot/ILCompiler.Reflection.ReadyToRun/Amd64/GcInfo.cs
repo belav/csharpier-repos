@@ -560,8 +560,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                         uint readSlots = NativeReader.DecodeVarLengthUnsigned(
                             image,
                             skip
-                                ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
-                                : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
+                              ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
+                              : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
                             ref bitOffset
                         );
                         skip = !skip;
@@ -571,8 +571,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                                 NativeReader.DecodeVarLengthUnsigned(
                                     image,
                                     skip
-                                        ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
-                                        : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
+                                      ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
+                                      : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
                                     ref bitOffset
                                 ) + 1;
                             if (report)
@@ -773,8 +773,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                 uint readSlots = NativeReader.DecodeVarLengthUnsigned(
                     image,
                     fSkip
-                        ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
-                        : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
+                      ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
+                      : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
                     ref bitOffset
                 );
                 fSkip = !fSkip;
@@ -784,8 +784,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                         NativeReader.DecodeVarLengthUnsigned(
                             image,
                             fSkip
-                                ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
-                                : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
+                              ? _gcInfoTypes.LIVESTATE_RLE_SKIP_ENCBASE
+                              : _gcInfoTypes.LIVESTATE_RLE_RUN_ENCBASE,
                             ref bitOffset
                         ) + 1;
                     if (fReport)

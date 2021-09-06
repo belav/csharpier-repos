@@ -1227,12 +1227,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocationSyntax.Location,
                     unwrappedCollectionExprType,
                     isAsync
-                        ? this.Compilation.GetWellKnownType(
-                              WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                          )
-                        : this.Compilation.GetSpecialType(
-                              SpecialType.System_Collections_Generic_IEnumerable_T
-                          )
+                      ? this.Compilation.GetWellKnownType(
+                            WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                        )
+                      : this.Compilation.GetSpecialType(
+                            SpecialType.System_Collections_Generic_IEnumerable_T
+                        )
                 );
                 return EnumeratorResult.FailedAndReported;
             }
@@ -1451,8 +1451,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || this.Conversions.ClassifyImplicitConversionFromType(
                     enumeratorType,
                     isAsync
-                        ? this.Compilation.GetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                        : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
+                      ? this.Compilation.GetWellKnownType(WellKnownType.System_IAsyncDisposable)
+                      : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
                     ref useSiteInfo
                 ).IsImplicit
             ) {
@@ -1524,8 +1524,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 builder.ElementTypeWithAnnotations = TypeWithAnnotations.Create(
                     ((_syntax as ForEachStatementSyntax)?.Type.IsVar == true)
-                        ? (TypeSymbol)DynamicTypeSymbol.Instance
-                        : GetSpecialType(SpecialType.System_Object, diagnostics, _syntax)
+                      ? (TypeSymbol)DynamicTypeSymbol.Instance
+                      : GetSpecialType(SpecialType.System_Object, diagnostics, _syntax)
                 );
             }
             else

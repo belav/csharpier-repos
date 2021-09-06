@@ -437,8 +437,8 @@ namespace System.Net.Http
                         Properties.Resources.HttpMessageContentAlreadyRead,
                         FormattingUtilities.HttpContentType.Name,
                         HttpRequestMessage != null
-                            ? FormattingUtilities.HttpRequestMessageType.Name
-                            : FormattingUtilities.HttpResponseMessageType.Name
+                          ? FormattingUtilities.HttpRequestMessageType.Name
+                          : FormattingUtilities.HttpResponseMessageType.Name
                     );
                 }
             }

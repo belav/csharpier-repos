@@ -53,8 +53,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .UnsafeOnCompleted(() => { });
             Assert.Equal(
                 continueOnCapturedContext
-                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                    : ValueTaskSourceOnCompletedFlags.None,
+                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                  : ValueTaskSourceOnCompletedFlags.None,
                 d.Flags
             );
         }

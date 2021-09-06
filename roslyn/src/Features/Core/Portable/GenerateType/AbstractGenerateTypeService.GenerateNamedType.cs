@@ -343,8 +343,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                                 parameters: c.Parameters,
                                 statements: default,
                                 baseConstructorArguments: c.Parameters.Length == 0
-                                    ? default
-                                    : factory.CreateArguments(c.Parameters)
+                                  ? default
+                                  : factory.CreateArguments(c.Parameters)
                             )
                     );
                 members.AddRange(constructors);

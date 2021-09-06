@@ -89,8 +89,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     tagNameWithoutPrefix,
                     rule.TagName,
                     rule.CaseSensitive
-                        ? StringComparison.Ordinal
-                        : StringComparison.OrdinalIgnoreCase
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
                 )
             ) {
                 return false;
@@ -114,8 +114,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     parentTagNameWithoutPrefix,
                     rule.ParentTag,
                     rule.CaseSensitive
-                        ? StringComparison.Ordinal
-                        : StringComparison.OrdinalIgnoreCase
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
                 )
             ) {
                 return false;
@@ -179,8 +179,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 && name.StartsWith(
                     descriptor.IndexerNamePrefix,
                     descriptor.CaseSensitive
-                        ? StringComparison.Ordinal
-                        : StringComparison.OrdinalIgnoreCase
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
                 );
         }
 
@@ -203,8 +203,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     descriptor.Name,
                     parameterName,
                     descriptor.CaseSensitive
-                        ? StringComparison.Ordinal
-                        : StringComparison.OrdinalIgnoreCase
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
                 );
                 return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer)
                     && matchesParameter;
@@ -290,8 +290,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 descriptor.Name,
                 name,
                 descriptor.CaseSensitive
-                    ? StringComparison.Ordinal
-                    : StringComparison.OrdinalIgnoreCase
+                  ? StringComparison.Ordinal
+                  : StringComparison.OrdinalIgnoreCase
             );
         }
 
@@ -310,8 +310,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     descriptor.Name,
                     attributeName,
                     descriptor.CaseSensitive
-                        ? StringComparison.Ordinal
-                        : StringComparison.OrdinalIgnoreCase
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
                 );
             }
             else if (
@@ -324,8 +324,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     && attributeName.StartsWith(
                         descriptor.Name,
                         descriptor.CaseSensitive
-                            ? StringComparison.Ordinal
-                            : StringComparison.OrdinalIgnoreCase
+                          ? StringComparison.Ordinal
+                          : StringComparison.OrdinalIgnoreCase
                     );
             }
             else

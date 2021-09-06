@@ -176,13 +176,13 @@ namespace Microsoft.EntityFrameworkCore.Design
             ) {
                 methodCallCodeFragments.Add(
                     defaultValueSql.Length == 0
-                        ? new MethodCallCodeFragment(
-                              nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql)
-                          )
-                        : new MethodCallCodeFragment(
-                              nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql),
-                              defaultValueSql
-                          )
+                      ? new MethodCallCodeFragment(
+                            nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql)
+                        )
+                      : new MethodCallCodeFragment(
+                            nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql),
+                            defaultValueSql
+                        )
                 );
             }
 
@@ -195,23 +195,23 @@ namespace Microsoft.EntityFrameworkCore.Design
             ) {
                 methodCallCodeFragments.Add(
                     computedColumnSql.Length == 0
-                        ? new MethodCallCodeFragment(
-                              nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)
-                          )
-                        : TryGetAndRemove(
-                              annotations,
-                              RelationalAnnotationNames.IsStored,
-                              out bool isStored
-                          )
-                            ? new MethodCallCodeFragment(
-                                  nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
-                                  computedColumnSql,
-                                  isStored
-                              )
-                            : new MethodCallCodeFragment(
-                                  nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
-                                  computedColumnSql
-                              )
+                      ? new MethodCallCodeFragment(
+                            nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)
+                        )
+                      : TryGetAndRemove(
+                            annotations,
+                            RelationalAnnotationNames.IsStored,
+                            out bool isStored
+                        )
+                          ? new MethodCallCodeFragment(
+                                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                                computedColumnSql,
+                                isStored
+                            )
+                          : new MethodCallCodeFragment(
+                                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                                computedColumnSql
+                            )
                 );
             }
 
@@ -224,13 +224,11 @@ namespace Microsoft.EntityFrameworkCore.Design
             ) {
                 methodCallCodeFragments.Add(
                     isFixedLength
-                        ? new MethodCallCodeFragment(
-                              nameof(RelationalAnnotationNames.IsFixedLength)
-                          )
-                        : new MethodCallCodeFragment(
-                              nameof(RelationalAnnotationNames.IsFixedLength),
-                              isFixedLength
-                          )
+                      ? new MethodCallCodeFragment(nameof(RelationalAnnotationNames.IsFixedLength))
+                      : new MethodCallCodeFragment(
+                            nameof(RelationalAnnotationNames.IsFixedLength),
+                            isFixedLength
+                        )
                 );
             }
 
@@ -379,8 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                 attributeCodeFragments.Add(
                     new AttributeCodeFragment(
                         property.ClrType == typeof(string)
-                            ? typeof(StringLengthAttribute)
-                            : typeof(MaxLengthAttribute),
+                          ? typeof(StringLengthAttribute)
+                          : typeof(MaxLengthAttribute),
                         maxLength
                     )
                 );

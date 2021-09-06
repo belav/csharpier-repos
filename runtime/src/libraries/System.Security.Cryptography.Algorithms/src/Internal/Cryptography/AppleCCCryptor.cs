@@ -150,8 +150,8 @@ namespace Internal.Cryptography
             {
                 ret = Interop.AppleCrypto.CryptorCreate(
                     _encrypting
-                        ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
-                        : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
+                      ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
+                      : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
                     _algorithm,
                     GetPalChainMode(_algorithm, _cipherMode, _feedbackSizeInBytes),
                     Interop.AppleCrypto.PAL_PaddingMode.None,

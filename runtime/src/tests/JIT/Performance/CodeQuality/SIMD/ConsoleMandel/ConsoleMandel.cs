@@ -157,8 +157,8 @@ namespace SIMD
                         Console.WriteLine(
                             "  Vector Count is {0}",
                             IsDouble(which)
-                                ? System.Numerics.Vector<Double>.Count
-                                : System.Numerics.Vector<Single>.Count
+                              ? System.Numerics.Vector<Double>.Count
+                              : System.Numerics.Vector<Single>.Count
                         );
                         Console.WriteLine(
                             "  {0} Accelerated.",

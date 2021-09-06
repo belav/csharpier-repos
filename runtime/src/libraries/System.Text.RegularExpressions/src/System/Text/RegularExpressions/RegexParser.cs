@@ -1384,8 +1384,8 @@ namespace System.Text.RegularExpressions
                               RegexNode.Set,
                               _options,
                               UseOptionE()
-                                  ? RegexCharClass.NotECMAWordClass
-                                  : RegexCharClass.NotWordClass
+                                ? RegexCharClass.NotECMAWordClass
+                                : RegexCharClass.NotWordClass
                           );
 
                 case 's':
@@ -1396,8 +1396,8 @@ namespace System.Text.RegularExpressions
                               RegexNode.Set,
                               _options,
                               UseOptionE()
-                                  ? RegexCharClass.ECMASpaceClass
-                                  : RegexCharClass.SpaceClass
+                                ? RegexCharClass.ECMASpaceClass
+                                : RegexCharClass.SpaceClass
                           );
 
                 case 'S':
@@ -1408,8 +1408,8 @@ namespace System.Text.RegularExpressions
                               RegexNode.Set,
                               _options,
                               UseOptionE()
-                                  ? RegexCharClass.NotECMASpaceClass
-                                  : RegexCharClass.NotSpaceClass
+                                ? RegexCharClass.NotECMASpaceClass
+                                : RegexCharClass.NotSpaceClass
                           );
 
                 case 'd':
@@ -1420,8 +1420,8 @@ namespace System.Text.RegularExpressions
                               RegexNode.Set,
                               _options,
                               UseOptionE()
-                                  ? RegexCharClass.ECMADigitClass
-                                  : RegexCharClass.DigitClass
+                                ? RegexCharClass.ECMADigitClass
+                                : RegexCharClass.DigitClass
                           );
 
                 case 'D':
@@ -1432,8 +1432,8 @@ namespace System.Text.RegularExpressions
                               RegexNode.Set,
                               _options,
                               UseOptionE()
-                                  ? RegexCharClass.NotECMADigitClass
-                                  : RegexCharClass.NotDigitClass
+                                ? RegexCharClass.NotECMADigitClass
+                                : RegexCharClass.NotDigitClass
                           );
 
                 case 'p':

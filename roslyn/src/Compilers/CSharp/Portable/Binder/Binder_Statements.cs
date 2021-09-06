@@ -986,8 +986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var result = PerformPatternMethodLookup(
                 expr,
                 hasAwait
-                    ? WellKnownMemberNames.DisposeAsyncMethodName
-                    : WellKnownMemberNames.DisposeMethodName,
+                  ? WellKnownMemberNames.DisposeAsyncMethodName
+                  : WellKnownMemberNames.DisposeMethodName,
                 syntaxNode,
                 diagnostics,
                 out var disposeMethod
@@ -1438,8 +1438,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Error(
                             localDiagnostics,
                             declTypeOpt.Type.IsFunctionPointer()
-                                ? ErrorCode.ERR_CannotUseFunctionPointerAsFixedLocal
-                                : ErrorCode.ERR_BadFixedInitType,
+                              ? ErrorCode.ERR_CannotUseFunctionPointerAsFixedLocal
+                              : ErrorCode.ERR_BadFixedInitType,
                             declarator
                         );
                         hasErrors = true;
@@ -1558,8 +1558,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 localSymbol: localSymbol,
                 declaredTypeOpt: boundDeclType,
                 initializerOpt: hasErrors
-                    ? BindToTypeForErrorRecovery(initializerOpt)?.WithHasErrors()
-                    : initializerOpt,
+                  ? BindToTypeForErrorRecovery(initializerOpt)?.WithHasErrors()
+                  : initializerOpt,
                 argumentsOpt: arguments,
                 inferredType: isVar,
                 hasErrors: hasErrors | nameConflict
@@ -4672,17 +4672,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constructor,
                 bodyBinder.GetDeclaredLocalsForScope(constructor),
                 constructor.Initializer == null
-                    ? null
-                    : bodyBinder.BindConstructorInitializer(constructor.Initializer, diagnostics),
+                  ? null
+                  : bodyBinder.BindConstructorInitializer(constructor.Initializer, diagnostics),
                 constructor.Body == null
-                    ? null
-                    : (BoundBlock)bodyBinder.BindStatement(constructor.Body, diagnostics),
+                  ? null
+                  : (BoundBlock)bodyBinder.BindStatement(constructor.Body, diagnostics),
                 constructor.ExpressionBody == null
-                    ? null
-                    : bodyBinder.BindExpressionBodyAsBlock(
-                          constructor.ExpressionBody,
-                          constructor.Body == null ? diagnostics : BindingDiagnosticBag.Discarded
-                      )
+                  ? null
+                  : bodyBinder.BindExpressionBodyAsBlock(
+                        constructor.ExpressionBody,
+                        constructor.Body == null ? diagnostics : BindingDiagnosticBag.Discarded
+                    )
             );
         }
 
@@ -4726,11 +4726,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 declaration,
                 blockBody == null ? null : (BoundBlock)BindStatement(blockBody, diagnostics),
                 expressionBody == null
-                    ? null
-                    : BindExpressionBodyAsBlock(
-                          expressionBody,
-                          blockBody == null ? diagnostics : BindingDiagnosticBag.Discarded
-                      )
+                  ? null
+                  : BindExpressionBodyAsBlock(
+                        expressionBody,
+                        blockBody == null ? diagnostics : BindingDiagnosticBag.Discarded
+                    )
             );
         }
 

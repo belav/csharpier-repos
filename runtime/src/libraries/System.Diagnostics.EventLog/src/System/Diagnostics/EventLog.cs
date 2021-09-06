@@ -703,8 +703,8 @@ namespace System.Diagnostics
                         throw new SecurityException(
                             SR.Format(
                                 wantToCreate
-                                    ? SR.SomeLogsInaccessibleToCreate
-                                    : SR.SomeLogsInaccessible,
+                                  ? SR.SomeLogsInaccessibleToCreate
+                                  : SR.SomeLogsInaccessible,
                                 inaccessibleLogs
                             )
                         );

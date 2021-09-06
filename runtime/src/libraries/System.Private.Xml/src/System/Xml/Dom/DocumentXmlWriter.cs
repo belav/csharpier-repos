@@ -440,8 +440,8 @@ namespace System.Xml
                     throw new XmlException(
                         SR.Xml_DupAttributeName,
                         attr.Prefix.Length == 0
-                            ? attr.LocalName
-                            : string.Concat(attr.Prefix, ":", attr.LocalName)
+                          ? attr.LocalName
+                          : string.Concat(attr.Prefix, ":", attr.LocalName)
                     );
                 }
             }

@@ -212,8 +212,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                                 await container.DeleteItemAsync<object>(
                                     item.Id,
                                     item.PartitionKey == null
-                                        ? PartitionKey.None
-                                        : new PartitionKey(item.PartitionKey)
+                                      ? PartitionKey.None
+                                      : new PartitionKey(item.PartitionKey)
                                 );
                             }
                         }

@@ -844,8 +844,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsRequired(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -858,8 +858,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsRequired(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -875,8 +875,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ValueGenerated(
                 valueGenerated,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -892,8 +892,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetValueGenerated(
                 valueGenerated,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -909,8 +909,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsConcurrencyToken(
                 concurrencyToken,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -926,8 +926,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsConcurrencyToken(
                 concurrencyToken,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -943,8 +943,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldName,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -960,8 +960,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldName,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -977,8 +977,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldInfo,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -994,8 +994,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldInfo,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1011,8 +1011,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetField(
                 fieldName,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1028,8 +1028,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetField(
                 fieldInfo,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1045,8 +1045,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UsePropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1062,8 +1062,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UsePropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1079,8 +1079,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1096,8 +1096,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasMaxLength(
                 maxLength,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1110,8 +1110,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetMaxLength(
                 maxLength,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1127,8 +1127,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsUnicode(
                 unicode,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1141,8 +1141,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsUnicode(
                 unicode,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1158,8 +1158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasPrecision(
                 precision,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1172,8 +1172,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPrecision(
                 precision,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1189,8 +1189,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasScale(
                 scale,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1203,8 +1203,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetScale(
                 scale,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1220,8 +1220,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             BeforeSave(
                 behavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1237,8 +1237,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetBeforeSave(
                 behavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1254,8 +1254,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AfterSave(
                 behavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1271,8 +1271,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetAfterSave(
                 behavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1288,8 +1288,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasValueGenerator(
                 valueGeneratorType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1305,8 +1305,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasValueGenerator(
                 factory,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1322,8 +1322,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetValueGenerator(
                 factory,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1339,8 +1339,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasConversion(
                 converter,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1356,8 +1356,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetConversion(
                 converter,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1373,8 +1373,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasConversion(
                 providerClrType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1390,8 +1390,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetConversion(
                 providerClrType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1402,8 +1402,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1414,8 +1414,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1431,8 +1431,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1448,8 +1448,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1465,8 +1465,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasKeyValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1482,8 +1482,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetKeyValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1499,8 +1499,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasKeyValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1516,8 +1516,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetKeyValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

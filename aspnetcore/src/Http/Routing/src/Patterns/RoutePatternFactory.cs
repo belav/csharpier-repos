@@ -490,12 +490,12 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                 rawText,
                 updatedDefaults ?? EmptyDictionary,
                 updatedParameterPolicies != null
-                    ? updatedParameterPolicies.ToDictionary(
-                          kvp => kvp.Key,
-                          kvp =>
-                              (IReadOnlyList<RoutePatternParameterPolicyReference>)kvp.Value.ToArray()
-                      )
-                    : EmptyPoliciesDictionary,
+                  ? updatedParameterPolicies.ToDictionary(
+                        kvp => kvp.Key,
+                        kvp =>
+                            (IReadOnlyList<RoutePatternParameterPolicyReference>)kvp.Value.ToArray()
+                    )
+                  : EmptyPoliciesDictionary,
                 requiredValues ?? EmptyDictionary,
                 (IReadOnlyList<RoutePatternParameterPart>?)parameters
                     ?? Array.Empty<RoutePatternParameterPart>(),

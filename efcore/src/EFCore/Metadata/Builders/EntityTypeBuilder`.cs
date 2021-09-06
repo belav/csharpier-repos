@@ -1408,8 +1408,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 Builder.Metadata,
                 relatedEntityType,
                 navigationMember is null
-                    ? MemberIdentity.None
-                    : new MemberIdentity(navigationMember),
+                  ? MemberIdentity.None
+                  : new MemberIdentity(navigationMember),
                 relationship?.Metadata,
                 skipNavigation
             );

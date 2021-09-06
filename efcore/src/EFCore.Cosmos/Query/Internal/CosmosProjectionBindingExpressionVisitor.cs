@@ -453,8 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 Expression updatedMemberExpression = memberExpression.Update(
                     expression != null
-                        ? MatchTypes(expression, memberExpression.Expression.Type)
-                        : expression
+                      ? MatchTypes(expression, memberExpression.Expression.Type)
+                      : expression
                 );
 
                 if (expression?.Type.IsNullableType() == true)

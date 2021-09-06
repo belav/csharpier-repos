@@ -519,8 +519,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     node.Name.LiteralTokens,
                     node.NameSuffix?.LiteralTokens,
                     node.EqualsToken == null
-                        ? new SyntaxList<SyntaxToken>()
-                        : new SyntaxList<SyntaxToken>(node.EqualsToken),
+                      ? new SyntaxList<SyntaxToken>()
+                      : new SyntaxList<SyntaxToken>(node.EqualsToken),
                     node.ValuePrefix?.LiteralTokens
                 );
                 var prefix = (MarkupTextLiteralSyntax)SyntaxFactory.MarkupTextLiteral(prefixTokens)
@@ -1429,8 +1429,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     node.Name.LiteralTokens,
                     node.NameSuffix?.LiteralTokens,
                     node.EqualsToken == null
-                        ? new SyntaxList<SyntaxToken>()
-                        : new SyntaxList<SyntaxToken>(node.EqualsToken),
+                      ? new SyntaxList<SyntaxToken>()
+                      : new SyntaxList<SyntaxToken>(node.EqualsToken),
                     node.ValuePrefix?.LiteralTokens
                 );
                 var prefix = (MarkupTextLiteralSyntax)SyntaxFactory.MarkupTextLiteral(prefixTokens)

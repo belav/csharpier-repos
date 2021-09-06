@@ -61,8 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
             return comparer.ExtractEqualsBody(
                 comparer.Type != clrType
-                    ? Expression.Convert(currentValueExpression, comparer.Type)
-                    : currentValueExpression,
+                  ? Expression.Convert(currentValueExpression, comparer.Type)
+                  : currentValueExpression,
                 Expression.Default(comparer.Type)
             );
         }

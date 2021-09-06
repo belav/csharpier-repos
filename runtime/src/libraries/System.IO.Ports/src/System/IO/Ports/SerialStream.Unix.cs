@@ -751,8 +751,8 @@ namespace System.IO.Ports
             {
                 r.Complete(
                     error.HasValue
-                        ? Interop.GetIOException(error.Value)
-                        : InternalResources.FileNotOpenException()
+                      ? Interop.GetIOException(error.Value)
+                      : InternalResources.FileNotOpenException()
                 );
             }
 
@@ -760,8 +760,8 @@ namespace System.IO.Ports
             {
                 r.Complete(
                     error.HasValue
-                        ? Interop.GetIOException(error.Value)
-                        : InternalResources.FileNotOpenException()
+                      ? Interop.GetIOException(error.Value)
+                      : InternalResources.FileNotOpenException()
                 );
             }
         }

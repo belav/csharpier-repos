@@ -196,8 +196,8 @@ namespace Internal.Cryptography.Pal
                     encodedDistinguishedName,
                     true,
                     multiLine
-                        ? X500DistinguishedNameFlags.UseNewLines
-                        : X500DistinguishedNameFlags.None,
+                      ? X500DistinguishedNameFlags.UseNewLines
+                      : X500DistinguishedNameFlags.None,
                     multiLine
                 );
             }

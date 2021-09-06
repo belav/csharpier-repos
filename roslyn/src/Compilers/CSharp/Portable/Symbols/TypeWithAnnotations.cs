@@ -93,10 +93,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return Create(
                 typeSymbol,
                 nullableAnnotation: isAnnotated
-                    ? NullableAnnotation.Annotated
-                    : isNullableEnabled
-                        ? NullableAnnotation.NotAnnotated
-                        : NullableAnnotation.Oblivious
+                  ? NullableAnnotation.Annotated
+                  : isNullableEnabled
+                      ? NullableAnnotation.NotAnnotated
+                      : NullableAnnotation.Oblivious
             );
         }
 
@@ -1114,8 +1114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return CreateNonLazyType(
                     defaultType,
                     defaultType.IsNullableType()
-                        ? type.NullableAnnotation
-                        : NullableAnnotation.NotAnnotated,
+                      ? type.NullableAnnotation
+                      : NullableAnnotation.NotAnnotated,
                     _customModifiers
                 );
             }

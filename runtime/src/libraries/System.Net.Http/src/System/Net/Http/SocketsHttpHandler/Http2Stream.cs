@@ -770,9 +770,9 @@ namespace System.Net.Http
                         string headerValue = descriptor.GetHeaderValue(value, valueEncoding);
                         _trailers.TryAddWithoutValidation(
                             (descriptor.HeaderType & HttpHeaderType.Request)
-                            == HttpHeaderType.Request
-                                ? descriptor.AsCustomHeader()
-                                : descriptor,
+                                == HttpHeaderType.Request
+                              ? descriptor.AsCustomHeader()
+                              : descriptor,
                             headerValue
                         );
                     }
@@ -793,9 +793,9 @@ namespace System.Net.Http
                         );
                         _response.Headers.TryAddWithoutValidation(
                             (descriptor.HeaderType & HttpHeaderType.Request)
-                            == HttpHeaderType.Request
-                                ? descriptor.AsCustomHeader()
-                                : descriptor,
+                                == HttpHeaderType.Request
+                              ? descriptor.AsCustomHeader()
+                              : descriptor,
                             headerValue
                         );
                     }

@@ -850,8 +850,8 @@ namespace System.Xml.Serialization
                         )!;
                     MethodInfo XmlReader_ReadXXXString = typeof(XmlReader).GetMethod(
                         source == "Reader.ReadElementString()"
-                            ? "ReadElementContentAsString"
-                            : "ReadContentAsString",
+                          ? "ReadElementContentAsString"
+                          : "ReadContentAsString",
                         CodeGenerator.InstanceBindingFlags,
                         Type.EmptyTypes
                     )!;
@@ -904,8 +904,8 @@ namespace System.Xml.Serialization
                         )!;
                     MethodInfo XmlReader_ReadXXXString = typeof(XmlReader).GetMethod(
                         source == "Reader.ReadElementString()"
-                            ? "ReadElementContentAsString"
-                            : "ReadContentAsString",
+                          ? "ReadElementContentAsString"
+                          : "ReadContentAsString",
                         CodeGenerator.InstanceBindingFlags,
                         Type.EmptyTypes
                     )!;
@@ -1039,8 +1039,8 @@ namespace System.Xml.Serialization
                         )!;
                     MethodInfo XmlReader_ReadXXXString = typeof(XmlReader).GetMethod(
                         source == "Reader.ReadElementString()"
-                            ? "ReadElementContentAsString"
-                            : "ReadContentAsString",
+                          ? "ReadElementContentAsString"
+                          : "ReadContentAsString",
                         CodeGenerator.InstanceBindingFlags,
                         Type.EmptyTypes
                     )!;
@@ -2358,8 +2358,8 @@ namespace System.Xml.Serialization
                     WriteSourceEnd(
                         member.ArraySource,
                         member.Mapping.TypeDesc!.IsArrayLike
-                            ? member.Mapping.TypeDesc.ArrayElementTypeDesc!.Type!
-                            : member.Mapping.TypeDesc.Type!
+                          ? member.Mapping.TypeDesc.ArrayElementTypeDesc!.Type!
+                          : member.Mapping.TypeDesc.Type!
                     );
                 }
                 else if (special.TypeDesc.CanBeAttributeValue)
@@ -2381,8 +2381,8 @@ namespace System.Xml.Serialization
                     WriteSourceEnd(
                         member.ArraySource,
                         member.Mapping.TypeDesc!.IsArrayLike
-                            ? member.Mapping.TypeDesc.ArrayElementTypeDesc!.Type!
-                            : member.Mapping.TypeDesc.Type!
+                          ? member.Mapping.TypeDesc.ArrayElementTypeDesc!.Type!
+                          : member.Mapping.TypeDesc.Type!
                     );
                     ilg.EndIf();
                 }
@@ -2448,8 +2448,8 @@ namespace System.Xml.Serialization
                     WriteSourceEnd(
                         member.ArraySource,
                         member.Mapping.TypeDesc!.IsArrayLike
-                            ? member.Mapping.TypeDesc.ArrayElementTypeDesc!.Type!
-                            : member.Mapping.TypeDesc.Type!
+                          ? member.Mapping.TypeDesc.ArrayElementTypeDesc!.Type!
+                          : member.Mapping.TypeDesc.Type!
                     );
                 }
             }
@@ -2823,8 +2823,8 @@ namespace System.Xml.Serialization
                             element,
                             anyElement.Mapping.ChoiceIdentifier,
                             anyElement.Mapping.CheckSpecified == SpecifiedAccessor.ReadWrite
-                                ? anyElement.CheckSpecifiedSource
-                                : null,
+                              ? anyElement.CheckSpecifiedSource
+                              : null,
                             false,
                             false,
                             -1,
@@ -2946,8 +2946,8 @@ namespace System.Xml.Serialization
                         e,
                         choice,
                         member.Mapping.CheckSpecified == SpecifiedAccessor.ReadWrite
-                            ? member.CheckSpecifiedSource
-                            : null,
+                          ? member.CheckSpecifiedSource
+                          : null,
                         member.IsList && member.Mapping.TypeDesc!.IsNullable,
                         member.Mapping.ReadOnly,
                         member.FixupIndex,
@@ -3260,8 +3260,8 @@ namespace System.Xml.Serialization
                 ilg.ConvertValue(
                     stackType,
                     memInfo is FieldInfo
-                        ? ((FieldInfo)memInfo).FieldType
-                        : ((PropertyInfo)memInfo).PropertyType
+                      ? ((FieldInfo)memInfo).FieldType
+                      : ((PropertyInfo)memInfo).PropertyType
                 );
                 ilg.StoreMember(memInfo);
                 return;
@@ -3759,8 +3759,8 @@ namespace System.Xml.Serialization
                                 "ReadSerializable",
                                 CodeGenerator.InstanceBindingFlags,
                                 isWrappedAny
-                                    ? new Type[] { typeof(IXmlSerializable), typeof(bool) }
-                                    : new Type[] { typeof(IXmlSerializable) }
+                                  ? new Type[] { typeof(IXmlSerializable), typeof(bool) }
+                                  : new Type[] { typeof(IXmlSerializable) }
                             )!;
                         ilg.Ldarg(0);
                         RaCodeGen.ILGenForCreateInstance(
@@ -3853,8 +3853,8 @@ namespace System.Xml.Serialization
                                 "ReadSerializable",
                                 CodeGenerator.InstanceBindingFlags,
                                 isWrappedAny
-                                    ? new Type[] { typeof(IXmlSerializable), typeof(bool) }
-                                    : new Type[] { typeof(IXmlSerializable) }
+                                  ? new Type[] { typeof(IXmlSerializable), typeof(bool) }
+                                  : new Type[] { typeof(IXmlSerializable) }
                             )!;
                         ilg.Ldarg(0);
                         RaCodeGen.ILGenForCreateInstance(

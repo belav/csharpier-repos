@@ -962,8 +962,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             syntax: designation,
                             localSymbol: localSymbol,
                             localSymbol.IsVar
-                                ? BoundLocalDeclarationKind.WithInferredType
-                                : BoundLocalDeclarationKind.WithExplicitType,
+                              ? BoundLocalDeclarationKind.WithInferredType
+                              : BoundLocalDeclarationKind.WithExplicitType,
                             constantValueOpt: null,
                             isNullableUnknown: false,
                             type: declType.Type

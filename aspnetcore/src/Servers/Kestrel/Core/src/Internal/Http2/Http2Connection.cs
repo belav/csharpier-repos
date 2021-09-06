@@ -1037,8 +1037,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 throw new Http2ConnectionErrorException(
                     CoreStrings.FormatHttp2ErrorSettingsParameterOutOfRange(ex.Parameter),
                     ex.Parameter == Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE
-                        ? Http2ErrorCode.FLOW_CONTROL_ERROR
-                        : Http2ErrorCode.PROTOCOL_ERROR
+                      ? Http2ErrorCode.FLOW_CONTROL_ERROR
+                      : Http2ErrorCode.PROTOCOL_ERROR
                 );
             }
         }

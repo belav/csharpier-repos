@@ -141,8 +141,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         _pGroup.Flags,
                         mask,
                         _namedArgumentsKind == NamedArgumentsKind.NonTrailing
-                            ? _pOriginalArguments
-                            : null
+                          ? _pOriginalArguments
+                          : null
                     );
                 while (true)
                 {
@@ -612,9 +612,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                         optionalArgument = ExprFactory.CreateConstant(
                             pRawParamType.IsEnumType
-                            && pConstValType == pRawParamType.UnderlyingEnumType
-                                ? pRawParamType
-                                : pConstValType,
+                                && pConstValType == pRawParamType.UnderlyingEnumType
+                              ? pRawParamType
+                              : pConstValType,
                             cv
                         );
                     }

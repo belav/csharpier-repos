@@ -240,8 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Expression valueExpression = Expression.Call(
                 getMethod.DeclaringType != typeof(DbDataReader)
-                    ? Expression.Convert(dataReaderExpression, getMethod.DeclaringType!)
-                    : dataReaderExpression,
+                  ? Expression.Convert(dataReaderExpression, getMethod.DeclaringType!)
+                  : dataReaderExpression,
                 getMethod,
                 indexExpression
             );

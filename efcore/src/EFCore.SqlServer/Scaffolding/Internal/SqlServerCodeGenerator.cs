@@ -34,12 +34,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
             new(
                 nameof(SqlServerDbContextOptionsExtensions.UseSqlServer),
                 providerOptions == null
-                    ? new object[] { connectionString }
-                    : new object[]
-                      {
-                          connectionString,
-                          new NestedClosureCodeFragment("x", providerOptions)
-                      }
+                  ? new object[] { connectionString }
+                  : new object[]
+                    {
+                        connectionString,
+                        new NestedClosureCodeFragment("x", providerOptions)
+                    }
             );
     }
 }

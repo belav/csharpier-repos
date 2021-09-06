@@ -126,8 +126,8 @@ namespace Microsoft.EntityFrameworkCore
                 ReportDiagnostic(
                     context,
                     symbol.Name == ".ctor"
-                        ? (object)containingType
-                        : $"{containingType}.{symbol.Name}"
+                      ? (object)containingType
+                      : $"{containingType}.{symbol.Name}"
                 );
                 return;
             }

@@ -1762,8 +1762,8 @@ namespace System.Xml
                 // If we are on the Text column, we should always have _fOnValue == true
                 Debug.Assert(
                     (_column.ColumnMapping == MappingType.SimpleContent)
-                        ? (_fOnValue == true)
-                        : true
+                      ? (_fOnValue == true)
+                      : true
                 );
             }
             if (_column == null)

@@ -6057,19 +6057,19 @@ public class C
                     VerifyAttributes(
                         x1,
                         isFromSource
-                            ? HighSurrogateCharacter
-                            : UnicodeReplacementCharacter + UnicodeReplacementCharacter
+                          ? HighSurrogateCharacter
+                          : UnicodeReplacementCharacter + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate2 = ""\uD800\uD800"";
                     VerifyAttributes(
                         x2,
                         isFromSource
-                            ? HighSurrogateCharacter + HighSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
+                          ? HighSurrogateCharacter + HighSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate3 = ""\uD800\uDC00"";
@@ -6079,72 +6079,70 @@ public class C
                     VerifyAttributes(
                         x4,
                         isFromSource
-                            ? HighSurrogateCharacter + UnicodeLT0800 + HighSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeLT0800
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
+                          ? HighSurrogateCharacter + UnicodeLT0800 + HighSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeLT0800
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate5 = ""\uD800\u007F\uDC00"";
                     VerifyAttributes(
                         x5,
                         isFromSource
-                            ? HighSurrogateCharacter + UnicodeLT0080 + LowSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeLT0080
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
+                          ? HighSurrogateCharacter + UnicodeLT0080 + LowSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeLT0080
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate6 = ""\uD800\u07FF\uDC00"";
                     VerifyAttributes(
                         x6,
                         isFromSource
-                            ? HighSurrogateCharacter + UnicodeLT0800 + LowSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeLT0800
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
+                          ? HighSurrogateCharacter + UnicodeLT0800 + LowSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeLT0800
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate7 = ""\uD800\uFFFF\uDC00"";
                     VerifyAttributes(
                         x7,
                         isFromSource
-                            ? HighSurrogateCharacter + UnicodeLT10000 + LowSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeLT10000
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
+                          ? HighSurrogateCharacter + UnicodeLT10000 + LowSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeLT10000
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate8 = ""\uD800\uD800\uDC00"";
                     VerifyAttributes(
                         x8,
                         isFromSource
-                            ? HighSurrogateCharacter
-                              + HighSurrogateCharacter
-                              + LowSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + HighSurrogateCharacter
-                              + LowSurrogateCharacter
+                          ? HighSurrogateCharacter + HighSurrogateCharacter + LowSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + HighSurrogateCharacter
+                                + LowSurrogateCharacter
                     );
 
                     // public const string UnicodeSurrogate9 = ""\uDC00\uDC00"";
                     VerifyAttributes(
                         x9,
                         isFromSource
-                            ? LowSurrogateCharacter + LowSurrogateCharacter
-                            : UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
-                              + UnicodeReplacementCharacter
+                          ? LowSurrogateCharacter + LowSurrogateCharacter
+                          : UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
+                                + UnicodeReplacementCharacter
                     );
                 };
 

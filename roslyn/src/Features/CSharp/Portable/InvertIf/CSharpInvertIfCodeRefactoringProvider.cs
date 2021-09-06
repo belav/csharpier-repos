@@ -185,8 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             var updatedIf = ifNode.WithCondition((ExpressionSyntax)condition)
                 .WithStatement(
                     trueStatement is IfStatementSyntax
-                        ? SyntaxFactory.Block(trueStatement)
-                        : trueStatement
+                      ? SyntaxFactory.Block(trueStatement)
+                      : trueStatement
                 );
 
             if (falseStatementOpt != null)

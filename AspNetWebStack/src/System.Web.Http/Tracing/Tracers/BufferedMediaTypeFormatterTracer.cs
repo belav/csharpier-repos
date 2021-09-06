@@ -125,8 +125,8 @@ namespace System.Web.Http.Tracing.Tracers
                         SRResources.TraceReadFromStreamMessage,
                         type.Name,
                         contentType == null
-                            ? SRResources.TraceNoneObjectMessage
-                            : contentType.ToString()
+                          ? SRResources.TraceNoneObjectMessage
+                          : contentType.ToString()
                     );
                 },
                 execute: () =>
@@ -210,8 +210,8 @@ namespace System.Web.Http.Tracing.Tracers
                         FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
                         type.Name,
                         contentType == null
-                            ? SRResources.TraceNoneObjectMessage
-                            : contentType.ToString()
+                          ? SRResources.TraceNoneObjectMessage
+                          : contentType.ToString()
                     );
                 },
                 execute: () =>

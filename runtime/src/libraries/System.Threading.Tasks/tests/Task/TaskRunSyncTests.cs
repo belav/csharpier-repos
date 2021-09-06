@@ -398,8 +398,8 @@ namespace System.Threading.Tasks.Tests
                             Task.Factory.StartNew(
                                 () => { },
                                 _workloadType == WorkloadType.CreateDetachedChildTask
-                                    ? TaskCreationOptions.None
-                                    : TaskCreationOptions.AttachedToParent
+                                  ? TaskCreationOptions.None
+                                  : TaskCreationOptions.AttachedToParent
                             );
                             break;
 

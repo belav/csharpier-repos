@@ -2079,9 +2079,9 @@ namespace System.Xml.Xsl
                         card += AddFilteredPrime(
                             list,
                             attributeWildcard.ProcessContentsCorrect
-                            == XmlSchemaContentProcessing.Skip
-                                ? UntypedAttribute
-                                : Attribute,
+                                == XmlSchemaContentProcessing.Skip
+                              ? UntypedAttribute
+                              : Attribute,
                             filter
                         );
                         break;
@@ -2309,8 +2309,8 @@ namespace System.Xml.Xsl
                             card = AddFilteredPrime(
                                 list,
                                 any.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip
-                                    ? UntypedElement
-                                    : Element,
+                                  ? UntypedElement
+                                  : Element,
                                 filter
                             );
                             break;

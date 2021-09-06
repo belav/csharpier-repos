@@ -400,8 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                           instance,
                           _sqlExpressionFactory.Constant(
                               startsWith
-                                  ? EscapeLikePattern(constantString) + '%'
-                                  : '%' + EscapeLikePattern(constantString)
+                                ? EscapeLikePattern(constantString) + '%'
+                                : '%' + EscapeLikePattern(constantString)
                           ),
                           _sqlExpressionFactory.Constant(LikeEscapeChar.ToString())
                       ) // SQL Server has no char mapping, avoid value conversion warning)

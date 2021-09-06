@@ -68,8 +68,8 @@ namespace System.Text.Json.Serialization.Converters
                 _nameCache.TryAdd(
                     key,
                     namingPolicy == null
-                        ? JsonEncodedText.Encode(name, encoder)
-                        : FormatEnumValue(name, encoder)
+                      ? JsonEncodedText.Encode(name, encoder)
+                      : FormatEnumValue(name, encoder)
                 );
             }
         }
@@ -195,8 +195,8 @@ namespace System.Text.Json.Serialization.Converters
                         // directly to the writer is cheaper than creating one and not caching it for reuse.
                         writer.WriteStringValue(
                             _namingPolicy == null
-                                ? original
-                                : FormatEnumValueToString(original, encoder)
+                              ? original
+                              : FormatEnumValueToString(original, encoder)
                         );
                     }
 

@@ -193,8 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -232,8 +232,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -257,8 +257,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

@@ -76,11 +76,11 @@ namespace Microsoft.CodeAnalysis
                 path,
                 new LinePositionSpan(
                     (mappedStartLine == -1)
-                        ? new LinePosition(unmappedStartPos.Character)
-                        : new LinePosition(mappedStartLine, unmappedStartPos.Character),
+                      ? new LinePosition(unmappedStartPos.Character)
+                      : new LinePosition(mappedStartLine, unmappedStartPos.Character),
                     (mappedEndLine == -1)
-                        ? new LinePosition(unmappedEndPos.Character)
-                        : new LinePosition(mappedEndLine, unmappedEndPos.Character)
+                      ? new LinePosition(unmappedEndPos.Character)
+                      : new LinePosition(mappedEndLine, unmappedEndPos.Character)
                 ),
                 hasMappedPath: entry.MappedPathOpt != null
             );

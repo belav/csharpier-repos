@@ -1443,8 +1443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return HasApplicableBooleanOperator(
                 namedType,
                 isNegative
-                    ? WellKnownMemberNames.FalseOperatorName
-                    : WellKnownMemberNames.TrueOperatorName,
+                  ? WellKnownMemberNames.FalseOperatorName
+                  : WellKnownMemberNames.TrueOperatorName,
                 type,
                 ref useSiteInfo,
                 out userDefinedOperator
@@ -3066,8 +3066,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Error(
                             diagnostics,
                             isFixedStatementAddressOfExpression
-                                ? ErrorCode.ERR_FixedNotNeeded
-                                : ErrorCode.ERR_FixedNeeded,
+                              ? ErrorCode.ERR_FixedNotNeeded
+                              : ErrorCode.ERR_FixedNeeded,
                             node
                         );
                         hasErrors = true;

@@ -307,8 +307,8 @@ namespace System.Reflection.Metadata.Ecma335
                 Builder.WriteInt32(codeSize);
                 Builder.WriteInt32(
                     localVariablesSignature.IsNil
-                        ? 0
-                        : MetadataTokens.GetToken(localVariablesSignature)
+                      ? 0
+                      : MetadataTokens.GetToken(localVariablesSignature)
                 );
             }
 

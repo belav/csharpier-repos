@@ -293,18 +293,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             (
                                 p,
                                 string.IsNullOrEmpty(p.Name)
-                                    ? null
-                                    : _propertyFactory.FindParameter(
-                                          (IEntityType)entityType,
-                                          p.ParameterType,
-                                          p.Name
-                                      )
-                                      ?? bind(
-                                          _factories.FindFactory(p.ParameterType, p.Name),
-                                          entityType,
-                                          p.ParameterType,
-                                          p.Name
-                                      )
+                                  ? null
+                                  : _propertyFactory.FindParameter(
+                                        (IEntityType)entityType,
+                                        p.ParameterType,
+                                        p.Name
+                                    )
+                                        ?? bind(
+                                            _factories.FindFactory(p.ParameterType, p.Name),
+                                            entityType,
+                                            p.ParameterType,
+                                            p.Name
+                                        )
                             )
                     )
                     .ToList();

@@ -535,12 +535,8 @@ namespace System.Net
                     NetEventSource.Error(
                         null,
                         errorCode == Interop.SspiCli.SEC_I_RENEGOTIATE
-                            ? SR.Format(
-                                  SR.event_OperationReturnedSomething,
-                                  op,
-                                  "SEC_I_RENEGOTIATE"
-                              )
-                            : SR.Format(SR.net_log_operation_failed_with_error, op, $"0x{0:X}")
+                          ? SR.Format(SR.event_OperationReturnedSomething, op, "SEC_I_RENEGOTIATE")
+                          : SR.Format(SR.net_log_operation_failed_with_error, op, $"0x{0:X}")
                     );
                 }
 

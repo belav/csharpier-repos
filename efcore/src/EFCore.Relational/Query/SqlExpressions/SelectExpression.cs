@@ -1174,8 +1174,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                     updatedExpressions.Add(
                         projectionBindingExpression.Type.IsValueType
-                            ? Convert(projectionBindingExpression, typeof(object))
-                            : (Expression)projectionBindingExpression
+                          ? Convert(projectionBindingExpression, typeof(object))
+                          : (Expression)projectionBindingExpression
                     );
                     comparers.Add(keyExpression.Comparer);
                 }
@@ -2314,8 +2314,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                             AddJoin(
                                 joinType == JoinType.CrossApply
-                                    ? JoinType.InnerJoin
-                                    : JoinType.LeftJoin,
+                                  ? JoinType.InnerJoin
+                                  : JoinType.LeftJoin,
                                 ref innerSelectExpression,
                                 joinPredicate
                             );

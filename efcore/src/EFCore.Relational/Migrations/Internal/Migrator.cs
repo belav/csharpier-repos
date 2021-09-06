@@ -211,8 +211,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     return GenerateDownSql(
                         migration,
                         index != migrationsToRevert.Count - 1
-                            ? migrationsToRevert[index + 1]
-                            : actualTargetMigration
+                          ? migrationsToRevert[index + 1]
+                          : actualTargetMigration
                     );
                 };
             }

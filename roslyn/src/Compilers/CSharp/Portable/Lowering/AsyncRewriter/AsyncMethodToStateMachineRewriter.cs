@@ -251,8 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     F.Field(F.This(), _asyncMethodBuilderField),
                     _asyncMethodBuilderMemberCollection.SetResult,
                     _method.IsAsyncReturningGenericTask(F.Compilation)
-                        ? ImmutableArray.Create<BoundExpression>(F.Local(_exprRetValue))
-                        : ImmutableArray<BoundExpression>.Empty
+                      ? ImmutableArray.Create<BoundExpression>(F.Local(_exprRetValue))
+                      : ImmutableArray<BoundExpression>.Empty
                 )
             );
         }
@@ -557,15 +557,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                             TypeCompareKind.ConsiderEverything2
                         )
                     )
-                        ? F.Local(awaiterTemp)
-                        : F.Convert(awaiterFieldType, F.Local(awaiterTemp))
+                      ? F.Local(awaiterTemp)
+                      : F.Convert(awaiterFieldType, F.Local(awaiterTemp))
                 )
             );
 
             blockBuilder.Add(
                 awaiterTemp.Type.IsDynamic()
-                    ? GenerateAwaitOnCompletedDynamic(awaiterTemp)
-                    : GenerateAwaitOnCompleted(awaiterTemp.Type, awaiterTemp)
+                  ? GenerateAwaitOnCompletedDynamic(awaiterTemp)
+                  : GenerateAwaitOnCompleted(awaiterTemp.Type, awaiterTemp)
             );
 
             blockBuilder.Add(GenerateReturn(false));
@@ -587,8 +587,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         awaiterField.Type,
                         TypeCompareKind.ConsiderEverything2
                     )
-                        ? F.Field(F.This(), awaiterField)
-                        : F.Convert(awaiterTemp.Type, F.Field(F.This(), awaiterField))
+                      ? F.Field(F.This(), awaiterField)
+                      : F.Convert(awaiterTemp.Type, F.Field(F.This(), awaiterField))
                 )
             );
 

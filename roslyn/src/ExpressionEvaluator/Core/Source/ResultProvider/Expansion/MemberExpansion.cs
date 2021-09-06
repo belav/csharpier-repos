@@ -590,11 +590,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 typeDeclaringMemberAndInfo: (
                     member.IncludeTypeInMemberName || typeDeclaringMember.IsInterface
                 )
-                    ? new TypeAndCustomInfo(
-                          DkmClrType.Create(appDomain, typeDeclaringMember),
-                          typeDeclaringMemberInfo
-                      )
-                    : default(TypeAndCustomInfo), // Note: Won't include DynamicAttribute.
+                  ? new TypeAndCustomInfo(
+                        DkmClrType.Create(appDomain, typeDeclaringMember),
+                        typeDeclaringMemberInfo
+                    )
+                  : default(TypeAndCustomInfo), // Note: Won't include DynamicAttribute.
                 declaredTypeAndInfo: new TypeAndCustomInfo(
                     DkmClrType.Create(appDomain, declaredType),
                     declaredTypeInfo

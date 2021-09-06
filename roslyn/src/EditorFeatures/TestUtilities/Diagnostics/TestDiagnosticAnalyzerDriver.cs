@@ -65,10 +65,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 );
                 documentDiagnostics = await CodeAnalysis.Diagnostics.Extensions.ToDiagnosticsAsync(
                     filterSpan is null
-                        ? dxs.Where(d => d.HasTextSpan)
-                        : dxs.Where(
-                              d => d.HasTextSpan && d.GetTextSpan().IntersectsWith(filterSpan.Value)
-                          ),
+                      ? dxs.Where(d => d.HasTextSpan)
+                      : dxs.Where(
+                            d => d.HasTextSpan && d.GetTextSpan().IntersectsWith(filterSpan.Value)
+                        ),
                     project,
                     CancellationToken.None
                 );

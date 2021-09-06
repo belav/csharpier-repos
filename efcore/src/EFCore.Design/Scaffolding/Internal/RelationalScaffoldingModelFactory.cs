@@ -95,15 +95,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             _tableNamer = new CSharpUniqueNamer<DatabaseTable>(
                 options.UseDatabaseNames
-                    ? (Func<DatabaseTable, string>)(t => t.Name)
-                    : t => _candidateNamingService.GenerateCandidateIdentifier(t),
+                  ? (Func<DatabaseTable, string>)(t => t.Name)
+                  : t => _candidateNamingService.GenerateCandidateIdentifier(t),
                 _cSharpUtilities,
                 options.NoPluralize ? (Func<string, string>?)null : _pluralizer.Singularize
             );
             _dbSetNamer = new CSharpUniqueNamer<DatabaseTable>(
                 options.UseDatabaseNames
-                    ? (Func<DatabaseTable, string>)(t => t.Name)
-                    : t => _candidateNamingService.GenerateCandidateIdentifier(t),
+                  ? (Func<DatabaseTable, string>)(t => t.Name)
+                  : t => _candidateNamingService.GenerateCandidateIdentifier(t),
                 _cSharpUtilities,
                 options.NoPluralize ? (Func<string, string>?)null : _pluralizer.Pluralize
             );

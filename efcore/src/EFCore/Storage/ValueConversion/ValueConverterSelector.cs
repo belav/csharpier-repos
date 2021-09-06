@@ -632,11 +632,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         k =>
                             GetDefaultValueConverterInfo(
                                 converterType.GetTypeInfo().GenericTypeParameters.Length == 1
-                                    ? converterType.MakeGenericType(k.ProviderClrType)
-                                    : converterType.MakeGenericType(
-                                          k.ModelClrType,
-                                          k.ProviderClrType
-                                      )
+                                  ? converterType.MakeGenericType(k.ProviderClrType)
+                                  : converterType.MakeGenericType(k.ModelClrType, k.ProviderClrType)
                             )
                     );
                 }

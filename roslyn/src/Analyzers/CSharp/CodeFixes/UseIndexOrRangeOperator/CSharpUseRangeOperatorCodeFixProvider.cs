@@ -232,8 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
             return RangeExpression(
                 startExpr != null && startFromEnd
-                    ? IndexExpression(startExpr)
-                    : startExpr?.Parenthesize(),
+                  ? IndexExpression(startExpr)
+                  : startExpr?.Parenthesize(),
                 endExpr != null && endFromEnd ? IndexExpression(endExpr) : endExpr?.Parenthesize()
             );
         }

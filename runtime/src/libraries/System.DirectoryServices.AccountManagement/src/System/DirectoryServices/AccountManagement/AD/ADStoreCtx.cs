@@ -1796,8 +1796,8 @@ namespace System.DirectoryServices.AccountManagement
 
                     ds = new DirectorySearcher(
                         (fspContainer != null)
-                            ? fspContainer
-                            : ((dncContainer != null ? dncContainer : this.ctxBase))
+                          ? fspContainer
+                          : ((dncContainer != null ? dncContainer : this.ctxBase))
                     );
 
                     // Pick some reasonable default values

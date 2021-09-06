@@ -211,8 +211,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                                     return SimplifyLogicalSqlBinaryExpression(
                                         binaryOperand.OperatorType == ExpressionType.AndAlso
-                                            ? ExpressionType.OrElse
-                                            : ExpressionType.AndAlso,
+                                          ? ExpressionType.OrElse
+                                          : ExpressionType.AndAlso,
                                         newLeft,
                                         newRight,
                                         binaryOperand.TypeMapping!
@@ -262,8 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         case SqlConstantExpression constantOperand:
                             return _sqlExpressionFactory.Constant(
                                 operatorType == ExpressionType.Equal
-                                    ? constantOperand.Value == null
-                                    : constantOperand.Value != null,
+                                  ? constantOperand.Value == null
+                                  : constantOperand.Value != null,
                                 typeMapping
                             );
 
@@ -330,8 +330,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                                 return SimplifyLogicalSqlBinaryExpression(
                                     operatorType == ExpressionType.Equal
-                                        ? ExpressionType.OrElse
-                                        : ExpressionType.AndAlso,
+                                      ? ExpressionType.OrElse
+                                      : ExpressionType.AndAlso,
                                     newLeft,
                                     newRight,
                                     typeMapping
@@ -365,8 +365,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                             return SimplifyLogicalSqlBinaryExpression(
                                 operatorType == ExpressionType.Equal
-                                    ? ExpressionType.AndAlso
-                                    : ExpressionType.OrElse,
+                                  ? ExpressionType.AndAlso
+                                  : ExpressionType.OrElse,
                                 leftArgument,
                                 rightArgument,
                                 typeMapping

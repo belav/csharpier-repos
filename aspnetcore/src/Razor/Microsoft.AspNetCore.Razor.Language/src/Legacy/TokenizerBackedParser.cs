@@ -660,8 +660,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             return PushSpanContextConfig(
                 newConfig == null
-                    ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
-                    : (span, _) => newConfig(span)
+                  ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
+                  : (span, _) => newConfig(span)
             );
         }
 

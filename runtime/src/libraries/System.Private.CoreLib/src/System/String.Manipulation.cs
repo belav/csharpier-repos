@@ -940,8 +940,8 @@ namespace System
                 throw new ArgumentOutOfRangeException(
                     nameof(startIndex),
                     startIndex < 0
-                        ? SR.ArgumentOutOfRange_StartIndex
-                        : SR.ArgumentOutOfRange_StartIndexLargerThanLength
+                      ? SR.ArgumentOutOfRange_StartIndex
+                      : SR.ArgumentOutOfRange_StartIndexLargerThanLength
                 );
 
             return Substring(0, startIndex);

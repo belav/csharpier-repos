@@ -231,8 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
             ContainingAssembly.GetSpecialType(
                 this.TypeKind == TypeKind.Struct
-                    ? SpecialType.System_ValueType
-                    : SpecialType.System_Object
+                  ? SpecialType.System_ValueType
+                  : SpecialType.System_Object
             );
 
         internal override NamedTypeSymbol GetDeclaredBaseType(

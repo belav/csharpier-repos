@@ -373,21 +373,21 @@ namespace System.Net.Http.Functional.Tests
                     Assert.Equal(
                         0,
                         mode == 0
-                            ? stream.Read(buffer, 0, buffer.Length)
-                            : mode == 1
-                                ? stream.Read(new Span<byte>(buffer))
-                                : mode == 2
-                                    ? await stream.ReadAsync(buffer, 0, buffer.Length)
-                                    : mode == 3
-                                        ? await stream.ReadAsync(new Memory<byte>(buffer))
-                                        : await Task.Factory.FromAsync(
-                                              stream.BeginRead,
-                                              stream.EndRead,
-                                              buffer,
-                                              0,
-                                              buffer.Length,
-                                              null
-                                          )
+                          ? stream.Read(buffer, 0, buffer.Length)
+                          : mode == 1
+                              ? stream.Read(new Span<byte>(buffer))
+                              : mode == 2
+                                  ? await stream.ReadAsync(buffer, 0, buffer.Length)
+                                  : mode == 3
+                                      ? await stream.ReadAsync(new Memory<byte>(buffer))
+                                      : await Task.Factory.FromAsync(
+                                            stream.BeginRead,
+                                            stream.EndRead,
+                                            buffer,
+                                            0,
+                                            buffer.Length,
+                                            null
+                                        )
                     );
                 }
             }

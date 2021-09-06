@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
             ) : base(
                 nestedActions,
                 category != null
-                    ? string.Format(
-                          FeaturesResources.Configure_severity_for_all_0_analyzers,
-                          category
-                      )
-                    : FeaturesResources.Configure_severity_for_all_analyzers
+                  ? string.Format(
+                        FeaturesResources.Configure_severity_for_all_0_analyzers,
+                        category
+                    )
+                  : FeaturesResources.Configure_severity_for_all_analyzers
             ) {
                 // Ensure that 'Category' based bulk configuration actions are shown above
                 // the 'All analyzer diagnostics' bulk configuration actions.

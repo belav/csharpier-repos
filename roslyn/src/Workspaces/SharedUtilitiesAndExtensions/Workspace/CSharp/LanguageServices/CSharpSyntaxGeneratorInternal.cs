@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         ) {
             return SyntaxFactory.LocalDeclarationStatement(
                 isConst
-                    ? SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword))
-                    : default,
+                  ? SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword))
+                  : default,
                 VariableDeclaration(type, name, initializer)
             );
         }
@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         name,
                         argumentList: null,
                         expression == null
-                            ? null
-                            : SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
+                          ? null
+                          : SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
                     )
                 )
             );

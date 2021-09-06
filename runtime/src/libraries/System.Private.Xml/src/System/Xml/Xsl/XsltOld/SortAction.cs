@@ -181,20 +181,20 @@ namespace System.Xml.Xsl.XsltOld
 
             processor.AddSort(
                 _sort != null
-                    ? _sort
-                    : new Sort(
-                          _selectKey,
-                          _langAvt == null ? _lang : ParseLang(_langAvt.Evaluate(processor, frame)),
-                          _dataTypeAvt == null
-                              ? _dataType
-                              : ParseDataType(_dataTypeAvt.Evaluate(processor, frame), _manager!),
-                          _orderAvt == null
-                              ? _order
-                              : ParseOrder(_orderAvt.Evaluate(processor, frame)),
-                          _caseOrderAvt == null
-                              ? _caseOrder
-                              : ParseCaseOrder(_caseOrderAvt.Evaluate(processor, frame))
-                      )
+                  ? _sort
+                  : new Sort(
+                        _selectKey,
+                        _langAvt == null ? _lang : ParseLang(_langAvt.Evaluate(processor, frame)),
+                        _dataTypeAvt == null
+                          ? _dataType
+                          : ParseDataType(_dataTypeAvt.Evaluate(processor, frame), _manager!),
+                        _orderAvt == null
+                          ? _order
+                          : ParseOrder(_orderAvt.Evaluate(processor, frame)),
+                        _caseOrderAvt == null
+                          ? _caseOrder
+                          : ParseCaseOrder(_caseOrderAvt.Evaluate(processor, frame))
+                    )
             );
             frame.Finished();
         }

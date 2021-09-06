@@ -51,8 +51,8 @@ namespace Microsoft.AspNetCore.Testing
                 // Major and Minor are required by the parser, but if Build isn't specified then it returns -1
                 // which the constructor rejects.
                 currentVersion.Build == -1
-                    ? 0
-                    : currentVersion.Build
+                  ? 0
+                  : currentVersion.Build
             );
 
             // Do not skip other OS's, Use OSSkipConditionAttribute or a separate MaximumOsVersionAttribute for that.

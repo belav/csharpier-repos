@@ -581,8 +581,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 hardSelect ? UpdateSelectionHint.Selected : UpdateSelectionHint.SoftSelected,
                 centerSelection: true,
                 uniqueItem: moreThanOneMatchWithSamePriority
-                    ? null
-                    : bestMatchResult.GetValueOrDefault().VSCompletionItem
+                  ? null
+                  : bestMatchResult.GetValueOrDefault().VSCompletionItem
             );
         }
 
@@ -646,8 +646,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 n =>
                     n.WithAvailability(
                         n.Filter is CompletionExpander
-                            ? true
-                            : textFilteredFilters.Contains(n.Filter)
+                          ? true
+                          : textFilteredFilters.Contains(n.Filter)
                     )
             );
         }

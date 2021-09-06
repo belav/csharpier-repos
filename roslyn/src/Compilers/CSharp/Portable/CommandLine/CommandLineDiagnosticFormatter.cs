@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ) {
                 return normalizedPath.Substring(
                     PathUtilities.IsDirectorySeparator(normalizedBaseDirectory.Last())
-                        ? normalizedBaseDirectory.Length
-                        : normalizedBaseDirectory.Length + 1
+                      ? normalizedBaseDirectory.Length
+                      : normalizedBaseDirectory.Length + 1
                 );
             }
 

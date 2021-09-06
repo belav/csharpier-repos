@@ -153,8 +153,8 @@ namespace System.Buffers
                     Id,
                     ArrayPoolEventSource.NoBucketId,
                     bucketIndex >= _buckets.Length
-                        ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
-                        : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
+                      ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
+                      : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
                 );
             }
 
@@ -241,8 +241,8 @@ namespace System.Buffers
                         Id,
                         haveBucket ? bucketIndex : ArrayPoolEventSource.NoBucketId,
                         haveBucket
-                            ? ArrayPoolEventSource.BufferDroppedReason.Full
-                            : ArrayPoolEventSource.BufferDroppedReason.OverMaximumSize
+                          ? ArrayPoolEventSource.BufferDroppedReason.Full
+                          : ArrayPoolEventSource.BufferDroppedReason.OverMaximumSize
                     );
                 }
             }

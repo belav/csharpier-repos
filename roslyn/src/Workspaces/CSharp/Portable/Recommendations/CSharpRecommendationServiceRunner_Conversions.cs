@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     // the user instead.
                     symbols.Add(
                         containerIsNullable && IsLiftableConversion(method)
-                            ? LiftConversion(compilation, method)
-                            : method
+                          ? LiftConversion(compilation, method)
+                          : method
                     );
                 }
             }

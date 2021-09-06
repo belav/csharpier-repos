@@ -498,8 +498,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     _console.SetForegroundColor(
                         diagnostic.Severity == DiagnosticSeverity.Error
-                            ? ConsoleColor.Red
-                            : ConsoleColor.Yellow
+                          ? ConsoleColor.Red
+                          : ConsoleColor.Yellow
                     );
                     _console.Error.WriteLine(diagnostic.ToString());
                 }

@@ -923,12 +923,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Client", "Orders"),
                 async
-                    ? (
-                          await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
-                      ).Message
-                    : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message
+                  ? (
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => query.ToListAsync()
+                        )
+                    ).Message
+                  : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message
             );
         }
 

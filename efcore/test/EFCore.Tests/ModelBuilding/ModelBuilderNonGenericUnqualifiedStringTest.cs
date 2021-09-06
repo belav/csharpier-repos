@@ -157,8 +157,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 return new NonGenericStringTestReferenceNavigationBuilder<TEntity, TRelatedEntity>(
                     navigationName == null
-                        ? EntityTypeBuilder.HasOne(typeof(TRelatedEntity).FullName!, navigationName)
-                        : EntityTypeBuilder.HasOne(navigationName)
+                      ? EntityTypeBuilder.HasOne(typeof(TRelatedEntity).FullName!, navigationName)
+                      : EntityTypeBuilder.HasOne(navigationName)
                 );
             }
 
@@ -173,11 +173,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 return new NonGenericTestCollectionNavigationBuilder<TEntity, TRelatedEntity>(
                     navigationName == null
-                        ? EntityTypeBuilder.HasMany(
-                              typeof(TRelatedEntity).FullName!,
-                              navigationName
-                          )
-                        : EntityTypeBuilder.HasMany(navigationName)
+                      ? EntityTypeBuilder.HasMany(typeof(TRelatedEntity).FullName!, navigationName)
+                      : EntityTypeBuilder.HasMany(navigationName)
                 );
             }
         }
@@ -305,11 +302,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     TNewDependentEntity
                 >(
                     navigationName == null
-                        ? OwnedNavigationBuilder.HasOne(
-                              typeof(TNewDependentEntity).FullName!,
-                              navigationName
-                          )
-                        : OwnedNavigationBuilder.HasOne(navigationName)
+                      ? OwnedNavigationBuilder.HasOne(
+                            typeof(TNewDependentEntity).FullName!,
+                            navigationName
+                        )
+                      : OwnedNavigationBuilder.HasOne(navigationName)
                 );
             }
         }

@@ -15246,8 +15246,8 @@ record B : A
             var verifierA = CompileAndVerify(
                     compA,
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
 
@@ -15303,8 +15303,8 @@ record B : A
                     compB,
                     expectedOutput: "(1, 2, 3, 4) (1, 2, 3, 4) (10, 2, 30, 4)",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             // call base copy constructor B..ctor(B)
@@ -15360,8 +15360,8 @@ public record C(object P1, object P2) : B(3, 4)
                     comp,
                     expectedOutput: "(1, 2, 3, 4) (10, 20, 30, 40)",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             // call base copy constructor B..ctor(B)
@@ -15432,8 +15432,8 @@ public record C(object P1, object P2) : B(3, 4) { }
             var verifier = CompileAndVerify(
                     comp,
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
@@ -15473,8 +15473,8 @@ public record C(object P1, object P2) : B(3, 4) { }
             var verifier = CompileAndVerify(
                     comp,
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics(
                     // (3,17): warning CS0414: The field 'C.field' is assigned but its value is never used
@@ -15751,8 +15751,8 @@ public record C(object I)
                     comp,
                     expectedOutput: "RAN",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
@@ -15821,8 +15821,8 @@ public record C(object I)
                     comp,
                     expectedOutput: "1 RAN 2",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
@@ -15963,8 +15963,8 @@ public record D(int J) : C(1)
                     comp,
                     expectedOutput: "(1, 2, 42) RAN (10, 20, 42)",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
@@ -16017,8 +16017,8 @@ public record D(int J) : C(1)
                     comp,
                     expectedOutput: "(1, 2, 42) (10, 20, 42)",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
@@ -16385,8 +16385,8 @@ public record C(object P1, object P2) : B(3, 4)
                     comp,
                     expectedOutput: "(1, 2, 3, 4, 100, 200)",
                     verify: ExecutionConditionUtil.IsCoreClr
-                        ? Verification.Skipped
-                        : Verification.Fails
+                      ? Verification.Skipped
+                      : Verification.Fails
                 )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
@@ -22956,8 +22956,8 @@ class Program
             var verifier = CompileAndVerify(
                     comp,
                     expectedOutput: modifiers == "abstract "
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 True
 True
 True
@@ -23050,8 +23050,8 @@ class Program
             var verifier = CompileAndVerify(
                     comp,
                     expectedOutput: modifiers == "abstract "
-                        ? null
-                        : @"
+                      ? null
+                      : @"
 True
 True
 True

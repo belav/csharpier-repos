@@ -1428,8 +1428,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             _diagnostics.ReportUseSite(
                                 attributeClass,
                                 symbol.Locations.IsEmpty
-                                    ? NoLocation.Singleton
-                                    : symbol.Locations[0]
+                                  ? NoLocation.Singleton
+                                  : symbol.Locations[0]
                             )
                         ) {
                             continue;

@@ -478,8 +478,8 @@ namespace System.Net.Sockets.Tests
             listener.Bind(
                 new IPEndPoint(
                     addressFamily == AddressFamily.InterNetwork
-                        ? IPAddress.Loopback
-                        : IPAddress.IPv6Loopback,
+                      ? IPAddress.Loopback
+                      : IPAddress.IPv6Loopback,
                     0
                 )
             );
@@ -552,8 +552,8 @@ namespace System.Net.Sockets.Tests
 
             using var listenerCopy = new Socket(
                 shareSafeHandle
-                    ? listener.SafeHandle
-                    : new SafeSocketHandle(listener.Handle, ownsHandle: false)
+                  ? listener.SafeHandle
+                  : new SafeSocketHandle(listener.Handle, ownsHandle: false)
             );
             Assert.False(listenerCopy.Connected);
             // This will throw if _isListening is set internally. (before reaching any real code)

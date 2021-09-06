@@ -228,15 +228,15 @@ namespace System
         {
             return TextWriter.Synchronized(
                 outputStream == Stream.Null
-                    ? StreamWriter.Null
-                    : new StreamWriter(
-                          stream: outputStream,
-                          encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
-                          bufferSize: WriteBufferSize,
-                          leaveOpen: true
-                      ) {
-                          AutoFlush = true
-                      }
+                  ? StreamWriter.Null
+                  : new StreamWriter(
+                        stream: outputStream,
+                        encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
+                        bufferSize: WriteBufferSize,
+                        leaveOpen: true
+                    ) {
+                        AutoFlush = true
+                    }
             );
         }
 

@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                         Task.FromResult(
                             new ReferenceCount(
                                 progress.SearchCap > 0
-                                    ? Math.Min(progress.ReferencesCount, progress.SearchCap)
-                                    : progress.ReferencesCount,
+                                  ? Math.Min(progress.ReferencesCount, progress.SearchCap)
+                                  : progress.ReferencesCount,
                                 progress.SearchCapReached,
                                 projectVersion.ToString()
                             )

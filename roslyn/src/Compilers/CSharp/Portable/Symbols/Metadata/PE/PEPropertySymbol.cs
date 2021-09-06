@@ -671,8 +671,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         _handle,
                         out _,
                         this.RefKind == RefKind.RefReadOnly
-                            ? AttributeDescription.IsReadOnlyAttribute
-                            : default
+                          ? AttributeDescription.IsReadOnlyAttribute
+                          : default
                     );
 
                 ImmutableInterlocked.InterlockedInitialize(ref _lazyCustomAttributes, attributes);

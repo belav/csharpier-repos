@@ -486,8 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddPunctuation(SyntaxKind.DotToken);
                     AddKeyword(
                         symbol.MethodKind == MethodKind.PropertyGet
-                            ? SyntaxKind.GetKeyword
-                            : IsInitOnly(symbol) ? SyntaxKind.InitKeyword : SyntaxKind.SetKeyword
+                          ? SyntaxKind.GetKeyword
+                          : IsInitOnly(symbol) ? SyntaxKind.InitKeyword : SyntaxKind.SetKeyword
                     );
                     break;
                 }
@@ -504,8 +504,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddPunctuation(SyntaxKind.DotToken);
                     AddKeyword(
                         symbol.MethodKind == MethodKind.EventAdd
-                            ? SyntaxKind.AddKeyword
-                            : SyntaxKind.RemoveKeyword
+                          ? SyntaxKind.AddKeyword
+                          : SyntaxKind.RemoveKeyword
                     );
                     break;
                 }

@@ -601,8 +601,8 @@ namespace System.Net.Http.Formatting
                         exception,
                         Properties.Resources.SerializerCannotSerializeType,
                         UseXmlSerializer
-                            ? typeof(XmlSerializer).Name
-                            : typeof(DataContractSerializer).Name,
+                          ? typeof(XmlSerializer).Name
+                          : typeof(DataContractSerializer).Name,
                         type.Name
                     );
                 }
@@ -611,8 +611,8 @@ namespace System.Net.Http.Formatting
                     throw Error.InvalidOperation(
                         Properties.Resources.SerializerCannotSerializeType,
                         UseXmlSerializer
-                            ? typeof(XmlSerializer).Name
-                            : typeof(DataContractSerializer).Name,
+                          ? typeof(XmlSerializer).Name
+                          : typeof(DataContractSerializer).Name,
                         type.Name
                     );
                 }
@@ -671,8 +671,8 @@ namespace System.Net.Http.Formatting
                 throw Error.InvalidOperation(
                     Properties.Resources.SerializerCannotSerializeType,
                     UseXmlSerializer
-                        ? typeof(XmlSerializer).Name
-                        : typeof(DataContractSerializer).Name,
+                      ? typeof(XmlSerializer).Name
+                      : typeof(DataContractSerializer).Name,
                     type.Name
                 );
             }

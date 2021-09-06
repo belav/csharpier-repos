@@ -620,13 +620,13 @@ namespace System.Net.WebSockets
                 return new ValueTask(
                     Task.FromException(
                         exc is OperationCanceledException
-                            ? exc
-                            : _state == WebSocketState.Aborted
-                                ? CreateOperationCanceledException(exc)
-                                : new WebSocketException(
-                                      WebSocketError.ConnectionClosedPrematurely,
-                                      exc
-                                  )
+                          ? exc
+                          : _state == WebSocketState.Aborted
+                              ? CreateOperationCanceledException(exc)
+                              : new WebSocketException(
+                                    WebSocketError.ConnectionClosedPrematurely,
+                                    exc
+                                )
                     )
                 );
             }
@@ -1018,8 +1018,8 @@ namespace System.Net.WebSockets
                         return resultGetter.GetResult(
                             0,
                             header.Opcode == MessageOpcode.Text
-                                ? WebSocketMessageType.Text
-                                : WebSocketMessageType.Binary,
+                              ? WebSocketMessageType.Text
+                              : WebSocketMessageType.Binary,
                             header.Fin && header.PayloadLength == 0,
                             null,
                             null
@@ -1103,8 +1103,8 @@ namespace System.Net.WebSockets
                     return resultGetter.GetResult(
                         totalBytesReceived,
                         header.Opcode == MessageOpcode.Text
-                            ? WebSocketMessageType.Text
-                            : WebSocketMessageType.Binary,
+                          ? WebSocketMessageType.Text
+                          : WebSocketMessageType.Binary,
                         header.Fin && header.PayloadLength == 0,
                         null,
                         null

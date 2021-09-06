@@ -184,10 +184,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     callingConventionSyntax = SyntaxFactory.FunctionPointerCallingConvention(
                         SyntaxFactory.Token(SyntaxKind.UnmanagedKeyword),
                         conventionsList is object
-                            ? SyntaxFactory.FunctionPointerUnmanagedCallingConventionList(
-                                  SyntaxFactory.SeparatedList(conventionsList)
-                              )
-                            : null
+                          ? SyntaxFactory.FunctionPointerUnmanagedCallingConventionList(
+                                SyntaxFactory.SeparatedList(conventionsList)
+                            )
+                          : null
                     );
 
                     static FunctionPointerUnmanagedCallingConventionSyntax GetConventionForString(

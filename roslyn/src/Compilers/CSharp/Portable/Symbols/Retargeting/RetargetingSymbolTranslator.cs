@@ -884,8 +884,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                         newModifiers.Add(
                             oldModifier.IsOptional
-                                ? CSharpCustomModifier.CreateOptional(newModifierSymbol)
-                                : CSharpCustomModifier.CreateRequired(newModifierSymbol)
+                              ? CSharpCustomModifier.CreateOptional(newModifierSymbol)
+                              : CSharpCustomModifier.CreateRequired(newModifierSymbol)
                         );
                     }
                     else if (newModifiers != null)

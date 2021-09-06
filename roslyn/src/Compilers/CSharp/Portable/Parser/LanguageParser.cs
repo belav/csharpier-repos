@@ -496,8 +496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 token = this.AddError(
                                     token,
                                     IsScript
-                                        ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
-                                        : ErrorCode.ERR_EOFExpected
+                                      ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
+                                      : ErrorCode.ERR_EOFExpected
                                 );
 
                                 this.AddSkippedNamespaceText(
@@ -666,8 +666,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                     skippedToken = this.AddError(
                                         skippedToken,
                                         IsScript
-                                            ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
-                                            : ErrorCode.ERR_EOFExpected
+                                          ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
+                                          : ErrorCode.ERR_EOFExpected
                                     );
 
                                     // do not report the error multiple times for subsequent tokens:
@@ -1381,8 +1381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             modTok = CheckFeatureAvailability(
                                 modTok,
                                 isPartialType
-                                    ? MessageID.IDS_FeaturePartialTypes
-                                    : MessageID.IDS_FeaturePartialMethod
+                                  ? MessageID.IDS_FeaturePartialTypes
+                                  : MessageID.IDS_FeaturePartialMethod
                             );
                         }
                         else if (nextToken.Kind == SyntaxKind.NamespaceKeyword)
@@ -2102,8 +2102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 list.Add(
                     argumentList is object
-                        ? _syntaxFactory.PrimaryConstructorBaseType(firstType, argumentList)
-                        : (BaseTypeSyntax)_syntaxFactory.SimpleBaseType(firstType)
+                      ? _syntaxFactory.PrimaryConstructorBaseType(firstType, argumentList)
+                      : (BaseTypeSyntax)_syntaxFactory.SimpleBaseType(firstType)
                 );
 
                 // any additional types
@@ -4248,8 +4248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 ref openBrace,
                                 builder,
                                 isEvent
-                                    ? ErrorCode.ERR_AddOrRemoveExpected
-                                    : ErrorCode.ERR_GetOrSetExpected
+                                  ? ErrorCode.ERR_AddOrRemoveExpected
+                                  : ErrorCode.ERR_GetOrSetExpected
                             ) == PostSkipAction.Abort
                         ) {
                             break;
@@ -4628,8 +4628,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         accessorName = this.AddError(
                             accessorName,
                             isEvent
-                                ? ErrorCode.ERR_AddOrRemoveExpected
-                                : ErrorCode.ERR_GetOrSetExpected
+                              ? ErrorCode.ERR_AddOrRemoveExpected
+                              : ErrorCode.ERR_GetOrSetExpected
                         );
                     }
                     else
@@ -4718,8 +4718,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             this.EatToken(
                 SyntaxKind.SemicolonToken,
                 IsFeatureEnabled(MessageID.IDS_FeatureExpressionBodiedAccessor)
-                    ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
-                    : ErrorCode.ERR_SemiOrLBraceExpected
+                  ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
+                  : ErrorCode.ERR_SemiOrLBraceExpected
             );
 
         private SyntaxKind GetAccessorKind(SyntaxToken accessorName)
@@ -8290,8 +8290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     token = this.AddError(
                         token,
                         mode == ParseTypeMode.Parameter
-                            ? ErrorCode.ERR_NoVoidParameter
-                            : ErrorCode.ERR_NoVoidHere
+                          ? ErrorCode.ERR_NoVoidParameter
+                          : ErrorCode.ERR_NoVoidHere
                     );
                 }
 
@@ -8316,8 +8316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return this.AddError(
                 this.CreateMissingIdentifierName(),
                 mode == ParseTypeMode.NewExpression
-                    ? ErrorCode.ERR_BadNewExpr
-                    : ErrorCode.ERR_TypeExpected
+                  ? ErrorCode.ERR_BadNewExpr
+                  : ErrorCode.ERR_TypeExpected
             );
         }
 
@@ -9402,8 +9402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     ? this.AddError(
                           SyntaxFactory.MissingToken(SyntaxKind.OpenBraceToken),
                           IsFeatureEnabled(MessageID.IDS_FeatureExpressionBodiedAccessor)
-                              ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
-                              : ErrorCode.ERR_SemiOrLBraceExpected
+                            ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
+                            : ErrorCode.ERR_SemiOrLBraceExpected
                       )
                     : this.EatToken(SyntaxKind.OpenBraceToken);
 
@@ -9415,10 +9415,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 (SyntaxToken)openBrace,
                 // Force creation a many-children list, even if only 1, 2, or 3 elements in the statement list.
                 IsLargeEnoughNonEmptyStatementList(statements)
-                    ? new SyntaxList<StatementSyntax>(
-                          SyntaxList.List(((SyntaxListBuilder)statements).ToArray())
-                      )
-                    : statements,
+                  ? new SyntaxList<StatementSyntax>(
+                        SyntaxList.List(((SyntaxListBuilder)statements).ToArray())
+                    )
+                  : statements,
                 this.EatToken(SyntaxKind.CloseBraceToken)
             );
 
@@ -14099,15 +14099,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 openBrace = CheckFeatureAvailability(
                     openBrace,
                     isObjectInitializer
-                        ? MessageID.IDS_FeatureObjectInitializer
-                        : MessageID.IDS_FeatureCollectionInitializer
+                      ? MessageID.IDS_FeatureObjectInitializer
+                      : MessageID.IDS_FeatureCollectionInitializer
                 );
 
                 var closeBrace = this.EatToken(SyntaxKind.CloseBraceToken);
                 return _syntaxFactory.InitializerExpression(
                     isObjectInitializer
-                        ? SyntaxKind.ObjectInitializerExpression
-                        : SyntaxKind.CollectionInitializerExpression,
+                      ? SyntaxKind.ObjectInitializerExpression
+                      : SyntaxKind.CollectionInitializerExpression,
                     openBrace,
                     initializers,
                     closeBrace

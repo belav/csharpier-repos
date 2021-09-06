@@ -69,8 +69,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             dataBuilder.EmitReloc(
                 _delayLoadHelper,
                 factory.Target.PointerSize == 4
-                    ? RelocType.IMAGE_REL_BASED_HIGHLOW
-                    : RelocType.IMAGE_REL_BASED_DIR64,
+                  ? RelocType.IMAGE_REL_BASED_HIGHLOW
+                  : RelocType.IMAGE_REL_BASED_DIR64,
                 codeDelta
             );
         }

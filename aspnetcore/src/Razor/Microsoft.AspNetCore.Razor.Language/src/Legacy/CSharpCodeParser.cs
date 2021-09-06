@@ -107,8 +107,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             ParserContext context
         ) : base(
             context.ParseLeadingDirectives
-                ? FirstDirectiveCSharpLanguageCharacteristics.Instance
-                : CSharpLanguageCharacteristics.Instance,
+              ? FirstDirectiveCSharpLanguageCharacteristics.Instance
+              : CSharpLanguageCharacteristics.Instance,
             context
         ) {
             if (directives == null)

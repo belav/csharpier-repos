@@ -586,8 +586,8 @@ namespace System.Net.Security
             return new Win32Exception(
                 NTE_FAIL,
                 (statusCode.Exception != null)
-                    ? statusCode.Exception.Message
-                    : statusCode.ErrorCode.ToString()
+                  ? statusCode.Exception.Message
+                  : statusCode.ErrorCode.ToString()
             );
         }
 

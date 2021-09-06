@@ -678,8 +678,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundBadStatement(
                 syntax: node,
                 childBoundNodes: gotoCaseExpressionOpt != null
-                    ? ImmutableArray.Create<BoundNode>(gotoCaseExpressionOpt)
-                    : ImmutableArray<BoundNode>.Empty,
+                  ? ImmutableArray.Create<BoundNode>(gotoCaseExpressionOpt)
+                  : ImmutableArray<BoundNode>.Empty,
                 hasErrors: true
             );
         }

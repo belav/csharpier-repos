@@ -68,8 +68,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             && sqlConstantExpression.Value is bool boolValue
                 ? _sqlExpressionFactory.Equal(
                       boolValue
-                          ? _sqlExpressionFactory.Constant(1)
-                          : _sqlExpressionFactory.Constant(0),
+                        ? _sqlExpressionFactory.Constant(1)
+                        : _sqlExpressionFactory.Constant(0),
                       _sqlExpressionFactory.Constant(1)
                   )
                 : _sqlExpressionFactory.Equal(sqlExpression, _sqlExpressionFactory.Constant(true));
@@ -125,8 +125,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
                 return _sqlExpressionFactory.MakeBinary(
                     sqlBinaryOperand.OperatorType == ExpressionType.Equal
-                        ? ExpressionType.NotEqual
-                        : ExpressionType.Equal,
+                      ? ExpressionType.NotEqual
+                      : ExpressionType.Equal,
                     sqlBinaryOperand.Left,
                     sqlBinaryOperand.Right,
                     sqlBinaryOperand.TypeMapping

@@ -343,8 +343,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                         size: size,
                         fixedLength: isFixedLength,
                         storeTypePostfix: storeTypeName == null
-                            ? StoreTypePostfix.Size
-                            : StoreTypePostfix.None
+                          ? StoreTypePostfix.Size
+                          : StoreTypePostfix.None
                     );
                 }
 
@@ -369,8 +369,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                               size: size,
                               fixedLength: isFixedLength,
                               storeTypePostfix: storeTypeName == null
-                                  ? StoreTypePostfix.Size
-                                  : StoreTypePostfix.None
+                                ? StoreTypePostfix.Size
+                                : StoreTypePostfix.None
                           );
                 }
             }

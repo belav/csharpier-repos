@@ -1327,8 +1327,8 @@ namespace System.Net.Http
                 string headerValue = descriptor.GetHeaderValue(value, valueEncoding);
                 response.TrailingHeaders.TryAddWithoutValidation(
                     (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                        ? descriptor.AsCustomHeader()
-                        : descriptor,
+                      ? descriptor.AsCustomHeader()
+                      : descriptor,
                     headerValue
                 );
             }
@@ -1347,8 +1347,8 @@ namespace System.Net.Http
                 );
                 response.Headers.TryAddWithoutValidation(
                     (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                        ? descriptor.AsCustomHeader()
-                        : descriptor,
+                      ? descriptor.AsCustomHeader()
+                      : descriptor,
                     headerValue
                 );
             }

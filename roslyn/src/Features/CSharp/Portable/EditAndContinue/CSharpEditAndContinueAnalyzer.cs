@@ -2067,8 +2067,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return TextSpan.FromBounds(
                         switchStatement.SwitchKeyword.SpanStart,
                         (switchStatement.CloseParenToken != default)
-                            ? switchStatement.CloseParenToken.Span.End
-                            : switchStatement.Expression.Span.End
+                          ? switchStatement.CloseParenToken.Span.End
+                          : switchStatement.Expression.Span.End
                     );
 
                 case SyntaxKind.SwitchSection:
@@ -2096,8 +2096,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     var commonForEachStatement = (CommonForEachStatementSyntax)node;
                     return TextSpan.FromBounds(
                         (commonForEachStatement.AwaitKeyword.Span.Length > 0)
-                            ? commonForEachStatement.AwaitKeyword.SpanStart
-                            : commonForEachStatement.ForEachKeyword.SpanStart,
+                          ? commonForEachStatement.AwaitKeyword.SpanStart
+                          : commonForEachStatement.ForEachKeyword.SpanStart,
                         commonForEachStatement.CloseParenToken.Span.End
                     );
 
@@ -3716,8 +3716,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 {
                     ReportError(
                         isTriviaUpdate
-                            ? RudeEditKind.GenericMethodTriviaUpdate
-                            : RudeEditKind.GenericMethodUpdate
+                          ? RudeEditKind.GenericMethodTriviaUpdate
+                          : RudeEditKind.GenericMethodUpdate
                     );
                     return;
                 }
@@ -3726,8 +3726,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 {
                     ReportError(
                         isTriviaUpdate
-                            ? RudeEditKind.GenericTypeTriviaUpdate
-                            : RudeEditKind.GenericTypeUpdate
+                          ? RudeEditKind.GenericTypeTriviaUpdate
+                          : RudeEditKind.GenericTypeUpdate
                     );
                     return;
                 }
@@ -4090,8 +4090,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return TextSpan.FromBounds(
                         tryStatement.Catches.First().SpanStart,
                         (tryStatement.Finally != null)
-                            ? tryStatement.Finally.Span.End
-                            : tryStatement.Catches.Last().Span.End
+                          ? tryStatement.Finally.Span.End
+                          : tryStatement.Catches.Last().Span.End
                     );
 
                 case SyntaxKind.CatchClause:

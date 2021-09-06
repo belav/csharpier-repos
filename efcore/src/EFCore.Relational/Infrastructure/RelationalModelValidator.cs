@@ -1405,16 +1405,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     throw new InvalidOperationException(
                         forTables
-                            ? RelationalStrings.NonTPHTableClash(
-                                  entityType.DisplayName(),
-                                  otherType.DisplayName(),
-                                  entityType.GetSchemaQualifiedTableName()
-                              )
-                            : RelationalStrings.NonTPHViewClash(
-                                  entityType.DisplayName(),
-                                  otherType.DisplayName(),
-                                  entityType.GetSchemaQualifiedViewName()
-                              )
+                          ? RelationalStrings.NonTPHTableClash(
+                                entityType.DisplayName(),
+                                otherType.DisplayName(),
+                                entityType.GetSchemaQualifiedTableName()
+                            )
+                          : RelationalStrings.NonTPHViewClash(
+                                entityType.DisplayName(),
+                                otherType.DisplayName(),
+                                entityType.GetSchemaQualifiedViewName()
+                            )
                     );
                 }
 
@@ -1448,18 +1448,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     throw new InvalidOperationException(
                         forTables
-                            ? RelationalStrings.TPHTableMismatch(
-                                  entityType.DisplayName(),
-                                  entityType.GetSchemaQualifiedTableName(),
-                                  firstType.DisplayName(),
-                                  firstType.GetSchemaQualifiedTableName()
-                              )
-                            : RelationalStrings.TPHViewMismatch(
-                                  entityType.DisplayName(),
-                                  entityType.GetSchemaQualifiedViewName(),
-                                  firstType.DisplayName(),
-                                  firstType.GetSchemaQualifiedViewName()
-                              )
+                          ? RelationalStrings.TPHTableMismatch(
+                                entityType.DisplayName(),
+                                entityType.GetSchemaQualifiedTableName(),
+                                firstType.DisplayName(),
+                                firstType.GetSchemaQualifiedTableName()
+                            )
+                          : RelationalStrings.TPHViewMismatch(
+                                entityType.DisplayName(),
+                                entityType.GetSchemaQualifiedViewName(),
+                                firstType.DisplayName(),
+                                firstType.GetSchemaQualifiedViewName()
+                            )
                     );
                 }
             }

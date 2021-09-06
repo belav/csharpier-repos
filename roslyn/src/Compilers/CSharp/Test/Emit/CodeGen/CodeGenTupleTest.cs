@@ -25481,8 +25481,8 @@ public class C2 : C1, I1<(int c, int d)>
                 Assert.Equal(1, m2Implementations.Length);
                 Assert.Equal(
                     isMetadata
-                        ? "void I1<(System.Int32, System.Int32)>.M2()"
-                        : "void I1<(System.Int32 c, System.Int32 d)>.M2()",
+                      ? "void I1<(System.Int32, System.Int32)>.M2()"
+                      : "void I1<(System.Int32 c, System.Int32 d)>.M2()",
                     m2Implementations[0].ToTestDisplayString()
                 );
 
@@ -33420,16 +33420,16 @@ public class ClassB
                 var iEnumerable = (ConstructedNamedTypeSymbol)classA.Interfaces()[0];
                 AssertEx.Equal(
                     decodingSuccessful
-                        ? "System.Collections.Generic.IEnumerable<Container<(System.Int32 alice, System.Int32 bob)>[missing].Contained<(System.Int32 charlie, System.Int32 dylan)>[missing]>"
-                        : "System.Collections.Generic.IEnumerable<Container<(System.Int32, System.Int32)>[missing].Contained<(System.Int32, System.Int32)>[missing]>",
+                      ? "System.Collections.Generic.IEnumerable<Container<(System.Int32 alice, System.Int32 bob)>[missing].Contained<(System.Int32 charlie, System.Int32 dylan)>[missing]>"
+                      : "System.Collections.Generic.IEnumerable<Container<(System.Int32, System.Int32)>[missing].Contained<(System.Int32, System.Int32)>[missing]>",
                     iEnumerable.ToTestDisplayString()
                 );
 
                 var contained = (NamedTypeSymbol)iEnumerable.TypeArguments()[0];
                 Assert.Equal(
                     decodingSuccessful
-                        ? "Container<(System.Int32 alice, System.Int32 bob)>[missing].Contained<(System.Int32 charlie, System.Int32 dylan)>[missing]"
-                        : "Container<(System.Int32, System.Int32)>[missing].Contained<(System.Int32, System.Int32)>[missing]",
+                      ? "Container<(System.Int32 alice, System.Int32 bob)>[missing].Contained<(System.Int32 charlie, System.Int32 dylan)>[missing]"
+                      : "Container<(System.Int32, System.Int32)>[missing].Contained<(System.Int32, System.Int32)>[missing]",
                     contained.ToTestDisplayString()
                 );
                 Assert.True(contained.IsErrorType());
@@ -33437,8 +33437,8 @@ public class ClassB
                 var tuple1 = (NamedTypeSymbol)contained.TypeArguments()[0];
                 Assert.Equal(
                     decodingSuccessful
-                        ? "(System.Int32 charlie, System.Int32 dylan)"
-                        : "(System.Int32, System.Int32)",
+                      ? "(System.Int32 charlie, System.Int32 dylan)"
+                      : "(System.Int32, System.Int32)",
                     tuple1.ToTestDisplayString()
                 );
                 Assert.True(tuple1.IsTupleType);
@@ -33448,8 +33448,8 @@ public class ClassB
                 var container = contained.ContainingType;
                 Assert.Equal(
                     decodingSuccessful
-                        ? "Container<(System.Int32 alice, System.Int32 bob)>[missing]"
-                        : "Container<(System.Int32, System.Int32)>[missing]",
+                      ? "Container<(System.Int32 alice, System.Int32 bob)>[missing]"
+                      : "Container<(System.Int32, System.Int32)>[missing]",
                     container.ToTestDisplayString()
                 );
                 Assert.True(container.IsErrorType());
@@ -33457,8 +33457,8 @@ public class ClassB
                 var tuple2 = (NamedTypeSymbol)container.TypeArguments()[0];
                 Assert.Equal(
                     decodingSuccessful
-                        ? "(System.Int32 alice, System.Int32 bob)"
-                        : "(System.Int32, System.Int32)",
+                      ? "(System.Int32 alice, System.Int32 bob)"
+                      : "(System.Int32, System.Int32)",
                     tuple2.ToTestDisplayString()
                 );
                 Assert.True(tuple2.IsTupleType);
@@ -34857,8 +34857,8 @@ class C
 
                 Assert.Equal(
                     module is SourceModuleSymbol
-                        ? "SourceNamedTypeSymbol"
-                        : "PENamedTypeSymbolGeneric",
+                      ? "SourceNamedTypeSymbol"
+                      : "PENamedTypeSymbolGeneric",
                     type.GetType().Name
                 );
                 Assert.Empty(type.GetFieldsToEmit());
@@ -35072,12 +35072,12 @@ namespace System
                     Assert.True(namedType.IsTupleType);
                     Assert.Equal(
                         isSourceSymbol
-                            ? "SourceNamedTypeSymbol"
-                            : (
-                                  retargeting
-                                      ? "RetargetingNamedTypeSymbol"
-                                      : "PENamedTypeSymbolGeneric"
-                              ),
+                          ? "SourceNamedTypeSymbol"
+                          : (
+                                retargeting
+                                    ? "RetargetingNamedTypeSymbol"
+                                    : "PENamedTypeSymbolGeneric"
+                            ),
                         namedType.GetType().Name
                     );
 

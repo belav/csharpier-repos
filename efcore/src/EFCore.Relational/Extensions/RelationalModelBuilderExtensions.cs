@@ -220,8 +220,8 @@ namespace Microsoft.EntityFrameworkCore
                 name,
                 schema,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             ).Builder;
 
         private static Sequence HasSequence(
@@ -337,8 +337,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 ((DbFunction)dbFunction).UpdateConfigurationSource(
                     fromDataAnnotation
-                        ? ConfigurationSource.DataAnnotation
-                        : ConfigurationSource.Convention
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
                 );
             }
 
@@ -375,8 +375,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 ((DbFunction)dbFunction).UpdateConfigurationSource(
                     fromDataAnnotation
-                        ? ConfigurationSource.DataAnnotation
-                        : ConfigurationSource.Convention
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
                 );
             }
 

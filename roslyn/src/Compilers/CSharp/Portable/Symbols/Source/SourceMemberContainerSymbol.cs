@@ -5058,8 +5058,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) {
                 builder.AddNonTypeMember(
                     (this.TypeKind == TypeKind.Submission)
-                        ? new SynthesizedSubmissionConstructor(this, diagnostics)
-                        : new SynthesizedInstanceConstructor(this),
+                      ? new SynthesizedSubmissionConstructor(this, diagnostics)
+                      : new SynthesizedInstanceConstructor(this),
                     declaredMembersAndInitializers
                 );
             }

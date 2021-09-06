@@ -232,11 +232,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             new ExtendedSyntaxNode(
                                 variable,
                                 i == 0
-                                    ? localDeclarationLeadingTrivia
-                                    : separators[i - 1].TrailingTrivia,
+                                  ? localDeclarationLeadingTrivia
+                                  : separators[i - 1].TrailingTrivia,
                                 i == localDeclarationStatement.Declaration.Variables.Count - 1
-                                    ? (IEnumerable<SyntaxTrivia>)localDeclarationTrailingTrivia
-                                    : separators[i].LeadingTrivia
+                                  ? (IEnumerable<SyntaxTrivia>)localDeclarationTrailingTrivia
+                                  : separators[i].LeadingTrivia
                             )
                         );
                         identifiersBuilder.Add(variable.Identifier);

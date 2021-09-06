@@ -596,8 +596,8 @@ namespace Microsoft.Cci
                         scopeLocal.Name,
                         (int)scopeLocal.PdbAttributes,
                         localSignatureHandleOpt.IsNil
-                            ? 0
-                            : MetadataTokens.GetToken(localSignatureHandleOpt)
+                          ? 0
+                          : MetadataTokens.GetToken(localSignatureHandleOpt)
                     );
                 }
             }

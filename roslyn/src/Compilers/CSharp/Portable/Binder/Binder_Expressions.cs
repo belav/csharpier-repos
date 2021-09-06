@@ -1398,8 +1398,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     shouldCheckConstraints: true,
                     includeNullability: false,
                     errorPositions: disallowInferredNames
-                        ? inferredPositions
-                        : default(ImmutableArray<bool>)
+                      ? inferredPositions
+                      : default(ImmutableArray<bool>)
                 );
             }
             else
@@ -2083,8 +2083,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         members,
                         lookupResult,
                         receiver != null
-                            ? BoundMethodGroupFlags.HasImplicitReceiver
-                            : BoundMethodGroupFlags.None,
+                          ? BoundMethodGroupFlags.HasImplicitReceiver
+                          : BoundMethodGroupFlags.None,
                         isError,
                         diagnostics
                     );
@@ -2936,8 +2936,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Error(
                     diagnostics,
                     inStaticContext
-                        ? ErrorCode.ERR_ThisInStaticMeth
-                        : ErrorCode.ERR_ThisInBadContext,
+                      ? ErrorCode.ERR_ThisInStaticMeth
+                      : ErrorCode.ERR_ThisInBadContext,
                     node
                 );
             }
@@ -2996,8 +2996,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Error(
                     diagnostics,
                     inStaticContext
-                        ? ErrorCode.ERR_BaseInStaticMeth
-                        : ErrorCode.ERR_BaseInBadContext,
+                      ? ErrorCode.ERR_BaseInStaticMeth
+                      : ErrorCode.ERR_BaseInBadContext,
                     node.Token
                 );
                 hasErrors = true;
@@ -5201,8 +5201,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ConstructNamedType(
                     type: spanType,
                     typeSyntax: node.Kind() == SyntaxKind.StackAllocArrayCreationExpression
-                        ? ((StackAllocArrayCreationExpressionSyntax)node).Type
-                        : node,
+                      ? ((StackAllocArrayCreationExpressionSyntax)node).Type
+                      : node,
                     typeArgumentsSyntax: default,
                     typeArguments: ImmutableArray.Create(elementTypeWithAnnotations),
                     basesBeingResolved: null,
@@ -6838,8 +6838,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ToBadExpression(
                 boundMember,
                 (valueKind == BindValueKind.RValue)
-                    ? LookupResultKind.NotAValue
-                    : LookupResultKind.NotAVariable
+                  ? LookupResultKind.NotAValue
+                  : LookupResultKind.NotAVariable
             );
         }
 
@@ -8981,8 +8981,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         boundLeft,
                         rightName,
                         lookupResult.Symbols.All(s => s.Kind == SymbolKind.Method)
-                            ? lookupResult.Symbols.SelectAsArray(s_toMethodSymbolFunc)
-                            : ImmutableArray<MethodSymbol>.Empty,
+                          ? lookupResult.Symbols.SelectAsArray(s_toMethodSymbolFunc)
+                          : ImmutableArray<MethodSymbol>.Empty,
                         lookupResult,
                         flags
                     );
@@ -9229,11 +9229,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node,
                 lookupKind,
                 (object)symbolOpt == null
-                    ? ImmutableArray<Symbol>.Empty
-                    : ImmutableArray.Create(symbolOpt),
+                  ? ImmutableArray<Symbol>.Empty
+                  : ImmutableArray.Create(symbolOpt),
                 boundLeft == null
-                    ? ImmutableArray<BoundExpression>.Empty
-                    : ImmutableArray.Create(BindToTypeForErrorRecovery(boundLeft)),
+                  ? ImmutableArray<BoundExpression>.Empty
+                  : ImmutableArray.Create(BindToTypeForErrorRecovery(boundLeft)),
                 GetNonMethodMemberType(symbolOpt)
             );
         }
@@ -9735,8 +9735,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             Error(
                                 diagnostics,
                                 isFixedStatementExpression
-                                    ? ErrorCode.ERR_FixedNotNeeded
-                                    : ErrorCode.ERR_FixedBufferNotFixed,
+                                  ? ErrorCode.ERR_FixedNotNeeded
+                                  : ErrorCode.ERR_FixedBufferNotFixed,
                                 node
                             );
                             hasErrors = hasError = true;
@@ -10825,8 +10825,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Error(
                     diagnostics,
                     mustHaveAllOptionalParameters
-                        ? ErrorCode.ERR_IndexedPropertyMustHaveAllOptionalParams
-                        : ErrorCode.ERR_IndexedPropertyRequiresParams,
+                      ? ErrorCode.ERR_IndexedPropertyMustHaveAllOptionalParams
+                      : ErrorCode.ERR_IndexedPropertyRequiresParams,
                     syntax,
                     properties[0].ToDisplayString(s_propertyGroupFormat)
                 );
@@ -11332,8 +11332,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 diagnostics.Add(
                     argIsRange
-                        ? ErrorCode.ERR_ImplicitRangeIndexerWithName
-                        : ErrorCode.ERR_ImplicitIndexIndexerWithName,
+                      ? ErrorCode.ERR_ImplicitRangeIndexerWithName
+                      : ErrorCode.ERR_ImplicitIndexIndexerWithName,
                     arguments.Names[0].GetLocation()
                 );
             }

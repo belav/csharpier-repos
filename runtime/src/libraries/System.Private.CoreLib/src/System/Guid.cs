@@ -243,8 +243,8 @@ namespace System
         public static Guid Parse(string input) =>
             Parse(
                 input != null
-                    ? (ReadOnlySpan<char>)input
-                    : throw new ArgumentNullException(nameof(input))
+                  ? (ReadOnlySpan<char>)input
+                  : throw new ArgumentNullException(nameof(input))
             );
 
         public static Guid Parse(ReadOnlySpan<char> input)
@@ -285,11 +285,11 @@ namespace System
         public static Guid ParseExact(string input, string format) =>
             ParseExact(
                 input != null
-                    ? (ReadOnlySpan<char>)input
-                    : throw new ArgumentNullException(nameof(input)),
+                  ? (ReadOnlySpan<char>)input
+                  : throw new ArgumentNullException(nameof(input)),
                 format != null
-                    ? (ReadOnlySpan<char>)format
-                    : throw new ArgumentNullException(nameof(format))
+                  ? (ReadOnlySpan<char>)format
+                  : throw new ArgumentNullException(nameof(format))
             );
 
         public static Guid ParseExact(ReadOnlySpan<char> input, ReadOnlySpan<char> format)
@@ -747,10 +747,10 @@ namespace System
                     result.SetFailure(
                         overflow,
                         overflow
-                            ? nameof(SR.Overflow_UInt32)
-                            : byteVal > byte.MaxValue
-                                ? nameof(SR.Overflow_Byte)
-                                : nameof(SR.Format_GuidInvalidChar)
+                          ? nameof(SR.Overflow_UInt32)
+                          : byteVal > byte.MaxValue
+                              ? nameof(SR.Overflow_Byte)
+                              : nameof(SR.Format_GuidInvalidChar)
                     );
                     return false;
                 }

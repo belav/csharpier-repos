@@ -652,16 +652,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 {
                     expressions.Add(
                         inverseNavigation.IsCollection
-                            ? AddToCollectionNavigation(
-                                  relatedEntityParameter,
-                                  entityParameter,
-                                  inverseNavigation
-                              )
-                            : AssignReferenceNavigation(
-                                  relatedEntityParameter,
-                                  entityParameter,
-                                  inverseNavigation
-                              )
+                          ? AddToCollectionNavigation(
+                                relatedEntityParameter,
+                                entityParameter,
+                                inverseNavigation
+                            )
+                          : AssignReferenceNavigation(
+                                relatedEntityParameter,
+                                entityParameter,
+                                inverseNavigation
+                            )
                     );
                 }
 

@@ -2472,8 +2472,8 @@ namespace System.Xml.Serialization
                     string suffixRaw = mapping.TypeDesc!.XmlEncodingNotRequired ? "Raw" : "";
                     WritePrimitive(
                         element.IsNullable
-                            ? ("WriteNullableStringLiteral" + suffixRaw)
-                            : ("WriteElementString" + suffixRaw),
+                          ? ("WriteNullableStringLiteral" + suffixRaw)
+                          : ("WriteElementString" + suffixRaw),
                         name,
                         ns,
                         GetConvertedDefaultValue(source.Type, element.Default),

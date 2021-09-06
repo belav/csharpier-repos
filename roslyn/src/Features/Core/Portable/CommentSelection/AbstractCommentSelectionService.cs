@@ -45,20 +45,20 @@ namespace Microsoft.CodeAnalysis.CommentSelection
         ) =>
             Task.FromResult(
                 SupportsBlockComment
-                    ? new CommentSelectionInfo(
-                          true,
-                          SupportsBlockComment,
-                          SingleLineCommentString,
-                          BlockCommentStartString,
-                          BlockCommentEndString
-                      )
-                    : new CommentSelectionInfo(
-                          true,
-                          SupportsBlockComment,
-                          SingleLineCommentString,
-                          "",
-                          ""
-                      )
+                  ? new CommentSelectionInfo(
+                        true,
+                        SupportsBlockComment,
+                        SingleLineCommentString,
+                        BlockCommentStartString,
+                        BlockCommentEndString
+                    )
+                  : new CommentSelectionInfo(
+                        true,
+                        SupportsBlockComment,
+                        SingleLineCommentString,
+                        "",
+                        ""
+                    )
             );
     }
 }

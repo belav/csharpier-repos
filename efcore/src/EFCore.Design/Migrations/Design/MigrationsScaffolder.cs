@@ -318,8 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         {
                             Dependencies.Migrator.Migrate(
                                 migrations.Count > 1
-                                    ? migrations[migrations.Count - 2].GetId()
-                                    : Migration.InitialDatabase
+                                  ? migrations[migrations.Count - 2].GetId()
+                                  : Migration.InitialDatabase
                             );
                         }
                         else

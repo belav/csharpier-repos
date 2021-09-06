@@ -366,8 +366,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     metadataItem.SetAnnotation(
                         annotationName,
                         validAnnotations.ContainsKey(annotationName)
-                            ? validAnnotations[annotationName].Value
-                            : null
+                          ? validAnnotations[annotationName].Value
+                          : null
                     );
 
                     SqlServerTestHelpers.Instance.Finalize(modelBuilder, designTime: true);
@@ -391,8 +391,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     {
                         Assert.Equal(
                             validAnnotations.ContainsKey(annotationName)
-                                ? validAnnotations[annotationName].Expected
-                                : generationDefault,
+                              ? validAnnotations[annotationName].Expected
+                              : generationDefault,
                             sb.ToString()
                         );
                     }

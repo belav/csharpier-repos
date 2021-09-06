@@ -1776,10 +1776,10 @@ namespace Microsoft.CodeAnalysis
             return ForkProject(
                 newProject,
                 newProject.CompilationOptions != null
-                    ? new CompilationAndGeneratorDriverTranslationAction.ProjectCompilationOptionsAction(
-                          newProject.CompilationOptions
-                      )
-                    : null
+                  ? new CompilationAndGeneratorDriverTranslationAction.ProjectCompilationOptionsAction(
+                        newProject.CompilationOptions
+                    )
+                  : null
             );
         }
 

@@ -588,8 +588,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // to handle those cases.
                 _children.Add(
                     node.TagHelper.IsComponentTagHelper()
-                        ? (IntermediateNode)new ComponentAttributeIntermediateNode(node)
-                        : node
+                      ? (IntermediateNode)new ComponentAttributeIntermediateNode(node)
+                      : node
                 );
             }
 

@@ -880,14 +880,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 Assert.Equal(
                     trackNewDependents
-                        ? new List<string>
-                          {
-                              "<None> -----> Category:1",
-                              "Category:1 ---Products--> Product:1",
-                              "Category:1 ---Products--> Product:2",
-                              "Category:1 ---Products--> Product:3"
-                          }
-                        : new List<string> { "<None> -----> Category:1" },
+                      ? new List<string>
+                        {
+                            "<None> -----> Category:1",
+                            "Category:1 ---Products--> Product:1",
+                            "Category:1 ---Products--> Product:2",
+                            "Category:1 ---Products--> Product:3"
+                        }
+                      : new List<string> { "<None> -----> Category:1" },
                     TrackGraph()
                 );
 

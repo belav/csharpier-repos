@@ -2033,8 +2033,8 @@ class C
                 Type incrementalAnalyzer = null
             ) : base(
                 composition: incrementalAnalyzer is null
-                    ? s_composition
-                    : s_composition.AddParts(incrementalAnalyzer),
+                  ? s_composition
+                  : s_composition.AddParts(incrementalAnalyzer),
                 workspaceKind: workspaceKind,
                 disablePartialSolutions: disablePartialSolutions
             ) {

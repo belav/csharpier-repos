@@ -810,8 +810,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope1 = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -916,8 +916,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentrequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -956,8 +956,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -1019,8 +1019,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -1073,8 +1073,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -2156,8 +2156,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -2196,8 +2196,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -2228,8 +2228,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -2280,8 +2280,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -2327,8 +2327,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -2365,8 +2365,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -2396,8 +2396,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -2440,8 +2440,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {
@@ -2533,8 +2533,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     parentRequiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required
                 )
             ) {
                 txId1 = AssertAndGetCurrentTransactionId();
@@ -2556,8 +2556,8 @@ namespace System.Transactions.Tests
             using (
                 TransactionScope scope = new TransactionScope(
                     requiresNew
-                        ? TransactionScopeOption.RequiresNew
-                        : TransactionScopeOption.Required,
+                      ? TransactionScopeOption.RequiresNew
+                      : TransactionScopeOption.Required,
                     TransactionScopeAsyncFlowOption.Enabled
                 )
             ) {

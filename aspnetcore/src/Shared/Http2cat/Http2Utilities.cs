@@ -1304,8 +1304,8 @@ namespace Microsoft.AspNetCore.Http2Cat
                     !expected.Equals(
                         actual,
                         ignoreCase
-                            ? StringComparison.InvariantCultureIgnoreCase
-                            : StringComparison.InvariantCulture
+                          ? StringComparison.InvariantCultureIgnoreCase
+                          : StringComparison.InvariantCulture
                     )
                 ) {
                     throw new Exception($"Assert.Equal('{expected}', '{actual}') failed");

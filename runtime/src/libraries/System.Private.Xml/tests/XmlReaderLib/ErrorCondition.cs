@@ -858,8 +858,8 @@ namespace System.Xml.Tests
                 CError.Compare(
                     DataReader.CanReadValueChunk,
                     (IsCharCheckingReader() || IsCustomReader() || IsXmlTextReader())
-                        ? false
-                        : true,
+                      ? false
+                      : true,
                     "CanReadValueChunk"
                 );
                 CError.Compare(DataReader.Depth, 1, "Depth");

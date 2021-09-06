@@ -168,8 +168,8 @@ namespace System.Net.Http.Headers
                 _headerStore.Add(
                     descriptor,
                     _forceHeaderStoreItems
-                        ? new HeaderStoreItemInfo { RawValue = value }
-                        : (object)value
+                      ? new HeaderStoreItemInfo { RawValue = value }
+                      : (object)value
                 );
             }
 
@@ -643,8 +643,8 @@ namespace System.Net.Http.Headers
                         _headerStore.Add(
                             header.Key,
                             _forceHeaderStoreItems
-                                ? new HeaderStoreItemInfo { RawValue = sourceValue }
-                                : sourceValue
+                              ? new HeaderStoreItemInfo { RawValue = sourceValue }
+                              : sourceValue
                         );
                     }
                 }

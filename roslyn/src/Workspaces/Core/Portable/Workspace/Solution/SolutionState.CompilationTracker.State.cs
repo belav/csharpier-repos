@@ -358,8 +358,8 @@ namespace Microsoft.CodeAnalysis
                     // underlying compilation is GC'ed.
                     var primaryDynamic = new WeakReference<ITypeSymbol?>(
                         compilation.Language == LanguageNames.CSharp
-                            ? compilation.DynamicType
-                            : null
+                          ? compilation.DynamicType
+                          : null
                     );
 
                     // PERF: Preallocate this array so we don't have to resize it as we're adding assembly symbols.

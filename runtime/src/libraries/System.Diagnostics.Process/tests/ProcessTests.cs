@@ -1198,8 +1198,8 @@ namespace System.Diagnostics.Tests
                 mre.SetSafeWaitHandle(
                     new SafeWaitHandle(
                         useSafeHandle
-                            ? h.Process.SafeHandle.DangerousGetHandle()
-                            : h.Process.Handle,
+                          ? h.Process.SafeHandle.DangerousGetHandle()
+                          : h.Process.Handle,
                         ownsHandle: false
                     )
                 );

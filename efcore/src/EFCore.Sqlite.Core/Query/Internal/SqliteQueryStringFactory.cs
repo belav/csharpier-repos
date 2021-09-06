@@ -52,9 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     .Append(' ')
                     .AppendLine(
                         value == null || value == DBNull.Value
-                            ? "NULL"
-                            : _typeMapper.FindMapping(value.GetType())?.GenerateSqlLiteral(value)
-                              ?? value.ToString()
+                          ? "NULL"
+                          : _typeMapper.FindMapping(value.GetType())?.GenerateSqlLiteral(value)
+                                ?? value.ToString()
                     );
             }
 

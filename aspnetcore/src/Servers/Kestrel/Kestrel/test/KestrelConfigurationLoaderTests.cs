@@ -513,14 +513,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                         ),
                     }.Concat(
                         password != null
-                            ? new[]
-                              {
-                                  new KeyValuePair<string, string>(
-                                      "Certificates:Default:Password",
-                                      password
-                                  )
-                              }
-                            : Array.Empty<KeyValuePair<string, string>>()
+                          ? new[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    "Certificates:Default:Password",
+                                    password
+                                )
+                            }
+                          : Array.Empty<KeyValuePair<string, string>>()
                     )
                 )
                 .Build();

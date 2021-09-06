@@ -261,8 +261,8 @@ namespace System.Globalization
             string userOverride = GetLocaleInfoFromLCType(
                 _sWindowsName,
                 shortFormat
-                    ? Interop.Kernel32.LOCALE_SSHORTTIME
-                    : Interop.Kernel32.LOCALE_STIMEFORMAT,
+                  ? Interop.Kernel32.LOCALE_SSHORTTIME
+                  : Interop.Kernel32.LOCALE_STIMEFORMAT,
                 useUserOverride: true
             );
 

@@ -105,8 +105,8 @@ namespace Moq
                         string.Format(
                             CultureInfo.CurrentCulture,
                             method.IsExtensionMethod()
-                                ? Resources.UnsupportedExtensionMethod
-                                : Resources.UnsupportedStaticMember,
+                              ? Resources.UnsupportedExtensionMethod
+                              : Resources.UnsupportedStaticMember,
                             $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
                         )
                     )

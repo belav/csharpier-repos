@@ -24,8 +24,8 @@ namespace System.IO.Tests
                 {
                     Assert.Equal(
                         function.Kind == DateTimeKind.Local
-                            ? DateTime.FromFileTime(0).Ticks
-                            : DateTime.FromFileTimeUtc(0).Ticks,
+                          ? DateTime.FromFileTime(0).Ticks
+                          : DateTime.FromFileTimeUtc(0).Ticks,
                         function.Getter(item).Ticks
                     );
                 }
@@ -47,8 +47,8 @@ namespace System.IO.Tests
                 {
                     Assert.Equal(
                         function.Kind == DateTimeKind.Local
-                            ? DateTime.FromFileTime(0).Ticks
-                            : DateTime.FromFileTimeUtc(0).Ticks,
+                          ? DateTime.FromFileTime(0).Ticks
+                          : DateTime.FromFileTimeUtc(0).Ticks,
                         function.Getter(item).Ticks
                     );
                 }

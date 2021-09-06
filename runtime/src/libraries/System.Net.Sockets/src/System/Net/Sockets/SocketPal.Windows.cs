@@ -1467,12 +1467,12 @@ namespace System.Net.Sockets
                     fileStream?.SafeFileHandle,
                     asyncResult.DangerousOverlappedPointer, // SafeHandle was just created in SetUnmanagedStructures
                     preBuffer is not null
-                        ? Marshal.UnsafeAddrOfPinnedArrayElement(preBuffer, 0)
-                        : IntPtr.Zero,
+                      ? Marshal.UnsafeAddrOfPinnedArrayElement(preBuffer, 0)
+                      : IntPtr.Zero,
                     preBuffer?.Length ?? 0,
                     postBuffer is not null
-                        ? Marshal.UnsafeAddrOfPinnedArrayElement(postBuffer, 0)
-                        : IntPtr.Zero,
+                      ? Marshal.UnsafeAddrOfPinnedArrayElement(postBuffer, 0)
+                      : IntPtr.Zero,
                     postBuffer?.Length ?? 0,
                     flags
                 );

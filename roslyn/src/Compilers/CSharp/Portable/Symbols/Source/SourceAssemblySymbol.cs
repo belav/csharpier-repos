@@ -2523,8 +2523,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && diagnostics.Add(
                     useSiteInfo,
                     useSiteInfo.DiagnosticInfo is object
-                        ? GetAssemblyAttributeLocationForDiagnostic(arguments.AttributeSyntaxOpt)
-                        : Location.None
+                      ? GetAssemblyAttributeLocationForDiagnostic(arguments.AttributeSyntaxOpt)
+                      : Location.None
                 )
             ) {
                 return;
@@ -2805,8 +2805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         _compilation.IsEmitDeterministic && verString?.Contains('*') == true;
                     diagnostics.Add(
                         foundBadWildcard
-                            ? ErrorCode.ERR_InvalidVersionFormatDeterministic
-                            : ErrorCode.ERR_InvalidVersionFormat,
+                          ? ErrorCode.ERR_InvalidVersionFormatDeterministic
+                          : ErrorCode.ERR_InvalidVersionFormat,
                         attributeArgumentSyntaxLocation
                     );
                 }

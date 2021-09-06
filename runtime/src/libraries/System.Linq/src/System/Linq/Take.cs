@@ -80,8 +80,8 @@ namespace System.Linq
             Debug.Assert(isStartIndexFromEnd || isEndIndexFromEnd);
             Debug.Assert(
                 isStartIndexFromEnd
-                    ? startIndex > 0 && (!isEndIndexFromEnd || startIndex > endIndex)
-                    : startIndex >= 0 && (isEndIndexFromEnd || startIndex < endIndex)
+                  ? startIndex > 0 && (!isEndIndexFromEnd || startIndex > endIndex)
+                  : startIndex >= 0 && (isEndIndexFromEnd || startIndex < endIndex)
             );
 
             // Attempt to extract the count of the source enumerator,

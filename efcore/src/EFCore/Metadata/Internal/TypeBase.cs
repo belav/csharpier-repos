@@ -429,8 +429,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddIgnored(
                 name,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

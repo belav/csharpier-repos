@@ -111,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsUnique(
                 unique,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsUnique(
                 unique,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

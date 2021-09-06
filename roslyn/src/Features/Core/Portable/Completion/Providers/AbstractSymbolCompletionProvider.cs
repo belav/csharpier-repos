@@ -295,8 +295,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     .WithMatchPriority(preselect ? MatchPriority.Preselect : MatchPriority.Default)
                     .WithSelectionBehavior(
                         context.IsRightSideOfNumericType
-                            ? CompletionItemSelectionBehavior.SoftSelection
-                            : CompletionItemSelectionBehavior.Default
+                          ? CompletionItemSelectionBehavior.SoftSelection
+                          : CompletionItemSelectionBehavior.Default
                     )
             );
         }

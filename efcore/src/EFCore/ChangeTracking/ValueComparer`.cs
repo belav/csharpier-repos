@@ -150,14 +150,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             return Expression.Lambda<Func<T?, T?, bool>>(
                 typedEquals == null
-                    ? Expression.Call(
-                          ObjectEqualsMethod,
-                          Expression.Convert(param1, typeof(object)),
-                          Expression.Convert(param2, typeof(object))
-                      )
-                    : typedEquals.IsStatic
-                        ? Expression.Call(typedEquals, param1, param2)
-                        : Expression.Call(param1, typedEquals, param2),
+                  ? Expression.Call(
+                        ObjectEqualsMethod,
+                        Expression.Convert(param1, typeof(object)),
+                        Expression.Convert(param2, typeof(object))
+                    )
+                  : typedEquals.IsStatic
+                      ? Expression.Call(typedEquals, param1, param2)
+                      : Expression.Call(param1, typedEquals, param2),
                 param1,
                 param2
             );

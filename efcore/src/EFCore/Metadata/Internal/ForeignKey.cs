@@ -1636,8 +1636,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 properties.Cast<Property>().ToArray(),
                 (Key)principalKey,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1649,8 +1649,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDependentToPrincipal(
                 name,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1662,8 +1662,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDependentToPrincipal(
                 property,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1675,8 +1675,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrincipalToDependent(
                 name,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1688,8 +1688,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrincipalToDependent(
                 property,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1703,8 +1703,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsUnique(
                 unique,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1713,8 +1713,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsRequired(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1726,8 +1726,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsRequiredDependent(
                 required,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1736,8 +1736,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsOwnership(
                 ownership,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1749,8 +1749,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDeleteBehavior(
                 deleteBehavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />

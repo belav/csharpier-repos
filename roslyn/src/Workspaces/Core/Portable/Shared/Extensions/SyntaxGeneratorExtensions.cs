@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 parameters: constructor.Parameters,
                 statements: default,
                 baseConstructorArguments: constructor.Parameters.Length == 0
-                    ? default
-                    : factory.CreateArguments(constructor.Parameters)
+                  ? default
+                  : factory.CreateArguments(constructor.Parameters)
             );
         }
 
@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var constructor = CodeGenerationSymbolFactory.CreateConstructorSymbol(
                 attributes: default,
                 accessibility: containingTypeOpt.IsAbstractClass()
-                    ? Accessibility.Protected
-                    : Accessibility.Public,
+                  ? Accessibility.Protected
+                  : Accessibility.Public,
                 modifiers: new DeclarationModifiers(
                     isUnsafe: !isContainedInUnsafeType
                         && parameters.Any(p => p.RequiresUnsafeModifier())
@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     containingTypeOpt,
                     parameterToExistingMemberMap
                 )
-                    ? ImmutableArray<SyntaxNode>.Empty
-                    : default
+                  ? ImmutableArray<SyntaxNode>.Empty
+                  : default
             );
 
             return newMembers.Concat(constructor);
@@ -703,8 +703,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     codeFactory.MemberAccessExpression(
                         codeFactory.BaseExpression(),
                         typeParams.IsDefaultOrEmpty
-                            ? codeFactory.IdentifierName(overriddenMethod.Name)
-                            : codeFactory.GenericName(overriddenMethod.Name, typeParams)
+                          ? codeFactory.IdentifierName(overriddenMethod.Name)
+                          : codeFactory.GenericName(overriddenMethod.Name, typeParams)
                     ),
                     codeFactory.CreateArguments(overriddenMethod.GetParameters())
                 );
@@ -723,8 +723,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     ),
                     modifiers: modifiers,
                     statements: overriddenMethod.ReturnsVoid
-                        ? ImmutableArray.Create(codeFactory.ExpressionStatement(body))
-                        : ImmutableArray.Create(codeFactory.ReturnStatement(body))
+                      ? ImmutableArray.Create(codeFactory.ExpressionStatement(body))
+                      : ImmutableArray.Create(codeFactory.ReturnStatement(body))
                 );
             }
         }

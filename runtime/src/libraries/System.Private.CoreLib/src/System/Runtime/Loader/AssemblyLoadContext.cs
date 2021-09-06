@@ -665,8 +665,8 @@ namespace System.Runtime.Loader
                             this != AssemblyLoadContext.Default ? ToString() : Name,
                             resolvedAssembly?.FullName,
                             resolvedAssembly != null && !resolvedAssembly.IsDynamic
-                                ? resolvedAssembly.Location
-                                : null
+                              ? resolvedAssembly.Location
+                              : null
                         );
                     }
 #endif // CORECLR

@@ -1096,11 +1096,11 @@ namespace System.Xml.Xsl.Xslt
                 {
                     ReportError(
                         Ref.Equal(NamespaceUri, _atoms.UriWdXsl)
-                        && Ref.Equal(LocalName, _atoms.Stylesheet)
-                            ?
-                              /*[XT_025]*/SR.Xslt_WdXslNamespace
-                            : /*[XT0150]*/
-                              SR.Xslt_WrongStylesheetElement
+                            && Ref.Equal(LocalName, _atoms.Stylesheet)
+                          ?
+                            /*[XT_025]*/SR.Xslt_WdXslNamespace
+                          : /*[XT0150]*/
+                            SR.Xslt_WrongStylesheetElement
                     );
 #if XSLT2
                     SetVersion(2.0);
@@ -1173,8 +1173,8 @@ namespace System.Xml.Xsl.Xslt
             {
                 Debug.Assert(
                     extensions
-                        ? IsKeyword(_atoms.ExtensionElementPrefixes)
-                        : IsKeyword(_atoms.ExcludeResultPrefixes)
+                      ? IsKeyword(_atoms.ExtensionElementPrefixes)
+                      : IsKeyword(_atoms.ExcludeResultPrefixes)
                 );
                 string value = Value;
                 if (value.Length != 0)

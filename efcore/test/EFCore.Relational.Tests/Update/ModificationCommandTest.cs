@@ -414,15 +414,15 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             Assert.Equal(
                 sensitive
-                    ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
-                          "T1",
-                          "{Id: 1}",
-                          EntityState.Unchanged
-                      )
-                    : RelationalStrings.ModificationCommandInvalidEntityState(
-                          "T1",
-                          EntityState.Unchanged
-                      ),
+                  ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
+                        "T1",
+                        "{Id: 1}",
+                        EntityState.Unchanged
+                    )
+                  : RelationalStrings.ModificationCommandInvalidEntityState(
+                        "T1",
+                        EntityState.Unchanged
+                    ),
                 Assert.Throws<InvalidOperationException>(
                     () => command.AddEntry(entry, true)
                 ).Message
@@ -446,15 +446,15 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             Assert.Equal(
                 sensitive
-                    ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
-                          "T1",
-                          "{Id: 1}",
-                          EntityState.Detached
-                      )
-                    : RelationalStrings.ModificationCommandInvalidEntityState(
-                          "T1",
-                          EntityState.Detached
-                      ),
+                  ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
+                        "T1",
+                        "{Id: 1}",
+                        EntityState.Detached
+                    )
+                  : RelationalStrings.ModificationCommandInvalidEntityState(
+                        "T1",
+                        EntityState.Detached
+                    ),
                 Assert.Throws<InvalidOperationException>(
                     () => command.AddEntry(entry, true)
                 ).Message

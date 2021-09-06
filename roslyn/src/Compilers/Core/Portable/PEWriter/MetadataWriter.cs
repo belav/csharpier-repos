@@ -2600,8 +2600,8 @@ namespace Microsoft.Cci
                     name: typeName,
                     implementation: implementation,
                     typeDefinitionId: exportedType.IsForwarder
-                        ? 0
-                        : MetadataTokens.GetToken(exportedType.Type.TypeDef)
+                      ? 0
+                      : MetadataTokens.GetToken(exportedType.Type.TypeDef)
                 );
             }
         }
@@ -2873,8 +2873,8 @@ namespace Microsoft.Cci
 
                 metadata.AddManifestResource(
                     attributes: resource.IsPublic
-                        ? ManifestResourceAttributes.Public
-                        : ManifestResourceAttributes.Private,
+                      ? ManifestResourceAttributes.Public
+                      : ManifestResourceAttributes.Private,
                     name: GetStringHandleForNameAndCheckLength(resource.Name),
                     implementation: implementation,
                     offset: GetManagedResourceOffset(resource, resourceDataWriter)
@@ -3116,8 +3116,8 @@ namespace Microsoft.Cci
                 metadata.AddTypeDefinition(
                     attributes: GetTypeAttributes(typeDef),
                     @namespace: (namespaceType != null)
-                        ? GetStringHandleForNamespaceAndCheckLength(namespaceType, mangledTypeName)
-                        : default(StringHandle),
+                      ? GetStringHandleForNamespaceAndCheckLength(namespaceType, mangledTypeName)
+                      : default(StringHandle),
                     name: GetStringHandleForNameAndCheckLength(mangledTypeName, typeDef),
                     baseType: (baseType != null) ? GetTypeHandle(baseType) : default(EntityHandle),
                     fieldList: GetFirstFieldDefinitionHandle(typeDef),
@@ -3680,10 +3680,10 @@ namespace Microsoft.Cci
                         writer.Offset = offset;
                         writer.WriteInt32(
                             token == 0
-                                ? MetadataTokens.GetToken(
-                                      ResolveEntityHandleFromPseudoToken(pseudoToken)
-                                  )
-                                : token
+                              ? MetadataTokens.GetToken(
+                                    ResolveEntityHandleFromPseudoToken(pseudoToken)
+                                )
+                              : token
                         );
                         offset += 4;
                         break;

@@ -261,8 +261,8 @@ namespace System.Data
 
             Index index = childKey.GetSortIndex(
                 (version == DataRowVersion.Original)
-                    ? DataViewRowState.OriginalRows
-                    : DataViewRowState.CurrentRows
+                  ? DataViewRowState.OriginalRows
+                  : DataViewRowState.CurrentRows
             );
             return index.GetRows(values);
         }
@@ -284,8 +284,8 @@ namespace System.Data
 
             Index index = parentKey.GetSortIndex(
                 (version == DataRowVersion.Original)
-                    ? DataViewRowState.OriginalRows
-                    : DataViewRowState.CurrentRows
+                  ? DataViewRowState.OriginalRows
+                  : DataViewRowState.CurrentRows
             );
             return index.GetRows(values);
         }
@@ -299,8 +299,8 @@ namespace System.Data
             if (
                 !childRow.HasVersion(
                     (version == DataRowVersion.Original)
-                        ? DataRowVersion.Original
-                        : DataRowVersion.Current
+                      ? DataRowVersion.Original
+                      : DataRowVersion.Current
                 )
             ) {
                 if (childRow._tempRecord == -1)
@@ -317,8 +317,8 @@ namespace System.Data
 
             Index index = parentKey.GetSortIndex(
                 (version == DataRowVersion.Original)
-                    ? DataViewRowState.OriginalRows
-                    : DataViewRowState.CurrentRows
+                  ? DataViewRowState.OriginalRows
+                  : DataViewRowState.CurrentRows
             );
             Range range = index.FindRecords(values);
             if (range.IsNull)

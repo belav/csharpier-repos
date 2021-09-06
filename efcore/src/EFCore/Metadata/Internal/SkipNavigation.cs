@@ -515,8 +515,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetForeignKey(
                 (ForeignKey?)foreignKey,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -542,8 +542,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetInverse(
                 (SkipNavigation?)inverse,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>

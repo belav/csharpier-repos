@@ -126,8 +126,8 @@ namespace System.Text.RegularExpressions
             {
                 Debug.WriteLine(
                     newpos < 0
-                        ? $"       Backtracking (back2) to code position {-newpos}"
-                        : $"       Backtracking to code position {newpos}"
+                      ? $"       Backtracking (back2) to code position {-newpos}"
+                      : $"       Backtracking to code position {newpos}"
                 );
             }
 #endif

@@ -154,10 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Interlocked.CompareExchange(
                         ref _lazyAnonymousTypeTemplates,
                         previousCache == null
-                            ? new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>()
-                            : new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>(
-                                  previousCache
-                              ),
+                          ? new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>()
+                          : new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>(
+                                previousCache
+                            ),
                         null
                     );
                 }
@@ -186,14 +186,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Interlocked.CompareExchange(
                         ref _lazySynthesizedDelegates,
                         previousCache == null
-                            ? new ConcurrentDictionary<
-                                  SynthesizedDelegateKey,
-                                  SynthesizedDelegateValue
-                              >()
-                            : new ConcurrentDictionary<
-                                  SynthesizedDelegateKey,
-                                  SynthesizedDelegateValue
-                              >(previousCache),
+                          ? new ConcurrentDictionary<
+                                SynthesizedDelegateKey,
+                                SynthesizedDelegateValue
+                            >()
+                          : new ConcurrentDictionary<
+                                SynthesizedDelegateKey,
+                                SynthesizedDelegateValue
+                            >(previousCache),
                         null
                     );
                 }

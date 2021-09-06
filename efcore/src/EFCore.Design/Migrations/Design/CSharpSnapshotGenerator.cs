@@ -210,8 +210,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             stringBuilder.Append(builderName)
                 .Append(
                     ownerNavigation != null
-                        ? ownership!.IsUnique ? ".OwnsOne(" : ".OwnsMany("
-                        : ".Entity("
+                      ? ownership!.IsUnique ? ".OwnsOne(" : ".OwnsMany("
+                      : ".Entity("
                 )
                 .Append(Code.Literal(entityTypeName));
 
@@ -555,12 +555,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     stringBuilder.AppendLine()
                         .Append(
                             property.ValueGenerated == ValueGenerated.OnAdd
-                                ? ".ValueGeneratedOnAdd()"
-                                : property.ValueGenerated == ValueGenerated.OnUpdate
-                                    ? ".ValueGeneratedOnUpdate()"
-                                    : property.ValueGenerated == ValueGenerated.OnUpdateSometimes
-                                        ? ".ValueGeneratedOnUpdateSometimes()"
-                                        : ".ValueGeneratedOnAddOrUpdate()"
+                              ? ".ValueGeneratedOnAdd()"
+                              : property.ValueGenerated == ValueGenerated.OnUpdate
+                                  ? ".ValueGeneratedOnUpdate()"
+                                  : property.ValueGenerated == ValueGenerated.OnUpdateSometimes
+                                      ? ".ValueGeneratedOnUpdateSometimes()"
+                                      : ".ValueGeneratedOnAddOrUpdate()"
                         );
                 }
 
@@ -1152,8 +1152,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .Append(", ")
                     .Append(
                         foreignKey.DependentToPrincipal == null
-                            ? Code.UnknownLiteral(null)
-                            : Code.Literal(foreignKey.DependentToPrincipal.Name)
+                          ? Code.UnknownLiteral(null)
+                          : Code.Literal(foreignKey.DependentToPrincipal.Name)
                     );
             }
             else
@@ -1619,8 +1619,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 stringBuilder.Append(
                     Code.UnknownLiteral(
                         FindValueConverter(property) is ValueConverter valueConverter
-                            ? valueConverter.ConvertToProvider(defaultValue)
-                            : defaultValue
+                          ? valueConverter.ConvertToProvider(defaultValue)
+                          : defaultValue
                     )
                 );
             }

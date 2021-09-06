@@ -1150,10 +1150,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ref result,
                     param.RefCustomModifiers,
                     this is MethodSymbol method
-                    && method.MethodKind == MethodKind.FunctionPointerSignature
-                        ? AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
-                          | AllowedRequiredModifierType.System_Runtime_CompilerServices_OutAttribute
-                        : AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
+                        && method.MethodKind == MethodKind.FunctionPointerSignature
+                      ? AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
+                            | AllowedRequiredModifierType.System_Runtime_CompilerServices_OutAttribute
+                      : AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
                 );
         }
 

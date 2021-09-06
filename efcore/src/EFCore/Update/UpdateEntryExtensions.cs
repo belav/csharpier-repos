@@ -232,10 +232,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
                 builder.Append(
                     otherEntry == null
-                        ? "<not found>"
-                        : otherEntry.BuildCurrentValuesString(
-                              targetType.FindPrimaryKey()!.Properties
-                          )
+                      ? "<not found>"
+                      : otherEntry.BuildCurrentValuesString(targetType.FindPrimaryKey()!.Properties)
                 );
             }
         }

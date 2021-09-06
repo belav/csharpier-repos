@@ -916,8 +916,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         navigationId.MemberInfo,
                         ConfigurationSource.Explicit,
                         targetIsPrincipal: Builder.Metadata == relatedEntityType
-                            ? true
-                            : (bool?)null
+                          ? true
+                          : (bool?)null
                     )!.Metadata;
             }
             else
@@ -928,8 +928,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                         navigationId.Name,
                         ConfigurationSource.Explicit,
                         targetIsPrincipal: Builder.Metadata == relatedEntityType
-                            ? true
-                            : (bool?)null
+                          ? true
+                          : (bool?)null
                     )!.Metadata;
             }
 

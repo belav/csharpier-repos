@@ -181,16 +181,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 GetSnippetExpansionClient(textView, subjectBuffer),
                 Guids.CSharpLanguageServiceId,
                 bstrTypes: surroundWith
-                    ? new[] { "SurroundsWith" }
-                    : new[] { "Expansion", "SurroundsWith" },
+                  ? new[] { "SurroundsWith" }
+                  : new[] { "Expansion", "SurroundsWith" },
                 iCountTypes: surroundWith ? 1 : 2,
                 fIncludeNULLType: 1,
                 bstrKinds: null,
                 iCountKinds: 0,
                 fIncludeNULLKind: 0,
                 bstrPrefixText: surroundWith
-                    ? CSharpVSResources.Surround_With
-                    : CSharpVSResources.Insert_Snippet,
+                  ? CSharpVSResources.Surround_With
+                  : CSharpVSResources.Insert_Snippet,
                 bstrCompletionChar: null
             );
 

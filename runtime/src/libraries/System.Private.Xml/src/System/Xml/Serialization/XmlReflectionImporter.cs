@@ -2264,8 +2264,8 @@ namespace System.Xml.Serialization
                     TypeDesc targetTypeDesc = _typeScope.GetTypeDesc(targetType);
                     attribute.Name = Accessor.EscapeQName(
                         a.XmlAttribute.AttributeName.Length == 0
-                            ? accessorName
-                            : a.XmlAttribute.AttributeName
+                          ? accessorName
+                          : a.XmlAttribute.AttributeName
                     );
                     attribute.Namespace =
                         a.XmlAttribute.Namespace == null ? ns : a.XmlAttribute.Namespace;
@@ -2357,8 +2357,8 @@ namespace System.Xml.Serialization
                         {
                             element.Name = XmlConvert.EncodeLocalName(
                                 xmlElement.ElementName.Length == 0
-                                    ? accessorName
-                                    : xmlElement.ElementName
+                                  ? accessorName
+                                  : xmlElement.ElementName
                             );
                             //element.IsUnbounded = element.Mapping is ArrayMapping;
                         }
@@ -2445,8 +2445,8 @@ namespace System.Xml.Serialization
                                     accessorName,
                                     xmlAnyElement.Name,
                                     xmlAnyElement.Namespace == null
-                                        ? "null"
-                                        : xmlAnyElement.Namespace
+                                      ? "null"
+                                      : xmlAnyElement.Namespace
                                 )
                             );
                         }
@@ -2569,8 +2569,8 @@ namespace System.Xml.Serialization
                         AttributeAccessor attribute = new AttributeAccessor();
                         attribute.Name = Accessor.EscapeQName(
                             a.XmlAttribute.AttributeName.Length == 0
-                                ? accessorName
-                                : a.XmlAttribute.AttributeName
+                              ? accessorName
+                              : a.XmlAttribute.AttributeName
                         );
                         attribute.Namespace =
                             a.XmlAttribute.Namespace == null ? ns : a.XmlAttribute.Namespace;
@@ -2644,8 +2644,8 @@ namespace System.Xml.Serialization
                             ElementAccessor element = new ElementAccessor();
                             element.Name = XmlConvert.EncodeLocalName(
                                 xmlElement.ElementName.Length == 0
-                                    ? accessorName
-                                    : xmlElement.ElementName
+                                  ? accessorName
+                                  : xmlElement.ElementName
                             );
                             element.Namespace = rpc
                                 ? null
@@ -2776,8 +2776,8 @@ namespace System.Xml.Serialization
                         {
                             element.Name = XmlConvert.EncodeLocalName(
                                 xmlElement.ElementName.Length == 0
-                                    ? accessorName
-                                    : xmlElement.ElementName
+                                  ? accessorName
+                                  : xmlElement.ElementName
                             );
                         }
                         else
@@ -2862,8 +2862,8 @@ namespace System.Xml.Serialization
                                     accessorName,
                                     xmlAnyElement.Name,
                                     xmlAnyElement.Namespace == null
-                                        ? "null"
-                                        : xmlAnyElement.Namespace
+                                      ? "null"
+                                      : xmlAnyElement.Namespace
                                 )
                             );
                         }

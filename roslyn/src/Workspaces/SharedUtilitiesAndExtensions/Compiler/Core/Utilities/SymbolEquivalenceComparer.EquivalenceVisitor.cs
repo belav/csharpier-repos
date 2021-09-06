@@ -61,13 +61,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                         x = xType.WithNullableAnnotation(
                             xType.IsValueType
-                                ? NullableAnnotation.NotAnnotated
-                                : NullableAnnotation.None
+                              ? NullableAnnotation.NotAnnotated
+                              : NullableAnnotation.None
                         );
                         y = yType.WithNullableAnnotation(
                             yType.IsValueType
-                                ? NullableAnnotation.NotAnnotated
-                                : NullableAnnotation.None
+                              ? NullableAnnotation.NotAnnotated
+                              : NullableAnnotation.None
                         );
                     }
 

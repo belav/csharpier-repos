@@ -483,8 +483,8 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
                 now.Add(HttpsCertificateValidity),
                 exportPath.Value(),
                 trust == null
-                    ? false
-                    : trust.HasValue() && !RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
+                  ? false
+                  : trust.HasValue() && !RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
                 password.HasValue()
                     || (noPassword.HasValue() && format == CertificateKeyExportFormat.Pem),
                 password.Value(),

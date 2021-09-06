@@ -1979,8 +1979,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     moveNextBodyDebugInfoOpt = new AsyncMoveNextBodyDebugInfo(
                         kickoffMethod.GetCciAdapter(),
                         catchHandlerOffset: (kickoffMethod.ReturnsVoid || isAsyncMainMoveNext)
-                            ? asyncCatchHandlerOffset
-                            : -1,
+                          ? asyncCatchHandlerOffset
+                          : -1,
                         asyncYieldPoints,
                         asyncResumePoints
                     );
@@ -2251,8 +2251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // if language version is insufficient, we do not want to surface nullability diagnostics,
                             // but we should still provide nullability information through the semantic model.
                             isSufficientLangVersion
-                                ? diagnostics.DiagnosticBag
-                                : new DiagnosticBag(),
+                              ? diagnostics.DiagnosticBag
+                              : new DiagnosticBag(),
                             createSnapshots: true,
                             out snapshotManager,
                             ref remappedSymbols

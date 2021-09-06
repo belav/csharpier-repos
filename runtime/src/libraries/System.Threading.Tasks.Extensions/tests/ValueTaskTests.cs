@@ -419,8 +419,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask(
                 sync
-                    ? ManualResetValueTaskSourceFactory.Completed(0)
-                    : ManualResetValueTaskSourceFactory.Delay(1, 0),
+                  ? ManualResetValueTaskSourceFactory.Completed(0)
+                  : ManualResetValueTaskSourceFactory.Delay(1, 0),
                 0
             );
             Task t = vt.AsTask();
@@ -438,8 +438,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask<int>(
                 sync
-                    ? ManualResetValueTaskSourceFactory.Completed(42)
-                    : ManualResetValueTaskSourceFactory.Delay(1, 42),
+                  ? ManualResetValueTaskSourceFactory.Completed(42)
+                  : ManualResetValueTaskSourceFactory.Delay(1, 42),
                 0
             );
             Task<int> t = vt.AsTask();
@@ -457,8 +457,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask(
                 sync
-                    ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
-                    : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
+                  ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
+                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
                 0
             );
             Task t = vt.AsTask();
@@ -480,8 +480,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask<int>(
                 sync
-                    ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
-                    : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
+                  ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
+                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
                 0
             );
             Task<int> t = vt.AsTask();
@@ -503,15 +503,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask(
                 sync
-                    ? ManualResetValueTaskSourceFactory.Completed(
-                          0,
-                          new OperationCanceledException()
-                      )
-                    : ManualResetValueTaskSourceFactory.Delay(
-                          1,
-                          0,
-                          new OperationCanceledException()
-                      ),
+                  ? ManualResetValueTaskSourceFactory.Completed(0, new OperationCanceledException())
+                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new OperationCanceledException()),
                 0
             );
             Task t = vt.AsTask();
@@ -533,15 +526,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask<int>(
                 sync
-                    ? ManualResetValueTaskSourceFactory.Completed(
-                          0,
-                          new OperationCanceledException()
-                      )
-                    : ManualResetValueTaskSourceFactory.Delay(
-                          1,
-                          0,
-                          new OperationCanceledException()
-                      ),
+                  ? ManualResetValueTaskSourceFactory.Completed(0, new OperationCanceledException())
+                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new OperationCanceledException()),
                 0
             );
             Task<int> t = vt.AsTask();
@@ -993,20 +979,13 @@ namespace System.Threading.Tasks.Tests
                                 : mode == CtorMode.Task
                                     ? new ValueTask<int>(
                                           sync
-                                              ? Task.FromResult(42)
-                                              : Task.Delay(1).ContinueWith(_ => 42)
+                                            ? Task.FromResult(42)
+                                            : Task.Delay(1).ContinueWith(_ => 42)
                                       )
                                     : new ValueTask<int>(
                                           sync
-                                              ? ManualResetValueTaskSourceFactory.Completed(
-                                                    42,
-                                                    null
-                                                )
-                                              : ManualResetValueTaskSourceFactory.Delay(
-                                                    1,
-                                                    42,
-                                                    null
-                                                ),
+                                            ? ManualResetValueTaskSourceFactory.Completed(42, null)
+                                            : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
                                           0
                                       );
 
@@ -1058,12 +1037,8 @@ namespace System.Threading.Tasks.Tests
                                     ? new ValueTask(sync ? Task.CompletedTask : Task.Delay(1))
                                     : new ValueTask(
                                           sync
-                                              ? ManualResetValueTaskSourceFactory.Completed(0, null)
-                                              : ManualResetValueTaskSourceFactory.Delay(
-                                                    42,
-                                                    0,
-                                                    null
-                                                ),
+                                            ? ManualResetValueTaskSourceFactory.Completed(0, null)
+                                            : ManualResetValueTaskSourceFactory.Delay(42, 0, null),
                                           0
                                       );
 
@@ -1116,20 +1091,13 @@ namespace System.Threading.Tasks.Tests
                                 : mode == CtorMode.Task
                                     ? new ValueTask<int>(
                                           sync
-                                              ? Task.FromResult(42)
-                                              : Task.Delay(1).ContinueWith(_ => 42)
+                                            ? Task.FromResult(42)
+                                            : Task.Delay(1).ContinueWith(_ => 42)
                                       )
                                     : new ValueTask<int>(
                                           sync
-                                              ? ManualResetValueTaskSourceFactory.Completed(
-                                                    42,
-                                                    null
-                                                )
-                                              : ManualResetValueTaskSourceFactory.Delay(
-                                                    1,
-                                                    42,
-                                                    null
-                                                ),
+                                            ? ManualResetValueTaskSourceFactory.Completed(42, null)
+                                            : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
                                           0
                                       );
 

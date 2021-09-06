@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 useDebuggerDisplay: false,
                 value: value,
                 displayValue: wasExceptionThrown
-                    ? string.Format(Resources.InvalidPointerDereference, fullName ?? parent.Name)
-                    : null,
+                  ? string.Format(Resources.InvalidPointerDereference, fullName ?? parent.Name)
+                  : null,
                 expansion: expansion,
                 childShouldParenthesize: true,
                 fullName: fullName,

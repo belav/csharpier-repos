@@ -302,14 +302,14 @@ namespace System
             if (actual == null)
                 throw new XunitException(
                     greaterThan == null
-                        ? AddOptionalUserMessage(
-                              $"Expected: <null> to be greater than <null>.",
-                              userMessage
-                          )
-                        : AddOptionalUserMessage(
-                              $"Expected: <null> to be greater than {greaterThan}.",
-                              userMessage
-                          )
+                      ? AddOptionalUserMessage(
+                            $"Expected: <null> to be greater than <null>.",
+                            userMessage
+                        )
+                      : AddOptionalUserMessage(
+                            $"Expected: <null> to be greater than {greaterThan}.",
+                            userMessage
+                        )
                 );
 
             if (actual.CompareTo(greaterThan) <= 0)

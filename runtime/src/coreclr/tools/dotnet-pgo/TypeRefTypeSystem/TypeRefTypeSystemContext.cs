@@ -246,8 +246,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
                 type = module.GetOrAddType(
                     !typeReference.Namespace.IsNil
-                        ? peInfo.reader.GetString(typeReference.Namespace)
-                        : null,
+                      ? peInfo.reader.GetString(typeReference.Namespace)
+                      : null,
                     peInfo.reader.GetString(typeReference.Name)
                 );
             }

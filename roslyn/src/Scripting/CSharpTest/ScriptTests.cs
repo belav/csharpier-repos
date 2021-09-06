@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
             PdbValidation.ValidateDebugDirectory(
                 peStream,
                 portablePdbStreamOpt: (format == DebugInformationFormat.PortablePdb)
-                    ? pdbStream
-                    : null,
+                  ? pdbStream
+                  : null,
                 pdbPath: compilation.AssemblyName + ".pdb",
                 hashAlgorithm: default,
                 hasEmbeddedPdb: false,

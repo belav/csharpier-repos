@@ -664,8 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 typeSyntax: node.Type,
                 identifierToken: designation.Identifier,
                 kind: node.IsOutVarDeclaration()
-                    ? LocalDeclarationKind.OutVariable
-                    : LocalDeclarationKind.DeclarationExpressionVariable,
+                  ? LocalDeclarationKind.OutVariable
+                  : LocalDeclarationKind.DeclarationExpressionVariable,
                 nodeToBind: nodeToBind,
                 forbiddenZone: argumentListSyntaxOpt
             );

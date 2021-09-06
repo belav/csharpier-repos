@@ -598,9 +598,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     updatedSolution = await _service.TryAddUsingsOrImportToDocumentAsync(
                             updatedSolution,
                             generateTypeOptionsResult.ExistingDocument.Id
-                            == _semanticDocument.Document.Id
-                                ? newRoot
-                                : null,
+                                == _semanticDocument.Document.Id
+                              ? newRoot
+                              : null,
                             _semanticDocument.Document,
                             _state.SimpleName,
                             includeUsingsOrImports,

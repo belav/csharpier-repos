@@ -1161,8 +1161,8 @@ namespace System.Net.Http
                     case HeaderState.ResponseHeaders:
                         _response!.Headers.TryAddWithoutValidation(
                             descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                                ? descriptor.AsCustomHeader()
-                                : descriptor,
+                              ? descriptor.AsCustomHeader()
+                              : descriptor,
                             headerValue
                         );
                         break;
@@ -1170,8 +1170,8 @@ namespace System.Net.Http
                         _trailingHeaders!.Add(
                             (
                                 descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                                    ? descriptor.AsCustomHeader()
-                                    : descriptor,
+                                  ? descriptor.AsCustomHeader()
+                                  : descriptor,
                                 headerValue
                             )
                         );

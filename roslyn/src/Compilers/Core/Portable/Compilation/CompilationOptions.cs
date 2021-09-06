@@ -738,34 +738,32 @@ namespace Microsoft.CodeAnalysis
                                 this.DebugPlusMode,
                                 Hash.Combine(
                                     this.CryptoKeyContainer != null
-                                        ? StringComparer.Ordinal.GetHashCode(
-                                              this.CryptoKeyContainer
-                                          )
-                                        : 0,
+                                      ? StringComparer.Ordinal.GetHashCode(this.CryptoKeyContainer)
+                                      : 0,
                                     Hash.Combine(
                                         this.CryptoKeyFile != null
-                                            ? StringComparer.Ordinal.GetHashCode(this.CryptoKeyFile)
-                                            : 0,
+                                          ? StringComparer.Ordinal.GetHashCode(this.CryptoKeyFile)
+                                          : 0,
                                         Hash.Combine(
                                             Hash.CombineValues(this.CryptoPublicKey, 16),
                                             Hash.Combine(
                                                 (int)this.GeneralDiagnosticOption,
                                                 Hash.Combine(
                                                     this.MainTypeName != null
-                                                        ? StringComparer.Ordinal.GetHashCode(
-                                                              this.MainTypeName
-                                                          )
-                                                        : 0,
+                                                      ? StringComparer.Ordinal.GetHashCode(
+                                                            this.MainTypeName
+                                                        )
+                                                      : 0,
                                                     Hash.Combine(
                                                         (int)this.MetadataImportOptions,
                                                         Hash.Combine(
                                                             this.ReferencesSupersedeLowerVersions,
                                                             Hash.Combine(
                                                                 this.ModuleName != null
-                                                                    ? StringComparer.Ordinal.GetHashCode(
-                                                                          this.ModuleName
-                                                                      )
-                                                                    : 0,
+                                                                  ? StringComparer.Ordinal.GetHashCode(
+                                                                        this.ModuleName
+                                                                    )
+                                                                  : 0,
                                                                 Hash.Combine(
                                                                     (int)this.OptimizationLevel,
                                                                     Hash.Combine(
@@ -776,11 +774,11 @@ namespace Microsoft.CodeAnalysis
                                                                                 this.ReportSuppressedDiagnostics,
                                                                                 Hash.Combine(
                                                                                     this.ScriptClassName
-                                                                                    != null
-                                                                                        ? StringComparer.Ordinal.GetHashCode(
-                                                                                              this.ScriptClassName
-                                                                                          )
-                                                                                        : 0,
+                                                                                        != null
+                                                                                      ? StringComparer.Ordinal.GetHashCode(
+                                                                                            this.ScriptClassName
+                                                                                        )
+                                                                                      : 0,
                                                                                     Hash.Combine(
                                                                                         Hash.CombineValues(
                                                                                             this.SpecificDiagnosticOptions

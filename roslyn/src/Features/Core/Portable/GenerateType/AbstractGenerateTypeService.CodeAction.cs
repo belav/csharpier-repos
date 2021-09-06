@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 {
                     return string.Format(
                         isNested
-                            ? FeaturesResources.Generate_nested_0_1
-                            : FeaturesResources.Generate_0_1,
+                          ? FeaturesResources.Generate_nested_0_1
+                          : FeaturesResources.Generate_0_1,
                         state.IsStruct ? "struct" : state.IsInterface ? "interface" : "class",
                         state.Name
                     );

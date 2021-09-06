@@ -185,8 +185,8 @@ namespace System.Net.Sockets
                                 NetEventSource.Info(
                                     thisRef,
                                     canceled
-                                        ? "Socket operation canceled."
-                                        : $"CancelIoEx failed with error '{Marshal.GetLastWin32Error()}'."
+                                      ? "Socket operation canceled."
+                                      : $"CancelIoEx failed with error '{Marshal.GetLastWin32Error()}'."
                                 );
                             }
                         }
@@ -354,8 +354,8 @@ namespace System.Net.Sockets
                     handle,
                     acceptHandle,
                     userBuffer
-                        ? (IntPtr)((byte*)_singleBufferHandle.Pointer + _offset)
-                        : (IntPtr)_singleBufferHandle.Pointer,
+                      ? (IntPtr)((byte*)_singleBufferHandle.Pointer + _offset)
+                      : (IntPtr)_singleBufferHandle.Pointer,
                     userBuffer ? _count - _acceptAddressBufferCount : 0,
                     _acceptAddressBufferCount / 2,
                     _acceptAddressBufferCount / 2,
@@ -1357,8 +1357,8 @@ namespace System.Net.Sockets
 
                 _currentSocket.GetAcceptExSockaddrs(
                     userBuffer
-                        ? (IntPtr)((byte*)_singleBufferHandle.Pointer + _offset)
-                        : (IntPtr)_singleBufferHandle.Pointer,
+                      ? (IntPtr)((byte*)_singleBufferHandle.Pointer + _offset)
+                      : (IntPtr)_singleBufferHandle.Pointer,
                     _count != 0 ? _count - _acceptAddressBufferCount : 0,
                     _acceptAddressBufferCount / 2,
                     _acceptAddressBufferCount / 2,

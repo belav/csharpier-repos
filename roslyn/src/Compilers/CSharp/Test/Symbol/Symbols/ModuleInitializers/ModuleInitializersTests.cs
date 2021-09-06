@@ -295,13 +295,13 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? @"
+                  ? @"
 I.M
 Program.Main"
-                    : null,
+                  : null,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? Verification.Passes
-                    : Verification.Skipped
+                  ? Verification.Passes
+                  : Verification.Skipped
             );
         }
 
@@ -379,8 +379,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr ? null : "1234",
                 verify: !ExecutionConditionUtil.IsMonoOrCoreClr
-                    ? Verification.Skipped
-                    : Verification.Passes
+                  ? Verification.Skipped
+                  : Verification.Passes
             );
         }
 

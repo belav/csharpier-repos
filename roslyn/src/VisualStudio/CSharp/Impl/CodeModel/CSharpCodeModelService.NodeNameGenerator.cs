@@ -227,8 +227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         var constructorDeclaration = (ConstructorDeclarationSyntax)node;
                         builder.Append(
                             constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
-                                ? "#sctor"
-                                : "#ctor"
+                              ? "#sctor"
+                              : "#ctor"
                         );
                         AppendParameterList(builder, constructorDeclaration.ParameterList);
                         break;

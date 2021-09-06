@@ -1148,8 +1148,8 @@ namespace Microsoft.EntityFrameworkCore
                 () =>
                     context.Database.BeginTransaction(
                         DirtyReadsOccur
-                            ? IsolationLevel.ReadUncommitted
-                            : IsolationLevel.Unspecified
+                          ? IsolationLevel.ReadUncommitted
+                          : IsolationLevel.Unspecified
                     )
             );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);

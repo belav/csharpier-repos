@@ -70,8 +70,8 @@ namespace Internal.TypeSystem
                     "System",
                     s_wellKnownTypeNames[typeIndex],
                     typeIndex == (int)WellKnownType.Object
-                        ? NotFoundBehavior.Throw
-                        : NotFoundBehavior.ReturnNull
+                      ? NotFoundBehavior.Throw
+                      : NotFoundBehavior.ReturnNull
                 );
                 if (type != null)
                 {

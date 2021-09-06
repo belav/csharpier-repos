@@ -123,8 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                     Resources.DesignNotFound(
                         Path.GetFileNameWithoutExtension(
                             _startupAssembly!.HasValue()
-                                ? _startupAssembly.Value()
-                                : _assembly!.Value()
+                              ? _startupAssembly.Value()
+                              : _assembly!.Value()
                         )
                     ),
                     ex

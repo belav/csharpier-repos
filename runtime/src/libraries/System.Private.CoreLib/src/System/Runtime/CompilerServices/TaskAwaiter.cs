@@ -298,8 +298,8 @@ namespace System.Runtime.CompilerServices
                 );
                 log.TaskWaitBegin(
                     currentTaskAtBegin != null
-                        ? currentTaskAtBegin.m_taskScheduler!.Id
-                        : TaskScheduler.Default.Id,
+                      ? currentTaskAtBegin.m_taskScheduler!.Id
+                      : TaskScheduler.Default.Id,
                     currentTaskAtBegin != null ? currentTaskAtBegin.Id : 0,
                     task.Id,
                     TplEventSource.TaskWaitBehavior.Asynchronous,
@@ -331,8 +331,8 @@ namespace System.Runtime.CompilerServices
                         Task? currentTaskAtEnd = Task.InternalCurrent;
                         innerEtwLog.TaskWaitEnd(
                             currentTaskAtEnd != null
-                                ? currentTaskAtEnd.m_taskScheduler!.Id
-                                : TaskScheduler.Default.Id,
+                              ? currentTaskAtEnd.m_taskScheduler!.Id
+                              : TaskScheduler.Default.Id,
                             currentTaskAtEnd != null ? currentTaskAtEnd.Id : 0,
                             innerTask.Id
                         );

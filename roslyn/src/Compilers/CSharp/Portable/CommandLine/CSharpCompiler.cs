@@ -146,8 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             MessageProvider,
                             (int)ErrorCode.WRN_FileAlreadyIncluded,
                             Arguments.PrintFullPaths
-                                ? normalizedFilePath
-                                : _diagnosticFormatter.RelativizeNormalizedPath(normalizedFilePath)
+                              ? normalizedFilePath
+                              : _diagnosticFormatter.RelativizeNormalizedPath(normalizedFilePath)
                         )
                     );
 

@@ -125,8 +125,8 @@ namespace System.Net.Sockets.Tests
 
                     Assert.Equal(
                         RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                            ? SocketError.ConnectionRefused
-                            : SocketError.AddressNotAvailable,
+                          ? SocketError.ConnectionRefused
+                          : SocketError.AddressNotAvailable,
                         args.SocketError
                     );
                 }

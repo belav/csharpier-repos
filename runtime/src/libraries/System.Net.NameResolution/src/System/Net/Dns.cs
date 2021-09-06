@@ -764,9 +764,9 @@ namespace System.Net
                     return justAddresses
                         ? (Task)Task.FromResult(
                               family == AddressFamily.Unspecified
-                              || ipAddress.AddressFamily == family
-                                  ? new[] { ipAddress }
-                                  : Array.Empty<IPAddress>()
+                                  || ipAddress.AddressFamily == family
+                                ? new[] { ipAddress }
+                                : Array.Empty<IPAddress>()
                           )
                         : Task.FromResult(CreateHostEntryForAddress(ipAddress));
                 }

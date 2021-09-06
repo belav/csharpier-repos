@@ -1475,8 +1475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _binderFactory.GetBinder(node)
                     .WithAdditionalFlags(
                         this.IgnoresAccessibility
-                            ? BinderFlags.IgnoreAccessibility
-                            : BinderFlags.None
+                          ? BinderFlags.IgnoreAccessibility
+                          : BinderFlags.None
                     );
 
             switch (node.Kind())

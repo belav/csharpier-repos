@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
           : base(
             moduleSymbol.Module,
             (moduleSymbol.ContainingAssembly is PEAssemblySymbol)
-                ? moduleSymbol.ContainingAssembly.Identity
-                : null,
+              ? moduleSymbol.ContainingAssembly.Identity
+              : null,
             SymbolFactory.Instance,
             moduleSymbol
         ) {

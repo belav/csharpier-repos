@@ -80,13 +80,13 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             ) {
                 result.Add(
                     wrappingStyle == WrappingStyle.WrapFirst_IndentRest
-                        ? Edit.UpdateBetween(
-                              _listSyntax.GetFirstToken(),
-                              NewLineTrivia,
-                              _singleIndentationTrivia,
-                              _listItems[0]
-                          )
-                        : Edit.DeleteBetween(_listSyntax.GetFirstToken(), _listItems[0])
+                      ? Edit.UpdateBetween(
+                            _listSyntax.GetFirstToken(),
+                            NewLineTrivia,
+                            _singleIndentationTrivia,
+                            _listItems[0]
+                        )
+                      : Edit.DeleteBetween(_listSyntax.GetFirstToken(), _listItems[0])
                 );
             }
 

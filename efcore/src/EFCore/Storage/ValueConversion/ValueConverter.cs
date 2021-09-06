@@ -168,8 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 firstConverter,
                 secondConverter,
                 secondConverter.MappingHints == null
-                    ? firstConverter.MappingHints
-                    : secondConverter.MappingHints.With(firstConverter.MappingHints)
+                  ? firstConverter.MappingHints
+                  : secondConverter.MappingHints.With(firstConverter.MappingHints)
             )!;
         }
     }

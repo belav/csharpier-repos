@@ -409,8 +409,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 var lengthAttribute = new AttributeWriter(
                     property.ClrType == typeof(string)
-                        ? nameof(StringLengthAttribute)
-                        : nameof(MaxLengthAttribute)
+                      ? nameof(StringLengthAttribute)
+                      : nameof(MaxLengthAttribute)
                 );
 
                 lengthAttribute.AddParameter(_code.Literal(maxLength.Value));
@@ -545,8 +545,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     inversePropertyAttribute.AddParameter(
                         !navigation.DeclaringEntityType.GetPropertiesAndNavigations()
                             .Any(m => m.Name == inverseNavigation.DeclaringEntityType.Name)
-                            ? $"nameof({inverseNavigation.DeclaringEntityType.Name}.{inverseNavigation.Name})"
-                            : _code.Literal(inverseNavigation.Name)
+                          ? $"nameof({inverseNavigation.DeclaringEntityType.Name}.{inverseNavigation.Name})"
+                          : _code.Literal(inverseNavigation.Name)
                     );
 
                     _sb.AppendLine(inversePropertyAttribute.ToString());

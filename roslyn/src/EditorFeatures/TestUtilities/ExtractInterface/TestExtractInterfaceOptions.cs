@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                       interfaceName: ChosenInterfaceName ?? defaultInterfaceName,
                       fileName: ChosenFileName ?? defaultInterfaceName,
                       location: SameFile
-                          ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
-                          : ExtractInterfaceOptionsResult.ExtractLocation.NewFile
+                        ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
+                        : ExtractInterfaceOptionsResult.ExtractLocation.NewFile
                   );
 
             return Task.FromResult(result);

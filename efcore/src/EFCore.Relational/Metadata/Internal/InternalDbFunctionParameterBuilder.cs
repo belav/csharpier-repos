@@ -145,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
             HasStoreType(
                 storeType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -158,8 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
             CanSetStoreType(
                 storeType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -171,8 +171,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
             HasTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -184,8 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
             CanSetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
     }
 }

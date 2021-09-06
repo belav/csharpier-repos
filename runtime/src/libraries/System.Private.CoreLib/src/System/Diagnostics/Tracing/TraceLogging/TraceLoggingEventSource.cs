@@ -89,8 +89,8 @@ namespace System.Diagnostics.Tracing
             params string[]? traits
         ) : this(
             eventSourceName == null
-                ? default
-                : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
+              ? default
+              : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
             eventSourceName!,
             config,
             traits

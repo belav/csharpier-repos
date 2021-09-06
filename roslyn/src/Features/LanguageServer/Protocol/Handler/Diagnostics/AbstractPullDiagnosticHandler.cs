@@ -437,8 +437,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             result.Add(
                 diagnosticData.CustomTags.Contains(WellKnownDiagnosticTags.Build)
-                    ? VSDiagnosticTags.BuildError
-                    : VSDiagnosticTags.IntellisenseError
+                  ? VSDiagnosticTags.BuildError
+                  : VSDiagnosticTags.IntellisenseError
             );
 
             if (diagnosticData.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary))

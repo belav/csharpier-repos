@@ -447,12 +447,12 @@ namespace System.IO
                 // it then fall back to doing the ArrayPool/copy behavior.
                 return new ValueTask<int>(
                     MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> destinationArray)
-                        ? Read(
-                              destinationArray.Array!,
-                              destinationArray.Offset,
-                              destinationArray.Count
-                          )
-                        : Read(buffer.Span)
+                      ? Read(
+                            destinationArray.Array!,
+                            destinationArray.Offset,
+                            destinationArray.Count
+                        )
+                      : Read(buffer.Span)
                 );
             }
             catch (OperationCanceledException oce)

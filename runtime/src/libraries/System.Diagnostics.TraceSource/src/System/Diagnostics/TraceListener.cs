@@ -189,8 +189,8 @@ namespace System.Diagnostics
         {
             WriteLine(
                 detailMessage is null
-                    ? SR.TraceListenerFail + " " + message
-                    : SR.TraceListenerFail + " " + message + " " + detailMessage
+                  ? SR.TraceListenerFail + " " + message
+                  : SR.TraceListenerFail + " " + message + " " + detailMessage
             );
         }
 

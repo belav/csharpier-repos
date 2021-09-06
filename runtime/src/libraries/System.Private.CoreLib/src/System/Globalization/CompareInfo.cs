@@ -584,8 +584,8 @@ namespace System.Globalization
             throw new ArgumentException(
                 paramName: nameof(options),
                 message: ((options & CompareOptions.Ordinal) != 0)
-                    ? SR.Argument_CompareOptionOrdinal
-                    : SR.Argument_InvalidFlag
+                  ? SR.Argument_CompareOptionOrdinal
+                  : SR.Argument_InvalidFlag
             );
         }
 

@@ -1172,9 +1172,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                                 .AppendLine(",")
                                 .Append(
                                     foreignKey.Columns.Length == 1
-                                    || foreignKey.PrincipalColumns == null
-                                        ? "column: "
-                                        : "columns: "
+                                        || foreignKey.PrincipalColumns == null
+                                      ? "column: "
+                                      : "columns: "
                                 )
                                 .Append(
                                     Code.Lambda(foreignKey.Columns.Select(c => map[c]).ToList())

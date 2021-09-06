@@ -506,8 +506,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
                     parameterOptions: SymbolDisplayParameterOptions.None,
                     memberOptions: methodToUpdate.IsConstructor()
-                        ? SymbolDisplayMemberOptions.None
-                        : SymbolDisplayMemberOptions.IncludeContainingType
+                      ? SymbolDisplayMemberOptions.None
+                      : SymbolDisplayMemberOptions.IncludeContainingType
                 )
             );
 

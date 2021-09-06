@@ -3302,8 +3302,8 @@ namespace System.Threading.Tasks
                 Task? currentTask = Task.InternalCurrent;
                 log.TaskWaitBegin(
                     currentTask != null
-                        ? currentTask.m_taskScheduler!.Id
-                        : TaskScheduler.Default.Id,
+                      ? currentTask.m_taskScheduler!.Id
+                      : TaskScheduler.Default.Id,
                     currentTask != null ? currentTask.Id : 0,
                     this.Id,
                     TplEventSource.TaskWaitBehavior.Synchronous,
@@ -7835,9 +7835,9 @@ namespace System.Threading.Tasks
                 case TaskStatus.RanToCompletion:
                     ProcessInnerTask(
                         task is Task<Task<TResult>> taskOfTaskOfTResult
-                            ? // it's either a Task<Task> or Task<Task<TResult>>
-                              taskOfTaskOfTResult.Result
-                            : ((Task<Task>)task).Result
+                          ? // it's either a Task<Task> or Task<Task<TResult>>
+                            taskOfTaskOfTResult.Result
+                          : ((Task<Task>)task).Result
                     );
                     break;
             }

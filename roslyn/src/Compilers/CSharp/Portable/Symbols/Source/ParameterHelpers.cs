@@ -276,8 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 diagnostics.Add(
                     mustBeLastParameter.Identifier.Kind() == SyntaxKind.ArgListKeyword
-                        ? ErrorCode.ERR_VarargsLast
-                        : ErrorCode.ERR_ParamsLast,
+                      ? ErrorCode.ERR_VarargsLast
+                      : ErrorCode.ERR_ParamsLast,
                     mustBeLastParameter.GetLocation()
                 );
             }
@@ -788,8 +788,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 !defaultExpression.HasAnyErrors
                 && !IsValidDefaultValue(
                     defaultExpression.IsImplicitObjectCreation()
-                        ? convertedExpression
-                        : defaultExpression
+                      ? convertedExpression
+                      : defaultExpression
                 )
             ) {
                 // error CS1736: Default parameter value for '{0}' must be a compile-time constant

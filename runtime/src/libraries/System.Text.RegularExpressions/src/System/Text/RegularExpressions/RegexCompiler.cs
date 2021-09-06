@@ -280,8 +280,8 @@ namespace System.Text.RegularExpressions
                     pattern,
                     options,
                     (options & RegexOptions.CultureInvariant) != 0
-                        ? CultureInfo.InvariantCulture
-                        : CultureInfo.CurrentCulture
+                      ? CultureInfo.InvariantCulture
+                      : CultureInfo.CurrentCulture
                 );
                 RegexCode code = RegexWriter.Write(tree);
 
@@ -630,8 +630,8 @@ namespace System.Text.RegularExpressions
             new RentedLocalBuilder(
                 _int32LocalsPool ??= new Stack<LocalBuilder>(),
                 _int32LocalsPool.TryPop(out LocalBuilder? iterationLocal)
-                    ? iterationLocal
-                    : DeclareInt32()
+                  ? iterationLocal
+                  : DeclareInt32()
             );
 
         /// <summary>Rents a ReadOnlySpan(char) local variable slot from the pool of locals.</summary>
@@ -643,8 +643,8 @@ namespace System.Text.RegularExpressions
             new RentedLocalBuilder(
                 _readOnlySpanCharLocalsPool ??= new Stack<LocalBuilder>(1), // capacity == 1 as we currently don't expect overlapping instances
                 _readOnlySpanCharLocalsPool.TryPop(out LocalBuilder? iterationLocal)
-                    ? iterationLocal
-                    : DeclareReadOnlySpanChar()
+                  ? iterationLocal
+                  : DeclareReadOnlySpanChar()
             );
 
         /// <summary>Returned a rented local to the pool.</summary>
@@ -1466,8 +1466,8 @@ namespace System.Text.RegularExpressions
                 MarkLabel(lDefaultAdvance);
                 Ldc(
                     _code.RightToLeft
-                        ? -_boyerMoorePrefix.Pattern.Length
-                        : _boyerMoorePrefix.Pattern.Length
+                      ? -_boyerMoorePrefix.Pattern.Length
+                      : _boyerMoorePrefix.Pattern.Length
                 );
 
                 // Advance:
@@ -2812,8 +2812,8 @@ namespace System.Text.RegularExpressions
                             Ldloc(runtextposLocal);
                             Ldthisfld(
                                 node.Type == RegexNode.Beginning
-                                    ? s_runtextbegField
-                                    : s_runtextstartField
+                                  ? s_runtextbegField
+                                  : s_runtextstartField
                             );
                             BneFar(doneLabel);
                         }

@@ -371,8 +371,8 @@ namespace Microsoft.EntityFrameworkCore
                     state,
                     (c, s) => operation(s),
                     verifySucceeded == null
-                        ? (Func<DbContext, TState, ExecutionResult<TResult>>?)null
-                        : (c, s) => verifySucceeded(s)
+                      ? (Func<DbContext, TState, ExecutionResult<TResult>>?)null
+                      : (c, s) => verifySucceeded(s)
                 );
 
         /// <summary>
@@ -411,13 +411,13 @@ namespace Microsoft.EntityFrameworkCore
                     state,
                     (c, s, ct) => operation(s, ct),
                     verifySucceeded == null
-                        ? (Func<
-                              DbContext,
-                              TState,
-                              CancellationToken,
-                              Task<ExecutionResult<TResult>>
-                          >?)null
-                        : (c, s, ct) => verifySucceeded(s, ct),
+                      ? (Func<
+                            DbContext,
+                            TState,
+                            CancellationToken,
+                            Task<ExecutionResult<TResult>>
+                        >?)null
+                      : (c, s, ct) => verifySucceeded(s, ct),
                     cancellationToken
                 );
 

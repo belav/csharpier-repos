@@ -2794,8 +2794,8 @@ namespace System.Speech.Recognition
                     isStreamReleased,
                     speechEvent.AudioPosition,
                     (speechEvent.LParam == 0)
-                        ? null
-                        : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
+                      ? null
+                      : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
                     isRecognizeCancelled
                 );
             }
@@ -2814,8 +2814,8 @@ namespace System.Speech.Recognition
                 FireEmulateRecognizeCompletedEvent(
                     lastResult,
                     (speechEvent.LParam == 0)
-                        ? lastException
-                        : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
+                      ? lastException
+                      : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
                     isRecognizeCancelled
                 );
             }

@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                     isCollapsible: true,
                     textSpan: TextSpan.FromBounds(
                         (node.CloseParenToken != default)
-                            ? node.CloseParenToken.Span.End
-                            : node.Expression.Span.End,
+                          ? node.CloseParenToken.Span.End
+                          : node.Expression.Span.End,
                         node.CloseBraceToken.Span.End
                     ),
                     hintSpan: node.Span,

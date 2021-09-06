@@ -42,12 +42,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     accessibility: accessibility,
                     modifiers: modifiers,
                     explicitInterfaceImplementations: useExplicitInterfaceSymbol
-                        ? ImmutableArray.Create(updatedMethod)
-                        : default,
+                      ? ImmutableArray.Create(updatedMethod)
+                      : default,
                     name: memberName,
                     statements: generateAbstractly
-                        ? default
-                        : ImmutableArray.Create(CreateStatement(compilation, updatedMethod))
+                      ? default
+                      : ImmutableArray.Create(CreateStatement(compilation, updatedMethod))
                 );
             }
 

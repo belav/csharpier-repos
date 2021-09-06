@@ -93,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
                             parsedVariable
                         ),
                         typeof(TNumber).IsNullableType()
-                            ? (Expression)Expression.Convert(parsedVariable, typeof(TNumber))
-                            : parsedVariable,
+                          ? (Expression)Expression.Convert(parsedVariable, typeof(TNumber))
+                          : parsedVariable,
                         Expression.Constant(default(TNumber), typeof(TNumber))
                     )
                 ),

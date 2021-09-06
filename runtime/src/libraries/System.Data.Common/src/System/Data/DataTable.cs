@@ -8227,8 +8227,8 @@ namespace System.Data
                             dc,
                             version,
                             dc.DataExpression == null
-                                ? dc.DefaultValue
-                                : dc.DataExpression.Evaluate(row, version)
+                              ? dc.DefaultValue
+                              : dc.DataExpression.Evaluate(row, version)
                         );
                     }
                 }

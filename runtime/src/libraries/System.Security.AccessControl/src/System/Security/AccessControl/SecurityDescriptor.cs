@@ -838,8 +838,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentException(
                     isContainer
-                        ? SR.AccessControl_MustSpecifyContainerAcl
-                        : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                      ? SR.AccessControl_MustSpecifyContainerAcl
+                      : SR.AccessControl_MustSpecifyLeafObjectAcl,
                     nameof(systemAcl)
                 );
             }
@@ -848,8 +848,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentException(
                     isContainer
-                        ? SR.AccessControl_MustSpecifyContainerAcl
-                        : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                      ? SR.AccessControl_MustSpecifyContainerAcl
+                      : SR.AccessControl_MustSpecifyLeafObjectAcl,
                     nameof(discretionaryAcl)
                 );
             }
@@ -860,8 +860,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentException(
                     isDS
-                        ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
-                        : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                      ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                      : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
                     nameof(systemAcl)
                 );
             }
@@ -870,8 +870,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentException(
                     isDS
-                        ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
-                        : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                      ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                      : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
                     nameof(discretionaryAcl)
                 );
             }
@@ -965,8 +965,8 @@ namespace System.Security.AccessControl
             group,
             systemAcl == null ? null : new SystemAcl(isContainer, isDS, systemAcl),
             discretionaryAcl == null
-                ? null
-                : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl)
+              ? null
+              : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl)
         ) { }
 
         public CommonSecurityDescriptor(
@@ -993,16 +993,16 @@ namespace System.Security.AccessControl
                 rawSecurityDescriptor.Owner,
                 rawSecurityDescriptor.Group,
                 rawSecurityDescriptor.SystemAcl == null
-                    ? null
-                    : new SystemAcl(isContainer, isDS, rawSecurityDescriptor.SystemAcl, trusted),
+                  ? null
+                  : new SystemAcl(isContainer, isDS, rawSecurityDescriptor.SystemAcl, trusted),
                 rawSecurityDescriptor.DiscretionaryAcl == null
-                    ? null
-                    : new DiscretionaryAcl(
-                          isContainer,
-                          isDS,
-                          rawSecurityDescriptor.DiscretionaryAcl,
-                          trusted
-                      )
+                  ? null
+                  : new DiscretionaryAcl(
+                        isContainer,
+                        isDS,
+                        rawSecurityDescriptor.DiscretionaryAcl,
+                        trusted
+                    )
             );
         }
 
@@ -1092,8 +1092,8 @@ namespace System.Security.AccessControl
                     {
                         throw new ArgumentException(
                             this.IsContainer
-                                ? SR.AccessControl_MustSpecifyContainerAcl
-                                : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                              ? SR.AccessControl_MustSpecifyContainerAcl
+                              : SR.AccessControl_MustSpecifyLeafObjectAcl,
                             nameof(value)
                         );
                     }
@@ -1102,8 +1102,8 @@ namespace System.Security.AccessControl
                     {
                         throw new ArgumentException(
                             this.IsDS
-                                ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
-                                : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                              ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                              : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
                             nameof(value)
                         );
                     }
@@ -1139,8 +1139,8 @@ namespace System.Security.AccessControl
                     {
                         throw new ArgumentException(
                             this.IsContainer
-                                ? SR.AccessControl_MustSpecifyContainerAcl
-                                : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                              ? SR.AccessControl_MustSpecifyContainerAcl
+                              : SR.AccessControl_MustSpecifyLeafObjectAcl,
                             nameof(value)
                         );
                     }
@@ -1149,8 +1149,8 @@ namespace System.Security.AccessControl
                     {
                         throw new ArgumentException(
                             this.IsDS
-                                ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
-                                : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                              ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                              : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
                             nameof(value)
                         );
                     }

@@ -71,8 +71,8 @@ namespace Roslyn.Test.Utilities
             return string.Format(
                 "\"{0}\"",
                 symbol == null
-                    ? (object)reference
-                    : symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                  ? (object)reference
+                  : symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
             );
         }
 

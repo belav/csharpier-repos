@@ -148,13 +148,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         .KeepCommentsAndAddElasticMarkers(),
                     type: forEachStatement.Type.IsVar ? null : forEachStatement.Type,
                     identifier: forEachStatement.Type.IsVar
-                        ? forEachStatement.Identifier.WithPrependedLeadingTrivia(
-                              SyntaxNodeOrTokenExtensions.GetTrivia(
-                                      forEachStatement.Type.GetFirstToken()
-                                  )
-                                  .FilterComments(addElasticMarker: false)
-                          )
-                        : forEachStatement.Identifier,
+                      ? forEachStatement.Identifier.WithPrependedLeadingTrivia(
+                            SyntaxNodeOrTokenExtensions.GetTrivia(
+                                    forEachStatement.Type.GetFirstToken()
+                                )
+                                .FilterComments(addElasticMarker: false)
+                        )
+                      : forEachStatement.Identifier,
                     inKeyword: forEachStatement.InKeyword.KeepCommentsAndAddElasticMarkers(),
                     expression: forEachStatement.Expression
                 )

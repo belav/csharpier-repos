@@ -300,8 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityType.ClrType,
                 entityType.HasSharedClrType,
                 entityType.BaseType == null
-                    ? null
-                    : model.FindEntityType(entityType.BaseType.Name)!,
+                  ? null
+                  : model.FindEntityType(entityType.BaseType.Name)!,
                 entityType.GetDiscriminatorPropertyName(),
                 entityType.GetChangeTrackingStrategy(),
                 entityType.FindIndexerPropertyInfo(),

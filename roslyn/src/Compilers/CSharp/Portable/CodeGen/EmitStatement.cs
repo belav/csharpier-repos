@@ -684,8 +684,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     DefineLocal(
                         local,
                         !declaringReferences.IsEmpty
-                            ? (CSharpSyntaxNode)declaringReferences[0].GetSyntax()
-                            : block.Syntax
+                          ? (CSharpSyntaxNode)declaringReferences[0].GetSyntax()
+                          : block.Syntax
                     );
                 }
             }
@@ -807,8 +807,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 var unexpectedTemp = this.EmitAddress(
                     expressionOpt,
                     this._method.RefKind == RefKind.RefReadOnly
-                        ? AddressKind.ReadOnlyStrict
-                        : AddressKind.Writeable
+                      ? AddressKind.ReadOnlyStrict
+                      : AddressKind.Writeable
                 );
                 Debug.Assert(unexpectedTemp == null, "ref-returning a temp?");
             }

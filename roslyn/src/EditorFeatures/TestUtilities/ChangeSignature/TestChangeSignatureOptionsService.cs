@@ -48,12 +48,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 new SignatureChange(
                     parameters,
                     UpdatedSignature == null
-                        ? parameters
-                        : ParameterConfiguration.Create(
-                              updateParameters,
-                              parameters.ThisParameter != null,
-                              selectedIndex: 0
-                          )
+                      ? parameters
+                      : ParameterConfiguration.Create(
+                            updateParameters,
+                            parameters.ThisParameter != null,
+                            selectedIndex: 0
+                        )
                 ),
                 previewChanges: false
             );

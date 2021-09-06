@@ -365,8 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 assemblyName,
                 options?.WithReferencesSupersedeLowerVersions(true) ?? s_defaultSubmissionOptions,
                 (syntaxTree != null)
-                    ? new[] { syntaxTree }
-                    : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
+                  ? new[] { syntaxTree }
+                  : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
                 references,
                 previousScriptCompilation,
                 returnType,
@@ -704,15 +704,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _referenceManager,
                 reuseReferenceManager,
                 reuseSyntaxAndDeclarationManager
-                    ? _syntaxAndDeclarations
-                    : new SyntaxAndDeclarationManager(
-                          _syntaxAndDeclarations.ExternalSyntaxTrees,
-                          options.ScriptClassName,
-                          options.SourceReferenceResolver,
-                          _syntaxAndDeclarations.MessageProvider,
-                          _syntaxAndDeclarations.IsSubmission,
-                          state: null
-                      ),
+                  ? _syntaxAndDeclarations
+                  : new SyntaxAndDeclarationManager(
+                        _syntaxAndDeclarations.ExternalSyntaxTrees,
+                        options.ScriptClassName,
+                        options.SourceReferenceResolver,
+                        _syntaxAndDeclarations.MessageProvider,
+                        _syntaxAndDeclarations.IsSubmission,
+                        state: null
+                    ),
                 this.SemanticModelProvider
             );
         }
@@ -2589,8 +2589,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 System.Runtime.CompilerServices.Unsafe.AreSame(
                     ref cachedBinderFactories,
                     ref ignoreAccessibility
-                        ? ref _ignoreAccessibilityBinderFactories
-                        : ref _binderFactories
+                      ? ref _ignoreAccessibilityBinderFactories
+                      : ref _binderFactories
                 )
             );
 
@@ -3194,17 +3194,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodCompiler.CompileMethodBodies(
                 compilation: this,
                 moduleBeingBuiltOpt: doLowering
-                    ? (PEModuleBuilder?)CreateModuleBuilder(
-                          emitOptions: EmitOptions.Default,
-                          debugEntryPoint: null,
-                          manifestResources: null,
-                          sourceLinkStream: null,
-                          embeddedTexts: null,
-                          testData: null,
-                          diagnostics: diagnostics.DiagnosticBag,
-                          cancellationToken: cancellationToken
-                      )
-                    : null,
+                  ? (PEModuleBuilder?)CreateModuleBuilder(
+                        emitOptions: EmitOptions.Default,
+                        debugEntryPoint: null,
+                        manifestResources: null,
+                        sourceLinkStream: null,
+                        embeddedTexts: null,
+                        testData: null,
+                        diagnostics: diagnostics.DiagnosticBag,
+                        cancellationToken: cancellationToken
+                    )
+                  : null,
                 emittingPdb: false,
                 emitTestCoverageData: false,
                 hasDeclarationErrors: false,

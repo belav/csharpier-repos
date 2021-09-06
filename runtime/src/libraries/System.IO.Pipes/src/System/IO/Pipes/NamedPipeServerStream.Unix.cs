@@ -62,8 +62,8 @@ namespace System.IO.Pipes
             _instance = SharedServer.Get(
                 GetPipePath(".", pipeName),
                 (maxNumberOfServerInstances == MaxAllowedServerInstances)
-                    ? int.MaxValue
-                    : maxNumberOfServerInstances
+                  ? int.MaxValue
+                  : maxNumberOfServerInstances
             );
 
             _direction = direction;

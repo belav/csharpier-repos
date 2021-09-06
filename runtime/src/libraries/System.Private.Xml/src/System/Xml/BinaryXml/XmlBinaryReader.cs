@@ -4676,8 +4676,8 @@ namespace System.Xml
                     Array.Copy(_data, _tokDataPos, data, 0, _tokLen);
                     value = GetValueConverter(
                             token == BinXmlToken.XSD_BINHEX
-                                ? XmlTypeCode.HexBinary
-                                : XmlTypeCode.Base64Binary
+                              ? XmlTypeCode.HexBinary
+                              : XmlTypeCode.Base64Binary
                         )
                         .ChangeType(data, returnType, namespaceResolver);
                     break;

@@ -1977,8 +1977,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                       // is a good default for any related case.
                       CreateResult(
                           patternOperation.NarrowedType.IsErrorType()
-                              ? patternOperation.InputType
-                              : patternOperation.NarrowedType
+                            ? patternOperation.InputType
+                            : patternOperation.NarrowedType
                       ),
                     _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>()
                 };

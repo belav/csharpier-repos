@@ -59,8 +59,8 @@ namespace System.Threading.Channels
                     : error is OperationCanceledException oce
                         ? Task.FromCanceled<T>(
                               oce.CancellationToken.IsCancellationRequested
-                                  ? oce.CancellationToken
-                                  : new CancellationToken(true)
+                                ? oce.CancellationToken
+                                : new CancellationToken(true)
                           )
                         : Task.FromException<T>(CreateInvalidCompletionException(error));
 

@@ -154,14 +154,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     NotifyEditors(
                         change.Value.Removed,
                         initialTags
-                            ? TaggerDelay.NearImmediate
-                            : _tagSource.RemovedTagNotificationDelay
+                          ? TaggerDelay.NearImmediate
+                          : _tagSource.RemovedTagNotificationDelay
                     );
                     NotifyEditors(
                         change.Value.Added,
                         initialTags
-                            ? TaggerDelay.NearImmediate
-                            : _tagSource.AddedTagNotificationDelay
+                          ? TaggerDelay.NearImmediate
+                          : _tagSource.AddedTagNotificationDelay
                     );
                 }
             }

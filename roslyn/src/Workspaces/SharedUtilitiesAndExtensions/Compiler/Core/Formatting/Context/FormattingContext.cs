@@ -271,8 +271,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                             operation.Option.IsOn(
                                 IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
                             )
-                                ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
-                                : operation.BaseToken
+                              ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
+                              : operation.BaseToken
                         );
 
                         return baseIndentation + indentationDelta;

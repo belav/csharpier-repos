@@ -652,8 +652,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                             // It changed!  Return the new type of tagspan.
                             return new ClassifiedSpan(
                                 isKeyword
-                                    ? ClassificationTypeNames.Keyword
-                                    : ClassificationTypeNames.Identifier,
+                                  ? ClassificationTypeNames.Keyword
+                                  : ClassificationTypeNames.Identifier,
                                 span
                             );
                         }

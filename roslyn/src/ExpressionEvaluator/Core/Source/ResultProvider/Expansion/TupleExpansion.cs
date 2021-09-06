@@ -182,8 +182,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     childShouldParenthesize: false,
                     fullName: fullName,
                     childFullNamePrefixOpt: flags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
-                        ? null
-                        : fullName,
+                      ? null
+                      : fullName,
                     formatSpecifiers: Formatter.AddFormatSpecifier(formatSpecifiers, "raw"),
                     category: DkmEvaluationResultCategory.Other,
                     flags: flags,
@@ -371,8 +371,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             fieldTypeAndInfo,
                             field,
                             (offset == 0)
-                                ? fieldName
-                                : TypeHelpers.GetTupleFieldName(offset + index),
+                              ? fieldName
+                              : TypeHelpers.GetTupleFieldName(offset + index),
                             parent,
                             isRest: false
                         )

@@ -6276,8 +6276,8 @@ namespace System.Xml
             {
                 Debug.Assert(
                     (_index > 0)
-                        ? _nextParsingFunction == ParsingFunction.ElementContent
-                        : _nextParsingFunction == ParsingFunction.DocumentContent
+                      ? _nextParsingFunction == ParsingFunction.ElementContent
+                      : _nextParsingFunction == ParsingFunction.DocumentContent
                 );
                 SkipPartialTextValue();
             }
@@ -6300,8 +6300,8 @@ namespace System.Xml
             {
                 Debug.Assert(
                     (_index > 0)
-                        ? _nextParsingFunction == ParsingFunction.ElementContent
-                        : _nextParsingFunction == ParsingFunction.DocumentContent
+                      ? _nextParsingFunction == ParsingFunction.ElementContent
+                      : _nextParsingFunction == ParsingFunction.DocumentContent
                 );
                 SkipPartialTextValue();
             }
@@ -8521,8 +8521,8 @@ namespace System.Xml
                 Throw(
                     new XmlException(
                         entityName == null
-                            ? SR.Xml_ErrorOpeningExternalDtd
-                            : SR.Xml_ErrorOpeningExternalEntity,
+                          ? SR.Xml_ErrorOpeningExternalDtd
+                          : SR.Xml_ErrorOpeningExternalEntity,
                         new string[] { uri.ToString(), innerMessage },
                         e,
                         0,
@@ -8543,8 +8543,8 @@ namespace System.Xml
             {
                 Throw(
                     _dtdProcessing == DtdProcessing.Ignore
-                        ? SR.Xml_CannotResolveEntityDtdIgnored
-                        : SR.Xml_CannotResolveEntity,
+                      ? SR.Xml_CannotResolveEntityDtdIgnored
+                      : SR.Xml_CannotResolveEntity,
                     entityName
                 );
             }
@@ -8691,8 +8691,8 @@ namespace System.Xml
                 {
                     Throw(
                         entity.IsParameterEntity
-                            ? SR.Xml_RecursiveParEntity
-                            : SR.Xml_RecursiveGenEntity,
+                          ? SR.Xml_RecursiveParEntity
+                          : SR.Xml_RecursiveGenEntity,
                         entity.Name,
                         _parsingStatesStack![_parsingStatesStackTop].LineNo,
                         _parsingStatesStack[_parsingStatesStackTop].LinePos

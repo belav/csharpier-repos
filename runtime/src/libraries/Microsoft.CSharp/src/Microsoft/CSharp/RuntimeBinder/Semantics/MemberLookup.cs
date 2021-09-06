@@ -718,8 +718,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 return ErrorHandling.Error(
                     (_flags & MemLookFlags.MustBeInvocable) != 0
-                        ? ErrorCode.ERR_NonInvocableMemberCalled
-                        : ErrorCode.ERR_CantCallSpecialMethod,
+                      ? ErrorCode.ERR_NonInvocableMemberCalled
+                      : ErrorCode.ERR_CantCallSpecialMethod,
                     _swtBad
                 );
             }

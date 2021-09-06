@@ -702,8 +702,8 @@ namespace System.Diagnostics
                                     startInfo.UserName,
                                     startInfo.Domain,
                                     (passwordPtr != IntPtr.Zero)
-                                        ? passwordPtr
-                                        : (IntPtr)passwordInClearTextPtr,
+                                      ? passwordPtr
+                                      : (IntPtr)passwordInClearTextPtr,
                                     logonFlags,
                                     null, // we don't need this since all the info is in commandLine
                                     commandLinePtr,
@@ -967,8 +967,8 @@ namespace System.Diagnostics
                         {
                             throw new InvalidOperationException(
                                 _haveProcessId
-                                    ? SR.Format(SR.ProcessHasExited, _processId.ToString())
-                                    : SR.ProcessHasExitedNoId
+                                  ? SR.Format(SR.ProcessHasExited, _processId.ToString())
+                                  : SR.ProcessHasExitedNoId
                             );
                         }
                     }

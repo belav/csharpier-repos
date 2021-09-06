@@ -2315,8 +2315,8 @@ namespace System.Xml.Serialization
                             Reader,
                             attribute.Name,
                             attribute.Form == XmlSchemaForm.Qualified
-                                ? attribute.Namespace
-                                : string.Empty
+                              ? attribute.Namespace
+                              : string.Empty
                         );
                     }
 

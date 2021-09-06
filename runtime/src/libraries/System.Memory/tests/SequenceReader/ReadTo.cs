@@ -38,8 +38,8 @@ namespace System.Memory.Tests.SequenceReader
                 // Can read to the first integer (0-5)
                 Assert.True(
                     useEscapeOverload
-                        ? copy.TryReadTo(out ReadOnlySpan<byte> span, i, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out span, i, advancePastDelimiter)
+                      ? copy.TryReadTo(out ReadOnlySpan<byte> span, i, 255, advancePastDelimiter)
+                      : copy.TryReadTo(out span, i, advancePastDelimiter)
                 );
 
                 // Should never have a null Position object
@@ -48,8 +48,8 @@ namespace System.Memory.Tests.SequenceReader
                 // Should be able to then read to 6
                 Assert.True(
                     useEscapeOverload
-                        ? copy.TryReadTo(out span, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out span, 6, advancePastDelimiter)
+                      ? copy.TryReadTo(out span, 6, 255, advancePastDelimiter)
+                      : copy.TryReadTo(out span, 6, advancePastDelimiter)
                 );
 
                 Assert.NotNull(copy.Position.GetObject());
@@ -58,8 +58,8 @@ namespace System.Memory.Tests.SequenceReader
                 Assert.Equal(
                     !advancePastDelimiter,
                     useEscapeOverload
-                        ? copy.TryReadTo(out span, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out span, 6, advancePastDelimiter)
+                      ? copy.TryReadTo(out span, 6, 255, advancePastDelimiter)
+                      : copy.TryReadTo(out span, 6, advancePastDelimiter)
                 );
             }
         }
@@ -93,13 +93,13 @@ namespace System.Memory.Tests.SequenceReader
                 // Can read to the first integer (0-5)
                 Assert.True(
                     useEscapeOverload
-                        ? copy.TryReadTo(
-                              out ReadOnlySequence<byte> sequence,
-                              i,
-                              255,
-                              advancePastDelimiter
-                          )
-                        : copy.TryReadTo(out sequence, i, advancePastDelimiter)
+                      ? copy.TryReadTo(
+                            out ReadOnlySequence<byte> sequence,
+                            i,
+                            255,
+                            advancePastDelimiter
+                        )
+                      : copy.TryReadTo(out sequence, i, advancePastDelimiter)
                 );
 
                 // Should never have a null Position object
@@ -111,8 +111,8 @@ namespace System.Memory.Tests.SequenceReader
                 // Should be able to read to final 6
                 Assert.True(
                     useEscapeOverload
-                        ? copy.TryReadTo(out sequence, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out sequence, 6, advancePastDelimiter)
+                      ? copy.TryReadTo(out sequence, 6, 255, advancePastDelimiter)
+                      : copy.TryReadTo(out sequence, 6, advancePastDelimiter)
                 );
 
                 Assert.NotNull(copy.Position.GetObject());
@@ -124,8 +124,8 @@ namespace System.Memory.Tests.SequenceReader
                 Assert.Equal(
                     !advancePastDelimiter,
                     useEscapeOverload
-                        ? copy.TryReadTo(out sequence, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out sequence, 6, advancePastDelimiter)
+                      ? copy.TryReadTo(out sequence, 6, 255, advancePastDelimiter)
+                      : copy.TryReadTo(out sequence, 6, advancePastDelimiter)
                 );
             }
         }

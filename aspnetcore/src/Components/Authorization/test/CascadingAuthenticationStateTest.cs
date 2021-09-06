@@ -234,8 +234,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
             new AuthenticationState(
                 new ClaimsPrincipal(
                     username == null
-                        ? new ClaimsIdentity()
-                        : (IIdentity)new TestIdentity { Name = username }
+                      ? new ClaimsIdentity()
+                      : (IIdentity)new TestIdentity { Name = username }
                 )
             );
 

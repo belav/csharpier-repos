@@ -358,11 +358,11 @@ namespace System.Net.Http.Functional.Tests
                             server.AcceptConnectionSendResponseAndCloseAsync(
                                 HttpStatusCode.Unauthorized,
                                 additionalHeaders: string.IsNullOrEmpty(authHeadrName)
-                                    ? null
-                                    : new HttpHeaderData[]
-                                      {
-                                          new HttpHeaderData(authHeadrName, authHeaderValue)
-                                      }
+                                  ? null
+                                  : new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData(authHeadrName, authHeaderValue)
+                                    }
                             );
 
                         await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
@@ -1043,8 +1043,8 @@ namespace System.Net.Http.Functional.Tests
                             + $"{newline}"
                     ),
                 dribble
-                    ? new LoopbackServer.Options { StreamWrapper = s => new DribbleStream(s) }
-                    : null
+                  ? new LoopbackServer.Options { StreamWrapper = s => new DribbleStream(s) }
+                  : null
             );
         }
 

@@ -1267,8 +1267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             == MethodAttributes.RTSpecialName
                         && _name.Equals(
                             this.IsStatic
-                                ? WellKnownMemberNames.StaticConstructorName
-                                : WellKnownMemberNames.InstanceConstructorName
+                              ? WellKnownMemberNames.StaticConstructorName
+                              : WellKnownMemberNames.InstanceConstructorName
                         )
                         && this.ReturnsVoid
                         && this.Arity == 0

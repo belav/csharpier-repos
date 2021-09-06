@@ -33,8 +33,8 @@ namespace System.Net.Test.Common
                         {
                             await connection.SendResponseAsync(
                                     _options.IsProxy
-                                        ? HttpStatusCode.ProxyAuthenticationRequired
-                                        : HttpStatusCode.Unauthorized,
+                                      ? HttpStatusCode.ProxyAuthenticationRequired
+                                      : HttpStatusCode.Unauthorized,
                                     authenticateHeaders
                                 )
                                 .ConfigureAwait(false);

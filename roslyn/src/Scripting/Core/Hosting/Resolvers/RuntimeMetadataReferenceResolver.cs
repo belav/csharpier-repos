@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 baseDirectory,
                 packageResolver: null,
                 gacFileResolver: GacFileResolver.IsAvailable
-                    ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
-                    : null,
+                  ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
+                  : null,
                 GetTrustedPlatformAssemblyPaths(),
                 fileReferenceProvider
             );

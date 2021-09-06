@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
             _debugDocuments = new ConcurrentDictionary<string, Cci.DebugSourceDocument>(
                 isDocumentNameCaseSensitive
-                    ? StringComparer.Ordinal
-                    : StringComparer.OrdinalIgnoreCase
+                  ? StringComparer.Ordinal
+                  : StringComparer.OrdinalIgnoreCase
             );
 
             _normalizedPathsCache = new ConcurrentCache<(string, string), string>(16);

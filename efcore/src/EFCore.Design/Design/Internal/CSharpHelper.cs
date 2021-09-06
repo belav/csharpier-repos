@@ -888,8 +888,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
                     builder.Append(
                         simple && value?.GetType()?.IsNumeric() == true
-                            ? value
-                            : UnknownLiteral(value)
+                          ? value
+                          : UnknownLiteral(value)
                     );
                     return true;
                 }

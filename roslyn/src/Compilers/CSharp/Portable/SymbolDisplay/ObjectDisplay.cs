@@ -326,8 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 builder.Append(
                     options.IncludesOption(ObjectDisplayOptions.UseHexadecimalNumbers)
-                        ? "0x" + ((int)c).ToString("x4")
-                        : ((int)c).ToString()
+                      ? "0x" + ((int)c).ToString("x4")
+                      : ((int)c).ToString()
                 );
                 builder.Append(" ");
             }

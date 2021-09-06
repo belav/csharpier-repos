@@ -572,8 +572,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     case CommittedSolution.DocumentState.OutOfSync:
                         var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
                             (oldDocumentState == CommittedSolution.DocumentState.Indeterminate)
-                                ? EditAndContinueErrorCode.UnableToReadSourceFileOrPdb
-                                : EditAndContinueErrorCode.DocumentIsOutOfSyncWithDebuggee
+                              ? EditAndContinueErrorCode.UnableToReadSourceFileOrPdb
+                              : EditAndContinueErrorCode.DocumentIsOutOfSyncWithDebuggee
                         );
                         documentDiagnostics.Add(
                             Diagnostic.Create(
@@ -1327,8 +1327,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return new SolutionUpdate(
                     new ManagedModuleUpdates(
                         (deltas.Count > 0)
-                            ? ManagedModuleUpdateStatus.Ready
-                            : ManagedModuleUpdateStatus.None,
+                          ? ManagedModuleUpdateStatus.Ready
+                          : ManagedModuleUpdateStatus.None,
                         deltas.ToImmutable()
                     ),
                     nonRemappableRegions.ToImmutable(),

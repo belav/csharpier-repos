@@ -671,11 +671,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 parameterPart.Default != null || parameterPart.IsCatchAll;
                             _slots.Add(
                                 hasDefaultValue
-                                    ? new KeyValuePair<string, object>(
-                                          parameterPart.Name,
-                                          parameterPart.Default
-                                      )
-                                    : default
+                                  ? new KeyValuePair<string, object>(
+                                        parameterPart.Name,
+                                        parameterPart.Default
+                                    )
+                                  : default
                             );
                         }
                     }

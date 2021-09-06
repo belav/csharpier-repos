@@ -402,8 +402,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                                   Description,
                                   out var description
                               )
-                                  ? description
-                                  : string.Empty
+                                ? description
+                                : string.Empty
                           )
                         : null;
 
@@ -453,8 +453,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 items,
                 suggestionItemOptions,
                 suggestionItemOptions == null
-                    ? AsyncCompletionData.InitialSelectionHint.RegularSelection
-                    : AsyncCompletionData.InitialSelectionHint.SoftSelection,
+                  ? AsyncCompletionData.InitialSelectionHint.RegularSelection
+                  : AsyncCompletionData.InitialSelectionHint.SoftSelection,
                 filterSet.GetFilterStatesInSet(addUnselectedExpander: expandItemsAvailable)
             );
         }

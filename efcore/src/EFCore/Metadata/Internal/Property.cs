@@ -1086,8 +1086,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1224,8 +1224,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsNullable(
                 nullable,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1242,8 +1242,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueGenerated(
                 valueGenerated,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1260,8 +1260,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsConcurrencyToken(
                 concurrencyToken,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1285,8 +1285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetMaxLength(
                 maxLength,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1310,8 +1310,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrecision(
                 precision,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1334,8 +1334,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetScale(
                 scale,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1359,8 +1359,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsUnicode(
                 unicode,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1387,8 +1387,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetBeforeSaveBehavior(
                 beforeSaveBehavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1415,8 +1415,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetAfterSaveBehavior(
                 afterSaveBehavior,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1444,8 +1444,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueGeneratorFactory(
                 valueGeneratorFactory,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1472,8 +1472,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueConverter(
                 converter,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1500,8 +1500,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetProviderClrType(
                 providerClrType,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1528,8 +1528,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueComparer(
                 comparer,
                 fromDataAnnotation
-                    ? ConfigurationSource.DataAnnotation
-                    : ConfigurationSource.Convention
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
             );
 
         /// <summary>

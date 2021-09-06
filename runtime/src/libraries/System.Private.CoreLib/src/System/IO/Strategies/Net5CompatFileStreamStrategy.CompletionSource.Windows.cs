@@ -212,8 +212,8 @@ namespace System.IO.Strategies
                     {
                         TrySetCanceled(
                             cancellationToken.IsCancellationRequested
-                                ? cancellationToken
-                                : new CancellationToken(true)
+                              ? cancellationToken
+                              : new CancellationToken(true)
                         );
                     }
                     else

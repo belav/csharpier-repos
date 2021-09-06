@@ -865,8 +865,8 @@ namespace Internal.JitInterface
             {
                 callConv = GetMemberFunctionCallingConventionVariant(
                     found
-                        ? callConv
-                        : (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention()
+                      ? callConv
+                      : (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention()
                 );
                 found = true;
             }

@@ -90,8 +90,8 @@ User-Agent: Testing application
                         "[Client] Connected. Authenticating: server={0}; clientCert={1}",
                         _options.ServerName,
                         _options.ClientCertificate != null
-                            ? _options.ClientCertificate.Subject
-                            : "<null>"
+                          ? _options.ClientCertificate.Subject
+                          : "<null>"
                     );
 
                     try

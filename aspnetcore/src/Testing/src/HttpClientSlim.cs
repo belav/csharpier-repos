@@ -226,8 +226,8 @@ namespace Microsoft.AspNetCore.Testing
                     stream,
                     leaveInnerStreamOpen: false,
                     userCertificateValidationCallback: validateCertificate
-                        ? null
-                        : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
+                      ? null
+                      : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
                 );
 
                 await sslStream.AuthenticateAsClientAsync(

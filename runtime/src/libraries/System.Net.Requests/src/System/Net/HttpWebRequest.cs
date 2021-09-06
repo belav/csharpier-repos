@@ -1083,16 +1083,16 @@ namespace System.Net
                     ? client.SendAsync(
                           request,
                           _allowReadStreamBuffering
-                              ? HttpCompletionOption.ResponseContentRead
-                              : HttpCompletionOption.ResponseHeadersRead,
+                            ? HttpCompletionOption.ResponseContentRead
+                            : HttpCompletionOption.ResponseHeadersRead,
                           _sendRequestCts!.Token
                       )
                     : Task.FromResult(
                           client.Send(
                               request,
                               _allowReadStreamBuffering
-                                  ? HttpCompletionOption.ResponseContentRead
-                                  : HttpCompletionOption.ResponseHeadersRead,
+                                ? HttpCompletionOption.ResponseContentRead
+                                : HttpCompletionOption.ResponseHeadersRead,
                               _sendRequestCts!.Token
                           )
                       );

@@ -115,14 +115,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     GetSnippetExpansionClient(textView, subjectBuffer),
                     subjectBuffer.ContentType,
                     types: surroundWith
-                        ? new[] { "SurroundsWith" }
-                        : new[] { "Expansion", "SurroundsWith" },
+                      ? new[] { "SurroundsWith" }
+                      : new[] { "Expansion", "SurroundsWith" },
                     includeNullType: true,
                     kinds: null,
                     includeNullKind: false,
                     prefixText: surroundWith
-                        ? GettextCatalog.GetString("Surround With")
-                        : GettextCatalog.GetString("Insert Snippet"),
+                      ? GettextCatalog.GetString("Surround With")
+                      : GettextCatalog.GetString("Insert Snippet"),
                     completionChar: null
                 );
 

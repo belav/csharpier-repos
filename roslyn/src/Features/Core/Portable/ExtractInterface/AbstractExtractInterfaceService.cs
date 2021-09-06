@@ -187,8 +187,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             var extractedInterfaceSymbol = CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
                 attributes: default,
                 accessibility: ShouldIncludeAccessibilityModifier(refactoringResult.TypeNode)
-                    ? refactoringResult.TypeToExtractFrom.DeclaredAccessibility
-                    : Accessibility.NotApplicable,
+                  ? refactoringResult.TypeToExtractFrom.DeclaredAccessibility
+                  : Accessibility.NotApplicable,
                 modifiers: new DeclarationModifiers(),
                 typeKind: TypeKind.Interface,
                 name: extractInterfaceOptions.InterfaceName,
@@ -548,21 +548,21 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                                 name: property.Name,
                                 parameters: property.Parameters,
                                 getMethod: property.GetMethod == null
-                                    ? null
-                                    : (
-                                          property.GetMethod.DeclaredAccessibility
-                                          == Accessibility.Public
-                                              ? property.GetMethod
-                                              : null
-                                      ),
+                                  ? null
+                                  : (
+                                        property.GetMethod.DeclaredAccessibility
+                                        == Accessibility.Public
+                                            ? property.GetMethod
+                                            : null
+                                    ),
                                 setMethod: property.SetMethod == null
-                                    ? null
-                                    : (
-                                          property.SetMethod.DeclaredAccessibility
-                                          == Accessibility.Public
-                                              ? property.SetMethod
-                                              : null
-                                      ),
+                                  ? null
+                                  : (
+                                        property.SetMethod.DeclaredAccessibility
+                                        == Accessibility.Public
+                                            ? property.SetMethod
+                                            : null
+                                    ),
                                 isIndexer: property.IsIndexer
                             )
                         );

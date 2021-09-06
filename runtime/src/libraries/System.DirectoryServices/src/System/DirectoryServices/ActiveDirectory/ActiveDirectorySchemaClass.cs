@@ -1266,8 +1266,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     SetProperty(
                         PropertyManager.DefaultSecurityDescriptor,
                         (value == null)
-                            ? null
-                            : value.GetSecurityDescriptorSddlForm(AccessControlSections.All)
+                          ? null
+                          : value.GetSecurityDescriptorSddlForm(AccessControlSections.All)
                     );
                 }
                 _defaultSDSddlForm =

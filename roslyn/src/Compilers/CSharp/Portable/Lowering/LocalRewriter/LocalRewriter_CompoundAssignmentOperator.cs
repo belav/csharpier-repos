@@ -606,8 +606,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         VisitExpression(arguments[i]),
                         out assignmentToTemp,
                         indexerAccess.ArgumentRefKindsOpt.RefKinds(i) != RefKind.None
-                            ? RefKind.Ref
-                            : RefKind.None
+                          ? RefKind.Ref
+                          : RefKind.None
                     );
                     stores.Add(assignmentToTemp);
                     temps.Add(temp.LocalSymbol);

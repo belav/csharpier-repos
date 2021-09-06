@@ -500,8 +500,8 @@ namespace Wasm.Build.Tests
                     Assert.False(
                         File.Exists(path),
                         label != null
-                            ? $"{label}: {path} should not exist"
-                            : $"{path} should not exist"
+                          ? $"{label}: {path} should not exist"
+                          : $"{path} should not exist"
                     );
                 }
             }

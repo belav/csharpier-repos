@@ -709,8 +709,8 @@ namespace System.Runtime.CompilerServices
                 options
                 ?? TestOptions.ReleaseDll.WithOutputKind(
                     (expectedOutput != null)
-                        ? OutputKind.ConsoleApplication
-                        : OutputKind.DynamicallyLinkedLibrary
+                      ? OutputKind.ConsoleApplication
+                      : OutputKind.DynamicallyLinkedLibrary
                 );
             var compilation = CreateExperimentalCompilationWithMscorlib45(
                 source,
@@ -835,8 +835,8 @@ namespace System.Runtime.CompilerServices
                 options
                 ?? TestOptions.ReleaseDll.WithOutputKind(
                     (expectedOutput != null)
-                        ? OutputKind.ConsoleApplication
-                        : OutputKind.DynamicallyLinkedLibrary
+                      ? OutputKind.ConsoleApplication
+                      : OutputKind.DynamicallyLinkedLibrary
                 );
             var compilation = CreateCompilation(
                 source,
@@ -1578,8 +1578,8 @@ namespace System.Runtime.CompilerServices
                 CSharpCompilation.CreateScriptCompilation(
                     GetUniqueName(),
                     references: (references != null)
-                        ? s_scriptRefs.Concat(references)
-                        : s_scriptRefs,
+                      ? s_scriptRefs.Concat(references)
+                      : s_scriptRefs,
                     options: options,
                     syntaxTree: Parse(code, options: parseOptions ?? TestOptions.Script),
                     previousScriptCompilation: previous,
@@ -2218,8 +2218,8 @@ namespace System.Runtime.CompilerServices
                 return string.Format(
                     "\"{0}\"",
                     (reference is Symbol symbol)
-                        ? symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
-                        : (object)reference
+                      ? symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                      : (object)reference
                 );
             }
 
@@ -2432,8 +2432,8 @@ namespace System.Runtime.CompilerServices
                 testSrc,
                 expectedOperationTree,
                 useLatestFrameworkReferences
-                    ? TargetFramework.Mscorlib46Extended
-                    : TargetFramework.Standard,
+                  ? TargetFramework.Mscorlib46Extended
+                  : TargetFramework.Standard,
                 expectedDiagnostics,
                 compilationOptions,
                 parseOptions,
@@ -2481,8 +2481,8 @@ namespace System.Runtime.CompilerServices
                 references,
                 options: compilationOptions,
                 targetFramework: useLatestFrameworkReferences
-                    ? TargetFramework.Mscorlib46Extended
-                    : TargetFramework.Standard
+                  ? TargetFramework.Mscorlib46Extended
+                  : TargetFramework.Standard
             );
             VerifyOperationTreeAndDiagnosticsForTest<TSyntaxNode>(
                 compilation,
@@ -2507,8 +2507,8 @@ namespace System.Runtime.CompilerServices
                 expectedFlowGraph,
                 expectedDiagnostics,
                 targetFramework: useLatestFrameworkReferences
-                    ? TargetFramework.Mscorlib46Extended
-                    : TargetFramework.Standard,
+                  ? TargetFramework.Mscorlib46Extended
+                  : TargetFramework.Standard,
                 compilationOptions,
                 parseOptions,
                 references

@@ -77,14 +77,14 @@ namespace Microsoft.CodeAnalysis
                 info.Attributes,
                 sourceText: null,
                 textAndVersionSource: info.TextLoader != null
-                    ? CreateRecoverableText(info.TextLoader, info.Id, services)
-                    : CreateStrongText(
-                          TextAndVersion.Create(
-                              SourceText.From(string.Empty, Encoding.UTF8),
-                              VersionStamp.Default,
-                              info.FilePath
-                          )
-                      )
+                  ? CreateRecoverableText(info.TextLoader, info.Id, services)
+                  : CreateStrongText(
+                        TextAndVersion.Create(
+                            SourceText.From(string.Empty, Encoding.UTF8),
+                            VersionStamp.Default,
+                            info.FilePath
+                        )
+                    )
             ) { }
 
         public DocumentId Id => Attributes.Id;

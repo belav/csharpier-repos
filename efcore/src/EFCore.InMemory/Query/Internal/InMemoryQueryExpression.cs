@@ -1190,8 +1190,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 var updatedExpression = replacingVisitor.Visit(expression);
                 resultSelectorExpressions.Add(
                     updatedExpression.Type.IsValueType
-                        ? Convert(updatedExpression, typeof(object))
-                        : updatedExpression
+                      ? Convert(updatedExpression, typeof(object))
+                      : updatedExpression
                 );
             }
 
@@ -1204,8 +1204,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 }
                 resultSelectorExpressions.Add(
                     replacedExpression.Type.IsValueType
-                        ? Convert(replacedExpression, typeof(object))
-                        : replacedExpression
+                      ? Convert(replacedExpression, typeof(object))
+                      : replacedExpression
                 );
 
                 _projectionMappingExpressions.Add(

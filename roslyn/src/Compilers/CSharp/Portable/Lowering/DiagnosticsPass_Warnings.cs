@@ -938,8 +938,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         Error(
                             node.OperatorKind.IsUserDefined()
-                                ? ErrorCode.WRN_NubExprIsConstBool2
-                                : ErrorCode.WRN_NubExprIsConstBool,
+                              ? ErrorCode.WRN_NubExprIsConstBool2
+                              : ErrorCode.WRN_NubExprIsConstBool,
                             node,
                             always,
                             node.Left.Type.GetNullableUnderlyingType(),
@@ -951,8 +951,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ) {
                         Error(
                             node.OperatorKind.IsUserDefined()
-                                ? ErrorCode.WRN_NubExprIsConstBool2
-                                : ErrorCode.WRN_NubExprIsConstBool,
+                              ? ErrorCode.WRN_NubExprIsConstBool2
+                              : ErrorCode.WRN_NubExprIsConstBool,
                             node,
                             always,
                             node.Right.Type.GetNullableUnderlyingType(),

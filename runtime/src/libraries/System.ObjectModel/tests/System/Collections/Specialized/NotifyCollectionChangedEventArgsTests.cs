@@ -59,8 +59,8 @@ namespace System.Collections.Specialized.Tests
             Assert.Equal(-1, e.NewStartingIndex);
             Assert.Equal(
                 action == NotifyCollectionChangedAction.Remove
-                    ? new object[] { changedItem }
-                    : null,
+                  ? new object[] { changedItem }
+                  : null,
                 e.OldItems
             );
             Assert.Equal(-1, e.OldStartingIndex);
@@ -98,8 +98,8 @@ namespace System.Collections.Specialized.Tests
             );
             Assert.Equal(
                 action == NotifyCollectionChangedAction.Remove
-                    ? new object[] { changedItem }
-                    : null,
+                  ? new object[] { changedItem }
+                  : null,
                 e.OldItems
             );
             Assert.Equal(

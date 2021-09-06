@@ -18,12 +18,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             new(
                 "UseTestProvider",
                 providerOptions == null
-                    ? new object[] { connectionString }
-                    : new object[]
-                      {
-                          connectionString,
-                          new NestedClosureCodeFragment("x", providerOptions)
-                      }
+                  ? new object[] { connectionString }
+                  : new object[]
+                    {
+                        connectionString,
+                        new NestedClosureCodeFragment("x", providerOptions)
+                    }
             );
     }
 }

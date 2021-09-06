@@ -1512,8 +1512,8 @@ namespace System.Net
                         session,
                         requestId,
                         challenges != null && challenges.Count > 0
-                            ? HttpStatusCode.Unauthorized
-                            : HttpStatusCode.Forbidden,
+                          ? HttpStatusCode.Unauthorized
+                          : HttpStatusCode.Forbidden,
                         challenges
                     );
                     if (NetEventSource.Log.IsEnabled())

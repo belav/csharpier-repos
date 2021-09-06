@@ -176,8 +176,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 type,
                 collectionVariableToken,
                 foreachInfo.RequireExplicitCastInterface
-                    ? generator.CastExpression(foreachInfo.ExplicitCastInterface, expression)
-                    : expression
+                  ? generator.CastExpression(foreachInfo.ExplicitCastInterface, expression)
+                  : expression
             );
 
             // attach trivia to right place

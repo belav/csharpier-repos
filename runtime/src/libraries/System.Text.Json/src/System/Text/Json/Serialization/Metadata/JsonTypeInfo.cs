@@ -211,8 +211,8 @@ namespace System.Text.Json.Serialization.Metadata
                             JsonPropertyInfo
                         >(
                             Options.PropertyNameCaseInsensitive
-                                ? StringComparer.OrdinalIgnoreCase
-                                : StringComparer.Ordinal
+                              ? StringComparer.OrdinalIgnoreCase
+                              : StringComparer.Ordinal
                         );
 
                         Dictionary<string, MemberInfo>? ignoredMembers = null;

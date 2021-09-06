@@ -532,8 +532,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 throw new InvalidOperationException(
                     _logger.ShouldLogSensitiveData()
-                        ? CoreStrings.ExpressionParameterizationExceptionSensitive(expression)
-                        : CoreStrings.ExpressionParameterizationException,
+                      ? CoreStrings.ExpressionParameterizationExceptionSensitive(expression)
+                      : CoreStrings.ExpressionParameterizationException,
                     exception
                 );
             }

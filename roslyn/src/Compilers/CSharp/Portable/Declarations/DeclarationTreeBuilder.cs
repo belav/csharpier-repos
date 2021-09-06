@@ -866,8 +866,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers.Any(
                             (int)SyntaxKind.StaticKeyword
                         )
-                            ? WellKnownMemberNames.StaticConstructorName
-                            : WellKnownMemberNames.InstanceConstructorName
+                          ? WellKnownMemberNames.StaticConstructorName
+                          : WellKnownMemberNames.InstanceConstructorName
                     );
                     break;
 
@@ -894,8 +894,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         (
                             (Syntax.InternalSyntax.ConversionOperatorDeclarationSyntax)member
                         ).ImplicitOrExplicitKeyword.Kind == SyntaxKind.ImplicitKeyword
-                            ? WellKnownMemberNames.ImplicitConversionName
-                            : WellKnownMemberNames.ExplicitConversionName
+                          ? WellKnownMemberNames.ImplicitConversionName
+                          : WellKnownMemberNames.ExplicitConversionName
                     );
                     break;
 

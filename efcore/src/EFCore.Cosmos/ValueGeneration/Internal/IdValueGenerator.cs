@@ -90,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
                 default:
                     builder.Append(
                         propertyValue == null
-                            ? "null"
-                            : propertyValue.ToString()!.Replace("|", "^|")
+                          ? "null"
+                          : propertyValue.ToString()!.Replace("|", "^|")
                     );
                     return;
             }

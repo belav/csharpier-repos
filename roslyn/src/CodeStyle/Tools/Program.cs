@@ -232,8 +232,8 @@ namespace CodeStyleConfigFileGenerator
                             return (
                                 isEnabledByDefault: rule.IsEnabledByDefault,
                                 effectiveSeverity: isEnabledInNonDefaultMode
-                                    ? DiagnosticSeverity.Warning
-                                    : rule.DefaultSeverity
+                                  ? DiagnosticSeverity.Warning
+                                  : rule.DefaultSeverity
                             );
                         }
                     }

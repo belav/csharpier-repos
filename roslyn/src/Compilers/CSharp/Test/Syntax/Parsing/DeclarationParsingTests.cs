@@ -7787,15 +7787,15 @@ b { }";
                 @"class C<T> where T : default { }",
                 useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9,
                 useCSharp8
-                    ? new[]
-                      {
-                          // (1,22): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
-                          // class C<T> where T : default { }
-                          Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
-                              .WithArguments("default type parameter constraints", "9.0")
-                              .WithLocation(1, 22)
-                      }
-                    : Array.Empty<DiagnosticDescription>()
+                  ? new[]
+                    {
+                        // (1,22): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        // class C<T> where T : default { }
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
+                            .WithArguments("default type parameter constraints", "9.0")
+                            .WithLocation(1, 22)
+                    }
+                  : Array.Empty<DiagnosticDescription>()
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -7907,20 +7907,20 @@ b { }";
     where U : default, class { }",
                 useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9,
                 useCSharp8
-                    ? new[]
-                      {
-                          // (2,23): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
-                          //     where T : struct, default
-                          Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
-                              .WithArguments("default type parameter constraints", "9.0")
-                              .WithLocation(2, 23),
-                          // (3,15): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
-                          //     where U : default, class { }
-                          Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
-                              .WithArguments("default type parameter constraints", "9.0")
-                              .WithLocation(3, 15)
-                      }
-                    : Array.Empty<DiagnosticDescription>()
+                  ? new[]
+                    {
+                        // (2,23): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        //     where T : struct, default
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
+                            .WithArguments("default type parameter constraints", "9.0")
+                            .WithLocation(2, 23),
+                        // (3,15): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        //     where U : default, class { }
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
+                            .WithArguments("default type parameter constraints", "9.0")
+                            .WithLocation(3, 15)
+                    }
+                  : Array.Empty<DiagnosticDescription>()
             );
 
             N(SyntaxKind.CompilationUnit);

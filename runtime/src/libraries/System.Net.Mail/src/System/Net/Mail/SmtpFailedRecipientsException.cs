@@ -53,8 +53,8 @@ namespace System.Net.Mail
         ) : base(
             message,
             innerExceptions != null && innerExceptions.Length > 0
-                ? innerExceptions[0].FailedRecipient
-                : null,
+              ? innerExceptions[0].FailedRecipient
+              : null,
             innerExceptions != null && innerExceptions.Length > 0 ? innerExceptions[0] : null
         ) {
             if (innerExceptions == null)
@@ -74,8 +74,8 @@ namespace System.Net.Mail
         ) : base(
             allFailed ? SR.SmtpAllRecipientsFailed : SR.SmtpRecipientFailed,
             innerExceptions != null && innerExceptions.Count > 0
-                ? innerExceptions[0].FailedRecipient
-                : null,
+              ? innerExceptions[0].FailedRecipient
+              : null,
             innerExceptions != null && innerExceptions.Count > 0 ? innerExceptions[0] : null
         ) {
             if (innerExceptions == null)

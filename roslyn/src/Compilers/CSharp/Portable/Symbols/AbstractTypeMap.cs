@@ -159,8 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     builder.Add(
                         customModifiers[i].IsOptional
-                            ? CSharpCustomModifier.CreateOptional(substituted)
-                            : CSharpCustomModifier.CreateRequired(substituted)
+                          ? CSharpCustomModifier.CreateOptional(substituted)
+                          : CSharpCustomModifier.CreateRequired(substituted)
                     );
                     for (i++; i < customModifiers.Length; i++)
                     {
@@ -176,8 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ) {
                             builder.Add(
                                 customModifiers[i].IsOptional
-                                    ? CSharpCustomModifier.CreateOptional(substituted)
-                                    : CSharpCustomModifier.CreateRequired(substituted)
+                                  ? CSharpCustomModifier.CreateOptional(substituted)
+                                  : CSharpCustomModifier.CreateRequired(substituted)
                             );
                         }
                         else

@@ -124,11 +124,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     lastTokenOfLabel,
                     lastTokenOfLabel,
                     lastSection
-                        ? TextSpan.FromBounds(lastTokenOfLabel.FullSpan.End, nextToken.SpanStart)
-                        : TextSpan.FromBounds(
-                              lastTokenOfLabel.FullSpan.End,
-                              lastTokenOfLabel.FullSpan.End
-                          )
+                      ? TextSpan.FromBounds(lastTokenOfLabel.FullSpan.End, nextToken.SpanStart)
+                      : TextSpan.FromBounds(
+                            lastTokenOfLabel.FullSpan.End,
+                            lastTokenOfLabel.FullSpan.End
+                        )
                 );
                 return;
             }

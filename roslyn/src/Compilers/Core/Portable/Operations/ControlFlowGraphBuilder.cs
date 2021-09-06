@@ -258,8 +258,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 return new ControlFlowBranch(
                     source: builder[source.Ordinal],
                     destination: branch.Destination != null
-                        ? builder[branch.Destination.Ordinal]
-                        : null,
+                      ? builder[branch.Destination.Ordinal]
+                      : null,
                     branch.Kind,
                     isConditionalSuccessor
                 );
@@ -2260,8 +2260,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     IOperation visitedElement = PopOperand();
                     builder.Add(
                         wrapper != null
-                            ? wrapper(visitedElement, i, originalArray)
-                            : (T)visitedElement
+                          ? wrapper(visitedElement, i, originalArray)
+                          : (T)visitedElement
                     );
                 }
                 builder.ReverseContents();
@@ -4067,8 +4067,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 operation.Type.IsReferenceType
                                 && !ITypeSymbolHelpers.IsNullableType(operation.Type)
                             )
-                                ? ConstantValue.Null
-                                : null,
+                              ? ConstantValue.Null
+                              : null,
                             isImplicit: true
                         )
                     )
@@ -4545,8 +4545,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         CurrentBasicBlock,
                         _exit,
                         returnedValue is null
-                            ? ControlFlowBranchSemantics.Regular
-                            : ControlFlowBranchSemantics.Return
+                          ? ControlFlowBranchSemantics.Regular
+                          : ControlFlowBranchSemantics.Return
                     );
                     Debug.Assert(current.BranchValue == null);
                     Debug.Assert(!current.HasCondition);
@@ -5052,8 +5052,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             var lockRegion = new RegionBuilder(
                 ControlFlowRegionKind.LocalLifetime,
                 locals: lockStatement.LockTakenSymbol != null
-                    ? ImmutableArray.Create(lockStatement.LockTakenSymbol)
-                    : ImmutableArray<ILocalSymbol>.Empty
+                  ? ImmutableArray.Create(lockStatement.LockTakenSymbol)
+                  : ImmutableArray<ILocalSymbol>.Empty
             );
             EnterRegion(lockRegion);
 

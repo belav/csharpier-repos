@@ -478,8 +478,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         {
             throw GetInvalidRequestException(
                 IsTlsHandshake(requestLine)
-                    ? RequestRejectionReason.TlsOverHttpError
-                    : RequestRejectionReason.InvalidRequestLine,
+                  ? RequestRejectionReason.TlsOverHttpError
+                  : RequestRejectionReason.InvalidRequestLine,
                 requestLine
             );
         }
@@ -519,8 +519,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             KestrelBadHttpRequestException.GetException(
                 reason,
                 _showErrorDetails
-                    ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
-                    : string.Empty
+                  ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
+                  : string.Empty
             );
     }
 }

@@ -839,8 +839,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 childShouldParenthesize: childShouldParenthesize,
                 fullName: fullName,
                 childFullNamePrefixOpt: flags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
-                    ? null
-                    : fullName,
+                  ? null
+                  : fullName,
                 formatSpecifiers: formatSpecifiers,
                 category: category,
                 flags: flags,
@@ -996,11 +996,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         useDebuggerDisplay: useDebuggerDisplay,
                         expansionFlags: expansionFlags,
                         childShouldParenthesize: (fullName == null)
-                            ? false
-                            : FullNameProvider.ClrExpressionMayRequireParentheses(
-                                  inspectionContext,
-                                  fullName
-                              ),
+                          ? false
+                          : FullNameProvider.ClrExpressionMayRequireParentheses(
+                                inspectionContext,
+                                fullName
+                            ),
                         fullName: fullName,
                         formatSpecifiers: formatSpecifiers,
                         category: DkmEvaluationResultCategory.Other,

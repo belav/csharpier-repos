@@ -106,12 +106,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         attributes: default,
                         accessibility: DetermineMinimalAccessibility(_state),
                         modifiers: _isConstant
-                            ? new DeclarationModifiers(isConst: true, isUnsafe: generateUnsafe)
-                            : new DeclarationModifiers(
-                                  isStatic: _state.IsStatic,
-                                  isReadOnly: _isReadonly,
-                                  isUnsafe: generateUnsafe
-                              ),
+                          ? new DeclarationModifiers(isConst: true, isUnsafe: generateUnsafe)
+                          : new DeclarationModifiers(
+                                isStatic: _state.IsStatic,
+                                isReadOnly: _isReadonly,
+                                isUnsafe: generateUnsafe
+                            ),
                         type: _state.TypeMemberType,
                         name: _state.IdentifierToken.ValueText
                     );

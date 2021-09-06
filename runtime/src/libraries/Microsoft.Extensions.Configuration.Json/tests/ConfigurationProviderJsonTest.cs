@@ -46,8 +46,8 @@ namespace Microsoft.Extensions.Configuration
             {
                 jsonBuilder.AppendLine(
                     tuple.Value.AsArray != null
-                        ? $"\"{tuple.Key}\": [{string.Join(", ", tuple.Value.AsArray.Select(ValueToJson))}],"
-                        : $"\"{tuple.Key}\": {ValueToJson(tuple.Value.AsString)},"
+                      ? $"\"{tuple.Key}\": [{string.Join(", ", tuple.Value.AsArray.Select(ValueToJson))}],"
+                      : $"\"{tuple.Key}\": {ValueToJson(tuple.Value.AsString)},"
                 );
             }
 

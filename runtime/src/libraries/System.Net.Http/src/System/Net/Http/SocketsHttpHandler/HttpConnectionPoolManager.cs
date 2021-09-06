@@ -316,8 +316,8 @@ namespace System.Net.Http
 
             string identity = GetIdentityIfDefaultCredentialsUsed(
                 proxyUri != null
-                    ? _settings._defaultCredentialsUsedForProxy
-                    : _settings._defaultCredentialsUsedForServer
+                  ? _settings._defaultCredentialsUsedForProxy
+                  : _settings._defaultCredentialsUsedForServer
             );
 
             if (proxyUri != null)

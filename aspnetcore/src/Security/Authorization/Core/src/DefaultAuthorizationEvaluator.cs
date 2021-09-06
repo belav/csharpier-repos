@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Authorization
                 ? AuthorizationResult.Success()
                 : AuthorizationResult.Failed(
                       context.HasFailed
-                          ? AuthorizationFailure.ExplicitFail()
-                          : AuthorizationFailure.Failed(context.PendingRequirements)
+                        ? AuthorizationFailure.ExplicitFail()
+                        : AuthorizationFailure.Failed(context.PendingRequirements)
                   );
     }
 }

@@ -45,8 +45,8 @@ namespace System.Globalization.Tests
                 Stream stream = typeof(StringNormalizationAllTests).GetTypeInfo()
                     .Assembly.GetManifestResourceStream(
                         PlatformDetection.IsWindows7
-                            ? "NormalizationDataWin7"
-                            : "NormalizationDataWin8"
+                          ? "NormalizationDataWin7"
+                          : "NormalizationDataWin8"
                     )
             ) {
                 using (StreamReader sr = new StreamReader(stream))

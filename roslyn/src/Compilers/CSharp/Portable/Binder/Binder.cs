@@ -877,17 +877,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // binding cycle.
                 diagnostics.Add(
                     unmanagedCallersOnlyAttributeData
-                    == UnmanagedCallersOnlyAttributeData.Uninitialized
-                        ? (DiagnosticInfo)new LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(
-                              symbol,
-                              isDelegateConversion
-                          )
-                        : new CSDiagnosticInfo(
-                              isDelegateConversion
-                                  ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
-                                  : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                              symbol
-                          ),
+                        == UnmanagedCallersOnlyAttributeData.Uninitialized
+                      ? (DiagnosticInfo)new LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(
+                            symbol,
+                            isDelegateConversion
+                        )
+                      : new CSDiagnosticInfo(
+                            isDelegateConversion
+                              ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
+                              : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                            symbol
+                        ),
                     location
                 );
             }

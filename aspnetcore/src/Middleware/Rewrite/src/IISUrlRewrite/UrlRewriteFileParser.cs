@@ -304,8 +304,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                     {
                         action = new RewriteAction(
                             stopProcessing
-                                ? RuleResult.SkipRemainingRules
-                                : RuleResult.ContinueRules,
+                              ? RuleResult.SkipRemainingRules
+                              : RuleResult.ContinueRules,
                             urlPattern,
                             appendQuery
                         );

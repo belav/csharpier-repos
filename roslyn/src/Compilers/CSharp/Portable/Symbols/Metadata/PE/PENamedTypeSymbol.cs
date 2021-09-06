@@ -732,13 +732,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     out _,
                     // Filter out [Extension]
                     MightContainExtensionMethods
-                        ? AttributeDescription.CaseSensitiveExtensionAttribute
-                        : default,
+                      ? AttributeDescription.CaseSensitiveExtensionAttribute
+                      : default,
                     out _,
                     // Filter out [Obsolete], unless it was user defined
                     (IsRefLikeType && ObsoleteAttributeData is null)
-                        ? AttributeDescription.ObsoleteAttribute
-                        : default,
+                      ? AttributeDescription.ObsoleteAttribute
+                      : default,
                     out _,
                     // Filter out [IsReadOnly]
                     IsReadOnly ? AttributeDescription.IsReadOnlyAttribute : default,

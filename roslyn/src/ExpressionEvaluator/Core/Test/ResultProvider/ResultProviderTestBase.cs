@@ -373,8 +373,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 default(DkmEvaluationResultTypeModifierFlags),
                 null,
                 (customUIVisualizerInfo != null)
-                    ? new ReadOnlyCollection<DkmCustomUIVisualizerInfo>(customUIVisualizerInfo)
-                    : null,
+                  ? new ReadOnlyCollection<DkmCustomUIVisualizerInfo>(customUIVisualizerInfo)
+                  : null,
                 null,
                 null
             );

@@ -128,8 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             NamedTypeSymbol effectiveBaseClass = corLibrary.GetSpecialType(
                 typeParameter.HasValueTypeConstraint
-                    ? SpecialType.System_ValueType
-                    : SpecialType.System_Object
+                  ? SpecialType.System_ValueType
+                  : SpecialType.System_Object
             );
             TypeSymbol deducedBaseType = effectiveBaseClass;
 
@@ -853,8 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     in args,
                     diagnosticsBuilder,
                     nullabilityDiagnosticsBuilderOpt: (nullabilityDiagnosticsOpt is null)
-                        ? null
-                        : nullabilityDiagnosticsBuilder,
+                      ? null
+                      : nullabilityDiagnosticsBuilder,
                     ref useSiteDiagnosticsBuilder
                 );
 
@@ -929,8 +929,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     in args,
                     diagnosticsBuilder,
                     nullabilityDiagnosticsBuilderOpt: args.IncludeNullability
-                        ? diagnosticsBuilder
-                        : null,
+                      ? diagnosticsBuilder
+                      : null,
                     ref useSiteDiagnosticsBuilder
                 );
 
@@ -976,8 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 in args,
                 diagnosticsBuilder,
                 nullabilityDiagnosticsBuilderOpt: args.IncludeNullability
-                    ? diagnosticsBuilder
-                    : null,
+                  ? diagnosticsBuilder
+                  : null,
                 ref useSiteDiagnosticsBuilder
             );
 
@@ -1681,10 +1681,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         new TypeParameterDiagnosticInfo(
                             typeParameter,
                             useSiteInfo.Dependencies.Count == 1
-                                ? new UseSiteInfo<AssemblySymbol>(useSiteInfo.Dependencies.Single())
-                                : new UseSiteInfo<AssemblySymbol>(
-                                      useSiteInfo.Dependencies.ToImmutableHashSet()
-                                  )
+                              ? new UseSiteInfo<AssemblySymbol>(useSiteInfo.Dependencies.Single())
+                              : new UseSiteInfo<AssemblySymbol>(
+                                    useSiteInfo.Dependencies.ToImmutableHashSet()
+                                )
                         )
                     );
             }
@@ -1762,8 +1762,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 typeArgument.Type.IsValueType
                 && conversions.HasBoxingConversion(
                     typeArgument.Type.IsNullableType()
-                        ? ((NamedTypeSymbol)typeArgument.Type).ConstructedFrom
-                        : typeArgument.Type,
+                      ? ((NamedTypeSymbol)typeArgument.Type).ConstructedFrom
+                      : typeArgument.Type,
                     constraintType.Type,
                     ref useSiteInfo
                 )

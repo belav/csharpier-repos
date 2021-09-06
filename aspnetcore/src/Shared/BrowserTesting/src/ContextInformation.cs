@@ -60,8 +60,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
                 var identifier = Guid.NewGuid().ToString("N");
                 browserContextOptions.RecordHar.Path = Path.Combine(
                     string.IsNullOrEmpty(uploadDir)
-                        ? browserContextOptions.RecordHar.Path
-                        : uploadDir,
+                      ? browserContextOptions.RecordHar.Path
+                      : uploadDir,
                     $"{identifier}.har"
                 );
                 _harPath = browserContextOptions.RecordHar.Path;

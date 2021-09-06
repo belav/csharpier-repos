@@ -1400,8 +1400,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             KestrelBadHttpRequestException.GetException(
                 RequestRejectionReason.InvalidRequestTarget,
                 Log.IsEnabled(LogLevel.Information)
-                    ? target.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
-                    : string.Empty
+                  ? target.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
+                  : string.Empty
             );
 
         public void SetBadRequestState(BadHttpRequestException ex)

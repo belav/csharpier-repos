@@ -61,14 +61,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     .Append(" = ")
                     .Append(
                         (parameter.Value == DBNull.Value || parameter.Value == null)
-                            ? "NULL"
-                            : parameter.Value is SqlBytes sqlBytes
-                                ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(
-                                      sqlBytes.Value
-                                  )
-                                : typeMapping != null
-                                    ? typeMapping.GenerateSqlLiteral(parameter.Value)
-                                    : parameter.Value.ToString()
+                          ? "NULL"
+                          : parameter.Value is SqlBytes sqlBytes
+                              ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(
+                                    sqlBytes.Value
+                                )
+                              : typeMapping != null
+                                  ? typeMapping.GenerateSqlLiteral(parameter.Value)
+                                  : parameter.Value.ToString()
                     )
                     .AppendLine(";");
             }

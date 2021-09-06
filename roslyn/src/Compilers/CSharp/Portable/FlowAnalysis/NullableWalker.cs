@@ -404,9 +404,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // https://github.com/dotnet/roslyn/issues/35046 We're dropping the result if the type doesn't match up completely
                     // with the existing type
                     expr.Type?.Equals(result.RValueType.Type, TypeCompareKind.AllIgnoreOptions)
-                    == true
-                        ? result.RValueType.Type
-                        : expr.Type
+                        == true
+                      ? result.RValueType.Type
+                      : expr.Type
                 );
             }
         }
@@ -1422,8 +1422,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     compilation,
                     null,
                     method.IsStatic
-                        ? containingType.StaticInitializers
-                        : containingType.InstanceInitializers,
+                      ? containingType.StaticInitializers
+                      : containingType.InstanceInitializers,
                     BindingDiagnosticBag.Discarded,
                     ref initializers
                 );
@@ -1806,8 +1806,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol,
                     diagnostics,
                     initialState is null
-                        ? (Optional<LocalState>)default
-                        : LocalState.Create(initialState.VariableNullableStates),
+                      ? (Optional<LocalState>)default
+                      : LocalState.Create(initialState.VariableNullableStates),
                     snapshotBuilderOpt,
                     requiresAnalysis
                 );
@@ -2372,8 +2372,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // target (e.g.: `object F() => null;` or calling `void F(object y)` with `F(null)`).
                 ReportDiagnostic(
                     assignmentKind == AssignmentKind.Return
-                        ? ErrorCode.WRN_NullReferenceReturn
-                        : ErrorCode.WRN_NullAsNonNullable,
+                      ? ErrorCode.WRN_NullReferenceReturn
+                      : ErrorCode.WRN_NullAsNonNullable,
                     location
                 );
             }
@@ -2404,8 +2404,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 ReportDiagnostic(
                     assignmentKind == AssignmentKind.Return
-                        ? ErrorCode.WRN_NullReferenceReturn
-                        : ErrorCode.WRN_NullReferenceAssignment,
+                      ? ErrorCode.WRN_NullReferenceReturn
+                      : ErrorCode.WRN_NullReferenceAssignment,
                     location
                 );
             }
@@ -6526,8 +6526,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         GetConversionIfApplicable(argument, argumentNoConversion),
                         argumentNoConversion,
                         conversions.IsDefault || i >= conversions.Length
-                            ? Conversion.Identity
-                            : conversions[i],
+                          ? Conversion.Identity
+                          : conversions[i],
                         GetRefKind(refKindsOpt, i),
                         parameter,
                         parameterType,
@@ -6603,8 +6603,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         results[i],
                         notNullParametersBuilder,
                         (!compareExchangeInfo.IsDefault && parameter.Ordinal == 0)
-                            ? compareExchangeInfo
-                            : default
+                          ? compareExchangeInfo
+                          : default
                     );
                 }
             }
@@ -10963,14 +10963,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             ReportDiagnostic(
                 forOutput
-                    ? ErrorCode.WRN_NullabilityMismatchInArgumentForOutput
-                    : ErrorCode.WRN_NullabilityMismatchInArgument,
+                  ? ErrorCode.WRN_NullabilityMismatchInArgumentForOutput
+                  : ErrorCode.WRN_NullabilityMismatchInArgument,
                 argumentLocation,
                 argumentType,
                 parameterOpt?.Type.IsNonNullableValueType() == true
-                && parameterType.IsNullableType()
-                    ? parameterOpt.Type
-                    : parameterType, // Compensate for operator lifting
+                    && parameterType.IsNullableType()
+                  ? parameterOpt.Type
+                  : parameterType, // Compensate for operator lifting
                 GetParameterAsDiagnosticArgument(parameterOpt),
                 GetContainingSymbolAsDiagnosticArgument(parameterOpt)
             );
@@ -12112,8 +12112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeWithState.Create(
                     node.Type,
                     node.Type?.CanContainNull() != false && node.ConstantValue?.IsNull == true
-                        ? NullableFlowState.MaybeDefault
-                        : NullableFlowState.NotNull
+                      ? NullableFlowState.MaybeDefault
+                      : NullableFlowState.NotNull
                 )
             );
 
@@ -12428,8 +12428,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 ReportDiagnostic(
                     isValueType
-                        ? ErrorCode.WRN_NullableValueTypeMayBeNull
-                        : ErrorCode.WRN_NullReferenceReceiver,
+                      ? ErrorCode.WRN_NullableValueTypeMayBeNull
+                      : ErrorCode.WRN_NullReferenceReceiver,
                     syntax
                 );
                 reportedDiagnostic = true;

@@ -336,8 +336,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             mockKey.Setup(o => o.CreationDate)
                 .Returns(
                     (creationDate != null)
-                        ? DateTimeOffset.ParseExact(creationDate, "u", CultureInfo.InvariantCulture)
-                        : DateTimeOffset.MinValue
+                      ? DateTimeOffset.ParseExact(creationDate, "u", CultureInfo.InvariantCulture)
+                      : DateTimeOffset.MinValue
                 );
             mockKey.Setup(o => o.ActivationDate)
                 .Returns(

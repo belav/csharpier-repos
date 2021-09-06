@@ -256,8 +256,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (charIndex < 0)
-                        ? ExceptionArgument.charIndex
-                        : ExceptionArgument.charCount,
+                      ? ExceptionArgument.charIndex
+                      : ExceptionArgument.charCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -324,8 +324,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (charIndex < 0)
-                        ? ExceptionArgument.charIndex
-                        : ExceptionArgument.charCount,
+                      ? ExceptionArgument.charIndex
+                      : ExceptionArgument.charCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -378,8 +378,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (charCount < 0)
-                        ? ExceptionArgument.charCount
-                        : ExceptionArgument.byteCount,
+                      ? ExceptionArgument.charCount
+                      : ExceptionArgument.byteCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -710,8 +710,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (byteIndex < 0)
-                        ? ExceptionArgument.byteIndex
-                        : ExceptionArgument.byteCount,
+                      ? ExceptionArgument.byteIndex
+                      : ExceptionArgument.byteCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -764,8 +764,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (byteCount < 0)
-                        ? ExceptionArgument.byteCount
-                        : ExceptionArgument.charCount,
+                      ? ExceptionArgument.byteCount
+                      : ExceptionArgument.charCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -946,8 +946,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (byteIndex < 0)
-                        ? ExceptionArgument.byteIndex
-                        : ExceptionArgument.byteCount,
+                      ? ExceptionArgument.byteIndex
+                      : ExceptionArgument.byteCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }

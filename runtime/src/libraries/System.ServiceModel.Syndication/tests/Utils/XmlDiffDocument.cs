@@ -442,8 +442,8 @@ namespace System.ServiceModel.Syndication.Tests
                                 reader,
                                 pInfo,
                                 TextNodeIsWhitespace(reader.Value)
-                                    ? XmlDiffNodeType.WS
-                                    : XmlDiffNodeType.Text
+                                  ? XmlDiffNodeType.WS
+                                  : XmlDiffNodeType.Text
                             );
                         }
                         else //merge with adjacent text/CDATA nodes
@@ -465,8 +465,8 @@ namespace System.ServiceModel.Syndication.Tests
                                 txt,
                                 pInfo,
                                 TextNodeIsWhitespace(txt)
-                                    ? XmlDiffNodeType.WS
-                                    : XmlDiffNodeType.Text
+                                  ? XmlDiffNodeType.WS
+                                  : XmlDiffNodeType.Text
                             );
                         }
                         break;

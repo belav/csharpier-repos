@@ -55,11 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return _sqlExpressionFactory.Coalesce(
                     instance,
                     arguments.Count == 0
-                        ? new SqlConstantExpression(
-                              method.ReturnType.GetDefaultValueConstant(),
-                              null
-                          )
-                        : arguments[0],
+                      ? new SqlConstantExpression(method.ReturnType.GetDefaultValueConstant(), null)
+                      : arguments[0],
                     instance.TypeMapping
                 );
             }

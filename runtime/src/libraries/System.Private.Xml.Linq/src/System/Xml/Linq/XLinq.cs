@@ -415,8 +415,8 @@ namespace System.Xml.Linq
                         GetPrefixOfNamespace(ns, false),
                         localName,
                         namespaceName.Length == 0 && localName == "xmlns"
-                            ? XNamespace.xmlnsPrefixNamespace
-                            : namespaceName,
+                          ? XNamespace.xmlnsPrefixNamespace
+                          : namespaceName,
                         a.Value
                     );
                 } while (a != e.lastAttr);
@@ -446,8 +446,8 @@ namespace System.Xml.Linq
                             GetPrefixOfNamespace(ns, false),
                             localName,
                             namespaceName.Length == 0 && localName == "xmlns"
-                                ? XNamespace.xmlnsPrefixNamespace
-                                : namespaceName,
+                              ? XNamespace.xmlnsPrefixNamespace
+                              : namespaceName,
                             a.Value
                         )
                         .ConfigureAwait(false);
@@ -613,8 +613,8 @@ namespace System.Xml.Linq
                         GetPrefixOfNamespace(ns, false),
                         localName,
                         namespaceName.Length == 0 && localName == "xmlns"
-                            ? XNamespace.xmlnsPrefixNamespace
-                            : namespaceName,
+                          ? XNamespace.xmlnsPrefixNamespace
+                          : namespaceName,
                         a.Value
                     );
                 }

@@ -636,8 +636,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     AddToGroup(
                         SymbolDescriptionGroups.MainDescription,
                         symbol.IsConst
-                            ? Description(FeaturesResources.constant)
-                            : Description(FeaturesResources.field),
+                          ? Description(FeaturesResources.constant)
+                          : Description(FeaturesResources.field),
                         parts
                     );
                 }
@@ -676,8 +676,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 AddToGroup(
                     SymbolDescriptionGroups.MainDescription,
                     symbol.IsConst
-                        ? Description(FeaturesResources.local_constant)
-                        : Description(FeaturesResources.local_variable),
+                      ? Description(FeaturesResources.local_constant)
+                      : Description(FeaturesResources.local_variable),
                     parts
                 );
             }
@@ -831,8 +831,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                         PlainText(count.ToString()),
                         Space(),
                         count == 1
-                            ? PlainText(FeaturesResources.overload)
-                            : PlainText(FeaturesResources.overloads_),
+                          ? PlainText(FeaturesResources.overload)
+                          : PlainText(FeaturesResources.overloads_),
                         Punctuation(")")
                     );
                 }

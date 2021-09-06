@@ -113,8 +113,8 @@ namespace System.IO.Compression.Tests
                                 e1interleaved,
                                 e1pos,
                                 bytesAtATime + e1pos > e1.Length
-                                    ? (int)e1.Length - e1pos
-                                    : bytesAtATime
+                                  ? (int)e1.Length - e1pos
+                                  : bytesAtATime
                             );
                             e1pos += e1bytesRead;
                         }
@@ -125,8 +125,8 @@ namespace System.IO.Compression.Tests
                                 e2interleaved,
                                 e2pos,
                                 bytesAtATime + e2pos > e2.Length
-                                    ? (int)e2.Length - e2pos
-                                    : bytesAtATime
+                                  ? (int)e2.Length - e2pos
+                                  : bytesAtATime
                             );
                             e2pos += e2bytesRead;
                         }
@@ -156,8 +156,8 @@ namespace System.IO.Compression.Tests
                                 e1interleaved,
                                 s1pos,
                                 bytesAtATime + s1pos > e1.Length
-                                    ? (int)e1.Length - s1pos
-                                    : bytesAtATime
+                                  ? (int)e1.Length - s1pos
+                                  : bytesAtATime
                             );
                             s1pos += s1bytesRead;
                         }
@@ -168,8 +168,8 @@ namespace System.IO.Compression.Tests
                                 e2interleaved,
                                 s2pos,
                                 bytesAtATime + s2pos > e1.Length
-                                    ? (int)e1.Length - s2pos
-                                    : bytesAtATime
+                                  ? (int)e1.Length - s2pos
+                                  : bytesAtATime
                             );
                             s2pos += s2bytesRead;
                         }

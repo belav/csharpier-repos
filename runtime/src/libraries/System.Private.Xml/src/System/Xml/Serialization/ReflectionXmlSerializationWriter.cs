@@ -539,10 +539,10 @@ namespace System.Xml.Serialization
                             : WritePrimitiveMethodRequirement.None;
                     WritePrimitive(
                         element.IsNullable
-                            ? WritePrimitiveMethodRequirement.WriteNullableStringLiteral
-                              | suffixNullable
-                              | suffixRaw
-                            : WritePrimitiveMethodRequirement.WriteElementString | suffixRaw,
+                          ? WritePrimitiveMethodRequirement.WriteNullableStringLiteral
+                                | suffixNullable
+                                | suffixRaw
+                          : WritePrimitiveMethodRequirement.WriteElementString | suffixRaw,
                         name,
                         ns!,
                         element.Default,
@@ -1038,8 +1038,8 @@ namespace System.Xml.Serialization
                             null,
                             attribute.Name,
                             attribute.Form == XmlSchemaForm.Qualified
-                                ? attribute.Namespace
-                                : string.Empty
+                              ? attribute.Namespace
+                              : string.Empty
                         );
                     }
                 }

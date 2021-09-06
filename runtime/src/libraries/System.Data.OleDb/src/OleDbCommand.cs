@@ -90,8 +90,8 @@ namespace System.Data.OleDb
             {
                 parameters.Add(
                     parameter is ICloneable cloneableParameter
-                        ? cloneableParameter.Clone()
-                        : parameter
+                      ? cloneableParameter.Clone()
+                      : parameter
                 );
             }
         }

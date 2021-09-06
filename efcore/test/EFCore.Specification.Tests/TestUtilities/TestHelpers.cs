@@ -166,10 +166,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 modelBuilder.FinalizeModel(),
                 designTime,
                 skipValidation
-                    ? null
-                    : new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>(
-                          LoggingDefinitions
-                      )
+                  ? null
+                  : new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>(
+                        LoggingDefinitions
+                    )
             );
         }
 

@@ -88,8 +88,8 @@ namespace System.Threading.Tasks
         {
             SetException(
                 token.IsCancellationRequested
-                    ? new OperationCanceledException(token)
-                    : new OperationCanceledException()
+                  ? new OperationCanceledException(token)
+                  : new OperationCanceledException()
             );
         }
 

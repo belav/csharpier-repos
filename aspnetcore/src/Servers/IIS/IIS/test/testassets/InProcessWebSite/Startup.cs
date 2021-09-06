@@ -1114,8 +1114,8 @@ namespace TestSite
 
             await context.Response.WriteAsync(
                 httpsPort.HasValue
-                    ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
-                    : "NOVALUE"
+                  ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
+                  : "NOVALUE"
             );
         }
 
@@ -1126,8 +1126,8 @@ namespace TestSite
 
             await context.Response.WriteAsync(
                 httpsPort.HasValue
-                    ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
-                    : "NOVALUE"
+                  ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
+                  : "NOVALUE"
             );
         }
 

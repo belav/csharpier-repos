@@ -377,8 +377,8 @@ namespace System.Threading.Tasks.Dataflow
             return Common.GetNameForDebugger(
                 this,
                 _defaultTarget != null
-                    ? _defaultTarget.DataflowBlockOptions
-                    : _spscTarget!.DataflowBlockOptions
+                  ? _defaultTarget.DataflowBlockOptions
+                  : _spscTarget!.DataflowBlockOptions
             );
         }
 

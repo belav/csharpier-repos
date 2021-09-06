@@ -3158,8 +3158,8 @@ namespace Microsoft.CodeAnalysis
                         moduleBeingBuilt,
                         new SimpleEmitStreamProvider(peStream),
                         (metadataPEStream != null)
-                            ? new SimpleEmitStreamProvider(metadataPEStream)
-                            : null,
+                          ? new SimpleEmitStreamProvider(metadataPEStream)
+                          : null,
                         (pdbStream != null) ? new SimpleEmitStreamProvider(pdbStream) : null,
                         pdbOptionsBlobReader,
                         testData?.SymWriterFactory,

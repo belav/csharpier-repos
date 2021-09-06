@@ -492,8 +492,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                     _invocationSequence,
                     type,
                     parameters == null
-                        ? ParameterView.Empty
-                        : ParameterView.FromDictionary(parameters),
+                      ? ParameterView.Empty
+                      : ParameterView.FromDictionary(parameters),
                     false
                 );
             }

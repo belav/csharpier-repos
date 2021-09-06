@@ -1514,8 +1514,8 @@ namespace System.Text.Json
                 ThrowHelper.ThrowJsonReaderException(
                     ref this,
                     JsonHelpers.IsInRangeInclusive(nextByte, '0', '9')
-                        ? ExceptionResource.InvalidLeadingZeroInNumber
-                        : ExceptionResource.ExpectedEndOfDigitNotFound,
+                      ? ExceptionResource.InvalidLeadingZeroInNumber
+                      : ExceptionResource.ExpectedEndOfDigitNotFound,
                     nextByte
                 );
             }

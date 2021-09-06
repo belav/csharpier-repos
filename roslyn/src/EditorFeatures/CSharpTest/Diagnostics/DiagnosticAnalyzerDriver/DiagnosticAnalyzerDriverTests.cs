@@ -1018,12 +1018,12 @@ class C
         ) =>
             TestNuGetAndVsixAnalyzerCoreAsync(
                 nugetAnalyzer != null
-                    ? ImmutableArray.Create(nugetAnalyzer)
-                    : ImmutableArray<NuGetAnalyzer>.Empty,
+                  ? ImmutableArray.Create(nugetAnalyzer)
+                  : ImmutableArray<NuGetAnalyzer>.Empty,
                 expectedNugetAnalyzerExecuted,
                 vsixAnalyzer != null
-                    ? ImmutableArray.Create(vsixAnalyzer)
-                    : ImmutableArray<VsixAnalyzer>.Empty,
+                  ? ImmutableArray.Create(vsixAnalyzer)
+                  : ImmutableArray<VsixAnalyzer>.Empty,
                 expectedVsixAnalyzerExecuted,
                 ImmutableArray<NuGetSuppressor>.Empty,
                 false,

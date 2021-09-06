@@ -535,8 +535,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 diagnostic.WarningLevel,
                 diagnostic.Descriptor.CustomTags.AsImmutableOrEmpty(),
                 (additionalProperties == null)
-                    ? diagnostic.Properties
-                    : diagnostic.Properties.AddRange(additionalProperties),
+                  ? diagnostic.Properties
+                  : diagnostic.Properties.AddRange(additionalProperties),
                 projectId,
                 location,
                 additionalLocations,

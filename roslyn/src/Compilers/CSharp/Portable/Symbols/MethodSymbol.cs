@@ -960,8 +960,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref result,
                     this.ReturnTypeWithAnnotations,
                     IsInitOnly
-                        ? AllowedRequiredModifierType.System_Runtime_CompilerServices_IsExternalInit
-                        : AllowedRequiredModifierType.None
+                      ? AllowedRequiredModifierType.System_Runtime_CompilerServices_IsExternalInit
+                      : AllowedRequiredModifierType.None
                 )
                 || DeriveUseSiteInfoFromCustomModifiers(
                     ref result,

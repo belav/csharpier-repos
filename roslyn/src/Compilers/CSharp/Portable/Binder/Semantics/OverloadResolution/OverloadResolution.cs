@@ -3878,8 +3878,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 types.Add(
                     parm == parameters.Length - 1
-                        ? ((ArrayTypeSymbol)type.Type).ElementTypeWithAnnotations
-                        : type
+                      ? ((ArrayTypeSymbol)type.Type).ElementTypeWithAnnotations
+                      : type
                 );
 
                 var argRefKind = hasAnyRefArg ? argumentRefKinds[arg] : RefKind.None;

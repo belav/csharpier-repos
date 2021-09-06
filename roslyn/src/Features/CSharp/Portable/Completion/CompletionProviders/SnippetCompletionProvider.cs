@@ -236,8 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                     return CommonCompletionItem.Create(
                         displayText: isPreProcessorContext
-                            ? snippet.Shortcut[1..]
-                            : snippet.Shortcut,
+                          ? snippet.Shortcut[1..]
+                          : snippet.Shortcut,
                         displayTextSuffix: "",
                         sortText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
                         description: (

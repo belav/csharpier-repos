@@ -278,11 +278,11 @@ namespace System.Threading.Channels.Tests
             public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken) =>
                 new ValueTask<bool>(
                     _closed
-                        ? Task.FromResult(false)
-                        : _rand.Next(0, 2) == 0
-                            ? Task.Delay(1).ContinueWith(_ => true)
-                            : // randomly introduce delays
-                              Task.FromResult(true)
+                      ? Task.FromResult(false)
+                      : _rand.Next(0, 2) == 0
+                          ? Task.Delay(1).ContinueWith(_ => true)
+                          : // randomly introduce delays
+                            Task.FromResult(true)
                 );
         }
 

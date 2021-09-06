@@ -1444,8 +1444,8 @@ namespace System.Net.Http.Functional.Tests
                             Assert.True(
                                 response.RequestMessage.Headers.Contains(
                                     parent.IdFormat == ActivityIdFormat.Hierarchical
-                                        ? "Request-Id"
-                                        : "traceparent"
+                                      ? "Request-Id"
+                                      : "traceparent"
                                 )
                             );
                             parent.Stop();
@@ -1531,8 +1531,8 @@ namespace System.Net.Http.Functional.Tests
                                     bool.Parse(innerIsInstrumentationEnabled),
                                     response.RequestMessage.Headers.Contains(
                                         parent.IdFormat == ActivityIdFormat.Hierarchical
-                                            ? "Request-Id"
-                                            : "traceparent"
+                                          ? "Request-Id"
+                                          : "traceparent"
                                     )
                                 );
                             }
@@ -1585,8 +1585,8 @@ namespace System.Net.Http.Functional.Tests
                                 bool.Parse(innerSwitchValue),
                                 response.RequestMessage.Headers.Contains(
                                     parent.IdFormat == ActivityIdFormat.Hierarchical
-                                        ? "Request-Id"
-                                        : "traceparent"
+                                      ? "Request-Id"
+                                      : "traceparent"
                                 )
                             );
                         }

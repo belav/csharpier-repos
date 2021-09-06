@@ -107,8 +107,8 @@ namespace System.Runtime.CompilerServices
                             continuation,
                             _value._token,
                             _value._continueOnCapturedContext
-                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                : ValueTaskSourceOnCompletedFlags.None
+                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                              : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else
@@ -140,8 +140,8 @@ namespace System.Runtime.CompilerServices
                             box,
                             _value._token,
                             _value._continueOnCapturedContext
-                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                : ValueTaskSourceOnCompletedFlags.None
+                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                              : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else
@@ -257,8 +257,8 @@ namespace System.Runtime.CompilerServices
                             continuation,
                             _value._token,
                             _value._continueOnCapturedContext
-                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                : ValueTaskSourceOnCompletedFlags.None
+                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                              : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else
@@ -292,8 +292,8 @@ namespace System.Runtime.CompilerServices
                             box,
                             _value._token,
                             _value._continueOnCapturedContext
-                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                : ValueTaskSourceOnCompletedFlags.None
+                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                              : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else

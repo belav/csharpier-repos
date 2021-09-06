@@ -711,8 +711,8 @@ namespace System.IO.Strategies
                             case Interop.Errors.ERROR_OPERATION_ABORTED: // canceled
                                 throw new OperationCanceledException(
                                     cancellationToken.IsCancellationRequested
-                                        ? cancellationToken
-                                        : new CancellationToken(true)
+                                      ? cancellationToken
+                                      : new CancellationToken(true)
                                 );
                             default: // error
                                 throw Win32Marshal.GetExceptionForWin32Error(

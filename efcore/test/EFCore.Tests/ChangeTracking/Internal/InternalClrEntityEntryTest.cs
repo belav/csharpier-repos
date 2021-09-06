@@ -131,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 entityState == EntityState.Deleted || entityState == EntityState.Detached
-                    ? EntityState.Detached
-                    : EntityState.Unchanged,
+                  ? EntityState.Detached
+                  : EntityState.Unchanged,
                 entry.EntityState
             );
             if (entityState == EntityState.Unchanged)
@@ -145,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal("Pickle", entry[valueProperty]);
                 Assert.Equal(
                     entityState == EntityState.Detached || entityState == EntityState.Deleted
-                        ? "Cheese"
-                        : "Pickle",
+                      ? "Cheese"
+                      : "Pickle",
                     entry.GetOriginalValue(valueProperty)
                 );
             }

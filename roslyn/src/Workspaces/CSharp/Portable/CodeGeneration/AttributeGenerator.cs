@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     : SyntaxFactory.SingletonList(
                           SyntaxFactory.AttributeList(
                               target.HasValue
-                                  ? SyntaxFactory.AttributeTargetSpecifier(target.Value)
-                                  : null,
+                                ? SyntaxFactory.AttributeTargetSpecifier(target.Value)
+                                : null,
                               SyntaxFactory.SeparatedList(attributeNodes)
                           )
                       );

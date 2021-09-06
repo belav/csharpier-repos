@@ -131,8 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             AppendProperties(operation.EndEvent, functionId, kvLogMessage);
             operation.End(
                 cancellationToken.IsCancellationRequested
-                    ? TelemetryResult.UserCancel
-                    : TelemetryResult.Success
+                  ? TelemetryResult.UserCancel
+                  : TelemetryResult.Success
             );
         }
 

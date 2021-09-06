@@ -2703,12 +2703,12 @@ namespace Microsoft.CodeAnalysis.Operations
                     isAsynchronous: enumeratorInfoOpt.IsAsync,
                     needsDispose: enumeratorInfoOpt.NeedsDisposal,
                     knownToImplementIDisposable: enumeratorInfoOpt.NeedsDisposal
-                        ? compilation.Conversions.ClassifyImplicitConversionFromType(
-                              enumeratorInfoOpt.GetEnumeratorInfo.Method.ReturnType,
-                              iDisposable,
-                              ref discardedUseSiteInfo
-                          ).IsImplicit
-                        : false,
+                      ? compilation.Conversions.ClassifyImplicitConversionFromType(
+                            enumeratorInfoOpt.GetEnumeratorInfo.Method.ReturnType,
+                            iDisposable,
+                            ref discardedUseSiteInfo
+                        ).IsImplicit
+                      : false,
                     enumeratorInfoOpt.PatternDisposeInfo?.Method.GetPublicSymbol(),
                     enumeratorInfoOpt.CurrentConversion,
                     boundForEachStatement.ElementConversion,
@@ -2717,25 +2717,25 @@ namespace Microsoft.CodeAnalysis.Operations
                         {
                             Method: { IsExtensionMethod: true }
                         } getEnumeratorInfo
-                        ? Operation.SetParentOperation(
-                              DeriveArguments(
-                                  getEnumeratorInfo.Method,
-                                  getEnumeratorInfo.Arguments,
-                                  argumentsToParametersOpt: default,
-                                  getEnumeratorInfo.DefaultArguments,
-                                  getEnumeratorInfo.Expanded,
-                                  boundForEachStatement.Expression.Syntax,
-                                  invokedAsExtensionMethod: true
-                              ),
-                              null
-                          )
-                        : default,
+                      ? Operation.SetParentOperation(
+                            DeriveArguments(
+                                getEnumeratorInfo.Method,
+                                getEnumeratorInfo.Arguments,
+                                argumentsToParametersOpt: default,
+                                getEnumeratorInfo.DefaultArguments,
+                                getEnumeratorInfo.Expanded,
+                                boundForEachStatement.Expression.Syntax,
+                                invokedAsExtensionMethod: true
+                            ),
+                            null
+                        )
+                      : default,
                     disposeArguments: enumeratorInfoOpt.PatternDisposeInfo is object
-                        ? CreateDisposeArguments(
-                              enumeratorInfoOpt.PatternDisposeInfo,
-                              boundForEachStatement.Syntax
-                          )
-                        : default
+                      ? CreateDisposeArguments(
+                            enumeratorInfoOpt.PatternDisposeInfo,
+                            boundForEachStatement.Syntax
+                        )
+                      : default
                 );
             }
             else
@@ -3144,14 +3144,14 @@ namespace Microsoft.CodeAnalysis.Operations
                     variableDeclaration,
                     isAsynchronous: usingDecl.AwaitOpt is object,
                     disposeInfo: usingDecl.PatternDisposeInfoOpt is object
-                        ? new DisposeOperationInfo(
-                              disposeMethod: usingDecl.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
-                              disposeArguments: CreateDisposeArguments(
-                                  usingDecl.PatternDisposeInfoOpt,
-                                  usingDecl.Syntax
-                              )
-                          )
-                        : default,
+                      ? new DisposeOperationInfo(
+                            disposeMethod: usingDecl.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
+                            disposeArguments: CreateDisposeArguments(
+                                usingDecl.PatternDisposeInfoOpt,
+                                usingDecl.Syntax
+                            )
+                        )
+                      : default,
                     _semanticModel,
                     declarationGroupSyntax,
                     isImplicit: boundMultipleLocalDeclarations.WasCompilerGenerated

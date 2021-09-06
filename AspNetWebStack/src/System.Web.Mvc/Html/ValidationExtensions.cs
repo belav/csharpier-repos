@@ -611,8 +611,8 @@ namespace System.Web.Mvc.Html
             builder.MergeAttributes(htmlAttributes);
             builder.AddCssClass(
                 (modelError != null)
-                    ? HtmlHelper.ValidationMessageCssClassName
-                    : HtmlHelper.ValidationMessageValidCssClassName
+                  ? HtmlHelper.ValidationMessageCssClassName
+                  : HtmlHelper.ValidationMessageValidCssClassName
             );
 
             if (!String.IsNullOrEmpty(validationMessage))
@@ -916,8 +916,8 @@ namespace System.Web.Mvc.Html
             divBuilder.MergeAttributes(htmlAttributes);
             divBuilder.AddCssClass(
                 (htmlHelper.ViewData.ModelState.IsValid)
-                    ? HtmlHelper.ValidationSummaryValidCssClassName
-                    : HtmlHelper.ValidationSummaryCssClassName
+                  ? HtmlHelper.ValidationSummaryValidCssClassName
+                  : HtmlHelper.ValidationSummaryCssClassName
             );
             divBuilder.InnerHtml = messageSpan + unorderedList.ToString(TagRenderMode.Normal);
 

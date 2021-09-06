@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             refKind: RefKind.None,
             explicitInterfaceImplementations: default,
             name: isImplicit
-                ? WellKnownMemberNames.ImplicitConversionName
-                : WellKnownMemberNames.ExplicitConversionName,
+              ? WellKnownMemberNames.ImplicitConversionName
+              : WellKnownMemberNames.ExplicitConversionName,
             typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
             parameters: ImmutableArray.Create(fromType),
             returnTypeAttributes: toTypeAttributes,

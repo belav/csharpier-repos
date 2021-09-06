@@ -310,8 +310,8 @@ namespace System.Runtime.Serialization.Json
                     _ilg.Load(_contextArg);
                     _ilg.Call(
                         methodInfo: member.IsGetOnlyCollection
-                            ? XmlFormatGeneratorStatics.StoreIsGetOnlyCollectionMethod
-                            : XmlFormatGeneratorStatics.ResetIsGetOnlyCollectionMethod
+                          ? XmlFormatGeneratorStatics.StoreIsGetOnlyCollectionMethod
+                          : XmlFormatGeneratorStatics.ResetIsGetOnlyCollectionMethod
                     );
 
                     if (!member.EmitDefaultValue)

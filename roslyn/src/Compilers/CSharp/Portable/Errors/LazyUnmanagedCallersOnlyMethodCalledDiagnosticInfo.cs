@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ? CSDiagnosticInfo.VoidDiagnosticInfo
                     : new CSDiagnosticInfo(
                           _isDelegateConversion
-                              ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
-                              : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                            ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
+                            : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
                           _method
                       );
 

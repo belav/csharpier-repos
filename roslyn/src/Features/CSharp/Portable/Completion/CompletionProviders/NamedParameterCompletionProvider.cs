@@ -404,8 +404,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     // Insert extra colon if committing with '(' only: "method(parameter:(" is preferred to "method(parameter(".
                     // In all other cases, do not add extra colon. Note that colon is already added if committing with ':'.
                     ch == '('
-                        ? selectedItem.GetEntireDisplayText()
-                        : selectedItem.DisplayText
+                      ? selectedItem.GetEntireDisplayText()
+                      : selectedItem.DisplayText
                 )
             );
         }

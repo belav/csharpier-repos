@@ -2914,8 +2914,8 @@ namespace System
             return blocks.ToCompilation(
                 moduleVersionId,
                 useReferencedModulesOnly
-                    ? MakeAssemblyReferencesKind.DirectReferencesOnly
-                    : MakeAssemblyReferencesKind.AllAssemblies
+                  ? MakeAssemblyReferencesKind.DirectReferencesOnly
+                  : MakeAssemblyReferencesKind.AllAssemblies
             );
         }
 
