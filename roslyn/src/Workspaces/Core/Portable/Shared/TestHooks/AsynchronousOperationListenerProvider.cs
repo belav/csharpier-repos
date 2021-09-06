@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
             RemoteHostClient? remoteHostClient = null;
             if (
-                workspace?.Services.GetService<IRemoteHostClientProvider>()
-                is { } remoteHostClientProvider
+                workspace?.Services.GetService<IRemoteHostClientProvider>() is
+                { } remoteHostClientProvider
             ) {
                 remoteHostClient = await remoteHostClientProvider.TryGetRemoteHostClientAsync(
                         CancellationToken.None

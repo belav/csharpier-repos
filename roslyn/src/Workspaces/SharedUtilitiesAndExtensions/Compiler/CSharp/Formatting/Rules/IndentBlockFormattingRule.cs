@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<IndentBlockOperation> list,
             SyntaxNode node
         ) {
-            if (node is TypeParameterConstraintClauseSyntax { Parent:  { } declaringNode })
+            if (node is TypeParameterConstraintClauseSyntax { Parent: { } declaringNode })
             {
                 var baseToken = declaringNode.GetFirstToken();
                 AddIndentBlockOperation(list, baseToken, node.GetFirstToken(), node.GetLastToken());
@@ -241,7 +241,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     if (
                         propertyPatternClause.Parent is RecursivePatternSyntax
                         {
-                            Parent:  { } recursivePatternParent
+                            Parent: { } recursivePatternParent
                         }
                     ) {
                         var baseTokenForAlignment = recursivePatternParent.GetFirstToken();

@@ -240,7 +240,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool resultDiscarded
         ) {
             _factory.Syntax = loweredReceiver.Syntax;
-            Debug.Assert(_factory.TopLevelMethod is { });
+            Debug.Assert(_factory.TopLevelMethod is{ });
 
             CSharpBinderFlags binderFlags = 0;
             if (hasImplicitReceiver && _factory.TopLevelMethod.RequiresInstanceReceiver)
@@ -740,7 +740,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         //     GetS().M(d); // becomes Site(GetS(), d) without ref on the target obj arg
         internal static RefKind GetReceiverRefKind(BoundExpression loweredReceiver)
         {
-            Debug.Assert(loweredReceiver.Type is { });
+            Debug.Assert(loweredReceiver.Type is{ });
             if (!loweredReceiver.Type.IsValueType)
             {
                 return RefKind.None;
@@ -972,9 +972,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             int methodOrdinal,
             int localFunctionOrdinal
         ) {
-            Debug.Assert(factory.CompilationState.ModuleBuilderOpt is { });
-            Debug.Assert(factory.TopLevelMethod is { });
-            Debug.Assert(factory.CurrentFunction is { });
+            Debug.Assert(factory.CompilationState.ModuleBuilderOpt is{ });
+            Debug.Assert(factory.TopLevelMethod is{ });
+            Debug.Assert(factory.CurrentFunction is{ });
 
             // We don't reuse call-sites during EnC. Each edit creates a new container and sites.
             int generation = factory.CompilationState.ModuleBuilderOpt.CurrentGenerationOrdinal;
@@ -1029,7 +1029,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isStatic: true
             );
             _factory.AddField(containerDefinition, field);
-            Debug.Assert(_currentDynamicCallSiteContainer is { });
+            Debug.Assert(_currentDynamicCallSiteContainer is{ });
             return _currentDynamicCallSiteContainer.IsGenericType
                 ? field.AsMember(_currentDynamicCallSiteContainer)
                 : field;
@@ -1117,7 +1117,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             int parameterCount = delegateSignature.Length - (returnsVoid ? 0 : 1);
-            Debug.Assert(_factory.CompilationState.ModuleBuilderOpt is { });
+            Debug.Assert(_factory.CompilationState.ModuleBuilderOpt is{ });
             int generation = _factory.CompilationState.ModuleBuilderOpt.CurrentGenerationOrdinal;
             var synthesizedType = _factory.Compilation.AnonymousTypeManager.SynthesizeDelegate(
                 parameterCount,
@@ -1198,7 +1198,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Check compile time type.
             // See also DynamicRewriter::GenerateCallingObjectFlags.
-            if (argType is { } && !argType.IsDynamic())
+            if (argType is{ } && !argType.IsDynamic())
             {
                 flags |= CSharpArgumentInfoFlags.UseCompileTimeType;
             }

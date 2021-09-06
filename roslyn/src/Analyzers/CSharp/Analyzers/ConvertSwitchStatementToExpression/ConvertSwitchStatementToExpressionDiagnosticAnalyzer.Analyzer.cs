@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 var symbol = semanticModel.GetSymbolInfo(_assignmentTargetOpt).Symbol;
                 if (
                     !(
-                        symbol
-                        is
+                        symbol is
                         {
                             Kind: SymbolKind.Local,
                             DeclaringSyntaxReferences: { Length: 1 } syntaxRefs

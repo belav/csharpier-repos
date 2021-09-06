@@ -145,8 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             return pattern switch
             {
-                Not{ Pattern: Constant _ } => true,
-                Not{ Pattern: Source{ PatternSyntax: ConstantPatternSyntax _ } } => true,
+                Not { Pattern: Constant _ } => true,
+                Not { Pattern: Source { PatternSyntax: ConstantPatternSyntax _ } } => true,
                 Not _ => false,
                 Binary _ => false,
                 _ => true

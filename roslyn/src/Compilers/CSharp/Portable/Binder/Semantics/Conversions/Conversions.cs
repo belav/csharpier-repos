@@ -201,7 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static (MethodSymbol, bool isFunctionPointer, CallingConventionInfo callingConventionInfo) GetDelegateInvokeOrFunctionPointerMethodIfAvailable(
             TypeSymbol type
         ) {
-            if (type is FunctionPointerTypeSymbol { Signature:  { } signature })
+            if (type is FunctionPointerTypeSymbol { Signature: { } signature })
             {
                 return (
                     signature,

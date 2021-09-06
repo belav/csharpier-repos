@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundHostObjectMemberReference node
         ) {
             Debug.Assert(_previousSubmissionFields != null);
-            Debug.Assert(_factory.TopLevelMethod is { IsStatic: false });
-            Debug.Assert(_factory.CurrentType is { });
+            Debug.Assert(_factory.TopLevelMethod is{ IsStatic: false });
+            Debug.Assert(_factory.CurrentType is{ });
 
             var syntax = node.Syntax;
             var hostObjectReference = _previousSubmissionFields.GetHostObjectField();

@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Contract.ThrowIfFalse(
                 fixAllContext.Scope
                     is FixAllScope.Document
-                    or FixAllScope.Project
-                    or FixAllScope.Solution
+                        or FixAllScope.Project
+                        or FixAllScope.Solution
             );
 
             var solution = fixAllContext.Scope switch

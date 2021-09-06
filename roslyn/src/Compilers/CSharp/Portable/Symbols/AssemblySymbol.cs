@@ -425,11 +425,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     == SpecialType.System_Runtime_CompilerServices_RuntimeFeature
             );
             return GetSpecialType(SpecialType.System_Runtime_CompilerServices_RuntimeFeature)
-                    is
-                    {
-                        TypeKind: TypeKind.Class,
-                        IsStatic: true
-                    }
+                    is { TypeKind: TypeKind.Class, IsStatic: true }
                 && GetSpecialTypeMember(feature) is object;
         }
 
@@ -452,10 +448,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && GetSpecialType(
                         SpecialType.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute
                     )
-                        is
-                        {
-                            TypeKind: TypeKind.Class
-                        };
+                        is { TypeKind: TypeKind.Class };
             }
         }
 

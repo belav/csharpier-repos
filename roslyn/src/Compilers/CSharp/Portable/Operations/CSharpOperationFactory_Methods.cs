@@ -50,10 +50,7 @@ namespace Microsoft.CodeAnalysis.Operations
             // put argument syntax to argument operation
             IOperation value = Create(expression);
             (SyntaxNode syntax, bool isImplicit) = expression.Syntax
-                is
-                {
-                    Parent: ArgumentSyntax parent
-                }
+                is{ Parent: ArgumentSyntax parent }
                 ? (parent, expression.WasCompilerGenerated)
                 : (value.Syntax, true);
             return new ArgumentOperation(

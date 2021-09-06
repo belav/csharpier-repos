@@ -21,20 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             switch (this, other)
             {
-                case
-                (BoundDagTypeTest x, BoundDagTypeTest y):
+                case (BoundDagTypeTest x, BoundDagTypeTest y):
                     return x.Type.Equals(y.Type, TypeCompareKind.AllIgnoreOptions);
-                case
-                (BoundDagNonNullTest x, BoundDagNonNullTest y):
+                case (BoundDagNonNullTest x, BoundDagNonNullTest y):
                     return x.IsExplicitTest == y.IsExplicitTest;
-                case
-                (BoundDagExplicitNullTest x, BoundDagExplicitNullTest y):
+                case (BoundDagExplicitNullTest x, BoundDagExplicitNullTest y):
                     return true;
-                case
-                (BoundDagValueTest x, BoundDagValueTest y):
+                case (BoundDagValueTest x, BoundDagValueTest y):
                     return x.Value.Equals(y.Value);
-                case
-                (BoundDagRelationalTest x, BoundDagRelationalTest y):
+                case (BoundDagRelationalTest x, BoundDagRelationalTest y):
                     return x.Relation == y.Relation && x.Value.Equals(y.Value);
                 default:
                     throw ExceptionUtilities.UnexpectedValue(this);

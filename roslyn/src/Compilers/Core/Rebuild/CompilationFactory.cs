@@ -195,7 +195,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
             IMethodSymbol? getDebugEntryPoint()
             {
                 if (
-                    OptionsReader.GetMainMethodInfo() is(string mainTypeName, string mainMethodName)
+                    OptionsReader.GetMainMethodInfo() is
+
+                    (string mainTypeName, string mainMethodName)
                 ) {
                     var typeSymbol = rebuildCompilation.GetTypeByMetadataName(mainTypeName);
                     if (typeSymbol is object)

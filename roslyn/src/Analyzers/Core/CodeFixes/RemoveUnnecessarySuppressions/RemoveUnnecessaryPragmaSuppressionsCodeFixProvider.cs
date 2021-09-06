@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             {
                 // Defensive check that we are operating on the diagnostic on a pragma.
                 if (
-                    root.FindNode(diagnostic.Location.SourceSpan) is { } node
+                    root.FindNode(diagnostic.Location.SourceSpan) is{ } node
                         && syntaxFacts.IsAttribute(node)
                     || root.FindTrivia(diagnostic.Location.SourceSpan.Start).HasStructure
                 ) {
@@ -100,7 +100,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 SyntaxNode node;
                 var options = SyntaxGenerator.DefaultRemoveOptions;
                 if (
-                    editor.OriginalRoot.FindNode(location.SourceSpan) is { } attribute
+                    editor.OriginalRoot.FindNode(location.SourceSpan) is{ } attribute
                     && syntaxFacts.IsAttribute(attribute)
                 ) {
                     node = attribute;

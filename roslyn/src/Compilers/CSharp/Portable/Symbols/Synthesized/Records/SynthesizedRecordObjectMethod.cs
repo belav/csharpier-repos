@@ -58,10 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     overridden is object
                     && !(
                         overridden.ContainingType
-                            is SourceMemberContainerTypeSymbol
-                            {
-                                IsRecord: true
-                            }
+                            is SourceMemberContainerTypeSymbol { IsRecord: true }
                         && overridden.ContainingModule == overriding.ContainingModule
                     )
                 ) {

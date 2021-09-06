@@ -129,11 +129,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             var node = _context.TargetToken.GetRequiredParent();
             return node switch
             {
-                MemberAccessExpressionSyntax{
+                MemberAccessExpressionSyntax
+                {
                     RawKind: (int)SyntaxKind.SimpleMemberAccessExpression
                 } memberAccess
                   => GetSymbolsOffOfExpression(memberAccess.Expression),
-                MemberAccessExpressionSyntax{
+                MemberAccessExpressionSyntax
+                {
                     RawKind: (int)SyntaxKind.PointerMemberAccessExpression
                 } memberAccess
                   => GetSymbolsOffOfDereferencedExpression(memberAccess.Expression),
@@ -542,8 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     originalExpressionKind is SyntaxKind.ParenthesizedExpression
                     && symbol.Kind
                         is SymbolKind.NamedType
-                        or SymbolKind.Namespace
-                        or SymbolKind.Alias
+                            or SymbolKind.Namespace
+                            or SymbolKind.Alias
                 ) {
                     return default;
                 }

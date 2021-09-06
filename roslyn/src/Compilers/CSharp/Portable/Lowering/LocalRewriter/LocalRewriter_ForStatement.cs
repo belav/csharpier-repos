@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var rewrittenCondition = VisitExpression(node.Condition);
             var rewrittenIncrement = VisitStatement(node.Increment);
             var rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is { });
+            Debug.Assert(rewrittenBody is{ });
 
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.

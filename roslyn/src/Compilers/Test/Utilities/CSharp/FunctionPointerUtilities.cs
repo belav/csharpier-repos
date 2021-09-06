@@ -194,10 +194,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             switch (syntax)
             {
-                case FunctionPointerTypeSyntax
-                {
-                    ParameterList: { Parameters: var paramSyntaxes }
-                }:
+                case FunctionPointerTypeSyntax { ParameterList: { Parameters: var paramSyntaxes } }:
                     verifyNestedFunctionPointerSyntaxSemanticInfo(
                         model,
                         (IFunctionPointerTypeSymbol)exprType,

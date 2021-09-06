@@ -2125,8 +2125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             viableEntryPoint.GetUnmanagedCallersOnlyAttributeData(
                                 forceComplete: true
-                            )
-                            is { } data
+                            ) is
+                            { } data
                         ) {
                             Debug.Assert(
                                 !ReferenceEquals(

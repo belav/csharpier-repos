@@ -30,10 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 {
                     if (
                         member
-                        is not IMethodSymbol
-                        {
-                            MethodKind: MethodKind.UserDefinedOperator
-                        } method
+                        is not IMethodSymbol { MethodKind: MethodKind.UserDefinedOperator } method
                     )
                         continue;
 
@@ -42,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     if (
                         method.Name
                         is WellKnownMemberNames.TrueOperatorName
-                        or WellKnownMemberNames.FalseOperatorName
+                            or WellKnownMemberNames.FalseOperatorName
                     )
                         continue;
 

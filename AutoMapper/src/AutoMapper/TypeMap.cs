@@ -159,7 +159,7 @@ namespace AutoMapper
         public MemberInfo[] DestinationSetters => DestinationTypeDetails.WriteAccessors;
         public ConstructorParameters[] DestinationConstructors =>
             DestinationTypeDetails.Constructors;
-        public bool ConstructorMapping => ConstructorMap is { CanResolve: true };
+        public bool ConstructorMapping => ConstructorMap is{ CanResolve: true };
         public bool CustomConstruction => (CustomCtorExpression ?? CustomCtorFunction) != null;
         public bool HasTypeConverter =>
             (CustomMapFunction ?? CustomMapExpression ?? (object)TypeConverterType) != null;

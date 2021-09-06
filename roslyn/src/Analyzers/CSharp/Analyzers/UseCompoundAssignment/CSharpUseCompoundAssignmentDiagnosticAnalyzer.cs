@@ -31,16 +31,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             if (
                 constantValue
                 is (sbyte)1
-                or (short)1
-                or (int)1
-                or (long)1
-                or (byte)1
-                or (ushort)1
-                or (uint)1
-                or (ulong)1
-                or 1.0
-                or 1.0f
-                or 1.0m
+                    or (short)1
+                    or (int)1
+                    or (long)1
+                    or (byte)1
+                    or (ushort)1
+                    or (uint)1
+                    or (ulong)1
+                    or 1.0
+                    or 1.0f
+                    or 1.0m
             ) {
                 return opKind switch
                 {
@@ -52,12 +52,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             else if (
                 constantValue
                 is (sbyte)-1
-                or (short)-1
-                or (int)-1
-                or (long)-1
-                or -1.0
-                or -1.0f
-                or -1.0m
+                    or (short)-1
+                    or (int)-1
+                    or (long)-1
+                    or -1.0
+                    or -1.0f
+                    or -1.0m
             ) {
                 return opKind switch
                 {

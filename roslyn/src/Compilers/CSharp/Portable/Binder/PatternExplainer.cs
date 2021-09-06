@@ -57,13 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     n switch
                     {
                         BoundEvaluationDecisionDagNode e => (distance(e.Next), e.Next),
-                        BoundTestDecisionDagNode{
-                            Test: BoundDagNonNullTest _
-                        } t when !nullPaths
+                        BoundTestDecisionDagNode { Test: BoundDagNonNullTest _ } t when !nullPaths
                           => (1 + distance(t.WhenTrue), t.WhenTrue),
-                        BoundTestDecisionDagNode{
-                            Test: BoundDagExplicitNullTest _
-                        } t when !nullPaths
+                        BoundTestDecisionDagNode { Test: BoundDagExplicitNullTest _ } t
+                            when !nullPaths
                           => (1 + distance(t.WhenFalse), t.WhenFalse),
                         BoundTestDecisionDagNode t
                             when distance(t.WhenTrue) is var trueDist1
@@ -243,18 +240,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     switch (constraints[0])
                     {
-                        case
-                        (test: BoundDagNonNullTest _, sense: var sense):
+                        case (test: BoundDagNonNullTest _, sense: var sense):
                             return !sense
                                 ? "null"
                                 : requireExactType ? input.Type.ToDisplayString() : "not null";
-                        case
-                        (test: BoundDagExplicitNullTest _, sense: var sense):
+                        case (test: BoundDagExplicitNullTest _, sense: var sense):
                             return sense
                                 ? "null"
                                 : requireExactType ? input.Type.ToDisplayString() : "not null";
-                        case
-                        (test: BoundDagTypeTest{ Type: var testedType }, sense: var sense):
+                        case (test: BoundDagTypeTest { Type: var testedType }, sense: var sense):
                             Debug.Assert(sense); // we have dropped failing type tests
                             return testedType.ToDisplayString();
                     }
@@ -269,7 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     evaluations.Length == 1
                     && constraints.Length == 1
-                    && constraints[0] is(BoundDagTypeTest{ Type: var constraintType }, true)
+                    && constraints[0] is(BoundDagTypeTest { Type: var constraintType }, true)
                     && evaluations[0] is BoundDagTypeEvaluation { Type: var evaluationType } te
                     && constraintType.Equals(evaluationType, TypeCompareKind.AllIgnoreOptions)
                 ) {
@@ -379,7 +373,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _ => false
                             }
                     )
-                    && ValueSetFactory.ForType(input.Type) is { } fac
+                    && ValueSetFactory.ForType(input.Type) is{ } fac
                 ) {
                     // All we have are numeric constraints. Process them to compute a value not covered.
                     var remainingValues = fac.AllValues;

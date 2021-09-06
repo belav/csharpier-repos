@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitLiteral(BoundLiteral node)
         {
-            Debug.Assert(node.ConstantValue is { });
+            Debug.Assert(node.ConstantValue is{ });
             return MakeLiteral(node.Syntax, node.ConstantValue, node.Type, oldNodeOpt: node);
         }
 
@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (constantValue.IsDecimal)
             {
                 //  Rewrite decimal literal
-                Debug.Assert(type is { SpecialType: SpecialType.System_Decimal });
+                Debug.Assert(type is{ SpecialType: SpecialType.System_Decimal });
                 return MakeDecimalLiteral(syntax, constantValue);
             }
             else if (constantValue.IsDateTime)
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // C# does not support DateTime constants but VB does; we might have obtained a
                 // DateTime constant by calling a method with an optional parameter with a DateTime
                 // for its default value.
-                Debug.Assert(type is { SpecialType: SpecialType.System_DateTime });
+                Debug.Assert(type is{ SpecialType: SpecialType.System_DateTime });
                 return MakeDateTimeLiteral(syntax, constantValue);
             }
             else if (oldNodeOpt != null)
@@ -79,7 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If we are building static constructor of System.Decimal, accessing static fields
                 // would be bad.
                 var curMethod = _factory.CurrentFunction;
-                Debug.Assert(curMethod is { });
+                Debug.Assert(curMethod is{ });
                 if (
                     (
                         curMethod.MethodKind != MethodKind.SharedConstructor
@@ -108,12 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        useField
-                        is
-                        {
-                            HasUseSiteError: false,
-                            ContainingType: { HasUseSiteError: false }
-                        }
+                        useField is
+                        { HasUseSiteError: false, ContainingType: { HasUseSiteError: false } }
                     ) {
                         var fieldSymbol = (FieldSymbol)useField;
                         return new BoundFieldAccess(syntax, null, fieldSymbol, constantValue);

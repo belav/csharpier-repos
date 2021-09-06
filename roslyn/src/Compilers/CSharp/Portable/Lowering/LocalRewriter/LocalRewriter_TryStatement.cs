@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitTryStatement(BoundTryStatement node)
         {
             BoundBlock? tryBlock = (BoundBlock?)this.Visit(node.TryBlock);
-            Debug.Assert(tryBlock is { });
+            Debug.Assert(tryBlock is{ });
 
             var origSawAwait = _sawAwait;
             _sawAwait = false;
@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.ExceptionFilterOpt
             );
             BoundBlock? rewrittenBody = (BoundBlock?)this.Visit(node.Body);
-            Debug.Assert(rewrittenBody is { });
+            Debug.Assert(rewrittenBody is{ });
             TypeSymbol? rewrittenExceptionTypeOpt = this.VisitType(node.ExceptionTypeOpt);
 
             // EnC: We need to insert a hidden sequence point to handle function remapping in case

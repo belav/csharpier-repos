@@ -378,7 +378,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case ParameterSymbol:
                         if (
                             symbol.ContainingSymbol is MethodSymbol method
-                            && GetVariablesForMethodScope(method) is { } variables
+                            && GetVariablesForMethodScope(method) is{ } variables
                         ) {
                             return variables;
                         }
@@ -393,7 +393,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal Variables GetRootScope()
             {
                 var variables = this;
-                while (variables.Container is { } container)
+                while (variables.Container is{ } container)
                 {
                     variables = container;
                 }
@@ -410,7 +410,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return variables;
                     }
                     variables = variables.Container;
-                } while (variables is { });
+                } while (variables is{ });
                 return null;
             }
 

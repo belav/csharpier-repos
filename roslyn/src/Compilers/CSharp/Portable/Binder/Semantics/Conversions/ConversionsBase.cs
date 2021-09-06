@@ -3632,12 +3632,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             static bool isTypeIEquatable(NamedTypeSymbol type)
             {
                 return type
-                    is
-                    {
+                    is{
                         IsInterface: true,
                         Name: "IEquatable",
-                        ContainingNamespace:
-                        {
+                        ContainingNamespace: {
                             Name: "System",
                             ContainingNamespace: { IsGlobalNamespace: true }
                         },
@@ -3799,8 +3797,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         ) {
             if (
-                !(source is FunctionPointerTypeSymbol { Signature:  { } sourceSig })
-                || !(destination is FunctionPointerTypeSymbol { Signature:  { } destinationSig })
+                !(source is FunctionPointerTypeSymbol { Signature: { } sourceSig })
+                || !(destination is FunctionPointerTypeSymbol { Signature: { } destinationSig })
             ) {
                 return false;
             }

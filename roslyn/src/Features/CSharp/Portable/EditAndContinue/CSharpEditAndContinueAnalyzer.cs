@@ -1408,7 +1408,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             declaration
                 is ParameterSyntax
                 {
-                    Parent: ParameterListSyntax{ Parent: RecordDeclarationSyntax }
+                    Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                 };
 
         private static bool IsPropertyDeclarationMatchingPrimaryConstructorParameter(
@@ -3820,53 +3820,37 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 // All rude edits below only apply when inserting into an existing type (not when the type itself is inserted):
                 _ when !insertingIntoExistingContainingType => RudeEditKind.None,
 
-
                 // Inserting a member into an existing generic type is not allowed.
-                {
-                    ContainingType: { Arity: > 0 }
-                }
+                { ContainingType: { Arity: > 0 } }
                 and not INamedTypeSymbol
                   => RudeEditKind.InsertIntoGenericType,
 
-
                 // Inserting virtual or interface member into an existing type is not allowed.
-                {
-                    IsVirtual: true
-                }
-                or
-                {
-                    IsOverride: true
-                }
-                or
-                {
-                    IsAbstract: true
-                }
+                { IsVirtual: true }
+                or { IsOverride: true }
+                or { IsAbstract: true }
                 and not INamedTypeSymbol
                   => RudeEditKind.InsertVirtual,
 
                 // Inserting generic method into an existing type is not allowed.
-                IMethodSymbol{ Arity: > 0 } => RudeEditKind.InsertGenericMethod,
+                IMethodSymbol { Arity: > 0 } => RudeEditKind.InsertGenericMethod,
 
                 // Inserting destructor to an existing type is not allowed.
-                IMethodSymbol{ MethodKind: MethodKind.Destructor } => RudeEditKind.Insert,
+                IMethodSymbol { MethodKind: MethodKind.Destructor } => RudeEditKind.Insert,
 
                 // Inserting operator to an existing type is not allowed.
-                IMethodSymbol{
+                IMethodSymbol
+                {
                     MethodKind: MethodKind.Conversion or MethodKind.UserDefinedOperator
                 }
                   => RudeEditKind.InsertOperator,
 
                 // Inserting a method that explictly implements an interface method into an existing type is not allowed.
-                IMethodSymbol{
-                    ExplicitInterfaceImplementations: { IsEmpty: false }
-                }
+                IMethodSymbol { ExplicitInterfaceImplementations: { IsEmpty: false } }
                   => RudeEditKind.InsertMethodWithExplicitInterfaceSpecifier,
 
-
                 // TODO: Inserting non-virtual member to an interface (https://github.com/dotnet/roslyn/issues/37128)
-                {
-                    ContainingType: { TypeKind: TypeKind.Interface }
-                }
+                { ContainingType: { TypeKind: TypeKind.Interface } }
                 and not INamedTypeSymbol
                   => RudeEditKind.InsertIntoInterface,
 

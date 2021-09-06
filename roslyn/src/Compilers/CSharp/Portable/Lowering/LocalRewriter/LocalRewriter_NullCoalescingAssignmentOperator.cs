@@ -14,11 +14,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitNullCoalescingAssignmentOperator(
             BoundNullCoalescingAssignmentOperator node
         ) {
-            Debug.Assert(node.Type is { });
+            Debug.Assert(node.Type is{ });
             SyntaxNode syntax = node.Syntax;
             var temps = ArrayBuilder<LocalSymbol>.GetInstance();
             var stores = ArrayBuilder<BoundExpression>.GetInstance();
-            Debug.Assert(node.LeftOperand.Type is { });
+            Debug.Assert(node.LeftOperand.Type is{ });
 
             // Rewrite LHS with temporaries to prevent double-evaluation of side effects, as we'll need to use it multiple times.
             BoundExpression transformedLHS = TransformCompoundAssignmentLHS(
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 temps,
                 node.LeftOperand.HasDynamicType()
             );
-            Debug.Assert(transformedLHS.Type is { });
+            Debug.Assert(transformedLHS.Type is{ });
             var lhsRead = MakeRValue(transformedLHS);
             BoundExpression loweredRight = VisitExpression(node.RightOperand);
 
@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundNullCoalescingOperatorResultKind.LeftType,
                     node.LeftOperand.Type
                 );
-                Debug.Assert(conditionalExpression.Type is { });
+                Debug.Assert(conditionalExpression.Type is{ });
 
                 return (temps.Count == 0 && stores.Count == 0)
                     ? conditionalExpression

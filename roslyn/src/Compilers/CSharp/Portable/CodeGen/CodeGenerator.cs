@@ -477,7 +477,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         private void EmitRestorePreviousSequencePoint(BoundRestorePreviousSequencePoint node)
         {
-            Debug.Assert(node.Syntax is { });
+            Debug.Assert(node.Syntax is{ });
             if (
                 _savedSequencePoints is null
                 || !_savedSequencePoints.TryGetValue(node.Identifier, out var span)

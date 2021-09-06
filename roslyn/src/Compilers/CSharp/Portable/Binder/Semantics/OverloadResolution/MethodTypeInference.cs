@@ -1498,7 +1498,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _ => throw ExceptionUtilities.UnexpectedValue(delegateOrFunctionPointerType),
             };
             Debug.Assert(
-                method is { HasUseSiteError: false },
+                method is{ HasUseSiteError: false },
                 "This method should only be called for valid delegate or function pointer types"
             );
 
@@ -1977,7 +1977,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ) switch
             {
                 (null, null) => true,
-                ( { } sourceModifiers,  { } targetModifiers)
+                ({ } sourceModifiers, { } targetModifiers)
                     when sourceModifiers.SetEquals(targetModifiers)
                   => true,
                 _ => false
@@ -2534,8 +2534,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         ) {
             if (
-                source is not FunctionPointerTypeSymbol{ Signature:  { } sourceSignature }
-                || target is not FunctionPointerTypeSymbol{ Signature:  { } targetSignature }
+                source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature }
+                || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature }
             ) {
                 return false;
             }
@@ -2973,8 +2973,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         ) {
             if (
-                source is not FunctionPointerTypeSymbol{ Signature:  { } sourceSignature }
-                || target is not FunctionPointerTypeSymbol{ Signature:  { } targetSignature }
+                source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature }
+                || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature }
             ) {
                 return false;
             }

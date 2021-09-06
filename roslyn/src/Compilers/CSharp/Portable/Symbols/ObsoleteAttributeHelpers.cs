@@ -190,13 +190,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (message: null, isError: _, isColInit: true)
                   => ErrorCode.WRN_DeprecatedCollectionInitAdd,
                 (message: null, isError: _, isColInit: false) => ErrorCode.WRN_DeprecatedSymbol,
-                (message:  { }, isError: true, isColInit: true)
+                (message: { }, isError: true, isColInit: true)
                   => ErrorCode.ERR_DeprecatedCollectionInitAddStr,
-                (message:  { }, isError: true, isColInit: false)
+                (message: { }, isError: true, isColInit: false)
                   => ErrorCode.ERR_DeprecatedSymbolStr,
-                (message:  { }, isError: false, isColInit: true)
+                (message: { }, isError: false, isColInit: true)
                   => ErrorCode.WRN_DeprecatedCollectionInitAddStr,
-                (message:  { }, isError: false, isColInit: false)
+                (message: { }, isError: false, isColInit: false)
                   => ErrorCode.WRN_DeprecatedSymbolStr
             };
 

@@ -326,8 +326,8 @@ namespace Microsoft.AspNetCore.Http
             var parameterCustomAttributes = parameter.GetCustomAttributes();
 
             if (
-                parameterCustomAttributes.OfType<IFromRouteMetadata>().FirstOrDefault()
-                is { } routeAttribute
+                parameterCustomAttributes.OfType<IFromRouteMetadata>().FirstOrDefault() is
+                { } routeAttribute
             ) {
                 return BindParameterFromProperty(
                     parameter,
@@ -337,8 +337,8 @@ namespace Microsoft.AspNetCore.Http
                 );
             }
             else if (
-                parameterCustomAttributes.OfType<IFromQueryMetadata>().FirstOrDefault()
-                is { } queryAttribute
+                parameterCustomAttributes.OfType<IFromQueryMetadata>().FirstOrDefault() is
+                { } queryAttribute
             ) {
                 return BindParameterFromProperty(
                     parameter,
@@ -348,8 +348,8 @@ namespace Microsoft.AspNetCore.Http
                 );
             }
             else if (
-                parameterCustomAttributes.OfType<IFromHeaderMetadata>().FirstOrDefault()
-                is { } headerAttribute
+                parameterCustomAttributes.OfType<IFromHeaderMetadata>().FirstOrDefault() is
+                { } headerAttribute
             ) {
                 return BindParameterFromProperty(
                     parameter,
@@ -359,8 +359,8 @@ namespace Microsoft.AspNetCore.Http
                 );
             }
             else if (
-                parameterCustomAttributes.OfType<IFromBodyMetadata>().FirstOrDefault()
-                is { } bodyAttribute
+                parameterCustomAttributes.OfType<IFromBodyMetadata>().FirstOrDefault() is
+                { } bodyAttribute
             ) {
                 return BindParameterFromBody(
                     parameter.ParameterType,

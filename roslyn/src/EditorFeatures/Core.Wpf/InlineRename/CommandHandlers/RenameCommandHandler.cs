@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
 #if !COCOA
         protected override bool DashboardShouldReceiveKeyboardNavigation(ITextView textView) =>
-            GetDashboard(textView) is { } dashboard && dashboard.ShouldReceiveKeyboardNavigation;
+            GetDashboard(textView) is{ } dashboard && dashboard.ShouldReceiveKeyboardNavigation;
 
         protected override void SetFocusToTextView(ITextView textView)
         {

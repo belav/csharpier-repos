@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool IsLiteralNull(this BoundExpression node)
         {
             return node
-                is
-                {
+                is{
                     Kind: BoundKind.Literal,
                     ConstantValue: { Discriminator: ConstantValueTypeDiscriminator.Null }
                 };
@@ -86,13 +85,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool HasExpressionType(this BoundExpression node)
         {
             // null literal, method group, and anonymous function expressions have no type.
-            return node.Type is { };
+            return node.Type is{ };
         }
 
         public static bool HasDynamicType(this BoundExpression node)
         {
             var type = node.Type;
-            return type is { } && type.IsDynamic();
+            return type is{ } && type.IsDynamic();
         }
 
         public static bool MethodGroupReceiverIsDynamic(this BoundMethodGroup node)
@@ -134,7 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Special case: if we are looking for info on "M" in "new Action(M)" in the context of a parent
                     // then we want to get the symbol that overload resolution chose for M, not on the whole method group M.
                     var delegateCreation = parent as BoundDelegateCreationExpression;
-                    if (delegateCreation != null && delegateCreation.MethodOpt is { })
+                    if (delegateCreation != null && delegateCreation.MethodOpt is{ })
                     {
                         symbols.Add(delegateCreation.MethodOpt);
                     }
@@ -231,11 +230,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol? receiverType = expressionOpt.Type;
             return receiverType
-                is NamedTypeSymbol
-                {
-                    Kind: SymbolKind.NamedType,
-                    IsComImport: true
-                };
+                is NamedTypeSymbol { Kind: SymbolKind.NamedType, IsComImport: true };
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(operand != null);
                 operand = VisitExpression(operand);
-                Debug.Assert(operand.Type is { });
+                Debug.Assert(operand.Type is{ });
 
                 if (NullableNeverHasValue(operand))
                 {
@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     operand = NullableAlwaysHasValue(operand) ?? operand;
-                    Debug.Assert(operand.Type is { });
+                    Debug.Assert(operand.Type is{ });
 
                     if (operand.Type.IsNullableType())
                     {
@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 left?.Type?.IsNullableType() == true || right?.Type?.IsNullableType() == true
             );
             Debug.Assert(!(left is null && right is null));
-            Debug.Assert(node.MethodOpt is { });
+            Debug.Assert(node.MethodOpt is{ });
 
             var sideeffects = ArrayBuilder<BoundExpression>.GetInstance();
             var locals = ArrayBuilder<LocalSymbol>.GetInstance();
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     sideeffects,
                     locals
                 );
-                Debug.Assert(tempOperand.Type is { });
+                Debug.Assert(tempOperand.Type is{ });
 
                 if (tempOperand.Type.IsNullableType())
                 {
@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     Debug.Assert(constructionMethod.IsStatic);
                     var arg = left ?? right;
-                    Debug.Assert(arg is { });
+                    Debug.Assert(arg is{ });
                     return F.StaticCall(constructionMethod, ImmutableArray.Create(arg));
 
                 case MethodKind.PropertyGet:

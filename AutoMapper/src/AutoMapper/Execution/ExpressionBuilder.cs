@@ -139,7 +139,7 @@ namespace AutoMapper.Execution
             }
             var destinationType = destinationParameter.Type;
             var isCollection = destinationType.IsCollection();
-            var mustUseDestination = memberMap is { MustUseDestination: true };
+            var mustUseDestination = memberMap is{ MustUseDestination: true };
             var ifSourceNull =
                 memberMap == null
                     ? destinationParameter.IfNullElse(
@@ -294,7 +294,7 @@ namespace AutoMapper.Execution
                 target = member switch
                 {
                     PropertyInfo property => Expression.Property(target, property),
-                    MethodInfo{ IsStatic: true } getter => Expression.Call(getter, target),
+                    MethodInfo { IsStatic: true } getter => Expression.Call(getter, target),
                     FieldInfo field => Field(target, field),
                     MethodInfo getter => Expression.Call(target, getter),
                     _
@@ -333,17 +333,16 @@ namespace AutoMapper.Execution
             {
                 var member = expression switch
                 {
-                    MemberExpression{
+                    MemberExpression
+                    {
                         Expression: Expression target,
                         Member: MemberInfo propertyOrField
                     }
                       => new Member(expression, propertyOrField, target),
-                    MethodCallExpression{
-                        Method: var instanceMethod,
-                        Object: Expression target
-                    }
+                    MethodCallExpression { Method: var instanceMethod, Object: Expression target }
                       => new Member(expression, instanceMethod, target),
-                    MethodCallExpression{
+                    MethodCallExpression
+                    {
                         Method: var extensionMethod,
                         Arguments: { Count: > 0 } arguments
                     } when extensionMethod.Has<ExtensionAttribute>()
@@ -565,14 +564,13 @@ namespace AutoMapper.Execution
                 sourceExpression switch
                 {
                     MemberExpression memberExpression => memberExpression.Update(newTarget),
-                    MethodCallExpression{
+                    MethodCallExpression
+                    {
                         Method: { IsStatic: true },
                         Arguments: var args
                     } methodCall when args[0] != newTarget
                       => methodCall.Update(null, new[] { newTarget }.Concat(args.Skip(1))),
-                    MethodCallExpression{
-                        Method: { IsStatic: false }
-                    } methodCall
+                    MethodCallExpression { Method: { IsStatic: false } } methodCall
                       => methodCall.Update(newTarget, methodCall.Arguments),
                     _ => sourceExpression,
                 };

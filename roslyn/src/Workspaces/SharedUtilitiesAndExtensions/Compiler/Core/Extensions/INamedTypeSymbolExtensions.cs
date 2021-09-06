@@ -663,12 +663,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return member switch
             {
                 IEventSymbol => true,
-                IMethodSymbol{
-                    MethodKind: MethodKind.Ordinary,
-                    CanBeReferencedByName: true
-                }
+                IMethodSymbol { MethodKind: MethodKind.Ordinary, CanBeReferencedByName: true }
                   => true,
-                IPropertySymbol{ IsWithEvents: false } => true,
+                IPropertySymbol { IsWithEvents: false } => true,
                 _ => false,
             };
         }

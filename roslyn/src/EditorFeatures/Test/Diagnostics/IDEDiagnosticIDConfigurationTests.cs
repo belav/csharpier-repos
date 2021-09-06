@@ -87,10 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
             if (
                 diagnosticId
                 is "IDE0043" // Intentionally undocumented because it's being removed in favor of CA2241
-                or "IDE1007"
-                or "IDE1008"
-                or "RemoveUnnecessaryImportsFixable"
-                or "RE0001"
+                    or "IDE1007"
+                    or "IDE1008"
+                    or "RemoveUnnecessaryImportsFixable"
+                    or "RE0001"
             ) // Tracked by https://github.com/dotnet/roslyn/issues/48530
             {
                 Assert.True(

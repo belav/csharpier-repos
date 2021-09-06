@@ -830,8 +830,8 @@ namespace BoundTreeGenerator
             foreach (var type in TypeAndBaseTypes(node))
             {
                 if (
-                    FieldsIncludingOverrides(type).SingleOrDefault(f => f.Name == fieldName)
-                    is { } field
+                    FieldsIncludingOverrides(type).SingleOrDefault(f => f.Name == fieldName) is
+                    { } field
                 ) {
                     return field;
                 }

@@ -835,8 +835,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     switch (IsConditionalState, stateAndReachable.state.IsConditionalState)
                     {
-                        case
-                        (true, true):
+                        case (true, true):
                             Debug.Assert(false);
                             Join(ref this.StateWhenTrue, ref stateAndReachable.state.StateWhenTrue);
                             Join(
@@ -844,14 +843,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 ref stateAndReachable.state.StateWhenFalse
                             );
                             break;
-                        case
-                        (true, false):
+                        case (true, false):
                             Debug.Assert(false);
                             Join(ref this.StateWhenTrue, ref stateAndReachable.state.State);
                             Join(ref this.StateWhenFalse, ref stateAndReachable.state.State);
                             break;
-                        case
-                        (false, true):
+                        case (false, true):
                             Debug.Assert(false);
                             Split();
                             Join(ref this.StateWhenTrue, ref stateAndReachable.state.StateWhenTrue);
@@ -860,8 +857,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 ref stateAndReachable.state.StateWhenFalse
                             );
                             break;
-                        case
-                        (false, false):
+                        case (false, false):
                             Join(ref this.State, ref stateAndReachable.state.State);
                             break;
                     }

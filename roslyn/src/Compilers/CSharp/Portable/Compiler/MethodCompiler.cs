@@ -1485,7 +1485,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SyntaxTreeSemanticModel semanticModelWithCachedBoundNodes = null;
                     if (
                         body != null
-                        && forSemanticModel.Syntax is { } semanticModelSyntax
+                        && forSemanticModel.Syntax is{ } semanticModelSyntax
                         && _compilation.SemanticModelProvider
                             is CachingSemanticModelProvider cachingSemanticModelProvider
                     ) {

@@ -343,7 +343,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var initializer in boundInitializersOpt)
             {
-                if (!(initializer is BoundFieldEqualsValue { Value:  { } value }))
+                if (!(initializer is BoundFieldEqualsValue { Value: { } value }))
                 {
                     // this isn't a BoundFieldEqualsValue, so this initializer is doing
                     // something we don't understand. Better just emit it.

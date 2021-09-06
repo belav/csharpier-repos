@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                     ConversionOperatorDeclarationSyntax conversion => conversion.Type,
                     OperatorDeclarationSyntax op => op.ReturnType,
                     BasePropertyDeclarationSyntax property => property.Type,
-                    AccessorDeclarationSyntax{
+                    AccessorDeclarationSyntax
+                    {
                         RawKind: (int)SyntaxKind.GetAccessorDeclaration,
                         Parent: AccessorListSyntax
                         {

@@ -120,10 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     );
                     if (
                         parameter?.ContainingSymbol
-                            is IMethodSymbol
-                            {
-                                MethodKind: MethodKind.AnonymousFunction
-                            }
+                            is IMethodSymbol { MethodKind: MethodKind.AnonymousFunction }
                         && IsValidType(parameter?.Type)
                     ) {
                         return new(

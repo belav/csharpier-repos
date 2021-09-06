@@ -1400,8 +1400,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     else if (
                                         MessageID.IDS_FeatureCovariantReturnsForOverrides.GetFeatureAvailabilityDiagnosticInfo(
                                             this.DeclaringCompilation
-                                        )
-                                        is { } diagnosticInfo
+                                        ) is
+                                        { } diagnosticInfo
                                     ) {
                                         diagnostics.Add(diagnosticInfo, overridingMemberLocation);
                                     }
@@ -1527,7 +1527,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         MessageID.IDS_FeatureCovariantReturnsForOverrides.GetFeatureAvailabilityDiagnosticInfo(
                                             this.DeclaringCompilation
                                         );
-                                    Debug.Assert(diagnosticInfo is { });
+                                    Debug.Assert(diagnosticInfo is{ });
                                     diagnostics.Add(diagnosticInfo, overridingMemberLocation);
                                 }
                             }

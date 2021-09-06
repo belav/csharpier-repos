@@ -25,9 +25,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         {
             return operation.Syntax switch
             {
-                TConditionalExpressionSyntax{
-                    Parent: TParenthesizedExpressionSyntax parent
-                }
+                TConditionalExpressionSyntax { Parent: TParenthesizedExpressionSyntax parent }
                   => parent,
                 var syntax => syntax,
             };
@@ -99,10 +97,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     case IParenthesizedOperation parenthesized:
                         expression = parenthesized.Operand;
                         continue;
-                    case IConversionOperation
-                    {
-                        IsImplicit: true
-                    } conversion:
+                    case IConversionOperation { IsImplicit: true } conversion:
                         expression = conversion.Operand;
                         continue;
                     default:
@@ -126,10 +121,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         {
             if (
                 expression
-                    is IInvocationOperation
-                    {
-                        TargetMethod: { Name: nameof(ToString) }
-                    } invocation
+                    is IInvocationOperation { TargetMethod: { Name: nameof(ToString) } } invocation
                 && HasNonImplicitInstance(invocation)
                 && !syntaxFacts.IsBaseExpression(invocation.Instance!.Syntax)
                 && !invocation.Instance.Type!.IsRefLikeType
@@ -144,7 +136,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     && invocation.SemanticModel!.Compilation.GetTypeByMetadataName(
                         typeof(System.IFormattable).FullName!
                     )
-                        is { } systemIFormattable
+                        is{ } systemIFormattable
                     && invocation.Instance.Type.Implements(systemIFormattable)
                 ) {
                     unwrapped = invocation.Instance;
@@ -263,6 +255,6 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             invocation.Instance != null && !invocation.Instance.IsImplicit;
 
         private static bool IsSpaceChar(IArgumentOperation argument) =>
-            argument.Value.ConstantValue is { HasValue: true, Value: ' ' };
+            argument.Value.ConstantValue is{ HasValue: true, Value: ' ' };
     }
 }

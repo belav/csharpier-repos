@@ -25,9 +25,7 @@ namespace AutoMapper.Execution
                 { IsValueType: true } => Default(type),
                 Type stringType when stringType == typeof(string) => Constant(string.Empty),
                 { IsInterface: true } => CreateInterfaceExpression(type),
-                {
-                    IsAbstract: true
-                }
+                { IsAbstract: true }
                   => InvalidType(type, $"Cannot create an instance of abstract type {type}."),
                 _ => CallConstructor(type)
             };

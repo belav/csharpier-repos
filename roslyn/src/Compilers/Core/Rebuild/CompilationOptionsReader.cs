@@ -343,7 +343,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
         {
             var metadataReader = PeReader.GetMetadataReader();
             if (
-                PeReader.PEHeaders.CorHeader is not  { } corHeader
+                PeReader.PEHeaders.CorHeader is not { } corHeader
                 || !PeReader.PEHeaders.TryGetDirectoryOffset(
                     corHeader.ResourcesDirectory,
                     out var resourcesOffset
@@ -396,8 +396,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 {
                     SourceText sourceText;
                     if (
-                        ResolveEmbeddedSource(documentHandle, sourceTextInfo)
-                        is { } embeddedSourceTextInfo
+                        ResolveEmbeddedSource(documentHandle, sourceTextInfo) is
+                        { } embeddedSourceTextInfo
                     ) {
                         sourceText = embeddedSourceTextInfo.SourceText;
                     }

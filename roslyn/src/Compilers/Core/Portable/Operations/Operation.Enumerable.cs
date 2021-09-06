@@ -36,15 +36,9 @@ namespace Microsoft.CodeAnalysis
             {
                 switch (_operation)
                 {
-                    case NoneOperation
-                    {
-                        Children: var children
-                    }:
+                    case NoneOperation { Children: var children }:
                         return children;
-                    case InvalidOperation
-                    {
-                        Children: var children
-                    }:
+                    case InvalidOperation { Children: var children }:
                         return children;
                     case var _ when !GetEnumerator().MoveNext():
                         return ImmutableArray<IOperation>.Empty;

@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 return;
             }
 
-            if (location is LocalFunctionStatementSyntax { ExpressionBody:  { } })
+            if (location is LocalFunctionStatementSyntax { ExpressionBody: { } })
             {
                 // This is an expression-bodied local function, which is also handled by the other code fix.
                 return;

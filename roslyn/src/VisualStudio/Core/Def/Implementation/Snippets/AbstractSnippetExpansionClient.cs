@@ -685,8 +685,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         Debug.Assert(_state._method == null);
 
                         if (
-                            _signatureHelpControllerProvider.GetController(TextView, SubjectBuffer)
-                            is { } controller
+                            _signatureHelpControllerProvider.GetController(
+                                TextView,
+                                SubjectBuffer
+                            ) is
+                            { } controller
                         ) {
                             EnsureRegisteredForModelUpdatedEvents(this, controller);
                         }

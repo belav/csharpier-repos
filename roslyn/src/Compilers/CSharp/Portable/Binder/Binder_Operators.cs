@@ -1076,10 +1076,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || operatorToken.Kind() == SyntaxKind.ExclamationEqualsToken;
             switch (left.Kind, right.Kind)
             {
-                case
-                (BoundKind.DefaultLiteral, _) when !isEquality:
-                case
-                (_, BoundKind.DefaultLiteral) when !isEquality:
+                case (BoundKind.DefaultLiteral, _) when !isEquality:
+                case (_, BoundKind.DefaultLiteral) when !isEquality:
                     // other than == and !=, binary operators are disallowed on `default` literal
                     Error(
                         diagnostics,
@@ -1089,8 +1087,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         "default"
                     );
                     return;
-                case
-                (BoundKind.DefaultLiteral, BoundKind.DefaultLiteral):
+                case (BoundKind.DefaultLiteral, BoundKind.DefaultLiteral):
                     Error(
                         diagnostics,
                         ErrorCode.ERR_AmbigBinaryOpsOnDefault,
@@ -1100,8 +1097,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         right.Display
                     );
                     return;
-                case
-                (BoundKind.DefaultLiteral, _) when right.Type is TypeParameterSymbol:
+                case (BoundKind.DefaultLiteral, _) when right.Type is TypeParameterSymbol:
                     Debug.Assert(!right.Type.IsReferenceType);
                     Error(
                         diagnostics,
@@ -1111,8 +1107,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         right.Type
                     );
                     return;
-                case
-                (_, BoundKind.DefaultLiteral) when left.Type is TypeParameterSymbol:
+                case (_, BoundKind.DefaultLiteral) when left.Type is TypeParameterSymbol:
                     Debug.Assert(!left.Type.IsReferenceType);
                     Error(
                         diagnostics,
@@ -1122,8 +1117,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         left.Type
                     );
                     return;
-                case
-                (BoundKind.UnconvertedObjectCreationExpression, _):
+                case (BoundKind.UnconvertedObjectCreationExpression, _):
                     Error(
                         diagnostics,
                         ErrorCode.ERR_BadOpOnNullOrDefaultOrNew,
@@ -1132,8 +1126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         left.Display
                     );
                     return;
-                case
-                (_, BoundKind.UnconvertedObjectCreationExpression):
+                case (_, BoundKind.UnconvertedObjectCreationExpression):
                     Error(
                         diagnostics,
                         ErrorCode.ERR_BadOpOnNullOrDefaultOrNew,
@@ -1767,7 +1760,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : LookupResultKind.Empty;
             }
 
-            if (possiblyBest is { HasValue: true, Signature: { Method:  { } bestMethod } })
+            if (possiblyBest is { HasValue: true, Signature: { Method: { } bestMethod } })
             {
                 ReportObsoleteAndFeatureAvailabilityDiagnostics(bestMethod, node, diagnostics);
                 ReportUseSite(bestMethod, diagnostics, node);
@@ -1908,7 +1901,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : LookupResultKind.Empty;
             }
 
-            if (possiblyBest is { HasValue: true, Signature: { Method:  { } bestMethod } })
+            if (possiblyBest is { HasValue: true, Signature: { Method: { } bestMethod } })
             {
                 ReportObsoleteAndFeatureAvailabilityDiagnostics(bestMethod, node, diagnostics);
                 ReportUseSite(bestMethod, diagnostics, node);
@@ -5426,7 +5419,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 diagnostics.Add(node, useSiteInfo);
 
-                Debug.Assert(type is { });
+                Debug.Assert(type is{ });
                 Debug.Assert(Conversions.HasIdentityConversion(trueType, type));
                 Debug.Assert(Conversions.HasIdentityConversion(falseType, type));
             }

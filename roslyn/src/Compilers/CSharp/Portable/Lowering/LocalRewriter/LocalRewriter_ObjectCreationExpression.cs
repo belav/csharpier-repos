@@ -351,7 +351,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (ctor is { })
             {
-                Debug.Assert(node.GuidString is { });
+                Debug.Assert(node.GuidString is{ });
                 newGuid = _factory.New(ctor, _factory.Literal(node.GuidString));
             }
             else

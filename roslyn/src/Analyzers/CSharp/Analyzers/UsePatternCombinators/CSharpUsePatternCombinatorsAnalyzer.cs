@@ -39,16 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             switch (operation)
             {
-                case IBinaryOperation
-                {
-                    OperatorKind: BinaryOperatorKind.Equals
-                } op:
+                case IBinaryOperation { OperatorKind: BinaryOperatorKind.Equals } op:
                     return ParseConstantPattern(op);
 
-                case IBinaryOperation
-                {
-                    OperatorKind: NotEquals
-                } op:
+                case IBinaryOperation { OperatorKind: NotEquals } op:
                     return Not.TryCreate(ParseConstantPattern(op));
 
                 case IBinaryOperation
@@ -68,22 +62,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 case IBinaryOperation op when IsRelationalOperator(op.OperatorKind):
                     return ParseRelationalPattern(op);
 
-                case IUnaryOperation
-                {
-                    OperatorKind: UnaryOperatorKind.Not
-                } op:
+                case IUnaryOperation { OperatorKind: UnaryOperatorKind.Not } op:
                     return Not.TryCreate(ParsePattern(op.Operand));
 
                 case IIsTypeOperation
                 {
-                    Syntax: BinaryExpressionSyntax{ Right: TypeSyntax type }
+                    Syntax: BinaryExpressionSyntax { Right: TypeSyntax type }
                 } op:
                     return new Type(type, op.ValueOperand);
 
-                case IIsPatternOperation
-                {
-                    Pattern: { Syntax: PatternSyntax pattern }
-                } op:
+                case IIsPatternOperation { Pattern: { Syntax: PatternSyntax pattern } } op:
                     return new Source(pattern, op.Value);
 
                 case IParenthesizedOperation op:

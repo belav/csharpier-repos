@@ -217,7 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 bindingOption == SpeculativeBindingOption.BindAsExpression
-                && GetSnapshotManager() is { } snapshotManager
+                && GetSnapshotManager() is{ } snapshotManager
             ) {
                 crefSymbols = default;
                 position = CheckAndAdjustPosition(position);
@@ -2881,11 +2881,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 symbol
                     is LocalSymbol
-                    or ParameterSymbol
-                    or MethodSymbol
-                    {
-                        MethodKind: MethodKind.LambdaMethod
-                    }
+                        or ParameterSymbol
+                        or MethodSymbol { MethodKind: MethodKind.LambdaMethod }
             );
 
             EnsureNullabilityAnalysisPerformedIfNecessary();

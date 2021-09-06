@@ -134,13 +134,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var left = (BoundExpression?)this.Visit(child);
-            Debug.Assert(left is { });
+            Debug.Assert(left is{ });
 
             do
             {
                 binary = stack.Pop();
                 var right = (BoundExpression?)this.Visit(binary.Right);
-                Debug.Assert(right is { });
+                Debug.Assert(right is{ });
                 var type = this.VisitType(binary.Type);
                 left = binary.Update(
                     binary.OperatorKind,

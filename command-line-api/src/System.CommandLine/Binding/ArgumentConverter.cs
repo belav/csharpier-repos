@@ -184,7 +184,7 @@ namespace System.CommandLine.Binding
         }
 
         internal static bool HasStringTypeConverter(this Type type) =>
-            TypeDescriptor.GetConverter(type) is { } typeConverter
+            TypeDescriptor.GetConverter(type) is{ } typeConverter
             && typeConverter.CanConvertFrom(typeof(string));
 
         private static FailedArgumentConversionResult Failure(

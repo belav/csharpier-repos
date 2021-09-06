@@ -84,7 +84,7 @@ namespace System.CommandLine
                         foreach (var alias in identifier.Aliases)
                         {
                             if (
-                                alias is { } suggestion
+                                alias is{ } suggestion
                                 && suggestion.ContainsCaseInsensitive(textToMatch)
                             ) {
                                 suggestions.Add(suggestion);
@@ -95,9 +95,8 @@ namespace System.CommandLine
                         foreach (
                             var suggestion in argument.GetSuggestions(parseResult, textToMatch)
                         ) {
-                            if (
-                                suggestion is { } && suggestion.ContainsCaseInsensitive(textToMatch)
-                            ) {
+                            if (suggestion is{ } && suggestion.ContainsCaseInsensitive(textToMatch))
+                            {
                                 suggestions.Add(suggestion);
                             }
                         }

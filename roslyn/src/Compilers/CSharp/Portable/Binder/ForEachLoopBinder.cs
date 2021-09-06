@@ -1109,7 +1109,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     unwrappedCollectionExprType
                 )
                 is not EnumeratorResult.FailedNotReported
-                and var result
+                    and var result
             ) {
                 collectionExpr = unwrappedCollectionExpr;
                 return result;
@@ -1892,7 +1892,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return info;
             }
             else if (
-                overloadResolutionResult?.GetAllApplicableMembers() is { } applicableMembers
+                overloadResolutionResult?.GetAllApplicableMembers() is{ } applicableMembers
                 && applicableMembers.Length > 1
             ) {
                 diagnostics.Add(

@@ -1256,12 +1256,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Assert.True(
                 operation.OperatorKind
                     is Operations.BinaryOperatorKind.LessThan
-                    or Operations.BinaryOperatorKind.LessThanOrEqual
-                    or Operations.BinaryOperatorKind.GreaterThan
-                    or Operations.BinaryOperatorKind.GreaterThanOrEqual
-                    or Operations.BinaryOperatorKind.Equals
-                    or // Error cases
-                    Operations.BinaryOperatorKind.NotEquals
+                        or Operations.BinaryOperatorKind.LessThanOrEqual
+                        or Operations.BinaryOperatorKind.GreaterThan
+                        or Operations.BinaryOperatorKind.GreaterThanOrEqual
+                        or Operations.BinaryOperatorKind.Equals
+                        or // Error cases
+                        Operations.BinaryOperatorKind.NotEquals
             );
             VisitPatternCommon(operation);
             Assert.Same(operation.Value, operation.Children.Single());

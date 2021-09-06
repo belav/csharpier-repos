@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var rewrittenArguments = ImmutableArray.Create<BoundExpression>(rewrittenArgument);
 
             MethodSymbol? method = node.IsAddition ? node.Event.AddMethod : node.Event.RemoveMethod;
-            Debug.Assert(method is { });
+            Debug.Assert(method is{ });
             return MakeCall(
                 node.Syntax,
                 rewrittenReceiverOpt,
@@ -109,7 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             BoundAssignmentOperator? tempAssignment = null;
             BoundLocal? boundTemp = null;
-            Debug.Assert(eventSymbol.IsStatic || rewrittenReceiverOpt is { });
+            Debug.Assert(eventSymbol.IsStatic || rewrittenReceiverOpt is{ });
             if (!eventSymbol.IsStatic && CanChangeValueBetweenReads(rewrittenReceiverOpt!))
             {
                 boundTemp = _factory.StoreToTemp(rewrittenReceiverOpt!, out tempAssignment);
@@ -309,7 +309,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(eventSymbol.HasAssociatedField);
 
             FieldSymbol? fieldSymbol = eventSymbol.AssociatedField;
-            Debug.Assert(fieldSymbol is { });
+            Debug.Assert(fieldSymbol is{ });
 
             if (!eventSymbol.IsWindowsRuntimeEvent)
             {

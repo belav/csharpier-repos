@@ -273,8 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location
         ) {
             if (
-                GetFeatureAvailabilityDiagnosticInfo(feature, (CSharpCompilation)compilation)
-                is { } diagInfo
+                GetFeatureAvailabilityDiagnosticInfo(feature, (CSharpCompilation)compilation) is
+                { } diagInfo
             ) {
                 diagnostics.Add(diagInfo, location);
                 return false;

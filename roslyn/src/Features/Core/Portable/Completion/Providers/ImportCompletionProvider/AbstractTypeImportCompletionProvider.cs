@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (
                     symbol is IAliasSymbol
                     {
-                        Target: ITypeSymbol{ TypeKind: not TypeKind.Error } target
+                        Target: ITypeSymbol { TypeKind: not TypeKind.Error } target
                     }
                 ) {
                     // If the target type is a type constructs from generics type, e.g.

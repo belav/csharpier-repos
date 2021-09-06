@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTupleExpression node,
             ImmutableArray<BoundExpression> rewrittenArguments
         ) {
-            Debug.Assert(node.Type is { });
+            Debug.Assert(node.Type is{ });
             return MakeTupleCreationExpression(
                 node.Syntax,
                 (NamedTypeSymbol)node.Type,

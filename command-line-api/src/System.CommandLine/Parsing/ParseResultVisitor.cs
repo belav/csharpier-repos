@@ -199,7 +199,7 @@ namespace System.CommandLine.Parsing
 
                     ValidateAndConvertArgumentResult(argumentResult);
 
-                    if (argumentResult.PassedOnTokens is { } && i == arguments.Count - 1)
+                    if (argumentResult.PassedOnTokens is{ } && i == arguments.Count - 1)
                     {
                         _unparsedTokens.AddRange(argumentResult.PassedOnTokens);
                     }

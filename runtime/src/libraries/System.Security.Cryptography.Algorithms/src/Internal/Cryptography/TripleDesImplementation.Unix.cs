@@ -22,20 +22,16 @@ namespace Internal.Cryptography
             IntPtr algorithm;
             switch ((cipherMode, feedbackSize))
             {
-                case
-                (CipherMode.CBC, _):
+                case (CipherMode.CBC, _):
                     algorithm = Interop.Crypto.EvpDes3Cbc();
                     break;
-                case
-                (CipherMode.ECB, _):
+                case (CipherMode.ECB, _):
                     algorithm = Interop.Crypto.EvpDes3Ecb();
                     break;
-                case
-                (CipherMode.CFB, 1):
+                case (CipherMode.CFB, 1):
                     algorithm = Interop.Crypto.EvpDes3Cfb8();
                     break;
-                case
-                (CipherMode.CFB, 8):
+                case (CipherMode.CFB, 8):
                     algorithm = Interop.Crypto.EvpDes3Cfb64();
                     break;
                 default:

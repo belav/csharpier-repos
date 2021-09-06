@@ -3868,7 +3868,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         private void EmitLoadFunction(BoundFunctionPointerLoad load, bool used)
         {
-            Debug.Assert(load.Type is { TypeKind: TypeKind.FunctionPointer });
+            Debug.Assert(load.Type is{ TypeKind: TypeKind.FunctionPointer });
 
             if (used)
             {

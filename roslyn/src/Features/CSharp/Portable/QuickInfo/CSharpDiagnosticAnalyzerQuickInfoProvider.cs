@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
                 // case 0219 or 219:
                 // Take the number and add the "CS" prefix.
-                LiteralExpressionSyntax{
+                LiteralExpressionSyntax
+                {
                     RawKind: (int)SyntaxKind.NumericLiteralExpression
                 } literal
                   => int.TryParse(literal.Token.ValueText, out var errorCodeNumber)
@@ -114,11 +115,12 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.suppressmessageattribute
             var suppressMessageCheckIdArgument = token.GetAncestor<AttributeArgumentSyntax>() switch
             {
-                AttributeArgumentSyntax{
+                AttributeArgumentSyntax
+                {
                     Parent: AttributeArgumentListSyntax
                     {
                         Arguments: var arguments,
-                        Parent: AttributeSyntax{ Name: var attributeName }
+                        Parent: AttributeSyntax { Name: var attributeName }
                     }
                 } argument
                     when attributeName.IsSuppressMessageAttribute()

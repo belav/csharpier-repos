@@ -641,7 +641,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         ) {
             int parameterIndex = parameter.Ordinal;
-            bool isDefault = parameterSyntax is ParameterSyntax { Default:  { } };
+            bool isDefault = parameterSyntax is ParameterSyntax { Default: { } };
 
             if (thisKeyword.Kind() == SyntaxKind.ThisKeyword && parameterIndex != 0)
             {
@@ -666,10 +666,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Debug.Assert(
                     parameter.ContainingSymbol
                         is FunctionPointerMethodSymbol
-                        or
-                        {
-                            ContainingType: not null
-                        }
+                            or { ContainingType: not null }
                 );
                 // error CS0721: '{0}': static types cannot be used as parameters
                 diagnostics.Add(

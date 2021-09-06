@@ -483,7 +483,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             _returnTypesOpt = returnTypesOpt;
             _snapshotBuilderOpt = snapshotBuilderOpt;
             _isSpeculative = isSpeculative;
-            _hasInitialState = variables is { };
+            _hasInitialState = variables is{ };
         }
 
         public string GetDebuggerDisplay()
@@ -742,11 +742,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (pendingReturn.IsConditionalState)
                 {
                     if (
-                        returnStatement.ExpressionOpt
-                        is
-                        {
-                            ConstantValue: { IsBoolean: true, BooleanValue: bool value }
-                        }
+                        returnStatement.ExpressionOpt is
+                        { ConstantValue: { IsBoolean: true, BooleanValue: bool value } }
                     ) {
                         enforceMemberNotNullWhen(
                             returnStatement.Syntax,
@@ -789,11 +786,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
                 else if (
-                    returnStatement.ExpressionOpt
-                    is
-                    {
-                        ConstantValue: { IsBoolean: true, BooleanValue: bool value }
-                    }
+                    returnStatement.ExpressionOpt is
+                    { ConstantValue: { IsBoolean: true, BooleanValue: bool value } }
                 ) {
                     enforceMemberNotNullWhen(
                         returnStatement.Syntax,
@@ -903,15 +897,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     case PropertySymbol:
                                         // skip any manually implemented properties.
                                         continue;
-                                    case FieldSymbol
-                                    {
-                                        IsConst: true
-                                    }:
+                                    case FieldSymbol { IsConst: true }:
                                         continue;
-                                    case FieldSymbol
-                                    {
-                                        AssociatedSymbol: PropertySymbol prop
-                                    }:
+                                    case FieldSymbol { AssociatedSymbol: PropertySymbol prop }:
                                         // this is a property where assigning 'default' causes us to simply update
                                         // the state to the output state of the property
                                         // thus we skip setting an initial state for it here
@@ -1010,11 +998,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (pendingReturn.IsConditionalState)
                     {
                         if (
-                            returnStatement.ExpressionOpt
-                            is
-                            {
-                                ConstantValue: { IsBoolean: true, BooleanValue: bool value }
-                            }
+                            returnStatement.ExpressionOpt is
+                            { ConstantValue: { IsBoolean: true, BooleanValue: bool value } }
                         ) {
                             enforceParameterNotNullWhen(
                                 returnStatement.Syntax,
@@ -1056,11 +1041,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                     }
                     else if (
-                        returnStatement.ExpressionOpt
-                        is
-                        {
-                            ConstantValue: { IsBoolean: true, BooleanValue: bool value }
-                        }
+                        returnStatement.ExpressionOpt is
+                        { ConstantValue: { IsBoolean: true, BooleanValue: bool value } }
                     ) {
                         // example: return (bool)true;
                         enforceParameterNotNullWhen(
@@ -5395,10 +5377,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         rightType,
                         reportMismatch: false
                     )
-                        is
-                        {
-                            Exists: true
-                        } conversion
+                        is { Exists: true } conversion
                 ) {
                     Debug.Assert(!conversion.IsUserDefined);
                     return (rightType, NullableFlowState.NotNull);
@@ -6341,10 +6320,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 node is BoundForEachStatement
                 {
-                    EnumeratorInfoOpt:
-                    {
-                        GetEnumeratorInfo:
-                        {
+                    EnumeratorInfoOpt: {
+                        GetEnumeratorInfo: {
                             Method: { TypeArgumentsWithAnnotations: { IsEmpty: false } }
                         }
                     }
@@ -6480,8 +6457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CheckMethodConstraints(
                         syntax switch
                         {
-                            InvocationExpressionSyntax{ Expression: var expression } => expression,
-                            ForEachStatementSyntax{ Expression: var expression } => expression,
+                            InvocationExpressionSyntax { Expression: var expression } => expression,
+                            ForEachStatementSyntax { Expression: var expression } => expression,
                             _ => syntax
                         },
                         method
@@ -7694,18 +7671,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 if (
                     argument
-                    is BoundLocal
-                    {
-                        DeclarationKind: BoundLocalDeclarationKind.WithInferredType
-                    }
-                    or BoundConditionalOperator
-                    {
-                        WasTargetTyped: true
-                    }
-                    or BoundConvertedSwitchExpression
-                    {
-                        WasTargetTyped: true
-                    }
+                    is BoundLocal { DeclarationKind: BoundLocalDeclarationKind.WithInferredType }
+                        or BoundConditionalOperator { WasTargetTyped: true }
+                        or BoundConvertedSwitchExpression { WasTargetTyped: true }
                 ) {
                     // target-typed contexts don't contribute to nullability
                     return new BoundExpressionWithNullability(
@@ -8723,13 +8691,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ) =>
                         targetType switch
                         {
-                            NamedTypeSymbol{
+                            NamedTypeSymbol
+                            {
                                 TypeKind: TypeKind.Delegate,
-                                DelegateInvokeMethod: { Parameters:  { } parameters } signature
+                                DelegateInvokeMethod: { Parameters: { } parameters } signature
                             }
                               => (signature, parameters),
-                            FunctionPointerTypeSymbol{
-                                Signature: { Parameters:  { } parameters } signature
+                            FunctionPointerTypeSymbol
+                            {
+                                Signature: { Parameters: { } parameters } signature
                             }
                               => (signature, parameters),
                             ErrorTypeSymbol => (null, ImmutableArray<ParameterSymbol>.Empty),
@@ -9261,10 +9231,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (conversionOperand)
                 {
-                    case BoundConditionalOperator
-                    {
-                        WasTargetTyped: true
-                    } conditional:
+                    case BoundConditionalOperator { WasTargetTyped: true } conditional:
                     {
                         Debug.Assert(ConditionalInfoForConversion.ContainsKey(conditional));
                         var info = ConditionalInfoForConversion[conditional];
@@ -9302,10 +9269,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return consequenceRValue.State.Join(alternativeRValue.State);
                     }
 
-                    case BoundConvertedSwitchExpression
-                    {
-                        WasTargetTyped: true
-                    } @switch:
+                    case BoundConvertedSwitchExpression { WasTargetTyped: true } @switch:
                     {
                         Debug.Assert(ConditionalInfoForConversion.ContainsKey(@switch));
                         var info = ConditionalInfoForConversion[@switch];
@@ -9341,10 +9305,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return resultState;
                     }
 
-                    case BoundObjectCreationExpression
-                    {
-                        WasTargetTyped: true
-                    }:
+                    case BoundObjectCreationExpression { WasTargetTyped: true }:
                     case BoundUnconvertedObjectCreationExpression:
                         return NullableFlowState.NotNull;
 
@@ -9743,7 +9704,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                     }
                     break;
-                case BoundExpression arg when arg.Type is { TypeKind: TypeKind.Delegate } argType:
+                case BoundExpression arg when arg.Type is{ TypeKind: TypeKind.Delegate } argType:
 
                     {
                         var argTypeWithAnnotations = TypeWithAnnotations.Create(
@@ -9990,7 +9951,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // in order to track member state based on these initializers, we need to see the assignment in terms of the associated member
                 case BoundFieldAccess
                 {
-                    ExpressionSymbol: FieldSymbol{ AssociatedSymbol: PropertySymbol autoProperty }
+                    ExpressionSymbol: FieldSymbol { AssociatedSymbol: PropertySymbol autoProperty }
                 } fieldAccess:
                     left = new BoundPropertyAccess(
                         fieldAccess.Syntax,
@@ -10003,7 +9964,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
                 case BoundFieldAccess
                 {
-                    ExpressionSymbol: FieldSymbol{ AssociatedSymbol: EventSymbol @event }
+                    ExpressionSymbol: FieldSymbol { AssociatedSymbol: EventSymbol @event }
                 } fieldAccess:
                     left = new BoundEventAccess(
                         fieldAccess.Syntax,
@@ -10140,17 +10101,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                   => property.PropertySymbol.GetFlowAnalysisAnnotations(),
                 BoundIndexerAccess indexer => indexer.Indexer.GetFlowAnalysisAnnotations(),
                 BoundFieldAccess field => getFieldAnnotations(field.FieldSymbol),
-                BoundObjectInitializerMember{
-                    MemberSymbol: PropertySymbol prop
-                }
+                BoundObjectInitializerMember { MemberSymbol: PropertySymbol prop }
                   => prop.GetFlowAnalysisAnnotations(),
-                BoundObjectInitializerMember{
-                    MemberSymbol: FieldSymbol field
-                }
+                BoundObjectInitializerMember { MemberSymbol: FieldSymbol field }
                   => getFieldAnnotations(field),
-                BoundParameter{
-                    ParameterSymbol: ParameterSymbol parameter
-                }
+                BoundParameter { ParameterSymbol: ParameterSymbol parameter }
                   => ToInwardAnnotations(
                       GetParameterAnnotations(parameter) & ~FlowAnalysisAnnotations.NotNull
                   ), // NotNull is enforced upon method exit
@@ -10906,7 +10861,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameterOpt: parameter
             );
 
-            if (argumentType.Type is { } argType && IsNullabilityMismatch(paramType.Type, argType))
+            if (argumentType.Type is{ } argType && IsNullabilityMismatch(paramType.Type, argType))
             {
                 ReportNullabilityMismatchInArgument(
                     argument.Syntax,
@@ -11272,8 +11227,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol? reinferredGetEnumeratorMethod = null;
 
             if (
-                node.EnumeratorInfoOpt?.GetEnumeratorInfo
-                is
+                node.EnumeratorInfoOpt?.GetEnumeratorInfo is
                 {
                     Method: { IsExtensionMethod: true, Parameters: var parameters }
                 } enumeratorMethodInfo
@@ -11363,10 +11317,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             bool reportedDiagnostic = node.EnumeratorInfoOpt?.GetEnumeratorInfo.Method
-                is
-                {
-                    IsExtensionMethod: true
-                }
+                is{ IsExtensionMethod: true }
                 ? false
                 : CheckPossibleNullReceiver(expr);
 
@@ -11433,8 +11384,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // Analyze `await MoveNextAsync()`
                 if (
-                    node.AwaitOpt
-                    is
+                    node.AwaitOpt is
                     {
                         AwaitableInstancePlaceholder: BoundAwaitableValuePlaceholder moveNextPlaceholder
                     } awaitMoveNextInfo
@@ -11459,8 +11409,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // Analyze `await DisposeAsync()`
                 if (
-                    node.EnumeratorInfoOpt
-                    is
+                    node.EnumeratorInfoOpt is
                     {
                         NeedsDisposal: true,
                         DisposeAwaitableInfo: BoundAwaitableInfo awaitDisposalInfo
@@ -11469,11 +11418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var disposalPlaceholder = awaitDisposalInfo.AwaitableInstancePlaceholder;
                     bool addedPlaceholder = false;
                     if (
-                        node.EnumeratorInfoOpt.PatternDisposeInfo
-                        is
-                        {
-                            Method: var originalDisposeMethod
-                        }
+                        node.EnumeratorInfoOpt.PatternDisposeInfo is
+                        { Method: var originalDisposeMethod }
                     ) // no statically known Dispose method if doing a runtime check
                     {
                         Debug.Assert(disposalPlaceholder is not null);
@@ -13068,7 +13014,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(Id == other.Id);
                 bool result = false;
-                if (_container is { } && _container.Value.Join(in other._container!.Value))
+                if (_container is{ } && _container.Value.Join(in other._container!.Value))
                 {
                     result = true;
                 }
@@ -13083,7 +13029,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(Id == other.Id);
                 bool result = false;
-                if (_container is { } && _container.Value.Meet(in other._container!.Value))
+                if (_container is{ } && _container.Value.Meet(in other._container!.Value))
                 {
                     result = true;
                 }

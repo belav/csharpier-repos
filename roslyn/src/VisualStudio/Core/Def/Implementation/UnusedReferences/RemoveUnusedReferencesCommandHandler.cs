@@ -149,7 +149,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
                 if (
                     solution is null
-                    || projectFilePath is not string{ Length: > 0 }
+                    || projectFilePath is not string { Length: > 0 }
                     || referenceUpdates.IsEmpty
                 ) {
                     MessageDialog.Show(

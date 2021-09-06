@@ -1624,10 +1624,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 while (
                     syntax.Parent
                         is CSharp.Syntax.ParenthesizedExpressionSyntax
-                        or PostfixUnaryExpressionSyntax
-                        {
-                            OperatorToken: { RawKind: (int)CSharp.SyntaxKind.ExclamationToken }
-                        }
+                            or PostfixUnaryExpressionSyntax
+                            {
+                                OperatorToken: { RawKind: (int)CSharp.SyntaxKind.ExclamationToken }
+                            }
                 ) {
                     syntax = syntax.Parent;
                 }
@@ -2431,7 +2431,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 is IMethodSymbol
                 {
                     Name: WellKnownMemberNames.TopLevelStatementsEntryPointMethodName,
-                    ContainingType:  { } containingType
+                    ContainingType: { } containingType
                 }
             && containingType.IsTopLevelMainType();
 

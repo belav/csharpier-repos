@@ -1108,10 +1108,7 @@ namespace Microsoft.Cci
             {
                 if (
                     referenceManager.GetMetadataReference(pair.AssemblySymbol)
-                    is PortableExecutableReference
-                    {
-                        FilePath:  { }
-                    } portableReference
+                    is PortableExecutableReference { FilePath: { } } portableReference
                 ) {
                     var fileName = PathUtilities.GetFileName(portableReference.FilePath);
                     var peReader = pair.AssemblySymbol.GetISymbol()

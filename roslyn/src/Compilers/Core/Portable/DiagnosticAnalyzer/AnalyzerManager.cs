@@ -514,7 +514,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ) {
                 if (
                     compilation != null
-                    && compilation.Options.SyntaxTreeOptionsProvider is { } treeOptions
+                    && compilation.Options.SyntaxTreeOptionsProvider is{ } treeOptions
                 ) {
                     foreach (var tree in compilation.SyntaxTrees)
                     {

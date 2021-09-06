@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var mg = (BoundMethodGroup)node.Argument;
                 var method = node.MethodOpt;
-                Debug.Assert(method is { });
+                Debug.Assert(method is{ });
                 var oldSyntax = _factory.Syntax;
                 _factory.Syntax = (mg.ReceiverOpt ?? mg).Syntax;
                 var receiver =

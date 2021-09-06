@@ -489,7 +489,7 @@ namespace Microsoft.CodeAnalysis.Remote
             exception
                 is RemoteInvocationException
                 {
-                    ErrorData: CommonErrorData{ TypeName: "System.IO.IOException" }
+                    ErrorData: CommonErrorData { TypeName: "System.IO.IOException" }
                 };
 
         private void OnUnexpectedException(Exception exception, CancellationToken cancellationToken)

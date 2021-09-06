@@ -39,17 +39,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (hasFalse, hasTrue)
                 {
-                    case
-                    (false, false):
+                    case (false, false):
                         return None;
-                    case
-                    (false, true):
+                    case (false, true):
                         return OnlyTrue;
-                    case
-                    (true, false):
+                    case (true, false):
                         return OnlyFalse;
-                    case
-                    (true, true):
+                    case (true, true):
                         return AllValues;
                 }
             }
@@ -65,11 +61,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (relation, value)
                 {
-                    case
-                    (Equal, true):
+                    case (Equal, true):
                         return _hasTrue;
-                    case
-                    (Equal, false):
+                    case (Equal, false):
                         return _hasFalse;
                     default:
                         return true;
@@ -83,11 +77,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (relation, value)
                 {
-                    case
-                    (Equal, true):
+                    case (Equal, true):
                         return !_hasFalse;
-                    case
-                    (Equal, false):
+                    case (Equal, false):
                         return !_hasTrue;
                     default:
                         return true;

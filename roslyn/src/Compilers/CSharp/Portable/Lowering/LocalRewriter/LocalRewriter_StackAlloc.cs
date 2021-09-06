@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var rewrittenCount = VisitExpression(stackAllocNode.Count);
             var type = stackAllocNode.Type;
-            Debug.Assert(type is { });
+            Debug.Assert(type is{ });
 
             if (rewrittenCount.ConstantValue?.Int32Value == 0)
             {

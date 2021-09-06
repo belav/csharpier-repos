@@ -173,7 +173,7 @@ End Class
             if (
                 cmd.Arguments is VisualBasicCommandLineArguments
                 {
-                    DefaultCoreLibraryReference:  { } reference
+                    DefaultCoreLibraryReference: { } reference
                 }
             ) {
                 expectedReads.Add(reference.Reference);

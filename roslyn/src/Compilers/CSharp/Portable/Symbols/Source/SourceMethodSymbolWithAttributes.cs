@@ -510,7 +510,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // We can't verify the symmetric case here. Error conditions (such as if a bad expression was provided to the array initializer)
                     // can cause the attribute to be skipped during regular attribute binding. Early binding doesn't know that though, so
                     // it still gets marked as present.
-                    Debug.Assert(earlyData is { UnmanagedCallersOnlyAttributePresent: true });
+                    Debug.Assert(earlyData is{ UnmanagedCallersOnlyAttributePresent: true });
                 }
                 else if (earlyData is null or { UnmanagedCallersOnlyAttributePresent: false })
                 {
@@ -1154,10 +1154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // to run the module initializer.
             if (
                 _lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
-                is MethodEarlyWellKnownAttributeData
-                {
-                    UnmanagedCallersOnlyAttributePresent: true
-                }
+                is MethodEarlyWellKnownAttributeData { UnmanagedCallersOnlyAttributePresent: true }
             ) {
                 diagnostics.Add(
                     ErrorCode.ERR_ModuleInitializerCannotBeUnmanagedCallersOnly,
@@ -1404,13 +1401,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     var returnTypeSyntax = this.SyntaxNode switch
                     {
-                        MethodDeclarationSyntax{
-                            ReturnType: var methodReturnType
-                        }
+                        MethodDeclarationSyntax { ReturnType: var methodReturnType }
                           => methodReturnType,
-                        LocalFunctionStatementSyntax{
-                            ReturnType: var localReturnType
-                        }
+                        LocalFunctionStatementSyntax { ReturnType: var localReturnType }
                           => localReturnType,
                         var unexpected => throw ExceptionUtilities.UnexpectedValue(unexpected)
                     };

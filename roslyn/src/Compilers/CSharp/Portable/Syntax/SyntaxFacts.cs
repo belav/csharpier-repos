@@ -594,7 +594,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && node.DescendantNodesAndSelf(
                         child => !IsNestedFunction(child) && !(node is ExpressionSyntax)
                     )
-                    .Any(n => n is ReturnStatementSyntax { Expression:  { } });
+                    .Any(n => n is ReturnStatementSyntax { Expression: { } });
         }
     }
 }

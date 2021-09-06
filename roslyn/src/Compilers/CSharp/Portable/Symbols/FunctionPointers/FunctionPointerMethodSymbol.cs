@@ -198,10 +198,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 );
                                 return CallingConvention.Unmanaged;
 
-                            case
-                            {
-                                CallingConventions: { Count: 1 } specifiers
-                            }:
+                            case { CallingConventions: { Count: 1 } specifiers }:
                                 return specifiers[0].Name switch
                                 {
                                     // Special identifiers cases
@@ -220,10 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                       )
                                 };
 
-                            case
-                            {
-                                CallingConventions: { Count: 0 }
-                            } unmanagedList:
+                            case { CallingConventions: { Count: 0 } } unmanagedList:
                                 // Should never be possible from parser-constructed code (parser will always provide at least a missing identifier token),
                                 // so diagnostic quality isn't hugely important
                                 if (!unmanagedList.ContainsDiagnostics)
@@ -236,10 +230,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 }
                                 return CallingConvention.Default;
 
-                            case
-                            {
-                                CallingConventions: var specifiers
-                            }:
+                            case { CallingConventions: var specifiers }:
                                 // More than one identifier case
                                 checkUnmanagedSupport(
                                     compilation,
@@ -681,7 +672,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 RefKind refKind,
                 CSharpCompilation compilation
             ) =>
-                GetCustomModifierForRefKind(refKind, compilation) is { } modifier
+                GetCustomModifierForRefKind(refKind, compilation) is{ } modifier
                     ? ImmutableArray.Create(modifier)
                     : ImmutableArray<CustomModifier>.Empty;
         }

@@ -229,7 +229,7 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         CSharpSyntax.ClassDeclarationSyntax s when s.BaseList?.Types.Count > 0
                           => s.BaseList.Types[0].GetLocation(),
-                         { } otherSyntax => otherSyntax.GetLocation()
+                        { } otherSyntax => otherSyntax.GetLocation()
                     };
 
                     context.ReportDiagnostic(Diagnostic.Create(_descriptor, location, baseSymbol));
@@ -243,7 +243,7 @@ namespace Microsoft.EntityFrameworkCore
                     var location = declaringSyntax.GetSyntax() switch
                     {
                         CSharpSyntax.ClassDeclarationSyntax s => s.Identifier.GetLocation(),
-                         { } otherSyntax => otherSyntax.GetLocation()
+                        { } otherSyntax => otherSyntax.GetLocation()
                     };
 
                     context.ReportDiagnostic(Diagnostic.Create(_descriptor, location, iface));
@@ -270,7 +270,7 @@ namespace Microsoft.EntityFrameworkCore
                     var location = declaringSyntax.GetSyntax() switch
                     {
                         CSharpSyntax.MethodDeclarationSyntax s => s.ReturnType.GetLocation(),
-                         { } otherSyntax => otherSyntax.GetLocation()
+                        { } otherSyntax => otherSyntax.GetLocation()
                     };
 
                     context.ReportDiagnostic(
@@ -286,7 +286,7 @@ namespace Microsoft.EntityFrameworkCore
                     var location = declaringSyntax.GetSyntax() switch
                     {
                         CSharpSyntax.ParameterSyntax s when s.Type != null => s.Type.GetLocation(),
-                         { } otherSyntax => otherSyntax.GetLocation()
+                        { } otherSyntax => otherSyntax.GetLocation()
                     };
 
                     context.ReportDiagnostic(

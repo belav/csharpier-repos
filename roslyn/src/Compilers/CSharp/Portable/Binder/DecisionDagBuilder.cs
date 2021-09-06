@@ -280,8 +280,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case Tests.True _:
                     case Tests.False _:
                         return tests;
-                    case Tests.One
-                    (BoundDagEvaluation e):
+                    case Tests.One(BoundDagEvaluation e):
                         if (usedValues.Contains(e))
                         {
                             if (e.Input.Source is { })
@@ -292,8 +291,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             return Tests.True.Instance;
                         }
-                    case Tests.One
-                    (BoundDagTest d):
+                    case Tests.One(BoundDagTest d):
                         if (d.Input.Source is { })
                             usedValues.Add(d.Input.Source);
                         return tests;
@@ -1123,7 +1121,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         RoslynDebug.Assert(state.TrueBranch == null);
-                        RoslynDebug.Assert(state.FalseBranch is { });
+                        RoslynDebug.Assert(state.FalseBranch is{ });
 
                         // The final state here does not need bindings, as they will be performed before evaluating the when clause (see below)
                         BoundDecisionDagNode whenTrue = finalState(
@@ -1132,7 +1130,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             default
                         );
                         BoundDecisionDagNode? whenFalse = state.FalseBranch.Dag;
-                        RoslynDebug.Assert(whenFalse is { });
+                        RoslynDebug.Assert(whenFalse is{ });
                         state.Dag = uniqifyDagNode(
                             new BoundWhenDecisionDagNode(
                                 first.Syntax,
@@ -1167,7 +1165,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                             {
                                 BoundDecisionDagNode? next = state.TrueBranch!.Dag;
-                                RoslynDebug.Assert(next is { });
+                                RoslynDebug.Assert(next is{ });
                                 RoslynDebug.Assert(state.FalseBranch == null);
                                 state.Dag = uniqifyDagNode(
                                     new BoundEvaluationDecisionDagNode(e.Syntax, e, next)
@@ -1179,8 +1177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 BoundDecisionDagNode? whenTrue = state.TrueBranch!.Dag;
                                 BoundDecisionDagNode? whenFalse = state.FalseBranch!.Dag;
-                                RoslynDebug.Assert(whenTrue is { });
-                                RoslynDebug.Assert(whenFalse is { });
+                                RoslynDebug.Assert(whenTrue is{ });
+                                RoslynDebug.Assert(whenFalse is{ });
                                 state.Dag = uniqifyDagNode(
                                     new BoundTestDecisionDagNode(d.Syntax, d, whenTrue, whenFalse)
                                 );
@@ -1629,19 +1627,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 while (
                     expressionType
-                        is ArrayTypeSymbol
-                        {
-                            ElementType: var e1,
-                            IsSZArray: var sz1,
-                            Rank: var r1
-                        }
+                        is ArrayTypeSymbol { ElementType: var e1, IsSZArray: var sz1, Rank: var r1 }
                     && patternType
-                        is ArrayTypeSymbol
-                        {
-                            ElementType: var e2,
-                            IsSZArray: var sz2,
-                            Rank: var r2
-                        }
+                        is ArrayTypeSymbol { ElementType: var e2, IsSZArray: var sz2, Rank: var r2 }
                     && sz1 == sz2
                     && r1 == r2
                 ) {
@@ -1653,66 +1641,40 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // the CLI specification but violates the C# language behavior.
                         // See ECMA-335's definition of *array-element-compatible-with*.
                         case var (s1, s2) when s1 == s2:
-                        case
-                        (SpecialType.System_SByte, SpecialType.System_Byte):
-                        case
-                        (SpecialType.System_Byte, SpecialType.System_SByte):
-                        case
-                        (SpecialType.System_Int16, SpecialType.System_UInt16):
-                        case
-                        (SpecialType.System_UInt16, SpecialType.System_Int16):
-                        case
-                        (SpecialType.System_Int32, SpecialType.System_UInt32):
-                        case
-                        (SpecialType.System_UInt32, SpecialType.System_Int32):
-                        case
-                        (SpecialType.System_Int64, SpecialType.System_UInt64):
-                        case
-                        (SpecialType.System_UInt64, SpecialType.System_Int64):
-                        case
-                        (SpecialType.System_IntPtr, SpecialType.System_UIntPtr):
-                        case
-                        (SpecialType.System_UIntPtr, SpecialType.System_IntPtr):
+                        case (SpecialType.System_SByte, SpecialType.System_Byte):
+                        case (SpecialType.System_Byte, SpecialType.System_SByte):
+                        case (SpecialType.System_Int16, SpecialType.System_UInt16):
+                        case (SpecialType.System_UInt16, SpecialType.System_Int16):
+                        case (SpecialType.System_Int32, SpecialType.System_UInt32):
+                        case (SpecialType.System_UInt32, SpecialType.System_Int32):
+                        case (SpecialType.System_Int64, SpecialType.System_UInt64):
+                        case (SpecialType.System_UInt64, SpecialType.System_Int64):
+                        case (SpecialType.System_IntPtr, SpecialType.System_UIntPtr):
+                        case (SpecialType.System_UIntPtr, SpecialType.System_IntPtr):
 
                         // The following support behavior of the CLR that violates the CLI
                         // and C# specifications, but we implement them because that is the
                         // behavior on 32-bit runtimes.
-                        case
-                        (SpecialType.System_Int32, SpecialType.System_IntPtr):
-                        case
-                        (SpecialType.System_Int32, SpecialType.System_UIntPtr):
-                        case
-                        (SpecialType.System_UInt32, SpecialType.System_IntPtr):
-                        case
-                        (SpecialType.System_UInt32, SpecialType.System_UIntPtr):
-                        case
-                        (SpecialType.System_IntPtr, SpecialType.System_Int32):
-                        case
-                        (SpecialType.System_IntPtr, SpecialType.System_UInt32):
-                        case
-                        (SpecialType.System_UIntPtr, SpecialType.System_Int32):
-                        case
-                        (SpecialType.System_UIntPtr, SpecialType.System_UInt32):
+                        case (SpecialType.System_Int32, SpecialType.System_IntPtr):
+                        case (SpecialType.System_Int32, SpecialType.System_UIntPtr):
+                        case (SpecialType.System_UInt32, SpecialType.System_IntPtr):
+                        case (SpecialType.System_UInt32, SpecialType.System_UIntPtr):
+                        case (SpecialType.System_IntPtr, SpecialType.System_Int32):
+                        case (SpecialType.System_IntPtr, SpecialType.System_UInt32):
+                        case (SpecialType.System_UIntPtr, SpecialType.System_Int32):
+                        case (SpecialType.System_UIntPtr, SpecialType.System_UInt32):
 
                         // The following support behavior of the CLR that violates the CLI
                         // and C# specifications, but we implement them because that is the
                         // behavior on 64-bit runtimes.
-                        case
-                        (SpecialType.System_Int64, SpecialType.System_IntPtr):
-                        case
-                        (SpecialType.System_Int64, SpecialType.System_UIntPtr):
-                        case
-                        (SpecialType.System_UInt64, SpecialType.System_IntPtr):
-                        case
-                        (SpecialType.System_UInt64, SpecialType.System_UIntPtr):
-                        case
-                        (SpecialType.System_IntPtr, SpecialType.System_Int64):
-                        case
-                        (SpecialType.System_IntPtr, SpecialType.System_UInt64):
-                        case
-                        (SpecialType.System_UIntPtr, SpecialType.System_Int64):
-                        case
-                        (SpecialType.System_UIntPtr, SpecialType.System_UInt64):
+                        case (SpecialType.System_Int64, SpecialType.System_IntPtr):
+                        case (SpecialType.System_Int64, SpecialType.System_UIntPtr):
+                        case (SpecialType.System_UInt64, SpecialType.System_IntPtr):
+                        case (SpecialType.System_UInt64, SpecialType.System_UIntPtr):
+                        case (SpecialType.System_IntPtr, SpecialType.System_Int64):
+                        case (SpecialType.System_IntPtr, SpecialType.System_UInt64):
+                        case (SpecialType.System_UIntPtr, SpecialType.System_Int64):
+                        case (SpecialType.System_UIntPtr, SpecialType.System_UInt64):
                             return true;
 
                         default:
@@ -2006,8 +1968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public bool Equals(DagState? x, DagState? y)
             {
-                RoslynDebug.Assert(x is { });
-                RoslynDebug.Assert(y is { });
+                RoslynDebug.Assert(x is{ });
+                RoslynDebug.Assert(y is{ });
                 return x == y || x.Cases.SequenceEqual(y.Cases, (a, b) => a.Equals(b));
             }
 
@@ -2367,20 +2329,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // In the specific case of a null check following by a type test, we skip the
                             // null check and perform the type test directly.  That's because the type test
                             // has the side-effect of performing the null check for us.
-                            case One
-                            {
-                                Test: { Kind: BoundKind.DagTypeTest } planB1
-                            }:
+                            case One { Test: { Kind: BoundKind.DagTypeTest } planB1 }:
                                 return (planA.Input == planB1.Input) ? planB1 : planA;
 
                             // In the specific case of a null check following by a value test (which occurs for
                             // pattern matching a string constant pattern), we skip the
                             // null check and perform the value test directly.  That's because the value test
                             // has the side-effect of performing the null check for us.
-                            case One
-                            {
-                                Test: { Kind: BoundKind.DagValueTest } planB2
-                            }:
+                            case One { Test: { Kind: BoundKind.DagValueTest } planB2 }:
                                 return (planA.Input == planB2.Input) ? planB2 : planA;
                         }
                     }

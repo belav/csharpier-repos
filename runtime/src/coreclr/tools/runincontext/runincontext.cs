@@ -232,9 +232,7 @@ class TestAssemblyLoadContextDelegating : TestAssemblyLoadContextBase
     }
 }
 
-public class UnloadFailedException : Exception
-{
-}
+public class UnloadFailedException : Exception { }
 
 public class TestRunner
 {

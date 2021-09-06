@@ -29,11 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (relation, value)
                 {
-                    case
-                    (Equal, true):
+                    case (Equal, true):
                         return BoolValueSet.OnlyTrue;
-                    case
-                    (Equal, false):
+                    case (Equal, false):
                         return BoolValueSet.OnlyFalse;
                     default:
                         // for error recovery

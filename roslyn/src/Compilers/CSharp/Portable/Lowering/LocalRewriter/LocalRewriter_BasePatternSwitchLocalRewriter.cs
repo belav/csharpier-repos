@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxNode? sectionSyntax = whenClauseSyntax is SwitchLabelSyntax l
                     ? l.Parent
                     : whenClauseSyntax;
-                Debug.Assert(sectionSyntax is { });
+                Debug.Assert(sectionSyntax is{ });
                 bool found = _switchArms.TryGetValue(
                     sectionSyntax,
                     out ArrayBuilder<BoundStatement>? result

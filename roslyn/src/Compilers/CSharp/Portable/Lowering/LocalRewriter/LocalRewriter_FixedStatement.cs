@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is { });
+            Debug.Assert(rewrittenBody is{ });
             statementBuilder.Add(rewrittenBody);
             statementBuilder.Add(_factory.HiddenSequencePoint());
 
@@ -101,7 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool IsInTryBlock(BoundFixedStatement boundFixed)
         {
             SyntaxNode? node = boundFixed.Syntax.Parent;
-            Debug.Assert(node is { });
+            Debug.Assert(node is{ });
             while (node != null)
             {
                 switch (node.Kind())
@@ -161,7 +161,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.FinallyClause:
                         // Skip past the enclosing try to avoid a false positive.
                         node = node.Parent;
-                        Debug.Assert(node is { } && node.Kind() == SyntaxKind.TryStatement);
+                        Debug.Assert(node is{ } && node.Kind() == SyntaxKind.TryStatement);
                         node = node.Parent;
                         break;
                     default:
@@ -238,11 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             else if (
-                fixedCollectionInitializer.Expression.Type
-                is
-                {
-                    SpecialType: SpecialType.System_String
-                }
+                fixedCollectionInitializer.Expression.Type is
+                { SpecialType: SpecialType.System_String }
             ) {
                 return InitializeFixedStatementStringLocal(
                     localDecl,
@@ -292,7 +289,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
-            Debug.Assert(initializerExpr.Type is { TypeKind: TypeKind.Pointer });
+            Debug.Assert(initializerExpr.Type is{ TypeKind: TypeKind.Pointer });
 
             // initializer expr should be either an address(&) of something or a fixed field access.
             // either should lower into addressof
@@ -373,12 +370,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
-            Debug.Assert(initializerExpr.Type is { });
+            Debug.Assert(initializerExpr.Type is{ });
 
             var initializerType = initializerExpr.Type;
             var initializerSyntax = initializerExpr.Syntax;
             var getPinnableMethod = fixedInitializer.GetPinnableOpt;
-            Debug.Assert(getPinnableMethod is { });
+            Debug.Assert(getPinnableMethod is{ });
 
             // intervening parens may have been skipped by the binder; find the declarator
             VariableDeclaratorSyntax? declarator =
@@ -490,7 +487,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
             TypeSymbol? initializerType = initializerExpr.Type;
-            Debug.Assert(initializerType is { });
+            Debug.Assert(initializerType is{ });
 
             // intervening parens may have been skipped by the binder; find the declarator
             VariableDeclaratorSyntax? declarator =
@@ -595,7 +592,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol localType = localSymbol.Type;
             BoundExpression initializerExpr = VisitExpression(fixedInitializer.Expression);
             TypeSymbol? initializerType = initializerExpr.Type;
-            Debug.Assert(initializerType is { });
+            Debug.Assert(initializerType is{ });
 
             pinnedTemp = factory.SynthesizedLocal(initializerType, isPinned: true);
             ArrayTypeSymbol arrayType = (ArrayTypeSymbol)pinnedTemp.Type;

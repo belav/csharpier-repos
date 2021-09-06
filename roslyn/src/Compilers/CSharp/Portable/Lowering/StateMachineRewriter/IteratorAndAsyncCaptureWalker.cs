@@ -157,11 +157,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                   =>
                   // in Debug build hoist all parameters that can be hoisted:
                   !parameter.Type.IsRestrictedType(),
-                LocalSymbol{
-                    IsConst: false,
-                    IsPinned: false,
-                    IsRef: false
-                } local
+                LocalSymbol { IsConst: false, IsPinned: false, IsRef: false } local
                   =>
                   // hoist all user-defined locals and long-lived temps that can be hoisted:
                   local.SynthesizedKind.MustSurviveStateMachineSuspension()
@@ -256,16 +252,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             switch (variableInitializer)
             {
-                case BoundLocal
-                {
-                    LocalSymbol: var symbol
-                }:
+                case BoundLocal { LocalSymbol: var symbol }:
                     CaptureVariable(symbol, syntax);
                     break;
-                case BoundParameter
-                {
-                    ParameterSymbol: var symbol
-                }:
+                case BoundParameter { ParameterSymbol: var symbol }:
                     CaptureVariable(symbol, syntax);
                     break;
                 case BoundFieldAccess
@@ -378,11 +368,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             base.VisitAssignmentOperator(node);
             // for compiler-generated ref local temp, save the initializer.
             if (
-                node
-                is
+                node is
                 {
                     IsRef: true,
-                    Left: BoundLocal{ LocalSymbol: LocalSymbol{ IsCompilerGenerated: true } local }
+                    Left: BoundLocal
+                    {
+                        LocalSymbol: LocalSymbol { IsCompilerGenerated: true } local
+                    }
                 }
             )
                 _boundRefLocalInitializers[local] = node.Right;

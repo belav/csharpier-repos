@@ -134,8 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                 if (
                     blockParent
                     is MemberDeclarationSyntax
-                    or AccessorDeclarationSyntax
-                    or AnonymousFunctionExpressionSyntax
+                        or AccessorDeclarationSyntax
+                        or AnonymousFunctionExpressionSyntax
                 ) {
                     if (parent.DescendantNodes().OfType<StatementSyntax>().Count() <= 1)
                         return false;

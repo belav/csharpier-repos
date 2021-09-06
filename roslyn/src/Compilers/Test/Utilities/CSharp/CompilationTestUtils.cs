@@ -433,7 +433,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 assertTypeInfoNull(iop, typeInfo);
             }
-            else if (iop is { Type:  { } })
+            else if (iop is { Type: { } })
             {
                 Assert.Equal(typeInfo.Type.NullableAnnotation, iop.Type.NullableAnnotation);
             }
@@ -463,7 +463,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 Assert.Null(iop?.Type);
             }
-            else if (iop is { Type:  { } })
+            else if (iop is { Type: { } })
             {
                 Assert.Equal(
                     typeInfo.ConvertedType.NullableAnnotation,
@@ -486,15 +486,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         case PostfixUnaryExpressionSyntax
                         {
                             RawKind: (int)SyntaxKind.SuppressNullableWarningExpression,
-                            Operand:  { } operand
+                            Operand: { } operand
                         }:
                             expression = operand;
                             continue;
 
-                        case ParenthesizedExpressionSyntax
-                        {
-                            Expression:  { } nested
-                        }:
+                        case ParenthesizedExpressionSyntax { Expression: { } nested }:
                             expression = nested;
                             continue;
 
@@ -514,10 +511,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     // For both of these types, their `IOperation.Type` property represents the converted type,
                     // because any conversions that need to occur are pushed into the branches. However, the
                     // `TypeInfo.Type` property represents the natural type of the switch expression.
-                    case ITupleOperation
-                    {
-                        NaturalType: null
-                    }:
+                    case ITupleOperation { NaturalType: null }:
                     case ISwitchExpressionOperation _:
                         Assert.True(
                             iop.Type?.NullableAnnotation
@@ -681,10 +675,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                             continue;
                         case ExpressionSyntax expr:
                             return expr;
-                        case
-                        {
-                            Parent: var parent
-                        }:
+                        case { Parent: var parent }:
                             node = parent;
                             continue;
                     }

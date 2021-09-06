@@ -140,7 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 statement.CheckLocalsDefined();
                 var loweredStatement = localRewriter.VisitStatement(statement);
-                Debug.Assert(loweredStatement is { });
+                Debug.Assert(loweredStatement is{ });
                 loweredStatement.CheckLocalsDefined();
                 sawLambdas = localRewriter._sawLambdas;
                 sawLocalFunctions = localRewriter._availableLocalFunctionOrdinal != 0;
@@ -257,7 +257,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 visited == null
                     || visited.HasErrors
                     || ReferenceEquals(visited.Type, node.Type)
-                    || visited.Type is { }
+                    || visited.Type is{ }
                         && visited.Type.Equals(
                             node.Type,
                             TypeCompareKind.IgnoreDynamicAndTupleNames
@@ -405,15 +405,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             switch (instrumenter)
             {
-                case DynamicAnalysisInjector
-                {
-                    Previous: var previous
-                }:
+                case DynamicAnalysisInjector { Previous: var previous }:
                     return RemoveDynamicAnalysisInjectors(previous);
-                case DebugInfoInjector
-                {
-                    Previous: var previous
-                } injector:
+                case DebugInfoInjector { Previous: var previous } injector:
                     var newPrevious = RemoveDynamicAnalysisInjectors(previous);
                     if ((object)newPrevious == previous)
                     {
@@ -473,7 +467,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private BoundExpression PlaceholderReplacement(BoundValuePlaceholderBase placeholder)
         {
-            Debug.Assert(_placeholderReplacementMapDoNotUseDirectly is { });
+            Debug.Assert(_placeholderReplacementMapDoNotUseDirectly is{ });
             var value = _placeholderReplacementMapDoNotUseDirectly[placeholder];
             AssertPlaceholderReplacement(placeholder, value);
             return value;
@@ -485,7 +479,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression value
         ) {
             Debug.Assert(
-                value.Type is { }
+                value.Type is{ }
                     && value.Type.Equals(placeholder.Type, TypeCompareKind.AllIgnoreOptions)
             );
         }
@@ -518,8 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private void RemovePlaceholderReplacement(BoundValuePlaceholderBase placeholder)
         {
-            Debug.Assert(placeholder is { });
-            Debug.Assert(_placeholderReplacementMapDoNotUseDirectly is { });
+            Debug.Assert(placeholder is{ });
+            Debug.Assert(_placeholderReplacementMapDoNotUseDirectly is{ });
             bool removed = _placeholderReplacementMapDoNotUseDirectly.Remove(placeholder);
 
             Debug.Assert(removed);
@@ -548,7 +542,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static BoundExpression BadExpression(BoundExpression node)
         {
-            Debug.Assert(node.Type is { });
+            Debug.Assert(node.Type is{ });
             return BadExpression(node.Syntax, node.Type, ImmutableArray.Create(node));
         }
 
@@ -601,7 +595,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isOptional: isOptional,
                 location: location
             );
-            return symbol is { };
+            return symbol is{ };
         }
 
         /// <summary>
@@ -683,7 +677,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(node.GetTypeFromHandle is null);
 
             var sourceType = (BoundTypeExpression?)this.Visit(node.SourceType);
-            Debug.Assert(sourceType is { });
+            Debug.Assert(sourceType is{ });
             var type = this.VisitType(node.Type);
 
             // Emit needs this helper
@@ -745,7 +739,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             (BoundExpressionStatement)block.Statements.Single(),
                             suppressInstrumentation: true
                         );
-                        Debug.Assert(statement is { });
+                        Debug.Assert(statement is{ });
                         statements.Add(
                             block.Update(
                                 block.Locals,
@@ -891,7 +885,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // array[Range] is compiled to:
                 // System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray(array, Range)
 
-                Debug.Assert(node.Expression.Type is { TypeKind: TypeKind.Array });
+                Debug.Assert(node.Expression.Type is{ TypeKind: TypeKind.Array });
                 var elementType =
                     ((ArrayTypeSymbol)node.Expression.Type).ElementTypeWithAnnotations;
 
@@ -925,11 +919,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                syntax is ExpressionSyntax { Parent:  { } parent }
+                syntax is ExpressionSyntax { Parent: { } parent }
                 && parent.Kind() == SyntaxKind.EqualsValueClause
             ) // Should be the initial value.
             {
-                Debug.Assert(parent.Parent is { });
+                Debug.Assert(parent.Parent is{ });
                 switch (parent.Parent.Kind())
                 {
                     case SyntaxKind.VariableDeclarator:
@@ -1090,7 +1084,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (eventAccess.EventSymbol.IsStatic)
                             return true;
 
-                        Debug.Assert(eventAccess.ReceiverOpt is { });
+                        Debug.Assert(eventAccess.ReceiverOpt is{ });
                         return CanBePassedByReference(eventAccess.ReceiverOpt);
                     }
 
@@ -1100,7 +1094,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var fieldAccess = (BoundFieldAccess)expr;
                     if (!fieldAccess.FieldSymbol.IsStatic)
                     {
-                        Debug.Assert(fieldAccess.ReceiverOpt is { });
+                        Debug.Assert(fieldAccess.ReceiverOpt is{ });
                         return CanBePassedByReference(fieldAccess.ReceiverOpt);
                     }
 

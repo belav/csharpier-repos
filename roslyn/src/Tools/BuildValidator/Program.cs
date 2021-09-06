@@ -198,7 +198,7 @@ namespace BuildValidator
                         continue;
                     }
 
-                    if (Util.GetPortableExecutableInfo(filePath) is not  { } peInfo)
+                    if (Util.GetPortableExecutableInfo(filePath) is not { } peInfo)
                     {
                         logger.LogError($"Skipping non-pe file {filePath}");
                         continue;

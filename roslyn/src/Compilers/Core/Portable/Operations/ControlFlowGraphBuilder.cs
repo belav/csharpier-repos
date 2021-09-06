@@ -327,12 +327,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 if (current.HasCondition)
                 {
                     if (
-                        current.BranchValue.GetConstantValue()
-                        is
-                        {
-                            IsBoolean: true,
-                            BooleanValue: bool constant
-                        }
+                        current.BranchValue.GetConstantValue() is
+                        { IsBoolean: true, BooleanValue: bool constant }
                     ) {
                         if (
                             constant == (current.ConditionKind == ControlFlowConditionKind.WhenTrue)
@@ -1651,10 +1647,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         statements.AsSpan()[(startIndex + 1)..]
                     );
                     return true;
-                case ILabeledOperation
-                {
-                    Operation:  { }
-                } labelOperation:
+                case ILabeledOperation { Operation: { } } labelOperation:
                     return visitPossibleUsingDeclarationInLabel(labelOperation);
                 default:
                     VisitStatement(operation);
@@ -1824,7 +1817,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 // afterif:
                 // result = capture
 
-                Debug.Assert(operation is { WhenTrue: not null, WhenFalse: not null });
+                Debug.Assert(operation is{ WhenTrue: not null, WhenFalse: not null });
 
                 SpillEvalStack();
 
@@ -3875,7 +3868,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ITypeSymbol booleanType
         ) {
             Debug.Assert(ITypeSymbolHelpers.IsBooleanType(booleanType));
-            ConstantValue? constantValue = operand.GetConstantValue() is { IsNull: var isNull }
+            ConstantValue? constantValue = operand.GetConstantValue() is{ IsNull: var isNull }
                 ? ConstantValue.Create(isNull)
                 : null;
             return new IsNullOperation(operand.Syntax, operand, booleanType, constantValue);

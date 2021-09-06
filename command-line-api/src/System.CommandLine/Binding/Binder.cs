@@ -27,7 +27,7 @@ namespace System.CommandLine.Binding
                 }
 
                 if (
-                    TypeDescriptor.GetConverter(type) is { } typeConverter
+                    TypeDescriptor.GetConverter(type) is{ } typeConverter
                     && typeConverter.CanConvertFrom(typeof(string))
                 ) {
                     return true;

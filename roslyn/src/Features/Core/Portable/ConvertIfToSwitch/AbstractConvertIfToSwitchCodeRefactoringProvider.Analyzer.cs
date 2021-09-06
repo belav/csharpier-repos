@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                     {
                         var nextStatement = operations[1];
                         if (
-                            nextStatement is IReturnOperation { ReturnedValue:  { } }
-                            || nextStatement is IThrowOperation { Exception:  { } }
+                            nextStatement is IReturnOperation { ReturnedValue: { } }
+                            || nextStatement is IThrowOperation { Exception: { } }
                         ) {
                             defaultBodyOpt = nextStatement;
                         }
@@ -298,20 +298,14 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             ) {
                 switch (operation)
                 {
-                    case IBinaryOperation
-                    {
-                        OperatorKind: ConditionalAnd
-                    } op
+                    case IBinaryOperation { OperatorKind: ConditionalAnd } op
                           when Supports(Feature.RangePattern)
                               && GetRangeBounds(op)
                                   is
                                   (TExpressionSyntax lower, TExpressionSyntax higher):
                         return new AnalyzedPattern.Range(lower, higher);
 
-                    case IBinaryOperation
-                    {
-                        OperatorKind: BinaryOperatorKind.Equals
-                    } op:
+                    case IBinaryOperation { OperatorKind: BinaryOperatorKind.Equals } op:
                         return DetermineConstant(op) switch
                         {
                             ConstantResult.Left when op.LeftOperand.Syntax is TExpressionSyntax left
@@ -322,10 +316,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                             _ => null
                         };
 
-                    case IBinaryOperation
-                    {
-                        OperatorKind: NotEquals
-                    } op when Supports(Feature.InequalityPattern):
+                    case IBinaryOperation { OperatorKind: NotEquals } op
+                          when Supports(Feature.InequalityPattern):
                         return ParseRelationalPattern(op);
 
                     case IBinaryOperation op
@@ -335,10 +327,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
                     // Check this below the cases that produce Relational/Ranges.  We would prefer to use those if
                     // available before utilizing a CaseGuard.
-                    case IBinaryOperation
-                    {
-                        OperatorKind: ConditionalAnd
-                    } op when Supports(Feature.AndPattern | Feature.CaseGuard):
+                    case IBinaryOperation { OperatorKind: ConditionalAnd } op
+                          when Supports(Feature.AndPattern | Feature.CaseGuard):
                     {
                         var leftPattern = ParsePattern(op.LeftOperand, guards);
                         if (leftPattern == null)
@@ -417,12 +407,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 if (
                     !(
-                        op
-                        is
-                        {
-                            LeftOperand: IBinaryOperation left,
-                            RightOperand: IBinaryOperation right
-                        }
+                        op is
+                        { LeftOperand: IBinaryOperation left, RightOperand: IBinaryOperation right }
                     )
                 ) {
                     return default;

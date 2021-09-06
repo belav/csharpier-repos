@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool Equals(BoundDagTemp other)
         {
-            return other is { }
+            return other is{ }
                 && this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions)
                 && object.Equals(this.Source, other.Source)
                 && this.Index == other.Index;

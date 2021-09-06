@@ -98,7 +98,7 @@ namespace Microsoft.Extensions.Internal
 
             if (!includeNonPublic)
             {
-                properties = properties.Where(property => property.SetMethod is { IsPublic: true });
+                properties = properties.Where(property => property.SetMethod is{ IsPublic: true });
             }
 
             return properties.Select(createActivateInfo).ToArray();

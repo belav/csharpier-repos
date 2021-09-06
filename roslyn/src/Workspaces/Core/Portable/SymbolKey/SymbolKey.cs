@@ -361,7 +361,7 @@ namespace Microsoft.CodeAnalysis
                 ILabelSymbol _ => true,
                 IRangeVariableSymbol _ => true,
                 ILocalSymbol _ => true,
-                IMethodSymbol{ MethodKind: MethodKind.LocalFunction } _ => true,
+                IMethodSymbol { MethodKind: MethodKind.LocalFunction } _ => true,
                 _ => false,
             };
     }

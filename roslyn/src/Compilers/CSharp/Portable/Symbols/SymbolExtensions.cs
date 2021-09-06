@@ -510,8 +510,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 property.GetOwnOrInheritedGetMethod()?.ReturnTypeFlowAnalysisAnnotations
                 ?? FlowAnalysisAnnotations.None;
             if (
-                property.GetOwnOrInheritedSetMethod()?.Parameters.Last().FlowAnalysisAnnotations
-                is { } setterAnnotations
+                property.GetOwnOrInheritedSetMethod()?.Parameters.Last().FlowAnalysisAnnotations is
+                { } setterAnnotations
             ) {
                 annotations |= setterAnnotations;
             }

@@ -93,12 +93,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     stringBuilder.Append('{').Append(nextFormatPosition++);
                     if (fillin.Alignment != null && !fillin.Alignment.HasErrors)
                     {
-                        Debug.Assert(fillin.Alignment.ConstantValue is { });
+                        Debug.Assert(fillin.Alignment.ConstantValue is{ });
                         stringBuilder.Append(',').Append(fillin.Alignment.ConstantValue.Int64Value);
                     }
                     if (fillin.Format != null && !fillin.Format.HasErrors)
                     {
-                        Debug.Assert(fillin.Format.ConstantValue is { });
+                        Debug.Assert(fillin.Format.ConstantValue is{ });
                         stringBuilder.Append(':').Append(fillin.Format.ConstantValue.StringValue);
                     }
                     stringBuilder.Append('}');
@@ -117,7 +117,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitInterpolatedString(BoundInterpolatedString node)
         {
-            Debug.Assert(node.Type is { SpecialType: SpecialType.System_String }); // if target-converted, we should not get here.
+            Debug.Assert(node.Type is{ SpecialType: SpecialType.System_String }); // if target-converted, we should not get here.
 
             BoundExpression? result;
 
@@ -148,7 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // this is one of the literal parts
                         Debug.Assert(
-                            part is BoundLiteral && part.ConstantValue is { StringValue:  { } }
+                            part is BoundLiteral && part.ConstantValue is { StringValue: { } }
                         );
                         part = _factory.StringLiteral(
                             ConstantValueUtils.UnescapeInterpolatedStringLiteral(
@@ -205,7 +205,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            Debug.Assert(result is { });
+            Debug.Assert(result is{ });
             if (!result.HasAnyErrors)
             {
                 result = VisitExpression(result); // lower the arguments AND handle expanded form, argument conversions, etc.

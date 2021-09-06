@@ -100,15 +100,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             switch (symbol)
             {
                 // Ignore constant values for nullability flow state
-                case IFieldSymbol
-                {
-                    HasConstantValue: true
-                }:
+                case IFieldSymbol { HasConstantValue: true }:
                     return default;
-                case ILocalSymbol
-                {
-                    HasConstantValue: true
-                }:
+                case ILocalSymbol { HasConstantValue: true }:
                     return default;
 
                 // Symbols with useful quick info

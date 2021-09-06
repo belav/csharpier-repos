@@ -530,7 +530,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
 
             var initializer = GetInitializerNode(node);
-            if (initializer is { Parent:  { } })
+            if (initializer is { Parent: { } })
             {
                 AddInitializerSuppressOperations(list, initializer.Parent, initializer.Expressions);
                 return;

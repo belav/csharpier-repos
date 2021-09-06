@@ -184,7 +184,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             };
 
         private static bool HasInitializer(SyntaxNode syntax) =>
-            syntax is PropertyDeclarationSyntax { Initializer:  { } };
+            syntax is PropertyDeclarationSyntax { Initializer: { } };
 
         public override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>
             ((BasePropertyDeclarationSyntax)CSharpSyntaxNode).AttributeLists;

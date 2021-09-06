@@ -380,10 +380,8 @@ namespace Roslyn.Utilities
             // there may be remaining old changes or remaining new changes (not both, and not neither)
             switch (oldIndex == oldChanges.Length, newIndex == newChanges.Length)
             {
-                case
-                (true, true):
-                case
-                (false, false):
+                case (true, true):
+                case (false, false):
                     throw new InvalidOperationException();
             }
 

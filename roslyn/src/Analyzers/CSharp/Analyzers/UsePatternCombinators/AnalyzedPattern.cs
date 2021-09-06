@@ -163,10 +163,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     null => null,
                     Not p => p.Pattern, // Avoid double negative
                     Relational p => new Relational(Negate(p.OperatorKind), p.Value, p.Target),
-                    Binary{
-                        Left: Not left,
-                        Right: Not right
-                    } p // Apply demorgans's law
+                    Binary { Left: Not left, Right: Not right } p // Apply demorgans's law
                       => Binary.TryCreate(left.Pattern, right.Pattern, !p.IsDisjunctive, p.Token),
                     _ => new Not(pattern, pattern.Target)
                 };

@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             if (
                 exprOrStatement is LocalFunctionStatementSyntax
                 {
-                    ExpressionBody:  { } localFunctionExpressionBody
+                    ExpressionBody: { } localFunctionExpressionBody
                 }
             ) {
                 // Expression-bodied local functions report CS0177 on the method name instead of the expression.

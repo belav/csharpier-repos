@@ -488,10 +488,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ).WithSuppression(defaultExpr.IsSuppressed);
                     }
                     break;
-                case BoundStackAllocArrayCreation
-                {
-                    Type: null
-                } boundStackAlloc:
+                case BoundStackAllocArrayCreation { Type: null } boundStackAlloc:
 
                     {
                         // This is a context in which the stackalloc could be either a pointer
@@ -11199,7 +11196,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            Debug.Assert(lengthOrCountProperty is { });
+            Debug.Assert(lengthOrCountProperty is{ });
 
             if (argIsIndex)
             {

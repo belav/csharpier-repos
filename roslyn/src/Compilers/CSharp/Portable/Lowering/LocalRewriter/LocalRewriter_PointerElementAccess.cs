@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BinaryOperatorKind additionKind = BinaryOperatorKind.Addition;
 
-            Debug.Assert(rewrittenExpression.Type is { });
-            Debug.Assert(rewrittenIndex.Type is { });
+            Debug.Assert(rewrittenExpression.Type is{ });
+            Debug.Assert(rewrittenIndex.Type is{ });
             switch (rewrittenIndex.Type.SpecialType)
             {
                 case SpecialType.System_Int32:

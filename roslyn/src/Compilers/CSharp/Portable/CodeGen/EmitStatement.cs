@@ -1598,7 +1598,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     (
                         local.ScopeDesignatorOpt?.Kind()
                         is SyntaxKind.SwitchSection
-                        or SyntaxKind.SwitchExpressionArm
+                            or SyntaxKind.SwitchExpressionArm
                     )
                 )
             ) {

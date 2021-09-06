@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression rewrittenArgument = VisitExpression(node.Argument);
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is { });
+            Debug.Assert(rewrittenBody is{ });
 
             TypeSymbol? argumentType = rewrittenArgument.Type;
             if (argumentType is null)

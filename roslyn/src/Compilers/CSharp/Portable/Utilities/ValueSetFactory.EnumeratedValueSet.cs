@@ -147,32 +147,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                         : (other, this);
                 switch (larger._included, smaller._included)
                 {
-                    case
-                    (true, true):
+                    case (true, true):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
                             larger._membersIncludedOrExcluded.Intersect(
                                 smaller._membersIncludedOrExcluded
                             )
                         );
-                    case
-                    (true, false):
+                    case (true, false):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
                             larger._membersIncludedOrExcluded.Except(
                                 smaller._membersIncludedOrExcluded
                             )
                         );
-                    case
-                    (false, false):
+                    case (false, false):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
                             larger._membersIncludedOrExcluded.Union(
                                 smaller._membersIncludedOrExcluded
                             )
                         );
-                    case
-                    (false, true):
+                    case (false, true):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
                             smaller._membersIncludedOrExcluded.Except(
@@ -195,32 +191,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                         : (other, this);
                 switch (larger._included, smaller._included)
                 {
-                    case
-                    (false, false):
+                    case (false, false):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
                             larger._membersIncludedOrExcluded.Intersect(
                                 smaller._membersIncludedOrExcluded
                             )
                         );
-                    case
-                    (false, true):
+                    case (false, true):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
                             larger._membersIncludedOrExcluded.Except(
                                 smaller._membersIncludedOrExcluded
                             )
                         );
-                    case
-                    (true, true):
+                    case (true, true):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
                             larger._membersIncludedOrExcluded.Union(
                                 smaller._membersIncludedOrExcluded
                             )
                         );
-                    case
-                    (true, false):
+                    case (true, false):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
                             smaller._membersIncludedOrExcluded.Except(

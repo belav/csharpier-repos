@@ -2235,10 +2235,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case LocalSymbol _:
                 case ParameterSymbol _:
-                case MethodSymbol
-                {
-                    MethodKind: MethodKind.LambdaMethod
-                }:
+                case MethodSymbol { MethodKind: MethodKind.LambdaMethod }:
                     return RemapSymbolIfNecessaryCore(symbol);
 
                 default:
@@ -2599,10 +2596,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             break;
                         }
-                        case BoundConvertedTupleLiteral
-                        {
-                            SourceTuple: BoundTupleLiteral original
-                        }:
+                        case BoundConvertedTupleLiteral { SourceTuple: BoundTupleLiteral original }:
                         {
                             // The bound tree fully binds tuple literals. From the language point of
                             // view, however, converted tuple literals represent tuple conversions
@@ -4188,7 +4182,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         expr.Syntax.Kind()
                         is SyntaxKind.ObjectCreationExpression
-                        or SyntaxKind.ImplicitObjectCreationExpression
+                            or SyntaxKind.ImplicitObjectCreationExpression
                     ) {
                         if (resultKind == LookupResultKind.NotCreatable)
                         {

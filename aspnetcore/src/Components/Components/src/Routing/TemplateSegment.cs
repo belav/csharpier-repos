@@ -158,29 +158,13 @@ namespace Microsoft.AspNetCore.Components.Routing
                     Constraints: { Length: > 0 }
                 }
                   => $"{{{Value}:{string.Join(':', Constraints.Select(c => c.ToString()))}}}",
-                {
-                    IsParameter: true,
-                    IsOptional: true,
-                    Constraints: { Length: 0 }
-                }
+                { IsParameter: true, IsOptional: true, Constraints: { Length: 0 } }
                   => $"{{{Value}?}}",
-                {
-                    IsParameter: true,
-                    IsOptional: true,
-                    Constraints: { Length: > 0 }
-                }
+                { IsParameter: true, IsOptional: true, Constraints: { Length: > 0 } }
                   => $"{{{Value}:{string.Join(':', Constraints.Select(c => c.ToString()))}?}}",
-                {
-                    IsParameter: true,
-                    IsCatchAll: true,
-                    Constraints: { Length: 0 }
-                }
+                { IsParameter: true, IsCatchAll: true, Constraints: { Length: 0 } }
                   => $"{{*{Value}}}",
-                {
-                    IsParameter: true,
-                    IsCatchAll: true,
-                    Constraints: { Length: > 0 }
-                }
+                { IsParameter: true, IsCatchAll: true, Constraints: { Length: > 0 } }
                   => $"{{*{Value}:{string.Join(':', Constraints.Select(c => c.ToString()))}?}}",
                 { IsParameter: false } => Value,
                 _ => throw new InvalidOperationException("Invalid template segment.")

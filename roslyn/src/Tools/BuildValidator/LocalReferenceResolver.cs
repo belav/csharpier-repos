@@ -154,7 +154,7 @@ namespace BuildValidator
                         SearchOption.AllDirectories
                     )
                 ) {
-                    if (Util.GetPortableExecutableInfo(fileInfo.FullName) is not  { } peInfo)
+                    if (Util.GetPortableExecutableInfo(fileInfo.FullName) is not { } peInfo)
                     {
                         _logger.LogWarning($@"Could not read MVID from ""{fileInfo.FullName}""");
                         continue;

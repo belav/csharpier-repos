@@ -156,20 +156,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 switch (op)
                 {
-                    case IReturnOperation
-                    {
-                        ReturnedValue:  { }
-                    }:
-                    case IThrowOperation
-                    {
-                        Exception:  { }
-                    }:
+                    case IReturnOperation { ReturnedValue: { } }:
+                    case IThrowOperation { Exception: { } }:
                         return op.Kind;
 
-                    case IBlockOperation
-                    {
-                        Operations: { Length: 1 } statements
-                    }:
+                    case IBlockOperation { Operations: { Length: 1 } statements }:
                         return GetSwitchArmKind(statements[0]);
                 }
 

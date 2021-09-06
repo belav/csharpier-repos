@@ -307,13 +307,9 @@ namespace AutoMapper.Execution
                 static Expression GetSetter(MemberExpression memberExpression) =>
                     memberExpression.Member switch
                     {
-                        PropertyInfo{
-                            CanWrite: true
-                        } property
+                        PropertyInfo { CanWrite: true } property
                           => Property(memberExpression.Expression, property),
-                        FieldInfo{
-                            IsInitOnly: false
-                        } field
+                        FieldInfo { IsInitOnly: false } field
                           => Field(memberExpression.Expression, field),
                         _ => null,
                     };
@@ -350,21 +346,13 @@ namespace AutoMapper.Execution
         private Expression CreateNewDestinationFunc() =>
             _typeMap switch
             {
-                {
-                    CustomCtorExpression: LambdaExpression constructUsing
-                }
+                { CustomCtorExpression: LambdaExpression constructUsing }
                   => constructUsing.ReplaceParameters(Source),
-                {
-                    CustomCtorFunction: LambdaExpression constructUsingFunc
-                }
+                { CustomCtorFunction: LambdaExpression constructUsingFunc }
                   => constructUsingFunc.ReplaceParameters(Source, ContextParameter),
-                {
-                    ConstructorMap: { CanResolve: true } constructorMap
-                }
+                { ConstructorMap: { CanResolve: true } constructorMap }
                   => ConstructorMapping(constructorMap),
-                {
-                    DestinationTypeToUse: { IsInterface: true } interfaceType
-                }
+                { DestinationTypeToUse: { IsInterface: true } interfaceType }
                   => _typeMap.AsProxy
                       ? Call(CreateProxyMethod, Constant(interfaceType))
                       : Throw(
@@ -377,9 +365,7 @@ namespace AutoMapper.Execution
                             ),
                             interfaceType
                         ),
-                {
-                    ConstructDestinationUsingServiceLocator: true
-                }
+                { ConstructDestinationUsingServiceLocator: true }
                   => ServiceLocator(DestinationType),
                 _ => ObjectFactory.GenerateConstructorExpression(DestinationType)
             };
@@ -578,37 +564,27 @@ namespace AutoMapper.Execution
             var destinationPropertyType = memberMap.DestinationType;
             var valueResolverFunc = memberMap switch
             {
-                {
-                    ValueConverterConfig:  { }
-                }
+                { ValueConverterConfig: { } }
                   => ToType(
                       BuildConvertCall(customSource, memberMap, destValueExpr),
                       destinationPropertyType
                   ),
-                {
-                    ValueResolverConfig:  { }
-                }
+                { ValueResolverConfig: { } }
                   => BuildResolveCall(customSource, destValueExpr, memberMap),
-                {
-                    CustomMapFunction: LambdaExpression function
-                }
+                { CustomMapFunction: LambdaExpression function }
                   => function.ConvertReplaceParameters(
                       customSource,
                       _destination,
                       destValueExpr,
                       ContextParameter
                   ),
-                {
-                    CustomMapExpression: LambdaExpression mapFrom
-                }
+                { CustomMapExpression: LambdaExpression mapFrom }
                   => CustomMapExpression(
                       mapFrom.ReplaceParameters(customSource),
                       destinationPropertyType,
                       destValueExpr
                   ),
-                {
-                    SourceMembers: { Length: > 0 }
-                }
+                { SourceMembers: { Length: > 0 } }
                   => memberMap.ChainSourceMembers(
                       customSource,
                       destinationPropertyType,

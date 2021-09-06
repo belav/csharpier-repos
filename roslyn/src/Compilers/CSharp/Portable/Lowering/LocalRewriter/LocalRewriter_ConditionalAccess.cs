@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundExpression? RewriteConditionalAccess(BoundConditionalAccess node, bool used)
         {
             Debug.Assert(!_inExpressionLambda);
-            Debug.Assert(node.AccessExpression.Type is { });
+            Debug.Assert(node.AccessExpression.Type is{ });
 
             var loweredReceiver = this.VisitExpression(node.Receiver);
-            Debug.Assert(loweredReceiver.Type is { });
+            Debug.Assert(loweredReceiver.Type is{ });
             var receiverType = loweredReceiver.Type;
 
             // Check trivial case
@@ -117,7 +117,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(loweredAccessExpression != null);
-            Debug.Assert(loweredAccessExpression.Type is { });
+            Debug.Assert(loweredAccessExpression.Type is{ });
             _currentConditionalAccessTarget = previousConditionalAccessTarget;
 
             TypeSymbol type = this.VisitType(node.Type);
@@ -166,7 +166,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (loweringKind)
             {
                 case ConditionalAccessLoweringKind.LoweredConditionalAccess:
-                    Debug.Assert(loweredReceiver.Type is { });
+                    Debug.Assert(loweredReceiver.Type is{ });
                     result = new BoundLoweredConditionalAccess(
                         node.Syntax,
                         loweredReceiver,
@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case ConditionalAccessLoweringKind.ConditionalCaptureReceiverByVal:
                     // capture the receiver into a temp
-                    Debug.Assert(temp is { });
+                    Debug.Assert(temp is{ });
                     loweredReceiver = _factory.MakeSequence(
                         _factory.AssignmentExpression(_factory.Local(temp), loweredReceiver),
                         _factory.Local(temp)
@@ -232,7 +232,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitConditionalReceiver(BoundConditionalReceiver node)
         {
             var newtarget = _currentConditionalAccessTarget;
-            Debug.Assert(newtarget is { Type:  { } });
+            Debug.Assert(newtarget is{ Type: { } });
 
             if (newtarget.Type.IsNullableType())
             {

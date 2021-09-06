@@ -577,10 +577,7 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 argumentOperation.ArgumentKind == ArgumentKind.ParamArray
                 && parameterSymbol.Type is IArrayTypeSymbol paramArrayParameter
                 && argumentExpressionOperation
-                    is IArrayCreationOperation
-                    {
-                        Initializer:  { } initializer
-                    }
+                    is IArrayCreationOperation { Initializer: { } initializer }
                 && argumentOperation.IsImplicit
             ) {
                 // if this argument is a param array & the array creation operation is implicitly generated,

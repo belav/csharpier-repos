@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitUsingStatement(BoundUsingStatement node)
         {
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is { });
+            Debug.Assert(rewrittenBody is{ });
 
             BoundBlock tryBlock =
                 rewrittenBody.Kind == BoundKind.Block
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                Debug.Assert(node.DeclarationsOpt is { });
+                Debug.Assert(node.DeclarationsOpt is{ });
                 SyntaxToken awaitKeyword =
                     node.Syntax.Kind() == SyntaxKind.UsingStatement
                         ? ((UsingStatementSyntax)node.Syntax).AwaitKeyword
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             //   using(ResourceType temp = expression) statement;
             //
 
-            Debug.Assert(rewrittenExpression.Type is { });
+            Debug.Assert(rewrittenExpression.Type is{ });
             TypeSymbol expressionType = rewrittenExpression.Type;
             SyntaxNode expressionSyntax = rewrittenExpression.Syntax;
             UsingStatementSyntax usingSyntax = (UsingStatementSyntax)node.Syntax;
@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundAwaitableInfo? awaitOpt,
             MethodArgumentInfo? patternDisposeInfo
         ) {
-            Debug.Assert(localDeclaration.InitializerOpt is { });
+            Debug.Assert(localDeclaration.InitializerOpt is{ });
             SyntaxNode declarationSyntax = localDeclaration.Syntax;
 
             LocalSymbol localSymbol = localDeclaration.LocalSymbol;
@@ -271,7 +271,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             BoundStatement? rewrittenDeclaration = VisitStatement(localDeclaration);
-            Debug.Assert(rewrittenDeclaration is { });
+            Debug.Assert(rewrittenDeclaration is{ });
 
             // If we know that the expression is null, then we know that the null check in the finally block
             // will fail, and the Dispose call will never happen.  That is, the finally block will have no effect.

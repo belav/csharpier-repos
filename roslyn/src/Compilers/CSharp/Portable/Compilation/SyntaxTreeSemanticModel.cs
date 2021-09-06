@@ -223,8 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
                 case RecordDeclarationSyntax
                 {
-                    ParameterList:  { },
-                    PrimaryConstructorBaseType:  { }
+                    ParameterList: { },
+                    PrimaryConstructorBaseType: { }
                 } recordDeclaration
                       when TryGetSynthesizedRecordConstructor(recordDeclaration)
                           is SynthesizedRecordConstructor:
@@ -3023,11 +3023,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 symbol
                     is LocalSymbol
-                    or ParameterSymbol
-                    or MethodSymbol
-                    {
-                        MethodKind: MethodKind.LambdaMethod
-                    }
+                        or ParameterSymbol
+                        or MethodSymbol { MethodKind: MethodKind.LambdaMethod }
             );
 
             if (symbol.Locations.IsDefaultOrEmpty)
@@ -3138,7 +3135,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case PrimaryConstructorBaseTypeSyntax
                 {
-                    Parent: BaseListSyntax{ Parent: RecordDeclarationSyntax recordDeclaration }
+                    Parent: BaseListSyntax { Parent: RecordDeclarationSyntax recordDeclaration }
                 } baseType
                       when recordDeclaration.PrimaryConstructorBaseType == declaredNode
                           && TryGetSynthesizedRecordConstructor(recordDeclaration)

@@ -214,12 +214,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     CancellationToken cancellationToken
                 ) {
                     if (
-                        document.SemanticModel.GetConstantValue(expression, cancellationToken)
-                        is
-                        {
-                            HasValue: true,
-                            Value: var value
-                        }
+                        document.SemanticModel.GetConstantValue(expression, cancellationToken) is
+                        { HasValue: true, Value: var value }
                     ) {
                         var syntaxKindsService =
                             document.Document.GetRequiredLanguageService<ISyntaxKindsService>();

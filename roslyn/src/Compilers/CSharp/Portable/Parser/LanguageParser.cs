@@ -7529,8 +7529,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     Debug.Assert(
                         result
                             is ScanTypeFlags.GenericTypeOrExpression
-                            or ScanTypeFlags.GenericTypeOrMethod
-                            or ScanTypeFlags.NonGenericTypeOrExpression
+                                or ScanTypeFlags.GenericTypeOrMethod
+                                or ScanTypeFlags.NonGenericTypeOrExpression
                     );
                 }
 
@@ -7555,8 +7555,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     Debug.Assert(
                         result
                             is ScanTypeFlags.GenericTypeOrExpression
-                            or ScanTypeFlags.GenericTypeOrMethod
-                            or ScanTypeFlags.NonGenericTypeOrExpression
+                                or ScanTypeFlags.GenericTypeOrMethod
+                                or ScanTypeFlags.NonGenericTypeOrExpression
                     );
                 }
 
@@ -7728,14 +7728,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var peek1 = PeekToken(1);
                 switch (CurrentToken)
                 {
-                    case
-                    {
-                        ContextualKind: SyntaxKind.ManagedKeyword
-                    }:
-                    case
-                    {
-                        ContextualKind: SyntaxKind.UnmanagedKeyword
-                    }:
+                    case { ContextualKind: SyntaxKind.ManagedKeyword }:
+                    case { ContextualKind: SyntaxKind.UnmanagedKeyword }:
                     case var _ when IsPossibleFunctionPointerParameterListStart(peek1):
                     case var _ when peek1.Kind == SyntaxKind.OpenBracketToken:
                         lastTokenOfType = EatToken();
@@ -8461,14 +8455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     SyntaxToken peek1 = PeekToken(1);
                     switch (CurrentToken)
                     {
-                        case
-                        {
-                            ContextualKind: SyntaxKind.ManagedKeyword
-                        }:
-                        case
-                        {
-                            ContextualKind: SyntaxKind.UnmanagedKeyword
-                        }:
+                        case { ContextualKind: SyntaxKind.ManagedKeyword }:
+                        case { ContextualKind: SyntaxKind.UnmanagedKeyword }:
                             managedSpecifier = EatContextualToken(CurrentToken.ContextualKind);
                             break;
 
@@ -12737,9 +12725,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
                 return tk
                     is SyntaxKind.OpenParenToken
-                    or SyntaxKind.OpenBracketToken
-                    or SyntaxKind.DotToken
-                    or SyntaxKind.QuestionToken;
+                        or SyntaxKind.OpenBracketToken
+                        or SyntaxKind.DotToken
+                        or SyntaxKind.QuestionToken;
             }
         }
 
@@ -13562,7 +13550,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 return this.CurrentToken.ContextualKind
                     is SyntaxKind.OrKeyword
-                    or SyntaxKind.AndKeyword;
+                        or SyntaxKind.AndKeyword;
             }
         }
 

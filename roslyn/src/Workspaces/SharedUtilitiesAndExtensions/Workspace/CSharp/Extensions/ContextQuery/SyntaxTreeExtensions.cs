@@ -638,8 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 if (
                     container
                     is CompilationUnitSyntax
-                    or NamespaceDeclarationSyntax
-                    or TypeDeclarationSyntax
+                        or NamespaceDeclarationSyntax
+                        or TypeDeclarationSyntax
                 )
                     return true;
             }
@@ -744,8 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 if (
                     container
                     is CompilationUnitSyntax
-                    or NamespaceDeclarationSyntax
-                    or TypeDeclarationSyntax
+                        or NamespaceDeclarationSyntax
+                        or TypeDeclarationSyntax
                 )
                     return true;
             }
@@ -1272,11 +1272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     cancellationToken
                 );
                 if (
-                    conditionOrType.GetBestOrAllSymbols().FirstOrDefault()
-                    is
-                    {
-                        Kind: SymbolKind.NamedType
-                    }
+                    conditionOrType.GetBestOrAllSymbols().FirstOrDefault() is
+                    { Kind: SymbolKind.NamedType }
                 ) {
                     return false;
                 }
@@ -2501,7 +2498,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 enclosingSymbol = enclosingSymbol.ContainingSymbol;
             }
 
-            return enclosingSymbol is { IsStatic: false };
+            return enclosingSymbol is{ IsStatic: false };
         }
 
         public static bool IsPossibleCastTypeContext(

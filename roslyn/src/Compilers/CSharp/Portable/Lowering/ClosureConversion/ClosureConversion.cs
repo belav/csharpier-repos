@@ -1592,7 +1592,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node.TargetMethod.MethodKind == MethodKind.LocalFunction)
             {
                 Debug.Assert(
-                    node.TargetMethod is { RequiresInstanceReceiver: false, IsStatic: true }
+                    node.TargetMethod is{ RequiresInstanceReceiver: false, IsStatic: true }
                 );
                 ImmutableArray<BoundExpression> arguments = default;
                 ImmutableArray<RefKind> argRefKinds = default;

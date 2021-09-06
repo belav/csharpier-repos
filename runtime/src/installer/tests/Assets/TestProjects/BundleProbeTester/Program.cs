@@ -31,8 +31,7 @@ namespace BundleProbeTester
 
             switch (exists, isExpected)
             {
-                case
-                (true, true):
+                case (true, true):
                     if (compressedSize < 0 || compressedSize > size)
                     {
                         Console.WriteLine(
@@ -49,18 +48,15 @@ namespace BundleProbeTester
                     Console.WriteLine($"Invalid location obtained for {path} within bundle.");
                     return false;
 
-                case
-                (true, false):
+                case (true, false):
                     Console.WriteLine($"Unexpected file {path} found in bundle.");
                     return false;
 
-                case
-                (false, true):
+                case (false, true):
                     Console.WriteLine($"Expected file {path} not found in bundle.");
                     return false;
 
-                case
-                (false, false):
+                case (false, false):
                     return true;
             }
         }

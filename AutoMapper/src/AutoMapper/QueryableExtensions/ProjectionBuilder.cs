@@ -245,13 +245,9 @@ namespace AutoMapper.QueryableExtensions.Impl
                         var customSource = memberMap.IncludedMember?.ProjectToCustomSource;
                         var resolvedSource = memberMap switch
                         {
-                            {
-                                CustomMapExpression: LambdaExpression mapFrom
-                            }
+                            { CustomMapExpression: LambdaExpression mapFrom }
                               => MapFromExpression(mapFrom),
-                            {
-                                SourceMembers: { Length: > 0 } sourceMembers
-                            }
+                            { SourceMembers: { Length: > 0 } sourceMembers }
                               => sourceMembers.Chain(CheckCustomSource()),
                             _ => throw CannotMap(memberMap, request.SourceType)
                         };
@@ -312,13 +308,9 @@ namespace AutoMapper.QueryableExtensions.Impl
             NewExpression CreateDestination() =>
                 typeMap switch
                 {
-                    {
-                        CustomCtorExpression: LambdaExpression ctorExpression
-                    }
+                    { CustomCtorExpression: LambdaExpression ctorExpression }
                       => (NewExpression)ctorExpression.ReplaceParameters(instanceParameter),
-                    {
-                        ConstructorMap: { CanResolve: true } constructorMap
-                    }
+                    { ConstructorMap: { CanResolve: true } constructorMap }
                       => New(
                           constructorMap.Ctor,
                           constructorMap.CtorParams.Select(

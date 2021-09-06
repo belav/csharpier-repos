@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         ) =>
             methodSymbol.Name
                 is WellKnownMemberNames.EntryPointMethodName
-                or WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
+                    or WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
             && methodSymbol.IsStatic
             && (
                 methodSymbol.ReturnsVoid

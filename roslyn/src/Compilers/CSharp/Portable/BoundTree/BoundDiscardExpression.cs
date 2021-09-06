@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                Debug.Assert(this.Type is { });
+                Debug.Assert(this.Type is{ });
                 return new DiscardSymbol(
                     TypeWithAnnotations.Create(
                         this.Type,

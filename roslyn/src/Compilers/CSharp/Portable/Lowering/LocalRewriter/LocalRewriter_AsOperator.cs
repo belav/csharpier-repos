@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitTypeExpression(BoundTypeExpression node)
         {
             var result = base.VisitTypeExpression(node);
-            Debug.Assert(result is { });
+            Debug.Assert(result is{ });
             return result;
         }
 

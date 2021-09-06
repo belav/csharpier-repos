@@ -87,7 +87,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             SyntaxKind.ForEachStatement
                         )
                 )
-                is not  { } declaration
+                is not { } declaration
             ) {
                 return default;
             }

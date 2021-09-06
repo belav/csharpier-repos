@@ -174,13 +174,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return method switch
             {
                 { IsDirectlyExcludedFromCodeCoverage: true } => true,
-                {
-                    AssociatedSymbol: PropertySymbol{ IsDirectlyExcludedFromCodeCoverage: true }
-                }
+                { AssociatedSymbol: PropertySymbol { IsDirectlyExcludedFromCodeCoverage: true } }
                   => true,
-                {
-                    AssociatedSymbol: EventSymbol{ IsDirectlyExcludedFromCodeCoverage: true }
-                }
+                { AssociatedSymbol: EventSymbol { IsDirectlyExcludedFromCodeCoverage: true } }
                   => true,
                 _ => false
             };

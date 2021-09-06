@@ -333,7 +333,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 cancellationToken,
                 includeDirectives: true
             );
-            return leftToken.GetAncestor(syntaxFacts.IsUsingOrExternOrImport) is { } node
+            return leftToken.GetAncestor(syntaxFacts.IsUsingOrExternOrImport) is{ } node
                 && !IsFinalSemicolonOfUsingOrExtern(node, leftToken);
         }
 

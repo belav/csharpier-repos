@@ -288,7 +288,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 default:
                 {
                     // there should have been a syntax error if we get here.
-                    Debug.Assert(state.fromExpression.Type is { });
+                    Debug.Assert(state.fromExpression.Type is{ });
                     return new BoundBadExpression(
                         state.selectOrGroup,
                         LookupResultKind.OverloadResolutionFailure,
@@ -931,7 +931,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         errorLocation,
                         yExpression.Type!
                     );
-                    Debug.Assert(yExpression.Type is { });
+                    Debug.Assert(yExpression.Type is{ });
                     yExpression = new BoundBadExpression(
                         yExpression.Syntax,
                         LookupResultKind.Empty,

@@ -277,10 +277,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                         // warn when inlining into a conditional expression, as the inlined expression will not be executed.
                         if (
                             semanticModel.GetSymbolInfo(o, cancellationToken).Symbol
-                            is IMethodSymbol
-                            {
-                                IsConditional: true
-                            }
+                            is IMethodSymbol { IsConditional: true }
                         ) {
                             node = node.WithAdditionalAnnotations(
                                 WarningAnnotation.Create(

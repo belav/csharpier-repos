@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                 CastExpressionSyntax cast => GetKind(cast.Expression),
                 PrefixUnaryExpressionSyntax prefix => GetKind(prefix.Operand),
                 // Treat `expr!` the same as `expr` (i.e. treat `!` as if it's just trivia).
-                PostfixUnaryExpressionSyntax{
+                PostfixUnaryExpressionSyntax
+                {
                     RawKind: (int)SyntaxKind.SuppressNullableWarningExpression
                 } postfix
                   => GetKind(postfix.Operand),

@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                 return null;
             }
 
-            if (!(statements[0] is IReturnOperation { ReturnedValue:  { } returnedValue }))
+            if (!(statements[0] is IReturnOperation { ReturnedValue: { } returnedValue }))
             {
                 return null;
             }
@@ -152,7 +152,7 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             // Last statement has to be the return of it.
             if (
                 !(statements.First() is IVariableDeclarationGroupOperation varDeclStatement)
-                || !(statements.Last() is IReturnOperation { ReturnedValue:  { } returnedValue })
+                || !(statements.Last() is IReturnOperation { ReturnedValue: { } returnedValue })
             ) {
                 return null;
             }

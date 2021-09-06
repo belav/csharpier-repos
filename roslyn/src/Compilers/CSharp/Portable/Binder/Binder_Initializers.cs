@@ -274,10 +274,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder scriptClassBinder = binderFactory.GetBinder(syntax);
                     Debug.Assert(
                         scriptClassBinder.ContainingMemberOrLambda
-                            is NamedTypeSymbol
-                            {
-                                IsScriptClass: true
-                            }
+                            is NamedTypeSymbol { IsScriptClass: true }
                     );
 
                     if (firstDebugImports == null)

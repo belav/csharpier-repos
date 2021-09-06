@@ -2085,33 +2085,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) {
             switch (method1, method2)
             {
-                case
-                (
-                    SourceOrdinaryMethodSymbol
-                    {
-                        IsPartialDefinition: true
-                    },
-                    SourceOrdinaryMethodSymbol
-                    {
-                        IsPartialImplementation: true
-                    }
+                case (
+                    SourceOrdinaryMethodSymbol { IsPartialDefinition: true },
+                    SourceOrdinaryMethodSymbol { IsPartialImplementation: true }
                 ):
-                case
-                (
-                    SourceOrdinaryMethodSymbol
-                    {
-                        IsPartialImplementation: true
-                    },
-                    SourceOrdinaryMethodSymbol
-                    {
-                        IsPartialDefinition: true
-                    }
+                case (
+                    SourceOrdinaryMethodSymbol { IsPartialImplementation: true },
+                    SourceOrdinaryMethodSymbol { IsPartialDefinition: true }
                 ):
                     // these could be 2 parts of the same partial method.
                     // Partial methods are allowed to collide by signature.
                     return;
-                case
-                (
+                case (
                     SynthesizedSimpleProgramEntryPointSymbol { },
                     SynthesizedSimpleProgramEntryPointSymbol { }
                 ):
@@ -3710,8 +3695,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
                     }
                     else if (
-                        method
-                        is
+                        method is
                         {
                             IsPartialDefinition: true,
                             OtherPartOfPartial: null,
@@ -4654,7 +4638,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
                     }
                     else if (
-                        existingMember is PropertySymbol { IsStatic: false, GetMethod:  { } } prop
+                        existingMember is PropertySymbol { IsStatic: false, GetMethod: { } } prop
                         && prop.TypeWithAnnotations.Equals(
                             param.TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions

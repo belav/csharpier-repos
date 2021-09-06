@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         ) {
             return (
-                ReturnType: VirtualCloneInBase() is { } baseClone
+                ReturnType: VirtualCloneInBase() is{ } baseClone
                     ? baseClone.ReturnTypeWithAnnotations
                     : // Use covariant returns when available
                       TypeWithAnnotations.Create(isNullableEnabled: true, ContainingType),

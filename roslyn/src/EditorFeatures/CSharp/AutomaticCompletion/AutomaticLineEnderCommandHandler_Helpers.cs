@@ -859,12 +859,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
         private static bool WithinMethodBody(SyntaxNode node, int caretPosition)
         {
-            if (node is BaseMethodDeclarationSyntax { Body:  { } baseMethodBody })
+            if (node is BaseMethodDeclarationSyntax { Body: { } baseMethodBody })
             {
                 return baseMethodBody.Span.Contains(caretPosition);
             }
 
-            if (node is LocalFunctionStatementSyntax { Body:  { } localFunctionBody })
+            if (node is LocalFunctionStatementSyntax { Body: { } localFunctionBody })
             {
                 return localFunctionBody.Span.Contains(caretPosition);
             }

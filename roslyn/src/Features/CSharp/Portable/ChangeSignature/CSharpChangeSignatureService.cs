@@ -523,10 +523,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                             signaturePermutation,
                             invocation.ArgumentList,
                             symbolInfo.Symbol
-                                is IMethodSymbol
-                                {
-                                    MethodKind: MethodKind.ReducedExtension
-                                },
+                                is IMethodSymbol { MethodKind: MethodKind.ReducedExtension },
                             IsParamsArrayExpanded(
                                 semanticModel,
                                 invocation,

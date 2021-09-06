@@ -372,10 +372,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         withExpr.Initializer.OpenBraceToken,
                         withExpr.Initializer.CloseBraceToken
                     );
-                case ImplicitObjectCreationExpressionSyntax
-                {
-                    Initializer:  { } initializer
-                }:
+                case ImplicitObjectCreationExpressionSyntax { Initializer: { } initializer }:
                     return (initializer.OpenBraceToken, initializer.CloseBraceToken);
             }
 
@@ -1450,8 +1447,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool IsTopLevelOfUsingAliasDirective(this SyntaxToken node) =>
             node switch
             {
-                { Parent: NameEqualsSyntax{ Parent: UsingDirectiveSyntax _ } } => true,
-                { Parent: IdentifierNameSyntax{ Parent: UsingDirectiveSyntax _ } } => true,
+                { Parent: NameEqualsSyntax { Parent: UsingDirectiveSyntax _ } } => true,
+                { Parent: IdentifierNameSyntax { Parent: UsingDirectiveSyntax _ } } => true,
                 _ => false
             };
 

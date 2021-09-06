@@ -505,7 +505,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // A record with parameters at least has a primary constructor
             if (
                 ((declFlags & SingleTypeDeclaration.TypeDeclarationFlags.HasAnyNontypeMembers) == 0)
-                && node is RecordDeclarationSyntax { ParameterList:  { } }
+                && node is RecordDeclarationSyntax { ParameterList: { } }
             ) {
                 declFlags |= SingleTypeDeclaration.TypeDeclarationFlags.HasAnyNontypeMembers;
             }

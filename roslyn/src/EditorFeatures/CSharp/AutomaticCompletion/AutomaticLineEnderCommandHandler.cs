@@ -360,9 +360,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         private static bool AllowedConstructs(SyntaxNode n) =>
             n
                 is StatementSyntax
-                or BaseFieldDeclarationSyntax
-                or UsingDirectiveSyntax
-                or ArrowExpressionClauseSyntax;
+                    or BaseFieldDeclarationSyntax
+                    or UsingDirectiveSyntax
+                    or ArrowExpressionClauseSyntax;
 
         private static SyntaxNode? OwningNode(SyntaxNode n) =>
             n is ArrowExpressionClauseSyntax ? n.Parent : n;
@@ -387,20 +387,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 if (
                     selectedNode
                     is BaseTypeDeclarationSyntax
-                    or BaseMethodDeclarationSyntax
-                    or LocalFunctionStatementSyntax
-                    or FieldDeclarationSyntax
-                    or EventFieldDeclarationSyntax
-                    or AccessorDeclarationSyntax
-                    or ObjectCreationExpressionSyntax
-                    or WhileStatementSyntax
-                    or ForEachStatementSyntax
-                    or ForStatementSyntax
-                    or LockStatementSyntax
-                    or UsingStatementSyntax
-                    or DoStatementSyntax
-                    or IfStatementSyntax
-                    or ElseClauseSyntax
+                        or BaseMethodDeclarationSyntax
+                        or LocalFunctionStatementSyntax
+                        or FieldDeclarationSyntax
+                        or EventFieldDeclarationSyntax
+                        or AccessorDeclarationSyntax
+                        or ObjectCreationExpressionSyntax
+                        or WhileStatementSyntax
+                        or ForEachStatementSyntax
+                        or ForStatementSyntax
+                        or LockStatementSyntax
+                        or UsingStatementSyntax
+                        or DoStatementSyntax
+                        or IfStatementSyntax
+                        or ElseClauseSyntax
                 ) {
                     // Add the braces and get the next caretPosition
                     var (newRoot, nextCaretPosition) = AddBraceToSelectedNode(
@@ -481,11 +481,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             if (
                 selectedNode
                 is BaseTypeDeclarationSyntax
-                or BaseMethodDeclarationSyntax
-                or LocalFunctionStatementSyntax
-                or FieldDeclarationSyntax
-                or EventFieldDeclarationSyntax
-                or AccessorDeclarationSyntax
+                    or BaseMethodDeclarationSyntax
+                    or LocalFunctionStatementSyntax
+                    or FieldDeclarationSyntax
+                    or EventFieldDeclarationSyntax
+                    or AccessorDeclarationSyntax
             ) {
                 var newRoot = ReplaceNodeAndFormat(
                     document,

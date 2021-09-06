@@ -2722,7 +2722,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // Apply bulk configuration from analyzer options for analyzer diagnostics, if applicable.
                 if (
-                    diagnostic?.Location.SourceTree is { } tree
+                    diagnostic?.Location.SourceTree is{ } tree
                     && analyzerOptions.TryGetSeverityFromBulkConfiguration(
                         tree,
                         compilation,

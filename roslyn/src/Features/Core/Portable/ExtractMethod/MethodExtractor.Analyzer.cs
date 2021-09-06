@@ -148,11 +148,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     !isThisParameterWritten
                     && thisParameterBeingRead != null
                     && thisParameterBeingRead.Type
-                        is
-                        {
-                            TypeKind: TypeKind.Struct,
-                            IsReadOnly: false
-                        };
+                        is { TypeKind: TypeKind.Struct, IsReadOnly: false };
 
                 // check whether end of selection is reachable
                 var endOfSelectionReachable = IsEndOfSelectionReachable(model);

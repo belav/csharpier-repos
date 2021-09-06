@@ -238,9 +238,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             // First, this only applies to methods (as we're looking at the method name itself) so filter down to those.
             if (
                 parameter
-                is not
-                {
-                    ContainingSymbol: IMethodSymbol{ MethodKind: MethodKind.Ordinary } method
+                is not {
+                    ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Ordinary } method
                 }
             )
                 return false;

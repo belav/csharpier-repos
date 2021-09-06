@@ -33415,10 +33415,7 @@ interface I1 {}
 
                         switch (context.CodeBlock)
                         {
-                            case RecordDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "A" }
-                            }:
+                            case RecordDeclarationSyntax { Identifier: { ValueText: "A" } }:
                                 Interlocked.Increment(ref FireCount1);
                                 break;
                             default:
@@ -33429,10 +33426,7 @@ interface I1 {}
                     case "B..ctor([System.Int32 Y = 1])":
                         switch (context.CodeBlock)
                         {
-                            case RecordDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "B" }
-                            }:
+                            case RecordDeclarationSyntax { Identifier: { ValueText: "B" } }:
                                 Interlocked.Increment(ref FireCount2);
                                 break;
                             default:
@@ -33443,10 +33437,7 @@ interface I1 {}
                     case "C..ctor([System.Int32 Z = 4])":
                         switch (context.CodeBlock)
                         {
-                            case ConstructorDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "C" }
-                            }:
+                            case ConstructorDeclarationSyntax { Identifier: { ValueText: "C" } }:
                                 Interlocked.Increment(ref FireCount3);
                                 break;
                             default:
@@ -33457,10 +33448,7 @@ interface I1 {}
                     case "System.Int32 B.M()":
                         switch (context.CodeBlock)
                         {
-                            case MethodDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "M" }
-                            }:
+                            case MethodDeclarationSyntax { Identifier: { ValueText: "M" } }:
                                 Interlocked.Increment(ref FireCount4);
                                 break;
                             default:
@@ -33584,10 +33572,7 @@ interface I1 {}
 
                         switch (context.CodeBlock)
                         {
-                            case RecordDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "A" }
-                            }:
+                            case RecordDeclarationSyntax { Identifier: { ValueText: "A" } }:
                                 Interlocked.Increment(ref FireCount100);
                                 break;
                             default:
@@ -33598,10 +33583,7 @@ interface I1 {}
                     case "B..ctor([System.Int32 Y = 1])":
                         switch (context.CodeBlock)
                         {
-                            case RecordDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "B" }
-                            }:
+                            case RecordDeclarationSyntax { Identifier: { ValueText: "B" } }:
                                 Interlocked.Increment(ref FireCount200);
                                 break;
                             default:
@@ -33612,10 +33594,7 @@ interface I1 {}
                     case "C..ctor([System.Int32 Z = 4])":
                         switch (context.CodeBlock)
                         {
-                            case ConstructorDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "C" }
-                            }:
+                            case ConstructorDeclarationSyntax { Identifier: { ValueText: "C" } }:
                                 Interlocked.Increment(ref FireCount300);
                                 break;
                             default:
@@ -33626,10 +33605,7 @@ interface I1 {}
                     case "System.Int32 B.M()":
                         switch (context.CodeBlock)
                         {
-                            case MethodDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "M" }
-                            }:
+                            case MethodDeclarationSyntax { Identifier: { ValueText: "M" } }:
                                 Interlocked.Increment(ref FireCount400);
                                 break;
                             default:
@@ -33664,10 +33640,7 @@ interface I1 {}
 
                         switch (context.CodeBlock)
                         {
-                            case RecordDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "A" }
-                            }:
+                            case RecordDeclarationSyntax { Identifier: { ValueText: "A" } }:
                                 Interlocked.Increment(ref FireCount1000);
                                 break;
                             default:
@@ -33678,10 +33651,7 @@ interface I1 {}
                     case "B..ctor([System.Int32 Y = 1])":
                         switch (context.CodeBlock)
                         {
-                            case RecordDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "B" }
-                            }:
+                            case RecordDeclarationSyntax { Identifier: { ValueText: "B" } }:
                                 Interlocked.Increment(ref FireCount2000);
                                 break;
                             default:
@@ -33692,10 +33662,7 @@ interface I1 {}
                     case "C..ctor([System.Int32 Z = 4])":
                         switch (context.CodeBlock)
                         {
-                            case ConstructorDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "C" }
-                            }:
+                            case ConstructorDeclarationSyntax { Identifier: { ValueText: "C" } }:
                                 Interlocked.Increment(ref FireCount3000);
                                 break;
                             default:
@@ -33706,10 +33673,7 @@ interface I1 {}
                     case "System.Int32 B.M()":
                         switch (context.CodeBlock)
                         {
-                            case MethodDeclarationSyntax
-                            {
-                                Identifier: { ValueText: "M" }
-                            }:
+                            case MethodDeclarationSyntax { Identifier: { ValueText: "M" } }:
                                 Interlocked.Increment(ref FireCount4000);
                                 break;
                             default:

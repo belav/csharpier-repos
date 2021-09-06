@@ -102,7 +102,7 @@ namespace System.CommandLine.Parsing
                 }
 
                 if (
-                    arg.GetResponseFileReference() is { } filePath
+                    arg.GetResponseFileReference() is{ } filePath
                     && configuration.ResponseFileHandling != ResponseFileHandling.Disabled
                 ) {
                     ReadResponseFile(filePath, i);
@@ -208,7 +208,7 @@ namespace System.CommandLine.Parsing
 
                 // don't unbundle if the last token is an option expecting an argument
                 if (
-                    tokenList[tokenList.Count - 1] is { } lastToken
+                    tokenList[tokenList.Count - 1] is{ } lastToken
                     && lastToken.Type == TokenType.Option
                     && currentCommand?.Children.GetByAlias(lastToken.Value) is IOption option
                     && option.Argument.Arity.MinimumNumberOfValues > 0

@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return AddSequencePoint(rewritten);
             }
 
-            Debug.Assert(syntax is { Parent: { Parent:  { } } });
+            Debug.Assert(syntax is{ Parent: { Parent: { } } });
             var grandparent = syntax.Parent.Parent;
             switch (grandparent.Kind())
             {
@@ -582,7 +582,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // EnC: We need to insert a hidden sequence point to handle function remapping in case
             // the containing method is edited while methods invoked in the condition are being executed.
             CatchFilterClauseSyntax? filterClause = ((CatchClauseSyntax)original.Syntax).Filter;
-            Debug.Assert(filterClause is { });
+            Debug.Assert(filterClause is{ });
             return AddConditionSequencePoint(
                 new BoundSequencePointExpression(
                     filterClause,

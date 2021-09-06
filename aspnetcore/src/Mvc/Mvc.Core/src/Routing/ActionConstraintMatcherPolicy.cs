@@ -50,10 +50,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var action = endpoint.Metadata.GetMetadata<ActionDescriptor>();
                 if (
                     action?.ActionConstraints
-                        is IList<IActionConstraintMetadata>
-                        {
-                            Count: > 0
-                        } constraints
+                        is IList<IActionConstraintMetadata> { Count: > 0 } constraints
                     && HasSignificantActionConstraint(constraints)
                 ) {
                     // We need to check for some specific action constraint implementations.

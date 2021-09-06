@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Rewrite the receiver.
             BoundExpression? rewrittenReceiver = VisitExpression(node.ReceiverOpt);
-            Debug.Assert(rewrittenReceiver is { });
+            Debug.Assert(rewrittenReceiver is{ });
 
             // Rewrite the arguments.
             // NOTE: We may need additional argument rewriting such as generating a params array, re-ordering arguments based on argsToParamsOpt map, inserting arguments for optional parameters, etc.
@@ -265,7 +265,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var F = _factory;
 
-            Debug.Assert(receiver.Type is { });
+            Debug.Assert(receiver.Type is{ });
             var receiverLocal = F.StoreToTemp(
                 VisitExpression(receiver),
                 out var receiverStore,
@@ -355,7 +355,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If the System.Index argument is `^index`, we can replace the
                 // `argument.GetOffset(length)` call with `length - index`
                 Debug.Assert(
-                    hatExpression.Operand is { Type: { SpecialType: SpecialType.System_Int32 } }
+                    hatExpression.Operand is{ Type: { SpecialType: SpecialType.System_Int32 } }
                 );
                 usedLength = true;
                 return F.IntSubtract(lengthAccess, VisitExpression(hatExpression.Operand));

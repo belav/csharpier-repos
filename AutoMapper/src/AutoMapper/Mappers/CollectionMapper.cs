@@ -77,7 +77,7 @@ namespace AutoMapper.Internal.Mappers
                 var destinationType = destExpression.Type;
                 MethodInfo addMethod;
                 bool isIList,
-                    mustUseDestination = memberMap is { MustUseDestination: true };
+                    mustUseDestination = memberMap is{ MustUseDestination: true };
                 Type destinationCollectionType,
                     destinationElementType;
                 GetDestinationType();

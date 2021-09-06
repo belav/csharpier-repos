@@ -1342,7 +1342,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 break;
                             case BoundUnconvertedSwitchExpression
                             {
-                                Type:  { } naturalType
+                                Type: { } naturalType
                             } switchExpr:
                                 _ = ConvertSwitchExpression(
                                     switchExpr,
@@ -1353,7 +1353,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 break;
                             case BoundUnconvertedConditionalOperator
                             {
-                                Type:  { } naturalType
+                                Type: { } naturalType
                             } conditionalExpr:
                                 _ = ConvertConditionalExpression(
                                     conditionalExpr,
@@ -1829,7 +1829,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // We want to use the associated user-declared symbol instead where possible.
             var containingMember = ContainingMember() switch
             {
-                FieldSymbol{ AssociatedSymbol:  { } symbol } => symbol,
+                FieldSymbol { AssociatedSymbol: { } symbol } => symbol,
                 var c => c
             };
 

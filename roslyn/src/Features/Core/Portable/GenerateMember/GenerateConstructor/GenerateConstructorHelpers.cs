@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 return false;
 
             if (
-                symbol is IPropertySymbol { SetMethod:  { } setMethod } property
+                symbol is IPropertySymbol { SetMethod: { } setMethod } property
                 && !IsSymbolAccessible(compilation, setMethod)
             ) {
                 return false;

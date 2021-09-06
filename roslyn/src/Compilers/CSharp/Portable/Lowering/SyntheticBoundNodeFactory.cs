@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _currentFunction = value;
                 if (
-                    value is { }
+                    value is{ }
                     && value.MethodKind != MethodKind.AnonymousFunction
                     && value.MethodKind != MethodKind.LocalFunction
                 ) {
@@ -237,7 +237,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void AddNestedType(NamedTypeSymbol nestedType)
         {
             // It is only valid to call this on a bound node factory with a module builder.
-            Debug.Assert(ModuleBuilderOpt is { });
+            Debug.Assert(ModuleBuilderOpt is{ });
             ModuleBuilderOpt.AddSynthesizedDefinition(CurrentType, nestedType.GetCciAdapter());
         }
 
@@ -263,7 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isPublic = false,
             bool isThis = false
         ) {
-            Debug.Assert(CurrentType is { });
+            Debug.Assert(CurrentType is{ });
             var result = new StateMachineFieldSymbol(CurrentType, type, name, isPublic, isThis);
             AddField(CurrentType, result);
             return result;
@@ -275,7 +275,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isPublic = false,
             bool isThis = false
         ) {
-            Debug.Assert(CurrentType is { });
+            Debug.Assert(CurrentType is{ });
             var result = new StateMachineFieldSymbol(
                 CurrentType,
                 TypeWithAnnotations.Create(type),
@@ -293,7 +293,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             SynthesizedLocalKind synthesizedKind,
             int slotIndex
         ) {
-            Debug.Assert(CurrentType is { });
+            Debug.Assert(CurrentType is{ });
             var result = new StateMachineFieldSymbol(
                 CurrentType,
                 type,
@@ -312,7 +312,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSlotDebugInfo slotDebugInfo,
             int slotIndex
         ) {
-            Debug.Assert(CurrentType is { });
+            Debug.Assert(CurrentType is{ });
             var result = new StateMachineFieldSymbol(
                 CurrentType,
                 type,
@@ -328,7 +328,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void AddField(NamedTypeSymbol containingType, FieldSymbol field)
         {
             // It is only valid to call this on a bound node factory with a module builder.
-            Debug.Assert(ModuleBuilderOpt is { });
+            Debug.Assert(ModuleBuilderOpt is{ });
             ModuleBuilderOpt.AddSynthesizedDefinition(containingType, field.GetCciAdapter());
         }
 
@@ -339,7 +339,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundThisReference This()
         {
-            Debug.Assert(CurrentFunction is { IsStatic: false });
+            Debug.Assert(CurrentFunction is{ IsStatic: false });
             return new BoundThisReference(Syntax, CurrentFunction.ThisParameter.Type)
             {
                 WasCompilerGenerated = true
@@ -353,7 +353,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundBaseReference Base(NamedTypeSymbol baseType)
         {
-            Debug.Assert(CurrentFunction is { IsStatic: false });
+            Debug.Assert(CurrentFunction is{ IsStatic: false });
             return new BoundBaseReference(Syntax, baseType) { WasCompilerGenerated = true };
         }
 
@@ -403,7 +403,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var propertySym = (PropertySymbol)WellKnownMember(member);
             Debug.Assert(
                 receiverOpt is null
-                    || receiverOpt.Type is { }
+                    || receiverOpt.Type is{ }
                         && receiverOpt.Type.GetMembers(propertySym.Name)
                             .OfType<PropertySymbol>()
                             .Single() == propertySym
@@ -554,8 +554,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isRef = false
         ) {
             Debug.Assert(
-                left.Type is { }
-                    && right.Type is { }
+                left.Type is{ }
+                    && right.Type is{ }
                     && (
                         left.Type.Equals(right.Type, TypeCompareKind.AllIgnoreOptions)
                         || StackOptimizerPass1.IsFixedBufferAssignmentToRefLocal(left, right, isRef)
@@ -646,7 +646,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundReturnStatement Return(BoundExpression? expression = null)
         {
-            Debug.Assert(CurrentFunction is { });
+            Debug.Assert(CurrentFunction is{ });
 
             if (expression != null)
             {
@@ -688,7 +688,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public void CloseMethod(BoundStatement body)
         {
-            Debug.Assert(CurrentFunction is { });
+            Debug.Assert(CurrentFunction is{ });
             if (body.Kind != BoundKind.Block)
             {
                 body = Block(body);
@@ -950,16 +950,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             switch (input.Type)
             {
-                case
-                {
-                    SpecialType: CodeAnalysis.SpecialType.System_Double
-                }:
+                case { SpecialType: CodeAnalysis.SpecialType.System_Double }:
                     // produce double.IsNaN(input)
                     return StaticCall(CodeAnalysis.SpecialMember.System_Double__IsNaN, input);
-                case
-                {
-                    SpecialType: CodeAnalysis.SpecialType.System_Single
-                }:
+                case { SpecialType: CodeAnalysis.SpecialType.System_Single }:
                     // produce float.IsNaN(input)
                     return StaticCall(CodeAnalysis.SpecialMember.System_Single__IsNaN, input);
                 default:
@@ -1195,7 +1189,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression valueTypeReceiver,
             BoundExpression referenceTypeReceiver
         ) {
-            Debug.Assert(valueTypeReceiver.Type is { });
+            Debug.Assert(valueTypeReceiver.Type is{ });
             Debug.Assert(
                 TypeSymbol.Equals(
                     valueTypeReceiver.Type,
@@ -1359,7 +1353,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression result,
             TypeSymbol? type = null
         ) {
-            Debug.Assert(result.Type is { });
+            Debug.Assert(result.Type is{ });
             var resultType = type ?? result.Type;
             return new BoundSequence(
                 Syntax,
@@ -1377,7 +1371,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> sideEffects,
             BoundExpression result
         ) {
-            Debug.Assert(result.Type is { });
+            Debug.Assert(result.Type is{ });
             return locals.IsDefaultOrEmpty && sideEffects.IsDefaultOrEmpty
                 ? result
                 : new BoundSequence(Syntax, locals, sideEffects, result, result.Type)
@@ -1391,7 +1385,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundStatement> sideEffects,
             BoundExpression result
         ) {
-            Debug.Assert(result.Type is { });
+            Debug.Assert(result.Type is{ });
             return new BoundSpillSequence(Syntax, locals, sideEffects, result, result.Type)
             {
                 WasCompilerGenerated = true
@@ -1439,7 +1433,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression ex,
             ImmutableArray<SyntheticSwitchSection> sections
         ) {
-            Debug.Assert(ex.Type is { SpecialType: CodeAnalysis.SpecialType.System_Int32 });
+            Debug.Assert(ex.Type is{ SpecialType: CodeAnalysis.SpecialType.System_Int32 });
 
             if (sections.Length == 0)
             {
@@ -1541,7 +1535,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundArrayLength ArrayLength(BoundExpression array)
         {
-            Debug.Assert(array.Type is { TypeKind: TypeKind.Array });
+            Debug.Assert(array.Type is{ TypeKind: TypeKind.Array });
             return new BoundArrayLength(
                 Syntax,
                 array,
@@ -1551,7 +1545,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundArrayAccess ArrayAccessFirstElement(BoundExpression array)
         {
-            Debug.Assert(array.Type is { TypeKind: TypeKind.Array });
+            Debug.Assert(array.Type is{ TypeKind: TypeKind.Array });
             int rank = ((ArrayTypeSymbol)array.Type).Rank;
             ImmutableArray<BoundExpression> firstElementIndices =
                 ArrayBuilder<BoundExpression>.GetInstance(rank, Literal(0)).ToImmutableAndFree();
@@ -1567,7 +1561,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression array,
             ImmutableArray<BoundExpression> indices
         ) {
-            Debug.Assert(array.Type is { TypeKind: TypeKind.Array });
+            Debug.Assert(array.Type is{ TypeKind: TypeKind.Array });
             return new BoundArrayAccess(
                 Syntax,
                 array,
@@ -1579,7 +1573,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public BoundStatement BaseInitialization()
         {
             // TODO: add diagnostics for when things fall apart
-            Debug.Assert(CurrentFunction is { });
+            Debug.Assert(CurrentFunction is{ });
             NamedTypeSymbol baseType =
                 CurrentFunction.ThisParameter.Type.BaseTypeNoUseSiteDiagnostics;
             var ctor = baseType.InstanceConstructors.Single(c => c.ParameterCount == 0);
@@ -1686,7 +1680,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundExpression TypeofDynamicOperationContextType()
         {
-            Debug.Assert(this.CompilationState is { DynamicOperationContextType:  { } });
+            Debug.Assert(this.CompilationState is{ DynamicOperationContextType: { } });
             return Typeof(this.CompilationState.DynamicOperationContextType);
         }
 
@@ -1880,7 +1874,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // NOTE: We can see user-defined conversions at this point because there are places in the bound tree where
             // the binder stashes Conversion objects for later consumption (e.g. foreach, nullable, increment).
             if (
-                conversion.Method is { }
+                conversion.Method is{ }
                 && !TypeSymbol.Equals(
                     conversion.Method.Parameters[0].Type,
                     arg.Type,
@@ -1895,7 +1889,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Null(type);
             }
 
-            Debug.Assert(arg.Type is { });
+            Debug.Assert(arg.Type is{ });
             if (
                 conversion.Kind == ConversionKind.ExplicitNullable
                 && arg.Type.IsNullableType()
@@ -2064,7 +2058,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BoundExpression Not(BoundExpression expression)
         {
             Debug.Assert(
-                expression is { Type: { SpecialType: CodeAnalysis.SpecialType.System_Boolean } }
+                expression is{ Type: { SpecialType: CodeAnalysis.SpecialType.System_Boolean } }
             );
             return new BoundUnaryOperator(
                 expression.Syntax,
@@ -2093,9 +2087,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             [CallerFilePath] string? callerFilePath = null
 #endif
         ) {
-            Debug.Assert(argument.Type is { });
+            Debug.Assert(argument.Type is{ });
             MethodSymbol? containingMethod = this.CurrentFunction;
-            Debug.Assert(containingMethod is { });
+            Debug.Assert(containingMethod is{ });
 
             switch (refKind)
             {
@@ -2176,7 +2170,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal BoundLocal MakeTempForDiscard(BoundDiscardExpression node, out LocalSymbol temp)
         {
-            Debug.Assert(node.Type is { });
+            Debug.Assert(node.Type is{ });
             temp = new SynthesizedLocal(
                 this.CurrentFunction,
                 TypeWithAnnotations.Create(node.Type),

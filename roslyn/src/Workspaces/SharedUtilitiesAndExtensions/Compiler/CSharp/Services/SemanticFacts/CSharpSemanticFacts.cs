@@ -419,10 +419,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     return queryInfo.OperationInfo;
-                case IdentifierNameSyntax
-                {
-                    Parent: PrimaryConstructorBaseTypeSyntax baseType
-                }:
+                case IdentifierNameSyntax { Parent: PrimaryConstructorBaseTypeSyntax baseType }:
                     return semanticModel.GetSymbolInfo(baseType, cancellationToken);
             }
 

@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation = containingType.DeclaringCompilation;
             switch (hasAwait, hasReturnWithExpression)
             {
-                case
-                (true, false):
+                case (true, false):
                     _returnType = Binder.GetWellKnownType(
                         compilation,
                         WellKnownType.System_Threading_Tasks_Task,
@@ -51,8 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         NoLocation.Singleton
                     );
                     break;
-                case
-                (false, false):
+                case (false, false):
                     _returnType = Binder.GetSpecialType(
                         compilation,
                         SpecialType.System_Void,
@@ -60,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         diagnostics
                     );
                     break;
-                case
-                (true, true):
+                case (true, true):
                     _returnType = Binder.GetWellKnownType(
                             compilation,
                             WellKnownType.System_Threading_Tasks_Task_T,
@@ -77,8 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             )
                         );
                     break;
-                case
-                (false, true):
+                case (false, true):
                     _returnType = Binder.GetSpecialType(
                         compilation,
                         SpecialType.System_Int32,

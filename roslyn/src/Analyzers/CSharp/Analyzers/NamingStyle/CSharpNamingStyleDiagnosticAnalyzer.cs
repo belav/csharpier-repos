@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.NamingStyles
                 && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
                     is ParameterSyntax
                     {
-                        Parent: ParameterListSyntax{ Parent: RecordDeclarationSyntax }
+                        Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                     }
             ) {
                 // Parameters of positional record declarations should be ignored because they also

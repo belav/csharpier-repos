@@ -2010,7 +2010,7 @@ namespace Microsoft.Cci
                 {
                     if (
                         documentsBuilder.TryGetDebugDocument(tree.FilePath, basePath: null)
-                            is { } doc
+                            is{ } doc
                         && !_documentIndex.ContainsKey(doc)
                     ) {
                         AddDocument(doc, _documentIndex);

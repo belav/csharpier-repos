@@ -768,8 +768,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     GetNullableUnconstrainedTypeParameterDiagnosticIfNecessary(
                         Compilation.LanguageVersion,
                         constructedType
-                    )
-                    is { } diagnosticInfo
+                    ) is
+                    { } diagnosticInfo
                 ) {
                     diagnostics.Add(diagnosticInfo, syntax.Location);
                 }
@@ -3495,8 +3495,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location
         ) {
             if (
-                feature.GetFeatureAvailabilityDiagnosticInfo((CSharpParseOptions)tree.Options)
-                is { } diagInfo
+                feature.GetFeatureAvailabilityDiagnosticInfo((CSharpParseOptions)tree.Options) is
+                { } diagInfo
             ) {
                 diagnostics?.Add(diagInfo, location);
                 return false;

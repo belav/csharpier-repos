@@ -1517,11 +1517,7 @@ namespace Microsoft.CodeAnalysis.Operations
         ) {
             IBlockOperation? body = (IBlockOperation?)Create(boundLocalFunctionStatement.Body);
             IBlockOperation? ignoredBody = boundLocalFunctionStatement
-                is
-                {
-                    BlockBody:  { },
-                    ExpressionBody:  { } exprBody
-                }
+                is{ BlockBody: { }, ExpressionBody: { } exprBody }
                 ? (IBlockOperation?)Create(exprBody)
                 : null;
             IMethodSymbol symbol = boundLocalFunctionStatement.Symbol.GetPublicSymbol();
@@ -2713,10 +2709,7 @@ namespace Microsoft.CodeAnalysis.Operations
                     enumeratorInfoOpt.CurrentConversion,
                     boundForEachStatement.ElementConversion,
                     getEnumeratorArguments: enumeratorInfoOpt.GetEnumeratorInfo
-                        is
-                        {
-                            Method: { IsExtensionMethod: true }
-                        } getEnumeratorInfo
+                        is{ Method: { IsExtensionMethod: true } } getEnumeratorInfo
                         ? Operation.SetParentOperation(
                               DeriveArguments(
                                   getEnumeratorInfo.Method,
@@ -3238,8 +3231,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
             TypeSymbol? naturalType = boundTupleExpression switch
             {
-                BoundTupleLiteral{ Type: var t } => t,
-                BoundConvertedTupleLiteral{ SourceTuple: { Type: var t } } => t,
+                BoundTupleLiteral { Type: var t } => t,
+                BoundConvertedTupleLiteral { SourceTuple: { Type: var t } } => t,
                 BoundConvertedTupleLiteral => null,
                 { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind)
             };
@@ -3404,14 +3397,14 @@ namespace Microsoft.CodeAnalysis.Operations
                 ?? boundRecursivePattern.InputType.StrippedType()
             ).GetPublicSymbol();
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
-                boundRecursivePattern.Deconstruction is { IsDefault: false } deconstructions
+                boundRecursivePattern.Deconstruction is{ IsDefault: false } deconstructions
                     ? deconstructions.SelectAsArray(
                           (p, fac) => (IPatternOperation)fac.Create(p.Pattern),
                           this
                       )
                     : ImmutableArray<IPatternOperation>.Empty;
             ImmutableArray<IPropertySubpatternOperation> propertySubpatterns =
-                boundRecursivePattern.Properties is { IsDefault: false } properties
+                boundRecursivePattern.Properties is{ IsDefault: false } properties
                     ? properties.SelectAsArray(
                           (p, arg) => arg.Fac.CreatePropertySubpattern(p, arg.MatchedType),
                           (Fac: this, MatchedType: matchedType)
@@ -3435,7 +3428,7 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundITuplePattern boundITuplePattern
         ) {
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
-                boundITuplePattern.Subpatterns is { IsDefault: false } subpatterns
+                boundITuplePattern.Subpatterns is{ IsDefault: false } subpatterns
                     ? subpatterns.SelectAsArray(
                           (p, fac) => (IPatternOperation)fac.Create(p.Pattern),
                           this

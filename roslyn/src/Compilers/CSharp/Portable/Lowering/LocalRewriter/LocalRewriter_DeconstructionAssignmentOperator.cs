@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var lhsEffects = ArrayBuilder<BoundExpression>.GetInstance();
             ArrayBuilder<Binder.DeconstructionVariable> lhsTargets =
                 GetAssignmentTargetsAndSideEffects(left, lhsTemps, lhsEffects);
-            Debug.Assert(left.Type is { });
+            Debug.Assert(left.Type is{ });
             BoundExpression? result = RewriteDeconstruction(
                 lhsTargets,
                 conversion,
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                     }
                     BoundExpression? leftTarget = leftTargets[i].Single;
-                    Debug.Assert(leftTarget is { Type:  { } });
+                    Debug.Assert(leftTarget is{ Type: { } });
 
                     resultPart = EvaluateConversionToTemp(
                         rightPart,
@@ -238,7 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                     }
                 }
-                Debug.Assert(builder is null || resultPart is { });
+                Debug.Assert(builder is null || resultPart is{ });
                 builder?.Add(resultPart!);
             }
 
@@ -331,7 +331,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // var (x, y) = GetTuple();
             // var (x, y) = ((byte, byte)) (1, 2);
             // var (a, _) = ((short, short))((int, int))(1L, 2L);
-            Debug.Assert(right.Type is { });
+            Debug.Assert(right.Type is{ });
             if (right.Type.IsTupleType)
             {
                 inInit = false;
@@ -352,7 +352,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LocalSymbol> temps,
             ArrayBuilder<BoundExpression> effects
         ) {
-            Debug.Assert(expression.Type is { });
+            Debug.Assert(expression.Type is{ });
             Debug.Assert(expression.Type.IsTupleType);
             var tupleType = expression.Type;
             var tupleElementTypes = tupleType.TupleElementTypesWithAnnotations;
@@ -521,7 +521,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     default:
-                        Debug.Assert(variable.Type is { });
+                        Debug.Assert(variable.Type is{ });
                         var temp = this.TransformCompoundAssignmentLHS(
                             variable,
                             effects,

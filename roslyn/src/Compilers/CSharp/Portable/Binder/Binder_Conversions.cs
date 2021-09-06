@@ -484,7 +484,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             bool hasErrors = false
         ) {
-            bool targetTyped = conversionIfTargetTyped is { };
+            bool targetTyped = conversionIfTargetTyped is{ };
             Debug.Assert(
                 targetTyped
                     || destination.IsErrorType()
@@ -549,7 +549,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             bool hasErrors = false
         ) {
-            bool targetTyped = conversionIfTargetTyped is { };
+            bool targetTyped = conversionIfTargetTyped is{ };
             Conversion conversion = conversionIfTargetTyped ?? Conversion.Identity;
             Debug.Assert(
                 targetTyped
@@ -870,7 +870,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var (originalGroup, isAddressOf) = source switch
             {
                 BoundMethodGroup m => (m, false),
-                BoundUnconvertedAddressOfOperator{ Operand:  { } m } => (m, true),
+                BoundUnconvertedAddressOfOperator { Operand: { } m } => (m, true),
                 _ => throw ExceptionUtilities.UnexpectedValue(source),
             };
             BoundMethodGroup group = FixMethodGroupWithTypeOrValue(
@@ -1466,8 +1466,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             MethodSymbol delegateOrFuncPtrMethod = delegateType switch
             {
-                NamedTypeSymbol{ DelegateInvokeMethod:  { } invokeMethod } => invokeMethod,
-                FunctionPointerTypeSymbol{ Signature:  { } signature } => signature,
+                NamedTypeSymbol { DelegateInvokeMethod: { } invokeMethod } => invokeMethod,
+                FunctionPointerTypeSymbol { Signature: { } signature } => signature,
                 _ => throw ExceptionUtilities.UnexpectedValue(delegateType),
             };
 
@@ -1570,9 +1570,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool returnsMatch = delegateOrFuncPtrMethod switch
             {
                 { RefKind: RefKind.None, ReturnsVoid: true } => method.ReturnsVoid,
-                {
-                    RefKind: var destinationRefKind
-                }
+                { RefKind: var destinationRefKind }
                   => hasConversion(
                       delegateType.TypeKind,
                       Conversions,

@@ -129,8 +129,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (
                 exportProvider.GetExportedValues<IAsynchronousOperationListenerProvider>()
-                    .SingleOrDefault()
-                is { } listenerProvider
+                    .SingleOrDefault() is
+                { } listenerProvider
             ) {
                 if (
                     exportProvider.GetExportedValues<IThreadingContext>()

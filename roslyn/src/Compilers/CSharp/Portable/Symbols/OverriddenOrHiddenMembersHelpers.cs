@@ -177,21 +177,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol knownOverriddenMember = member switch
             {
                 MethodSymbol method => KnownOverriddenClassMethod(method),
-                PEPropertySymbol{
+                PEPropertySymbol
+                {
                     GetMethod: PEMethodSymbol
                     {
-                        ExplicitlyOverriddenClassMethod:
-                        {
+                        ExplicitlyOverriddenClassMethod: {
                             AssociatedSymbol: PropertySymbol overriddenProperty
                         }
                     }
                 }
                   => overriddenProperty,
-                RetargetingPropertySymbol{
+                RetargetingPropertySymbol
+                {
                     GetMethod: RetargetingMethodSymbol
                     {
-                        ExplicitlyOverriddenClassMethod:
-                        {
+                        ExplicitlyOverriddenClassMethod: {
                             AssociatedSymbol: PropertySymbol overriddenProperty
                         }
                     }
@@ -1194,7 +1194,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!methodimplWouldBeAmbiguous)
                 return true;
 
-            Debug.Assert(runtimeOverriddenMethod is { });
+            Debug.Assert(runtimeOverriddenMethod is{ });
 
             // We produce the warning when a methodimpl would be required but would be ambiguous to the runtime.
             // However, if there was a duplicate definition for the runtime signature of the overridden

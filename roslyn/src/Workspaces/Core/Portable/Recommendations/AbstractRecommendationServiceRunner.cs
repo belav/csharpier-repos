@@ -76,10 +76,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
             // Starting from a. in the example, looking for a => a.
             if (
                 parameter.ContainingSymbol
-                is not IMethodSymbol
-                {
-                    MethodKind: MethodKind.AnonymousFunction
-                } owningMethod
+                is not IMethodSymbol { MethodKind: MethodKind.AnonymousFunction } owningMethod
             )
                 return default;
 

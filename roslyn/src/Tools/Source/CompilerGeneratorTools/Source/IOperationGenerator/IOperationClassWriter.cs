@@ -486,12 +486,10 @@ namespace IOperationGenerator
                 {
                     switch (property.MakeAbstract, type.IsAbstract)
                     {
-                        case
-                        (true, true):
+                        case (true, true):
                             writeProperty(property, propExtensibility: "abstract ");
                             break;
-                        case
-                        (true, false):
+                        case (true, false):
                             continue;
                         default:
                             writeProperty(property, propExtensibility: string.Empty);

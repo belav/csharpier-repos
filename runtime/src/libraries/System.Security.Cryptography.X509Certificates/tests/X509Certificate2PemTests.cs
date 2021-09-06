@@ -620,8 +620,7 @@ MII
 
                 switch ((alg, key))
                 {
-                    case
-                    (RSA rsa, RSA rsaPem):
+                    case (RSA rsa, RSA rsaPem):
                         byte[] rsaSignature = rsa.SignData(
                             data,
                             HashAlgorithmName.SHA256,
@@ -636,20 +635,17 @@ MII
                             )
                         );
                         break;
-                    case
-                    (ECDsa ecdsa, ECDsa ecdsaPem):
+                    case (ECDsa ecdsa, ECDsa ecdsaPem):
                         byte[] ecdsaSignature = ecdsa.SignData(data, HashAlgorithmName.SHA256);
                         Assert.True(
                             ecdsaPem.VerifyData(data, ecdsaSignature, HashAlgorithmName.SHA256)
                         );
                         break;
-                    case
-                    (DSA dsa, DSA dsaPem):
+                    case (DSA dsa, DSA dsaPem):
                         byte[] dsaSignature = dsa.SignData(data, HashAlgorithmName.SHA1);
                         Assert.True(dsaPem.VerifyData(data, dsaSignature, HashAlgorithmName.SHA1));
                         break;
-                    case
-                    (ECDiffieHellman ecdh, ECDiffieHellman ecdhPem):
+                    case (ECDiffieHellman ecdh, ECDiffieHellman ecdhPem):
                         ECCurve curve = ecdh.KeySize switch
                         {
                             256 => ECCurve.NamedCurves.nistP256,

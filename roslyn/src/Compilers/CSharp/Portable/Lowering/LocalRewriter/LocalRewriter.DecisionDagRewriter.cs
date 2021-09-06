@@ -135,7 +135,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 public override BoundNode Visit(BoundNode node)
                 {
                     // A constant expression cannot mutate anything
-                    if (node is BoundExpression { ConstantValue:  { } })
+                    if (node is BoundExpression { ConstantValue: { } })
                         return null;
 
                     // Stop visiting once we determine something might get assigned
@@ -823,7 +823,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 public CasesComparer(TypeSymbol type)
                 {
                     _fac = ValueSetFactory.ForType(type);
-                    Debug.Assert(_fac is { });
+                    Debug.Assert(_fac is{ });
                 }
 
                 int IComparer<(ConstantValue value, LabelSymbol label)>.Compare(

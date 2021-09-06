@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             string? tooltip = null;
             if (
                 workspace is object
-                && diagnostic.HelpLink is { } helpLink
+                && diagnostic.HelpLink is{ } helpLink
                 && Uri.TryCreate(helpLink, UriKind.Absolute, out var helpLinkUri)
             ) {
                 navigationAction = new QuickInfoHyperLink(workspace, helpLinkUri).NavigationAction;
