@@ -33,7 +33,12 @@ namespace SerializerTrimmingTest
 
             using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
             {
-                var obj = (MyClassWithParameterizedCtor)(await JsonSerializer.DeserializeAsync(stream, typeof(MyClassWithParameterizedCtor)));
+                var obj = (MyClassWithParameterizedCtor)(
+                    await JsonSerializer.DeserializeAsync(
+                        stream,
+                        typeof(MyClassWithParameterizedCtor)
+                    )
+                );
                 if (obj == null)
                 {
                     return -1;

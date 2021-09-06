@@ -44,12 +44,14 @@ namespace SignalRSamples.ConnectionHandlers
                             break;
                         }
                     }
+
                     finally
                     {
                         connection.Transport.Input.AdvanceTo(buffer.End);
                     }
                 }
             }
+
             finally
             {
                 Connections.Remove(connection);

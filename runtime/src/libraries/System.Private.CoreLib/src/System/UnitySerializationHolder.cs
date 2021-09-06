@@ -53,7 +53,9 @@ namespace System
             // We are only support deserializing DBNull and throwing for everything else.
             if (_unityType != NullUnity)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidUnity, _data ?? "UnityType"));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidUnity, _data ?? "UnityType")
+                );
             }
 
             // We are always returning the same DBNull instance.

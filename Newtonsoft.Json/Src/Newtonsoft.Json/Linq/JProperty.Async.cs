@@ -41,8 +41,11 @@ namespace Newtonsoft.Json.Linq
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
-        public override Task WriteToAsync(JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
-        {
+        public override Task WriteToAsync(
+            JsonWriter writer,
+            CancellationToken cancellationToken,
+            params JsonConverter[] converters
+        ) {
             Task task = writer.WritePropertyNameAsync(_name, cancellationToken);
             if (task.IsCompletedSucessfully())
             {
@@ -52,15 +55,22 @@ namespace Newtonsoft.Json.Linq
             return WriteToAsync(task, writer, cancellationToken, converters);
         }
 
-        private async Task WriteToAsync(Task task, JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
-        {
+        private async Task WriteToAsync(
+            Task task,
+            JsonWriter writer,
+            CancellationToken cancellationToken,
+            params JsonConverter[] converters
+        ) {
             await task.ConfigureAwait(false);
 
             await WriteValueAsync(writer, cancellationToken, converters).ConfigureAwait(false);
         }
 
-        private Task WriteValueAsync(JsonWriter writer, CancellationToken cancellationToken, JsonConverter[] converters)
-        {
+        private Task WriteValueAsync(
+            JsonWriter writer,
+            CancellationToken cancellationToken,
+            JsonConverter[] converters
+        ) {
             JToken value = Value;
             return value != null
                 ? value.WriteToAsync(writer, cancellationToken, converters)
@@ -74,8 +84,10 @@ namespace Newtonsoft.Json.Linq
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous creation. The <see cref="Task{TResult}.Result"/>
         /// property returns a <see cref="JProperty"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static Task<JProperty> LoadAsync(JsonReader reader, CancellationToken cancellationToken = default)
-        {
+        public new static Task<JProperty> LoadAsync(
+            JsonReader reader,
+            CancellationToken cancellationToken = default
+        ) {
             return LoadAsync(reader, null, cancellationToken);
         }
 
@@ -88,13 +100,19 @@ namespace Newtonsoft.Json.Linq
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous creation. The <see cref="Task{TResult}.Result"/>
         /// property returns a <see cref="JProperty"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static async Task<JProperty> LoadAsync(JsonReader reader, JsonLoadSettings? settings, CancellationToken cancellationToken = default)
-        {
+        public new static async Task<JProperty> LoadAsync(
+            JsonReader reader,
+            JsonLoadSettings? settings,
+            CancellationToken cancellationToken = default
+        ) {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
-                    throw JsonReaderException.Create(reader, "Error reading JProperty from JsonReader.");
+                    throw JsonReaderException.Create(
+                        reader,
+                        "Error reading JProperty from JsonReader."
+                    );
                 }
             }
 
@@ -102,7 +120,13 @@ namespace Newtonsoft.Json.Linq
 
             if (reader.TokenType != JsonToken.PropertyName)
             {
-                throw JsonReaderException.Create(reader, "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             JProperty p = new JProperty((string)reader.Value!);

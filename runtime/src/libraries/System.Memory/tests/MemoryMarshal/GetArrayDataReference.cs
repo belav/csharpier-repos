@@ -12,14 +12,18 @@ namespace System.SpanTests
         [Fact]
         public static void GetArrayDataReference_NullInput_ThrowsNullRef()
         {
-            Assert.Throws<NullReferenceException>(() => MemoryMarshal.GetArrayDataReference((object[])null));
+            Assert.Throws<NullReferenceException>(
+                () => MemoryMarshal.GetArrayDataReference((object[])null)
+            );
         }
 
         [Fact]
         public static void GetArrayDataReference_NonEmptyInput_ReturnsRefToFirstElement()
         {
             int[] theArray = new int[] { 10, 20, 30 };
-            Assert.True(Unsafe.AreSame(ref theArray[0], ref MemoryMarshal.GetArrayDataReference(theArray)));
+            Assert.True(
+                Unsafe.AreSame(ref theArray[0], ref MemoryMarshal.GetArrayDataReference(theArray))
+            );
         }
 
         [Fact]
@@ -30,7 +34,9 @@ namespace System.SpanTests
             ref int theRef = ref MemoryMarshal.GetArrayDataReference(theArray);
 
             Assert.True(Unsafe.AsPointer(ref theRef) != null);
-            Assert.True(Unsafe.AreSame(ref theRef, ref MemoryMarshal.GetReference(theArray.AsSpan())));
+            Assert.True(
+                Unsafe.AreSame(ref theRef, ref MemoryMarshal.GetReference(theArray.AsSpan()))
+            );
         }
 
         [Fact]

@@ -17,7 +17,8 @@ namespace CodeGenerator.HttpUtilities
 
         public CombinationsWithoutRepetition(T[] nElements, int p)
         {
-            if (nElements.Length < p) throw new ArgumentOutOfRangeException(nameof(p));
+            if (nElements.Length < p)
+                throw new ArgumentOutOfRangeException(nameof(p));
 
             _nElements = nElements;
             _p = p;

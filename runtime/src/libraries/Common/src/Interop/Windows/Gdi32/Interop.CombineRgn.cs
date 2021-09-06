@@ -17,10 +17,19 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Gdi32, SetLastError = true, ExactSpelling = true)]
-        public static extern RegionType CombineRgn(IntPtr hrgnDst, IntPtr hrgnSrc1, IntPtr hrgnSrc2, CombineMode iMode);
+        public static extern RegionType CombineRgn(
+            IntPtr hrgnDst,
+            IntPtr hrgnSrc1,
+            IntPtr hrgnSrc2,
+            CombineMode iMode
+        );
 
-        public static RegionType CombineRgn(HandleRef hrgnDst, HandleRef hrgnSrc1, HandleRef hrgnSrc2, CombineMode iMode)
-        {
+        public static RegionType CombineRgn(
+            HandleRef hrgnDst,
+            HandleRef hrgnSrc1,
+            HandleRef hrgnSrc2,
+            CombineMode iMode
+        ) {
             RegionType result = CombineRgn(hrgnDst.Handle, hrgnSrc1.Handle, hrgnSrc2.Handle, iMode);
             GC.KeepAlive(hrgnDst.Wrapper);
             GC.KeepAlive(hrgnSrc1.Wrapper);

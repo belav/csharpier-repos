@@ -21,13 +21,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly ImportThunk _delayLoadHelper;
 
         public DelayLoadHelperImport(
-            NodeFactory factory, 
-            ImportSectionNode importSectionNode, 
-            ReadyToRunHelper helper, 
-            Signature instanceSignature, 
-            bool useVirtualCall = false, 
-            MethodDesc callingMethod = null)
-            : base(importSectionNode, instanceSignature, callingMethod)
+            NodeFactory factory,
+            ImportSectionNode importSectionNode,
+            ReadyToRunHelper helper,
+            Signature instanceSignature,
+            bool useVirtualCall = false,
+            MethodDesc callingMethod = null
+        ) : base(importSectionNode, instanceSignature, callingMethod)
         {
             _helper = helper;
             _useVirtualCall = useVirtualCall;
@@ -53,8 +53,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int ClassCode => 667823013;
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
-        {
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        ) {
             // This needs to be an empty target pointer since it will be filled in with Module*
             // when loaded by CoreCLR
             int codeDelta = 0;
@@ -63,15 +66,23 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // THUMB_CODE
                 codeDelta = 1;
             }
-            dataBuilder.EmitReloc(_delayLoadHelper,
-                factory.Target.PointerSize == 4 ? RelocType.IMAGE_REL_BASED_HIGHLOW : RelocType.IMAGE_REL_BASED_DIR64, codeDelta);
+            dataBuilder.EmitReloc(
+                _delayLoadHelper,
+                factory.Target.PointerSize == 4
+                    ? RelocType.IMAGE_REL_BASED_HIGHLOW
+                    : RelocType.IMAGE_REL_BASED_DIR64,
+                codeDelta
+            );
         }
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
-            return new DependencyListEntry[] 
+            return new DependencyListEntry[]
             {
-                new DependencyListEntry(_delayLoadHelper, "Delay load helper thunk for ready-to-run fixup import"),
+                new DependencyListEntry(
+                    _delayLoadHelper,
+                    "Delay load helper thunk for ready-to-run fixup import"
+                ),
                 new DependencyListEntry(ImportSignature, "Signature for ready-to-run fixup import"),
             };
         }

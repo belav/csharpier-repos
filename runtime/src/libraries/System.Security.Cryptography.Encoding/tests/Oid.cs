@@ -71,8 +71,10 @@ namespace System.Security.Cryptography.Encoding.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/16686", TestRuntimes.Mono)]
         [MemberData(nameof(ValidOidFriendlyNamePairs))]
-        public static void Oid_StringString_NullFriendlyName(string oidValue, string expectedFriendlyName)
-        {
+        public static void Oid_StringString_NullFriendlyName(
+            string oidValue,
+            string expectedFriendlyName
+        ) {
             // Can omit friendly-name - FriendlyName property demand-computes it.
             Oid oid = new Oid(oidValue, null);
 
@@ -145,10 +147,7 @@ namespace System.Security.Cryptography.Encoding.Tests
             // the value as well. If the value updates, it must match the current
             // value, if any.
 
-            Oid oid = new Oid
-            {
-                FriendlyName = SHA1_Name
-            };
+            Oid oid = new Oid { FriendlyName = SHA1_Name };
             Assert.Equal(SHA1_Name, oid.FriendlyName);
             Assert.Equal(SHA1_Oid, oid.Value);
 
@@ -199,8 +198,10 @@ namespace System.Security.Cryptography.Encoding.Tests
 
         [Theory]
         [MemberData(nameof(ValidOidFriendlyNameHashAlgorithmPairs))]
-        public static void LookupOidByValue_Method_HashAlgorithm(string oidValue, string friendlyName)
-        {
+        public static void LookupOidByValue_Method_HashAlgorithm(
+            string oidValue,
+            string friendlyName
+        ) {
             Oid oid = Oid.FromOidValue(oidValue, OidGroup.HashAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -209,8 +210,10 @@ namespace System.Security.Cryptography.Encoding.Tests
 
         [Theory]
         [MemberData(nameof(ValidOidFriendlyNameEncryptionAlgorithmPairs))]
-        public static void LookupOidByValue_Method_EncryptionAlgorithm(string oidValue, string friendlyName)
-        {
+        public static void LookupOidByValue_Method_EncryptionAlgorithm(
+            string oidValue,
+            string friendlyName
+        ) {
             Oid oid = Oid.FromOidValue(oidValue, OidGroup.EncryptionAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -219,18 +222,22 @@ namespace System.Security.Cryptography.Encoding.Tests
 
         [Theory]
         [MemberData(nameof(ValidOidFriendlyNameHashAlgorithmPairs))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get the  Oid lookup table
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to get the  Oid lookup table
         public static void LookupOidByValue_Method_WrongGroup(string oidValue, string friendlyName)
         {
             // Oid group is implemented strictly - no fallback to OidGroup.All as with many other parts of Crypto.
             _ = friendlyName;
-            Assert.Throws<CryptographicException>(() => Oid.FromOidValue(oidValue, OidGroup.EncryptionAlgorithm));
+            Assert.Throws<CryptographicException>(
+                () => Oid.FromOidValue(oidValue, OidGroup.EncryptionAlgorithm)
+            );
         }
 
         [Fact]
         public static void LookupOidByValue_Method_NullInput()
         {
-            Assert.Throws<ArgumentNullException>(() => Oid.FromOidValue(null, OidGroup.HashAlgorithm));
+            Assert.Throws<ArgumentNullException>(
+                () => Oid.FromOidValue(null, OidGroup.HashAlgorithm)
+            );
         }
 
         [Theory]
@@ -238,13 +245,17 @@ namespace System.Security.Cryptography.Encoding.Tests
         [InlineData(Bogus_Name)]
         public static void LookupOidByValue_Method_BadInput(string badInput)
         {
-            Assert.Throws<CryptographicException>(() => Oid.FromOidValue(badInput, OidGroup.HashAlgorithm));
+            Assert.Throws<CryptographicException>(
+                () => Oid.FromOidValue(badInput, OidGroup.HashAlgorithm)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidOidFriendlyNameHashAlgorithmPairs))]
-        public static void LookupOidByFriendlyName_Method_HashAlgorithm(string oidValue, string friendlyName)
-        {
+        public static void LookupOidByFriendlyName_Method_HashAlgorithm(
+            string oidValue,
+            string friendlyName
+        ) {
             Oid oid = Oid.FromFriendlyName(friendlyName, OidGroup.HashAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -253,8 +264,10 @@ namespace System.Security.Cryptography.Encoding.Tests
 
         [Theory]
         [MemberData(nameof(ValidOidFriendlyNameEncryptionAlgorithmPairs))]
-        public static void LookupOidByFriendlyName_Method_EncryptionAlgorithm(string oidValue, string friendlyName)
-        {
+        public static void LookupOidByFriendlyName_Method_EncryptionAlgorithm(
+            string oidValue,
+            string friendlyName
+        ) {
             Oid oid = Oid.FromFriendlyName(friendlyName, OidGroup.EncryptionAlgorithm);
 
             Assert.Equal(oidValue, oid.Value);
@@ -264,8 +277,10 @@ namespace System.Security.Cryptography.Encoding.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/16686", TestRuntimes.Mono)]
         [MemberData(nameof(ValidOidFriendlyNamePairs))]
-        public static void LookupOidByFriendlyName_Method_InverseCase(string oidValue, string friendlyName)
-        {
+        public static void LookupOidByFriendlyName_Method_InverseCase(
+            string oidValue,
+            string friendlyName
+        ) {
             // Note that oid lookup is case-insensitive, and we store the name in the form it was
             // input to the constructor (rather than "normalizing" it to the official casing.)
             string inverseCasedName = InvertCase(friendlyName);
@@ -277,18 +292,24 @@ namespace System.Security.Cryptography.Encoding.Tests
 
         [Theory]
         [MemberData(nameof(ValidOidFriendlyNameHashAlgorithmPairs))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to get the  Oid lookup table
-        public static void LookupOidByFriendlyName_Method_WrongGroup(string oidValue, string friendlyName)
-        {
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to get the  Oid lookup table
+        public static void LookupOidByFriendlyName_Method_WrongGroup(
+            string oidValue,
+            string friendlyName
+        ) {
             // Oid group is implemented strictly - no fallback to OidGroup.All as with many other parts of Crypto.
             _ = oidValue;
-            Assert.Throws<CryptographicException>(() => Oid.FromFriendlyName(friendlyName, OidGroup.EncryptionAlgorithm));
+            Assert.Throws<CryptographicException>(
+                () => Oid.FromFriendlyName(friendlyName, OidGroup.EncryptionAlgorithm)
+            );
         }
 
         [Fact]
         public static void LookupOidByFriendlyName_Method_NullInput()
         {
-            Assert.Throws<ArgumentNullException>(() => Oid.FromFriendlyName(null, OidGroup.HashAlgorithm));
+            Assert.Throws<ArgumentNullException>(
+                () => Oid.FromFriendlyName(null, OidGroup.HashAlgorithm)
+            );
         }
 
         [Theory]
@@ -296,7 +317,9 @@ namespace System.Security.Cryptography.Encoding.Tests
         [InlineData(Bogus_Name)]
         public static void LookupOidByFriendlyName_Method_BadInput(string badInput)
         {
-            Assert.Throws<CryptographicException>(() => Oid.FromFriendlyName(badInput, OidGroup.HashAlgorithm));
+            Assert.Throws<CryptographicException>(
+                () => Oid.FromFriendlyName(badInput, OidGroup.HashAlgorithm)
+            );
         }
 
         [Fact]
@@ -313,7 +336,7 @@ namespace System.Security.Cryptography.Encoding.Tests
         }
 
         [Fact]
-        [PlatformSpecific(PlatformSupport.OpenSSL)]  // Uses P/Invokes to search Oid in the lookup table
+        [PlatformSpecific(PlatformSupport.OpenSSL)] // Uses P/Invokes to search Oid in the lookup table
         public static void LookupOidByFriendlyName_Method_OpenSSL()
         {
             // This needs to be a name not in the static lookup table.  The purpose is to verify the
@@ -333,8 +356,10 @@ namespace System.Security.Cryptography.Encoding.Tests
         [InlineData("secP384r1", "1.3.132.0.34")]
         [InlineData("nistP521", "1.3.132.0.35")]
         [InlineData("secP521r1", "1.3.132.0.35")]
-        public static void LookupOidByFriendlyName_AdditionalNames(string friendlyName, string expectedOid)
-        {
+        public static void LookupOidByFriendlyName_AdditionalNames(
+            string friendlyName,
+            string expectedOid
+        ) {
             Oid oid = Oid.FromFriendlyName(friendlyName, OidGroup.All);
             Assert.Equal(friendlyName, oid.FriendlyName);
             Assert.Equal(expectedOid, oid.Value);
@@ -368,13 +393,7 @@ namespace System.Security.Cryptography.Encoding.Tests
 
         public static IEnumerable<object[]> ValidOidFriendlyNameEncryptionAlgorithmPairs
         {
-            get
-            {
-                return new[]
-                {
-                    new[] { "1.2.840.113549.3.7", "3des" },
-                };
-            }
+            get { return new[] { new[] { "1.2.840.113549.3.7", "3des" }, }; }
         }
 
         private static string InvertCase(string existing)

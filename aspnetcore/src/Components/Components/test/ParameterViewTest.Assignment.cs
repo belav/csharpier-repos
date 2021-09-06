@@ -135,10 +135,7 @@ namespace Microsoft.AspNetCore.Components
             var builder = new ParameterViewBuilder();
             var parameters = builder.Build();
 
-            var target = new HasCascadingParameter()
-            {
-                Cascading = "bye",
-            };
+            var target = new HasCascadingParameter() { Cascading = "bye", };
 
             // Act
             parameters.SetParameterProperties(target);
@@ -158,13 +155,16 @@ namespace Microsoft.AspNetCore.Components
             var target = new HasCascadingParameter();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"Object of type '{typeof(HasCascadingParameter).FullName}' does not have a property " +
-                $"matching the name 'SomethingElse'.",
-                ex.Message);
+                $"Object of type '{typeof(HasCascadingParameter).FullName}' does not have a property "
+                    + $"matching the name 'SomethingElse'.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -179,14 +179,16 @@ namespace Microsoft.AspNetCore.Components
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => parameters.SetParameterProperties(target));
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(default, target.IntProp);
             Assert.Equal(
-                $"Object of type '{typeof(HasPropertyWithoutParameterAttribute).FullName}' has a property matching the name '{nameof(HasPropertyWithoutParameterAttribute.IntProp)}', " +
-                $"but it does not have [{nameof(ParameterAttribute)}] or [{nameof(CascadingParameterAttribute)}] applied.",
-                ex.Message);
+                $"Object of type '{typeof(HasPropertyWithoutParameterAttribute).FullName}' has a property matching the name '{nameof(HasPropertyWithoutParameterAttribute.IntProp)}', "
+                    + $"but it does not have [{nameof(ParameterAttribute)}] or [{nameof(CascadingParameterAttribute)}] applied.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -201,13 +203,15 @@ namespace Microsoft.AspNetCore.Components
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => parameters.SetParameterProperties(target));
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(default, target.IntProp);
             Assert.Equal(
                 $"The type '{typeof(HasNonPublicPropertyWithParameterAttribute).FullName}' declares a parameter matching the name '{nameof(HasNonPublicPropertyWithParameterAttribute.IntProp)}' that is not public. Parameters must be public.",
-                ex.Message);
+                ex.Message
+            );
         }
 
         [Fact]
@@ -237,13 +241,16 @@ namespace Microsoft.AspNetCore.Components
             }.Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"Object of type '{typeof(HasCascadingParameter).FullName}' has a property matching the name '{nameof(HasCascadingParameter.Cascading)}', " +
-                $"but it does not have [{nameof(ParameterAttribute)}] applied.",
-                ex.Message);
+                $"Object of type '{typeof(HasCascadingParameter).FullName}' has a property matching the name '{nameof(HasCascadingParameter.Cascading)}', "
+                    + $"but it does not have [{nameof(ParameterAttribute)}] applied.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -256,13 +263,16 @@ namespace Microsoft.AspNetCore.Components
             var parameters = builder.Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The property '{nameof(HasInstanceProperties.IntProp)}' on component type '{typeof(HasInstanceProperties).FullName}' " +
-                $"cannot be set using a cascading value.",
-                ex.Message);
+                $"The property '{nameof(HasInstanceProperties.IntProp)}' on component type '{typeof(HasInstanceProperties).FullName}' "
+                    + $"cannot be set using a cascading value.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -311,7 +321,8 @@ namespace Microsoft.AspNetCore.Components
                 {
                     Assert.Equal("test2", kvp.Key);
                     Assert.Equal(456, kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -321,21 +332,29 @@ namespace Microsoft.AspNetCore.Components
             var target = new HasCaptureUnmatchedValuesProperty();
             var parameters = new ParameterViewBuilder
             {
-                { nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues), new Dictionary<string, object>() },
+                {
+                    nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues),
+                    new Dictionary<string, object>()
+                },
                 { "test1", 123 },
                 { "test2", 456 },
             }.Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The property '{nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues)}' on component type '{typeof(HasCaptureUnmatchedValuesProperty).FullName}' cannot be set explicitly when " +
-                $"also used to capture unmatched values. Unmatched values:" + Environment.NewLine +
-                $"test1" + Environment.NewLine +
-                $"test2",
-                ex.Message);
+                $"The property '{nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues)}' on component type '{typeof(HasCaptureUnmatchedValuesProperty).FullName}' cannot be set explicitly when "
+                    + $"also used to capture unmatched values. Unmatched values:"
+                    + Environment.NewLine
+                    + $"test1"
+                    + Environment.NewLine
+                    + $"test2",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -347,19 +366,27 @@ namespace Microsoft.AspNetCore.Components
             {
                 { "test2", 456 },
                 { "test1", 123 },
-                { nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues), new Dictionary<string, object>() },
+                {
+                    nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues),
+                    new Dictionary<string, object>()
+                },
             }.Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The property '{nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues)}' on component type '{typeof(HasCaptureUnmatchedValuesProperty).FullName}' cannot be set explicitly when " +
-                $"also used to capture unmatched values. Unmatched values:" + Environment.NewLine +
-                $"test1" + Environment.NewLine +
-                $"test2",
-                ex.Message);
+                $"The property '{nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues)}' on component type '{typeof(HasCaptureUnmatchedValuesProperty).FullName}' cannot be set explicitly when "
+                    + $"also used to capture unmatched values. Unmatched values:"
+                    + Environment.NewLine
+                    + $"test1"
+                    + Environment.NewLine
+                    + $"test2",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -370,17 +397,22 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder().Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"Multiple properties were found on component type '{typeof(HasDuplicateCaptureUnmatchedValuesProperty).FullName}' " +
-                $"with '{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}'. " +
-                $"Only a single property per type can use '{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}'. " +
-                $"Properties:" + Environment.NewLine +
-                $"{nameof(HasDuplicateCaptureUnmatchedValuesProperty.CaptureUnmatchedValuesProp1)}" + Environment.NewLine +
-                $"{nameof(HasDuplicateCaptureUnmatchedValuesProperty.CaptureUnmatchedValuesProp2)}",
-                ex.Message);
+                $"Multiple properties were found on component type '{typeof(HasDuplicateCaptureUnmatchedValuesProperty).FullName}' "
+                    + $"with '{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}'. "
+                    + $"Only a single property per type can use '{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}'. "
+                    + $"Properties:"
+                    + Environment.NewLine
+                    + $"{nameof(HasDuplicateCaptureUnmatchedValuesProperty.CaptureUnmatchedValuesProp1)}"
+                    + Environment.NewLine
+                    + $"{nameof(HasDuplicateCaptureUnmatchedValuesProperty.CaptureUnmatchedValuesProp2)}",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -391,14 +423,17 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder().Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The property '{nameof(HasWrongTypeCaptureUnmatchedValuesProperty.CaptureUnmatchedValuesProp)}' on component type '{typeof(HasWrongTypeCaptureUnmatchedValuesProperty).FullName}' cannot be used with " +
-                $"'{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}' because it has the wrong type. " +
-                $"The property must be assignable from 'Dictionary<string, object>'.",
-                ex.Message);
+                $"The property '{nameof(HasWrongTypeCaptureUnmatchedValuesProperty.CaptureUnmatchedValuesProp)}' on component type '{typeof(HasWrongTypeCaptureUnmatchedValuesProperty).FullName}' cannot be used with "
+                    + $"'{nameof(ParameterAttribute)}.{nameof(ParameterAttribute.CaptureUnmatchedValues)}' because it has the wrong type. "
+                    + $"The property must be assignable from 'Dictionary<string, object>'.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -421,9 +456,13 @@ namespace Microsoft.AspNetCore.Components
                 target.CaptureUnmatchedValues,
                 kvp =>
                 {
-                    Assert.Equal(nameof(HasCaptureUnmatchedValuesPropertyAndCascadingParameter.Cascading), kvp.Key);
+                    Assert.Equal(
+                        nameof(HasCaptureUnmatchedValuesPropertyAndCascadingParameter.Cascading),
+                        kvp.Key
+                    );
                     Assert.Equal("hi", kvp.Value);
-                });
+                }
+            );
             Assert.Equal("bye", target.Cascading);
         }
 
@@ -437,13 +476,16 @@ namespace Microsoft.AspNetCore.Components
             var parameters = builder.Build();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The property '{nameof(HasCaptureUnmatchedValuesProperty.IntProp)}' on component type '{typeof(HasCaptureUnmatchedValuesProperty).FullName}' " +
-                $"cannot be set using a cascading value.",
-                ex.Message);
+                $"The property '{nameof(HasCaptureUnmatchedValuesProperty.IntProp)}' on component type '{typeof(HasCaptureUnmatchedValuesProperty).FullName}' "
+                    + $"cannot be set using a cascading value.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -459,13 +501,15 @@ namespace Microsoft.AspNetCore.Components
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => parameters.SetParameterProperties(target));
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"Unable to set property '{nameof(HasInstanceProperties.IntProp)}' on object of " +
-                $"type '{typeof(HasInstanceProperties).FullName}'. The error was: {ex.InnerException.Message}",
-                ex.Message);
+                $"Unable to set property '{nameof(HasInstanceProperties.IntProp)}' on object of "
+                    + $"type '{typeof(HasInstanceProperties).FullName}'. The error was: {ex.InnerException.Message}",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -480,13 +524,15 @@ namespace Microsoft.AspNetCore.Components
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => parameters.SetParameterProperties(target));
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"Unable to set property '{nameof(HasPropertyWhoseSetterThrows.StringProp)}' on object of " +
-                $"type '{typeof(HasPropertyWhoseSetterThrows).FullName}'. The error was: {ex.InnerException.Message}",
-                ex.Message);
+                $"Unable to set property '{nameof(HasPropertyWhoseSetterThrows.StringProp)}' on object of "
+                    + $"type '{typeof(HasPropertyWhoseSetterThrows).FullName}'. The error was: {ex.InnerException.Message}",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -497,14 +543,16 @@ namespace Microsoft.AspNetCore.Components
             var target = new HasParametersVaryingOnlyByCase();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The type '{typeof(HasParametersVaryingOnlyByCase).FullName}' declares more than one parameter matching the " +
-                $"name '{nameof(HasParametersVaryingOnlyByCase.MyValue).ToLowerInvariant()}'. Parameter names are case-insensitive and must be unique.",
-                ex.Message);
+                $"The type '{typeof(HasParametersVaryingOnlyByCase).FullName}' declares more than one parameter matching the "
+                    + $"name '{nameof(HasParametersVaryingOnlyByCase.MyValue).ToLowerInvariant()}'. Parameter names are case-insensitive and must be unique.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -520,14 +568,16 @@ namespace Microsoft.AspNetCore.Components
             var target = new HasParameterClashingWithInherited();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                parameters.SetParameterProperties(target));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => parameters.SetParameterProperties(target)
+            );
 
             // Assert
             Assert.Equal(
-                $"The type '{typeof(HasParameterClashingWithInherited).FullName}' declares more than one parameter matching the " +
-                $"name '{nameof(HasParameterClashingWithInherited.IntProp).ToLowerInvariant()}'. Parameter names are case-insensitive and must be unique.",
-                ex.Message);
+                $"The type '{typeof(HasParameterClashingWithInherited).FullName}' declares more than one parameter matching the "
+                    + $"name '{nameof(HasParameterClashingWithInherited.IntProp).ToLowerInvariant()}'. Parameter names are case-insensitive and must be unique.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -551,10 +601,13 @@ namespace Microsoft.AspNetCore.Components
 
         class HasInstanceProperties
         {
-            [Parameter] public int IntProp { get; set; }
-            [Parameter] public string StringProp { get; set; }
+            [Parameter]
+            public int IntProp { get; set; }
+            [Parameter]
+            public string StringProp { get; set; }
 
-            [Parameter] public object ObjectProp { get; set; }
+            [Parameter]
+            public object ObjectProp { get; set; }
 
             public static string ObjectPropName => nameof(ObjectProp);
             public object ObjectPropCurrentValue
@@ -566,7 +619,8 @@ namespace Microsoft.AspNetCore.Components
 
         class HasCascadingParameter
         {
-            [CascadingParameter] public string Cascading { get; set; }
+            [CascadingParameter]
+            public string Cascading { get; set; }
         }
 
         class HasPropertyWithoutParameterAttribute
@@ -592,12 +646,14 @@ namespace Microsoft.AspNetCore.Components
 
         class HasInheritedProperties : HasInstanceProperties
         {
-            [Parameter] public int DerivedClassIntProp { get; set; }
+            [Parameter]
+            public int DerivedClassIntProp { get; set; }
         }
 
         class BaseType
         {
-            [Parameter] public virtual int VirtualProp { get; set; }
+            [Parameter]
+            public virtual int VirtualProp { get; set; }
         }
 
         class DerivedType : BaseType
@@ -607,57 +663,69 @@ namespace Microsoft.AspNetCore.Components
 
         class HasParametersVaryingOnlyByCase
         {
-            [Parameter] public object MyValue { get; set; }
-            [Parameter] public object Myvalue { get; set; }
+            [Parameter]
+            public object MyValue { get; set; }
+            [Parameter]
+            public object Myvalue { get; set; }
         }
 
         class HasParameterClashingWithInherited : HasInstanceProperties
         {
-            [Parameter] public new int IntProp { get; set; }
+            [Parameter]
+            public new int IntProp { get; set; }
         }
 
         class HasCaptureUnmatchedValuesProperty
         {
-            [Parameter] public int IntProp { get; set; }
-            [Parameter] public string StringProp { get; set; }
-            [Parameter] public object ObjectProp { get; set; }
-            [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> CaptureUnmatchedValues { get; set; }
+            [Parameter]
+            public int IntProp { get; set; }
+            [Parameter]
+            public string StringProp { get; set; }
+            [Parameter]
+            public object ObjectProp { get; set; }
+            [Parameter(CaptureUnmatchedValues = true)]
+            public IReadOnlyDictionary<string, object> CaptureUnmatchedValues { get; set; }
         }
 
         class HasCaptureUnmatchedValuesPropertyAndCascadingParameter
         {
-            [CascadingParameter] public string Cascading { get; set; }
-            [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> CaptureUnmatchedValues { get; set; }
+            [CascadingParameter]
+            public string Cascading { get; set; }
+            [Parameter(CaptureUnmatchedValues = true)]
+            public IReadOnlyDictionary<string, object> CaptureUnmatchedValues { get; set; }
         }
 
         class HasDuplicateCaptureUnmatchedValuesProperty
         {
-            [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> CaptureUnmatchedValuesProp1 { get; set; }
-            [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> CaptureUnmatchedValuesProp2 { get; set; }
+            [Parameter(CaptureUnmatchedValues = true)]
+            public Dictionary<string, object> CaptureUnmatchedValuesProp1 { get; set; }
+            [Parameter(CaptureUnmatchedValues = true)]
+            public IDictionary<string, object> CaptureUnmatchedValuesProp2 { get; set; }
         }
 
         class HasWrongTypeCaptureUnmatchedValuesProperty
         {
-            [Parameter(CaptureUnmatchedValues = true)] public KeyValuePair<string, object>[] CaptureUnmatchedValuesProp { get; set; }
+            [Parameter(CaptureUnmatchedValues = true)]
+            public KeyValuePair<string, object>[] CaptureUnmatchedValuesProp { get; set; }
         }
 
         class HasNonPublicCascadingParameter
         {
-            [CascadingParameter] private string Cascading { get; set; }
+            [CascadingParameter]
+            private string Cascading { get; set; }
 
             public string GetCascadingValue() => Cascading;
         }
 
         class ParameterViewBuilder : IEnumerable
         {
-            private readonly List<(string Name, object Value, bool Cascading)> _keyValuePairs
-                = new List<(string, object, bool)>();
+            private readonly List<(string Name, object Value, bool Cascading)> _keyValuePairs =
+                new List<(string, object, bool)>();
 
-            public void Add(string name, object value, bool cascading = false)
-                => _keyValuePairs.Add((name, value, cascading));
+            public void Add(string name, object value, bool cascading = false) =>
+                _keyValuePairs.Add((name, value, cascading));
 
-            public IEnumerator GetEnumerator()
-                => throw new NotImplementedException();
+            public IEnumerator GetEnumerator() => throw new NotImplementedException();
 
             public ParameterView Build()
             {
@@ -673,14 +741,23 @@ namespace Microsoft.AspNetCore.Components
                 }
                 builder.CloseComponent();
 
-                var view = new ParameterView(ParameterViewLifetime.Unbound, builder.GetFrames().Array, ownerIndex: 0);
+                var view = new ParameterView(
+                    ParameterViewLifetime.Unbound,
+                    builder.GetFrames().Array,
+                    ownerIndex: 0
+                );
 
                 var cascadingParameters = new List<CascadingParameterState>();
                 foreach (var kvp in _keyValuePairs)
                 {
                     if (kvp.Cascading)
                     {
-                        cascadingParameters.Add(new CascadingParameterState(kvp.Name, new TestCascadingValueProvider(kvp.Value)));
+                        cascadingParameters.Add(
+                            new CascadingParameterState(
+                                kvp.Name,
+                                new TestCascadingValueProvider(kvp.Value)
+                            )
+                        );
                     }
                 }
 

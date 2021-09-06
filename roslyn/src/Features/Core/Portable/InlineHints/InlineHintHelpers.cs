@@ -16,28 +16,55 @@ namespace Microsoft.CodeAnalysis.InlineHints
 {
     internal static class InlineHintHelpers
     {
-        public static Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>>? GetDescriptionFunction(int position, SymbolKey symbolKey)
-            => (document, cancellationToken) => GetDescriptionAsync(document, position, symbolKey, cancellationToken);
+        public static Func<
+            Document,
+            CancellationToken,
+            Task<ImmutableArray<TaggedText>>
+        >? GetDescriptionFunction(int position, SymbolKey symbolKey) =>
+            (document, cancellationToken) =>
+                GetDescriptionAsync(document, position, symbolKey, cancellationToken);
 
-        private static async Task<ImmutableArray<TaggedText>> GetDescriptionAsync(Document document, int position, SymbolKey symbolKey, CancellationToken cancellationToken)
-        {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        private static async Task<ImmutableArray<TaggedText>> GetDescriptionAsync(
+            Document document,
+            int position,
+            SymbolKey symbolKey,
+            CancellationToken cancellationToken
+        ) {
+            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var symbol = symbolKey.Resolve(semanticModel.Compilation, cancellationToken: cancellationToken).Symbol;
+            var symbol =
+                symbolKey.Resolve(
+                    semanticModel.Compilation,
+                    cancellationToken: cancellationToken
+                ).Symbol;
             if (symbol != null)
             {
                 var workspace = document.Project.Solution.Workspace;
-                var symbolDisplayService = document.GetRequiredLanguageService<ISymbolDisplayService>();
+                var symbolDisplayService =
+                    document.GetRequiredLanguageService<ISymbolDisplayService>();
 
                 var parts = new List<TaggedText>();
 
                 var groups = await symbolDisplayService.ToDescriptionGroupsAsync(
-                    workspace, semanticModel, position, ImmutableArray.Create(symbol), cancellationToken).ConfigureAwait(false);
+                        workspace,
+                        semanticModel,
+                        position,
+                        ImmutableArray.Create(symbol),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 parts.AddRange(groups[SymbolDescriptionGroups.MainDescription]);
 
-                var formatter = document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
-                var documentation = symbol.GetDocumentationParts(semanticModel, position, formatter, cancellationToken);
+                var formatter =
+                    document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
+                var documentation = symbol.GetDocumentationParts(
+                    semanticModel,
+                    position,
+                    formatter,
+                    cancellationToken
+                );
 
                 if (documentation.Any())
                 {
@@ -45,8 +72,12 @@ namespace Microsoft.CodeAnalysis.InlineHints
                     parts.AddRange(documentation);
                 }
 
-                if (groups.TryGetValue(SymbolDescriptionGroups.AnonymousTypes, out var anonymousTypes))
-                {
+                if (
+                    groups.TryGetValue(
+                        SymbolDescriptionGroups.AnonymousTypes,
+                        out var anonymousTypes
+                    )
+                ) {
                     if (!anonymousTypes.IsDefaultOrEmpty)
                     {
                         parts.AddLineBreak();

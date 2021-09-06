@@ -13,8 +13,12 @@ using Microsoft.CodeAnalysis.PreferFrameworkType;
 namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpPreferFrameworkTypeDiagnosticAnalyzer :
-        PreferFrameworkTypeDiagnosticAnalyzerBase<SyntaxKind, ExpressionSyntax, PredefinedTypeSyntax>
+    internal class CSharpPreferFrameworkTypeDiagnosticAnalyzer
+        : PreferFrameworkTypeDiagnosticAnalyzerBase<
+              SyntaxKind,
+              ExpressionSyntax,
+              PredefinedTypeSyntax
+          >
     {
         protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get; } =
             ImmutableArray.Create(SyntaxKind.PredefinedType);
@@ -22,13 +26,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.Analyzers
         ///<remarks>
         /// every predefined type keyword except <c>void</c> can be replaced by its framework type in code.
         ///</remarks>
-        protected override bool IsPredefinedTypeReplaceableWithFrameworkType(PredefinedTypeSyntax node)
-            => node.Keyword.Kind() != SyntaxKind.VoidKeyword;
+        protected override bool IsPredefinedTypeReplaceableWithFrameworkType(
+            PredefinedTypeSyntax node
+        ) => node.Keyword.Kind() != SyntaxKind.VoidKeyword;
 
-        protected override bool IsInMemberAccessOrCrefReferenceContext(ExpressionSyntax node)
-            => node.IsDirectChildOfMemberAccessExpression() || node.InsideCrefReference();
+        protected override bool IsInMemberAccessOrCrefReferenceContext(ExpressionSyntax node) =>
+            node.IsDirectChildOfMemberAccessExpression() || node.InsideCrefReference();
 
-        protected override string GetLanguageName()
-            => LanguageNames.CSharp;
+        protected override string GetLanguageName() => LanguageNames.CSharp;
     }
 }

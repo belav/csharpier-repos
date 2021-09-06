@@ -34,14 +34,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation IPropertySymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation IPropertySymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         ImmutableArray<IParameterSymbol> IPropertySymbol.Parameters
         {
@@ -60,10 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IPropertySymbol IPropertySymbol.OriginalDefinition
         {
-            get
-            {
-                return _underlying.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return _underlying.OriginalDefinition.GetPublicSymbol(); }
         }
 
         IPropertySymbol IPropertySymbol.OverriddenProperty
@@ -118,7 +120,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         {
             return visitor.VisitProperty(this);
         }
-
         #endregion
     }
 }

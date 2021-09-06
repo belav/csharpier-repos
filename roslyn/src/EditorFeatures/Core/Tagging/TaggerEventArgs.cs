@@ -23,7 +23,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// <summary>
         /// Creates a new <see cref="TaggerEventArgs"/>
         /// </summary>
-        public TaggerEventArgs(TaggerDelay delay)
-            => this.Delay = delay;
+        public TaggerEventArgs(TaggerDelay delay) => this.Delay = delay;
     }
 }

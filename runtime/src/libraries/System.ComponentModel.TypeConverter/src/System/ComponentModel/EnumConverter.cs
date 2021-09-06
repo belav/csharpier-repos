@@ -20,8 +20,10 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.EnumConverter'/> class for the given
         /// type.
         /// </summary>
-        public EnumConverter([DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)] Type type)
-        {
+        public EnumConverter(
+            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
+                Type type
+        ) {
             EnumType = type;
         }
 
@@ -62,30 +64,41 @@ namespace System.ComponentModel
         /// </summary>
         protected virtual IComparer Comparer => InvariantComparer.Default;
 
-        private static long GetEnumValue(bool isUnderlyingTypeUInt64, Enum enumVal, CultureInfo culture)
-        {
-            return isUnderlyingTypeUInt64 ?
-                unchecked((long)Convert.ToUInt64(enumVal, culture)) :
-                Convert.ToInt64(enumVal, culture);
+        private static long GetEnumValue(
+            bool isUnderlyingTypeUInt64,
+            Enum enumVal,
+            CultureInfo culture
+        ) {
+            return isUnderlyingTypeUInt64
+                ? unchecked((long)Convert.ToUInt64(enumVal, culture))
+                : Convert.ToInt64(enumVal, culture);
         }
 
         /// <summary>
         /// Converts the specified value object to an enumeration object.
         /// </summary>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        ) {
             if (value is string strValue)
             {
                 try
                 {
                     if (strValue.Contains(','))
                     {
-                        bool isUnderlyingTypeUInt64 = Enum.GetUnderlyingType(EnumType) == typeof(ulong);
+                        bool isUnderlyingTypeUInt64 =
+                            Enum.GetUnderlyingType(EnumType) == typeof(ulong);
                         long convertedValue = 0;
                         string[] values = strValue.Split(',');
                         foreach (string v in values)
                         {
-                            convertedValue |= GetEnumValue(isUnderlyingTypeUInt64, (Enum)Enum.Parse(EnumType, v, true), culture);
+                            convertedValue |= GetEnumValue(
+                                isUnderlyingTypeUInt64,
+                                (Enum)Enum.Parse(EnumType, v, true),
+                                culture
+                            );
                         }
                         return Enum.ToObject(EnumType, convertedValue);
                     }
@@ -96,7 +109,10 @@ namespace System.ComponentModel
                 }
                 catch (Exception e)
                 {
-                    throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, (string)value, EnumType.Name), e);
+                    throw new FormatException(
+                        SR.Format(SR.ConvertInvalidPrimitive, (string)value, EnumType.Name),
+                        e
+                    );
                 }
             }
             else if (value is Enum[])
@@ -115,8 +131,12 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to the specified destination type.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        ) {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -126,9 +146,13 @@ namespace System.ComponentModel
             {
                 // Raise an argument exception if the value isn't defined and if
                 // the enum isn't a flags style.
-                if (!EnumType.IsDefined(typeof(FlagsAttribute), false) && !Enum.IsDefined(EnumType, value))
-                {
-                    throw new ArgumentException(SR.Format(SR.EnumConverterInvalidValue, value, EnumType.Name));
+                if (
+                    !EnumType.IsDefined(typeof(FlagsAttribute), false)
+                    && !Enum.IsDefined(EnumType, value)
+                ) {
+                    throw new ArgumentException(
+                        SR.Format(SR.EnumConverterInvalidValue, value, EnumType.Name)
+                    );
                 }
 
                 return Enum.Format(EnumType, value, "G");
@@ -148,12 +172,21 @@ namespace System.ComponentModel
                     Type underlyingType = Enum.GetUnderlyingType(EnumType);
                     if (value is IConvertible)
                     {
-                        object convertedValue = ((IConvertible)value).ToType(underlyingType, culture);
+                        object convertedValue = ((IConvertible)value).ToType(
+                            underlyingType,
+                            culture
+                        );
 
-                        MethodInfo method = typeof(Enum).GetMethod("ToObject", new Type[] { typeof(Type), underlyingType });
+                        MethodInfo method = typeof(Enum).GetMethod(
+                            "ToObject",
+                            new Type[] { typeof(Type), underlyingType }
+                        );
                         if (method != null)
                         {
-                            return new InstanceDescriptor(method, new object[] { EnumType, convertedValue });
+                            return new InstanceDescriptor(
+                                method,
+                                new object[] { EnumType, convertedValue }
+                            );
                         }
                     }
                 }
@@ -178,7 +211,11 @@ namespace System.ComponentModel
                     long[] ulValues = new long[objValues.Length];
                     for (int idx = 0; idx < objValues.Length; idx++)
                     {
-                        ulValues[idx] = GetEnumValue(isUnderlyingTypeUInt64, (Enum)objValues.GetValue(idx), culture);
+                        ulValues[idx] = GetEnumValue(
+                            isUnderlyingTypeUInt64,
+                            (Enum)objValues.GetValue(idx),
+                            culture
+                        );
                     }
 
                     long longValue = GetEnumValue(isUnderlyingTypeUInt64, (Enum)value, culture);
@@ -232,7 +269,9 @@ namespace System.ComponentModel
                 // the behavior is undefined, since what we return are just enum values, not names.
                 Type reflectType = TypeDescriptor.GetReflectionType(EnumType) ?? EnumType;
 
-                FieldInfo[] fields = reflectType.GetFields(BindingFlags.Public | BindingFlags.Static);
+                FieldInfo[] fields = reflectType.GetFields(
+                    BindingFlags.Public | BindingFlags.Static
+                );
                 ArrayList objValues = null;
 
                 if (fields != null && fields.Length > 0)
@@ -245,8 +284,12 @@ namespace System.ComponentModel
                     foreach (FieldInfo field in fields)
                     {
                         BrowsableAttribute browsableAttr = null;
-                        foreach (Attribute attr in field.GetCustomAttributes(typeof(BrowsableAttribute), false))
-                        {
+                        foreach (
+                            Attribute attr in field.GetCustomAttributes(
+                                typeof(BrowsableAttribute),
+                                false
+                            )
+                        ) {
                             browsableAttr = attr as BrowsableAttribute;
                         }
 
@@ -305,6 +348,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets a value indicating whether the given object value is valid for this type.
         /// </summary>
-        public override bool IsValid(ITypeDescriptorContext context, object value) => Enum.IsDefined(EnumType, value);
+        public override bool IsValid(ITypeDescriptorContext context, object value) =>
+            Enum.IsDefined(EnumType, value);
     }
 }

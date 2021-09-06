@@ -38,17 +38,31 @@ namespace System.Composition.Hosting.Tests
             public int CalledGetExportDescriptors { get; set; }
             public int CalledCompositeActivator { get; set; }
 
-            public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)
-            {
+            public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
+                CompositionContract contract,
+                DependencyAccessor descriptorAccessor
+            ) {
                 CalledGetExportDescriptors++;
                 return new[]
                 {
-                    new ExportDescriptorPromise(contract, "origin", false, () => new CompositionDependency[0], dependencies => ExportDescriptor.Create(CompositeActivator, new Dictionary<string, object>()))
+                    new ExportDescriptorPromise(
+                        contract,
+                        "origin",
+                        false,
+                        () => new CompositionDependency[0],
+                        dependencies =>
+                            ExportDescriptor.Create(
+                                CompositeActivator,
+                                new Dictionary<string, object>()
+                            )
+                    )
                 };
             }
 
-            public object CompositeActivator(LifetimeContext context, CompositionOperation operation)
-            {
+            public object CompositeActivator(
+                LifetimeContext context,
+                CompositionOperation operation
+            ) {
                 CalledCompositeActivator++;
                 return Result;
             }
@@ -58,7 +72,10 @@ namespace System.Composition.Hosting.Tests
         public void WithProvider_NullProvider_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>("exportDescriptorProvider", () => configuration.WithProvider(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "exportDescriptorProvider",
+                () => configuration.WithProvider(null)
+            );
         }
 
         [Fact]
@@ -127,7 +144,10 @@ namespace System.Composition.Hosting.Tests
         public void WithDefaultConventions_NullConventions_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>("conventions", () => configuration.WithDefaultConventions(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "conventions",
+                () => configuration.WithDefaultConventions(null)
+            );
         }
 
         [Fact]
@@ -135,7 +155,9 @@ namespace System.Composition.Hosting.Tests
         {
             var configuration = new ContainerConfiguration();
             configuration.WithDefaultConventions(new ConventionBuilder());
-            Assert.Throws<InvalidOperationException>(() => configuration.WithDefaultConventions(new ConventionBuilder()));
+            Assert.Throws<InvalidOperationException>(
+                () => configuration.WithDefaultConventions(new ConventionBuilder())
+            );
         }
 
         [Fact]
@@ -158,7 +180,10 @@ namespace System.Composition.Hosting.Tests
             conventions.ForType<ExportedProperty>().ExportProperty(b => b.Property);
 
             var configuration = new ContainerConfiguration();
-            Assert.Same(configuration, configuration.WithPart(typeof(ExportedProperty), conventions));
+            Assert.Same(
+                configuration,
+                configuration.WithPart(typeof(ExportedProperty), conventions)
+            );
 
             CompositionHost container = configuration.CreateContainer();
             Assert.Equal("A", container.GetExport<string>());
@@ -168,8 +193,14 @@ namespace System.Composition.Hosting.Tests
         public void WithPart_NullPartType_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>("partType", () => configuration.WithPart(null));
-            AssertExtensions.Throws<ArgumentNullException>("partType", () => configuration.WithPart(null, new ConventionBuilder()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "partType",
+                () => configuration.WithPart(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "partType",
+                () => configuration.WithPart(null, new ConventionBuilder())
+            );
         }
 
         [Fact]
@@ -179,7 +210,10 @@ namespace System.Composition.Hosting.Tests
             conventions.ForType<ExportedProperty>().ExportProperty(b => b.Property);
 
             var configuration = new ContainerConfiguration();
-            Assert.Same(configuration, configuration.WithParts(new Type[] { typeof(ExportedProperty) }, conventions));
+            Assert.Same(
+                configuration,
+                configuration.WithParts(new Type[] { typeof(ExportedProperty) }, conventions)
+            );
 
             CompositionHost container = configuration.CreateContainer();
             Assert.Equal("A", container.GetExport<string>());
@@ -189,23 +223,40 @@ namespace System.Composition.Hosting.Tests
         public void WithParts_NullPartTypes_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>("partTypes", () => configuration.WithParts(null));
-            AssertExtensions.Throws<ArgumentNullException>("partTypes", () => configuration.WithParts((IEnumerable<Type>)null));
-            AssertExtensions.Throws<ArgumentNullException>("partTypes", () => configuration.WithParts(null, new ConventionBuilder()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "partTypes",
+                () => configuration.WithParts(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "partTypes",
+                () => configuration.WithParts((IEnumerable<Type>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "partTypes",
+                () => configuration.WithParts(null, new ConventionBuilder())
+            );
         }
 
         [Fact]
         public void WithParts_NullItemInPartTypes_ThrowsArgumentNullExceptionOnCreation()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(new Type[] { null });
-            AssertExtensions.Throws<ArgumentNullException>("type", () => configuration.CreateContainer());
+            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(
+                new Type[] { null }
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => configuration.CreateContainer()
+            );
         }
 
         [Fact]
         public void WithAssembly_Assembly_ThrowsCompositionFailedExceptionOnCreation()
         {
             var configuration = new ContainerConfiguration();
-            Assert.Same(configuration, configuration.WithAssembly(typeof(ExportedProperty).Assembly));
+            Assert.Same(
+                configuration,
+                configuration.WithAssembly(typeof(ExportedProperty).Assembly)
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -216,7 +267,10 @@ namespace System.Composition.Hosting.Tests
             conventions.ForType<ExportedProperty>().ExportProperty(b => b.Property);
 
             var configuration = new ContainerConfiguration();
-            Assert.Same(configuration, configuration.WithAssembly(typeof(ExportedProperty).Assembly, conventions));
+            Assert.Same(
+                configuration,
+                configuration.WithAssembly(typeof(ExportedProperty).Assembly, conventions)
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -224,7 +278,10 @@ namespace System.Composition.Hosting.Tests
         public void WithAssemblies_Assemblies_ThrowsCompositionFailedExceptionOnCreation()
         {
             var configuration = new ContainerConfiguration();
-            Assert.Same(configuration, configuration.WithAssemblies(new Assembly[] { typeof(ExportedProperty).Assembly }));
+            Assert.Same(
+                configuration,
+                configuration.WithAssemblies(new Assembly[] { typeof(ExportedProperty).Assembly })
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -235,7 +292,13 @@ namespace System.Composition.Hosting.Tests
             conventions.ForType<ExportedProperty>().ExportProperty(b => b.Property);
 
             var configuration = new ContainerConfiguration();
-            Assert.Same(configuration, configuration.WithAssemblies(new Assembly[] { typeof(ExportedProperty).Assembly }, conventions));
+            Assert.Same(
+                configuration,
+                configuration.WithAssemblies(
+                    new Assembly[] { typeof(ExportedProperty).Assembly },
+                    conventions
+                )
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -243,8 +306,14 @@ namespace System.Composition.Hosting.Tests
         public void WithAssemblies_NullAssemblies_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>("assemblies", () => configuration.WithAssemblies(null));
-            AssertExtensions.Throws<ArgumentNullException>("assemblies", () => configuration.WithAssemblies(null, new ConventionBuilder()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "assemblies",
+                () => configuration.WithAssemblies(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "assemblies",
+                () => configuration.WithAssemblies(null, new ConventionBuilder())
+            );
         }
 
         [Fact]
@@ -257,8 +326,7 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_ExportedSubClass_Success()
         {
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart(typeof(Derived))
+            CompositionHost container = new ContainerConfiguration().WithPart(typeof(Derived))
                 .CreateContainer();
             Assert.Equal("Derived", container.GetExport<Derived>().Prop);
         }
@@ -278,13 +346,14 @@ namespace System.Composition.Hosting.Tests
         public void CreateContainer_OpenGenericTypes_Success()
         {
             var conventions = new ConventionBuilder();
-            conventions.ForTypesDerivedFrom<IContainer>()
-                .Export<IContainer>();
+            conventions.ForTypesDerivedFrom<IContainer>().Export<IContainer>();
             conventions.ForTypesDerivedFrom(typeof(IRepository<>))
                 .Export(t => t.AsContractType(typeof(IRepository<>)));
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithParts(new Type[] { typeof(EFRepository<>), typeof(Container) }, conventions)
+            CompositionHost container = new ContainerConfiguration().WithParts(
+                    new Type[] { typeof(EFRepository<>), typeof(Container) },
+                    conventions
+                )
                 .CreateContainer();
             Assert.Equal(0, container.GetExport<IRepository<int>>().Fetch());
         }
@@ -312,8 +381,9 @@ namespace System.Composition.Hosting.Tests
                 .ImportProperty(b => b.Imported)
                 .Export();
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithDefaultConventions(conventions)
+            CompositionHost container = new ContainerConfiguration().WithDefaultConventions(
+                    conventions
+                )
                 .WithParts(typeof(Imported), typeof(DerivedFromBaseWithImport))
                 .CreateContainer();
 
@@ -334,11 +404,11 @@ namespace System.Composition.Hosting.Tests
         public void CreateContainer_ExportConventionsWithInheritedProperties_Success()
         {
             var conventions = new ConventionBuilder();
-            conventions.ForType<DerivedFromBaseWithExport>()
-                .ExportProperty(b => b.Exported);
+            conventions.ForType<DerivedFromBaseWithExport>().ExportProperty(b => b.Exported);
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithDefaultConventions(conventions)
+            CompositionHost container = new ContainerConfiguration().WithDefaultConventions(
+                    conventions
+                )
                 .WithParts(typeof(DerivedFromBaseWithExport))
                 .CreateContainer();
             Assert.Equal("A", container.GetExport<string>());
@@ -346,7 +416,10 @@ namespace System.Composition.Hosting.Tests
 
         public class BaseWithExport
         {
-            public string Exported { get { return "A"; } }
+            public string Exported
+            {
+                get { return "A"; }
+            }
         }
 
         public class DerivedFromBaseWithExport : BaseWithExport { }
@@ -355,11 +428,11 @@ namespace System.Composition.Hosting.Tests
         public void CreateContainer_ExportsToInheritedProperties_DontInterfereWithBase()
         {
             var conventions = new ConventionBuilder();
-            conventions.ForType<DerivedFromBaseWithExport2>()
-                .ExportProperty(b => b.Exported);
+            conventions.ForType<DerivedFromBaseWithExport2>().ExportProperty(b => b.Exported);
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithDefaultConventions(conventions)
+            CompositionHost container = new ContainerConfiguration().WithDefaultConventions(
+                    conventions
+                )
                 .WithParts(typeof(BaseWithExport2))
                 .WithParts(typeof(DerivedFromBaseWithExport2))
                 .CreateContainer();
@@ -377,18 +450,22 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_HasConventions_ClassExportsAreNotInherited()
         {
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart<DerivedFromBaseWithDeclaredExports>(new ConventionBuilder())
-                .CreateContainer();
+            CompositionHost container =
+                new ContainerConfiguration().WithPart<DerivedFromBaseWithDeclaredExports>(
+                        new ConventionBuilder()
+                    )
+                    .CreateContainer();
             Assert.False(container.TryGetExport(out BaseWithDeclaredExports export));
         }
 
         [Fact]
         public void CreateContainer_HasConventions_PropertyExportsAreNotInherited()
         {
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart<DerivedFromBaseWithDeclaredExports>(new ConventionBuilder())
-                .CreateContainer();
+            CompositionHost container =
+                new ContainerConfiguration().WithPart<DerivedFromBaseWithDeclaredExports>(
+                        new ConventionBuilder()
+                    )
+                    .CreateContainer();
             Assert.False(container.TryGetExport(out string export));
         }
 
@@ -408,9 +485,11 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_HasConventions_CustomAttributesAreNotInherited()
         {
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart<DerivedFromBaseWithCustomExport>(new ConventionBuilder())
-                .CreateContainer();
+            CompositionHost container =
+                new ContainerConfiguration().WithPart<DerivedFromBaseWithCustomExport>(
+                        new ConventionBuilder()
+                    )
+                    .CreateContainer();
             Assert.False(container.TryGetExport(out BaseWithCustomExport bce));
         }
 
@@ -422,7 +501,9 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_OpenGenericTypePart_Success()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(typeof(GenericExportedType<>));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(
+                typeof(GenericExportedType<>)
+            );
             CompositionHost container = configuration.CreateContainer();
 
             Assert.Equal("C", container.GetExport<GenericExportedType<int>>().Property);
@@ -438,10 +519,11 @@ namespace System.Composition.Hosting.Tests
         [InlineData(typeof(IncompatibleGenericExportedType<>))]
         [InlineData(typeof(IncompatibleGenericExportedType<int>))]
         [InlineData(typeof(IncompatibleGenericExportedTypeDerived<>))]
-        public void CreateContainer_GenericTypeExport_ThrowsCompositionFailedException(Type partType)
-        {
+        public void CreateContainer_GenericTypeExport_ThrowsCompositionFailedException(
+            Type partType
+        ) {
             ContainerConfiguration configuration = new ContainerConfiguration().WithParts(partType);
-            Assert.Throws<CompositionFailedException>(  () => configuration.CreateContainer());
+            Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
         [Export(typeof(GenericExportedType<>))]
@@ -453,8 +535,9 @@ namespace System.Composition.Hosting.Tests
         [Theory]
         [InlineData(typeof(NonGenericExportedType<>))]
         [InlineData(typeof(NonGenericExportedType<int>))]
-        public void CreateContainer_NonGenericTypeExportWithGenericPart_ThrowsCompositionFailedException(Type partType)
-        {
+        public void CreateContainer_NonGenericTypeExportWithGenericPart_ThrowsCompositionFailedException(
+            Type partType
+        ) {
             ContainerConfiguration configuration = new ContainerConfiguration().WithParts(partType);
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
@@ -465,7 +548,9 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_UnassignableType_ThrowsCompositionFailedException()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(typeof(ContractExportedType));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(
+                typeof(ContractExportedType)
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -475,7 +560,10 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_AbstractOrStructType_Success()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(typeof(AbstractClass), typeof(StructType));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithParts(
+                typeof(AbstractClass),
+                typeof(StructType)
+            );
             CompositionHost container = configuration.CreateContainer();
 
             Assert.Throws<CompositionFailedException>(() => container.GetExport<AbstractClass>());
@@ -488,10 +576,14 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_MetadataProperty_Success()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(typeof(MetadataProperty));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(
+                typeof(MetadataProperty)
+            );
             CompositionHost container = configuration.CreateContainer();
 
-            Assert.Throws<CompositionFailedException>(() => container.GetExport<MetadataProperty>());
+            Assert.Throws<CompositionFailedException>(
+                () => container.GetExport<MetadataProperty>()
+            );
         }
 
         [MetadataAttribute]
@@ -525,10 +617,14 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_MetadataClass_Success()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(typeof(MetadataClass));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(
+                typeof(MetadataClass)
+            );
             CompositionHost container = configuration.CreateContainer();
 
-            Assert.Throws<CompositionFailedException>(() => container.GetExport<MetadataProperty>());
+            Assert.Throws<CompositionFailedException>(
+                () => container.GetExport<MetadataProperty>()
+            );
         }
 
         [CustomMetadataExport]
@@ -537,7 +633,9 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_ExportIncompatibleNonGenericProperty_ThrowsCompositionFailedException()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(typeof(IncompatibleExportProperty));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(
+                typeof(IncompatibleExportProperty)
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -550,7 +648,9 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_ExportGenericProperty_Success()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(typeof(GenericExportProperty<>));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(
+                typeof(GenericExportProperty<>)
+            );
             Assert.NotNull(configuration.CreateContainer());
         }
 
@@ -563,7 +663,9 @@ namespace System.Composition.Hosting.Tests
         [Fact]
         public void CreateContainer_ExportIncompatibleGenericProperty_ThrowsCompositionFailedException()
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(typeof(IncompatibleGenericExportProperty<>));
+            ContainerConfiguration configuration = new ContainerConfiguration().WithPart(
+                typeof(IncompatibleGenericExportProperty<>)
+            );
             Assert.Throws<CompositionFailedException>(() => configuration.CreateContainer());
         }
 
@@ -577,16 +679,28 @@ namespace System.Composition.Hosting.Tests
         {
             yield return new object[] { new ContainerConfiguration() };
             yield return new object[] { new ContainerConfiguration().WithPart(typeof(int)) };
-            yield return new object[] { new ContainerConfiguration().WithDefaultConventions(new ConventionBuilder()).WithPart(typeof(int)) };
-            yield return new object[] { new ContainerConfiguration().WithPart(typeof(int), new ConventionBuilder()) };
-            yield return new object[] { new ContainerConfiguration().WithPart(typeof(ExportedProperty)) };
+            yield return new object[]
+            {
+                new ContainerConfiguration().WithDefaultConventions(new ConventionBuilder())
+                    .WithPart(typeof(int))
+            };
+            yield return new object[]
+            {
+                new ContainerConfiguration().WithPart(typeof(int), new ConventionBuilder())
+            };
+            yield return new object[]
+            {
+                new ContainerConfiguration().WithPart(typeof(ExportedProperty))
+            };
         }
 
         [Theory]
         [MemberData(nameof(DebuggerAttributes_TestData))]
-        public void DebuggerAttributes_GetViaReflection_Success(ContainerConfiguration configuration)
-        {
-            DebuggerAttributeInfo debuggerAttributeInfo = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(configuration);
+        public void DebuggerAttributes_GetViaReflection_Success(
+            ContainerConfiguration configuration
+        ) {
+            DebuggerAttributeInfo debuggerAttributeInfo =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(configuration);
             foreach (PropertyInfo property in debuggerAttributeInfo.Properties)
             {
                 Assert.NotNull(property.GetValue(debuggerAttributeInfo.Instance));
@@ -598,23 +712,24 @@ namespace System.Composition.Hosting.Tests
         {
             var conventions = new ConventionBuilder();
 
-            conventions
-                .ForType<Dependency>()
-                .Export<Dependency>();
+            conventions.ForType<Dependency>().Export<Dependency>();
 
-            conventions
-                .ForType(typeof(MoreOpenWithDependency<>))
+            conventions.ForType(typeof(MoreOpenWithDependency<>))
                 .ExportInterfaces(
                     (i) => i.GetGenericTypeDefinition() == typeof(IOpen<>),
-                    (type, builder) => builder.AsContractType(typeof(IOpen<>)))
+                    (type, builder) => builder.AsContractType(typeof(IOpen<>))
+                )
                 .SelectConstructor(ctors => ctors.ElementAt(0));
 
-            var configuration = new ContainerConfiguration()
-                .WithParts(new[] { typeof(IOpen<>), typeof(MoreOpenWithDependency<>), typeof(Dependency) }, conventions);
+            var configuration = new ContainerConfiguration().WithParts(
+                new[] { typeof(IOpen<>), typeof(MoreOpenWithDependency<>), typeof(Dependency) },
+                conventions
+            );
 
             using (var container = configuration.CreateContainer())
             {
-                var service = container.GetExport(typeof(IOpen<object>)) as MoreOpenWithDependency<object>;
+                var service =
+                    container.GetExport(typeof(IOpen<object>)) as MoreOpenWithDependency<object>;
                 Assert.NotNull(service);
                 Assert.NotNull(service.Dependency);
             }

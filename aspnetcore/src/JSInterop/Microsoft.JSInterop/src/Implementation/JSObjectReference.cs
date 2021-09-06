@@ -36,16 +36,21 @@ namespace Microsoft.JSInterop.Implementation
         }
 
         /// <inheritdoc />
-        public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string identifier, object?[]? args)
-        {
+        public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+            string identifier,
+            object?[]? args
+        ) {
             ThrowIfDisposed();
 
             return _jsRuntime.InvokeAsync<TValue>(Id, identifier, args);
         }
 
         /// <inheritdoc />
-        public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string identifier, CancellationToken cancellationToken, object?[]? args)
-        {
+        public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+            string identifier,
+            CancellationToken cancellationToken,
+            object?[]? args
+        ) {
             ThrowIfDisposed();
 
             return _jsRuntime.InvokeAsync<TValue>(Id, identifier, cancellationToken, args);
@@ -58,7 +63,10 @@ namespace Microsoft.JSInterop.Implementation
             {
                 Disposed = true;
 
-                await _jsRuntime.InvokeVoidAsync("DotNet.jsCallDispatcher.disposeJSObjectReferenceById", Id);
+                await _jsRuntime.InvokeVoidAsync(
+                    "DotNet.jsCallDispatcher.disposeJSObjectReferenceById",
+                    Id
+                );
             }
         }
 

@@ -56,8 +56,12 @@ namespace System.Collections.Immutable
             /// <param name="equalityComparer">The equality comparer.</param>
             /// <param name="hashBucketEqualityComparer">The equality comparer to use when checking for <see cref="HashBucket"/> equality.</param>
             /// <param name="count">The count.</param>
-            internal MutationInput(SortedInt32KeyNode<HashBucket> root, IEqualityComparer<T> equalityComparer, IEqualityComparer<HashBucket> hashBucketEqualityComparer, int count)
-            {
+            internal MutationInput(
+                SortedInt32KeyNode<HashBucket> root,
+                IEqualityComparer<T> equalityComparer,
+                IEqualityComparer<HashBucket> hashBucketEqualityComparer,
+                int count
+            ) {
                 Requires.NotNull(root, nameof(root));
                 Requires.NotNull(equalityComparer, nameof(equalityComparer));
                 Requires.Range(count >= 0, nameof(count));
@@ -96,7 +100,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Gets the equality comparer to use when checking for <see cref="HashBucket"/> equality.
             /// </summary>
-            internal IEqualityComparer<HashBucket> HashBucketEqualityComparer => _hashBucketEqualityComparer;
+            internal IEqualityComparer<HashBucket> HashBucketEqualityComparer =>
+                _hashBucketEqualityComparer;
         }
     }
 }

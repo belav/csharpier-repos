@@ -11,17 +11,74 @@ using static System.Runtime.Intrinsics.X86.Avx2;
 
 class GitHub_25039
 {
-    static ReadOnlySpan<byte> PermTable => new byte[]
-    {
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-        0, 1, 2, 3, 4, 5, 6, 7, /* 0*/
-    };
+    static ReadOnlySpan<byte> PermTable =>
+        new byte[]
+        {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7, /* 0*/
+        };
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static unsafe Vector256<int> GetPermutation(byte* pBase, int pvbyte)
@@ -39,10 +96,8 @@ class GitHub_25039
             try
             {
                 var src = new int[1024];
-                fixed (int* pSrc = &src[0])
-                fixed (byte* pBase = &PermTable[0])
+                fixed (int* pSrc = &src[0])fixed (byte* pBase = &PermTable[0])
                 {
-
                     for (var i = 0; i < 100; i++)
                     {
                         var srcv = LoadDquVector256(pSrc + i);

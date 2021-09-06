@@ -25,10 +25,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="name"> The name of the column. </param>
         /// <param name="getFieldValue"> A function to get field value for the column from the reader. </param>
         [Obsolete("Use constructor which also takes IPropertyBase.")]
-        public ReaderColumn(bool nullable, string? name, Func<DbDataReader, int[], T> getFieldValue)
-            : this(nullable, name, property: null, getFieldValue)
-        {
-        }
+        public ReaderColumn(
+            bool nullable,
+            string? name,
+            Func<DbDataReader, int[], T> getFieldValue
+        ) : this(nullable, name, property: null, getFieldValue) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="ReaderColumn{T}" /> class.
@@ -41,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool nullable,
             string? name,
             IPropertyBase? property,
-            Func<DbDataReader, int[], T> getFieldValue)
-            : base(typeof(T), nullable, name, property)
+            Func<DbDataReader, int[], T> getFieldValue
+        ) : base(typeof(T), nullable, name, property)
         {
             GetFieldValue = getFieldValue;
         }

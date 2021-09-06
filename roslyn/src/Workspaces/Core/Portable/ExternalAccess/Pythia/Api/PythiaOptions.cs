@@ -17,13 +17,25 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
     {
         public const string LocalRegistryPath = @"Roslyn\Internal\OnOff\Features\";
 
-        public static readonly Option<bool> ShowDebugInfo = new(
-            "InternalFeatureOnOffOptions", nameof(ShowDebugInfo), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(ShowDebugInfo)));
+        public static readonly Option<bool> ShowDebugInfo =
+            new(
+                "InternalFeatureOnOffOptions",
+                nameof(ShowDebugInfo),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(ShowDebugInfo)
+                )
+            );
 
-        public static readonly Option<bool> RemoveRecommendationLimit = new(
-            "InternalFeatureOnOffOptions", nameof(RemoveRecommendationLimit), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(RemoveRecommendationLimit)));
+        public static readonly Option<bool> RemoveRecommendationLimit =
+            new(
+                "InternalFeatureOnOffOptions",
+                nameof(RemoveRecommendationLimit),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(RemoveRecommendationLimit)
+                )
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -31,13 +43,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PythiaOptionsProvider()
-        {
-        }
+        public PythiaOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; }
-            = ImmutableArray.Create<IOption>(
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
                 PythiaOptions.ShowDebugInfo,
-                PythiaOptions.RemoveRecommendationLimit);
+                PythiaOptions.RemoveRecommendationLimit
+            );
     }
 }

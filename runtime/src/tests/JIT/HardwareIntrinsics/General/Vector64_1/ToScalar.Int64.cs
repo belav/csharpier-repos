@@ -72,20 +72,26 @@ namespace JIT.HardwareIntrinsics.General
 
             Vector64<Int64> value = Vector64.Create(values[0]);
 
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.ToScalar))
-                                .MakeGenericMethod(typeof(Int64))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector64).GetMethod(nameof(Vector64.ToScalar))
+                .MakeGenericMethod(typeof(Int64))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Int64)(result), values);
         }
 
-        private void ValidateResult(Int64 result, Int64[] values, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Int64 result,
+            Int64[] values,
+            [CallerMemberName] string method = ""
+        ) {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int64>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int64>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

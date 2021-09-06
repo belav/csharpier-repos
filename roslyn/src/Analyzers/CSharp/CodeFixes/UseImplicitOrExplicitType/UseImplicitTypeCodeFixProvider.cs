@@ -21,14 +21,22 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseImplicitType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseImplicitType
+        ),
+        Shared
+    ]
     internal class UseImplicitTypeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseImplicitTypeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseImplicitTypeCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseImplicitTypeDiagnosticId);
@@ -39,20 +47,26 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
         {
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             var root = editor.OriginalRoot;
 
             foreach (var diagnostic in diagnostics)
             {
-                var typeSyntax = (TypeSyntax)root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+                var typeSyntax = (TypeSyntax)root.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
                 ReplaceTypeWithVar(editor, typeSyntax);
             }
 
@@ -62,20 +76,20 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
         internal static void ReplaceTypeWithVar(SyntaxEditor editor, TypeSyntax type)
         {
             type = type.StripRefIfNeeded();
-            var implicitType = SyntaxFactory.IdentifierName("var")
-                                            .WithTriviaFrom(type);
+            var implicitType = SyntaxFactory.IdentifierName("var").WithTriviaFrom(type);
 
             editor.ReplaceNode(type, implicitType);
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.use_var_instead_of_explicit_type,
-                       createChangedDocument,
-                       CSharpAnalyzersResources.use_var_instead_of_explicit_type)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                CSharpAnalyzersResources.use_var_instead_of_explicit_type,
+                createChangedDocument,
+                CSharpAnalyzersResources.use_var_instead_of_explicit_type
+            ) { }
         }
     }
 }

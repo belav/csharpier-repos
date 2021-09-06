@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddMemberToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddMemberToken());
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddMemberToken()
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -25,7 +29,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddNamespaceToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddNamespaceToken("Name", "Description"));
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddNamespaceToken("Name", "Description")
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -39,7 +47,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddStringToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddStringToken());
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddStringToken()
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -53,7 +65,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddTypeToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddTypeToken("Name", "Description"));
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddTypeToken("Name", "Description")
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -67,7 +83,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddOptionalTypeToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalTypeToken());
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddOptionalTypeToken()
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -81,7 +101,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddOptionalMemberToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalMemberToken("Name", "Description"));
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddOptionalMemberToken("Name", "Description")
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -95,7 +119,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddOptionalNamespaceToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalNamespaceToken());
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddOptionalNamespaceToken()
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -109,7 +137,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddOptionalStringToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalStringToken("Name", "Description"));
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddOptionalStringToken("Name", "Description")
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -123,7 +155,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddAttributeToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddAttributeToken("Name", "Description"));
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddAttributeToken("Name", "Description")
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -137,7 +173,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddOptionalAttributeToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalAttributeToken());
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddOptionalAttributeToken()
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);
@@ -151,7 +191,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddOptionalGenericTypeConstraintToken_AddsToken()
         {
             // Arrange & Act
-            var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalGenericTypeConstraintToken("Name", "Description"));
+            var descriptor = DirectiveDescriptor.CreateDirective(
+                "custom",
+                DirectiveKind.SingleLine,
+                b => b.AddOptionalGenericTypeConstraintToken("Name", "Description")
+            );
 
             // Assert
             var token = Assert.Single(descriptor.Tokens);

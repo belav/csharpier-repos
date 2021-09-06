@@ -22,12 +22,24 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public long OperationCount => throw new NotImplementedException();
 
-        public bool PreserveAsyncOrder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool PreserveAsyncOrder
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public bool IsConnected => true;
 
-        public bool IncludeDetailInExceptions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int StormLogThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IncludeDetailInExceptions
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+        public int StormLogThreshold
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public bool IsConnecting => throw new NotImplementedException();
 
@@ -110,8 +122,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public ProfiledCommandEnumerable FinishProfiling(object forContext, bool allowCleanupSweep = true)
-        {
+        public ProfiledCommandEnumerable FinishProfiling(
+            object forContext,
+            bool allowCleanupSweep = true
+        ) {
             throw new NotImplementedException();
         }
 
@@ -215,19 +229,29 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public void ExportConfiguration(Stream destination, ExportOptions options = (ExportOptions)(-1))
-        {
+        public void ExportConfiguration(
+            Stream destination,
+            ExportOptions options = (ExportOptions)(-1)
+        ) {
             throw new NotImplementedException();
         }
     }
 
     public class TestRedisServer
     {
-        private readonly ConcurrentDictionary<RedisChannel, List<Action<RedisChannel, RedisValue>>> _subscriptions =
-            new ConcurrentDictionary<RedisChannel, List<Action<RedisChannel, RedisValue>>>();
+        private readonly ConcurrentDictionary<
+            RedisChannel,
+            List<Action<RedisChannel, RedisValue>>
+        > _subscriptions = new ConcurrentDictionary<
+            RedisChannel,
+            List<Action<RedisChannel, RedisValue>>
+        >();
 
-        public long Publish(RedisChannel channel, RedisValue message, CommandFlags flags = CommandFlags.None)
-        {
+        public long Publish(
+            RedisChannel channel,
+            RedisValue message,
+            CommandFlags flags = CommandFlags.None
+        ) {
             if (_subscriptions.TryGetValue(channel, out var handlers))
             {
                 foreach (var handler in handlers)
@@ -239,17 +263,27 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             return handlers != null ? handlers.Count : 0;
         }
 
-        public void Subscribe(RedisChannel channel, Action<RedisChannel, RedisValue> handler, CommandFlags flags = CommandFlags.None)
-        {
-            _subscriptions.AddOrUpdate(channel, _ => new List<Action<RedisChannel, RedisValue>> { handler }, (_, list) =>
-            {
-                list.Add(handler);
-                return list;
-            });
+        public void Subscribe(
+            RedisChannel channel,
+            Action<RedisChannel, RedisValue> handler,
+            CommandFlags flags = CommandFlags.None
+        ) {
+            _subscriptions.AddOrUpdate(
+                channel,
+                _ => new List<Action<RedisChannel, RedisValue>> { handler },
+                (_, list) =>
+                {
+                    list.Add(handler);
+                    return list;
+                }
+            );
         }
 
-        public void Unsubscribe(RedisChannel channel, Action<RedisChannel, RedisValue> handler = null, CommandFlags flags = CommandFlags.None)
-        {
+        public void Unsubscribe(
+            RedisChannel channel,
+            Action<RedisChannel, RedisValue> handler = null,
+            CommandFlags flags = CommandFlags.None
+        ) {
             if (_subscriptions.TryGetValue(channel, out var list))
             {
                 list.Remove(handler);
@@ -269,13 +303,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             _server = server;
         }
 
-        public EndPoint IdentifyEndpoint(RedisChannel channel, CommandFlags flags = CommandFlags.None)
-        {
+        public EndPoint IdentifyEndpoint(
+            RedisChannel channel,
+            CommandFlags flags = CommandFlags.None
+        ) {
             throw new NotImplementedException();
         }
 
-        public Task<EndPoint> IdentifyEndpointAsync(RedisChannel channel, CommandFlags flags = CommandFlags.None)
-        {
+        public Task<EndPoint> IdentifyEndpointAsync(
+            RedisChannel channel,
+            CommandFlags flags = CommandFlags.None
+        ) {
             throw new NotImplementedException();
         }
 
@@ -294,24 +332,36 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public long Publish(RedisChannel channel, RedisValue message, CommandFlags flags = CommandFlags.None)
-        {
+        public long Publish(
+            RedisChannel channel,
+            RedisValue message,
+            CommandFlags flags = CommandFlags.None
+        ) {
             return _server.Publish(channel, message, flags);
         }
 
-        public async Task<long> PublishAsync(RedisChannel channel, RedisValue message, CommandFlags flags = CommandFlags.None)
-        {
+        public async Task<long> PublishAsync(
+            RedisChannel channel,
+            RedisValue message,
+            CommandFlags flags = CommandFlags.None
+        ) {
             await Task.Yield();
             return Publish(channel, message, flags);
         }
 
-        public void Subscribe(RedisChannel channel, Action<RedisChannel, RedisValue> handler, CommandFlags flags = CommandFlags.None)
-        {
+        public void Subscribe(
+            RedisChannel channel,
+            Action<RedisChannel, RedisValue> handler,
+            CommandFlags flags = CommandFlags.None
+        ) {
             _server.Subscribe(channel, handler, flags);
         }
 
-        public Task SubscribeAsync(RedisChannel channel, Action<RedisChannel, RedisValue> handler, CommandFlags flags = CommandFlags.None)
-        {
+        public Task SubscribeAsync(
+            RedisChannel channel,
+            Action<RedisChannel, RedisValue> handler,
+            CommandFlags flags = CommandFlags.None
+        ) {
             Subscribe(channel, handler, flags);
             return Task.CompletedTask;
         }
@@ -326,8 +376,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public void Unsubscribe(RedisChannel channel, Action<RedisChannel, RedisValue> handler = null, CommandFlags flags = CommandFlags.None)
-        {
+        public void Unsubscribe(
+            RedisChannel channel,
+            Action<RedisChannel, RedisValue> handler = null,
+            CommandFlags flags = CommandFlags.None
+        ) {
             _server.Unsubscribe(channel, handler, flags);
         }
 
@@ -341,8 +394,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public Task UnsubscribeAsync(RedisChannel channel, Action<RedisChannel, RedisValue> handler = null, CommandFlags flags = CommandFlags.None)
-        {
+        public Task UnsubscribeAsync(
+            RedisChannel channel,
+            Action<RedisChannel, RedisValue> handler = null,
+            CommandFlags flags = CommandFlags.None
+        ) {
             Unsubscribe(channel, handler, flags);
             return Task.CompletedTask;
         }
@@ -362,13 +418,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public ChannelMessageQueue Subscribe(RedisChannel channel, CommandFlags flags = CommandFlags.None)
-        {
+        public ChannelMessageQueue Subscribe(
+            RedisChannel channel,
+            CommandFlags flags = CommandFlags.None
+        ) {
             throw new NotImplementedException();
         }
 
-        public Task<ChannelMessageQueue> SubscribeAsync(RedisChannel channel, CommandFlags flags = CommandFlags.None)
-        {
+        public Task<ChannelMessageQueue> SubscribeAsync(
+            RedisChannel channel,
+            CommandFlags flags = CommandFlags.None
+        ) {
             var t = Subscribe(channel, flags);
             return Task.FromResult(t);
         }

@@ -32,14 +32,36 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 return;
             }
 
-            using (GroupPrincipal group = GroupPrincipal.FindByIdentity(DomainContext, "TestLargeGroup"))
-            {
-                Assert.True(UserPrincipal.FindByIdentity(DomainContext, "user1499-LargeGroup").IsMemberOf(group));
-                Assert.True(UserPrincipal.FindByIdentity(DomainContext, "user1500-LargeGroup").IsMemberOf(group));
-                Assert.True(UserPrincipal.FindByIdentity(DomainContext, "user1501-LargeGroup").IsMemberOf(group));
-                Assert.True(UserPrincipal.FindByIdentity(DomainContext, "user3000-LargeGroup").IsMemberOf(group));
-                Assert.True(UserPrincipal.FindByIdentity(DomainContext, "user3001-LargeGroup").IsMemberOf(group));
-                Assert.False(UserPrincipal.FindByIdentity(DomainContext, "userNotInLargeGroup").IsMemberOf(group));
+            using (
+                GroupPrincipal group = GroupPrincipal.FindByIdentity(
+                    DomainContext,
+                    "TestLargeGroup"
+                )
+            ) {
+                Assert.True(
+                    UserPrincipal.FindByIdentity(DomainContext, "user1499-LargeGroup")
+                        .IsMemberOf(group)
+                );
+                Assert.True(
+                    UserPrincipal.FindByIdentity(DomainContext, "user1500-LargeGroup")
+                        .IsMemberOf(group)
+                );
+                Assert.True(
+                    UserPrincipal.FindByIdentity(DomainContext, "user1501-LargeGroup")
+                        .IsMemberOf(group)
+                );
+                Assert.True(
+                    UserPrincipal.FindByIdentity(DomainContext, "user3000-LargeGroup")
+                        .IsMemberOf(group)
+                );
+                Assert.True(
+                    UserPrincipal.FindByIdentity(DomainContext, "user3001-LargeGroup")
+                        .IsMemberOf(group)
+                );
+                Assert.False(
+                    UserPrincipal.FindByIdentity(DomainContext, "userNotInLargeGroup")
+                        .IsMemberOf(group)
+                );
             }
         }
 

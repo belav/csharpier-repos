@@ -10,12 +10,12 @@ namespace JitBench
 {
     class MusicStoreBenchmark : WebAppBenchmark
     {
-        public MusicStoreBenchmark() :
-            base(
+        public MusicStoreBenchmark()
+            : base(
                 "MusicStore",
                 "MusicStore.dll",
-                new string[] { Path.Combine("src", "MusicStore", "MusicStore.csproj") })
-        { }
+                new string[] { Path.Combine("src", "MusicStore", "MusicStore.csproj") }
+            ) { }
 
         protected override string GetJitBenchRepoRootDir(string outputDir)
         {
@@ -30,12 +30,12 @@ namespace JitBench
 
     class AllReadyBenchmark : WebAppBenchmark
     {
-        public AllReadyBenchmark() :
-            base(
+        public AllReadyBenchmark()
+            : base(
                 "AllReady",
                 "AllReady.dll",
-                new string[] { Path.Combine("src", "AllReady", "AllReady.csproj") })
-        { }
+                new string[] { Path.Combine("src", "AllReady", "AllReady.csproj") }
+            ) { }
 
         protected override string GetJitBenchRepoRootDir(string outputDir)
         {
@@ -54,26 +54,40 @@ namespace JitBench
 
         private string[] _projectFileRelativePaths;
 
-        public WebAppBenchmark(string name, string executableName, string[] projectFileRelativePaths) : base(name)
+        public WebAppBenchmark(
+            string name,
+            string executableName,
+            string[] projectFileRelativePaths
+        ) : base(name)
         {
             ExePath = executableName;
             _projectFileRelativePaths = projectFileRelativePaths;
         }
 
-        public override async Task Setup(DotNetInstallation dotNetInstall, string outputDir, bool useExistingSetup, ITestOutputHelper output)
-        {
-            if(!useExistingSetup)
+        public override async Task Setup(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            bool useExistingSetup,
+            ITestOutputHelper output
+        ) {
+            if (!useExistingSetup)
             {
                 using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
                 {
                     await CloneAspNetJitBenchRepo(outputDir, setupSection);
-                    RetargetProjects(dotNetInstall, GetJitBenchRepoRootDir(outputDir), _projectFileRelativePaths);
+                    RetargetProjects(
+                        dotNetInstall,
+                        GetJitBenchRepoRootDir(outputDir),
+                        _projectFileRelativePaths
+                    );
                     await CreateStore(dotNetInstall, outputDir, setupSection);
                     await Publish(dotNetInstall, outputDir, setupSection);
                 }
             }
 
-            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(dotNetInstall.FrameworkVersion);
+            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
+                dotNetInstall.FrameworkVersion
+            );
             WorkingDirPath = GetWebAppPublishDirectory(dotNetInstall, outputDir, tfm);
             EnvironmentVariables.Add("DOTNET_SHARED_STORE", GetWebAppStoreDir(outputDir));
         }
@@ -85,50 +99,96 @@ namespace JitBench
             FileTasks.DeleteDirectory(jitBenchRepoRootDir, output);
 
             await ExecuteGitCommand($"clone {JitBenchRepoUrl} {jitBenchRepoRootDir}", output);
-            await ExecuteGitCommand($"checkout {JitBenchCommitSha1Id}", output, workingDirectory: jitBenchRepoRootDir);
-            await ExecuteGitCommand($"submodule update --init --recursive", output, workingDirectory: jitBenchRepoRootDir);
+            await ExecuteGitCommand(
+                $"checkout {JitBenchCommitSha1Id}",
+                output,
+                workingDirectory: jitBenchRepoRootDir
+            );
+            await ExecuteGitCommand(
+                $"submodule update --init --recursive",
+                output,
+                workingDirectory: jitBenchRepoRootDir
+            );
         }
 
-        async Task ExecuteGitCommand(string arguments, ITestOutputHelper output, string workingDirectory = null)
-        {
-            int exitCode = await new ProcessRunner("git", arguments).WithLog(output).WithWorkingDirectory(workingDirectory).Run();
+        async Task ExecuteGitCommand(
+            string arguments,
+            ITestOutputHelper output,
+            string workingDirectory = null
+        ) {
+            int exitCode = await new ProcessRunner("git", arguments).WithLog(output)
+                .WithWorkingDirectory(workingDirectory)
+                .Run();
 
             if (!DefaultExitCodes.Contains(exitCode))
                 throw new Exception($"git {arguments} has failed, the exit code was {exitCode}");
         }
 
-        private async Task CreateStore(DotNetInstallation dotNetInstall, string outputDir, ITestOutputHelper output)
-        {
-            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(dotNetInstall.FrameworkVersion);
+        private async Task CreateStore(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            ITestOutputHelper output
+        ) {
+            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
+                dotNetInstall.FrameworkVersion
+            );
             string storeDirName = ".store";
-            await (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-                    new ProcessRunner("powershell.exe", $"-ExecutionPolicy Bypass .\\AspNet-GenerateStore.ps1 -InstallDir {storeDirName} -Architecture {dotNetInstall.Architecture} -Runtime win7-{dotNetInstall.Architecture}") :
-                    new ProcessRunner("bash", $"./aspnet-generatestore.sh --install-dir {storeDirName} --architecture {dotNetInstall.Architecture} --runtime-id linux-{dotNetInstall.Architecture} -f {tfm} --fx-version {dotNetInstall.FrameworkVersion}"))
-                .WithWorkingDirectory(GetJitBenchRepoRootDir(outputDir))
-                .WithEnvironmentVariable("PATH", $"{dotNetInstall.DotNetDir}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}")
+            await (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    ? new ProcessRunner(
+                          "powershell.exe",
+                          $"-ExecutionPolicy Bypass .\\AspNet-GenerateStore.ps1 -InstallDir {storeDirName} -Architecture {dotNetInstall.Architecture} -Runtime win7-{dotNetInstall.Architecture}"
+                      )
+                    : new ProcessRunner(
+                          "bash",
+                          $"./aspnet-generatestore.sh --install-dir {storeDirName} --architecture {dotNetInstall.Architecture} --runtime-id linux-{dotNetInstall.Architecture} -f {tfm} --fx-version {dotNetInstall.FrameworkVersion}"
+                      )
+            ).WithWorkingDirectory(GetJitBenchRepoRootDir(outputDir))
+                .WithEnvironmentVariable(
+                    "PATH",
+                    $"{dotNetInstall.DotNetDir}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}"
+                )
                 .WithEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .WithEnvironmentVariable("JITBENCH_TARGET_FRAMEWORK_MONIKER", tfm)
-                .WithEnvironmentVariable("JITBENCH_FRAMEWORK_VERSION", dotNetInstall.FrameworkVersion)
+                .WithEnvironmentVariable(
+                    "JITBENCH_FRAMEWORK_VERSION",
+                    dotNetInstall.FrameworkVersion
+                )
                 .WithLog(output)
                 .Run();
         }
 
-        private async Task<string> Publish(DotNetInstallation dotNetInstall, string outputDir, ITestOutputHelper output)
-        {
-            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(dotNetInstall.FrameworkVersion);
+        private async Task<string> Publish(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            ITestOutputHelper output
+        ) {
+            string tfm = DotNetSetup.GetTargetFrameworkMonikerForFrameworkVersion(
+                dotNetInstall.FrameworkVersion
+            );
             string publishDir = GetWebAppPublishDirectory(dotNetInstall, outputDir, tfm);
-            string manifestPath = Path.Combine(GetWebAppStoreDir(outputDir), dotNetInstall.Architecture, tfm, "artifact.xml");
+            string manifestPath = Path.Combine(
+                GetWebAppStoreDir(outputDir),
+                dotNetInstall.Architecture,
+                tfm,
+                "artifact.xml"
+            );
             if (publishDir != null)
             {
                 FileTasks.DeleteDirectory(publishDir, output);
             }
             string dotNetExePath = dotNetInstall.DotNetExe;
-            await new ProcessRunner(dotNetExePath, $"publish -c Release -f {tfm} --manifest {manifestPath}")
-                .WithWorkingDirectory(GetWebAppSrcDirectory(outputDir))
+            await new ProcessRunner(
+                dotNetExePath,
+                $"publish -c Release -f {tfm} --manifest {manifestPath}"
+            ).WithWorkingDirectory(GetWebAppSrcDirectory(outputDir))
                 .WithEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .WithEnvironmentVariable("JITBENCH_ASPNET_VERSION", "2.0")
                 .WithEnvironmentVariable("JITBENCH_TARGET_FRAMEWORK_MONIKER", tfm)
-                .WithEnvironmentVariable("JITBENCH_FRAMEWORK_VERSION", dotNetInstall.FrameworkVersion)
+                .WithEnvironmentVariable(
+                    "JITBENCH_FRAMEWORK_VERSION",
+                    dotNetInstall.FrameworkVersion
+                )
                 .WithEnvironmentVariable("UseSharedCompilation", "false")
                 .WithLog(output)
                 .Run();
@@ -136,24 +196,30 @@ namespace JitBench
             publishDir = GetWebAppPublishDirectory(dotNetInstall, outputDir, tfm);
             if (publishDir == null)
             {
-                throw new DirectoryNotFoundException($"Could not find 'publish' directory: {publishDir}");
+                throw new DirectoryNotFoundException(
+                    $"Could not find 'publish' directory: {publishDir}"
+                );
             }
             return publishDir;
         }
 
         public override Metric[] GetDefaultDisplayMetrics()
         {
-            return new Metric[]
-            {
-                StartupMetric,
-                FirstRequestMetric,
-                MedianResponseMetric
-            };
+            return new Metric[] { StartupMetric, FirstRequestMetric, MedianResponseMetric };
         }
 
-        protected override IterationResult RecordIterationMetrics(ScenarioExecutionResult scenarioIteration, string stdout, string stderr, ITestOutputHelper output)
-        {
-            IterationResult result = base.RecordIterationMetrics(scenarioIteration, stdout, stderr, output);
+        protected override IterationResult RecordIterationMetrics(
+            ScenarioExecutionResult scenarioIteration,
+            string stdout,
+            string stderr,
+            ITestOutputHelper output
+        ) {
+            IterationResult result = base.RecordIterationMetrics(
+                scenarioIteration,
+                stdout,
+                stderr,
+                output
+            );
             AddConsoleMetrics(result, stdout, output);
             return result;
         }
@@ -193,7 +259,10 @@ namespace JitBench
                     //  ... many more rows ...
 
                     //                              Requests       Agg     req/s        min          mean           median         max          SEM
-                    match = Regex.Match(line, @"^\s*\d+-\s*\d+ \s* \d+ \s* \d+\.\d+ \s* \d+\.\d+ \s* (\d+\.\d+) \s* (\d+\.\d+) \s* \d+\.\d+ \s* \d+\.\d+$");
+                    match = Regex.Match(
+                        line,
+                        @"^\s*\d+-\s*\d+ \s* \d+ \s* \d+\.\d+ \s* \d+\.\d+ \s* (\d+\.\d+) \s* (\d+\.\d+) \s* \d+\.\d+ \s* \d+\.\d+$"
+                    );
                     if (match.Success && match.Groups.Count == 3)
                     {
                         //many lines will match, but the final values of these variables will be from the last batch which is presumably the
@@ -210,7 +279,6 @@ namespace JitBench
                 throw new FormatException("First Request time was not found.");
             if (!steadyStateMedianTime.HasValue)
                 throw new FormatException("Steady state median response time not found.");
-                
 
             result.Measurements.Add(StartupMetric, startupTime.Value);
             result.Measurements.Add(FirstRequestMetric, firstRequestTime.Value);
@@ -226,9 +294,12 @@ namespace JitBench
         /// than they were collected. Both web apps use this to collect several measurements in each iteration, then present those measurements
         /// to benchview as if each was the Duration metric of a distinct scenario test with its own set of iterations.
         /// </summary>
-        public override bool TryGetBenchviewCustomMetricReporting(Metric originalMetric, out Metric newMetric, out string newScenarioModelName)
-        {
-            if(originalMetric.Equals(StartupMetric))
+        public override bool TryGetBenchviewCustomMetricReporting(
+            Metric originalMetric,
+            out Metric newMetric,
+            out string newScenarioModelName
+        ) {
+            if (originalMetric.Equals(StartupMetric))
             {
                 newScenarioModelName = "Startup";
             }
@@ -242,7 +313,11 @@ namespace JitBench
             }
             else
             {
-                return base.TryGetBenchviewCustomMetricReporting(originalMetric, out newMetric, out newScenarioModelName);
+                return base.TryGetBenchviewCustomMetricReporting(
+                    originalMetric,
+                    out newMetric,
+                    out newScenarioModelName
+                );
             }
             newMetric = Metric.ElapsedTimeMilliseconds;
             return true;
@@ -252,9 +327,19 @@ namespace JitBench
 
         protected abstract string GetWebAppSrcDirectory(string outputDir);
 
-        string GetWebAppPublishDirectory(DotNetInstallation dotNetInstall, string outputDir, string tfm)
-        {
-            string dir = Path.Combine(GetWebAppSrcDirectory(outputDir), "bin", dotNetInstall.Architecture, "Release", tfm, "publish");
+        string GetWebAppPublishDirectory(
+            DotNetInstallation dotNetInstall,
+            string outputDir,
+            string tfm
+        ) {
+            string dir = Path.Combine(
+                GetWebAppSrcDirectory(outputDir),
+                "bin",
+                dotNetInstall.Architecture,
+                "Release",
+                tfm,
+                "publish"
+            );
             if (Directory.Exists(dir))
             {
                 return dir;

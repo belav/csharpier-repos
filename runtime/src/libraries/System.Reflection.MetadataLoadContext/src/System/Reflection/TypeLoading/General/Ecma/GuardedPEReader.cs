@@ -35,7 +35,21 @@ namespace System.Reflection.TypeLoading.Ecma
             _reader = reader;
         }
 
-        public PEReader PEReader { get { _loader.DisposeCheck(); return _peReader; } }
-        public MetadataReader Reader { get { _loader.DisposeCheck(); return _reader; } }
+        public PEReader PEReader
+        {
+            get
+            {
+                _loader.DisposeCheck();
+                return _peReader;
+            }
+        }
+        public MetadataReader Reader
+        {
+            get
+            {
+                _loader.DisposeCheck();
+                return _reader;
+            }
+        }
     }
 }

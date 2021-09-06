@@ -51,10 +51,7 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 
         public bool IsActive
         {
-            get
-            {
-                return _isActive > 0;
-            }
+            get { return _isActive > 0; }
         }
 
         public void Start()
@@ -89,7 +86,9 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
         {
             if (_children != null)
             {
-                _children.Sort(new Comparison<ActivityLevel>((a, b) => string.CompareOrdinal(a.Name, b.Name)));
+                _children.Sort(
+                    new Comparison<ActivityLevel>((a, b) => string.CompareOrdinal(a.Name, b.Name))
+                );
                 foreach (var child in _children)
                 {
                     child.SortChildren();

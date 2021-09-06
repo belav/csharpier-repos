@@ -9,9 +9,10 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal.Test
 {
-    public class DiagnosticMemoryPoolTests: MemoryPoolTests
+    public class DiagnosticMemoryPoolTests : MemoryPoolTests
     {
-        protected override MemoryPool<byte> CreatePool() => new DiagnosticMemoryPool(new PinnedBlockMemoryPool());
+        protected override MemoryPool<byte> CreatePool() =>
+            new DiagnosticMemoryPool(new PinnedBlockMemoryPool());
 
         [Fact]
         public void DoubleDisposeThrows()
@@ -101,7 +102,9 @@ namespace Microsoft.Extensions.Internal.Test
 
             ExpectDisposeException(memoryPool);
 
-            var exception = Assert.Throws<InvalidOperationException>(() => MemoryMarshal.TryGetArray<byte>(memory, out _));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => MemoryMarshal.TryGetArray<byte>(memory, out _)
+            );
             Assert.Equal("Block is backed by disposed slab", exception.Message);
         }
 
@@ -114,7 +117,10 @@ namespace Microsoft.Extensions.Internal.Test
             block.Dispose();
 
             var exception = Assert.Throws<ObjectDisposedException>(() => block.Memory);
-            Assert.Equal($"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.", exception.Message);
+            Assert.Equal(
+                $"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.",
+                exception.Message
+            );
 
             ExpectDisposeAggregateException(memoryPool, exception);
         }
@@ -129,7 +135,10 @@ namespace Microsoft.Extensions.Internal.Test
             block.Dispose();
 
             var exception = Assert.Throws<ObjectDisposedException>(() => memory.Pin());
-            Assert.Equal($"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.", exception.Message);
+            Assert.Equal(
+                $"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.",
+                exception.Message
+            );
 
             ExpectDisposeAggregateException(memoryPool, exception);
         }
@@ -151,7 +160,10 @@ namespace Microsoft.Extensions.Internal.Test
             catch (ObjectDisposedException ode)
             {
                 exception = ode;
-                Assert.Equal($"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.", ode.Message);
+                Assert.Equal(
+                    $"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.",
+                    ode.Message
+                );
             }
             Assert.NotNull(exception);
 
@@ -167,8 +179,13 @@ namespace Microsoft.Extensions.Internal.Test
 
             block.Dispose();
 
-            var exception = Assert.Throws<ObjectDisposedException>(() => MemoryMarshal.TryGetArray<byte>(memory, out _));
-            Assert.Equal($"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.", exception.Message);
+            var exception = Assert.Throws<ObjectDisposedException>(
+                () => MemoryMarshal.TryGetArray<byte>(memory, out _)
+            );
+            Assert.Equal(
+                $"Cannot access a disposed object.{Environment.NewLine}Object name: 'MemoryPoolBlock'.",
+                exception.Message
+            );
 
             ExpectDisposeAggregateException(memoryPool, exception);
         }
@@ -176,7 +193,10 @@ namespace Microsoft.Extensions.Internal.Test
         [Fact]
         public async Task DoesNotThrowWithLateReturns()
         {
-            var memoryPool = new DiagnosticMemoryPool(new PinnedBlockMemoryPool(), allowLateReturn: true);
+            var memoryPool = new DiagnosticMemoryPool(
+                new PinnedBlockMemoryPool(),
+                allowLateReturn: true
+            );
             var block = memoryPool.Rent();
             memoryPool.Dispose();
             block.Dispose();
@@ -186,7 +206,10 @@ namespace Microsoft.Extensions.Internal.Test
         [Fact]
         public async Task ThrowsOnAccessToLateBlocks()
         {
-            var memoryPool = new DiagnosticMemoryPool(new PinnedBlockMemoryPool(), allowLateReturn: true);
+            var memoryPool = new DiagnosticMemoryPool(
+                new PinnedBlockMemoryPool(),
+                allowLateReturn: true
+            );
             var block = memoryPool.Rent();
             memoryPool.Dispose();
 
@@ -194,15 +217,20 @@ namespace Microsoft.Extensions.Internal.Test
             Assert.Equal("Block is backed by disposed slab", exception.Message);
 
             block.Dispose();
-            var aggregateException = await Assert.ThrowsAsync<AggregateException>(async () => await memoryPool.WhenAllBlocksReturnedAsync(TimeSpan.FromSeconds(5)));
+            var aggregateException = await Assert.ThrowsAsync<AggregateException>(
+                async () => await memoryPool.WhenAllBlocksReturnedAsync(TimeSpan.FromSeconds(5))
+            );
 
-            Assert.Equal(new Exception [] { exception }, aggregateException.InnerExceptions);
+            Assert.Equal(new Exception[] { exception }, aggregateException.InnerExceptions);
         }
 
         [Fact]
         public void ExceptionsContainStackTraceWhenEnabled()
         {
-            var memoryPool = new DiagnosticMemoryPool(new PinnedBlockMemoryPool(), rentTracking: true);
+            var memoryPool = new DiagnosticMemoryPool(
+                new PinnedBlockMemoryPool(),
+                rentTracking: true
+            );
             var block = memoryPool.Rent();
 
             ExpectDisposeException(memoryPool);
@@ -215,11 +243,16 @@ namespace Microsoft.Extensions.Internal.Test
         private static void ExpectDisposeException(MemoryPool<byte> memoryPool)
         {
             var exception = Assert.Throws<InvalidOperationException>(() => memoryPool.Dispose());
-            Assert.Contains("Memory pool with active blocks is being disposed, 0 of 1 returned", exception.Message);
+            Assert.Contains(
+                "Memory pool with active blocks is being disposed, 0 of 1 returned",
+                exception.Message
+            );
         }
 
-        private static void ExpectDisposeAggregateException(MemoryPool<byte> memoryPool, params Exception[] inner)
-        {
+        private static void ExpectDisposeAggregateException(
+            MemoryPool<byte> memoryPool,
+            params Exception[] inner
+        ) {
             var exception = Assert.Throws<AggregateException>(() => memoryPool.Dispose());
 
             Assert.Equal(inner, exception.InnerExceptions);

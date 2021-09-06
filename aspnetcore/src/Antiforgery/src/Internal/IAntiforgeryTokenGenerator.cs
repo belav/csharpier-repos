@@ -23,7 +23,10 @@ namespace Microsoft.AspNetCore.Antiforgery
         /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
         /// <param name="cookieToken">A valid cookie token.</param>
         /// <returns>An <see cref="AntiforgeryToken"/>.</returns>
-        AntiforgeryToken GenerateRequestToken(HttpContext httpContext, AntiforgeryToken cookieToken);
+        AntiforgeryToken GenerateRequestToken(
+            HttpContext httpContext,
+            AntiforgeryToken cookieToken
+        );
 
         /// <summary>
         /// Attempts to validate a cookie token.
@@ -46,6 +49,7 @@ namespace Microsoft.AspNetCore.Antiforgery
             HttpContext httpContext,
             AntiforgeryToken cookieToken,
             AntiforgeryToken requestToken,
-            [NotNullWhen(false)] out string? message);
+            [NotNullWhen(false)] out string? message
+        );
     }
 }

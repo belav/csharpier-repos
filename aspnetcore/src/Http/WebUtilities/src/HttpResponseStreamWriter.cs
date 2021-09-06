@@ -40,9 +40,13 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="stream">The HTTP response <see cref="Stream"/>.</param>
         /// <param name="encoding">The character encoding to use.</param>
         public HttpResponseStreamWriter(Stream stream, Encoding encoding)
-            : this(stream, encoding, DefaultBufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-        {
-        }
+            : this(
+                stream,
+                encoding,
+                DefaultBufferSize,
+                ArrayPool<byte>.Shared,
+                ArrayPool<char>.Shared
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="HttpResponseStreamWriter"/>.
@@ -51,9 +55,7 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="bufferSize">The minimum buffer size.</param>
         public HttpResponseStreamWriter(Stream stream, Encoding encoding, int bufferSize)
-            : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-        {
-        }
+            : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="HttpResponseStreamWriter"/>.
@@ -68,8 +70,8 @@ namespace Microsoft.AspNetCore.WebUtilities
             Encoding encoding,
             int bufferSize,
             ArrayPool<byte> bytePool,
-            ArrayPool<char> charPool)
-        {
+            ArrayPool<char> charPool
+        ) {
             _stream = stream ?? throw new ArgumentNullException(nameof(stream));
             Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
             _bytePool = bytePool ?? throw new ArgumentNullException(nameof(bytePool));
@@ -81,7 +83,10 @@ namespace Microsoft.AspNetCore.WebUtilities
             }
             if (!_stream.CanWrite)
             {
-                throw new ArgumentException(Resources.HttpResponseStreamWriter_StreamNotWritable, nameof(stream));
+                throw new ArgumentException(
+                    Resources.HttpResponseStreamWriter_StreamNotWritable,
+                    nameof(stream)
+                );
             }
 
             _charBufferSize = bufferSize;
@@ -171,7 +176,8 @@ namespace Microsoft.AspNetCore.WebUtilities
 
                 remaining -= written;
                 value = value.Slice(written);
-            };
+            }
+            ;
         }
 
         /// <inheritdoc/>
@@ -331,9 +337,15 @@ namespace Microsoft.AspNetCore.WebUtilities
         }
 
         /// <inheritdoc/>
-        [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.", Justification = "Required to maintain compatibility")]
-        public override Task WriteAsync(ReadOnlyMemory<char> value, CancellationToken cancellationToken = default)
-        {
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.",
+            Justification = "Required to maintain compatibility"
+        )]
+        public override Task WriteAsync(
+            ReadOnlyMemory<char> value,
+            CancellationToken cancellationToken = default
+        ) {
             if (_disposed)
             {
                 return GetObjectDisposedTask();
@@ -379,12 +391,15 @@ namespace Microsoft.AspNetCore.WebUtilities
 
                 remaining -= written;
                 value = value.Slice(written);
-            };
+            }
+            ;
         }
 
         /// <inheritdoc/>
-        public override Task WriteLineAsync(ReadOnlyMemory<char> value, CancellationToken cancellationToken = default)
-        {
+        public override Task WriteLineAsync(
+            ReadOnlyMemory<char> value,
+            CancellationToken cancellationToken = default
+        ) {
             if (_disposed)
             {
                 return GetObjectDisposedTask();
@@ -455,6 +470,7 @@ namespace Microsoft.AspNetCore.WebUtilities
                 {
                     FlushInternal(flushEncoder: true);
                 }
+
                 finally
                 {
                     _bytePool.Return(_byteBuffer);
@@ -475,6 +491,7 @@ namespace Microsoft.AspNetCore.WebUtilities
                 {
                     await FlushInternalAsync(flushEncoder: true);
                 }
+
                 finally
                 {
                     _bytePool.Return(_byteBuffer);
@@ -500,7 +517,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 _charBufferCount,
                 _byteBuffer,
                 0,
-                flush: flushEncoder);
+                flush: flushEncoder
+            );
 
             _charBufferCount = 0;
 
@@ -525,7 +543,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 _charBufferCount,
                 _byteBuffer,
                 0,
-                flush: flushEncoder);
+                flush: flushEncoder
+            );
 
             _charBufferCount = 0;
 
@@ -543,7 +562,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 sourceIndex: 0,
                 destination: _charBuffer,
                 destinationIndex: _charBufferCount,
-                count: value.Length);
+                count: value.Length
+            );
 
             _charBufferCount += value.Length;
         }
@@ -556,7 +576,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 sourceIndex: index,
                 destination: _charBuffer,
                 destinationIndex: _charBufferCount,
-                count: remaining);
+                count: remaining
+            );
 
             _charBufferCount += remaining;
             index += remaining;
@@ -572,7 +593,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 srcOffset: index * sizeof(char),
                 dst: _charBuffer,
                 dstOffset: _charBufferCount * sizeof(char),
-                count: remaining * sizeof(char));
+                count: remaining * sizeof(char)
+            );
 
             _charBufferCount += remaining;
             index += remaining;
@@ -595,7 +617,9 @@ namespace Microsoft.AspNetCore.WebUtilities
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Task GetObjectDisposedTask()
         {
-            return Task.FromException(new ObjectDisposedException(nameof(HttpResponseStreamWriter)));
+            return Task.FromException(
+                new ObjectDisposedException(nameof(HttpResponseStreamWriter))
+            );
         }
     }
 }

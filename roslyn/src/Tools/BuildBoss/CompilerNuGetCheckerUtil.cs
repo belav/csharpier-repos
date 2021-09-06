@@ -49,20 +49,25 @@ namespace BuildBoss
                 IsDesktop = isDesktop;
             }
 
-            public PackageAsset WithFileRelativeName(string fileRelativeName) => new PackageAsset(fileRelativeName, Checksum, IsDesktop);
+            public PackageAsset WithFileRelativeName(string fileRelativeName) =>
+                new PackageAsset(fileRelativeName, Checksum, IsDesktop);
 
             public override string ToString() => FileRelativeName;
         }
 
         internal static StringComparer PathComparer { get; } = StringComparer.OrdinalIgnoreCase;
-        internal static StringComparison PathComparison { get; } = StringComparison.OrdinalIgnoreCase;
+        internal static StringComparison PathComparison { get; } =
+            StringComparison.OrdinalIgnoreCase;
 
         internal string ArtifactsDirectory { get; }
         internal string Configuration { get; }
         internal string RepositoryDirectory { get; }
 
-        internal PackageContentsChecker(string repositoryDirectory, string artifactsDirectory, string configuration)
-        {
+        internal PackageContentsChecker(
+            string repositoryDirectory,
+            string artifactsDirectory,
+            string configuration
+        ) {
             RepositoryDirectory = repositoryDirectory;
             ArtifactsDirectory = artifactsDirectory;
             Configuration = configuration;
@@ -85,7 +90,9 @@ namespace BuildBoss
                 allGood &= CheckExternalApis(textWriter);
                 return allGood;
 
-                IEnumerable<string> filter(bool isDesktop) => packageAssets.Where(x => x.IsDesktop == isDesktop).Select(x => x.FileRelativeName);
+                IEnumerable<string> filter(bool isDesktop) =>
+                    packageAssets.Where(x => x.IsDesktop == isDesktop)
+                        .Select(x => x.FileRelativeName);
             }
             catch (Exception ex)
             {
@@ -101,16 +108,24 @@ namespace BuildBoss
         {
             var allGood = true;
             allGood &= VerifyNuPackage(
-                        textWriter,
-                        FindNuGetPackage(Path.Combine(ArtifactsDirectory, "packages", Configuration, "Shipping"), "Microsoft.Net.Compilers"),
-                        @"tools",
-                        assetRelativeNames);
+                textWriter,
+                FindNuGetPackage(
+                    Path.Combine(ArtifactsDirectory, "packages", Configuration, "Shipping"),
+                    "Microsoft.Net.Compilers"
+                ),
+                @"tools",
+                assetRelativeNames
+            );
 
             allGood &= VerifyNuPackage(
-                        textWriter,
-                        FindNuGetPackage(Path.Combine(ArtifactsDirectory, "VSSetup", Configuration, "DevDivPackages"), "VS.Tools.Roslyn"),
-                        string.Empty,
-                        assetRelativeNames);
+                textWriter,
+                FindNuGetPackage(
+                    Path.Combine(ArtifactsDirectory, "VSSetup", Configuration, "DevDivPackages"),
+                    "VS.Tools.Roslyn"
+                ),
+                string.Empty,
+                assetRelativeNames
+            );
 
             return allGood;
         }
@@ -121,10 +136,14 @@ namespace BuildBoss
         private bool CheckCoreClr(TextWriter textWriter, IEnumerable<string> assetRelativeNames)
         {
             return VerifyNuPackage(
-                        textWriter,
-                        FindNuGetPackage(Path.Combine(ArtifactsDirectory, "packages", Configuration, "Shipping"), "Microsoft.NETCore.Compilers"),
-                        @"tools",
-                        assetRelativeNames);
+                textWriter,
+                FindNuGetPackage(
+                    Path.Combine(ArtifactsDirectory, "packages", Configuration, "Shipping"),
+                    "Microsoft.NETCore.Compilers"
+                ),
+                @"tools",
+                assetRelativeNames
+            );
         }
 
         /// <summary>
@@ -135,18 +154,20 @@ namespace BuildBoss
             var list = new List<string>();
             foreach (var asset in packageAssets)
             {
-                var folder = asset.IsDesktop
-                    ? @"net472"
-                    : @"netcoreapp3.1";
+                var folder = asset.IsDesktop ? @"net472" : @"netcoreapp3.1";
                 var fileRelativeName = Path.Combine(folder, asset.FileRelativeName);
                 list.Add(fileRelativeName);
             }
 
             return VerifyNuPackage(
-                    textWriter,
-                    FindNuGetPackage(Path.Combine(ArtifactsDirectory, "packages", Configuration, "Shipping"), "Microsoft.Net.Compilers.Toolset"),
-                    @"tasks",
-                    list);
+                textWriter,
+                FindNuGetPackage(
+                    Path.Combine(ArtifactsDirectory, "packages", Configuration, "Shipping"),
+                    "Microsoft.Net.Compilers.Toolset"
+                ),
+                @"tasks",
+                list
+            );
         }
 
         /// <summary>
@@ -158,7 +179,10 @@ namespace BuildBoss
         /// <returns></returns>
         private bool CheckExternalApis(TextWriter textWriter)
         {
-            var packageFilePath = FindNuGetPackage(Path.Combine(ArtifactsDirectory, "VSSetup", Configuration, "DevDivPackages"), "VS.ExternalAPIs.Roslyn");
+            var packageFilePath = FindNuGetPackage(
+                Path.Combine(ArtifactsDirectory, "VSSetup", Configuration, "DevDivPackages"),
+                "VS.ExternalAPIs.Roslyn"
+            );
             var allGood = true;
 
             // This tracks the packages which are included in separate packages. Hence they don't need to
@@ -190,7 +214,9 @@ namespace BuildBoss
                     }
 
                     foundDllNameSet.Add(Path.GetFileNameWithoutExtension(name));
-                    using var peReader = new PEReader(part.GetStream(FileMode.Open, FileAccess.Read));
+                    using var peReader = new PEReader(
+                        part.GetStream(FileMode.Open, FileAccess.Read)
+                    );
                     var metadataReader = peReader.GetMetadataReader();
                     foreach (var handle in metadataReader.AssemblyReferences)
                     {
@@ -207,11 +233,12 @@ namespace BuildBoss
                     return;
                 }
 
-                // As a simplification we only validate the assembly names that begin with Microsoft.CodeAnalysis. This is a good 
+                // As a simplification we only validate the assembly names that begin with Microsoft.CodeAnalysis. This is a good
                 // hueristic for finding assemblies that we build. Can be expanded in the future if we find more assemblies that
                 // are worth validating here.
-                var neededDllNames = neededDllNameSet
-                    .Where(x => x.StartsWith("Microsoft.CodeAnalysis"))
+                var neededDllNames = neededDllNameSet.Where(
+                        x => x.StartsWith("Microsoft.CodeAnalysis")
+                    )
                     .OrderBy(x => x, PathComparer);
                 foreach (var name in neededDllNames)
                 {
@@ -238,7 +265,8 @@ namespace BuildBoss
                 $@"vbc\{Configuration}\net472",
                 $@"csi\{Configuration}\net472",
                 $@"VBCSCompiler\{Configuration}\net472",
-                $@"Microsoft.Build.Tasks.CodeAnalysis\{Configuration}\net472");
+                $@"Microsoft.Build.Tasks.CodeAnalysis\{Configuration}\net472"
+            );
 
             allGood &= GetPackageAssetsCore(
                 textWriter,
@@ -246,23 +274,39 @@ namespace BuildBoss
                 coreClrAssets,
                 $@"csc\{Configuration}\netcoreapp3.1\publish",
                 $@"vbc\{Configuration}\netcoreapp3.1\publish",
-                $@"VBCSCompiler\{Configuration}\netcoreapp3.1\publish");
+                $@"VBCSCompiler\{Configuration}\netcoreapp3.1\publish"
+            );
 
-            // The native DLLs ship inside the runtime specific directories but build deploys it at the 
+            // The native DLLs ship inside the runtime specific directories but build deploys it at the
             // root as well. That copy is unnecessary.
-            coreClrAssets.RemoveAll(asset =>
-                PathComparer.Equals("Microsoft.DiaSymReader.Native.amd64.dll", asset.FileRelativeName) ||
-                PathComparer.Equals("Microsoft.DiaSymReader.Native.arm.dll", asset.FileRelativeName) ||
-                PathComparer.Equals("Microsoft.DiaSymReader.Native.x86.dll", asset.FileRelativeName));
+            coreClrAssets.RemoveAll(
+                asset =>
+                    PathComparer.Equals(
+                        "Microsoft.DiaSymReader.Native.amd64.dll",
+                        asset.FileRelativeName
+                    )
+                    || PathComparer.Equals(
+                        "Microsoft.DiaSymReader.Native.arm.dll",
+                        asset.FileRelativeName
+                    )
+                    || PathComparer.Equals(
+                        "Microsoft.DiaSymReader.Native.x86.dll",
+                        asset.FileRelativeName
+                    )
+            );
 
             // Move all of the assets into bincore as that is where the non-MSBuild task assets will go
-            coreClrAssets = coreClrAssets.Select(x => x.WithFileRelativeName(Path.Combine("bincore", x.FileRelativeName))).ToList();
+            coreClrAssets = coreClrAssets.Select(
+                    x => x.WithFileRelativeName(Path.Combine("bincore", x.FileRelativeName))
+                )
+                .ToList();
 
             allGood &= GetPackageAssetsCore(
                 textWriter,
                 isDesktop: false,
                 coreClrAssets,
-                $@"Microsoft.Build.Tasks.CodeAnalysis\{Configuration}\netcoreapp3.1\publish");
+                $@"Microsoft.Build.Tasks.CodeAnalysis\{Configuration}\netcoreapp3.1\publish"
+            );
 
             packageAssets.AddRange(desktopAssets);
             packageAssets.AddRange(coreClrAssets);
@@ -273,19 +317,24 @@ namespace BuildBoss
         /// <summary>
         /// Get all of the dependencies in the specified directory set. 
         /// </summary>
-        private bool GetPackageAssetsCore(TextWriter textWriter, bool isDesktop, List<PackageAsset> packageAssets, params string[] directoryPaths)
-        {
+        private bool GetPackageAssetsCore(
+            TextWriter textWriter,
+            bool isDesktop,
+            List<PackageAsset> packageAssets,
+            params string[] directoryPaths
+        ) {
             var relativeNameMap = new Dictionary<string, PackageAsset>(PathComparer);
             var allGood = true;
 
-            IEnumerable<string> enumerateAssets(string directory, SearchOption searchOption = SearchOption.TopDirectoryOnly)
-            {
-                return Directory
-                    .EnumerateFiles(directory, "*.*", searchOption)
+            IEnumerable<string> enumerateAssets(
+                string directory,
+                SearchOption searchOption = SearchOption.TopDirectoryOnly
+            ) {
+                return Directory.EnumerateFiles(directory, "*.*", searchOption)
                     .Where(IsTrackedAsset);
             }
 
-            // This will record all of the assets files in a directory. The name of the assets and the checksum of the contents will 
+            // This will record all of the assets files in a directory. The name of the assets and the checksum of the contents will
             // be added to the map
             void recordDependencies(MD5 md5, string directory)
             {
@@ -301,33 +350,51 @@ namespace BuildBoss
                     var runtimeDirectory = Path.Combine(directory, "runtimes");
                     if (Directory.Exists(runtimeDirectory))
                     {
-                        foreach (var filePath in enumerateAssets(runtimeDirectory, SearchOption.AllDirectories))
-                        {
+                        foreach (
+                            var filePath in enumerateAssets(
+                                runtimeDirectory,
+                                SearchOption.AllDirectories
+                            )
+                        ) {
                             yield return filePath;
                         }
                     }
                 }
 
-                var normalizedDirectoryName = (directory[directory.Length - 1] == '\\') ? directory : directory + @"\";
-                string getRelativeName(string filePath) => filePath.Substring(normalizedDirectoryName.Length);
+                var normalizedDirectoryName =
+                    (directory[directory.Length - 1] == '\\') ? directory : directory + @"\";
+                string getRelativeName(string filePath) =>
+                    filePath.Substring(normalizedDirectoryName.Length);
 
                 var foundOne = false;
                 foreach (var assetFilePath in enumerateFiles())
                 {
                     foundOne = true;
-                    using (var stream = File.Open(assetFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    {
+                    using (
+                        var stream = File.Open(
+                            assetFilePath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        )
+                    ) {
                         var assetRelativeName = getRelativeName(assetFilePath);
                         var hash = md5.ComputeHash(stream);
                         var hashString = BitConverter.ToString(hash);
-                        if (relativeNameMap.TryGetValue(assetRelativeName, out PackageAsset existingAsset))
-                        {
+                        if (
+                            relativeNameMap.TryGetValue(
+                                assetRelativeName,
+                                out PackageAsset existingAsset
+                            )
+                        ) {
                             // Make sure that all copies of the DLL have the same contents. The DLLs are being merged into
-                            // a single directory in the resulting NuGet. If the contents are different then our merge is 
+                            // a single directory in the resulting NuGet. If the contents are different then our merge is
                             // invalid.
                             if (existingAsset.Checksum != hashString)
                             {
-                                textWriter.WriteLine($"Asset {assetRelativeName} exists at two different versions");
+                                textWriter.WriteLine(
+                                    $"Asset {assetRelativeName} exists at two different versions"
+                                );
                                 textWriter.WriteLine($"\tHash 1: {hashString}");
                                 textWriter.WriteLine($"\tHash 2: {existingAsset.Checksum}");
                                 allGood = false;
@@ -335,7 +402,11 @@ namespace BuildBoss
                         }
                         else
                         {
-                            var packageAsset = new PackageAsset(assetRelativeName, hashString, isDesktop);
+                            var packageAsset = new PackageAsset(
+                                assetRelativeName,
+                                hashString,
+                                isDesktop
+                            );
                             packageAssets.Add(packageAsset);
                             relativeNameMap[assetRelativeName] = packageAsset;
                         }
@@ -364,24 +435,26 @@ namespace BuildBoss
             TextWriter textWriter,
             string nupkgFilePath,
             string folderRelativePath,
-            IEnumerable<string> dllFileNames) => VerifyCore(textWriter, nupkgFilePath, folderRelativePath, dllFileNames);
+            IEnumerable<string> dllFileNames
+        ) => VerifyCore(textWriter, nupkgFilePath, folderRelativePath, dllFileNames);
 
         private static bool VerifyVsix(
             TextWriter textWriter,
             string vsixFilePath,
-            IEnumerable<string> dllFileNames) => VerifyCore(textWriter, vsixFilePath, folderRelativePath: "", dllFileNames);
+            IEnumerable<string> dllFileNames
+        ) => VerifyCore(textWriter, vsixFilePath, folderRelativePath: "", dllFileNames);
 
         private static bool VerifyCore(
             TextWriter textWriter,
             string packageFilePath,
             string folderRelativePath,
-            IEnumerable<string> dllFileNames)
-        {
-            var map = dllFileNames
-                .ToDictionary(
-                    keySelector: x => Path.Combine(folderRelativePath, x),
-                    elementSelector: _ => false,
-                    comparer: PathComparer);
+            IEnumerable<string> dllFileNames
+        ) {
+            var map = dllFileNames.ToDictionary(
+                keySelector: x => Path.Combine(folderRelativePath, x),
+                elementSelector: _ => false,
+                comparer: PathComparer
+            );
             var allGood = true;
             var packageFileName = Path.GetFileName(packageFilePath);
 
@@ -426,8 +499,10 @@ namespace BuildBoss
         /// <summary>
         /// Get all of the parts in the specified folder. Will exclude all items in child folders.
         /// </summary>
-        private static IEnumerable<PackagePart> GetPartsInFolder(string packageFilePath, string folderRelativePath)
-        {
+        private static IEnumerable<PackagePart> GetPartsInFolder(
+            string packageFilePath,
+            string folderRelativePath
+        ) {
             Debug.Assert(string.IsNullOrEmpty(folderRelativePath) || folderRelativePath[0] != '\\');
 
             using (var package = Package.Open(packageFilePath, FileMode.Open, FileAccess.Read))
@@ -453,15 +528,17 @@ namespace BuildBoss
         private string FindNuGetPackage(string directory, string partialName)
         {
             var regex = $@"{partialName}.\d.*\.nupkg";
-            var file = Directory
-                .EnumerateFiles(directory, "*.nupkg")
-                .Where(filePath =>
-                {
-                    var fileName = Path.GetFileName(filePath);
-                    return Regex.IsMatch(fileName, regex);
-                })
-               .SingleOrDefault();
-            return file ?? throw new Exception($"Unable to find unique '{partialName}' in '{directory}'");
+            var file = Directory.EnumerateFiles(directory, "*.nupkg")
+                .Where(
+                    filePath =>
+                    {
+                        var fileName = Path.GetFileName(filePath);
+                        return Regex.IsMatch(fileName, regex);
+                    }
+                )
+                .SingleOrDefault();
+            return file
+                ?? throw new Exception($"Unable to find unique '{partialName}' in '{directory}'");
         }
 
         private string FindVsix(string fileName)
@@ -482,10 +559,9 @@ namespace BuildBoss
                 return !filePath.EndsWith(".resources.dll");
             }
 
-            return
-                filePath.EndsWith(".exe") ||
-                filePath.EndsWith(".targets") ||
-                filePath.EndsWith(".props");
+            return filePath.EndsWith(".exe")
+                || filePath.EndsWith(".targets")
+                || filePath.EndsWith(".props");
         }
     }
 }

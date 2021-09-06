@@ -29,7 +29,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [MemberData(nameof(PayloadData))]
         public async Task WriteTextMessageFromMultipleSegments(string encoded, string payload)
         {
-            var buffer = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(Encoding.UTF8.GetBytes(payload));
+            var buffer = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
+                Encoding.UTF8.GetBytes(payload)
+            );
 
             var output = new MemoryStream();
             await ServerSentEventsMessageFormatter.WriteMessageAsync(buffer, output, default);
@@ -37,14 +39,15 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             Assert.Equal(encoded, Encoding.UTF8.GetString(output.ToArray()));
         }
 
-        public static IEnumerable<object[]> PayloadData => new List<object[]>
-        {
-            new object[] { "\r\n", "" },
-            new object[] { "data: Hello, World\r\n\r\n", "Hello, World" },
-            new object[] { "data: Hello\r\ndata: World\r\n\r\n", "Hello\r\nWorld" },
-            new object[] { "data: Hello\r\ndata: World\r\n\r\n", "Hello\nWorld" },
-            new object[] { "data: Hello\r\ndata: \r\n\r\n", "Hello\n" },
-            new object[] { "data: Hello\r\ndata: \r\n\r\n", "Hello\r\n" },
-        };
+        public static IEnumerable<object[]> PayloadData =>
+            new List<object[]>
+            {
+                new object[] { "\r\n", "" },
+                new object[] { "data: Hello, World\r\n\r\n", "Hello, World" },
+                new object[] { "data: Hello\r\ndata: World\r\n\r\n", "Hello\r\nWorld" },
+                new object[] { "data: Hello\r\ndata: World\r\n\r\n", "Hello\nWorld" },
+                new object[] { "data: Hello\r\ndata: \r\n\r\n", "Hello\n" },
+                new object[] { "data: Hello\r\ndata: \r\n\r\n", "Hello\r\n" },
+            };
     }
 }

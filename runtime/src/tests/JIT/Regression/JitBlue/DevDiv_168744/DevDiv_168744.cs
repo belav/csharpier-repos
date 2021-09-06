@@ -13,9 +13,10 @@ internal class Program
 
         // When folding boolean conditionals (optOptimizeBools) RyuJIT failed to
         // correctly identify when the result of the compare is against 0/1 value.
-        if (((i & 0x8000000000000000) == 0x8000000000000000)
-            && ((i & 0x0100000000000000) == 0x0100000000000000))
-        {
+        if (
+            ((i & 0x8000000000000000) == 0x8000000000000000)
+            && ((i & 0x0100000000000000) == 0x0100000000000000)
+        ) {
             res = true;
         }
         else

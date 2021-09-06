@@ -12,8 +12,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetName()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 AssemblyName name = a.GetName(copiedName: false);
                 Assert.NotNull(name);
@@ -25,10 +28,13 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetCopiedName()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
-                AssemblyName name = a.GetName(copiedName: true);   // Shadow-copying is irrevant for MetadataLoadContext-loaded assemblies so this parameter is ignored.
+                AssemblyName name = a.GetName(copiedName: true); // Shadow-copying is irrevant for MetadataLoadContext-loaded assemblies so this parameter is ignored.
                 Assert.NotNull(name);
                 string fullName = name.FullName;
                 Assert.Equal(TestData.s_SimpleAssemblyFullName, fullName);
@@ -38,8 +44,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetNameAlwaysReturnsNewInstance()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 AssemblyName name1 = a.GetName();
                 AssemblyName name2 = a.GetName();
@@ -50,8 +59,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyFullName()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 string fullName = a.FullName;
                 Assert.Equal(TestData.s_SimpleAssemblyFullName, fullName);
@@ -61,28 +73,37 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGlobalAssemblyCache()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
-                Assert.False(a.GlobalAssemblyCache);  // This property is meaningless for MetadataLoadContexts and always returns false.
+                Assert.False(a.GlobalAssemblyCache); // This property is meaningless for MetadataLoadContexts and always returns false.
             }
         }
 
         [Fact]
         public static void AssemblyHostContext()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
-                Assert.Equal(0L, a.HostContext);  // This property is meaningless for MetadataLoadContexts and always returns 0.
+                Assert.Equal(0L, a.HostContext); // This property is meaningless for MetadataLoadContexts and always returns 0.
             }
         }
 
         [Fact]
         public static void AssemblyIsDynamic()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.False(a.IsDynamic);
             }
@@ -91,8 +112,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyReflectionOnly()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.True(a.ReflectionOnly);
             }
@@ -101,8 +125,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyMetadataVersion4_0()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 string metadataVersion = a.ImageRuntimeVersion;
                 Assert.Equal("v4.0.30319", metadataVersion);
@@ -112,8 +139,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyMetadataVersion2_0()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_NetFx20AssemblyImage);
                 string metadataVersion = a.ImageRuntimeVersion;
                 Assert.Equal("v2.0.50727", metadataVersion);
@@ -123,8 +153,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyLocationMemory()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 string location = a.Location;
                 Assert.Equal(string.Empty, location);
@@ -135,8 +168,11 @@ namespace System.Reflection.Tests
         public static void AssemblyLocationFile()
         {
             using (TempFile tf = TempFile.Create(TestData.s_SimpleAssemblyImage))
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromAssemblyPath(tf.Path);
                 string location = a.Location;
                 Assert.Equal(tf.Path, location);
@@ -146,8 +182,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetTypesReturnsDifferentObjectsEachTime()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
                 TestUtils.AssertNewObjectReturnedEachTime<Type>(() => a.GetTypes());
             }
@@ -156,8 +195,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyDefinedTypeInfosReturnsDifferentObjectsEachTime()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
                 TestUtils.AssertNewObjectReturnedEachTime<TypeInfo>(() => a.DefinedTypes);
             }
@@ -166,8 +208,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetReferencedAssemblies()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyReferencesTestImage);
                 AssemblyName[] ans = a.GetReferencedAssemblies();
                 Assert.Equal(3, ans.Length);
@@ -220,8 +265,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetReferencedAssembliesFullPublicKeyReference()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 // Ecma-335 allows an assembly reference to specify a full public key rather than the token.
 
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyRefUsingFullPublicKeyImage);
@@ -240,8 +288,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetReferencedAssembliesPartialVersions()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_PartialVersionsImage);
                 AssemblyName[] ans = a.GetReferencedAssemblies();
                 Assert.Equal(6, ans.Length);
@@ -288,8 +339,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetReferencedAssembliesReturnsDifferentObjectsEachTime()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyReferencesTestImage);
                 AssemblyName[] ans1 = a.GetReferencedAssemblies();
                 AssemblyName[] ans2 = a.GetReferencedAssemblies();
@@ -341,16 +395,31 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetTypes1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly upper = lc.LoadFromByteArray(TestData.s_UpperImage);
                 Type[] types = upper.GetTypes().OrderBy(t => t.FullName).ToArray();
                 string[] fullNames = types.Select(t => t.FullName).ToArray();
 
-                string[] expected = {
-                    "Outer1", "Outer1+Inner1", "Outer1+Inner2", "Outer1+Inner3" ,"Outer1+Inner4" ,"Outer1+Inner5",
-                    "Outer2", "Outer2+Inner1", "Outer2+Inner2", "Outer2+Inner3" ,"Outer2+Inner4" ,"Outer2+Inner5",
-                    "Upper1", "Upper4"
+                string[] expected =
+                {
+                    "Outer1",
+                    "Outer1+Inner1",
+                    "Outer1+Inner2",
+                    "Outer1+Inner3",
+                    "Outer1+Inner4",
+                    "Outer1+Inner5",
+                    "Outer2",
+                    "Outer2+Inner1",
+                    "Outer2+Inner2",
+                    "Outer2+Inner3",
+                    "Outer2+Inner4",
+                    "Outer2+Inner5",
+                    "Upper1",
+                    "Upper4"
                 };
 
                 Assert.Equal<string>(expected, fullNames);
@@ -360,8 +429,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyGetExportedTypes1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly upper = lc.LoadFromByteArray(TestData.s_UpperImage);
                 Type[] types = upper.GetExportedTypes().OrderBy(t => t.FullName).ToArray();
                 string[] fullNames = types.Select(t => t.FullName).ToArray();
@@ -398,7 +470,9 @@ namespace System.Reflection.Tests
                 Assembly upper = lc.LoadFromByteArray(TestData.s_UpperImage);
                 Assembly middle = lc.LoadFromByteArray(TestData.s_MiddleImage);
 
-                ReflectionTypeLoadException re = Assert.Throws<ReflectionTypeLoadException>(() => upper.GetForwardedTypesThunk());
+                ReflectionTypeLoadException re = Assert.Throws<ReflectionTypeLoadException>(
+                    () => upper.GetForwardedTypesThunk()
+                );
                 Assert.Equal(3, re.Types.Length);
                 Assert.Equal(3, re.LoaderExceptions.Length);
 
@@ -406,7 +480,9 @@ namespace System.Reflection.Tests
                 Assert.Contains<Type>(middle.GetType("Upper2", throwOnError: true), re.Types);
 
                 Assert.Equal(1, re.LoaderExceptions.Count((t) => t == null));
-                Assert.True(re.LoaderExceptions.All((t) => t == null || t is FileNotFoundException));
+                Assert.True(
+                    re.LoaderExceptions.All((t) => t == null || t is FileNotFoundException)
+                );
             }
         }
 
@@ -419,16 +495,23 @@ namespace System.Reflection.Tests
                 Assembly upper = lc.LoadFromByteArray(TestData.s_UpperImage);
                 Assembly lower = lc.LoadFromByteArray(TestData.s_LowerImage);
 
-                ReflectionTypeLoadException re = Assert.Throws<ReflectionTypeLoadException>(() => upper.GetForwardedTypesThunk());
+                ReflectionTypeLoadException re = Assert.Throws<ReflectionTypeLoadException>(
+                    () => upper.GetForwardedTypesThunk()
+                );
                 Assert.Equal(4, re.Types.Length);
                 Assert.Equal(4, re.LoaderExceptions.Length);
 
                 Assert.Equal(2, re.Types.Count((t) => t == null));
                 Assert.Contains<Type>(lower.GetType("Upper3", throwOnError: true), re.Types);
-                Assert.Contains<Type>(lower.GetType("Upper3+Upper3a", throwOnError: true), re.Types);
+                Assert.Contains<Type>(
+                    lower.GetType("Upper3+Upper3a", throwOnError: true),
+                    re.Types
+                );
 
                 Assert.Equal(2, re.LoaderExceptions.Count((t) => t == null));
-                Assert.True(re.LoaderExceptions.All((t) => t == null || t is FileNotFoundException));
+                Assert.True(
+                    re.LoaderExceptions.All((t) => t == null || t is FileNotFoundException)
+                );
             }
         }
 
@@ -436,8 +519,11 @@ namespace System.Reflection.Tests
         public static void AssemblyWithEmbeddedResources()
         {
             // Note this is using SimpleAssemblyResolver in order to resolve names between assemblies.
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyWithEmbeddedResourcesImage);
 
                 string[] names = a.GetManifestResourceNames().OrderBy(s => s).ToArray();
@@ -445,7 +531,10 @@ namespace System.Reflection.Tests
                 foreach (string name in names)
                 {
                     ManifestResourceInfo mri = a.GetManifestResourceInfo(name);
-                    Assert.Equal(ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile, mri.ResourceLocation);
+                    Assert.Equal(
+                        ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile,
+                        mri.ResourceLocation
+                    );
                     Assert.Null(mri.FileName);
                     Assert.Null(mri.ReferencedAssembly);
                 }
@@ -470,7 +559,6 @@ namespace System.Reflection.Tests
             }
         }
 
-
         [Fact]
         public static void AssemblyWithResourcesInManifestFile()
         {
@@ -481,13 +569,19 @@ namespace System.Reflection.Tests
                 string myRes2Path = Path.Combine(td.Path, "MyRes2");
                 string myRes3Path = Path.Combine(td.Path, "MyRes3");
 
-                File.WriteAllBytes(assemblyPath, TestData.s_AssemblyWithResourcesInManifestFilesImage);
+                File.WriteAllBytes(
+                    assemblyPath,
+                    TestData.s_AssemblyWithResourcesInManifestFilesImage
+                );
                 File.WriteAllBytes(myRes1Path, TestData.s_MyRes1);
                 File.WriteAllBytes(myRes2Path, TestData.s_MyRes2);
                 File.WriteAllBytes(myRes3Path, TestData.s_MyRes3);
 
-                using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-                {
+                using (
+                    MetadataLoadContext lc = new MetadataLoadContext(
+                        new EmptyCoreMetadataAssemblyResolver()
+                    )
+                ) {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
 
                     string[] names = a.GetManifestResourceNames().OrderBy(s => s).ToArray();
@@ -529,10 +623,16 @@ namespace System.Reflection.Tests
                 string assemblyPath = Path.Combine(td.Path, "n.dll");
                 string modulePath = Path.Combine(td.Path, "a.netmodule");
                 File.WriteAllBytes(assemblyPath, TestData.s_AssemblyWithResourcesInModuleImage);
-                File.WriteAllBytes(modulePath, TestData.s_ModuleForAssemblyWithResourcesInModuleImage);
+                File.WriteAllBytes(
+                    modulePath,
+                    TestData.s_ModuleForAssemblyWithResourcesInModuleImage
+                );
 
-                using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-                {
+                using (
+                    MetadataLoadContext lc = new MetadataLoadContext(
+                        new EmptyCoreMetadataAssemblyResolver()
+                    )
+                ) {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
 
                     string[] names = a.GetManifestResourceNames().OrderBy(s => s).ToArray();
@@ -540,7 +640,10 @@ namespace System.Reflection.Tests
                     foreach (string name in names)
                     {
                         ManifestResourceInfo mri = a.GetManifestResourceInfo(name);
-                        Assert.Equal(ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile, mri.ResourceLocation);
+                        Assert.Equal(
+                            ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile,
+                            mri.ResourceLocation
+                        );
                         Assert.Null(mri.FileName);
                         Assert.Null(mri.ReferencedAssembly);
                     }
@@ -569,8 +672,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyEntryPoint1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyWithEntryPointImage);
                 MethodInfo m = a.EntryPoint;
                 Assert.Equal(TestData.s_AssemblyWithEntryPointEntryPointToken, m.MetadataToken);
@@ -581,8 +687,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void AssemblyEntryPoint2()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 MethodInfo m = a.EntryPoint;
                 Assert.Null(m);

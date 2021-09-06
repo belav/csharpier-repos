@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         protected override IEnumerableValueProvider GetEnumerableValueProvider(
             BindingSource bindingSource,
             Dictionary<string, StringValues> values,
-            CultureInfo culture)
-        {
+            CultureInfo culture
+        ) {
             var backingStore = new QueryCollection(values);
             return new QueryStringValueProvider(bindingSource, backingStore, culture);
         }

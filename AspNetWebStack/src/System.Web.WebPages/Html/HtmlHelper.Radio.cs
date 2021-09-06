@@ -19,11 +19,17 @@ namespace System.Web.WebPages.Html
             return RadioButton(name, value, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString RadioButton(string name, object value, IDictionary<string, object> htmlAttributes)
-        {
+        public IHtmlString RadioButton(
+            string name,
+            object value,
+            IDictionary<string, object> htmlAttributes
+        ) {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
             return BuildRadioButton(name, value, isChecked: null, attributes: htmlAttributes);
@@ -31,25 +37,50 @@ namespace System.Web.WebPages.Html
 
         public IHtmlString RadioButton(string name, object value, bool isChecked)
         {
-            return RadioButton(name, value, isChecked, htmlAttributes: (IDictionary<string, object>)null);
+            return RadioButton(
+                name,
+                value,
+                isChecked,
+                htmlAttributes: (IDictionary<string, object>)null
+            );
         }
 
-        public IHtmlString RadioButton(string name, object value, bool isChecked, object htmlAttributes)
-        {
-            return RadioButton(name, value, isChecked, AnonymousObjectToHtmlAttributes(htmlAttributes));
+        public IHtmlString RadioButton(
+            string name,
+            object value,
+            bool isChecked,
+            object htmlAttributes
+        ) {
+            return RadioButton(
+                name,
+                value,
+                isChecked,
+                AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public IHtmlString RadioButton(string name, object value, bool isChecked, IDictionary<string, object> htmlAttributes)
-        {
+        public IHtmlString RadioButton(
+            string name,
+            object value,
+            bool isChecked,
+            IDictionary<string, object> htmlAttributes
+        ) {
             if (name == null)
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
             return BuildRadioButton(name, value, isChecked, htmlAttributes);
         }
 
-        private IHtmlString BuildRadioButton(string name, object value, bool? isChecked, IDictionary<string, object> attributes)
-        {
+        private IHtmlString BuildRadioButton(
+            string name,
+            object value,
+            bool? isChecked,
+            IDictionary<string, object> attributes
+        ) {
             string valueString = ConvertTo(value, typeof(string)) as string;
 
             TagBuilder builder = new TagBuilder("input");
@@ -63,7 +94,9 @@ namespace System.Web.WebPages.Html
             if (UnobtrusiveJavaScriptEnabled)
             {
                 // Add validation attributes
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(name);
+                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
+                    name
+                );
                 builder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 
@@ -72,7 +105,9 @@ namespace System.Web.WebPages.Html
             if (modelState != null)
             {
                 modelValue = ConvertTo(modelState.Value, typeof(string)) as string;
-                isChecked = isChecked ?? String.Equals(modelValue, valueString, StringComparison.OrdinalIgnoreCase);
+                isChecked =
+                    isChecked
+                    ?? String.Equals(modelValue, valueString, StringComparison.OrdinalIgnoreCase);
             }
 
             if (isChecked.HasValue)

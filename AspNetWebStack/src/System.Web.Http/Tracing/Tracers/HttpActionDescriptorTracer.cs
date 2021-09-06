@@ -19,15 +19,20 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref="HttpActionDescriptor"/>.
     /// </summary>
-    internal class HttpActionDescriptorTracer : HttpActionDescriptor, IDecorator<HttpActionDescriptor>
+    internal class HttpActionDescriptorTracer
+        : HttpActionDescriptor,
+          IDecorator<HttpActionDescriptor>
     {
         private const string ExecuteMethodName = "ExecuteAsync";
 
         private readonly HttpActionDescriptor _innerDescriptor;
         private readonly ITraceWriter _traceWriter;
 
-        public HttpActionDescriptorTracer(HttpControllerContext controllerContext, HttpActionDescriptor innerDescriptor, ITraceWriter traceWriter)
-            : base(controllerContext.ControllerDescriptor)
+        public HttpActionDescriptorTracer(
+            HttpControllerContext controllerContext,
+            HttpActionDescriptor innerDescriptor,
+            ITraceWriter traceWriter
+        ) : base(controllerContext.ControllerDescriptor)
         {
             Contract.Assert(innerDescriptor != null);
             Contract.Assert(traceWriter != null);
@@ -43,30 +48,18 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override ConcurrentDictionary<object, object> Properties
         {
-            get
-            {
-                return _innerDescriptor.Properties;
-            }
+            get { return _innerDescriptor.Properties; }
         }
 
         public override HttpActionBinding ActionBinding
         {
-            get
-            {
-                return _innerDescriptor.ActionBinding;
-            }
-            set
-            {
-                _innerDescriptor.ActionBinding = value;
-            }
+            get { return _innerDescriptor.ActionBinding; }
+            set { _innerDescriptor.ActionBinding = value; }
         }
 
         public override Collection<HttpMethod> SupportedHttpMethods
         {
-            get
-            {
-                return _innerDescriptor.SupportedHttpMethods;
-            }
+            get { return _innerDescriptor.SupportedHttpMethods; }
         }
 
         public override string ActionName
@@ -84,8 +77,11 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerDescriptor.ReturnType; }
         }
 
-        public override Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments, CancellationToken cancellationToken)
-        {
+        public override Task<object> ExecuteAsync(
+            HttpControllerContext controllerContext,
+            IDictionary<string, object> arguments,
+            CancellationToken cancellationToken
+        ) {
             return _traceWriter.TraceBeginEndAsync<object>(
                 controllerContext.Request,
                 TraceCategories.ActionCategory,
@@ -94,19 +90,28 @@ namespace System.Web.Http.Tracing.Tracers
                 ExecuteMethodName,
                 beginTrace: (tr) =>
                 {
-                    tr.Message = Error.Format(SRResources.TraceInvokingAction,
-                                              FormattingUtilities.ActionInvokeToString(ActionName, arguments));
+                    tr.Message = Error.Format(
+                        SRResources.TraceInvokingAction,
+                        FormattingUtilities.ActionInvokeToString(ActionName, arguments)
+                    );
                 },
                 execute: () =>
                 {
-                    return _innerDescriptor.ExecuteAsync(controllerContext, arguments, cancellationToken);
+                    return _innerDescriptor.ExecuteAsync(
+                        controllerContext,
+                        arguments,
+                        cancellationToken
+                    );
                 },
                 endTrace: (tr, value) =>
                 {
-                    tr.Message = Error.Format(SRResources.TraceActionReturnValue,
-                                              FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture));
+                    tr.Message = Error.Format(
+                        SRResources.TraceActionReturnValue,
+                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture)
+                    );
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
 
         public override Collection<T> GetCustomAttributes<T>()
@@ -131,7 +136,10 @@ namespace System.Web.Http.Tracing.Tracers
                 }
                 else
                 {
-                    IEnumerable<IFilter> filterTracers = FilterTracer.CreateFilterTracers(filters[i], _traceWriter);
+                    IEnumerable<IFilter> filterTracers = FilterTracer.CreateFilterTracers(
+                        filters[i],
+                        _traceWriter
+                    );
                     foreach (IFilter filterTracer in filterTracers)
                     {
                         returnFilters.Add(filterTracer);
@@ -155,7 +163,10 @@ namespace System.Web.Http.Tracing.Tracers
                 }
                 else
                 {
-                    IEnumerable<FilterInfo> filterTracers = FilterTracer.CreateFilterTracers(filters[i], _traceWriter);
+                    IEnumerable<FilterInfo> filterTracers = FilterTracer.CreateFilterTracers(
+                        filters[i],
+                        _traceWriter
+                    );
                     foreach (FilterInfo filterTracer in filterTracers)
                     {
                         returnFilters.Add(filterTracer);

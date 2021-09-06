@@ -13,15 +13,18 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string executable,
             IReadOnlyList<string> args,
             string? workingDirectory = null,
-            bool interceptOutput = false)
-        {
+            bool interceptOutput = false
+        ) {
             var arguments = ToArguments(args);
 
             Reporter.WriteVerbose(executable + " " + arguments);
 
             var startInfo = new ProcessStartInfo
             {
-                FileName = executable, Arguments = arguments, UseShellExecute = false, RedirectStandardOutput = interceptOutput
+                FileName = executable,
+                Arguments = arguments,
+                UseShellExecute = false,
+                RedirectStandardOutput = interceptOutput
             };
             if (workingDirectory != null)
             {
@@ -57,13 +60,11 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 if (args[i].Length == 0)
                 {
                     builder.Append("\"\"");
-
                     continue;
                 }
                 if (args[i].IndexOf(' ') == -1)
                 {
                     builder.Append(args[i]);
-
                     continue;
                 }
 

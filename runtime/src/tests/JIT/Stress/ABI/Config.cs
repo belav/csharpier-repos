@@ -40,7 +40,7 @@ namespace ABIStress
         InstantiatingStubs = 0x4,
         UnboxingStubs = 0x8,
         SharedGenericUnboxingStubs = 0x10,
-
-        All = TailCalls | PInvokes | InstantiatingStubs | UnboxingStubs | SharedGenericUnboxingStubs,
+        All =
+            TailCalls | PInvokes | InstantiatingStubs | UnboxingStubs | SharedGenericUnboxingStubs,
     }
 }

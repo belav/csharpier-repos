@@ -12,7 +12,13 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use DeleteFile.
         /// </summary>
-        [DllImport(Libraries.Kernel32, EntryPoint = "DeleteFileW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false)]
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "DeleteFileW",
+            SetLastError = true,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false
+        )]
         private static extern bool DeleteFilePrivate(string path);
 
         internal static bool DeleteFile(string path)

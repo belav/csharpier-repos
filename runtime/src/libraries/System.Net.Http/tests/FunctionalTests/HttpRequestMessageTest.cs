@@ -101,13 +101,18 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_NullMethod_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HttpRequestMessage(null, "http://example.com"));
+            Assert.Throws<ArgumentNullException>(
+                () => new HttpRequestMessage(null, "http://example.com")
+            );
         }
 
         [Fact]
         public void Ctor_NonHttpUri_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("requestUri", () => new HttpRequestMessage(HttpMethod.Put, "ftp://example.com"));
+            AssertExtensions.Throws<ArgumentException>(
+                "requestUri",
+                () => new HttpRequestMessage(HttpMethod.Put, "ftp://example.com")
+            );
         }
 
         [Fact]
@@ -122,10 +127,30 @@ namespace System.Net.Http.Functional.Tests
             rm.Dispose(); // Multiple calls don't throw.
 
             Assert.True(content.IsDisposed);
-            Assert.Throws<ObjectDisposedException>(() => { rm.Method = HttpMethod.Put; });
-            Assert.Throws<ObjectDisposedException>(() => { rm.RequestUri = null; });
-            Assert.Throws<ObjectDisposedException>(() => { rm.Version = new Version(1, 0); });
-            Assert.Throws<ObjectDisposedException>(() => { rm.Content = null; });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    rm.Method = HttpMethod.Put;
+                }
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    rm.RequestUri = null;
+                }
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    rm.Version = new Version(1, 0);
+                }
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    rm.Content = null;
+                }
+            );
 
             // Property getters should still work after disposing.
             Assert.Equal(HttpMethod.Get, rm.Method);
@@ -162,21 +187,37 @@ namespace System.Net.Http.Functional.Tests
         public void RequestUri_SetNonHttpUri_ThrowsArgumentException()
         {
             var rm = new HttpRequestMessage();
-            AssertExtensions.Throws<ArgumentException>("value", () => { rm.RequestUri = new Uri("ftp://example.com"); });
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () =>
+                {
+                    rm.RequestUri = new Uri("ftp://example.com");
+                }
+            );
         }
 
         [Fact]
         public void Version_SetToNull_ThrowsArgumentNullException()
         {
             var rm = new HttpRequestMessage();
-            Assert.Throws<ArgumentNullException>(() => { rm.Version = null; });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    rm.Version = null;
+                }
+            );
         }
 
         [Fact]
         public void Method_SetToNull_ThrowsArgumentNullException()
         {
             var rm = new HttpRequestMessage();
-            Assert.Throws<ArgumentNullException>(() => { rm.Method = null; });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    rm.Method = null;
+                }
+            );
         }
 
         [Fact]
@@ -184,9 +225,9 @@ namespace System.Net.Http.Functional.Tests
         {
             var rm = new HttpRequestMessage();
             string expected =
-                    "Method: GET, RequestUri: '<null>', Version: " +
-                    _expectedRequestMessageVersion.ToString(2) +
-                    $", Content: <null>, Headers:{Environment.NewLine}{{{Environment.NewLine}}}";
+                "Method: GET, RequestUri: '<null>', Version: "
+                + _expectedRequestMessageVersion.ToString(2)
+                + $", Content: <null>, Headers:{Environment.NewLine}{{{Environment.NewLine}}}";
             Assert.Equal(expected, rm.ToString());
 
             rm.Method = HttpMethod.Put;
@@ -197,10 +238,16 @@ namespace System.Net.Http.Functional.Tests
             // Note that there is no Content-Length header: The reason is that the value for Content-Length header
             // doesn't get set by StringContent..ctor, but only if someone actually accesses the ContentLength property.
             Assert.Equal(
-                "Method: PUT, RequestUri: 'http://a.com/', Version: 1.0, Content: " + typeof(StringContent).ToString() + ", Headers:" + Environment.NewLine +
-                $"{{{Environment.NewLine}" +
-                "  Content-Type: text/plain; charset=utf-8" + Environment.NewLine +
-                "}", rm.ToString());
+                "Method: PUT, RequestUri: 'http://a.com/', Version: 1.0, Content: "
+                    + typeof(StringContent).ToString()
+                    + ", Headers:"
+                    + Environment.NewLine
+                    + $"{{{Environment.NewLine}"
+                    + "  Content-Type: text/plain; charset=utf-8"
+                    + Environment.NewLine
+                    + "}",
+                rm.ToString()
+            );
 
             rm.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain", 0.2));
             rm.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml", 0.1));
@@ -211,15 +258,27 @@ namespace System.Net.Http.Functional.Tests
             for (int i = 0; i < 2; i++) // make sure ToString() doesn't impact subsequent use
             {
                 Assert.Equal(
-                    "Method: PUT, RequestUri: 'http://a.com/', Version: 1.0, Content: " + typeof(StringContent).ToString() + ", Headers:" + Environment.NewLine +
-                    "{" + Environment.NewLine +
-                    "  Accept: text/plain; q=0.2" + Environment.NewLine +
-                    "  Accept: text/xml; q=0.1" + Environment.NewLine +
-                    "  Accept-Language: en-US,en;q=0.5" + Environment.NewLine +
-                    "  Custom-Request-Header: value1" + Environment.NewLine +
-                    "  Content-Type: text/plain; charset=utf-8" + Environment.NewLine +
-                    "  Custom-Content-Header: value2" + Environment.NewLine +
-                    "}", rm.ToString());
+                    "Method: PUT, RequestUri: 'http://a.com/', Version: 1.0, Content: "
+                        + typeof(StringContent).ToString()
+                        + ", Headers:"
+                        + Environment.NewLine
+                        + "{"
+                        + Environment.NewLine
+                        + "  Accept: text/plain; q=0.2"
+                        + Environment.NewLine
+                        + "  Accept: text/xml; q=0.1"
+                        + Environment.NewLine
+                        + "  Accept-Language: en-US,en;q=0.5"
+                        + Environment.NewLine
+                        + "  Custom-Request-Header: value1"
+                        + Environment.NewLine
+                        + "  Content-Type: text/plain; charset=utf-8"
+                        + Environment.NewLine
+                        + "  Custom-Content-Header: value2"
+                        + Environment.NewLine
+                        + "}",
+                    rm.ToString()
+                );
             }
         }
 
@@ -231,22 +290,29 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClient client = CreateHttpClient())
             {
-                await LoopbackServer.CreateServerAsync(async (server, uri) =>
-                {
-                    var request = new HttpRequestMessage();
-                    request.RequestUri = uri;
-                    request.Method = new HttpMethod(method);
-
-                    Task<HttpResponseMessage> requestTask = client.SendAsync(request);
-                    await server.AcceptConnectionAsync(async connection =>
+                await LoopbackServer.CreateServerAsync(
+                    async (server, uri) =>
                     {
-                        List<string> headers = await connection.ReadRequestHeaderAsync();
-                        Assert.DoesNotContain(headers, line => line.StartsWith("Content-length"));
+                        var request = new HttpRequestMessage();
+                        request.RequestUri = uri;
+                        request.Method = new HttpMethod(method);
 
-                        await connection.SendResponseAsync();
-                        await requestTask;
-                    });
-                });
+                        Task<HttpResponseMessage> requestTask = client.SendAsync(request);
+                        await server.AcceptConnectionAsync(
+                            async connection =>
+                            {
+                                List<string> headers = await connection.ReadRequestHeaderAsync();
+                                Assert.DoesNotContain(
+                                    headers,
+                                    line => line.StartsWith("Content-length")
+                                );
+
+                                await connection.SendResponseAsync();
+                                await requestTask;
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -255,29 +321,35 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClient client = CreateHttpClient())
             {
-                await LoopbackServer.CreateServerAsync(async (server, uri) =>
-                {
-                    var request = new HttpRequestMessage(HttpMethod.Head, uri);
-
-                    Task<HttpResponseMessage> requestTask = client.SendAsync(request);
-
-                    await server.AcceptConnectionAsync(async connection =>
+                await LoopbackServer.CreateServerAsync(
+                    async (server, uri) =>
                     {
-                        // Content-Length greater than 2GB.
-                        string response = LoopbackServer.GetConnectionCloseResponse(
-                            HttpStatusCode.OK, "Content-Length: 2167849215\r\n\r\n");
-                        await connection.SendResponseAsync(response);
+                        var request = new HttpRequestMessage(HttpMethod.Head, uri);
 
-                        await requestTask;
-                    });
+                        Task<HttpResponseMessage> requestTask = client.SendAsync(request);
 
-                    using (HttpResponseMessage result = requestTask.Result)
-                    {
-                        Assert.NotNull(result);
-                        Assert.NotNull(result.Content);
-                        Assert.Equal(2167849215, result.Content.Headers.ContentLength);
+                        await server.AcceptConnectionAsync(
+                            async connection =>
+                            {
+                                // Content-Length greater than 2GB.
+                                string response = LoopbackServer.GetConnectionCloseResponse(
+                                    HttpStatusCode.OK,
+                                    "Content-Length: 2167849215\r\n\r\n"
+                                );
+                                await connection.SendResponseAsync(response);
+
+                                await requestTask;
+                            }
+                        );
+
+                        using (HttpResponseMessage result = requestTask.Result)
+                        {
+                            Assert.NotNull(result);
+                            Assert.NotNull(result.Content);
+                            Assert.Equal(2167849215, result.Content.Headers.ContentLength);
+                        }
                     }
-                });
+                );
             }
         }
 
@@ -303,7 +375,6 @@ namespace System.Net.Http.Functional.Tests
                 base.Dispose(disposing);
             }
         }
-
         #endregion
     }
 }

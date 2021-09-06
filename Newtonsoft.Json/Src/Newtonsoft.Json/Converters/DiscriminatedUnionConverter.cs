@@ -66,8 +66,13 @@ namespace Newtonsoft.Json.Converters
             public readonly FSharpFunction FieldReader;
             public readonly FSharpFunction Constructor;
 
-            public UnionCase(int tag, string name, PropertyInfo[] fields, FSharpFunction fieldReader, FSharpFunction constructor)
-            {
+            public UnionCase(
+                int tag,
+                string name,
+                PropertyInfo[] fields,
+                FSharpFunction fieldReader,
+                FSharpFunction constructor
+            ) {
                 Tag = tag;
                 Name = name;
                 Fields = fields;
@@ -80,8 +85,12 @@ namespace Newtonsoft.Json.Converters
         private const string CasePropertyName = "Case";
         private const string FieldsPropertyName = "Fields";
 
-        private static readonly ThreadSafeStore<Type, Union> UnionCache = new ThreadSafeStore<Type, Union>(CreateUnion);
-        private static readonly ThreadSafeStore<Type, Type> UnionTypeLookupCache = new ThreadSafeStore<Type, Type>(CreateUnionTypeLookup);
+        private static readonly ThreadSafeStore<Type, Union> UnionCache = new ThreadSafeStore<
+            Type,
+            Union
+        >(CreateUnion);
+        private static readonly ThreadSafeStore<Type, Type> UnionTypeLookupCache =
+            new ThreadSafeStore<Type, Type>(CreateUnionTypeLookup);
 
         private static Type CreateUnionTypeLookup(Type t)
         {
@@ -99,7 +108,10 @@ namespace Newtonsoft.Json.Converters
 
         private static Union CreateUnion(Type t)
         {
-            Union u = new Union((FSharpFunction)FSharpUtils.Instance.PreComputeUnionTagReader(null, t, null), new List<UnionCase>());
+            Union u = new Union(
+                (FSharpFunction)FSharpUtils.Instance.PreComputeUnionTagReader(null, t, null),
+                new List<UnionCase>()
+            );
 
             object[] cases = (object[])FSharpUtils.Instance.GetUnionCases(null, t, null)!;
 
@@ -109,8 +121,17 @@ namespace Newtonsoft.Json.Converters
                     (int)FSharpUtils.Instance.GetUnionCaseInfoTag(unionCaseInfo),
                     (string)FSharpUtils.Instance.GetUnionCaseInfoName(unionCaseInfo),
                     (PropertyInfo[])FSharpUtils.Instance.GetUnionCaseInfoFields(unionCaseInfo)!,
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionReader(null, unionCaseInfo, null),
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionConstructor(null, unionCaseInfo, null));
+                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionReader(
+                        null,
+                        unionCaseInfo,
+                        null
+                    ),
+                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionConstructor(
+                        null,
+                        unionCaseInfo,
+                        null
+                    )
+                );
 
                 u.Cases.Add(unionCase);
             }
@@ -132,7 +153,8 @@ namespace Newtonsoft.Json.Converters
                 return;
             }
 
-            DefaultContractResolver? resolver = serializer.ContractResolver as DefaultContractResolver;
+            DefaultContractResolver? resolver =
+                serializer.ContractResolver as DefaultContractResolver;
 
             Type unionType = UnionTypeLookupCache.Get(value.GetType());
             Union union = UnionCache.Get(unionType);
@@ -141,13 +163,21 @@ namespace Newtonsoft.Json.Converters
             UnionCase caseInfo = union.Cases.Single(c => c.Tag == tag);
 
             writer.WriteStartObject();
-            writer.WritePropertyName((resolver != null) ? resolver.GetResolvedPropertyName(CasePropertyName) : CasePropertyName);
+            writer.WritePropertyName(
+                (resolver != null)
+                    ? resolver.GetResolvedPropertyName(CasePropertyName)
+                    : CasePropertyName
+            );
             writer.WriteValue(caseInfo.Name);
             if (caseInfo.Fields != null && caseInfo.Fields.Length > 0)
             {
                 object[] fields = (object[])caseInfo.FieldReader.Invoke(value)!;
 
-                writer.WritePropertyName((resolver != null) ? resolver.GetResolvedPropertyName(FieldsPropertyName) : FieldsPropertyName);
+                writer.WritePropertyName(
+                    (resolver != null)
+                        ? resolver.GetResolvedPropertyName(FieldsPropertyName)
+                        : FieldsPropertyName
+                );
                 writer.WriteStartArray();
                 foreach (object field in fields)
                 {
@@ -166,8 +196,12 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-        {
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        ) {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;
@@ -183,8 +217,13 @@ namespace Newtonsoft.Json.Converters
             while (reader.TokenType == JsonToken.PropertyName)
             {
                 string propertyName = reader.Value!.ToString();
-                if (string.Equals(propertyName, CasePropertyName, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    string.Equals(
+                        propertyName,
+                        CasePropertyName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     reader.ReadAndAssert();
 
                     Union union = UnionCache.Get(objectType);
@@ -195,22 +234,42 @@ namespace Newtonsoft.Json.Converters
 
                     if (caseInfo == null)
                     {
-                        throw JsonSerializationException.Create(reader, "No union type found with the name '{0}'.".FormatWith(CultureInfo.InvariantCulture, caseName));
+                        throw JsonSerializationException.Create(
+                            reader,
+                            "No union type found with the name '{0}'.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                caseName
+                            )
+                        );
                     }
                 }
-                else if (string.Equals(propertyName, FieldsPropertyName, StringComparison.OrdinalIgnoreCase))
-                {
+                else if (
+                    string.Equals(
+                        propertyName,
+                        FieldsPropertyName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     reader.ReadAndAssert();
                     if (reader.TokenType != JsonToken.StartArray)
                     {
-                        throw JsonSerializationException.Create(reader, "Union fields must been an array.");
+                        throw JsonSerializationException.Create(
+                            reader,
+                            "Union fields must been an array."
+                        );
                     }
 
                     fields = (JArray)JToken.ReadFrom(reader);
                 }
                 else
                 {
-                    throw JsonSerializationException.Create(reader, "Unexpected property '{0}' found when reading union.".FormatWith(CultureInfo.InvariantCulture, propertyName));
+                    throw JsonSerializationException.Create(
+                        reader,
+                        "Unexpected property '{0}' found when reading union.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            propertyName
+                        )
+                    );
                 }
 
                 reader.ReadAndAssert();
@@ -218,21 +277,39 @@ namespace Newtonsoft.Json.Converters
 
             if (caseInfo == null)
             {
-                throw JsonSerializationException.Create(reader, "No '{0}' property with union name found.".FormatWith(CultureInfo.InvariantCulture, CasePropertyName));
+                throw JsonSerializationException.Create(
+                    reader,
+                    "No '{0}' property with union name found.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        CasePropertyName
+                    )
+                );
             }
 
             object?[] typedFieldValues = new object?[caseInfo.Fields.Length];
 
             if (caseInfo.Fields.Length > 0 && fields == null)
             {
-                throw JsonSerializationException.Create(reader, "No '{0}' property with union fields found.".FormatWith(CultureInfo.InvariantCulture, FieldsPropertyName));
+                throw JsonSerializationException.Create(
+                    reader,
+                    "No '{0}' property with union fields found.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        FieldsPropertyName
+                    )
+                );
             }
 
             if (fields != null)
             {
                 if (caseInfo.Fields.Length != fields.Count)
                 {
-                    throw JsonSerializationException.Create(reader, "The number of field values does not match the number of properties defined by union '{0}'.".FormatWith(CultureInfo.InvariantCulture, caseName));
+                    throw JsonSerializationException.Create(
+                        reader,
+                        "The number of field values does not match the number of properties defined by union '{0}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            caseName
+                        )
+                    );
                 }
 
                 for (int i = 0; i < fields.Count; i++)

@@ -25,12 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             /// None of operands were constant.
             /// </summary>
             None,
-
             /// <summary>
             /// The left operand is the constant.
             /// </summary>
             Left,
-
             /// <summary>
             /// The right operand is the constant.
             /// </summary>
@@ -41,28 +39,51 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             switch (operation)
             {
-                case IBinaryOperation { OperatorKind: BinaryOperatorKind.Equals } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: BinaryOperatorKind.Equals
+                } op:
                     return ParseConstantPattern(op);
 
-                case IBinaryOperation { OperatorKind: NotEquals } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: NotEquals
+                } op:
                     return Not.TryCreate(ParseConstantPattern(op));
 
-                case IBinaryOperation { OperatorKind: ConditionalOr, Syntax: BinaryExpressionSyntax syntax } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: ConditionalOr,
+                    Syntax: BinaryExpressionSyntax syntax
+                } op:
                     return ParseBinaryPattern(op, isDisjunctive: true, syntax.OperatorToken);
 
-                case IBinaryOperation { OperatorKind: ConditionalAnd, Syntax: BinaryExpressionSyntax syntax } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: ConditionalAnd,
+                    Syntax: BinaryExpressionSyntax syntax
+                } op:
                     return ParseBinaryPattern(op, isDisjunctive: false, syntax.OperatorToken);
 
                 case IBinaryOperation op when IsRelationalOperator(op.OperatorKind):
                     return ParseRelationalPattern(op);
 
-                case IUnaryOperation { OperatorKind: UnaryOperatorKind.Not } op:
+                case IUnaryOperation
+                {
+                    OperatorKind: UnaryOperatorKind.Not
+                } op:
                     return Not.TryCreate(ParsePattern(op.Operand));
 
-                case IIsTypeOperation { Syntax: BinaryExpressionSyntax { Right: TypeSyntax type } } op:
+                case IIsTypeOperation
+                {
+                    Syntax: BinaryExpressionSyntax{ Right: TypeSyntax type }
+                } op:
                     return new Type(type, op.ValueOperand);
 
-                case IIsPatternOperation { Pattern: { Syntax: PatternSyntax pattern } } op:
+                case IIsPatternOperation
+                {
+                    Pattern: { Syntax: PatternSyntax pattern }
+                } op:
                     return new Source(pattern, op.Value);
 
                 case IParenthesizedOperation op:
@@ -72,8 +93,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return null;
         }
 
-        private static AnalyzedPattern? ParseBinaryPattern(IBinaryOperation op, bool isDisjunctive, SyntaxToken token)
-        {
+        private static AnalyzedPattern? ParseBinaryPattern(
+            IBinaryOperation op,
+            bool isDisjunctive,
+            SyntaxToken token
+        ) {
             var leftPattern = ParsePattern(op.LeftOperand);
             if (leftPattern is null)
                 return null;
@@ -100,12 +124,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return DetermineConstant(op) switch
             {
                 ConstantResult.Left when op.LeftOperand.Syntax is ExpressionSyntax left
-                    // We need to flip the operator if the constant is on the left-hand-side.
-                    // This is because relational patterns only come in the prefix form.
-                    // For instance: `123 > x` would be rewritten as `x is < 123`.
-                    => new Relational(Flip(op.OperatorKind), left, op.RightOperand),
+                  // We need to flip the operator if the constant is on the left-hand-side.
+                  // This is because relational patterns only come in the prefix form.
+                  // For instance: `123 > x` would be rewritten as `x is < 123`.
+                  => new Relational(Flip(op.OperatorKind), left, op.RightOperand),
                 ConstantResult.Right when op.RightOperand.Syntax is ExpressionSyntax right
-                    => new Relational(op.OperatorKind, right, op.LeftOperand),
+                  => new Relational(op.OperatorKind, right, op.LeftOperand),
                 _ => null
             };
         }
@@ -115,9 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return DetermineConstant(op) switch
             {
                 ConstantResult.Left when op.LeftOperand.Syntax is ExpressionSyntax left
-                    => new Constant(left, op.RightOperand),
+                  => new Constant(left, op.RightOperand),
                 ConstantResult.Right when op.RightOperand.Syntax is ExpressionSyntax right
-                    => new Constant(right, op.LeftOperand),
+                  => new Constant(right, op.LeftOperand),
                 _ => null
             };
         }

@@ -12,8 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         // in the DOM than developer-written ones
         public override int Order => 110;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -35,12 +37,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void ProcessElement(MarkupElementIntermediateNode node, string cssScope)
         {
             // Add a minimized attribute whose name is simply the CSS scope
-            node.Children.Add(new HtmlAttributeIntermediateNode
-            {
-                AttributeName = cssScope,
-                Prefix = cssScope,
-                Suffix = string.Empty,
-            });
+            node.Children.Add(
+                new HtmlAttributeIntermediateNode
+                {
+                    AttributeName = cssScope,
+                    Prefix = cssScope,
+                    Suffix = string.Empty,
+                }
+            );
         }
     }
 }

@@ -40,11 +40,13 @@ public class AutoReleaseTest
         {
             int numReleaseCalls = ObjectiveC.getNumReleaseCalls();
             IntPtr obj = ObjectiveC.initObject();
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                ObjectiveC.autoreleaseObject(obj);
-                evt.Set();
-            });
+            ThreadPool.QueueUserWorkItem(
+                _ =>
+                {
+                    ObjectiveC.autoreleaseObject(obj);
+                    evt.Set();
+                }
+            );
             evt.WaitOne();
             // Wait 60 ms after the signal to ensure that the thread has finished the work item and has drained the thread's autorelease pool.
             Thread.Sleep(60);

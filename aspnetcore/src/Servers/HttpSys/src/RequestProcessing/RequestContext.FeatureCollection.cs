@@ -22,25 +22,25 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.HttpSys
 {
-    internal partial class RequestContext :
-        IHttpRequestFeature,
-        IHttpRequestBodyDetectionFeature,
-        IHttpConnectionFeature,
-        IHttpResponseFeature,
-        IHttpResponseBodyFeature,
-        ITlsConnectionFeature,
-        ITlsHandshakeFeature,
-        // ITlsTokenBindingFeature, TODO: https://github.com/aspnet/HttpSysServer/issues/231
-        IHttpRequestLifetimeFeature,
-        IHttpAuthenticationFeature,
-        IHttpUpgradeFeature,
-        IHttpRequestIdentifierFeature,
-        IHttpMaxRequestBodySizeFeature,
-        IHttpBodyControlFeature,
-        IHttpSysRequestInfoFeature,
-        IHttpResponseTrailersFeature,
-        IHttpResetFeature,
-        IHttpSysRequestDelegationFeature
+    internal partial class RequestContext
+        : IHttpRequestFeature,
+          IHttpRequestBodyDetectionFeature,
+          IHttpConnectionFeature,
+          IHttpResponseFeature,
+          IHttpResponseBodyFeature,
+          ITlsConnectionFeature,
+          ITlsHandshakeFeature,
+          // ITlsTokenBindingFeature, TODO: https://github.com/aspnet/HttpSysServer/issues/231
+          IHttpRequestLifetimeFeature,
+          IHttpAuthenticationFeature,
+          IHttpUpgradeFeature,
+          IHttpRequestIdentifierFeature,
+          IHttpMaxRequestBodySizeFeature,
+          IHttpBodyControlFeature,
+          IHttpSysRequestInfoFeature,
+          IHttpResponseTrailersFeature,
+          IHttpResetFeature,
+          IHttpSysRequestDelegationFeature
     {
         private IFeatureCollection? _features;
         private bool _enableResponseCaching;
@@ -70,8 +70,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         private Fields _initializedFields;
 
-        private List<Tuple<Func<object, Task>, object>>? _onStartingActions = new List<Tuple<Func<object, Task>, object>>();
-        private List<Tuple<Func<object, Task>, object>>? _onCompletedActions = new List<Tuple<Func<object, Task>, object>>();
+        private List<Tuple<Func<object, Task>, object>>? _onStartingActions = new List<
+            Tuple<Func<object, Task>, object>
+        >();
+        private List<Tuple<Func<object, Task>, object>>? _onCompletedActions = new List<
+            Tuple<Func<object, Task>, object>
+        >();
         private bool _responseStarted;
         private bool _completed;
 
@@ -128,7 +132,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             _responseStream = new ResponseStream(Response.Body, OnResponseStart);
             _responseHeaders = Response.Headers;
         }
-
 
         private bool IsNotInitialized(Fields field)
         {
@@ -338,8 +341,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
         }
 
-        async Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(CancellationToken cancellationToken)
-        {
+        async Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(
+            CancellationToken cancellationToken
+        ) {
             if (IsNotInitialized(Fields.ClientCertificate))
             {
                 var method = Server.Options.ClientCertificateMethod;
@@ -417,7 +421,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 if (_pipeWriter == null)
                 {
-                    _pipeWriter = PipeWriter.Create(_responseStream, new StreamPipeWriterOptions(leaveOpen: true));
+                    _pipeWriter = PipeWriter.Create(
+                        _responseStream,
+                        new StreamPipeWriterOptions(leaveOpen: true)
+                    );
                 }
 
                 return _pipeWriter;
@@ -440,7 +447,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             if (_onStartingActions == null)
             {
-                throw new InvalidOperationException("Cannot register new callbacks, the response has already started.");
+                throw new InvalidOperationException(
+                    "Cannot register new callbacks, the response has already started."
+                );
             }
 
             _onStartingActions.Add(new Tuple<Func<object, Task>, object>(callback, state));
@@ -454,7 +463,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             if (_onCompletedActions == null)
             {
-                throw new InvalidOperationException("Cannot register new callbacks, the response has already completed.");
+                throw new InvalidOperationException(
+                    "Cannot register new callbacks, the response has already completed."
+                );
             }
 
             _onCompletedActions.Add(new Tuple<Func<object, Task>, object>(callback, state));
@@ -472,8 +483,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             set { Response.StatusCode = value; }
         }
 
-        async Task IHttpResponseBodyFeature.SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
-        {
+        async Task IHttpResponseBodyFeature.SendFileAsync(
+            string path,
+            long offset,
+            long? length,
+            CancellationToken cancellation
+        ) {
             await OnResponseStart();
             await Response.SendFileAsync(path, offset, length, cancellation);
         }
@@ -588,11 +603,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         int ITlsHandshakeFeature.HashStrength => Request.HashStrength;
 
-        ExchangeAlgorithmType ITlsHandshakeFeature.KeyExchangeAlgorithm => Request.KeyExchangeAlgorithm;
+        ExchangeAlgorithmType ITlsHandshakeFeature.KeyExchangeAlgorithm =>
+            Request.KeyExchangeAlgorithm;
 
         int ITlsHandshakeFeature.KeyExchangeStrength => Request.KeyExchangeStrength;
 
-        IReadOnlyDictionary<int, ReadOnlyMemory<byte>> IHttpSysRequestInfoFeature.RequestInfo => Request.RequestInfo;
+        IReadOnlyDictionary<int, ReadOnlyMemory<byte>> IHttpSysRequestInfoFeature.RequestInfo =>
+            Request.RequestInfo;
 
         IHeaderDictionary IHttpResponseTrailersFeature.Trailers
         {
@@ -662,17 +679,20 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             // Before we check the header value, check for the existence of other headers which would
             // make us *not* want to cache the response.
-            if (response.Headers.ContainsKey(HeaderNames.SetCookie)
+            if (
+                response.Headers.ContainsKey(HeaderNames.SetCookie)
                 || response.Headers.ContainsKey(HeaderNames.Vary)
-                || response.Headers.ContainsKey(HeaderNames.Pragma))
-            {
+                || response.Headers.ContainsKey(HeaderNames.Pragma)
+            ) {
                 return null;
             }
 
             // We require 'public' and 's-max-age' or 'max-age' or the Expires header.
             CacheControlHeaderValue? cacheControl;
-            if (CacheControlHeaderValue.TryParse(cacheControlHeader.ToString(), out cacheControl) && cacheControl.Public)
-            {
+            if (
+                CacheControlHeaderValue.TryParse(cacheControlHeader.ToString(), out cacheControl)
+                && cacheControl.Public
+            ) {
                 if (cacheControl.SharedMaxAge.HasValue)
                 {
                     return cacheControl.SharedMaxAge;
@@ -683,8 +703,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 }
 
                 DateTimeOffset expirationDate;
-                if (HeaderUtilities.TryParseDate(response.Headers[HeaderNames.Expires].ToString(), out expirationDate))
-                {
+                if (
+                    HeaderUtilities.TryParseDate(
+                        response.Headers[HeaderNames.Expires].ToString(),
+                        out expirationDate
+                    )
+                ) {
                     var expiresOffset = expirationDate - DateTimeOffset.UtcNow;
                     if (expiresOffset > TimeSpan.Zero)
                     {

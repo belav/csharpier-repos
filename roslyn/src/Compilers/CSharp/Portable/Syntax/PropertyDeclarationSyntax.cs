@@ -14,10 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         [Obsolete("This member is obsolete.", true)]
         public SyntaxToken Semicolon
         {
-            get
-            {
-                return this.SemicolonToken;
-            }
+            get { return this.SemicolonToken; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -31,8 +28,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     // backwards compatibility for API extension
     public sealed partial class AccessorDeclarationSyntax : CSharpSyntaxNode
     {
-        public AccessorDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, BlockSyntax body, SyntaxToken semicolonToken)
-            => Update(attributeLists, modifiers, keyword, body, expressionBody: null, semicolonToken);
+        public AccessorDeclarationSyntax Update(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxTokenList modifiers,
+            SyntaxToken keyword,
+            BlockSyntax body,
+            SyntaxToken semicolonToken
+        ) => Update(attributeLists, modifiers, keyword, body, expressionBody: null, semicolonToken);
     }
 }
 
@@ -41,9 +43,19 @@ namespace Microsoft.CodeAnalysis.CSharp
     public partial class SyntaxFactory
     {
         /// <summary>Creates a new AccessorDeclarationSyntax instance.</summary>
-        public static AccessorDeclarationSyntax AccessorDeclaration(SyntaxKind kind, BlockSyntax body)
-        {
-            return SyntaxFactory.AccessorDeclaration(kind, default(SyntaxList<AttributeListSyntax>), default(SyntaxTokenList), SyntaxFactory.Token(GetAccessorDeclarationKeywordKind(kind)), body, expressionBody: null, default(SyntaxToken));
+        public static AccessorDeclarationSyntax AccessorDeclaration(
+            SyntaxKind kind,
+            BlockSyntax body
+        ) {
+            return SyntaxFactory.AccessorDeclaration(
+                kind,
+                default(SyntaxList<AttributeListSyntax>),
+                default(SyntaxTokenList),
+                SyntaxFactory.Token(GetAccessorDeclarationKeywordKind(kind)),
+                body,
+                expressionBody: null,
+                default(SyntaxToken)
+            );
         }
     }
 }

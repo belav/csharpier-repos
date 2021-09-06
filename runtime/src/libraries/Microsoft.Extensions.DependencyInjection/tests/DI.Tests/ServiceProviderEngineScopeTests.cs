@@ -14,23 +14,23 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             var engine = new FakeEngine();
             var serviceProviderEngineScope = new ServiceProviderEngineScope(engine);
-            serviceProviderEngineScope.ResolvedServices.Add(new ServiceCacheKey(typeof(IFakeService), 0), null);
+            serviceProviderEngineScope.ResolvedServices.Add(
+                new ServiceCacheKey(typeof(IFakeService), 0),
+                null
+            );
             serviceProviderEngineScope.Dispose();
             serviceProviderEngineScope.Dispose();
         }
 
         private class FakeEngine : ServiceProviderEngine
         {
-            public FakeEngine() :
-                base(Array.Empty<ServiceDescriptor>())
-            {
-            }
+            public FakeEngine() : base(Array.Empty<ServiceDescriptor>()) { }
 
-            protected override Func<ServiceProviderEngineScope, object> RealizeService(ServiceCallSite callSite)
-            {
+            protected override Func<ServiceProviderEngineScope, object> RealizeService(
+                ServiceCallSite callSite
+            ) {
                 return scope => null;
             }
-
         }
     }
 }

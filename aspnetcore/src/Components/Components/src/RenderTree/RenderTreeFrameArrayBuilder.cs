@@ -76,13 +76,15 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             };
         }
 
-        public void AppendComponent(int sequence, [DynamicallyAccessedMembers(Component)] Type componentType)
-        {
+        public void AppendComponent(
+            int sequence,
+            [DynamicallyAccessedMembers(Component)] Type componentType
+        ) {
             if (_itemsInUse == _items.Length)
             {
                 GrowBuffer(_items.Length * 2);
             }
-            
+
             _items[_itemsInUse++] = new RenderTreeFrame
             {
                 SequenceField = sequence,
@@ -91,13 +93,15 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             };
         }
 
-        public void AppendElementReferenceCapture(int sequence, Action<ElementReference> elementReferenceCaptureAction)
-        {
+        public void AppendElementReferenceCapture(
+            int sequence,
+            Action<ElementReference> elementReferenceCaptureAction
+        ) {
             if (_itemsInUse == _items.Length)
             {
                 GrowBuffer(_items.Length * 2);
             }
-            
+
             _items[_itemsInUse++] = new RenderTreeFrame
             {
                 SequenceField = sequence,
@@ -106,13 +110,16 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             };
         }
 
-        public void AppendComponentReferenceCapture(int sequence, Action<object> componentReferenceCaptureAction, int parentFrameIndexValue)
-        {
+        public void AppendComponentReferenceCapture(
+            int sequence,
+            Action<object> componentReferenceCaptureAction,
+            int parentFrameIndexValue
+        ) {
             if (_itemsInUse == _items.Length)
             {
                 GrowBuffer(_items.Length * 2);
             }
-            
+
             _items[_itemsInUse++] = new RenderTreeFrame
             {
                 SequenceField = sequence,
@@ -128,7 +135,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             {
                 GrowBuffer(_items.Length * 2);
             }
-            
+
             _items[_itemsInUse++] = new RenderTreeFrame
             {
                 SequenceField = sequence,

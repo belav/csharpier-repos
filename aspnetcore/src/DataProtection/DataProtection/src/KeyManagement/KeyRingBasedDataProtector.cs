@@ -27,8 +27,12 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         private readonly IKeyRingProvider _keyRingProvider;
         private readonly ILogger? _logger;
 
-        public KeyRingBasedDataProtector(IKeyRingProvider keyRingProvider, ILogger? logger, string[]? originalPurposes, string newPurpose)
-        {
+        public KeyRingBasedDataProtector(
+            IKeyRingProvider keyRingProvider,
+            ILogger? logger,
+            string[]? originalPurposes,
+            string newPurpose
+        ) {
             Debug.Assert(keyRingProvider != null);
 
             Purposes = ConcatPurposes(originalPurposes, newPurpose);
@@ -65,7 +69,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 logger: _logger,
                 keyRingProvider: _keyRingProvider,
                 originalPurposes: Purposes,
-                newPurpose: purpose);
+                newPurpose: purpose
+            );
         }
 
         private static string JoinPurposesForLog(IEnumerable<string> purposes)
@@ -74,8 +79,12 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         }
 
         // allows decrypting payloads whose keys have been revoked
-        public byte[] DangerousUnprotect(byte[] protectedData, bool ignoreRevocationErrors, out bool requiresMigration, out bool wasRevoked)
-        {
+        public byte[] DangerousUnprotect(
+            byte[] protectedData,
+            bool ignoreRevocationErrors,
+            out bool requiresMigration,
+            out bool wasRevoked
+        ) {
             // argument & state checking
             if (protectedData == null)
             {
@@ -102,11 +111,17 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 var currentKeyRing = _keyRingProvider.GetCurrentKeyRing();
                 var defaultKeyId = currentKeyRing.DefaultKeyId;
                 var defaultEncryptorInstance = currentKeyRing.DefaultAuthenticatedEncryptor;
-                CryptoUtil.Assert(defaultEncryptorInstance != null, "defaultEncryptorInstance != null");
+                CryptoUtil.Assert(
+                    defaultEncryptorInstance != null,
+                    "defaultEncryptorInstance != null"
+                );
 
                 if (_logger.IsDebugLevelEnabled())
                 {
-                    _logger.PerformingProtectOperationToKeyWithPurposes(defaultKeyId, JoinPurposesForLog(Purposes));
+                    _logger.PerformingProtectOperationToKeyWithPurposes(
+                        defaultKeyId,
+                        JoinPurposesForLog(Purposes)
+                    );
                 }
 
                 // We'll need to apply the default key id to the template if it hasn't already been applied.
@@ -118,8 +133,12 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     plaintext: new ArraySegment<byte>(plaintext),
                     additionalAuthenticatedData: new ArraySegment<byte>(aad),
                     preBufferSize: (uint)(sizeof(uint) + sizeof(Guid)),
-                    postBufferSize: 0);
-                CryptoUtil.Assert(retVal != null && retVal.Length >= sizeof(uint) + sizeof(Guid), "retVal != null && retVal.Length >= sizeof(uint) + sizeof(Guid)");
+                    postBufferSize: 0
+                );
+                CryptoUtil.Assert(
+                    retVal != null && retVal.Length >= sizeof(uint) + sizeof(Guid),
+                    "retVal != null && retVal.Length >= sizeof(uint) + sizeof(Guid)"
+                );
 
                 // At this point: retVal := { 000..000 || encryptorSpecificProtectedPayload },
                 // where 000..000 is a placeholder for our magic header and key id.
@@ -187,22 +206,31 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             }
 
             // Argument checking will be done by the callee
-            bool requiresMigration, wasRevoked; // unused
-            return DangerousUnprotect(protectedData,
+            bool requiresMigration,
+                wasRevoked; // unused
+            return DangerousUnprotect(
+                protectedData,
                 ignoreRevocationErrors: false,
                 requiresMigration: out requiresMigration,
-                wasRevoked: out wasRevoked);
+                wasRevoked: out wasRevoked
+            );
         }
 
-        private byte[] UnprotectCore(byte[] protectedData, bool allowOperationsOnRevokedKeys, out UnprotectStatus status)
-        {
+        private byte[] UnprotectCore(
+            byte[] protectedData,
+            bool allowOperationsOnRevokedKeys,
+            out UnprotectStatus status
+        ) {
             Debug.Assert(protectedData != null);
 
             try
             {
                 // argument & state checking
-                if (protectedData.Length < sizeof(uint) /* magic header */ + sizeof(Guid) /* key id */)
-                {
+                if (
+                    protectedData.Length
+                    < sizeof(uint) /* magic header */
+                        + sizeof(Guid) /* key id */
+                ) {
                     // payload must contain at least the magic header and key id
                     throw Error.ProtectionProvider_BadMagicHeader();
                 }
@@ -231,26 +259,39 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
                 if (_logger.IsDebugLevelEnabled())
                 {
-                    _logger.PerformingUnprotectOperationToKeyWithPurposes(keyIdFromPayload, JoinPurposesForLog(Purposes));
+                    _logger.PerformingUnprotectOperationToKeyWithPurposes(
+                        keyIdFromPayload,
+                        JoinPurposesForLog(Purposes)
+                    );
                 }
 
                 // Find the correct encryptor in the keyring.
                 bool keyWasRevoked;
                 var currentKeyRing = _keyRingProvider.GetCurrentKeyRing();
-                var requestedEncryptor = currentKeyRing.GetAuthenticatedEncryptorByKeyId(keyIdFromPayload, out keyWasRevoked);
+                var requestedEncryptor = currentKeyRing.GetAuthenticatedEncryptorByKeyId(
+                    keyIdFromPayload,
+                    out keyWasRevoked
+                );
                 if (requestedEncryptor == null)
                 {
-                    if (_keyRingProvider is KeyRingProvider provider && provider.InAutoRefreshWindow())
-                    {
+                    if (
+                        _keyRingProvider is KeyRingProvider provider
+                        && provider.InAutoRefreshWindow()
+                    ) {
                         currentKeyRing = provider.RefreshCurrentKeyRing();
-                        requestedEncryptor = currentKeyRing.GetAuthenticatedEncryptorByKeyId(keyIdFromPayload, out keyWasRevoked);
+                        requestedEncryptor = currentKeyRing.GetAuthenticatedEncryptorByKeyId(
+                            keyIdFromPayload,
+                            out keyWasRevoked
+                        );
                     }
 
                     if (requestedEncryptor == null)
                     {
                         if (_logger.IsTraceLevelEnabled())
                         {
-                            _logger.KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(keyIdFromPayload);
+                            _logger.KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(
+                                keyIdFromPayload
+                            );
                         }
                         throw Error.Common_KeyNotFound(keyIdFromPayload);
                     }
@@ -270,7 +311,9 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     {
                         if (_logger.IsDebugLevelEnabled())
                         {
-                            _logger.KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(keyIdFromPayload);
+                            _logger.KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(
+                                keyIdFromPayload
+                            );
                         }
                         status = UnprotectStatus.DecryptionKeyWasRevoked;
                     }
@@ -285,8 +328,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 }
 
                 // Perform the decryption operation.
-                ArraySegment<byte> ciphertext = new ArraySegment<byte>(protectedData, sizeof(uint) + sizeof(Guid), protectedData.Length - (sizeof(uint) + sizeof(Guid))); // chop off magic header + encryptor id
-                ArraySegment<byte> additionalAuthenticatedData = new ArraySegment<byte>(_aadTemplate.GetAadForKey(keyIdFromPayload, isProtecting: false));
+                ArraySegment<byte> ciphertext = new ArraySegment<byte>(
+                    protectedData,
+                    sizeof(uint) + sizeof(Guid),
+                    protectedData.Length - (sizeof(uint) + sizeof(Guid))
+                ); // chop off magic header + encryptor id
+                ArraySegment<byte> additionalAuthenticatedData = new ArraySegment<byte>(
+                    _aadTemplate.GetAadForKey(keyIdFromPayload, isProtecting: false)
+                );
 
                 // At this point, cipherText := { encryptorSpecificPayload },
                 // so all that's left is to invoke the decryption routine directly.
@@ -360,7 +409,11 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 // Multiple threads might be trying to read and write the _aadTemplate field
                 // simultaneously. We need to make sure all accesses to it are thread-safe.
                 var existingTemplate = Volatile.Read(ref _aadTemplate);
-                Debug.Assert(existingTemplate.Length >= sizeof(uint) /* MAGIC_HEADER */ + sizeof(Guid) /* keyId */);
+                Debug.Assert(
+                    existingTemplate.Length
+                        >= sizeof(uint) /* MAGIC_HEADER */
+                            + sizeof(Guid) /* keyId */
+                );
 
                 // If the template is already initialized to this key id, return it.
                 // The caller will not mutate it.
@@ -390,7 +443,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             private sealed class PurposeBinaryWriter : BinaryWriter
             {
-                public PurposeBinaryWriter(MemoryStream stream) : base(stream, EncodingUtil.SecureUtf8Encoding, leaveOpen: true) { }
+                public PurposeBinaryWriter(MemoryStream stream)
+                    : base(stream, EncodingUtil.SecureUtf8Encoding, leaveOpen: true) { }
 
                 // Writes a big-endian 32-bit integer to the underlying stream.
                 public void WriteBigEndian(uint value)

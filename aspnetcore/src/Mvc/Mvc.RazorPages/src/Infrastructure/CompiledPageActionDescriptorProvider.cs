@@ -36,11 +36,19 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IEnumerable<IPageApplicationModelProvider> applicationModelProviders,
             ApplicationPartManager applicationPartManager,
             IOptions<MvcOptions> mvcOptions,
-            IOptions<RazorPagesOptions> pageOptions)
-        {
-            _pageActionDescriptorProvider = new PageActionDescriptorProvider(pageRouteModelProviders, mvcOptions, pageOptions);
+            IOptions<RazorPagesOptions> pageOptions
+        ) {
+            _pageActionDescriptorProvider = new PageActionDescriptorProvider(
+                pageRouteModelProviders,
+                mvcOptions,
+                pageOptions
+            );
             _applicationPartManager = applicationPartManager;
-            _compiledPageActionDescriptorFactory = new CompiledPageActionDescriptorFactory(applicationModelProviders, mvcOptions.Value, pageOptions.Value);
+            _compiledPageActionDescriptorFactory = new CompiledPageActionDescriptorFactory(
+                applicationModelProviders,
+                mvcOptions.Value,
+                pageOptions.Value
+            );
         }
 
         /// <inheritdoc/>
@@ -56,7 +64,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var feature = new ViewsFeature();
             _applicationPartManager.PopulateFeature(feature);
 
-            var lookup = new Dictionary<string, CompiledViewDescriptor>(feature.ViewDescriptors.Count, StringComparer.Ordinal);
+            var lookup = new Dictionary<string, CompiledViewDescriptor>(
+                feature.ViewDescriptors.Count,
+                StringComparer.Ordinal
+            );
 
             foreach (var viewDescriptor in feature.ViewDescriptors)
             {
@@ -68,21 +79,27 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             foreach (var item in newContext.Results)
             {
                 var pageActionDescriptor = (PageActionDescriptor)item;
-                if (!lookup.TryGetValue(pageActionDescriptor.RelativePath, out var compiledViewDescriptor))
-                {
-                    throw new InvalidOperationException($"A descriptor for '{pageActionDescriptor.RelativePath}' was not found.");
+                if (
+                    !lookup.TryGetValue(
+                        pageActionDescriptor.RelativePath,
+                        out var compiledViewDescriptor
+                    )
+                ) {
+                    throw new InvalidOperationException(
+                        $"A descriptor for '{pageActionDescriptor.RelativePath}' was not found."
+                    );
                 }
 
-                var compiledPageActionDescriptor = _compiledPageActionDescriptorFactory.CreateCompiledDescriptor(
-                    pageActionDescriptor,
-                    compiledViewDescriptor);
+                var compiledPageActionDescriptor =
+                    _compiledPageActionDescriptorFactory.CreateCompiledDescriptor(
+                        pageActionDescriptor,
+                        compiledViewDescriptor
+                    );
                 context.Results.Add(compiledPageActionDescriptor);
             }
         }
 
         /// <inheritdoc/>
-        public void OnProvidersExecuted(ActionDescriptorProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
     }
 }

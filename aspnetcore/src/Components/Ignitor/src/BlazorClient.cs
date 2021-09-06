@@ -30,16 +30,18 @@ namespace Ignitor
             CancellationToken = CancellationTokenSource.Token;
             TaskCompletionSource = new TaskCompletionSource<object?>();
 
-            CancellationTokenSource.Token.Register(() =>
-            {
-                TaskCompletionSource.TrySetCanceled();
-            });
+            CancellationTokenSource.Token.Register(
+                () =>
+                {
+                    TaskCompletionSource.TrySetCanceled();
+                }
+            );
         }
 
-        public TimeSpan? DefaultConnectionTimeout { get; set; } = Debugger.IsAttached ?
-            Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(20);
-        public TimeSpan? DefaultOperationTimeout { get; set; } = Debugger.IsAttached ?
-            Timeout.InfiniteTimeSpan : TimeSpan.FromMilliseconds(500);
+        public TimeSpan? DefaultConnectionTimeout { get; set; } =
+            Debugger.IsAttached ? Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(20);
+        public TimeSpan? DefaultOperationTimeout { get; set; } =
+            Debugger.IsAttached ? Timeout.InfiniteTimeSpan : TimeSpan.FromMilliseconds(500);
 
         /// <summary>
         /// Gets or sets a value that determines whether the client will capture data such
@@ -91,7 +93,9 @@ namespace Ignitor
 
         public bool ImplicitWait => DefaultOperationTimeout != null;
 
-        public HubConnection HubConnection => _hubConnection ?? throw new InvalidOperationException("HubConnection has not been initialized.");
+        public HubConnection HubConnection =>
+            _hubConnection
+            ?? throw new InvalidOperationException("HubConnection has not been initialized.");
 
         public Task<CapturedRenderBatch?> PrepareForNextBatch(TimeSpan? timeout)
         {
@@ -100,7 +104,10 @@ namespace Ignitor
                 throw new InvalidOperationException("Invalid state previous task not completed");
             }
 
-            NextBatchReceived = new CancellableOperation<CapturedRenderBatch?>(timeout, CancellationToken);
+            NextBatchReceived = new CancellableOperation<CapturedRenderBatch?>(
+                timeout,
+                CancellationToken
+            );
             return NextBatchReceived.Completion.Task;
         }
 
@@ -111,19 +118,27 @@ namespace Ignitor
                 throw new InvalidOperationException("Invalid state previous task not completed");
             }
 
-            NextJSInteropReceived = new CancellableOperation<CapturedJSInteropCall?>(timeout, CancellationToken);
+            NextJSInteropReceived = new CancellableOperation<CapturedJSInteropCall?>(
+                timeout,
+                CancellationToken
+            );
 
             return NextJSInteropReceived.Completion.Task;
         }
 
         public Task<string?> PrepareForNextDotNetInterop(TimeSpan? timeout)
         {
-            if (NextDotNetInteropCompletionReceived != null && !NextDotNetInteropCompletionReceived.Disposed)
-            {
+            if (
+                NextDotNetInteropCompletionReceived != null
+                && !NextDotNetInteropCompletionReceived.Disposed
+            ) {
                 throw new InvalidOperationException("Invalid state previous task not completed");
             }
 
-            NextDotNetInteropCompletionReceived = new CancellableOperation<string?>(timeout, CancellationToken);
+            NextDotNetInteropCompletionReceived = new CancellableOperation<string?>(
+                timeout,
+                CancellationToken
+            );
 
             return NextDotNetInteropCompletionReceived.Completion.Task;
         }
@@ -178,15 +193,19 @@ namespace Ignitor
             return ExpectRenderBatch(() => elementNode.SelectAsync(HubConnection, value));
         }
 
-        public async Task<CapturedRenderBatch?> ExpectRenderBatch(Func<Task> action, TimeSpan? timeout = null)
-        {
+        public async Task<CapturedRenderBatch?> ExpectRenderBatch(
+            Func<Task> action,
+            TimeSpan? timeout = null
+        ) {
             var task = WaitForRenderBatch(timeout);
             await action();
             return await task;
         }
 
-        public async Task<CapturedJSInteropCall?> ExpectJSInterop(Func<Task> action, TimeSpan? timeout = null)
-        {
+        public async Task<CapturedJSInteropCall?> ExpectJSInterop(
+            Func<Task> action,
+            TimeSpan? timeout = null
+        ) {
             var task = WaitForJSInterop(timeout);
             await action();
             return await task;
@@ -213,15 +232,20 @@ namespace Ignitor
             return await task;
         }
 
-        public async Task<(string? error, Exception? exception)> ExpectCircuitErrorAndDisconnect(Func<Task> action, TimeSpan? timeout = null)
-        {
+        public async Task<(string? error, Exception? exception)> ExpectCircuitErrorAndDisconnect(
+            Func<Task> action,
+            TimeSpan? timeout = null
+        ) {
             string? error = default;
 
             // NOTE: timeout is used for each operation individually.
-            var exception = await ExpectDisconnect(async () =>
-            {
-                error = await ExpectCircuitError(action, timeout);
-            }, timeout);
+            var exception = await ExpectDisconnect(
+                async () =>
+                {
+                    error = await ExpectCircuitError(action, timeout);
+                },
+                timeout
+            );
 
             return (error, exception);
         }
@@ -232,7 +256,9 @@ namespace Ignitor
             {
                 if (DefaultOperationTimeout == null && timeout == null)
                 {
-                    throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                    throw new InvalidOperationException(
+                        "Implicit wait without DefaultLatencyTimeout is not allowed."
+                    );
                 }
 
                 try
@@ -254,7 +280,9 @@ namespace Ignitor
             {
                 if (DefaultOperationTimeout == null && timeout == null)
                 {
-                    throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                    throw new InvalidOperationException(
+                        "Implicit wait without DefaultLatencyTimeout is not allowed."
+                    );
                 }
 
                 try
@@ -276,7 +304,9 @@ namespace Ignitor
             {
                 if (DefaultOperationTimeout == null && timeout == null)
                 {
-                    throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                    throw new InvalidOperationException(
+                        "Implicit wait without DefaultLatencyTimeout is not allowed."
+                    );
                 }
 
                 try
@@ -298,7 +328,9 @@ namespace Ignitor
             {
                 if (DefaultOperationTimeout == null && timeout == null)
                 {
-                    throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                    throw new InvalidOperationException(
+                        "Implicit wait without DefaultLatencyTimeout is not allowed."
+                    );
                 }
 
                 try
@@ -320,7 +352,9 @@ namespace Ignitor
             {
                 if (DefaultOperationTimeout == null && timeout == null)
                 {
-                    throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                    throw new InvalidOperationException(
+                        "Implicit wait without DefaultLatencyTimeout is not allowed."
+                    );
                 }
 
                 try
@@ -336,20 +370,27 @@ namespace Ignitor
             return null;
         }
 
-        public async Task<bool> ConnectAsync(Uri uri, bool connectAutomatically = true, Action<HubConnectionBuilder, Uri>? configure = null)
-        {
+        public async Task<bool> ConnectAsync(
+            Uri uri,
+            bool connectAutomatically = true,
+            Action<HubConnectionBuilder, Uri>? configure = null
+        ) {
             var builder = new HubConnectionBuilder();
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>());
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
+            );
             var hubUrl = GetHubUrl(uri);
             builder.WithUrl(hubUrl);
-            builder.ConfigureLogging(l =>
-            {
-                l.SetMinimumLevel(LogLevel.Trace);
-                if (LoggerProvider != null)
+            builder.ConfigureLogging(
+                l =>
                 {
-                    l.AddProvider(LoggerProvider);
+                    l.SetMinimumLevel(LogLevel.Trace);
+                    if (LoggerProvider != null)
+                    {
+                        l.AddProvider(LoggerProvider);
+                    }
                 }
-            });
+            );
 
             configure?.Invoke(builder, hubUrl);
 
@@ -383,8 +424,17 @@ namespace Ignitor
 
             var descriptors = await GetPrerenderDescriptors(uri);
             await ExpectRenderBatch(
-                async () => CircuitId = await HubConnection.InvokeAsync<string>("StartCircuit", uri, uri, descriptors, null, CancellationToken),
-                DefaultConnectionTimeout);
+                async () =>
+                    CircuitId = await HubConnection.InvokeAsync<string>(
+                        "StartCircuit",
+                        uri,
+                        uri,
+                        descriptors,
+                        null,
+                        CancellationToken
+                    ),
+                DefaultConnectionTimeout
+            );
             return CircuitId != null;
         }
 
@@ -404,9 +454,20 @@ namespace Ignitor
             NextAttachComponentReceived?.Completion?.TrySetResult(call);
         }
 
-        private void OnBeginInvokeJS(int asyncHandle, string identifier, string argsJson, int resultType, long targetInstanceId)
-        {
-            var call = new CapturedJSInteropCall(asyncHandle, identifier, argsJson, resultType, targetInstanceId);
+        private void OnBeginInvokeJS(
+            int asyncHandle,
+            string identifier,
+            string argsJson,
+            int resultType,
+            long targetInstanceId
+        ) {
+            var call = new CapturedJSInteropCall(
+                asyncHandle,
+                identifier,
+                argsJson,
+                resultType,
+                targetInstanceId
+            );
             Operations?.JSInteropCalls.Enqueue(call);
             JSInterop?.Invoke(call);
 
@@ -434,7 +495,12 @@ namespace Ignitor
 
         public Task ConfirmBatch(int batchId, string? error = null)
         {
-            return HubConnection.InvokeAsync("OnRenderCompleted", batchId, error, CancellationToken);
+            return HubConnection.InvokeAsync(
+                "OnRenderCompleted",
+                batchId,
+                error,
+                CancellationToken
+            );
         }
 
         private void OnError(string error)
@@ -478,27 +544,41 @@ namespace Ignitor
             else
             {
                 var builder = new UriBuilder(uri);
-                builder.Path += builder.Path.EndsWith("/", StringComparison.Ordinal) ? "_blazor" : "/_blazor";
+                builder.Path += builder.Path.EndsWith("/", StringComparison.Ordinal)
+                    ? "_blazor"
+                    : "/_blazor";
                 return builder.Uri;
             }
         }
 
-        public async Task InvokeDotNetMethod(object callId, string assemblyName, string methodIdentifier, object dotNetObjectId, string argsJson)
-        {
-            await ExpectDotNetInterop(() => HubConnection.InvokeAsync(
-                "BeginInvokeDotNetFromJS",
-                callId?.ToString(),
-                assemblyName,
-                methodIdentifier,
-                dotNetObjectId ?? 0,
-                argsJson,
-                CancellationToken));
+        public async Task InvokeDotNetMethod(
+            object callId,
+            string assemblyName,
+            string methodIdentifier,
+            object dotNetObjectId,
+            string argsJson
+        ) {
+            await ExpectDotNetInterop(
+                () =>
+                    HubConnection.InvokeAsync(
+                        "BeginInvokeDotNetFromJS",
+                        callId?.ToString(),
+                        assemblyName,
+                        methodIdentifier,
+                        dotNetObjectId ?? 0,
+                        argsJson,
+                        CancellationToken
+                    )
+            );
         }
 
         public async Task<string> GetPrerenderDescriptors(Uri uri)
         {
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Cookie", "__blazor_execution_mode=server");
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                "Cookie",
+                "__blazor_execution_mode=server"
+            );
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
@@ -530,13 +610,17 @@ namespace Ignitor
         {
             content = content.Replace("\r\n", "").Replace("\n", "");
             var matches = Regex.Matches(content, MarkerPattern);
-            var markers = matches.Select(s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value)))
-                .Where(s =>
-                {
-                    return s.parsed.RootElement.TryGetProperty("type", out var markerType) &&
-                        markerType.ValueKind != JsonValueKind.Undefined &&
-                        markerType.GetString() == "server";
-                })
+            var markers = matches.Select(
+                    s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value))
+                )
+                .Where(
+                    s =>
+                    {
+                        return s.parsed.RootElement.TryGetProperty("type", out var markerType)
+                            && markerType.ValueKind != JsonValueKind.Undefined
+                            && markerType.GetString() == "server";
+                    }
+                )
                 .OrderBy(p => p.parsed.RootElement.GetProperty("sequence").GetInt32())
                 .Select(p => p.value)
                 .ToArray();

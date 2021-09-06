@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : UpdatesFixtureBase
     {
-        protected UpdatesTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected UpdatesTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -34,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     context.AFewBytes.AddRange(
                         new AFewBytes { Id = id1, Bytes = bytes },
-                        new AFewBytes { Id = id2, Bytes = bytes });
+                        new AFewBytes { Id = id2, Bytes = bytes }
+                    );
 
                     context.SaveChanges();
                 },
@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(222, fromStore1.Bytes[1]);
                     Assert.Equal(2, fromStore2.Bytes[1]);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -74,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var entry = context.Products.Attach(
-                        new Product { Id = productId, Price = 1.49M });
+                        new Product { Id = productId, Price = 1.49M }
+                    );
 
                     entry.Property(c => c.Price).CurrentValue = 1.99M;
                     entry.Property(p => p.Price).IsModified = true;
@@ -90,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(1.99M, product.Price);
                     Assert.Equal("Apple Cider", product.Name);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -100,15 +103,23 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var entry = context.Products.Attach(
-                        new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10"), Name = "Apple Fritter" });
+                        new Product
+                        {
+                            Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10"),
+                            Name = "Apple Fritter"
+                        }
+                    );
 
                     entry.Property(c => c.Name).IsModified = true;
 
                     Assert.Equal(
                         UpdateConcurrencyMessage,
                         Assert.Throws<DbUpdateConcurrencyException>(
-                            () => context.SaveChanges()).Message);
-                });
+                            () => context.SaveChanges()
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -125,15 +136,19 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "Apple Fritter",
                             Price = 3.49M // Not the same as the value stored in the database
-                        });
+                        }
+                    );
 
                     entry.Property(c => c.Name).IsModified = true;
 
                     Assert.Equal(
                         UpdateConcurrencyTokenMessage,
                         Assert.Throws<DbUpdateConcurrencyException>(
-                            () => context.SaveChanges()).Message);
-                });
+                            () => context.SaveChanges()
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -150,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
                 },
@@ -162,14 +178,15 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 }
-                        });
+                        }
+                    );
 
                     entry.Entity.Name = "GigaChips";
 
-                    Assert.Throws<DbUpdateConcurrencyException>(
-                        () => context.SaveChanges());
+                    Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
                 },
-                context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name));
+                context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name)
+            );
         }
 
         [ConditionalFact]
@@ -186,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
                 },
@@ -198,13 +216,15 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                        });
+                        }
+                    );
 
                     entry.Entity.Name = "GigaChips";
 
                     Assert.Equal(1, context.SaveChanges());
                 },
-                context => Assert.Equal("GigaChips", context.ProductWithBytes.Find(productId).Name));
+                context => Assert.Equal("GigaChips", context.ProductWithBytes.Find(productId).Name)
+            );
         }
 
         [ConditionalFact]
@@ -221,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
                 },
@@ -233,14 +254,15 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 }
-                        });
+                        }
+                    );
 
                     entry.State = EntityState.Deleted;
 
-                    Assert.Throws<DbUpdateConcurrencyException>(
-                        () => context.SaveChanges());
+                    Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
                 },
-                context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name));
+                context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name)
+            );
         }
 
         [ConditionalFact]
@@ -257,7 +279,8 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                        });
+                        }
+                    );
 
                     context.SaveChanges();
                 },
@@ -269,13 +292,15 @@ namespace Microsoft.EntityFrameworkCore
                             Id = productId,
                             Name = "MegaChips",
                             Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                        });
+                        }
+                    );
 
                     entry.State = EntityState.Deleted;
 
                     Assert.Equal(1, context.SaveChanges());
                 },
-                context => Assert.Null(context.ProductWithBytes.Find(productId)));
+                context => Assert.Null(context.ProductWithBytes.Find(productId))
+            );
         }
 
         [ConditionalFact]
@@ -286,8 +311,7 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.Products.Remove(
-                        new Product { Id = productId, Price = 1.49M });
+                    context.Products.Remove(new Product { Id = productId, Price = 1.49M });
 
                     context.SaveChanges();
                 },
@@ -296,7 +320,8 @@ namespace Microsoft.EntityFrameworkCore
                     var product = context.Products.FirstOrDefault(f => f.Id == productId);
 
                     Assert.Null(product);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -306,13 +331,17 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     context.Products.Remove(
-                        new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") });
+                        new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") }
+                    );
 
                     Assert.Equal(
                         UpdateConcurrencyMessage,
                         Assert.Throws<DbUpdateConcurrencyException>(
-                            () => context.SaveChanges()).Message);
-                });
+                            () => context.SaveChanges()
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -326,14 +355,19 @@ namespace Microsoft.EntityFrameworkCore
                     context.Products.Remove(
                         new Product
                         {
-                            Id = productId, Price = 3.49M // Not the same as the value stored in the database
-                        });
+                            Id = productId,
+                            Price = 3.49M // Not the same as the value stored in the database
+                        }
+                    );
 
                     Assert.Equal(
                         UpdateConcurrencyTokenMessage,
                         Assert.Throws<DbUpdateConcurrencyException>(
-                            () => context.SaveChanges()).Message);
-                });
+                            () => context.SaveChanges()
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -343,7 +377,10 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var category = context.Categories.Single();
-                    var products = context.Products.Where(p => p.DependentId == category.PrincipalId).ToList();
+                    var products = context.Products.Where(
+                            p => p.DependentId == category.PrincipalId
+                        )
+                        .ToList();
 
                     Assert.Equal(2, products.Count);
 
@@ -361,11 +398,15 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var category = context.Categories.Single();
-                    var products = context.Products.Where(p => p.DependentId == category.PrincipalId).ToList();
+                    var products = context.Products.Where(
+                            p => p.DependentId == category.PrincipalId
+                        )
+                        .ToList();
 
                     Assert.Equal("New Category", category.Name);
                     Assert.Equal(2, products.Count);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -380,13 +421,15 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 });
+                        new Category { Id = 77, PrincipalId = 777 }
+                    );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 });
-                    var entry3 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId1 });
+                        new Category { Id = 78, PrincipalId = 778 }
+                    );
+                    var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M });
+                        new Product { Id = productId2, Price = 2.49M }
+                    );
 
                     entry1.SetEntityState(EntityState.Added);
                     entry2.SetEntityState(EntityState.Modified);
@@ -404,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Unchanged, entry1.EntityState);
                     Assert.Equal(EntityState.Unchanged, entry2.EntityState);
                     Assert.Equal(EntityState.Unchanged, entry3.EntityState);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -419,13 +463,15 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 });
+                        new Category { Id = 77, PrincipalId = 777 }
+                    );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 });
-                    var entry3 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId1 });
+                        new Category { Id = 78, PrincipalId = 778 }
+                    );
+                    var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M });
+                        new Product { Id = productId2, Price = 2.49M }
+                    );
 
                     entry1.SetEntityState(EntityState.Added);
                     entry2.SetEntityState(EntityState.Modified);
@@ -445,7 +491,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Modified, entry2.EntityState);
                     Assert.Equal(EntityState.Unchanged, entry3.EntityState);
                     Assert.Equal(EntityState.Deleted, entry4.EntityState);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -460,13 +507,15 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 });
+                        new Category { Id = 77, PrincipalId = 777 }
+                    );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 });
-                    var entry3 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId1 });
+                        new Category { Id = 78, PrincipalId = 778 }
+                    );
+                    var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M });
+                        new Product { Id = productId2, Price = 2.49M }
+                    );
 
                     entry1.SetEntityState(EntityState.Added);
                     entry2.SetEntityState(EntityState.Modified);
@@ -484,7 +533,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Unchanged, entry1.EntityState);
                     Assert.Equal(EntityState.Unchanged, entry2.EntityState);
                     Assert.Equal(EntityState.Unchanged, entry3.EntityState);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -499,13 +549,15 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 });
+                        new Category { Id = 77, PrincipalId = 777 }
+                    );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 });
-                    var entry3 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId1 });
+                        new Category { Id = 78, PrincipalId = 778 }
+                    );
+                    var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M });
+                        new Product { Id = productId2, Price = 2.49M }
+                    );
 
                     entry1.SetEntityState(EntityState.Added);
                     entry2.SetEntityState(EntityState.Modified);
@@ -525,7 +577,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Modified, entry2.EntityState);
                     Assert.Equal(EntityState.Unchanged, entry3.EntityState);
                     Assert.Equal(EntityState.Deleted, entry4.EntityState);
-                });
+                }
+            );
         }
 
         protected abstract string UpdateConcurrencyMessage { get; }
@@ -535,24 +588,34 @@ namespace Microsoft.EntityFrameworkCore
         protected virtual void ExecuteWithStrategyInTransaction(
             Action<UpdatesContext> testOperation,
             Action<UpdatesContext> nestedTestOperation1 = null,
-            Action<UpdatesContext> nestedTestOperation2 = null)
-            => TestHelpers.ExecuteWithStrategyInTransaction(
-                CreateContext, UseTransaction,
-                testOperation, nestedTestOperation1, nestedTestOperation2);
+            Action<UpdatesContext> nestedTestOperation2 = null
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransaction(
+                CreateContext,
+                UseTransaction,
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
 
         protected virtual Task ExecuteWithStrategyInTransactionAsync(
             Func<UpdatesContext, Task> testOperation,
             Func<UpdatesContext, Task> nestedTestOperation1 = null,
-            Func<UpdatesContext, Task> nestedTestOperation2 = null)
-            => TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                CreateContext, UseTransaction,
-                testOperation, nestedTestOperation1, nestedTestOperation2);
+            Func<UpdatesContext, Task> nestedTestOperation2 = null
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransactionAsync(
+                CreateContext,
+                UseTransaction,
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
 
-        protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        {
-        }
+        protected virtual void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) { }
 
-        protected UpdatesContext CreateContext()
-            => Fixture.CreateContext();
+        protected UpdatesContext CreateContext() => Fixture.CreateContext();
     }
 }

@@ -8,16 +8,20 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
 {
     internal class FlagParser
     {
-        private readonly IDictionary<string, FlagType> _ruleFlagLookup = new Dictionary<string, FlagType>(StringComparer.OrdinalIgnoreCase) {
-            { "b", FlagType.EscapeBackreference},
+        private readonly IDictionary<string, FlagType> _ruleFlagLookup = new Dictionary<
+            string,
+            FlagType
+        >(StringComparer.OrdinalIgnoreCase)
+        {
+            { "b", FlagType.EscapeBackreference },
             { "c", FlagType.Chain },
-            { "chain", FlagType.Chain},
+            { "chain", FlagType.Chain },
             { "co", FlagType.Cookie },
             { "cookie", FlagType.Cookie },
             { "dpi", FlagType.DiscardPath },
             { "discardpath", FlagType.DiscardPath },
-            { "e", FlagType.Env},
-            { "env", FlagType.Env},
+            { "e", FlagType.Env },
+            { "env", FlagType.Env },
             { "end", FlagType.End },
             { "f", FlagType.Forbidden },
             { "forbidden", FlagType.Forbidden },
@@ -66,7 +70,9 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             // Guaranteed to have a length of at least 1 here, so this will never throw for indexing.
             if (!(flagString[0] == '[' && flagString[flagString.Length - 1] == ']'))
             {
-                throw new FormatException("Flags should start and end with square brackets: [flags]");
+                throw new FormatException(
+                    "Flags should start and end with square brackets: [flags]"
+                );
             }
 
             // Lexing esque step to split all flags.

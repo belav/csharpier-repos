@@ -21,14 +21,18 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteInformation)
             {
-                CompositionTraceSource.WriteInformation(CompositionTraceId.Rejection_DefinitionResurrected,
+                CompositionTraceSource.WriteInformation(
+                    CompositionTraceId.Rejection_DefinitionResurrected,
                     SR.CompositionTrace_Rejection_DefinitionResurrected,
-                    definition.GetDisplayName());
+                    definition.GetDisplayName()
+                );
             }
         }
 
-        internal static void PartDefinitionRejected(ComposablePartDefinition definition, ChangeRejectedException exception)
-        {
+        internal static void PartDefinitionRejected(
+            ComposablePartDefinition definition,
+            ChangeRejectedException exception
+        ) {
             if (definition == null)
             {
                 throw new ArgumentNullException(nameof(definition));
@@ -39,18 +43,22 @@ namespace System.Composition.Diagnostics
                 throw new ArgumentNullException(nameof(exception));
             }
 
-
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Rejection_DefinitionRejected,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Rejection_DefinitionRejected,
                     SR.CompositionTrace_Rejection_DefinitionRejected,
                     definition.GetDisplayName(),
-                    exception.Message);
+                    exception.Message
+                );
             }
         }
 
-        internal static void AssemblyLoadFailed(DirectoryCatalog catalog, string fileName, Exception exception)
-        {
+        internal static void AssemblyLoadFailed(
+            DirectoryCatalog catalog,
+            string fileName,
+            Exception exception
+        ) {
             if (catalog == null)
             {
                 throw new ArgumentNullException(nameof(catalog));
@@ -68,16 +76,21 @@ namespace System.Composition.Diagnostics
 
             if (fileName.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(fileName)), nameof(fileName));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(fileName)),
+                    nameof(fileName)
+                );
             }
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Discovery_AssemblyLoadFailed,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Discovery_AssemblyLoadFailed,
                     SR.CompositionTrace_Discovery_AssemblyLoadFailed,
                     catalog.GetDisplayName(),
                     fileName,
-                    exception.Message);
+                    exception.Message
+                );
             }
         }
 
@@ -90,9 +103,11 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteInformation)
             {
-                CompositionTraceSource.WriteInformation(CompositionTraceId.Discovery_DefinitionMarkedWithPartNotDiscoverableAttribute,
+                CompositionTraceSource.WriteInformation(
+                    CompositionTraceId.Discovery_DefinitionMarkedWithPartNotDiscoverableAttribute,
                     SR.CompositionTrace_Discovery_DefinitionMarkedWithPartNotDiscoverableAttribute,
-                    type.GetDisplayName());
+                    type.GetDisplayName()
+                );
             }
         }
 
@@ -110,9 +125,12 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteInformation)
             {
-                CompositionTraceSource.WriteInformation(CompositionTraceId.Discovery_DefinitionMismatchedExportArity,
+                CompositionTraceSource.WriteInformation(
+                    CompositionTraceId.Discovery_DefinitionMismatchedExportArity,
                     SR.CompositionTrace_Discovery_DefinitionMismatchedExportArity,
-                    type.GetDisplayName(), member.GetDisplayName());
+                    type.GetDisplayName(),
+                    member.GetDisplayName()
+                );
             }
         }
 
@@ -125,9 +143,11 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteInformation)
             {
-                CompositionTraceSource.WriteInformation(CompositionTraceId.Discovery_DefinitionContainsNoExports,
+                CompositionTraceSource.WriteInformation(
+                    CompositionTraceId.Discovery_DefinitionContainsNoExports,
                     SR.CompositionTrace_Discovery_DefinitionContainsNoExports,
-                    type.GetDisplayName());
+                    type.GetDisplayName()
+                );
             }
         }
 
@@ -140,9 +160,11 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteError)
             {
-                CompositionTraceSource.WriteError(CompositionTraceId.Discovery_MemberMarkedWithMultipleImportAndImportMany,
+                CompositionTraceSource.WriteError(
+                    CompositionTraceId.Discovery_MemberMarkedWithMultipleImportAndImportMany,
                     SR.CompositionTrace_Discovery_MemberMarkedWithMultipleImportAndImportMany,
-                    item.GetDisplayName());
+                    item.GetDisplayName()
+                );
             }
         }
     }

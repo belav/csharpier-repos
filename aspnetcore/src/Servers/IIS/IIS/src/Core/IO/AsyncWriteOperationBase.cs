@@ -28,7 +28,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
 
             if (_buffer.Length > int.MaxValue)
             {
-                throw new InvalidOperationException($"Writes larger then {int.MaxValue} are not supported.");
+                throw new InvalidOperationException(
+                    $"Writes larger then {int.MaxValue} are not supported."
+                );
             }
 
             bool completionExpected;
@@ -41,7 +43,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 // To avoid stackoverflows, we will only stackalloc if the write size is less than the StackChunkLimit
                 // The stack size is IIS is by default 128/256 KB, so we are generous with this threshold.
                 var chunks = stackalloc HttpApiTypes.HTTP_DATA_CHUNK[chunkCount];
-                hr = WriteSequence(_requestHandler, chunkCount, _buffer, chunks, out completionExpected);
+                hr = WriteSequence(
+                    _requestHandler,
+                    chunkCount,
+                    _buffer,
+                    chunks,
+                    out completionExpected
+                );
             }
             else
             {
@@ -49,7 +57,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 var chunks = new HttpApiTypes.HTTP_DATA_CHUNK[chunkCount];
                 fixed (HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks = chunks)
                 {
-                    hr = WriteSequence(_requestHandler, chunkCount, _buffer, pDataChunks, out completionExpected);
+                    hr = WriteSequence(
+                        _requestHandler,
+                        chunkCount,
+                        _buffer,
+                        pDataChunks,
+                        out completionExpected
+                    );
                 }
             }
 
@@ -95,8 +109,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
             return count;
         }
 
-        private unsafe int WriteSequence(NativeSafeHandle requestHandler, int nChunks, ReadOnlySequence<byte> buffer, HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks, out bool fCompletionExpected)
-        {
+        private unsafe int WriteSequence(
+            NativeSafeHandle requestHandler,
+            int nChunks,
+            ReadOnlySequence<byte> buffer,
+            HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
+            out bool fCompletionExpected
+        ) {
             var currentChunk = 0;
 
             if (_handles == null || _handles.Length < nChunks)
@@ -120,6 +139,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
             return WriteChunks(requestHandler, nChunks, pDataChunks, out fCompletionExpected);
         }
 
-        protected abstract unsafe int WriteChunks(NativeSafeHandle requestHandler, int chunkCount, HttpApiTypes.HTTP_DATA_CHUNK* dataChunks, out bool completionExpected);
+        protected abstract unsafe int WriteChunks(
+            NativeSafeHandle requestHandler,
+            int chunkCount,
+            HttpApiTypes.HTTP_DATA_CHUNK* dataChunks,
+            out bool completionExpected
+        );
     }
 }

@@ -21,8 +21,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             return new DefaultContext(new List<TagHelperDescriptor>());
         }
 
-        public static TagHelperDescriptorProviderContext Create(ICollection<TagHelperDescriptor> results)
-        {
+        public static TagHelperDescriptorProviderContext Create(
+            ICollection<TagHelperDescriptor> results
+        ) {
             if (results == null)
             {
                 throw new ArgumentNullException(nameof(results));

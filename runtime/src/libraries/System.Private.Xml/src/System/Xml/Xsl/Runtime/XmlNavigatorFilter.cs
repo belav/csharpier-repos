@@ -54,7 +54,6 @@ namespace System.Xml.Xsl.Runtime
         public abstract bool IsFiltered(XPathNavigator navigator);
     }
 
-
     /// <summary>
     /// Filters any non-element and any element with a non-matching local name or namespace uri.
     /// </summary>
@@ -129,7 +128,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Filters any node not of the specified type (type may not be attribute or namespace).
     /// </summary>
@@ -147,7 +145,9 @@ namespace System.Xml.Xsl.Runtime
             var filters = new XmlNavigatorFilter[(int)XPathNodeType.Comment + 1];
             filters[(int)XPathNodeType.Element] = new XmlNavTypeFilter(XPathNodeType.Element);
             filters[(int)XPathNodeType.Text] = new XmlNavTypeFilter(XPathNodeType.Text);
-            filters[(int)XPathNodeType.ProcessingInstruction] = new XmlNavTypeFilter(XPathNodeType.ProcessingInstruction);
+            filters[(int)XPathNodeType.ProcessingInstruction] = new XmlNavTypeFilter(
+                XPathNodeType.ProcessingInstruction
+            );
             filters[(int)XPathNodeType.Comment] = new XmlNavTypeFilter(XPathNodeType.Comment);
             return filters;
         }
@@ -166,7 +166,9 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         private XmlNavTypeFilter(XPathNodeType nodeType)
         {
-            Debug.Assert(nodeType != XPathNodeType.Attribute && nodeType != XPathNodeType.Namespace);
+            Debug.Assert(
+                nodeType != XPathNodeType.Attribute && nodeType != XPathNodeType.Namespace
+            );
             _nodeType = nodeType;
             _mask = XPathNavigator.GetContentKindMask(nodeType);
         }
@@ -220,7 +222,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Filters all attribute nodes.
     /// </summary>
@@ -239,9 +240,7 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        private XmlNavAttrFilter()
-        {
-        }
+        private XmlNavAttrFilter() { }
 
         /// <summary>
         /// Reposition the navigator on the first non-attribute child.
@@ -292,7 +291,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Never filter nodes.
     /// </summary>
@@ -311,9 +309,7 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        private XmlNavNeverFilter()
-        {
-        }
+        private XmlNavNeverFilter() { }
 
         /// <summary>
         /// Reposition the navigator on the first child (attribute or non-attribute).

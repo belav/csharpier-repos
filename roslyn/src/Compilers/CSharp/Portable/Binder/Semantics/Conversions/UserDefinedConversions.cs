@@ -15,13 +15,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class ConversionsBase
     {
-        private static TypeSymbol GetUnderlyingEffectiveType(TypeSymbol type, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
-        {
-            // Spec 6.4.4: User-defined implicit conversions 
-            // Spec 6.4.5: User-defined explicit conversions 
-            // 
-            // Determine the types S0 and T0. 
-            //   * If S or T are nullable types, let Su and Tu be their underlying types, otherwise let Su and Tu be S and T, respectively. 
+        private static TypeSymbol GetUnderlyingEffectiveType(
+            TypeSymbol type,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) {
+            // Spec 6.4.4: User-defined implicit conversions
+            // Spec 6.4.5: User-defined explicit conversions
+            //
+            // Determine the types S0 and T0.
+            //   * If S or T are nullable types, let Su and Tu be their underlying types, otherwise let Su and Tu be S and T, respectively.
             //   * If Su or Tu are type parameters, S0 and T0 are their effective base types, otherwise S0 and T0 are equal to Su and Tu, respectively.
 
             if ((object)type != null)
@@ -37,8 +39,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return type;
         }
 
-        public static void AddTypesParticipatingInUserDefinedConversion(ArrayBuilder<NamedTypeSymbol> result, TypeSymbol type, bool includeBaseTypes, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
-        {
+        public static void AddTypesParticipatingInUserDefinedConversion(
+            ArrayBuilder<NamedTypeSymbol> result,
+            TypeSymbol type,
+            bool includeBaseTypes,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) {
             if ((object)type == null)
             {
                 return;

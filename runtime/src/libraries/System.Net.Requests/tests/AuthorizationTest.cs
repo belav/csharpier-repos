@@ -35,15 +35,16 @@ namespace System.Net.Tests
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void Ctor_ConnectionGroupIdNullOrEmpty_ExpectConnectionGroupIdNull(string connectionGroupId)
-        {
+        public void Ctor_ConnectionGroupIdNullOrEmpty_ExpectConnectionGroupIdNull(
+            string connectionGroupId
+        ) {
             Authorization authorization = new Authorization(null, true, connectionGroupId);
             Assert.Null(authorization.ConnectionGroupId);
         }
 
         [Theory]
         [InlineData(null)]
-        [InlineData(new object[] { new string[0] { } })]
+        [InlineData(new object[] { new string[0] {  } })]
         public void ProtectionRealm_SetNullOrEmptyGet_ExpectNullValue(string[] protectionRealm)
         {
             Authorization authorization = new Authorization(null);
@@ -69,8 +70,11 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(GetMutuallyAuthenticatedValues))]
-        public void MutuallyAuthenticated_Values_ExpectEqualValues(Authorization authorization, bool setValue, bool expectedValue)
-        {
+        public void MutuallyAuthenticated_Values_ExpectEqualValues(
+            Authorization authorization,
+            bool setValue,
+            bool expectedValue
+        ) {
             authorization.MutuallyAuthenticated = setValue;
             Assert.Equal(expectedValue, authorization.MutuallyAuthenticated);
         }

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             foreach (var member in type.GetMembers())
             {
                 // Skip accessors since those are covered by associated symbol.
-                if (member.IsAccessor()) continue;
+                if (member.IsAccessor())
+                    continue;
                 Visit(member);
             }
         }
@@ -128,13 +129,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             return new string(' ', level * 4);
         }
 
-        private static readonly SymbolDisplayFormat _displayFormat = SymbolDisplayFormat.TestFormatWithConstraints.
-            WithMemberOptions(
-                SymbolDisplayMemberOptions.IncludeParameters |
-                SymbolDisplayMemberOptions.IncludeType |
-                SymbolDisplayMemberOptions.IncludeRef |
-                SymbolDisplayMemberOptions.IncludeExplicitInterface).
-            WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType);
+        private static readonly SymbolDisplayFormat _displayFormat =
+            SymbolDisplayFormat.TestFormatWithConstraints.WithMemberOptions(
+                    SymbolDisplayMemberOptions.IncludeParameters
+                        | SymbolDisplayMemberOptions.IncludeType
+                        | SymbolDisplayMemberOptions.IncludeRef
+                        | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                )
+                .WithCompilerInternalOptions(
+                    SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
+                );
 
         private void ReportContainingSymbols(Symbol symbol)
         {
@@ -156,7 +160,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         private void ReportSymbol(Symbol symbol)
         {
             var type = (symbol as TypeSymbol) ?? symbol.GetTypeOrReturnType().Type;
-            var attribute = GetNativeIntegerAttribute((symbol is MethodSymbol method) ? method.GetReturnTypeAttributes() : symbol.GetAttributes());
+            var attribute = GetNativeIntegerAttribute(
+                (symbol is MethodSymbol method)
+                    ? method.GetReturnTypeAttributes()
+                    : symbol.GetAttributes()
+            );
             Debug.Assert((type?.ContainsNativeInteger() != true) || (attribute != null));
             if (attribute == null)
             {
@@ -191,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             builder.Append("[");
 
             var name = attribute.AttributeClass.Name;
-            if (name.EndsWith("Attribute")) name = name.Substring(0, name.Length - 9);
+            if (name.EndsWith("Attribute"))
+                name = name.Substring(0, name.Length - 9);
             builder.Append(name);
 
             var arguments = attribute.ConstructorArguments.ToImmutableArray();
@@ -232,16 +241,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             }
         }
 
-        private static CSharpAttributeData GetNativeIntegerAttribute(ImmutableArray<CSharpAttributeData> attributes) =>
-            GetAttribute(attributes, "System.Runtime.CompilerServices", "NativeIntegerAttribute");
+        private static CSharpAttributeData GetNativeIntegerAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        ) => GetAttribute(attributes, "System.Runtime.CompilerServices", "NativeIntegerAttribute");
 
-        private static CSharpAttributeData GetAttribute(ImmutableArray<CSharpAttributeData> attributes, string namespaceName, string name)
-        {
+        private static CSharpAttributeData GetAttribute(
+            ImmutableArray<CSharpAttributeData> attributes,
+            string namespaceName,
+            string name
+        ) {
             foreach (var attribute in attributes)
             {
                 var containingType = attribute.AttributeConstructor.ContainingType;
-                if (containingType.Name == name && containingType.ContainingNamespace.QualifiedName == namespaceName)
-                {
+                if (
+                    containingType.Name == name
+                    && containingType.ContainingNamespace.QualifiedName == namespaceName
+                ) {
                     return attribute;
                 }
             }

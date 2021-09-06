@@ -21,14 +21,20 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4]))
-                {
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4]
+                    )
+                ) {
                     var vf = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     Sse.StoreLow((float*)(floatTable.outArrayPtr), vf);
 
-                    if (!floatTable.CheckResult((x, y) => y[0] == x[0] && y[1] == x[1] &&
-                                                          y[2] == 0    && y[3] == 0))
-                    {
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) => y[0] == x[0] && y[1] == x[1] && y[2] == 0 && y[3] == 0
+                        )
+                    ) {
                         Console.WriteLine("SSE StoreLow failed on float:");
                         foreach (var item in floatTable.outArray)
                         {
@@ -72,6 +78,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

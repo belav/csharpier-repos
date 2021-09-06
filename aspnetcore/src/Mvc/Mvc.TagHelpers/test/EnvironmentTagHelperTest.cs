@@ -33,8 +33,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         [InlineData("Staging,Production,Development", "Development")]
         [InlineData("Test", "Test")]
         [InlineData("Test,Staging", "Test")]
-        public void ShowsContentWhenCurrentEnvironmentIsSpecified(string namesAttribute, string environmentName)
-        {
+        public void ShowsContentWhenCurrentEnvironmentIsSpecified(
+            string namesAttribute,
+            string environmentName
+        ) {
             ShouldShowContent(namesAttribute, environmentName);
         }
 
@@ -49,8 +51,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         [InlineData(",,", "Development")]
         [InlineData(",,,", "Development")]
         [InlineData(",,, ", "Development")]
-        public void ShowsContentWhenNoEnvironmentIsSpecified(string namesAttribute, string environmentName)
-        {
+        public void ShowsContentWhenNoEnvironmentIsSpecified(
+            string namesAttribute,
+            string environmentName
+        ) {
             ShouldShowContent(namesAttribute, environmentName);
         }
 
@@ -61,8 +65,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         [InlineData("Development", "  ")]
         [InlineData("Development", "\t")]
         [InlineData("Test", null)]
-        public void ShowsContentWhenCurrentEnvironmentIsNotSet(string namesAttribute, string environmentName)
-        {
+        public void ShowsContentWhenCurrentEnvironmentIsNotSet(
+            string namesAttribute,
+            string environmentName
+        ) {
             ShouldShowContent(namesAttribute, environmentName);
         }
 
@@ -79,16 +85,21 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         [InlineData("Development", null, "Test")]
         [InlineData("Development", "Test", "Test")]
         [InlineData("Test", "Development", "Test")]
-        public void ShouldShowContent_IncludeExcludeSpecified(string namesAttribute, string includeAttribute, string excludeAttribute)
-        {
+        public void ShouldShowContent_IncludeExcludeSpecified(
+            string namesAttribute,
+            string includeAttribute,
+            string excludeAttribute
+        ) {
             // Arrange
             var content = "content";
             var context = MakeTagHelperContext(
-                attributes: new TagHelperAttributeList {
+                attributes: new TagHelperAttributeList
+                {
                     { "names", namesAttribute },
                     { "include", includeAttribute },
                     { "exclude", excludeAttribute },
-                });
+                }
+            );
             var output = MakeTagHelperOutput("environment", childContent: content);
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
             hostingEnvironment.SetupProperty(h => h.EnvironmentName, "Development");
@@ -123,16 +134,21 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         [InlineData("", "Test", null)]
         [InlineData("Test", "", "")]
         [InlineData("Test", "Test", null)]
-        public void DoesNotShowContent_IncludeExcludeSpecified(string namesAttribute, string includeAttribute, string excludeAttribute)
-        {
+        public void DoesNotShowContent_IncludeExcludeSpecified(
+            string namesAttribute,
+            string includeAttribute,
+            string excludeAttribute
+        ) {
             // Arrange
             var content = "content";
             var context = MakeTagHelperContext(
-                attributes: new TagHelperAttributeList {
+                attributes: new TagHelperAttributeList
+                {
                     { "names", namesAttribute },
                     { "include", includeAttribute },
                     { "exclude", excludeAttribute },
-                });
+                }
+            );
             var output = MakeTagHelperOutput("environment", childContent: content);
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
             hostingEnvironment.SetupProperty(h => h.EnvironmentName, "Development");
@@ -163,11 +179,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
         [InlineData("Development and a space,SomethingElse", "Development")]
         public void DoesNotShowContentWhenCurrentEnvironmentIsNotSpecified(
             string namesAttribute,
-            string environmentName)
-        {
+            string environmentName
+        ) {
             // Arrange
             var content = "content";
-            var context = MakeTagHelperContext(attributes: new TagHelperAttributeList { { "names", namesAttribute } });
+            var context = MakeTagHelperContext(
+                attributes: new TagHelperAttributeList { { "names", namesAttribute } }
+            );
             var output = MakeTagHelperOutput("environment", childContent: content);
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
             hostingEnvironment.SetupProperty(h => h.EnvironmentName, environmentName);
@@ -192,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
             // Arrange
             var content = "content";
             var context = MakeTagHelperContext(
-                attributes: new TagHelperAttributeList { { "names", namesAttribute } });
+                attributes: new TagHelperAttributeList { { "names", namesAttribute } }
+            );
             var output = MakeTagHelperOutput("environment", childContent: content);
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
             hostingEnvironment.SetupProperty(h => h.EnvironmentName, environmentName);
@@ -217,14 +236,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
                 tagName: "env",
                 allAttributes: attributes,
                 items: new Dictionary<object, object>(),
-                uniqueId: Guid.NewGuid().ToString("N"));
+                uniqueId: Guid.NewGuid().ToString("N")
+            );
         }
 
         private TagHelperOutput MakeTagHelperOutput(
             string tagName,
             TagHelperAttributeList attributes = null,
-            string childContent = null)
-        {
+            string childContent = null
+        ) {
             attributes = attributes ?? new TagHelperAttributeList();
 
             return new TagHelperOutput(
@@ -235,7 +255,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent(childContent);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
         }
     }
 }

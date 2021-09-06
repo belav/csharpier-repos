@@ -18,7 +18,10 @@ class Test
 
     public static int Main()
     {
-        S sM, sM2, sM3, sM4;
+        S sM,
+            sM2,
+            sM3,
+            sM4;
 
         sM.str = "test";
         sM2.str = "test2";

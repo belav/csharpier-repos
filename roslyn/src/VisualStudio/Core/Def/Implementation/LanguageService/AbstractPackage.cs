@@ -12,8 +12,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
     internal abstract class AbstractPackage : AsyncPackage
     {
-        protected async Task LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(CancellationToken cancellationToken)
-        {
+        protected async Task LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(
+            CancellationToken cancellationToken
+        ) {
             // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build or in other scenarios.
             // Trying to await them will throw.
             if (!KnownUIContexts.SolutionExistsAndFullyLoadedContext.IsZombie)

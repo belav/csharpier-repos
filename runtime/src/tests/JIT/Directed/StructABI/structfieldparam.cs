@@ -11,7 +11,6 @@ using System;
 using System.Runtime.CompilerServices;
 namespace structfieldparam
 {
-
     struct Inner1
     {
         public long l1;
@@ -117,7 +116,9 @@ namespace structfieldparam
             long indirect = test1(o1.inner);
             if (direct != indirect)
             {
-                Console.WriteLine("t1.sum() returns " + direct + ", but test(o1.inner) returns " + indirect);
+                Console.WriteLine(
+                    "t1.sum() returns " + direct + ", but test(o1.inner) returns " + indirect
+                );
                 result = -1;
             }
 
@@ -130,7 +131,9 @@ namespace structfieldparam
             indirect = test2(o2.inner);
             if (direct != indirect)
             {
-                Console.WriteLine("t2.sum() returns " + direct + ", but test(o2.inner) returns " + indirect);
+                Console.WriteLine(
+                    "t2.sum() returns " + direct + ", but test(o2.inner) returns " + indirect
+                );
                 result = -1;
             }
 

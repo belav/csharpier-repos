@@ -66,10 +66,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(268435466, false)]
         [InlineData(268435467, true)]
         [InlineData(268435468, false)]
-        public void ChunkedPrefixReturnsSegmentThatDoesNotNeedToMove(int dataCount, bool expectSlice)
-        {
+        public void ChunkedPrefixReturnsSegmentThatDoesNotNeedToMove(
+            int dataCount,
+            bool expectSlice
+        ) {
             // Will call GetMemory on at least 5 bytes from the Http1OutputProducer
-            var prefixLength = ChunkWriter.GetPrefixBytesForChunk(dataCount, out var actualSliceOneByte);
+            var prefixLength = ChunkWriter.GetPrefixBytesForChunk(
+                dataCount,
+                out var actualSliceOneByte
+            );
             if (actualSliceOneByte)
             {
                 dataCount--;
@@ -77,7 +82,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var fakeMemory = new Memory<byte>(new byte[16]);
 
-            var actualLength = ChunkWriter.BeginChunkBytes(dataCount - prefixLength - 2, fakeMemory.Span);
+            var actualLength = ChunkWriter.BeginChunkBytes(
+                dataCount - prefixLength - 2,
+                fakeMemory.Span
+            );
 
             Assert.Equal(prefixLength, actualLength);
             Assert.Equal(expectSlice, actualSliceOneByte);

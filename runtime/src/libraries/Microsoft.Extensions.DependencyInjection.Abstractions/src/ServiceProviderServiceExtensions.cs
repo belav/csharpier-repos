@@ -100,8 +100,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the services from.</param>
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
         /// <returns>An enumeration of services of type <paramref name="serviceType"/>.</returns>
-        public static IEnumerable<object?> GetServices(this IServiceProvider provider, Type serviceType)
-        {
+        public static IEnumerable<object?> GetServices(
+            this IServiceProvider provider,
+            Type serviceType
+        ) {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));

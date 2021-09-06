@@ -15,46 +15,90 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal abstract partial class AbstractSyntaxClassificationService : ISyntaxClassificationService
+    internal abstract partial class AbstractSyntaxClassificationService
+        : ISyntaxClassificationService
     {
-        protected AbstractSyntaxClassificationService()
-        {
-        }
+        protected AbstractSyntaxClassificationService() { }
 
-        public abstract void AddLexicalClassifications(SourceText text, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken);
-        public abstract void AddSyntacticClassifications(SyntaxTree syntaxTree, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken);
+        public abstract void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
+        public abstract void AddSyntacticClassifications(
+            SyntaxTree syntaxTree,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         public abstract ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers();
-        public abstract ClassifiedSpan FixClassification(SourceText text, ClassifiedSpan classifiedSpan);
+        public abstract ClassifiedSpan FixClassification(
+            SourceText text,
+            ClassifiedSpan classifiedSpan
+        );
 
         public async Task AddSemanticClassificationsAsync(
-            Document document, TextSpan textSpan,
+            Document document,
+            TextSpan textSpan,
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
-            ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
-        {
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) {
             try
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                AddSemanticClassifications(semanticModel, textSpan, document.Project.Solution.Workspace, getNodeClassifiers, getTokenClassifiers, result, cancellationToken);
+                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                AddSemanticClassifications(
+                    semanticModel,
+                    textSpan,
+                    document.Project.Solution.Workspace,
+                    getNodeClassifiers,
+                    getTokenClassifiers,
+                    result,
+                    cancellationToken
+                );
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
         public void AddSemanticClassifications(
-            SemanticModel semanticModel, TextSpan textSpan, Workspace workspace,
+            SemanticModel semanticModel,
+            TextSpan textSpan,
+            Workspace workspace,
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
-        {
-            Worker.Classify(workspace, semanticModel, textSpan, result, getNodeClassifiers, getTokenClassifiers, cancellationToken);
+            CancellationToken cancellationToken
+        ) {
+            Worker.Classify(
+                workspace,
+                semanticModel,
+                textSpan,
+                result,
+                getNodeClassifiers,
+                getTokenClassifiers,
+                cancellationToken
+            );
         }
 
-        public ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(Document oldDocument, Document newDocument, TimeSpan timeout, CancellationToken cancellationToken)
-            => SyntacticChangeRangeComputer.ComputeSyntacticChangeRangeAsync(oldDocument, newDocument, timeout, cancellationToken);
+        public ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        ) =>
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRangeAsync(
+                oldDocument,
+                newDocument,
+                timeout,
+                cancellationToken
+            );
     }
 }

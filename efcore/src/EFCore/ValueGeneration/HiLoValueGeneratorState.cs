@@ -30,7 +30,10 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         {
             if (blockSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(blockSize), CoreStrings.HiLoBadBlockSize);
+                throw new ArgumentOutOfRangeException(
+                    nameof(blockSize),
+                    CoreStrings.HiLoBadBlockSize
+                );
             }
 
             _blockSize = blockSize;
@@ -72,6 +75,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                         newValue = GetNextValue();
                     }
                 }
+
                 finally
                 {
                     _semaphoreSlim.Release();
@@ -93,8 +97,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async ValueTask<TValue> NextAsync<TValue>(
             Func<CancellationToken, Task<long>> getNewLowValue,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             Check.NotNull(getNewLowValue, nameof(getNewLowValue));
 
             var newValue = GetNextValue();
@@ -111,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                     // case just get a value out of the new block instead of requesting one.
                     if (newValue.High == _currentValue.High)
                     {
-                        var newCurrent = await getNewLowValue(cancellationToken).ConfigureAwait(false);
+                        var newCurrent = await getNewLowValue(cancellationToken)
+                            .ConfigureAwait(false);
                         newValue = new HiLoValue(newCurrent, newCurrent + _blockSize);
                         _currentValue = newValue;
                     }
@@ -120,6 +125,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                         newValue = GetNextValue();
                     }
                 }
+
                 finally
                 {
                     _semaphoreSlim.Release();
@@ -129,8 +135,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             return ConvertResult<TValue>(newValue);
         }
 
-        private static TValue ConvertResult<TValue>(HiLoValue newValue)
-            => (TValue)Convert.ChangeType(newValue.Low, typeof(TValue), CultureInfo.InvariantCulture);
+        private static TValue ConvertResult<TValue>(HiLoValue newValue) =>
+            (TValue)Convert.ChangeType(newValue.Low, typeof(TValue), CultureInfo.InvariantCulture);
 
         private HiLoValue GetNextValue()
         {
@@ -140,8 +146,10 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             {
                 originalValue = _currentValue;
                 newValue = originalValue.NextValue();
-            }
-            while (Interlocked.CompareExchange(ref _currentValue, newValue, originalValue) != originalValue);
+            } while (
+                Interlocked.CompareExchange(ref _currentValue, newValue, originalValue)
+                != originalValue
+            );
 
             return newValue;
         }
@@ -158,8 +166,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
 
             public long High { get; }
 
-            public HiLoValue NextValue()
-                => new(Low + 1, High);
+            public HiLoValue NextValue() => new(Low + 1, High);
         }
 
         /// <summary>

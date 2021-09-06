@@ -21,8 +21,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly string? _display;
         private readonly string _id;
 
-        public AnalyzerImageReference(ImmutableArray<DiagnosticAnalyzer> analyzers, string? fullPath = null, string? display = null)
-        {
+        public AnalyzerImageReference(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            string? fullPath = null,
+            string? display = null
+        ) {
             if (analyzers.Any(a => a == null))
             {
                 throw new ArgumentException("Cannot have null-valued analyzer", nameof(analyzers));
@@ -46,26 +49,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public override string? FullPath
         {
-            get
-            {
-                return _fullPath;
-            }
+            get { return _fullPath; }
         }
 
         public override string Display
         {
-            get
-            {
-                return _display ?? _fullPath ?? CodeAnalysisResources.InMemoryAssembly;
-            }
+            get { return _display ?? _fullPath ?? CodeAnalysisResources.InMemoryAssembly; }
         }
 
         public override object Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
 
         private string GetDebuggerDisplay()

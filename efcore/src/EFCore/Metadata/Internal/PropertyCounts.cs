@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             int originalValueCount,
             int shadowCount,
             int relationshipCount,
-            int storeGeneratedCount)
-        {
+            int storeGeneratedCount
+        ) {
             PropertyCount = propertyCount;
             NavigationCount = navigationCount;
             OriginalValueCount = originalValueCount;

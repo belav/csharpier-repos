@@ -31,33 +31,63 @@ namespace System.Speech.Internal.SapiInterop
 
         internal void SetGrammarState(SPGRAMMARSTATE state)
         {
-            _sapiProxy.Invoke2(delegate { _sapiGrammar.SetGrammarState(state); });
+            _sapiProxy.Invoke2(
+                delegate
+                {
+                    _sapiGrammar.SetGrammarState(state);
+                }
+            );
         }
 
         internal void SetWordSequenceData(string text, SPTEXTSELECTIONINFO info)
         {
             SPTEXTSELECTIONINFO selectionInfo = info;
-            _sapiProxy.Invoke2(delegate { _sapiGrammar.SetWordSequenceData(text, (uint)text.Length, ref selectionInfo); });
+            _sapiProxy.Invoke2(
+                delegate
+                {
+                    _sapiGrammar.SetWordSequenceData(text, (uint)text.Length, ref selectionInfo);
+                }
+            );
         }
 
         internal void LoadCmdFromMemory(IntPtr grammar, SPLOADOPTIONS options)
         {
-            _sapiProxy.Invoke2(delegate { _sapiGrammar.LoadCmdFromMemory(grammar, options); });
+            _sapiProxy.Invoke2(
+                delegate
+                {
+                    _sapiGrammar.LoadCmdFromMemory(grammar, options);
+                }
+            );
         }
 
         internal void LoadDictation(string pszTopicName, SPLOADOPTIONS options)
         {
-            _sapiProxy.Invoke2(delegate { _sapiGrammar.LoadDictation(pszTopicName, options); });
+            _sapiProxy.Invoke2(
+                delegate
+                {
+                    _sapiGrammar.LoadDictation(pszTopicName, options);
+                }
+            );
         }
 
         internal SAPIErrorCodes SetDictationState(SPRULESTATE state)
         {
-            return (SAPIErrorCodes)_sapiProxy.Invoke(delegate { return _sapiGrammar.SetDictationState(state); });
+            return (SAPIErrorCodes)_sapiProxy.Invoke(
+                delegate
+                {
+                    return _sapiGrammar.SetDictationState(state);
+                }
+            );
         }
 
         internal SAPIErrorCodes SetRuleState(string name, SPRULESTATE state)
         {
-            return (SAPIErrorCodes)_sapiProxy.Invoke(delegate { return _sapiGrammar.SetRuleState(name, IntPtr.Zero, state); });
+            return (SAPIErrorCodes)_sapiProxy.Invoke(
+                delegate
+                {
+                    return _sapiGrammar.SetRuleState(name, IntPtr.Zero, state);
+                }
+            );
         }
 
         /*
@@ -70,8 +100,12 @@ namespace System.Speech.Internal.SapiInterop
             SpRecoGrammar2.SetGrammarLoader(resourceLoader);
         }
 
-        internal void LoadCmdFromMemory2(IntPtr grammar, SPLOADOPTIONS options, string sharingUri, string baseUri)
-        {
+        internal void LoadCmdFromMemory2(
+            IntPtr grammar,
+            SPLOADOPTIONS options,
+            string sharingUri,
+            string baseUri
+        ) {
             SpRecoGrammar2.LoadCmdFromMemory2(grammar, options, sharingUri, baseUri);
         }
 
@@ -112,7 +146,6 @@ namespace System.Speech.Internal.SapiInterop
         private ISpRecoGrammar _sapiGrammar;
         private SapiProxy _sapiProxy;
         private bool _disposed;
-
         #endregion
     }
 }

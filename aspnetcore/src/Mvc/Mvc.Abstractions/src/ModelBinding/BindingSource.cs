@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Body",
             Resources.BindingSource_Body,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for a custom model binder (unknown data source).
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Custom",
             Resources.BindingSource_Custom,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for the request form-data.
@@ -39,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Form",
             Resources.BindingSource_Form,
             isGreedy: false,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for the request headers.
@@ -48,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Header",
             Resources.BindingSource_Header,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for model binding. Includes form-data, query-string
@@ -58,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "ModelBinding",
             Resources.BindingSource_ModelBinding,
             isGreedy: false,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for the request url path.
@@ -67,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Path",
             Resources.BindingSource_Path,
             isGreedy: false,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for the request query-string.
@@ -76,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Query",
             Resources.BindingSource_Query,
             isGreedy: false,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for request services.
@@ -85,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Services",
             Resources.BindingSource_Services,
             isGreedy: true,
-            isFromRequest: false);
+            isFromRequest: false
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for special parameter types that are not user input.
@@ -94,7 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "Special",
             Resources.BindingSource_Special,
             isGreedy: true,
-            isFromRequest: false);
+            isFromRequest: false
+        );
 
         /// <summary>
         /// A <see cref="BindingSource"/> for <see cref="IFormFile"/>, <see cref="IFormCollection"/>, and <see cref="IFormFileCollection"/>.
@@ -103,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             "FormFile",
             Resources.BindingSource_FormFile,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         /// <summary>
         /// Creates a new <see cref="BindingSource"/>.
@@ -192,7 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 var message = Resources.FormatBindingSource_CannotBeComposite(
                     bindingSource.DisplayName,
-                    nameof(CanAcceptDataFrom));
+                    nameof(CanAcceptDataFrom)
+                );
                 throw new ArgumentException(message, nameof(bindingSource));
             }
 

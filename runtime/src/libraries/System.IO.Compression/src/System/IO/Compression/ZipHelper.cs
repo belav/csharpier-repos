@@ -15,7 +15,14 @@ namespace System.IO.Compression
         internal const int ValidZipDate_YearMin = 1980;
         internal const int ValidZipDate_YearMax = 2107;
 
-        private static readonly DateTime s_invalidDateIndicator = new DateTime(ValidZipDate_YearMin, 1, 1, 0, 0, 0);
+        private static readonly DateTime s_invalidDateIndicator = new DateTime(
+            ValidZipDate_YearMin,
+            1,
+            1,
+            0,
+            0,
+            0
+        );
 
         internal static bool RequiresUnicode(string test)
         {
@@ -45,7 +52,8 @@ namespace System.IO.Compression
             while (bytesLeftToRead > 0)
             {
                 int bytesRead = stream.Read(buffer, totalBytesRead, bytesLeftToRead);
-                if (bytesRead == 0) throw new IOException(SR.UnexpectedEndOfStream);
+                if (bytesRead == 0)
+                    throw new IOException(SR.UnexpectedEndOfStream);
 
                 totalBytesRead += bytesRead;
                 bytesLeftToRead -= bytesRead;
@@ -95,7 +103,9 @@ namespace System.IO.Compression
         internal static uint DateTimeToDosTime(DateTime dateTime)
         {
             // DateTime must be Convertible to DosTime:
-            Debug.Assert(ValidZipDate_YearMin <= dateTime.Year && dateTime.Year <= ValidZipDate_YearMax);
+            Debug.Assert(
+                ValidZipDate_YearMin <= dateTime.Year && dateTime.Year <= ValidZipDate_YearMax
+            );
 
             int ret = ((dateTime.Year - ValidZipDate_YearMin) & 0x7F);
             ret = (ret << 4) + dateTime.Month;
@@ -110,8 +120,11 @@ namespace System.IO.Compression
         // assumes maxBytesToRead is positive, ensures to not read beyond the provided max number of bytes,
         // if the signature is found then returns true and positions stream at first byte of signature
         // if the signature is not found, returns false
-        internal static bool SeekBackwardsToSignature(Stream stream, uint signatureToFind, int maxBytesToRead)
-        {
+        internal static bool SeekBackwardsToSignature(
+            Stream stream,
+            uint signatureToFind,
+            int maxBytesToRead
+        ) {
             Debug.Assert(signatureToFind != 0);
             Debug.Assert(maxBytesToRead > 0);
 
@@ -164,8 +177,13 @@ namespace System.IO.Compression
             while (numBytesLeft != 0)
             {
                 const int throwAwayBufferSize = 64;
-                int numBytesToSkip = (numBytesLeft > throwAwayBufferSize) ? throwAwayBufferSize : (int)numBytesLeft;
-                int numBytesActuallySkipped = stream.Read(new byte[throwAwayBufferSize], 0, numBytesToSkip);
+                int numBytesToSkip =
+                    (numBytesLeft > throwAwayBufferSize) ? throwAwayBufferSize : (int)numBytesLeft;
+                int numBytesActuallySkipped = stream.Read(
+                    new byte[throwAwayBufferSize],
+                    0,
+                    numBytesToSkip
+                );
                 if (numBytesActuallySkipped == 0)
                     throw new IOException(SR.UnexpectedEndOfStream);
                 numBytesLeft -= numBytesActuallySkipped;
@@ -173,8 +191,11 @@ namespace System.IO.Compression
         }
 
         // Returns true if we are out of bytes
-        private static bool SeekBackwardsAndRead(Stream stream, byte[] buffer, out int bufferPointer)
-        {
+        private static bool SeekBackwardsAndRead(
+            Stream stream,
+            byte[] buffer,
+            out int bufferPointer
+        ) {
             if (stream.Position >= buffer.Length)
             {
                 stream.Seek(-buffer.Length, SeekOrigin.Current);

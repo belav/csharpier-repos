@@ -10,7 +10,11 @@ using System.Threading;
 
 namespace System.Data.Common
 {
-    public abstract class DbDataReader : MarshalByRefObject, IDataReader, IEnumerable, IAsyncDisposable
+    public abstract class DbDataReader
+        : MarshalByRefObject,
+          IDataReader,
+          IEnumerable,
+          IAsyncDisposable
     {
         protected DbDataReader() : base() { }
 
@@ -98,8 +102,9 @@ namespace System.Data.Common
         /// </summary>
         /// <param name="cancellationToken">The cancellation instruction.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public virtual Task<DataTable?> GetSchemaTableAsync(CancellationToken cancellationToken = default)
-        {
+        public virtual Task<DataTable?> GetSchemaTableAsync(
+            CancellationToken cancellationToken = default
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<DataTable?>(cancellationToken);
@@ -128,8 +133,8 @@ namespace System.Data.Common
         /// <param name="cancellationToken">The cancellation instruction.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         public virtual Task<ReadOnlyCollection<DbColumn>> GetColumnSchemaAsync(
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<ReadOnlyCollection<DbColumn>>(cancellationToken);
@@ -149,11 +154,23 @@ namespace System.Data.Common
 
         public abstract byte GetByte(int ordinal);
 
-        public abstract long GetBytes(int ordinal, long dataOffset, byte[]? buffer, int bufferOffset, int length);
+        public abstract long GetBytes(
+            int ordinal,
+            long dataOffset,
+            byte[]? buffer,
+            int bufferOffset,
+            int length
+        );
 
         public abstract char GetChar(int ordinal);
 
-        public abstract long GetChars(int ordinal, long dataOffset, char[]? buffer, int bufferOffset, int length);
+        public abstract long GetChars(
+            int ordinal,
+            long dataOffset,
+            char[]? buffer,
+            int bufferOffset,
+            int length
+        );
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DbDataReader GetData(int ordinal) => GetDbDataReader(ordinal);
@@ -189,9 +206,7 @@ namespace System.Data.Common
             return GetFieldType(ordinal);
         }
 
-        [
-        EditorBrowsable(EditorBrowsableState.Never)
-        ]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual object GetProviderSpecificValue(int ordinal)
         {
             // NOTE: This is virtual because not all providers may choose to support
@@ -199,9 +214,7 @@ namespace System.Data.Common
             return GetValue(ordinal);
         }
 
-        [
-        EditorBrowsable(EditorBrowsableState.Never)
-        ]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual int GetProviderSpecificValues(object[] values) => GetValues(values);
 
         public abstract string GetString(int ordinal);
@@ -218,8 +231,7 @@ namespace System.Data.Common
                     bytesRead = GetBytes(ordinal, bytesReadTotal, buffer, 0, buffer.Length);
                     bufferStream.Write(buffer, 0, (int)bytesRead);
                     bytesReadTotal += bytesRead;
-                }
-                while (bytesRead > 0);
+                } while (bytesRead > 0);
 
                 return new MemoryStream(bufferStream.ToArray(), false);
             }
@@ -244,8 +256,10 @@ namespace System.Data.Common
         public Task<T> GetFieldValueAsync<T>(int ordinal) =>
             GetFieldValueAsync<T>(ordinal, CancellationToken.None);
 
-        public virtual Task<T> GetFieldValueAsync<T>(int ordinal, CancellationToken cancellationToken)
-        {
+        public virtual Task<T> GetFieldValueAsync<T>(
+            int ordinal,
+            CancellationToken cancellationToken
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ADP.CreatedTaskWithCancellation<T>();
@@ -267,7 +281,8 @@ namespace System.Data.Common
 
         public abstract bool IsDBNull(int ordinal);
 
-        public Task<bool> IsDBNullAsync(int ordinal) => IsDBNullAsync(ordinal, CancellationToken.None);
+        public Task<bool> IsDBNullAsync(int ordinal) =>
+            IsDBNullAsync(ordinal, CancellationToken.None);
 
         public virtual Task<bool> IsDBNullAsync(int ordinal, CancellationToken cancellationToken)
         {

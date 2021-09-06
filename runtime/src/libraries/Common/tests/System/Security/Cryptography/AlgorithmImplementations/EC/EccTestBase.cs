@@ -78,8 +78,8 @@ namespace System.Security.Cryptography.Tests
                 var curveDefs =
                     from curveDef in TestCurvesRaw
                     where
-                        curveDef.IsCurveValidOnPlatform == true &&
-                        curveDef.RequiredOnPlatform == false
+                        curveDef.IsCurveValidOnPlatform == true
+                        && curveDef.RequiredOnPlatform == false
                     select curveDef;
 
                 foreach (CurveDef curveDef in curveDefs)
@@ -172,8 +172,11 @@ namespace System.Security.Cryptography.Tests
             CompareCurve(p1.Curve, p2.Curve);
         }
 
-        internal static void ComparePrivateKey(in ECParameters p1, in ECParameters p2, bool isEqual = true)
-        {
+        internal static void ComparePrivateKey(
+            in ECParameters p1,
+            in ECParameters p2,
+            bool isEqual = true
+        ) {
             if (isEqual)
             {
                 Assert.Equal(p1.D, p2.D);
@@ -204,9 +207,10 @@ namespace System.Security.Cryptography.Tests
             {
                 Assert.True(c2.IsNamed);
 
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ||
-                    string.IsNullOrEmpty(c1.Oid.Value))
-                {
+                if (
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    || string.IsNullOrEmpty(c1.Oid.Value)
+                ) {
                     Assert.Equal(c1.Oid.FriendlyName, c2.Oid.FriendlyName);
                 }
                 else

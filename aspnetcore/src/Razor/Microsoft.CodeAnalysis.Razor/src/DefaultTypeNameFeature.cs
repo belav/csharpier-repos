@@ -29,12 +29,14 @@ namespace Microsoft.CodeAnalysis.Razor
                 return parsed.DescendantNodesAndSelf()
                     .OfType<TypeArgumentListSyntax>()
                     .SelectMany(arg => arg.Arguments)
-                    .Select(a => a.ToString()).ToList();        
+                    .Select(a => a.ToString())
+                    .ToList();
             }
         }
 
-        public override TypeNameRewriter CreateGenericTypeRewriter(Dictionary<string, string> bindings)
-        {
+        public override TypeNameRewriter CreateGenericTypeRewriter(
+            Dictionary<string, string> bindings
+        ) {
             if (bindings == null)
             {
                 throw new ArgumentNullException(nameof(bindings));
@@ -43,8 +45,9 @@ namespace Microsoft.CodeAnalysis.Razor
             return new GenericTypeNameRewriter(bindings);
         }
 
-        public override TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(ICollection<string> ignore)
-        {
+        public override TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(
+            ICollection<string> ignore
+        ) {
             if (ignore == null)
             {
                 throw new ArgumentNullException(nameof(ignore));

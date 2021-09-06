@@ -8,19 +8,40 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class FileStream_IsAsync : FileSystemTest
     {
         [Fact]
         public void IsAsyncConstructorArg()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, true))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    true
+                )
+            ) {
                 Assert.True(fs.IsAsync);
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, false))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    false
+                )
+            ) {
                 Assert.False(fs.IsAsync);
             }
         }
@@ -28,13 +49,29 @@ namespace System.IO.Tests
         [Fact]
         public void FileOptionsAsynchronousConstructorArg()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, FileOptions.Asynchronous))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    FileOptions.Asynchronous
+                )
+            ) {
                 Assert.True(fs.IsAsync);
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, FileOptions.None))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    FileOptions.None
+                )
+            ) {
                 Assert.False(fs.IsAsync);
             }
         }
@@ -42,13 +79,31 @@ namespace System.IO.Tests
         [Fact]
         public void AsyncDiscoveredFromHandle()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, true))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    true
+                )
+            )
             using (FileStream fsh = new FileStream(fs.SafeFileHandle, FileAccess.ReadWrite))
             {
                 Assert.True(fsh.IsAsync);
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, false))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    false
+                )
+            )
             using (FileStream fsh = new FileStream(fs.SafeFileHandle, FileAccess.ReadWrite))
             {
                 Assert.False(fsh.IsAsync);

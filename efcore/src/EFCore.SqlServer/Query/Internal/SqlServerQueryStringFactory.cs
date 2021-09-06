@@ -54,27 +54,26 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 var typeName = TypeNameBuilder.CreateTypeName(parameter);
                 var typeMapping = _typeMapper.FindMapping(typeName);
 
-                builder
-                    .Append("DECLARE ")
+                builder.Append("DECLARE ")
                     .Append(parameter.ParameterName)
                     .Append(' ')
                     .Append(typeName)
                     .Append(" = ")
                     .Append(
-                        (parameter.Value == DBNull.Value
-                            || parameter.Value == null)
+                        (parameter.Value == DBNull.Value || parameter.Value == null)
                             ? "NULL"
                             : parameter.Value is SqlBytes sqlBytes
-                                ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(sqlBytes.Value)
+                                ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(
+                                      sqlBytes.Value
+                                  )
                                 : typeMapping != null
                                     ? typeMapping.GenerateSqlLiteral(parameter.Value)
-                                    : parameter.Value.ToString())
+                                    : parameter.Value.ToString()
+                    )
                     .AppendLine(";");
             }
 
-            return builder
-                .AppendLine()
-                .Append(command.CommandText).ToString();
+            return builder.AppendLine().Append(command.CommandText).ToString();
         }
     }
 
@@ -84,8 +83,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         {
             if (parameter.Size > 0)
             {
-                builder
-                    .Append('(')
+                builder.Append('(')
                     .Append(parameter.Size.ToString(CultureInfo.InvariantCulture))
                     .Append(')');
             }
@@ -93,8 +91,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             return builder;
         }
 
-        private static StringBuilder AppendSizeOrMax(this StringBuilder builder, DbParameter parameter)
-        {
+        private static StringBuilder AppendSizeOrMax(
+            this StringBuilder builder,
+            DbParameter parameter
+        ) {
             if (parameter.Size > 0)
             {
                 builder.AppendSize(parameter);
@@ -107,12 +107,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             return builder;
         }
 
-        private static StringBuilder AppendPrecision(this StringBuilder builder, DbParameter parameter)
-        {
+        private static StringBuilder AppendPrecision(
+            this StringBuilder builder,
+            DbParameter parameter
+        ) {
             if (parameter.Precision > 0)
             {
-                builder
-                    .Append('(')
+                builder.Append('(')
                     .Append(parameter.Precision.ToString(CultureInfo.InvariantCulture))
                     .Append(')');
             }
@@ -120,13 +121,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             return builder;
         }
 
-        private static StringBuilder AppendPrecisionAndScale(this StringBuilder builder, DbParameter parameter)
-        {
-            if (parameter.Precision > 0
-                && parameter.Scale > 0)
+        private static StringBuilder AppendPrecisionAndScale(
+            this StringBuilder builder,
+            DbParameter parameter
+        ) {
+            if (parameter.Precision > 0 && parameter.Scale > 0)
             {
-                builder
-                    .Append('(')
+                builder.Append('(')
                     .Append(parameter.Precision.ToString(CultureInfo.InvariantCulture))
                     .Append(',')
                     .Append(parameter.Scale.ToString(CultureInfo.InvariantCulture))
@@ -141,41 +142,47 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             if (parameter is SqlParameter sqlParameter)
             {
                 var builder = new StringBuilder();
-                return (sqlParameter.SqlDbType switch
-                {
-                    SqlDbType.BigInt => builder.Append("bigint"),
-                    SqlDbType.Binary => builder.Append("binary").AppendSize(parameter),
-                    SqlDbType.Bit => builder.Append("bit"),
-                    SqlDbType.Char => builder.Append("char").AppendSize(parameter),
-                    SqlDbType.Date => builder.Append("date"),
-                    SqlDbType.DateTime => builder.Append("datetime"),
-                    SqlDbType.DateTime2 => builder.Append("datetime2").AppendPrecision(parameter),
-                    SqlDbType.DateTimeOffset => builder.Append("datetimeoffset").AppendPrecision(parameter),
-                    SqlDbType.Decimal => builder.Append("decimal").AppendPrecisionAndScale(parameter),
-                    SqlDbType.Float => builder.Append("float").AppendSize(parameter),
-                    SqlDbType.Image => builder.Append("image"),
-                    SqlDbType.Int => builder.Append("int"),
-                    SqlDbType.Money => builder.Append("money"),
-                    SqlDbType.NChar => builder.Append("nchar").AppendSize(parameter),
-                    SqlDbType.NText => builder.Append("ntext"),
-                    SqlDbType.NVarChar => builder.Append("nvarchar").AppendSizeOrMax(parameter),
-                    SqlDbType.Real => builder.Append("real"),
-                    SqlDbType.SmallDateTime => builder.Append("smalldatetime"),
-                    SqlDbType.SmallInt => builder.Append("smallint"),
-                    SqlDbType.SmallMoney => builder.Append("smallmoney"),
-                    SqlDbType.Structured => builder.Append("structured"),
-                    SqlDbType.Text => builder.Append("text"),
-                    SqlDbType.Time => builder.Append("time").AppendPrecision(parameter),
-                    SqlDbType.Timestamp => builder.Append("rowversion"),
-                    SqlDbType.TinyInt => builder.Append("tinyint"),
-                    SqlDbType.Udt => builder.Append(sqlParameter.UdtTypeName),
-                    SqlDbType.UniqueIdentifier => builder.Append("uniqueIdentifier"),
-                    SqlDbType.VarBinary => builder.Append("varbinary").AppendSizeOrMax(parameter),
-                    SqlDbType.VarChar => builder.Append("varchar").AppendSizeOrMax(parameter),
-                    SqlDbType.Variant => builder.Append("sql_variant"),
-                    SqlDbType.Xml => builder.Append("xml"),
-                    _ => builder.Append("sql_variant")
-                }).ToString();
+                return (
+                    sqlParameter.SqlDbType switch
+                    {
+                        SqlDbType.BigInt => builder.Append("bigint"),
+                        SqlDbType.Binary => builder.Append("binary").AppendSize(parameter),
+                        SqlDbType.Bit => builder.Append("bit"),
+                        SqlDbType.Char => builder.Append("char").AppendSize(parameter),
+                        SqlDbType.Date => builder.Append("date"),
+                        SqlDbType.DateTime => builder.Append("datetime"),
+                        SqlDbType.DateTime2
+                          => builder.Append("datetime2").AppendPrecision(parameter),
+                        SqlDbType.DateTimeOffset
+                          => builder.Append("datetimeoffset").AppendPrecision(parameter),
+                        SqlDbType.Decimal
+                          => builder.Append("decimal").AppendPrecisionAndScale(parameter),
+                        SqlDbType.Float => builder.Append("float").AppendSize(parameter),
+                        SqlDbType.Image => builder.Append("image"),
+                        SqlDbType.Int => builder.Append("int"),
+                        SqlDbType.Money => builder.Append("money"),
+                        SqlDbType.NChar => builder.Append("nchar").AppendSize(parameter),
+                        SqlDbType.NText => builder.Append("ntext"),
+                        SqlDbType.NVarChar => builder.Append("nvarchar").AppendSizeOrMax(parameter),
+                        SqlDbType.Real => builder.Append("real"),
+                        SqlDbType.SmallDateTime => builder.Append("smalldatetime"),
+                        SqlDbType.SmallInt => builder.Append("smallint"),
+                        SqlDbType.SmallMoney => builder.Append("smallmoney"),
+                        SqlDbType.Structured => builder.Append("structured"),
+                        SqlDbType.Text => builder.Append("text"),
+                        SqlDbType.Time => builder.Append("time").AppendPrecision(parameter),
+                        SqlDbType.Timestamp => builder.Append("rowversion"),
+                        SqlDbType.TinyInt => builder.Append("tinyint"),
+                        SqlDbType.Udt => builder.Append(sqlParameter.UdtTypeName),
+                        SqlDbType.UniqueIdentifier => builder.Append("uniqueIdentifier"),
+                        SqlDbType.VarBinary
+                          => builder.Append("varbinary").AppendSizeOrMax(parameter),
+                        SqlDbType.VarChar => builder.Append("varchar").AppendSizeOrMax(parameter),
+                        SqlDbType.Variant => builder.Append("sql_variant"),
+                        SqlDbType.Xml => builder.Append("xml"),
+                        _ => builder.Append("sql_variant")
+                    }
+                ).ToString();
             }
 
             return "sql_variant";

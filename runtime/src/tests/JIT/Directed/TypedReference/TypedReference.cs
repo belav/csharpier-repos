@@ -4,7 +4,6 @@
 
 using System;
 
-
 public class BringUpTest
 {
     const int Pass = 100;
@@ -17,12 +16,14 @@ public class BringUpTest
         int i = Fail;
         F(__makeref(i));
 
-        if (i != Pass) return Fail;
+        if (i != Pass)
+            return Fail;
 
         string j = Apple;
         G(__makeref(j));
-        
-        if (j != Orange) return Fail;
+
+        if (j != Orange)
+            return Fail;
 
         return Pass;
     }
@@ -36,5 +37,4 @@ public class BringUpTest
     {
         __refvalue(t, string) = Orange;
     }
-
-}    
+}

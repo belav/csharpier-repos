@@ -18,6 +18,7 @@ namespace Test
                 {
                     GC.Collect();
                 }
+
                 finally
                 {
                     if (m_bFlag)
@@ -26,6 +27,7 @@ namespace Test
                         {
                             throw new Exception();
                         }
+
                         finally
                         {
                             while (m_bFlag) { }

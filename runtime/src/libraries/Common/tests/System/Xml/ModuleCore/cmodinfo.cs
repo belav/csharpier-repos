@@ -19,10 +19,7 @@ namespace OLEDB.Test.ModuleCore
                 }
                 return default(Type2);
             }
-            set
-            {
-                base[key] = value;
-            }
+            set { base[key] = value; }
         }
     }
     ////////////////////////////////////////////////////////////////
@@ -37,9 +34,7 @@ namespace OLEDB.Test.ModuleCore
         private static object _includenotimplemented;
 
         //Constructor
-        public CModInfo()
-        {
-        }
+        public CModInfo() { }
 
         //Helpers
         internal static void Dispose()
@@ -61,10 +56,7 @@ namespace OLEDB.Test.ModuleCore
                     s_strCommandLine = "";
                 return s_strCommandLine;
             }
-            set
-            {
-                s_strCommandLine = value;
-            }
+            set { s_strCommandLine = value; }
         }
         public static MyDict<string, string> Options
         {
@@ -115,9 +107,7 @@ namespace OLEDB.Test.ModuleCore
         {
             bool ret = true;
             string testcasefilter = CModInfo.Options["testcase"];
-            if (testcasefilter != null
-                && testcasefilter != "*"
-                && testcasefilter != testcasename)
+            if (testcasefilter != null && testcasefilter != "*" && testcasefilter != testcasename)
             {
                 ret = false;
             }
@@ -129,10 +119,11 @@ namespace OLEDB.Test.ModuleCore
         {
             bool ret = true;
             string variationfilter = CModInfo.Options["variation"];
-            if (variationfilter != null
+            if (
+                variationfilter != null
                 && variationfilter != "*"
-                && variationfilter != variationname)
-            {
+                && variationfilter != variationname
+            ) {
                 ret = false;
             }
 

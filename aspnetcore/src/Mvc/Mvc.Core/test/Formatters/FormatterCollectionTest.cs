@@ -50,16 +50,20 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         private class TestOutputFormatter : TextOutputFormatter
         {
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 throw new NotImplementedException();
             }
         }
 
         private class AnotherTestOutputFormatter : TextOutputFormatter
         {
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 throw new NotImplementedException();
             }
         }

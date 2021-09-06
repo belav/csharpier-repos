@@ -24,8 +24,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="subquery"> An expression reprensenting how to get value from query to create the collection. </param>
         /// <param name="navigation"> A navigation associated with this collection. </param>
-        public MaterializeCollectionNavigationExpression(Expression subquery, INavigationBase navigation)
-        {
+        public MaterializeCollectionNavigationExpression(
+            Expression subquery,
+            INavigationBase navigation
+        ) {
             Check.NotNull(subquery, nameof(subquery));
             Check.NotNull(navigation, nameof(navigation));
 
@@ -44,12 +46,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual INavigationBase Navigation { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation.ClrType;
+        public override Type Type => Navigation.ClrType;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -82,7 +82,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             expressionPrinter.AppendLine("MaterializeCollectionNavigation(");
             using (expressionPrinter.Indent())
             {
-                expressionPrinter.AppendLine($"Navigation: {Navigation.DeclaringEntityType.DisplayName()}.{Navigation.Name},");
+                expressionPrinter.AppendLine(
+                    $"Navigation: {Navigation.DeclaringEntityType.DisplayName()}.{Navigation.Name},"
+                );
                 expressionPrinter.Append("subquery: ");
                 expressionPrinter.Visit(Subquery);
             }

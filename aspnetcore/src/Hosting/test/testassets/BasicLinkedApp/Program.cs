@@ -20,27 +20,36 @@ namespace BasicLinkedApp
         // Do not change the signature of this method. It's used for tests.
         private static IHostBuilder CreateWebHostBuilder(string[] args)
         {
-            return new HostBuilder()
-                    .ConfigureHostConfiguration(config =>
+            return new HostBuilder().ConfigureHostConfiguration(
+                    config =>
                     {
                         config.AddCommandLine(args);
-                    })
-                    .ConfigureLogging(logging =>
+                    }
+                )
+                .ConfigureLogging(
+                    logging =>
                     {
                         logging.AddConsole();
                         logging.SetMinimumLevel(LogLevel.Debug);
-                    })
-                    .ConfigureWebHost(webHostBuilder =>
+                    }
+                )
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        webHostBuilder.UseKestrel(o =>
-                        {
-                            o.ConfigureEndpointDefaults(lo =>
-                            {
-                                lo.UseConnectionLogging();
-                            });
-
-                        }).UseStartup<Startup>();
-                    });
+                        webHostBuilder.UseKestrel(
+                                o =>
+                                {
+                                    o.ConfigureEndpointDefaults(
+                                        lo =>
+                                        {
+                                            lo.UseConnectionLogging();
+                                        }
+                                    );
+                                }
+                            )
+                            .UseStartup<Startup>();
+                    }
+                );
         }
     }
 }

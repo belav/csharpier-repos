@@ -22,12 +22,23 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
 
                 var context = new DefaultHttpContext();
 
-                var poll = new LongPollingServerTransport(CancellationToken.None, connection.Application.Input, LoggerFactory);
+                var poll = new LongPollingServerTransport(
+                    CancellationToken.None,
+                    connection.Application.Input,
+                    LoggerFactory
+                );
 
                 connection.Transport.Output.Complete();
 
@@ -42,15 +53,30 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
                 var timeoutToken = new CancellationToken(true);
-                var poll = new LongPollingServerTransport(timeoutToken, connection.Application.Input, LoggerFactory);
+                var poll = new LongPollingServerTransport(
+                    timeoutToken,
+                    connection.Application.Input,
+                    LoggerFactory
+                );
 
-                using (var cts = CancellationTokenSource.CreateLinkedTokenSource(timeoutToken, context.RequestAborted))
-                {
+                using (
+                    var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                        timeoutToken,
+                        context.RequestAborted
+                    )
+                ) {
                     await poll.ProcessRequestAsync(context, cts.Token).DefaultTimeout();
 
                     Assert.Equal(0, context.Response.ContentLength);
@@ -64,11 +90,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
-                var poll = new LongPollingServerTransport(CancellationToken.None, connection.Application.Input, LoggerFactory);
+                var poll = new LongPollingServerTransport(
+                    CancellationToken.None,
+                    connection.Application.Input,
+                    LoggerFactory
+                );
                 var ms = new MemoryStream();
                 context.Response.Body = ms;
 
@@ -87,11 +124,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
-                var poll = new LongPollingServerTransport(CancellationToken.None, connection.Application.Input, LoggerFactory);
+                var poll = new LongPollingServerTransport(
+                    CancellationToken.None,
+                    connection.Application.Input,
+                    LoggerFactory
+                );
                 var ms = new MemoryStream();
                 context.Response.Body = ms;
 

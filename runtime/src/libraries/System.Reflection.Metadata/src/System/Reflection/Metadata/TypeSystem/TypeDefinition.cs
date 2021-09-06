@@ -268,7 +268,8 @@ namespace System.Reflection.Metadata
 
             return (Treatment & TypeDefTreatment.KindMask) switch
             {
-                TypeDefTreatment.UnmangleWinRTName => name.SuffixRaw(MetadataReader.ClrPrefix.Length),
+                TypeDefTreatment.UnmangleWinRTName
+                  => name.SuffixRaw(MetadataReader.ClrPrefix.Length),
                 TypeDefTreatment.PrefixWinRTName => name.WithWinRTPrefix(),
                 _ => name,
             };
@@ -294,7 +295,6 @@ namespace System.Reflection.Metadata
             // no change:
             return _reader.TypeDefTable.GetExtends(Handle);
         }
-
         #endregion
     }
 }

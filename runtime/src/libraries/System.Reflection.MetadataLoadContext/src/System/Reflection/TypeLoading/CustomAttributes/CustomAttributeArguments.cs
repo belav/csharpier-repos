@@ -11,8 +11,10 @@ namespace System.Reflection.TypeLoading
     //
     internal readonly struct CustomAttributeArguments
     {
-        public CustomAttributeArguments(IList<CustomAttributeTypedArgument> fixedArguments, IList<CustomAttributeNamedArgument> namedArguments)
-        {
+        public CustomAttributeArguments(
+            IList<CustomAttributeTypedArgument> fixedArguments,
+            IList<CustomAttributeNamedArgument> namedArguments
+        ) {
             FixedArguments = fixedArguments;
             NamedArguments = namedArguments;
         }

@@ -32,7 +32,9 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             {
                 if (_extra == null)
                 {
-                    var newDict = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+                    var newDict = new Dictionary<string, StringValues>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                     GetUnknownHeaders(newDict);
                     Interlocked.CompareExchange(ref _extra, newDict, null);
                 }
@@ -108,9 +110,10 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             return PropertiesTryGetValue(key, out value) || Extra.TryGetValue(key, out value);
         }
 
-        void ICollection<KeyValuePair<string, StringValues>>.Add(KeyValuePair<string, StringValues> item)
-        {
-            ((IDictionary<string, StringValues>)this).Add(item.Key,item.Value);
+        void ICollection<KeyValuePair<string, StringValues>>.Add(
+            KeyValuePair<string, StringValues> item
+        ) {
+            ((IDictionary<string, StringValues>)this).Add(item.Key, item.Value);
         }
 
         void ICollection<KeyValuePair<string, StringValues>>.Clear()
@@ -122,13 +125,17 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             Extra.Clear();
         }
 
-        bool ICollection<KeyValuePair<string, StringValues>>.Contains(KeyValuePair<string, StringValues> item)
-        {
-            return ((IDictionary<string, StringValues>)this).TryGetValue(item.Key, out var value) && Equals(value, item.Value);
+        bool ICollection<KeyValuePair<string, StringValues>>.Contains(
+            KeyValuePair<string, StringValues> item
+        ) {
+            return ((IDictionary<string, StringValues>)this).TryGetValue(item.Key, out var value)
+                && Equals(value, item.Value);
         }
 
-        void ICollection<KeyValuePair<string, StringValues>>.CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex)
-        {
+        void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
+            KeyValuePair<string, StringValues>[] array,
+            int arrayIndex
+        ) {
             PropertiesEnumerable().Concat(Extra).ToArray().CopyTo(array, arrayIndex);
         }
 
@@ -149,10 +156,14 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                     return _contentLength;
                 }
 
-                if (rawValue.Count == 1 &&
-                    !string.IsNullOrWhiteSpace(rawValue[0]) &&
-                    HeaderUtilities.TryParseNonNegativeInt64(new StringSegment(rawValue[0]).Trim(), out value))
-                {
+                if (
+                    rawValue.Count == 1
+                    && !string.IsNullOrWhiteSpace(rawValue[0])
+                    && HeaderUtilities.TryParseNonNegativeInt64(
+                        new StringSegment(rawValue[0]).Trim(),
+                        out value
+                    )
+                ) {
                     _contentLengthText = rawValue;
                     _contentLength = value;
                     return value;
@@ -168,7 +179,11 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 {
                     if (value.Value < 0)
                     {
-                        throw new ArgumentOutOfRangeException("value", value.Value, "Cannot be negative.");
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            value.Value,
+                            "Cannot be negative."
+                        );
                     }
                     _contentLengthText = HeaderUtilities.FormatNonNegativeInt64(value.Value);
                     this[HttpKnownHeaderNames.ContentLength] = _contentLengthText;
@@ -227,13 +242,16 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             }
         }
 
-        bool ICollection<KeyValuePair<string, StringValues>>.Remove(KeyValuePair<string, StringValues> item)
-        {
-            return ((IDictionary<string, StringValues>)this).Contains(item) &&
-                ((IDictionary<string, StringValues>)this).Remove(item.Key);
+        bool ICollection<KeyValuePair<string, StringValues>>.Remove(
+            KeyValuePair<string, StringValues> item
+        ) {
+            return ((IDictionary<string, StringValues>)this).Contains(item)
+                && ((IDictionary<string, StringValues>)this).Remove(item.Key);
         }
 
-        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+            KeyValuePair<string, StringValues>
+        >.GetEnumerator()
         {
             return PropertiesEnumerable().Concat(Extra).GetEnumerator();
         }
@@ -247,7 +265,9 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         {
             if (IsReadOnly)
             {
-                throw new InvalidOperationException("The response headers cannot be modified because the response has already started.");
+                throw new InvalidOperationException(
+                    "The response headers cannot be modified because the response has already started."
+                );
             }
         }
 

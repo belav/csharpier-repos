@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             Assert.Collection(
                 actionConstraints1,
                 a => Assert.Same(action.ActionConstraints[0], a), // Copied by provider
-                a => Assert.Same(action.ActionConstraints[1], a)); // Copied by provider
+                a => Assert.Same(action.ActionConstraints[1], a)
+            ); // Copied by provider
 
             // Act - 2
             var actionConstraints2 = cache.GetActionConstraints(context, action);
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             Assert.Collection(
                 actionConstraints2,
                 a => Assert.Same(actionConstraints1[0], a), // Cached
-                a => Assert.Same(actionConstraints1[1], a)); // Cached
+                a => Assert.Same(actionConstraints1[1], a)
+            ); // Cached
         }
 
         [Fact]
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             Assert.Collection(
                 actionConstraints1,
                 a => Assert.NotSame(action.ActionConstraints[0], a), // Created by factory
-                a => Assert.Same(action.ActionConstraints[1], a)); // Copied by provider
+                a => Assert.Same(action.ActionConstraints[1], a)
+            ); // Copied by provider
 
             // Act - 2
             var actionConstraints2 = cache.GetActionConstraints(context, action);
@@ -85,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             Assert.Collection(
                 actionConstraints2,
                 a => Assert.Same(actionConstraints1[0], a), // Cached
-                a => Assert.Same(actionConstraints1[1], a)); // Cached
+                a => Assert.Same(actionConstraints1[1], a)
+            ); // Cached
         }
 
         [Fact]
@@ -112,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             Assert.Collection(
                 actionConstraints1,
                 a => Assert.NotSame(action.ActionConstraints[0], a), // Created by factory
-                a => Assert.Same(action.ActionConstraints[1], a)); // Copied by provider
+                a => Assert.Same(action.ActionConstraints[1], a)
+            ); // Copied by provider
 
             // Act - 2
             var actionConstraints2 = cache.GetActionConstraints(context, action);
@@ -122,17 +127,15 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             Assert.Collection(
                 actionConstraints2,
                 a => Assert.NotSame(actionConstraints1[0], a), // Created by factory (again)
-                a => Assert.Same(actionConstraints1[1], a)); // Cached
+                a => Assert.Same(actionConstraints1[1], a)
+            ); // Cached
         }
 
         private class TestActionConstraint : IActionConstraint
         {
             public int Order
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public bool Accept(ActionConstraintContext context)
@@ -156,11 +159,13 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             return new ServiceCollection().BuildServiceProvider();
         }
 
-        private static ActionConstraintCache CreateCache(params IActionConstraintProvider[] providers)
-        {
+        private static ActionConstraintCache CreateCache(
+            params IActionConstraintProvider[] providers
+        ) {
             var descriptorProvider = new DefaultActionDescriptorCollectionProvider(
                 Enumerable.Empty<IActionDescriptorProvider>(),
-                Enumerable.Empty<IActionDescriptorChangeProvider>());
+                Enumerable.Empty<IActionDescriptorChangeProvider>()
+            );
             return new ActionConstraintCache(descriptorProvider, providers);
         }
     }

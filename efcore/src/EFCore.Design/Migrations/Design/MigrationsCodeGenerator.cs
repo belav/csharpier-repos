@@ -38,8 +38,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         ///     Gets the programming language supported by this service.
         /// </summary>
         /// <value> The language. </value>
-        public virtual string? Language
-            => null;
+        public virtual string? Language => null;
 
         /// <summary>
         ///     Parameter object containing dependencies for this service.
@@ -58,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? migrationNamespace,
             string migrationName,
             IReadOnlyList<MigrationOperation> upOperations,
-            IReadOnlyList<MigrationOperation> downOperations);
+            IReadOnlyList<MigrationOperation> downOperations
+        );
 
         /// <summary>
         ///     Generates the migration metadata code.
@@ -74,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Type contextType,
             string migrationName,
             string migrationId,
-            IModel targetModel);
+            IModel targetModel
+        );
 
         /// <summary>
         ///     Generates the model snapshot code.
@@ -88,21 +89,34 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? modelSnapshotNamespace,
             Type contextType,
             string modelSnapshotName,
-            IModel model);
+            IModel model
+        );
 
         /// <summary>
         ///     Gets the namespaces required for a list of <see cref="MigrationOperation" /> objects.
         /// </summary>
         /// <param name="operations"> The operations. </param>
         /// <returns> The namespaces. </returns>
-        protected virtual IEnumerable<string> GetNamespaces(IEnumerable<MigrationOperation> operations)
-            => operations.OfType<ColumnOperation>().SelectMany(GetColumnNamespaces)
-                .Concat(operations.OfType<CreateTableOperation>().SelectMany(o => o.Columns).SelectMany(GetColumnNamespaces))
+        protected virtual IEnumerable<string> GetNamespaces(
+            IEnumerable<MigrationOperation> operations
+        ) =>
+            operations.OfType<ColumnOperation>()
+                .SelectMany(GetColumnNamespaces)
                 .Concat(
-                    operations.OfType<InsertDataOperation>().Select(o => o.Values)
-                        .Concat(operations.OfType<UpdateDataOperation>().SelectMany(o => new[] { o.KeyValues, o.Values }))
+                    operations.OfType<CreateTableOperation>()
+                        .SelectMany(o => o.Columns)
+                        .SelectMany(GetColumnNamespaces)
+                )
+                .Concat(
+                    operations.OfType<InsertDataOperation>()
+                        .Select(o => o.Values)
+                        .Concat(
+                            operations.OfType<UpdateDataOperation>()
+                                .SelectMany(o => new[] { o.KeyValues, o.Values })
+                        )
                         .Concat(operations.OfType<DeleteDataOperation>().Select(o => o.KeyValues))
-                        .SelectMany(GetDataNamespaces))
+                        .SelectMany(GetDataNamespaces)
+                )
                 .Concat(GetAnnotationNamespaces(GetAnnotatables(operations)));
 
         private static IEnumerable<string> GetColumnNamespaces(ColumnOperation columnOperation)
@@ -140,8 +154,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             }
         }
 
-        private static IEnumerable<IAnnotatable> GetAnnotatables(IEnumerable<MigrationOperation> operations)
-        {
+        private static IEnumerable<IAnnotatable> GetAnnotatables(
+            IEnumerable<MigrationOperation> operations
+        ) {
             foreach (var operation in operations)
             {
                 yield return operation;
@@ -176,10 +191,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="model"> The model. </param>
         /// <returns> The namespaces. </returns>
-        protected virtual IEnumerable<string> GetNamespaces(IModel model)
-            => model.GetEntityTypes().SelectMany(
-                    e => e.GetDeclaredProperties()
-                        .SelectMany(p => (FindValueConverter(p)?.ProviderClrType ?? p.ClrType).GetNamespaces()))
+        protected virtual IEnumerable<string> GetNamespaces(IModel model) =>
+            model.GetEntityTypes()
+                .SelectMany(
+                    e =>
+                        e.GetDeclaredProperties()
+                            .SelectMany(
+                                p =>
+                                    (
+                                        FindValueConverter(p)?.ProviderClrType ?? p.ClrType
+                                    ).GetNamespaces()
+                            )
+                )
                 .Concat(GetAnnotationNamespaces(GetAnnotatables(model)));
 
         private static IEnumerable<IAnnotatable> GetAnnotatables(IModel model)
@@ -212,20 +235,30 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             }
         }
 
-        private IEnumerable<string> GetAnnotationNamespaces(IEnumerable<IAnnotatable> items)
-            => items.SelectMany(
-                i => Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(i.GetAnnotations())
-                    .Select(a => new { Annotatable = i, Annotation = a })
-                    .SelectMany(a => GetProviderType(a.Annotatable, a.Annotation.Value!.GetType()).GetNamespaces()));
+        private IEnumerable<string> GetAnnotationNamespaces(IEnumerable<IAnnotatable> items) =>
+            items.SelectMany(
+                i =>
+                    Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
+                            i.GetAnnotations()
+                        )
+                        .Select(a => new { Annotatable = i, Annotation = a })
+                        .SelectMany(
+                            a =>
+                                GetProviderType(a.Annotatable, a.Annotation.Value!.GetType())
+                                    .GetNamespaces()
+                        )
+            );
 
-        private ValueConverter? FindValueConverter(IProperty property)
-            => (property.FindTypeMapping()
-                ?? Dependencies.RelationalTypeMappingSource.FindMapping(property))?.Converter;
+        private ValueConverter? FindValueConverter(IProperty property) =>
+            (
+                property.FindTypeMapping()
+                ?? Dependencies.RelationalTypeMappingSource.FindMapping(property)
+            )?.Converter;
 
-        private Type GetProviderType(IAnnotatable annotatable, Type valueType)
-            => annotatable is IProperty property
-                && valueType.UnwrapNullableType() == property.ClrType.UnwrapNullableType()
-                    ? FindValueConverter(property)?.ProviderClrType ?? valueType
-                    : valueType;
+        private Type GetProviderType(IAnnotatable annotatable, Type valueType) =>
+            annotatable is IProperty property
+            && valueType.UnwrapNullableType() == property.ClrType.UnwrapNullableType()
+                ? FindValueConverter(property)?.ProviderClrType ?? valueType
+                : valueType;
     }
 }

@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 _context.ServiceContext.Log,
                 _context.TimeoutControl,
                 minResponseDataRateFeature: this,
-                outputAborter: this);
+                outputAborter: this
+            );
 
             Input = _context.Transport.Input;
             Output = _http1Output;
@@ -82,7 +83,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 ServiceContext.ConnectionManager.UpgradedConnectionCount.ReleaseOne();
             }
 
-            TimeoutControl.StartDrainTimeout(MinResponseDataRate, ServerOptions.Limits.MaxResponseBufferSize);
+            TimeoutControl.StartDrainTimeout(
+                MinResponseDataRate,
+                ServerOptions.Limits.MaxResponseBufferSize
+            );
 
             // Prevent RequestAborted from firing. Free up unneeded feature references.
             Reset();
@@ -92,7 +96,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public void OnInputOrOutputCompleted()
         {
-            _http1Output.Abort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient));
+            _http1Output.Abort(
+                new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient)
+            );
             CancelRequestAbortedToken();
         }
 
@@ -129,14 +135,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Input.CancelPendingRead();
         }
 
-        public void HandleRequestHeadersTimeout()
-            => SendTimeoutResponse();
+        public void HandleRequestHeadersTimeout() => SendTimeoutResponse();
 
         public void HandleReadDataRateTimeout()
         {
             Debug.Assert(MinRequestBodyDataRate != null);
 
-            Log.RequestBodyMinimumDataRateNotSatisfied(ConnectionId, TraceIdentifier, MinRequestBodyDataRate.BytesPerSecond);
+            Log.RequestBodyMinimumDataRateNotSatisfied(
+                ConnectionId,
+                TraceIdentifier,
+                MinRequestBodyDataRate.BytesPerSecond
+            );
             SendTimeoutResponse();
         }
 
@@ -150,7 +159,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         break;
                     }
 
-                    TimeoutControl.ResetTimeout(_requestHeadersTimeoutTicks, TimeoutReason.RequestHeaders);
+                    TimeoutControl.ResetTimeout(
+                        _requestHeadersTimeoutTicks,
+                        TimeoutReason.RequestHeaders
+                    );
 
                     _requestProcessingStatus = RequestProcessingStatus.ParsingRequestLine;
                     goto case RequestProcessingStatus.ParsingRequestLine;
@@ -191,7 +203,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             bool TrimAndTakeStartLine(ref SequenceReader<byte> reader)
             {
-                var trimmedBuffer = reader.Sequence.Slice(reader.Position, ServerOptions.Limits.MaxRequestLineSize);
+                var trimmedBuffer = reader.Sequence.Slice(
+                    reader.Position,
+                    ServerOptions.Limits.MaxRequestLineSize
+                );
                 var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
 
                 if (!_parser.ParseRequestLine(new Http1ParsingHandler(this), ref trimmedReader))
@@ -218,7 +233,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             try
             {
-                var result = _parser.ParseHeaders(new Http1ParsingHandler(this, trailers), ref reader);
+                var result = _parser.ParseHeaders(
+                    new Http1ParsingHandler(this, trailers),
+                    ref reader
+                );
                 if (result)
                 {
                     TimeoutControl.CancelTimeout();
@@ -226,6 +244,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                 return result;
             }
+
             finally
             {
                 _remainingRequestHeadersBytesAllowed -= reader.Consumed - alreadyConsumed;
@@ -233,14 +252,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             bool TrimAndTakeMessageHeaders(ref SequenceReader<byte> reader, bool trailers)
             {
-                var trimmedBuffer = reader.Sequence.Slice(reader.Position, _remainingRequestHeadersBytesAllowed);
+                var trimmedBuffer = reader.Sequence.Slice(
+                    reader.Position,
+                    _remainingRequestHeadersBytesAllowed
+                );
                 var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
                 try
                 {
-                    if (!_parser.ParseHeaders(new Http1ParsingHandler(this, trailers), ref trimmedReader))
-                    {
+                    if (
+                        !_parser.ParseHeaders(
+                            new Http1ParsingHandler(this, trailers),
+                            ref trimmedReader
+                        )
+                    ) {
                         // We read the maximum allowed but didn't complete the headers.
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.HeadersExceedMaxTotalSize);
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.HeadersExceedMaxTotalSize
+                        );
                     }
 
                     TimeoutControl.CancelTimeout();
@@ -249,6 +277,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                     return true;
                 }
+
                 finally
                 {
                     _remainingRequestHeadersBytesAllowed -= trimmedReader.Consumed;
@@ -256,8 +285,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
         }
 
-        public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-        {
+        public void OnStartLine(
+            HttpVersionAndMethod versionAndMethod,
+            TargetOffsetPathLength targetPath,
+            Span<byte> startLine
+        ) {
             var targetStart = targetPath.Offset;
             // Slice out target
             var target = startLine[targetStart..];
@@ -290,7 +322,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Method = method;
             if (method == HttpMethod.Custom)
             {
-                _methodText = startLine[..versionAndMethod.MethodEnd].GetAsciiStringNonNullCharacters();
+                _methodText = startLine[
+                    ..versionAndMethod.MethodEnd
+                ].GetAsciiStringNonNullCharacters();
             }
 
             _httpVersion = versionAndMethod.Version;
@@ -305,7 +339,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         // Compare with Http2Stream.TryValidatePseudoHeaders
         private void OnOriginFormTarget(TargetOffsetPathLength targetPath, Span<byte> target)
         {
-            Debug.Assert(target[0] == ByteForwardSlash, "Should only be called when path starts with /");
+            Debug.Assert(
+                target[0] == ByteForwardSlash,
+                "Should only be called when path starts with /"
+            );
 
             _requestTargetForm = HttpRequestTarget.OriginForm;
 
@@ -325,10 +362,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             // Read raw target before mutating memory.
             var previousValue = _parsedRawTarget;
-            if (ServerOptions.DisableStringReuse ||
-                previousValue == null || previousValue.Length != target.Length ||
-                !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target))
-            {
+            if (
+                ServerOptions.DisableStringReuse
+                || previousValue == null
+                || previousValue.Length != target.Length
+                || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
+            ) {
                 ParseTarget(targetPath, target);
             }
             else
@@ -384,7 +423,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 else
                 {
                     var path = target[..pathLength];
-                    Path = _parsedPath = PathNormalizer.DecodePath(path, targetPath.IsEncoded, RawTarget, queryLength);
+                    Path = _parsedPath = PathNormalizer.DecodePath(
+                        path,
+                        targetPath.IsEncoded,
+                        RawTarget,
+                        queryLength
+                    );
                 }
             }
             catch (InvalidOperationException)
@@ -398,10 +442,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             var previousValue = _parsedQueryString;
             var query = target[targetPath.Length..];
             var queryLength = query.Length;
-            if (ServerOptions.DisableStringReuse ||
-                previousValue == null || previousValue.Length != queryLength ||
-                !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query))
-            {
+            if (
+                ServerOptions.DisableStringReuse
+                || previousValue == null
+                || previousValue.Length != queryLength
+                || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query)
+            ) {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
                 QueryString = _parsedQueryString = query.GetAsciiStringNonNullCharacters();
@@ -444,10 +490,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             // See https://tools.ietf.org/html/rfc3986#section-3.2
 
             var previousValue = _parsedRawTarget;
-            if (ServerOptions.DisableStringReuse ||
-                previousValue == null || previousValue.Length != target.Length ||
-                !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target))
-            {
+            if (
+                ServerOptions.DisableStringReuse
+                || previousValue == null
+                || previousValue.Length != target.Length
+                || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
+            ) {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
                 RawTarget = _parsedRawTarget = target.GetAsciiStringNonNullCharacters();
@@ -502,10 +550,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             var disableStringReuse = ServerOptions.DisableStringReuse;
             var previousValue = _parsedRawTarget;
-            if (disableStringReuse ||
-                previousValue == null || previousValue.Length != target.Length ||
-                !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target))
-            {
+            if (
+                disableStringReuse
+                || previousValue == null
+                || previousValue.Length != target.Length
+                || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
+            ) {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
                 RawTarget = _parsedRawTarget = target.GetAsciiStringNonNullCharacters();
@@ -523,10 +573,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 Path = _parsedPath = uri.LocalPath;
                 // don't use uri.Query because we need the unescaped version
                 previousValue = _parsedQueryString;
-                if (disableStringReuse ||
-                    previousValue == null || previousValue.Length != query.Length ||
-                    !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query))
-                {
+                if (
+                    disableStringReuse
+                    || previousValue == null
+                    || previousValue.Length != query.Length
+                    || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query)
+                ) {
                     // The previous string does not match what the bytes would convert to,
                     // so we will need to generate a new string.
                     QueryString = _parsedQueryString = query.GetAsciiStringNonNullCharacters();
@@ -576,7 +628,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
             else if (!HttpUtilities.IsHostHeaderValid(hostText))
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidHostHeader,
+                    hostText
+                );
             }
         }
 
@@ -586,7 +641,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             {
                 if (hostText != RawTarget)
                 {
-                    KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+                    KestrelBadHttpRequestException.Throw(
+                        RequestRejectionReason.InvalidHostHeader,
+                        hostText
+                    );
                 }
             }
             else if (_requestTargetForm == HttpRequestTarget.AbsoluteForm)
@@ -600,27 +658,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 // When IsDefaultPort = true, we will allow Host: with or without the default port
                 if (hostText != _absoluteRequestTarget!.Authority)
                 {
-                    if (!_absoluteRequestTarget.IsDefaultPort
-                        || hostText != _absoluteRequestTarget.Authority + ":" + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture))
-                    {
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+                    if (
+                        !_absoluteRequestTarget.IsDefaultPort
+                        || hostText
+                            != _absoluteRequestTarget.Authority
+                                + ":"
+                                + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture)
+                    ) {
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.InvalidHostHeader,
+                            hostText
+                        );
                     }
                 }
             }
 
             if (!HttpUtilities.IsHostHeaderValid(hostText))
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidHostHeader,
+                    hostText
+                );
             }
         }
 
         protected override void OnReset()
         {
-
             _requestTimedOut = false;
             _requestTargetForm = HttpRequestTarget.Unknown;
             _absoluteRequestTarget = null;
-            _remainingRequestHeadersBytesAllowed = ServerOptions.Limits.MaxRequestHeadersTotalSize + 2;
+            _remainingRequestHeadersBytesAllowed =
+                ServerOptions.Limits.MaxRequestHeadersTotalSize + 2;
             _requestCount++;
 
             MinResponseDataRate = ServerOptions.Limits.MinResponseDataRate;
@@ -630,15 +698,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             _currentIHttpMinResponseDataRateFeature = this;
         }
 
-        protected override void OnRequestProcessingEnding()
-        {
-        }
+        protected override void OnRequestProcessingEnding() { }
 
-        protected override string CreateRequestId()
-            => StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', _requestCount);
+        protected override string CreateRequestId() =>
+            StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', _requestCount);
 
-        protected override MessageBody CreateMessageBody()
-            => Http1MessageBody.For(_httpVersion, HttpRequestHeaders, this);
+        protected override MessageBody CreateMessageBody() =>
+            Http1MessageBody.For(_httpVersion, HttpRequestHeaders, this);
 
         protected override void BeginRequestProcessing()
         {
@@ -665,7 +731,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             {
                 if (_requestProcessingStatus == RequestProcessingStatus.ParsingHeaders)
                 {
-                    KestrelBadHttpRequestException.Throw(RequestRejectionReason.MalformedRequestInvalidHeaders);
+                    KestrelBadHttpRequestException.Throw(
+                        RequestRejectionReason.MalformedRequestInvalidHeaders
+                    );
                 }
                 throw;
             }
@@ -682,15 +750,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         endConnection = true;
                         return true;
                     case RequestProcessingStatus.ParsingRequestLine:
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidRequestLine);
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.InvalidRequestLine
+                        );
                         break;
                     case RequestProcessingStatus.ParsingHeaders:
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.MalformedRequestInvalidHeaders);
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.MalformedRequestInvalidHeaders
+                        );
                         break;
                 }
             }
-            else if (!_keepAlive && _requestProcessingStatus == RequestProcessingStatus.RequestPending)
-            {
+            else if (
+                !_keepAlive && _requestProcessingStatus == RequestProcessingStatus.RequestPending
+            ) {
                 // Stop the request processing loop if the server is shutting down or there was a keep-alive timeout
                 // and there is no ongoing request.
                 endConnection = true;

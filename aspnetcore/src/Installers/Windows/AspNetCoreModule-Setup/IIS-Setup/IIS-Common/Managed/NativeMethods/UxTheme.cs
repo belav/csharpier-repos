@@ -11,17 +11,38 @@ namespace Microsoft.Web.Management.PInvoke.UxTheme
     internal static class NativeMethods
     {
         [DllImport("UxTheme.dll", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static void SetWindowTheme(IntPtr hWnd, string textSubAppName, string textSubIdList);
+        public extern static void SetWindowTheme(
+            IntPtr hWnd,
+            string textSubAppName,
+            string textSubIdList
+        );
 
         [DllImport("uxtheme.dll", CharSet = CharSet.Unicode, PreserveSig = true)]
-        private static extern int GetCurrentThemeName(StringBuilder pszThemeFileName, int dwMaxNameChars, StringBuilder pszColorBuff, int dwMaxColorChars, StringBuilder pszSizeBuff, int cchMaxSizeChars);
+        private static extern int GetCurrentThemeName(
+            StringBuilder pszThemeFileName,
+            int dwMaxNameChars,
+            StringBuilder pszColorBuff,
+            int dwMaxColorChars,
+            StringBuilder pszSizeBuff,
+            int cchMaxSizeChars
+        );
 
-        public static bool TryGetCurrentThemeName(out string themeName, out string color, out string size)
-        {
+        public static bool TryGetCurrentThemeName(
+            out string themeName,
+            out string color,
+            out string size
+        ) {
             StringBuilder nameBuilder = new StringBuilder(512);
             StringBuilder colorBuilder = new StringBuilder(512);
             StringBuilder sizeBuilder = new StringBuilder(512);
-            int hr = GetCurrentThemeName(nameBuilder, nameBuilder.Capacity, colorBuilder, colorBuilder.Capacity, sizeBuilder, sizeBuilder.Capacity);
+            int hr = GetCurrentThemeName(
+                nameBuilder,
+                nameBuilder.Capacity,
+                colorBuilder,
+                colorBuilder.Capacity,
+                sizeBuilder,
+                sizeBuilder.Capacity
+            );
             if (hr == 0)
             {
                 themeName = nameBuilder.ToString();

@@ -33,7 +33,10 @@ namespace Microsoft.AspNetCore.Hosting
         private WebHostOptions? _options;
         private bool _webHostBuilt;
         private Action<WebHostBuilderContext, IServiceCollection>? _configureServices;
-        private Action<WebHostBuilderContext, IConfigurationBuilder>? _configureAppConfigurationBuilder;
+        private Action<
+            WebHostBuilderContext,
+            IConfigurationBuilder
+        >? _configureAppConfigurationBuilder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebHostBuilder"/> class.
@@ -42,27 +45,29 @@ namespace Microsoft.AspNetCore.Hosting
         {
             _hostingEnvironment = new HostingEnvironment();
 
-            _config = new ConfigurationBuilder()
-                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+            _config = new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
 
             if (string.IsNullOrEmpty(GetSetting(WebHostDefaults.EnvironmentKey)))
             {
                 // Try adding legacy environment keys, never remove these.
-                UseSetting(WebHostDefaults.EnvironmentKey, Environment.GetEnvironmentVariable("Hosting:Environment")
-                    ?? Environment.GetEnvironmentVariable("ASPNET_ENV"));
+                UseSetting(
+                    WebHostDefaults.EnvironmentKey,
+                    Environment.GetEnvironmentVariable("Hosting:Environment")
+                        ?? Environment.GetEnvironmentVariable("ASPNET_ENV")
+                );
             }
 
             if (string.IsNullOrEmpty(GetSetting(WebHostDefaults.ServerUrlsKey)))
             {
                 // Try adding legacy url key, never remove this.
-                UseSetting(WebHostDefaults.ServerUrlsKey, Environment.GetEnvironmentVariable("ASPNETCORE_SERVER.URLS"));
+                UseSetting(
+                    WebHostDefaults.ServerUrlsKey,
+                    Environment.GetEnvironmentVariable("ASPNETCORE_SERVER.URLS")
+                );
             }
 
-            _context = new WebHostBuilderContext
-            {
-                Configuration = _config
-            };
+            _context = new WebHostBuilderContext { Configuration = _config };
         }
 
         /// <summary>
@@ -109,8 +114,9 @@ namespace Microsoft.AspNetCore.Hosting
         /// </summary>
         /// <param name="configureServices">A delegate for configuring the <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-        public IWebHostBuilder ConfigureServices(Action<WebHostBuilderContext, IServiceCollection> configureServices)
-        {
+        public IWebHostBuilder ConfigureServices(
+            Action<WebHostBuilderContext, IServiceCollection> configureServices
+        ) {
             _configureServices += configureServices;
             return this;
         }
@@ -124,8 +130,9 @@ namespace Microsoft.AspNetCore.Hosting
         /// The <see cref="IConfiguration"/> and <see cref="ILoggerFactory"/> on the <see cref="WebHostBuilderContext"/> are uninitialized at this stage.
         /// The <see cref="IConfigurationBuilder"/> is pre-populated with the settings of the <see cref="IWebHostBuilder"/>.
         /// </remarks>
-        public IWebHostBuilder ConfigureAppConfiguration(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate)
-        {
+        public IWebHostBuilder ConfigureAppConfiguration(
+            Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
+        ) {
             _configureAppConfigurationBuilder += configureDelegate;
             return this;
         }
@@ -150,17 +157,23 @@ namespace Microsoft.AspNetCore.Hosting
                 // Warn about deprecated environment variables
                 if (Environment.GetEnvironmentVariable("Hosting:Environment") != null)
                 {
-                    Console.WriteLine("The environment variable 'Hosting:Environment' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'");
+                    Console.WriteLine(
+                        "The environment variable 'Hosting:Environment' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'"
+                    );
                 }
 
                 if (Environment.GetEnvironmentVariable("ASPNET_ENV") != null)
                 {
-                    Console.WriteLine("The environment variable 'ASPNET_ENV' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'");
+                    Console.WriteLine(
+                        "The environment variable 'ASPNET_ENV' is obsolete and has been replaced with 'ASPNETCORE_ENVIRONMENT'"
+                    );
                 }
 
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_SERVER.URLS") != null)
                 {
-                    Console.WriteLine("The environment variable 'ASPNETCORE_SERVER.URLS' is obsolete and has been replaced with 'ASPNETCORE_URLS'");
+                    Console.WriteLine(
+                        "The environment variable 'ASPNETCORE_SERVER.URLS' is obsolete and has been replaced with 'ASPNETCORE_URLS'"
+                    );
                 }
             }
 
@@ -171,7 +184,8 @@ namespace Microsoft.AspNetCore.Hosting
                 hostingServiceProvider,
                 _options,
                 _config,
-                hostingStartupErrors);
+                hostingStartupErrors
+            );
             try
             {
                 host.Initialize();
@@ -188,7 +202,9 @@ namespace Microsoft.AspNetCore.Hosting
                 {
                     if (!assemblyNames.Add(assemblyName))
                     {
-                        logger.LogWarning($"The assembly {assemblyName} was specified multiple times. Hosting startup assemblies should only be specified once.");
+                        logger.LogWarning(
+                            $"The assembly {assemblyName} was specified multiple times. Hosting startup assemblies should only be specified once."
+                        );
                     }
                 }
 
@@ -224,7 +240,10 @@ namespace Microsoft.AspNetCore.Hosting
         {
             hostingStartupErrors = null;
 
-            _options = new WebHostOptions(_config, Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty);
+            _options = new WebHostOptions(
+                _config,
+                Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty
+            );
 
             if (!_options.PreventHostingStartup)
             {
@@ -244,16 +263,24 @@ namespace Microsoft.AspNetCore.Hosting
                             continue;
                         }
 
-                        foreach (var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>())
-                        {
-                            var hostingStartup = (IHostingStartup)Activator.CreateInstance(attribute.HostingStartupType)!;
+                        foreach (
+                            var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>()
+                        ) {
+                            var hostingStartup = (IHostingStartup)Activator.CreateInstance(
+                                attribute.HostingStartupType
+                            )!;
                             hostingStartup.Configure(this);
                         }
                     }
                     catch (Exception ex)
                     {
                         // Capture any errors that happen during startup
-                        exceptions.Add(new InvalidOperationException($"Startup assembly {assemblyName} failed to execute. See the inner exception for more details.", ex));
+                        exceptions.Add(
+                            new InvalidOperationException(
+                                $"Startup assembly {assemblyName} failed to execute. See the inner exception for more details.",
+                                ex
+                            )
+                        );
                     }
                 }
 
@@ -263,7 +290,10 @@ namespace Microsoft.AspNetCore.Hosting
                 }
             }
 
-            var contentRootPath = ResolveContentRootPath(_options.ContentRootPath, AppContext.BaseDirectory);
+            var contentRootPath = ResolveContentRootPath(
+                _options.ContentRootPath,
+                AppContext.BaseDirectory
+            );
 
             // Initialize the hosting environment
             ((IWebHostEnvironment)_hostingEnvironment).Initialize(contentRootPath, _options);
@@ -279,8 +309,9 @@ namespace Microsoft.AspNetCore.Hosting
 #pragma warning restore CS0618 // Type or member is obsolete
             services.AddSingleton(_context);
 
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(_hostingEnvironment.ContentRootPath)
+            var builder = new ConfigurationBuilder().SetBasePath(
+                    _hostingEnvironment.ContentRootPath
+                )
                 .AddConfiguration(_config, shouldDisposeConfiguration: true);
 
             _configureAppConfigurationBuilder?.Invoke(_context, builder);
@@ -291,7 +322,9 @@ namespace Microsoft.AspNetCore.Hosting
             _context.Configuration = configuration;
 
             services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
-            services.TryAddSingleton<DiagnosticSource>(sp => sp.GetRequiredService<DiagnosticListener>());
+            services.TryAddSingleton<DiagnosticSource>(
+                sp => sp.GetRequiredService<DiagnosticListener>()
+            );
             services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
 
             services.AddTransient<IApplicationBuilderFactory, ApplicationBuilderFactory>();
@@ -300,13 +333,19 @@ namespace Microsoft.AspNetCore.Hosting
             services.AddOptions();
             services.AddLogging();
 
-            services.AddTransient<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+            services.AddTransient<
+                IServiceProviderFactory<IServiceCollection>,
+                DefaultServiceProviderFactory
+            >();
 
             if (!string.IsNullOrEmpty(_options.StartupAssembly))
             {
                 try
                 {
-                    var startupType = StartupLoader.FindStartupType(_options.StartupAssembly, _hostingEnvironment.EnvironmentName);
+                    var startupType = StartupLoader.FindStartupType(
+                        _options.StartupAssembly,
+                        _hostingEnvironment.EnvironmentName
+                    );
 
                     if (typeof(IStartup).IsAssignableFrom(startupType))
                     {
@@ -314,22 +353,31 @@ namespace Microsoft.AspNetCore.Hosting
                     }
                     else
                     {
-                        services.AddSingleton(typeof(IStartup), sp =>
-                        {
-                            var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
-                            var methods = StartupLoader.LoadMethods(sp, startupType, hostingEnvironment.EnvironmentName);
-                            return new ConventionBasedStartup(methods);
-                        });
+                        services.AddSingleton(
+                            typeof(IStartup),
+                            sp =>
+                            {
+                                var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
+                                var methods = StartupLoader.LoadMethods(
+                                    sp,
+                                    startupType,
+                                    hostingEnvironment.EnvironmentName
+                                );
+                                return new ConventionBasedStartup(methods);
+                            }
+                        );
                     }
                 }
                 catch (Exception ex)
                 {
                     var capture = ExceptionDispatchInfo.Capture(ex);
-                    services.AddSingleton<IStartup>(_ =>
-                    {
-                        capture.Throw();
-                        return null;
-                    });
+                    services.AddSingleton<IStartup>(
+                        _ =>
+                        {
+                            capture.Throw();
+                            return null;
+                        }
+                    );
                 }
             }
 
@@ -338,8 +386,10 @@ namespace Microsoft.AspNetCore.Hosting
             return services;
         }
 
-        private void AddApplicationServices(IServiceCollection services, IServiceProvider hostingServiceProvider)
-        {
+        private void AddApplicationServices(
+            IServiceCollection services,
+            IServiceProvider hostingServiceProvider
+        ) {
             // We are forwarding services from hosting container so hosting container
             // can still manage their lifetime (disposal) shared instances with application services.
             // NOTE: This code overrides original services lifetime. Instances would always be singleton in

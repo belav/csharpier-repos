@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Simple1()
         {
             var text =
-@"abstract class A : Base
+                @"abstract class A : Base
 {
     void M1() { }
     public void M2() { }
@@ -95,7 +95,7 @@ abstract class Base
         public void InScript()
         {
             var text =
-@"
+                @"
 void M1() { }
 public void M2() { }
 protected void M3() { }
@@ -138,7 +138,8 @@ static void M12() { }
         [Fact]
         public void TypeMap()
         {
-            var source = @"
+            var source =
+                @"
 struct S<T> where T : struct
 {
 }
@@ -148,26 +149,44 @@ struct S<T> where T : struct
             comp.VerifyDiagnostics();
 
             var intType = comp.GetSpecialType(SpecialType.System_Int32);
-            var customModifiers = ImmutableArray.Create(CSharpCustomModifier.CreateOptional(intType));
+            var customModifiers = ImmutableArray.Create(
+                CSharpCustomModifier.CreateOptional(intType)
+            );
 
             var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
             var typeParamType = structType.TypeParameters.Single();
 
-            var pointerType = new PointerTypeSymbol(TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)); // NOTE: We're constructing this manually, since it's illegal.
-            var arrayType = ArrayTypeSymbol.CreateCSharpArray(comp.Assembly, TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)); // This is legal, but we're already manually constructing types.
+            var pointerType = new PointerTypeSymbol(
+                TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)
+            ); // NOTE: We're constructing this manually, since it's illegal.
+            var arrayType = ArrayTypeSymbol.CreateCSharpArray(
+                comp.Assembly,
+                TypeWithAnnotations.Create(typeParamType, customModifiers: customModifiers)
+            ); // This is legal, but we're already manually constructing types.
 
-            var typeMap = new TypeMap(ImmutableArray.Create(typeParamType), ImmutableArray.Create(TypeWithAnnotations.Create(intType)));
+            var typeMap = new TypeMap(
+                ImmutableArray.Create(typeParamType),
+                ImmutableArray.Create(TypeWithAnnotations.Create(intType))
+            );
 
-            var substitutedPointerType = (PointerTypeSymbol)typeMap.SubstituteType(pointerType).AsTypeSymbolOnly();
-            var substitutedArrayType = (ArrayTypeSymbol)typeMap.SubstituteType(arrayType).AsTypeSymbolOnly();
+            var substitutedPointerType = (PointerTypeSymbol)typeMap.SubstituteType(pointerType)
+                .AsTypeSymbolOnly();
+            var substitutedArrayType = (ArrayTypeSymbol)typeMap.SubstituteType(arrayType)
+                .AsTypeSymbolOnly();
 
             // The map changed the types.
             Assert.Equal(intType, substitutedPointerType.PointedAtType);
             Assert.Equal(intType, substitutedArrayType.ElementType);
 
             // The map preserved the custom modifiers.
-            Assert.Equal(customModifiers, substitutedPointerType.PointedAtTypeWithAnnotations.CustomModifiers);
-            Assert.Equal(customModifiers, substitutedArrayType.ElementTypeWithAnnotations.CustomModifiers);
+            Assert.Equal(
+                customModifiers,
+                substitutedPointerType.PointedAtTypeWithAnnotations.CustomModifiers
+            );
+            Assert.Equal(
+                customModifiers,
+                substitutedArrayType.ElementTypeWithAnnotations.CustomModifiers
+            );
         }
     }
 }

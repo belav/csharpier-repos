@@ -7,8 +7,12 @@ namespace Microsoft.Extensions.Configuration.Xml
 {
     internal sealed class XmlConfigurationElementAttributeValue
     {
-        public XmlConfigurationElementAttributeValue(string attribute, string value, int? lineNumber, int? linePosition)
-        {
+        public XmlConfigurationElementAttributeValue(
+            string attribute,
+            string value,
+            int? lineNumber,
+            int? linePosition
+        ) {
             Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
             Value = value ?? throw new ArgumentNullException(nameof(value));
             LineNumber = lineNumber;

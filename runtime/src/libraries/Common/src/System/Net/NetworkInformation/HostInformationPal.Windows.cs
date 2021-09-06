@@ -45,6 +45,7 @@ namespace System.Net.NetworkInformation
                         fixedInfo = Marshal.PtrToStructure<Interop.IpHlpApi.FIXED_INFO>(buffer);
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeHGlobal(buffer);
@@ -64,7 +65,12 @@ namespace System.Net.NetworkInformation
         {
             get
             {
-                LazyInitializer.EnsureInitialized(ref s_fixedInfo, ref s_fixedInfoInitialized, ref s_syncObject, () => GetFixedInfo());
+                LazyInitializer.EnsureInitialized(
+                    ref s_fixedInfo,
+                    ref s_fixedInfoInitialized,
+                    ref s_syncObject,
+                    () => GetFixedInfo()
+                );
                 return ref s_fixedInfo;
             }
         }

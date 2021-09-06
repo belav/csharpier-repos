@@ -22,25 +22,27 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public PhysicalAddressToStringConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                ToString(),
-                ToPhysicalAddress(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToString(), ToPhysicalAddress(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(PhysicalAddress), typeof(string), i => new PhysicalAddressToStringConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(PhysicalAddress),
+                typeof(string),
+                i => new PhysicalAddressToStringConverter(i.MappingHints),
+                _defaultHints
+            );
 
         private static new Expression<Func<PhysicalAddress, string>> ToString()
             // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-            => v => v == null ? default! : v.ToString();
+            =>
+            v => v == null ? default! : v.ToString();
 
         private static Expression<Func<string, PhysicalAddress>> ToPhysicalAddress()
             // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-            => v => v == null ? default! : PhysicalAddress.Parse(v);
+            =>
+            v => v == null ? default! : PhysicalAddress.Parse(v);
     }
 }

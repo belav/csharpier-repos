@@ -47,7 +47,12 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         // This is a server parameter, parse for a condition variable
                         if (!context.Next())
                         {
-                            throw new FormatException(Resources.FormatError_InputParserUnrecognizedParameter(testString, context.Index));
+                            throw new FormatException(
+                                Resources.FormatError_InputParserUnrecognizedParameter(
+                                    testString,
+                                    context.Index
+                                )
+                            );
                         }
                         ParseConditionParameter(context, results);
                         break;
@@ -56,7 +61,9 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         // and create a new Pattern Segment.
                         if (!context.Next())
                         {
-                            throw new FormatException(Resources.FormatError_InputParserNoBackreference(context.Index));
+                            throw new FormatException(
+                                Resources.FormatError_InputParserNoBackreference(context.Index)
+                            );
                         }
                         context.Mark();
                         if (context.Current >= '0' && context.Current <= '9')
@@ -70,7 +77,12 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         }
                         else
                         {
-                            throw new FormatException(Resources.FormatError_InputParserInvalidInteger(testString, context.Index));
+                            throw new FormatException(
+                                Resources.FormatError_InputParserInvalidInteger(
+                                    testString,
+                                    context.Index
+                                )
+                            );
                         }
                         break;
                     default:
@@ -90,8 +102,10 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
         /// <param name="context">The ParserContext</param>
         /// <param name="results">The List of results which the new condition parameter will be added.</param>
         /// <returns>true </returns>
-        private static void ParseConditionParameter(ParserContext context, IList<PatternSegment> results)
-        {
+        private static void ParseConditionParameter(
+            ParserContext context,
+            IList<PatternSegment> results
+        ) {
             // Parse { }
             if (context.Current == OpenBrace)
             {
@@ -99,18 +113,22 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                 if (!context.Next())
                 {
                     // Dangling {
-                    throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                    throw new FormatException(
+                        Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                    );
                 }
                 context.Mark();
                 while (context.Current != CloseBrace)
                 {
                     if (!context.Next())
                     {
-                        throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                        throw new FormatException(
+                            Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                        );
                     }
                     else if (context.Current == Colon)
                     {
-                        // Have a segmented look up Ex: HTTP:xxxx 
+                        // Have a segmented look up Ex: HTTP:xxxx
                         // Most of these we can't handle
                         throw new NotImplementedException("Segmented Lookups no implemented");
                     }
@@ -137,7 +155,9 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             else
             {
                 // illegal escape of a character
-                throw new FormatException(Resources.FormatError_InputParserInvalidInteger(context.Template, context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserInvalidInteger(context.Template, context.Index)
+                );
             }
         }
 

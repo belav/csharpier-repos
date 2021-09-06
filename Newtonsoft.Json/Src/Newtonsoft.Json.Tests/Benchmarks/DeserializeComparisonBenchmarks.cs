@@ -46,8 +46,12 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 {
     public class DeserializeComparisonBenchmarks
     {
-        private static readonly byte[] BinaryFormatterData = TestFixtureBase.HexToBytes(BenchmarkConstants.BinaryFormatterHex);
-        private static readonly byte[] BsonData = TestFixtureBase.HexToBytes(BenchmarkConstants.BsonHex);
+        private static readonly byte[] BinaryFormatterData = TestFixtureBase.HexToBytes(
+            BenchmarkConstants.BinaryFormatterHex
+        );
+        private static readonly byte[] BsonData = TestFixtureBase.HexToBytes(
+            BenchmarkConstants.BsonHex
+        );
 
         [Benchmark]
         public TestClass DataContractSerializer()
@@ -65,7 +69,9 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
         private T DeserializeDataContractJson<T>(string json)
         {
-            DataContractJsonSerializer dataContractSerializer = new DataContractJsonSerializer(typeof(T));
+            DataContractJsonSerializer dataContractSerializer = new DataContractJsonSerializer(
+                typeof(T)
+            );
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 
             return (T)dataContractSerializer.ReadObject(ms);
@@ -239,17 +245,22 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                     {
                         case "strings":
                             await reader.ReadAsync();
-                            while (await reader.ReadAsync() && reader.TokenType != JsonToken.EndArray)
-                            {
+                            while (
+                                await reader.ReadAsync() && reader.TokenType != JsonToken.EndArray
+                            ) {
                                 c.strings.Add((string)reader.Value);
                             }
                             break;
                         case "dictionary":
                             await reader.ReadAsync();
-                            while (await reader.ReadAsync() && reader.TokenType != JsonToken.EndObject)
-                            {
+                            while (
+                                await reader.ReadAsync() && reader.TokenType != JsonToken.EndObject
+                            ) {
                                 string key = (string)reader.Value;
-                                c.dictionary.Add(key, (await reader.ReadAsInt32Async()).GetValueOrDefault());
+                                c.dictionary.Add(
+                                    key,
+                                    (await reader.ReadAsInt32Async()).GetValueOrDefault()
+                                );
                             }
                             break;
                         case "Name":
@@ -267,8 +278,9 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                             break;
                         case "Addresses":
                             await reader.ReadAsync();
-                            while (await reader.ReadAsync() && reader.TokenType != JsonToken.EndArray)
-                            {
+                            while (
+                                await reader.ReadAsync() && reader.TokenType != JsonToken.EndArray
+                            ) {
                                 var address = await CreateAddressAsync(reader);
                                 c.Addresses.Add(address);
                             }

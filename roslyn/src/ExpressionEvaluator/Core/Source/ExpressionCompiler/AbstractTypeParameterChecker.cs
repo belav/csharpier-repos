@@ -19,8 +19,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     {
         private readonly HashSet<ITypeParameterSymbol> _acceptableTypeParameters;
 
-        protected AbstractTypeParameterChecker(ImmutableArray<ITypeParameterSymbol> acceptableTypeParameters)
-        {
+        protected AbstractTypeParameterChecker(
+            ImmutableArray<ITypeParameterSymbol> acceptableTypeParameters
+        ) {
             _acceptableTypeParameters = new HashSet<ITypeParameterSymbol>(acceptableTypeParameters);
         }
 
@@ -31,8 +32,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // Using an if, rather than assert condition, to make debugging easier.
             if (!_acceptableTypeParameters.Contains(symbol))
             {
-                Debug.Assert(false,
-                    string.Format("Unexpected type parameter {0} owned by {1}", symbol, symbol.ContainingSymbol));
+                Debug.Assert(
+                    false,
+                    string.Format(
+                        "Unexpected type parameter {0} owned by {1}",
+                        symbol,
+                        symbol.ContainingSymbol
+                    )
+                );
             }
 
             foreach (var constraintType in symbol.ConstraintTypes)
@@ -59,7 +66,6 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public sealed override void VisitParameter(IParameterSymbol symbol)
         {
             Visit(symbol.Type);
-
             // Specifically not visiting containing symbol because VisitMethod visits the parameters (i.e. cycle).
         }
 

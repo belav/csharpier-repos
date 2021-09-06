@@ -8,7 +8,8 @@ namespace System.Collections.Tests
 {
     public class LinkedList_ICollection_NonGeneric_Tests : ICollection_NonGeneric_Tests
     {
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(ArgumentException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(ArgumentException);
 
         protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd)
         {
@@ -27,8 +28,9 @@ namespace System.Collections.Tests
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
-        {
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
                 yield return (IEnumerable enumerable) =>
@@ -93,8 +95,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void LinkedList_ICollection_NonGeneric_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(int count)
-        {
+        public void LinkedList_ICollection_NonGeneric_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(
+            int count
+        ) {
             ICollection collection = NonGenericICollectionFactory(count);
             string[] array = new string[count];
             collection.CopyTo(array, 0);

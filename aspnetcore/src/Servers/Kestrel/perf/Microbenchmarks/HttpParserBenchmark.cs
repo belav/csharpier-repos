@@ -75,17 +75,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             }
         }
 
-        public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-        {
-        }
+        public void OnStartLine(
+            HttpVersionAndMethod versionAndMethod,
+            TargetOffsetPathLength targetPath,
+            Span<byte> startLine
+        ) { }
 
-        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) { }
 
-        public void OnHeadersComplete(bool endStream)
-        {
-        }
+        public void OnHeadersComplete(bool endStream) { }
 
         public void OnStaticIndexedHeader(int index)
         {
@@ -106,14 +104,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 RequestHandler = requestHandler;
             }
 
-            public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-                => RequestHandler.OnHeader(name, value);
+            public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) =>
+                RequestHandler.OnHeader(name, value);
 
-            public void OnHeadersComplete(bool endStream)
-                => RequestHandler.OnHeadersComplete(endStream);
+            public void OnHeadersComplete(bool endStream) =>
+                RequestHandler.OnHeadersComplete(endStream);
 
-            public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-                => RequestHandler.OnStartLine(versionAndMethod, targetPath, startLine);
+            public void OnStartLine(
+                HttpVersionAndMethod versionAndMethod,
+                TargetOffsetPathLength targetPath,
+                Span<byte> startLine
+            ) => RequestHandler.OnStartLine(versionAndMethod, targetPath, startLine);
 
             public void OnStaticIndexedHeader(int index)
             {

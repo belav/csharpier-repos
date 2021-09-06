@@ -15,14 +15,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// the first parameter is of <see cref="object"/> type and the second
         /// parameter inherits from or equals <see cref="EventArgs"/> type.
         /// </summary>
-        public static bool HasEventHandlerSignature(this IMethodSymbol method, [NotNullWhen(returnValue: true)] INamedTypeSymbol? eventArgsType)
-            => eventArgsType != null &&
-               method.Parameters.Length == 2 &&
-               method.Parameters[0].Type.SpecialType == SpecialType.System_Object &&
-               method.Parameters[1].Type.InheritsFromOrEquals(eventArgsType);
+        public static bool HasEventHandlerSignature(
+            this IMethodSymbol method,
+            [NotNullWhen(returnValue: true)] INamedTypeSymbol? eventArgsType
+        ) =>
+            eventArgsType != null
+            && method.Parameters.Length == 2
+            && method.Parameters[0].Type.SpecialType == SpecialType.System_Object
+            && method.Parameters[1].Type.InheritsFromOrEquals(eventArgsType);
 
-        public static bool TryGetPredefinedComparisonOperator(this IMethodSymbol symbol, out PredefinedOperator op)
-        {
+        public static bool TryGetPredefinedComparisonOperator(
+            this IMethodSymbol symbol,
+            out PredefinedOperator op
+        ) {
             if (symbol.MethodKind == MethodKind.BuiltinOperator)
             {
                 op = symbol.GetPredefinedOperator();
@@ -45,8 +50,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static PredefinedOperator GetPredefinedOperator(this IMethodSymbol symbol)
-            => symbol.Name switch
+        public static PredefinedOperator GetPredefinedOperator(this IMethodSymbol symbol) =>
+            symbol.Name switch
             {
                 "op_Addition" or "op_UnaryPlus" => PredefinedOperator.Addition,
                 "op_BitwiseAnd" => PredefinedOperator.BitwiseAnd,
@@ -74,12 +79,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 _ => PredefinedOperator.None,
             };
 
-        public static bool IsEntryPoint(this IMethodSymbol methodSymbol, INamedTypeSymbol? taskType, INamedTypeSymbol? genericTaskType)
-            => methodSymbol.Name is WellKnownMemberNames.EntryPointMethodName or WellKnownMemberNames.TopLevelStatementsEntryPointMethodName &&
-               methodSymbol.IsStatic &&
-               (methodSymbol.ReturnsVoid ||
-                methodSymbol.ReturnType.SpecialType == SpecialType.System_Int32 ||
-                methodSymbol.ReturnType.OriginalDefinition.Equals(taskType) ||
-                methodSymbol.ReturnType.OriginalDefinition.Equals(genericTaskType));
+        public static bool IsEntryPoint(
+            this IMethodSymbol methodSymbol,
+            INamedTypeSymbol? taskType,
+            INamedTypeSymbol? genericTaskType
+        ) =>
+            methodSymbol.Name
+                is WellKnownMemberNames.EntryPointMethodName
+                or WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
+            && methodSymbol.IsStatic
+            && (
+                methodSymbol.ReturnsVoid
+                || methodSymbol.ReturnType.SpecialType == SpecialType.System_Int32
+                || methodSymbol.ReturnType.OriginalDefinition.Equals(taskType)
+                || methodSymbol.ReturnType.OriginalDefinition.Equals(genericTaskType)
+            );
     }
 }

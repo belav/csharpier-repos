@@ -19,9 +19,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
     internal class DefaultTagHelperFactory : ITagHelperFactory
     {
         private readonly ITagHelperActivator _activator;
-        private readonly ConcurrentDictionary<Type, PropertyActivator<ViewContext>[]> _injectActions;
+        private readonly ConcurrentDictionary<
+            Type,
+            PropertyActivator<ViewContext>[]
+        > _injectActions;
         private readonly Func<Type, PropertyActivator<ViewContext>[]> _getPropertiesToActivate;
-        private static readonly Func<PropertyInfo, PropertyActivator<ViewContext>> _createActivateInfo = CreateActivateInfo;
+        private static readonly Func<
+            PropertyInfo,
+            PropertyActivator<ViewContext>
+        > _createActivateInfo = CreateActivateInfo;
 
         /// <summary>
         /// Initializes a new <see cref="DefaultTagHelperFactory"/> instance.
@@ -42,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 PropertyActivator<ViewContext>.GetPropertiesToActivate(
                     type,
                     typeof(ViewContextAttribute),
-                    _createActivateInfo);
+                    _createActivateInfo
+                );
         }
 
         /// <inheritdoc />
@@ -58,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             var propertiesToActivate = _injectActions.GetOrAdd(
                 tagHelper.GetType(),
-                _getPropertiesToActivate);
+                _getPropertiesToActivate
+            );
 
             for (var i = 0; i < propertiesToActivate.Length; i++)
             {
@@ -71,12 +79,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             return tagHelper;
         }
 
-        private static void InitializeTagHelper<TTagHelper>(TTagHelper tagHelper, ViewContext context)
-            where TTagHelper : ITagHelper
+        private static void InitializeTagHelper<TTagHelper>(
+            TTagHelper tagHelper,
+            ViewContext context
+        ) where TTagHelper : ITagHelper
         {
             // Run any tag helper initializers in the container
             var serviceProvider = context.HttpContext.RequestServices;
-            var initializers = serviceProvider.GetService<IEnumerable<ITagHelperInitializer<TTagHelper>>>()!;
+            var initializers = serviceProvider.GetService<
+                IEnumerable<ITagHelperInitializer<TTagHelper>>
+            >()!;
 
             foreach (var initializer in initializers)
             {

@@ -12,17 +12,14 @@ namespace System.Web.Mvc
         private IModelBinderProvider[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ModelBinderProviderCollection()
-        {
-        }
+        public ModelBinderProviderCollection() { }
 
-        public ModelBinderProviderCollection(IList<IModelBinderProvider> list)
-            : base(list)
-        {
-        }
+        public ModelBinderProviderCollection(IList<IModelBinderProvider> list) : base(list) { }
 
-        internal ModelBinderProviderCollection(IList<IModelBinderProvider> list, IDependencyResolver dependencyResolver)
-            : base(list)
+        internal ModelBinderProviderCollection(
+            IList<IModelBinderProvider> list,
+            IDependencyResolver dependencyResolver
+        ) : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }
@@ -34,7 +31,10 @@ namespace System.Web.Mvc
                 IModelBinderProvider[] combinedItems = _combinedItems;
                 if (combinedItems == null)
                 {
-                    combinedItems = MultiServiceResolver.GetCombined<IModelBinderProvider>(Items, _dependencyResolver);
+                    combinedItems = MultiServiceResolver.GetCombined<IModelBinderProvider>(
+                        Items,
+                        _dependencyResolver
+                    );
                     _combinedItems = combinedItems;
                 }
                 return combinedItems;

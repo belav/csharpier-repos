@@ -92,7 +92,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var effectivePolicy = context.FindEffectivePolicy<IResponseCacheFilter>();
             if (effectivePolicy != null && effectivePolicy != this)
             {
-                _logger.NotMostEffectiveFilter(GetType(), effectivePolicy.GetType(), typeof(IResponseCacheFilter));
+                _logger.NotMostEffectiveFilter(
+                    GetType(),
+                    effectivePolicy.GetType(),
+                    typeof(IResponseCacheFilter)
+                );
                 return;
             }
 
@@ -100,8 +104,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         }
 
         /// <inheritdoc />
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
     }
 }

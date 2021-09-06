@@ -20,6 +20,7 @@ internal static partial class Interop
             IntPtr pszPolicyOID,
             SafeX509ChainHandle pChainContext,
             [In] ref CERT_CHAIN_POLICY_PARA pPolicyPara,
-            [In, Out] ref CERT_CHAIN_POLICY_STATUS pPolicyStatus);
+            [In, Out] ref CERT_CHAIN_POLICY_STATUS pPolicyStatus
+        );
     }
 }

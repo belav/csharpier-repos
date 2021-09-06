@@ -13,11 +13,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public abstract class ClrAccessorFactory<TAccessor>
-        where TAccessor : class
+    public abstract class ClrAccessorFactory<TAccessor> where TAccessor : class
     {
-        private static readonly MethodInfo _genericCreate
-            = typeof(ClrAccessorFactory<TAccessor>).GetTypeInfo().GetDeclaredMethods(nameof(CreateGeneric)).Single();
+        private static readonly MethodInfo _genericCreate =
+            typeof(ClrAccessorFactory<TAccessor>).GetTypeInfo()
+                .GetDeclaredMethods(nameof(CreateGeneric))
+                .Single();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,8 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TAccessor Create(MemberInfo memberInfo)
-            => Create(memberInfo, null);
+        public virtual TAccessor Create(MemberInfo memberInfo) => Create(memberInfo, null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,20 +44,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         protected virtual TAccessor Create(MemberInfo memberInfo, IPropertyBase? propertyBase)
         {
-            var boundMethod = propertyBase != null
-                ? _genericCreate.MakeGenericMethod(
-                    propertyBase.DeclaringType.ClrType,
-                    propertyBase.ClrType,
-                    propertyBase.ClrType.UnwrapNullableType())
-                : _genericCreate.MakeGenericMethod(
-                    memberInfo.DeclaringType!,
-                    memberInfo.GetMemberType(),
-                    memberInfo.GetMemberType().UnwrapNullableType());
+            var boundMethod =
+                propertyBase != null
+                    ? _genericCreate.MakeGenericMethod(
+                          propertyBase.DeclaringType.ClrType,
+                          propertyBase.ClrType,
+                          propertyBase.ClrType.UnwrapNullableType()
+                      )
+                    : _genericCreate.MakeGenericMethod(
+                          memberInfo.DeclaringType!,
+                          memberInfo.GetMemberType(),
+                          memberInfo.GetMemberType().UnwrapNullableType()
+                      );
 
             try
             {
                 return (TAccessor)boundMethod.Invoke(
-                    this, new object?[] { memberInfo, propertyBase })!;
+                    this,
+                    new object?[] { memberInfo, propertyBase }
+                )!;
             }
             catch (TargetInvocationException e) when (e.InnerException != null)
             {
@@ -73,7 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         protected abstract TAccessor CreateGeneric<TEntity, TValue, TNonNullableEnumValue>(
             MemberInfo memberInfo,
-            IPropertyBase? propertyBase)
-            where TEntity : class;
+            IPropertyBase? propertyBase
+        ) where TEntity : class;
     }
 }

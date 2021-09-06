@@ -17,7 +17,9 @@ namespace System.Resources.Tests
         [InlineData("")]
         public static void ConstructorBasic(string cultureName)
         {
-            NeutralResourcesLanguageAttribute nrla = new NeutralResourcesLanguageAttribute(cultureName);
+            NeutralResourcesLanguageAttribute nrla = new NeutralResourcesLanguageAttribute(
+                cultureName
+            );
             Assert.Equal(cultureName, nrla.CultureName);
         }
 
@@ -39,11 +41,16 @@ namespace System.Resources.Tests
         [InlineData(typeof(System.Net.Http.HttpClient))] // System.Net.Http
         [InlineData(typeof(System.Text.RegularExpressions.Regex))] // System.Text.RegularExpressions
         [InlineData(typeof(System.Threading.Barrier))] // System.Threading
-        public static void TestAttributeExistence(Type type) => Assert.Equal("en-US", ChildResourceManager.GetNeutralResourcesCulture(type.Assembly).Name);
+        public static void TestAttributeExistence(Type type) =>
+            Assert.Equal(
+                "en-US",
+                ChildResourceManager.GetNeutralResourcesCulture(type.Assembly).Name
+            );
 
         public class ChildResourceManager : ResourceManager
         {
-            public static CultureInfo GetNeutralResourcesCulture(Assembly a) => ResourceManager.GetNeutralResourcesLanguage(a);
+            public static CultureInfo GetNeutralResourcesCulture(Assembly a) =>
+                ResourceManager.GetNeutralResourcesLanguage(a);
         }
     }
 }

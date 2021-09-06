@@ -20,8 +20,12 @@ namespace Microsoft.AspNetCore.Authentication.OAuth.Claims
         /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
         /// <param name="jsonKey">The top level key to look for in the json user data.</param>
         /// <param name="subKey">The second level key to look for in the json user data.</param>
-        public JsonSubKeyClaimAction(string claimType, string valueType, string jsonKey, string subKey)
-            : base(claimType, valueType, jsonKey)
+        public JsonSubKeyClaimAction(
+            string claimType,
+            string valueType,
+            string jsonKey,
+            string subKey
+        ) : base(claimType, valueType, jsonKey)
         {
             SubKey = subKey;
         }
@@ -42,11 +46,16 @@ namespace Microsoft.AspNetCore.Authentication.OAuth.Claims
         }
 
         // Get the given subProperty from a property.
-        private static string? GetValue(JsonElement userData, string propertyName, string subProperty)
-        {
-            if (userData.TryGetProperty(propertyName, out var value)
-                && value.ValueKind == JsonValueKind.Object && value.TryGetProperty(subProperty, out value))
-            {
+        private static string? GetValue(
+            JsonElement userData,
+            string propertyName,
+            string subProperty
+        ) {
+            if (
+                userData.TryGetProperty(propertyName, out var value)
+                && value.ValueKind == JsonValueKind.Object
+                && value.TryGetProperty(subProperty, out value)
+            ) {
                 return value.ToString();
             }
             return null;

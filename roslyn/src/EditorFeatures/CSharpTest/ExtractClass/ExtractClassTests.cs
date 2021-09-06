@@ -28,9 +28,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             IEnumerable<(string name, bool makeAbstract)> dialogSelection = null,
             bool sameFile = false,
             bool isClassDeclarationSelection = false,
-            TestParameters testParameters = default)
-        {
-            var service = new TestExtractClassOptionsService(dialogSelection, sameFile, isClassDeclarationSelection);
+            TestParameters testParameters = default
+        ) {
+            var service = new TestExtractClassOptionsService(
+                dialogSelection,
+                sameFile,
+                isClassDeclarationSelection
+            );
             var parametersWithOptionsService = testParameters.WithFixProviderData(service);
 
             if (expected is null)
@@ -41,16 +45,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             return TestInRegularAndScript1Async(
                 input,
                 expected,
-                parameters: parametersWithOptionsService);
+                parameters: parametersWithOptionsService
+            );
         }
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-           => new CSharpExtractClassCodeRefactoringProvider((IExtractClassOptionsService)parameters.fixProviderData);
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) =>
+            new CSharpExtractClassCodeRefactoringProvider(
+                (IExtractClassOptionsService)parameters.fixProviderData
+            );
 
         [Fact]
         public async Task TestSingleMethod()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -65,7 +76,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -89,7 +101,8 @@ class Test : MyBase
         [Fact]
         public async Task TestErrorBaseMethod()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -110,7 +123,8 @@ class Test : ErrorBase
         [Fact]
         public async Task TestMiscellaneousFiles()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -126,13 +140,17 @@ class Test
 </Workspace>";
 
             TestParameters parameters = default;
-            await TestAsync(input, testParameters: parameters.WithWorkspaceKind(WorkspaceKind.MiscellaneousFiles));
+            await TestAsync(
+                input,
+                testParameters: parameters.WithWorkspaceKind(WorkspaceKind.MiscellaneousFiles)
+            );
         }
 
         [Fact]
         public async Task TestPartialClass()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -156,7 +174,8 @@ partial class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -183,16 +202,14 @@ partial class Test
     </Project>
 </Workspace>";
 
-            await TestAsync(
-                input,
-                expected,
-                dialogSelection: MakeSelection("Method", "Method2"));
+            await TestAsync(input, expected, dialogSelection: MakeSelection("Method", "Method2"));
         }
 
         [Fact]
         public async Task TestInNamespace()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -210,7 +227,8 @@ namespace MyNamespace
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -240,7 +258,8 @@ namespace MyNamespace
         [Fact]
         public async Task TestAccessibility()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -255,7 +274,8 @@ public class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -279,7 +299,8 @@ public class Test : MyBase
         [Fact]
         public async Task TestEvent()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -293,7 +314,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -316,7 +338,8 @@ class Test : MyBase
         [Fact]
         public async Task TestProperty()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -328,7 +351,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -349,7 +373,8 @@ class Test : MyBase
         [Fact]
         public async Task TestField()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -361,7 +386,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -382,7 +408,8 @@ class Test : MyBase
         [Fact]
         public async Task TestFileHeader()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">// this is my document header
@@ -399,7 +426,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">// this is my document header
@@ -428,7 +456,8 @@ internal class MyBase
         [Fact]
         public async Task TestWithInterface()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -448,7 +477,8 @@ class Test : ITest
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -477,7 +507,8 @@ class Test : MyBase, ITest
         [ConditionalFact(AlwaysSkip = "https://github.com/dotnet/roslyn/issues/45977")]
         public async Task TestRegion()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -496,7 +527,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -521,16 +553,14 @@ class Test : MyBase
     </Project>
 </Workspace>";
 
-            await TestAsync(
-                input,
-                expected,
-                dialogSelection: MakeSelection("Method"));
+            await TestAsync(input, expected, dialogSelection: MakeSelection("Method"));
         }
 
         [Fact]
         public async Task TestMakeAbstract_SingleMethod()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -545,7 +575,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -564,16 +595,14 @@ class Test : MyBase
     </Project>
 </Workspace>";
 
-            await TestAsync(
-                input,
-                expected,
-                dialogSelection: MakeAbstractSelection("Method"));
+            await TestAsync(input, expected, dialogSelection: MakeAbstractSelection("Method"));
         }
 
         [Fact]
         public async Task TestMakeAbstract_MultipleMethods()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -591,7 +620,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -618,13 +648,15 @@ class Test : MyBase
             await TestAsync(
                 input,
                 expected,
-                dialogSelection: MakeAbstractSelection("Method", "Method2", "Method3"));
+                dialogSelection: MakeAbstractSelection("Method", "Method2", "Method3")
+            );
         }
 
         [Fact]
         public async Task TestMultipleMethods()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -641,7 +673,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -661,16 +694,14 @@ class Test : MyBase
     </Project>
 </Workspace>";
 
-            await TestAsync(
-                input,
-                expected,
-                dialogSelection: MakeSelection("Method", "Method2"));
+            await TestAsync(input, expected, dialogSelection: MakeSelection("Method", "Method2"));
         }
 
         [Fact]
         public async Task TestMultipleMethods_SomeSelected()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -687,7 +718,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -707,16 +739,14 @@ class Test : MyBase
     </Project>
 </Workspace>";
 
-            await TestAsync(
-                input,
-                expected,
-                dialogSelection: MakeSelection("Method2"));
+            await TestAsync(input, expected, dialogSelection: MakeSelection("Method2"));
         }
 
         [Fact]
         public async Task TestSelection_CompleteMethodAndComments()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -734,7 +764,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -761,7 +792,8 @@ class Test : MyBase
         [Fact]
         public async Task TestSelection_PartialMethodAndComments()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -779,7 +811,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -806,7 +839,8 @@ class Test : MyBase
         [Fact]
         public async Task TestSelection_PartialMethodAndComments2()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -824,7 +858,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -851,7 +886,8 @@ class Test : MyBase
         [Fact]
         public async Task TestSelection_PartialMethodAndComments3()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -869,7 +905,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -896,7 +933,8 @@ class Test : MyBase
         [Fact]
         public async Task TestAttributes()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -919,7 +957,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -951,7 +990,8 @@ class Test : MyBase
         [Fact]
         public async Task TestAttributes2()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -976,7 +1016,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1010,7 +1051,8 @@ class Test : MyBase
         [ConditionalFact(AlwaysSkip = "https://github.com/dotnet/roslyn/issues/45987")]
         public async Task TestAttributes3()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1035,7 +1077,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1068,7 +1111,8 @@ class Test : MyBase
         [ConditionalFact(AlwaysSkip = "https://github.com/dotnet/roslyn/issues/45987")]
         public async Task TestAttributes4()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1093,7 +1137,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1126,7 +1171,8 @@ class Test : MyBase
         [Fact]
         public async Task TestSameFile()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1139,7 +1185,8 @@ class Test
         </Document>
     </Project>
 </Workspace>";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1162,7 +1209,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1177,7 +1225,8 @@ class Test[||]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1201,7 +1250,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration2()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1216,7 +1266,8 @@ class [||]Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1240,7 +1291,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration3()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1255,7 +1307,8 @@ class Test : MyBase
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1279,7 +1332,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration4()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1294,7 +1348,8 @@ class[||] Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1318,7 +1373,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration_Comment()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1338,7 +1394,8 @@ class Test|]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1367,7 +1424,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration_Comment2()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1387,7 +1445,8 @@ class Test|]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1416,7 +1475,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration_Comment3()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1436,7 +1496,8 @@ class|] Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1465,7 +1526,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration_Attribute()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1485,7 +1547,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1515,7 +1578,8 @@ internal class MyBase
         [Fact]
         public async Task TestClassDeclaration_SelectWithMembers()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1530,7 +1594,8 @@ internal class MyBase
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1554,7 +1619,8 @@ class Test : MyBase
         [Fact]
         public async Task TestClassDeclaration_SelectWithMembers2()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1569,7 +1635,8 @@ class Test : MyBase
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document FilePath=""Test.cs"">
@@ -1590,11 +1657,13 @@ class Test : MyBase
             await TestAsync(input, expected, isClassDeclarationSelection: true);
         }
 
-        private static IEnumerable<(string name, bool makeAbstract)> MakeAbstractSelection(params string[] memberNames)
-            => memberNames.Select(m => (m, true));
+        private static IEnumerable<(string name, bool makeAbstract)> MakeAbstractSelection(
+            params string[] memberNames
+        ) => memberNames.Select(m => (m, true));
 
-        private static IEnumerable<(string name, bool makeAbstract)> MakeSelection(params string[] memberNames)
-           => memberNames.Select(m => (m, false));
+        private static IEnumerable<(string name, bool makeAbstract)> MakeSelection(
+            params string[] memberNames
+        ) => memberNames.Select(m => (m, false));
 
         private class TestExtractClassOptionsService : IExtractClassOptionsService
         {
@@ -1602,8 +1671,11 @@ class Test : MyBase
             private readonly bool _sameFile;
             private readonly bool isClassDeclarationSelection;
 
-            public TestExtractClassOptionsService(IEnumerable<(string name, bool makeAbstract)> dialogSelection = null, bool sameFile = false, bool isClassDeclarationSelection = false)
-            {
+            public TestExtractClassOptionsService(
+                IEnumerable<(string name, bool makeAbstract)> dialogSelection = null,
+                bool sameFile = false,
+                bool isClassDeclarationSelection = false
+            ) {
                 _dialogSelection = dialogSelection;
                 _sameFile = sameFile;
                 this.isClassDeclarationSelection = isClassDeclarationSelection;
@@ -1612,9 +1684,13 @@ class Test : MyBase
             public string FileName { get; set; } = "MyBase.cs";
             public string BaseName { get; set; } = "MyBase";
 
-            public Task<ExtractClassOptions> GetExtractClassOptionsAsync(Document document, INamedTypeSymbol originalSymbol, ISymbol selectedMember)
-            {
-                var availableMembers = originalSymbol.GetMembers().Where(member => MemberAndDestinationValidator.IsMemberValid(member));
+            public Task<ExtractClassOptions> GetExtractClassOptionsAsync(
+                Document document,
+                INamedTypeSymbol originalSymbol,
+                ISymbol selectedMember
+            ) {
+                var availableMembers = originalSymbol.GetMembers()
+                    .Where(member => MemberAndDestinationValidator.IsMemberValid(member));
 
                 IEnumerable<(ISymbol member, bool makeAbstract)> selections;
 
@@ -1623,7 +1699,9 @@ class Test : MyBase
                     if (selectedMember is null)
                     {
                         Assert.True(isClassDeclarationSelection);
-                        selections = availableMembers.Select(member => (member, makeAbstract: false));
+                        selections = availableMembers.Select(
+                            member => (member, makeAbstract: false)
+                        );
                     }
                     else
                     {
@@ -1633,16 +1711,25 @@ class Test : MyBase
                 }
                 else
                 {
-                    selections = _dialogSelection.Select(selection => (member: availableMembers.Single(symbol => symbol.Name == selection.name), selection.makeAbstract));
+                    selections = _dialogSelection.Select(
+                        selection =>
+                            (
+                                member: availableMembers.Single(
+                                    symbol => symbol.Name == selection.name
+                                ),
+                                selection.makeAbstract
+                            )
+                    );
                 }
 
-                var memberAnalysis = selections.Select(s =>
-                    new ExtractClassMemberAnalysisResult(
-                        s.member,
-                        s.makeAbstract))
+                var memberAnalysis = selections.Select(
+                        s => new ExtractClassMemberAnalysisResult(s.member, s.makeAbstract)
+                    )
                     .ToImmutableArray();
 
-                return Task.FromResult(new ExtractClassOptions(FileName, BaseName, _sameFile, memberAnalysis));
+                return Task.FromResult(
+                    new ExtractClassOptions(FileName, BaseName, _sameFile, memberAnalysis)
+                );
             }
         }
     }

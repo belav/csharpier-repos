@@ -13,28 +13,29 @@ namespace Microsoft.CodeAnalysis
     public sealed partial class DesktopAssemblyIdentityComparer : AssemblyIdentityComparer
     {
         // Portability:
-        //   If a reference or definition identity is strong, not retargetable, and portable (i.e. one of a few names hard-coded in Fusion) 
-        //   and the portability for its PublicKeyToken is not disabled in app.config file then the identity is replaced by a different identity 
+        //   If a reference or definition identity is strong, not retargetable, and portable (i.e. one of a few names hard-coded in Fusion)
+        //   and the portability for its PublicKeyToken is not disabled in app.config file then the identity is replaced by a different identity
         //   before the match is performed.
         //
         //   Portable identities:
         //    - System, PKT=7cec85d7bea7798e, Version=2.0.0.0-5.9.0.0                            -> System, PKT=b77a5c561934e089, Version=<current framework version>
         //    - System.Core, PKT=7cec85d7bea7798e, Version=2.0.0.0-5.9.0.0                       -> System.Core, PKT=b77a5c561934e089, Version=<current framework version>
-        //    - System.ComponentModel.Composition, PKT=31bf3856ad364e35, Version=2.0.0.0-5.9.0.0 -> System.ComponentModel.Composition, PKT=b77a5c561934e089, Version=<current framework version> 
+        //    - System.ComponentModel.Composition, PKT=31bf3856ad364e35, Version=2.0.0.0-5.9.0.0 -> System.ComponentModel.Composition, PKT=b77a5c561934e089, Version=<current framework version>
         //    - Microsoft.VisualBasic, PKT=31bf3856ad364e35, Version=2.0.0.0-5.9.0.0             -> Microsoft.VisualBasic, PKT=b03f5f7f11d50a3a, Version=10.0.0.0
         //
         // Retargetability:
         //   If the reference identity specifies property Retargetable=Yes the identity is looked up in a hard-coded Fusion table.
         //   The table maps it to an identity that is used for identity matching.
         //   Note: Retargeting may change name, version and public key token of the identity.
-        //   
+        //
         // Version unification:
         //   FX identities (hard-coded list in Fusion):
         //     FX references are unified regardless of the isUnified flags, returns EquivalentFxUnified.
         //   Non-FX identities:
         //     if (isUnified1 && version1 > version2 || isUnified2 && version1 < version2) return EquivalentUnified.
 
-        public static new DesktopAssemblyIdentityComparer Default { get; } = new DesktopAssemblyIdentityComparer(default(AssemblyPortabilityPolicy));
+        public static new DesktopAssemblyIdentityComparer Default { get; } =
+            new DesktopAssemblyIdentityComparer(default(AssemblyPortabilityPolicy));
 
         internal readonly AssemblyPortabilityPolicy policy;
 
@@ -66,27 +67,27 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         public static DesktopAssemblyIdentityComparer LoadFromXml(Stream input)
         {
-            return new DesktopAssemblyIdentityComparer(AssemblyPortabilityPolicy.LoadFromXml(input));
+            return new DesktopAssemblyIdentityComparer(
+                AssemblyPortabilityPolicy.LoadFromXml(input)
+            );
         }
 
         internal AssemblyPortabilityPolicy PortabilityPolicy
         {
-            get
-            {
-                return this.policy;
-            }
+            get { return this.policy; }
         }
 
         internal override bool ApplyUnificationPolicies(
             ref AssemblyIdentity reference,
             ref AssemblyIdentity definition,
             AssemblyIdentityParts referenceParts,
-            out bool isDefinitionFxAssembly)
-        {
-            if (reference.ContentType == AssemblyContentType.Default &&
-                SimpleNameComparer.Equals(reference.Name, definition.Name) &&
-                SimpleNameComparer.Equals(reference.Name, "mscorlib"))
-            {
+            out bool isDefinitionFxAssembly
+        ) {
+            if (
+                reference.ContentType == AssemblyContentType.Default
+                && SimpleNameComparer.Equals(reference.Name, definition.Name)
+                && SimpleNameComparer.Equals(reference.Name, "mscorlib")
+            ) {
                 isDefinitionFxAssembly = true;
                 reference = definition;
                 return true;
@@ -117,10 +118,11 @@ namespace Microsoft.CodeAnalysis
                     return false;
                 }
 
-                // Reference needs to be retargeted before comparison, 
+                // Reference needs to be retargeted before comparison,
                 // unless it's optionally retargetable and we already match the PK
-                bool skipRetargeting = IsOptionallyRetargetableAssembly(reference) &&
-                                       AssemblyIdentity.KeysEqual(reference, definition);
+                bool skipRetargeting =
+                    IsOptionallyRetargetableAssembly(reference)
+                    && AssemblyIdentity.KeysEqual(reference, definition);
 
                 if (!skipRetargeting)
                 {
@@ -157,7 +159,7 @@ namespace Microsoft.CodeAnalysis
             // Note:
             // FrameworkAssemblyTable::IsFrameworkAssembly returns false if culture is not neutral.
             // However its caller doesn't initialize the culture and hence the culture is ignored.
-            //   PrepQueryMatchData(pName, wzName, &dwSizeName, wzVersion, &dwSizeVer, wzPublicKeyToken, &dwSizePKT, NULL, NULL, NULL);. 
+            //   PrepQueryMatchData(pName, wzName, &dwSizeName, wzVersion, &dwSizeVer, wzPublicKeyToken, &dwSizePKT, NULL, NULL, NULL);.
 
             if (identity.ContentType != AssemblyContentType.Default)
             {
@@ -165,9 +167,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             FrameworkAssemblyDictionary.Value value;
-            if (!s_arFxPolicy.TryGetValue(identity.Name, out value) ||
-                !value.PublicKeyToken.SequenceEqual(identity.PublicKeyToken))
-            {
+            if (
+                !s_arFxPolicy.TryGetValue(identity.Name, out value)
+                || !value.PublicKeyToken.SequenceEqual(identity.PublicKeyToken)
+            ) {
                 return false;
             }
 
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis
 
         private static bool IsRetargetableAssembly(AssemblyIdentity identity)
         {
-            bool retargetable, portable;
+            bool retargetable,
+                portable;
             IsRetargetableAssembly(identity, out retargetable, out portable);
             return retargetable;
         }
@@ -191,22 +195,26 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            bool retargetable, portable;
+            bool retargetable,
+                portable;
             IsRetargetableAssembly(identity, out retargetable, out portable);
             return retargetable && portable;
         }
 
         private static bool IsTriviallyNonRetargetable(AssemblyIdentity identity)
         {
-            // Short-circuit zero-version/non-neutral culture/weak name, 
+            // Short-circuit zero-version/non-neutral culture/weak name,
             // which will never match retargeted identities.
             return identity.CultureName.Length != 0
                 || identity.ContentType != AssemblyContentType.Default
                 || !identity.IsStrongName;
         }
 
-        private static void IsRetargetableAssembly(AssemblyIdentity identity, out bool retargetable, out bool portable)
-        {
+        private static void IsRetargetableAssembly(
+            AssemblyIdentity identity,
+            out bool retargetable,
+            out bool portable
+        ) {
             retargetable = portable = false;
 
             if (IsTriviallyNonRetargetable(identity))
@@ -236,7 +244,8 @@ namespace Microsoft.CodeAnalysis
                     value.NewPublicKeyToken,
                     hasPublicKey: false,
                     isRetargetable: identity.IsRetargetable,
-                    contentType: AssemblyContentType.Default);
+                    contentType: AssemblyContentType.Default
+                );
             }
 
             return identity;
@@ -244,8 +253,11 @@ namespace Microsoft.CodeAnalysis
 
         private AssemblyIdentity Port(AssemblyIdentity identity)
         {
-            if (identity.IsRetargetable || !identity.IsStrongName || identity.ContentType != AssemblyContentType.Default)
-            {
+            if (
+                identity.IsRetargetable
+                || !identity.IsStrongName
+                || identity.ContentType != AssemblyContentType.Default
+            ) {
                 return identity;
             }
 
@@ -253,15 +265,18 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<byte> newPublicKeyToken = default;
 
             var version = (AssemblyVersion)identity.Version;
-            if (version >= new AssemblyVersion(2, 0, 0, 0) && version <= new AssemblyVersion(5, 9, 0, 0))
-            {
+            if (
+                version >= new AssemblyVersion(2, 0, 0, 0)
+                && version <= new AssemblyVersion(5, 9, 0, 0)
+            ) {
                 if (identity.PublicKeyToken.SequenceEqual(s_SILVERLIGHT_PLATFORM_PUBLICKEY_STR_L))
                 {
                     if (!policy.SuppressSilverlightPlatformAssembliesPortability)
                     {
-                        if (SimpleNameComparer.Equals(identity.Name, "System") ||
-                            SimpleNameComparer.Equals(identity.Name, "System.Core"))
-                        {
+                        if (
+                            SimpleNameComparer.Equals(identity.Name, "System")
+                            || SimpleNameComparer.Equals(identity.Name, "System.Core")
+                        ) {
                             newVersion = (Version)s_VER_ASSEMBLYVERSION_STR_L;
                             newPublicKeyToken = s_ECMA_PUBLICKEY_STR_L;
                         }
@@ -277,8 +292,12 @@ namespace Microsoft.CodeAnalysis
                             newPublicKeyToken = s_MICROSOFT_PUBLICKEY_STR_L;
                         }
 
-                        if (SimpleNameComparer.Equals(identity.Name, "System.ComponentModel.Composition"))
-                        {
+                        if (
+                            SimpleNameComparer.Equals(
+                                identity.Name,
+                                "System.ComponentModel.Composition"
+                            )
+                        ) {
                             newVersion = (Version)s_VER_ASSEMBLYVERSION_STR_L;
                             newPublicKeyToken = s_ECMA_PUBLICKEY_STR_L;
                         }
@@ -298,7 +317,8 @@ namespace Microsoft.CodeAnalysis
                 newPublicKeyToken,
                 hasPublicKey: false,
                 isRetargetable: identity.IsRetargetable,
-                contentType: AssemblyContentType.Default);
+                contentType: AssemblyContentType.Default
+            );
         }
     }
 }

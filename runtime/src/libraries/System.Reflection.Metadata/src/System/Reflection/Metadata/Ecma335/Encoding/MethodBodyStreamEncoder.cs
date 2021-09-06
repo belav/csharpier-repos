@@ -48,8 +48,17 @@ namespace System.Reflection.Metadata.Ecma335
             int exceptionRegionCount,
             bool hasSmallExceptionRegions,
             StandaloneSignatureHandle localVariablesSignature,
-            MethodBodyAttributes attributes)
-            => AddMethodBody(codeSize, maxStack, exceptionRegionCount, hasSmallExceptionRegions, localVariablesSignature, attributes, hasDynamicStackAllocation: false);
+            MethodBodyAttributes attributes
+        ) =>
+            AddMethodBody(
+                codeSize,
+                maxStack,
+                exceptionRegionCount,
+                hasSmallExceptionRegions,
+                localVariablesSignature,
+                attributes,
+                hasDynamicStackAllocation: false
+            );
 
         /// <summary>
         /// Encodes a method body and adds it to the method body stream.
@@ -72,8 +81,8 @@ namespace System.Reflection.Metadata.Ecma335
             bool hasSmallExceptionRegions = true,
             StandaloneSignatureHandle localVariablesSignature = default,
             MethodBodyAttributes attributes = MethodBodyAttributes.InitLocals,
-            bool hasDynamicStackAllocation = false)
-        {
+            bool hasDynamicStackAllocation = false
+        ) {
             if (codeSize < 0)
             {
                 Throw.ArgumentOutOfRange(nameof(codeSize));
@@ -89,11 +98,24 @@ namespace System.Reflection.Metadata.Ecma335
                 Throw.ArgumentOutOfRange(nameof(exceptionRegionCount));
             }
 
-            int bodyOffset = SerializeHeader(codeSize, (ushort)maxStack, exceptionRegionCount, attributes, localVariablesSignature, hasDynamicStackAllocation);
+            int bodyOffset = SerializeHeader(
+                codeSize,
+                (ushort)maxStack,
+                exceptionRegionCount,
+                attributes,
+                localVariablesSignature,
+                hasDynamicStackAllocation
+            );
             var instructions = Builder.ReserveBytes(codeSize);
 
-            var regionEncoder = (exceptionRegionCount > 0) ?
-                ExceptionRegionEncoder.SerializeTableHeader(Builder, exceptionRegionCount, hasSmallExceptionRegions) : default;
+            var regionEncoder =
+                (exceptionRegionCount > 0)
+                    ? ExceptionRegionEncoder.SerializeTableHeader(
+                          Builder,
+                          exceptionRegionCount,
+                          hasSmallExceptionRegions
+                      )
+                    : default;
 
             return new MethodBody(bodyOffset, instructions, regionEncoder);
         }
@@ -115,8 +137,11 @@ namespace System.Reflection.Metadata.Ecma335
             /// </summary>
             public ExceptionRegionEncoder ExceptionRegions { get; }
 
-            internal MethodBody(int bodyOffset, Blob instructions, ExceptionRegionEncoder exceptionRegions)
-            {
+            internal MethodBody(
+                int bodyOffset,
+                Blob instructions,
+                ExceptionRegionEncoder exceptionRegions
+            ) {
                 Offset = bodyOffset;
                 Instructions = instructions;
                 ExceptionRegions = exceptionRegions;
@@ -141,8 +166,15 @@ namespace System.Reflection.Metadata.Ecma335
             InstructionEncoder instructionEncoder,
             int maxStack,
             StandaloneSignatureHandle localVariablesSignature,
-            MethodBodyAttributes attributes)
-            => AddMethodBody(instructionEncoder, maxStack, localVariablesSignature, attributes, hasDynamicStackAllocation: false);
+            MethodBodyAttributes attributes
+        ) =>
+            AddMethodBody(
+                instructionEncoder,
+                maxStack,
+                localVariablesSignature,
+                attributes,
+                hasDynamicStackAllocation: false
+            );
 
         /// <summary>
         /// Encodes a method body and adds it to the method body stream.
@@ -165,8 +197,8 @@ namespace System.Reflection.Metadata.Ecma335
             int maxStack = 8,
             StandaloneSignatureHandle localVariablesSignature = default,
             MethodBodyAttributes attributes = MethodBodyAttributes.InitLocals,
-            bool hasDynamicStackAllocation = false)
-        {
+            bool hasDynamicStackAllocation = false
+        ) {
             if (unchecked((uint)maxStack) > ushort.MaxValue)
             {
                 Throw.ArgumentOutOfRange(nameof(maxStack));
@@ -202,7 +234,14 @@ namespace System.Reflection.Metadata.Ecma335
             // and a perf regression to do so. Instead we rely on the caller to let us know if there is a localloc
             // in the code they emitted.
 
-            int bodyOffset = SerializeHeader(codeBuilder.Count, (ushort)maxStack, exceptionRegionCount, attributes, localVariablesSignature, hasDynamicStackAllocation);
+            int bodyOffset = SerializeHeader(
+                codeBuilder.Count,
+                (ushort)maxStack,
+                exceptionRegionCount,
+                attributes,
+                localVariablesSignature,
+                hasDynamicStackAllocation
+            );
 
             if (flowBuilder?.BranchCount > 0)
             {
@@ -224,8 +263,8 @@ namespace System.Reflection.Metadata.Ecma335
             int exceptionRegionCount,
             MethodBodyAttributes attributes,
             StandaloneSignatureHandle localVariablesSignature,
-            bool hasDynamicStackAllocation)
-        {
+            bool hasDynamicStackAllocation
+        ) {
             const int TinyFormat = 2;
             const int FatFormat = 3;
             const int MoreSections = 8;
@@ -233,10 +272,12 @@ namespace System.Reflection.Metadata.Ecma335
 
             bool initLocals = (attributes & MethodBodyAttributes.InitLocals) != 0;
 
-            bool isTiny = codeSize < 64 &&
-                          maxStack <= 8 &&
-                          localVariablesSignature.IsNil && (!hasDynamicStackAllocation || !initLocals) &&
-                          exceptionRegionCount == 0;
+            bool isTiny =
+                codeSize < 64
+                && maxStack <= 8
+                && localVariablesSignature.IsNil
+                && (!hasDynamicStackAllocation || !initLocals)
+                && exceptionRegionCount == 0;
 
             int offset;
             if (isTiny)
@@ -264,7 +305,11 @@ namespace System.Reflection.Metadata.Ecma335
                 Builder.WriteUInt16((ushort)((int)attributes | flags));
                 Builder.WriteUInt16(maxStack);
                 Builder.WriteInt32(codeSize);
-                Builder.WriteInt32(localVariablesSignature.IsNil ? 0 : MetadataTokens.GetToken(localVariablesSignature));
+                Builder.WriteInt32(
+                    localVariablesSignature.IsNil
+                        ? 0
+                        : MetadataTokens.GetToken(localVariablesSignature)
+                );
             }
 
             return offset;

@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return MakeLabeledStatement(node, rewrittenBody);
         }
 
-        private BoundStatement MakeLabeledStatement(BoundLabeledStatement node, BoundStatement? rewrittenBody)
-        {
+        private BoundStatement MakeLabeledStatement(
+            BoundLabeledStatement node,
+            BoundStatement? rewrittenBody
+        ) {
             BoundStatement labelStatement = new BoundLabelStatement(node.Syntax, node.Label);
 
             if (this.Instrument)

@@ -13,22 +13,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider, Shared]
     [ProvidesMethod(Methods.TextDocumentRangeFormattingName)]
-    internal class FormatDocumentRangeHandler : AbstractFormatDocumentHandlerBase<DocumentRangeFormattingParams, TextEdit[]>
+    internal class FormatDocumentRangeHandler
+        : AbstractFormatDocumentHandlerBase<DocumentRangeFormattingParams, TextEdit[]>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentRangeHandler()
-        {
-        }
+        public FormatDocumentRangeHandler() { }
 
         public override string Method => Methods.TextDocumentRangeFormattingName;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentRangeFormattingParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            DocumentRangeFormattingParams request
+        ) => request.TextDocument;
 
         public override Task<TextEdit[]> HandleRequestAsync(
             DocumentRangeFormattingParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
-            => GetTextEditsAsync(context, request.Options, cancellationToken, range: request.Range);
+            CancellationToken cancellationToken
+        ) => GetTextEditsAsync(context, request.Options, cancellationToken, range: request.Range);
     }
 }

@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         protected override IEnumerableValueProvider GetEnumerableValueProvider(
             BindingSource bindingSource,
             Dictionary<string, StringValues> values,
-            CultureInfo culture)
-        {
+            CultureInfo culture
+        ) {
             return new JQueryFormValueProvider(bindingSource, values, culture);
         }
 
@@ -23,7 +23,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             // Arrange
             var dictionary = new Dictionary<string, StringValues>();
-            var provider = new JQueryFormValueProvider(BindingSource.Form, dictionary, CultureInfo.CurrentCulture);
+            var provider = new JQueryFormValueProvider(
+                BindingSource.Form,
+                dictionary,
+                CultureInfo.CurrentCulture
+            );
 
             // Act
             var result = provider.Filter();
@@ -40,7 +44,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 { string.Empty, "some-value" },
             };
-            var valueProvider = GetEnumerableValueProvider(BindingSource.Query, store, culture: null);
+            var valueProvider = GetEnumerableValueProvider(
+                BindingSource.Query,
+                store,
+                culture: null
+            );
 
             // Act
             var result = valueProvider.GetValue(string.Empty);

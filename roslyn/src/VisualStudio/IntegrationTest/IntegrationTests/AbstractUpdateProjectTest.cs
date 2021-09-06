@@ -17,40 +17,51 @@ namespace Roslyn.VisualStudio.IntegrationTests
     public abstract class AbstractUpdateProjectTest : AbstractIntegrationTest
     {
         protected AbstractUpdateProjectTest(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         protected XElement GetProjectFileElement(ProjectUtils.Project project)
         {
             // Save the project file.
             VisualStudio.SolutionExplorer.SaveAll();
 
-            var projectFileContent = VisualStudio.SolutionExplorer.GetFileContents(project, Path.GetFileName(project.RelativePath));
+            var projectFileContent = VisualStudio.SolutionExplorer.GetFileContents(
+                project,
+                Path.GetFileName(project.RelativePath)
+            );
             return XElement.Parse(projectFileContent);
         }
 
-        protected static void VerifyPropertyOutsideConfiguration(XElement projectElement, string name, string value)
-        {
+        protected static void VerifyPropertyOutsideConfiguration(
+            XElement projectElement,
+            string name,
+            string value
+        ) {
             Assert.Contains(
                 projectElement.Elements().Where(IsUnconditionalPropertyGroup),
-                group => GetPropertyValue(group, name) == value);
+                group => GetPropertyValue(group, name) == value
+            );
 
-            static bool IsUnconditionalPropertyGroup(XElement element)
-                => element.Name.LocalName == "PropertyGroup" && !element.Attributes().Any(a => a.Name.LocalName == "Condition");
+            static bool IsUnconditionalPropertyGroup(XElement element) =>
+                element.Name.LocalName == "PropertyGroup"
+                && !element.Attributes().Any(a => a.Name.LocalName == "Condition");
         }
 
-        protected static void VerifyPropertyInEachConfiguration(XElement projectElement, string name, string value)
-        {
+        protected static void VerifyPropertyInEachConfiguration(
+            XElement projectElement,
+            string name,
+            string value
+        ) {
             Assert.All(
                 projectElement.Elements().Where(IsConditionalPropertyGroup),
-                group => Assert.Equal(value, GetPropertyValue(group, name)));
+                group => Assert.Equal(value, GetPropertyValue(group, name))
+            );
 
-            static bool IsConditionalPropertyGroup(XElement element)
-                => element.Name.LocalName == "PropertyGroup" && element.Attributes().Any(a => a.Name.LocalName == "Condition");
+            static bool IsConditionalPropertyGroup(XElement element) =>
+                element.Name.LocalName == "PropertyGroup"
+                && element.Attributes().Any(a => a.Name.LocalName == "Condition");
         }
 
-        private static string GetPropertyValue(XElement propertyGroup, string propertyName)
-            => propertyGroup.Elements().SingleOrDefault(e => e.Name.LocalName == propertyName)?.Value;
+        private static string GetPropertyValue(XElement propertyGroup, string propertyName) =>
+            propertyGroup.Elements().SingleOrDefault(e => e.Name.LocalName == propertyName)?.Value;
     }
 }

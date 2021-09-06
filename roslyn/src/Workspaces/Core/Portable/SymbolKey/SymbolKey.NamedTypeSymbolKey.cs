@@ -28,44 +28,64 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
                 var metadataName = reader.ReadString()!;
-                var containingSymbolResolution = reader.ReadSymbolKey(out var containingSymbolFailureReason);
+                var containingSymbolResolution = reader.ReadSymbolKey(
+                    out var containingSymbolFailureReason
+                );
                 var arity = reader.ReadInteger();
                 var isUnboundGenericType = reader.ReadBoolean();
-                using var typeArguments = reader.ReadSymbolKeyArray<ITypeSymbol>(out var typeArgumentsFailureReason);
+                using var typeArguments = reader.ReadSymbolKeyArray<ITypeSymbol>(
+                    out var typeArgumentsFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(NamedTypeSymbolKey)} {nameof(containingSymbolFailureReason)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(NamedTypeSymbolKey)} {nameof(containingSymbolFailureReason)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
                 if (typeArgumentsFailureReason != null)
                 {
-                    failureReason = $"({nameof(NamedTypeSymbolKey)} {nameof(typeArguments)} failed -> {typeArgumentsFailureReason})";
+                    failureReason =
+                        $"({nameof(NamedTypeSymbolKey)} {nameof(typeArguments)} failed -> {typeArgumentsFailureReason})";
                     return default;
                 }
 
                 if (typeArguments.IsDefault)
                 {
-                    failureReason = $"({nameof(NamedTypeSymbolKey)} {nameof(typeArguments)} failed)";
+                    failureReason =
+                        $"({nameof(NamedTypeSymbolKey)} {nameof(typeArguments)} failed)";
                     return default;
                 }
 
-                var typeArgumentArray = typeArguments.Count == 0
-                    ? Array.Empty<ITypeSymbol>()
-                    : typeArguments.Builder.ToArray();
+                var typeArgumentArray =
+                    typeArguments.Count == 0
+                        ? Array.Empty<ITypeSymbol>()
+                        : typeArguments.Builder.ToArray();
                 using var result = PooledArrayBuilder<INamedTypeSymbol>.GetInstance();
-                foreach (var nsOrType in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>())
-                {
+                foreach (
+                    var nsOrType in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>()
+                ) {
                     Resolve(
-                        result, nsOrType, metadataName, arity,
-                        isUnboundGenericType, typeArgumentArray);
+                        result,
+                        nsOrType,
+                        metadataName,
+                        arity,
+                        isUnboundGenericType,
+                        typeArgumentArray
+                    );
                 }
 
-                return CreateResolution(result, $"({nameof(NamedTypeSymbolKey)} failed)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(NamedTypeSymbolKey)} failed)",
+                    out failureReason
+                );
             }
 
             private static void Resolve(
@@ -74,12 +94,15 @@ namespace Microsoft.CodeAnalysis
                 string metadataName,
                 int arity,
                 bool isUnboundGenericType,
-                ITypeSymbol[] typeArguments)
-            {
+                ITypeSymbol[] typeArguments
+            ) {
                 foreach (var type in container.GetTypeMembers(GetName(metadataName), arity))
                 {
-                    var currentType = typeArguments.Length > 0 ? type.Construct(typeArguments) : type;
-                    currentType = isUnboundGenericType ? currentType.ConstructUnboundGenericType() : currentType;
+                    var currentType =
+                        typeArguments.Length > 0 ? type.Construct(typeArguments) : type;
+                    currentType = isUnboundGenericType
+                        ? currentType.ConstructUnboundGenericType()
+                        : currentType;
 
                     result.AddIfNotNull(currentType);
                 }

@@ -10,28 +10,20 @@ namespace FormatterWebSite.Controllers
         [HttpGet]
         public Employee EmployeeInfo()
         {
-            return new Employee()
-            {
-                Id = 10,
-                Name = "John"
-            };
+            return new Employee() { Id = 10, Name = "John" };
         }
 
         [HttpGet]
         [Produces("application/xml")]
         public Employee EmployeeInfoWithProduces()
         {
-            return new Employee()
-            {
-                Id = 20,
-                Name = "Mike"
-            };
+            return new Employee() { Id = 20, Name = "Mike" };
         }
 
         [HttpPost]
-        public IActionResult CreateEmployee([FromBody]Employee employee)
+        public IActionResult CreateEmployee([FromBody] Employee employee)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }

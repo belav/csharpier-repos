@@ -9,19 +9,35 @@ using System.Reflection.Emit;
 
 namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
-    internal sealed class ILEmitResolverBuilder : CallSiteVisitor<ILEmitResolverBuilderContext, object>
+    internal sealed class ILEmitResolverBuilder
+        : CallSiteVisitor<ILEmitResolverBuilderContext, object>
     {
-        private static readonly MethodInfo ResolvedServicesGetter = typeof(ServiceProviderEngineScope).GetProperty(
-            nameof(ServiceProviderEngineScope.ResolvedServices), BindingFlags.Instance | BindingFlags.NonPublic).GetMethod;
+        private static readonly MethodInfo ResolvedServicesGetter =
+            typeof(ServiceProviderEngineScope).GetProperty(
+                nameof(ServiceProviderEngineScope.ResolvedServices),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            ).GetMethod;
 
-        private static readonly MethodInfo ScopeLockGetter = typeof(ServiceProviderEngineScope).GetProperty(
-            nameof(ServiceProviderEngineScope.Sync), BindingFlags.Instance | BindingFlags.NonPublic).GetMethod;
+        private static readonly MethodInfo ScopeLockGetter =
+            typeof(ServiceProviderEngineScope).GetProperty(
+                nameof(ServiceProviderEngineScope.Sync),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            ).GetMethod;
 
-        private static readonly FieldInfo FactoriesField = typeof(ILEmitResolverBuilderRuntimeContext).GetField(nameof(ILEmitResolverBuilderRuntimeContext.Factories));
-        private static readonly FieldInfo ConstantsField = typeof(ILEmitResolverBuilderRuntimeContext).GetField(nameof(ILEmitResolverBuilderRuntimeContext.Constants));
-        private static readonly MethodInfo GetTypeFromHandleMethod = typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle));
+        private static readonly FieldInfo FactoriesField =
+            typeof(ILEmitResolverBuilderRuntimeContext).GetField(
+                nameof(ILEmitResolverBuilderRuntimeContext.Factories)
+            );
+        private static readonly FieldInfo ConstantsField =
+            typeof(ILEmitResolverBuilderRuntimeContext).GetField(
+                nameof(ILEmitResolverBuilderRuntimeContext.Constants)
+            );
+        private static readonly MethodInfo GetTypeFromHandleMethod = typeof(Type).GetMethod(
+            nameof(Type.GetTypeFromHandle)
+        );
 
-        private static readonly ConstructorInfo CacheKeyCtor = typeof(ServiceCacheKey).GetConstructors()[0];
+        private static readonly ConstructorInfo CacheKeyCtor =
+            typeof(ServiceCacheKey).GetConstructors()[0];
 
         private sealed class ILEmitResolverBuilderRuntimeContext
         {
@@ -48,8 +64,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private readonly Func<ServiceCacheKey, ServiceCallSite, GeneratedMethod> _buildTypeDelegate;
 
-        public ILEmitResolverBuilder(CallSiteRuntimeResolver runtimeResolver, IServiceScopeFactory serviceScopeFactory, ServiceProviderEngineScope rootScope) :
-            base()
+        public ILEmitResolverBuilder(
+            CallSiteRuntimeResolver runtimeResolver,
+            IServiceScopeFactory serviceScopeFactory,
+            ServiceProviderEngineScope rootScope
+        ) : base()
         {
             if (runtimeResolver == null)
             {
@@ -80,9 +99,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             if (callSite.Cache.Location == CallSiteResultCacheLocation.Scope)
             {
 #if NETSTANDARD2_1
-                return _scopeResolverCache.GetOrAdd(callSite.Cache.Key, _buildTypeDelegate, callSite);
+                return _scopeResolverCache.GetOrAdd(
+                    callSite.Cache.Key,
+                    _buildTypeDelegate,
+                    callSite
+                );
 #else
-                return _scopeResolverCache.GetOrAdd(callSite.Cache.Key, key => _buildTypeDelegate(key, callSite));
+                return _scopeResolverCache.GetOrAdd(
+                    callSite.Cache.Key,
+                    key => _buildTypeDelegate(key, callSite)
+                );
 #endif
             }
 
@@ -92,47 +118,76 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private GeneratedMethod BuildTypeNoCache(ServiceCallSite callSite)
         {
             // We need to skip visibility checks because services/constructors might be private
-            var dynamicMethod = new DynamicMethod("ResolveService",
+            var dynamicMethod = new DynamicMethod(
+                "ResolveService",
                 attributes: MethodAttributes.Public | MethodAttributes.Static,
                 callingConvention: CallingConventions.Standard,
                 returnType: typeof(object),
-                parameterTypes: new[] { typeof(ILEmitResolverBuilderRuntimeContext), typeof(ServiceProviderEngineScope) },
+                parameterTypes: new[]
+                {
+                    typeof(ILEmitResolverBuilderRuntimeContext),
+                    typeof(ServiceProviderEngineScope)
+                },
                 owner: GetType(),
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
-            ILEmitCallSiteAnalysisResult info = ILEmitCallSiteAnalyzer.Instance.CollectGenerationInfo(callSite);
+            ILEmitCallSiteAnalysisResult info =
+                ILEmitCallSiteAnalyzer.Instance.CollectGenerationInfo(callSite);
             ILGenerator ilGenerator = dynamicMethod.GetILGenerator(info.Size);
-            ILEmitResolverBuilderRuntimeContext runtimeContext = GenerateMethodBody(callSite, ilGenerator);
+            ILEmitResolverBuilderRuntimeContext runtimeContext = GenerateMethodBody(
+                callSite,
+                ilGenerator
+            );
 
 #if SAVE_ASSEMBLIES
             var assemblyName = "Test" + DateTime.Now.Ticks;
 
             var fileName = "Test" + DateTime.Now.Ticks;
-            var assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.RunAndSave);
-            var module = assembly.DefineDynamicModule(assemblyName, assemblyName+".dll");
+            var assembly = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName(assemblyName),
+                AssemblyBuilderAccess.RunAndSave
+            );
+            var module = assembly.DefineDynamicModule(assemblyName, assemblyName + ".dll");
             var type = module.DefineType("Resolver");
 
             var method = type.DefineMethod(
-                "ResolveService", MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, typeof(object),
-                new[] { typeof(ILEmitResolverBuilderRuntimeContext), typeof(ServiceProviderEngineScope) });
+                "ResolveService",
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                typeof(object),
+                new[]
+                {
+                    typeof(ILEmitResolverBuilderRuntimeContext),
+                    typeof(ServiceProviderEngineScope)
+                }
+            );
 
             GenerateMethodBody(callSite, method.GetILGenerator(), info);
             type.CreateTypeInfo();
             assembly.Save(assemblyName + ".dll");
 #endif
-            DependencyInjectionEventSource.Log.DynamicMethodBuilt(callSite.ServiceType, ilGenerator.ILOffset);
+            DependencyInjectionEventSource.Log.DynamicMethodBuilt(
+                callSite.ServiceType,
+                ilGenerator.ILOffset
+            );
 
             return new GeneratedMethod()
             {
-                Lambda = (Func<ServiceProviderEngineScope, object>)dynamicMethod.CreateDelegate(typeof(Func<ServiceProviderEngineScope, object>), runtimeContext),
+                Lambda =
+                    (Func<ServiceProviderEngineScope, object>)dynamicMethod.CreateDelegate(
+                        typeof(Func<ServiceProviderEngineScope, object>),
+                        runtimeContext
+                    ),
                 Context = runtimeContext,
                 DynamicMethod = dynamicMethod
             };
         }
 
-
-        protected override object VisitDisposeCache(ServiceCallSite transientCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitDisposeCache(
+            ServiceCallSite transientCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             if (transientCallSite.CaptureDisposable)
             {
                 BeginCaptureDisposable(argument);
@@ -146,8 +201,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return null;
         }
 
-        protected override object VisitConstructor(ConstructorCallSite constructorCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitConstructor(
+            ConstructorCallSite constructorCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             // new T([create arguments])
             foreach (ServiceCallSite parameterCallSite in constructorCallSite.ParameterCallSites)
             {
@@ -162,14 +219,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return null;
         }
 
-        protected override object VisitRootCache(ServiceCallSite callSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitRootCache(
+            ServiceCallSite callSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             AddConstant(argument, _runtimeResolver.Resolve(callSite, _rootScope));
             return null;
         }
 
-        protected override object VisitScopeCache(ServiceCallSite scopedCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitScopeCache(
+            ServiceCallSite scopedCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             GeneratedMethod generatedMethod = BuildType(scopedCallSite);
 
             // Type builder doesn't support invoking dynamic methods, replace them with delegate.Invoke calls
@@ -177,7 +238,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             AddConstant(argument, generatedMethod.Lambda);
             // ProviderScope
             argument.Generator.Emit(OpCodes.Ldarg_1);
-            argument.Generator.Emit(OpCodes.Call, generatedMethod.Lambda.GetType().GetMethod("Invoke"));
+            argument.Generator.Emit(
+                OpCodes.Call,
+                generatedMethod.Lambda.GetType().GetMethod("Invoke")
+            );
 #else
             AddConstant(argument, generatedMethod.Context);
             // ProviderScope
@@ -188,32 +252,48 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return null;
         }
 
-        protected override object VisitConstant(ConstantCallSite constantCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitConstant(
+            ConstantCallSite constantCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             AddConstant(argument, constantCallSite.DefaultValue);
             return null;
         }
 
-        protected override object VisitServiceProvider(ServiceProviderCallSite serviceProviderCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitServiceProvider(
+            ServiceProviderCallSite serviceProviderCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             // [return] ProviderScope
             argument.Generator.Emit(OpCodes.Ldarg_1);
             return null;
         }
 
-        protected override object VisitServiceScopeFactory(ServiceScopeFactoryCallSite serviceScopeFactoryCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitServiceScopeFactory(
+            ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             // this.ScopeFactory
             argument.Generator.Emit(OpCodes.Ldarg_0);
-            argument.Generator.Emit(OpCodes.Ldfld, typeof(ILEmitResolverBuilderRuntimeContext).GetField(nameof(ILEmitResolverBuilderRuntimeContext.ScopeFactory)));
+            argument.Generator.Emit(
+                OpCodes.Ldfld,
+                typeof(ILEmitResolverBuilderRuntimeContext).GetField(
+                    nameof(ILEmitResolverBuilderRuntimeContext.ScopeFactory)
+                )
+            );
             return null;
         }
 
-        protected override object VisitIEnumerable(IEnumerableCallSite enumerableCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitIEnumerable(
+            IEnumerableCallSite enumerableCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             if (enumerableCallSite.ServiceCallSites.Length == 0)
             {
-                argument.Generator.Emit(OpCodes.Call, ExpressionResolverBuilder.GetArrayEmptyMethodInfo(enumerableCallSite.ItemType));
+                argument.Generator.Emit(
+                    OpCodes.Call,
+                    ExpressionResolverBuilder.GetArrayEmptyMethodInfo(enumerableCallSite.ItemType)
+                );
             }
             else
             {
@@ -245,8 +325,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return null;
         }
 
-        protected override object VisitFactory(FactoryCallSite factoryCallSite, ILEmitResolverBuilderContext argument)
-        {
+        protected override object VisitFactory(
+            FactoryCallSite factoryCallSite,
+            ILEmitResolverBuilderContext argument
+        ) {
             if (argument.Factories == null)
             {
                 argument.Factories = new List<Func<IServiceProvider, object>>();
@@ -260,7 +342,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             argument.Generator.Emit(OpCodes.Ldelem, typeof(Func<IServiceProvider, object>));
 
             argument.Generator.Emit(OpCodes.Ldarg_1);
-            argument.Generator.Emit(OpCodes.Call, ExpressionResolverBuilder.InvokeFactoryMethodInfo);
+            argument.Generator.Emit(
+                OpCodes.Call,
+                ExpressionResolverBuilder.InvokeFactoryMethodInfo
+            );
 
             argument.Factories.Add(factoryCallSite.Factory);
             return null;
@@ -291,8 +376,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             argument.Generator.Emit(OpCodes.Newobj, CacheKeyCtor);
         }
 
-        private ILEmitResolverBuilderRuntimeContext GenerateMethodBody(ServiceCallSite callSite, ILGenerator generator)
-        {
+        private ILEmitResolverBuilderRuntimeContext GenerateMethodBody(
+            ServiceCallSite callSite,
+            ILGenerator generator
+        ) {
             var context = new ILEmitResolverBuilderContext()
             {
                 Generator = generator,
@@ -320,8 +407,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             if (callSite.Cache.Location == CallSiteResultCacheLocation.Scope)
             {
-                LocalBuilder cacheKeyLocal = context.Generator.DeclareLocal(typeof(ServiceCacheKey));
-                LocalBuilder resolvedServicesLocal = context.Generator.DeclareLocal(typeof(IDictionary<ServiceCacheKey, object>));
+                LocalBuilder cacheKeyLocal = context.Generator.DeclareLocal(
+                    typeof(ServiceCacheKey)
+                );
+                LocalBuilder resolvedServicesLocal = context.Generator.DeclareLocal(
+                    typeof(IDictionary<ServiceCacheKey, object>)
+                );
                 LocalBuilder syncLocal = context.Generator.DeclareLocal(typeof(object));
                 LocalBuilder lockTakenLocal = context.Generator.DeclareLocal(typeof(bool));
                 LocalBuilder resultLocal = context.Generator.DeclareLocal(typeof(object));
@@ -355,7 +446,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 // Load address of lockTaken
                 context.Generator.Emit(OpCodes.Ldloca_S, lockTakenLocal.LocalIndex);
                 // Monitor.Enter
-                context.Generator.Emit(OpCodes.Call, ExpressionResolverBuilder.MonitorEnterMethodInfo);
+                context.Generator.Emit(
+                    OpCodes.Call,
+                    ExpressionResolverBuilder.MonitorEnterMethodInfo
+                );
 
                 // Load resolved services
                 Ldloc(context.Generator, resolvedServicesLocal.LocalIndex);
@@ -364,7 +458,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 // Load address of result local
                 context.Generator.Emit(OpCodes.Ldloca_S, resultLocal.LocalIndex);
                 // .TryGetValue
-                context.Generator.Emit(OpCodes.Callvirt, ExpressionResolverBuilder.TryGetValueMethodInfo);
+                context.Generator.Emit(
+                    OpCodes.Callvirt,
+                    ExpressionResolverBuilder.TryGetValueMethodInfo
+                );
 
                 // Jump to the end if already in cache
                 context.Generator.Emit(OpCodes.Brtrue, skipCreationLabel);
@@ -402,12 +499,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 // Load syncLocal
                 Ldloc(context.Generator, syncLocal.LocalIndex);
                 // Monitor.Exit
-                context.Generator.Emit(OpCodes.Call, ExpressionResolverBuilder.MonitorExitMethodInfo);
+                context.Generator.Emit(
+                    OpCodes.Call,
+                    ExpressionResolverBuilder.MonitorExitMethodInfo
+                );
 
                 context.Generator.MarkLabel(returnLabel);
 
                 context.Generator.EndExceptionBlock();
-
 
                 // load value
                 Ldloc(context.Generator, resultLocal.LocalIndex);
@@ -437,20 +536,27 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private static void EndCaptureDisposable(ILEmitResolverBuilderContext argument)
         {
             // Call CaptureDisposabl we expect calee and arguments to be on the stackcontext.Generator.BeginExceptionBlock
-            argument.Generator.Emit(OpCodes.Callvirt, ExpressionResolverBuilder.CaptureDisposableMethodInfo);
+            argument.Generator.Emit(
+                OpCodes.Callvirt,
+                ExpressionResolverBuilder.CaptureDisposableMethodInfo
+            );
         }
 
         private void Ldloc(ILGenerator generator, int index)
         {
             switch (index)
             {
-                case 0: generator.Emit(OpCodes.Ldloc_0);
+                case 0:
+                    generator.Emit(OpCodes.Ldloc_0);
                     return;
-                case 1: generator.Emit(OpCodes.Ldloc_1);
+                case 1:
+                    generator.Emit(OpCodes.Ldloc_1);
                     return;
-                case 2: generator.Emit(OpCodes.Ldloc_2);
+                case 2:
+                    generator.Emit(OpCodes.Ldloc_2);
                     return;
-                case 3: generator.Emit(OpCodes.Ldloc_3);
+                case 3:
+                    generator.Emit(OpCodes.Ldloc_3);
                     return;
             }
 
@@ -467,13 +573,17 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             switch (index)
             {
-                case 0: generator.Emit(OpCodes.Stloc_0);
+                case 0:
+                    generator.Emit(OpCodes.Stloc_0);
                     return;
-                case 1: generator.Emit(OpCodes.Stloc_1);
+                case 1:
+                    generator.Emit(OpCodes.Stloc_1);
                     return;
-                case 2: generator.Emit(OpCodes.Stloc_2);
+                case 2:
+                    generator.Emit(OpCodes.Stloc_2);
                     return;
-                case 3: generator.Emit(OpCodes.Stloc_3);
+                case 3:
+                    generator.Emit(OpCodes.Stloc_3);
                     return;
             }
 

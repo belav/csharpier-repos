@@ -6,7 +6,14 @@ namespace System.Speech.Synthesis
     public class PhonemeReachedEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal PhonemeReachedEventArgs(Prompt prompt, string currentPhoneme, TimeSpan audioPosition, TimeSpan duration, SynthesizerEmphasis emphasis, string nextPhoneme) : base(prompt)
+        internal PhonemeReachedEventArgs(
+            Prompt prompt,
+            string currentPhoneme,
+            TimeSpan audioPosition,
+            TimeSpan duration,
+            SynthesizerEmphasis emphasis,
+            string nextPhoneme
+        ) : base(prompt)
         {
             _currentPhoneme = currentPhoneme;
             _audioPosition = audioPosition;
@@ -57,7 +64,6 @@ namespace System.Speech.Synthesis
 
         // Next phoneme to be synthesized
         private string _nextPhoneme;
-
         #endregion
     }
 }

@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             // digging into same tree again and again to find exactly same answer
             private readonly LastLineCache _lastLineCache;
 
-            // The latest data about the document being classified that we've cached.  objects can 
+            // The latest data about the document being classified that we've cached.  objects can
             // be accessed from both threads, and must be obtained when this lock is held.
             private readonly object _gate = new();
             private ITextSnapshot _lastProcessedSnapshot;
@@ -76,20 +76,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 IForegroundNotificationService notificationService,
                 IAsynchronousOperationListener asyncListener,
                 ClassificationTypeMap typeMap,
-                TimeSpan diffTimeout)
-            {
+                TimeSpan diffTimeout
+            ) {
                 _subjectBuffer = subjectBuffer;
                 _notificationService = notificationService;
                 _listener = asyncListener;
                 _typeMap = typeMap;
                 _taggerProvider = taggerProvider;
                 _diffTimeout = diffTimeout;
-                _workQueue = new AsynchronousSerialWorkQueue(taggerProvider._threadingContext, asyncListener);
+                _workQueue = new AsynchronousSerialWorkQueue(
+                    taggerProvider._threadingContext,
+                    asyncListener
+                );
                 _reportChangeCancellationSource = new CancellationTokenSource();
 
                 _lastLineCache = new LastLineCache();
 
-                _workspaceRegistration = Workspace.GetWorkspaceRegistration(subjectBuffer.AsTextContainer());
+                _workspaceRegistration = Workspace.GetWorkspaceRegistration(
+                    subjectBuffer.AsTextContainer()
+                );
                 _workspaceRegistration.WorkspaceChanged += OnWorkspaceRegistrationChanged;
 
                 if (_workspaceRegistration.Workspace != null)
@@ -118,8 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 }
             }
 
-            internal void IncrementReferenceCount()
-                => _taggerReferenceCount++;
+            internal void IncrementReferenceCount() => _taggerReferenceCount++;
 
             internal void DecrementReferenceCountAndDisposeIfNecessary()
             {
@@ -184,13 +188,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             {
                 if (newDocument != null)
                 {
-                    _workQueue.EnqueueBackgroundTask(c => this.EnqueueProcessSnapshotWorkerAsync(newDocument, c), GetType() + ".EnqueueParseSnapshotTask.1", CancellationToken.None);
+                    _workQueue.EnqueueBackgroundTask(
+                        c => this.EnqueueProcessSnapshotWorkerAsync(newDocument, c),
+                        GetType() + ".EnqueueParseSnapshotTask.1",
+                        CancellationToken.None
+                    );
                 }
             }
 
-            private async Task EnqueueProcessSnapshotWorkerAsync(Document currentDocument, CancellationToken cancellationToken)
-            {
-                var currentText = await currentDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            private async Task EnqueueProcessSnapshotWorkerAsync(
+                Document currentDocument,
+                CancellationToken cancellationToken
+            ) {
+                var currentText = await currentDocument.GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var currentSnapshot = currentText.FindCorrespondingEditorTextSnapshot();
                 if (currentSnapshot == null)
                 {
@@ -205,13 +216,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 // preemptively allow the classification service to compute and cache data for this file.  For
                 // example, in C# and VB we will parse the file so that are called from tagger from UI thread,
                 // we have the root of the tree ready to go.
-                var currentCachedData = service == null
-                    ? null
-                    : await service.GetDataToCacheAsync(currentDocument, cancellationToken).ConfigureAwait(false);
+                var currentCachedData =
+                    service == null
+                        ? null
+                        : await service.GetDataToCacheAsync(currentDocument, cancellationToken)
+                              .ConfigureAwait(false);
 
                 // Query the service to determine waht span of the document actually changed and should be
                 // reclassified in the host editor.
-                var changedSpan = await GetChangedSpanAsync(currentDocument, currentSnapshot, cancellationToken).ConfigureAwait(false);
+                var changedSpan = await GetChangedSpanAsync(
+                        currentDocument,
+                        currentSnapshot,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 lock (_gate)
                 {
@@ -220,20 +238,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     _lastProcessedCachedData = currentCachedData;
                 }
 
-                _notificationService.RegisterNotification(() =>
+                _notificationService.RegisterNotification(
+                    () =>
                     {
                         _workQueue.AssertIsForeground();
                         ReportChangedSpan(changedSpan);
                     },
-                    _listener.BeginAsyncOperation("EnqueueProcessSnapshotWorkerAsync.ReportChangedSpan"),
-                    _reportChangeCancellationSource.Token);
+                    _listener.BeginAsyncOperation(
+                        "EnqueueProcessSnapshotWorkerAsync.ReportChangedSpan"
+                    ),
+                    _reportChangeCancellationSource.Token
+                );
             }
 
             private async Task<SnapshotSpan> GetChangedSpanAsync(
-                Document currentDocument, ITextSnapshot currentSnapshot, CancellationToken cancellationToken)
-            {
+                Document currentDocument,
+                ITextSnapshot currentSnapshot,
+                CancellationToken cancellationToken
+            ) {
                 // We don't need to grab _lastProcessedDocument in a lock.  We don't care which version of the previous
-                // doc we grab, just that we grab some prior version.  This is only used to narrow down the changed range we 
+                // doc we grab, just that we grab some prior version.  This is only used to narrow down the changed range we
                 // specify, so it's ok if it's slightly larger because we read in a change from a couple of edits ago.
                 var previousDocument = _lastProcessedDocument;
                 if (previousDocument != null)
@@ -242,9 +266,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     if (service != null)
                     {
                         var changeRange = await service.ComputeSyntacticChangeRangeAsync(
-                            previousDocument, currentDocument, _diffTimeout, cancellationToken).ConfigureAwait(false);
+                                previousDocument,
+                                currentDocument,
+                                _diffTimeout,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         if (changeRange != null)
-                            return currentSnapshot.GetSpan(changeRange.Value.Span.Start, changeRange.Value.NewLength);
+                            return currentSnapshot.GetSpan(
+                                changeRange.Value.Span.Start,
+                                changeRange.Value.NewLength
+                            );
                     }
                 }
 
@@ -257,8 +289,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 lock (_gate)
                 {
                     var snapshot = _lastProcessedSnapshot;
-                    if (snapshot.Version.ReiteratedVersionNumber != changeSpan.Snapshot.Version.ReiteratedVersionNumber)
-                    {
+                    if (
+                        snapshot.Version.ReiteratedVersionNumber
+                        != changeSpan.Snapshot.Version.ReiteratedVersionNumber
+                    ) {
                         // wait for next call
                         return;
                     }
@@ -269,10 +303,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
-            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(NormalizedSnapshotSpanCollection spans)
-            {
-                using (Logger.LogBlock(FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags, CancellationToken.None))
-                {
+            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            ) {
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags,
+                        CancellationToken.None
+                    )
+                ) {
                     if (spans.Count > 0 && _workspace != null)
                     {
                         var result = GetTagsWorker(spans);
@@ -286,15 +325,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             private IClassificationService TryGetClassificationService(ITextSnapshot snapshot)
             {
-                var languageServices = _workspace.Services.GetLanguageServices(snapshot.ContentType);
+                var languageServices = _workspace.Services.GetLanguageServices(
+                    snapshot.ContentType
+                );
                 if (languageServices == null)
                     return null;
 
                 return languageServices.GetService<IClassificationService>();
             }
 
-            private IEnumerable<ITagSpan<IClassificationTag>> GetTagsWorker(NormalizedSnapshotSpanCollection spans)
-            {
+            private IEnumerable<ITagSpan<IClassificationTag>> GetTagsWorker(
+                NormalizedSnapshotSpanCollection spans
+            ) {
                 var classificationService = TryGetClassificationService(spans[0].Snapshot);
                 if (classificationService == null)
                     return null;
@@ -307,15 +349,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 }
 
                 return ClassificationUtilities.ConvertAndReturnList(
-                    _typeMap, spans[0].Snapshot, classifiedSpans);
+                    _typeMap,
+                    spans[0].Snapshot,
+                    classifiedSpans
+                );
             }
 
             private void AddClassifiedSpans(
                 IClassificationService classificationService,
                 SnapshotSpan span,
-                List<ClassifiedSpan> classifiedSpans)
-            {
-                // First, get the tree and snapshot that we'll be operating over.  
+                List<ClassifiedSpan> classifiedSpans
+            ) {
+                // First, get the tree and snapshot that we'll be operating over.
                 // From this point on we'll do all operations over these values.
                 ITextSnapshot lastSnapshot;
                 Document lastDocument;
@@ -339,17 +384,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 // If it is for an older version, then classify that older version and translate
                 // the classifications forward.  Otherwise, just classify normally.
 
-                if (lastSnapshot.Version.ReiteratedVersionNumber == span.Snapshot.Version.ReiteratedVersionNumber)
-                {
+                if (
+                    lastSnapshot.Version.ReiteratedVersionNumber
+                    == span.Snapshot.Version.ReiteratedVersionNumber
+                ) {
                     AddClassifiedSpansForCurrentTree(
-                        classificationService, span, lastDocument, classifiedSpans);
+                        classificationService,
+                        span,
+                        lastDocument,
+                        classifiedSpans
+                    );
                 }
                 else
                 {
                     // Slightly more complicated.  We have a parse tree, it's just not for the snapshot
                     // we're being asked for.
                     AddClassifiedSpansForPreviousTree(
-                        classificationService, span, lastSnapshot, lastDocument, classifiedSpans);
+                        classificationService,
+                        span,
+                        lastSnapshot,
+                        lastDocument,
+                        classifiedSpans
+                    );
                 }
 
                 // Ensure the cached data stays alive for as long as we're calling into the classification service to do
@@ -361,14 +417,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 IClassificationService classificationService,
                 SnapshotSpan span,
                 Document document,
-                List<ClassifiedSpan> classifiedSpans)
-            {
+                List<ClassifiedSpan> classifiedSpans
+            ) {
                 if (!_lastLineCache.TryUseCache(span, out var tempList))
                 {
                     tempList = ClassificationUtilities.GetOrCreateClassifiedSpanList();
 
                     classificationService.AddSyntacticClassificationsAsync(
-                        document, span.Span.ToTextSpan(), tempList, CancellationToken.None).Wait(CancellationToken.None);
+                            document,
+                            span.Span.ToTextSpan(),
+                            tempList,
+                            CancellationToken.None
+                        )
+                        .Wait(CancellationToken.None);
 
                     _lastLineCache.Update(span, tempList);
                 }
@@ -384,8 +445,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 SnapshotSpan span,
                 ITextSnapshot lastSnapshot,
                 Document lastDocument,
-                List<ClassifiedSpan> classifiedSpans)
-            {
+                List<ClassifiedSpan> classifiedSpans
+            ) {
                 // Slightly more complicated case.  They're asking for the classifications for a
                 // different snapshot than what we have a parse tree for.  So we first translate the span
                 // that they're asking for so that is maps onto the tree that we have spans for.  We then
@@ -400,7 +461,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 // the deleted code.  In most addition/modification cases, there will be overlap with
                 // existing spans, and so we'll end up classifying well.  In the worst case, there is a
                 // large addition that doesn't exist when we map back, and so we don't have any
-                // classifications for it. That's probably okay, because: 
+                // classifications for it. That's probably okay, because:
 
                 // 1. If it's that large, it's likely that in reality there are multiple classification
                 // spans within it.
@@ -426,7 +487,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
                 var tempList = ClassificationUtilities.GetOrCreateClassifiedSpanList();
                 AddClassifiedSpansForCurrentTree(
-                    classificationService, translatedSpan, lastDocument, tempList);
+                    classificationService,
+                    translatedSpan,
+                    lastDocument,
+                    tempList
+                );
 
                 var currentSnapshot = span.Snapshot;
                 var currentText = currentSnapshot.AsText();
@@ -435,14 +500,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     // 2) Translate those classifications forward so that they correspond to the true
                     //    requested snapshot.
                     var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(lastSnapshot);
-                    var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeInclusive);
+                    var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(
+                        currentSnapshot,
+                        SpanTrackingMode.EdgeInclusive
+                    );
 
-                    var currentClassifiedSpan = new ClassifiedSpan(lastClassifiedSpan.ClassificationType, currentSnapshotSpan.Span.ToTextSpan());
+                    var currentClassifiedSpan = new ClassifiedSpan(
+                        lastClassifiedSpan.ClassificationType,
+                        currentSnapshotSpan.Span.ToTextSpan()
+                    );
 
                     // 3) The classifications may be incorrect due to changes in the text.  For example,
                     //    if "clss" becomes "class", then we want to changes the classification from
                     //    'identifier' to 'keyword'.
-                    currentClassifiedSpan = classificationService.AdjustStaleClassification(currentText, currentClassifiedSpan);
+                    currentClassifiedSpan = classificationService.AdjustStaleClassification(
+                        currentText,
+                        currentClassifiedSpan
+                    );
 
                     classifiedSpans.Add(currentClassifiedSpan);
                 }
@@ -453,14 +527,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             private static void AddClassifiedSpansForTokens(
                 IClassificationService classificationService,
                 SnapshotSpan span,
-                List<ClassifiedSpan> classifiedSpans)
-            {
+                List<ClassifiedSpan> classifiedSpans
+            ) {
                 classificationService.AddLexicalClassifications(
-                    span.Snapshot.AsText(), span.Span.ToTextSpan(), classifiedSpans, CancellationToken.None);
+                    span.Snapshot.AsText(),
+                    span.Span.ToTextSpan(),
+                    classifiedSpans,
+                    CancellationToken.None
+                );
             }
 
-            private void OnDocumentActiveContextChanged(object sender, DocumentActiveContextChangedEventArgs args)
-            {
+            private void OnDocumentActiveContextChanged(
+                object sender,
+                DocumentActiveContextChangedEventArgs args
+            ) {
                 if (_workspace != null && _workspace == args.Solution.Workspace)
                 {
                     ProcessIfThisDocument(args.Solution, args.NewActiveContextDocumentId);
@@ -488,27 +568,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 switch (args.Kind)
                 {
                     case WorkspaceChangeKind.ProjectChanged:
+                    {
+                        var documentId = _workspace.GetDocumentIdInCurrentContext(
+                            _subjectBuffer.AsTextContainer()
+                        );
+                        if (documentId == null || documentId.ProjectId != args.ProjectId)
                         {
-                            var documentId = _workspace.GetDocumentIdInCurrentContext(_subjectBuffer.AsTextContainer());
-                            if (documentId == null || documentId.ProjectId != args.ProjectId)
-                            {
-                                break;
-                            }
-
-                            var oldProject = args.OldSolution.GetProject(args.ProjectId);
-                            var newProject = args.NewSolution.GetProject(args.ProjectId);
-
-                            // make sure in case of parse config change, we re-colorize whole document. not just edited section.
-                            var configChanged = !object.Equals(oldProject.ParseOptions, newProject.ParseOptions);
-                            EnqueueProcessSnapshot(newProject.GetDocument(documentId));
                             break;
                         }
+
+                        var oldProject = args.OldSolution.GetProject(args.ProjectId);
+                        var newProject = args.NewSolution.GetProject(args.ProjectId);
+
+                        // make sure in case of parse config change, we re-colorize whole document. not just edited section.
+                        var configChanged = !object.Equals(
+                            oldProject.ParseOptions,
+                            newProject.ParseOptions
+                        );
+                        EnqueueProcessSnapshot(newProject.GetDocument(documentId));
+                        break;
+                    }
 
                     case WorkspaceChangeKind.DocumentChanged:
-                        {
-                            ProcessIfThisDocument(args.NewSolution, args.DocumentId);
-                            break;
-                        }
+                    {
+                        ProcessIfThisDocument(args.NewSolution, args.DocumentId);
+                        break;
+                    }
                 }
 
                 // put a request to update last parsed document.
@@ -516,11 +601,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 // if this show up as perf cost, we might need to revisit this design. currently we do this so that our Roslyn Language Service API
                 // maintain its consistency.
                 var newSolution = args.NewSolution;
-                _workQueue.EnqueueBackgroundTask(c => UpdateLastParsedDocumentAsync(newSolution, c), "UpdateLastParsedDocument", CancellationToken.None);
+                _workQueue.EnqueueBackgroundTask(
+                    c => UpdateLastParsedDocumentAsync(newSolution, c),
+                    "UpdateLastParsedDocument",
+                    CancellationToken.None
+                );
             }
 
-            private async Task UpdateLastParsedDocumentAsync(Solution newSolution, CancellationToken cancellationToken)
-            {
+            private async Task UpdateLastParsedDocumentAsync(
+                Solution newSolution,
+                CancellationToken cancellationToken
+            ) {
                 // lastParsedDocument only updated in the same sequential queue so don't need lock to use it
                 var lastDocument = Volatile.Read(ref _lastProcessedDocument);
                 if (lastDocument == null)
@@ -542,7 +633,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     return;
                 }
 
-                var lastParsedText = await lastDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var lastParsedText = await lastDocument.GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var lastParsedSnapshot = lastParsedText.FindCorrespondingEditorTextSnapshot();
 
                 var newText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -582,7 +674,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             {
                 if (_workspace != null)
                 {
-                    var openDocumentId = _workspace.GetDocumentIdInCurrentContext(_subjectBuffer.AsTextContainer());
+                    var openDocumentId = _workspace.GetDocumentIdInCurrentContext(
+                        _subjectBuffer.AsTextContainer()
+                    );
                     if (openDocumentId == documentId)
                     {
                         EnqueueProcessSnapshot(newSolution.GetDocument(documentId));

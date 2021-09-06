@@ -30,19 +30,26 @@ namespace Microsoft.AspNetCore.Components.WebView
             IServiceScope serviceScope,
             IpcSender ipcSender,
             string baseUrl,
-            string startUrl)
-        {
+            string startUrl
+        ) {
             _serviceScope = serviceScope;
             var services = serviceScope.ServiceProvider;
 
-            NavigationManager = (WebViewNavigationManager)services.GetRequiredService<NavigationManager>();
+            NavigationManager =
+                (WebViewNavigationManager)services.GetRequiredService<NavigationManager>();
             NavigationManager.AttachToWebView(ipcSender, baseUrl, startUrl);
 
             JSRuntime = (WebViewJSRuntime)services.GetRequiredService<IJSRuntime>();
             JSRuntime.AttachToWebView(ipcSender);
 
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-            Renderer = new WebViewRenderer(services, dispatcher, ipcSender, loggerFactory, JSRuntime.ElementReferenceContext);
+            Renderer = new WebViewRenderer(
+                services,
+                dispatcher,
+                ipcSender,
+                loggerFactory,
+                JSRuntime.ElementReferenceContext
+            );
         }
 
         public void Dispose()

@@ -111,8 +111,7 @@ namespace Test
         }
     }
 
-    public sealed class SealedGrandChild : GrandChild
-    { }
+    public sealed class SealedGrandChild : GrandChild { }
 
     public delegate string TestMethod();
 
@@ -123,16 +122,31 @@ namespace Test
             SealedGrandChild child = new SealedGrandChild();
 
             Assert.AreEqual("Child.AbstractFinal", new TestMethod(child.AbstractFinal));
-            Assert.AreEqual("GrandChild.AbstractOverrideFinal", new TestMethod(child.AbstractOverrideFinal));
+            Assert.AreEqual(
+                "GrandChild.AbstractOverrideFinal",
+                new TestMethod(child.AbstractOverrideFinal)
+            );
             Assert.AreEqual("Child.AbstractOverrideNil", new TestMethod(child.AbstractOverrideNil));
-            Assert.AreEqual("GrandChild.AbstractOverrideOverride", new TestMethod(child.AbstractOverrideOverride));
+            Assert.AreEqual(
+                "GrandChild.AbstractOverrideOverride",
+                new TestMethod(child.AbstractOverrideOverride)
+            );
             Assert.AreEqual("Child.VirtualFinal", new TestMethod(child.VirtualFinal));
             Assert.AreEqual("GrandChild.VirtualNilFinal", new TestMethod(child.VirtualNilFinal));
             Assert.AreEqual("Base.VirtualNilNil", new TestMethod(child.VirtualNilNil));
-            Assert.AreEqual("GrandChild.VirtualNilOverride", new TestMethod(child.VirtualNilOverride));
-            Assert.AreEqual("GrandChild.VirtualOverrideFinal", new TestMethod(child.VirtualOverrideFinal));
+            Assert.AreEqual(
+                "GrandChild.VirtualNilOverride",
+                new TestMethod(child.VirtualNilOverride)
+            );
+            Assert.AreEqual(
+                "GrandChild.VirtualOverrideFinal",
+                new TestMethod(child.VirtualOverrideFinal)
+            );
             Assert.AreEqual("Child.VirtualOverrideNil", new TestMethod(child.VirtualOverrideNil));
-            Assert.AreEqual("GrandChild.VirtualOverrideOverride", new TestMethod(child.VirtualOverrideOverride));
+            Assert.AreEqual(
+                "GrandChild.VirtualOverrideOverride",
+                new TestMethod(child.VirtualOverrideOverride)
+            );
         }
 
         public static void CallDelegateFromGrandChild()
@@ -140,10 +154,16 @@ namespace Test
             GrandChild child = new GrandChild();
 
             Assert.AreEqual("Child.AbstractFinal", new TestMethod(child.AbstractFinal));
-            Assert.AreEqual("GrandChild.AbstractOverrideFinal", new TestMethod(child.AbstractOverrideFinal));
+            Assert.AreEqual(
+                "GrandChild.AbstractOverrideFinal",
+                new TestMethod(child.AbstractOverrideFinal)
+            );
             Assert.AreEqual("Child.VirtualFinal", new TestMethod(child.VirtualFinal));
             Assert.AreEqual("GrandChild.VirtualNilFinal", new TestMethod(child.VirtualNilFinal));
-            Assert.AreEqual("GrandChild.VirtualOverrideFinal", new TestMethod(child.VirtualOverrideFinal));
+            Assert.AreEqual(
+                "GrandChild.VirtualOverrideFinal",
+                new TestMethod(child.VirtualOverrideFinal)
+            );
         }
 
         public static int Main(string[] args)

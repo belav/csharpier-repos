@@ -15,8 +15,12 @@ namespace R2RDumpTest
     {
         public static void RunTest(string expectedXmlPath, string name)
         {
-            List<XmlNode> testXmlNodes = ReadXmlNodes($"{name}-test.xml", true).Cast<XmlNode>().ToList();
-            List<XmlNode> expectedXmlNodes = ReadXmlNodes($"{expectedXmlPath}{name}.xml", true).Cast<XmlNode>().ToList();
+            List<XmlNode> testXmlNodes = ReadXmlNodes($"{name}-test.xml", true)
+                .Cast<XmlNode>()
+                .ToList();
+            List<XmlNode> expectedXmlNodes = ReadXmlNodes($"{expectedXmlPath}{name}.xml", true)
+                .Cast<XmlNode>()
+                .ToList();
             bool identical = XmlDiff(testXmlNodes, expectedXmlNodes);
             Assert.True(identical);
         }
@@ -26,16 +30,30 @@ namespace R2RDumpTest
             testXmlNodes.RemoveAll(node => !IsLeaf(node));
             expectedXmlNodes.RemoveAll(node => !IsLeaf(node));
 
-            Dictionary<string, XmlNode> allTest = testXmlNodes.ToDictionary(node => XmlNodeFullName(node));
-            Dictionary<string, XmlNode> allExpected = expectedXmlNodes.ToDictionary(node => XmlNodeFullName(node));
-            Dictionary<string, XmlNode> diffTest = testXmlNodes.Except(expectedXmlNodes, new XElementEqualityComparer()).ToDictionary(node => XmlNodeFullName(node));
-            Dictionary<string, XmlNode> diffExpected = expectedXmlNodes.Except(testXmlNodes, new XElementEqualityComparer()).ToDictionary(node => XmlNodeFullName(node));
+            Dictionary<string, XmlNode> allTest = testXmlNodes.ToDictionary(
+                node => XmlNodeFullName(node)
+            );
+            Dictionary<string, XmlNode> allExpected = expectedXmlNodes.ToDictionary(
+                node => XmlNodeFullName(node)
+            );
+            Dictionary<string, XmlNode> diffTest = testXmlNodes.Except(
+                    expectedXmlNodes,
+                    new XElementEqualityComparer()
+                )
+                .ToDictionary(node => XmlNodeFullName(node));
+            Dictionary<string, XmlNode> diffExpected = expectedXmlNodes.Except(
+                    testXmlNodes,
+                    new XElementEqualityComparer()
+                )
+                .ToDictionary(node => XmlNodeFullName(node));
 
             foreach (KeyValuePair<string, XmlNode> diff in diffExpected)
             {
                 XmlNode expectedNode = diff.Value;
                 Console.WriteLine("Expected:");
-                Console.WriteLine("\t" + XmlNodeFullName(expectedNode) + ": " + expectedNode.InnerText);
+                Console.WriteLine(
+                    "\t" + XmlNodeFullName(expectedNode) + ": " + expectedNode.InnerText
+                );
                 if (allTest.ContainsKey(diff.Key))
                 {
                     XmlNode testNode = allTest[diff.Key];
@@ -56,7 +74,9 @@ namespace R2RDumpTest
                     Console.WriteLine("Expected:");
                     Console.WriteLine("\tnone");
                     Console.WriteLine("Test:");
-                    Console.WriteLine("\t" + XmlNodeFullName(diff.Value) + ": " + diff.Value.InnerText);
+                    Console.WriteLine(
+                        "\t" + XmlNodeFullName(diff.Value) + ": " + diff.Value.InnerText
+                    );
                 }
                 Console.WriteLine("");
             }
@@ -68,7 +88,8 @@ namespace R2RDumpTest
         {
             public bool Equals(XmlNode x, XmlNode y)
             {
-                return XmlNodeFullName(x).Equals(XmlNodeFullName(y)) && x.InnerText.Equals(y.InnerText);
+                return XmlNodeFullName(x).Equals(XmlNodeFullName(y))
+                    && x.InnerText.Equals(y.InnerText);
             }
             public int GetHashCode(XmlNode obj)
             {
@@ -89,7 +110,8 @@ namespace R2RDumpTest
             {
                 string index = "";
                 XmlAttribute indexAttribute = node.Attributes["Index"];
-                if (indexAttribute != null) {
+                if (indexAttribute != null)
+                {
                     index = indexAttribute.Value;
                 }
                 fullName = node.Name + index + "." + fullName;

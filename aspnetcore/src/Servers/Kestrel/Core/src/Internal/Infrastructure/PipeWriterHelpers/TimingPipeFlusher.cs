@@ -26,8 +26,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
         public TimingPipeFlusher(
             PipeWriter writer,
             ITimeoutControl? timeoutControl,
-            IKestrelTrace log)
-        {
+            IKestrelTrace log
+        ) {
             _writer = writer;
             _timeoutControl = timeoutControl;
             _log = log;
@@ -38,9 +38,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             return FlushAsync(outputAborter: null, cancellationToken: default);
         }
 
-        public ValueTask<FlushResult> FlushAsync(IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
-        {
-            return FlushAsync(minRate: null, count: 0, outputAborter: outputAborter, cancellationToken: cancellationToken);
+        public ValueTask<FlushResult> FlushAsync(
+            IHttpOutputAborter? outputAborter,
+            CancellationToken cancellationToken
+        ) {
+            return FlushAsync(
+                minRate: null,
+                count: 0,
+                outputAborter: outputAborter,
+                cancellationToken: cancellationToken
+            );
         }
 
         public ValueTask<FlushResult> FlushAsync(MinDataRate? minRate, long count)
@@ -48,8 +55,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             return FlushAsync(minRate, count, outputAborter: null, cancellationToken: default);
         }
 
-        public ValueTask<FlushResult> FlushAsync(MinDataRate? minRate, long count, IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
-        {
+        public ValueTask<FlushResult> FlushAsync(
+            MinDataRate? minRate,
+            long count,
+            IHttpOutputAborter? outputAborter,
+            CancellationToken cancellationToken
+        ) {
             if (minRate is object)
             {
                 // Call BytesWrittenToBuffer before FlushAsync() to make testing easier, otherwise the Flush can cause test code to run before the timeout
@@ -74,8 +85,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             return TimeFlushAsyncAwaited(pipeFlushTask, minRate, outputAborter, cancellationToken);
         }
 
-        private async ValueTask<FlushResult> TimeFlushAsyncAwaited(ValueTask<FlushResult> pipeFlushTask, MinDataRate? minRate, IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
-        {
+        private async ValueTask<FlushResult> TimeFlushAsyncAwaited(
+            ValueTask<FlushResult> pipeFlushTask,
+            MinDataRate? minRate,
+            IHttpOutputAborter? outputAborter,
+            CancellationToken cancellationToken
+        ) {
             if (minRate is object)
             {
                 _timeoutControl!.StartTimingWrite();
@@ -92,12 +107,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
             }
             catch (OperationCanceledException ex) when (outputAborter is object)
             {
-                outputAborter.Abort(new ConnectionAbortedException(CoreStrings.ConnectionOrStreamAbortedByCancellationToken, ex));
+                outputAborter.Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.ConnectionOrStreamAbortedByCancellationToken,
+                        ex
+                    )
+                );
             }
             catch (Exception ex)
             {
                 // A canceled token is the only reason flush should ever throw.
-                _log.LogError(0, ex, $"Unexpected exception in {nameof(TimingPipeFlusher)}.{nameof(FlushAsync)}.");
+                _log.LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(TimingPipeFlusher)}.{nameof(FlushAsync)}."
+                );
             }
             finally
             {

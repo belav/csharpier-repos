@@ -67,10 +67,15 @@ namespace Company.WebApplication1
 
             services.AddControllers();
 #if (EnableOpenAPI)
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" });
-            });
+            services.AddSwaggerGen(
+                c =>
+                {
+                    c.SwaggerDoc(
+                        "v1",
+                        new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" }
+                    );
+                }
+            );
 #endif
         }
 
@@ -80,10 +85,12 @@ namespace Company.WebApplication1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                #if (EnableOpenAPI)
+#if (EnableOpenAPI)
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company.WebApplication1 v1"));
-                #endif
+                app.UseSwaggerUI(
+                    c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company.WebApplication1 v1")
+                );
+#endif
             }
 #if (RequiresHttps)
 
@@ -97,10 +104,12 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                }
+            );
         }
     }
 }

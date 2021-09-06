@@ -15,11 +15,12 @@ namespace http2cat
     {
         public static async Task Main(string[] args)
         {
-            using var host = new HostBuilder()
-                .ConfigureLogging(loggingBuilder =>
-                {
-                    loggingBuilder.AddConsole();
-                })
+            using var host = new HostBuilder().ConfigureLogging(
+                    loggingBuilder =>
+                    {
+                        loggingBuilder.AddConsole();
+                    }
+                )
                 .UseHttp2Cat("https://localhost:5001", RunTestCase)
                 .Build();
 
@@ -32,7 +33,11 @@ namespace http2cat
 
             h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
 
-            await h2Connection.StartStreamAsync(1, Http2Utilities.BrowserRequestHeaders, endStream: true);
+            await h2Connection.StartStreamAsync(
+                1,
+                Http2Utilities.BrowserRequestHeaders,
+                endStream: true
+            );
 
             var headersFrame = await h2Connection.ReceiveFrameAsync();
 
@@ -56,7 +61,9 @@ namespace http2cat
 
             h2Connection.Logger.LogInformation("Received data in a single frame.");
 
-            h2Connection.Logger.LogInformation(Encoding.UTF8.GetString(dataFrame.Payload.ToArray()));
+            h2Connection.Logger.LogInformation(
+                Encoding.UTF8.GetString(dataFrame.Payload.ToArray())
+            );
 
             var trailersFrame = await h2Connection.ReceiveFrameAsync();
 
@@ -73,7 +80,10 @@ namespace http2cat
                 h2Connection.Logger.LogInformation($"{header.Key}: {header.Value}");
             }
 
-            await h2Connection.StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
+            await h2Connection.StopConnectionAsync(
+                expectedLastStreamId: 1,
+                ignoreNonGoAwayFrames: false
+            );
 
             h2Connection.Logger.LogInformation("Connection stopped.");
         }

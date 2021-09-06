@@ -44,7 +44,9 @@ namespace Microsoft.AspNetCore.Components.Routing
             // Arrange
             var template = "awesome/cool/super";
 
-            var expected = new ExpectedTemplateBuilder().Literal("awesome").Literal("cool").Literal("super");
+            var expected = new ExpectedTemplateBuilder().Literal("awesome")
+                .Literal("cool")
+                .Literal("super");
 
             // Act
             var actual = TemplateParser.ParseTemplate(template);
@@ -59,7 +61,9 @@ namespace Microsoft.AspNetCore.Components.Routing
             // Arrange
             var template = "{p1}/{p2}/{p3}";
 
-            var expected = new ExpectedTemplateBuilder().Parameter("p1").Parameter("p2").Parameter("p3");
+            var expected = new ExpectedTemplateBuilder().Parameter("p1")
+                .Parameter("p2")
+                .Parameter("p3");
 
             // Act
             var actual = TemplateParser.ParseTemplate(template);
@@ -74,7 +78,9 @@ namespace Microsoft.AspNetCore.Components.Routing
             // Arrange
             var template = "{p1?}/{p2?}/{p3?}";
 
-            var expected = new ExpectedTemplateBuilder().Parameter("p1?").Parameter("p2?").Parameter("p3?");
+            var expected = new ExpectedTemplateBuilder().Parameter("p1?")
+                .Parameter("p2?")
+                .Parameter("p3?");
 
             // Act
             var actual = TemplateParser.ParseTemplate(template);
@@ -100,7 +106,9 @@ namespace Microsoft.AspNetCore.Components.Routing
         public void Parse_MixedLiteralAndCatchAllParameter()
         {
             // Arrange
-            var expected = new ExpectedTemplateBuilder().Literal("awesome").Literal("wow").Parameter("p");
+            var expected = new ExpectedTemplateBuilder().Literal("awesome")
+                .Literal("wow")
+                .Parameter("p");
 
             // Act
             var actual = TemplateParser.ParseTemplate("awesome/wow/{*p}");
@@ -113,7 +121,9 @@ namespace Microsoft.AspNetCore.Components.Routing
         public void Parse_MixedLiteralParameterAndCatchAllParameter()
         {
             // Arrange
-            var expected = new ExpectedTemplateBuilder().Literal("awesome").Parameter("p1").Parameter("p2");
+            var expected = new ExpectedTemplateBuilder().Literal("awesome")
+                .Parameter("p1")
+                .Parameter("p2");
 
             // Act
             var actual = TemplateParser.ParseTemplate("awesome/{p1}/{*p2}");
@@ -126,9 +136,11 @@ namespace Microsoft.AspNetCore.Components.Routing
         public void InvalidTemplate_WithRepeatedParameter()
         {
             var ex = Assert.Throws<InvalidOperationException>(
-                () => TemplateParser.ParseTemplate("{p1}/literal/{p1}"));
+                () => TemplateParser.ParseTemplate("{p1}/literal/{p1}")
+            );
 
-            var expectedMessage = "Invalid template '{p1}/literal/{p1}'. The parameter '{p1}' appears multiple times.";
+            var expectedMessage =
+                "Invalid template '{p1}/literal/{p1}'. The parameter '{p1}' appears multiple times.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -136,32 +148,69 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Theory]
         [InlineData("p}", "Invalid template 'p}'. Missing '{' in parameter segment 'p}'.")]
         [InlineData("{p", "Invalid template '{p'. Missing '}' in parameter segment '{p'.")]
-        [InlineData("Literal/p}", "Invalid template 'Literal/p}'. Missing '{' in parameter segment 'p}'.")]
-        [InlineData("Literal/{p", "Invalid template 'Literal/{p'. Missing '}' in parameter segment '{p'.")]
-        [InlineData("p}/Literal", "Invalid template 'p}/Literal'. Missing '{' in parameter segment 'p}'.")]
-        [InlineData("{p/Literal", "Invalid template '{p/Literal'. Missing '}' in parameter segment '{p'.")]
-        [InlineData("Another/p}/Literal", "Invalid template 'Another/p}/Literal'. Missing '{' in parameter segment 'p}'.")]
-        [InlineData("Another/{p/Literal", "Invalid template 'Another/{p/Literal'. Missing '}' in parameter segment '{p'.")]
-
+        [InlineData(
+            "Literal/p}",
+            "Invalid template 'Literal/p}'. Missing '{' in parameter segment 'p}'."
+        )]
+        [InlineData(
+            "Literal/{p",
+            "Invalid template 'Literal/{p'. Missing '}' in parameter segment '{p'."
+        )]
+        [InlineData(
+            "p}/Literal",
+            "Invalid template 'p}/Literal'. Missing '{' in parameter segment 'p}'."
+        )]
+        [InlineData(
+            "{p/Literal",
+            "Invalid template '{p/Literal'. Missing '}' in parameter segment '{p'."
+        )]
+        [InlineData(
+            "Another/p}/Literal",
+            "Invalid template 'Another/p}/Literal'. Missing '{' in parameter segment 'p}'."
+        )]
+        [InlineData(
+            "Another/{p/Literal",
+            "Invalid template 'Another/{p/Literal'. Missing '}' in parameter segment '{p'."
+        )]
         public void InvalidTemplate_WithMismatchedBraces(string template, string expectedMessage)
         {
             var ex = Assert.Throws<InvalidOperationException>(
-                () => TemplateParser.ParseTemplate(template));
+                () => TemplateParser.ParseTemplate(template)
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
 
         [Theory]
         // * is only allowed at beginning for catch-all parameters
-        [InlineData("{p*}", "Invalid template '{p*}'. The character '*' in parameter segment '{p*}' is not allowed.")]
-        [InlineData("{{}", "Invalid template '{{}'. The character '{' in parameter segment '{{}' is not allowed.")]
-        [InlineData("{}}", "Invalid template '{}}'. The character '}' in parameter segment '{}}' is not allowed.")]
-        [InlineData("{=}", "Invalid template '{=}'. The character '=' in parameter segment '{=}' is not allowed.")]
-        [InlineData("{.}", "Invalid template '{.}'. The character '.' in parameter segment '{.}' is not allowed.")]
-        public void ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(string template, string expectedMessage)
-        {
+        [InlineData(
+            "{p*}",
+            "Invalid template '{p*}'. The character '*' in parameter segment '{p*}' is not allowed."
+        )]
+        [InlineData(
+            "{{}",
+            "Invalid template '{{}'. The character '{' in parameter segment '{{}' is not allowed."
+        )]
+        [InlineData(
+            "{}}",
+            "Invalid template '{}}'. The character '}' in parameter segment '{}}' is not allowed."
+        )]
+        [InlineData(
+            "{=}",
+            "Invalid template '{=}'. The character '=' in parameter segment '{=}' is not allowed."
+        )]
+        [InlineData(
+            "{.}",
+            "Invalid template '{.}'. The character '.' in parameter segment '{.}' is not allowed."
+        )]
+        public void ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(
+            string template,
+            string expectedMessage
+        ) {
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate(template));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate(template)
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -169,9 +218,12 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_InvalidParameterNameWithEmptyNameThrows()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate("{a}/{}/{z}"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate("{a}/{}/{z}")
+            );
 
-            var expectedMessage = "Invalid template '{a}/{}/{z}'. Empty parameter name in segment '{}' is not allowed.";
+            var expectedMessage =
+                "Invalid template '{a}/{}/{z}'. Empty parameter name in segment '{}' is not allowed.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -179,7 +231,9 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_ConsecutiveSeparatorsSlashSlashThrows()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate("{a}//{z}"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate("{a}//{z}")
+            );
 
             var expectedMessage = "Invalid template '{a}//{z}'. Empty segments are not allowed.";
 
@@ -189,9 +243,12 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_LiteralAfterOptionalParam()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate("/test/{a?}/test"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate("/test/{a?}/test")
+            );
 
-            var expectedMessage = "Invalid template 'test/{a?}/test'. Non-optional parameters or literal routes cannot appear after optional parameters.";
+            var expectedMessage =
+                "Invalid template 'test/{a?}/test'. Non-optional parameters or literal routes cannot appear after optional parameters.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -199,9 +256,12 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_NonOptionalParamAfterOptionalParam()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate("/test/{a?}/{b}"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate("/test/{a?}/{b}")
+            );
 
-            var expectedMessage = "Invalid template 'test/{a?}/{b}'. Non-optional parameters or literal routes cannot appear after optional parameters.";
+            var expectedMessage =
+                "Invalid template 'test/{a?}/{b}'. Non-optional parameters or literal routes cannot appear after optional parameters.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -209,9 +269,12 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_CatchAllParamWithMultipleAsterisks()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate("/test/{a}/{**b}"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate("/test/{a}/{**b}")
+            );
 
-            var expectedMessage = "Invalid template '/test/{a}/{**b}'. A catch-all parameter may only have one '*' at the beginning of the segment.";
+            var expectedMessage =
+                "Invalid template '/test/{a}/{**b}'. A catch-all parameter may only have one '*' at the beginning of the segment.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -219,9 +282,12 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_CatchAllParamNotLast()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => TemplateParser.ParseTemplate("/test/{*a}/{b}"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => TemplateParser.ParseTemplate("/test/{*a}/{b}")
+            );
 
-            var expectedMessage = "Invalid template 'test/{*a}/{b}'. A catch-all parameter can only appear as the last segment of the route template.";
+            var expectedMessage =
+                "Invalid template 'test/{*a}/{b}'. A catch-all parameter can only appear as the last segment of the route template.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -229,9 +295,12 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Fact]
         public void InvalidTemplate_BadOptionalCharacterPosition()
         {
-            var ex = Assert.Throws<ArgumentException>(() => TemplateParser.ParseTemplate("/test/{a?bc}/{b}"));
+            var ex = Assert.Throws<ArgumentException>(
+                () => TemplateParser.ParseTemplate("/test/{a?bc}/{b}")
+            );
 
-            var expectedMessage = "Malformed parameter 'a?bc' in route '/test/{a?bc}/{b}'. '?' character can only appear at the end of parameter name.";
+            var expectedMessage =
+                "Malformed parameter 'a?bc' in route '/test/{a?bc}/{b}'. '?' character can only appear at the end of parameter name.";
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -252,14 +321,17 @@ namespace Microsoft.AspNetCore.Components.Routing
                 return this;
             }
 
-            public RouteTemplate Build() => new RouteTemplate(string.Join('/', Segments), Segments.ToArray());
+            public RouteTemplate Build() =>
+                new RouteTemplate(string.Join('/', Segments), Segments.ToArray());
 
-            public static implicit operator RouteTemplate(ExpectedTemplateBuilder builder) => builder.Build();
+            public static implicit operator RouteTemplate(ExpectedTemplateBuilder builder) =>
+                builder.Build();
         }
 
         private class RouteTemplateTestComparer : IEqualityComparer<RouteTemplate>
         {
-            public static RouteTemplateTestComparer Instance { get; } = new RouteTemplateTestComparer();
+            public static RouteTemplateTestComparer Instance { get; } =
+                new RouteTemplateTestComparer();
 
             public bool Equals(RouteTemplate x, RouteTemplate y)
             {
@@ -280,8 +352,13 @@ namespace Microsoft.AspNetCore.Components.Routing
                     {
                         return false;
                     }
-                    if (!string.Equals(xSegment.Value, ySegment.Value, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        !string.Equals(
+                            xSegment.Value,
+                            ySegment.Value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         return false;
                     }
                 }

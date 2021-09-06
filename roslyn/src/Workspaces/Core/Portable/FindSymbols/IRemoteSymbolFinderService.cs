@@ -21,34 +21,100 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ValueTask ReferenceItemCompletedAsync(RemoteServiceCallbackId callbackId);
             ValueTask OnStartedAsync(RemoteServiceCallbackId callbackId);
             ValueTask OnCompletedAsync(RemoteServiceCallbackId callbackId);
-            ValueTask OnFindInDocumentStartedAsync(RemoteServiceCallbackId callbackId, DocumentId documentId);
-            ValueTask OnFindInDocumentCompletedAsync(RemoteServiceCallbackId callbackId, DocumentId documentId);
-            ValueTask OnDefinitionFoundAsync(RemoteServiceCallbackId callbackId, SerializableSymbolGroup group);
-            ValueTask OnReferenceFoundAsync(RemoteServiceCallbackId callbackId, SerializableSymbolGroup group, SerializableSymbolAndProjectId definition, SerializableReferenceLocation reference);
+            ValueTask OnFindInDocumentStartedAsync(
+                RemoteServiceCallbackId callbackId,
+                DocumentId documentId
+            );
+            ValueTask OnFindInDocumentCompletedAsync(
+                RemoteServiceCallbackId callbackId,
+                DocumentId documentId
+            );
+            ValueTask OnDefinitionFoundAsync(
+                RemoteServiceCallbackId callbackId,
+                SerializableSymbolGroup group
+            );
+            ValueTask OnReferenceFoundAsync(
+                RemoteServiceCallbackId callbackId,
+                SerializableSymbolGroup group,
+                SerializableSymbolAndProjectId definition,
+                SerializableReferenceLocation reference
+            );
 
             ValueTask AddLiteralItemsAsync(RemoteServiceCallbackId callbackId, int count);
             ValueTask LiteralItemCompletedAsync(RemoteServiceCallbackId callbackId);
-            ValueTask OnLiteralReferenceFoundAsync(RemoteServiceCallbackId callbackId, DocumentId documentId, TextSpan span);
+            ValueTask OnLiteralReferenceFoundAsync(
+                RemoteServiceCallbackId callbackId,
+                DocumentId documentId,
+                TextSpan span
+            );
         }
 
-        ValueTask FindReferencesAsync(PinnedSolutionInfo solutionInfo, RemoteServiceCallbackId callbackId, SerializableSymbolAndProjectId symbolAndProjectIdArg, ImmutableArray<DocumentId> documentArgs,
-            FindReferencesSearchOptions options, CancellationToken cancellationToken);
+        ValueTask FindReferencesAsync(
+            PinnedSolutionInfo solutionInfo,
+            RemoteServiceCallbackId callbackId,
+            SerializableSymbolAndProjectId symbolAndProjectIdArg,
+            ImmutableArray<DocumentId> documentArgs,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask FindLiteralReferencesAsync(PinnedSolutionInfo solutionInfo, RemoteServiceCallbackId callbackId, object value, TypeCode typeCode, CancellationToken cancellationToken);
+        ValueTask FindLiteralReferencesAsync(
+            PinnedSolutionInfo solutionInfo,
+            RemoteServiceCallbackId callbackId,
+            object value,
+            TypeCode typeCode,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask<ImmutableArray<SerializableSymbolAndProjectId>> FindAllDeclarationsWithNormalQueryAsync(
-            PinnedSolutionInfo solutionInfo, ProjectId projectId, string name, SearchKind searchKind, SymbolFilter criteria, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<SerializableSymbolAndProjectId>
+        > FindAllDeclarationsWithNormalQueryAsync(
+            PinnedSolutionInfo solutionInfo,
+            ProjectId projectId,
+            string name,
+            SearchKind searchKind,
+            SymbolFilter criteria,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask<ImmutableArray<SerializableSymbolAndProjectId>> FindSolutionSourceDeclarationsWithNormalQueryAsync(
-            PinnedSolutionInfo solutionInfo, string name, bool ignoreCase, SymbolFilter criteria, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<SerializableSymbolAndProjectId>
+        > FindSolutionSourceDeclarationsWithNormalQueryAsync(
+            PinnedSolutionInfo solutionInfo,
+            string name,
+            bool ignoreCase,
+            SymbolFilter criteria,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask<ImmutableArray<SerializableSymbolAndProjectId>> FindProjectSourceDeclarationsWithNormalQueryAsync(
-            PinnedSolutionInfo solutionInfo, ProjectId projectId, string name, bool ignoreCase, SymbolFilter criteria, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<SerializableSymbolAndProjectId>
+        > FindProjectSourceDeclarationsWithNormalQueryAsync(
+            PinnedSolutionInfo solutionInfo,
+            ProjectId projectId,
+            string name,
+            bool ignoreCase,
+            SymbolFilter criteria,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask<ImmutableArray<SerializableSymbolAndProjectId>> FindSolutionSourceDeclarationsWithPatternAsync(
-            PinnedSolutionInfo solutionInfo, string pattern, SymbolFilter criteria, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<SerializableSymbolAndProjectId>
+        > FindSolutionSourceDeclarationsWithPatternAsync(
+            PinnedSolutionInfo solutionInfo,
+            string pattern,
+            SymbolFilter criteria,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask<ImmutableArray<SerializableSymbolAndProjectId>> FindProjectSourceDeclarationsWithPatternAsync(
-            PinnedSolutionInfo solutionInfo, ProjectId projectId, string pattern, SymbolFilter criteria, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<SerializableSymbolAndProjectId>
+        > FindProjectSourceDeclarationsWithPatternAsync(
+            PinnedSolutionInfo solutionInfo,
+            ProjectId projectId,
+            string pattern,
+            SymbolFilter criteria,
+            CancellationToken cancellationToken
+        );
     }
 }

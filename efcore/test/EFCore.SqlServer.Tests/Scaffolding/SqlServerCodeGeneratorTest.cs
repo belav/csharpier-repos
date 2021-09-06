@@ -16,14 +16,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         {
             var codeGenerator = new SqlServerCodeGenerator(
                 new ProviderCodeGeneratorDependencies(
-                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()));
+                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()
+                )
+            );
 
-            var result = codeGenerator.GenerateUseProvider("Data Source=Test", providerOptions: null);
+            var result = codeGenerator.GenerateUseProvider(
+                "Data Source=Test",
+                providerOptions: null
+            );
 
             Assert.Equal("UseSqlServer", result.Method);
-            Assert.Collection(
-                result.Arguments,
-                a => Assert.Equal("Data Source=Test", a));
+            Assert.Collection(result.Arguments, a => Assert.Equal("Data Source=Test", a));
             Assert.Null(result.ChainedCall);
         }
 
@@ -32,7 +35,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         {
             var codeGenerator = new SqlServerCodeGenerator(
                 new ProviderCodeGeneratorDependencies(
-                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()));
+                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()
+                )
+            );
 
             var providerOptions = new MethodCallCodeFragment("SetProviderOption");
 
@@ -48,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
 
                     Assert.Equal("x", nestedClosure.Parameter);
                     Assert.Same(providerOptions, nestedClosure.MethodCall);
-                });
+                }
+            );
             Assert.Null(result.ChainedCall);
         }
     }

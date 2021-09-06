@@ -11,10 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         private readonly Dictionary<string, RazorProjectItem> _lookup;
 
-        public TestRazorProject()
-            : this(new RazorProjectItem[0])
-        {
-        }
+        public TestRazorProject() : this(new RazorProjectItem[0]) { }
 
         public TestRazorProject(IList<RazorProjectItem> items)
         {
@@ -25,7 +22,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             throw new NotImplementedException();
         }
-
 
         public override RazorProjectItem GetItem(string path)
         {
@@ -42,6 +38,7 @@ namespace Microsoft.AspNetCore.Razor.Language
             return value;
         }
 
-        public new string NormalizeAndEnsureValidPath(string path) => base.NormalizeAndEnsureValidPath(path);
+        public new string NormalizeAndEnsureValidPath(string path) =>
+            base.NormalizeAndEnsureValidPath(path);
     }
 }

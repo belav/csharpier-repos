@@ -97,22 +97,21 @@ namespace System.CommandLine.Parsing
             {
                 if (skipQuoteAtIndex is null)
                 {
-                    return memory.Slice(
-                                     startTokenIndex,
-                                     IndexOfEndOfToken())
-                                 .ToString();
+                    return memory.Slice(startTokenIndex, IndexOfEndOfToken()).ToString();
                 }
                 else
                 {
                     var beforeQuote = memory.Slice(
                         startTokenIndex,
-                        skipQuoteAtIndex.Value - startTokenIndex);
+                        skipQuoteAtIndex.Value - startTokenIndex
+                    );
 
                     var indexOfCharAfterQuote = skipQuoteAtIndex.Value + 1;
 
                     var afterQuote = memory.Slice(
                         indexOfCharAfterQuote,
-                        pos - skipQuoteAtIndex.Value - 1);
+                        pos - skipQuoteAtIndex.Value - 1
+                    );
 
                     skipQuoteAtIndex = null;
 

@@ -61,7 +61,6 @@ namespace GCTest
             test.DoTest(iters, gcMode);
         }
 
-
         private void LoadData(int count)
         {
             loid++;
@@ -69,7 +68,10 @@ namespace GCTest
             byte[] aBuffer = null;
             long maxElapsed = 0;
 
-            string clunieFile = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "clunie_small.xml");
+            string clunieFile = Path.Combine(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                "clunie_small.xml"
+            );
             using (StreamReader reader = new StreamReader(clunieFile))
             {
                 aBuffer = new byte[reader.BaseStream.Length];
@@ -101,7 +103,6 @@ namespace GCTest
 
                 Console.WriteLine("Maximum of {0}: {1}", count, maxElapsed);
             }
-
         }
 
         public void DoTest(int count, GCLatencyMode gcMode)
@@ -115,11 +116,11 @@ namespace GCTest
                 GCSettings.LatencyMode = gcMode;
                 LoadData(count);
             }
+
             finally
             {
                 GCSettings.LatencyMode = oldMode;
             }
         }
-
     }
 }

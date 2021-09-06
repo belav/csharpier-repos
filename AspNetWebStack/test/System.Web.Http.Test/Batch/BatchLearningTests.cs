@@ -24,32 +24,50 @@ namespace System.Web.Http.Batch
             config.Routes.MapHttpBatchRoute(
                 routeName: "Batch",
                 routeTemplate: "api/$batch",
-                batchHandler: new CustomHttpBatchHandler(server));
+                batchHandler: new CustomHttpBatchHandler(server)
+            );
             config.Routes.MapHttpRoute(
                 "Default",
                 "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
+                defaults: new { id = RouteParameter.Optional }
+            );
 
             // Act
             using (HttpClient client = new HttpClient(server))
-            using (HttpRequestMessage batchRequest = new HttpRequestMessage(HttpMethod.Post, baseAddress + "$batch"))
-            {
+            using (
+                HttpRequestMessage batchRequest = new HttpRequestMessage(
+                    HttpMethod.Post,
+                    baseAddress + "$batch"
+                )
+            ) {
                 batchRequest.Content = new MultipartContent("mixed")
                 {
                     new HttpMessageContent(
                         new HttpRequestMessage(HttpMethod.Post, baseAddress + "values")
                         {
-                            Content = new ObjectContent<string>("newValue", new JsonMediaTypeFormatter())
-                        }),
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Get, baseAddress + "values/newValue"))
+                            Content = new ObjectContent<string>(
+                                "newValue",
+                                new JsonMediaTypeFormatter()
+                            )
+                        }
+                    ),
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Get, baseAddress + "values/newValue")
+                    )
                 };
 
-                using (HttpResponseMessage batchResponse = await client.SendAsync(batchRequest, CancellationToken.None))
-                {
-                    MultipartStreamProvider streamProvider = await batchResponse.Content.ReadAsMultipartAsync();
+                using (
+                    HttpResponseMessage batchResponse = await client.SendAsync(
+                        batchRequest,
+                        CancellationToken.None
+                    )
+                ) {
+                    MultipartStreamProvider streamProvider =
+                        await batchResponse.Content.ReadAsMultipartAsync();
                     foreach (HttpContent content in streamProvider.Contents)
                     {
-                        HttpResponseMessage response = await content.ReadAsHttpResponseMessageAsync();
+                        HttpResponseMessage response =
+                            await content.ReadAsHttpResponseMessageAsync();
                         string result = await response.Content.ReadAsStringAsync();
 
                         // Assert
@@ -74,16 +92,16 @@ namespace System.Web.Http.Batch
 
         public class CustomHttpBatchHandler : DefaultHttpBatchHandler
         {
-            public CustomHttpBatchHandler(HttpServer httpServer)
-                : base(httpServer)
-            {
-            }
+            public CustomHttpBatchHandler(HttpServer httpServer) : base(httpServer) { }
 
             public override async Task<IList<HttpRequestMessage>> ParseBatchRequestsAsync(
                 HttpRequestMessage request,
-                CancellationToken cancellationToken)
-            {
-                IList<HttpRequestMessage> subRequests = await base.ParseBatchRequestsAsync(request, cancellationToken);
+                CancellationToken cancellationToken
+            ) {
+                IList<HttpRequestMessage> subRequests = await base.ParseBatchRequestsAsync(
+                    request,
+                    cancellationToken
+                );
 
                 // Assert
                 Assert.NotNull(subRequests);
@@ -91,7 +109,9 @@ namespace System.Web.Http.Batch
                 {
                     Assert.NotNull(subRequest);
                     Assert.Equal(2, subRequest.Properties.Count);
-                    Assert.True(subRequest.Properties.ContainsKey(HttpPropertyKeys.RequestContextKey));
+                    Assert.True(
+                        subRequest.Properties.ContainsKey(HttpPropertyKeys.RequestContextKey)
+                    );
                     Assert.True(subRequest.Properties.ContainsKey(HttpPropertyKeys.IsBatchRequest));
                     Assert.False(subRequest.Properties.ContainsKey(HttpRoute.RoutingContextKey));
                 }

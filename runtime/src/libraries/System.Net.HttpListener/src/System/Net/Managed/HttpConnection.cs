@@ -71,8 +71,12 @@ namespace System.Net
         private LineState _lineState = LineState.None;
         private int _position;
 
-        public HttpConnection(Socket sock, HttpEndPointListener epl, bool secure, X509Certificate cert)
-        {
+        public HttpConnection(
+            Socket sock,
+            HttpEndPointListener epl,
+            bool secure,
+            X509Certificate cert
+        ) {
             _socket = sock;
             _epl = epl;
             _secure = secure;
@@ -84,31 +88,41 @@ namespace System.Net
             else
             {
 #pragma warning disable CA5359
-                _sslStream = epl.Listener.CreateSslStream(new NetworkStream(sock, false), false, (t, c, ch, e) =>
-                {
-                    if (c == null)
+                _sslStream = epl.Listener.CreateSslStream(
+                    new NetworkStream(sock, false),
+                    false,
+                    (t, c, ch, e) =>
                     {
+                        if (c == null)
+                        {
+                            return true;
+                        }
+
+                        var c2 = c as X509Certificate2;
+                        if (c2 == null)
+                        {
+                            c2 = new X509Certificate2(c.GetRawCertData());
+                        }
+
+                        _clientCert = c2;
+                        _clientCertErrors = new int[] { (int)e };
                         return true;
                     }
-
-                    var c2 = c as X509Certificate2;
-                    if (c2 == null)
-                    {
-                        c2 = new X509Certificate2(c.GetRawCertData());
-                    }
-
-                    _clientCert = c2;
-                    _clientCertErrors = new int[] { (int)e };
-                    return true;
-                });
+                );
 #pragma warning restore CA5359
 
                 _stream = _sslStream;
             }
 
             _timer = new Timer(OnTimeout, null, Timeout.Infinite, Timeout.Infinite);
-            if (_sslStream != null) {
-                _sslStream.AuthenticateAsServer (_cert, true, (SslProtocols)ServicePointManager.SecurityProtocol, false);
+            if (_sslStream != null)
+            {
+                _sslStream.AuthenticateAsServer(
+                    _cert,
+                    true,
+                    (SslProtocols)ServicePointManager.SecurityProtocol,
+                    false
+                );
             }
             Init();
         }
@@ -220,11 +234,23 @@ namespace System.Net
                 {
                     _chunked = true;
                     _context.Response.SendChunked = true;
-                    _requestStream = new ChunkedInputStream(_context, _stream, buffer, _position, length - _position);
+                    _requestStream = new ChunkedInputStream(
+                        _context,
+                        _stream,
+                        buffer,
+                        _position,
+                        length - _position
+                    );
                 }
                 else
                 {
-                    _requestStream = new HttpRequestStream(_stream, buffer, _position, length - _position, contentlength);
+                    _requestStream = new HttpRequestStream(
+                        _stream,
+                        buffer,
+                        _position,
+                        length - _position,
+                        contentlength
+                    );
                 }
             }
             return _requestStream;
@@ -239,7 +265,11 @@ namespace System.Net
                 if (listener == null)
                     return new HttpResponseStream(_stream, _context.Response, true);
 
-                _responseStream = new HttpResponseStream(_stream, _context.Response, listener.IgnoreWriteExceptions);
+                _responseStream = new HttpResponseStream(
+                    _stream,
+                    _context.Response,
+                    listener.IgnoreWriteExceptions
+                );
             }
             return _responseStream;
         }
@@ -451,9 +481,8 @@ namespace System.Net
                 response.StatusCode = status;
                 response.ContentType = "text/html";
                 string? description = HttpStatusDescription.Get(status);
-                string str = msg != null ?
-                    $"<h1>{description} ({msg})</h1>" :
-                    $"<h1>{description}</h1>";
+                string str =
+                    msg != null ? $"<h1>{description} ({msg})</h1>" : $"<h1>{description}</h1>";
 
                 byte[] error = Encoding.Default.GetBytes(str);
                 response.Close(error, false);
@@ -516,7 +545,10 @@ namespace System.Net
             {
                 force |= !_context.Request.KeepAlive;
                 if (!force)
-                    force = (_context.Response.Headers[HttpKnownHeaderNames.Connection] == HttpHeaderStrings.Close);
+                    force = (
+                        _context.Response.Headers[HttpKnownHeaderNames.Connection]
+                        == HttpHeaderStrings.Close
+                    );
 
                 if (!force && _context.Request.FlushInput())
                 {
@@ -544,9 +576,7 @@ namespace System.Net
                     if (s != null)
                         s.Shutdown(SocketShutdown.Both);
                 }
-                catch
-                {
-                }
+                catch { }
                 finally
                 {
                     if (s != null)

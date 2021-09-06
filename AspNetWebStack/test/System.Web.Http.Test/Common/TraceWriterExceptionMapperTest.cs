@@ -16,21 +16,45 @@ namespace System.Web.Http.Common
             {
                 return new TheoryDataSet<Exception, TraceLevel?>
                 {
-                    { new Exception(), null},
-                    { new HttpResponseException(new HttpResponseMessage(HttpStatusCode.OK)), TraceLevel.Info },
-                    { new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Accepted)), TraceLevel.Info },
-                    { new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)), TraceLevel.Warn },
-                    { new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Conflict)), TraceLevel.Warn },
-                    { new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)), null },
+                    { new Exception(), null },
+                    {
+                        new HttpResponseException(new HttpResponseMessage(HttpStatusCode.OK)),
+                        TraceLevel.Info
+                    },
+                    {
+                        new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Accepted)),
+                        TraceLevel.Info
+                    },
+                    {
+                        new HttpResponseException(
+                            new HttpResponseMessage(HttpStatusCode.BadRequest)
+                        ),
+                        TraceLevel.Warn
+                    },
+                    {
+                        new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Conflict)),
+                        TraceLevel.Warn
+                    },
+                    {
+                        new HttpResponseException(
+                            new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                        ),
+                        null
+                    },
                 };
             }
         }
 
         [Theory]
         [PropertyData("GetMappedTraceLevelTestData")]
-        public void GetMappedTraceLevel_ReturnsExpectedTraceLevel(Exception exception, TraceLevel? expectedTraceLevel)
-        {
-            Assert.Equal(expectedTraceLevel, TraceWriterExceptionMapper.GetMappedTraceLevel(exception));
+        public void GetMappedTraceLevel_ReturnsExpectedTraceLevel(
+            Exception exception,
+            TraceLevel? expectedTraceLevel
+        ) {
+            Assert.Equal(
+                expectedTraceLevel,
+                TraceWriterExceptionMapper.GetMappedTraceLevel(exception)
+            );
         }
     }
 }

@@ -49,7 +49,12 @@ namespace System.Xml.Schema
         [XmlIgnore]
         internal XmlSchemaContentProcessing ProcessContentsCorrect
         {
-            get { return _processContents == XmlSchemaContentProcessing.None ? XmlSchemaContentProcessing.Strict : _processContents; }
+            get
+            {
+                return _processContents == XmlSchemaContentProcessing.None
+                    ? XmlSchemaContentProcessing.Strict
+                    : _processContents;
+            }
         }
 
         internal override string NameString

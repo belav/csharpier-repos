@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             IViewComponentFactory viewComponentFactory,
             ViewComponentInvokerCache viewComponentInvokerCache,
             DiagnosticListener diagnosticListener,
-            ILogger logger)
-        {
+            ILogger logger
+        ) {
             if (viewComponentFactory == null)
             {
                 throw new ArgumentNullException(nameof(viewComponentFactory));
@@ -96,6 +96,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     result = InvokeSyncCore(executor, component, context);
                 }
             }
+
             finally
             {
                 if (component != null)
@@ -107,8 +108,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             await result.ExecuteAsync(context);
         }
 
-        private async Task<IViewComponentResult> InvokeAsyncCore(ObjectMethodExecutor executor, object component, ViewComponentContext context)
-        {
+        private async Task<IViewComponentResult> InvokeAsyncCore(
+            ObjectMethodExecutor executor,
+            object component,
+            ViewComponentContext context
+        ) {
             using (_logger.ViewComponentScope(context))
             {
                 var arguments = PrepareArguments(context.Arguments, executor);
@@ -126,7 +130,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     var task = executor.Execute(component, arguments);
                     if (task is null)
                     {
-                        throw new InvalidOperationException(Resources.ViewComponent_MustReturnValue);
+                        throw new InvalidOperationException(
+                            Resources.ViewComponent_MustReturnValue
+                        );
                     }
 
                     resultAsObject = await (Task<IViewComponentResult>)task;
@@ -136,7 +142,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     var task = executor.Execute(component, arguments);
                     if (task is null)
                     {
-                        throw new InvalidOperationException(Resources.ViewComponent_MustReturnValue);
+                        throw new InvalidOperationException(
+                            Resources.ViewComponent_MustReturnValue
+                        );
                     }
 
                     resultAsObject = await (Task<string>)task;
@@ -146,7 +154,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     var task = executor.Execute(component, arguments);
                     if (task is null)
                     {
-                        throw new InvalidOperationException(Resources.ViewComponent_MustReturnValue);
+                        throw new InvalidOperationException(
+                            Resources.ViewComponent_MustReturnValue
+                        );
                     }
 
                     resultAsObject = await (Task<IHtmlContent>)task;
@@ -157,15 +167,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 }
 
                 var viewComponentResult = CoerceToViewComponentResult(resultAsObject);
-                _logger.ViewComponentExecuted(context, stopwatch.GetElapsedTime(), viewComponentResult);
+                _logger.ViewComponentExecuted(
+                    context,
+                    stopwatch.GetElapsedTime(),
+                    viewComponentResult
+                );
                 _diagnosticListener.AfterViewComponent(context, viewComponentResult, component);
 
                 return viewComponentResult;
             }
         }
 
-        private IViewComponentResult InvokeSyncCore(ObjectMethodExecutor executor, object component, ViewComponentContext context)
-        {
+        private IViewComponentResult InvokeSyncCore(
+            ObjectMethodExecutor executor,
+            object component,
+            ViewComponentContext context
+        ) {
             using (_logger.ViewComponentScope(context))
             {
                 var arguments = PrepareArguments(context.Arguments, executor);
@@ -179,7 +196,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 result = executor.Execute(component, arguments);
 
                 var viewComponentResult = CoerceToViewComponentResult(result);
-                _logger.ViewComponentExecuted(context, stopwatch.GetElapsedTime(), viewComponentResult);
+                _logger.ViewComponentExecuted(
+                    context,
+                    stopwatch.GetElapsedTime(),
+                    viewComponentResult
+                );
                 _diagnosticListener.AfterViewComponent(context, viewComponentResult, component);
 
                 return viewComponentResult;
@@ -208,16 +229,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 return new HtmlContentViewComponentResult(htmlContent);
             }
 
-            throw new InvalidOperationException(Resources.FormatViewComponent_InvalidReturnValue(
-                typeof(string).Name,
-                typeof(IHtmlContent).Name,
-                typeof(IViewComponentResult).Name));
+            throw new InvalidOperationException(
+                Resources.FormatViewComponent_InvalidReturnValue(
+                    typeof(string).Name,
+                    typeof(IHtmlContent).Name,
+                    typeof(IViewComponentResult).Name
+                )
+            );
         }
 
         private static object?[]? PrepareArguments(
             IDictionary<string, object?> parameters,
-            ObjectMethodExecutor objectMethodExecutor)
-        {
+            ObjectMethodExecutor objectMethodExecutor
+        ) {
             var declaredParameterInfos = objectMethodExecutor.MethodParameters;
             var count = declaredParameterInfos.Length;
             if (count == 0)

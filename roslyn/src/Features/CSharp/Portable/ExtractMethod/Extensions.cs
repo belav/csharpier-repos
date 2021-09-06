@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             for (var current = node; current is object; current = current.Parent)
             {
-                if (current.Parent != null &&
-                    current.Parent.IsStatementContainerNode())
+                if (current.Parent != null && current.Parent.IsStatementContainerNode())
                 {
                     return current as StatementSyntax;
                 }
@@ -45,22 +44,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             return null;
         }
 
-        public static StatementSyntax GetParentLabeledStatementIfPossible(this SyntaxNode node)
-            => (StatementSyntax)((node.Parent is LabeledStatementSyntax) ? node.Parent : node);
+        public static StatementSyntax GetParentLabeledStatementIfPossible(this SyntaxNode node) =>
+            (StatementSyntax)((node.Parent is LabeledStatementSyntax) ? node.Parent : node);
 
-        public static bool IsStatementContainerNode([NotNullWhen(returnValue: true)] this SyntaxNode? node)
-            => node is BlockSyntax || node is SwitchSectionSyntax;
+        public static bool IsStatementContainerNode(
+            [NotNullWhen(returnValue: true)] this SyntaxNode? node
+        ) => node is BlockSyntax || node is SwitchSectionSyntax;
 
         public static BlockSyntax? GetBlockBody(this SyntaxNode? node)
         {
             switch (node)
             {
-                case BaseMethodDeclarationSyntax m: return m.Body;
-                case AccessorDeclarationSyntax a: return a.Body;
-                case SimpleLambdaExpressionSyntax s: return s.Body as BlockSyntax;
-                case ParenthesizedLambdaExpressionSyntax p: return p.Body as BlockSyntax;
-                case AnonymousMethodExpressionSyntax a: return a.Block;
-                default: return null;
+                case BaseMethodDeclarationSyntax m:
+                    return m.Body;
+                case AccessorDeclarationSyntax a:
+                    return a.Body;
+                case SimpleLambdaExpressionSyntax s:
+                    return s.Body as BlockSyntax;
+                case ParenthesizedLambdaExpressionSyntax p:
+                    return p.Body as BlockSyntax;
+                case AnonymousMethodExpressionSyntax a:
+                    return a.Block;
+                default:
+                    return null;
             }
         }
 
@@ -70,11 +76,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             bool predicate(SyntaxNode n)
             {
-                if (n is BaseMethodDeclarationSyntax ||
-                    n is AccessorDeclarationSyntax ||
-                    n is BlockSyntax ||
-                    n is GlobalStatementSyntax)
-                {
+                if (
+                    n is BaseMethodDeclarationSyntax
+                    || n is AccessorDeclarationSyntax
+                    || n is BlockSyntax
+                    || n is GlobalStatementSyntax
+                ) {
                     return true;
                 }
 
@@ -99,16 +106,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             return false;
         }
 
-        public static bool UnderValidContext(this SyntaxToken token)
-            => token.GetAncestors<SyntaxNode>().Any(n => n.CheckTopLevel(token.Span));
+        public static bool UnderValidContext(this SyntaxToken token) =>
+            token.GetAncestors<SyntaxNode>().Any(n => n.CheckTopLevel(token.Span));
 
         public static bool PartOfConstantInitializerExpression(this SyntaxNode node)
         {
-            return node.PartOfConstantInitializerExpression<FieldDeclarationSyntax>(n => n.Modifiers) ||
-                   node.PartOfConstantInitializerExpression<LocalDeclarationStatementSyntax>(n => n.Modifiers);
+            return node.PartOfConstantInitializerExpression<FieldDeclarationSyntax>(
+                    n => n.Modifiers
+                )
+                || node.PartOfConstantInitializerExpression<LocalDeclarationStatementSyntax>(
+                    n => n.Modifiers
+                );
         }
 
-        private static bool PartOfConstantInitializerExpression<T>(this SyntaxNode node, Func<T, SyntaxTokenList> modifiersGetter) where T : SyntaxNode
+        private static bool PartOfConstantInitializerExpression<T>(
+            this SyntaxNode node,
+            Func<T, SyntaxTokenList> modifiersGetter
+        ) where T : SyntaxNode
         {
             var decl = node.GetAncestor<T>();
             if (decl == null)
@@ -131,8 +145,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             return equal.Value != null && equal.Value.Span.Contains(node.Span);
         }
 
-        public static bool ContainArgumentlessThrowWithoutEnclosingCatch(this IEnumerable<SyntaxToken> tokens, TextSpan textSpan)
-        {
+        public static bool ContainArgumentlessThrowWithoutEnclosingCatch(
+            this IEnumerable<SyntaxToken> tokens,
+            TextSpan textSpan
+        ) {
             foreach (var token in tokens)
             {
                 if (token.Kind() != SyntaxKind.ThrowKeyword)
@@ -140,8 +156,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     continue;
                 }
 
-                if (!(token.Parent is ThrowStatementSyntax throwStatement) || throwStatement.Expression != null)
-                {
+                if (
+                    !(token.Parent is ThrowStatementSyntax throwStatement)
+                    || throwStatement.Expression != null
+                ) {
                     continue;
                 }
 
@@ -155,8 +173,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             return false;
         }
 
-        public static bool ContainPreprocessorCrossOver(this IEnumerable<SyntaxToken> tokens, TextSpan textSpan)
-        {
+        public static bool ContainPreprocessorCrossOver(
+            this IEnumerable<SyntaxToken> tokens,
+            TextSpan textSpan
+        ) {
             var activeRegions = 0;
             var activeIfs = 0;
 
@@ -197,7 +217,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         {
                             return true;
                         }
-
                         break;
                 }
             }
@@ -221,8 +240,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
         }
 
-        public static bool HasSyntaxAnnotation(this HashSet<SyntaxAnnotation> set, SyntaxNode node)
-            => set.Any(a => node.GetAnnotatedNodesAndTokens(a).Any());
+        public static bool HasSyntaxAnnotation(
+            this HashSet<SyntaxAnnotation> set,
+            SyntaxNode node
+        ) => set.Any(a => node.GetAnnotatedNodesAndTokens(a).Any());
 
         public static bool HasHybridTriviaBetween(this SyntaxToken token1, SyntaxToken token2)
         {
@@ -239,19 +260,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             return false;
         }
 
-        public static bool IsArrayInitializer([NotNullWhen(returnValue: true)] this SyntaxNode? node)
-            => node is InitializerExpressionSyntax && node.Parent is EqualsValueClauseSyntax;
+        public static bool IsArrayInitializer(
+            [NotNullWhen(returnValue: true)] this SyntaxNode? node
+        ) => node is InitializerExpressionSyntax && node.Parent is EqualsValueClauseSyntax;
 
-        public static bool IsExpressionInCast([NotNullWhen(returnValue: true)] this SyntaxNode? node)
-            => node is ExpressionSyntax && node.Parent is CastExpressionSyntax;
+        public static bool IsExpressionInCast(
+            [NotNullWhen(returnValue: true)] this SyntaxNode? node
+        ) => node is ExpressionSyntax && node.Parent is CastExpressionSyntax;
 
-        public static bool IsObjectType(this ITypeSymbol? type)
-            => type == null || type.SpecialType == SpecialType.System_Object;
+        public static bool IsObjectType(this ITypeSymbol? type) =>
+            type == null || type.SpecialType == SpecialType.System_Object;
 
-        public static bool BetweenFieldAndNonFieldMember(this SyntaxToken token1, SyntaxToken token2)
-        {
-            if (token1.RawKind != (int)SyntaxKind.SemicolonToken || !(token1.Parent is FieldDeclarationSyntax))
-            {
+        public static bool BetweenFieldAndNonFieldMember(
+            this SyntaxToken token1,
+            SyntaxToken token2
+        ) {
+            if (
+                token1.RawKind != (int)SyntaxKind.SemicolonToken
+                || !(token1.Parent is FieldDeclarationSyntax)
+            ) {
                 return false;
             }
 

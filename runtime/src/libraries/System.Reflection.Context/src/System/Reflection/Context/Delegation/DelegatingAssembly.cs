@@ -73,9 +73,24 @@ namespace System.Reflection.Context.Delegation
             get { return UnderlyingAssembly.CodeBase; }
         }
 
-        public override object CreateInstance(string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes)
-        {
-            return UnderlyingAssembly.CreateInstance(typeName, ignoreCase, bindingAttr, binder, args, culture, activationAttributes);
+        public override object CreateInstance(
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        ) {
+            return UnderlyingAssembly.CreateInstance(
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
         }
 
         public override MethodInfo EntryPoint
@@ -203,8 +218,11 @@ namespace System.Reflection.Context.Delegation
             get { return UnderlyingAssembly.IsDynamic; }
         }
 
-        public override Module LoadModule(string moduleName, byte[] rawModule, byte[] rawSymbolStore)
-        {
+        public override Module LoadModule(
+            string moduleName,
+            byte[] rawModule,
+            byte[] rawSymbolStore
+        ) {
             return UnderlyingAssembly.LoadModule(moduleName, rawModule, rawSymbolStore);
         }
     }

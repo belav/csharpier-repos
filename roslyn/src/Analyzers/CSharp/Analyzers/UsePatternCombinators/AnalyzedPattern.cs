@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
     {
         public readonly IOperation Target;
 
-        private AnalyzedPattern(IOperation target)
-            => Target = target;
+        private AnalyzedPattern(IOperation target) => Target = target;
 
         /// <summary>
         /// Represents a type-pattern, constructed from an is-expression
@@ -25,8 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly TypeSyntax TypeSyntax;
 
-            public Type(TypeSyntax type, IOperation target) : base(target)
-                => TypeSyntax = type;
+            public Type(TypeSyntax type, IOperation target) : base(target) => TypeSyntax = type;
         }
 
         /// <summary>
@@ -36,8 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly PatternSyntax PatternSyntax;
 
-            public Source(PatternSyntax patternSyntax, IOperation target) : base(target)
-                => PatternSyntax = patternSyntax;
+            public Source(PatternSyntax patternSyntax, IOperation target) : base(target) =>
+                PatternSyntax = patternSyntax;
         }
 
         /// <summary>
@@ -47,8 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly ExpressionSyntax ExpressionSyntax;
 
-            public Constant(ExpressionSyntax expression, IOperation target) : base(target)
-                => ExpressionSyntax = expression;
+            public Constant(ExpressionSyntax expression, IOperation target) : base(target) =>
+                ExpressionSyntax = expression;
         }
 
         /// <summary>
@@ -59,7 +57,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             public readonly BinaryOperatorKind OperatorKind;
             public readonly ExpressionSyntax Value;
 
-            public Relational(BinaryOperatorKind operatorKind, ExpressionSyntax value, IOperation target) : base(target)
+            public Relational(
+                BinaryOperatorKind operatorKind,
+                ExpressionSyntax value,
+                IOperation target
+            ) : base(target)
             {
                 OperatorKind = operatorKind;
                 Value = value;
@@ -76,7 +78,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             public readonly bool IsDisjunctive;
             public readonly SyntaxToken Token;
 
-            private Binary(AnalyzedPattern leftPattern, AnalyzedPattern rightPattern, bool isDisjunctive, SyntaxToken token, IOperation target) : base(target)
+            private Binary(
+                AnalyzedPattern leftPattern,
+                AnalyzedPattern rightPattern,
+                bool isDisjunctive,
+                SyntaxToken token,
+                IOperation target
+            ) : base(target)
             {
                 Left = leftPattern;
                 Right = rightPattern;
@@ -84,8 +92,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 Token = token;
             }
 
-            public static AnalyzedPattern? TryCreate(AnalyzedPattern leftPattern, AnalyzedPattern rightPattern, bool isDisjunctive, SyntaxToken token)
-            {
+            public static AnalyzedPattern? TryCreate(
+                AnalyzedPattern leftPattern,
+                AnalyzedPattern rightPattern,
+                bool isDisjunctive,
+                SyntaxToken token
+            ) {
                 var leftTarget = leftPattern.Target;
                 var rightTarget = rightPattern.Target;
 
@@ -94,12 +106,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 
                 var target = (leftConv, rightConv) switch
                 {
-                    ({ IsUserDefined: true }, _) or
-                    (_, { IsUserDefined: true }) => null,
+                    ({ IsUserDefined: true }, _) or (_, { IsUserDefined: true }) => null,
 
                     // If the original targets are implicitly converted due to usage of operators,
                     // both targets must have been converted to the same type, otherwise we bail.
-                    ({ IsImplicit: true }, { IsImplicit: true }) when !Equals(leftTarget.Type, rightTarget.Type) => null,
+                    ({ IsImplicit: true }, { IsImplicit: true })
+                        when !Equals(leftTarget.Type, rightTarget.Type)
+                      => null,
 
                     // If either of targets are implicitly converted but not both,
                     // we take the conversion node so that we can generate a cast off of it.
@@ -128,8 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly AnalyzedPattern Pattern;
 
-            private Not(AnalyzedPattern pattern, IOperation target) : base(target)
-                => Pattern = pattern;
+            private Not(AnalyzedPattern pattern, IOperation target) : base(target) =>
+                Pattern = pattern;
 
             private static BinaryOperatorKind Negate(BinaryOperatorKind kind)
             {
@@ -150,8 +163,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     null => null,
                     Not p => p.Pattern, // Avoid double negative
                     Relational p => new Relational(Negate(p.OperatorKind), p.Value, p.Target),
-                    Binary { Left: Not left, Right: Not right } p // Apply demorgans's law
-                        => Binary.TryCreate(left.Pattern, right.Pattern, !p.IsDisjunctive, p.Token),
+                    Binary{
+                        Left: Not left,
+                        Right: Not right
+                    } p // Apply demorgans's law
+                      => Binary.TryCreate(left.Pattern, right.Pattern, !p.IsDisjunctive, p.Token),
                     _ => new Not(pattern, pattern.Target)
                 };
             }

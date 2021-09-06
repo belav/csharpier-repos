@@ -40,7 +40,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <param name="key">Key to compare</param>
         /// <param name="stringConstant">Case constant to compare the key against</param>
         /// <param name="targetLabel">Target label to branch to if key = stringConstant</param>
-        public delegate void EmitStringCompareAndBranch(LocalOrParameter key, ConstantValue stringConstant, object targetLabel);
+        public delegate void EmitStringCompareAndBranch(
+            LocalOrParameter key,
+            ConstantValue stringConstant,
+            object targetLabel
+        );
 
         /// <summary>
         /// Delegate to compute string hash code.
@@ -70,8 +74,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             object fallThroughLabel,
             LocalDefinition? keyHash,
             EmitStringCompareAndBranch emitStringCondBranchDelegate,
-            GetStringHashCode computeStringHashcodeDelegate)
-        {
+            GetStringHashCode computeStringHashcodeDelegate
+        ) {
             Debug.Assert(caseLabels.Length > 0);
             RoslynDebug.Assert(emitStringCondBranchDelegate != null);
 
@@ -106,8 +110,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
             // Compute hash value for each case label constant and store the hash buckets
             // into a dictionary indexed by hash value.
             Dictionary<uint, HashBucket> stringHashMap = ComputeStringHashMap(
-                                                            _caseLabels,
-                                                            _computeStringHashcodeDelegate);
+                _caseLabels,
+                _computeStringHashcodeDelegate
+            );
 
             // Emit conditional jumps to hash buckets.
             // EmitHashBucketJumpTable returns a map from hashValues to hashBucketLabels.
@@ -127,8 +132,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         // Emits conditional jumps to hash buckets, returning a map from hashValues to hashBucketLabels.
-        private Dictionary<uint, object> EmitHashBucketJumpTable(Dictionary<uint, HashBucket> stringHashMap)
-        {
+        private Dictionary<uint, object> EmitHashBucketJumpTable(
+            Dictionary<uint, HashBucket> stringHashMap
+        ) {
             int count = stringHashMap.Count;
             var hashBucketLabelsMap = new Dictionary<uint, object>(count);
             var jumpTableLabels = new KeyValuePair<ConstantValue, object>[count];
@@ -139,7 +145,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ConstantValue hashConstant = ConstantValue.Create(hashValue);
                 object hashBucketLabel = new object();
 
-                jumpTableLabels[i] = new KeyValuePair<ConstantValue, object>(hashConstant, hashBucketLabel);
+                jumpTableLabels[i] = new KeyValuePair<ConstantValue, object>(
+                    hashConstant,
+                    hashBucketLabel
+                );
                 hashBucketLabelsMap[hashValue] = hashBucketLabel;
 
                 i++;
@@ -151,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 caseLabels: jumpTableLabels,
                 fallThroughLabel: _fallThroughLabel,
                 keyTypeCode: Cci.PrimitiveTypeCode.UInt32,
-                key: _keyHash);
+                key: _keyHash
+            );
 
             hashBucketJumpTableEmitter.EmitJumpTable();
 
@@ -171,8 +181,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         private void EmitCondBranchForStringSwitch(ConstantValue stringConstant, object targetLabel)
         {
-            RoslynDebug.Assert(stringConstant != null &&
-                (stringConstant.IsString || stringConstant.IsNull));
+            RoslynDebug.Assert(
+                stringConstant != null && (stringConstant.IsString || stringConstant.IsNull)
+            );
             RoslynDebug.Assert(targetLabel != null);
 
             _emitStringCondBranchDelegate(_key, stringConstant, targetLabel);
@@ -182,8 +193,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         // into a dictionary indexed by hash value.
         private static Dictionary<uint, HashBucket> ComputeStringHashMap(
             KeyValuePair<ConstantValue, object>[] caseLabels,
-            GetStringHashCode computeStringHashcodeDelegate)
-        {
+            GetStringHashCode computeStringHashcodeDelegate
+        ) {
             RoslynDebug.Assert(caseLabels != null);
             var stringHashMap = new Dictionary<uint, HashBucket>(caseLabels.Length);
 
@@ -208,8 +219,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             return stringHashMap;
         }
 
-        internal static bool ShouldGenerateHashTableSwitch(CommonPEModuleBuilder module, int labelsCount)
-        {
+        internal static bool ShouldGenerateHashTableSwitch(
+            CommonPEModuleBuilder module,
+            int labelsCount
+        ) {
             return module.SupportsPrivateImplClass && ShouldGenerateHashTableSwitch(labelsCount);
         }
 

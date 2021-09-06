@@ -11,16 +11,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal class DestructorSymbolReferenceFinder : AbstractReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind == MethodKind.Destructor;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.Destructor;
 
         protected override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             return SpecializedTasks.EmptyImmutableArray<Document>();
         }
 
@@ -29,9 +29,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
-            return new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
+            CancellationToken cancellationToken
+        ) {
+            return new ValueTask<ImmutableArray<FinderLocation>>(
+                ImmutableArray<FinderLocation>.Empty
+            );
         }
     }
 }

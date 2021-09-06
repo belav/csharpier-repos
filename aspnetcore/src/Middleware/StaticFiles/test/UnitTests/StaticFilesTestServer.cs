@@ -16,24 +16,25 @@ namespace Microsoft.AspNetCore.StaticFiles
 {
     public static class StaticFilesTestServer
     {
-        public static async Task<IHost> Create(Action<IApplicationBuilder> configureApp, Action<IServiceCollection> configureServices = null)
-        {
+        public static async Task<IHost> Create(
+            Action<IApplicationBuilder> configureApp,
+            Action<IServiceCollection> configureServices = null
+        ) {
             Action<IServiceCollection> defaultConfigureServices = services => { };
-            var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new []
-                {
-                    new KeyValuePair<string, string>("webroot", ".")
-                })
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                    new[] { new KeyValuePair<string, string>("webroot", ".") }
+                )
                 .Build();
-            var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .UseConfiguration(configuration)
-                    .Configure(configureApp)
-                    .ConfigureServices(configureServices ?? defaultConfigureServices);
-                }).Build();
+            var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseTestServer()
+                            .UseConfiguration(configuration)
+                            .Configure(configureApp)
+                            .ConfigureServices(configureServices ?? defaultConfigureServices);
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
             return host;

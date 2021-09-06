@@ -12,10 +12,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     part of the primary key and not part of any foreign keys or were configured to have a database default value.
     ///     It also configures properties as <see cref="ValueGenerated.OnAddOrUpdate" /> if they were configured as computed columns.
     /// </summary>
-    public class RelationalValueGenerationConvention :
-        ValueGenerationConvention,
-        IPropertyAnnotationChangedConvention,
-        IEntityTypeAnnotationChangedConvention
+    public class RelationalValueGenerationConvention
+        : ValueGenerationConvention,
+          IPropertyAnnotationChangedConvention,
+          IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalValueGenerationConvention" />.
@@ -24,10 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public RelationalValueGenerationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an annotation is changed on a property.
@@ -42,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
-        {
+            IConventionContext<IConventionAnnotation> context
+        ) {
             var property = propertyBuilder.Metadata;
             switch (name)
             {
@@ -68,17 +66,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
-        {
+            IConventionContext<IConventionAnnotation> context
+        ) {
             if (name == RelationalAnnotationNames.TableName)
             {
                 var schema = entityTypeBuilder.Metadata.GetSchema();
                 ProcessTableChanged(
                     entityTypeBuilder,
-                    (string?)oldAnnotation?.Value ?? entityTypeBuilder.Metadata.GetDefaultTableName(),
+                    (string?)oldAnnotation?.Value
+                        ?? entityTypeBuilder.Metadata.GetDefaultTableName(),
                     schema,
                     entityTypeBuilder.Metadata.GetTableName(),
-                    schema);
+                    schema
+                );
             }
             else if (name == RelationalAnnotationNames.Schema)
             {
@@ -88,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     tableName,
                     (string?)oldAnnotation?.Value ?? entityTypeBuilder.Metadata.GetDefaultSchema(),
                     tableName,
-                    entityTypeBuilder.Metadata.GetSchema());
+                    entityTypeBuilder.Metadata.GetSchema()
+                );
             }
         }
 
@@ -97,31 +98,37 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string? oldTable,
             string? oldSchema,
             string? newTable,
-            string? newSchema)
-        {
+            string? newSchema
+        ) {
             var primaryKey = entityTypeBuilder.Metadata.FindPrimaryKey();
             if (primaryKey == null)
             {
                 return;
             }
 
-            var oldLink = oldTable != null
-                ? entityTypeBuilder.Metadata.FindRowInternalForeignKeys(StoreObjectIdentifier.Table(oldTable, oldSchema))
-                : null;
-            var newLink = newTable != null
-                ? entityTypeBuilder.Metadata.FindRowInternalForeignKeys(StoreObjectIdentifier.Table(newTable, newSchema))
-                : null;
+            var oldLink =
+                oldTable != null
+                    ? entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
+                          StoreObjectIdentifier.Table(oldTable, oldSchema)
+                      )
+                    : null;
+            var newLink =
+                newTable != null
+                    ? entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
+                          StoreObjectIdentifier.Table(newTable, newSchema)
+                      )
+                    : null;
 
-            if ((oldLink?.Any() != true
-                    && newLink?.Any() != true)
-                || newLink == null)
+            if ((oldLink?.Any() != true && newLink?.Any() != true) || newLink == null)
             {
                 return;
             }
 
             foreach (var property in primaryKey.Properties)
             {
-                property.Builder.ValueGenerated(GetValueGenerated(property, StoreObjectIdentifier.Table(newTable!, newSchema)));
+                property.Builder.ValueGenerated(
+                    GetValueGenerated(property, StoreObjectIdentifier.Table(newTable!, newSchema))
+                );
             }
         }
 
@@ -138,7 +145,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return null;
             }
 
-            return GetValueGenerated(property, StoreObjectIdentifier.Table(tableName, property.DeclaringEntityType.GetSchema()));
+            return GetValueGenerated(
+                property,
+                StoreObjectIdentifier.Table(tableName, property.DeclaringEntityType.GetSchema())
+            );
         }
 
         /// <summary>
@@ -147,15 +157,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the store object. </param>
         /// <returns> The new store value generation strategy to set for the given property. </returns>
-        public static ValueGenerated? GetValueGenerated(IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
-        {
+        public static ValueGenerated? GetValueGenerated(
+            IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        ) {
             var valueGenerated = GetValueGenerated(property);
             return valueGenerated
-                ?? (property.GetComputedColumnSql(storeObject) != null
-                    ? ValueGenerated.OnAddOrUpdate
-                    : property.GetDefaultValue(storeObject) != null || property.GetDefaultValueSql(storeObject) != null
-                        ? ValueGenerated.OnAdd
-                        : (ValueGenerated?)null);
+                ?? (
+                    property.GetComputedColumnSql(storeObject) != null
+                        ? ValueGenerated.OnAddOrUpdate
+                        : property.GetDefaultValue(storeObject) != null
+                          || property.GetDefaultValueSql(storeObject) != null
+                            ? ValueGenerated.OnAdd
+                            : (ValueGenerated?)null
+                );
         }
     }
 }

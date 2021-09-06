@@ -59,8 +59,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Values are false if the node should result in an error and true otherwise.
             /// </param>
             /// <param name="isUnboundGenericType">True if no constructed generic type was encountered.</param>
-            public static void Visit(ExpressionSyntax typeSyntax, out Dictionary<GenericNameSyntax, bool> allowedMap, out bool isUnboundGenericType)
-            {
+            public static void Visit(
+                ExpressionSyntax typeSyntax,
+                out Dictionary<GenericNameSyntax, bool> allowedMap,
+                out bool isUnboundGenericType
+            ) {
                 OpenTypeVisitor visitor = new OpenTypeVisitor();
                 visitor.Visit(typeSyntax);
                 allowedMap = visitor._allowedMap;

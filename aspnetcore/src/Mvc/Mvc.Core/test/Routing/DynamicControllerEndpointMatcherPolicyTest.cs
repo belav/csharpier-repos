@@ -50,19 +50,37 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             ControllerEndpoints = new[]
             {
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[0]), "Test1"),
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[1]), "Test2"),
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[2]), "Test3"),
+                new Endpoint(
+                    _ => Task.CompletedTask,
+                    new EndpointMetadataCollection(actions[0]),
+                    "Test1"
+                ),
+                new Endpoint(
+                    _ => Task.CompletedTask,
+                    new EndpointMetadataCollection(actions[1]),
+                    "Test2"
+                ),
+                new Endpoint(
+                    _ => Task.CompletedTask,
+                    new EndpointMetadataCollection(actions[2]),
+                    "Test3"
+                ),
             };
 
             DynamicEndpoint = new Endpoint(
                 _ => Task.CompletedTask,
-                new EndpointMetadataCollection(new object[]
-                {
-                    new DynamicControllerRouteValueTransformerMetadata(typeof(CustomTransformer), State),
-                    dataSourceKey
-                }),
-                "dynamic");
+                new EndpointMetadataCollection(
+                    new object[]
+                    {
+                        new DynamicControllerRouteValueTransformerMetadata(
+                            typeof(CustomTransformer),
+                            State
+                        ),
+                        dataSourceKey
+                    }
+                ),
+                "dynamic"
+            );
 
             DataSource = new DefaultEndpointDataSource(ControllerEndpoints);
 
@@ -70,13 +88,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             var services = new ServiceCollection();
             services.AddRouting();
-            services.AddTransient<CustomTransformer>(s =>
-            {
-                var transformer = new CustomTransformer();
-                transformer.Transform = (c, values, state) => Transform(c, values, state);
-                transformer.Filter = (c, values, state, candidates) => Filter(c, values, state, candidates);
-                return transformer;
-            });
+            services.AddTransient<CustomTransformer>(
+                s =>
+                {
+                    var transformer = new CustomTransformer();
+                    transformer.Transform = (c, values, state) => Transform(c, values, state);
+                    transformer.Filter = (c, values, state, candidates) =>
+                        Filter(c, values, state, candidates);
+                    return transformer;
+                }
+            );
             Services = services.BuildServiceProvider();
 
             Comparer = Services.GetRequiredService<EndpointMetadataComparer>();
@@ -94,9 +115,20 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private IServiceProvider Services { get; }
 
-        private Func<HttpContext, RouteValueDictionary, object, ValueTask<RouteValueDictionary>> Transform { get; set; }
+        private Func<
+            HttpContext,
+            RouteValueDictionary,
+            object,
+            ValueTask<RouteValueDictionary>
+        > Transform { get; set; }
 
-        private Func<HttpContext, RouteValueDictionary, object, IReadOnlyList<Endpoint>, ValueTask<IReadOnlyList<Endpoint>>> Filter { get; set; } = (_, __, ___, e) => new ValueTask<IReadOnlyList<Endpoint>>(e);
+        private Func<
+            HttpContext,
+            RouteValueDictionary,
+            object,
+            IReadOnlyList<Endpoint>,
+            ValueTask<IReadOnlyList<Endpoint>>
+        > Filter { get; set; } = (_, __, ___, e) => new ValueTask<IReadOnlyList<Endpoint>>(e);
 
         private object State { get; } = new object();
 
@@ -118,10 +150,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 throw new InvalidOperationException();
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -147,10 +176,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 return new ValueTask<RouteValueDictionary>(new RouteValueDictionary());
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -175,17 +201,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Index",
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { controller = "Home", action = "Index", })
+                );
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -203,7 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("controller", kvp.Key);
                     Assert.Equal("Home", kvp.Value);
-                });
+                }
+            );
             Assert.True(candidates.IsValidCandidate(0));
         }
 
@@ -214,28 +236,33 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var policy = new DynamicControllerEndpointMatcherPolicy(SelectorCache, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                );
             };
 
             var httpContext = new DefaultHttpContext()
             {
-                RequestServices = new ServiceCollection().AddScoped(sp => new CustomTransformer { State = "Invalid" }).BuildServiceProvider(),
+                RequestServices = new ServiceCollection().AddScoped(
+                        sp => new CustomTransformer { State = "Invalid" }
+                    )
+                    .BuildServiceProvider(),
             };
 
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() => policy.ApplyAsync(httpContext, candidates));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => policy.ApplyAsync(httpContext, candidates)
+            );
         }
 
         [Fact]
@@ -245,25 +272,22 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var policy = new DynamicControllerEndpointMatcherPolicy(SelectorCache, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                );
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -291,7 +315,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("state", kvp.Key);
                     Assert.Same(State, kvp.Value);
-                });
+                }
+            );
             Assert.True(candidates.IsValidCandidate(0));
         }
 
@@ -302,19 +327,19 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var policy = new DynamicControllerEndpointMatcherPolicy(SelectorCache, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                );
             };
 
             Filter = (c, values, state, endpoints) =>
@@ -322,10 +347,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 return new ValueTask<IReadOnlyList<Endpoint>>(Array.Empty<Endpoint>());
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -341,30 +363,34 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var policy = new DynamicControllerEndpointMatcherPolicy(SelectorCache, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                );
             };
 
-            Filter = (c, values, state, endpoints) => new ValueTask<IReadOnlyList<Endpoint>>(new[]
-            {
-                new Endpoint((ctx) => Task.CompletedTask, new EndpointMetadataCollection(Array.Empty<object>()), "ReplacedEndpoint")
-            });
+            Filter = (c, values, state, endpoints) =>
+                new ValueTask<IReadOnlyList<Endpoint>>(
+                    new[]
+                    {
+                        new Endpoint(
+                            (ctx) => Task.CompletedTask,
+                            new EndpointMetadataCollection(Array.Empty<object>()),
+                            "ReplacedEndpoint"
+                        )
+                    }
+                );
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -391,7 +417,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("state", kvp.Key);
                     Assert.Same(State, kvp.Value);
-                });
+                }
+            );
             Assert.Equal("ReplacedEndpoint", candidates[0].Endpoint.DisplayName);
             Assert.True(candidates.IsValidCandidate(0));
         }
@@ -403,30 +430,27 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var policy = new DynamicControllerEndpointMatcherPolicy(SelectorCache, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                );
             };
 
-            Filter = (c, values, state, endpoints) => new ValueTask<IReadOnlyList<Endpoint>>(new[]
-            {
-                ControllerEndpoints[1], ControllerEndpoints[2]
-            });
+            Filter = (c, values, state, endpoints) =>
+                new ValueTask<IReadOnlyList<Endpoint>>(
+                    new[] { ControllerEndpoints[1], ControllerEndpoints[2] }
+                );
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -439,27 +463,46 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             Assert.Same(ControllerEndpoints[2], candidates[1].Endpoint);
         }
 
-        private class TestDynamicControllerEndpointSelectorCache : DynamicControllerEndpointSelectorCache
+        private class TestDynamicControllerEndpointSelectorCache
+            : DynamicControllerEndpointSelectorCache
         {
-            public TestDynamicControllerEndpointSelectorCache(EndpointDataSource dataSource, int key)
-            {
+            public TestDynamicControllerEndpointSelectorCache(
+                EndpointDataSource dataSource,
+                int key
+            ) {
                 AddDataSource(dataSource, key);
             }
         }
 
         private class CustomTransformer : DynamicRouteValueTransformer
         {
-            public Func<HttpContext, RouteValueDictionary, object, ValueTask<RouteValueDictionary>> Transform { get; set; }
+            public Func<
+                HttpContext,
+                RouteValueDictionary,
+                object,
+                ValueTask<RouteValueDictionary>
+            > Transform { get; set; }
 
-            public Func<HttpContext, RouteValueDictionary, object, IReadOnlyList<Endpoint>, ValueTask<IReadOnlyList<Endpoint>>> Filter { get; set; }
+            public Func<
+                HttpContext,
+                RouteValueDictionary,
+                object,
+                IReadOnlyList<Endpoint>,
+                ValueTask<IReadOnlyList<Endpoint>>
+            > Filter { get; set; }
 
-            public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
-            {
+            public override ValueTask<RouteValueDictionary> TransformAsync(
+                HttpContext httpContext,
+                RouteValueDictionary values
+            ) {
                 return Transform(httpContext, values, State);
             }
 
-            public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(HttpContext httpContext, RouteValueDictionary values, IReadOnlyList<Endpoint> endpoints)
-            {
+            public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(
+                HttpContext httpContext,
+                RouteValueDictionary values,
+                IReadOnlyList<Endpoint> endpoints
+            ) {
                 return Filter(httpContext, values, State, endpoints);
             }
         }

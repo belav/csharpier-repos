@@ -10,20 +10,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 {
-    internal class DefaultPageApplicationModelPartsProvider: IPageApplicationModelPartsProvider
+    internal class DefaultPageApplicationModelPartsProvider : IPageApplicationModelPartsProvider
     {
         private readonly IModelMetadataProvider _modelMetadataProvider;
 
         private readonly Func<ActionContext, bool> _supportsAllRequests;
         private readonly Func<ActionContext, bool> _supportsNonGetRequests;
 
-
-        public DefaultPageApplicationModelPartsProvider(IModelMetadataProvider modelMetadataProvider)
-        {
+        public DefaultPageApplicationModelPartsProvider(
+            IModelMetadataProvider modelMetadataProvider
+        ) {
             _modelMetadataProvider = modelMetadataProvider;
 
             _supportsAllRequests = _ => true;
-            _supportsNonGetRequests = context => !HttpMethods.IsGet(context.HttpContext.Request.Method);
+            _supportsNonGetRequests = context =>
+                !HttpMethods.IsGet(context.HttpContext.Request.Method);
         }
 
         /// <summary>
@@ -50,8 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             var handlerModel = new PageHandlerModel(
                 method,
-                method.GetCustomAttributes(inherit: true))
-            {
+                method.GetCustomAttributes(inherit: true)
+            ) {
                 Name = method.Name,
                 HandlerName = handlerName,
                 HttpMethod = httpMethod,
@@ -119,7 +120,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // BindingInfo for properties can be either specified by decorating the property with binding-specific attributes.
             // ModelMetadata also adds information from the property's type and any configured IBindingMetadataProvider.
-            var propertyMetadata = _modelMetadataProvider.GetMetadataForProperty(property.DeclaringType, property.Name);
+            var propertyMetadata = _modelMetadataProvider.GetMetadataForProperty(
+                property.DeclaringType,
+                property.Name
+            );
             var bindingInfo = BindingInfo.GetBindingInfo(propertyAttributes, propertyMetadata);
 
             if (bindingInfo == null)
@@ -127,14 +131,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 // Look for BindPropertiesAttribute on the handler type if no BindingInfo was inferred for the property.
                 // This allows a user to enable model binding on properties by decorating the controller type with BindPropertiesAttribute.
                 var declaringType = property.DeclaringType;
-                var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(inherit: true);
+                var bindPropertiesAttribute =
+                    declaringType.GetCustomAttribute<BindPropertiesAttribute>(inherit: true);
                 if (bindPropertiesAttribute != null)
                 {
-                    var requestPredicate = bindPropertiesAttribute.SupportsGet ? _supportsAllRequests : _supportsNonGetRequests;
-                    bindingInfo = new BindingInfo
-                    {
-                        RequestPredicate = requestPredicate,
-                    };
+                    var requestPredicate = bindPropertiesAttribute.SupportsGet
+                        ? _supportsAllRequests
+                        : _supportsNonGetRequests;
+                    bindingInfo = new BindingInfo { RequestPredicate = requestPredicate, };
                 }
             }
 
@@ -202,10 +206,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // Exclude the whole hierarchy of Page.
             var declaringType = methodInfo.DeclaringType;
-            if (declaringType == typeof(Page) ||
-                declaringType == typeof(PageBase) ||
-                declaringType == typeof(RazorPageBase))
-            {
+            if (
+                declaringType == typeof(Page)
+                || declaringType == typeof(PageBase)
+                || declaringType == typeof(RazorPageBase)
+            ) {
                 return false;
             }
 
@@ -218,14 +223,19 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             return true;
         }
 
-        internal static bool TryParseHandlerMethod(string methodName, out string httpMethod, out string handler)
-        {
+        internal static bool TryParseHandlerMethod(
+            string methodName,
+            out string httpMethod,
+            out string handler
+        ) {
             httpMethod = null;
             handler = null;
 
             // Handler method names always start with "On"
-            if (!methodName.StartsWith("On", StringComparison.Ordinal) || methodName.Length <= "On".Length)
-            {
+            if (
+                !methodName.StartsWith("On", StringComparison.Ordinal)
+                || methodName.Length <= "On".Length
+            ) {
                 return false;
             }
 
@@ -267,7 +277,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // The handler name follows the http method and is optional. It includes everything up to the end
             // excluding the "Async" suffix (if present).
-            handler = handlerNameStart == length ? null : methodName.Substring(handlerNameStart, length - handlerNameStart);
+            handler =
+                handlerNameStart == length
+                    ? null
+                    : methodName.Substring(handlerNameStart, length - handlerNameStart);
             return true;
         }
     }

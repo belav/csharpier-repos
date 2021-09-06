@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private DocumentAnalysisData _syntax = DocumentAnalysisData.Empty;
             private DocumentAnalysisData _semantic = DocumentAnalysisData.Empty;
 
-            public ActiveFileState(DocumentId documentId)
-                => DocumentId = documentId;
+            public ActiveFileState(DocumentId documentId) => DocumentId = documentId;
 
             public bool IsEmpty => _syntax.Items.IsEmpty && _semantic.Items.IsEmpty;
 
@@ -33,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 _semantic = new DocumentAnalysisData(VersionStamp.Default, _semantic.Items);
             }
 
-            public DocumentAnalysisData GetAnalysisData(AnalysisKind kind)
-                => kind switch
+            public DocumentAnalysisData GetAnalysisData(AnalysisKind kind) =>
+                kind switch
                 {
                     AnalysisKind.Syntax => _syntax,
                     AnalysisKind.Semantic => _semantic,

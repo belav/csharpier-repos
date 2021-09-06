@@ -10,13 +10,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class MultipleHostedAppTest: ServerTestBase<AspNetSiteServerFixture>
+    public class MultipleHostedAppTest : ServerTestBase<AspNetSiteServerFixture>
     {
         public MultipleHostedAppTest(
             BrowserFixture browserFixture,
             AspNetSiteServerFixture serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output)
         {
             serverFixture.AdditionalArguments.AddRange(new[] { "--MapAllApps", "true" });
             serverFixture.BuildWebHostMethod = HostedInAspNet.Server.Program.BuildWebHost;
@@ -48,8 +48,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void ServesStaticAssetsFromClientAppWebRoot()
         {
             var javascriptExecutor = (IJavaScriptExecutor)Browser;
-            var bootstrapTooltipType = javascriptExecutor
-                .ExecuteScript("return window.customJsWasLoaded;");
+            var bootstrapTooltipType = javascriptExecutor.ExecuteScript(
+                "return window.customJsWasLoaded;"
+            );
             Assert.True((bool)bootstrapTooltipType);
         }
 

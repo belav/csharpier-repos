@@ -17,8 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddExceptionHandler(this IServiceCollection services, Action<ExceptionHandlerOptions> configureOptions)
-        {
+        public static IServiceCollection AddExceptionHandler(
+            this IServiceCollection services,
+            Action<ExceptionHandlerOptions> configureOptions
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -27,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 throw new ArgumentNullException(nameof(configureOptions));
             }
-            
+
             return services.Configure(configureOptions);
         }
 
@@ -37,7 +39,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddExceptionHandler<TService>(this IServiceCollection services, Action<ExceptionHandlerOptions, TService> configureOptions) where TService : class
+        public static IServiceCollection AddExceptionHandler<TService>(
+            this IServiceCollection services,
+            Action<ExceptionHandlerOptions, TService> configureOptions
+        ) where TService : class
         {
             if (services == null)
             {
@@ -47,7 +52,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 throw new ArgumentNullException(nameof(configureOptions));
             }
-            
+
             services.AddOptions<ExceptionHandlerOptions>().Configure(configureOptions);
             return services;
         }

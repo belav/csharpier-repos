@@ -14,33 +14,42 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ExtractClass
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ExtractClass), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ExtractClass
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.ExtractInterface)]
-    internal class CSharpExtractClassCodeRefactoringProvider : AbstractExtractClassRefactoringProvider
+    internal class CSharpExtractClassCodeRefactoringProvider
+        : AbstractExtractClassRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpExtractClassCodeRefactoringProvider()
-            : base(null)
-        {
-        }
+        public CSharpExtractClassCodeRefactoringProvider() : base(null) { }
 
         /// <summary>
         /// Test purpose only.
         /// </summary>
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
-        internal CSharpExtractClassCodeRefactoringProvider(IExtractClassOptionsService optionsService)
-            : base(optionsService)
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
+        internal CSharpExtractClassCodeRefactoringProvider(
+            IExtractClassOptionsService optionsService
+        ) : base(optionsService) { }
 
-        protected override async Task<SyntaxNode?> GetSelectedClassDeclarationAsync(CodeRefactoringContext context)
-        {
-            var relaventNodes = await context.GetRelevantNodesAsync<ClassDeclarationSyntax>().ConfigureAwait(false);
+        protected override async Task<SyntaxNode?> GetSelectedClassDeclarationAsync(
+            CodeRefactoringContext context
+        ) {
+            var relaventNodes = await context.GetRelevantNodesAsync<ClassDeclarationSyntax>()
+                .ConfigureAwait(false);
             return relaventNodes.FirstOrDefault();
         }
 
-        protected override Task<SyntaxNode?> GetSelectedNodeAsync(CodeRefactoringContext context)
-            => NodeSelectionHelpers.GetSelectedDeclarationOrVariableAsync(context);
+        protected override Task<SyntaxNode?> GetSelectedNodeAsync(CodeRefactoringContext context) =>
+            NodeSelectionHelpers.GetSelectedDeclarationOrVariableAsync(context);
     }
 }

@@ -21,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public ServiceProviderEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            IServiceProvider serviceProvider)
-            : base(eventDefinition, messageGenerator)
+            IServiceProvider serviceProvider
+        ) : base(eventDefinition, messageGenerator)
         {
             ServiceProvider = serviceProvider;
         }

@@ -13,33 +13,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class StructKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.PrivateKeyword,
-                SyntaxKind.ProtectedKeyword,
-                SyntaxKind.UnsafeKeyword,
-                SyntaxKind.RefKeyword,
-                SyntaxKind.ReadOnlyKeyword
-            };
+        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        ) {
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.ProtectedKeyword,
+            SyntaxKind.UnsafeKeyword,
+            SyntaxKind.RefKeyword,
+            SyntaxKind.ReadOnlyKeyword
+        };
 
-        public StructKeywordRecommender()
-            : base(SyntaxKind.StructKeyword)
-        {
-        }
+        public StructKeywordRecommender() : base(SyntaxKind.StructKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsGlobalStatementContext ||
-                context.IsTypeDeclarationContext(
+            return context.IsGlobalStatementContext
+                || context.IsTypeDeclarationContext(
                     validModifiers: s_validModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: true,
-                    cancellationToken: cancellationToken) ||
-                syntaxTree.IsTypeParameterConstraintStartContext(position, context.LeftToken);
+                    cancellationToken: cancellationToken
+                )
+                || syntaxTree.IsTypeParameterConstraintStartContext(position, context.LeftToken);
         }
     }
 }

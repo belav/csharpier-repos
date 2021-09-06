@@ -33,26 +33,20 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="System.Numerics.Vector4" /> object whose four elements have the same value.</summary>
         /// <param name="value">The value to assign to all four elements.</param>
         [Intrinsic]
-        public Vector4(float value) : this(value, value, value, value)
-        {
-        }
+        public Vector4(float value) : this(value, value, value, value) { }
 
         /// <summary>Creates a   new <see cref="System.Numerics.Vector4" /> object from the specified <see cref="System.Numerics.Vector2" /> object and a Z and a W component.</summary>
         /// <param name="value">The vector to use for the X and Y components.</param>
         /// <param name="z">The Z component.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector2 value, float z, float w) : this(value.X, value.Y, z, w)
-        {
-        }
+        public Vector4(Vector2 value, float z, float w) : this(value.X, value.Y, z, w) { }
 
         /// <summary>Constructs a new <see cref="System.Numerics.Vector4" /> object from the specified <see cref="System.Numerics.Vector3" /> object and a W component.</summary>
         /// <param name="value">The vector to use for the X, Y, and Z components.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector3 value, float w) : this(value.X, value.Y, value.Z, w)
-        {
-        }
+        public Vector4(Vector3 value, float w) : this(value.X, value.Y, value.Z, w) { }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="System.Numerics.Vector4.X" /> field.</param>
@@ -77,7 +71,9 @@ namespace System.Numerics
                 Vector.ThrowInsufficientNumberOfElementsException(4);
             }
 
-            this = Unsafe.ReadUnaligned<Vector4>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector4>(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Gets a vector whose 4 elements are equal to zero.</summary>
@@ -350,9 +346,9 @@ namespace System.Numerics
         public static float Dot(Vector4 vector1, Vector4 vector2)
         {
             return (vector1.X * vector2.X)
-                 + (vector1.Y * vector2.Y)
-                 + (vector1.Z * vector2.Z)
-                 + (vector1.W * vector2.W);
+                + (vector1.Y * vector2.Y)
+                + (vector1.Z * vector2.Z)
+                + (vector1.W * vector2.W);
         }
 
         /// <summary>Performs a linear interpolation between two vectors based on the given weighting.</summary>
@@ -526,10 +522,22 @@ namespace System.Numerics
         public static Vector4 Transform(Vector3 position, Matrix4x4 matrix)
         {
             return new Vector4(
-                (position.X * matrix.M11) + (position.Y * matrix.M21) + (position.Z * matrix.M31) + matrix.M41,
-                (position.X * matrix.M12) + (position.Y * matrix.M22) + (position.Z * matrix.M32) + matrix.M42,
-                (position.X * matrix.M13) + (position.Y * matrix.M23) + (position.Z * matrix.M33) + matrix.M43,
-                (position.X * matrix.M14) + (position.Y * matrix.M24) + (position.Z * matrix.M34) + matrix.M44
+                (position.X * matrix.M11)
+                    + (position.Y * matrix.M21)
+                    + (position.Z * matrix.M31)
+                    + matrix.M41,
+                (position.X * matrix.M12)
+                    + (position.Y * matrix.M22)
+                    + (position.Z * matrix.M32)
+                    + matrix.M42,
+                (position.X * matrix.M13)
+                    + (position.Y * matrix.M23)
+                    + (position.Z * matrix.M33)
+                    + matrix.M43,
+                (position.X * matrix.M14)
+                    + (position.Y * matrix.M24)
+                    + (position.Z * matrix.M34)
+                    + matrix.M44
             );
         }
 
@@ -570,10 +578,22 @@ namespace System.Numerics
         public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix)
         {
             return new Vector4(
-                (vector.X * matrix.M11) + (vector.Y * matrix.M21) + (vector.Z * matrix.M31) + (vector.W * matrix.M41),
-                (vector.X * matrix.M12) + (vector.Y * matrix.M22) + (vector.Z * matrix.M32) + (vector.W * matrix.M42),
-                (vector.X * matrix.M13) + (vector.Y * matrix.M23) + (vector.Z * matrix.M33) + (vector.W * matrix.M43),
-                (vector.X * matrix.M14) + (vector.Y * matrix.M24) + (vector.Z * matrix.M34) + (vector.W * matrix.M44)
+                (vector.X * matrix.M11)
+                    + (vector.Y * matrix.M21)
+                    + (vector.Z * matrix.M31)
+                    + (vector.W * matrix.M41),
+                (vector.X * matrix.M12)
+                    + (vector.Y * matrix.M22)
+                    + (vector.Z * matrix.M32)
+                    + (vector.W * matrix.M42),
+                (vector.X * matrix.M13)
+                    + (vector.Y * matrix.M23)
+                    + (vector.Z * matrix.M33)
+                    + (vector.W * matrix.M43),
+                (vector.X * matrix.M14)
+                    + (vector.Y * matrix.M24)
+                    + (vector.Z * matrix.M34)
+                    + (vector.W * matrix.M44)
             );
         }
 
@@ -602,7 +622,8 @@ namespace System.Numerics
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2) + value.Z * (xz2 + wy2),
                 value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2) + value.Z * (yz2 - wx2),
                 value.X * (xz2 - wy2) + value.Y * (yz2 + wx2) + value.Z * (1.0f - xx2 - yy2),
-                value.W);
+                value.W
+            );
         }
 
         /// <summary>Copies the elements of the vector to a specified array.</summary>
@@ -640,12 +661,17 @@ namespace System.Numerics
 
             if ((index < 0) || (index >= array.Length))
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.Format(SR.Arg_ArgumentOutOfRangeException, index));
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.Format(SR.Arg_ArgumentOutOfRangeException, index)
+                );
             }
 
             if ((array.Length - index) < 4)
             {
-                throw new ArgumentException(SR.Format(SR.Arg_ElementsInSourceIsGreaterThanDestination, index));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_ElementsInSourceIsGreaterThanDestination, index)
+                );
             }
 
             array[index] = X;
@@ -664,7 +690,10 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 4.</summary>
@@ -677,7 +706,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
 
             return true;
         }

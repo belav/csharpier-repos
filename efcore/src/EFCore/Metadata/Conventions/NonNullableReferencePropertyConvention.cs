@@ -11,26 +11,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the properties of non-nullable types as required.
     /// </summary>
-    public class NonNullableReferencePropertyConvention : NonNullableConventionBase,
-        IPropertyAddedConvention,
-        IPropertyFieldChangedConvention
+    public class NonNullableReferencePropertyConvention
+        : NonNullableConventionBase,
+          IPropertyAddedConvention,
+          IPropertyFieldChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NonNullableReferencePropertyConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public NonNullableReferencePropertyConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public NonNullableReferencePropertyConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         private void Process(IConventionPropertyBuilder propertyBuilder)
         {
             // If the model is spread across multiple assemblies, it may contain different NullableAttribute types as
             // the compiler synthesizes them for each assembly.
-            if (propertyBuilder.Metadata.GetIdentifyingMemberInfo() is MemberInfo memberInfo
-                && IsNonNullableReferenceType(propertyBuilder.ModelBuilder, memberInfo))
-            {
+            if (
+                propertyBuilder.Metadata.GetIdentifyingMemberInfo() is MemberInfo memberInfo
+                && IsNonNullableReferenceType(propertyBuilder.ModelBuilder, memberInfo)
+            ) {
                 propertyBuilder.IsRequired(true);
             }
         }
@@ -42,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context)
-        {
+            IConventionContext<IConventionPropertyBuilder> context
+        ) {
             Process(propertyBuilder);
         }
 
@@ -58,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             FieldInfo? newFieldInfo,
             FieldInfo? oldFieldInfo,
-            IConventionContext<FieldInfo> context)
-        {
+            IConventionContext<FieldInfo> context
+        ) {
             Process(propertyBuilder);
         }
     }

@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return o1.TextSpan.Start - o2.TextSpan.Start;
         };
 
-        public static readonly Comparison<IndentBlockOperation> IndentBlockOperationComparer = (o1, o2) =>
+        public static readonly Comparison<IndentBlockOperation> IndentBlockOperationComparer = (
+            o1,
+            o2
+        ) =>
         {
             // smaller one goes left
             var s = o1.TextSpan.Start - o2.TextSpan.Start;
@@ -39,8 +42,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return 0;
         };
 
-        public static IEnumerable<ValueTuple<SyntaxToken, SyntaxToken>> ConvertToTokenPairs(this SyntaxNode root, IList<TextSpan> spans)
-        {
+        public static IEnumerable<ValueTuple<SyntaxToken, SyntaxToken>> ConvertToTokenPairs(
+            this SyntaxNode root,
+            IList<TextSpan> spans
+        ) {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfFalse(spans.Count > 0);
 
@@ -60,7 +65,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (currentOne.Item1.SpanStart <= previousOne.Item2.Span.End)
                 {
                     // oops, looks like two spans are overlapping each other. merge them
-                    previousOne = ValueTuple.Create(previousOne.Item1, previousOne.Item2.Span.End < currentOne.Item2.Span.End ? currentOne.Item2 : previousOne.Item2);
+                    previousOne = ValueTuple.Create(
+                        previousOne.Item1,
+                        previousOne.Item2.Span.End < currentOne.Item2.Span.End
+                            ? currentOne.Item2
+                            : previousOne.Item2
+                    );
                     continue;
                 }
 
@@ -75,8 +85,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             yield return previousOne;
         }
 
-        public static ValueTuple<SyntaxToken, SyntaxToken> ConvertToTokenPair(this SyntaxNode root, TextSpan textSpan)
-        {
+        public static ValueTuple<SyntaxToken, SyntaxToken> ConvertToTokenPair(
+            this SyntaxNode root,
+            TextSpan textSpan
+        ) {
             Contract.ThrowIfNull(root);
             Contract.ThrowIfTrue(textSpan.IsEmpty);
 
@@ -97,8 +109,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             // adjust position where we try to search end token
-            var endToken = (root.FullSpan.End <= textSpan.End) ?
-                root.GetLastToken(includeZeroWidth: true) : root.FindToken(textSpan.End);
+            var endToken =
+                (root.FullSpan.End <= textSpan.End)
+                    ? root.GetLastToken(includeZeroWidth: true)
+                    : root.FindToken(textSpan.End);
 
             // empty token, get next token
             if (endToken.IsMissing)
@@ -113,16 +127,23 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             // make sure tokens are not SyntaxKind.None
-            startToken = (startToken.RawKind != 0) ? startToken : root.GetFirstToken(includeZeroWidth: true);
-            endToken = (endToken.RawKind != 0) ? endToken : root.GetLastToken(includeZeroWidth: true);
+            startToken =
+                (startToken.RawKind != 0) ? startToken : root.GetFirstToken(includeZeroWidth: true);
+            endToken =
+                (endToken.RawKind != 0) ? endToken : root.GetLastToken(includeZeroWidth: true);
 
             // token is in right order
-            Contract.ThrowIfFalse(startToken.Equals(endToken) || startToken.Span.End <= endToken.SpanStart);
+            Contract.ThrowIfFalse(
+                startToken.Equals(endToken) || startToken.Span.End <= endToken.SpanStart
+            );
             return ValueTuple.Create(startToken, endToken);
         }
 
-        public static bool IsInvalidTokenRange(this SyntaxNode root, SyntaxToken startToken, SyntaxToken endToken)
-        {
+        public static bool IsInvalidTokenRange(
+            this SyntaxNode root,
+            SyntaxToken startToken,
+            SyntaxToken endToken
+        ) {
             // given token must be token exist excluding EndOfFile token.
             if (startToken.RawKind == 0 || endToken.RawKind == 0)
             {
@@ -134,9 +155,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            // regular case. 
+            // regular case.
             // start token can't be end of file token and start token must be before end token if it's not the same token.
-            return root.FullSpan.End == startToken.SpanStart || startToken.FullSpan.End > endToken.FullSpan.Start;
+            return root.FullSpan.End == startToken.SpanStart
+                || startToken.FullSpan.End > endToken.FullSpan.Start;
         }
 
         public static int GetTokenColumn(this SyntaxTree tree, SyntaxToken token, int tabSize)
@@ -150,8 +172,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return line.GetColumnFromLineOffset(startPosition - line.Start, tabSize);
         }
 
-        public static string GetText(this SourceText text, SyntaxToken token1, SyntaxToken token2)
-            => (token1.RawKind == 0) ? text.ToString(TextSpan.FromBounds(0, token2.SpanStart)) : text.ToString(TextSpan.FromBounds(token1.Span.End, token2.SpanStart));
+        public static string GetText(
+            this SourceText text,
+            SyntaxToken token1,
+            SyntaxToken token2
+        ) =>
+            (token1.RawKind == 0)
+                ? text.ToString(TextSpan.FromBounds(0, token2.SpanStart))
+                : text.ToString(TextSpan.FromBounds(token1.Span.End, token2.SpanStart));
 
         public static string GetTextBetween(SyntaxToken token1, SyntaxToken token2)
         {
@@ -161,8 +189,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return builder.ToString();
         }
 
-        public static void AppendTextBetween(SyntaxToken token1, SyntaxToken token2, StringBuilder builder)
-        {
+        public static void AppendTextBetween(
+            SyntaxToken token1,
+            SyntaxToken token2,
+            StringBuilder builder
+        ) {
             Contract.ThrowIfTrue(token1.RawKind == 0 && token2.RawKind == 0);
             Contract.ThrowIfTrue(token1.Equals(token2));
 
@@ -186,16 +217,22 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             AppendTrailingTriviaText(token1, builder);
 
-            for (var token = token1.GetNextToken(includeZeroWidth: true); token.FullSpan.End <= token2.FullSpan.Start; token = token.GetNextToken(includeZeroWidth: true))
-            {
+            for (
+                var token = token1.GetNextToken(includeZeroWidth: true);
+                token.FullSpan.End <= token2.FullSpan.Start;
+                token = token.GetNextToken(includeZeroWidth: true)
+            ) {
                 builder.Append(token.ToFullString());
             }
 
             AppendPartialLeadingTriviaText(token2, builder, token1.TrailingTrivia.FullSpan.End);
         }
 
-        private static void AppendTextBetweenTwoAdjacentTokens(SyntaxToken token1, SyntaxToken token2, StringBuilder builder)
-        {
+        private static void AppendTextBetweenTwoAdjacentTokens(
+            SyntaxToken token1,
+            SyntaxToken token2,
+            StringBuilder builder
+        ) {
             AppendTrailingTriviaText(token1, builder);
             AppendLeadingTriviaText(token2, builder);
         }
@@ -217,8 +254,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// If the token1 is expected to be part of the leading trivia of the token2 then the trivia
         /// before the token1FullSpanEnd, which the fullspan end of the token1 should be ignored
         /// </summary>
-        private static void AppendPartialLeadingTriviaText(SyntaxToken token, StringBuilder builder, int token1FullSpanEnd)
-        {
+        private static void AppendPartialLeadingTriviaText(
+            SyntaxToken token,
+            StringBuilder builder,
+            int token1FullSpanEnd
+        ) {
             if (!token.HasLeadingTrivia)
             {
                 return;
@@ -253,8 +293,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// for example, for code such as "class A { int ...", if given tokens are "A" and "{", this will return span [] of "class[ A { ]int ..."
         /// which included trailing trivia of "class" which is previous token of "A", and leading trivia of "int" which is next token of "{"
         /// </summary>
-        public static TextSpan GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(SyntaxToken startToken, SyntaxToken endToken)
-        {
+        public static TextSpan GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(
+            SyntaxToken startToken,
+            SyntaxToken endToken
+        ) {
             // most of cases we can just ask previous and next token to create the span, but in some corner cases such as omitted token case,
             // those navigation function doesn't work, so we have to explore the tree ourselves to create correct span
             var startPosition = GetStartPositionOfSpan(startToken);
@@ -272,7 +314,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             var backwardPosition = token.FullSpan.End;
-            var parentNode = GetParentThatContainsGivenSpan(token.Parent, backwardPosition, forward: false);
+            var parentNode = GetParentThatContainsGivenSpan(
+                token.Parent,
+                backwardPosition,
+                forward: false
+            );
             if (parentNode == null)
             {
                 // reached the end of tree
@@ -303,7 +349,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return 0;
             }
 
-            var parentNode = GetParentThatContainsGivenSpan(token.Parent, forwardPosition, forward: true);
+            var parentNode = GetParentThatContainsGivenSpan(
+                token.Parent,
+                forwardPosition,
+                forward: true
+            );
             Contract.ThrowIfNull(parentNode);
             Contract.ThrowIfFalse(parentNode.FullSpan.Start < forwardPosition);
 
@@ -314,8 +364,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return previousToken.Span.End;
         }
 
-        private static SyntaxNode? GetParentThatContainsGivenSpan(SyntaxNode? node, int position, bool forward)
-        {
+        private static SyntaxNode? GetParentThatContainsGivenSpan(
+            SyntaxNode? node,
+            int position,
+            bool forward
+        ) {
             while (node != null)
             {
                 var fullSpan = node.FullSpan;
@@ -340,22 +393,24 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return null;
         }
 
-        public static bool HasAnyWhitespaceElasticTrivia(SyntaxToken previousToken, SyntaxToken currentToken)
-        {
-            if ((!previousToken.ContainsAnnotations && !currentToken.ContainsAnnotations) ||
-                (!previousToken.HasTrailingTrivia && !currentToken.HasLeadingTrivia))
-            {
+        public static bool HasAnyWhitespaceElasticTrivia(
+            SyntaxToken previousToken,
+            SyntaxToken currentToken
+        ) {
+            if (
+                (!previousToken.ContainsAnnotations && !currentToken.ContainsAnnotations)
+                || (!previousToken.HasTrailingTrivia && !currentToken.HasLeadingTrivia)
+            ) {
                 return false;
             }
 
-            return previousToken.TrailingTrivia.HasAnyWhitespaceElasticTrivia() || currentToken.LeadingTrivia.HasAnyWhitespaceElasticTrivia();
+            return previousToken.TrailingTrivia.HasAnyWhitespaceElasticTrivia()
+                || currentToken.LeadingTrivia.HasAnyWhitespaceElasticTrivia();
         }
 
-        public static bool IsNull<T>(T t) where T : class
-            => t == null;
+        public static bool IsNull<T>(T t) where T : class => t == null;
 
-        public static bool IsNotNull<T>(T t) where T : class
-            => !IsNull(t);
+        public static bool IsNotNull<T>(T t) where T : class => !IsNull(t);
 
         public static TextSpan GetFormattingSpan(SyntaxNode root, TextSpan span)
         {

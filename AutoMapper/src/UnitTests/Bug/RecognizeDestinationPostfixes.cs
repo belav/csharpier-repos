@@ -20,11 +20,14 @@ namespace AutoMapper.UnitTests.Bug
             public string NameV { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.RecognizeDestinationPostfixes("V");
-            cfg.CreateMap<Person, PersonDto>().ForMember("AgeV", m => m.MapFrom("Age2"));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.RecognizeDestinationPostfixes("V");
+                    cfg.CreateMap<Person, PersonDto>().ForMember("AgeV", m => m.MapFrom("Age2"));
+                }
+            );
 
         [Fact]
         public void Should_be_overriden_by_MapFrom()

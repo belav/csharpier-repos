@@ -8,8 +8,10 @@ namespace System.Reflection.Emit
 {
     public sealed partial class AssemblyBuilder : Assembly
     {
-        public override string? CodeBase => throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
-        public override string Location => throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
+        public override string? CodeBase =>
+            throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
+        public override string Location =>
+            throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
         public override MethodInfo? EntryPoint => null;
         public override bool IsDynamic => true;
 

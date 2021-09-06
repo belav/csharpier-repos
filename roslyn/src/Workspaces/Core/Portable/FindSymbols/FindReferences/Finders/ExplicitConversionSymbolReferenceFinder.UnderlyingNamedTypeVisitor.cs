@@ -10,29 +10,27 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
     {
         private class UnderlyingNamedTypeVisitor : SymbolVisitor<INamedTypeSymbol?>
         {
-            public static readonly UnderlyingNamedTypeVisitor Instance = new UnderlyingNamedTypeVisitor();
+            public static readonly UnderlyingNamedTypeVisitor Instance =
+                new UnderlyingNamedTypeVisitor();
 
-            private UnderlyingNamedTypeVisitor()
-            {
-            }
+            private UnderlyingNamedTypeVisitor() { }
 
-            public override INamedTypeSymbol? VisitArrayType(IArrayTypeSymbol symbol)
-                => Visit(symbol.ElementType);
+            public override INamedTypeSymbol? VisitArrayType(IArrayTypeSymbol symbol) =>
+                Visit(symbol.ElementType);
 
-            public override INamedTypeSymbol? VisitDynamicType(IDynamicTypeSymbol symbol)
-                => null;
+            public override INamedTypeSymbol? VisitDynamicType(IDynamicTypeSymbol symbol) => null;
 
-            public override INamedTypeSymbol? VisitFunctionPointerType(IFunctionPointerTypeSymbol symbol)
-                => null;
+            public override INamedTypeSymbol? VisitFunctionPointerType(
+                IFunctionPointerTypeSymbol symbol
+            ) => null;
 
-            public override INamedTypeSymbol? VisitPointerType(IPointerTypeSymbol symbol)
-                => Visit(symbol.PointedAtType);
+            public override INamedTypeSymbol? VisitPointerType(IPointerTypeSymbol symbol) =>
+                Visit(symbol.PointedAtType);
 
-            public override INamedTypeSymbol? VisitTypeParameter(ITypeParameterSymbol symbol)
-                => null;
+            public override INamedTypeSymbol? VisitTypeParameter(ITypeParameterSymbol symbol) =>
+                null;
 
-            public override INamedTypeSymbol? VisitNamedType(INamedTypeSymbol symbol)
-                => symbol;
+            public override INamedTypeSymbol? VisitNamedType(INamedTypeSymbol symbol) => symbol;
 
             public override INamedTypeSymbol? DefaultVisit(ISymbol symbol)
             {

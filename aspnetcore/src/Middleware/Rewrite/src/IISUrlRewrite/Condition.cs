@@ -14,8 +14,11 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         public Pattern Input { get; }
         public UrlMatch Match { get; }
 
-        public MatchResults Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
-        {
+        public MatchResults Evaluate(
+            RewriteContext context,
+            BackReferenceCollection? ruleBackReferences,
+            BackReferenceCollection? conditionBackReferences
+        ) {
             var pattern = Input.Evaluate(context, ruleBackReferences, conditionBackReferences);
             return Match.Evaluate(pattern, context);
         }

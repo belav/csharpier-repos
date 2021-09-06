@@ -16,13 +16,18 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         static ProcessTracker()
         {
             // Requires Win8 or later
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || Environment.OSVersion.Version < new Version(6, 2))
-            {
+            if (
+                !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                || Environment.OSVersion.Version < new Version(6, 2)
+            ) {
                 return;
             }
 
             // Job name is optional but helps with diagnostics.  Job name must be unique if non-null.
-            _jobHandle = CreateJobObject(IntPtr.Zero, name: $"ProcessTracker{Process.GetCurrentProcess().Id}");
+            _jobHandle = CreateJobObject(
+                IntPtr.Zero,
+                name: $"ProcessTracker{Process.GetCurrentProcess().Id}"
+            );
 
             var extendedInfo = new JOBOBJECT_EXTENDED_LIMIT_INFORMATION
             {
@@ -38,12 +43,18 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             {
                 Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
 
-                if (!SetInformationJobObject(_jobHandle, JobObjectInfoType.ExtendedLimitInformation,
-                    extendedInfoPtr, (uint)length))
-                {
+                if (
+                    !SetInformationJobObject(
+                        _jobHandle,
+                        JobObjectInfoType.ExtendedLimitInformation,
+                        extendedInfoPtr,
+                        (uint)length
+                    )
+                ) {
                     throw new Win32Exception();
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal(extendedInfoPtr);
@@ -66,8 +77,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         static extern IntPtr CreateJobObject(IntPtr lpJobAttributes, string name);
 
         [DllImport("kernel32.dll")]
-        static extern bool SetInformationJobObject(IntPtr job, JobObjectInfoType infoType,
-            IntPtr lpJobObjectInfo, uint cbJobObjectInfoLength);
+        static extern bool SetInformationJobObject(
+            IntPtr job,
+            JobObjectInfoType infoType,
+            IntPtr lpJobObjectInfo,
+            uint cbJobObjectInfoLength
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool AssignProcessToJobObject(IntPtr job, IntPtr process);

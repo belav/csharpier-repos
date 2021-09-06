@@ -96,7 +96,8 @@ namespace System.Net.Http.HPack
         private static HeaderField CreateHeaderField(string name, string value) =>
             new HeaderField(
                 Encoding.ASCII.GetBytes(name),
-                value.Length != 0 ? Encoding.ASCII.GetBytes(value) : Array.Empty<byte>());
+                value.Length != 0 ? Encoding.ASCII.GetBytes(value) : Array.Empty<byte>()
+            );
 
         // Values for encoding.
         // Unused values are omitted.

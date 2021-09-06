@@ -25,13 +25,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         public DefaultApplicationModelProvider(
             IOptions<MvcOptions> mvcOptionsAccessor,
-            IModelMetadataProvider modelMetadataProvider)
-        {
+            IModelMetadataProvider modelMetadataProvider
+        ) {
             _mvcOptions = mvcOptionsAccessor.Value;
             _modelMetadataProvider = modelMetadataProvider;
 
             _supportsAllRequests = _ => true;
-            _supportsNonGetRequests = context => !string.Equals(context.HttpContext.Request.Method, "GET", StringComparison.OrdinalIgnoreCase);
+            _supportsNonGetRequests = context =>
+                !string.Equals(
+                    context.HttpContext.Request.Method,
+                    "GET",
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         /// <inheritdoc />
@@ -61,8 +66,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 context.Result.Controllers.Add(controllerModel);
                 controllerModel.Application = context.Result;
 
-                foreach (var propertyHelper in PropertyHelper.GetProperties(controllerType.AsType()))
-                {
+                foreach (
+                    var propertyHelper in PropertyHelper.GetProperties(controllerType.AsType())
+                ) {
                     var propertyInfo = propertyHelper.Property;
                     var propertyModel = CreatePropertyModel(propertyInfo);
                     if (propertyModel != null)
@@ -125,8 +131,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             do
             {
-                routeAttributes = currentTypeInfo
-                    .GetCustomAttributes(inherit: false)
+                routeAttributes = currentTypeInfo.GetCustomAttributes(inherit: false)
                     .OfType<IRouteTemplateProvider>()
                     .ToArray();
 
@@ -137,8 +142,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 }
 
                 currentTypeInfo = currentTypeInfo.BaseType!.GetTypeInfo();
-            }
-            while (currentTypeInfo != objectTypeInfo);
+            } while (currentTypeInfo != objectTypeInfo);
 
             // CoreCLR returns IEnumerable<Attribute> from GetCustomAttributes - the OfType<object>
             // is needed to so that the result of ToArray() is object
@@ -167,25 +171,32 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             AddRange(controllerModel.Selectors, CreateSelectors(attributes));
 
-            controllerModel.ControllerName =
-                typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) ?
-                    typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length) :
-                    typeInfo.Name;
+            controllerModel.ControllerName = typeInfo.Name.EndsWith(
+                "Controller",
+                StringComparison.OrdinalIgnoreCase
+            )
+                ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
+                : typeInfo.Name;
 
             AddRange(controllerModel.Filters, attributes.OfType<IFilterMetadata>());
 
             foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
             {
-                controllerModel.RouteValues.Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
+                controllerModel.RouteValues.Add(
+                    routeValueProvider.RouteKey,
+                    routeValueProvider.RouteValue
+                );
             }
 
-            var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>().FirstOrDefault();
+            var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>()
+                .FirstOrDefault();
             if (apiVisibility != null)
             {
                 controllerModel.ApiExplorer.IsVisible = !apiVisibility.IgnoreApi;
             }
 
-            var apiGroupName = attributes.OfType<IApiDescriptionGroupNameProvider>().FirstOrDefault();
+            var apiGroupName = attributes.OfType<IApiDescriptionGroupNameProvider>()
+                .FirstOrDefault();
             if (apiGroupName != null)
             {
                 controllerModel.ApiExplorer.GroupName = apiGroupName.GroupName;
@@ -195,14 +206,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // a special delegating filter implementation to the pipeline to handle it.
             //
             // This is needed because filters are instantiated before the controller.
-            if (typeof(IAsyncActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo) ||
-                typeof(IActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo))
-            {
+            if (
+                typeof(IAsyncActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+                || typeof(IActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+            ) {
                 controllerModel.Filters.Add(new ControllerActionFilter());
             }
-            if (typeof(IAsyncResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo) ||
-                typeof(IResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo))
-            {
+            if (
+                typeof(IAsyncResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+                || typeof(IResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+            ) {
                 controllerModel.Filters.Add(new ControllerResultFilter());
             }
 
@@ -226,21 +239,24 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // BindingInfo for properties can be either specified by decorating the property with binding specific attributes.
             // ModelMetadata also adds information from the property's type and any configured IBindingMetadataProvider.
             var declaringType = propertyInfo.DeclaringType!;
-            var modelMetadata = _modelMetadataProvider.GetMetadataForProperty(declaringType, propertyInfo.Name);
+            var modelMetadata = _modelMetadataProvider.GetMetadataForProperty(
+                declaringType,
+                propertyInfo.Name
+            );
             var bindingInfo = BindingInfo.GetBindingInfo(attributes, modelMetadata);
 
             if (bindingInfo == null)
             {
                 // Look for BindPropertiesAttribute on the handler type if no BindingInfo was inferred for the property.
                 // This allows a user to enable model binding on properties by decorating the controller type with BindPropertiesAttribute.
-                var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(inherit: true);
+                var bindPropertiesAttribute =
+                    declaringType.GetCustomAttribute<BindPropertiesAttribute>(inherit: true);
                 if (bindPropertiesAttribute != null)
                 {
-                    var requestPredicate = bindPropertiesAttribute.SupportsGet ? _supportsAllRequests : _supportsNonGetRequests;
-                    bindingInfo = new BindingInfo
-                    {
-                        RequestPredicate = requestPredicate,
-                    };
+                    var requestPredicate = bindPropertiesAttribute.SupportsGet
+                        ? _supportsAllRequests
+                        : _supportsNonGetRequests;
+                    bindingInfo = new BindingInfo { RequestPredicate = requestPredicate, };
                 }
             }
 
@@ -262,9 +278,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// An <see cref="ActionModel"/> instance for the given action <see cref="MethodInfo"/> or
         /// <c>null</c> if the <paramref name="methodInfo"/> does not represent an action.
         /// </returns>
-        internal ActionModel? CreateActionModel(
-            TypeInfo typeInfo,
-            MethodInfo methodInfo)
+        internal ActionModel? CreateActionModel(TypeInfo typeInfo, MethodInfo methodInfo)
         {
             if (typeInfo == null)
             {
@@ -299,13 +313,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 actionModel.ActionName = CanonicalizeActionName(methodInfo.Name);
             }
 
-            var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>().FirstOrDefault();
+            var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>()
+                .FirstOrDefault();
             if (apiVisibility != null)
             {
                 actionModel.ApiExplorer.IsVisible = !apiVisibility.IgnoreApi;
             }
 
-            var apiGroupName = attributes.OfType<IApiDescriptionGroupNameProvider>().FirstOrDefault();
+            var apiGroupName = attributes.OfType<IApiDescriptionGroupNameProvider>()
+                .FirstOrDefault();
             if (apiGroupName != null)
             {
                 actionModel.ApiExplorer.GroupName = apiGroupName.GroupName;
@@ -313,7 +329,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
             {
-                actionModel.RouteValues.Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
+                actionModel.RouteValues.Add(
+                    routeValueProvider.RouteKey,
+                    routeValueProvider.RouteValue
+                );
             }
 
             // Now we need to determine the action selection info (cross-section of routes and constraints)
@@ -329,8 +348,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             while (true)
             {
-                routeAttributes = currentMethodInfo
-                    .GetCustomAttributes(inherit: false)
+                routeAttributes = currentMethodInfo.GetCustomAttributes(inherit: false)
                     .OfType<IRouteTemplateProvider>()
                     .ToArray();
 
@@ -375,9 +393,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             const string Suffix = "Async";
 
-            if (_mvcOptions.SuppressAsyncSuffixInActionNames &&
-                actionName.EndsWith(Suffix, StringComparison.Ordinal))
-            {
+            if (
+                _mvcOptions.SuppressAsyncSuffixInActionNames
+                && actionName.EndsWith(Suffix, StringComparison.Ordinal)
+            ) {
                 actionName = actionName.Substring(0, actionName.Length - Suffix.Length);
             }
 
@@ -469,7 +488,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             BindingInfo? bindingInfo;
             if (_modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase)
             {
-                var modelMetadata = modelMetadataProviderBase.GetMetadataForParameter(parameterInfo);
+                var modelMetadata = modelMetadataProviderBase.GetMetadataForParameter(
+                    parameterInfo
+                );
                 bindingInfo = BindingInfo.GetBindingInfo(attributes, modelMetadata);
             }
             else
@@ -596,9 +617,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                             // [Route("template/{id}")]
                         }
                         else if (
-                            routeProvider is IActionHttpMethodProvider &&
-                            attribute is IActionHttpMethodProvider)
-                        {
+                            routeProvider is IActionHttpMethodProvider
+                            && attribute is IActionHttpMethodProvider
+                        ) {
                             // Example:
                             // [HttpGet("template")]
                             // [AcceptVerbs("GET", "POST")]
@@ -626,15 +647,19 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         }
                     }
 
-                    selectorModels.Add(CreateSelectorModel(route: null, attributes: filteredAttributes));
+                    selectorModels.Add(
+                        CreateSelectorModel(route: null, attributes: filteredAttributes)
+                    );
                 }
             }
 
             return selectorModels;
         }
 
-        private static bool InRouteProviders(List<IRouteTemplateProvider> routeProviders, object attribute)
-        {
+        private static bool InRouteProviders(
+            List<IRouteTemplateProvider> routeProviders,
+            object attribute
+        ) {
             foreach (var rp in routeProviders)
             {
                 if (ReferenceEquals(rp, attribute))
@@ -646,20 +671,24 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             return false;
         }
 
-        private static SelectorModel CreateSelectorModel(IRouteTemplateProvider? route, IList<object> attributes)
-        {
+        private static SelectorModel CreateSelectorModel(
+            IRouteTemplateProvider? route,
+            IList<object> attributes
+        ) {
             var selectorModel = new SelectorModel();
             if (route != null)
             {
                 selectorModel.AttributeRouteModel = new AttributeRouteModel(route);
             }
 
-            AddRange(selectorModel.ActionConstraints, attributes.OfType<IActionConstraintMetadata>());
+            AddRange(
+                selectorModel.ActionConstraints,
+                attributes.OfType<IActionConstraintMetadata>()
+            );
             AddRange(selectorModel.EndpointMetadata, attributes);
 
             // Simple case, all HTTP method attributes apply
-            var httpMethods = attributes
-                .OfType<IActionHttpMethodProvider>()
+            var httpMethods = attributes.OfType<IActionHttpMethodProvider>()
                 .SelectMany(a => a.HttpMethods)
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToArray();
@@ -684,17 +713,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var baseMethodInfo = methodInfo.GetBaseDefinition();
             var declaringType = baseMethodInfo.DeclaringType;
 
-            return
-                (typeof(IDisposable).IsAssignableFrom(declaringType) &&
-                 declaringType.GetInterfaceMap(typeof(IDisposable)).TargetMethods[0] == baseMethodInfo);
+            return (
+                typeof(IDisposable).IsAssignableFrom(declaringType)
+                && declaringType.GetInterfaceMap(typeof(IDisposable)).TargetMethods[0]
+                    == baseMethodInfo
+            );
         }
 
         private bool IsSilentRouteAttribute(IRouteTemplateProvider routeTemplateProvider)
         {
-            return
-                routeTemplateProvider.Template == null &&
-                routeTemplateProvider.Order == null &&
-                routeTemplateProvider.Name == null;
+            return routeTemplateProvider.Template == null
+                && routeTemplateProvider.Order == null
+                && routeTemplateProvider.Name == null;
         }
 
         private static void AddRange<T>(IList<T> list, IEnumerable<T> items)

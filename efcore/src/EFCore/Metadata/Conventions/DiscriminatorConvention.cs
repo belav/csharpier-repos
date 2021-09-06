@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the discriminator value for entity types in a hierarchy as the entity type name.
     /// </summary>
-    public class DiscriminatorConvention : IEntityTypeBaseTypeChangedConvention, IEntityTypeRemovedConvention
+    public class DiscriminatorConvention
+        : IEntityTypeBaseTypeChangedConvention,
+          IEntityTypeRemovedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="DiscriminatorConvention" />.
@@ -38,13 +40,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
-        {
-            if (oldBaseType != null
+            IConventionContext<IConventionEntityType> context
+        ) {
+            if (
+                oldBaseType != null
                 && oldBaseType.IsInModel
                 && oldBaseType.BaseType == null
-                && !oldBaseType.GetDirectlyDerivedTypes().Any())
-            {
+                && !oldBaseType.GetDirectlyDerivedTypes().Any()
+            ) {
                 oldBaseType.Builder.HasNoDiscriminator();
             }
 
@@ -81,7 +84,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (discriminator != null)
             {
-                discriminator.HasValue(entityTypeBuilder.Metadata, entityTypeBuilder.Metadata.ShortName());
+                discriminator.HasValue(
+                    entityTypeBuilder.Metadata,
+                    entityTypeBuilder.Metadata.ShortName()
+                );
                 SetDefaultDiscriminatorValues(derivedEntityTypes, discriminator);
             }
         }
@@ -95,14 +101,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             var oldBaseType = entityType.BaseType;
-            if (oldBaseType != null
+            if (
+                oldBaseType != null
                 && oldBaseType.IsInModel
                 && oldBaseType.BaseType == null
-                && !oldBaseType.GetDirectlyDerivedTypes().Any())
-            {
+                && !oldBaseType.GetDirectlyDerivedTypes().Any()
+            ) {
                 oldBaseType.Builder.HasNoDiscriminator();
             }
         }
@@ -114,8 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="discriminatorBuilder"> The discriminator builder. </param>
         protected virtual void SetDefaultDiscriminatorValues(
             IEnumerable<IConventionEntityType> entityTypes,
-            IConventionDiscriminatorBuilder discriminatorBuilder)
-        {
+            IConventionDiscriminatorBuilder discriminatorBuilder
+        ) {
             foreach (var entityType in entityTypes)
             {
                 discriminatorBuilder.HasValue(entityType, entityType.ShortName());

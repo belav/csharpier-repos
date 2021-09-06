@@ -10,13 +10,11 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public abstract class ConcurrencyDetectorDisabledTestBase<TFixture> : ConcurrencyDetectorTestBase<TFixture>
+    public abstract class ConcurrencyDetectorDisabledTestBase<TFixture>
+        : ConcurrencyDetectorTestBase<TFixture>
         where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
     {
-        protected ConcurrencyDetectorDisabledTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected ConcurrencyDetectorDisabledTestBase(TFixture fixture) : base(fixture) { }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
@@ -25,9 +23,12 @@ namespace Microsoft.EntityFrameworkCore
             await ConcurrencyDetectorTest(
                 async c =>
                 {
-                    c.Products.Add(new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" });
+                    c.Products.Add(
+                        new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" }
+                    );
                     return async ? await c.SaveChangesAsync() : c.SaveChanges();
-                });
+                }
+            );
 
             using var ctx = CreateContext();
             var newProduct = await ctx.Products.FindAsync(3);
@@ -36,8 +37,9 @@ namespace Microsoft.EntityFrameworkCore
             await ctx.SaveChangesAsync();
         }
 
-        protected override async Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test)
-        {
+        protected override async Task ConcurrencyDetectorTest(
+            Func<ConcurrencyDetectorDbContext, Task<object>> test
+        ) {
             using var context = CreateContext();
 
             var concurrencyDetector = context.GetService<IConcurrencyDetector>();

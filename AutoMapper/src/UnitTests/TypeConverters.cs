@@ -13,10 +13,14 @@ namespace AutoMapper.UnitTests.CustomMapping
             Gamma = 13
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.CreateMap<int?, GreekLetters>().ConvertUsing(n => n == null ? GreekLetters.Beta : GreekLetters.Gamma);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateMap<int?, GreekLetters>()
+                        .ConvertUsing(n => n == null ? GreekLetters.Beta : GreekLetters.Gamma);
+                }
+            );
 
         [Fact]
         public void Should_map_nullable()
@@ -28,17 +32,26 @@ namespace AutoMapper.UnitTests.CustomMapping
 
     public class MissingConverter : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.ConstructServicesUsing(t => null);
-            c.CreateMap<int, int>().ConvertUsing<ITypeConverter<int, int>>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.ConstructServicesUsing(t => null);
+                    c.CreateMap<int, int>().ConvertUsing<ITypeConverter<int, int>>();
+                }
+            );
 
         [Fact]
         public void Should_report_the_missing_converter()
         {
-            new Action(()=>Mapper.Map<int, int>(0))
-                .ShouldThrowException<AutoMapperMappingException>(e=>e.Message.ShouldBe("Cannot create an instance of type AutoMapper.ITypeConverter`2[System.Int32,System.Int32]"));
+            new Action(
+                () => Mapper.Map<int, int>(0)
+            ).ShouldThrowException<AutoMapperMappingException>(
+                e =>
+                    e.Message.ShouldBe(
+                        "Cannot create an instance of type AutoMapper.ITypeConverter`2[System.Int32,System.Int32]"
+                    )
+            );
         }
     }
 
@@ -60,18 +73,24 @@ namespace AutoMapper.UnitTests.CustomMapping
             public decimal? Value3 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<decimal?, decimal>().ConvertUsing(source => source ?? decimal.MaxValue);
-            cfg.CreateMap<decimal, decimal?>().ConvertUsing(source => source == decimal.MaxValue ? new decimal?() : source);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<decimal?, decimal>()
+                        .ConvertUsing(source => source ?? decimal.MaxValue);
+                    cfg.CreateMap<decimal, decimal?>()
+                        .ConvertUsing(
+                            source => source == decimal.MaxValue ? new decimal?() : source
+                        );
+                }
+            );
 
         protected override void Because_of()
         {
             _destination = Mapper.Map<Destination>(new Source { Value1 = decimal.MaxValue });
         }
-
 
         [Fact]
         public void Should_treat_max_value_as_null()
@@ -113,15 +132,20 @@ namespace AutoMapper.UnitTests.CustomMapping
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<IId, string>().ConvertUsing(id => id.Serialize());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<IId, string>().ConvertUsing(id => id.Serialize());
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Destination>(new Source { TheId = new Id { Prefix = "p", Value = "v" } });
+            _destination = Mapper.Map<Destination>(
+                new Source { TheId = new Id { Prefix = "p", Value = "v" } }
+            );
         }
 
         [Fact]
@@ -145,15 +169,21 @@ namespace AutoMapper.UnitTests.CustomMapping
             public IDictionary<int, int> Values { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(IDictionary<,>), typeof(IDictionary<,>)).ConvertUsing(typeof(DictionaryConverter<,>));
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(IDictionary<, >), typeof(IDictionary<, >))
+                        .ConvertUsing(typeof(DictionaryConverter<, >));
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Destination>(new Source { Values = new Dictionary<int, int>() });
+            _destination = Mapper.Map<Destination>(
+                new Source { Values = new Dictionary<int, int>() }
+            );
         }
 
         [Fact]
@@ -162,12 +192,19 @@ namespace AutoMapper.UnitTests.CustomMapping
             _destination.Values.ShouldBeSameAs(DictionaryConverter<int, int>.Instance);
         }
 
-        private class DictionaryConverter<TKey, TValue> : ITypeConverter<IDictionary<TKey, TValue>, IDictionary<TKey, TValue>>
+        private class DictionaryConverter<TKey, TValue>
+            : ITypeConverter<IDictionary<TKey, TValue>, IDictionary<TKey, TValue>>
         {
-            public static readonly IDictionary<TKey, TValue> Instance = new Dictionary<TKey, TValue>();
+            public static readonly IDictionary<TKey, TValue> Instance = new Dictionary<
+                TKey,
+                TValue
+            >();
 
-            public IDictionary<TKey, TValue> Convert(IDictionary<TKey, TValue> source, IDictionary<TKey, TValue> destination, ResolutionContext context)
-            {
+            public IDictionary<TKey, TValue> Convert(
+                IDictionary<TKey, TValue> source,
+                IDictionary<TKey, TValue> destination,
+                ResolutionContext context
+            ) {
                 return Instance;
             }
         }
@@ -208,14 +245,16 @@ namespace AutoMapper.UnitTests.CustomMapping
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<string, int>().ConvertUsing((string arg) => Convert.ToInt32(arg));
-            cfg.CreateMap<string, DateTime>().ConvertUsing(new DateTimeTypeConverter());
-            cfg.CreateMap<string, Type>().ConvertUsing<TypeTypeConverter>();
-            cfg.CreateMap<Source, Destination>();
-
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<string, int>().ConvertUsing((string arg) => Convert.ToInt32(arg));
+                    cfg.CreateMap<string, DateTime>().ConvertUsing(new DateTimeTypeConverter());
+                    cfg.CreateMap<string, Type>().ConvertUsing<TypeTypeConverter>();
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -223,7 +262,8 @@ namespace AutoMapper.UnitTests.CustomMapping
             {
                 Value1 = "5",
                 Value2 = "01/01/2000",
-                Value3 = "AutoMapper.UnitTests.CustomMapping.When_specifying_type_converters+Destination"
+                Value3 =
+                    "AutoMapper.UnitTests.CustomMapping.When_specifying_type_converters+Destination"
             };
 
             _result = Mapper.Map<Source, Destination>(source);
@@ -248,7 +288,8 @@ namespace AutoMapper.UnitTests.CustomMapping
         }
     }
 
-    public class When_specifying_type_converters_on_types_with_incompatible_members : AutoMapperSpecBase
+    public class When_specifying_type_converters_on_types_with_incompatible_members
+        : AutoMapperSpecBase
     {
         private ParentDestination _result;
 
@@ -272,19 +313,19 @@ namespace AutoMapper.UnitTests.CustomMapping
             public Destination Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().ConvertUsing(arg => new Destination {Type = Convert.ToInt32(arg.Foo)});
-            cfg.CreateMap<ParentSource, ParentDestination>();
-
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .ConvertUsing(arg => new Destination { Type = Convert.ToInt32(arg.Foo) });
+                    cfg.CreateMap<ParentSource, ParentDestination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            var source = new ParentSource
-            {
-                Value = new Source { Foo = "5", }
-            };
+            var source = new ParentSource { Value = new Source { Foo = "5", } };
 
             _result = Mapper.Map<ParentSource, ParentDestination>(source);
         }
@@ -295,7 +336,8 @@ namespace AutoMapper.UnitTests.CustomMapping
             _result.Value.Type.ShouldBe(5);
         }
     }
-    public class When_specifying_a_type_converter_for_a_non_generic_configuration : NonValidatingSpecBase
+    public class When_specifying_a_type_converter_for_a_non_generic_configuration
+        : NonValidatingSpecBase
     {
         private Destination _result;
 
@@ -311,23 +353,26 @@ namespace AutoMapper.UnitTests.CustomMapping
 
         public class CustomConverter : ITypeConverter<Source, Destination>
         {
-            public Destination Convert(Source source, Destination destination, ResolutionContext context)
-            {
-                return new Destination
-                    {
-                        OtherValue = source.Value + 10
-                    };
+            public Destination Convert(
+                Source source,
+                Destination destination,
+                ResolutionContext context
+            ) {
+                return new Destination { OtherValue = source.Value + 10 };
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().ConvertUsing<CustomConverter>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().ConvertUsing<CustomConverter>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _result = Mapper.Map<Source, Destination>(new Source {Value = 5});
+            _result = Mapper.Map<Source, Destination>(new Source { Value = 5 });
         }
 
         [Fact]
@@ -337,7 +382,8 @@ namespace AutoMapper.UnitTests.CustomMapping
         }
     }
 
-    public class When_specifying_a_non_generic_type_converter_for_a_non_generic_configuration : AutoMapperSpecBase
+    public class When_specifying_a_non_generic_type_converter_for_a_non_generic_configuration
+        : AutoMapperSpecBase
     {
         private Destination _result;
 
@@ -353,23 +399,27 @@ namespace AutoMapper.UnitTests.CustomMapping
 
         public class CustomConverter : ITypeConverter<Source, Destination>
         {
-            public Destination Convert(Source source, Destination destination, ResolutionContext context)
-            {
-                return new Destination
-                    {
-                        OtherValue = source.Value + 10
-                    };
+            public Destination Convert(
+                Source source,
+                Destination destination,
+                ResolutionContext context
+            ) {
+                return new Destination { OtherValue = source.Value + 10 };
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof (Source), typeof (Destination)).ConvertUsing(typeof (CustomConverter));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source), typeof(Destination))
+                        .ConvertUsing(typeof(CustomConverter));
+                }
+            );
 
         protected override void Because_of()
         {
-            _result = Mapper.Map<Source, Destination>(new Source {Value = 5});
+            _result = Mapper.Map<Source, Destination>(new Source { Value = 5 });
         }
 
         [Fact]

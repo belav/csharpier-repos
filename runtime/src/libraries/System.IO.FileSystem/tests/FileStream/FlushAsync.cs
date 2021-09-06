@@ -21,6 +21,7 @@ namespace System.IO.Tests
                     await fs.FlushAsync();
                 }
             }
+
             finally
             {
                 File.SetAttributes(fileName, FileAttributes.Normal);
@@ -33,9 +34,23 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
 
             // ensure that we'll be using a buffer larger than our test data
-            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite, TestBuffer.Length * 2))
-            using (FileStream fsr = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite,
+                    TestBuffer.Length * 2
+                )
+            )
+            using (
+                FileStream fsr = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite
+                )
+            ) {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 Assert.Equal(TestBuffer.Length, fs.Length);
 

@@ -3,12 +3,12 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of ImplementOneInterface using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -18,12 +18,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(IEmpty o)
     {
-        return Helper.Compare((ImplementOneInterface)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     private static bool BoxUnboxToQ(IEmpty o)
     {
-        return Helper.Compare((ImplementOneInterface?)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     private static int Main()

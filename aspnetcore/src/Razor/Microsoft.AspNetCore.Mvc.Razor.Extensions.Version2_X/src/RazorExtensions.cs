@@ -31,10 +31,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
 
             builder.AddTargetExtension(new ViewComponentTagHelperTargetExtension());
-            builder.AddTargetExtension(new TemplateTargetExtension()
-            {
-                TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
-            });
+            builder.AddTargetExtension(
+                new TemplateTargetExtension()
+                {
+                    TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
+                }
+            );
 
             builder.Features.Add(new ModelExpressionPass());
             builder.Features.Add(new PagesPropertyInjectionPass());

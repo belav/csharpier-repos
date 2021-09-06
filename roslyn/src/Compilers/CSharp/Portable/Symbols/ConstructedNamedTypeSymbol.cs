@@ -17,15 +17,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SubstitutedNestedTypeSymbol : SubstitutedNamedTypeSymbol
     {
-        internal SubstitutedNestedTypeSymbol(SubstitutedNamedTypeSymbol newContainer, NamedTypeSymbol originalDefinition)
-            : base(
-                newContainer: newContainer,
-                map: newContainer.TypeSubstitution,
-                originalDefinition: originalDefinition,
-                // An Arity-0 member of an unbound type, e.g. A<>.B, is unbound.
-                unbound: newContainer.IsUnboundGenericType && originalDefinition.Arity == 0)
-        {
-        }
+        internal SubstitutedNestedTypeSymbol(
+            SubstitutedNamedTypeSymbol newContainer,
+            NamedTypeSymbol originalDefinition
+        ) : base(
+            newContainer: newContainer,
+            map: newContainer.TypeSubstitution,
+            originalDefinition: originalDefinition,
+            // An Arity-0 member of an unbound type, e.g. A<>.B, is unbound.
+            unbound: newContainer.IsUnboundGenericType && originalDefinition.Arity == 0
+        ) { }
 
         internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
         {
@@ -56,12 +57,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ImmutableArray<TypeWithAnnotations> _typeArgumentsWithAnnotations;
         private readonly NamedTypeSymbol _constructedFrom;
 
-        internal ConstructedNamedTypeSymbol(NamedTypeSymbol constructedFrom, ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations, bool unbound = false, TupleExtraData tupleData = null)
-            : base(newContainer: constructedFrom.ContainingSymbol,
-                   map: new TypeMap(constructedFrom.ContainingType, constructedFrom.OriginalDefinition.TypeParameters, typeArgumentsWithAnnotations),
-                   originalDefinition: constructedFrom.OriginalDefinition,
-                   constructedFrom: constructedFrom, unbound: unbound, tupleData: tupleData)
-        {
+        internal ConstructedNamedTypeSymbol(
+            NamedTypeSymbol constructedFrom,
+            ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations,
+            bool unbound = false,
+            TupleExtraData tupleData = null
+        ) : base(
+            newContainer: constructedFrom.ContainingSymbol,
+            map: new TypeMap(
+                constructedFrom.ContainingType,
+                constructedFrom.OriginalDefinition.TypeParameters,
+                typeArgumentsWithAnnotations
+            ),
+            originalDefinition: constructedFrom.OriginalDefinition,
+            constructedFrom: constructedFrom,
+            unbound: unbound,
+            tupleData: tupleData
+        ) {
             _typeArgumentsWithAnnotations = typeArgumentsWithAnnotations;
             _constructedFrom = constructedFrom;
 
@@ -71,27 +83,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {
-            return new ConstructedNamedTypeSymbol(_constructedFrom, _typeArgumentsWithAnnotations, IsUnboundGenericType, tupleData: newData);
+            return new ConstructedNamedTypeSymbol(
+                _constructedFrom,
+                _typeArgumentsWithAnnotations,
+                IsUnboundGenericType,
+                tupleData: newData
+            );
         }
 
         public override NamedTypeSymbol ConstructedFrom
         {
-            get
-            {
-                return _constructedFrom;
-            }
+            get { return _constructedFrom; }
         }
 
         internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
         {
-            get
-            {
-                return _typeArgumentsWithAnnotations;
-            }
+            get { return _typeArgumentsWithAnnotations; }
         }
 
-        internal static bool TypeParametersMatchTypeArguments(ImmutableArray<TypeParameterSymbol> typeParameters, ImmutableArray<TypeWithAnnotations> typeArguments)
-        {
+        internal static bool TypeParametersMatchTypeArguments(
+            ImmutableArray<TypeParameterSymbol> typeParameters,
+            ImmutableArray<TypeWithAnnotations> typeArguments
+        ) {
             int n = typeParameters.Length;
             Debug.Assert(typeArguments.Length == n);
             Debug.Assert(typeArguments.Length > 0);
@@ -107,19 +120,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return true;
         }
 
-        internal sealed override bool GetUnificationUseSiteDiagnosticRecursive(ref DiagnosticInfo result, Symbol owner, ref HashSet<TypeSymbol> checkedTypes)
-        {
-            if (ConstructedFrom.GetUnificationUseSiteDiagnosticRecursive(ref result, owner, ref checkedTypes) ||
-                GetUnificationUseSiteDiagnosticRecursive(ref result, _typeArgumentsWithAnnotations, owner, ref checkedTypes))
-            {
+        internal sealed override bool GetUnificationUseSiteDiagnosticRecursive(
+            ref DiagnosticInfo result,
+            Symbol owner,
+            ref HashSet<TypeSymbol> checkedTypes
+        ) {
+            if (
+                ConstructedFrom.GetUnificationUseSiteDiagnosticRecursive(
+                    ref result,
+                    owner,
+                    ref checkedTypes
+                )
+                || GetUnificationUseSiteDiagnosticRecursive(
+                    ref result,
+                    _typeArgumentsWithAnnotations,
+                    owner,
+                    ref checkedTypes
+                )
+            ) {
                 return true;
             }
 
             var typeArguments = this.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
             foreach (var typeArg in typeArguments)
             {
-                if (GetUnificationUseSiteDiagnosticRecursive(ref result, typeArg.CustomModifiers, owner, ref checkedTypes))
-                {
+                if (
+                    GetUnificationUseSiteDiagnosticRecursive(
+                        ref result,
+                        typeArg.CustomModifiers,
+                        owner,
+                        ref checkedTypes
+                    )
+                ) {
                     return true;
                 }
             }

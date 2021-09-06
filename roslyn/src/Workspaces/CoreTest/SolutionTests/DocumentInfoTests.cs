@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(id: null, "doc"));
             Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(documentId, name: null));
 
-            Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(documentId, "doc", folders: new[] { "folder", null }));
+            Assert.Throws<ArgumentNullException>(
+                () => DocumentInfo.Create(documentId, "doc", folders: new[] { "folder", null })
+            );
         }
 
         [Fact]
@@ -36,7 +38,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 name: "doc",
                 sourceCodeKind: SourceCodeKind.Script,
                 loader: loader,
-                isGenerated: true);
+                isGenerated: true
+            );
 
             Assert.Equal(id, info.Id);
             Assert.Equal("doc", info.Name);
@@ -59,7 +62,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var info3 = DocumentInfo.Create(documentId, "doc", folders: new string[0]);
             Assert.True(((ImmutableArray<string>)info3.Folders).IsEmpty);
 
-            var info4 = DocumentInfo.Create(documentId, "doc", folders: ImmutableArray<string>.Empty);
+            var info4 = DocumentInfo.Create(
+                documentId,
+                "doc",
+                folders: ImmutableArray<string>.Empty
+            );
             Assert.True(((ImmutableArray<string>)info4.Folders).IsEmpty);
         }
 
@@ -69,7 +76,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [InlineData("path")]
         public void Create_FilePath(string path)
         {
-            var info = DocumentInfo.Create(DocumentId.CreateNewId(ProjectId.CreateNewId()), "doc", filePath: path);
+            var info = DocumentInfo.Create(
+                DocumentId.CreateNewId(ProjectId.CreateNewId()),
+                "doc",
+                filePath: path
+            );
             Assert.Equal(path, info.FilePath);
         }
 
@@ -78,14 +89,45 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
-            var instance = DocumentInfo.Create(DocumentId.CreateNewId(ProjectId.CreateNewId()), "doc");
+            var instance = DocumentInfo.Create(
+                DocumentId.CreateNewId(ProjectId.CreateNewId()),
+                "doc"
+            );
 
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithId(value), opt => opt.Id, documentId, defaultThrows: true);
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithName(value), opt => opt.Name, "New", defaultThrows: true);
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithSourceCodeKind(value), opt => opt.SourceCodeKind, SourceCodeKind.Script);
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithTextLoader(value), opt => opt.TextLoader, (TextLoader)new FileTextLoader(Path.GetTempPath(), defaultEncoding: null));
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithId(value),
+                opt => opt.Id,
+                documentId,
+                defaultThrows: true
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithName(value),
+                opt => opt.Name,
+                "New",
+                defaultThrows: true
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithSourceCodeKind(value),
+                opt => opt.SourceCodeKind,
+                SourceCodeKind.Script
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithTextLoader(value),
+                opt => opt.TextLoader,
+                (TextLoader)new FileTextLoader(Path.GetTempPath(), defaultEncoding: null)
+            );
 
-            SolutionTestHelpers.TestListProperty(instance, (old, value) => old.WithFolders(value), opt => opt.Folders, "folder", allowDuplicates: true);
+            SolutionTestHelpers.TestListProperty(
+                instance,
+                (old, value) => old.WithFolders(value),
+                opt => opt.Folders,
+                "folder",
+                allowDuplicates: true
+            );
         }
     }
 }

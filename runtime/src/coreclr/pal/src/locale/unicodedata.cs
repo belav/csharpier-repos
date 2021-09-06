@@ -12,7 +12,9 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("// Licensed to the .NET Foundation under one or more agreements.");
-        Console.WriteLine("// The .NET Foundation licenses this file to you under the MIT license.");
+        Console.WriteLine(
+            "// The .NET Foundation licenses this file to you under the MIT license."
+        );
         Console.WriteLine();
 
         Console.WriteLine("#include \"pal/unicodedata.h\"");
@@ -40,10 +42,9 @@ class Program
                 if (!hasLowerCaseMapping && !hasUpperCaseMapping)
                     continue;
 
-
-                int opposingCase = hasUpperCaseMapping ?
-                    int.Parse(fields[12], NumberStyles.HexNumber) :
-                    int.Parse(fields[13], NumberStyles.HexNumber);
+                int opposingCase = hasUpperCaseMapping
+                    ? int.Parse(fields[12], NumberStyles.HexNumber)
+                    : int.Parse(fields[13], NumberStyles.HexNumber);
 
                 // These won't fit in 16 bits - no point carrying them
                 if (code > 0xFFFF)
@@ -58,6 +59,8 @@ class Program
 
         Console.WriteLine("};");
 
-        Console.WriteLine("CONST UINT UNICODE_DATA_SIZE = sizeof(UnicodeData)/sizeof(UnicodeDataRec);");
+        Console.WriteLine(
+            "CONST UINT UNICODE_DATA_SIZE = sizeof(UnicodeData)/sizeof(UnicodeDataRec);"
+        );
     }
 }

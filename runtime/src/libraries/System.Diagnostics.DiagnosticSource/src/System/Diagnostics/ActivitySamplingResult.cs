@@ -13,19 +13,16 @@ namespace System.Diagnostics
         /// The Activity object doesn't need to be created
         /// </summary>
         None,
-
         /// <summary>
         /// The Activity object needs to be created. It will have Name, Source, Id and Baggage.
         /// Other properties are unnecessary and will be ignored by this listener.
         /// </summary>
         PropagationData,
-
         /// <summary>
         /// The activity object should be populated with all the propagation info and also all other
         /// properties such as Links, Tags, and Events. Activity.IsAllDataRequested will return true.
         /// </summary>
         AllData,
-
         /// <summary>
         /// The activity object should be populated the same as the AllData case and additionally
         /// Activity.IsRecorded is set true. For activities using W3C trace ids this sets a flag bit in the

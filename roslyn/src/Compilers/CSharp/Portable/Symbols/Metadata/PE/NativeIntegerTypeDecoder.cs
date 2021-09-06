@@ -14,15 +14,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     {
         private sealed class ErrorTypeException : Exception { }
 
-        internal static TypeSymbol TransformType(TypeSymbol type, EntityHandle handle, PEModuleSymbol containingModule)
-        {
-            return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags) ?
-                TransformType(type, transformFlags) :
-                type;
+        internal static TypeSymbol TransformType(
+            TypeSymbol type,
+            EntityHandle handle,
+            PEModuleSymbol containingModule
+        ) {
+            return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags)
+                ? TransformType(type, transformFlags)
+                : type;
         }
 
-        internal static TypeSymbol TransformType(TypeSymbol type, ImmutableArray<bool> transformFlags)
-        {
+        internal static TypeSymbol TransformType(
+            TypeSymbol type,
+            ImmutableArray<bool> transformFlags
+        ) {
             var decoder = new NativeIntegerTypeDecoder(transformFlags);
             try
             {
@@ -126,34 +131,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
             }
 
-            NamedTypeSymbol result = haveChanges ? type.WithTypeArguments(allTypeArguments.ToImmutable()) : type;
+            NamedTypeSymbol result = haveChanges
+                ? type.WithTypeArguments(allTypeArguments.ToImmutable())
+                : type;
             allTypeArguments.Free();
             return result;
         }
 
         private ArrayTypeSymbol TransformArrayType(ArrayTypeSymbol type)
         {
-            return type.WithElementType(TransformTypeWithAnnotations(type.ElementTypeWithAnnotations));
+            return type.WithElementType(
+                TransformTypeWithAnnotations(type.ElementTypeWithAnnotations)
+            );
         }
 
         private PointerTypeSymbol TransformPointerType(PointerTypeSymbol type)
         {
-            return type.WithPointedAtType(TransformTypeWithAnnotations(type.PointedAtTypeWithAnnotations));
+            return type.WithPointedAtType(
+                TransformTypeWithAnnotations(type.PointedAtTypeWithAnnotations)
+            );
         }
 
-        private FunctionPointerTypeSymbol TransformFunctionPointerType(FunctionPointerTypeSymbol type)
-        {
-            var transformedReturnType = TransformTypeWithAnnotations(type.Signature.ReturnTypeWithAnnotations);
+        private FunctionPointerTypeSymbol TransformFunctionPointerType(
+            FunctionPointerTypeSymbol type
+        ) {
+            var transformedReturnType = TransformTypeWithAnnotations(
+                type.Signature.ReturnTypeWithAnnotations
+            );
             var transformedParameterTypes = ImmutableArray<TypeWithAnnotations>.Empty;
             var paramsModified = false;
 
             if (type.Signature.ParameterCount > 0)
             {
-                var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(type.Signature.ParameterCount);
+                var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                    type.Signature.ParameterCount
+                );
                 foreach (var param in type.Signature.Parameters)
                 {
                     var transformedParam = TransformTypeWithAnnotations(param.TypeWithAnnotations);
-                    paramsModified = paramsModified || !transformedParam.IsSameAs(param.TypeWithAnnotations);
+                    paramsModified =
+                        paramsModified || !transformedParam.IsSameAs(param.TypeWithAnnotations);
                     builder.Add(transformedParam);
                 }
 
@@ -168,9 +185,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
             }
 
-            if (paramsModified || !transformedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations))
-            {
-                return type.SubstituteTypeSymbol(transformedReturnType, transformedParameterTypes, refCustomModifiers: default, paramRefCustomModifiers: default);
+            if (
+                paramsModified
+                || !transformedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations)
+            ) {
+                return type.SubstituteTypeSymbol(
+                    transformedReturnType,
+                    transformedParameterTypes,
+                    refCustomModifiers: default,
+                    paramRefCustomModifiers: default
+                );
             }
             else
             {

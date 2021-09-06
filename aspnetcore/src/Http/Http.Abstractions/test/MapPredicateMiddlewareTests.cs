@@ -12,7 +12,12 @@ namespace Microsoft.AspNetCore.Builder.Extensions
 
     public class MapPredicateMiddlewareTests
     {
-        private static readonly Predicate NotImplementedPredicate = new Predicate(environment => { throw new NotImplementedException(); });
+        private static readonly Predicate NotImplementedPredicate = new Predicate(
+            environment =>
+            {
+                throw new NotImplementedException();
+            }
+        );
 
         private static Task Success(HttpContext context)
         {
@@ -52,7 +57,9 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             var noMiddleware = new ApplicationBuilder(serviceProvider: null!).Build();
             var noOptions = new MapWhenOptions();
             Assert.Throws<ArgumentNullException>(() => builder.MapWhen(null!, UseNotImplemented));
-            Assert.Throws<ArgumentNullException>(() => builder.MapWhen(NotImplementedPredicate, configuration: null!));
+            Assert.Throws<ArgumentNullException>(
+                () => builder.MapWhen(NotImplementedPredicate, configuration: null!)
+            );
             Assert.Throws<ArgumentNullException>(() => new MapWhenMiddleware(null!, noOptions));
             Assert.Throws<ArgumentNullException>(() => new MapWhenMiddleware(noMiddleware, null!));
             Assert.Throws<ArgumentNullException>(() => new MapWhenMiddleware(null!, noOptions));
@@ -100,12 +107,18 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         public async Task ChainedPredicates_Success()
         {
             var builder = new ApplicationBuilder(serviceProvider: null!);
-            builder.MapWhen(TruePredicate, map1 =>
-            {
-                map1.MapWhen((Predicate)FalsePredicate, UseNotImplemented);
-                map1.MapWhen((Predicate)TruePredicate, map2 => map2.MapWhen((Predicate)TruePredicate, UseSuccess));
-                map1.Run(NotImplemented);
-            });
+            builder.MapWhen(
+                TruePredicate,
+                map1 =>
+                {
+                    map1.MapWhen((Predicate)FalsePredicate, UseNotImplemented);
+                    map1.MapWhen(
+                        (Predicate)TruePredicate,
+                        map2 => map2.MapWhen((Predicate)TruePredicate, UseSuccess)
+                    );
+                    map1.Run(NotImplemented);
+                }
+            );
             var app = builder.Build();
 
             HttpContext context = CreateRequest();

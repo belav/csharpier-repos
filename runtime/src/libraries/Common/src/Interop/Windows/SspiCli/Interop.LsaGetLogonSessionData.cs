@@ -10,6 +10,9 @@ internal static partial class Interop
     internal static partial class SspiCli
     {
         [DllImport(Interop.Libraries.SspiCli, SetLastError = true)]
-        internal static extern int LsaGetLogonSessionData(ref LUID LogonId, out SafeLsaReturnBufferHandle ppLogonSessionData);
+        internal static extern int LsaGetLogonSessionData(
+            ref LUID LogonId,
+            out SafeLsaReturnBufferHandle ppLogonSessionData
+        );
     }
 }

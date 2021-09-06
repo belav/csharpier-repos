@@ -15,11 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class SpatialQuerySqliteFixture : SpatialQueryRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection)
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection)
                 .AddEntityFrameworkSqliteNetTopologySuite()
                 .AddSingleton<IRelationalTypeMappingSource, ReplacementTypeMappingSource>();
 
@@ -37,14 +36,19 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             modelBuilder.HasDbFunction(
                 typeof(GeoExtensions).GetMethod(nameof(GeoExtensions.Distance)),
-                b => b.HasTranslation(
-                    e => new SqlFunctionExpression(
-                        "Distance",
-                        arguments: e,
-                        nullable: true,
-                        argumentsPropagateNullability: e.Select(a => true).ToList(),
-                        typeof(double),
-                        null)));
+                b =>
+                    b.HasTranslation(
+                        e =>
+                            new SqlFunctionExpression(
+                                "Distance",
+                                arguments: e,
+                                nullable: true,
+                                argumentsPropagateNullability: e.Select(a => true).ToList(),
+                                typeof(double),
+                                null
+                            )
+                    )
+            );
         }
 
         protected override void Clean(DbContext context)
@@ -59,16 +63,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             public ReplacementTypeMappingSource(
                 TypeMappingSourceDependencies dependencies,
-                RelationalTypeMappingSourceDependencies relationalDependencies)
-                : base(dependencies, relationalDependencies)
-            {
-            }
+                RelationalTypeMappingSourceDependencies relationalDependencies
+            ) : base(dependencies, relationalDependencies) { }
 
-            protected override RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-                => mappingInfo.ClrType == typeof(GeoPoint)
-                    ? ((RelationalTypeMapping)base.FindMapping(typeof(Point))
-                        .Clone(new GeoPointConverter()))
-                    .Clone("geometry", null)
+            protected override RelationalTypeMapping FindMapping(
+                in RelationalTypeMappingInfo mappingInfo
+            ) =>
+                mappingInfo.ClrType == typeof(GeoPoint)
+                    ? (
+                          (RelationalTypeMapping)base.FindMapping(typeof(Point))
+                              .Clone(new GeoPointConverter())
+                      ).Clone("geometry", null)
                     : base.FindMapping(mappingInfo);
         }
     }

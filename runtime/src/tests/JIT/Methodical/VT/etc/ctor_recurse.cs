@@ -8,7 +8,10 @@ namespace Test
     internal class S
     {
         private T _nvalue;
-        public S(T t) { _nvalue = t; }
+        public S(T t)
+        {
+            _nvalue = t;
+        }
     }
 
     internal struct T
@@ -16,28 +19,141 @@ namespace Test
         private static T s_stat;
         private S _gcref;
 
-        public T(T t) { t.DoMethod(); _gcref = new S(t); }
-        public T(S s) { _gcref = s; }
+        public T(T t)
+        {
+            t.DoMethod();
+            _gcref = new S(t);
+        }
+        public T(S s)
+        {
+            _gcref = s;
+        }
 
         private void DoMethod() { }
 
         private static int Main()
         {
-            s_stat =
-                new T(new S(new T(new S(new T(new S(new T(new S(new T(new S(
-                new T(new S(new T(new S(new T(new S(new T(new S(new T(new S(
-                new T(new S(new T(new S(new T(new S(new T(new S(new T(new S(
-                new T(new S(new T(new S(new T(new S(new T(new S(new T(new S(
-                new T(new S(new T(new S(new T(new S(new T(new S(new T(new S(
-                new T(new S(new T(new S(new T(new S(new T(new S(new T(new S(
-                        s_stat
-                ))))))))))
-                ))))))))))
-                ))))))))))
-                ))))))))))
-                ))))))))))
-                ))))))))))
-                ;
+            s_stat = new T(
+                new S(
+                    new T(
+                        new S(
+                            new T(
+                                new S(
+                                    new T(
+                                        new S(
+                                            new T(
+                                                new S(
+                                                    new T(
+                                                        new S(
+                                                            new T(
+                                                                new S(
+                                                                    new T(
+                                                                        new S(
+                                                                            new T(
+                                                                                new S(
+                                                                                    new T(
+                                                                                        new S(
+                                                                                            new T(
+                                                                                                new S(
+                                                                                                    new T(
+                                                                                                        new S(
+                                                                                                            new T(
+                                                                                                                new S(
+                                                                                                                    new T(
+                                                                                                                        new S(
+                                                                                                                            new T(
+                                                                                                                                new S(
+                                                                                                                                    new T(
+                                                                                                                                        new S(
+                                                                                                                                            new T(
+                                                                                                                                                new S(
+                                                                                                                                                    new T(
+                                                                                                                                                        new S(
+                                                                                                                                                            new T(
+                                                                                                                                                                new S(
+                                                                                                                                                                    new T(
+                                                                                                                                                                        new S(
+                                                                                                                                                                            new T(
+                                                                                                                                                                                new S(
+                                                                                                                                                                                    new T(
+                                                                                                                                                                                        new S(
+                                                                                                                                                                                            new T(
+                                                                                                                                                                                                new S(
+                                                                                                                                                                                                    new T(
+                                                                                                                                                                                                        new S(
+                                                                                                                                                                                                            new T(
+                                                                                                                                                                                                                new S(
+                                                                                                                                                                                                                    new T(
+                                                                                                                                                                                                                        new S(
+                                                                                                                                                                                                                            new T(
+                                                                                                                                                                                                                                new S(
+                                                                                                                                                                                                                                    new T(
+                                                                                                                                                                                                                                        new S(
+                                                                                                                                                                                                                                            new T(
+                                                                                                                                                                                                                                                new S(
+                                                                                                                                                                                                                                                    new T(
+                                                                                                                                                                                                                                                        new S(
+                                                                                                                                                                                                                                                            s_stat
+                                                                                                                                                                                                                                                        )
+                                                                                                                                                                                                                                                    )
+                                                                                                                                                                                                                                                )
+                                                                                                                                                                                                                                            )
+                                                                                                                                                                                                                                        )
+                                                                                                                                                                                                                                    )
+                                                                                                                                                                                                                                )
+                                                                                                                                                                                                                            )
+                                                                                                                                                                                                                        )
+                                                                                                                                                                                                                    )
+                                                                                                                                                                                                                )
+                                                                                                                                                                                                            )
+                                                                                                                                                                                                        )
+                                                                                                                                                                                                    )
+                                                                                                                                                                                                )
+                                                                                                                                                                                            )
+                                                                                                                                                                                        )
+                                                                                                                                                                                    )
+                                                                                                                                                                                )
+                                                                                                                                                                            )
+                                                                                                                                                                        )
+                                                                                                                                                                    )
+                                                                                                                                                                )
+                                                                                                                                                            )
+                                                                                                                                                        )
+                                                                                                                                                    )
+                                                                                                                                                )
+                                                                                                                                            )
+                                                                                                                                        )
+                                                                                                                                    )
+                                                                                                                                )
+                                                                                                                            )
+                                                                                                                        )
+                                                                                                                    )
+                                                                                                                )
+                                                                                                            )
+                                                                                                        )
+                                                                                                    )
+                                                                                                )
+                                                                                            )
+                                                                                        )
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
             return 100;
         }
     }

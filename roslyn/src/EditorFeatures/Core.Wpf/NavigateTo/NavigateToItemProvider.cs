@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
         public NavigateToItemProvider(
             Workspace workspace,
             IAsynchronousOperationListener asyncListener,
-            IThreadingContext threadingContext)
-        {
+            IThreadingContext threadingContext
+        ) {
             Contract.ThrowIfNull(workspace);
             Contract.ThrowIfNull(asyncListener);
 
@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 var result = ImmutableHashSet.Create<string>(StringComparer.Ordinal);
                 foreach (var project in _workspace.CurrentSolution.Projects)
                 {
-                    var navigateToSearchService = project.GetLanguageService<INavigateToSearchService>();
+                    var navigateToSearchService =
+                        project.GetLanguageService<INavigateToSearchService>();
                     if (navigateToSearchService != null)
                     {
                         result = result.Union(navigateToSearchService.KindsProvided);
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             {
                 foreach (var project in _workspace.CurrentSolution.Projects)
                 {
-                    var navigateToSearchService = project.GetLanguageService<INavigateToSearchService>();
+                    var navigateToSearchService =
+                        project.GetLanguageService<INavigateToSearchService>();
                     if (navigateToSearchService is null)
                     {
                         // If we reach here, it means the current project does not support Navigate To, which is
@@ -95,14 +97,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             (_displayFactory as IDisposable)?.Dispose();
         }
 
-        public void StartSearch(INavigateToCallback callback, string searchValue)
-            => StartSearch(callback, searchValue, KindsProvided);
+        public void StartSearch(INavigateToCallback callback, string searchValue) =>
+            StartSearch(callback, searchValue, KindsProvided);
 
-        public void StartSearch(INavigateToCallback callback, string searchValue, INavigateToFilterParameters filter)
-            => StartSearch(callback, searchValue, filter.Kinds.ToImmutableHashSet(StringComparer.Ordinal));
+        public void StartSearch(
+            INavigateToCallback callback,
+            string searchValue,
+            INavigateToFilterParameters filter
+        ) =>
+            StartSearch(
+                callback,
+                searchValue,
+                filter.Kinds.ToImmutableHashSet(StringComparer.Ordinal)
+            );
 
-        private void StartSearch(INavigateToCallback callback, string searchValue, IImmutableSet<string> kinds)
-        {
+        private void StartSearch(
+            INavigateToCallback callback,
+            string searchValue,
+            IImmutableSet<string> kinds
+        ) {
             this.StopSearch();
 
             if (string.IsNullOrWhiteSpace(searchValue))
@@ -116,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 kinds = KindsProvided;
             }
 
-            var searchCurrentDocument = (callback.Options as INavigateToOptions2)?.SearchCurrentDocument ?? false;
+            var searchCurrentDocument =
+                (callback.Options as INavigateToOptions2)?.SearchCurrentDocument ?? false;
 
             var roslynCallback = new NavigateToItemProviderCallback(_displayFactory, callback);
             var searcher = NavigateToSearcher.Create(
@@ -126,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 searchValue,
                 searchCurrentDocument,
                 kinds,
-                _threadingContext.DisposalToken);
+                _threadingContext.DisposalToken
+            );
 
             _ = searcher.SearchAsync(_cancellationTokenSource.Token);
         }

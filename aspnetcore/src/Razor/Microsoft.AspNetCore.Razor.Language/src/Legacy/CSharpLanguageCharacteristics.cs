@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTokenizer>
     {
-        private static Dictionary<SyntaxKind, string> _tokenSamples = new Dictionary<SyntaxKind, string>()
+        private static Dictionary<SyntaxKind, string> _tokenSamples = new Dictionary<
+            SyntaxKind,
+            string
+        >()
         {
             { SyntaxKind.Arrow, "->" },
             { SyntaxKind.Minus, "-" },
@@ -64,7 +67,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         };
 
         // Allows performance optimization of GetKeyword such that it need not do Enum.ToString
-        private static IReadOnlyDictionary<CSharpKeyword, string> _keywordNames = new Dictionary<CSharpKeyword, string>()
+        private static IReadOnlyDictionary<CSharpKeyword, string> _keywordNames = new Dictionary<
+            CSharpKeyword,
+            string
+        >()
         {
             { CSharpKeyword.Await, "await" },
             { CSharpKeyword.Abstract, "abstract" },
@@ -144,26 +150,33 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             { CSharpKeyword.Break, "break" },
             { CSharpKeyword.Checked, "checked" },
             { CSharpKeyword.Namespace, "namespace" },
-            { CSharpKeyword.When,  "when" },
-            { CSharpKeyword.Where,  "where" },
+            { CSharpKeyword.When, "when" },
+            { CSharpKeyword.Where, "where" },
         };
 
-        private static readonly CSharpLanguageCharacteristics _instance = new CSharpLanguageCharacteristics();
+        private static readonly CSharpLanguageCharacteristics _instance =
+            new CSharpLanguageCharacteristics();
 
         protected CSharpLanguageCharacteristics()
         {
 #if DEBUG
             var values = Enum.GetValues(typeof(CSharpKeyword));
 
-            Debug.Assert(values.Length == _keywordNames.Count, "_keywordNames and CSharpKeyword are out of sync");
+            Debug.Assert(
+                values.Length == _keywordNames.Count,
+                "_keywordNames and CSharpKeyword are out of sync"
+            );
             for (var i = 0; i < values.Length; i++)
             {
-                var keyword = (CSharpKeyword) values.GetValue(i);
+                var keyword = (CSharpKeyword)values.GetValue(i);
 
                 var expectedValue = keyword.ToString().ToLowerInvariant();
                 var actualValue = _keywordNames[keyword];
 
-                Debug.Assert(expectedValue == actualValue, "_keywordNames and CSharpKeyword are out of sync for " + expectedValue);
+                Debug.Assert(
+                    expectedValue == actualValue,
+                    "_keywordNames and CSharpKeyword are out of sync for " + expectedValue
+                );
             }
 #endif
         }
@@ -175,8 +188,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return new CSharpTokenizer(source);
         }
 
-        protected override SyntaxToken CreateToken(string content, SyntaxKind kind, RazorDiagnostic[] errors)
-        {
+        protected override SyntaxToken CreateToken(
+            string content,
+            SyntaxKind kind,
+            RazorDiagnostic[] errors
+        ) {
             return SyntaxFactory.Token(kind, content, errors);
         }
 

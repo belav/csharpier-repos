@@ -37,7 +37,8 @@ namespace System.Text.Json.Node.Tests
         [Fact]
         public static void NodesAsPocoProperties()
         {
-            const string Expected = "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
+            const string Expected =
+                "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
 
             var poco = new Poco
             {
@@ -45,10 +46,7 @@ namespace System.Text.Json.Node.Tests
                 Array = new JsonArray(43),
                 Value = (JsonValue)44,
                 IntValue = (JsonValue)45,
-                Object = new JsonObject
-                {
-                    ["Property"] = 46
-                }
+                Object = new JsonObject { ["Property"] = 46 }
             };
 
             string json = JsonSerializer.Serialize(poco);

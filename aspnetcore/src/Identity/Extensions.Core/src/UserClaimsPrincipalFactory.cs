@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="optionsAccessor">The configured <see cref="IdentityOptions"/>.</param>
         public UserClaimsPrincipalFactory(
             UserManager<TUser> userManager,
-            IOptions<IdentityOptions> optionsAccessor)
-        {
+            IOptions<IdentityOptions> optionsAccessor
+        ) {
             if (userManager == null)
             {
                 throw new ArgumentNullException(nameof(userManager));
@@ -76,9 +76,11 @@ namespace Microsoft.AspNetCore.Identity
         {
             var userId = await UserManager.GetUserIdAsync(user);
             var userName = await UserManager.GetUserNameAsync(user);
-            var id = new ClaimsIdentity("Identity.Application", // REVIEW: Used to match Application scheme
+            var id = new ClaimsIdentity(
+                "Identity.Application", // REVIEW: Used to match Application scheme
                 Options.ClaimsIdentity.UserNameClaimType,
-                Options.ClaimsIdentity.RoleClaimType);
+                Options.ClaimsIdentity.RoleClaimType
+            );
             id.AddClaim(new Claim(Options.ClaimsIdentity.UserIdClaimType, userId));
             id.AddClaim(new Claim(Options.ClaimsIdentity.UserNameClaimType, userName));
             if (UserManager.SupportsUserEmail)
@@ -91,8 +93,12 @@ namespace Microsoft.AspNetCore.Identity
             }
             if (UserManager.SupportsUserSecurityStamp)
             {
-                id.AddClaim(new Claim(Options.ClaimsIdentity.SecurityStampClaimType,
-                    await UserManager.GetSecurityStampAsync(user)));
+                id.AddClaim(
+                    new Claim(
+                        Options.ClaimsIdentity.SecurityStampClaimType,
+                        await UserManager.GetSecurityStampAsync(user)
+                    )
+                );
             }
             if (UserManager.SupportsUserClaim)
             {
@@ -117,8 +123,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="userManager">The <see cref="UserManager{TUser}"/> to retrieve user information from.</param>
         /// <param name="roleManager">The <see cref="RoleManager{TRole}"/> to retrieve a user's roles from.</param>
         /// <param name="options">The configured <see cref="IdentityOptions"/>.</param>
-        public UserClaimsPrincipalFactory(UserManager<TUser> userManager, RoleManager<TRole> roleManager, IOptions<IdentityOptions> options)
-            : base(userManager, options)
+        public UserClaimsPrincipalFactory(
+            UserManager<TUser> userManager,
+            RoleManager<TRole> roleManager,
+            IOptions<IdentityOptions> options
+        ) : base(userManager, options)
         {
             if (roleManager == null)
             {

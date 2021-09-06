@@ -33,7 +33,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             BindingSource = bindingSource;
         }
 
-
         /// <summary>
         /// The <see cref="Type"/>. The provider sets <see cref="BindingSource"/> of the given <see cref="Type"/> or 
         /// anything assignable to the given <see cref="Type"/>. 

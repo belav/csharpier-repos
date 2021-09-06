@@ -16,8 +16,10 @@ namespace System.Web.Http.ExceptionHandling
         internal const string LoggedByKey = "MS_LoggedBy";
 
         /// <inheritdoc />
-        Task IExceptionLogger.LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
-        {
+        Task IExceptionLogger.LogAsync(
+            ExceptionLoggerContext context,
+            CancellationToken cancellationToken
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -38,17 +40,17 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="context">The exception logger context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task representing the asynchronous exception logging operation.</returns>
-        public virtual Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
-        {
+        public virtual Task LogAsync(
+            ExceptionLoggerContext context,
+            CancellationToken cancellationToken
+        ) {
             Log(context);
             return TaskHelpers.Completed();
         }
 
         /// <summary>When overridden in a derived class, logs the exception synchronously.</summary>
         /// <param name="context">The exception logger context.</param>
-        public virtual void Log(ExceptionLoggerContext context)
-        {
-        }
+        public virtual void Log(ExceptionLoggerContext context) { }
 
         /// <summary>Determines whether the exception should be logged.</summary>
         /// <param name="context">The exception logger context.</param>

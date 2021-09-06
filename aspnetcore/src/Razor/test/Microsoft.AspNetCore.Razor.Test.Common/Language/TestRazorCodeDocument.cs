@@ -15,12 +15,17 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static RazorCodeDocument Create(string content, bool normalizeNewLines = false)
         {
-            var source = TestRazorSourceDocument.Create(content, normalizeNewLines: normalizeNewLines);
+            var source = TestRazorSourceDocument.Create(
+                content,
+                normalizeNewLines: normalizeNewLines
+            );
             return new DefaultRazorCodeDocument(source, imports: null);
         }
 
-        public static RazorCodeDocument Create(RazorSourceDocument source, IEnumerable<RazorSourceDocument> imports)
-        {
+        public static RazorCodeDocument Create(
+            RazorSourceDocument source,
+            IEnumerable<RazorSourceDocument> imports
+        ) {
             return new DefaultRazorCodeDocument(source, imports);
         }
     }

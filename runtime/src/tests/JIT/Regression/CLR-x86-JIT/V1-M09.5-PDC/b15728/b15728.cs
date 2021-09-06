@@ -10,8 +10,10 @@ namespace defaultNamespace
     {
         public static int Main(String[] args)
         {
-            if ("15.0%Double.PositiveInfinity = " + 15.0 % Double.PositiveInfinity == "15.0%Double.PositiveInfinity = 15")
-            {
+            if (
+                "15.0%Double.PositiveInfinity = " + 15.0 % Double.PositiveInfinity
+                == "15.0%Double.PositiveInfinity = 15"
+            ) {
                 Console.WriteLine("*** PASSED ***");
                 return 100;
             }
@@ -20,5 +22,4 @@ namespace defaultNamespace
             return 1;
         }
     }
-
 }

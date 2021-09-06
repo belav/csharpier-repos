@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             Document existingDocument,
             bool areFoldersValidIdentifiers,
             string defaultNamespace,
-            bool isCancelled = false)
-        {
+            bool isCancelled = false
+        ) {
             Accessibility = accessibility;
             TypeKind = typeKind;
             TypeName = typeName;
@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.GenerateType
             IsCancelled = isCancelled;
         }
 
-        private GenerateTypeOptionsResult(bool isCancelled)
-            => IsCancelled = isCancelled;
+        private GenerateTypeOptionsResult(bool isCancelled) => IsCancelled = isCancelled;
     }
 }

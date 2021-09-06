@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
             while (true)
             {
-                var elementWhichRequiresDecryption = doc.Descendants(XmlConstants.EncryptedSecretElementName).FirstOrDefault();
+                var elementWhichRequiresDecryption = doc.Descendants(
+                        XmlConstants.EncryptedSecretElementName
+                    )
+                    .FirstOrDefault();
                 if (elementWhichRequiresDecryption == null)
                 {
                     // All encryption is finished.
@@ -45,10 +48,16 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                 // Decrypt the clone so that the decryptor doesn't inadvertently modify
                 // the original document or other data structures. The element we pass to
                 // the decryptor should be the child of the 'encryptedSecret' element.
-                var clonedElementWhichRequiresDecryption = new XElement(elementWhichRequiresDecryption);
-                string decryptorTypeName = (string)clonedElementWhichRequiresDecryption.Attribute(XmlConstants.DecryptorTypeAttributeName)!;
+                var clonedElementWhichRequiresDecryption = new XElement(
+                    elementWhichRequiresDecryption
+                );
+                string decryptorTypeName = (string)clonedElementWhichRequiresDecryption.Attribute(
+                    XmlConstants.DecryptorTypeAttributeName
+                )!;
                 var decryptorInstance = activator.CreateInstance<IXmlDecryptor>(decryptorTypeName);
-                var decryptedElement = decryptorInstance.Decrypt(clonedElementWhichRequiresDecryption.Elements().Single());
+                var decryptedElement = decryptorInstance.Decrypt(
+                    clonedElementWhichRequiresDecryption.Elements().Single()
+                );
 
                 // Put a placeholder into the original document so that we can continue our
                 // search for elements which need to be decrypted.
@@ -86,7 +95,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
             while (true)
             {
-                var elementWhichRequiresEncryption = doc.Descendants().FirstOrDefault(DoesSingleElementRequireEncryption);
+                var elementWhichRequiresEncryption = doc.Descendants()
+                    .FirstOrDefault(DoesSingleElementRequireEncryption);
                 if (elementWhichRequiresEncryption == null)
                 {
                     // All encryption is finished.
@@ -95,7 +105,9 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
                 // Encrypt the clone so that the encryptor doesn't inadvertently modify
                 // the original document or other data structures.
-                var clonedElementWhichRequiresEncryption = new XElement(elementWhichRequiresEncryption);
+                var clonedElementWhichRequiresEncryption = new XElement(
+                    elementWhichRequiresEncryption
+                );
                 var innerDoc = new XDocument(clonedElementWhichRequiresEncryption);
                 var encryptedXmlInfo = encryptor.Encrypt(clonedElementWhichRequiresEncryption);
                 CryptoUtil.Assert(encryptedXmlInfo != null, "IXmlEncryptor.Encrypt returned null.");
@@ -115,9 +127,15 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                 //   <element />
                 // </enc:encryptedSecret>
                 entry.Key.ReplaceWith(
-                    new XElement(XmlConstants.EncryptedSecretElementName,
-                        new XAttribute(XmlConstants.DecryptorTypeAttributeName, entry.Value.DecryptorType.AssemblyQualifiedName!),
-                        entry.Value.EncryptedElement));
+                    new XElement(
+                        XmlConstants.EncryptedSecretElementName,
+                        new XAttribute(
+                            XmlConstants.DecryptorTypeAttributeName,
+                            entry.Value.DecryptorType.AssemblyQualifiedName!
+                        ),
+                        entry.Value.EncryptedElement
+                    )
+                );
             }
             return doc.Root;
         }
@@ -137,8 +155,15 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             {
                 try
                 {
-                    return new Secret(new ArraySegment<byte>(underlyingBuffer, 0, checked((int)memoryStream.Length)));
+                    return new Secret(
+                        new ArraySegment<byte>(
+                            underlyingBuffer,
+                            0,
+                            checked((int)memoryStream.Length)
+                        )
+                    );
                 }
+
                 finally
                 {
                     Array.Clear(underlyingBuffer, 0, underlyingBuffer.Length);
@@ -160,6 +185,7 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                     var memoryStream = new MemoryStream(plaintextSecret, writable: false);
                     return XElement.Load(memoryStream);
                 }
+
                 finally
                 {
                     Array.Clear(plaintextSecret, 0, plaintextSecret.Length);

@@ -12,7 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class InternalIndexBuilder : AnnotatableBuilder<Index, InternalModelBuilder>, IConventionIndexBuilder
+    public class InternalIndexBuilder
+        : AnnotatableBuilder<Index, InternalModelBuilder>,
+          IConventionIndexBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -21,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public InternalIndexBuilder(Index index, InternalModelBuilder modelBuilder)
-            : base(index, modelBuilder)
-        {
-        }
+            : base(index, modelBuilder) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +31,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalIndexBuilder? IsUnique(bool? unique, ConfigurationSource configurationSource)
-        {
+        public virtual InternalIndexBuilder? IsUnique(
+            bool? unique,
+            ConfigurationSource configurationSource
+        ) {
             if (!CanSetIsUnique(unique, configurationSource))
             {
                 return null;
@@ -48,9 +50,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanSetIsUnique(bool? unique, ConfigurationSource? configurationSource)
-            => Metadata.IsUnique == unique
-                || configurationSource.Overrides(Metadata.GetIsUniqueConfigurationSource());
+        public virtual bool CanSetIsUnique(
+            bool? unique,
+            ConfigurationSource? configurationSource
+        ) =>
+            Metadata.IsUnique == unique
+            || configurationSource.Overrides(Metadata.GetIsUniqueConfigurationSource());
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,9 +71,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return null;
             }
 
-            var newIndexBuilder = Metadata.Name == null
-                ? entityTypeBuilder.HasIndex(properties, Metadata.GetConfigurationSource())
-                : entityTypeBuilder.HasIndex(properties, Metadata.Name, Metadata.GetConfigurationSource());
+            var newIndexBuilder =
+                Metadata.Name == null
+                    ? entityTypeBuilder.HasIndex(properties, Metadata.GetConfigurationSource())
+                    : entityTypeBuilder.HasIndex(
+                          properties,
+                          Metadata.Name,
+                          Metadata.GetConfigurationSource()
+                      );
             newIndexBuilder?.MergeAnnotationsFrom(Metadata);
 
             var isUniqueConfigurationSource = Metadata.GetIsUniqueConfigurationSource();
@@ -86,8 +96,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        IConventionIndex IConventionIndexBuilder.Metadata
-            => Metadata;
+        IConventionIndex IConventionIndexBuilder.Metadata => Metadata;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,10 +104,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        IConventionIndexBuilder? IConventionIndexBuilder.IsUnique(bool? unique, bool fromDataAnnotation)
-            => IsUnique(
+        IConventionIndexBuilder? IConventionIndexBuilder.IsUnique(
+            bool? unique,
+            bool fromDataAnnotation
+        ) =>
+            IsUnique(
                 unique,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -106,9 +121,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        bool IConventionIndexBuilder.CanSetIsUnique(bool? unique, bool fromDataAnnotation)
-            => CanSetIsUnique(
+        bool IConventionIndexBuilder.CanSetIsUnique(bool? unique, bool fromDataAnnotation) =>
+            CanSetIsUnique(
                 unique,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
     }
 }

@@ -28,8 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             IList<IFilterMetadata> filters,
             HandlerMethodDescriptor handlerMethod,
             IDictionary<string, object> handlerArguments,
-            object handlerInstance)
-            : base(pageContext, filters)
+            object handlerInstance
+        ) : base(pageContext, filters)
         {
             if (handlerArguments == null)
             {
@@ -49,7 +49,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// <summary>
         /// Gets the descriptor associated with the current page.
         /// </summary>
-        public new virtual CompiledPageActionDescriptor ActionDescriptor => 
+        public new virtual CompiledPageActionDescriptor ActionDescriptor =>
             (CompiledPageActionDescriptor)base.ActionDescriptor;
 
         /// <summary>

@@ -30,7 +30,6 @@ class Gen<T>
     {
         return t;
     }
-
 }
 
 public class Test
@@ -137,6 +136,5 @@ public class Test
             Console.WriteLine("Test Passes");
         }
         return ret;
-
     }
 }

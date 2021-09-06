@@ -18,9 +18,7 @@ namespace EventPipeTests
     public class EventPipeTestEventSource : EventSource
     {
         public EventPipeTestEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat)
-        {
-
-        }
+        { }
 
         [Event(1)]
         public void MyEvent(int i)
@@ -35,15 +33,20 @@ namespace EventPipeTests
         }
 
         [Event(3)]
-        public void KeyValueEvent(string SourceName, string EventName, IEnumerable<KeyValuePair<string, string>> Arguments)
-        {
+        public void KeyValueEvent(
+            string SourceName,
+            string EventName,
+            IEnumerable<KeyValuePair<string, string>> Arguments
+        ) {
             WriteEvent(3, SourceName, EventName, Arguments);
         }
     }
 
     class EventPipe
     {
-        static readonly Guid EventPipeReadingProfilerGuid = new Guid("9E7F78E2-B3BE-410B-AA8D-E210E4C757A4");
+        static readonly Guid EventPipeReadingProfilerGuid = new Guid(
+            "9E7F78E2-B3BE-410B-AA8D-E210E4C757A4"
+        );
 
         public static int Main(string[] args)
         {
@@ -52,9 +55,11 @@ namespace EventPipeTests
                 return RunTest();
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "EventPipeReadBasic",
-                                          profilerClsid: EventPipeReadingProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "EventPipeReadBasic",
+                profilerClsid: EventPipeReadingProfilerGuid
+            );
         }
 
         public static int RunTest()
@@ -63,11 +68,15 @@ namespace EventPipeTests
 
             EventPipeTestEventSource myEventSource = new EventPipeTestEventSource();
             myEventSource.MyEvent(12);
-            myEventSource.MyArrayEvent('d', Enumerable.Range(0, 120).ToArray(), "Hello from EventPipeTestEventSource!");
+            myEventSource.MyArrayEvent(
+                'd',
+                Enumerable.Range(0, 120).ToArray(),
+                "Hello from EventPipeTestEventSource!"
+            );
 
             List<KeyValuePair<string, string>> myList = new List<KeyValuePair<string, string>>()
             {
-                KeyValuePair.Create("samplekey", "samplevalue" )
+                KeyValuePair.Create("samplekey", "samplevalue")
             };
             myEventSource.KeyValueEvent("Source", "Event", myList);
 

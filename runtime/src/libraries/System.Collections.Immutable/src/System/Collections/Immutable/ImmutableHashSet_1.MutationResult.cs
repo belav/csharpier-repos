@@ -17,7 +17,6 @@ namespace System.Collections.Immutable
             /// The <see cref="MutationResult.Count"/> member describes an adjustment to the previous count of the collection.
             /// </summary>
             Adjustment,
-
             /// <summary>
             /// The <see cref="MutationResult.Count"/> member describes the actual count of the collection.
             /// </summary>
@@ -52,8 +51,11 @@ namespace System.Collections.Immutable
             /// <param name="root">The root node of the result.</param>
             /// <param name="count">The total element count or a count adjustment.</param>
             /// <param name="countType">The appropriate interpretation for the <paramref name="count"/> parameter.</param>
-            internal MutationResult(SortedInt32KeyNode<HashBucket> root, int count, CountType countType = ImmutableHashSet<T>.CountType.Adjustment)
-            {
+            internal MutationResult(
+                SortedInt32KeyNode<HashBucket> root,
+                int count,
+                CountType countType = ImmutableHashSet<T>.CountType.Adjustment
+            ) {
                 Requires.NotNull(root, nameof(root));
                 _root = root;
                 _count = count;

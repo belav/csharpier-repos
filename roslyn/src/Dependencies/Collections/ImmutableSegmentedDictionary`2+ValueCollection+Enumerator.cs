@@ -15,8 +15,9 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 private ImmutableSegmentedDictionary<TKey, TValue>.Enumerator _enumerator;
 
-                internal Enumerator(ImmutableSegmentedDictionary<TKey, TValue>.Enumerator enumerator)
-                {
+                internal Enumerator(
+                    ImmutableSegmentedDictionary<TKey, TValue>.Enumerator enumerator
+                ) {
                     _enumerator = enumerator;
                 }
 
@@ -24,14 +25,11 @@ namespace Microsoft.CodeAnalysis.Collections
 
                 object? IEnumerator.Current => Current;
 
-                public void Dispose()
-                    => _enumerator.Dispose();
+                public void Dispose() => _enumerator.Dispose();
 
-                public bool MoveNext()
-                    => _enumerator.MoveNext();
+                public bool MoveNext() => _enumerator.MoveNext();
 
-                public void Reset()
-                    => _enumerator.Reset();
+                public void Reset() => _enumerator.Reset();
             }
         }
     }

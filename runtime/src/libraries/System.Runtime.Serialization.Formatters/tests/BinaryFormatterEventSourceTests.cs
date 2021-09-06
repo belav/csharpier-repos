@@ -11,11 +11,19 @@ using Xunit;
 
 namespace System.Runtime.Serialization.Formatters.Tests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsBinaryFormatterSupported)
+    )]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public static class BinaryFormatterEventSourceTests
     {
-        private const string BinaryFormatterEventSourceName = "System.Runtime.Serialization.Formatters.Binary.BinaryFormatterEventSource";
+        private const string BinaryFormatterEventSourceName =
+            "System.Runtime.Serialization.Formatters.Binary.BinaryFormatterEventSource";
 
         [Fact]
         public static void RecordsSerialization()
@@ -76,7 +84,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             string[] expected = new string[]
             {
                 "SerializationStart [Start, 00000001]: <no payload>",
-                "SerializingObject [Info, 00000001]: " + typeof(ClassWithNestedDeserialization).AssemblyQualifiedName,
+                "SerializingObject [Info, 00000001]: "
+                    + typeof(ClassWithNestedDeserialization).AssemblyQualifiedName,
                 "SerializationStart [Start, 00000001]: <no payload>",
                 "SerializingObject [Info, 00000001]: " + typeof(Address).AssemblyQualifiedName,
                 "SerializationStop [Stop, 00000001]: <no payload>",
@@ -95,7 +104,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             expected = new string[]
             {
                 "DeserializationStart [Start, 00000002]: <no payload>",
-                "DeserializingObject [Info, 00000002]: " + typeof(ClassWithNestedDeserialization).AssemblyQualifiedName,
+                "DeserializingObject [Info, 00000002]: "
+                    + typeof(ClassWithNestedDeserialization).AssemblyQualifiedName,
                 "DeserializationStart [Start, 00000002]: <no payload>",
                 "DeserializingObject [Info, 00000002]: " + typeof(Address).AssemblyQualifiedName,
                 "DeserializationStop [Stop, 00000002]: <no payload>",
@@ -159,7 +169,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     return;
                 }
 
-                AddToLog($"{eventData.EventName} [{eventData.Opcode}, {(int)eventData.Keywords & int.MaxValue:X8}]: {ParsePayload(eventData.Payload)}");
+                AddToLog(
+                    $"{eventData.EventName} [{eventData.Opcode}, {(int)eventData.Keywords & int.MaxValue:X8}]: {ParsePayload(eventData.Payload)}"
+                );
                 base.OnEventWritten(eventData);
             }
 
@@ -193,12 +205,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Serializable]
         public class ClassWithNestedDeserialization : ISerializable
         {
-            public ClassWithNestedDeserialization()
-            {
-            }
+            public ClassWithNestedDeserialization() { }
 
-            protected ClassWithNestedDeserialization(SerializationInfo info, StreamingContext context)
-            {
+            protected ClassWithNestedDeserialization(
+                SerializationInfo info,
+                StreamingContext context
+            ) {
                 byte[] serializedData = (byte[])info.GetValue("SomeField", typeof(byte[]));
                 MemoryStream ms = new MemoryStream(serializedData);
                 BinaryFormatter formatter = new BinaryFormatter();

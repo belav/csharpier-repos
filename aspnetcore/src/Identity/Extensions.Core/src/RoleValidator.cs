@@ -30,8 +30,10 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="manager">The <see cref="RoleManager{TRole}"/> managing the role store.</param>
         /// <param name="role">The role to validate.</param>
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous validation.</returns>
-        public virtual async Task<IdentityResult> ValidateAsync(RoleManager<TRole> manager, TRole role)
-        {
+        public virtual async Task<IdentityResult> ValidateAsync(
+            RoleManager<TRole> manager,
+            TRole role
+        ) {
             if (manager == null)
             {
                 throw new ArgumentNullException(nameof(manager));
@@ -49,9 +51,11 @@ namespace Microsoft.AspNetCore.Identity
             return IdentityResult.Success;
         }
 
-        private async Task ValidateRoleName(RoleManager<TRole> manager, TRole role,
-            ICollection<IdentityError> errors)
-        {
+        private async Task ValidateRoleName(
+            RoleManager<TRole> manager,
+            TRole role,
+            ICollection<IdentityError> errors
+        ) {
             var roleName = await manager.GetRoleNameAsync(role);
             if (string.IsNullOrWhiteSpace(roleName))
             {
@@ -60,9 +64,13 @@ namespace Microsoft.AspNetCore.Identity
             else
             {
                 var owner = await manager.FindByNameAsync(roleName);
-                if (owner != null && 
-                    !string.Equals(await manager.GetRoleIdAsync(owner), await manager.GetRoleIdAsync(role)))
-                {
+                if (
+                    owner != null
+                    && !string.Equals(
+                        await manager.GetRoleIdAsync(owner),
+                        await manager.GetRoleIdAsync(role)
+                    )
+                ) {
                     errors.Add(Describer.DuplicateRoleName(roleName));
                 }
             }

@@ -20,8 +20,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         internal virtual IReadOnlyList<LinePragma> LinePragmas { get; }
 
-        public static RazorCSharpDocument Create(string generatedCode, RazorCodeGenerationOptions options, IEnumerable<RazorDiagnostic> diagnostics)
-        {
+        public static RazorCSharpDocument Create(
+            string generatedCode,
+            RazorCodeGenerationOptions options,
+            IEnumerable<RazorDiagnostic> diagnostics
+        ) {
             if (generatedCode == null)
             {
                 throw new ArgumentNullException(nameof(generatedCode));
@@ -37,7 +40,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(diagnostics));
             }
 
-            return new DefaultRazorCSharpDocument(generatedCode, options, diagnostics.ToArray(), sourceMappings: null, linePragmas: null);
+            return new DefaultRazorCSharpDocument(
+                generatedCode,
+                options,
+                diagnostics.ToArray(),
+                sourceMappings: null,
+                linePragmas: null
+            );
         }
 
         public static RazorCSharpDocument Create(
@@ -45,8 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorCodeGenerationOptions options,
             IEnumerable<RazorDiagnostic> diagnostics,
             IEnumerable<SourceMapping> sourceMappings,
-            IEnumerable<LinePragma> linePragmas)
-        {
+            IEnumerable<LinePragma> linePragmas
+        ) {
             if (generatedCode == null)
             {
                 throw new ArgumentNullException(nameof(generatedCode));
@@ -67,7 +76,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(sourceMappings));
             }
 
-            return new DefaultRazorCSharpDocument(generatedCode, options, diagnostics.ToArray(), sourceMappings.ToArray(), linePragmas.ToArray());
+            return new DefaultRazorCSharpDocument(
+                generatedCode,
+                options,
+                diagnostics.ToArray(),
+                sourceMappings.ToArray(),
+                linePragmas.ToArray()
+            );
         }
     }
 }

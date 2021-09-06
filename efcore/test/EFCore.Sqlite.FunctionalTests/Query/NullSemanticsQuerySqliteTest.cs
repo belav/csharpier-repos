@@ -6,12 +6,11 @@ using Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NullSemanticsQuerySqliteTest : NullSemanticsQueryTestBase<NullSemanticsQuerySqliteFixture>
+    public class NullSemanticsQuerySqliteTest
+        : NullSemanticsQueryTestBase<NullSemanticsQuerySqliteFixture>
     {
-        public NullSemanticsQuerySqliteTest(NullSemanticsQuerySqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public NullSemanticsQuerySqliteTest(NullSemanticsQuerySqliteFixture fixture) : base(fixture)
+        { }
 
         protected override NullSemanticsContext CreateContext(bool useRelationalNulls = false)
         {

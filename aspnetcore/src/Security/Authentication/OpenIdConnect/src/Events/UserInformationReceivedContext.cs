@@ -17,9 +17,13 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         /// Initializes a new instance of <see cref="UserInformationReceivedContext"/>.
         /// </summary>
         /// <inheritdoc />
-        public UserInformationReceivedContext(HttpContext context, AuthenticationScheme scheme, OpenIdConnectOptions options, ClaimsPrincipal principal, AuthenticationProperties properties)
-            : base(context, scheme, options, properties)
-            => Principal = principal;
+        public UserInformationReceivedContext(
+            HttpContext context,
+            AuthenticationScheme scheme,
+            OpenIdConnectOptions options,
+            ClaimsPrincipal principal,
+            AuthenticationProperties properties
+        ) : base(context, scheme, options, properties) => Principal = principal;
 
         /// <summary>
         /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

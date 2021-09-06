@@ -20,8 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteLineStringMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _getPointN
-            = typeof(LineString).GetRequiredRuntimeMethod(nameof(LineString.GetPointN), new[] { typeof(int) });
+        private static readonly MethodInfo _getPointN = typeof(LineString).GetRequiredRuntimeMethod(
+            nameof(LineString.GetPointN),
+            new[] { typeof(int) }
+        );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -46,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -59,13 +61,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     new[]
                     {
                         instance!,
-                        _sqlExpressionFactory.Add(
-                            arguments[0],
-                            _sqlExpressionFactory.Constant(1))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1))
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },
-                    method.ReturnType);
+                    method.ReturnType
+                );
             }
 
             return null;

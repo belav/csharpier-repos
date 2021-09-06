@@ -20,15 +20,24 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var httpContext = new DefaultHttpContext();
-            var originalViewData = new ViewDataDictionary(metadataProvider: new EmptyModelMetadataProvider());
+            var originalViewData = new ViewDataDictionary(
+                metadataProvider: new EmptyModelMetadataProvider()
+            );
             var context = new ViewContext(
-                new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()),
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new ActionDescriptor()
+                ),
                 view: Mock.Of<IView>(),
                 viewData: originalViewData,
                 tempData: new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
                 writer: TextWriter.Null,
-                htmlHelperOptions: new HtmlHelperOptions());
-            var replacementViewData = new ViewDataDictionary(metadataProvider: new EmptyModelMetadataProvider());
+                htmlHelperOptions: new HtmlHelperOptions()
+            );
+            var replacementViewData = new ViewDataDictionary(
+                metadataProvider: new EmptyModelMetadataProvider()
+            );
 
             // Act
             context.ViewBag.Hello = "goodbye";
@@ -51,10 +60,13 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var originalContext = new ViewContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
                 view: Mock.Of<IView>(),
-                viewData: new ViewDataDictionary(metadataProvider: new EmptyModelMetadataProvider()),
+                viewData: new ViewDataDictionary(
+                    metadataProvider: new EmptyModelMetadataProvider()
+                ),
                 tempData: new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
                 writer: TextWriter.Null,
-                htmlHelperOptions: new HtmlHelperOptions());
+                htmlHelperOptions: new HtmlHelperOptions()
+            );
             var view = Mock.Of<IView>();
             var viewData = new ViewDataDictionary(originalContext.ViewData);
             var writer = new StringWriter();
@@ -73,7 +85,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.Same(originalContext.RouteData, context.RouteData);
             Assert.Same(originalContext.TempData, context.TempData);
             Assert.Same(originalContext.ValidationMessageElement, context.ValidationMessageElement);
-            Assert.Same(originalContext.ValidationSummaryMessageElement, context.ValidationSummaryMessageElement);
+            Assert.Same(
+                originalContext.ValidationSummaryMessageElement,
+                context.ValidationSummaryMessageElement
+            );
 
             Assert.Same(view, context.View);
             Assert.Same(viewData, context.ViewData);

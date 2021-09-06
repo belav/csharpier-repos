@@ -21,9 +21,11 @@ namespace Microsoft.CodeAnalysis.Razor
             {
                 throw new ArgumentNullException(nameof(builder));
             }
-            
-            if (builder.Configuration.LanguageVersion.CompareTo(RazorLanguageVersion.Version_3_0) >= 0)
-            {
+
+            if (
+                builder.Configuration.LanguageVersion.CompareTo(RazorLanguageVersion.Version_3_0)
+                >= 0
+            ) {
                 builder.Features.Add(new BindTagHelperDescriptorProvider());
                 builder.Features.Add(new ComponentTagHelperDescriptorProvider());
                 builder.Features.Add(new EventHandlerTagHelperDescriptorProvider());

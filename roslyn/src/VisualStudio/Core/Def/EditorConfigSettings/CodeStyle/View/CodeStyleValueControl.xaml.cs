@@ -22,10 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
             InitializeComponent();
             var values = setting.GetValues().ToList();
             var index = values.IndexOf(setting.GetCurrentValue());
-            _comboBox = new ComboBox()
-            {
-                ItemsSource = values
-            };
+            _comboBox = new ComboBox() { ItemsSource = values };
             _comboBox.SelectedIndex = index;
             _comboBox.SetValue(AutomationProperties.NameProperty, ServicesVSResources.Value);
             _comboBox.SelectionChanged += ComboBox_SelectionChanged;

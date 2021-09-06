@@ -19,28 +19,30 @@ namespace System.Net
         ///       instance of the <see cref='System.Net.WebResponse'/>
         ///       class.</para>
         /// </devdoc>
-        protected WebResponse()
-        {
-        }
+        protected WebResponse() { }
 
-        protected WebResponse(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        protected WebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        protected virtual void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        protected virtual void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        public virtual void Close()
-        {
-        }
+        public virtual void Close() { }
 
         public void Dispose()
         {
@@ -76,7 +78,6 @@ namespace System.Net
                 throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
             }
         }
-
 
         /// <devdoc>
         ///    <para>When overridden in a derived class,
@@ -141,10 +142,7 @@ namespace System.Net
         // Derived types with headers should override both Headers and SupportsHeaders.
         public virtual bool SupportsHeaders
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

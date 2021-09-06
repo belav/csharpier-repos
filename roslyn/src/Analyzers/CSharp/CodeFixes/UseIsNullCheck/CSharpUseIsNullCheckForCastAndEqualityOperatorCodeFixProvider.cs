@@ -20,22 +20,31 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseIsNullCheckForCastAndEqualityOperator), Shared]
-    internal class CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseIsNullCheckForCastAndEqualityOperator
+        ),
+        Shared
+    ]
+    internal class CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseIsNullCheckDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseIsNullCheckDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
-        private static bool IsSupportedDiagnostic(Diagnostic diagnostic)
-            => diagnostic.Properties[UseIsNullConstants.Kind] == UseIsNullConstants.CastAndEqualityKey;
+        private static bool IsSupportedDiagnostic(Diagnostic diagnostic) =>
+            diagnostic.Properties[UseIsNullConstants.Kind] == UseIsNullConstants.CastAndEqualityKey;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -43,18 +52,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             if (IsSupportedDiagnostic(diagnostic))
             {
                 context.RegisterCodeFix(
-                    new MyCodeAction(CSharpAnalyzersResources.Use_is_null_check,
-                    c => FixAsync(context.Document, diagnostic, c)),
-                    context.Diagnostics);
+                    new MyCodeAction(
+                        CSharpAnalyzersResources.Use_is_null_check,
+                        c => FixAsync(context.Document, diagnostic, c)
+                    ),
+                    context.Diagnostics
+                );
             }
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             foreach (var diagnostic in diagnostics)
             {
                 if (!IsSupportedDiagnostic(diagnostic))
@@ -62,11 +76,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                     continue;
                 }
 
-                var binary = (BinaryExpressionSyntax)diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
+                var binary = (BinaryExpressionSyntax)diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken: cancellationToken
+                );
 
                 editor.ReplaceNode(
                     binary,
-                    (current, g) => Rewrite((BinaryExpressionSyntax)current));
+                    (current, g) => Rewrite((BinaryExpressionSyntax)current)
+                );
             }
 
             return Task.CompletedTask;
@@ -81,35 +99,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             }
 
             // convert:  (object)expr != null   to    expr is object
-            return SyntaxFactory
-                .BinaryExpression(
+            return SyntaxFactory.BinaryExpression(
                     SyntaxKind.IsExpression,
                     isPattern.Expression,
-                    SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword)))
+                    SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
+                )
                 .WithTriviaFrom(isPattern);
         }
 
-        private static IsPatternExpressionSyntax RewriteWorker(BinaryExpressionSyntax binary)
-            => binary.Right.IsKind(SyntaxKind.NullLiteralExpression)
+        private static IsPatternExpressionSyntax RewriteWorker(BinaryExpressionSyntax binary) =>
+            binary.Right.IsKind(SyntaxKind.NullLiteralExpression)
                 ? Rewrite(binary, binary.Left, binary.Right)
                 : Rewrite(binary, binary.Right, binary.Left);
 
         private static IsPatternExpressionSyntax Rewrite(
-            BinaryExpressionSyntax binary, ExpressionSyntax expr, ExpressionSyntax nullLiteral)
-        {
+            BinaryExpressionSyntax binary,
+            ExpressionSyntax expr,
+            ExpressionSyntax nullLiteral
+        ) {
             var castExpr = (CastExpressionSyntax)expr;
             return SyntaxFactory.IsPatternExpression(
                 castExpr.Expression.WithTriviaFrom(binary.Left),
                 SyntaxFactory.Token(SyntaxKind.IsKeyword).WithTriviaFrom(binary.OperatorToken),
-                SyntaxFactory.ConstantPattern(nullLiteral).WithTriviaFrom(binary.Right));
+                SyntaxFactory.ConstantPattern(nullLiteral).WithTriviaFrom(binary.Right)
+            );
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, title) { }
         }
     }
 }

@@ -7,15 +7,19 @@ namespace ApiAuthSample.Controllers
     {
         private readonly IClientRequestParametersProvider _clientRequestParametersProvider;
 
-        public ConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider)
-        {
+        public ConfigurationController(
+            IClientRequestParametersProvider clientRequestParametersProvider
+        ) {
             _clientRequestParametersProvider = clientRequestParametersProvider;
         }
 
         [HttpGet("/_configuration/{clientId}")]
         public IActionResult GetClientParameters(string clientId)
         {
-            var parameters = _clientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+            var parameters = _clientRequestParametersProvider.GetClientParameters(
+                HttpContext,
+                clientId
+            );
             if (parameters == null)
             {
                 return BadRequest($"Parameters for client '{clientId}' not found.");

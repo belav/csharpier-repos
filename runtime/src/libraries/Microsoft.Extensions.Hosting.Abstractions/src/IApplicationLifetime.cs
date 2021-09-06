@@ -13,7 +13,10 @@ namespace Microsoft.Extensions.Hosting
     ///  The recommended alternative is Microsoft.Extensions.Hosting.IHostApplicationLifetime.
     /// </para>
     /// </summary>
-    [Obsolete("This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.Extensions.Hosting.IHostApplicationLifetime.", error: false)]
+    [Obsolete(
+        "This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.Extensions.Hosting.IHostApplicationLifetime.",
+        error: false
+    )]
     public interface IApplicationLifetime
     {
         /// <summary>

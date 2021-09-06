@@ -18,24 +18,30 @@ namespace Microsoft.CodeAnalysis.Classification
         ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers();
 
         /// <inheritdoc cref="IClassificationService.AddLexicalClassifications"/>
-        void AddLexicalClassifications(SourceText text,
+        void AddLexicalClassifications(
+            SourceText text,
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="IClassificationService.AddSyntacticClassificationsAsync"/>
-        void AddSyntacticClassifications(SyntaxTree syntaxTree,
+        void AddSyntacticClassifications(
+            SyntaxTree syntaxTree,
             TextSpan textSpan,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="IClassificationService.AddSemanticClassificationsAsync"/>
-        Task AddSemanticClassificationsAsync(Document document,
+        Task AddSemanticClassificationsAsync(
+            Document document,
             TextSpan textSpan,
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="AddSemanticClassificationsAsync"/>
         void AddSemanticClassifications(
@@ -45,13 +51,18 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="IClassificationService.AdjustStaleClassification"/>
         ClassifiedSpan FixClassification(SourceText text, ClassifiedSpan classifiedSpan);
 
         /// <inheritdoc cref="IClassificationService.ComputeSyntacticChangeRangeAsync"/>
         ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
-            Document oldDocument, Document newDocument, TimeSpan timeout, CancellationToken cancellationToken);
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        );
     }
 }

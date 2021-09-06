@@ -10,7 +10,7 @@ namespace RazorWebSite.Controllers
     {
         public IActionResult Enum()
         {
-            return View(new EnumModel{ Id = ModelEnum.FirstOption });
+            return View(new EnumModel { Id = ModelEnum.FirstOption });
         }
     }
 }

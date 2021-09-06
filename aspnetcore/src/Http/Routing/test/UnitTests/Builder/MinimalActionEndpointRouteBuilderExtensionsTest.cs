@@ -15,14 +15,20 @@ namespace Microsoft.AspNetCore.Builder
 {
     public class MinimalActionEndpointDataSourceBuilderExtensionsTest
     {
-        private ModelEndpointDataSource GetBuilderEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)
-        {
-            return Assert.IsType<ModelEndpointDataSource>(Assert.Single(endpointRouteBuilder.DataSources));
+        private ModelEndpointDataSource GetBuilderEndpointDataSource(
+            IEndpointRouteBuilder endpointRouteBuilder
+        ) {
+            return Assert.IsType<ModelEndpointDataSource>(
+                Assert.Single(endpointRouteBuilder.DataSources)
+            );
         }
 
-        private RouteEndpointBuilder GetRouteEndpointBuilder(IEndpointRouteBuilder endpointRouteBuilder)
-        {
-            return Assert.IsType<RouteEndpointBuilder>(Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders));
+        private RouteEndpointBuilder GetRouteEndpointBuilder(
+            IEndpointRouteBuilder endpointRouteBuilder
+        ) {
+            return Assert.IsType<RouteEndpointBuilder>(
+                Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders)
+            );
         }
 
         [Fact]
@@ -31,9 +37,7 @@ namespace Microsoft.AspNetCore.Builder
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
 
             [HttpMethod("ATTRIBUTE")]
-            void TestAction()
-            {
-            }
+            void TestAction() { }
 
             var endpointBuilder = builder.MapMethods("/", new[] { "METHOD" }, (Action)TestAction);
             endpointBuilder.WithMetadata(new HttpMethodMetadata(new[] { "BUILDER" }));
@@ -41,14 +45,18 @@ namespace Microsoft.AspNetCore.Builder
             var dataSource = Assert.Single(builder.DataSources);
             var endpoint = Assert.Single(dataSource.Endpoints);
 
-            var metadataArray = endpoint.Metadata.Where(m => m is not CompilerGeneratedAttribute).ToArray();
+            var metadataArray = endpoint.Metadata.Where(m => m is not CompilerGeneratedAttribute)
+                .ToArray();
 
             Assert.Equal(3, metadataArray.Length);
             Assert.Equal("ATTRIBUTE", GetMethod(metadataArray[0]));
             Assert.Equal("METHOD", GetMethod(metadataArray[1]));
             Assert.Equal("BUILDER", GetMethod(metadataArray[2]));
 
-            Assert.Equal("BUILDER", endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()!.HttpMethods.Single());
+            Assert.Equal(
+                "BUILDER",
+                endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()!.HttpMethods.Single()
+            );
 
             string GetMethod(object metadata)
             {

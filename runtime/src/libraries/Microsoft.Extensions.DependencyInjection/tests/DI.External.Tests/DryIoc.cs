@@ -7,12 +7,12 @@ using DryIoc.Microsoft.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public class DryIocDependencyInjectionSpecificationTests: DependencyInjectionSpecificationTests
+    public class DryIocDependencyInjectionSpecificationTests : DependencyInjectionSpecificationTests
     {
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
-        {
-            return new Container()
-                .WithDependencyInjectionAdapter(serviceCollection)
+        protected override IServiceProvider CreateServiceProvider(
+            IServiceCollection serviceCollection
+        ) {
+            return new Container().WithDependencyInjectionAdapter(serviceCollection)
                 .BuildServiceProvider();
         }
     }

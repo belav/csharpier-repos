@@ -10,7 +10,8 @@ namespace System.IO.Tests
 {
     public class File_AppendAllTextAsync : File_ReadWriteAllTextAsync
     {
-        protected override Task WriteAsync(string path, string content) => File.AppendAllTextAsync(path, content);
+        protected override Task WriteAsync(string path, string content) =>
+            File.AppendAllTextAsync(path, content);
 
         [Fact]
         public override async Task OverwriteAsync()
@@ -31,7 +32,9 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.AppendAllTextAsync(path, "", token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(async () => await File.AppendAllTextAsync(path, "", token));
+            return Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await File.AppendAllTextAsync(path, "", token)
+            );
         }
     }
 
@@ -41,9 +44,11 @@ namespace System.IO.Tests
             File.AppendAllTextAsync(path, content, new UTF8Encoding(false));
 
         [Fact]
-        public Task NullEncodingAsync() => Assert.ThrowsAsync<ArgumentNullException>(
-            "encoding",
-            async () => await File.AppendAllTextAsync(GetTestFilePath(), "Text", null));
+        public Task NullEncodingAsync() =>
+            Assert.ThrowsAsync<ArgumentNullException>(
+                "encoding",
+                async () => await File.AppendAllTextAsync(GetTestFilePath(), "Text", null)
+            );
 
         [Fact]
         public override Task TaskAlreadyCanceledAsync()
@@ -54,13 +59,15 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.AppendAllTextAsync(path, "", Encoding.UTF8, token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllTextAsync(path, "", Encoding.UTF8, token));
+                async () => await File.AppendAllTextAsync(path, "", Encoding.UTF8, token)
+            );
         }
     }
 
     public class File_AppendAllLinesAsync : File_ReadWriteAllLines_EnumerableAsync
     {
-        protected override Task WriteAsync(string path, string[] content) => File.AppendAllLinesAsync(path, content);
+        protected override Task WriteAsync(string path, string[] content) =>
+            File.AppendAllLinesAsync(path, content);
 
         [Fact]
         public override async Task OverwriteAsync()
@@ -82,20 +89,29 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.AppendAllLinesAsync(path, new[] { "" }, token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllLinesAsync(path, new[] { "" }, token));
+                async () => await File.AppendAllLinesAsync(path, new[] { "" }, token)
+            );
         }
     }
 
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class File_AppendAllLinesAsync_Encoded : File_AppendAllLinesAsync
     {
         protected override Task WriteAsync(string path, string[] content) =>
             File.AppendAllLinesAsync(path, content, new UTF8Encoding(false));
 
         [Fact]
-        public Task NullEncodingAsync() => Assert.ThrowsAsync<ArgumentNullException>(
-            "encoding",
-            async () => await File.AppendAllLinesAsync(GetTestFilePath(), new string[] { "Text" }, null));
+        public Task NullEncodingAsync() =>
+            Assert.ThrowsAsync<ArgumentNullException>(
+                "encoding",
+                async () =>
+                    await File.AppendAllLinesAsync(GetTestFilePath(), new string[] { "Text" }, null)
+            );
 
         [Fact]
         public override Task TaskAlreadyCanceledAsync()
@@ -104,9 +120,12 @@ namespace System.IO.Tests
             CancellationTokenSource source = new CancellationTokenSource();
             CancellationToken token = source.Token;
             source.Cancel();
-            Assert.True(File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token).IsCanceled);
+            Assert.True(
+                File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token).IsCanceled
+            );
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token));
+                async () => await File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token)
+            );
         }
     }
 }

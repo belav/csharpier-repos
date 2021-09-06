@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(FindBaseSymbolsCommandHandler))]
-    internal sealed class FindBaseSymbolsCommandHandler :
-        AbstractNavigationCommandHandler<FindBaseSymbolsCommandArgs>
+    internal sealed class FindBaseSymbolsCommandHandler
+        : AbstractNavigationCommandHandler<FindBaseSymbolsCommandArgs>
     {
         private readonly IAsynchronousOperationListener _asyncListener;
 
@@ -36,21 +36,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FindBaseSymbolsCommandHandler(
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(streamingPresenters)
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(streamingPresenters)
         {
             Contract.ThrowIfNull(listenerProvider);
 
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.FindReferences);
         }
 
-        protected override bool TryExecuteCommand(int caretPosition, Document document, CommandExecutionContext context)
-        {
+        protected override bool TryExecuteCommand(
+            int caretPosition,
+            Document document,
+            CommandExecutionContext context
+        ) {
             var streamingPresenter = base.GetStreamingPresenter();
             if (streamingPresenter != null)
             {
                 // Fire and forget.  So no need for cancellation.
-                _ = StreamingFindBaseSymbolsAsync(document, caretPosition, streamingPresenter, CancellationToken.None);
+                _ = StreamingFindBaseSymbolsAsync(
+                    document,
+                    caretPosition,
+                    streamingPresenter,
+                    CancellationToken.None
+                );
                 return true;
             }
 
@@ -58,25 +66,39 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         }
 
         private async Task StreamingFindBaseSymbolsAsync(
-            Document document, int caretPosition,
+            Document document,
+            int caretPosition,
             IStreamingFindUsagesPresenter presenter,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             try
             {
-                using var token = _asyncListener.BeginAsyncOperation(nameof(StreamingFindBaseSymbolsAsync));
+                using var token = _asyncListener.BeginAsyncOperation(
+                    nameof(StreamingFindBaseSymbolsAsync)
+                );
 
-                var context = presenter.StartSearch(EditorFeaturesResources.Navigating, supportsReferences: true, cancellationToken);
+                var context = presenter.StartSearch(
+                    EditorFeaturesResources.Navigating,
+                    supportsReferences: true,
+                    cancellationToken
+                );
 
-                using (Logger.LogBlock(
-                    FunctionId.CommandHandler_FindAllReference,
-                    KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
-                    context.CancellationToken))
-                {
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CommandHandler_FindAllReference,
+                        KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
+                        context.CancellationToken
+                    )
+                ) {
                     try
                     {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-                        var relevantSymbol = await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(document, caretPosition, context.CancellationToken);
+                        var relevantSymbol =
+                            await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
+                                document,
+                                caretPosition,
+                                context.CancellationToken
+                            );
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
 
                         var overriddenSymbol = relevantSymbol?.symbol.GetOverriddenMember();
@@ -88,7 +110,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                                 return;
                             }
 
-                            var definitionItem = overriddenSymbol.ToNonClassifiedDefinitionItem(document.Project.Solution, true);
+                            var definitionItem = overriddenSymbol.ToNonClassifiedDefinitionItem(
+                                document.Project.Solution,
+                                true
+                            );
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
                             await context.OnDefinitionFoundAsync(definitionItem);
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
@@ -97,18 +122,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             overriddenSymbol = overriddenSymbol.GetOverriddenMember();
                         }
                     }
+
                     finally
                     {
                         await context.OnCompletedAsync().ConfigureAwait(false);
                     }
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
     }
 }

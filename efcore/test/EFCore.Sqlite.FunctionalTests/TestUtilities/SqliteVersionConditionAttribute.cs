@@ -38,7 +38,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             get
             {
                 var connection = new SqliteConnection("Data Source=:memory:;");
-                return connection.ServerVersion != null ? new Version(connection.ServerVersion) : null;
+                return connection.ServerVersion != null
+                    ? new Version(connection.ServerVersion)
+                    : null;
             }
         }
 
@@ -49,8 +51,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return new ValueTask<bool>(false);
             }
 
-            if (_min == null
-                && _max == null)
+            if (_min == null && _max == null)
             {
                 return new ValueTask<bool>(true);
             }
@@ -60,7 +61,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return new ValueTask<bool>(Current <= _max);
             }
 
-            return new ValueTask<bool>(_max == null ? Current >= _min : Current <= _max && Current >= _min);
+            return new ValueTask<bool>(
+                _max == null ? Current >= _min : Current <= _max && Current >= _min
+            );
         }
 
         private string _skipReason;
@@ -68,9 +71,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public string SkipReason
         {
             set => _skipReason = value;
-            get
-                => _skipReason
-                    ?? $"Test only runs for SQLite versions >= {Min ?? "Any"} and <= {Max ?? "Any"}"
+            get =>
+                _skipReason
+                ?? $"Test only runs for SQLite versions >= {Min ?? "Any"} and <= {Max ?? "Any"}"
                     + (Skip == null ? "" : "and skipping on " + Skip);
         }
     }

@@ -38,7 +38,10 @@ namespace System.Configuration
             }
         }
 
-        public int LineNumber { get { return ((IConfigErrorInfo)this).LineNumber; } }
+        public int LineNumber
+        {
+            get { return ((IConfigErrorInfo)this).LineNumber; }
+        }
 
         public string Filename
         {
@@ -59,6 +62,7 @@ namespace System.Configuration
                 _reader.XmlResolver = null;
                 base.Load(_reader);
             }
+
             finally
             {
                 if (_reader != null)
@@ -80,6 +84,7 @@ namespace System.Configuration
                 _reader = new XmlTextReader(new StringReader(outerXml), sourceReader.NameTable);
                 base.Load(_reader);
             }
+
             finally
             {
                 if (_reader != null)
@@ -90,14 +95,34 @@ namespace System.Configuration
             }
         }
 
-        public override XmlAttribute CreateAttribute(string prefix, string localName, string namespaceUri)
-        {
-            return new ConfigXmlAttribute(_filename, LineNumber, prefix, localName, namespaceUri, this);
+        public override XmlAttribute CreateAttribute(
+            string prefix,
+            string localName,
+            string namespaceUri
+        ) {
+            return new ConfigXmlAttribute(
+                _filename,
+                LineNumber,
+                prefix,
+                localName,
+                namespaceUri,
+                this
+            );
         }
 
-        public override XmlElement CreateElement(string prefix, string localName, string namespaceUri)
-        {
-            return new ConfigXmlElement(_filename, LineNumber, prefix, localName, namespaceUri, this);
+        public override XmlElement CreateElement(
+            string prefix,
+            string localName,
+            string namespaceUri
+        ) {
+            return new ConfigXmlElement(
+                _filename,
+                LineNumber,
+                prefix,
+                localName,
+                namespaceUri,
+                this
+            );
         }
 
         public override XmlText CreateTextNode(string text)

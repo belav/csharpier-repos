@@ -19,8 +19,13 @@ namespace Microsoft.AspNetCore.Components.Routing
     // * Catch-all parameters (Like /blog/{*slug})
     internal class TemplateParser
     {
-        public static readonly char[] InvalidParameterNameCharacters =
-            new char[] { '{', '}', '=', '.' };
+        public static readonly char[] InvalidParameterNameCharacters = new char[]
+        {
+            '{',
+            '}',
+            '=',
+            '.'
+        };
 
         internal static RouteTemplate ParseTemplate(string template)
         {
@@ -40,7 +45,8 @@ namespace Microsoft.AspNetCore.Components.Routing
                 if (string.IsNullOrEmpty(segment))
                 {
                     throw new InvalidOperationException(
-                        $"Invalid template '{template}'. Empty segments are not allowed.");
+                        $"Invalid template '{template}'. Empty segments are not allowed."
+                    );
                 }
 
                 if (segment[0] != '{')
@@ -48,37 +54,54 @@ namespace Microsoft.AspNetCore.Components.Routing
                     if (segment[segment.Length - 1] == '}')
                     {
                         throw new InvalidOperationException(
-                            $"Invalid template '{template}'. Missing '{{' in parameter segment '{segment}'.");
+                            $"Invalid template '{template}'. Missing '{{' in parameter segment '{segment}'."
+                        );
                     }
                     if (segment[^1] == '?')
                     {
                         throw new InvalidOperationException(
-                            $"Invalid template '{template}'. '?' is not allowed in literal segment '{segment}'.");
+                            $"Invalid template '{template}'. '?' is not allowed in literal segment '{segment}'."
+                        );
                     }
-                    templateSegments[i] = new TemplateSegment(originalTemplate, segment, isParameter: false);
+                    templateSegments[i] = new TemplateSegment(
+                        originalTemplate,
+                        segment,
+                        isParameter: false
+                    );
                 }
                 else
                 {
                     if (segment[segment.Length - 1] != '}')
                     {
                         throw new InvalidOperationException(
-                            $"Invalid template '{template}'. Missing '}}' in parameter segment '{segment}'.");
+                            $"Invalid template '{template}'. Missing '}}' in parameter segment '{segment}'."
+                        );
                     }
 
                     if (segment.Length < 3)
                     {
                         throw new InvalidOperationException(
-                            $"Invalid template '{template}'. Empty parameter name in segment '{segment}' is not allowed.");
+                            $"Invalid template '{template}'. Empty parameter name in segment '{segment}' is not allowed."
+                        );
                     }
 
-                    var invalidCharacter = segment.IndexOfAny(InvalidParameterNameCharacters, 1, segment.Length - 2);
+                    var invalidCharacter = segment.IndexOfAny(
+                        InvalidParameterNameCharacters,
+                        1,
+                        segment.Length - 2
+                    );
                     if (invalidCharacter != -1)
                     {
                         throw new InvalidOperationException(
-                            $"Invalid template '{template}'. The character '{segment[invalidCharacter]}' in parameter segment '{segment}' is not allowed.");
+                            $"Invalid template '{template}'. The character '{segment[invalidCharacter]}' in parameter segment '{segment}' is not allowed."
+                        );
                     }
 
-                    templateSegments[i] = new TemplateSegment(originalTemplate, segment.Substring(1, segment.Length - 2), isParameter: true);
+                    templateSegments[i] = new TemplateSegment(
+                        originalTemplate,
+                        segment.Substring(1, segment.Length - 2),
+                        isParameter: true
+                    );
                 }
             }
 
@@ -88,7 +111,9 @@ namespace Microsoft.AspNetCore.Components.Routing
 
                 if (currentSegment.IsCatchAll && i != templateSegments.Length - 1)
                 {
-                    throw new InvalidOperationException($"Invalid template '{template}'. A catch-all parameter can only appear as the last segment of the route template.");
+                    throw new InvalidOperationException(
+                        $"Invalid template '{template}'. A catch-all parameter can only appear as the last segment of the route template."
+                    );
                 }
 
                 if (!currentSegment.IsParameter)
@@ -100,15 +125,26 @@ namespace Microsoft.AspNetCore.Components.Routing
                 {
                     var nextSegment = templateSegments[j];
 
-                    if (currentSegment.IsOptional && !nextSegment.IsOptional && !nextSegment.IsCatchAll)
-                    {
-                        throw new InvalidOperationException($"Invalid template '{template}'. Non-optional parameters or literal routes cannot appear after optional parameters.");
+                    if (
+                        currentSegment.IsOptional
+                        && !nextSegment.IsOptional
+                        && !nextSegment.IsCatchAll
+                    ) {
+                        throw new InvalidOperationException(
+                            $"Invalid template '{template}'. Non-optional parameters or literal routes cannot appear after optional parameters."
+                        );
                     }
 
-                    if (string.Equals(currentSegment.Value, nextSegment.Value, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            currentSegment.Value,
+                            nextSegment.Value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         throw new InvalidOperationException(
-                            $"Invalid template '{template}'. The parameter '{currentSegment}' appears multiple times.");
+                            $"Invalid template '{template}'. The parameter '{currentSegment}' appears multiple times."
+                        );
                     }
                 }
             }

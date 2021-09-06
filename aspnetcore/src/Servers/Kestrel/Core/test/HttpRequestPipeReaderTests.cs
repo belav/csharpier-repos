@@ -18,7 +18,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             pipeReader.StopAcceptingReads();
 
             // Validation for ReadAsync occurs in an async method in ReadOnlyPipeStream.
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => { await pipeReader.ReadAsync(); });
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () =>
+                {
+                    await pipeReader.ReadAsync();
+                }
+            );
         }
         [Fact]
         public async Task AbortCausesReadToCancel()
@@ -38,7 +43,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             pipeReader.StartAcceptingReads(null);
             var error = new Exception();
             pipeReader.Abort(error);
-            var exception = await Assert.ThrowsAsync<Exception>(() => pipeReader.ReadAsync().AsTask());
+            var exception = await Assert.ThrowsAsync<Exception>(
+                () => pipeReader.ReadAsync().AsTask()
+            );
             Assert.Same(error, exception);
         }
     }

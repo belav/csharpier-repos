@@ -20,43 +20,48 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
     {
-        private static readonly List<string> _longReturningTypes = new()
-        {
-            "nvarchar(max)",
-            "varchar(max)",
-            "varbinary(max)"
-        };
+        private static readonly List<string> _longReturningTypes =
+            new() { "nvarchar(max)", "varchar(max)", "varbinary(max)" };
 
-        private static readonly HashSet<MethodInfo> _methodInfoDataLengthMapping
-            = new()
+        private static readonly HashSet<MethodInfo> _methodInfoDataLengthMapping =
+            new()
             {
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(string) }),
+                    new[] { typeof(DbFunctions), typeof(string) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(bool?) }),
+                    new[] { typeof(DbFunctions), typeof(bool?) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(double?) }),
+                    new[] { typeof(DbFunctions), typeof(double?) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(decimal?) }),
+                    new[] { typeof(DbFunctions), typeof(decimal?) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(DateTime?) }),
+                    new[] { typeof(DbFunctions), typeof(DateTime?) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(TimeSpan?) }),
+                    new[] { typeof(DbFunctions), typeof(TimeSpan?) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(DateTimeOffset?) }),
+                    new[] { typeof(DbFunctions), typeof(DateTimeOffset?) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(byte[]) }),
+                    new[] { typeof(DbFunctions), typeof(byte[]) }
+                ),
                 typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
                     nameof(SqlServerDbFunctionsExtensions.DataLength),
-                    new[] { typeof(DbFunctions), typeof(Guid?) })
+                    new[] { typeof(DbFunctions), typeof(Guid?) }
+                )
             };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -82,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -103,9 +108,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         arguments.Skip(1),
                         nullable: true,
                         argumentsPropagateNullability: new[] { true },
-                        typeof(long));
+                        typeof(long)
+                    );
 
-                    return _sqlExpressionFactory.Convert(result, method.ReturnType.UnwrapNullableType());
+                    return _sqlExpressionFactory.Convert(
+                        result,
+                        method.ReturnType.UnwrapNullableType()
+                    );
                 }
 
                 return _sqlExpressionFactory.Function(
@@ -113,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     arguments.Skip(1),
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    method.ReturnType.UnwrapNullableType());
+                    method.ReturnType.UnwrapNullableType()
+                );
             }
 
             return null;

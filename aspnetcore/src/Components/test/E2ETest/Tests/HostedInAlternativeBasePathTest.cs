@@ -15,10 +15,12 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public HostedInAlternativeBasePathTest(
             BrowserFixture browserFixture,
             AspNetSiteServerFixture serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output)
         {
-            serverFixture.AdditionalArguments.AddRange(new[] { "--UseAlternativeBasePath", "true" });
+            serverFixture.AdditionalArguments.AddRange(
+                new[] { "--UseAlternativeBasePath", "true" }
+            );
             serverFixture.BuildWebHostMethod = HostedInAspNet.Server.Program.BuildWebHost;
             serverFixture.Environment = AspNetEnvironment.Development;
         }

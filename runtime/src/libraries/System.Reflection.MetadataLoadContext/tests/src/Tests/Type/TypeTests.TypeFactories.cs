@@ -48,7 +48,6 @@ namespace System.Reflection.Tests
             t.TestByRefInvariants();
         }
 
-
         [Fact]
         public static void TestMakePointer()
         {
@@ -64,8 +63,13 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMakeGenericType()
         {
-            Type gt = typeof(GenericClass3<,,>).Project();
-            Type[] gas = { typeof(int).Project(), typeof(string).Project(), typeof(double).Project() };
+            Type gt = typeof(GenericClass3<, , >).Project();
+            Type[] gas =
+            {
+                typeof(int).Project(),
+                typeof(string).Project(),
+                typeof(double).Project()
+            };
             Type t = gt.MakeGenericType(gas);
 
             Assert.True(t.IsConstructedGenericType);
@@ -78,7 +82,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMakeGenericTypeParameter()
         {
-            Type gt = typeof(GenericClass3<,,>).Project();
+            Type gt = typeof(GenericClass3<, , >).Project();
             Type[] gps = gt.GetTypeInfo().GenericTypeParameters;
             Assert.Equal(3, gps.Length);
             Assert.Equal("T", gps[0].Name);
@@ -100,14 +104,14 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMakeGenericTypeNegativeInput()
         {
-            Type t = typeof(GenericClass3<,,>).Project();
+            Type t = typeof(GenericClass3<, , >).Project();
             Type[] typeArguments = null;
             Assert.Throws<ArgumentNullException>(() => t.MakeGenericType(typeArguments));
 
-            typeArguments = new Type[2];  // Wrong number of arguments
+            typeArguments = new Type[2]; // Wrong number of arguments
             Assert.Throws<ArgumentException>(() => t.MakeGenericType(typeArguments));
 
-            typeArguments = new Type[4];  // Wrong number of arguments
+            typeArguments = new Type[4]; // Wrong number of arguments
             Assert.Throws<ArgumentException>(() => t.MakeGenericType(typeArguments));
 
             typeArguments = new Type[] { typeof(int).Project(), null, typeof(int).Project() }; // Null embedded in array.

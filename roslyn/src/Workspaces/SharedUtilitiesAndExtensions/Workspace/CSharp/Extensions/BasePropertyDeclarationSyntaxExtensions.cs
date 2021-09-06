@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             {
                 switch (node.Kind())
                 {
-                    case SyntaxKind.PropertyDeclaration: return ((PropertyDeclarationSyntax)node).SemicolonToken;
-                    case SyntaxKind.IndexerDeclaration: return ((IndexerDeclarationSyntax)node).SemicolonToken;
+                    case SyntaxKind.PropertyDeclaration:
+                        return ((PropertyDeclarationSyntax)node).SemicolonToken;
+                    case SyntaxKind.IndexerDeclaration:
+                        return ((IndexerDeclarationSyntax)node).SemicolonToken;
                 }
             }
 
@@ -30,14 +32,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see cref="IndexerDeclarationSyntax"/>.
         /// </summary>
         [return: NotNullIfNotNull("node")]
-        public static BasePropertyDeclarationSyntax? TryWithSemicolonToken(this BasePropertyDeclarationSyntax? node, SyntaxToken semicolonToken)
-        {
+        public static BasePropertyDeclarationSyntax? TryWithSemicolonToken(
+            this BasePropertyDeclarationSyntax? node,
+            SyntaxToken semicolonToken
+        ) {
             if (node != null)
             {
                 switch (node.Kind())
                 {
-                    case SyntaxKind.PropertyDeclaration: return ((PropertyDeclarationSyntax)node).WithSemicolonToken(semicolonToken);
-                    case SyntaxKind.IndexerDeclaration: return ((IndexerDeclarationSyntax)node).WithSemicolonToken(semicolonToken);
+                    case SyntaxKind.PropertyDeclaration:
+                        return ((PropertyDeclarationSyntax)node).WithSemicolonToken(semicolonToken);
+                    case SyntaxKind.IndexerDeclaration:
+                        return ((IndexerDeclarationSyntax)node).WithSemicolonToken(semicolonToken);
                 }
             }
 
@@ -48,14 +54,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see cref="IndexerDeclarationSyntax"/>.
         /// </summary>
         [return: NotNullIfNotNull("node")]
-        public static BasePropertyDeclarationSyntax? TryWithExpressionBody(this BasePropertyDeclarationSyntax? node, ArrowExpressionClauseSyntax expressionBody)
-        {
+        public static BasePropertyDeclarationSyntax? TryWithExpressionBody(
+            this BasePropertyDeclarationSyntax? node,
+            ArrowExpressionClauseSyntax expressionBody
+        ) {
             if (node != null)
             {
                 switch (node.Kind())
                 {
-                    case SyntaxKind.PropertyDeclaration: return ((PropertyDeclarationSyntax)node).WithExpressionBody(expressionBody);
-                    case SyntaxKind.IndexerDeclaration: return ((IndexerDeclarationSyntax)node).WithExpressionBody(expressionBody);
+                    case SyntaxKind.PropertyDeclaration:
+                        return ((PropertyDeclarationSyntax)node).WithExpressionBody(expressionBody);
+                    case SyntaxKind.IndexerDeclaration:
+                        return ((IndexerDeclarationSyntax)node).WithExpressionBody(expressionBody);
                 }
             }
 

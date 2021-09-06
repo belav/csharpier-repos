@@ -19,15 +19,19 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
     /// </summary>
     internal class FileTextLoaderNoException : FileTextLoader
     {
-        public FileTextLoaderNoException(string path, Encoding defaultEncoding) : base(path, defaultEncoding)
-        {
-        }
+        public FileTextLoaderNoException(string path, Encoding defaultEncoding)
+            : base(path, defaultEncoding) { }
 
-        public override Task<TextAndVersion> LoadTextAndVersionAsync(CodeAnalysis.Workspace workspace, DocumentId documentId, CancellationToken cancellationToken)
-        {
+        public override Task<TextAndVersion> LoadTextAndVersionAsync(
+            CodeAnalysis.Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        ) {
             if (!File.Exists(Path))
             {
-                return Task.FromResult(TextAndVersion.Create(SourceText.From(""), VersionStamp.Create()));
+                return Task.FromResult(
+                    TextAndVersion.Create(SourceText.From(""), VersionStamp.Create())
+                );
             }
 
             return base.LoadTextAndVersionAsync(workspace, documentId, cancellationToken);

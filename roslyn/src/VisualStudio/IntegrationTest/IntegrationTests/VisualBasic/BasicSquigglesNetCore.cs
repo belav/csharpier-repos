@@ -14,9 +14,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicSquigglesNetCore : BasicSquigglesCommon
     {
         public BasicSquigglesNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary) { }
 
         [WorkItem(1825, "https://github.com/dotnet/roslyn-project-system/issues/1825")]
         [WpfFact]

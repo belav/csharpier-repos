@@ -11,15 +11,14 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
     public class Team
     {
         private readonly ILazyLoader _loader;
-        private readonly ObservableCollection<Driver> _drivers = new ObservableCollectionListSource<Driver>();
+        private readonly ObservableCollection<Driver> _drivers =
+            new ObservableCollectionListSource<Driver>();
         private readonly ObservableCollection<Sponsor> _sponsors = new();
         private Engine _engine;
         private Chassis _chassis;
         private Gearbox _gearbox;
 
-        public Team()
-        {
-        }
+        public Team() { }
 
         private Team(
             ILazyLoader loader,
@@ -34,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             int victories,
             int poles,
             int fastestLaps,
-            int? gearboxId)
-        {
+            int? gearboxId
+        ) {
             _loader = loader;
             Id = id;
             Name = name;
@@ -84,8 +83,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             }
         }
 
-        public virtual ICollection<Sponsor> Sponsors
-            => _sponsors;
+        public virtual ICollection<Sponsor> Sponsors => _sponsors;
 
         public int? GearboxId { get; set; }
 

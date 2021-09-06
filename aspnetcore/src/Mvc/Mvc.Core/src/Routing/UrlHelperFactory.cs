@@ -29,21 +29,29 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             if (httpContext == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(ActionContext.HttpContext),
-                    nameof(ActionContext)));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(ActionContext.HttpContext),
+                        nameof(ActionContext)
+                    )
+                );
             }
 
             if (httpContext.Items == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(HttpContext.Items),
-                    nameof(HttpContext)));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(HttpContext.Items),
+                        nameof(HttpContext)
+                    )
+                );
             }
 
             // Perf: Create only one UrlHelper per context
-            if (httpContext.Items.TryGetValue(typeof(IUrlHelper), out var value) && value is IUrlHelper urlHelper)
-            {
+            if (
+                httpContext.Items.TryGetValue(typeof(IUrlHelper), out var value)
+                && value is IUrlHelper urlHelper
+            ) {
                 return urlHelper;
             }
 
@@ -54,10 +62,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var linkGenerator = services.GetRequiredService<LinkGenerator>();
                 var logger = services.GetRequiredService<ILogger<EndpointRoutingUrlHelper>>();
 
-                urlHelper = new EndpointRoutingUrlHelper(
-                    context,
-                    linkGenerator,
-                    logger);
+                urlHelper = new EndpointRoutingUrlHelper(context, linkGenerator, logger);
             }
             else
             {

@@ -19,19 +19,26 @@ namespace Microsoft.EntityFrameworkCore.Design
             var entityType = modelBuilder.Model.GetEntityTypes().Single();
 
             var annotations = entityType.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            CreateGenerator().RemoveAnnotationsHandledByConventions((IEntityType)entityType, annotations);
+            CreateGenerator()
+                .RemoveAnnotationsHandledByConventions((IEntityType)entityType, annotations);
 
-            Assert.DoesNotContain(RelationalAnnotationNames.IsTableExcludedFromMigrations, annotations.Keys);
+            Assert.DoesNotContain(
+                RelationalAnnotationNames.IsTableExcludedFromMigrations,
+                annotations.Keys
+            );
         }
 
-        private ModelBuilder CreateModelBuilder()
-            => RelationalTestHelpers.Instance.CreateConventionBuilder();
+        private ModelBuilder CreateModelBuilder() =>
+            RelationalTestHelpers.Instance.CreateConventionBuilder();
 
-        private AnnotationCodeGenerator CreateGenerator()
-            => new(
+        private AnnotationCodeGenerator CreateGenerator() =>
+            new(
                 new AnnotationCodeGeneratorDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>())));
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                    )
+                )
+            );
     }
 }

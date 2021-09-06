@@ -26,8 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             string? controllerName,
             string? areaName,
             string? pageName,
-            bool isMainPage)
-        {
+            bool isMainPage
+        ) {
             if (actionContext == null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
@@ -45,7 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             PageName = pageName;
             IsMainPage = isMainPage;
         }
-        
+
         /// <summary>
         /// Gets the <see cref="Mvc.ActionContext"/> for the current executing action.
         /// </summary>

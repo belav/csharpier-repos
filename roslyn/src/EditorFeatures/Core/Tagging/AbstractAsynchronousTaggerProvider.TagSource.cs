@@ -67,19 +67,28 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// <summary>
             /// During the time that we are paused from updating the UI, we will use these tags instead.
             /// </summary>
-            private ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> _previousCachedTagTrees;
+            private ImmutableDictionary<
+                ITextBuffer,
+                TagSpanIntervalTree<TTag>
+            > _previousCachedTagTrees;
 
             /// <summary>
             /// accumulated text changes since last tag calculation
             /// </summary>
             private TextChangeRange? _accumulatedTextChanges_doNotAccessDirectly;
-            private ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> _cachedTagTrees_doNotAccessDirectly;
+            private ImmutableDictionary<
+                ITextBuffer,
+                TagSpanIntervalTree<TTag>
+            > _cachedTagTrees_doNotAccessDirectly;
             private object _state_doNotAccessDirecty;
             private bool _upToDate_doNotAccessDirectly = false;
 
             #endregion
 
-            public event Action<ICollection<KeyValuePair<ITextBuffer, DiffResult>>, bool> TagsChangedForBuffer;
+            public event Action<
+                ICollection<KeyValuePair<ITextBuffer, DiffResult>>,
+                bool
+            > TagsChangedForBuffer;
 
             public event EventHandler Paused;
             public event EventHandler Resumed;
@@ -89,22 +98,27 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// if our ref count actually reaches 0.  Otherwise, we always try to compute the initial
             /// set of tags for our view/buffer.
             /// </summary>
-            private readonly CancellationTokenSource _initialComputationCancellationTokenSource = new();
+            private readonly CancellationTokenSource _initialComputationCancellationTokenSource =
+                new();
 
             public TaggerDelay AddedTagNotificationDelay => _dataSource.AddedTagNotificationDelay;
-            public TaggerDelay RemovedTagNotificationDelay => _dataSource.RemovedTagNotificationDelay;
+            public TaggerDelay RemovedTagNotificationDelay =>
+                _dataSource.RemovedTagNotificationDelay;
 
             public TagSource(
                 ITextView textViewOpt,
                 ITextBuffer subjectBuffer,
                 AbstractAsynchronousTaggerProvider<TTag> dataSource,
                 IAsynchronousOperationListener asyncListener,
-                IForegroundNotificationService notificationService)
-                : base(dataSource.ThreadingContext)
+                IForegroundNotificationService notificationService
+            ) : base(dataSource.ThreadingContext)
             {
                 if (dataSource.SpanTrackingMode == SpanTrackingMode.Custom)
                 {
-                    throw new ArgumentException("SpanTrackingMode.Custom not allowed.", "spanTrackingMode");
+                    throw new ArgumentException(
+                        "SpanTrackingMode.Custom not allowed.",
+                        "spanTrackingMode"
+                    );
                 }
 
                 _subjectBuffer = subjectBuffer;
@@ -117,7 +131,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 DebugRecordInitialStackTrace();
 
                 _workQueue = new AsynchronousSerialWorkQueue(ThreadingContext, asyncListener);
-                this.CachedTagTrees = ImmutableDictionary.Create<ITextBuffer, TagSpanIntervalTree<TTag>>();
+                this.CachedTagTrees = ImmutableDictionary.Create<
+                    ITextBuffer,
+                    TagSpanIntervalTree<TTag>
+                >();
 
                 _eventSource = CreateEventSource();
 
@@ -137,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 RegisterNotification(
                     () => RecomputeTagsForeground(initialTags: true),
                     delay: 0,
-                    cancellationToken: GetCancellationToken(initialTags: true));
+                    cancellationToken: GetCancellationToken(initialTags: true)
+                );
             }
 
             private ITaggerEventSource CreateEventSource()
@@ -146,9 +164,18 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // If there are any options specified for this tagger, then also hook up event
                 // notifications for when those options change.
-                var optionChangedEventSources =
-                    _dataSource.Options.Concat<IOption>(_dataSource.PerLanguageOptions)
-                        .Select(o => TaggerEventSources.OnOptionChanged(_subjectBuffer, o, TaggerDelay.NearImmediate)).ToList();
+                var optionChangedEventSources = _dataSource.Options.Concat<IOption>(
+                        _dataSource.PerLanguageOptions
+                    )
+                    .Select(
+                        o =>
+                            TaggerEventSources.OnOptionChanged(
+                                _subjectBuffer,
+                                o,
+                                TaggerDelay.NearImmediate
+                            )
+                    )
+                    .ToList();
 
                 if (optionChangedEventSources.Count == 0)
                 {
@@ -167,7 +194,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _workQueue.AssertIsForeground();
                     return _accumulatedTextChanges_doNotAccessDirectly;
                 }
-
                 set
                 {
                     _workQueue.AssertIsForeground();
@@ -182,7 +208,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _workQueue.AssertIsForeground();
                     return _cachedTagTrees_doNotAccessDirectly;
                 }
-
                 set
                 {
                     _workQueue.AssertIsForeground();
@@ -197,7 +222,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _workQueue.AssertIsForeground();
                     return _state_doNotAccessDirecty;
                 }
-
                 set
                 {
                     _workQueue.AssertIsForeground();
@@ -212,7 +236,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _workQueue.AssertIsForeground();
                     return _upToDate_doNotAccessDirectly;
                 }
-
                 set
                 {
                     _workQueue.AssertIsForeground();
@@ -220,8 +243,17 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 }
             }
 
-            public void RegisterNotification(Action action, int delay, CancellationToken cancellationToken)
-                => _notificationService.RegisterNotification(action, delay, _asyncListener.BeginAsyncOperation(typeof(TTag).Name), cancellationToken);
+            public void RegisterNotification(
+                Action action,
+                int delay,
+                CancellationToken cancellationToken
+            ) =>
+                _notificationService.RegisterNotification(
+                    action,
+                    delay,
+                    _asyncListener.BeginAsyncOperation(typeof(TTag).Name),
+                    cancellationToken
+                );
 
             private void Connect()
             {
@@ -231,17 +263,26 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _eventSource.UIUpdatesResumed += OnUIUpdatesResumed;
                 _eventSource.UIUpdatesPaused += OnUIUpdatesPaused;
 
-                if (_dataSource.TextChangeBehavior.HasFlag(TaggerTextChangeBehavior.TrackTextChanges))
-                {
+                if (
+                    _dataSource.TextChangeBehavior.HasFlag(
+                        TaggerTextChangeBehavior.TrackTextChanges
+                    )
+                ) {
                     _subjectBuffer.Changed += OnSubjectBufferChanged;
                 }
 
-                if (_dataSource.CaretChangeBehavior.HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag))
-                {
+                if (
+                    _dataSource.CaretChangeBehavior.HasFlag(
+                        TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
+                    )
+                ) {
                     if (_textViewOpt == null)
                     {
                         throw new ArgumentException(
-                            nameof(_dataSource.CaretChangeBehavior) + " can only be specified for an " + nameof(IViewTaggerProvider));
+                            nameof(_dataSource.CaretChangeBehavior)
+                                + " can only be specified for an "
+                                + nameof(IViewTaggerProvider)
+                        );
                     }
 
                     _textViewOpt.Caret.PositionChanged += OnCaretPositionChanged;
@@ -259,13 +300,19 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 // Tell the interaction object to stop issuing events.
                 _eventSource.Disconnect();
 
-                if (_dataSource.CaretChangeBehavior.HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag))
-                {
+                if (
+                    _dataSource.CaretChangeBehavior.HasFlag(
+                        TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
+                    )
+                ) {
                     _textViewOpt.Caret.PositionChanged -= OnCaretPositionChanged;
                 }
 
-                if (_dataSource.TextChangeBehavior.HasFlag(TaggerTextChangeBehavior.TrackTextChanges))
-                {
+                if (
+                    _dataSource.TextChangeBehavior.HasFlag(
+                        TaggerTextChangeBehavior.TrackTextChanges
+                    )
+                ) {
                     _subjectBuffer.Changed -= OnSubjectBufferChanged;
                 }
 
@@ -283,31 +330,36 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     return;
                 }
 
-                RaiseTagsChanged(SpecializedCollections.SingletonCollection(
-                    new KeyValuePair<ITextBuffer, DiffResult>(buffer, difference)),
-                    initialTags: false);
+                RaiseTagsChanged(
+                    SpecializedCollections.SingletonCollection(
+                        new KeyValuePair<ITextBuffer, DiffResult>(buffer, difference)
+                    ),
+                    initialTags: false
+                );
             }
 
             private void RaiseTagsChanged(
-                ICollection<KeyValuePair<ITextBuffer, DiffResult>> collection, bool initialTags)
-            {
+                ICollection<KeyValuePair<ITextBuffer, DiffResult>> collection,
+                bool initialTags
+            ) {
                 TagsChangedForBuffer?.Invoke(collection, initialTags);
             }
 
-            private void RaisePaused()
-                => this.Paused?.Invoke(this, EventArgs.Empty);
+            private void RaisePaused() => this.Paused?.Invoke(this, EventArgs.Empty);
 
-            private void RaiseResumed()
-                => this.Resumed?.Invoke(this, EventArgs.Empty);
+            private void RaiseResumed() => this.Resumed?.Invoke(this, EventArgs.Empty);
 
-            private static T NextOrDefault<T>(IEnumerator<T> enumerator)
-                => enumerator.MoveNext() ? enumerator.Current : default;
+            private static T NextOrDefault<T>(IEnumerator<T> enumerator) =>
+                enumerator.MoveNext() ? enumerator.Current : default;
 
             /// <summary>
             /// Return all the spans that appear in only one of "latestSpans" or "previousSpans".
             /// </summary>
-            private static DiffResult Difference<T>(IEnumerable<ITagSpan<T>> latestSpans, IEnumerable<ITagSpan<T>> previousSpans, IEqualityComparer<T> comparer)
-                where T : ITag
+            private static DiffResult Difference<T>(
+                IEnumerable<ITagSpan<T>> latestSpans,
+                IEnumerable<ITagSpan<T>> previousSpans,
+                IEqualityComparer<T> comparer
+            ) where T : ITag
             {
                 using var addedPool = SharedPools.Default<List<SnapshotSpan>>().GetPooledObject();
                 using var removedPool = SharedPools.Default<List<SnapshotSpan>>().GetPooledObject();

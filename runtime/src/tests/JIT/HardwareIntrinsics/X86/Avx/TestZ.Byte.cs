@@ -134,8 +134,11 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Byte>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Byte>();
-                if ((alignment != 32 && alignment != 16) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfinArray2)
-                {
+                if (
+                    (alignment != 32 && alignment != 16)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfinArray2
+                ) {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -147,12 +150,22 @@ namespace JIT.HardwareIntrinsics.X86
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<Byte, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray2Ptr), ref Unsafe.As<Byte, byte>(ref inArray2[0]), (uint)sizeOfinArray2);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<Byte, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray2Ptr),
+                    ref Unsafe.As<Byte, byte>(ref inArray2[0]),
+                    (uint)sizeOfinArray2
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray2Ptr => Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray2Ptr =>
+                Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -175,10 +188,24 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref testStruct._fld1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Byte>>());
-                for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref testStruct._fld2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Byte>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Byte>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Byte>>()
+                );
+                for (var i = 0; i < Op2ElementCount; i++)
+                {
+                    _data2[i] = TestLibrary.Generator.GetByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Byte>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Byte>>()
+                );
 
                 return testStruct;
             }
@@ -191,8 +218,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(BooleanBinaryOpTest__TestZByte testClass)
             {
-                fixed (Vector256<Byte>* pFld1 = &_fld1)
-                fixed (Vector256<Byte>* pFld2 = &_fld2)
+                fixed (Vector256<Byte>* pFld1 = &_fld1)fixed (Vector256<Byte>* pFld2 = &_fld2)
                 {
                     var result = Avx.TestZ(
                         Avx.LoadVector256((Byte*)(pFld1)),
@@ -206,8 +232,10 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector256<Byte>>() / sizeof(Byte);
-        private static readonly int Op2ElementCount = Unsafe.SizeOf<Vector256<Byte>>() / sizeof(Byte);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector256<Byte>>() / sizeof(Byte);
+        private static readonly int Op2ElementCount =
+            Unsafe.SizeOf<Vector256<Byte>>() / sizeof(Byte);
 
         private static Byte[] _data1 = new Byte[Op1ElementCount];
         private static Byte[] _data2 = new Byte[Op2ElementCount];
@@ -222,23 +250,57 @@ namespace JIT.HardwareIntrinsics.X86
 
         static BooleanBinaryOpTest__TestZByte()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref _clsVar1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Byte>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref _clsVar2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Byte>, byte>(ref _clsVar1),
+                ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector256<Byte>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Byte>, byte>(ref _clsVar2),
+                ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector256<Byte>>()
+            );
         }
 
         public BooleanBinaryOpTest__TestZByte()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref _fld1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Byte>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref _fld2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Byte>, byte>(ref _fld1),
+                ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector256<Byte>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Byte>, byte>(ref _fld2),
+                ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector256<Byte>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetByte(); }
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetByte(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetByte();
+            }
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetByte();
+            }
             _dataTable = new DataTable(_data1, _data2, LargestVectorSize);
         }
 
@@ -286,11 +348,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.TestZ), new Type[] { typeof(Vector256<Byte>), typeof(Vector256<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector256<Byte>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector256<Byte>>(_dataTable.inArray2Ptr)
-                                     });
+            var result = typeof(Avx).GetMethod(
+                    nameof(Avx.TestZ),
+                    new Type[] { typeof(Vector256<Byte>), typeof(Vector256<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector256<Byte>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector256<Byte>>(_dataTable.inArray2Ptr)
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, (bool)(result));
         }
@@ -299,11 +368,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.TestZ), new Type[] { typeof(Vector256<Byte>), typeof(Vector256<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadVector256((Byte*)(_dataTable.inArray1Ptr)),
-                                        Avx.LoadVector256((Byte*)(_dataTable.inArray2Ptr))
-                                     });
+            var result = typeof(Avx).GetMethod(
+                    nameof(Avx.TestZ),
+                    new Type[] { typeof(Vector256<Byte>), typeof(Vector256<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Avx.LoadVector256((Byte*)(_dataTable.inArray1Ptr)),
+                        Avx.LoadVector256((Byte*)(_dataTable.inArray2Ptr))
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, (bool)(result));
         }
@@ -312,11 +388,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.TestZ), new Type[] { typeof(Vector256<Byte>), typeof(Vector256<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadAlignedVector256((Byte*)(_dataTable.inArray1Ptr)),
-                                        Avx.LoadAlignedVector256((Byte*)(_dataTable.inArray2Ptr))
-                                     });
+            var result = typeof(Avx).GetMethod(
+                    nameof(Avx.TestZ),
+                    new Type[] { typeof(Vector256<Byte>), typeof(Vector256<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Avx.LoadAlignedVector256((Byte*)(_dataTable.inArray1Ptr)),
+                        Avx.LoadAlignedVector256((Byte*)(_dataTable.inArray2Ptr))
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, (bool)(result));
         }
@@ -325,10 +408,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Avx.TestZ(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Avx.TestZ(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -337,9 +417,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector256<Byte>* pClsVar1 = &_clsVar1)
-            fixed (Vector256<Byte>* pClsVar2 = &_clsVar2)
-            {
+            fixed (Vector256<Byte>* pClsVar1 = &_clsVar1)fixed (
+                Vector256<Byte>* pClsVar2 = &_clsVar2
+            ) {
                 var result = Avx.TestZ(
                     Avx.LoadVector256((Byte*)(pClsVar1)),
                     Avx.LoadVector256((Byte*)(pClsVar2))
@@ -398,8 +478,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new BooleanBinaryOpTest__TestZByte();
 
-            fixed (Vector256<Byte>* pFld1 = &test._fld1)
-            fixed (Vector256<Byte>* pFld2 = &test._fld2)
+            fixed (Vector256<Byte>* pFld1 = &test._fld1)fixed (Vector256<Byte>* pFld2 = &test._fld2)
             {
                 var result = Avx.TestZ(
                     Avx.LoadVector256((Byte*)(pFld1)),
@@ -423,8 +502,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector256<Byte>* pFld1 = &_fld1)
-            fixed (Vector256<Byte>* pFld2 = &_fld2)
+            fixed (Vector256<Byte>* pFld1 = &_fld1)fixed (Vector256<Byte>* pFld2 = &_fld2)
             {
                 var result = Avx.TestZ(
                     Avx.LoadVector256((Byte*)(pFld1)),
@@ -494,8 +572,12 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector256<Byte> op1, Vector256<Byte> op2, bool result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector256<Byte> op1,
+            Vector256<Byte> op2,
+            bool result,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
 
@@ -505,19 +587,35 @@ namespace JIT.HardwareIntrinsics.X86
             ValidateResult(inArray1, inArray2, result, method);
         }
 
-        private void ValidateResult(void* op1, void* op2, bool result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* op1,
+            void* op2,
+            bool result,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector256<Byte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray2[0]), ref Unsafe.AsRef<byte>(op2), (uint)Unsafe.SizeOf<Vector256<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector256<Byte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray2[0]),
+                ref Unsafe.AsRef<byte>(op2),
+                (uint)Unsafe.SizeOf<Vector256<Byte>>()
+            );
 
             ValidateResult(inArray1, inArray2, result, method);
         }
 
-        private void ValidateResult(Byte[] left, Byte[] right, bool result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Byte[] left,
+            Byte[] right,
+            bool result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             var expectedResult = true;
@@ -531,7 +629,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Avx)}.{nameof(Avx.TestZ)}<Byte>(Vector256<Byte>, Vector256<Byte>): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx)}.{nameof(Avx.TestZ)}<Byte>(Vector256<Byte>, Vector256<Byte>): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");

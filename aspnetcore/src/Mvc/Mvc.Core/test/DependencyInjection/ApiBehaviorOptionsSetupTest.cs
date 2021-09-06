@@ -38,11 +38,17 @@ namespace Microsoft.Extensions.DependencyInjection
             var factory = GetProblemDetailsFactory();
 
             // Act
-            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+                factory,
+                actionContext
+            );
 
             // Assert
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, badRequest.ContentTypes.OrderBy(c => c));
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                badRequest.ContentTypes.OrderBy(c => c)
+            );
 
             var problemDetails = Assert.IsType<ValidationProblemDetails>(badRequest.Value);
             Assert.Equal(400, problemDetails.Status);
@@ -57,14 +63,22 @@ namespace Microsoft.Extensions.DependencyInjection
             var link = "http://mylink";
             var actionContext = GetActionContext();
 
-            var factory = GetProblemDetailsFactory(options => options.ClientErrorMapping[400].Link = link);
+            var factory = GetProblemDetailsFactory(
+                options => options.ClientErrorMapping[400].Link = link
+            );
 
             // Act
-            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+                factory,
+                actionContext
+            );
 
             // Assert
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, badRequest.ContentTypes.OrderBy(c => c));
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                badRequest.ContentTypes.OrderBy(c => c)
+            );
 
             var problemDetails = Assert.IsType<ValidationProblemDetails>(badRequest.Value);
             Assert.Equal(400, problemDetails.Status);
@@ -77,18 +91,32 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var actionContext = GetActionContext();
-            var factory = Mock.Of<ProblemDetailsFactory>(m => m.CreateValidationProblemDetails(It.IsAny<HttpContext>(), It.IsAny<ModelStateDictionary>(), null, null, null, null, null) == new ValidationProblemDetails
-            {
-                Status = 422,
-            });
+            var factory = Mock.Of<ProblemDetailsFactory>(
+                m =>
+                    m.CreateValidationProblemDetails(
+                        It.IsAny<HttpContext>(),
+                        It.IsAny<ModelStateDictionary>(),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ) == new ValidationProblemDetails { Status = 422, }
+            );
 
             // Act
-            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+                factory,
+                actionContext
+            );
 
             // Assert
             var objectResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(422, objectResult.StatusCode);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes.OrderBy(c => c));
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                objectResult.ContentTypes.OrderBy(c => c)
+            );
 
             var problemDetails = Assert.IsType<ValidationProblemDetails>(objectResult.Value);
             Assert.Equal(422, problemDetails.Status);
@@ -105,7 +133,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 var factory = GetProblemDetailsFactory();
 
                 // Act
-                var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+                var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+                    factory,
+                    actionContext
+                );
 
                 // Assert
                 var badRequest = Assert.IsType<BadRequestObjectResult>(result);
@@ -122,7 +153,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var factory = GetProblemDetailsFactory();
 
             // Act
-            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(factory, actionContext);
+            var result = ApiBehaviorOptionsSetup.ProblemDetailsInvalidModelStateResponse(
+                factory,
+                actionContext
+            );
 
             // Assert
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
@@ -130,8 +164,9 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal("42", problemDetails.Extensions["traceId"]);
         }
 
-        private static ProblemDetailsFactory GetProblemDetailsFactory(Action<ApiBehaviorOptions> configure = null)
-        {
+        private static ProblemDetailsFactory GetProblemDetailsFactory(
+            Action<ApiBehaviorOptions> configure = null
+        ) {
             var options = new ApiBehaviorOptions();
             var setup = new ApiBehaviorOptionsSetup();
 

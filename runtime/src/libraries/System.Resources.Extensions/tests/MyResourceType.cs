@@ -29,8 +29,11 @@ namespace System.Resources.Extensions.Tests
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        ) {
             if (value is byte[] bytes)
             {
                 return new MyResourceType(bytes);
@@ -39,8 +42,12 @@ namespace System.Resources.Extensions.Tests
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        ) {
             if (destinationType == typeof(byte[]) && value is MyResourceType myResourceType)
             {
                 return myResourceType.Data;

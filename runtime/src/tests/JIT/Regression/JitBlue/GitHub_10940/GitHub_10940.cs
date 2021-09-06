@@ -39,9 +39,7 @@ class Test
         }
     }
 
-    Test(string s, decimal d)
-    {
-    }
+    Test(string s, decimal d) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int M(ValueSourceBase vs)

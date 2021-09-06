@@ -14,18 +14,12 @@ namespace Internal.TypeSystem
         [System.Runtime.CompilerServices.IndexerName("Parameter")]
         public TypeDesc this[int index]
         {
-            get
-            {
-                return _parameters[index];
-            }
+            get { return _parameters[index]; }
         }
 
         public int Length
         {
-            get
-            {
-                return _parameters.Length;
-            }
+            get { return _parameters.Length; }
         }
 
         public PropertySignature(bool isStatic, TypeDesc[] parameters, TypeDesc returnType)

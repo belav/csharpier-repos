@@ -14,11 +14,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     {
         protected abstract void BeginWriteAttribute(CodeRenderingContext context, string key);
 
-        protected abstract void BeginWriteAttribute(CodeRenderingContext context, IntermediateNode expression);
+        protected abstract void BeginWriteAttribute(
+            CodeRenderingContext context,
+            IntermediateNode expression
+        );
 
-        protected abstract void WriteReferenceCaptureInnards(CodeRenderingContext context, ReferenceCaptureIntermediateNode node, bool shouldTypeCheck);
+        protected abstract void WriteReferenceCaptureInnards(
+            CodeRenderingContext context,
+            ReferenceCaptureIntermediateNode node,
+            bool shouldTypeCheck
+        );
 
-        public abstract void WriteTemplate(CodeRenderingContext context, TemplateIntermediateNode node);
+        public abstract void WriteTemplate(
+            CodeRenderingContext context,
+            TemplateIntermediateNode node
+        );
 
         public sealed override void BeginWriterScope(CodeRenderingContext context, string writer)
         {
@@ -30,20 +40,29 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             throw new NotImplementedException(nameof(EndWriterScope));
         }
 
-        public sealed override void WriteCSharpCodeAttributeValue(CodeRenderingContext context, CSharpCodeAttributeValueIntermediateNode node)
-        {
-            // We used to support syntaxes like <elem onsomeevent=@{ /* some C# code */ } /> but this is no longer the 
+        public sealed override void WriteCSharpCodeAttributeValue(
+            CodeRenderingContext context,
+            CSharpCodeAttributeValueIntermediateNode node
+        ) {
+            // We used to support syntaxes like <elem onsomeevent=@{ /* some C# code */ } /> but this is no longer the
             // case.
             //
             // We provide an error for this case just to be friendly.
-            var content = string.Join("", node.Children.OfType<IntermediateToken>().Select(t => t.Content));
-            context.Diagnostics.Add(ComponentDiagnosticFactory.Create_CodeBlockInAttribute(node.Source, content));
+            var content = string.Join(
+                "",
+                node.Children.OfType<IntermediateToken>().Select(t => t.Content)
+            );
+            context.Diagnostics.Add(
+                ComponentDiagnosticFactory.Create_CodeBlockInAttribute(node.Source, content)
+            );
             return;
         }
 
         // Currently the same for design time and runtime
-        public override void WriteComponentTypeInferenceMethod(CodeRenderingContext context, ComponentTypeInferenceMethodIntermediateNode node)
-        {
+        public override void WriteComponentTypeInferenceMethod(
+            CodeRenderingContext context,
+            ComponentTypeInferenceMethodIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -57,7 +76,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             var parameters = GetTypeInferenceMethodParameters(node);
 
             // This is really similar to the code in WriteComponentAttribute and WriteComponentChildContent - except simpler because
-            // attributes and child contents look like variables. 
+            // attributes and child contents look like variables.
             //
             // Looks like:
             //
@@ -74,13 +93,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // them verbatim.
             //
             // The problem is that RenderTreeBuilder wants an Action<object>. The caller can't write the type
-            // name if it contains generics, and we can't write the variable they want to assign to. 
+            // name if it contains generics, and we can't write the variable they want to assign to.
             var writer = context.CodeWriter;
 
             writer.Write("public static void ");
             writer.Write(node.MethodName);
             writer.Write("<");
-            writer.Write(string.Join(", ", node.Component.Component.GetTypeParameters().Select(a => a.Name)));
+            writer.Write(
+                string.Join(", ", node.Component.Component.GetTypeParameters().Select(a => a.Name))
+            );
             writer.Write(">");
 
             writer.Write("(");
@@ -136,7 +157,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 switch (parameter.Source)
                 {
                     case ComponentAttributeIntermediateNode attribute:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(ComponentsApi.RenderTreeBuilder.BuilderParameter, ComponentsApi.RenderTreeBuilder.AddAttribute);
+                        context.CodeWriter.WriteStartInstanceMethodInvocation(
+                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                            ComponentsApi.RenderTreeBuilder.AddAttribute
+                        );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
@@ -148,7 +172,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     case SplatIntermediateNode:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(ComponentsApi.RenderTreeBuilder.BuilderParameter, ComponentsApi.RenderTreeBuilder.AddMultipleAttributes);
+                        context.CodeWriter.WriteStartInstanceMethodInvocation(
+                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                            ComponentsApi.RenderTreeBuilder.AddMultipleAttributes
+                        );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
@@ -157,7 +184,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     case ComponentChildContentIntermediateNode childContent:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(ComponentsApi.RenderTreeBuilder.BuilderParameter, ComponentsApi.RenderTreeBuilder.AddAttribute);
+                        context.CodeWriter.WriteStartInstanceMethodInvocation(
+                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                            ComponentsApi.RenderTreeBuilder.AddAttribute
+                        );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
@@ -169,18 +199,30 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     case SetKeyIntermediateNode:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(ComponentsApi.RenderTreeBuilder.BuilderParameter, ComponentsApi.RenderTreeBuilder.SetKey);
+                        context.CodeWriter.WriteStartInstanceMethodInvocation(
+                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                            ComponentsApi.RenderTreeBuilder.SetKey
+                        );
                         context.CodeWriter.Write(parameter.ParameterName);
                         context.CodeWriter.WriteEndMethodInvocation();
                         break;
 
                     case ReferenceCaptureIntermediateNode capture:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(ComponentsApi.RenderTreeBuilder.BuilderParameter, capture.IsComponentCapture ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture);
+                        context.CodeWriter.WriteStartInstanceMethodInvocation(
+                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                            capture.IsComponentCapture
+                                ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture
+                                : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture
+                        );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
-                        var cast = capture.IsComponentCapture ? $"({capture.ComponentCaptureTypeName})" : string.Empty;
-                        context.CodeWriter.Write($"(__value) => {{ {parameter.ParameterName}({cast}__value); }}");
+                        var cast = capture.IsComponentCapture
+                            ? $"({capture.ComponentCaptureTypeName})"
+                            : string.Empty;
+                        context.CodeWriter.Write(
+                            $"(__value) => {{ {parameter.ParameterName}({cast}__value); }}"
+                        );
                         context.CodeWriter.WriteEndMethodInvocation();
                         break;
 
@@ -189,11 +231,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     default:
-                        throw new InvalidOperationException($"Not implemented: type inference method parameter from source {parameter.Source}");
+                        throw new InvalidOperationException(
+                            $"Not implemented: type inference method parameter from source {parameter.Source}"
+                        );
                 }
             }
 
-            context.CodeWriter.WriteInstanceMethodInvocation(ComponentsApi.RenderTreeBuilder.BuilderParameter, ComponentsApi.RenderTreeBuilder.CloseComponent);
+            context.CodeWriter.WriteInstanceMethodInvocation(
+                ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                ComponentsApi.RenderTreeBuilder.CloseComponent
+            );
 
             writer.WriteLine("}");
 
@@ -220,7 +267,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 writer.Write("public static void ");
                 writer.Write(node.MethodName);
                 writer.Write("_CaptureParameters<");
-                writer.Write(string.Join(", ", node.Component.Component.GetTypeParameters().Select(a => a.Name)));
+                writer.Write(
+                    string.Join(
+                        ", ",
+                        node.Component.Component.GetTypeParameters().Select(a => a.Name)
+                    )
+                );
                 writer.Write(">");
 
                 writer.Write("(");
@@ -260,8 +312,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        protected List<TypeInferenceMethodParameter> GetTypeInferenceMethodParameters(ComponentTypeInferenceMethodIntermediateNode node)
-        {
+        protected List<TypeInferenceMethodParameter> GetTypeInferenceMethodParameters(
+            ComponentTypeInferenceMethodIntermediateNode node
+        ) {
             var p = new List<TypeInferenceMethodParameter>();
 
             // Preserve order between attributes and splats
@@ -277,40 +330,84 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     else
                     {
                         typeName = attribute.TypeName;
-                        if (attribute.BoundAttribute != null && !attribute.BoundAttribute.IsGenericTypedProperty())
-                        {
+                        if (
+                            attribute.BoundAttribute != null
+                            && !attribute.BoundAttribute.IsGenericTypedProperty()
+                        ) {
                             typeName = "global::" + typeName;
                         }
                     }
 
-                    p.Add(new TypeInferenceMethodParameter($"__seq{p.Count}", typeName, $"__arg{p.Count}", usedForTypeInference: true, attribute));
+                    p.Add(
+                        new TypeInferenceMethodParameter(
+                            $"__seq{p.Count}",
+                            typeName,
+                            $"__arg{p.Count}",
+                            usedForTypeInference: true,
+                            attribute
+                        )
+                    );
                 }
                 else if (child is SplatIntermediateNode splat)
                 {
                     var typeName = ComponentsApi.AddMultipleAttributesTypeFullName;
-                    p.Add(new TypeInferenceMethodParameter($"__seq{p.Count}", typeName, $"__arg{p.Count}", usedForTypeInference: false, splat));
+                    p.Add(
+                        new TypeInferenceMethodParameter(
+                            $"__seq{p.Count}",
+                            typeName,
+                            $"__arg{p.Count}",
+                            usedForTypeInference: false,
+                            splat
+                        )
+                    );
                 }
             }
 
             foreach (var childContent in node.Component.ChildContents)
             {
                 var typeName = childContent.TypeName;
-                if (childContent.BoundAttribute != null && !childContent.BoundAttribute.IsGenericTypedProperty())
-                {
+                if (
+                    childContent.BoundAttribute != null
+                    && !childContent.BoundAttribute.IsGenericTypedProperty()
+                ) {
                     typeName = "global::" + typeName;
                 }
-                p.Add(new TypeInferenceMethodParameter($"__seq{p.Count}", typeName, $"__arg{p.Count}", usedForTypeInference: false, childContent));
+                p.Add(
+                    new TypeInferenceMethodParameter(
+                        $"__seq{p.Count}",
+                        typeName,
+                        $"__arg{p.Count}",
+                        usedForTypeInference: false,
+                        childContent
+                    )
+                );
             }
 
             foreach (var capture in node.Component.SetKeys)
             {
-                p.Add(new TypeInferenceMethodParameter($"__seq{p.Count}", "object", $"__arg{p.Count}", usedForTypeInference: false, capture));
+                p.Add(
+                    new TypeInferenceMethodParameter(
+                        $"__seq{p.Count}",
+                        "object",
+                        $"__arg{p.Count}",
+                        usedForTypeInference: false,
+                        capture
+                    )
+                );
             }
 
             foreach (var capture in node.Component.Captures)
             {
                 // The capture type name should already contain the global:: prefix.
-                p.Add(new TypeInferenceMethodParameter($"__seq{p.Count}", capture.TypeName, $"__arg{p.Count}", usedForTypeInference: false, capture));
+                p.Add(
+                    new TypeInferenceMethodParameter(
+                        $"__seq{p.Count}",
+                        capture.TypeName,
+                        $"__arg{p.Count}",
+                        usedForTypeInference: false,
+                        capture
+                    )
+                );
             }
 
             // Insert synthetic args for cascaded type inference at the start of the list
@@ -320,7 +417,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 var i = 0;
                 foreach (var cascadingGenericType in node.ReceivesCascadingGenericTypes)
                 {
-                    p.Insert(i, new TypeInferenceMethodParameter(null, cascadingGenericType.ValueType, $"__syntheticArg{i}", usedForTypeInference: true, cascadingGenericType));
+                    p.Insert(
+                        i,
+                        new TypeInferenceMethodParameter(
+                            null,
+                            cascadingGenericType.ValueType,
+                            $"__syntheticArg{i}",
+                            usedForTypeInference: true,
+                            cascadingGenericType
+                        )
+                    );
                     i++;
                 }
             }
@@ -328,8 +434,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             return p;
         }
 
-        protected static void UseCapturedCascadingGenericParameterVariable(ComponentIntermediateNode node, TypeInferenceMethodParameter parameter, string variableName)
-        {
+        protected static void UseCapturedCascadingGenericParameterVariable(
+            ComponentIntermediateNode node,
+            TypeInferenceMethodParameter parameter,
+            string variableName
+        ) {
             // If this captured variable corresponds to a generic type we want to cascade to
             // descendants, supply that info to descendants
             if (node.ProvidesCascadingGenericTypes != null)
@@ -356,8 +465,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             public bool UsedForTypeInference { get; private set; }
             public object Source { get; private set; }
 
-            public TypeInferenceMethodParameter(string seqName, string typeName, string parameterName, bool usedForTypeInference, object source)
-            {
+            public TypeInferenceMethodParameter(
+                string seqName,
+                string typeName,
+                string parameterName,
+                bool usedForTypeInference,
+                object source
+            ) {
                 SeqName = seqName;
                 TypeName = typeName;
                 ParameterName = parameterName;

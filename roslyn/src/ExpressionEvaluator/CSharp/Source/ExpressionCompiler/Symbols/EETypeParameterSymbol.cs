@@ -25,9 +25,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             Symbol container,
             TypeParameterSymbol sourceTypeParameter,
             int ordinal,
-            Func<TypeMap> getTypeMap)
-        {
-            Debug.Assert((container.Kind == SymbolKind.NamedType) || (container.Kind == SymbolKind.Method));
+            Func<TypeMap> getTypeMap
+        ) {
+            Debug.Assert(
+                (container.Kind == SymbolKind.NamedType) || (container.Kind == SymbolKind.Method)
+            );
             _container = container;
             _sourceTypeParameter = sourceTypeParameter;
             _ordinal = ordinal;
@@ -63,7 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             get
             {
-                return _sourceTypeParameter.IsReferenceTypeFromConstraintTypes || CalculateIsReferenceTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
+                return _sourceTypeParameter.IsReferenceTypeFromConstraintTypes
+                    || CalculateIsReferenceTypeFromConstraintTypes(
+                        ConstraintTypesNoUseSiteDiagnostics
+                    );
             }
         }
 
@@ -99,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             get
             {
-                return _sourceTypeParameter.IsValueTypeFromConstraintTypes || CalculateIsValueTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
+                return _sourceTypeParameter.IsValueTypeFromConstraintTypes
+                    || CalculateIsValueTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
             }
         }
 
@@ -138,8 +144,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             _sourceTypeParameter.EnsureAllConstraintsAreResolved();
         }
 
-        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress)
-        {
+        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+            ConsList<TypeParameterSymbol> inProgress
+        ) {
             var constraintTypes = _sourceTypeParameter.GetConstraintTypes(inProgress);
 
             if (constraintTypes.IsEmpty)
@@ -158,14 +165,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return this.TypeMap.SubstituteType(type).AsTypeSymbolOnly();
         }
 
-        internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress)
-        {
+        internal override NamedTypeSymbol GetEffectiveBaseClass(
+            ConsList<TypeParameterSymbol> inProgress
+        ) {
             var type = _sourceTypeParameter.GetEffectiveBaseClass(inProgress);
             return this.TypeMap.SubstituteNamedType(type);
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress)
-        {
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+            ConsList<TypeParameterSymbol> inProgress
+        ) {
             var interfaces = _sourceTypeParameter.GetInterfaces(inProgress);
             return this.TypeMap.SubstituteNamedTypes(interfaces);
         }

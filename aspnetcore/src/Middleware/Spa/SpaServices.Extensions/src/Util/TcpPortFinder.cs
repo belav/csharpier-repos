@@ -16,6 +16,7 @@ namespace Microsoft.AspNetCore.SpaServices.Util
             {
                 return ((IPEndPoint)listener.LocalEndpoint).Port;
             }
+
             finally
             {
                 listener.Stop();

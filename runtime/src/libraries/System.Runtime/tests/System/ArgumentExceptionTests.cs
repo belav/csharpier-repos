@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new ArgumentException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_ARGUMENT, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_ARGUMENT,
+                validateMessage: false
+            );
             Assert.Null(exception.ParamName);
         }
 
@@ -22,7 +26,11 @@ namespace System.Tests
         {
             string message = "the argument is wrong";
             var exception = new ArgumentException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_ARGUMENT, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_ARGUMENT,
+                message: message
+            );
             Assert.Null(exception.ParamName);
         }
 
@@ -32,7 +40,12 @@ namespace System.Tests
             string message = "the argument is wrong";
             var innerException = new Exception("Inner exception");
             var exception = new ArgumentException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_ARGUMENT, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_ARGUMENT,
+                innerException: innerException,
+                message: message
+            );
             Assert.Null(exception.ParamName);
         }
 
@@ -42,7 +55,11 @@ namespace System.Tests
             string message = "the argument is wrong";
             string argumentName = "theArgument";
             var exception = new ArgumentException(message, argumentName);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_ARGUMENT, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_ARGUMENT,
+                validateMessage: false
+            );
             Assert.Equal(argumentName, exception.ParamName);
             Assert.Contains(message, exception.Message);
             Assert.Contains(argumentName, exception.Message);
@@ -55,7 +72,12 @@ namespace System.Tests
             string argumentName = "theArgument";
             var innerException = new Exception("Inner exception");
             var exception = new ArgumentException(message, argumentName, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_ARGUMENT, innerException: innerException, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_ARGUMENT,
+                innerException: innerException,
+                validateMessage: false
+            );
             Assert.Equal(argumentName, exception.ParamName);
             Assert.Contains(message, exception.Message);
             Assert.Contains(argumentName, exception.Message);

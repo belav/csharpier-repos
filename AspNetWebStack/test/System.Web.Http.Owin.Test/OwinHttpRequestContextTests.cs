@@ -23,7 +23,10 @@ namespace System.Web.Http.Owin
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                OwinHttpRequestContext context = CreateProductUnderTest(expectedOwinContext, request);
+                OwinHttpRequestContext context = CreateProductUnderTest(
+                    expectedOwinContext,
+                    request
+                );
 
                 // Act
                 IOwinContext owinContext = context.Context;
@@ -41,7 +44,10 @@ namespace System.Web.Http.Owin
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                OwinHttpRequestContext context = CreateProductUnderTest(owinContext, expectedRequest);
+                OwinHttpRequestContext context = CreateProductUnderTest(
+                    owinContext,
+                    expectedRequest
+                );
 
                 // Act
                 HttpRequestMessage request = context.Request;
@@ -57,8 +63,7 @@ namespace System.Web.Http.Owin
             // Arrange
             X509Certificate2 expectedCertificate = CreateCertificate();
             Mock<IOwinContext> owinContextMock = CreateOwinContextMock();
-            owinContextMock
-                .Setup(c => c.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey))
+            owinContextMock.Setup(c => c.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey))
                 .Returns(expectedCertificate);
             IOwinContext owinContext = owinContextMock.Object;
 
@@ -117,8 +122,7 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             Mock<IOwinContext> owinContextMock = CreateOwinContextMock();
-            owinContextMock
-                .Setup(c => c.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey))
+            owinContextMock.Setup(c => c.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey))
                 .Returns(CreateCertificate());
             IOwinContext owinContext = owinContextMock.Object;
 
@@ -142,8 +146,7 @@ namespace System.Web.Http.Owin
             X509Certificate2 expectedCertificate = CreateCertificate();
             X509Certificate2 currentCertificate = expectedCertificate;
             Mock<IOwinContext> owinContextMock = CreateOwinContextMock();
-            owinContextMock
-                .Setup(c => c.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey))
+            owinContextMock.Setup(c => c.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey))
                 .Returns(() => currentCertificate);
             IOwinContext owinContext = owinContextMock.Object;
 
@@ -207,8 +210,11 @@ namespace System.Web.Http.Owin
         [InlineData(false, IncludeErrorDetailPolicy.LocalOnly, false)]
         [InlineData(true, IncludeErrorDetailPolicy.Default, true)]
         [InlineData(false, IncludeErrorDetailPolicy.Default, false)]
-        public void IncludeErrorDetailGet_ForPolicy(bool expected, IncludeErrorDetailPolicy policy, bool isLocal)
-        {
+        public void IncludeErrorDetailGet_ForPolicy(
+            bool expected,
+            IncludeErrorDetailPolicy policy,
+            bool isLocal
+        ) {
             // Arrange
             IOwinContext owinContext = CreateStubOwinContext();
 
@@ -252,8 +258,10 @@ namespace System.Web.Http.Owin
         [Theory]
         [InlineData(true, IncludeErrorDetailPolicy.Never)]
         [InlineData(false, IncludeErrorDetailPolicy.Always)]
-        public void IncludeErrorDetailSet_OverridesPolicy(bool expected, IncludeErrorDetailPolicy policy)
-        {
+        public void IncludeErrorDetailSet_OverridesPolicy(
+            bool expected,
+            IncludeErrorDetailPolicy policy
+        ) {
             // Arrange
             IOwinContext owinContext = CreateStubOwinContext();
 
@@ -321,7 +329,8 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             Mock<IOwinContext> owinContextMock = CreateOwinContextMock();
-            owinContextMock.Setup(c => c.Get<bool>(OwinConstants.IsLocalKey)).Returns(expectedIsLocal);
+            owinContextMock.Setup(c => c.Get<bool>(OwinConstants.IsLocalKey))
+                .Returns(expectedIsLocal);
             IOwinContext owinContext = owinContextMock.Object;
 
             using (HttpRequestMessage request = CreateRequest())
@@ -365,7 +374,8 @@ namespace System.Web.Http.Owin
             // Arrange
             Mock<IOwinContext> owinContextMock = CreateOwinContextMock();
             bool currentOwinContextIsLocal = expectedIsLocal;
-            owinContextMock.Setup(c => c.Get<bool>(OwinConstants.IsLocalKey)).Returns(() => currentOwinContextIsLocal);
+            owinContextMock.Setup(c => c.Get<bool>(OwinConstants.IsLocalKey))
+                .Returns(() => currentOwinContextIsLocal);
             IOwinContext owinContext = owinContextMock.Object;
 
             using (HttpRequestMessage request = CreateRequest())
@@ -410,8 +420,13 @@ namespace System.Web.Http.Owin
             // Arrange
             Mock<IOwinRequest> owinRequestMock = new Mock<IOwinRequest>(MockBehavior.Strict);
             IPrincipal principal = null;
-            owinRequestMock.SetupSet((r) => r.User = It.IsAny<IPrincipal>()).Callback<IPrincipal>(
-                value => { principal = value; });
+            owinRequestMock.SetupSet((r) => r.User = It.IsAny<IPrincipal>())
+                .Callback<IPrincipal>(
+                    value =>
+                    {
+                        principal = value;
+                    }
+                );
             IOwinContext owinContext = CreateStubOwinContext(owinRequestMock.Object);
 
             using (HttpRequestMessage request = CreateRequest())
@@ -571,9 +586,7 @@ namespace System.Web.Http.Owin
             // Arrange
             var expectedVirtualPathRoot = "/a b";
             var owinRequestMock = new Mock<IOwinRequest>(MockBehavior.Strict);
-            owinRequestMock
-                .Setup(r => r.PathBase)
-                .Returns(new PathString(expectedVirtualPathRoot));
+            owinRequestMock.Setup(r => r.PathBase).Returns(new PathString(expectedVirtualPathRoot));
 
             var owinContext = CreateStubOwinContext(owinRequestMock.Object);
             using (var request = CreateRequest())
@@ -591,8 +604,9 @@ namespace System.Web.Http.Owin
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void VirtualPathRootGet_ReturnsSlash_WhenContextRequestPathBaseIsValue(string contextRequestPathBase)
-        {
+        public void VirtualPathRootGet_ReturnsSlash_WhenContextRequestPathBaseIsValue(
+            string contextRequestPathBase
+        ) {
             // Arrange
             Mock<IOwinRequest> owinRequestMock = new Mock<IOwinRequest>(MockBehavior.Strict);
             owinRequestMock.Setup(r => r.PathBase).Returns(new PathString(contextRequestPathBase));
@@ -658,7 +672,8 @@ namespace System.Web.Http.Owin
             string expectedVirtualPathRoot = "/expected";
             string currentVirtualPathRoot = expectedVirtualPathRoot;
             Mock<IOwinRequest> owinRequestMock = new Mock<IOwinRequest>(MockBehavior.Strict);
-            owinRequestMock.Setup(r => r.PathBase).Returns(() => new PathString(currentVirtualPathRoot));
+            owinRequestMock.Setup(r => r.PathBase)
+                .Returns(() => new PathString(currentVirtualPathRoot));
             IOwinContext owinContext = CreateStubOwinContext(owinRequestMock.Object);
 
             using (HttpRequestMessage request = CreateRequest())
@@ -707,8 +722,10 @@ namespace System.Web.Http.Owin
             return mock;
         }
 
-        private static OwinHttpRequestContext CreateProductUnderTest(IOwinContext context, HttpRequestMessage request)
-        {
+        private static OwinHttpRequestContext CreateProductUnderTest(
+            IOwinContext context,
+            HttpRequestMessage request
+        ) {
             return new OwinHttpRequestContext(context, request);
         }
 

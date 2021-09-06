@@ -13,7 +13,11 @@ internal static partial class Interop
         /// Version used for a buffer containing a scalar integer (not an IntPtr)
         /// </summary>
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode)]
-        private static extern IntPtr CryptFindOIDInfo(CryptOidInfoKeyType dwKeyType, ref int pvKey, OidGroup group);
+        private static extern IntPtr CryptFindOIDInfo(
+            CryptOidInfoKeyType dwKeyType,
+            ref int pvKey,
+            OidGroup group
+        );
 
         public static CRYPT_OID_INFO FindAlgIdOidInfo(Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM algId)
         {
@@ -21,7 +25,8 @@ internal static partial class Interop
             IntPtr fullOidInfo = CryptFindOIDInfo(
                 CryptOidInfoKeyType.CRYPT_OID_INFO_ALGID_KEY,
                 ref intAlgId,
-                OidGroup.HashAlgorithm);
+                OidGroup.HashAlgorithm
+            );
 
             if (fullOidInfo != IntPtr.Zero)
             {

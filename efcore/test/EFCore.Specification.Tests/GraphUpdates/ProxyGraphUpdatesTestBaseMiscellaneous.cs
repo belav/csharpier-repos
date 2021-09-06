@@ -19,8 +19,7 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -75,8 +74,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -91,19 +89,20 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(bool nullPrincipal)
-        {
+        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
+            bool nullPrincipal
+        ) {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -161,8 +160,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -180,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(root.Id, dependent.RootId);
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -245,7 +244,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(dependent.BadCustomerId);
                     Assert.Null(dependent.BadCustomer);
                     Assert.Empty(principal.BadOrders);
-                });
+                }
+            );
         }
     }
 }

@@ -32,8 +32,9 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static string EscapeAndConcatenateArgArrayForCmdProcessStart(IEnumerable<string> args)
-        {
+        public static string EscapeAndConcatenateArgArrayForCmdProcessStart(
+            IEnumerable<string> args
+        ) {
             return string.Join(" ", EscapeArgArrayForCmd(args));
         }
 
@@ -85,7 +86,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
             var sb = new StringBuilder();
 
             var quoted = ShouldSurroundWithQuotes(arg);
-            if (quoted) sb.Append('"');
+            if (quoted)
+                sb.Append('"');
 
             for (int i = 0; i < arg.Length; ++i)
             {
@@ -105,14 +107,12 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 {
                     sb.Append('\\', 2 * backslashCount);
                 }
-
                 // Escape any preceding backslashes and the quote
                 else if (arg[i] == '"')
                 {
                     sb.Append('\\', (2 * backslashCount) + 1);
                     sb.Append('"');
                 }
-
                 // Output any consumed backslashes and the character
                 else
                 {
@@ -121,7 +121,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 }
             }
 
-            if (quoted) sb.Append('"');
+            if (quoted)
+                sb.Append('"');
 
             return sb.ToString();
         }
@@ -145,11 +146,11 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
             var quoted = ShouldSurroundWithQuotes(argument);
 
-            if (quoted) sb.Append("^\"");
+            if (quoted)
+                sb.Append("^\"");
 
             foreach (var character in argument)
             {
-
                 if (character == '"')
                 {
                     sb.Append('^');
@@ -164,7 +165,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 }
             }
 
-            if (quoted) sb.Append("^\"");
+            if (quoted)
+                sb.Append("^\"");
 
             return sb.ToString();
         }
@@ -185,9 +187,10 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         internal static bool ShouldSurroundWithQuotes(string argument)
         {
             // Don't quote already quoted strings
-            if (argument.StartsWith("\"", StringComparison.Ordinal) &&
-                    argument.EndsWith("\"", StringComparison.Ordinal))
-            {
+            if (
+                argument.StartsWith("\"", StringComparison.Ordinal)
+                && argument.EndsWith("\"", StringComparison.Ordinal)
+            ) {
                 return false;
             }
 

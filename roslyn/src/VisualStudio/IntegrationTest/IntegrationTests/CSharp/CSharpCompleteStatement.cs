@@ -15,14 +15,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpCompleteStatement(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpCompleteStatement))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpCompleteStatement)) { }
 
         [WpfFact]
         public void UndoRestoresCaretPosition1()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -32,10 +31,14 @@ public class Test
         f.ToString($$)
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString();$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString();$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.Undo();
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
@@ -45,7 +48,8 @@ public class Test
         [WorkItem(43400, "https://github.com/dotnet/roslyn/issues/43400")]
         public void UndoRestoresCaretPosition2()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -55,19 +59,27 @@ public class Test
         Method(condition ? whenTrue $$)
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText("Method(condition ? whenTrue );$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "Method(condition ? whenTrue );$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.CurrentLineText("Method(condition ? whenTrue $$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "Method(condition ? whenTrue $$)",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void UndoRestoresFormatBeforeRestoringCaretPosition()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -77,16 +89,26 @@ public class Test
         f.ToString($$ )
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString();$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString();$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString( );$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString( );$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$ )", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString($$ )",
+                assertCaretPosition: true
+            );
         }
     }
 }

@@ -65,10 +65,17 @@ namespace System.Composition.Convention.Tests
             // Export all interfaces except IDisposable, Export contracts on types without interfaces. except for disposable types
             var builder = new ConventionBuilder();
             builder.ForTypesMatching((t) => true).ExportInterfaces();
-            builder.ForTypesMatching((t) => t.GetTypeInfo().ImplementedInterfaces.Where((iface) => iface != typeof(System.IDisposable)).Count() == 0).Export();
+            builder.ForTypesMatching(
+                    (t) =>
+                        t.GetTypeInfo()
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
+                            .Count() == 0
+                )
+                .Export();
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart<Standard>(builder)
+            CompositionHost container = new ContainerConfiguration().WithPart<Standard>(builder)
                 .WithPart<Dippy>(builder)
                 .WithPart<Derived>(builder)
                 .WithPart<BareClass>(builder)
@@ -96,17 +103,24 @@ namespace System.Composition.Convention.Tests
             Assert.NotNull(importer.BareClass);
         }
 
-
         [Fact]
         public void StandardExportInterfacesInterfaceFilterDefaultContractShouldWork()
         {
             //Same test as above only using default export builder
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching((t) => true).ExportInterfaces((iface) => iface != typeof(System.IDisposable));
-            builder.ForTypesMatching((t) => t.GetTypeInfo().ImplementedInterfaces.Where((iface) => iface != typeof(System.IDisposable)).Count() == 0).Export();
+            builder.ForTypesMatching((t) => true)
+                .ExportInterfaces((iface) => iface != typeof(System.IDisposable));
+            builder.ForTypesMatching(
+                    (t) =>
+                        t.GetTypeInfo()
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
+                            .Count() == 0
+                )
+                .Export();
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart<Standard>(builder)
+            CompositionHost container = new ContainerConfiguration().WithPart<Standard>(builder)
                 .WithPart<Dippy>(builder)
                 .WithPart<Derived>(builder)
                 .WithPart<BareClass>(builder)
@@ -139,11 +153,22 @@ namespace System.Composition.Convention.Tests
         {
             //Same test as above only using default export builder
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching((t) => true).ExportInterfaces((iface) => iface != typeof(System.IDisposable), (iface, bldr) => bldr.AsContractType((Type)iface));
-            builder.ForTypesMatching((t) => t.GetTypeInfo().ImplementedInterfaces.Where((iface) => iface != typeof(System.IDisposable)).Count() == 0).Export();
+            builder.ForTypesMatching((t) => true)
+                .ExportInterfaces(
+                    (iface) => iface != typeof(System.IDisposable),
+                    (iface, bldr) => bldr.AsContractType((Type)iface)
+                );
+            builder.ForTypesMatching(
+                    (t) =>
+                        t.GetTypeInfo()
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
+                            .Count() == 0
+                )
+                .Export();
 
-            CompositionHost container = new ContainerConfiguration()
-                .WithPart<Standard>(builder)
+            CompositionHost container = new ContainerConfiguration().WithPart<Standard>(builder)
                 .WithPart<Dippy>(builder)
                 .WithPart<Derived>(builder)
                 .WithPart<BareClass>(builder)

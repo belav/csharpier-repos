@@ -27,8 +27,12 @@ namespace Roslyn.Utilities
         {
             foreach (var commaFeatures in values)
             {
-                foreach (var feature in commaFeatures.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
+                foreach (
+                    var feature in commaFeatures.Split(
+                        new[] { ',' },
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                ) {
                     ParseFeatureCore(builder, feature);
                 }
             }

@@ -32,26 +32,34 @@ namespace Microsoft.WebAssembly.Diagnostics
 
                 host = WebHost.CreateDefaultBuilder()
                     .UseSetting("UseIISIntegration", false.ToString())
-                    .ConfigureAppConfiguration((hostingContext, config) =>
-                    {
-                        config.AddEnvironmentVariables(prefix: "WASM_TESTS_");
-                    })
-                    .ConfigureLogging(logging =>
-                    {
-                        logging.AddSimpleConsole(options => options.SingleLine = true)
-                               .AddFilter(null, LogLevel.Information);
-                    })
-                    .ConfigureServices((ctx, services) =>
-                    {
-                        services.Configure<TestHarnessOptions>(ctx.Configuration);
-                        services.Configure<TestHarnessOptions>(options =>
+                    .ConfigureAppConfiguration(
+                        (hostingContext, config) =>
                         {
-                            options.ChromePath = options.ChromePath ?? chromePath;
-                            options.AppPath = appPath;
-                            options.PagePath = pagePath;
-                            options.DevToolsUrl = new Uri("http://localhost:0");
-                        });
-                    })
+                            config.AddEnvironmentVariables(prefix: "WASM_TESTS_");
+                        }
+                    )
+                    .ConfigureLogging(
+                        logging =>
+                        {
+                            logging.AddSimpleConsole(options => options.SingleLine = true)
+                                .AddFilter(null, LogLevel.Information);
+                        }
+                    )
+                    .ConfigureServices(
+                        (ctx, services) =>
+                        {
+                            services.Configure<TestHarnessOptions>(ctx.Configuration);
+                            services.Configure<TestHarnessOptions>(
+                                options =>
+                                {
+                                    options.ChromePath = options.ChromePath ?? chromePath;
+                                    options.AppPath = appPath;
+                                    options.PagePath = pagePath;
+                                    options.DevToolsUrl = new Uri("http://localhost:0");
+                                }
+                            );
+                        }
+                    )
                     .UseStartup<TestHarnessStartup>()
                     .UseUrls(Endpoint.ToString())
                     .Build();

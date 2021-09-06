@@ -19,8 +19,10 @@ namespace System.Web.Http.Validation
         private readonly ModelMetadataProvider _metadataProvider;
         private readonly List<ModelValidatorProvider> _validatorProviders;
 
-        public ModelValidationRequiredMemberSelector(ModelMetadataProvider metadataProvider, IEnumerable<ModelValidatorProvider> validatorProviders)
-        {
+        public ModelValidationRequiredMemberSelector(
+            ModelMetadataProvider metadataProvider,
+            IEnumerable<ModelValidatorProvider> validatorProviders
+        ) {
             if (metadataProvider == null)
             {
                 throw Error.ArgumentNull("metadataProvider");
@@ -54,7 +56,11 @@ namespace System.Web.Http.Validation
                 return false;
             }
 
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => null, member.DeclaringType, member.Name);
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => null,
+                member.DeclaringType,
+                member.Name
+            );
             if (metadata.ModelType.IsNullable())
             {
                 // If the model type is nullable, the value validator will raise a model error for the null member

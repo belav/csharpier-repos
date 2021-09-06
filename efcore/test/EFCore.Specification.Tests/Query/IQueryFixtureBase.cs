@@ -12,8 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         Func<DbContext> GetContextCreator();
 
-        Func<DbContext, ISetSource> GetSetSourceCreator()
-            => context => new DefaultSetSource(context);
+        Func<DbContext, ISetSource> GetSetSourceCreator() =>
+            context => new DefaultSetSource(context);
 
         ISetSource GetExpectedData();
 
@@ -30,9 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _context = context;
             }
 
-            public IQueryable<TEntity> Set<TEntity>()
-                where TEntity : class
-                => _context.Set<TEntity>();
+            public IQueryable<TEntity> Set<TEntity>() where TEntity : class =>
+                _context.Set<TEntity>();
         }
     }
 }

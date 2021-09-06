@@ -25,9 +25,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 var testSourceCode = await File.ReadAllTextAsync(src).ConfigureAwait(false);
 
                 var (d, r) = await RoslynTestUtils.RunGenerator(
-                    new LoggerMessageGenerator(),
-                    new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
-                    new[] { testSourceCode }).ConfigureAwait(false);
+                        new LoggerMessageGenerator(),
+                        new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
+                        new[] { testSourceCode }
+                    )
+                    .ConfigureAwait(false);
 
                 Assert.Empty(d);
                 Assert.Single(r);
@@ -37,7 +39,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task TestBaseline_TestWithOneParam_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithOneParam
@@ -53,7 +56,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public async Task TestBaseline_TestWithMoreThan6Params_Success()
         {
             // TODO: Remove support for more than 6 arguments
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithMoreThan6Params
@@ -62,13 +66,17 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public static partial void Method9(ILogger logger, int p1, int p2, int p3, int p4, int p5, int p6, int p7);
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithMoreThan6Params.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithMoreThan6Params.generated.txt",
+                testSourceCode
+            );
         }
 
         [Fact]
         public async Task TestBaseline_TestWithDynamicLogLevel_Success()
         {
-            string testSourceCode = @"
+            string testSourceCode =
+                @"
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     internal static partial class TestWithDynamicLogLevel
@@ -77,31 +85,44 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public static partial void M9(LogLevel level, ILogger logger);
     }
 }";
-            await VerifyAgainstBaselineUsingFile("TestWithDynamicLogLevel.generated.txt", testSourceCode);
+            await VerifyAgainstBaselineUsingFile(
+                "TestWithDynamicLogLevel.generated.txt",
+                testSourceCode
+            );
         }
 
         private async Task VerifyAgainstBaselineUsingFile(string filename, string testSourceCode)
         {
-            string[] expectedLines = await File.ReadAllLinesAsync(Path.Combine("Baselines", filename)).ConfigureAwait(false);
+            string[] expectedLines = await File.ReadAllLinesAsync(
+                    Path.Combine("Baselines", filename)
+                )
+                .ConfigureAwait(false);
 
             var (d, r) = await RoslynTestUtils.RunGenerator(
-                new LoggerMessageGenerator(),
-                new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
-                new[] { testSourceCode }).ConfigureAwait(false);
+                    new LoggerMessageGenerator(),
+                    new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
+                    new[] { testSourceCode }
+                )
+                .ConfigureAwait(false);
 
             Assert.Empty(d);
             Assert.Single(r);
 
-            Assert.True(CompareLines(expectedLines, r[0].SourceText,
-                out string errorMessage), errorMessage);
+            Assert.True(
+                CompareLines(expectedLines, r[0].SourceText, out string errorMessage),
+                errorMessage
+            );
         }
 
         private bool CompareLines(string[] expectedLines, SourceText sourceText, out string message)
         {
             if (expectedLines.Length != sourceText.Lines.Count)
             {
-                message = string.Format("Line numbers do not match. Expected: {0} lines, but generated {1}",
-                    expectedLines.Length, sourceText.Lines.Count);
+                message = string.Format(
+                    "Line numbers do not match. Expected: {0} lines, but generated {1}",
+                    expectedLines.Length,
+                    sourceText.Lines.Count
+                );
                 return false;
             }
             int index = 0;
@@ -110,8 +131,13 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
                 string expectedLine = expectedLines[index];
                 if (!expectedLine.Equals(textLine.ToString(), StringComparison.Ordinal))
                 {
-                    message = string.Format("Line {0} does not match.{1}Expected Line:{1}{2}{1}Actual Line:{1}{3}",
-                        textLine.LineNumber, Environment.NewLine, expectedLine, textLine);
+                    message = string.Format(
+                        "Line {0} does not match.{1}Expected Line:{1}{2}{1}Actual Line:{1}{3}",
+                        textLine.LineNumber,
+                        Environment.NewLine,
+                        expectedLine,
+                        textLine
+                    );
                     return false;
                 }
                 index++;

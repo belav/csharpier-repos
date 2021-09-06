@@ -4,9 +4,21 @@
 namespace System.Security.Permissions
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class StorePermissionAttribute : CodeAccessSecurityAttribute
     {
         public StorePermissionAttribute(SecurityAction action) : base(action) { }
@@ -18,6 +30,9 @@ namespace System.Security.Permissions
         public bool AddToStore { get; set; }
         public bool RemoveFromStore { get; set; }
         public bool EnumerateCertificates { get; set; }
-        public override IPermission CreatePermission() { return null; }
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

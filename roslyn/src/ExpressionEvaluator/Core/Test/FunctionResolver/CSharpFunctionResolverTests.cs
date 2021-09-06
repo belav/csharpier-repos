@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void OnLoad()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(object o) { }
     object F() => null;
@@ -48,13 +48,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void ShouldEnableFunctionResolver()
         {
             var sourceA =
-@"class A
+                @"class A
 {
     static void F() { }
     static void G() { }
 }";
             var sourceB =
-@"class B
+                @"class B
 {
     static void F() { }
     static void G() { }
@@ -67,8 +67,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             // ... resolver enabled.
             var moduleA = new Module(bytesA, name: "A.dll");
             var moduleB = new Module(bytesB, name: "B.dll");
-            using (var process = new Process(shouldEnable: true, modules: new[] { moduleA, moduleB }))
-            {
+            using (
+                var process = new Process(shouldEnable: true, modules: new[] { moduleA, moduleB })
+            ) {
                 var requestF = new Request(null, MemberSignatureParser.Parse("F"));
                 var requestG = new Request(null, MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -83,8 +84,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             // ... resolver disabled.
             moduleA = new Module(bytesA, name: "A.dll");
             moduleB = new Module(bytesB, name: "B.dll");
-            using (var process = new Process(shouldEnable: false, modules: new[] { moduleA, moduleB }))
-            {
+            using (
+                var process = new Process(shouldEnable: false, modules: new[] { moduleA, moduleB })
+            ) {
                 var requestF = new Request(null, MemberSignatureParser.Parse("F"));
                 var requestG = new Request(null, MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -100,8 +102,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             // ... resolver enabled.
             moduleA = new Module(bytesA, name: "A.dll");
             moduleB = new Module(bytesB, name: "B.dll");
-            using (var process = new Process(shouldEnable: true, modules: new[] { moduleA, moduleB }))
-            {
+            using (
+                var process = new Process(shouldEnable: true, modules: new[] { moduleA, moduleB })
+            ) {
                 var requestF = new Request("B.dll", MemberSignatureParser.Parse("F"));
                 var requestG = new Request("B.dll", MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -116,8 +119,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             // ... resolver disabled.
             moduleA = new Module(bytesA, name: "A.dll");
             moduleB = new Module(bytesB, name: "B.dll");
-            using (var process = new Process(shouldEnable: false, modules: new[] { moduleA, moduleB }))
-            {
+            using (
+                var process = new Process(shouldEnable: false, modules: new[] { moduleA, moduleB })
+            ) {
                 var requestF = new Request("B.dll", MemberSignatureParser.Parse("F"));
                 var requestG = new Request("B.dll", MemberSignatureParser.Parse("G"));
                 Assert.Equal(0, process.ShouldEnableRequests);
@@ -229,7 +233,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void LanguageId()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F() { }
 }";
@@ -244,11 +248,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             var module = new Module(bytes);
             using (var process = new Process(module))
             {
-                var requestDefaultId = new Request(null, MemberSignatureParser.Parse("F"), Guid.Empty);
+                var requestDefaultId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    Guid.Empty
+                );
                 var requestUnknown = new Request(null, MemberSignatureParser.Parse("F"), unknownId);
-                var requestCausalityBreakpoint = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.CausalityBreakpoint);
-                var requestMethodId = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.MethodId);
-                var requestCSharp = new Request(null, MemberSignatureParser.Parse("F"), csharpLanguageId);
+                var requestCausalityBreakpoint = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.CausalityBreakpoint
+                );
+                var requestMethodId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.MethodId
+                );
+                var requestCSharp = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    csharpLanguageId
+                );
                 var requestVB = new Request(null, MemberSignatureParser.Parse("F"), vbLanguageId);
                 var requestCPP = new Request(null, MemberSignatureParser.Parse("F"), cppLanguageId);
                 resolver.EnableResolution(process, requestDefaultId);
@@ -271,11 +291,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             module = new Module(bytes);
             using (var process = new Process())
             {
-                var requestDefaultId = new Request(null, MemberSignatureParser.Parse("F"), Guid.Empty);
+                var requestDefaultId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    Guid.Empty
+                );
                 var requestUnknown = new Request(null, MemberSignatureParser.Parse("F"), unknownId);
-                var requestCausalityBreakpoint = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.CausalityBreakpoint);
-                var requestMethodId = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.MethodId);
-                var requestCSharp = new Request(null, MemberSignatureParser.Parse("F"), csharpLanguageId);
+                var requestCausalityBreakpoint = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.CausalityBreakpoint
+                );
+                var requestMethodId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.MethodId
+                );
+                var requestCSharp = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    csharpLanguageId
+                );
                 var requestVB = new Request(null, MemberSignatureParser.Parse("F"), vbLanguageId);
                 var requestCPP = new Request(null, MemberSignatureParser.Parse("F"), cppLanguageId);
                 resolver.EnableResolution(process, requestCPP);
@@ -301,7 +337,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void MissingMetadata()
         {
             var sourceA =
-@"class A
+                @"class A
 {
     static void F1() { }
     static void F2() { }
@@ -309,7 +345,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
     static void F4() { }
 }";
             var sourceC =
-@"class C
+                @"class C
 {
     static void F1() { }
     static void F2() { }
@@ -403,7 +439,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void ModuleName()
         {
             var sourceA =
-@"public struct A
+                @"public struct A
 {
     static void F() { }
 }";
@@ -412,16 +448,25 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             var imageA = compilationA.EmitToArray();
             var refA = AssemblyMetadata.CreateFromImage(imageA).GetReference();
             var sourceB =
-@"class B
+                @"class B
 {
     static void F(A a) { }
     static void Main() { }
 }";
             var nameB = GetUniqueName();
-            var compilationB = CreateCompilation(sourceB, assemblyName: nameB, options: TestOptions.DebugExe, references: new[] { refA });
+            var compilationB = CreateCompilation(
+                sourceB,
+                assemblyName: nameB,
+                options: TestOptions.DebugExe,
+                references: new[] { refA }
+            );
             var imageB = compilationB.EmitToArray();
-            using (var process = new Process(new Module(imageA, nameA + ".dll"), new Module(imageB, nameB + ".exe")))
-            {
+            using (
+                var process = new Process(
+                    new Module(imageA, nameA + ".dll"),
+                    new Module(imageB, nameB + ".exe")
+                )
+            ) {
                 var signature = MemberSignatureParser.Parse("F");
                 var resolver = Resolver.CSharpResolver;
 
@@ -456,7 +501,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void Arrays()
         {
             var source =
-@"class A
+                @"class A
 {
 }
 class B
@@ -472,7 +517,17 @@ class B
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F", "B.F(A)", "B.F(A[])", "B.F(A[,,])", "B.F(A[][,,])", "B.F(A[,,][])", "B.F(A[][][])");
+                Resolve(
+                    process,
+                    resolver,
+                    "F",
+                    "B.F(A)",
+                    "B.F(A[])",
+                    "B.F(A[,,])",
+                    "B.F(A[][,,])",
+                    "B.F(A[,,][])",
+                    "B.F(A[][][])"
+                );
                 Resolve(process, resolver, "F(A)", "B.F(A)");
                 Resolve(process, resolver, "F(A[])", "B.F(A[])");
                 Resolve(process, resolver, "F(A[][])");
@@ -490,7 +545,7 @@ class B
         public void Pointers()
         {
             var source =
-@"class C
+                @"class C
 {
     static unsafe void F(int*[] p) { }
     static unsafe void F(int** q) { }
@@ -515,7 +570,7 @@ class B
         public void Nullable()
         {
             var source =
-@"struct S
+                @"struct S
 {
     void F(S? o) { }
     static void F(int?[] o) { }
@@ -524,7 +579,13 @@ class B
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F", "S.F(System.Nullable<S>)", "S.F(System.Nullable<System.Int32>[])");
+                Resolve(
+                    process,
+                    resolver,
+                    "F",
+                    "S.F(System.Nullable<S>)",
+                    "S.F(System.Nullable<System.Int32>[])"
+                );
                 Resolve(process, resolver, "F(S)");
                 Resolve(process, resolver, "F(S?)", "S.F(System.Nullable<S>)");
                 Resolve(process, resolver, "F(S??)");
@@ -536,7 +597,7 @@ class B
         public void ByRef()
         {
             var source =
-@"class @ref { }
+                @"class @ref { }
 class @out { }
 class C
 {
@@ -562,7 +623,7 @@ class C
         public void Methods()
         {
             var source =
-@"abstract class A
+                @"abstract class A
 {
     abstract internal object F();
 }
@@ -596,7 +657,7 @@ interface I
         public void Properties()
         {
             var source =
-@"abstract class A
+                @"abstract class A
 {
     abstract internal object P { get; set; }
 }
@@ -620,7 +681,15 @@ interface I
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "P", "B.get_P()", "B.set_P(System.Object)", "C.get_P()", "D.set_P(System.Int32)");
+                Resolve(
+                    process,
+                    resolver,
+                    "P",
+                    "B.get_P()",
+                    "B.set_P(System.Object)",
+                    "C.get_P()",
+                    "D.set_P(System.Int32)"
+                );
                 Resolve(process, resolver, "A.P");
                 Resolve(process, resolver, "B.P", "B.get_P()", "B.set_P(System.Object)");
                 Resolve(process, resolver, "B.P()");
@@ -632,7 +701,13 @@ interface I
                 Resolve(process, resolver, "D.P()");
                 Resolve(process, resolver, "D.P(object)");
                 Resolve(process, resolver, "get_P", "B.get_P()", "C.get_P()");
-                Resolve(process, resolver, "set_P", "B.set_P(System.Object)", "D.set_P(System.Int32)");
+                Resolve(
+                    process,
+                    resolver,
+                    "set_P",
+                    "B.set_P(System.Object)",
+                    "D.set_P(System.Int32)"
+                );
                 Resolve(process, resolver, "B.get_P()", "B.get_P()");
                 Resolve(process, resolver, "B.set_P", "B.set_P(System.Object)");
             }
@@ -642,7 +717,7 @@ interface I
         public void Constructors()
         {
             var source =
-@"class A
+                @"class A
 {
     static A() { }
     A() { }
@@ -679,7 +754,7 @@ class D
         public void GenericMethods()
         {
             var source =
-@"class A
+                @"class A
 {
     static void F() { }
     void F<T, U>() { }
@@ -721,7 +796,7 @@ class B : A<int>
         public void Namespaces()
         {
             var source =
-@"namespace N
+                @"namespace N
 {
     namespace M
     {
@@ -755,7 +830,7 @@ namespace N
         public void NestedTypes()
         {
             var source =
-@"class A
+                @"class A
 {
     class B
     {
@@ -810,7 +885,7 @@ namespace N
         public void NamespacesAndTypes()
         {
             var source =
-@"namespace A.B
+                @"namespace A.B
 {
     class T { }
     class C
@@ -845,13 +920,42 @@ class A<T>
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F", "A.B.C.F(A.B.C)", "A.B.C.F(A.B<A.B.T>.C)", "A.B<T>.C.F(A.B<T>.C)", "A.B<T>.C.F(A.B.C)", "A<T>.B.C.F(A<T>.B.C)", "A<T>.B.C.F(A.B<T>.C)");
-                Resolve(process, resolver, "F(C)", "A.B.C.F(A.B.C)", "A.B.C.F(A.B<A.B.T>.C)", "A.B<T>.C.F(A.B.C)");
+                Resolve(
+                    process,
+                    resolver,
+                    "F",
+                    "A.B.C.F(A.B.C)",
+                    "A.B.C.F(A.B<A.B.T>.C)",
+                    "A.B<T>.C.F(A.B<T>.C)",
+                    "A.B<T>.C.F(A.B.C)",
+                    "A<T>.B.C.F(A<T>.B.C)",
+                    "A<T>.B.C.F(A.B<T>.C)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "F(C)",
+                    "A.B.C.F(A.B.C)",
+                    "A.B.C.F(A.B<A.B.T>.C)",
+                    "A.B<T>.C.F(A.B.C)"
+                );
                 Resolve(process, resolver, "F(B.C)", "A.B.C.F(A.B.C)", "A.B<T>.C.F(A.B.C)");
                 Resolve(process, resolver, "F(B<T>.C)", "A.B.C.F(A.B<A.B.T>.C)");
                 Resolve(process, resolver, "A.B.C.F", "A.B.C.F(A.B.C)", "A.B.C.F(A.B<A.B.T>.C)");
-                Resolve(process, resolver, "A<T>.B.C.F", "A<T>.B.C.F(A<T>.B.C)", "A<T>.B.C.F(A.B<T>.C)");
-                Resolve(process, resolver, "A.B<T>.C.F", "A.B<T>.C.F(A.B<T>.C)", "A.B<T>.C.F(A.B.C)");
+                Resolve(
+                    process,
+                    resolver,
+                    "A<T>.B.C.F",
+                    "A<T>.B.C.F(A<T>.B.C)",
+                    "A<T>.B.C.F(A.B<T>.C)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "A.B<T>.C.F",
+                    "A.B<T>.C.F(A.B<T>.C)",
+                    "A.B<T>.C.F(A.B.C)"
+                );
                 Resolve(process, resolver, "B<T>.C.F(B<T>.C)", "A.B<T>.C.F(A.B<T>.C)");
             }
         }
@@ -860,7 +964,7 @@ class A<T>
         public void NamespacesAndTypes_More()
         {
             var source =
-@"namespace A1.B
+                @"namespace A1.B
 {
     class C
     {
@@ -901,8 +1005,30 @@ namespace B
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F(C)", "B.C.F(B.C)", "B.C.F(A3.B.C)", "A1.B.C.F(A1.B.C)", "A2.B.C.F(A2.B.C)", "A2.B.C.F(A1.B.C)", "A3.B.C.F(A3.B.C)", "A3.B.C.F(A2.B.C)");
-                Resolve(process, resolver, "B.C.F(B.C)", "B.C.F(B.C)", "B.C.F(A3.B.C)", "A1.B.C.F(A1.B.C)", "A2.B.C.F(A2.B.C)", "A2.B.C.F(A1.B.C)", "A3.B.C.F(A3.B.C)", "A3.B.C.F(A2.B.C)");
+                Resolve(
+                    process,
+                    resolver,
+                    "F(C)",
+                    "B.C.F(B.C)",
+                    "B.C.F(A3.B.C)",
+                    "A1.B.C.F(A1.B.C)",
+                    "A2.B.C.F(A2.B.C)",
+                    "A2.B.C.F(A1.B.C)",
+                    "A3.B.C.F(A3.B.C)",
+                    "A3.B.C.F(A2.B.C)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "B.C.F(B.C)",
+                    "B.C.F(B.C)",
+                    "B.C.F(A3.B.C)",
+                    "A1.B.C.F(A1.B.C)",
+                    "A2.B.C.F(A2.B.C)",
+                    "A2.B.C.F(A1.B.C)",
+                    "A3.B.C.F(A3.B.C)",
+                    "A3.B.C.F(A2.B.C)"
+                );
                 Resolve(process, resolver, "B.C.F(A1.B.C)", "A1.B.C.F(A1.B.C)", "A2.B.C.F(A1.B.C)");
                 Resolve(process, resolver, "B.C.F(A2.B.C)", "A2.B.C.F(A2.B.C)", "A3.B.C.F(A2.B.C)");
                 Resolve(process, resolver, "B.C.F(A3.B.C)", "B.C.F(A3.B.C)", "A3.B.C.F(A3.B.C)");
@@ -913,7 +1039,7 @@ namespace B
         public void TypeParameters()
         {
             var source =
-@"class A
+                @"class A
 {
     class B<T>
     {
@@ -934,8 +1060,26 @@ class A<T>
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F<T>", "A.B<T>.F<U>(A.B<T>)", "A.B<T>.F<U>(A.B<U>)", "A<T>.B<U>.F<V>(T)", "A<T>.B<U>.F<V>(A<U>)", "A<T>.B<U>.F<V>(A<T>.B<V>)");
-                Resolve(process, resolver, "B<T>.F<U>", "A.B<T>.F<U>(A.B<T>)", "A.B<T>.F<U>(A.B<U>)", "A<T>.B<U>.F<V>(T)", "A<T>.B<U>.F<V>(A<U>)", "A<T>.B<U>.F<V>(A<T>.B<V>)");
+                Resolve(
+                    process,
+                    resolver,
+                    "F<T>",
+                    "A.B<T>.F<U>(A.B<T>)",
+                    "A.B<T>.F<U>(A.B<U>)",
+                    "A<T>.B<U>.F<V>(T)",
+                    "A<T>.B<U>.F<V>(A<U>)",
+                    "A<T>.B<U>.F<V>(A<T>.B<V>)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "B<T>.F<U>",
+                    "A.B<T>.F<U>(A.B<T>)",
+                    "A.B<T>.F<U>(A.B<U>)",
+                    "A<T>.B<U>.F<V>(T)",
+                    "A<T>.B<U>.F<V>(A<U>)",
+                    "A<T>.B<U>.F<V>(A<T>.B<V>)"
+                );
                 Resolve(process, resolver, "F<T>(B<T>)", "A.B<T>.F<U>(A.B<U>)");
                 Resolve(process, resolver, "F<U>(B<T>)"); // No T in signature to bind to.
                 Resolve(process, resolver, "F<T>(B<U>)"); // No U in signature to bind to.
@@ -954,7 +1098,7 @@ class A<T>
         public void DifferentCase_MethodsAndProperties()
         {
             var source =
-@"class A
+                @"class A
 {
     static void method() { }
     static void Method(object o) { }
@@ -972,7 +1116,13 @@ class B
                 Resolve(process, resolver, "method", "A.method()");
                 Resolve(process, resolver, "Method", "A.Method(System.Object)", "B.Method()");
                 Resolve(process, resolver, "property", "A.get_property()");
-                Resolve(process, resolver, "Property", "B.get_Property()", "B.set_Property(System.Object)");
+                Resolve(
+                    process,
+                    resolver,
+                    "Property",
+                    "B.get_Property()",
+                    "B.set_Property(System.Object)"
+                );
                 Resolve(process, resolver, "PROPERTY");
                 Resolve(process, resolver, "get_property", "A.get_property()");
                 Resolve(process, resolver, "GET_PROPERTY");
@@ -983,7 +1133,7 @@ class B
         public void DifferentCase_NamespacesAndTypes()
         {
             var source =
-@"namespace one.two
+                @"namespace one.two
 {
     class THREE
     {
@@ -1001,15 +1151,41 @@ namespace One.Two
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "Method", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
+                Resolve(
+                    process,
+                    resolver,
+                    "Method",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
                 Resolve(process, resolver, "Three.Method", "One.Two.Three.Method(One.Two.Three)");
                 Resolve(process, resolver, "three.Method");
                 Resolve(process, resolver, "Method(three)");
-                Resolve(process, resolver, "THREE.Method(THREE)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "One.Two.Three.Method", "One.Two.Three.Method(One.Two.Three)");
+                Resolve(
+                    process,
+                    resolver,
+                    "THREE.Method(THREE)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "One.Two.Three.Method",
+                    "One.Two.Three.Method(One.Two.Three)"
+                );
                 Resolve(process, resolver, "ONE.TWO.THREE.Method");
-                Resolve(process, resolver, "Method(One.Two.Three)", "One.Two.Three.Method(One.Two.Three)");
-                Resolve(process, resolver, "Method(one.two.THREE)", "one.two.THREE.Method(one.two.THREE)");
+                Resolve(
+                    process,
+                    resolver,
+                    "Method(One.Two.Three)",
+                    "One.Two.Three.Method(One.Two.Three)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "Method(one.two.THREE)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
                 Resolve(process, resolver, "Method(one.two.Three)");
                 Resolve(process, resolver, "THREE", "one.two.THREE..ctor()");
             }
@@ -1019,7 +1195,7 @@ namespace One.Two
         public void TypeReferences()
         {
             var sourceA =
-@"public class A<T>
+                @"public class A<T>
 {
     public class B<U>
     {
@@ -1036,7 +1212,7 @@ namespace N
             var bytesA = compilationA.EmitToArray();
             var refA = AssemblyMetadata.CreateFromImage(bytesA).GetReference();
             var sourceB =
-@"class D<T>
+                @"class D<T>
 {
     static void F<U, V>(N.C<A<U>.B<V>[]> b) { }
 }";
@@ -1045,16 +1221,32 @@ namespace N
             using (var process = new Process(new Module(bytesA), new Module(bytesB)))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F<T, U>", "A<T>.B<U>.F<V, W>()", "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)");
+                Resolve(
+                    process,
+                    resolver,
+                    "F<T, U>",
+                    "A<T>.B<U>.F<V, W>()",
+                    "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)"
+                );
                 Resolve(process, resolver, "F<T, U>(C)"); // No type argument for C<>
                 Resolve(process, resolver, "F<T, U>(C<T>)"); // Incorrect type argument for C<>
                 Resolve(process, resolver, "F<T, U>(C<B<U>>)"); // No array qualifier
                 Resolve(process, resolver, "F<T, U>(C<B<T>[]>)"); // Incorrect type argument for B<>
                 Resolve(process, resolver, "F<T, U>(C<B<U>[]>)", "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)");
-                Resolve(process, resolver, "F<T, U>(N.C<B<U>[]>)", "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)");
+                Resolve(
+                    process,
+                    resolver,
+                    "F<T, U>(N.C<B<U>[]>)",
+                    "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)"
+                );
                 Resolve(process, resolver, "D<X>.F<Y, Z>", "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)");
                 Resolve(process, resolver, "D<X>.F<Y, Z>(C<A<Y>[]>)"); // No nested type B
-                Resolve(process, resolver, "D<X>.F<Y, Z>(C<A<Y>.B<Z>[]>)", "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)");
+                Resolve(
+                    process,
+                    resolver,
+                    "D<X>.F<Y, Z>(C<A<Y>.B<Z>[]>)",
+                    "D<T>.F<U, V>(N.C<A<U>.B<V>[]>)"
+                );
                 Resolve(process, resolver, "D<X>.F<Y, Z>(C<A<Y>.B<Y>[]>)"); // Incorrect type argument for B<>.
             }
         }
@@ -1063,7 +1255,7 @@ namespace N
         public void Keywords_MethodName()
         {
             var source =
-@"namespace @namespace
+                @"namespace @namespace
 {
     struct @struct
     {
@@ -1079,7 +1271,12 @@ namespace N
                 Assert.Null(MemberSignatureParser.Parse("@namespace.struct.@public"));
                 Assert.Null(MemberSignatureParser.Parse("@namespace.@struct.public"));
                 Resolve(process, resolver, "@public", "namespace.struct.get_public()");
-                Resolve(process, resolver, "@namespace.@struct.@public", "namespace.struct.get_public()");
+                Resolve(
+                    process,
+                    resolver,
+                    "@namespace.@struct.@public",
+                    "namespace.struct.get_public()"
+                );
             }
         }
 
@@ -1087,7 +1284,7 @@ namespace N
         public void Keywords_MethodTypeParameter()
         {
             var source =
-@"class @class<@in>
+                @"class @class<@in>
 {
     static void F<@out>(@in i, @out o) { }
 }";
@@ -1112,7 +1309,7 @@ namespace N
         public void Keywords_ParameterName()
         {
             var source =
-@"namespace @namespace
+                @"namespace @namespace
 {
     struct @struct
     {
@@ -1137,7 +1334,7 @@ class C
         public void Keywords_ParameterTypeArgument()
         {
             var source =
-@"class @this
+                @"class @this
 {
     internal class @base
     {
@@ -1166,7 +1363,7 @@ class C
         public void EscapedNames()
         {
             var source =
-@"class @object { }
+                @"class @object { }
 class Object { }
 class C
 {
@@ -1191,7 +1388,7 @@ class C
         public void SpecialTypes()
         {
             var source =
-@"class C<T1, T2, T3, T4>
+                @"class C<T1, T2, T3, T4>
 {
 }
 class C
@@ -1205,10 +1402,30 @@ class C
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "F(bool, char, sbyte, byte)", "C.F(System.Boolean, System.Char, System.SByte, System.Byte)");
-                Resolve(process, resolver, "F(System.Int16, System.UInt16, System.Int32, System.UInt32)", "C.F(System.Int16, System.UInt16, System.Int32, System.UInt32)");
-                Resolve(process, resolver, "F(C<UInt32, Int64, UInt64, Single>)", "C.F(C<System.UInt32, System.Int64, System.UInt64, System.Single>)");
-                Resolve(process, resolver, "F(C<double, string, object, decimal>)", "C.F(C<System.Double, System.String, System.Object, System.Decimal>)");
+                Resolve(
+                    process,
+                    resolver,
+                    "F(bool, char, sbyte, byte)",
+                    "C.F(System.Boolean, System.Char, System.SByte, System.Byte)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "F(System.Int16, System.UInt16, System.Int32, System.UInt32)",
+                    "C.F(System.Int16, System.UInt16, System.Int32, System.UInt32)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "F(C<UInt32, Int64, UInt64, Single>)",
+                    "C.F(C<System.UInt32, System.Int64, System.UInt64, System.Single>)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "F(C<double, string, object, decimal>)",
+                    "C.F(C<System.Double, System.String, System.Object, System.Decimal>)"
+                );
                 Resolve(process, resolver, "F(bool, char, sbyte)");
                 Resolve(process, resolver, "F(C<double, string, object, decimal, bool>)");
             }
@@ -1218,7 +1435,7 @@ class C
         public void SpecialTypes_More()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(System.IntPtr p) { }
     static void F(System.UIntPtr p) { }
@@ -1241,7 +1458,7 @@ class C
         public void Dynamic()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
 }
 class C
@@ -1265,7 +1482,7 @@ class C
         public void Iterator()
         {
             var source =
-@"class C
+                @"class C
 {
     static System.Collections.IEnumerable F() { yield break; }
 }";
@@ -1281,7 +1498,7 @@ class C
         public void Async()
         {
             var source =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class C
 {
     static async Task F()
@@ -1301,7 +1518,7 @@ class C
         public void Global()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(N.C o) { }
     static void F(global::C o) { }
@@ -1318,7 +1535,15 @@ namespace N
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.CSharpResolver;
-                Resolve(process, resolver, "C.F(C)", "C.F(N.C)", "C.F(C)", "N.C.F(N.C)", "N.C.F(C)");
+                Resolve(
+                    process,
+                    resolver,
+                    "C.F(C)",
+                    "C.F(N.C)",
+                    "C.F(C)",
+                    "N.C.F(N.C)",
+                    "N.C.F(C)"
+                );
                 Resolve(process, resolver, "C.F(N.C)", "C.F(N.C)", "N.C.F(N.C)");
                 Resolve(process, resolver, "global::C.F(C)", "C.F(N.C)", "C.F(C)"); // Dev14 does not bind global::
                 Resolve(process, resolver, "C.F(global::C)", "C.F(C)", "N.C.F(C)"); // Dev14 does not bind global::
@@ -1333,17 +1558,22 @@ namespace N
         [Fact]
         public void UnexpectedArity()
         {
-            var sourceA =
-@".class public A<T> { }";
+            var sourceA = @".class public A<T> { }";
             var sourceB =
-@"class B
+                @"class B
 {
     static void F(object o) { }
     static void F(A<object> a) { }
 }";
             ImmutableArray<byte> bytesA;
             ImmutableArray<byte> pdbA;
-            EmitILToArray(sourceA, appendDefaultHeader: true, includePdb: false, assemblyBytes: out bytesA, pdbBytes: out pdbA);
+            EmitILToArray(
+                sourceA,
+                appendDefaultHeader: true,
+                includePdb: false,
+                assemblyBytes: out bytesA,
+                pdbBytes: out pdbA
+            );
             var refA = AssemblyMetadata.CreateFromImage(bytesA).GetReference();
             var compilationB = CreateCompilation(sourceB, references: new[] { refA });
             var bytesB = compilationB.EmitToArray();
@@ -1362,7 +1592,7 @@ namespace N
         public void PInvoke()
         {
             var source =
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 class A
 {
     [DllImport(""extern.dll"")]
@@ -1380,8 +1610,12 @@ class B
             }
         }
 
-        private static void Resolve(Process process, Resolver resolver, string str, params string[] expectedSignatures)
-        {
+        private static void Resolve(
+            Process process,
+            Resolver resolver,
+            string str,
+            params string[] expectedSignatures
+        ) {
             var signature = MemberSignatureParser.Parse(str);
             Assert.NotNull(signature);
             Resolve(process, resolver, signature, expectedSignatures);

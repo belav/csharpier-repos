@@ -23,18 +23,29 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         [DataMember(Order = 3)]
         public readonly string?[] Arguments;
 
-        internal RudeEditDiagnostic(RudeEditKind kind, TextSpan span, ushort syntaxKind, string?[] arguments)
-        {
+        internal RudeEditDiagnostic(
+            RudeEditKind kind,
+            TextSpan span,
+            ushort syntaxKind,
+            string?[] arguments
+        ) {
             Kind = kind;
             Span = span;
             SyntaxKind = syntaxKind;
             Arguments = arguments;
         }
 
-        internal RudeEditDiagnostic(RudeEditKind kind, TextSpan span, SyntaxNode? node = null, string?[]? arguments = null)
-            : this(kind, span, (ushort)(node != null ? node.RawKind : 0), arguments ?? Array.Empty<string>())
-        {
-        }
+        internal RudeEditDiagnostic(
+            RudeEditKind kind,
+            TextSpan span,
+            SyntaxNode? node = null,
+            string?[]? arguments = null
+        ) : this(
+            kind,
+            span,
+            (ushort)(node != null ? node.RawKind : 0),
+            arguments ?? Array.Empty<string>()
+        ) { }
 
         internal Diagnostic ToDiagnostic(SyntaxTree tree)
         {

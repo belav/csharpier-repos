@@ -11,16 +11,28 @@ namespace System.ComponentModel.DataAnnotations.Tests
         protected override IEnumerable<TestCase> ValidValues()
         {
             yield return new TestCase(new RequiredAttribute(), "SomeString");
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = true }, string.Empty);
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = true }, " \t \r \n ");
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = true },
+                string.Empty
+            );
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = true },
+                " \t \r \n "
+            );
             yield return new TestCase(new RequiredAttribute(), new object());
         }
 
         protected override IEnumerable<TestCase> InvalidValues()
         {
             yield return new TestCase(new RequiredAttribute(), null);
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = false }, string.Empty);
-            yield return new TestCase(new RequiredAttribute() { AllowEmptyStrings = false }, " \t \r \n ");
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = false },
+                string.Empty
+            );
+            yield return new TestCase(
+                new RequiredAttribute() { AllowEmptyStrings = false },
+                " \t \r \n "
+            );
         }
 
         [Fact]

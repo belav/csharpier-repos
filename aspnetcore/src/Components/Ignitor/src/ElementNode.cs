@@ -69,21 +69,14 @@ namespace Ignitor
                 throw new InvalidOperationException("Element does not have a change event.");
             }
 
-            var args = new
-            {
-                Value = value
-            };
+            var args = new { Value = value };
 
             var webEventDescriptor = new WebEventDescriptor
             {
                 BrowserRendererId = 0,
                 EventHandlerId = changeEventDescriptor.EventId,
                 EventName = "change",
-                EventFieldInfo = new EventFieldInfo
-                {
-                    ComponentId = 0,
-                    FieldValue = value
-                }
+                EventFieldInfo = new EventFieldInfo { ComponentId = 0, FieldValue = value }
             };
 
             return DispatchEventCore(connection, Serialize(webEventDescriptor), Serialize(args));
@@ -96,11 +89,7 @@ namespace Ignitor
                 throw new InvalidOperationException("Element does not have a click event.");
             }
 
-            var mouseEventArgs = new
-            {
-                Type = clickEventDescriptor.EventName,
-                Detail = 1
-            };
+            var mouseEventArgs = new { Type = clickEventDescriptor.EventName, Detail = 1 };
             var webEventDescriptor = new WebEventDescriptor
             {
                 BrowserRendererId = 0,
@@ -108,14 +97,24 @@ namespace Ignitor
                 EventName = "click",
             };
 
-            return DispatchEventCore(connection, Serialize(webEventDescriptor), Serialize(mouseEventArgs));
+            return DispatchEventCore(
+                connection,
+                Serialize(webEventDescriptor),
+                Serialize(mouseEventArgs)
+            );
         }
 
         private static string Serialize<T>(T payload) =>
-             JsonSerializer.Serialize(payload, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            JsonSerializer.Serialize(
+                payload,
+                new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
+            );
 
-        private static Task DispatchEventCore(HubConnection connection, string descriptor, string eventArgs) =>
-            connection.InvokeAsync("DispatchBrowserEvent", descriptor, eventArgs);
+        private static Task DispatchEventCore(
+            HubConnection connection,
+            string descriptor,
+            string eventArgs
+        ) => connection.InvokeAsync("DispatchBrowserEvent", descriptor, eventArgs);
 
         public class ElementEventDescriptor
         {

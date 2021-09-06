@@ -14,9 +14,16 @@ namespace System.Diagnostics.Contracts
 
         internal Exception? thrownDuringHandler;
 
-        public ContractFailedEventArgs(ContractFailureKind failureKind, string? message, string? condition, Exception? originalException)
-        {
-            Debug.Assert(originalException == null || failureKind == ContractFailureKind.PostconditionOnException);
+        public ContractFailedEventArgs(
+            ContractFailureKind failureKind,
+            string? message,
+            string? condition,
+            Exception? originalException
+        ) {
+            Debug.Assert(
+                originalException == null
+                    || failureKind == ContractFailureKind.PostconditionOnException
+            );
             _failureKind = failureKind;
             _message = message;
             _condition = condition;

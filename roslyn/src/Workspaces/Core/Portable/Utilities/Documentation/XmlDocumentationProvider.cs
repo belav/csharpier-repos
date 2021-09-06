@@ -36,10 +36,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="xmlDocCommentBytes">The XML document bytes.</param>
         /// <returns>An <see cref="XmlDocumentationProvider"/>.</returns>
-        public static XmlDocumentationProvider CreateFromBytes(byte[] xmlDocCommentBytes)
-            => new ContentBasedXmlDocumentationProvider(xmlDocCommentBytes);
+        public static XmlDocumentationProvider CreateFromBytes(byte[] xmlDocCommentBytes) =>
+            new ContentBasedXmlDocumentationProvider(xmlDocCommentBytes);
 
-        private static XmlDocumentationProvider DefaultXmlDocumentationProvider { get; } = new NullXmlDocumentationProvider();
+        private static XmlDocumentationProvider DefaultXmlDocumentationProvider { get; } =
+            new NullXmlDocumentationProvider();
 
         /// <summary>
         /// Creates an <see cref="XmlDocumentationProvider"/> from an XML documentation file.
@@ -63,8 +64,11 @@ namespace Microsoft.CodeAnalysis
             return XDocument.Load(xmlReader);
         }
 
-        protected override string GetDocumentationForSymbol(string documentationMemberID, CultureInfo preferredCulture, CancellationToken cancellationToken = default)
-        {
+        protected override string GetDocumentationForSymbol(
+            string documentationMemberID,
+            CultureInfo preferredCulture,
+            CancellationToken cancellationToken = default
+        ) {
             if (_docComments == null)
             {
                 using (_gate.DisposableWait(cancellationToken))
@@ -93,13 +97,13 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return _docComments.TryGetValue(documentationMemberID, out var docComment) ? docComment : "";
+            return _docComments.TryGetValue(documentationMemberID, out var docComment)
+                ? docComment
+                : "";
         }
 
-        private static readonly XmlReaderSettings s_xmlSettings = new()
-        {
-            DtdProcessing = DtdProcessing.Prohibit,
-        };
+        private static readonly XmlReaderSettings s_xmlSettings =
+            new() { DtdProcessing = DtdProcessing.Prohibit, };
 
         private sealed class ContentBasedXmlDocumentationProvider : XmlDocumentationProvider
         {
@@ -112,8 +116,8 @@ namespace Microsoft.CodeAnalysis
                 _xmlDocCommentBytes = xmlDocCommentBytes;
             }
 
-            protected override Stream GetSourceStream(CancellationToken cancellationToken)
-                => SerializableBytes.CreateReadableStream(_xmlDocCommentBytes);
+            protected override Stream GetSourceStream(CancellationToken cancellationToken) =>
+                SerializableBytes.CreateReadableStream(_xmlDocCommentBytes);
 
             public override bool Equals(object obj)
             {
@@ -146,8 +150,7 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            public override int GetHashCode()
-                => Hash.CombineValues(_xmlDocCommentBytes);
+            public override int GetHashCode() => Hash.CombineValues(_xmlDocCommentBytes);
         }
 
         private sealed class FileBasedXmlDocumentationProvider : XmlDocumentationProvider
@@ -162,8 +165,8 @@ namespace Microsoft.CodeAnalysis
                 _filePath = filePath;
             }
 
-            protected override Stream GetSourceStream(CancellationToken cancellationToken)
-                => new FileStream(_filePath, FileMode.Open, FileAccess.Read);
+            protected override Stream GetSourceStream(CancellationToken cancellationToken) =>
+                new FileStream(_filePath, FileMode.Open, FileAccess.Read);
 
             public override bool Equals(object obj)
             {
@@ -171,8 +174,7 @@ namespace Microsoft.CodeAnalysis
                 return other != null && _filePath == other._filePath;
             }
 
-            public override int GetHashCode()
-                => _filePath.GetHashCode();
+            public override int GetHashCode() => _filePath.GetHashCode();
         }
 
         /// <summary>
@@ -180,11 +182,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private sealed class NullXmlDocumentationProvider : XmlDocumentationProvider
         {
-            protected override string GetDocumentationForSymbol(string documentationMemberID, CultureInfo preferredCulture, CancellationToken cancellationToken = default)
-                => "";
+            protected override string GetDocumentationForSymbol(
+                string documentationMemberID,
+                CultureInfo preferredCulture,
+                CancellationToken cancellationToken = default
+            ) => "";
 
-            protected override Stream GetSourceStream(CancellationToken cancellationToken)
-                => new MemoryStream();
+            protected override Stream GetSourceStream(CancellationToken cancellationToken) =>
+                new MemoryStream();
 
             public override bool Equals(object obj)
             {
@@ -192,8 +197,7 @@ namespace Microsoft.CodeAnalysis
                 return (object)this == obj;
             }
 
-            public override int GetHashCode()
-                => 0;
+            public override int GetHashCode() => 0;
         }
     }
 }

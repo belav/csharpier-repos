@@ -8,16 +8,17 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class UrlResolutionTest :
-        IClassFixture<MvcTestFixture<RazorWebSite.Startup>>,
-        IClassFixture<MvcEncodedTestFixture<RazorWebSite.Startup>>
+    public class UrlResolutionTest
+        : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>,
+          IClassFixture<MvcEncodedTestFixture<RazorWebSite.Startup>>
     {
-        private static readonly Assembly _resourcesAssembly = typeof(UrlResolutionTest).GetTypeInfo().Assembly;
+        private static readonly Assembly _resourcesAssembly =
+            typeof(UrlResolutionTest).GetTypeInfo().Assembly;
 
         public UrlResolutionTest(
             MvcTestFixture<RazorWebSite.Startup> fixture,
-            MvcEncodedTestFixture<RazorWebSite.Startup> encodedFixture)
-        {
+            MvcEncodedTestFixture<RazorWebSite.Startup> encodedFixture
+        ) {
             Client = fixture.CreateDefaultClient();
             EncodedClient = encodedFixture.CreateDefaultClient();
         }
@@ -31,8 +32,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var outputFile = "compiler/resources/RazorWebSite.UrlResolution.Index.html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             var response = await Client.GetAsync("http://localhost/UrlResolution/Index");
@@ -40,7 +44,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             responseContent = responseContent.Trim();
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile,
+                expectedContent,
+                responseContent
+            );
         }
 
         [Fact]
@@ -48,8 +57,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var outputFile = "compiler/resources/RazorWebSite.UrlResolution.Index.Encoded.html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             var response = await EncodedClient.GetAsync("http://localhost/UrlResolution/Index");
@@ -57,7 +69,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             responseContent = responseContent.Trim();
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile,
+                expectedContent,
+                responseContent
+            );
         }
     }
 }

@@ -8,10 +8,17 @@ internal class WrappedStream : Stream
 {
     private readonly Stream _baseStream;
     private readonly EventHandler _onClosed;
-    private bool _canRead, _canWrite, _canSeek;
+    private bool _canRead,
+        _canWrite,
+        _canSeek;
 
-    internal WrappedStream(Stream baseStream, bool canRead, bool canWrite, bool canSeek, EventHandler onClosed)
-    {
+    internal WrappedStream(
+        Stream baseStream,
+        bool canRead,
+        bool canWrite,
+        bool canSeek,
+        EventHandler onClosed
+    ) {
         _baseStream = baseStream;
         _onClosed = onClosed;
         _canRead = canRead;
@@ -39,7 +46,8 @@ internal class WrappedStream : Stream
                 throw new NotSupportedException("This stream does not support reading", ex);
             }
         }
-        else throw new NotSupportedException("This stream does not support reading");
+        else
+            throw new NotSupportedException("This stream does not support reading");
     }
 
     public override long Seek(long offset, SeekOrigin origin)
@@ -55,10 +63,14 @@ internal class WrappedStream : Stream
                 throw new NotSupportedException("This stream does not support seeking", ex);
             }
         }
-        else throw new NotSupportedException("This stream does not support seeking");
+        else
+            throw new NotSupportedException("This stream does not support seeking");
     }
 
-    public override void SetLength(long value) { _baseStream.SetLength(value); }
+    public override void SetLength(long value)
+    {
+        _baseStream.SetLength(value);
+    }
 
     public override void Write(byte[] buffer, int offset, int count)
     {
@@ -73,7 +85,8 @@ internal class WrappedStream : Stream
                 throw new NotSupportedException("This stream does not support writing", ex);
             }
         }
-        else throw new NotSupportedException("This stream does not support writing");
+        else
+            throw new NotSupportedException("This stream does not support writing");
     }
 
     public override bool CanRead => _canRead && _baseStream.CanRead;
@@ -105,7 +118,8 @@ internal class WrappedStream : Stream
                     throw new NotSupportedException("This stream does not support seeking", ex);
                 }
             }
-            else throw new NotSupportedException("This stream does not support seeking");
+            else
+                throw new NotSupportedException("This stream does not support seeking");
         }
     }
 

@@ -12,18 +12,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
     {
         public static ObjectCreationExpressionSyntax GetNewObjectCreation(
             ObjectCreationExpressionSyntax objectCreation,
-            SeparatedSyntaxList<ExpressionSyntax> expressions)
-        {
+            SeparatedSyntaxList<ExpressionSyntax> expressions
+        ) {
             var openBrace = SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
-                                         .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
+                .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
             var initializer = SyntaxFactory.InitializerExpression(
-                SyntaxKind.ObjectInitializerExpression, expressions).WithOpenBraceToken(openBrace);
+                    SyntaxKind.ObjectInitializerExpression,
+                    expressions
+                )
+                .WithOpenBraceToken(openBrace);
 
-            if (objectCreation.ArgumentList != null &&
-                objectCreation.ArgumentList.Arguments.Count == 0)
-            {
-                objectCreation = objectCreation.WithType(objectCreation.Type.WithTrailingTrivia(objectCreation.ArgumentList.GetTrailingTrivia()))
-                                               .WithArgumentList(null);
+            if (
+                objectCreation.ArgumentList != null
+                && objectCreation.ArgumentList.Arguments.Count == 0
+            ) {
+                objectCreation = objectCreation.WithType(
+                        objectCreation.Type.WithTrailingTrivia(
+                            objectCreation.ArgumentList.GetTrailingTrivia()
+                        )
+                    )
+                    .WithArgumentList(null);
             }
 
             return objectCreation.WithInitializer(initializer);

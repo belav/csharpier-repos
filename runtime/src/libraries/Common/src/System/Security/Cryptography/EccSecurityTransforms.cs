@@ -58,7 +58,11 @@ namespace System.Security.Cryptography
                     break;
                 default:
                     throw new PlatformNotSupportedException(
-                        SR.Format(SR.Cryptography_CurveNotSupported, curve.Oid.Value ?? curve.Oid.FriendlyName));
+                        SR.Format(
+                            SR.Cryptography_CurveNotSupported,
+                            curve.Oid.Value ?? curve.Oid.FriendlyName
+                        )
+                    );
             }
 
             GenerateKey(keySize);
@@ -115,11 +119,21 @@ namespace System.Security.Cryptography
             current?.Dispose();
         }
 
-        internal static ECParameters ExportPublicParametersFromPrivateKey(SafeSecKeyRefHandle handle)
-        {
+        internal static ECParameters ExportPublicParametersFromPrivateKey(
+            SafeSecKeyRefHandle handle
+        ) {
             const string ExportPassword = "DotnetExportPassphrase";
-            byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(handle, exportPrivate: true, password: ExportPassword);
-            EccKeyFormatHelper.ReadEncryptedPkcs8(keyBlob, ExportPassword, out _, out ECParameters key);
+            byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
+                handle,
+                exportPrivate: true,
+                password: ExportPassword
+            );
+            EccKeyFormatHelper.ReadEncryptedPkcs8(
+                keyBlob,
+                ExportPassword,
+                out _,
+                out ECParameters key
+            );
             CryptographicOperations.ZeroMemory(key.D);
             CryptographicOperations.ZeroMemory(keyBlob);
             key.D = null;
@@ -141,7 +155,8 @@ namespace System.Security.Cryptography
             byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                 includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                 exportPrivate: includePrivateParameters,
-                password: ExportPassword);
+                password: ExportPassword
+            );
 
             try
             {
@@ -150,7 +165,8 @@ namespace System.Security.Cryptography
                     EccKeyFormatHelper.ReadSubjectPublicKeyInfo(
                         keyBlob,
                         out int localRead,
-                        out ECParameters key);
+                        out ECParameters key
+                    );
                     return key;
                 }
                 else
@@ -159,10 +175,12 @@ namespace System.Security.Cryptography
                         keyBlob,
                         ExportPassword,
                         out int localRead,
-                        out ECParameters key);
+                        out ECParameters key
+                    );
                     return key;
                 }
             }
+
             finally
             {
                 CryptographicOperations.ZeroMemory(keyBlob);
@@ -259,30 +277,34 @@ namespace System.Security.Cryptography
 
             try
             {
-                return Interop.AppleCrypto.ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
+                return Interop.AppleCrypto.ImportEphemeralKey(
+                    rented.AsSpan(0, written),
+                    hasPrivateKey
+                );
             }
+
             finally
             {
                 CryptoPool.Return(rented, written);
             }
         }
 
-        internal unsafe int ImportSubjectPublicKeyInfo(
-            ReadOnlySpan<byte> source,
-            out int bytesRead)
+        internal unsafe int ImportSubjectPublicKeyInfo(ReadOnlySpan<byte> source, out int bytesRead)
         {
             ThrowIfDisposed();
 
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
-                {
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                ) {
                     // Validate the DER value and get the number of bytes.
-                    EccKeyFormatHelper.ReadSubjectPublicKeyInfo(
-                        manager.Memory,
-                        out int localRead);
+                    EccKeyFormatHelper.ReadSubjectPublicKeyInfo(manager.Memory, out int localRead);
 
-                    SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(source.Slice(0, localRead), false);
+                    SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
+                        source.Slice(0, localRead),
+                        false
+                    );
                     SecKeyPair newKeys = SecKeyPair.PublicOnly(publicKey);
                     int size = GetKeySize(newKeys);
                     SetKey(newKeys);

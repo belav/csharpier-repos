@@ -45,21 +45,24 @@ namespace System.IO.Pipes
             }
 
             // Let's try to connect first
-            SafePipeHandle handle = Interop.Kernel32.CreateNamedPipeClient(_normalizedPipePath,
-                                        access,           // read and write access
-                                        0,                  // sharing: none
-                                        ref secAttrs,           // security attributes
-                                        FileMode.Open,      // open existing
-                                        _pipeFlags,         // impersonation flags
-                                        IntPtr.Zero);  // template file: null
+            SafePipeHandle handle = Interop.Kernel32.CreateNamedPipeClient(
+                _normalizedPipePath,
+                access, // read and write access
+                0, // sharing: none
+                ref secAttrs, // security attributes
+                FileMode.Open, // open existing
+                _pipeFlags, // impersonation flags
+                IntPtr.Zero
+            ); // template file: null
 
             if (handle.IsInvalid)
             {
                 int errorCode = Marshal.GetLastWin32Error();
 
-                if (errorCode != Interop.Errors.ERROR_PIPE_BUSY &&
-                    errorCode != Interop.Errors.ERROR_FILE_NOT_FOUND)
-                {
+                if (
+                    errorCode != Interop.Errors.ERROR_PIPE_BUSY
+                    && errorCode != Interop.Errors.ERROR_FILE_NOT_FOUND
+                ) {
                     throw Win32Marshal.GetExceptionForWin32Error(errorCode);
                 }
 
@@ -68,9 +71,10 @@ namespace System.IO.Pipes
                     errorCode = Marshal.GetLastWin32Error();
 
                     // Server is not yet created or a timeout occurred before a pipe instance was available.
-                    if (errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND ||
-                        errorCode == Interop.Errors.ERROR_SEM_TIMEOUT)
-                    {
+                    if (
+                        errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                        || errorCode == Interop.Errors.ERROR_SEM_TIMEOUT
+                    ) {
                         return false;
                     }
 
@@ -78,13 +82,15 @@ namespace System.IO.Pipes
                 }
 
                 // Pipe server should be free.  Let's try to connect to it.
-                handle = Interop.Kernel32.CreateNamedPipeClient(_normalizedPipePath,
-                                            access,           // read and write access
-                                            0,                  // sharing: none
-                                            ref secAttrs,           // security attributes
-                                            FileMode.Open,      // open existing
-                                            _pipeFlags,         // impersonation flags
-                                            IntPtr.Zero);  // template file: null
+                handle = Interop.Kernel32.CreateNamedPipeClient(
+                    _normalizedPipePath,
+                    access, // read and write access
+                    0, // sharing: none
+                    ref secAttrs, // security attributes
+                    FileMode.Open, // open existing
+                    _pipeFlags, // impersonation flags
+                    IntPtr.Zero
+                ); // template file: null
 
                 if (handle.IsInvalid)
                 {
@@ -121,8 +127,17 @@ namespace System.IO.Pipes
                 // access request before calling NTCreateFile, so all NamedPipeClientStreams can read
                 // this if they are created (on WinXP SP2 at least)]
                 uint numInstances;
-                if (!Interop.Kernel32.GetNamedPipeHandleStateW(InternalHandle!, null, &numInstances, null, null, null, 0))
-                {
+                if (
+                    !Interop.Kernel32.GetNamedPipeHandleStateW(
+                        InternalHandle!,
+                        null,
+                        &numInstances,
+                        null,
+                        null,
+                        null,
+                        0
+                    )
+                ) {
                     throw WinIOError(Marshal.GetLastWin32Error());
                 }
 
@@ -143,7 +158,9 @@ namespace System.IO.Pipes
                 if (remoteOwnerSid != currentUserSid)
                 {
                     State = PipeState.Closed;
-                    throw new UnauthorizedAccessException(SR.UnauthorizedAccess_NotOwnedByCurrentUser);
+                    throw new UnauthorizedAccessException(
+                        SR.UnauthorizedAccess_NotOwnedByCurrentUser
+                    );
                 }
             }
         }

@@ -14,11 +14,11 @@ namespace System.Net.Security
 {
     internal sealed class CipherSuitesPolicyPal
     {
-        private static readonly byte[] AllowNoEncryptionDefault =
-            Encoding.ASCII.GetBytes("ALL:eNULL\0");
+        private static readonly byte[] AllowNoEncryptionDefault = Encoding.ASCII.GetBytes(
+            "ALL:eNULL\0"
+        );
 
-        private static readonly byte[] NoEncryptionDefault =
-            Encoding.ASCII.GetBytes("eNULL\0");
+        private static readonly byte[] NoEncryptionDefault = Encoding.ASCII.GetBytes("eNULL\0");
 
         private byte[] _cipherSuites;
         private byte[] _tls13CipherSuites;
@@ -30,11 +30,14 @@ namespace System.Net.Security
         {
             if (!Interop.Ssl.Tls13Supported)
             {
-                throw new PlatformNotSupportedException(SR.net_ssl_ciphersuites_policy_not_supported);
+                throw new PlatformNotSupportedException(
+                    SR.net_ssl_ciphersuites_policy_not_supported
+                );
             }
 
-            using (SafeSslContextHandle innerContext = Ssl.SslCtxCreate(Ssl.SslMethods.SSLv23_method))
-            {
+            using (
+                SafeSslContextHandle innerContext = Ssl.SslCtxCreate(Ssl.SslMethods.SSLv23_method)
+            ) {
                 if (innerContext.IsInvalid)
                 {
                     throw OpenSsl.CreateSslException(SR.net_allocate_ssl_context_failed);
@@ -55,7 +58,8 @@ namespace System.Net.Security
                             string? name = Interop.Ssl.GetOpenSslCipherSuiteName(
                                 ssl,
                                 cs,
-                                out bool isTls12OrLower);
+                                out bool isTls12OrLower
+                            );
 
                             if (name == null)
                             {
@@ -65,7 +69,9 @@ namespace System.Net.Security
                             }
 
                             _tlsCipherSuites.Add(cs);
-                            (isTls12OrLower ? cipherSuites : tls13CipherSuites).AllowCipherSuite(name);
+                            (isTls12OrLower ? cipherSuites : tls13CipherSuites).AllowCipherSuite(
+                                name
+                            );
                         }
 
                         _cipherSuites = cipherSuites.GetOpenSslString();
@@ -75,8 +81,10 @@ namespace System.Net.Security
             }
         }
 
-        internal static bool ShouldOptOutOfTls13(CipherSuitesPolicy? policy, EncryptionPolicy encryptionPolicy)
-        {
+        internal static bool ShouldOptOutOfTls13(
+            CipherSuitesPolicy? policy,
+            EncryptionPolicy encryptionPolicy
+        ) {
             // if TLS 1.3 was explicitly requested the underlying code will throw
             // if default option (SslProtocols.None) is used we will opt-out of TLS 1.3
 
@@ -94,16 +102,19 @@ namespace System.Net.Security
             }
 
             Debug.Assert(
-                policy.Pal._tls13CipherSuites.Length != 0 &&
-                    policy.Pal._tls13CipherSuites[policy.Pal._tls13CipherSuites.Length - 1] == 0,
-                "null terminated string expected");
+                policy.Pal._tls13CipherSuites.Length != 0
+                    && policy.Pal._tls13CipherSuites[policy.Pal._tls13CipherSuites.Length - 1] == 0,
+                "null terminated string expected"
+            );
 
             // we should opt out only when policy is empty
             return policy.Pal._tls13CipherSuites.Length == 1;
         }
 
-        internal static bool ShouldOptOutOfLowerThanTls13(CipherSuitesPolicy? policy, EncryptionPolicy encryptionPolicy)
-        {
+        internal static bool ShouldOptOutOfLowerThanTls13(
+            CipherSuitesPolicy? policy,
+            EncryptionPolicy encryptionPolicy
+        ) {
             if (policy == null)
             {
                 // null means default, by default OpenSSL will choose if it wants to opt-out or not
@@ -111,25 +122,25 @@ namespace System.Net.Security
             }
 
             Debug.Assert(
-                policy.Pal._cipherSuites.Length != 0 &&
-                    policy.Pal._cipherSuites[policy.Pal._cipherSuites.Length - 1] == 0,
-                "null terminated string expected");
+                policy.Pal._cipherSuites.Length != 0
+                    && policy.Pal._cipherSuites[policy.Pal._cipherSuites.Length - 1] == 0,
+                "null terminated string expected"
+            );
 
             // we should opt out only when policy is empty
             return policy.Pal._cipherSuites.Length == 1;
         }
 
-        private static bool IsOnlyTls13(SslProtocols protocols)
-            => protocols == SslProtocols.Tls13;
+        private static bool IsOnlyTls13(SslProtocols protocols) => protocols == SslProtocols.Tls13;
 
-        internal static bool WantsTls13(SslProtocols protocols)
-            => protocols == SslProtocols.None || (protocols & SslProtocols.Tls13) != 0;
+        internal static bool WantsTls13(SslProtocols protocols) =>
+            protocols == SslProtocols.None || (protocols & SslProtocols.Tls13) != 0;
 
         internal static byte[]? GetOpenSslCipherList(
             CipherSuitesPolicy? policy,
             SslProtocols protocols,
-            EncryptionPolicy encryptionPolicy)
-        {
+            EncryptionPolicy encryptionPolicy
+        ) {
             if (IsOnlyTls13(protocols))
             {
                 // older cipher suites will be disabled through protocols
@@ -143,7 +154,9 @@ namespace System.Net.Security
 
             if (encryptionPolicy == EncryptionPolicy.NoEncryption)
             {
-                throw new PlatformNotSupportedException(SR.net_ssl_ciphersuites_policy_not_supported);
+                throw new PlatformNotSupportedException(
+                    SR.net_ssl_ciphersuites_policy_not_supported
+                );
             }
 
             return policy.Pal._cipherSuites;
@@ -152,8 +165,8 @@ namespace System.Net.Security
         internal static byte[]? GetOpenSslCipherSuites(
             CipherSuitesPolicy? policy,
             SslProtocols protocols,
-            EncryptionPolicy encryptionPolicy)
-        {
+            EncryptionPolicy encryptionPolicy
+        ) {
             if (!WantsTls13(protocols) || policy == null)
             {
                 // do not call TLS 1.3 API, let OpenSSL choose what to do
@@ -162,7 +175,9 @@ namespace System.Net.Security
 
             if (encryptionPolicy == EncryptionPolicy.NoEncryption)
             {
-                throw new PlatformNotSupportedException(SR.net_ssl_ciphersuites_policy_not_supported);
+                throw new PlatformNotSupportedException(
+                    SR.net_ssl_ciphersuites_policy_not_supported
+                );
             }
 
             return policy.Pal._tls13CipherSuites;

@@ -14,8 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SyntaxNode root,
             RazorSourceDocument source,
             IEnumerable<RazorDiagnostic> diagnostics,
-            RazorParserOptions options)
-        {
+            RazorParserOptions options
+        ) {
             if (root == null)
             {
                 throw new ArgumentNullException(nameof(root));
@@ -36,7 +36,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(options));
             }
 
-            return new DefaultRazorSyntaxTree(root, source, new List<RazorDiagnostic>(diagnostics), options);
+            return new DefaultRazorSyntaxTree(
+                root,
+                source,
+                new List<RazorDiagnostic>(diagnostics),
+                options
+            );
         }
 
         public static RazorSyntaxTree Parse(RazorSourceDocument source)

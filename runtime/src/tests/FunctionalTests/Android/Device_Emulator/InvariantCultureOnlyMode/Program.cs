@@ -10,7 +10,10 @@ public static class Program
     {
         var culture = new CultureInfo("es-ES", false);
         // https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md#cultures-and-culture-data
-        int result = culture.LCID == 0x1000 && culture.NativeName == "Invariant Language (Invariant Country)" ? 42 : 1;
+        int result =
+            culture.LCID == 0x1000 && culture.NativeName == "Invariant Language (Invariant Country)"
+                ? 42
+                : 1;
 
         return result;
     }

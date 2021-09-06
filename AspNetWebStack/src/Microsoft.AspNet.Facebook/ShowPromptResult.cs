@@ -15,9 +15,6 @@ namespace Microsoft.AspNet.Facebook
         /// Creates a JavaScript based redirect <see cref="ActionResult"/>.
         /// </summary>
         /// <param name="promptUrl">The url that the prompt exists at.</param>
-        public ShowPromptResult(Uri promptUrl)
-            : base(promptUrl)
-        {
-        }
+        public ShowPromptResult(Uri promptUrl) : base(promptUrl) { }
     }
 }

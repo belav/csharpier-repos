@@ -26,10 +26,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 bool selectionInExpression,
                 SemanticDocument document,
                 SyntaxAnnotation firstTokenAnnotation,
-                SyntaxAnnotation lastTokenAnnotation)
-                : base(status, originalSpan, finalSpan, options, selectionInExpression, document, firstTokenAnnotation, lastTokenAnnotation)
-            {
-            }
+                SyntaxAnnotation lastTokenAnnotation
+            ) : base(
+                status,
+                originalSpan,
+                finalSpan,
+                options,
+                selectionInExpression,
+                document,
+                firstTokenAnnotation,
+                lastTokenAnnotation
+            ) { }
 
             public override bool ContainingScopeHasAsyncKeyword()
             {
@@ -39,9 +46,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     AccessorDeclarationSyntax _ => false,
                     MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                    ParenthesizedLambdaExpressionSyntax lambda => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
-                    SimpleLambdaExpressionSyntax lambda => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
-                    AnonymousMethodExpressionSyntax anonymous => anonymous.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                    ParenthesizedLambdaExpressionSyntax lambda
+                      => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                    SimpleLambdaExpressionSyntax lambda
+                      => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                    AnonymousMethodExpressionSyntax anonymous
+                      => anonymous.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
                     _ => false,
                 };
             }
@@ -53,17 +63,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 // it contains statements
                 var firstToken = GetFirstTokenInSelection();
-                return firstToken.GetAncestors<SyntaxNode>().FirstOrDefault(n =>
-                {
-                    return n is AccessorDeclarationSyntax ||
-                           n is LocalFunctionStatementSyntax ||
-                           n is BaseMethodDeclarationSyntax ||
-                           n is AccessorDeclarationSyntax ||
-                           n is ParenthesizedLambdaExpressionSyntax ||
-                           n is SimpleLambdaExpressionSyntax ||
-                           n is AnonymousMethodExpressionSyntax ||
-                           n is CompilationUnitSyntax;
-                });
+                return firstToken.GetAncestors<SyntaxNode>()
+                    .FirstOrDefault(
+                        n =>
+                        {
+                            return n is AccessorDeclarationSyntax
+                                || n is LocalFunctionStatementSyntax
+                                || n is BaseMethodDeclarationSyntax
+                                || n is AccessorDeclarationSyntax
+                                || n is ParenthesizedLambdaExpressionSyntax
+                                || n is SimpleLambdaExpressionSyntax
+                                || n is AnonymousMethodExpressionSyntax
+                                || n is CompilationUnitSyntax;
+                        }
+                    );
             }
 
             public override ITypeSymbol GetContainingScopeType()

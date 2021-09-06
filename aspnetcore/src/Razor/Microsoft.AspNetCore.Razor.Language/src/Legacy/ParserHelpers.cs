@@ -29,8 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             // We want to handle both LF and CRLF regardless of the platform.
             // We explicitly check for CRLF and IsNewLine() should return true for LF.
-            return (value.Length == 1 && (IsNewLine(value[0]))) ||
-                   (string.Equals(value, "\r\n", StringComparison.Ordinal));
+            return (value.Length == 1 && (IsNewLine(value[0])))
+                || (string.Equals(value, "\r\n", StringComparison.Ordinal));
         }
 
         public static bool IsIdentifier(string value)
@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 identifierPart = identifierPart.Skip(1);
             }
-            return (!requireIdentifierStart || IsIdentifierStart(value[0])) && identifierPart.All(IsIdentifierPart);
+            return (!requireIdentifierStart || IsIdentifierStart(value[0]))
+                && identifierPart.All(IsIdentifierPart);
         }
 
         public static bool IsIdentifierStart(char value)
@@ -71,21 +72,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             var cat = CharUnicodeInfo.GetUnicodeCategory(value);
 
-            return cat == UnicodeCategory.SpacingCombiningMark || cat == UnicodeCategory.NonSpacingMark;
+            return cat == UnicodeCategory.SpacingCombiningMark
+                || cat == UnicodeCategory.NonSpacingMark;
         }
 
         public static bool IsConnecting(char value)
         {
-            return CharUnicodeInfo.GetUnicodeCategory(value) == UnicodeCategory.ConnectorPunctuation;
+            return CharUnicodeInfo.GetUnicodeCategory(value)
+                == UnicodeCategory.ConnectorPunctuation;
         }
 
         public static bool IsWhitespace(char value)
         {
-            return value == ' ' ||
-                   value == '\f' ||
-                   value == '\t' ||
-                   value == '\u000B' || // Vertical Tab
-                   CharUnicodeInfo.GetUnicodeCategory(value) == UnicodeCategory.SpaceSeparator;
+            return value == ' '
+                || value == '\f'
+                || value == '\t'
+                || value == '\u000B'
+                || // Vertical Tab
+                CharUnicodeInfo.GetUnicodeCategory(value) == UnicodeCategory.SpaceSeparator;
         }
 
         public static bool IsLetter(char value)
@@ -93,11 +97,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var cat = CharUnicodeInfo.GetUnicodeCategory(value);
 
             return cat == UnicodeCategory.UppercaseLetter
-                   || cat == UnicodeCategory.LowercaseLetter
-                   || cat == UnicodeCategory.TitlecaseLetter
-                   || cat == UnicodeCategory.ModifierLetter
-                   || cat == UnicodeCategory.OtherLetter
-                   || cat == UnicodeCategory.LetterNumber;
+                || cat == UnicodeCategory.LowercaseLetter
+                || cat == UnicodeCategory.TitlecaseLetter
+                || cat == UnicodeCategory.ModifierLetter
+                || cat == UnicodeCategory.OtherLetter
+                || cat == UnicodeCategory.LetterNumber;
         }
 
         public static bool IsDecimalDigit(char value)
@@ -106,8 +110,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         }
 
         // From http://dev.w3.org/html5/spec/Overview.html#elements-0
-        public static readonly HashSet<string> VoidElements = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
+        public static readonly HashSet<string> VoidElements = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        ) {
             "area",
             "base",
             "br",
@@ -129,7 +134,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         #region HtmlEntities
 
         // From https://www.w3.org/TR/html5/syntax.html#named-character-references
-        public static readonly Dictionary<string, string> NamedHtmlEntities = new Dictionary<string, string>()
+        public static readonly Dictionary<string, string> NamedHtmlEntities = new Dictionary<
+            string,
+            string
+        >()
         {
             { "&Aacute;", "\u00C1" },
             { "&Aacute", "\u00C1" },
@@ -2364,7 +2372,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             { "&zwnj;", "\u200C" },
         };
 
-        public static readonly Dictionary<int, string> HtmlEntityCodePoints = new Dictionary<int, string>()
+        public static readonly Dictionary<int, string> HtmlEntityCodePoints = new Dictionary<
+            int,
+            string
+        >()
         {
             { 193, "\u00C1" },
             { 225, "\u00E1" },
@@ -3813,7 +3824,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             { 8205, "\u200D" },
             { 8204, "\u200C" },
         };
-
         #endregion
     }
 }

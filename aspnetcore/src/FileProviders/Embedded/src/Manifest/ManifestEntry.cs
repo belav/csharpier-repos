@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
 
             Parent = directory;
         }
-        
+
         public abstract ManifestEntry Traverse(StringSegment segment);
     }
 }

@@ -25,9 +25,7 @@ namespace Test
             {
                 Static3(null, Method1((int)Static3(null, new AA().m_nField2 + 2)[0])[0]);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return 100;
         }
     }

@@ -90,7 +90,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
         public readonly object Left;
         public readonly object? Right;
 
-        public BooleanQueryExpression(QueryOperator @operator, object left, object? right) : base(@operator)
+        public BooleanQueryExpression(QueryOperator @operator, object left, object? right)
+            : base(@operator)
         {
             Left = left;
             Right = right;
@@ -123,7 +124,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 if (leftResults.MoveNext())
                 {
                     IEnumerable<JToken> rightResultsEn = GetResult(root, t, Right);
-                    ICollection<JToken> rightResults = rightResultsEn as ICollection<JToken> ?? rightResultsEn.ToList();
+                    ICollection<JToken> rightResults =
+                        rightResultsEn as ICollection<JToken> ?? rightResultsEn.ToList();
 
                     do
                     {
@@ -142,8 +144,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
             return false;
         }
 
-        private bool MatchTokens(JToken leftResult, JToken rightResult, JsonSelectSettings? settings)
-        {
+        private bool MatchTokens(
+            JToken leftResult,
+            JToken rightResult,
+            JsonSelectSettings? settings
+        ) {
             if (leftResult is JValue leftValue && rightResult is JValue rightValue)
             {
                 switch (Operator)
@@ -236,9 +241,18 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
 #if HAVE_REGEX_TIMEOUTS
             TimeSpan timeout = settings?.RegexMatchTimeout ?? Regex.InfiniteMatchTimeout;
-            return Regex.IsMatch((string)input.Value!, patternText, MiscellaneousUtils.GetRegexOptions(optionsText), timeout);
+            return Regex.IsMatch(
+                (string)input.Value!,
+                patternText,
+                MiscellaneousUtils.GetRegexOptions(optionsText),
+                timeout
+            );
 #else
-            return Regex.IsMatch((string)input.Value!, patternText, MiscellaneousUtils.GetRegexOptions(optionsText));
+            return Regex.IsMatch(
+                (string)input.Value!,
+                patternText,
+                MiscellaneousUtils.GetRegexOptions(optionsText)
+            );
 #endif
         }
 
@@ -251,9 +265,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
             // Handle comparing an integer with a float
             // e.g. Comparing 1 and 1.0
-            if ((value.Type == JTokenType.Integer && queryValue.Type == JTokenType.Float)
-                || (value.Type == JTokenType.Float && queryValue.Type == JTokenType.Integer))
-            {
+            if (
+                (value.Type == JTokenType.Integer && queryValue.Type == JTokenType.Float)
+                || (value.Type == JTokenType.Float && queryValue.Type == JTokenType.Integer)
+            ) {
                 return JValue.Compare(value.Type, value.Value, queryValue.Value) == 0;
             }
 
@@ -275,12 +290,24 @@ namespace Newtonsoft.Json.Linq.JsonPath
 #if HAVE_DATE_TIME_OFFSET
                         if (value.Value is DateTimeOffset offset)
                         {
-                            DateTimeUtils.WriteDateTimeOffsetString(writer, offset, DateFormatHandling.IsoDateFormat, null, CultureInfo.InvariantCulture);
+                            DateTimeUtils.WriteDateTimeOffsetString(
+                                writer,
+                                offset,
+                                DateFormatHandling.IsoDateFormat,
+                                null,
+                                CultureInfo.InvariantCulture
+                            );
                         }
                         else
 #endif
                         {
-                            DateTimeUtils.WriteDateTimeString(writer, (DateTime)value.Value!, DateFormatHandling.IsoDateFormat, null, CultureInfo.InvariantCulture);
+                            DateTimeUtils.WriteDateTimeString(
+                                writer,
+                                (DateTime)value.Value!,
+                                DateFormatHandling.IsoDateFormat,
+                                null,
+                                CultureInfo.InvariantCulture
+                            );
                         }
 
                         currentValueString = writer.ToString();
@@ -310,9 +337,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
             // Handle comparing an integer with a float
             // e.g. Comparing 1 and 1.0
-            if ((value.Type == JTokenType.Integer && queryValue.Type == JTokenType.Float)
-                || (value.Type == JTokenType.Float && queryValue.Type == JTokenType.Integer))
-            {
+            if (
+                (value.Type == JTokenType.Integer && queryValue.Type == JTokenType.Float)
+                || (value.Type == JTokenType.Float && queryValue.Type == JTokenType.Integer)
+            ) {
                 return JValue.Compare(value.Type, value.Value, queryValue.Value) == 0;
             }
 

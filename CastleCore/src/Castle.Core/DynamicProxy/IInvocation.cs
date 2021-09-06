@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,72 +14,72 @@
 
 namespace Castle.DynamicProxy
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	/// <summary>
+    /// <summary>
 	///   Encapsulates an invocation of a proxied method.
 	/// </summary>
-	public interface IInvocation
-	{
-		/// <summary>
+    public interface IInvocation
+    {
+        /// <summary>
 		///   Gets the arguments that the <see cref = "Method" /> has been invoked with.
 		/// </summary>
 		/// <value>The arguments the method was invoked with.</value>
-		object[] Arguments { get; }
+        object[] Arguments { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the generic arguments of the method.
 		/// </summary>
 		/// <value>The generic arguments, or null if not a generic method.</value>
-		Type[] GenericArguments { get; }
+        Type[] GenericArguments { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the object on which the invocation is performed. This is different from proxy object
 		///   because most of the time this will be the proxy target object.
 		/// </summary>
 		/// <seealso cref = "IChangeProxyTarget" />
 		/// <value>The invocation target.</value>
-		object InvocationTarget { get; }
+        object InvocationTarget { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the <see cref = "MethodInfo" /> representing the method being invoked on the proxy.
 		/// </summary>
 		/// <value>The <see cref = "MethodInfo" /> representing the method being invoked.</value>
-		MethodInfo Method { get; }
+        MethodInfo Method { get; }
 
-		/// <summary>
+        /// <summary>
 		///   For interface proxies, this will point to the <see cref = "MethodInfo" /> on the target class.
 		/// </summary>
 		/// <value>The method invocation target.</value>
-		MethodInfo MethodInvocationTarget { get; }
+        MethodInfo MethodInvocationTarget { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the proxy object on which the intercepted method is invoked.
 		/// </summary>
 		/// <value>Proxy object on which the intercepted method is invoked.</value>
-		object Proxy { get; }
+        object Proxy { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets or sets the return value of the method.
 		/// </summary>
 		/// <value>The return value of the method.</value>
-		object ReturnValue { get; set; }
+        object ReturnValue { get; set; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the type of the target object for the intercepted method.
 		/// </summary>
 		/// <value>The type of the target object.</value>
-		Type TargetType { get; }
+        Type TargetType { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the value of the argument at the specified <paramref name = "index" />.
 		/// </summary>
 		/// <param name = "index">The index.</param>
 		/// <returns>The value of the argument at the specified <paramref name = "index" />.</returns>
-		object GetArgumentValue(int index);
+        object GetArgumentValue(int index);
 
-		/// <summary>
+        /// <summary>
 		///   Returns the concrete instantiation of the <see cref = "Method" /> on the proxy, with any generic
 		///   parameters bound to real types.
 		/// </summary>
@@ -90,9 +90,9 @@ namespace Castle.DynamicProxy
 		/// <remarks>
 		///   Can be slower than calling <see cref = "Method" />.
 		/// </remarks>
-		MethodInfo GetConcreteMethod();
+        MethodInfo GetConcreteMethod();
 
-		/// <summary>
+        /// <summary>
 		///   Returns the concrete instantiation of <see cref = "MethodInvocationTarget" />, with any
 		///   generic parameters bound to real types.
 		///   For interface proxies, this will point to the <see cref = "MethodInfo" /> on the target class.
@@ -102,9 +102,9 @@ namespace Castle.DynamicProxy
 		/// <remarks>
 		///   In debug builds this can be slower than calling <see cref = "MethodInvocationTarget" />.
 		/// </remarks>
-		MethodInfo GetConcreteMethodInvocationTarget();
+        MethodInfo GetConcreteMethodInvocationTarget();
 
-		/// <summary>
+        /// <summary>
 		///   Proceeds the call to the next interceptor in line, and ultimately to the target method.
 		/// </summary>
 		/// <remarks>
@@ -112,15 +112,15 @@ namespace Castle.DynamicProxy
 		///   it is important, that the last interceptor does not call this method, otherwise a
 		///   <see cref = "NotImplementedException" /> will be thrown.
 		/// </remarks>
-		void Proceed();
+        void Proceed();
 
-		/// <summary>
+        /// <summary>
 		///   Returns an object describing the <see cref="Proceed"/> operation for this <see cref="IInvocation"/>
 		///   at this specific point during interception.
 		/// </summary>
-		IInvocationProceedInfo CaptureProceedInfo();
+        IInvocationProceedInfo CaptureProceedInfo();
 
-		/// <summary>
+        /// <summary>
 		///   Overrides the value of an argument at the given <paramref name = "index" /> with the
 		///   new <paramref name = "value" /> provided.
 		/// </summary>
@@ -130,6 +130,6 @@ namespace Castle.DynamicProxy
 		/// </remarks>
 		/// <param name = "index">The index of the argument to override.</param>
 		/// <param name = "value">The new value for the argument.</param>
-		void SetArgumentValue(int index, object value);
-	}
+        void SetArgumentValue(int index, object value);
+    }
 }

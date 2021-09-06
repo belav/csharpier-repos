@@ -16,6 +16,8 @@ namespace Microsoft.AspNetCore.Authorization
         /// </summary>
         /// <param name="context">The <see cref="AuthorizationHandlerContext"/>.</param>
         /// <returns>The list of handlers.</returns>
-        Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(AuthorizationHandlerContext context);
+        Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(
+            AuthorizationHandlerContext context
+        );
     }
 }

@@ -14,13 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             Properties = properties;
         }
 
-        public IReadOnlyList<LifecycleProperty> Properties { get;  }
+        public IReadOnlyList<LifecycleProperty> Properties { get; }
 
         public object Subject { get; set; }
 
-        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-        {
-        }
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
 
         public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
@@ -28,9 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             context.HttpContext.Features.Set<IViewDataValuesProviderFeature>(this);
         }
 
-        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
-        {
-        }
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
 
         public void ProvideViewDataValues(ViewDataDictionary viewData)
         {

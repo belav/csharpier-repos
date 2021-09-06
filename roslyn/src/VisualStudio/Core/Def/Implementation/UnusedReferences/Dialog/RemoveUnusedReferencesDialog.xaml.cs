@@ -17,22 +17,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
     internal partial class RemoveUnusedReferencesDialog : DialogWindow
     {
         public string RemoveUnusedReferences => ServicesVSResources.Remove_Unused_References;
-        public string HelpText => ServicesVSResources.Choose_which_action_you_would_like_to_perform_on_the_unused_references;
+        public string HelpText =>
+            ServicesVSResources.Choose_which_action_you_would_like_to_perform_on_the_unused_references;
         public string Apply => ServicesVSResources.Apply;
         public string Cancel => ServicesVSResources.Cancel;
 
         private readonly UnusedReferencesTableProvider _tableProvider;
 
-        public RemoveUnusedReferencesDialog(UnusedReferencesTableProvider tableProvider)
-            : base()
+        public RemoveUnusedReferencesDialog(UnusedReferencesTableProvider tableProvider) : base()
         {
             _tableProvider = tableProvider;
 
             InitializeComponent();
         }
 
-        public bool? ShowModal(Solution solution, string projectFilePath, ImmutableArray<ReferenceUpdate> referenceUpdates)
-        {
+        public bool? ShowModal(
+            Solution solution,
+            string projectFilePath,
+            ImmutableArray<ReferenceUpdate> referenceUpdates
+        ) {
             bool? result = null;
 
             try
@@ -50,6 +53,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
                 TablePanel.Child = null;
             }
+
             finally
             {
                 // Ensure we clear out the table data to prevent leaks.

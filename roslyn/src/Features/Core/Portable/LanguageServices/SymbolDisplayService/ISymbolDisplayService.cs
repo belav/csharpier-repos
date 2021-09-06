@@ -14,9 +14,38 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 {
     internal interface ISymbolDisplayService : ILanguageService
     {
-        Task<string> ToDescriptionStringAsync(Workspace workspace, SemanticModel semanticModel, int position, ISymbol symbol, SymbolDescriptionGroups groups = SymbolDescriptionGroups.All, CancellationToken cancellationToken = default);
-        Task<string> ToDescriptionStringAsync(Workspace workspace, SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionGroups groups = SymbolDescriptionGroups.All, CancellationToken cancellationToken = default);
-        Task<ImmutableArray<SymbolDisplayPart>> ToDescriptionPartsAsync(Workspace workspace, SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionGroups groups = SymbolDescriptionGroups.All, CancellationToken cancellationToken = default);
-        Task<IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>> ToDescriptionGroupsAsync(Workspace workspace, SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, CancellationToken cancellationToken = default);
+        Task<string> ToDescriptionStringAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ISymbol symbol,
+            SymbolDescriptionGroups groups = SymbolDescriptionGroups.All,
+            CancellationToken cancellationToken = default
+        );
+        Task<string> ToDescriptionStringAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionGroups groups = SymbolDescriptionGroups.All,
+            CancellationToken cancellationToken = default
+        );
+        Task<ImmutableArray<SymbolDisplayPart>> ToDescriptionPartsAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionGroups groups = SymbolDescriptionGroups.All,
+            CancellationToken cancellationToken = default
+        );
+        Task<
+            IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>
+        > ToDescriptionGroupsAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            CancellationToken cancellationToken = default
+        );
     }
 }

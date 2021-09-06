@@ -48,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public CSharpMigrationsGeneratorDependencies(
             ICSharpHelper csharpHelper,
             ICSharpMigrationOperationGenerator csharpMigrationOperationGenerator,
-            ICSharpSnapshotGenerator csharpSnapshotGenerator)
-        {
+            ICSharpSnapshotGenerator csharpSnapshotGenerator
+        ) {
             CSharpHelper = csharpHelper;
             CSharpMigrationOperationGenerator = csharpMigrationOperationGenerator;
             CSharpSnapshotGenerator = csharpSnapshotGenerator;

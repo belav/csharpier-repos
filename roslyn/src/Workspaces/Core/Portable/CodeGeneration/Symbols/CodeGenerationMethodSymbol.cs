@@ -33,9 +33,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ImmutableArray<AttributeData> returnTypeAttributes,
             string documentationCommentXml = null,
             MethodKind methodKind = MethodKind.Ordinary,
-            bool isInitOnly = false)
-            : base(containingType, attributes, declaredAccessibility, modifiers, name, returnTypeAttributes, documentationCommentXml)
-        {
+            bool isInitOnly = false
+        ) : base(
+            containingType,
+            attributes,
+            declaredAccessibility,
+            modifiers,
+            name,
+            returnTypeAttributes,
+            documentationCommentXml
+        ) {
             this.ReturnType = returnType;
             this.RefKind = refKind;
 
@@ -52,48 +59,55 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected override CodeGenerationSymbol Clone()
         {
-            var result = new CodeGenerationMethodSymbol(this.ContainingType,
-                this.GetAttributes(), this.DeclaredAccessibility, this.Modifiers,
-                this.ReturnType, this.RefKind, this.ExplicitInterfaceImplementations,
-                this.Name, this.TypeParameters, this.Parameters, this.GetReturnTypeAttributes(),
-                _documentationCommentXml, this.MethodKind, this.IsInitOnly);
+            var result = new CodeGenerationMethodSymbol(
+                this.ContainingType,
+                this.GetAttributes(),
+                this.DeclaredAccessibility,
+                this.Modifiers,
+                this.ReturnType,
+                this.RefKind,
+                this.ExplicitInterfaceImplementations,
+                this.Name,
+                this.TypeParameters,
+                this.Parameters,
+                this.GetReturnTypeAttributes(),
+                _documentationCommentXml,
+                this.MethodKind,
+                this.IsInitOnly
+            );
 
-            CodeGenerationMethodInfo.Attach(result,
+            CodeGenerationMethodInfo.Attach(
+                result,
                 CodeGenerationMethodInfo.GetIsNew(this),
                 CodeGenerationMethodInfo.GetIsUnsafe(this),
                 CodeGenerationMethodInfo.GetIsPartial(this),
                 CodeGenerationMethodInfo.GetIsAsyncMethod(this),
                 CodeGenerationMethodInfo.GetStatements(this),
-                CodeGenerationMethodInfo.GetHandlesExpressions(this));
+                CodeGenerationMethodInfo.GetHandlesExpressions(this)
+            );
 
             return result;
         }
 
         public override int Arity => this.TypeParameters.Length;
 
-        public override bool ReturnsVoid
-            => this.ReturnType == null || this.ReturnType.SpecialType == SpecialType.System_Void;
+        public override bool ReturnsVoid =>
+            this.ReturnType == null || this.ReturnType.SpecialType == SpecialType.System_Void;
 
         public override bool ReturnsByRef
         {
-            get
-            {
-                return RefKind == RefKind.Ref;
-            }
+            get { return RefKind == RefKind.Ref; }
         }
 
         public override bool ReturnsByRefReadonly
         {
-            get
-            {
-                return RefKind == RefKind.RefReadOnly;
-            }
+            get { return RefKind == RefKind.RefReadOnly; }
         }
 
         public override RefKind RefKind { get; }
 
-        public override ImmutableArray<ITypeSymbol> TypeArguments
-            => this.TypeParameters.As<ITypeSymbol>();
+        public override ImmutableArray<ITypeSymbol> TypeArguments =>
+            this.TypeParameters.As<ITypeSymbol>();
 
         public override IMethodSymbol ConstructedFrom => this;
 
@@ -106,11 +120,11 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override IMethodSymbol ReducedFrom => null;
 
-        public override ITypeSymbol GetTypeInferredDuringReduction(ITypeParameterSymbol reducedFromTypeParameter)
-            => throw new InvalidOperationException();
+        public override ITypeSymbol GetTypeInferredDuringReduction(
+            ITypeParameterSymbol reducedFromTypeParameter
+        ) => throw new InvalidOperationException();
 
-        public override IMethodSymbol ReduceExtensionMethod(ITypeSymbol receiverType)
-            => null;
+        public override IMethodSymbol ReduceExtensionMethod(ITypeSymbol receiverType) => null;
 
         public override IMethodSymbol PartialImplementationPart => null;
 

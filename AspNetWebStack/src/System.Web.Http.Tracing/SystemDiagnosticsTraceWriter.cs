@@ -22,19 +22,14 @@ namespace System.Web.Http.Tracing
         {
             // TraceLevel.Off
             (TraceEventType)0,
-
             // TraceLevel.Debug
             TraceEventType.Verbose,
-
             // TraceLevel.Info
             TraceEventType.Information,
-
             // TraceLevel.Warn
             TraceEventType.Warning,
-
             // TraceLevel.Error
             TraceEventType.Error,
-
             // TraceLevel.Fatal
             TraceEventType.Critical
         };
@@ -51,17 +46,16 @@ namespace System.Web.Http.Tracing
         /// </value>
         public TraceLevel MinimumLevel
         {
-            get
-            {
-                return _minLevel;
-            }
+            get { return _minLevel; }
             set
             {
                 if (value < TraceLevel.Off || value > TraceLevel.Fatal)
                 {
-                    throw Error.ArgumentOutOfRange("value",
-                                                    value,
-                                                    SRResources.TraceLevelOutOfRange);
+                    throw Error.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SRResources.TraceLevelOutOfRange
+                    );
                 }
 
                 _minLevel = value;
@@ -105,8 +99,12 @@ namespace System.Web.Http.Tracing
         /// <see cref="MinimumLevel"/>, this trace request will be ignored.</param>
         /// <param name="traceAction">The user callback to invoke to fill in a <see cref="TraceRecord"/>
         /// with additional information to add to the trace.</param>
-        public virtual void Trace(HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction)
-        {
+        public virtual void Trace(
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Action<TraceRecord> traceAction
+        ) {
             if (category == null)
             {
                 throw Error.ArgumentNull("category");
@@ -119,9 +117,7 @@ namespace System.Web.Http.Tracing
 
             if (level < TraceLevel.Off || level > TraceLevel.Fatal)
             {
-                throw Error.ArgumentOutOfRange("level",
-                                                level,
-                                                SRResources.TraceLevelOutOfRange);
+                throw Error.ArgumentOutOfRange("level", level, SRResources.TraceLevelOutOfRange);
             }
 
             if (MinimumLevel == TraceLevel.Off || level < MinimumLevel)
@@ -158,8 +154,13 @@ namespace System.Web.Http.Tracing
             // The first and last traces are injected by the tracing system itself.
             // We use these to format unique strings identifying the incoming request
             // and the outgoing response.
-            if (String.Equals(traceRecord.Category, SystemWebHttpRequestCategory, StringComparison.Ordinal))
-            {
+            if (
+                String.Equals(
+                    traceRecord.Category,
+                    SystemWebHttpRequestCategory,
+                    StringComparison.Ordinal
+                )
+            ) {
                 return FormatRequestEnvelope(traceRecord);
             }
 
@@ -176,10 +177,14 @@ namespace System.Web.Http.Tracing
             }
             else
             {
-                messages.Add(Error.Format(SRResources.TimeLevelKindFormat,
-                                            FormatDateTime(traceRecord.Timestamp),
-                                            traceRecord.Level.ToString(),
-                                            traceRecord.Kind.ToString()));
+                messages.Add(
+                    Error.Format(
+                        SRResources.TimeLevelKindFormat,
+                        FormatDateTime(traceRecord.Timestamp),
+                        traceRecord.Level.ToString(),
+                        traceRecord.Kind.ToString()
+                    )
+                );
 
                 if (!String.IsNullOrEmpty(traceRecord.Category))
                 {
@@ -196,17 +201,31 @@ namespace System.Web.Http.Tracing
 
             if (traceRecord.Operator != null || traceRecord.Operation != null)
             {
-                messages.Add(Error.Format(SRResources.OperationFormat, traceRecord.Operator, traceRecord.Operation));
+                messages.Add(
+                    Error.Format(
+                        SRResources.OperationFormat,
+                        traceRecord.Operator,
+                        traceRecord.Operation
+                    )
+                );
             }
 
             if (traceRecord.Status != 0)
             {
-                messages.Add(Error.Format(SRResources.HttpStatusFormat, (int)traceRecord.Status, traceRecord.Status.ToString()));
+                messages.Add(
+                    Error.Format(
+                        SRResources.HttpStatusFormat,
+                        (int)traceRecord.Status,
+                        traceRecord.Status.ToString()
+                    )
+                );
             }
 
             if (traceRecord.Exception != null)
             {
-                messages.Add(Error.Format(SRResources.ExceptionFormat, traceRecord.Exception.ToString()));
+                messages.Add(
+                    Error.Format(SRResources.ExceptionFormat, traceRecord.Exception.ToString())
+                );
             }
 
             return String.Join(", ", messages);
@@ -231,30 +250,49 @@ namespace System.Web.Http.Tracing
 
             if (IsVerbose)
             {
-                messages.Add(Error.Format((traceRecord.Kind == TraceKind.Begin)
-                                                ? SRResources.TimeRequestFormat
-                                                : SRResources.TimeResponseFormat,
-                                            FormatDateTime(traceRecord.Timestamp)));
+                messages.Add(
+                    Error.Format(
+                        (traceRecord.Kind == TraceKind.Begin)
+                            ? SRResources.TimeRequestFormat
+                            : SRResources.TimeResponseFormat,
+                        FormatDateTime(traceRecord.Timestamp)
+                    )
+                );
             }
             else
             {
-                messages.Add((traceRecord.Kind == TraceKind.Begin)
-                                ? SRResources.ShortRequestFormat
-                                : SRResources.ShortResponseFormat);
+                messages.Add(
+                    (traceRecord.Kind == TraceKind.Begin)
+                        ? SRResources.ShortRequestFormat
+                        : SRResources.ShortResponseFormat
+                );
             }
 
             if (traceRecord.Status != 0)
             {
-                messages.Add(Error.Format(SRResources.HttpStatusFormat, (int)traceRecord.Status, traceRecord.Status.ToString()));
+                messages.Add(
+                    Error.Format(
+                        SRResources.HttpStatusFormat,
+                        (int)traceRecord.Status,
+                        traceRecord.Status.ToString()
+                    )
+                );
             }
 
             if (traceRecord.Request != null)
             {
-                messages.Add(Error.Format(SRResources.HttpMethodFormat, traceRecord.Request.Method));
+                messages.Add(
+                    Error.Format(SRResources.HttpMethodFormat, traceRecord.Request.Method)
+                );
 
                 if (traceRecord.Request.RequestUri != null)
                 {
-                    messages.Add(Error.Format(SRResources.UrlFormat, traceRecord.Request.RequestUri.ToString()));
+                    messages.Add(
+                        Error.Format(
+                            SRResources.UrlFormat,
+                            traceRecord.Request.RequestUri.ToString()
+                        )
+                    );
                 }
             }
 
@@ -272,7 +310,9 @@ namespace System.Web.Http.Tracing
 
             if (traceRecord.Exception != null)
             {
-                messages.Add(Error.Format(SRResources.ExceptionFormat, traceRecord.Exception.ToString()));
+                messages.Add(
+                    Error.Format(SRResources.ExceptionFormat, traceRecord.Exception.ToString())
+                );
             }
 
             return String.Join(", ", messages);
@@ -319,7 +359,11 @@ namespace System.Web.Http.Tracing
             TraceSource traceSource = TraceSource;
             if (traceSource != null)
             {
-                traceSource.TraceEvent(eventType: TraceLevelToTraceEventType[(int)level], id: 0, message: message);
+                traceSource.TraceEvent(
+                    eventType: TraceLevelToTraceEventType[(int)level],
+                    id: 0,
+                    message: message
+                );
                 return;
             }
 

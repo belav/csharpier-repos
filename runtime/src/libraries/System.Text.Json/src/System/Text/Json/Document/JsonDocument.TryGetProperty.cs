@@ -8,8 +8,11 @@ namespace System.Text.Json
 {
     public sealed partial class JsonDocument
     {
-        internal bool TryGetNamedPropertyValue(int index, ReadOnlySpan<char> propertyName, out JsonElement value)
-        {
+        internal bool TryGetNamedPropertyValue(
+            int index,
+            ReadOnlySpan<char> propertyName,
+            out JsonElement value
+        ) {
             CheckNotDisposed();
 
             DbRow row = _parsedData.Get(index);
@@ -33,11 +36,7 @@ namespace System.Text.Json
                 int len = JsonReaderHelper.GetUtf8FromText(propertyName, utf8Name);
                 utf8Name = utf8Name.Slice(0, len);
 
-                return TryGetNamedPropertyValue(
-                    startIndex,
-                    endIndex,
-                    utf8Name,
-                    out value);
+                return TryGetNamedPropertyValue(startIndex, endIndex, utf8Name, out value);
             }
 
             // Unescaping the property name will make the string shorter (or the same)
@@ -86,8 +85,10 @@ namespace System.Text.Json
                             startIndex,
                             passedIndex + DbRow.Size,
                             utf8Name,
-                            out value);
+                            out value
+                        );
                     }
+
                     finally
                     {
                         // While property names aren't usually a secret, they also usually
@@ -108,8 +109,11 @@ namespace System.Text.Json
             return false;
         }
 
-        internal bool TryGetNamedPropertyValue(int index, ReadOnlySpan<byte> propertyName, out JsonElement value)
-        {
+        internal bool TryGetNamedPropertyValue(
+            int index,
+            ReadOnlySpan<byte> propertyName,
+            out JsonElement value
+        ) {
             CheckNotDisposed();
 
             DbRow row = _parsedData.Get(index);
@@ -125,19 +129,15 @@ namespace System.Text.Json
 
             int endIndex = checked(row.NumberOfRows * DbRow.Size + index);
 
-            return TryGetNamedPropertyValue(
-                index + DbRow.Size,
-                endIndex,
-                propertyName,
-                out value);
+            return TryGetNamedPropertyValue(index + DbRow.Size, endIndex, propertyName, out value);
         }
 
         private bool TryGetNamedPropertyValue(
             int startIndex,
             int endIndex,
             ReadOnlySpan<byte> propertyName,
-            out JsonElement value)
-        {
+            out JsonElement value
+        ) {
             ReadOnlySpan<byte> documentSpan = _utf8Json.Span;
             Span<byte> utf8UnescapedStack = stackalloc byte[JsonConstants.StackallocThreshold];
 
@@ -163,7 +163,10 @@ namespace System.Text.Json
                 row = _parsedData.Get(index);
                 Debug.Assert(row.TokenType == JsonTokenType.PropertyName);
 
-                ReadOnlySpan<byte> currentPropertyName = documentSpan.Slice(row.Location, row.SizeOrLength);
+                ReadOnlySpan<byte> currentPropertyName = documentSpan.Slice(
+                    row.Location,
+                    row.SizeOrLength
+                );
 
                 if (row.HasComplexChildren)
                 {
@@ -175,30 +178,41 @@ namespace System.Text.Json
                         Debug.Assert(idx >= 0);
 
                         // If everything up to where the property name has a backslash matches, keep going.
-                        if (propertyName.Length > idx &&
-                            currentPropertyName.Slice(0, idx).SequenceEqual(propertyName.Slice(0, idx)))
-                        {
+                        if (
+                            propertyName.Length > idx
+                            && currentPropertyName.Slice(0, idx)
+                                .SequenceEqual(propertyName.Slice(0, idx))
+                        ) {
                             int remaining = currentPropertyName.Length - idx;
                             int written = 0;
                             byte[]? rented = null;
 
                             try
                             {
-                                Span<byte> utf8Unescaped = remaining <= utf8UnescapedStack.Length ?
-                                    utf8UnescapedStack :
-                                    (rented = ArrayPool<byte>.Shared.Rent(remaining));
+                                Span<byte> utf8Unescaped =
+                                    remaining <= utf8UnescapedStack.Length
+                                        ? utf8UnescapedStack
+                                        : (rented = ArrayPool<byte>.Shared.Rent(remaining));
 
                                 // Only unescape the part we haven't processed.
-                                JsonReaderHelper.Unescape(currentPropertyName.Slice(idx), utf8Unescaped, 0, out written);
+                                JsonReaderHelper.Unescape(
+                                    currentPropertyName.Slice(idx),
+                                    utf8Unescaped,
+                                    0,
+                                    out written
+                                );
 
                                 // If the unescaped remainder matches the input remainder, it's a match.
-                                if (utf8Unescaped.Slice(0, written).SequenceEqual(propertyName.Slice(idx)))
-                                {
+                                if (
+                                    utf8Unescaped.Slice(0, written)
+                                        .SequenceEqual(propertyName.Slice(idx))
+                                ) {
                                     // If the property name is a match, the answer is the next element.
                                     value = new JsonElement(this, index + DbRow.Size);
                                     return true;
                                 }
                             }
+
                             finally
                             {
                                 if (rented != null)

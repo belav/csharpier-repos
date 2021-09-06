@@ -69,8 +69,9 @@ namespace System.Transactions.Tests
 
                     if (Type == ResourceManagerType.Promotable)
                     {
-                        _transaction.EnlistPromotableSinglePhase(new PromotableSinglePhaseNotification(this));
-
+                        _transaction.EnlistPromotableSinglePhase(
+                            new PromotableSinglePhaseNotification(this)
+                        );
                         // TODO: EnlistPromotableSinglePhase will not throw an exception if there is already another PSPE or
                         // a DurableEnlistment. Instead, it returns false. Right now the tests that exercise these scenarios do
                         // not take this into account. This scenario should be taken into account to correctly test EnlistPromotableSinglePhase.
@@ -154,7 +155,9 @@ namespace System.Transactions.Tests
             if (resource.FailPrepare)
             {
                 if (resource.FailWithException)
-                    preparingEnlistment.ForceRollback(resource.ThrowThisException ?? new NotSupportedException());
+                    preparingEnlistment.ForceRollback(
+                        resource.ThrowThisException ?? new NotSupportedException()
+                    );
                 else
                     preparingEnlistment.ForceRollback();
             }
@@ -202,10 +205,7 @@ namespace System.Transactions.Tests
 
     public class SinglePhaseNotification : EnlistmentNotification, ISinglePhaseNotification
     {
-        public SinglePhaseNotification(IntResourceManager resource)
-            : base(resource)
-        {
-        }
+        public SinglePhaseNotification(IntResourceManager resource) : base(resource) { }
 
         public void SinglePhaseCommit(SinglePhaseEnlistment enlistment)
         {
@@ -228,12 +228,11 @@ namespace System.Transactions.Tests
         }
     }
 
-    public class PromotableSinglePhaseNotification : SinglePhaseNotification, IPromotableSinglePhaseNotification
+    public class PromotableSinglePhaseNotification
+        : SinglePhaseNotification,
+          IPromotableSinglePhaseNotification
     {
-        public PromotableSinglePhaseNotification(IntResourceManager resource)
-            : base(resource)
-        {
-        }
+        public PromotableSinglePhaseNotification(IntResourceManager resource) : base(resource) { }
 
         public void Initialize()
         {
@@ -253,5 +252,10 @@ namespace System.Transactions.Tests
         }
     }
 
-    public enum ResourceManagerType { Volatile, Durable, Promotable };
+    public enum ResourceManagerType
+    {
+        Volatile,
+        Durable,
+        Promotable
+    };
 }

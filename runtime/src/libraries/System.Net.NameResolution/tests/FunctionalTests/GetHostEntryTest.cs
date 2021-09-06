@@ -21,7 +21,6 @@ namespace System.Net.NameResolution.Tests
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/1488", TestPlatforms.OSX)]
-        
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/27622")]
         [InlineData("")]
         [InlineData(TestSettings.LocalHost)]
@@ -67,12 +66,13 @@ namespace System.Net.NameResolution.Tests
                 }
 
                 throw new Exception(
-                    $"Failed for empty hostname.{Environment.NewLine}" +
-                    $"Dns.GetHostName() == {actualHostName}{Environment.NewLine}" +
-                    $"{nameof(getHostEntryException)}=={getHostEntryException}{Environment.NewLine}" +
-                    $"{nameof(etcHostsException)}=={etcHostsException}{Environment.NewLine}" +
-                    $"/etc/host =={Environment.NewLine}{etcHosts}",
-                    ex);
+                    $"Failed for empty hostname.{Environment.NewLine}"
+                        + $"Dns.GetHostName() == {actualHostName}{Environment.NewLine}"
+                        + $"{nameof(getHostEntryException)}=={getHostEntryException}{Environment.NewLine}"
+                        + $"{nameof(etcHostsException)}=={etcHostsException}{Environment.NewLine}"
+                        + $"/etc/host =={Environment.NewLine}{etcHosts}",
+                    ex
+                );
             }
         }
 
@@ -115,16 +115,36 @@ namespace System.Net.NameResolution.Tests
         public async Task Dns_GetHostEntry_NullStringHost_Fail()
         {
             Assert.Throws<ArgumentNullException>(() => Dns.GetHostEntry((string)null));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => Dns.GetHostEntryAsync((string)null));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, (string)null, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () => Dns.GetHostEntryAsync((string)null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        (string)null,
+                        null
+                    )
+            );
         }
 
         [Fact]
         public async Task Dns_GetHostEntryAsync_NullIPAddressHost_Fail()
         {
             Assert.Throws<ArgumentNullException>(() => Dns.GetHostEntry((IPAddress)null));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => Dns.GetHostEntryAsync((IPAddress)null));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, (IPAddress)null, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () => Dns.GetHostEntryAsync((IPAddress)null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        (IPAddress)null,
+                        null
+                    )
+            );
         }
 
         public static IEnumerable<object[]> GetInvalidAddresses()
@@ -142,17 +162,37 @@ namespace System.Net.NameResolution.Tests
             Assert.Throws<ArgumentException>(() => Dns.GetHostEntry(address.ToString()));
 
             await Assert.ThrowsAsync<ArgumentException>(() => Dns.GetHostEntryAsync(address));
-            await Assert.ThrowsAsync<ArgumentException>(() => Dns.GetHostEntryAsync(address.ToString()));
+            await Assert.ThrowsAsync<ArgumentException>(
+                () => Dns.GetHostEntryAsync(address.ToString())
+            );
 
-            await Assert.ThrowsAsync<ArgumentException>(() => Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, address, null));
-            await Assert.ThrowsAsync<ArgumentException>(() => Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, address.ToString(), null));
+            await Assert.ThrowsAsync<ArgumentException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        address,
+                        null
+                    )
+            );
+            await Assert.ThrowsAsync<ArgumentException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        address.ToString(),
+                        null
+                    )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task DnsGetHostEntry_MachineName_AllVariationsMatch()
         {
             IPHostEntry syncResult = Dns.GetHostEntry(TestSettings.LocalHost);
-            IPHostEntry apmResult = Dns.EndGetHostEntry(Dns.BeginGetHostEntry(TestSettings.LocalHost, null, null));
+            IPHostEntry apmResult = Dns.EndGetHostEntry(
+                Dns.BeginGetHostEntry(TestSettings.LocalHost, null, null)
+            );
             IPHostEntry asyncResult = await Dns.GetHostEntryAsync(TestSettings.LocalHost);
 
             Assert.Equal(syncResult.HostName, apmResult.HostName);
@@ -166,7 +206,9 @@ namespace System.Net.NameResolution.Tests
         public async Task DnsGetHostEntry_Loopback_AllVariationsMatch()
         {
             IPHostEntry syncResult = Dns.GetHostEntry(IPAddress.Loopback);
-            IPHostEntry apmResult = Dns.EndGetHostEntry(Dns.BeginGetHostEntry(IPAddress.Loopback, null, null));
+            IPHostEntry apmResult = Dns.EndGetHostEntry(
+                Dns.BeginGetHostEntry(IPAddress.Loopback, null, null)
+            );
             IPHostEntry asyncResult = await Dns.GetHostEntryAsync(IPAddress.Loopback);
 
             Assert.Equal(syncResult.HostName, apmResult.HostName);
@@ -181,25 +223,52 @@ namespace System.Net.NameResolution.Tests
         [InlineData("0.0.1.1")] // unknown address
         [InlineData("Test-\u65B0-Unicode")] // unknown unicode name
         [InlineData("xn--test--unicode-0b01a")] // unknown punicode name
-        [InlineData("Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+        [InlineData(
+            "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
                 + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are")] // very long name but not too long
+                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are"
+        )] // very long name but not too long
         public async Task DnsGetHostEntry_BadName_ThrowsSocketException(string hostNameOrAddress)
         {
             Assert.ThrowsAny<SocketException>(() => Dns.GetHostEntry(hostNameOrAddress));
-            await Assert.ThrowsAnyAsync<SocketException>(() => Dns.GetHostEntryAsync(hostNameOrAddress));
-            await Assert.ThrowsAnyAsync<SocketException>(() => Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, hostNameOrAddress, null));
+            await Assert.ThrowsAnyAsync<SocketException>(
+                () => Dns.GetHostEntryAsync(hostNameOrAddress)
+            );
+            await Assert.ThrowsAnyAsync<SocketException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        hostNameOrAddress,
+                        null
+                    )
+            );
         }
 
         [Theory]
-        [InlineData("Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+        [InlineData(
+            "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
                 + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret")]
-        public async Task DnsGetHostEntry_BadName_ThrowsArgumentOutOfRangeException(string hostNameOrAddress)
-        {
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => Dns.GetHostEntry(hostNameOrAddress));
-            await Assert.ThrowsAnyAsync<ArgumentOutOfRangeException>(() => Dns.GetHostEntryAsync(hostNameOrAddress));
-            await Assert.ThrowsAnyAsync<ArgumentOutOfRangeException>(() => Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, hostNameOrAddress, null));
+                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret"
+        )]
+        public async Task DnsGetHostEntry_BadName_ThrowsArgumentOutOfRangeException(
+            string hostNameOrAddress
+        ) {
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(
+                () => Dns.GetHostEntry(hostNameOrAddress)
+            );
+            await Assert.ThrowsAnyAsync<ArgumentOutOfRangeException>(
+                () => Dns.GetHostEntryAsync(hostNameOrAddress)
+            );
+            await Assert.ThrowsAnyAsync<ArgumentOutOfRangeException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        hostNameOrAddress,
+                        null
+                    )
+            );
         }
 
         [Theory]
@@ -212,16 +281,28 @@ namespace System.Net.NameResolution.Tests
             {
                 0 => Dns.GetHostEntry("localhost"),
                 1 => await Dns.GetHostEntryAsync("localhost"),
-                _ => await Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, "localhost", null)
+                _
+                  => await Task.Factory.FromAsync(
+                      Dns.BeginGetHostEntry,
+                      Dns.EndGetHostEntry,
+                      "localhost",
+                      null
+                  )
             };
 
             Assert.NotNull(entry.HostName);
             Assert.True(entry.HostName.Length > 0, "Empty host name");
             Assert.True(entry.AddressList.Length >= 1, "No local IPs");
-            Assert.All(entry.AddressList, addr => Assert.True(IPAddress.IsLoopback(addr), "Not a loopback address: " + addr));
+            Assert.All(
+                entry.AddressList,
+                addr => Assert.True(IPAddress.IsLoopback(addr), "Not a loopback address: " + addr)
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(2)]
@@ -233,13 +314,25 @@ namespace System.Net.NameResolution.Tests
             {
                 0 => Dns.GetHostEntry(address),
                 1 => await Dns.GetHostEntryAsync(address),
-                _ => await Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, address, null)
+                _
+                  => await Task.Factory.FromAsync(
+                      Dns.BeginGetHostEntry,
+                      Dns.EndGetHostEntry,
+                      address,
+                      null
+                  )
             };
             IPHostEntry stringEntry = mode switch
             {
                 0 => Dns.GetHostEntry(address.ToString()),
                 1 => await Dns.GetHostEntryAsync(address.ToString()),
-                _ => await Task.Factory.FromAsync(Dns.BeginGetHostEntry, Dns.EndGetHostEntry, address.ToString(), null)
+                _
+                  => await Task.Factory.FromAsync(
+                      Dns.BeginGetHostEntry,
+                      Dns.EndGetHostEntry,
+                      address.ToString(),
+                      null
+                  )
             };
 
             Assert.Equal(ipEntry.HostName, stringEntry.HostName);
@@ -249,13 +342,19 @@ namespace System.Net.NameResolution.Tests
         [OuterLoop]
         [Theory]
         [MemberData(nameof(AddressFamilySpecificTestData))]
-        public async Task DnsGetHostEntry_LocalHost_AddressFamilySpecific(bool useAsync, string host, AddressFamily addressFamily)
-        {
-            IPHostEntry entry =
-                useAsync ? await Dns.GetHostEntryAsync(host, addressFamily) :
-                Dns.GetHostEntry(host, addressFamily);
+        public async Task DnsGetHostEntry_LocalHost_AddressFamilySpecific(
+            bool useAsync,
+            string host,
+            AddressFamily addressFamily
+        ) {
+            IPHostEntry entry = useAsync
+                ? await Dns.GetHostEntryAsync(host, addressFamily)
+                : Dns.GetHostEntry(host, addressFamily);
 
-            Assert.All(entry.AddressList, address => Assert.Equal(addressFamily, address.AddressFamily));
+            Assert.All(
+                entry.AddressList,
+                address => Assert.Equal(addressFamily, address.AddressFamily)
+            );
         }
 
         public static TheoryData<bool, string, AddressFamily> AddressFamilySpecificTestData =>
@@ -274,7 +373,10 @@ namespace System.Net.NameResolution.Tests
             using var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => Dns.GetHostEntryAsync(TestSettings.LocalHost, cts.Token));
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () => Dns.GetHostEntryAsync(TestSettings.LocalHost, cts.Token)
+                );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -292,7 +394,8 @@ namespace System.Net.NameResolution.Tests
             // It's a race between the DNS server getting back to us and the cancellation processing.
             cts.Cancel();
 
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => task);
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => task);
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
     }

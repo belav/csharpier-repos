@@ -9,9 +9,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     public partial class LocalFunctionStatementSyntax
     {
         // Preserved as shipped public API for binary compatibility
-        public LocalFunctionStatementSyntax Update(SyntaxTokenList modifiers, TypeSyntax returnType, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken)
-        {
-            return Update(AttributeLists, modifiers, returnType, identifier, typeParameterList, parameterList, constraintClauses, body, expressionBody, semicolonToken);
+        public LocalFunctionStatementSyntax Update(
+            SyntaxTokenList modifiers,
+            TypeSyntax returnType,
+            SyntaxToken identifier,
+            TypeParameterListSyntax typeParameterList,
+            ParameterListSyntax parameterList,
+            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
+            BlockSyntax body,
+            ArrowExpressionClauseSyntax expressionBody,
+            SyntaxToken semicolonToken
+        ) {
+            return Update(
+                AttributeLists,
+                modifiers,
+                returnType,
+                identifier,
+                typeParameterList,
+                parameterList,
+                constraintClauses,
+                body,
+                expressionBody,
+                semicolonToken
+            );
         }
     }
 }
@@ -21,15 +41,54 @@ namespace Microsoft.CodeAnalysis.CSharp
     public partial class SyntaxFactory
     {
         // Preserved as shipped public API for binary compatibility
-        public static LocalFunctionStatementSyntax LocalFunctionStatement(SyntaxTokenList modifiers, TypeSyntax returnType, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
-        {
-            return LocalFunctionStatement(attributeLists: default, modifiers, returnType, identifier, typeParameterList, parameterList, constraintClauses, body, expressionBody, semicolonToken: default);
+        public static LocalFunctionStatementSyntax LocalFunctionStatement(
+            SyntaxTokenList modifiers,
+            TypeSyntax returnType,
+            SyntaxToken identifier,
+            TypeParameterListSyntax typeParameterList,
+            ParameterListSyntax parameterList,
+            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
+            BlockSyntax body,
+            ArrowExpressionClauseSyntax expressionBody
+        ) {
+            return LocalFunctionStatement(
+                attributeLists: default,
+                modifiers,
+                returnType,
+                identifier,
+                typeParameterList,
+                parameterList,
+                constraintClauses,
+                body,
+                expressionBody,
+                semicolonToken: default
+            );
         }
 
         // Preserved as shipped public API for binary compatibility
-        public static LocalFunctionStatementSyntax LocalFunctionStatement(SyntaxTokenList modifiers, TypeSyntax returnType, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken)
-        {
-            return LocalFunctionStatement(attributeLists: default, modifiers, returnType, identifier, typeParameterList, parameterList, constraintClauses, body, expressionBody, semicolonToken);
+        public static LocalFunctionStatementSyntax LocalFunctionStatement(
+            SyntaxTokenList modifiers,
+            TypeSyntax returnType,
+            SyntaxToken identifier,
+            TypeParameterListSyntax typeParameterList,
+            ParameterListSyntax parameterList,
+            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses,
+            BlockSyntax body,
+            ArrowExpressionClauseSyntax expressionBody,
+            SyntaxToken semicolonToken
+        ) {
+            return LocalFunctionStatement(
+                attributeLists: default,
+                modifiers,
+                returnType,
+                identifier,
+                typeParameterList,
+                parameterList,
+                constraintClauses,
+                body,
+                expressionBody,
+                semicolonToken
+            );
         }
     }
 }

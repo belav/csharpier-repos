@@ -16,11 +16,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     {
         private static bool IsPotentialKeyword(string identifier)
         {
-            return SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None || SyntaxFacts.GetContextualKeywordKind(identifier) != SyntaxKind.None;
+            return SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None
+                || SyntaxFacts.GetContextualKeywordKind(identifier) != SyntaxKind.None;
         }
 
-        protected override void AppendIdentifierEscapingPotentialKeywords(StringBuilder builder, string identifier, out bool sawInvalidIdentifier)
-        {
+        protected override void AppendIdentifierEscapingPotentialKeywords(
+            StringBuilder builder,
+            string identifier,
+            out bool sawInvalidIdentifier
+        ) {
             sawInvalidIdentifier = !SyntaxFacts.IsValidIdentifier(identifier);
             if (IsPotentialKeyword(identifier))
             {
@@ -39,8 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ref int tupleElementIndex,
             int arity,
             bool escapeKeywordIdentifiers,
-            out bool sawInvalidIdentifier)
-        {
+            out bool sawInvalidIdentifier
+        ) {
             sawInvalidIdentifier = false;
             builder.Append('<');
             for (int i = 0; i < arity; i++)
@@ -60,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     tupleElementNames,
                     ref tupleElementIndex,
                     escapeKeywordIdentifiers,
-                    out sawSingleInvalidIdentifier);
+                    out sawSingleInvalidIdentifier
+                );
                 sawInvalidIdentifier |= sawSingleInvalidIdentifier;
             }
             builder.Append('>');
@@ -75,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ReadOnlyCollection<string> tupleElementNames,
             ref int tupleElementIndex,
             bool escapeKeywordIdentifiers,
-            out bool sawInvalidIdentifier)
-        {
+            out bool sawInvalidIdentifier
+        ) {
             sawInvalidIdentifier = false;
             bool sawSingleInvalidIdentifier;
             AppendQualifiedTypeName(
@@ -87,12 +92,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 tupleElementNames,
                 ref tupleElementIndex,
                 escapeKeywordIdentifiers,
-                sawInvalidIdentifier: out sawSingleInvalidIdentifier);
+                sawInvalidIdentifier: out sawSingleInvalidIdentifier
+            );
             Debug.Assert(!sawSingleInvalidIdentifier);
             if (!string.IsNullOrEmpty(nameOpt))
             {
                 builder.Append(' ');
-                AppendIdentifier(builder, escapeKeywordIdentifiers, nameOpt, out sawSingleInvalidIdentifier);
+                AppendIdentifier(
+                    builder,
+                    escapeKeywordIdentifiers,
+                    nameOpt,
+                    out sawSingleInvalidIdentifier
+                );
                 sawInvalidIdentifier |= sawSingleInvalidIdentifier;
             }
         }
@@ -106,8 +117,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             builder.Append(']');
         }
 
-        protected override bool AppendSpecialTypeName(StringBuilder builder, Type type, bool isDynamic)
-        {
+        protected override bool AppendSpecialTypeName(
+            StringBuilder builder,
+            Type type,
+            bool isDynamic
+        ) {
             if (isDynamic)
             {
                 Debug.Assert(type.IsObject());

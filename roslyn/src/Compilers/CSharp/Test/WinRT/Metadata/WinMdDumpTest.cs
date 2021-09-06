@@ -23,14 +23,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
 {
     public class WinMdDumpTest : CSharpTestBase
     {
-        private readonly MetadataReference _windowsRef = MetadataReference.CreateFromImage(TestResources.WinRt.Windows.AsImmutableOrNull());
-        private readonly MetadataReference _systemRuntimeRef = MetadataReference.CreateFromImage(TestMetadata.ResourcesNet451.SystemRuntime.AsImmutableOrNull());
-        private readonly MetadataReference _systemObjectModelRef = MetadataReference.CreateFromImage(TestMetadata.ResourcesNet451.SystemObjectModel.AsImmutableOrNull());
-        private readonly MetadataReference _windowsRuntimeUIXamlRef = MetadataReference.CreateFromImage(ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml.AsImmutableOrNull());
-        private readonly MetadataReference _interopServicesWindowsRuntimeRef = MetadataReference.CreateFromImage(TestMetadata.ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime.AsImmutableOrNull());
+        private readonly MetadataReference _windowsRef = MetadataReference.CreateFromImage(
+            TestResources.WinRt.Windows.AsImmutableOrNull()
+        );
+        private readonly MetadataReference _systemRuntimeRef = MetadataReference.CreateFromImage(
+            TestMetadata.ResourcesNet451.SystemRuntime.AsImmutableOrNull()
+        );
+        private readonly MetadataReference _systemObjectModelRef =
+            MetadataReference.CreateFromImage(
+                TestMetadata.ResourcesNet451.SystemObjectModel.AsImmutableOrNull()
+            );
+        private readonly MetadataReference _windowsRuntimeUIXamlRef =
+            MetadataReference.CreateFromImage(
+                ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml.AsImmutableOrNull()
+            );
+        private readonly MetadataReference _interopServicesWindowsRuntimeRef =
+            MetadataReference.CreateFromImage(
+                TestMetadata.ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime.AsImmutableOrNull()
+            );
 
-        private void AppendMembers(StringBuilder result, NamespaceOrTypeSymbol container, string indent)
-        {
+        private void AppendMembers(
+            StringBuilder result,
+            NamespaceOrTypeSymbol container,
+            string indent
+        ) {
             string memberIndent;
             if (container is NamedTypeSymbol)
             {
@@ -51,9 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                 memberIndent = indent;
             }
 
-
-            foreach (var member in container.GetMembers().OrderBy(m => m.Name, System.StringComparer.InvariantCulture))
-            {
+            foreach (
+                var member in container.GetMembers()
+                    .OrderBy(m => m.Name, System.StringComparer.InvariantCulture)
+            ) {
                 switch (member.Kind)
                 {
                     case SymbolKind.NamedType:
@@ -129,7 +146,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         result.Append(".property ");
 
                         PropertyAttributes propertyAttrs;
-                        ((PEModuleSymbol)container.ContainingModule).Module.GetPropertyDefPropsOrThrow(property.Handle, out propertyName, out propertyAttrs);
+                        (
+                            (PEModuleSymbol)container.ContainingModule
+                        ).Module.GetPropertyDefPropsOrThrow(
+                            property.Handle,
+                            out propertyName,
+                            out propertyAttrs
+                        );
                         if (MetadataSignatureHelper.AppendPropertyAttributes(result, propertyAttrs))
                         {
                             result.Append(" ");
@@ -172,7 +195,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         string eventName;
                         EventAttributes eventAttrs;
                         EntityHandle type;
-                        ((PEModuleSymbol)container.ContainingModule).Module.GetEventDefPropsOrThrow(evnt.Handle, out eventName, out eventAttrs, out type);
+                        ((PEModuleSymbol)container.ContainingModule).Module.GetEventDefPropsOrThrow(
+                            evnt.Handle,
+                            out eventName,
+                            out eventAttrs,
+                            out type
+                        );
 
                         if (MetadataSignatureHelper.AppendEventAttributes(result, eventAttrs))
                         {
@@ -217,8 +245,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             }
         }
 
-        private static void AppendCustomAttributes(StringBuilder result, Symbol symbol, string indent, bool inBlock)
-        {
+        private static void AppendCustomAttributes(
+            StringBuilder result,
+            Symbol symbol,
+            string indent,
+            bool inBlock
+        ) {
             var attributes = symbol.GetAttributes();
             if (attributes.Length == 0)
             {
@@ -245,7 +277,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                 }
                 else
                 {
-                    AppendMethod(result, (PEMethodSymbol)attribute.AttributeConstructor, indent: null, includeTypeName: true);
+                    AppendMethod(
+                        result,
+                        (PEMethodSymbol)attribute.AttributeConstructor,
+                        indent: null,
+                        includeTypeName: true
+                    );
                 }
 
                 result.Append(" = (");
@@ -337,8 +374,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             }
         }
 
-        private static void AppendMethod(StringBuilder result, PEMethodSymbol method, string indent, bool includeTypeName = false)
-        {
+        private static void AppendMethod(
+            StringBuilder result,
+            PEMethodSymbol method,
+            string indent,
+            bool includeTypeName = false
+        ) {
             MetadataSignatureHelper.AppendMethodAttributes(result, method.Flags);
             result.Append(" ");
             AppendSignatureType(result, method.ReturnType, RefKind.None);
@@ -368,8 +409,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                     hasParameterAttributes = true;
                 }
 
-                if (MetadataSignatureHelper.AppendParameterAttributes(result, parameter.Flags, all: true))
-                {
+                if (
+                    MetadataSignatureHelper.AppendParameterAttributes(
+                        result,
+                        parameter.Flags,
+                        all: true
+                    )
+                ) {
                     result.Append(" ");
                 }
 
@@ -380,7 +426,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             }
 
             result.Append(") ");
-            MetadataSignatureHelper.AppendMethodImplAttributes(result, method.ImplementationAttributes);
+            MetadataSignatureHelper.AppendMethodImplAttributes(
+                result,
+                method.ImplementationAttributes
+            );
 
             if (indent != null)
             {
@@ -414,8 +463,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             }
         }
 
-        private static void AppendSignatureType(StringBuilder result, TypeSymbol type, RefKind refKind)
-        {
+        private static void AppendSignatureType(
+            StringBuilder result,
+            TypeSymbol type,
+            RefKind refKind
+        ) {
             result.Append(type);
 
             if (refKind != RefKind.None)
@@ -435,14 +487,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
 
         private string Dump(MetadataReference winmd, MetadataReference[] additionalRefs = null)
         {
-            IEnumerable<MetadataReference> references = new[] { MscorlibRef_v4_0_30316_17626, _systemRuntimeRef, _systemObjectModelRef, _windowsRuntimeUIXamlRef, _interopServicesWindowsRuntimeRef, winmd };
+            IEnumerable<MetadataReference> references = new[]
+            {
+                MscorlibRef_v4_0_30316_17626,
+                _systemRuntimeRef,
+                _systemObjectModelRef,
+                _windowsRuntimeUIXamlRef,
+                _interopServicesWindowsRuntimeRef,
+                winmd
+            };
 
             if (additionalRefs != null)
             {
                 references = references.Concat(additionalRefs);
             }
 
-            var comp = CreateEmptyCompilation("", references, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var comp = CreateEmptyCompilation(
+                "",
+                references,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             var writer = new StringBuilder();
             AppendAssemblyRefs(writer, (PEAssemblySymbol)comp.GetReferencedAssemblySymbol(winmd));
@@ -455,11 +519,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
         {
             if (expected != actual)
             {
-                string fileExpected = Path.Combine(Path.GetTempPath(), "roslyn_winmd_dump.expected.txt");
-                string fileActual = Path.Combine(Path.GetTempPath(), "roslyn_winmd_dump.actual.txt");
+                string fileExpected = Path.Combine(
+                    Path.GetTempPath(),
+                    "roslyn_winmd_dump.expected.txt"
+                );
+                string fileActual = Path.Combine(
+                    Path.GetTempPath(),
+                    "roslyn_winmd_dump.actual.txt"
+                );
                 File.WriteAllText(fileExpected, expected);
                 File.WriteAllText(fileActual, actual);
-                Assert.True(false, "Dump is different. To investigate compare files:\r\n\"" + fileExpected + "\" \"" + fileActual + "\"");
+                Assert.True(
+                    false,
+                    "Dump is different. To investigate compare files:\r\n\""
+                        + fileExpected
+                        + "\" \""
+                        + fileActual
+                        + "\""
+                );
             }
         }
 
@@ -474,7 +551,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
         [Fact]
         public void DumpWinMDPrefixing()
         {
-            var winmd = MetadataReference.CreateFromImage(TestResources.WinRt.WinMDPrefixing.AsImmutableOrNull());
+            var winmd = MetadataReference.CreateFromImage(
+                TestResources.WinRt.WinMDPrefixing.AsImmutableOrNull()
+            );
             var actual = Dump(winmd, new[] { _windowsRef });
             var expected = Encoding.UTF8.GetString(TestResources.WinRt.WinMDPrefixing_dump);
             AssertDumpsEqual(expected, actual);

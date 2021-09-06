@@ -14,15 +14,15 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class StdOutRedirectionTests : IISFunctionalTestBase
     {
-        public StdOutRedirectionTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public StdOutRedirectionTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         [RequiresNewShim]
         public async Task FrameworkNotFoundExceptionLogged_Pipe()
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -33,16 +33,20 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult,
-                "The framework 'Microsoft.NETCore.App', version '2.9.9' was not found.", Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                "The framework 'Microsoft.NETCore.App', version '2.9.9' was not found.",
+                Logger
+            );
         }
 
         [ConditionalFact]
         [RequiresNewShim]
         public async Task FrameworkNotFoundExceptionLogged_File()
         {
-            var deploymentParameters =
-                Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
 
             deploymentParameters.EnableLogging(LogFolderPath);
 
@@ -55,8 +59,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            var contents = Helpers.ReadAllTextFromFile(Helpers.GetExpectedLogName(deploymentResult, LogFolderPath), Logger);
-            var expectedString = "The framework 'Microsoft.NETCore.App', version '2.9.9' was not found.";
+            var contents = Helpers.ReadAllTextFromFile(
+                Helpers.GetExpectedLogName(deploymentResult, LogFolderPath),
+                Logger
+            );
+            var expectedString =
+                "The framework 'Microsoft.NETCore.App', version '2.9.9' was not found.";
             EventLogHelpers.VerifyEventLogEvent(deploymentResult, expectedString, Logger);
             Assert.Contains(expectedString, contents);
         }
@@ -66,8 +74,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [SkipIfDebug]
         public async Task EnableCoreHostTraceLogging_TwoLogFilesCreated()
         {
-            var deploymentParameters =
-                Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
             deploymentParameters.TransformArguments((a, _) => $"{a} CheckLargeStdOutWrites");
 
             deploymentParameters.EnvironmentVariables["COREHOST_TRACE"] = "1";
@@ -96,7 +105,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("CheckOversizedStdOutWrites")]
         public async Task EnableCoreHostTraceLogging_PipeCaptureNativeLogs(string path)
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
             deploymentParameters.EnvironmentVariables["COREHOST_TRACE"] = "1";
             deploymentParameters.TransformArguments((a, _) => $"{a} {path}");
 
@@ -120,8 +131,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("CheckOversizedStdOutWrites")]
         public async Task EnableCoreHostTraceLogging_FileCaptureNativeLogs(string path)
         {
-            var deploymentParameters =
-                Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
             deploymentParameters.EnvironmentVariables["COREHOST_TRACE"] = "1";
             deploymentParameters.TransformArguments((a, _) => $"{a} {path}");
 

@@ -23,14 +23,17 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             Func<Task<HttpResponseMessage>> retryBlock,
             ILogger logger,
             CancellationToken cancellationToken = default,
-            int retryCount = 60)
-        {
+            int retryCount = 60
+        ) {
             for (var retry = 0; retry < retryCount; retry++)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     logger.LogInformation("Failed to connect, retry canceled.");
-                    throw new OperationCanceledException("Failed to connect, retry canceled.", cancellationToken);
+                    throw new OperationCanceledException(
+                        "Failed to connect, retry canceled.",
+                        cancellationToken
+                    );
                 }
 
                 try
@@ -58,7 +61,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     {
                         if (exception is HttpRequestException || exception is WebException)
                         {
-                            logger.LogWarning("Failed to complete the request : {0}.", exception.Message);
+                            logger.LogWarning(
+                                "Failed to complete the request : {0}.",
+                                exception.Message
+                            );
                             await Task.Delay(1 * 1000); //Wait for a while before retry.
                         }
                     }
@@ -73,8 +79,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             Action retryBlock,
             Action<Exception> exceptionBlock,
             int retryCount = 3,
-            int retryDelayMilliseconds = 0)
-        {
+            int retryDelayMilliseconds = 0
+        ) {
             for (var retry = 0; retry < retryCount; ++retry)
             {
                 try

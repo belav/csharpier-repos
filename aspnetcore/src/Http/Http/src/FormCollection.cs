@@ -20,7 +20,9 @@ namespace Microsoft.AspNetCore.Http
         private static readonly string[] EmptyKeys = Array.Empty<string>();
         private static readonly Enumerator EmptyEnumerator = new Enumerator();
         // Pre-box
-        private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType = EmptyEnumerator;
+        private static readonly IEnumerator<
+            KeyValuePair<string, StringValues>
+        > EmptyIEnumeratorType = EmptyEnumerator;
         private static readonly IEnumerator EmptyIEnumerator = EmptyEnumerator;
 
         private static IFormFileCollection EmptyFiles = new FormFileCollection();
@@ -37,8 +39,10 @@ namespace Microsoft.AspNetCore.Http
         /// </summary>
         /// <param name="fields">The backing fields.</param>
         /// <param name="files">The files associated with the form.</param>
-        public FormCollection(Dictionary<string, StringValues>? fields, IFormFileCollection? files = null)
-        {
+        public FormCollection(
+            Dictionary<string, StringValues>? fields,
+            IFormFileCollection? files = null
+        ) {
             // can be null
             Store = fields;
             _files = files;
@@ -81,10 +85,7 @@ namespace Microsoft.AspNetCore.Http
         /// <inheritdoc />
         public int Count
         {
-            get
-            {
-                return Store?.Count ?? 0;
-            }
+            get { return Store?.Count ?? 0; }
         }
 
         /// <inheritdoc />
@@ -141,7 +142,9 @@ namespace Microsoft.AspNetCore.Http
         /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
         /// </summary>
         /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
-        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+            KeyValuePair<string, StringValues>
+        >.GetEnumerator()
         {
             if (Store == null || Store.Count == 0)
             {
@@ -212,16 +215,11 @@ namespace Microsoft.AspNetCore.Http
             }
 
             /// <inheritdoc />
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             void IEnumerator.Reset()

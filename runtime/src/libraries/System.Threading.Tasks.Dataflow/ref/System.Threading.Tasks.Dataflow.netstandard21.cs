@@ -8,6 +8,11 @@ namespace System.Threading.Tasks.Dataflow
 {
     public static partial class DataflowBlock
     {
-        public static System.Collections.Generic.IAsyncEnumerable<TOutput> ReceiveAllAsync<TOutput>(this System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput> source, System.Threading.CancellationToken cancellationToken = default) { throw null; }
+        public static System.Collections.Generic.IAsyncEnumerable<TOutput> ReceiveAllAsync<TOutput>(
+            this System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput> source,
+            System.Threading.CancellationToken cancellationToken = default
+        ) {
+            throw null;
+        }
     }
 }

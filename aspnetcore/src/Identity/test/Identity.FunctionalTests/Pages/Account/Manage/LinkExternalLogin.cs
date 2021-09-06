@@ -12,11 +12,17 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         private readonly IHtmlFormElement _linkLoginForm;
         private readonly IHtmlElement _linkLoginButton;
 
-        public LinkExternalLogin(HttpClient client, IHtmlDocument externalLoginsDocument, DefaultUIContext context)
-            : base(client, externalLoginsDocument, context)
+        public LinkExternalLogin(
+            HttpClient client,
+            IHtmlDocument externalLoginsDocument,
+            DefaultUIContext context
+        ) : base(client, externalLoginsDocument, context)
         {
             _linkLoginForm = HtmlAssert.HasForm($"#link-login-form", externalLoginsDocument);
-            _linkLoginButton = HtmlAssert.HasElement($"#link-login-button-Contoso", externalLoginsDocument);
+            _linkLoginButton = HtmlAssert.HasElement(
+                $"#link-login-button-Contoso",
+                externalLoginsDocument
+            );
         }
 
         public async Task<ManageExternalLogin> LinkExternalLoginAsync(string loginEmail)
@@ -25,7 +31,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
             var linkExternalLogin = await Client.SendAsync(_linkLoginForm, _linkLoginButton);
             var goToLinkExternalLogin = ResponseAssert.IsRedirect(linkExternalLogin);
             var externalLoginResponse = await Client.GetAsync(goToLinkExternalLogin);
-            var externalLoginDocument = await ResponseAssert.IsHtmlDocumentAsync(externalLoginResponse);
+            var externalLoginDocument = await ResponseAssert.IsHtmlDocumentAsync(
+                externalLoginResponse
+            );
 
             // Redirected to manage page for external login with a remove button
             return new ManageExternalLogin(Client, externalLoginDocument, Context);

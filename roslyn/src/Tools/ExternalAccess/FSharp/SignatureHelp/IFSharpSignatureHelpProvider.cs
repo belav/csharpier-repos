@@ -26,6 +26,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
         /// <summary>
         /// Returns valid signature help items at the specified position in the document.
         /// </summary>
-        Task<FSharpSignatureHelpItems> GetItemsAsync(Document document, int position, FSharpSignatureHelpTriggerInfo triggerInfo, CancellationToken cancellationToken);
+        Task<FSharpSignatureHelpItems> GetItemsAsync(
+            Document document,
+            int position,
+            FSharpSignatureHelpTriggerInfo triggerInfo,
+            CancellationToken cancellationToken
+        );
     }
 }

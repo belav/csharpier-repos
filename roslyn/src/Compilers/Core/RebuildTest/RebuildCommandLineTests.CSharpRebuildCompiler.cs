@@ -11,9 +11,14 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         private sealed class CSharpRebuildCompiler : CSharpCompiler
         {
             internal CSharpRebuildCompiler(string[] args)
-                : base(CSharpCommandLineParser.Default, responseFile: null, args, StandardBuildPaths, additionalReferenceDirectories: null, new DefaultAnalyzerAssemblyLoader())
-            {
-            }
+                : base(
+                    CSharpCommandLineParser.Default,
+                    responseFile: null,
+                    args,
+                    StandardBuildPaths,
+                    additionalReferenceDirectories: null,
+                    new DefaultAnalyzerAssemblyLoader()
+                ) { }
         }
     }
 }

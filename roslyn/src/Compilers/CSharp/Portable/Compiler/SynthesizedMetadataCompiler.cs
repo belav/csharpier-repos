@@ -26,8 +26,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly PEModuleBuilder _moduleBeingBuilt;
         private readonly CancellationToken _cancellationToken;
 
-        private SynthesizedMetadataCompiler(PEModuleBuilder moduleBeingBuilt, CancellationToken cancellationToken)
-        {
+        private SynthesizedMetadataCompiler(
+            PEModuleBuilder moduleBeingBuilt,
+            CancellationToken cancellationToken
+        ) {
             Debug.Assert(moduleBeingBuilt != null);
             _moduleBeingBuilt = moduleBeingBuilt;
             _cancellationToken = cancellationToken;
@@ -41,8 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static void ProcessSynthesizedMembers(
             CSharpCompilation compilation,
             PEModuleBuilder moduleBeingBuilt,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             Debug.Assert(moduleBeingBuilt != null);
 
             var compiler = new SynthesizedMetadataCompiler(moduleBeingBuilt, cancellationToken);
@@ -72,9 +74,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // base type from another assembly) it is necessary for the compiler to generate explicit implementations for
                     // some interface methods.  They don't go in the symbol table, but if we are emitting metadata, then we should
                     // generate MethodDef entries for them.
-                    foreach (var synthesizedExplicitImpl in sourceTypeSymbol.GetSynthesizedExplicitImplementations(_cancellationToken))
-                    {
-                        _moduleBeingBuilt.AddSynthesizedDefinition(symbol, synthesizedExplicitImpl.GetCciAdapter());
+                    foreach (
+                        var synthesizedExplicitImpl in sourceTypeSymbol.GetSynthesizedExplicitImplementations(
+                            _cancellationToken
+                        )
+                    ) {
+                        _moduleBeingBuilt.AddSynthesizedDefinition(
+                            symbol,
+                            synthesizedExplicitImpl.GetCciAdapter()
+                        );
                     }
                 }
             }
@@ -99,7 +107,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var synthesizedAccessor = sourceProperty.SynthesizedSealedAccessorOpt;
                 if ((object)synthesizedAccessor != null)
                 {
-                    _moduleBeingBuilt.AddSynthesizedDefinition(sourceProperty.ContainingType, synthesizedAccessor.GetCciAdapter());
+                    _moduleBeingBuilt.AddSynthesizedDefinition(
+                        sourceProperty.ContainingType,
+                        synthesizedAccessor.GetCciAdapter()
+                    );
                 }
             }
         }

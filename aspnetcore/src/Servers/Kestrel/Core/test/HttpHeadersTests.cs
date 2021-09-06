@@ -24,11 +24,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(" , , ", (int)(ConnectionOptions.None))]
         [InlineData("KEEP-ALIVE", (int)(ConnectionOptions.KeepAlive))]
         [InlineData("keep-alive", (int)(ConnectionOptions.KeepAlive))]
-        [InlineData("keep-alive, upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("keep-alive,upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("upgrade, keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("upgrade,keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("upgrade,,keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
+        [InlineData(
+            "keep-alive, upgrade",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "keep-alive,upgrade",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "upgrade, keep-alive",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "upgrade,keep-alive",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "upgrade,,keep-alive",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
         [InlineData("keep-alive,", (int)(ConnectionOptions.KeepAlive))]
         [InlineData("keep-alive,,", (int)(ConnectionOptions.KeepAlive))]
         [InlineData("keep-alive, ", (int)(ConnectionOptions.KeepAlive))]
@@ -142,23 +157,50 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         }
 
         [Theory]
-        [InlineData("keep-alive", "upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("upgrade", "keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
+        [InlineData(
+            "keep-alive",
+            "upgrade",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "upgrade",
+            "keep-alive",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
         [InlineData("keep-alive", "", (int)(ConnectionOptions.KeepAlive))]
         [InlineData("", "keep-alive", (int)(ConnectionOptions.KeepAlive))]
         [InlineData("upgrade", "", (int)(ConnectionOptions.Upgrade))]
         [InlineData("", "upgrade", (int)(ConnectionOptions.Upgrade))]
-        [InlineData("keep-alive, upgrade", "", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("upgrade, keep-alive", "", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("", "keep-alive, upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-        [InlineData("", "upgrade, keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
+        [InlineData(
+            "keep-alive, upgrade",
+            "",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "upgrade, keep-alive",
+            "",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "",
+            "keep-alive, upgrade",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
+        [InlineData(
+            "",
+            "upgrade, keep-alive",
+            (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+        )]
         [InlineData("", "", (int)(ConnectionOptions.None))]
         [InlineData("close", "", (int)(ConnectionOptions.Close))]
         [InlineData("", "close", (int)(ConnectionOptions.Close))]
         [InlineData("close", "upgrade", (int)(ConnectionOptions.Close | ConnectionOptions.Upgrade))]
         [InlineData("upgrade", "close", (int)(ConnectionOptions.Close | ConnectionOptions.Upgrade))]
-        public void TestParseConnectionMultipleValues(string value1, string value2, int intExpectedConnectionOptions)
-        {
+        public void TestParseConnectionMultipleValues(
+            string value1,
+            string value2,
+            int intExpectedConnectionOptions
+        ) {
             var expectedConnectionOptions = (ConnectionOptions)intExpectedConnectionOptions;
             var connection = new StringValues(new[] { value1, value2 });
             var requestHeaders = new HttpRequestHeaders();
@@ -201,9 +243,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("chunked2, gzip", (int)(TransferCoding.Other))]
         [InlineData("gzip, chunked 2", (int)(TransferCoding.Other))]
         [InlineData("gzip, chunked2", (int)(TransferCoding.Other))]
-        public void TestParseTransferEncoding(string transferEncoding, int intExpectedTransferEncodingOptions)
-        {
-            var expectedTransferEncodingOptions = (TransferCoding)intExpectedTransferEncodingOptions;
+        public void TestParseTransferEncoding(
+            string transferEncoding,
+            int intExpectedTransferEncodingOptions
+        ) {
+            var expectedTransferEncodingOptions =
+                (TransferCoding)intExpectedTransferEncodingOptions;
 
             var transferEncodingOptions = HttpHeaders.GetFinalTransferCoding(transferEncoding);
             Assert.Equal(expectedTransferEncodingOptions, transferEncodingOptions);
@@ -221,9 +266,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("", "", (int)(TransferCoding.None))]
         [InlineData("deflate", "", (int)(TransferCoding.Other))]
         [InlineData("", "gzip", (int)(TransferCoding.Other))]
-        public void TestParseTransferEncodingMultipleValues(string value1, string value2, int intExpectedTransferEncodingOptions)
-        {
-            var expectedTransferEncodingOptions = (TransferCoding)intExpectedTransferEncodingOptions;
+        public void TestParseTransferEncodingMultipleValues(
+            string value1,
+            string value2,
+            int intExpectedTransferEncodingOptions
+        ) {
+            var expectedTransferEncodingOptions =
+                (TransferCoding)intExpectedTransferEncodingOptions;
 
             var transferEncoding = new StringValues(new[] { value1, value2 });
             var transferEncodingOptions = HttpHeaders.GetFinalTransferCoding(transferEncoding);
@@ -281,7 +330,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.False(httpHeaders.ContentLength.HasValue);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => httpHeaders.ContentLength = -1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => httpHeaders.ContentLength = long.MinValue);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => httpHeaders.ContentLength = long.MinValue
+            );
 
             Assert.False(headers.TryGetValue("Content-Length", out value));
             Assert.Null(httpHeaders.ContentLength);

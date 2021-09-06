@@ -16,15 +16,14 @@ namespace System.Linq.Parallel
     /// <summary>
     /// An inlined sum aggregation and its enumerator, for floats.
     /// </summary>
-    internal sealed class FloatSumAggregationOperator : InlinedAggregationOperator<float, double, float>
+    internal sealed class FloatSumAggregationOperator
+        : InlinedAggregationOperator<float, double, float>
     {
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal FloatSumAggregationOperator(IEnumerable<float> child) : base(child)
-        {
-        }
+        internal FloatSumAggregationOperator(IEnumerable<float> child) : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -40,8 +39,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<double> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
-            {
+            using (
+                IEnumerator<double> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            ) {
                 // We just reduce the elements in each output partition.
                 double sum = 0.0;
                 while (enumerator.MoveNext())
@@ -58,10 +61,17 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<double, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<float, TKey> source, object? sharedData,
-            CancellationToken cancellationToken)
-        {
-            return new FloatSumAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
+            int index,
+            int count,
+            QueryOperatorEnumerator<float, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        ) {
+            return new FloatSumAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -69,7 +79,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class FloatSumAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<double>
+        private sealed class FloatSumAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<double>
         {
             private readonly QueryOperatorEnumerator<float, TKey> _source; // The source data.
 
@@ -77,9 +88,11 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal FloatSumAggregationOperatorEnumerator(QueryOperatorEnumerator<float, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal FloatSumAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<float, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            ) : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;
@@ -107,8 +120,7 @@ namespace System.Linq.Parallel
                             _cancellationToken.ThrowIfCancellationRequested();
 
                         tempSum += element;
-                    }
-                    while (source.MoveNext(ref element, ref keyUnused));
+                    } while (source.MoveNext(ref element, ref keyUnused));
 
                     // The sum has been calculated. Now just return.
                     currentElement = tempSum;

@@ -7,7 +7,6 @@ using System.Security;
 using System.Reflection;
 using System.Text;
 
-
 namespace System.Runtime.Serialization.Json
 {
     internal static class JsonGlobals
@@ -16,11 +15,21 @@ namespace System.Runtime.Serialization.Json
         public const string KeyString = "Key";
         public const string ValueString = "Value";
         public const string ServerTypeString = "__type";
-        public static readonly int DataContractXsdBaseNamespaceLength = Globals.DataContractXsdBaseNamespace.Length;
-        public static readonly long unixEpochTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+        public static readonly int DataContractXsdBaseNamespaceLength =
+            Globals.DataContractXsdBaseNamespace.Length;
+        public static readonly long unixEpochTicks =
+            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
         public static readonly SecurityException SecurityException = new SecurityException();
-        public static readonly UnicodeEncoding ValidatingBEUTF16 = new UnicodeEncoding(true, false, true);
-        public static readonly UnicodeEncoding ValidatingUTF16 = new UnicodeEncoding(false, false, true);
+        public static readonly UnicodeEncoding ValidatingBEUTF16 = new UnicodeEncoding(
+            true,
+            false,
+            true
+        );
+        public static readonly UnicodeEncoding ValidatingUTF16 = new UnicodeEncoding(
+            false,
+            false,
+            true
+        );
         public static readonly UTF8Encoding ValidatingUTF8 = new UTF8Encoding(false, true);
         public const string PositiveInf = "INF";
         public const string NegativeInf = "-INF";
@@ -57,7 +66,11 @@ namespace System.Runtime.Serialization.Json
         public const char WhitespaceChar = ' ';
         public const string serverTypeString = "__type";
         public const int maxScopeSize = 25;
-        public static readonly XmlDictionaryString itemDictionaryString = new XmlDictionary().Add("item");
-        public static readonly XmlDictionaryString rootDictionaryString = new XmlDictionary().Add("root");
+        public static readonly XmlDictionaryString itemDictionaryString = new XmlDictionary().Add(
+            "item"
+        );
+        public static readonly XmlDictionaryString rootDictionaryString = new XmlDictionary().Add(
+            "root"
+        );
     }
 }

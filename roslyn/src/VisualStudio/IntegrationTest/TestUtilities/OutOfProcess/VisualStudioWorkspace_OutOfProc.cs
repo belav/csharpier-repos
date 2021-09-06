@@ -29,41 +29,46 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
-        public void SetPersistenceOption(bool value)
-            => SetOption("Enabled", PersistentStorageOptions.OptionName, value);
+        public void SetPersistenceOption(bool value) =>
+            SetOption("Enabled", PersistentStorageOptions.OptionName, value);
 
-        public bool IsPrettyListingOn(string languageName)
-            => _inProc.IsPrettyListingOn(languageName);
+        public bool IsPrettyListingOn(string languageName) =>
+            _inProc.IsPrettyListingOn(languageName);
 
-        public void SetPrettyListing(string languageName, bool value)
-            => _inProc.SetPrettyListing(languageName, value);
+        public void SetPrettyListing(string languageName, bool value) =>
+            _inProc.SetPrettyListing(languageName, value);
 
-        public void SetPerLanguageOption(string optionName, string feature, string language, object value)
-            => _inProc.SetPerLanguageOption(optionName, feature, language, value);
+        public void SetPerLanguageOption(
+            string optionName,
+            string feature,
+            string language,
+            object value
+        ) => _inProc.SetPerLanguageOption(optionName, feature, language, value);
 
-        public void SetOption(string optionName, string feature, object value)
-            => _inProc.SetOption(optionName, feature, value);
+        public void SetOption(string optionName, string feature, object value) =>
+            _inProc.SetOption(optionName, feature, value);
 
-        public void WaitForAsyncOperations(TimeSpan timeout, string featuresToWaitFor, bool waitForWorkspaceFirst = true)
-            => _inProc.WaitForAsyncOperations(timeout, featuresToWaitFor, waitForWorkspaceFirst);
+        public void WaitForAsyncOperations(
+            TimeSpan timeout,
+            string featuresToWaitFor,
+            bool waitForWorkspaceFirst = true
+        ) => _inProc.WaitForAsyncOperations(timeout, featuresToWaitFor, waitForWorkspaceFirst);
 
-        public void WaitForAllAsyncOperations(TimeSpan timeout, params string[] featureNames)
-            => _inProc.WaitForAllAsyncOperations(timeout, featureNames);
+        public void WaitForAllAsyncOperations(TimeSpan timeout, params string[] featureNames) =>
+            _inProc.WaitForAllAsyncOperations(timeout, featureNames);
 
-        public void WaitForAllAsyncOperationsOrFail(TimeSpan timeout, params string[] featureNames)
-            => _inProc.WaitForAllAsyncOperationsOrFail(timeout, featureNames);
+        public void WaitForAllAsyncOperationsOrFail(
+            TimeSpan timeout,
+            params string[] featureNames
+        ) => _inProc.WaitForAllAsyncOperationsOrFail(timeout, featureNames);
 
-        public void CleanUpWorkspace()
-            => _inProc.CleanUpWorkspace();
+        public void CleanUpWorkspace() => _inProc.CleanUpWorkspace();
 
-        public void ResetOptions()
-            => _inProc.ResetOptions();
+        public void ResetOptions() => _inProc.ResetOptions();
 
-        public void CleanUpWaitingService()
-            => _inProc.CleanUpWaitingService();
+        public void CleanUpWaitingService() => _inProc.CleanUpWaitingService();
 
-        public void SetQuickInfo(bool value)
-            => _inProc.EnableQuickInfo(value);
+        public void SetQuickInfo(bool value) => _inProc.EnableQuickInfo(value);
 
         public void SetImportCompletionOption(bool value)
         {
@@ -71,13 +76,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 optionName: "ShowItemsFromUnimportedNamespaces",
                 feature: "CompletionOptions",
                 language: LanguageNames.CSharp,
-                value: value);
+                value: value
+            );
 
             SetPerLanguageOption(
                 optionName: "ShowItemsFromUnimportedNamespaces",
                 feature: "CompletionOptions",
                 language: LanguageNames.VisualBasic,
-                value: value);
+                value: value
+            );
         }
 
         public void SetArgumentCompletionSnippetsOption(bool value)
@@ -86,13 +93,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 optionName: CompletionOptions.EnableArgumentCompletionSnippets.Name,
                 feature: CompletionOptions.EnableArgumentCompletionSnippets.Feature,
                 language: LanguageNames.CSharp,
-                value: value);
+                value: value
+            );
 
             SetPerLanguageOption(
                 optionName: CompletionOptions.EnableArgumentCompletionSnippets.Name,
                 feature: CompletionOptions.EnableArgumentCompletionSnippets.Feature,
                 language: LanguageNames.VisualBasic,
-                value: value);
+                value: value
+            );
         }
 
         public void SetTriggerCompletionInArgumentLists(bool value)
@@ -101,7 +110,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 optionName: CompletionOptions.TriggerInArgumentLists.Name,
                 feature: CompletionOptions.TriggerInArgumentLists.Feature,
                 language: LanguageNames.CSharp,
-                value: value);
+                value: value
+            );
         }
 
         public void SetFullSolutionAnalysis(bool value)
@@ -110,17 +120,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 optionName: SolutionCrawlerOptions.BackgroundAnalysisScopeOption.Name,
                 feature: SolutionCrawlerOptions.BackgroundAnalysisScopeOption.Feature,
                 language: LanguageNames.CSharp,
-                value: value ? BackgroundAnalysisScope.FullSolution : BackgroundAnalysisScope.Default);
+                value: value
+                    ? BackgroundAnalysisScope.FullSolution
+                    : BackgroundAnalysisScope.Default
+            );
 
             SetPerLanguageOption(
                 optionName: SolutionCrawlerOptions.BackgroundAnalysisScopeOption.Name,
                 feature: SolutionCrawlerOptions.BackgroundAnalysisScopeOption.Feature,
                 language: LanguageNames.VisualBasic,
-                value: value ? BackgroundAnalysisScope.FullSolution : BackgroundAnalysisScope.Default);
+                value: value
+                    ? BackgroundAnalysisScope.FullSolution
+                    : BackgroundAnalysisScope.Default
+            );
         }
 
-        public void SetFeatureOption(string feature, string optionName, string language, string valueString)
-            => _inProc.SetFeatureOption(feature, optionName, language, valueString);
+        public void SetFeatureOption(
+            string feature,
+            string optionName,
+            string language,
+            string valueString
+        ) => _inProc.SetFeatureOption(feature, optionName, language, valueString);
 
         public string GetWorkingFolder() => _inProc.GetWorkingFolder();
     }

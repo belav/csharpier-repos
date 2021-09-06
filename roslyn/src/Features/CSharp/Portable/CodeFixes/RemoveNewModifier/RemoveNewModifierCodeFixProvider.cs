@@ -19,25 +19,34 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveNew), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveNew
+        ),
+        Shared
+    ]
     internal class RemoveNewModifierCodeFixProvider : CodeFixProvider
     {
         private const string CS0109 = nameof(CS0109); // The member 'SomeClass.SomeMember' does not hide an accessible member. The new keyword is not required.
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public RemoveNewModifierCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public RemoveNewModifierCodeFixProvider() { }
 
-        public override FixAllProvider GetFixAllProvider()
-            => WellKnownFixAllProviders.BatchFixer;
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS0109);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS0109);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
 
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -53,32 +62,42 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
                 return;
 
             context.RegisterCodeFix(
-                new MyCodeAction(ct => FixAsync(context.Document, generator, memberDeclarationSyntax, ct)),
-                context.Diagnostics);
+                new MyCodeAction(
+                    ct => FixAsync(context.Document, generator, memberDeclarationSyntax, ct)
+                ),
+                context.Diagnostics
+            );
         }
 
         private static async Task<Document> FixAsync(
             Document document,
             SyntaxGenerator generator,
             MemberDeclarationSyntax memberDeclaration,
-            CancellationToken cancellationToken)
-        {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) {
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            return document.WithSyntaxRoot(root.ReplaceNode(
-                memberDeclaration,
-                generator.WithModifiers(
-                    memberDeclaration, generator.GetModifiers(memberDeclaration).WithIsNew(false))));
+            return document.WithSyntaxRoot(
+                root.ReplaceNode(
+                    memberDeclaration,
+                    generator.WithModifiers(
+                        memberDeclaration,
+                        generator.GetModifiers(memberDeclaration).WithIsNew(false)
+                    )
+                )
+            );
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpFeaturesResources.Remove_new_modifier,
-                    createChangedDocument,
-                    CSharpFeaturesResources.Remove_new_modifier)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                CSharpFeaturesResources.Remove_new_modifier,
+                createChangedDocument,
+                CSharpFeaturesResources.Remove_new_modifier
+            ) { }
         }
     }
 }

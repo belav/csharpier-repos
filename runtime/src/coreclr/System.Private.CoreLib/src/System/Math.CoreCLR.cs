@@ -106,7 +106,8 @@ namespace System
 
         public static unsafe (double Sin, double Cos) SinCos(double x)
         {
-            double sin, cos;
+            double sin,
+                cos;
             SinCos(x, &sin, &cos);
             return (sin, cos);
         }

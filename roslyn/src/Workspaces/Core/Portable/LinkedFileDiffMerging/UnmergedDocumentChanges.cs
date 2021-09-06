@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis
         public string ProjectName { get; }
         public DocumentId DocumentId { get; }
 
-        public UnmergedDocumentChanges(IEnumerable<TextChange> unmergedChanges, string projectName, DocumentId documentId)
-        {
+        public UnmergedDocumentChanges(
+            IEnumerable<TextChange> unmergedChanges,
+            string projectName,
+            DocumentId documentId
+        ) {
             UnmergedChanges = unmergedChanges;
             ProjectName = projectName;
             DocumentId = documentId;

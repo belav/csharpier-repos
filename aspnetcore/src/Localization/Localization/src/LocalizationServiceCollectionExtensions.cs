@@ -41,8 +41,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection AddLocalization(
             this IServiceCollection services,
-            Action<LocalizationOptions> setupAction)
-        {
+            Action<LocalizationOptions> setupAction
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -61,14 +61,17 @@ namespace Microsoft.Extensions.DependencyInjection
         // To enable unit testing
         internal static void AddLocalizationServices(IServiceCollection services)
         {
-            services.TryAddSingleton<IStringLocalizerFactory, ResourceManagerStringLocalizerFactory>();
+            services.TryAddSingleton<
+                IStringLocalizerFactory,
+                ResourceManagerStringLocalizerFactory
+            >();
             services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
         }
 
         internal static void AddLocalizationServices(
             IServiceCollection services,
-            Action<LocalizationOptions> setupAction)
-        {
+            Action<LocalizationOptions> setupAction
+        ) {
             AddLocalizationServices(services);
             services.Configure(setupAction);
         }

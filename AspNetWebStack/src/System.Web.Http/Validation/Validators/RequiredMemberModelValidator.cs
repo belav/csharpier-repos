@@ -12,18 +12,19 @@ namespace System.Web.Http.Validation.Validators
     /// </summary>
     public class RequiredMemberModelValidator : ModelValidator
     {
-        public RequiredMemberModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-            : base(validatorProviders)
-        {
-        }
+        public RequiredMemberModelValidator(
+            IEnumerable<ModelValidatorProvider> validatorProviders
+        ) : base(validatorProviders) { }
 
         public override bool IsRequired
         {
             get { return true; }
         }
 
-        public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
-        {
+        public override IEnumerable<ModelValidationResult> Validate(
+            ModelMetadata metadata,
+            object container
+        ) {
             return Enumerable.Empty<ModelValidationResult>();
         }
     }

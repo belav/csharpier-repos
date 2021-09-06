@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.CompilerServices;
 
-interface IBar {}
-interface IFoo<T> {}
-class C : IBar {}
-class C<T> : IFoo<T> {}
-struct S {}
-struct SBar : IBar {}
+interface IBar { }
+interface IFoo<T> { }
+class C : IBar { }
+class C<T> : IFoo<T> { }
+struct S { }
+struct SBar : IBar { }
 
 // More tests for shared types passing through compareTypesForCast
 
@@ -17,8 +17,11 @@ class X
 {
     static int _errors;
 
-    static void IsTrue(bool expression, [CallerLineNumber] int line = 0, [CallerFilePath] string file = "")
-    {
+    static void IsTrue(
+        bool expression,
+        [CallerLineNumber] int line = 0,
+        [CallerFilePath] string file = ""
+    ) {
         if (!expression)
         {
             Console.WriteLine($"{file}:L{line} test failed (expected: true).");
@@ -26,8 +29,11 @@ class X
         }
     }
 
-    static void IsFalse(bool expression, [CallerLineNumber] int line = 0, [CallerFilePath] string file = "")
-    {
+    static void IsFalse(
+        bool expression,
+        [CallerLineNumber] int line = 0,
+        [CallerFilePath] string file = ""
+    ) {
         if (expression)
         {
             Console.WriteLine($"{file}:L{line} test failed (expected: false).");
@@ -115,7 +121,8 @@ class X
         IsFalse(C2(s));
         IsTrue(C2(sb));
 
-        if (_errors == 0) Console.WriteLine("Passed");
+        if (_errors == 0)
+            Console.WriteLine("Passed");
         return _errors > 0 ? -1 : 100;
     }
 }

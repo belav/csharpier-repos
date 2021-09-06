@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             Expression queryExpression,
-            ExpressionPrinter expressionPrinter)
-            : base(eventDefinition, messageGenerator)
+            ExpressionPrinter expressionPrinter
+        ) : base(eventDefinition, messageGenerator)
         {
             Expression = queryExpression;
             ExpressionPrinter = expressionPrinter;

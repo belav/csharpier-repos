@@ -41,15 +41,19 @@ namespace Microsoft.AspNetCore.Http
 
             if (port <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(port), Resources.Exception_PortMustBeGreaterThanZero);
+                throw new ArgumentOutOfRangeException(
+                    nameof(port),
+                    Resources.Exception_PortMustBeGreaterThanZero
+                );
             }
 
             int index;
-            if (host.IndexOf('[') == -1
+            if (
+                host.IndexOf('[') == -1
                 && (index = host.IndexOf(':')) >= 0
                 && index < host.Length - 1
-                && host.IndexOf(':', index + 1) >= 0)
-            {
+                && host.IndexOf(':', index + 1) >= 0
+            ) {
                 // IPv6 without brackets ::1 is the only type of host with 2 or more colons
                 host = $"[{host}]";
             }
@@ -98,9 +102,15 @@ namespace Microsoft.AspNetCore.Http
             {
                 GetParts(_value, out var host, out var port);
 
-                if (!StringSegment.IsNullOrEmpty(port)
-                    && int.TryParse(port.AsSpan(), NumberStyles.None, CultureInfo.InvariantCulture, out var p))
-                {
+                if (
+                    !StringSegment.IsNullOrEmpty(port)
+                    && int.TryParse(
+                        port.AsSpan(),
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out var p
+                    )
+                ) {
                     return p;
                 }
 
@@ -168,10 +178,11 @@ namespace Microsoft.AspNetCore.Http
                 {
                     // IPv6 in brackets [::1], maybe with port
                 }
-                else if ((index = uriComponent.IndexOf(':')) >= 0
+                else if (
+                    (index = uriComponent.IndexOf(':')) >= 0
                     && index < uriComponent.Length - 1
-                    && uriComponent.IndexOf(':', index + 1) >= 0)
-                {
+                    && uriComponent.IndexOf(':', index + 1) >= 0
+                ) {
                     // IPv6 without brackets ::1 is the only type of host with 2 or more colons
                 }
                 else if (uriComponent.IndexOf("xn--", StringComparison.Ordinal) >= 0)
@@ -207,9 +218,14 @@ namespace Microsoft.AspNetCore.Http
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            return new HostString(uri.GetComponents(
-                UriComponents.NormalizedHost | // Always convert punycode to Unicode.
-                UriComponents.HostAndPort, UriFormat.Unescaped));
+            return new HostString(
+                uri.GetComponents(
+                    UriComponents.NormalizedHost
+                        | // Always convert punycode to Unicode.
+                        UriComponents.HostAndPort,
+                    UriFormat.Unescaped
+                )
+            );
         }
 
         /// <summary>
@@ -245,7 +261,9 @@ namespace Microsoft.AspNetCore.Http
             {
                 if (port[i] < '0' || '9' < port[i])
                 {
-                    throw new FormatException($"The given host value '{value}' has a malformed port.");
+                    throw new FormatException(
+                        $"The given host value '{value}' has a malformed port."
+                    );
                 }
             }
 
@@ -265,8 +283,10 @@ namespace Microsoft.AspNetCore.Http
                 }
 
                 // Sub-domain wildcards: *.example.com
-                if (pattern.StartsWith("*.", StringComparison.Ordinal) && host.Length >= pattern.Length)
-                {
+                if (
+                    pattern.StartsWith("*.", StringComparison.Ordinal)
+                    && host.Length >= pattern.Length
+                ) {
                     // .example.com
                     var allowedRoot = pattern.Subsegment(1);
 
@@ -346,8 +366,11 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="value">The value to get the parts of.</param>
         /// <param name="host">The portion of the <paramref name="value"/> which represents the host.</param>
         /// <param name="port">The portion of the <paramref name="value"/> which represents the port.</param>
-        private static void GetParts(StringSegment value, out StringSegment host, out StringSegment port)
-        {
+        private static void GetParts(
+            StringSegment value,
+            out StringSegment host,
+            out StringSegment port
+        ) {
             int index;
             port = null;
             host = null;
@@ -366,10 +389,11 @@ namespace Microsoft.AspNetCore.Http
                     port = value.Subsegment(index + 2);
                 }
             }
-            else if ((index = value.IndexOf(':')) >= 0
+            else if (
+                (index = value.IndexOf(':')) >= 0
                 && index < value.Length - 1
-                && value.IndexOf(':', index + 1) >= 0)
-            {
+                && value.IndexOf(':', index + 1) >= 0
+            ) {
                 // IPv6 without brackets ::1 is the only type of host with 2 or more colons
                 host = $"[{value}]";
                 port = null;

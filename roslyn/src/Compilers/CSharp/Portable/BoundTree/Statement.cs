@@ -27,11 +27,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     partial class BoundFixedStatement
     {
-        protected override ImmutableArray<BoundNode?> Children => ImmutableArray.Create<BoundNode?>(this.Declarations, this.Body);
+        protected override ImmutableArray<BoundNode?> Children =>
+            ImmutableArray.Create<BoundNode?>(this.Declarations, this.Body);
     }
 
     partial class BoundPointerIndirectionOperator
     {
-        protected override ImmutableArray<BoundNode?> Children => ImmutableArray.Create<BoundNode?>(this.Operand);
+        protected override ImmutableArray<BoundNode?> Children =>
+            ImmutableArray.Create<BoundNode?>(this.Operand);
     }
 }

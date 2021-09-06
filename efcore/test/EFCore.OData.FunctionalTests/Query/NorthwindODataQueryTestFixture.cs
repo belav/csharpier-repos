@@ -21,7 +21,9 @@ using Microsoft.OData.UriParser;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindODataQueryTestFixture : NorthwindQuerySqlServerFixture<NoopModelCustomizer>, IODataQueryTestFixture
+    public class NorthwindODataQueryTestFixture
+        : NorthwindQuerySqlServerFixture<NoopModelCustomizer>,
+          IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 
@@ -29,11 +31,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public NorthwindODataQueryTestFixture()
         {
-            (BaseAddress, ClientFactory, _selfHostServer)
-                = ODataQueryTestFixtureInitializer.Initialize<NorthwindODataContext>(
+            (BaseAddress, ClientFactory, _selfHostServer) =
+                ODataQueryTestFixtureInitializer.Initialize<NorthwindODataContext>(
                     StoreName,
                     GetEdmModel(),
-                    new List<IODataRoutingConvention> { new OrderDetailsRoutingConvention() });
+                    new List<IODataRoutingConvention> { new OrderDetailsRoutingConvention() }
+                );
         }
 
         private static IEdmModel GetEdmModel()
@@ -72,10 +75,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return null;
             }
 
-            if (odataPath.PathTemplate == "~/entityset"
-                && routeContext.HttpContext.Request.Method.Equals("get", StringComparison.OrdinalIgnoreCase)
-                && ((EntitySetSegment)odataPath.Segments[0]).EntitySet.Name == "Order Details")
-            {
+            if (
+                odataPath.PathTemplate == "~/entityset"
+                && routeContext.HttpContext.Request.Method.Equals(
+                    "get",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && ((EntitySetSegment)odataPath.Segments[0]).EntitySet.Name == "Order Details"
+            ) {
                 return routeContext.HttpContext.RequestServices.GetRequiredService<IActionDescriptorCollectionProvider>()
                     .ActionDescriptors.Items.OfType<ControllerActionDescriptor>()
                     .Where(c => c.ControllerName == "OrderDetails" && c.ActionName == "Get");

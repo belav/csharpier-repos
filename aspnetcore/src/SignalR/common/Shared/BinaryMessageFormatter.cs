@@ -32,8 +32,7 @@ namespace Microsoft.AspNetCore.Internal
                     current |= 0x80;
                 }
                 lenNumBytes++;
-            }
-            while (length > 0);
+            } while (length > 0);
 
             return lenNumBytes;
         }
@@ -45,8 +44,7 @@ namespace Microsoft.AspNetCore.Internal
             {
                 length >>= 7;
                 lenNumBytes++;
-            }
-            while (length > 0);
+            } while (length > 0);
 
             return lenNumBytes;
         }

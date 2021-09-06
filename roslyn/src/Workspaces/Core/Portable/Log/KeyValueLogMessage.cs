@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// </summary>
     internal sealed class KeyValueLogMessage : LogMessage
     {
-        private static readonly ObjectPool<KeyValueLogMessage> s_pool = new(() => new KeyValueLogMessage(), 20);
+        private static readonly ObjectPool<KeyValueLogMessage> s_pool =
+            new(() => new KeyValueLogMessage(), 20);
 
         public static readonly KeyValueLogMessage NoProperty = new();
 
@@ -28,11 +29,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             return logMessage;
         }
 
-        public static KeyValueLogMessage Create(LogType kind)
-            => Create(kind, propertySetter: null);
+        public static KeyValueLogMessage Create(LogType kind) => Create(kind, propertySetter: null);
 
-        public static KeyValueLogMessage Create(LogType kind, Action<Dictionary<string, object>> propertySetter)
-        {
+        public static KeyValueLogMessage Create(
+            LogType kind,
+            Action<Dictionary<string, object>> propertySetter
+        ) {
             var logMessage = s_pool.Allocate();
             logMessage.Construct(kind, propertySetter);
 
@@ -124,7 +126,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// Log some traces of an activity (default)
         /// </summary>
         Trace,
-
         /// <summary>
         /// Log an user explicit action
         /// </summary>

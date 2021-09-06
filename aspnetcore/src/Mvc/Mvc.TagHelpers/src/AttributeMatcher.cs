@@ -25,8 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             TagHelperContext context,
             ModeAttributes<TMode>[] modeInfos,
             Func<TMode, TMode, int> compare,
-            out TMode result)
-        {
+            out TMode result
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -53,10 +53,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             {
                 var requiredAttributes = modeInfo.Attributes;
                 // If there are fewer attributes present than required, one or more of them must be missing.
-                if (allAttributesCount >= requiredAttributes.Length &&
-                    !HasMissingAttributes(allAttributes, requiredAttributes) &&
-                    compare(result, modeInfo.Mode) <= 0)
-                {
+                if (
+                    allAttributesCount >= requiredAttributes.Length
+                    && !HasMissingAttributes(allAttributes, requiredAttributes)
+                    && compare(result, modeInfo.Mode) <= 0
+                ) {
                     foundResult = true;
                     result = modeInfo.Mode;
                 }
@@ -65,8 +66,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             return foundResult;
         }
 
-        private static bool HasMissingAttributes(ReadOnlyTagHelperAttributeList allAttributes, string[] requiredAttributes)
-        {
+        private static bool HasMissingAttributes(
+            ReadOnlyTagHelperAttributeList allAttributes,
+            string[] requiredAttributes
+        ) {
             // Check for all attribute values
             // Perf: Avoid allocating enumerator
             for (var i = 0; i < requiredAttributes.Length; i++)

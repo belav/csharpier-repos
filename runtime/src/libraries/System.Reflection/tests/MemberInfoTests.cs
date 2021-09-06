@@ -18,11 +18,23 @@ namespace System.Reflection.Tests
         [Fact]
         public void MetadataToken()
         {
-            Assert.Equal(GetMetadataTokens(typeof(SampleClass)), GetMetadataTokens(typeof(SampleClass)));
-            Assert.Equal(GetMetadataTokens(new MemberInfoTests().GetType()), GetMetadataTokens(new MemberInfoTests().GetType()));
-            Assert.Equal(GetMetadataTokens(new Dictionary<int, string>().GetType()), GetMetadataTokens(new Dictionary<int, int>().GetType()));
+            Assert.Equal(
+                GetMetadataTokens(typeof(SampleClass)),
+                GetMetadataTokens(typeof(SampleClass))
+            );
+            Assert.Equal(
+                GetMetadataTokens(new MemberInfoTests().GetType()),
+                GetMetadataTokens(new MemberInfoTests().GetType())
+            );
+            Assert.Equal(
+                GetMetadataTokens(new Dictionary<int, string>().GetType()),
+                GetMetadataTokens(new Dictionary<int, int>().GetType())
+            );
             Assert.Equal(GetMetadataTokens(typeof(int)), GetMetadataTokens(typeof(int)));
-            Assert.Equal(GetMetadataTokens(typeof(Dictionary<,>)), GetMetadataTokens(typeof(Dictionary<,>)));
+            Assert.Equal(
+                GetMetadataTokens(typeof(Dictionary<, >)),
+                GetMetadataTokens(typeof(Dictionary<, >))
+            );
         }
 
         [Fact]
@@ -192,7 +204,7 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(SampleClass) };
             yield return new object[] { new MemberInfoTests().GetType() };
             yield return new object[] { typeof(int) };
-            yield return new object[] { typeof(Dictionary<,>) };
+            yield return new object[] { typeof(Dictionary<, >) };
         }
 
         [Theory]
@@ -214,7 +226,8 @@ namespace System.Reflection.Tests
         public static void HasSameMetadataDefinitionAs_GenericClassMembers()
         {
             Type tGeneric = typeof(GenericTestClass<>);
-            IEnumerable<MethodInfo> methodsOnGeneric = tGeneric.GetTypeInfo().GetDeclaredMethods(nameof(GenericTestClass<object>.Foo));
+            IEnumerable<MethodInfo> methodsOnGeneric = tGeneric.GetTypeInfo()
+                .GetDeclaredMethods(nameof(GenericTestClass<object>.Foo));
 
             List<Type> typeInsts = new List<Type>();
             foreach (MethodInfo method in methodsOnGeneric)
@@ -229,28 +242,38 @@ namespace System.Reflection.Tests
 
         private static void CrossTestHasSameMethodDefinitionAs(params Type[] types)
         {
-            Assert.All(types,
-                delegate (Type type1)
+            Assert.All(
+                types,
+                delegate(Type type1)
                 {
-                    Assert.All(type1.GenerateTestMemberList(),
-                        delegate (MemberInfo m1)
+                    Assert.All(
+                        type1.GenerateTestMemberList(),
+                        delegate(MemberInfo m1)
                         {
                             MarkerAttribute mark1 = m1.GetCustomAttribute<MarkerAttribute>();
                             if (mark1 == null)
                                 return;
 
-                            Assert.All(types,
-                                delegate (Type type2)
+                            Assert.All(
+                                types,
+                                delegate(Type type2)
                                 {
-                                    Assert.All(type2.GenerateTestMemberList(),
-                                        delegate (MemberInfo m2)
+                                    Assert.All(
+                                        type2.GenerateTestMemberList(),
+                                        delegate(MemberInfo m2)
                                         {
-                                            MarkerAttribute mark2 = m2.GetCustomAttribute<MarkerAttribute>();
+                                            MarkerAttribute mark2 =
+                                                m2.GetCustomAttribute<MarkerAttribute>();
                                             if (mark2 == null)
                                                 return;
 
-                                            bool hasSameMetadata = m1.HasSameMetadataDefinitionAs(m2);
-                                            Assert.Equal(hasSameMetadata, m2.HasSameMetadataDefinitionAs(m1));
+                                            bool hasSameMetadata = m1.HasSameMetadataDefinitionAs(
+                                                m2
+                                            );
+                                            Assert.Equal(
+                                                hasSameMetadata,
+                                                m2.HasSameMetadataDefinitionAs(m1)
+                                            );
 
                                             if (hasSameMetadata)
                                             {
@@ -275,17 +298,28 @@ namespace System.Reflection.Tests
         {
             Type tBase = typeof(GenericTestClass<>);
             Type tDerived = typeof(DerivedFromGenericTestClass<int>);
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Static
+                | BindingFlags.Instance;
 
-            IEnumerable<MemberInfo> baseMembers = tBase.GetMembers(bf).Where(m => m.IsDefined(typeof(MarkerAttribute)));
+            IEnumerable<MemberInfo> baseMembers = tBase.GetMembers(bf)
+                .Where(m => m.IsDefined(typeof(MarkerAttribute)));
             baseMembers = baseMembers.Where(bm => !(bm is ConstructorInfo)); // Constructors cannot be seen from derived types.
-            IEnumerable<MemberInfo> derivedMembers = tDerived.GetMembers(bf).Where(m => m.IsDefined(typeof(MarkerAttribute)));
-            Assert.All(baseMembers,
-                delegate (MemberInfo baseMember)
+            IEnumerable<MemberInfo> derivedMembers = tDerived.GetMembers(bf)
+                .Where(m => m.IsDefined(typeof(MarkerAttribute)));
+            Assert.All(
+                baseMembers,
+                delegate(MemberInfo baseMember)
                 {
-                    MemberInfo matchingDerivedMember = derivedMembers.Single(dm => dm.HasSameMarkAs(baseMember));
+                    MemberInfo matchingDerivedMember = derivedMembers.Single(
+                        dm => dm.HasSameMarkAs(baseMember)
+                    );
                     Assert.True(baseMember.HasSameMetadataDefinitionAs(matchingDerivedMember));
-                    Assert.True(matchingDerivedMember.HasSameMetadataDefinitionAs(matchingDerivedMember));
+                    Assert.True(
+                        matchingDerivedMember.HasSameMetadataDefinitionAs(matchingDerivedMember)
+                    );
                 }
             );
         }
@@ -296,8 +330,13 @@ namespace System.Reflection.Tests
             Type t1 = typeof(TestClassWithGenericMethod<>);
             Type theT = t1.GetTypeInfo().GenericTypeParameters[0];
 
-            MethodInfo mooNormal = t1.GetConfirmedMethod(nameof(TestClassWithGenericMethod<object>.Moo), theT);
-            MethodInfo mooGeneric = t1.GetTypeInfo().GetDeclaredMethods("Moo").Single(m => m.IsGenericMethod);
+            MethodInfo mooNormal = t1.GetConfirmedMethod(
+                nameof(TestClassWithGenericMethod<object>.Moo),
+                theT
+            );
+            MethodInfo mooGeneric = t1.GetTypeInfo()
+                .GetDeclaredMethods("Moo")
+                .Single(m => m.IsGenericMethod);
 
             MethodInfo mooInst = mooGeneric.MakeGenericMethod(typeof(int));
             Assert.True(mooGeneric.HasSameMetadataDefinitionAs(mooInst));
@@ -308,7 +347,10 @@ namespace System.Reflection.Tests
             Assert.True(mooInst.HasSameMetadataDefinitionAs(mooInst2));
 
             Type t2 = typeof(TestClassWithGenericMethod<int>);
-            MethodInfo mooNormalOnT2 = t2.GetConfirmedMethod(nameof(TestClassWithGenericMethod<object>.Moo), typeof(int));
+            MethodInfo mooNormalOnT2 = t2.GetConfirmedMethod(
+                nameof(TestClassWithGenericMethod<object>.Moo),
+                typeof(int)
+            );
             Assert.False(mooInst.HasSameMetadataDefinitionAs(mooNormalOnT2));
         }
 
@@ -320,7 +362,6 @@ namespace System.Reflection.Tests
             Type tg = typeof(GenericTestClass<>);
             Type tginst1 = typeof(GenericTestClass<int>);
             Type tginst2 = typeof(GenericTestClass<string>);
-
 
             Assert.True(tnong.HasSameMetadataDefinitionAs(tnong));
             Assert.True(tnong2.HasSameMetadataDefinitionAs(tnong2));
@@ -344,11 +385,21 @@ namespace System.Reflection.Tests
         public static void HasSameMetadataDefinitionAs_GenericTypeParameters()
         {
             Type theT = typeof(GenericTestClass<>).GetTypeInfo().GenericTypeParameters[0];
-            Type theT2 = typeof(TestClassWithGenericMethod<>).GetTypeInfo().GenericTypeParameters[0];
+            Type theT2 = typeof(TestClassWithGenericMethod<>).GetTypeInfo().GenericTypeParameters[
+                0
+            ];
 
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.ExactBinding;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Static
+                | BindingFlags.Instance
+                | BindingFlags.DeclaredOnly
+                | BindingFlags.ExactBinding;
             MethodInfo mooNong = theT2.GetMethod("Moo", bf, null, new Type[] { theT2 }, null);
-            MethodInfo mooGeneric = typeof(TestClassWithGenericMethod<>).GetTypeInfo().GetDeclaredMethods("Moo").Single(m => m.IsGenericMethod);
+            MethodInfo mooGeneric = typeof(TestClassWithGenericMethod<>).GetTypeInfo()
+                .GetDeclaredMethods("Moo")
+                .Single(m => m.IsGenericMethod);
             Type theM = mooGeneric.GetGenericArguments()[0];
 
             Assert.True(theT.HasSameMetadataDefinitionAs(theT));
@@ -368,15 +419,17 @@ namespace System.Reflection.Tests
             Type twin1 = typeof(Twin1);
             Type twin2 = typeof(Twin2);
 
-            Assert.All(twin1.GenerateTestMemberList(),
-                delegate (MemberInfo m1)
+            Assert.All(
+                twin1.GenerateTestMemberList(),
+                delegate(MemberInfo m1)
                 {
-                    Assert.All(twin2.GenerateTestMemberList(),
-                        delegate (MemberInfo m2)
+                    Assert.All(
+                        twin2.GenerateTestMemberList(),
+                        delegate(MemberInfo m2)
                         {
                             Assert.False(m1.HasSameMetadataDefinitionAs(m2));
                         }
-                     );
+                    );
                 }
             );
         }
@@ -415,13 +468,19 @@ namespace System.Reflection.Tests
 
         [Theory]
         [MemberData(nameof(NegativeTypeData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34328", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34328",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public static void HasSameMetadataDefinitionAs_Negative_NonRuntimeType(Type type)
         {
             Type mockType = new MockType();
             Assert.False(type.HasSameMetadataDefinitionAs(mockType));
-            Assert.All(type.GenerateTestMemberList(),
-                delegate (MemberInfo member)
+            Assert.All(
+                type.GenerateTestMemberList(),
+                delegate(MemberInfo member)
                 {
                     Assert.False(member.HasSameMetadataDefinitionAs(mockType));
                 }
@@ -429,20 +488,33 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34328", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34328",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(NegativeTypeData))]
         public static void HasSameMetadataDefinitionAs_Negative_Null(Type type)
         {
-            AssertExtensions.Throws<ArgumentNullException>("other", () => type.HasSameMetadataDefinitionAs(null));
-            Assert.All(type.GenerateTestMemberList(),
-                delegate (MemberInfo member)
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => type.HasSameMetadataDefinitionAs(null)
+            );
+            Assert.All(
+                type.GenerateTestMemberList(),
+                delegate(MemberInfo member)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>("other", () => member.HasSameMetadataDefinitionAs(null));
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "other",
+                        () => member.HasSameMetadataDefinitionAs(null)
+                    );
                 }
             );
         }
 
-        public static IEnumerable<object[]> NegativeTypeData => NegativeTypeDataRaw.Select(t => new object[] { t });
+        public static IEnumerable<object[]> NegativeTypeData =>
+            NegativeTypeDataRaw.Select(t => new object[] { t });
         private static IEnumerable<Type> NegativeTypeDataRaw
         {
             get
@@ -459,7 +531,9 @@ namespace System.Reflection.Tests
 
                 yield return typeof(GenericTestClass<>).GetTypeInfo().GenericTypeParameters[0];
                 if (PlatformDetection.IsWindows)
-                    yield return Type.GetTypeFromCLSID(new Guid("DCA66D18-E253-4695-9E08-35B54420AFA2"));
+                    yield return Type.GetTypeFromCLSID(
+                        new Guid("DCA66D18-E253-4695-9E08-35B54420AFA2")
+                    );
             }
         }
 
@@ -485,8 +559,9 @@ namespace System.Reflection.Tests
                 typeof(double).MakePointerType(),
             };
 
-            Assert.All(types,
-                delegate (Type t1)
+            Assert.All(
+                types,
+                delegate(Type t1)
                 {
                     Assert.All(types, t2 => Assert.True(t1.HasSameMetadataDefinitionAs(t2)));
                 }
@@ -512,8 +587,11 @@ namespace System.Reflection.Tests
             List<MemberInfo> members = new List<MemberInfo>();
             foreach (Type arrayType in arrayTypes)
             {
-                foreach (MemberInfo member in arrayType.GetMembers(BindingFlags.Public|BindingFlags.Instance | BindingFlags.DeclaredOnly))
-                {
+                foreach (
+                    MemberInfo member in arrayType.GetMembers(
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                    )
+                ) {
                     if (member is MethodBase)
                     {
                         members.Add(member);
@@ -521,11 +599,13 @@ namespace System.Reflection.Tests
                 }
             }
 
-            Assert.All(members,
-                delegate (MemberInfo member1)
+            Assert.All(
+                members,
+                delegate(MemberInfo member1)
                 {
-                    Assert.All(members,
-                        delegate (MemberInfo member2)
+                    Assert.All(
+                        members,
+                        delegate(MemberInfo member2)
                         {
                             if (member1.MemberType == member2.MemberType)
                                 Assert.True(member1.HasSameMetadataDefinitionAs(member2));
@@ -538,7 +618,12 @@ namespace System.Reflection.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34328", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34328",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [PlatformSpecific(TestPlatforms.Windows)]
         public static void HasSameMetadataDefinitionAs_CornerCase_CLSIDConstructor()
         {
@@ -572,7 +657,6 @@ namespace System.Reflection.Tests
         }
 
         private class TestClass2 { }
-
 
         private class GenericTestClass<T>
         {
@@ -610,37 +694,70 @@ namespace System.Reflection.Tests
             public T Field3;
 
             [Marker(301)]
-            public int Property1 { get { throw null; } set { throw null; } }
+            public int Property1
+            {
+                get { throw null; }
+                set { throw null; }
+            }
             [Marker(302)]
-            public int Property2 { get { throw null; } set { throw null; } }
+            public int Property2
+            {
+                get { throw null; }
+                set { throw null; }
+            }
             [Marker(303)]
-            public T Property3 { get { throw null; } set { throw null; } }
+            public T Property3
+            {
+                get { throw null; }
+                set { throw null; }
+            }
 
             [Marker(401)]
-            public event Action Event1 { add { } remove { } }
+            public event Action Event1
+            {
+                add { }
+                remove { }
+            }
             [Marker(402)]
-            public event Action<int> Event2 { add { } remove { } }
+            public event Action<int> Event2
+            {
+                add { }
+                remove { }
+            }
             [Marker(403)]
-            public event Action<T> Event3 { add { } remove { } }
+            public event Action<T> Event3
+            {
+                add { }
+                remove { }
+            }
         }
 
         private class DerivedFromGenericTestClass<T> : GenericTestClass<T> { }
 
         private MemberInfo[] GetMembers(Type type)
         {
-            return type.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            return type.GetMembers(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
         }
 
         private IEnumerable<int> GetMetadataTokens(Type type)
         {
-            return type.GetTypeInfo().GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Select(m => m.HasMetadataToken() ? m.MetadataToken : 0);
+            return type.GetTypeInfo()
+                .GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                .Select(m => m.HasMetadataToken() ? m.MetadataToken : 0);
         }
 
-        private MemberInfo[] GetOrderedMembers(Type type) => GetMembers(type).OrderBy(member => member.Name).ToArray();
+        private MemberInfo[] GetOrderedMembers(Type type) =>
+            GetMembers(type).OrderBy(member => member.Name).ToArray();
 
         private class Base
         {
-            public event Action MyEvent { add { } remove { } }
+            public event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
 #pragma warning disable 0649
             public int MyField;
 #pragma warning restore 0649
@@ -711,17 +828,31 @@ namespace System.Reflection.Tests
             return marker1.Mark == marker2.Mark;
         }
 
-        internal static MethodInfo GetConfirmedMethod(this Type t, string name, params Type[] parameterTypes)
-        {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.ExactBinding;
+        internal static MethodInfo GetConfirmedMethod(
+            this Type t,
+            string name,
+            params Type[] parameterTypes
+        ) {
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.ExactBinding;
             MethodInfo method = t.GetMethod(name, bf, null, parameterTypes, null);
             Assert.NotNull(method);
             return method;
         }
 
-        internal static ConstructorInfo GetConfirmedConstructor(this Type t, params Type[] parameterTypes)
-        {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.ExactBinding;
+        internal static ConstructorInfo GetConfirmedConstructor(
+            this Type t,
+            params Type[] parameterTypes
+        ) {
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.ExactBinding;
             ConstructorInfo ctor = t.GetConstructor(bf, null, parameterTypes, null);
             Assert.NotNull(ctor);
             return ctor;
@@ -746,7 +877,9 @@ namespace System.Reflection.Tests
                     {
                         yield return mgp;
                     }
-                    yield return method.MakeGenericMethod(method.GetGenericArguments().Select(ga => typeof(object)).ToArray());
+                    yield return method.MakeGenericMethod(
+                        method.GetGenericArguments().Select(ga => typeof(object)).ToArray()
+                    );
                 }
             }
         }

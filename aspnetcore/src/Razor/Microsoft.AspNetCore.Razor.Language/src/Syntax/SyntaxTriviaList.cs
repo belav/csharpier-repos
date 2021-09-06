@@ -12,7 +12,9 @@ using Microsoft.Extensions.Internal;
 namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     [StructLayout(LayoutKind.Auto)]
-    internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadOnlyList<SyntaxTrivia>
+    internal readonly struct SyntaxTriviaList
+        : IEquatable<SyntaxTriviaList>,
+          IReadOnlyList<SyntaxTrivia>
     {
         public static SyntaxTriviaList Empty => default(SyntaxTriviaList);
 
@@ -41,19 +43,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// Creates a list of trivia.
         /// </summary>
         /// <param name="trivias">An array of trivia.</param>
-        public SyntaxTriviaList(params SyntaxTrivia[] trivias)
-            : this(CreateNode(trivias), 0, 0)
-        {
-        }
+        public SyntaxTriviaList(params SyntaxTrivia[] trivias) : this(CreateNode(trivias), 0, 0) { }
 
         /// <summary>
         /// Creates a list of trivia.
         /// </summary>
         /// <param name="trivias">A sequence of trivia.</param>
         public SyntaxTriviaList(IEnumerable<SyntaxTrivia> trivias)
-            : this(SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0)
-        {
-        }
+            : this(SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0) { }
 
         private static SyntaxNode CreateNode(SyntaxTrivia[] trivias)
         {
@@ -141,8 +138,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     return default(TextSpan);
                 }
 
-                return TextSpan.FromBounds(Position + Node.Green.GetLeadingTriviaWidth(),
-                    Position + Node.FullWidth - Node.Green.GetTrailingTriviaWidth());
+                return TextSpan.FromBounds(
+                    Position + Node.Green.GetLeadingTriviaWidth(),
+                    Position + Node.FullWidth - Node.Green.GetTrailingTriviaWidth()
+                );
             }
         }
 
@@ -150,7 +149,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// Returns the first trivia in the list.
         /// </summary>
         /// <returns>The first trivia in the list.</returns>
-        /// <exception cref="InvalidOperationException">The list is empty.</exception>        
+        /// <exception cref="InvalidOperationException">The list is empty.</exception>
         public SyntaxTrivia First()
         {
             if (Any())
@@ -165,7 +164,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// Returns the last trivia in the list.
         /// </summary>
         /// <returns>The last trivia in the list.</returns>
-        /// <exception cref="InvalidOperationException">The list is empty.</exception>        
+        /// <exception cref="InvalidOperationException">The list is empty.</exception>
         public SyntaxTrivia Last()
         {
             if (Any())
@@ -261,8 +260,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         private static readonly ObjectPool<SyntaxTriviaListBuilder> s_builderPool =
             new ObjectPool<SyntaxTriviaListBuilder>(() => SyntaxTriviaListBuilder.Create());
 
-        private static SyntaxTriviaListBuilder GetBuilder()
-            => s_builderPool.Allocate();
+        private static SyntaxTriviaListBuilder GetBuilder() => s_builderPool.Allocate();
 
         private static void ClearAndFreeBuilder(SyntaxTriviaListBuilder builder)
         {
@@ -319,6 +317,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
                 return builder.Count == thisCount ? this : builder.ToList();
             }
+
             finally
             {
                 ClearAndFreeBuilder(builder);
@@ -376,8 +375,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// </summary>
         /// <param name="triviaInList">The trivia element to replace.</param>
         /// <param name="newTrivia">The trivia to replace the element with.</param>
-        public SyntaxTriviaList ReplaceRange(SyntaxTrivia triviaInList, IEnumerable<SyntaxTrivia> newTrivia)
-        {
+        public SyntaxTriviaList ReplaceRange(
+            SyntaxTrivia triviaInList,
+            IEnumerable<SyntaxTrivia> newTrivia
+        ) {
             var index = IndexOf(triviaInList);
             if (index >= 0 && index < Count)
             {
@@ -529,8 +530,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 return new ReversedEnumeratorImpl(in _list);
             }
 
-            IEnumerator
-                IEnumerable.GetEnumerator()
+            IEnumerator IEnumerable.GetEnumerator()
             {
                 if (_list.Count == 0)
                 {
@@ -566,8 +566,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 private SyntaxNode _current;
                 private int _position;
 
-                public Enumerator(in SyntaxTriviaList list)
-                    : this()
+                public Enumerator(in SyntaxTriviaList list) : this()
                 {
                     if (list.Any())
                     {
@@ -637,9 +636,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     throw new NotSupportedException();
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
 
@@ -777,9 +774,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 throw new NotSupportedException();
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

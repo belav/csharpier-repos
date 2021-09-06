@@ -16,10 +16,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// Instantiates a new instance of <see cref="ReadOnlyTagHelperAttributeList"/> with an empty
         /// collection.
         /// </summary>
-        protected ReadOnlyTagHelperAttributeList()
-            : base(new List<TagHelperAttribute>())
-        {
-        }
+        protected ReadOnlyTagHelperAttributeList() : base(new List<TagHelperAttribute>()) { }
 
         /// <summary>
         /// Instantiates a new instance of <see cref="ReadOnlyTagHelperAttributeList"/> with the specified
@@ -27,9 +24,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </summary>
         /// <param name="attributes">The collection to wrap.</param>
         public ReadOnlyTagHelperAttributeList(IList<TagHelperAttribute> attributes)
-            : base(attributes)
-        {
-        }
+            : base(attributes) { }
 
         /// <summary>
         /// Gets the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/>
@@ -144,7 +139,9 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     matchedAttributes.Add(attribute);
                 }
             }
-            attributes = matchedAttributes ?? (IReadOnlyList<TagHelperAttribute>)Array.Empty<TagHelperAttribute>();
+            attributes =
+                matchedAttributes
+                ?? (IReadOnlyList<TagHelperAttribute>)Array.Empty<TagHelperAttribute>();
 
             return matchedAttributes != null;
         }

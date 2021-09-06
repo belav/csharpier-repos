@@ -11,47 +11,36 @@ namespace System.IO.Pipes
         public PipeAuditRule(
             IdentityReference identity,
             PipeAccessRights rights,
-            AuditFlags flags)
-            : this(
-                identity,
-                AccessMaskFromRights(rights),
-                false,
-                flags)
-        {
-        }
+            AuditFlags flags
+        ) : this(identity, AccessMaskFromRights(rights), false, flags) { }
 
-        public PipeAuditRule(
-            string identity,
-            PipeAccessRights rights,
-            AuditFlags flags)
-            : this(
-                new NTAccount(identity),
-                AccessMaskFromRights(rights),
-                false,
-                flags)
-        {
-        }
+        public PipeAuditRule(string identity, PipeAccessRights rights, AuditFlags flags)
+            : this(new NTAccount(identity), AccessMaskFromRights(rights), false, flags) { }
 
         internal PipeAuditRule(
             IdentityReference identity,
             int accessMask,
             bool isInherited,
-            AuditFlags flags)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                InheritanceFlags.None,
-                PropagationFlags.None,
-                flags)
-        {
-        }
+            AuditFlags flags
+        ) : base(
+            identity,
+            accessMask,
+            isInherited,
+            InheritanceFlags.None,
+            PropagationFlags.None,
+            flags
+        ) { }
 
         private static int AccessMaskFromRights(PipeAccessRights rights)
         {
-            if (rights < (PipeAccessRights)0 || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity))
-            {
-                throw new ArgumentOutOfRangeException(nameof(rights), SR.ArgumentOutOfRange_NeedValidPipeAccessRights);
+            if (
+                rights < (PipeAccessRights)0
+                || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity)
+            ) {
+                throw new ArgumentOutOfRangeException(
+                    nameof(rights),
+                    SR.ArgumentOutOfRange_NeedValidPipeAccessRights
+                );
             }
 
             return (int)rights;
@@ -59,10 +48,7 @@ namespace System.IO.Pipes
 
         public PipeAccessRights PipeAccessRights
         {
-            get
-            {
-                return PipeAccessRule.RightsFromAccessMask(base.AccessMask);
-            }
+            get { return PipeAccessRule.RightsFromAccessMask(base.AccessMask); }
         }
     }
 }

@@ -13,7 +13,11 @@ namespace System.Web.Http.ValueProviders
         [Fact]
         public void ConvertTo_ReturnsNullForReferenceTypes_WhenValueIsNull()
         {
-            var valueProviderResult = new ValueProviderResult(null, null, CultureInfo.InvariantCulture);
+            var valueProviderResult = new ValueProviderResult(
+                null,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             var convertedValue = valueProviderResult.ConvertTo(typeof(string));
 
@@ -23,7 +27,11 @@ namespace System.Web.Http.ValueProviders
         [Fact]
         public void ConvertTo_ReturnsDefaultForValueTypes_WhenValueIsNull()
         {
-            var valueProviderResult = new ValueProviderResult(null, null, CultureInfo.InvariantCulture);
+            var valueProviderResult = new ValueProviderResult(
+                null,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             var convertedValue = valueProviderResult.ConvertTo(typeof(int));
 
@@ -34,7 +42,11 @@ namespace System.Web.Http.ValueProviders
         public void ConvertTo_PopulatesArray_WhenSingleNeedsToBeConvertedToArray()
         {
             // Arrange
-            var valueProviderResult = new ValueProviderResult(DayOfWeek.Friday, "It's Friday!", CultureInfo.InvariantCulture);
+            var valueProviderResult = new ValueProviderResult(
+                DayOfWeek.Friday,
+                "It's Friday!",
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             var convertedValue = (DayOfWeek[])valueProviderResult.ConvertTo(typeof(DayOfWeek[]));
@@ -48,7 +60,11 @@ namespace System.Web.Http.ValueProviders
         {
             // Arrange
             string[] values = new[] { "3", "2", "1" };
-            var valueProviderResult = new ValueProviderResult(values, values.ToString(), CultureInfo.InvariantCulture);
+            var valueProviderResult = new ValueProviderResult(
+                values,
+                values.ToString(),
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             var convertedValue = valueProviderResult.ConvertTo(typeof(int[]));
@@ -62,7 +78,11 @@ namespace System.Web.Http.ValueProviders
         {
             // Arrange
             List<string> values = new List<string> { "-1", "0", "1" };
-            var valueProviderResult = new ValueProviderResult(values, values.ToString(), CultureInfo.InvariantCulture);
+            var valueProviderResult = new ValueProviderResult(
+                values,
+                values.ToString(),
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             var convertedValue = valueProviderResult.ConvertTo(typeof(int[]));
@@ -88,10 +108,16 @@ namespace System.Web.Http.ValueProviders
 
         [Theory]
         [PropertyData("SingleValueBoundToArrayData")]
-        public void ConvertTo_ReturnsFirstValue_WhenSequenceNeedsToConvertedToSingleValue(IList value, object expected)
-        {
+        public void ConvertTo_ReturnsFirstValue_WhenSequenceNeedsToConvertedToSingleValue(
+            IList value,
+            object expected
+        ) {
             // Arrange
-            var valueProviderResult = new ValueProviderResult(value, value.ToString(), CultureInfo.InvariantCulture);
+            var valueProviderResult = new ValueProviderResult(
+                value,
+                value.ToString(),
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             var convertedValue = valueProviderResult.ConvertTo(expected.GetType());

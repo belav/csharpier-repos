@@ -42,9 +42,13 @@ namespace System.ComponentModel.Composition.Hosting
         public class TestCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged
         {
             private Func<IQueryable<ComposablePartDefinition>> _partFunc;
-            private Func<IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>> _exportsFunc;
-            public TestCatalog(Func<IQueryable<ComposablePartDefinition>> partFunc, Func<IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>> exportsFunc)
-            {
+            private Func<
+                IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>
+            > _exportsFunc;
+            public TestCatalog(
+                Func<IQueryable<ComposablePartDefinition>> partFunc,
+                Func<IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>> exportsFunc
+            ) {
                 this._partFunc = partFunc;
                 this._exportsFunc = exportsFunc;
             }
@@ -54,7 +58,9 @@ namespace System.ComponentModel.Composition.Hosting
                 get { return this._partFunc.Invoke(); }
             }
 
-            public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+            public override IEnumerable<
+                Tuple<ComposablePartDefinition, ExportDefinition>
+            > GetExports(ImportDefinition definition)
             {
                 return this._exportsFunc.Invoke();
             }
@@ -87,9 +93,18 @@ namespace System.ComponentModel.Composition.Hosting
             TypeCatalog catalog1 = new TypeCatalog(typeof(FooImpl2));
             TypeCatalog catalog2 = new TypeCatalog(typeof(FooImpl3));
 
-            CompositionScopeDefinition scope1 = new CompositionScopeDefinition(catalog1, Enumerable.Empty<CompositionScopeDefinition>());
-            CompositionScopeDefinition scope2 = new CompositionScopeDefinition(catalog1, Enumerable.Empty<CompositionScopeDefinition>());
-            CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, new CompositionScopeDefinition[] { scope1, scope2 });
+            CompositionScopeDefinition scope1 = new CompositionScopeDefinition(
+                catalog1,
+                Enumerable.Empty<CompositionScopeDefinition>()
+            );
+            CompositionScopeDefinition scope2 = new CompositionScopeDefinition(
+                catalog1,
+                Enumerable.Empty<CompositionScopeDefinition>()
+            );
+            CompositionScopeDefinition scope = new CompositionScopeDefinition(
+                catalog,
+                new CompositionScopeDefinition[] { scope1, scope2 }
+            );
 
             Assert.NotNull(scope);
             Assert.NotNull(scope.Parts);
@@ -112,10 +127,16 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void Constructor_NullCatalog_ShowThrowNullArgument()
         {
-            var ex = ExceptionAssert.Throws<ArgumentNullException>(RetryMode.DoNotRetry, () =>
-            {
-                CompositionScopeDefinition scope = new CompositionScopeDefinition(null, Enumerable.Empty<CompositionScopeDefinition>());
-            });
+            var ex = ExceptionAssert.Throws<ArgumentNullException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    CompositionScopeDefinition scope = new CompositionScopeDefinition(
+                        null,
+                        Enumerable.Empty<CompositionScopeDefinition>()
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -123,9 +144,7 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var parts = new TypeCatalog(typeof(FooImpl), typeof(FooImpl2), typeof(FooImpl2)).Parts;
             var exports = parts.Select(p => Tuple.Create(p, p.ExportDefinitions.First()));
-            TestCatalog catalog = new TestCatalog(
-                () => parts,
-                () => exports);
+            TestCatalog catalog = new TestCatalog(() => parts, () => exports);
 
             CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null);
             EqualityExtensions.CheckEquals(parts, scope.Parts);
@@ -136,7 +155,11 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var catalog = new TypeCatalog(typeof(FooImpl), typeof(FooImpl2), typeof(FooImpl2));
             var exports = catalog.Parts.Select(p => p.ExportDefinitions.First());
-            CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null, exports);
+            CompositionScopeDefinition scope = new CompositionScopeDefinition(
+                catalog,
+                null,
+                exports
+            );
             Assert.Equal(catalog.Parts.Count(), scope.Parts.Count());
             Assert.Equal(exports.Count(), scope.PublicSurface.Count());
         }
@@ -146,7 +169,11 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var catalog = new TypeCatalog(typeof(FooImpl4));
             var exports = catalog.Parts.SelectMany(p => p.ExportDefinitions);
-            CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null, exports);
+            CompositionScopeDefinition scope = new CompositionScopeDefinition(
+                catalog,
+                null,
+                exports
+            );
             Assert.Equal(3, scope.PublicSurface.Count());
         }
 
@@ -156,9 +183,7 @@ namespace System.ComponentModel.Composition.Hosting
             var parts = new TypeCatalog(typeof(FooImpl), typeof(FooImpl2), typeof(FooImpl2)).Parts;
             var exports = parts.Select(p => Tuple.Create(p, p.ExportDefinitions.First()));
             var import = parts.SelectMany(p => p.ImportDefinitions).First();
-            TestCatalog catalog = new TestCatalog(
-                () => parts,
-                () => exports);
+            TestCatalog catalog = new TestCatalog(() => parts, () => exports);
 
             CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null);
             Assert.Same(exports, scope.GetExports(import));
@@ -169,29 +194,35 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var parts = new TypeCatalog(typeof(FooImpl), typeof(FooImpl2), typeof(FooImpl2)).Parts;
             var exports = parts.Select(p => Tuple.Create(p, p.ExportDefinitions.First()));
-            TestCatalog catalog = new TestCatalog(
-                () => parts,
-                () => exports);
+            TestCatalog catalog = new TestCatalog(() => parts, () => exports);
 
             CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null);
 
-            ComposablePartCatalogChangeEventArgs args = new ComposablePartCatalogChangeEventArgs(Enumerable.Empty<ComposablePartDefinition>(), Enumerable.Empty<ComposablePartDefinition>(), null);
+            ComposablePartCatalogChangeEventArgs args = new ComposablePartCatalogChangeEventArgs(
+                Enumerable.Empty<ComposablePartDefinition>(),
+                Enumerable.Empty<ComposablePartDefinition>(),
+                null
+            );
 
             bool changedFired = false;
-            scope.Changed += new EventHandler<ComposablePartCatalogChangeEventArgs>((o, e) =>
+            scope.Changed += new EventHandler<ComposablePartCatalogChangeEventArgs>(
+                (o, e) =>
                 {
                     Assert.Same(args, e);
                     Assert.Same(scope, o);
                     changedFired = true;
-                });
+                }
+            );
 
             bool changingFired = false;
-            scope.Changing += new EventHandler<ComposablePartCatalogChangeEventArgs>((o, e) =>
-            {
-                Assert.Same(args, e);
-                Assert.Same(scope, o);
-                changingFired = true;
-            });
+            scope.Changing += new EventHandler<ComposablePartCatalogChangeEventArgs>(
+                (o, e) =>
+                {
+                    Assert.Same(args, e);
+                    Assert.Same(scope, o);
+                    changingFired = true;
+                }
+            );
 
             catalog.OnChanged(args);
             Assert.True(changedFired);
@@ -209,7 +240,6 @@ namespace System.ComponentModel.Composition.Hosting
 
             Assert.False(changedFired);
             Assert.False(changingFired);
-
         }
 
         [Fact]
@@ -217,35 +247,44 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var parts = new TypeCatalog(typeof(FooImpl), typeof(FooImpl2), typeof(FooImpl2)).Parts;
             var exports = parts.Select(p => Tuple.Create(p, p.ExportDefinitions.First()));
-            TestCatalog catalog = new TestCatalog(
-                () => parts,
-                () => exports);
+            TestCatalog catalog = new TestCatalog(() => parts, () => exports);
             var import = parts.SelectMany(p => p.ImportDefinitions).First();
 
             CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null);
 
             scope.Dispose();
-            var ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
-            {
-                var ps = scope.Parts;
-            });
+            var ex = ExceptionAssert.Throws<ObjectDisposedException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var ps = scope.Parts;
+                }
+            );
 
-            ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
-            {
-                var es = scope.GetExports(import);
-            });
+            ex = ExceptionAssert.Throws<ObjectDisposedException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var es = scope.GetExports(import);
+                }
+            );
 
             scope.Dispose();
-            ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
-            {
-                var ps = scope.Parts;
-            });
+            ex = ExceptionAssert.Throws<ObjectDisposedException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var ps = scope.Parts;
+                }
+            );
 
-            ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
-            {
-                var es = scope.GetExports(import);
-            });
-
+            ex = ExceptionAssert.Throws<ObjectDisposedException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var es = scope.GetExports(import);
+                }
+            );
         }
 
         [Fact]

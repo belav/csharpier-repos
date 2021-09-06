@@ -41,14 +41,19 @@ namespace Microsoft.AspNetCore.Internal
         {
             if (token == null || token.Type != JTokenType.Object)
             {
-                throw new InvalidDataException($"Unexpected JSON Token Type '{token?.Type}'. Expected a JSON Object.");
+                throw new InvalidDataException(
+                    $"Unexpected JSON Token Type '{token?.Type}'. Expected a JSON Object."
+                );
             }
 
             return (JObject)token;
         }
 
-        public static T GetRequiredProperty<T>(JObject json, string property, JTokenType expectedType = JTokenType.None)
-        {
+        public static T GetRequiredProperty<T>(
+            JObject json,
+            string property,
+            JTokenType expectedType = JTokenType.None
+        ) {
             var prop = json[property];
 
             if (prop == null)
@@ -63,7 +68,9 @@ namespace Microsoft.AspNetCore.Internal
         {
             if (expectedType != JTokenType.None && prop.Type != expectedType)
             {
-                throw new InvalidDataException($"Expected '{property}' to be of type {expectedType}.");
+                throw new InvalidDataException(
+                    $"Expected '{property}' to be of type {expectedType}."
+                );
             }
             return prop.Value<T>();
         }
@@ -90,7 +97,9 @@ namespace Microsoft.AspNetCore.Internal
         {
             if (reader.TokenType != JsonToken.StartObject)
             {
-                throw new InvalidDataException($"Unexpected JSON Token Type '{GetTokenString(reader.TokenType)}'. Expected a JSON Object.");
+                throw new InvalidDataException(
+                    $"Unexpected JSON Token Type '{GetTokenString(reader.TokenType)}'. Expected a JSON Object."
+                );
             }
         }
 
@@ -98,7 +107,9 @@ namespace Microsoft.AspNetCore.Internal
         {
             if (reader.TokenType != JsonToken.StartArray)
             {
-                throw new InvalidDataException($"Unexpected JSON Token Type '{GetTokenString(reader.TokenType)}'. Expected a JSON Array.");
+                throw new InvalidDataException(
+                    $"Unexpected JSON Token Type '{GetTokenString(reader.TokenType)}'. Expected a JSON Array."
+                );
             }
         }
 
@@ -108,7 +119,9 @@ namespace Microsoft.AspNetCore.Internal
 
             if (reader.TokenType != JsonToken.Boolean || reader.Value == null)
             {
-                throw new InvalidDataException($"Expected '{propertyName}' to be of type {JTokenType.Boolean}.");
+                throw new InvalidDataException(
+                    $"Expected '{propertyName}' to be of type {JTokenType.Boolean}."
+                );
             }
 
             return Convert.ToBoolean(reader.Value, CultureInfo.InvariantCulture);
@@ -120,7 +133,9 @@ namespace Microsoft.AspNetCore.Internal
 
             if (reader.TokenType != JsonToken.Integer)
             {
-                throw new InvalidDataException($"Expected '{propertyName}' to be of type {JTokenType.Integer}.");
+                throw new InvalidDataException(
+                    $"Expected '{propertyName}' to be of type {JTokenType.Integer}."
+                );
             }
 
             if (reader.Value == null)
@@ -137,7 +152,9 @@ namespace Microsoft.AspNetCore.Internal
 
             if (reader.TokenType != JsonToken.String)
             {
-                throw new InvalidDataException($"Expected '{propertyName}' to be of type {JTokenType.String}.");
+                throw new InvalidDataException(
+                    $"Expected '{propertyName}' to be of type {JTokenType.String}."
+                );
             }
 
             return reader.Value?.ToString();
@@ -180,7 +197,9 @@ namespace Microsoft.AspNetCore.Internal
         {
             private readonly ArrayPool<T> _inner;
 
-            internal static readonly JsonArrayPool<T> Shared = new JsonArrayPool<T>(ArrayPool<T>.Shared);
+            internal static readonly JsonArrayPool<T> Shared = new JsonArrayPool<T>(
+                ArrayPool<T>.Shared
+            );
 
             public JsonArrayPool(ArrayPool<T> inner)
             {

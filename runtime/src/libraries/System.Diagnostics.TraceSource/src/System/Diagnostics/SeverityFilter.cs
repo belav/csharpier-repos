@@ -14,22 +14,23 @@ namespace System.Diagnostics
             _level = level;
         }
 
-        public override bool ShouldTrace(TraceEventCache? cache, string source, TraceEventType eventType, int id, string? formatOrMessage,
-                                         object?[]? args, object? data1, object?[]? data)
-        {
+        public override bool ShouldTrace(
+            TraceEventCache? cache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string? formatOrMessage,
+            object?[]? args,
+            object? data1,
+            object?[]? data
+        ) {
             return ((int)eventType & (int)_level) != 0;
         }
 
         public SourceLevels EventType
         {
-            get
-            {
-                return _level;
-            }
-            set
-            {
-                _level = value;
-            }
+            get { return _level; }
+            set { _level = value; }
         }
     }
 }

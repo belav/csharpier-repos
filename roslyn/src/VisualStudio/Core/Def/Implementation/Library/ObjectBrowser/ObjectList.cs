@@ -31,10 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ObjectListKind kind,
             uint flags,
             AbstractObjectBrowserLibraryManager manager,
-            ImmutableArray<ObjectListItem> items)
-            : this(kind, flags, null, null, manager, items)
-        {
-        }
+            ImmutableArray<ObjectListItem> items
+        ) : this(kind, flags, null, null, manager, items) { }
 
         public ObjectList(
             ObjectListKind kind,
@@ -42,8 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ObjectList parentList,
             ObjectListItem parentListItem,
             AbstractObjectBrowserLibraryManager manager,
-            ImmutableArray<ObjectListItem> items)
-            : base(manager)
+            ImmutableArray<ObjectListItem> items
+        ) : base(manager)
         {
             _kind = kind;
             _flags = flags;
@@ -59,8 +57,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             }
         }
 
-        private bool IsClassView()
-            => Helpers.IsClassView(_flags);
+        private bool IsClassView() => Helpers.IsClassView(_flags);
 
         private ObjectListItem GetListItem(uint index)
         {
@@ -88,7 +85,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         case ObjectListKind.Types:
                             return listItem.DisplayText;
                     }
-
                     break;
             }
 
@@ -119,14 +115,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             switch (_kind)
             {
                 case ObjectListKind.BaseTypes:
-                    categoryField = (uint)_LIB_LISTTYPE.LLT_CLASSES | (uint)_LIB_LISTTYPE.LLT_MEMBERS;
+                    categoryField =
+                        (uint)_LIB_LISTTYPE.LLT_CLASSES | (uint)_LIB_LISTTYPE.LLT_MEMBERS;
                     return true;
 
                 case ObjectListKind.Hierarchy:
                     var parentKind = this.ParentKind;
-                    categoryField = parentKind == ObjectListKind.Types || parentKind == ObjectListKind.BaseTypes
-                        ? (uint)_LIB_LISTTYPE.LLT_CLASSES
-                        : (uint)_LIB_LISTTYPE.LLT_PACKAGE;
+                    categoryField =
+                        parentKind == ObjectListKind.Types || parentKind == ObjectListKind.BaseTypes
+                            ? (uint)_LIB_LISTTYPE.LLT_CLASSES
+                            : (uint)_LIB_LISTTYPE.LLT_PACKAGE;
 
                     return true;
 
@@ -139,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     return true;
 
                 case ObjectListKind.Projects:
-                    categoryField = (uint)_LIB_LISTTYPE.LLT_NAMESPACES | (uint)_LIB_LISTTYPE.LLT_CLASSES;
+                    categoryField =
+                        (uint)_LIB_LISTTYPE.LLT_NAMESPACES | (uint)_LIB_LISTTYPE.LLT_CLASSES;
 
                     if (IsClassView() && this.ParentKind == ObjectListKind.None)
                     {
@@ -149,14 +148,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     return true;
 
                 case ObjectListKind.References:
-                    categoryField = (uint)_LIB_LISTTYPE.LLT_NAMESPACES | (uint)_LIB_LISTTYPE.LLT_CLASSES;
+                    categoryField =
+                        (uint)_LIB_LISTTYPE.LLT_NAMESPACES | (uint)_LIB_LISTTYPE.LLT_CLASSES;
                     return true;
 
                 case ObjectListKind.Types:
                     categoryField = (uint)_LIB_LISTTYPE.LLT_MEMBERS;
 
-                    if ((_flags & (Helpers.LLF_SEARCH_EXPAND_MEMBERS | Helpers.LLF_SEARCH_WITH_EXPANSION)) == 0)
-                    {
+                    if (
+                        (
+                            _flags
+                            & (
+                                Helpers.LLF_SEARCH_EXPAND_MEMBERS
+                                | Helpers.LLF_SEARCH_WITH_EXPANSION
+                            )
+                        ) == 0
+                    ) {
                         categoryField |= (uint)_LIB_LISTTYPE.LLT_HIERARCHY;
                     }
 
@@ -336,8 +343,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             return true;
         }
 
-        protected override bool TryGetCategoryField(uint index, int category, out uint categoryField)
-        {
+        protected override bool TryGetCategoryField(
+            uint index,
+            int category,
+            out uint categoryField
+        ) {
             switch (category)
             {
                 case (int)LIB_CATEGORY.LC_LISTTYPE:
@@ -361,9 +371,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 case (int)_LIB_CATEGORY2.LC_HIERARCHYTYPE:
                     if (_kind == ObjectListKind.Hierarchy)
                     {
-                        categoryField = this.ParentKind == ObjectListKind.Projects
-                            ? (uint)_LIBCAT_HIERARCHYTYPE.LCHT_PROJECTREFERENCES
-                            : (uint)_LIBCAT_HIERARCHYTYPE.LCHT_BASESANDINTERFACES;
+                        categoryField =
+                            this.ParentKind == ObjectListKind.Projects
+                                ? (uint)_LIBCAT_HIERARCHYTYPE.LCHT_PROJECTREFERENCES
+                                : (uint)_LIBCAT_HIERARCHYTYPE.LCHT_BASESANDINTERFACES;
                     }
                     else
                     {
@@ -455,11 +466,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             return true;
         }
 
-        protected override uint GetItemCount()
-            => (uint)_items.Length;
+        protected override uint GetItemCount() => (uint)_items.Length;
 
-        protected override IVsSimpleObjectList2 GetList(uint index, uint listType, uint flags, VSOBSEARCHCRITERIA2[] pobSrch)
-        {
+        protected override IVsSimpleObjectList2 GetList(
+            uint index,
+            uint listType,
+            uint flags,
+            VSOBSEARCHCRITERIA2[] pobSrch
+        ) {
             var listItem = GetListItem(index);
 
             // We need to do a little massaging of the list type and parent item in a couple of cases.
@@ -468,13 +482,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 case ObjectListKind.Hierarchy:
                     // LLT_USESCLASSES is for displaying base classes and interfaces
                     // LLF_PROJREF is for displaying project references
-                    listType = listType == (uint)_LIB_LISTTYPE.LLT_CLASSES
-                        ? (uint)_LIB_LISTTYPE.LLT_USESCLASSES
-                        : Helpers.LLT_PROJREF;
+                    listType =
+                        listType == (uint)_LIB_LISTTYPE.LLT_CLASSES
+                            ? (uint)_LIB_LISTTYPE.LLT_USESCLASSES
+                            : Helpers.LLT_PROJREF;
 
                     // Use the parent of this list as the parent of the new list.
                     listItem = listItem.ParentList._parentListItem;
-
                     break;
 
                 case ObjectListKind.BaseTypes:
@@ -482,7 +496,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     {
                         listType = (uint)_LIB_LISTTYPE.LLT_USESCLASSES;
                     }
-
                     break;
             }
 
@@ -496,10 +509,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     return null;
                 }
 
-                var lookInReferences = (flags & ((uint)_VSOBSEARCHOPTIONS.VSOBSO_LOOKINREFS | (uint)_VSOBSEARCHOPTIONS2.VSOBSO_LISTREFERENCES)) != 0;
+                var lookInReferences =
+                    (
+                        flags
+                        & (
+                            (uint)_VSOBSEARCHOPTIONS.VSOBSO_LOOKINREFS
+                            | (uint)_VSOBSEARCHOPTIONS2.VSOBSO_LISTREFERENCES
+                        )
+                    ) != 0;
 
-                var projectAndAssemblySet = this.LibraryManager.GetAssemblySet(project, lookInReferences, CancellationToken.None);
-                return this.LibraryManager.GetSearchList(listKind, flags, pobSrch, projectAndAssemblySet);
+                var projectAndAssemblySet = this.LibraryManager.GetAssemblySet(
+                    project,
+                    lookInReferences,
+                    CancellationToken.None
+                );
+                return this.LibraryManager.GetSearchList(
+                    listKind,
+                    flags,
+                    pobSrch,
+                    projectAndAssemblySet
+                );
             }
 
             var compilation = listItem.GetCompilation(this.LibraryManager.Workspace);
@@ -511,17 +540,59 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             switch (listKind)
             {
                 case ObjectListKind.Types:
-                    return new ObjectList(ObjectListKind.Types, flags, this, listItem, _manager, this.LibraryManager.GetTypeListItems(listItem, compilation));
+                    return new ObjectList(
+                        ObjectListKind.Types,
+                        flags,
+                        this,
+                        listItem,
+                        _manager,
+                        this.LibraryManager.GetTypeListItems(listItem, compilation)
+                    );
                 case ObjectListKind.Hierarchy:
-                    return new ObjectList(ObjectListKind.Hierarchy, flags, this, listItem, _manager, this.LibraryManager.GetFolderListItems(listItem, compilation));
+                    return new ObjectList(
+                        ObjectListKind.Hierarchy,
+                        flags,
+                        this,
+                        listItem,
+                        _manager,
+                        this.LibraryManager.GetFolderListItems(listItem, compilation)
+                    );
                 case ObjectListKind.Namespaces:
-                    return new ObjectList(ObjectListKind.Namespaces, flags, this, listItem, _manager, this.LibraryManager.GetNamespaceListItems(listItem, compilation));
+                    return new ObjectList(
+                        ObjectListKind.Namespaces,
+                        flags,
+                        this,
+                        listItem,
+                        _manager,
+                        this.LibraryManager.GetNamespaceListItems(listItem, compilation)
+                    );
                 case ObjectListKind.Members:
-                    return new ObjectList(ObjectListKind.Members, flags, this, listItem, _manager, this.LibraryManager.GetMemberListItems(listItem, compilation));
+                    return new ObjectList(
+                        ObjectListKind.Members,
+                        flags,
+                        this,
+                        listItem,
+                        _manager,
+                        this.LibraryManager.GetMemberListItems(listItem, compilation)
+                    );
                 case ObjectListKind.References:
-                    return new ObjectList(ObjectListKind.References, flags, this, listItem, _manager, this.LibraryManager.GetReferenceListItems(listItem, compilation));
+                    return new ObjectList(
+                        ObjectListKind.References,
+                        flags,
+                        this,
+                        listItem,
+                        _manager,
+                        this.LibraryManager.GetReferenceListItems(listItem, compilation)
+                    );
                 case ObjectListKind.BaseTypes:
-                    return new ObjectList(ObjectListKind.BaseTypes, flags, this, listItem, _manager, this.LibraryManager.GetBaseTypeListItems(listItem, compilation));
+                    return new ObjectList(
+                        ObjectListKind.BaseTypes,
+                        flags,
+                        this,
+                        listItem,
+                        _manager,
+                        this.LibraryManager.GetBaseTypeListItems(listItem, compilation)
+                    );
             }
 
             throw new NotImplementedException();
@@ -555,18 +626,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 var project = this.LibraryManager.GetProject(projectListItem.ProjectId);
                 if (project != null)
                 {
-                    return this.LibraryManager.LibraryService.NavInfoFactory.CreateForProject(project);
+                    return this.LibraryManager.LibraryService.NavInfoFactory.CreateForProject(
+                        project
+                    );
                 }
             }
 
             if (listItem is ReferenceListItem referenceListItem)
             {
-                return this.LibraryManager.LibraryService.NavInfoFactory.CreateForReference(referenceListItem.MetadataReference);
+                return this.LibraryManager.LibraryService.NavInfoFactory.CreateForReference(
+                    referenceListItem.MetadataReference
+                );
             }
 
             if (listItem is SymbolListItem symbolListItem)
             {
-                return this.LibraryManager.GetNavInfo(symbolListItem, useExpandedHierarchy: IsClassView());
+                return this.LibraryManager.GetNavInfo(
+                    symbolListItem,
+                    useExpandedHierarchy: IsClassView()
+                );
             }
 
             return null;
@@ -611,10 +689,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             {
                 var name = GetText(i, VSTREETEXTOPTIONS.TTO_DISPLAYTEXT);
 
-                if (_kind == ObjectListKind.Types ||
-                    _kind == ObjectListKind.Namespaces ||
-                    _kind == ObjectListKind.Members)
-                {
+                if (
+                    _kind == ObjectListKind.Types
+                    || _kind == ObjectListKind.Namespaces
+                    || _kind == ObjectListKind.Members
+                ) {
                     if (string.Equals(matchName, name, StringComparison.Ordinal))
                     {
                         index = i;
@@ -650,15 +729,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             get { return true; }
         }
 
-        protected override bool TryFillDescription(uint index, _VSOBJDESCOPTIONS options, IVsObjectBrowserDescription3 description)
-        {
+        protected override bool TryFillDescription(
+            uint index,
+            _VSOBJDESCOPTIONS options,
+            IVsObjectBrowserDescription3 description
+        ) {
             var listItem = GetListItem(index);
 
             return this.LibraryManager.TryFillDescription(listItem, description, options);
         }
 
-        protected override bool TryGetProperty(uint index, _VSOBJLISTELEMPROPID propertyId, out object pvar)
-        {
+        protected override bool TryGetProperty(
+            uint index,
+            _VSOBJLISTELEMPROPID propertyId,
+            out object pvar
+        ) {
             pvar = null;
 
             var listItem = GetListItem(index);
@@ -676,17 +761,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 case _VSOBJLISTELEMPROPID.VSOBJLISTELEMPROPID_HELPKEYWORD:
                     if (listItem is SymbolListItem symbolListItem)
                     {
-                        var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(symbolListItem.ProjectId);
+                        var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
+                            symbolListItem.ProjectId
+                        );
                         if (project != null)
                         {
-                            var compilation = project
-                                .GetCompilationAsync(CancellationToken.None)
+                            var compilation = project.GetCompilationAsync(CancellationToken.None)
                                 .WaitAndGetResult_ObjectBrowser(CancellationToken.None);
 
                             var symbol = symbolListItem.ResolveSymbol(compilation);
                             if (symbol != null)
                             {
-                                var helpContextService = project.LanguageServices.GetService<IHelpContextService>();
+                                var helpContextService =
+                                    project.LanguageServices.GetService<IHelpContextService>();
 
                                 pvar = helpContextService.FormatSymbol(symbol);
                                 return true;
@@ -700,8 +787,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             return false;
         }
 
-        protected override bool TryCountSourceItems(uint index, out IVsHierarchy hierarchy, out uint itemid, out uint items)
-        {
+        protected override bool TryCountSourceItems(
+            uint index,
+            out IVsHierarchy hierarchy,
+            out uint itemid,
+            out uint items
+        ) {
             hierarchy = null;
             itemid = 0;
             items = 0;
@@ -731,24 +822,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             return false;
         }
 
-        protected override string GetText(uint index, VSTREETEXTOPTIONS tto)
-            => GetDisplayText(index, tto);
+        protected override string GetText(uint index, VSTREETEXTOPTIONS tto) =>
+            GetDisplayText(index, tto);
 
-        protected override string GetTipText(uint index, VSTREETOOLTIPTYPE eTipType)
-            => null;
+        protected override string GetTipText(uint index, VSTREETOOLTIPTYPE eTipType) => null;
 
         protected override int GoToSource(uint index, VSOBJGOTOSRCTYPE srcType)
         {
             if (srcType == VSOBJGOTOSRCTYPE.GS_DEFINITION)
             {
-                if (GetListItem(index) is SymbolListItem symbolItem && symbolItem.SupportsGoToDefinition)
-                {
-                    var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(symbolItem.ProjectId);
-                    var compilation = project.GetCompilationAsync(CancellationToken.None).WaitAndGetResult(CancellationToken.None);
+                if (
+                    GetListItem(index) is SymbolListItem symbolItem
+                    && symbolItem.SupportsGoToDefinition
+                ) {
+                    var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
+                        symbolItem.ProjectId
+                    );
+                    var compilation = project.GetCompilationAsync(CancellationToken.None)
+                        .WaitAndGetResult(CancellationToken.None);
                     var symbol = symbolItem.ResolveSymbol(compilation);
 
-                    if (this.LibraryManager.Workspace.TryGoToDefinition(symbol, project, CancellationToken.None))
-                    {
+                    if (
+                        this.LibraryManager.Workspace.TryGoToDefinition(
+                            symbol,
+                            project,
+                            CancellationToken.None
+                        )
+                    ) {
                         return VSConstants.S_OK;
                     }
                     else
@@ -840,13 +940,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         continue;
                     }
 
-                    if (!(referenceListItem.MetadataReference is PortableExecutableReference metadataReference))
-                    {
+                    if (
+                        !(
+                            referenceListItem.MetadataReference
+                            is PortableExecutableReference metadataReference
+                        )
+                    ) {
                         continue;
                     }
 
-                    if (string.Equals(data.bstrFile, metadataReference.FilePath, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            data.bstrFile,
+                            metadataReference.FilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         index = i;
                         return true;
                     }
@@ -861,13 +970,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         continue;
                     }
 
-                    if (!(this.LibraryManager.ServiceProvider.GetService(typeof(SVsSolution)) is IVsSolution vsSolution))
-                    {
+                    if (
+                        !(
+                            this.LibraryManager.ServiceProvider.GetService(typeof(SVsSolution))
+                            is IVsSolution vsSolution
+                        )
+                    ) {
                         return false;
                     }
 
-                    if (ErrorHandler.Failed(vsSolution.GetProjrefOfProject(hierarchy, out var projectRef)))
-                    {
+                    if (
+                        ErrorHandler.Failed(
+                            vsSolution.GetProjrefOfProject(hierarchy, out var projectRef)
+                        )
+                    ) {
                         return false;
                     }
 
@@ -882,29 +998,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             return false;
         }
 
-        protected override bool TryGetBrowseContainerData(uint index, ref VSCOMPONENTSELECTORDATA data)
-        {
+        protected override bool TryGetBrowseContainerData(
+            uint index,
+            ref VSCOMPONENTSELECTORDATA data
+        ) {
             var listItem = GetListItem(index);
 
             if (listItem is ProjectListItem projectListItem)
             {
-                var hierarchy = this.LibraryManager.Workspace.GetHierarchy(projectListItem.ProjectId);
+                var hierarchy = this.LibraryManager.Workspace.GetHierarchy(
+                    projectListItem.ProjectId
+                );
                 if (hierarchy == null)
                 {
                     return false;
                 }
 
-                if (!(this.LibraryManager.ServiceProvider.GetService(typeof(SVsSolution)) is IVsSolution vsSolution))
-                {
+                if (
+                    !(
+                        this.LibraryManager.ServiceProvider.GetService(typeof(SVsSolution))
+                        is IVsSolution vsSolution
+                    )
+                ) {
                     return false;
                 }
 
-                if (ErrorHandler.Failed(vsSolution.GetProjrefOfProject(hierarchy, out var projectRef)))
-                {
+                if (
+                    ErrorHandler.Failed(
+                        vsSolution.GetProjrefOfProject(hierarchy, out var projectRef)
+                    )
+                ) {
                     return false;
                 }
 
-                var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(projectListItem.ProjectId);
+                var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
+                    projectListItem.ProjectId
+                );
                 if (project == null)
                 {
                     return false;
@@ -922,12 +1051,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     return false;
                 }
 
-                if (!(referenceListItem.MetadataReference is PortableExecutableReference portableExecutableReference))
-                {
+                if (
+                    !(
+                        referenceListItem.MetadataReference
+                        is PortableExecutableReference portableExecutableReference
+                    )
+                ) {
                     return false;
                 }
 
-                var assemblyIdentity = AssemblyIdentityUtils.TryGetAssemblyIdentity(portableExecutableReference.FilePath);
+                var assemblyIdentity = AssemblyIdentityUtils.TryGetAssemblyIdentity(
+                    portableExecutableReference.FilePath
+                );
                 if (assemblyIdentity == null)
                 {
                     return false;
@@ -952,12 +1087,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
         public ObjectListKind ParentKind
         {
-            get
-            {
-                return _parentList != null
-                    ? _parentList.Kind
-                    : ObjectListKind.None;
-            }
+            get { return _parentList != null ? _parentList.Kind : ObjectListKind.None; }
         }
 
         public ObjectListItem ParentListItem

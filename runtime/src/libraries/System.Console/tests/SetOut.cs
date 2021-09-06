@@ -15,6 +15,7 @@ public class SetOut
         {
             Assert.Throws<ArgumentNullException>(() => Console.SetOut(null));
         }
+
         finally
         {
             Console.SetOut(savedOut);

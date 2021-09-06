@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
         TLanguageKindEnum,
         TExpressionSyntax,
         TThisExpressionSyntax,
-        TMemberAccessExpressionSyntax> :
-        AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TMemberAccessExpressionSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TLanguageKindEnum : struct
         where TExpressionSyntax : SyntaxNode
         where TThisExpressionSyntax : TExpressionSyntax
@@ -28,29 +28,49 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
         private readonly ImmutableArray<TLanguageKindEnum> _kindsOfInterest;
 
         protected AbstractSimplifyThisOrMeDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.RemoveQualificationDiagnosticId,
-                   EnforceOnBuildValues.RemoveQualification,
-                   ImmutableHashSet.Create<IPerLanguageOption>(CodeStyleOptions2.QualifyFieldAccess, CodeStyleOptions2.QualifyPropertyAccess, CodeStyleOptions2.QualifyMethodAccess, CodeStyleOptions2.QualifyEventAccess),
-                   new LocalizableResourceString(nameof(FeaturesResources.Remove_qualification), FeaturesResources.ResourceManager, typeof(FeaturesResources)),
-                   new LocalizableResourceString(nameof(WorkspacesResources.Name_can_be_simplified), WorkspacesResources.ResourceManager, typeof(WorkspacesResources)),
-                   isUnnecessary: true)
-        {
+            : base(
+                IDEDiagnosticIds.RemoveQualificationDiagnosticId,
+                EnforceOnBuildValues.RemoveQualification,
+                ImmutableHashSet.Create<IPerLanguageOption>(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    CodeStyleOptions2.QualifyMethodAccess,
+                    CodeStyleOptions2.QualifyEventAccess
+                ),
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Remove_qualification),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(WorkspacesResources.Name_can_be_simplified),
+                    WorkspacesResources.ResourceManager,
+                    typeof(WorkspacesResources)
+                ),
+                isUnnecessary: true
+            ) {
             var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
             _kindsOfInterest = ImmutableArray.Create(
-                syntaxKinds.Convert<TLanguageKindEnum>(syntaxKinds.SimpleMemberAccessExpression));
+                syntaxKinds.Convert<TLanguageKindEnum>(syntaxKinds.SimpleMemberAccessExpression)
+            );
         }
 
         protected abstract string GetLanguageName();
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
         protected abstract bool CanSimplifyTypeNameExpression(
-            SemanticModel model, TMemberAccessExpressionSyntax memberAccess, OptionSet optionSet, out TextSpan issueSpan, CancellationToken cancellationToken);
+            SemanticModel model,
+            TMemberAccessExpressionSyntax memberAccess,
+            OptionSet optionSet,
+            out TextSpan issueSpan,
+            CancellationToken cancellationToken
+        );
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeNode, _kindsOfInterest);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeNode, _kindsOfInterest);
 
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
@@ -70,9 +90,15 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
             var optionSet = analyzerOptions.GetAnalyzerOptionSet(syntaxTree, cancellationToken);
 
             var model = context.SemanticModel;
-            if (!CanSimplifyTypeNameExpression(
-                    model, node, optionSet, out var issueSpan, cancellationToken))
-            {
+            if (
+                !CanSimplifyTypeNameExpression(
+                    model,
+                    node,
+                    optionSet,
+                    out var issueSpan,
+                    cancellationToken
+                )
+            ) {
                 return;
             }
 
@@ -87,7 +113,9 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
                 return;
             }
 
-            var applicableOption = QualifyMembersHelpers.GetApplicableOptionFromSymbolKind(symbolInfo.Symbol.Kind);
+            var applicableOption = QualifyMembersHelpers.GetApplicableOptionFromSymbolKind(
+                symbolInfo.Symbol.Kind
+            );
             var optionValue = optionSet.GetOption(applicableOption, GetLanguageName());
             if (optionValue == null)
             {
@@ -101,12 +129,18 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
 
             // used so we can provide a link in the preview to the options page. This value is
             // hard-coded there to be the one that will go to the code-style page.
-            builder["OptionName"] = nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration);
+            builder["OptionName"] = nameof(
+                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration
+            );
             builder["OptionLanguage"] = model.Language;
 
             var diagnostic = DiagnosticHelper.Create(
-                Descriptor, tree.GetLocation(issueSpan), severity,
-                ImmutableArray.Create(node.GetLocation()), builder.ToImmutable());
+                Descriptor,
+                tree.GetLocation(issueSpan),
+                severity,
+                ImmutableArray.Create(node.GetLocation()),
+                builder.ToImmutable()
+            );
 
             context.ReportDiagnostic(diagnostic);
         }

@@ -83,9 +83,22 @@ namespace Microsoft.NET.HostModel.Bundle
             Flags = (netcoreapp3CompatMode) ? HeaderFlags.NetcoreApp3CompatMode : HeaderFlags.None;
         }
 
-        public FileEntry AddEntry(FileType type, string relativePath, long offset, long size, long compressedSize, uint bundleMajorVersion)
-        {
-            FileEntry entry = new FileEntry(type, relativePath, offset, size, compressedSize, bundleMajorVersion);
+        public FileEntry AddEntry(
+            FileType type,
+            string relativePath,
+            long offset,
+            long size,
+            long compressedSize,
+            uint bundleMajorVersion
+        ) {
+            FileEntry entry = new FileEntry(
+                type,
+                relativePath,
+                offset,
+                size,
+                compressedSize,
+                bundleMajorVersion
+            );
             Files.Add(entry);
 
             switch (entry.Type)

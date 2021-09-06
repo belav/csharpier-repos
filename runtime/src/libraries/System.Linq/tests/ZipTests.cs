@@ -34,7 +34,10 @@ namespace System.Linq.Tests
             IEnumerable<int> first = null;
             IEnumerable<int> second = new int[] { 2, 5, 9 };
 
-            AssertExtensions.Throws<ArgumentNullException>("first", () => first.Zip<int, int, int>(second, (x, y) => x + y));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "first",
+                () => first.Zip<int, int, int>(second, (x, y) => x + y)
+            );
         }
 
         [Fact]
@@ -43,7 +46,10 @@ namespace System.Linq.Tests
             IEnumerable<int> first = new int[] { 1, 2, 3 };
             IEnumerable<int> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("second", () => first.Zip<int, int, int>(second, (x, y) => x + y));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "second",
+                () => first.Zip<int, int, int>(second, (x, y) => x + y)
+            );
         }
 
         [Fact]
@@ -53,13 +59,19 @@ namespace System.Linq.Tests
             IEnumerable<int> second = new int[] { 2, 4, 6 };
             Func<int, int, int> func = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () => first.Zip(second, func));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "resultSelector",
+                () => first.Zip(second, func)
+            );
         }
 
         [Fact]
         public void ExceptionThrownFromFirstsEnumerator()
         {
-            ThrowsOnMatchEnumerable<int> first = new ThrowsOnMatchEnumerable<int>(new int[] { 1, 3, 3 }, 2);
+            ThrowsOnMatchEnumerable<int> first = new ThrowsOnMatchEnumerable<int>(
+                new int[] { 1, 3, 3 },
+                2
+            );
             IEnumerable<int> second = new int[] { 2, 4, 6 };
             Func<int, int, int> func = (x, y) => x + y;
             IEnumerable<int> expected = new int[] { 3, 7, 9 };
@@ -76,7 +88,10 @@ namespace System.Linq.Tests
         [Fact]
         public void ExceptionThrownFromSecondsEnumerator()
         {
-            ThrowsOnMatchEnumerable<int> second = new ThrowsOnMatchEnumerable<int>(new int[] { 1, 3, 3 }, 2);
+            ThrowsOnMatchEnumerable<int> second = new ThrowsOnMatchEnumerable<int>(
+                new int[] { 1, 3, 3 },
+                2
+            );
             IEnumerable<int> first = new int[] { 2, 4, 6 };
             Func<int, int, int> func = (x, y) => x + y;
             IEnumerable<int> expected = new int[] { 3, 7, 9 };
@@ -93,22 +108,21 @@ namespace System.Linq.Tests
         [Fact]
         public void FirstAndSecondEmpty()
         {
-            IEnumerable<int> first = new int[] { };
-            IEnumerable<int> second = new int[] { };
+            IEnumerable<int> first = new int[] {  };
+            IEnumerable<int> second = new int[] {  };
             Func<int, int, int> func = (x, y) => x + y;
-            IEnumerable<int> expected = new int[] { };
+            IEnumerable<int> expected = new int[] {  };
 
             Assert.Equal(expected, first.Zip(second, func));
         }
 
-
         [Fact]
         public void FirstEmptySecondSingle()
         {
-            IEnumerable<int> first = new int[] { };
+            IEnumerable<int> first = new int[] {  };
             IEnumerable<int> second = new int[] { 2 };
             Func<int, int, int> func = (x, y) => x + y;
-            IEnumerable<int> expected = new int[] { };
+            IEnumerable<int> expected = new int[] {  };
 
             Assert.Equal(expected, first.Zip(second, func));
         }
@@ -116,22 +130,21 @@ namespace System.Linq.Tests
         [Fact]
         public void FirstEmptySecondMany()
         {
-            IEnumerable<int> first = new int[] { };
+            IEnumerable<int> first = new int[] {  };
             IEnumerable<int> second = new int[] { 2, 4, 8 };
             Func<int, int, int> func = (x, y) => x + y;
-            IEnumerable<int> expected = new int[] { };
+            IEnumerable<int> expected = new int[] {  };
 
             Assert.Equal(expected, first.Zip(second, func));
         }
-
 
         [Fact]
         public void SecondEmptyFirstSingle()
         {
             IEnumerable<int> first = new int[] { 1 };
-            IEnumerable<int> second = new int[] { };
+            IEnumerable<int> second = new int[] {  };
             Func<int, int, int> func = (x, y) => x + y;
-            IEnumerable<int> expected = new int[] { };
+            IEnumerable<int> expected = new int[] {  };
 
             Assert.Equal(expected, first.Zip(second, func));
         }
@@ -140,9 +153,9 @@ namespace System.Linq.Tests
         public void SecondEmptyFirstMany()
         {
             IEnumerable<int> first = new int[] { 1, 2, 3 };
-            IEnumerable<int> second = new int[] { };
+            IEnumerable<int> second = new int[] {  };
             Func<int, int, int> func = (x, y) => x + y;
-            IEnumerable<int> expected = new int[] { };
+            IEnumerable<int> expected = new int[] {  };
 
             Assert.Equal(expected, first.Zip(second, func));
         }
@@ -180,7 +193,6 @@ namespace System.Linq.Tests
             Assert.Equal(expected, first.Zip(second, func));
         }
 
-
         [Fact]
         public void SecondManyMoreThanFirst()
         {
@@ -203,7 +215,6 @@ namespace System.Linq.Tests
             Assert.Equal(expected, first.Zip(second, func));
         }
 
-
         [Fact]
         public void FirstManyMoreThanSecond()
         {
@@ -214,7 +225,6 @@ namespace System.Linq.Tests
 
             Assert.Equal(expected, first.Zip(second, func));
         }
-
 
         [Fact]
         public void DelegateFuncChanged()
@@ -345,7 +355,6 @@ namespace System.Linq.Tests
             Assert.Equal(expected, first.Zip(second, func));
         }
 
-
         [Fact]
         public void FirstSameSizeSecondAllNull()
         {
@@ -371,7 +380,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerate()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).Zip(Enumerable.Range(0, 3), (x, y) => x + y);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .Zip(Enumerable.Range(0, 3), (x, y) => x + y);
             // Don't insist on this behaviour, but check it's correct if it happens
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
@@ -414,7 +424,10 @@ namespace System.Linq.Tests
             IEnumerable<int> first = null;
             IEnumerable<int> second = new int[] { 2, 5, 9 };
 
-            AssertExtensions.Throws<ArgumentNullException>("first", () => first.Zip<int, int>(second));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "first",
+                () => first.Zip<int, int>(second)
+            );
         }
 
         [Fact]
@@ -423,13 +436,19 @@ namespace System.Linq.Tests
             IEnumerable<int> first = new int[] { 1, 2, 3 };
             IEnumerable<int> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("second", () => first.Zip<int, int>(second));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "second",
+                () => first.Zip<int, int>(second)
+            );
         }
 
         [Fact]
         public void Zip2_ExceptionThrownFromFirstsEnumerator()
         {
-            ThrowsOnMatchEnumerable<int> first = new ThrowsOnMatchEnumerable<int>(new int[] { 1, 3, 3 }, 2);
+            ThrowsOnMatchEnumerable<int> first = new ThrowsOnMatchEnumerable<int>(
+                new int[] { 1, 3, 3 },
+                2
+            );
             IEnumerable<int> second = new int[] { 2, 4, 6 };
             IEnumerable<(int, int)> expected = new (int, int)[] { (1, 2), (3, 4), (3, 6) };
 
@@ -445,7 +464,10 @@ namespace System.Linq.Tests
         [Fact]
         public void Zip2_ExceptionThrownFromSecondsEnumerator()
         {
-            ThrowsOnMatchEnumerable<int> second = new ThrowsOnMatchEnumerable<int>(new int[] { 1, 3, 3 }, 2);
+            ThrowsOnMatchEnumerable<int> second = new ThrowsOnMatchEnumerable<int>(
+                new int[] { 1, 3, 3 },
+                2
+            );
             IEnumerable<int> first = new int[] { 2, 4, 6 };
             IEnumerable<(int, int)> expected = new (int, int)[] { (2, 1), (4, 3), (6, 3) };
 
@@ -461,9 +483,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Zip2_FirstAndSecondEmpty()
         {
-            IEnumerable<int> first = new int[] { };
-            IEnumerable<int> second = new int[] { };
-            IEnumerable<(int, int)> expected = new (int, int)[] { };
+            IEnumerable<int> first = new int[] {  };
+            IEnumerable<int> second = new int[] {  };
+            IEnumerable<(int, int)> expected = new (int, int)[] {  };
 
             Assert.Equal(expected, first.Zip(second));
         }
@@ -471,9 +493,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Zip2_FirstEmptySecondSingle()
         {
-            IEnumerable<int> first = new int[] { };
+            IEnumerable<int> first = new int[] {  };
             IEnumerable<int> second = new int[] { 2 };
-            IEnumerable<(int, int)> expected = new (int, int)[] { };
+            IEnumerable<(int, int)> expected = new (int, int)[] {  };
 
             Assert.Equal(expected, first.Zip(second));
         }
@@ -481,9 +503,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Zip2_FirstEmptySecondMany()
         {
-            IEnumerable<int> first = new int[] { };
+            IEnumerable<int> first = new int[] {  };
             IEnumerable<int> second = new int[] { 2, 4, 8 };
-            IEnumerable<(int, int)> expected = new (int, int)[] { };
+            IEnumerable<(int, int)> expected = new (int, int)[] {  };
 
             Assert.Equal(expected, first.Zip(second));
         }
@@ -492,8 +514,8 @@ namespace System.Linq.Tests
         public void Zip2_SecondEmptyFirstSingle()
         {
             IEnumerable<int> first = new int[] { 1 };
-            IEnumerable<int> second = new int[] { };
-            IEnumerable<(int, int)> expected = new (int, int)[] { };
+            IEnumerable<int> second = new int[] {  };
+            IEnumerable<(int, int)> expected = new (int, int)[] {  };
 
             Assert.Equal(expected, first.Zip(second));
         }
@@ -502,8 +524,8 @@ namespace System.Linq.Tests
         public void Zip2_SecondEmptyFirstMany()
         {
             IEnumerable<int> first = new int[] { 1, 2, 3 };
-            IEnumerable<int> second = new int[] { };
-            IEnumerable<(int, int)> expected = new (int, int)[] { };
+            IEnumerable<int> second = new int[] {  };
+            IEnumerable<(int, int)> expected = new (int, int)[] {  };
 
             Assert.Equal(expected, first.Zip(second));
         }
@@ -537,7 +559,6 @@ namespace System.Linq.Tests
 
             Assert.Equal(expected, first.Zip(second));
         }
-
 
         [Fact]
         public void Zip2_SecondManyMoreThanFirst()
@@ -590,7 +611,12 @@ namespace System.Linq.Tests
 
             IEnumerable<string> fourth = new[] { "one", "two", "three" };
 
-            IEnumerable<((int, int), string)> final = new[] { ((1, 2), "one"), ((3, 4), "two"), ((5, 6), "three") };
+            IEnumerable<((int, int), string)> final = new[]
+            {
+                ((1, 2), "one"),
+                ((3, 4), "two"),
+                ((5, 6), "three")
+            };
             Assert.Equal(final, third.Zip(fourth));
         }
 
@@ -619,7 +645,10 @@ namespace System.Linq.Tests
             IEnumerable<int> second = null;
             IEnumerable<int> third = new[] { 4, 5, 6 };
 
-            AssertExtensions.Throws<ArgumentNullException>("second", () => first.Zip(second, third));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "second",
+                () => first.Zip(second, third)
+            );
         }
 
         [Fact]
@@ -637,8 +666,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> first = new[] { 1, 2, 3 };
             IEnumerable<int> second = new[] { 4, 5, 6 };
-            IEnumerable<int> third = new int[] { };
-            IEnumerable<(int, int, int)> expected = new (int, int, int)[] { };
+            IEnumerable<int> third = new int[] {  };
+            IEnumerable<(int, int, int)> expected = new (int, int, int)[] {  };
 
             Assert.Equal(expected, first.Zip(second, third));
         }

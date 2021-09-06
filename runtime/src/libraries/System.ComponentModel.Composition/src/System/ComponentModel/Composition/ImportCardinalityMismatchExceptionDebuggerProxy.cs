@@ -9,8 +9,9 @@ namespace System.ComponentModel.Composition
     {
         private readonly ImportCardinalityMismatchException _exception;
 
-        public ImportCardinalityMismatchExceptionDebuggerProxy(ImportCardinalityMismatchException exception)
-        {
+        public ImportCardinalityMismatchExceptionDebuggerProxy(
+            ImportCardinalityMismatchException exception
+        ) {
             Requires.NotNull(exception, nameof(exception));
 
             _exception = exception;

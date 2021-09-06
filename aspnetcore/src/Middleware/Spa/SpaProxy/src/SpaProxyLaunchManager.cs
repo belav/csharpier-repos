@@ -25,8 +25,9 @@ namespace Microsoft.AspNetCore.SpaProxy
         public SpaProxyLaunchManager(ILogger<SpaProxyLaunchManager> logger)
         {
             _options = new SpaDevelopmentServerOptions();
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile(Path.Combine(AppContext.BaseDirectory, "spa.proxy.json"))
+            var configuration = new ConfigurationBuilder().AddJsonFile(
+                    Path.Combine(AppContext.BaseDirectory, "spa.proxy.json")
+                )
                 .Build();
             configuration.GetSection("SpaProxyServer").Bind(_options);
             _logger = logger;
@@ -34,53 +35,75 @@ namespace Microsoft.AspNetCore.SpaProxy
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            var httpClient = new HttpClient(new HttpClientHandler()
-            {
-                // It's ok for us to do this here since this service is only plugged in during development.
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            });
+            var httpClient = new HttpClient(
+                new HttpClientHandler()
+                {
+                    // It's ok for us to do this here since this service is only plugged in during development.
+                    ServerCertificateCustomValidationCallback =
+                        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                }
+            );
 
             _logger.LogInformation("Starting SPA development server");
             var running = await ProbeSpaDevelopmentServerUrl(httpClient, cancellationToken);
             if (running)
             {
-                _logger.LogInformation($"Found SPA development server running at {_options.ServerUrl}");
+                _logger.LogInformation(
+                    $"Found SPA development server running at {_options.ServerUrl}"
+                );
             }
             else
             {
-                _logger.LogInformation($"No SPA development server running at {_options.ServerUrl} found.");
+                _logger.LogInformation(
+                    $"No SPA development server running at {_options.ServerUrl} found."
+                );
                 await StartSpaProcessAndProbeForLiveness(httpClient, cancellationToken);
             }
         }
 
-        private async Task<bool> ProbeSpaDevelopmentServerUrl(HttpClient httpClient, CancellationToken cancellationToken)
-        {
+        private async Task<bool> ProbeSpaDevelopmentServerUrl(
+            HttpClient httpClient,
+            CancellationToken cancellationToken
+        ) {
             using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-            using var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(timeout.Token, cancellationToken);
+            using var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                timeout.Token,
+                cancellationToken
+            );
             try
             {
-                var response = await httpClient.GetAsync(_options.ServerUrl, cancellationTokenSource.Token);
+                var response = await httpClient.GetAsync(
+                    _options.ServerUrl,
+                    cancellationTokenSource.Token
+                );
                 var running = response.IsSuccessStatusCode;
                 return running;
             }
-            catch (Exception exception) when (exception is HttpRequestException ||
-                  exception is TaskCanceledException ||
-                  exception is OperationCanceledException)
+            catch (Exception exception)
+                when (exception is HttpRequestException
+                    || exception is TaskCanceledException
+                    || exception is OperationCanceledException
+                )
             {
                 _logger.LogDebug(exception, "Failed to connect to the SPA Development proxy.");
                 return false;
             }
         }
 
-        private async Task StartSpaProcessAndProbeForLiveness(HttpClient httpClient, CancellationToken cancellationToken)
-        {
+        private async Task StartSpaProcessAndProbeForLiveness(
+            HttpClient httpClient,
+            CancellationToken cancellationToken
+        ) {
             LaunchDevelopmentProxy();
             var sw = Stopwatch.StartNew();
             var livenessProbeSucceeded = false;
             var maxTimeoutReached = false;
             while (_spaProcess != null && !_spaProcess.HasExited && !maxTimeoutReached)
             {
-                livenessProbeSucceeded = await ProbeSpaDevelopmentServerUrl(httpClient, cancellationToken);
+                livenessProbeSucceeded = await ProbeSpaDevelopmentServerUrl(
+                    httpClient,
+                    cancellationToken
+                );
                 if (livenessProbeSucceeded)
                 {
                     break;
@@ -97,11 +120,15 @@ namespace Microsoft.AspNetCore.SpaProxy
 
             if (_spaProcess == null || _spaProcess.HasExited)
             {
-                _logger.LogError($"Couldn't start the SPA development server with command '{_options.LaunchCommand}'.");
+                _logger.LogError(
+                    $"Couldn't start the SPA development server with command '{_options.LaunchCommand}'."
+                );
             }
             else if (!livenessProbeSucceeded)
             {
-                _logger.LogError($"Unable to connect to the SPA development server at '{_options.ServerUrl}'.");
+                _logger.LogError(
+                    $"Unable to connect to the SPA development server at '{_options.ServerUrl}'."
+                );
             }
             else
             {
@@ -137,13 +164,19 @@ namespace Microsoft.AspNetCore.SpaProxy
                     CreateNoWindow = false,
                     UseShellExecute = true,
                     WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = Path.Combine(AppContext.BaseDirectory, _options.WorkingDirectory)
+                    WorkingDirectory = Path.Combine(
+                        AppContext.BaseDirectory,
+                        _options.WorkingDirectory
+                    )
                 };
                 _spaProcess = Process.Start(info);
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Failed to launch the SPA development server '{_options.LaunchCommand}'.");
+                _logger.LogError(
+                    exception,
+                    $"Failed to launch the SPA development server '{_options.LaunchCommand}'."
+                );
             }
         }
 

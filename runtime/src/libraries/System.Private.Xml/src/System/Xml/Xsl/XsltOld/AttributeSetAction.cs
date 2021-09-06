@@ -64,8 +64,10 @@ namespace System.Xml.Xsl.XsltOld
                             string nspace = input.NamespaceURI;
                             string name = input.LocalName;
 
-                            if (Ref.Equal(nspace, input.Atoms.UriXsl) && Ref.Equal(name, input.Atoms.Attribute))
-                            {
+                            if (
+                                Ref.Equal(nspace, input.Atoms.UriXsl)
+                                && Ref.Equal(name, input.Atoms.Attribute)
+                            ) {
                                 // found attribute so add it
                                 AddAction(compiler.CreateAttributeAction());
                             }
@@ -85,8 +87,7 @@ namespace System.Xml.Xsl.XsltOld
                         default:
                             throw XsltException.Create(SR.Xslt_InvalidContents, "attribute-set");
                     }
-                }
-                while (compiler.Advance());
+                } while (compiler.Advance());
 
                 compiler.ToParent();
             }

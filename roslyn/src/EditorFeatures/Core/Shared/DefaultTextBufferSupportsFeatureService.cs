@@ -10,24 +10,19 @@ using Microsoft.VisualStudio.Text;
 namespace Microsoft.CodeAnalysis.Editor.Shared
 {
     [ExportWorkspaceService(typeof(ITextBufferSupportsFeatureService), ServiceLayer.Editor), Shared]
-    internal sealed class DefaultTextBufferSupportsFeatureService : ITextBufferSupportsFeatureService
+    internal sealed class DefaultTextBufferSupportsFeatureService
+        : ITextBufferSupportsFeatureService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultTextBufferSupportsFeatureService()
-        {
-        }
+        public DefaultTextBufferSupportsFeatureService() { }
 
-        public bool SupportsCodeFixes(ITextBuffer textBuffer)
-            => true;
+        public bool SupportsCodeFixes(ITextBuffer textBuffer) => true;
 
-        public bool SupportsRefactorings(ITextBuffer textBuffer)
-            => true;
+        public bool SupportsRefactorings(ITextBuffer textBuffer) => true;
 
-        public bool SupportsRename(ITextBuffer textBuffer)
-            => true;
+        public bool SupportsRename(ITextBuffer textBuffer) => true;
 
-        public bool SupportsNavigationToAnyPosition(ITextBuffer textBuffer)
-            => true;
+        public bool SupportsNavigationToAnyPosition(ITextBuffer textBuffer) => true;
     }
 }

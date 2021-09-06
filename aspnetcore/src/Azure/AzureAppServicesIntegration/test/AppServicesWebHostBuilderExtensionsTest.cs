@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Hosting.Azure.AppServices.Tests
 
             mock.Object.UseAzureAppServices();
 
-            mock.Verify(builder => builder.ConfigureServices(It.IsNotNull<Action<IServiceCollection>>()), Times.Once);
+            mock.Verify(
+                builder => builder.ConfigureServices(It.IsNotNull<Action<IServiceCollection>>()),
+                Times.Once
+            );
         }
     }
 }

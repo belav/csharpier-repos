@@ -19,9 +19,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         /// </summary>
         /// <param name="dependencies"> The dependencies. </param>
         public SqlServerCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,11 +29,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         /// </summary>
         public override MethodCallCodeFragment GenerateUseProvider(
             string connectionString,
-            MethodCallCodeFragment? providerOptions)
-            => new(
+            MethodCallCodeFragment? providerOptions
+        ) =>
+            new(
                 nameof(SqlServerDbContextOptionsExtensions.UseSqlServer),
                 providerOptions == null
                     ? new object[] { connectionString }
-                    : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+                    : new object[]
+                      {
+                          connectionString,
+                          new NestedClosureCodeFragment("x", providerOptions)
+                      }
+            );
     }
 }

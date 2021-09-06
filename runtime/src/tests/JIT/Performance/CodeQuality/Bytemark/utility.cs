@@ -35,7 +35,7 @@ public class Utility
                 }
                 srStream.Read();
             }
-            if ('%' == format[formatIndex])  //If we found a scan field type
+            if ('%' == format[formatIndex]) //If we found a scan field type
             {
                 StringBuilder sb = new StringBuilder();
                 ++formatIndex;

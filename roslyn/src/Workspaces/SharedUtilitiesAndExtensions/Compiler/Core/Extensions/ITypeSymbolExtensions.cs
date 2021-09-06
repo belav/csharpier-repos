@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
 
             var isNullableValueType = type.IsNullable();
-            var isNonNullableReferenceType = type.IsReferenceType && type.NullableAnnotation != NullableAnnotation.Annotated;
+            var isNonNullableReferenceType =
+                type.IsReferenceType && type.NullableAnnotation != NullableAnnotation.Annotated;
 
             return isNullableValueType || isNonNullableReferenceType;
         }
@@ -34,8 +35,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IList<INamedTypeSymbol> GetAllInterfacesIncludingThis(this ITypeSymbol type)
         {
             var allInterfaces = type.AllInterfaces;
-            if (type is INamedTypeSymbol namedType && namedType.TypeKind == TypeKind.Interface && !allInterfaces.Contains(namedType))
-            {
+            if (
+                type is INamedTypeSymbol namedType
+                && namedType.TypeKind == TypeKind.Interface
+                && !allInterfaces.Contains(namedType)
+            ) {
                 var result = new List<INamedTypeSymbol>(allInterfaces.Length + 1);
                 result.Add(namedType);
                 result.AddRange(allInterfaces);
@@ -45,17 +49,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return allInterfaces;
         }
 
-        public static bool IsAbstractClass([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.TypeKind == TypeKind.Class && symbol.IsAbstract;
+        public static bool IsAbstractClass(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.TypeKind == TypeKind.Class && symbol.IsAbstract;
 
-        public static bool IsSystemVoid([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.SpecialType == SpecialType.System_Void;
+        public static bool IsSystemVoid(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.SpecialType == SpecialType.System_Void;
 
-        public static bool IsNullable([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
+        public static bool IsNullable([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol) =>
+            symbol?.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
 
-        public static bool IsNonNullableValueType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-        {
+        public static bool IsNonNullableValueType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) {
             if (symbol?.IsValueType != true)
                 return false;
 
@@ -64,8 +71,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool IsNullable(
             [NotNullWhen(true)] this ITypeSymbol? symbol,
-            [NotNullWhen(true)] out ITypeSymbol? underlyingType)
-        {
+            [NotNullWhen(true)] out ITypeSymbol? underlyingType
+        ) {
             if (IsNullable(symbol))
             {
                 underlyingType = ((INamedTypeSymbol)symbol).TypeArguments[0];
@@ -76,28 +83,34 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool IsModuleType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.TypeKind == TypeKind.Module;
+        public static bool IsModuleType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.TypeKind == TypeKind.Module;
 
-        public static bool IsInterfaceType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.TypeKind == TypeKind.Interface;
+        public static bool IsInterfaceType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.TypeKind == TypeKind.Interface;
 
-        public static bool IsDelegateType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.TypeKind == TypeKind.Delegate;
+        public static bool IsDelegateType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.TypeKind == TypeKind.Delegate;
 
-        public static bool IsFunctionPointerType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.TypeKind == TypeKind.FunctionPointer;
+        public static bool IsFunctionPointerType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.TypeKind == TypeKind.FunctionPointer;
 
-        public static bool IsStructType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-            => symbol?.TypeKind == TypeKind.Struct;
+        public static bool IsStructType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) => symbol?.TypeKind == TypeKind.Struct;
 
-        public static bool IsAnonymousType([NotNullWhen(returnValue: true)] this INamedTypeSymbol? symbol)
-            => symbol?.IsAnonymousType == true;
+        public static bool IsAnonymousType(
+            [NotNullWhen(returnValue: true)] this INamedTypeSymbol? symbol
+        ) => symbol?.IsAnonymousType == true;
 
         private static HashSet<INamedTypeSymbol> GetOriginalInterfacesAndTheirBaseInterfaces(
             this ITypeSymbol type,
-            HashSet<INamedTypeSymbol>? symbols = null)
-        {
+            HashSet<INamedTypeSymbol>? symbols = null
+        ) {
             symbols ??= new HashSet<INamedTypeSymbol>(SymbolEquivalenceComparer.Instance);
 
             foreach (var interfaceType in type.Interfaces)
@@ -152,29 +165,34 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         // Determine if "type" inherits from "baseType", ignoring constructed types, optionally including interfaces,
         // dealing only with original types.
         public static bool InheritsFromOrEquals(
-            this ITypeSymbol type, ITypeSymbol baseType, bool includeInterfaces)
-        {
+            this ITypeSymbol type,
+            ITypeSymbol baseType,
+            bool includeInterfaces
+        ) {
             if (!includeInterfaces)
             {
                 return InheritsFromOrEquals(type, baseType);
             }
 
-            return type.GetBaseTypesAndThis().Concat(type.AllInterfaces).Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, baseType));
+            return type.GetBaseTypesAndThis()
+                .Concat(type.AllInterfaces)
+                .Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, baseType));
         }
 
         // Determine if "type" inherits from "baseType", ignoring constructed types and interfaces, dealing
         // only with original types.
-        public static bool InheritsFromOrEquals(
-            this ITypeSymbol type, ITypeSymbol baseType)
+        public static bool InheritsFromOrEquals(this ITypeSymbol type, ITypeSymbol baseType)
         {
-            return type.GetBaseTypesAndThis().Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, baseType));
+            return type.GetBaseTypesAndThis()
+                .Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, baseType));
         }
 
         // Determine if "type" inherits from or implements "baseType", ignoring constructed types, and dealing
         // only with original types.
         public static bool InheritsFromOrImplementsOrEqualsIgnoringConstruction(
-            this ITypeSymbol type, ITypeSymbol baseType)
-        {
+            this ITypeSymbol type,
+            ITypeSymbol baseType
+        ) {
             var originalBaseType = baseType.OriginalDefinition;
             type = type.OriginalDefinition;
 
@@ -183,15 +201,25 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return true;
             }
 
-            IEnumerable<ITypeSymbol> baseTypes = (baseType.TypeKind == TypeKind.Interface) ? type.AllInterfaces : type.GetBaseTypes();
-            return baseTypes.Contains(t => SymbolEquivalenceComparer.Instance.Equals(t.OriginalDefinition, originalBaseType));
+            IEnumerable<ITypeSymbol> baseTypes =
+                (baseType.TypeKind == TypeKind.Interface)
+                    ? type.AllInterfaces
+                    : type.GetBaseTypes();
+            return baseTypes.Contains(
+                t =>
+                    SymbolEquivalenceComparer.Instance.Equals(
+                        t.OriginalDefinition,
+                        originalBaseType
+                    )
+            );
         }
 
         // Determine if "type" inherits from "baseType", ignoring constructed types, and dealing
         // only with original types.
         public static bool InheritsFromIgnoringConstruction(
-            this ITypeSymbol type, ITypeSymbol baseType)
-        {
+            this ITypeSymbol type,
+            ITypeSymbol baseType
+        ) {
             var originalBaseType = baseType.OriginalDefinition;
 
             // We could just call GetBaseTypes and foreach over it, but this
@@ -200,8 +228,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var currentBaseType = type.BaseType;
             while (currentBaseType != null)
             {
-                if (SymbolEquivalenceComparer.Instance.Equals(currentBaseType.OriginalDefinition, originalBaseType))
-                {
+                if (
+                    SymbolEquivalenceComparer.Instance.Equals(
+                        currentBaseType.OriginalDefinition,
+                        originalBaseType
+                    )
+                ) {
                     return true;
                 }
 
@@ -212,29 +244,38 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static bool ImplementsIgnoringConstruction(
-            this ITypeSymbol type, ITypeSymbol interfaceType)
-        {
+            this ITypeSymbol type,
+            ITypeSymbol interfaceType
+        ) {
             var originalInterfaceType = interfaceType.OriginalDefinition;
-            return type.AllInterfaces.Any(t => SymbolEquivalenceComparer.Instance.Equals(t.OriginalDefinition, originalInterfaceType));
+            return type.AllInterfaces.Any(
+                t =>
+                    SymbolEquivalenceComparer.Instance.Equals(
+                        t.OriginalDefinition,
+                        originalInterfaceType
+                    )
+            );
         }
 
-        public static bool Implements(
-            this ITypeSymbol type, ITypeSymbol interfaceType)
+        public static bool Implements(this ITypeSymbol type, ITypeSymbol interfaceType)
         {
-            return type.AllInterfaces.Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, interfaceType));
+            return type.AllInterfaces.Contains(
+                t => SymbolEquivalenceComparer.Instance.Equals(t, interfaceType)
+            );
         }
 
         public static bool IsAttribute(this ITypeSymbol symbol)
         {
             for (var b = symbol.BaseType; b != null; b = b.BaseType)
             {
-                if (b.MetadataName == "Attribute" &&
-                    b.ContainingType == null &&
-                    b.ContainingNamespace != null &&
-                    b.ContainingNamespace.Name == "System" &&
-                    b.ContainingNamespace.ContainingNamespace != null &&
-                    b.ContainingNamespace.ContainingNamespace.IsGlobalNamespace)
-                {
+                if (
+                    b.MetadataName == "Attribute"
+                    && b.ContainingType == null
+                    && b.ContainingNamespace != null
+                    && b.ContainingNamespace.Name == "System"
+                    && b.ContainingNamespace.ContainingNamespace != null
+                    && b.ContainingNamespace.ContainingNamespace.IsGlobalNamespace
+                ) {
                     return true;
                 }
             }
@@ -242,8 +283,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool IsFormattableStringOrIFormattable([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-        {
+        public static bool IsFormattableStringOrIFormattable(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) {
             return symbol?.MetadataName is nameof(FormattableString) or nameof(IFormattable)
                 && symbol.ContainingType == null
                 && symbol.ContainingNamespace?.Name == "System"
@@ -303,17 +345,22 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static Accessibility DetermineMinimalAccessibility(this ITypeSymbol typeSymbol)
-            => typeSymbol.Accept(MinimalAccessibilityVisitor.Instance);
+        public static Accessibility DetermineMinimalAccessibility(this ITypeSymbol typeSymbol) =>
+            typeSymbol.Accept(MinimalAccessibilityVisitor.Instance);
 
-        public static bool ContainsAnonymousType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
-        {
+        public static bool ContainsAnonymousType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? symbol
+        ) {
             switch (symbol)
             {
-                case IArrayTypeSymbol a: return ContainsAnonymousType(a.ElementType);
-                case IPointerTypeSymbol p: return ContainsAnonymousType(p.PointedAtType);
-                case INamedTypeSymbol n: return ContainsAnonymousType(n);
-                default: return false;
+                case IArrayTypeSymbol a:
+                    return ContainsAnonymousType(a.ElementType);
+                case IPointerTypeSymbol p:
+                    return ContainsAnonymousType(p.PointedAtType);
+                case INamedTypeSymbol n:
+                    return ContainsAnonymousType(n);
+                default:
+                    return false;
             }
         }
 
@@ -348,7 +395,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         type = pointerType.PointedAtType;
                         continue;
                 }
-
                 break;
             }
 
@@ -363,15 +409,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return DefaultParameterName;
             }
 
-            if (type.IsSpecialType() || type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T)
-            {
+            if (
+                type.IsSpecialType()
+                || type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
+            ) {
                 return DefaultBuiltInParameterName;
             }
 
             var shortName = type.GetShortName();
-            return shortName.Length == 0
-                ? DefaultParameterName
-                : shortName;
+            return shortName.Length == 0 ? DefaultParameterName : shortName;
         }
 
         public static bool IsSpecialType([NotNullWhen(returnValue: true)] this ITypeSymbol? symbol)
@@ -405,19 +451,27 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool CanSupportCollectionInitializer(this ITypeSymbol typeSymbol, ISymbol within)
-        {
-            return
-                typeSymbol.AllInterfaces.Any(i => i.SpecialType == SpecialType.System_Collections_IEnumerable) &&
-                typeSymbol.GetBaseTypesAndThis()
+        public static bool CanSupportCollectionInitializer(
+            this ITypeSymbol typeSymbol,
+            ISymbol within
+        ) {
+            return typeSymbol.AllInterfaces.Any(
+                    i => i.SpecialType == SpecialType.System_Collections_IEnumerable
+                )
+                && typeSymbol.GetBaseTypesAndThis()
                     .Union(typeSymbol.GetOriginalInterfacesAndTheirBaseInterfaces())
-                    .SelectAccessibleMembers<IMethodSymbol>(WellKnownMemberNames.CollectionInitializerAddMethodName, within ?? typeSymbol)
+                    .SelectAccessibleMembers<IMethodSymbol>(
+                        WellKnownMemberNames.CollectionInitializerAddMethodName,
+                        within ?? typeSymbol
+                    )
                     .OfType<IMethodSymbol>()
                     .Any(m => m.Parameters.Any());
         }
 
-        public static INamedTypeSymbol? GetDelegateType(this ITypeSymbol? typeSymbol, Compilation compilation)
-        {
+        public static INamedTypeSymbol? GetDelegateType(
+            this ITypeSymbol? typeSymbol,
+            Compilation compilation
+        ) {
             if (typeSymbol != null)
             {
                 var expressionOfT = compilation.ExpressionOfTType();
@@ -436,7 +490,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return null;
         }
 
-        public static IEnumerable<T> GetAccessibleMembersInBaseTypes<T>(this ITypeSymbol containingType, ISymbol within) where T : class, ISymbol
+        public static IEnumerable<T> GetAccessibleMembersInBaseTypes<T>(
+            this ITypeSymbol containingType,
+            ISymbol within
+        ) where T : class, ISymbol
         {
             if (containingType == null)
             {
@@ -444,17 +501,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             var types = containingType.GetBaseTypes();
-            return types.SelectMany(x => x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within)));
+            return types.SelectMany(
+                x => x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within))
+            );
         }
 
-        public static ImmutableArray<T> GetAccessibleMembersInThisAndBaseTypes<T>(this ITypeSymbol? containingType, ISymbol within) where T : class, ISymbol
+        public static ImmutableArray<T> GetAccessibleMembersInThisAndBaseTypes<T>(
+            this ITypeSymbol? containingType,
+            ISymbol within
+        ) where T : class, ISymbol
         {
             if (containingType == null)
             {
                 return ImmutableArray<T>.Empty;
             }
 
-            return containingType.GetBaseTypesAndThis().SelectAccessibleMembers<T>(within).ToImmutableArray();
+            return containingType.GetBaseTypesAndThis()
+                .SelectAccessibleMembers<T>(within)
+                .ToImmutableArray();
         }
 
         public static bool? AreMoreSpecificThan(this IList<ITypeSymbol> t1, IList<ITypeSymbol> t2)
@@ -492,24 +556,35 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return result;
         }
 
-        public static IEnumerable<T> SelectAccessibleMembers<T>(this IEnumerable<ITypeSymbol>? types, ISymbol within) where T : class, ISymbol
+        public static IEnumerable<T> SelectAccessibleMembers<T>(
+            this IEnumerable<ITypeSymbol>? types,
+            ISymbol within
+        ) where T : class, ISymbol
         {
             if (types == null)
             {
                 return ImmutableArray<T>.Empty;
             }
 
-            return types.SelectMany(x => x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within)));
+            return types.SelectMany(
+                x => x.GetMembers().OfType<T>().Where(m => m.IsAccessibleWithin(within))
+            );
         }
 
-        private static IEnumerable<T> SelectAccessibleMembers<T>(this IEnumerable<ITypeSymbol>? types, string memberName, ISymbol within) where T : class, ISymbol
+        private static IEnumerable<T> SelectAccessibleMembers<T>(
+            this IEnumerable<ITypeSymbol>? types,
+            string memberName,
+            ISymbol within
+        ) where T : class, ISymbol
         {
             if (types == null)
             {
                 return ImmutableArray<T>.Empty;
             }
 
-            return types.SelectMany(x => x.GetMembers(memberName).OfType<T>().Where(m => m.IsAccessibleWithin(within)));
+            return types.SelectMany(
+                x => x.GetMembers(memberName).OfType<T>().Where(m => m.IsAccessibleWithin(within))
+            );
         }
 
         private static bool? IsMoreSpecificThan(this ITypeSymbol t1, ITypeSymbol t2)
@@ -592,8 +667,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return allTypeArgs1.AreMoreSpecificThan(allTypeArgs2);
         }
 
-        public static bool IsOrDerivesFromExceptionType([NotNullWhen(returnValue: true)] this ITypeSymbol? type, Compilation compilation)
-        {
+        public static bool IsOrDerivesFromExceptionType(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? type,
+            Compilation compilation
+        ) {
             if (type != null)
             {
                 switch (type.Kind)
@@ -606,7 +683,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 return true;
                             }
                         }
-
                         break;
 
                     case SymbolKind.TypeParameter:
@@ -617,7 +693,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                                 return true;
                             }
                         }
-
                         break;
                 }
             }
@@ -625,11 +700,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool IsEnumType([NotNullWhen(true)] this ITypeSymbol? type)
-            => IsEnumType(type, out _);
+        public static bool IsEnumType([NotNullWhen(true)] this ITypeSymbol? type) =>
+            IsEnumType(type, out _);
 
-        public static bool IsEnumType([NotNullWhen(true)] this ITypeSymbol? type, [NotNullWhen(true)] out INamedTypeSymbol? enumType)
-        {
+        public static bool IsEnumType(
+            [NotNullWhen(true)] this ITypeSymbol? type,
+            [NotNullWhen(true)] out INamedTypeSymbol? enumType
+        ) {
             if (type != null && type.IsValueType && type.TypeKind == TypeKind.Enum)
             {
                 enumType = (INamedTypeSymbol)type;
@@ -708,9 +785,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // immutable, treat it as potentially mutable.
                 foreach (var attributeData in type.ContainingAssembly.GetAttributes())
                 {
-                    if (attributeData.AttributeClass?.Name == nameof(ReferenceAssemblyAttribute)
-                        && attributeData.AttributeClass.ToNameDisplayString() == typeof(ReferenceAssemblyAttribute).FullName)
-                    {
+                    if (
+                        attributeData.AttributeClass?.Name == nameof(ReferenceAssemblyAttribute)
+                        && attributeData.AttributeClass.ToNameDisplayString()
+                            == typeof(ReferenceAssemblyAttribute).FullName
+                    ) {
                         return null;
                     }
                 }
@@ -719,13 +798,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool IsDisposable([NotNullWhen(returnValue: true)] this ITypeSymbol? type, [NotNullWhen(returnValue: true)] ITypeSymbol? iDisposableType)
-            => iDisposableType != null &&
-               (Equals(iDisposableType, type) ||
-                type?.AllInterfaces.Contains(iDisposableType) == true);
+        public static bool IsDisposable(
+            [NotNullWhen(returnValue: true)] this ITypeSymbol? type,
+            [NotNullWhen(returnValue: true)] ITypeSymbol? iDisposableType
+        ) =>
+            iDisposableType != null
+            && (
+                Equals(iDisposableType, type)
+                || type?.AllInterfaces.Contains(iDisposableType) == true
+            );
 
-        public static ITypeSymbol WithNullableAnnotationFrom(this ITypeSymbol type, ITypeSymbol symbolForNullableAnnotation)
-            => type.WithNullableAnnotation(symbolForNullableAnnotation.NullableAnnotation);
+        public static ITypeSymbol WithNullableAnnotationFrom(
+            this ITypeSymbol type,
+            ITypeSymbol symbolForNullableAnnotation
+        ) => type.WithNullableAnnotation(symbolForNullableAnnotation.NullableAnnotation);
 
         [return: NotNullIfNotNull(parameterName: "symbol")]
         public static ITypeSymbol? RemoveNullableIfPresent(this ITypeSymbol? symbol)

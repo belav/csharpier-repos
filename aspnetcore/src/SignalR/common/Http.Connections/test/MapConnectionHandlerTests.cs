@@ -39,14 +39,18 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public void MapConnectionHandlerFindsAuthAttributeOnEndPoint()
         {
             var authCount = 0;
-            using (var host = BuildWebHost<AuthConnectionHandler>("/auth",
-                options => authCount += options.AuthorizationData.Count))
-            {
+            using (
+                var host = BuildWebHost<AuthConnectionHandler>(
+                    "/auth",
+                    options => authCount += options.AuthorizationData.Count
+                )
+            ) {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/auth/negotiate", endpoint.DisplayName);
@@ -56,7 +60,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     {
                         Assert.Equal("/auth", endpoint.DisplayName);
                         Assert.Single(endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>());
-                    });
+                    }
+                );
             }
 
             Assert.Equal(0, authCount);
@@ -66,14 +71,18 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public void MapConnectionHandlerFindsAuthAttributeOnInheritedEndPoint()
         {
             var authCount = 0;
-            using (var host = BuildWebHost<InheritedAuthConnectionHandler>("/auth",
-                options => authCount += options.AuthorizationData.Count))
-            {
+            using (
+                var host = BuildWebHost<InheritedAuthConnectionHandler>(
+                    "/auth",
+                    options => authCount += options.AuthorizationData.Count
+                )
+            ) {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/auth/negotiate", endpoint.DisplayName);
@@ -83,35 +92,46 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     {
                         Assert.Equal("/auth", endpoint.DisplayName);
                         Assert.Single(endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>());
-                    });
+                    }
+                );
             }
 
             Assert.Equal(0, authCount);
         }
 
         [Fact]
-
         public void MapConnectionHandlerFindsAuthAttributesOnDoubleAuthEndPoint()
         {
             var authCount = 0;
-            using (var host = BuildWebHost<DoubleAuthConnectionHandler>("/auth",
-                options => authCount += options.AuthorizationData.Count))
-            {
+            using (
+                var host = BuildWebHost<DoubleAuthConnectionHandler>(
+                    "/auth",
+                    options => authCount += options.AuthorizationData.Count
+                )
+            ) {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/auth/negotiate", endpoint.DisplayName);
-                        Assert.Equal(2, endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count);
+                        Assert.Equal(
+                            2,
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count
+                        );
                     },
                     endpoint =>
                     {
                         Assert.Equal("/auth", endpoint.DisplayName);
-                        Assert.Equal(2, endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count);
-                    });
+                        Assert.Equal(
+                            2,
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count
+                        );
+                    }
+                );
             }
 
             Assert.Equal(0, authCount);
@@ -121,28 +141,39 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public void MapConnectionHandlerFindsAttributesFromEndPointAndOptions()
         {
             var authCount = 0;
-            using (var host = BuildWebHost<AuthConnectionHandler>("/auth",
-                options =>
-                {
-                    authCount += options.AuthorizationData.Count;
-                    options.AuthorizationData.Add(new AuthorizeAttribute());
-                }))
-            {
+            using (
+                var host = BuildWebHost<AuthConnectionHandler>(
+                    "/auth",
+                    options =>
+                    {
+                        authCount += options.AuthorizationData.Count;
+                        options.AuthorizationData.Add(new AuthorizeAttribute());
+                    }
+                )
+            ) {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/auth/negotiate", endpoint.DisplayName);
-                        Assert.Equal(2, endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count);
+                        Assert.Equal(
+                            2,
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count
+                        );
                     },
                     endpoint =>
                     {
                         Assert.Equal("/auth", endpoint.DisplayName);
-                        Assert.Equal(2, endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count);
-                    });
+                        Assert.Equal(
+                            2,
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count
+                        );
+                    }
+                );
             }
 
             Assert.Equal(0, authCount);
@@ -152,16 +183,21 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public void MapConnectionHandlerEndPointRoutingFindsAttributesOnHub()
         {
             var authCount = 0;
-            using (var host = BuildWebHost<AuthConnectionHandler>("/path", options =>
-            {
-                authCount += options.AuthorizationData.Count;
-            }))
-            {
+            using (
+                var host = BuildWebHost<AuthConnectionHandler>(
+                    "/path",
+                    options =>
+                    {
+                        authCount += options.AuthorizationData.Count;
+                    }
+                )
+            ) {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/path/negotiate", endpoint.DisplayName);
@@ -171,7 +207,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     {
                         Assert.Equal("/path", endpoint.DisplayName);
                         Assert.Single(endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>());
-                    });
+                    }
+                );
             }
 
             Assert.Equal(0, authCount);
@@ -181,27 +218,39 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         public void MapConnectionHandlerEndPointRoutingFindsAttributesFromOptions()
         {
             var authCount = 0;
-            using (var host = BuildWebHost<AuthConnectionHandler>("/path", options =>
-            {
-                authCount += options.AuthorizationData.Count;
-                options.AuthorizationData.Add(new AuthorizeAttribute());
-            }))
-            {
+            using (
+                var host = BuildWebHost<AuthConnectionHandler>(
+                    "/path",
+                    options =>
+                    {
+                        authCount += options.AuthorizationData.Count;
+                        options.AuthorizationData.Add(new AuthorizeAttribute());
+                    }
+                )
+            ) {
                 host.Start();
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/path/negotiate", endpoint.DisplayName);
-                        Assert.Equal(2, endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count);
+                        Assert.Equal(
+                            2,
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count
+                        );
                     },
                     endpoint =>
                     {
                         Assert.Equal("/path", endpoint.DisplayName);
-                        Assert.Equal(2, endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count);
-                    });
+                        Assert.Equal(
+                            2,
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>().Count
+                        );
+                    }
+                );
             }
 
             Assert.Equal(0, authCount);
@@ -214,7 +263,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             {
                 // This "Foo" policy should override the default auth attribute
                 endpoints.MapConnectionHandler<AuthConnectionHandler>("/path")
-                      .RequireAuthorization(new AuthorizeAttribute("Foo"));
+                    .RequireAuthorization(new AuthorizeAttribute("Foo"));
             }
 
             using (var host = BuildWebHost(ConfigureRoutes))
@@ -223,27 +272,33 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/path/negotiate", endpoint.DisplayName);
-                        Assert.Collection(endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
+                        Assert.Collection(
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
                             auth => { },
                             auth =>
                             {
                                 Assert.Equal("Foo", auth?.Policy);
-                            });
+                            }
+                        );
                     },
                     endpoint =>
                     {
                         Assert.Equal("/path", endpoint.DisplayName);
-                        Assert.Collection(endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
+                        Assert.Collection(
+                            endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>(),
                             auth => { },
                             auth =>
                             {
                                 Assert.Equal("Foo", auth?.Policy);
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -261,7 +316,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/path/negotiate", endpoint.DisplayName);
@@ -271,7 +327,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     {
                         Assert.Equal("/path", endpoint.DisplayName);
                         Assert.Null(endpoint.Metadata.GetMetadata<NegotiateMetadata>());
-                    });
+                    }
+                );
             }
         }
 
@@ -289,7 +346,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 var dataSource = host.Services.GetRequiredService<EndpointDataSource>();
                 // We register 2 endpoints (/negotiate and /)
-                Assert.Collection(dataSource.Endpoints,
+                Assert.Collection(
+                    dataSource.Endpoints,
                     endpoint =>
                     {
                         Assert.Equal("/path/negotiate", endpoint.DisplayName);
@@ -299,7 +357,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     {
                         Assert.Equal("/path", endpoint.DisplayName);
                         Assert.NotNull(endpoint.Metadata.GetMetadata<IEnableCorsAttribute>());
-                    });
+                    }
+                );
             }
         }
 
@@ -307,16 +366,20 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         [WebSocketsSupportedCondition]
         public async Task MapConnectionHandlerWithWebSocketSubProtocolSetsProtocol()
         {
-            using var host = BuildWebHost<MyConnectionHandler>("/socket",
-                options => options.WebSockets.SubProtocolSelector = subprotocols =>
-                {
-                    Assert.Equal(new[] { "protocol1", "protocol2" }, subprotocols.ToArray());
-                    return "protocol1";
-                });
+            using var host = BuildWebHost<MyConnectionHandler>(
+                "/socket",
+                options =>
+                    options.WebSockets.SubProtocolSelector = subprotocols =>
+                    {
+                        Assert.Equal(new[] { "protocol1", "protocol2" }, subprotocols.ToArray());
+                        return "protocol1";
+                    }
+            );
 
             await host.StartAsync();
 
-            var feature = host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>();
+            var feature = host.Services.GetService<IServer>()
+                .Features.Get<IServerAddressesFeature>();
             var address = feature.Addresses.First().Replace("http", "ws") + "/socket";
 
             var client = new ClientWebSocket();
@@ -324,8 +387,17 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             client.Options.AddSubProtocol("protocol2");
             await client.ConnectAsync(new Uri(address), CancellationToken.None);
             Assert.Equal("protocol1", client.SubProtocol);
-            await client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None).DefaultTimeout();
-            var result = await client.ReceiveAsync(new ArraySegment<byte>(new byte[1024]), CancellationToken.None).DefaultTimeout();
+            await client.CloseOutputAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    CancellationToken.None
+                )
+                .DefaultTimeout();
+            var result = await client.ReceiveAsync(
+                    new ArraySegment<byte>(new byte[1024]),
+                    CancellationToken.None
+                )
+                .DefaultTimeout();
             Assert.Equal(WebSocketMessageType.Close, result.MessageType);
         }
 
@@ -381,50 +453,68 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
         private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
         {
-            return new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseKestrel()
-                    .ConfigureServices(services =>
+            return new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        services.AddConnections();
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(endpoints => configure(endpoints));
-                    })
-                    .UseUrls("http://127.0.0.1:0");
-                })
+                        webHostBuilder.UseKestrel()
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddConnections();
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseRouting();
+                                    app.UseEndpoints(endpoints => configure(endpoints));
+                                }
+                            )
+                            .UseUrls("http://127.0.0.1:0");
+                    }
+                )
                 .Build();
         }
 
-        private IHost BuildWebHost<TConnectionHandler>(string path, Action<HttpConnectionDispatcherOptions> configureOptions) where TConnectionHandler : ConnectionHandler
+        private IHost BuildWebHost<TConnectionHandler>(
+            string path,
+            Action<HttpConnectionDispatcherOptions> configureOptions
+        ) where TConnectionHandler : ConnectionHandler
         {
-            return new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseUrls("http://127.0.0.1:0")
-                    .UseKestrel()
-                    .ConfigureServices(services =>
+            return new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        services.AddConnections();
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(routes =>
-                        {
-                            routes.MapConnectionHandler<TConnectionHandler>(path, configureOptions);
-                        });
-                    })
-                    .ConfigureLogging(factory =>
-                    {
-                        factory.AddXunit(_output, LogLevel.Trace);
-                    });
-                })
+                        webHostBuilder.UseUrls("http://127.0.0.1:0")
+                            .UseKestrel()
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddConnections();
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseRouting();
+                                    app.UseEndpoints(
+                                        routes =>
+                                        {
+                                            routes.MapConnectionHandler<TConnectionHandler>(
+                                                path,
+                                                configureOptions
+                                            );
+                                        }
+                                    );
+                                }
+                            )
+                            .ConfigureLogging(
+                                factory =>
+                                {
+                                    factory.AddXunit(_output, LogLevel.Trace);
+                                }
+                            );
+                    }
+                )
                 .Build();
         }
     }

@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public partial class CompilationEventTests : CompilingTestBase
     {
-        internal static void VerifyEvents(AsyncQueue<CompilationEvent> queue, params string[] expectedEvents)
-        {
+        internal static void VerifyEvents(
+            AsyncQueue<CompilationEvent> queue,
+            params string[] expectedEvents
+        ) {
             var expected = new HashSet<string>();
             foreach (var s in expectedEvents)
             {
@@ -77,7 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestQueuedSymbols()
         {
             var source =
-@"namespace N
+                @"namespace N
 {
   partial class C<T1>
   {
@@ -94,14 +96,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var q = new AsyncQueue<CompilationEvent>();
             CreateCompilationWithMscorlib45(source)
                 .WithEventQueue(q)
-                .VerifyDiagnostics()  // force diagnostics twice
+                .VerifyDiagnostics() // force diagnostics twice
                 .VerifyDiagnostics();
             VerifyEvents(q);
         }
 
         private static void VerifyEvents(AsyncQueue<CompilationEvent> q)
         {
-            VerifyEvents(q,
+            VerifyEvents(
+                q,
                 "CompilationStartedEvent",
                 "SymbolDeclaredCompilationEvent(P int C<T1>.P @ : (5,4)-(5,40))",
                 "SymbolDeclaredCompilationEvent(F int C<T1>.F @ : (6,8)-(6,14))",
@@ -115,14 +118,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "SymbolDeclaredCompilationEvent(N void C<T1>.N<T2>(int y = 12) @ : (7,4)-(7,41))",
                 "CompilationUnitCompletedEvent()",
                 "CompilationCompletedEvent"
-                );
+            );
         }
 
         [Fact]
         public void TestQueuedSymbolsAndGetUsedAssemblyReferences()
         {
             var source =
-@"namespace N
+                @"namespace N
 {
   partial class C<T1>
   {

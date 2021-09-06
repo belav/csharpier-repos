@@ -59,7 +59,8 @@ namespace System.Linq.Expressions.Compiler
         /// Variables defined in this scope, and whether they're hoisted or not
         /// Populated by VariableBinder
         /// </summary>
-        internal readonly Dictionary<ParameterExpression, VariableStorageKind> Definitions = new Dictionary<ParameterExpression, VariableStorageKind>();
+        internal readonly Dictionary<ParameterExpression, VariableStorageKind> Definitions =
+            new Dictionary<ParameterExpression, VariableStorageKind>();
 
         /// <summary>
         /// Each variable referenced within this scope, and how often it was referenced
@@ -89,7 +90,10 @@ namespace System.Linq.Expressions.Compiler
         /// Mutable dictionary that maps non-hoisted variables to either local
         /// slots or argument slots
         /// </summary>
-        private readonly Dictionary<ParameterExpression, Storage> _locals = new Dictionary<ParameterExpression, Storage>();
+        private readonly Dictionary<ParameterExpression, Storage> _locals = new Dictionary<
+            ParameterExpression,
+            Storage
+        >();
 
         internal CompilerScope(object node, bool isMethod)
         {
@@ -166,8 +170,10 @@ namespace System.Linq.Expressions.Compiler
 
         #region RuntimeVariablesExpression support
 
-        internal void EmitVariableAccess(LambdaCompiler lc, ReadOnlyCollection<ParameterExpression> vars)
-        {
+        internal void EmitVariableAccess(
+            LambdaCompiler lc,
+            ReadOnlyCollection<ParameterExpression> vars
+        ) {
             if (NearestHoistedLocals != null && vars.Count > 0)
             {
                 // Find what array each variable is on & its index
@@ -291,7 +297,9 @@ namespace System.Linq.Expressions.Compiler
                 _closureHoistedLocals = _parent.NearestHoistedLocals;
             }
 
-            ReadOnlyCollection<ParameterExpression> hoistedVars = GetVariables().Where(p => Definitions[p] == VariableStorageKind.Hoisted).ToReadOnly();
+            ReadOnlyCollection<ParameterExpression> hoistedVars = GetVariables()
+                .Where(p => Definitions[p] == VariableStorageKind.Hoisted)
+                .ToReadOnly();
 
             if (hoistedVars.Count > 0)
             {
@@ -522,8 +530,10 @@ namespace System.Linq.Expressions.Compiler
             return -1;
         }
 
-        public static bool Contains(this IParameterProvider provider, ParameterExpression? parameter)
-        {
+        public static bool Contains(
+            this IParameterProvider provider,
+            ParameterExpression? parameter
+        ) {
             return provider.IndexOf(parameter) >= 0;
         }
     }
@@ -539,10 +549,7 @@ namespace System.Linq.Expressions.Compiler
 
         public ParameterExpression this[int index]
         {
-            get
-            {
-                return _provider.GetParameter(index);
-            }
+            get { return _provider.GetParameter(index); }
         }
 
         public int Count => _provider.ParameterCount;

@@ -19,29 +19,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly PropertySymbol _equalityContract;
 
-        public SynthesizedRecordGetHashCode(SourceMemberContainerTypeSymbol containingType, PropertySymbol equalityContract, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.ObjectGetHashCode, memberOffset, diagnostics)
+        public SynthesizedRecordGetHashCode(
+            SourceMemberContainerTypeSymbol containingType,
+            PropertySymbol equalityContract,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        ) : base(containingType, WellKnownMemberNames.ObjectGetHashCode, memberOffset, diagnostics)
         {
             _equalityContract = equalityContract;
         }
 
-        protected override SpecialMember OverriddenSpecialMember => SpecialMember.System_Object__GetHashCode;
+        protected override SpecialMember OverriddenSpecialMember =>
+            SpecialMember.System_Object__GetHashCode;
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
-        {
+        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        ) {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Int32, location, diagnostics)),
-                    Parameters: ImmutableArray<ParameterSymbol>.Empty,
-                    IsVararg: false,
-                    DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty);
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Int32,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray<ParameterSymbol>.Empty,
+                IsVararg: false,
+                DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 0;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-        {
-            var F = new SyntheticBoundNodeFactory(this, this.SyntaxNode, compilationState, diagnostics);
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        ) {
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                this.SyntaxNode,
+                compilationState,
+                diagnostics
+            );
 
             try
             {
@@ -66,8 +88,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     // There are no base record types.
                     // Get hash code of the equality contract and combine it with hash codes for field values.
-                    ensureEqualityComparerHelpers(F, ref equalityComparer_GetHashCode, ref equalityComparer_get_Default);
-                    currentHashValue = MethodBodySynthesizer.GenerateGetHashCode(equalityComparer_GetHashCode!, equalityComparer_get_Default!, F.Property(F.This(), _equalityContract), F);
+                    ensureEqualityComparerHelpers(
+                        F,
+                        ref equalityComparer_GetHashCode,
+                        ref equalityComparer_get_Default
+                    );
+                    currentHashValue = MethodBodySynthesizer.GenerateGetHashCode(
+                        equalityComparer_GetHashCode!,
+                        equalityComparer_get_Default!,
+                        F.Property(F.This(), _equalityContract),
+                        F
+                    );
                 }
                 else
                 {
@@ -75,8 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // Get base.GetHashCode() and combine it with hash codes for field values.
                     var overridden = OverriddenMethod;
 
-                    if (overridden is null || overridden.ReturnType.SpecialType != SpecialType.System_Int32)
-                    {
+                    if (
+                        overridden is null
+                        || overridden.ReturnType.SpecialType != SpecialType.System_Int32
+                    ) {
                         // There was a problem with overriding, an error was reported elsewhere
                         F.CloseMethod(F.ThrowNull());
                         return;
@@ -92,10 +125,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (!f.IsStatic)
                     {
-                        ensureEqualityComparerHelpers(F, ref equalityComparer_GetHashCode, ref equalityComparer_get_Default);
-                        currentHashValue = MethodBodySynthesizer.GenerateHashCombine(currentHashValue, equalityComparer_GetHashCode!, equalityComparer_get_Default!, ref boundHashFactor,
-                                                                                     F.Field(F.This(), f),
-                                                                                     F);
+                        ensureEqualityComparerHelpers(
+                            F,
+                            ref equalityComparer_GetHashCode,
+                            ref equalityComparer_get_Default
+                        );
+                        currentHashValue = MethodBodySynthesizer.GenerateHashCombine(
+                            currentHashValue,
+                            equalityComparer_GetHashCode!,
+                            equalityComparer_get_Default!,
+                            ref boundHashFactor,
+                            F.Field(F.This(), f),
+                            F
+                        );
                     }
                 }
 
@@ -107,10 +149,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 F.CloseMethod(F.ThrowNull());
             }
 
-            static void ensureEqualityComparerHelpers(SyntheticBoundNodeFactory F, ref MethodSymbol? equalityComparer_GetHashCode, ref MethodSymbol? equalityComparer_get_Default)
-            {
-                equalityComparer_GetHashCode ??= F.WellKnownMethod(WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode);
-                equalityComparer_get_Default ??= F.WellKnownMethod(WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default);
+            static void ensureEqualityComparerHelpers(
+                SyntheticBoundNodeFactory F,
+                ref MethodSymbol? equalityComparer_GetHashCode,
+                ref MethodSymbol? equalityComparer_get_Default
+            ) {
+                equalityComparer_GetHashCode ??= F.WellKnownMethod(
+                    WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode
+                );
+                equalityComparer_get_Default ??= F.WellKnownMethod(
+                    WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
+                );
             }
         }
     }

@@ -45,12 +45,18 @@ namespace System.Security.Principal
 
             if (accountName.Length > MaximumAccountNameLength)
             {
-                throw new ArgumentException(SR.IdentityReference_AccountNameTooLong, nameof(accountName));
+                throw new ArgumentException(
+                    SR.IdentityReference_AccountNameTooLong,
+                    nameof(accountName)
+                );
             }
 
             if (domainName != null && domainName.Length > MaximumDomainNameLength)
             {
-                throw new ArgumentException(SR.IdentityReference_DomainNameTooLong, nameof(domainName));
+                throw new ArgumentException(
+                    SR.IdentityReference_DomainNameTooLong,
+                    nameof(domainName)
+                );
             }
 
             if (domainName == null || domainName.Length == 0)
@@ -75,8 +81,14 @@ namespace System.Security.Principal
                 throw new ArgumentException(SR.Argument_StringZeroLength, nameof(name));
             }
 
-            if (name.Length > (MaximumDomainNameLength + 1 /* '\' */ + MaximumAccountNameLength))
-            {
+            if (
+                name.Length
+                > (
+                    MaximumDomainNameLength
+                    + 1 /* '\' */
+                    + MaximumAccountNameLength
+                )
+            ) {
                 throw new ArgumentException(SR.IdentityReference_AccountNameTooLong, nameof(name));
             }
 
@@ -88,10 +100,7 @@ namespace System.Security.Principal
         #region Inherited properties and methods
         public override string Value
         {
-            get
-            {
-                return ToString();
-            }
+            get { return ToString(); }
         }
 
         public override bool IsValidTargetType(Type targetType)
@@ -133,7 +142,10 @@ namespace System.Security.Principal
             }
             else
             {
-                throw new ArgumentException(SR.IdentityReference_MustBeIdentityReference, nameof(targetType));
+                throw new ArgumentException(
+                    SR.IdentityReference_MustBeIdentityReference,
+                    nameof(targetType)
+                );
             }
         }
 
@@ -152,9 +164,16 @@ namespace System.Security.Principal
             return _name;
         }
 
-        internal static IdentityReferenceCollection Translate(IdentityReferenceCollection sourceAccounts, Type targetType, bool forceSuccess)
-        {
-            IdentityReferenceCollection result = Translate(sourceAccounts, targetType, out bool someFailed);
+        internal static IdentityReferenceCollection Translate(
+            IdentityReferenceCollection sourceAccounts,
+            Type targetType,
+            bool forceSuccess
+        ) {
+            IdentityReferenceCollection result = Translate(
+                sourceAccounts,
+                targetType,
+                out bool someFailed
+            );
 
             if (forceSuccess && someFailed)
             {
@@ -168,14 +187,20 @@ namespace System.Security.Principal
                     }
                 }
 
-                throw new IdentityNotMappedException(SR.IdentityReference_IdentityNotMapped, UnmappedIdentities);
+                throw new IdentityNotMappedException(
+                    SR.IdentityReference_IdentityNotMapped,
+                    UnmappedIdentities
+                );
             }
 
             return result;
         }
 
-        internal static IdentityReferenceCollection Translate(IdentityReferenceCollection sourceAccounts, Type targetType, out bool someFailed)
-        {
+        internal static IdentityReferenceCollection Translate(
+            IdentityReferenceCollection sourceAccounts,
+            Type targetType,
+            out bool someFailed
+        ) {
             if (sourceAccounts == null)
             {
                 throw new ArgumentNullException(nameof(sourceAccounts));
@@ -186,7 +211,10 @@ namespace System.Security.Principal
                 return TranslateToSids(sourceAccounts, out someFailed);
             }
 
-            throw new ArgumentException(SR.IdentityReference_MustBeIdentityReference, nameof(targetType));
+            throw new ArgumentException(
+                SR.IdentityReference_MustBeIdentityReference,
+                nameof(targetType)
+            );
         }
 
         #endregion
@@ -208,7 +236,9 @@ namespace System.Security.Principal
             }
             else
             {
-                return (left!.ToString().Equals(right!.ToString(), StringComparison.OrdinalIgnoreCase));
+                return (
+                    left!.ToString().Equals(right!.ToString(), StringComparison.OrdinalIgnoreCase)
+                );
             }
         }
 
@@ -222,8 +252,10 @@ namespace System.Security.Principal
         #region Private methods
 
 
-        private static IdentityReferenceCollection TranslateToSids(IdentityReferenceCollection sourceAccounts, out bool someFailed)
-        {
+        private static IdentityReferenceCollection TranslateToSids(
+            IdentityReferenceCollection sourceAccounts,
+            out bool someFailed
+        ) {
             if (sourceAccounts == null)
             {
                 throw new ArgumentNullException(nameof(sourceAccounts));
@@ -244,14 +276,18 @@ namespace System.Security.Principal
                 // Construct an array of unicode strings
                 //
 
-                Interop.Advapi32.MARSHALLED_UNICODE_STRING[] Names = new Interop.Advapi32.MARSHALLED_UNICODE_STRING[sourceAccounts.Count];
+                Interop.Advapi32.MARSHALLED_UNICODE_STRING[] Names =
+                    new Interop.Advapi32.MARSHALLED_UNICODE_STRING[sourceAccounts.Count];
 
                 int currentName = 0;
                 foreach (IdentityReference id in sourceAccounts)
                 {
                     if (!(id is NTAccount nta))
                     {
-                        throw new ArgumentException(SR.Argument_ImproperType, nameof(sourceAccounts));
+                        throw new ArgumentException(
+                            SR.Argument_ImproperType,
+                            nameof(sourceAccounts)
+                        );
                     }
 
                     Names[currentName].Buffer = nta.ToString();
@@ -282,34 +318,47 @@ namespace System.Security.Principal
                 someFailed = false;
                 uint ReturnCode;
 
-                ReturnCode = Interop.Advapi32.LsaLookupNames2(LsaHandle, 0, sourceAccounts.Count, Names, out ReferencedDomainsPtr, out SidsPtr);
+                ReturnCode = Interop.Advapi32.LsaLookupNames2(
+                    LsaHandle,
+                    0,
+                    sourceAccounts.Count,
+                    Names,
+                    out ReferencedDomainsPtr,
+                    out SidsPtr
+                );
 
                 //
                 // Make a decision regarding whether it makes sense to proceed
                 // based on the return code and the value of the forceSuccess argument
                 //
 
-                if (ReturnCode == Interop.StatusOptions.STATUS_NO_MEMORY ||
-                    ReturnCode == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES)
-                {
+                if (
+                    ReturnCode == Interop.StatusOptions.STATUS_NO_MEMORY
+                    || ReturnCode == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
+                ) {
                     throw new OutOfMemoryException();
                 }
                 else if (ReturnCode == Interop.StatusOptions.STATUS_ACCESS_DENIED)
                 {
                     throw new UnauthorizedAccessException();
                 }
-                else if (ReturnCode == Interop.StatusOptions.STATUS_NONE_MAPPED ||
-                    ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED)
-                {
+                else if (
+                    ReturnCode == Interop.StatusOptions.STATUS_NONE_MAPPED
+                    || ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED
+                ) {
                     someFailed = true;
                 }
                 else if (ReturnCode != 0)
                 {
                     uint win32ErrorCode = Interop.Advapi32.LsaNtStatusToWinError(ReturnCode);
 
-                    if (unchecked((int)win32ErrorCode) != Interop.Errors.ERROR_TRUSTED_RELATIONSHIP_FAILURE)
-                    {
-                        Debug.Fail($"Interop.LsaLookupNames(2) returned unrecognized error {win32ErrorCode}");
+                    if (
+                        unchecked((int)win32ErrorCode)
+                        != Interop.Errors.ERROR_TRUSTED_RELATIONSHIP_FAILURE
+                    ) {
+                        Debug.Fail(
+                            $"Interop.LsaLookupNames(2) returned unrecognized error {win32ErrorCode}"
+                        );
                     }
 
                     throw new Win32Exception(unchecked((int)win32ErrorCode));
@@ -319,13 +368,20 @@ namespace System.Security.Principal
                 // Interpret the results and generate SID objects
                 //
 
-                IdentityReferenceCollection Result = new IdentityReferenceCollection(sourceAccounts.Count);
+                IdentityReferenceCollection Result = new IdentityReferenceCollection(
+                    sourceAccounts.Count
+                );
 
                 if (ReturnCode == 0 || ReturnCode == Interop.StatusOptions.STATUS_SOME_NOT_MAPPED)
                 {
-                    SidsPtr.Initialize((uint)sourceAccounts.Count, (uint)Marshal.SizeOf<Interop.LSA_TRANSLATED_SID2>());
+                    SidsPtr.Initialize(
+                        (uint)sourceAccounts.Count,
+                        (uint)Marshal.SizeOf<Interop.LSA_TRANSLATED_SID2>()
+                    );
                     Win32.InitializeReferencedDomainsPointer(ReferencedDomainsPtr);
-                    Interop.LSA_TRANSLATED_SID2[] translatedSids = new Interop.LSA_TRANSLATED_SID2[sourceAccounts.Count];
+                    Interop.LSA_TRANSLATED_SID2[] translatedSids = new Interop.LSA_TRANSLATED_SID2[
+                        sourceAccounts.Count
+                    ];
                     SidsPtr.ReadArray(0, translatedSids, 0, translatedSids.Length);
 
                     for (int i = 0; i < sourceAccounts.Count; i++)
@@ -363,6 +419,7 @@ namespace System.Security.Principal
 
                 return Result;
             }
+
             finally
             {
                 LsaHandle?.Dispose();

@@ -15,13 +15,15 @@ namespace SocialWeather.Protobuf
             var inputStream = new CodedInputStream(stream, leaveOpen: true);
             var protoWeatherReport = new Protobuf.WeatherReport();
             inputStream.ReadMessage(protoWeatherReport);
-            return Task.FromResult(new SocialWeather.WeatherReport
-            {
-                Temperature = protoWeatherReport.Temperature,
-                ReportTime = protoWeatherReport.ReportTime,
-                Weather = (Weather)(int)protoWeatherReport.Weather,
-                ZipCode = protoWeatherReport.ZipCode
-            });
+            return Task.FromResult(
+                new SocialWeather.WeatherReport
+                {
+                    Temperature = protoWeatherReport.Temperature,
+                    ReportTime = protoWeatherReport.ReportTime,
+                    Weather = (Weather)(int)protoWeatherReport.Weather,
+                    ZipCode = protoWeatherReport.ZipCode
+                }
+            );
         }
 
         public async Task WriteAsync(SocialWeather.WeatherReport weatherReport, Stream stream)

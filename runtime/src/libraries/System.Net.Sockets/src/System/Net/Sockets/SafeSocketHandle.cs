@@ -31,8 +31,7 @@ namespace System.Net.Sockets
 #endif
         private int _ownClose;
 
-        public SafeSocketHandle(IntPtr preexistingHandle, bool ownsHandle)
-            : base(ownsHandle)
+        public SafeSocketHandle(IntPtr preexistingHandle, bool ownsHandle) : base(ownsHandle)
         {
             OwnsHandle = ownsHandle;
             SetHandleAndValid(preexistingHandle);
@@ -52,8 +51,7 @@ namespace System.Net.Sockets
 
         internal void TrackShutdown(SocketShutdown how)
         {
-            if (how == SocketShutdown.Send ||
-                how == SocketShutdown.Both)
+            if (how == SocketShutdown.Send || how == SocketShutdown.Both)
             {
                 _hasShutdownSend = true;
             }
@@ -61,10 +59,7 @@ namespace System.Net.Sockets
 
         public override bool IsInvalid
         {
-            get
-            {
-                return IsClosed || base.IsInvalid;
-            }
+            get { return IsClosed || base.IsInvalid; }
         }
 
         protected override bool ReleaseHandle()
@@ -72,7 +67,8 @@ namespace System.Net.Sockets
             _released = true;
             bool shouldClose = TryOwnClose();
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"shouldClose={shouldClose}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"shouldClose={shouldClose}");
 
             // When shouldClose is true, the user called Dispose on the SafeHandle.
             // When it is false, the handle was closed from the Socket via CloseAsIs.
@@ -93,7 +89,8 @@ namespace System.Net.Sockets
 #endif
                 bool shouldClose = TryOwnClose();
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"shouldClose={shouldClose}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"shouldClose={shouldClose}");
 
                 Dispose();
 
@@ -133,7 +130,8 @@ namespace System.Net.Sockets
             try
             {
 #endif
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"handle:{handle}");
 
                 canceledOperations |= OnHandleClose();
 
@@ -150,8 +148,11 @@ namespace System.Net.Sockets
             }
             catch (Exception exception)
             {
-                Debug.Assert(ExceptionCheck.IsFatal(exception), $"handle:{handle}, error:{exception}");
-                ret = true;  // Avoid a second assert.
+                Debug.Assert(
+                    ExceptionCheck.IsFatal(exception),
+                    $"handle:{handle}, error:{exception}"
+                );
+                ret = true; // Avoid a second assert.
                 throw;
             }
             finally

@@ -8,19 +8,12 @@ namespace System.Security.AccessControl
 {
     public sealed class FileSecurity : FileSystemSecurity
     {
-        public FileSecurity()
-            : base(false)
-        {
-        }
+        public FileSecurity() : base(false) { }
 
         public FileSecurity(string fileName, AccessControlSections includeSections)
-            : base(false, fileName, includeSections, false)
-        {
-        }
+            : base(false, fileName, includeSections, false) { }
 
         internal FileSecurity(SafeFileHandle? handle, AccessControlSections includeSections)
-            : base(false, handle, includeSections, false)
-        {
-        }
+            : base(false, handle, includeSections, false) { }
     }
 }

@@ -12,13 +12,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR(options =>
-            {
-                options.EnableDetailedErrors = true;
-            });
+            services.AddSignalR(
+                options =>
+                {
+                    options.EnableDetailedErrors = true;
+                }
+            );
 
             services.RemoveAll<IHubProtocol>();
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol>(new VersionedJsonHubProtocol(1000)));
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHubProtocol>(new VersionedJsonHubProtocol(1000))
+            );
 
             services.AddAuthentication();
         }
@@ -28,10 +32,12 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             app.UseRouting();
             app.UseAuthentication();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<VersionHub>("/version");
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapHub<VersionHub>("/version");
+                }
+            );
         }
     }
 }

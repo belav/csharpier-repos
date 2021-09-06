@@ -9,13 +9,13 @@ using System.Text.Encodings.Web;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class EnumConverter<T> : JsonConverter<T>
-        where T : struct, Enum
+    internal sealed class EnumConverter<T> : JsonConverter<T> where T : struct, Enum
     {
         private static readonly TypeCode s_enumTypeCode = Type.GetTypeCode(typeof(T));
 
         // Odd type codes are conveniently signed types (for enum backing types).
-        private static readonly string? s_negativeSign = ((int)s_enumTypeCode % 2) == 0 ? null : NumberFormatInfo.CurrentInfo.NegativeSign;
+        private static readonly string? s_negativeSign =
+            ((int)s_enumTypeCode % 2) == 0 ? null : NumberFormatInfo.CurrentInfo.NegativeSign;
 
         private const string ValueSeparator = ", ";
 
@@ -34,13 +34,16 @@ namespace System.Text.Json.Serialization.Converters
             return type.IsEnum;
         }
 
-        public EnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
-            : this(converterOptions, namingPolicy: null, serializerOptions)
-        {
-        }
+        public EnumConverter(
+            EnumConverterOptions converterOptions,
+            JsonSerializerOptions serializerOptions
+        ) : this(converterOptions, namingPolicy: null, serializerOptions) { }
 
-        public EnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy? namingPolicy, JsonSerializerOptions serializerOptions)
-        {
+        public EnumConverter(
+            EnumConverterOptions converterOptions,
+            JsonNamingPolicy? namingPolicy,
+            JsonSerializerOptions serializerOptions
+        ) {
             _converterOptions = converterOptions;
             _namingPolicy = namingPolicy;
             _nameCache = new ConcurrentDictionary<ulong, JsonEncodedText>();
@@ -66,12 +69,16 @@ namespace System.Text.Json.Serialization.Converters
                     key,
                     namingPolicy == null
                         ? JsonEncodedText.Encode(name, encoder)
-                        : FormatEnumValue(name, encoder));
+                        : FormatEnumValue(name, encoder)
+                );
             }
         }
 
-        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override T Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             JsonTokenType token = reader.TokenType;
 
             if (token == JsonTokenType.String)
@@ -85,8 +92,10 @@ namespace System.Text.Json.Serialization.Converters
                 return ReadWithQuotes(ref reader);
             }
 
-            if (token != JsonTokenType.Number || !_converterOptions.HasFlag(EnumConverterOptions.AllowNumbers))
-            {
+            if (
+                token != JsonTokenType.Number
+                || !_converterOptions.HasFlag(EnumConverterOptions.AllowNumbers)
+            ) {
                 ThrowHelper.ThrowJsonException();
                 return default;
             }
@@ -171,9 +180,10 @@ namespace System.Text.Json.Serialization.Converters
 
                     if (_nameCache.Count < NameCacheSizeSoftLimit)
                     {
-                        formatted = _namingPolicy == null
-                            ? JsonEncodedText.Encode(original, encoder)
-                            : FormatEnumValue(original, encoder);
+                        formatted =
+                            _namingPolicy == null
+                                ? JsonEncodedText.Encode(original, encoder)
+                                : FormatEnumValue(original, encoder);
 
                         writer.WriteStringValue(formatted);
 
@@ -185,8 +195,9 @@ namespace System.Text.Json.Serialization.Converters
                         // directly to the writer is cheaper than creating one and not caching it for reuse.
                         writer.WriteStringValue(
                             _namingPolicy == null
-                            ? original
-                            : FormatEnumValueToString(original, encoder));
+                                ? original
+                                : FormatEnumValueToString(original, encoder)
+                        );
                     }
 
                     return;
@@ -260,8 +271,9 @@ namespace System.Text.Json.Serialization.Converters
             // preceded by a negative sign. Identifiers have to start with a letter
             // so we'll just pick the first valid one and check for a negative sign
             // if needed.
-            return (value[0] >= 'A' &&
-                (s_negativeSign == null || !value.StartsWith(s_negativeSign)));
+            return (
+                value[0] >= 'A' && (s_negativeSign == null || !value.StartsWith(s_negativeSign))
+            );
         }
 
         private JsonEncodedText FormatEnumValue(string value, JavaScriptEncoder? encoder)
@@ -287,9 +299,13 @@ namespace System.Text.Json.Serialization.Converters
 #if BUILDING_INBOX_LIBRARY
                     ValueSeparator
 #else
-                    new string[] { ValueSeparator }, StringSplitOptions.None
+                    new string[]
+                    {
+                        ValueSeparator
+                    },
+                    StringSplitOptions.None
 #endif
-                    );
+                );
 
                 for (int i = 0; i < enumValues.Length; i++)
                 {
@@ -307,17 +323,22 @@ namespace System.Text.Json.Serialization.Converters
             string? enumString = reader.GetString();
 
             // Try parsing case sensitive first
-            if (!Enum.TryParse(enumString, out T value)
-                && !Enum.TryParse(enumString, ignoreCase: true, out value))
-            {
+            if (
+                !Enum.TryParse(enumString, out T value)
+                && !Enum.TryParse(enumString, ignoreCase: true, out value)
+            ) {
                 ThrowHelper.ThrowJsonException();
             }
 
             return value;
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, T value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            T value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             // An EnumConverter that invokes this method
             // can only be created by JsonSerializerOptions.GetDictionaryKeyConverter
             // hence no naming policy is expected.

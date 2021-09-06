@@ -17,31 +17,40 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         TInterpolationSyntax,
         TExpressionSyntax,
         TConditionalExpressionSyntax,
-        TParenthesizedExpressionSyntax> : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TParenthesizedExpressionSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TInterpolationSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
         where TConditionalExpressionSyntax : TExpressionSyntax
         where TParenthesizedExpressionSyntax : TExpressionSyntax
     {
         protected AbstractSimplifyInterpolationDiagnosticAnalyzer()
-           : base(IDEDiagnosticIds.SimplifyInterpolationId,
-                  EnforceOnBuildValues.SimplifyInterpolation,
-                  CodeStyleOptions2.PreferSimplifiedInterpolation,
-                  new LocalizableResourceString(nameof(AnalyzersResources.Simplify_interpolation), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                  new LocalizableResourceString(nameof(AnalyzersResources.Interpolation_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                  isUnnecessary: true)
-        {
-        }
+            : base(
+                IDEDiagnosticIds.SimplifyInterpolationId,
+                EnforceOnBuildValues.SimplifyInterpolation,
+                CodeStyleOptions2.PreferSimplifiedInterpolation,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Simplify_interpolation),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Interpolation_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                isUnnecessary: true
+            ) { }
 
         protected abstract IVirtualCharService GetVirtualCharService();
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeInterpolation, OperationKind.Interpolation);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(AnalyzeInterpolation, OperationKind.Interpolation);
 
         private void AnalyzeInterpolation(OperationAnalysisContext context)
         {
@@ -56,16 +65,31 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             }
 
             var language = interpolation.Language;
-            var option = optionSet.GetOption(CodeStyleOptions2.PreferSimplifiedInterpolation, language);
+            var option = optionSet.GetOption(
+                CodeStyleOptions2.PreferSimplifiedInterpolation,
+                language
+            );
             if (!option.Value)
             {
                 // No point in analyzing if the option is off.
                 return;
             }
 
-            Helpers.UnwrapInterpolation<TInterpolationSyntax, TExpressionSyntax, TConditionalExpressionSyntax, TParenthesizedExpressionSyntax>(
-                GetVirtualCharService(), GetSyntaxFacts(), interpolation, out _, out var alignment, out _,
-                out var formatString, out var unnecessaryLocations);
+            Helpers.UnwrapInterpolation<
+                TInterpolationSyntax,
+                TExpressionSyntax,
+                TConditionalExpressionSyntax,
+                TParenthesizedExpressionSyntax
+            >(
+                GetVirtualCharService(),
+                GetSyntaxFacts(),
+                interpolation,
+                out _,
+                out var alignment,
+                out _,
+                out var formatString,
+                out var unnecessaryLocations
+            );
 
             if (alignment == null && formatString == null)
             {
@@ -77,12 +101,15 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             var firstUnnecessaryLocation = unnecessaryLocations[0];
             var remainingUnnecessaryLocations = unnecessaryLocations.RemoveAt(0);
 
-            context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-                Descriptor,
-                firstUnnecessaryLocation,
-                option.Notification.Severity,
-                additionalLocations: ImmutableArray.Create(interpolation.Syntax.GetLocation()),
-                additionalUnnecessaryLocations: remainingUnnecessaryLocations));
+            context.ReportDiagnostic(
+                DiagnosticHelper.CreateWithLocationTags(
+                    Descriptor,
+                    firstUnnecessaryLocation,
+                    option.Notification.Severity,
+                    additionalLocations: ImmutableArray.Create(interpolation.Syntax.GetLocation()),
+                    additionalUnnecessaryLocations: remainingUnnecessaryLocations
+                )
+            );
         }
     }
 }

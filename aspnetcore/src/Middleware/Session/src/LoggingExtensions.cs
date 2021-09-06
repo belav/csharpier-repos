@@ -26,58 +26,71 @@ namespace Microsoft.Extensions.Logging
             _errorClosingTheSession = LoggerMessage.Define(
                 eventId: new EventId(1, "ErrorClosingTheSession"),
                 logLevel: LogLevel.Error,
-                formatString: "Error closing the session.");
+                formatString: "Error closing the session."
+            );
             _accessingExpiredSession = LoggerMessage.Define<string>(
                 eventId: new EventId(2, "AccessingExpiredSession"),
                 logLevel: LogLevel.Information,
-                formatString: "Accessing expired session, Key:{sessionKey}");
+                formatString: "Accessing expired session, Key:{sessionKey}"
+            );
             _sessionStarted = LoggerMessage.Define<string, string>(
                 eventId: new EventId(3, "SessionStarted"),
                 logLevel: LogLevel.Information,
                 formatString: "Session started; Key:{sessionKey}, Id:{sessionId}",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
             _sessionLoaded = LoggerMessage.Define<string, string, int>(
                 eventId: new EventId(4, "SessionLoaded"),
                 logLevel: LogLevel.Debug,
                 formatString: "Session loaded; Key:{sessionKey}, Id:{sessionId}, Count:{count}",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
             _sessionStored = LoggerMessage.Define<string, string, int>(
                 eventId: new EventId(5, "SessionStored"),
                 logLevel: LogLevel.Debug,
-                formatString: "Session stored; Key:{sessionKey}, Id:{sessionId}, Count:{count}");
+                formatString: "Session stored; Key:{sessionKey}, Id:{sessionId}, Count:{count}"
+            );
             _sessionCacheReadException = LoggerMessage.Define<string>(
                 eventId: new EventId(6, "SessionCacheReadException"),
                 logLevel: LogLevel.Error,
                 formatString: "Session cache read exception, Key:{sessionKey}",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
             _errorUnprotectingCookie = LoggerMessage.Define(
                 eventId: new EventId(7, "ErrorUnprotectingCookie"),
                 logLevel: LogLevel.Warning,
-                formatString: "Error unprotecting the session cookie.");
+                formatString: "Error unprotecting the session cookie."
+            );
             _sessionLoadingTimeout = LoggerMessage.Define(
                 eventId: new EventId(8, "SessionLoadingTimeout"),
                 logLevel: LogLevel.Warning,
-                formatString: "Loading the session timed out.");
+                formatString: "Loading the session timed out."
+            );
             _sessionCommitTimeout = LoggerMessage.Define(
                 eventId: new EventId(9, "SessionCommitTimeout"),
                 logLevel: LogLevel.Warning,
-                formatString: "Committing the session timed out.");
+                formatString: "Committing the session timed out."
+            );
             _sessionCommitCanceled = LoggerMessage.Define(
                 eventId: new EventId(10, "SessionCommitCanceled"),
                 logLevel: LogLevel.Information,
-                formatString: "Committing the session was canceled.");
+                formatString: "Committing the session was canceled."
+            );
             _sessionRefreshTimeout = LoggerMessage.Define(
                 eventId: new EventId(11, "SessionRefreshTimeout"),
                 logLevel: LogLevel.Warning,
-                formatString: "Refreshing the session timed out.");
+                formatString: "Refreshing the session timed out."
+            );
             _sessionRefreshCanceled = LoggerMessage.Define(
                 eventId: new EventId(12, "SessionRefreshCanceled"),
                 logLevel: LogLevel.Information,
-                formatString: "Refreshing the session was canceled.");
+                formatString: "Refreshing the session was canceled."
+            );
             _sessionNotAvailable = LoggerMessage.Define(
                 eventId: new EventId(13, "SessionCommitNotAvailable"),
                 logLevel: LogLevel.Information,
-                formatString: "Session cannot be committed since it is unavailable.");
+                formatString: "Session cannot be committed since it is unavailable."
+            );
         }
 
         public static void ErrorClosingTheSession(this ILogger logger, Exception exception)
@@ -95,18 +108,29 @@ namespace Microsoft.Extensions.Logging
             _sessionStarted(logger, sessionKey, sessionId, null);
         }
 
-        public static void SessionLoaded(this ILogger logger, string sessionKey, string sessionId, int count)
-        {
+        public static void SessionLoaded(
+            this ILogger logger,
+            string sessionKey,
+            string sessionId,
+            int count
+        ) {
             _sessionLoaded(logger, sessionKey, sessionId, count, null);
         }
 
-        public static void SessionStored(this ILogger logger, string sessionKey, string sessionId, int count)
-        {
+        public static void SessionStored(
+            this ILogger logger,
+            string sessionKey,
+            string sessionId,
+            int count
+        ) {
             _sessionStored(logger, sessionKey, sessionId, count, null);
         }
 
-        public static void SessionCacheReadException(this ILogger logger, string sessionKey, Exception exception)
-        {
+        public static void SessionCacheReadException(
+            this ILogger logger,
+            string sessionKey,
+            Exception exception
+        ) {
             _sessionCacheReadException(logger, sessionKey, exception);
         }
 
@@ -140,6 +164,7 @@ namespace Microsoft.Extensions.Logging
             _sessionRefreshCanceled(logger, null);
         }
 
-        public static void SessionNotAvailable(this ILogger logger) => _sessionNotAvailable(logger, null);
+        public static void SessionNotAvailable(this ILogger logger) =>
+            _sessionNotAvailable(logger, null);
     }
 }

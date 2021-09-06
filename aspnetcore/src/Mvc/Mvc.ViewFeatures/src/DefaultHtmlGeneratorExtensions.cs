@@ -30,9 +30,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string fragment,
             object routeValues,
             string method,
-            object htmlAttributes)
-        {
-            var tagBuilder = generator.GenerateForm(viewContext, actionName, controllerName, routeValues, method, htmlAttributes);
+            object htmlAttributes
+        ) {
+            var tagBuilder = generator.GenerateForm(
+                viewContext,
+                actionName,
+                controllerName,
+                routeValues,
+                method,
+                htmlAttributes
+            );
 
             // Append the fragment to action
             if (fragment != null)
@@ -61,9 +68,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object routeValues,
             string fragment,
             string method,
-            object htmlAttributes)
-        {
-            var tagBuilder = generator.GenerateRouteForm(viewContext, routeName, routeValues, method, htmlAttributes);
+            object htmlAttributes
+        ) {
+            var tagBuilder = generator.GenerateRouteForm(
+                viewContext,
+                routeName,
+                routeValues,
+                method,
+                htmlAttributes
+            );
 
             // Append the fragment to action
             if (fragment != null)

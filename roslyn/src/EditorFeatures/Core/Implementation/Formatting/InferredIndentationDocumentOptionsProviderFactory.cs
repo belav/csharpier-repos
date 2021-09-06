@@ -19,27 +19,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 {
     [Export(typeof(IDocumentOptionsProviderFactory))]
     [Order(After = PredefinedDocumentOptionsProviderNames.EditorConfig)]
-    internal sealed class InferredIndentationDocumentOptionsProviderFactory : IDocumentOptionsProviderFactory
+    internal sealed class InferredIndentationDocumentOptionsProviderFactory
+        : IDocumentOptionsProviderFactory
     {
         private readonly IIndentationManagerService _indentationManagerService;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InferredIndentationDocumentOptionsProviderFactory(IIndentationManagerService indentationManagerService)
-            => _indentationManagerService = indentationManagerService;
+        public InferredIndentationDocumentOptionsProviderFactory(
+            IIndentationManagerService indentationManagerService
+        ) => _indentationManagerService = indentationManagerService;
 
-        public IDocumentOptionsProvider? TryCreate(Workspace workspace)
-            => new DocumentOptionsProvider(_indentationManagerService);
+        public IDocumentOptionsProvider? TryCreate(Workspace workspace) =>
+            new DocumentOptionsProvider(_indentationManagerService);
 
         private class DocumentOptionsProvider : IDocumentOptionsProvider
         {
             private readonly IIndentationManagerService _indentationManagerService;
 
-            public DocumentOptionsProvider(IIndentationManagerService indentationManagerService)
-                => _indentationManagerService = indentationManagerService;
+            public DocumentOptionsProvider(IIndentationManagerService indentationManagerService) =>
+                _indentationManagerService = indentationManagerService;
 
-            public Task<IDocumentOptions?> GetOptionsForDocumentAsync(Document document, CancellationToken cancellationToken)
-                => Task.FromResult<IDocumentOptions?>(new DocumentOptions(document.Project.Solution.Workspace, document.Id, _indentationManagerService));
+            public Task<IDocumentOptions?> GetOptionsForDocumentAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) =>
+                Task.FromResult<IDocumentOptions?>(
+                    new DocumentOptions(
+                        document.Project.Solution.Workspace,
+                        document.Id,
+                        _indentationManagerService
+                    )
+                );
 
             private sealed class DocumentOptions : IDocumentOptions
             {
@@ -47,8 +58,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 private readonly DocumentId _documentId;
                 private readonly IIndentationManagerService _indentationManagerService;
 
-                public DocumentOptions(Workspace workspace, DocumentId id, IIndentationManagerService indentationManagerService)
-                {
+                public DocumentOptions(
+                    Workspace workspace,
+                    DocumentId id,
+                    IIndentationManagerService indentationManagerService
+                ) {
                     _workspace = workspace;
                     _documentId = id;
                     _indentationManagerService = indentationManagerService;
@@ -71,7 +85,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                             }
                             else
                             {
-                                FatalError.ReportAndCatch(new System.Exception("We had an open document but it wasn't associated with a buffer. That meant we coudln't apply formatting settings."));
+                                FatalError.ReportAndCatch(
+                                    new System.Exception(
+                                        "We had an open document but it wasn't associated with a buffer. That meant we coudln't apply formatting settings."
+                                    )
+                                );
                             }
                         }
                     }
@@ -80,21 +98,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                     return false;
                 }
 
-                private bool TryGetOptionForBuffer(ITextBuffer textBuffer, OptionKey option, out object? value)
-                {
+                private bool TryGetOptionForBuffer(
+                    ITextBuffer textBuffer,
+                    OptionKey option,
+                    out object? value
+                ) {
                     if (option.Option == FormattingOptions.UseTabs)
                     {
-                        value = !_indentationManagerService.UseSpacesForWhitespace(textBuffer, explicitFormat: false);
+                        value = !_indentationManagerService.UseSpacesForWhitespace(
+                            textBuffer,
+                            explicitFormat: false
+                        );
                         return true;
                     }
                     else if (option.Option == FormattingOptions.TabSize)
                     {
-                        value = _indentationManagerService.GetTabSize(textBuffer, explicitFormat: false);
+                        value = _indentationManagerService.GetTabSize(
+                            textBuffer,
+                            explicitFormat: false
+                        );
                         return true;
                     }
                     else if (option.Option == FormattingOptions.IndentationSize)
                     {
-                        value = _indentationManagerService.GetIndentSize(textBuffer, explicitFormat: false);
+                        value = _indentationManagerService.GetIndentSize(
+                            textBuffer,
+                            explicitFormat: false
+                        );
                         return true;
                     }
                     else

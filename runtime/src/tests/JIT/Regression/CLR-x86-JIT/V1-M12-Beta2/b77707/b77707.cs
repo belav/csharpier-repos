@@ -15,6 +15,7 @@ namespace Test
             {
                 return arr[0];
             }
+
             finally
             {
                 throw new Exception();

@@ -33,9 +33,14 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                     try
                     {
                         //creating XmlC14NWriter with a null stream;
-                        XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(Stream.Null);
+                        XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(
+                            Stream.Null
+                        );
                         writer.StartCanonicalization(null, true, new string[] { "p1", "p2" });
-                        Assert.False(true, "Error, creating XmlC14NWriter with a null stream should have thrown!");
+                        Assert.False(
+                            true,
+                            "Error, creating XmlC14NWriter with a null stream should have thrown!"
+                        );
                     }
                     catch (Exception ex)
                     {
@@ -61,7 +66,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                         writer.WriteEndElement();
                         writer.EndCanonicalization();
                         writer.WriteEndElement();
-                        Assert.False(true, "Error, creating XmlC14NWriter with null elements in include prefixes should have thrown!");
+                        Assert.False(
+                            true,
+                            "Error, creating XmlC14NWriter with null elements in include prefixes should have thrown!"
+                        );
                     }
                     catch (Exception ex)
                     {
@@ -86,7 +94,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             {
                 count++;
                 string rwTypeStr = input.Arguments[0].Value;
-                ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
+                ReaderWriterFactory.ReaderWriterType rwType =
+                    (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
+                        typeof(ReaderWriterFactory.ReaderWriterType),
+                        rwTypeStr,
+                        true
+                    );
                 Encoding encoding = Encoding.GetEncoding(input.Arguments[1].Value);
                 bool mustSupportV14N = input.Arguments[2].Value.ToLower() == "true";
 
@@ -100,8 +113,14 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
                 if (!writer.CanCanonicalize)
                 {
-                    Assert.False(mustSupportV14N,
-                        string.Format("Error, writer {0},{1} should support C14N, but it doesn't!", rwTypeStr, encoding.ToString()));
+                    Assert.False(
+                        mustSupportV14N,
+                        string.Format(
+                            "Error, writer {0},{1} should support C14N, but it doesn't!",
+                            rwTypeStr,
+                            encoding.ToString()
+                        )
+                    );
                     continue;
                 }
 
@@ -119,7 +138,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
                 MemoryStream canonicalStream = new MemoryStream();
 
-                writer.StartCanonicalization(canonicalStream, false, new string[] { "p3", "p2", "p1", "" });
+                writer.StartCanonicalization(
+                    canonicalStream,
+                    false,
+                    new string[] { "p3", "p2", "p1", "" }
+                );
                 writer.WriteStartElement("pre", "Element3", myNamespace2);
                 writer.WriteAttributeString("pre2", "attrName", myNamespace4, "attrValue");
                 writer.WriteStartElement("Element4", "");
@@ -157,7 +180,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 Helper.DumpToFile(fullDoc);
                 Helper.DumpToFile(canonicalDoc);
                 Helper.DumpToFile(outputFromSecurity);
-                Assert.True(Enumerable.SequenceEqual(outputFromSecurity, canonicalDoc), $"TestC14NInclusivePrefixes test variation #{count} failed");
+                Assert.True(
+                    Enumerable.SequenceEqual(outputFromSecurity, canonicalDoc),
+                    $"TestC14NInclusivePrefixes test variation #{count} failed"
+                );
             }
         }
 
@@ -165,10 +191,18 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         public static void ReaderWriter_C14N_DifferentReadersWriters()
         {
             int count = 0;
-            var params1 = TestConfigHelper.GetTest("ReaderWriter_C14N_DifferentReadersWriters_ParamGroup1");
-            var params2 = TestConfigHelper.GetTest("ReaderWriter_C14N_DifferentReadersWriters_ParamGroup2");
-            var params3 = TestConfigHelper.GetTest("ReaderWriter_C14N_DifferentReadersWriters_ParamGroup3");
-            var params4 = TestConfigHelper.GetTest("ReaderWriter_C14N_DifferentReadersWriters_ParamGroup4");
+            var params1 = TestConfigHelper.GetTest(
+                "ReaderWriter_C14N_DifferentReadersWriters_ParamGroup1"
+            );
+            var params2 = TestConfigHelper.GetTest(
+                "ReaderWriter_C14N_DifferentReadersWriters_ParamGroup2"
+            );
+            var params3 = TestConfigHelper.GetTest(
+                "ReaderWriter_C14N_DifferentReadersWriters_ParamGroup3"
+            );
+            var params4 = TestConfigHelper.GetTest(
+                "ReaderWriter_C14N_DifferentReadersWriters_ParamGroup4"
+            );
             Transform transform;
             MemoryStream canonicalStream;
             MemoryStream ms;
@@ -185,7 +219,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                     {
                         count++;
                         string rwTypeStr = input.Arguments[0].Value;
-                        ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
+                        ReaderWriterFactory.ReaderWriterType rwType =
+                            (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
+                                typeof(ReaderWriterFactory.ReaderWriterType),
+                                rwTypeStr,
+                                true
+                            );
                         Encoding encoding = Encoding.GetEncoding((string)input.Arguments[1].Value);
                         string sampleXmlFileName = input2.Arguments[0].Value;
                         bool mustSupportV14N = input.Arguments[2].Value == "true";
@@ -224,7 +263,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
                         if (!dicWriter.CanCanonicalize)
                         {
-                            Assert.False(mustSupportV14N, "Error, writer should support C14N, but it doesn't!");
+                            Assert.False(
+                                mustSupportV14N,
+                                "Error, writer should support C14N, but it doesn't!"
+                            );
                             continue;
                         }
 
@@ -243,7 +285,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
                         Helper.DumpToFile(outputFromSecurity);
                         Helper.DumpToFile(outputFromIndigo);
-                        Assert.True(Enumerable.SequenceEqual(outputFromSecurity, outputFromIndigo), $"ReaderWriter_C14N_DifferentReadersWriters test variation #{count} failed");
+                        Assert.True(
+                            Enumerable.SequenceEqual(outputFromSecurity, outputFromIndigo),
+                            $"ReaderWriter_C14N_DifferentReadersWriters test variation #{count} failed"
+                        );
                     }
                 }
             }
@@ -254,7 +299,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 count++;
                 string sampleXmlFileName = input.Arguments[3].Value;
                 string rwTypeStr = input.Arguments[0].Value;
-                ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
+                ReaderWriterFactory.ReaderWriterType rwType =
+                    (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
+                        typeof(ReaderWriterFactory.ReaderWriterType),
+                        rwTypeStr,
+                        true
+                    );
                 Encoding encoding = Encoding.GetEncoding((string)input.Arguments[1].Value);
 
                 bool mustSupportV14N = input.Arguments[2].Value == "true";
@@ -269,7 +319,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 outputFromSecurity = StreamToByteArray(transformedOutput);
                 byte[] sampleXmlFileBytes = File.ReadAllBytes(sampleXmlFileName);
 
-                XmlReader r = ReaderWriterFactory.CreateXmlReader(rwType, sampleXmlFileBytes, encoding);
+                XmlReader r = ReaderWriterFactory.CreateXmlReader(
+                    rwType,
+                    sampleXmlFileBytes,
+                    encoding
+                );
                 XmlDictionaryReader dicReader = r as XmlDictionaryReader;
                 if (dicReader == null)
                 {
@@ -280,7 +334,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
                 if (!dicReader.CanCanonicalize)
                 {
-                    Assert.False(mustSupportV14N, "Error, reader should support C14N, but it doesn't!");
+                    Assert.False(
+                        mustSupportV14N,
+                        "Error, reader should support C14N, but it doesn't!"
+                    );
                     continue;
                 }
 
@@ -289,14 +346,18 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 canonicalStream.Position = 0;
                 string str = new StreamReader(canonicalStream).ReadToEnd();
                 canonicalStream.Position = 0;
-                while (dicReader.Read()) ; // simply read it all into the C14N writer
+                while (dicReader.Read())
+                    ; // simply read it all into the C14N writer
                 dicReader.EndCanonicalization();
                 dicReader.Close();
 
                 outputFromIndigo = canonicalStream.ToArray();
                 Helper.DumpToFile(outputFromSecurity);
                 Helper.DumpToFile(outputFromIndigo);
-                Assert.True(Enumerable.SequenceEqual(outputFromSecurity, outputFromIndigo), $"ReaderWriter_C14N_DifferentReadersWriters test variation #{count} failed");
+                Assert.True(
+                    Enumerable.SequenceEqual(outputFromSecurity, outputFromIndigo),
+                    $"ReaderWriter_C14N_DifferentReadersWriters test variation #{count} failed"
+                );
             }
 
             //TestC14NWriterWithManyAttributes
@@ -324,8 +385,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 }
                 else
                 {
-                    sb.AppendFormat(" {0}:{1}=\"{2}\" xmlns:{0}=\"{3}\"",
-                        prefix, localName, value, namespaceUri);
+                    sb.AppendFormat(
+                        " {0}:{1}=\"{2}\" xmlns:{0}=\"{3}\"",
+                        prefix,
+                        localName,
+                        value,
+                        namespaceUri
+                    );
                 }
             }
             sb.Append(">Hello world</Element></Root>");
@@ -352,9 +418,17 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Helper.DumpToFile(outputFromIndigo);
             Helper.DumpToFile(nonCanonicalOutput);
 
-            Assert.True(Enumerable.SequenceEqual(outputFromSecurity, outputFromIndigo), $"ReaderWriter_C14N_DifferentReadersWriters test variation #{count} failed");
+            Assert.True(
+                Enumerable.SequenceEqual(outputFromSecurity, outputFromIndigo),
+                $"ReaderWriter_C14N_DifferentReadersWriters test variation #{count} failed"
+            );
             count++;
-            Assert.Equal(params1.Inputs.Count * params2.Inputs.Count * params3.Inputs.Count + params4.Inputs.Count + 1, count);
+            Assert.Equal(
+                params1.Inputs.Count * params2.Inputs.Count * params3.Inputs.Count
+                    + params4.Inputs.Count
+                    + 1,
+                count
+            );
         }
 
         [Fact]
@@ -384,7 +458,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 }
 
                 xmlBuffer = new XmlBuffer(input.Arguments[0].Value);
-                engine = new Engine(includeComments, inclusivePrefixes, mode == TestMode.FullDocument);
+                engine = new Engine(
+                    includeComments,
+                    inclusivePrefixes,
+                    mode == TestMode.FullDocument
+                );
 
                 XmlReader reader = CreateReader(mode, xmlBuffer, startAt);
                 //Canonicalization using Dictionary writer
@@ -406,9 +484,18 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 string dicWriterOutput = dw == null ? null : Encoding.UTF8.GetString(dw);
                 string clrOutput = Encoding.UTF8.GetString(c);
 
-                Assert.Equal(input.Arguments[4].Value.ToLower() == "true", dicReaderOutput == writerOutput);
-                Assert.Equal(input.Arguments[5].Value.ToLower() == "true", dicWriterOutput == writerOutput);
-                Assert.Equal(input.Arguments[6].Value.ToLower() == "true", clrOutput == writerOutput);
+                Assert.Equal(
+                    input.Arguments[4].Value.ToLower() == "true",
+                    dicReaderOutput == writerOutput
+                );
+                Assert.Equal(
+                    input.Arguments[5].Value.ToLower() == "true",
+                    dicWriterOutput == writerOutput
+                );
+                Assert.Equal(
+                    input.Arguments[6].Value.ToLower() == "true",
+                    clrOutput == writerOutput
+                );
             }
         }
 
@@ -438,14 +525,22 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                             r.MoveToFirstAttribute();
                             do
                             {
-                                if (r.LocalName == "xop" && r.Prefix == "xmlns" && r.Value == "http://www.w3.org/2004/08/xop/include")
-                                {
+                                if (
+                                    r.LocalName == "xop"
+                                    && r.Prefix == "xmlns"
+                                    && r.Value == "http://www.w3.org/2004/08/xop/include"
+                                ) {
                                     // special case: do not need to rewrite the xmlns:xop for MTOM
                                     // skip
                                 }
                                 else
                                 {
-                                    w.WriteAttributeString(r.Prefix, r.LocalName, r.NamespaceURI, r.Value);
+                                    w.WriteAttributeString(
+                                        r.Prefix,
+                                        r.LocalName,
+                                        r.NamespaceURI,
+                                        r.Value
+                                    );
                                 }
                             } while (r.MoveToNextAttribute());
                             r.MoveToElement();
@@ -455,7 +550,6 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                         {
                             w.WriteEndElement();
                         }
-
                         break;
                     case XmlNodeType.CDATA:
                         w.WriteCData(r.Value);
@@ -515,8 +609,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             }
         }
 
-        private static byte[] CanonicalizeUsingClrLibrary(Engine engine, TestMode mode, XmlBuffer xmlBuffer, string startAt)
-        {
+        private static byte[] CanonicalizeUsingClrLibrary(
+            Engine engine,
+            TestMode mode,
+            XmlBuffer xmlBuffer,
+            string startAt
+        ) {
             if (mode == TestMode.FullDocument)
             {
                 return engine.CanonicalizeUsingClrLibrary(xmlBuffer.CreateStream());

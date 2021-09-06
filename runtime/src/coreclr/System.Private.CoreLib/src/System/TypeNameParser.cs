@@ -21,10 +21,7 @@ namespace System
         private static extern void _ReleaseTypeNameParser(IntPtr pTypeNameParser);
         #endregion
 
-        public SafeTypeNameParserHandle()
-            : base(true)
-        {
-        }
+        public SafeTypeNameParserHandle() : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -38,19 +35,35 @@ namespace System
     {
         #region QCalls
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void _CreateTypeNameParser(string typeName, ObjectHandleOnStack retHandle, bool throwOnError);
+        private static extern void _CreateTypeNameParser(
+            string typeName,
+            ObjectHandleOnStack retHandle,
+            bool throwOnError
+        );
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void _GetNames(SafeTypeNameParserHandle pTypeNameParser, ObjectHandleOnStack retArray);
+        private static extern void _GetNames(
+            SafeTypeNameParserHandle pTypeNameParser,
+            ObjectHandleOnStack retArray
+        );
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void _GetTypeArguments(SafeTypeNameParserHandle pTypeNameParser, ObjectHandleOnStack retArray);
+        private static extern void _GetTypeArguments(
+            SafeTypeNameParserHandle pTypeNameParser,
+            ObjectHandleOnStack retArray
+        );
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void _GetModifiers(SafeTypeNameParserHandle pTypeNameParser, ObjectHandleOnStack retArray);
+        private static extern void _GetModifiers(
+            SafeTypeNameParserHandle pTypeNameParser,
+            ObjectHandleOnStack retArray
+        );
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void _GetAssemblyName(SafeTypeNameParserHandle pTypeNameParser, StringHandleOnStack retString);
+        private static extern void _GetAssemblyName(
+            SafeTypeNameParserHandle pTypeNameParser,
+            StringHandleOnStack retString
+        );
         #endregion
 
         #region Static Members
@@ -61,8 +74,8 @@ namespace System
             Func<Assembly?, string, bool, Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
-        {
+            ref StackCrawlMark stackMark
+        ) {
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
             if (typeName.Length > 0 && typeName[0] == '\0')
@@ -78,7 +91,13 @@ namespace System
                 // Let's construct the Type object.
                 using (TypeNameParser parser = new TypeNameParser(handle))
                 {
-                    ret = parser.ConstructType(assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+                    ret = parser.ConstructType(
+                        assemblyResolver,
+                        typeResolver,
+                        throwOnError,
+                        ignoreCase,
+                        ref stackMark
+                    );
                 }
             }
 
@@ -110,8 +129,8 @@ namespace System
             Func<Assembly?, string, bool, Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
-        {
+            ref StackCrawlMark stackMark
+        ) {
             // assembly name
             Assembly? assembly = null;
             string asmName = GetAssemblyName();
@@ -140,7 +159,14 @@ namespace System
                 return null;
             }
 
-            Type? baseType = ResolveType(assembly, names, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            Type? baseType = ResolveType(
+                assembly,
+                names,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
 
             if (baseType == null)
             {
@@ -161,7 +187,13 @@ namespace System
 
                     using (TypeNameParser argParser = new TypeNameParser(typeArguments[i]))
                     {
-                        types[i] = argParser.ConstructType(assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+                        types[i] = argParser.ConstructType(
+                            assemblyResolver,
+                            typeResolver,
+                            throwOnError,
+                            ignoreCase,
+                            ref stackMark
+                        );
                     }
 
                     if (types[i] == null)
@@ -178,12 +210,21 @@ namespace System
             fixed (int* ptr = modifiers)
             {
                 IntPtr intPtr = new IntPtr(ptr);
-                return RuntimeTypeHandle.GetTypeHelper(baseType, types!, intPtr, modifiers == null ? 0 : modifiers.Length);
+                return RuntimeTypeHandle.GetTypeHelper(
+                    baseType,
+                    types!,
+                    intPtr,
+                    modifiers == null ? 0 : modifiers.Length
+                );
             }
         }
 
-        private static Assembly? ResolveAssembly(string asmName, Func<AssemblyName, Assembly?>? assemblyResolver, bool throwOnError, ref StackCrawlMark stackMark)
-        {
+        private static Assembly? ResolveAssembly(
+            string asmName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            bool throwOnError,
+            ref StackCrawlMark stackMark
+        ) {
             Debug.Assert(!string.IsNullOrEmpty(asmName));
 
             Assembly? assembly;
@@ -191,7 +232,11 @@ namespace System
             {
                 if (throwOnError)
                 {
-                    assembly = RuntimeAssembly.InternalLoad(asmName, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    assembly = RuntimeAssembly.InternalLoad(
+                        asmName,
+                        ref stackMark,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
                 }
                 else
                 {
@@ -199,7 +244,11 @@ namespace System
                     // Other exceptions like BadImangeFormatException should still fly.
                     try
                     {
-                        assembly = RuntimeAssembly.InternalLoad(asmName, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+                        assembly = RuntimeAssembly.InternalLoad(
+                            asmName,
+                            ref stackMark,
+                            AssemblyLoadContext.CurrentContextualReflectionContext
+                        );
                     }
                     catch (FileNotFoundException)
                     {
@@ -212,7 +261,9 @@ namespace System
                 assembly = assemblyResolver(new AssemblyName(asmName));
                 if (assembly == null && throwOnError)
                 {
-                    throw new FileNotFoundException(SR.Format(SR.FileNotFound_ResolveAssembly, asmName));
+                    throw new FileNotFoundException(
+                        SR.Format(SR.FileNotFound_ResolveAssembly, asmName)
+                    );
                 }
             }
 
@@ -220,8 +271,14 @@ namespace System
         }
 
         [RequiresUnreferencedCode("The type might be removed")]
-        private static Type? ResolveType(Assembly? assembly, string[] names, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError, bool ignoreCase, ref StackCrawlMark stackMark)
-        {
+        private static Type? ResolveType(
+            Assembly? assembly,
+            string[] names,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        ) {
             Debug.Assert(names != null && names.Length > 0);
 
             Type? type;
@@ -236,9 +293,14 @@ namespace System
 
                 if (type == null && throwOnError)
                 {
-                    string errorString = assembly == null ?
-                        SR.Format(SR.TypeLoad_ResolveType, OuterMostTypeName) :
-                        SR.Format(SR.TypeLoad_ResolveTypeFromAssembly, OuterMostTypeName, assembly.FullName);
+                    string errorString =
+                        assembly == null
+                            ? SR.Format(SR.TypeLoad_ResolveType, OuterMostTypeName)
+                            : SR.Format(
+                                  SR.TypeLoad_ResolveTypeFromAssembly,
+                                  OuterMostTypeName,
+                                  assembly.FullName
+                              );
 
                     throw new TypeLoadException(errorString);
                 }
@@ -247,7 +309,12 @@ namespace System
             {
                 if (assembly == null)
                 {
-                    type = RuntimeType.GetType(OuterMostTypeName, throwOnError, ignoreCase, ref stackMark);
+                    type = RuntimeType.GetType(
+                        OuterMostTypeName,
+                        throwOnError,
+                        ignoreCase,
+                        ref stackMark
+                    );
                 }
                 else
                 {
@@ -269,7 +336,9 @@ namespace System
                     if (type == null)
                     {
                         if (throwOnError)
-                            throw new TypeLoadException(SR.Format(SR.TypeLoad_ResolveNestedType, names[i], names[i - 1]));
+                            throw new TypeLoadException(
+                                SR.Format(SR.TypeLoad_ResolveNestedType, names[i], names[i - 1])
+                            );
                         else
                             break;
                     }
@@ -296,10 +365,16 @@ namespace System
             return sb.ToString();
         }
 
-        private static SafeTypeNameParserHandle? CreateTypeNameParser(string typeName, bool throwOnError)
-        {
+        private static SafeTypeNameParserHandle? CreateTypeNameParser(
+            string typeName,
+            bool throwOnError
+        ) {
             SafeTypeNameParserHandle? retHandle = null;
-            _CreateTypeNameParser(typeName, ObjectHandleOnStack.Create(ref retHandle), throwOnError);
+            _CreateTypeNameParser(
+                typeName,
+                ObjectHandleOnStack.Create(ref retHandle),
+                throwOnError
+            );
 
             return retHandle;
         }

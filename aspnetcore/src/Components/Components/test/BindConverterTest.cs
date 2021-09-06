@@ -230,11 +230,7 @@ namespace Microsoft.AspNetCore.Components
         public void FormatValue_TypeConverter()
         {
             // Arrange
-            var value = new Person()
-            {
-                Name = "Glenn",
-                Age = 47,
-            };
+            var value = new Person() { Name = "Glenn", Age = 47, };
 
             var expected = JsonSerializer.Serialize(value);
 
@@ -273,8 +269,11 @@ namespace Microsoft.AspNetCore.Components
                 return base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-            {
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            ) {
                 if (value is string text)
                 {
                     return JsonSerializer.Deserialize<Person>(text);
@@ -293,8 +292,12 @@ namespace Microsoft.AspNetCore.Components
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-            {
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            ) {
                 if (destinationType == typeof(string))
                 {
                     return JsonSerializer.Serialize((Person)value);

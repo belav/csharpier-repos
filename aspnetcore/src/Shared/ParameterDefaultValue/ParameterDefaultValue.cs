@@ -45,11 +45,11 @@ namespace Microsoft.Extensions.Internal
                 }
 
                 // Handle nullable enums
-                if (defaultValue != null &&
-                    parameter.ParameterType.IsGenericType &&
-                    parameter.ParameterType.GetGenericTypeDefinition() == _nullable
-                    )
-                {
+                if (
+                    defaultValue != null
+                    && parameter.ParameterType.IsGenericType
+                    && parameter.ParameterType.GetGenericTypeDefinition() == _nullable
+                ) {
                     var underlyingType = Nullable.GetUnderlyingType(parameter.ParameterType);
                     if (underlyingType != null && underlyingType.IsEnum)
                     {

@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             string? partitionKey,
             IReadOnlyList<(string Name, object? Value)> parameters,
             string querySql,
-            bool logSensitiveData)
-            : base(eventDefinition, messageGenerator)
+            bool logSensitiveData
+        ) : base(eventDefinition, messageGenerator)
         {
             ContainerId = containerId;
             PartitionKey = partitionKey;

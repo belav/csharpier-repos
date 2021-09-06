@@ -16,15 +16,14 @@ namespace System.Net.NetworkInformation
         /// Gets the Internet Protocol (IP) address.
         public override IPAddress Address
         {
-            get
-            {
-                return _address;
-            }
+            get { return _address; }
         }
 
-        internal static GatewayIPAddressInformationCollection ToGatewayIpAddressInformationCollection(IPAddressCollection addresses)
-        {
-            GatewayIPAddressInformationCollection gatewayList = new GatewayIPAddressInformationCollection();
+        internal static GatewayIPAddressInformationCollection ToGatewayIpAddressInformationCollection(
+            IPAddressCollection addresses
+        ) {
+            GatewayIPAddressInformationCollection gatewayList =
+                new GatewayIPAddressInformationCollection();
             foreach (IPAddress address in addresses)
             {
                 gatewayList.InternalAdd(new SystemGatewayIPAddressInformation(address));

@@ -8,14 +8,17 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices
 {
-    internal class ConfigurationBasedLevelSwitcher: IConfigureOptions<LoggerFilterOptions>
+    internal class ConfigurationBasedLevelSwitcher : IConfigureOptions<LoggerFilterOptions>
     {
         private readonly IConfiguration _configuration;
         private readonly Type _provider;
         private readonly string _levelKey;
 
-        public ConfigurationBasedLevelSwitcher(IConfiguration configuration, Type provider, string levelKey)
-        {
+        public ConfigurationBasedLevelSwitcher(
+            IConfiguration configuration,
+            Type provider,
+            string levelKey
+        ) {
             _configuration = configuration;
             _provider = provider;
             _levelKey = levelKey;

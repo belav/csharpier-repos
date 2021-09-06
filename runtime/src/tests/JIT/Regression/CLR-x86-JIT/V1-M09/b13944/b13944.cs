@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace DefaultNamespace
 {
     internal class X
@@ -15,23 +14,16 @@ namespace DefaultNamespace
             {
                 throw new Exception();
             }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-            }
-
+            catch (Exception) { }
+            finally { }
 
             return -1;
         }
-
 
         public static int Main(String[] argv)
         {
             int i = 0;
             X x = new X();
-
 
             i = x.Blah(1);
             return 100;

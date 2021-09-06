@@ -11,8 +11,16 @@ namespace Internal.Runtime.InteropServices
 {
     public static class ComponentActivator
     {
-        private static readonly Dictionary<string, IsolatedComponentLoadContext> s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(StringComparer.InvariantCulture);
-        private static readonly Dictionary<IntPtr, Delegate> s_delegates = new Dictionary<IntPtr, Delegate>();
+        private static readonly Dictionary<
+            string,
+            IsolatedComponentLoadContext
+        > s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(
+            StringComparer.InvariantCulture
+        );
+        private static readonly Dictionary<IntPtr, Delegate> s_delegates = new Dictionary<
+            IntPtr,
+            Delegate
+        >();
 
         public delegate int ComponentEntryPoint(IntPtr args, int sizeBytes);
 
@@ -36,17 +44,21 @@ namespace Internal.Runtime.InteropServices
         /// <param name="reserved">Extensibility parameter (currently unused)</param>
         /// <param name="functionHandle">Pointer where to store the function pointer result</param>
         [UnmanagedCallersOnly]
-        public static unsafe int LoadAssemblyAndGetFunctionPointer(IntPtr assemblyPathNative,
-                                                                   IntPtr typeNameNative,
-                                                                   IntPtr methodNameNative,
-                                                                   IntPtr delegateTypeNative,
-                                                                   IntPtr reserved,
-                                                                   IntPtr functionHandle)
-        {
+        public static unsafe int LoadAssemblyAndGetFunctionPointer(
+            IntPtr assemblyPathNative,
+            IntPtr typeNameNative,
+            IntPtr methodNameNative,
+            IntPtr delegateTypeNative,
+            IntPtr reserved,
+            IntPtr functionHandle
+        ) {
             try
             {
                 // Validate all parameters first.
-                string assemblyPath = MarshalToString(assemblyPathNative, nameof(assemblyPathNative));
+                string assemblyPath = MarshalToString(
+                    assemblyPathNative,
+                    nameof(assemblyPathNative)
+                );
                 string typeName = MarshalToString(typeNameNative, nameof(typeNameNative));
                 string methodName = MarshalToString(methodNameNative, nameof(methodNameNative));
 
@@ -64,7 +76,12 @@ namespace Internal.Runtime.InteropServices
                 AssemblyLoadContext alc = GetIsolatedComponentLoadContext(assemblyPath);
 
                 // Create the function pointer.
-                *(IntPtr*)functionHandle = InternalGetFunctionPointer(alc, typeName, methodName, delegateTypeNative);
+                *(IntPtr*)functionHandle = InternalGetFunctionPointer(
+                    alc,
+                    typeName,
+                    methodName,
+                    delegateTypeNative
+                );
             }
             catch (Exception e)
             {
@@ -84,13 +101,14 @@ namespace Internal.Runtime.InteropServices
         /// <param name="reserved">Extensibility parameter (currently unused)</param>
         /// <param name="functionHandle">Pointer where to store the function pointer result</param>
         [UnmanagedCallersOnly]
-        public static unsafe int GetFunctionPointer(IntPtr typeNameNative,
-                                                    IntPtr methodNameNative,
-                                                    IntPtr delegateTypeNative,
-                                                    IntPtr loadContext,
-                                                    IntPtr reserved,
-                                                    IntPtr functionHandle)
-        {
+        public static unsafe int GetFunctionPointer(
+            IntPtr typeNameNative,
+            IntPtr methodNameNative,
+            IntPtr delegateTypeNative,
+            IntPtr loadContext,
+            IntPtr reserved,
+            IntPtr functionHandle
+        ) {
             try
             {
                 // Validate all parameters first.
@@ -113,7 +131,12 @@ namespace Internal.Runtime.InteropServices
                 }
 
                 // Create the function pointer.
-                *(IntPtr*)functionHandle = InternalGetFunctionPointer(AssemblyLoadContext.Default, typeName, methodName, delegateTypeNative);
+                *(IntPtr*)functionHandle = InternalGetFunctionPointer(
+                    AssemblyLoadContext.Default,
+                    typeName,
+                    methodName,
+                    delegateTypeNative
+                );
             }
             catch (Exception e)
             {
@@ -123,8 +146,9 @@ namespace Internal.Runtime.InteropServices
             return 0;
         }
 
-        private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(string assemblyPath)
-        {
+        private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(
+            string assemblyPath
+        ) {
             IsolatedComponentLoadContext? alc;
 
             lock (s_assemblyLoadContexts)
@@ -139,11 +163,12 @@ namespace Internal.Runtime.InteropServices
             return alc;
         }
 
-        private static IntPtr InternalGetFunctionPointer(AssemblyLoadContext alc,
-                                                         string typeName,
-                                                         string methodName,
-                                                         IntPtr delegateTypeNative)
-        {
+        private static IntPtr InternalGetFunctionPointer(
+            AssemblyLoadContext alc,
+            string typeName,
+            string methodName,
+            IntPtr delegateTypeNative
+        ) {
             // Create a resolver callback for types.
             Func<AssemblyName, Assembly> resolver = name => alc.LoadFromAssemblyName(name);
 
@@ -163,7 +188,10 @@ namespace Internal.Runtime.InteropServices
             }
             else
             {
-                string delegateTypeName = MarshalToString(delegateTypeNative, nameof(delegateTypeNative));
+                string delegateTypeName = MarshalToString(
+                    delegateTypeNative,
+                    nameof(delegateTypeNative)
+                );
                 delegateType = Type.GetType(delegateTypeName, resolver, null, throwOnError: true)!;
             }
 
@@ -174,14 +202,17 @@ namespace Internal.Runtime.InteropServices
             if (delegateType == null)
             {
                 // Match search semantics of the CreateDelegate() function below.
-                BindingFlags bindingFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+                BindingFlags bindingFlags =
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
                 MethodInfo? methodInfo = type.GetMethod(methodName, bindingFlags);
                 if (methodInfo == null)
                     throw new MissingMethodException(typeName, methodName);
 
                 // Verify the function is properly marked.
                 if (null == methodInfo.GetCustomAttribute<UnmanagedCallersOnlyAttribute>())
-                    throw new InvalidOperationException(SR.InvalidOperation_FunctionMissingUnmanagedCallersOnly);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_FunctionMissingUnmanagedCallersOnly
+                    );
 
                 functionPtr = methodInfo.MethodHandle.GetFunctionPointer();
             }

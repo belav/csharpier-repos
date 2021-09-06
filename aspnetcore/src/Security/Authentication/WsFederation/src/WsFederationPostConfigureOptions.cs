@@ -44,16 +44,22 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             if (options.StateDataFormat == null)
             {
                 var dataProtector = options.DataProtectionProvider.CreateProtector(
-                    typeof(WsFederationHandler).FullName!, name, "v1");
+                    typeof(WsFederationHandler).FullName!,
+                    name,
+                    "v1"
+                );
                 options.StateDataFormat = new PropertiesDataFormat(dataProtector);
             }
-            
-            if (!options.CallbackPath.HasValue && !string.IsNullOrEmpty(options.Wreply) && Uri.TryCreate(options.Wreply, UriKind.Absolute, out var wreply))
-            {
+
+            if (
+                !options.CallbackPath.HasValue
+                && !string.IsNullOrEmpty(options.Wreply)
+                && Uri.TryCreate(options.Wreply, UriKind.Absolute, out var wreply)
+            ) {
                 // Wreply must be a very specific, case sensitive value, so we can't generate it. Instead we generate CallbackPath from it.
                 options.CallbackPath = PathString.FromUriComponent(wreply);
             }
-            
+
             if (string.IsNullOrEmpty(options.TokenValidationParameters.ValidAudience))
             {
                 options.TokenValidationParameters.ValidAudience = options.Wtrealm;
@@ -61,8 +67,12 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
             if (options.Backchannel == null)
             {
-                options.Backchannel = new HttpClient(options.BackchannelHttpHandler ?? new HttpClientHandler());
-                options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd("Microsoft ASP.NET Core WsFederation handler");
+                options.Backchannel = new HttpClient(
+                    options.BackchannelHttpHandler ?? new HttpClientHandler()
+                );
+                options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
+                    "Microsoft ASP.NET Core WsFederation handler"
+                );
                 options.Backchannel.Timeout = options.BackchannelTimeout;
                 options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
             }
@@ -71,17 +81,34 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             {
                 if (options.Configuration != null)
                 {
-                    options.ConfigurationManager = new StaticConfigurationManager<WsFederationConfiguration>(options.Configuration);
+                    options.ConfigurationManager =
+                        new StaticConfigurationManager<WsFederationConfiguration>(
+                            options.Configuration
+                        );
                 }
                 else if (!string.IsNullOrEmpty(options.MetadataAddress))
                 {
-                    if (options.RequireHttpsMetadata && !options.MetadataAddress.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-                    {
-                        throw new InvalidOperationException("The MetadataAddress must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false.");
+                    if (
+                        options.RequireHttpsMetadata
+                        && !options.MetadataAddress.StartsWith(
+                            "https://",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
+                        throw new InvalidOperationException(
+                            "The MetadataAddress must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false."
+                        );
                     }
 
-                    options.ConfigurationManager = new ConfigurationManager<WsFederationConfiguration>(options.MetadataAddress, new WsFederationConfigurationRetriever(),
-                        new HttpDocumentRetriever(options.Backchannel) { RequireHttps = options.RequireHttpsMetadata });
+                    options.ConfigurationManager =
+                        new ConfigurationManager<WsFederationConfiguration>(
+                            options.MetadataAddress,
+                            new WsFederationConfigurationRetriever(),
+                            new HttpDocumentRetriever(options.Backchannel)
+                            {
+                                RequireHttps = options.RequireHttpsMetadata
+                            }
+                        );
                 }
             }
         }

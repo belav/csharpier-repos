@@ -22,14 +22,21 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <remarks>
         /// This should only be enabled in the Development environment. 
         /// </remarks>
-        public static IServiceCollection AddDatabaseDeveloperPageExceptionFilter(this IServiceCollection services)
-        {
+        public static IServiceCollection AddDatabaseDeveloperPageExceptionFilter(
+            this IServiceCollection services
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.TryAddEnumerable(new ServiceDescriptor(typeof(IDeveloperPageExceptionFilter), typeof(DatabaseDeveloperPageExceptionFilter), ServiceLifetime.Singleton));
+            services.TryAddEnumerable(
+                new ServiceDescriptor(
+                    typeof(IDeveloperPageExceptionFilter),
+                    typeof(DatabaseDeveloperPageExceptionFilter),
+                    ServiceLifetime.Singleton
+                )
+            );
 
             return services;
         }

@@ -6,7 +6,11 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for TripleDES, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for TripleDES, not consuming it."
+    )]
     internal sealed partial class TripleDesImplementation : TripleDES
     {
         private const int BitsPerByte = 8;
@@ -81,7 +85,16 @@ namespace Internal.Cryptography
                 ValidateCFBFeedbackSize(FeedbackSize);
             }
 
-            return CreateTransformCore(Mode, Padding, rgbKey, rgbIV, BlockSize / BitsPerByte, this.GetPaddingSize(), FeedbackSize / BitsPerByte, encrypting);
+            return CreateTransformCore(
+                Mode,
+                Padding,
+                rgbKey,
+                rgbIV,
+                BlockSize / BitsPerByte,
+                this.GetPaddingSize(),
+                FeedbackSize / BitsPerByte,
+                encrypting
+            );
         }
 
         private static void ValidateCFBFeedbackSize(int feedback)
@@ -89,7 +102,13 @@ namespace Internal.Cryptography
             // only 8bits/64bits feedback would be valid.
             if (feedback != 8 && feedback != 64)
             {
-                throw new CryptographicException(string.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB));
+                throw new CryptographicException(
+                    string.Format(
+                        SR.Cryptography_CipherModeFeedbackNotSupported,
+                        feedback,
+                        CipherMode.CFB
+                    )
+                );
             }
         }
     }

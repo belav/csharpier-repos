@@ -12,9 +12,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             object value,
-            out string errorMessage)
-        {
-            var obj = (JObject) target;
+            out string errorMessage
+        ) {
+            var obj = (JObject)target;
 
             obj[segment] = value != null ? JToken.FromObject(value) : JValue.CreateNull();
 
@@ -27,9 +27,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out object value,
-            out string errorMessage)
-        {
-            var obj = (JObject) target;
+            out string errorMessage
+        ) {
+            var obj = (JObject)target;
 
             if (!obj.TryGetValue(segment, out var valueAsToken))
             {
@@ -47,9 +47,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object target,
             string segment,
             IContractResolver contractResolver,
-            out string errorMessage)
-        {
-            var obj = (JObject) target;
+            out string errorMessage
+        ) {
+            var obj = (JObject)target;
 
             if (!obj.Remove(segment))
             {
@@ -66,9 +66,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             object value,
-            out string errorMessage)
-        {
-            var obj = (JObject) target;
+            out string errorMessage
+        ) {
+            var obj = (JObject)target;
 
             if (!obj.ContainsKey(segment))
             {
@@ -87,25 +87,33 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             object value,
-            out string errorMessage)
-        {
-            var obj = (JObject) target;
+            out string errorMessage
+        ) {
+            var obj = (JObject)target;
 
             if (!obj.TryGetValue(segment, out var currentValue))
             {
                 errorMessage = Resources.FormatTargetLocationAtPathSegmentNotFound(segment);
                 return false;
             }
-            
+
             if (currentValue == null || string.IsNullOrEmpty(currentValue.ToString()))
             {
                 errorMessage = Resources.FormatValueForTargetSegmentCannotBeNullOrEmpty(segment);
                 return false;
             }
 
-            if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(value)))
-            {
-                errorMessage = Resources.FormatValueNotEqualToTestValue(currentValue, value, segment);
+            if (
+                !JToken.DeepEquals(
+                    JsonConvert.SerializeObject(currentValue),
+                    JsonConvert.SerializeObject(value)
+                )
+            ) {
+                errorMessage = Resources.FormatValueNotEqualToTestValue(
+                    currentValue,
+                    value,
+                    segment
+                );
                 return false;
             }
 
@@ -118,9 +126,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out object nextTarget,
-            out string errorMessage)
-        {
-            var obj = (JObject) target;
+            out string errorMessage
+        ) {
+            var obj = (JObject)target;
 
             if (!obj.TryGetValue(segment, out var nextTargetToken))
             {

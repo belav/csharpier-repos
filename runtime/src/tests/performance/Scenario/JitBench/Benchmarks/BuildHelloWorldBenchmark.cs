@@ -10,16 +10,29 @@ namespace JitBench
     {
         public BuildHelloWorldBenchmark() : base("Dotnet_Build_HelloWorld") { }
 
-        public override async Task Setup(DotNetInstallation dotNetInstall, string intermediateOutputDir, bool useExistingSetup, ITestOutputHelper output)
-        {
+        public override async Task Setup(
+            DotNetInstallation dotNetInstall,
+            string intermediateOutputDir,
+            bool useExistingSetup,
+            ITestOutputHelper output
+        ) {
             using (var setupSection = new IndentedTestOutputHelper("Setup " + Name, output))
             {
-                await SetupHelloWorldProject(dotNetInstall, intermediateOutputDir, useExistingSetup, setupSection);
+                await SetupHelloWorldProject(
+                    dotNetInstall,
+                    intermediateOutputDir,
+                    useExistingSetup,
+                    setupSection
+                );
             }
         }
 
-        protected async Task SetupHelloWorldProject(DotNetInstallation dotNetInstall, string intermediateOutputDir, bool useExistingSetup, ITestOutputHelper output)
-        {
+        protected async Task SetupHelloWorldProject(
+            DotNetInstallation dotNetInstall,
+            string intermediateOutputDir,
+            bool useExistingSetup,
+            ITestOutputHelper output
+        ) {
             string helloWorldProjectDir = Path.Combine(intermediateOutputDir, "helloworld");
             //the 'exePath' gets passed as an argument to dotnet.exe
             //in this case it isn't an executable at all, its a CLI command
@@ -33,16 +46,20 @@ namespace JitBench
             // issue another way.
             EnvironmentVariables["UseSharedCompilation"] = "false";
 
-            if(!useExistingSetup)
+            if (!useExistingSetup)
             {
                 FileTasks.DeleteDirectory(helloWorldProjectDir, output);
                 FileTasks.CreateDirectory(helloWorldProjectDir, output);
-                await new ProcessRunner(dotNetInstall.DotNetExe, "new console")
-                    .WithWorkingDirectory(helloWorldProjectDir)
-                    .WithLog(output)
-                    .Run();
+                await new ProcessRunner(
+                    dotNetInstall.DotNetExe,
+                    "new console"
+                ).WithWorkingDirectory(helloWorldProjectDir).WithLog(output).Run();
 
-                RetargetProjects(dotNetInstall, helloWorldProjectDir, new string[] { "helloworld.csproj" });
+                RetargetProjects(
+                    dotNetInstall,
+                    helloWorldProjectDir,
+                    new string[] { "helloworld.csproj" }
+                );
             }
         }
     }

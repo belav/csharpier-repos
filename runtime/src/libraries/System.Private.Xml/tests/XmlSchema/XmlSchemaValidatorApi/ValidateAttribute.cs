@@ -82,8 +82,9 @@ namespace System.Xml.Tests
         [InlineData("DefaultAttribute")]
         [InlineData("FixedAttribute")]
         [InlineData("FixedRequiredAttribute")]
-        public void Validate_Required_Optional_Default_Fixed_FixedRequired_Attribute(string attrType)
-        {
+        public void Validate_Required_Optional_Default_Fixed_FixedRequired_Attribute(
+            string attrType
+        ) {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_ATTRIBUTE);
             XmlSchemaInfo info = new XmlSchemaInfo();
 
@@ -108,7 +109,10 @@ namespace System.Xml.Tests
             val.ValidateElement("NamespaceAttributeElement", "", null);
             val.ValidateAttribute("attr1", "uri:tempuri", StringGetter("123"), info);
 
-            Assert.Equal(info.SchemaAttribute.QualifiedName, new XmlQualifiedName("attr1", "uri:tempuri"));
+            Assert.Equal(
+                info.SchemaAttribute.QualifiedName,
+                new XmlQualifiedName("attr1", "uri:tempuri")
+            );
             Assert.Equal(XmlSchemaValidity.Valid, info.Validity);
             Assert.Equal(XmlTypeCode.Int, info.SchemaType.TypeCode);
 
@@ -143,7 +147,12 @@ namespace System.Xml.Tests
 
             foreach (XmlSchemaAttribute a in atts)
             {
-                val.ValidateAttribute(a.QualifiedName.Name, a.QualifiedName.Namespace, StringGetter(a.DefaultValue), info);
+                val.ValidateAttribute(
+                    a.QualifiedName.Name,
+                    a.QualifiedName.Namespace,
+                    StringGetter(a.DefaultValue),
+                    info
+                );
                 Assert.Equal(info.SchemaAttribute, a);
             }
 
@@ -168,7 +177,10 @@ namespace System.Xml.Tests
             val.Initialize();
             val.ValidateAttribute("BasicAttribute", "", StringGetter("foo"), info);
 
-            Assert.Equal(info.SchemaAttribute, schemas.GlobalAttributes[new XmlQualifiedName("BasicAttribute")]);
+            Assert.Equal(
+                info.SchemaAttribute,
+                schemas.GlobalAttributes[new XmlQualifiedName("BasicAttribute")]
+            );
 
             return;
         }
@@ -189,7 +201,11 @@ namespace System.Xml.Tests
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, "Sch_DuplicateAttribute", new string[] { "RequiredAttribute" });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    "Sch_DuplicateAttribute",
+                    new string[] { "RequiredAttribute" }
+                );
                 return;
             }
 
@@ -201,9 +217,7 @@ namespace System.Xml.Tests
 
     public class TCGetUnspecifiedDefaultAttributes : CXmlSchemaValidatorTestCase
     {
-        public TCGetUnspecifiedDefaultAttributes(ITestOutputHelper output) : base(output)
-        {
-        }
+        public TCGetUnspecifiedDefaultAttributes(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void PassNull__Invalid()
@@ -306,7 +320,7 @@ namespace System.Xml.Tests
 
             atts.Clear();
             val.GetUnspecifiedDefaultAttributes(atts);
-            CheckDefaultAttributes(atts, new string[] { });
+            CheckDefaultAttributes(atts, new string[] {  });
 
             return;
         }
@@ -336,7 +350,7 @@ namespace System.Xml.Tests
             val.ValidateElement("FixedRequiredAttributeElement", "", null);
 
             val.GetUnspecifiedDefaultAttributes(atts);
-            CheckDefaultAttributes(atts, new string[] { });
+            CheckDefaultAttributes(atts, new string[] {  });
 
             return;
         }
@@ -415,8 +429,9 @@ namespace System.Xml.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void CallWithoutValidationOfDefaultAttributesGetUnspecifiedDefault_Called_NotCalled(bool call)
-        {
+        public void CallWithoutValidationOfDefaultAttributesGetUnspecifiedDefault_Called_NotCalled(
+            bool call
+        ) {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_ATTRIBUTE);
             ArrayList atts = new ArrayList();
 
@@ -445,7 +460,11 @@ namespace System.Xml.Tests
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, "Sch_MissRequiredAttribute", new string[] { "RequiredAttribute" });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    "Sch_MissRequiredAttribute",
+                    new string[] { "RequiredAttribute" }
+                );
                 return;
             }
 

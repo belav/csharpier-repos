@@ -64,7 +64,11 @@ namespace RepoTasks
             }
 
             List<string> errorMessages = new List<string>();
-            bool? downloadStatus = await DownloadWithRetriesAsync(Uri, DestinationPath, errorMessages);
+            bool? downloadStatus = await DownloadWithRetriesAsync(
+                Uri,
+                DestinationPath,
+                errorMessages
+            );
 
             if (downloadStatus == false && !string.IsNullOrEmpty(PrivateUri))
             {
@@ -74,7 +78,11 @@ namespace RepoTasks
                     var uriSuffixBytes = System.Convert.FromBase64String(PrivateUriSuffix);
                     uriSuffix = System.Text.Encoding.UTF8.GetString(uriSuffixBytes);
                 }
-                downloadStatus = await DownloadWithRetriesAsync($"{PrivateUri}{uriSuffix}", DestinationPath, errorMessages);
+                downloadStatus = await DownloadWithRetriesAsync(
+                    $"{PrivateUri}{uriSuffix}",
+                    DestinationPath,
+                    errorMessages
+                );
             }
 
             if (downloadStatus != true)
@@ -94,8 +102,11 @@ namespace RepoTasks
         /// <param name="source">URL to the file to be downloaded.</param>
         /// <param name="target">Local path where to put the downloaded file.</param>
         /// <returns>true: Download Succeeded. false: Download failed with 404. null: Download failed but is retriable.</returns>
-        private async Task<bool?> DownloadWithRetriesAsync(string source, string target, List<string> errorMessages)
-        {
+        private async Task<bool?> DownloadWithRetriesAsync(
+            string source,
+            string target,
+            List<string> errorMessages
+        ) {
             Random rng = new Random();
 
             Log.LogMessage(MessageImportance.High, $"Attempting download '{source}' to '{target}'");
@@ -108,15 +119,24 @@ namespace RepoTasks
                     {
                         var httpResponse = await httpClient.GetAsync(source);
 
-                        Log.LogMessage(MessageImportance.High, $"{source} -> {httpResponse.StatusCode}");
+                        Log.LogMessage(
+                            MessageImportance.High,
+                            $"{source} -> {httpResponse.StatusCode}"
+                        );
 
                         // The Azure Storage REST API returns '400 - Bad Request' in some cases
                         // where the resource is not found on the storage.
                         // https://docs.microsoft.com/en-us/rest/api/storageservices/common-rest-api-error-codes
-                        if (httpResponse.StatusCode == HttpStatusCode.NotFound ||
-                            httpResponse.ReasonPhrase.IndexOf("The requested URI does not represent any resource on the server.", StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            errorMessages.Add($"Problems downloading file from '{source}'. Does the resource exist on the storage? {httpResponse.StatusCode} : {httpResponse.ReasonPhrase}");
+                        if (
+                            httpResponse.StatusCode == HttpStatusCode.NotFound
+                            || httpResponse.ReasonPhrase.IndexOf(
+                                "The requested URI does not represent any resource on the server.",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        ) {
+                            errorMessages.Add(
+                                $"Problems downloading file from '{source}'. Does the resource exist on the storage? {httpResponse.StatusCode} : {httpResponse.ReasonPhrase}"
+                            );
                             return false;
                         }
 
@@ -127,13 +147,18 @@ namespace RepoTasks
                             await httpResponse.Content.CopyToAsync(outStream);
                         }
 
-                        Log.LogMessage(MessageImportance.High, $"returning true {source} -> {httpResponse.StatusCode}");
+                        Log.LogMessage(
+                            MessageImportance.High,
+                            $"returning true {source} -> {httpResponse.StatusCode}"
+                        );
                         return true;
                     }
                     catch (Exception e)
                     {
                         Log.LogMessage(MessageImportance.High, $"returning error in {source} ");
-                        errorMessages.Add($"Problems downloading file from '{source}'. {e.Message} {e.StackTrace}");
+                        errorMessages.Add(
+                            $"Problems downloading file from '{source}'. {e.Message} {e.StackTrace}"
+                        );
                         File.Delete(target);
                     }
 
@@ -142,7 +167,9 @@ namespace RepoTasks
             }
 
             Log.LogMessage(MessageImportance.High, $"giving up {source} ");
-            errorMessages.Add($"Giving up downloading the file from '{source}' after {MaxRetries} retries.");
+            errorMessages.Add(
+                $"Giving up downloading the file from '{source}' after {MaxRetries} retries."
+            );
             return null;
         }
     }

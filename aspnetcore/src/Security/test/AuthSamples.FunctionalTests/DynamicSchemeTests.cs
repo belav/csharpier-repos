@@ -83,13 +83,14 @@ namespace AuthSamples.FunctionalTests
             var signIn = await TestAssert.IsHtmlDocumentAsync(goToSignIn);
 
             var form = TestAssert.HasForm(signIn);
-            return await Client.SendAsync(form, new Dictionary<string, string>()
-            {
-                ["scheme"] = name,
-                ["OptionsMessage"] = message,
-            });
-
+            return await Client.SendAsync(
+                form,
+                new Dictionary<string, string>()
+                {
+                    ["scheme"] = name,
+                    ["OptionsMessage"] = message,
+                }
+            );
         }
-
     }
 }

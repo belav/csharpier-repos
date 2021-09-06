@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <param name="transform">A function which transforms each element. The function returns the transformed list
         /// element, or <see langword="null"/> to remove the current item from the list.</param>
         /// <param name="arg">The state argument to pass to the transformation callback.</param>
-        public static void RemoveOrTransformAll<T, TArg>(this List<T> list, Func<T, TArg, T?> transform, TArg arg)
-            where T : class
+        public static void RemoveOrTransformAll<T, TArg>(
+            this List<T> list,
+            Func<T, TArg, T?> transform,
+            TArg arg
+        ) where T : class
         {
             RoslynDebug.AssertNotNull(list);
             RoslynDebug.AssertNotNull(transform);

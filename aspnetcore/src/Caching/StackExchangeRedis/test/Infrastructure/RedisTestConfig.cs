@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
     {
         internal const string RedisServerExeName = "redis-server.exe";
         internal const string FunctionalTestsRedisServerExeName = "RedisFuncTests-redis-server";
-        internal const string UserProfileRedisNugetPackageServerPath = @".dotnet\packages\Redis-64\2.8.9";
+        internal const string UserProfileRedisNugetPackageServerPath =
+            @".dotnet\packages\Redis-64\2.8.9";
         internal const string CIMachineRedisNugetPackageServerPath = @"Redis-64\2.8.9";
 
         private static volatile Process _redisServerProcess; // null implies if server exists it was not started by this code
@@ -23,11 +24,13 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
 
         public static IDistributedCache CreateCacheInstance(string instanceName)
         {
-            return new RedisCache(new RedisCacheOptions()
-            {
-                Configuration = "localhost:" + RedisPort,
-                InstanceName = instanceName,
-            });
+            return new RedisCache(
+                new RedisCacheOptions()
+                {
+                    Configuration = "localhost:" + RedisPort,
+                    InstanceName = instanceName,
+                }
+            );
         }
 
         public static void GetOrStartServer()
@@ -49,8 +52,7 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         private static bool AlreadyOwnRunningRedisServer()
         {
             // Does RedisTestConfig already know about a running server?
-            if (_redisServerProcess != null
-                && !_redisServerProcess.HasExited)
+            if (_redisServerProcess != null && !_redisServerProcess.HasExited)
             {
                 return true;
             }
@@ -91,7 +93,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
 
         private static bool CanFindExistingRedisServer()
         {
-            var process = Process.GetProcessesByName(FunctionalTestsRedisServerExeName).SingleOrDefault();
+            var process = Process.GetProcessesByName(FunctionalTestsRedisServerExeName)
+                .SingleOrDefault();
             if (process == null || process.HasExited)
             {
                 lock (_redisServerProcessLock)
@@ -116,8 +119,14 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                 serverPath = GetCIMachineServerPath();
                 if (!File.Exists(serverPath))
                 {
-                    throw new Exception("Could not find " + RedisServerExeName +
-                                        " at path " + GetUserProfileServerPath() + " nor at " + GetCIMachineServerPath());
+                    throw new Exception(
+                        "Could not find "
+                            + RedisServerExeName
+                            + " at path "
+                            + GetUserProfileServerPath()
+                            + " nor at "
+                            + GetCIMachineServerPath()
+                    );
                 }
             }
 
@@ -134,13 +143,21 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         public static string GetUserProfileServerPath()
         {
             var configFilePath = Environment.GetEnvironmentVariable("USERPROFILE");
-            return Path.Combine(configFilePath, UserProfileRedisNugetPackageServerPath, RedisServerExeName);
+            return Path.Combine(
+                configFilePath,
+                UserProfileRedisNugetPackageServerPath,
+                RedisServerExeName
+            );
         }
 
         public static string GetCIMachineServerPath()
         {
             var configFilePath = Environment.GetEnvironmentVariable("DOTNET_PACKAGES");
-            return Path.Combine(configFilePath, CIMachineRedisNugetPackageServerPath, RedisServerExeName);
+            return Path.Combine(
+                configFilePath,
+                CIMachineRedisNugetPackageServerPath,
+                RedisServerExeName
+            );
         }
 
         private static bool RunServer(string serverExePath)
@@ -153,8 +170,10 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     // name - so we know the difference between a redis-server started by us and a redis-server
                     // which the customer already has running.
                     var tempPath = Path.GetTempPath();
-                    var tempRedisServerFullPath =
-                        Path.Combine(tempPath, FunctionalTestsRedisServerExeName + ".exe");
+                    var tempRedisServerFullPath = Path.Combine(
+                        tempPath,
+                        FunctionalTestsRedisServerExeName + ".exe"
+                    );
                     if (!File.Exists(tempRedisServerFullPath))
                     {
                         File.Copy(serverExePath, tempRedisServerFullPath);
@@ -164,16 +183,16 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     {
                         var serverArgs = "--port " + RedisPort + " --maxheap 512MB";
                         var processInfo = new ProcessStartInfo
-                            {
-                                // start the process in users TMP dir (a .dat file will be created but will be removed when the server dies)
-                                Arguments = serverArgs,
-                                WorkingDirectory = tempPath,
-                                CreateNoWindow = true,
-                                FileName = tempRedisServerFullPath,
-                                RedirectStandardError = true,
-                                RedirectStandardOutput = true,
-                                UseShellExecute = false,
-                            };
+                        {
+                            // start the process in users TMP dir (a .dat file will be created but will be removed when the server dies)
+                            Arguments = serverArgs,
+                            WorkingDirectory = tempPath,
+                            CreateNoWindow = true,
+                            FileName = tempRedisServerFullPath,
+                            RedirectStandardError = true,
+                            RedirectStandardOutput = true,
+                            UseShellExecute = false,
+                        };
                         try
                         {
                             _redisServerProcess = Process.Start(processInfo);
@@ -181,22 +200,43 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
 
                             if (_redisServerProcess.HasExited)
                             {
-                                throw new Exception("Could not start Redis Server at path "
-                                                    + tempRedisServerFullPath + " with Arguments '" + serverArgs + "', working dir = " + tempPath + Environment.NewLine
-                                                    + _redisServerProcess.StandardError.ReadToEnd() + Environment.NewLine
-                                                    + _redisServerProcess.StandardOutput.ReadToEnd());
+                                throw new Exception(
+                                    "Could not start Redis Server at path "
+                                        + tempRedisServerFullPath
+                                        + " with Arguments '"
+                                        + serverArgs
+                                        + "', working dir = "
+                                        + tempPath
+                                        + Environment.NewLine
+                                        + _redisServerProcess.StandardError.ReadToEnd()
+                                        + Environment.NewLine
+                                        + _redisServerProcess.StandardOutput.ReadToEnd()
+                                );
                             }
                         }
                         catch (Exception e)
                         {
-                            throw new Exception("Could not start Redis Server at path "
-                                                + tempRedisServerFullPath + " with Arguments '" + serverArgs + "', working dir = " + tempPath, e);
+                            throw new Exception(
+                                "Could not start Redis Server at path "
+                                    + tempRedisServerFullPath
+                                    + " with Arguments '"
+                                    + serverArgs
+                                    + "', working dir = "
+                                    + tempPath,
+                                e
+                            );
                         }
 
                         if (_redisServerProcess == null)
                         {
-                            throw new Exception("Got null process trying to  start Redis Server at path "
-                                                + tempRedisServerFullPath + " with Arguments '" + serverArgs + "', working dir = " + tempPath);
+                            throw new Exception(
+                                "Got null process trying to  start Redis Server at path "
+                                    + tempRedisServerFullPath
+                                    + " with Arguments '"
+                                    + serverArgs
+                                    + "', working dir = "
+                                    + tempPath
+                            );
                         }
                     }
                 }

@@ -8,10 +8,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     {
         internal PrimaryConstructorBaseTypeSyntax? PrimaryConstructorBaseType
         {
-            get
-            {
-                return BaseList?.Types.FirstOrDefault() as PrimaryConstructorBaseTypeSyntax;
-            }
+            get { return BaseList?.Types.FirstOrDefault() as PrimaryConstructorBaseTypeSyntax; }
         }
     }
 }

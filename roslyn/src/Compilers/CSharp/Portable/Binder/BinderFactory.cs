@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-
         // This dictionary stores contexts so we don't have to recreate them, which can be
-        // expensive. 
+        // expensive.
         private readonly ConcurrentCache<BinderCacheKey, Binder> _binderCache;
         private readonly CSharpCompilation _compilation;
         private readonly SyntaxTree _syntaxTree;
@@ -58,20 +57,26 @@ namespace Microsoft.CodeAnalysis.CSharp
         // reduces this churn to almost nothing.
         private readonly ObjectPool<BinderFactoryVisitor> _binderFactoryVisitorPool;
 
-        internal BinderFactory(CSharpCompilation compilation, SyntaxTree syntaxTree, bool ignoreAccessibility)
-        {
+        internal BinderFactory(
+            CSharpCompilation compilation,
+            SyntaxTree syntaxTree,
+            bool ignoreAccessibility
+        ) {
             _compilation = compilation;
             _syntaxTree = syntaxTree;
             _ignoreAccessibility = ignoreAccessibility;
 
-            _binderFactoryVisitorPool = new ObjectPool<BinderFactoryVisitor>(() => new BinderFactoryVisitor(this), 64);
+            _binderFactoryVisitorPool = new ObjectPool<BinderFactoryVisitor>(
+                () => new BinderFactoryVisitor(this),
+                64
+            );
 
             // 50 is more or less a guess, but it seems to work fine for scenarios that I tried.
-            // we need something big enough to keep binders for most classes and some methods 
+            // we need something big enough to keep binders for most classes and some methods
             // in a typical syntax tree.
-            // On the other side, note that the whole factory is weakly referenced and therefore short lived, 
+            // On the other side, note that the whole factory is weakly referenced and therefore short lived,
             // making this cache big is not very useful.
-            // I noticed that while compiling Roslyn C# compiler most caches never see 
+            // I noticed that while compiling Roslyn C# compiler most caches never see
             // more than 50 items added before getting collected.
             _binderCache = new ConcurrentCache<BinderCacheKey, Binder>(50);
 
@@ -80,18 +85,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal SyntaxTree SyntaxTree
         {
-            get
-            {
-                return _syntaxTree;
-            }
+            get { return _syntaxTree; }
         }
 
         private bool InScript
         {
-            get
-            {
-                return _syntaxTree.Options.Kind == SourceCodeKind.Script;
-            }
+            get { return _syntaxTree.Options.Kind == SourceCodeKind.Script; }
         }
 
         /// <summary>
@@ -105,8 +104,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <remarks>
         /// Note, there is no guarantee that the factory always gives back the same binder instance for the same node.
         /// </remarks>
-        internal Binder GetBinder(SyntaxNode node, CSharpSyntaxNode memberDeclarationOpt = null, Symbol memberOpt = null)
-        {
+        internal Binder GetBinder(
+            SyntaxNode node,
+            CSharpSyntaxNode memberDeclarationOpt = null,
+            Symbol memberOpt = null
+        ) {
             int position = node.SpanStart;
 
             // Unless this is interactive retrieving a binder for global statements
@@ -120,8 +122,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return GetBinder(node, position, memberDeclarationOpt, memberOpt);
         }
 
-        internal Binder GetBinder(SyntaxNode node, int position, CSharpSyntaxNode memberDeclarationOpt = null, Symbol memberOpt = null)
-        {
+        internal Binder GetBinder(
+            SyntaxNode node,
+            int position,
+            CSharpSyntaxNode memberDeclarationOpt = null,
+            Symbol memberOpt = null
+        ) {
             Debug.Assert(node != null);
 
 #if DEBUG
@@ -138,8 +144,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        internal InMethodBinder GetRecordConstructorInMethodBinder(SynthesizedRecordConstructor constructor)
-        {
+        internal InMethodBinder GetRecordConstructorInMethodBinder(
+            SynthesizedRecordConstructor constructor
+        ) {
             RecordDeclarationSyntax typeDecl = constructor.GetSyntax();
 
             var extraInfo = NodeUsage.ConstructorBodyOrInitializer;
@@ -160,8 +167,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal Binder GetInRecordBodyBinder(RecordDeclarationSyntax typeDecl)
         {
             BinderFactoryVisitor visitor = _binderFactoryVisitorPool.Allocate();
-            visitor.Initialize(position: typeDecl.SpanStart, memberDeclarationOpt: null, memberOpt: null);
-            Binder resultBinder = visitor.VisitTypeDeclarationCore(typeDecl, NodeUsage.NamedTypeBodyOrTypeParameters);
+            visitor.Initialize(
+                position: typeDecl.SpanStart,
+                memberDeclarationOpt: null,
+                memberOpt: null
+            );
+            Binder resultBinder = visitor.VisitTypeDeclarationCore(
+                typeDecl,
+                NodeUsage.NamedTypeBodyOrTypeParameters
+            );
             _binderFactoryVisitorPool.Free(visitor);
 
             return resultBinder;
@@ -180,23 +194,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (unit.Kind())
             {
                 case SyntaxKind.NamespaceDeclaration:
-                    {
-                        BinderFactoryVisitor visitor = _binderFactoryVisitorPool.Allocate();
-                        visitor.Initialize(0, null, null);
-                        Binder result = visitor.VisitNamespaceDeclaration((NamespaceDeclarationSyntax)unit, unit.SpanStart, inBody: true, inUsing: inUsing);
-                        _binderFactoryVisitorPool.Free(visitor);
-                        return result;
-                    }
+                {
+                    BinderFactoryVisitor visitor = _binderFactoryVisitorPool.Allocate();
+                    visitor.Initialize(0, null, null);
+                    Binder result = visitor.VisitNamespaceDeclaration(
+                        (NamespaceDeclarationSyntax)unit,
+                        unit.SpanStart,
+                        inBody: true,
+                        inUsing: inUsing
+                    );
+                    _binderFactoryVisitorPool.Free(visitor);
+                    return result;
+                }
 
                 case SyntaxKind.CompilationUnit:
-                    // imports are bound by the Script class binder:
-                    {
-                        BinderFactoryVisitor visitor = _binderFactoryVisitorPool.Allocate();
-                        visitor.Initialize(0, null, null);
-                        Binder result = visitor.VisitCompilationUnit((CompilationUnitSyntax)unit, inUsing: inUsing, inScript: InScript);
-                        _binderFactoryVisitorPool.Free(visitor);
-                        return result;
-                    }
+                // imports are bound by the Script class binder:
+                {
+                    BinderFactoryVisitor visitor = _binderFactoryVisitorPool.Allocate();
+                    visitor.Initialize(0, null, null);
+                    Binder result = visitor.VisitCompilationUnit(
+                        (CompilationUnitSyntax)unit,
+                        inUsing: inUsing,
+                        inScript: InScript
+                    );
+                    _binderFactoryVisitorPool.Free(visitor);
+                    return result;
+                }
 
                 default:
                     return null;

@@ -15,11 +15,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
     [Guid(Guids.CSharpOptionPageAdvancedIdString)]
     internal class AdvancedOptionPage : AbstractOptionPage
     {
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
-        {
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        ) {
             var componentModel = (IComponentModel)this.Site.GetService(typeof(SComponentModel));
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
-            return new AdvancedOptionPageControl(optionStore, componentModel, workspace.Services.GetService<IExperimentationService>());
+            return new AdvancedOptionPageControl(
+                optionStore,
+                componentModel,
+                workspace.Services.GetService<IExperimentationService>()
+            );
         }
     }
 }

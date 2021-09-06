@@ -22,23 +22,32 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return token.Kind == SyntaxKind.Whitespace;
         };
 
-        protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingNewLines = (token) =>
+        protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingNewLines = (
+            token
+        ) =>
         {
             return IsSpacingToken(token) || token.Kind == SyntaxKind.NewLine;
         };
 
-        protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingComments = (token) =>
+        protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingComments = (
+            token
+        ) =>
         {
             return IsSpacingToken(token) || token.Kind == SyntaxKind.CSharpComment;
         };
 
-        protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingNewLinesAndComments = (token) =>
+        protected static readonly Func<
+            SyntaxToken,
+            bool
+        > IsSpacingTokenIncludingNewLinesAndComments = (token) =>
         {
             return IsSpacingTokenIncludingNewLines(token) || token.Kind == SyntaxKind.CSharpComment;
         };
-        
-        protected TokenizerBackedParser(LanguageCharacteristics<TTokenizer> language, ParserContext context)
-            : base(context)
+
+        protected TokenizerBackedParser(
+            LanguageCharacteristics<TTokenizer> language,
+            ParserContext context
+        ) : base(context)
         {
             Language = language;
 
@@ -224,7 +233,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         protected internal bool NextIs(SyntaxKind type)
         {
-            // Duplicated logic with NextIs(Func...) to prevent allocation 
+            // Duplicated logic with NextIs(Func...) to prevent allocation
             var cur = CurrentToken;
             var result = false;
             if (NextToken())
@@ -273,9 +282,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected bool TokenExistsAfterWhitespace(SyntaxKind kind, bool includeNewLines = true)
         {
             var tokenFound = false;
-            var whitespace = ReadWhile(token =>
-                token.Kind == SyntaxKind.Whitespace ||
-                (includeNewLines && token.Kind == SyntaxKind.NewLine));
+            var whitespace = ReadWhile(
+                token =>
+                    token.Kind == SyntaxKind.Whitespace
+                    || (includeNewLines && token.Kind == SyntaxKind.NewLine)
+            );
             tokenFound = At(kind);
 
             PutCurrentBack();
@@ -307,26 +318,30 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 result.Add(CurrentToken);
                 NextToken();
-            }
-            while (EnsureCurrent() && condition(CurrentToken));
+            } while (EnsureCurrent() && condition(CurrentToken));
 
             return result;
         }
 
         protected bool AtIdentifier(bool allowKeywords)
         {
-            return CurrentToken != null &&
-                   (Language.IsIdentifier(CurrentToken) ||
-                    (allowKeywords && Language.IsKeyword(CurrentToken)));
+            return CurrentToken != null
+                && (
+                    Language.IsIdentifier(CurrentToken)
+                    || (allowKeywords && Language.IsKeyword(CurrentToken))
+                );
         }
 
         protected RazorCommentBlockSyntax ParseRazorComment()
         {
-            if (!Language.KnowsTokenType(KnownTokenType.CommentStart) ||
-                !Language.KnowsTokenType(KnownTokenType.CommentStar) ||
-                !Language.KnowsTokenType(KnownTokenType.CommentBody))
-            {
-                throw new InvalidOperationException(Resources.Language_Does_Not_Support_RazorComment);
+            if (
+                !Language.KnowsTokenType(KnownTokenType.CommentStart)
+                || !Language.KnowsTokenType(KnownTokenType.CommentStar)
+                || !Language.KnowsTokenType(KnownTokenType.CommentBody)
+            ) {
+                throw new InvalidOperationException(
+                    Resources.Language_Does_Not_Support_RazorComment
+                );
             }
 
             RazorCommentBlockSyntax commentBlock;
@@ -346,7 +361,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (endStar == null)
                 {
                     var diagnostic = RazorDiagnosticFactory.CreateParsing_RazorCommentNotTerminated(
-                        new SourceSpan(start, contentLength: 2 /* @* */));
+                        new SourceSpan(
+                            start,
+                            contentLength: 2 /* @* */
+                        )
+                    );
                     endStar = SyntaxFactory.MissingToken(SyntaxKind.RazorCommentStar, diagnostic);
                     Context.ErrorSink.OnError(diagnostic);
                 }
@@ -355,16 +374,30 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 {
                     if (!endStar.IsMissing)
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateParsing_RazorCommentNotTerminated(
-                            new SourceSpan(start, contentLength: 2 /* @* */));
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateParsing_RazorCommentNotTerminated(
+                                new SourceSpan(
+                                    start,
+                                    contentLength: 2 /* @* */
+                                )
+                            );
                         Context.ErrorSink.OnError(diagnostic);
-                        endTransition = SyntaxFactory.MissingToken(SyntaxKind.RazorCommentTransition, diagnostic);
+                        endTransition = SyntaxFactory.MissingToken(
+                            SyntaxKind.RazorCommentTransition,
+                            diagnostic
+                        );
                     }
 
                     endTransition = SyntaxFactory.MissingToken(SyntaxKind.RazorCommentTransition);
                 }
 
-                commentBlock = SyntaxFactory.RazorCommentBlock(startTransition, startStar, comment, endStar, endTransition);
+                commentBlock = SyntaxFactory.RazorCommentBlock(
+                    startTransition,
+                    startStar,
+                    comment,
+                    endStar,
+                    endTransition
+                );
 
                 // Make sure we generate a marker symbol after a comment if necessary.
                 if (!comment.IsMissing || !endStar.IsMissing || !endTransition.IsMissing)
@@ -461,7 +494,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         protected internal void Accept(IReadOnlyList<SyntaxToken> tokens)
         {
-            for(int i = 0; i < tokens.Count; i++)
+            for (int i = 0; i < tokens.Count; i++)
             {
                 var token = tokens[i];
                 Accept(token);
@@ -556,8 +589,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         protected internal void AcceptMarkerTokenIfNecessary()
         {
-            if (TokenBuilder.Count == 0 && Context.LastAcceptedCharacters != AcceptedCharactersInternal.Any)
-            {
+            if (
+                TokenBuilder.Count == 0
+                && Context.LastAcceptedCharacters != AcceptedCharactersInternal.Any
+            ) {
                 Accept(Language.CreateMarkerToken());
             }
         }
@@ -584,8 +619,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return GetNodeWithSpanContext(SyntaxFactory.MarkupEphemeralTextLiteral(tokens));
         }
 
-        protected RazorMetaCodeSyntax OutputAsMetaCode(SyntaxList<SyntaxToken> tokens, AcceptedCharactersInternal? accepted = null)
-        {
+        protected RazorMetaCodeSyntax OutputAsMetaCode(
+            SyntaxList<SyntaxToken> tokens,
+            AcceptedCharactersInternal? accepted = null
+        ) {
             if (tokens.Count == 0)
             {
                 return null;
@@ -593,7 +630,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             var metacode = SyntaxFactory.RazorMetaCode(tokens);
             SpanContext.ChunkGenerator = SpanChunkGenerator.Null;
-            SpanContext.EditHandler.AcceptedCharacters = accepted ?? AcceptedCharactersInternal.None;
+            SpanContext.EditHandler.AcceptedCharacters =
+                accepted ?? AcceptedCharactersInternal.None;
 
             return GetNodeWithSpanContext(metacode);
         }
@@ -603,23 +641,33 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var spanContext = SpanContext.Build();
             Context.LastAcceptedCharacters = spanContext.EditHandler.AcceptedCharacters;
             InitializeContext(SpanContext);
-            var annotation = new Syntax.SyntaxAnnotation(SyntaxConstants.SpanContextKind, spanContext);
+            var annotation = new Syntax.SyntaxAnnotation(
+                SyntaxConstants.SpanContextKind,
+                spanContext
+            );
 
             return (TNode)node.SetAnnotations(new[] { annotation });
         }
 
         protected IDisposable PushSpanContextConfig()
         {
-            return PushSpanContextConfig(newConfig: (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null);
+            return PushSpanContextConfig(
+                newConfig: (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
+            );
         }
 
         protected IDisposable PushSpanContextConfig(Action<SpanContextBuilder> newConfig)
         {
-            return PushSpanContextConfig(newConfig == null ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null : (span, _) => newConfig(span));
+            return PushSpanContextConfig(
+                newConfig == null
+                    ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
+                    : (span, _) => newConfig(span)
+            );
         }
 
-        protected IDisposable PushSpanContextConfig(Action<SpanContextBuilder, Action<SpanContextBuilder>> newConfig)
-        {
+        protected IDisposable PushSpanContextConfig(
+            Action<SpanContextBuilder, Action<SpanContextBuilder>> newConfig
+        ) {
             var old = SpanContextConfig;
             ConfigureSpanContext(newConfig);
             return new DisposableAction(() => SpanContextConfig = old);
@@ -631,8 +679,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             InitializeContext(SpanContext);
         }
 
-        protected void ConfigureSpanContext(Action<SpanContextBuilder, Action<SpanContextBuilder>> config)
-        {
+        protected void ConfigureSpanContext(
+            Action<SpanContextBuilder, Action<SpanContextBuilder>> config
+        ) {
             var prev = SpanContextConfig;
             if (config == null)
             {

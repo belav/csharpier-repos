@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="relativePath">The application relative path of the page.</param>
         /// <param name="viewEnginePath">The path relative to the base path for page discovery.</param>
         public PageRouteModel(string relativePath, string viewEnginePath)
-            : this(relativePath, viewEnginePath, areaName: null)
-        {
-        }
+            : this(relativePath, viewEnginePath, areaName: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="PageRouteModel"/>.
@@ -33,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public PageRouteModel(string relativePath, string viewEnginePath, string areaName)
         {
             RelativePath = relativePath ?? throw new ArgumentNullException(nameof(relativePath));
-            ViewEnginePath = viewEnginePath ?? throw new ArgumentNullException(nameof(viewEnginePath));
+            ViewEnginePath =
+                viewEnginePath ?? throw new ArgumentNullException(nameof(viewEnginePath));
             AreaName = areaName;
 
             Properties = new Dictionary<object, object>();
@@ -59,7 +58,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             Properties = new Dictionary<object, object>(other.Properties);
             Selectors = new List<SelectorModel>(other.Selectors.Select(m => new SelectorModel(m)));
-            RouteValues = new Dictionary<string, string>(other.RouteValues, StringComparer.OrdinalIgnoreCase);
+            RouteValues = new Dictionary<string, string>(
+                other.RouteValues,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         /// <summary>

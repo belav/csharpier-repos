@@ -8,7 +8,7 @@ namespace System.CommandLine.Builder
 {
     public class CommandBuilder
     {
-        public CommandBuilder(Command command) 
+        public CommandBuilder(Command command)
         {
             Command = command;
         }

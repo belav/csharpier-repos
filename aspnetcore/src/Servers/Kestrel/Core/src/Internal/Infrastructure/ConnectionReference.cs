@@ -12,8 +12,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private readonly WeakReference<KestrelConnection> _weakReference;
         private readonly TransportConnectionManager _transportConnectionManager;
 
-        public ConnectionReference(long id, KestrelConnection connection, TransportConnectionManager transportConnectionManager)
-        {
+        public ConnectionReference(
+            long id,
+            KestrelConnection connection,
+            TransportConnectionManager transportConnectionManager
+        ) {
             _id = id;
 
             _weakReference = new WeakReference<KestrelConnection>(connection);

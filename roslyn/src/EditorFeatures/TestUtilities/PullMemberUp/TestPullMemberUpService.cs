@@ -20,19 +20,31 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
 
         private string DestinationName { get; }
 
-        public TestPullMemberUpService(IEnumerable<(string member, bool makeAbstract)> selectedMembers, string destinationName)
-        {
+        public TestPullMemberUpService(
+            IEnumerable<(string member, bool makeAbstract)> selectedMembers,
+            string destinationName
+        ) {
             _selectedMembers = selectedMembers;
             DestinationName = destinationName;
         }
 
-        public PullMembersUpOptions GetPullMemberUpOptions(Document document, ISymbol selectedNodeSymbol)
-        {
-            var members = selectedNodeSymbol.ContainingType.GetMembers().Where(member => MemberAndDestinationValidator.IsMemberValid(member));
+        public PullMembersUpOptions GetPullMemberUpOptions(
+            Document document,
+            ISymbol selectedNodeSymbol
+        ) {
+            var members = selectedNodeSymbol.ContainingType.GetMembers()
+                .Where(member => MemberAndDestinationValidator.IsMemberValid(member));
 
-            var selectedMember = _selectedMembers == null
-                ? members.Select(member => (member, false))
-                : _selectedMembers.Select(selection => (members.Single(symbol => symbol.Name == selection.member), selection.makeAbstract));
+            var selectedMember =
+                _selectedMembers == null
+                    ? members.Select(member => (member, false))
+                    : _selectedMembers.Select(
+                          selection =>
+                              (
+                                  members.Single(symbol => symbol.Name == selection.member),
+                                  selection.makeAbstract
+                              )
+                      );
 
             var allInterfaces = selectedNodeSymbol.ContainingType.AllInterfaces;
             var baseClass = selectedNodeSymbol.ContainingType.BaseType;
@@ -51,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
             {
                 if (allInterfaces != null)
                 {
-                    destination = allInterfaces.SingleOrDefault(@interface => @interface.Name == DestinationName);
+                    destination = allInterfaces.SingleOrDefault(
+                        @interface => @interface.Name == DestinationName
+                    );
                 }
 
                 if (baseClass != null && destination == null)
@@ -60,7 +74,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
                     {
                         if (i.Name == DestinationName)
                         {
-                            return PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(i, selectedMember.ToImmutableArray());
+                            return PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(
+                                i,
+                                selectedMember.ToImmutableArray()
+                            );
                         }
                     }
                 }
@@ -72,7 +89,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
             }
             else
             {
-                return PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(destination, selectedMember.ToImmutableArray());
+                return PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(
+                    destination,
+                    selectedMember.ToImmutableArray()
+                );
             }
         }
     }

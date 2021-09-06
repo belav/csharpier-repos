@@ -21,11 +21,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
         [WorkItem(624315, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624315")]
         public void MultipleTextChangesTest()
         {
-            var code = @"class C
+            var code =
+                @"class C
 ";
             using var workspace = TestWorkspace.CreateCSharp(code);
             var hostDocument = workspace.Documents.First();
-            var document = workspace.CurrentSolution.GetDocument(workspace.GetDocumentId(hostDocument));
+            var document = workspace.CurrentSolution.GetDocument(
+                workspace.GetDocumentId(hostDocument)
+            );
 
             var buffer = hostDocument.GetTextBuffer();
             var container = buffer.AsTextContainer();
@@ -35,10 +38,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             buffer.Insert(startPosition + 1, " ");
             buffer.Insert(startPosition + 2, "}");
 
-            var newDocument = buffer.CurrentSnapshot.GetRelatedDocumentsWithChanges().FirstOrDefault();
+            var newDocument = buffer.CurrentSnapshot.GetRelatedDocumentsWithChanges()
+                .FirstOrDefault();
             Assert.NotNull(newDocument);
 
-            var expected = @"class C
+            var expected =
+                @"class C
 { }";
 
             var newSourceText = newDocument.GetTextAsync().Result;
@@ -53,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             var code = @"class C";
             using var workspace = TestWorkspace.CreateCSharp(code);
             var hostDocument = workspace.Documents.First();
-            var document = workspace.CurrentSolution.GetDocument(workspace.GetDocumentId(hostDocument));
+            var document = workspace.CurrentSolution.GetDocument(
+                workspace.GetDocumentId(hostDocument)
+            );
 
             var buffer = hostDocument.GetTextBuffer();
             var startingSnapshotVersion = buffer.CurrentSnapshot.Version;
@@ -68,8 +75,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
                 edit.Apply();
             }
 
-            Assert.Equal(startingSnapshotVersion.VersionNumber + 1, buffer.CurrentSnapshot.Version.VersionNumber);
-            Assert.Equal(startingSnapshotVersion.VersionNumber, buffer.CurrentSnapshot.Version.ReiteratedVersionNumber);
+            Assert.Equal(
+                startingSnapshotVersion.VersionNumber + 1,
+                buffer.CurrentSnapshot.Version.VersionNumber
+            );
+            Assert.Equal(
+                startingSnapshotVersion.VersionNumber,
+                buffer.CurrentSnapshot.Version.ReiteratedVersionNumber
+            );
 
             var newText = buffer.CurrentSnapshot.AsText();
 

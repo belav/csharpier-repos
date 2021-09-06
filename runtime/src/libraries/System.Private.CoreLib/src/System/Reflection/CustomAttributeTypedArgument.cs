@@ -8,9 +8,15 @@ namespace System.Reflection
 {
     public readonly partial struct CustomAttributeTypedArgument
     {
-        public static bool operator ==(CustomAttributeTypedArgument left, CustomAttributeTypedArgument right) => left.Equals(right);
+        public static bool operator ==(
+            CustomAttributeTypedArgument left,
+            CustomAttributeTypedArgument right
+        ) => left.Equals(right);
 
-        public static bool operator !=(CustomAttributeTypedArgument left, CustomAttributeTypedArgument right) => !left.Equals(right);
+        public static bool operator !=(
+            CustomAttributeTypedArgument left,
+            CustomAttributeTypedArgument right
+        ) => !left.Equals(right);
 
         private readonly object? m_value;
         private readonly Type m_argumentType;
@@ -34,7 +40,6 @@ namespace System.Reflection
             m_value = CanonicalizeValue(value);
             m_argumentType = value.GetType();
         }
-
 
         public override string ToString() => ToString(false);
 
@@ -60,7 +65,8 @@ namespace System.Reflection
 
             if (ArgumentType.IsArray)
             {
-                IList<CustomAttributeTypedArgument> array = (IList<CustomAttributeTypedArgument>)Value!;
+                IList<CustomAttributeTypedArgument> array =
+                    (IList<CustomAttributeTypedArgument>)Value!;
                 Type elementType = ArgumentType.GetElementType()!;
 
                 var result = new ValueStringBuilder(stackalloc char[256]);

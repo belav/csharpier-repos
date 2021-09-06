@@ -30,8 +30,13 @@ namespace System.Collections.Immutable
             /// <remarks>
             /// We utilize this resource pool to make "allocation free" enumeration achievable.
             /// </remarks>
-            private static readonly SecureObjectPool<Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>, Enumerator> s_enumeratingStacks =
-                new SecureObjectPool<Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>, Enumerator>();
+            private static readonly SecureObjectPool<
+                Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
+                Enumerator
+            > s_enumeratingStacks = new SecureObjectPool<
+                Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
+                Enumerator
+            >();
 
             /// <summary>
             /// A unique ID for this instance of this enumerator.
@@ -70,7 +75,10 @@ namespace System.Collections.Immutable
                 {
                     if (!s_enumeratingStacks.TryTake(this, out _stack))
                     {
-                        _stack = s_enumeratingStacks.PrepNew(this, new Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>(root.Height));
+                        _stack = s_enumeratingStacks.PrepNew(
+                            this,
+                            new Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>(root.Height)
+                        );
                     }
 
                     this.PushLeft(_root);
@@ -115,8 +123,13 @@ namespace System.Collections.Immutable
             {
                 _root = null!;
                 _current = null;
-                if (_stack != null && _stack.TryUse(ref this, out Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>? stack))
-                {
+                if (
+                    _stack != null
+                    && _stack.TryUse(
+                        ref this,
+                        out Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>? stack
+                    )
+                ) {
                     stack.ClearFastWhenEmpty();
                     s_enumeratingStacks.TryAdd(this, _stack!);
                 }

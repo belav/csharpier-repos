@@ -29,8 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public DefaultValidationHtmlAttributeProvider(
             IOptions<MvcViewOptions> optionsAccessor,
             IModelMetadataProvider metadataProvider,
-            ClientValidatorCache clientValidatorCache)
-        {
+            ClientValidatorCache clientValidatorCache
+        ) {
             if (optionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(optionsAccessor));
@@ -50,15 +50,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             _metadataProvider = metadataProvider;
 
             var clientValidatorProviders = optionsAccessor.Value.ClientModelValidatorProviders;
-            _clientModelValidatorProvider = new CompositeClientModelValidatorProvider(clientValidatorProviders);
+            _clientModelValidatorProvider = new CompositeClientModelValidatorProvider(
+                clientValidatorProviders
+            );
         }
 
         /// <inheritdoc />
         public override void AddValidationAttributes(
             ViewContext viewContext,
             ModelExplorer modelExplorer,
-            IDictionary<string, string> attributes)
-        {
+            IDictionary<string, string> attributes
+        ) {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
@@ -82,14 +84,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var validators = _clientValidatorCache.GetValidators(
                 modelExplorer.Metadata,
-                _clientModelValidatorProvider);
+                _clientModelValidatorProvider
+            );
             if (validators.Count > 0)
             {
                 var validationContext = new ClientModelValidationContext(
                     viewContext,
                     modelExplorer.Metadata,
                     _metadataProvider,
-                    attributes);
+                    attributes
+                );
 
                 for (var i = 0; i < validators.Count; i++)
                 {

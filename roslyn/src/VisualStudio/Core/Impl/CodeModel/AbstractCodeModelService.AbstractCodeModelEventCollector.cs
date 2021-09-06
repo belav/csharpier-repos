@@ -22,31 +22,58 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             protected readonly AbstractCodeModelService CodeModelService;
 
-            protected AbstractCodeModelEventCollector(AbstractCodeModelService codeModelService)
-                => this.CodeModelService = codeModelService;
+            protected AbstractCodeModelEventCollector(AbstractCodeModelService codeModelService) =>
+                this.CodeModelService = codeModelService;
 
-            protected abstract void CollectCore(SyntaxNode oldRoot, SyntaxNode newRoot, CodeModelEventQueue eventQueue);
+            protected abstract void CollectCore(
+                SyntaxNode oldRoot,
+                SyntaxNode newRoot,
+                CodeModelEventQueue eventQueue
+            );
 
-            protected abstract void EnqueueAddEvent(SyntaxNode node, SyntaxNode parent, CodeModelEventQueue eventQueue);
-            protected abstract void EnqueueRemoveEvent(SyntaxNode node, SyntaxNode parent, CodeModelEventQueue eventQueue);
-            protected abstract void EnqueueChangeEvent(SyntaxNode node, SyntaxNode parent, CodeModelEventType eventType, CodeModelEventQueue eventQueue);
+            protected abstract void EnqueueAddEvent(
+                SyntaxNode node,
+                SyntaxNode parent,
+                CodeModelEventQueue eventQueue
+            );
+            protected abstract void EnqueueRemoveEvent(
+                SyntaxNode node,
+                SyntaxNode parent,
+                CodeModelEventQueue eventQueue
+            );
+            protected abstract void EnqueueChangeEvent(
+                SyntaxNode node,
+                SyntaxNode parent,
+                CodeModelEventType eventType,
+                CodeModelEventQueue eventQueue
+            );
 
             public Queue<CodeModelEvent> Collect(SyntaxTree oldTree, SyntaxTree newTree)
             {
                 var queue = new Queue<CodeModelEvent>();
                 var eventQueue = new CodeModelEventQueue(queue);
-                CollectCore(oldTree.GetRoot(CancellationToken.None), newTree.GetRoot(CancellationToken.None), eventQueue);
+                CollectCore(
+                    oldTree.GetRoot(CancellationToken.None),
+                    newTree.GetRoot(CancellationToken.None),
+                    eventQueue
+                );
                 return queue;
             }
 
             protected delegate bool NodeComparison<TNode, TParent>(
-                TNode oldNode, TNode newNode,
+                TNode oldNode,
+                TNode newNode,
                 TParent newNodeParent,
-                CodeModelEventQueue eventQueue)
+                CodeModelEventQueue eventQueue
+            )
                 where TNode : SyntaxNode
                 where TParent : SyntaxNode;
 
-            protected enum DeclarationChange { WholeDeclaration, NameOnly }
+            protected enum DeclarationChange
+            {
+                WholeDeclaration,
+                NameOnly
+            }
 
             protected bool CompareChildren<TNode, TParent>(
                 NodeComparison<TNode, TParent> compare,
@@ -54,16 +81,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 IReadOnlyList<TNode> newChildren,
                 TParent newNodeParent,
                 CodeModelEventType eventType,
-                CodeModelEventQueue eventQueue)
-                where TNode : SyntaxNode
-                where TParent : SyntaxNode
+                CodeModelEventQueue eventQueue
+            ) where TNode : SyntaxNode
+              where TParent : SyntaxNode
             {
                 var oldCount = oldChildren.Count;
                 var newCount = newChildren.Count;
 
                 if (oldCount == newCount)
                 {
-                    return FindDifferentChild(compare, oldChildren, newChildren, newNodeParent, eventQueue);
+                    return FindDifferentChild(
+                        compare,
+                        oldChildren,
+                        newChildren,
+                        newNodeParent,
+                        eventQueue
+                    );
                 }
                 else if (Math.Abs(oldCount - newCount) > MaxChildDelta)
                 {
@@ -74,11 +107,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     if (oldCount > newCount)
                     {
-                        FindRemovedChild(compare, oldChildren, newChildren, newNodeParent, oldCount - newCount, eventQueue);
+                        FindRemovedChild(
+                            compare,
+                            oldChildren,
+                            newChildren,
+                            newNodeParent,
+                            oldCount - newCount,
+                            eventQueue
+                        );
                     }
                     else
                     {
-                        FindAddedChild(compare, oldChildren, newChildren, newNodeParent, newCount - oldCount, eventQueue);
+                        FindAddedChild(
+                            compare,
+                            oldChildren,
+                            newChildren,
+                            newNodeParent,
+                            newCount - oldCount,
+                            eventQueue
+                        );
                     }
                 }
 
@@ -92,9 +139,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 SyntaxNode oldNode,
                 SyntaxNode newNode,
                 TParent newNodeParent,
-                CodeModelEventQueue eventQueue)
-                where TNode : SyntaxNode
-                where TParent : SyntaxNode
+                CodeModelEventQueue eventQueue
+            ) where TNode : SyntaxNode
+              where TParent : SyntaxNode
             {
                 var oldCount = oldChildren.Count;
                 var newCount = newChildren.Count;
@@ -135,15 +182,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 IReadOnlyList<TNode> oldChildren,
                 IReadOnlyList<TNode> newChildren,
                 TParent newNodeParent,
-                CodeModelEventQueue eventQueue)
-                where TNode : SyntaxNode
-                where TParent : SyntaxNode
+                CodeModelEventQueue eventQueue
+            ) where TNode : SyntaxNode
+              where TParent : SyntaxNode
             {
                 Debug.Assert(oldChildren.Count == newChildren.Count);
 
-                var eventCount = eventQueue != null
-                    ? eventQueue.Count
-                    : 0;
+                var eventCount = eventQueue != null ? eventQueue.Count : 0;
 
                 var hasChanges = false;
 
@@ -174,7 +219,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             }
                         }
 
-                        EnqueueChangeEvent(newNodeParent, null, CodeModelEventType.Unknown, eventQueue);
+                        EnqueueChangeEvent(
+                            newNodeParent,
+                            null,
+                            CodeModelEventType.Unknown,
+                            eventQueue
+                        );
                         return false;
                     }
                 }
@@ -188,9 +238,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 IReadOnlyList<TNode> newChildren,
                 TParent newNodeParent,
                 int delta,
-                CodeModelEventQueue eventQueue)
-                where TNode : SyntaxNode
-                where TParent : SyntaxNode
+                CodeModelEventQueue eventQueue
+            ) where TNode : SyntaxNode
+              where TParent : SyntaxNode
             {
                 Debug.Assert(oldChildren.Count + delta == newChildren.Count);
 
@@ -202,11 +252,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 // Look for the first different child. If there is one, track that index as
                 // the first added node.
-                int oldIndex, newIndex;
-                for (oldIndex = 0, newIndex = 0; newIndex < newChildren.Count; oldIndex++, newIndex++)
-                {
-                    if (oldIndex >= oldChildren.Count || !compare(oldChildren[oldIndex], newChildren[newIndex], newNodeParent, null))
-                    {
+                int oldIndex,
+                    newIndex;
+                for (
+                    oldIndex = 0, newIndex = 0;
+                    newIndex < newChildren.Count;
+                    oldIndex++, newIndex++
+                ) {
+                    if (
+                        oldIndex >= oldChildren.Count
+                        || !compare(
+                            oldChildren[oldIndex],
+                            newChildren[newIndex],
+                            newNodeParent,
+                            null
+                        )
+                    ) {
                         firstAdded = newIndex;
                         newIndex += delta;
                         break;
@@ -219,7 +280,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     if (!compare(oldChildren[oldIndex], newChildren[newIndex], newNodeParent, null))
                     {
-                        EnqueueChangeEvent(newNodeParent, null, CodeModelEventType.Unknown, eventQueue);
+                        EnqueueChangeEvent(
+                            newNodeParent,
+                            null,
+                            CodeModelEventType.Unknown,
+                            eventQueue
+                        );
                         return;
                     }
                 }
@@ -239,9 +305,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 IReadOnlyList<TNode> newChildren,
                 TParent newNodeParent,
                 int delta,
-                CodeModelEventQueue eventQueue)
-                where TNode : SyntaxNode
-                where TParent : SyntaxNode
+                CodeModelEventQueue eventQueue
+            ) where TNode : SyntaxNode
+              where TParent : SyntaxNode
             {
                 Debug.Assert(oldChildren.Count - delta == newChildren.Count);
 
@@ -253,11 +319,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 // Look for the first different child. If there is one, track that index as
                 // the first added node.
-                int oldIndex, newIndex;
-                for (oldIndex = 0, newIndex = 0; oldIndex < oldChildren.Count; oldIndex++, newIndex++)
-                {
-                    if (newIndex >= newChildren.Count || !compare(oldChildren[oldIndex], newChildren[newIndex], newNodeParent, null))
-                    {
+                int oldIndex,
+                    newIndex;
+                for (
+                    oldIndex = 0, newIndex = 0;
+                    oldIndex < oldChildren.Count;
+                    oldIndex++, newIndex++
+                ) {
+                    if (
+                        newIndex >= newChildren.Count
+                        || !compare(
+                            oldChildren[oldIndex],
+                            newChildren[newIndex],
+                            newNodeParent,
+                            null
+                        )
+                    ) {
                         firstRemoved = oldIndex;
                         oldIndex += delta;
                         break;
@@ -270,7 +347,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     if (!compare(oldChildren[oldIndex], newChildren[newIndex], newNodeParent, null))
                     {
-                        EnqueueChangeEvent(newNodeParent, null, CodeModelEventType.Unknown, eventQueue);
+                        EnqueueChangeEvent(
+                            newNodeParent,
+                            null,
+                            CodeModelEventType.Unknown,
+                            eventQueue
+                        );
                         return;
                     }
                 }
@@ -279,7 +361,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     for (var i = 0; i < delta; i++)
                     {
-                        EnqueueRemoveEvent(oldChildren[firstRemoved + i], newNodeParent, eventQueue);
+                        EnqueueRemoveEvent(
+                            oldChildren[firstRemoved + i],
+                            newNodeParent,
+                            eventQueue
+                        );
                     }
                 }
             }

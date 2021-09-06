@@ -248,7 +248,10 @@ public class MyObject
 
     public string ArgDoubleTest(double d)
     {
-        string s = string.Format("Received a double with value {0}", Convert.ToString(d, NumberFormatInfo.InvariantInfo));
+        string s = string.Format(
+            "Received a double with value {0}",
+            Convert.ToString(d, NumberFormatInfo.InvariantInfo)
+        );
         return s;
     }
 
@@ -289,7 +292,5 @@ public class MyObject
         return this;
     }
 
-    public void DoNothing()
-    {
-    }
+    public void DoNothing() { }
 }

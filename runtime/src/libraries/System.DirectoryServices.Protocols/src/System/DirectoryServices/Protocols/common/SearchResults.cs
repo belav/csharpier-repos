@@ -44,7 +44,8 @@ namespace System.DirectoryServices.Protocols
 
         public int IndexOf(SearchResultReference value) => InnerList.IndexOf(value);
 
-        public void CopyTo(SearchResultReference[] values, int index) => InnerList.CopyTo(values, index);
+        public void CopyTo(SearchResultReference[] values, int index) =>
+            InnerList.CopyTo(values, index);
 
         internal void Clear() => InnerList.Clear();
     }
@@ -78,7 +79,8 @@ namespace System.DirectoryServices.Protocols
 
         public int IndexOf(SearchResultEntry value) => InnerList.IndexOf(value);
 
-        public void CopyTo(SearchResultEntry[] values, int index) => InnerList.CopyTo(values, index);
+        public void CopyTo(SearchResultEntry[] values, int index) =>
+            InnerList.CopyTo(values, index);
 
         internal void Clear() => InnerList.Clear();
     }

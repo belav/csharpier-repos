@@ -12,27 +12,20 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class OwnedQueryRelationalTestBase<TFixture> : OwnedQueryTestBase<TFixture>
         where TFixture : OwnedQueryRelationalTestBase<TFixture>.RelationalOwnedQueryFixture, new()
     {
-        protected OwnedQueryRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected OwnedQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_for_base_type_loads_all_owned_navs_split(bool async)
         {
-            return AssertQuery(
-                async,
-                ss => ss.Set<OwnedPerson>().AsSplitQuery());
+            return AssertQuery(async, ss => ss.Set<OwnedPerson>().AsSplitQuery());
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Query_for_branch_type_loads_all_owned_navs_split(bool async)
         {
-            return AssertQuery(
-                async,
-                ss => ss.Set<Branch>().AsSplitQuery());
+            return AssertQuery(async, ss => ss.Set<Branch>().AsSplitQuery());
         }
 
         [ConditionalTheory]
@@ -41,12 +34,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<OwnedPerson>().Distinct().AsSplitQuery()
-                    .OrderBy(p => p.Id)
-                    .Take(5)
-                    .Select(op => new { op }),
+                ss =>
+                    ss.Set<OwnedPerson>()
+                        .Distinct()
+                        .AsSplitQuery()
+                        .OrderBy(p => p.Id)
+                        .Take(5)
+                        .Select(op => new { op }),
                 assertOrder: true,
-                elementAsserter: (e, a) => AssertEqual(e.op, a.op));
+                elementAsserter: (e, a) => AssertEqual(e.op, a.op)
+            );
         }
 
         [ConditionalTheory]
@@ -55,41 +52,46 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<OwnedPerson>().OrderBy(p => p.Id).AsSplitQuery()
-                    .Select(
-                        p => new
-                        {
-                            p.Orders,
-                            p.PersonAddress,
-                            p.PersonAddress.Country.Planet
-                        }),
+                ss =>
+                    ss.Set<OwnedPerson>()
+                        .OrderBy(p => p.Id)
+                        .AsSplitQuery()
+                        .Select(
+                            p => new { p.Orders, p.PersonAddress, p.PersonAddress.Country.Planet }
+                        ),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                 {
                     AssertCollection(e.Orders, a.Orders);
                     AssertEqual(e.PersonAddress, a.PersonAddress);
                     AssertEqual(e.Planet, a.Planet);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(bool async)
-        {
+        public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(
+            bool async
+        ) {
             return AssertQuery(
                 async,
-                ss => ss.Set<OwnedPerson>().OrderBy(p => p.Id).Select(p => p.PersonAddress.Country.Planet.Moons).AsSplitQuery(),
+                ss =>
+                    ss.Set<OwnedPerson>()
+                        .OrderBy(p => p.Id)
+                        .Select(p => p.PersonAddress.Country.Planet.Moons)
+                        .AsSplitQuery(),
                 assertOrder: true,
-                elementAsserter: (e, a) => AssertCollection(e, a));
+                elementAsserter: (e, a) => AssertCollection(e, a)
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Query_with_OfType_eagerly_loads_correct_owned_navigations_split(bool async)
-        {
-            return AssertQuery(
-                async,
-                ss => ss.Set<OwnedPerson>().OfType<LeafA>().AsSplitQuery());
+        public virtual Task Query_with_OfType_eagerly_loads_correct_owned_navigations_split(
+            bool async
+        ) {
+            return AssertQuery(async, ss => ss.Set<OwnedPerson>().OfType<LeafA>().AsSplitQuery());
         }
 
         [ConditionalTheory]
@@ -98,8 +100,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<OwnedPerson>().Where(e => e.Id == 1).AsTracking().Select(e => new { e.ReadOnlyProperty }).AsSplitQuery(),
-                entryCount: 7);
+                ss =>
+                    ss.Set<OwnedPerson>()
+                        .Where(e => e.Id == 1)
+                        .AsTracking()
+                        .Select(e => new { e.ReadOnlyProperty })
+                        .AsSplitQuery(),
+                entryCount: 7
+            );
         }
 
         [ConditionalTheory]
@@ -108,15 +116,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<OwnedPerson>().Where(c => (string)c["Name"] == "Mona Cy").AsSplitQuery());
+                ss =>
+                    ss.Set<OwnedPerson>().Where(c => (string)c["Name"] == "Mona Cy").AsSplitQuery()
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(bool async)
-        {
+        public virtual async Task Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(
+            bool async
+        ) {
             using var context = CreateContext();
-            var query = context.Set<OwnedPerson>().FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [OwnedPerson]"));
+            var query = context.Set<OwnedPerson>()
+                .FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [OwnedPerson]"));
 
             if (async)
             {
@@ -128,31 +140,33 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
         }
 
-        protected string NormalizeDelimitersInRawString(string sql)
-            => Fixture.TestStore.NormalizeDelimitersInRawString(sql);
+        protected string NormalizeDelimitersInRawString(string sql) =>
+            Fixture.TestStore.NormalizeDelimitersInRawString(sql);
 
-        protected FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql)
-            => Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
+        protected FormattableString NormalizeDelimitersInInterpolatedString(
+            FormattableString sql
+        ) => Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
 
-        protected virtual bool CanExecuteQueryString
-            => false;
+        protected virtual bool CanExecuteQueryString => false;
 
-        protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-            => new RelationalQueryAsserter(
-                fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+        protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+            new RelationalQueryAsserter(
+                fixture,
+                RewriteExpectedQueryExpression,
+                RewriteServerQueryExpression,
+                canExecuteQueryString: CanExecuteQueryString
+            );
 
         public abstract class RelationalOwnedQueryFixture : OwnedQueryFixtureBase
         {
-            public new RelationalTestStore TestStore
-                => (RelationalTestStore)base.TestStore;
+            public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
                 base.OnModelCreating(modelBuilder, context);
-
                 // TODO: See issue#20334
                 //modelBuilder.Entity<OwnedPerson>().OwnsOne(e => e.PersonAddress).Property(e => e.PlaceType).HasColumnName("PlaceType");
                 //modelBuilder.Entity<Branch>().OwnsOne(e => e.BranchAddress).Property(e => e.PlaceType).HasColumnName("PlaceType");

@@ -10,8 +10,7 @@ namespace Default
 
     class q
     {
-        static
-        int func(int i, int updateAddr, byte[] newBytes, int[] m_fixupPos)
+        static int func(int i, int updateAddr, byte[] newBytes, int[] m_fixupPos)
         {
             while (i > 10)
             {
@@ -29,9 +28,7 @@ namespace Default
             return i;
         }
 
-        public
-        static
-        int Main(String[] args)
+        public static int Main(String[] args)
         {
             func(0, 0, null, null);
             return 100;

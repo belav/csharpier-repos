@@ -186,12 +186,18 @@ namespace Microsoft.CodeAnalysis.Text
         {
             if (start < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(start), CodeAnalysisResources.StartMustNotBeNegative);
+                throw new ArgumentOutOfRangeException(
+                    nameof(start),
+                    CodeAnalysisResources.StartMustNotBeNegative
+                );
             }
 
             if (end < start)
             {
-                throw new ArgumentOutOfRangeException(nameof(end), CodeAnalysisResources.EndMustNotBeLessThanStart);
+                throw new ArgumentOutOfRangeException(
+                    nameof(end),
+                    CodeAnalysisResources.EndMustNotBeLessThanStart
+                );
             }
 
             return new TextSpan(start, end - start);

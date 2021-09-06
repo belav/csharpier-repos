@@ -24,8 +24,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 string str = $"Failed to load assembly '{simpleName}' from '{filePath}'";
 
-                if (String.Compare("System.Private.CoreLib", simpleName, StringComparison.OrdinalIgnoreCase) == 0)
-                {
+                if (
+                    String.Compare(
+                        "System.Private.CoreLib",
+                        simpleName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                ) {
                     _logger.PrintError(str);
                 }
                 else
@@ -41,8 +46,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 string str = $"Failed to load assembly '{simpleName}'";
 
-                if (String.Compare("System.Private.CoreLib", simpleName, StringComparison.OrdinalIgnoreCase) == 0)
-                {
+                if (
+                    String.Compare(
+                        "System.Private.CoreLib",
+                        simpleName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                ) {
                     _logger.PrintError(str);
                 }
                 else

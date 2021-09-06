@@ -17,27 +17,43 @@ namespace System.Text.Json.Serialization.Converters
 
         internal override bool CanHaveIdMetadata => false;
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
-        {
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        ) {
             state.Current.ReturnValue = new List<TElement>();
         }
 
-        protected override void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
-        {
+        protected override void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        ) {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
-            Func<IEnumerable<TElement>, TCollection>? creator = (Func<IEnumerable<TElement>, TCollection>?)typeInfo.CreateObjectWithArgs;
+            Func<IEnumerable<TElement>, TCollection>? creator = (Func<
+                IEnumerable<TElement>,
+                TCollection
+            >?)typeInfo.CreateObjectWithArgs;
             if (creator == null)
             {
-                creator = options.MemberAccessorStrategy.CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>();
+                creator =
+                    options.MemberAccessorStrategy.CreateImmutableEnumerableCreateRangeDelegate<
+                        TCollection,
+                        TElement
+                    >();
                 typeInfo.CreateObjectWithArgs = creator;
             }
 
             state.Current.ReturnValue = creator((List<TElement>)state.Current.ReturnValue!);
         }
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             IEnumerator<TElement> enumerator;
             if (state.Current.CollectionEnumerator == null)
             {

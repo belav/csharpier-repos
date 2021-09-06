@@ -34,9 +34,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             public bool Equals(LocalNameAndScope other)
             {
-                return ScopeStart == other.ScopeStart &&
-                    ScopeEnd == other.ScopeEnd &&
-                    string.Equals(LocalName, other.LocalName, StringComparison.Ordinal);
+                return ScopeStart == other.ScopeStart
+                    && ScopeEnd == other.ScopeEnd
+                    && string.Equals(LocalName, other.LocalName, StringComparison.Ordinal);
             }
 
             public override bool Equals(object obj)
@@ -46,9 +46,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             public override int GetHashCode()
             {
-                return Hash.Combine(
-                    Hash.Combine(ScopeStart, ScopeEnd),
-                    LocalName.GetHashCode());
+                return Hash.Combine(Hash.Combine(ScopeStart, ScopeEnd), LocalName.GetHashCode());
             }
         }
 
@@ -63,8 +61,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             int ilOffset,
-            bool isVisualBasicMethod)
-        {
+            bool isVisualBasicMethod
+        ) {
             // no symbols
             if (symReader == null)
             {
@@ -73,7 +71,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             if (symReader is ISymUnmanagedReader5 symReader5)
             {
-                int hr = symReader5.GetPortableDebugMetadataByVersion(methodVersion, out byte* metadata, out int size);
+                int hr = symReader5.GetPortableDebugMetadataByVersion(
+                    methodVersion,
+                    out byte* metadata,
+                    out int size
+                );
                 ThrowExceptionForHR(hr);
 
                 if (hr == S_OK)
@@ -81,7 +83,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     var mdReader = new MetadataReader(metadata, size);
                     try
                     {
-                        return ReadFromPortable(mdReader, methodToken, ilOffset, symbolProvider, isVisualBasicMethod);
+                        return ReadFromPortable(
+                            mdReader,
+                            methodToken,
+                            ilOffset,
+                            symbolProvider,
+                            isVisualBasicMethod
+                        );
                     }
                     catch (BadImageFormatException)
                     {
@@ -99,7 +107,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 var symMethod = symReader.GetMethodByVersion(methodToken, methodVersion);
                 if (symMethod != null)
                 {
-                    symMethod.GetAllScopes(allScopes, containingScopes, ilOffset, isScopeEndInclusive: isVisualBasicMethod);
+                    symMethod.GetAllScopes(
+                        allScopes,
+                        containingScopes,
+                        ilOffset,
+                        isScopeEndInclusive: isVisualBasicMethod
+                    );
                 }
 
                 ImmutableArray<ImmutableArray<ImportRecord>> importRecordGroups;
@@ -113,7 +126,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         methodToken,
                         methodVersion,
                         out importRecordGroups,
-                        out defaultNamespaceName);
+                        out defaultNamespaceName
+                    );
 
                     externAliasRecords = ImmutableArray<ExternAliasRecord>.Empty;
                 }
@@ -127,48 +141,75 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         methodToken,
                         methodVersion,
                         out importRecordGroups,
-                        out externAliasRecords);
+                        out externAliasRecords
+                    );
 
                     defaultNamespaceName = "";
                 }
 
                 // VB should read hoisted scope information from local variables:
-                var hoistedLocalScopeRecords = isVisualBasicMethod ? default : ImmutableArray<HoistedLocalScopeRecord>.Empty;
+                var hoistedLocalScopeRecords = isVisualBasicMethod
+                    ? default
+                    : ImmutableArray<HoistedLocalScopeRecord>.Empty;
 
                 ImmutableDictionary<int, ImmutableArray<bool>>? dynamicLocalMap = null;
                 ImmutableDictionary<string, ImmutableArray<bool>>? dynamicLocalConstantMap = null;
                 ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalMap = null;
-                ImmutableDictionary<LocalNameAndScope, ImmutableArray<string?>>? tupleLocalConstantMap = null;
+                ImmutableDictionary<
+                    LocalNameAndScope,
+                    ImmutableArray<string?>
+                >? tupleLocalConstantMap = null;
 
-                byte[]? customDebugInfo = GetCustomDebugInfoBytes(symReader, methodToken, methodVersion);
+                byte[]? customDebugInfo = GetCustomDebugInfoBytes(
+                    symReader,
+                    methodToken,
+                    methodVersion
+                );
                 if (customDebugInfo != null)
                 {
                     if (!isVisualBasicMethod)
                     {
-                        var customDebugInfoRecord = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(customDebugInfo, CustomDebugInfoKind.StateMachineHoistedLocalScopes);
+                        var customDebugInfoRecord =
+                            CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                                customDebugInfo,
+                                CustomDebugInfoKind.StateMachineHoistedLocalScopes
+                            );
                         if (!customDebugInfoRecord.IsDefault)
                         {
-                            hoistedLocalScopeRecords = CustomDebugInfoReader.DecodeStateMachineHoistedLocalScopesRecord(customDebugInfoRecord)
-                                .SelectAsArray(s => new HoistedLocalScopeRecord(s.StartOffset, s.Length));
+                            hoistedLocalScopeRecords =
+                                CustomDebugInfoReader.DecodeStateMachineHoistedLocalScopesRecord(
+                                        customDebugInfoRecord
+                                    )
+                                    .SelectAsArray(
+                                        s => new HoistedLocalScopeRecord(s.StartOffset, s.Length)
+                                    );
                         }
 
                         GetCSharpDynamicLocalInfo(
                             customDebugInfo,
                             allScopes,
                             out dynamicLocalMap,
-                            out dynamicLocalConstantMap);
+                            out dynamicLocalConstantMap
+                        );
                     }
 
                     GetTupleElementNamesLocalInfo(
                         customDebugInfo,
                         out tupleLocalMap,
-                        out tupleLocalConstantMap);
+                        out tupleLocalConstantMap
+                    );
                 }
 
                 var constantsBuilder = ArrayBuilder<TLocalSymbol>.GetInstance();
                 if (symbolProvider != null) // TODO
                 {
-                    GetConstants(constantsBuilder, symbolProvider, containingScopes, dynamicLocalConstantMap, tupleLocalConstantMap);
+                    GetConstants(
+                        constantsBuilder,
+                        symbolProvider,
+                        containingScopes,
+                        dynamicLocalConstantMap,
+                        tupleLocalConstantMap
+                    );
                 }
 
                 var reuseSpan = GetReuseSpan(allScopes, ilOffset, isVisualBasicMethod);
@@ -182,7 +223,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     defaultNamespaceName,
                     containingScopes.GetLocalNames(),
                     constantsBuilder.ToImmutableAndFree(),
-                    reuseSpan);
+                    reuseSpan
+                );
             }
             catch (InvalidOperationException)
             {
@@ -209,8 +251,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// <summary>
         /// Get the blob of binary custom debug info for a given method.
         /// </summary>
-        private static byte[]? GetCustomDebugInfoBytes(ISymUnmanagedReader3 reader, int methodToken, int methodVersion)
-        {
+        private static byte[]? GetCustomDebugInfoBytes(
+            ISymUnmanagedReader3 reader,
+            int methodToken,
+            int methodVersion
+        ) {
             try
             {
                 return reader.GetCustomDebugInfo(methodToken, methodVersion);
@@ -236,8 +281,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// 
         /// Returns empty array if there are no import strings for the specified method.
         /// </remarks>
-        private static ImmutableArray<string> GetImportStrings(ISymUnmanagedReader reader, int methodToken, int methodVersion)
-        {
+        private static ImmutableArray<string> GetImportStrings(
+            ISymUnmanagedReader reader,
+            int methodToken,
+            int methodVersion
+        ) {
             var method = reader.GetMethodByVersion(methodToken, methodVersion);
             if (method == null)
             {
@@ -282,16 +330,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             out ImmutableArray<ImmutableArray<ImportRecord>> importRecordGroups,
-            out ImmutableArray<ExternAliasRecord> externAliasRecords)
-        {
+            out ImmutableArray<ExternAliasRecord> externAliasRecords
+        ) {
             ImmutableArray<string> externAliasStrings;
 
             var importStringGroups = CustomDebugInfoReader.GetCSharpGroupedImportStrings(
                 methodToken,
                 KeyValuePairUtil.Create(reader, methodVersion),
-                getMethodCustomDebugInfo: (token, arg) => GetCustomDebugInfoBytes(arg.Key, token, arg.Value),
+                getMethodCustomDebugInfo: (token, arg) =>
+                    GetCustomDebugInfoBytes(arg.Key, token, arg.Value),
                 getMethodImportStrings: (token, arg) => GetImportStrings(arg.Key, token, arg.Value),
-                externAliasStrings: out externAliasStrings);
+                externAliasStrings: out externAliasStrings
+            );
 
             Debug.Assert(importStringGroups.IsDefault == externAliasStrings.IsDefault);
 
@@ -299,14 +349,23 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ExternAliasRecord>? externAliasRecordBuilder = null;
             if (!importStringGroups.IsDefault)
             {
-                importRecordGroupBuilder = ArrayBuilder<ImmutableArray<ImportRecord>>.GetInstance(importStringGroups.Length);
+                importRecordGroupBuilder = ArrayBuilder<ImmutableArray<ImportRecord>>.GetInstance(
+                    importStringGroups.Length
+                );
                 foreach (var importStringGroup in importStringGroups)
                 {
-                    var groupBuilder = ArrayBuilder<ImportRecord>.GetInstance(importStringGroup.Length);
+                    var groupBuilder = ArrayBuilder<ImportRecord>.GetInstance(
+                        importStringGroup.Length
+                    );
                     foreach (var importString in importStringGroup)
                     {
-                        if (TryCreateImportRecordFromCSharpImportString(symbolProvider, importString, out var record))
-                        {
+                        if (
+                            TryCreateImportRecordFromCSharpImportString(
+                                symbolProvider,
+                                importString,
+                                out var record
+                            )
+                        ) {
                             groupBuilder.Add(record);
                         }
                         else
@@ -319,23 +378,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
                 if (!externAliasStrings.IsDefault)
                 {
-                    externAliasRecordBuilder = ArrayBuilder<ExternAliasRecord>.GetInstance(externAliasStrings.Length);
+                    externAliasRecordBuilder = ArrayBuilder<ExternAliasRecord>.GetInstance(
+                        externAliasStrings.Length
+                    );
                     foreach (var externAliasString in externAliasStrings)
                     {
-                        if (!CustomDebugInfoReader.TryParseCSharpImportString(externAliasString, out var alias, out var externAlias, out var target, out var kind))
-                        {
+                        if (
+                            !CustomDebugInfoReader.TryParseCSharpImportString(
+                                externAliasString,
+                                out var alias,
+                                out var externAlias,
+                                out var target,
+                                out var kind
+                            )
+                        ) {
                             Debug.WriteLine($"Unable to parse extern alias '{externAliasString}'");
                             continue;
                         }
 
-                        Debug.Assert(kind == ImportTargetKind.Assembly, "Programmer error: How did a non-assembly get in the extern alias list?");
+                        Debug.Assert(
+                            kind == ImportTargetKind.Assembly,
+                            "Programmer error: How did a non-assembly get in the extern alias list?"
+                        );
                         RoslynDebug.Assert(alias != null); // Name of the extern alias.
                         RoslynDebug.Assert(externAlias == null); // Not used.
                         RoslynDebug.Assert(target != null); // Name of the target assembly.
 
                         if (!AssemblyIdentity.TryParseDisplayName(target, out var targetIdentity))
                         {
-                            Debug.WriteLine($"Unable to parse target of extern alias '{externAliasString}'");
+                            Debug.WriteLine(
+                                $"Unable to parse target of extern alias '{externAliasString}'"
+                            );
                             continue;
                         }
 
@@ -344,15 +417,29 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 }
             }
 
-            importRecordGroups = importRecordGroupBuilder?.ToImmutableAndFree() ?? ImmutableArray<ImmutableArray<ImportRecord>>.Empty;
-            externAliasRecords = externAliasRecordBuilder?.ToImmutableAndFree() ?? ImmutableArray<ExternAliasRecord>.Empty;
+            importRecordGroups =
+                importRecordGroupBuilder?.ToImmutableAndFree()
+                ?? ImmutableArray<ImmutableArray<ImportRecord>>.Empty;
+            externAliasRecords =
+                externAliasRecordBuilder?.ToImmutableAndFree()
+                ?? ImmutableArray<ExternAliasRecord>.Empty;
         }
 
-        private static bool TryCreateImportRecordFromCSharpImportString(EESymbolProvider<TTypeSymbol, TLocalSymbol> symbolProvider, string importString, out ImportRecord record)
-        {
+        private static bool TryCreateImportRecordFromCSharpImportString(
+            EESymbolProvider<TTypeSymbol, TLocalSymbol> symbolProvider,
+            string importString,
+            out ImportRecord record
+        ) {
             string? targetString;
-            if (CustomDebugInfoReader.TryParseCSharpImportString(importString, out var alias, out var externAlias, out targetString, out var targetKind))
-            {
+            if (
+                CustomDebugInfoReader.TryParseCSharpImportString(
+                    importString,
+                    out var alias,
+                    out var externAlias,
+                    out targetString,
+                    out var targetKind
+                )
+            ) {
                 ITypeSymbolInternal? type = null;
                 if (targetKind == ImportTargetKind.Type)
                 {
@@ -366,7 +453,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     targetType: type,
                     targetString: targetString,
                     targetAssembly: null,
-                    targetAssemblyAlias: externAlias);
+                    targetAssemblyAlias: externAlias
+                );
 
                 return true;
             }
@@ -380,12 +468,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             byte[] customDebugInfo,
             IEnumerable<ISymUnmanagedScope> scopes,
             out ImmutableDictionary<int, ImmutableArray<bool>>? dynamicLocalMap,
-            out ImmutableDictionary<string, ImmutableArray<bool>>? dynamicLocalConstantMap)
-        {
+            out ImmutableDictionary<string, ImmutableArray<bool>>? dynamicLocalConstantMap
+        ) {
             dynamicLocalMap = null;
             dynamicLocalConstantMap = null;
 
-            var record = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(customDebugInfo, CustomDebugInfoKind.DynamicLocals);
+            var record = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                customDebugInfo,
+                CustomDebugInfoKind.DynamicLocals
+            );
             if (record.IsDefault)
             {
                 return;
@@ -413,7 +504,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             // Drop locals with ambiguous names.
                             continue;
                         case LocalKind.ConstantName:
-                            constantBuilder ??= ImmutableDictionary.CreateBuilder<string, ImmutableArray<bool>>();
+                            constantBuilder ??= ImmutableDictionary.CreateBuilder<
+                                string,
+                                ImmutableArray<bool>
+                            >();
                             constantBuilder[name] = flags;
                             continue;
                     }
@@ -435,7 +529,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             localKindsByName.Free();
         }
 
-        private enum LocalKind { DuplicateName, VariableName, ConstantName }
+        private enum LocalKind
+        {
+            DuplicateName,
+            VariableName,
+            ConstantName
+        }
 
         /// <summary>
         /// Dynamic CDI encodes slot id and name for each dynamic local variable, but only name for a constant. 
@@ -445,11 +544,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// 
         /// This method returns the local kind (variable, constant, or duplicate) based on name.
         /// </summary>
-        private static void GetLocalKindByName(Dictionary<string, LocalKind> localNames, IEnumerable<ISymUnmanagedScope> scopes)
-        {
+        private static void GetLocalKindByName(
+            Dictionary<string, LocalKind> localNames,
+            IEnumerable<ISymUnmanagedScope> scopes
+        ) {
             Debug.Assert(localNames.Count == 0);
 
-            var localSlot0 = scopes.SelectMany(scope => scope.GetLocals()).FirstOrDefault(variable => variable.GetSlot() == 0);
+            var localSlot0 = scopes.SelectMany(scope => scope.GetLocals())
+                .FirstOrDefault(variable => variable.GetSlot() == 0);
             if (localSlot0 != null)
             {
                 localNames.Add(localSlot0.GetName(), LocalKind.VariableName);
@@ -460,7 +562,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 foreach (var constant in scope.GetConstants())
                 {
                     string name = constant.GetName();
-                    localNames[name] = localNames.ContainsKey(name) ? LocalKind.DuplicateName : LocalKind.ConstantName;
+                    localNames[name] = localNames.ContainsKey(name)
+                        ? LocalKind.DuplicateName
+                        : LocalKind.ConstantName;
                 }
             }
         }
@@ -468,19 +572,28 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static void GetTupleElementNamesLocalInfo(
             byte[] customDebugInfo,
             out ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalMap,
-            out ImmutableDictionary<LocalNameAndScope, ImmutableArray<string?>>? tupleLocalConstantMap)
-        {
+            out ImmutableDictionary<
+                LocalNameAndScope,
+                ImmutableArray<string?>
+            >? tupleLocalConstantMap
+        ) {
             tupleLocalMap = null;
             tupleLocalConstantMap = null;
 
-            var record = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(customDebugInfo, CustomDebugInfoKind.TupleElementNames);
+            var record = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                customDebugInfo,
+                CustomDebugInfoKind.TupleElementNames
+            );
             if (record.IsDefault)
             {
                 return;
             }
 
             ImmutableDictionary<int, ImmutableArray<string?>>.Builder? localBuilder = null;
-            ImmutableDictionary<LocalNameAndScope, ImmutableArray<string?>>.Builder? constantBuilder = null;
+            ImmutableDictionary<
+                LocalNameAndScope,
+                ImmutableArray<string?>
+            >.Builder? constantBuilder = null;
 
             var tuples = CustomDebugInfoReader.DecodeTupleElementNamesRecord(record);
             foreach (var tuple in tuples)
@@ -489,13 +602,23 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 var elementNames = tuple.ElementNames;
                 if (slotIndex < 0)
                 {
-                    constantBuilder ??= ImmutableDictionary.CreateBuilder<LocalNameAndScope, ImmutableArray<string?>>();
-                    var localAndScope = new LocalNameAndScope(tuple.LocalName, tuple.ScopeStart, tuple.ScopeEnd);
+                    constantBuilder ??= ImmutableDictionary.CreateBuilder<
+                        LocalNameAndScope,
+                        ImmutableArray<string?>
+                    >();
+                    var localAndScope = new LocalNameAndScope(
+                        tuple.LocalName,
+                        tuple.ScopeStart,
+                        tuple.ScopeEnd
+                    );
                     constantBuilder[localAndScope] = elementNames;
                 }
                 else
                 {
-                    localBuilder ??= ImmutableDictionary.CreateBuilder<int, ImmutableArray<string?>>();
+                    localBuilder ??= ImmutableDictionary.CreateBuilder<
+                        int,
+                        ImmutableArray<string?>
+                    >();
                     localBuilder[slotIndex] = elementNames;
                 }
             }
@@ -516,14 +639,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             out ImmutableArray<ImmutableArray<ImportRecord>> importRecordGroups,
-            out string defaultNamespaceName)
-        {
+            out string defaultNamespaceName
+        ) {
             importRecordGroups = ImmutableArray<ImmutableArray<ImportRecord>>.Empty;
 
             var importStrings = CustomDebugInfoReader.GetVisualBasicImportStrings(
                 methodToken,
                 KeyValuePairUtil.Create(reader, methodVersion),
-                (token, arg) => GetImportStrings(arg.Key, token, arg.Value));
+                (token, arg) => GetImportStrings(arg.Key, token, arg.Value)
+            );
 
             if (importStrings.IsDefault)
             {
@@ -544,8 +668,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     string? alias = null;
                     string? target = null;
 
-                    if (!CustomDebugInfoReader.TryParseVisualBasicImportString(importString, out alias, out target, out var kind, out var scope))
-                    {
+                    if (
+                        !CustomDebugInfoReader.TryParseVisualBasicImportString(
+                            importString,
+                            out alias,
+                            out target,
+                            out var kind,
+                            out var scope
+                        )
+                    ) {
                         Debug.WriteLine($"Unable to parse import string '{importString}'");
                         continue;
                     }
@@ -569,15 +700,23 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     ImportRecord importRecord;
                     VBImportScopeKind scope = 0;
 
-                    if (TryCreateImportRecordFromVisualBasicImportString(importString, out importRecord, out scope))
-                    {
+                    if (
+                        TryCreateImportRecordFromVisualBasicImportString(
+                            importString,
+                            out importRecord,
+                            out scope
+                        )
+                    ) {
                         if (scope == VBImportScopeKind.Project)
                         {
                             projectLevelImportRecords.Add(importRecord);
                         }
                         else
                         {
-                            Debug.Assert(scope == VBImportScopeKind.File || scope == VBImportScopeKind.Unspecified);
+                            Debug.Assert(
+                                scope == VBImportScopeKind.File
+                                    || scope == VBImportScopeKind.Unspecified
+                            );
                             fileLevelImportRecords.Add(importRecord);
                         }
                     }
@@ -590,25 +729,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             importRecordGroups = ImmutableArray.Create(
                 fileLevelImportRecords.ToImmutableAndFree(),
-                projectLevelImportRecords.ToImmutableAndFree());
+                projectLevelImportRecords.ToImmutableAndFree()
+            );
 
             defaultNamespaceName = lazyDefaultNamespaceName ?? "";
         }
 
-        private static bool TryCreateImportRecordFromVisualBasicImportString(string importString, out ImportRecord record, out VBImportScopeKind scope)
-        {
+        private static bool TryCreateImportRecordFromVisualBasicImportString(
+            string importString,
+            out ImportRecord record,
+            out VBImportScopeKind scope
+        ) {
             ImportTargetKind targetKind;
             string alias;
             string targetString;
-            if (CustomDebugInfoReader.TryParseVisualBasicImportString(importString, out alias, out targetString, out targetKind, out scope))
-            {
+            if (
+                CustomDebugInfoReader.TryParseVisualBasicImportString(
+                    importString,
+                    out alias,
+                    out targetString,
+                    out targetKind,
+                    out scope
+                )
+            ) {
                 record = new ImportRecord(
                     targetKind: targetKind,
                     alias: alias,
                     targetType: null,
                     targetString: targetString,
                     targetAssembly: null,
-                    targetAssemblyAlias: null);
+                    targetAssemblyAlias: null
+                );
 
                 return true;
             }
@@ -617,12 +768,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return false;
         }
 
-        private static ILSpan GetReuseSpan(ArrayBuilder<ISymUnmanagedScope> scopes, int ilOffset, bool isEndInclusive)
-        {
+        private static ILSpan GetReuseSpan(
+            ArrayBuilder<ISymUnmanagedScope> scopes,
+            int ilOffset,
+            bool isEndInclusive
+        ) {
             return MethodContextReuseConstraints.CalculateReuseSpan(
                 ilOffset,
                 ILSpan.MaxValue,
-                scopes.Select(scope => new ILSpan((uint)scope.GetStartOffset(), (uint)(scope.GetEndOffset() + (isEndInclusive ? 1 : 0)))));
+                scopes.Select(
+                    scope =>
+                        new ILSpan(
+                            (uint)scope.GetStartOffset(),
+                            (uint)(scope.GetEndOffset() + (isEndInclusive ? 1 : 0))
+                        )
+                )
+            );
         }
 
         private static void GetConstants(
@@ -630,8 +791,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             EESymbolProvider<TTypeSymbol, TLocalSymbol> symbolProvider,
             ArrayBuilder<ISymUnmanagedScope> scopes,
             ImmutableDictionary<string, ImmutableArray<bool>>? dynamicLocalConstantMap,
-            ImmutableDictionary<LocalNameAndScope, ImmutableArray<string?>>? tupleLocalConstantMap)
-        {
+            ImmutableDictionary<LocalNameAndScope, ImmutableArray<string?>>? tupleLocalConstantMap
+        ) {
             foreach (var scope in scopes)
             {
                 foreach (var constant in scope.GetConstants())
@@ -645,9 +806,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     {
                         type = symbolProvider.DecodeLocalVariableType(signature);
                     }
-                    catch (Exception e) when (e is UnsupportedSignatureContent || e is BadImageFormatException)
+                    catch (Exception e)
+                        when (e is UnsupportedSignatureContent || e is BadImageFormatException)
                     {
-                        // ignore 
+                        // ignore
                         continue;
                     }
 
@@ -675,10 +837,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     {
                         int scopeStart = scope.GetStartOffset();
                         int scopeEnd = scope.GetEndOffset();
-                        tupleLocalConstantMap.TryGetValue(new LocalNameAndScope(name, scopeStart, scopeEnd), out tupleElementNames);
+                        tupleLocalConstantMap.TryGetValue(
+                            new LocalNameAndScope(name, scopeStart, scopeEnd),
+                            out tupleElementNames
+                        );
                     }
 
-                    builder.Add(symbolProvider.GetLocalConstant(name, type, constantValue, dynamicFlags, tupleElementNames));
+                    builder.Add(
+                        symbolProvider.GetLocalConstant(
+                            name,
+                            type,
+                            constantValue,
+                            dynamicFlags,
+                            tupleElementNames
+                        )
+                    );
                 }
             }
         }
@@ -695,8 +868,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<string> names,
             ImmutableArray<LocalInfo<TTypeSymbol>> localInfo,
             ImmutableDictionary<int, ImmutableArray<bool>>? dynamicLocalMap,
-            ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalConstantMap)
-        {
+            ImmutableDictionary<int, ImmutableArray<string?>>? tupleLocalConstantMap
+        ) {
             if (localInfo.Length == 0)
             {
                 // When debugging a .dmp without a heap, localInfo will be empty although
@@ -720,7 +893,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 var tupleElementNames = default(ImmutableArray<string?>);
                 tupleLocalConstantMap?.TryGetValue(i, out tupleElementNames);
 
-                builder.Add(symbolProvider.GetLocalVariable(name, i, localInfo[i], dynamicFlags, tupleElementNames));
+                builder.Add(
+                    symbolProvider.GetLocalVariable(
+                        name,
+                        i,
+                        localInfo[i],
+                        dynamicFlags,
+                        tupleElementNames
+                    )
+                );
             }
         }
     }

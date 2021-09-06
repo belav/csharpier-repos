@@ -24,6 +24,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// </returns>
         Task OnResourceExecutionAsync(
             ResourceExecutingContext context,
-            ResourceExecutionDelegate next);
+            ResourceExecutionDelegate next
+        );
     }
 }

@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Converters
             }
 
             DataSet dataSet = (DataSet)value;
-            DefaultContractResolver? resolver = serializer.ContractResolver as DefaultContractResolver;
+            DefaultContractResolver? resolver =
+                serializer.ContractResolver as DefaultContractResolver;
 
             DataTableConverter converter = new DataTableConverter();
 
@@ -58,7 +59,11 @@ namespace Newtonsoft.Json.Converters
 
             foreach (DataTable table in dataSet.Tables)
             {
-                writer.WritePropertyName((resolver != null) ? resolver.GetResolvedPropertyName(table.TableName) : table.TableName);
+                writer.WritePropertyName(
+                    (resolver != null)
+                        ? resolver.GetResolvedPropertyName(table.TableName)
+                        : table.TableName
+                );
 
                 converter.WriteJson(writer, table, serializer);
             }
@@ -74,17 +79,22 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-        {
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        ) {
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;
             }
 
             // handle typed datasets
-            DataSet ds = (objectType == typeof(DataSet))
-                ? new DataSet()
-                : (DataSet)Activator.CreateInstance(objectType);
+            DataSet ds =
+                (objectType == typeof(DataSet))
+                    ? new DataSet()
+                    : (DataSet)Activator.CreateInstance(objectType);
 
             DataTableConverter converter = new DataTableConverter();
 

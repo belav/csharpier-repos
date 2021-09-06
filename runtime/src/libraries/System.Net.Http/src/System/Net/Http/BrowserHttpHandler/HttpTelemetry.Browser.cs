@@ -7,16 +7,10 @@ namespace System.Net.Http
 {
     internal sealed partial class HttpTelemetry
     {
-        public void Http11RequestLeftQueue(double timeOnQueueMilliseconds)
-        {
-        }
+        public void Http11RequestLeftQueue(double timeOnQueueMilliseconds) { }
 
-        public void Http20RequestLeftQueue(double timeOnQueueMilliseconds)
-        {
-        }
+        public void Http20RequestLeftQueue(double timeOnQueueMilliseconds) { }
 
-        protected override void OnEventCommand(EventCommandEventArgs command)
-        {
-        }
+        protected override void OnEventCommand(EventCommandEventArgs command) { }
     }
 }

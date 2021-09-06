@@ -64,7 +64,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void CreatePropertyModelName()
         {
             // Act
-            string fullChildName = ModelBinderUtil.CreatePropertyModelName("parentName", "childName");
+            string fullChildName = ModelBinderUtil.CreatePropertyModelName(
+                "parentName",
+                "childName"
+            );
 
             // Assert
             Assert.Equal("parentName.childName", fullChildName);
@@ -84,7 +87,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetPossibleBinderInstance_Match_ReturnsBinder()
         {
             // Act
-            IExtensibleModelBinder binder = ModelBinderUtil.GetPossibleBinderInstance(typeof(List<int>), typeof(List<>), typeof(SampleGenericBinder<>));
+            IExtensibleModelBinder binder = ModelBinderUtil.GetPossibleBinderInstance(
+                typeof(List<int>),
+                typeof(List<>),
+                typeof(SampleGenericBinder<>)
+            );
 
             // Assert
             Assert.IsType<SampleGenericBinder<int>>(binder);
@@ -94,7 +101,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetPossibleBinderInstance_NoMatch_ReturnsNull()
         {
             // Act
-            IExtensibleModelBinder binder = ModelBinderUtil.GetPossibleBinderInstance(typeof(ArraySegment<int>), typeof(List<>), typeof(SampleGenericBinder<>));
+            IExtensibleModelBinder binder = ModelBinderUtil.GetPossibleBinderInstance(
+                typeof(ArraySegment<int>),
+                typeof(List<>),
+                typeof(SampleGenericBinder<>)
+            );
 
             // Assert
             Assert.Null(binder);
@@ -218,7 +229,6 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act
             ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), false);
-
             // Assert
             // Nothing to do - if we got this far without throwing, the test succeeded
         }
@@ -234,7 +244,6 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act
             ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true);
-
             // Assert
             // Nothing to do - if we got this far without throwing, the test succeeded
         }
@@ -244,7 +253,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { ModelBinderUtil.ValidateBindingContext(null, typeof(string), true); }, "bindingContext");
+                delegate
+                {
+                    ModelBinderUtil.ValidateBindingContext(null, typeof(string), true);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]
@@ -259,9 +273,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true); },
-                "The binding context has a Model of type 'System.Int32', but this binder can only operate on models of type 'System.String'." + Environment.NewLine
-              + "Parameter name: bindingContext");
+                delegate
+                {
+                    ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true);
+                },
+                "The binding context has a Model of type 'System.Int32', but this binder can only operate on models of type 'System.String'."
+                    + Environment.NewLine
+                    + "Parameter name: bindingContext"
+            );
         }
 
         [Fact]
@@ -275,9 +294,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), false); },
-                "The binding context has a null Model, but this binder requires a non-null model of type 'System.String'." + Environment.NewLine
-              + "Parameter name: bindingContext");
+                delegate
+                {
+                    ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), false);
+                },
+                "The binding context has a null Model, but this binder requires a non-null model of type 'System.String'."
+                    + Environment.NewLine
+                    + "Parameter name: bindingContext"
+            );
         }
 
         [Fact]
@@ -288,9 +312,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true); },
-                "The binding context cannot have a null ModelMetadata." + Environment.NewLine
-              + "Parameter name: bindingContext");
+                delegate
+                {
+                    ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true);
+                },
+                "The binding context cannot have a null ModelMetadata."
+                    + Environment.NewLine
+                    + "Parameter name: bindingContext"
+            );
         }
 
         [Fact]
@@ -304,9 +333,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true); },
-                "The binding context has a ModelType of 'System.Object', but this binder can only operate on models of type 'System.String'." + Environment.NewLine
-              + "Parameter name: bindingContext");
+                delegate
+                {
+                    ModelBinderUtil.ValidateBindingContext(bindingContext, typeof(string), true);
+                },
+                "The binding context has a ModelType of 'System.Object', but this binder can only operate on models of type 'System.String'."
+                    + Environment.NewLine
+                    + "Parameter name: bindingContext"
+            );
         }
 
         private static ModelMetadata GetMetadata(Type modelType)
@@ -317,8 +351,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class SampleGenericBinder<T> : IExtensibleModelBinder
         {
-            public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public bool BindModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 throw new NotImplementedException();
             }
         }

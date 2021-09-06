@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Path may be <see cref="string.Empty"/> if not available.
         /// </remarks>
-        public string Path { get { return _path; } }
+        public string Path
+        {
+            get { return _path; }
+        }
 
         /// <summary>
         /// True if the <see cref="Path"/> is a mapped path.
@@ -32,29 +35,35 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// A mapped path is a path specified in source via <c>#line</c> (C#) or <c>#ExternalSource</c> (VB) directives.
         /// </remarks>
-        public bool HasMappedPath { get { return _hasMappedPath; } }
+        public bool HasMappedPath
+        {
+            get { return _hasMappedPath; }
+        }
 
         /// <summary>
         /// Gets the <see cref="LinePosition"/> of the start of the span.
         /// </summary>
         /// <returns></returns>
-        public LinePosition StartLinePosition { get { return _span.Start; } }
+        public LinePosition StartLinePosition
+        {
+            get { return _span.Start; }
+        }
 
         /// <summary>
         /// Gets the <see cref="LinePosition"/> of the end of the span.
         /// </summary>
         /// <returns></returns>
-        public LinePosition EndLinePosition { get { return _span.End; } }
+        public LinePosition EndLinePosition
+        {
+            get { return _span.End; }
+        }
 
         /// <summary>
         /// Gets the span.
         /// </summary>
         public LinePositionSpan Span
         {
-            get
-            {
-                return _span;
-            }
+            get { return _span; }
         }
 
         /// <summary>
@@ -65,9 +74,7 @@ namespace Microsoft.CodeAnalysis
         /// <param name="end">The end line position.</param>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
         public FileLinePositionSpan(string path, LinePosition start, LinePosition end)
-            : this(path, new LinePositionSpan(start, end))
-        {
-        }
+            : this(path, new LinePositionSpan(start, end)) { }
 
         /// <summary>
         /// Initializes the <see cref="FileLinePositionSpan"/> instance.

@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing
         /// <summary>
         /// A default instance of the <see cref="RouteValueEqualityComparer"/>.
         /// </summary>
-        public static readonly RouteValueEqualityComparer Default = new RouteValueEqualityComparer();
+        public static readonly RouteValueEqualityComparer Default =
+            new RouteValueEqualityComparer();
 
         /// <inheritdoc />
         public new bool Equals(object? x, object? y)

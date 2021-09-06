@@ -29,7 +29,6 @@ namespace System.Net.Security
             }
 
             return new GenericIdentity(name, protocol);
-
         }
 
         internal static string QueryContextAssociatedName(SafeDeleteContext? securityContext)
@@ -41,8 +40,11 @@ namespace System.Net.Security
         {
             if (impersonationLevel != TokenImpersonationLevel.Identification)
             {
-                throw new ArgumentOutOfRangeException(nameof(impersonationLevel), impersonationLevel.ToString(),
-                    SR.net_auth_supported_impl_levels);
+                throw new ArgumentOutOfRangeException(
+                    nameof(impersonationLevel),
+                    impersonationLevel.ToString(),
+                    SR.net_auth_supported_impl_levels
+                );
             }
         }
     }

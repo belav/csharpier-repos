@@ -16,7 +16,8 @@ namespace System.Dynamic.Utils
             .Select(i => i.GetGenericTypeDefinition())
             .ToArray();
 
-        public static Type GetNonNullableType(this Type type) => IsNullableType(type) ? type.GetGenericArguments()[0] : type;
+        public static Type GetNonNullableType(this Type type) =>
+            IsNullableType(type) ? type.GetGenericArguments()[0] : type;
 
         public static Type GetNullableType(this Type type)
         {
@@ -30,19 +31,26 @@ namespace System.Dynamic.Utils
         }
 
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(Nullable<>))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The Nullable<T> ctor will be preserved by the DynamicDependency.")]
-        public static ConstructorInfo GetNullableConstructor(Type nullableType, Type nonNullableType)
-        {
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The Nullable<T> ctor will be preserved by the DynamicDependency."
+        )]
+        public static ConstructorInfo GetNullableConstructor(
+            Type nullableType,
+            Type nonNullableType
+        ) {
             Debug.Assert(nullableType.IsNullableType());
             Debug.Assert(!nonNullableType.IsNullableType() && nonNullableType.IsValueType);
 
             return nullableType.GetConstructor(new Type[] { nonNullableType })!;
         }
 
-        public static bool IsNullableType(this Type type) => type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        public static bool IsNullableType(this Type type) =>
+            type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 
-        public static bool IsNullableOrReferenceType(this Type type) => !type.IsValueType || IsNullableType(type);
+        public static bool IsNullableOrReferenceType(this Type type) =>
+            !type.IsValueType || IsNullableType(type);
 
         public static bool IsBool(this Type type) => GetNonNullableType(type) == typeof(bool);
 
@@ -247,9 +255,12 @@ namespace System.Dynamic.Utils
             // (and their corresponding nullable types) are legal except for
             // nonbool==>bool and nonbool==>bool? which are only legal from
             // bool-backed enums.
-            return IsConvertible(source) && IsConvertible(dest)
-                   && (GetNonNullableType(dest) != typeof(bool)
-                   || source.IsEnum && source.GetEnumUnderlyingType() == typeof(bool));
+            return IsConvertible(source)
+                && IsConvertible(dest)
+                && (
+                    GetNonNullableType(dest) != typeof(bool)
+                    || source.IsEnum && source.GetEnumUnderlyingType() == typeof(bool)
+                );
         }
 
         public static bool HasReferenceConversionTo(this Type source, Type dest)
@@ -294,11 +305,15 @@ namespace System.Dynamic.Utils
             // Object conversion handled by assignable above.
             Debug.Assert(source != typeof(object) && dest != typeof(object));
 
-            return (source.IsArray || dest.IsArray) && StrictHasReferenceConversionTo(source, dest, true);
+            return (source.IsArray || dest.IsArray)
+                && StrictHasReferenceConversionTo(source, dest, true);
         }
 
-        private static bool StrictHasReferenceConversionTo(this Type source, Type dest, bool skipNonArray)
-        {
+        private static bool StrictHasReferenceConversionTo(
+            this Type source,
+            Type dest,
+            bool skipNonArray
+        ) {
             // HasReferenceConversionTo was both too strict and too lax. It was too strict in prohibiting
             // some valid conversions involving arrays, and too lax in allowing casts between interfaces
             // and sealed classes that don't implement them. Unfortunately fixing the lax cases would be
@@ -342,8 +357,10 @@ namespace System.Dynamic.Utils
                 {
                     if (dest.IsArray)
                     {
-                        if (source.GetArrayRank() != dest.GetArrayRank() || source.IsSZArray != dest.IsSZArray)
-                        {
+                        if (
+                            source.GetArrayRank() != dest.GetArrayRank()
+                            || source.IsSZArray != dest.IsSZArray
+                        ) {
                             return false;
                         }
 
@@ -392,7 +409,11 @@ namespace System.Dynamic.Utils
             {
                 if (AreEquivalent(destGen, iface))
                 {
-                    return StrictHasReferenceConversionTo(source.GetElementType()!, destParams[0], false);
+                    return StrictHasReferenceConversionTo(
+                        source.GetElementType()!,
+                        destParams[0],
+                        false
+                    );
                 }
             }
 
@@ -419,7 +440,11 @@ namespace System.Dynamic.Utils
             {
                 if (AreEquivalent(sourceGen, iface))
                 {
-                    return StrictHasReferenceConversionTo(sourceParams[0], dest.GetElementType()!, false);
+                    return StrictHasReferenceConversionTo(
+                        sourceParams[0],
+                        dest.GetElementType()!,
+                        false
+                    );
                 }
             }
 
@@ -464,8 +489,12 @@ namespace System.Dynamic.Utils
             //   o If type parameter Xi is declared to be contravariant ("in") then either Si must be identical to Ti,
             //     or Si and Ti must both be reference types.
 
-            if (!IsDelegate(source) || !IsDelegate(dest) || !source.IsGenericType || !dest.IsGenericType)
-            {
+            if (
+                !IsDelegate(source)
+                || !IsDelegate(dest)
+                || !source.IsGenericType
+                || !dest.IsGenericType
+            ) {
                 return false;
             }
 
@@ -515,8 +544,10 @@ namespace System.Dynamic.Utils
                         return false;
                     }
                 }
-                else if (IsContravariant(genericParameter) && (sourceArgument.IsValueType || destArgument.IsValueType))
-                {
+                else if (
+                    IsContravariant(genericParameter)
+                    && (sourceArgument.IsValueType || destArgument.IsValueType)
+                ) {
                     return false;
                 }
             }
@@ -566,8 +597,10 @@ namespace System.Dynamic.Utils
             // If we have two reference types and one is assignable to the
             // other then we can do reference equality.
 
-            return left.IsInterface || right.IsInterface || AreReferenceAssignable(left, right)
-                   || AreReferenceAssignable(right, left);
+            return left.IsInterface
+                || right.IsInterface
+                || AreReferenceAssignable(left, right)
+                || AreReferenceAssignable(right, left);
         }
 
         public static bool HasBuiltInEqualityOperator(Type left, Type right)
@@ -625,7 +658,9 @@ namespace System.Dynamic.Utils
             Type nnConvType = GetNonNullableType(convertToType);
 
             // try exact match on types
-            MethodInfo[] eMethods = nnExprType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            MethodInfo[] eMethods = nnExprType.GetMethods(
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+            );
 
             MethodInfo? method = FindConversionOperator(eMethods, convertFrom, convertToType);
             if (method != null)
@@ -633,7 +668,9 @@ namespace System.Dynamic.Utils
                 return method;
             }
 
-            MethodInfo[] cMethods = nnConvType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            MethodInfo[] cMethods = nnConvType.GetMethods(
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+            );
 
             method = FindConversionOperator(cMethods, convertFrom, convertToType);
             if (method != null)
@@ -648,17 +685,22 @@ namespace System.Dynamic.Utils
 
             // try lifted conversion
             return FindConversionOperator(eMethods, nnExprType, nnConvType)
-                   ?? FindConversionOperator(cMethods, nnExprType, nnConvType)
-                   ?? FindConversionOperator(eMethods, nnExprType, convertToType)
-                   ?? FindConversionOperator(cMethods, nnExprType, convertToType);
+                ?? FindConversionOperator(cMethods, nnExprType, nnConvType)
+                ?? FindConversionOperator(eMethods, nnExprType, convertToType)
+                ?? FindConversionOperator(cMethods, nnExprType, convertToType);
         }
 
-        private static MethodInfo? FindConversionOperator(MethodInfo[] methods, Type? typeFrom, Type? typeTo)
-        {
+        private static MethodInfo? FindConversionOperator(
+            MethodInfo[] methods,
+            Type? typeFrom,
+            Type? typeTo
+        ) {
             foreach (MethodInfo mi in methods)
             {
-                if ((mi.Name == "op_Implicit" || mi.Name == "op_Explicit") && AreEquivalent(mi.ReturnType, typeTo))
-                {
+                if (
+                    (mi.Name == "op_Implicit" || mi.Name == "op_Explicit")
+                    && AreEquivalent(mi.ReturnType, typeTo)
+                ) {
                     ParameterInfo[] pis = mi.GetParametersCached();
                     if (pis.Length == 1 && AreEquivalent(pis[0].ParameterType, typeFrom))
                     {
@@ -688,7 +730,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.Byte:
                     switch (tcDest)
@@ -704,7 +745,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.Int16:
                     switch (tcDest)
@@ -716,7 +756,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.UInt16:
                     switch (tcDest)
@@ -730,7 +769,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.Int32:
                     switch (tcDest)
@@ -741,7 +779,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.UInt32:
                     switch (tcDest)
@@ -753,7 +790,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
@@ -764,7 +800,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.Char:
                     switch (tcDest)
@@ -779,7 +814,6 @@ namespace System.Dynamic.Utils
                         case TypeCode.Decimal:
                             return true;
                     }
-
                     break;
                 case TypeCode.Single:
                     return tcDest == TypeCode.Double;
@@ -792,17 +826,25 @@ namespace System.Dynamic.Utils
             destination.IsAssignableFrom(source);
 
         private static bool IsImplicitBoxingConversion(Type source, Type destination) =>
-            source.IsValueType && (destination == typeof(object) || destination == typeof(ValueType)) || source.IsEnum && destination == typeof(Enum);
+            source.IsValueType
+                && (destination == typeof(object) || destination == typeof(ValueType))
+            || source.IsEnum && destination == typeof(Enum);
 
         private static bool IsImplicitNullableConversion(Type source, Type destination) =>
-            IsNullableType(destination) && IsImplicitlyConvertibleTo(GetNonNullableType(source), GetNonNullableType(destination));
+            IsNullableType(destination)
+            && IsImplicitlyConvertibleTo(
+                GetNonNullableType(source),
+                GetNonNullableType(destination)
+            );
 
         public static Type? FindGenericType(Type definition, Type? type)
         {
             while (type is not null && type != typeof(object))
             {
-                if (type.IsConstructedGenericType && AreEquivalent(type.GetGenericTypeDefinition(), definition))
-                {
+                if (
+                    type.IsConstructedGenericType
+                    && AreEquivalent(type.GetGenericTypeDefinition(), definition)
+                ) {
                     return type;
                 }
 
@@ -849,7 +891,8 @@ namespace System.Dynamic.Utils
             return null;
         }
 
-        public static Type GetNonRefType(this Type type) => type.IsByRef ? type.GetElementType()! : type;
+        public static Type GetNonRefType(this Type type) =>
+            type.IsByRef ? type.GetElementType()! : type;
 
         public static bool AreEquivalent(Type? t1, Type? t2) => t1 != null && t1.IsEquivalentTo(t2);
 
@@ -867,10 +910,15 @@ namespace System.Dynamic.Utils
         public static bool IsSameOrSubclass(Type type, Type subType) =>
             AreEquivalent(type, subType) || subType.IsSubclassOf(type);
 
-        public static void ValidateType(Type type, string? paramName) => ValidateType(type, paramName, false, false);
+        public static void ValidateType(Type type, string? paramName) =>
+            ValidateType(type, paramName, false, false);
 
-        public static void ValidateType(Type type, string? paramName, bool allowByRef, bool allowPointer)
-        {
+        public static void ValidateType(
+            Type type,
+            string? paramName,
+            bool allowByRef,
+            bool allowPointer
+        ) {
             if (ValidateType(type, paramName, -1))
             {
                 if (!allowByRef && type.IsByRef)
@@ -902,17 +950,24 @@ namespace System.Dynamic.Utils
             return true;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The trimmer will never remove the Invoke method from delegates.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The trimmer will never remove the Invoke method from delegates."
+        )]
         public static MethodInfo GetInvokeMethod(this Type delegateType)
         {
             Debug.Assert(typeof(Delegate).IsAssignableFrom(delegateType));
-            return delegateType.GetMethod("Invoke", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)!;
+            return delegateType.GetMethod(
+                "Invoke",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            )!;
         }
 
 #if FEATURE_COMPILE
 
-        internal static bool IsUnsigned(this Type type) => IsUnsigned(GetNonNullableType(type).GetTypeCode());
+        internal static bool IsUnsigned(this Type type) =>
+            IsUnsigned(GetNonNullableType(type).GetTypeCode());
 
         internal static bool IsUnsigned(this TypeCode typeCode)
         {
@@ -930,7 +985,8 @@ namespace System.Dynamic.Utils
             }
         }
 
-        internal static bool IsFloatingPoint(this Type type) => IsFloatingPoint(GetNonNullableType(type).GetTypeCode());
+        internal static bool IsFloatingPoint(this Type type) =>
+            IsFloatingPoint(GetNonNullableType(type).GetTypeCode());
 
         internal static bool IsFloatingPoint(this TypeCode typeCode)
         {
@@ -947,24 +1003,33 @@ namespace System.Dynamic.Utils
 
 #endif
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The Array 'Get' method is dynamically constructed and is not included in IL. It is not subject to trimming.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The Array 'Get' method is dynamically constructed and is not included in IL. It is not subject to trimming."
+        )]
         public static MethodInfo GetArrayGetMethod(Type arrayType)
         {
             Debug.Assert(arrayType.IsArray);
             return arrayType.GetMethod("Get", BindingFlags.Public | BindingFlags.Instance)!;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The Array 'Set' method is dynamically constructed and is not included in IL. It is not subject to trimming.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The Array 'Set' method is dynamically constructed and is not included in IL. It is not subject to trimming."
+        )]
         public static MethodInfo GetArraySetMethod(Type arrayType)
         {
             Debug.Assert(arrayType.IsArray);
             return arrayType.GetMethod("Set", BindingFlags.Public | BindingFlags.Instance)!;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The Array 'Address' method is dynamically constructed and is not included in IL. It is not subject to trimming.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The Array 'Address' method is dynamically constructed and is not included in IL. It is not subject to trimming."
+        )]
         public static MethodInfo GetArrayAddressMethod(Type arrayType)
         {
             Debug.Assert(arrayType.IsArray);

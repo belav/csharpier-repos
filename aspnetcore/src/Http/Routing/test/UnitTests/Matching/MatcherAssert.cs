@@ -12,18 +12,25 @@ namespace Microsoft.AspNetCore.Routing.Matching
 {
     internal static class MatcherAssert
     {
-        public static void AssertRouteValuesEqual(object expectedValues, RouteValueDictionary actualValues)
-        {
+        public static void AssertRouteValuesEqual(
+            object expectedValues,
+            RouteValueDictionary actualValues
+        ) {
             AssertRouteValuesEqual(new RouteValueDictionary(expectedValues), actualValues);
         }
 
-        public static void AssertRouteValuesEqual(RouteValueDictionary expectedValues, RouteValueDictionary actualValues)
-        {
-            if (expectedValues.Count != actualValues.Count ||
-                !expectedValues.OrderBy(kvp => kvp.Key).SequenceEqual(actualValues.OrderBy(kvp => kvp.Key)))
-            {
+        public static void AssertRouteValuesEqual(
+            RouteValueDictionary expectedValues,
+            RouteValueDictionary actualValues
+        ) {
+            if (
+                expectedValues.Count != actualValues.Count
+                || !expectedValues.OrderBy(kvp => kvp.Key)
+                    .SequenceEqual(actualValues.OrderBy(kvp => kvp.Key))
+            ) {
                 throw new XunitException(
-                    $"Expected values:{FormatRouteValues(expectedValues)} Actual values: {FormatRouteValues(actualValues)}.");
+                    $"Expected values:{FormatRouteValues(expectedValues)} Actual values: {FormatRouteValues(actualValues)}."
+                );
             }
         }
 
@@ -32,8 +39,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             AssertMatch(httpContext, expected, new RouteValueDictionary());
         }
 
-        public static void AssertMatch(HttpContext httpContext, Endpoint expected, bool ignoreValues)
-        {
+        public static void AssertMatch(
+            HttpContext httpContext,
+            Endpoint expected,
+            bool ignoreValues
+        ) {
             AssertMatch(httpContext, expected, new RouteValueDictionary(), ignoreValues);
         }
 
@@ -42,8 +52,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
             AssertMatch(httpContext, expected, new RouteValueDictionary(values));
         }
 
-        public static void AssertMatch(HttpContext httpContext, Endpoint expected, string[] keys, string[] values)
-        {
+        public static void AssertMatch(
+            HttpContext httpContext,
+            Endpoint expected,
+            string[] keys,
+            string[] values
+        ) {
             keys = keys ?? Array.Empty<string>();
             values = values ?? Array.Empty<string>();
 
@@ -60,11 +74,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
             HttpContext httpContext,
             Endpoint expected,
             RouteValueDictionary values,
-            bool ignoreValues = false)
-        {
+            bool ignoreValues = false
+        ) {
             if (httpContext.GetEndpoint() == null)
             {
-                throw new XunitException($"Was expected to match '{expected.DisplayName}' but did not match.");
+                throw new XunitException(
+                    $"Was expected to match '{expected.DisplayName}' but did not match."
+                );
             }
 
             var actualValues = httpContext.Request.RouteValues;
@@ -77,20 +93,24 @@ namespace Microsoft.AspNetCore.Routing.Matching
             if (!object.ReferenceEquals(expected, httpContext.GetEndpoint()))
             {
                 throw new XunitException(
-                    $"Was expected to match '{expected.DisplayName}' but matched " +
-                    $"'{httpContext.GetEndpoint().DisplayName}' with values: {FormatRouteValues(actualValues)}.");
+                    $"Was expected to match '{expected.DisplayName}' but matched "
+                        + $"'{httpContext.GetEndpoint().DisplayName}' with values: {FormatRouteValues(actualValues)}."
+                );
             }
 
             if (!ignoreValues)
             {
                 // Note: this comparison is intended for unit testing, and is stricter than necessary to make tests
                 // more precise. Route value comparisons in product code are more flexible than a simple .Equals.
-                if (values.Count != actualValues.Count ||
-                    !values.OrderBy(kvp => kvp.Key).SequenceEqual(actualValues.OrderBy(kvp => kvp.Key)))
-                {
+                if (
+                    values.Count != actualValues.Count
+                    || !values.OrderBy(kvp => kvp.Key)
+                        .SequenceEqual(actualValues.OrderBy(kvp => kvp.Key))
+                ) {
                     throw new XunitException(
-                        $"Was expected to match '{expected.DisplayName}' with values {FormatRouteValues(values)} but matched " +
-                        $"values: {FormatRouteValues(actualValues)}.");
+                        $"Was expected to match '{expected.DisplayName}' with values {FormatRouteValues(values)} but matched "
+                            + $"values: {FormatRouteValues(actualValues)}."
+                    );
                 }
             }
         }
@@ -100,14 +120,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
             if (httpContext.GetEndpoint() != null)
             {
                 throw new XunitException(
-                    $"Was expected not to match '{httpContext.GetEndpoint().DisplayName}' " +
-                    $"but matched with values: {FormatRouteValues(httpContext.Request.RouteValues)}.");
+                    $"Was expected not to match '{httpContext.GetEndpoint().DisplayName}' "
+                        + $"but matched with values: {FormatRouteValues(httpContext.Request.RouteValues)}."
+                );
             }
         }
 
         private static string FormatRouteValues(RouteValueDictionary values)
         {
-            return values == null ? "{}" : "{" + string.Join(", ", values.Select(kvp => $"{kvp.Key} = '{kvp.Value}'")) + "}";
+            return values == null
+                ? "{}"
+                : "{" + string.Join(", ", values.Select(kvp => $"{kvp.Key} = '{kvp.Value}'")) + "}";
         }
     }
 }

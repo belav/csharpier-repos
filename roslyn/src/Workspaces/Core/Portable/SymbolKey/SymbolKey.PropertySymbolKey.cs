@@ -17,23 +17,31 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteParameterTypesArray(symbol.OriginalDefinition.Parameters);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
                 var metadataName = reader.ReadString();
-                var containingTypeResolution = reader.ReadSymbolKey(out var containingTypeFailureReason);
+                var containingTypeResolution = reader.ReadSymbolKey(
+                    out var containingTypeFailureReason
+                );
                 var isIndexer = reader.ReadBoolean();
                 using var refKinds = reader.ReadRefKindArray();
-                using var parameterTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(out var parameterTypesFailureReason);
+                using var parameterTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(
+                    out var parameterTypesFailureReason
+                );
 
                 if (containingTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(PropertySymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(PropertySymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
                     return default;
                 }
 
                 if (parameterTypesFailureReason != null)
                 {
-                    failureReason = $"({nameof(PropertySymbolKey)} {nameof(parameterTypes)} failed -> {parameterTypesFailureReason})";
+                    failureReason =
+                        $"({nameof(PropertySymbolKey)} {nameof(parameterTypes)} failed -> {parameterTypesFailureReason})";
                     return default;
                 }
 
@@ -43,21 +51,32 @@ namespace Microsoft.CodeAnalysis
                     return default;
                 }
 
-                using var properties = GetMembersOfNamedType<IPropertySymbol>(containingTypeResolution, metadataName: null);
+                using var properties = GetMembersOfNamedType<IPropertySymbol>(
+                    containingTypeResolution,
+                    metadataName: null
+                );
                 using var result = PooledArrayBuilder<IPropertySymbol>.GetInstance();
                 foreach (var property in properties)
                 {
-                    if (property.Parameters.Length == refKinds.Count &&
-                        property.MetadataName == metadataName &&
-                        property.IsIndexer == isIndexer &&
-                        ParameterRefKindsMatch(property.OriginalDefinition.Parameters, refKinds) &&
-                        reader.ParameterTypesMatch(property.OriginalDefinition.Parameters, parameterTypes))
-                    {
+                    if (
+                        property.Parameters.Length == refKinds.Count
+                        && property.MetadataName == metadataName
+                        && property.IsIndexer == isIndexer
+                        && ParameterRefKindsMatch(property.OriginalDefinition.Parameters, refKinds)
+                        && reader.ParameterTypesMatch(
+                            property.OriginalDefinition.Parameters,
+                            parameterTypes
+                        )
+                    ) {
                         result.AddIfNotNull(property);
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(PropertySymbolKey)} '{metadataName}' not found)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(PropertySymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
         }
     }

@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly RangeVariableMap _rangeVariableMap;
             private readonly MultiDictionary<string, RangeVariableSymbol> _parameterMap;
 
-            public WithQueryLambdaParametersBinder(LambdaSymbol lambdaSymbol, RangeVariableMap rangeVariableMap, Binder next)
-                : base(lambdaSymbol, next)
+            public WithQueryLambdaParametersBinder(
+                LambdaSymbol lambdaSymbol,
+                RangeVariableMap rangeVariableMap,
+                Binder next
+            ) : base(lambdaSymbol, next)
             {
                 _rangeVariableMap = rangeVariableMap;
                 _parameterMap = new MultiDictionary<string, RangeVariableSymbol>();
@@ -34,8 +37,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            protected override BoundExpression BindRangeVariable(SimpleNameSyntax node, RangeVariableSymbol qv, BindingDiagnosticBag diagnostics)
-            {
+            protected override BoundExpression BindRangeVariable(
+                SimpleNameSyntax node,
+                RangeVariableSymbol qv,
+                BindingDiagnosticBag diagnostics
+            ) {
                 Debug.Assert(!qv.IsTransparent);
 
                 BoundExpression translation;
@@ -53,7 +59,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // if the query variable map for this variable is non empty, we always start with the current
                         // lambda's first parameter, which is a transparent identifier.
-                        Debug.Assert(base.lambdaSymbol.Parameters[0].Name.StartsWith(transparentIdentifierPrefix, StringComparison.Ordinal));
+                        Debug.Assert(
+                            base.lambdaSymbol.Parameters[0].Name.StartsWith(
+                                transparentIdentifierPrefix,
+                                StringComparison.Ordinal
+                            )
+                        );
                         translation = new BoundParameter(node, base.lambdaSymbol.Parameters[0]);
                         for (int i = path.Length - 1; i >= 0; i--)
                         {
@@ -69,14 +80,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return base.BindRangeVariable(node, qv, diagnostics);
             }
 
-            private BoundExpression SelectField(SimpleNameSyntax node, BoundExpression receiver, string name, BindingDiagnosticBag diagnostics)
-            {
+            private BoundExpression SelectField(
+                SimpleNameSyntax node,
+                BoundExpression receiver,
+                string name,
+                BindingDiagnosticBag diagnostics
+            ) {
                 var receiverType = receiver.Type as NamedTypeSymbol;
                 if ((object)receiverType == null || !receiverType.IsAnonymousType)
                 {
                     // We only construct transparent query variables using anonymous types, so if we're trying to navigate through
                     // some other type, we must have some query API where the types don't match up as expected.
-                    var info = new CSDiagnosticInfo(ErrorCode.ERR_UnsupportedTransparentIdentifierAccess, name, receiver.ExpressionSymbol ?? receiverType);
+                    var info = new CSDiagnosticInfo(
+                        ErrorCode.ERR_UnsupportedTransparentIdentifierAccess,
+                        name,
+                        receiver.ExpressionSymbol ?? receiverType
+                    );
                     if (receiver.Type?.IsErrorType() != true)
                     {
                         Error(diagnostics, info, node);
@@ -87,23 +106,53 @@ namespace Microsoft.CodeAnalysis.CSharp
                         LookupResultKind.Empty,
                         ImmutableArray.Create<Symbol>(receiver.ExpressionSymbol),
                         ImmutableArray.Create(BindToTypeForErrorRecovery(receiver)),
-                        new ExtendedErrorTypeSymbol(this.Compilation, "", 0, info));
+                        new ExtendedErrorTypeSymbol(this.Compilation, "", 0, info)
+                    );
                 }
 
                 LookupResult lookupResult = LookupResult.GetInstance();
                 LookupOptions options = LookupOptions.MustBeInstance;
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(diagnostics);
-                LookupMembersWithFallback(lookupResult, receiver.Type, name, 0, ref useSiteInfo, basesBeingResolved: null, options: options);
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
+                    diagnostics
+                );
+                LookupMembersWithFallback(
+                    lookupResult,
+                    receiver.Type,
+                    name,
+                    0,
+                    ref useSiteInfo,
+                    basesBeingResolved: null,
+                    options: options
+                );
                 diagnostics.Add(node, useSiteInfo);
 
-                var result = BindMemberOfType(node, node, name, 0, indexed: false, receiver, default(SeparatedSyntaxList<TypeSyntax>), default(ImmutableArray<TypeWithAnnotations>), lookupResult, BoundMethodGroupFlags.None, diagnostics);
+                var result = BindMemberOfType(
+                    node,
+                    node,
+                    name,
+                    0,
+                    indexed: false,
+                    receiver,
+                    default(SeparatedSyntaxList<TypeSyntax>),
+                    default(ImmutableArray<TypeWithAnnotations>),
+                    lookupResult,
+                    BoundMethodGroupFlags.None,
+                    diagnostics
+                );
                 lookupResult.Free();
                 return result;
             }
 
             internal override void LookupSymbolsInSingleBinder(
-                LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
-            {
+                LookupResult result,
+                string name,
+                int arity,
+                ConsList<TypeSymbol> basesBeingResolved,
+                LookupOptions options,
+                Binder originalBinder,
+                bool diagnose,
+                ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+            ) {
                 Debug.Assert(result.IsClear);
 
                 if ((options & LookupOptions.NamespaceAliasesOnly) != 0)
@@ -113,12 +162,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 foreach (var rangeVariable in _parameterMap[name])
                 {
-                    result.MergeEqual(originalBinder.CheckViability(rangeVariable, arity, options, null, diagnose, ref useSiteInfo));
+                    result.MergeEqual(
+                        originalBinder.CheckViability(
+                            rangeVariable,
+                            arity,
+                            options,
+                            null,
+                            diagnose,
+                            ref useSiteInfo
+                        )
+                    );
                 }
             }
 
-            protected override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
-            {
+            protected override void AddLookupSymbolsInfoInSingleBinder(
+                LookupSymbolsInfo result,
+                LookupOptions options,
+                Binder originalBinder
+            ) {
                 if (options.CanConsiderMembers())
                 {
                     foreach (var kvp in _parameterMap)

@@ -11,11 +11,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 {
     internal class TestRazorReferenceManager : RazorReferenceManager
     {
-        public TestRazorReferenceManager() 
+        public TestRazorReferenceManager()
             : base(
                 new ApplicationPartManager(),
-                Options.Create(new MvcRazorRuntimeCompilationOptions()))
-        {
+                Options.Create(new MvcRazorRuntimeCompilationOptions())
+            ) {
             CompilationReferences = Array.Empty<MetadataReference>();
         }
 

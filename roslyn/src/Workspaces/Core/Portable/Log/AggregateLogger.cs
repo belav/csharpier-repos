@@ -39,8 +39,11 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             return new AggregateLogger(set.ToImmutableArray());
         }
 
-        public static ILogger AddOrReplace(ILogger newLogger, ILogger oldLogger, Func<ILogger, bool> predicate)
-        {
+        public static ILogger AddOrReplace(
+            ILogger newLogger,
+            ILogger oldLogger,
+            Func<ILogger, bool> predicate
+        ) {
             if (newLogger == null)
             {
                 return oldLogger;
@@ -108,11 +111,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             return new AggregateLogger(set.ToImmutableArray());
         }
 
-        private AggregateLogger(ImmutableArray<ILogger> loggers)
-            => _loggers = loggers;
+        private AggregateLogger(ImmutableArray<ILogger> loggers) => _loggers = loggers;
 
-        public bool IsEnabled(FunctionId functionId)
-            => true;
+        public bool IsEnabled(FunctionId functionId) => true;
 
         public void Log(FunctionId functionId, LogMessage logMessage)
         {
@@ -128,8 +129,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             }
         }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-        {
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            CancellationToken cancellationToken
+        ) {
             for (var i = 0; i < _loggers.Length; i++)
             {
                 var logger = _loggers[i];
@@ -142,8 +147,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             }
         }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-        {
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            int delta,
+            CancellationToken cancellationToken
+        ) {
             for (var i = 0; i < _loggers.Length; i++)
             {
                 var logger = _loggers[i];

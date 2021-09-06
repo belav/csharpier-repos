@@ -42,72 +42,99 @@ namespace AutoMapper.IntegrationTests.Net4
 
         public class Context : DbContext
         {
-            public Context()
-                : base()
+            public Context() : base()
             {
                 Database.SetInitializer<Context>(new DatabaseInitializer());
             }
 
             public DbSet<Customer> Customers { get; set; }
             public DbSet<Address> Addresses { get; set; }
-
         }
 
         public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Address = new Address
+                context.Customers.Add(
+                    new Customer
                     {
                         Id = 1,
-                        Street = "123 Anywhere",
-                        City = "Austin",
-                        State = "TX"
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Address = new Address
+                        {
+                            Id = 1,
+                            Street = "123 Anywhere",
+                            City = "Austin",
+                            State = "TX"
+                        }
                     }
-                });
+                );
 
                 base.Seed(context);
             }
         }
-        
-        public class AutoMapperQueryableExtensionsThrowsNullReferenceExceptionSpec : AutoMapperSpecBase
+
+        public class AutoMapperQueryableExtensionsThrowsNullReferenceExceptionSpec
+            : AutoMapperSpecBase
         {
-            protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Customer, CustomerViewModel>()
-                    .ForMember(x => x.FullAddress,
-                        o => o.MapFrom(c => c.Address.Street + ", " + c.Address.City + " " + c.Address.State));
-            });
+            protected override MapperConfiguration Configuration =>
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateProjection<Customer, CustomerViewModel>()
+                            .ForMember(
+                                x => x.FullAddress,
+                                o =>
+                                    o.MapFrom(
+                                        c =>
+                                            c.Address.Street
+                                            + ", "
+                                            + c.Address.City
+                                            + " "
+                                            + c.Address.State
+                                    )
+                            );
+                    }
+                );
 
             [Fact]
             public void can_map_with_projection()
             {
                 using (var context = new Context())
                 {
-                    var customerVms = context.Customers.Select(c => new CustomerViewModel
-                    {
-                        FirstName = c.FirstName,
-                        LastName = c.LastName,
-                        FullAddress = c.Address.Street + ", " + c.Address.City + " " + c.Address.State
-                    }).ToList();
+                    var customerVms = context.Customers.Select(
+                            c =>
+                                new CustomerViewModel
+                                {
+                                    FirstName = c.FirstName,
+                                    LastName = c.LastName,
+                                    FullAddress =
+                                        c.Address.Street
+                                        + ", "
+                                        + c.Address.City
+                                        + " "
+                                        + c.Address.State
+                                }
+                        )
+                        .ToList();
 
-                    customerVms.ForEach(x =>
-                    {
-                        x.FullAddress.ShouldNotBeNull();
-                        x.FullAddress.ShouldNotBeEmpty();
-                    });
+                    customerVms.ForEach(
+                        x =>
+                        {
+                            x.FullAddress.ShouldNotBeNull();
+                            x.FullAddress.ShouldNotBeEmpty();
+                        }
+                    );
 
                     customerVms = ProjectTo<CustomerViewModel>(context.Customers).ToList();
-                    customerVms.ForEach(x =>
-                    {
-                        x.FullAddress.ShouldNotBeNull();
-                        x.FullAddress.ShouldNotBeEmpty();
-                    });
+                    customerVms.ForEach(
+                        x =>
+                        {
+                            x.FullAddress.ShouldNotBeNull();
+                            x.FullAddress.ShouldNotBeEmpty();
+                        }
+                    );
                 }
             }
         }

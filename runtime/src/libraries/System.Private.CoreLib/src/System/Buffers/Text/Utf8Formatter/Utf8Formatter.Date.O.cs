@@ -14,8 +14,12 @@ namespace System.Buffers.Text
         //   2017-06-12T05:30:45.7680000Z           (Z is short for "+00:00" but also distinguishes DateTimeKind.Utc from DateTimeKind.Local)
         //   2017-06-12T05:30:45.7680000            (interpreted as local time wrt to current time zone)
         //
-        private static bool TryFormatDateTimeO(DateTime value, TimeSpan offset, Span<byte> destination, out int bytesWritten)
-        {
+        private static bool TryFormatDateTimeO(
+            DateTime value,
+            TimeSpan offset,
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             const int MinimumBytesNeeded = 27;
 
             int bytesRequired = MinimumBytesNeeded;
@@ -48,7 +52,9 @@ namespace System.Buffers.Text
             bytesWritten = bytesRequired;
 
             // Hoist most of the bounds checks on buffer.
-            { _ = destination[MinimumBytesNeeded - 1]; }
+            {
+                _ = destination[MinimumBytesNeeded - 1];
+            }
 
             value.GetDate(out int year, out int month, out int day);
             value.GetTimePrecise(out int hour, out int minute, out int second, out int ticks);

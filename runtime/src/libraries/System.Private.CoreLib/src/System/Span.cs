@@ -81,7 +81,9 @@ namespace System
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 #endif
 
-            _pointer = new ByReference<T>(ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), start));
+            _pointer = new ByReference<T>(
+                ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), start)
+            );
             _length = length;
         }
 
@@ -256,7 +258,8 @@ namespace System
         {
             // Ensure that the native code has just one forward branch that is predicted-not-taken.
             ref T ret = ref Unsafe.NullRef<T>();
-            if (_length != 0) ret = ref _pointer.Value;
+            if (_length != 0)
+                ret = ref _pointer.Value;
             return ref ret;
         }
 
@@ -268,11 +271,17 @@ namespace System
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<T, IntPtr>(ref _pointer.Value), (nuint)_length * (nuint)(Unsafe.SizeOf<T>() / sizeof(nuint)));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<T, IntPtr>(ref _pointer.Value),
+                    (nuint)_length * (nuint)(Unsafe.SizeOf<T>() / sizeof(nuint))
+                );
             }
             else
             {
-                SpanHelpers.ClearWithoutReferences(ref Unsafe.As<T, byte>(ref _pointer.Value), (nuint)_length * (nuint)Unsafe.SizeOf<T>());
+                SpanHelpers.ClearWithoutReferences(
+                    ref Unsafe.As<T, byte>(ref _pointer.Value),
+                    (nuint)_length * (nuint)Unsafe.SizeOf<T>()
+                );
             }
         }
 
@@ -294,7 +303,11 @@ namespace System
                     // The runtime eventually calls memset, which can efficiently support large buffers.
                     // We don't need to check IsReferenceOrContainsReferences because no references
                     // can ever be stored in types this small.
-                    Unsafe.InitBlockUnaligned(ref Unsafe.As<T, byte>(ref _pointer.Value), Unsafe.As<T, byte>(ref value), (uint)_length);
+                    Unsafe.InitBlockUnaligned(
+                        ref Unsafe.As<T, byte>(ref _pointer.Value),
+                        Unsafe.As<T, byte>(ref value),
+                        (uint)_length
+                    );
                 }
             }
             else
@@ -354,8 +367,8 @@ namespace System
         /// this does *not* check to see if the *contents* are equal.
         /// </summary>
         public static bool operator ==(Span<T> left, Span<T> right) =>
-            left._length == right._length &&
-            Unsafe.AreSame<T>(ref left._pointer.Value, ref right._pointer.Value);
+            left._length == right._length
+            && Unsafe.AreSame<T>(ref left._pointer.Value, ref right._pointer.Value);
 
         /// <summary>
         /// Defines an implicit conversion of a <see cref="Span{T}"/> to a <see cref="ReadOnlySpan{T}"/>
@@ -371,7 +384,9 @@ namespace System
         {
             if (typeof(T) == typeof(char))
             {
-                return new string(new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _pointer.Value), _length));
+                return new string(
+                    new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _pointer.Value), _length)
+                );
             }
             return $"System.Span<{typeof(T).Name}>[{_length}]";
         }
@@ -432,7 +447,11 @@ namespace System
                 return Array.Empty<T>();
 
             var destination = new T[_length];
-            Buffer.Memmove(ref MemoryMarshal.GetArrayDataReference(destination), ref _pointer.Value, (nuint)_length);
+            Buffer.Memmove(
+                ref MemoryMarshal.GetArrayDataReference(destination),
+                ref _pointer.Value,
+                (nuint)_length
+            );
             return destination;
         }
     }

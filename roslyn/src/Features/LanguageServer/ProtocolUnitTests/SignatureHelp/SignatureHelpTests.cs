@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
         public async Task TestGetSignatureHelpAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -39,22 +39,42 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
             {
                 ActiveParameter = 0,
                 ActiveSignature = 0,
-                Signatures = new LSP.SignatureInformation[] { CreateSignatureInformation("int A.M2(string a)", "M2 is a method.", "a", "") }
+                Signatures = new LSP.SignatureInformation[]
+                {
+                    CreateSignatureInformation("int A.M2(string a)", "M2 is a method.", "a", "")
+                }
             };
 
-            var results = await RunGetSignatureHelpAsync(testLspServer, locations["caret"].Single());
+            var results = await RunGetSignatureHelpAsync(
+                testLspServer,
+                locations["caret"].Single()
+            );
             AssertJsonEquals(expected, results);
         }
 
-        private static async Task<LSP.SignatureHelp?> RunGetSignatureHelpAsync(TestLspServer testLspServer, LSP.Location caret)
-        {
-            return await testLspServer.ExecuteRequestAsync<LSP.TextDocumentPositionParams, LSP.SignatureHelp?>(
+        private static async Task<LSP.SignatureHelp?> RunGetSignatureHelpAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        ) {
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.TextDocumentPositionParams,
+                LSP.SignatureHelp?
+            >(
                 LSP.Methods.TextDocumentSignatureHelpName,
-                CreateTextDocumentPositionParams(caret), new LSP.ClientCapabilities(), null, CancellationToken.None);
+                CreateTextDocumentPositionParams(caret),
+                new LSP.ClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
         }
 
-        private static LSP.SignatureInformation CreateSignatureInformation(string methodLabal, string methodDocumentation, string parameterLabel, string parameterDocumentation)
-            => new LSP.SignatureInformation()
+        private static LSP.SignatureInformation CreateSignatureInformation(
+            string methodLabal,
+            string methodDocumentation,
+            string parameterLabel,
+            string parameterDocumentation
+        ) =>
+            new LSP.SignatureInformation()
             {
                 Documentation = CreateMarkupContent(LSP.MarkupKind.PlainText, methodDocumentation),
                 Label = methodLabal,
@@ -64,8 +84,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
                 }
             };
 
-        private static LSP.ParameterInformation CreateParameterInformation(string parameter, string documentation)
-            => new LSP.ParameterInformation()
+        private static LSP.ParameterInformation CreateParameterInformation(
+            string parameter,
+            string documentation
+        ) =>
+            new LSP.ParameterInformation()
             {
                 Documentation = CreateMarkupContent(LSP.MarkupKind.PlainText, documentation),
                 Label = parameter

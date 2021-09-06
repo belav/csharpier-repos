@@ -14,19 +14,21 @@ namespace Internal.Cryptography.Pal
     {
         private const int NamedKeyUsageFlagsCount = 9;
 
-        private static readonly Dictionary<string, X509KeyUsageFlags> s_keyUsages =
-            new Dictionary<string, X509KeyUsageFlags>(NamedKeyUsageFlagsCount, StringComparer.OrdinalIgnoreCase)
-            {
-                { "DigitalSignature", X509KeyUsageFlags.DigitalSignature },
-                { "NonRepudiation", X509KeyUsageFlags.NonRepudiation },
-                { "KeyEncipherment", X509KeyUsageFlags.KeyEncipherment },
-                { "DataEncipherment", X509KeyUsageFlags.DataEncipherment },
-                { "KeyAgreement", X509KeyUsageFlags.KeyAgreement },
-                { "KeyCertSign", X509KeyUsageFlags.KeyCertSign },
-                { "CrlSign", X509KeyUsageFlags.CrlSign },
-                { "EncipherOnly", X509KeyUsageFlags.EncipherOnly },
-                { "DecipherOnly", X509KeyUsageFlags.DecipherOnly },
-            };
+        private static readonly Dictionary<string, X509KeyUsageFlags> s_keyUsages = new Dictionary<
+            string,
+            X509KeyUsageFlags
+        >(NamedKeyUsageFlagsCount, StringComparer.OrdinalIgnoreCase)
+        {
+            { "DigitalSignature", X509KeyUsageFlags.DigitalSignature },
+            { "NonRepudiation", X509KeyUsageFlags.NonRepudiation },
+            { "KeyEncipherment", X509KeyUsageFlags.KeyEncipherment },
+            { "DataEncipherment", X509KeyUsageFlags.DataEncipherment },
+            { "KeyAgreement", X509KeyUsageFlags.KeyAgreement },
+            { "KeyCertSign", X509KeyUsageFlags.KeyCertSign },
+            { "CrlSign", X509KeyUsageFlags.CrlSign },
+            { "EncipherOnly", X509KeyUsageFlags.EncipherOnly },
+            { "DecipherOnly", X509KeyUsageFlags.DecipherOnly },
+        };
 
 #if DEBUG
         static FindPal()
@@ -39,8 +41,8 @@ namespace Internal.Cryptography.Pal
             X509Certificate2Collection coll,
             X509FindType findType,
             object findValue,
-            bool validOnly)
-        {
+            bool validOnly
+        ) {
             X509Certificate2Collection results = new X509Certificate2Collection();
 
             using (IFindPal findPal = OpenPal(coll, results, validOnly))
@@ -133,7 +135,11 @@ namespace Internal.Cryptography.Pal
                     }
                     case X509FindType.FindByExtension:
                     {
-                        string oidValue = ConfirmedOidValue(findPal, findValue, OidGroup.ExtensionOrAttribute);
+                        string oidValue = ConfirmedOidValue(
+                            findPal,
+                            findValue,
+                            OidGroup.ExtensionOrAttribute
+                        );
                         findPal.FindByExtension(oidValue);
                         break;
                     }
@@ -167,8 +173,11 @@ namespace Internal.Cryptography.Pal
             return (T)findValue;
         }
 
-        private static string ConfirmedOidValue(IFindPal findPal, object findValue, OidGroup oidGroup)
-        {
+        private static string ConfirmedOidValue(
+            IFindPal findPal,
+            object findValue,
+            OidGroup oidGroup
+        ) {
             string maybeOid = ConfirmedCast<string>(findValue);
 
             if (maybeOid.Length == 0)

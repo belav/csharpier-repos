@@ -13,12 +13,10 @@ namespace Microsoft.CodeAnalysis
         /// Indicates a regular source <see cref="CodeAnalysis.Document"/>
         /// </summary>
         Document,
-
         /// <summary>
         /// Indicates an <see cref="CodeAnalysis.AdditionalDocument"/>
         /// </summary>
         AdditionalDocument,
-
         /// <summary>
         /// Indicates an <see cref="CodeAnalysis.AnalyzerConfigDocument"/>
         /// </summary>

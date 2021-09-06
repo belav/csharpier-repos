@@ -21,8 +21,10 @@ namespace System.Security.Cryptography
 
         internal static bool IsECNamedCurve(string algorithm)
         {
-            return (algorithm == CngAlgorithm.ECDiffieHellman.Algorithm ||
-                algorithm == CngAlgorithm.ECDsa.Algorithm);
+            return (
+                algorithm == CngAlgorithm.ECDiffieHellman.Algorithm
+                || algorithm == CngAlgorithm.ECDsa.Algorithm
+            );
         }
 
         internal string? GetCurveName(out string? oidValue)
@@ -30,7 +32,10 @@ namespace System.Security.Cryptography
             if (IsECNamedCurve())
             {
                 oidValue = null;
-                return _keyHandle.GetPropertyAsString(KeyPropertyName.ECCCurveName, CngPropertyOptions.None);
+                return _keyHandle.GetPropertyAsString(
+                    KeyPropertyName.ECCCurveName,
+                    CngPropertyOptions.None
+                );
             }
 
             // Use hard-coded values (for use with pre-Win10 APIs)
@@ -41,29 +46,34 @@ namespace System.Security.Cryptography
         {
             string algorithm = Algorithm.Algorithm;
 
-            if (algorithm == CngAlgorithm.ECDiffieHellmanP256.Algorithm ||
-                algorithm == CngAlgorithm.ECDsaP256.Algorithm)
-            {
+            if (
+                algorithm == CngAlgorithm.ECDiffieHellmanP256.Algorithm
+                || algorithm == CngAlgorithm.ECDsaP256.Algorithm
+            ) {
                 oidValue = Oids.secp256r1;
                 return "nistP256";
             }
 
-            if (algorithm == CngAlgorithm.ECDiffieHellmanP384.Algorithm ||
-                algorithm == CngAlgorithm.ECDsaP384.Algorithm)
-            {
+            if (
+                algorithm == CngAlgorithm.ECDiffieHellmanP384.Algorithm
+                || algorithm == CngAlgorithm.ECDsaP384.Algorithm
+            ) {
                 oidValue = Oids.secp384r1;
                 return "nistP384";
             }
 
-            if (algorithm == CngAlgorithm.ECDiffieHellmanP521.Algorithm ||
-                algorithm == CngAlgorithm.ECDsaP521.Algorithm)
-            {
+            if (
+                algorithm == CngAlgorithm.ECDiffieHellmanP521.Algorithm
+                || algorithm == CngAlgorithm.ECDsaP521.Algorithm
+            ) {
                 oidValue = Oids.secp521r1;
                 return "nistP521";
             }
 
             Debug.Fail($"Unknown curve {algorithm}");
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, algorithm));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_CurveNotSupported, algorithm)
+            );
         }
 
         /// <summary>
@@ -75,8 +85,18 @@ namespace System.Security.Cryptography
             unsafe
             {
                 byte[] curveNameBytes = new byte[(curveName.Length + 1) * sizeof(char)]; // +1 to add trailing null
-                System.Text.Encoding.Unicode.GetBytes(curveName, 0, curveName.Length, curveNameBytes, 0);
-                return new CngProperty(KeyPropertyName.ECCCurveName, curveNameBytes, CngPropertyOptions.None);
+                System.Text.Encoding.Unicode.GetBytes(
+                    curveName,
+                    0,
+                    curveName.Length,
+                    curveNameBytes,
+                    0
+                );
+                return new CngProperty(
+                    KeyPropertyName.ECCCurveName,
+                    curveNameBytes,
+                    CngPropertyOptions.None
+                );
             }
         }
 
@@ -146,7 +166,9 @@ namespace System.Security.Cryptography
             if (curve.IsNamed)
             {
                 if (string.IsNullOrEmpty(curve.Oid.FriendlyName))
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value)
+                    );
 
                 // Map curve name to algorithm to support pre-Win10 curves
                 alg = algorithmResolver(curve.Oid.FriendlyName);
@@ -157,10 +179,14 @@ namespace System.Security.Cryptography
                 }
                 else
                 {
-                    if (alg == CngAlgorithm.ECDsaP256 || alg == CngAlgorithm.ECDiffieHellmanP256 ||
-                        alg == CngAlgorithm.ECDsaP384 || alg == CngAlgorithm.ECDiffieHellmanP384 ||
-                        alg == CngAlgorithm.ECDsaP521 || alg == CngAlgorithm.ECDiffieHellmanP521)
-                    {
+                    if (
+                        alg == CngAlgorithm.ECDsaP256
+                        || alg == CngAlgorithm.ECDiffieHellmanP256
+                        || alg == CngAlgorithm.ECDsaP384
+                        || alg == CngAlgorithm.ECDiffieHellmanP384
+                        || alg == CngAlgorithm.ECDsaP521
+                        || alg == CngAlgorithm.ECDiffieHellmanP521
+                    ) {
                         // No parameters required, the algorithm ID has everything built-in.
                     }
                     else
@@ -177,14 +203,17 @@ namespace System.Security.Cryptography
                 CngProperty prop = new CngProperty(
                     KeyPropertyName.ECCParameters,
                     parametersBlob,
-                    CngPropertyOptions.None);
+                    CngPropertyOptions.None
+                );
 
                 creationParameters.Parameters.Add(prop);
                 alg = algorithmResolver(null);
             }
             else
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString()));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString())
+                );
             }
 
             try
@@ -195,16 +224,21 @@ namespace System.Security.Cryptography
             {
                 Interop.NCrypt.ErrorCode errorCode = (Interop.NCrypt.ErrorCode)e.HResult;
 
-                if (errorCode == Interop.NCrypt.ErrorCode.NTE_INVALID_PARAMETER ||
-                    errorCode == Interop.NCrypt.ErrorCode.NTE_NOT_SUPPORTED)
-                {
-                    string? target = curve.IsNamed ? curve.Oid.FriendlyName : curve.CurveType.ToString();
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, target), e);
+                if (
+                    errorCode == Interop.NCrypt.ErrorCode.NTE_INVALID_PARAMETER
+                    || errorCode == Interop.NCrypt.ErrorCode.NTE_NOT_SUPPORTED
+                ) {
+                    string? target = curve.IsNamed
+                        ? curve.Oid.FriendlyName
+                        : curve.CurveType.ToString();
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CurveNotSupported, target),
+                        e
+                    );
                 }
 
                 throw;
             }
         }
-
     }
 }

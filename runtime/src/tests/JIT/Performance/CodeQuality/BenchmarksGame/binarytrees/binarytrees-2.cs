@@ -28,7 +28,8 @@ namespace BenchmarksGame
         public static int Main(String[] args)
         {
             int n = 0;
-            if (args.Length > 0) n = Int32.Parse(args[0]);
+            if (args.Length > 0)
+                n = Int32.Parse(args[0]);
 
             int check = Bench(n, true);
             int expected = 4398;
@@ -50,7 +51,8 @@ namespace BenchmarksGame
 
             int check = (TreeNode.bottomUpTree(stretchDepth)).itemCheck();
             int checkSum = check;
-            if (verbose) Console.WriteLine("stretch tree of depth {0}\t check: {1}", stretchDepth, check);
+            if (verbose)
+                Console.WriteLine("stretch tree of depth {0}\t check: {1}", stretchDepth, check);
 
             TreeNode longLivedTree = TreeNode.bottomUpTree(maxDepth);
 
@@ -66,7 +68,12 @@ namespace BenchmarksGame
                 checkSum += check;
 
                 if (verbose)
-                    Console.WriteLine("{0}\t trees of depth {1}\t check: {2}", iterations, depth, check);
+                    Console.WriteLine(
+                        "{0}\t trees of depth {1}\t check: {2}",
+                        iterations,
+                        depth,
+                        check
+                    );
             }
 
             check = longLivedTree.itemCheck();
@@ -78,12 +85,12 @@ namespace BenchmarksGame
             return checkSum;
         }
 
-
         struct TreeNode
         {
             class Next
             {
-                public TreeNode left, right;
+                public TreeNode left,
+                    right;
             }
 
             private Next next;
@@ -92,10 +99,7 @@ namespace BenchmarksGame
             {
                 if (depth > 0)
                 {
-                    return new TreeNode(
-                         bottomUpTree(depth - 1)
-                       , bottomUpTree(depth - 1)
-                       );
+                    return new TreeNode(bottomUpTree(depth - 1), bottomUpTree(depth - 1));
                 }
                 else
                 {
@@ -113,8 +117,10 @@ namespace BenchmarksGame
             internal int itemCheck()
             {
                 // if necessary deallocate here
-                if (next == null) return 1;
-                else return 1 + next.left.itemCheck() + next.right.itemCheck();
+                if (next == null)
+                    return 1;
+                else
+                    return 1 + next.left.itemCheck() + next.right.itemCheck();
             }
         }
     }

@@ -29,7 +29,7 @@ namespace System.Data
         internal bool _inCascade;
 
         private DataColumn? _lastChangedColumn; // last successfully changed column
-        private int _countColumnChange;        // number of columns changed during edit mode
+        private int _countColumnChange; // number of columns changed during edit mode
 
         private DataError? _error;
         private object? _element;
@@ -37,7 +37,9 @@ namespace System.Data
         private int _rbTreeNodeId; // if row is not detached, Id used for computing index in rows collection
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(ref s_objectTypeCount);
+        internal readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref s_objectTypeCount
+        );
 
         /// <summary>
         /// Initializes a new instance of the DataRow.
@@ -77,7 +79,11 @@ namespace System.Data
             get { return _rbTreeNodeId; }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataRow.set_RBTreeNodeId|INFO> {0}, value={1}", _objectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataRow.set_RBTreeNodeId|INFO> {0}, value={1}",
+                    _objectID,
+                    value
+                );
                 _rbTreeNodeId = value;
             }
         }
@@ -91,7 +97,11 @@ namespace System.Data
             get { return _error == null ? string.Empty : _error.Text; }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataRow.set_RowError|API> {0}, value='{1}'", _objectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataRow.set_RowError|API> {0}, value='{1}'",
+                    _objectID,
+                    value
+                );
                 if (_error == null)
                 {
                     if (!string.IsNullOrEmpty(value))
@@ -203,12 +213,15 @@ namespace System.Data
             // and index creation may fail. The check will be done
             // after all the loading is done _and_ we are sure there
             // are no holes in the collection.
-            if (_table._fInLoadDiffgram || (_table.DataSet != null && _table.DataSet._fInLoadDiffgram))
-            {
+            if (
+                _table._fInLoadDiffgram
+                || (_table.DataSet != null && _table.DataSet._fInLoadDiffgram)
+            ) {
                 return;
             }
 
-            int count = _table.Rows.Count, i = 0;
+            int count = _table.Rows.Count,
+                i = 0;
             // need to optimize this for count > 100
             DataRow? parent = GetParentRow(rel);
             while (parent != null)
@@ -337,7 +350,10 @@ namespace System.Data
                 {
                     if (immediate)
                     {
-                        Debug.Assert(!_inChangingEvent, "how are we in a changing event to cancel?");
+                        Debug.Assert(
+                            !_inChangingEvent,
+                            "how are we in a changing event to cancel?"
+                        );
                         Debug.Assert(-1 != _tempRecord, "how no propsed record to cancel?");
                         CancelEdit();
                     }
@@ -474,7 +490,10 @@ namespace System.Data
                         if (column.Table != _table)
                         {
                             // user removed column from table during OnColumnChanging event
-                            throw ExceptionBuilder.ColumnNotInTheTable(column.ColumnName, _table.TableName);
+                            throw ExceptionBuilder.ColumnNotInTheTable(
+                                column.ColumnName,
+                                _table.TableName
+                            );
                         }
                         if ((-1 != rowID) && column.ReadOnly)
                         {
@@ -505,11 +524,15 @@ namespace System.Data
                             _table._recordManager.VerifyRecord(record, this);
                             column[record] = proposed;
                         }
-                        catch (Exception e1) when (Common.ADP.IsCatchableOrSecurityExceptionType(e1))
+                        catch (Exception e1)
+                            when (Common.ADP.IsCatchableOrSecurityExceptionType(e1))
                         {
                             if (immediate)
                             {
-                                Debug.Assert(!_inChangingEvent, "how are we in a changing event to cancel?");
+                                Debug.Assert(
+                                    !_inChangingEvent,
+                                    "how are we in a changing event to cancel?"
+                                );
                                 Debug.Assert(-1 != _tempRecord, "how no propsed record to cancel?");
                                 CancelEdit();
                             }
@@ -521,7 +544,7 @@ namespace System.Data
                         // infinite loops are possible if user calls Item or ItemArray during the event
                         if (null != e)
                         {
-                            _table.OnColumnChanged(e);  // user may call CancelEdit or EndEdit
+                            _table.OnColumnChanged(e); // user may call CancelEdit or EndEdit
                         }
                     }
                 }
@@ -537,7 +560,10 @@ namespace System.Data
         /// </summary>
         public void AcceptChanges()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataRow.AcceptChanges|API> {0}", _objectID);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<ds.DataRow.AcceptChanges|API> {0}",
+                _objectID
+            );
             try
             {
                 EndEdit();
@@ -562,6 +588,7 @@ namespace System.Data
                 }
                 _table.CommitRow(this);
             }
+
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -692,6 +719,7 @@ namespace System.Data
                     // suppressing the ensure property changed because it's possible that no values have been modified
                     _table.SetNewRecord(this, _tempRecord, suppressEnsurePropertyChanged: true);
                 }
+
                 finally
                 {
                     // a constraint violation may be thrown during SetNewRecord
@@ -729,16 +757,23 @@ namespace System.Data
         {
             CheckColumn(column);
 
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataRow.SetColumnError|API> {0}, column={1}, error='{2}'", _objectID, column.ObjectID, error);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<ds.DataRow.SetColumnError|API> {0}, column={1}, error='{2}'",
+                _objectID,
+                column.ObjectID,
+                error
+            );
             try
             {
-                if (_error == null) _error = new DataError();
+                if (_error == null)
+                    _error = new DataError();
                 if (GetColumnError(column) != error)
                 {
                     _error.SetColumnError(column, error);
                     RowErrorChanged();
                 }
             }
+
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -753,7 +788,8 @@ namespace System.Data
         /// <summary>
         /// Gets the error description for a column, specified by name.
         /// </summary>
-        public string GetColumnError(string columnName) => GetColumnError(GetDataColumn(columnName));
+        public string GetColumnError(string columnName) =>
+            GetColumnError(GetDataColumn(columnName));
 
         /// <summary>
         /// Gets the error description of the specified <see cref='System.Data.DataColumn'/>.
@@ -761,7 +797,8 @@ namespace System.Data
         public string GetColumnError(DataColumn column)
         {
             CheckColumn(column);
-            if (_error == null) _error = new DataError();
+            if (_error == null)
+                _error = new DataError();
             return _error.GetColumnError(column);
         }
 
@@ -795,8 +832,8 @@ namespace System.Data
         /// <summary>
         /// Gets an array of columns that have errors.
         /// </summary>
-        public DataColumn[] GetColumnsInError() => _error == null ?
-            Array.Empty<DataColumn>() : _error.GetColumnsInError();
+        public DataColumn[] GetColumnsInError() =>
+            _error == null ? Array.Empty<DataColumn>() : _error.GetColumnsInError();
 
         public DataRow[] GetChildRows(string? relationName) =>
             GetChildRows(_table.ChildRelations[relationName], DataRowVersion.Default);
@@ -827,7 +864,10 @@ namespace System.Data
             }
             if (relation.ParentKey.Table != _table)
             {
-                throw ExceptionBuilder.RelationForeignTable(relation.ParentTable.TableName, _table.TableName);
+                throw ExceptionBuilder.RelationForeignTable(
+                    relation.ParentTable.TableName,
+                    _table.TableName
+                );
             }
             return DataRelation.GetChildRows(relation.ParentKey, relation.ChildKey, this, version);
         }
@@ -872,7 +912,10 @@ namespace System.Data
 
             if (relation.ChildKey.Table != _table)
             {
-                throw ExceptionBuilder.GetParentRowTableMismatch(relation.ChildTable.TableName, _table.TableName);
+                throw ExceptionBuilder.GetParentRowTableMismatch(
+                    relation.ChildTable.TableName,
+                    _table.TableName
+                );
             }
 
             return DataRelation.GetParentRow(relation.ParentKey, relation.ChildKey, this, version);
@@ -934,7 +977,10 @@ namespace System.Data
 
             if (relation.ChildKey.Table != _table)
             {
-                throw ExceptionBuilder.GetParentRowTableMismatch(relation.ChildTable.TableName, _table.TableName);
+                throw ExceptionBuilder.GetParentRowTableMismatch(
+                    relation.ChildTable.TableName,
+                    _table.TableName
+                );
             }
 
             return DataRelation.GetParentRows(relation.ParentKey, relation.ChildKey, this, version);
@@ -982,9 +1028,9 @@ namespace System.Data
             }
 
             // If row has oldRecord - this is deleted row.
-            throw _oldRecord == -1 ?
-                ExceptionBuilder.RowRemovedFromTheTable() :
-                ExceptionBuilder.DeletedRowInaccessible();
+            throw _oldRecord == -1
+                ? ExceptionBuilder.RowRemovedFromTheTable()
+                : ExceptionBuilder.DeletedRowInaccessible();
         }
 
         internal int GetOriginalRecordNo()
@@ -1030,12 +1076,19 @@ namespace System.Data
             }
             else if (_oldRecord == -1)
             {
-                Debug.Assert(0 != (DataViewRowState.Added & viewState), "not DataViewRowState.Added");
+                Debug.Assert(
+                    0 != (DataViewRowState.Added & viewState),
+                    "not DataViewRowState.Added"
+                );
                 return DataRowVersion.Default;
             }
             else if (_newRecord == -1)
             {
-                Debug.Assert(_action == DataRowAction.Rollback || 0 != (DataViewRowState.Deleted & viewState), "not DataViewRowState.Deleted");
+                Debug.Assert(
+                    _action == DataRowAction.Rollback
+                        || 0 != (DataViewRowState.Deleted & viewState),
+                    "not DataViewRowState.Deleted"
+                );
                 return DataRowVersion.Original;
             }
             else if (0 != (DataViewRowState.ModifiedCurrent & viewState))
@@ -1044,7 +1097,10 @@ namespace System.Data
             }
             else
             {
-                Debug.Assert(0 != (DataViewRowState.ModifiedOriginal & viewState), "not DataViewRowState.ModifiedOriginal");
+                Debug.Assert(
+                    0 != (DataViewRowState.ModifiedOriginal & viewState),
+                    "not DataViewRowState.ModifiedOriginal"
+                );
                 return DataRowVersion.Original;
             }
         }
@@ -1063,12 +1119,16 @@ namespace System.Data
 
             if (record == _oldRecord)
             {
-                return (_newRecord != -1) ? DataViewRowState.ModifiedOriginal : DataViewRowState.Deleted;
+                return (_newRecord != -1)
+                    ? DataViewRowState.ModifiedOriginal
+                    : DataViewRowState.Deleted;
             }
 
             if (record == _newRecord)
             {
-                return (_oldRecord != -1) ? DataViewRowState.ModifiedCurrent : DataViewRowState.Added;
+                return (_oldRecord != -1)
+                    ? DataViewRowState.ModifiedCurrent
+                    : DataViewRowState.Added;
             }
 
             return DataViewRowState.None;
@@ -1084,7 +1144,10 @@ namespace System.Data
                 return true;
             }
 
-            return !key.RecordsEqual(GetRecordFromVersion(version1), GetRecordFromVersion(version2));
+            return !key.RecordsEqual(
+                GetRecordFromVersion(version1),
+                GetRecordFromVersion(version2)
+            );
         }
 
         /// <summary>
@@ -1121,8 +1184,11 @@ namespace System.Data
         internal bool HaveValuesChanged(DataColumn[] columns) =>
             HaveValuesChanged(columns, DataRowVersion.Current, DataRowVersion.Proposed);
 
-        internal bool HaveValuesChanged(DataColumn[] columns, DataRowVersion version1, DataRowVersion version2)
-        {
+        internal bool HaveValuesChanged(
+            DataColumn[] columns,
+            DataRowVersion version1,
+            DataRowVersion version2
+        ) {
             for (int i = 0; i < columns.Length; i++)
             {
                 CheckColumn(columns[i]);
@@ -1176,13 +1242,18 @@ namespace System.Data
         /// </summary>
         public void RejectChanges()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataRow.RejectChanges|API> {0}", _objectID);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<ds.DataRow.RejectChanges|API> {0}",
+                _objectID
+            );
             try
             {
                 if (RowState != DataRowState.Detached)
                 {
-                    if (_columns.ColumnsImplementingIChangeTrackingCount != _columns.ColumnsImplementingIRevertibleChangeTrackingCount)
-                    {
+                    if (
+                        _columns.ColumnsImplementingIChangeTrackingCount
+                        != _columns.ColumnsImplementingIRevertibleChangeTrackingCount
+                    ) {
                         foreach (DataColumn dc in _columns.ColumnsImplementingIChangeTracking)
                         {
                             if (!dc.ImplementsIRevertibleChangeTracking)
@@ -1196,7 +1267,9 @@ namespace System.Data
                                 {
                                     if (((IChangeTracking)value).IsChanged)
                                     {
-                                        throw ExceptionBuilder.UDTImplementsIChangeTrackingButnotIRevertible(dc.DataType.AssemblyQualifiedName!);
+                                        throw ExceptionBuilder.UDTImplementsIChangeTrackingButnotIRevertible(
+                                            dc.DataType.AssemblyQualifiedName!
+                                        );
                                     }
                                 }
                             }
@@ -1221,6 +1294,7 @@ namespace System.Data
                 }
                 _table.RollbackRow(this);
             }
+
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1327,12 +1401,18 @@ namespace System.Data
 
             if (relation.ChildKey.Table != _table)
             {
-                throw ExceptionBuilder.SetParentRowTableMismatch(relation.ChildKey.Table.TableName, _table.TableName);
+                throw ExceptionBuilder.SetParentRowTableMismatch(
+                    relation.ChildKey.Table.TableName,
+                    _table.TableName
+                );
             }
 
             if (relation.ParentKey.Table != parentRow._table)
             {
-                throw ExceptionBuilder.SetParentRowTableMismatch(relation.ParentKey.Table.TableName, parentRow._table.TableName);
+                throw ExceptionBuilder.SetParentRowTableMismatch(
+                    relation.ParentKey.Table.TableName,
+                    parentRow._table.TableName
+                );
             }
 
             object[] parentKeyValues = parentRow.GetKeyValues(relation.ParentKey);
@@ -1353,7 +1433,10 @@ namespace System.Data
 
             if (relation.ChildKey.Table != _table)
             {
-                throw ExceptionBuilder.SetParentRowTableMismatch(relation.ChildKey.Table.TableName, _table.TableName);
+                throw ExceptionBuilder.SetParentRowTableMismatch(
+                    relation.ChildKey.Table.TableName,
+                    _table.TableName
+                );
             }
 
             object[] parentKeyValues = new object[1];
@@ -1399,7 +1482,12 @@ namespace System.Data
                 //Copy original record for the row in Unchanged, Modified, Deleted state.
                 for (int i = 0; i < _columns.Count; i++)
                 {
-                    _columns[i].CopyValueIntoStore(_oldRecord, storeList[i]!, (BitArray)nullbitList[i]!, storeIndex);
+                    _columns[i].CopyValueIntoStore(
+                        _oldRecord,
+                        storeList[i]!,
+                        (BitArray)nullbitList[i]!,
+                        storeIndex
+                    );
                 }
                 recordCount++;
                 storeIndex++;
@@ -1411,7 +1499,12 @@ namespace System.Data
                 //Copy current record for the row in Added, Modified state.
                 for (int i = 0; i < _columns.Count; i++)
                 {
-                    _columns[i].CopyValueIntoStore(_newRecord, storeList[i]!, (BitArray)nullbitList[i]!, storeIndex);
+                    _columns[i].CopyValueIntoStore(
+                        _newRecord,
+                        storeList[i]!,
+                        (BitArray)nullbitList[i]!,
+                        storeIndex
+                    );
                 }
                 recordCount++;
                 storeIndex++;
@@ -1422,7 +1515,12 @@ namespace System.Data
                 //Copy temp record for the row in edit mode.
                 for (int i = 0; i < _columns.Count; i++)
                 {
-                    _columns[i].CopyValueIntoStore(_tempRecord, storeList[i]!, (BitArray)nullbitList[i]!, storeIndex);
+                    _columns[i].CopyValueIntoStore(
+                        _tempRecord,
+                        storeList[i]!,
+                        (BitArray)nullbitList[i]!,
+                        storeIndex
+                    );
                 }
                 recordCount++;
                 storeIndex++;
@@ -1432,11 +1530,18 @@ namespace System.Data
         }
 
         [Conditional("DEBUG")]
-        private void VerifyValueFromStorage(DataColumn column, DataRowVersion version, object valueFromStorage)
-        {
+        private void VerifyValueFromStorage(
+            DataColumn column,
+            DataRowVersion version,
+            object valueFromStorage
+        ) {
             // ignore deleted rows by adding "newRecord != -1" condition - we do not evaluate computed rows if they are deleted
-            if (column.DataExpression != null && !_inChangingEvent && _tempRecord == -1 && _newRecord != -1)
-            {
+            if (
+                column.DataExpression != null
+                && !_inChangingEvent
+                && _tempRecord == -1
+                && _newRecord != -1
+            ) {
                 // for unchanged rows, check current if original is asked for.
                 // this is because by design, there is only single storage for an unchanged row.
                 if (version == DataRowVersion.Original && _oldRecord == _newRecord)
@@ -1444,8 +1549,10 @@ namespace System.Data
                     version = DataRowVersion.Current;
                 }
 
-                Debug.Assert(valueFromStorage.Equals(column.DataExpression.Evaluate(this, version)),
-                    "Value from storage does lazily computed expression value");
+                Debug.Assert(
+                    valueFromStorage.Equals(column.DataExpression.Evaluate(this, version)),
+                    "Value from storage does lazily computed expression value"
+                );
             }
         }
     }

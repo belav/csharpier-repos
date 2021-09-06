@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Analyzers
 {
     internal class MiddlewareAnalysis
     {
-        public MiddlewareAnalysis(IMethodSymbol configureMethod, ImmutableArray<MiddlewareItem> middleware)
-        {
+        public MiddlewareAnalysis(
+            IMethodSymbol configureMethod,
+            ImmutableArray<MiddlewareItem> middleware
+        ) {
             ConfigureMethod = configureMethod;
             Middleware = middleware;
         }

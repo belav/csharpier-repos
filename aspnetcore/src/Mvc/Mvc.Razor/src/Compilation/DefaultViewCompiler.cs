@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
         private readonly ConcurrentDictionary<string, string> _normalizedPathCache;
         private readonly ILogger _logger;
 
-        public DefaultViewCompiler(
-            IList<CompiledViewDescriptor> compiledViews,
-            ILogger logger)
+        public DefaultViewCompiler(IList<CompiledViewDescriptor> compiledViews, ILogger logger)
         {
             if (compiledViews == null)
             {
@@ -43,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
             // views that differ only by case.
             _compiledViews = new Dictionary<string, Task<CompiledViewDescriptor>>(
                 compiledViews.Count,
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var compiledView in compiledViews)
             {
@@ -88,11 +87,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
 
             // Entry does not exist. Attempt to create one.
             _logger.ViewCompilerCouldNotFindFileAtPath(relativePath);
-            return Task.FromResult(new CompiledViewDescriptor
-            {
-                RelativePath = normalizedPath,
-                ExpirationTokens = Array.Empty<IChangeToken>(),
-            });
+            return Task.FromResult(
+                new CompiledViewDescriptor
+                {
+                    RelativePath = normalizedPath,
+                    ExpirationTokens = Array.Empty<IChangeToken>(),
+                }
+            );
         }
 
         private string GetNormalizedPath(string relativePath)

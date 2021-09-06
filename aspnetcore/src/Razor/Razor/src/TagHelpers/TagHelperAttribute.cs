@@ -21,9 +21,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </summary>
         /// <param name="name">The <see cref="Name"/> of the attribute.</param>
         public TagHelperAttribute(string name)
-            : this(name, value: null, valueStyle: HtmlAttributeValueStyle.Minimized)
-        {
-        }
+            : this(name, value: null, valueStyle: HtmlAttributeValueStyle.Minimized) { }
 
         /// <summary>
         /// Instantiates a new instance of <see cref="TagHelperAttribute"/> with the specified <paramref name="name"/>
@@ -32,9 +30,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <param name="name">The <see cref="Name"/> of the attribute.</param>
         /// <param name="value">The <see cref="Value"/> of the attribute.</param>
         public TagHelperAttribute(string name, object value)
-            : this(name, value, valueStyle: HtmlAttributeValueStyle.DoubleQuotes)
-        {
-        }
+            : this(name, value, valueStyle: HtmlAttributeValueStyle.DoubleQuotes) { }
 
         /// <summary>
         /// Instantiates a new instance of <see cref="TagHelperAttribute"/> with the specified <paramref name="name"/>,
@@ -76,11 +72,10 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <remarks><see cref="Name"/> is compared case-insensitively.</remarks>
         public bool Equals(TagHelperAttribute other)
         {
-            return
-                other != null &&
-                string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase) &&
-                ValueStyle == other.ValueStyle &&
-                (ValueStyle == HtmlAttributeValueStyle.Minimized || Equals(Value, other.Value));
+            return other != null
+                && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase)
+                && ValueStyle == other.ValueStyle
+                && (ValueStyle == HtmlAttributeValueStyle.Minimized || Equals(Value, other.Value));
         }
 
         /// <inheritdoc />

@@ -24,12 +24,13 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             ITransportFactory transportFactory = null,
             HttpTransportType? transportType = null,
             TransferFormat transferFormat = TransferFormat.Text,
-            Func<Task<string>> accessTokenProvider = null)
-        {
+            Func<Task<string>> accessTokenProvider = null
+        ) {
             var httpOptions = new HttpConnectionOptions
             {
                 Transports = transportType ?? HttpTransportType.LongPolling,
-                HttpMessageHandlerFactory = (httpMessageHandler) => httpHandler ?? TestHttpMessageHandler.CreateDefault(),
+                HttpMessageHandlerFactory = (httpMessageHandler) =>
+                    httpHandler ?? TestHttpMessageHandler.CreateDefault(),
                 AccessTokenProvider = accessTokenProvider,
             };
             if (url != null)
@@ -37,7 +38,13 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 httpOptions.Url = new Uri(url);
             }
 
-            return CreateConnection(httpOptions, loggerFactory, transport, transportFactory, transferFormat);
+            return CreateConnection(
+                httpOptions,
+                loggerFactory,
+                transport,
+                transportFactory,
+                transferFormat
+            );
         }
 
         private static HttpConnection CreateConnection(
@@ -45,8 +52,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             ILoggerFactory loggerFactory = null,
             ITransport transport = null,
             ITransportFactory transportFactory = null,
-            TransferFormat transferFormat = TransferFormat.Text)
-        {
+            TransferFormat transferFormat = TransferFormat.Text
+        ) {
             loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
             httpConnectionOptions.Url ??= new Uri("http://fakeuri.org/");
             httpConnectionOptions.DefaultTransferFormat = transferFormat;
@@ -67,13 +74,16 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             }
         }
 
-        private static async Task WithConnectionAsync(HttpConnection connection, Func<HttpConnection, Task> body)
-        {
+        private static async Task WithConnectionAsync(
+            HttpConnection connection,
+            Func<HttpConnection, Task> body
+        ) {
             try
             {
                 // Using OrTimeout here will hide any timeout issues in the test :(.
                 await body(connection);
             }
+
             finally
             {
                 await connection.DisposeAsync().DefaultTimeout();

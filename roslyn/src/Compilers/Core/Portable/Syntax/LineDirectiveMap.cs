@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis
     /// directives, then the array has just one element in it. To map line numbers, a binary search
     /// of the mapping entries is done and nearest line mapping is applied.
     /// </summary>
-    internal abstract partial class LineDirectiveMap<TDirective>
-        where TDirective : SyntaxNode
+    internal abstract partial class LineDirectiveMap<TDirective> where TDirective : SyntaxNode
     {
         protected readonly LineMappingEntry[] Entries;
 
@@ -27,7 +26,11 @@ namespace Microsoft.CodeAnalysis
         protected abstract bool ShouldAddDirective(TDirective directive);
 
         // Given a directive and the previous entry, create a new entry.
-        protected abstract LineMappingEntry GetEntry(TDirective directive, SourceText sourceText, LineMappingEntry previous);
+        protected abstract LineMappingEntry GetEntry(
+            TDirective directive,
+            SourceText sourceText,
+            LineMappingEntry previous
+        );
 
         // Creates the first entry with language specific content
         protected abstract LineMappingEntry InitializeFirstEntry();
@@ -36,7 +39,9 @@ namespace Microsoft.CodeAnalysis
         {
             // Accumulate all the directives, in source code order
             var syntaxRoot = (SyntaxNodeOrToken)syntaxTree.GetRoot();
-            IList<TDirective> directives = syntaxRoot.GetDirectives<TDirective>(filter: ShouldAddDirective);
+            IList<TDirective> directives = syntaxRoot.GetDirectives<TDirective>(
+                filter: ShouldAddDirective
+            );
             Debug.Assert(directives != null);
 
             // Create the entry map.
@@ -45,8 +50,11 @@ namespace Microsoft.CodeAnalysis
 
         // Given a span and a default file name, return a FileLinePositionSpan that is the mapped
         // span, taking into account line directives.
-        public FileLinePositionSpan TranslateSpan(SourceText sourceText, string treeFilePath, TextSpan span)
-        {
+        public FileLinePositionSpan TranslateSpan(
+            SourceText sourceText,
+            string treeFilePath,
+            TextSpan span
+        ) {
             var unmappedStartPos = sourceText.Lines.GetLinePosition(span.Start);
             var unmappedEndPos = sourceText.Lines.GetLinePosition(span.End);
             var entry = FindEntry(unmappedStartPos.Line);
@@ -54,8 +62,12 @@ namespace Microsoft.CodeAnalysis
             return TranslateSpan(entry, treeFilePath, unmappedStartPos, unmappedEndPos);
         }
 
-        protected FileLinePositionSpan TranslateSpan(LineMappingEntry entry, string treeFilePath, LinePosition unmappedStartPos, LinePosition unmappedEndPos)
-        {
+        protected FileLinePositionSpan TranslateSpan(
+            LineMappingEntry entry,
+            string treeFilePath,
+            LinePosition unmappedStartPos,
+            LinePosition unmappedEndPos
+        ) {
             string path = entry.MappedPathOpt ?? treeFilePath;
             int mappedStartLine = unmappedStartPos.Line - entry.UnmappedLine + entry.MappedLine;
             int mappedEndLine = unmappedEndPos.Line - entry.UnmappedLine + entry.MappedLine;
@@ -63,9 +75,15 @@ namespace Microsoft.CodeAnalysis
             return new FileLinePositionSpan(
                 path,
                 new LinePositionSpan(
-                    (mappedStartLine == -1) ? new LinePosition(unmappedStartPos.Character) : new LinePosition(mappedStartLine, unmappedStartPos.Character),
-                    (mappedEndLine == -1) ? new LinePosition(unmappedEndPos.Character) : new LinePosition(mappedEndLine, unmappedEndPos.Character)),
-                hasMappedPath: entry.MappedPathOpt != null);
+                    (mappedStartLine == -1)
+                        ? new LinePosition(unmappedStartPos.Character)
+                        : new LinePosition(mappedStartLine, unmappedStartPos.Character),
+                    (mappedEndLine == -1)
+                        ? new LinePosition(unmappedEndPos.Character)
+                        : new LinePosition(mappedEndLine, unmappedEndPos.Character)
+                ),
+                hasMappedPath: entry.MappedPathOpt != null
+            );
         }
 
         /// <summary>
@@ -76,7 +94,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Combines TranslateSpan and IsHiddenPosition to not search the entries twice when emitting sequence points
         /// </summary>
-        internal abstract FileLinePositionSpan TranslateSpanAndVisibility(SourceText sourceText, string treeFilePath, TextSpan span, out bool isHiddenPosition);
+        internal abstract FileLinePositionSpan TranslateSpanAndVisibility(
+            SourceText sourceText,
+            string treeFilePath,
+            TextSpan span,
+            out bool isHiddenPosition
+        );
 
         /// <summary>
         /// Are there any hidden regions in the map?
@@ -123,7 +146,7 @@ namespace Microsoft.CodeAnalysis
             }
 
 #if DEBUG
-            // Make sure the entries array is correctly sorted. 
+            // Make sure the entries array is correctly sorted.
             for (int i = 0; i < entries.Length - 1; ++i)
             {
                 Debug.Assert(entries[i].CompareTo(entries[i + 1]) < 0);

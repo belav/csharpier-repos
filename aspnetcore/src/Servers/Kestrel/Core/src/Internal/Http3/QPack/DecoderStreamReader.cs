@@ -46,9 +46,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
         private readonly IntegerDecoder _integerDecoder = new IntegerDecoder();
         private State _state;
 
-        public DecoderStreamReader()
-        {
-        }
+        public DecoderStreamReader() { }
 
         public void Read(ReadOnlySequence<byte> data)
         {
@@ -72,8 +70,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     if ((b & HeaderAcknowledgementMask) == HeaderAcknowledgementRepresentation)
                     {
                         prefixInt = HeaderAcknowledgementPrefixMask & b;
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, HeaderAcknowledgementPrefix, out intResult))
-                        {
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                HeaderAcknowledgementPrefix,
+                                out intResult
+                            )
+                        ) {
                             OnHeaderAcknowledgement(intResult);
                         }
                         else
@@ -84,8 +87,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     else if ((b & StreamCancellationMask) == StreamCancellationRepresentation)
                     {
                         prefixInt = StreamCancellationPrefixMask & b;
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, StreamCancellationPrefix, out intResult))
-                        {
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                StreamCancellationPrefix,
+                                out intResult
+                            )
+                        ) {
                             OnStreamCancellation(intResult);
                         }
                         else
@@ -96,8 +104,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     else if ((b & InsertCountIncrementMask) == InsertCountIncrementRepresentation)
                     {
                         prefixInt = InsertCountIncrementPrefixMask & b;
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, InsertCountIncrementPrefix, out intResult))
-                        {
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                InsertCountIncrementPrefix,
+                                out intResult
+                            )
+                        ) {
                             OnInsertCountIncrement(intResult);
                         }
                         else

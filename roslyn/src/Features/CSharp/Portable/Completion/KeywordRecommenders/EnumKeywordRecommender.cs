@@ -13,28 +13,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class EnumKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.PrivateKeyword,
-                SyntaxKind.ProtectedKeyword,
-            };
+        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        ) {
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.ProtectedKeyword,
+        };
 
-        public EnumKeywordRecommender()
-            : base(SyntaxKind.EnumKeyword)
-        {
-        }
+        public EnumKeywordRecommender() : base(SyntaxKind.EnumKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsGlobalStatementContext ||
-                context.IsTypeDeclarationContext(
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsGlobalStatementContext
+                || context.IsTypeDeclarationContext(
                     validModifiers: s_validModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
         }
     }
 }

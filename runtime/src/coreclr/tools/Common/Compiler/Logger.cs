@@ -34,31 +34,55 @@ namespace ILCompiler
         }
 
         public Logger(TextWriter writer, bool isVerbose)
-            : this(writer, isVerbose, Array.Empty<int>())
-        {
-        }
+            : this(writer, isVerbose, Array.Empty<int>()) { }
 
-        public void LogWarning(string text, int code, MessageOrigin origin, string subcategory = MessageSubCategory.None)
-        {
-            MessageContainer? warning = MessageContainer.CreateWarningMessage(this, text, code, origin, subcategory);
+        public void LogWarning(
+            string text,
+            int code,
+            MessageOrigin origin,
+            string subcategory = MessageSubCategory.None
+        ) {
+            MessageContainer? warning = MessageContainer.CreateWarningMessage(
+                this,
+                text,
+                code,
+                origin,
+                subcategory
+            );
             if (warning.HasValue)
                 Writer.WriteLine(warning.Value.ToMSBuildString());
         }
 
-        public void LogWarning(string text, int code, TypeSystemEntity origin, string subcategory = MessageSubCategory.None)
-        {
+        public void LogWarning(
+            string text,
+            int code,
+            TypeSystemEntity origin,
+            string subcategory = MessageSubCategory.None
+        ) {
             MessageOrigin messageOrigin = new MessageOrigin(origin);
-            MessageContainer? warning = MessageContainer.CreateWarningMessage(this, text, code, messageOrigin, subcategory);
+            MessageContainer? warning = MessageContainer.CreateWarningMessage(
+                this,
+                text,
+                code,
+                messageOrigin,
+                subcategory
+            );
             if (warning.HasValue)
                 Writer.WriteLine(warning.Value.ToMSBuildString());
         }
 
-        public void LogWarning(string text, int code, MethodIL origin, int ilOffset, string subcategory = MessageSubCategory.None)
-        {
+        public void LogWarning(
+            string text,
+            int code,
+            MethodIL origin,
+            int ilOffset,
+            string subcategory = MessageSubCategory.None
+        ) {
             string document = null;
             int? lineNumber = null;
 
-            IEnumerable<ILSequencePoint> sequencePoints = origin.GetDebugInfo()?.GetSequencePoints();
+            IEnumerable<ILSequencePoint> sequencePoints =
+                origin.GetDebugInfo()?.GetSequencePoints();
             if (sequencePoints != null)
             {
                 foreach (var sequencePoint in sequencePoints)
@@ -71,7 +95,12 @@ namespace ILCompiler
                 }
             }
 
-            MessageOrigin messageOrigin = new MessageOrigin(origin.OwningMethod, document, lineNumber, null);
+            MessageOrigin messageOrigin = new MessageOrigin(
+                origin.OwningMethod,
+                document,
+                lineNumber,
+                null
+            );
             LogWarning(text, code, messageOrigin, subcategory);
         }
 
@@ -83,25 +112,29 @@ namespace ILCompiler
             IEnumerable<CustomAttributeValue<TypeDesc>> suppressions = null;
 
             // TODO: Suppressions with different scopes
-            
+
 
             if (origin.MemberDefinition is MethodDesc method)
             {
                 var ecmaMethod = method.GetTypicalMethodDefinition() as EcmaMethod;
-                suppressions = ecmaMethod?.GetDecodedCustomAttributes("System.Diagnostics.CodeAnalysis", "UnconditionalSuppressMessageAttribute");
+                suppressions = ecmaMethod?.GetDecodedCustomAttributes(
+                    "System.Diagnostics.CodeAnalysis",
+                    "UnconditionalSuppressMessageAttribute"
+                );
             }
 
             if (suppressions != null)
             {
                 foreach (CustomAttributeValue<TypeDesc> suppression in suppressions)
                 {
-                    if (suppression.FixedArguments.Length != 2
+                    if (
+                        suppression.FixedArguments.Length != 2
                         || suppression.FixedArguments[1].Value is not string warningId
                         || warningId.Length < 6
                         || !warningId.StartsWith("IL")
                         || (warningId.Length > 6 && warningId[6] != ':')
-                        || !int.TryParse(warningId.Substring(2, 4), out int suppressedCode))
-                    {
+                        || !int.TryParse(warningId.Substring(2, 4), out int suppressedCode)
+                    ) {
                         continue;
                     }
 

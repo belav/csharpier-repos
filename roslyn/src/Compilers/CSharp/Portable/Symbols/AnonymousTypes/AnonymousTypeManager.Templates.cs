@@ -27,14 +27,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Cache of created anonymous type templates used as an implementation of anonymous 
         /// types in emit phase.
         /// </summary>
-        private ConcurrentDictionary<string, AnonymousTypeTemplateSymbol> _lazyAnonymousTypeTemplates;
+        private ConcurrentDictionary<
+            string,
+            AnonymousTypeTemplateSymbol
+        > _lazyAnonymousTypeTemplates;
 
         /// <summary>
         /// Maps delegate signature shape (number of parameters and their ref-ness) to a synthesized generic delegate symbol.
         /// Unlike anonymous types synthesized delegates are not available through symbol APIs. They are only used in lowered bound trees.
         /// Currently used for dynamic call-site sites whose signature doesn't match any of the well-known Func or Action types.
         /// </summary>
-        private ConcurrentDictionary<SynthesizedDelegateKey, SynthesizedDelegateValue> _lazySynthesizedDelegates;
+        private ConcurrentDictionary<
+            SynthesizedDelegateKey,
+            SynthesizedDelegateValue
+        > _lazySynthesizedDelegates;
 
         private struct SynthesizedDelegateKey : IEquatable<SynthesizedDelegateKey>
         {
@@ -43,8 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private readonly bool _returnsVoid;
             private readonly int _generation;
 
-            public SynthesizedDelegateKey(int parameterCount, BitVector byRefs, bool returnsVoid, int generation)
-            {
+            public SynthesizedDelegateKey(
+                int parameterCount,
+                BitVector byRefs,
+                bool returnsVoid,
+                int generation
+            ) {
                 _parameterCount = (ushort)parameterCount;
                 _returnsVoid = returnsVoid;
                 _generation = generation;
@@ -53,7 +63,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public string MakeTypeName()
             {
-                return GeneratedNames.MakeDynamicCallSiteDelegateName(_byRefs, _returnsVoid, _generation);
+                return GeneratedNames.MakeDynamicCallSiteDelegateName(
+                    _byRefs,
+                    _returnsVoid,
+                    _generation
+                );
             }
 
             public override bool Equals(object obj)
@@ -73,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 return Hash.Combine(
                     Hash.Combine((int)_parameterCount, _generation),
-                    Hash.Combine(_returnsVoid.GetHashCode(), _byRefs.GetHashCode()));
+                    Hash.Combine(_returnsVoid.GetHashCode(), _byRefs.GetHashCode())
+                );
             }
         }
 
@@ -84,8 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // the manager that created this delegate:
             public readonly AnonymousTypeManager Manager;
 
-            public SynthesizedDelegateValue(AnonymousTypeManager manager, SynthesizedDelegateSymbol @delegate)
-            {
+            public SynthesizedDelegateValue(
+                AnonymousTypeManager manager,
+                SynthesizedDelegateSymbol @delegate
+            ) {
                 Debug.Assert(manager != null && (object)@delegate != null);
                 this.Manager = manager;
                 this.Delegate = @delegate;
@@ -96,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Holds a collection of all the locations of anonymous types and delegates from source
         /// </summary>
-        private readonly ConcurrentDictionary<Location, bool> _sourceLocationsSeen = new ConcurrentDictionary<Location, bool>();
+        private readonly ConcurrentDictionary<Location, bool> _sourceLocationsSeen =
+            new ConcurrentDictionary<Location, bool>();
 #endif
 
         [Conditional("DEBUG")]
@@ -128,20 +146,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     CSharpCompilation previousSubmission = this.Compilation.PreviousSubmission;
 
                     // TODO (tomat): avoid recursion
-                    var previousCache = (previousSubmission == null) ? null : previousSubmission.AnonymousTypeManager.AnonymousTypeTemplates;
+                    var previousCache =
+                        (previousSubmission == null)
+                            ? null
+                            : previousSubmission.AnonymousTypeManager.AnonymousTypeTemplates;
 
-                    Interlocked.CompareExchange(ref _lazyAnonymousTypeTemplates,
-                                                previousCache == null
-                                                    ? new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>()
-                                                    : new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>(previousCache),
-                                                null);
+                    Interlocked.CompareExchange(
+                        ref _lazyAnonymousTypeTemplates,
+                        previousCache == null
+                            ? new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>()
+                            : new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>(
+                                  previousCache
+                              ),
+                        null
+                    );
                 }
 
                 return _lazyAnonymousTypeTemplates;
             }
         }
 
-        private ConcurrentDictionary<SynthesizedDelegateKey, SynthesizedDelegateValue> SynthesizedDelegates
+        private ConcurrentDictionary<
+            SynthesizedDelegateKey,
+            SynthesizedDelegateValue
+        > SynthesizedDelegates
         {
             get
             {
@@ -150,25 +178,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     CSharpCompilation previousSubmission = this.Compilation.PreviousSubmission;
 
                     // TODO (tomat): avoid recursion
-                    var previousCache = (previousSubmission == null) ? null : previousSubmission.AnonymousTypeManager._lazySynthesizedDelegates;
+                    var previousCache =
+                        (previousSubmission == null)
+                            ? null
+                            : previousSubmission.AnonymousTypeManager._lazySynthesizedDelegates;
 
-                    Interlocked.CompareExchange(ref _lazySynthesizedDelegates,
-                                                previousCache == null
-                                                    ? new ConcurrentDictionary<SynthesizedDelegateKey, SynthesizedDelegateValue>()
-                                                    : new ConcurrentDictionary<SynthesizedDelegateKey, SynthesizedDelegateValue>(previousCache),
-                                                null);
+                    Interlocked.CompareExchange(
+                        ref _lazySynthesizedDelegates,
+                        previousCache == null
+                            ? new ConcurrentDictionary<
+                                  SynthesizedDelegateKey,
+                                  SynthesizedDelegateValue
+                              >()
+                            : new ConcurrentDictionary<
+                                  SynthesizedDelegateKey,
+                                  SynthesizedDelegateValue
+                              >(previousCache),
+                        null
+                    );
                 }
 
                 return _lazySynthesizedDelegates;
             }
         }
 
-        internal SynthesizedDelegateSymbol SynthesizeDelegate(int parameterCount, BitVector byRefParameters, bool returnsVoid, int generation)
-        {
+        internal SynthesizedDelegateSymbol SynthesizeDelegate(
+            int parameterCount,
+            BitVector byRefParameters,
+            bool returnsVoid,
+            int generation
+        ) {
             // parameterCount doesn't include return type
             Debug.Assert(byRefParameters.IsNull || parameterCount == byRefParameters.Capacity);
 
-            var key = new SynthesizedDelegateKey(parameterCount, byRefParameters, returnsVoid, generation);
+            var key = new SynthesizedDelegateKey(
+                parameterCount,
+                byRefParameters,
+                returnsVoid,
+                generation
+            );
 
             SynthesizedDelegateValue result;
             if (this.SynthesizedDelegates.TryGetValue(key, out result))
@@ -177,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // NOTE: the newly created template may be thrown away if another thread wins
-            return this.SynthesizedDelegates.GetOrAdd(key,
+            return this.SynthesizedDelegates.GetOrAdd(
+                key,
                 new SynthesizedDelegateValue(
                     this,
                     new SynthesizedDelegateSymbol(
@@ -187,7 +236,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         Compilation.GetSpecialType(SpecialType.System_IntPtr),
                         returnsVoid ? Compilation.GetSpecialType(SpecialType.System_Void) : null,
                         parameterCount,
-                        byRefParameters))).Delegate;
+                        byRefParameters
+                    )
+                )
+            ).Delegate;
         }
 
         /// <summary>
@@ -196,8 +248,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// a generic type template generated for each 'unique' anonymous type structure, otherwise the template
         /// type will be non-generic.
         /// </summary>
-        private NamedTypeSymbol ConstructAnonymousTypeImplementationSymbol(AnonymousTypePublicSymbol anonymous)
-        {
+        private NamedTypeSymbol ConstructAnonymousTypeImplementationSymbol(
+            AnonymousTypePublicSymbol anonymous
+        ) {
             Debug.Assert(ReferenceEquals(this, anonymous.Manager));
 
             CheckSourceLocationSeen(anonymous);
@@ -210,7 +263,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!this.AnonymousTypeTemplates.TryGetValue(typeDescr.Key, out template))
             {
                 // NOTE: the newly created template may be thrown away if another thread wins
-                template = this.AnonymousTypeTemplates.GetOrAdd(typeDescr.Key, new AnonymousTypeTemplateSymbol(this, typeDescr));
+                template = this.AnonymousTypeTemplates.GetOrAdd(
+                    typeDescr.Key,
+                    new AnonymousTypeTemplateSymbol(this, typeDescr)
+                );
             }
 
             // Adjust template location if the template is owned by this manager
@@ -230,9 +286,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return template.Construct(typeArguments);
         }
 
-        private AnonymousTypeTemplateSymbol CreatePlaceholderTemplate(Microsoft.CodeAnalysis.Emit.AnonymousTypeKey key)
-        {
-            var fields = key.Fields.SelectAsArray(f => new AnonymousTypeField(f.Name, Location.None, default));
+        private AnonymousTypeTemplateSymbol CreatePlaceholderTemplate(
+            Microsoft.CodeAnalysis.Emit.AnonymousTypeKey key
+        ) {
+            var fields = key.Fields.SelectAsArray(
+                f => new AnonymousTypeField(f.Name, Location.None, default)
+            );
             var typeDescr = new AnonymousTypeDescriptor(fields, Location.None);
             return new AnonymousTypeTemplateSymbol(this, typeDescr);
         }
@@ -241,21 +300,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Resets numbering in anonymous type names and compiles the
         /// anonymous type methods. Also seals the collection of templates.
         /// </summary>
-        public void AssignTemplatesNamesAndCompile(MethodCompiler compiler, PEModuleBuilder moduleBeingBuilt, BindingDiagnosticBag diagnostics)
-        {
+        public void AssignTemplatesNamesAndCompile(
+            MethodCompiler compiler,
+            PEModuleBuilder moduleBeingBuilt,
+            BindingDiagnosticBag diagnostics
+        ) {
             // Ensure all previous anonymous type templates are included so the
             // types are available for subsequent edit and continue generations.
             foreach (var key in moduleBeingBuilt.GetPreviousAnonymousTypes())
             {
                 var templateKey = AnonymousTypeDescriptor.ComputeKey(key.Fields, f => f.Name);
-                this.AnonymousTypeTemplates.GetOrAdd(templateKey, k => this.CreatePlaceholderTemplate(key));
+                this.AnonymousTypeTemplates.GetOrAdd(
+                    templateKey,
+                    k => this.CreatePlaceholderTemplate(key)
+                );
             }
 
             // Get all anonymous types owned by this manager
             var builder = ArrayBuilder<AnonymousTypeTemplateSymbol>.GetInstance();
             GetCreatedAnonymousTypeTemplates(builder);
 
-            // If the collection is not sealed yet we should assign 
+            // If the collection is not sealed yet we should assign
             // new indexes to the created anonymous type templates
             if (!this.AreTemplatesSealed)
             {
@@ -289,7 +354,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (!moduleBeingBuilt.TryGetAnonymousTypeName(template, out name, out index))
                     {
                         index = nextIndex++;
-                        name = GeneratedNames.MakeAnonymousTypeTemplateName(index, this.Compilation.GetSubmissionSlotIndex(), moduleId);
+                        name = GeneratedNames.MakeAnonymousTypeTemplateName(
+                            index,
+                            this.Compilation.GetSubmissionSlotIndex(),
+                            moduleId
+                        );
                     }
                     // normally it should only happen once, but in case there is a race
                     // NameAndIndex.set has an assert which guarantees that the
@@ -329,8 +398,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// The set of anonymous type templates created by
         /// this AnonymousTypeManager, in fixed order.
         /// </summary>
-        private void GetCreatedAnonymousTypeTemplates(ArrayBuilder<AnonymousTypeTemplateSymbol> builder)
-        {
+        private void GetCreatedAnonymousTypeTemplates(
+            ArrayBuilder<AnonymousTypeTemplateSymbol> builder
+        ) {
             Debug.Assert(!builder.Any());
             var anonymousTypes = _lazyAnonymousTypeTemplates;
             if (anonymousTypes != null)
@@ -370,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private class SynthesizedDelegateSymbolComparer : IComparer<SynthesizedDelegateSymbol>
         {
-            public static readonly SynthesizedDelegateSymbolComparer Instance = new SynthesizedDelegateSymbolComparer();
+            public static readonly SynthesizedDelegateSymbolComparer Instance =
+                new SynthesizedDelegateSymbolComparer();
 
             public int Compare(SynthesizedDelegateSymbol x, SynthesizedDelegateSymbol y)
             {
@@ -378,9 +449,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal IReadOnlyDictionary<Microsoft.CodeAnalysis.Emit.AnonymousTypeKey, Microsoft.CodeAnalysis.Emit.AnonymousTypeValue> GetAnonymousTypeMap()
+        internal IReadOnlyDictionary<
+            Microsoft.CodeAnalysis.Emit.AnonymousTypeKey,
+            Microsoft.CodeAnalysis.Emit.AnonymousTypeValue
+        > GetAnonymousTypeMap()
         {
-            var result = new Dictionary<Microsoft.CodeAnalysis.Emit.AnonymousTypeKey, Microsoft.CodeAnalysis.Emit.AnonymousTypeValue>();
+            var result = new Dictionary<
+                Microsoft.CodeAnalysis.Emit.AnonymousTypeKey,
+                Microsoft.CodeAnalysis.Emit.AnonymousTypeValue
+            >();
             var templates = ArrayBuilder<AnonymousTypeTemplateSymbol>.GetInstance();
             // Get anonymous types but not synthesized delegates. (Delegate types are
             // not reused across generations since reuse would add complexity (such
@@ -390,7 +467,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var nameAndIndex = template.NameAndIndex;
                 var key = template.GetAnonymousTypeKey();
-                var value = new Microsoft.CodeAnalysis.Emit.AnonymousTypeValue(nameAndIndex.Name, nameAndIndex.Index, template.GetCciAdapter());
+                var value = new Microsoft.CodeAnalysis.Emit.AnonymousTypeValue(
+                    nameAndIndex.Name,
+                    nameAndIndex.Index,
+                    template.GetCciAdapter()
+                );
                 result.Add(key, value);
             }
             templates.Free();
@@ -431,8 +512,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Retrieves methods of anonymous type template which are not placed to symbol table.
         /// In current implementation those are overridden 'ToString', 'Equals' and 'GetHashCode'
         /// </summary>
-        internal static ImmutableArray<MethodSymbol> GetAnonymousTypeHiddenMethods(NamedTypeSymbol type)
-        {
+        internal static ImmutableArray<MethodSymbol> GetAnonymousTypeHiddenMethods(
+            NamedTypeSymbol type
+        ) {
             Debug.Assert((object)type != null);
             return ((AnonymousTypeTemplateSymbol)type).SpecialMembers;
         }
@@ -457,8 +539,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert((object)method != null);
             NamedTypeSymbol translatedType = TranslateAnonymousTypeSymbol(method.ContainingType);
             // find a method in anonymous type template by name
-            foreach (var member in ((NamedTypeSymbol)translatedType.OriginalDefinition).GetMembers(method.Name))
-            {
+            foreach (
+                var member in ((NamedTypeSymbol)translatedType.OriginalDefinition).GetMembers(
+                    method.Name
+                )
+            ) {
                 if (member.Kind == SymbolKind.Method)
                 {
                     // found a method definition, get a constructed method
@@ -494,7 +579,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (result == 0)
                 {
-                    // It is still possible for two templates to have the same smallest location 
+                    // It is still possible for two templates to have the same smallest location
                     // in case they are implicitly created and use the same syntax for location
                     result = string.CompareOrdinal(x.TypeDescriptorKey, y.TypeDescriptorKey);
                 }

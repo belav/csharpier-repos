@@ -19,32 +19,45 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ImplementInterfaceExplicitly), Shared]
-    internal class CSharpImplementExplicitlyCodeRefactoringProvider :
-        AbstractChangeImplementionCodeRefactoringProvider
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ImplementInterfaceExplicitly
+        ),
+        Shared
+    ]
+    internal class CSharpImplementExplicitlyCodeRefactoringProvider
+        : AbstractChangeImplementionCodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpImplementExplicitlyCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpImplementExplicitlyCodeRefactoringProvider() { }
 
         protected override string Implement_0 => FeaturesResources.Implement_0_explicitly;
-        protected override string Implement_all_interfaces => FeaturesResources.Implement_all_interfaces_explicitly;
+        protected override string Implement_all_interfaces =>
+            FeaturesResources.Implement_all_interfaces_explicitly;
         protected override string Implement => FeaturesResources.Implement_explicitly;
 
         // If we already have an explicit name, we can't change this to be explicit.
-        protected override bool CheckExplicitNameAllowsConversion(ExplicitInterfaceSpecifierSyntax? explicitName)
-            => explicitName == null;
+        protected override bool CheckExplicitNameAllowsConversion(
+            ExplicitInterfaceSpecifierSyntax? explicitName
+        ) => explicitName == null;
 
         // If we don't implement any interface members we can't convert this to be explicit.
-        protected override bool CheckMemberCanBeConverted(ISymbol member)
-            => member.ImplicitInterfaceImplementations().Length > 0;
+        protected override bool CheckMemberCanBeConverted(ISymbol member) =>
+            member.ImplicitInterfaceImplementations().Length > 0;
 
         protected override async Task UpdateReferencesAsync(
-            Project project, SolutionEditor solutionEditor,
-            ISymbol implMember, INamedTypeSymbol interfaceType, CancellationToken cancellationToken)
-        {
+            Project project,
+            SolutionEditor solutionEditor,
+            ISymbol implMember,
+            INamedTypeSymbol interfaceType,
+            CancellationToken cancellationToken
+        ) {
             var solution = project.Solution;
 
             // We don't need to cascade in this search, we're only explicitly looking for direct
@@ -55,7 +68,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             // high fan-out (like IDisposable.Dispose()).
             var findRefsOptions = FindReferencesSearchOptions.Default.With(cascade: false);
             var references = await SymbolFinder.FindReferencesAsync(
-                implMember, solution, findRefsOptions, cancellationToken).ConfigureAwait(false);
+                    implMember,
+                    solution,
+                    findRefsOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var implReferences = references.FirstOrDefault();
             if (implReferences == null)
@@ -68,10 +86,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 var document = group.Key;
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var editor = await solutionEditor.GetDocumentEditorAsync(
-                    document.Id, cancellationToken).ConfigureAwait(false);
+                        document.Id,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 foreach (var refLocation in group)
                 {
@@ -83,24 +106,34 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                         continue;
 
                     UpdateLocation(
-                        semanticModel, interfaceType, editor,
-                        syntaxFacts, location, cancellationToken);
+                        semanticModel,
+                        interfaceType,
+                        editor,
+                        syntaxFacts,
+                        location,
+                        cancellationToken
+                    );
                 }
             }
         }
 
         private static void UpdateLocation(
-            SemanticModel semanticModel, INamedTypeSymbol interfaceType,
-            SyntaxEditor editor, ISyntaxFactsService syntaxFacts,
-            Location location, CancellationToken cancellationToken)
-        {
+            SemanticModel semanticModel,
+            INamedTypeSymbol interfaceType,
+            SyntaxEditor editor,
+            ISyntaxFactsService syntaxFacts,
+            Location location,
+            CancellationToken cancellationToken
+        ) {
             var identifierName = location.FindNode(getInnermostNodeForTie: true, cancellationToken);
             if (identifierName == null || !syntaxFacts.IsIdentifierName(identifierName))
                 return;
 
-            var node = syntaxFacts.IsNameOfSimpleMemberAccessExpression(identifierName) || syntaxFacts.IsNameOfMemberBindingExpression(identifierName)
-                ? identifierName.Parent
-                : identifierName;
+            var node =
+                syntaxFacts.IsNameOfSimpleMemberAccessExpression(identifierName)
+                || syntaxFacts.IsNameOfMemberBindingExpression(identifierName)
+                    ? identifierName.Parent
+                    : identifierName;
 
             RoslynDebug.Assert(node is object);
             if (syntaxFacts.IsInvocationExpression(node.Parent))
@@ -119,9 +152,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
             if (instance.IsImplicit)
             {
-                if (instance is IInstanceReferenceOperation instanceReference &&
-                    instanceReference.ReferenceKind != InstanceReferenceKind.ContainingTypeInstance)
-                {
+                if (
+                    instance is IInstanceReferenceOperation instanceReference
+                    && instanceReference.ReferenceKind
+                        != InstanceReferenceKind.ContainingTypeInstance
+                ) {
                     return;
                 }
 
@@ -131,20 +166,34 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 editor.ReplaceNode(
                     identifierName,
                     generator.MemberAccessExpression(
-                        generator.AddParentheses(generator.CastExpression(interfaceType, generator.ThisExpression())),
-                        identifierName.WithoutTrivia()).WithTriviaFrom(identifierName));
+                            generator.AddParentheses(
+                                generator.CastExpression(interfaceType, generator.ThisExpression())
+                            ),
+                            identifierName.WithoutTrivia()
+                        )
+                        .WithTriviaFrom(identifierName)
+                );
             }
             else
             {
                 // Accessing the member like `x.Goo()`.  Replace with `((IGoo)x).Goo()`
                 editor.ReplaceNode(
-                    instance.Syntax, (current, g) =>
-                        g.AddParentheses(
-                            g.CastExpression(interfaceType, current.WithoutTrivia())).WithTriviaFrom(current));
+                    instance.Syntax,
+                    (current, g) =>
+                        g.AddParentheses(g.CastExpression(interfaceType, current.WithoutTrivia()))
+                            .WithTriviaFrom(current)
+                );
             }
         }
 
-        protected override SyntaxNode ChangeImplementation(SyntaxGenerator generator, SyntaxNode decl, ISymbol interfaceMember)
-            => generator.WithExplicitInterfaceImplementations(decl, ImmutableArray.Create(interfaceMember));
+        protected override SyntaxNode ChangeImplementation(
+            SyntaxGenerator generator,
+            SyntaxNode decl,
+            ISymbol interfaceMember
+        ) =>
+            generator.WithExplicitInterfaceImplementations(
+                decl,
+                ImmutableArray.Create(interfaceMember)
+            );
     }
 }

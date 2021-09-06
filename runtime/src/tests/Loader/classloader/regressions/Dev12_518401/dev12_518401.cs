@@ -10,7 +10,9 @@ using System;
 #pragma warning disable 169
 struct MyStruct
 {
-    byte a, b, c;
+    byte a,
+        b,
+        c;
 }
 #pragma warning restore 169
 

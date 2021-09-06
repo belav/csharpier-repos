@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public TypedRelationalValueBufferFactory(
             RelationalValueBufferFactoryDependencies dependencies,
-            Func<DbDataReader, object[]> valueFactory)
-        {
+            Func<DbDataReader, object[]> valueFactory
+        ) {
             _valueFactory = valueFactory;
         }
 
@@ -44,9 +44,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
 
             var values = _valueFactory(dataReader);
 
-            return values.Length == 0
-                ? ValueBuffer.Empty
-                : new ValueBuffer(values);
+            return values.Length == 0 ? ValueBuffer.Empty : new ValueBuffer(values);
         }
     }
 }

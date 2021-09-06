@@ -21,8 +21,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         {
             try
             {
-                using (var socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-                {
+                using (
+                    var socket = new Socket(
+                        AddressFamily.InterNetworkV6,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                ) {
                     socket.Bind(new IPEndPoint(IPAddress.IPv6Loopback, 0));
                     return true;
                 }

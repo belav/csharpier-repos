@@ -9,16 +9,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the entity types that have the <see cref="OwnedAttribute" /> as owned.
     /// </summary>
-    public class OwnedEntityTypeAttributeConvention : EntityTypeAttributeConventionBase<OwnedAttribute>
+    public class OwnedEntityTypeAttributeConvention
+        : EntityTypeAttributeConventionBase<OwnedAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="OwnedEntityTypeAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public OwnedEntityTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public OwnedEntityTypeAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model if it has an attribute.
@@ -29,9 +29,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             OwnedAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-        {
-            entityTypeBuilder.ModelBuilder.Owned(entityTypeBuilder.Metadata.ClrType, fromDataAnnotation: true);
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) {
+            entityTypeBuilder.ModelBuilder.Owned(
+                entityTypeBuilder.Metadata.ClrType,
+                fromDataAnnotation: true
+            );
         }
     }
 }

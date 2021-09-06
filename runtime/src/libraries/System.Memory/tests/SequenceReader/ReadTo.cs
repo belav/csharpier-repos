@@ -9,19 +9,24 @@ namespace System.Memory.Tests.SequenceReader
 {
     public class ReadTo
     {
-        [Theory,
+        [
+            Theory,
             InlineData(false, false),
             InlineData(false, true),
             InlineData(true, false),
-            InlineData(true, true)]
+            InlineData(true, true)
+        ]
         public void TryReadTo_Span(bool advancePastDelimiter, bool useEscapeOverload)
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 0 },
-                new byte[] { 1, 2 },
-                new byte[] { },
-                new byte[] { 3, 4, 5, 6 }
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][]
+                {
+                    new byte[] { 0 },
+                    new byte[] { 1, 2 },
+                    new byte[] {  },
+                    new byte[] { 3, 4, 5, 6 }
+                }
+            );
 
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);
 
@@ -34,7 +39,8 @@ namespace System.Memory.Tests.SequenceReader
                 Assert.True(
                     useEscapeOverload
                         ? copy.TryReadTo(out ReadOnlySpan<byte> span, i, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out span, i, advancePastDelimiter));
+                        : copy.TryReadTo(out span, i, advancePastDelimiter)
+                );
 
                 // Should never have a null Position object
                 Assert.NotNull(copy.Position.GetObject());
@@ -43,31 +49,39 @@ namespace System.Memory.Tests.SequenceReader
                 Assert.True(
                     useEscapeOverload
                         ? copy.TryReadTo(out span, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out span, 6, advancePastDelimiter));
+                        : copy.TryReadTo(out span, 6, advancePastDelimiter)
+                );
 
                 Assert.NotNull(copy.Position.GetObject());
 
                 // If we didn't advance, we should still be able to read to 6
-                Assert.Equal(!advancePastDelimiter,
+                Assert.Equal(
+                    !advancePastDelimiter,
                     useEscapeOverload
                         ? copy.TryReadTo(out span, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out span, 6, advancePastDelimiter));
+                        : copy.TryReadTo(out span, 6, advancePastDelimiter)
+                );
             }
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(false, false),
             InlineData(false, true),
             InlineData(true, false),
-            InlineData(true, true)]
+            InlineData(true, true)
+        ]
         public void TryReadTo_Sequence(bool advancePastDelimiter, bool useEscapeOverload)
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 0 },
-                new byte[] { 1, 2 },
-                new byte[] { },
-                new byte[] { 3, 4, 5, 6 }
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][]
+                {
+                    new byte[] { 0 },
+                    new byte[] { 1, 2 },
+                    new byte[] {  },
+                    new byte[] { 3, 4, 5, 6 }
+                }
+            );
 
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);
 
@@ -79,8 +93,14 @@ namespace System.Memory.Tests.SequenceReader
                 // Can read to the first integer (0-5)
                 Assert.True(
                     useEscapeOverload
-                        ? copy.TryReadTo(out ReadOnlySequence<byte> sequence, i, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out sequence, i, advancePastDelimiter));
+                        ? copy.TryReadTo(
+                              out ReadOnlySequence<byte> sequence,
+                              i,
+                              255,
+                              advancePastDelimiter
+                          )
+                        : copy.TryReadTo(out sequence, i, advancePastDelimiter)
+                );
 
                 // Should never have a null Position object
                 Assert.NotNull(copy.Position.GetObject());
@@ -92,7 +112,8 @@ namespace System.Memory.Tests.SequenceReader
                 Assert.True(
                     useEscapeOverload
                         ? copy.TryReadTo(out sequence, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out sequence, 6, advancePastDelimiter));
+                        : copy.TryReadTo(out sequence, 6, advancePastDelimiter)
+                );
 
                 Assert.NotNull(copy.Position.GetObject());
                 enumerator = sequence.GetEnumerator();
@@ -100,24 +121,27 @@ namespace System.Memory.Tests.SequenceReader
                     ;
 
                 // If we didn't advance, we should still be able to read to 6
-                Assert.Equal(!advancePastDelimiter,
+                Assert.Equal(
+                    !advancePastDelimiter,
                     useEscapeOverload
                         ? copy.TryReadTo(out sequence, 6, 255, advancePastDelimiter)
-                        : copy.TryReadTo(out sequence, 6, advancePastDelimiter));
+                        : copy.TryReadTo(out sequence, 6, advancePastDelimiter)
+                );
             }
         }
 
-        [Theory,
-            InlineData(false),
-            InlineData(true),]
+        [Theory, InlineData(false), InlineData(true),]
         public void TryReadToSpan_Sequence(bool advancePastDelimiter)
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 0, 0 },
-                new byte[] { 1, 1, 2, 2 },
-                new byte[] { },
-                new byte[] { 3, 3, 4, 4, 5, 5, 6, 6 }
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][]
+                {
+                    new byte[] { 0, 0 },
+                    new byte[] { 1, 1, 2, 2 },
+                    new byte[] {  },
+                    new byte[] { 3, 3, 4, 4, 5, 5, 6, 6 }
+                }
+            );
 
             SequenceReader<byte> baseReader = new SequenceReader<byte>(bytes);
             for (byte i = 0; i < bytes.Length / 2 - 1; i++)
@@ -131,66 +155,84 @@ namespace System.Memory.Tests.SequenceReader
                 ReadOnlySpan<byte> searchFor = new byte[] { i, (byte)(i + 1) };
                 SequenceReader<byte> copy = baseReader;
 
-                Assert.True(copy.TryReadTo(out ReadOnlySpan<byte> sp, searchFor, advancePastDelimiter));
+                Assert.True(
+                    copy.TryReadTo(out ReadOnlySpan<byte> sp, searchFor, advancePastDelimiter)
+                );
                 Assert.True(sp.SequenceEqual(expected));
 
                 copy = baseReader;
-                Assert.True(copy.TryReadTo(out ReadOnlySequence<byte> seq, searchFor, advancePastDelimiter));
+                Assert.True(
+                    copy.TryReadTo(out ReadOnlySequence<byte> seq, searchFor, advancePastDelimiter)
+                );
                 Assert.True(seq.ToArray().AsSpan().SequenceEqual(expected));
             }
 
-            bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 47, 42, 66, 32, 42, 32, 66, 42, 47 }   // /*b * b*/
-            });
+            bytes = SequenceFactory.Create(
+                new byte[][]
+                {
+                    new byte[] { 47, 42, 66, 32, 42, 32, 66, 42, 47 } // /*b * b*/
+                }
+            );
 
             baseReader = new SequenceReader<byte>(bytes);
             SequenceReader<byte> copyReader = baseReader;
 
-            Assert.True(copyReader.TryReadTo(out ReadOnlySpan<byte> span, new byte[] { 42, 47 }, advancePastDelimiter));    //  */
+            Assert.True(
+                copyReader.TryReadTo(
+                    out ReadOnlySpan<byte> span,
+                    new byte[] { 42, 47 },
+                    advancePastDelimiter
+                )
+            ); //  */
             Assert.True(span.SequenceEqual(new byte[] { 47, 42, 66, 32, 42, 32, 66 }));
 
             copyReader = baseReader;
-            Assert.True(copyReader.TryReadTo(out ReadOnlySequence<byte> sequence, new byte[] { 42, 47 }, advancePastDelimiter));    //  */
-            Assert.True(sequence.ToArray().AsSpan().SequenceEqual(new byte[] { 47, 42, 66, 32, 42, 32, 66 }));
+            Assert.True(
+                copyReader.TryReadTo(
+                    out ReadOnlySequence<byte> sequence,
+                    new byte[] { 42, 47 },
+                    advancePastDelimiter
+                )
+            ); //  */
+            Assert.True(
+                sequence.ToArray().AsSpan().SequenceEqual(new byte[] { 47, 42, 66, 32, 42, 32, 66 })
+            );
         }
 
-        [Theory,
-            InlineData(false),
-            InlineData(true)]
+        [Theory, InlineData(false), InlineData(true)]
         public void TryReadTo_NotFound_Span(bool advancePastDelimiter)
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 1 },
-                new byte[] { 2, 3, 255 }
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][] { new byte[] { 1 }, new byte[] { 2, 3, 255 } }
+            );
 
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);
             reader.Advance(4);
-            Assert.False(reader.TryReadTo(out ReadOnlySpan<byte> span, 255, 0, advancePastDelimiter));
+            Assert.False(
+                reader.TryReadTo(out ReadOnlySpan<byte> span, 255, 0, advancePastDelimiter)
+            );
         }
 
-        [Theory,
-            InlineData(false),
-            InlineData(true)]
+        [Theory, InlineData(false), InlineData(true)]
         public void TryReadTo_NotFound_Sequence(bool advancePastDelimiter)
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 1 },
-                new byte[] { 2, 3, 255 }
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][] { new byte[] { 1 }, new byte[] { 2, 3, 255 } }
+            );
 
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);
             reader.Advance(4);
-            Assert.False(reader.TryReadTo(out ReadOnlySequence<byte> span, 255, 0, advancePastDelimiter));
+            Assert.False(
+                reader.TryReadTo(out ReadOnlySequence<byte> span, 255, 0, advancePastDelimiter)
+            );
         }
 
         [Fact]
         public void TryReadTo_SingleDelimiter()
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 1 },
-                new byte[] { 2, 3, 4, 5, 6 }
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][] { new byte[] { 1 }, new byte[] { 2, 3, 4, 5, 6 } }
+            );
 
             SequenceReader<byte> baseReader = new SequenceReader<byte>(bytes);
 
@@ -203,7 +245,13 @@ namespace System.Memory.Tests.SequenceReader
                 // Also check scanning from the start.
                 SequenceReader<byte> resetReader = baseReader;
                 delimiter[0] = (byte)i;
-                Assert.True(spanReader.TryReadTo(out ReadOnlySpan<byte> span, delimiter, advancePastDelimiter: true));
+                Assert.True(
+                    spanReader.TryReadTo(
+                        out ReadOnlySpan<byte> span,
+                        delimiter,
+                        advancePastDelimiter: true
+                    )
+                );
                 Assert.True(resetReader.TryReadTo(out span, delimiter, advancePastDelimiter: true));
                 Assert.True(spanReader.TryPeek(out byte value));
                 Assert.Equal(i + 1, value);
@@ -213,8 +261,16 @@ namespace System.Memory.Tests.SequenceReader
                 // Also check scanning from the start.
                 resetReader = baseReader;
                 delimiter[0] = (byte)i;
-                Assert.True(sequenceReader.TryReadTo(out ReadOnlySequence<byte> sequence, delimiter, advancePastDelimiter: true));
-                Assert.True(resetReader.TryReadTo(out sequence, delimiter, advancePastDelimiter: true));
+                Assert.True(
+                    sequenceReader.TryReadTo(
+                        out ReadOnlySequence<byte> sequence,
+                        delimiter,
+                        advancePastDelimiter: true
+                    )
+                );
+                Assert.True(
+                    resetReader.TryReadTo(out sequence, delimiter, advancePastDelimiter: true)
+                );
                 Assert.True(sequenceReader.TryPeek(out value));
                 Assert.Equal(i + 1, value);
                 Assert.True(resetReader.TryPeek(out value));
@@ -226,7 +282,9 @@ namespace System.Memory.Tests.SequenceReader
         public void TryReadTo_Span_At_Segments_Boundary()
         {
             Span<byte> delimiter = new byte[] { 13, 10 }; // \r\n
-            BufferSegment<byte> segment = new BufferSegment<byte>(Text.Encoding.ASCII.GetBytes("Hello\r"));
+            BufferSegment<byte> segment = new BufferSegment<byte>(
+                Text.Encoding.ASCII.GetBytes("Hello\r")
+            );
             segment.Append(Text.Encoding.ASCII.GetBytes("\nWorld")); // add next segment
             ReadOnlySequence<byte> inputSeq = new ReadOnlySequence<byte>(segment, 0, segment, 6); // span only the first segment!
             SequenceReader<byte> sr = new SequenceReader<byte>(inputSeq);

@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis
         internal readonly IMetadataService MetadataService;
         internal readonly IProjectCacheHostService CacheService;
 
-        internal bool SupportsCachingRecoverableObjects { get { return this.CacheService != null; } }
+        internal bool SupportsCachingRecoverableObjects
+        {
+            get { return this.CacheService != null; }
+        }
 
         public SolutionServices(Workspace workspace)
         {

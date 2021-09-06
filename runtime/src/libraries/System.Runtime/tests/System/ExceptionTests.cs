@@ -20,7 +20,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new Exception();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_EXCEPTION, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_EXCEPTION,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -28,7 +32,11 @@ namespace System.Tests
         {
             string message = "something went wrong";
             var exception = new Exception(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_EXCEPTION, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_EXCEPTION,
+                message: message
+            );
         }
 
         [Fact]
@@ -37,7 +45,12 @@ namespace System.Tests
             string message = "something went wrong";
             var innerException = new Exception("Inner exception");
             var exception = new Exception(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_EXCEPTION, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_EXCEPTION,
+                innerException: innerException,
+                message: message
+            );
         }
 
         [Fact]
@@ -78,7 +91,7 @@ namespace System.Tests
 
             Assert.True(caught);
         }
-        
+
         static void RethrowException()
         {
             try
@@ -121,8 +134,9 @@ namespace System.Tests
             }
         }
 
-        private static (string, string, int) ThrowAndRethrowSameMethod(out (string, string, int) rethrownExceptionStackFrame)
-        {
+        private static (string, string, int) ThrowAndRethrowSameMethod(
+            out (string, string, int) rethrownExceptionStackFrame
+        ) {
             try
             {
                 rethrownExceptionStackFrame = GetSourceInformation(1);
@@ -134,7 +148,7 @@ namespace System.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotArm64Process))] 
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotArm64Process))]
         // [ActiveIssue(https://github.com/dotnet/runtime/issues/1871)] can't use ActiveIssue for archs
         [ActiveIssue("https://github.com/mono/mono/issues/15141", TestRuntimes.Mono)]
         public static void ThrowStatementDoesNotResetExceptionStackLineOtherMethod()
@@ -151,12 +165,17 @@ namespace System.Tests
             }
         }
 
-        private static void ThrowAndRethrowOtherMethod(out (string, string, int) rethrownExceptionStackFrame)
-        {
+        private static void ThrowAndRethrowOtherMethod(
+            out (string, string, int) rethrownExceptionStackFrame
+        ) {
             try
             {
                 rethrownExceptionStackFrame = GetSourceInformation(1);
-                ThrowException(); Assert.True(false, "Workaround for Linux Release builds (https://github.com/dotnet/corefx/pull/28059#issuecomment-378335456)");
+                ThrowException();
+                Assert.True(
+                    false,
+                    "Workaround for Linux Release builds (https://github.com/dotnet/corefx/pull/28059#issuecomment-378335456)"
+                );
             }
             catch
             {
@@ -173,14 +192,16 @@ namespace System.Tests
 
         private static void VerifyCallStack(
             (string CallerMemberName, string SourceFilePath, int SourceLineNumber) expectedStackFrame,
-            string reportedCallStack, int skipFrames)
-        {
+            string reportedCallStack,
+            int skipFrames
+        ) {
             try
             {
                 string frameParserRegex;
                 if (PlatformDetection.IsLineNumbersSupported)
                 {
-                    frameParserRegex = @"\s+at\s.+\.(?<memberName>[^(.]+)\([^)]*\)\sin\s(?<filePath>.*)\:line\s(?<lineNumber>[\d]+)";
+                    frameParserRegex =
+                        @"\s+at\s.+\.(?<memberName>[^(.]+)\([^)]*\)\sin\s(?<filePath>.*)\:line\s(?<lineNumber>[\d]+)";
                 }
                 else
                 {
@@ -195,18 +216,30 @@ namespace System.Tests
                     Assert.NotNull(frame);
                     var match = Regex.Match(frame, frameParserRegex);
                     Assert.True(match.Success);
-                    Assert.Equal(expectedStackFrame.CallerMemberName, match.Groups["memberName"].Value);
-                    
+                    Assert.Equal(
+                        expectedStackFrame.CallerMemberName,
+                        match.Groups["memberName"].Value
+                    );
+
                     if (PlatformDetection.IsLineNumbersSupported)
                     {
-                        Assert.Equal(expectedStackFrame.SourceFilePath, match.Groups["filePath"].Value);
-                        Assert.Equal(expectedStackFrame.SourceLineNumber, Convert.ToInt32(match.Groups["lineNumber"].Value));
+                        Assert.Equal(
+                            expectedStackFrame.SourceFilePath,
+                            match.Groups["filePath"].Value
+                        );
+                        Assert.Equal(
+                            expectedStackFrame.SourceLineNumber,
+                            Convert.ToInt32(match.Groups["lineNumber"].Value)
+                        );
                     }
                 }
             }
             catch
             {
-                Console.WriteLine("* ExceptionTests - reported call stack:\n{0}", reportedCallStack);
+                Console.WriteLine(
+                    "* ExceptionTests - reported call stack:\n{0}",
+                    reportedCallStack
+                );
                 throw;
             }
         }
@@ -215,8 +248,8 @@ namespace System.Tests
             int offset,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
-        {
+            [CallerLineNumber] int sourceLineNumber = 0
+        ) {
             return (memberName, sourceFilePath, sourceLineNumber + offset);
         }
     }
@@ -237,8 +270,16 @@ namespace System.Tests
         public static void Exception_SerializeObjectState()
         {
             var excp = new DerivedException();
-            Assert.Throws<PlatformNotSupportedException>(() => excp.SerializeObjectState += (exception, eventArgs) => eventArgs.AddSerializedState(null));
-            Assert.Throws<PlatformNotSupportedException>(() => excp.SerializeObjectState -= (exception, eventArgs) => eventArgs.AddSerializedState(null));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    excp.SerializeObjectState += (exception, eventArgs) =>
+                        eventArgs.AddSerializedState(null)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    excp.SerializeObjectState -= (exception, eventArgs) =>
+                        eventArgs.AddSerializedState(null)
+            );
         }
 
         [Fact]
@@ -256,10 +297,14 @@ namespace System.Tests
     {
         protected override IDictionary NonGenericIDictionaryFactory() => new Exception().Data;
 
-        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType => typeof(IndexOutOfRangeException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType =>
+            typeof(IndexOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
 
         public override void ICollection_NonGeneric_CopyTo_NonZeroLowerBound(int count)
         {
@@ -269,7 +314,11 @@ namespace System.Tests
             if (count == 0)
             {
                 ICollection collection = NonGenericICollectionFactory(count);
-                Array arr = Array.CreateInstance(typeof(object), new int[1] { count }, new int[1] { 2 });
+                Array arr = Array.CreateInstance(
+                    typeof(object),
+                    new int[1] { count },
+                    new int[1] { 2 }
+                );
                 collection.CopyTo(arr, 0);
                 return;
             }

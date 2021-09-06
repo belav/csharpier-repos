@@ -20,8 +20,10 @@ namespace System.Net.Test.Common
 
         public override Uri Address => new Uri($"https://{_listener.ListenEndPoint}/");
 
-        public Http3LoopbackServer(QuicImplementationProvider quicImplementationProvider = null, GenericLoopbackOptions options = null)
-        {
+        public Http3LoopbackServer(
+            QuicImplementationProvider quicImplementationProvider = null,
+            GenericLoopbackOptions options = null
+        ) {
             options ??= new GenericLoopbackOptions();
 
             _cert = Configuration.Certificates.GetSelfSigned13ServerCertificate();
@@ -39,7 +41,11 @@ namespace System.Net.Test.Common
                 ClientCertificateRequired = false
             };
 
-            _listener = new QuicListener(quicImplementationProvider ?? QuicImplementationProviders.Default, new IPEndPoint(options.Address, 0), sslOpts);
+            _listener = new QuicListener(
+                quicImplementationProvider ?? QuicImplementationProviders.Default,
+                new IPEndPoint(options.Address, 0),
+                sslOpts
+            );
             _listener.Start();
         }
 
@@ -55,15 +61,21 @@ namespace System.Net.Test.Common
             return new Http3LoopbackConnection(con);
         }
 
-        public override async Task AcceptConnectionAsync(Func<GenericLoopbackConnection, Task> funcAsync)
-        {
-            using GenericLoopbackConnection con = await EstablishGenericConnectionAsync().ConfigureAwait(false);
+        public override async Task AcceptConnectionAsync(
+            Func<GenericLoopbackConnection, Task> funcAsync
+        ) {
+            using GenericLoopbackConnection con = await EstablishGenericConnectionAsync()
+                .ConfigureAwait(false);
             await funcAsync(con).ConfigureAwait(false);
         }
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
-        {
-            using var con = (Http3LoopbackConnection)await EstablishGenericConnectionAsync().ConfigureAwait(false);
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        ) {
+            using var con = (Http3LoopbackConnection)await EstablishGenericConnectionAsync()
+                .ConfigureAwait(false);
             return await con.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
         }
     }
@@ -77,7 +89,8 @@ namespace System.Net.Test.Common
             _quicImplementationProvider = quicImplementationProvider;
         }
 
-        public static Http3LoopbackServerFactory Singleton { get; } = new Http3LoopbackServerFactory(null);
+        public static Http3LoopbackServerFactory Singleton { get; } =
+            new Http3LoopbackServerFactory(null);
 
         public override Version Version { get; } = new Version(3, 0);
 
@@ -86,14 +99,21 @@ namespace System.Net.Test.Common
             return new Http3LoopbackServer(_quicImplementationProvider, options);
         }
 
-        public override async Task CreateServerAsync(Func<GenericLoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60000, GenericLoopbackOptions options = null)
-        {
+        public override async Task CreateServerAsync(
+            Func<GenericLoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60000,
+            GenericLoopbackOptions options = null
+        ) {
             using GenericLoopbackServer server = CreateServer(options);
-            await funcAsync(server, server.Address).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+            await funcAsync(server, server.Address)
+                .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
         }
 
-        public override Task<GenericLoopbackConnection> CreateConnectionAsync(Socket socket, Stream stream, GenericLoopbackOptions options = null)
-        {
+        public override Task<GenericLoopbackConnection> CreateConnectionAsync(
+            Socket socket,
+            Stream stream,
+            GenericLoopbackOptions options = null
+        ) {
             // TODO: make a new overload that takes a MultiplexedConnection.
             // This method is always unacceptable to call for HTTP/3.
             throw new NotImplementedException("HTTP/3 does not operate over a Socket.");

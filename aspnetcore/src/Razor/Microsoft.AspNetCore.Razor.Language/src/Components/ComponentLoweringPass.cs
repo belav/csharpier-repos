@@ -12,8 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         // This pass runs earlier than our other passes that 'lower' specific kinds of attributes.
         public override int Order => 0;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -50,7 +52,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         // the first one and ignore the others.
                         if (++count > 1)
                         {
-                            node.Diagnostics.Add(ComponentDiagnosticFactory.Create_MultipleComponents(node.Source, node.TagName, node.TagHelpers));
+                            node.Diagnostics.Add(
+                                ComponentDiagnosticFactory.Create_MultipleComponents(
+                                    node.Source,
+                                    node.TagName,
+                                    node.TagHelpers
+                                )
+                            );
                             break;
                         }
                     }
@@ -58,7 +66,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                 if (count >= 1)
                 {
-                    reference.Replace(RewriteAsComponent(node, node.TagHelpers.First(t => t.IsComponentTagHelper())));
+                    reference.Replace(
+                        RewriteAsComponent(
+                            node,
+                            node.TagHelpers.First(t => t.IsComponentTagHelper())
+                        )
+                    );
                 }
                 else
                 {
@@ -67,8 +80,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        private ComponentIntermediateNode RewriteAsComponent(TagHelperIntermediateNode node, TagHelperDescriptor tagHelper)
-        {
+        private ComponentIntermediateNode RewriteAsComponent(
+            TagHelperIntermediateNode node,
+            TagHelperDescriptor tagHelper
+        ) {
             var component = new ComponentIntermediateNode()
             {
                 Component = tagHelper,
@@ -89,7 +104,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // because we see the nodes in the wrong order.
             foreach (var childContent in component.ChildContents)
             {
-                childContent.ParameterName = childContent.ParameterName ?? component.ChildContentParameterName ?? ComponentMetadata.ChildContent.DefaultParameterName;
+                childContent.ParameterName =
+                    childContent.ParameterName
+                    ?? component.ChildContentParameterName
+                    ?? ComponentMetadata.ChildContent.DefaultParameterName;
             }
 
             return component;
@@ -168,11 +186,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 //    which is always allowed.
                 // 5. Each 'child content' element will generate its own lambda, and be assigned to the property
                 //    that matches the element name.
-                if (!node.Children.OfType<TagHelperIntermediateNode>().Any(t => t.TagHelpers.Any(th => th.IsChildContentTagHelper())))
-                {
+                if (
+                    !node.Children.OfType<TagHelperIntermediateNode>()
+                        .Any(t => t.TagHelpers.Any(th => th.IsChildContentTagHelper()))
+                ) {
                     // This node has implicit child content. It may or may not have an attribute that matches.
-                    var attribute = _component.Component.BoundAttributes
-                        .Where(a => string.Equals(a.Name, ComponentsApi.RenderTreeBuilder.ChildContent, StringComparison.Ordinal))
+                    var attribute = _component.Component.BoundAttributes.Where(
+                            a =>
+                                string.Equals(
+                                    a.Name,
+                                    ComponentsApi.RenderTreeBuilder.ChildContent,
+                                    StringComparison.Ordinal
+                                )
+                        )
                         .FirstOrDefault();
                     _children.Add(RewriteChildContent(attribute, node.Source, node.Children));
                     return;
@@ -190,29 +216,42 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         continue;
                     }
 
-                    if (child is TagHelperIntermediateNode tagHelperNode &&
-                        tagHelperNode.TagHelpers.Any(th => th.IsChildContentTagHelper()))
-                    {
+                    if (
+                        child is TagHelperIntermediateNode tagHelperNode
+                        && tagHelperNode.TagHelpers.Any(th => th.IsChildContentTagHelper())
+                    ) {
                         // This is a child content element
-                        var attribute = _component.Component.BoundAttributes
-                            .Where(a => string.Equals(a.Name, tagHelperNode.TagName, StringComparison.Ordinal))
+                        var attribute = _component.Component.BoundAttributes.Where(
+                                a =>
+                                    string.Equals(
+                                        a.Name,
+                                        tagHelperNode.TagName,
+                                        StringComparison.Ordinal
+                                    )
+                            )
                             .FirstOrDefault();
                         _children.Add(RewriteChildContent(attribute, child.Source, child.Children));
                         continue;
                     }
-                    
+
                     // If we get here then this is significant content inside a component with explicit child content.
-                    child.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(child.Source, _component));
+                    child.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(
+                            child.Source,
+                            _component
+                        )
+                    );
                     _children.Add(child);
                 }
 
                 bool IsIgnorableWhitespace(IntermediateNode n)
                 {
-                    if (n is HtmlContentIntermediateNode html &&
-                        html.Children.Count == 1 &&
-                        html.Children[0] is IntermediateToken token &&
-                        string.IsNullOrWhiteSpace(token.Content))
-                    {
+                    if (
+                        n is HtmlContentIntermediateNode html
+                        && html.Children.Count == 1
+                        && html.Children[0] is IntermediateToken token
+                        && string.IsNullOrWhiteSpace(token.Content)
+                    ) {
                         return true;
                     }
 
@@ -220,8 +259,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 }
             }
 
-            private ComponentChildContentIntermediateNode RewriteChildContent(BoundAttributeDescriptor attribute, SourceSpan? source, IntermediateNodeCollection children)
-            {
+            private ComponentChildContentIntermediateNode RewriteChildContent(
+                BoundAttributeDescriptor attribute,
+                SourceSpan? source,
+                IntermediateNodeCollection children
+            ) {
                 var childContent = new ComponentChildContentIntermediateNode()
                 {
                     BoundAttribute = attribute,
@@ -259,22 +301,47 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             }
 
                             // The parameter name is invalid.
-                            childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(property.Source, property.AttributeName, attribute.Name));
+                            childContent.Diagnostics.Add(
+                                ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(
+                                    property.Source,
+                                    property.AttributeName,
+                                    attribute.Name
+                                )
+                            );
                             continue;
                         }
 
                         // This is an unrecognized tag helper bound attribute. This will practically never happen unless the child content descriptor was misconfigured.
-                        childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(property.Source, property.AttributeName, attribute.Name));
+                        childContent.Diagnostics.Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                property.Source,
+                                property.AttributeName,
+                                attribute.Name
+                            )
+                        );
                     }
                     else if (child is TagHelperHtmlAttributeIntermediateNode a)
                     {
                         // This is an HTML attribute on a child content.
-                        childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(a.Source, a.AttributeName, attribute.Name));
+                        childContent.Diagnostics.Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                a.Source,
+                                a.AttributeName,
+                                attribute.Name
+                            )
+                        );
                     }
-                    else if (child is TagHelperDirectiveAttributeIntermediateNode directiveAttribute)
-                    {
+                    else if (
+                        child is TagHelperDirectiveAttributeIntermediateNode directiveAttribute
+                    ) {
                         // We don't support directive attributes inside child content, this is possible if you try to do something like put '@ref' on a child content.
-                        childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(directiveAttribute.Source, directiveAttribute.OriginalAttributeName, attribute.Name));
+                        childContent.Diagnostics.Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                directiveAttribute.Source,
+                                directiveAttribute.OriginalAttributeName,
+                                attribute.Name
+                            )
+                        );
                     }
                     else
                     {
@@ -286,13 +353,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 return childContent;
             }
 
-            private bool TryGetAttributeStringContent(TagHelperPropertyIntermediateNode property, out string content)
-            {
+            private bool TryGetAttributeStringContent(
+                TagHelperPropertyIntermediateNode property,
+                out string content
+            ) {
                 // The success path looks like - a single HTML Attribute Value node with tokens
-                if (property.Children.Count == 1 &&
-                    property.Children[0] is HtmlContentIntermediateNode html)
-                {
-                    content = string.Join(string.Empty, html.Children.OfType<IntermediateToken>().Select(n => n.Content));
+                if (
+                    property.Children.Count == 1
+                    && property.Children[0] is HtmlContentIntermediateNode html
+                ) {
+                    content = string.Join(
+                        string.Empty,
+                        html.Children.OfType<IntermediateToken>().Select(n => n.Content)
+                    );
                     return true;
                 }
 
@@ -300,8 +373,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 return false;
             }
 
-            public override void VisitTagHelperHtmlAttribute(TagHelperHtmlAttributeIntermediateNode node)
-            {
+            public override void VisitTagHelperHtmlAttribute(
+                TagHelperHtmlAttributeIntermediateNode node
+            ) {
                 var attribute = new ComponentAttributeIntermediateNode(node);
                 _children.Add(attribute);
 
@@ -322,8 +396,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                         attribute.Children[i] = newNode;
                     }
-                    else if (attribute.Children[i] is CSharpExpressionAttributeValueIntermediateNode expressionValue)
-                    {
+                    else if (
+                        attribute.Children[i]
+                        is CSharpExpressionAttributeValueIntermediateNode expressionValue
+                    ) {
                         var newNode = new CSharpExpressionIntermediateNode()
                         {
                             Source = expressionValue.Source,
@@ -335,8 +411,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                         attribute.Children[i] = newNode;
                     }
-                    else if (attribute.Children[i] is CSharpCodeAttributeValueIntermediateNode codeValue)
-                    {
+                    else if (
+                        attribute.Children[i] is CSharpCodeAttributeValueIntermediateNode codeValue
+                    ) {
                         var newNode = new CSharpExpressionIntermediateNode()
                         {
                             Source = codeValue.Source,
@@ -364,8 +441,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                 // Another special case here - this might be a type argument. These don't represent 'real' parameters
                 // that get passed to the component, it needs special code generation support.
-                if (node.TagHelper.IsGenericTypedComponent() && node.BoundAttribute.IsTypeParameterProperty())
-                {
+                if (
+                    node.TagHelper.IsGenericTypedComponent()
+                    && node.BoundAttribute.IsTypeParameterProperty()
+                ) {
                     _children.Add(new ComponentTypeArgumentIntermediateNode(node));
                     return;
                 }
@@ -385,15 +464,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     }
 
                     // The parameter name is invalid.
-                    _component.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(node.Source, node.AttributeName, _component.TagName));
+                    _component.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(
+                            node.Source,
+                            node.AttributeName,
+                            _component.TagName
+                        )
+                    );
                     return;
                 }
 
                 _children.Add(new ComponentAttributeIntermediateNode(node));
             }
 
-            public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
-            {
+            public override void VisitTagHelperDirectiveAttribute(
+                TagHelperDirectiveAttributeIntermediateNode node
+            ) {
                 // We don't want to do anything special with directive attributes here.
                 // Let their corresponding lowering pass take care of processing them.
                 _children.Add(node);
@@ -431,8 +517,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 }
             }
 
-            public override void VisitTagHelperHtmlAttribute(TagHelperHtmlAttributeIntermediateNode node)
-            {
+            public override void VisitTagHelperHtmlAttribute(
+                TagHelperHtmlAttributeIntermediateNode node
+            ) {
                 var attribute = new HtmlAttributeIntermediateNode()
                 {
                     AttributeName = node.AttributeName,
@@ -465,7 +552,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         {
                             attribute.Children.Add(RewriteAttributeContent(node.Children[i]));
                         }
-
                         break;
                 }
 
@@ -491,7 +577,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         return value;
                     }
 
-
                     return content;
                 }
             }
@@ -501,11 +586,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // Each 'tag helper property' belongs to a specific tag helper. We want to handle
                 // the cases for components, but leave others alone. This allows our other passes
                 // to handle those cases.
-                _children.Add(node.TagHelper.IsComponentTagHelper() ? (IntermediateNode)new ComponentAttributeIntermediateNode(node) : node);
+                _children.Add(
+                    node.TagHelper.IsComponentTagHelper()
+                        ? (IntermediateNode)new ComponentAttributeIntermediateNode(node)
+                        : node
+                );
             }
 
-            public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
-            {
+            public override void VisitTagHelperDirectiveAttribute(
+                TagHelperDirectiveAttributeIntermediateNode node
+            ) {
                 // We don't want to do anything special with directive attributes here.
                 // Let their corresponding lowering pass take care of processing them.
                 _children.Add(node);

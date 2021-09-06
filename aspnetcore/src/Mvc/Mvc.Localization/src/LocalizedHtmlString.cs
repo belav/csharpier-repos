@@ -21,9 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         /// <param name="name">The name of the string resource.</param>
         /// <param name="value">The string resource.</param>
         public LocalizedHtmlString(string name, string value)
-            : this(name, value, isResourceNotFound: false, arguments: Array.Empty<object>())
-        {
-        }
+            : this(name, value, isResourceNotFound: false, arguments: Array.Empty<object>()) { }
 
         /// <summary>
         /// Creates an instance of <see cref="LocalizedHtmlString"/>.
@@ -32,9 +30,7 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         /// <param name="value">The string resource.</param>
         /// <param name="isResourceNotFound">A flag that indicates if the resource is not found.</param>
         public LocalizedHtmlString(string name, string value, bool isResourceNotFound)
-            : this(name, value, isResourceNotFound, arguments: Array.Empty<object>())
-        {
-        }
+            : this(name, value, isResourceNotFound, arguments: Array.Empty<object>()) { }
 
         /// <summary>
         /// Creates an instance of <see cref="LocalizedHtmlString"/>.
@@ -43,8 +39,12 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         /// <param name="value">The string resource.</param>
         /// <param name="isResourceNotFound">A flag that indicates if the resource is not found.</param>
         /// <param name="arguments">The values to format the <paramref name="value"/> with.</param>
-        public LocalizedHtmlString(string name, string value, bool isResourceNotFound, params object[] arguments)
-        {
+        public LocalizedHtmlString(
+            string name,
+            string value,
+            bool isResourceNotFound,
+            params object[] arguments
+        ) {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));

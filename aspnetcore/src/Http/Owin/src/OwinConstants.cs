@@ -171,7 +171,6 @@ namespace Microsoft.AspNetCore.Owin
 
             public const string User = "server.User";
         }
-
         #endregion
     }
 }

@@ -20,10 +20,10 @@ internal static partial class Interop
 
         internal struct proc_stats
         {
-            internal long startTime;        /* time_t */
+            internal long startTime; /* time_t */
             internal int nice;
-            internal ulong userTime;        /* in ticks */
-            internal ulong systemTime;      /* in ticks */
+            internal ulong userTime; /* in ticks */
+            internal ulong systemTime; /* in ticks */
         }
 
         /// <summary>
@@ -63,12 +63,12 @@ internal static partial class Interop
                 Array.Resize<int>(ref pids, numProcesses);
                 return pids;
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)entries);
             }
         }
-
 
         /// <summary>
         /// Gets executable name for process given it's PID
@@ -76,7 +76,8 @@ internal static partial class Interop
         /// <param name="pid">The PID of the process</param>
         public static unsafe string? GetProcPath(int pid)
         {
-            Span<int> sysctlName = stackalloc int[] { CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, pid };
+            Span<int> sysctlName =
+                stackalloc int[] { CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, pid };
             byte* pBuffer = null;
             int bytesLength = 0;
 
@@ -85,6 +86,7 @@ internal static partial class Interop
                 Interop.Sys.Sysctl(sysctlName, ref pBuffer, ref bytesLength);
                 return System.Text.Encoding.UTF8.GetString(pBuffer, (int)bytesLength - 1);
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)pBuffer);
@@ -140,6 +142,7 @@ internal static partial class Interop
                     info._threadInfoList.Add(ti);
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)kinfo);
@@ -172,8 +175,12 @@ internal static partial class Interop
                     {
                         ret.startTime = (int)info->ki_start.tv_sec;
                         ret.nice = info->ki_nice;
-                        ret.userTime = (ulong)info->ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds + (ulong)info->ki_rusage.ru_utime.tv_usec;
-                        ret.systemTime = (ulong)info->ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds + (ulong)info->ki_rusage.ru_stime.tv_usec;
+                        ret.userTime =
+                            (ulong)info->ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds
+                            + (ulong)info->ki_rusage.ru_utime.tv_usec;
+                        ret.systemTime =
+                            (ulong)info->ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds
+                            + (ulong)info->ki_rusage.ru_stime.tv_usec;
                     }
                     else
                     {
@@ -184,14 +191,19 @@ internal static partial class Interop
                             {
                                 ret.startTime = (int)list[i].ki_start.tv_sec;
                                 ret.nice = list[i].ki_nice;
-                                ret.userTime = (ulong)list[i].ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds + (ulong)list[i].ki_rusage.ru_utime.tv_usec;
-                                ret.systemTime = (ulong)list[i].ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds + (ulong)list[i].ki_rusage.ru_stime.tv_usec;
+                                ret.userTime =
+                                    (ulong)list[i].ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds
+                                    + (ulong)list[i].ki_rusage.ru_utime.tv_usec;
+                                ret.systemTime =
+                                    (ulong)list[i].ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds
+                                    + (ulong)list[i].ki_rusage.ru_stime.tv_usec;
                                 break;
                             }
                         }
                     }
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)info);

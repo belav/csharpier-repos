@@ -13,8 +13,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         /// <param name="valueComparer"> The value comparer. </param>
         /// <returns> <see langword="true" /> if the value comparer is the default; <see langword="false" /> otherwise. </returns>
-        public static bool IsDefault(this ValueComparer valueComparer)
-            => valueComparer.GetType().IsGenericType
-                && valueComparer.GetType().GetGenericTypeDefinition() == typeof(ValueComparer.DefaultValueComparer<>);
+        public static bool IsDefault(this ValueComparer valueComparer) =>
+            valueComparer.GetType().IsGenericType
+            && valueComparer.GetType().GetGenericTypeDefinition()
+                == typeof(ValueComparer.DefaultValueComparer<>);
     }
 }

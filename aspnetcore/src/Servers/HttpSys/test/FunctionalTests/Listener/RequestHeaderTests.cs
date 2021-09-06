@@ -15,7 +15,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
 {
     public class RequestHeaderTests
     {
-
         [ConditionalFact]
         public async Task RequestHeaders_ClientSendsUtf8Headers_Success()
         {
@@ -29,14 +28,23 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var requestHeaders = context.Request.Headers;
                 Assert.Equal(4, requestHeaders.Count);
                 Assert.Equal(new Uri(address).Authority, requestHeaders["Host"]);
-                Assert.Equal(new[] { new Uri(address).Authority }, requestHeaders.GetValues("Host"));
+                Assert.Equal(
+                    new[] { new Uri(address).Authority },
+                    requestHeaders.GetValues("Host")
+                );
                 Assert.Equal("close", requestHeaders["Connection"]);
                 Assert.Equal(new[] { "close" }, requestHeaders.GetValues("Connection"));
                 // Apparently Http.Sys squashes request headers together.
                 Assert.Equal("custom1, and custom测试2, custom3", requestHeaders["Custom-Header"]);
-                Assert.Equal(new[] { "custom1", "and custom测试2", "custom3" }, requestHeaders.GetValues("Custom-Header"));
+                Assert.Equal(
+                    new[] { "custom1", "and custom测试2", "custom3" },
+                    requestHeaders.GetValues("Custom-Header")
+                );
                 Assert.Equal("spacervalue, spacervalue", requestHeaders["Spacer-Header"]);
-                Assert.Equal(new[] { "spacervalue", "spacervalue" }, requestHeaders.GetValues("Spacer-Header"));
+                Assert.Equal(
+                    new[] { "spacervalue", "spacervalue" },
+                    requestHeaders.GetValues("Spacer-Header")
+                );
                 context.Dispose();
 
                 await responseTask;
@@ -56,7 +64,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var requestHeaders = context.Request.Headers;
                 Assert.Equal(3, requestHeaders.Count);
                 Assert.Equal(new Uri(address).Authority, requestHeaders["Host"]);
-                Assert.Equal(new[] { new Uri(address).Authority }, requestHeaders.GetValues("Host"));
+                Assert.Equal(
+                    new[] { new Uri(address).Authority },
+                    requestHeaders.GetValues("Host")
+                );
                 Assert.Equal("close", requestHeaders["Connection"]);
                 Assert.Equal(new[] { "close" }, requestHeaders.GetValues("Connection"));
                 Assert.Equal(StringValues.Empty, requestHeaders["If-None-Match"]);
@@ -81,7 +92,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var requestHeaders = context.Request.Headers;
                 Assert.Equal(4, requestHeaders.Count);
                 Assert.Equal(new Uri(address).Authority, requestHeaders["Host"]);
-                Assert.Equal(new[] { new Uri(address).Authority }, requestHeaders.GetValues("Host"));
+                Assert.Equal(
+                    new[] { new Uri(address).Authority },
+                    requestHeaders.GetValues("Host")
+                );
                 Assert.Equal("close", requestHeaders["Connection"]);
                 Assert.Equal(new[] { "close" }, requestHeaders.GetValues("Connection"));
                 Assert.Equal("", requestHeaders["Custom-Header"]);
@@ -93,8 +107,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             }
         }
 
-        private async Task SendRequestAsync(string address, string customHeader, string[] customValues)
-        {
+        private async Task SendRequestAsync(
+            string address,
+            string customHeader,
+            string[] customValues
+        ) {
             var uri = new Uri(address);
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("GET / HTTP/1.1");

@@ -106,14 +106,15 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
-            where TFlagsEnum : Enum
+            Asn1Tag? expectedTag = null
+        ) where TFlagsEnum : Enum
         {
             Type tFlagsEnum = typeof(TFlagsEnum);
 
             TFlagsEnum ret = (TFlagsEnum)Enum.ToObject(
                 tFlagsEnum,
-                ReadNamedBitListValue(source, ruleSet, tFlagsEnum, out int consumed, expectedTag));
+                ReadNamedBitListValue(source, ruleSet, tFlagsEnum, out int consumed, expectedTag)
+            );
 
             // Now that there's nothing left to throw, assign bytesConsumed.
             bytesConsumed = consumed;
@@ -179,8 +180,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             Type flagsEnumType,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
-        {
+            Asn1Tag? expectedTag = null
+        ) {
             if (flagsEnumType == null)
                 throw new ArgumentNullException(nameof(flagsEnumType));
 
@@ -192,7 +193,8 @@ namespace System.Formats.Asn1
             {
                 throw new ArgumentException(
                     SR.Argument_NamedBitListRequiresFlagsEnum,
-                    nameof(flagsEnumType));
+                    nameof(flagsEnumType)
+                );
             }
 
             Span<byte> stackSpan = stackalloc byte[sizeof(ulong)];
@@ -206,12 +208,14 @@ namespace System.Formats.Asn1
                 out int unusedBitCount,
                 out int consumed,
                 out int bytesWritten,
-                expectedTag);
+                expectedTag
+            );
 
             if (!read)
             {
                 throw new AsnContentException(
-                    SR.Format(SR.ContentException_NamedBitListValueTooBig, flagsEnumType.Name));
+                    SR.Format(SR.ContentException_NamedBitListValueTooBig, flagsEnumType.Name)
+                );
             }
 
             Enum ret;
@@ -229,8 +233,7 @@ namespace System.Formats.Asn1
             // Now that the 0-bounds check is out of the way:
             //
             // T-REC-X.690-201508 sec 11.2.2
-            if (ruleSet == AsnEncodingRules.DER ||
-                ruleSet == AsnEncodingRules.CER)
+            if (ruleSet == AsnEncodingRules.DER || ruleSet == AsnEncodingRules.CER)
             {
                 byte lastByte = valueSpan[bytesWritten - 1];
 
@@ -322,9 +325,15 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
-        {
-            Asn1Tag actualTag = ReadEncodedValue(source, ruleSet, out _, out int contentLength, out _);
+            Asn1Tag? expectedTag = null
+        ) {
+            Asn1Tag actualTag = ReadEncodedValue(
+                source,
+                ruleSet,
+                out _,
+                out int contentLength,
+                out _
+            );
 
             // Get the last ArgumentException out of the way before we rent arrays
             if (expectedTag != null)
@@ -335,15 +344,17 @@ namespace System.Formats.Asn1
             // The number of interpreted bytes is at most contentLength - 1, just ask for contentLength.
             byte[] rented = CryptoPool.Rent(contentLength);
 
-            if (!TryReadBitString(
-                source,
-                rented,
-                ruleSet,
-                out int unusedBitCount,
-                out int consumed,
-                out int written,
-                expectedTag))
-            {
+            if (
+                !TryReadBitString(
+                    source,
+                    rented,
+                    ruleSet,
+                    out int unusedBitCount,
+                    out int consumed,
+                    out int written,
+                    expectedTag
+                )
+            ) {
                 Debug.Fail("TryReadBitString failed with an over-allocated buffer");
                 throw new InvalidOperationException();
             }
@@ -490,13 +501,15 @@ namespace System.Formats.Asn1
         ///   the example enum uses values thar are different from
         ///   System.Security.Cryptography.X509Certificates.X509KeyUsageFlags.
         /// </remarks>
-        public TFlagsEnum ReadNamedBitListValue<TFlagsEnum>(Asn1Tag? expectedTag = null) where TFlagsEnum : Enum
+        public TFlagsEnum ReadNamedBitListValue<TFlagsEnum>(Asn1Tag? expectedTag = null)
+            where TFlagsEnum : Enum
         {
             TFlagsEnum ret = AsnDecoder.ReadNamedBitListValue<TFlagsEnum>(
                 _data.Span,
                 RuleSet,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             _data = _data.Slice(consumed);
             return ret;
@@ -551,7 +564,8 @@ namespace System.Formats.Asn1
                 RuleSet,
                 flagsEnumType,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             _data = _data.Slice(consumed);
             return ret;
@@ -584,7 +598,12 @@ namespace System.Formats.Asn1
         /// <seealso cref="ReadNamedBitListValue{TFlagsEnum}"/>
         public BitArray ReadNamedBitList(Asn1Tag? expectedTag = null)
         {
-            BitArray ret = AsnDecoder.ReadNamedBitList(_data.Span, RuleSet, out int consumed, expectedTag);
+            BitArray ret = AsnDecoder.ReadNamedBitList(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
             _data = _data.Slice(consumed);
             return ret;
         }

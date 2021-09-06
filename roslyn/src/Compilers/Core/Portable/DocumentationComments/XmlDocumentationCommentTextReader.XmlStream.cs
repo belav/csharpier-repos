@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis
             // Base the root element name on a GUID to avoid accidental (or intentional) collisions. An underscore is
             // prefixed because element names must not start with a number.
             private static readonly string s_rootElementName = "_" + Guid.NewGuid().ToString("N");
-            private static readonly string s_currentElementName = "_" + Guid.NewGuid().ToString("N");
+            private static readonly string s_currentElementName =
+                "_" + Guid.NewGuid().ToString("N");
 
             // internal for testing
             internal static readonly string RootStart = "<" + s_rootElementName + ">";
@@ -57,7 +58,7 @@ namespace Microsoft.CodeAnalysis
                 _text = text;
                 _readsPastTheEnd = 0;
 
-                // The first read shall read the <root>, 
+                // The first read shall read the <root>,
                 // the subsequents reads shall start with <current> element
                 if (_position > 0)
                 {
@@ -80,10 +81,7 @@ namespace Microsoft.CodeAnalysis
 
             public bool Eof
             {
-                get
-                {
-                    return _readsPastTheEnd >= maxReadsPastTheEnd;
-                }
+                get { return _readsPastTheEnd >= maxReadsPastTheEnd; }
             }
 
             public override int Read(char[] buffer, int index, int count)
@@ -105,13 +103,31 @@ namespace Microsoft.CodeAnalysis
                 _position += EncodeAndAdvance(RootStart, _position, buffer, ref index, ref count);
 
                 // <current>
-                _position += EncodeAndAdvance(CurrentStart, _position - RootStart.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    CurrentStart,
+                    _position - RootStart.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // text
-                _position += EncodeAndAdvance(_text, _position - RootStart.Length - CurrentStart.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    _text,
+                    _position - RootStart.Length - CurrentStart.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // </current>
-                _position += EncodeAndAdvance(CurrentEnd, _position - RootStart.Length - CurrentStart.Length - _text.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    CurrentEnd,
+                    _position - RootStart.Length - CurrentStart.Length - _text.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // Pretend that the stream doesn't end right away
                 if (initialCount == count)
@@ -124,8 +140,13 @@ namespace Microsoft.CodeAnalysis
                 return initialCount - count;
             }
 
-            private static int EncodeAndAdvance(string src, int srcIndex, char[] dest, ref int destIndex, ref int destCount)
-            {
+            private static int EncodeAndAdvance(
+                string src,
+                int srcIndex,
+                char[] dest,
+                ref int destIndex,
+                ref int destCount
+            ) {
                 if (destCount == 0 || srcIndex < 0 || srcIndex >= src.Length)
                 {
                     return 0;

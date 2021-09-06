@@ -84,7 +84,11 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             Assert.Equal("test-entry", (string)executionContextItem.Key, StringComparer.Ordinal);
             Assert.Equal(2222, executionContextItem.Value);
             var parentExecutionContextItem = Assert.Single(parentExecutionContext.Items);
-            Assert.Equal("test-entry", (string)parentExecutionContextItem.Key, StringComparer.Ordinal);
+            Assert.Equal(
+                "test-entry",
+                (string)parentExecutionContextItem.Key,
+                StringComparer.Ordinal
+            );
             Assert.Equal(1234, parentExecutionContextItem.Value);
         }
 
@@ -121,7 +125,11 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             // Assert
             Assert.Empty(executionContext.Items);
             var parentExecutionContextItem = Assert.Single(parentExecutionContext.Items);
-            Assert.Equal("test-entry", (string)parentExecutionContextItem.Key, StringComparer.Ordinal);
+            Assert.Equal(
+                "test-entry",
+                (string)parentExecutionContextItem.Key,
+                StringComparer.Ordinal
+            );
             Assert.Equal(1234, parentExecutionContextItem.Value);
         }
 
@@ -213,13 +221,16 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 "Must call '{2}.{1}' before calling '{2}.{0}'.",
                 nameof(TagHelperScopeManager.End),
                 nameof(TagHelperScopeManager.Begin),
-                nameof(TagHelperScopeManager));
+                nameof(TagHelperScopeManager)
+            );
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-            {
-                scopeManager.End();
-            });
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    scopeManager.End();
+                }
+            );
 
             Assert.Equal(expectedError, ex.Message);
         }
@@ -228,19 +239,21 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         {
             return new TagHelperScopeManager(
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
         }
 
         private static TagHelperExecutionContext BeginDefaultScope(
             TagHelperScopeManager scopeManager,
             string tagName,
-            TagMode tagMode = TagMode.StartTagAndEndTag)
-        {
+            TagMode tagMode = TagMode.StartTagAndEndTag
+        ) {
             return scopeManager.Begin(
                 tagName,
                 tagMode,
                 uniqueId: string.Empty,
-                executeChildContentAsync: async () => await Task.FromResult(result: true));
+                executeChildContentAsync: async () => await Task.FromResult(result: true)
+            );
         }
     }
 }

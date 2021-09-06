@@ -238,8 +238,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         private static readonly string[] s_separator = { Environment.NewLine };
 
-        private protected override void LogCompilerOutput(string output, MessageImportance messageImportance)
-        {
+        private protected override void LogCompilerOutput(
+            string output,
+            MessageImportance messageImportance
+        ) {
             var lines = output.Split(s_separator, StringSplitOptions.None);
             foreach (string line in lines)
             {
@@ -247,7 +249,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 //error message into a single object. The four-line format contains
                 //a second line that is blank. This must be passed to the code below
                 //to satisfy the parser. The parser needs to work with output from
-                //old compilers as well. 
+                //old compilers as well.
                 LogEventsFromTextOutput(line, messageImportance);
             }
         }
@@ -257,10 +259,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected override string ToolNameWithoutExtension
         {
-            get
-            {
-                return "vbc";
-            }
+            get { return "vbc"; }
         }
 
         /// <summary>
@@ -316,8 +315,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 if (actualPdbInfo.Exists)
                 {
                     // .. and the desired one does not exist or it's older...
-                    if (!desiredPdbInfo.Exists || (desiredPdbInfo.Exists && actualPdbInfo.LastWriteTime > desiredPdbInfo.LastWriteTime))
-                    {
+                    if (
+                        !desiredPdbInfo.Exists
+                        || (
+                            desiredPdbInfo.Exists
+                            && actualPdbInfo.LastWriteTime > desiredPdbInfo.LastWriteTime
+                        )
+                    ) {
                         // Delete the existing one if it's already there, as Move would otherwise fail
                         if (desiredPdbInfo.Exists)
                         {
@@ -351,10 +355,23 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     string twoLetterPrefix = originalBaseAddress.Substring(0, 2);
 
                     if (
-                         (0 == String.Compare(twoLetterPrefix, "0x", StringComparison.OrdinalIgnoreCase)) ||
-                         (0 == String.Compare(twoLetterPrefix, "&h", StringComparison.OrdinalIgnoreCase))
-                       )
-                    {
+                        (
+                            0
+                            == String.Compare(
+                                twoLetterPrefix,
+                                "0x",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        || (
+                            0
+                            == String.Compare(
+                                twoLetterPrefix,
+                                "&h",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    ) {
                         // The incoming string is already in hex format ... we just need to
                         // remove the 0x or &H from the beginning.
                         return originalBaseAddress.Substring(2);
@@ -365,13 +382,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // convert it to hex.
                 try
                 {
-                    uint baseAddressDecimal = UInt32.Parse(originalBaseAddress, CultureInfo.InvariantCulture);
+                    uint baseAddressDecimal = UInt32.Parse(
+                        originalBaseAddress,
+                        CultureInfo.InvariantCulture
+                    );
                     return baseAddressDecimal.ToString("X", CultureInfo.InvariantCulture);
                 }
                 catch (FormatException e)
                 {
-                    throw Utilities.GetLocalizedArgumentException(e,
-                        ErrorString.Vbc_ParameterHasInvalidValue, "BaseAddress", originalBaseAddress);
+                    throw Utilities.GetLocalizedArgumentException(
+                        e,
+                        ErrorString.Vbc_ParameterHasInvalidValue,
+                        "BaseAddress",
+                        originalBaseAddress
+                    );
                 }
             }
 
@@ -382,8 +406,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Looks at all the parameters that have been set, and builds up the string
         /// containing all the command-line switches.
         /// </summary>
-        protected internal override void AddResponseFileCommands(CommandLineBuilderExtension commandLine)
-        {
+        protected internal override void AddResponseFileCommands(
+            CommandLineBuilderExtension commandLine
+        ) {
             commandLine.AppendSwitchIfNotNull("/baseaddress:", this.GetBaseAddressInHex());
             commandLine.AppendSwitchIfNotNull("/libpath:", this.AdditionalLibPaths, ",");
             commandLine.AppendSwitchIfNotNull("/imports:", this.Imports, ",");
@@ -435,7 +460,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendWhenTrue("/novbruntimeref", this._store, "NoVBRuntimeReference");
             commandLine.AppendSwitchIfNotNull("/errorreport:", this.ErrorReport);
             commandLine.AppendSwitchIfNotNull("/platform:", this.PlatformWith32BitPreference);
-            commandLine.AppendPlusOrMinusSwitch("/removeintchecks", this._store, "RemoveIntegerChecks");
+            commandLine.AppendPlusOrMinusSwitch(
+                "/removeintchecks",
+                this._store,
+                "RemoveIntegerChecks"
+            );
             commandLine.AppendSwitchIfNotNull("/rootnamespace:", this.RootNamespace);
             commandLine.AppendSwitchIfNotNull("/sdkpath:", this.SdkPath);
             commandLine.AppendSwitchIfNotNull("/moduleassemblyname:", this.ModuleAssemblyName);
@@ -443,23 +472,38 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/preferreduilang:", this.PreferredUILang);
             commandLine.AppendPlusOrMinusSwitch("/highentropyva", this._store, "HighEntropyVA");
 
-            if (0 == String.Compare(this.VBRuntimePath, this.VBRuntime, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                0
+                == String.Compare(
+                    this.VBRuntimePath,
+                    this.VBRuntime,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 commandLine.AppendSwitchIfNotNull("/vbruntime:", this.VBRuntimePath);
             }
             else if (this.VBRuntime != null)
             {
                 string vbRuntimeSwitch = this.VBRuntime;
-                if (0 == String.Compare(vbRuntimeSwitch, "EMBED", StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    0
+                    == String.Compare(vbRuntimeSwitch, "EMBED", StringComparison.OrdinalIgnoreCase)
+                ) {
                     commandLine.AppendSwitch("/vbruntime*");
                 }
-                else if (0 == String.Compare(vbRuntimeSwitch, "NONE", StringComparison.OrdinalIgnoreCase))
-                {
+                else if (
+                    0 == String.Compare(vbRuntimeSwitch, "NONE", StringComparison.OrdinalIgnoreCase)
+                ) {
                     commandLine.AppendSwitch("/vbruntime-");
                 }
-                else if (0 == String.Compare(vbRuntimeSwitch, "DEFAULT", StringComparison.OrdinalIgnoreCase))
-                {
+                else if (
+                    0
+                    == String.Compare(
+                        vbRuntimeSwitch,
+                        "DEFAULT",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     commandLine.AppendSwitch("/vbruntime+");
                 }
                 else
@@ -468,17 +512,28 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
             }
 
-
             // Verbosity
             if (
-                   (this.Verbosity != null) &&
-
-                   (
-                      (0 == String.Compare(this.Verbosity, "quiet", StringComparison.OrdinalIgnoreCase)) ||
-                      (0 == String.Compare(this.Verbosity, "verbose", StringComparison.OrdinalIgnoreCase))
-                   )
+                (this.Verbosity != null)
+                && (
+                    (
+                        0
+                        == String.Compare(
+                            this.Verbosity,
+                            "quiet",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    || (
+                        0
+                        == String.Compare(
+                            this.Verbosity,
+                            "verbose",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                 )
-            {
+            ) {
                 commandLine.AppendSwitchIfNotNull("/", this.Verbosity);
             }
 
@@ -491,13 +546,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 commandLine.AppendSwitchIfNotNull("/doc:", this.DocumentationFile);
             }
 
-            commandLine.AppendSwitchUnquotedIfNotNull("/define:", Vbc.GetDefineConstantsSwitch(this.DefineConstants));
+            commandLine.AppendSwitchUnquotedIfNotNull(
+                "/define:",
+                Vbc.GetDefineConstantsSwitch(this.DefineConstants)
+            );
             AddReferencesToCommandLine(commandLine);
             commandLine.AppendSwitchIfNotNull("/win32resource:", this.Win32Resource);
 
             // Special case for "Sub Main" (See VSWhidbey 381254)
-            if (0 != String.Compare("Sub Main", this.MainEntryPoint, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                0
+                != String.Compare(
+                    "Sub Main",
+                    this.MainEntryPoint,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 commandLine.AppendSwitchIfNotNull("/main:", this.MainEntryPoint);
             }
 
@@ -518,8 +582,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             //      /warnaserror-
             // is just shorthand for:
             //      /warnaserror-:<all possible warnings>
-            commandLine.AppendSwitchWithSplitting("/warnaserror+:", this.WarningsAsErrors, ",", ';', ',');
-            commandLine.AppendSwitchWithSplitting("/warnaserror-:", this.WarningsNotAsErrors, ",", ';', ',');
+            commandLine.AppendSwitchWithSplitting(
+                "/warnaserror+:",
+                this.WarningsAsErrors,
+                ",",
+                ';',
+                ','
+            );
+            commandLine.AppendSwitchWithSplitting(
+                "/warnaserror-:",
+                this.WarningsNotAsErrors,
+                ",",
+                ';',
+                ','
+            );
 
             // If not design time build and the globalSessionGuid property was set then add a -globalsessionguid:<guid>
             bool designTime = false;
@@ -529,7 +605,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
             else if (this.HostObject != null)
             {
-                throw new InvalidOperationException(string.Format(ErrorString.General_IncorrectHostObject, "Vbc", "IVbcHostObject"));
+                throw new InvalidOperationException(
+                    string.Format(ErrorString.General_IncorrectHostObject, "Vbc", "IVbcHostObject")
+                );
             }
             if (!designTime)
             {
@@ -539,7 +617,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
             }
 
-            // It's a good idea for the response file to be the very last switch passed, just 
+            // It's a good idea for the response file to be the very last switch passed, just
             // from a predictability perspective.  It also solves the problem that a dogfooder
             // ran into, which is described in an email thread attached to bug VSWhidbey 146883.
             // See also bugs 177762 and 118307 for additional bugs related to response file position.
@@ -601,11 +679,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // Validate that the "Verbosity" parameter is one of "quiet", "normal", or "verbose".
             if (this.Verbosity != null)
             {
-                if ((0 != String.Compare(Verbosity, "normal", StringComparison.OrdinalIgnoreCase)) &&
-                    (0 != String.Compare(Verbosity, "quiet", StringComparison.OrdinalIgnoreCase)) &&
-                    (0 != String.Compare(Verbosity, "verbose", StringComparison.OrdinalIgnoreCase)))
-                {
-                    Log.LogErrorWithCodeFromResources("Vbc_EnumParameterHasInvalidValue", "Verbosity", this.Verbosity, "Quiet, Normal, Verbose");
+                if (
+                    (0 != String.Compare(Verbosity, "normal", StringComparison.OrdinalIgnoreCase))
+                    && (0 != String.Compare(Verbosity, "quiet", StringComparison.OrdinalIgnoreCase))
+                    && (
+                        0
+                        != String.Compare(Verbosity, "verbose", StringComparison.OrdinalIgnoreCase)
+                    )
+                ) {
+                    Log.LogErrorWithCodeFromResources(
+                        "Vbc_EnumParameterHasInvalidValue",
+                        "Verbosity",
+                        this.Verbosity,
+                        "Quiet, Normal, Verbose"
+                    );
                     return false;
                 }
             }
@@ -622,8 +709,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// original vbc structure such that we can call <see cref="TaskLoggingHelper.LogMessageFromText(string, MessageImportance)" />
         /// with the complete error message.
         /// </summary>
-        protected override void LogEventsFromTextOutput(string singleLine, MessageImportance messageImportance)
-        {
+        protected override void LogEventsFromTextOutput(
+            string singleLine,
+            MessageImportance messageImportance
+        ) {
             // We can return immediately if this was not called by the out of proc compiler
             if (!this.UsedCommandLineTool)
             {
@@ -633,10 +722,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
             // We can also return immediately if the current string is not a warning or error
             // and we have not seen a warning or error yet. 'Error' and 'Warning' are not localized.
-            if (_vbErrorLines.Count == 0 &&
-                singleLine.IndexOf("warning", StringComparison.OrdinalIgnoreCase) == -1 &&
-                singleLine.IndexOf("error", StringComparison.OrdinalIgnoreCase) == -1)
-            {
+            if (
+                _vbErrorLines.Count == 0
+                && singleLine.IndexOf("warning", StringComparison.OrdinalIgnoreCase) == -1
+                && singleLine.IndexOf("error", StringComparison.OrdinalIgnoreCase) == -1
+            ) {
                 base.LogEventsFromTextOutput(singleLine, messageImportance);
                 return;
             }
@@ -675,9 +765,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // <blank line>
                 // <line with the source text>
                 // <line with the '~'>
-                if (_isDoneOutputtingErrorMessage &&
-                    _vbErrorLines.Count == _numberOfLinesInErrorMessage + 3)
-                {
+                if (
+                    _isDoneOutputtingErrorMessage
+                    && _vbErrorLines.Count == _numberOfLinesInErrorMessage + 3
+                ) {
                     // Once we have the 4th line (error line + 3), then parse it for the first ~
                     // which will correspond to the column of the token with the error because
                     // VBC respects the users's indentation settings in the file it is compiling
@@ -696,17 +787,27 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     if (column < 0 || endParenthesisLocation < 0)
                     {
                         // we need to output all of the original lines we ate.
-                        Log.LogMessageFromText(originalVBErrorString, originalVBError.MessageImportance);
+                        Log.LogMessageFromText(
+                            originalVBErrorString,
+                            originalVBError.MessageImportance
+                        );
                         foreach (VBError vberror in _vbErrorLines)
                         {
-                            base.LogEventsFromTextOutput(vberror.Message, vberror.MessageImportance);
+                            base.LogEventsFromTextOutput(
+                                vberror.Message,
+                                vberror.MessageImportance
+                            );
                         }
 
                         _vbErrorLines.Clear();
                         return;
                     }
 
-                    string? newLine = originalVBErrorString.Substring(0, endParenthesisLocation) + "," + column + originalVBErrorString.Substring(endParenthesisLocation);
+                    string? newLine =
+                        originalVBErrorString.Substring(0, endParenthesisLocation)
+                        + ","
+                        + column
+                        + originalVBErrorString.Substring(endParenthesisLocation);
 
                     // Output all of the lines of the error, but with the modified first line as well.
                     Log.LogMessageFromText(newLine, originalVBError.MessageImportance);
@@ -725,10 +826,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 {
                     base.LogEventsFromTextOutput(singleLine, messageImportance);
                 }
-                else if ((parts.category == CanonicalError.Parts.Category.Error ||
-                     parts.category == CanonicalError.Parts.Category.Warning) &&
-                     parts.column == CanonicalError.Parts.numberNotSpecified)
-                {
+                else if (
+                    (
+                        parts.category == CanonicalError.Parts.Category.Error
+                        || parts.category == CanonicalError.Parts.Category.Warning
+                    )
+                    && parts.column == CanonicalError.Parts.numberNotSpecified
+                ) {
                     if (parts.line != CanonicalError.Parts.numberNotSpecified)
                     {
                         // If we got here, then this is a standard VBC error or warning.
@@ -738,7 +842,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     }
                     else
                     {
-                        // Project-level errors don't have line numbers -- just output now. 
+                        // Project-level errors don't have line numbers -- just output now.
                         base.LogEventsFromTextOutput(singleLine, messageImportance);
                     }
                 }
@@ -757,10 +861,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// switch.  It does that by quoting the entire string, and escaping the embedded
         /// quotes.
         /// </summary>
-        internal static string? GetDefineConstantsSwitch
-            (
-            string? originalDefineConstants
-            )
+        internal static string? GetDefineConstantsSwitch(string? originalDefineConstants)
         {
             if ((originalDefineConstants == null) || (originalDefineConstants.Length == 0))
             {
@@ -816,96 +917,250 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 param = nameof(vbcHostObject.BeginInitialization);
                 vbcHostObject.BeginInitialization();
 
-                CheckHostObjectSupport(param = nameof(AdditionalLibPaths), vbcHostObject.SetAdditionalLibPaths(AdditionalLibPaths));
-                CheckHostObjectSupport(param = nameof(AddModules), vbcHostObject.SetAddModules(AddModules));
+                CheckHostObjectSupport(
+                    param = nameof(AdditionalLibPaths),
+                    vbcHostObject.SetAdditionalLibPaths(AdditionalLibPaths)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(AddModules),
+                    vbcHostObject.SetAddModules(AddModules)
+                );
 
                 // For host objects which support them, set the analyzers, ruleset and additional files.
                 IAnalyzerHostObject? analyzerHostObject = vbcHostObject as IAnalyzerHostObject;
                 if (analyzerHostObject != null)
                 {
-                    CheckHostObjectSupport(param = nameof(Analyzers), analyzerHostObject.SetAnalyzers(Analyzers));
-                    CheckHostObjectSupport(param = nameof(CodeAnalysisRuleSet), analyzerHostObject.SetRuleSet(CodeAnalysisRuleSet));
-                    CheckHostObjectSupport(param = nameof(AdditionalFiles), analyzerHostObject.SetAdditionalFiles(AdditionalFiles));
+                    CheckHostObjectSupport(
+                        param = nameof(Analyzers),
+                        analyzerHostObject.SetAnalyzers(Analyzers)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(CodeAnalysisRuleSet),
+                        analyzerHostObject.SetRuleSet(CodeAnalysisRuleSet)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(AdditionalFiles),
+                        analyzerHostObject.SetAdditionalFiles(AdditionalFiles)
+                    );
                 }
 
                 // For host objects which support them, set analyzer config files and potential analyzer config files
                 if (vbcHostObject is IAnalyzerConfigFilesHostObject analyzerConfigFilesHostObject)
                 {
-                    CheckHostObjectSupport(param = nameof(AnalyzerConfigFiles), analyzerConfigFilesHostObject.SetAnalyzerConfigFiles(AnalyzerConfigFiles));
-                    CheckHostObjectSupport(param = nameof(PotentialAnalyzerConfigFiles), analyzerConfigFilesHostObject.SetPotentialAnalyzerConfigFiles(PotentialAnalyzerConfigFiles));
+                    CheckHostObjectSupport(
+                        param = nameof(AnalyzerConfigFiles),
+                        analyzerConfigFilesHostObject.SetAnalyzerConfigFiles(AnalyzerConfigFiles)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(PotentialAnalyzerConfigFiles),
+                        analyzerConfigFilesHostObject.SetPotentialAnalyzerConfigFiles(
+                            PotentialAnalyzerConfigFiles
+                        )
+                    );
                 }
 
-                CheckHostObjectSupport(param = nameof(BaseAddress), vbcHostObject.SetBaseAddress(TargetType, GetBaseAddressInHex()));
-                CheckHostObjectSupport(param = nameof(CodePage), vbcHostObject.SetCodePage(CodePage));
-                CheckHostObjectSupport(param = nameof(DebugType), vbcHostObject.SetDebugType(EmitDebugInformation, DebugType));
-                CheckHostObjectSupport(param = nameof(DefineConstants), vbcHostObject.SetDefineConstants(DefineConstants));
-                CheckHostObjectSupport(param = nameof(DelaySign), vbcHostObject.SetDelaySign(DelaySign));
-                CheckHostObjectSupport(param = nameof(DocumentationFile), vbcHostObject.SetDocumentationFile(DocumentationFile));
-                CheckHostObjectSupport(param = nameof(FileAlignment), vbcHostObject.SetFileAlignment(FileAlignment));
-                CheckHostObjectSupport(param = nameof(GenerateDocumentation), vbcHostObject.SetGenerateDocumentation(GenerateDocumentation));
+                CheckHostObjectSupport(
+                    param = nameof(BaseAddress),
+                    vbcHostObject.SetBaseAddress(TargetType, GetBaseAddressInHex())
+                );
+                CheckHostObjectSupport(
+                    param = nameof(CodePage),
+                    vbcHostObject.SetCodePage(CodePage)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DebugType),
+                    vbcHostObject.SetDebugType(EmitDebugInformation, DebugType)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DefineConstants),
+                    vbcHostObject.SetDefineConstants(DefineConstants)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DelaySign),
+                    vbcHostObject.SetDelaySign(DelaySign)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DocumentationFile),
+                    vbcHostObject.SetDocumentationFile(DocumentationFile)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(FileAlignment),
+                    vbcHostObject.SetFileAlignment(FileAlignment)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(GenerateDocumentation),
+                    vbcHostObject.SetGenerateDocumentation(GenerateDocumentation)
+                );
                 CheckHostObjectSupport(param = nameof(Imports), vbcHostObject.SetImports(Imports));
-                CheckHostObjectSupport(param = nameof(KeyContainer), vbcHostObject.SetKeyContainer(KeyContainer));
+                CheckHostObjectSupport(
+                    param = nameof(KeyContainer),
+                    vbcHostObject.SetKeyContainer(KeyContainer)
+                );
                 CheckHostObjectSupport(param = nameof(KeyFile), vbcHostObject.SetKeyFile(KeyFile));
-                CheckHostObjectSupport(param = nameof(LinkResources), vbcHostObject.SetLinkResources(LinkResources));
-                CheckHostObjectSupport(param = nameof(MainEntryPoint), vbcHostObject.SetMainEntryPoint(MainEntryPoint));
-                CheckHostObjectSupport(param = nameof(NoConfig), vbcHostObject.SetNoConfig(NoConfig));
-                CheckHostObjectSupport(param = nameof(NoStandardLib), vbcHostObject.SetNoStandardLib(NoStandardLib));
-                CheckHostObjectSupport(param = nameof(NoWarnings), vbcHostObject.SetNoWarnings(NoWarnings));
-                CheckHostObjectSupport(param = nameof(Optimize), vbcHostObject.SetOptimize(Optimize));
-                CheckHostObjectSupport(param = nameof(OptionCompare), vbcHostObject.SetOptionCompare(OptionCompare));
-                CheckHostObjectSupport(param = nameof(OptionExplicit), vbcHostObject.SetOptionExplicit(OptionExplicit));
-                CheckHostObjectSupport(param = nameof(OptionStrict), vbcHostObject.SetOptionStrict(OptionStrict));
-                CheckHostObjectSupport(param = nameof(OptionStrictType), vbcHostObject.SetOptionStrictType(OptionStrictType));
-                CheckHostObjectSupport(param = nameof(OutputAssembly), vbcHostObject.SetOutputAssembly(OutputAssembly?.ItemSpec));
+                CheckHostObjectSupport(
+                    param = nameof(LinkResources),
+                    vbcHostObject.SetLinkResources(LinkResources)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(MainEntryPoint),
+                    vbcHostObject.SetMainEntryPoint(MainEntryPoint)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(NoConfig),
+                    vbcHostObject.SetNoConfig(NoConfig)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(NoStandardLib),
+                    vbcHostObject.SetNoStandardLib(NoStandardLib)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(NoWarnings),
+                    vbcHostObject.SetNoWarnings(NoWarnings)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Optimize),
+                    vbcHostObject.SetOptimize(Optimize)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(OptionCompare),
+                    vbcHostObject.SetOptionCompare(OptionCompare)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(OptionExplicit),
+                    vbcHostObject.SetOptionExplicit(OptionExplicit)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(OptionStrict),
+                    vbcHostObject.SetOptionStrict(OptionStrict)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(OptionStrictType),
+                    vbcHostObject.SetOptionStrictType(OptionStrictType)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(OutputAssembly),
+                    vbcHostObject.SetOutputAssembly(OutputAssembly?.ItemSpec)
+                );
 
                 // For host objects which support them, set platform with 32BitPreference, HighEntropyVA, and SubsystemVersion
                 IVbcHostObject5? vbcHostObject5 = vbcHostObject as IVbcHostObject5;
                 if (vbcHostObject5 != null)
                 {
-                    CheckHostObjectSupport(param = nameof(PlatformWith32BitPreference), vbcHostObject5.SetPlatformWith32BitPreference(PlatformWith32BitPreference));
-                    CheckHostObjectSupport(param = nameof(HighEntropyVA), vbcHostObject5.SetHighEntropyVA(HighEntropyVA));
-                    CheckHostObjectSupport(param = nameof(SubsystemVersion), vbcHostObject5.SetSubsystemVersion(SubsystemVersion));
+                    CheckHostObjectSupport(
+                        param = nameof(PlatformWith32BitPreference),
+                        vbcHostObject5.SetPlatformWith32BitPreference(PlatformWith32BitPreference)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(HighEntropyVA),
+                        vbcHostObject5.SetHighEntropyVA(HighEntropyVA)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(SubsystemVersion),
+                        vbcHostObject5.SetSubsystemVersion(SubsystemVersion)
+                    );
                 }
                 else
                 {
-                    CheckHostObjectSupport(param = nameof(Platform), vbcHostObject.SetPlatform(Platform));
+                    CheckHostObjectSupport(
+                        param = nameof(Platform),
+                        vbcHostObject.SetPlatform(Platform)
+                    );
                 }
 
                 IVbcHostObject6? vbcHostObject6 = vbcHostObject as IVbcHostObject6;
                 if (vbcHostObject6 != null)
                 {
-                    CheckHostObjectSupport(param = nameof(ErrorLog), vbcHostObject6.SetErrorLog(ErrorLog));
-                    CheckHostObjectSupport(param = nameof(ReportAnalyzer), vbcHostObject6.SetReportAnalyzer(ReportAnalyzer));
+                    CheckHostObjectSupport(
+                        param = nameof(ErrorLog),
+                        vbcHostObject6.SetErrorLog(ErrorLog)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(ReportAnalyzer),
+                        vbcHostObject6.SetReportAnalyzer(ReportAnalyzer)
+                    );
                 }
 
-                CheckHostObjectSupport(param = nameof(References), vbcHostObject.SetReferences(References));
-                CheckHostObjectSupport(param = nameof(RemoveIntegerChecks), vbcHostObject.SetRemoveIntegerChecks(RemoveIntegerChecks));
-                CheckHostObjectSupport(param = nameof(Resources), vbcHostObject.SetResources(Resources));
-                CheckHostObjectSupport(param = nameof(ResponseFiles), vbcHostObject.SetResponseFiles(ResponseFiles));
-                CheckHostObjectSupport(param = nameof(RootNamespace), vbcHostObject.SetRootNamespace(RootNamespace));
+                CheckHostObjectSupport(
+                    param = nameof(References),
+                    vbcHostObject.SetReferences(References)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(RemoveIntegerChecks),
+                    vbcHostObject.SetRemoveIntegerChecks(RemoveIntegerChecks)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Resources),
+                    vbcHostObject.SetResources(Resources)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(ResponseFiles),
+                    vbcHostObject.SetResponseFiles(ResponseFiles)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(RootNamespace),
+                    vbcHostObject.SetRootNamespace(RootNamespace)
+                );
                 CheckHostObjectSupport(param = nameof(SdkPath), vbcHostObject.SetSdkPath(SdkPath));
                 CheckHostObjectSupport(param = nameof(Sources), vbcHostObject.SetSources(Sources));
-                CheckHostObjectSupport(param = nameof(TargetCompactFramework), vbcHostObject.SetTargetCompactFramework(TargetCompactFramework));
-                CheckHostObjectSupport(param = nameof(TargetType), vbcHostObject.SetTargetType(TargetType));
-                CheckHostObjectSupport(param = nameof(TreatWarningsAsErrors), vbcHostObject.SetTreatWarningsAsErrors(TreatWarningsAsErrors));
-                CheckHostObjectSupport(param = nameof(WarningsAsErrors), vbcHostObject.SetWarningsAsErrors(WarningsAsErrors));
-                CheckHostObjectSupport(param = nameof(WarningsNotAsErrors), vbcHostObject.SetWarningsNotAsErrors(WarningsNotAsErrors));
+                CheckHostObjectSupport(
+                    param = nameof(TargetCompactFramework),
+                    vbcHostObject.SetTargetCompactFramework(TargetCompactFramework)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(TargetType),
+                    vbcHostObject.SetTargetType(TargetType)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(TreatWarningsAsErrors),
+                    vbcHostObject.SetTreatWarningsAsErrors(TreatWarningsAsErrors)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(WarningsAsErrors),
+                    vbcHostObject.SetWarningsAsErrors(WarningsAsErrors)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(WarningsNotAsErrors),
+                    vbcHostObject.SetWarningsNotAsErrors(WarningsNotAsErrors)
+                );
                 // DisabledWarnings needs to come after WarningsAsErrors and WarningsNotAsErrors, because
                 // of the way the host object works, and the fact that DisabledWarnings trump Warnings[Not]AsErrors.
-                CheckHostObjectSupport(param = nameof(DisabledWarnings), vbcHostObject.SetDisabledWarnings(DisabledWarnings));
-                CheckHostObjectSupport(param = nameof(Win32Icon), vbcHostObject.SetWin32Icon(Win32Icon));
-                CheckHostObjectSupport(param = nameof(Win32Resource), vbcHostObject.SetWin32Resource(Win32Resource));
+                CheckHostObjectSupport(
+                    param = nameof(DisabledWarnings),
+                    vbcHostObject.SetDisabledWarnings(DisabledWarnings)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Win32Icon),
+                    vbcHostObject.SetWin32Icon(Win32Icon)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Win32Resource),
+                    vbcHostObject.SetWin32Resource(Win32Resource)
+                );
 
                 // In order to maintain compatibility with previous host compilers, we must
                 // light-up for IVbcHostObject2
                 if (vbcHostObject is IVbcHostObject2)
                 {
                     IVbcHostObject2 vbcHostObject2 = (IVbcHostObject2)vbcHostObject;
-                    CheckHostObjectSupport(param = nameof(ModuleAssemblyName), vbcHostObject2.SetModuleAssemblyName(ModuleAssemblyName));
-                    CheckHostObjectSupport(param = nameof(OptionInfer), vbcHostObject2.SetOptionInfer(OptionInfer));
-                    CheckHostObjectSupport(param = nameof(Win32Manifest), vbcHostObject2.SetWin32Manifest(GetWin32ManifestSwitch(NoWin32Manifest, Win32Manifest)));
+                    CheckHostObjectSupport(
+                        param = nameof(ModuleAssemblyName),
+                        vbcHostObject2.SetModuleAssemblyName(ModuleAssemblyName)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(OptionInfer),
+                        vbcHostObject2.SetOptionInfer(OptionInfer)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(Win32Manifest),
+                        vbcHostObject2.SetWin32Manifest(
+                            GetWin32ManifestSwitch(NoWin32Manifest, Win32Manifest)
+                        )
+                    );
                     // initialize option Infer
-                    CheckHostObjectSupport(param = nameof(OptionInfer), vbcHostObject2.SetOptionInfer(OptionInfer));
+                    CheckHostObjectSupport(
+                        param = nameof(OptionInfer),
+                        vbcHostObject2.SetOptionInfer(OptionInfer)
+                    );
                 }
                 else
                 {
@@ -913,42 +1168,65 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     // then we need to state that we are falling back to the command line compiler
                     if (!String.IsNullOrEmpty(ModuleAssemblyName))
                     {
-                        CheckHostObjectSupport(param = nameof(ModuleAssemblyName), resultFromHostObjectSetOperation: false);
+                        CheckHostObjectSupport(
+                            param = nameof(ModuleAssemblyName),
+                            resultFromHostObjectSetOperation: false
+                        );
                     }
 
                     if (_store.ContainsKey(nameof(OptionInfer)))
                     {
-                        CheckHostObjectSupport(param = nameof(OptionInfer), resultFromHostObjectSetOperation: false);
+                        CheckHostObjectSupport(
+                            param = nameof(OptionInfer),
+                            resultFromHostObjectSetOperation: false
+                        );
                     }
 
                     if (!String.IsNullOrEmpty(Win32Manifest))
                     {
-                        CheckHostObjectSupport(param = nameof(Win32Manifest), resultFromHostObjectSetOperation: false);
+                        CheckHostObjectSupport(
+                            param = nameof(Win32Manifest),
+                            resultFromHostObjectSetOperation: false
+                        );
                     }
                 }
 
                 // Check for support of the LangVersion property
-                if (vbcHostObject is IVbcHostObject3 && !DeferToICompilerOptionsHostObject(LangVersion, vbcHostObject))
-                {
+                if (
+                    vbcHostObject is IVbcHostObject3
+                    && !DeferToICompilerOptionsHostObject(LangVersion, vbcHostObject)
+                ) {
                     IVbcHostObject3 vbcHostObject3 = (IVbcHostObject3)vbcHostObject;
-                    CheckHostObjectSupport(param = nameof(LangVersion), vbcHostObject3.SetLanguageVersion(LangVersion));
+                    CheckHostObjectSupport(
+                        param = nameof(LangVersion),
+                        vbcHostObject3.SetLanguageVersion(LangVersion)
+                    );
                 }
                 else if (!String.IsNullOrEmpty(LangVersion) && !UsedCommandLineTool)
                 {
-                    CheckHostObjectSupport(param = nameof(LangVersion), resultFromHostObjectSetOperation: false);
+                    CheckHostObjectSupport(
+                        param = nameof(LangVersion),
+                        resultFromHostObjectSetOperation: false
+                    );
                 }
 
                 if (vbcHostObject is IVbcHostObject4)
                 {
                     IVbcHostObject4 vbcHostObject4 = (IVbcHostObject4)vbcHostObject;
-                    CheckHostObjectSupport(param = nameof(VBRuntime), vbcHostObject4.SetVBRuntime(VBRuntime));
+                    CheckHostObjectSupport(
+                        param = nameof(VBRuntime),
+                        vbcHostObject4.SetVBRuntime(VBRuntime)
+                    );
                 }
                 // Support for NoVBRuntimeReference was added to this task after IVbcHostObject was frozen. That doesn't matter much because the host
                 // compiler doesn't support it, and almost nobody uses it anyway. But if someone has set it, we need to hard code falling back to
                 // the command line compiler here.
                 if (NoVBRuntimeReference)
                 {
-                    CheckHostObjectSupport(param = nameof(NoVBRuntimeReference), resultFromHostObjectSetOperation: false);
+                    CheckHostObjectSupport(
+                        param = nameof(NoVBRuntimeReference),
+                        resultFromHostObjectSetOperation: false
+                    );
                 }
 
                 InitializeHostObjectSupportForNewSwitches(vbcHostObject, ref param);
@@ -958,14 +1236,27 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // However, we explicitly allow two values (mostly for parity with C#):
                 // Null is supported because it means that option should be omitted, and compiler default used - obviously always valid.
                 // Explicitly specified name of current locale is also supported, since it is effectively a no-op.
-                if (!String.IsNullOrEmpty(PreferredUILang) && !String.Equals(PreferredUILang, System.Globalization.CultureInfo.CurrentUICulture.Name, StringComparison.OrdinalIgnoreCase))
-                {
-                    CheckHostObjectSupport(param = nameof(PreferredUILang), resultFromHostObjectSetOperation: false);
+                if (
+                    !String.IsNullOrEmpty(PreferredUILang)
+                    && !String.Equals(
+                        PreferredUILang,
+                        System.Globalization.CultureInfo.CurrentUICulture.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
+                    CheckHostObjectSupport(
+                        param = nameof(PreferredUILang),
+                        resultFromHostObjectSetOperation: false
+                    );
                 }
             }
             catch (Exception e)
             {
-                Log.LogErrorWithCodeFromResources("General_CouldNotSetHostObjectParameter", param, e.Message);
+                Log.LogErrorWithCodeFromResources(
+                    "General_CouldNotSetHostObjectParameter",
+                    param,
+                    e.Message
+                );
                 return false;
             }
             finally
@@ -981,8 +1272,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         // VbcHostObject doesn't support VB versions beyond 15,
         // so the LangVersion will be passed through ICompilerOptionsHostObject.SetCompilerOptions instead
-        private static bool DeferToICompilerOptionsHostObject(string? langVersion, IVbcHostObject vbcHostObject)
-        {
+        private static bool DeferToICompilerOptionsHostObject(
+            string? langVersion,
+            IVbcHostObject vbcHostObject
+        ) {
             if (!(vbcHostObject is ICompilerOptionsHostObject))
             {
                 return false;
@@ -997,12 +1290,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // CVbcMSBuildHostObject::SetLanguageVersion can handle versions up to 15
             var supportedList = new[]
             {
-                "9", "9.0",
-                "10", "10.0",
-                "11", "11.0",
-                "12", "12.0",
-                "14", "14.0",
-                "15", "15.0"
+                "9",
+                "9.0",
+                "10",
+                "10.0",
+                "11",
+                "11.0",
+                "12",
+                "12.0",
+                "14",
+                "14.0",
+                "15",
+                "15.0"
             };
 
             return Array.IndexOf(supportedList, langVersion) < 0;
@@ -1032,10 +1331,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // we can dynamically test for smarter interfaces later..
                 if (HostObject is IVbcHostObject hostObjectCOM)
                 {
-                    using (RCWForCurrentContext<IVbcHostObject> hostObject = new RCWForCurrentContext<IVbcHostObject>(hostObjectCOM))
-                    {
+                    using (
+                        RCWForCurrentContext<IVbcHostObject> hostObject =
+                            new RCWForCurrentContext<IVbcHostObject>(hostObjectCOM)
+                    ) {
                         IVbcHostObject vbcHostObject = hostObject.RCW;
-                        bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(vbcHostObject);
+                        bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(
+                            vbcHostObject
+                        );
 
                         // If we're currently only in design-time (as opposed to build-time),
                         // then we're done.  We've initialized the host compiler as best we
@@ -1043,11 +1346,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         // So return true, saying we're done and successful.
                         if (vbcHostObject.IsDesignTime())
                         {
-                            // If we are design-time then we do not want to continue the build at 
+                            // If we are design-time then we do not want to continue the build at
                             // this time.
-                            return hostObjectSuccessfullyInitialized ?
-                                HostObjectInitializationStatus.NoActionReturnSuccess :
-                                HostObjectInitializationStatus.NoActionReturnFailure;
+                            return hostObjectSuccessfullyInitialized
+                                ? HostObjectInitializationStatus.NoActionReturnSuccess
+                                : HostObjectInitializationStatus.NoActionReturnFailure;
                         }
 
                         if (!this.HostCompilerSupportsAllParameters)
@@ -1058,7 +1361,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             // the trouble, and just throw a consistent error ourselves.  This allows us to give
                             // more information than the compiler would, and also make things consistent across
                             // Vbc / Csc / etc.  Actually, the real reason is bug 275726 (ddsuites\src\vs\env\vsproject\refs\ptp3).
-                            // This suite behaves differently in localized builds than on English builds because 
+                            // This suite behaves differently in localized builds than on English builds because
                             // VBC.EXE doesn't localize the word "error" when they emit errors and so we can't scan for it.
                             if (!CheckAllReferencesExistOnDisk())
                             {
@@ -1077,9 +1380,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         // and in that case, we will inform the caller that no further action is necessary.
                         if (hostObjectSuccessfullyInitialized)
                         {
-                            return vbcHostObject.IsUpToDate() ?
-                                HostObjectInitializationStatus.NoActionReturnSuccess :
-                                HostObjectInitializationStatus.UseHostObjectToExecute;
+                            return vbcHostObject.IsUpToDate()
+                                ? HostObjectInitializationStatus.NoActionReturnSuccess
+                                : HostObjectInitializationStatus.UseHostObjectToExecute;
                         }
                         else
                         {
@@ -1089,10 +1392,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
                 else
                 {
-                    Log.LogErrorWithCodeFromResources("General_IncorrectHostObject", "Vbc", "IVbcHostObject");
+                    Log.LogErrorWithCodeFromResources(
+                        "General_IncorrectHostObject",
+                        "Vbc",
+                        "IVbcHostObject"
+                    );
                 }
             }
-
 
             // No appropriate host object was found.
             UsedCommandLineTool = true;
@@ -1107,7 +1413,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <owner>RGoel</owner>
         protected override bool CallHostObjectToExecute()
         {
-            Debug.Assert(this.HostObject != null, "We should not be here if the host object has not been set.");
+            Debug.Assert(
+                this.HostObject != null,
+                "We should not be here if the host object has not been set."
+            );
 
             IVbcHostObject? vbcHostObject = this.HostObject as IVbcHostObject;
             RoslynDebug.Assert(vbcHostObject != null, "Wrong kind of host object passed in!");
@@ -1116,11 +1425,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             Debug.Assert(vbcHostObject5 != null, "Wrong kind of host object passed in!");
 
             // IVbcHostObjectFreeThreaded::Compile is the preferred way to compile the host object
-            // because while it is still synchronous it does its waiting on our BG thread 
+            // because while it is still synchronous it does its waiting on our BG thread
             // (as opposed to the UI thread for IVbcHostObject::Compile)
             if (vbcHostObject5 != null)
             {
-                IVbcHostObjectFreeThreaded freeThreadedHostObject = vbcHostObject5.GetFreeThreadedHostObject();
+                IVbcHostObjectFreeThreaded freeThreadedHostObject =
+                    vbcHostObject5.GetFreeThreadedHostObject();
                 return freeThreadedHostObject.Compile();
             }
             else

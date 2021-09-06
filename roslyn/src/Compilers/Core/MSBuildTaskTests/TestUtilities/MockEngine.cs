@@ -53,7 +53,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         public int LineNumberOfTaskNode => 0;
         public bool ContinueOnError => true;
 
-        public bool BuildProjectFile(string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs)
-            => throw new NotImplementedException();
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        ) => throw new NotImplementedException();
     }
 }

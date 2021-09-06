@@ -28,11 +28,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "CustomParameter",
-                },
-
+                BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
                 ParameterType = typeof(Person)
             };
 
@@ -103,11 +99,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "CustomParameter",
-                },
-
+                BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
                 ParameterType = typeof(CancellationToken)
             };
 

@@ -7,7 +7,10 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
 {
     public class AutobahnExpectations
     {
-        private Dictionary<string, Expectation> _expectations = new Dictionary<string, Expectation>();
+        private Dictionary<string, Expectation> _expectations = new Dictionary<
+            string,
+            Expectation
+        >();
         public bool Ssl { get; }
         public ServerType Server { get; }
         public string Environment { get; }
@@ -19,9 +22,12 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             Environment = environment;
         }
 
-        public AutobahnExpectations Fail(params string[] caseSpecs) => Expect(Expectation.Fail, caseSpecs);
-        public AutobahnExpectations NonStrict(params string[] caseSpecs) => Expect(Expectation.NonStrict, caseSpecs);
-        public AutobahnExpectations OkOrFail(params string[] caseSpecs) => Expect(Expectation.OkOrFail, caseSpecs);
+        public AutobahnExpectations Fail(params string[] caseSpecs) =>
+            Expect(Expectation.Fail, caseSpecs);
+        public AutobahnExpectations NonStrict(params string[] caseSpecs) =>
+            Expect(Expectation.NonStrict, caseSpecs);
+        public AutobahnExpectations OkOrFail(params string[] caseSpecs) =>
+            Expect(Expectation.OkOrFail, caseSpecs);
 
         public AutobahnExpectations Expect(Expectation expectation, params string[] caseSpecs)
         {
@@ -37,8 +43,13 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             foreach (var caseResult in serverResult.Cases)
             {
                 // If this is an informational test result, we can't compare it to anything
-                if (!string.Equals(caseResult.ActualBehavior, "INFORMATIONAL", StringComparison.Ordinal))
-                {
+                if (
+                    !string.Equals(
+                        caseResult.ActualBehavior,
+                        "INFORMATIONAL",
+                        StringComparison.Ordinal
+                    )
+                ) {
                     Expectation expectation;
                     if (!_expectations.TryGetValue(caseResult.Name, out expectation))
                     {
@@ -50,25 +61,37 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
                         case Expectation.Fail:
                             if (!caseResult.BehaviorIs("FAILED"))
                             {
-                                failures.AppendLine($"Case {serverResult.Name}:{caseResult.Name}. Expected 'FAILED', but got '{caseResult.ActualBehavior}'");
+                                failures.AppendLine(
+                                    $"Case {serverResult.Name}:{caseResult.Name}. Expected 'FAILED', but got '{caseResult.ActualBehavior}'"
+                                );
                             }
                             break;
                         case Expectation.NonStrict:
                             if (!caseResult.BehaviorIs("NON-STRICT"))
                             {
-                                failures.AppendLine($"Case {serverResult.Name}:{caseResult.Name}. Expected 'NON-STRICT', but got '{caseResult.ActualBehavior}'");
+                                failures.AppendLine(
+                                    $"Case {serverResult.Name}:{caseResult.Name}. Expected 'NON-STRICT', but got '{caseResult.ActualBehavior}'"
+                                );
                             }
                             break;
                         case Expectation.Ok:
-                            if (!caseResult.BehaviorIs("NON-STRICT") && !caseResult.BehaviorIs("OK"))
-                            {
-                                failures.AppendLine($"Case {serverResult.Name}:{caseResult.Name}. Expected 'NON-STRICT' or 'OK', but got '{caseResult.ActualBehavior}'");
+                            if (
+                                !caseResult.BehaviorIs("NON-STRICT") && !caseResult.BehaviorIs("OK")
+                            ) {
+                                failures.AppendLine(
+                                    $"Case {serverResult.Name}:{caseResult.Name}. Expected 'NON-STRICT' or 'OK', but got '{caseResult.ActualBehavior}'"
+                                );
                             }
                             break;
                         case Expectation.OkOrFail:
-                            if (!caseResult.BehaviorIs("NON-STRICT") && !caseResult.BehaviorIs("FAILED") && !caseResult.BehaviorIs("OK"))
-                            {
-                                failures.AppendLine($"Case {serverResult.Name}:{caseResult.Name}. Expected 'FAILED', 'NON-STRICT' or 'OK', but got '{caseResult.ActualBehavior}'");
+                            if (
+                                !caseResult.BehaviorIs("NON-STRICT")
+                                && !caseResult.BehaviorIs("FAILED")
+                                && !caseResult.BehaviorIs("OK")
+                            ) {
+                                failures.AppendLine(
+                                    $"Case {serverResult.Name}:{caseResult.Name}. Expected 'FAILED', 'NON-STRICT' or 'OK', but got '{caseResult.ActualBehavior}'"
+                                );
                             }
                             break;
                         default:

@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.CompilerServices;
 
-class Test 
+class Test
 {
     static int SIZE = 100;
 
     public static unsafe int Main()
     {
         byte* source = stackalloc byte[SIZE];
-        byte* dest   = stackalloc byte[SIZE];
+        byte* dest = stackalloc byte[SIZE];
 
         for (int i = 0; i < SIZE; i++)
         {
@@ -19,7 +19,7 @@ class Test
             dest[i] = 0;
         }
 
-        Unsafe.CopyBlock(dest, source, (uint) SIZE);
+        Unsafe.CopyBlock(dest, source, (uint)SIZE);
 
         bool result = true;
 

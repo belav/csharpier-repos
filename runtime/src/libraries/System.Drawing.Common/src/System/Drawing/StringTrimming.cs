@@ -12,30 +12,25 @@ namespace System.Drawing
         /// Specifies no trimming.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Specifies that the string is broken at the boundary of the last character
         /// that is inside the layout rectangle. This is the default.
         /// </summary>
         Character = 1,
-
         /// <summary>
         /// Specifies that the string is broken at the boundary of the last word that is inside the layout rectangle.
         /// </summary>
         Word = 2,
-
         /// <summary>
         /// Specifies that the string is broken at the boundary of the last character that is inside
         /// the layout rectangle and an ellipsis (...) is inserted after the character.
         /// </summary>
         EllipsisCharacter = 3,
-
         /// <summary>
         /// Specifies that the string is broken at the boundary of the last word that is inside the
         /// layout rectangle and an ellipsis (...) is inserted after the word.
         /// </summary>
         EllipsisWord = 4,
-
         /// <summary>
         /// Specifies that the center is removed from the string and replaced by an ellipsis.
         /// The algorithm keeps as much of the last portion of the string as possible.

@@ -131,7 +131,9 @@ namespace System.Text.Json.Node
         /// <returns>
         ///   <see langword="true"/> if the <see cref="JsonObject"/> contains an element with the property name; otherwise, <see langword="false"/>.
         /// </returns>
-        bool ICollection<KeyValuePair<string, JsonNode?>>.Contains(KeyValuePair<string, JsonNode?> item) => Dictionary.Contains(item);
+        bool ICollection<KeyValuePair<string, JsonNode?>>.Contains(
+            KeyValuePair<string, JsonNode?> item
+        ) => Dictionary.Contains(item);
 
         /// <summary>
         ///   Copies the elements of the <see cref="JsonObject"/> to an array of type KeyValuePair starting at the specified array index.
@@ -150,8 +152,10 @@ namespace System.Text.Json.Node
         ///   The number of elements in the source ICollection is greater than the available space from <paramref name="index"/>
         ///   to the end of the destination <paramref name="array"/>.
         /// </exception>
-        void ICollection<KeyValuePair<string, JsonNode?>>.CopyTo(KeyValuePair<string, JsonNode?>[] array, int index) =>
-            Dictionary.CopyTo(array, index);
+        void ICollection<KeyValuePair<string, JsonNode?>>.CopyTo(
+            KeyValuePair<string, JsonNode?>[] array,
+            int index
+        ) => Dictionary.CopyTo(array, index);
 
         /// <summary>
         ///   Returns an enumerator that iterates through the <see cref="JsonObject"/>.
@@ -159,7 +163,8 @@ namespace System.Text.Json.Node
         /// <returns>
         ///   An enumerator that iterates through the <see cref="JsonObject"/>.
         /// </returns>
-        public IEnumerator<KeyValuePair<string, JsonNode?>> GetEnumerator() => Dictionary.GetEnumerator();
+        public IEnumerator<KeyValuePair<string, JsonNode?>> GetEnumerator() =>
+            Dictionary.GetEnumerator();
 
         /// <summary>
         ///   Removes a key and value from the <see cref="JsonObject"/>.
@@ -170,8 +175,9 @@ namespace System.Text.Json.Node
         /// <returns>
         ///   <see langword="true"/> if the element is successfully removed; otherwise, <see langword="false"/>.
         /// </returns>
-        bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(KeyValuePair<string, JsonNode?> item)
-        {
+        bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(
+            KeyValuePair<string, JsonNode?> item
+        ) {
             if (Dictionary.Remove(item))
             {
                 JsonNode? node = item.Value;
@@ -206,8 +212,10 @@ namespace System.Text.Json.Node
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="propertyName"/> is <see langword="null"/>.
         /// </exception>
-        bool IDictionary<string, JsonNode?>.TryGetValue(string propertyName, [NotNullWhen(true)] out JsonNode? jsonNode)
-        {
+        bool IDictionary<string, JsonNode?>.TryGetValue(
+            string propertyName,
+            [NotNullWhen(true)] out JsonNode? jsonNode
+        ) {
             if (propertyName == null)
             {
                 throw new ArgumentNullException(nameof(propertyName));

@@ -14,6 +14,10 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
     internal interface IIntroduceVariableService : ILanguageService
     {
-        Task<CodeAction> IntroduceVariableAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        Task<CodeAction> IntroduceVariableAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
     }
 }

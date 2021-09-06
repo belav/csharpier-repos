@@ -28,8 +28,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             ImmutableArray<EmbeddedSyntaxTrivia<TSyntaxKind>> leadingTrivia,
             VirtualCharSequence virtualChars,
             ImmutableArray<EmbeddedSyntaxTrivia<TSyntaxKind>> trailingTrivia,
-            ImmutableArray<EmbeddedDiagnostic> diagnostics, object value)
-        {
+            ImmutableArray<EmbeddedDiagnostic> diagnostics,
+            object value
+        ) {
             Debug.Assert(!leadingTrivia.IsDefault);
             Debug.Assert(!virtualChars.IsDefault);
             Debug.Assert(!trailingTrivia.IsDefault);
@@ -44,11 +45,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
 
         public bool IsMissing => VirtualChars.IsEmpty;
 
-        public EmbeddedSyntaxToken<TSyntaxKind> AddDiagnosticIfNone(EmbeddedDiagnostic diagnostic)
-            => Diagnostics.Length > 0 ? this : WithDiagnostics(ImmutableArray.Create(diagnostic));
+        public EmbeddedSyntaxToken<TSyntaxKind> AddDiagnosticIfNone(
+            EmbeddedDiagnostic diagnostic
+        ) => Diagnostics.Length > 0 ? this : WithDiagnostics(ImmutableArray.Create(diagnostic));
 
-        public EmbeddedSyntaxToken<TSyntaxKind> WithDiagnostics(ImmutableArray<EmbeddedDiagnostic> diagnostics)
-            => With(diagnostics: diagnostics);
+        public EmbeddedSyntaxToken<TSyntaxKind> WithDiagnostics(
+            ImmutableArray<EmbeddedDiagnostic> diagnostics
+        ) => With(diagnostics: diagnostics);
 
         public EmbeddedSyntaxToken<TSyntaxKind> With(
             Optional<TSyntaxKind> kind = default,
@@ -56,18 +59,18 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             Optional<VirtualCharSequence> virtualChars = default,
             Optional<ImmutableArray<EmbeddedSyntaxTrivia<TSyntaxKind>>> trailingTrivia = default,
             Optional<ImmutableArray<EmbeddedDiagnostic>> diagnostics = default,
-            Optional<object> value = default)
-        {
+            Optional<object> value = default
+        ) {
             return new EmbeddedSyntaxToken<TSyntaxKind>(
                 kind.HasValue ? kind.Value : Kind,
                 leadingTrivia.HasValue ? leadingTrivia.Value : LeadingTrivia,
                 virtualChars.HasValue ? virtualChars.Value : VirtualChars,
                 trailingTrivia.HasValue ? trailingTrivia.Value : TrailingTrivia,
                 diagnostics.HasValue ? diagnostics.Value : Diagnostics,
-                value.HasValue ? value.Value : Value);
+                value.HasValue ? value.Value : Value
+            );
         }
 
-        public TextSpan GetSpan()
-            => EmbeddedSyntaxHelpers.GetSpan(this.VirtualChars);
+        public TextSpan GetSpan() => EmbeddedSyntaxHelpers.GetSpan(this.VirtualChars);
     }
 }

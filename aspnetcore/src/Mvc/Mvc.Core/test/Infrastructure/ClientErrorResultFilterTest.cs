@@ -38,12 +38,20 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var actionResult = new NotFoundResult();
             var context = GetContext(actionResult);
             var factory = new Mock<IClientErrorFactory>();
-            factory
-                .Setup(f => f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>()))
+            factory.Setup(
+                    f =>
+                        f.GetClientError(
+                            It.IsAny<ActionContext>(),
+                            It.IsAny<IClientErrorActionResult>()
+                        )
+                )
                 .Returns((IActionResult)null)
                 .Verifiable();
 
-            var filter = new ClientErrorResultFilter(factory.Object, NullLogger<ClientErrorResultFilter>.Instance);
+            var filter = new ClientErrorResultFilter(
+                factory.Object,
+                NullLogger<ClientErrorResultFilter>.Instance
+            );
 
             // Act
             filter.OnResultExecuting(context);
@@ -107,18 +115,31 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static ClientErrorResultFilter GetFilter()
         {
             var factory = Mock.Of<IClientErrorFactory>(
-                f => f.GetClientError(It.IsAny<ActionContext>(), It.IsAny<IClientErrorActionResult>()) == Result);
+                f =>
+                    f.GetClientError(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<IClientErrorActionResult>()
+                    ) == Result
+            );
 
-            return new ClientErrorResultFilter(factory, NullLogger<ClientErrorResultFilter>.Instance);
+            return new ClientErrorResultFilter(
+                factory,
+                NullLogger<ClientErrorResultFilter>.Instance
+            );
         }
 
         private static ResultExecutingContext GetContext(IActionResult actionResult)
         {
             return new ResultExecutingContext(
-                new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()),
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new ActionDescriptor()
+                ),
                 Array.Empty<IFilterMetadata>(),
                 actionResult,
-                new object());
+                new object()
+            );
         }
     }
 }

@@ -9,12 +9,10 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class StoreGeneratedSqliteTest : StoreGeneratedTestBase<StoreGeneratedSqliteTest.StoreGeneratedSqliteFixture>
+    public class StoreGeneratedSqliteTest
+        : StoreGeneratedTestBase<StoreGeneratedSqliteTest.StoreGeneratedSqliteFixture>
     {
-        public StoreGeneratedSqliteTest(StoreGeneratedSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public StoreGeneratedSqliteTest(StoreGeneratedSqliteFixture fixture) : base(fixture) { }
 
         public override void Fields_used_correctly_for_store_generated_values()
         {
@@ -33,24 +31,28 @@ namespace Microsoft.EntityFrameworkCore
                     var id = entry.Entity.Id;
 
                     Assert.Equal(16, id?.Length ?? 0);
-                });
+                }
+            );
         }
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         public class StoreGeneratedSqliteFixture : StoreGeneratedFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => builder
-                    .EnableSensitiveDataLogging()
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                builder.EnableSensitiveDataLogging()
                     .ConfigureWarnings(
-                        b => b.Default(WarningBehavior.Throw)
-                            .Ignore(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                            .Ignore(RelationalEventId.BoolWithDefaultWarning));
+                        b =>
+                            b.Default(WarningBehavior.Throw)
+                                .Ignore(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                                .Ignore(RelationalEventId.BoolWithDefaultWarning)
+                    );
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -58,18 +60,23 @@ namespace Microsoft.EntityFrameworkCore
                     b =>
                     {
                         b.Property(e => e.Identity).HasDefaultValue("Banana Joe");
-                        b.Property(e => e.IdentityReadOnlyBeforeSave).HasDefaultValue("Doughnut Sheriff");
+                        b.Property(e => e.IdentityReadOnlyBeforeSave)
+                            .HasDefaultValue("Doughnut Sheriff");
                         b.Property(e => e.IdentityReadOnlyAfterSave).HasDefaultValue("Anton");
                         b.Property(e => e.AlwaysIdentity).HasDefaultValue("Banana Joe");
-                        b.Property(e => e.AlwaysIdentityReadOnlyBeforeSave).HasDefaultValue("Doughnut Sheriff");
+                        b.Property(e => e.AlwaysIdentityReadOnlyBeforeSave)
+                            .HasDefaultValue("Doughnut Sheriff");
                         b.Property(e => e.AlwaysIdentityReadOnlyAfterSave).HasDefaultValue("Anton");
                         b.Property(e => e.Computed).HasDefaultValue("Alan");
                         b.Property(e => e.ComputedReadOnlyBeforeSave).HasDefaultValue("Carmen");
                         b.Property(e => e.ComputedReadOnlyAfterSave).HasDefaultValue("Tina Rex");
                         b.Property(e => e.AlwaysComputed).HasDefaultValue("Alan");
-                        b.Property(e => e.AlwaysComputedReadOnlyBeforeSave).HasDefaultValue("Carmen");
-                        b.Property(e => e.AlwaysComputedReadOnlyAfterSave).HasDefaultValue("Tina Rex");
-                    });
+                        b.Property(e => e.AlwaysComputedReadOnlyBeforeSave)
+                            .HasDefaultValue("Carmen");
+                        b.Property(e => e.AlwaysComputedReadOnlyAfterSave)
+                            .HasDefaultValue("Tina Rex");
+                    }
+                );
 
                 modelBuilder.Entity<Anais>(
                     b =>
@@ -87,26 +94,36 @@ namespace Microsoft.EntityFrameworkCore
 
                         b.Property(e => e.OnAddOrUpdate).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnAddOrUpdateUseBeforeUseAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateIgnoreBeforeUseAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateThrowBeforeUseAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateUseBeforeIgnoreAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateIgnoreBeforeIgnoreAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateThrowBeforeIgnoreAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateUseBeforeThrowAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateIgnoreBeforeThrowAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnAddOrUpdateThrowBeforeThrowAfter).HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateIgnoreBeforeUseAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateThrowBeforeUseAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateUseBeforeIgnoreAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateIgnoreBeforeIgnoreAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateThrowBeforeIgnoreAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateUseBeforeThrowAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateIgnoreBeforeThrowAfter)
+                            .HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnAddOrUpdateThrowBeforeThrowAfter)
+                            .HasDefaultValue("Rabbit");
 
                         b.Property(e => e.OnUpdate).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateUseBeforeUseAfter).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateIgnoreBeforeUseAfter).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateThrowBeforeUseAfter).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateUseBeforeIgnoreAfter).HasDefaultValue("Rabbit");
-                        b.Property(e => e.OnUpdateIgnoreBeforeIgnoreAfter).HasDefaultValue("Rabbit");
+                        b.Property(e => e.OnUpdateIgnoreBeforeIgnoreAfter)
+                            .HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateThrowBeforeIgnoreAfter).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateUseBeforeThrowAfter).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateIgnoreBeforeThrowAfter).HasDefaultValue("Rabbit");
                         b.Property(e => e.OnUpdateThrowBeforeThrowAfter).HasDefaultValue("Rabbit");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<WithNullableBackingFields>(
                     b =>
@@ -115,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.Property(e => e.NullableBackedIntNonZeroDefault).HasDefaultValue(-1);
                         b.Property(e => e.NullableBackedBoolFalseDefault).HasDefaultValue(false);
                         b.Property(e => e.NullableBackedIntZeroDefault).HasDefaultValue(0);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<WithObjectBackingFields>(
                     b =>
@@ -124,13 +142,17 @@ namespace Microsoft.EntityFrameworkCore
                         b.Property(e => e.NullableBackedIntNonZeroDefault).HasDefaultValue(-1);
                         b.Property(e => e.NullableBackedBoolFalseDefault).HasDefaultValue(false);
                         b.Property(e => e.NullableBackedIntZeroDefault).HasDefaultValue(0);
-                    });
+                    }
+                );
 
-                modelBuilder.Entity<Zach>().Property(e => e.Id)
+                modelBuilder.Entity<Zach>()
+                    .Property(e => e.Id)
                     .ValueGeneratedOnAdd()
                     .HasDefaultValueSql("randomblob(16)");
 
-                modelBuilder.Entity<NonStoreGenDependent>().Property(e => e.HasTemp).HasDefaultValue(777);
+                modelBuilder.Entity<NonStoreGenDependent>()
+                    .Property(e => e.HasTemp)
+                    .HasDefaultValue(777);
 
                 base.OnModelCreating(modelBuilder, context);
             }

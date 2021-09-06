@@ -14,9 +14,15 @@ namespace SecurityWebSite
     {
         public int AuthorizeCount { get; private set; }
 
-        public CountingPolicyEvaluator(IAuthorizationService authorization) : base(authorization) { }
+        public CountingPolicyEvaluator(IAuthorizationService authorization) : base(authorization)
+        { }
 
-        public override Task<PolicyAuthorizationResult> AuthorizeAsync(AuthorizationPolicy policy, AuthenticateResult authenticationResult, HttpContext context, object resource) {
+        public override Task<PolicyAuthorizationResult> AuthorizeAsync(
+            AuthorizationPolicy policy,
+            AuthenticateResult authenticationResult,
+            HttpContext context,
+            object resource
+        ) {
             AuthorizeCount++;
             return base.AuthorizeAsync(policy, authenticationResult, context, resource);
         }

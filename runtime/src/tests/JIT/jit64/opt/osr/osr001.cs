@@ -31,7 +31,12 @@ public class TestCase
         {
             if (array[k] != (k + k / ARRAY_UNITSIZE))
             {
-                Console.WriteLine("[k = {0}]\texpected = {1}\tactual={2}", k, k + (k / ARRAY_UNITSIZE), array[k]);
+                Console.WriteLine(
+                    "[k = {0}]\texpected = {1}\tactual={2}",
+                    k,
+                    k + (k / ARRAY_UNITSIZE),
+                    array[k]
+                );
             }
             else
             {

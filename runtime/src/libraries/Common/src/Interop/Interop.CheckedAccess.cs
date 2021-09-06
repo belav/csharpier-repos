@@ -5,8 +5,12 @@ using System;
 
 internal static partial class Interop
 {
-    public static unsafe void CheckBounds(byte* buffer, int bufferSize, byte* offset, int accessSize)
-    {
+    public static unsafe void CheckBounds(
+        byte* buffer,
+        int bufferSize,
+        byte* offset,
+        int accessSize
+    ) {
         var start = checked((int)(IntPtr)(offset - buffer));
         var end = checked(start + accessSize);
         if (start < 0 || end > bufferSize)
@@ -54,8 +58,12 @@ internal static partial class Interop
         *offset = value;
     }
 
-    public static unsafe void CheckedWrite(byte* buffer, int bufferSize, ushort* offset, ushort value)
-    {
+    public static unsafe void CheckedWrite(
+        byte* buffer,
+        int bufferSize,
+        ushort* offset,
+        ushort value
+    ) {
         CheckBounds(buffer, bufferSize, offset);
         *offset = value;
     }

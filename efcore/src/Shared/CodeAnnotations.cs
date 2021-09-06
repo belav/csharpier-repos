@@ -24,10 +24,7 @@ namespace JetBrains.Annotations
 
         public bool ForceFullStates { get; }
 
-        public ContractAnnotationAttribute(string contract)
-            : this(contract, false)
-        {
-        }
+        public ContractAnnotationAttribute(string contract) : this(contract, false) { }
 
         public ContractAnnotationAttribute(string contract, bool forceFullStates)
         {
@@ -40,24 +37,18 @@ namespace JetBrains.Annotations
     internal sealed class UsedImplicitlyAttribute : Attribute
     {
         public UsedImplicitlyAttribute()
-            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default)
-        {
-        }
+            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) { }
 
         public UsedImplicitlyAttribute(ImplicitUseKindFlags useKindFlags)
-            : this(useKindFlags, ImplicitUseTargetFlags.Default)
-        {
-        }
+            : this(useKindFlags, ImplicitUseTargetFlags.Default) { }
 
         public UsedImplicitlyAttribute(ImplicitUseTargetFlags targetFlags)
-            : this(ImplicitUseKindFlags.Default, targetFlags)
-        {
-        }
+            : this(ImplicitUseKindFlags.Default, targetFlags) { }
 
         public UsedImplicitlyAttribute(
             ImplicitUseKindFlags useKindFlags,
-            ImplicitUseTargetFlags targetFlags)
-        {
+            ImplicitUseTargetFlags targetFlags
+        ) {
             UseKindFlags = useKindFlags;
             TargetFlags = targetFlags;
         }
@@ -66,11 +57,16 @@ namespace JetBrains.Annotations
         public ImplicitUseTargetFlags TargetFlags { get; }
     }
 
-    [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Delegate)]
+    [AttributeUsage(
+        AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Delegate
+    )]
     internal sealed class StringFormatMethodAttribute : Attribute
     {
-        public StringFormatMethodAttribute(string formatParameterName)
-            => FormatParameterName = formatParameterName;
+        public StringFormatMethodAttribute(string formatParameterName) =>
+            FormatParameterName = formatParameterName;
 
         public string FormatParameterName { get; }
     }

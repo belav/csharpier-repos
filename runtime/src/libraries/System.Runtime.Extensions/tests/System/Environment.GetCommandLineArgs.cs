@@ -16,35 +16,63 @@ namespace System.Tests
             yield return new object[] { new string[] { "singleArg" } };
             yield return new object[] { new string[] { "Arg1", "Arg2" } };
             yield return new object[] { new string[] { "\"Arg With Quotes\"" } };
-            yield return new object[] { new string[] { "\"Arg1 With Quotes\"", "\"Arg2 With Quotes\"" } };
-            yield return new object[] { new string[] { "\"Arg1 With Quotes\"", "Arg2", "\"Arg3 With Quotes\"" } };
-            yield return new object[] { new string[] { "arg1", @"\\\\\" + "\"alpha", @"\" + "\"arg3" } };
+            yield return new object[]
+            {
+                new string[] { "\"Arg1 With Quotes\"", "\"Arg2 With Quotes\"" }
+            };
+            yield return new object[]
+            {
+                new string[] { "\"Arg1 With Quotes\"", "Arg2", "\"Arg3 With Quotes\"" }
+            };
+            yield return new object[]
+            {
+                new string[] { "arg1", @"\\\\\" + "\"alpha", @"\" + "\"arg3" }
+            };
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [MemberData(nameof(GetCommandLineArgs_TestData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/49568",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMacOsAppleSilicon)
+        )]
         public void GetCommandLineArgs_Invoke_ReturnsExpected(string[] args)
         {
             switch (args.Length)
             {
                 case 1:
-                    RemoteExecutor.Invoke((arg) => CheckCommandLineArgs(new string[] { arg }), args[0]).Dispose();
+                    RemoteExecutor.Invoke(
+                            (arg) => CheckCommandLineArgs(new string[] { arg }),
+                            args[0]
+                        )
+                        .Dispose();
                     break;
 
                 case 2:
-                    RemoteExecutor.Invoke((arg1, arg2) => CheckCommandLineArgs(new string[] { arg1, arg2 }), args[0], args[1]).Dispose();
+                    RemoteExecutor.Invoke(
+                            (arg1, arg2) => CheckCommandLineArgs(new string[] { arg1, arg2 }),
+                            args[0],
+                            args[1]
+                        )
+                        .Dispose();
                     break;
 
                 case 3:
-                    RemoteExecutor.Invoke((arg1, arg2, arg3) => CheckCommandLineArgs(new string[] { arg1, arg2, arg3 }), args[0], args[1], args[2]).Dispose();
+                    RemoteExecutor.Invoke(
+                            (arg1, arg2, arg3) =>
+                                CheckCommandLineArgs(new string[] { arg1, arg2, arg3 }),
+                            args[0],
+                            args[1],
+                            args[2]
+                        )
+                        .Dispose();
                     break;
 
                 default:
                     Assert.True(false, "Unexpected number of args passed to test");
                     break;
             }
-
         }
 
         public static int CheckCommandLineArgs(string[] args)

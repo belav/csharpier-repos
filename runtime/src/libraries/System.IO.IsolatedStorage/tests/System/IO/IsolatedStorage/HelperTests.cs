@@ -32,11 +32,12 @@ namespace System.IO.IsolatedStorage.Tests
             }
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(IsolatedStorageScope.Assembly),
             InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.Roaming),
             InlineData(IsolatedStorageScope.Machine)
-            ]
+        ]
         public void GetDataDirectory(IsolatedStorageScope scope)
         {
             // Machine scope is behind a policy that isn't enabled by default

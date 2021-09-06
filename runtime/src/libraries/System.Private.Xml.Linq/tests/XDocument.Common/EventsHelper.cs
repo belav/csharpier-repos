@@ -21,7 +21,8 @@ namespace CoreXml.Test.XLinq
         private EventItem _pending;
         private Queue<EventItem> _events;
         private IEqualityComparer _nodeComparer = XNode.EqualityComparer;
-        private XAttributeEqualityComparer<XAttribute> _attributeComparer = new XAttributeEqualityComparer<XAttribute>();
+        private XAttributeEqualityComparer<XAttribute> _attributeComparer =
+            new XAttributeEqualityComparer<XAttribute>();
 
         public EventsHelper(XObject x)
         {
@@ -84,12 +85,20 @@ namespace CoreXml.Test.XLinq
         // Know exactly what events should be thrown and in what order
         public void Verify(XObjectChange[] expectedEvents)
         {
-            TestLog.Compare(_events.Count, expectedEvents.Length, "Mismatch in expected number of events");
+            TestLog.Compare(
+                _events.Count,
+                expectedEvents.Length,
+                "Mismatch in expected number of events"
+            );
             int i = 0;
             while (_events.Count > 0)
             {
                 EventItem item = _events.Dequeue();
-                TestLog.Compare(item.EventArgs.ObjectChange, expectedEvents[i], "Event Type Mismatch");
+                TestLog.Compare(
+                    item.EventArgs.ObjectChange,
+                    expectedEvents[i],
+                    "Event Type Mismatch"
+                );
                 i++;
             }
         }
@@ -106,7 +115,11 @@ namespace CoreXml.Test.XLinq
         // Same event for many different objects
         public void Verify(XObjectChange expectedEvent, object[] expectedObjects)
         {
-            TestLog.Compare(_events.Count, expectedObjects.Length, "Mismatch in expected number of events");
+            TestLog.Compare(
+                _events.Count,
+                expectedObjects.Length,
+                "Mismatch in expected number of events"
+            );
             int i = 0;
             while (_events.Count > 0)
             {
@@ -124,24 +137,43 @@ namespace CoreXml.Test.XLinq
             EventItem item = _events.Dequeue();
             TestLog.Compare(item.EventArgs.ObjectChange, expectedEvent, "Event Type Mismatch");
             if (item.Sender is XAttribute)
-                TestLog.Compare(_attributeComparer.Equals((XAttribute)item.Sender, (XAttribute)expectedObject), "Attribute Mismatch");
+                TestLog.Compare(
+                    _attributeComparer.Equals((XAttribute)item.Sender, (XAttribute)expectedObject),
+                    "Attribute Mismatch"
+                );
             else
-                TestLog.Compare(_nodeComparer.Equals((XNode)item.Sender, expectedObject), "Node Mismatch");
+                TestLog.Compare(
+                    _nodeComparer.Equals((XNode)item.Sender, expectedObject),
+                    "Node Mismatch"
+                );
         }
 
         // Same event for many different XNodes
         public void Verify(XObjectChange expectedEvent, XObject[] expectedObjects)
         {
-            TestLog.Compare(_events.Count, expectedObjects.Length, "Mismatch in expected number of events");
+            TestLog.Compare(
+                _events.Count,
+                expectedObjects.Length,
+                "Mismatch in expected number of events"
+            );
             int i = 0;
             while (_events.Count > 0)
             {
                 EventItem item = _events.Dequeue();
                 TestLog.Compare(item.EventArgs.ObjectChange, expectedEvent, "Event Type Mismatch");
                 if (item.Sender is XAttribute)
-                    TestLog.Compare(_attributeComparer.Equals((XAttribute)item.Sender, (XAttribute)expectedObjects[i]), "Attribute Mismatch");
+                    TestLog.Compare(
+                        _attributeComparer.Equals(
+                            (XAttribute)item.Sender,
+                            (XAttribute)expectedObjects[i]
+                        ),
+                        "Attribute Mismatch"
+                    );
                 else
-                    TestLog.Compare(_nodeComparer.Equals((XNode)item.Sender, expectedObjects[i]), "Node Mismatch");
+                    TestLog.Compare(
+                        _nodeComparer.Equals((XNode)item.Sender, expectedObjects[i]),
+                        "Node Mismatch"
+                    );
                 i++;
             }
         }
@@ -149,16 +181,33 @@ namespace CoreXml.Test.XLinq
         // Different events for different objects
         public void Verify(XObjectChange[] expectedEvents, XObject[] expectedObjects)
         {
-            TestLog.Compare(_events.Count, expectedEvents.Length, "Mismatch in expected number of events");
+            TestLog.Compare(
+                _events.Count,
+                expectedEvents.Length,
+                "Mismatch in expected number of events"
+            );
             int i = 0;
             while (_events.Count > 0)
             {
                 EventItem item = _events.Dequeue();
-                TestLog.Compare(item.EventArgs.ObjectChange, expectedEvents[i], "Event Type Mismatch");
+                TestLog.Compare(
+                    item.EventArgs.ObjectChange,
+                    expectedEvents[i],
+                    "Event Type Mismatch"
+                );
                 if (item.Sender is XAttribute)
-                    TestLog.Compare(_attributeComparer.Equals((XAttribute)item.Sender, (XAttribute)expectedObjects[i]), "Attribute Mismatch");
+                    TestLog.Compare(
+                        _attributeComparer.Equals(
+                            (XAttribute)item.Sender,
+                            (XAttribute)expectedObjects[i]
+                        ),
+                        "Attribute Mismatch"
+                    );
                 else
-                    TestLog.Compare(_nodeComparer.Equals((XNode)item.Sender, expectedObjects[i]), "Node Mismatch");
+                    TestLog.Compare(
+                        _nodeComparer.Equals((XNode)item.Sender, expectedObjects[i]),
+                        "Node Mismatch"
+                    );
                 i++;
             }
         }
@@ -186,7 +235,6 @@ namespace CoreXml.Test.XLinq
         }
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// UndoManager provided by the product team
@@ -204,7 +252,8 @@ namespace CoreXml.Test.XLinq
 
         public UndoManager(XObject root)
         {
-            if (root == null) throw new ArgumentNullException();
+            if (root == null)
+                throw new ArgumentNullException();
             _root = root;
             _root.Changing += new EventHandler<XObjectChangeEventArgs>(Changing);
             _root.Changed += new EventHandler<XObjectChangeEventArgs>(Changed);
@@ -243,6 +292,7 @@ namespace CoreXml.Test.XLinq
                     } while (_undos.Count > 0 && _undos.Peek().Group == unit.Group);
                 }
             }
+
             finally
             {
                 _undoing = false;
@@ -265,6 +315,7 @@ namespace CoreXml.Test.XLinq
                     } while (_redos.Count > 0 && _redos.Peek().Group == unit.Group);
                 }
             }
+
             finally
             {
                 _redoing = false;
@@ -278,7 +329,8 @@ namespace CoreXml.Test.XLinq
 
         void Changing(object sender, XObjectChangeEventArgs e)
         {
-            if (_pending != null) throw new NotImplementedException();
+            if (_pending != null)
+                throw new NotImplementedException();
             switch (e.ObjectChange)
             {
                 case XObjectChange.Add:
@@ -370,9 +422,7 @@ namespace CoreXml.Test.XLinq
     {
         private int _group;
 
-        public UndoUnit()
-        {
-        }
+        public UndoUnit() { }
 
         public int Group
         {

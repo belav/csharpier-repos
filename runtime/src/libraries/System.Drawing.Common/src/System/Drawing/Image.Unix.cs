@@ -52,8 +52,11 @@ namespace System.Drawing
         // static
 
         // See http://support.microsoft.com/default.aspx?scid=kb;en-us;831419 for performance discussion
-        public static Image FromStream(Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
-        {
+        public static Image FromStream(
+            Stream stream,
+            bool useEmbeddedColorManagement,
+            bool validateImageData
+        ) {
             return LoadFromStream(stream, false);
         }
 
@@ -77,8 +80,15 @@ namespace System.Drawing
             // with a set of delegates.
             GdiPlusStreamHelper sh = new GdiPlusStreamHelper(stream, seekToOrigin: true);
 
-            int st = Gdip.GdipLoadImageFromDelegate_linux(sh.GetHeaderDelegate, sh.GetBytesDelegate,
-                sh.PutBytesDelegate, sh.SeekDelegate, sh.CloseDelegate, sh.SizeDelegate, out IntPtr imagePtr);
+            int st = Gdip.GdipLoadImageFromDelegate_linux(
+                sh.GetHeaderDelegate,
+                sh.GetBytesDelegate,
+                sh.PutBytesDelegate,
+                sh.SeekDelegate,
+                sh.CloseDelegate,
+                sh.SizeDelegate,
+                out IntPtr imagePtr
+            );
 
             // Since we're just passing to native code the delegates inside the wrapper, we need to keep sh alive
             // to avoid the object being collected and therefore the delegates would be collected as well.
@@ -98,8 +108,12 @@ namespace System.Drawing
             return source;
         }
 
-        public Image GetThumbnailImage(int thumbWidth, int thumbHeight, Image.GetThumbnailImageAbort? callback, IntPtr callbackData)
-        {
+        public Image GetThumbnailImage(
+            int thumbWidth,
+            int thumbHeight,
+            Image.GetThumbnailImageAbort? callback,
+            IntPtr callbackData
+        ) {
             if ((thumbWidth <= 0) || (thumbHeight <= 0))
                 throw new OutOfMemoryException(SR.InvalidThumbnailSize);
 
@@ -110,11 +124,19 @@ namespace System.Drawing
                 int status = Gdip.GdipDrawImageRectRectI(
                     new HandleRef(this, g.NativeGraphics),
                     new HandleRef(this, nativeImage),
-                    0, 0, thumbWidth, thumbHeight,
-                    0, 0, this.Width, this.Height,
+                    0,
+                    0,
+                    thumbWidth,
+                    thumbHeight,
+                    0,
+                    0,
+                    this.Width,
+                    this.Height,
                     GraphicsUnit.Pixel,
-                    new HandleRef(this, IntPtr.Zero), null,
-                    new HandleRef(this, IntPtr.Zero));
+                    new HandleRef(this, IntPtr.Zero),
+                    null,
+                    new HandleRef(this, IntPtr.Zero)
+                );
 
                 Gdip.CheckStatus(status);
             }
@@ -152,7 +174,10 @@ namespace System.Drawing
                 encoder = FindEncoderForFormat(RawFormat);
                 if (encoder == null)
                 {
-                    string msg = string.Format("No codec available for saving format '{0}'.", format.Guid);
+                    string msg = string.Format(
+                        "No codec available for saving format '{0}'.",
+                        format.Guid
+                    );
                     throw new ArgumentException(msg, nameof(format));
                 }
             }
@@ -191,7 +216,8 @@ namespace System.Drawing
                 dest = ImageFormat.Png;
 
             // If we don't find an Encoder (for things like Icon), we just switch back to PNG...
-            ImageCodecInfo codec = FindEncoderForFormat(dest) ?? FindEncoderForFormat(ImageFormat.Png)!;
+            ImageCodecInfo codec =
+                FindEncoderForFormat(dest) ?? FindEncoderForFormat(ImageFormat.Png)!;
 
             Save(stream, codec, null);
         }
@@ -219,14 +245,27 @@ namespace System.Drawing
 
             try
             {
-                GdiPlusStreamHelper sh = new GdiPlusStreamHelper(stream, seekToOrigin: false, makeSeekable: false);
-                st = Gdip.GdipSaveImageToDelegate_linux(nativeImage, sh.GetBytesDelegate, sh.PutBytesDelegate,
-                    sh.SeekDelegate, sh.CloseDelegate, sh.SizeDelegate, ref guid, nativeEncoderParams);
+                GdiPlusStreamHelper sh = new GdiPlusStreamHelper(
+                    stream,
+                    seekToOrigin: false,
+                    makeSeekable: false
+                );
+                st = Gdip.GdipSaveImageToDelegate_linux(
+                    nativeImage,
+                    sh.GetBytesDelegate,
+                    sh.PutBytesDelegate,
+                    sh.SeekDelegate,
+                    sh.CloseDelegate,
+                    sh.SizeDelegate,
+                    ref guid,
+                    nativeEncoderParams
+                );
 
                 // Since we're just passing to native code the delegates inside the wrapper, we need to keep sh alive
                 // to avoid the object being collected and therefore the delegates would be collected as well.
                 GC.KeepAlive(sh);
             }
+
             finally
             {
                 if (nativeEncoderParams != IntPtr.Zero)
@@ -259,14 +298,8 @@ namespace System.Drawing
         [Browsable(false)]
         public ColorPalette Palette
         {
-            get
-            {
-                return retrieveGDIPalette();
-            }
-            set
-            {
-                storeGDIPalette(value);
-            }
+            get { return retrieveGDIPalette(); }
+            set { storeGDIPalette(value); }
         }
 
         internal ColorPalette retrieveGDIPalette()

@@ -19,9 +19,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
     {
         private static readonly TimeSpan _keepAliveTimeout = TimeSpan.FromSeconds(10);
         private static readonly TimeSpan _longDelay = TimeSpan.FromSeconds(30);
-        private static readonly TimeSpan _shortDelay = TimeSpan.FromSeconds(_longDelay.TotalSeconds / 10);
+        private static readonly TimeSpan _shortDelay = TimeSpan.FromSeconds(
+            _longDelay.TotalSeconds / 10
+        );
 
-        private readonly TaskCompletionSource _firstRequestReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _firstRequestReceived = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         [Fact]
         public async Task ConnectionClosedWhenKeepAliveTimeoutExpires()
@@ -35,15 +39,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 {
                     await connection.TransportConnection.WaitForReadTask;
 
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        "Host:",
-                        "",
-                        "");
+                    await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                     await ReceiveResponse(connection, testContext);
 
                     // Min amount of time between requests that triggers a keep-alive timeout.
-                    testContext.MockSystemClock.UtcNow += _keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
+                    testContext.MockSystemClock.UtcNow +=
+                        _keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
                     await connection.WaitForConnectionClose();
@@ -65,15 +66,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                     for (var i = 0; i < 10; i++)
                     {
-                        await connection.Send(
-                            "GET / HTTP/1.1",
-                            "Host:",
-                            "",
-                            "");
+                        await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                         await ReceiveResponse(connection, testContext);
 
                         // Max amount of time between requests that doesn't trigger a keep-alive timeout.
-                        testContext.MockSystemClock.UtcNow += _keepAliveTimeout + Heartbeat.Interval;
+                        testContext.MockSystemClock.UtcNow +=
+                            _keepAliveTimeout + Heartbeat.Interval;
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
                 }
@@ -93,29 +91,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     await connection.TransportConnection.WaitForReadTask;
 
                     await connection.Send(
-                            "POST /consume HTTP/1.1",
-                            "Host:",
-                            "Transfer-Encoding: chunked",
-                            "",
-                            "");
+                        "POST /consume HTTP/1.1",
+                        "Host:",
+                        "Transfer-Encoding: chunked",
+                        "",
+                        ""
+                    );
 
                     await _firstRequestReceived.Task.DefaultTimeout();
 
-                    for (var totalDelay = TimeSpan.Zero; totalDelay < _longDelay; totalDelay += _shortDelay)
-                    {
-                        await connection.Send(
-                            "1",
-                            "a",
-                            "");
+                    for (
+                        var totalDelay = TimeSpan.Zero;
+                        totalDelay < _longDelay;
+                        totalDelay += _shortDelay
+                    ) {
+                        await connection.Send("1", "a", "");
 
                         testContext.MockSystemClock.UtcNow += _shortDelay;
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
 
-                    await connection.Send(
-                            "0",
-                            "",
-                            "");
+                    await connection.Send("0", "", "");
                     await ReceiveResponse(connection, testContext);
                 }
             }
@@ -134,16 +130,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 {
                     await connection.TransportConnection.WaitForReadTask;
 
-                    await connection.Send(
-                        "GET /longrunning HTTP/1.1",
-                        "Host:",
-                        "",
-                        "");
+                    await connection.Send("GET /longrunning HTTP/1.1", "Host:", "", "");
 
                     await _firstRequestReceived.Task.DefaultTimeout();
 
-                    for (var totalDelay = TimeSpan.Zero; totalDelay < _longDelay; totalDelay += _shortDelay)
-                    {
+                    for (
+                        var totalDelay = TimeSpan.Zero;
+                        totalDelay < _longDelay;
+                        totalDelay += _shortDelay
+                    ) {
                         testContext.MockSystemClock.UtcNow += _shortDelay;
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
@@ -152,11 +147,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                     await ReceiveResponse(connection, testContext);
 
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        "Host:",
-                        "",
-                        "");
+                    await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                     await ReceiveResponse(connection, testContext);
                 }
             }
@@ -175,7 +166,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     await connection.TransportConnection.WaitForReadTask;
 
                     // Min amount of time between requests that triggers a keep-alive timeout.
-                    testContext.MockSystemClock.UtcNow += _keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
+                    testContext.MockSystemClock.UtcNow +=
+                        _keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
                     await connection.WaitForConnectionClose();
@@ -201,16 +193,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "Host:",
                         "Connection: Upgrade",
                         "",
-                        "");
+                        ""
+                    );
                     await connection.Receive(
                         "HTTP/1.1 101 Switching Protocols",
                         "Connection: Upgrade",
                         $"Date: {testContext.DateHeaderValue}",
                         "",
-                        "");
+                        ""
+                    );
 
-                    for (var totalDelay = TimeSpan.Zero; totalDelay < _longDelay; totalDelay += _shortDelay)
-                    {
+                    for (
+                        var totalDelay = TimeSpan.Zero;
+                        totalDelay < _longDelay;
+                        totalDelay += _shortDelay
+                    ) {
                         testContext.MockSystemClock.UtcNow += _shortDelay;
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
@@ -222,19 +219,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
         }
 
-        private TestServer CreateServer(TestServiceContext context, CancellationToken longRunningCt = default, CancellationToken upgradeCt = default)
-        {
+        private TestServer CreateServer(
+            TestServiceContext context,
+            CancellationToken longRunningCt = default,
+            CancellationToken upgradeCt = default
+        ) {
             // Ensure request headers timeout is started as soon as the tests send requests.
             context.Scheduler = PipeScheduler.Inline;
             context.ServerOptions.AddServerHeader = false;
             context.ServerOptions.Limits.KeepAliveTimeout = _keepAliveTimeout;
             context.ServerOptions.Limits.MinRequestBodyDataRate = null;
 
-            return new TestServer(httpContext => App(httpContext, longRunningCt, upgradeCt), context);
+            return new TestServer(
+                httpContext => App(httpContext, longRunningCt, upgradeCt),
+                context
+            );
         }
 
-        private async Task App(HttpContext httpContext, CancellationToken longRunningCt, CancellationToken upgradeCt)
-        {
+        private async Task App(
+            HttpContext httpContext,
+            CancellationToken longRunningCt,
+            CancellationToken upgradeCt
+        ) {
             var ct = httpContext.RequestAborted;
             var responseStream = httpContext.Response.Body;
             var responseBytes = Encoding.ASCII.GetBytes("hello, world");
@@ -247,8 +253,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
             else if (httpContext.Request.Path == "/upgrade")
             {
-                using (var stream = await httpContext.Features.Get<IHttpUpgradeFeature>().UpgradeAsync())
-                {
+                using (
+                    var stream = await httpContext.Features.Get<IHttpUpgradeFeature>()
+                        .UpgradeAsync()
+                ) {
                     await CancellationTokenAsTask(upgradeCt);
 
                     responseStream = stream;
@@ -257,14 +265,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             else if (httpContext.Request.Path == "/consume")
             {
                 var buffer = new byte[1024];
-                while (await httpContext.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) ;
+                while (await httpContext.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
+                    ;
             }
 
             await responseStream.WriteAsync(responseBytes, 0, responseBytes.Length);
         }
 
-        private async Task ReceiveResponse(InMemoryConnection connection, TestServiceContext testContext)
-        {
+        private async Task ReceiveResponse(
+            InMemoryConnection connection,
+            TestServiceContext testContext
+        ) {
             await connection.Receive(
                 "HTTP/1.1 200 OK",
                 $"Date: {testContext.DateHeaderValue}",
@@ -274,7 +285,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 "hello, world",
                 "0",
                 "",
-                "");
+                ""
+            );
         }
 
         private static Task CancellationTokenAsTask(CancellationToken token)

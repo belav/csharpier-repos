@@ -69,7 +69,11 @@ internal class StrAccess1
         for (int j = 0; j < len; j++)
             str1darr[j] = Convert.ToString(teststr[j]);
 
-        char b0, b1, b2, b3, b4;
+        char b0,
+            b1,
+            b2,
+            b3,
+            b4;
         try
         {
             passed = false;

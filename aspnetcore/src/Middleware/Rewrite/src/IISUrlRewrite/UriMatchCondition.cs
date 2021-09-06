@@ -11,13 +11,23 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
     {
         private static readonly TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
 
-        public UriMatchCondition(InputParser inputParser, string input, string pattern, UriMatchPart uriMatchPart, bool ignoreCase, bool negate)
-            : base(CreatePattern(inputParser, input, uriMatchPart), CreateRegexMatch(pattern, ignoreCase, negate))
-        {
-        }
+        public UriMatchCondition(
+            InputParser inputParser,
+            string input,
+            string pattern,
+            UriMatchPart uriMatchPart,
+            bool ignoreCase,
+            bool negate
+        ) : base(
+            CreatePattern(inputParser, input, uriMatchPart),
+            CreateRegexMatch(pattern, ignoreCase, negate)
+        ) { }
 
-        private static Pattern CreatePattern(InputParser inputParser, string input, UriMatchPart uriMatchPart)
-        {
+        private static Pattern CreatePattern(
+            InputParser inputParser,
+            string input,
+            UriMatchPart uriMatchPart
+        ) {
             return inputParser.ParseInputString(input, uriMatchPart);
         }
 
@@ -25,11 +35,7 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         {
             var regexOptions = RegexOptions.CultureInvariant | RegexOptions.Compiled;
             regexOptions = ignoreCase ? regexOptions | RegexOptions.IgnoreCase : regexOptions;
-            var regex = new Regex(
-                pattern,
-                regexOptions,
-                _regexTimeout
-            );
+            var regex = new Regex(pattern, regexOptions, _regexTimeout);
             return new RegexMatch(regex, negate);
         }
     }

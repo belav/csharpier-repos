@@ -15,10 +15,23 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossAcceptAsyncOperation(bool suppressContext)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossAcceptAsyncOperation(
+            bool suppressContext
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             using (var saea = new SocketAsyncEventArgs())
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
@@ -33,14 +46,17 @@ namespace System.Net.Sockets.Tests
                 };
 
                 asyncLocal.Value = 42;
-                if (suppressContext) ExecutionContext.SuppressFlow();
+                if (suppressContext)
+                    ExecutionContext.SuppressFlow();
                 try
                 {
                     Assert.True(listener.AcceptAsync(saea));
                 }
+
                 finally
                 {
-                    if (suppressContext) ExecutionContext.RestoreFlow();
+                    if (suppressContext)
+                        ExecutionContext.RestoreFlow();
                 }
                 asyncLocal.Value = 0;
 
@@ -55,9 +71,20 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task APM_ExecutionContextFlowsAcrossBeginAcceptOperation(bool suppressContext)
         {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -65,18 +92,24 @@ namespace System.Net.Sockets.Tests
                 var tcs = new TaskCompletionSource<int>();
 
                 asyncLocal.Value = 42;
-                if (suppressContext) ExecutionContext.SuppressFlow();
+                if (suppressContext)
+                    ExecutionContext.SuppressFlow();
                 try
                 {
-                    listener.BeginAccept(iar =>
-                    {
-                        listener.EndAccept(iar).Dispose();
-                        tcs.SetResult(asyncLocal.Value);
-                    }, null);
+                    listener.BeginAccept(
+                        iar =>
+                        {
+                            listener.EndAccept(iar).Dispose();
+                            tcs.SetResult(asyncLocal.Value);
+                        },
+                        null
+                    );
                 }
+
                 finally
                 {
-                    if (suppressContext) ExecutionContext.RestoreFlow();
+                    if (suppressContext)
+                        ExecutionContext.RestoreFlow();
                 }
                 asyncLocal.Value = 0;
 
@@ -89,10 +122,23 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossConnectAsyncOperation(bool suppressContext)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossConnectAsyncOperation(
+            bool suppressContext
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             using (var saea = new SocketAsyncEventArgs())
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
@@ -105,14 +151,17 @@ namespace System.Net.Sockets.Tests
 
                 bool pending;
                 asyncLocal.Value = 42;
-                if (suppressContext) ExecutionContext.SuppressFlow();
+                if (suppressContext)
+                    ExecutionContext.SuppressFlow();
                 try
                 {
                     pending = client.ConnectAsync(saea);
                 }
+
                 finally
                 {
-                    if (suppressContext) ExecutionContext.RestoreFlow();
+                    if (suppressContext)
+                        ExecutionContext.RestoreFlow();
                 }
                 asyncLocal.Value = 0;
 
@@ -128,9 +177,20 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task APM_ExecutionContextFlowsAcrossBeginConnectOperation(bool suppressContext)
         {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -139,18 +199,25 @@ namespace System.Net.Sockets.Tests
 
                 bool pending;
                 asyncLocal.Value = 42;
-                if (suppressContext) ExecutionContext.SuppressFlow();
+                if (suppressContext)
+                    ExecutionContext.SuppressFlow();
                 try
                 {
-                    pending = !client.BeginConnect(listener.LocalEndPoint, iar =>
-                    {
-                        client.EndConnect(iar);
-                        tcs.SetResult(asyncLocal.Value);
-                    }, null).CompletedSynchronously;
+                    pending = !client.BeginConnect(
+                        listener.LocalEndPoint,
+                        iar =>
+                        {
+                            client.EndConnect(iar);
+                            tcs.SetResult(asyncLocal.Value);
+                        },
+                        null
+                    ).CompletedSynchronously;
                 }
+
                 finally
                 {
-                    if (suppressContext) ExecutionContext.RestoreFlow();
+                    if (suppressContext)
+                        ExecutionContext.RestoreFlow();
                 }
                 asyncLocal.Value = 0;
 
@@ -164,10 +231,23 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossDisconnectAsyncOperation(bool suppressContext)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossDisconnectAsyncOperation(
+            bool suppressContext
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             using (var saea = new SocketAsyncEventArgs())
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
@@ -182,14 +262,17 @@ namespace System.Net.Sockets.Tests
 
                     bool pending;
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
                         pending = client.DisconnectAsync(saea);
                     }
+
                     finally
                     {
-                        if (suppressContext) ExecutionContext.RestoreFlow();
+                        if (suppressContext)
+                            ExecutionContext.RestoreFlow();
                     }
                     asyncLocal.Value = 0;
 
@@ -204,11 +287,23 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task APM_ExecutionContextFlowsAcrossBeginDisconnectOperation(bool suppressContext)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+        public async Task APM_ExecutionContextFlowsAcrossBeginDisconnectOperation(
+            bool suppressContext
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -220,18 +315,25 @@ namespace System.Net.Sockets.Tests
 
                     bool pending;
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
-                        pending = !client.BeginDisconnect(reuseSocket: false, iar =>
-                        {
-                            client.EndDisconnect(iar);
-                            tcs.SetResult(asyncLocal.Value);
-                        }, null).CompletedSynchronously;
+                        pending = !client.BeginDisconnect(
+                            reuseSocket: false,
+                            iar =>
+                            {
+                                client.EndDisconnect(iar);
+                                tcs.SetResult(asyncLocal.Value);
+                            },
+                            null
+                        ).CompletedSynchronously;
                     }
+
                     finally
                     {
-                        if (suppressContext) ExecutionContext.RestoreFlow();
+                        if (suppressContext)
+                            ExecutionContext.RestoreFlow();
                     }
                     asyncLocal.Value = 0;
 
@@ -248,10 +350,24 @@ namespace System.Net.Sockets.Tests
         [InlineData(true, false)]
         [InlineData(false, true)]
         [InlineData(true, true)]
-        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossReceiveAsyncOperation(bool suppressContext, bool receiveFrom)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossReceiveAsyncOperation(
+            bool suppressContext,
+            bool receiveFrom
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             using (var saea = new SocketAsyncEventArgs())
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
@@ -267,16 +383,19 @@ namespace System.Net.Sockets.Tests
                     saea.RemoteEndPoint = server.LocalEndPoint;
 
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
-                        Assert.True(receiveFrom ?
-                            client.ReceiveFromAsync(saea) :
-                            client.ReceiveAsync(saea));
+                        Assert.True(
+                            receiveFrom ? client.ReceiveFromAsync(saea) : client.ReceiveAsync(saea)
+                        );
                     }
+
                     finally
                     {
-                        if (suppressContext) ExecutionContext.RestoreFlow();
+                        if (suppressContext)
+                            ExecutionContext.RestoreFlow();
                     }
                     asyncLocal.Value = 0;
 
@@ -291,11 +410,24 @@ namespace System.Net.Sockets.Tests
         [InlineData(true, false)]
         [InlineData(false, true)]
         [InlineData(true, true)]
-        public async Task APM_ExecutionContextFlowsAcrossBeginReceiveOperation(bool suppressContext, bool receiveFrom)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+        public async Task APM_ExecutionContextFlowsAcrossBeginReceiveOperation(
+            bool suppressContext,
+            bool receiveFrom
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -306,22 +438,41 @@ namespace System.Net.Sockets.Tests
                     var tcs = new TaskCompletionSource<int>();
 
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
                         EndPoint ep = server.LocalEndPoint;
-                        Assert.False(receiveFrom ?
-                            client.BeginReceiveFrom(new byte[1], 0, 1, SocketFlags.None, ref ep, iar =>
-                            {
-                                client.EndReceiveFrom(iar, ref ep);
-                                tcs.SetResult(asyncLocal.Value);
-                            }, null).CompletedSynchronously :
-                            client.BeginReceive(new byte[1], 0, 1, SocketFlags.None, iar =>
-                            {
-                                client.EndReceive(iar);
-                                tcs.SetResult(asyncLocal.Value);
-                            }, null).CompletedSynchronously);
+                        Assert.False(
+                            receiveFrom
+                                ? client.BeginReceiveFrom(
+                                      new byte[1],
+                                      0,
+                                      1,
+                                      SocketFlags.None,
+                                      ref ep,
+                                      iar =>
+                                      {
+                                          client.EndReceiveFrom(iar, ref ep);
+                                          tcs.SetResult(asyncLocal.Value);
+                                      },
+                                      null
+                                  ).CompletedSynchronously
+                                : client.BeginReceive(
+                                      new byte[1],
+                                      0,
+                                      1,
+                                      SocketFlags.None,
+                                      iar =>
+                                      {
+                                          client.EndReceive(iar);
+                                          tcs.SetResult(asyncLocal.Value);
+                                      },
+                                      null
+                                  ).CompletedSynchronously
+                        );
                     }
+
                     finally
                     {
                         if (suppressContext)
@@ -335,17 +486,34 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         [InlineData(false, 0)]
         [InlineData(true, 0)]
         [InlineData(false, 1)]
         [InlineData(true, 1)]
         [InlineData(false, 2)]
         [InlineData(true, 2)]
-        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossSendAsyncOperation(bool suppressContext, int sendMode)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        public async Task SocketAsyncEventArgs_ExecutionContextFlowsAcrossSendAsyncOperation(
+            bool suppressContext,
+            int sendMode
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             using (var saea = new SocketAsyncEventArgs())
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
@@ -365,17 +533,22 @@ namespace System.Net.Sockets.Tests
 
                     bool pending;
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
                         pending =
-                            sendMode == 0 ? client.SendAsync(saea) :
-                            sendMode == 1 ? client.SendToAsync(saea) :
-                            client.SendPacketsAsync(saea);
+                            sendMode == 0
+                                ? client.SendAsync(saea)
+                                : sendMode == 1
+                                    ? client.SendToAsync(saea)
+                                    : client.SendPacketsAsync(saea);
                     }
+
                     finally
                     {
-                        if (suppressContext) ExecutionContext.RestoreFlow();
+                        if (suppressContext)
+                            ExecutionContext.RestoreFlow();
                     }
                     asyncLocal.Value = 0;
 
@@ -398,11 +571,24 @@ namespace System.Net.Sockets.Tests
         [InlineData(true, false)]
         [InlineData(false, true)]
         [InlineData(true, true)]
-        public async Task APM_ExecutionContextFlowsAcrossBeginSendOperation(bool suppressContext, bool sendTo)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+        public async Task APM_ExecutionContextFlowsAcrossBeginSendOperation(
+            bool suppressContext,
+            bool sendTo
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -416,24 +602,42 @@ namespace System.Net.Sockets.Tests
 
                     bool pending;
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
-                        pending = sendTo ?
-                            !client.BeginSendTo(buffer, 0, buffer.Length, SocketFlags.None, server.LocalEndPoint, iar =>
-                            {
-                                client.EndSendTo(iar);
-                                tcs.SetResult(asyncLocal.Value);
-                            }, null).CompletedSynchronously :
-                            !client.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, iar =>
-                            {
-                                client.EndSend(iar);
-                                tcs.SetResult(asyncLocal.Value);
-                            }, null).CompletedSynchronously;
+                        pending = sendTo
+                            ? !client.BeginSendTo(
+                                  buffer,
+                                  0,
+                                  buffer.Length,
+                                  SocketFlags.None,
+                                  server.LocalEndPoint,
+                                  iar =>
+                                  {
+                                      client.EndSendTo(iar);
+                                      tcs.SetResult(asyncLocal.Value);
+                                  },
+                                  null
+                              ).CompletedSynchronously
+                            : !client.BeginSend(
+                                  buffer,
+                                  0,
+                                  buffer.Length,
+                                  SocketFlags.None,
+                                  iar =>
+                                  {
+                                      client.EndSend(iar);
+                                      tcs.SetResult(asyncLocal.Value);
+                                  },
+                                  null
+                              ).CompletedSynchronously;
                     }
+
                     finally
                     {
-                        if (suppressContext) ExecutionContext.RestoreFlow();
+                        if (suppressContext)
+                            ExecutionContext.RestoreFlow();
                     }
                     asyncLocal.Value = 0;
 
@@ -454,11 +658,23 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task APM_ExecutionContextFlowsAcrossBeginSendFileOperation(bool suppressContext)
-        {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+        public async Task APM_ExecutionContextFlowsAcrossBeginSendFileOperation(
+            bool suppressContext
+        ) {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -476,18 +692,25 @@ namespace System.Net.Sockets.Tests
 
                     bool pending;
                     asyncLocal.Value = 42;
-                    if (suppressContext) ExecutionContext.SuppressFlow();
+                    if (suppressContext)
+                        ExecutionContext.SuppressFlow();
                     try
                     {
-                        pending = !client.BeginSendFile(filePath, iar =>
-                        {
-                            client.EndSendFile(iar);
-                            tcs.SetResult(asyncLocal.Value);
-                        }, null).CompletedSynchronously;
+                        pending = !client.BeginSendFile(
+                            filePath,
+                            iar =>
+                            {
+                                client.EndSendFile(iar);
+                                tcs.SetResult(asyncLocal.Value);
+                            },
+                            null
+                        ).CompletedSynchronously;
                     }
+
                     finally
                     {
-                        if (suppressContext) ExecutionContext.RestoreFlow();
+                        if (suppressContext)
+                            ExecutionContext.RestoreFlow();
                     }
                     asyncLocal.Value = 0;
 
@@ -503,9 +726,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void ExecutionContext_NotCachedInSocketAsyncEventArgs()
         {
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
@@ -537,8 +771,13 @@ namespace System.Net.Sockets.Tests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static AsyncLocal<object> CreateAsyncLocalWithSetWhenFinalized(ManualResetEventSlim ecDropped) =>
-            new AsyncLocal<object>() { Value = new SetOnFinalized { _setWhenFinalized = ecDropped } };
+        private static AsyncLocal<object> CreateAsyncLocalWithSetWhenFinalized(
+            ManualResetEventSlim ecDropped
+        ) =>
+            new AsyncLocal<object>()
+            {
+                Value = new SetOnFinalized { _setWhenFinalized = ecDropped }
+            };
 
         private sealed class SetOnFinalized
         {
@@ -549,54 +788,78 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public Task ExecutionContext_FlowsOnlyOnceAcrossAsyncOperations()
         {
-            return Task.Run(async () => // escape xunit's sync ctx
-            {
-                using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-                using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            return Task.Run(
+                async () => // escape xunit's sync ctx
                 {
-                    listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                    listener.Listen(1);
+                    using (
+                        var listener = new Socket(
+                            AddressFamily.InterNetwork,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        )
+                    )
+                    using (
+                        var client = new Socket(
+                            AddressFamily.InterNetwork,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        )
+                    ) {
+                        listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                        listener.Listen(1);
 
-                    client.Connect(listener.LocalEndPoint);
-                    using (Socket server = listener.Accept())
-                    {
-                        var stackLog = new StringBuilder();
-                        int executionContextChanges = 0;
-                        var asyncLocal = new AsyncLocal<int>(_ =>
+                        client.Connect(listener.LocalEndPoint);
+                        using (Socket server = listener.Accept())
                         {
-                            lock (stackLog)
+                            var stackLog = new StringBuilder();
+                            int executionContextChanges = 0;
+                            var asyncLocal = new AsyncLocal<int>(
+                                _ =>
+                                {
+                                    lock (stackLog)
+                                    {
+                                        executionContextChanges++;
+                                        stackLog.AppendLine(
+                                            $"#{executionContextChanges}: {Environment.StackTrace}"
+                                        );
+                                    }
+                                }
+                            );
+                            Assert.Equal(0, executionContextChanges);
+
+                            int numAwaits = 20;
+                            for (int i = 1; i <= numAwaits; i++)
                             {
-                                executionContextChanges++;
-                                stackLog.AppendLine($"#{executionContextChanges}: {Environment.StackTrace}");
+                                asyncLocal.Value = i;
+
+                                await new AwaitWithOnCompletedInvocation<int>(
+                                    client.ReceiveAsync(
+                                        new Memory<byte>(new byte[1]),
+                                        SocketFlags.None
+                                    ),
+                                    () => server.Send(new byte[1])
+                                );
+
+                                Assert.Equal(i, asyncLocal.Value);
                             }
-                        });
-                        Assert.Equal(0, executionContextChanges);
 
-                        int numAwaits = 20;
-                        for (int i = 1; i <= numAwaits; i++)
-                        {
-                            asyncLocal.Value = i;
-
-                            await new AwaitWithOnCompletedInvocation<int>(
-                                client.ReceiveAsync(new Memory<byte>(new byte[1]), SocketFlags.None),
-                                () => server.Send(new byte[1]));
-
-                            Assert.Equal(i, asyncLocal.Value);
-                        }
-
-                        // This doesn't count EC changes where EC.Run is passed the same context
-                        // as is current, but it's the best we can track via public API.
-                        try
-                        {
-                            Assert.InRange(executionContextChanges, 1, numAwaits * 3); // at most: 1 / AsyncLocal change + 1 / suspend + 1 / resume
-                        }
-                        catch (Exception e)
-                        {
-                            throw new Exception($"{nameof(executionContextChanges)} == {executionContextChanges} with log: {stackLog.ToString()}", e);
+                            // This doesn't count EC changes where EC.Run is passed the same context
+                            // as is current, but it's the best we can track via public API.
+                            try
+                            {
+                                Assert.InRange(executionContextChanges, 1, numAwaits * 3); // at most: 1 / AsyncLocal change + 1 / suspend + 1 / resume
+                            }
+                            catch (Exception e)
+                            {
+                                throw new Exception(
+                                    $"{nameof(executionContextChanges)} == {executionContextChanges} with log: {stackLog.ToString()}",
+                                    e
+                                );
+                            }
                         }
                     }
                 }
-            });
+            );
         }
 
         private readonly struct AwaitWithOnCompletedInvocation<T> : ICriticalNotifyCompletion
@@ -604,8 +867,10 @@ namespace System.Net.Sockets.Tests
             private readonly ValueTask<T> _valueTask;
             private readonly Action _invokeAfterOnCompleted;
 
-            public AwaitWithOnCompletedInvocation(ValueTask<T> valueTask, Action invokeAfterOnCompleted)
-            {
+            public AwaitWithOnCompletedInvocation(
+                ValueTask<T> valueTask,
+                Action invokeAfterOnCompleted
+            ) {
                 _valueTask = valueTask;
                 _invokeAfterOnCompleted = invokeAfterOnCompleted;
             }

@@ -60,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [EntityFrameworkInternal]
         public RelationalValueBufferFactoryDependencies(
             IRelationalTypeMappingSource typeMappingSource,
-            ICoreSingletonOptions coreOptions)
-        {
+            ICoreSingletonOptions coreOptions
+        ) {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(coreOptions, nameof(coreOptions));
 

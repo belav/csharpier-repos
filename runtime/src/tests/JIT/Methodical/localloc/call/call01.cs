@@ -21,13 +21,13 @@ internal class LocallocTest
         Int32* intArray2 = stackalloc Int32[1];
         s_locallocSize = 1;
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		Int32* intArray2 = stackalloc Int32[0x1000];
-		locallocSize = 0x1000;
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
+        locallocSize = 0x1000;
 #else
-		Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
-		Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
-		locallocSize = Global.stackAllocSize;
+        Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
+        Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
+        locallocSize = Global.stackAllocSize;
 #endif
         Global.initializeStack(intArray1, s_locallocSize, 1000);
         Global.initializeStack(intArray2, s_locallocSize, 2000);
@@ -55,17 +55,27 @@ internal class LocallocTest
         return 100;
     }
 
-    private static unsafe bool func1(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Int32* ar1, Int32* ar2)
-    {
+    private static unsafe bool func1(
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        int i8,
+        Int32* ar1,
+        Int32* ar2
+    ) {
 #if LOCALLOC_SMALL
         Int32* intArray1 = stackalloc Int32[1];
         Int32* intArray2 = stackalloc Int32[1];
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		Int32* intArray2 = stackalloc Int32[0x1000];
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
 #else
-		Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
-		Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
+        Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
+        Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
 #endif
         Global.initializeStack(intArray1, s_locallocSize, 3000);
         Global.initializeStack(intArray2, s_locallocSize, 4000);

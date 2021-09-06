@@ -20,46 +20,65 @@ namespace Microsoft.CodeAnalysis.CSharp
     [ExportLanguageServiceFactory(typeof(ISyntaxTreeFactoryService), LanguageNames.CSharp), Shared]
     internal partial class CSharpSyntaxTreeFactoryServiceFactory : ILanguageServiceFactory
     {
-        private static readonly CSharpParseOptions _parseOptionWithLatestLanguageVersion = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);
+        private static readonly CSharpParseOptions _parseOptionWithLatestLanguageVersion =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxTreeFactoryServiceFactory()
-        {
-        }
+        public CSharpSyntaxTreeFactoryServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => new CSharpSyntaxTreeFactoryService(provider);
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            new CSharpSyntaxTreeFactoryService(provider);
 
         private partial class CSharpSyntaxTreeFactoryService : AbstractSyntaxTreeFactoryService
         {
-            public CSharpSyntaxTreeFactoryService(HostLanguageServices languageServices) : base(languageServices)
-            {
-            }
+            public CSharpSyntaxTreeFactoryService(HostLanguageServices languageServices)
+                : base(languageServices) { }
 
-            public override ParseOptions GetDefaultParseOptions()
-                => CSharpParseOptions.Default;
+            public override ParseOptions GetDefaultParseOptions() => CSharpParseOptions.Default;
 
-            public override ParseOptions GetDefaultParseOptionsWithLatestLanguageVersion()
-                => _parseOptionWithLatestLanguageVersion;
+            public override ParseOptions GetDefaultParseOptionsWithLatestLanguageVersion() =>
+                _parseOptionWithLatestLanguageVersion;
 
-            public override SyntaxTree CreateSyntaxTree(string filePath, ParseOptions options, Encoding encoding, SyntaxNode root)
-            {
+            public override SyntaxTree CreateSyntaxTree(
+                string filePath,
+                ParseOptions options,
+                Encoding encoding,
+                SyntaxNode root
+            ) {
                 options ??= GetDefaultParseOptions();
-                return CSharpSyntaxTree.Create((CSharpSyntaxNode)root, (CSharpParseOptions)options, filePath, encoding);
+                return CSharpSyntaxTree.Create(
+                    (CSharpSyntaxNode)root,
+                    (CSharpParseOptions)options,
+                    filePath,
+                    encoding
+                );
             }
 
-            public override SyntaxTree ParseSyntaxTree(string filePath, ParseOptions options, SourceText text, CancellationToken cancellationToken)
-            {
+            public override SyntaxTree ParseSyntaxTree(
+                string filePath,
+                ParseOptions options,
+                SourceText text,
+                CancellationToken cancellationToken
+            ) {
                 options ??= GetDefaultParseOptions();
-                return SyntaxFactory.ParseSyntaxTree(text, options, filePath, cancellationToken: cancellationToken);
+                return SyntaxFactory.ParseSyntaxTree(
+                    text,
+                    options,
+                    filePath,
+                    cancellationToken: cancellationToken
+                );
             }
 
-            public override SyntaxNode DeserializeNodeFrom(Stream stream, CancellationToken cancellationToken)
-                => CSharpSyntaxNode.DeserializeFrom(stream, cancellationToken);
+            public override SyntaxNode DeserializeNodeFrom(
+                Stream stream,
+                CancellationToken cancellationToken
+            ) => CSharpSyntaxNode.DeserializeFrom(stream, cancellationToken);
 
-            public override bool CanCreateRecoverableTree(SyntaxNode root)
-                => base.CanCreateRecoverableTree(root) && root is CompilationUnitSyntax cu && cu.AttributeLists.Count == 0;
+            public override bool CanCreateRecoverableTree(SyntaxNode root) =>
+                base.CanCreateRecoverableTree(root)
+                && root is CompilationUnitSyntax cu
+                && cu.AttributeLists.Count == 0;
 
             public override SyntaxTree CreateRecoverableTree(
                 ProjectId cacheKey,
@@ -67,8 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ParseOptions options,
                 ValueSource<TextAndVersion> text,
                 Encoding encoding,
-                SyntaxNode root)
-            {
+                SyntaxNode root
+            ) {
                 System.Diagnostics.Debug.Assert(CanCreateRecoverableTree(root));
                 return RecoverableSyntaxTree.CreateRecoverableTree(
                     this,
@@ -77,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     options ?? GetDefaultParseOptions(),
                     text,
                     encoding,
-                    (CompilationUnitSyntax)root);
+                    (CompilationUnitSyntax)root
+                );
             }
         }
     }

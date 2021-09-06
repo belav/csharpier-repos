@@ -17,7 +17,6 @@ internal unsafe class testout1
         public double a0_0 = -1013.76;
     }
 
-
     public static double Func_0()
     {
         VT_0 vt_0 = new VT_0(1);

@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
     /// <summary>
     /// A model for configuring controllers in an MVC application.
     /// </summary>
-    [DebuggerDisplay("ApplicationModel: Controllers: {Controllers.Count}, Filters: {Filters.Count}")]
+    [DebuggerDisplay(
+        "ApplicationModel: Controllers: {Controllers.Count}, Filters: {Filters.Count}"
+    )]
     public class ApplicationModel : IPropertyModel, IFilterModel, IApiExplorerModel
     {
         /// <summary>

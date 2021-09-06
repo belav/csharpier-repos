@@ -83,10 +83,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         /// </summary>
         public Func<string, bool> IsOriginAllowed
         {
-            get
-            {
-                return _isOriginAllowed;
-            }
+            get { return _isOriginAllowed; }
             set
             {
                 _isOriginAllowed = value;
@@ -119,15 +116,15 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         /// </summary>
         public TimeSpan? PreflightMaxAge
         {
-            get
-            {
-                return _preflightMaxAge;
-            }
+            get { return _preflightMaxAge; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), Resources.PreflightMaxAgeOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        Resources.PreflightMaxAgeOutOfRange
+                    );
                 }
 
                 _preflightMaxAge = value;
@@ -155,8 +152,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             builder.Append(", AllowAnyOrigin: ");
             builder.Append(AllowAnyOrigin);
             builder.Append(", PreflightMaxAge: ");
-            builder.Append(PreflightMaxAge.HasValue ?
-                PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture) : "null");
+            builder.Append(
+                PreflightMaxAge.HasValue
+                    ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                    : "null"
+            );
             builder.Append(", SupportsCredentials: ");
             builder.Append(SupportsCredentials);
             builder.Append(", Origins: {");

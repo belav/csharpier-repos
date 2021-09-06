@@ -8,7 +8,6 @@ namespace System.Linq.Tests
 {
     public class SequenceEqualTests : EnumerableBasedTests
     {
-
         [Fact]
         public void MismatchInMiddle()
         {
@@ -33,25 +32,40 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Chris" };
             string[] second = { "Bbo", "mTi", "rishC" };
 
-            Assert.True(first.AsQueryable().SequenceEqual(second.AsQueryable(), new AnagramEqualityComparer()));
+            Assert.True(
+                first.AsQueryable()
+                    .SequenceEqual(second.AsQueryable(), new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
         public void FirstSourceNull()
         {
             IQueryable<int> first = null;
-            int[] second = { };
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => first.SequenceEqual(second.AsQueryable()));
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => first.SequenceEqual(second.AsQueryable(), null));
+            int[] second = {  };
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () => first.SequenceEqual(second.AsQueryable())
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () => first.SequenceEqual(second.AsQueryable(), null)
+            );
         }
 
         [Fact]
         public void SecondSourceNull()
         {
-            int[] first = { };
+            int[] first = {  };
             IQueryable<int> second = null;
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => first.AsQueryable().SequenceEqual(second));
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => first.AsQueryable().SequenceEqual(second, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => first.AsQueryable().SequenceEqual(second)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => first.AsQueryable().SequenceEqual(second, null)
+            );
         }
 
         [Fact]
@@ -64,7 +78,8 @@ namespace System.Linq.Tests
         [Fact]
         public void SequenceEqual2()
         {
-            var val = (new int[] { 0, 2, 1 }).AsQueryable().SequenceEqual(new int[] { 0, 2, 1 }, EqualityComparer<int>.Default);
+            var val = (new int[] { 0, 2, 1 }).AsQueryable()
+                .SequenceEqual(new int[] { 0, 2, 1 }, EqualityComparer<int>.Default);
             Assert.True(val);
         }
     }

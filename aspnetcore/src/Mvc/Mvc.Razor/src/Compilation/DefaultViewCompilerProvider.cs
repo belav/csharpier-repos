@@ -12,12 +12,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
 
         public DefaultViewCompilerProvider(
             ApplicationPartManager applicationPartManager,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             var feature = new ViewsFeature();
             applicationPartManager.PopulateFeature(feature);
 
-            _compiler = new DefaultViewCompiler(feature.ViewDescriptors, loggerFactory.CreateLogger<DefaultViewCompiler>());
+            _compiler = new DefaultViewCompiler(
+                feature.ViewDescriptors,
+                loggerFactory.CreateLogger<DefaultViewCompiler>()
+            );
         }
 
         public IViewCompiler GetCompiler() => _compiler;

@@ -7,7 +7,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 {
     public static class TestDbFunctions
     {
-        public static int MethodA(string a, int b)
-            => throw new NotImplementedException();
+        public static int MethodA(string a, int b) => throw new NotImplementedException();
     }
 }

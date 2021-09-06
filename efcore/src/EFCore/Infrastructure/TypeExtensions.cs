@@ -31,7 +31,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <param name="type"> The type. </param>
         /// <returns> The human-readable name. </returns>
-        public static string ShortDisplayName(this Type type)
-            => type.DisplayName(fullName: false);
+        public static string ShortDisplayName(this Type type) => type.DisplayName(fullName: false);
     }
 }

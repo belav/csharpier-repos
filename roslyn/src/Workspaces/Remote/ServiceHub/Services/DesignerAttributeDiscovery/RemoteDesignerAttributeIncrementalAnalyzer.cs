@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.DesignerAttribute;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteDesignerAttributeIncrementalAnalyzer : AbstractDesignerAttributeIncrementalAnalyzer
+    internal sealed partial class RemoteDesignerAttributeIncrementalAnalyzer
+        : AbstractDesignerAttributeIncrementalAnalyzer
     {
         /// <summary>
         /// Channel back to VS to inform it of the designer attributes we discover.
@@ -18,24 +19,40 @@ namespace Microsoft.CodeAnalysis.Remote
         private readonly RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> _callback;
         private readonly RemoteServiceCallbackId _callbackId;
 
-        public RemoteDesignerAttributeIncrementalAnalyzer(RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback, RemoteServiceCallbackId callbackId)
-        {
+        public RemoteDesignerAttributeIncrementalAnalyzer(
+            RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback,
+            RemoteServiceCallbackId callbackId
+        ) {
             _callback = callback;
             _callbackId = callbackId;
         }
 
-        protected override async ValueTask ReportProjectRemovedAsync(ProjectId projectId, CancellationToken cancellationToken)
-        {
+        protected override async ValueTask ReportProjectRemovedAsync(
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        ) {
             await _callback.InvokeAsync(
-                (callback, cancellationToken) => callback.OnProjectRemovedAsync(_callbackId, projectId, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+                    (callback, cancellationToken) =>
+                        callback.OnProjectRemovedAsync(_callbackId, projectId, cancellationToken),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        protected override async ValueTask ReportDesignerAttributeDataAsync(ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken)
-        {
+        protected override async ValueTask ReportDesignerAttributeDataAsync(
+            ImmutableArray<DesignerAttributeData> data,
+            CancellationToken cancellationToken
+        ) {
             await _callback.InvokeAsync(
-               (callback, cancellationToken) => callback.ReportDesignerAttributeDataAsync(_callbackId, data, cancellationToken),
-               cancellationToken).ConfigureAwait(false);
+                    (callback, cancellationToken) =>
+                        callback.ReportDesignerAttributeDataAsync(
+                            _callbackId,
+                            data,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

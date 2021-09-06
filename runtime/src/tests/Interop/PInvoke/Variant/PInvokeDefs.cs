@@ -38,17 +38,26 @@ class VariantNative
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByValue_Double(object obj, double expected);
     [DllImport(nameof(VariantNative), CharSet = CharSet.Unicode)]
-    public static extern bool Marshal_ByValue_String(object obj, [MarshalAs(UnmanagedType.BStr)] string expected);
+    public static extern bool Marshal_ByValue_String(
+        object obj,
+        [MarshalAs(UnmanagedType.BStr)] string expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByValue_Char(object obj, char expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_ByValue_Boolean(object obj, [MarshalAs(UnmanagedType.VariantBool)] bool expected);
+    public static extern bool Marshal_ByValue_Boolean(
+        object obj,
+        [MarshalAs(UnmanagedType.VariantBool)] bool expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByValue_DateTime(object obj, DateTime expected);
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByValue_Decimal(object obj, decimal expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_ByValue_Currency(object obj, [MarshalAs(UnmanagedType.Currency)] decimal expected);
+    public static extern bool Marshal_ByValue_Currency(
+        object obj,
+        [MarshalAs(UnmanagedType.Currency)] decimal expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByValue_Missing(object obj);
     [DllImport(nameof(VariantNative))]
@@ -84,17 +93,26 @@ class VariantNative
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByRef_Double(ref object obj, double expected);
     [DllImport(nameof(VariantNative), CharSet = CharSet.Unicode)]
-    public static extern bool Marshal_ByRef_String(ref object obj, [MarshalAs(UnmanagedType.BStr)] string expected);
+    public static extern bool Marshal_ByRef_String(
+        ref object obj,
+        [MarshalAs(UnmanagedType.BStr)] string expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByRef_Char(ref object obj, char expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_ByRef_Boolean(ref object obj, [MarshalAs(UnmanagedType.VariantBool)] bool expected);
+    public static extern bool Marshal_ByRef_Boolean(
+        ref object obj,
+        [MarshalAs(UnmanagedType.VariantBool)] bool expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByRef_DateTime(ref object obj, DateTime expected);
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByRef_Decimal(ref object obj, decimal expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_ByRef_Currency(ref object obj, [MarshalAs(UnmanagedType.Currency)] decimal expected);
+    public static extern bool Marshal_ByRef_Currency(
+        ref object obj,
+        [MarshalAs(UnmanagedType.Currency)] decimal expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_ByRef_Missing(ref object obj);
     [DllImport(nameof(VariantNative))]
@@ -132,17 +150,32 @@ class VariantNative
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByValue_Double(ObjectWrapper wrapper, double expected);
     [DllImport(nameof(VariantNative), CharSet = CharSet.Unicode)]
-    public static extern bool Marshal_Struct_ByValue_String(ObjectWrapper wrapper, [MarshalAs(UnmanagedType.BStr)] string expected);
+    public static extern bool Marshal_Struct_ByValue_String(
+        ObjectWrapper wrapper,
+        [MarshalAs(UnmanagedType.BStr)] string expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByValue_Char(ObjectWrapper wrapper, char expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByValue_Boolean(ObjectWrapper wrapper, [MarshalAs(UnmanagedType.VariantBool)] bool expected);
+    public static extern bool Marshal_Struct_ByValue_Boolean(
+        ObjectWrapper wrapper,
+        [MarshalAs(UnmanagedType.VariantBool)] bool expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByValue_DateTime(ObjectWrapper wrapper, DateTime expected);
+    public static extern bool Marshal_Struct_ByValue_DateTime(
+        ObjectWrapper wrapper,
+        DateTime expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByValue_Decimal(ObjectWrapper wrapper, decimal expected);
+    public static extern bool Marshal_Struct_ByValue_Decimal(
+        ObjectWrapper wrapper,
+        decimal expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByValue_Currency(ObjectWrapper wrapper, [MarshalAs(UnmanagedType.Currency)] decimal expected);
+    public static extern bool Marshal_Struct_ByValue_Currency(
+        ObjectWrapper wrapper,
+        [MarshalAs(UnmanagedType.Currency)] decimal expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByValue_Missing(ObjectWrapper wrapper);
     [DllImport(nameof(VariantNative))]
@@ -161,7 +194,10 @@ class VariantNative
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByRef_Int16(ref ObjectWrapper wrapper, short expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_UInt16(ref ObjectWrapper wrapper, ushort expected);
+    public static extern bool Marshal_Struct_ByRef_UInt16(
+        ref ObjectWrapper wrapper,
+        ushort expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByRef_Int32(ref ObjectWrapper wrapper, int expected);
     [DllImport(nameof(VariantNative))]
@@ -169,23 +205,47 @@ class VariantNative
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByRef_Int64(ref ObjectWrapper wrapper, long expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_UInt64(ref ObjectWrapper wrapper, ulong expected);
+    public static extern bool Marshal_Struct_ByRef_UInt64(
+        ref ObjectWrapper wrapper,
+        ulong expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_Single(ref ObjectWrapper wrapper, float expected);
+    public static extern bool Marshal_Struct_ByRef_Single(
+        ref ObjectWrapper wrapper,
+        float expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_Double(ref ObjectWrapper wrapper, double expected);
+    public static extern bool Marshal_Struct_ByRef_Double(
+        ref ObjectWrapper wrapper,
+        double expected
+    );
     [DllImport(nameof(VariantNative), CharSet = CharSet.Unicode)]
-    public static extern bool Marshal_Struct_ByRef_String(ref ObjectWrapper wrapper, [MarshalAs(UnmanagedType.BStr)] string expected);
+    public static extern bool Marshal_Struct_ByRef_String(
+        ref ObjectWrapper wrapper,
+        [MarshalAs(UnmanagedType.BStr)] string expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByRef_Char(ref ObjectWrapper wrapper, char expected);
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_Boolean(ref ObjectWrapper wrapper, [MarshalAs(UnmanagedType.VariantBool)] bool expected);
+    public static extern bool Marshal_Struct_ByRef_Boolean(
+        ref ObjectWrapper wrapper,
+        [MarshalAs(UnmanagedType.VariantBool)] bool expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_DateTime(ref ObjectWrapper wrapper, DateTime expected);
+    public static extern bool Marshal_Struct_ByRef_DateTime(
+        ref ObjectWrapper wrapper,
+        DateTime expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_Decimal(ref ObjectWrapper wrapper, decimal expected);
+    public static extern bool Marshal_Struct_ByRef_Decimal(
+        ref ObjectWrapper wrapper,
+        decimal expected
+    );
     [DllImport(nameof(VariantNative))]
-    public static extern bool Marshal_Struct_ByRef_Currency(ref ObjectWrapper wrapper, [MarshalAs(UnmanagedType.Currency)] decimal expected);
+    public static extern bool Marshal_Struct_ByRef_Currency(
+        ref ObjectWrapper wrapper,
+        [MarshalAs(UnmanagedType.Currency)] decimal expected
+    );
     [DllImport(nameof(VariantNative))]
     public static extern bool Marshal_Struct_ByRef_Missing(ref ObjectWrapper wrapper);
     [DllImport(nameof(VariantNative))]

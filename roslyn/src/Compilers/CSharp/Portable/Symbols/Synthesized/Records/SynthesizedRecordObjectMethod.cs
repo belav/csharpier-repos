@@ -11,14 +11,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class SynthesizedRecordObjectMethod : SynthesizedRecordOrdinaryMethod
     {
-        protected SynthesizedRecordObjectMethod(SourceMemberContainerTypeSymbol containingType, string name, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(containingType, name, hasBody: true, memberOffset, diagnostics)
-        {
-        }
+        protected SynthesizedRecordObjectMethod(
+            SourceMemberContainerTypeSymbol containingType,
+            string name,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        ) : base(containingType, name, hasBody: true, memberOffset, diagnostics) { }
 
-        protected sealed override DeclarationModifiers MakeDeclarationModifiers(DeclarationModifiers allowedModifiers, BindingDiagnosticBag diagnostics)
-        {
-            const DeclarationModifiers result = DeclarationModifiers.Public | DeclarationModifiers.Override;
+        protected sealed override DeclarationModifiers MakeDeclarationModifiers(
+            DeclarationModifiers allowedModifiers,
+            BindingDiagnosticBag diagnostics
+        ) {
+            const DeclarationModifiers result =
+                DeclarationModifiers.Public | DeclarationModifiers.Override;
             Debug.Assert((result & ~allowedModifiers) == 0);
             return result;
         }
@@ -34,8 +39,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Returns true if reported an error
         /// </summary>
-        internal static bool VerifyOverridesMethodFromObject(MethodSymbol overriding, SpecialMember overriddenSpecialMember, BindingDiagnosticBag diagnostics)
-        {
+        internal static bool VerifyOverridesMethodFromObject(
+            MethodSymbol overriding,
+            SpecialMember overriddenSpecialMember,
+            BindingDiagnosticBag diagnostics
+        ) {
             bool reportAnError = false;
 
             if (!overriding.IsOverride)
@@ -46,18 +54,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var overridden = overriding.OverriddenMethod?.OriginalDefinition;
 
-                if (overridden is object && !(overridden.ContainingType is SourceMemberContainerTypeSymbol { IsRecord: true } && overridden.ContainingModule == overriding.ContainingModule))
-                {
-                    MethodSymbol leastOverridden = overriding.GetLeastOverriddenMethod(accessingTypeOpt: null);
+                if (
+                    overridden is object
+                    && !(
+                        overridden.ContainingType
+                            is SourceMemberContainerTypeSymbol
+                            {
+                                IsRecord: true
+                            }
+                        && overridden.ContainingModule == overriding.ContainingModule
+                    )
+                ) {
+                    MethodSymbol leastOverridden = overriding.GetLeastOverriddenMethod(
+                        accessingTypeOpt: null
+                    );
 
-                    reportAnError = (object)leastOverridden != overriding.ContainingAssembly.GetSpecialTypeMember(overriddenSpecialMember) &&
-                                    leastOverridden.ReturnType.Equals(overriding.ReturnType, TypeCompareKind.AllIgnoreOptions);
+                    reportAnError =
+                        (object)leastOverridden
+                            != overriding.ContainingAssembly.GetSpecialTypeMember(
+                                overriddenSpecialMember
+                            )
+                        && leastOverridden.ReturnType.Equals(
+                            overriding.ReturnType,
+                            TypeCompareKind.AllIgnoreOptions
+                        );
                 }
             }
 
             if (reportAnError)
             {
-                diagnostics.Add(ErrorCode.ERR_DoesNotOverrideMethodFromObject, overriding.Locations[0], overriding);
+                diagnostics.Add(
+                    ErrorCode.ERR_DoesNotOverrideMethodFromObject,
+                    overriding.Locations[0],
+                    overriding
+                );
             }
 
             return reportAnError;

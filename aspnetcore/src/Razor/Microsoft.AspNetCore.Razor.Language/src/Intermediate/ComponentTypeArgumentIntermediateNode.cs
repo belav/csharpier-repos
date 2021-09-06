@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
         }
 
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public BoundAttributeDescriptor BoundAttribute { get; set; }
 
@@ -55,9 +56,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             {
                 throw new ArgumentNullException(nameof(formatter));
             }
-            
+
             formatter.WriteContent(TypeParameterName);
-            
+
             formatter.WriteProperty(nameof(BoundAttribute), BoundAttribute?.DisplayName);
             formatter.WriteProperty(nameof(TagHelper), TagHelper?.DisplayName);
         }

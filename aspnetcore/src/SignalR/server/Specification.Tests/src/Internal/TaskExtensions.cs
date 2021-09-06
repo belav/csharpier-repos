@@ -13,10 +13,12 @@ namespace Microsoft.AspNetCore.Testing
     // Required because Microsoft.AspNetCore.Testing is not shipped
     internal static class TaskExtensions
     {
-        public static async Task<T> TimeoutAfter<T>(this Task<T> task, TimeSpan timeout,
+        public static async Task<T> TimeoutAfter<T>(
+            this Task<T> task,
+            TimeSpan timeout,
             [CallerFilePath] string filePath = null,
-            [CallerLineNumber] int lineNumber = default)
-        {
+            [CallerLineNumber] int lineNumber = default
+        ) {
             // Don't create a timer if the task is already completed
             // or the debugger is attached
             if (task.IsCompleted || Debugger.IsAttached)
@@ -36,10 +38,12 @@ namespace Microsoft.AspNetCore.Testing
             }
         }
 
-        public static async Task TimeoutAfter(this Task task, TimeSpan timeout,
+        public static async Task TimeoutAfter(
+            this Task task,
+            TimeSpan timeout,
             [CallerFilePath] string filePath = null,
-            [CallerLineNumber] int lineNumber = default)
-        {
+            [CallerLineNumber] int lineNumber = default
+        ) {
             // Don't create a timer if the task is already completed
             // or the debugger is attached
             if (task.IsCompleted || Debugger.IsAttached)
@@ -60,9 +64,9 @@ namespace Microsoft.AspNetCore.Testing
             }
         }
 
-        private static string CreateMessage(TimeSpan timeout, string filePath, int lineNumber)
-            => string.IsNullOrEmpty(filePath)
-            ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
-            : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
+        private static string CreateMessage(TimeSpan timeout, string filePath, int lineNumber) =>
+            string.IsNullOrEmpty(filePath)
+                ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
+                : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
     }
 }

@@ -19,8 +19,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
-            : base(dependencies)
+        public SqlServerMethodCallTranslatorProvider(
+            RelationalMethodCallTranslatorProviderDependencies dependencies
+        ) : base(dependencies)
         {
             var sqlExpressionFactory = dependencies.SqlExpressionFactory;
             var typeMappingSource = dependencies.RelationalTypeMappingSource;
@@ -32,7 +33,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     new SqlServerDataLengthFunctionTranslator(sqlExpressionFactory),
                     new SqlServerDateDiffFunctionsTranslator(sqlExpressionFactory),
                     new SqlServerDateTimeMethodTranslator(sqlExpressionFactory, typeMappingSource),
-                    new SqlServerFromPartsFunctionTranslator(sqlExpressionFactory, typeMappingSource),
+                    new SqlServerFromPartsFunctionTranslator(
+                        sqlExpressionFactory,
+                        typeMappingSource
+                    ),
                     new SqlServerFullTextSearchFunctionsTranslator(sqlExpressionFactory),
                     new SqlServerIsDateFunctionTranslator(sqlExpressionFactory),
                     new SqlServerIsNumericFunctionTranslator(sqlExpressionFactory),
@@ -40,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     new SqlServerNewGuidTranslator(sqlExpressionFactory),
                     new SqlServerObjectToStringTranslator(sqlExpressionFactory),
                     new SqlServerStringMethodTranslator(sqlExpressionFactory)
-                });
+                }
+            );
         }
     }
 }

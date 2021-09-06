@@ -12,6 +12,7 @@ internal static partial class Interop
         internal static extern SocketError bind(
             [In] SafeSocketHandle socketHandle,
             [In] byte[] socketAddress,
-            [In] int socketAddressSize);
+            [In] int socketAddressSize
+        );
     }
 }

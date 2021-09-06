@@ -45,7 +45,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             Filter = filter;
             Scope = filterScope;
 
-
             if (Filter is IOrderedFilter orderedFilter)
             {
                 Order = orderedFilter.Order;

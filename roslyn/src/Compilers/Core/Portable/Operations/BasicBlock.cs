@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowConditionKind conditionKind,
             int ordinal,
             bool isReachable,
-            ControlFlowRegion region)
-        {
+            ControlFlowRegion region
+        ) {
             Kind = kind;
             Operations = operations;
             BranchValue = branchValue;
@@ -131,8 +131,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         public ControlFlowRegion EnclosingRegion { get; }
 
-        internal void SetSuccessors(ControlFlowBranch? successor, ControlFlowBranch? conditionalSuccessor)
-        {
+        internal void SetSuccessors(
+            ControlFlowBranch? successor,
+            ControlFlowBranch? conditionalSuccessor
+        ) {
 #if DEBUG
             Debug.Assert(!_successorsAreSealed);
             Debug.Assert(_lazySuccessor == null);
@@ -141,7 +143,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             _lazySuccessor = successor;
             _lazyConditionalSuccessor = conditionalSuccessor;
-
 #if DEBUG
             _successorsAreSealed = true;
 #endif
@@ -156,7 +157,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 #endif
 
             _lazyPredecessors = predecessors;
-
 #if DEBUG
             _predecessorsAreSealed = true;
 #endif

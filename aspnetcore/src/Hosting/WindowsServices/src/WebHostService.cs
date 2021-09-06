@@ -45,17 +45,16 @@ namespace Microsoft.AspNetCore.Hosting.WindowsServices
             // Register callback for application stopping after we've
             // started the service, because otherwise we might introduce unwanted
             // race conditions.
-            _host
-                .Services
-                .GetRequiredService<IHostApplicationLifetime>()
-                .ApplicationStopping
-                .Register(() =>
-                {
-                    if (!_stopRequestedByWindows)
+            _host.Services.GetRequiredService<IHostApplicationLifetime>()
+                .ApplicationStopping.Register(
+                    () =>
                     {
-                        Stop();
+                        if (!_stopRequestedByWindows)
+                        {
+                            Stop();
+                        }
                     }
-                });
+                );
         }
 
         /// <inheritdoc />
@@ -67,6 +66,7 @@ namespace Microsoft.AspNetCore.Hosting.WindowsServices
             {
                 _host.StopAsync().GetAwaiter().GetResult();
             }
+
             finally
             {
                 _host.Dispose();

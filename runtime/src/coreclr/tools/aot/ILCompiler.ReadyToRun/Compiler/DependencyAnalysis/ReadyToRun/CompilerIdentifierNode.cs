@@ -14,10 +14,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int ClassCode => 230053202;
 
-        public CompilerIdentifierNode(TargetDetails target)
-            : base(target)
-        {
-        }
+        public CompilerIdentifierNode(TargetDetails target) : base(target) { }
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -26,10 +23,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private string GetCompilerVersion()
         {
-            return Assembly
-                   .GetExecutingAssembly()
-                   .GetCustomAttribute<AssemblyFileVersionAttribute>()
-                   .Version;
+            return Assembly.GetExecutingAssembly()
+                .GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)

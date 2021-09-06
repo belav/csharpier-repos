@@ -11,23 +11,25 @@ namespace System.Xml
         private readonly string _asterisk = null!;
         private int _changeCount; //recording the total number that the dom tree has been changed ( insertion and deletion )
         //the member vars below are saved for further reconstruction
-        private readonly string? _name;         //only one of 2 string groups will be initialized depends on which constructor is called.
+        private readonly string? _name; //only one of 2 string groups will be initialized depends on which constructor is called.
         private string? _localName;
         private string? _namespaceURI;
         private readonly XmlNode _rootNode;
         // the member vars below serves the optimization of accessing of the elements in the list
-        private int _curInd;       // -1 means the starting point for a new search round
-        private XmlNode _curElem;      // if sets to rootNode, means the starting point for a new search round
-        private bool _empty;        // whether the list is empty
-        private bool _atomized;     //whether the localname and namespaceuri are atomized
-        private int _matchCount;   // cached list count. -1 means it needs reconstruction
+        private int _curInd; // -1 means the starting point for a new search round
+        private XmlNode _curElem; // if sets to rootNode, means the starting point for a new search round
+        private bool _empty; // whether the list is empty
+        private bool _atomized; //whether the localname and namespaceuri are atomized
+        private int _matchCount; // cached list count. -1 means it needs reconstruction
 
         private WeakReference<XmlElementListListener>? _listener;
 
         private XmlElementList(XmlNode parent)
         {
             Debug.Assert(parent != null);
-            Debug.Assert(parent.NodeType == XmlNodeType.Element || parent.NodeType == XmlNodeType.Document);
+            Debug.Assert(
+                parent.NodeType == XmlNodeType.Element || parent.NodeType == XmlNodeType.Document
+            );
             _rootNode = parent;
             Debug.Assert(parent.Document != null);
             _curInd = -1;
@@ -37,7 +39,9 @@ namespace System.Xml
             _atomized = true;
             _matchCount = -1;
             // This can be a regular reference, but it would cause some kind of loop inside the GC
-            _listener = new WeakReference<XmlElementListListener>(new XmlElementListListener(parent.Document, this));
+            _listener = new WeakReference<XmlElementListListener>(
+                new XmlElementListListener(parent.Document, this)
+            );
         }
 
         ~XmlElementList()
@@ -78,7 +82,8 @@ namespace System.Xml
             _namespaceURI = null;
         }
 
-        internal XmlElementList(XmlNode parent, string localName, string namespaceURI) : this(parent)
+        internal XmlElementList(XmlNode parent, string localName, string namespaceURI)
+            : this(parent)
         {
             Debug.Assert(parent.Document != null);
             XmlNameTable nt = parent.Document.NameTable;
@@ -113,9 +118,7 @@ namespace System.Xml
                 //if no child, the next node forward will the be the NextSibling of the first ancestor which has NextSibling
                 //so, first while-loop find out such an ancestor (until no more ancestor or the ancestor is the rootNode
                 retNode = curNode;
-                while (retNode != null
-                        && retNode != _rootNode
-                        && retNode.NextSibling == null)
+                while (retNode != null && retNode != _rootNode && retNode.NextSibling == null)
                 {
                     retNode = retNode.ParentNode;
                 }
@@ -164,10 +167,15 @@ namespace System.Xml
                 else
                 {
                     if (
-                        (Ref.Equal(_localName, _asterisk) || Ref.Equal(curNode.LocalName, _localName)) &&
-                        (Ref.Equal(_namespaceURI, _asterisk) || curNode.NamespaceURI == _namespaceURI)
-                    )
-                    {
+                        (
+                            Ref.Equal(_localName, _asterisk)
+                            || Ref.Equal(curNode.LocalName, _localName)
+                        )
+                        && (
+                            Ref.Equal(_namespaceURI, _asterisk)
+                            || curNode.NamespaceURI == _namespaceURI
+                        )
+                    ) {
                         return true;
                     }
                 }
@@ -336,18 +344,14 @@ namespace System.Xml
 
     internal sealed class XmlEmptyElementListEnumerator : IEnumerator
     {
-        public XmlEmptyElementListEnumerator(XmlElementList list)
-        {
-        }
+        public XmlEmptyElementListEnumerator(XmlElementList list) { }
 
         public bool MoveNext()
         {
             return false;
         }
 
-        public void Reset()
-        {
-        }
+        public void Reset() { }
 
         public object? Current
         {

@@ -36,8 +36,8 @@ namespace System.Configuration
             OverrideModeSetting overrideModeDefault,
             string filename,
             int lineNumber,
-            ICollection<ConfigurationException> errors)
-        {
+            ICollection<ConfigurationException> errors
+        ) {
             ConfigKey = configKey;
             Group = group;
             Name = name;
@@ -54,9 +54,14 @@ namespace System.Configuration
         }
 
         // constructor used for group
-        internal FactoryRecord(string configKey, string group, string name, string factoryTypeName, string filename,
-            int lineNumber)
-        {
+        internal FactoryRecord(
+            string configKey,
+            string group,
+            string name,
+            string factoryTypeName,
+            string filename,
+            int lineNumber
+        ) {
             ConfigKey = configKey;
             Group = group;
             Name = name;
@@ -81,8 +86,8 @@ namespace System.Configuration
             bool isFromTrustedConfigRecord,
             bool isUndeclared,
             string filename,
-            int lineNumber)
-        {
+            int lineNumber
+        ) {
             ConfigKey = configKey;
             Group = group;
             Name = name;
@@ -166,7 +171,8 @@ namespace System.Configuration
         // by cloning we contain a single copy of the strings referred to in the factory and section records
         internal FactoryRecord CloneSection(string filename, int lineNumber)
         {
-            return new FactoryRecord(ConfigKey,
+            return new FactoryRecord(
+                ConfigKey,
                 Group,
                 Name,
                 Factory,
@@ -177,15 +183,21 @@ namespace System.Configuration
                 OverrideModeDefault,
                 filename,
                 lineNumber,
-                Errors);
+                Errors
+            );
         }
 
         // by cloning we contain a single copy of the strings referred to in the factory and section records
-        internal FactoryRecord CloneSectionGroup(string factoryTypeName, string filename, int lineNumber)
-        {
-            if (FactoryTypeName != null) factoryTypeName = FactoryTypeName;
+        internal FactoryRecord CloneSectionGroup(
+            string factoryTypeName,
+            string filename,
+            int lineNumber
+        ) {
+            if (FactoryTypeName != null)
+                factoryTypeName = FactoryTypeName;
 
-            return new FactoryRecord(ConfigKey,
+            return new FactoryRecord(
+                ConfigKey,
                 Group,
                 Name,
                 Factory,
@@ -196,7 +208,8 @@ namespace System.Configuration
                 OverrideModeDefault,
                 filename,
                 lineNumber,
-                Errors);
+                Errors
+            );
         }
 
         internal bool IsEquivalentType(IInternalConfigHost host, string typeName)
@@ -206,7 +219,8 @@ namespace System.Configuration
                 if (FactoryTypeName == typeName)
                     return true;
 
-                Type t1, t2;
+                Type t1,
+                    t2;
 
                 if (host != null)
                 {
@@ -241,13 +255,15 @@ namespace System.Configuration
             ConfigurationAllowDefinition allowDefinition,
             ConfigurationAllowExeDefinition allowExeDefinition,
             bool restartOnExternalChanges,
-            bool requirePermission)
-        {
-            if ((allowLocation != AllowLocation) ||
-                (allowDefinition != AllowDefinition) ||
-                (allowExeDefinition != AllowExeDefinition) ||
-                (restartOnExternalChanges != RestartOnExternalChanges) ||
-                (requirePermission != RequirePermission))
+            bool requirePermission
+        ) {
+            if (
+                (allowLocation != AllowLocation)
+                || (allowDefinition != AllowDefinition)
+                || (allowExeDefinition != AllowExeDefinition)
+                || (restartOnExternalChanges != RestartOnExternalChanges)
+                || (requirePermission != RequirePermission)
+            )
                 return false;
 
             return IsEquivalentType(host, typeName);
@@ -268,7 +284,8 @@ namespace System.Configuration
             if (Factory != null)
                 return Factory is IgnoreSectionHandler;
 
-            return (FactoryTypeName != null) && FactoryTypeName.Contains("System.Configuration.IgnoreSection");
+            return (FactoryTypeName != null)
+                && FactoryTypeName.Contains("System.Configuration.IgnoreSection");
         }
     }
 }

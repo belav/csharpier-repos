@@ -42,22 +42,25 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Define an unordered mixture of policies that implement INodeBuilderPolicy,
             // IEndpointComparerPolicy and/or IEndpointSelectorPolicy
             _policies = new List<MatcherPolicy>()
-                {
-                    CreateNodeBuilderPolicy(4),
-                    CreateUberPolicy(2),
-                    CreateNodeBuilderPolicy(3),
-                    CreateEndpointComparerPolicy(5),
-                    CreateNodeBuilderPolicy(1),
-                    CreateEndpointSelectorPolicy(9),
-                    CreateEndpointComparerPolicy(7),
-                    CreateNodeBuilderPolicy(6),
-                    CreateEndpointSelectorPolicy(10),
-                    CreateUberPolicy(12),
-                    CreateEndpointComparerPolicy(11)
-                };
+            {
+                CreateNodeBuilderPolicy(4),
+                CreateUberPolicy(2),
+                CreateNodeBuilderPolicy(3),
+                CreateEndpointComparerPolicy(5),
+                CreateNodeBuilderPolicy(1),
+                CreateEndpointSelectorPolicy(9),
+                CreateEndpointComparerPolicy(7),
+                CreateNodeBuilderPolicy(6),
+                CreateEndpointSelectorPolicy(10),
+                CreateUberPolicy(12),
+                CreateEndpointComparerPolicy(11)
+            };
             _loggerFactory = NullLoggerFactory.Instance;
             _selector = new DefaultEndpointSelector();
-            _parameterPolicyFactory = new DefaultParameterPolicyFactory(Options.Create(new RouteOptions()), new TestServiceProvider());
+            _parameterPolicyFactory = new DefaultParameterPolicyFactory(
+                Options.Create(new RouteOptions()),
+                new TestServiceProvider()
+            );
 
             _services = CreateServices();
         }
@@ -103,11 +106,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
             return new TestUberPolicy(order);
         }
 
-        private class TestUberPolicy : TestMatcherPolicyBase, INodeBuilderPolicy, IEndpointComparerPolicy
+        private class TestUberPolicy
+            : TestMatcherPolicyBase,
+              INodeBuilderPolicy,
+              IEndpointComparerPolicy
         {
-            public TestUberPolicy(int order) : base(order)
-            {
-            }
+            public TestUberPolicy(int order) : base(order) { }
 
             public IComparer<Endpoint> Comparer => new TestEndpointComparer();
 
@@ -116,8 +120,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 return false;
             }
 
-            public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-            {
+            public PolicyJumpTable BuildJumpTable(
+                int exitDestination,
+                IReadOnlyList<PolicyJumpTableEdge> edges
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -129,17 +135,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private class TestNodeBuilderPolicy : TestMatcherPolicyBase, INodeBuilderPolicy
         {
-            public TestNodeBuilderPolicy(int order) : base(order)
-            {
-            }
+            public TestNodeBuilderPolicy(int order) : base(order) { }
 
             public bool AppliesToEndpoints(IReadOnlyList<Endpoint> endpoints)
             {
                 return false;
             }
 
-            public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-            {
+            public PolicyJumpTable BuildJumpTable(
+                int exitDestination,
+                IReadOnlyList<PolicyJumpTableEdge> edges
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -151,9 +157,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private class TestEndpointComparerPolicy : TestMatcherPolicyBase, IEndpointComparerPolicy
         {
-            public TestEndpointComparerPolicy(int order) : base(order)
-            {
-            }
+            public TestEndpointComparerPolicy(int order) : base(order) { }
 
             public IComparer<Endpoint> Comparer => new TestEndpointComparer();
 
@@ -170,9 +174,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private class TestEndpointSelectorPolicy : TestMatcherPolicyBase, IEndpointSelectorPolicy
         {
-            public TestEndpointSelectorPolicy(int order) : base(order)
-            {
-            }
+            public TestEndpointSelectorPolicy(int order) : base(order) { }
 
             public bool AppliesToEndpoints(IReadOnlyList<Endpoint> endpoints)
             {
@@ -194,7 +196,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 _order = order;
             }
 
-            public override int Order { get { return _order; } }
+            public override int Order
+            {
+                get { return _order; }
+            }
         }
 
         private class TestEndpointComparer : IComparer<Endpoint>

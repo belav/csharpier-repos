@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language
 {
-    public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRazorDocumentClassifierPass
+    public abstract class DocumentClassifierPassBase
+        : IntermediateNodePassBase,
+          IRazorDocumentClassifierPass
     {
         protected abstract string DocumentKind { get; }
 
@@ -18,11 +20,15 @@ namespace Microsoft.AspNetCore.Razor.Language
         protected override void OnInitialized()
         {
             var feature = Engine.Features.OfType<IRazorTargetExtensionFeature>();
-            TargetExtensions = feature.FirstOrDefault()?.TargetExtensions.ToArray() ?? Array.Empty<ICodeTargetExtension>();
+            TargetExtensions =
+                feature.FirstOrDefault()?.TargetExtensions.ToArray()
+                ?? Array.Empty<ICodeTargetExtension>();
         }
 
-        protected sealed override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected sealed override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (documentNode.DocumentKind != null)
             {
                 return;
@@ -37,7 +43,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             documentNode.Target = CreateTarget(codeDocument, documentNode.Options);
             if (documentNode.Target == null)
             {
-                throw new InvalidOperationException($"{nameof(CreateTarget)} must return a non-null {nameof(CodeTarget)}.");
+                throw new InvalidOperationException(
+                    $"{nameof(CreateTarget)} must return a non-null {nameof(CodeTarget)}."
+                );
             }
 
             Rewrite(codeDocument, documentNode);
@@ -51,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             documentNode.Children.Clear();
 
             var @namespace = new NamespaceDeclarationIntermediateNode();
-            @namespace.Annotations[CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace;
+            @namespace.Annotations[CommonAnnotations.PrimaryNamespace] =
+                CommonAnnotations.PrimaryNamespace;
 
             var @class = new ClassDeclarationIntermediateNode();
             @class.Annotations[CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass;
@@ -70,7 +79,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             var methodBuilder = IntermediateNodeBuilder.Create(classBuilder.Current);
             methodBuilder.Push(method);
 
-            var visitor = new Visitor(documentBuilder, namespaceBuilder, classBuilder, methodBuilder);
+            var visitor = new Visitor(
+                documentBuilder,
+                namespaceBuilder,
+                classBuilder,
+                methodBuilder
+            );
 
             for (var i = 0; i < children.Count; i++)
             {
@@ -82,20 +96,29 @@ namespace Microsoft.AspNetCore.Razor.Language
             OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
         }
 
-        protected abstract bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode);
+        protected abstract bool IsMatch(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        );
 
         // virtual to allow replacing the code target wholesale.
-        protected virtual CodeTarget CreateTarget(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
-        {
-            return CodeTarget.CreateDefault(codeDocument, options, (builder) =>
-            {
-                for (var i = 0; i < TargetExtensions.Count; i++)
+        protected virtual CodeTarget CreateTarget(
+            RazorCodeDocument codeDocument,
+            RazorCodeGenerationOptions options
+        ) {
+            return CodeTarget.CreateDefault(
+                codeDocument,
+                options,
+                (builder) =>
                 {
-                    builder.TargetExtensions.Add(TargetExtensions[i]);
-                }
+                    for (var i = 0; i < TargetExtensions.Count; i++)
+                    {
+                        builder.TargetExtensions.Add(TargetExtensions[i]);
+                    }
 
-                ConfigureTarget(builder);
-            });
+                    ConfigureTarget(builder);
+                }
+            );
         }
 
         protected virtual void ConfigureTarget(CodeTargetBuilder builder)
@@ -107,8 +130,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorCodeDocument codeDocument,
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
-            MethodDeclarationIntermediateNode @method)
-        {
+            MethodDeclarationIntermediateNode @method
+        ) {
             // Intentionally empty.
         }
 
@@ -119,8 +142,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             private readonly IntermediateNodeBuilder _class;
             private readonly IntermediateNodeBuilder _method;
 
-            public Visitor(IntermediateNodeBuilder document, IntermediateNodeBuilder @namespace, IntermediateNodeBuilder @class, IntermediateNodeBuilder method)
-            {
+            public Visitor(
+                IntermediateNodeBuilder document,
+                IntermediateNodeBuilder @namespace,
+                IntermediateNodeBuilder @class,
+                IntermediateNodeBuilder method
+            ) {
                 _document = document;
                 _namespace = @namespace;
                 _class = @class;

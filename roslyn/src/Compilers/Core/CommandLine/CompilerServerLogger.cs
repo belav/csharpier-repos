@@ -28,8 +28,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
     internal static class CompilerServerLoggerExtensions
     {
-        internal static void Log(this ICompilerServerLogger logger, string format, params object?[] arguments)
-        {
+        internal static void Log(
+            this ICompilerServerLogger logger,
+            string format,
+            params object?[] arguments
+        ) {
             if (logger.IsLogging)
             {
                 logger.Log(string.Format(format, arguments));
@@ -44,8 +47,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
             }
         }
 
-        internal static void LogError(this ICompilerServerLogger logger, string format, params object?[] arguments)
-        {
+        internal static void LogError(
+            this ICompilerServerLogger logger,
+            string format,
+            params object?[] arguments
+        ) {
             if (logger.IsLogging)
             {
                 logger.Log($"Error: {format}", arguments);
@@ -55,8 +61,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// Log an exception. Also logs information about inner exceptions.
         /// </summary>
-        internal static void LogException(this ICompilerServerLogger logger, Exception exception, string reason)
-        {
+        internal static void LogException(
+            this ICompilerServerLogger logger,
+            Exception exception,
+            string reason
+        ) {
             if (!logger.IsLogging)
             {
                 return;
@@ -80,7 +89,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
             void AppendException(Exception exception)
             {
-                builder.AppendLine($"Error: '{exception.GetType().Name}' '{exception.Message}' occurred during '{reason}'");
+                builder.AppendLine(
+                    $"Error: '{exception.GetType().Name}' '{exception.Message}' occurred during '{reason}'"
+                );
                 builder.AppendLine("Stack trace:");
                 builder.AppendLine(exception.StackTrace);
             }
@@ -117,8 +128,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
             try
             {
                 // Check if the environment
-                if (Environment.GetEnvironmentVariable(EnvironmentVariableName) is string loggingFileName)
-                {
+                if (
+                    Environment.GetEnvironmentVariable(EnvironmentVariableName)
+                    is string loggingFileName
+                ) {
                     // If the environment variable contains the path of a currently existing directory,
                     // then use a process-specific name for the log file and put it in that directory.
                     // Otherwise, assume that the environment variable specifies the name of the log file.
@@ -128,7 +141,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     }
 
                     // Open allowing sharing. We allow multiple processes to log to the same file, so we use share mode to allow that.
-                    _loggingStream = new FileStream(loggingFileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+                    _loggingStream = new FileStream(
+                        loggingFileName,
+                        FileMode.OpenOrCreate,
+                        FileAccess.Write,
+                        FileShare.ReadWrite
+                    );
                 }
             }
             catch (Exception e)
@@ -167,12 +185,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
         public bool IsLogging => false;
 
-        private EmptyCompilerServerLogger()
-        {
-        }
+        private EmptyCompilerServerLogger() { }
 
-        public void Log(string message)
-        {
-        }
+        public void Log(string message) { }
     }
 }

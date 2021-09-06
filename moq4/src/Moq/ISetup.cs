@@ -6,18 +6,18 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	///   A setup configured on a mock.
 	/// </summary>
 	/// <seealso cref="Mock.Setups"/>
-	public interface ISetup
-	{
-		/// <summary>
+    public interface ISetup
+    {
+        /// <summary>
 		///   The setup expression.
 		/// </summary>
-		LambdaExpression Expression { get; }
+        LambdaExpression Expression { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the inner mock of this setup (if present and known).
 		///   <para>
 		///     An "inner mock" is the <see cref="Moq.Mock"/> instance associated with a setup's return value,
@@ -32,26 +32,26 @@ namespace Moq
 		///     since calling a user-provided function could have effects beyond Moq's understanding and control.
 		///   </para>
 		/// </summary>
-		Mock InnerMock { get; }
+        Mock InnerMock { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup is conditional.
 		/// </summary>
 		/// <seealso cref="Mock{T}.When(Func{bool})"/>
-		bool IsConditional { get; }
+        bool IsConditional { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup was matched by at least one invocation on the mock.
 		/// </summary>
-		bool IsMatched { get; }
+        bool IsMatched { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup has been overridden
 		///   (that is, whether it is being shadowed by a more recent non-conditional setup with an equal expression).
 		/// </summary>
-		bool IsOverridden { get; }
+        bool IsOverridden { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup is "verifiable".
 		/// </summary>
 		/// <remarks>
@@ -62,14 +62,14 @@ namespace Moq
 		///     <see cref="Mock.Verify()"/>, however, will only verify setups where this property is <see langword="true"/>.
 		///   </para>
 		/// </remarks>
-		bool IsVerifiable { get; }
+        bool IsVerifiable { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Returns the <see cref="Mock"/> instance to which this setup belongs.
 		/// </summary>
-		Mock Mock { get; }
+        Mock Mock { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Returns the original setup expression from which this setup resulted.
 		///   <para>
 		///     For setups doing a simple member access or method invocation (such as <c>`mock => mock.Member`</c>),
@@ -92,9 +92,9 @@ namespace Moq
 		///     e.g. by <see cref="Mock{T}.SetupAllProperties"/> or by <see cref="DefaultValue.Mock"/>.
 		///   </para>
 		/// </summary>
-		Expression OriginalExpression { get; }
+        Expression OriginalExpression { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies this setup and optionally all verifiable setups of its inner mock (if present and known).
 		///   <para>
 		///     If <paramref name="recursive"/> is set to <see langword="true"/>,
@@ -111,9 +111,9 @@ namespace Moq
 		/// </exception>
 		/// <seealso cref="VerifyAll()"/>
 		/// <seealso cref="Mock.Verify()"/>
-		void Verify(bool recursive = true);
+        void Verify(bool recursive = true);
 
-		/// <summary>
+        /// <summary>
 		///   Verifies this setup and all setups of its inner mock (if present and known),
 		///   regardless of whether they have been flagged as verifiable.
 		///   <para>
@@ -126,6 +126,6 @@ namespace Moq
 		/// </exception>
 		/// <seealso cref="Verify(bool)"/>
 		/// <seealso cref="Mock.VerifyAll()"/>
-		void VerifyAll();
-	}
+        void VerifyAll();
+    }
 }

@@ -10,15 +10,20 @@ namespace Microsoft.CodeAnalysis.Serialization
 {
     internal partial class SerializerService
     {
-        public void SerializeOptionSet(SerializableOptionSet options, ObjectWriter writer, CancellationToken cancellationToken)
-        {
+        public void SerializeOptionSet(
+            SerializableOptionSet options,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             options.Serialize(writer, cancellationToken);
         }
 
-        private SerializableOptionSet DeserializeOptionSet(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private SerializableOptionSet DeserializeOptionSet(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             var optionService = _workspaceServices.GetRequiredService<IOptionService>();

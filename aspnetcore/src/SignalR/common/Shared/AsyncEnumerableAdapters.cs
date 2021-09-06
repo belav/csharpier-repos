@@ -13,19 +13,25 @@ namespace Microsoft.AspNetCore.SignalR.Internal
     // True-internal because this is a weird and tricky class to use :)
     internal static class AsyncEnumerableAdapters
     {
-        public static IAsyncEnumerable<object?> MakeCancelableAsyncEnumerable<T>(IAsyncEnumerable<T> asyncEnumerable, CancellationToken cancellationToken = default)
-        {
+        public static IAsyncEnumerable<object?> MakeCancelableAsyncEnumerable<T>(
+            IAsyncEnumerable<T> asyncEnumerable,
+            CancellationToken cancellationToken = default
+        ) {
             return new CancelableAsyncEnumerable<T>(asyncEnumerable, cancellationToken);
         }
 
-        public static IAsyncEnumerable<T> MakeCancelableTypedAsyncEnumerable<T>(IAsyncEnumerable<T> asyncEnumerable, CancellationTokenSource cts)
-        {
+        public static IAsyncEnumerable<T> MakeCancelableTypedAsyncEnumerable<T>(
+            IAsyncEnumerable<T> asyncEnumerable,
+            CancellationTokenSource cts
+        ) {
             return new CancelableTypedAsyncEnumerable<T>(asyncEnumerable, cts);
         }
 
 #if NETCOREAPP
-        public static async IAsyncEnumerable<object?> MakeAsyncEnumerableFromChannel<T>(ChannelReader<T> channel, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-        {
+        public static async IAsyncEnumerable<object?> MakeAsyncEnumerableFromChannel<T>(
+            ChannelReader<T> channel,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        ) {
             await foreach (var item in channel.ReadAllAsync(cancellationToken))
             {
                 yield return item;
@@ -34,8 +40,10 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 #else
         // System.Threading.Channels.ReadAllAsync() is not available on netstandard2.0 and netstandard2.1
         // But this is the exact same code that it uses
-        public static async IAsyncEnumerable<object?> MakeAsyncEnumerableFromChannel<T>(ChannelReader<T> channel, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-        {
+        public static async IAsyncEnumerable<object?> MakeAsyncEnumerableFromChannel<T>(
+            ChannelReader<T> channel,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        ) {
             while (await channel.WaitToReadAsync(cancellationToken).ConfigureAwait(false))
             {
                 while (channel.TryRead(out var item))
@@ -51,21 +59,27 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             private readonly IAsyncEnumerable<TResult> _asyncEnumerable;
             private readonly CancellationTokenSource _cts;
 
-            public CancelableTypedAsyncEnumerable(IAsyncEnumerable<TResult> asyncEnumerable, CancellationTokenSource cts)
-            {
+            public CancelableTypedAsyncEnumerable(
+                IAsyncEnumerable<TResult> asyncEnumerable,
+                CancellationTokenSource cts
+            ) {
                 _asyncEnumerable = asyncEnumerable;
                 _cts = cts;
             }
 
-            public IAsyncEnumerator<TResult> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-            {
+            public IAsyncEnumerator<TResult> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            ) {
                 var enumerator = _asyncEnumerable.GetAsyncEnumerator(_cts.Token);
                 if (cancellationToken.CanBeCanceled)
                 {
-                    var registration = cancellationToken.Register((ctsState) =>
-                    {
-                        ((CancellationTokenSource)ctsState!).Cancel();
-                    }, _cts);
+                    var registration = cancellationToken.Register(
+                        (ctsState) =>
+                        {
+                            ((CancellationTokenSource)ctsState!).Cancel();
+                        },
+                        _cts
+                    );
 
                     return new CancelableEnumerator<TResult>(enumerator, registration);
                 }
@@ -80,8 +94,10 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
                 public T Current => (T)_asyncEnumerator.Current;
 
-                public CancelableEnumerator(IAsyncEnumerator<T> asyncEnumerator, CancellationTokenRegistration registration)
-                {
+                public CancelableEnumerator(
+                    IAsyncEnumerator<T> asyncEnumerator,
+                    CancellationTokenRegistration registration
+                ) {
                     _asyncEnumerator = asyncEnumerator;
                     _cancellationTokenRegistration = registration;
                 }
@@ -105,20 +121,24 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             private readonly IAsyncEnumerable<T> _asyncEnumerable;
             private readonly CancellationToken _cancellationToken;
 
-            public CancelableAsyncEnumerable(IAsyncEnumerable<T> asyncEnumerable, CancellationToken cancellationToken)
-            {
+            public CancelableAsyncEnumerable(
+                IAsyncEnumerable<T> asyncEnumerable,
+                CancellationToken cancellationToken
+            ) {
                 _asyncEnumerable = asyncEnumerable;
                 _cancellationToken = cancellationToken;
             }
 
-            public IAsyncEnumerator<object?> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-            {
+            public IAsyncEnumerator<object?> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            ) {
                 // Assume that this will be iterated through with await foreach which always passes a default token.
                 // Instead use the token from the ctor.
                 Debug.Assert(cancellationToken == default);
 
                 var enumeratorOfT = _asyncEnumerable.GetAsyncEnumerator(_cancellationToken);
-                return enumeratorOfT as IAsyncEnumerator<object?> ?? new BoxedAsyncEnumerator(enumeratorOfT);
+                return enumeratorOfT as IAsyncEnumerator<object?>
+                    ?? new BoxedAsyncEnumerator(enumeratorOfT);
             }
 
             private class BoxedAsyncEnumerator : IAsyncEnumerator<object?>

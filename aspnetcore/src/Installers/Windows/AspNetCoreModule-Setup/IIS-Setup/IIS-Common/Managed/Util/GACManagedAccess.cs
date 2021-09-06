@@ -34,8 +34,12 @@ namespace Microsoft.Web.Utility
                     {
                         if (getPhysicalPath)
                         {
-                            using (GACAssemblyCache gacAssemblyCache = new GACAssemblyCache(assemblyName, gacAssembly.FullAssemblyName))
-                            {
+                            using (
+                                GACAssemblyCache gacAssemblyCache = new GACAssemblyCache(
+                                    assemblyName,
+                                    gacAssembly.FullAssemblyName
+                                )
+                            ) {
                                 assemblyList.Add(gacAssemblyCache.AssemblyPath);
                             }
                         }
@@ -61,10 +65,11 @@ namespace Microsoft.Web.Utility
         {
             _assemblyName = assemblyName;
             int hResult = PInvoke.Fusion.NativeMethods.CreateAssemblyNameObject(
-                    out _fusionName,
-                    _assemblyName,
-                    PInvoke.Fusion.CreateAssemblyNameObjectFlags.CANOF_PARSE_DISPLAY_NAME,
-                    IntPtr.Zero);
+                out _fusionName,
+                _assemblyName,
+                PInvoke.Fusion.CreateAssemblyNameObjectFlags.CANOF_PARSE_DISPLAY_NAME,
+                IntPtr.Zero
+            );
 
             if (hResult >= 0)
             {
@@ -73,7 +78,8 @@ namespace Microsoft.Web.Utility
                     IntPtr.Zero,
                     _fusionName,
                     PInvoke.Fusion.AssemblyCacheFlags.GAC,
-                    IntPtr.Zero);
+                    IntPtr.Zero
+                );
             }
 
             if (hResult < 0 || _assemblyEnum == null)
@@ -104,7 +110,8 @@ namespace Microsoft.Web.Utility
                 int hrLocal = _fusionName.GetDisplayName(
                     sDisplayName,
                     ref iLen,
-                    (int)PInvoke.Fusion.AssemblyNameDisplayFlags.ALL);
+                    (int)PInvoke.Fusion.AssemblyNameDisplayFlags.ALL
+                );
 
                 if (hrLocal < 0)
                 {
@@ -117,10 +124,7 @@ namespace Microsoft.Web.Utility
 
         internal PInvoke.Fusion.IAssemblyName FusionName
         {
-            get
-            {
-                return _fusionName;
-            }
+            get { return _fusionName; }
         }
 
         public void Dispose()
@@ -170,10 +174,7 @@ namespace Microsoft.Web.Utility
 
         internal string AssemblyPath
         {
-            get
-            {
-                return _assemblyPath;
-            }
+            get { return _assemblyPath; }
         }
 
         public void Dispose()

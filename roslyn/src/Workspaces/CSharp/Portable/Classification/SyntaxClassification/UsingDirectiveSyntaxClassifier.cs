@@ -19,29 +19,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             SyntaxNode syntax,
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             if (syntax is UsingDirectiveSyntax usingDirective)
             {
-                ClassifyUsingDirectiveSyntax(usingDirective, semanticModel, result, cancellationToken);
+                ClassifyUsingDirectiveSyntax(
+                    usingDirective,
+                    semanticModel,
+                    result,
+                    cancellationToken
+                );
             }
         }
 
-        public override ImmutableArray<Type> SyntaxNodeTypes { get; } = ImmutableArray.Create(typeof(UsingDirectiveSyntax));
+        public override ImmutableArray<Type> SyntaxNodeTypes { get; } =
+            ImmutableArray.Create(typeof(UsingDirectiveSyntax));
 
         private static void ClassifyUsingDirectiveSyntax(
             UsingDirectiveSyntax usingDirective,
             SemanticModel semanticModel,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // For using aliases, we bind the target on the right of the equals and use that
             // binding to classify the alias.
             if (usingDirective.Alias != null)
             {
                 var token = usingDirective.Alias.Name;
 
-                var symbolInfo = semanticModel.GetSymbolInfo(usingDirective.Name, cancellationToken);
+                var symbolInfo = semanticModel.GetSymbolInfo(
+                    usingDirective.Name,
+                    cancellationToken
+                );
                 if (symbolInfo.Symbol is ITypeSymbol typeSymbol)
                 {
                     var classification = GetClassificationForType(typeSymbol);
@@ -52,7 +61,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
                 }
                 else if (symbolInfo.Symbol?.Kind == SymbolKind.Namespace)
                 {
-                    result.Add(new ClassifiedSpan(token.Span, ClassificationTypeNames.NamespaceName));
+                    result.Add(
+                        new ClassifiedSpan(token.Span, ClassificationTypeNames.NamespaceName)
+                    );
                 }
             }
         }

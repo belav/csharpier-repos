@@ -12,10 +12,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
     {
         internal class SettingsEntriesSnapshot : SettingsEntriesSnapshotBase<CodeStyleSetting>
         {
-            public SettingsEntriesSnapshot(ImmutableArray<CodeStyleSetting> data, int currentVersionNumber) : base(data, currentVersionNumber) { }
+            public SettingsEntriesSnapshot(
+                ImmutableArray<CodeStyleSetting> data,
+                int currentVersionNumber
+            ) : base(data, currentVersionNumber) { }
 
-            protected override bool TryGetValue(CodeStyleSetting result, string keyName, out object? content)
-            {
+            protected override bool TryGetValue(
+                CodeStyleSetting result,
+                string keyName,
+                out object? content
+            ) {
                 content = keyName switch
                 {
                     ColumnDefinitions.CodeStyle.Description => result.Description,

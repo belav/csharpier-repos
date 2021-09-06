@@ -13,8 +13,6 @@ namespace Microsoft.AspNetCore.Hosting.Fakes
             throw new Exception("Exception from constructor");
         }
 
-        public void Configure(IApplicationBuilder app)
-        {
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 }

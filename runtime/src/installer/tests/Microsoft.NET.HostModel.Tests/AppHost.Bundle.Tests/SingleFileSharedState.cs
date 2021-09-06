@@ -16,9 +16,17 @@ namespace AppHost.Bundle.Tests
         public SingleFileSharedState()
         {
             // We include mockcoreclr in our project to test native binaries extraction.
-            string mockCoreClrPath = Path.Combine(RepoDirectories.Artifacts, "corehost_test",
-                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("mockcoreclr"));
-            TestFixture = PreparePublishedSelfContainedTestProject("SingleFileApiTests", $"/p:AddFile={mockCoreClrPath}");
+            string mockCoreClrPath = Path.Combine(
+                RepoDirectories.Artifacts,
+                "corehost_test",
+                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                    "mockcoreclr"
+                )
+            );
+            TestFixture = PreparePublishedSelfContainedTestProject(
+                "SingleFileApiTests",
+                $"/p:AddFile={mockCoreClrPath}"
+            );
         }
 
         public void Dispose()

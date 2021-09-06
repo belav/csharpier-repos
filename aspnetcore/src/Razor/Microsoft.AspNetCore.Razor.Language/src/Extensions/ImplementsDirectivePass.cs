@@ -9,8 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     internal class ImplementsDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
     {
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             var @class = documentNode.FindPrimaryClass();
             if (@class == null)
             {
@@ -22,8 +24,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 @class.Interfaces = new List<string>();
             }
 
-            foreach (var implements in documentNode.FindDirectiveReferences(ImplementsDirective.Directive))
-            {
+            foreach (
+                var implements in documentNode.FindDirectiveReferences(
+                    ImplementsDirective.Directive
+                )
+            ) {
                 var token = ((DirectiveIntermediateNode)implements.Node).Tokens.FirstOrDefault();
                 if (token != null)
                 {

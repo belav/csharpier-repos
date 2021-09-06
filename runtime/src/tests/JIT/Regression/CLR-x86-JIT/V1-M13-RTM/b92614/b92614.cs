@@ -7,8 +7,11 @@ public struct CC
 {
     static float Static3(short N)
     {
-        return
-            82 * (ulong)N * (float)(((ulong)N) ^ (82u * (ulong)N));
+        return 82 * (ulong)N * (float)(((ulong)N) ^ (82u * (ulong)N));
     }
-    static int Main() { Static3(0); return 100; }
+    static int Main()
+    {
+        Static3(0);
+        return 100;
+    }
 }

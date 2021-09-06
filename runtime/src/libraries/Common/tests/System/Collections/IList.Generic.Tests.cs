@@ -36,13 +36,16 @@ namespace System.Collections.Tests
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
-        {
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) {
             foreach (var item in base.GetModifyEnumerables(operations))
                 yield return item;
 
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Insert) == ModifyOperation.Insert)
-            {
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Insert) == ModifyOperation.Insert
+            ) {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     IList<T> casted = ((IList<T>)enumerable);
@@ -54,8 +57,10 @@ namespace System.Collections.Tests
                     return false;
                 };
             }
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Overwrite) == ModifyOperation.Overwrite)
-            {
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Overwrite) == ModifyOperation.Overwrite
+            ) {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     IList<T> casted = ((IList<T>)enumerable);
@@ -67,8 +72,10 @@ namespace System.Collections.Tests
                     return false;
                 };
             }
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Remove) == ModifyOperation.Remove)
-            {
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Remove) == ModifyOperation.Remove
+            ) {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     IList<T> casted = ((IList<T>)enumerable);
@@ -90,9 +97,11 @@ namespace System.Collections.Tests
 
         protected override ICollection<T> GenericICollectionFactory() => GenericIListFactory();
 
-        protected override ICollection<T> GenericICollectionFactory(int count) => GenericIListFactory(count);
+        protected override ICollection<T> GenericICollectionFactory(int count) =>
+            GenericIListFactory(count);
 
-        protected virtual Type IList_Generic_Item_InvalidIndex_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected virtual Type IList_Generic_Item_InvalidIndex_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
 
@@ -138,7 +147,10 @@ namespace System.Collections.Tests
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
                 Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[-1] = validAdd);
-                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[int.MinValue] = validAdd);
+                Assert.Throws(
+                    IList_Generic_Item_InvalidIndex_ThrowType,
+                    () => list[int.MinValue] = validAdd
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -151,8 +163,14 @@ namespace System.Collections.Tests
             {
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
-                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[count] = validAdd);
-                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[count + 1] = validAdd);
+                Assert.Throws(
+                    IList_Generic_Item_InvalidIndex_ThrowType,
+                    () => list[count] = validAdd
+                );
+                Assert.Throws(
+                    IList_Generic_Item_InvalidIndex_ThrowType,
+                    () => list[count + 1] = validAdd
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -257,13 +275,16 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_Generic_ItemSet_InvalidValue(int count)
         {
-            if (count > 0&& !IsReadOnly)
+            if (count > 0 && !IsReadOnly)
             {
-                Assert.All(InvalidValues, value =>
-                {
-                    IList<T> list = GenericIListFactory(count);
-                    Assert.Throws<ArgumentException>(() => list[count / 2] = value);
-                });
+                Assert.All(
+                    InvalidValues,
+                    value =>
+                    {
+                        IList<T> list = GenericIListFactory(count);
+                        Assert.Throws<ArgumentException>(() => list[count / 2] = value);
+                    }
+                );
             }
         }
 
@@ -345,10 +366,13 @@ namespace System.Collections.Tests
         {
             // Assumes no duplicate elements contained in the list returned by GenericIListFactory
             IList<T> list = GenericIListFactory(count);
-            Assert.All(Enumerable.Range(0, count), index =>
-            {
-                Assert.Equal(index, list.IndexOf(list[index]));
-            });
+            Assert.All(
+                Enumerable.Range(0, count),
+                index =>
+                {
+                    Assert.Equal(index, list.IndexOf(list[index]));
+                }
+            );
         }
 
         [Theory]
@@ -357,11 +381,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(InvalidValues, value =>
-                {
-                    IList<T> list = GenericIListFactory(count);
-                    Assert.Throws<ArgumentException>(() => list.IndexOf(value));
-                });
+                Assert.All(
+                    InvalidValues,
+                    value =>
+                    {
+                        IList<T> list = GenericIListFactory(count);
+                        Assert.Throws<ArgumentException>(() => list.IndexOf(value));
+                    }
+                );
             }
         }
 
@@ -376,9 +403,10 @@ namespace System.Collections.Tests
                     list.Add(duplicate);
                 List<T> expectedList = list.ToList();
 
-                Assert.All(Enumerable.Range(0, count), (index =>
-                    Assert.Equal(index, list.IndexOf(expectedList[index]))
-                ));
+                Assert.All(
+                    Enumerable.Range(0, count),
+                    (index => Assert.Equal(index, list.IndexOf(expectedList[index])))
+                );
             }
         }
 
@@ -395,7 +423,9 @@ namespace System.Collections.Tests
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, validAdd));
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(int.MinValue, validAdd));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.Insert(int.MinValue, validAdd)
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -513,11 +543,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(InvalidValues, value =>
-                {
-                    IList<T> list = GenericIListFactory(count);
-                    Assert.Throws<ArgumentException>(() => list.Insert(count / 2, value));
-                });
+                Assert.All(
+                    InvalidValues,
+                    value =>
+                    {
+                        IList<T> list = GenericIListFactory(count);
+                        Assert.Throws<ArgumentException>(() => list.Insert(count / 2, value));
+                    }
+                );
             }
         }
 
@@ -527,8 +560,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IList_Generic_RemoveAt_NegativeIndex_ThrowsArgumentOutOfRangeException(int count)
-        {
+        public void IList_Generic_RemoveAt_NegativeIndex_ThrowsArgumentOutOfRangeException(
+            int count
+        ) {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 IList<T> list = GenericIListFactory(count);
@@ -541,8 +575,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IList_Generic_RemoveAt_IndexGreaterThanListCount_ThrowsArgumentOutOfRangeException(int count)
-        {
+        public void IList_Generic_RemoveAt_IndexGreaterThanListCount_ThrowsArgumentOutOfRangeException(
+            int count
+        ) {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 IList<T> list = GenericIListFactory(count);
@@ -573,11 +608,14 @@ namespace System.Collections.Tests
             {
                 IList<T> list = GenericIListFactory(count);
                 Assert.Equal(count, list.Count);
-                Assert.All(Enumerable.Range(0, count).Reverse(), index =>
-                {
-                    list.RemoveAt(index);
-                    Assert.Equal(index, list.Count);
-                });
+                Assert.All(
+                    Enumerable.Range(0, count).Reverse(),
+                    index =>
+                    {
+                        list.RemoveAt(index);
+                        Assert.Equal(index, list.Count);
+                    }
+                );
             }
         }
 
@@ -588,11 +626,14 @@ namespace System.Collections.Tests
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 IList<T> list = GenericIListFactory(count);
-                Assert.All(Enumerable.Range(0, count), index =>
-                {
-                    list.RemoveAt(0);
-                    Assert.Equal(count - index - 1, list.Count);
-                });
+                Assert.All(
+                    Enumerable.Range(0, count),
+                    index =>
+                    {
+                        list.RemoveAt(0);
+                        Assert.Equal(count - index - 1, list.Count);
+                    }
+                );
             }
         }
 
@@ -611,7 +652,8 @@ namespace System.Collections.Tests
 
                 using (IEnumerator<T> enumerator = collection.GetEnumerator())
                 {
-                    while (enumerator.MoveNext()) ; // Go to end of enumerator
+                    while (enumerator.MoveNext())
+                        ; // Go to end of enumerator
 
                     T current = default(T);
                     if (Enumerator_Current_UndefinedOperation_Throws)
@@ -643,7 +685,6 @@ namespace System.Collections.Tests
                 }
             }
         }
-
         #endregion
     }
 }

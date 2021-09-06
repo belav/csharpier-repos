@@ -17,13 +17,15 @@ namespace Microsoft.CodeAnalysis.Remote
         private readonly RemoteCallback<IRemoteProjectTelemetryService.ICallback> _callback;
         private readonly RemoteServiceCallbackId _callbackId;
 
-        public RemoteProjectTelemetryIncrementalAnalyzerProvider(RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback, RemoteServiceCallbackId callbackId)
-        {
+        public RemoteProjectTelemetryIncrementalAnalyzerProvider(
+            RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback,
+            RemoteServiceCallbackId callbackId
+        ) {
             _callback = callback;
             _callbackId = callbackId;
         }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new RemoteProjectTelemetryIncrementalAnalyzer(_callback, _callbackId);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new RemoteProjectTelemetryIncrementalAnalyzer(_callback, _callbackId);
     }
 }

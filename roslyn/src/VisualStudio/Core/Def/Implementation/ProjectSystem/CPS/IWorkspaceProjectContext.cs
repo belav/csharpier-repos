@@ -39,7 +39,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
 
         // Options.
 
-        [Obsolete("To avoid contributing to the large object heap, use SetOptions(ImmutableArray<string>). This API will be removed in the future.")]
+        [Obsolete(
+            "To avoid contributing to the large object heap, use SetOptions(ImmutableArray<string>). This API will be removed in the future."
+        )]
         void SetOptions(string commandLineForOptions);
         void SetOptions(ImmutableArray<string> arguments);
 
@@ -49,13 +51,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         // References.
         void AddMetadataReference(string referencePath, MetadataReferenceProperties properties);
         void RemoveMetadataReference(string referencePath);
-        void AddProjectReference(IWorkspaceProjectContext project, MetadataReferenceProperties properties);
+        void AddProjectReference(
+            IWorkspaceProjectContext project,
+            MetadataReferenceProperties properties
+        );
         void RemoveProjectReference(IWorkspaceProjectContext project);
         void AddAnalyzerReference(string referencePath);
         void RemoveAnalyzerReference(string referencePath);
 
         // Files.
-        void AddSourceFile(string filePath, bool isInCurrentContext = true, IEnumerable<string> folderNames = null, SourceCodeKind sourceCodeKind = SourceCodeKind.Regular);
+        void AddSourceFile(
+            string filePath,
+            bool isInCurrentContext = true,
+            IEnumerable<string> folderNames = null,
+            SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
+        );
         void RemoveSourceFile(string filePath);
         void AddAdditionalFile(string filePath, bool isInCurrentContext = true);
         void RemoveAdditionalFile(string filePath);

@@ -72,8 +72,13 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="kind"/> is not a valid kind.
         /// </exception>
-        public SemanticEdit(SemanticEditKind kind, ISymbol? oldSymbol, ISymbol? newSymbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap = null, bool preserveLocalVariables = false)
-        {
+        public SemanticEdit(
+            SemanticEditKind kind,
+            ISymbol? oldSymbol,
+            ISymbol? newSymbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap = null,
+            bool preserveLocalVariables = false
+        ) {
             if (oldSymbol == null && kind != SemanticEditKind.Insert)
             {
                 throw new ArgumentNullException(nameof(oldSymbol));
@@ -96,16 +101,25 @@ namespace Microsoft.CodeAnalysis.Emit
             this.SyntaxMap = syntaxMap;
         }
 
-        internal static SemanticEdit Create(SemanticEditKind kind, ISymbolInternal oldSymbol, ISymbolInternal newSymbol, Func<SyntaxNode, SyntaxNode>? syntaxMap = null, bool preserveLocalVariables = false)
-        {
-            return new SemanticEdit(kind, oldSymbol?.GetISymbol(), newSymbol?.GetISymbol(), syntaxMap, preserveLocalVariables);
+        internal static SemanticEdit Create(
+            SemanticEditKind kind,
+            ISymbolInternal oldSymbol,
+            ISymbolInternal newSymbol,
+            Func<SyntaxNode, SyntaxNode>? syntaxMap = null,
+            bool preserveLocalVariables = false
+        ) {
+            return new SemanticEdit(
+                kind,
+                oldSymbol?.GetISymbol(),
+                newSymbol?.GetISymbol(),
+                syntaxMap,
+                preserveLocalVariables
+            );
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(OldSymbol,
-                   Hash.Combine(NewSymbol,
-                   (int)Kind));
+            return Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
         }
 
         public override bool Equals(object? obj)
@@ -116,8 +130,16 @@ namespace Microsoft.CodeAnalysis.Emit
         public bool Equals(SemanticEdit other)
         {
             return this.Kind == other.Kind
-                && (this.OldSymbol == null ? other.OldSymbol == null : this.OldSymbol.Equals(other.OldSymbol))
-                && (this.NewSymbol == null ? other.NewSymbol == null : this.NewSymbol.Equals(other.NewSymbol));
+                && (
+                    this.OldSymbol == null
+                        ? other.OldSymbol == null
+                        : this.OldSymbol.Equals(other.OldSymbol)
+                )
+                && (
+                    this.NewSymbol == null
+                        ? other.NewSymbol == null
+                        : this.NewSymbol.Equals(other.NewSymbol)
+                );
         }
     }
 }

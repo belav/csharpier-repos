@@ -20,19 +20,22 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// </param>
         public StringToBytesConverter(
             Encoding encoding,
-            ConverterMappingHints? mappingHints = null)
-            : base(
-                // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-                v => v == null ? null! : encoding.GetBytes(v),
-                v => v == null ? null! : encoding.GetString(v),
-                mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(
+            // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
+            v => v == null ? null! : encoding.GetBytes(v),
+            v => v == null ? null! : encoding.GetString(v),
+            mappingHints
+        ) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(byte[]), i => new StringToBytesConverter(Encoding.UTF8, i.MappingHints));
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(byte[]),
+                i => new StringToBytesConverter(Encoding.UTF8, i.MappingHints)
+            );
     }
 }

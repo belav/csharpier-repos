@@ -7,7 +7,12 @@ namespace System.ComponentModel
     /// Specifies the display name for a property or event.
     /// The default is the name of the property or event.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(
+        AttributeTargets.Property
+            | AttributeTargets.Event
+            | AttributeTargets.Class
+            | AttributeTargets.Method
+    )]
     public class DisplayNameAttribute : Attribute
     {
         /// <summary>
@@ -16,9 +21,7 @@ namespace System.ComponentModel
         /// </summary>
         public static readonly DisplayNameAttribute Default = new DisplayNameAttribute();
 
-        public DisplayNameAttribute() : this(string.Empty)
-        {
-        }
+        public DisplayNameAttribute() : this(string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DisplayNameAttribute'/> class.

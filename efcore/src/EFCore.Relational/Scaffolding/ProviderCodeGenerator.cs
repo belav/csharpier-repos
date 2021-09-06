@@ -15,8 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         ///     Initializes a new instance of the <see cref="ProviderCodeGenerator" /> class.
         /// </summary>
         /// <param name="dependencies"> The dependencies. </param>
-        protected ProviderCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-            => Dependencies = Check.NotNull(dependencies, nameof(dependencies));
+        protected ProviderCodeGenerator(ProviderCodeGeneratorDependencies dependencies) =>
+            Dependencies = Check.NotNull(dependencies, nameof(dependencies));
 
         /// <summary>
         ///     Parameter object containing dependencies for this service.
@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <returns> The code fragment. </returns>
         public abstract MethodCallCodeFragment GenerateUseProvider(
             string connectionString,
-            MethodCallCodeFragment? providerOptions);
+            MethodCallCodeFragment? providerOptions
+        );
 
         /// <summary>
         ///     Generates a method chain to configure additional context options.

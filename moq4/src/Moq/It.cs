@@ -13,7 +13,7 @@ using Moq.Properties;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	///   Allows the specification of a matching condition for an argument in a method invocation,
 	///   rather than a specific argument value. "It" refers to the argument being matched.
 	/// </summary>
@@ -21,21 +21,21 @@ namespace Moq
 	///   This class allows the setup to match a method invocation with an arbitrary value,
 	///   with a value in a specified range, or even one that matches a given predicate.
 	/// </remarks>
-	public static class It
-	{
-		/// <summary>
+    public static class It
+    {
+        /// <summary>
 		/// Contains matchers for <see langword="ref"/> (C#) / <see langword="ByRef"/> (VB.NET) parameters of type <typeparamref name="TValue"/>.
 		/// </summary>
 		/// <typeparam name="TValue">The parameter type.</typeparam>
-		public static class Ref<TValue>
-		{
-			/// <summary>
+        public static class Ref<TValue>
+        {
+            /// <summary>
 			/// Matches any value that is assignment-compatible with type <typeparamref name="TValue"/>.
 			/// </summary>
-			public static TValue IsAny;
-		}
+            public static TValue IsAny;
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value of the given <typeparamref name="TValue"/> type.
 		/// </summary>
 		/// <typeparam name="TValue">Type of the value.</typeparam>
@@ -48,30 +48,36 @@ namespace Moq
 		///     mock.Setup(x => x.Remove(It.IsAny&lt;string&gt;())).Throws(new InvalidOperationException());
 		///   </code>
 		/// </example>
-		public static TValue IsAny<TValue>()
-		{
-			if (typeof(TValue).IsOrContainsTypeMatcher())
-			{
-				return Match.Create<TValue>(
-					(argument, parameterType) => argument == null || parameterType.IsAssignableFrom(argument.GetType()),
-					() => It.IsAny<TValue>());
-			}
-			else
-			{
-				return Match.Create<TValue>(
-					 argument                 => argument == null || argument is TValue,
-					() => It.IsAny<TValue>());
-			}
-		}
+        public static TValue IsAny<TValue>()
+        {
+            if (typeof(TValue).IsOrContainsTypeMatcher())
+            {
+                return Match.Create<TValue>(
+                    (argument, parameterType) =>
+                        argument == null || parameterType.IsAssignableFrom(argument.GetType()),
+                    () => It.IsAny<TValue>()
+                );
+            }
+            else
+            {
+                return Match.Create<TValue>(
+                    argument => argument == null || argument is TValue,
+                    () => It.IsAny<TValue>()
+                );
+            }
+        }
 
-		private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
+        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(
+            nameof(It.IsAny),
+            BindingFlags.Public | BindingFlags.Static
+        );
 
-		internal static MethodCallExpression IsAny(Type genericArgument)
-		{
-			return Expression.Call(It.isAnyMethod.MakeGenericMethod(genericArgument));
-		}
+        internal static MethodCallExpression IsAny(Type genericArgument)
+        {
+            return Expression.Call(It.isAnyMethod.MakeGenericMethod(genericArgument));
+        }
 
-		/// <summary>
+        /// <summary>
 		///   A type matcher that matches any generic type argument.
 		///   <para>
 		///     If the generic type parameter is constrained to <see langword="struct"/> (C#) / <see langword="Structure"/>
@@ -83,36 +89,39 @@ namespace Moq
 		///     See <see cref="TypeMatcherAttribute"/> and <see cref="ITypeMatcher"/>.
 		///   </para>
 		/// </summary>
-		[TypeMatcher]
-		public sealed class IsAnyType : ITypeMatcher
-		{
-			bool ITypeMatcher.Matches(Type type)
-			{
-				return true;
-			}
-		}
+        [TypeMatcher]
+        public sealed class IsAnyType : ITypeMatcher
+        {
+            bool ITypeMatcher.Matches(Type type)
+            {
+                return true;
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value of the given <typeparamref name="TValue"/> type, except null.
 		/// </summary>
 		/// <typeparam name="TValue">Type of the value.</typeparam>
-		public static TValue IsNotNull<TValue>()
-		{
-			if (typeof(TValue).IsOrContainsTypeMatcher())
-			{
-				return Match.Create<TValue>(
-					(argument, parameterType) => argument != null && parameterType.IsAssignableFrom(argument.GetType()),
-					() => It.IsNotNull<TValue>());
-			}
-			else
-			{
-				return Match.Create<TValue>(
-					 argument                 => argument is TValue,
-					() => It.IsNotNull<TValue>());
-			}
-		}
+        public static TValue IsNotNull<TValue>()
+        {
+            if (typeof(TValue).IsOrContainsTypeMatcher())
+            {
+                return Match.Create<TValue>(
+                    (argument, parameterType) =>
+                        argument != null && parameterType.IsAssignableFrom(argument.GetType()),
+                    () => It.IsNotNull<TValue>()
+                );
+            }
+            else
+            {
+                return Match.Create<TValue>(
+                    argument => argument is TValue,
+                    () => It.IsNotNull<TValue>()
+                );
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that satisfies the given predicate.
 		/// </summary>
 		/// <param name="match">The predicate used to match the method argument.</param>
@@ -136,21 +145,24 @@ namespace Moq
 		///         .Throws(new ArgumentException());
 		///   </code>
 		/// </example>
-		public static TValue Is<TValue>(Expression<Func<TValue, bool>> match)
-		{
-			if (typeof(TValue).IsOrContainsTypeMatcher())
-			{
-				throw new ArgumentException(Resources.UseItIsOtherOverload, nameof(match));
-			}
+        public static TValue Is<TValue>(Expression<Func<TValue, bool>> match)
+        {
+            if (typeof(TValue).IsOrContainsTypeMatcher())
+            {
+                throw new ArgumentException(Resources.UseItIsOtherOverload, nameof(match));
+            }
 
-			var thisMethod = (MethodInfo)MethodBase.GetCurrentMethod();
+            var thisMethod = (MethodInfo)MethodBase.GetCurrentMethod();
 
-			return Match.Create<TValue>(
-				argument => match.CompileUsingExpressionCompiler().Invoke(argument),
-				Expression.Lambda<Func<TValue>>(Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)));
-		}
+            return Match.Create<TValue>(
+                argument => match.CompileUsingExpressionCompiler().Invoke(argument),
+                Expression.Lambda<Func<TValue>>(
+                    Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)
+                )
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that satisfies the given predicate.
 		///   <para>
 		///     Use this overload when you specify a type matcher for <typeparamref name="TValue"/>.
@@ -163,17 +175,21 @@ namespace Moq
 		/// <remarks>
 		///   Allows the specification of a predicate to perform matching of method call arguments.
 		/// </remarks>
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public static TValue Is<TValue>(Expression<Func<object, Type, bool>> match)
-		{
-			var thisMethod = (MethodInfo)MethodBase.GetCurrentMethod();
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static TValue Is<TValue>(Expression<Func<object, Type, bool>> match)
+        {
+            var thisMethod = (MethodInfo)MethodBase.GetCurrentMethod();
 
-			return Match.Create<TValue>(
-				(argument, parameterType) => match.CompileUsingExpressionCompiler().Invoke(argument, parameterType),
-				Expression.Lambda<Func<TValue>>(Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)));
-		}
+            return Match.Create<TValue>(
+                (argument, parameterType) =>
+                    match.CompileUsingExpressionCompiler().Invoke(argument, parameterType),
+                Expression.Lambda<Func<TValue>>(
+                    Expression.Call(thisMethod.MakeGenericMethod(typeof(TValue)), match)
+                )
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that equals the <paramref name="value"/> using the <paramref name="comparer"/>.
 		///   To use the default comparer for the specified object, specify the value inline,
 		///   i.e. <code>mock.Verify(service => service.DoWork(value))</code>.
@@ -184,13 +200,16 @@ namespace Moq
 		/// <param name="value">The value to match with.</param>
 		/// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
 		/// <typeparam name="TValue">Type of the argument to check.</typeparam>
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public static TValue Is<TValue>(TValue value, IEqualityComparer<TValue> comparer)
-		{
-			return Match.Create<TValue>(actual => comparer.Equals(actual, value), () => It.Is<TValue>(value, comparer));
-		}
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static TValue Is<TValue>(TValue value, IEqualityComparer<TValue> comparer)
+        {
+            return Match.Create<TValue>(
+                actual => comparer.Equals(actual, value),
+                () => It.Is<TValue>(value, comparer)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is in the range specified.
 		/// </summary>
 		/// <param name="from">The lower bound of the range.</param>
@@ -207,27 +226,29 @@ namespace Moq
 		///         .Returns(false);
 		///   </code>
 		/// </example>
-		public static TValue IsInRange<TValue>(TValue from, TValue to, Range rangeKind)
-			where TValue : IComparable
-		{
-			return Match<TValue>.Create(value =>
-			{
-				if (value == null)
-				{
-					return false;
-				}
+        public static TValue IsInRange<TValue>(TValue from, TValue to, Range rangeKind)
+            where TValue : IComparable
+        {
+            return Match<TValue>.Create(
+                value =>
+                {
+                    if (value == null)
+                    {
+                        return false;
+                    }
 
-				if (rangeKind == Range.Exclusive)
-				{
-					return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
-				}
+                    if (rangeKind == Range.Exclusive)
+                    {
+                        return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
+                    }
 
-				return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
-			},
-			() => It.IsInRange(from, to, rangeKind));
-		}
+                    return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
+                },
+                () => It.IsInRange(from, to, rangeKind)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is present in the sequence specified.
 		/// </summary>
 		/// <param name="items">The sequence of possible values.</param>
@@ -244,23 +265,28 @@ namespace Moq
 		///         .Returns(false);
 		///   </code>
 		/// </example>
-		public static TValue IsIn<TValue>(IEnumerable<TValue> items)
-		{
-			return Match<TValue>.Create(value => items.Contains(value), () => It.IsIn(items));
-		}
+        public static TValue IsIn<TValue>(IEnumerable<TValue> items)
+        {
+            return Match<TValue>.Create(value => items.Contains(value), () => It.IsIn(items));
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is present in the sequence specified.
 		/// </summary>
 		/// <param name="items">The sequence of possible values.</param>
 		/// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
 		/// <typeparam name="TValue">Type of the argument to check.</typeparam>
-		public static TValue IsIn<TValue>(IEnumerable<TValue> items, IEqualityComparer<TValue> comparer)
-		{
-			return Match<TValue>.Create(value => items.Contains(value, comparer), () => It.IsIn(items, comparer));
-		}
+        public static TValue IsIn<TValue>(
+            IEnumerable<TValue> items,
+            IEqualityComparer<TValue> comparer
+        ) {
+            return Match<TValue>.Create(
+                value => items.Contains(value, comparer),
+                () => It.IsIn(items, comparer)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is present in the sequence specified.
 		/// </summary>
 		/// <param name="items">The sequence of possible values.</param>
@@ -275,12 +301,12 @@ namespace Moq
 		///         .Returns(false);
 		///   </code>
 		/// </example>
-		public static TValue IsIn<TValue>(params TValue[] items)
-		{
-			return Match<TValue>.Create(value => items.Contains(value), () => It.IsIn(items));
-		}
+        public static TValue IsIn<TValue>(params TValue[] items)
+        {
+            return Match<TValue>.Create(value => items.Contains(value), () => It.IsIn(items));
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is not found in the sequence specified.
 		/// </summary>
 		/// <param name="items">The sequence of disallowed values.</param>
@@ -297,23 +323,28 @@ namespace Moq
 		///         .Returns(false);
 		///   </code>
 		/// </example>
-		public static TValue IsNotIn<TValue>(IEnumerable<TValue> items)
-		{
-			return Match<TValue>.Create(value => !items.Contains(value), () => It.IsNotIn(items));
-		}
+        public static TValue IsNotIn<TValue>(IEnumerable<TValue> items)
+        {
+            return Match<TValue>.Create(value => !items.Contains(value), () => It.IsNotIn(items));
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is not found in the sequence specified.
 		/// </summary>
 		/// <param name="items">The sequence of disallowed values.</param>
 		/// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
 		/// <typeparam name="TValue">Type of the argument to check.</typeparam>
-		public static TValue IsNotIn<TValue>(IEnumerable<TValue> items, IEqualityComparer<TValue> comparer)
-		{
-			return Match<TValue>.Create(value => !items.Contains(value, comparer), () => It.IsNotIn(items, comparer));
-		}
+        public static TValue IsNotIn<TValue>(
+            IEnumerable<TValue> items,
+            IEqualityComparer<TValue> comparer
+        ) {
+            return Match<TValue>.Create(
+                value => !items.Contains(value, comparer),
+                () => It.IsNotIn(items, comparer)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches any value that is not found in the sequence specified.
 		/// </summary>
 		/// <param name="items">The sequence of disallowed values.</param>
@@ -328,12 +359,12 @@ namespace Moq
 		///         .Returns(false);
 		///   </code>
 		/// </example>
-		public static TValue IsNotIn<TValue>(params TValue[] items)
-		{
-			return Match<TValue>.Create(value => !items.Contains(value), () => It.IsNotIn(items));
-		}
+        public static TValue IsNotIn<TValue>(params TValue[] items)
+        {
+            return Match<TValue>.Create(value => !items.Contains(value), () => It.IsNotIn(items));
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches a string argument if it matches the given regular expression pattern.
 		/// </summary>
 		/// <param name="regex">The pattern to use to match the string argument value.</param>
@@ -345,18 +376,21 @@ namespace Moq
 		///         .Returns(1);
 		///   </code>
 		/// </example>
-		public static string IsRegex(string regex)
-		{
-			Guard.NotNull(regex, nameof(regex));
+        public static string IsRegex(string regex)
+        {
+            Guard.NotNull(regex, nameof(regex));
 
-			// The regex is constructed only once.
-			var re = new Regex(regex);
+            // The regex is constructed only once.
+            var re = new Regex(regex);
 
-			// But evaluated every time :)
-			return Match<string>.Create(value => value != null && re.IsMatch(value), () => It.IsRegex(regex));
-		}
+            // But evaluated every time :)
+            return Match<string>.Create(
+                value => value != null && re.IsMatch(value),
+                () => It.IsRegex(regex)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Matches a string argument if it matches the given regular expression pattern.
 		/// </summary>
 		/// <param name="regex">The pattern to use to match the string argument value.</param>
@@ -369,40 +403,43 @@ namespace Moq
 		///         .Returns(1);
 		///   </code>
 		/// </example>
-		public static string IsRegex(string regex, RegexOptions options)
-		{
-			Guard.NotNull(regex, nameof(regex));
+        public static string IsRegex(string regex, RegexOptions options)
+        {
+            Guard.NotNull(regex, nameof(regex));
 
-			// The regex is constructed only once.
-			var re = new Regex(regex, options);
+            // The regex is constructed only once.
+            var re = new Regex(regex, options);
 
-			// But evaluated every time :)
-			return Match<string>.Create(value => value != null && re.IsMatch(value), () => It.IsRegex(regex, options));
-		}
+            // But evaluated every time :)
+            return Match<string>.Create(
+                value => value != null && re.IsMatch(value),
+                () => It.IsRegex(regex, options)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		///   A type matcher that matches subtypes of <typeparamref name="T"/>, as well as <typeparamref name="T"/> itself.
 		/// </summary>
 		/// <typeparam name="T">The type whose subtypes should match.</typeparam>
-		[TypeMatcher]
-		public sealed class IsSubtype<T> : ITypeMatcher
-		{
-			bool ITypeMatcher.Matches(Type type)
-			{
-				return typeof(T).IsAssignableFrom(type);
-			}
-		}
+        [TypeMatcher]
+        public sealed class IsSubtype<T> : ITypeMatcher
+        {
+            bool ITypeMatcher.Matches(Type type)
+            {
+                return typeof(T).IsAssignableFrom(type);
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		///   A type matcher that matches any value type.
 		/// </summary>
-		[TypeMatcher]
-		public readonly struct IsValueType : ITypeMatcher
-		{
-			bool ITypeMatcher.Matches(Type type)
-			{
-				return type.IsValueType;
-			}
-		}
-	}
+        [TypeMatcher]
+        public readonly struct IsValueType : ITypeMatcher
+        {
+            bool ITypeMatcher.Matches(Type type)
+            {
+                return type.IsValueType;
+            }
+        }
+    }
 }

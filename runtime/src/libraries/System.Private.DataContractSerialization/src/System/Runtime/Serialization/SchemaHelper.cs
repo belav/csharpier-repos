@@ -11,7 +11,6 @@ namespace System.Runtime.Serialization
 {
     internal static class SchemaHelper
     {
-
         internal static bool NamespacesEqual(string? ns1, string? ns2)
         {
             if (ns1 == null || ns1.Length == 0)
@@ -20,8 +19,11 @@ namespace System.Runtime.Serialization
                 return ns1 == ns2;
         }
 
-        internal static XmlSchemaType? GetSchemaType(XmlSchemaSet schemas, XmlQualifiedName typeQName, out XmlSchema? outSchema)
-        {
+        internal static XmlSchemaType? GetSchemaType(
+            XmlSchemaSet schemas,
+            XmlQualifiedName typeQName,
+            out XmlSchema? outSchema
+        ) {
             outSchema = null;
             ICollection currentSchemas = schemas.Schemas();
             string ns = typeQName.Namespace;
@@ -43,8 +45,11 @@ namespace System.Runtime.Serialization
             return null;
         }
 
-        internal static XmlSchemaElement? GetSchemaElement(XmlSchemaSet schemas, XmlQualifiedName elementQName, out XmlSchema? outSchema)
-        {
+        internal static XmlSchemaElement? GetSchemaElement(
+            XmlSchemaSet schemas,
+            XmlQualifiedName elementQName,
+            out XmlSchema? outSchema
+        ) {
             outSchema = null;
             ICollection currentSchemas = schemas.Schemas();
             string ns = elementQName.Namespace;
@@ -68,13 +73,18 @@ namespace System.Runtime.Serialization
 
         internal static XmlSchema GetSchema(string ns, XmlSchemaSet schemas)
         {
-            if (ns == null) { ns = string.Empty; }
+            if (ns == null)
+            {
+                ns = string.Empty;
+            }
 
             ICollection currentSchemas = schemas.Schemas();
             foreach (XmlSchema schema in currentSchemas)
             {
-                if ((schema.TargetNamespace == null && ns.Length == 0) || ns.Equals(schema.TargetNamespace))
-                {
+                if (
+                    (schema.TargetNamespace == null && ns.Length == 0)
+                    || ns.Equals(schema.TargetNamespace)
+                ) {
                     return schema;
                 }
             }
@@ -92,7 +102,6 @@ namespace System.Runtime.Serialization
                 schema.Namespaces.Add(Globals.TnsPrefix, ns);
             }
 
-
             schemas.Add(schema);
             return schema;
         }
@@ -107,7 +116,11 @@ namespace System.Runtime.Serialization
 
         internal static void AddSchemaImport(string ns, XmlSchema schema)
         {
-            if (SchemaHelper.NamespacesEqual(ns, schema.TargetNamespace) || SchemaHelper.NamespacesEqual(ns, Globals.SchemaNamespace) || SchemaHelper.NamespacesEqual(ns, Globals.SchemaInstanceNamespace))
+            if (
+                SchemaHelper.NamespacesEqual(ns, schema.TargetNamespace)
+                || SchemaHelper.NamespacesEqual(ns, Globals.SchemaNamespace)
+                || SchemaHelper.NamespacesEqual(ns, Globals.SchemaInstanceNamespace)
+            )
                 return;
 
             foreach (object item in schema.Includes)

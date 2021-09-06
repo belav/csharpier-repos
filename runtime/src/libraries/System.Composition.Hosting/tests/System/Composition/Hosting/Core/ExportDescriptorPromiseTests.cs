@@ -12,27 +12,49 @@ namespace System.Composition.Hosting.Core.Tests
     {
         public static IEnumerable<object[]> Ctor_Depedencies()
         {
-            yield return new object[] { null, null, false, Enumerable.Empty<CompositionDependency>() };
-            yield return new object[] { new CompositionContract(typeof(int)), "Origin", true, Enumerable.Empty<CompositionDependency>() };
+            yield return new object[]
+            {
+                null,
+                null,
+                false,
+                Enumerable.Empty<CompositionDependency>()
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                Enumerable.Empty<CompositionDependency>()
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Depedencies))]
-        public void Ctor_Dependencies(CompositionContract contract, string origin, bool isShared, IEnumerable<CompositionDependency> dependencies)
-        {
+        public void Ctor_Dependencies(
+            CompositionContract contract,
+            string origin,
+            bool isShared,
+            IEnumerable<CompositionDependency> dependencies
+        ) {
             int calledDependencies = 0;
             int calledGetDescriptor = 0;
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var promise = new ExportDescriptorPromise(contract, origin, isShared, () =>
-            {
-                calledDependencies++;
-                return dependencies;
-            }, getDependencies =>
-            {
-                Assert.Equal(dependencies, getDependencies);
-                calledGetDescriptor++;
-                return descriptor;
-            });
+            var promise = new ExportDescriptorPromise(
+                contract,
+                origin,
+                isShared,
+                () =>
+                {
+                    calledDependencies++;
+                    return dependencies;
+                },
+                getDependencies =>
+                {
+                    Assert.Equal(dependencies, getDependencies);
+                    calledGetDescriptor++;
+                    return descriptor;
+                }
+            );
 
             Assert.Same(contract, promise.Contract);
             Assert.Same(origin, promise.Origin);
@@ -64,10 +86,16 @@ namespace System.Composition.Hosting.Core.Tests
         public void Dependencies_GetWhenNull_ThrowsNullReferenceException()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, null, dependencies =>
-            {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
+            var promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                null,
+                dependencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
 
             Assert.Throws<NullReferenceException>(() => promise.Dependencies);
         }
@@ -76,10 +104,16 @@ namespace System.Composition.Hosting.Core.Tests
         public void Dependencies_GetWhenReturnsNull_ThrowsArgumentNullException()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => null, depdendencies =>
-            {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
+            var promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => null,
+                depdendencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => promise.Dependencies);
         }
@@ -88,10 +122,16 @@ namespace System.Composition.Hosting.Core.Tests
         public void GetDescriptor_GetWhenNull_ThrowsNullReferenceException()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, null, dependencies =>
-            {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
+            var promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                null,
+                dependencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
 
             Assert.Throws<NullReferenceException>(() => promise.GetDescriptor());
         }
@@ -100,44 +140,72 @@ namespace System.Composition.Hosting.Core.Tests
         public void GetDescriptor_GetWhenReturnsNull_ThrowsArgumentNullException()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                return null;
-            });
+            var promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    return null;
+                }
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("descriptor", () => promise.GetDescriptor());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "descriptor",
+                () => promise.GetDescriptor()
+            );
         }
 
         [Fact]
         public void GetDescriptor_CycleMetadataNotCompleted_MethodsThrowNotImplementedException()
         {
             ExportDescriptorPromise promise = null;
-            promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                ExportDescriptor cycleDescriptor = promise.GetDescriptor();
-                IDictionary<string, object> metadata = cycleDescriptor.Metadata;
+            promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    ExportDescriptor cycleDescriptor = promise.GetDescriptor();
+                    IDictionary<string, object> metadata = cycleDescriptor.Metadata;
 
-                Assert.Throws<NotImplementedException>(() => metadata.Add("key", "value"));
-                Assert.Throws<NotImplementedException>(() => metadata.Clear());
-                Assert.Throws<NotImplementedException>(() => metadata.Add(default(KeyValuePair<string, object>)));
-                Assert.Throws<NotImplementedException>(() => metadata.CopyTo(null, 0));
-                Assert.Throws<NotImplementedException>(() => metadata.Contains(default(KeyValuePair<string, object>)));
-                Assert.Throws<NotImplementedException>(() => metadata.ContainsKey("key"));
-                Assert.Throws<NotImplementedException>(() => metadata.Count);
-                Assert.Throws<NotImplementedException>(() => metadata.IsReadOnly);
-                Assert.Throws<NotImplementedException>(() => metadata.GetEnumerator());
-                Assert.Throws<NotImplementedException>(() => ((IEnumerable)metadata).GetEnumerator());
-                Assert.Throws<NotImplementedException>(() => metadata.Keys);
-                Assert.Throws<NotImplementedException>(() => metadata.Remove("key"));
-                Assert.Throws<NotImplementedException>(() => metadata.Remove(default(KeyValuePair<string, object>)));
-                Assert.Throws<NotImplementedException>(() => metadata.TryGetValue("key", out object _));
-                Assert.Throws<NotImplementedException>(() => metadata.Values);
+                    Assert.Throws<NotImplementedException>(() => metadata.Add("key", "value"));
+                    Assert.Throws<NotImplementedException>(() => metadata.Clear());
+                    Assert.Throws<NotImplementedException>(
+                        () => metadata.Add(default(KeyValuePair<string, object>))
+                    );
+                    Assert.Throws<NotImplementedException>(() => metadata.CopyTo(null, 0));
+                    Assert.Throws<NotImplementedException>(
+                        () => metadata.Contains(default(KeyValuePair<string, object>))
+                    );
+                    Assert.Throws<NotImplementedException>(() => metadata.ContainsKey("key"));
+                    Assert.Throws<NotImplementedException>(() => metadata.Count);
+                    Assert.Throws<NotImplementedException>(() => metadata.IsReadOnly);
+                    Assert.Throws<NotImplementedException>(() => metadata.GetEnumerator());
+                    Assert.Throws<NotImplementedException>(
+                        () => ((IEnumerable)metadata).GetEnumerator()
+                    );
+                    Assert.Throws<NotImplementedException>(() => metadata.Keys);
+                    Assert.Throws<NotImplementedException>(() => metadata.Remove("key"));
+                    Assert.Throws<NotImplementedException>(
+                        () => metadata.Remove(default(KeyValuePair<string, object>))
+                    );
+                    Assert.Throws<NotImplementedException>(
+                        () => metadata.TryGetValue("key", out object _)
+                    );
+                    Assert.Throws<NotImplementedException>(() => metadata.Values);
 
-                Assert.Throws<NotImplementedException>(() => metadata["key"]);
-                Assert.Throws<NotImplementedException>(() => metadata["key"] = "value");
+                    Assert.Throws<NotImplementedException>(() => metadata["key"]);
+                    Assert.Throws<NotImplementedException>(() => metadata["key"] = "value");
 
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object> { { "key", "value" } });
-            });
+                    return ExportDescriptor.Create(
+                        Activator,
+                        new Dictionary<string, object> { { "key", "value" } }
+                    );
+                }
+            );
 
             // Invoke the GetDescriptor method to start the test.
             Assert.NotNull(promise.GetDescriptor());
@@ -148,13 +216,22 @@ namespace System.Composition.Hosting.Core.Tests
         {
             ExportDescriptorPromise promise = null;
             IDictionary<string, object> metadata = null;
-            promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                ExportDescriptor cycleDescriptor = promise.GetDescriptor();
-                metadata = cycleDescriptor.Metadata;
+            promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    ExportDescriptor cycleDescriptor = promise.GetDescriptor();
+                    metadata = cycleDescriptor.Metadata;
 
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object> { { "key", "value" } });
-            });
+                    return ExportDescriptor.Create(
+                        Activator,
+                        new Dictionary<string, object> { { "key", "value" } }
+                    );
+                }
+            );
 
             // Invoke the GetDescriptor method to start the test.
             Assert.NotNull(promise.GetDescriptor());
@@ -186,7 +263,14 @@ namespace System.Composition.Hosting.Core.Tests
 
             var array = new KeyValuePair<string, object>[2];
             metadata.CopyTo(array, 1);
-            Assert.Equal(new KeyValuePair<string, object>[] { default(KeyValuePair<string, object>), new KeyValuePair<string, object>("key", "value2") }, array);
+            Assert.Equal(
+                new KeyValuePair<string, object>[]
+                {
+                    default(KeyValuePair<string, object>),
+                    new KeyValuePair<string, object>("key", "value2")
+                },
+                array
+            );
 
             IEnumerator enumerator = metadata.GetEnumerator();
             Assert.True(enumerator.MoveNext());
@@ -204,14 +288,23 @@ namespace System.Composition.Hosting.Core.Tests
         public void GetDescriptor_CycleActivatorNotCompleted_ThrowsNotImplementedException()
         {
             ExportDescriptorPromise promise = null;
-            promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                ExportDescriptor cycleDescriptor = promise.GetDescriptor();
-                CompositeActivator activator = cycleDescriptor.Activator;
-                Assert.Throws<NotImplementedException>(() => activator(null, null));
+            promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    ExportDescriptor cycleDescriptor = promise.GetDescriptor();
+                    CompositeActivator activator = cycleDescriptor.Activator;
+                    Assert.Throws<NotImplementedException>(() => activator(null, null));
 
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object> { { "key", "value" } });
-            });
+                    return ExportDescriptor.Create(
+                        Activator,
+                        new Dictionary<string, object> { { "key", "value" } }
+                    );
+                }
+            );
 
             // Invoke the GetDescriptor method to start the test.
             Assert.NotNull(promise.GetDescriptor());
@@ -222,13 +315,22 @@ namespace System.Composition.Hosting.Core.Tests
         {
             ExportDescriptorPromise promise = null;
             CompositeActivator activator = null;
-            promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                ExportDescriptor cycleDescriptor = promise.GetDescriptor();
-                activator = cycleDescriptor.Activator;
+            promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    ExportDescriptor cycleDescriptor = promise.GetDescriptor();
+                    activator = cycleDescriptor.Activator;
 
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object> { { "key", "value" } });
-            });
+                    return ExportDescriptor.Create(
+                        Activator,
+                        new Dictionary<string, object> { { "key", "value" } }
+                    );
+                }
+            );
 
             ExportDescriptor descriptor = promise.GetDescriptor();
             Assert.Equal("hi", descriptor.Activator(null, null));
@@ -240,11 +342,20 @@ namespace System.Composition.Hosting.Core.Tests
         {
             ExportDescriptorPromise promise = null;
             ExportDescriptor cycleDescriptor = null;
-            promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                cycleDescriptor = promise.GetDescriptor();
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object> { { "key", "value" } });
-            });
+            promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    cycleDescriptor = promise.GetDescriptor();
+                    return ExportDescriptor.Create(
+                        Activator,
+                        new Dictionary<string, object> { { "key", "value" } }
+                    );
+                }
+            );
 
             ExportDescriptor descriptor = promise.GetDescriptor();
             Assert.Same(descriptor.Activator, cycleDescriptor.Activator);
@@ -254,13 +365,20 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void ToString_Invoke_ReturnsExpected()
         {
-            var promise = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", true, () => Enumerable.Empty<CompositionDependency>(), depdendencies =>
-            {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
+            var promise = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                true,
+                () => Enumerable.Empty<CompositionDependency>(),
+                depdendencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
             Assert.Equal("Int32 supplied by Origin", promise.ToString());
         }
 
-        private static object Activator(LifetimeContext context, CompositionOperation operation) => "hi";
+        private static object Activator(LifetimeContext context, CompositionOperation operation) =>
+            "hi";
     }
 }

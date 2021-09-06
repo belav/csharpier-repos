@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             SyntaxNode root,
             RazorSourceDocument source,
             IReadOnlyList<RazorDiagnostic> diagnostics,
-            RazorParserOptions options)
-        {
+            RazorParserOptions options
+        ) {
             Root = root;
             Source = source;
             _diagnostics = diagnostics;
@@ -32,7 +32,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (_allDiagnostics == null)
                 {
                     var allDiagnostics = new HashSet<RazorDiagnostic>();
-                    for (var i = 0; i <  _diagnostics.Count; i++)
+                    for (var i = 0; i < _diagnostics.Count; i++)
                     {
                         allDiagnostics.Add(_diagnostics[i]);
                     }
@@ -43,7 +43,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                         allDiagnostics.Add(rootDiagnostics[i]);
                     }
 
-                    var allOrderedDiagnostics = allDiagnostics.OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
+                    var allOrderedDiagnostics = allDiagnostics.OrderBy(
+                        diagnostic => diagnostic.Span.AbsoluteIndex
+                    );
                     _allDiagnostics = allOrderedDiagnostics.ToArray();
                 }
 

@@ -10,8 +10,10 @@ namespace Microsoft.AspNetCore.Mvc
     internal class DesignTimeMvcServiceCollectionProvider
     {
         // This method invoked by RazorTooling using reflection.
-        public static void PopulateServiceCollection(IServiceCollection services, string assemblyName)
-        {
+        public static void PopulateServiceCollection(
+            IServiceCollection services,
+            string assemblyName
+        ) {
             var assembly = Assembly.Load(new AssemblyName(assemblyName));
 
             var partManager = new ApplicationPartManager();

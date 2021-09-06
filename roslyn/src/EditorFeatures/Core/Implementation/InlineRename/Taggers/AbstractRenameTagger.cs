@@ -35,8 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
         }
 
-        private void OnActiveSessionChanged(object sender, InlineRenameService.ActiveSessionChangedEventArgs e)
-        {
+        private void OnActiveSessionChanged(
+            object sender,
+            InlineRenameService.ActiveSessionChangedEventArgs e
+        ) {
             if (e.PreviousSession != null)
             {
                 DetachFromSession();
@@ -75,8 +77,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             RaiseTagsChangedForEntireBuffer();
         }
 
-        private void RaiseTagsChangedForEntireBuffer()
-            => TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(_buffer.CurrentSnapshot.GetFullSpan()));
+        private void RaiseTagsChangedForEntireBuffer() =>
+            TagsChanged?.Invoke(
+                this,
+                new SnapshotSpanEventArgs(_buffer.CurrentSnapshot.GetFullSpan())
+            );
 
         public void Dispose()
         {
@@ -115,6 +120,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
         }
 
-        protected abstract bool TryCreateTagSpan(SnapshotSpan span, RenameSpanKind type, out TagSpan<T> tagSpan);
+        protected abstract bool TryCreateTagSpan(
+            SnapshotSpan span,
+            RenameSpanKind type,
+            out TagSpan<T> tagSpan
+        );
     }
 }

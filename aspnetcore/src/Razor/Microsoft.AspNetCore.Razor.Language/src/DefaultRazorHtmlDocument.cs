@@ -10,9 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         private readonly string _generatedHtml;
         private readonly RazorCodeGenerationOptions _options;
 
-        public DefaultRazorHtmlDocument(
-            string generatedHtml,
-            RazorCodeGenerationOptions options)
+        public DefaultRazorHtmlDocument(string generatedHtml, RazorCodeGenerationOptions options)
         {
             if (generatedHtml == null)
             {

@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         public static readonly CSharpSyntaxTriviaService Instance = new CSharpSyntaxTriviaService();
 
         private CSharpSyntaxTriviaService()
-            : base(CSharpSyntaxFacts.Instance, (int)SyntaxKind.EndOfLineTrivia)
-        {
-        }
+            : base(CSharpSyntaxFacts.Instance, (int)SyntaxKind.EndOfLineTrivia) { }
     }
 }

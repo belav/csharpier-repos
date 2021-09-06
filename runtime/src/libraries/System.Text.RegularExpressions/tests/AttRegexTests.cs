@@ -34,7 +34,7 @@
 // using System.Collections.Generic;
 // using System.IO;
 // using System.Linq;
-// 
+//
 // class Program
 // {
 //     static void Main()
@@ -47,7 +47,7 @@
 //             .Where(s => s.Length >= 4 && !s[3].Contains("?"))
 //             .Where(s => !s[1].StartsWith("[["))
 //             .ToArray();
-// 
+//
 //         var seen = new HashSet<string>();
 //         foreach (string[] test in tests)
 //         {
@@ -73,7 +73,6 @@ namespace System.Text.RegularExpressions.Tests
     public class AttRegexTests
     {
         [Theory]
-
         // basic.dat
         [InlineData("abracadabra$", "abracadabracadabra", "(7,18)")]
         [InlineData("a...b", "abababbb", "(2,7)")]
@@ -130,18 +129,46 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("\na", "\na", "(0,2)")]
         [InlineData("(a)(b)(c)", "abc", "(0,3)(0,1)(1,2)(2,3)")]
         [InlineData("xxx", "xxx", "(0,3)")]
-        [InlineData("(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "feb 6,", "(0,6)")]
+        [InlineData(
+            "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+            "feb 6,",
+            "(0,6)"
+        )]
         [InlineData("(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "2/7", "(0,3)")]
-        [InlineData("(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "feb 1,Feb 6", "(5,11)")]
-        [InlineData("((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))", "x", "(0,1)(0,1)(0,1)")]
-        [InlineData("((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))*", "xx", "(0,2)(1,2)(1,2)")]
-        [InlineData("a?(ab|ba)*", "ababababababababababababababababababababababababababababababababababababababababa", "(0,81)(79,81)")]
+        [InlineData(
+            "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+            "feb 1,Feb 6",
+            "(5,11)"
+        )]
+        [InlineData(
+            "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))",
+            "x",
+            "(0,1)(0,1)(0,1)"
+        )]
+        [InlineData(
+            "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))*",
+            "xx",
+            "(0,2)(1,2)(1,2)"
+        )]
+        [InlineData(
+            "a?(ab|ba)*",
+            "ababababababababababababababababababababababababababababababababababababababababa",
+            "(0,81)(79,81)"
+        )]
         [InlineData("abaa|abbaa|abbbaa|abbbbaa", "ababbabbbabbbabbbbabbbbaa", "(18,25)")]
         [InlineData("abaa|abbaa|abbbaa|abbbbaa", "ababbabbbabbbabbbbabaa", "(18,22)")]
         [InlineData("aaac|aabc|abac|abbc|baac|babc|bbac|bbbc", "baaabbbabac", "(7,11)")]
         [InlineData(".*", "\x0001\x00ff", "(0,2)")]
-        [InlineData("aaaa|bbbb|cccc|ddddd|eeeeee|fffffff|gggg|hhhh|iiiii|jjjjj|kkkkk|llll", "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa", "(53,57)")]
-        [InlineData("aaaa\nbbbb\ncccc\nddddd\neeeeee\nfffffff\ngggg\nhhhh\niiiii\njjjjj\nkkkkk\nllll", "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa", "NOMATCH")]
+        [InlineData(
+            "aaaa|bbbb|cccc|ddddd|eeeeee|fffffff|gggg|hhhh|iiiii|jjjjj|kkkkk|llll",
+            "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa",
+            "(53,57)"
+        )]
+        [InlineData(
+            "aaaa\nbbbb\ncccc\nddddd\neeeeee\nfffffff\ngggg\nhhhh\niiiii\njjjjj\nkkkkk\nllll",
+            "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa",
+            "NOMATCH"
+        )]
         [InlineData("a*a*a*a*a*b", "aaaaaaaaab", "(0,10)")]
         [InlineData("^", "NULL", "(0,0)")]
         [InlineData("$", "NULL", "(0,0)")]
@@ -218,7 +245,11 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(bc+d$|ef*g.|h?i(j|k))", "effgz", "(0,5)(0,5)")]
         [InlineData("(bc+d$|ef*g.|h?i(j|k))", "ij", "(0,2)(0,2)(1,2)")]
         [InlineData("(bc+d$|ef*g.|h?i(j|k))", "reffgz", "(1,6)(1,6)")]
-        [InlineData("(((((((((a)))))))))", "a", "(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)")]
+        [InlineData(
+            "(((((((((a)))))))))",
+            "a",
+            "(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)"
+        )]
         [InlineData("multiple words", "multiple words yeah", "(0,14)")]
         [InlineData("(.*)c(.*)", "abcde", "(0,5)(0,2)(3,5)")]
         [InlineData("abcd", "abcd", "(0,4)")]
@@ -251,7 +282,6 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(".*(/000).*", "/000", "(0,4)(0,4)")]
         [InlineData(".*(\\\\000).*", "\\000", "(0,4)(0,4)")]
         [InlineData("\\\\000", "\\000", "(0,4)")]
-
         // repetition.dat
         [InlineData("((..)|(.))", "NULL", "NOMATCH")]
         [InlineData("((..)|(.))((..)|(.))", "NULL", "NOMATCH")]
@@ -308,7 +338,6 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(ab|a|c|bcd){4,10}(d*)", "ababcd", "NOMATCH")]
         [InlineData("(ab|a|c|bcd)*(d*)", "ababcd", "(0,6)(4,5)(5,6)")] // was "(0,6)(3,6)(6,6)"
         [InlineData("(ab|a|c|bcd)+(d*)", "ababcd", "(0,6)(4,5)(5,6)")] // was "(0,6)(3,6)(6,6)"
-
         // unknownassoc.dat
         [InlineData("(a|ab)(c|bcd)(d*)", "abcd", "(0,4)(0,1)(1,4)(4,4)")]
         [InlineData("(a|ab)(bcd|c)(d*)", "abcd", "(0,4)(0,1)(1,4)(4,4)")]
@@ -320,7 +349,6 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(a|ab)(bcd|c)(d|.*)", "abcd", "(0,4)(0,1)(1,4)(4,4)")]
         [InlineData("(ab|a)(c|bcd)(d|.*)", "abcd", "(0,4)(0,2)(2,3)(3,4)")]
         [InlineData("(ab|a)(bcd|c)(d|.*)", "abcd", "(0,4)(0,2)(2,3)(3,4)")]
-
         // nullsubexpr.dat
         [InlineData("(a*)*", "a", "(0,1)(0,1)")]
         [InlineData("(a*)*", "x", "(0,0)(0,0)")]
@@ -377,7 +405,9 @@ namespace System.Text.RegularExpressions.Tests
             {
                 if (captures == "BADBR")
                 {
-                    Assert.ThrowsAny<ArgumentException>(() => Regex.IsMatch(input, pattern, options));
+                    Assert.ThrowsAny<ArgumentException>(
+                        () => Regex.IsMatch(input, pattern, options)
+                    );
                 }
                 else if (captures == "NOMATCH")
                 {
@@ -389,26 +419,28 @@ namespace System.Text.RegularExpressions.Tests
                     Assert.True(match.Success);
 
                     var expected = new HashSet<(int start, int end)>(
-                        captures
-                        .Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(s => s.Split(','))
-                        .Select(s => (start: int.Parse(s[0]), end: int.Parse(s[1])))
-                        .Distinct()
-                        .OrderBy(c => c.start)
-                        .ThenBy(c => c.end));
+                        captures.Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(s => s.Split(','))
+                            .Select(s => (start: int.Parse(s[0]), end: int.Parse(s[1])))
+                            .Distinct()
+                            .OrderBy(c => c.start)
+                            .ThenBy(c => c.end)
+                    );
 
                     var actual = new HashSet<(int start, int end)>(
-                        match.Groups
-                        .Cast<Group>()
-                        .Select(g => (start: g.Index, end: g.Index + g.Length))
-                        .Distinct()
-                        .OrderBy(g => g.start)
-                        .ThenBy(g => g.end));
+                        match.Groups.Cast<Group>()
+                            .Select(g => (start: g.Index, end: g.Index + g.Length))
+                            .Distinct()
+                            .OrderBy(g => g.start)
+                            .ThenBy(g => g.end)
+                    );
 
                     // The .NET implementation sometimes has extra captures beyond what the original data specifies, so we assert a subset.
                     if (!expected.IsSubsetOf(actual))
                     {
-                        throw new Xunit.Sdk.XunitException($"Actual: {string.Join(", ", actual)}{Environment.NewLine}Expected: {string.Join(", ", expected)}");
+                        throw new Xunit.Sdk.XunitException(
+                            $"Actual: {string.Join(", ", actual)}{Environment.NewLine}Expected: {string.Join(", ", expected)}"
+                        );
                     }
                 }
             }

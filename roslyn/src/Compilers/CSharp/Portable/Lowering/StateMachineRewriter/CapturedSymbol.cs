@@ -23,21 +23,28 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Rewrite the replacement expression for the hoisted local so all synthesized field are accessed as members
         /// of the appropriate frame.
         /// </summary>
-        public abstract BoundExpression Replacement(SyntaxNode node, Func<NamedTypeSymbol, BoundExpression> makeFrame);
+        public abstract BoundExpression Replacement(
+            SyntaxNode node,
+            Func<NamedTypeSymbol, BoundExpression> makeFrame
+        );
     }
 
     internal sealed class CapturedToFrameSymbolReplacement : CapturedSymbolReplacement
     {
         public readonly LambdaCapturedVariable HoistedField;
 
-        public CapturedToFrameSymbolReplacement(LambdaCapturedVariable hoistedField, bool isReusable)
-            : base(isReusable)
+        public CapturedToFrameSymbolReplacement(
+            LambdaCapturedVariable hoistedField,
+            bool isReusable
+        ) : base(isReusable)
         {
             this.HoistedField = hoistedField;
         }
 
-        public override BoundExpression Replacement(SyntaxNode node, Func<NamedTypeSymbol, BoundExpression> makeFrame)
-        {
+        public override BoundExpression Replacement(
+            SyntaxNode node,
+            Func<NamedTypeSymbol, BoundExpression> makeFrame
+        ) {
             var frame = makeFrame(this.HoistedField.ContainingType);
             var field = this.HoistedField.AsMember((NamedTypeSymbol)frame.Type);
             return new BoundFieldAccess(node, frame, field, constantValueOpt: null);
@@ -48,14 +55,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public readonly StateMachineFieldSymbol HoistedField;
 
-        public CapturedToStateMachineFieldReplacement(StateMachineFieldSymbol hoistedField, bool isReusable)
-            : base(isReusable)
+        public CapturedToStateMachineFieldReplacement(
+            StateMachineFieldSymbol hoistedField,
+            bool isReusable
+        ) : base(isReusable)
         {
             this.HoistedField = hoistedField;
         }
 
-        public override BoundExpression Replacement(SyntaxNode node, Func<NamedTypeSymbol, BoundExpression> makeFrame)
-        {
+        public override BoundExpression Replacement(
+            SyntaxNode node,
+            Func<NamedTypeSymbol, BoundExpression> makeFrame
+        ) {
             var frame = makeFrame(this.HoistedField.ContainingType);
             var field = this.HoistedField.AsMember((NamedTypeSymbol)frame.Type);
             return new BoundFieldAccess(node, frame, field, constantValueOpt: null);
@@ -67,15 +78,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly BoundExpression _replacement;
         public readonly ImmutableArray<StateMachineFieldSymbol> HoistedFields;
 
-        public CapturedToExpressionSymbolReplacement(BoundExpression replacement, ImmutableArray<StateMachineFieldSymbol> hoistedFields, bool isReusable)
-            : base(isReusable)
+        public CapturedToExpressionSymbolReplacement(
+            BoundExpression replacement,
+            ImmutableArray<StateMachineFieldSymbol> hoistedFields,
+            bool isReusable
+        ) : base(isReusable)
         {
             _replacement = replacement;
             this.HoistedFields = hoistedFields;
         }
 
-        public override BoundExpression Replacement(SyntaxNode node, Func<NamedTypeSymbol, BoundExpression> makeFrame)
-        {
+        public override BoundExpression Replacement(
+            SyntaxNode node,
+            Func<NamedTypeSymbol, BoundExpression> makeFrame
+        ) {
             // By returning the same replacement each time, it is possible we
             // are constructing a DAG instead of a tree for the translation.
             // Because the bound trees are immutable that is usually harmless.

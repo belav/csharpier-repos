@@ -15,9 +15,10 @@ namespace System.Net.NetworkInformation
         {
             foreach (var ni in GetAllNetworkInterfaces())
             {
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Loopback
-                    || ni.NetworkInterfaceType == NetworkInterfaceType.Tunnel)
-                {
+                if (
+                    ni.NetworkInterfaceType == NetworkInterfaceType.Loopback
+                    || ni.NetworkInterfaceType == NetworkInterfaceType.Tunnel
+                ) {
                     continue;
                 }
                 if (ni.OperationalStatus == OperationalStatus.Up)
@@ -29,7 +30,10 @@ namespace System.Net.NetworkInformation
             return false;
         }
 
-        public static int IPv6LoopbackInterfaceIndex { get { return LoopbackInterfaceIndex; } }
+        public static int IPv6LoopbackInterfaceIndex
+        {
+            get { return LoopbackInterfaceIndex; }
+        }
 
         public static int LoopbackInterfaceIndex
         {

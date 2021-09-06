@@ -35,9 +35,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.False(aia.Critical);
 
                     byte[] expectedDer = (
-                        "304c304a06082b06010505073002863e687474703a2f2f7777772e6d" +
-                        "6963726f736f66742e636f6d2f706b692f63657274732f4d6963436f" +
-                        "645369675043415f30382d33312d323031302e637274").HexToByteArray();
+                        "304c304a06082b06010505073002863e687474703a2f2f7777772e6d"
+                        + "6963726f736f66742e636f6d2f706b692f63657274732f4d6963436f"
+                        + "645369675043415f30382d33312d323031302e637274"
+                    ).HexToByteArray();
 
                     Assert.Equal(expectedDer, aia.RawData);
                 }
@@ -48,12 +49,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal("2.5.29.14", skid.Oid.Value);
                     Assert.False(skid.Critical);
 
-                    byte[] expected = "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray();
+                    byte[] expected =
+                        "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray();
                     Assert.Equal(expected, skid.RawData);
 
                     Assert.True(skid is X509SubjectKeyIdentifierExtension);
-                    X509SubjectKeyIdentifierExtension rich = (X509SubjectKeyIdentifierExtension)skid;
-                    Assert.Equal("5971A65A334DDA980780FF841EBE87F9723241F2", rich.SubjectKeyIdentifier);
+                    X509SubjectKeyIdentifierExtension rich =
+                        (X509SubjectKeyIdentifierExtension)skid;
+                    Assert.Equal(
+                        "5971A65A334DDA980780FF841EBE87F9723241F2",
+                        rich.SubjectKeyIdentifier
+                    );
                 }
 
                 {
@@ -63,9 +69,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.False(sans.Critical);
 
                     byte[] expected = (
-                        "3048a4463044310d300b060355040b13044d4f505231333031060355" +
-                        "0405132a33313539352b34666166306237312d616433372d34616133" +
-                        "2d613637312d373662633035323334346164").HexToByteArray();
+                        "3048a4463044310d300b060355040b13044d4f505231333031060355"
+                        + "0405132a33313539352b34666166306237312d616433372d34616133"
+                        + "2d613637312d373662633035323334346164"
+                    ).HexToByteArray();
 
                     Assert.Equal(expected, sans.RawData);
                 }
@@ -77,9 +84,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.False(cdps.Critical);
 
                     byte[] expected = (
-                        "304d304ba049a0478645687474703a2f2f63726c2e6d6963726f736f" +
-                        "66742e636f6d2f706b692f63726c2f70726f64756374732f4d696343" +
-                        "6f645369675043415f30382d33312d323031302e63726c").HexToByteArray();
+                        "304d304ba049a0478645687474703a2f2f63726c2e6d6963726f736f"
+                        + "66742e636f6d2f706b692f63726c2f70726f64756374732f4d696343"
+                        + "6f645369675043415f30382d33312d323031302e63726c"
+                    ).HexToByteArray();
 
                     Assert.Equal(expected, cdps.RawData);
                 }
@@ -90,7 +98,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal("2.5.29.35", akid.Oid.Value);
                     Assert.False(akid.Critical);
 
-                    byte[] expected = "30168014cb11e8cad2b4165801c9372e331616b94c9a0a1f".HexToByteArray();
+                    byte[] expected =
+                        "30168014cb11e8cad2b4165801c9372e331616b94c9a0a1f".HexToByteArray();
                     Assert.Equal(expected, akid.RawData);
                 }
 
@@ -136,43 +145,71 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void KeyUsageExtension_DataEncipherment()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.DataEncipherment, false, "03020410".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.DataEncipherment,
+                false,
+                "03020410".HexToByteArray()
+            );
         }
 
         [Fact]
         public static void KeyUsageExtension_DecipherOnly()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.DecipherOnly, false, "0303070080".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.DecipherOnly,
+                false,
+                "0303070080".HexToByteArray()
+            );
         }
 
         [Fact]
         public static void KeyUsageExtension_DigitalSignature()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false, "03020780".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.DigitalSignature,
+                false,
+                "03020780".HexToByteArray()
+            );
         }
 
         [Fact]
         public static void KeyUsageExtension_EncipherOnly()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.EncipherOnly, false, "03020001".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.EncipherOnly,
+                false,
+                "03020001".HexToByteArray()
+            );
         }
 
         [Fact]
         public static void KeyUsageExtension_KeyAgreement()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.KeyAgreement, false, "03020308".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.KeyAgreement,
+                false,
+                "03020308".HexToByteArray()
+            );
         }
 
         [Fact]
         public static void KeyUsageExtension_KeyCertSign()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.KeyCertSign, false, "03020204".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.KeyCertSign,
+                false,
+                "03020204".HexToByteArray()
+            );
         }
 
         [Fact]
         public static void KeyUsageExtension_KeyEncipherment()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.KeyEncipherment, false, "03020520".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.KeyEncipherment,
+                false,
+                "03020520".HexToByteArray()
+            );
         }
 
         [Fact]
@@ -184,7 +221,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void KeyUsageExtension_NonRepudiation()
         {
-            TestKeyUsageExtension(X509KeyUsageFlags.NonRepudiation, false, "03020640".HexToByteArray());
+            TestKeyUsageExtension(
+                X509KeyUsageFlags.NonRepudiation,
+                false,
+                "03020640".HexToByteArray()
+            );
         }
 
         [Fact]
@@ -193,7 +234,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             TestKeyUsageExtension(
                 X509KeyUsageFlags.KeyAgreement | X509KeyUsageFlags.DecipherOnly,
                 false,
-                "0303070880".HexToByteArray());
+                "0303070880".HexToByteArray()
+            );
         }
 
         [Fact]
@@ -202,9 +244,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Extensions encoded inside PKCS#8 on Windows may use BER encoding that would be invalid DER.
             // Ensure that no exception is thrown and the value is decoded correctly.
             X509KeyUsageExtension ext;
-            ext = new X509KeyUsageExtension(new AsnEncodedData("230403020080".HexToByteArray()), false);
+            ext = new X509KeyUsageExtension(
+                new AsnEncodedData("230403020080".HexToByteArray()),
+                false
+            );
             Assert.Equal(X509KeyUsageFlags.DigitalSignature, ext.KeyUsages);
-            ext = new X509KeyUsageExtension(new AsnEncodedData("038200020080".HexToByteArray()), false);
+            ext = new X509KeyUsageExtension(
+                new AsnEncodedData("038200020080".HexToByteArray()),
+                false
+            );
             Assert.Equal(X509KeyUsageFlags.DigitalSignature, ext.KeyUsages);
         }
 
@@ -229,13 +277,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             bool hasPathLengthConstraint,
             int pathLengthConstraint,
             bool critical,
-            string expectedDerString)
-        {
+            string expectedDerString
+        ) {
             X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(
                 certificateAuthority,
                 hasPathLengthConstraint,
                 pathLengthConstraint,
-                critical);
+                critical
+            );
 
             byte[] expectedDer = expectedDerString.HexToByteArray();
             Assert.Equal(expectedDer, ext.RawData);
@@ -248,12 +297,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             bool hasPathLengthConstraint,
             int pathLengthConstraint,
             bool critical,
-            string rawDataString)
-        {
+            string rawDataString
+        ) {
             byte[] rawData = rawDataString.HexToByteArray();
             int expectedPathLengthConstraint = hasPathLengthConstraint ? pathLengthConstraint : 0;
 
-            X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(new AsnEncodedData(rawData), critical);
+            X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(
+                new AsnEncodedData(rawData),
+                critical
+            );
             Assert.Equal(certificateAuthority, ext.CertificateAuthority);
             Assert.Equal(hasPathLengthConstraint, ext.HasPathLengthConstraint);
             Assert.Equal(expectedPathLengthConstraint, ext.PathLengthConstraint);
@@ -275,7 +327,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Extensions encoded inside PKCS#8 on Windows may use BER encoding that would be invalid DER.
             // Ensure that no exception is thrown and the value is decoded correctly.
             X509BasicConstraintsExtension ext;
-            ext = new X509BasicConstraintsExtension(new AsnEncodedData("30800101000201080000".HexToByteArray()), false);
+            ext = new X509BasicConstraintsExtension(
+                new AsnEncodedData("30800101000201080000".HexToByteArray()),
+                false
+            );
             Assert.False(ext.CertificateAuthority);
             Assert.True(ext.HasPathLengthConstraint);
             Assert.Equal(8, ext.PathLengthConstraint);
@@ -310,7 +365,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             usages.Add(oid1);
             usages.Add(oid2);
 
-            TestEnhancedKeyUsageExtension(usages, false, "301606082b06010505070301060a2b0601040182370a0301".HexToByteArray());
+            TestEnhancedKeyUsageExtension(
+                usages,
+                false,
+                "301606082b06010505070301060a2b0601040182370a0301".HexToByteArray()
+            );
         }
 
         [Theory]
@@ -319,12 +378,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData("Invalid Value")]
         public static void EnhancedKeyUsageExtension_InvalidOid(string invalidOidValue)
         {
-            OidCollection oids = new OidCollection
-            {
-                new Oid(invalidOidValue)
-            };
+            OidCollection oids = new OidCollection { new Oid(invalidOidValue) };
 
-            Assert.ThrowsAny<CryptographicException>(() => new X509EnhancedKeyUsageExtension(oids, false));
+            Assert.ThrowsAny<CryptographicException>(
+                () => new X509EnhancedKeyUsageExtension(oids, false)
+            );
         }
 
         [Fact]
@@ -379,7 +437,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 e = new X509SubjectKeyIdentifierExtension(
                     new AsnEncodedData(new ReadOnlySpan<byte>(rawData)),
-                    false);
+                    false
+                );
             }
             else
             {
@@ -432,7 +491,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 X509SubjectKeyIdentifierHashAlgorithm.Sha1,
                 false,
                 "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray(),
-                "5971A65A334DDA980780FF841EBE87F9723241F2");
+                "5971A65A334DDA980780FF841EBE87F9723241F2"
+            );
         }
 
         [Fact]
@@ -443,7 +503,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 X509SubjectKeyIdentifierHashAlgorithm.ShortSha1,
                 false,
                 "04084ebe87f9723241f2".HexToByteArray(),
-                "4EBE87F9723241F2");
+                "4EBE87F9723241F2"
+            );
         }
 
         [Fact]
@@ -454,7 +515,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 X509SubjectKeyIdentifierHashAlgorithm.CapiSha1,
                 false,
                 "0414a260a870be1145ed71e2bb5aa19463a4fe9dcc41".HexToByteArray(),
-                "A260A870BE1145ED71E2BB5AA19463A4FE9DCC41");
+                "A260A870BE1145ED71E2BB5AA19463A4FE9DCC41"
+            );
         }
 
         [Fact]
@@ -472,14 +534,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ReadInvalidExtension_KeyUsage()
         {
-            X509KeyUsageExtension keyUsageExtension =
-                new X509KeyUsageExtension(new AsnEncodedData(Array.Empty<byte>()), false);
+            X509KeyUsageExtension keyUsageExtension = new X509KeyUsageExtension(
+                new AsnEncodedData(Array.Empty<byte>()),
+                false
+            );
 
             Assert.ThrowsAny<CryptographicException>(() => keyUsageExtension.KeyUsages);
         }
 
-        private static void TestKeyUsageExtension(X509KeyUsageFlags flags, bool critical, byte[] expectedDer)
-        {
+        private static void TestKeyUsageExtension(
+            X509KeyUsageFlags flags,
+            bool critical,
+            byte[] expectedDer
+        ) {
             X509KeyUsageExtension ext = new X509KeyUsageExtension(flags, critical);
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);
@@ -495,8 +562,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static void TestEnhancedKeyUsageExtension(
             OidCollection usages,
             bool critical,
-            byte[] expectedDer)
-        {
+            byte[] expectedDer
+        ) {
             X509EnhancedKeyUsageExtension ext = new X509EnhancedKeyUsageExtension(usages, critical);
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);
@@ -517,8 +584,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509SubjectKeyIdentifierHashAlgorithm algorithm,
             bool critical,
             byte[] expectedDer,
-            string expectedIdentifier)
-        {
+            string expectedIdentifier
+        ) {
             PublicKey pk;
 
             using (var cert = new X509Certificate2(certBytes))
@@ -526,8 +593,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 pk = cert.PublicKey;
             }
 
-            X509SubjectKeyIdentifierExtension ext =
-                new X509SubjectKeyIdentifierExtension(pk, algorithm, critical);
+            X509SubjectKeyIdentifierExtension ext = new X509SubjectKeyIdentifierExtension(
+                pk,
+                algorithm,
+                critical
+            );
 
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);

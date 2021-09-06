@@ -11,9 +11,13 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         public abstract IReadOnlyList<string> ParseTypeParameters(string typeName);
 
-        public abstract TypeNameRewriter CreateGenericTypeRewriter(Dictionary<string, string> bindings);
+        public abstract TypeNameRewriter CreateGenericTypeRewriter(
+            Dictionary<string, string> bindings
+        );
 
-        public abstract TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(ICollection<string> ignore);
+        public abstract TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(
+            ICollection<string> ignore
+        );
 
         public abstract bool IsLambda(string expression);
     }

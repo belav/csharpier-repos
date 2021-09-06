@@ -14,15 +14,15 @@ namespace System.Data
         Min = FunctionId.Min,
         Max = FunctionId.Max,
         Count = FunctionId.Count,
-        StDev = FunctionId.StDev,   // Statistical standard deviation
-        Var = FunctionId.Var,       // Statistical variance
+        StDev = FunctionId.StDev, // Statistical standard deviation
+        Var = FunctionId.Var, // Statistical variance
     }
 
     internal sealed class AggregateNode : ExpressionNode
     {
         private readonly AggregateType _type;
         private readonly Aggregate _aggregate;
-        private readonly bool _local;     // set to true if the aggregate calculated locally (for the current table)
+        private readonly bool _local; // set to true if the aggregate calculated locally (for the current table)
 
         private readonly string? _relationName;
         private readonly string _columnName;
@@ -33,12 +33,19 @@ namespace System.Data
         private DataColumn? _column;
         private DataRelation? _relation;
 
-        internal AggregateNode(DataTable? table, FunctionId aggregateType, string columnName) :
-            this(table, aggregateType, columnName, true, null)
-        {
-        }
+        internal AggregateNode(
+            DataTable? table,
+            FunctionId aggregateType,
+            string columnName
+        ) : this(table, aggregateType, columnName, true, null) { }
 
-        internal AggregateNode(DataTable? table, FunctionId aggregateType, string columnName, bool local, string? relationName) : base(table)
+        internal AggregateNode(
+            DataTable? table,
+            FunctionId aggregateType,
+            string columnName,
+            bool local,
+            string? relationName
+        ) : base(table)
         {
             Debug.Assert(columnName != null, "Invalid parameter column name (null).");
             _aggregate = (Aggregate)(int)aggregateType;
@@ -204,8 +211,10 @@ namespace System.Data
                     Debug.Assert(DataRowVersion.Original == version, "wrong version");
                     version = DataRowVersion.Original;
                 }
-                else if ((DataRowAction.Rollback == rows[i]._action) && (rows[i].RowState == DataRowState.Added))
-                {
+                else if (
+                    (DataRowAction.Rollback == rows[i]._action)
+                    && (rows[i].RowState == DataRowState.Added)
+                ) {
                     continue;
                 }
                 if (version == DataRowVersion.Original && rows[i]._oldRecord == -1)

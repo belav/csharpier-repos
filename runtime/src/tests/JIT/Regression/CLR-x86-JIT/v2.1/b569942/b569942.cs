@@ -14,16 +14,16 @@ internal class TEST
         try
         {
             goto LB1;
-        LB7:
+            LB7:
             goto LB4;
-        LB1:
+            LB1:
             SSS = 0;
             goto LB9;
-        LB3:
+            LB3:
             goto LB4;
-        LB4:
+            LB4:
             goto LB13;
-        LB9:
+            LB9:
             switch (SSS)
             {
                 case 0:
@@ -35,10 +35,9 @@ internal class TEST
             }
             goto LB13;
         }
-        finally
-        {
-        }
-    LB13:
+
+        finally { }
+        LB13:
         System.Console.WriteLine("TEST SUCCESS");
     }
 }

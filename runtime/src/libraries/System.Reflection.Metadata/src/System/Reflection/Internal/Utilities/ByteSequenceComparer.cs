@@ -8,13 +8,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.Internal
 {
-    internal sealed class ByteSequenceComparer : IEqualityComparer<byte[]>, IEqualityComparer<ImmutableArray<byte>>
+    internal sealed class ByteSequenceComparer
+        : IEqualityComparer<byte[]>,
+          IEqualityComparer<ImmutableArray<byte>>
     {
         internal static readonly ByteSequenceComparer Instance = new ByteSequenceComparer();
 
-        private ByteSequenceComparer()
-        {
-        }
+        private ByteSequenceComparer() { }
 
         internal static bool Equals(ImmutableArray<byte> x, ImmutableArray<byte> y)
         {
@@ -39,8 +39,13 @@ namespace System.Reflection.Internal
             return true;
         }
 
-        internal static bool Equals(byte[] left, int leftStart, byte[] right, int rightStart, int length)
-        {
+        internal static bool Equals(
+            byte[] left,
+            int leftStart,
+            byte[] right,
+            int rightStart,
+            int length
+        ) {
             if (left == null || right == null)
             {
                 return ReferenceEquals(left, right);
@@ -109,8 +114,10 @@ namespace System.Reflection.Internal
             return GetHashCode(x);
         }
 
-        bool IEqualityComparer<ImmutableArray<byte>>.Equals(ImmutableArray<byte> x, ImmutableArray<byte> y)
-        {
+        bool IEqualityComparer<ImmutableArray<byte>>.Equals(
+            ImmutableArray<byte> x,
+            ImmutableArray<byte> y
+        ) {
             return Equals(x, y);
         }
 

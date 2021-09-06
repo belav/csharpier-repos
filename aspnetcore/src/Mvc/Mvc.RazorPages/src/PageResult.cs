@@ -44,13 +44,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         {
             if (!(context is PageContext pageContext))
             {
-                throw new ArgumentException(Resources.FormatPageViewResult_ContextIsInvalid(
-                    nameof(context),
-                    nameof(Page),
-                    nameof(PageResult)));
+                throw new ArgumentException(
+                    Resources.FormatPageViewResult_ContextIsInvalid(
+                        nameof(context),
+                        nameof(Page),
+                        nameof(PageResult)
+                    )
+                );
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<PageResultExecutor>();
+            var executor =
+                context.HttpContext.RequestServices.GetRequiredService<PageResultExecutor>();
             return executor.ExecuteAsync(pageContext, this);
         }
     }

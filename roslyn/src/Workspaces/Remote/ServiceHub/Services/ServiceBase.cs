@@ -46,8 +46,11 @@ namespace Microsoft.CodeAnalysis.Remote
             WatsonReporter.InitializeFatalErrorHandlers();
         }
 
-        protected ServiceBase(IServiceProvider serviceProvider, Stream stream, IEnumerable<JsonConverter>? jsonConverters = null)
-        {
+        protected ServiceBase(
+            IServiceProvider serviceProvider,
+            Stream stream,
+            IEnumerable<JsonConverter>? jsonConverters = null
+        ) {
             InstanceId = Interlocked.Add(ref s_instanceId, 1);
 
             TestData = (RemoteHostTestData?)serviceProvider.GetService(typeof(RemoteHostTestData));
@@ -82,51 +85,77 @@ namespace Microsoft.CodeAnalysis.Remote
 
         protected string DebugInstanceString => $"{GetType()} ({InstanceId})";
 
-        protected void Log(TraceEventType errorType, string message)
-            => Logger.TraceEvent(errorType, 0, $"{DebugInstanceString}: {message}");
+        protected void Log(TraceEventType errorType, string message) =>
+            Logger.TraceEvent(errorType, 0, $"{DebugInstanceString}: {message}");
 
-        public RemoteWorkspace GetWorkspace()
-            => WorkspaceManager.GetWorkspace();
+        public RemoteWorkspace GetWorkspace() => WorkspaceManager.GetWorkspace();
 
-        protected Task<Solution> GetSolutionAsync(PinnedSolutionInfo solutionInfo, CancellationToken cancellationToken)
-        {
+        protected Task<Solution> GetSolutionAsync(
+            PinnedSolutionInfo solutionInfo,
+            CancellationToken cancellationToken
+        ) {
             var workspace = GetWorkspace();
-            var assetProvider = workspace.CreateAssetProvider(solutionInfo, WorkspaceManager.SolutionAssetCache, WorkspaceManager.GetAssetSource());
-            return workspace.GetSolutionAsync(assetProvider, solutionInfo.SolutionChecksum, solutionInfo.FromPrimaryBranch, solutionInfo.WorkspaceVersion, cancellationToken).AsTask();
+            var assetProvider = workspace.CreateAssetProvider(
+                solutionInfo,
+                WorkspaceManager.SolutionAssetCache,
+                WorkspaceManager.GetAssetSource()
+            );
+            return workspace.GetSolutionAsync(
+                    assetProvider,
+                    solutionInfo.SolutionChecksum,
+                    solutionInfo.FromPrimaryBranch,
+                    solutionInfo.WorkspaceVersion,
+                    cancellationToken
+                )
+                .AsTask();
         }
 
-        internal Task<Solution> GetSolutionImplAsync(JObject solutionInfo, CancellationToken cancellationToken)
-        {
+        internal Task<Solution> GetSolutionImplAsync(
+            JObject solutionInfo,
+            CancellationToken cancellationToken
+        ) {
             var reader = solutionInfo.CreateReader();
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings() { Converters = new[] { AggregateJsonConverter.Instance }, DateParseHandling = DateParseHandling.None });
+            var serializer = JsonSerializer.Create(
+                new JsonSerializerSettings()
+                {
+                    Converters = new[] { AggregateJsonConverter.Instance },
+                    DateParseHandling = DateParseHandling.None
+                }
+            );
             var pinnedSolutionInfo = serializer.Deserialize<PinnedSolutionInfo>(reader);
 
             return GetSolutionAsync(pinnedSolutionInfo, cancellationToken);
         }
 
-        protected async Task<T> RunServiceAsync<T>(Func<Task<T>> callAsync, CancellationToken cancellationToken)
-        {
+        protected async Task<T> RunServiceAsync<T>(
+            Func<Task<T>> callAsync,
+            CancellationToken cancellationToken
+        ) {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
 
             try
             {
                 return await callAsync().ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        protected async Task RunServiceAsync(Func<Task> callAsync, CancellationToken cancellationToken)
-        {
+        protected async Task RunServiceAsync(
+            Func<Task> callAsync,
+            CancellationToken cancellationToken
+        ) {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
 
             try
             {
                 await callAsync().ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
@@ -140,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 return call();
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
@@ -154,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 call();
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }

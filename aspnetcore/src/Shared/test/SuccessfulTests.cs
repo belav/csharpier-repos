@@ -16,9 +16,7 @@ namespace AlwaysTestTests
         /// </summary>
         [Fact]
         [QuarantinedTest("No issue")]
-        public void GuaranteedQuarantinedTest()
-        {
-        }
+        public void GuaranteedQuarantinedTest() { }
 
         /// <summary>
         /// Test that executes in unquarantined runs and always succeeds.
@@ -32,8 +30,6 @@ namespace AlwaysTestTests
         /// </remarks>
         [Fact]
         [Trait("Quarantined", "false")]
-        public void GuaranteedUnquarantinedTest()
-        {
-        }
+        public void GuaranteedUnquarantinedTest() { }
     }
 }

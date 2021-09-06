@@ -12,11 +12,14 @@ using Xunit;
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
     // Functional tests for MVC's scenarios with LinkParser
-    public class LinkParserTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
+    public class LinkParserTest
+        : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
     {
         public LinkParserTest(MvcTestFixture<RoutingWebSite.StartupForLinkGenerator> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -24,7 +27,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             builder.UseStartup<RoutingWebSite.StartupForLinkGenerator>();
 
         public HttpClient Client { get; }
-        
+
         [Fact]
         public async Task ParsePathByEndpoint_CanParsedWithDefaultRoute()
         {
@@ -36,21 +39,22 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Collection(
                 values.Properties().OrderBy(p => p.Name),
-                p => 
+                p =>
                 {
                     Assert.Equal("action", p.Name);
                     Assert.Equal("Index", p.Value.Value<string>());
                 },
-                p => 
+                p =>
                 {
                     Assert.Equal("controller", p.Name);
                     Assert.Equal("LinkParser", p.Value.Value<string>());
                 },
-                p => 
+                p =>
                 {
                     Assert.Equal("id", p.Name);
                     Assert.Equal("18", p.Value.Value<string>());
-                });
+                }
+            );
         }
 
         [Fact]
@@ -59,7 +63,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             //
             // %2F => /
-            var response = await Client.GetAsync("LinkParser/Another?path=%2Fsome-path%2Fa%2Fb%2Fc");
+            var response = await Client.GetAsync(
+                "LinkParser/Another?path=%2Fsome-path%2Fa%2Fb%2Fc"
+            );
             var values = await response.Content.ReadAsAsync<JObject>();
 
             // Assert
@@ -90,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 {
                     Assert.Equal("z", p.Name);
                     Assert.Equal("c", p.Value.Value<string>());
-                });
+                }
+            );
         }
     }
 }

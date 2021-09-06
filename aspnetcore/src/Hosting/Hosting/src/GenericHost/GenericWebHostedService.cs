@@ -20,17 +20,18 @@ namespace Microsoft.AspNetCore.Hosting
 {
     internal class GenericWebHostService : IHostedService
     {
-        public GenericWebHostService(IOptions<GenericWebHostServiceOptions> options,
-                                     IServer server,
-                                     ILoggerFactory loggerFactory,
-                                     DiagnosticListener diagnosticListener,
-                                     ActivitySource activitySource,
-                                     IHttpContextFactory httpContextFactory,
-                                     IApplicationBuilderFactory applicationBuilderFactory,
-                                     IEnumerable<IStartupFilter> startupFilters,
-                                     IConfiguration configuration,
-                                     IWebHostEnvironment hostingEnvironment)
-        {
+        public GenericWebHostService(
+            IOptions<GenericWebHostServiceOptions> options,
+            IServer server,
+            ILoggerFactory loggerFactory,
+            DiagnosticListener diagnosticListener,
+            ActivitySource activitySource,
+            IHttpContextFactory httpContextFactory,
+            IApplicationBuilderFactory applicationBuilderFactory,
+            IEnumerable<IStartupFilter> startupFilters,
+            IConfiguration configuration,
+            IWebHostEnvironment hostingEnvironment
+        ) {
             Options = options.Value;
             Server = server;
             Logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Hosting.Diagnostics");
@@ -68,7 +69,10 @@ namespace Microsoft.AspNetCore.Hosting
                 var urls = Configuration[WebHostDefaults.ServerUrlsKey];
                 if (!string.IsNullOrEmpty(urls))
                 {
-                    serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(Configuration, WebHostDefaults.PreferHostingUrlsKey);
+                    serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(
+                        Configuration,
+                        WebHostDefaults.PreferHostingUrlsKey
+                    );
 
                     foreach (var value in urls.Split(';', StringSplitOptions.RemoveEmptyEntries))
                     {
@@ -85,7 +89,9 @@ namespace Microsoft.AspNetCore.Hosting
 
                 if (configure == null)
                 {
-                    throw new InvalidOperationException($"No application configured. Please specify an application via IWebHostBuilder.UseStartup, IWebHostBuilder.Configure, or specifying the startup assembly via {nameof(WebHostDefaults.StartupAssemblyKey)} in the web host configuration.");
+                    throw new InvalidOperationException(
+                        $"No application configured. Please specify an application via IWebHostBuilder.UseStartup, IWebHostBuilder.Configure, or specifying the startup assembly via {nameof(WebHostDefaults.StartupAssemblyKey)} in the web host configuration."
+                    );
                 }
 
                 var builder = ApplicationBuilderFactory.CreateBuilder(Server.Features);
@@ -109,12 +115,24 @@ namespace Microsoft.AspNetCore.Hosting
                     throw;
                 }
 
-                var showDetailedErrors = HostingEnvironment.IsDevelopment() || Options.WebHostOptions.DetailedErrors;
+                var showDetailedErrors =
+                    HostingEnvironment.IsDevelopment() || Options.WebHostOptions.DetailedErrors;
 
-                application = ErrorPageBuilder.BuildErrorPageApplication(HostingEnvironment.ContentRootFileProvider, Logger, showDetailedErrors, ex);
+                application = ErrorPageBuilder.BuildErrorPageApplication(
+                    HostingEnvironment.ContentRootFileProvider,
+                    Logger,
+                    showDetailedErrors,
+                    ex
+                );
             }
 
-            var httpApplication = new HostingApplication(application, Logger, DiagnosticListener, ActivitySource, HttpContextFactory);
+            var httpApplication = new HostingApplication(
+                application,
+                Logger,
+                DiagnosticListener,
+                ActivitySource,
+                HttpContextFactory
+            );
 
             await Server.StartAsync(httpApplication, cancellationToken);
 
@@ -149,6 +167,7 @@ namespace Microsoft.AspNetCore.Hosting
             {
                 await Server.StopAsync(cancellationToken);
             }
+
             finally
             {
                 HostingEventSource.Log.HostStop();

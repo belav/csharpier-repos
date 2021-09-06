@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 "\r\n <div>Ignored</div>",
                 SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n"),
                 SyntaxFactory.Token(SyntaxKind.Whitespace, " "),
-                SyntaxFactory.Token(SyntaxKind.OpenAngle, "<"));
+                SyntaxFactory.Token(SyntaxKind.OpenAngle, "<")
+            );
         }
 
         [Fact]
@@ -31,7 +32,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 SyntaxFactory.Token(SyntaxKind.RazorCommentStar, "*"),
                 SyntaxFactory.Token(SyntaxKind.RazorCommentTransition, "@"),
                 SyntaxFactory.Token(SyntaxKind.Whitespace, " "),
-                SyntaxFactory.Token(SyntaxKind.OpenAngle, "<"));
+                SyntaxFactory.Token(SyntaxKind.OpenAngle, "<")
+            );
         }
 
         internal override object CreateTokenizer(ITextDocument source)

@@ -25,13 +25,12 @@ namespace BasicApi.Controllers
         public BasicApiContext DbContext { get; }
 
         [HttpGet("{id}", Name = "FindPetById")]
-        [ProducesResponseType(typeof(Pet),  StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Pet), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pet>> FindById(int id)
         {
-            var pet = await DbContext.Pets
-                .Include(p => p.Category)
+            var pet = await DbContext.Pets.Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.Id == id);
@@ -49,8 +48,7 @@ namespace BasicApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pet>> FindByIdWithoutToken(int id)
         {
-            var pet = await DbContext.Pets
-                .Include(p => p.Category)
+            var pet = await DbContext.Pets.Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.Id == id);
@@ -68,8 +66,7 @@ namespace BasicApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pet>> FindByCategory(int categoryId)
         {
-            var pet = await DbContext.Pets
-                .Include(p => p.Category)
+            var pet = await DbContext.Pets.Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.Category != null && p.Category.Id == categoryId);
@@ -87,8 +84,7 @@ namespace BasicApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pet>> FindByStatus(string status)
         {
-            var pet = await DbContext.Pets
-                .Include(p => p.Category)
+            var pet = await DbContext.Pets.Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.Status == status);
@@ -106,8 +102,7 @@ namespace BasicApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pet>> FindByTags(string[] tags)
         {
-            var pet = await DbContext.Pets
-                .Include(p => p.Category)
+            var pet = await DbContext.Pets.Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.Tags.Any(t => tags.Contains(t.Name)));

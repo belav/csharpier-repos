@@ -52,13 +52,16 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             // if the type is both nullable and an INamedTypeSymbol extract the type argument from the nullable
             // and check if it is of enum type
             if (switchExpressionType != null)
-                switchExpressionType = switchExpressionType.IsNullable(out var underlyingType) ? underlyingType : switchExpressionType;
+                switchExpressionType = switchExpressionType.IsNullable(out var underlyingType)
+                    ? underlyingType
+                    : switchExpressionType;
 
             if (switchExpressionType?.TypeKind == TypeKind.Enum)
             {
-                if (!TryGetAllEnumMembers(switchExpressionType, enumMembers) ||
-                    !TryRemoveExistingEnumMembers(switchStatement, enumMembers))
-                {
+                if (
+                    !TryGetAllEnumMembers(switchExpressionType, enumMembers)
+                    || !TryRemoveExistingEnumMembers(switchStatement, enumMembers)
+                ) {
                     return SpecializedCollections.EmptyCollection<ISymbol>();
                 }
             }
@@ -66,8 +69,10 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             return enumMembers.Values;
         }
 
-        private static bool TryRemoveExistingEnumMembers(ISwitchOperation switchStatement, Dictionary<long, ISymbol> enumValues)
-        {
+        private static bool TryRemoveExistingEnumMembers(
+            ISwitchOperation switchStatement,
+            Dictionary<long, ISymbol> enumValues
+        ) {
             foreach (var switchCase in switchStatement.Cases)
             {
                 foreach (var clause in switchCase.Clauses)
@@ -90,14 +95,13 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                             var value = ((ISingleValueCaseClauseOperation)clause).Value;
                             if (value == null || !value.ConstantValue.HasValue)
                             {
-                                // We had a case which didn't resolve properly.  
+                                // We had a case which didn't resolve properly.
                                 // Assume the switch is complete.
                                 return false;
                             }
 
                             var caseValue = IntegerUtilities.ToInt64(value.ConstantValue.Value);
                             enumValues.Remove(caseValue);
-
                             break;
                     }
                 }
@@ -108,13 +112,15 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
 
         public static bool TryGetAllEnumMembers(
             ITypeSymbol enumType,
-            Dictionary<long, ISymbol> enumValues)
-        {
+            Dictionary<long, ISymbol> enumValues
+        ) {
             foreach (var member in enumType.GetMembers())
             {
                 // skip `.ctor` and `__value`
-                if (!(member is IFieldSymbol fieldSymbol) || fieldSymbol.Type.SpecialType != SpecialType.None)
-                {
+                if (
+                    !(member is IFieldSymbol fieldSymbol)
+                    || fieldSymbol.Type.SpecialType != SpecialType.None
+                ) {
                     continue;
                 }
 

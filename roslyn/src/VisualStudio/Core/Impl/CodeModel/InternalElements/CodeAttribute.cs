@@ -15,15 +15,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeAttribute2))]
-    public sealed class CodeAttribute : AbstractCodeElement, ICodeElementContainer<CodeAttributeArgument>, EnvDTE.CodeAttribute, EnvDTE80.CodeAttribute2
+    public sealed class CodeAttribute
+        : AbstractCodeElement,
+          ICodeElementContainer<CodeAttributeArgument>,
+          EnvDTE.CodeAttribute,
+          EnvDTE80.CodeAttribute2
     {
         internal static EnvDTE.CodeAttribute Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             AbstractCodeElement parent,
             string name,
-            int ordinal)
-        {
+            int ordinal
+        ) {
             var newElement = new CodeAttribute(state, fileCodeModel, parent, name, ordinal);
             return (EnvDTE.CodeAttribute)ComAggregate.CreateAggregatedObject(newElement);
         }
@@ -33,35 +37,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         private string _name;
         private readonly int _ordinal;
 
-        private CodeAttribute(CodeModelState state, FileCodeModel fileCodeModel, AbstractCodeElement parent, string name, int ordinal)
-            : base(state, fileCodeModel)
+        private CodeAttribute(
+            CodeModelState state,
+            FileCodeModel fileCodeModel,
+            AbstractCodeElement parent,
+            string name,
+            int ordinal
+        ) : base(state, fileCodeModel)
         {
             _parent = parent;
             _name = name;
             _ordinal = ordinal;
         }
 
-        EnvDTE.CodeElements ICodeElementContainer<CodeAttributeArgument>.GetCollection()
-            => this.Arguments;
+        EnvDTE.CodeElements ICodeElementContainer<CodeAttributeArgument>.GetCollection() =>
+            this.Arguments;
 
-        protected override EnvDTE.CodeElements GetCollection()
-            => GetCollection<CodeAttribute>(Parent);
+        protected override EnvDTE.CodeElements GetCollection() =>
+            GetCollection<CodeAttribute>(Parent);
 
         internal override bool TryLookupNode(out SyntaxNode node)
         {
             node = null;
 
-            var parentNode = _parent != null
-                ? _parent.LookupNode()
-                : FileCodeModel.GetSyntaxRoot();
+            var parentNode = _parent != null ? _parent.LookupNode() : FileCodeModel.GetSyntaxRoot();
 
             if (parentNode == null)
             {
                 return false;
             }
 
-            if (!CodeModelService.TryGetAttributeNode(parentNode, _name, _ordinal, out var attributeNode))
-            {
+            if (
+                !CodeModelService.TryGetAttributeNode(
+                    parentNode,
+                    _name,
+                    _ordinal,
+                    out var attributeNode
+                )
+            ) {
                 return false;
             }
 
@@ -97,36 +110,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public string Target
         {
-            get
-            {
-                return CodeModelService.GetAttributeTarget(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateAttributeTarget, value);
-            }
+            get { return CodeModelService.GetAttributeTarget(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateAttributeTarget, value); }
         }
 
         public string Value
         {
-            get
-            {
-                return CodeModelService.GetAttributeValue(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateAttributeValue, value);
-            }
+            get { return CodeModelService.GetAttributeValue(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateAttributeValue, value); }
         }
 
-        public EnvDTE80.CodeAttributeArgument AddArgument(string value, object nameObj, object position)
-        {
+        public EnvDTE80.CodeAttributeArgument AddArgument(
+            string value,
+            object nameObj,
+            object position
+        ) {
             string name;
 
-            if (nameObj == Type.Missing ||
-                nameObj == null)
+            if (nameObj == Type.Missing || nameObj == null)
             {
                 name = null;
             }
@@ -139,13 +140,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 throw Exceptions.ThrowEInvalidArg();
             }
 
-            return FileCodeModel.EnsureEditor(() =>
-            {
-                return FileCodeModel.AddAttributeArgument(LookupNode(), name, value, position);
-            });
+            return FileCodeModel.EnsureEditor(
+                () =>
+                {
+                    return FileCodeModel.AddAttributeArgument(LookupNode(), name, value, position);
+                }
+            );
         }
 
-        public new void Delete()
-            => base.Delete();
+        public new void Delete() => base.Delete();
     }
 }

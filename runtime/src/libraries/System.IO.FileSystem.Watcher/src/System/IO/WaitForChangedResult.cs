@@ -5,16 +5,24 @@ namespace System.IO
 {
     public struct WaitForChangedResult
     {
-        internal WaitForChangedResult(WatcherChangeTypes changeType, string? name, string? oldName, bool timedOut)
-        {
+        internal WaitForChangedResult(
+            WatcherChangeTypes changeType,
+            string? name,
+            string? oldName,
+            bool timedOut
+        ) {
             ChangeType = changeType;
             Name = name;
             OldName = oldName;
             TimedOut = timedOut;
         }
 
-        internal static readonly WaitForChangedResult TimedOutResult =
-            new WaitForChangedResult(changeType: 0, name: null, oldName: null, timedOut: true);
+        internal static readonly WaitForChangedResult TimedOutResult = new WaitForChangedResult(
+            changeType: 0,
+            name: null,
+            oldName: null,
+            timedOut: true
+        );
 
         public WatcherChangeTypes ChangeType { get; set; }
         public string? Name { get; set; }

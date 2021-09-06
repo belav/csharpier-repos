@@ -16,19 +16,27 @@ internal static partial class Interop
         private static extern int AppleCryptoNative_X509StoreAddCertificate(
             SafeKeychainItemHandle cert,
             SafeKeychainHandle keychain,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_X509StoreRemoveCertificate(
             SafeKeychainItemHandle cert,
             SafeKeychainHandle keychain,
             bool isReadOnlyMode,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
-        internal static void X509StoreAddCertificate(SafeKeychainItemHandle certOrIdentity, SafeKeychainHandle keychain)
-        {
+        internal static void X509StoreAddCertificate(
+            SafeKeychainItemHandle certOrIdentity,
+            SafeKeychainHandle keychain
+        ) {
             int osStatus;
-            int ret = AppleCryptoNative_X509StoreAddCertificate(certOrIdentity, keychain, out osStatus);
+            int ret = AppleCryptoNative_X509StoreAddCertificate(
+                certOrIdentity,
+                keychain,
+                out osStatus
+            );
 
             if (ret == 0)
             {
@@ -37,15 +45,25 @@ internal static partial class Interop
 
             if (ret != 1)
             {
-                Debug.Fail($"Unexpected result from AppleCryptoNative_X509StoreAddCertificate: {ret}");
+                Debug.Fail(
+                    $"Unexpected result from AppleCryptoNative_X509StoreAddCertificate: {ret}"
+                );
                 throw new CryptographicException();
             }
         }
 
-        internal static void X509StoreRemoveCertificate(SafeKeychainItemHandle certHandle, SafeKeychainHandle keychain, bool isReadOnlyMode)
-        {
+        internal static void X509StoreRemoveCertificate(
+            SafeKeychainItemHandle certHandle,
+            SafeKeychainHandle keychain,
+            bool isReadOnlyMode
+        ) {
             int osStatus;
-            int ret = AppleCryptoNative_X509StoreRemoveCertificate(certHandle, keychain, isReadOnlyMode, out osStatus);
+            int ret = AppleCryptoNative_X509StoreRemoveCertificate(
+                certHandle,
+                keychain,
+                isReadOnlyMode,
+                out osStatus
+            );
 
             if (ret == 0)
             {
@@ -62,13 +80,19 @@ internal static partial class Interop
                 case SuccessOrNoMatch:
                     break;
                 case UserTrustExists:
-                    throw new CryptographicException(SR.Cryptography_X509Store_WouldModifyUserTrust);
+                    throw new CryptographicException(
+                        SR.Cryptography_X509Store_WouldModifyUserTrust
+                    );
                 case AdminTrustExists:
-                    throw new CryptographicException(SR.Cryptography_X509Store_WouldModifyAdminTrust);
+                    throw new CryptographicException(
+                        SR.Cryptography_X509Store_WouldModifyAdminTrust
+                    );
                 case ReadOnlyDelete:
                     throw new CryptographicException(SR.Cryptography_X509_StoreReadOnly);
                 default:
-                    Debug.Fail($"Unexpected result from AppleCryptoNative_X509StoreRemoveCertificate: {ret}");
+                    Debug.Fail(
+                        $"Unexpected result from AppleCryptoNative_X509StoreRemoveCertificate: {ret}"
+                    );
                     throw new CryptographicException();
             }
         }

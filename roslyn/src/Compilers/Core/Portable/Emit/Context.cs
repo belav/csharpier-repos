@@ -20,8 +20,13 @@ namespace Microsoft.CodeAnalysis.Emit
         public bool MetadataOnly => (_flags & Flags.MetadataOnly) != 0;
         public bool IsRefAssembly => MetadataOnly && !IncludePrivateMembers;
 
-        public EmitContext(CommonPEModuleBuilder module, SyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics, bool metadataOnly, bool includePrivateMembers)
-        {
+        public EmitContext(
+            CommonPEModuleBuilder module,
+            SyntaxNode syntaxNodeOpt,
+            DiagnosticBag diagnostics,
+            bool metadataOnly,
+            bool includePrivateMembers
+        ) {
             Debug.Assert(module != null);
             Debug.Assert(diagnostics != null);
             Debug.Assert(includePrivateMembers || metadataOnly);

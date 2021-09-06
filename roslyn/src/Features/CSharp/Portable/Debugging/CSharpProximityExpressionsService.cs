@@ -41,37 +41,48 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
     internal partial class CSharpProximityExpressionsService : IProximityExpressionsService
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpProximityExpressionsService()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpProximityExpressionsService() { }
 
         public async Task<bool> IsValidAsync(
             Document document,
             int position,
             string expressionValue,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var expression = SyntaxFactory.ParseExpression(expressionValue);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
-            if (token.Kind() == SyntaxKind.CloseBraceToken && token.GetPreviousToken().Kind() != SyntaxKind.None)
-            {
+            if (
+                token.Kind() == SyntaxKind.CloseBraceToken
+                && token.GetPreviousToken().Kind() != SyntaxKind.None
+            ) {
                 token = token.GetPreviousToken();
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var info = semanticModel.GetSpeculativeSymbolInfo(token.SpanStart, expression, SpeculativeBindingOption.BindAsExpression);
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var info = semanticModel.GetSpeculativeSymbolInfo(
+                token.SpanStart,
+                expression,
+                SpeculativeBindingOption.BindAsExpression
+            );
             if (info.Symbol == null)
             {
                 return false;
             }
 
             // We seem to have bound successfully.  However, if it bound to a local, then make
-            // sure that that local isn't after the statement that we're currently looking at.  
+            // sure that that local isn't after the statement that we're currently looking at.
             if (info.Symbol.Kind == SymbolKind.Local)
             {
-                var statement = info.Symbol.Locations.First().FindToken(cancellationToken).GetAncestor<StatementSyntax>();
+                var statement = info.Symbol.Locations.First()
+                    .FindToken(cancellationToken)
+                    .GetAncestor<StatementSyntax>();
                 if (statement != null && position < statement.SpanStart)
                 {
                     return false;
@@ -87,11 +98,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
         public async Task<IList<string>> GetProximityExpressionsAsync(
             Document document,
             int position,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             try
             {
-                var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document.GetSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return GetProximityExpressions(tree, position, cancellationToken);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
@@ -100,18 +112,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             }
         }
 
-        public static IList<string> GetProximityExpressions(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
-            => new Worker(syntaxTree, position).Do(cancellationToken);
+        public static IList<string> GetProximityExpressions(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        ) => new Worker(syntaxTree, position).Do(cancellationToken);
 
         [Obsolete($"Use {nameof(GetProximityExpressions)}.")]
-        private static IList<string> Do(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
-            => new Worker(syntaxTree, position).Do(cancellationToken);
+        private static IList<string> Do(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        ) => new Worker(syntaxTree, position).Do(cancellationToken);
 
         private static void AddRelevantExpressions(
             StatementSyntax statement,
             IList<string> expressions,
-            bool includeDeclarations)
-        {
+            bool includeDeclarations
+        ) {
             new RelevantExpressionsCollector(includeDeclarations, expressions).Visit(statement);
         }
     }

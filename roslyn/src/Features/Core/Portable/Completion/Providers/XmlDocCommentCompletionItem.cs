@@ -17,12 +17,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         public static CompletionItem Create(
             string displayText,
-            string beforeCaretText, string afterCaretText,
-            string beforeCaretTextOnSpace, string afterCaretTextOnSpace,
-            CompletionItemRules rules)
-        {
-            var props = ImmutableDictionary<string, string>.Empty
-                .Add(BeforeCaretText, beforeCaretText)
+            string beforeCaretText,
+            string afterCaretText,
+            string beforeCaretTextOnSpace,
+            string afterCaretTextOnSpace,
+            CompletionItemRules rules
+        ) {
+            var props = ImmutableDictionary<string, string>.Empty.Add(
+                    BeforeCaretText,
+                    beforeCaretText
+                )
                 .Add(AfterCaretText, afterCaretText)
                 .Add(BeforeCaretTextOnSpace, beforeCaretTextOnSpace)
                 .Add(AfterCaretTextOnSpace, afterCaretTextOnSpace);
@@ -32,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 displayTextSuffix: "",
                 glyph: Glyph.Keyword,
                 properties: props,
-                rules: rules);
+                rules: rules
+            );
         }
 
         public static string GetBeforeCaretText(CompletionItem item)
@@ -47,13 +52,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return afterCaretText;
         }
 
-        public static bool TryGetInsertionTextOnSpace(CompletionItem item,
-            out string beforeCaretText, out string afterCaretText)
-        {
-            return
-                item.Properties.TryGetValue(BeforeCaretTextOnSpace, out beforeCaretText) &
-                item.Properties.TryGetValue(AfterCaretTextOnSpace, out afterCaretText) &&
-                (!string.IsNullOrEmpty(beforeCaretText) || !string.IsNullOrEmpty(afterCaretText));
+        public static bool TryGetInsertionTextOnSpace(
+            CompletionItem item,
+            out string beforeCaretText,
+            out string afterCaretText
+        ) {
+            return item.Properties.TryGetValue(BeforeCaretTextOnSpace, out beforeCaretText)
+                    & item.Properties.TryGetValue(AfterCaretTextOnSpace, out afterCaretText)
+                && (
+                    !string.IsNullOrEmpty(beforeCaretText) || !string.IsNullOrEmpty(afterCaretText)
+                );
         }
     }
 }

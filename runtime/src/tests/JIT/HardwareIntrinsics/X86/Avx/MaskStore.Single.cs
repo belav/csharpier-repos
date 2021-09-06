@@ -100,10 +100,24 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref testStruct._fld1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
-                for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref testStruct._fld2), ref Unsafe.As<Single, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Single>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Single, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Single>>()
+                );
+                for (var i = 0; i < Op2ElementCount; i++)
+                {
+                    _data2[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Single>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<Single, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Single>>()
+                );
 
                 return testStruct;
             }
@@ -117,9 +131,12 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
-        private static readonly int Op2ElementCount = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
+        private static readonly int Op2ElementCount =
+            Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
 
         private static Single[] _data1 = new Single[Op1ElementCount];
         private static Single[] _data2 = new Single[Op2ElementCount];
@@ -134,24 +151,63 @@ namespace JIT.HardwareIntrinsics.X86
 
         static StoreBinaryOpTest__MaskStoreSingle()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref _clsVar1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref _clsVar2), ref Unsafe.As<Single, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Single>, byte>(ref _clsVar1),
+                ref Unsafe.As<Single, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Single>, byte>(ref _clsVar2),
+                ref Unsafe.As<Single, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
         }
 
         public StoreBinaryOpTest__MaskStoreSingle()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref _fld1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref _fld2), ref Unsafe.As<Single, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Single>, byte>(ref _fld1),
+                ref Unsafe.As<Single, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Single>, byte>(ref _fld2),
+                ref Unsafe.As<Single, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-            _dataTable = new SimpleBinaryOpTest__DataTable<Single, Single, Single>(_data1, _data2, new Single[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSingle();
+            }
+            _dataTable = new SimpleBinaryOpTest__DataTable<Single, Single, Single>(
+                _data1,
+                _data2,
+                new Single[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Avx.IsSupported;
@@ -201,12 +257,24 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(Avx).GetMethod(nameof(Avx.MaskStore), new Type[] { typeof(Single*), typeof(Vector256<Single>), typeof(Vector256<Single>) })
-                         .Invoke(null, new object[] {
-                            Pointer.Box(_dataTable.outArrayPtr, typeof(Single*)),
-                            Unsafe.Read<Vector256<Single>>(_dataTable.inArray1Ptr),
-                            Unsafe.Read<Vector256<Single>>(_dataTable.inArray2Ptr)
-                         });
+            typeof(Avx).GetMethod(
+                    nameof(Avx.MaskStore),
+                    new Type[]
+                    {
+                        typeof(Single*),
+                        typeof(Vector256<Single>),
+                        typeof(Vector256<Single>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Single*)),
+                        Unsafe.Read<Vector256<Single>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector256<Single>>(_dataTable.inArray2Ptr)
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
         }
@@ -215,12 +283,24 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(Avx).GetMethod(nameof(Avx.MaskStore), new Type[] { typeof(Single*), typeof(Vector256<Single>), typeof(Vector256<Single>) })
-                         .Invoke(null, new object[] {
-                            Pointer.Box(_dataTable.outArrayPtr, typeof(Single*)),
-                            Avx.LoadVector256((Single*)(_dataTable.inArray1Ptr)),
-                            Avx.LoadVector256((Single*)(_dataTable.inArray2Ptr))
-                         });
+            typeof(Avx).GetMethod(
+                    nameof(Avx.MaskStore),
+                    new Type[]
+                    {
+                        typeof(Single*),
+                        typeof(Vector256<Single>),
+                        typeof(Vector256<Single>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Single*)),
+                        Avx.LoadVector256((Single*)(_dataTable.inArray1Ptr)),
+                        Avx.LoadVector256((Single*)(_dataTable.inArray2Ptr))
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
         }
@@ -229,12 +309,24 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            typeof(Avx).GetMethod(nameof(Avx.MaskStore), new Type[] { typeof(Single*), typeof(Vector256<Single>), typeof(Vector256<Single>) })
-                         .Invoke(null, new object[] {
-                            Pointer.Box(_dataTable.outArrayPtr, typeof(Single*)),
-                            Avx.LoadAlignedVector256((Single*)(_dataTable.inArray1Ptr)),
-                            Avx.LoadAlignedVector256((Single*)(_dataTable.inArray2Ptr))
-                         });
+            typeof(Avx).GetMethod(
+                    nameof(Avx.MaskStore),
+                    new Type[]
+                    {
+                        typeof(Single*),
+                        typeof(Vector256<Single>),
+                        typeof(Vector256<Single>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Single*)),
+                        Avx.LoadAlignedVector256((Single*)(_dataTable.inArray1Ptr)),
+                        Avx.LoadAlignedVector256((Single*)(_dataTable.inArray2Ptr))
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
         }
@@ -243,11 +335,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            Avx.MaskStore(
-                (Single*)_dataTable.outArrayPtr,
-                _clsVar1,
-                _clsVar2
-            );
+            Avx.MaskStore((Single*)_dataTable.outArrayPtr, _clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, _dataTable.outArrayPtr);
         }
@@ -342,46 +430,86 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector256<Single> left, Vector256<Single> right, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector256<Single> left,
+            Vector256<Single> right,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), left);
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray2[0]), right);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
 
             ValidateResult(inArray1, inArray2, outArray, method);
         }
 
-        private void ValidateResult(void* left, void* right, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* left,
+            void* right,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(left), (uint)Unsafe.SizeOf<Vector256<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray2[0]), ref Unsafe.AsRef<byte>(right), (uint)Unsafe.SizeOf<Vector256<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(left),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray2[0]),
+                ref Unsafe.AsRef<byte>(right),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
 
             ValidateResult(inArray1, inArray2, outArray, method);
         }
 
-        private void ValidateResult(Single[] left, Single[] right, Single[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Single[] left,
+            Single[] right,
+            Single[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
-            if (BitConverter.SingleToInt32Bits(result[0]) != BitConverter.SingleToInt32Bits((BitConverter.SingleToInt32Bits(left[0]) < 0) ? right[0] : BitConverter.SingleToInt32Bits(result[0])))
-            {
+            if (
+                BitConverter.SingleToInt32Bits(result[0])
+                != BitConverter.SingleToInt32Bits(
+                    (BitConverter.SingleToInt32Bits(left[0]) < 0)
+                        ? right[0]
+                        : BitConverter.SingleToInt32Bits(result[0])
+                )
+            ) {
                 succeeded = false;
             }
             else
             {
                 for (var i = 1; i < RetElementCount; i++)
                 {
-                    if (BitConverter.SingleToInt32Bits(result[i]) != BitConverter.SingleToInt32Bits((BitConverter.SingleToInt32Bits(left[i]) < 0) ? right[i] : BitConverter.SingleToInt32Bits(result[i])))
-                    {
+                    if (
+                        BitConverter.SingleToInt32Bits(result[i])
+                        != BitConverter.SingleToInt32Bits(
+                            (BitConverter.SingleToInt32Bits(left[i]) < 0)
+                                ? right[i]
+                                : BitConverter.SingleToInt32Bits(result[i])
+                        )
+                    ) {
                         succeeded = false;
                         break;
                     }
@@ -390,10 +518,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Avx)}.{nameof(Avx.MaskStore)}<Single>(Vector256<Single>, Vector256<Single>): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx)}.{nameof(Avx.MaskStore)}<Single>(Vector256<Single>, Vector256<Single>): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -16,10 +16,27 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         // No need to go too deep with these tests, or we're just testing StackExchange.Redis again :). It's the one doing the parsing.
         [Theory]
         [InlineData("testredis.example.com", "testredis.example.com", 0, null, false)]
-        [InlineData("testredis.example.com:6380,ssl=True", "testredis.example.com", 6380, null, true)]
-        [InlineData("testredis.example.com:6380,password=hunter2,ssl=True", "testredis.example.com", 6380, "hunter2", true)]
-        public void AddRedisWithConnectionStringProperlyParsesOptions(string connectionString, string host, int port, string password, bool useSsl)
-        {
+        [InlineData(
+            "testredis.example.com:6380,ssl=True",
+            "testredis.example.com",
+            6380,
+            null,
+            true
+        )]
+        [InlineData(
+            "testredis.example.com:6380,password=hunter2,ssl=True",
+            "testredis.example.com",
+            6380,
+            "hunter2",
+            true
+        )]
+        public void AddRedisWithConnectionStringProperlyParsesOptions(
+            string connectionString,
+            string host,
+            int port,
+            string password,
+            bool useSsl
+        ) {
             var services = new ServiceCollection();
             services.AddSignalR().AddStackExchangeRedis(connectionString);
             var provider = services.BuildServiceProvider();
@@ -28,13 +45,15 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             Assert.NotNull(options.Value);
             Assert.NotNull(options.Value.Configuration);
             Assert.Equal(password, options.Value.Configuration.Password);
-            Assert.Collection(options.Value.Configuration.EndPoints,
+            Assert.Collection(
+                options.Value.Configuration.EndPoints,
                 endpoint =>
                 {
                     var dnsEndpoint = Assert.IsType<DnsEndPoint>(endpoint);
                     Assert.Equal(host, dnsEndpoint.Host);
                     Assert.Equal(port, dnsEndpoint.Port);
-                });
+                }
+            );
             Assert.Equal(useSsl, options.Value.Configuration.Ssl);
         }
     }

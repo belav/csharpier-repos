@@ -12,6 +12,7 @@ internal static partial class Interop
         internal static extern unsafe SocketError getsockname(
             SafeSocketHandle socketHandle,
             byte* socketAddress,
-            int* socketAddressSize);
+            int* socketAddressSize
+        );
     }
 }

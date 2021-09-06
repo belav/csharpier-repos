@@ -25,9 +25,8 @@ namespace System.Web.Http.Cors
         /// </summary>
         /// <param name="httpConfiguration">The <see cref="HttpConfiguration"/>.</param>
         /// <exception cref="System.ArgumentNullException">httpConfiguration</exception>
-        public CorsMessageHandler(HttpConfiguration httpConfiguration) : this(httpConfiguration, false)
-        {
-        }
+        public CorsMessageHandler(HttpConfiguration httpConfiguration)
+            : this(httpConfiguration, false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CorsMessageHandler"/> class.
@@ -54,8 +53,10 @@ namespace System.Web.Http.Cors
         /// <returns>
         /// Returns <see cref="T:System.Threading.Tasks.Task`1" />. The task object representing the asynchronous operation.
         /// </returns>
-        protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected async override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             CorsRequestContext corsRequestContext = request.GetCorsRequestContext();
             if (corsRequestContext != null)
             {
@@ -63,11 +64,19 @@ namespace System.Web.Http.Cors
                 {
                     if (corsRequestContext.IsPreflight)
                     {
-                        return await HandleCorsPreflightRequestAsync(request, corsRequestContext, cancellationToken);
+                        return await HandleCorsPreflightRequestAsync(
+                            request,
+                            corsRequestContext,
+                            cancellationToken
+                        );
                     }
                     else
                     {
-                        return await HandleCorsRequestAsync(request, corsRequestContext, cancellationToken);
+                        return await HandleCorsRequestAsync(
+                            request,
+                            corsRequestContext,
+                            cancellationToken
+                        );
                     }
                 }
                 catch (Exception exception)
@@ -98,8 +107,11 @@ namespace System.Web.Http.Cors
         /// or
         /// corsRequestContext
         /// </exception>
-        public virtual async Task<HttpResponseMessage> HandleCorsRequestAsync(HttpRequestMessage request, CorsRequestContext corsRequestContext, CancellationToken cancellationToken)
-        {
+        public virtual async Task<HttpResponseMessage> HandleCorsRequestAsync(
+            HttpRequestMessage request,
+            CorsRequestContext corsRequestContext,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -137,8 +149,11 @@ namespace System.Web.Http.Cors
         /// or
         /// corsRequestContext
         /// </exception>
-        public virtual async Task<HttpResponseMessage> HandleCorsPreflightRequestAsync(HttpRequestMessage request, CorsRequestContext corsRequestContext, CancellationToken cancellationToken)
-        {
+        public virtual async Task<HttpResponseMessage> HandleCorsPreflightRequestAsync(
+            HttpRequestMessage request,
+            CorsRequestContext corsRequestContext,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -155,15 +170,21 @@ namespace System.Web.Http.Cors
             }
             catch (ArgumentException)
             {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                        SRResources.AccessControlRequestMethodCannotBeNullOrEmpty);
+                return request.CreateErrorResponse(
+                    HttpStatusCode.BadRequest,
+                    SRResources.AccessControlRequestMethodCannotBeNullOrEmpty
+                );
             }
             catch (FormatException)
             {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                    String.Format(CultureInfo.CurrentCulture,
+                return request.CreateErrorResponse(
+                    HttpStatusCode.BadRequest,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         SRResources.InvalidAccessControlRequestMethod,
-                        corsRequestContext.AccessControlRequestMethod));
+                        corsRequestContext.AccessControlRequestMethod
+                    )
+                );
             }
 
             CorsPolicy corsPolicy = await GetCorsPolicyAsync(request, cancellationToken);
@@ -178,9 +199,13 @@ namespace System.Web.Http.Cors
                 }
                 else
                 {
-                    response = result != null ?
-                        request.CreateErrorResponse(HttpStatusCode.BadRequest, String.Join(" | ", result.ErrorMessages)) :
-                        request.CreateResponse(HttpStatusCode.BadRequest);
+                    response =
+                        result != null
+                            ? request.CreateErrorResponse(
+                                  HttpStatusCode.BadRequest,
+                                  String.Join(" | ", result.ErrorMessages)
+                              )
+                            : request.CreateResponse(HttpStatusCode.BadRequest);
                 }
 
                 return response;
@@ -191,9 +216,15 @@ namespace System.Web.Http.Cors
             }
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller owns HttpRequestMessage instance.")]
-        private static HttpResponseMessage HandleException(HttpRequestMessage request, Exception exception)
-        {
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller owns HttpRequestMessage instance."
+        )]
+        private static HttpResponseMessage HandleException(
+            HttpRequestMessage request,
+            Exception exception
+        ) {
             HttpResponseException httpResponseException = exception as HttpResponseException;
 
             if (httpResponseException != null)
@@ -204,20 +235,30 @@ namespace System.Web.Http.Cors
             return request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception);
         }
 
-        private async Task<CorsPolicy> GetCorsPolicyAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        private async Task<CorsPolicy> GetCorsPolicyAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             CorsPolicy corsPolicy = null;
-            ICorsPolicyProviderFactory corsPolicyProviderFactory = _httpConfiguration.GetCorsPolicyProviderFactory();
-            ICorsPolicyProvider corsPolicyProvider = corsPolicyProviderFactory.GetCorsPolicyProvider(request);
+            ICorsPolicyProviderFactory corsPolicyProviderFactory =
+                _httpConfiguration.GetCorsPolicyProviderFactory();
+            ICorsPolicyProvider corsPolicyProvider =
+                corsPolicyProviderFactory.GetCorsPolicyProvider(request);
             if (corsPolicyProvider != null)
             {
-                corsPolicy = await corsPolicyProvider.GetCorsPolicyAsync(request, cancellationToken);
+                corsPolicy = await corsPolicyProvider.GetCorsPolicyAsync(
+                    request,
+                    cancellationToken
+                );
             }
             return corsPolicy;
         }
 
-        private bool TryEvaluateCorsPolicy(CorsRequestContext requestContext, CorsPolicy corsPolicy, out CorsResult corsResult)
-        {
+        private bool TryEvaluateCorsPolicy(
+            CorsRequestContext requestContext,
+            CorsPolicy corsPolicy,
+            out CorsResult corsResult
+        ) {
             ICorsEngine engine = _httpConfiguration.GetCorsEngine();
             corsResult = engine.EvaluatePolicy(requestContext, corsPolicy);
             return corsResult != null && corsResult.IsValid;

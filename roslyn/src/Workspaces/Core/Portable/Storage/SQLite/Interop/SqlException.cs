@@ -10,8 +10,7 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
     {
         public readonly Result Result;
 
-        public SqlException(Result result, string message)
-            : base(message)
+        public SqlException(Result result, string message) : base(message)
         {
             this.Result = result;
         }

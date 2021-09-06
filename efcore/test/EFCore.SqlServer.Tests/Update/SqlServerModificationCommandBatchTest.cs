@@ -18,35 +18,61 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             var typeMapper = new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
             var batch = new SqlServerModificationCommandBatch(
                 new ModificationCommandBatchFactoryDependencies(
                     new RelationalCommandBuilderFactory(
-                        new RelationalCommandBuilderDependencies(
-                            typeMapper)),
+                        new RelationalCommandBuilderDependencies(typeMapper)
+                    ),
                     new SqlServerSqlGenerationHelper(
-                        new RelationalSqlGenerationHelperDependencies()),
+                        new RelationalSqlGenerationHelperDependencies()
+                    ),
                     new SqlServerUpdateSqlGenerator(
                         new UpdateSqlGeneratorDependencies(
                             new SqlServerSqlGenerationHelper(
-                                new RelationalSqlGenerationHelperDependencies()),
-                            typeMapper)),
+                                new RelationalSqlGenerationHelperDependencies()
+                            ),
+                            typeMapper
+                        )
+                    ),
                     new TypedRelationalValueBufferFactoryFactory(
                         new RelationalValueBufferFactoryDependencies(
-                            typeMapper, new CoreSingletonOptions())),
+                            typeMapper,
+                            new CoreSingletonOptions()
+                        )
+                    ),
                     new CurrentDbContext(new FakeDbContext()),
-                    logger),
-                1);
+                    logger
+                ),
+                1
+            );
 
             Assert.True(
                 batch.AddCommand(
-                    new ModificationCommand("T1", null, new ParameterNameGenerator().GenerateNext, false, null)));
+                    new ModificationCommand(
+                        "T1",
+                        null,
+                        new ParameterNameGenerator().GenerateNext,
+                        false,
+                        null
+                    )
+                )
+            );
             Assert.False(
                 batch.AddCommand(
-                    new ModificationCommand("T1", null, new ParameterNameGenerator().GenerateNext, false, null)));
+                    new ModificationCommand(
+                        "T1",
+                        null,
+                        new ParameterNameGenerator().GenerateNext,
+                        false,
+                        null
+                    )
+                )
+            );
         }
 
         private class FakeDbContext : DbContext

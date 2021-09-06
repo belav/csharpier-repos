@@ -17,28 +17,35 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UseInferredMemberName
 {
-    internal abstract class AbstractUseInferredMemberNameCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractUseInferredMemberNameCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
-        protected abstract void LanguageSpecificRemoveSuggestedNode(SyntaxEditor editor, SyntaxNode node);
+        protected abstract void LanguageSpecificRemoveSuggestedNode(
+            SyntaxEditor editor,
+            SyntaxNode node
+        );
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; }
-            = ImmutableArray.Create(IDEDiagnosticIds.UseInferredMemberNameDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.UseInferredMemberNameDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             var root = editor.OriginalRoot;
 
             foreach (var diagnostic in diagnostics)
@@ -52,10 +59,13 @@ namespace Microsoft.CodeAnalysis.UseInferredMemberName
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Use_inferred_member_name, createChangedDocument, AnalyzersResources.Use_inferred_member_name)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                AnalyzersResources.Use_inferred_member_name,
+                createChangedDocument,
+                AnalyzersResources.Use_inferred_member_name
+            ) { }
         }
     }
 }

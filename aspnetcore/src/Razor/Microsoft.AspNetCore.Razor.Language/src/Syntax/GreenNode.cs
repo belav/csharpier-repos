@@ -15,11 +15,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     internal abstract class GreenNode
     {
         private static readonly RazorDiagnostic[] EmptyDiagnostics = Array.Empty<RazorDiagnostic>();
-        private static readonly SyntaxAnnotation[] EmptyAnnotations = Array.Empty<SyntaxAnnotation>();
-        private static readonly ConditionalWeakTable<GreenNode, RazorDiagnostic[]> DiagnosticsTable =
-            new ConditionalWeakTable<GreenNode, RazorDiagnostic[]>();
-        private static readonly ConditionalWeakTable<GreenNode, SyntaxAnnotation[]> AnnotationsTable =
-            new ConditionalWeakTable<GreenNode, SyntaxAnnotation[]>();
+        private static readonly SyntaxAnnotation[] EmptyAnnotations =
+            Array.Empty<SyntaxAnnotation>();
+        private static readonly ConditionalWeakTable<
+            GreenNode,
+            RazorDiagnostic[]
+        > DiagnosticsTable = new ConditionalWeakTable<GreenNode, RazorDiagnostic[]>();
+        private static readonly ConditionalWeakTable<
+            GreenNode,
+            SyntaxAnnotation[]
+        > AnnotationsTable = new ConditionalWeakTable<GreenNode, SyntaxAnnotation[]>();
         private byte _slotCount;
 
         protected GreenNode(SyntaxKind kind)
@@ -27,19 +32,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             Kind = kind;
         }
 
-        protected GreenNode(SyntaxKind kind, int fullWidth)
-            : this(kind)
+        protected GreenNode(SyntaxKind kind, int fullWidth) : this(kind)
         {
             FullWidth = fullWidth;
         }
 
-        protected GreenNode(SyntaxKind kind, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-            : this(kind, 0, diagnostics, annotations)
-        {
-        }
+        protected GreenNode(
+            SyntaxKind kind,
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations
+        ) : this(kind, 0, diagnostics, annotations) { }
 
-        protected GreenNode(SyntaxKind kind, int fullWidth, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-            : this(kind, fullWidth)
+        protected GreenNode(
+            SyntaxKind kind,
+            int fullWidth,
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations
+        ) : this(kind, fullWidth)
         {
             if (diagnostics?.Length > 0)
             {
@@ -53,7 +62,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 {
                     if (annotation == null)
                     {
-                        throw new ArgumentException(nameof(annotations), "Annotation cannot be null");
+                        throw new ArgumentException(
+                            nameof(annotations),
+                            "Annotation cannot be null"
+                        );
                     }
                 }
 
@@ -96,11 +108,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
                 return count;
             }
-
-            protected set
-            {
-                _slotCount = (byte)value;
-            }
+            protected set { _slotCount = (byte)value; }
         }
 
         internal abstract GreenNode GetSlot(int index);
@@ -130,7 +138,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             int i;
             var accumulatedWidth = 0;
-            for (i = 0; ; i++)
+            for (i = 0;; i++)
             {
                 Debug.Assert(i < SlotCount);
                 var child = GetSlot(i);
@@ -165,18 +173,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         public bool ContainsDiagnostics
         {
-            get
-            {
-                return (Flags & NodeFlags.ContainsDiagnostics) != 0;
-            }
+            get { return (Flags & NodeFlags.ContainsDiagnostics) != 0; }
         }
 
         public bool ContainsAnnotations
         {
-            get
-            {
-                return (Flags & NodeFlags.ContainsAnnotations) != 0;
-            }
+            get { return (Flags & NodeFlags.ContainsAnnotations) != 0; }
         }
         #endregion
 
@@ -185,10 +187,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         public virtual int Width
         {
-            get
-            {
-                return FullWidth - GetLeadingTriviaWidth() - GetTrailingTriviaWidth();
-            }
+            get { return FullWidth - GetLeadingTriviaWidth() - GetTrailingTriviaWidth(); }
         }
 
         public virtual int GetLeadingTriviaWidth()
@@ -203,18 +202,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         public bool HasLeadingTrivia
         {
-            get
-            {
-                return GetLeadingTriviaWidth() != 0;
-            }
+            get { return GetLeadingTriviaWidth() != 0; }
         }
 
         public bool HasTrailingTrivia
         {
-            get
-            {
-                return GetTrailingTriviaWidth() != 0;
-            }
+            get { return GetTrailingTriviaWidth() != 0; }
         }
         #endregion
 
@@ -244,7 +237,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             {
                 if (AnnotationsTable.TryGetValue(this, out var annotations))
                 {
-                    Debug.Assert(annotations.Length != 0, "There cannot be an empty annotation entry.");
+                    Debug.Assert(
+                        annotations.Length != 0,
+                        "There cannot be an empty annotation entry."
+                    );
                     return annotations;
                 }
             }
@@ -265,7 +261,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         public virtual string ToFullString()
         {
             var builder = new StringBuilder();
-            var writer = new StringWriter(builder, System.Globalization.CultureInfo.InvariantCulture);
+            var writer = new StringWriter(
+                builder,
+                System.Globalization.CultureInfo.InvariantCulture
+            );
             WriteTo(writer);
             return builder.ToString();
         }
@@ -281,7 +280,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             var stack = new Stack<StackEntry>();
             stack.Push(new StackEntry(this, leading, trailing));
 
-            // Separated out stack processing logic so that it does not unintentionally refer to 
+            // Separated out stack processing logic so that it does not unintentionally refer to
             // "this", "leading" or "trailing.
             ProcessStack(writer, stack);
         }
@@ -297,7 +296,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         }
         #endregion
 
-        #region Tokens 
+        #region Tokens
 
         public virtual object GetValue()
         {
@@ -384,7 +383,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         }
         #endregion
 
-        #region Equivalence 
+        #region Equivalence
         public virtual bool IsEquivalentTo(GreenNode other)
         {
             if (this == other)
@@ -438,8 +437,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             {
                 var node1Child = node1.GetSlot(i);
                 var node2Child = node2.GetSlot(i);
-                if (node1Child != null && node2Child != null && !node1Child.IsEquivalentTo(node2Child))
-                {
+                if (
+                    node1Child != null
+                    && node2Child != null
+                    && !node1Child.IsEquivalentTo(node2Child)
+                ) {
                     return false;
                 }
             }
@@ -449,8 +451,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         #endregion
 
         #region Factories
-        public virtual GreenNode CreateList(IEnumerable<GreenNode> nodes, bool alwaysCreateListNode = false)
-        {
+        public virtual GreenNode CreateList(
+            IEnumerable<GreenNode> nodes,
+            bool alwaysCreateListNode = false
+        ) {
             if (nodes == null)
             {
                 return null;
@@ -494,8 +498,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         #region StaticMethods
 
-        private static void ProcessStack(TextWriter writer,
-            Stack<StackEntry> stack)
+        private static void ProcessStack(TextWriter writer, Stack<StackEntry> stack)
         {
             while (stack.Count > 0)
             {
@@ -526,7 +529,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     {
                         var first = i == firstIndex;
                         var last = i == lastIndex;
-                        stack.Push(new StackEntry(child, currentLeading | !first, currentTrailing | !last));
+                        stack.Push(
+                            new StackEntry(child, currentLeading | !first, currentTrailing | !last)
+                        );
                     }
                 }
             }

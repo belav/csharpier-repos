@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         /// supplied type, else null.</returns>
         public static IWrapperProvider GetWrapperProvider(
             this IEnumerable<IWrapperProviderFactory> wrapperProviderFactories,
-            WrapperProviderContext wrapperProviderContext)
-        {
+            WrapperProviderContext wrapperProviderContext
+        ) {
             if (wrapperProviderFactories == null)
             {
                 throw new ArgumentNullException(nameof(wrapperProviderFactories));

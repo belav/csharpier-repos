@@ -18,7 +18,13 @@ public delegate int MainDelegate();
 public delegate void BlockDelegate();
 
 [SecuritySafeCritical]
-public delegate void PrepareStackDelegate(string arg, string interleaver, int id, int totalRts, int stackHeight);
+public delegate void PrepareStackDelegate(
+    string arg,
+    string interleaver,
+    int id,
+    int totalRts,
+    int stackHeight
+);
 
 [SecuritySafeCritical]
 public delegate int BuildStackDelegate(int stackId);

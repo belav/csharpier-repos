@@ -25,8 +25,10 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public class ViewViewComponentResultTest
     {
-        private readonly ITempDataDictionary _tempDataDictionary =
-            new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+        private readonly ITempDataDictionary _tempDataDictionary = new TempDataDictionary(
+            new DefaultHttpContext(),
+            Mock.Of<ITempDataProvider>()
+        );
 
         [Fact]
         public void Execute_RendersPartialViews()
@@ -38,12 +40,24 @@ namespace Microsoft.AspNetCore.Mvc
                 .Verifiable();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view.Object))
                 .Verifiable();
 
@@ -77,8 +91,14 @@ namespace Microsoft.AspNetCore.Mvc
                 .Verifiable();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/Default", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/Default", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Components/Invoke/Default", view.Object))
                 .Verifiable();
 
@@ -111,8 +131,14 @@ namespace Microsoft.AspNetCore.Mvc
                 .Verifiable();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/Default", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/Default", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Components/Invoke/Default", view.Object))
                 .Verifiable();
 
@@ -148,21 +174,40 @@ namespace Microsoft.AspNetCore.Mvc
         public void Execute_ThrowsIfPartialViewCannotBeFound_MessageUsesGetViewLocations()
         {
             // Arrange
-            var expected = string.Join(Environment.NewLine,
+            var expected = string.Join(
+                Environment.NewLine,
                 "The view 'Components/Invoke/some-view' was not found. The following locations were searched:",
                 "location1",
-                "location2");
+                "location2"
+            );
 
             var view = Mock.Of<IView>();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", new[] { "location1", "location2" }))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
-                .Returns(ViewEngineResult.NotFound("Components/Invoke/some-view", Enumerable.Empty<string>()))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
+                .Returns(
+                    ViewEngineResult.NotFound(
+                        "Components/Invoke/some-view",
+                        Enumerable.Empty<string>()
+                    )
+                )
                 .Verifiable();
 
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -178,7 +223,9 @@ namespace Microsoft.AspNetCore.Mvc
             var viewComponentContext = GetViewComponentContext(view, viewData);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => result.Execute(viewComponentContext));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => result.Execute(viewComponentContext)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -186,21 +233,40 @@ namespace Microsoft.AspNetCore.Mvc
         public void Execute_ThrowsIfPartialViewCannotBeFound_MessageUsesFindViewLocations()
         {
             // Arrange
-            var expected = string.Join(Environment.NewLine,
+            var expected = string.Join(
+                Environment.NewLine,
                 "The view 'Components/Invoke/some-view' was not found. The following locations were searched:",
                 "location1",
-                "location2");
+                "location2"
+            );
 
             var view = Mock.Of<IView>();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
-                .Returns(ViewEngineResult.NotFound("Components/Invoke/some-view", new[] { "location1", "location2" }))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
+                .Returns(
+                    ViewEngineResult.NotFound(
+                        "Components/Invoke/some-view",
+                        new[] { "location1", "location2" }
+                    )
+                )
                 .Verifiable();
 
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -216,7 +282,9 @@ namespace Microsoft.AspNetCore.Mvc
             var viewComponentContext = GetViewComponentContext(view, viewData);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => result.Execute(viewComponentContext));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => result.Execute(viewComponentContext)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -224,23 +292,42 @@ namespace Microsoft.AspNetCore.Mvc
         public void Execute_ThrowsIfPartialViewCannotBeFound_MessageUsesAllLocations()
         {
             // Arrange
-            var expected = string.Join(Environment.NewLine,
+            var expected = string.Join(
+                Environment.NewLine,
                 "The view 'Components/Invoke/some-view' was not found. The following locations were searched:",
                 "location1",
                 "location2",
                 "location3",
-                "location4");
+                "location4"
+            );
 
             var view = Mock.Of<IView>();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", new[] { "location1", "location2" }))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
-                .Returns(ViewEngineResult.NotFound("Components/Invoke/some-view", new[] { "location3", "location4" }))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
+                .Returns(
+                    ViewEngineResult.NotFound(
+                        "Components/Invoke/some-view",
+                        new[] { "location3", "location4" }
+                    )
+                )
                 .Verifiable();
 
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -256,7 +343,9 @@ namespace Microsoft.AspNetCore.Mvc
             var viewComponentContext = GetViewComponentContext(view, viewData);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => result.Execute(viewComponentContext));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => result.Execute(viewComponentContext)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -267,17 +356,27 @@ namespace Microsoft.AspNetCore.Mvc
             var expected = new IndexOutOfRangeException();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Throws(expected)
-                .Verifiable();
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Throws(expected).Verifiable();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view.Object))
                 .Verifiable();
 
@@ -308,12 +407,24 @@ namespace Microsoft.AspNetCore.Mvc
             var view = Mock.Of<IView>();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view))
                 .Verifiable();
 
@@ -343,12 +454,24 @@ namespace Microsoft.AspNetCore.Mvc
             var view = Mock.Of<IView>();
 
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound("some-view", Enumerable.Empty<string>()))
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Components/Invoke/some-view", view))
                 .Verifiable();
 
@@ -382,25 +505,47 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteAsync_ThrowsIfPartialViewCannotBeFound()
         {
             // Arrange
-            var expected = string.Join(Environment.NewLine,
+            var expected = string.Join(
+                Environment.NewLine,
                 "The view 'Components/Invoke/some-view' was not found. The following locations were searched:",
                 "view-location1",
                 "view-location2",
                 "view-location3",
-                "view-location4");
+                "view-location4"
+            );
 
             var view = Mock.Of<IView>();
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, "some-view", /*isMainPage*/ false))
-                .Returns(ViewEngineResult.NotFound("some-view", new[] { "view-location1", "view-location2" }))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            "some-view", /*isMainPage*/
+                            false
+                        )
+                )
+                .Returns(
+                    ViewEngineResult.NotFound(
+                        "some-view",
+                        new[] { "view-location1", "view-location2" }
+                    )
+                )
                 .Verifiable();
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "Components/Invoke/some-view", /*isMainPage*/ false))
-                .Returns(ViewEngineResult.NotFound(
-                    "Components/Invoke/some-view",
-                    new[] { "view-location3", "view-location4" }))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "Components/Invoke/some-view", /*isMainPage*/
+                            false
+                        )
+                )
+                .Returns(
+                    ViewEngineResult.NotFound(
+                        "Components/Invoke/some-view",
+                        new[] { "view-location3", "view-location4" }
+                    )
+                )
                 .Verifiable();
 
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -417,7 +562,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Act and Assert
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => result.ExecuteAsync(viewComponentContext));
+                () => result.ExecuteAsync(viewComponentContext)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -425,8 +571,9 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteAsync_Throws_IfNoViewEngineCanBeResolved()
         {
             // Arrange
-            var expected = $"No service for type '{typeof(ICompositeViewEngine).FullName}'" +
-                " has been registered.";
+            var expected =
+                $"No service for type '{typeof(ICompositeViewEngine).FullName}'"
+                + " has been registered.";
 
             var view = Mock.Of<IView>();
 
@@ -446,15 +593,17 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Act and Assert
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => result.ExecuteAsync(viewComponentContext));
+                () => result.ExecuteAsync(viewComponentContext)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void Execute_CallsFindView_WithExpectedPath_WhenViewNameIsNullOrEmpty(string viewName)
-        {
+        public void Execute_CallsFindView_WithExpectedPath_WhenViewNameIsNullOrEmpty(
+            string viewName
+        ) {
             // Arrange
             var shortName = "SomeShortName";
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -462,8 +611,14 @@ namespace Microsoft.AspNetCore.Mvc
             componentContext.ViewComponentDescriptor.ShortName = shortName;
             var expectedViewName = $"Components/{shortName}/Default";
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), expectedViewName, /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            expectedViewName, /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found(expectedViewName, new Mock<IView>().Object))
                 .Verifiable();
 
@@ -486,8 +641,14 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, viewName, /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            viewName, /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found(viewName, new Mock<IView>().Object))
                 .Verifiable();
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
@@ -508,8 +669,8 @@ namespace Microsoft.AspNetCore.Mvc
         private static ViewComponentContext GetViewComponentContext(
             IView view,
             ViewDataDictionary viewData,
-            object diagnosticListener = null)
-        {
+            object diagnosticListener = null
+        ) {
             var diagnosticSource = new DiagnosticListener("Microsoft.AspNetCore");
             if (diagnosticListener == null)
             {
@@ -519,19 +680,25 @@ namespace Microsoft.AspNetCore.Mvc
             diagnosticSource.SubscribeWithAdapter(diagnosticListener);
 
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(DiagnosticListener))).Returns(diagnosticSource);
+            serviceProvider.Setup(s => s.GetService(typeof(DiagnosticListener)))
+                .Returns(diagnosticSource);
 
             var httpContext = new DefaultHttpContext();
             httpContext.RequestServices = serviceProvider.Object;
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var viewContext = new ViewContext(
                 actionContext,
                 view,
                 viewData,
                 new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             var viewComponentDescriptor = new ViewComponentDescriptor()
             {
@@ -545,7 +712,8 @@ namespace Microsoft.AspNetCore.Mvc
                 new Dictionary<string, object>(),
                 new HtmlTestEncoder(),
                 viewContext,
-                TextWriter.Null);
+                TextWriter.Null
+            );
 
             return viewComponentContext;
         }

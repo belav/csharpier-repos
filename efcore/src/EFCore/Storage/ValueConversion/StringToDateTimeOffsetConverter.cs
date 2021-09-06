@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     /// <summary>
     ///     Converts strings to and from <see cref="DateTimeOffset" /> values.
     /// </summary>
-    public class StringToDateTimeOffsetConverter : StringDateTimeOffsetConverter<string, DateTimeOffset>
+    public class StringToDateTimeOffsetConverter
+        : StringDateTimeOffsetConverter<string, DateTimeOffset>
     {
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -18,19 +19,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
         ///     facets for the converted data.
         /// </param>
-        public StringToDateTimeOffsetConverter(
-            ConverterMappingHints? mappingHints = null)
-            : base(
-                ToDateTimeOffset(),
-                ToString(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+        public StringToDateTimeOffsetConverter(ConverterMappingHints? mappingHints = null)
+            : base(ToDateTimeOffset(), ToString(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(DateTimeOffset), i => new StringToDateTimeOffsetConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(DateTimeOffset),
+                i => new StringToDateTimeOffsetConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

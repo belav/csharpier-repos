@@ -26,13 +26,21 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
 {
-    internal delegate ValueTask<SslServerAuthenticationOptions> HttpsOptionsCallback(ConnectionContext connection, SslStream stream, SslClientHelloInfo clientHelloInfo, object state, CancellationToken cancellationToken);
+    internal delegate ValueTask<SslServerAuthenticationOptions> HttpsOptionsCallback(
+        ConnectionContext connection,
+        SslStream stream,
+        SslClientHelloInfo clientHelloInfo,
+        object state,
+        CancellationToken cancellationToken
+    );
 
     internal class HttpsConnectionMiddleware
     {
-        private const string EnableWindows81Http2 = "Microsoft.AspNetCore.Server.Kestrel.EnableWindows81Http2";
+        private const string EnableWindows81Http2 =
+            "Microsoft.AspNetCore.Server.Kestrel.EnableWindows81Http2";
 
-        private static readonly bool _isWindowsVersionIncompatibleWithHttp2 = IsWindowsVersionIncompatibleWithHttp2();
+        private static readonly bool _isWindowsVersionIncompatibleWithHttp2 =
+            IsWindowsVersionIncompatibleWithHttp2();
 
         private readonly ConnectionDelegate _next;
         private readonly TimeSpan _handshakeTimeout;
@@ -43,7 +51,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         private readonly HttpsConnectionAdapterOptions? _options;
         private readonly SslStreamCertificateContext? _serverCertificateContext;
         private readonly X509Certificate2? _serverCertificate;
-        private readonly Func<ConnectionContext, string?, X509Certificate2?>? _serverCertificateSelector;
+        private readonly Func<
+            ConnectionContext,
+            string?,
+            X509Certificate2?
+        >? _serverCertificateSelector;
 
         // The following fields are only set by ServerOptionsSelectionCallback ctor.
         private readonly HttpsOptionsCallback? _httpsOptionsCallback;
@@ -52,13 +64,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         // Pool for cancellation tokens that cancel the handshake
         private readonly CancellationTokenSourcePool _ctsPool = new();
 
-        public HttpsConnectionMiddleware(ConnectionDelegate next, HttpsConnectionAdapterOptions options)
-          : this(next, options, loggerFactory: NullLoggerFactory.Instance)
-        {
-        }
+        public HttpsConnectionMiddleware(
+            ConnectionDelegate next,
+            HttpsConnectionAdapterOptions options
+        ) : this(next, options, loggerFactory: NullLoggerFactory.Instance) { }
 
-        public HttpsConnectionMiddleware(ConnectionDelegate next, HttpsConnectionAdapterOptions options, ILoggerFactory loggerFactory)
-        {
+        public HttpsConnectionMiddleware(
+            ConnectionDelegate next,
+            HttpsConnectionAdapterOptions options,
+            ILoggerFactory loggerFactory
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -80,7 +95,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             //_sslStreamFactory = s => new SslStream(s);
 
             _options = options;
-            _options.HttpProtocols = ValidateAndNormalizeHttpProtocols(_options.HttpProtocols, _logger);
+            _options.HttpProtocols = ValidateAndNormalizeHttpProtocols(
+                _options.HttpProtocols,
+                _logger
+            );
 
             // capture the certificate now so it can't be switched after validation
             _serverCertificate = options.ServerCertificate;
@@ -109,13 +127,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
 
                 // This might be do blocking IO but it'll resolve the certificate chain up front before any connections are
                 // made to the server
-                _serverCertificateContext = SslStreamCertificateContext.Create(certificate, additionalCertificates: null);
+                _serverCertificateContext = SslStreamCertificateContext.Create(
+                    certificate,
+                    additionalCertificates: null
+                );
             }
 
-            var remoteCertificateValidationCallback = _options.ClientCertificateMode == ClientCertificateMode.NoCertificate ?
-                (RemoteCertificateValidationCallback?)null : RemoteCertificateValidationCallback;
+            var remoteCertificateValidationCallback =
+                _options.ClientCertificateMode == ClientCertificateMode.NoCertificate
+                    ? (RemoteCertificateValidationCallback?)null
+                    : RemoteCertificateValidationCallback;
 
-            _sslStreamFactory = s => new SslStream(s, leaveInnerStreamOpen: false, userCertificateValidationCallback: remoteCertificateValidationCallback);
+            _sslStreamFactory = s =>
+                new SslStream(
+                    s,
+                    leaveInnerStreamOpen: false,
+                    userCertificateValidationCallback: remoteCertificateValidationCallback
+                );
         }
 
         internal HttpsConnectionMiddleware(
@@ -123,8 +151,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             HttpsOptionsCallback httpsOptionsCallback,
             object httpsOptionsCallbackState,
             TimeSpan handshakeTimeout,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             _next = next;
             _handshakeTimeout = handshakeTimeout;
             _logger = loggerFactory.CreateLogger<HttpsConnectionMiddleware>();
@@ -148,7 +176,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
 
             var sslDuplexPipe = CreateSslDuplexPipe(
                 context.Transport,
-                context.Features.Get<IMemoryPoolFeature>()?.MemoryPool ?? MemoryPool<byte>.Shared);
+                context.Features.Get<IMemoryPoolFeature>()?.MemoryPool ?? MemoryPool<byte>.Shared
+            );
             var sslStream = sslDuplexPipe.Stream;
 
             try
@@ -158,12 +187,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
 
                 if (_httpsOptionsCallback is null)
                 {
-                    await DoOptionsBasedHandshakeAsync(context, sslStream, feature, cancellationTokenSource.Token);
+                    await DoOptionsBasedHandshakeAsync(
+                        context,
+                        sslStream,
+                        feature,
+                        cancellationTokenSource.Token
+                    );
                 }
                 else
                 {
                     var state = (this, context, feature);
-                    await sslStream.AuthenticateAsServerAsync(ServerOptionsCallback, state, cancellationTokenSource.Token);
+                    await sslStream.AuthenticateAsServerAsync(
+                        ServerOptionsCallback,
+                        state,
+                        cancellationTokenSource.Token
+                    );
                 }
             }
             catch (OperationCanceledException)
@@ -226,6 +264,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                     // as the duplex pipe can hit an ODE as it still may be writing.
                 }
             }
+
             finally
             {
                 // Restore the original so that it gets closed appropriately
@@ -237,7 +276,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         // but with public APIs
         private X509Certificate2 LocateCertificateWithPrivateKey(X509Certificate2 certificate)
         {
-            Debug.Assert(!certificate.HasPrivateKey, "This should only be called with certificates that don't have a private key");
+            Debug.Assert(
+                !certificate.HasPrivateKey,
+                "This should only be called with certificates that don't have a private key"
+            );
 
             _logger.LocatingCertWithPrivateKey(certificate);
 
@@ -269,7 +311,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                 {
                     using (store)
                     {
-                        var certs = store.Certificates.Find(X509FindType.FindByThumbprint, certificate.Thumbprint, validOnly: false);
+                        var certs = store.Certificates.Find(
+                            X509FindType.FindByThumbprint,
+                            certificate.Thumbprint,
+                            validOnly: false
+                        );
 
                         if (certs.Count > 0 && certs[0].HasPrivateKey)
                         {
@@ -285,7 +331,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                 {
                     using (store)
                     {
-                        var certs = store.Certificates.Find(X509FindType.FindByThumbprint, certificate.Thumbprint, validOnly: false);
+                        var certs = store.Certificates.Find(
+                            X509FindType.FindByThumbprint,
+                            certificate.Thumbprint,
+                            validOnly: false
+                        );
 
                         if (certs.Count > 0 && certs[0].HasPrivateKey)
                         {
@@ -305,8 +355,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             return certificate;
         }
 
-        private Task DoOptionsBasedHandshakeAsync(ConnectionContext context, SslStream sslStream, Core.Internal.TlsConnectionFeature feature, CancellationToken cancellationToken)
-        {
+        private Task DoOptionsBasedHandshakeAsync(
+            ConnectionContext context,
+            SslStream sslStream,
+            Core.Internal.TlsConnectionFeature feature,
+            CancellationToken cancellationToken
+        ) {
             Debug.Assert(_options != null, "Middleware must be created with options.");
 
             // Adapt to the SslStream signature
@@ -331,9 +385,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                 ServerCertificate = _serverCertificate,
                 ServerCertificateContext = _serverCertificateContext,
                 ServerCertificateSelectionCallback = selector,
-                ClientCertificateRequired = _options.ClientCertificateMode != ClientCertificateMode.NoCertificate,
+                ClientCertificateRequired =
+                    _options.ClientCertificateMode != ClientCertificateMode.NoCertificate,
                 EnabledSslProtocols = _options.SslProtocols,
-                CertificateRevocationCheckMode = _options.CheckCertificateRevocation ? X509RevocationMode.Online : X509RevocationMode.NoCheck,
+                CertificateRevocationCheckMode = _options.CheckCertificateRevocation
+                    ? X509RevocationMode.Online
+                    : X509RevocationMode.NoCheck,
             };
 
             ConfigureAlpn(sslOptions, _options.HttpProtocols);
@@ -345,8 +402,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             return sslStream.AuthenticateAsServerAsync(sslOptions, cancellationToken);
         }
 
-        internal static void ConfigureAlpn(SslServerAuthenticationOptions serverOptions, HttpProtocols httpProtocols)
-        {
+        internal static void ConfigureAlpn(
+            SslServerAuthenticationOptions serverOptions,
+            HttpProtocols httpProtocols
+        ) {
             serverOptions.ApplicationProtocols = new List<SslApplicationProtocol>();
 
             // This is order sensitive
@@ -368,8 +427,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             Func<X509Certificate2, X509Chain?, SslPolicyErrors, bool>? clientCertificateValidation,
             X509Certificate? certificate,
             X509Chain? chain,
-            SslPolicyErrors sslPolicyErrors)
-        {
+            SslPolicyErrors sslPolicyErrors
+        ) {
             if (certificate == null)
             {
                 return clientCertificateMode != ClientCertificateMode.RequireCertificate;
@@ -400,17 +459,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             return true;
         }
 
-        private bool RemoteCertificateValidationCallback(object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors)
-        {
+        private bool RemoteCertificateValidationCallback(
+            object sender,
+            X509Certificate? certificate,
+            X509Chain? chain,
+            SslPolicyErrors sslPolicyErrors
+        ) {
             Debug.Assert(_options != null, "Middleware must be created with options.");
 
-            return RemoteCertificateValidationCallback(_options.ClientCertificateMode, _options.ClientCertificateValidation, certificate, chain, sslPolicyErrors);
+            return RemoteCertificateValidationCallback(
+                _options.ClientCertificateMode,
+                _options.ClientCertificateValidation,
+                certificate,
+                chain,
+                sslPolicyErrors
+            );
         }
 
-        private SslDuplexPipe CreateSslDuplexPipe(IDuplexPipe transport, MemoryPool<byte> memoryPool)
-        {
-            StreamPipeReaderOptions inputPipeOptions = new StreamPipeReaderOptions
-            (
+        private SslDuplexPipe CreateSslDuplexPipe(
+            IDuplexPipe transport,
+            MemoryPool<byte> memoryPool
+        ) {
+            StreamPipeReaderOptions inputPipeOptions = new StreamPipeReaderOptions(
                 pool: memoryPool,
                 bufferSize: memoryPool.GetMinimumSegmentSize(),
                 minimumReadSize: memoryPool.GetMinimumAllocSize(),
@@ -418,23 +488,39 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                 useZeroByteReads: true
             );
 
-            var outputPipeOptions = new StreamPipeWriterOptions
-            (
-                pool: memoryPool,
-                leaveOpen: true
-            );
+            var outputPipeOptions = new StreamPipeWriterOptions(pool: memoryPool, leaveOpen: true);
 
-            return new SslDuplexPipe(transport, inputPipeOptions, outputPipeOptions, _sslStreamFactory);
+            return new SslDuplexPipe(
+                transport,
+                inputPipeOptions,
+                outputPipeOptions,
+                _sslStreamFactory
+            );
         }
 
-        private static async ValueTask<SslServerAuthenticationOptions> ServerOptionsCallback(SslStream sslStream, SslClientHelloInfo clientHelloInfo, object? state, CancellationToken cancellationToken)
-        {
-            var (middleware, context, feature) = (ValueTuple<HttpsConnectionMiddleware, ConnectionContext, Core.Internal.TlsConnectionFeature>)state!;
+        private static async ValueTask<SslServerAuthenticationOptions> ServerOptionsCallback(
+            SslStream sslStream,
+            SslClientHelloInfo clientHelloInfo,
+            object? state,
+            CancellationToken cancellationToken
+        ) {
+            var (middleware, context, feature) =
+                (ValueTuple<
+                    HttpsConnectionMiddleware,
+                    ConnectionContext,
+                    Core.Internal.TlsConnectionFeature
+                >)state!;
 
             feature.HostName = clientHelloInfo.ServerName;
             context.Features.Set(sslStream);
 
-            var sslOptions = await middleware._httpsOptionsCallback!(context, sslStream, clientHelloInfo, middleware._httpsOptionsCallbackState!, cancellationToken);
+            var sslOptions = await middleware._httpsOptionsCallback!(
+                context,
+                sslStream,
+                clientHelloInfo,
+                middleware._httpsOptionsCallbackState!,
+                cancellationToken
+            );
 
             KestrelEventSource.Log.TlsHandshakeStart(context, sslOptions);
 
@@ -445,7 +531,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         {
             if (!CertificateLoader.IsCertificateAllowedForServerAuth(certificate))
             {
-                throw new InvalidOperationException(CoreStrings.FormatInvalidServerCertificateEku(certificate.Thumbprint));
+                throw new InvalidOperationException(
+                    CoreStrings.FormatInvalidServerCertificateEku(certificate.Thumbprint)
+                );
             }
         }
 
@@ -464,8 +552,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             return new X509Certificate2(certificate);
         }
 
-        internal static HttpProtocols ValidateAndNormalizeHttpProtocols(HttpProtocols httpProtocols, ILogger<HttpsConnectionMiddleware> logger)
-        {
+        internal static HttpProtocols ValidateAndNormalizeHttpProtocols(
+            HttpProtocols httpProtocols,
+            ILogger<HttpsConnectionMiddleware> logger
+        ) {
             // This configuration will always fail per-request, preemptively fail it here. See HttpConnection.SelectProtocol().
             if (httpProtocols == HttpProtocols.Http2)
             {
@@ -478,8 +568,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                     throw new NotSupportedException(CoreStrings.Http2NoTlsWin81);
                 }
             }
-            else if (httpProtocols == HttpProtocols.Http1AndHttp2 && _isWindowsVersionIncompatibleWithHttp2)
-            {
+            else if (
+                httpProtocols == HttpProtocols.Http1AndHttp2
+                && _isWindowsVersionIncompatibleWithHttp2
+            ) {
                 logger.Http2DefaultCiphersInsufficient();
                 return HttpProtocols.Http1;
             }
@@ -491,11 +583,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
         {
             if (OperatingSystem.IsWindows())
             {
-                var enableHttp2OnWindows81 = AppContext.TryGetSwitch(EnableWindows81Http2, out var enabled) && enabled;
-                if (Environment.OSVersion.Version < new Version(6, 3) // Missing ALPN support
-                                                                      // Win8.1 and 2012 R2 don't support the right cipher configuration by default.
-                    || (Environment.OSVersion.Version < new Version(10, 0) && !enableHttp2OnWindows81))
-                {
+                var enableHttp2OnWindows81 =
+                    AppContext.TryGetSwitch(EnableWindows81Http2, out var enabled) && enabled;
+                if (
+                    Environment.OSVersion.Version < new Version(6, 3) // Missing ALPN support
+                    // Win8.1 and 2012 R2 don't support the right cipher configuration by default.
+                    || (
+                        Environment.OSVersion.Version < new Version(10, 0)
+                        && !enableHttp2OnWindows81
+                    )
+                ) {
                     return true;
                 }
             }
@@ -510,73 +607,116 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
             LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(1, "AuthenticationFailed"),
-                formatString: CoreStrings.AuthenticationFailed);
+                formatString: CoreStrings.AuthenticationFailed
+            );
 
         private static readonly Action<ILogger, Exception?> _authenticationTimedOut =
             LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(2, "AuthenticationTimedOut"),
-                formatString: CoreStrings.AuthenticationTimedOut);
+                formatString: CoreStrings.AuthenticationTimedOut
+            );
 
-        private static readonly Action<ILogger, string, SslProtocols, Exception?> _httpsConnectionEstablished =
-            LoggerMessage.Define<string, SslProtocols>(
-                logLevel: LogLevel.Debug,
-                eventId: new EventId(3, "HttpsConnectionEstablished"),
-                formatString: CoreStrings.HttpsConnectionEstablished);
+        private static readonly Action<
+            ILogger,
+            string,
+            SslProtocols,
+            Exception?
+        > _httpsConnectionEstablished = LoggerMessage.Define<string, SslProtocols>(
+            logLevel: LogLevel.Debug,
+            eventId: new EventId(3, "HttpsConnectionEstablished"),
+            formatString: CoreStrings.HttpsConnectionEstablished
+        );
 
         private static readonly Action<ILogger, Exception?> _http2DefaultCiphersInsufficient =
             LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(4, "Http2DefaultCiphersInsufficient"),
-                formatString: CoreStrings.Http2DefaultCiphersInsufficient);
+                formatString: CoreStrings.Http2DefaultCiphersInsufficient
+            );
 
         private static readonly Action<ILogger, string, Exception?> _locatingCertWithPrivateKey =
             LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(5, "LocateCertWithPrivateKey"),
-                formatString: CoreStrings.LocatingCertWithPrivateKey);
+                formatString: CoreStrings.LocatingCertWithPrivateKey
+            );
 
-        private static readonly Action<ILogger, string, string, Exception?> _foundCertWithPrivateKey =
-            LoggerMessage.Define<string, string>(
-                logLevel: LogLevel.Debug,
-                eventId: new EventId(6, "FoundCertWithPrivateKey"),
-                formatString: CoreStrings.FoundCertWithPrivateKey);
+        private static readonly Action<
+            ILogger,
+            string,
+            string,
+            Exception?
+        > _foundCertWithPrivateKey = LoggerMessage.Define<string, string>(
+            logLevel: LogLevel.Debug,
+            eventId: new EventId(6, "FoundCertWithPrivateKey"),
+            formatString: CoreStrings.FoundCertWithPrivateKey
+        );
 
         private static readonly Action<ILogger, Exception> _failedToFindCertificateInStore =
             LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(7, "FailToLocateCertificate"),
-                formatString: CoreStrings.FailedToLocateCertificateFromStore);
-
+                formatString: CoreStrings.FailedToLocateCertificateFromStore
+            );
 
         private static readonly Action<ILogger, string, Exception> _failedToOpenCertificateStore =
             LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(8, "FailToOpenStore"),
-                formatString: CoreStrings.FailedToOpenCertStore);
+                formatString: CoreStrings.FailedToOpenCertStore
+            );
 
-        public static void AuthenticationFailed(this ILogger<HttpsConnectionMiddleware> logger, Exception exception) => _authenticationFailed(logger, exception);
+        public static void AuthenticationFailed(
+            this ILogger<HttpsConnectionMiddleware> logger,
+            Exception exception
+        ) => _authenticationFailed(logger, exception);
 
-        public static void AuthenticationTimedOut(this ILogger<HttpsConnectionMiddleware> logger) => _authenticationTimedOut(logger, null);
+        public static void AuthenticationTimedOut(this ILogger<HttpsConnectionMiddleware> logger) =>
+            _authenticationTimedOut(logger, null);
 
-        public static void HttpsConnectionEstablished(this ILogger<HttpsConnectionMiddleware> logger, string connectionId, SslProtocols sslProtocol) => _httpsConnectionEstablished(logger, connectionId, sslProtocol, null);
+        public static void HttpsConnectionEstablished(
+            this ILogger<HttpsConnectionMiddleware> logger,
+            string connectionId,
+            SslProtocols sslProtocol
+        ) => _httpsConnectionEstablished(logger, connectionId, sslProtocol, null);
 
-        public static void Http2DefaultCiphersInsufficient(this ILogger<HttpsConnectionMiddleware> logger) => _http2DefaultCiphersInsufficient(logger, null);
+        public static void Http2DefaultCiphersInsufficient(
+            this ILogger<HttpsConnectionMiddleware> logger
+        ) => _http2DefaultCiphersInsufficient(logger, null);
 
-        public static void LocatingCertWithPrivateKey(this ILogger<HttpsConnectionMiddleware> logger, X509Certificate2 certificate) => _locatingCertWithPrivateKey(logger, certificate.Thumbprint, null);
+        public static void LocatingCertWithPrivateKey(
+            this ILogger<HttpsConnectionMiddleware> logger,
+            X509Certificate2 certificate
+        ) => _locatingCertWithPrivateKey(logger, certificate.Thumbprint, null);
 
-        public static void FoundCertWithPrivateKey(this ILogger<HttpsConnectionMiddleware> logger, X509Certificate2 certificate, StoreLocation storeLocation)
-        {
-            var storeLocationString = storeLocation == StoreLocation.LocalMachine ? nameof(StoreLocation.LocalMachine) : nameof(StoreLocation.CurrentUser);
+        public static void FoundCertWithPrivateKey(
+            this ILogger<HttpsConnectionMiddleware> logger,
+            X509Certificate2 certificate,
+            StoreLocation storeLocation
+        ) {
+            var storeLocationString =
+                storeLocation == StoreLocation.LocalMachine
+                    ? nameof(StoreLocation.LocalMachine)
+                    : nameof(StoreLocation.CurrentUser);
 
             _foundCertWithPrivateKey(logger, certificate.Thumbprint, storeLocationString, null);
         }
 
-        public static void FailedToFindCertificateInStore(this ILogger<HttpsConnectionMiddleware> logger, Exception exception) => _failedToFindCertificateInStore(logger, exception);
+        public static void FailedToFindCertificateInStore(
+            this ILogger<HttpsConnectionMiddleware> logger,
+            Exception exception
+        ) => _failedToFindCertificateInStore(logger, exception);
 
-        public static void FailedToOpenStore(this ILogger<HttpsConnectionMiddleware> logger, StoreLocation storeLocation, Exception exception)
-        {
-            var storeLocationString = storeLocation == StoreLocation.LocalMachine ? nameof(StoreLocation.LocalMachine) : nameof(StoreLocation.CurrentUser);
+        public static void FailedToOpenStore(
+            this ILogger<HttpsConnectionMiddleware> logger,
+            StoreLocation storeLocation,
+            Exception exception
+        ) {
+            var storeLocationString =
+                storeLocation == StoreLocation.LocalMachine
+                    ? nameof(StoreLocation.LocalMachine)
+                    : nameof(StoreLocation.CurrentUser);
 
             _failedToOpenCertificateStore(logger, storeLocationString, exception);
         }

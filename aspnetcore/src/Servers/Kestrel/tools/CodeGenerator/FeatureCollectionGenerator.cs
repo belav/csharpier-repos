@@ -9,15 +9,19 @@ namespace CodeGenerator
 {
     public static class FeatureCollectionGenerator
     {
-        public static string GenerateFile(string namespaceName, string className, string[] allFeatures, string[] implementedFeatures, string extraUsings, string fallbackFeatures)
-        {
+        public static string GenerateFile(
+            string namespaceName,
+            string className,
+            string[] allFeatures,
+            string[] implementedFeatures,
+            string extraUsings,
+            string fallbackFeatures
+        ) {
             // NOTE: This list MUST always match the set of feature interfaces implemented by TransportConnection.
             // See also: src/Kestrel/Http/TransportConnection.FeatureCollection.cs
-            var features = allFeatures.Select((type, index) => new KnownFeature
-            {
-                Name = type,
-                Index = index
-            });
+            var features = allFeatures.Select(
+                (type, index) => new KnownFeature { Name = type, Index = index }
+            );
 
             return $@"// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.

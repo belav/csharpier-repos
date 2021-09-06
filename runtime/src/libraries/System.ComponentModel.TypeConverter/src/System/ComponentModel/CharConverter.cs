@@ -23,8 +23,12 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given object to another type.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        ) {
             if (destinationType == typeof(string) && value is char charValue)
             {
                 if (charValue == '\0')
@@ -39,8 +43,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given object to a Unicode character object.
         /// </summary>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        ) {
             if (value is string text)
             {
                 if (text.Length > 1)
@@ -52,7 +59,9 @@ namespace System.ComponentModel
                 {
                     if (text.Length != 1)
                     {
-                        throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, text, nameof(Char)));
+                        throw new FormatException(
+                            SR.Format(SR.ConvertInvalidPrimitive, text, nameof(Char))
+                        );
                     }
 
                     return text[0];

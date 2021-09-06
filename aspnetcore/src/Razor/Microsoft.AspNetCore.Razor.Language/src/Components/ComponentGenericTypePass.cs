@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     // 1. Adds diagnostics for missing generic type arguments
     // 2. Rewrites the type name of the component to substitute generic type arguments
     // 3. Rewrites the type names of parameters/child content to substitute generic type arguments
-    internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+    internal class ComponentGenericTypePass
+        : ComponentIntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         private TypeNameFeature _typeNameFeature;
 
@@ -35,8 +37,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -76,8 +80,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // Listing all type parameters that exist
                 var bindings = new Dictionary<string, Binding>();
                 var componentTypeParameters = node.Component.GetTypeParameters().ToList();
-                var supplyCascadingTypeParameters = componentTypeParameters
-                    .Where(p => p.IsCascadingTypeParameterProperty())
+                var supplyCascadingTypeParameters = componentTypeParameters.Where(
+                        p => p.IsCascadingTypeParameterProperty()
+                    )
                     .Select(p => p.Name)
                     .ToList();
                 foreach (var attribute in componentTypeParameters)
@@ -99,12 +104,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     if (supplyCascadingTypeParameters.Contains(typeArgumentNode.TypeParameterName))
                     {
                         node.ProvidesCascadingGenericTypes ??= new();
-                        node.ProvidesCascadingGenericTypes[typeArgumentNode.TypeParameterName] = new CascadingGenericTypeParameter
-                        {
-                            GenericTypeNames = new[] { typeArgumentNode.TypeParameterName },
-                            ValueType = typeArgumentNode.TypeParameterName,
-                            ValueExpression = $"default({binding.Content})",
-                        };
+                        node.ProvidesCascadingGenericTypes[typeArgumentNode.TypeParameterName] =
+                            new CascadingGenericTypeParameter
+                            {
+                                GenericTypeNames = new[] { typeArgumentNode.TypeParameterName },
+                                ValueType = typeArgumentNode.TypeParameterName,
+                                ValueExpression = $"default({binding.Content})",
+                            };
                     }
                 }
 
@@ -114,8 +120,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     // Either they specified everything and its OK to rewrite, or its an error.
                     if (ValidateTypeArguments(node, bindings))
                     {
-                        var mappings = bindings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Content);
-                        RewriteTypeNames(_pass.TypeNameFeature.CreateGenericTypeRewriter(mappings), node);
+                        var mappings = bindings.ToDictionary(
+                            kvp => kvp.Key,
+                            kvp => kvp.Value.Content
+                        );
+                        RewriteTypeNames(
+                            _pass.TypeNameFeature.CreateGenericTypeRewriter(mappings),
+                            node
+                        );
                     }
 
                     return;
@@ -129,7 +141,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                 // Since we're generating code in a different namespace, we need to 'global qualify' all of the types
                 // to avoid clashes with our generated code.
-                RewriteTypeNames(_pass.TypeNameFeature.CreateGlobalQualifiedTypeNameRewriter(bindings.Keys), node);
+                RewriteTypeNames(
+                    _pass.TypeNameFeature.CreateGlobalQualifiedTypeNameRewriter(bindings.Keys),
+                    node
+                );
 
                 //
                 // We need to verify that an argument was provided that 'covers' each type parameter.
@@ -138,9 +153,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // not set the items. We won't be able to do type inference on this and so it will just be nonsense.
                 foreach (var attribute in node.Attributes)
                 {
-                    if (attribute != null && TryFindGenericTypeNames(attribute.BoundAttribute, out var typeParameters))
-                    {
-                        var attributeValueIsLambda = _pass.TypeNameFeature.IsLambda(GetContent(attribute));
+                    if (
+                        attribute != null
+                        && TryFindGenericTypeNames(attribute.BoundAttribute, out var typeParameters)
+                    ) {
+                        var attributeValueIsLambda = _pass.TypeNameFeature.IsLambda(
+                            GetContent(attribute)
+                        );
                         var provideCascadingGenericTypes = new CascadingGenericTypeParameter
                         {
                             GenericTypeNames = typeParameters,
@@ -157,10 +176,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 // fewest other generic types on it. For example if we could infer from either List<T>
                                 // or Dictionary<T, U>, we prefer List<T>.
                                 node.ProvidesCascadingGenericTypes ??= new();
-                                if (!node.ProvidesCascadingGenericTypes.TryGetValue(typeName, out var existingValue)
-                                    || existingValue.GenericTypeNames.Count > typeParameters.Count)
-                                {
-                                    node.ProvidesCascadingGenericTypes[typeName] = provideCascadingGenericTypes;
+                                if (
+                                    !node.ProvidesCascadingGenericTypes.TryGetValue(
+                                        typeName,
+                                        out var existingValue
+                                    )
+                                    || existingValue.GenericTypeNames.Count > typeParameters.Count
+                                ) {
+                                    node.ProvidesCascadingGenericTypes[typeName] =
+                                        provideCascadingGenericTypes;
                                 }
                             }
 
@@ -193,9 +217,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     var uncoveredBinding = bindings[uncoveredBindingKey];
                     foreach (var candidateAncestor in Ancestors.OfType<ComponentIntermediateNode>())
                     {
-                        if (candidateAncestor.ProvidesCascadingGenericTypes != null
-                            && candidateAncestor.ProvidesCascadingGenericTypes.TryGetValue(uncoveredBindingKey, out var genericTypeProvider))
-                        {
+                        if (
+                            candidateAncestor.ProvidesCascadingGenericTypes != null
+                            && candidateAncestor.ProvidesCascadingGenericTypes.TryGetValue(
+                                uncoveredBindingKey,
+                                out var genericTypeProvider
+                            )
+                        ) {
                             // If the parameter value is an expression that includes multiple generic types, we only want
                             // to use it if we want *all* those generic types. That is, a parameter of type MyType<T0, T1>
                             // can supply types to a Child<T0, T1>, but not to a Child<T0>.
@@ -208,14 +236,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 bindings.Remove(uncoveredBindingKey);
                                 receivesCascadingGenericTypes ??= new();
                                 receivesCascadingGenericTypes.Add(genericTypeProvider);
-
                                 // It's sufficient to identify the closest provider for each type parameter
                                 break;
                             }
 
-                            bool GenericTypeIsUsed(string typeName) => componentTypeParameters
-                                .Select(t => t.Name)
-                                .Contains(typeName, StringComparer.Ordinal);
+                            bool GenericTypeIsUsed(string typeName) =>
+                                componentTypeParameters.Select(t => t.Name)
+                                    .Contains(typeName, StringComparer.Ordinal);
                         }
                     }
                 }
@@ -255,9 +282,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     // helpful as possible. So let's substitute 'object' for all of those type parameters, and add
                     // an error.
                     var mappings = bindings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Content);
-                    RewriteTypeNames(_pass.TypeNameFeature.CreateGenericTypeRewriter(mappings), node);
+                    RewriteTypeNames(
+                        _pass.TypeNameFeature.CreateGenericTypeRewriter(mappings),
+                        node
+                    );
 
-                    node.Diagnostics.Add(ComponentDiagnosticFactory.Create_GenericComponentTypeInferenceUnderspecified(node.Source, node, node.Component.GetTypeParameters()));
+                    node.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_GenericComponentTypeInferenceUnderspecified(
+                            node.Source,
+                            node,
+                            node.Component.GetTypeParameters()
+                        )
+                    );
                 }
 
                 // Next we need to generate a type inference 'method' node. This represents a method that we will codegen that
@@ -267,8 +303,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 CreateTypeInferenceMethod(documentNode, node, receivesCascadingGenericTypes);
             }
 
-            private bool TryFindGenericTypeNames(BoundAttributeDescriptor boundAttribute, out IReadOnlyList<string> typeParameters)
-            {
+            private bool TryFindGenericTypeNames(
+                BoundAttributeDescriptor boundAttribute,
+                out IReadOnlyList<string> typeParameters
+            ) {
                 if (boundAttribute == null)
                 {
                     // Will be null for attributes set on the component that don't match a declared component parameter
@@ -297,21 +335,35 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             private string GetContent(ComponentTypeArgumentIntermediateNode node)
             {
-                return string.Join(string.Empty, node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).Select(t => t.Content));
+                return string.Join(
+                    string.Empty,
+                    node.FindDescendantNodes<IntermediateToken>()
+                        .Where(t => t.IsCSharp)
+                        .Select(t => t.Content)
+                );
             }
 
             private string GetContent(ComponentAttributeIntermediateNode node)
             {
-                return string.Join(string.Empty, node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).Select(t => t.Content));
+                return string.Join(
+                    string.Empty,
+                    node.FindDescendantNodes<IntermediateToken>()
+                        .Where(t => t.IsCSharp)
+                        .Select(t => t.Content)
+                );
             }
 
-            private static bool ValidateTypeArguments(ComponentIntermediateNode node, Dictionary<string, Binding> bindings)
-            {
+            private static bool ValidateTypeArguments(
+                ComponentIntermediateNode node,
+                Dictionary<string, Binding> bindings
+            ) {
                 var missing = new List<BoundAttributeDescriptor>();
                 foreach (var binding in bindings)
                 {
-                    if (binding.Value.Node == null || string.IsNullOrWhiteSpace(binding.Value.Content))
-                    {
+                    if (
+                        binding.Value.Node == null
+                        || string.IsNullOrWhiteSpace(binding.Value.Content)
+                    ) {
                         missing.Add(binding.Value.Attribute);
                     }
                 }
@@ -321,7 +373,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     // We add our own error for this because its likely the user will see other errors due
                     // to incorrect codegen without the types. Our errors message will pretty clearly indicate
                     // what to do, whereas the other errors might be confusing.
-                    node.Diagnostics.Add(ComponentDiagnosticFactory.Create_GenericComponentMissingTypeArgument(node.Source, node, missing));
+                    node.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_GenericComponentMissingTypeArgument(
+                            node.Source,
+                            node,
+                            missing
+                        )
+                    );
                     return false;
                 }
 
@@ -343,19 +401,25 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         attribute.GloballyQualifiedTypeName = globallyQualifiedTypeName;
                     }
 
-                    if (attribute.BoundAttribute?.IsGenericTypedProperty() ?? false && attribute.TypeName != null)
-                    {
+                    if (
+                        attribute.BoundAttribute?.IsGenericTypedProperty()
+                        ?? false && attribute.TypeName != null
+                    ) {
                         // If we know the type name, then replace any generic type parameter inside it with
                         // the known types.
                         attribute.TypeName = globallyQualifiedTypeName;
                     }
-                    else if (attribute.TypeName == null && (attribute.BoundAttribute?.IsDelegateProperty() ?? false))
-                    {
+                    else if (
+                        attribute.TypeName == null
+                        && (attribute.BoundAttribute?.IsDelegateProperty() ?? false)
+                    ) {
                         // This is a weakly typed delegate, treat it as Action<object>
                         attribute.TypeName = "System.Action<System.Object>";
                     }
-                    else if (attribute.TypeName == null && (attribute.BoundAttribute?.IsEventCallbackProperty() ?? false))
-                    {
+                    else if (
+                        attribute.TypeName == null
+                        && (attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
+                    ) {
                         // This is a weakly typed event-callback, treat it as EventCallback (non-generic)
                         attribute.TypeName = ComponentsApi.EventCallback.FullTypeName;
                     }
@@ -370,7 +434,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 {
                     if (capture.IsComponentCapture && capture.ComponentCaptureTypeName != null)
                     {
-                        capture.ComponentCaptureTypeName = rewriter.Rewrite(capture.ComponentCaptureTypeName);
+                        capture.ComponentCaptureTypeName = rewriter.Rewrite(
+                            capture.ComponentCaptureTypeName
+                        );
                     }
                     else if (capture.IsComponentCapture)
                     {
@@ -380,8 +446,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                 foreach (var childContent in node.ChildContents)
                 {
-                    if (childContent.BoundAttribute?.IsGenericTypedProperty() ?? false && childContent.TypeName != null)
-                    {
+                    if (
+                        childContent.BoundAttribute?.IsGenericTypedProperty()
+                        ?? false && childContent.TypeName != null
+                    ) {
                         // If we know the type name, then replace any generic type parameter inside it with
                         // the known types.
                         childContent.TypeName = rewriter.Rewrite(childContent.TypeName);
@@ -398,31 +466,43 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 }
             }
 
-            private void CreateTypeInferenceMethod(DocumentIntermediateNode documentNode, ComponentIntermediateNode node, List<CascadingGenericTypeParameter> receivesCascadingGenericTypes)
-            {
+            private void CreateTypeInferenceMethod(
+                DocumentIntermediateNode documentNode,
+                ComponentIntermediateNode node,
+                List<CascadingGenericTypeParameter> receivesCascadingGenericTypes
+            ) {
                 var @namespace = documentNode.FindPrimaryNamespace().Content;
-                @namespace = string.IsNullOrEmpty(@namespace) ? "__Blazor" : "__Blazor." + @namespace;
+                @namespace = string.IsNullOrEmpty(@namespace)
+                    ? "__Blazor"
+                    : "__Blazor." + @namespace;
                 @namespace += "." + documentNode.FindPrimaryClass().ClassName;
 
                 var typeInferenceNode = new ComponentTypeInferenceMethodIntermediateNode()
                 {
                     Component = node,
-
                     // Method name is generated and guaranteed not to collide, since it's unique for each
                     // component call site.
-                    MethodName = $"Create{CSharpIdentifier.SanitizeIdentifier(node.TagName)}_{_id++}",
+                    MethodName =
+                        $"Create{CSharpIdentifier.SanitizeIdentifier(node.TagName)}_{_id++}",
                     FullTypeName = @namespace + ".TypeInference",
-
                     ReceivesCascadingGenericTypes = receivesCascadingGenericTypes,
                 };
 
                 node.TypeInferenceNode = typeInferenceNode;
 
                 // Now we need to insert the type inference node into the tree.
-                var namespaceNode = documentNode.Children
-                    .OfType<NamespaceDeclarationIntermediateNode>()
-                    .Where(n => n.Annotations.Contains(new KeyValuePair<object, object>(ComponentMetadata.Component.GenericTypedKey, bool.TrueString)))
-                    .FirstOrDefault();
+                var namespaceNode =
+                    documentNode.Children.OfType<NamespaceDeclarationIntermediateNode>()
+                        .Where(
+                            n =>
+                                n.Annotations.Contains(
+                                    new KeyValuePair<object, object>(
+                                        ComponentMetadata.Component.GenericTypedKey,
+                                        bool.TrueString
+                                    )
+                                )
+                        )
+                        .FirstOrDefault();
                 if (namespaceNode == null)
                 {
                     namespaceNode = new NamespaceDeclarationIntermediateNode()
@@ -437,8 +517,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     documentNode.Children.Add(namespaceNode);
                 }
 
-                var classNode = namespaceNode.Children
-                    .OfType<ClassDeclarationIntermediateNode>()
+                var classNode = namespaceNode.Children.OfType<ClassDeclarationIntermediateNode>()
                     .Where(n => n.ClassName == "TypeInference")
                     .FirstOrDefault();
                 if (classNode == null)
@@ -446,11 +525,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     classNode = new ClassDeclarationIntermediateNode()
                     {
                         ClassName = "TypeInference",
-                        Modifiers =
-                        {
-                            "internal",
-                            "static",
-                        },
+                        Modifiers = { "internal", "static", },
                     };
                     namespaceNode.Children.Add(classNode);
                 }

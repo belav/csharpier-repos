@@ -22,15 +22,15 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToBase)]
-    internal class GoToBaseCommandHandler : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>
+    internal class GoToBaseCommandHandler
+        : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public GoToBaseCommandHandler(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter) : base(threadingContext, streamingPresenter)
-        {
-        }
+            IStreamingFindUsagesPresenter streamingPresenter
+        ) : base(threadingContext, streamingPresenter) { }
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Base;
 
@@ -38,7 +38,11 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
 
         protected override FunctionId FunctionId => FunctionId.CommandHandler_GoToBase;
 
-        protected override Task FindActionAsync(IGoToBaseService service, Document document, int caretPosition, IFindUsagesContext context)
-            => service.FindBasesAsync(document, caretPosition, context);
+        protected override Task FindActionAsync(
+            IGoToBaseService service,
+            Document document,
+            int caretPosition,
+            IFindUsagesContext context
+        ) => service.FindBasesAsync(document, caretPosition, context);
     }
 }

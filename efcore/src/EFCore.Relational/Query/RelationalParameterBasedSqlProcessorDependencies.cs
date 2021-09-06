@@ -56,8 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalParameterBasedSqlProcessorDependencies(
             ISqlExpressionFactory sqlExpressionFactory,
             IRelationalTypeMappingSource typeMappingSource,
-            IParameterNameGeneratorFactory parameterNameGeneratorFactory)
-        {
+            IParameterNameGeneratorFactory parameterNameGeneratorFactory
+        ) {
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(parameterNameGeneratorFactory, nameof(parameterNameGeneratorFactory));

@@ -41,8 +41,14 @@ namespace System.Globalization
             }
         }
 
-        private static unsafe string NlsGetAsciiCore(string unicodeString, char* unicode, int count, uint flags, char* output, int outputLength)
-        {
+        private static unsafe string NlsGetAsciiCore(
+            string unicodeString,
+            char* unicode,
+            int count,
+            uint flags,
+            char* output,
+            int outputLength
+        ) {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(unicodeString != null && unicodeString.Length >= count);
@@ -88,8 +94,14 @@ namespace System.Globalization
             }
         }
 
-        private static unsafe string NlsGetUnicodeCore(string asciiString, char* ascii, int count, uint flags, char* output, int outputLength)
-        {
+        private static unsafe string NlsGetUnicodeCore(
+            string asciiString,
+            char* ascii,
+            int count,
+            uint flags,
+            char* output,
+            int outputLength
+        ) {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(GlobalizationMode.UseNls);
             Debug.Assert(asciiString != null && asciiString.Length >= count);
@@ -108,8 +120,8 @@ namespace System.Globalization
             get
             {
                 int flags =
-                    (AllowUnassigned ? Interop.Normaliz.IDN_ALLOW_UNASSIGNED : 0) |
-                    (UseStd3AsciiRules ? Interop.Normaliz.IDN_USE_STD3_ASCII_RULES : 0);
+                    (AllowUnassigned ? Interop.Normaliz.IDN_ALLOW_UNASSIGNED : 0)
+                    | (UseStd3AsciiRules ? Interop.Normaliz.IDN_USE_STD3_ASCII_RULES : 0);
                 return (uint)flags;
             }
         }
@@ -120,9 +132,15 @@ namespace System.Globalization
             int lastError = Marshal.GetLastWin32Error();
 
             throw new ArgumentException(
-                lastError == Interop.Errors.ERROR_INVALID_NAME ? SR.Argument_IdnIllegalName :
-                    (unicode ? SR.Argument_InvalidCharSequenceNoIndex : SR.Argument_IdnBadPunycode),
-                unicode ? "unicode" : "ascii");
+                lastError == Interop.Errors.ERROR_INVALID_NAME
+                    ? SR.Argument_IdnIllegalName
+                    : (
+                          unicode
+                              ? SR.Argument_InvalidCharSequenceNoIndex
+                              : SR.Argument_IdnBadPunycode
+                      ),
+                unicode ? "unicode" : "ascii"
+            );
         }
     }
 }

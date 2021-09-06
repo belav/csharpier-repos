@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             bool childShouldParenthesize,
             string fullNameWithoutFormatSpecifiers,
             string childFullNamePrefixOpt,
-            ReadOnlyCollection<string> formatSpecifiers)
-        {
+            ReadOnlyCollection<string> formatSpecifiers
+        ) {
             this.Name = name;
             this.DeclaredTypeAndInfo = declaredTypeAndInfo;
             this.Value = value;
@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         protected override void OnClose()
         {
-            // If we have an expansion, there's a danger that more than one data item is 
+            // If we have an expansion, there's a danger that more than one data item is
             // referring to the same DkmClrValue (e.g. if it's an AggregateExpansion).
             // To be safe, we'll only call Close when there's no expansion.  Since this
             // is only an optimization (the debugger will eventually close the value
@@ -124,26 +124,28 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        public EvalResult(string name, string errorMessage, DkmInspectionContext inspectionContext)
-            : this(
-                ExpansionKind.Error,
-                name: name,
-                typeDeclaringMemberAndInfo: default(TypeAndCustomInfo),
-                declaredTypeAndInfo: default(TypeAndCustomInfo),
-                useDebuggerDisplay: false,
-                value: null,
-                displayValue: errorMessage,
-                expansion: null,
-                childShouldParenthesize: false,
-                fullName: null,
-                childFullNamePrefixOpt: null,
-                formatSpecifiers: Formatter.NoFormatSpecifiers,
-                category: DkmEvaluationResultCategory.Other,
-                flags: DkmEvaluationResultFlags.None,
-                editableValue: null,
-                inspectionContext: inspectionContext)
-        {
-        }
+        public EvalResult(
+            string name,
+            string errorMessage,
+            DkmInspectionContext inspectionContext
+        ) : this(
+            ExpansionKind.Error,
+            name: name,
+            typeDeclaringMemberAndInfo: default(TypeAndCustomInfo),
+            declaredTypeAndInfo: default(TypeAndCustomInfo),
+            useDebuggerDisplay: false,
+            value: null,
+            displayValue: errorMessage,
+            expansion: null,
+            childShouldParenthesize: false,
+            fullName: null,
+            childFullNamePrefixOpt: null,
+            formatSpecifiers: Formatter.NoFormatSpecifiers,
+            category: DkmEvaluationResultCategory.Other,
+            flags: DkmEvaluationResultFlags.None,
+            editableValue: null,
+            inspectionContext: inspectionContext
+        ) { }
 
         public EvalResult(
             ExpansionKind kind,
@@ -165,8 +167,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string displayName = null,
             string displayType = null,
             bool canFavorite = false,
-            bool isFavorite = false)
-        {
+            bool isFavorite = false
+        ) {
             Debug.Assert(name != null);
             Debug.Assert(formatSpecifiers != null);
             Debug.Assert((flags & DkmEvaluationResultFlags.Expandable) == 0);
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this.FormatSpecifiers = formatSpecifiers;
             this.Category = category;
             this.EditableValue = editableValue;
-            this.Flags = flags | GetFlags(value, inspectionContext, expansion, canFavorite, isFavorite);
+            this.Flags =
+                flags | GetFlags(value, inspectionContext, expansion, canFavorite, isFavorite);
             this.Expansion = expansion;
             this.InspectionContext = inspectionContext;
             this.DisplayName = displayName;
@@ -205,7 +208,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 ChildShouldParenthesize,
                 FullNameWithoutFormatSpecifiers,
                 ChildFullNamePrefix,
-                FormatSpecifiers);
+                FormatSpecifiers
+            );
         }
 
         internal EvalResult WithDisableCanAddFavorite()
@@ -230,12 +234,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 displayName: DisplayName,
                 displayType: DisplayType,
                 canFavorite: false,
-                isFavorite: IsFavorite);
-
+                isFavorite: IsFavorite
+            );
         }
 
-        private static DkmEvaluationResultFlags GetFlags(DkmClrValue value, DkmInspectionContext inspectionContext, Expansion expansion, bool canFavorite, bool isFavorite)
-        {
+        private static DkmEvaluationResultFlags GetFlags(
+            DkmClrValue value,
+            DkmInspectionContext inspectionContext,
+            Expansion expansion,
+            bool canFavorite,
+            bool isFavorite
+        ) {
             if (value == null)
             {
                 return DkmEvaluationResultFlags.None;

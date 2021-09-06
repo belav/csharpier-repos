@@ -36,7 +36,9 @@ namespace System.Linq.Expressions.Tests
         {
             // (Expression[]) overload
             {
-                ConstantExpression[] args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
                 BlockExpression expr = Expression.Block(args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -44,7 +46,9 @@ namespace System.Linq.Expressions.Tests
 
             // (IEnumerable<Expression>) overload
             {
-                List<ConstantExpression> args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToList();
+                List<ConstantExpression> args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToList();
                 BlockExpression expr = Expression.Block(args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -52,7 +56,9 @@ namespace System.Linq.Expressions.Tests
 
             // (Type, Expression[]) overload
             {
-                ConstantExpression[] args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
                 BlockExpression expr = Expression.Block(args.Last().Type, args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -60,7 +66,9 @@ namespace System.Linq.Expressions.Tests
 
             // (Type, IEnumerable<Expression>) overload
             {
-                List<ConstantExpression> args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToList();
+                List<ConstantExpression> args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToList();
                 BlockExpression expr = Expression.Block(args.Last().Type, args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -69,7 +77,9 @@ namespace System.Linq.Expressions.Tests
             // (IEnumerable<ParameterExpression>, Expression[]) overload
             {
                 var vars = new ParameterExpression[0];
-                ConstantExpression[] args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
                 BlockExpression expr = Expression.Block(vars, args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -78,7 +88,9 @@ namespace System.Linq.Expressions.Tests
             // (IEnumerable<ParameterExpression>, IEnumerable<Expression>) overload
             {
                 var vars = new ParameterExpression[0];
-                List<ConstantExpression> args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToList();
+                List<ConstantExpression> args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToList();
                 BlockExpression expr = Expression.Block(vars, args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -87,7 +99,9 @@ namespace System.Linq.Expressions.Tests
             // (Type, IEnumerable<ParameterExpression>, Expression[]) overload
             {
                 var vars = new ParameterExpression[0];
-                ConstantExpression[] args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
                 BlockExpression expr = Expression.Block(args.Last().Type, vars, args);
 
                 AssertBlockIsOptimized(expr, args);
@@ -96,15 +110,19 @@ namespace System.Linq.Expressions.Tests
             // (Type, IEnumerable<ParameterExpression>, IEnumerable<Expression>) overload
             {
                 var vars = new ParameterExpression[0];
-                List<ConstantExpression> args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToList();
+                List<ConstantExpression> args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToList();
                 BlockExpression expr = Expression.Block(args.Last().Type, vars, args);
 
                 AssertBlockIsOptimized(expr, args);
             }
         }
 
-        private static void AssertBlockIsOptimized(BlockExpression expr, IReadOnlyList<Expression> args)
-        {
+        private static void AssertBlockIsOptimized(
+            BlockExpression expr,
+            IReadOnlyList<Expression> args
+        ) {
             int n = args.Count;
 
             BlockExpression updated = Update(expr);

@@ -193,8 +193,9 @@ namespace System.Dynamic.Tests
                 return false;
             }
 
-            public static explicit operator DateTimeOffset(DynamicallyConvertableNotOverride source) =>
-                new DateTimeOffset(1991, 8, 6, 0, 0, 0, new TimeSpan(2, 0, 0));
+            public static explicit operator DateTimeOffset(
+                DynamicallyConvertableNotOverride source
+            ) => new DateTimeOffset(1991, 8, 6, 0, 0, 0, new TimeSpan(2, 0, 0));
 
             public static implicit operator Uri(DynamicallyConvertableNotOverride source) =>
                 new Uri("http://example.net/");
@@ -258,12 +259,20 @@ namespace System.Dynamic.Tests
 
         private class DynamicallyInvokableIntPowerMember : DynamicObject
         {
-            public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
-            {
-                if (binder.Name.Equals(
-                    "Power", binder.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)
-                    && args.Length == 2)
-                {
+            public override bool TryInvokeMember(
+                InvokeMemberBinder binder,
+                object[] args,
+                out object result
+            ) {
+                if (
+                    binder.Name.Equals(
+                        "Power",
+                        binder.IgnoreCase
+                            ? StringComparison.OrdinalIgnoreCase
+                            : StringComparison.Ordinal
+                    )
+                    && args.Length == 2
+                ) {
                     int x;
                     int y;
                     try
@@ -308,10 +317,16 @@ namespace System.Dynamic.Tests
         private class IndexableObject : DynamicObject
         {
             Dictionary<int, int> _oneDimension = new Dictionary<int, int>();
-            Dictionary<Tuple<int, int>, string> _twoDimensions = new Dictionary<Tuple<int, int>, string>();
+            Dictionary<Tuple<int, int>, string> _twoDimensions = new Dictionary<
+                Tuple<int, int>,
+                string
+            >();
 
-            public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
-            {
+            public override bool TryGetIndex(
+                GetIndexBinder binder,
+                object[] indexes,
+                out object result
+            ) {
                 switch (indexes.Length)
                 {
                     case 1:
@@ -321,16 +336,16 @@ namespace System.Dynamic.Tests
                             result = value;
                             return true;
                         }
-
                         break;
                     case 2:
                         if (indexes[0] is int && indexes[1] is int)
                         {
-                            string value = _twoDimensions[Tuple.Create((int)indexes[0], (int)indexes[1])];
+                            string value = _twoDimensions[
+                                Tuple.Create((int)indexes[0], (int)indexes[1])
+                            ];
                             result = value;
                             return true;
                         }
-
                         break;
                 }
 
@@ -348,15 +363,14 @@ namespace System.Dynamic.Tests
                             _oneDimension[(int)indexes[0]] = (int)value;
                             return true;
                         }
-
                         break;
                     case 2:
                         if (indexes[0] is int && indexes[1] is int && value is string)
                         {
-                            _twoDimensions[Tuple.Create((int)indexes[0], (int)indexes[1])] = (string)value;
+                            _twoDimensions[Tuple.Create((int)indexes[0], (int)indexes[1])] =
+                                (string)value;
                             return true;
                         }
-
                         break;
                 }
 
@@ -395,8 +409,11 @@ namespace System.Dynamic.Tests
 
             public int Value { get; }
 
-            public override bool TryBinaryOperation(BinaryOperationBinder binder, object arg, out object result)
-            {
+            public override bool TryBinaryOperation(
+                BinaryOperationBinder binder,
+                object arg,
+                out object result
+            ) {
                 if (binder.Operation == ExpressionType.Add)
                 {
                     AddableNum addend = arg as AddableNum;
@@ -422,8 +439,11 @@ namespace System.Dynamic.Tests
 
             public int Value { get; }
 
-            public override bool TryBinaryOperation(BinaryOperationBinder binder, object arg, out object result)
-            {
+            public override bool TryBinaryOperation(
+                BinaryOperationBinder binder,
+                object arg,
+                out object result
+            ) {
                 if (binder.Operation == ExpressionType.Add)
                 {
                     AddableNum addend = arg as AddableNum;
@@ -443,7 +463,13 @@ namespace System.Dynamic.Tests
         {
             private static readonly string[] Names =
             {
-                "Foo", "Bar", "Baz", "Quux", "Quuux", "Quuuux", "Quuuuux",
+                "Foo",
+                "Bar",
+                "Baz",
+                "Quux",
+                "Quuux",
+                "Quuuux",
+                "Quuuuux",
                 "Quuuuuux"
             };
 
@@ -503,7 +529,10 @@ namespace System.Dynamic.Tests
         {
             dynamic d = new TestDynamicNameReflective();
             d.DynProp = nameof(d.DynProp);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => d.DynProp = "I wandered lonely as a cloud.");
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => d.DynProp = "I wandered lonely as a cloud."
+            );
         }
 
         [Fact]
@@ -553,7 +582,10 @@ namespace System.Dynamic.Tests
         public void MetaDynamicKnowsNamesFromDynamic()
         {
             var trad = new TraditionalDynamicObject();
-            Assert.Same(trad.GetDynamicMemberNames(), trad.GetMetaObject(Expression.Parameter(typeof(object))).GetDynamicMemberNames());
+            Assert.Same(
+                trad.GetDynamicMemberNames(),
+                trad.GetMetaObject(Expression.Parameter(typeof(object))).GetDynamicMemberNames()
+            );
         }
 
         [Fact]
@@ -685,7 +717,9 @@ namespace System.Dynamic.Tests
             Assert.Throws<RuntimeBinderException>(() => d.modulo(233, 12));
             Assert.Throws<RuntimeBinderException>(() => d.Modulo());
             Assert.Throws<RuntimeBinderException>(() => d.Modulo(233, 12, 9));
-            Assert.Throws<RuntimeBinderException>(() => d.Modulo("two hundred and thirty-three", "twelve"));
+            Assert.Throws<RuntimeBinderException>(
+                () => d.Modulo("two hundred and thirty-three", "twelve")
+            );
         }
 
         [Fact]
@@ -783,14 +817,18 @@ namespace System.Dynamic.Tests
             Assert.Throws<RuntimeBinderException>(() => d[2, 4] = 1);
             Assert.Throws<RuntimeBinderException>(() => d["index"]);
             Assert.Throws<RuntimeBinderException>(() => d["index"] = 2);
-            Assert.Throws<RuntimeBinderException>(() =>
-            {
-                string val = d[23];
-            });
-            Assert.Throws<RuntimeBinderException>(() =>
-            {
-                int val = d[1, 2];
-            });
+            Assert.Throws<RuntimeBinderException>(
+                () =>
+                {
+                    string val = d[23];
+                }
+            );
+            Assert.Throws<RuntimeBinderException>(
+                () =>
+                {
+                    int val = d[1, 2];
+                }
+            );
             Assert.Throws<RuntimeBinderException>(() => d[1, 2, 3]);
         }
 
@@ -801,10 +839,12 @@ namespace System.Dynamic.Tests
             d[0] = 1;
             Assert.Equal(1, d[0]);
             Assert.Throws<RuntimeBinderException>(() => d[0] = "One");
-            Assert.Throws<RuntimeBinderException>(() =>
-            {
-                string val = d[0];
-            });
+            Assert.Throws<RuntimeBinderException>(
+                () =>
+                {
+                    string val = d[0];
+                }
+            );
             Assert.Throws<RuntimeBinderException>(() => d["index"]);
         }
     }

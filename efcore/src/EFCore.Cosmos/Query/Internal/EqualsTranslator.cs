@@ -40,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -49,29 +49,25 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? left = null;
             SqlExpression? right = null;
 
-            if (method.Name == nameof(object.Equals)
-                && instance != null
-                && arguments.Count == 1)
+            if (method.Name == nameof(object.Equals) && instance != null && arguments.Count == 1)
             {
                 left = instance;
                 right = arguments[0];
             }
-            else if (instance == null
-                && method.Name == nameof(object.Equals)
-                && arguments.Count == 2)
-            {
+            else if (
+                instance == null && method.Name == nameof(object.Equals) && arguments.Count == 2
+            ) {
                 left = arguments[0];
                 right = arguments[1];
             }
 
-            if (left != null
-                && right != null)
+            if (left != null && right != null)
             {
                 return left.Type.UnwrapNullableType() == right.Type.UnwrapNullableType()
-                    || (right.Type == typeof(object) && right is SqlParameterExpression)
-                    || (left.Type == typeof(object) && left is SqlParameterExpression)
-                        ? _sqlExpressionFactory.Equal(left, right)
-                        : (SqlExpression)_sqlExpressionFactory.Constant(false);
+                || (right.Type == typeof(object) && right is SqlParameterExpression)
+                || (left.Type == typeof(object) && left is SqlParameterExpression)
+                    ? _sqlExpressionFactory.Equal(left, right)
+                    : (SqlExpression)_sqlExpressionFactory.Constant(false);
             }
 
             return null;

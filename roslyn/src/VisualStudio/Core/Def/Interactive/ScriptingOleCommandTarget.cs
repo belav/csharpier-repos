@@ -20,18 +20,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
     {
         internal ScriptingOleCommandTarget(
             IWpfTextView wpfTextView,
-            IComponentModel componentModel)
-            : base(wpfTextView, componentModel)
-        {
-        }
+            IComponentModel componentModel
+        ) : base(wpfTextView, componentModel) { }
 
         protected override ITextBuffer? GetSubjectBufferContainingCaret()
         {
-            var result = WpfTextView.GetBufferContainingCaret(contentType: ContentTypeNames.RoslynContentType);
+            var result = WpfTextView.GetBufferContainingCaret(
+                contentType: ContentTypeNames.RoslynContentType
+            );
 
             if (result == null)
             {
-                result = WpfTextView.GetBufferContainingCaret(contentType: PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName);
+                result = WpfTextView.GetBufferContainingCaret(
+                    contentType: PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName
+                );
             }
 
             return result;

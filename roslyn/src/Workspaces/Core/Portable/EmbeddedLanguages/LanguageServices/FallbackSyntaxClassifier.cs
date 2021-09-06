@@ -24,17 +24,22 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices
             SyntaxTokenKinds = ImmutableArray.Create(
                 info.CharLiteralTokenKind,
                 info.StringLiteralTokenKind,
-                info.InterpolatedTextTokenKind);
+                info.InterpolatedTextTokenKind
+            );
         }
 
         public override void AddClassifications(
-            Workspace workspace, SyntaxToken token, SemanticModel semanticModel,
-            ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
-        {
-            if (_info.CharLiteralTokenKind != token.RawKind &&
-                _info.StringLiteralTokenKind != token.RawKind &&
-                _info.InterpolatedTextTokenKind != token.RawKind)
-            {
+            Workspace workspace,
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) {
+            if (
+                _info.CharLiteralTokenKind != token.RawKind
+                && _info.StringLiteralTokenKind != token.RawKind
+                && _info.InterpolatedTextTokenKind != token.RawKind
+            ) {
                 return;
             }
 
@@ -48,7 +53,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices
             {
                 if (vc.Span.Length > 1)
                 {
-                    result.Add(new ClassifiedSpan(ClassificationTypeNames.StringEscapeCharacter, vc.Span));
+                    result.Add(
+                        new ClassifiedSpan(ClassificationTypeNames.StringEscapeCharacter, vc.Span)
+                    );
                 }
             }
         }

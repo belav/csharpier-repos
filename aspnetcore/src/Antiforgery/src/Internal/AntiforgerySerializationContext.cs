@@ -39,10 +39,7 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 return _stream;
             }
-            private set
-            {
-                _stream = value;
-            }
+            private set { _stream = value; }
         }
 
         public BinaryReader Reader
@@ -57,10 +54,7 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 return _reader;
             }
-            private set
-            {
-                _reader = value;
-            }
+            private set { _reader = value; }
         }
 
         public BinaryWriter Writer
@@ -75,10 +69,7 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 return _writer;
             }
-            private set
-            {
-                _writer = value;
-            }
+            private set { _writer = value; }
         }
 
         public char[] GetChars(int count)

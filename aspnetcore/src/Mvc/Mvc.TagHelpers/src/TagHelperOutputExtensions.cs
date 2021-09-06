@@ -18,7 +18,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
     /// </summary>
     public static class TagHelperOutputExtensions
     {
-        private static readonly char[] SpaceChars = { '\u0020', '\u0009', '\u000A', '\u000C', '\u000D' };
+        private static readonly char[] SpaceChars =
+        {
+            '\u0020',
+            '\u0009',
+            '\u000A',
+            '\u000C',
+            '\u000D'
+        };
 
         /// <summary>
         /// Copies a user-provided attribute from <paramref name="context"/>'s
@@ -42,8 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public static void CopyHtmlAttribute(
             this TagHelperOutput tagHelperOutput,
             string attributeName,
-            TagHelperContext context)
-        {
+            TagHelperContext context
+        ) {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -69,11 +76,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 {
                     // We look for the original attribute so we can restore the exact attribute name the user typed in
                     // approximately the same position where the user wrote it in the Razor source.
-                    if (string.Equals(
-                        attributeName,
-                        context.AllAttributes[i].Name,
-                        StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            attributeName,
+                            context.AllAttributes[i].Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         CopyHtmlAttribute(i, tagHelperOutput, context);
                         copiedAttribute = true;
                     }
@@ -82,8 +91,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 if (!copiedAttribute)
                 {
                     throw new ArgumentException(
-                        Resources.FormatTagHelperOutput_AttributeDoesNotExist(attributeName, nameof(TagHelperContext)),
-                        nameof(attributeName));
+                        Resources.FormatTagHelperOutput_AttributeDoesNotExist(
+                            attributeName,
+                            nameof(TagHelperContext)
+                        ),
+                        nameof(attributeName)
+                    );
                 }
             }
         }
@@ -96,8 +109,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <param name="tagBuilder">The <see cref="TagBuilder"/> to merge attributes from.</param>
         /// <remarks>Existing <see cref="TagHelperOutput.Attributes"/> on the given <paramref name="tagHelperOutput"/>
         /// are not overridden; "class" attributes are merged with spaces.</remarks>
-        public static void MergeAttributes(this TagHelperOutput tagHelperOutput, TagBuilder tagBuilder)
-        {
+        public static void MergeAttributes(
+            this TagHelperOutput tagHelperOutput,
+            TagBuilder tagBuilder
+        ) {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -116,13 +131,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 }
                 else if (string.Equals(attribute.Key, "class", StringComparison.OrdinalIgnoreCase))
                 {
-                    var found = tagHelperOutput.Attributes.TryGetAttribute("class", out var classAttribute);
+                    var found = tagHelperOutput.Attributes.TryGetAttribute(
+                        "class",
+                        out var classAttribute
+                    );
                     Debug.Assert(found);
 
                     var newAttribute = new TagHelperAttribute(
                         classAttribute.Name,
                         new ClassAttributeHtmlContent(classAttribute.Value, attribute.Value),
-                        classAttribute.ValueStyle);
+                        classAttribute.ValueStyle
+                    );
 
                     tagHelperOutput.Attributes.SetAttribute(newAttribute);
                 }
@@ -137,8 +156,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <param name="attributes">Attributes to remove.</param>
         public static void RemoveRange(
             this TagHelperOutput tagHelperOutput,
-            IEnumerable<TagHelperAttribute> attributes)
-        {
+            IEnumerable<TagHelperAttribute> attributes
+        ) {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -165,8 +184,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public static void AddClass(
             this TagHelperOutput tagHelperOutput,
             string classValue,
-            HtmlEncoder htmlEncoder)
-        {
+            HtmlEncoder htmlEncoder
+        ) {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
@@ -177,15 +196,28 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 return;
             }
 
-            var encodedSpaceChars = SpaceChars.Where(x => !x.Equals('\u0020')).Select(x => htmlEncoder.Encode(x.ToString())).ToArray();
+            var encodedSpaceChars = SpaceChars.Where(x => !x.Equals('\u0020'))
+                .Select(x => htmlEncoder.Encode(x.ToString()))
+                .ToArray();
 
-            if (SpaceChars.Any(classValue.Contains) || encodedSpaceChars.Any(value => classValue.IndexOf(value, StringComparison.Ordinal) >= 0))
-            {
-                throw new ArgumentException(Resources.ArgumentCannotContainHtmlSpace, nameof(classValue));
+            if (
+                SpaceChars.Any(classValue.Contains)
+                || encodedSpaceChars.Any(
+                    value => classValue.IndexOf(value, StringComparison.Ordinal) >= 0
+                )
+            ) {
+                throw new ArgumentException(
+                    Resources.ArgumentCannotContainHtmlSpace,
+                    nameof(classValue)
+                );
             }
 
-            if (!tagHelperOutput.Attributes.TryGetAttribute("class", out TagHelperAttribute classAttribute))
-            {
+            if (
+                !tagHelperOutput.Attributes.TryGetAttribute(
+                    "class",
+                    out TagHelperAttribute classAttribute
+                )
+            ) {
                 tagHelperOutput.Attributes.Add("class", classValue);
             }
             else
@@ -199,8 +231,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     return;
                 }
 
-                var arrayOfClasses = currentClassValue.Split(SpaceChars, StringSplitOptions.RemoveEmptyEntries)
-                    .SelectMany(perhapsEncoded => perhapsEncoded.Split(encodedSpaceChars, StringSplitOptions.RemoveEmptyEntries))
+                var arrayOfClasses = currentClassValue.Split(
+                        SpaceChars,
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                    .SelectMany(
+                        perhapsEncoded =>
+                            perhapsEncoded.Split(
+                                encodedSpaceChars,
+                                StringSplitOptions.RemoveEmptyEntries
+                            )
+                    )
                     .ToArray();
 
                 if (arrayOfClasses.Contains(encodedClassValue, StringComparer.Ordinal))
@@ -211,7 +252,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 var newClassAttribute = new TagHelperAttribute(
                     classAttribute.Name,
                     new HtmlString($"{currentClassValue} {encodedClassValue}"),
-                    classAttribute.ValueStyle);
+                    classAttribute.ValueStyle
+                );
 
                 tagHelperOutput.Attributes.SetAttribute(newClassAttribute);
             }
@@ -227,22 +269,35 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public static void RemoveClass(
             this TagHelperOutput tagHelperOutput,
             string classValue,
-            HtmlEncoder htmlEncoder)
-        {
+            HtmlEncoder htmlEncoder
+        ) {
             if (tagHelperOutput == null)
             {
                 throw new ArgumentNullException(nameof(tagHelperOutput));
             }
 
-            var encodedSpaceChars = SpaceChars.Where(x => !x.Equals('\u0020')).Select(x => htmlEncoder.Encode(x.ToString())).ToArray();
+            var encodedSpaceChars = SpaceChars.Where(x => !x.Equals('\u0020'))
+                .Select(x => htmlEncoder.Encode(x.ToString()))
+                .ToArray();
 
-            if (SpaceChars.Any(classValue.Contains) || encodedSpaceChars.Any(value => classValue.IndexOf(value, StringComparison.Ordinal) >= 0))
-            {
-                throw new ArgumentException(Resources.ArgumentCannotContainHtmlSpace, nameof(classValue));
+            if (
+                SpaceChars.Any(classValue.Contains)
+                || encodedSpaceChars.Any(
+                    value => classValue.IndexOf(value, StringComparison.Ordinal) >= 0
+                )
+            ) {
+                throw new ArgumentException(
+                    Resources.ArgumentCannotContainHtmlSpace,
+                    nameof(classValue)
+                );
             }
 
-            if (!tagHelperOutput.Attributes.TryGetAttribute("class", out TagHelperAttribute classAttribute))
-            {
+            if (
+                !tagHelperOutput.Attributes.TryGetAttribute(
+                    "class",
+                    out TagHelperAttribute classAttribute
+                )
+            ) {
                 return;
             }
 
@@ -266,8 +321,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 return;
             }
 
-            var listOfClasses = currentClassValue.Split(SpaceChars, StringSplitOptions.RemoveEmptyEntries)
-                .SelectMany(perhapsEncoded => perhapsEncoded.Split(encodedSpaceChars, StringSplitOptions.RemoveEmptyEntries))
+            var listOfClasses = currentClassValue.Split(
+                    SpaceChars,
+                    StringSplitOptions.RemoveEmptyEntries
+                )
+                .SelectMany(
+                    perhapsEncoded =>
+                        perhapsEncoded.Split(
+                            encodedSpaceChars,
+                            StringSplitOptions.RemoveEmptyEntries
+                        )
+                )
                 .ToList();
 
             if (!listOfClasses.Contains(encodedClassValue))
@@ -290,8 +354,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
         private static string ExtractClassValue(
             TagHelperAttribute classAttribute,
-            HtmlEncoder htmlEncoder)
-        {
+            HtmlEncoder htmlEncoder
+        ) {
             string extractedClassValue;
             switch (classAttribute.Value)
             {
@@ -319,8 +383,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private static void CopyHtmlAttribute(
             int allAttributeIndex,
             TagHelperOutput tagHelperOutput,
-            TagHelperContext context)
-        {
+            TagHelperContext context
+        ) {
             var allAttributes = context.AllAttributes;
             var existingAttribute = allAttributes[allAttributeIndex];
 

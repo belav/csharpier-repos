@@ -25,11 +25,19 @@ namespace ILCompiler.Diagnostics
                 {
                     if (methodInfo.HotRVA != 0 && methodInfo.HotLength != 0)
                     {
-                        perfMapWriter.WriteLine(methodInfo.Name, methodInfo.HotRVA, methodInfo.HotLength);
+                        perfMapWriter.WriteLine(
+                            methodInfo.Name,
+                            methodInfo.HotRVA,
+                            methodInfo.HotLength
+                        );
                     }
                     if (methodInfo.ColdRVA != 0 && methodInfo.ColdLength != 0)
                     {
-                        perfMapWriter.WriteLine(methodInfo.Name, methodInfo.ColdRVA, methodInfo.ColdLength);
+                        perfMapWriter.WriteLine(
+                            methodInfo.Name,
+                            methodInfo.ColdRVA,
+                            methodInfo.ColdLength
+                        );
                     }
                 }
             }

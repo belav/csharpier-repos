@@ -25,7 +25,7 @@ class OpenMutexPos
         int iRet = -1;
         string sName = Common.GetUniqueName();
         // Basic test, not owned
-        using(mut = new Mutex(false, sName))
+        using (mut = new Mutex(false, sName))
         {
             Thread t = new Thread(new ThreadStart(OwnMutex));
             t.Start();
@@ -39,8 +39,7 @@ class OpenMutexPos
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unexpected exception thrown: " +
-                    ex.ToString());
+                Console.WriteLine("Unexpected exception thrown: " + ex.ToString());
             }
         }
 

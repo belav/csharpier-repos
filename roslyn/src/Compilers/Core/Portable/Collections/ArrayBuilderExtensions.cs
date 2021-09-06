@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static bool Any<T, A>(this ArrayBuilder<T> builder, Func<T, A, bool> predicate, A arg)
-        {
+        public static bool Any<T, A>(
+            this ArrayBuilder<T> builder,
+            Func<T, A, bool> predicate,
+            A arg
+        ) {
             foreach (var item in builder)
             {
                 if (predicate(item, arg))
@@ -47,8 +50,11 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        public static bool All<T, A>(this ArrayBuilder<T> builder, Func<T, A, bool> predicate, A arg)
-        {
+        public static bool All<T, A>(
+            this ArrayBuilder<T> builder,
+            Func<T, A, bool> predicate,
+            A arg
+        ) {
             foreach (var item in builder)
             {
                 if (!predicate(item, arg))
@@ -67,8 +73,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="items">The array to map</param>
         /// <param name="map">The mapping delegate</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array</returns>
-        public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(this ArrayBuilder<TItem> items, Func<TItem, TResult> map)
-        {
+        public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(
+            this ArrayBuilder<TItem> items,
+            Func<TItem, TResult> map
+        ) {
             switch (items.Count)
             {
                 case 0:
@@ -84,7 +92,12 @@ namespace Microsoft.CodeAnalysis
                     return ImmutableArray.Create(map(items[0]), map(items[1]), map(items[2]));
 
                 case 4:
-                    return ImmutableArray.Create(map(items[0]), map(items[1]), map(items[2]), map(items[3]));
+                    return ImmutableArray.Create(
+                        map(items[0]),
+                        map(items[1]),
+                        map(items[2]),
+                        map(items[3])
+                    );
 
                 default:
                     var builder = ArrayBuilder<TResult>.GetInstance(items.Count);
@@ -107,8 +120,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="map">The mapping delegate</param>
         /// <param name="arg">The extra input used by mapping delegate</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
-        public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(this ArrayBuilder<TItem> items, Func<TItem, TArg, TResult> map, TArg arg)
-        {
+        public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(
+            this ArrayBuilder<TItem> items,
+            Func<TItem, TArg, TResult> map,
+            TArg arg
+        ) {
             switch (items.Count)
             {
                 case 0:
@@ -121,10 +137,19 @@ namespace Microsoft.CodeAnalysis
                     return ImmutableArray.Create(map(items[0], arg), map(items[1], arg));
 
                 case 3:
-                    return ImmutableArray.Create(map(items[0], arg), map(items[1], arg), map(items[2], arg));
+                    return ImmutableArray.Create(
+                        map(items[0], arg),
+                        map(items[1], arg),
+                        map(items[2], arg)
+                    );
 
                 case 4:
-                    return ImmutableArray.Create(map(items[0], arg), map(items[1], arg), map(items[2], arg), map(items[3], arg));
+                    return ImmutableArray.Create(
+                        map(items[0], arg),
+                        map(items[1], arg),
+                        map(items[2], arg),
+                        map(items[3], arg)
+                    );
 
                 default:
                     var builder = ArrayBuilder<TResult>.GetInstance(items.Count);
@@ -137,8 +162,7 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static void AddOptional<T>(this ArrayBuilder<T> builder, T? item)
-            where T : class
+        public static void AddOptional<T>(this ArrayBuilder<T> builder, T? item) where T : class
         {
             if (item != null)
             {
@@ -146,8 +170,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        // The following extension methods allow an ArrayBuilder to be used as a stack. 
-        // Note that the order of an IEnumerable from a List is from bottom to top of stack. An IEnumerable 
+        // The following extension methods allow an ArrayBuilder to be used as a stack.
+        // Note that the order of an IEnumerable from a List is from bottom to top of stack. An IEnumerable
         // from the framework Stack is from top to bottom.
         public static void Push<T>(this ArrayBuilder<T> builder, T e)
         {
@@ -161,8 +185,10 @@ namespace Microsoft.CodeAnalysis
             return e;
         }
 
-        public static bool TryPop<T>(this ArrayBuilder<T> builder, [MaybeNullWhen(false)] out T result)
-        {
+        public static bool TryPop<T>(
+            this ArrayBuilder<T> builder,
+            [MaybeNullWhen(false)] out T result
+        ) {
             if (builder.Count > 0)
             {
                 result = builder.Pop();
@@ -183,8 +209,7 @@ namespace Microsoft.CodeAnalysis
             return builder?.ToImmutableAndFree() ?? ImmutableArray<T>.Empty;
         }
 
-        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value)
-            where T : struct
+        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value) where T : struct
         {
             if (value != null)
             {
@@ -192,8 +217,7 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value)
-            where T : class
+        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value) where T : class
         {
             if (value != null)
             {
@@ -202,8 +226,10 @@ namespace Microsoft.CodeAnalysis
         }
 
 #nullable disable
-        public static void FreeAll<T>(this ArrayBuilder<T> builder, Func<T, ArrayBuilder<T>> getNested)
-        {
+        public static void FreeAll<T>(
+            this ArrayBuilder<T> builder,
+            Func<T, ArrayBuilder<T>> getNested
+        ) {
             foreach (var item in builder)
             {
                 getNested(item)?.FreeAll(getNested);

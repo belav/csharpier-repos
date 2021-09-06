@@ -37,13 +37,20 @@ namespace Roslyn.Test.Utilities.CoreClr
             Compilation mainCompilation,
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions emitOptions,
-            bool usePdbForDebugging = false)
-        {
+            bool usePdbForDebugging = false
+        ) {
             _testData.Methods.Clear();
 
             var diagnostics = DiagnosticBag.GetInstance();
             var dependencies = new List<ModuleData>();
-            var mainOutput = EmitCompilation(mainCompilation, manifestResources, dependencies, diagnostics, _testData, emitOptions);
+            var mainOutput = EmitCompilation(
+                mainCompilation,
+                manifestResources,
+                dependencies,
+                diagnostics,
+                _testData,
+                emitOptions
+            );
 
             _emitData = new EmitData();
             _emitData.Diagnostics = diagnostics.ToReadOnlyAndFree();
@@ -57,7 +64,8 @@ namespace Roslyn.Test.Utilities.CoreClr
                     mainCompilation.Options.OutputKind,
                     mainImage,
                     pdb: usePdbForDebugging ? mainPdb : default(ImmutableArray<byte>),
-                    inMemoryModule: true);
+                    inMemoryModule: true
+                );
                 _emitData.MainModulePdb = mainPdb;
                 _emitData.AllModuleData = dependencies;
 
@@ -81,7 +89,11 @@ namespace Roslyn.Test.Utilities.CoreClr
         {
             var emitData = GetEmitData();
             emitData.RuntimeData.ExecuteRequested = true;
-            var (ExitCode, Output) = emitData.LoadContext.Execute(GetMainImage(), args, expectedOutput?.Length);
+            var (ExitCode, Output) = emitData.LoadContext.Execute(
+                GetMainImage(),
+                args,
+                expectedOutput?.Length
+            );
 
             if (expectedOutput != null && expectedOutput.Trim() != Output.Trim())
             {
@@ -91,7 +103,9 @@ namespace Roslyn.Test.Utilities.CoreClr
             return ExitCode;
         }
 
-        private EmitData GetEmitData() => _emitData ?? throw new InvalidOperationException("Must call Emit before calling this method");
+        private EmitData GetEmitData() =>
+            _emitData
+            ?? throw new InvalidOperationException("Must call Emit before calling this method");
 
         public IList<ModuleData> GetAllModuleData() => GetEmitData().AllModuleData;
 
@@ -101,8 +115,10 @@ namespace Roslyn.Test.Utilities.CoreClr
 
         public ImmutableArray<byte> GetMainPdb() => GetEmitData().MainModulePdb;
 
-        public SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName) =>
-            GetEmitData().GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName);
+        public SortedSet<string> GetMemberSignaturesFromMetadata(
+            string fullyQualifiedTypeName,
+            string memberName
+        ) => GetEmitData().GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName);
 
         public void Verify(Verification verification)
         {
@@ -124,12 +140,16 @@ namespace Roslyn.Test.Utilities.CoreClr
 
         public void Dispose()
         {
-            // We need Dispose to satisfy the IRuntimeEnvironment interface, but 
+            // We need Dispose to satisfy the IRuntimeEnvironment interface, but
             // we don't really need it.
         }
 
-        public void CaptureOutput(Action action, int expectedLength, out string output, out string errorOutput)
-            => SharedConsole.CaptureOutput(action, expectedLength, out output, out errorOutput);
+        public void CaptureOutput(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        ) => SharedConsole.CaptureOutput(action, expectedLength, out output, out errorOutput);
 
         private sealed class RuntimeData
         {
@@ -160,9 +180,15 @@ namespace Roslyn.Test.Utilities.CoreClr
 
             internal ImmutableArray<Diagnostic> Diagnostics;
 
-            public SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName)
-            {
-                return LoadContext.GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName, AllModuleData.Select(x => x.Id));
+            public SortedSet<string> GetMemberSignaturesFromMetadata(
+                string fullyQualifiedTypeName,
+                string memberName
+            ) {
+                return LoadContext.GetMemberSignaturesFromMetadata(
+                    fullyQualifiedTypeName,
+                    memberName,
+                    AllModuleData.Select(x => x.Id)
+                );
             }
         }
     }

@@ -10,8 +10,13 @@ namespace System.Buffers.Text
         /// <summary>
         /// Overflow-safe DateTimeOffset factory.
         /// </summary>
-        private static bool TryCreateDateTimeOffset(DateTime dateTime, bool offsetNegative, int offsetHours, int offsetMinutes, out DateTimeOffset value)
-        {
+        private static bool TryCreateDateTimeOffset(
+            DateTime dateTime,
+            bool offsetNegative,
+            int offsetHours,
+            int offsetMinutes,
+            out DateTimeOffset value
+        ) {
             if (((uint)offsetHours) > Utf8Constants.DateTimeMaxUtcOffsetHours)
             {
                 value = default;
@@ -30,7 +35,8 @@ namespace System.Buffers.Text
                 return false;
             }
 
-            long offsetTicks = (((long)offsetHours) * 3600 + ((long)offsetMinutes) * 60) * TimeSpan.TicksPerSecond;
+            long offsetTicks =
+                (((long)offsetHours) * 3600 + ((long)offsetMinutes) * 60) * TimeSpan.TicksPerSecond;
             if (offsetNegative)
             {
                 offsetTicks = -offsetTicks;
@@ -38,7 +44,10 @@ namespace System.Buffers.Text
 
             try
             {
-                value = new DateTimeOffset(ticks: dateTime.Ticks, offset: new TimeSpan(ticks: offsetTicks));
+                value = new DateTimeOffset(
+                    ticks: dateTime.Ticks,
+                    offset: new TimeSpan(ticks: offsetTicks)
+                );
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -54,16 +63,45 @@ namespace System.Buffers.Text
         /// <summary>
         /// Overflow-safe DateTimeOffset factory.
         /// </summary>
-        private static bool TryCreateDateTimeOffset(int year, int month, int day, int hour, int minute, int second, int fraction, bool offsetNegative, int offsetHours, int offsetMinutes, out DateTimeOffset value)
-        {
-            if (!TryCreateDateTime(year: year, month: month, day: day, hour: hour, minute: minute, second: second, fraction: fraction, kind: DateTimeKind.Unspecified, out DateTime dateTime))
-            {
+        private static bool TryCreateDateTimeOffset(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int fraction,
+            bool offsetNegative,
+            int offsetHours,
+            int offsetMinutes,
+            out DateTimeOffset value
+        ) {
+            if (
+                !TryCreateDateTime(
+                    year: year,
+                    month: month,
+                    day: day,
+                    hour: hour,
+                    minute: minute,
+                    second: second,
+                    fraction: fraction,
+                    kind: DateTimeKind.Unspecified,
+                    out DateTime dateTime
+                )
+            ) {
                 value = default;
                 return false;
             }
 
-            if (!TryCreateDateTimeOffset(dateTime: dateTime, offsetNegative: offsetNegative, offsetHours: offsetHours, offsetMinutes: offsetMinutes, out value))
-            {
+            if (
+                !TryCreateDateTimeOffset(
+                    dateTime: dateTime,
+                    offsetNegative: offsetNegative,
+                    offsetHours: offsetHours,
+                    offsetMinutes: offsetMinutes,
+                    out value
+                )
+            ) {
                 value = default;
                 return false;
             }
@@ -74,10 +112,29 @@ namespace System.Buffers.Text
         /// <summary>
         /// Overflow-safe DateTimeOffset/Local time conversion factory.
         /// </summary>
-        private static bool TryCreateDateTimeOffsetInterpretingDataAsLocalTime(int year, int month, int day, int hour, int minute, int second, int fraction, out DateTimeOffset value)
-        {
-            if (!TryCreateDateTime(year: year, month: month, day: day, hour: hour, minute: minute, second: second, fraction: fraction, DateTimeKind.Local, out DateTime dateTime))
-            {
+        private static bool TryCreateDateTimeOffsetInterpretingDataAsLocalTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int fraction,
+            out DateTimeOffset value
+        ) {
+            if (
+                !TryCreateDateTime(
+                    year: year,
+                    month: month,
+                    day: day,
+                    hour: hour,
+                    minute: minute,
+                    second: second,
+                    fraction: fraction,
+                    DateTimeKind.Local,
+                    out DateTime dateTime
+                )
+            ) {
                 value = default;
                 return false;
             }
@@ -101,8 +158,17 @@ namespace System.Buffers.Text
         /// <summary>
         /// Overflow-safe DateTime factory.
         /// </summary>
-        private static bool TryCreateDateTime(int year, int month, int day, int hour, int minute, int second, int fraction, DateTimeKind kind, out DateTime value)
-        {
+        private static bool TryCreateDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int fraction,
+            DateTimeKind kind,
+            out DateTime value
+        ) {
             if (year == 0)
             {
                 value = default;
@@ -146,7 +212,13 @@ namespace System.Buffers.Text
 
             int[] days = DateTime.IsLeapYear(year) ? s_daysToMonth366 : s_daysToMonth365;
             int yearMinusOne = year - 1;
-            int totalDays = (yearMinusOne * 365) + (yearMinusOne / 4) - (yearMinusOne / 100) + (yearMinusOne / 400) + days[month - 1] + day - 1;
+            int totalDays =
+                (yearMinusOne * 365) + (yearMinusOne / 4)
+                - (yearMinusOne / 100)
+                + (yearMinusOne / 400)
+                + days[month - 1]
+                + day
+                - 1;
             long ticks = totalDays * TimeSpan.TicksPerDay;
             int totalSeconds = (hour * 3600) + (minute * 60) + second;
             ticks += totalSeconds * TimeSpan.TicksPerSecond;
@@ -155,7 +227,37 @@ namespace System.Buffers.Text
             return true;
         }
 
-        private static readonly int[] s_daysToMonth365 = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
-        private static readonly int[] s_daysToMonth366 = { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
+        private static readonly int[] s_daysToMonth365 =
+        {
+            0,
+            31,
+            59,
+            90,
+            120,
+            151,
+            181,
+            212,
+            243,
+            273,
+            304,
+            334,
+            365
+        };
+        private static readonly int[] s_daysToMonth366 =
+        {
+            0,
+            31,
+            60,
+            91,
+            121,
+            152,
+            182,
+            213,
+            244,
+            274,
+            305,
+            335,
+            366
+        };
     }
 }

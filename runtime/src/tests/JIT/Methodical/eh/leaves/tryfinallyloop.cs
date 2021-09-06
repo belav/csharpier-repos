@@ -51,10 +51,11 @@ namespace hello
                 L:
                 Console.WriteLine("in loop, i = " + i);
                 i += 1;
-                if (i == 10) goto finish;
+                if (i == 10)
+                    goto finish;
                 goto L;
-
             }
+
             finally
             {
                 inFinally();
@@ -65,7 +66,6 @@ namespace hello
             testLog.StopRecording();
 
             return testLog.VerifyOutput();
-
         }
     }
 }

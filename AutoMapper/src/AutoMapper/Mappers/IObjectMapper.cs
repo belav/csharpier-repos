@@ -27,8 +27,13 @@ namespace AutoMapper.Internal.Mappers
         /// <param name="destExpression">Destination parameter</param>
         /// 
         /// <returns>Map expression</returns>
-        Expression MapExpression(IGlobalConfiguration configurationProvider, ProfileMap profileMap,
-            MemberMap memberMap, Expression sourceExpression, Expression destExpression);
+        Expression MapExpression(
+            IGlobalConfiguration configurationProvider,
+            ProfileMap profileMap,
+            MemberMap memberMap,
+            Expression sourceExpression,
+            Expression destExpression
+        );
     }
     public interface IObjectMapperInfo : IObjectMapper
     {
@@ -42,15 +47,19 @@ namespace AutoMapper.Internal.Mappers
     /// <typeparam name="TDestination">type of the destination</typeparam>
     public abstract class ObjectMapper<TSource, TDestination> : IObjectMapper
     {
-        private static readonly MethodInfo MapMethod = typeof(ObjectMapper<TSource, TDestination>).GetMethod("Map");
+        private static readonly MethodInfo MapMethod = typeof(ObjectMapper<
+            TSource,
+            TDestination
+        >).GetMethod("Map");
 
         /// <summary>
         /// When true, the mapping engine will use this mapper as the strategy
         /// </summary>
         /// <param name="context">Resolution context</param>
         /// <returns>Is match</returns>
-        public virtual bool IsMatch(in TypePair context) => 
-            typeof(TSource).IsAssignableFrom(context.SourceType) && typeof(TDestination).IsAssignableFrom(context.DestinationType);
+        public virtual bool IsMatch(in TypePair context) =>
+            typeof(TSource).IsAssignableFrom(context.SourceType)
+            && typeof(TDestination).IsAssignableFrom(context.DestinationType);
 
         /// <summary>
         /// Performs conversion from source to destination type
@@ -61,10 +70,21 @@ namespace AutoMapper.Internal.Mappers
         /// <param name="destinationType">The compile time type of the destination object</param>
         /// <param name="context">Resolution context</param>
         /// <returns>Destination object</returns>
-        public abstract TDestination Map(TSource source, TDestination destination, Type sourceType, Type destinationType, ResolutionContext context);
+        public abstract TDestination Map(
+            TSource source,
+            TDestination destination,
+            Type sourceType,
+            Type destinationType,
+            ResolutionContext context
+        );
 
-        public Expression MapExpression(IGlobalConfiguration configurationProvider, ProfileMap profileMap,
-            MemberMap memberMap, Expression sourceExpression, Expression destExpression) =>
+        public Expression MapExpression(
+            IGlobalConfiguration configurationProvider,
+            ProfileMap profileMap,
+            MemberMap memberMap,
+            Expression sourceExpression,
+            Expression destExpression
+        ) =>
             Call(
                 Constant(this),
                 MapMethod,
@@ -72,6 +92,7 @@ namespace AutoMapper.Internal.Mappers
                 ToType(destExpression, typeof(TDestination)),
                 Constant(sourceExpression.Type),
                 Constant(destExpression.Type),
-                ContextParameter);
+                ContextParameter
+            );
     }
 }

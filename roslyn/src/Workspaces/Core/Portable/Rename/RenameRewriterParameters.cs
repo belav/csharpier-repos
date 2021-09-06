@@ -26,7 +26,10 @@ namespace Microsoft.CodeAnalysis.Rename
         internal readonly ISymbol RenameSymbol;
         internal readonly string ReplacementText;
         internal readonly bool ReplacementTextValid;
-        internal readonly ImmutableDictionary<TextSpan, ImmutableSortedSet<TextSpan>?> StringAndCommentTextSpans;
+        internal readonly ImmutableDictionary<
+            TextSpan,
+            ImmutableSortedSet<TextSpan>?
+        > StringAndCommentTextSpans;
         internal readonly SyntaxNode SyntaxRoot;
         internal readonly Document Document;
         internal readonly SemanticModel SemanticModel;
@@ -49,8 +52,8 @@ namespace Microsoft.CodeAnalysis.Rename
             RenamedSpansTracker renameSpansTracker,
             RenameOptionSet optionSet,
             AnnotationTable<RenameAnnotation> renameAnnotations,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             this.RenamedSymbolDeclarationAnnotation = renamedSymbolDeclarationAnnotation;
             this.Document = document;
             this.SemanticModel = semanticModel;

@@ -18,8 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         public StatementParsingTests(ITestOutputHelper output) : base(output) { }
 
-        private StatementSyntax ParseStatement(string text, int offset = 0, ParseOptions options = null)
-        {
+        private StatementSyntax ParseStatement(
+            string text,
+            int offset = 0,
+            ParseOptions options = null
+        ) {
             return SyntaxFactory.ParseStatement(text, offset, options);
         }
 
@@ -27,17 +30,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [WorkItem(17458, "https://github.com/dotnet/roslyn/issues/17458")]
         public void ParsePrivate()
         {
-            UsingStatement("private",
+            UsingStatement(
+                "private",
                 // (1,1): error CS1073: Unexpected token 'private'
                 // private
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "").WithArguments("private").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "")
+                    .WithArguments("private")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1525: Invalid expression term 'private'
                 // private
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "private").WithArguments("private").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "private")
+                    .WithArguments("private")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1002: ; expected
                 // private
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "private").WithLocation(1, 1)
-                );
+            );
             M(SyntaxKind.ExpressionStatement);
             {
                 M(SyntaxKind.IdentifierName);
@@ -63,7 +71,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var es = (ExpressionStatementSyntax)statement;
             Assert.NotNull(es.Expression);
             Assert.Equal(SyntaxKind.InvocationExpression, es.Expression.Kind());
-            Assert.Equal(SyntaxKind.IdentifierName, ((InvocationExpressionSyntax)es.Expression).Expression.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierName,
+                ((InvocationExpressionSyntax)es.Expression).Expression.Kind()
+            );
             Assert.Equal("a()", es.Expression.ToString());
             Assert.NotEqual(default, es.SemicolonToken);
             Assert.False(es.SemicolonToken.IsMissing);
@@ -83,7 +94,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var es = (ExpressionStatementSyntax)statement;
             Assert.NotNull(es.Expression);
             Assert.Equal(SyntaxKind.InvocationExpression, es.Expression.Kind());
-            Assert.Equal(SyntaxKind.SimpleMemberAccessExpression, ((InvocationExpressionSyntax)es.Expression).Expression.Kind());
+            Assert.Equal(
+                SyntaxKind.SimpleMemberAccessExpression,
+                ((InvocationExpressionSyntax)es.Expression).Expression.Kind()
+            );
             Assert.Equal("a.b()", es.Expression.ToString());
             Assert.NotEqual(default, es.SemicolonToken);
             Assert.False(es.SemicolonToken.IsMissing);
@@ -102,7 +116,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var es = (ExpressionStatementSyntax)statement;
             Assert.NotNull(es.Expression);
             Assert.Equal(SyntaxKind.InvocationExpression, es.Expression.Kind());
-            Assert.Equal(SyntaxKind.GenericName, ((InvocationExpressionSyntax)es.Expression).Expression.Kind());
+            Assert.Equal(
+                SyntaxKind.GenericName,
+                ((InvocationExpressionSyntax)es.Expression).Expression.Kind()
+            );
             Assert.Equal("a<b>()", es.Expression.ToString());
             Assert.NotEqual(default, es.SemicolonToken);
             Assert.False(es.SemicolonToken.IsMissing);
@@ -122,7 +139,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var es = (ExpressionStatementSyntax)statement;
             Assert.NotNull(es.Expression);
             Assert.Equal(SyntaxKind.InvocationExpression, es.Expression.Kind());
-            Assert.Equal(SyntaxKind.SimpleMemberAccessExpression, ((InvocationExpressionSyntax)es.Expression).Expression.Kind());
+            Assert.Equal(
+                SyntaxKind.SimpleMemberAccessExpression,
+                ((InvocationExpressionSyntax)es.Expression).Expression.Kind()
+            );
             Assert.Equal("a<b>.c()", es.Expression.ToString());
             Assert.NotEqual(default, es.SemicolonToken);
             Assert.False(es.SemicolonToken.IsMissing);
@@ -142,7 +162,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var es = (ExpressionStatementSyntax)statement;
             Assert.NotNull(es.Expression);
             Assert.Equal(SyntaxKind.InvocationExpression, es.Expression.Kind());
-            Assert.Equal(SyntaxKind.SimpleMemberAccessExpression, ((InvocationExpressionSyntax)es.Expression).Expression.Kind());
+            Assert.Equal(
+                SyntaxKind.SimpleMemberAccessExpression,
+                ((InvocationExpressionSyntax)es.Expression).Expression.Kind()
+            );
             Assert.Equal("a.b<c>()", es.Expression.ToString());
             Assert.NotEqual(default, es.SemicolonToken);
             Assert.False(es.SemicolonToken.IsMissing);
@@ -207,7 +230,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestLocalDeclarationStatementWithVar()
         {
-            // note: semantically this would require an initializer, but we don't know 
+            // note: semantically this would require an initializer, but we don't know
             // about var being special until we bind.
             var text = "var a;";
             var statement = this.ParseStatement(text);
@@ -222,7 +245,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(ds.Declaration.Type);
             Assert.Equal("var", ds.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, ds.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)ds.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)ds.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, ds.Declaration.Variables.Count);
 
             Assert.NotEqual(default, ds.Declaration.Variables[0].Identifier);
@@ -293,7 +319,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("y", tt.Elements[1].Identifier.ToString());
             Assert.Equal(2, tt.Elements.Count);
 
-
             tt = (TupleTypeSyntax)tt.Elements[1].Type;
 
             Assert.Equal("(U k, V l, W m)", tt.ToString());
@@ -313,7 +338,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestLocalDeclarationStatementWithDynamic()
         {
-            // note: semantically this would require an initializer, but we don't know 
+            // note: semantically this would require an initializer, but we don't know
             // about dynamic being special until we bind.
             var text = "dynamic a;";
             var statement = this.ParseStatement(text);
@@ -328,7 +353,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(ds.Declaration.Type);
             Assert.Equal("dynamic", ds.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, ds.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)ds.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)ds.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, ds.Declaration.Variables.Count);
 
             Assert.NotEqual(default, ds.Declaration.Variables[0].Identifier);
@@ -630,7 +658,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotEqual(default, ds.Declaration.Variables[0].Initializer.EqualsToken);
             Assert.False(ds.Declaration.Variables[0].Initializer.EqualsToken.IsMissing);
             Assert.NotNull(ds.Declaration.Variables[0].Initializer.Value);
-            Assert.Equal(SyntaxKind.ArrayInitializerExpression, ds.Declaration.Variables[0].Initializer.Value.Kind());
+            Assert.Equal(
+                SyntaxKind.ArrayInitializerExpression,
+                ds.Declaration.Variables[0].Initializer.Value.Kind()
+            );
             Assert.Equal("{b, c}", ds.Declaration.Variables[0].Initializer.Value.ToString());
 
             Assert.NotEqual(default, ds.SemicolonToken);
@@ -911,7 +942,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("var", fs.Declaration.Type.ToString());
             Assert.True(fs.Declaration.Type.IsVar);
             Assert.Equal(SyntaxKind.IdentifierName, fs.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)fs.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)fs.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, fs.Declaration.Variables.Count);
             Assert.Equal("a = b", fs.Declaration.Variables[0].ToString());
             Assert.NotNull(fs.Statement);
@@ -1596,7 +1630,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(fs.Declaration.Type);
             Assert.Equal("var", fs.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, fs.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)fs.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)fs.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, fs.Declaration.Variables.Count);
             Assert.NotEqual(default, fs.Declaration.Variables[0].Identifier);
             Assert.Equal("a", fs.Declaration.Variables[0].Identifier.ToString());
@@ -1961,7 +1998,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(SyntaxKind.ForEachKeyword, fs.ForEachKeyword.Kind());
             Assert.True(fs.ForEachKeyword.IsMissing);
             Assert.Equal(1, fs.ForEachKeyword.TrailingTrivia.Count);
-            Assert.Equal(SyntaxKind.SkippedTokensTrivia, fs.ForEachKeyword.TrailingTrivia[0].Kind());
+            Assert.Equal(
+                SyntaxKind.SkippedTokensTrivia,
+                fs.ForEachKeyword.TrailingTrivia[0].Kind()
+            );
             Assert.Equal("for", fs.ForEachKeyword.TrailingTrivia[0].ToString());
 
             Assert.NotEqual(default, fs.OpenParenToken);
@@ -1997,7 +2037,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(fs.Type);
             Assert.Equal("var", fs.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, fs.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)fs.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)fs.Type).Identifier.Kind()
+            );
             Assert.NotEqual(default, fs.Identifier);
             Assert.Equal("a", fs.Identifier.ToString());
             Assert.NotEqual(default, fs.InKeyword);
@@ -2466,7 +2509,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(us.Declaration.Type);
             Assert.Equal("var", us.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, us.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, us.Declaration.Variables.Count);
             Assert.NotEqual(default, us.Declaration.Variables[0].Identifier);
             Assert.Equal("a", us.Declaration.Variables[0].Identifier.ToString());
@@ -2501,7 +2547,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(us.Declaration.Type);
             Assert.Equal("var", us.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, us.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, us.Declaration.Variables.Count);
             Assert.NotEqual(default, us.Declaration.Variables[0].Identifier);
             Assert.Equal("a", us.Declaration.Variables[0].Identifier.ToString());
@@ -2536,7 +2585,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(us.Declaration.Type);
             Assert.Equal("var", us.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, us.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(2, us.Modifiers.Count);
             Assert.Equal("public", us.Modifiers[0].ToString());
             Assert.Equal("readonly", us.Modifiers[1].ToString());
@@ -2632,7 +2684,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(us.Declaration.Type);
             Assert.Equal("var", us.Declaration.Type.ToString());
             Assert.Equal(SyntaxKind.IdentifierName, us.Declaration.Type.Kind());
-            Assert.Equal(SyntaxKind.IdentifierToken, ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.IdentifierToken,
+                ((IdentifierNameSyntax)us.Declaration.Type).Identifier.Kind()
+            );
             Assert.Equal(1, us.Declaration.Variables.Count);
             Assert.NotEqual(default, us.Declaration.Variables[0].Identifier);
             Assert.Equal("a", us.Declaration.Variables[0].Identifier.ToString());
@@ -2677,7 +2732,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitUsingVarWithVarDecl_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -2685,7 +2741,8 @@ class C
         using await var x = null;
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2754,13 +2811,18 @@ class C
         [Fact]
         public void TestAwaitUsingVarWithVarAndNoUsingDeclarationTree()
         {
-            UsingStatement(@"await var a = b;", TestOptions.Regular8,
+            UsingStatement(
+                @"await var a = b;",
+                TestOptions.Regular8,
                 // (1,1): error CS1073: Unexpected token 'a'
                 // await var a = b;
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "await var ").WithArguments("a").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "await var ")
+                    .WithArguments("a")
+                    .WithLocation(1, 1),
                 // (1,11): error CS1002: ; expected
                 // await var a = b;
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "a").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "a").WithLocation(1, 11)
+            );
 
             N(SyntaxKind.ExpressionStatement);
             {
@@ -3280,10 +3342,15 @@ class C
         [Fact]
         public void TestUsingVarReadonlyMultipleDeclarations()
         {
-            UsingStatement("using readonly var x, y = ref z;", TestOptions.Regular8,
+            UsingStatement(
+                "using readonly var x, y = ref z;",
+                TestOptions.Regular8,
                 // (1,7): error CS0106: The modifier 'readonly' is not valid for this item
                 // using readonly var x, y = ref z;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly").WithArguments("readonly").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(1, 7)
+            );
             N(SyntaxKind.LocalDeclarationStatement);
             {
                 N(SyntaxKind.UsingKeyword);
@@ -3426,7 +3493,10 @@ class C
             builder.AppendLine("\"/>");
             builder.AppendLine("class C { }");
             var text = builder.ToString();
-            var tree = SyntaxFactory.ParseSyntaxTree(text, options: new CSharpParseOptions(documentationMode: DocumentationMode.Parse));
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                text,
+                options: new CSharpParseOptions(documentationMode: DocumentationMode.Parse)
+            );
             var root = tree.GetRoot();
             var walker = new TokenAndTriviaWalker();
             walker.Visit(root);
@@ -3438,7 +3508,8 @@ class C
         [Fact]
         public void ExceptionFilter_IfKeyword()
         {
-            const string source = @"
+            const string source =
+                @"
 class C
 {
     void M()
@@ -3451,10 +3522,14 @@ class C
 
             var tree = SyntaxFactory.ParseSyntaxTree(source);
             var root = tree.GetRoot();
-            tree.GetDiagnostics(root).Verify(
-                // (7,36): error CS1003: Syntax error, 'when' expected
-                //         catch (System.Exception e) if (true) { }
-                CSharpTestBase.Diagnostic(ErrorCode.ERR_SyntaxError, "if").WithArguments("when", "if").WithLocation(7, 36));
+            tree.GetDiagnostics(root)
+                .Verify(
+                    // (7,36): error CS1003: Syntax error, 'when' expected
+                    //         catch (System.Exception e) if (true) { }
+                    CSharpTestBase.Diagnostic(ErrorCode.ERR_SyntaxError, "if")
+                        .WithArguments("when", "if")
+                        .WithLocation(7, 36)
+                );
 
             var filterClause = root.DescendantNodes().OfType<CatchFilterClauseSyntax>().Single();
             Assert.Equal(SyntaxKind.WhenKeyword, filterClause.WhenKeyword.Kind());
@@ -3464,7 +3539,8 @@ class C
         [Fact]
         public void Tuple001()
         {
-            var source = @"
+            var source =
+                @"
 class C1
 {
     static void Test(int arg1, (byte, byte) arg2)
@@ -3503,7 +3579,8 @@ class C1
         [WorkItem(684860, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/266237")]
         public void DevDiv266237()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Go()
@@ -3521,23 +3598,28 @@ class Program
 ";
 
             var tree = SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular);
-            tree.GetDiagnostics(tree.GetRoot()).Verify(
-                // (9,10): error CS1026: ) expected
-                //         }
-                CSharpTestBase.Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(9, 10),
-                // (9,10): error CS1002: ; expected
-                //         }
-                CSharpTestBase.Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(9, 10),
-                // (9,10): error CS1513: } expected
-                //         }
-                CSharpTestBase.Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(9, 10));
+            tree.GetDiagnostics(tree.GetRoot())
+                .Verify(
+                    // (9,10): error CS1026: ) expected
+                    //         }
+                    CSharpTestBase.Diagnostic(ErrorCode.ERR_CloseParenExpected, "")
+                        .WithLocation(9, 10),
+                    // (9,10): error CS1002: ; expected
+                    //         }
+                    CSharpTestBase.Diagnostic(ErrorCode.ERR_SemicolonExpected, "")
+                        .WithLocation(9, 10),
+                    // (9,10): error CS1513: } expected
+                    //         }
+                    CSharpTestBase.Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(9, 10)
+                );
         }
 
         [WorkItem(6676, "https://github.com/dotnet/roslyn/issues/6676")]
         [Fact]
         public void TestRunEmbeddedStatementNotFollowedBySemicolon()
         {
-            var text = @"if (true)
+            var text =
+                @"if (true)
 System.Console.WriteLine(true)";
             var statement = this.ParseStatement(text);
 
@@ -3548,21 +3630,27 @@ System.Console.WriteLine(true)";
             Assert.Equal((int)ErrorCode.ERR_SemicolonExpected, statement.Errors()[0].Code);
         }
 
-        [WorkItem(266237, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=266237")]
+        [WorkItem(
+            266237,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=266237"
+        )]
         [Fact]
         public void NullExceptionInLabeledStatement()
         {
-            UsingStatement(@"{ label: public",
+            UsingStatement(
+                @"{ label: public",
                 // (1,1): error CS1073: Unexpected token 'public'
                 // { label: public
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "{ label: ").WithArguments("public").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "{ label: ")
+                    .WithArguments("public")
+                    .WithLocation(1, 1),
                 // (1,10): error CS1002: ; expected
                 // { label: public
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "public").WithLocation(1, 10),
                 // (1,10): error CS1513: } expected
                 // { label: public
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "public").WithLocation(1, 10)
-                );
+            );
 
             N(SyntaxKind.Block);
             {
@@ -3585,26 +3673,33 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseElseWithoutPrecedingIfStatement()
         {
-            UsingStatement("else {}",
+            UsingStatement(
+                "else {}",
                 // (1,1): error CS8641: 'else' cannot start a statement.
                 // else {}
                 Diagnostic(ErrorCode.ERR_ElseCannotStartStatement, "else").WithLocation(1, 1),
                 // (1,1): error CS1003: Syntax error, '(' expected
                 // else {}
-                Diagnostic(ErrorCode.ERR_SyntaxError, "else").WithArguments("(", "else").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "else")
+                    .WithArguments("(", "else")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1525: Invalid expression term 'else'
                 // else {}
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1026: ) expected
                 // else {}
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "else").WithLocation(1, 1),
                 // (1,1): error CS1525: Invalid expression term 'else'
                 // else {}
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1002: ; expected
                 // else {}
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "else").WithLocation(1, 1)
-                );
+            );
             N(SyntaxKind.IfStatement);
             {
                 M(SyntaxKind.IfKeyword);
@@ -3639,22 +3734,29 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseElseAndElseWithoutPrecedingIfStatement()
         {
-            UsingStatement("{ else {} else {} }",
+            UsingStatement(
+                "{ else {} else {} }",
                 // (1,3): error CS8641: 'else' cannot start a statement.
                 // { else {} else {} }
                 Diagnostic(ErrorCode.ERR_ElseCannotStartStatement, "else").WithLocation(1, 3),
                 // (1,3): error CS1003: Syntax error, '(' expected
                 // { else {} else {} }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "else").WithArguments("(", "else").WithLocation(1, 3),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "else")
+                    .WithArguments("(", "else")
+                    .WithLocation(1, 3),
                 // (1,3): error CS1525: Invalid expression term 'else'
                 // { else {} else {} }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 3),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 3),
                 // (1,3): error CS1026: ) expected
                 // { else {} else {} }
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "else").WithLocation(1, 3),
                 // (1,3): error CS1525: Invalid expression term 'else'
                 // { else {} else {} }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 3),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 3),
                 // (1,3): error CS1002: ; expected
                 // { else {} else {} }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "else").WithLocation(1, 3),
@@ -3663,20 +3765,26 @@ System.Console.WriteLine(true)";
                 Diagnostic(ErrorCode.ERR_ElseCannotStartStatement, "else").WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, '(' expected
                 // { else {} else {} }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "else").WithArguments("(", "else").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "else")
+                    .WithArguments("(", "else")
+                    .WithLocation(1, 11),
                 // (1,11): error CS1525: Invalid expression term 'else'
                 // { else {} else {} }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 11),
                 // (1,11): error CS1026: ) expected
                 // { else {} else {} }
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "else").WithLocation(1, 11),
                 // (1,11): error CS1525: Invalid expression term 'else'
                 // { else {} else {} }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 11),
                 // (1,11): error CS1002: ; expected
                 // { else {} else {} }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "else").WithLocation(1, 11)
-                );
+            );
             N(SyntaxKind.Block);
             {
                 N(SyntaxKind.OpenBraceToken);
@@ -3743,26 +3851,33 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseSubsequentElseWithoutPrecedingIfStatement()
         {
-            UsingStatement("{ if (a) { } else { } else { } }",
+            UsingStatement(
+                "{ if (a) { } else { } else { } }",
                 // (1,23): error CS8641: 'else' cannot start a statement.
                 // { if (a) { } else { } else { } }
                 Diagnostic(ErrorCode.ERR_ElseCannotStartStatement, "else").WithLocation(1, 23),
                 // (1,23): error CS1003: Syntax error, '(' expected
                 // { if (a) { } else { } else { } }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "else").WithArguments("(", "else").WithLocation(1, 23),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "else")
+                    .WithArguments("(", "else")
+                    .WithLocation(1, 23),
                 // (1,23): error CS1525: Invalid expression term 'else'
                 // { if (a) { } else { } else { } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 23),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 23),
                 // (1,23): error CS1026: ) expected
                 // { if (a) { } else { } else { } }
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "else").WithLocation(1, 23),
                 // (1,23): error CS1525: Invalid expression term 'else'
                 // { if (a) { } else { } else { } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 23),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 23),
                 // (1,23): error CS1002: ; expected
                 // { if (a) { } else { } else { } }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "else").WithLocation(1, 23)
-                );
+            );
             N(SyntaxKind.Block);
             {
                 N(SyntaxKind.OpenBraceToken);
@@ -3826,26 +3941,33 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseElseKeywordPlacedAsIfEmbeddedStatement()
         {
-            UsingStatement("if (a) else {}",
+            UsingStatement(
+                "if (a) else {}",
                 // (1,8): error CS8641: 'else' cannot start a statement.
                 // if (a) else {}
                 Diagnostic(ErrorCode.ERR_ElseCannotStartStatement, "else").WithLocation(1, 8),
                 // (1,8): error CS1003: Syntax error, '(' expected
                 // if (a) else {}
-                Diagnostic(ErrorCode.ERR_SyntaxError, "else").WithArguments("(", "else").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "else")
+                    .WithArguments("(", "else")
+                    .WithLocation(1, 8),
                 // (1,8): error CS1525: Invalid expression term 'else'
                 // if (a) else {}
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 8),
                 // (1,8): error CS1026: ) expected
                 // if (a) else {}
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "else").WithLocation(1, 8),
                 // (1,8): error CS1525: Invalid expression term 'else'
                 // if (a) else {}
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else").WithArguments("else").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "else")
+                    .WithArguments("else")
+                    .WithLocation(1, 8),
                 // (1,8): error CS1002: ; expected
                 // if (a) else {}
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "else").WithLocation(1, 8)
-                );
+            );
             N(SyntaxKind.IfStatement);
             {
                 N(SyntaxKind.IfKeyword);
@@ -3889,11 +4011,13 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseSwitch01()
         {
-            UsingStatement("switch 1+2 {}",
+            UsingStatement(
+                "switch 1+2 {}",
                 // (1,8): error CS8415: Parentheses are required around the switch governing expression.
                 // switch 1+2 {}
-                Diagnostic(ErrorCode.ERR_SwitchGoverningExpressionRequiresParens, "1+2").WithLocation(1, 8)
-                );
+                Diagnostic(ErrorCode.ERR_SwitchGoverningExpressionRequiresParens, "1+2")
+                    .WithLocation(1, 8)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -3920,11 +4044,12 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseSwitch02()
         {
-            UsingStatement("switch (a: 0) {}",
+            UsingStatement(
+                "switch (a: 0) {}",
                 // (1,13): error CS8124: Tuple must contain at least two elements.
                 // switch (a: 0) {}
                 Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(1, 13)
-                );
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -4014,11 +4139,13 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseSwitch04()
         {
-            UsingStatement("switch (1) + (2) {}",
+            UsingStatement(
+                "switch (1) + (2) {}",
                 // (1,8): error CS8415: Parentheses are required around the switch governing expression.
                 // switch (1) + (2) {}
-                Diagnostic(ErrorCode.ERR_SwitchGoverningExpressionRequiresParens, "(1) + (2)").WithLocation(1, 8)
-                );
+                Diagnostic(ErrorCode.ERR_SwitchGoverningExpressionRequiresParens, "(1) + (2)")
+                    .WithLocation(1, 8)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -4107,14 +4234,17 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParseCreateNullableTuple_02()
         {
-            UsingStatement("_ = new (int, int) ? (x) : (y);",
+            UsingStatement(
+                "_ = new (int, int) ? (x) : (y);",
                 // (1,1): error CS1073: Unexpected token ':'
                 // _ = new (int, int) ? (x) : (y);
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = new (int, int) ? (x) ").WithArguments(":").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = new (int, int) ? (x) ")
+                    .WithArguments(":")
+                    .WithLocation(1, 1),
                 // (1,26): error CS1002: ; expected
                 // _ = new (int, int) ? (x) : (y);
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(1, 26)
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -4173,14 +4303,17 @@ System.Console.WriteLine(true)";
         [Fact]
         public void ParsePointerToArray()
         {
-            UsingStatement("int []* p;",
+            UsingStatement(
+                "int []* p;",
                 // (1,7): error CS1001: Identifier expected
                 // int []* p;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "*").WithLocation(1, 7),
                 // (1,7): error CS1003: Syntax error, ',' expected
                 // int []* p;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "*").WithArguments(",", "*").WithLocation(1, 7)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, "*")
+                    .WithArguments(",", "*")
+                    .WithLocation(1, 7)
+            );
             N(SyntaxKind.LocalDeclarationStatement);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -4250,10 +4383,7 @@ System.Console.WriteLine(true)";
         private sealed class TokenAndTriviaWalker : CSharpSyntaxWalker
         {
             public int Tokens;
-            public TokenAndTriviaWalker()
-                : base(SyntaxWalkerDepth.StructuredTrivia)
-            {
-            }
+            public TokenAndTriviaWalker() : base(SyntaxWalkerDepth.StructuredTrivia) { }
             public override void VisitToken(SyntaxToken token)
             {
                 Tokens++;

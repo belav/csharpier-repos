@@ -17,14 +17,20 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var model = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var model = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
 
             var convention = new Mock<IPageApplicationModelConvention>();
             convention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>()))
-                .Callback((PageApplicationModel m) =>
-                {
-                    Assert.Same(model, m);
-                })
+                .Callback(
+                    (PageApplicationModel m) =>
+                    {
+                        Assert.Same(model, m);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
@@ -44,21 +50,29 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             // Arrange
             var descriptor = new PageActionDescriptor();
             var handlerConvention = new Mock<IPageApplicationModelConvention>();
-            var model = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), new[] { handlerConvention.Object });
+            var model = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                new[] { handlerConvention.Object }
+            );
 
             var globalConvention = new Mock<IPageApplicationModelConvention>();
             globalConvention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>()))
-                .Callback((PageApplicationModel m) =>
-                {
-                    Assert.Same(model, m);
-                })
+                .Callback(
+                    (PageApplicationModel m) =>
+                    {
+                        Assert.Same(model, m);
+                    }
+                )
                 .Verifiable();
 
             handlerConvention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>()))
-                .Callback((PageApplicationModel m) =>
-                {
-                    Assert.Same(model, m);
-                })
+                .Callback(
+                    (PageApplicationModel m) =>
+                    {
+                        Assert.Same(model, m);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
@@ -78,24 +92,37 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
             var handlerModelConvention = new Mock<IPageHandlerModelConvention>();
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
-            var handlerModel = new PageHandlerModel(methodInfo, new[] { handlerModelConvention.Object });
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
+            var handlerModel = new PageHandlerModel(
+                methodInfo,
+                new[] { handlerModelConvention.Object }
+            );
 
             applicationModel.HandlerMethods.Add(handlerModel);
 
             handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>()))
-                .Callback((PageHandlerModel m) =>
-                {
-                    Assert.Same(handlerModel, m);
-                })
+                .Callback(
+                    (PageHandlerModel m) =>
+                    {
+                        Assert.Same(handlerModel, m);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             handlerModelConvention.Verify();
@@ -106,23 +133,36 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var handlerModel = new PageHandlerModel(methodInfo, Array.Empty<object>());
             applicationModel.HandlerMethods.Add(handlerModel);
 
             var handlerModelConvention = new Mock<IPageHandlerModelConvention>();
             handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>()))
-                .Callback((PageHandlerModel m) =>
-                {
-                    Assert.Same(handlerModel, m);
-                })
+                .Callback(
+                    (PageHandlerModel m) =>
+                    {
+                        Assert.Same(handlerModel, m);
+                    }
+                )
                 .Verifiable();
-            var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>()) { handlerModelConvention.Object };
+            var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
+            {
+                handlerModelConvention.Object
+            };
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             handlerModelConvention.Verify();
@@ -133,27 +173,39 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
             var handlerModelConvention = new Mock<IPageHandlerModelConvention>();
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
-            var handlerModel = new PageHandlerModel(methodInfo, new[] { handlerModelConvention.Object })
-            {
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
+            var handlerModel = new PageHandlerModel(
+                methodInfo,
+                new[] { handlerModelConvention.Object }
+            ) {
                 Page = applicationModel,
             };
 
             applicationModel.HandlerMethods.Add(handlerModel);
 
             handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>()))
-                .Callback((PageHandlerModel m) =>
-                {
-                    m.Page.HandlerMethods.Remove(m);
-                })
+                .Callback(
+                    (PageHandlerModel m) =>
+                    {
+                        m.Page.HandlerMethods.Remove(m);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             handlerModelConvention.Verify();
@@ -164,27 +216,40 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
             var parameterInfo = methodInfo.GetParameters()[0];
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var handlerModel = new PageHandlerModel(methodInfo, Array.Empty<object>());
             var parameterModelConvention = new Mock<IParameterModelBaseConvention>();
-            var parameterModel = new PageParameterModel(parameterInfo, new[] { parameterModelConvention.Object });
+            var parameterModel = new PageParameterModel(
+                parameterInfo,
+                new[] { parameterModelConvention.Object }
+            );
 
             applicationModel.HandlerMethods.Add(handlerModel);
             handlerModel.Parameters.Add(parameterModel);
 
             parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback((ParameterModelBase m) =>
-                {
-                    Assert.Same(parameterModel, m);
-                })
+                .Callback(
+                    (ParameterModelBase m) =>
+                    {
+                        Assert.Same(parameterModel, m);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             parameterModelConvention.Verify();
@@ -195,10 +260,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
             var parameterInfo = methodInfo.GetParameters()[0];
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var handlerModel = new PageHandlerModel(methodInfo, Array.Empty<object>());
             var parameterModel = new PageParameterModel(parameterInfo, Array.Empty<object>());
 
@@ -207,15 +277,23 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var parameterModelConvention = new Mock<IParameterModelBaseConvention>();
             parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback((ParameterModelBase m) =>
-                {
-                    Assert.Same(parameterModel, m);
-                })
+                .Callback(
+                    (ParameterModelBase m) =>
+                    {
+                        Assert.Same(parameterModel, m);
+                    }
+                )
                 .Verifiable();
-            var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>()) { parameterModelConvention.Object };
+            var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
+            {
+                parameterModelConvention.Object
+            };
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             parameterModelConvention.Verify();
@@ -226,14 +304,21 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
             var parameterInfo = methodInfo.GetParameters()[0];
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var handlerModel = new PageHandlerModel(methodInfo, Array.Empty<object>());
             var parameterModelConvention = new Mock<IParameterModelBaseConvention>();
-            var parameterModel = new PageParameterModel(parameterInfo, new[] { parameterModelConvention.Object })
-            {
+            var parameterModel = new PageParameterModel(
+                parameterInfo,
+                new[] { parameterModelConvention.Object }
+            ) {
                 Handler = handlerModel,
             };
 
@@ -241,16 +326,21 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             handlerModel.Parameters.Add(parameterModel);
 
             parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback((ParameterModelBase m) =>
-                {
-                    var model = Assert.IsType<PageParameterModel>(m);
-                    model.Handler.Parameters.Remove(model);
-                })
+                .Callback(
+                    (ParameterModelBase m) =>
+                    {
+                        var model = Assert.IsType<PageParameterModel>(m);
+                        model.Handler.Parameters.Remove(model);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             parameterModelConvention.Verify();
@@ -261,30 +351,44 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
-            var propertyInfo = GetType().GetProperty(nameof(TestProperty), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var propertyInfo = GetType()
+                .GetProperty(nameof(TestProperty), BindingFlags.Instance | BindingFlags.NonPublic);
             var parameterInfo = methodInfo.GetParameters()[0];
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var handlerModel = new PageHandlerModel(methodInfo, Array.Empty<object>());
             var parameterModel = new PageParameterModel(parameterInfo, Array.Empty<object>());
             var propertyModelConvention = new Mock<IParameterModelBaseConvention>();
-            var propertyModel = new PagePropertyModel(propertyInfo, new[] { propertyModelConvention.Object });
+            var propertyModel = new PagePropertyModel(
+                propertyInfo,
+                new[] { propertyModelConvention.Object }
+            );
 
             applicationModel.HandlerMethods.Add(handlerModel);
             applicationModel.HandlerProperties.Add(propertyModel);
             handlerModel.Parameters.Add(parameterModel);
 
             propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback((ParameterModelBase m) =>
-                {
-                    Assert.Same(propertyModel, m);
-                })
+                .Callback(
+                    (ParameterModelBase m) =>
+                    {
+                        Assert.Same(propertyModel, m);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             propertyModelConvention.Verify();
@@ -295,10 +399,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var methodInfo = GetType().GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
-            var propertyInfo = GetType().GetProperty(nameof(TestProperty), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(OnGet), BindingFlags.Instance | BindingFlags.NonPublic);
+            var propertyInfo = GetType()
+                .GetProperty(nameof(TestProperty), BindingFlags.Instance | BindingFlags.NonPublic);
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var handlerModel = new PageHandlerModel(methodInfo, Array.Empty<object>());
             var propertyModel = new PagePropertyModel(propertyInfo, Array.Empty<object>());
 
@@ -307,15 +417,23 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var propertyModelConvention = new Mock<IParameterModelBaseConvention>();
             propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback((ParameterModelBase m) =>
-                {
-                    Assert.Same(propertyModel, m);
-                })
+                .Callback(
+                    (ParameterModelBase m) =>
+                    {
+                        Assert.Same(propertyModel, m);
+                    }
+                )
                 .Verifiable();
-            var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>()) { propertyModelConvention.Object };
+            var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
+            {
+                propertyModelConvention.Object
+            };
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             propertyModelConvention.Verify();
@@ -326,36 +444,46 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var descriptor = new PageActionDescriptor();
-            var propertyInfo = GetType().GetProperty(nameof(TestProperty), BindingFlags.Instance | BindingFlags.NonPublic);
+            var propertyInfo = GetType()
+                .GetProperty(nameof(TestProperty), BindingFlags.Instance | BindingFlags.NonPublic);
 
-            var applicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var applicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var propertyModelConvention = new Mock<IParameterModelBaseConvention>();
-            var propertyModel = new PagePropertyModel(propertyInfo, new[] { propertyModelConvention.Object })
-            {
+            var propertyModel = new PagePropertyModel(
+                propertyInfo,
+                new[] { propertyModelConvention.Object }
+            ) {
                 Page = applicationModel,
             };
 
             applicationModel.HandlerProperties.Add(propertyModel);
 
             propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback((ParameterModelBase m) =>
-                {
-                    var model = Assert.IsType<PagePropertyModel>(m);
-                    model.Page.HandlerProperties.Remove(model);
-                })
+                .Callback(
+                    (ParameterModelBase m) =>
+                    {
+                        var model = Assert.IsType<PagePropertyModel>(m);
+                        model.Page.HandlerProperties.Remove(model);
+                    }
+                )
                 .Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
-            CompiledPageActionDescriptorFactory.ApplyConventions(conventionCollection, applicationModel);
+            CompiledPageActionDescriptorFactory.ApplyConventions(
+                conventionCollection,
+                applicationModel
+            );
 
             // Assert
             propertyModelConvention.Verify();
         }
 
-        private void OnGet(string parameter)
-        {
-        }
+        private void OnGet(string parameter) { }
 
         private string TestProperty { get; set; }
     }

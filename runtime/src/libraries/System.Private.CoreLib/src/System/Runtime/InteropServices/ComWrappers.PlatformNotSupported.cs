@@ -16,23 +16,34 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        public IntPtr GetOrCreateComInterfaceForObject(object instance, CreateComInterfaceFlags flags)
-        {
+        public IntPtr GetOrCreateComInterfaceForObject(
+            object instance,
+            CreateComInterfaceFlags flags
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        public object GetOrCreateObjectForComInstance(IntPtr externalComObject, CreateObjectFlags flags)
-        {
+        public object GetOrCreateObjectForComInstance(
+            IntPtr externalComObject,
+            CreateObjectFlags flags
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        public object GetOrRegisterObjectForComInstance(IntPtr externalComObject, CreateObjectFlags flags, object wrapper)
-        {
+        public object GetOrRegisterObjectForComInstance(
+            IntPtr externalComObject,
+            CreateObjectFlags flags,
+            object wrapper
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        public object GetOrRegisterObjectForComInstance(IntPtr externalComObject, CreateObjectFlags flags, object wrapper, IntPtr inner)
-        {
+        public object GetOrRegisterObjectForComInstance(
+            IntPtr externalComObject,
+            CreateObjectFlags flags,
+            object wrapper,
+            IntPtr inner
+        ) {
             throw new PlatformNotSupportedException();
         }
 
@@ -46,8 +57,11 @@ namespace System.Runtime.InteropServices
             throw new PlatformNotSupportedException();
         }
 
-        protected static void GetIUnknownImpl(out IntPtr fpQueryInterface, out IntPtr fpAddRef, out IntPtr fpRelease)
-        {
+        protected static void GetIUnknownImpl(
+            out IntPtr fpQueryInterface,
+            out IntPtr fpAddRef,
+            out IntPtr fpRelease
+        ) {
             throw new PlatformNotSupportedException();
         }
     }

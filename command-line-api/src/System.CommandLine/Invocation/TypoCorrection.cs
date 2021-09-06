@@ -27,53 +27,58 @@ namespace System.CommandLine.Invocation
             for (var i = 0; i < result.UnmatchedTokens.Count; i++)
             {
                 var token = result.UnmatchedTokens[i];
-                string suggestions = string.Join(", or ", GetPossibleTokens(result.CommandResult.Command, token).Select(x => $"'{x}'"));
+                string suggestions = string.Join(
+                    ", or ",
+                    GetPossibleTokens(result.CommandResult.Command, token).Select(x => $"'{x}'")
+                );
 
                 if (suggestions.Length > 0)
                 {
-                    console.Out.WriteLine($"'{token}' was not matched. Did you mean {suggestions}?");
+                    console.Out.WriteLine(
+                        $"'{token}' was not matched. Did you mean {suggestions}?"
+                    );
                 }
             }
         }
 
         private IEnumerable<string> GetPossibleTokens(ISymbol targetSymbol, string token)
         {
-            IEnumerable<string> possibleMatches = targetSymbol
-                .Children
-                .Where(x => !x.IsHidden)
+            IEnumerable<string> possibleMatches = targetSymbol.Children.Where(x => !x.IsHidden)
                 .OfType<IIdentifierSymbol>()
                 .Where(x => x.Aliases.Count > 0)
-                .Select(symbol => 
-                    symbol.Aliases
-                        .Union(symbol.Aliases)
-                        .OrderBy(x => GetDistance(token, x))
-                        .ThenByDescending(x => GetStartsWithDistance(token, x))
-                        .First()
+                .Select(
+                    symbol =>
+                        symbol.Aliases.Union(symbol.Aliases)
+                            .OrderBy(x => GetDistance(token, x))
+                            .ThenByDescending(x => GetStartsWithDistance(token, x))
+                            .First()
                 );
-            
+
             int? bestDistance = null;
-            return possibleMatches
-                .Select(possibleMatch => (possibleMatch, distance:GetDistance(token, possibleMatch)))
+            return possibleMatches.Select(
+                    possibleMatch => (possibleMatch, distance: GetDistance(token, possibleMatch))
+                )
                 .Where(tuple => tuple.distance <= _maxLevenshteinDistance)
                 .OrderBy(tuple => tuple.distance)
                 .ThenByDescending(tuple => GetStartsWithDistance(token, tuple.possibleMatch))
-                .TakeWhile(tuple =>
-                {
-                    var (_, distance) = tuple;
-                    if (bestDistance is null)
+                .TakeWhile(
+                    tuple =>
                     {
-                        bestDistance = distance;
+                        var (_, distance) = tuple;
+                        if (bestDistance is null)
+                        {
+                            bestDistance = distance;
+                        }
+                        return distance == bestDistance;
                     }
-                    return distance == bestDistance;
-                })
+                )
                 .Select(tuple => tuple.possibleMatch);
         }
 
         private static int GetStartsWithDistance(string first, string second)
         {
             int i;
-            for (i = 0; i < first.Length && i < second.Length && first[i] == second[i]; i++)
-            { }
+            for (i = 0; i < first.Length && i < second.Length && first[i] == second[i]; i++) { }
             return i;
         }
 
@@ -91,21 +96,23 @@ namespace System.CommandLine.Invocation
                 throw new ArgumentNullException(nameof(second));
             }
 
-
             // Get the length of both.  If either is 0, return
             // the length of the other, since that number of insertions
             // would be required.
 
-            int n = first.Length, m = second.Length;
-            if (n == 0) return m;
-            if (m == 0) return n;
-
+            int n = first.Length,
+                m = second.Length;
+            if (n == 0)
+                return m;
+            if (m == 0)
+                return n;
 
             // Rather than maintain an entire matrix (which would require O(n*m) space),
             // just store the current row and the next row, each of which has a length m+1,
             // so just O(m) space. Initialize the current row.
 
-            int curRow = 0, nextRow = 1;
+            int curRow = 0,
+                nextRow = 1;
             int[][] rows = { new int[m + 1], new int[m + 1] };
 
             for (int j = 0; j <= m; ++j)
@@ -127,7 +134,6 @@ namespace System.CommandLine.Invocation
                     rows[nextRow][j] = Math.Min(dist1, Math.Min(dist2, dist3));
                 }
 
-
                 // Swap the current and next rows
                 if (curRow == 0)
                 {
@@ -143,7 +149,6 @@ namespace System.CommandLine.Invocation
 
             // Return the computed edit distance
             return rows[curRow][m];
-
         }
     }
 }

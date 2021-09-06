@@ -16,13 +16,12 @@ namespace System.Runtime.InteropServices.JavaScript
     ///
     /// Host objects are treated differently in the bridge code as they are not guaranteed to exist.
     /// </remarks>
-    public interface IHostObject
-    { }
+    public interface IHostObject { }
 
     public class HostObject : HostObjectBase
     {
-        public HostObject(string hostName, params object[] _params) : base(Interop.Runtime.New(hostName, _params))
-        { }
+        public HostObject(string hostName, params object[] _params)
+            : base(Interop.Runtime.New(hostName, _params)) { }
     }
 
     public abstract class HostObjectBase : JSObject, IHostObject
@@ -34,7 +33,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 throw new JSException(SR.Format(SR.HostObjectErrorBinding, result));
         }
 
-        internal HostObjectBase(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle)
-        { }
+        internal HostObjectBase(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle) { }
     }
 }

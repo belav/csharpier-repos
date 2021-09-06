@@ -14,15 +14,21 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR(options =>
-            {
-                options.EnableDetailedErrors = true;
-            })
+            services.AddSignalR(
+                    options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                    }
+                )
                 .AddMessagePackProtocol()
-                .AddStackExchangeRedis(options =>
-                {
-                    options.Configuration.EndPoints.Add(Environment.GetEnvironmentVariable("REDIS_CONNECTION"));
-                });
+                .AddStackExchangeRedis(
+                    options =>
+                    {
+                        options.Configuration.EndPoints.Add(
+                            Environment.GetEnvironmentVariable("REDIS_CONNECTION")
+                        );
+                    }
+                );
 
             services.AddSingleton<IUserIdProvider, UserNameIdProvider>();
         }
@@ -30,10 +36,12 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<EchoHub>("/echo");
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapHub<EchoHub>("/echo");
+                }
+            );
         }
 
         private class UserNameIdProvider : IUserIdProvider

@@ -11,6 +11,11 @@ internal static partial class Interop
         internal const uint CERT_STORE_ADD_ALWAYS = 4;
 
         [DllImport(Interop.Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CertAddCertificateLinkToStore(SafeCertStoreHandle hCertStore, SafeCertContextHandle pCertContext, uint dwAddDisposition, [In, Out] SafeCertContextHandle ppStoreContext);
+        internal static extern bool CertAddCertificateLinkToStore(
+            SafeCertStoreHandle hCertStore,
+            SafeCertContextHandle pCertContext,
+            uint dwAddDisposition,
+            [In, Out] SafeCertContextHandle ppStoreContext
+        );
     }
 }

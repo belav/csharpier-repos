@@ -11,24 +11,37 @@ using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
 {
-    internal abstract class AbstractBraceCompletionServiceFactory : ForegroundThreadAffinitizedObject, IBraceCompletionServiceFactory
+    internal abstract class AbstractBraceCompletionServiceFactory
+        : ForegroundThreadAffinitizedObject,
+          IBraceCompletionServiceFactory
     {
         private readonly ImmutableArray<IBraceCompletionService> _braceCompletionServices;
 
         protected AbstractBraceCompletionServiceFactory(
             IEnumerable<IBraceCompletionService> braceCompletionServices,
-            IThreadingContext threadingContext)
-            : base(threadingContext)
+            IThreadingContext threadingContext
+        ) : base(threadingContext)
         {
             _braceCompletionServices = braceCompletionServices.ToImmutableArray();
         }
 
-        public async Task<IBraceCompletionService?> TryGetServiceAsync(Document document, int openingPosition, char openingBrace, CancellationToken cancellationToken)
-        {
+        public async Task<IBraceCompletionService?> TryGetServiceAsync(
+            Document document,
+            int openingPosition,
+            char openingBrace,
+            CancellationToken cancellationToken
+        ) {
             foreach (var service in _braceCompletionServices)
             {
-                if (await service.CanProvideBraceCompletionAsync(openingBrace, openingPosition, document, cancellationToken).ConfigureAwait(false))
-                {
+                if (
+                    await service.CanProvideBraceCompletionAsync(
+                            openingBrace,
+                            openingPosition,
+                            document,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                ) {
                     return service;
                 }
             }

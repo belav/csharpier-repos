@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                     (byte*)_inputHandle.Pointer,
                     _memory.Length,
                     out bytes,
-                    out bool completionExpected);
+                    out bool completionExpected
+                );
 
                 return !completionExpected;
             }
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 _inputHandle.Dispose();
             }
 
-            protected override bool IsSuccessfulResult(int hr) => hr == NativeMethods.ERROR_HANDLE_EOF;
+            protected override bool IsSuccessfulResult(int hr) =>
+                hr == NativeMethods.ERROR_HANDLE_EOF;
         }
     }
 }

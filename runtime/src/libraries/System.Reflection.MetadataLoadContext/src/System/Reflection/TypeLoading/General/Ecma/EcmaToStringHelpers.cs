@@ -16,8 +16,11 @@ namespace System.Reflection.TypeLoading.Ecma
     /// </summary>
     internal static class EcmaToStringHelpers
     {
-        public static string ToTypeString(this EntityHandle handle, in TypeContext typeContext, MetadataReader reader)
-        {
+        public static string ToTypeString(
+            this EntityHandle handle,
+            in TypeContext typeContext,
+            MetadataReader reader
+        ) {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(reader != null);
 
@@ -57,17 +60,23 @@ namespace System.Reflection.TypeLoading.Ecma
             TypeReference tr = handle.GetTypeReference(reader);
             string ns = tr.Namespace.GetStringOrNull(reader) ?? string.Empty;
             string name = tr.Name.GetString(reader);
-            if (tr.ResolutionScope.Kind == HandleKind.TypeDefinition || tr.ResolutionScope.Kind == HandleKind.TypeReference)
-            {
+            if (
+                tr.ResolutionScope.Kind == HandleKind.TypeDefinition
+                || tr.ResolutionScope.Kind == HandleKind.TypeReference
+            ) {
                 string declaringTypeName = tr.ResolutionScope.ToTypeString(default, reader);
                 name = declaringTypeName + "+" + name;
             }
             return ns.AppendTypeName(name);
         }
 
-        public static string ToTypeString(this TypeSpecificationHandle handle, MetadataReader reader, in TypeContext typeContext)
-        {
-            return handle.GetTypeSpecification(reader).DecodeSignature(EcmaSignatureTypeProviderForToString.Instance, typeContext);
+        public static string ToTypeString(
+            this TypeSpecificationHandle handle,
+            MetadataReader reader,
+            in TypeContext typeContext
+        ) {
+            return handle.GetTypeSpecification(reader)
+                .DecodeSignature(EcmaSignatureTypeProviderForToString.Instance, typeContext);
         }
     }
 }

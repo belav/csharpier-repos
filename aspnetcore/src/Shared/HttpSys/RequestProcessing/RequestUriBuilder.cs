@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
     {
         private static readonly Encoding UTF8 = new UTF8Encoding(
             encoderShouldEmitUTF8Identifier: false,
-            throwOnInvalidBytes: true);
+            throwOnInvalidBytes: true
+        );
 
         public static string DecodeAndUnescapePath(Span<byte> rawUrlBytes)
         {
@@ -122,7 +123,9 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 return true;
             }
 
-            int byte2 = 0, byte3 = 0, byte4 = 0;
+            int byte2 = 0,
+                byte3 = 0,
+                byte4 = 0;
 
             // anticipate more bytes
             var currentDecodeBits = 0;
@@ -263,8 +266,11 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         /// <param name="end">The end of the buffer</param>
         /// <param name="buffer">The byte array</param>
         /// <returns>The unescaped byte if success. Otherwise return -1.</returns>
-        private static int? UnescapePercentEncoding(ref int scan, int end, ReadOnlySpan<byte> buffer)
-        {
+        private static int? UnescapePercentEncoding(
+            ref int scan,
+            int end,
+            ReadOnlySpan<byte> buffer
+        ) {
             if (buffer[scan++] != '%')
             {
                 return -1;
@@ -311,9 +317,11 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             }
 
             var value = buffer[scan++];
-            var isHead = (((value >= '0') && (value <= '9')) ||
-                          ((value >= 'A') && (value <= 'F')) ||
-                          ((value >= 'a') && (value <= 'f')));
+            var isHead = (
+                ((value >= '0') && (value <= '9'))
+                || ((value >= 'A') && (value <= 'F'))
+                || ((value >= 'a') && (value <= 'f'))
+            );
 
             if (!isHead)
             {

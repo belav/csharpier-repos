@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
     {
         private readonly struct EmbeddedCompletionContext
         {
-            private static readonly DateTime s_exampleDateTime = DateTime.Parse("2009-06-15T13:45:30.1234567");
+            private static readonly DateTime s_exampleDateTime = DateTime.Parse(
+                "2009-06-15T13:45:30.1234567"
+            );
             private static readonly CultureInfo s_enUsCulture = CultureInfo.GetCultureInfo("en-US");
 
             private readonly ArrayBuilder<DateAndTimeItem> _items;
@@ -37,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 SourceText text,
                 CompletionContext context,
                 VirtualCharSequence virtualChars,
-                ArrayBuilder<DateAndTimeItem> items)
-            {
+                ArrayBuilder<DateAndTimeItem> items
+            ) {
                 _items = items;
 
                 var startPosition = context.Position;
@@ -49,12 +51,18 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
 
                 _replacementSpan = TextSpan.FromBounds(startPosition, context.Position);
 
-                (_userFormatPrefix, _userFormatSuffix) = GetUserFormatParts(virtualChars, startPosition, context.Position);
+                (_userFormatPrefix, _userFormatSuffix) = GetUserFormatParts(
+                    virtualChars,
+                    startPosition,
+                    context.Position
+                );
             }
 
             private static (string prefix, string suffix) GetUserFormatParts(
-                VirtualCharSequence virtualChars, int startPosition, int endPosition)
-            {
+                VirtualCharSequence virtualChars,
+                int startPosition,
+                int endPosition
+            ) {
                 virtualChars = virtualChars.IsDefault ? VirtualCharSequence.Empty : virtualChars;
 
                 using var _1 = PooledStringBuilder.GetInstance(out var prefix);
@@ -70,8 +78,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 return (prefix.ToString(), suffix.ToString());
             }
 
-            private void AddExamples(ArrayBuilder<string> examples, bool standard, string displayText)
-            {
+            private void AddExamples(
+                ArrayBuilder<string> examples,
+                bool standard,
+                string displayText
+            ) {
                 var userFormat = _userFormatPrefix + displayText + _userFormatSuffix;
 
                 var primaryCulture = CultureInfo.CurrentCulture;
@@ -85,13 +96,16 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             }
 
             private static void AddExample(
-                ArrayBuilder<string> examples, bool standard, string displayText, CultureInfo culture, bool hideCulture)
-            {
+                ArrayBuilder<string> examples,
+                bool standard,
+                string displayText,
+                CultureInfo culture,
+                bool hideCulture
+            ) {
                 // Single letter custom strings need a %, or else they're interpreted as a format
                 // standard format string (and will throw a format exception).
-                var formatString = !standard && displayText.Length == 1
-                    ? "%" + displayText
-                    : displayText;
+                var formatString =
+                    !standard && displayText.Length == 1 ? "%" + displayText : displayText;
 
                 if (formatString == "")
                     return;
@@ -118,32 +132,46 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                     examples.Add(example);
             }
 
-            public void AddStandard(string displayText, string suffix, string description, bool isDefault = false)
-                => Add(displayText, suffix, description, standard: true, isDefault);
+            public void AddStandard(
+                string displayText,
+                string suffix,
+                string description,
+                bool isDefault = false
+            ) => Add(displayText, suffix, description, standard: true, isDefault);
 
-            public void AddCustom(string displayText, string suffix, string description)
-                => Add(displayText, suffix, description, standard: false, isDefault: false);
+            public void AddCustom(string displayText, string suffix, string description) =>
+                Add(displayText, suffix, description, standard: false, isDefault: false);
 
-            private void Add(string displayText, string suffix, string description, bool standard, bool isDefault)
-            {
+            private void Add(
+                string displayText,
+                string suffix,
+                string description,
+                bool standard,
+                bool isDefault
+            ) {
                 using var _1 = PooledStringBuilder.GetInstance(out var descriptionBuilder);
                 using var _2 = ArrayBuilder<string>.GetInstance(out var examples);
 
                 AddExamples(examples, standard, displayText);
 
                 descriptionBuilder.AppendLine(
-                    examples.Count == 1 ? FeaturesResources.Example : FeaturesResources.Examples);
+                    examples.Count == 1 ? FeaturesResources.Example : FeaturesResources.Examples
+                );
                 foreach (var example in examples)
                     descriptionBuilder.AppendLine(example);
 
                 descriptionBuilder.AppendLine();
                 descriptionBuilder.Append(description);
 
-                _items.Add(new DateAndTimeItem(
-                    displayText, suffix, descriptionBuilder.ToString(),
-                    CompletionChange.Create(
-                        new TextChange(_replacementSpan, displayText)),
-                    isDefault));
+                _items.Add(
+                    new DateAndTimeItem(
+                        displayText,
+                        suffix,
+                        descriptionBuilder.ToString(),
+                        CompletionChange.Create(new TextChange(_replacementSpan, displayText)),
+                        isDefault
+                    )
+                );
             }
         }
     }

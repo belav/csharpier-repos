@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis
     {
         private abstract partial class CompilationAndGeneratorDriverTranslationAction
         {
-            public virtual Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
-            {
+            public virtual Task<Compilation> TransformCompilationAsync(
+                Compilation oldCompilation,
+                CancellationToken cancellationToken
+            ) {
                 return Task.FromResult(oldCompilation);
             }
         }

@@ -9,8 +9,13 @@ namespace System.Net.Http.Json
 {
     public static partial class HttpClientJsonExtensions
     {
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
-        {
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        ) {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -20,8 +25,13 @@ namespace System.Net.Http.Json
             return client.PutAsync(requestUri, content, cancellationToken);
         }
 
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
-        {
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        ) {
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
@@ -31,10 +41,18 @@ namespace System.Net.Http.Json
             return client.PutAsync(requestUri, content, cancellationToken);
         }
 
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
 
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
     }
 }

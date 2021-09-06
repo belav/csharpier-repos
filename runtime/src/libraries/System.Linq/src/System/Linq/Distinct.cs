@@ -8,10 +8,13 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source) => Distinct(source, null);
+        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source) =>
+            Distinct(source, null);
 
-        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource>? comparer)
-        {
+        public static IEnumerable<TSource> Distinct<TSource>(
+            this IEnumerable<TSource> source,
+            IEqualityComparer<TSource>? comparer
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -20,10 +23,16 @@ namespace System.Linq
             return new DistinctIterator<TSource>(source, comparer);
         }
 
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) => DistinctBy(source, keySelector, null);
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        ) => DistinctBy(source, keySelector, null);
 
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
-        {
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        ) {
             if (source is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -36,8 +45,11 @@ namespace System.Linq
             return DistinctByIterator(source, keySelector, comparer);
         }
 
-        private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
-        {
+        private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        ) {
             using IEnumerator<TSource> enumerator = source.GetEnumerator();
 
             if (enumerator.MoveNext())
@@ -50,8 +62,7 @@ namespace System.Linq
                     {
                         yield return element;
                     }
-                }
-                while (enumerator.MoveNext());
+                } while (enumerator.MoveNext());
             }
         }
 
@@ -66,14 +77,17 @@ namespace System.Linq
             private HashSet<TSource>? _set;
             private IEnumerator<TSource>? _enumerator;
 
-            public DistinctIterator(IEnumerable<TSource> source, IEqualityComparer<TSource>? comparer)
-            {
+            public DistinctIterator(
+                IEnumerable<TSource> source,
+                IEqualityComparer<TSource>? comparer
+            ) {
                 Debug.Assert(source != null);
                 _source = source;
                 _comparer = comparer;
             }
 
-            public override Iterator<TSource> Clone() => new DistinctIterator<TSource>(_source, _comparer);
+            public override Iterator<TSource> Clone() =>
+                new DistinctIterator<TSource>(_source, _comparer);
 
             public override bool MoveNext()
             {
@@ -105,7 +119,6 @@ namespace System.Linq
                                 return true;
                             }
                         }
-
                         break;
                 }
 

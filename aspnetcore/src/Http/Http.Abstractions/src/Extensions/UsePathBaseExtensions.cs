@@ -18,8 +18,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
         /// <param name="pathBase">The path base to extract.</param>
         /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
-        public static IApplicationBuilder UsePathBase(this IApplicationBuilder app, PathString pathBase)
-        {
+        public static IApplicationBuilder UsePathBase(
+            this IApplicationBuilder app,
+            PathString pathBase
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

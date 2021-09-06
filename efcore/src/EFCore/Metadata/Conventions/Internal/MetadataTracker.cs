@@ -15,7 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
     /// </summary>
     public class MetadataTracker : IReferenceRoot<IConventionForeignKey>
     {
-        private readonly Dictionary<IConventionForeignKey, Reference<IConventionForeignKey>> _trackedForeignKeys = new();
+        private readonly Dictionary<
+            IConventionForeignKey,
+            Reference<IConventionForeignKey>
+        > _trackedForeignKeys = new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,11 +26,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Update(IConventionForeignKey oldForeignKey, IConventionForeignKey newForeignKey)
-        {
+        public virtual void Update(
+            IConventionForeignKey oldForeignKey,
+            IConventionForeignKey newForeignKey
+        ) {
             Check.DebugAssert(
                 !oldForeignKey.IsInModel && newForeignKey.IsInModel,
-                $"{nameof(oldForeignKey)} is in the model or {nameof(newForeignKey)} isn't");
+                $"{nameof(oldForeignKey)} is in the model or {nameof(newForeignKey)} isn't"
+            );
 
             if (_trackedForeignKeys.TryGetValue(oldForeignKey, out var reference))
             {
@@ -63,8 +69,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        void IReferenceRoot<IConventionForeignKey>.Release(Reference<IConventionForeignKey> foreignKeyReference)
-        {
+        void IReferenceRoot<IConventionForeignKey>.Release(
+            Reference<IConventionForeignKey> foreignKeyReference
+        ) {
             _trackedForeignKeys.Remove(foreignKeyReference.Object);
         }
     }

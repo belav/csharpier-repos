@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             try
             {
                 ws.TryApplyChanges(changedDoc.Project.Solution);
-
             }
             catch (NotSupportedException x)
             {
@@ -62,7 +61,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             Assert.NotNull(e);
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported, e.Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                e.Message
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -90,7 +92,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             Assert.NotNull(e);
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported, e.Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                e.Message
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -117,7 +122,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             Assert.NotNull(e);
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported, e.Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                e.Message
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -143,27 +151,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             Assert.NotNull(e);
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported, e.Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                e.Message
+            );
         }
 
         private class NoChangesAllowedWorkspace : Workspace
         {
-            public NoChangesAllowedWorkspace(HostServices services, string workspaceKind = "Custom")
-                : base(services, workspaceKind)
-            {
-            }
+            public NoChangesAllowedWorkspace(
+                HostServices services,
+                string workspaceKind = "Custom"
+            ) : base(services, workspaceKind) { }
 
-            public NoChangesAllowedWorkspace()
-                : this(Host.Mef.MefHostServices.DefaultHost)
-            {
-            }
+            public NoChangesAllowedWorkspace() : this(Host.Mef.MefHostServices.DefaultHost) { }
 
-            public override bool CanApplyChange(ApplyChangesKind feature)
-                => false;
+            public override bool CanApplyChange(ApplyChangesKind feature) => false;
 
             public Project AddProject(string name, string language)
             {
-                var info = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Create(), name, name, language);
+                var info = ProjectInfo.Create(
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    name,
+                    name,
+                    language
+                );
                 return this.AddProject(info);
             }
 

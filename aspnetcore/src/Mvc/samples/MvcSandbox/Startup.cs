@@ -21,10 +21,12 @@ namespace MvcSandbox
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRouting(options =>
-            {
-                options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-            });
+            services.AddRouting(
+                options =>
+                {
+                    options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+                }
+            );
             services.AddServerSideBlazor();
             services.AddMvc();
         }
@@ -36,39 +38,45 @@ namespace MvcSandbox
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseEndpoints(builder =>
-            {
-                builder.MapGet(
-                    requestDelegate: WriteEndpoints,
-                    pattern: "/endpoints").WithDisplayName("Endpoints");
+            app.UseEndpoints(
+                builder =>
+                {
+                    builder.MapGet(requestDelegate: WriteEndpoints, pattern: "/endpoints")
+                        .WithDisplayName("Endpoints");
 
-                builder.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    builder.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}"
+                    );
 
-                builder.MapControllerRoute(
-                    name: "transform",
-                    pattern: "Transform/{controller:slugify=Home}/{action:slugify=Index}/{id?}",
-                    defaults: null,
-                    constraints: new { controller = "Home" });
+                    builder.MapControllerRoute(
+                        name: "transform",
+                        pattern: "Transform/{controller:slugify=Home}/{action:slugify=Index}/{id?}",
+                        defaults: null,
+                        constraints: new { controller = "Home" }
+                    );
 
-                builder.MapGet(
-                    "/graph",
-                    async (httpContext) =>
-                    {
-                        await using var writer = new StringWriter();
-                        var graphWriter = httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
-                        var dataSource = httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
-                        graphWriter.Write(dataSource, writer);
-                        await httpContext.Response.WriteAsync(writer.ToString());
+                    builder.MapGet(
+                            "/graph",
+                            async (httpContext) =>
+                            {
+                                await using var writer = new StringWriter();
+                                var graphWriter =
+                                    httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
+                                var dataSource =
+                                    httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                                graphWriter.Write(dataSource, writer);
+                                await httpContext.Response.WriteAsync(writer.ToString());
+                            }
+                        )
+                        .WithDisplayName("DFA Graph");
 
-                    }).WithDisplayName("DFA Graph");
-
-                builder.MapControllers();
-                builder.MapRazorPages();
-                builder.MapBlazorHub();
-                builder.MapFallbackToPage("/Components");
-            });
+                    builder.MapControllers();
+                    builder.MapRazorPages();
+                    builder.MapBlazorHub();
+                    builder.MapFallbackToPage("/Components");
+                }
+            );
         }
 
         private static Task WriteEndpoints(HttpContext httpContext)
@@ -77,8 +85,10 @@ namespace MvcSandbox
 
             var sb = new StringBuilder();
             sb.AppendLine("Endpoints:");
-            foreach (var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>().OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase))
-            {
+            foreach (
+                var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>()
+                    .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
+            ) {
                 sb.AppendLine($"- {endpoint.RoutePattern.RawText} '{endpoint.DisplayName}'");
             }
 
@@ -90,21 +100,19 @@ namespace MvcSandbox
 
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
-                .Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureLogging(factory =>
-                {
-                    factory
-                        .AddConsole()
-                        .AddDebug();
-                })
+            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureLogging(
+                    factory =>
+                    {
+                        factory.AddConsole().AddDebug();
+                    }
+                )
                 .UseIISIntegration()
                 .UseKestrel()
                 .UseStartup<Startup>();

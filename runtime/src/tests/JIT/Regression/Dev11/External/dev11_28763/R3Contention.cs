@@ -5,7 +5,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 namespace R3Contention
 {
     public struct Size
@@ -41,9 +40,6 @@ namespace R3Contention
         }
     }
 
-
-
-
     public class LayoutOptions
     {
         public string text;
@@ -56,9 +52,10 @@ namespace R3Contention
         public bool disableWordWrapping;
         public Size imageSize;
 
-
-        public int FullCheckSize { get { return (this.checkSize + this.checkPaddingSize); } }
-
+        public int FullCheckSize
+        {
+            get { return (this.checkSize + this.checkPaddingSize); }
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public Size Compose(Size checkSize, Size imageSize, Size textSize)
@@ -66,25 +63,19 @@ namespace R3Contention
             return Size.Empty;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
         public Size Decompose(Size checkSize, Size requiredImageSize, Size proposedSize)
         {
             return Size.Empty;
         }
 
-
         public virtual Size GetTextSize(Size proposedSize)
         {
             return Size.Empty;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public
-        Size GetPreferredSizeCore(
-            Size proposedSize
-            )
+        public Size GetPreferredSizeCore(Size proposedSize)
         {
             int linearBorderAndPadding = ((this.borderSize * 2) + (this.paddingSize * 2));
 
@@ -93,41 +84,27 @@ namespace R3Contention
                 linearBorderAndPadding += 2;
             }
 
-
-
             Size bordersAndPadding = new Size(linearBorderAndPadding, linearBorderAndPadding);
 
             proposedSize = Size.Subtract(proposedSize, bordersAndPadding);
 
-
-
             int checkSizeLinear = this.FullCheckSize;
 
             Size checkSize =
-                (checkSizeLinear > 0) ?
-                    new Size(checkSizeLinear + 1, checkSizeLinear) :
-                    Size.Empty;
-
-
-
+                (checkSizeLinear > 0) ? new Size(checkSizeLinear + 1, checkSizeLinear) : Size.Empty;
 
             Size textImageInsetSize = new Size(this.textImageInset * 2, this.textImageInset * 2);
 
             Size requiredImageSize =
-                (!Size.AreEqual(this.imageSize, Size.Empty)) ?
-                    Size.Add(this.imageSize, textImageInsetSize) :
-                    Size.Empty;
-
-
+                (!Size.AreEqual(this.imageSize, Size.Empty))
+                    ? Size.Add(this.imageSize, textImageInsetSize)
+                    : Size.Empty;
 
             proposedSize = Size.Subtract(proposedSize, textImageInsetSize);
 
             proposedSize = this.Decompose(checkSize, requiredImageSize, proposedSize);
 
-
-
             Size textSize = Size.Empty;
-
 
             if (!string.IsNullOrEmpty(this.text))
             {
@@ -136,24 +113,20 @@ namespace R3Contention
                     this.disableWordWrapping = true;
                     textSize = Size.Add(this.GetTextSize(proposedSize), textImageInsetSize);
                 }
+
                 finally
                 {
                     this.disableWordWrapping = false;
                 }
             }
 
-
-
             Size requiredSize = this.Compose(checkSize, this.imageSize, textSize);
 
             requiredSize = Size.Add(requiredSize, bordersAndPadding);
 
-
-
             return requiredSize;
         }
     }
-
 
     internal static class App
     {

@@ -3,44 +3,46 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-class CustomException : Exception
-{
-}
+class CustomException : Exception { }
 
 class Driver
 {
-	static ManualResetEvent mre = new ManualResetEvent (false);
+    static ManualResetEvent mre = new ManualResetEvent(false);
 
-	class FinalizedClass
-	{
-		~FinalizedClass ()
-		{
-			try {
-				throw new CustomException ();
-			} finally {
-				mre.Set ();
-			}
-		}
-	}
+    class FinalizedClass
+    {
+        ~FinalizedClass()
+        {
+            try
+            {
+                throw new CustomException();
+            }
 
-	/* expected exit code: 255 */
-	static void Main (string[] args)
-	{
-		if (Environment.GetEnvironmentVariable ("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
-			AppDomain.CurrentDomain.UnhandledException += (s, e) => {};
+            finally
+            {
+                mre.Set();
+            }
+        }
+    }
 
-		new FinalizedClass();
+    /* expected exit code: 255 */
+    static void Main(string[] args)
+    {
+        if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => { };
 
-		GC.Collect ();
-		GC.WaitForPendingFinalizers ();
+        new FinalizedClass();
 
-		if (!mre.WaitOne (5000))
-			Environment.Exit (2);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
 
-		/* Give a chance to the finalizer thread to finish executing the exception unwinding
+        if (!mre.WaitOne(5000))
+            Environment.Exit(2);
+
+        /* Give a chance to the finalizer thread to finish executing the exception unwinding
 		 * after the finally, before we exit with status 0 on the current thread */
-		Thread.Sleep (1000);
+        Thread.Sleep(1000);
 
-		Environment.Exit (0);
-	}
+        Environment.Exit(0);
+    }
 }

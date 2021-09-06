@@ -11,7 +11,18 @@ public class Program
 
     public static int Main()
     {
-        int[] testData = new int[] { int.MinValue, int.MinValue + 1, -1, 0, 1, 2, 1000, int.MaxValue - 1, int.MaxValue };
+        int[] testData = new int[]
+        {
+            int.MinValue,
+            int.MinValue + 1,
+            -1,
+            0,
+            1,
+            2,
+            1000,
+            int.MaxValue - 1,
+            int.MaxValue
+        };
         for (int i = 0; i < testData.Length; i++)
         {
             for (int j = 0; j < testData.Length; j++)
@@ -59,31 +70,38 @@ public class Program
                 AssertEquals(test7Value, test8Value);
             }
 
-            ThrowsNRE(() =>
-            {
-                ref int nullref = ref Unsafe.NullRef<int>();
-                InterlockedImpl.XAnd32(ref nullref, testData[i]);
-            });
+            ThrowsNRE(
+                () =>
+                {
+                    ref int nullref = ref Unsafe.NullRef<int>();
+                    InterlockedImpl.XAnd32(ref nullref, testData[i]);
+                }
+            );
 
-            ThrowsNRE(() =>
-            {
-                ref int nullref = ref Unsafe.NullRef<int>();
-                InterlockedImpl.XAnd32_noret(ref nullref, testData[i]);
-            });
+            ThrowsNRE(
+                () =>
+                {
+                    ref int nullref = ref Unsafe.NullRef<int>();
+                    InterlockedImpl.XAnd32_noret(ref nullref, testData[i]);
+                }
+            );
 
-            ThrowsNRE(() =>
-            {
-                ref int nullref = ref Unsafe.NullRef<int>();
-                InterlockedImpl.XOr32(ref nullref, testData[i]);
-            });
+            ThrowsNRE(
+                () =>
+                {
+                    ref int nullref = ref Unsafe.NullRef<int>();
+                    InterlockedImpl.XOr32(ref nullref, testData[i]);
+                }
+            );
 
-            ThrowsNRE(() =>
-            {
-                ref int nullref = ref Unsafe.NullRef<int>();
-                InterlockedImpl.XOr32_noret(ref nullref, testData[i]);
-            });
+            ThrowsNRE(
+                () =>
+                {
+                    ref int nullref = ref Unsafe.NullRef<int>();
+                    InterlockedImpl.XOr32_noret(ref nullref, testData[i]);
+                }
+            );
         }
-
 
         return s_RetCode;
     }
@@ -116,13 +134,23 @@ public class Program
 class RefImpl
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static int XAnd32(ref int a, int b) { int src = a; a &= b; return src; }
+    public static int XAnd32(ref int a, int b)
+    {
+        int src = a;
+        a &= b;
+        return src;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void XAnd32_noret(ref int a, int b) => a &= b;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static int XOr32(ref int a, int b) { int src = a; a |= b; return src; }
+    public static int XOr32(ref int a, int b)
+    {
+        int src = a;
+        a |= b;
+        return src;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void XOr32_noret(ref int a, int b) => a |= b;

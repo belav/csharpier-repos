@@ -16,14 +16,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRecommendationService()
-        {
-        }
+        public CSharpRecommendationService() { }
 
-        protected override CSharpSyntaxContext CreateContext(Workspace workspace, SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => CSharpSyntaxContext.CreateContext(workspace, semanticModel, position, cancellationToken);
+        protected override CSharpSyntaxContext CreateContext(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            CSharpSyntaxContext.CreateContext(
+                workspace,
+                semanticModel,
+                position,
+                cancellationToken
+            );
 
-        protected override AbstractRecommendationServiceRunner<CSharpSyntaxContext> CreateRunner(CSharpSyntaxContext context, bool filterOutOfScopeLocals, CancellationToken cancellationToken)
-            => new CSharpRecommendationServiceRunner(context, filterOutOfScopeLocals, cancellationToken);
+        protected override AbstractRecommendationServiceRunner<CSharpSyntaxContext> CreateRunner(
+            CSharpSyntaxContext context,
+            bool filterOutOfScopeLocals,
+            CancellationToken cancellationToken
+        ) =>
+            new CSharpRecommendationServiceRunner(
+                context,
+                filterOutOfScopeLocals,
+                cancellationToken
+            );
     }
 }

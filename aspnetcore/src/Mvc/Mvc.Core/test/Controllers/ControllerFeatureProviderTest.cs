@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         public void UserDefinedControllerClass_IsNotController()
         {
             // Arrange
-            var controllerType = typeof(ControllerFeatureProviderControllers.Controller).GetTypeInfo();
+            var controllerType =
+                typeof(ControllerFeatureProviderControllers.Controller).GetTypeInfo();
             var manager = GetApplicationPartManager(controllerType);
             var feature = new ControllerFeature();
 
@@ -121,7 +122,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             // Assert
             Assert.Empty(feature.Controllers);
         }
-        
+
         [Fact]
         public void ValueTypeClass_IsNotController()
         {
@@ -299,12 +300,12 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var otherPart = new Mock<ApplicationPart>();
-            otherPart
-                .As<IApplicationPartTypeProvider>()
+            otherPart.As<IApplicationPartTypeProvider>()
                 .Setup(t => t.Types)
                 .Returns(new[] { typeof(PocoController).GetTypeInfo() });
 
-            var parts = new[] {
+            var parts = new[]
+            {
                 Mock.Of<ApplicationPart>(),
                 new TestApplicationPart(typeof(NoSuffix).GetTypeInfo()),
                 otherPart.Object
@@ -332,12 +333,12 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var otherPart = new Mock<ApplicationPart>();
-            otherPart
-                .As<IApplicationPartTypeProvider>()
+            otherPart.As<IApplicationPartTypeProvider>()
                 .Setup(t => t.Types)
                 .Returns(new[] { typeof(PocoController).GetTypeInfo() });
 
-            var parts = new[] {
+            var parts = new[]
+            {
                 Mock.Of<ApplicationPart>(),
                 new TestApplicationPart(typeof(NoSuffix)),
                 otherPart.Object
@@ -453,7 +454,6 @@ namespace Microsoft.AspNetCore.Mvc.ControllerFeatureProviderControllers
 
     public class NoSuffixPoco
     {
-
     }
 
     public class PocoController
@@ -463,82 +463,68 @@ namespace Microsoft.AspNetCore.Mvc.ControllerFeatureProviderControllers
     [Controller]
     public class CustomBase
     {
-
     }
 
     [Controller]
     public abstract class CustomAbstractBaseController
     {
-
     }
 
     public class DescendantLevel1 : CustomBase
     {
-
     }
 
     public class DescendantLevel2 : DescendantLevel1
     {
-
     }
 
     public class AbstractChildWithoutSuffix : CustomAbstractBaseController
     {
-
     }
 
     [NonController]
     public class BasePocoNonControllerController
     {
-
     }
 
     [Controller]
-    public class BaseNonControllerAttributeChildControllerControllerAttributeController : BaseNonControllerController
+    public class BaseNonControllerAttributeChildControllerControllerAttributeController
+        : BaseNonControllerController
     {
- 
     }
 
     public class BasePocoNonControllerControllerChild : BasePocoNonControllerController
     {
-
     }
 
     [NonController]
     public class BaseNonControllerController : Controller
     {
-
     }
 
     public class BaseNonControllerControllerChild : BaseNonControllerController
     {
-
     }
 
     [NonController]
     public class NonControllerChild : Controller
     {
-
     }
 
     [NonController]
     public class NonController : Controller
     {
-
     }
 
     public class DataModelBase
     {
-
     }
 
     public class EntityDataModel : DataModelBase
     {
-
     }
 
     public class PersonModel : EntityDataModel
     {
-
     }
 }

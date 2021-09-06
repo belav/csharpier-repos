@@ -17,37 +17,34 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private Transaction _enlistedTransaction;
 
         public TestInMemoryTransactionManager(
-            IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger)
-            : base(logger)
-        {
-        }
+            IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger
+        ) : base(logger) { }
 
-        public override IDbContextTransaction CurrentTransaction
-            => _currentTransaction;
+        public override IDbContextTransaction CurrentTransaction => _currentTransaction;
 
-        public override Transaction EnlistedTransaction
-            => _enlistedTransaction;
+        public override Transaction EnlistedTransaction => _enlistedTransaction;
 
-        public override IDbContextTransaction BeginTransaction()
-            => _currentTransaction = new TestInMemoryTransaction(this);
+        public override IDbContextTransaction BeginTransaction() =>
+            _currentTransaction = new TestInMemoryTransaction(this);
 
-        public override Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-            => Task.FromResult(_currentTransaction = new TestInMemoryTransaction(this));
+        public override Task<IDbContextTransaction> BeginTransactionAsync(
+            CancellationToken cancellationToken = default
+        ) => Task.FromResult(_currentTransaction = new TestInMemoryTransaction(this));
 
-        public override void CommitTransaction()
-            => CurrentTransaction.Commit();
+        public override void CommitTransaction() => CurrentTransaction.Commit();
 
-        public override Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-            => CurrentTransaction.CommitAsync(cancellationToken);
+        public override Task CommitTransactionAsync(
+            CancellationToken cancellationToken = default
+        ) => CurrentTransaction.CommitAsync(cancellationToken);
 
-        public override void RollbackTransaction()
-            => CurrentTransaction.Rollback();
+        public override void RollbackTransaction() => CurrentTransaction.Rollback();
 
-        public override Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-            => CurrentTransaction.RollbackAsync(cancellationToken);
+        public override Task RollbackTransactionAsync(
+            CancellationToken cancellationToken = default
+        ) => CurrentTransaction.RollbackAsync(cancellationToken);
 
-        public override void EnlistTransaction(Transaction transaction)
-            => _enlistedTransaction = transaction;
+        public override void EnlistTransaction(Transaction transaction) =>
+            _enlistedTransaction = transaction;
 
         private class TestInMemoryTransaction : IDbContextTransaction
         {

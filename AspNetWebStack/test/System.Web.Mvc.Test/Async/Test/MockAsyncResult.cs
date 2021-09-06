@@ -47,7 +47,6 @@ namespace System.Web.Mvc.Async.Test
         {
             get { return _asyncWaitHandle; }
         }
-
         #endregion
     }
 }

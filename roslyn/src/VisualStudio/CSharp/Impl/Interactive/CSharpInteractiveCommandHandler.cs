@@ -18,8 +18,13 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
 {
-    [ExportInteractive(typeof(IExecuteInInteractiveCommandHandler), ContentTypeNames.CSharpContentType)]
-    internal sealed class CSharpInteractiveCommandHandler : InteractiveCommandHandler, IExecuteInInteractiveCommandHandler
+    [ExportInteractive(
+        typeof(IExecuteInInteractiveCommandHandler),
+        ContentTypeNames.CSharpContentType
+    )]
+    internal sealed class CSharpInteractiveCommandHandler
+        : InteractiveCommandHandler,
+          IExecuteInInteractiveCommandHandler
     {
         private readonly CSharpVsInteractiveWindowProvider _interactiveWindowProvider;
 
@@ -32,16 +37,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             ISendToInteractiveSubmissionProvider sendToInteractiveSubmissionProvider,
             IContentTypeRegistryService contentTypeRegistryService,
             IEditorOptionsFactoryService editorOptionsFactoryService,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-            : base(contentTypeRegistryService, editorOptionsFactoryService, editorOperationsFactoryService)
-        {
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) : base(
+            contentTypeRegistryService,
+            editorOptionsFactoryService,
+            editorOperationsFactoryService
+        ) {
             _interactiveWindowProvider = interactiveWindowProvider;
             _sendToInteractiveSubmissionProvider = sendToInteractiveSubmissionProvider;
         }
 
-        protected override ISendToInteractiveSubmissionProvider SendToInteractiveSubmissionProvider => _sendToInteractiveSubmissionProvider;
+        protected override ISendToInteractiveSubmissionProvider SendToInteractiveSubmissionProvider =>
+            _sendToInteractiveSubmissionProvider;
 
-        protected override IInteractiveWindow OpenInteractiveWindow(bool focus)
-            => _interactiveWindowProvider.Open(instanceId: 0, focus: focus).InteractiveWindow;
+        protected override IInteractiveWindow OpenInteractiveWindow(bool focus) =>
+            _interactiveWindowProvider.Open(instanceId: 0, focus: focus).InteractiveWindow;
     }
 }

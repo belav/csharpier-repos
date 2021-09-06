@@ -36,21 +36,30 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return objectType == typeof(System.Net.Mail.MailAddress);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             var messageJObject = serializer.Deserialize<JObject>(reader);
             if (messageJObject == null)
             {
                 return null;
             }
 
-            var address = messageJObject.GetValue("Address", StringComparison.OrdinalIgnoreCase).ToObject<string>();
+            var address = messageJObject.GetValue("Address", StringComparison.OrdinalIgnoreCase)
+                .ToObject<string>();
 
             JToken displayNameToken;
             string displayName;
-            if (messageJObject.TryGetValue("DisplayName", StringComparison.OrdinalIgnoreCase, out displayNameToken)
-                && !string.IsNullOrEmpty(displayName = displayNameToken.ToObject<string>()))
-            {
+            if (
+                messageJObject.TryGetValue(
+                    "DisplayName",
+                    StringComparison.OrdinalIgnoreCase,
+                    out displayNameToken
+                ) && !string.IsNullOrEmpty(displayName = displayNameToken.ToObject<string>())
+            ) {
                 return new System.Net.Mail.MailAddress(address, displayName);
             }
 

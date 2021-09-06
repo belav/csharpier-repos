@@ -26,11 +26,18 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used for logging.</param>
         /// <param name="queue">The queueing strategy to use for the server.</param>
         /// <param name="options">The options for the middleware, currently containing the 'OnRejected' callback.</param>
-        public ConcurrencyLimiterMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IQueuePolicy queue, IOptions<ConcurrencyLimiterOptions> options)
-        {
+        public ConcurrencyLimiterMiddleware(
+            RequestDelegate next,
+            ILoggerFactory loggerFactory,
+            IQueuePolicy queue,
+            IOptions<ConcurrencyLimiterOptions> options
+        ) {
             if (options.Value.OnRejected == null)
             {
-                throw new ArgumentException("The value of 'options.OnRejected' must not be null.", nameof(options));
+                throw new ArgumentException(
+                    "The value of 'options.OnRejected' must not be null.",
+                    nameof(options)
+                );
             }
 
             _next = next;
@@ -70,6 +77,7 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
                 {
                     await _next(context);
                 }
+
                 finally
                 {
                     _queuePolicy.OnExit();
@@ -87,16 +95,32 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
         private static class ConcurrencyLimiterLog
         {
             private static readonly Action<ILogger, int, Exception?> _requestEnqueued =
-                LoggerMessage.Define<int>(LogLevel.Debug, new EventId(1, "RequestEnqueued"), "MaxConcurrentRequests limit reached, request has been queued. Current active requests: {ActiveRequests}.");
+                LoggerMessage.Define<int>(
+                    LogLevel.Debug,
+                    new EventId(1, "RequestEnqueued"),
+                    "MaxConcurrentRequests limit reached, request has been queued. Current active requests: {ActiveRequests}."
+                );
 
             private static readonly Action<ILogger, int, Exception?> _requestDequeued =
-                LoggerMessage.Define<int>(LogLevel.Debug, new EventId(2, "RequestDequeued"), "Request dequeued. Current active requests: {ActiveRequests}.");
+                LoggerMessage.Define<int>(
+                    LogLevel.Debug,
+                    new EventId(2, "RequestDequeued"),
+                    "Request dequeued. Current active requests: {ActiveRequests}."
+                );
 
             private static readonly Action<ILogger, int, Exception?> _requestRunImmediately =
-                LoggerMessage.Define<int>(LogLevel.Debug, new EventId(3, "RequestRunImmediately"), "Below MaxConcurrentRequests limit, running request immediately. Current active requests: {ActiveRequests}");
+                LoggerMessage.Define<int>(
+                    LogLevel.Debug,
+                    new EventId(3, "RequestRunImmediately"),
+                    "Below MaxConcurrentRequests limit, running request immediately. Current active requests: {ActiveRequests}"
+                );
 
             private static readonly Action<ILogger, Exception?> _requestRejectedQueueFull =
-                LoggerMessage.Define(LogLevel.Debug, new EventId(4, "RequestRejectedQueueFull"), "Currently at the 'RequestQueueLimit', rejecting this request with a '503 server not available' error");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    new EventId(4, "RequestRejectedQueueFull"),
+                    "Currently at the 'RequestQueueLimit', rejecting this request with a '503 server not available' error"
+                );
 
             internal static void RequestEnqueued(ILogger logger, int activeRequests)
             {

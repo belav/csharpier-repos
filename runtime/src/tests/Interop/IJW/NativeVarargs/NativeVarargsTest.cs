@@ -16,8 +16,11 @@ namespace NativeVarargsTest
     {
         static int Main(string[] args)
         {
-            if(Environment.OSVersion.Platform != PlatformID.Win32NT || TestLibrary.Utilities.IsWindows7 || TestLibrary.Utilities.IsWindowsNanoServer)
-            {
+            if (
+                Environment.OSVersion.Platform != PlatformID.Win32NT
+                || TestLibrary.Utilities.IsWindows7
+                || TestLibrary.Utilities.IsWindowsNanoServer
+            ) {
                 return 100;
             }
 
@@ -30,7 +33,13 @@ namespace NativeVarargsTest
                 Type testType = ijwNativeDll.GetType("TestClass");
                 object testInstance = Activator.CreateInstance(testType);
                 MethodInfo testMethod = testType.GetMethod("RunTests");
-                IEnumerable failedTests = (IEnumerable)testMethod.Invoke(testInstance, BindingFlags.DoNotWrapExceptions, null, new object[] {seed}, null);
+                IEnumerable failedTests = (IEnumerable)testMethod.Invoke(
+                    testInstance,
+                    BindingFlags.DoNotWrapExceptions,
+                    null,
+                    new object[] { seed },
+                    null
+                );
 
                 if (failedTests.OfType<object>().Any())
                 {

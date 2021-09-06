@@ -129,9 +129,16 @@ namespace System
                 const int Magic32BitNumber = 0x21E; // magic number octal 01036 for new ncruses terminfo
                 short magic = ReadInt16(data, 0);
                 _readAs32Bit =
-                    magic == MagicLegacyNumber ? false :
-                    magic == Magic32BitNumber ? true :
-                    throw new InvalidOperationException(SR.Format(SR.IO_TermInfoInvalidMagicNumber, string.Concat("O" + Convert.ToString(magic, 8)))); // magic number was not recognized. Printing the magic number in octal.
+                    magic == MagicLegacyNumber
+                        ? false
+                        : magic == Magic32BitNumber
+                            ? true
+                            : throw new InvalidOperationException(
+                                  SR.Format(
+                                      SR.IO_TermInfoInvalidMagicNumber,
+                                      string.Concat("O" + Convert.ToString(magic, 8))
+                                  )
+                              ); // magic number was not recognized. Printing the magic number in octal.
                 _sizeOfInt = (_readAs32Bit) ? 4 : 2;
 
                 _nameSectionNumBytes = ReadInt16(data, 2);
@@ -139,12 +146,13 @@ namespace System
                 _numberSectionNumInts = ReadInt16(data, 6);
                 _stringSectionNumOffsets = ReadInt16(data, 8);
                 _stringTableNumBytes = ReadInt16(data, 10);
-                if (_nameSectionNumBytes < 0 ||
-                    _boolSectionNumBytes < 0 ||
-                    _numberSectionNumInts < 0 ||
-                    _stringSectionNumOffsets < 0 ||
-                    _stringTableNumBytes < 0)
-                {
+                if (
+                    _nameSectionNumBytes < 0
+                    || _boolSectionNumBytes < 0
+                    || _numberSectionNumInts < 0
+                    || _stringSectionNumOffsets < 0
+                    || _stringTableNumBytes < 0
+                ) {
                     throw new InvalidOperationException(SR.IO_TermInfoInvalid);
                 }
 
@@ -156,11 +164,16 @@ namespace System
                 // (Note that the extended section also includes other Booleans and numbers, but we don't
                 // have any need for those now, so we don't parse them.)
                 int extendedBeginning = RoundUpToEven(StringsTableOffset + _stringTableNumBytes);
-                _extendedStrings = ParseExtendedStrings(data, extendedBeginning, _readAs32Bit) ?? new Dictionary<string, string>();
+                _extendedStrings =
+                    ParseExtendedStrings(data, extendedBeginning, _readAs32Bit)
+                    ?? new Dictionary<string, string>();
             }
 
             /// <summary>The name of the associated terminfo, if any.</summary>
-            public string Term { get { return _term; } }
+            public string Term
+            {
+                get { return _term; }
+            }
 
             /// <summary>Read the database for the current terminal as specified by the "TERM" environment variable.</summary>
             /// <returns>The database, or null if it could not be found.</returns>
@@ -174,12 +187,13 @@ namespace System
             /// The default locations in which to search for terminfo databases.
             /// This is the ordering of well-known locations used by ncurses.
             /// </summary>
-            private static readonly string[] _terminfoLocations = new string[] {
-                    "/etc/terminfo",
-                    "/lib/terminfo",
-                    "/usr/share/terminfo",
-                    "/usr/share/misc/terminfo"
-                };
+            private static readonly string[] _terminfoLocations = new string[]
+            {
+                "/etc/terminfo",
+                "/lib/terminfo",
+                "/usr/share/terminfo",
+                "/usr/share/misc/terminfo"
+            };
 
             /// <summary>Read the database for the specified terminal.</summary>
             /// <param name="term">The identifier for the terminal.</param>
@@ -191,15 +205,19 @@ namespace System
 
                 // First try a location specified in the TERMINFO environment variable.
                 string? terminfo = Environment.GetEnvironmentVariable("TERMINFO");
-                if (!string.IsNullOrWhiteSpace(terminfo) && (db = ReadDatabase(term, terminfo)) != null)
-                {
+                if (
+                    !string.IsNullOrWhiteSpace(terminfo)
+                    && (db = ReadDatabase(term, terminfo)) != null
+                ) {
                     return db;
                 }
 
                 // Then try in the user's home directory.
                 string? home = PersistedFiles.GetHomeDirectory();
-                if (!string.IsNullOrWhiteSpace(home) && (db = ReadDatabase(term, home + "/.terminfo")) != null)
-                {
+                if (
+                    !string.IsNullOrWhiteSpace(home)
+                    && (db = ReadDatabase(term, home + "/.terminfo")) != null
+                ) {
                     return db;
                 }
 
@@ -222,7 +240,11 @@ namespace System
             /// <returns>true if the file was successfully opened; otherwise, false.</returns>
             private static bool TryOpen(string filePath, [NotNullWhen(true)] out SafeFileHandle? fd)
             {
-                fd = Interop.Sys.Open(filePath, Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC, 0);
+                fd = Interop.Sys.Open(
+                    filePath,
+                    Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC,
+                    0
+                );
                 if (fd.IsInvalid)
                 {
                     // Don't throw in this case, as we'll be polling multiple locations looking for the file.
@@ -245,8 +267,14 @@ namespace System
                 }
 
                 SafeFileHandle? fd;
-                if (!TryOpen(directoryPath + "/" + term[0].ToString() + "/" + term, out fd) &&          // /directory/termFirstLetter/term      (Linux)
-                    !TryOpen(directoryPath + "/" + ((int)term[0]).ToString("X") + "/" + term, out fd))  // /directory/termFirstLetterAsHex/term (Mac)
+                if (
+                    !TryOpen(directoryPath + "/" + term[0].ToString() + "/" + term, out fd)
+                    && // /directory/termFirstLetter/term      (Linux)
+                    !TryOpen(
+                        directoryPath + "/" + ((int)term[0]).ToString("X") + "/" + term,
+                        out fd
+                    )
+                ) // /directory/termFirstLetterAsHex/term (Mac)
                 {
                     return null;
                 }
@@ -254,7 +282,9 @@ namespace System
                 using (fd)
                 {
                     // Read in all of the terminfo data
-                    long termInfoLength = Interop.CheckIo(Interop.Sys.LSeek(fd, 0, Interop.Sys.SeekWhence.SEEK_END)); // jump to the end to get the file length
+                    long termInfoLength = Interop.CheckIo(
+                        Interop.Sys.LSeek(fd, 0, Interop.Sys.SeekWhence.SEEK_END)
+                    ); // jump to the end to get the file length
                     Interop.CheckIo(Interop.Sys.LSeek(fd, 0, Interop.Sys.SeekWhence.SEEK_SET)); // reset back to beginning
                     const int MaxTermInfoLength = 4096; // according to the term and tic man pages, 4096 is the terminfo file size max
                     const int HeaderLength = 12;
@@ -278,19 +308,31 @@ namespace System
             private const int NamesOffset = 12; // comes right after the header, which is always 12 bytes
 
             /// <summary>The offset into data where the Booleans section begins.</summary>
-            private int BooleansOffset { get { return NamesOffset + _nameSectionNumBytes; } } // after the names section
+            private int BooleansOffset
+            {
+                get { return NamesOffset + _nameSectionNumBytes; }
+            } // after the names section
 
             /// <summary>The offset into data where the numbers section begins.</summary>
-            private int NumbersOffset { get { return RoundUpToEven(BooleansOffset + _boolSectionNumBytes); } } // after the Booleans section, at an even position
+            private int NumbersOffset
+            {
+                get { return RoundUpToEven(BooleansOffset + _boolSectionNumBytes); }
+            } // after the Booleans section, at an even position
 
             /// <summary>
             /// The offset into data where the string offsets section begins.  We index into this section
             /// to find the location within the strings table where a string value exists.
             /// </summary>
-            private int StringOffsetsOffset { get { return NumbersOffset + (_numberSectionNumInts * _sizeOfInt); } }
+            private int StringOffsetsOffset
+            {
+                get { return NumbersOffset + (_numberSectionNumInts * _sizeOfInt); }
+            }
 
             /// <summary>The offset into data where the string table exists.</summary>
-            private int StringsTableOffset { get { return StringOffsetsOffset + (_stringSectionNumOffsets * 2); } }
+            private int StringsTableOffset
+            {
+                get { return StringOffsetsOffset + (_stringSectionNumOffsets * 2); }
+            }
 
             /// <summary>Gets a string from the strings section by the string's well-known index.</summary>
             /// <param name="stringTableIndex">The index of the string to find.</param>
@@ -326,9 +368,7 @@ namespace System
                 Debug.Assert(name != null);
 
                 string? value;
-                return _extendedStrings.TryGetValue(name, out value) ?
-                    value :
-                    null;
+                return _extendedStrings.TryGetValue(name, out value) ? value : null;
             }
 
             /// <summary>Gets a number from the numbers section by the number's well-known index.</summary>
@@ -355,8 +395,11 @@ namespace System
             /// defined as the earlier portions, and may not even exist, the parsing is more lenient about
             /// errors, returning an empty collection rather than throwing.
             /// </returns>
-            private static Dictionary<string, string>? ParseExtendedStrings(byte[] data, int extendedBeginning, bool readAs32Bit)
-            {
+            private static Dictionary<string, string>? ParseExtendedStrings(
+                byte[] data,
+                int extendedBeginning,
+                bool readAs32Bit
+            ) {
                 const int ExtendedHeaderSize = 10;
                 int sizeOfIntValuesInBytes = (readAs32Bit) ? 4 : 2;
                 if (extendedBeginning + ExtendedHeaderSize >= data.Length)
@@ -371,12 +414,13 @@ namespace System
                 int extendedStringCount = ReadInt16(data, extendedBeginning + (2 * 2));
                 int extendedStringNumOffsets = ReadInt16(data, extendedBeginning + (2 * 3));
                 int extendedStringTableByteSize = ReadInt16(data, extendedBeginning + (2 * 4));
-                if (extendedBoolCount < 0 ||
-                    extendedNumberCount < 0 ||
-                    extendedStringCount < 0 ||
-                    extendedStringNumOffsets < 0 ||
-                    extendedStringTableByteSize < 0)
-                {
+                if (
+                    extendedBoolCount < 0
+                    || extendedNumberCount < 0
+                    || extendedStringCount < 0
+                    || extendedStringNumOffsets < 0
+                    || extendedStringTableByteSize < 0
+                ) {
                     // The extended header contained invalid data.  Bail.
                     return null;
                 }
@@ -387,22 +431,24 @@ namespace System
                 // Get the location where the extended string offsets begin.  These point into
                 // the extended string table.
                 int extendedOffsetsStart =
-                    extendedBeginning + // go past the normal data
-                    ExtendedHeaderSize + // and past the extended header
-                    RoundUpToEven(extendedBoolCount) + // and past all of the extended Booleans
+                    extendedBeginning
+                    + // go past the normal data
+                    ExtendedHeaderSize
+                    + // and past the extended header
+                    RoundUpToEven(extendedBoolCount)
+                    + // and past all of the extended Booleans
                     (extendedNumberCount * sizeOfIntValuesInBytes); // and past all of the extended numbers
 
                 // Get the location where the extended string table begins.  This area contains
                 // null-terminated strings.
                 int extendedStringTableStart =
-                    extendedOffsetsStart +
-                    (extendedStringCount * 2) + // and past all of the string offsets
+                    extendedOffsetsStart
+                    + (extendedStringCount * 2)
+                    + // and past all of the string offsets
                     ((extendedBoolCount + extendedNumberCount + extendedStringCount) * 2); // and past all of the name offsets
 
                 // Get the location where the extended string table ends.  We shouldn't read past this.
-                int extendedStringTableEnd =
-                    extendedStringTableStart +
-                    extendedStringTableByteSize;
+                int extendedStringTableEnd = extendedStringTableStart + extendedStringTableByteSize;
 
                 if (extendedStringTableEnd > data.Length)
                 {
@@ -418,7 +464,8 @@ namespace System
                 int lastEnd = 0;
                 for (int i = 0; i < extendedStringCount; i++)
                 {
-                    int offset = extendedStringTableStart + ReadInt16(data, extendedOffsetsStart + (i * 2));
+                    int offset =
+                        extendedStringTableStart + ReadInt16(data, extendedOffsetsStart + (i * 2));
                     if (offset < 0 || offset >= data.Length)
                     {
                         // If the offset is invalid, bail.
@@ -434,7 +481,9 @@ namespace System
                 }
 
                 // Now parse all of the names.
-                var names = new List<string>(extendedBoolCount + extendedNumberCount + extendedStringCount);
+                var names = new List<string>(
+                    extendedBoolCount + extendedNumberCount + extendedStringCount
+                );
                 for (int pos = lastEnd + 1; pos < extendedStringTableEnd; pos++)
                 {
                     int end = FindNullTerminator(data, pos);
@@ -445,17 +494,21 @@ namespace System
                 // The names are in order for the Booleans, then the numbers, and then the strings.
                 // Skip over the bools and numbers, and associate the names with the values.
                 var extendedStrings = new Dictionary<string, string>(extendedStringCount);
-                for (int iName = extendedBoolCount + extendedNumberCount, iValue = 0;
-                     iName < names.Count && iValue < values.Count;
-                     iName++, iValue++)
-                {
+                for (
+                    int iName = extendedBoolCount + extendedNumberCount, iValue = 0;
+                    iName < names.Count && iValue < values.Count;
+                    iName++, iValue++
+                ) {
                     extendedStrings.Add(names[iName], values[iValue]);
                 }
 
                 return extendedStrings;
             }
 
-            private static int RoundUpToEven(int i) { return i % 2 == 1 ? i + 1 : i; }
+            private static int RoundUpToEven(int i)
+            {
+                return i % 2 == 1 ? i + 1 : i;
+            }
 
             /// <summary>Read a 16-bit or 32-bit value from the buffer starting at the specified position.</summary>
             /// <param name="buffer">The buffer from which to read.</param>
@@ -471,17 +524,17 @@ namespace System
             /// <returns>The 16-bit value read.</returns>
             private static short ReadInt16(byte[] buffer, int pos)
             {
-                return unchecked((short)
-                    ((((int)buffer[pos + 1]) << 8) |
-                     ((int)buffer[pos] & 0xff)));
+                return unchecked(
+                    (short)((((int)buffer[pos + 1]) << 8) | ((int)buffer[pos] & 0xff))
+                );
             }
 
             /// <summary>Read a 32-bit value from the buffer starting at the specified position.</summary>
             /// <param name="buffer">The buffer from which to read.</param>
             /// <param name="pos">The position at which to read.</param>
             /// <returns>The 32-bit value read.</returns>
-            private static int ReadInt32(byte[] buffer, int pos)
-                => BinaryPrimitives.ReadInt32LittleEndian(buffer.AsSpan(pos));
+            private static int ReadInt32(byte[] buffer, int pos) =>
+                BinaryPrimitives.ReadInt32LittleEndian(buffer.AsSpan(pos));
 
             /// <summary>Reads a string from the buffer starting at the specified position.</summary>
             /// <param name="buffer">The buffer from which to read.</param>
@@ -497,7 +550,8 @@ namespace System
             private static int FindNullTerminator(byte[] buffer, int pos)
             {
                 int termPos = pos;
-                while (termPos < buffer.Length && buffer[termPos] != '\0') termPos++;
+                while (termPos < buffer.Length && buffer[termPos] != '\0')
+                    termPos++;
                 return termPos;
             }
         }
@@ -582,11 +636,18 @@ namespace System
                 // "dynamic" and "static" variables are much less often used (the "dynamic" and "static"
                 // terminology appears to just refer to two different collections rather than to any semantic
                 // meaning).  As such, we'll only initialize them if we really need them.
-                FormatParam[]? dynamicVars = null, staticVars = null;
+                FormatParam[]? dynamicVars = null,
+                    staticVars = null;
 
                 int pos = 0;
-                return EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
-
+                return EvaluateInternal(
+                    format,
+                    ref pos,
+                    args,
+                    stack,
+                    ref dynamicVars,
+                    ref staticVars
+                );
                 // EvaluateInternal may throw IndexOutOfRangeException and InvalidOperationException
                 // if the format string is malformed or if it's inconsistent with the parameters provided.
             }
@@ -604,9 +665,13 @@ namespace System
             /// of recursion, and a 0 at the top if we're still inside of a conditional that requires more processing.
             /// </returns>
             private static string EvaluateInternal(
-                string format, ref int pos, FormatParam[] args, Stack<FormatParam> stack,
-                ref FormatParam[]? dynamicVars, ref FormatParam[]? staticVars)
-            {
+                string format,
+                ref int pos,
+                FormatParam[] args,
+                Stack<FormatParam> stack,
+                ref FormatParam[]? dynamicVars,
+                ref FormatParam[]? staticVars
+            ) {
                 // Create a StringBuilder to store the output of this processing.  We use the format's length as an
                 // approximation of an upper-bound for how large the output will be, though with parameter processing,
                 // this is just an estimate, sometimes way over, sometimes under.
@@ -718,13 +783,23 @@ namespace System
                         case 'P': // Pop a value and store it into either static or dynamic variables based on whether the a-z variable is capitalized
                             pos++;
                             int setIndex;
-                            FormatParam[] targetVars = GetDynamicOrStaticVariables(format[pos], ref dynamicVars, ref staticVars, out setIndex);
+                            FormatParam[] targetVars = GetDynamicOrStaticVariables(
+                                format[pos],
+                                ref dynamicVars,
+                                ref staticVars,
+                                out setIndex
+                            );
                             targetVars[setIndex] = stack.Pop();
                             break;
                         case 'g': // Push a static or dynamic variable; which is based on whether the a-z variable is capitalized
                             pos++;
                             int getIndex;
-                            FormatParam[] sourceVars = GetDynamicOrStaticVariables(format[pos], ref dynamicVars, ref staticVars, out getIndex);
+                            FormatParam[] sourceVars = GetDynamicOrStaticVariables(
+                                format[pos],
+                                ref dynamicVars,
+                                ref staticVars,
+                                out getIndex
+                            );
                             stack.Push(sourceVars[getIndex]);
                             break;
 
@@ -736,39 +811,63 @@ namespace System
                         case 'm':
                         case '^': // arithmetic
                         case '&':
-                        case '|':                                         // bitwise
+                        case '|': // bitwise
                         case '=':
                         case '>':
-                        case '<':                               // comparison
+                        case '<': // comparison
                         case 'A':
-                        case 'O':                                         // logical
+                        case 'O': // logical
                             int second = stack.Pop().Int32; // it's a stack... the second value was pushed last
                             int first = stack.Pop().Int32;
                             char c = format[pos];
                             stack.Push(
-                                c == '+' ? (first + second) :
-                                c == '-' ? (first - second) :
-                                c == '*' ? (first * second) :
-                                c == '/' ? (first / second) :
-                                c == 'm' ? (first % second) :
-                                c == '^' ? (first ^ second) :
-                                c == '&' ? (first & second) :
-                                c == '|' ? (first | second) :
-                                c == '=' ? AsInt(first == second) :
-                                c == '>' ? AsInt(first > second) :
-                                c == '<' ? AsInt(first < second) :
-                                c == 'A' ? AsInt(AsBool(first) && AsBool(second)) :
-                                c == 'O' ? AsInt(AsBool(first) || AsBool(second)) :
-                                0); // not possible; we just validated above
+                                c == '+'
+                                    ? (first + second)
+                                    : c == '-'
+                                        ? (first - second)
+                                        : c == '*'
+                                            ? (first * second)
+                                            : c == '/'
+                                                ? (first / second)
+                                                : c == 'm'
+                                                    ? (first % second)
+                                                    : c == '^'
+                                                        ? (first ^ second)
+                                                        : c == '&'
+                                                            ? (first & second)
+                                                            : c == '|'
+                                                                ? (first | second)
+                                                                : c == '='
+                                                                    ? AsInt(first == second)
+                                                                    : c == '>'
+                                                                        ? AsInt(first > second)
+                                                                        : c == '<'
+                                                                            ? AsInt(first < second)
+                                                                            : c == 'A'
+                                                                                ? AsInt(
+                                                                                      AsBool(first)
+                                                                                          && AsBool(
+                                                                                              second
+                                                                                          )
+                                                                                  )
+                                                                                : c == 'O'
+                                                                                    ? AsInt(
+                                                                                          AsBool(
+                                                                                              first
+                                                                                          )
+                                                                                              || AsBool(
+                                                                                                  second
+                                                                                              )
+                                                                                      )
+                                                                                    : 0
+                            ); // not possible; we just validated above
                             break;
 
                         // Unary operations
                         case '!':
                         case '~':
                             int value = stack.Pop().Int32;
-                            stack.Push(
-                                format[pos] == '!' ? AsInt(!AsBool(value)) :
-                                ~value);
+                            stack.Push(format[pos] == '!' ? AsInt(!AsBool(value)) : ~value);
                             break;
 
                         // Some terminfo files appear to have a fairly liberal interpretation of %i. The spec states that %i increments the first two arguments,
@@ -796,7 +895,14 @@ namespace System
                             // Regardless of whether it's true, run the then-part to get past it.
                             // If the conditional was true, output the then results.
                             pos++;
-                            string thenResult = EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
+                            string thenResult = EvaluateInternal(
+                                format,
+                                ref pos,
+                                args,
+                                stack,
+                                ref dynamicVars,
+                                ref staticVars
+                            );
                             if (conditionalResult)
                             {
                                 output.Append(thenResult);
@@ -809,7 +915,14 @@ namespace System
                             {
                                 // Process the else clause, and if the conditional was false, output the else results.
                                 pos++;
-                                string elseResult = EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
+                                string elseResult = EvaluateInternal(
+                                    format,
+                                    ref pos,
+                                    args,
+                                    stack,
+                                    ref dynamicVars,
+                                    ref staticVars
+                                );
                                 if (!conditionalResult)
                                 {
                                     output.Append(elseResult);
@@ -851,12 +964,18 @@ namespace System
             /// <summary>Converts an Int32 to a Boolean, with 0 meaning false and all non-zero values meaning true.</summary>
             /// <param name="i">The integer value to convert.</param>
             /// <returns>true if the integer was non-zero; otherwise, false.</returns>
-            private static bool AsBool(int i) { return i != 0; }
+            private static bool AsBool(int i)
+            {
+                return i != 0;
+            }
 
             /// <summary>Converts a Boolean to an Int32, with true meaning 1 and false meaning 0.</summary>
             /// <param name="b">The Boolean value to convert.</param>
             /// <returns>1 if the Boolean is true; otherwise, 0.</returns>
-            private static int AsInt(bool b) { return b ? 1 : 0; }
+            private static int AsInt(bool b)
+            {
+                return b ? 1 : 0;
+            }
 
             /// <summary>Formats an argument into a printf-style format string.</summary>
             /// <param name="format">The printf-style format string.</param>
@@ -868,9 +987,10 @@ namespace System
 
                 // Determine how much space is needed to store the formatted string.
                 string? stringArg = arg as string;
-                int neededLength = stringArg != null ?
-                    Interop.Sys.SNPrintF(null, 0, format, stringArg) :
-                    Interop.Sys.SNPrintF(null, 0, format, (int)arg);
+                int neededLength =
+                    stringArg != null
+                        ? Interop.Sys.SNPrintF(null, 0, format, stringArg)
+                        : Interop.Sys.SNPrintF(null, 0, format, (int)arg);
                 if (neededLength == 0)
                 {
                     return string.Empty;
@@ -884,9 +1004,10 @@ namespace System
                 byte[] bytes = new byte[neededLength + 1]; // extra byte for the null terminator
                 fixed (byte* ptr = &bytes[0])
                 {
-                    int length = stringArg != null ?
-                        Interop.Sys.SNPrintF(ptr, bytes.Length, format, stringArg) :
-                        Interop.Sys.SNPrintF(ptr, bytes.Length, format, (int)arg);
+                    int length =
+                        stringArg != null
+                            ? Interop.Sys.SNPrintF(ptr, bytes.Length, format, stringArg)
+                            : Interop.Sys.SNPrintF(ptr, bytes.Length, format, (int)arg);
                     if (length != neededLength)
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_PrintF);
@@ -902,8 +1023,11 @@ namespace System
             /// <param name="index">The index to use to index into the variables.</param>
             /// <returns>The variables collection.</returns>
             private static FormatParam[] GetDynamicOrStaticVariables(
-                char c, ref FormatParam[]? dynamicVars, ref FormatParam[]? staticVars, out int index)
-            {
+                char c,
+                ref FormatParam[]? dynamicVars,
+                ref FormatParam[]? staticVars,
+                out int index
+            ) {
                 if (c >= 'A' && c <= 'Z')
                 {
                     index = c - 'A';
@@ -914,7 +1038,8 @@ namespace System
                     index = c - 'a';
                     return dynamicVars ?? (dynamicVars = new FormatParam[26]); // one slot for each letter of alphabet
                 }
-                else throw new InvalidOperationException(SR.IO_TermInfoInvalid);
+                else
+                    throw new InvalidOperationException(SR.IO_TermInfoInvalid);
             }
 
             /// <summary>
@@ -959,13 +1084,22 @@ namespace System
                 }
 
                 /// <summary>Gets the integer value of the parameter. If a string was stored, 0 is returned.</summary>
-                public int Int32 { get { return _int32; } }
+                public int Int32
+                {
+                    get { return _int32; }
+                }
 
                 /// <summary>Gets the string value of the parameter.  If an Int32 or a null String were stored, an empty string is returned.</summary>
-                public string String { get { return _string ?? string.Empty; } }
+                public string String
+                {
+                    get { return _string ?? string.Empty; }
+                }
 
                 /// <summary>Gets the string or the integer value as an object.</summary>
-                public object Object { get { return _string ?? (object)_int32; } }
+                public object Object
+                {
+                    get { return _string ?? (object)_int32; }
+                }
             }
         }
     }

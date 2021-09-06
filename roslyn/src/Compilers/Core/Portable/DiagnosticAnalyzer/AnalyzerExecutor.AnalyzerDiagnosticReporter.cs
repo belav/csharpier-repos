@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public readonly Action<Diagnostic> AddDiagnosticAction;
 
             private static readonly ObjectPool<AnalyzerDiagnosticReporter> s_objectPool =
-                new ObjectPool<AnalyzerDiagnosticReporter>(() => new AnalyzerDiagnosticReporter(), 10);
+                new ObjectPool<AnalyzerDiagnosticReporter>(
+                    () => new AnalyzerDiagnosticReporter(),
+                    10
+                );
 
             public static AnalyzerDiagnosticReporter GetInstance(
                 SourceOrAdditionalFile contextFile,
@@ -33,9 +36,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Action<Diagnostic>? addNonCategorizedDiagnostic,
                 Action<Diagnostic, DiagnosticAnalyzer, bool>? addCategorizedLocalDiagnostic,
                 Action<Diagnostic, DiagnosticAnalyzer>? addCategorizedNonLocalDiagnostic,
-                Func<Diagnostic, DiagnosticAnalyzer, Compilation, CancellationToken, bool> shouldSuppressGeneratedCodeDiagnostic,
-                CancellationToken cancellationToken)
-            {
+                Func<
+                    Diagnostic,
+                    DiagnosticAnalyzer,
+                    Compilation,
+                    CancellationToken,
+                    bool
+                > shouldSuppressGeneratedCodeDiagnostic,
+                CancellationToken cancellationToken
+            ) {
                 var item = s_objectPool.Allocate();
                 item._contextFile = contextFile;
                 item._span = span;
@@ -73,7 +82,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private Action<Diagnostic>? _addNonCategorizedDiagnostic;
             private Action<Diagnostic, DiagnosticAnalyzer, bool>? _addCategorizedLocalDiagnostic;
             private Action<Diagnostic, DiagnosticAnalyzer>? _addCategorizedNonLocalDiagnostic;
-            private Func<Diagnostic, DiagnosticAnalyzer, Compilation, CancellationToken, bool> _shouldSuppressGeneratedCodeDiagnostic;
+            private Func<
+                Diagnostic,
+                DiagnosticAnalyzer,
+                Compilation,
+                CancellationToken,
+                bool
+            > _shouldSuppressGeneratedCodeDiagnostic;
             private CancellationToken _cancellationToken;
 
             // Pooled objects are initialized in their GetInstance method
@@ -86,8 +101,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             private void AddDiagnostic(Diagnostic diagnostic)
             {
-                if (_shouldSuppressGeneratedCodeDiagnostic(diagnostic, _analyzer, _compilation, _cancellationToken))
-                {
+                if (
+                    _shouldSuppressGeneratedCodeDiagnostic(
+                        diagnostic,
+                        _analyzer,
+                        _compilation,
+                        _cancellationToken
+                    )
+                ) {
                     return;
                 }
 
@@ -101,9 +122,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Debug.Assert(_addNonCategorizedDiagnostic == null);
                 Debug.Assert(_addCategorizedNonLocalDiagnostic != null);
 
-                if (isLocalDiagnostic(diagnostic) &&
-                    (!_span.HasValue || _span.Value.IntersectsWith(diagnostic.Location.SourceSpan)))
-                {
+                if (
+                    isLocalDiagnostic(diagnostic)
+                    && (
+                        !_span.HasValue
+                        || _span.Value.IntersectsWith(diagnostic.Location.SourceSpan)
+                    )
+                ) {
                     _addCategorizedLocalDiagnostic(diagnostic, _analyzer, _isSyntaxDiagnostic);
                 }
                 else
@@ -117,14 +142,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     if (diagnostic.Location.IsInSource)
                     {
-                        return _contextFile?.SourceTree != null &&
-                            _contextFile.Value.SourceTree == diagnostic.Location.SourceTree;
+                        return _contextFile?.SourceTree != null
+                            && _contextFile.Value.SourceTree == diagnostic.Location.SourceTree;
                     }
 
-                    if (_contextFile?.AdditionalFile != null &&
-                        diagnostic.Location is ExternalFileLocation externalFileLocation)
-                    {
-                        return PathUtilities.Comparer.Equals(_contextFile.Value.AdditionalFile.Path, externalFileLocation.FilePath);
+                    if (
+                        _contextFile?.AdditionalFile != null
+                        && diagnostic.Location is ExternalFileLocation externalFileLocation
+                    ) {
+                        return PathUtilities.Comparer.Equals(
+                            _contextFile.Value.AdditionalFile.Path,
+                            externalFileLocation.FilePath
+                        );
                     }
 
                     return false;

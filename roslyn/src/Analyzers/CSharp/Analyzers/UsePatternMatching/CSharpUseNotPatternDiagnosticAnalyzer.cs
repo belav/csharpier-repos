@@ -23,20 +23,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
     ///     
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal partial class CSharpUseNotPatternDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal partial class CSharpUseNotPatternDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseNotPatternDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseNotPatternDiagnosticId,
-                   EnforceOnBuildValues.UseNotPattern,
-                   CSharpCodeStyleOptions.PreferNotPattern,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(
-                        nameof(CSharpAnalyzersResources.Use_pattern_matching), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseNotPatternDiagnosticId,
+                EnforceOnBuildValues.UseNotPattern,
+                CSharpCodeStyleOptions.PreferNotPattern,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_pattern_matching),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -57,32 +61,42 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var cancellationToken = syntaxContext.CancellationToken;
 
             // Bail immediately if the user has disabled this feature.
-            var styleOption = options.GetOption(CSharpCodeStyleOptions.PreferNotPattern, syntaxTree, cancellationToken);
+            var styleOption = options.GetOption(
+                CSharpCodeStyleOptions.PreferNotPattern,
+                syntaxTree,
+                cancellationToken
+            );
             if (!styleOption.Value)
                 return;
 
             // Look for the form: !(x is Y y)
-            if (!(node is PrefixUnaryExpressionSyntax
-                {
-                    Operand: ParenthesizedExpressionSyntax
+            if (
+                !(
+                    node is PrefixUnaryExpressionSyntax
                     {
-                        Expression: IsPatternExpressionSyntax
+                        Operand: ParenthesizedExpressionSyntax
                         {
-                            Pattern: DeclarationPatternSyntax,
-                        } isPattern,
-                    },
-                } notExpression))
-            {
+                            Expression: IsPatternExpressionSyntax
+                            {
+                                Pattern: DeclarationPatternSyntax,
+                            } isPattern,
+                        },
+                    } notExpression
+                )
+            ) {
                 return;
             }
 
             // Put a diagnostic with the appropriate severity on `is` keyword.
-            syntaxContext.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                isPattern.IsKeyword.GetLocation(),
-                styleOption.Notification.Severity,
-                ImmutableArray.Create(notExpression.GetLocation()),
-                properties: null));
+            syntaxContext.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    isPattern.IsKeyword.GetLocation(),
+                    styleOption.Notification.Severity,
+                    ImmutableArray.Create(notExpression.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalQueryContextFactory(
             QueryContextDependencies dependencies,
-            RelationalQueryContextDependencies relationalDependencies)
-        {
+            RelationalQueryContextDependencies relationalDependencies
+        ) {
             _dependencies = dependencies;
             _relationalDependencies = relationalDependencies;
         }
@@ -44,7 +44,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryContext Create()
-            => new RelationalQueryContext(_dependencies, _relationalDependencies);
+        public virtual QueryContext Create() =>
+            new RelationalQueryContext(_dependencies, _relationalDependencies);
     }
 }

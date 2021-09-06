@@ -16,16 +16,18 @@ namespace Microsoft.Extensions.Logging
             _obtainRequestToken = LoggerMessage.Define(
                 eventId: new EventId(1, "ObtainRequestToken"),
                 logLevel: LogLevel.Debug,
-                formatString: "ObtainRequestToken");
+                formatString: "ObtainRequestToken"
+            );
             _obtainAccessToken = LoggerMessage.Define(
                 eventId: new EventId(2, "ObtainAccessToken"),
                 logLevel: LogLevel.Debug,
-                formatString: "ObtainAccessToken");
+                formatString: "ObtainAccessToken"
+            );
             _retrieveUserDetails = LoggerMessage.Define(
                 eventId: new EventId(3, "RetrieveUserDetails"),
                 logLevel: LogLevel.Debug,
-                formatString: "RetrieveUserDetails");
-
+                formatString: "RetrieveUserDetails"
+            );
         }
 
         public static void ObtainAccessToken(this ILogger logger)

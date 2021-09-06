@@ -17,8 +17,12 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             private readonly string _newString;
 
-            public FormattedWhitespace(AnalyzerConfigOptions options, int lineBreaks, int indentation, string language)
-                : base(options, language)
+            public FormattedWhitespace(
+                AnalyzerConfigOptions options,
+                int lineBreaks,
+                int indentation,
+                string language
+            ) : base(options, language)
             {
                 this.LineBreaks = Math.Max(0, lineBreaks);
                 this.Spaces = Math.Max(0, indentation);
@@ -36,7 +40,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                         builder.Append(newLine);
                     }
 
-                    builder.AppendIndentationString(this.Spaces, this.Options.GetOption(FormattingOptions2.UseTabs), this.Options.GetOption(FormattingOptions2.TabSize));
+                    builder.AppendIndentationString(
+                        this.Spaces,
+                        this.Options.GetOption(FormattingOptions2.UseTabs),
+                        this.Options.GetOption(FormattingOptions2.TabSize)
+                    );
                     return StringBuilderPool.ReturnAndFree(builder);
                 }
 
@@ -50,21 +58,39 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             public override bool ContainsChanges => true;
 
-            public override IEnumerable<TextChange> GetTextChanges(TextSpan textSpan)
-                => SpecializedCollections.SingletonEnumerable<TextChange>(new TextChange(textSpan, _newString));
+            public override IEnumerable<TextChange> GetTextChanges(TextSpan textSpan) =>
+                SpecializedCollections.SingletonEnumerable<TextChange>(
+                    new TextChange(textSpan, _newString)
+                );
 
-            public override TriviaData WithSpace(int space, FormattingContext context, ChainedFormattingRules formattingRules)
-                => throw new NotImplementedException();
+            public override TriviaData WithSpace(
+                int space,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules
+            ) => throw new NotImplementedException();
 
-            public override TriviaData WithLine(int line, int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
-                => throw new NotImplementedException();
+            public override TriviaData WithLine(
+                int line,
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            ) => throw new NotImplementedException();
 
-            public override TriviaData WithIndentation(int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
-                => throw new NotImplementedException();
+            public override TriviaData WithIndentation(
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            ) => throw new NotImplementedException();
 
             public override void Format(
-                FormattingContext context, ChainedFormattingRules formattingRules, Action<int, TokenStream, TriviaData> formattingResultApplier, CancellationToken cancellationToken, int tokenPairIndex = TokenPairIndexNotNeeded)
-            {
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                Action<int, TokenStream, TriviaData> formattingResultApplier,
+                CancellationToken cancellationToken,
+                int tokenPairIndex = TokenPairIndexNotNeeded
+            ) {
                 throw new NotImplementedException();
             }
         }

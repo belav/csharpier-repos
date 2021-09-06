@@ -9,37 +9,37 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class ManyToManyTrackingSqliteTest : ManyToManyTrackingTestBase<ManyToManyTrackingSqliteTest.ManyToManyTrackingSqliteFixture>
+    public class ManyToManyTrackingSqliteTest
+        : ManyToManyTrackingTestBase<ManyToManyTrackingSqliteTest.ManyToManyTrackingSqliteFixture>
     {
-        public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture) : base(fixture)
+        { }
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         public class ManyToManyTrackingSqliteFixture : ManyToManyTrackingFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder
-                    .Entity<JoinOneSelfPayload>()
+                modelBuilder.Entity<JoinOneSelfPayload>()
                     .Property(e => e.Payload)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                modelBuilder
-                    .SharedTypeEntity<Dictionary<string, object>>("JoinOneToThreePayloadFullShared")
+                modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
+                        "JoinOneToThreePayloadFullShared"
+                    )
                     .IndexerProperty<string>("Payload")
                     .HasDefaultValue("Generated");
 
-                modelBuilder
-                    .Entity<JoinOneToThreePayloadFull>()
+                modelBuilder.Entity<JoinOneToThreePayloadFull>()
                     .Property(e => e.Payload)
                     .HasDefaultValue("Generated");
             }

@@ -37,8 +37,8 @@ namespace System.Net.WebSockets
             IEnumerable<string> secWebSocketProtocols,
             string secWebSocketVersion,
             string secWebSocketKey,
-            WebSocket webSocket)
-        {
+            WebSocket webSocket
+        ) {
             Debug.Assert(requestUri != null, "requestUri shouldn't be null");
             Debug.Assert(headers != null, "headers shouldn't be null");
             Debug.Assert(cookieCollection != null, "cookieCollection shouldn't be null");
@@ -95,7 +95,13 @@ namespace System.Net.WebSockets
                     // AuthenticationSchemes.Basic.
                     if (user.Identity is HttpListenerBasicIdentity basicIdentity)
                     {
-                        return new GenericPrincipal(new HttpListenerBasicIdentity(basicIdentity.Name, basicIdentity.Password), null);
+                        return new GenericPrincipal(
+                            new HttpListenerBasicIdentity(
+                                basicIdentity.Name,
+                                basicIdentity.Password
+                            ),
+                            null
+                        );
                     }
                 }
                 else

@@ -17,22 +17,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class IsCalledByGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
-        {
-            using (Logger.LogBlock(FunctionId.GraphQuery_IsCalledBy, KeyValueLogMessage.Create(LogType.UserAction), cancellationToken))
-            {
-                var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        ) {
+            using (
+                Logger.LogBlock(
+                    FunctionId.GraphQuery_IsCalledBy,
+                    KeyValueLogMessage.Create(LogType.UserAction),
+                    cancellationToken
+                )
+            ) {
+                var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
+                        solution,
+                        context.InputNodes,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 foreach (var node in context.InputNodes)
                 {
                     var symbol = graphBuilder.GetSymbol(node);
                     if (symbol != null)
                     {
-                        var callers = await SymbolFinder.FindCallersAsync(symbol, solution, cancellationToken).ConfigureAwait(false);
+                        var callers = await SymbolFinder.FindCallersAsync(
+                                symbol,
+                                solution,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         foreach (var caller in callers.Where(c => c.IsDirect))
                         {
-                            var callerNode = await graphBuilder.AddNodeAsync(caller.CallingSymbol, relatedNode: node).ConfigureAwait(false);
+                            var callerNode = await graphBuilder.AddNodeAsync(
+                                    caller.CallingSymbol,
+                                    relatedNode: node
+                                )
+                                .ConfigureAwait(false);
                             graphBuilder.AddLink(callerNode, CodeLinkCategories.Calls, node);
                         }
                     }

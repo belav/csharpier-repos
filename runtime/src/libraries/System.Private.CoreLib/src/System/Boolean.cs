@@ -18,7 +18,9 @@ using System.Runtime.Versioning;
 namespace System
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Boolean : IComparable, IConvertible, IComparable<bool>, IEquatable<bool>
     {
         //
@@ -193,33 +195,36 @@ namespace System
         //
         internal static bool IsTrueStringIgnoreCase(ReadOnlySpan<char> value)
         {
-            return value.Length == 4 &&
-                    (value[0] == 't' || value[0] == 'T') &&
-                    (value[1] == 'r' || value[1] == 'R') &&
-                    (value[2] == 'u' || value[2] == 'U') &&
-                    (value[3] == 'e' || value[3] == 'E');
+            return value.Length == 4
+                && (value[0] == 't' || value[0] == 'T')
+                && (value[1] == 'r' || value[1] == 'R')
+                && (value[2] == 'u' || value[2] == 'U')
+                && (value[3] == 'e' || value[3] == 'E');
         }
 
         internal static bool IsFalseStringIgnoreCase(ReadOnlySpan<char> value)
         {
-            return value.Length == 5 &&
-                    (value[0] == 'f' || value[0] == 'F') &&
-                    (value[1] == 'a' || value[1] == 'A') &&
-                    (value[2] == 'l' || value[2] == 'L') &&
-                    (value[3] == 's' || value[3] == 'S') &&
-                    (value[4] == 'e' || value[4] == 'E');
+            return value.Length == 5
+                && (value[0] == 'f' || value[0] == 'F')
+                && (value[1] == 'a' || value[1] == 'A')
+                && (value[2] == 'l' || value[2] == 'L')
+                && (value[3] == 's' || value[3] == 'S')
+                && (value[4] == 'e' || value[4] == 'E');
         }
 
         // Determines whether a String represents true or false.
         //
         public static bool Parse(string value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
             return Parse(value.AsSpan());
         }
 
         public static bool Parse(ReadOnlySpan<char> value) =>
-            TryParse(value, out bool result) ? result : throw new FormatException(SR.Format(SR.Format_BadBoolean, new string(value)));
+            TryParse(value, out bool result)
+                ? result
+                : throw new FormatException(SR.Format(SR.Format_BadBoolean, new string(value)));
 
         // Determines whether a String represents true or false.
         //

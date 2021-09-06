@@ -12,14 +12,19 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             return new PooledDisposer<ArrayBuilder<T>>(instance);
         }
 
-        public static PooledDisposer<ArrayBuilder<T>> GetInstance(int capacity, out ArrayBuilder<T> instance)
-        {
+        public static PooledDisposer<ArrayBuilder<T>> GetInstance(
+            int capacity,
+            out ArrayBuilder<T> instance
+        ) {
             instance = GetInstance(capacity);
             return new PooledDisposer<ArrayBuilder<T>>(instance);
         }
 
-        public static PooledDisposer<ArrayBuilder<T>> GetInstance(int capacity, T fillWithValue, out ArrayBuilder<T> instance)
-        {
+        public static PooledDisposer<ArrayBuilder<T>> GetInstance(
+            int capacity,
+            T fillWithValue,
+            out ArrayBuilder<T> instance
+        ) {
             instance = GetInstance(capacity, fillWithValue);
             return new PooledDisposer<ArrayBuilder<T>>(instance);
         }

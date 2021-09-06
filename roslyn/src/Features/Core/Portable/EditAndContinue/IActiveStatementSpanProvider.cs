@@ -19,7 +19,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <see langword="default"/> if called outside of an edit session.
         /// The length of the returned array matches the length of <paramref name="documentIds"/> otherwise.
         /// </returns>
-        ValueTask<ImmutableArray<ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>>> GetBaseActiveStatementSpansAsync(Solution solution, ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>>
+        > GetBaseActiveStatementSpansAsync(
+            Solution solution,
+            ImmutableArray<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns adjusted active statements in the specified <paramref name="document"/> snapshot.
@@ -28,6 +34,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <see langword="default"/> if called outside of an edit session, or active statements for the document can't be determined for some reason
         /// (e.g. the document has syntax errors or is out-of-sync).
         /// </returns>
-        ValueTask<ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>> GetAdjustedActiveStatementSpansAsync(Document document, DocumentActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>
+        > GetAdjustedActiveStatementSpansAsync(
+            Document document,
+            DocumentActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        );
     }
 }

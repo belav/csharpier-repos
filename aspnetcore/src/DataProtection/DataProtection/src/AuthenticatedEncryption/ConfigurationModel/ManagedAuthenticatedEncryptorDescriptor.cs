@@ -18,8 +18,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         /// </summary>
         /// <param name="configuration">The <see cref="ManagedAuthenticatedEncryptorConfiguration"/>.</param>
         /// <param name="masterKey">The master key.</param>
-        public ManagedAuthenticatedEncryptorDescriptor(ManagedAuthenticatedEncryptorConfiguration configuration, ISecret masterKey)
-        {
+        public ManagedAuthenticatedEncryptorDescriptor(
+            ManagedAuthenticatedEncryptorConfiguration configuration,
+            ISecret masterKey
+        ) {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -48,20 +50,37 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
             //   <masterKey>...</masterKey>
             // </descriptor>
 
-            var encryptionElement = new XElement("encryption",
-                new XAttribute("algorithm", TypeToFriendlyName(Configuration.EncryptionAlgorithmType)),
-                new XAttribute("keyLength", Configuration.EncryptionAlgorithmKeySize));
+            var encryptionElement = new XElement(
+                "encryption",
+                new XAttribute(
+                    "algorithm",
+                    TypeToFriendlyName(Configuration.EncryptionAlgorithmType)
+                ),
+                new XAttribute("keyLength", Configuration.EncryptionAlgorithmKeySize)
+            );
 
-            var validationElement = new XElement("validation",
-                new XAttribute("algorithm", TypeToFriendlyName(Configuration.ValidationAlgorithmType)));
+            var validationElement = new XElement(
+                "validation",
+                new XAttribute(
+                    "algorithm",
+                    TypeToFriendlyName(Configuration.ValidationAlgorithmType)
+                )
+            );
 
-            var rootElement = new XElement("descriptor",
-                new XComment(" Algorithms provided by specified SymmetricAlgorithm and KeyedHashAlgorithm "),
+            var rootElement = new XElement(
+                "descriptor",
+                new XComment(
+                    " Algorithms provided by specified SymmetricAlgorithm and KeyedHashAlgorithm "
+                ),
                 encryptionElement,
                 validationElement,
-                MasterKey.ToMasterKeyElement());
+                MasterKey.ToMasterKeyElement()
+            );
 
-            return new XmlSerializedDescriptorInfo(rootElement, typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer));
+            return new XmlSerializedDescriptorInfo(
+                rootElement,
+                typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer)
+            );
         }
 
         // Any changes to this method should also be be reflected

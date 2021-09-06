@@ -13,16 +13,32 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         /// <summary>
         /// Schedule the action on the caller's thread and wait for the task to complete.
         /// </summary>
-        WaitIndicatorResult Wait(string title, string message, bool allowCancel, bool showProgress, Action<IWaitContext> action);
+        WaitIndicatorResult Wait(
+            string title,
+            string message,
+            bool allowCancel,
+            bool showProgress,
+            Action<IWaitContext> action
+        );
         IWaitContext StartWait(string title, string message, bool allowCancel, bool showProgress);
     }
 
     internal static class IWaitIndicatorExtensions
     {
         public static WaitIndicatorResult Wait(
-            this IWaitIndicator waitIndicator, string title, string message, bool allowCancel, Action<IWaitContext> action)
-        {
-            return waitIndicator.Wait(title, message, allowCancel, showProgress: false, action: action);
+            this IWaitIndicator waitIndicator,
+            string title,
+            string message,
+            bool allowCancel,
+            Action<IWaitContext> action
+        ) {
+            return waitIndicator.Wait(
+                title,
+                message,
+                allowCancel,
+                showProgress: false,
+                action: action
+            );
         }
     }
 }

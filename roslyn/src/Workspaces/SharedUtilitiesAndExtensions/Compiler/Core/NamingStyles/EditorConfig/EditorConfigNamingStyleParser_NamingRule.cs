@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             SymbolSpecification symbolSpec,
             NamingStyle namingStyle,
             IReadOnlyDictionary<string, string> conventionsDictionary,
-            out SerializableNamingRule serializableNamingRule)
-        {
+            out SerializableNamingRule serializableNamingRule
+        ) {
             if (!TryGetRuleSeverity(namingRuleTitle, conventionsDictionary, out var severity))
             {
                 serializableNamingRule = null;
@@ -37,10 +37,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static bool TryGetRuleSeverity(
             string namingRuleName,
             IReadOnlyDictionary<string, string> conventionsDictionary,
-            out ReportDiagnostic severity)
-        {
-            if (conventionsDictionary.TryGetValue($"dotnet_naming_rule.{namingRuleName}.severity", out var result))
-            {
+            out ReportDiagnostic severity
+        ) {
+            if (
+                conventionsDictionary.TryGetValue(
+                    $"dotnet_naming_rule.{namingRuleName}.severity",
+                    out var result
+                )
+            ) {
                 severity = ParseEnforcementLevel(result ?? string.Empty);
                 return true;
             }
@@ -60,10 +64,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 case EditorConfigSeverityStrings.Silent:
                     return ReportDiagnostic.Hidden;
 
-                case EditorConfigSeverityStrings.Suggestion: return ReportDiagnostic.Info;
-                case EditorConfigSeverityStrings.Warning: return ReportDiagnostic.Warn;
-                case EditorConfigSeverityStrings.Error: return ReportDiagnostic.Error;
-                default: return ReportDiagnostic.Hidden;
+                case EditorConfigSeverityStrings.Suggestion:
+                    return ReportDiagnostic.Info;
+                case EditorConfigSeverityStrings.Warning:
+                    return ReportDiagnostic.Warn;
+                case EditorConfigSeverityStrings.Error:
+                    return ReportDiagnostic.Error;
+                default:
+                    return ReportDiagnostic.Hidden;
             }
         }
     }

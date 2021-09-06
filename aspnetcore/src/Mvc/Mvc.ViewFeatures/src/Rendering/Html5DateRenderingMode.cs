@@ -14,7 +14,6 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// elements.
         /// </summary>
         Rfc3339 = 0,
-
         /// <summary>
         /// Render date and time values according to the current culture's ToString behavior.
         /// </summary>

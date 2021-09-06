@@ -26,7 +26,7 @@ namespace ILCompiler.PEWriter
         /// Index of the section holding the symbol target.
         /// </summary>
         public readonly int SectionIndex;
-        
+
         /// <summary>
         /// Offset of the symbol within the section.
         /// </summary>
@@ -46,7 +46,7 @@ namespace ILCompiler.PEWriter
             Size = size;
         }
     }
-    
+
     /// <summary>
     /// After placing an ObjectData within a section, we use this helper structure to record
     /// its relocation information for the final relocation pass.
@@ -118,7 +118,7 @@ namespace ILCompiler.PEWriter
         /// the output code section).
         /// </summary>
         public readonly int Alignment;
-        
+
         /// <summary>
         /// Blob builder representing the section content.
         /// </summary>
@@ -146,8 +146,12 @@ namespace ILCompiler.PEWriter
         /// <param name="name">Section name</param>
         /// <param name="characteristics">Section characteristics</param>
         /// <param name="alignment">Alignment for combining multiple logical sections</param>
-        public Section(int index, string name, SectionCharacteristics characteristics, int alignment)
-        {
+        public Section(
+            int index,
+            string name,
+            SectionCharacteristics characteristics,
+            int alignment
+        ) {
             Index = index;
             Name = name;
             Characteristics = characteristics;
@@ -376,10 +380,7 @@ namespace ILCompiler.PEWriter
         /// <param name="symbol">Symbol to export</param>
         public void AddExportSymbol(string name, int ordinal, ISymbolNode symbol)
         {
-            _exportSymbols.Add(new ExportSymbol(
-                name: name,
-                ordinal: ordinal,
-                symbol: symbol));
+            _exportSymbols.Add(new ExportSymbol(name: name, ordinal: ordinal, symbol: symbol));
         }
 
         /// <summary>
@@ -419,7 +420,7 @@ namespace ILCompiler.PEWriter
         }
 
         private CoreRTNameMangler _nameMangler;
-        
+
         private NameMangler GetNameMangler()
         {
             if (_nameMangler == null)
@@ -438,15 +439,20 @@ namespace ILCompiler.PEWriter
         /// <param name="sectionIndex">Section index</param>
         /// <param name="name">Node name to emit in the map file</param>
         /// <param name="outputInfoBuilder">Optional output info to collect (used for creating maps and symbols)</param>
-        public void AddObjectData(ObjectNode.ObjectData objectData, int sectionIndex, string name, OutputInfoBuilder outputInfoBuilder)
-        {
+        public void AddObjectData(
+            ObjectNode.ObjectData objectData,
+            int sectionIndex,
+            string name,
+            OutputInfoBuilder outputInfoBuilder
+        ) {
             Section section = _sections[sectionIndex];
 
             // Calculate alignment padding - apparently ObjectDataBuilder can produce an alignment of 0
             int alignedOffset = section.Content.Count;
             if (objectData.Alignment > 1)
             {
-                alignedOffset = (section.Content.Count + objectData.Alignment - 1) & -objectData.Alignment;
+                alignedOffset =
+                    (section.Content.Count + objectData.Alignment - 1) & -objectData.Alignment;
                 int padding = alignedOffset - section.Content.Count;
                 if (padding > 0)
                 {
@@ -477,7 +483,12 @@ namespace ILCompiler.PEWriter
 
             if (outputInfoBuilder != null)
             {
-                var node = new OutputNode(sectionIndex, alignedOffset, objectData.Data.Length, name);
+                var node = new OutputNode(
+                    sectionIndex,
+                    alignedOffset,
+                    objectData.Data.Length,
+                    name
+                );
                 outputInfoBuilder.AddNode(node, objectData.DefinedSymbols[0]);
                 if (objectData.Relocs != null)
                 {
@@ -503,33 +514,48 @@ namespace ILCompiler.PEWriter
                         Utf8StringBuilder sb = new Utf8StringBuilder();
                         symbol.AppendMangledName(GetNameMangler(), sb);
                         int sectionRelativeOffset = alignedOffset + symbol.Offset;
-                        outputInfoBuilder.AddSymbol(new OutputSymbol(sectionIndex, sectionRelativeOffset, sb.ToString()));
+                        outputInfoBuilder.AddSymbol(
+                            new OutputSymbol(sectionIndex, sectionRelativeOffset, sb.ToString())
+                        );
                     }
-                    _symbolMap.Add(symbol, new SymbolTarget(
-                        sectionIndex: sectionIndex,
-                        offset: alignedOffset + symbol.Offset,
-                        size: objectData.Data.Length));
+                    _symbolMap.Add(
+                        symbol,
+                        new SymbolTarget(
+                            sectionIndex: sectionIndex,
+                            offset: alignedOffset + symbol.Offset,
+                            size: objectData.Data.Length
+                        )
+                    );
                 }
             }
 
             if (objectData.Relocs != null && objectData.Relocs.Length != 0)
             {
-                section.PlacedObjectDataToRelocate.Add(new PlacedObjectData(alignedOffset, objectData));
+                section.PlacedObjectDataToRelocate.Add(
+                    new PlacedObjectData(alignedOffset, objectData)
+                );
             }
         }
 
-        public void AddSymbolForRange(ISymbolNode symbol, ISymbolNode firstNode, ISymbolNode secondNode)
-        {
+        public void AddSymbolForRange(
+            ISymbolNode symbol,
+            ISymbolNode firstNode,
+            ISymbolNode secondNode
+        ) {
             SymbolTarget firstSymbolTarget = _symbolMap[firstNode];
             SymbolTarget secondSymbolTarget = _symbolMap[secondNode];
             Debug.Assert(firstSymbolTarget.SectionIndex == secondSymbolTarget.SectionIndex);
             Debug.Assert(firstSymbolTarget.Offset <= secondSymbolTarget.Offset);
 
-            _symbolMap.Add(symbol, new SymbolTarget(
-                sectionIndex: firstSymbolTarget.SectionIndex,
-                offset: firstSymbolTarget.Offset,
-                size: secondSymbolTarget.Offset - firstSymbolTarget.Offset + secondSymbolTarget.Size
-                ));
+            _symbolMap.Add(
+                symbol,
+                new SymbolTarget(
+                    sectionIndex: firstSymbolTarget.SectionIndex,
+                    offset: firstSymbolTarget.Offset,
+                    size: secondSymbolTarget.Offset - firstSymbolTarget.Offset
+                        + secondSymbolTarget.Size
+                )
+            );
         }
 
         /// <summary>
@@ -572,7 +598,7 @@ namespace ILCompiler.PEWriter
             {
                 return SerializeRelocationSection(sectionLocation);
             }
-            
+
             if (name == R2RPEBuilder.ExportDataSectionName)
             {
                 return SerializeExportSection(sectionLocation);
@@ -584,7 +610,9 @@ namespace ILCompiler.PEWriter
             foreach (Section section in _sections.Where((sec) => sec.Name == name))
             {
                 // Calculate alignment padding
-                int alignedRVA = (sectionLocation.RelativeVirtualAddress + section.Alignment - 1) & -section.Alignment;
+                int alignedRVA =
+                    (sectionLocation.RelativeVirtualAddress + section.Alignment - 1)
+                    & -section.Alignment;
                 int padding = alignedRVA - sectionLocation.RelativeVirtualAddress;
                 if (padding > 0)
                 {
@@ -595,7 +623,8 @@ namespace ILCompiler.PEWriter
                     serializedSection.WriteBytes(0, padding);
                     sectionLocation = new SectionLocation(
                         sectionLocation.RelativeVirtualAddress + padding,
-                        sectionLocation.PointerToRawData + padding);
+                        sectionLocation.PointerToRawData + padding
+                    );
                 }
 
                 // Place the section
@@ -606,7 +635,8 @@ namespace ILCompiler.PEWriter
                 {
                     sectionLocation = new SectionLocation(
                         sectionLocation.RelativeVirtualAddress + section.Content.Count,
-                        sectionLocation.PointerToRawData + section.Content.Count);
+                        sectionLocation.PointerToRawData + section.Content.Count
+                    );
 
                     if (serializedSection == null)
                     {
@@ -637,7 +667,7 @@ namespace ILCompiler.PEWriter
             // Even though the format doesn't dictate it, it seems customary
             // to align the base RVA's on 4K boundaries.
             const int BaseRVAAlignment = 1 << RelocationTypeShift;
-            
+
             BlobBuilder builder = new BlobBuilder();
             int baseRVA = 0;
             List<ushort> offsetsAndTypes = null;
@@ -656,15 +686,23 @@ namespace ILCompiler.PEWriter
             {
                 foreach (PlacedObjectData placedObjectData in section.PlacedObjectDataToRelocate)
                 {
-                    for (int relocIndex = 0; relocIndex < placedObjectData.Relocs.Length; relocIndex++)
-                    {
+                    for (
+                        int relocIndex = 0;
+                        relocIndex < placedObjectData.Relocs.Length;
+                        relocIndex++
+                    ) {
                         RelocType relocType = placedObjectData.Relocs[relocIndex].RelocType;
                         RelocType fileRelocType = Relocation.GetFileRelocationType(relocType);
                         if (fileRelocType != RelocType.IMAGE_REL_BASED_ABSOLUTE)
                         {
-                            int relocationRVA = section.RVAWhenPlaced + placedObjectData.Offset + placedObjectData.Relocs[relocIndex].Offset;
-                            if (offsetsAndTypes != null && relocationRVA - baseRVA > MaxRelativeOffsetInBlock)
-                            {
+                            int relocationRVA =
+                                section.RVAWhenPlaced
+                                + placedObjectData.Offset
+                                + placedObjectData.Relocs[relocIndex].Offset;
+                            if (
+                                offsetsAndTypes != null
+                                && relocationRVA - baseRVA > MaxRelativeOffsetInBlock
+                            ) {
                                 // Need to flush relocation block as the current RVA is too far from base RVA
                                 FlushRelocationBlock(builder, baseRVA, offsetsAndTypes);
                                 offsetsAndTypes = null;
@@ -675,7 +713,10 @@ namespace ILCompiler.PEWriter
                                 baseRVA = relocationRVA & -BaseRVAAlignment;
                                 offsetsAndTypes = new List<ushort>();
                             }
-                            ushort offsetAndType = (ushort)(((ushort)fileRelocType << RelocationTypeShift) | (relocationRVA - baseRVA));
+                            ushort offsetAndType = (ushort)(
+                                ((ushort)fileRelocType << RelocationTypeShift)
+                                | (relocationRVA - baseRVA)
+                            );
                             offsetsAndTypes.Add(offsetAndType);
                         }
                     }
@@ -689,7 +730,10 @@ namespace ILCompiler.PEWriter
 
             if (builder.Count != 0)
             {
-                _relocationDirectoryEntry = new DirectoryEntry(sectionLocation.RelativeVirtualAddress, builder.Count);
+                _relocationDirectoryEntry = new DirectoryEntry(
+                    sectionLocation.RelativeVirtualAddress,
+                    builder.Count
+                );
             }
 
             return builder;
@@ -701,8 +745,11 @@ namespace ILCompiler.PEWriter
         /// <param name="builder">Output blob builder to receive the serialized relocation block</param>
         /// <param name="baseRVA">Base RVA of the relocation block</param>
         /// <param name="offsetsAndTypes">16-bit entries encoding offset relative to the base RVA (low 12 bits) and relocation type (top 4 bite)</param>
-        private static void FlushRelocationBlock(BlobBuilder builder, int baseRVA, List<ushort> offsetsAndTypes)
-        {
+        private static void FlushRelocationBlock(
+            BlobBuilder builder,
+            int baseRVA,
+            List<ushort> offsetsAndTypes
+        ) {
             // First, emit the block header: 4 bytes starting RVA,
             builder.WriteInt32(baseRVA);
             // followed by the total block size comprising this header
@@ -721,8 +768,10 @@ namespace ILCompiler.PEWriter
         /// <param name="location">RVA and file location of the .edata section</param>
         private BlobBuilder SerializeExportSection(SectionLocation sectionLocation)
         {
-            _exportSymbols.MergeSort((es1, es2) => StringComparer.Ordinal.Compare(es1.Name, es2.Name));
-            
+            _exportSymbols.MergeSort(
+                (es1, es2) => StringComparer.Ordinal.Compare(es1.Name, es2.Name)
+            );
+
             BlobBuilder builder = new BlobBuilder();
 
             int minOrdinal = int.MaxValue;
@@ -735,7 +784,7 @@ namespace ILCompiler.PEWriter
                 symbol.NameRVAWhenPlaced = sectionLocation.RelativeVirtualAddress + builder.Count;
                 builder.WriteUTF8(symbol.Name);
                 builder.WriteByte(0);
-                
+
                 if (symbol.Ordinal < minOrdinal)
                 {
                     minOrdinal = symbol.Ordinal;
@@ -764,7 +813,8 @@ namespace ILCompiler.PEWriter
                 SymbolTarget symbolTarget = _symbolMap[symbol.Symbol];
                 Section symbolSection = _sections[symbolTarget.SectionIndex];
                 Debug.Assert(symbolSection.RVAWhenPlaced != 0);
-                addressTable[symbol.Ordinal - minOrdinal] = symbolSection.RVAWhenPlaced + symbolTarget.Offset;
+                addressTable[symbol.Ordinal - minOrdinal] =
+                    symbolSection.RVAWhenPlaced + symbolTarget.Offset;
             }
 
             // Emit the ordinal table
@@ -781,7 +831,7 @@ namespace ILCompiler.PEWriter
             {
                 builder.WriteInt32(addressTableEntry);
             }
-            
+
             // Emit the export directory table
             builder.Align(4);
             int exportDirectoryTableRVA = sectionLocation.RelativeVirtualAddress + builder.Count;
@@ -807,10 +857,14 @@ namespace ILCompiler.PEWriter
             builder.WriteInt32(namePointerTableRVA);
             // +0x24: ordinal table RVA
             builder.WriteInt32(ordinalTableRVA);
-            int exportDirectorySize = sectionLocation.RelativeVirtualAddress + builder.Count - exportDirectoryTableRVA;
+            int exportDirectorySize =
+                sectionLocation.RelativeVirtualAddress + builder.Count - exportDirectoryTableRVA;
 
-            _exportDirectoryEntry = new DirectoryEntry(relativeVirtualAddress: exportDirectoryTableRVA, size: exportDirectorySize);
-            
+            _exportDirectoryEntry = new DirectoryEntry(
+                relativeVirtualAddress: exportDirectoryTableRVA,
+                size: exportDirectorySize
+            );
+
             return builder;
         }
 
@@ -826,7 +880,10 @@ namespace ILCompiler.PEWriter
                 SymbolTarget symbolTarget = _symbolMap[_corHeaderSymbol];
                 Section section = _sections[symbolTarget.SectionIndex];
                 Debug.Assert(section.RVAWhenPlaced != 0);
-                directoriesBuilder.CorHeaderTable = new DirectoryEntry(section.RVAWhenPlaced + symbolTarget.Offset, _corHeaderSize);
+                directoriesBuilder.CorHeaderTable = new DirectoryEntry(
+                    section.RVAWhenPlaced + symbolTarget.Offset,
+                    _corHeaderSize
+                );
             }
 
             if (_win32ResourcesSymbol != null)
@@ -835,7 +892,7 @@ namespace ILCompiler.PEWriter
                 Section section = _sections[symbolTarget.SectionIndex];
                 Debug.Assert(section.RVAWhenPlaced != 0);
 
-                // Windows has a bug in its resource processing logic that occurs when 
+                // Windows has a bug in its resource processing logic that occurs when
                 // 1. A PE file is loaded as a data file
                 // 2. The resource data found in the resources has an RVA which has a magnitude greater than the size of the section which holds the resources
                 // 3. The offset of the start of the resource data from the start of the section is not zero.
@@ -844,14 +901,17 @@ namespace ILCompiler.PEWriter
                 // instead require that the resource data is located at offset 0 within the section.
                 // We achieve that by sorting the Win32ResourcesNode as the first node.
                 Debug.Assert(symbolTarget.Offset == 0);
-                directoriesBuilder.ResourceTable = new DirectoryEntry(section.RVAWhenPlaced + symbolTarget.Offset, _win32ResourcesSize);
+                directoriesBuilder.ResourceTable = new DirectoryEntry(
+                    section.RVAWhenPlaced + symbolTarget.Offset,
+                    _win32ResourcesSize
+                );
             }
 
             if (_exportDirectoryEntry.Size != 0)
             {
                 directoriesBuilder.ExportTable = _exportDirectoryEntry;
             }
-            
+
             int relocationTableRVA = directoriesBuilder.BaseRelocationTable.RelativeVirtualAddress;
             if (relocationTableRVA == 0)
             {
@@ -859,14 +919,16 @@ namespace ILCompiler.PEWriter
             }
             directoriesBuilder.BaseRelocationTable = new DirectoryEntry(
                 relocationTableRVA,
-                directoriesBuilder.BaseRelocationTable.Size + _relocationDirectoryEntry.Size);
+                directoriesBuilder.BaseRelocationTable.Size + _relocationDirectoryEntry.Size
+            );
 
             if (_entryPointSymbol != null)
             {
                 SymbolTarget symbolTarget = _symbolMap[_entryPointSymbol];
                 Section section = _sections[symbolTarget.SectionIndex];
                 Debug.Assert(section.RVAWhenPlaced != 0);
-                directoriesBuilder.AddressOfEntryPoint = section.RVAWhenPlaced + symbolTarget.Offset;
+                directoriesBuilder.AddressOfEntryPoint =
+                    section.RVAWhenPlaced + symbolTarget.Offset;
             }
 
             if (_debugDirectorySymbol != null)
@@ -874,7 +936,10 @@ namespace ILCompiler.PEWriter
                 SymbolTarget symbolTarget = _symbolMap[_debugDirectorySymbol];
                 Section section = _sections[symbolTarget.SectionIndex];
                 Debug.Assert(section.RVAWhenPlaced != 0);
-                directoriesBuilder.DebugTable = new DirectoryEntry(section.RVAWhenPlaced + symbolTarget.Offset, _debugDirectorySize);
+                directoriesBuilder.DebugTable = new DirectoryEntry(
+                    section.RVAWhenPlaced + symbolTarget.Offset,
+                    _debugDirectorySize
+                );
             }
         }
 
@@ -889,9 +954,13 @@ namespace ILCompiler.PEWriter
         public void RelocateOutputFile(
             BlobBuilder peFile,
             ulong defaultImageBase,
-            Stream outputStream)
-        {
-            RelocationHelper relocationHelper = new RelocationHelper(outputStream, defaultImageBase, peFile);
+            Stream outputStream
+        ) {
+            RelocationHelper relocationHelper = new RelocationHelper(
+                outputStream,
+                defaultImageBase,
+                peFile
+            );
 
             // Traverse relocations in all sections in their RVA order
             foreach (Section section in _sections.OrderBy((sec) => sec.RVAWhenPlaced))
@@ -902,7 +971,8 @@ namespace ILCompiler.PEWriter
                     foreach (Relocation relocation in placedObjectData.Relocs)
                     {
                         // Process a single relocation
-                        int relocationRVA = section.RVAWhenPlaced + placedObjectData.Offset + relocation.Offset;
+                        int relocationRVA =
+                            section.RVAWhenPlaced + placedObjectData.Offset + relocation.Offset;
                         int relocationFilePos = relocationRVA + rvaToFilePosDelta;
 
                         // Flush parts of PE file before the relocation to the output stream
@@ -912,7 +982,8 @@ namespace ILCompiler.PEWriter
                         SymbolTarget relocationTarget = _symbolMap[relocation.Target];
                         Section targetSection = _sections[relocationTarget.SectionIndex];
                         int targetRVA = targetSection.RVAWhenPlaced + relocationTarget.Offset;
-                        int filePosWhenPlaced = targetSection.FilePosWhenPlaced + relocationTarget.Offset;
+                        int filePosWhenPlaced =
+                            targetSection.FilePosWhenPlaced + relocationTarget.Offset;
 
                         // If relocating to a node's size, switch out the target RVA with data length
                         if (relocation.RelocType == RelocType.IMAGE_REL_SYMBOL_SIZE)
@@ -921,7 +992,12 @@ namespace ILCompiler.PEWriter
                         }
 
                         // Apply the relocation
-                        relocationHelper.ProcessRelocation(relocation.RelocType, relocationRVA, targetRVA, filePosWhenPlaced);
+                        relocationHelper.ProcessRelocation(
+                            relocation.RelocType,
+                            relocationRVA,
+                            targetRVA,
+                            filePosWhenPlaced
+                        );
                     }
                 }
             }

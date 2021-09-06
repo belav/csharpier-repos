@@ -21,19 +21,28 @@ namespace System.Reflection
 
             Type? declaringType = m?.DeclaringType;
             if (declaringType != null && declaringType.IsGenericType)
-                throw new ArgumentException(SR.Format(
-                    SR.Argument_MethodDeclaringTypeGeneric,
-                    m, declaringType.GetGenericTypeDefinition()));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_MethodDeclaringTypeGeneric,
+                        m,
+                        declaringType.GetGenericTypeDefinition()
+                    )
+                );
 
             return m;
         }
 
-        public static MethodBase? GetMethodFromHandle(RuntimeMethodHandle handle, RuntimeTypeHandle declaringType)
-        {
+        public static MethodBase? GetMethodFromHandle(
+            RuntimeMethodHandle handle,
+            RuntimeTypeHandle declaringType
+        ) {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
 
-            return RuntimeType.GetMethodBase(declaringType.GetRuntimeType(), handle.GetMethodInfo());
+            return RuntimeType.GetMethodBase(
+                declaringType.GetRuntimeType(),
+                handle.GetMethodInfo()
+            );
         }
 
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
@@ -46,9 +55,15 @@ namespace System.Reflection
 
         #region Internal Members
         // used by EE
-        private IntPtr GetMethodDesc() { return MethodHandle.Value; }
+        private IntPtr GetMethodDesc()
+        {
+            return MethodHandle.Value;
+        }
 
-        internal virtual ParameterInfo[] GetParametersNoCopy() { return GetParameters(); }
+        internal virtual ParameterInfo[] GetParametersNoCopy()
+        {
+            return GetParameters();
+        }
         #endregion
 
         #region Internal Methods
@@ -65,11 +80,19 @@ namespace System.Reflection
             return parameterTypes;
         }
 
-        private protected Span<object?> CheckArguments(ref StackAllocedArguments stackArgs, object?[]? parameters, Binder? binder,
-            BindingFlags invokeAttr, CultureInfo? culture, Signature sig)
-        {
-            Debug.Assert(Unsafe.SizeOf<StackAllocedArguments>() == StackAllocedArguments.MaxStackAllocArgCount * Unsafe.SizeOf<object>(),
-                "MaxStackAllocArgCount not properly defined.");
+        private protected Span<object?> CheckArguments(
+            ref StackAllocedArguments stackArgs,
+            object?[]? parameters,
+            Binder? binder,
+            BindingFlags invokeAttr,
+            CultureInfo? culture,
+            Signature sig
+        ) {
+            Debug.Assert(
+                Unsafe.SizeOf<StackAllocedArguments>()
+                    == StackAllocedArguments.MaxStackAllocArgCount * Unsafe.SizeOf<object>(),
+                "MaxStackAllocArgCount not properly defined."
+            );
 
             Span<object?> copyOfParameters = default;
 
@@ -82,7 +105,8 @@ namespace System.Reflection
                 // as we validate them. n.b. This disallows use of ArrayPool, as ArrayPool-rented arrays are
                 // considered user-visible to threads which may still be holding on to returned instances.
 
-                copyOfParameters = (parameters.Length <= StackAllocedArguments.MaxStackAllocArgCount)
+                copyOfParameters =
+                    (parameters.Length <= StackAllocedArguments.MaxStackAllocArgCount)
                         ? MemoryMarshal.CreateSpan(ref stackArgs._arg0, parameters.Length)
                         : new Span<object?>(new object?[parameters.Length]);
 

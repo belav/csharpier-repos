@@ -19,7 +19,10 @@ namespace Microsoft.WebAssembly.Diagnostics
         private ConcurrentQueue<byte[]> pending;
 
         public WebSocket Ws { get; private set; }
-        public Task? CurrentSend { get { return current_send; } }
+        public Task? CurrentSend
+        {
+            get { return current_send; }
+        }
         public DevToolsQueue(WebSocket sock)
         {
             this.Ws = sock;
@@ -36,8 +39,10 @@ namespace Microsoft.WebAssembly.Diagnostics
             return sendTask;
         }
 
-        public bool TryPumpIfCurrentCompleted(CancellationToken token, [NotNullWhen(true)] out Task? sendTask)
-        {
+        public bool TryPumpIfCurrentCompleted(
+            CancellationToken token,
+            [NotNullWhen(true)] out Task? sendTask
+        ) {
             sendTask = null;
 
             if (current_send?.IsCompleted == false)
@@ -46,7 +51,12 @@ namespace Microsoft.WebAssembly.Diagnostics
             current_send = null;
             if (pending.TryDequeue(out byte[]? bytes))
             {
-                current_send = Ws.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, token);
+                current_send = Ws.SendAsync(
+                    new ArraySegment<byte>(bytes),
+                    WebSocketMessageType.Text,
+                    true,
+                    token
+                );
                 sendTask = current_send;
             }
 

@@ -31,7 +31,6 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class RuntimeModule : Module
     {
@@ -49,15 +48,12 @@ namespace System.Reflection
         #endregion
 #pragma warning restore 649
 
-        public
-        override
-        Assembly Assembly
+        public override Assembly Assembly
         {
             get { return assembly; }
         }
 
-        public
-        override
+        public override
         // Note: we do not ask for PathDiscovery because no path is returned here.
         // However MS Fx requires it (see FDBK23572 for details).
         string Name
@@ -65,16 +61,12 @@ namespace System.Reflection
             get { return name; }
         }
 
-        public
-        override
-        string ScopeName
+        public override string ScopeName
         {
             get { return scopename; }
         }
 
-        public
-        override
-        int MDStreamVersion
+        public override int MDStreamVersion
         {
             get
             {
@@ -84,35 +76,23 @@ namespace System.Reflection
             }
         }
 
-        public
-        override
-        Guid ModuleVersionId
+        public override Guid ModuleVersionId
         {
-            get
-            {
-                return GetModuleVersionId();
-            }
+            get { return GetModuleVersionId(); }
         }
 
-        public override
-        string FullyQualifiedName
+        public override string FullyQualifiedName
         {
-            get
-            {
-                return fqname;
-            }
+            get { return fqname; }
         }
 
-        public
-        override
-        bool IsResource()
+        public override bool IsResource()
         {
             return is_resource;
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
-        public override
-        Type[] FindTypes(TypeFilter? filter, object? filterCriteria)
+        public override Type[] FindTypes(TypeFilter? filter, object? filterCriteria)
         {
             var filtered = new List<Type>();
             foreach (Type t in GetTypes())
@@ -121,21 +101,18 @@ namespace System.Reflection
             return filtered.ToArray();
         }
 
-        public override
-        object[] GetCustomAttributes(bool inherit)
+        public override object[] GetCustomAttributes(bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
 
-        public override
-        object[] GetCustomAttributes(Type attributeType, bool inherit)
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
         }
 
         [RequiresUnreferencedCode("Fields might be removed")]
-        public override
-        FieldInfo? GetField(string name, BindingFlags bindingAttr)
+        public override FieldInfo? GetField(string name, BindingFlags bindingAttr)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -148,30 +125,31 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Fields might be removed")]
-        public override
-        FieldInfo[] GetFields(BindingFlags bindingFlags)
+        public override FieldInfo[] GetFields(BindingFlags bindingFlags)
         {
             if (IsResource())
                 return Array.Empty<FieldInfo>();
 
             Type globalType = GetGlobalType(_impl);
-            return (globalType != null) ? globalType.GetFields(bindingFlags) : Array.Empty<FieldInfo>();
+            return (globalType != null)
+                ? globalType.GetFields(bindingFlags)
+                : Array.Empty<FieldInfo>();
         }
 
-        public override
-        int MetadataToken
+        public override int MetadataToken
         {
-            get
-            {
-                return get_MetadataToken(this);
-            }
+            get { return get_MetadataToken(this); }
         }
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        protected
-        override
-        MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
-        {
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) {
             if (IsResource())
                 return null;
 
@@ -180,30 +158,37 @@ namespace System.Reflection
                 return null;
             if (types == null)
                 return globalType.GetMethod(name);
-            return globalType.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+            return globalType.GetMethod(
+                name,
+                bindingAttr,
+                binder,
+                callConvention,
+                types,
+                modifiers
+            );
         }
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        public
-        override
-        MethodInfo[] GetMethods(BindingFlags bindingFlags)
+        public override MethodInfo[] GetMethods(BindingFlags bindingFlags)
         {
             if (IsResource())
                 return Array.Empty<MethodInfo>();
 
             Type globalType = GetGlobalType(_impl);
-            return (globalType != null) ? globalType.GetMethods(bindingFlags) : Array.Empty<MethodInfo>();
+            return (globalType != null)
+                ? globalType.GetMethods(bindingFlags)
+                : Array.Empty<MethodInfo>();
         }
 
-        public override
-        void GetPEKind(out PortableExecutableKinds peKind, out ImageFileMachine machine)
-        {
+        public override void GetPEKind(
+            out PortableExecutableKinds peKind,
+            out ImageFileMachine machine
+        ) {
             GetPEKind(_impl, out peKind, out machine);
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
-        public override
-        Type GetType(string className, bool throwOnError, bool ignoreCase)
+        public override Type GetType(string className, bool throwOnError, bool ignoreCase)
         {
             if (className == null)
                 throw new ArgumentNullException(nameof(className));
@@ -212,25 +197,42 @@ namespace System.Reflection
             return assembly.InternalGetType(this, className, throwOnError, ignoreCase);
         }
 
-        public override
-        bool IsDefined(Type attributeType, bool inherit)
+        public override bool IsDefined(Type attributeType, bool inherit)
         {
             return CustomAttribute.IsDefined(this, attributeType, inherit);
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public
-        override
-        FieldInfo ResolveField(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
-            return ResolveField(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+        public override FieldInfo ResolveField(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
+            return ResolveField(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        internal static FieldInfo ResolveField(Module module, IntPtr monoModule, int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
+        internal static FieldInfo ResolveField(
+            Module module,
+            IntPtr monoModule,
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
             ResolveTokenError error;
 
-            IntPtr handle = ResolveFieldToken(monoModule, metadataToken, ptrs_from_types(genericTypeArguments), ptrs_from_types(genericMethodArguments), out error);
+            IntPtr handle = ResolveFieldToken(
+                monoModule,
+                metadataToken,
+                ptrs_from_types(genericTypeArguments),
+                ptrs_from_types(genericMethodArguments),
+                out error
+            );
             if (handle == IntPtr.Zero)
                 throw resolve_token_exception(module.Name, metadataToken, error, "Field");
             else
@@ -238,18 +240,36 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public
-        override
-        MemberInfo ResolveMember(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
-            return ResolveMember(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+        public override MemberInfo ResolveMember(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
+            return ResolveMember(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        internal static MemberInfo ResolveMember(Module module, IntPtr monoModule, int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
+        internal static MemberInfo ResolveMember(
+            Module module,
+            IntPtr monoModule,
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
             ResolveTokenError error;
 
-            MemberInfo m = ResolveMemberToken(monoModule, metadataToken, ptrs_from_types(genericTypeArguments), ptrs_from_types(genericMethodArguments), out error);
+            MemberInfo m = ResolveMemberToken(
+                monoModule,
+                metadataToken,
+                ptrs_from_types(genericTypeArguments),
+                ptrs_from_types(genericMethodArguments),
+                out error
+            );
             if (m == null)
                 throw resolve_token_exception(module.Name, metadataToken, error, "MemberInfo");
             else
@@ -257,28 +277,46 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public
-        override
-        MethodBase ResolveMethod(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
-            return ResolveMethod(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+        public override MethodBase ResolveMethod(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
+            return ResolveMethod(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        internal static MethodBase ResolveMethod(Module module, IntPtr monoModule, int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
+        internal static MethodBase ResolveMethod(
+            Module module,
+            IntPtr monoModule,
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
             ResolveTokenError error;
 
-            IntPtr handle = ResolveMethodToken(monoModule, metadataToken, ptrs_from_types(genericTypeArguments), ptrs_from_types(genericMethodArguments), out error);
+            IntPtr handle = ResolveMethodToken(
+                monoModule,
+                metadataToken,
+                ptrs_from_types(genericTypeArguments),
+                ptrs_from_types(genericMethodArguments),
+                out error
+            );
             if (handle == IntPtr.Zero)
                 throw resolve_token_exception(module.Name, metadataToken, error, "MethodBase");
             else
-                return RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(new RuntimeMethodHandle(handle));
+                return RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(
+                    new RuntimeMethodHandle(handle)
+                );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public
-        override
-        string ResolveString(int metadataToken)
+        public override string ResolveString(int metadataToken)
         {
             return ResolveString(this, _impl, metadataToken);
         }
@@ -295,18 +333,36 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public
-        override
-        Type ResolveType(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
-            return ResolveType(this, _impl, metadataToken, genericTypeArguments, genericMethodArguments);
+        public override Type ResolveType(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
+            return ResolveType(
+                this,
+                _impl,
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        internal static Type ResolveType(Module module, IntPtr monoModule, int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
-        {
+        internal static Type ResolveType(
+            Module module,
+            IntPtr monoModule,
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        ) {
             ResolveTokenError error;
 
-            IntPtr handle = ResolveTypeToken(monoModule, metadataToken, ptrs_from_types(genericTypeArguments), ptrs_from_types(genericMethodArguments), out error);
+            IntPtr handle = ResolveTypeToken(
+                monoModule,
+                metadataToken,
+                ptrs_from_types(genericTypeArguments),
+                ptrs_from_types(genericMethodArguments),
+                out error
+            );
             if (handle == IntPtr.Zero)
                 throw resolve_token_exception(module.Name, metadataToken, error, "Type");
             else
@@ -314,9 +370,7 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public
-        override
-        byte[] ResolveSignature(int metadataToken)
+        public override byte[] ResolveSignature(int metadataToken)
         {
             return ResolveSignature(this, _impl, metadataToken);
         }
@@ -333,8 +387,7 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
-        public override
-        Type[] GetTypes()
+        public override Type[] GetTypes()
         {
             return InternalGetTypes(_impl);
         }
@@ -351,10 +404,7 @@ namespace System.Reflection
 
         internal IntPtr MonoModule
         {
-            get
-            {
-                return _impl;
-            }
+            get { return _impl; }
         }
 
         internal Guid GetModuleVersionId()
@@ -364,12 +414,31 @@ namespace System.Reflection
             return new Guid(guid);
         }
 
-        internal static Exception resolve_token_exception(string name, int metadataToken, ResolveTokenError error, string tokenType)
-        {
+        internal static Exception resolve_token_exception(
+            string name,
+            int metadataToken,
+            ResolveTokenError error,
+            string tokenType
+        ) {
             if (error == ResolveTokenError.OutOfRange)
-                return new ArgumentOutOfRangeException(nameof(metadataToken), string.Format("Token 0x{0:x} is not valid in the scope of module {1}", metadataToken, name));
+                return new ArgumentOutOfRangeException(
+                    nameof(metadataToken),
+                    string.Format(
+                        "Token 0x{0:x} is not valid in the scope of module {1}",
+                        metadataToken,
+                        name
+                    )
+                );
             else
-                return new ArgumentException(string.Format("Token 0x{0:x} is not a valid {1} token in the scope of module {2}", metadataToken, tokenType, name), nameof(metadataToken));
+                return new ArgumentException(
+                    string.Format(
+                        "Token 0x{0:x} is not a valid {1} token in the scope of module {2}",
+                        metadataToken,
+                        tokenType,
+                        name
+                    ),
+                    nameof(metadataToken)
+                );
         }
 
         internal static IntPtr[]? ptrs_from_types(Type[]? types)
@@ -389,7 +458,10 @@ namespace System.Reflection
             }
         }
 
-        internal IntPtr GetUnderlyingNativeHandle() { return _impl; }
+        internal IntPtr GetUnderlyingNativeHandle()
+        {
+            return _impl;
+        }
 
         // This calls ves_icall_reflection_get_token, so needs a Module argument
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -408,25 +480,61 @@ namespace System.Reflection
         internal static extern Type GetGlobalType(IntPtr module);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern IntPtr ResolveTypeToken(IntPtr module, int token, IntPtr[]? type_args, IntPtr[]? method_args, out ResolveTokenError error);
+        internal static extern IntPtr ResolveTypeToken(
+            IntPtr module,
+            int token,
+            IntPtr[]? type_args,
+            IntPtr[]? method_args,
+            out ResolveTokenError error
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern IntPtr ResolveMethodToken(IntPtr module, int token, IntPtr[]? type_args, IntPtr[]? method_args, out ResolveTokenError error);
+        internal static extern IntPtr ResolveMethodToken(
+            IntPtr module,
+            int token,
+            IntPtr[]? type_args,
+            IntPtr[]? method_args,
+            out ResolveTokenError error
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern IntPtr ResolveFieldToken(IntPtr module, int token, IntPtr[]? type_args, IntPtr[]? method_args, out ResolveTokenError error);
+        internal static extern IntPtr ResolveFieldToken(
+            IntPtr module,
+            int token,
+            IntPtr[]? type_args,
+            IntPtr[]? method_args,
+            out ResolveTokenError error
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern string ResolveStringToken(IntPtr module, int token, out ResolveTokenError error);
+        internal static extern string ResolveStringToken(
+            IntPtr module,
+            int token,
+            out ResolveTokenError error
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern MemberInfo ResolveMemberToken(IntPtr module, int token, IntPtr[]? type_args, IntPtr[]? method_args, out ResolveTokenError error);
+        internal static extern MemberInfo ResolveMemberToken(
+            IntPtr module,
+            int token,
+            IntPtr[]? type_args,
+            IntPtr[]? method_args,
+            out ResolveTokenError error
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern byte[] ResolveSignature(IntPtr module, int metadataToken, out ResolveTokenError error);
+        internal static extern byte[] ResolveSignature(
+            IntPtr module,
+            int metadataToken,
+            out ResolveTokenError error
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void GetPEKind(IntPtr module, out PortableExecutableKinds peKind, out ImageFileMachine machine);
+        internal static extern void GetPEKind(
+            IntPtr module,
+            out PortableExecutableKinds peKind,
+            out ImageFileMachine machine
+        );
     }
 
     internal enum ResolveTokenError

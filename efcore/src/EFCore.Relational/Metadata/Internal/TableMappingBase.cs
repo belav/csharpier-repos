@@ -21,10 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public TableMappingBase(
-            IEntityType entityType,
-            TableBase table,
-            bool includesDerivedTypes)
+        public TableMappingBase(IEntityType entityType, TableBase table, bool includesDerivedTypes)
         {
             EntityType = entityType;
             Table = table;
@@ -56,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SortedSet<ColumnMappingBase> ColumnMappings { get; }
-            = new(ColumnMappingBaseComparer.Instance);
+        public virtual SortedSet<ColumnMappingBase> ColumnMappings { get; } =
+            new(ColumnMappingBaseComparer.Instance);
 
         /// <inheritdoc />
         public virtual bool IncludesDerivedTypes { get; }

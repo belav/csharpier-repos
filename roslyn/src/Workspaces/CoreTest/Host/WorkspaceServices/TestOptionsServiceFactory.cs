@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public TestOptionsServiceFactory(
             [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
-            [ImportMany] IEnumerable<Lazy<IOptionProvider, LanguageMetadata>> optionProviders)
-        {
+            [ImportMany] IEnumerable<Lazy<IOptionProvider, LanguageMetadata>> optionProviders
+        ) {
             _workspaceThreadingService = workspaceThreadingService;
             _providers = optionProviders.ToImmutableArray();
         }
@@ -35,8 +35,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             // give out new option service per workspace
             return new OptionServiceFactory.OptionService(
-                new GlobalOptionService(_workspaceThreadingService, _providers, SpecializedCollections.EmptyEnumerable<Lazy<IOptionPersisterProvider>>()),
-                workspaceServices);
+                new GlobalOptionService(
+                    _workspaceThreadingService,
+                    _providers,
+                    SpecializedCollections.EmptyEnumerable<Lazy<IOptionPersisterProvider>>()
+                ),
+                workspaceServices
+            );
         }
     }
 }

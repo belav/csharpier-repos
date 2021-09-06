@@ -14,10 +14,19 @@ namespace Microsoft.AspNetCore.Hosting
     internal static class HostingLoggerExtensions
     {
         private static readonly Action<ILogger, string, Exception?> _startupAssemblyLoaded =
-                LoggerMessage.Define<string>(LogLevel.Debug, LoggerEventIds.HostingStartupAssemblyLoaded, "Loaded hosting startup assembly {assemblyName}", skipEnabledCheck: true);
+            LoggerMessage.Define<string>(
+                LogLevel.Debug,
+                LoggerEventIds.HostingStartupAssemblyLoaded,
+                "Loaded hosting startup assembly {assemblyName}",
+                skipEnabledCheck: true
+            );
 
         private static readonly Action<ILogger, string, Exception?> _listeningOnAddress =
-                LoggerMessage.Define<string>(LogLevel.Information, LoggerEventIds.ServerListeningOnAddresses, "Now listening on: {address}");
+            LoggerMessage.Define<string>(
+                LogLevel.Information,
+                LoggerEventIds.ServerListeningOnAddresses,
+                "Now listening on: {address}"
+            );
 
         public static IDisposable RequestScope(this ILogger logger, HttpContext httpContext)
         {
@@ -39,7 +48,8 @@ namespace Microsoft.AspNetCore.Hosting
             logger.ApplicationError(
                 eventId: LoggerEventIds.ApplicationStartupException,
                 message: "Application startup exception",
-                exception: exception);
+                exception: exception
+            );
         }
 
         public static void HostingStartupAssemblyError(this ILogger logger, Exception exception)
@@ -47,11 +57,16 @@ namespace Microsoft.AspNetCore.Hosting
             logger.ApplicationError(
                 eventId: LoggerEventIds.HostingStartupAssemblyException,
                 message: "Hosting startup assembly exception",
-                exception: exception);
+                exception: exception
+            );
         }
 
-        public static void ApplicationError(this ILogger logger, EventId eventId, string message, Exception exception)
-        {
+        public static void ApplicationError(
+            this ILogger logger,
+            EventId eventId,
+            string message,
+            Exception exception
+        ) {
             var reflectionTypeLoadException = exception as ReflectionTypeLoadException;
             if (reflectionTypeLoadException != null)
             {
@@ -64,19 +79,14 @@ namespace Microsoft.AspNetCore.Hosting
                 }
             }
 
-            logger.LogCritical(
-                eventId: eventId,
-                message: message,
-                exception: exception);
+            logger.LogCritical(eventId: eventId, message: message, exception: exception);
         }
 
         public static void Starting(this ILogger logger)
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                   eventId: LoggerEventIds.Starting,
-                   message: "Hosting starting");
+                logger.LogDebug(eventId: LoggerEventIds.Starting, message: "Hosting starting");
             }
         }
 
@@ -84,9 +94,7 @@ namespace Microsoft.AspNetCore.Hosting
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                    eventId: LoggerEventIds.Started,
-                    message: "Hosting started");
+                logger.LogDebug(eventId: LoggerEventIds.Started, message: "Hosting started");
             }
         }
 
@@ -94,9 +102,7 @@ namespace Microsoft.AspNetCore.Hosting
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                    eventId: LoggerEventIds.Shutdown,
-                    message: "Hosting shutdown");
+                logger.LogDebug(eventId: LoggerEventIds.Shutdown, message: "Hosting shutdown");
             }
         }
 
@@ -107,7 +113,8 @@ namespace Microsoft.AspNetCore.Hosting
                 logger.LogDebug(
                     eventId: LoggerEventIds.ServerShutdownException,
                     exception: ex,
-                    message: "Server shutdown exception");
+                    message: "Server shutdown exception"
+                );
             }
         }
 
@@ -120,10 +127,7 @@ namespace Microsoft.AspNetCore.Hosting
 
             public int Count
             {
-                get
-                {
-                    return 2;
-                }
+                get { return 2; }
             }
 
             public KeyValuePair<string, object> this[int index]
@@ -146,9 +150,11 @@ namespace Microsoft.AspNetCore.Hosting
             public HostingLogScope(HttpContext httpContext)
             {
                 _traceIdentifier = httpContext.TraceIdentifier;
-                _path = (httpContext.Request.PathBase.HasValue
-                         ? httpContext.Request.PathBase + httpContext.Request.Path
-                         : httpContext.Request.Path).ToString();
+                _path = (
+                    httpContext.Request.PathBase.HasValue
+                        ? httpContext.Request.PathBase + httpContext.Request.Path
+                        : httpContext.Request.Path
+                ).ToString();
             }
 
             public override string ToString()
@@ -159,7 +165,8 @@ namespace Microsoft.AspNetCore.Hosting
                         CultureInfo.InvariantCulture,
                         "RequestPath:{0} RequestId:{1}",
                         _path,
-                        _traceIdentifier);
+                        _traceIdentifier
+                    );
                 }
 
                 return _cachedToString;

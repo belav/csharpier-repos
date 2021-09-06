@@ -30,8 +30,7 @@ namespace System.Numerics
     /// large algorithms. This type is immutable, individual elements cannot be modified.
     /// </summary>
     [Intrinsic]
-    public struct Vector<T> : IEquatable<Vector<T>>, IFormattable
-        where T : struct
+    public struct Vector<T> : IEquatable<Vector<T>>, IFormattable where T : struct
     {
         private Register register;
 
@@ -149,7 +148,9 @@ namespace System.Numerics
                 Vector.ThrowInsufficientNumberOfElementsException(Count);
             }
 
-            this = Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>
@@ -192,7 +193,10 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>
@@ -227,15 +231,23 @@ namespace System.Numerics
 
             if ((uint)startIndex >= (uint)destination.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.Format(SR.Arg_ArgumentOutOfRangeException, startIndex));
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.Format(SR.Arg_ArgumentOutOfRangeException, startIndex)
+                );
             }
 
             if ((destination.Length - startIndex) < Count)
             {
-                throw new ArgumentException(SR.Format(SR.Arg_ElementsInSourceIsGreaterThanDestination, startIndex));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_ElementsInSourceIsGreaterThanDestination, startIndex)
+                );
             }
 
-            Unsafe.WriteUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref destination[startIndex]), this);
+            Unsafe.WriteUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref destination[startIndex]),
+                this
+            );
         }
 
         /// <summary>Returns the element at the given index.</summary>
@@ -248,7 +260,9 @@ namespace System.Numerics
 
                 if ((uint)index >= (uint)Count)
                 {
-                    throw new IndexOutOfRangeException(SR.Format(SR.Arg_ArgumentOutOfRangeException, index));
+                    throw new IndexOutOfRangeException(
+                        SR.Format(SR.Arg_ArgumentOutOfRangeException, index)
+                    );
                 }
 
                 return GetElement(index);
@@ -259,7 +273,8 @@ namespace System.Numerics
         /// <param name="obj">The Object to compare against.</param>
         /// <returns>True if the Object is equal to this vector; False otherwise.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override readonly bool Equals([NotNullWhen(true)] object? obj) => (obj is Vector<T> other) && Equals(other);
+        public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector<T> other) && Equals(other);
 
         /// <summary>Returns a boolean indicating whether the given vector is equal to this vector instance.</summary>
         /// <param name="other">The vector to compare this instance to.</param>
@@ -289,7 +304,8 @@ namespace System.Numerics
         /// <summary>Returns a String representing this vector, using the specified format string to format individual elements.</summary>
         /// <param name="format">The format of individual elements.</param>
         /// <returns>The string representation.</returns>
-        public readonly string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
+        public readonly string ToString(string? format) =>
+            ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a String representing this vector, using the specified format string to format individual elements and the given IFormatProvider.</summary>
         /// <param name="format">The format of individual elements.</param>
@@ -350,7 +366,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
             return true;
         }
 
@@ -365,7 +384,10 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                result.SetElement(index, ScalarAdd(left.GetElement(index), right.GetElement(index)));
+                result.SetElement(
+                    index,
+                    ScalarAdd(left.GetElement(index), right.GetElement(index))
+                );
             }
 
             return result;
@@ -382,7 +404,10 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                result.SetElement(index, ScalarSubtract(left.GetElement(index), right.GetElement(index)));
+                result.SetElement(
+                    index,
+                    ScalarSubtract(left.GetElement(index), right.GetElement(index))
+                );
             }
 
             return result;
@@ -399,7 +424,10 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                result.SetElement(index, ScalarMultiply(left.GetElement(index), right.GetElement(index)));
+                result.SetElement(
+                    index,
+                    ScalarMultiply(left.GetElement(index), right.GetElement(index))
+                );
             }
 
             return result;
@@ -441,7 +469,10 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                result.SetElement(index, ScalarDivide(left.GetElement(index), right.GetElement(index)));
+                result.SetElement(
+                    index,
+                    ScalarDivide(left.GetElement(index), right.GetElement(index))
+                );
             }
 
             return result;
@@ -646,7 +677,9 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarEquals(left.GetElement(index), right.GetElement(index)) ? GetAllBitsSetValue() : default;
+                T value = ScalarEquals(left.GetElement(index), right.GetElement(index))
+                    ? GetAllBitsSetValue()
+                    : default;
                 result.SetElement(index, value);
             }
 
@@ -661,7 +694,9 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarLessThan(left.GetElement(index), right.GetElement(index)) ? GetAllBitsSetValue() : default;
+                T value = ScalarLessThan(left.GetElement(index), right.GetElement(index))
+                    ? GetAllBitsSetValue()
+                    : default;
                 result.SetElement(index, value);
             }
 
@@ -676,7 +711,9 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarGreaterThan(left.GetElement(index), right.GetElement(index)) ? GetAllBitsSetValue() : default;
+                T value = ScalarGreaterThan(left.GetElement(index), right.GetElement(index))
+                    ? GetAllBitsSetValue()
+                    : default;
                 result.SetElement(index, value);
             }
 
@@ -690,7 +727,9 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarGreaterThanOrEqual(left.GetElement(index), right.GetElement(index)) ? GetAllBitsSetValue() : default;
+                T value = ScalarGreaterThanOrEqual(left.GetElement(index), right.GetElement(index))
+                    ? GetAllBitsSetValue()
+                    : default;
                 result.SetElement(index, value);
             }
 
@@ -700,12 +739,13 @@ namespace System.Numerics
         [Intrinsic]
         internal static Vector<T> LessThanOrEqual(Vector<T> left, Vector<T> right)
         {
-
             Vector<T> result = default;
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarLessThanOrEqual(left.GetElement(index), right.GetElement(index)) ? GetAllBitsSetValue() : default;
+                T value = ScalarLessThanOrEqual(left.GetElement(index), right.GetElement(index))
+                    ? GetAllBitsSetValue()
+                    : default;
                 result.SetElement(index, value);
             }
 
@@ -713,13 +753,20 @@ namespace System.Numerics
         }
 
         [Intrinsic]
-        internal static Vector<T> ConditionalSelect(Vector<T> condition, Vector<T> left, Vector<T> right)
-        {
+        internal static Vector<T> ConditionalSelect(
+            Vector<T> condition,
+            Vector<T> left,
+            Vector<T> right
+        ) {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
             Vector<T> result = default;
 
-            result.register.uint64_0 = (left.register.uint64_0 & condition.register.uint64_0) | (right.register.uint64_0 & ~condition.register.uint64_0);
-            result.register.uint64_1 = (left.register.uint64_1 & condition.register.uint64_1) | (right.register.uint64_1 & ~condition.register.uint64_1);
+            result.register.uint64_0 =
+                (left.register.uint64_0 & condition.register.uint64_0)
+                | (right.register.uint64_0 & ~condition.register.uint64_0);
+            result.register.uint64_1 =
+                (left.register.uint64_1 & condition.register.uint64_1)
+                | (right.register.uint64_1 & ~condition.register.uint64_1);
 
             return result;
         }
@@ -763,7 +810,9 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarLessThan(left.GetElement(index), right.GetElement(index)) ? left.GetElement(index) : right.GetElement(index);
+                T value = ScalarLessThan(left.GetElement(index), right.GetElement(index))
+                    ? left.GetElement(index)
+                    : right.GetElement(index);
                 result.SetElement(index, value);
             }
 
@@ -777,7 +826,9 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                T value = ScalarGreaterThan(left.GetElement(index), right.GetElement(index)) ? left.GetElement(index) : right.GetElement(index);
+                T value = ScalarGreaterThan(left.GetElement(index), right.GetElement(index))
+                    ? left.GetElement(index)
+                    : right.GetElement(index);
                 result.SetElement(index, value);
             }
 
@@ -791,7 +842,10 @@ namespace System.Numerics
 
             for (nint index = 0; index < Count; index++)
             {
-                product = ScalarAdd(product, ScalarMultiply(left.GetElement(index), right.GetElement(index)));
+                product = ScalarAdd(
+                    product,
+                    ScalarMultiply(left.GetElement(index), right.GetElement(index))
+                );
             }
 
             return product;
@@ -1497,14 +1551,18 @@ namespace System.Numerics
         private readonly T GetElement(nint index)
         {
             Debug.Assert((index >= 0) && (index < Count));
-            return Unsafe.Add(ref Unsafe.As<Vector<T>, T>(ref Unsafe.AsRef<Vector<T>>(in this)), index);
+            return Unsafe.Add(
+                ref Unsafe.As<Vector<T>, T>(ref Unsafe.AsRef<Vector<T>>(in this)),
+                index
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SetElement(nint index, T value)
         {
             Debug.Assert((index >= 0) && (index < Count));
-            Unsafe.Add(ref Unsafe.As<Vector<T>, T>(ref Unsafe.AsRef<Vector<T>>(in this)), index) = value;
+            Unsafe.Add(ref Unsafe.As<Vector<T>, T>(ref Unsafe.AsRef<Vector<T>>(in this)), index) =
+                value;
         }
     }
 }

@@ -13,8 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     // Sealed for perf
-    public sealed class NamedListComparer : IComparer<(string, string?, IReadOnlyList<string>)>,
-        IEqualityComparer<(string, string?, IReadOnlyList<string>)>
+    public sealed class NamedListComparer
+        : IComparer<(string, string?, IReadOnlyList<string>)>,
+          IEqualityComparer<(string, string?, IReadOnlyList<string>)>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -24,9 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static readonly NamedListComparer Instance = new();
 
-        private NamedListComparer()
-        {
-        }
+        private NamedListComparer() { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,8 +33,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public int Compare((string, string?, IReadOnlyList<string>) x, (string, string?, IReadOnlyList<string>) y)
-        {
+        public int Compare(
+            (string, string?, IReadOnlyList<string>) x,
+            (string, string?, IReadOnlyList<string>) y
+        ) {
             var result = StringComparer.Ordinal.Compare(x.Item1, y.Item1);
             if (result != 0)
             {
@@ -55,8 +56,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             var index = 0;
-            while ((result == 0)
-                && (index < x.Item3.Count))
+            while ((result == 0) && (index < x.Item3.Count))
             {
                 result = StringComparer.Ordinal.Compare(x.Item3[index], y.Item3[index]);
                 index++;
@@ -71,8 +71,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public bool Equals((string, string?, IReadOnlyList<string>) x, (string, string?, IReadOnlyList<string>) y)
-            => Compare(x, y) == 0;
+        public bool Equals(
+            (string, string?, IReadOnlyList<string>) x,
+            (string, string?, IReadOnlyList<string>) y
+        ) => Compare(x, y) == 0;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

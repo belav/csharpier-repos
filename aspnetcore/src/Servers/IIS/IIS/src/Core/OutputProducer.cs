@@ -89,9 +89,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         {
             lock (_flushLock)
             {
-                _lastFlushTask = _lastFlushTask.IsCompleted ?
-                    FlushNowAsync(pipeWriter, cancellationToken) :
-                    AwaitLastFlushAndThenFlushAsync(_lastFlushTask, pipeWriter, cancellationToken);
+                _lastFlushTask = _lastFlushTask.IsCompleted
+                    ? FlushNowAsync(pipeWriter, cancellationToken)
+                    : AwaitLastFlushAndThenFlushAsync(
+                          _lastFlushTask,
+                          pipeWriter,
+                          cancellationToken
+                      );
 
                 return _lastFlushTask;
             }
@@ -100,11 +104,15 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         private Task FlushNowAsync(PipeWriter pipeWriter, CancellationToken cancellationToken)
         {
             var awaitable = pipeWriter.FlushAsync(cancellationToken);
-            return awaitable.IsCompleted ? Task.CompletedTask : FlushNowAsyncAwaited(awaitable, cancellationToken);
+            return awaitable.IsCompleted
+                ? Task.CompletedTask
+                : FlushNowAsyncAwaited(awaitable, cancellationToken);
         }
 
-        private async Task FlushNowAsyncAwaited(ValueTask<FlushResult> awaitable, CancellationToken cancellationToken)
-        {
+        private async Task FlushNowAsyncAwaited(
+            ValueTask<FlushResult> awaitable,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 await awaitable;
@@ -112,7 +120,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             }
             catch (OperationCanceledException ex)
             {
-                Abort(new ConnectionAbortedException(CoreStrings.ConnectionOrStreamAbortedByCancellationToken, ex));
+                Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.ConnectionOrStreamAbortedByCancellationToken,
+                        ex
+                    )
+                );
             }
             catch
             {
@@ -121,8 +134,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             }
         }
 
-        private async Task AwaitLastFlushAndThenFlushAsync(Task lastFlushTask, PipeWriter pipeWriter, CancellationToken cancellationToken)
-        {
+        private async Task AwaitLastFlushAndThenFlushAsync(
+            Task lastFlushTask,
+            PipeWriter pipeWriter,
+            CancellationToken cancellationToken
+        ) {
             await lastFlushTask;
             await FlushNowAsync(pipeWriter, cancellationToken);
         }

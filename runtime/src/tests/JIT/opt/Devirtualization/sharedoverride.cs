@@ -5,8 +5,8 @@ using System;
 
 public class Base
 {
-    public virtual int Foo(int x) 
-    { 
+    public virtual int Foo(int x)
+    {
         return x + 1;
     }
 }
@@ -28,7 +28,7 @@ public class Derived<T> : Base
         {
             return x + 31;
         }
-        else 
+        else
         {
             return x + 22;
         }
@@ -46,7 +46,7 @@ public class Test
         var ds = new Derived<string>();
         var dx = new Derived<object>();
         var di = new Derived<int>();
-        var b  = new Base();
+        var b = new Base();
 
         int resultD = ds.Foo(1) + dx.Foo(1) + di.Foo(1) + b.Foo(1);
 

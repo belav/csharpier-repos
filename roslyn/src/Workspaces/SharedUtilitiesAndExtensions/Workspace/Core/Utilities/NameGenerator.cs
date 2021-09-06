@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static string EnsureUniqueness(
             string baseName,
             IEnumerable<string> reservedNames,
-            bool isCaseSensitive = true)
-        {
+            bool isCaseSensitive = true
+        ) {
             using var namesDisposer = ArrayBuilder<string>.GetInstance(out var names);
             using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(out var isFixed);
             using var nameSetDisposer = PooledHashSet<string>.GetInstance(out var nameSet);
@@ -44,9 +44,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static ImmutableArray<string> EnsureUniqueness(
             ImmutableArray<string> names,
             Func<string, bool>? canUse = null,
-            bool isCaseSensitive = true)
-        {
-            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(names.Length, fillWithValue: false, out var isFixed);
+            bool isCaseSensitive = true
+        ) {
+            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
+                names.Length,
+                fillWithValue: false,
+                out var isFixed
+            );
 
             var result = ArrayBuilder<string>.GetInstance(names.Length);
             result.AddRange(names);
@@ -64,9 +68,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ImmutableArray<string> names,
             ImmutableArray<bool> isFixed,
             Func<string, bool>? canUse = null,
-            bool isCaseSensitive = true)
-        {
-            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(names.Length, out var isFixedBuilder);
+            bool isCaseSensitive = true
+        ) {
+            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
+                names.Length,
+                out var isFixedBuilder
+            );
             isFixedBuilder.AddRange(isFixed);
 
             var result = ArrayBuilder<string>.GetInstance(names.Length);
@@ -87,8 +94,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ArrayBuilder<string> names,
             ArrayBuilder<bool> isFixed,
             Func<string, bool>? canUse = null,
-            bool isCaseSensitive = true)
-        {
+            bool isCaseSensitive = true
+        ) {
             canUse ??= Functions<string>.True;
 
             using var disposer = ArrayBuilder<int>.GetInstance(out var collisionIndices);
@@ -115,10 +122,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string name,
             Func<string, bool> canUse,
             bool isCaseSensitive,
-            ArrayBuilder<int> collisionIndices)
-        {
+            ArrayBuilder<int> collisionIndices
+        ) {
             var suffix = 1;
-            var comparer = isCaseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
+            var comparer = isCaseSensitive
+                ? StringComparer.Ordinal
+                : StringComparer.OrdinalIgnoreCase;
             for (var i = 0; i < collisionIndices.Count; i++)
             {
                 var collisionIndex = collisionIndices[i];
@@ -145,11 +154,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ArrayBuilder<string> names,
             string name,
             bool isCaseSensitive,
-            ArrayBuilder<int> collisionIndices)
-        {
+            ArrayBuilder<int> collisionIndices
+        ) {
             collisionIndices.Clear();
 
-            var comparer = isCaseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
+            var comparer = isCaseSensitive
+                ? StringComparer.Ordinal
+                : StringComparer.OrdinalIgnoreCase;
             for (int i = 0, n = names.Count; i < n; i++)
             {
                 if (comparer.Equals(names[i], name))
@@ -159,14 +170,20 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
         }
 
-        public static string GenerateUniqueName(string baseName, Func<string, bool> canUse)
-            => GenerateUniqueName(baseName, string.Empty, canUse);
+        public static string GenerateUniqueName(string baseName, Func<string, bool> canUse) =>
+            GenerateUniqueName(baseName, string.Empty, canUse);
 
-        public static string GenerateUniqueName(string baseName, ISet<string> names, StringComparer comparer)
-            => GenerateUniqueName(baseName, x => !names.Contains(x, comparer));
+        public static string GenerateUniqueName(
+            string baseName,
+            ISet<string> names,
+            StringComparer comparer
+        ) => GenerateUniqueName(baseName, x => !names.Contains(x, comparer));
 
-        public static string GenerateUniqueName(string baseName, string extension, Func<string, bool> canUse)
-        {
+        public static string GenerateUniqueName(
+            string baseName,
+            string extension,
+            Func<string, bool> canUse
+        ) {
             if (!string.IsNullOrEmpty(extension) && extension[0] != '.')
             {
                 extension = "." + extension;

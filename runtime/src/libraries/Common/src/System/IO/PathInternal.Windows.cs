@@ -119,8 +119,7 @@ namespace System.IO
             // If the path begins with any two separators is will be recognized and normalized and prepped with
             // "\??\" for internal usage correctly. "\??\" is recognized and handled, "/??/" is not.
             return IsExtended(path)
-                ||
-                (
+                || (
                     path.Length >= DevicePrefixLength
                     && IsDirectorySeparator(path[0])
                     && IsDirectorySeparator(path[1])
@@ -175,12 +174,14 @@ namespace System.IO
 
             // The only way to specify a fixed path that doesn't begin with two slashes
             // is the drive, colon, slash format- i.e. C:\
-            return !((path.Length >= 3)
+            return !(
+                (path.Length >= 3)
                 && (path[1] == Path.VolumeSeparatorChar)
                 && IsDirectorySeparator(path[2])
                 // To match old behavior we'll check the drive character for validity as the path is technically
                 // not qualified if you don't have a valid drive. "=:\" is the "=" file's default data stream.
-                && IsValidDriveChar(path[0]));
+                && IsValidDriveChar(path[0])
+            );
         }
 
         /// <summary>

@@ -49,7 +49,9 @@ namespace System.Runtime.CompilerServices
                 // an array of the exact same backing type. The cast to T[] will
                 // never fail.
 
-                dest = Unsafe.As<T[]>(Array.CreateInstance(array.GetType().GetElementType()!, length));
+                dest = Unsafe.As<T[]>(
+                    Array.CreateInstance(array.GetType().GetElementType()!, length)
+                );
             }
 
             // In either case, the newly-allocated array is the exact same type as the
@@ -60,14 +62,22 @@ namespace System.Runtime.CompilerServices
             Buffer.Memmove(
                 ref MemoryMarshal.GetArrayDataReference(dest),
                 ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), offset),
-                (uint)length);
+                (uint)length
+            );
 
             return dest;
         }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, object? userData)
-        {
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void ExecuteCodeWithGuaranteedCleanup(
+            TryCode code,
+            CleanupCode backoutCode,
+            object? userData
+        ) {
             if (code == null)
                 throw new ArgumentNullException(nameof(code));
             if (backoutCode == null)
@@ -80,34 +90,44 @@ namespace System.Runtime.CompilerServices
                 code(userData);
                 exceptionThrown = false;
             }
+
             finally
             {
                 backoutCode(userData, exceptionThrown);
             }
         }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void PrepareContractedDelegate(Delegate d)
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void PrepareContractedDelegate(Delegate d) { }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void ProbeForSufficientStack()
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void ProbeForSufficientStack() { }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void PrepareConstrainedRegions()
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void PrepareConstrainedRegions() { }
 
-        [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void PrepareConstrainedRegionsNoOP()
-        {
-        }
+        [Obsolete(
+            Obsoletions.ConstrainedExecutionRegionMessage,
+            DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void PrepareConstrainedRegionsNoOP() { }
 
         internal static bool IsPrimitiveType(this CorElementType et)
             // COR_ELEMENT_TYPE_I1,I2,I4,I8,U1,U2,U4,U8,R4,R8,I,U,CHAR,BOOLEAN
-            => ((1 << (int)et) & 0b_0011_0000_0000_0011_1111_1111_1100) != 0;
+            =>
+            ((1 << (int)et) & 0b_0011_0000_0000_0011_1111_1111_1100) != 0;
     }
 }

@@ -12,7 +12,11 @@ namespace System.Web.WebPages
     /// the stack would contain instances of the page. 
     /// The stack can be queried to identify properties of the current executing file such as the virtual path of the file.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "TemplateStack is a stack")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1711:IdentifiersShouldNotHaveIncorrectSuffix",
+        Justification = "TemplateStack is a stack"
+    )]
     public static class TemplateStack
     {
         private static readonly object _contextKey = new object();

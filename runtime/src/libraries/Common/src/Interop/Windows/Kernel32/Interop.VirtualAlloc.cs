@@ -9,6 +9,11 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [DllImport(Libraries.Kernel32, SetLastError = true, ExactSpelling = true)]
-        internal static extern IntPtr VirtualAlloc(SafeHandle lpAddress, UIntPtr dwSize, int flAllocationType, int flProtect);
+        internal static extern IntPtr VirtualAlloc(
+            SafeHandle lpAddress,
+            UIntPtr dwSize,
+            int flAllocationType,
+            int flProtect
+        );
     }
 }

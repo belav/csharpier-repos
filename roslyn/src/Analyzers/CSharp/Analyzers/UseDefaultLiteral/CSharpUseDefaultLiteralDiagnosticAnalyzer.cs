@@ -15,38 +15,60 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseDefaultLiteralDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class CSharpUseDefaultLiteralDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseDefaultLiteralDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseDefaultLiteralDiagnosticId,
-                   EnforceOnBuildValues.UseDefaultLiteral,
-                   CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Simplify_default_expression), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.default_expression_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseDefaultLiteralDiagnosticId,
+                EnforceOnBuildValues.UseDefaultLiteral,
+                CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Simplify_default_expression),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.default_expression_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.DefaultExpression);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.DefaultExpression);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
             var cancellationToken = context.CancellationToken;
             var syntaxTree = context.Node.SyntaxTree;
-            var preference = context.Options.GetOption(CSharpCodeStyleOptions.PreferSimpleDefaultExpression, syntaxTree, cancellationToken);
+            var preference = context.Options.GetOption(
+                CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
+                syntaxTree,
+                cancellationToken
+            );
 
             var parseOptions = (CSharpParseOptions)syntaxTree.Options;
             var defaultExpression = (DefaultExpressionSyntax)context.Node;
-            if (!defaultExpression.CanReplaceWithDefaultLiteral(parseOptions, preference.Value, context.SemanticModel, cancellationToken))
-            {
+            if (
+                !defaultExpression.CanReplaceWithDefaultLiteral(
+                    parseOptions,
+                    preference.Value,
+                    context.SemanticModel,
+                    cancellationToken
+                )
+            ) {
                 return;
             }
 
-            var fadeSpan = TextSpan.FromBounds(defaultExpression.OpenParenToken.SpanStart, defaultExpression.CloseParenToken.Span.End);
+            var fadeSpan = TextSpan.FromBounds(
+                defaultExpression.OpenParenToken.SpanStart,
+                defaultExpression.CloseParenToken.Span.End
+            );
 
             // Create a normal diagnostic that covers the entire default expression.
             context.ReportDiagnostic(
@@ -55,7 +77,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
                     defaultExpression.GetLocation(),
                     preference.Notification.Severity,
                     additionalLocations: ImmutableArray<Location>.Empty,
-                    additionalUnnecessaryLocations: ImmutableArray.Create(defaultExpression.SyntaxTree.GetLocation(fadeSpan))));
+                    additionalUnnecessaryLocations: ImmutableArray.Create(
+                        defaultExpression.SyntaxTree.GetLocation(fadeSpan)
+                    )
+                )
+            );
         }
     }
 }

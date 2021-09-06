@@ -12,7 +12,6 @@ namespace System.Drawing.Printing
         /// The paper size is defined by the user.
         /// </summary>
         Custom = 0,
-
         // I got this information from two places: MSDN's writeup of DEVMODE
         // (https://docs.microsoft.com/en-us/windows/desktop/api/wingdi/ns-wingdi-_devicemodea),
         // and the raw C++ header file (wingdi.h).  Beyond that, your guess

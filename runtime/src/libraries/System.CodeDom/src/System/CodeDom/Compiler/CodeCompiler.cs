@@ -8,8 +8,10 @@ namespace System.CodeDom.Compiler
 {
     public abstract class CodeCompiler : CodeGenerator, ICodeCompiler
     {
-        CompilerResults ICodeCompiler.CompileAssemblyFromDom(CompilerParameters options, CodeCompileUnit e)
-        {
+        CompilerResults ICodeCompiler.CompileAssemblyFromDom(
+            CompilerParameters options,
+            CodeCompileUnit e
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -19,14 +21,17 @@ namespace System.CodeDom.Compiler
             {
                 return FromDom(options, e);
             }
+
             finally
             {
                 options.TempFiles.SafeDelete();
             }
         }
 
-        CompilerResults ICodeCompiler.CompileAssemblyFromFile(CompilerParameters options, string fileName)
-        {
+        CompilerResults ICodeCompiler.CompileAssemblyFromFile(
+            CompilerParameters options,
+            string fileName
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -36,14 +41,17 @@ namespace System.CodeDom.Compiler
             {
                 return FromFile(options, fileName);
             }
+
             finally
             {
                 options.TempFiles.SafeDelete();
             }
         }
 
-        CompilerResults ICodeCompiler.CompileAssemblyFromSource(CompilerParameters options, string source)
-        {
+        CompilerResults ICodeCompiler.CompileAssemblyFromSource(
+            CompilerParameters options,
+            string source
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -53,14 +61,17 @@ namespace System.CodeDom.Compiler
             {
                 return FromSource(options, source);
             }
+
             finally
             {
                 options.TempFiles.SafeDelete();
             }
         }
 
-        CompilerResults ICodeCompiler.CompileAssemblyFromSourceBatch(CompilerParameters options, string[] sources)
-        {
+        CompilerResults ICodeCompiler.CompileAssemblyFromSourceBatch(
+            CompilerParameters options,
+            string[] sources
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -70,14 +81,17 @@ namespace System.CodeDom.Compiler
             {
                 return FromSourceBatch(options, sources);
             }
+
             finally
             {
                 options.TempFiles.SafeDelete();
             }
         }
 
-        CompilerResults ICodeCompiler.CompileAssemblyFromFileBatch(CompilerParameters options, string[] fileNames)
-        {
+        CompilerResults ICodeCompiler.CompileAssemblyFromFileBatch(
+            CompilerParameters options,
+            string[] fileNames
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -97,14 +111,17 @@ namespace System.CodeDom.Compiler
 
                 return FromFileBatch(options, fileNames);
             }
+
             finally
             {
                 options.TempFiles.SafeDelete();
             }
         }
 
-        CompilerResults ICodeCompiler.CompileAssemblyFromDomBatch(CompilerParameters options, CodeCompileUnit[] ea)
-        {
+        CompilerResults ICodeCompiler.CompileAssemblyFromDomBatch(
+            CompilerParameters options,
+            CodeCompileUnit[] ea
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -114,6 +131,7 @@ namespace System.CodeDom.Compiler
             {
                 return FromDomBatch(options, ea);
             }
+
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -161,8 +179,10 @@ namespace System.CodeDom.Compiler
             return FromSourceBatch(options, new string[1] { source });
         }
 
-        protected virtual CompilerResults FromDomBatch(CompilerParameters options, CodeCompileUnit[] ea)
-        {
+        protected virtual CompilerResults FromDomBatch(
+            CompilerParameters options,
+            CodeCompileUnit[] ea
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -183,7 +203,14 @@ namespace System.CodeDom.Compiler
 
                 ResolveReferencedAssemblies(options, ea[i]);
                 filenames[i] = options.TempFiles.AddExtension(i + FileExtension);
-                using (var fs = new FileStream(filenames[i], FileMode.Create, FileAccess.Write, FileShare.Read))
+                using (
+                    var fs = new FileStream(
+                        filenames[i],
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.Read
+                    )
+                )
                 using (var sw = new StreamWriter(fs, Encoding.UTF8))
                 {
                     ((ICodeGenerator)this).GenerateCodeFromCompileUnit(ea[i], sw, Options);
@@ -208,8 +235,10 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        protected virtual CompilerResults FromFileBatch(CompilerParameters options, string[] fileNames)
-        {
+        protected virtual CompilerResults FromFileBatch(
+            CompilerParameters options,
+            string[] fileNames
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -230,7 +259,14 @@ namespace System.CodeDom.Compiler
         {
             string responseFileName = options.TempFiles.AddExtension("cmdline");
 
-            using (var fs = new FileStream(responseFileName, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (
+                var fs = new FileStream(
+                    responseFileName,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read
+                )
+            )
             using (var sw = new StreamWriter(fs, Encoding.UTF8))
             {
                 sw.Write(cmdArgs);
@@ -240,8 +276,10 @@ namespace System.CodeDom.Compiler
             return "@\"" + responseFileName + "\"";
         }
 
-        protected virtual CompilerResults FromSourceBatch(CompilerParameters options, string[] sources)
-        {
+        protected virtual CompilerResults FromSourceBatch(
+            CompilerParameters options,
+            string[] sources
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -257,7 +295,9 @@ namespace System.CodeDom.Compiler
             for (int i = 0; i < sources.Length; i++)
             {
                 string name = options.TempFiles.AddExtension(i + FileExtension);
-                using (var fs = new FileStream(name, FileMode.Create, FileAccess.Write, FileShare.Read))
+                using (
+                    var fs = new FileStream(name, FileMode.Create, FileAccess.Write, FileShare.Read)
+                )
                 using (var sw = new StreamWriter(fs, Encoding.UTF8))
                 {
                     sw.Write(sources[i]);

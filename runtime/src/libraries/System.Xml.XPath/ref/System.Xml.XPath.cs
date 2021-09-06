@@ -14,15 +14,27 @@ namespace System.Xml.XPath
         public XPathDocument(string uri, System.Xml.XmlSpace space) { }
         public XPathDocument(System.Xml.XmlReader reader) { }
         public XPathDocument(System.Xml.XmlReader reader, System.Xml.XmlSpace space) { }
-        public System.Xml.XPath.XPathNavigator CreateNavigator() { throw null; }
+        public System.Xml.XPath.XPathNavigator CreateNavigator()
+        {
+            throw null;
+        }
     }
     public partial class XPathException : System.SystemException
     {
         public XPathException() { }
-        protected XPathException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected XPathException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
         public XPathException(string? message) { }
         public XPathException(string? message, System.Exception? innerException) { }
-        public override string Message { get { throw null; } }
-        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public override string Message
+        {
+            get { throw null; }
+        }
+        public override void GetObjectData(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
     }
 }

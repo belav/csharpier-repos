@@ -33,7 +33,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             };
         }
 
-        [Benchmark(Baseline=true, OperationsPerInvoke = 5)]
+        [Benchmark(Baseline = true, OperationsPerInvoke = 5)]
         public int Baseline()
         {
             var strings = _strings;

@@ -31,8 +31,10 @@ namespace System.Web.Http.ExceptionHandling
             get { return _innerHandler; }
         }
 
-        public Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
-        {
+        public Task HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        ) {
             if (context != null)
             {
                 ExceptionContext exceptionContext = context.ExceptionContext;
@@ -93,8 +95,13 @@ namespace System.Web.Http.ExceptionHandling
             IEnumerable<MediaTypeFormatter> formatters = configuration.Formatters;
             Contract.Assert(formatters != null);
 
-            return new ExceptionResult(exception, requestContext.IncludeErrorDetail, contentNegotiator, request,
-                formatters);
+            return new ExceptionResult(
+                exception,
+                requestContext.IncludeErrorDetail,
+                contentNegotiator,
+                request,
+                formatters
+            );
         }
     }
 }

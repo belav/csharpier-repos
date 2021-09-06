@@ -5,7 +5,6 @@
 using System;
 using System.Collections;
 
-
 namespace Test
 {
     internal struct AA
@@ -17,11 +16,12 @@ namespace Test
             {
                 goto EOM;
             }
+
             finally
             {
                 throw new Exception();
             }
-        EOM:
+            EOM:
             if (((Array)new Object()).Clone() == null)
                 return 1;
             return 0;

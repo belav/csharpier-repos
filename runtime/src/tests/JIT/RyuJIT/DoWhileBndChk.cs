@@ -23,8 +23,7 @@ public class Program
             {
                 a[i] = 0;
                 ++i;
-            }
-            while (i < a.Length);
+            } while (i < a.Length);
         }
         catch (Exception e)
         {

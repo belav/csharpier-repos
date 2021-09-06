@@ -49,8 +49,7 @@ namespace System.Collections.Immutable
                 T interlockedResult = Interlocked.CompareExchange(ref location, newValue, oldValue);
                 successful = ReferenceEquals(oldValue, interlockedResult);
                 oldValue = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             return true;
         }
@@ -75,7 +74,11 @@ namespace System.Collections.Immutable
         /// <c>false</c> if the location's value remained the same because the last
         /// invocation of <paramref name="transformer"/> returned the existing value.
         /// </returns>
-        public static bool Update<T, TArg>(ref T location, Func<T, TArg, T> transformer, TArg transformerArgument) where T : class?
+        public static bool Update<T, TArg>(
+            ref T location,
+            Func<T, TArg, T> transformer,
+            TArg transformerArgument
+        ) where T : class?
         {
             Requires.NotNull(transformer, nameof(transformer));
 
@@ -93,8 +96,7 @@ namespace System.Collections.Immutable
                 T interlockedResult = Interlocked.CompareExchange(ref location, newValue, oldValue);
                 successful = ReferenceEquals(oldValue, interlockedResult);
                 oldValue = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             return true;
         }
@@ -117,8 +119,10 @@ namespace System.Collections.Immutable
         /// <c>false</c> if the location's value remained the same because the last
         /// invocation of <paramref name="transformer"/> returned the existing value.
         /// </returns>
-        public static bool Update<T>(ref ImmutableArray<T> location, Func<ImmutableArray<T>, ImmutableArray<T>> transformer)
-        {
+        public static bool Update<T>(
+            ref ImmutableArray<T> location,
+            Func<ImmutableArray<T>, ImmutableArray<T>> transformer
+        ) {
             Requires.NotNull(transformer, nameof(transformer));
 
             bool successful;
@@ -132,11 +136,14 @@ namespace System.Collections.Immutable
                     return false;
                 }
 
-                T[]? interlockedResult = Interlocked.CompareExchange(ref Unsafe.AsRef(in location.array), newImmutableArray.array, oldArray);
+                T[]? interlockedResult = Interlocked.CompareExchange(
+                    ref Unsafe.AsRef(in location.array),
+                    newImmutableArray.array,
+                    oldArray
+                );
                 successful = ReferenceEquals(oldArray, interlockedResult);
                 oldArray = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             return true;
         }
@@ -161,26 +168,35 @@ namespace System.Collections.Immutable
         /// <c>false</c> if the location's value remained the same because the last
         /// invocation of <paramref name="transformer"/> returned the existing value.
         /// </returns>
-        public static bool Update<T, TArg>(ref ImmutableArray<T> location, Func<ImmutableArray<T>, TArg, ImmutableArray<T>> transformer, TArg transformerArgument)
-        {
+        public static bool Update<T, TArg>(
+            ref ImmutableArray<T> location,
+            Func<ImmutableArray<T>, TArg, ImmutableArray<T>> transformer,
+            TArg transformerArgument
+        ) {
             Requires.NotNull(transformer, nameof(transformer));
 
             bool successful;
             T[]? oldArray = Volatile.Read(ref Unsafe.AsRef(in location.array));
             do
             {
-                ImmutableArray<T> newImmutableArray = transformer(new ImmutableArray<T>(oldArray), transformerArgument);
+                ImmutableArray<T> newImmutableArray = transformer(
+                    new ImmutableArray<T>(oldArray),
+                    transformerArgument
+                );
                 if (ReferenceEquals(oldArray, newImmutableArray.array))
                 {
                     // No change was actually required.
                     return false;
                 }
 
-                T[]? interlockedResult = Interlocked.CompareExchange(ref Unsafe.AsRef(in location.array), newImmutableArray.array, oldArray);
+                T[]? interlockedResult = Interlocked.CompareExchange(
+                    ref Unsafe.AsRef(in location.array),
+                    newImmutableArray.array,
+                    oldArray
+                );
                 successful = ReferenceEquals(oldArray, interlockedResult);
                 oldArray = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             return true;
         }
@@ -194,9 +210,13 @@ namespace System.Collections.Immutable
         /// <param name="location">The field or local variable to change.</param>
         /// <param name="value">The new value to assign.</param>
         /// <returns>The prior value at the specified <paramref name="location"/>.</returns>
-        public static ImmutableArray<T> InterlockedExchange<T>(ref ImmutableArray<T> location, ImmutableArray<T> value)
-        {
-            return new ImmutableArray<T>(Interlocked.Exchange(ref Unsafe.AsRef(in location.array), value.array));
+        public static ImmutableArray<T> InterlockedExchange<T>(
+            ref ImmutableArray<T> location,
+            ImmutableArray<T> value
+        ) {
+            return new ImmutableArray<T>(
+                Interlocked.Exchange(ref Unsafe.AsRef(in location.array), value.array)
+            );
         }
 
         /// <summary>
@@ -208,9 +228,18 @@ namespace System.Collections.Immutable
         /// <param name="value">The new value to assign.</param>
         /// <param name="comparand">The value to check equality for before assigning.</param>
         /// <returns>The prior value at the specified <paramref name="location"/>.</returns>
-        public static ImmutableArray<T> InterlockedCompareExchange<T>(ref ImmutableArray<T> location, ImmutableArray<T> value, ImmutableArray<T> comparand)
-        {
-            return new ImmutableArray<T>(Interlocked.CompareExchange(ref Unsafe.AsRef(in location.array), value.array, comparand.array));
+        public static ImmutableArray<T> InterlockedCompareExchange<T>(
+            ref ImmutableArray<T> location,
+            ImmutableArray<T> value,
+            ImmutableArray<T> comparand
+        ) {
+            return new ImmutableArray<T>(
+                Interlocked.CompareExchange(
+                    ref Unsafe.AsRef(in location.array),
+                    value.array,
+                    comparand.array
+                )
+            );
         }
 
         /// <summary>
@@ -221,9 +250,15 @@ namespace System.Collections.Immutable
         /// <param name="location">The field or local variable to change.</param>
         /// <param name="value">The new value to assign.</param>
         /// <returns>True if the field was assigned the specified value; <c>false</c> if it was previously initialized.</returns>
-        public static bool InterlockedInitialize<T>(ref ImmutableArray<T> location, ImmutableArray<T> value)
-        {
-            return InterlockedCompareExchange(ref location, value, default(ImmutableArray<T>)).IsDefault;
+        public static bool InterlockedInitialize<T>(
+            ref ImmutableArray<T> location,
+            ImmutableArray<T> value
+        ) {
+            return InterlockedCompareExchange(
+                ref location,
+                value,
+                default(ImmutableArray<T>)
+            ).IsDefault;
         }
 
         #endregion
@@ -241,7 +276,12 @@ namespace System.Collections.Immutable
         /// <param name="valueFactory">The function to execute to obtain the value to insert into the dictionary if the key is not found.</param>
         /// <param name="factoryArgument">The argument to pass to the value factory.</param>
         /// <returns>The value obtained from the dictionary or <paramref name="valueFactory"/> if it was not present.</returns>
-        public static TValue GetOrAdd<TKey, TValue, TArg>(ref ImmutableDictionary<TKey, TValue> location, TKey key, Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TKey : notnull
+        public static TValue GetOrAdd<TKey, TValue, TArg>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            Func<TKey, TArg, TValue> valueFactory,
+            TArg factoryArgument
+        ) where TKey : notnull
         {
             Requires.NotNull(valueFactory, nameof(valueFactory));
 
@@ -270,7 +310,11 @@ namespace System.Collections.Immutable
         /// This delegate will not be invoked more than once.
         /// </param>
         /// <returns>The value obtained from the dictionary or <paramref name="valueFactory"/> if it was not present.</returns>
-        public static TValue GetOrAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, Func<TKey, TValue> valueFactory) where TKey : notnull
+        public static TValue GetOrAdd<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            Func<TKey, TValue> valueFactory
+        ) where TKey : notnull
         {
             Requires.NotNull(valueFactory, nameof(valueFactory));
 
@@ -296,7 +340,11 @@ namespace System.Collections.Immutable
         /// <param name="key">The key for the value to retrieve or add.</param>
         /// <param name="value">The value to add to the dictionary if one is not already present.</param>
         /// <returns>The value obtained from the dictionary or <paramref name="value"/> if it was not present.</returns>
-        public static TValue GetOrAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue value) where TKey : notnull
+        public static TValue GetOrAdd<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            TValue value
+        ) where TKey : notnull
         {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
@@ -310,11 +358,14 @@ namespace System.Collections.Immutable
                 }
 
                 var updatedCollection = priorCollection.Add(key, value);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             // We won the race-condition and have updated the collection.
             // Return the value that is in the collection (as of the Interlocked operation).
@@ -331,7 +382,12 @@ namespace System.Collections.Immutable
         /// <param name="addValueFactory">The function that receives the key and returns a new value to add to the dictionary when no value previously exists.</param>
         /// <param name="updateValueFactory">The function that receives the key and prior value and returns the new value with which to update the dictionary.</param>
         /// <returns>The added or updated value.</returns>
-        public static TValue AddOrUpdate<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, Func<TKey, TValue> addValueFactory, Func<TKey, TValue, TValue> updateValueFactory) where TKey : notnull
+        public static TValue AddOrUpdate<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            Func<TKey, TValue> addValueFactory,
+            Func<TKey, TValue, TValue> updateValueFactory
+        ) where TKey : notnull
         {
             Requires.NotNull(addValueFactory, nameof(addValueFactory));
             Requires.NotNull(updateValueFactory, nameof(updateValueFactory));
@@ -358,11 +414,14 @@ namespace System.Collections.Immutable
                 {
                     return oldValue;
                 }
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             // We won the race-condition and have updated the collection.
             // Return the value that is in the collection (as of the Interlocked operation).
@@ -379,7 +438,12 @@ namespace System.Collections.Immutable
         /// <param name="addValue">The value to use if no previous value exists.</param>
         /// <param name="updateValueFactory">The function that receives the key and prior value and returns the new value with which to update the dictionary.</param>
         /// <returns>The added or updated value.</returns>
-        public static TValue AddOrUpdate<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue addValue, Func<TKey, TValue, TValue> updateValueFactory) where TKey : notnull
+        public static TValue AddOrUpdate<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            TValue addValue,
+            Func<TKey, TValue, TValue> updateValueFactory
+        ) where TKey : notnull
         {
             Requires.NotNull(updateValueFactory, nameof(updateValueFactory));
 
@@ -405,11 +469,14 @@ namespace System.Collections.Immutable
                 {
                     return oldValue;
                 }
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
-            }
-            while (!successful);
+            } while (!successful);
 
             // We won the race-condition and have updated the collection.
             // Return the value that is in the collection (as of the Interlocked operation).
@@ -425,7 +492,11 @@ namespace System.Collections.Immutable
         /// <param name="key">The key to add, if is not already defined in the dictionary.</param>
         /// <param name="value">The value to add.</param>
         /// <returns><c>true</c> if the key was not previously set in the dictionary and the value was set; <c>false</c> otherwise.</returns>
-        public static bool TryAdd<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue value) where TKey : notnull
+        public static bool TryAdd<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            TValue value
+        ) where TKey : notnull
         {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
@@ -439,7 +510,11 @@ namespace System.Collections.Immutable
                 }
 
                 var updatedCollection = priorCollection.Add(key, value);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
@@ -457,7 +532,12 @@ namespace System.Collections.Immutable
         /// <param name="newValue">The new value to set.</param>
         /// <param name="comparisonValue">The value that must already be set in the dictionary in order for the update to succeed.</param>
         /// <returns><c>true</c> if the key and comparison value were present in the dictionary and the update was made; <c>false</c> otherwise.</returns>
-        public static bool TryUpdate<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, TValue newValue, TValue comparisonValue) where TKey : notnull
+        public static bool TryUpdate<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            TValue newValue,
+            TValue comparisonValue
+        ) where TKey : notnull
         {
             var valueComparer = EqualityComparer<TValue>.Default;
             var priorCollection = Volatile.Read(ref location);
@@ -467,14 +547,20 @@ namespace System.Collections.Immutable
                 Requires.NotNull(priorCollection, nameof(location));
 
                 TValue priorValue;
-                if (!priorCollection.TryGetValue(key, out priorValue!) || !valueComparer.Equals(priorValue, comparisonValue))
-                {
+                if (
+                    !priorCollection.TryGetValue(key, out priorValue!)
+                    || !valueComparer.Equals(priorValue, comparisonValue)
+                ) {
                     // The key isn't in the dictionary, or its current value doesn't match what the caller expected.
                     return false;
                 }
 
                 var updatedCollection = priorCollection.SetItem(key, newValue);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
@@ -491,7 +577,11 @@ namespace System.Collections.Immutable
         /// <param name="key">The key to remove.</param>
         /// <param name="value">Receives the value from the pre-existing entry, if one exists.</param>
         /// <returns><c>true</c> if the key was found and removed; <c>false</c> otherwise.</returns>
-        public static bool TryRemove<TKey, TValue>(ref ImmutableDictionary<TKey, TValue> location, TKey key, [MaybeNullWhen(false)] out TValue value) where TKey : notnull
+        public static bool TryRemove<TKey, TValue>(
+            ref ImmutableDictionary<TKey, TValue> location,
+            TKey key,
+            [MaybeNullWhen(false)] out TValue value
+        ) where TKey : notnull
         {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
@@ -505,7 +595,11 @@ namespace System.Collections.Immutable
                 }
 
                 var updatedCollection = priorCollection.Remove(key);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
@@ -524,8 +618,10 @@ namespace System.Collections.Immutable
         /// <param name="location">The variable or field to atomically update.</param>
         /// <param name="value">The value popped from the stack, if it was non-empty.</param>
         /// <returns><c>true</c> if an element was removed from the stack; <c>false</c> otherwise.</returns>
-        public static bool TryPop<T>(ref ImmutableStack<T> location, [MaybeNullWhen(false)] out T value)
-        {
+        public static bool TryPop<T>(
+            ref ImmutableStack<T> location,
+            [MaybeNullWhen(false)] out T value
+        ) {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
             do
@@ -539,7 +635,11 @@ namespace System.Collections.Immutable
                 }
 
                 var updatedCollection = priorCollection.Pop(out value);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
@@ -562,7 +662,11 @@ namespace System.Collections.Immutable
                 Requires.NotNull(priorCollection, nameof(location));
 
                 var updatedCollection = priorCollection.Push(value);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
@@ -579,8 +683,10 @@ namespace System.Collections.Immutable
         /// <param name="location">The variable or field to atomically update.</param>
         /// <param name="value">Receives the value from the head of the queue, if the queue is non-empty.</param>
         /// <returns><c>true</c> if the queue was not empty and the head element was removed; <c>false</c> otherwise.</returns>
-        public static bool TryDequeue<T>(ref ImmutableQueue<T> location, [MaybeNullWhen(false)] out T value)
-        {
+        public static bool TryDequeue<T>(
+            ref ImmutableQueue<T> location,
+            [MaybeNullWhen(false)] out T value
+        ) {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
             do
@@ -594,7 +700,11 @@ namespace System.Collections.Immutable
                 }
 
                 var updatedCollection = priorCollection.Dequeue(out value);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
@@ -617,7 +727,11 @@ namespace System.Collections.Immutable
                 Requires.NotNull(priorCollection, nameof(location));
 
                 var updatedCollection = priorCollection.Enqueue(value);
-                var interlockedResult = Interlocked.CompareExchange(ref location, updatedCollection, priorCollection);
+                var interlockedResult = Interlocked.CompareExchange(
+                    ref location,
+                    updatedCollection,
+                    priorCollection
+                );
                 successful = object.ReferenceEquals(priorCollection, interlockedResult);
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);

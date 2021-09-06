@@ -9,26 +9,41 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         protected abstract RazorLanguageVersion Version { get; }
 
-        protected virtual void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
-        {
-        }
+        protected virtual void ConfigureProjectEngine(RazorProjectEngineBuilder builder) { }
 
         protected RazorEngine CreateEngine() => CreateProjectEngine().Engine;
 
         protected RazorProjectEngine CreateProjectEngine()
         {
-            var configuration = RazorConfiguration.Create(Version, "test", Array.Empty<RazorExtension>());
-            return RazorProjectEngine.Create(configuration, RazorProjectFileSystem.Empty, ConfigureProjectEngine);
+            var configuration = RazorConfiguration.Create(
+                Version,
+                "test",
+                Array.Empty<RazorExtension>()
+            );
+            return RazorProjectEngine.Create(
+                configuration,
+                RazorProjectFileSystem.Empty,
+                ConfigureProjectEngine
+            );
         }
 
-        protected RazorProjectEngine CreateProjectEngine(Action<RazorProjectEngineBuilder> configure)
-        {
-            var configuration = RazorConfiguration.Create(Version, "test", Array.Empty<RazorExtension>());
-            return RazorProjectEngine.Create(configuration, RazorProjectFileSystem.Empty, b =>
-            {
-                ConfigureProjectEngine(b);
-                configure?.Invoke(b);
-            });
+        protected RazorProjectEngine CreateProjectEngine(
+            Action<RazorProjectEngineBuilder> configure
+        ) {
+            var configuration = RazorConfiguration.Create(
+                Version,
+                "test",
+                Array.Empty<RazorExtension>()
+            );
+            return RazorProjectEngine.Create(
+                configuration,
+                RazorProjectFileSystem.Empty,
+                b =>
+                {
+                    ConfigureProjectEngine(b);
+                    configure?.Invoke(b);
+                }
+            );
         }
     }
 }

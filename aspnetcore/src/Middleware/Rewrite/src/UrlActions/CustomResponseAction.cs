@@ -19,14 +19,18 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             StatusCode = statusCode;
         }
 
-        public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
-        {
+        public override void ApplyAction(
+            RewriteContext context,
+            BackReferenceCollection? ruleBackReferences,
+            BackReferenceCollection? conditionBackReferences
+        ) {
             var response = context.HttpContext.Response;
             response.StatusCode = StatusCode;
 
             if (!string.IsNullOrEmpty(StatusReason))
             {
-                context.HttpContext.Features.Get<IHttpResponseFeature>()!.ReasonPhrase = StatusReason;
+                context.HttpContext.Features.Get<IHttpResponseFeature>()!.ReasonPhrase =
+                    StatusReason;
             }
 
             if (!string.IsNullOrEmpty(StatusDescription))

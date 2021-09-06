@@ -67,17 +67,33 @@ namespace Microsoft.AspNetCore.BrowserTesting
         }
 
         public BrowserContextOptions GetContextOptions(string browser, string contextName) =>
-            Combine(GetContextOptions(browser.ToString()), ContextOptions.TryGetValue(contextName, out var context) ? context : throw new InvalidOperationException("Invalid context name"));
+            Combine(
+                GetContextOptions(browser.ToString()),
+                ContextOptions.TryGetValue(contextName, out var context)
+                    ? context
+                    : throw new InvalidOperationException("Invalid context name")
+            );
 
-        public BrowserContextOptions GetContextOptions(string browser, string contextName, BrowserContextOptions options) =>
-            Combine(GetContextOptions(browser, contextName), options);
+        public BrowserContextOptions GetContextOptions(
+            string browser,
+            string contextName,
+            BrowserContextOptions options
+        ) => Combine(GetContextOptions(browser, contextName), options);
 
         private void Load(IConfiguration configuration)
         {
             TimeoutInMilliseconds = configuration.GetValue(nameof(TimeoutInMilliseconds), 30000);
-            TimeoutAfterFirstFailureInMilliseconds = configuration.GetValue(nameof(TimeoutAfterFirstFailureInMilliseconds), 10000);
+            TimeoutAfterFirstFailureInMilliseconds = configuration.GetValue(
+                nameof(TimeoutAfterFirstFailureInMilliseconds),
+                10000
+            );
             IsDisabled = configuration.GetValue(nameof(IsDisabled), false);
-            BaseArtifactsFolder = Path.GetFullPath(configuration.GetValue(nameof(BaseArtifactsFolder), Path.Combine(Directory.GetCurrentDirectory(), "playwright")));
+            BaseArtifactsFolder = Path.GetFullPath(
+                configuration.GetValue(
+                    nameof(BaseArtifactsFolder),
+                    Path.Combine(Directory.GetCurrentDirectory(), "playwright")
+                )
+            );
             Directory.CreateDirectory(BaseArtifactsFolder);
 
             var defaultBrowserOptions = configuration.GetSection(nameof(GlobalBrowserOptions));
@@ -89,7 +105,9 @@ namespace Microsoft.AspNetCore.BrowserTesting
             var defaultContextOptions = configuration.GetSection(nameof(GlobalContextOptions));
             if (defaultContextOptions.Exists())
             {
-                GlobalContextOptions = LoadContextOptions(configuration.GetSection(nameof(GlobalContextOptions)));
+                GlobalContextOptions = LoadContextOptions(
+                    configuration.GetSection(nameof(GlobalContextOptions))
+                );
             }
 
             var browsersOptions = configuration.GetSection(nameof(BrowserOptions));
@@ -114,7 +132,10 @@ namespace Microsoft.AspNetCore.BrowserTesting
                 var browserOptions = new BrowserOptions(
                     browserKind,
                     LoadBrowserLaunchOptions(browser),
-                    defaultContextOptionsSection.Exists() ? LoadContextOptions(defaultContextOptionsSection) : null);
+                    defaultContextOptionsSection.Exists()
+                        ? LoadContextOptions(defaultContextOptionsSection)
+                        : null
+                );
 
                 BrowserOptions.Add(browserName, browserOptions);
             }
@@ -126,38 +147,87 @@ namespace Microsoft.AspNetCore.BrowserTesting
             }
         }
 
-        private BrowserContextOptions LoadContextOptions(IConfiguration configuration) => EnsureFoldersExist(new BrowserContextOptions
-        {
-            Proxy = BindValue<ProxySettings>(configuration, nameof(BrowserContextOptions.Proxy)),
-            RecordVideo = BindValue<RecordVideoOptions>(configuration, nameof(BrowserContextOptions.RecordVideo)),
-            RecordHar = BindValue<RecordHarOptions>(configuration, nameof(BrowserContextOptions.RecordHar)),
-            ExtraHTTPHeaders = BindMultiValueMap(
-                configuration.GetSection(nameof(BrowserContextOptions.ExtraHTTPHeaders)),
-                argsMap => argsMap.ToDictionary(kvp => kvp.Key, kvp => string.Join(", ", kvp.Value))),
-            Locale = configuration.GetValue<string>(nameof(BrowserContextOptions.Locale)),
-            ColorScheme = configuration.GetValue<ColorScheme?>(nameof(BrowserContextOptions.ColorScheme)),
-            AcceptDownloads = configuration.GetValue<bool?>(nameof(BrowserContextOptions.AcceptDownloads)),
-            HasTouch = configuration.GetValue<bool?>(nameof(BrowserContextOptions.HasTouch)),
-            HttpCredentials = configuration.GetValue<Credentials>(nameof(BrowserContextOptions.HttpCredentials)),
-            DeviceScaleFactor = configuration.GetValue<decimal?>(nameof(BrowserContextOptions.DeviceScaleFactor)),
-            Offline = configuration.GetValue<bool?>(nameof(BrowserContextOptions.Offline)),
-            IsMobile = configuration.GetValue<bool?>(nameof(BrowserContextOptions.IsMobile)),
-
-            // TODO: Map this properly
-            Permissions = configuration.GetValue<ContextPermission[]>(nameof(BrowserContextOptions.Permissions)),
-
-            Geolocation = BindValue<Geolocation>(configuration, nameof(BrowserContextOptions.Geolocation)),
-            TimezoneId = configuration.GetValue<string>(nameof(BrowserContextOptions.TimezoneId)),
-            IgnoreHTTPSErrors = configuration.GetValue<bool?>(nameof(BrowserContextOptions.IgnoreHTTPSErrors)),
-            JavaScriptEnabled = configuration.GetValue<bool?>(nameof(BrowserContextOptions.JavaScriptEnabled)),
-            BypassCSP = configuration.GetValue<bool?>(nameof(BrowserContextOptions.BypassCSP)),
-            UserAgent = configuration.GetValue<string>(nameof(BrowserContextOptions.UserAgent)),
-            Viewport = BindValue<ViewportSize>(configuration, nameof(BrowserContextOptions.Viewport)),
-            StorageStatePath = configuration.GetValue<string>(nameof(BrowserContextOptions.StorageStatePath)),
-
-            // TODO: Map this properly
-            StorageState = BindValue<StorageState>(configuration, nameof(BrowserContextOptions.StorageState))
-        });
+        private BrowserContextOptions LoadContextOptions(IConfiguration configuration) =>
+            EnsureFoldersExist(
+                new BrowserContextOptions
+                {
+                    Proxy = BindValue<ProxySettings>(
+                        configuration,
+                        nameof(BrowserContextOptions.Proxy)
+                    ),
+                    RecordVideo = BindValue<RecordVideoOptions>(
+                        configuration,
+                        nameof(BrowserContextOptions.RecordVideo)
+                    ),
+                    RecordHar = BindValue<RecordHarOptions>(
+                        configuration,
+                        nameof(BrowserContextOptions.RecordHar)
+                    ),
+                    ExtraHTTPHeaders = BindMultiValueMap(
+                        configuration.GetSection(nameof(BrowserContextOptions.ExtraHTTPHeaders)),
+                        argsMap =>
+                            argsMap.ToDictionary(
+                                kvp => kvp.Key,
+                                kvp => string.Join(", ", kvp.Value)
+                            )
+                    ),
+                    Locale = configuration.GetValue<string>(nameof(BrowserContextOptions.Locale)),
+                    ColorScheme = configuration.GetValue<ColorScheme?>(
+                        nameof(BrowserContextOptions.ColorScheme)
+                    ),
+                    AcceptDownloads = configuration.GetValue<bool?>(
+                        nameof(BrowserContextOptions.AcceptDownloads)
+                    ),
+                    HasTouch = configuration.GetValue<bool?>(
+                        nameof(BrowserContextOptions.HasTouch)
+                    ),
+                    HttpCredentials = configuration.GetValue<Credentials>(
+                        nameof(BrowserContextOptions.HttpCredentials)
+                    ),
+                    DeviceScaleFactor = configuration.GetValue<decimal?>(
+                        nameof(BrowserContextOptions.DeviceScaleFactor)
+                    ),
+                    Offline = configuration.GetValue<bool?>(nameof(BrowserContextOptions.Offline)),
+                    IsMobile = configuration.GetValue<bool?>(
+                        nameof(BrowserContextOptions.IsMobile)
+                    ),
+                    // TODO: Map this properly
+                    Permissions = configuration.GetValue<ContextPermission[]>(
+                        nameof(BrowserContextOptions.Permissions)
+                    ),
+                    Geolocation = BindValue<Geolocation>(
+                        configuration,
+                        nameof(BrowserContextOptions.Geolocation)
+                    ),
+                    TimezoneId = configuration.GetValue<string>(
+                        nameof(BrowserContextOptions.TimezoneId)
+                    ),
+                    IgnoreHTTPSErrors = configuration.GetValue<bool?>(
+                        nameof(BrowserContextOptions.IgnoreHTTPSErrors)
+                    ),
+                    JavaScriptEnabled = configuration.GetValue<bool?>(
+                        nameof(BrowserContextOptions.JavaScriptEnabled)
+                    ),
+                    BypassCSP = configuration.GetValue<bool?>(
+                        nameof(BrowserContextOptions.BypassCSP)
+                    ),
+                    UserAgent = configuration.GetValue<string>(
+                        nameof(BrowserContextOptions.UserAgent)
+                    ),
+                    Viewport = BindValue<ViewportSize>(
+                        configuration,
+                        nameof(BrowserContextOptions.Viewport)
+                    ),
+                    StorageStatePath = configuration.GetValue<string>(
+                        nameof(BrowserContextOptions.StorageStatePath)
+                    ),
+                    // TODO: Map this properly
+                    StorageState = BindValue<StorageState>(
+                        configuration,
+                        nameof(BrowserContextOptions.StorageState)
+                    )
+                }
+            );
 
         private static T BindValue<T>(IConfiguration configuration, string key) where T : new()
         {
@@ -167,16 +237,21 @@ namespace Microsoft.AspNetCore.BrowserTesting
             return section.Exists() ? instance : default;
         }
 
-        private BrowserContextOptions EnsureFoldersExist(BrowserContextOptions browserContextOptions)
-        {
+        private BrowserContextOptions EnsureFoldersExist(
+            BrowserContextOptions browserContextOptions
+        ) {
             if (browserContextOptions?.RecordVideo?.Dir != null)
             {
-                browserContextOptions.RecordVideo.Dir = EnsureFolderExists(browserContextOptions.RecordVideo.Dir);
+                browserContextOptions.RecordVideo.Dir = EnsureFolderExists(
+                    browserContextOptions.RecordVideo.Dir
+                );
             }
 
             if (browserContextOptions?.RecordHar?.Path != null)
             {
-                browserContextOptions.RecordHar.Path = EnsureFolderExists(browserContextOptions.RecordHar.Path);
+                browserContextOptions.RecordHar.Path = EnsureFolderExists(
+                    browserContextOptions.RecordHar.Path
+                );
             }
 
             return browserContextOptions;
@@ -197,32 +272,50 @@ namespace Microsoft.AspNetCore.BrowserTesting
             }
         }
 
-        private LaunchOptions LoadBrowserLaunchOptions(IConfiguration configuration) => new LaunchOptions
-        {
-            IgnoreDefaultArgs = BindArgumentMap(configuration.GetSection(nameof(LaunchOptions.IgnoreAllDefaultArgs))),
-            ChromiumSandbox = configuration.GetValue<bool?>(nameof(LaunchOptions.ChromiumSandbox)),
-            HandleSIGHUP = configuration.GetValue<bool?>(nameof(LaunchOptions.HandleSIGHUP)),
-            HandleSIGTERM = configuration.GetValue<bool?>(nameof(LaunchOptions.HandleSIGTERM)),
-            HandleSIGINT = configuration.GetValue<bool?>(nameof(LaunchOptions.HandleSIGINT)),
-            IgnoreAllDefaultArgs = configuration.GetValue<bool?>(nameof(LaunchOptions.IgnoreAllDefaultArgs)),
-            SlowMo = configuration.GetValue<int?>(nameof(LaunchOptions.SlowMo)),
-            Env = configuration.GetValue<Dictionary<string, string>>(nameof(LaunchOptions.Env)),
-            DumpIO = configuration.GetValue<bool?>(nameof(LaunchOptions.DumpIO)),
-            IgnoreHTTPSErrors = configuration.GetValue<bool?>(nameof(LaunchOptions.IgnoreHTTPSErrors)),
-            DownloadsPath = configuration.GetValue<string>(nameof(LaunchOptions.DownloadsPath)),
-            ExecutablePath = configuration.GetValue<string>(nameof(LaunchOptions.ExecutablePath)),
-            Devtools = configuration.GetValue<bool?>(nameof(LaunchOptions.Devtools)),
-            UserDataDir = configuration.GetValue<string>(nameof(LaunchOptions.UserDataDir)),
-            Args = BindMultiValueMap(
-                configuration.GetSection(nameof(LaunchOptions.Args)),
-                argsMap => argsMap.SelectMany(argNameValue => argNameValue.Value.Prepend(argNameValue.Key)).ToArray()),
-            Headless = configuration.GetValue<bool?>(nameof(LaunchOptions.Headless)),
-            Timeout = configuration.GetValue<int?>(nameof(LaunchOptions.Timeout)),
-            Proxy = configuration.GetValue<ProxySettings>(nameof(LaunchOptions.Proxy))
-        };
+        private LaunchOptions LoadBrowserLaunchOptions(IConfiguration configuration) =>
+            new LaunchOptions
+            {
+                IgnoreDefaultArgs = BindArgumentMap(
+                    configuration.GetSection(nameof(LaunchOptions.IgnoreAllDefaultArgs))
+                ),
+                ChromiumSandbox = configuration.GetValue<bool?>(
+                    nameof(LaunchOptions.ChromiumSandbox)
+                ),
+                HandleSIGHUP = configuration.GetValue<bool?>(nameof(LaunchOptions.HandleSIGHUP)),
+                HandleSIGTERM = configuration.GetValue<bool?>(nameof(LaunchOptions.HandleSIGTERM)),
+                HandleSIGINT = configuration.GetValue<bool?>(nameof(LaunchOptions.HandleSIGINT)),
+                IgnoreAllDefaultArgs = configuration.GetValue<bool?>(
+                    nameof(LaunchOptions.IgnoreAllDefaultArgs)
+                ),
+                SlowMo = configuration.GetValue<int?>(nameof(LaunchOptions.SlowMo)),
+                Env = configuration.GetValue<Dictionary<string, string>>(nameof(LaunchOptions.Env)),
+                DumpIO = configuration.GetValue<bool?>(nameof(LaunchOptions.DumpIO)),
+                IgnoreHTTPSErrors = configuration.GetValue<bool?>(
+                    nameof(LaunchOptions.IgnoreHTTPSErrors)
+                ),
+                DownloadsPath = configuration.GetValue<string>(nameof(LaunchOptions.DownloadsPath)),
+                ExecutablePath = configuration.GetValue<string>(
+                    nameof(LaunchOptions.ExecutablePath)
+                ),
+                Devtools = configuration.GetValue<bool?>(nameof(LaunchOptions.Devtools)),
+                UserDataDir = configuration.GetValue<string>(nameof(LaunchOptions.UserDataDir)),
+                Args = BindMultiValueMap(
+                    configuration.GetSection(nameof(LaunchOptions.Args)),
+                    argsMap =>
+                        argsMap.SelectMany(
+                                argNameValue => argNameValue.Value.Prepend(argNameValue.Key)
+                            )
+                            .ToArray()
+                ),
+                Headless = configuration.GetValue<bool?>(nameof(LaunchOptions.Headless)),
+                Timeout = configuration.GetValue<int?>(nameof(LaunchOptions.Timeout)),
+                Proxy = configuration.GetValue<ProxySettings>(nameof(LaunchOptions.Proxy))
+            };
 
-        private T BindMultiValueMap<T>(IConfigurationSection processArgsMap, Func<Dictionary<string, HashSet<string>>, T> mapper)
-        {
+        private T BindMultiValueMap<T>(
+            IConfigurationSection processArgsMap,
+            Func<Dictionary<string, HashSet<string>>, T> mapper
+        ) {
             // TODO: We need a way to pass in arguments that allows overriding values through our config system.
             // "Args": {
             //   // switch argument
@@ -289,8 +382,10 @@ namespace Microsoft.AspNetCore.BrowserTesting
 
             return mapper(argsMap);
 
-            static HashSet<string> InitializeMapValue(Dictionary<string, HashSet<string>> argsMap, string argName)
-            {
+            static HashSet<string> InitializeMapValue(
+                Dictionary<string, HashSet<string>> argsMap,
+                string argName
+            ) {
                 if (!argsMap.TryGetValue(argName, out var argValue))
                 {
                     argValue = new HashSet<string>();
@@ -301,70 +396,209 @@ namespace Microsoft.AspNetCore.BrowserTesting
             }
         }
 
-        private string[] BindArgumentMap(IConfigurationSection configuration) => configuration.Exists() switch
-        {
-            false => Array.Empty<string>(),
-            true => configuration.Get<Dictionary<string, bool>>().Where(kvp => kvp.Value == true).Select(kvp => kvp.Key).ToArray()
-        };
-
-        private static BrowserContextOptions Combine(BrowserContextOptions defaultOptions, BrowserContextOptions overrideOptions) =>
-            new()
+        private string[] BindArgumentMap(IConfigurationSection configuration) =>
+            configuration.Exists() switch
             {
-                Proxy = overrideOptions?.Proxy != default ? overrideOptions.Proxy : defaultOptions.Proxy,
-                RecordVideo = overrideOptions?.RecordVideo != default ?
-                    new() { Dir = overrideOptions.RecordVideo.Dir, Size = overrideOptions.RecordVideo.Size?.Clone() } :
-                    defaultOptions != default ?
-                        new() { Dir = defaultOptions.RecordVideo.Dir, Size = defaultOptions.RecordVideo.Size?.Clone() } :
-                        default,
-                RecordHar = overrideOptions?.RecordHar != default ?
-                    new() { Path = overrideOptions.RecordHar.Path, OmitContent = overrideOptions.RecordHar.OmitContent } :
-                    defaultOptions?.RecordHar != default ?
-                        new() { Path = defaultOptions.RecordHar.Path, OmitContent = defaultOptions.RecordHar.OmitContent } :
-                        default,
-                ExtraHTTPHeaders = overrideOptions?.ExtraHTTPHeaders != default ? overrideOptions.ExtraHTTPHeaders : defaultOptions.ExtraHTTPHeaders,
-                Locale = overrideOptions?.Locale != default ? overrideOptions.Locale : defaultOptions.Locale,
-                ColorScheme = overrideOptions?.ColorScheme != default ? overrideOptions.ColorScheme : defaultOptions.ColorScheme,
-                AcceptDownloads = overrideOptions?.AcceptDownloads != default ? overrideOptions.AcceptDownloads : defaultOptions.AcceptDownloads,
-                HasTouch = overrideOptions?.HasTouch != default ? overrideOptions.HasTouch : defaultOptions.HasTouch,
-                HttpCredentials = overrideOptions?.HttpCredentials != default ? overrideOptions.HttpCredentials : defaultOptions.HttpCredentials,
-                DeviceScaleFactor = overrideOptions?.DeviceScaleFactor != default ? overrideOptions.DeviceScaleFactor : defaultOptions.DeviceScaleFactor,
-                Offline = overrideOptions?.Offline != default ? overrideOptions.Offline : defaultOptions.Offline,
-                IsMobile = overrideOptions?.IsMobile != default ? overrideOptions.IsMobile : defaultOptions.IsMobile,
-                Permissions = overrideOptions?.Permissions != default ? overrideOptions.Permissions : defaultOptions.Permissions,
-                Geolocation = overrideOptions?.Geolocation != default ? overrideOptions.Geolocation : defaultOptions.Geolocation,
-                TimezoneId = overrideOptions?.TimezoneId != default ? overrideOptions.TimezoneId : defaultOptions.TimezoneId,
-                IgnoreHTTPSErrors = overrideOptions?.IgnoreHTTPSErrors != default ? overrideOptions.IgnoreHTTPSErrors : defaultOptions.IgnoreHTTPSErrors,
-                JavaScriptEnabled = overrideOptions?.JavaScriptEnabled != default ? overrideOptions.JavaScriptEnabled : defaultOptions.JavaScriptEnabled,
-                BypassCSP = overrideOptions?.BypassCSP != default ? overrideOptions.BypassCSP : defaultOptions.BypassCSP,
-                UserAgent = overrideOptions?.UserAgent != default ? overrideOptions.UserAgent : defaultOptions.UserAgent,
-                Viewport = overrideOptions?.Viewport != default ? overrideOptions.Viewport : defaultOptions.Viewport,
-                StorageStatePath = overrideOptions?.StorageStatePath != default ? overrideOptions.StorageStatePath : defaultOptions.StorageStatePath,
-                StorageState = overrideOptions?.StorageState != default ? overrideOptions.StorageState : defaultOptions.StorageState
+                false => Array.Empty<string>(),
+                true
+                  => configuration.Get<Dictionary<string, bool>>()
+                      .Where(kvp => kvp.Value == true)
+                      .Select(kvp => kvp.Key)
+                      .ToArray()
             };
 
-        private LaunchOptions Combine(LaunchOptions defaultOptions, LaunchOptions overrideOptions) =>
+        private static BrowserContextOptions Combine(
+            BrowserContextOptions defaultOptions,
+            BrowserContextOptions overrideOptions
+        ) =>
             new()
             {
-                IgnoreDefaultArgs = overrideOptions.IgnoreDefaultArgs != default ? overrideOptions.IgnoreDefaultArgs : defaultOptions.IgnoreDefaultArgs,
-                ChromiumSandbox = overrideOptions.ChromiumSandbox != default ? overrideOptions.ChromiumSandbox : defaultOptions.ChromiumSandbox,
-                HandleSIGHUP = overrideOptions.HandleSIGHUP != default ? overrideOptions.HandleSIGHUP : defaultOptions.HandleSIGHUP,
-                HandleSIGTERM = overrideOptions.HandleSIGTERM != default ? overrideOptions.HandleSIGTERM : defaultOptions.HandleSIGTERM,
-                HandleSIGINT = overrideOptions.HandleSIGINT != default ? overrideOptions.HandleSIGINT : defaultOptions.HandleSIGINT,
-                IgnoreAllDefaultArgs = overrideOptions.IgnoreAllDefaultArgs != default ? overrideOptions.IgnoreAllDefaultArgs : defaultOptions.IgnoreAllDefaultArgs,
-                SlowMo = overrideOptions.SlowMo != default ? overrideOptions.SlowMo : defaultOptions.SlowMo,
+                Proxy =
+                    overrideOptions?.Proxy != default
+                        ? overrideOptions.Proxy
+                        : defaultOptions.Proxy,
+                RecordVideo =
+                    overrideOptions?.RecordVideo != default
+                        ? new()
+                          {
+                              Dir = overrideOptions.RecordVideo.Dir,
+                              Size = overrideOptions.RecordVideo.Size?.Clone()
+                          }
+                        : defaultOptions != default
+                            ? new()
+                              {
+                                  Dir = defaultOptions.RecordVideo.Dir,
+                                  Size = defaultOptions.RecordVideo.Size?.Clone()
+                              }
+                            : default,
+                RecordHar =
+                    overrideOptions?.RecordHar != default
+                        ? new()
+                          {
+                              Path = overrideOptions.RecordHar.Path,
+                              OmitContent = overrideOptions.RecordHar.OmitContent
+                          }
+                        : defaultOptions?.RecordHar != default
+                            ? new()
+                              {
+                                  Path = defaultOptions.RecordHar.Path,
+                                  OmitContent = defaultOptions.RecordHar.OmitContent
+                              }
+                            : default,
+                ExtraHTTPHeaders =
+                    overrideOptions?.ExtraHTTPHeaders != default
+                        ? overrideOptions.ExtraHTTPHeaders
+                        : defaultOptions.ExtraHTTPHeaders,
+                Locale =
+                    overrideOptions?.Locale != default
+                        ? overrideOptions.Locale
+                        : defaultOptions.Locale,
+                ColorScheme =
+                    overrideOptions?.ColorScheme != default
+                        ? overrideOptions.ColorScheme
+                        : defaultOptions.ColorScheme,
+                AcceptDownloads =
+                    overrideOptions?.AcceptDownloads != default
+                        ? overrideOptions.AcceptDownloads
+                        : defaultOptions.AcceptDownloads,
+                HasTouch =
+                    overrideOptions?.HasTouch != default
+                        ? overrideOptions.HasTouch
+                        : defaultOptions.HasTouch,
+                HttpCredentials =
+                    overrideOptions?.HttpCredentials != default
+                        ? overrideOptions.HttpCredentials
+                        : defaultOptions.HttpCredentials,
+                DeviceScaleFactor =
+                    overrideOptions?.DeviceScaleFactor != default
+                        ? overrideOptions.DeviceScaleFactor
+                        : defaultOptions.DeviceScaleFactor,
+                Offline =
+                    overrideOptions?.Offline != default
+                        ? overrideOptions.Offline
+                        : defaultOptions.Offline,
+                IsMobile =
+                    overrideOptions?.IsMobile != default
+                        ? overrideOptions.IsMobile
+                        : defaultOptions.IsMobile,
+                Permissions =
+                    overrideOptions?.Permissions != default
+                        ? overrideOptions.Permissions
+                        : defaultOptions.Permissions,
+                Geolocation =
+                    overrideOptions?.Geolocation != default
+                        ? overrideOptions.Geolocation
+                        : defaultOptions.Geolocation,
+                TimezoneId =
+                    overrideOptions?.TimezoneId != default
+                        ? overrideOptions.TimezoneId
+                        : defaultOptions.TimezoneId,
+                IgnoreHTTPSErrors =
+                    overrideOptions?.IgnoreHTTPSErrors != default
+                        ? overrideOptions.IgnoreHTTPSErrors
+                        : defaultOptions.IgnoreHTTPSErrors,
+                JavaScriptEnabled =
+                    overrideOptions?.JavaScriptEnabled != default
+                        ? overrideOptions.JavaScriptEnabled
+                        : defaultOptions.JavaScriptEnabled,
+                BypassCSP =
+                    overrideOptions?.BypassCSP != default
+                        ? overrideOptions.BypassCSP
+                        : defaultOptions.BypassCSP,
+                UserAgent =
+                    overrideOptions?.UserAgent != default
+                        ? overrideOptions.UserAgent
+                        : defaultOptions.UserAgent,
+                Viewport =
+                    overrideOptions?.Viewport != default
+                        ? overrideOptions.Viewport
+                        : defaultOptions.Viewport,
+                StorageStatePath =
+                    overrideOptions?.StorageStatePath != default
+                        ? overrideOptions.StorageStatePath
+                        : defaultOptions.StorageStatePath,
+                StorageState =
+                    overrideOptions?.StorageState != default
+                        ? overrideOptions.StorageState
+                        : defaultOptions.StorageState
+            };
+
+        private LaunchOptions Combine(
+            LaunchOptions defaultOptions,
+            LaunchOptions overrideOptions
+        ) =>
+            new()
+            {
+                IgnoreDefaultArgs =
+                    overrideOptions.IgnoreDefaultArgs != default
+                        ? overrideOptions.IgnoreDefaultArgs
+                        : defaultOptions.IgnoreDefaultArgs,
+                ChromiumSandbox =
+                    overrideOptions.ChromiumSandbox != default
+                        ? overrideOptions.ChromiumSandbox
+                        : defaultOptions.ChromiumSandbox,
+                HandleSIGHUP =
+                    overrideOptions.HandleSIGHUP != default
+                        ? overrideOptions.HandleSIGHUP
+                        : defaultOptions.HandleSIGHUP,
+                HandleSIGTERM =
+                    overrideOptions.HandleSIGTERM != default
+                        ? overrideOptions.HandleSIGTERM
+                        : defaultOptions.HandleSIGTERM,
+                HandleSIGINT =
+                    overrideOptions.HandleSIGINT != default
+                        ? overrideOptions.HandleSIGINT
+                        : defaultOptions.HandleSIGINT,
+                IgnoreAllDefaultArgs =
+                    overrideOptions.IgnoreAllDefaultArgs != default
+                        ? overrideOptions.IgnoreAllDefaultArgs
+                        : defaultOptions.IgnoreAllDefaultArgs,
+                SlowMo =
+                    overrideOptions.SlowMo != default
+                        ? overrideOptions.SlowMo
+                        : defaultOptions.SlowMo,
                 Env = overrideOptions.Env != default ? overrideOptions.Env : defaultOptions.Env,
-                DumpIO = overrideOptions.DumpIO != default ? overrideOptions.DumpIO : defaultOptions.DumpIO,
-                IgnoreHTTPSErrors = overrideOptions.IgnoreHTTPSErrors != default ? overrideOptions.IgnoreHTTPSErrors : defaultOptions.IgnoreHTTPSErrors,
-                DownloadsPath = overrideOptions.DownloadsPath != default ? overrideOptions.DownloadsPath : defaultOptions.DownloadsPath,
-                ExecutablePath = overrideOptions.ExecutablePath != default ? overrideOptions.ExecutablePath : defaultOptions.ExecutablePath,
-                Devtools = overrideOptions.Devtools != default ? overrideOptions.Devtools : defaultOptions.Devtools,
-                UserDataDir = overrideOptions.UserDataDir != default ? overrideOptions.UserDataDir : defaultOptions.UserDataDir,
+                DumpIO =
+                    overrideOptions.DumpIO != default
+                        ? overrideOptions.DumpIO
+                        : defaultOptions.DumpIO,
+                IgnoreHTTPSErrors =
+                    overrideOptions.IgnoreHTTPSErrors != default
+                        ? overrideOptions.IgnoreHTTPSErrors
+                        : defaultOptions.IgnoreHTTPSErrors,
+                DownloadsPath =
+                    overrideOptions.DownloadsPath != default
+                        ? overrideOptions.DownloadsPath
+                        : defaultOptions.DownloadsPath,
+                ExecutablePath =
+                    overrideOptions.ExecutablePath != default
+                        ? overrideOptions.ExecutablePath
+                        : defaultOptions.ExecutablePath,
+                Devtools =
+                    overrideOptions.Devtools != default
+                        ? overrideOptions.Devtools
+                        : defaultOptions.Devtools,
+                UserDataDir =
+                    overrideOptions.UserDataDir != default
+                        ? overrideOptions.UserDataDir
+                        : defaultOptions.UserDataDir,
                 Args = overrideOptions.Args != default ? overrideOptions.Args : defaultOptions.Args,
-                Headless = overrideOptions.Headless != default ? overrideOptions.Headless : defaultOptions.Headless,
-                Timeout = overrideOptions.Timeout != default ? overrideOptions.Timeout : defaultOptions.Timeout,
-                Proxy = overrideOptions.Proxy != default ? overrideOptions.Proxy : defaultOptions.Proxy
+                Headless =
+                    overrideOptions.Headless != default
+                        ? overrideOptions.Headless
+                        : defaultOptions.Headless,
+                Timeout =
+                    overrideOptions.Timeout != default
+                        ? overrideOptions.Timeout
+                        : defaultOptions.Timeout,
+                Proxy =
+                    overrideOptions.Proxy != default ? overrideOptions.Proxy : defaultOptions.Proxy
             };
     }
 
-    public record BrowserOptions(BrowserKind BrowserKind, LaunchOptions BrowserLaunchOptions, BrowserContextOptions DefaultContextOptions);
+    public record BrowserOptions(
+        BrowserKind BrowserKind,
+        LaunchOptions BrowserLaunchOptions,
+        BrowserContextOptions DefaultContextOptions
+    );
 }

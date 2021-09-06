@@ -28,8 +28,11 @@ namespace Microsoft.Extensions.Logging.EventLog
         /// <param name="name">The name of the logger.</param>
         /// <param name="settings">The <see cref="EventLogSettings"/>.</param>
         /// <param name="externalScopeProvider">The <see cref="IExternalScopeProvider"/>.</param>
-        public EventLogLogger(string name, EventLogSettings settings, IExternalScopeProvider externalScopeProvider)
-        {
+        public EventLogLogger(
+            string name,
+            EventLogSettings settings,
+            IExternalScopeProvider externalScopeProvider
+        ) {
             _name = name ?? throw new ArgumentNullException(nameof(name));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
@@ -43,7 +46,8 @@ namespace Microsoft.Extensions.Logging.EventLog
 
             // Example:
             // ...rred while writ...
-            _intermediateMessageSegmentSize = EventLog.MaxMessageSize - 2 * ContinuationString.Length;
+            _intermediateMessageSegmentSize =
+                EventLog.MaxMessageSize - 2 * ContinuationString.Length;
         }
 
         public IEventLog EventLog { get; }
@@ -57,8 +61,8 @@ namespace Microsoft.Extensions.Logging.EventLog
         /// <inheritdoc />
         public bool IsEnabled(LogLevel logLevel)
         {
-            return logLevel != LogLevel.None &&
-                (_settings.Filter == null || _settings.Filter(_name, logLevel));
+            return logLevel != LogLevel.None
+                && (_settings.Filter == null || _settings.Filter(_name, logLevel));
         }
 
         /// <inheritdoc />
@@ -67,8 +71,8 @@ namespace Microsoft.Extensions.Logging.EventLog
             EventId eventId,
             TState state,
             Exception exception,
-            Func<TState, Exception, string> formatter)
-        {
+            Func<TState, Exception, string> formatter
+        ) {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -86,38 +90,42 @@ namespace Microsoft.Extensions.Logging.EventLog
                 return;
             }
 
-            StringBuilder builder = new StringBuilder()
-                            .Append("Category: ")
-                            .AppendLine(_name)
-                            .Append("EventId: ")
-                            .Append(eventId.Id)
-                            .AppendLine();
+            StringBuilder builder = new StringBuilder().Append("Category: ")
+                .AppendLine(_name)
+                .Append("EventId: ")
+                .Append(eventId.Id)
+                .AppendLine();
 
-            _externalScopeProvider?.ForEachScope((scope, sb) =>
-            {
-                if (scope is IEnumerable<KeyValuePair<string, object>> properties)
+            _externalScopeProvider?.ForEachScope(
+                (scope, sb) =>
                 {
-                    foreach (KeyValuePair<string, object> pair in properties)
+                    if (scope is IEnumerable<KeyValuePair<string, object>> properties)
                     {
-                        sb.Append(pair.Key).Append(": ").AppendLine(pair.Value?.ToString());
+                        foreach (KeyValuePair<string, object> pair in properties)
+                        {
+                            sb.Append(pair.Key).Append(": ").AppendLine(pair.Value?.ToString());
+                        }
                     }
-                }
-                else if (scope != null)
-                {
-                    sb.AppendLine(scope.ToString());
-                }
-            },
-            builder);
+                    else if (scope != null)
+                    {
+                        sb.AppendLine(scope.ToString());
+                    }
+                },
+                builder
+            );
 
-            builder.AppendLine()
-            .AppendLine(message);
+            builder.AppendLine().AppendLine(message);
 
             if (exception != null)
             {
                 builder.AppendLine().AppendLine("Exception: ").Append(exception).AppendLine();
             }
 
-            WriteMessage(builder.ToString(), GetEventLogEntryType(logLevel), EventLog.DefaultEventId ?? eventId.Id);
+            WriteMessage(
+                builder.ToString(),
+                GetEventLogEntryType(logLevel),
+                EventLog.DefaultEventId ?? eventId.Id
+            );
         }
 
         // category '0' translates to 'None' in event log
@@ -137,7 +145,9 @@ namespace Microsoft.Extensions.Logging.EventLog
                 // Example: An error occu...
                 if (startIndex == 0)
                 {
-                    messageSegment = message.Substring(startIndex, _beginOrEndMessageSegmentSize) + ContinuationString;
+                    messageSegment =
+                        message.Substring(startIndex, _beginOrEndMessageSegmentSize)
+                        + ContinuationString;
                     startIndex += _beginOrEndMessageSegmentSize;
                 }
                 else
@@ -147,7 +157,12 @@ namespace Microsoft.Extensions.Logging.EventLog
                     if ((message.Length - (startIndex + 1)) <= _beginOrEndMessageSegmentSize)
                     {
                         messageSegment = ContinuationString + message.Substring(startIndex);
-                        EventLog.WriteEntry(messageSegment, eventLogEntryType, eventId, category: 0);
+                        EventLog.WriteEntry(
+                            messageSegment,
+                            eventLogEntryType,
+                            eventId,
+                            category: 0
+                        );
                         break;
                     }
                     else

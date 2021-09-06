@@ -4,7 +4,6 @@
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
-
     internal interface IEnumSettingViewModel
     {
         string[] GetValueDescriptions();

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.TestHost
         internal ResponseBodyPipeWriter(Pipe pipe, Func<Task> onFirstWriteAsync)
         {
             _pipe = pipe ?? throw new ArgumentNullException(nameof(pipe));
-            _onFirstWriteAsync = onFirstWriteAsync ?? throw new ArgumentNullException(nameof(onFirstWriteAsync));
+            _onFirstWriteAsync =
+                onFirstWriteAsync ?? throw new ArgumentNullException(nameof(onFirstWriteAsync));
             _firstWrite = true;
         }
 

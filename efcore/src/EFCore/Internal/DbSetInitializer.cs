@@ -31,9 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public DbSetInitializer(
-            IDbSetFinder setFinder,
-            IDbSetSource setSource)
+        public DbSetInitializer(IDbSetFinder setFinder, IDbSetSource setSource)
         {
             _setFinder = setFinder;
             _setSource = setSource;
@@ -47,11 +45,13 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public virtual void InitializeSets(DbContext context)
         {
-            foreach (var setInfo in _setFinder.FindSets(context.GetType()).Where(p => p.Setter != null))
-            {
+            foreach (
+                var setInfo in _setFinder.FindSets(context.GetType()).Where(p => p.Setter != null)
+            ) {
                 setInfo.Setter!.SetClrValue(
                     context,
-                    ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type));
+                    ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type)
+                );
             }
         }
     }

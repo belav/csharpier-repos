@@ -26,12 +26,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             this IReadOnlyKey key,
             IReadOnlyKey duplicateKey,
             in StoreObjectIdentifier storeObject,
-            bool shouldThrow)
-        {
+            bool shouldThrow
+        ) {
             var columnNames = key.Properties.GetColumnNames(storeObject);
             var duplicateColumnNames = duplicateKey.Properties.GetColumnNames(storeObject);
-            if (columnNames == null
-                || duplicateColumnNames == null)
+            if (columnNames == null || duplicateColumnNames == null)
             {
                 if (shouldThrow)
                 {
@@ -43,7 +42,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             duplicateKey.DeclaringEntityType.DisplayName(),
                             key.GetName(storeObject),
                             key.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                            duplicateKey.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                            duplicateKey.DeclaringEntityType.GetSchemaQualifiedTableName()
+                        )
+                    );
                 }
 
                 return false;
@@ -62,7 +63,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             key.DeclaringEntityType.GetSchemaQualifiedTableName(),
                             key.GetName(storeObject),
                             key.Properties.FormatColumns(storeObject),
-                            duplicateKey.Properties.FormatColumns(storeObject)));
+                            duplicateKey.Properties.FormatColumns(storeObject)
+                        )
+                    );
                 }
 
                 return false;

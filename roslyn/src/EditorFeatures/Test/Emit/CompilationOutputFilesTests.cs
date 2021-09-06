@@ -28,9 +28,16 @@ namespace Microsoft.CodeAnalysis.Emit.UnitTests
         {
             var source = @"class C { public static void Main() { int x = 1; } }";
 
-            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll, assemblyName: "lib");
+            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: "lib"
+            );
             var pdbStream = new MemoryStream();
-            var peImage = compilation.EmitToArray(new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb), pdbStream: pdbStream);
+            var peImage = compilation.EmitToArray(
+                new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb),
+                pdbStream: pdbStream
+            );
             pdbStream.Position = 0;
 
             var dir = Temp.CreateDirectory();
@@ -43,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Emit.UnitTests
             {
                 var encReader = pdb.CreateEditAndContinueMethodDebugInfoReader();
                 Assert.True(encReader.IsPortable);
-                var localSig = encReader.GetLocalSignature(MetadataTokens.MethodDefinitionHandle(1));
+                var localSig = encReader.GetLocalSignature(
+                    MetadataTokens.MethodDefinitionHandle(1)
+                );
                 Assert.Equal(MetadataTokens.StandaloneSignatureHandle(1), localSig);
             }
 

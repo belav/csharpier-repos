@@ -26,9 +26,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public PgoTraceProcess(TraceProcess traceProcess)
         {
             TraceProcess = traceProcess;
-            foreach (var assemblyLoadTrace in traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>())
-            {
-                _assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] = assemblyLoadTrace.ClrInstanceID;
+            foreach (
+                var assemblyLoadTrace in traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
+            ) {
+                _assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] =
+                    assemblyLoadTrace.ClrInstanceID;
             }
         }
 
@@ -45,7 +47,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     var managedModule = moduleFile as TraceManagedModule;
 
                     int clrInstanceIDModule;
-                    if (!_assemblyToCLRInstanceIDMap.TryGetValue(managedModule.AssemblyID, out clrInstanceIDModule))
+                    if (
+                        !_assemblyToCLRInstanceIDMap.TryGetValue(
+                            managedModule.AssemblyID,
+                            out clrInstanceIDModule
+                        )
+                    )
                         continue;
 
                     yield return new LoadedModule(clrInstanceIDModule, managedModule);
@@ -68,12 +75,28 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return false;
         }
 
-        public static bool CompareModuleAgainstSimpleName(string simpleName, TraceManagedModule managedModule)
-        {
+        public static bool CompareModuleAgainstSimpleName(
+            string simpleName,
+            TraceManagedModule managedModule
+        ) {
             if (managedModule.ModuleFile != null)
             {
-                if ((String.Compare(managedModule.ModuleFile.Name, simpleName, StringComparison.OrdinalIgnoreCase) == 0) || (String.Compare(managedModule.ModuleFile.Name, (simpleName + ".il"), StringComparison.OrdinalIgnoreCase) == 0))
-                {
+                if (
+                    (
+                        String.Compare(
+                            managedModule.ModuleFile.Name,
+                            simpleName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    || (
+                        String.Compare(
+                            managedModule.ModuleFile.Name,
+                            (simpleName + ".il"),
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                ) {
                     return true;
                 }
             }

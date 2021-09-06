@@ -11,9 +11,9 @@ class ThreadStartStruct
     public struct MyStruct
     {
         public int myInt;
-        public string myStr;  
-        public long myLong;  
-        public double myDouble;  
+        public string myStr;
+        public long myLong;
+        public double myDouble;
         public Mutex myMutex;
     }
 
@@ -45,21 +45,21 @@ class ThreadStartStruct
 
     private void ThreadWorker(Object o)
     {
-        if(Int32.MinValue == ((MyStruct)o).myInt &&
-            "This is the string" == ((MyStruct)o).myStr &&
-            Int64.MaxValue == ((MyStruct)o).myLong &&
-            Double.MinValue == ((MyStruct)o).myDouble)
-        {
+        if (
+            Int32.MinValue == ((MyStruct)o).myInt
+            && "This is the string" == ((MyStruct)o).myStr
+            && Int64.MaxValue == ((MyStruct)o).myLong
+            && Double.MinValue == ((MyStruct)o).myDouble
+        ) {
             try
             {
                 ((MyStruct)o).myMutex.WaitOne();
                 ((MyStruct)o).myMutex.ReleaseMutex();
                 iRet = 100;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception thrown: " + 
-                    e.ToString());
+                Console.WriteLine("Unexpected exception thrown: " + e.ToString());
             }
         }
     }

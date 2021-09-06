@@ -13,7 +13,9 @@ namespace System.Xml.Tests
         {
             foreach (string token in strEncode)
             {
-                AddVariation(new CVariation(this, "EncodeName-DecodeName with " + token, XmlEncodeName2));
+                AddVariation(
+                    new CVariation(this, "EncodeName-DecodeName with " + token, XmlEncodeName2)
+                );
             }
         }
 

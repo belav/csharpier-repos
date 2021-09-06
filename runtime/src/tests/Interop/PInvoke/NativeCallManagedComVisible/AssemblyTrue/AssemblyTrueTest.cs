@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using NativeCallManagedComVisible;
 using TestLibrary;
 
-// Setting ComVisible to true makes the types in this assembly visible 
-// to COM components by default.  If you don't need to access a type in 
+// Setting ComVisible to true makes the types in this assembly visible
+// to COM components by default.  If you don't need to access a type in
 // this assembly from COM, set the ComVisible attribute to false on that type.
 [assembly: ComVisible(true)]
 
@@ -85,7 +85,10 @@ public interface IInterfaceGenericVisibleTrue<T>
 /// </summary>
 public class GenericClassW2Pars<T1, T2>
 {
-    T1 Foo(T2 a) { return default(T1); }
+    T1 Foo(T2 a)
+    {
+        return default(T1);
+    }
 }
 
 /// <summary>
@@ -125,13 +128,27 @@ public interface IDerivedInterfaceWithoutVisibleNoGuid
 /// </summary>
 [ComVisible(true)]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-public interface IInterfaceVisibleTrueNoGuid : IDerivedInterfaceVisibleTrueGuid, IDerivedInterfaceVisibleTrueNoGuid, IDerivedInterfaceWithoutVisibleNoGuid
+public interface IInterfaceVisibleTrueNoGuid
+    : IDerivedInterfaceVisibleTrueGuid,
+      IDerivedInterfaceVisibleTrueNoGuid,
+      IDerivedInterfaceWithoutVisibleNoGuid
 {
     new int Foo1(UInt16 int16Val, bool boolVal);
     new int Foo();
-    int Foo2(string str, out int outIntVal, IntPtr intPtrVal, int[] arrayVal, byte inByteVal = 0, int inIntVal = 0);
+    int Foo2(
+        string str,
+        out int outIntVal,
+        IntPtr intPtrVal,
+        int[] arrayVal,
+        byte inByteVal = 0,
+        int inIntVal = 0
+    );
     int Foo3(ref short refShortVal, params byte[] paramsList);
-    int Foo4(ref List<short> refShortVal, GenericClassW2Pars<int, short> genericClass, params object[] paramsList);
+    int Foo4(
+        ref List<short> refShortVal,
+        GenericClassW2Pars<int, short> genericClass,
+        params object[] paramsList
+    );
 }
 
 /// <summary>
@@ -230,48 +247,132 @@ interface IInterfaceNotPublic_VisibleTrue : IInterfaceVisibleTrue
     new int Foo();
 }
 
-
 /// <summary>
 /// Class visible with ComVisible(true).
 /// </summary>
 [ComVisible(true)]
 [Guid("48FC2EFC-C7ED-4E02-8D02-F05B6A439FC9")]
-public sealed class ClassVisibleTrueServer :
-    IInterfaceComImport, IInterfaceVisibleTrue, IInterfaceVisibleFalse, IInterfaceWithoutVisible, IInterfaceNotPublic,
-    IInterfaceVisibleTrueNoGuid, IInterfaceNotVisibleNoGuid,
-    IInterfaceComImport_ComImport, IInterfaceVisibleTrue_ComImport, IInterfaceVisibleFalse_ComImport,
-    IInterfaceVisibleTrue_VisibleTrue, IInterfaceVisibleFalse_VisibleTrue, IInterfaceVisibleTrue_VisibleFalse, IInterfaceNotPublic_VisibleTrue
+public sealed class ClassVisibleTrueServer
+    : IInterfaceComImport,
+      IInterfaceVisibleTrue,
+      IInterfaceVisibleFalse,
+      IInterfaceWithoutVisible,
+      IInterfaceNotPublic,
+      IInterfaceVisibleTrueNoGuid,
+      IInterfaceNotVisibleNoGuid,
+      IInterfaceComImport_ComImport,
+      IInterfaceVisibleTrue_ComImport,
+      IInterfaceVisibleFalse_ComImport,
+      IInterfaceVisibleTrue_VisibleTrue,
+      IInterfaceVisibleFalse_VisibleTrue,
+      IInterfaceVisibleTrue_VisibleFalse,
+      IInterfaceNotPublic_VisibleTrue
 {
-    int IInterfaceComImport.Foo() { return 1; }
-    int IInterfaceVisibleTrue.Foo() { return 2; }
-    int IInterfaceVisibleFalse.Foo() { return 3; }
-    int IInterfaceWithoutVisible.Foo() { return 4; }
-    int IInterfaceNotPublic.Foo() { return 5; }
-
-    int IInterfaceVisibleTrueNoGuid.Foo() { return 6; }
-    int IInterfaceVisibleTrueNoGuid.Foo1(UInt16 int16Val, bool boolVal) { return 7; }
-    int IInterfaceVisibleTrueNoGuid.Foo2(string str, out int outIntVal, IntPtr intPtrVal, int[] arrayVal, byte inByteVal, int inIntVal)
+    int IInterfaceComImport.Foo()
     {
+        return 1;
+    }
+    int IInterfaceVisibleTrue.Foo()
+    {
+        return 2;
+    }
+    int IInterfaceVisibleFalse.Foo()
+    {
+        return 3;
+    }
+    int IInterfaceWithoutVisible.Foo()
+    {
+        return 4;
+    }
+    int IInterfaceNotPublic.Foo()
+    {
+        return 5;
+    }
+
+    int IInterfaceVisibleTrueNoGuid.Foo()
+    {
+        return 6;
+    }
+    int IInterfaceVisibleTrueNoGuid.Foo1(UInt16 int16Val, bool boolVal)
+    {
+        return 7;
+    }
+    int IInterfaceVisibleTrueNoGuid.Foo2(
+        string str,
+        out int outIntVal,
+        IntPtr intPtrVal,
+        int[] arrayVal,
+        byte inByteVal,
+        int inIntVal
+    ) {
         outIntVal = 10;
         return 8;
     }
-    int IInterfaceVisibleTrueNoGuid.Foo3(ref short refShortVal, params byte[] paramsList) { return 9; }
-    int IInterfaceVisibleTrueNoGuid.Foo4(ref List<short> refShortVal, GenericClassW2Pars<int, short> genericClass, params object[] paramsList) { return 10; }
-    int IDerivedInterfaceVisibleTrueGuid.Foo() { return 12; }
-    int IDerivedInterfaceVisibleTrueNoGuid.Foo1(UInt16 int16Val, bool boolVal) { return 13; }
-    int IDerivedInterfaceVisibleTrueNoGuid.Foo5(Int32 int32Val) { return 14; }
-    int IDerivedInterfaceWithoutVisibleNoGuid.Foo7(Int32 int32Val) { return 15; }
-    int IInterfaceNotVisibleNoGuid.Foo() { return 16; } 
+    int IInterfaceVisibleTrueNoGuid.Foo3(ref short refShortVal, params byte[] paramsList)
+    {
+        return 9;
+    }
+    int IInterfaceVisibleTrueNoGuid.Foo4(
+        ref List<short> refShortVal,
+        GenericClassW2Pars<int, short> genericClass,
+        params object[] paramsList
+    ) {
+        return 10;
+    }
+    int IDerivedInterfaceVisibleTrueGuid.Foo()
+    {
+        return 12;
+    }
+    int IDerivedInterfaceVisibleTrueNoGuid.Foo1(UInt16 int16Val, bool boolVal)
+    {
+        return 13;
+    }
+    int IDerivedInterfaceVisibleTrueNoGuid.Foo5(Int32 int32Val)
+    {
+        return 14;
+    }
+    int IDerivedInterfaceWithoutVisibleNoGuid.Foo7(Int32 int32Val)
+    {
+        return 15;
+    }
+    int IInterfaceNotVisibleNoGuid.Foo()
+    {
+        return 16;
+    }
 
-    int IInterfaceComImport_ComImport.Foo() { return 101; }
-    int IInterfaceVisibleTrue_ComImport.Foo() { return 102; }
-    int IInterfaceVisibleFalse_ComImport.Foo() { return 103; }
-    int IInterfaceVisibleTrue_VisibleTrue.Foo() { return 104; }
-    int IInterfaceVisibleFalse_VisibleTrue.Foo() { return 105; }
-    int IInterfaceVisibleTrue_VisibleFalse.Foo() { return 106; }
-    int IInterfaceNotPublic_VisibleTrue.Foo() { return 107; }
+    int IInterfaceComImport_ComImport.Foo()
+    {
+        return 101;
+    }
+    int IInterfaceVisibleTrue_ComImport.Foo()
+    {
+        return 102;
+    }
+    int IInterfaceVisibleFalse_ComImport.Foo()
+    {
+        return 103;
+    }
+    int IInterfaceVisibleTrue_VisibleTrue.Foo()
+    {
+        return 104;
+    }
+    int IInterfaceVisibleFalse_VisibleTrue.Foo()
+    {
+        return 105;
+    }
+    int IInterfaceVisibleTrue_VisibleFalse.Foo()
+    {
+        return 106;
+    }
+    int IInterfaceNotPublic_VisibleTrue.Foo()
+    {
+        return 107;
+    }
 
-    int Foo() { return 9; }
+    int Foo()
+    {
+        return 9;
+    }
 }
 
 /// <summary>
@@ -279,30 +380,74 @@ public sealed class ClassVisibleTrueServer :
 /// </summary>
 [ComVisible(false)]
 [Guid("6DF17EC1-A8F4-4693-B195-EDB27DF00170")]
-public sealed class ClassVisibleFalseServer :
-    IInterfaceComImport, IInterfaceVisibleTrue, IInterfaceVisibleFalse, IInterfaceWithoutVisible, IInterfaceNotPublic
+public sealed class ClassVisibleFalseServer
+    : IInterfaceComImport,
+      IInterfaceVisibleTrue,
+      IInterfaceVisibleFalse,
+      IInterfaceWithoutVisible,
+      IInterfaceNotPublic
 {
-    int IInterfaceComImport.Foo() { return 120; }
-    int IInterfaceVisibleTrue.Foo() { return 121; }
-    int IInterfaceVisibleFalse.Foo() { return 122; }
-    int IInterfaceWithoutVisible.Foo() { return 123; }
-    int IInterfaceNotPublic.Foo() { return 124; }
-    int Foo() { return 129; }
+    int IInterfaceComImport.Foo()
+    {
+        return 120;
+    }
+    int IInterfaceVisibleTrue.Foo()
+    {
+        return 121;
+    }
+    int IInterfaceVisibleFalse.Foo()
+    {
+        return 122;
+    }
+    int IInterfaceWithoutVisible.Foo()
+    {
+        return 123;
+    }
+    int IInterfaceNotPublic.Foo()
+    {
+        return 124;
+    }
+    int Foo()
+    {
+        return 129;
+    }
 }
 
 /// <summary>
 /// Class not visible without ComVisible().
 /// </summary>
 [Guid("A57430B8-E0C1-486E-AE57-A15D6A729F99")]
-public sealed class ClassWithoutVisibleServer :
-    IInterfaceComImport, IInterfaceVisibleTrue, IInterfaceVisibleFalse, IInterfaceWithoutVisible, IInterfaceNotPublic
+public sealed class ClassWithoutVisibleServer
+    : IInterfaceComImport,
+      IInterfaceVisibleTrue,
+      IInterfaceVisibleFalse,
+      IInterfaceWithoutVisible,
+      IInterfaceNotPublic
 {
-    int IInterfaceComImport.Foo() { return 130; }
-    int IInterfaceVisibleTrue.Foo() { return 131; }
-    int IInterfaceVisibleFalse.Foo() { return 132; }
-    int IInterfaceWithoutVisible.Foo() { return 133; }
-    int IInterfaceNotPublic.Foo() { return 134; }
-    int Foo() { return 139; }
+    int IInterfaceComImport.Foo()
+    {
+        return 130;
+    }
+    int IInterfaceVisibleTrue.Foo()
+    {
+        return 131;
+    }
+    int IInterfaceVisibleFalse.Foo()
+    {
+        return 132;
+    }
+    int IInterfaceWithoutVisible.Foo()
+    {
+        return 133;
+    }
+    int IInterfaceNotPublic.Foo()
+    {
+        return 134;
+    }
+    int Foo()
+    {
+        return 139;
+    }
 }
 
 /// <summary>
@@ -310,14 +455,28 @@ public sealed class ClassWithoutVisibleServer :
 /// </summary>
 [ComVisible(true)]
 [Guid("3CD290FA-1CD0-4370-B8E6-5A573F78C9F7")]
-public sealed class ClassGenericServer<T> : IInterfaceVisibleTrue, IInterfaceGenericVisibleTrue<T>, IInterfaceComImport
+public sealed class ClassGenericServer<T>
+    : IInterfaceVisibleTrue,
+      IInterfaceGenericVisibleTrue<T>,
+      IInterfaceComImport
 {
-    int IInterfaceComImport.Foo() { return 140; }
-    int IInterfaceVisibleTrue.Foo() { return 141; }
-    T IInterfaceGenericVisibleTrue<T>.Foo() { return default(T); }
-    T Foo() { return default(T); }
+    int IInterfaceComImport.Foo()
+    {
+        return 140;
+    }
+    int IInterfaceVisibleTrue.Foo()
+    {
+        return 141;
+    }
+    T IInterfaceGenericVisibleTrue<T>.Foo()
+    {
+        return default(T);
+    }
+    T Foo()
+    {
+        return default(T);
+    }
 }
-
 
 public class ComVisibleServer
 {
@@ -482,27 +641,79 @@ public class ComVisibleServer
     /// </summary>
     [ComVisible(true)]
     [Guid("CF681980-CE6D-421E-8B21-AEAE3F1B7DAC")]
-    public sealed class NestedClassVisibleTrueServer : 
-        INestedInterfaceComImport, INestedInterfaceVisibleTrue, INestedInterfaceVisibleFalse, INestedInterfaceWithoutVisible, INestedInterfaceNotPublic,
-        NestedClass.INestedInterfaceNestedInClass, INestedInterfaceComImport_ComImport, INestedInterfaceVisibleTrue_ComImport, INestedInterfaceVisibleFalse_ComImport,
-        INestedInterfaceVisibleTrue_VisibleTrue, INestedInterfaceVisibleFalse_VisibleTrue, INestedInterfaceVisibleTrue_VisibleFalse, INestedInterfaceNotPublic_VisibleTrue
+    public sealed class NestedClassVisibleTrueServer
+        : INestedInterfaceComImport,
+          INestedInterfaceVisibleTrue,
+          INestedInterfaceVisibleFalse,
+          INestedInterfaceWithoutVisible,
+          INestedInterfaceNotPublic,
+          NestedClass.INestedInterfaceNestedInClass,
+          INestedInterfaceComImport_ComImport,
+          INestedInterfaceVisibleTrue_ComImport,
+          INestedInterfaceVisibleFalse_ComImport,
+          INestedInterfaceVisibleTrue_VisibleTrue,
+          INestedInterfaceVisibleFalse_VisibleTrue,
+          INestedInterfaceVisibleTrue_VisibleFalse,
+          INestedInterfaceNotPublic_VisibleTrue
     {
-        int INestedInterfaceComImport.Foo() { return 10; }
-        int INestedInterfaceVisibleTrue.Foo() { return 11; }
-        int INestedInterfaceVisibleFalse.Foo() { return 12; }
-        int INestedInterfaceWithoutVisible.Foo() { return 13; }
-        int INestedInterfaceNotPublic.Foo() { return 14; }
+        int INestedInterfaceComImport.Foo()
+        {
+            return 10;
+        }
+        int INestedInterfaceVisibleTrue.Foo()
+        {
+            return 11;
+        }
+        int INestedInterfaceVisibleFalse.Foo()
+        {
+            return 12;
+        }
+        int INestedInterfaceWithoutVisible.Foo()
+        {
+            return 13;
+        }
+        int INestedInterfaceNotPublic.Foo()
+        {
+            return 14;
+        }
 
-        int NestedClass.INestedInterfaceNestedInClass.Foo() { return 110; }
-        int INestedInterfaceComImport_ComImport.Foo() { return 111; }
-        int INestedInterfaceVisibleTrue_ComImport.Foo() { return 112; }
-        int INestedInterfaceVisibleFalse_ComImport.Foo() { return 113; }
-        int INestedInterfaceVisibleTrue_VisibleTrue.Foo() { return 114; }
-        int INestedInterfaceVisibleFalse_VisibleTrue.Foo() { return 115; }
-        int INestedInterfaceVisibleTrue_VisibleFalse.Foo() { return 116; }
-        int INestedInterfaceNotPublic_VisibleTrue.Foo() { return 117; }
+        int NestedClass.INestedInterfaceNestedInClass.Foo()
+        {
+            return 110;
+        }
+        int INestedInterfaceComImport_ComImport.Foo()
+        {
+            return 111;
+        }
+        int INestedInterfaceVisibleTrue_ComImport.Foo()
+        {
+            return 112;
+        }
+        int INestedInterfaceVisibleFalse_ComImport.Foo()
+        {
+            return 113;
+        }
+        int INestedInterfaceVisibleTrue_VisibleTrue.Foo()
+        {
+            return 114;
+        }
+        int INestedInterfaceVisibleFalse_VisibleTrue.Foo()
+        {
+            return 115;
+        }
+        int INestedInterfaceVisibleTrue_VisibleFalse.Foo()
+        {
+            return 116;
+        }
+        int INestedInterfaceNotPublic_VisibleTrue.Foo()
+        {
+            return 117;
+        }
 
-        int Foo() { return 19; }
+        int Foo()
+        {
+            return 19;
+        }
     }
 
     /// <summary>
@@ -510,30 +721,74 @@ public class ComVisibleServer
     /// </summary>
     [ComVisible(false)]
     [Guid("6DF17EC1-A8F4-4693-B195-EDB27DF00170")]
-    public sealed class NestedClassVisibleFalseServer : 
-        INestedInterfaceComImport, INestedInterfaceVisibleTrue, INestedInterfaceVisibleFalse, INestedInterfaceWithoutVisible, INestedInterfaceNotPublic
+    public sealed class NestedClassVisibleFalseServer
+        : INestedInterfaceComImport,
+          INestedInterfaceVisibleTrue,
+          INestedInterfaceVisibleFalse,
+          INestedInterfaceWithoutVisible,
+          INestedInterfaceNotPublic
     {
-        int INestedInterfaceComImport.Foo() { return 20; }
-        int INestedInterfaceVisibleTrue.Foo() { return 21; }
-        int INestedInterfaceVisibleFalse.Foo() { return 22; }
-        int INestedInterfaceWithoutVisible.Foo() { return 23; }
-        int INestedInterfaceNotPublic.Foo() { return 24; }
-        int Foo() { return 29; }
+        int INestedInterfaceComImport.Foo()
+        {
+            return 20;
+        }
+        int INestedInterfaceVisibleTrue.Foo()
+        {
+            return 21;
+        }
+        int INestedInterfaceVisibleFalse.Foo()
+        {
+            return 22;
+        }
+        int INestedInterfaceWithoutVisible.Foo()
+        {
+            return 23;
+        }
+        int INestedInterfaceNotPublic.Foo()
+        {
+            return 24;
+        }
+        int Foo()
+        {
+            return 29;
+        }
     }
 
     /// <summary>
     /// Nested class not visible without ComVisible().
     /// </summary>
     [Guid("A57430B8-E0C1-486E-AE57-A15D6A729F99")]
-    public sealed class NestedClassWithoutVisibleServer : 
-        INestedInterfaceComImport, INestedInterfaceVisibleTrue, INestedInterfaceVisibleFalse, INestedInterfaceWithoutVisible, INestedInterfaceNotPublic
+    public sealed class NestedClassWithoutVisibleServer
+        : INestedInterfaceComImport,
+          INestedInterfaceVisibleTrue,
+          INestedInterfaceVisibleFalse,
+          INestedInterfaceWithoutVisible,
+          INestedInterfaceNotPublic
     {
-        int INestedInterfaceComImport.Foo() { return 30; }
-        int INestedInterfaceVisibleTrue.Foo() { return 31; }
-        int INestedInterfaceVisibleFalse.Foo() { return 32; }
-        int INestedInterfaceWithoutVisible.Foo() { return 33; }
-        int INestedInterfaceNotPublic.Foo() { return 34; }
-        int Foo() { return 39; }
+        int INestedInterfaceComImport.Foo()
+        {
+            return 30;
+        }
+        int INestedInterfaceVisibleTrue.Foo()
+        {
+            return 31;
+        }
+        int INestedInterfaceVisibleFalse.Foo()
+        {
+            return 32;
+        }
+        int INestedInterfaceWithoutVisible.Foo()
+        {
+            return 33;
+        }
+        int INestedInterfaceNotPublic.Foo()
+        {
+            return 34;
+        }
+        int Foo()
+        {
+            return 39;
+        }
     }
 
     /// <summary>
@@ -541,100 +796,202 @@ public class ComVisibleServer
     /// </summary>
     [ComVisible(true)]
     [Guid("CAFBD2FF-710A-4E83-9229-42FA16963424")]
-    public sealed class NestedClassGenericServer<T> : INestedInterfaceVisibleTrue, INestedInterfaceGenericVisibleTrue<T>, INestedInterfaceComImport
+    public sealed class NestedClassGenericServer<T>
+        : INestedInterfaceVisibleTrue,
+          INestedInterfaceGenericVisibleTrue<T>,
+          INestedInterfaceComImport
     {
-        int INestedInterfaceComImport.Foo() { return 40; }
-        int INestedInterfaceVisibleTrue.Foo() { return 41; }
-        T INestedInterfaceGenericVisibleTrue<T>.Foo() { return default(T); }
-        T Foo() { return default(T); }
+        int INestedInterfaceComImport.Foo()
+        {
+            return 40;
+        }
+        int INestedInterfaceVisibleTrue.Foo()
+        {
+            return 41;
+        }
+        T INestedInterfaceGenericVisibleTrue<T>.Foo()
+        {
+            return default(T);
+        }
+        T Foo()
+        {
+            return default(T);
+        }
     }
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
-    
-    [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleFalse([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
-    
-    [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceWithoutVisible([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceNotPublic([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleFalse(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleTrueNoGuid([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceWithoutVisible(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceNotVisibleNoGuid([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceNotPublic(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceGenericVisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleTrueNoGuid(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceComImport_ComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceNotVisibleNoGuid(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleTrue_ComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceGenericVisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleFalse_ComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceComImport_ComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleTrue_VisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleTrue_ComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleFalse_VisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleFalse_ComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceVisibleTrue_VisibleFalse([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleTrue_VisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_InterfaceNotPublic_VisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleFalse_VisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceVisibleTrue_VisibleFalse(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_InterfaceNotPublic_VisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleFalse([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceWithoutVisible([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceVisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceNotPublic([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
-    
-    [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceNestedInClass([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceVisibleFalse(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceGenericVisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceWithoutVisible(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceComImport_ComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceNotPublic(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleTrue_ComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceNestedInClass(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleFalse_ComImport([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceGenericVisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleTrue_VisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceComImport_ComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleFalse_VisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceVisibleTrue_ComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceVisibleTrue_VisibleFalse([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceVisibleFalse_ComImport(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     [DllImport("ComVisibleNative")]
-    public static extern int CCWTest_NestedInterfaceNotPublic_VisibleTrue([MarshalAs(UnmanagedType.IUnknown)] object unk, out int fooSuccessVal);
+    public static extern int CCWTest_NestedInterfaceVisibleTrue_VisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
+
+    [DllImport("ComVisibleNative")]
+    public static extern int CCWTest_NestedInterfaceVisibleFalse_VisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
+
+    [DllImport("ComVisibleNative")]
+    public static extern int CCWTest_NestedInterfaceVisibleTrue_VisibleFalse(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
+
+    [DllImport("ComVisibleNative")]
+    public static extern int CCWTest_NestedInterfaceNotPublic_VisibleTrue(
+        [MarshalAs(UnmanagedType.IUnknown)] object unk,
+        out int fooSuccessVal
+    );
 
     /// <summary>
     /// Test case set for ComVisible. The assembly is set as [assembly: ComVisible(false)]
@@ -650,60 +1007,116 @@ public class ComVisibleServer
         ClassVisibleTrueServer visibleBaseClass = new ClassVisibleTrueServer();
 
         Console.WriteLine("CCWTest_InterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceComImport((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceComImport((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(1, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(2, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleFalse");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceVisibleFalse((object)visibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceVisibleFalse((object)visibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
         Console.WriteLine("CCWTest_InterfaceWithoutVisible");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceWithoutVisible((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceWithoutVisible((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(4, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceNotPublic");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceNotPublic((object)visibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceNotPublic((object)visibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         Console.WriteLine("CCWTest_InterfaceVisibleTrueNoGuid");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrueNoGuid((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrueNoGuid((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(6, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_InterfaceNotVisibleNoGuid");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceNotVisibleNoGuid((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceNotVisibleNoGuid((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(16, fooSuccessVal, "COM method didn't return the expected value.");
 
         //
         // Tests for nested Interface in a class with ComVisible(true)
         //
         Console.WriteLine("Nested Interface in a class with ComVisible(true)");
-        
+
         Console.WriteLine("CCWTest_InterfaceComImport_ComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceComImport_ComImport((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceComImport_ComImport((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(101, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleTrue_ComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue_ComImport((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue_ComImport((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(102, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleFalse_ComImport");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceVisibleFalse_ComImport((object)visibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceVisibleFalse_ComImport((object)visibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
         Console.WriteLine("CCWTest_InterfaceVisibleTrue_VisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue_VisibleTrue((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue_VisibleTrue((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(104, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleFalse_VisibleTrue");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceVisibleFalse_VisibleTrue((object)visibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceVisibleFalse_VisibleTrue((object)visibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
         Console.WriteLine("CCWTest_InterfaceVisibleTrue_VisibleFalse");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue_VisibleFalse((object)visibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue_VisibleFalse((object)visibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(106, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceNotPublic_VisibleTrue");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceNotPublic_VisibleTrue((object)visibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceNotPublic_VisibleTrue((object)visibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for class with ComVisible(false)
@@ -712,22 +1125,42 @@ public class ComVisibleServer
         ClassVisibleFalseServer visibleFalseBaseClass = new ClassVisibleFalseServer();
 
         Console.WriteLine("CCWTest_InterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceComImport((object)visibleFalseBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceComImport((object)visibleFalseBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(120, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue((object)visibleFalseBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue((object)visibleFalseBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(121, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleFalse");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceVisibleFalse((object)visibleFalseBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceVisibleFalse((object)visibleFalseBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
         Console.WriteLine("CCWTest_InterfaceWithoutVisible");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceWithoutVisible((object)visibleFalseBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceWithoutVisible((object)visibleFalseBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(123, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceNotPublic");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceNotPublic((object)visibleFalseBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceNotPublic((object)visibleFalseBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for class without ComVisible()
@@ -736,23 +1169,42 @@ public class ComVisibleServer
         ClassWithoutVisibleServer withoutVisibleBaseClass = new ClassWithoutVisibleServer();
 
         Console.WriteLine("CCWTest_InterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceComImport((object)withoutVisibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceComImport((object)withoutVisibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(130, fooSuccessVal, "COM method didn't return the expected value.");
-        
-        Console.WriteLine("CCWTest_InterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue((object)withoutVisibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
-        Assert.AreEqual(131, fooSuccessVal, "COM method didn't return the expected value.");
-        
-        Console.WriteLine("CCWTest_InterfaceVisibleFalse");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceVisibleFalse((object)withoutVisibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
-        Console.WriteLine("CCWTest_InterfaceWithoutVisible");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceWithoutVisible((object)withoutVisibleBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
-        Assert.AreEqual(133, fooSuccessVal, "COM method didn't return the expected value.");
-        
-        Console.WriteLine("CCWTest_InterfaceNotPublic");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_InterfaceNotPublic((object)withoutVisibleBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
 
+        Console.WriteLine("CCWTest_InterfaceVisibleTrue");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue((object)withoutVisibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
+        Assert.AreEqual(131, fooSuccessVal, "COM method didn't return the expected value.");
+
+        Console.WriteLine("CCWTest_InterfaceVisibleFalse");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceVisibleFalse((object)withoutVisibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
+        Console.WriteLine("CCWTest_InterfaceWithoutVisible");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceWithoutVisible((object)withoutVisibleBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
+        Assert.AreEqual(133, fooSuccessVal, "COM method didn't return the expected value.");
+
+        Console.WriteLine("CCWTest_InterfaceNotPublic");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_InterfaceNotPublic((object)withoutVisibleBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for generic class with ComVisible(true)
@@ -761,39 +1213,74 @@ public class ComVisibleServer
         ClassGenericServer<int> genericServer = new ClassGenericServer<int>();
 
         Console.WriteLine("CCWTest_InterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceComImport((object)genericServer, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceComImport((object)genericServer, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(140, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_InterfaceVisibleTrue((object)genericServer, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_InterfaceVisibleTrue((object)genericServer, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(141, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_InterfaceGenericVisibleTrue");
-        Assert.AreEqual(Helpers.COR_E_INVALIDOPERATION, CCWTest_InterfaceGenericVisibleTrue((object)genericServer, out fooSuccessVal), "Returned diferent exception than the expected COR_E_INVALIDOPERATION.");
+        Assert.AreEqual(
+            Helpers.COR_E_INVALIDOPERATION,
+            CCWTest_InterfaceGenericVisibleTrue((object)genericServer, out fooSuccessVal),
+            "Returned diferent exception than the expected COR_E_INVALIDOPERATION."
+        );
 
         //
         // Tests for nested class with ComVisible(true)
         //
         Console.WriteLine("Nested class with ComVisible(true)");
         NestedClassVisibleTrueServer visibleNestedBaseClass = new NestedClassVisibleTrueServer();
-        
+
         Console.WriteLine("CCWTest_NestedInterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceComImport((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceComImport((object)visibleNestedBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(10, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue((object)visibleNestedBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(11, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleFalse");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceVisibleFalse((object)visibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceVisibleFalse((object)visibleNestedBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
         Console.WriteLine("CCWTest_NestedInterfaceWithoutVisible");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceWithoutVisible((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceWithoutVisible(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(13, fooSuccessVal, "COM method didn't return the expected value.");
-        
+
         Console.WriteLine("CCWTest_NestedInterfaceNotPublic");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceNotPublic((object)visibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceNotPublic((object)visibleNestedBaseClass, out fooSuccessVal),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for nested Interface in a nested class with ComVisible(true)
@@ -801,100 +1288,240 @@ public class ComVisibleServer
         Console.WriteLine("Nested Interface in a nested class with ComVisible(true)");
 
         Console.WriteLine("CCWTest_NestedInterfaceNestedInClass");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceNestedInClass((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceNestedInClass((object)visibleNestedBaseClass, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(110, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceComImport_ComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceComImport_ComImport((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceComImport_ComImport(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(111, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue_ComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue_ComImport((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue_ComImport(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(112, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleFalse_ComImport");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceVisibleFalse_ComImport((object)visibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceVisibleFalse_ComImport(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue_VisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue_VisibleTrue((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue_VisibleTrue(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(114, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleFalse_VisibleTrue");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceVisibleFalse_VisibleTrue((object)visibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
-        
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceVisibleFalse_VisibleTrue(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
+
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue_VisibleFalse");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue_VisibleFalse((object)visibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue_VisibleFalse(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(116, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceNotPublic_VisibleTrue");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceNotPublic_VisibleTrue((object)visibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceNotPublic_VisibleTrue(
+                (object)visibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for nested class with ComVisible(false)
         //
         Console.WriteLine("Nested class with ComVisible(false)");
-        NestedClassVisibleFalseServer visibleFalseNestedBaseClass = new NestedClassVisibleFalseServer();
-        
+        NestedClassVisibleFalseServer visibleFalseNestedBaseClass =
+            new NestedClassVisibleFalseServer();
+
         Console.WriteLine("CCWTest_NestedInterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceComImport((object)visibleFalseNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceComImport(
+                (object)visibleFalseNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(20, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue((object)visibleFalseNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue(
+                (object)visibleFalseNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(21, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleFalse");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceVisibleFalse((object)visibleFalseNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceVisibleFalse(
+                (object)visibleFalseNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         Console.WriteLine("CCWTest_NestedInterfaceWithoutVisible");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceWithoutVisible((object)visibleFalseNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceWithoutVisible(
+                (object)visibleFalseNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(23, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceNotPublic");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceNotPublic((object)visibleFalseNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceNotPublic(
+                (object)visibleFalseNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for nested class without ComVisible()
         //
         Console.WriteLine("Nested class without ComVisible()");
-        NestedClassWithoutVisibleServer withoutVisibleNestedBaseClass = new NestedClassWithoutVisibleServer();
-        
+        NestedClassWithoutVisibleServer withoutVisibleNestedBaseClass =
+            new NestedClassWithoutVisibleServer();
+
         Console.WriteLine("CCWTest_NestedInterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceComImport((object)withoutVisibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceComImport(
+                (object)withoutVisibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(30, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue((object)withoutVisibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue(
+                (object)withoutVisibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(31, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleFalse");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceVisibleFalse((object)withoutVisibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceVisibleFalse(
+                (object)withoutVisibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         Console.WriteLine("CCWTest_NestedInterfaceWithoutVisible");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceWithoutVisible((object)withoutVisibleNestedBaseClass, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceWithoutVisible(
+                (object)withoutVisibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(33, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceNotPublic");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceNotPublic((object)withoutVisibleNestedBaseClass, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceNotPublic(
+                (object)withoutVisibleNestedBaseClass,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
 
         //
         // Tests for generic nested class with ComVisible(true)
         //
         Console.WriteLine("Nested generic class with ComVisible(true)");
         NestedClassGenericServer<int> nestedGenericServer = new NestedClassGenericServer<int>();
-        
+
         Console.WriteLine("CCWTest_NestedInterfaceComImport");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceComImport((object)nestedGenericServer, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceComImport((object)nestedGenericServer, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(40, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceVisibleTrue");
-        Assert.AreEqual(Helpers.S_OK, CCWTest_NestedInterfaceVisibleTrue((object)nestedGenericServer, out fooSuccessVal), "COM method thrown an unexpected exception.");
+        Assert.AreEqual(
+            Helpers.S_OK,
+            CCWTest_NestedInterfaceVisibleTrue((object)nestedGenericServer, out fooSuccessVal),
+            "COM method thrown an unexpected exception."
+        );
         Assert.AreEqual(41, fooSuccessVal, "COM method didn't return the expected value.");
 
         Console.WriteLine("CCWTest_NestedInterfaceGenericVisibleTrue");
-        Assert.AreEqual(Helpers.E_NOINTERFACE, CCWTest_NestedInterfaceGenericVisibleTrue((object)nestedGenericServer, out fooSuccessVal), "Returned diferent exception than the expected E_NOINTERFACE.");
+        Assert.AreEqual(
+            Helpers.E_NOINTERFACE,
+            CCWTest_NestedInterfaceGenericVisibleTrue(
+                (object)nestedGenericServer,
+                out fooSuccessVal
+            ),
+            "Returned diferent exception than the expected E_NOINTERFACE."
+        );
     }
-    
+
     public static int Main()
     {
         try

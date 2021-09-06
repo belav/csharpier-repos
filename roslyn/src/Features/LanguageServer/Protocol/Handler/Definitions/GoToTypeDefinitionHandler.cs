@@ -18,13 +18,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GoToTypeDefinitionHandler(IMetadataAsSourceFileService metadataAsSourceFileService) : base(metadataAsSourceFileService)
-        {
-        }
+        public GoToTypeDefinitionHandler(
+            IMetadataAsSourceFileService metadataAsSourceFileService
+        ) : base(metadataAsSourceFileService) { }
 
         public override string Method => LSP.Methods.TextDocumentTypeDefinitionName;
 
-        public override Task<LSP.Location[]> HandleRequestAsync(LSP.TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
-            => GetDefinitionAsync(request, typeOnly: true, context, cancellationToken);
+        public override Task<LSP.Location[]> HandleRequestAsync(
+            LSP.TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) => GetDefinitionAsync(request, typeOnly: true, context, cancellationToken);
     }
 }

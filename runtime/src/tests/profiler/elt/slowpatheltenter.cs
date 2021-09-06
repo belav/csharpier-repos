@@ -17,7 +17,9 @@ namespace SlowPathELTTests
 {
     class SlowPathELTEnter
     {
-        static readonly Guid EventPipeWritingProfilerGuid = new Guid("0B36296B-EC47-44DA-8320-DC5E3071DD06");
+        static readonly Guid EventPipeWritingProfilerGuid = new Guid(
+            "0B36296B-EC47-44DA-8320-DC5E3071DD06"
+        );
 
         public static int Main(string[] args)
         {
@@ -26,9 +28,11 @@ namespace SlowPathELTTests
                 return SlowPathELTHelpers.RunTest();
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "ELTSlowPathEnter",
-                                          profilerClsid: EventPipeWritingProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "ELTSlowPathEnter",
+                profilerClsid: EventPipeWritingProfilerGuid
+            );
         }
     }
 }

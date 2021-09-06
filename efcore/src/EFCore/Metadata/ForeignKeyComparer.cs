@@ -17,11 +17,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///         not used in application code.
     ///     </para>
     /// </summary>
-    public sealed class ForeignKeyComparer : IEqualityComparer<IReadOnlyForeignKey>, IComparer<IReadOnlyForeignKey>
+    public sealed class ForeignKeyComparer
+        : IEqualityComparer<IReadOnlyForeignKey>,
+          IComparer<IReadOnlyForeignKey>
     {
-        private ForeignKeyComparer()
-        {
-        }
+        private ForeignKeyComparer() { }
 
         /// <summary>
         ///     The singleton instance of the comparer to use.
@@ -42,14 +42,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 return result;
             }
 
-            result = PropertyListComparer.Instance.Compare(x?.PrincipalKey.Properties, y?.PrincipalKey.Properties);
+            result = PropertyListComparer.Instance.Compare(
+                x?.PrincipalKey.Properties,
+                y?.PrincipalKey.Properties
+            );
             if (result != 0)
             {
                 return result;
             }
 
-            result = EntityTypeFullNameComparer.Instance.Compare(x?.PrincipalEntityType, y?.PrincipalEntityType);
-            return result != 0 ? result : EntityTypeFullNameComparer.Instance.Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
+            result = EntityTypeFullNameComparer.Instance.Compare(
+                x?.PrincipalEntityType,
+                y?.PrincipalEntityType
+            );
+            return result != 0
+                ? result
+                : EntityTypeFullNameComparer.Instance.Compare(
+                      x?.DeclaringEntityType,
+                      y?.DeclaringEntityType
+                  );
         }
 
         /// <summary>
@@ -58,8 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="x"> The first object to compare. </param>
         /// <param name="y"> The second object to compare. </param>
         /// <returns> <see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />. </returns>
-        public bool Equals(IReadOnlyForeignKey? x, IReadOnlyForeignKey? y)
-            => Compare(x, y) == 0;
+        public bool Equals(IReadOnlyForeignKey? x, IReadOnlyForeignKey? y) => Compare(x, y) == 0;
 
         /// <summary>
         ///     Returns a hash code for the specified object.

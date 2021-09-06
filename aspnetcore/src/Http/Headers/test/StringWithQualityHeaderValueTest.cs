@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -33,8 +33,12 @@ namespace Microsoft.Net.Http.Headers
             Assert.Throws<ArgumentException>(() => new StringWithQualityHeaderValue("", 0.1));
             Assert.Throws<FormatException>(() => new StringWithQualityHeaderValue("in valid", 0.1));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", 1.1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", -0.1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StringWithQualityHeaderValue("t", 1.1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StringWithQualityHeaderValue("t", -0.1)
+            );
         }
 
         [Fact]
@@ -113,7 +117,10 @@ namespace Microsoft.Net.Http.Headers
             CheckValidParse("text ; q = 0.5", new StringWithQualityHeaderValue("text", 0.5));
             CheckValidParse("\r\n text ; q = 0.5 ", new StringWithQualityHeaderValue("text", 0.5));
             CheckValidParse("  text  ", new StringWithQualityHeaderValue("text"));
-            CheckValidParse(" \r\n text \r\n ; \r\n q = 0.123", new StringWithQualityHeaderValue("text", 0.123));
+            CheckValidParse(
+                " \r\n text \r\n ; \r\n q = 0.123",
+                new StringWithQualityHeaderValue("text", 0.123)
+            );
             CheckValidParse(" text ; q = 0.123 ", new StringWithQualityHeaderValue("text", 0.123));
             CheckValidParse("text;q=1 ", new StringWithQualityHeaderValue("text", 1));
             CheckValidParse("*", new StringWithQualityHeaderValue("*"));
@@ -125,7 +132,10 @@ namespace Microsoft.Net.Http.Headers
             CheckValidParse("t;q=0.12345678", new StringWithQualityHeaderValue("t", 0.12345678));
             CheckValidParse("t ;  q  =   0", new StringWithQualityHeaderValue("t", 0));
             CheckValidParse("iso-8859-5", new StringWithQualityHeaderValue("iso-8859-5"));
-            CheckValidParse("unicode-1-1; q=0.8", new StringWithQualityHeaderValue("unicode-1-1", 0.8));
+            CheckValidParse(
+                "unicode-1-1; q=0.8",
+                new StringWithQualityHeaderValue("unicode-1-1", 0.8)
+            );
         }
 
         [Theory]
@@ -172,9 +182,15 @@ namespace Microsoft.Net.Http.Headers
             CheckValidTryParse("text", new StringWithQualityHeaderValue("text"));
             CheckValidTryParse("text;q=0.5", new StringWithQualityHeaderValue("text", 0.5));
             CheckValidTryParse("text ; q = 0.5", new StringWithQualityHeaderValue("text", 0.5));
-            CheckValidTryParse("\r\n text ; q = 0.5 ", new StringWithQualityHeaderValue("text", 0.5));
+            CheckValidTryParse(
+                "\r\n text ; q = 0.5 ",
+                new StringWithQualityHeaderValue("text", 0.5)
+            );
             CheckValidTryParse("  text  ", new StringWithQualityHeaderValue("text"));
-            CheckValidTryParse(" \r\n text \r\n ; \r\n q = 0.123", new StringWithQualityHeaderValue("text", 0.123));
+            CheckValidTryParse(
+                " \r\n text \r\n ; \r\n q = 0.123",
+                new StringWithQualityHeaderValue("text", 0.123)
+            );
         }
 
         [Fact]
@@ -219,7 +235,9 @@ namespace Microsoft.Net.Http.Headers
                 "text7,text8;q=0.5",
                 " text9 , text10 ; q = 0.5 ",
             };
-            IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseList(inputs);
+            IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseList(
+                inputs
+            );
 
             var expectedResults = new[]
             {
@@ -256,7 +274,8 @@ namespace Microsoft.Net.Http.Headers
                 "text7,text8;q=0.5",
                 " text9 , text10 ; q = 0.5 ",
             };
-            IList<StringWithQualityHeaderValue> results = StringWithQualityHeaderValue.ParseStrictList(inputs);
+            IList<StringWithQualityHeaderValue> results =
+                StringWithQualityHeaderValue.ParseStrictList(inputs);
 
             var expectedResults = new[]
             {
@@ -406,7 +425,9 @@ namespace Microsoft.Net.Http.Headers
                 "text7,text8;q=0.5",
                 " text9 , text10 ; q = 0.5 ",
             };
-            Assert.Throws<FormatException>(() => StringWithQualityHeaderValue.ParseStrictList(inputs));
+            Assert.Throws<FormatException>(
+                () => StringWithQualityHeaderValue.ParseStrictList(inputs)
+            );
         }
 
         [Fact]
@@ -486,7 +507,6 @@ namespace Microsoft.Net.Http.Headers
             Assert.False(StringWithQualityHeaderValue.TryParse(input, out var result));
             Assert.Null(result);
         }
-
         #endregion
     }
 }

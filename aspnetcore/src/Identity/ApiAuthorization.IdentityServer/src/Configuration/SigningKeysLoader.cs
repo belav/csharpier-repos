@@ -12,25 +12,33 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 {
     internal static class SigningKeysLoader
     {
-        public static X509Certificate2 LoadFromFile(string path, string password, X509KeyStorageFlags keyStorageFlags)
-        {
+        public static X509Certificate2 LoadFromFile(
+            string path,
+            string password,
+            X509KeyStorageFlags keyStorageFlags
+        ) {
             try
             {
                 if (!File.Exists(path))
                 {
-                    throw new InvalidOperationException($"There was an error loading the certificate. The file '{path}' was not found.");
+                    throw new InvalidOperationException(
+                        $"There was an error loading the certificate. The file '{path}' was not found."
+                    );
                 }
                 else if (password == null)
                 {
-                    throw new InvalidOperationException("There was an error loading the certificate. No password was provided.");
+                    throw new InvalidOperationException(
+                        "There was an error loading the certificate. No password was provided."
+                    );
                 }
 
                 return new X509Certificate2(path, password, keyStorageFlags);
             }
             catch (CryptographicException e)
             {
-                var message = "There was an error loading the certificate. Either the password is incorrect or the process does not have permisions to " +
-                    $"store the key in the Keyset '{keyStorageFlags}'";
+                var message =
+                    "There was an error loading the certificate. Either the password is incorrect or the process does not have permisions to "
+                    + $"store the key in the Keyset '{keyStorageFlags}'";
                 throw new InvalidOperationException(message, e);
             }
         }
@@ -39,8 +47,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             string subject,
             string storeName,
             StoreLocation storeLocation,
-            DateTimeOffset currentTime)
-        {
+            DateTimeOffset currentTime
+        ) {
             using (var store = new X509Store(storeName, storeLocation))
             {
                 X509Certificate2Collection storeCertificates = null;
@@ -50,23 +58,32 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 {
                     store.Open(OpenFlags.ReadOnly);
                     storeCertificates = store.Certificates;
-                    var foundCertificates = storeCertificates
-                        .Find(X509FindType.FindBySubjectDistinguishedName, subject, validOnly: false);
+                    var foundCertificates = storeCertificates.Find(
+                        X509FindType.FindBySubjectDistinguishedName,
+                        subject,
+                        validOnly: false
+                    );
 
-                    foundCertificate = foundCertificates
-                        .OfType<X509Certificate2>()
-                        .Where(certificate => certificate.NotBefore <= currentTime && certificate.NotAfter > currentTime)
+                    foundCertificate = foundCertificates.OfType<X509Certificate2>()
+                        .Where(
+                            certificate =>
+                                certificate.NotBefore <= currentTime
+                                && certificate.NotAfter > currentTime
+                        )
                         .OrderBy(certificate => certificate.NotAfter)
                         .FirstOrDefault();
 
                     if (foundCertificate == null)
                     {
-                        throw new InvalidOperationException("Couldn't find a valid certificate with " +
-                            $"subject '{subject}' on the '{storeLocation}\\{storeName}'");
+                        throw new InvalidOperationException(
+                            "Couldn't find a valid certificate with "
+                                + $"subject '{subject}' on the '{storeLocation}\\{storeName}'"
+                        );
                     }
 
                     return foundCertificate;
                 }
+
                 finally
                 {
                     DisposeCertificates(storeCertificates, except: foundCertificate);
@@ -79,7 +96,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var fileExists = File.Exists(path);
             if (!fileExists && !createIfMissing)
             {
-                throw new InvalidOperationException($"Couldn't find the file '{path}' and creation of a development key was not requested.");
+                throw new InvalidOperationException(
+                    $"Couldn't find the file '{path}' and creation of a development key was not requested."
+                );
             }
 
             if (fileExists)
@@ -115,12 +134,16 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             {
                 using (var rsa = RSA.Create())
                 {
-                    if (rsa is RSACryptoServiceProvider rSACryptoServiceProvider && rsa.KeySize < 2048)
-                    {
+                    if (
+                        rsa is RSACryptoServiceProvider rSACryptoServiceProvider
+                        && rsa.KeySize < 2048
+                    ) {
                         rsa.KeySize = 2048;
                         if (rsa.KeySize < 2048)
                         {
-                            throw new InvalidOperationException("We can't generate an RSA key with at least 2048 bits. Key generation is not supported in this system.");
+                            throw new InvalidOperationException(
+                                "We can't generate an RSA key with at least 2048 bits. Key generation is not supported in this system."
+                            );
                         }
                     }
 
@@ -226,8 +249,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             }
         }
 
-        private static void DisposeCertificates(X509Certificate2Collection certificates, X509Certificate2 except)
-        {
+        private static void DisposeCertificates(
+            X509Certificate2Collection certificates,
+            X509Certificate2 except
+        ) {
             if (certificates != null)
             {
                 foreach (var certificate in certificates)

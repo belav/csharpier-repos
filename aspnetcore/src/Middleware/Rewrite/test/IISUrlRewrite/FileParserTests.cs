@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void RuleParse_ParseTypicalRule()
         {
             // arrange
-            var xml = @"<rewrite>
+            var xml =
+                @"<rewrite>
                             <rules>
                                 <rule name=""Rewrite to article.aspx"">
                                     <match url = ""^article/([0-9]+)/([_0-9a-z-]+)"" />
@@ -27,11 +28,15 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
                         </rewrite>";
 
             var expected = new List<IISUrlRewriteRule>();
-            expected.Add(CreateTestRule(new ConditionCollection(),
-                url: "^article/([0-9]+)/([_0-9a-z-]+)",
-                name: "Rewrite to article.aspx",
-                actionType: ActionType.Rewrite,
-                pattern: "article.aspx?id={R:1}&amp;title={R:2}"));
+            expected.Add(
+                CreateTestRule(
+                    new ConditionCollection(),
+                    url: "^article/([0-9]+)/([_0-9a-z-]+)",
+                    name: "Rewrite to article.aspx",
+                    actionType: ActionType.Rewrite,
+                    pattern: "article.aspx?id={R:1}&amp;title={R:2}"
+                )
+            );
 
             // act
             var res = new UrlRewriteFileParser().Parse(new StringReader(xml), false);
@@ -44,7 +49,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void RuleParse_ParseSingleRuleWithSingleCondition()
         {
             // arrange
-            var xml = @"<rewrite>
+            var xml =
+                @"<rewrite>
                             <rules>
                                 <rule name=""Rewrite to article.aspx"">
                                     <match url = ""^article/([0-9]+)/([_0-9a-z-]+)"" />
@@ -57,14 +63,23 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
                         </rewrite>";
 
             var condList = new ConditionCollection();
-            condList.Add(new Condition(new InputParser().ParseInputString("{HTTPS}"), new RegexMatch(new Regex("^OFF$"), false)));
+            condList.Add(
+                new Condition(
+                    new InputParser().ParseInputString("{HTTPS}"),
+                    new RegexMatch(new Regex("^OFF$"), false)
+                )
+            );
 
             var expected = new List<IISUrlRewriteRule>();
-            expected.Add(CreateTestRule(condList,
-                url: "^article/([0-9]+)/([_0-9a-z-]+)",
-                name: "Rewrite to article.aspx",
-                actionType: ActionType.Rewrite,
-                pattern: "article.aspx?id={R:1}&amp;title={R:2}"));
+            expected.Add(
+                CreateTestRule(
+                    condList,
+                    url: "^article/([0-9]+)/([_0-9a-z-]+)",
+                    name: "Rewrite to article.aspx",
+                    actionType: ActionType.Rewrite,
+                    pattern: "article.aspx?id={R:1}&amp;title={R:2}"
+                )
+            );
 
             // act
             var res = new UrlRewriteFileParser().Parse(new StringReader(xml), false);
@@ -77,7 +92,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void RuleParse_ParseMultipleRules()
         {
             // arrange
-            var xml = @"<rewrite>
+            var xml =
+                @"<rewrite>
                             <rules>
                                 <rule name=""Rewrite to article.aspx"">
                                     <match url = ""^article/([0-9]+)/([_0-9a-z-]+)"" />
@@ -97,19 +113,32 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
                         </rewrite>";
 
             var condList = new ConditionCollection();
-            condList.Add(new Condition(new InputParser().ParseInputString("{HTTPS}"), new RegexMatch(new Regex("^OFF$"), false)));
+            condList.Add(
+                new Condition(
+                    new InputParser().ParseInputString("{HTTPS}"),
+                    new RegexMatch(new Regex("^OFF$"), false)
+                )
+            );
 
             var expected = new List<IISUrlRewriteRule>();
-            expected.Add(CreateTestRule(condList,
-                url: "^article/([0-9]+)/([_0-9a-z-]+)",
-                name: "Rewrite to article.aspx",
-                actionType: ActionType.Rewrite,
-                pattern: "article.aspx?id={R:1}&amp;title={R:2}"));
-            expected.Add(CreateTestRule(condList,
-                url: "^article/([0-9]+)/([_0-9a-z-]+)",
-                name: "Rewrite to another article.aspx",
-                actionType: ActionType.Rewrite,
-                pattern: "article.aspx?id={R:1}&amp;title={R:2}"));
+            expected.Add(
+                CreateTestRule(
+                    condList,
+                    url: "^article/([0-9]+)/([_0-9a-z-]+)",
+                    name: "Rewrite to article.aspx",
+                    actionType: ActionType.Rewrite,
+                    pattern: "article.aspx?id={R:1}&amp;title={R:2}"
+                )
+            );
+            expected.Add(
+                CreateTestRule(
+                    condList,
+                    url: "^article/([0-9]+)/([_0-9a-z-]+)",
+                    name: "Rewrite to another article.aspx",
+                    actionType: ActionType.Rewrite,
+                    pattern: "article.aspx?id={R:1}&amp;title={R:2}"
+                )
+            );
 
             // act
             var res = new UrlRewriteFileParser().Parse(new StringReader(xml), false);
@@ -122,7 +151,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void Should_parse_global_rules()
         {
             // arrange
-            var xml = @"<rewrite>
+            var xml =
+                @"<rewrite>
                             <globalRules>
                                 <rule name=""httpsOnly"" patternSyntax=""ECMAScript"" stopProcessing=""true"">
                                     <match url="".*"" />
@@ -153,7 +183,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void Should_skip_empty_conditions()
         {
             // arrange
-            var xml = @"<rewrite>
+            var xml =
+                @"<rewrite>
                             <rules>
                                 <rule name=""redirect-aspnet-mvc"" enabled=""true"" stopProcessing=""true"">
                                     <match url=""^aspnet/Mvc"" />
@@ -171,7 +202,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         }
 
         // Creates a rule with appropriate default values of the url rewrite rule.
-        private IISUrlRewriteRule CreateTestRule(ConditionCollection conditions,
+        private IISUrlRewriteRule CreateTestRule(
+            ConditionCollection conditions,
             string name = "",
             bool enabled = true,
             PatternSyntax patternSyntax = PatternSyntax.ECMAScript,
@@ -186,19 +218,25 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             bool global = false,
             UriMatchPart uriMatchPart = UriMatchPart.Path,
             RedirectType redirectType = RedirectType.Permanent
-            )
-        {
+        ) {
             return new IISUrlRewriteRule(
                 name,
                 new RegexMatch(new Regex("^OFF$"), negate),
                 conditions,
-                new RewriteAction(RuleResult.ContinueRules, new InputParser().ParseInputString(url, uriMatchPart), queryStringAppend: false),
-                global);
+                new RewriteAction(
+                    RuleResult.ContinueRules,
+                    new InputParser().ParseInputString(url, uriMatchPart),
+                    queryStringAppend: false
+                ),
+                global
+            );
         }
 
         // TODO make rules comparable?
-        private void AssertUrlRewriteRuleEquality(IList<IISUrlRewriteRule> actual, IList<IISUrlRewriteRule> expected)
-        {
+        private void AssertUrlRewriteRuleEquality(
+            IList<IISUrlRewriteRule> actual,
+            IList<IISUrlRewriteRule> expected
+        ) {
             Assert.Equal(actual.Count, expected.Count);
             for (var i = 0; i < actual.Count; i++)
             {
@@ -222,7 +260,10 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
                     {
                         var c1 = r1.Conditions[j];
                         var c2 = r2.Conditions[j];
-                        Assert.Equal(c1.Input.PatternSegments.Count, c2.Input.PatternSegments.Count);
+                        Assert.Equal(
+                            c1.Input.PatternSegments.Count,
+                            c2.Input.PatternSegments.Count
+                        );
                     }
                 }
 

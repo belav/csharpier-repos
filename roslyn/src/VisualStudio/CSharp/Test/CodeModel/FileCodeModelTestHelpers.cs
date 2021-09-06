@@ -26,9 +26,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
         // finalizer complaining we didn't clean it up. Catching AVs is of course not safe, but this is balancing
         // "probably not crash" as an improvement over "will crash when the finalizer throws."
         [HandleProcessCorruptedStateExceptions]
-        public static (TestWorkspace workspace, VisualStudioWorkspace extraWorkspaceToDisposeButNotUse, EnvDTE.FileCodeModel fileCodeModel) CreateWorkspaceAndFileCodeModel(string file)
-        {
-            var workspace = TestWorkspace.CreateCSharp(file, composition: VisualStudioTestCompositions.LanguageServices);
+        public static (TestWorkspace workspace, VisualStudioWorkspace extraWorkspaceToDisposeButNotUse, EnvDTE.FileCodeModel fileCodeModel) CreateWorkspaceAndFileCodeModel(
+            string file
+        ) {
+            var workspace = TestWorkspace.CreateCSharp(
+                file,
+                composition: VisualStudioTestCompositions.LanguageServices
+            );
 
             try
             {
@@ -40,9 +44,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                 WrapperPolicy.s_ComWrapperFactory = MockComWrapperFactory.Instance;
 
                 var visualStudioWorkspaceMock = new MockVisualStudioWorkspace(workspace);
-                var threadingContext = workspace.ExportProvider.GetExportedValue<IThreadingContext>();
-                var notificationService = workspace.ExportProvider.GetExportedValue<IForegroundNotificationService>();
-                var listenerProvider = workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+                var threadingContext =
+                    workspace.ExportProvider.GetExportedValue<IThreadingContext>();
+                var notificationService =
+                    workspace.ExportProvider.GetExportedValue<IForegroundNotificationService>();
+                var listenerProvider =
+                    workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
 
                 var state = new CodeModelState(
                     threadingContext,
@@ -54,9 +61,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                         serviceProvider,
                         threadingContext,
                         notificationService,
-                        listenerProvider));
+                        listenerProvider
+                    )
+                );
 
-                var codeModel = FileCodeModel.Create(state, null, document, new MockTextManagerAdapter()).Handle;
+                var codeModel =
+                    FileCodeModel.Create(
+                        state,
+                        null,
+                        document,
+                        new MockTextManagerAdapter()
+                    ).Handle;
 
                 return (workspace, visualStudioWorkspaceMock, codeModel);
             }

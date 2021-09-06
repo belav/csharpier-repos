@@ -8,8 +8,14 @@ namespace System.Xml.Tests
 {
     public abstract class TCWriteBuffer
     {
-        public void VerifyInvalidWrite(XmlWriterUtils utils, string methodName, int iBufferSize, int iIndex, int iCount, Type exceptionType)
-        {
+        public void VerifyInvalidWrite(
+            XmlWriterUtils utils,
+            string methodName,
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        ) {
             byte[] byteBuffer = new byte[iBufferSize];
             for (int i = 0; i < iBufferSize; i++)
                 byteBuffer[i] = (byte)(i + '0');
@@ -95,8 +101,13 @@ namespace System.Xml.Tests
             WriteToBuffer(ref destBuff, ref len, srcBuff, 0, (int)srcArrayLen);
         }
 
-        public static void WriteToBuffer(ref byte[] destBuff, ref int destStart, byte[] srcBuff, int srcStart, int count)
-        {
+        public static void WriteToBuffer(
+            ref byte[] destBuff,
+            ref int destStart,
+            byte[] srcBuff,
+            int srcStart,
+            int count
+        ) {
             ensureSpace(ref destBuff, destStart + count - 1);
             for (int i = srcStart; i < srcStart + count; i++)
             {
@@ -104,11 +115,18 @@ namespace System.Xml.Tests
             }
         }
 
-        public static void WriteToBuffer(ref byte[] destBuffer, ref int destBuffLen, string strValue)
-        {
+        public static void WriteToBuffer(
+            ref byte[] destBuffer,
+            ref int destBuffLen,
+            string strValue
+        ) {
             for (int i = 0; i < strValue.Length; i++)
             {
-                WriteToBuffer(ref destBuffer, ref destBuffLen, System.BitConverter.GetBytes(strValue[i]));
+                WriteToBuffer(
+                    ref destBuffer,
+                    ref destBuffLen,
+                    System.BitConverter.GetBytes(strValue[i])
+                );
             }
 
             WriteToBuffer(ref destBuffer, ref destBuffLen, System.BitConverter.GetBytes('\0'));

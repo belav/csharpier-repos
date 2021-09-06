@@ -20,8 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             string name,
-            int ordinal)
-        {
+            int ordinal
+        ) {
             var element = new CodeOptionsStatement(state, fileCodeModel, name, ordinal);
             var result = (EnvDTE80.CodeElement2)ComAggregate.CreateAggregatedObject(element);
 
@@ -32,8 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-        {
+            string name
+        ) {
             var element = new CodeOptionsStatement(state, fileCodeModel, nodeKind, name);
             return (EnvDTE80.CodeElement2)ComAggregate.CreateAggregatedObject(element);
         }
@@ -45,8 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             string name,
-            int ordinal)
-            : base(state, fileCodeModel)
+            int ordinal
+        ) : base(state, fileCodeModel)
         {
             _name = name;
             _ordinal = ordinal;
@@ -56,8 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind)
+            string name
+        ) : base(state, fileCodeModel, nodeKind)
         {
             _name = name;
         }
@@ -96,10 +96,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return EmptyCollection.Create(this.State, this); }
         }
 
-        protected override void SetName(string value)
-            => throw Exceptions.ThrowENotImpl();
+        protected override void SetName(string value) => throw Exceptions.ThrowENotImpl();
 
-        public override void RenameSymbol(string newName)
-            => throw Exceptions.ThrowENotImpl();
+        public override void RenameSymbol(string newName) => throw Exceptions.ThrowENotImpl();
     }
 }

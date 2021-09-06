@@ -22,8 +22,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class InMemoryTable<TKey> : IInMemoryTable
-        where TKey : notnull
+    public class InMemoryTable<TKey> : IInMemoryTable where TKey : notnull
     {
         private readonly IPrincipalKeyValueFactory<TKey> _keyValueFactory;
         private readonly bool _sensitiveLoggingEnabled;
@@ -44,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IEntityType entityType,
             IInMemoryTable? baseTable,
             bool sensitiveLoggingEnabled,
-            bool nullabilityCheckEnabled)
-        {
+            bool nullabilityCheckEnabled
+        ) {
             EntityType = entityType;
             BaseTable = baseTable;
             _keyValueFactory = entityType.FindPrimaryKey()!.GetPrincipalKeyValueFactory<TKey>();
@@ -55,8 +54,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 
             foreach (var property in entityType.GetProperties())
             {
-                var converter = property.GetValueConverter()
-                    ?? property.FindTypeMapping()?.Converter;
+                var converter =
+                    property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
                 if (converter != null)
                 {
@@ -97,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// </summary>
         public virtual InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(
             IProperty property,
-            IReadOnlyList<IInMemoryTable> tables)
-        {
+            IReadOnlyList<IInMemoryTable> tables
+        ) {
             _integerGenerators ??= new Dictionary<int, IInMemoryIntegerValueGenerator>();
 
             var propertyIndex = property.GetIndex();
@@ -125,8 +124,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerable<object?[]> Rows
-            => _rows.Values;
+        public virtual IEnumerable<object?[]> Rows => _rows.Values;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -168,8 +166,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             return rows;
         }
 
-        private static List<ValueComparer> GetKeyComparers(IEnumerable<IProperty> properties)
-            => properties.Select(p => p.GetKeyValueComparer()).ToList();
+        private static List<ValueComparer> GetKeyComparers(IEnumerable<IProperty> properties) =>
+            properties.Select(p => p.GetKeyValueComparer()).ToList();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -185,7 +183,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 
             for (var index = 0; index < properties.Count; index++)
             {
-                var propertyValue = SnapshotValue(properties[index], properties[index].GetKeyValueComparer(), entry);
+                var propertyValue = SnapshotValue(
+                    properties[index],
+                    properties[index].GetKeyValueComparer(),
+                    entry
+                );
 
                 row[index] = propertyValue;
                 HasNullabilityError(properties[index], propertyValue, nullabilityErrors);
@@ -218,7 +220,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 
                 for (var index = 0; index < properties.Count; index++)
                 {
-                    IsConcurrencyConflict(entry, properties[index], row[index], concurrencyConflicts);
+                    IsConcurrencyConflict(
+                        entry,
+                        properties[index],
+                        row[index],
+                        concurrencyConflicts
+                    );
                 }
 
                 if (concurrencyConflicts.Count > 0)
@@ -230,7 +237,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             }
             else
             {
-                throw new DbUpdateConcurrencyException(InMemoryStrings.UpdateConcurrencyException, new[] { entry });
+                throw new DbUpdateConcurrencyException(
+                    InMemoryStrings.UpdateConcurrencyException,
+                    new[] { entry }
+                );
             }
         }
 
@@ -238,24 +248,31 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IUpdateEntry entry,
             IProperty property,
             object? rowValue,
-            Dictionary<IProperty, object?> concurrencyConflicts)
-        {
+            Dictionary<IProperty, object?> concurrencyConflicts
+        ) {
             if (property.IsConcurrencyToken)
             {
                 var comparer = property.GetKeyValueComparer();
                 var originalValue = entry.GetOriginalValue(property);
 
-                var converter = property.GetValueConverter()
-                    ?? property.FindTypeMapping()?.Converter;
+                var converter =
+                    property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
                 if (converter != null)
                 {
                     rowValue = converter.ConvertFromProvider(rowValue);
                 }
 
-                if ((comparer != null && !comparer.Equals(rowValue, originalValue))
-                    || (comparer == null && !StructuralComparisons.StructuralEqualityComparer.Equals(rowValue, originalValue)))
-                {
+                if (
+                    (comparer != null && !comparer.Equals(rowValue, originalValue))
+                    || (
+                        comparer == null
+                        && !StructuralComparisons.StructuralEqualityComparer.Equals(
+                            rowValue,
+                            originalValue
+                        )
+                    )
+                ) {
                     concurrencyConflicts.Add(property, rowValue);
 
                     return true;
@@ -285,8 +302,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 
                 for (var index = 0; index < valueBuffer.Length; index++)
                 {
-                    if (IsConcurrencyConflict(entry, properties[index], row[index], concurrencyConflicts))
-                    {
+                    if (
+                        IsConcurrencyConflict(
+                            entry,
+                            properties[index],
+                            row[index],
+                            concurrencyConflicts
+                        )
+                    ) {
                         continue;
                     }
 
@@ -316,7 +339,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             }
             else
             {
-                throw new DbUpdateConcurrencyException(InMemoryStrings.UpdateConcurrencyException, new[] { entry });
+                throw new DbUpdateConcurrencyException(
+                    InMemoryStrings.UpdateConcurrencyException,
+                    new[] { entry }
+                );
             }
         }
 
@@ -339,15 +365,17 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             }
         }
 
-        private TKey CreateKey(IUpdateEntry entry)
-            => _keyValueFactory.CreateFromCurrentValues(entry);
+        private TKey CreateKey(IUpdateEntry entry) =>
+            _keyValueFactory.CreateFromCurrentValues(entry);
 
-        private static object? SnapshotValue(IProperty property, ValueComparer? comparer, IUpdateEntry entry)
-        {
+        private static object? SnapshotValue(
+            IProperty property,
+            ValueComparer? comparer,
+            IUpdateEntry entry
+        ) {
             var value = SnapshotValue(comparer, entry.GetCurrentValue(property));
 
-            var converter = property.GetValueConverter()
-                ?? property.FindTypeMapping()?.Converter;
+            var converter = property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
             if (converter != null)
             {
@@ -357,14 +385,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             return value;
         }
 
-        private static object? SnapshotValue(ValueComparer? comparer, object? value)
-            => comparer == null ? value : comparer.Snapshot(value);
+        private static object? SnapshotValue(ValueComparer? comparer, object? value) =>
+            comparer == null ? value : comparer.Snapshot(value);
 
         private bool HasNullabilityError(
             IProperty property,
             object? propertyValue,
-            IList<IProperty> nullabilityErrors)
-        {
+            IList<IProperty> nullabilityErrors
+        ) {
             if (!_nullabilityCheckEnabled)
             {
                 return false;
@@ -382,8 +410,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 
         private void ThrowNullabilityErrorException(
             IUpdateEntry entry,
-            IList<IProperty> nullabilityErrors)
-        {
+            IList<IProperty> nullabilityErrors
+        ) {
             Check.NotNull(entry, nameof(entry));
             Check.NotNull(nullabilityErrors, nameof(nullabilityErrors));
 
@@ -393,15 +421,21 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                     InMemoryStrings.NullabilityErrorExceptionSensitive(
                         nullabilityErrors.Format(),
                         entry.EntityType.DisplayName(),
-                        entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties)),
-                    new[] { entry });
+                        entry.BuildCurrentValuesString(
+                            entry.EntityType.FindPrimaryKey()!.Properties
+                        )
+                    ),
+                    new[] { entry }
+                );
             }
 
             throw new DbUpdateException(
                 InMemoryStrings.NullabilityErrorException(
                     nullabilityErrors.Format(),
-                    entry.EntityType.DisplayName()),
-                new[] { entry });
+                    entry.EntityType.DisplayName()
+                ),
+                new[] { entry }
+            );
         }
 
         /// <summary>
@@ -411,8 +445,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// <param name="concurrencyConflicts"> The conflicting properties with their associated database values. </param>
         protected virtual void ThrowUpdateConcurrencyException(
             IUpdateEntry entry,
-            Dictionary<IProperty, object?> concurrencyConflicts)
-        {
+            Dictionary<IProperty, object?> concurrencyConflicts
+        ) {
             Check.NotNull(entry, nameof(entry));
             Check.NotNull(concurrencyConflicts, nameof(concurrencyConflicts));
 
@@ -421,22 +455,33 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                 throw new DbUpdateConcurrencyException(
                     InMemoryStrings.UpdateConcurrencyTokenExceptionSensitive(
                         entry.EntityType.DisplayName(),
-                        entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties),
+                        entry.BuildCurrentValuesString(
+                            entry.EntityType.FindPrimaryKey()!.Properties
+                        ),
                         entry.BuildOriginalValuesString(concurrencyConflicts.Keys),
                         "{"
-                        + string.Join(
-                            ", ",
-                            concurrencyConflicts.Select(
-                                c => c.Key.Name + ": " + Convert.ToString(c.Value, CultureInfo.InvariantCulture)))
-                        + "}"),
-                    new[] { entry });
+                            + string.Join(
+                                ", ",
+                                concurrencyConflicts.Select(
+                                    c =>
+                                        c.Key.Name
+                                        + ": "
+                                        + Convert.ToString(c.Value, CultureInfo.InvariantCulture)
+                                )
+                            )
+                            + "}"
+                    ),
+                    new[] { entry }
+                );
             }
 
             throw new DbUpdateConcurrencyException(
                 InMemoryStrings.UpdateConcurrencyTokenException(
                     entry.EntityType.DisplayName(),
-                    concurrencyConflicts.Keys.Format()),
-                new[] { entry });
+                    concurrencyConflicts.Keys.Format()
+                ),
+                new[] { entry }
+            );
         }
     }
 }

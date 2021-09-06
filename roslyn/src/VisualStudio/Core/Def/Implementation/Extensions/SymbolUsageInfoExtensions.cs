@@ -14,8 +14,9 @@ namespace Microsoft.CodeAnalysis
         /// Converts our internal symbol usage info representation to platform layer's representation
         /// <see cref="Microsoft.VisualStudio.Shell.TableManager.SymbolReferenceKinds"/>
         /// </summary>
-        public static SymbolReferenceKinds ToSymbolReferenceKinds(this SymbolUsageInfo symbolUsageInfo)
-        {
+        public static SymbolReferenceKinds ToSymbolReferenceKinds(
+            this SymbolUsageInfo symbolUsageInfo
+        ) {
             var kinds = SymbolReferenceKinds.None;
 
             if (symbolUsageInfo.ValueUsageInfoOpt.HasValue)

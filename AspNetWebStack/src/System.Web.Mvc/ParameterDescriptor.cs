@@ -7,7 +7,8 @@ namespace System.Web.Mvc
 {
     public abstract class ParameterDescriptor : ICustomAttributeProvider
     {
-        private static readonly EmptyParameterBindingInfo _emptyBindingInfo = new EmptyParameterBindingInfo();
+        private static readonly EmptyParameterBindingInfo _emptyBindingInfo =
+            new EmptyParameterBindingInfo();
 
         public abstract ActionDescriptor ActionDescriptor { get; }
 

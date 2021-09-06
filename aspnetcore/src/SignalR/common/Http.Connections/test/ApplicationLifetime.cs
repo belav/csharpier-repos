@@ -38,8 +38,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
         public CancellationToken ApplicationStopped => CancellationToken.None;
 
-        public void StopApplication()
-        {
-        }
+        public void StopApplication() { }
     }
 }

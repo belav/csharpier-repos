@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// <inheritdoc />
         public Task OnResultExecutionAsync(
             ResultExecutingContext context,
-            ResultExecutionDelegate next)
-        {
+            ResultExecutionDelegate next
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -34,9 +34,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var controller = context.Controller;
             if (controller == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(context.Controller),
-                    nameof(ResultExecutingContext)));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(context.Controller),
+                        nameof(ResultExecutingContext)
+                    )
+                );
             }
 
             if (controller is IAsyncResultFilter asyncResultFilter)
@@ -56,8 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private static async Task ExecuteResultFilter(
             ResultExecutingContext context,
             ResultExecutionDelegate next,
-            IResultFilter resultFilter)
-        {
+            IResultFilter resultFilter
+        ) {
             resultFilter.OnResultExecuting(context);
             if (!context.Cancel)
             {

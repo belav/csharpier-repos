@@ -41,8 +41,13 @@ namespace System.IO.Compression
             _stream.Write(buffer);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             _position += count;
             return _stream.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -55,14 +60,20 @@ namespace System.IO.Compression
             _stream.WriteByte(value);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             _position += count;
             return _stream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             _position += buffer.Length;
             return _stream.WriteAsync(buffer, cancellationToken);
         }
@@ -80,7 +91,8 @@ namespace System.IO.Compression
         }
 
         public override void Flush() => _stream.Flush();
-        public override Task FlushAsync(CancellationToken cancellationToken) => _stream.FlushAsync(cancellationToken);
+        public override Task FlushAsync(CancellationToken cancellationToken) =>
+            _stream.FlushAsync(cancellationToken);
 
         public override void Close()
         {

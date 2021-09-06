@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// The purpose of this map is to avoid multiple calls to <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> that might return different values
         /// (they should not but we need a guarantee to function correctly).
         /// </remarks>
-        private readonly ConditionalWeakTable<DiagnosticAnalyzer, DiagnosticDescriptorsInfo> _descriptorsInfo;
+        private readonly ConditionalWeakTable<
+            DiagnosticAnalyzer,
+            DiagnosticDescriptorsInfo
+        > _descriptorsInfo;
 
         private sealed class DiagnosticDescriptorsInfo
         {
@@ -38,31 +41,40 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public readonly bool TelemetryAllowed;
             public readonly bool HasCompilationEndDescriptor;
 
-            public DiagnosticDescriptorsInfo(ImmutableArray<DiagnosticDescriptor> supportedDescriptors, bool telemetryAllowed)
-            {
+            public DiagnosticDescriptorsInfo(
+                ImmutableArray<DiagnosticDescriptor> supportedDescriptors,
+                bool telemetryAllowed
+            ) {
                 SupportedDescriptors = supportedDescriptors;
                 TelemetryAllowed = telemetryAllowed;
-                HasCompilationEndDescriptor = supportedDescriptors.Any(DiagnosticDescriptorExtensions.IsCompilationEnd);
+                HasCompilationEndDescriptor = supportedDescriptors.Any(
+                    DiagnosticDescriptorExtensions.IsCompilationEnd
+                );
             }
         }
 
         internal DiagnosticAnalyzerInfoCache()
         {
-            _descriptorsInfo = new ConditionalWeakTable<DiagnosticAnalyzer, DiagnosticDescriptorsInfo>();
+            _descriptorsInfo = new ConditionalWeakTable<
+                DiagnosticAnalyzer,
+                DiagnosticDescriptorsInfo
+            >();
         }
 
         /// <summary>
         /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref name="analyzer"/>.
         /// </summary>
-        public ImmutableArray<DiagnosticDescriptor> GetDiagnosticDescriptors(DiagnosticAnalyzer analyzer)
-            => GetOrCreateDescriptorsInfo(analyzer).SupportedDescriptors;
+        public ImmutableArray<DiagnosticDescriptor> GetDiagnosticDescriptors(
+            DiagnosticAnalyzer analyzer
+        ) => GetOrCreateDescriptorsInfo(analyzer).SupportedDescriptors;
 
         /// <summary>
         /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref name="analyzer"/>
         /// that are not compilation end descriptors.
         /// </summary>
-        public ImmutableArray<DiagnosticDescriptor> GetNonCompilationEndDiagnosticDescriptors(DiagnosticAnalyzer analyzer)
-        {
+        public ImmutableArray<DiagnosticDescriptor> GetNonCompilationEndDiagnosticDescriptors(
+            DiagnosticAnalyzer analyzer
+        ) {
             var descriptorInfo = GetOrCreateDescriptorsInfo(analyzer);
             return !descriptorInfo.HasCompilationEndDescriptor
                 ? descriptorInfo.SupportedDescriptors
@@ -73,17 +85,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Returns true if given <paramref name="analyzer"/> has a compilation end descriptor
         /// that is reported in the Compilation end action.
         /// </summary>
-        public bool IsCompilationEndAnalyzer(DiagnosticAnalyzer analyzer)
-            => GetOrCreateDescriptorsInfo(analyzer).HasCompilationEndDescriptor;
+        public bool IsCompilationEndAnalyzer(DiagnosticAnalyzer analyzer) =>
+            GetOrCreateDescriptorsInfo(analyzer).HasCompilationEndDescriptor;
 
         /// <summary>
         /// Determine whether collection of telemetry is allowed for given <paramref name="analyzer"/>.
         /// </summary>
-        public bool IsTelemetryCollectionAllowed(DiagnosticAnalyzer analyzer)
-            => GetOrCreateDescriptorsInfo(analyzer).TelemetryAllowed;
+        public bool IsTelemetryCollectionAllowed(DiagnosticAnalyzer analyzer) =>
+            GetOrCreateDescriptorsInfo(analyzer).TelemetryAllowed;
 
-        private DiagnosticDescriptorsInfo GetOrCreateDescriptorsInfo(DiagnosticAnalyzer analyzer)
-            => _descriptorsInfo.GetValue(analyzer, CalculateDescriptorsInfo);
+        private DiagnosticDescriptorsInfo GetOrCreateDescriptorsInfo(DiagnosticAnalyzer analyzer) =>
+            _descriptorsInfo.GetValue(analyzer, CalculateDescriptorsInfo);
 
         private DiagnosticDescriptorsInfo CalculateDescriptorsInfo(DiagnosticAnalyzer analyzer)
         {
@@ -104,10 +116,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return new DiagnosticDescriptorsInfo(descriptors, telemetryAllowed);
         }
 
-        private static bool IsTelemetryCollectionAllowed(DiagnosticAnalyzer analyzer, ImmutableArray<DiagnosticDescriptor> descriptors)
-            => analyzer.IsCompilerAnalyzer() ||
-               analyzer is IBuiltInAnalyzer ||
-               descriptors.Length > 0 && descriptors[0].CustomTags.Any(t => t == WellKnownDiagnosticTags.Telemetry);
+        private static bool IsTelemetryCollectionAllowed(
+            DiagnosticAnalyzer analyzer,
+            ImmutableArray<DiagnosticDescriptor> descriptors
+        ) =>
+            analyzer.IsCompilerAnalyzer()
+            || analyzer is IBuiltInAnalyzer
+            || descriptors.Length > 0
+                && descriptors[0].CustomTags.Any(t => t == WellKnownDiagnosticTags.Telemetry);
 
         /// <summary>
         /// Return true if the given <paramref name="analyzer"/> is suppressed for the given project.
@@ -116,16 +132,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public bool IsAnalyzerSuppressed(DiagnosticAnalyzer analyzer, Project project)
         {
             var options = project.CompilationOptions;
-            if (options == null || analyzer == FileContentLoadAnalyzer.Instance || analyzer.IsCompilerAnalyzer())
-            {
+            if (
+                options == null
+                || analyzer == FileContentLoadAnalyzer.Instance
+                || analyzer.IsCompilerAnalyzer()
+            ) {
                 return false;
             }
 
             // If user has disabled analyzer execution for this project, we only want to execute required analyzers
             // that report diagnostics with category "Compiler".
-            if (!project.State.RunAnalyzers &&
-                GetDiagnosticDescriptors(analyzer).All(d => d.Category != DiagnosticCategory.Compiler))
-            {
+            if (
+                !project.State.RunAnalyzers
+                && GetDiagnosticDescriptors(analyzer)
+                    .All(d => d.Category != DiagnosticCategory.Compiler)
+            ) {
                 return true;
             }
 

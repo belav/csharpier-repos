@@ -9,16 +9,23 @@ namespace System.Text.Json
 {
     public static partial class JsonSerializer
     {
-        private static TValue? ReadCore<TValue>(ref Utf8JsonReader reader, Type returnType, JsonSerializerOptions options)
-        {
+        private static TValue? ReadCore<TValue>(
+            ref Utf8JsonReader reader,
+            Type returnType,
+            JsonSerializerOptions options
+        ) {
             ReadStack state = default;
             state.Initialize(returnType, options, supportContinuation: false);
             JsonConverter jsonConverter = state.Current.JsonPropertyInfo!.ConverterBase;
             return ReadCore<TValue>(jsonConverter, ref reader, options, ref state);
         }
 
-        private static TValue? ReadCore<TValue>(JsonConverter jsonConverter, ref Utf8JsonReader reader, JsonSerializerOptions options, ref ReadStack state)
-        {
+        private static TValue? ReadCore<TValue>(
+            JsonConverter jsonConverter,
+            ref Utf8JsonReader reader,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        ) {
             if (jsonConverter is JsonConverter<TValue> converter)
             {
                 // Call the strongly-typed ReadCore that will not box structs.

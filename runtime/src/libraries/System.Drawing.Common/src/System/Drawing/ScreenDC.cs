@@ -12,10 +12,8 @@ namespace System.Drawing
     {
         private IntPtr _handle;
 
-        public static ScreenDC Create() => new ScreenDC
-        {
-            _handle = Interop.User32.GetDC(IntPtr.Zero)
-        };
+        public static ScreenDC Create() =>
+            new ScreenDC { _handle = Interop.User32.GetDC(IntPtr.Zero) };
 
         public static implicit operator IntPtr(ScreenDC screenDC) => screenDC._handle;
 

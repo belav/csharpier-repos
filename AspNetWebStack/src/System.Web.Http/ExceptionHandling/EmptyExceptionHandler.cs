@@ -15,8 +15,10 @@ namespace System.Web.Http.ExceptionHandling
     /// </remarks>
     internal class EmptyExceptionHandler : IExceptionHandler
     {
-        public Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
-        {
+        public Task HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        ) {
             // For exceptions at the top of the call stack, Result will start out non-null (due to
             // LastChanceExceptionHandler). This class does not force exceptions back to unhandled in such cases, so it
             // will not not trigger the host-level exception processing, such as the ASP.NET yellow screen.

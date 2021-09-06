@@ -35,15 +35,15 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
     public class HelperPerformanceBenchmark : RuntimePerformanceBenchmarkBase
     {
         private Random _rand = new Random();
-        public HelperPerformanceBenchmark() : base(
-            "~/Views/HelperTyped.cshtml",
-            "~/Views/HelperDynamic.cshtml",
-            "~/Views/HelperPartialSync.cshtml",
-            "~/Views/HelperPartialAsync.cshtml",
-            "~/Views/HelperExtensions.cshtml",
-            "~/Views/HelperPartialTagHelper.cshtml")
-        {
-        }
+        public HelperPerformanceBenchmark()
+            : base(
+                "~/Views/HelperTyped.cshtml",
+                "~/Views/HelperDynamic.cshtml",
+                "~/Views/HelperPartialSync.cshtml",
+                "~/Views/HelperPartialAsync.cshtml",
+                "~/Views/HelperExtensions.cshtml",
+                "~/Views/HelperPartialTagHelper.cshtml"
+            ) { }
 
         protected override object Model => _rand.Next().ToString(CultureInfo.InvariantCulture);
     }

@@ -18,14 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StructDeclarationOrganizer()
-        {
-        }
+        public StructDeclarationOrganizer() { }
 
         protected override StructDeclarationSyntax Organize(
             StructDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             return syntax.Update(
                 syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),
@@ -37,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 syntax.OpenBraceToken,
                 MemberDeclarationsOrganizer.Organize(syntax.Members, cancellationToken),
                 syntax.CloseBraceToken,
-                syntax.SemicolonToken);
+                syntax.SemicolonToken
+            );
         }
     }
 }

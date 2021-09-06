@@ -19,18 +19,23 @@ namespace Microsoft.CodeAnalysis.AddPackage
         private readonly string _packageName;
 
         public InstallWithPackageManagerCodeAction(
-            IPackageInstallerService installerService, string packageName)
-        {
+            IPackageInstallerService installerService,
+            string packageName
+        ) {
             _installerService = installerService;
             _packageName = packageName;
         }
 
         public override string Title => FeaturesResources.Install_with_package_manager;
 
-        protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-        {
-            return Task.FromResult(SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
-                new InstallWithPackageManagerCodeActionOperation(this)));
+        protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            CancellationToken cancellationToken
+        ) {
+            return Task.FromResult(
+                SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
+                    new InstallWithPackageManagerCodeActionOperation(this)
+                )
+            );
         }
 
         private class InstallWithPackageManagerCodeActionOperation : CodeActionOperation
@@ -38,15 +43,15 @@ namespace Microsoft.CodeAnalysis.AddPackage
             private readonly InstallWithPackageManagerCodeAction _codeAction;
 
             public InstallWithPackageManagerCodeActionOperation(
-                InstallWithPackageManagerCodeAction codeAction)
-            {
+                InstallWithPackageManagerCodeAction codeAction
+            ) {
                 _codeAction = codeAction;
             }
 
             public override string Title => FeaturesResources.Install_with_package_manager;
 
-            public override void Apply(Workspace workspace, CancellationToken cancellationToken)
-                => _codeAction._installerService.ShowManagePackagesDialog(_codeAction._packageName);
+            public override void Apply(Workspace workspace, CancellationToken cancellationToken) =>
+                _codeAction._installerService.ShowManagePackagesDialog(_codeAction._packageName);
         }
     }
 }

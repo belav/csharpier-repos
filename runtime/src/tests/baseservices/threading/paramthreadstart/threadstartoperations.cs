@@ -10,7 +10,7 @@ class ThreadStartInt
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartInt <int>|min|max\n");
             return -1;
@@ -18,15 +18,15 @@ class ThreadStartInt
 
         int i = 0;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             i = Int32.MaxValue;
-        else if(args[0].ToLower() == "min")
-            i = Int32.MinValue;       
+        else if (args[0].ToLower() == "min")
+            i = Int32.MinValue;
         else
             i = Convert.ToInt32(args[0]);
 
         ThreadStartInt tsi = new ThreadStartInt();
-        if(tsi.RunAdd(i) && tsi.RunSub(i) && tsi.RunMult(i) && tsi.RunDiv(i))
+        if (tsi.RunAdd(i) && tsi.RunSub(i) && tsi.RunMult(i) && tsi.RunDiv(i))
             return 100;
         else
             return -1;
@@ -34,18 +34,16 @@ class ThreadStartInt
 
     private bool RunAdd(int iPass)
     {
-        Thread t = new Thread(new ParameterizedThreadStart(
-            ThreadWorker));
+        Thread t = new Thread(new ParameterizedThreadStart(ThreadWorker));
         t.Start(iPass + iPass);
         t.Join();
-        Console.WriteLine(iNum == iPass*2 ? "Test Passed" : "Test Failed");
-        return (iNum == iPass*2);
+        Console.WriteLine(iNum == iPass * 2 ? "Test Passed" : "Test Failed");
+        return (iNum == iPass * 2);
     }
 
     private bool RunSub(int iPass)
     {
-        Thread t = new Thread(new ParameterizedThreadStart(
-            ThreadWorker));
+        Thread t = new Thread(new ParameterizedThreadStart(ThreadWorker));
         t.Start(iPass - iPass);
         t.Join();
         Console.WriteLine(0 == iNum ? "Test Passed" : "Test Failed");
@@ -54,22 +52,20 @@ class ThreadStartInt
 
     private bool RunMult(int iPass)
     {
-        Thread t = new Thread(new ParameterizedThreadStart(
-            ThreadWorker));
+        Thread t = new Thread(new ParameterizedThreadStart(ThreadWorker));
         t.Start(iPass * 10);
         t.Join();
-        Console.WriteLine(iPass*10 == iNum ? "Test Passed" : "Test Failed");
-        return (iPass*10 == iNum);
+        Console.WriteLine(iPass * 10 == iNum ? "Test Passed" : "Test Failed");
+        return (iPass * 10 == iNum);
     }
 
     private bool RunDiv(int iPass)
     {
-        Thread t = new Thread(new ParameterizedThreadStart(
-            ThreadWorker));
-        t.Start(iPass/10);
+        Thread t = new Thread(new ParameterizedThreadStart(ThreadWorker));
+        t.Start(iPass / 10);
         t.Join();
-        Console.WriteLine(iPass/10 == iNum ? "Test Passed" : "Test Failed");
-        return (iPass/10 == iNum);
+        Console.WriteLine(iPass / 10 == iNum ? "Test Passed" : "Test Failed");
+        return (iPass / 10 == iNum);
     }
 
     private void ThreadWorker(Object o)

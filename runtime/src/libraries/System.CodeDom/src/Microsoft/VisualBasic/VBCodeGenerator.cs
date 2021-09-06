@@ -18,41 +18,44 @@ namespace Microsoft.VisualBasic
         private static readonly char[] s_periodArray = new char[] { '.' };
         private const int MaxLineLength = 80;
 
-        private const GeneratorSupport LanguageSupport = GeneratorSupport.EntryPointMethod |
-                                                         GeneratorSupport.GotoStatements |
-                                                         GeneratorSupport.ArraysOfArrays |
-                                                         GeneratorSupport.MultidimensionalArrays |
-                                                         GeneratorSupport.StaticConstructors |
-                                                         GeneratorSupport.ReturnTypeAttributes |
-                                                         GeneratorSupport.AssemblyAttributes |
-                                                         GeneratorSupport.TryCatchStatements |
-                                                         GeneratorSupport.DeclareValueTypes |
-                                                         GeneratorSupport.DeclareEnums |
-                                                         GeneratorSupport.DeclareEvents |
-                                                         GeneratorSupport.DeclareDelegates |
-                                                         GeneratorSupport.DeclareInterfaces |
-                                                         GeneratorSupport.ParameterAttributes |
-                                                         GeneratorSupport.ReferenceParameters |
-                                                         GeneratorSupport.ChainedConstructorArguments |
-                                                         GeneratorSupport.NestedTypes |
-                                                         GeneratorSupport.MultipleInterfaceMembers |
-                                                         GeneratorSupport.PublicStaticMembers |
-                                                         GeneratorSupport.ComplexExpressions |
-                                                         GeneratorSupport.Win32Resources |
-                                                         GeneratorSupport.Resources |
-                                                         GeneratorSupport.PartialTypes |
-                                                         GeneratorSupport.GenericTypeReference |
-                                                         GeneratorSupport.GenericTypeDeclaration |
-                                                         GeneratorSupport.DeclareIndexerProperties;
+        private const GeneratorSupport LanguageSupport =
+            GeneratorSupport.EntryPointMethod
+            | GeneratorSupport.GotoStatements
+            | GeneratorSupport.ArraysOfArrays
+            | GeneratorSupport.MultidimensionalArrays
+            | GeneratorSupport.StaticConstructors
+            | GeneratorSupport.ReturnTypeAttributes
+            | GeneratorSupport.AssemblyAttributes
+            | GeneratorSupport.TryCatchStatements
+            | GeneratorSupport.DeclareValueTypes
+            | GeneratorSupport.DeclareEnums
+            | GeneratorSupport.DeclareEvents
+            | GeneratorSupport.DeclareDelegates
+            | GeneratorSupport.DeclareInterfaces
+            | GeneratorSupport.ParameterAttributes
+            | GeneratorSupport.ReferenceParameters
+            | GeneratorSupport.ChainedConstructorArguments
+            | GeneratorSupport.NestedTypes
+            | GeneratorSupport.MultipleInterfaceMembers
+            | GeneratorSupport.PublicStaticMembers
+            | GeneratorSupport.ComplexExpressions
+            | GeneratorSupport.Win32Resources
+            | GeneratorSupport.Resources
+            | GeneratorSupport.PartialTypes
+            | GeneratorSupport.GenericTypeReference
+            | GeneratorSupport.GenericTypeDeclaration
+            | GeneratorSupport.DeclareIndexerProperties;
 
         private int _statementDepth;
         private readonly IDictionary<string, string> _provOptions;
 
         // This is the keyword list. To minimize search time and startup time, this is stored by length
         // and then alphabetically for use by FixedStringLookup.Contains.
-        private static readonly string[][] s_keywords = new string[][] {
-            null,           // 1 character
-            new string[] {  // 2 characters
+        private static readonly string[][] s_keywords = new string[][]
+        {
+            null, // 1 character
+            new string[]
+            { // 2 characters
                 "as",
                 "do",
                 "if",
@@ -64,7 +67,8 @@ namespace Microsoft.VisualBasic
                 "or",
                 "to",
             },
-            new string[] {  // 3 characters
+            new string[]
+            { // 3 characters
                 "and",
                 "dim",
                 "end",
@@ -81,7 +85,8 @@ namespace Microsoft.VisualBasic
                 "try",
                 "xor",
             },
-            new string[] {  // 4 characters
+            new string[]
+            { // 4 characters
                 "ansi",
                 "auto",
                 "byte",
@@ -113,7 +118,8 @@ namespace Microsoft.VisualBasic
                 "when",
                 "with",
             },
-            new string[] {  // 5 characters
+            new string[]
+            { // 5 characters
                 "alias",
                 "byref",
                 "byval",
@@ -142,8 +148,9 @@ namespace Microsoft.VisualBasic
                 "until",
                 "using",
                 "while",
-             },
-            new string[] {  // 6 characters
+            },
+            new string[]
+            { // 6 characters
                 "csbyte",
                 "cshort",
                 "double",
@@ -166,7 +173,8 @@ namespace Microsoft.VisualBasic
                 "typeof",
                 "ushort",
             },
-            new string[] { // 7 characters
+            new string[]
+            { // 7 characters
                 "andalso",
                 "boolean",
                 "cushort",
@@ -187,7 +195,8 @@ namespace Microsoft.VisualBasic
                 "unicode",
                 "variant",
             },
-            new string[] {  // 8 characters
+            new string[]
+            { // 8 characters
                 "assembly",
                 "continue",
                 "delegate",
@@ -202,7 +211,8 @@ namespace Microsoft.VisualBasic
                 "uinteger",
                 "widening"
             },
-            new string [] { // 9 characters
+            new string[]
+            { // 9 characters
                 "addressof",
                 "interface",
                 "namespace",
@@ -213,7 +223,8 @@ namespace Microsoft.VisualBasic
                 "structure",
                 "writeonly",
             },
-            new string [] { // 10 characters
+            new string[]
+            { // 10 characters
                 "addhandler",
                 "directcast",
                 "implements",
@@ -221,27 +232,29 @@ namespace Microsoft.VisualBasic
                 "raiseevent",
                 "withevents",
             },
-            new string[] {  // 11 characters
+            new string[]
+            { // 11 characters
                 "mustinherit",
                 "overridable",
             },
-            new string[] { // 12 characters
+            new string[]
+            { // 12 characters
                 "mustoverride",
             },
-            new string [] { // 13 characters
+            new string[]
+            { // 13 characters
                 "removehandler",
             },
             // class_finalize and class_initialize are not keywords anymore,
             // but it will be nice to escape them to avoid warning
-            new string [] { // 14 characters
+            new string[]
+            { // 14 characters
                 "class_finalize",
                 "notinheritable",
                 "notoverridable",
             },
-            null,           // 15 characters
-            new string [] {
-                "class_initialize",
-            }
+            null, // 15 characters
+            new string[] { "class_initialize", }
         };
 
         internal VBCodeGenerator() { }
@@ -256,7 +269,8 @@ namespace Microsoft.VisualBasic
         protected override string CompilerName => "vbc.exe";
 
         /// <summary>Tells whether or not the current class should be generated as a module</summary>
-        private bool IsCurrentModule => IsCurrentClass && GetUserData(CurrentClass, "Module", false);
+        private bool IsCurrentModule =>
+            IsCurrentClass && GetUserData(CurrentClass, "Module", false);
 
         protected override string NullToken => "Nothing";
 
@@ -287,7 +301,10 @@ namespace Microsoft.VisualBasic
             StringBuilder b = new StringBuilder(value.Length + 5);
 
             bool fInDoubleQuotes = true;
-            Indentation indentObj = new Indentation((ExposedTabStringIndentedTextWriter)Output, Indent + 1);
+            Indentation indentObj = new Indentation(
+                (ExposedTabStringIndentedTextWriter)Output,
+                Indent + 1
+            );
 
             b.Append('\"');
 
@@ -312,7 +329,9 @@ namespace Microsoft.VisualBasic
                         EnsureNotInDoubleQuotes(ref fInDoubleQuotes, b);
                         if (i < value.Length - 1 && value[i + 1] == '\n')
                         {
-                            b.Append("&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)");
+                            b.Append(
+                                "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)"
+                            );
                             i++;
                         }
                         else
@@ -349,10 +368,11 @@ namespace Microsoft.VisualBasic
                     // character is a low surrogate, don't break them.
                     // Otherwise when we write the string to a file, we might lose
                     // the characters.
-                    if (char.IsHighSurrogate(value[i])
+                    if (
+                        char.IsHighSurrogate(value[i])
                         && (i < value.Length - 1)
-                        && char.IsLowSurrogate(value[i + 1]))
-                    {
+                        && char.IsLowSurrogate(value[i + 1])
+                    ) {
                         b.Append(value[++i]);
                     }
 
@@ -398,7 +418,11 @@ namespace Microsoft.VisualBasic
                 OutputIdentifier(arg.Name);
                 Output.Write(":=");
             }
-            ((ICodeGenerator)this).GenerateCodeFromExpression(arg.Value, ((ExposedTabStringIndentedTextWriter)Output).InnerWriter, Options);
+            ((ICodeGenerator)this).GenerateCodeFromExpression(
+                arg.Value,
+                ((ExposedTabStringIndentedTextWriter)Output).InnerWriter,
+                Options
+            );
         }
 
         private void OutputAttributes(CodeAttributeDeclarationCollection attributes, bool inLine)
@@ -406,9 +430,14 @@ namespace Microsoft.VisualBasic
             OutputAttributes(attributes, inLine, null, false);
         }
 
-        private void OutputAttributes(CodeAttributeDeclarationCollection attributes, bool inLine, string prefix, bool closingLine)
-        {
-            if (attributes.Count == 0) return;
+        private void OutputAttributes(
+            CodeAttributeDeclarationCollection attributes,
+            bool inLine,
+            string prefix,
+            bool closingLine
+        ) {
+            if (attributes.Count == 0)
+                return;
             bool firstAttr = true;
             GenerateAttributeDeclarationsStart(attributes);
             foreach (CodeAttributeDeclaration current in attributes)
@@ -648,13 +677,16 @@ namespace Microsoft.VisualBasic
             }
 
             // "o <> nothing" should be "not o is nothing"
-            if (e.Right is CodePrimitiveExpression && ((CodePrimitiveExpression)e.Right).Value == null)
-            {
+            if (
+                e.Right is CodePrimitiveExpression
+                && ((CodePrimitiveExpression)e.Right).Value == null
+            ) {
                 GenerateNotIsNullExpression(e.Left);
                 return;
             }
-            if (e.Left is CodePrimitiveExpression && ((CodePrimitiveExpression)e.Left).Value == null)
-            {
+            if (
+                e.Left is CodePrimitiveExpression && ((CodePrimitiveExpression)e.Left).Value == null
+            ) {
                 GenerateNotIsNullExpression(e.Right);
                 return;
             }
@@ -814,7 +846,12 @@ namespace Microsoft.VisualBasic
         {
             if (e.Value is char)
             {
-                Output.Write("Global.Microsoft.VisualBasic.ChrW(" + ((IConvertible)e.Value).ToInt32(CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture) + ")");
+                Output.Write(
+                    "Global.Microsoft.VisualBasic.ChrW("
+                        + ((IConvertible)e.Value).ToInt32(CultureInfo.InvariantCulture)
+                            .ToString(CultureInfo.InvariantCulture)
+                        + ")"
+                );
             }
             else if (e.Value is sbyte)
             {
@@ -853,7 +890,6 @@ namespace Microsoft.VisualBasic
             }
             Output.WriteLine();
         }
-
 
         protected override void GenerateArrayCreateExpression(CodeArrayCreateExpression e)
         {
@@ -999,13 +1035,15 @@ namespace Microsoft.VisualBasic
             Output.Write('D');
         }
 
-        protected override void GenerateArgumentReferenceExpression(CodeArgumentReferenceExpression e)
-        {
+        protected override void GenerateArgumentReferenceExpression(
+            CodeArgumentReferenceExpression e
+        ) {
             OutputIdentifier(e.ParameterName);
         }
 
-        protected override void GenerateVariableReferenceExpression(CodeVariableReferenceExpression e)
-        {
+        protected override void GenerateVariableReferenceExpression(
+            CodeVariableReferenceExpression e
+        ) {
             OutputIdentifier(e.VariableName);
         }
 
@@ -1135,7 +1173,9 @@ namespace Microsoft.VisualBasic
                 if (e.TargetObject is CodeEventReferenceExpression)
                 {
                     Output.Write("RaiseEvent ");
-                    GenerateFormalEventReferenceExpression((CodeEventReferenceExpression)e.TargetObject);
+                    GenerateFormalEventReferenceExpression(
+                        (CodeEventReferenceExpression)e.TargetObject
+                    );
                 }
                 else
                 {
@@ -1162,8 +1202,9 @@ namespace Microsoft.VisualBasic
             Output.Write(')');
         }
 
-        protected override void GenerateParameterDeclarationExpression(CodeParameterDeclarationExpression e)
-        {
+        protected override void GenerateParameterDeclarationExpression(
+            CodeParameterDeclarationExpression e
+        ) {
             if (e.CustomAttributes.Count > 0)
             {
                 OutputAttributes(e.CustomAttributes, true);
@@ -1172,8 +1213,9 @@ namespace Microsoft.VisualBasic
             OutputTypeNamePair(e.Type, e.Name);
         }
 
-        protected override void GeneratePropertySetValueReferenceExpression(CodePropertySetValueReferenceExpression e)
-        {
+        protected override void GeneratePropertySetValueReferenceExpression(
+            CodePropertySetValueReferenceExpression e
+        ) {
             Output.Write("value");
         }
 
@@ -1360,8 +1402,9 @@ namespace Microsoft.VisualBasic
             }
         }
 
-        protected override void GenerateVariableDeclarationStatement(CodeVariableDeclarationStatement e)
-        {
+        protected override void GenerateVariableDeclarationStatement(
+            CodeVariableDeclarationStatement e
+        ) {
             bool doInit = true;
 
             Output.Write("Dim ");
@@ -1369,7 +1412,8 @@ namespace Microsoft.VisualBasic
             CodeTypeReference typeRef = e.Type;
             if (typeRef.ArrayRank == 1 && e.InitExpression != null)
             {
-                CodeArrayCreateExpression eAsArrayCreate = e.InitExpression as CodeArrayCreateExpression;
+                CodeArrayCreateExpression eAsArrayCreate =
+                    e.InitExpression as CodeArrayCreateExpression;
                 if (eAsArrayCreate != null && eAsArrayCreate.Initializers.Count == 0)
                 {
                     doInit = false;
@@ -1427,7 +1471,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateEvent(CodeMemberEvent e, CodeTypeDeclaration c)
         {
-            if (IsCurrentDelegate || IsCurrentEnum) return;
+            if (IsCurrentDelegate || IsCurrentEnum)
+                return;
 
             if (e.CustomAttributes.Count > 0)
             {
@@ -1437,7 +1482,10 @@ namespace Microsoft.VisualBasic
             string eventName = e.Name;
             if (e.PrivateImplementationType != null)
             {
-                string impl = GetBaseTypeOutput(e.PrivateImplementationType, preferBuiltInTypes: false);
+                string impl = GetBaseTypeOutput(
+                    e.PrivateImplementationType,
+                    preferBuiltInTypes: false
+                );
                 impl = impl.Replace('.', '_');
                 e.Name = impl + "_" + e.Name;
             }
@@ -1478,7 +1526,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateField(CodeMemberField e)
         {
-            if (IsCurrentDelegate || IsCurrentInterface) return;
+            if (IsCurrentDelegate || IsCurrentInterface)
+                return;
 
             if (IsCurrentEnum)
             {
@@ -1533,11 +1582,13 @@ namespace Microsoft.VisualBasic
                     continue;
                 CodeMemberMethod meth = (CodeMemberMethod)current;
 
-                if (!(current is CodeTypeConstructor) && !(current is CodeConstructor)
+                if (
+                    !(current is CodeTypeConstructor)
+                    && !(current is CodeConstructor)
                     && meth != e
                     && meth.Name.Equals(e.Name, StringComparison.OrdinalIgnoreCase)
-                    && meth.PrivateImplementationType == null)
-                {
+                    && meth.PrivateImplementationType == null
+                ) {
                     return true;
                 }
             }
@@ -1552,7 +1603,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateMethod(CodeMemberMethod e, CodeTypeDeclaration c)
         {
-            if (!(IsCurrentClass || IsCurrentStruct || IsCurrentInterface)) return;
+            if (!(IsCurrentClass || IsCurrentStruct || IsCurrentInterface))
+                return;
 
             if (e.CustomAttributes.Count > 0)
             {
@@ -1564,7 +1616,10 @@ namespace Microsoft.VisualBasic
             string methodName = e.Name;
             if (e.PrivateImplementationType != null)
             {
-                string impl = GetBaseTypeOutput(e.PrivateImplementationType, preferBuiltInTypes: false);
+                string impl = GetBaseTypeOutput(
+                    e.PrivateImplementationType,
+                    preferBuiltInTypes: false
+                );
                 impl = impl.Replace('.', '_');
                 e.Name = impl + "_" + e.Name;
             }
@@ -1586,8 +1641,14 @@ namespace Microsoft.VisualBasic
                 OutputVTableModifier(e.Attributes);
             }
             bool sub = false;
-            if (e.ReturnType.BaseType.Length == 0 || string.Equals(e.ReturnType.BaseType, typeof(void).FullName, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                e.ReturnType.BaseType.Length == 0
+                || string.Equals(
+                    e.ReturnType.BaseType,
+                    typeof(void).FullName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 sub = true;
             }
 
@@ -1599,7 +1660,6 @@ namespace Microsoft.VisualBasic
             {
                 Output.Write("Function ");
             }
-
 
             OutputIdentifier(e.Name);
             OutputTypeParameters(e.TypeParameters);
@@ -1646,9 +1706,10 @@ namespace Microsoft.VisualBasic
                 OutputIdentifier(methodName);
             }
             Output.WriteLine();
-            if (!IsCurrentInterface
-                && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract)
-            {
+            if (
+                !IsCurrentInterface
+                && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
+            ) {
                 Indent++;
 
                 GenerateVBStatements(e.Statements);
@@ -1667,8 +1728,10 @@ namespace Microsoft.VisualBasic
             e.Name = methodName;
         }
 
-        protected override void GenerateEntryPointMethod(CodeEntryPointMethod e, CodeTypeDeclaration c)
-        {
+        protected override void GenerateEntryPointMethod(
+            CodeEntryPointMethod e,
+            CodeTypeDeclaration c
+        ) {
             if (e.CustomAttributes.Count > 0)
             {
                 OutputAttributes(e.CustomAttributes, false);
@@ -1694,10 +1757,11 @@ namespace Microsoft.VisualBasic
                 if (!(current is CodeMemberProperty))
                     continue;
                 CodeMemberProperty prop = (CodeMemberProperty)current;
-                if (prop != e
+                if (
+                    prop != e
                     && prop.Name.Equals(e.Name, StringComparison.OrdinalIgnoreCase)
-                    && prop.PrivateImplementationType == null)
-                {
+                    && prop.PrivateImplementationType == null
+                ) {
                     return true;
                 }
             }
@@ -1707,7 +1771,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateProperty(CodeMemberProperty e, CodeTypeDeclaration c)
         {
-            if (!(IsCurrentClass || IsCurrentStruct || IsCurrentInterface)) return;
+            if (!(IsCurrentClass || IsCurrentStruct || IsCurrentInterface))
+                return;
 
             if (e.CustomAttributes.Count > 0)
             {
@@ -1717,7 +1782,10 @@ namespace Microsoft.VisualBasic
             string propName = e.Name;
             if (e.PrivateImplementationType != null)
             {
-                string impl = GetBaseTypeOutput(e.PrivateImplementationType, preferBuiltInTypes: false);
+                string impl = GetBaseTypeOutput(
+                    e.PrivateImplementationType,
+                    preferBuiltInTypes: false
+                );
                 impl = impl.Replace('.', '_');
                 e.Name = impl + "_" + e.Name;
             }
@@ -1739,8 +1807,10 @@ namespace Microsoft.VisualBasic
                 // interface may still need "Shadows"
                 OutputVTableModifier(e.Attributes);
             }
-            if (e.Parameters.Count > 0 && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                e.Parameters.Count > 0
+                && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase)
+            ) {
                 Output.Write("Default ");
             }
             if (e.HasGet)
@@ -1795,8 +1865,10 @@ namespace Microsoft.VisualBasic
 
             Output.WriteLine();
 
-            if (!c.IsInterface && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract)
-            {
+            if (
+                !c.IsInterface
+                && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
+            ) {
                 Indent++;
 
                 if (e.HasGet)
@@ -1831,8 +1903,9 @@ namespace Microsoft.VisualBasic
             e.Name = propName;
         }
 
-        protected override void GeneratePropertyReferenceExpression(CodePropertyReferenceExpression e)
-        {
+        protected override void GeneratePropertyReferenceExpression(
+            CodePropertyReferenceExpression e
+        ) {
             if (e.TargetObject != null)
             {
                 GenerateExpression(e.TargetObject);
@@ -1847,7 +1920,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateConstructor(CodeConstructor e, CodeTypeDeclaration c)
         {
-            if (!(IsCurrentClass || IsCurrentStruct)) return;
+            if (!(IsCurrentClass || IsCurrentStruct))
+                return;
 
             if (e.CustomAttributes.Count > 0)
             {
@@ -1890,7 +1964,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateTypeConstructor(CodeTypeConstructor e)
         {
-            if (!(IsCurrentClass || IsCurrentStruct)) return;
+            if (!(IsCurrentClass || IsCurrentStruct))
+                return;
 
             if (e.CustomAttributes.Count > 0)
             {
@@ -1931,7 +2006,14 @@ namespace Microsoft.VisualBasic
                 }
 
                 CodeTypeDelegate del = (CodeTypeDelegate)e;
-                if (del.ReturnType.BaseType.Length > 0 && !string.Equals(del.ReturnType.BaseType, "System.Void", StringComparison.OrdinalIgnoreCase))
+                if (
+                    del.ReturnType.BaseType.Length > 0
+                    && !string.Equals(
+                        del.ReturnType.BaseType,
+                        "System.Void",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                     Output.Write("Delegate Function ");
                 else
                     Output.Write("Delegate Sub ");
@@ -1939,8 +2021,14 @@ namespace Microsoft.VisualBasic
                 Output.Write('(');
                 OutputParameters(del.Parameters);
                 Output.Write(')');
-                if (del.ReturnType.BaseType.Length > 0 && !string.Equals(del.ReturnType.BaseType, "System.Void", StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    del.ReturnType.BaseType.Length > 0
+                    && !string.Equals(
+                        del.ReturnType.BaseType,
+                        "System.Void",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     Output.Write(" As ");
                     OutputType(del.ReturnType);
                     OutputArrayPostfix(del.ReturnType);
@@ -2177,7 +2265,9 @@ namespace Microsoft.VisualBasic
         {
             base.GenerateCompileUnitStart(e);
 
-            Output.WriteLine("'------------------------------------------------------------------------------");
+            Output.WriteLine(
+                "'------------------------------------------------------------------------------"
+            );
             Output.Write("' <");
             Output.WriteLine(SR.AutoGen_Comment_Line1);
             Output.Write("'     ");
@@ -2189,7 +2279,9 @@ namespace Microsoft.VisualBasic
             Output.WriteLine(SR.AutoGen_Comment_Line5);
             Output.Write("' </");
             Output.WriteLine(SR.AutoGen_Comment_Line1);
-            Output.WriteLine("'------------------------------------------------------------------------------");
+            Output.WriteLine(
+                "'------------------------------------------------------------------------------"
+            );
             Output.WriteLine();
 
             if (AllowLateBound(e))
@@ -2263,7 +2355,9 @@ namespace Microsoft.VisualBasic
             Output.Write("#ExternalChecksum(\"");
             Output.Write(checksumPragma.FileName);
             Output.Write("\",\"");
-            Output.Write(checksumPragma.ChecksumAlgorithmId.ToString("B", CultureInfo.InvariantCulture));
+            Output.Write(
+                checksumPragma.ChecksumAlgorithmId.ToString("B", CultureInfo.InvariantCulture)
+            );
             Output.Write("\",\"");
             if (checksumPragma.ChecksumData != null)
             {
@@ -2328,13 +2422,15 @@ namespace Microsoft.VisualBasic
             Output.WriteLine();
         }
 
-        protected override void GenerateAttributeDeclarationsStart(CodeAttributeDeclarationCollection attributes)
-        {
+        protected override void GenerateAttributeDeclarationsStart(
+            CodeAttributeDeclarationCollection attributes
+        ) {
             Output.Write('<');
         }
 
-        protected override void GenerateAttributeDeclarationsEnd(CodeAttributeDeclarationCollection attributes)
-        {
+        protected override void GenerateAttributeDeclarationsEnd(
+            CodeAttributeDeclarationCollection attributes
+        ) {
             Output.Write('>');
         }
 
@@ -2463,15 +2559,19 @@ namespace Microsoft.VisualBasic
                 {
                     case '+':
                     case '.':
-                        sb.Append(CreateEscapedIdentifier(baseType.Substring(lastIndex, i - lastIndex)));
+                        sb.Append(
+                            CreateEscapedIdentifier(baseType.Substring(lastIndex, i - lastIndex))
+                        );
                         sb.Append('.');
                         i++;
                         lastIndex = i;
                         break;
 
                     case '`':
-                        sb.Append(CreateEscapedIdentifier(baseType.Substring(lastIndex, i - lastIndex)));
-                        i++;    // skip the '
+                        sb.Append(
+                            CreateEscapedIdentifier(baseType.Substring(lastIndex, i - lastIndex))
+                        );
+                        i++; // skip the '
                         int numTypeArgs = 0;
                         while (i < baseType.Length && baseType[i] >= '0' && baseType[i] <= '9')
                         {
@@ -2479,7 +2579,12 @@ namespace Microsoft.VisualBasic
                             i++;
                         }
 
-                        GetTypeArgumentsOutput(typeRef.TypeArguments, currentTypeArgStart, numTypeArgs, sb);
+                        GetTypeArgumentsOutput(
+                            typeRef.TypeArguments,
+                            currentTypeArgStart,
+                            numTypeArgs,
+                            sb
+                        );
                         currentTypeArgStart += numTypeArgs;
 
                         // Arity can be in the middle of a nested type name, so we might have a . or + after it.
@@ -2523,9 +2628,12 @@ namespace Microsoft.VisualBasic
             return sb.ToString();
         }
 
-
-        private void GetTypeArgumentsOutput(CodeTypeReferenceCollection typeArguments, int start, int length, StringBuilder sb)
-        {
+        private void GetTypeArgumentsOutput(
+            CodeTypeReferenceCollection typeArguments,
+            int start,
+            int length,
+            StringBuilder sb
+        ) {
             sb.Append("(Of ");
             bool first = true;
             for (int i = start; i < start + length; i++)
@@ -2578,6 +2686,7 @@ namespace Microsoft.VisualBasic
             {
                 GenerateStatements(stms);
             }
+
             finally
             {
                 _statementDepth--;

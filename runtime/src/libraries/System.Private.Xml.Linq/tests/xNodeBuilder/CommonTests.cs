@@ -80,12 +80,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteEndDocument();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -105,12 +112,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteEndElement();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -130,12 +144,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteFullEndElement();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -172,12 +193,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteStartDocument();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -196,7 +224,6 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-
                 //[Variation(Id = 4, Desc = "Multiple EndDocument should error", Priority = 1)]
                 public void document_4()
                 {
@@ -213,12 +240,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteEndDocument();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -255,12 +289,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteEndDocument();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -281,12 +322,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteStartElement("Root");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -305,12 +353,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteEndDocument();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -329,12 +384,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteString("Top level text");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -355,17 +417,23 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteString("Top level text");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
                 }
-
 
                 //[Variation(Id = 11, Desc = "Top level atomic value should error - PROLOG", Priority = 1)]
                 public void document_11()
@@ -381,12 +449,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteValue(1);
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "");
@@ -408,12 +483,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteValue(1);
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "");
@@ -440,12 +522,19 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             try
                             {
                                 w.WriteDocType(docName, null, null, "test1");
                             }
-                            catch (ArgumentException) { return; }
+                            catch (ArgumentException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "Did not throw exception");
@@ -465,7 +554,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -486,7 +579,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -545,7 +642,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -564,7 +665,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -709,7 +814,9 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(doc, "<Root pre1:attr1=\"\" xmlns:pre1=\"http://my.com\" />"))
+                    if (
+                        !CompareReader(doc, "<Root pre1:attr1=\"\" xmlns:pre1=\"http://my.com\" />")
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -727,7 +834,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -748,7 +859,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -768,7 +883,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -788,7 +907,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -821,11 +944,20 @@ namespace CoreXml.Test.XLinq
                         try
                         {
                             w.WriteStartElement("Root");
-                            w.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "invalid");
+                            w.WriteAttributeString(
+                                "xml",
+                                "space",
+                                "http://www.w3.org/XML/1998/namespace",
+                                "invalid"
+                            );
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -869,7 +1001,9 @@ namespace CoreXml.Test.XLinq
                     w.WriteAttributeString("c", "&#x43;");
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(doc, "<Root a=\"&amp;\" b=\"&amp;#65;\" c=\"&amp;#x43;\" />"))
+                    if (
+                        !CompareReader(doc, "<Root a=\"&amp;\" b=\"&amp;#65;\" c=\"&amp;#x43;\" />")
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -940,7 +1074,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(doc, "<test xmlns:n1=\"http://testbasens\"><base n1:id=\"5\" p4:lang=\"en\" xmlns:p4=\"http://common\" /></test>"))
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<test xmlns:n1=\"http://testbasens\"><base n1:id=\"5\" p4:lang=\"en\" xmlns:p4=\"http://common\" /></test>"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -957,7 +1096,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(doc, "<test p:a1=\"v\" xmlns:p=\"ns1\"><base p:a2=\"v\" p4:a3=\"v\" xmlns:p4=\"ns2\" /></test>"))
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<test p:a1=\"v\" xmlns:p=\"ns1\"><base p:a2=\"v\" p4:a3=\"v\" xmlns:p4=\"ns2\" /></test>"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -1020,7 +1164,9 @@ namespace CoreXml.Test.XLinq
                     w.WriteStartAttribute("attr");
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(doc, "<pre:test pre:attr=\"\" attr=\"\" xmlns:pre=\"ns\" />"))
+                    if (
+                        !CompareReader(doc, "<pre:test pre:attr=\"\" attr=\"\" xmlns:pre=\"ns\" />")
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -1070,7 +1216,12 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = CreateReader(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReader(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "name")
@@ -1093,7 +1244,12 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = CreateReader(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReader(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "name")
@@ -1125,7 +1281,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentNullException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Element,
+                                "WriteState should be Element"
+                            );
                             return;
                         }
                     }
@@ -1138,12 +1298,20 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = CreateReader(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReader(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "AttributesGeneric")
                         {
-                            do { xr.Read(); } while (xr.LocalName != "node");
+                            do
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             break;
                         }
                     }
@@ -1170,12 +1338,20 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = CreateReader(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReader(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "AttributesGeneric")
                         {
-                            do { xr.Read(); } while (xr.LocalName != "node");
+                            do
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             xr.MoveToAttribute(1);
                             break;
                         }
@@ -1202,12 +1378,20 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = CreateReader(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReader(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "AttributesGeneric")
                         {
-                            do { xr.Read(); } while (xr.LocalName != "node");
+                            do
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             xr.MoveToNextAttribute();
                             xr.MoveToNextAttribute();
                             xr.MoveToNextAttribute();
@@ -1236,7 +1420,10 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = GetReader(Path.Combine(FilePathUtil.GetTestDataPath(), @"XmlWriter2\Simple.xml"), false);
+                    XmlReader xr = GetReader(
+                        Path.Combine(FilePathUtil.GetTestDataPath(), @"XmlWriter2\Simple.xml"),
+                        false
+                    );
                     xr.Read();
                     w.WriteStartElement("Root");
                     w.WriteAttributes(xr, false);
@@ -1284,11 +1471,18 @@ namespace CoreXml.Test.XLinq
                     XmlReader xr;
                     xr = CreateReader(new StringReader(strxml));
 
-                    do { xr.Read(); }
-                    while ((xr.NodeType.ToString() != Variation.Param.ToString()) && (xr.ReadState != ReadState.EndOfFile));
-
-                    if (xr.ReadState == ReadState.EndOfFile || xr.NodeType.ToString() != Variation.Param.ToString())
+                    do
                     {
+                        xr.Read();
+                    } while (
+                        (xr.NodeType.ToString() != Variation.Param.ToString())
+                        && (xr.ReadState != ReadState.EndOfFile)
+                    );
+
+                    if (
+                        xr.ReadState == ReadState.EndOfFile
+                        || xr.NodeType.ToString() != Variation.Param.ToString()
+                    ) {
                         xr.Dispose();
                         TestLog.WriteLine("Reader not positioned on correct node");
                         TestLog.WriteLine("ReadState: {0}", xr.ReadState);
@@ -1306,7 +1500,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Element,
+                                "WriteState should be Element"
+                            );
                             return;
                         }
                         finally
@@ -1322,7 +1520,12 @@ namespace CoreXml.Test.XLinq
                 public void writeAttributes_12()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReader(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReader(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "OneHundredAttributes")
@@ -1402,7 +1605,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (Exception)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                         finally
@@ -1431,7 +1638,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentNullException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Element,
+                                "WriteState should be Element"
+                            );
                             return;
                         }
                     }
@@ -1444,7 +1655,12 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "defattr")
@@ -1502,7 +1718,12 @@ namespace CoreXml.Test.XLinq
                 public void writeNode_XmlReader5()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "Middle")
@@ -1518,13 +1739,24 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(xr.NodeType, XmlNodeType.Comment, "Error");
                     TestLog.Compare(xr.Value, "WriteComment", "Error");
                     xr.Dispose();
-                    if (!CompareReader(doc, "<node2>Node Text<node3></node3><?name Instruction?></node2>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<node2>Node Text<node3></node3><?name Instruction?></node2>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 6, Desc = "WriteNode when reader state is EOF", Priority = 1)]
                 public void writeNode_XmlReader6()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read()) { }
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
@@ -1533,13 +1765,19 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     xr.Dispose();
                     w.Dispose();
-                    if (!CompareReader(doc, "<Root />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 7, Desc = "WriteNode when reader state is Closed", Priority = 1)]
                 public void writeNode_XmlReader7()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read()) { }
                     xr.Dispose();
                     XDocument doc = new XDocument();
@@ -1548,13 +1786,19 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(doc, "<Root />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 8, Desc = "WriteNode with reader on empty element node", Priority = 1)]
                 public void writeNode_XmlReader8()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "EmptyElement")
@@ -1571,13 +1815,19 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(xr.NodeType, XmlNodeType.EndElement, "Error");
                     TestLog.Compare(xr.Name, "EmptyElement", "Error");
                     xr.Dispose();
-                    if (!CompareReader(doc, "<node1 />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<node1 />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 9, Desc = "WriteNode with reader on 100 Nodes", Priority = 1)]
                 public void writeNode_XmlReader9()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "OneHundredElements")
@@ -1591,13 +1841,19 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareBaseline(doc, "100Nodes.txt")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareBaseline(doc, "100Nodes.txt"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 10, Desc = "WriteNode with reader on node with mixed content", Priority = 1)]
                 public void writeNode_XmlReader10()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "MixedContent")
@@ -1614,13 +1870,24 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(xr.NodeType, XmlNodeType.EndElement, "Error");
                     TestLog.Compare(xr.Name, "MixedContent", "Error");
                     xr.Dispose();
-                    if (!CompareReader(doc, "<node1><?PI Instruction?><!--Comment-->Text<![CDATA[cdata]]></node1>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<node1><?PI Instruction?><!--Comment-->Text<![CDATA[cdata]]></node1>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 11, Desc = "WriteNode with reader on node with declared namespace in parent", Priority = 1)]
                 public void writeNode_XmlReader11()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "NamespaceNoPrefix")
@@ -1635,13 +1902,19 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<node1 xmlns=\"foo\" ></node1>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<node1 xmlns=\"foo\" ></node1>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 14, Desc = "WriteNode with element that has different prefix", Priority = 1)]
                 public void writeNode_XmlReader14()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "DiffPrefix")
@@ -1659,13 +1932,24 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<x:bar xmlns:x=\"foo\"><z:node xmlns:z=\"foo\" /><x:blah /></x:bar>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<x:bar xmlns:x=\"foo\"><z:node xmlns:z=\"foo\" /><x:blah /></x:bar>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 15, Desc = "Call WriteNode with default attributes = true and DTD", Priority = 1)]
                 public void writeNode_XmlReader15()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "DefaultAttributesTrue")
@@ -1681,13 +1965,19 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<Root><name a=\"b\" /></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><name a=\"b\" /></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 16, Desc = "Call WriteNode with default attributes = false and DTD", Priority = 1)]
                 public void writeNode_XmlReader16()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "DefaultAttributesTrue")
@@ -1703,13 +1993,19 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<Root><name a='b' /></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><name a='b' /></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 17, Desc = "testcase: WriteNode with reader on empty element with attributes", Priority = 1)]
                 public void writeNode_XmlReader17()
                 {
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "EmptyElementWithAttributes")
@@ -1722,7 +2018,8 @@ namespace CoreXml.Test.XLinq
                     XmlWriter w = CreateWriter(doc);
                     w.WriteNode(xr, false);
                     w.Dispose();
-                    if (!CompareReader(doc, "<node1 a='foo' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<node1 a='foo' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 18, Desc = "testcase: WriteNode with document containing just empty element with attributes", Priority = 1)]
@@ -1736,7 +2033,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<Root a=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"foo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 19, Desc = "testcase: Call WriteNode with special entity references as attribute value", Priority = 1)]
@@ -1750,7 +2048,8 @@ namespace CoreXml.Test.XLinq
                         w.WriteNode(xr, true);
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 21, Desc = "Call WriteNode with full end element", Priority = 1)]
@@ -1763,14 +2062,20 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<root></root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root></root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 22, Desc = "Call WriteNode with reader on element with 100 attributes", Priority = 1)]
                 public void writeNode_XmlReader22()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "OneHundredAttributes")
@@ -1782,14 +2087,20 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareBaseline(doc, "OneHundredAttributes.xml")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareBaseline(doc, "OneHundredAttributes.xml"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 23, Desc = "Call WriteNode with reader on text node", Priority = 1)]
                 public void writeNode_XmlReader23()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "Middle")
@@ -1811,14 +2122,20 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<root>Node Text</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root>Node Text</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 24, Desc = "Call WriteNode with reader on CDATA node", Priority = 1)]
                 public void writeNode_XmlReader24()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "CDataNode")
@@ -1840,14 +2157,20 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<root><![CDATA[cdata content]]></root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root><![CDATA[cdata content]]></root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 25, Desc = "Call WriteNode with reader on PI node", Priority = 1)]
                 public void writeNode_XmlReader25()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "PINode")
@@ -1868,14 +2191,20 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<root><?PI Text?></root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root><?PI Text?></root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 26, Desc = "Call WriteNode with reader on Comment node", Priority = 1)]
                 public void writeNode_XmlReader26()
                 {
                     XDocument doc = new XDocument();
-                    XmlReader xr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader xr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
                     while (xr.Read())
                     {
                         if (xr.LocalName == "CommentNode")
@@ -1896,7 +2225,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
                     xr.Dispose();
-                    if (!CompareReader(doc, "<root><!--Comment--></root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root><!--Comment--></root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 27, Desc = "WriteNode should only write required namespaces", Priority = 1)]
@@ -1914,14 +2244,16 @@ namespace CoreXml.Test.XLinq
                     w.WriteNode(xr, false);
                     xr.Dispose();
                     w.Dispose();
-                    if (!CompareReader(doc, "<p2:child xmlns:p2='p2' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<p2:child xmlns:p2='p2' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 28, Desc = "WriteNode should only write required namespaces, include xmlns:xml", Priority = 1)]
                 public void writeNode_XmlReader28()
                 {
                     XDocument doc = new XDocument();
-                    string strxml = @"<root xmlns:p1='p1'><p2:child xmlns:p2='p2' xmlns:xml='http://www.w3.org/XML/1998/namespace' /></root>";
+                    string strxml =
+                        @"<root xmlns:p1='p1'><p2:child xmlns:p2='p2' xmlns:xml='http://www.w3.org/XML/1998/namespace' /></root>";
                     XmlReader xr = CreateReader(new StringReader(strxml));
                     while (xr.Read())
                     {
@@ -1933,14 +2265,21 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<p2:child xmlns:p2='p2'  xmlns:xml='http://www.w3.org/XML/1998/namespace' />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<p2:child xmlns:p2='p2'  xmlns:xml='http://www.w3.org/XML/1998/namespace' />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 29, Desc = "WriteNode should only write required namespaces, exclude xmlns:xml", Priority = 1)]
                 public void writeNode_XmlReader29()
                 {
                     XDocument doc = new XDocument();
-                    string strxml = @"<root xmlns:p1='p1' xmlns:xml='http://www.w3.org/XML/1998/namespace'><p2:child xmlns:p2='p2' /></root>";
+                    string strxml =
+                        @"<root xmlns:p1='p1' xmlns:xml='http://www.w3.org/XML/1998/namespace'><p2:child xmlns:p2='p2' /></root>";
                     XmlReader xr = CreateReader(new StringReader(strxml));
                     while (xr.Read())
                     {
@@ -1952,7 +2291,8 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<p2:child xmlns:p2=\"p2\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<p2:child xmlns:p2=\"p2\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 30, Desc = "WriteNode should only write required namespaces, change default ns at top level", Priority = 1)]
@@ -1971,7 +2311,8 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<child xmlns='p1' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<child xmlns='p1' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 31, Desc = "WriteNode should only write required namespaces, change default ns at same level", Priority = 1)]
@@ -1990,7 +2331,8 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<child xmlns='p2' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<child xmlns='p2' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 32, Desc = "WriteNode should only write required namespaces, change default ns at both levels", Priority = 1)]
@@ -2009,7 +2351,8 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<child xmlns='p2' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<child xmlns='p2' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 33, Desc = "WriteNode should only write required namespaces, change ns uri for same prefix", Priority = 1)]
@@ -2028,7 +2371,8 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<p1:child xmlns:p1='p2' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<p1:child xmlns:p1='p2' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 34, Desc = "WriteNode should only write required namespaces, reuse prefix from top level", Priority = 1)]
@@ -2047,7 +2391,8 @@ namespace CoreXml.Test.XLinq
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<p1:child xmlns:p1='p1' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<p1:child xmlns:p1='p1' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -2063,7 +2408,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteFullEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "Call WriteFullEndElement before calling WriteStartElement", Priority = 2)]
@@ -2078,7 +2424,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2100,7 +2450,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2119,7 +2473,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteFullEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"b\"></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"b\"></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "Call WriteFullEndElement after WriteStartAttribute", Priority = 1)]
@@ -2132,7 +2487,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteFullEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"\"></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"\"></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 6, Desc = "WriteFullEndElement for 100 nested elements", Priority = 1)]
@@ -2149,7 +2505,8 @@ namespace CoreXml.Test.XLinq
                         w.WriteFullEndElement();
                     w.Dispose();
 
-                    if (!CompareBaseline(doc, "100FullEndElements.txt")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareBaseline(doc, "100FullEndElements.txt"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -2191,7 +2548,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2209,7 +2570,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<x:Root p1:a=\"b\" xmlns:p1=\"bar\" xmlns:x=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<x:Root p1:a=\"b\" xmlns:p1=\"bar\" xmlns:x=\"foo\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "Nested elements have same prefix, but different namespace", Priority = 1)]
@@ -2225,7 +2592,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<x:Root xmlns:x=\"foo\"><x:level1 xmlns:x=\"bar\"><x:level2 xmlns:x=\"blah\" /></x:level1></x:Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<x:Root xmlns:x=\"foo\"><x:level1 xmlns:x=\"bar\"><x:level2 xmlns:x=\"blah\" /></x:level1></x:Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "Mapping reserved prefix xml to invalid namespace", Priority = 1)]
@@ -2240,7 +2613,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2257,7 +2634,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<xml:Root />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<xml:Root />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 7, Desc = "Write element with prefix beginning with xml", Priority = 1)]
@@ -2273,7 +2651,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><xmlA:elem1 xmlns:xmlA=\"test\" /><xMlB:elem2 xmlns:xMlB=\"test\" /></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root><xmlA:elem1 xmlns:xmlA=\"test\" /><xMlB:elem2 xmlns:xMlB=\"test\" /></Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 8, Desc = "Reuse prefix that refers the same as default namespace", Priority = 2)]
@@ -2305,7 +2689,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (Exception)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2325,7 +2713,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:x=\"fo\"><x:level1 /></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns:x=\"fo\"><x:level1 /></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 11, Desc = "Create different prefix for element and attribute that have same namespace", Priority = 2)]
@@ -2338,7 +2727,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<y:Root y:attr=\"b\" xmlns:y=\"foo\" xmlns:x=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<y:Root y:attr=\"b\" xmlns:y=\"foo\" xmlns:x=\"foo\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 12, Desc = "Create same prefix for element and attribute that have same namespace", Priority = 2)]
@@ -2351,7 +2746,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<x:Root x:attr=\"b\" xmlns:x=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<x:Root x:attr=\"b\" xmlns:x=\"foo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "Try to re-define NS prefix on attribute which is already defined on an element", Priority = 2)]
@@ -2364,7 +2760,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<x:Root p1:attr=\"test\" xmlns:p1=\"bar\" xmlns:x=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<x:Root p1:attr=\"test\" xmlns:p1=\"bar\" xmlns:x=\"foo\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 14, Desc = "testcase: Namespace string contains surrogates, reuse at different levels", Priority = 1)]
@@ -2380,8 +2782,12 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    string strExpected = string.Format("<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>", uri);
-                    if (!CompareReader(doc, strExpected)) throw new TestException(TestResult.Failed, "");
+                    string strExpected = string.Format(
+                        "<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>",
+                        uri
+                    );
+                    if (!CompareReader(doc, strExpected))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 15, Desc = "Namespace containing entities, use at multiple levels", Priority = 1)]
@@ -2389,14 +2795,21 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    string strxml = "<?xml version=\"1.0\" ?><root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>";
+                    string strxml =
+                        "<?xml version=\"1.0\" ?><root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>";
 
                     XmlReader xr = XmlReader.Create(new StringReader(strxml));
                     w.WriteNode(xr, false);
                     xr.Dispose();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 16, Desc = "testcase: Verify it resets default namespace when redefined earlier in the stack", Priority = 1)]
@@ -2413,7 +2826,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<x xmlns=\"foo\"><y xmlns=\"\"><z xmlns=\"foo\" /></y></x>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<x xmlns=\"foo\"><y xmlns=\"\"><z xmlns=\"foo\" /></y></x>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 17, Desc = "The default namespace for an element can not be changed once it is written out", Priority = 1)]
@@ -2430,7 +2849,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2447,7 +2870,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<foo:bar xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\"  />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<foo:bar xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\"  />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 19, Desc = "testcase: Pass NULL as NS to WriteStartElement", Priority = 1)]
@@ -2461,7 +2890,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<foo:Root xmlns:foo=\"NS\"><bar /></foo:Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<foo:Root xmlns:foo=\"NS\"><bar /></foo:Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 20, Desc = "Write element in reserved XML namespace, should error", Priority = 1)]
@@ -2475,7 +2905,11 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     finally
@@ -2497,7 +2931,11 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     finally
@@ -2520,7 +2958,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2537,7 +2979,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 24, Desc = "Pass String.Empty prefix to WriteStartElement()", Priority = 1)]
@@ -2549,7 +2992,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 25, Desc = "Pass null ns to WriteStartElement()", Priority = 1)]
@@ -2561,7 +3005,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root/>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root/>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 26, Desc = "Pass String.Empty ns to WriteStartElement()", Priority = 1)]
@@ -2573,7 +3018,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root/>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root/>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 27, Desc = "Pass null prefix to WriteStartElement() when namespace is in scope", Priority = 1)]
@@ -2586,7 +3032,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 28, Desc = "Pass String.Empty prefix to WriteStartElement() when namespace is in scope", Priority = 1)]
@@ -2599,7 +3051,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root xmlns:pre=\"ns\"><pre:child xmlns=\"ns\">test</pre:child></pre:Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<pre:Root xmlns:pre=\"ns\"><pre:child xmlns=\"ns\">test</pre:child></pre:Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 29, Desc = "Pass null ns to WriteStartElement() when prefix is in scope", Priority = 1)]
@@ -2612,7 +3070,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 30, Desc = "Pass String.Empty ns to WriteStartElement() when prefix is in scope", Priority = 1)]
@@ -2689,7 +3153,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2703,11 +3171,22 @@ namespace CoreXml.Test.XLinq
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xmlns", "xml", null, "http://www.w3.org/XML/1998/namespace");
+                    w.WriteAttributeString(
+                        "xmlns",
+                        "xml",
+                        null,
+                        "http://www.w3.org/XML/1998/namespace"
+                    );
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Bind NS prefix 'xmlA' with namespace URI 'foo'", Priority = 1)]
@@ -2720,7 +3199,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:xmlA=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns:xmlA=\"foo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "Write attribute xml:space with correct namespace", Priority = 1)]
@@ -2729,11 +3209,17 @@ namespace CoreXml.Test.XLinq
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "default");
+                    w.WriteAttributeString(
+                        "xml",
+                        "space",
+                        "http://www.w3.org/XML/1998/namespace",
+                        "default"
+                    );
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xml:space=\"default\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xml:space=\"default\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "Write attribute xml:space with incorrect namespace", Priority = 1)]
@@ -2750,7 +3236,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -2772,14 +3262,17 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
                     throw new TestException(TestResult.Failed, "");
                 }
-
 
                 //[Variation(Id = 7, Desc = "WriteAttribute, define namespace attribute before value attribute", Priority = 1)]
                 public void attrNamespace_7()
@@ -2792,7 +3285,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:x=\"fo\" x:a=\"b\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns:x=\"fo\" x:a=\"b\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 8, Desc = "WriteAttribute, define namespace attribute after value attribute", Priority = 1)]
@@ -2806,7 +3300,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root x:a=\"b\" xmlns:x=\"fo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root x:a=\"b\" xmlns:x=\"fo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 9, Desc = "WriteAttribute, redefine prefix at different scope and use both of them", Priority = 1)]
@@ -2824,7 +3319,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:x=\"bar\" x:c=\"d\" /></level1>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:x=\"bar\" x:c=\"d\" /></level1>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 10, Desc = "WriteAttribute, redefine namespace at different scope and use both of them", Priority = 1)]
@@ -2842,7 +3343,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:y=\"fo\" y:c=\"d\" /></level1>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:y=\"fo\" y:c=\"d\" /></level1>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 11, Desc = "WriteAttribute with collIding prefix with element", Priority = 1)]
@@ -2855,7 +3362,10 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<x:Root p1:a=\"b\" xmlns:p1=\"bar\" xmlns:x=\"fo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(doc, "<x:Root p1:a=\"b\" xmlns:p1=\"bar\" xmlns:x=\"fo\" />")
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 12, Desc = "WriteAttribute with collIding namespace with element", Priority = 1)]
@@ -2868,7 +3378,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<y:Root y:a=\"b\" xmlns:y=\"fo\" xmlns:x=\"fo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<y:Root y:a=\"b\" xmlns:y=\"fo\" xmlns:x=\"fo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "WriteAttribute with namespace but no prefix", Priority = 1)]
@@ -2881,7 +3392,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root p1:a=\"b\" xmlns:p1=\"fo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root p1:a=\"b\" xmlns:p1=\"fo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 14, Desc = "WriteAttribute for 2 attributes with same prefix but different namespace", Priority = 1)]
@@ -2895,7 +3407,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root x:a=\"b\" p2:c=\"d\" xmlns:p2=\"bar\" xmlns:x=\"fo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root x:a=\"b\" p2:c=\"d\" xmlns:p2=\"bar\" xmlns:x=\"fo\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 15, Desc = "WriteAttribute with String.Empty and null as namespace and prefix values", Priority = 1)]
@@ -2911,7 +3429,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"b\" c=\"d\" e=\"f\" g=\"h\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"b\" c=\"d\" e=\"f\" g=\"h\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 16, Desc = "WriteAttribute to manually create attribute of xmlns:x", Priority = 1)]
@@ -2926,7 +3445,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:x=\"test\"><x:level1 /></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns:x=\"test\"><x:level1 /></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 17, Desc = "testcase: WriteAttribute with namespace value = null while a prefix exists", Priority = 1)]
@@ -2939,7 +3459,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"b\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"b\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 18, Desc = "testcase: WriteAttribute with namespace value = String.Empty while a prefix exists", Priority = 1)]
@@ -2952,9 +3473,9 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"b\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"b\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
-
 
                 //[Variation(Id = 19, Desc = "WriteAttribe in nested elements with same namespace but different prefix", Priority = 1)]
                 public void attrNamespace_19()
@@ -2977,7 +3498,13 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a:x=\"y\" xmlns:a=\"fo\"><level1 b:x=\"y\" xmlns:b=\"fo\"><level2 c:x=\"y\" xmlns:c=\"fo\" /></level1></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root a:x=\"y\" xmlns:a=\"fo\"><level1 b:x=\"y\" xmlns:b=\"fo\"><level2 c:x=\"y\" xmlns:c=\"fo\" /></level1></Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 20, Desc = "WriteAttribute for x:a and xmlns:a diff namespace", Priority = 1)]
@@ -2991,7 +3518,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root x:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"bar\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root x:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"bar\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 21, Desc = "WriteAttribute for x:a and xmlns:a same namespace", Priority = 1)]
@@ -3005,7 +3533,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"foo\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"foo\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 22, Desc = "WriteAttribute with collIding NS and prefix for 2 attributes", Priority = 1)]
@@ -3020,7 +3549,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:x=\"foo\" x:a=\"b\" x:c=\"b\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xmlns:x=\"foo\" x:a=\"b\" x:c=\"b\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 23, Desc = "WriteAttribute with DQ in namespace", Priority = 2)]
@@ -3033,7 +3563,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root p1:a=\"b\" xmlns:p1=\"&quot;\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root p1:a=\"b\" xmlns:p1=\"&quot;\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 24, Desc = "testcase: Attach prefix with empty namespace", Priority = 1)]
@@ -3050,7 +3581,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3064,11 +3599,22 @@ namespace CoreXml.Test.XLinq
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xmlns", "foo", "", "http://www.w3.org/XML/1998/namaespace");
+                    w.WriteAttributeString(
+                        "xmlns",
+                        "foo",
+                        "",
+                        "http://www.w3.org/XML/1998/namaespace"
+                    );
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\"  />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\"  />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 26, Desc = "Map XML NS 'http://www.w3.org/XML/1998/namaespace' to another prefix", Priority = 1)]
@@ -3077,11 +3623,22 @@ namespace CoreXml.Test.XLinq
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("foo", "bar", "http://www.w3.org/XML/1998/namaespace", "test");
+                    w.WriteAttributeString(
+                        "foo",
+                        "bar",
+                        "http://www.w3.org/XML/1998/namaespace",
+                        "test"
+                    );
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root foo:bar=\"test\" xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\"  />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root foo:bar=\"test\" xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\"  />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 27, Desc = "Pass empty namespace to WriteAttributeString(prefix, name, ns, value)", Priority = 1)]
@@ -3094,7 +3651,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root xmlns:pre=\"urn:pre\" attr=\"test\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<pre:Root xmlns:pre=\"urn:pre\" attr=\"test\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 28, Desc = "Write attribute with prefix = xmlns", Priority = 1)]
@@ -3110,7 +3668,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3127,11 +3689,20 @@ namespace CoreXml.Test.XLinq
                     try
                     {
                         w.WriteStartElement("foo");
-                        w.WriteAttributeString("aaa", "bbb", "http://www.w3.org/XML/1998/namespace", "ccc");
+                        w.WriteAttributeString(
+                            "aaa",
+                            "bbb",
+                            "http://www.w3.org/XML/1998/namespace",
+                            "ccc"
+                        );
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     finally
@@ -3154,7 +3725,11 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        TestLog.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     finally
@@ -3181,10 +3756,15 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<d:Data xmlns:d='http://example.org/data'>" +
-                                        "<g:GoodStuff hello='world' xmlns:g='http://example.org/data/good' />" +
-                                        "<BadStuff hello='world' xmlns='http://example.org/data/bad' />" +
-                                        "</d:Data>"))
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<d:Data xmlns:d='http://example.org/data'>"
+                                + "<g:GoodStuff hello='world' xmlns:g='http://example.org/data/good' />"
+                                + "<BadStuff hello='world' xmlns='http://example.org/data/bad' />"
+                                + "</d:Data>"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -3198,7 +3778,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root p1:attr=\"value\" xmlns:p1=\"ns\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root p1:attr=\"value\" xmlns:p1=\"ns\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 33, Desc = "Pass String.Empty prefix to WriteAttributeString()", Priority = 1)]
@@ -3211,7 +3792,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root p1:attr=\"value\" xmlns:p1=\"ns\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root p1:attr=\"value\" xmlns:p1=\"ns\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 34, Desc = "Pass null ns to WriteAttributeString()", Priority = 1)]
@@ -3224,7 +3806,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root attr='value' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root attr='value' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 35, Desc = "Pass String.Empty ns to WriteAttributeString()", Priority = 1)]
@@ -3237,7 +3820,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root attr='value' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root attr='value' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 36, Desc = "Pass null prefix to WriteAttributeString() when namespace is in scope", Priority = 1)]
@@ -3250,7 +3834,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root pre:child='test' xmlns:pre='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<pre:Root pre:child='test' xmlns:pre='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 37, Desc = "Pass String.Empty prefix to WriteAttributeString() when namespace is in scope", Priority = 1)]
@@ -3263,7 +3848,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root pre:child='test' xmlns:pre='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<pre:Root pre:child='test' xmlns:pre='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 38, Desc = "Pass null ns to WriteAttributeString() when prefix is in scope", Priority = 1)]
@@ -3276,7 +3862,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root pre:child='test' xmlns:pre='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<pre:Root pre:child='test' xmlns:pre='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 39, Desc = "Pass String.Empty ns to WriteAttributeString() when prefix is in scope", Priority = 1)]
@@ -3289,7 +3876,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:Root child='test' xmlns:pre='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<pre:Root child='test' xmlns:pre='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 40, Desc = "Mapping empty ns uri to a prefix should error", Priority = 1)]
@@ -3320,7 +3908,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteStartElement("foo");
                     try
                     {
-                        w.WriteAttributeString(null, "xmlns", "http://www.w3.org/2000/xmlns/", "ns");
+                        w.WriteAttributeString(
+                            null,
+                            "xmlns",
+                            "http://www.w3.org/2000/xmlns/",
+                            "ns"
+                        );
                     }
                     catch (XmlException)
                     {
@@ -3343,7 +3936,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<pre:foo xmlns:pre='ns1' xmlns='ns' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<pre:foo xmlns:pre='ns1' xmlns='ns' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -3359,7 +3953,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><![CDATA[]]></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "WriteCData with String.Empty", Priority = 1)]
@@ -3372,7 +3967,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><![CDATA[]]></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "WriteCData Sanity test", Priority = 0)]
@@ -3385,7 +3981,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[This text is in a CDATA section]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root><![CDATA[This text is in a CDATA section]]></Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteCData with valid surrogate pair", Priority = 1)]
@@ -3398,7 +4000,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[\uD812\uDD12]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><![CDATA[\uD812\uDD12]]></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "WriteCData with ]]>", Priority = 1)]
@@ -3415,11 +4018,17 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader reader = doc.CreateReader())
                     {
-                        Exception exception = AssertExtensions.Throws<ArgumentException>(null, () => MoveToFirstElement(reader).ReadOuterXml());
+                        Exception exception = AssertExtensions.Throws<ArgumentException>(
+                            null,
+                            () => MoveToFirstElement(reader).ReadOuterXml()
+                        );
                         // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
                         // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
                         // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
-                        Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape("]]>") + @"[\p{Pf}\p{Po}]", exception.Message);
+                        Assert.Matches(
+                            @"[\p{Pi}\p{Po}]" + Regex.Escape("]]>") + @"[\p{Pf}\p{Po}]",
+                            exception.Message
+                        );
                         Assert.Matches(@"\b" + "XML" + @"\b", exception.Message);
                         Assert.Matches(@"\b" + "CDATA" + @"\b", exception.Message);
                     }
@@ -3435,7 +4044,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[<greeting>Hello World! & Hello XML</greeting>]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root><![CDATA[<greeting>Hello World! & Hello XML</greeting>]]></Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 7, Desc = "WriteCData with <![CDATA[", Priority = 2)]
@@ -3448,7 +4063,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[<![CDATA[]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><![CDATA[<![CDATA[]]></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
                 //[Variation(Id = 8, Desc = "CData state machine", Priority = 2)]
                 private void CData_8()
@@ -3460,7 +4076,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[]x]>]]x> x]x]x> x]]x]]x>]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><![CDATA[]x]>]]x> x]x]x> x]]x]]x>]]></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 9, Desc = "WriteCData with invalid surrogate pair", Priority = 1)]
@@ -3498,7 +4115,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3517,7 +4138,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><![CDATA[foo]]><![CDATA[bar]]></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><![CDATA[foo]]><![CDATA[bar]]></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -3533,7 +4155,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><!--This text is a comment--></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><!--This text is a comment--></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "Comment value = String.Empty", Priority = 0)]
@@ -3546,7 +4169,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><!----></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><!----></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Comment value = null", Priority = 0)]
@@ -3559,7 +4183,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><!----></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><!----></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteComment with valid surrogate pair", Priority = 1)]
@@ -3572,7 +4197,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><!--\uD812\uDD12--></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><!--\uD812\uDD12--></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "WriteComment with invalid surrogate pair", Priority = 1)]
@@ -3610,14 +4236,23 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader reader = doc.CreateReader())
                     {
-                        Exception exception = AssertExtensions.Throws<ArgumentException>(null, () => MoveToFirstElement(reader).ReadOuterXml());
+                        Exception exception = AssertExtensions.Throws<ArgumentException>(
+                            null,
+                            () => MoveToFirstElement(reader).ReadOuterXml()
+                        );
                         // \b word boundary
                         // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
                         // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
                         // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
                         Assert.Matches(@"\b" + "XML" + @"\b", exception.Message);
-                        Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape("--") + @"[\p{Pf}\p{Po}]", exception.Message);
-                        Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape("-") + @"[\p{Pf}\p{Po}]", exception.Message);
+                        Assert.Matches(
+                            @"[\p{Pi}\p{Po}]" + Regex.Escape("--") + @"[\p{Pf}\p{Po}]",
+                            exception.Message
+                        );
+                        Assert.Matches(
+                            @"[\p{Pi}\p{Po}]" + Regex.Escape("-") + @"[\p{Pf}\p{Po}]",
+                            exception.Message
+                        );
                     }
                 }
             }
@@ -3661,7 +4296,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3679,7 +4318,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEntityRef("amp");
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&amp;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            d,
+                            "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&amp;</Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "XmlWriter: Entity Refs: apos", Priority = 1)]
@@ -3695,7 +4340,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"'&lt;\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            d,
+                            "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"'&lt;\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 14, Desc = "XmlWriter: Entity Refs: lt", Priority = 1)]
@@ -3710,7 +4361,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&lt;\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            d,
+                            "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&lt;\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 15, Desc = "XmlWriter: Entity Refs: quot", Priority = 1)]
@@ -3725,7 +4382,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&quot;\" />")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            d,
+                            "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&quot;\" />"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 16, Desc = "XmlWriter: Entity Refs: gt", Priority = 1)]
@@ -3738,7 +4401,10 @@ namespace CoreXml.Test.XLinq
                     w.WriteEntityRef("gt");
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&gt;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(d, "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&gt;</Root>")
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -3758,7 +4424,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"&#xD23E;\">&#xD7FF;&#xE000;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"&#xD23E;\">&#xD7FF;&#xE000;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "Call WriteCharEntity after WriteStartElement/WriteEndElement", Priority = 0)]
@@ -3775,7 +4442,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>&#xD001;<elem>&#xF345;</elem>&#x48;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>&#xD001;<elem>&#xF345;</elem>&#x48;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Call WriteCharEntity after WriteStartAttribute/WriteEndAttribute", Priority = 0)]
@@ -3791,7 +4459,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"&#x1289;\">&#x2584;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"&#x1289;\">&#x2584;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "Character from low surrogate range", Priority = 1)]
@@ -3807,7 +4476,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3828,7 +4501,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3848,7 +4525,8 @@ namespace CoreXml.Test.XLinq
                     w.Dispose();
 
                     string strExp = "<root>&#x63;</root>";
-                    if (!CompareReader(doc, strExp)) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, strExp))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 8, Desc = "WriteCharEntity for special attributes", Priority = 1)]
@@ -3865,7 +4543,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root xml:lang=\"A&#xA;\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root xml:lang=\"A&#xA;\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -3885,7 +4564,10 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(doc, "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>")
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "SurrogateCharEntity after WriteStartAttribute/WriteEndAttribute", Priority = 1)]
@@ -3902,7 +4584,8 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"&#x58341;\">&#xCFE44;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"&#x58341;\">&#xCFE44;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Test with limits of surrogate range", Priority = 1)]
@@ -3920,7 +4603,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"&#x10000;\">&#x103FF;&#x10FC00;&#x10FFFF;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root a=\"&#x10000;\">&#x103FF;&#x10FC00;&#x10FFFF;</Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "MIddle surrogate character", Priority = 1)]
@@ -3933,7 +4622,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>&#x9D112;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>&#x9D112;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "Invalid high surrogate character", Priority = 1)]
@@ -3949,7 +4639,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3970,7 +4664,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -3991,7 +4689,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4014,7 +4716,8 @@ namespace CoreXml.Test.XLinq
                     w.Dispose();
 
                     string strExp = "<root xml:lang=\"&#x10FC00;\" />";
-                    if (!CompareReader(doc, strExp)) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, strExp))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -4030,7 +4733,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><?test This text is a PI?></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><?test This text is a PI?></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "PI text value = null", Priority = 1)]
@@ -4043,7 +4747,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><?test?></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><?test?></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "PI text value = String.Empty", Priority = 1)]
@@ -4056,7 +4761,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><?test?></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><?test?></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "PI name = null should error", Priority = 1)]
@@ -4072,7 +4778,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4093,7 +4803,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4130,7 +4844,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4151,7 +4869,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4172,7 +4894,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4193,7 +4919,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (InvalidOperationException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4215,12 +4945,18 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader reader = doc.CreateReader())
                     {
-                        Exception exception = AssertExtensions.Throws<ArgumentException>(null, () => MoveToFirstElement(reader).ReadOuterXml());
+                        Exception exception = AssertExtensions.Throws<ArgumentException>(
+                            null,
+                            () => MoveToFirstElement(reader).ReadOuterXml()
+                        );
                         // \b word boundary
                         // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
                         // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
                         // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
-                        Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape("?>") + @"[\p{Pf}\p{Po}]", exception.Message);
+                        Assert.Matches(
+                            @"[\p{Pi}\p{Po}]" + Regex.Escape("?>") + @"[\p{Pf}\p{Po}]",
+                            exception.Message
+                        );
                         Assert.Matches(@"\b" + "XML" + @"\b", exception.Message);
                     }
                 }
@@ -4235,7 +4971,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root><?pi \uD812\uDD12?></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><?pi \uD812\uDD12?></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "WritePI with invalid surrogate pair", Priority = 1)]
@@ -4300,7 +5037,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root>foo</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root>foo</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Name contains letters, digits, . _ - : chars", Priority = 1)]
@@ -4313,7 +5051,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root>_foo:1234.bar-</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root>_foo:1234.bar-</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "Name contains whitespace char", Param = "test test", Priority = 1)]
@@ -4382,7 +5121,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root>foo</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root>foo</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Sanity test, Name = foo:bar", Priority = 1)]
@@ -4395,7 +5135,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root>foo:bar</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root>foo:bar</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "Name starts with :", Param = ":bar", Priority = 1)]
@@ -4445,7 +5186,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4464,7 +5209,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root xmlns:foo=\"test\">foo:bar</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root xmlns:foo=\"test\">foo:bar</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteQName when NS is auto-generated", Priority = 1)]
@@ -4477,7 +5223,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<foo:root xmlns:foo=\"test\">foo:bar</foo:root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<foo:root xmlns:foo=\"test\">foo:bar</foo:root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "QName = foo:bar when foo is not in scope", Priority = 1)]
@@ -4494,7 +5241,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4518,7 +5269,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4541,7 +5296,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>test</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>test</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "WriteChars with & < >", Priority = 1)]
@@ -4557,7 +5313,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>&amp;&lt;&gt;th</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>&amp;&lt;&gt;th</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "WriteChars following WriteStartAttribute", Priority = 1)]
@@ -4574,7 +5331,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"valid\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"valid\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteChars with entity ref included", Priority = 1)]
@@ -4590,7 +5348,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>this is an entity &amp;foo;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>this is an entity &amp;foo;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "WriteChars with buffer = null", Priority = 2)]
@@ -4606,7 +5365,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4617,7 +5380,13 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Id = 6, Desc = "WriteChars with count > buffer size", Priority = 1)]
                 public void writeChars_6()
                 {
-                    VerifyInvalidWrite("WriteChars", 5, 0, 6, typeof(System.ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        "WriteChars",
+                        5,
+                        0,
+                        6,
+                        typeof(System.ArgumentOutOfRangeException)
+                    );
                 }
 
                 //[Variation(Id = 7, Desc = "WriteChars with count < 0", Priority = 1)]
@@ -4658,7 +5427,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root xml:lang='' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root xml:lang='' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -4674,7 +5444,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "WriteString(String.Empty)", Priority = 1)]
@@ -4687,7 +5458,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "WriteString with valid surrogate pair", Priority = 1)]
@@ -4700,7 +5472,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>\uD812\uDD12</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>\uD812\uDD12</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteString with invalid surrogate pair", Priority = 1)]
@@ -4737,7 +5510,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>&amp;test;</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>&amp;test;</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 6, Desc = "WriteString with single/double quote, &, <, >", Priority = 1)]
@@ -4750,7 +5524,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>&apos; &amp; &lt; &gt; \"</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>&apos; &amp; &lt; &gt; \"</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 9, Desc = "WriteString for value greater than x1F", Priority = 1)]
@@ -4763,7 +5538,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>!</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>!</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 11, Desc = "WriteString with CR, LF, CR LF inside attribute value", Priority = 1)]
@@ -4782,7 +5558,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareBaseline(doc, "writeStringWhiespaceInAttr.txt")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareBaseline(doc, "writeStringWhiespaceInAttr.txt"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 12, Desc = "Call WriteString for LF inside attribute", Priority = 1)]
@@ -4796,13 +5573,24 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a1=\"x&#xA;y\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a1=\"x&#xA;y\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "Surrogate characters in text nodes, range limits", Priority = 1)]
                 public void writeString_13()
                 {
-                    char[] invalidXML = { '\uD800', '\uDC00', '\uD800', '\uDFFF', '\uDBFF', '\uDC00', '\uDBFF', '\uDFFF' };
+                    char[] invalidXML =
+                    {
+                        '\uD800',
+                        '\uDC00',
+                        '\uD800',
+                        '\uDFFF',
+                        '\uDBFF',
+                        '\uDC00',
+                        '\uDBFF',
+                        '\uDFFF'
+                    };
                     string invXML = new string(invalidXML);
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
@@ -4811,7 +5599,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>\uD800\uDC00\uD800\uDFFF\uDBFF\uDC00\uDBFF\uDFFF</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root>\uD800\uDC00\uD800\uDFFF\uDBFF\uDC00\uDBFF\uDFFF</Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 14, Desc = "High surrogate on last position", Priority = 1)]
@@ -4905,7 +5699,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndDocument();
                     w.Dispose();
 
-                    if (!CompareBaseline(doc, "whitespace3.txt")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareBaseline(doc, "whitespace3.txt"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 // Factory writer behavior is inconsistent with XmlTextWriter, but consistent with other Write(string) methods
@@ -4926,7 +5721,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 6, Desc = "WriteWhitespace with invalid char", Param = (int)0x61, Priority = 1)]
@@ -4946,7 +5742,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4968,7 +5768,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>true</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>true</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "WriteValue(DateTime)", Priority = 1)]
@@ -4982,7 +5783,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>2002-04-03T00:00:00Z</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>2002-04-03T00:00:00Z</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "WriteValue(decimal)", Priority = 1)]
@@ -4995,7 +5797,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>79228162514264337593543950335</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>79228162514264337593543950335</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteValue(double)", Priority = 1)]
@@ -5008,7 +5811,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>1.7976931348623157E+308</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>1.7976931348623157E+308</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "WriteValue(int32)", Priority = 1)]
@@ -5021,7 +5825,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>2147483647</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>2147483647</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 6, Desc = "WriteValue(int64)", Priority = 1)]
@@ -5034,7 +5839,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>9223372036854775807</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>9223372036854775807</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 7, Desc = "WriteValue(single)", Priority = 1)]
@@ -5047,7 +5853,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, $"<Root>{float.MaxValue.ToString("R", CultureInfo.InvariantCulture)}</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            $"<Root>{float.MaxValue.ToString("R", CultureInfo.InvariantCulture)}</Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 8, Desc = "WriteValue(string)", Priority = 1)]
@@ -5060,13 +5872,22 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>Test</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>Test</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 9, Desc = "WriteValue(DateTimeOffset)", Priority = 1)]
                 public void writeValue_9()
                 {
-                    DateTimeOffset myDTO = new DateTimeOffset(2011, 5, 9, 11, 18, 23, new TimeSpan(8, 0, 0));
+                    DateTimeOffset myDTO = new DateTimeOffset(
+                        2011,
+                        5,
+                        9,
+                        11,
+                        18,
+                        23,
+                        new TimeSpan(8, 0, 0)
+                    );
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
                     w.WriteStartElement("Root");
@@ -5074,7 +5895,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>2011-05-09T11:18:23+08:00</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>2011-05-09T11:18:23+08:00</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 11, Desc = "Write multiple atomic values inside element", Priority = 1)]
@@ -5090,7 +5912,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>2true3.14</Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>2true3.14</Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 12, Desc = "Write multiple atomic values inside attribute", Priority = 1)]
@@ -5107,7 +5930,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root attr=\"2true3.14\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root attr=\"2true3.14\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "Write multiple atomic values inside element, separate by WriteWhitespace(' ')", Priority = 1)]
@@ -5126,7 +5950,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>2 true 3.14 </Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>2 true 3.14 </Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 14, Desc = "Write multiple atomic values inside element, separate by WriteString(' ')", Priority = 1)]
@@ -5145,7 +5970,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>2 true 3.14 </Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root>2 true 3.14 </Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 15, Desc = "Write multiple atomic values inside attribute, separate by WriteWhitespace(' ')", Priority = 1)]
@@ -5165,7 +5991,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root attr=\"2 true 3.14 \" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root attr=\"2 true 3.14 \" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 16, Desc = "Write multiple atomic values inside attribute, separate by WriteString(' ')", Priority = 1)]
@@ -5185,7 +6012,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root attr=\"2 true 3.14 \" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root attr=\"2 true 3.14 \" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 17, Desc = "WriteValue(long)", Priority = 1)]
@@ -5201,7 +6029,13 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root>9223372036854775807<child>-9223372036854775808</child></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (
+                        !CompareReader(
+                            doc,
+                            "<Root>9223372036854775807<child>-9223372036854775808</child></Root>"
+                        )
+                    )
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -5468,7 +6302,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5490,7 +6328,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5541,7 +6383,9 @@ namespace CoreXml.Test.XLinq
                     if (w.XmlLang != null)
                     {
                         w.Dispose();
-                        TestLog.WriteLine("Default value if no xml:lang attributes are currently on the stack should be null");
+                        TestLog.WriteLine(
+                            "Default value if no xml:lang attributes are currently on the stack should be null"
+                        );
                         TestLog.WriteLine("Actual value: {0}", w.XmlLang.ToString());
                         throw new TestException(TestResult.Failed, "");
                     }
@@ -5592,7 +6436,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (XmlException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5603,7 +6451,12 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Id = 5, Desc = "Verify XmlLang value when received through WriteAttributes", Priority = 1)]
                 public void XmlLang_5()
                 {
-                    XmlReader tr = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
+                    XmlReader tr = CreateReaderIgnoreWS(
+                        Path.Combine(
+                            FilePathUtil.GetTestDataPath(),
+                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                        )
+                    );
 
                     while (tr.Read())
                     {
@@ -5652,7 +6505,6 @@ namespace CoreXml.Test.XLinq
                         w.WriteEndElement();
                         w.Dispose();
 
-
                         string strExp = "<Root xml:lang=\"" + langs[i] + "\" />";
                         if (!CompareReader(doc, strExp))
                             throw new TestException(TestResult.Failed, "");
@@ -5686,7 +6538,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root a=\"Test Case\" b=\"Test\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root a=\"Test Case\" b=\"Test\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "Call WriteRaw to write the value of xml:space")]
@@ -5701,7 +6554,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<Root xml:space=\"default\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root xml:space=\"default\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 5, Desc = "Call WriteRaw to write the value of xml:lang", Priority = 1)]
@@ -5721,7 +6575,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root xml:lang=\"bab\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root xml:lang=\"bab\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 6, Desc = "WriteRaw with count > buffer size", Priority = 1)]
@@ -5767,7 +6622,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentNullException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5791,7 +6650,8 @@ namespace CoreXml.Test.XLinq
                     w.Dispose();
 
                     string strExp = "<Root>\uD812\uDD12\uD812\uDD12</Root>";
-                    if (!CompareReader(doc, strExp)) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, strExp))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 13, Desc = "WriteRaw with invalid surrogate pair", Priority = 1)]
@@ -5809,7 +6669,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Closed, "WriteState should be Closed");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Closed,
+                                "WriteState should be Closed"
+                            );
                             return;
                         }
                     }
@@ -5831,7 +6695,8 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root xml:lang=\"\" />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root xml:lang=\"\" />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -5846,7 +6711,13 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Id = 30, Desc = "WriteBase64 with count < 0", Priority = 1)]
                 public void Base64_3()
                 {
-                    VerifyInvalidWrite("WriteBase64", 5, 2, -1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        "WriteBase64",
+                        5,
+                        2,
+                        -1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 //[Variation(Id = 40, Desc = "WriteBase64 with index > buffer size", Priority = 1)]
@@ -5858,7 +6729,13 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Id = 50, Desc = "WriteBase64 with index < 0", Priority = 1)]
                 public void Base64_5()
                 {
-                    VerifyInvalidWrite("WriteBase64", 5, -1, 1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        "WriteBase64",
+                        5,
+                        -1,
+                        1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 //[Variation(Id = 60, Desc = "WriteBase64 with index + count exceeds buffer", Priority = 1)]
@@ -5880,7 +6757,11 @@ namespace CoreXml.Test.XLinq
                         }
                         catch (ArgumentNullException)
                         {
-                            TestLog.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            TestLog.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5934,7 +6815,6 @@ namespace CoreXml.Test.XLinq
 
                     byte[] bufferOld = new byte[bufferSize];
                     byte[] bufferNew = new byte[bufferSize];
-
 
                     BinaryReader binaryReaderOld = new BinaryReader(fileOld);
                     BinaryReader binaryReaderNew = new BinaryReader(fileNew);
@@ -6162,21 +7042,34 @@ namespace CoreXml.Test.XLinq
                                     w.WriteValue("");
                                     break;
                                 case "WriteAttributes":
+                                {
+                                    XmlReader reader = CreateReaderIgnoreWS(
+                                        Path.Combine(
+                                            FilePathUtil.GetTestDataPath(),
+                                            Path.Combine("XmlWriter2", "XmlReader.xml")
+                                        )
+                                    );
+                                    while (reader.Read())
                                     {
-                                        XmlReader reader = CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml")));
-                                        while (reader.Read())
+                                        if (reader.LocalName == "defattr")
                                         {
-                                            if (reader.LocalName == "defattr")
-                                            {
-                                                reader.Read();
-                                                break;
-                                            }
+                                            reader.Read();
+                                            break;
                                         }
-                                        w.WriteAttributes(reader, false);
-                                        break;
                                     }
+                                    w.WriteAttributes(reader, false);
+                                    break;
+                                }
                                 case "WriteNodeReader":
-                                    w.WriteNode(CreateReaderIgnoreWS(Path.Combine(FilePathUtil.GetTestDataPath(), Path.Combine("XmlWriter2", "XmlReader.xml"))), false);
+                                    w.WriteNode(
+                                        CreateReaderIgnoreWS(
+                                            Path.Combine(
+                                                FilePathUtil.GetTestDataPath(),
+                                                Path.Combine("XmlWriter2", "XmlReader.xml")
+                                            )
+                                        ),
+                                        false
+                                    );
                                     break;
                                 case "Flush":
                                     w.Flush();
@@ -6188,7 +7081,10 @@ namespace CoreXml.Test.XLinq
                             return;
                         }
                         // Flush/LookupPrefix is a NOOP
-                        if (Variation.Param.ToString() == "Flush" || Variation.Param.ToString() == "LookupPrefix")
+                        if (
+                            Variation.Param.ToString() == "Flush"
+                            || Variation.Param.ToString() == "LookupPrefix"
+                        )
                             return;
                     }
                     finally
@@ -6258,7 +7154,7 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    w.WriteElementString("root", "");  // line added by t-goranh
+                    w.WriteElementString("root", ""); // line added by t-goranh
                     w.Dispose();
                     try
                     {
@@ -6269,7 +7165,10 @@ namespace CoreXml.Test.XLinq
                         return;
                     }
                     // Flush/LookupPrefix is a NOOP
-                    if (Variation.Param.ToString() == "Flush" || Variation.Param.ToString() == "LookupPrefix")
+                    if (
+                        Variation.Param.ToString() == "Flush"
+                        || Variation.Param.ToString() == "LookupPrefix"
+                    )
                         return;
 
                     throw new TestException(TestResult.Failed, "");
@@ -6348,7 +7247,9 @@ namespace CoreXml.Test.XLinq
                             w.WriteValue(int.MaxValue);
                             break;
                         case "WriteAttributes":
-                            XmlReader xr1 = XmlReader.Create(new StringReader("<root attr='test'/>"));
+                            XmlReader xr1 = XmlReader.Create(
+                                new StringReader("<root attr='test'/>")
+                            );
                             xr1.Read();
                             w.WriteAttributes(xr1, false);
                             break;
@@ -6378,7 +7279,8 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<foo:elem xmlns:foo='bar'>test</foo:elem>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<foo:elem xmlns:foo='bar'>test</foo:elem>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "WriteElementString(prefix = xml, ns = XML namespace)", Priority = 1)]
@@ -6386,11 +7288,17 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlWriter w = CreateWriter(doc);
-                    w.WriteElementString("xml", "elem", "http://www.w3.org/XML/1998/namespace", "test");
+                    w.WriteElementString(
+                        "xml",
+                        "elem",
+                        "http://www.w3.org/XML/1998/namespace",
+                        "test"
+                    );
 
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<xml:elem>test</xml:elem>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<xml:elem>test</xml:elem>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "WriteStartAttribute(string name) sanity test", Priority = 0)]
@@ -6404,7 +7312,8 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<elem attr='' />")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<elem attr='' />"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 4, Desc = "WriteElementString followed by attribute should error", Priority = 1)]
@@ -6459,11 +7368,13 @@ namespace CoreXml.Test.XLinq
                     XmlWriter w = CreateWriter(doc);
                     string UniStr = "";
 
-                    for (char ch = '\ue000'; ch < '\ufffe'; ch++) UniStr += ch;
+                    for (char ch = '\ue000'; ch < '\ufffe'; ch++)
+                        UniStr += ch;
                     w.WriteElementString("root", UniStr);
                     w.Dispose();
 
-                    if (!CompareReader(doc, "<root>" + UniStr + "</root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<root>" + UniStr + "</root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "XmlWriter using UTF-16BE encoding writes out wrong encoding name value in the xml decl", Priority = 1)]
@@ -6490,7 +7401,8 @@ namespace CoreXml.Test.XLinq
                     StreamReader sr = new StreamReader(s);
                     string str = sr.ReadToEnd();
 
-                    if (!(str == "<?xml version=\"1.0\" encoding=\"utf-16BE\"?><A>value</A>")) throw new TestException(TestResult.Failed, "");
+                    if (!(str == "<?xml version=\"1.0\" encoding=\"utf-16BE\"?><A>value</A>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
             }
 
@@ -6508,7 +7420,8 @@ namespace CoreXml.Test.XLinq
                         writer.Dispose();
                     }
 
-                    if (!CompareReader(doc, "<Root><Nesting><SomeDeep/></Nesting></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><Nesting><SomeDeep/></Nesting></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 2, Desc = "Disposing an XmlWriter should close all opened elements", Priority = 1)]
@@ -6522,7 +7435,8 @@ namespace CoreXml.Test.XLinq
                         writer.WriteStartElement("SomeDeep");
                     }
 
-                    if (!CompareReader(doc, "<Root><Nesting><SomeDeep/></Nesting></Root>")) throw new TestException(TestResult.Failed, "");
+                    if (!CompareReader(doc, "<Root><Nesting><SomeDeep/></Nesting></Root>"))
+                        throw new TestException(TestResult.Failed, "");
                 }
 
                 //[Variation(Id = 3, Desc = "Dispose() shouldn't throw when a tag is not closed and inner stream is closed", Priority = 1)]

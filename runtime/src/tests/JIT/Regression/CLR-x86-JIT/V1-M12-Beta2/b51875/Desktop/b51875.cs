@@ -15,11 +15,12 @@ namespace Test
             {
                 goto EOM;
             }
+
             finally
             {
                 throw new Exception();
             }
-        EOM:
+            EOM:
             if (new Queue(10).Clone() == null)
                 return 1;
             return 0;

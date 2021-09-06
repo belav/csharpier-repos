@@ -20,13 +20,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TryStatementHighlighter()
-        {
-        }
+        public TryStatementHighlighter() { }
 
         protected override void AddHighlights(
-            TryStatementSyntax tryStatement, List<TextSpan> highlights, CancellationToken cancellationToken)
-        {
+            TryStatementSyntax tryStatement,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        ) {
             highlights.Add(tryStatement.TryKeyword.Span);
 
             foreach (var catchDeclaration in tryStatement.Catches)

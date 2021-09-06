@@ -10,13 +10,12 @@ namespace Internal.CommandLine
     {
         private readonly IReadOnlyList<ArgumentToken> _tokens;
 
-        public ArgumentParser(IEnumerable<string> arguments)
-            : this(arguments, null)
-        {
-        }
+        public ArgumentParser(IEnumerable<string> arguments) : this(arguments, null) { }
 
-        public ArgumentParser(IEnumerable<string> arguments, Func<string, IEnumerable<string>> responseFileReader)
-        {
+        public ArgumentParser(
+            IEnumerable<string> arguments,
+            Func<string, IEnumerable<string>> responseFileReader
+        ) {
             if (arguments == null)
                 throw new ArgumentNullException("arguments");
 
@@ -37,10 +36,24 @@ namespace Internal.CommandLine
             return true;
         }
 
-        public bool TryParseOption<T>(string diagnosticName, IReadOnlyCollection<string> names, Func<string, T> valueConverter, bool isRequired, out T value, out bool specified)
-        {
-            if (!TryParseOptionList(diagnosticName, names, valueConverter, isRequired, out IReadOnlyList<T> values, out specified))
-            {
+        public bool TryParseOption<T>(
+            string diagnosticName,
+            IReadOnlyCollection<string> names,
+            Func<string, T> valueConverter,
+            bool isRequired,
+            out T value,
+            out bool specified
+        ) {
+            if (
+                !TryParseOptionList(
+                    diagnosticName,
+                    names,
+                    valueConverter,
+                    isRequired,
+                    out IReadOnlyList<T> values,
+                    out specified
+                )
+            ) {
                 value = default;
                 return false;
             }
@@ -54,8 +67,14 @@ namespace Internal.CommandLine
             return true;
         }
 
-        public bool TryParseOptionList<T>(string diagnosticName, IReadOnlyCollection<string> names, Func<string, T> valueConverter, bool isRequired, out IReadOnlyList<T> values, out bool specified)
-        {
+        public bool TryParseOptionList<T>(
+            string diagnosticName,
+            IReadOnlyCollection<string> names,
+            Func<string, T> valueConverter,
+            bool isRequired,
+            out IReadOnlyList<T> values,
+            out bool specified
+        ) {
             var result = new List<T>();
             var tokenIndex = 0;
             var isFlag = typeof(T) == typeof(bool);
@@ -96,8 +115,11 @@ namespace Internal.CommandLine
             return true;
         }
 
-        public bool TryParseParameter<T>(string diagnosticName, Func<string, T> valueConverter, out T value)
-        {
+        public bool TryParseParameter<T>(
+            string diagnosticName,
+            Func<string, T> valueConverter,
+            out T value
+        ) {
             foreach (var token in _tokens)
             {
                 if (token.IsMatched || token.IsOption || token.IsSeparator)
@@ -114,8 +136,11 @@ namespace Internal.CommandLine
             return false;
         }
 
-        public bool TryParseParameterList<T>(string diagnosticName, Func<string, T> valueConverter, out IReadOnlyList<T> values)
-        {
+        public bool TryParseParameterList<T>(
+            string diagnosticName,
+            Func<string, T> valueConverter,
+            out IReadOnlyList<T> values
+        ) {
             var result = new List<T>();
 
             while (TryParseParameter(diagnosticName, valueConverter, out T value))
@@ -229,32 +254,46 @@ namespace Internal.CommandLine
             return true;
         }
 
-        private static T ParseValue<T>(string diagnosticName, Func<string, T> valueConverter, string valueText)
-        {
+        private static T ParseValue<T>(
+            string diagnosticName,
+            Func<string, T> valueConverter,
+            string valueText
+        ) {
             try
             {
                 return valueConverter(valueText);
             }
             catch (FormatException ex)
             {
-                var message = string.Format(Strings.CannotParseValueFmt, valueText, diagnosticName, ex.Message);
+                var message = string.Format(
+                    Strings.CannotParseValueFmt,
+                    valueText,
+                    diagnosticName,
+                    ex.Message
+                );
                 throw new ArgumentSyntaxException(message);
             }
         }
 
         public string GetUnreadCommand()
         {
-            return _tokens.Where(t => !t.IsOption && !t.IsSeparator).Select(t => t.Name).FirstOrDefault();
+            return _tokens.Where(t => !t.IsOption && !t.IsSeparator)
+                .Select(t => t.Name)
+                .FirstOrDefault();
         }
 
         public IReadOnlyList<string> GetUnreadOptionNames()
         {
-            return _tokens.Where(t => !t.IsMatched && t.IsOption).Select(t => t.Modifier + t.Name).ToArray();
+            return _tokens.Where(t => !t.IsMatched && t.IsOption)
+                .Select(t => t.Modifier + t.Name)
+                .ToArray();
         }
 
         public IReadOnlyList<string> GetUnreadParameters()
         {
-            return _tokens.Where(t => !t.IsMatched && !t.IsOption).Select(t => t.ToString()).ToArray();
+            return _tokens.Where(t => !t.IsMatched && !t.IsOption)
+                .Select(t => t.ToString())
+                .ToArray();
         }
 
         public IReadOnlyList<string> GetUnreadArguments()

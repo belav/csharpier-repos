@@ -41,14 +41,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            if (member.Name == nameof(string.Length)
-                && instance?.Type == typeof(string))
+            if (member.Name == nameof(string.Length) && instance?.Type == typeof(string))
             {
                 return _sqlExpressionFactory.Convert(
                     _sqlExpressionFactory.Function(
@@ -56,8 +55,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         new[] { instance },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true },
-                        typeof(long)),
-                    returnType);
+                        typeof(long)
+                    ),
+                    returnType
+                );
             }
 
             return null;

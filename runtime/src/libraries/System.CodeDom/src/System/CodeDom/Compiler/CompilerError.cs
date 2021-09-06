@@ -9,8 +9,13 @@ namespace System.CodeDom.Compiler
     {
         public CompilerError() : this(string.Empty, 0, 0, string.Empty, string.Empty) { }
 
-        public CompilerError(string fileName, int line, int column, string errorNumber, string errorText)
-        {
+        public CompilerError(
+            string fileName,
+            int line,
+            int column,
+            string errorNumber,
+            string errorText
+        ) {
             Line = line;
             Column = column;
             ErrorNumber = errorNumber;
@@ -30,9 +35,25 @@ namespace System.CodeDom.Compiler
 
         public string FileName { get; set; }
 
-        public override string ToString() => FileName.Length > 0 ?
-            string.Format(CultureInfo.InvariantCulture, "{0}({1},{2}) : {3} {4}: {5}", FileName, Line, Column, WarningString, ErrorNumber, ErrorText) :
-            string.Format(CultureInfo.InvariantCulture, "{0} {1}: {2}", WarningString, ErrorNumber, ErrorText);
+        public override string ToString() =>
+            FileName.Length > 0
+                ? string.Format(
+                      CultureInfo.InvariantCulture,
+                      "{0}({1},{2}) : {3} {4}: {5}",
+                      FileName,
+                      Line,
+                      Column,
+                      WarningString,
+                      ErrorNumber,
+                      ErrorText
+                  )
+                : string.Format(
+                      CultureInfo.InvariantCulture,
+                      "{0} {1}: {2}",
+                      WarningString,
+                      ErrorNumber,
+                      ErrorText
+                  );
 
         private string WarningString => IsWarning ? "warning" : "error";
     }

@@ -38,10 +38,11 @@ namespace System.Formats.Asn1
         /// </exception>
         public AsnWriter(AsnEncodingRules ruleSet)
         {
-            if (ruleSet != AsnEncodingRules.BER &&
-                ruleSet != AsnEncodingRules.CER &&
-                ruleSet != AsnEncodingRules.DER)
-            {
+            if (
+                ruleSet != AsnEncodingRules.BER
+                && ruleSet != AsnEncodingRules.CER
+                && ruleSet != AsnEncodingRules.DER
+            ) {
                 throw new ArgumentOutOfRangeException(nameof(ruleSet));
             }
 
@@ -279,10 +280,13 @@ namespace System.Formats.Asn1
             int spaceRequired = tag.CalculateEncodedSize();
             EnsureWriteCapacity(spaceRequired);
 
-            if (!tag.TryEncode(_buffer.AsSpan(_offset, spaceRequired), out int written) ||
-                written != spaceRequired)
-            {
-                Debug.Fail($"TryWrite failed or written was wrong value ({written} vs {spaceRequired})");
+            if (
+                !tag.TryEncode(_buffer.AsSpan(_offset, spaceRequired), out int written)
+                || written != spaceRequired
+            ) {
+                Debug.Fail(
+                    $"TryWrite failed or written was wrong value ({written} vs {spaceRequired})"
+                );
                 throw new InvalidOperationException();
             }
 
@@ -421,13 +425,15 @@ namespace System.Formats.Asn1
                 out _,
                 out _,
                 out _,
-                out int consumed);
+                out int consumed
+            );
 
             if (!read || consumed != value.Length)
             {
                 throw new ArgumentException(
                     SR.Argument_WriteEncodedValue_OneValueAtATime,
-                    nameof(value));
+                    nameof(value)
+                );
             }
 
             EnsureWriteCapacity(value.Length);
@@ -466,7 +472,8 @@ namespace System.Formats.Asn1
                 throw new InvalidOperationException(SR.AsnWriter_PopWrongTag);
             }
 
-            (Asn1Tag stackTag, int lenOffset, UniversalTagNumber stackTagType) = _nestingStack.Peek();
+            (Asn1Tag stackTag, int lenOffset, UniversalTagNumber stackTagType) =
+                _nestingStack.Peek();
 
             Debug.Assert(tag.IsConstructed);
             if (stackTag != tag || stackTagType != tagType)
@@ -506,8 +513,10 @@ namespace System.Formats.Asn1
             // T-REC-X.690-201508 sec 10.2
             if (tagType == UniversalTagNumber.OctetString)
             {
-                if (RuleSet != AsnEncodingRules.CER || containedLength <= AsnDecoder.MaxCERSegmentSize)
-                {
+                if (
+                    RuleSet != AsnEncodingRules.CER
+                    || containedLength <= AsnDecoder.MaxCERSegmentSize
+                ) {
                     // Need to replace the tag with the primitive tag.
                     // Since the P/C bit doesn't affect the length, overwrite the tag.
                     int tagLen = tag.CalculateEncodedSize();
@@ -519,13 +528,16 @@ namespace System.Formats.Asn1
                     int fullSegments = Math.DivRem(
                         containedLength,
                         AsnDecoder.MaxCERSegmentSize,
-                        out int lastSegmentSize);
+                        out int lastSegmentSize
+                    );
 
                     int requiredPadding =
                         // Each full segment has a header of 048203E8
-                        4 * fullSegments +
+                        4 * fullSegments
+                        +
                         // The last one is 04 plus the encoded length.
-                        2 + GetEncodedLengthSubsequentByteCount(lastSegmentSize);
+                        2
+                        + GetEncodedLengthSubsequentByteCount(lastSegmentSize);
 
                     // Shift the data forward so we can use right-source-overlapped
                     // copy in the existing method.
@@ -583,7 +595,10 @@ namespace System.Formats.Asn1
             //
             // Since it's not mutating, any restrictions imposed by CER or DER will
             // still be maintained.
-            var reader = new AsnReader(new ReadOnlyMemory<byte>(buffer, start, len), AsnEncodingRules.BER);
+            var reader = new AsnReader(
+                new ReadOnlyMemory<byte>(buffer, start, len),
+                AsnEncodingRules.BER
+            );
 
             List<(int, int)> positions = new List<(int, int)>();
 
@@ -639,11 +654,11 @@ namespace System.Formats.Asn1
             {
                 Asn1Tag value = tag.Value;
 
-                if (value.TagClass == TagClass.Universal && value.TagValue != (int)universalTagNumber)
-                {
-                    throw new ArgumentException(
-                        SR.Argument_UniversalValueIsFixed,
-                        nameof(tag));
+                if (
+                    value.TagClass == TagClass.Universal
+                    && value.TagValue != (int)universalTagNumber
+                ) {
+                    throw new ArgumentException(SR.Argument_UniversalValueIsFixed, nameof(tag));
                 }
             }
         }
@@ -662,10 +677,10 @@ namespace System.Formats.Asn1
                 (int xOffset, int xLength) = x;
                 (int yOffset, int yLength) = y;
 
-                int value =
-                    SetOfValueComparer.Instance.Compare(
-                        new ReadOnlyMemory<byte>(_data, xOffset, xLength),
-                        new ReadOnlyMemory<byte>(_data, yOffset, yLength));
+                int value = SetOfValueComparer.Instance.Compare(
+                    new ReadOnlyMemory<byte>(_data, xOffset, xLength),
+                    new ReadOnlyMemory<byte>(_data, yOffset, yLength)
+                );
 
                 if (value == 0)
                 {
@@ -690,8 +705,11 @@ namespace System.Formats.Asn1
                 ItemType = itemType;
             }
 
-            public void Deconstruct(out Asn1Tag tag, out int offset, out UniversalTagNumber itemType)
-            {
+            public void Deconstruct(
+                out Asn1Tag tag,
+                out int offset,
+                out UniversalTagNumber itemType
+            ) {
                 tag = Tag;
                 offset = Offset;
                 itemType = ItemType;
@@ -699,10 +717,13 @@ namespace System.Formats.Asn1
 
             public bool Equals(StackFrame other)
             {
-                return Tag.Equals(other.Tag) && Offset == other.Offset && ItemType == other.ItemType;
+                return Tag.Equals(other.Tag)
+                    && Offset == other.Offset
+                    && ItemType == other.ItemType;
             }
 
-            public override bool Equals([NotNullWhen(true)] object? obj) => obj is StackFrame other && Equals(other);
+            public override bool Equals([NotNullWhen(true)] object? obj) =>
+                obj is StackFrame other && Equals(other);
 
             public override int GetHashCode()
             {
@@ -711,7 +732,8 @@ namespace System.Formats.Asn1
 
             public static bool operator ==(StackFrame left, StackFrame right) => left.Equals(right);
 
-            public static bool operator !=(StackFrame left, StackFrame right) => !left.Equals(right);
+            public static bool operator !=(StackFrame left, StackFrame right) =>
+                !left.Equals(right);
         }
 
         public readonly struct Scope : IDisposable
@@ -756,9 +778,9 @@ namespace System.Formats.Asn1
                             throw new InvalidOperationException();
                     }
                 }
-                else if (_writer._nestingStack.Count > _depth &&
-                    _writer._nestingStack.Contains(_frame))
-                {
+                else if (
+                    _writer._nestingStack.Count > _depth && _writer._nestingStack.Contains(_frame)
+                ) {
                     // Another frame was pushed when we got disposed.
                     // Report the imbalance.
                     throw new InvalidOperationException(SR.AsnWriter_PopWrongTag);

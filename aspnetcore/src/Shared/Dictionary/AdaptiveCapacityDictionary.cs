@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Internal
     /// <summary>
     /// An <see cref="IDictionary{String, Object}"/> type to hold a small amount of items (10 or less in the common case).
     /// </summary>
-    internal class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+    internal class AdaptiveCapacityDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         // Threshold for size of array to use.
         private const int DefaultArrayThreshold = 10;
@@ -27,28 +29,20 @@ namespace Microsoft.AspNetCore.Internal
         /// <summary>
         /// Creates an empty <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
         /// </summary>
-        public AdaptiveCapacityDictionary()
-            : this(0, EqualityComparer<TKey>.Default)
-        {
-        }
+        public AdaptiveCapacityDictionary() : this(0, EqualityComparer<TKey>.Default) { }
 
         /// <summary>
         /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
         /// </summary>
         /// <param name="comparer">Equality comparison.</param>
-        public AdaptiveCapacityDictionary(IEqualityComparer<TKey> comparer)
-            : this(0, comparer)
-        {
-        }
+        public AdaptiveCapacityDictionary(IEqualityComparer<TKey> comparer) : this(0, comparer) { }
 
         /// <summary>
         /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
         /// </summary>
         /// <param name="capacity">Initial capacity.</param>
         public AdaptiveCapacityDictionary(int capacity)
-            : this(capacity, EqualityComparer<TKey>.Default)
-        {
-        }
+            : this(capacity, EqualityComparer<TKey>.Default) { }
 
         /// <summary>
         /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
@@ -91,8 +85,11 @@ namespace Microsoft.AspNetCore.Internal
         /// <remarks>This constructor is unoptimized and primarily used for tests.</remarks>
         /// <param name="comparer">Equality comparison.</param>
         /// <param name="capacity">Initial capacity.</param>
-        internal AdaptiveCapacityDictionary(IEnumerable<KeyValuePair<TKey, TValue>> values, int capacity, IEqualityComparer<TKey> comparer)
-        {
+        internal AdaptiveCapacityDictionary(
+            IEnumerable<KeyValuePair<TKey, TValue>> values,
+            int capacity,
+            IEqualityComparer<TKey> comparer
+        ) {
             _comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             _arrayStorage = new KeyValuePair<TKey, TValue>[capacity];
@@ -128,7 +125,6 @@ namespace Microsoft.AspNetCore.Internal
 
                 return value!;
             }
-
             set
             {
                 if (key == null)
@@ -253,7 +249,10 @@ namespace Microsoft.AspNetCore.Internal
 
                 if (ContainsKeyArray(key))
                 {
-                    throw new ArgumentException($"An element with the key '{key}' already exists in the {nameof(AdaptiveCapacityDictionary<TKey, TValue>)}.", nameof(key));
+                    throw new ArgumentException(
+                        $"An element with the key '{key}' already exists in the {nameof(AdaptiveCapacityDictionary<TKey, TValue>)}.",
+                        nameof(key)
+                    );
                 }
 
                 _arrayStorage[_count] = new KeyValuePair<TKey, TValue>(key, value);
@@ -291,7 +290,8 @@ namespace Microsoft.AspNetCore.Internal
                 return ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage).Contains(item);
             }
 
-            return TryGetValue(item.Key, out var value) && EqualityComparer<object>.Default.Equals(value, item.Value);
+            return TryGetValue(item.Key, out var value)
+                && EqualityComparer<object>.Default.Equals(value, item.Value);
         }
 
         /// <inheritdoc />
@@ -313,8 +313,8 @@ namespace Microsoft.AspNetCore.Internal
         /// <inheritdoc />
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
             KeyValuePair<TKey, TValue>[] array,
-            int arrayIndex)
-        {
+            int arrayIndex
+        ) {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));
@@ -337,7 +337,10 @@ namespace Microsoft.AspNetCore.Internal
                 return;
             }
 
-            ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage!).CopyTo(array, arrayIndex);
+            ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage!).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
         /// <inheritdoc />
@@ -347,7 +350,9 @@ namespace Microsoft.AspNetCore.Internal
         }
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator()
         {
             if (_dictionaryStorage != null)
             {
@@ -380,8 +385,10 @@ namespace Microsoft.AspNetCore.Internal
 
                 var index = FindIndex(item.Key);
                 var array = _arrayStorage;
-                if (index >= 0 && EqualityComparer<TValue>.Default.Equals(array[index].Value, item.Value))
-                {
+                if (
+                    index >= 0
+                    && EqualityComparer<TValue>.Default.Equals(array[index].Value, item.Value)
+                ) {
                     Array.Copy(array, index + 1, array, index, _count - index);
                     _count--;
                     array[_count] = default;
@@ -391,7 +398,7 @@ namespace Microsoft.AspNetCore.Internal
                 return false;
             }
 
-             return ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage!).Remove(item);
+            return ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage!).Remove(item);
         }
 
         /// <inheritdoc />
@@ -553,7 +560,8 @@ namespace Microsoft.AspNetCore.Internal
             }
             else
             {
-                capacity = _arrayStorage.Length == 0 ? DefaultArrayThreshold : _arrayStorage.Length * 2;
+                capacity =
+                    _arrayStorage.Length == 0 ? DefaultArrayThreshold : _arrayStorage.Length * 2;
                 var array = new KeyValuePair<TKey, TValue>[capacity];
                 if (_count > 0)
                 {
@@ -621,7 +629,6 @@ namespace Microsoft.AspNetCore.Internal
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool ContainsKeyArray(TKey key) => TryFindItem(key, out _);
 
-
         /// <inheritdoc />
         public struct Enumerator : IEnumerator<KeyValuePair<TKey, TValue>>
         {
@@ -664,9 +671,7 @@ namespace Microsoft.AspNetCore.Internal
             /// <summary>
             /// Releases resources used by the <see cref="Enumerator"/>.
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining friendliness
             /// <inheritdoc />

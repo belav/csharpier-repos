@@ -12,7 +12,8 @@ namespace System.Formats.Asn1.Tests.Reader
             Span<byte> destination,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            out int bytesWritten);
+            out int bytesWritten
+        );
 
         [Fact]
         public static void NoOverlappedBitStrings()
@@ -22,15 +23,16 @@ namespace System.Formats.Asn1.Tests.Reader
                 Span<byte> destination,
                 AsnEncodingRules ruleSet,
                 out int consumed,
-                out int written)
-            {
+                out int written
+            ) {
                 bool ret = AsnDecoder.TryReadBitString(
                     source,
                     destination,
                     ruleSet,
                     out int unusedBitCount,
                     out consumed,
-                    out written);
+                    out written
+                );
 
                 if (ret)
                 {
@@ -47,7 +49,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 encodedValueOffset: 2,
                 encodedValueLength: 4,
                 copyLength: 1,
-                Method);
+                Method
+            );
         }
 
         [Fact]
@@ -58,14 +61,15 @@ namespace System.Formats.Asn1.Tests.Reader
                 Span<byte> destination,
                 AsnEncodingRules ruleSet,
                 out int consumed,
-                out int written)
-            {
+                out int written
+            ) {
                 return AsnDecoder.TryReadOctetString(
                     source,
                     destination,
                     ruleSet,
                     out consumed,
-                    out written);
+                    out written
+                );
             }
 
             byte[] input = { 0x00, 0x00, 0x04, 0x01, 0x21, 0x00 };
@@ -75,7 +79,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 encodedValueOffset: 2,
                 encodedValueLength: 3,
                 copyLength: 1,
-                Method);
+                Method
+            );
         }
 
         [Fact]
@@ -86,15 +91,16 @@ namespace System.Formats.Asn1.Tests.Reader
                 Span<byte> destination,
                 AsnEncodingRules ruleSet,
                 out int consumed,
-                out int written)
-            {
+                out int written
+            ) {
                 return AsnDecoder.TryReadCharacterStringBytes(
                     source,
                     destination,
                     ruleSet,
-                    new Asn1Tag(UniversalTagNumber.UTF8String), 
+                    new Asn1Tag(UniversalTagNumber.UTF8String),
                     out consumed,
-                    out written);
+                    out written
+                );
             }
 
             byte[] input = { 0x00, 0x00, 0x0C, 0x01, 0x30, 0x00 };
@@ -104,7 +110,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 encodedValueOffset: 2,
                 encodedValueLength: 3,
                 copyLength: 1,
-                Method);
+                Method
+            );
         }
 
         private static void NoOverlappedReads(
@@ -112,39 +119,51 @@ namespace System.Formats.Asn1.Tests.Reader
             int encodedValueOffset,
             int encodedValueLength,
             int copyLength,
-            TryWriteMethod tryWriteMethod)
-        {
+            TryWriteMethod tryWriteMethod
+        ) {
             // The write starts beyond the portion of source that will be read,
             // but that hasn't yet been determined.
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => tryWriteMethod(
-                    input.AsSpan(encodedValueOffset),
-                    input.AsSpan(encodedValueOffset + encodedValueLength),
-                    AsnEncodingRules.BER,
-                    out _,
-                    out _));
+                () =>
+                    tryWriteMethod(
+                        input.AsSpan(encodedValueOffset),
+                        input.AsSpan(encodedValueOffset + encodedValueLength),
+                        AsnEncodingRules.BER,
+                        out _,
+                        out _
+                    )
+            );
 
             // The CopyTo would actually end up with source == dest for this one
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => tryWriteMethod(
-                    input.AsSpan(encodedValueOffset),
-                    input.AsSpan(encodedValueOffset + encodedValueLength - copyLength, copyLength),
-                    AsnEncodingRules.BER,
-                    out _,
-                    out _));
+                () =>
+                    tryWriteMethod(
+                        input.AsSpan(encodedValueOffset),
+                        input.AsSpan(
+                            encodedValueOffset + encodedValueLength - copyLength,
+                            copyLength
+                        ),
+                        AsnEncodingRules.BER,
+                        out _,
+                        out _
+                    )
+            );
 
             // destination[1] is source[0], but there isn't actually an overwrite because
             // the value length isn't long enough.
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => tryWriteMethod(
-                    input.AsSpan(encodedValueOffset),
-                    input.AsSpan(encodedValueOffset - copyLength, copyLength + 1),
-                    AsnEncodingRules.BER,
-                    out _,
-                    out _));
+                () =>
+                    tryWriteMethod(
+                        input.AsSpan(encodedValueOffset),
+                        input.AsSpan(encodedValueOffset - copyLength, copyLength + 1),
+                        AsnEncodingRules.BER,
+                        out _,
+                        out _
+                    )
+            );
 
             Assert.True(
                 tryWriteMethod(
@@ -152,13 +171,16 @@ namespace System.Formats.Asn1.Tests.Reader
                     input.AsSpan(encodedValueOffset + encodedValueLength, copyLength),
                     AsnEncodingRules.BER,
                     out int bytesConsumed,
-                    out int bytesWritten));
+                    out int bytesWritten
+                )
+            );
 
             Assert.Equal(encodedValueLength, bytesConsumed);
             Assert.Equal(copyLength, bytesWritten);
             Assert.Equal(
                 input[encodedValueOffset + encodedValueLength - copyLength],
-                input[encodedValueOffset + encodedValueLength]);
+                input[encodedValueOffset + encodedValueLength]
+            );
 
             Assert.True(
                 tryWriteMethod(
@@ -166,7 +188,9 @@ namespace System.Formats.Asn1.Tests.Reader
                     input.AsSpan(0, copyLength),
                     AsnEncodingRules.BER,
                     out bytesConsumed,
-                    out bytesWritten));
+                    out bytesWritten
+                )
+            );
 
             Assert.Equal(encodedValueLength, bytesConsumed);
             Assert.Equal(copyLength, bytesWritten);

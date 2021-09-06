@@ -19,15 +19,17 @@ namespace Microsoft.AspNetCore.Hosting.Views
             IFileProvider contentRootFileProvider,
             ILogger? logger,
             bool showDetailedErrors,
-            Exception exception)
-        {
-            var systemRuntimeAssembly = typeof(System.ComponentModel.DefaultValueAttribute).Assembly;
-            var assemblyVersion = new AssemblyName(systemRuntimeAssembly.FullName!).Version?.ToString() ?? string.Empty;
+            Exception exception
+        ) {
+            var systemRuntimeAssembly =
+                typeof(System.ComponentModel.DefaultValueAttribute).Assembly;
+            var assemblyVersion =
+                new AssemblyName(systemRuntimeAssembly.FullName!).Version?.ToString()
+                ?? string.Empty;
             var clrVersion = assemblyVersion;
             var currentAssembly = typeof(ErrorPage).Assembly;
-            var currentAssemblyVesion = currentAssembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
-                .InformationalVersion;
+            var currentAssemblyVesion =
+                currentAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
 
             IEnumerable<ExceptionDetails> errorDetails;
             if (showDetailedErrors)
@@ -35,7 +37,8 @@ namespace Microsoft.AspNetCore.Hosting.Views
                 var exceptionDetailProvider = new ExceptionDetailsProvider(
                     contentRootFileProvider,
                     logger,
-                    sourceCodeLineCount: 6);
+                    sourceCodeLineCount: 6
+                );
 
                 errorDetails = exceptionDetailProvider.GetDetails(exception);
             }
@@ -51,7 +54,8 @@ namespace Microsoft.AspNetCore.Hosting.Views
                 RuntimeInformation.ProcessArchitecture.ToString(),
                 clrVersion,
                 currentAssemblyVesion,
-                RuntimeInformation.OSDescription);
+                RuntimeInformation.OSDescription
+            );
             return model;
         }
     }

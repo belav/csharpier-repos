@@ -11,13 +11,18 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static float FPSubConst(float x) { return x-1; }
+    public static float FPSubConst(float x)
+    {
+        return x - 1;
+    }
 
     public static int Main()
     {
         float y = FPSubConst(1f);
         Console.WriteLine(y);
-        if (System.Math.Abs(y) <= Single.Epsilon) return Pass;
-        else return Fail;
+        if (System.Math.Abs(y) <= Single.Epsilon)
+            return Pass;
+        else
+            return Fail;
     }
 }

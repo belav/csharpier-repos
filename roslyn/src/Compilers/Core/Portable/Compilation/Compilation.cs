@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis
             IReadOnlyDictionary<string, string> features,
             bool isSubmission,
             SemanticModelProvider? semanticModelProvider,
-            AsyncQueue<CompilationEvent>? eventQueue)
-        {
+            AsyncQueue<CompilationEvent>? eventQueue
+        ) {
             RoslynDebug.Assert(!references.IsDefault);
             RoslynDebug.Assert(features != null);
 
@@ -81,12 +81,15 @@ namespace Microsoft.CodeAnalysis
             this.SemanticModelProvider = semanticModelProvider;
             this.EventQueue = eventQueue;
 
-            _lazySubmissionSlotIndex = isSubmission ? SubmissionSlotIndexToBeAllocated : SubmissionSlotIndexNotApplicable;
+            _lazySubmissionSlotIndex = isSubmission
+                ? SubmissionSlotIndexToBeAllocated
+                : SubmissionSlotIndexNotApplicable;
             _features = features;
         }
 
-        protected static IReadOnlyDictionary<string, string> SyntaxTreeCommonFeatures(IEnumerable<SyntaxTree> trees)
-        {
+        protected static IReadOnlyDictionary<string, string> SyntaxTreeCommonFeatures(
+            IEnumerable<SyntaxTree> trees
+        ) {
             IReadOnlyDictionary<string, string>? set = null;
 
             foreach (var tree in trees)
@@ -100,7 +103,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     if ((object)set != treeFeatures && !set.SetEquals(treeFeatures))
                     {
-                        throw new ArgumentException(CodeAnalysisResources.InconsistentSyntaxTreeFeature, nameof(trees));
+                        throw new ArgumentException(
+                            CodeAnalysisResources.InconsistentSyntaxTreeFeature,
+                            nameof(trees)
+                        );
                     }
                 }
             }
@@ -114,7 +120,11 @@ namespace Microsoft.CodeAnalysis
             return set;
         }
 
-        internal abstract AnalyzerDriver CreateAnalyzerDriver(ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerManager analyzerManager, SeverityFilter severityFilter);
+        internal abstract AnalyzerDriver CreateAnalyzerDriver(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            AnalyzerManager analyzerManager,
+            SeverityFilter severityFilter
+        );
 
         /// <summary>
         /// Gets the source language ("C#" or "Visual Basic").
@@ -123,16 +133,25 @@ namespace Microsoft.CodeAnalysis
 
         internal abstract void SerializePdbEmbeddedCompilationOptions(BlobBuilder builder);
 
-        internal static void ValidateScriptCompilationParameters(Compilation? previousScriptCompilation, Type? returnType, ref Type? globalsType)
-        {
+        internal static void ValidateScriptCompilationParameters(
+            Compilation? previousScriptCompilation,
+            Type? returnType,
+            ref Type? globalsType
+        ) {
             if (globalsType != null && !IsValidHostObjectType(globalsType))
             {
-                throw new ArgumentException(CodeAnalysisResources.ReturnTypeCannotBeValuePointerbyRefOrOpen, nameof(globalsType));
+                throw new ArgumentException(
+                    CodeAnalysisResources.ReturnTypeCannotBeValuePointerbyRefOrOpen,
+                    nameof(globalsType)
+                );
             }
 
             if (returnType != null && !IsValidSubmissionReturnType(returnType))
             {
-                throw new ArgumentException(CodeAnalysisResources.ReturnTypeCannotBeVoidByRefOrOpen, nameof(returnType));
+                throw new ArgumentException(
+                    CodeAnalysisResources.ReturnTypeCannotBeVoidByRefOrOpen,
+                    nameof(returnType)
+                );
             }
 
             if (previousScriptCompilation != null)
@@ -143,13 +162,20 @@ namespace Microsoft.CodeAnalysis
                 }
                 else if (globalsType != previousScriptCompilation.HostObjectType)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.TypeMustBeSameAsHostObjectTypeOfPreviousSubmission, nameof(globalsType));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.TypeMustBeSameAsHostObjectTypeOfPreviousSubmission,
+                        nameof(globalsType)
+                    );
                 }
 
                 // Force the previous submission to be analyzed. This is required for anonymous types unification.
-                if (previousScriptCompilation.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
-                {
-                    throw new InvalidOperationException(CodeAnalysisResources.PreviousSubmissionHasErrors);
+                if (
+                    previousScriptCompilation.GetDiagnostics()
+                        .Any(d => d.Severity == DiagnosticSeverity.Error)
+                ) {
+                    throw new InvalidOperationException(
+                        CodeAnalysisResources.PreviousSubmissionHasErrors
+                    );
                 }
             }
         }
@@ -165,18 +191,27 @@ namespace Microsoft.CodeAnalysis
                 return;
             }
 
-            if (options.OutputKind.IsValid() && options.OutputKind != OutputKind.DynamicallyLinkedLibrary)
-            {
-                throw new ArgumentException(CodeAnalysisResources.InvalidOutputKindForSubmission, nameof(options));
+            if (
+                options.OutputKind.IsValid()
+                && options.OutputKind != OutputKind.DynamicallyLinkedLibrary
+            ) {
+                throw new ArgumentException(
+                    CodeAnalysisResources.InvalidOutputKindForSubmission,
+                    nameof(options)
+                );
             }
 
-            if (options.CryptoKeyContainer != null ||
-                options.CryptoKeyFile != null ||
-                options.DelaySign != null ||
-                !options.CryptoPublicKey.IsEmpty ||
-                (options.DelaySign == true && options.PublicSign))
-            {
-                throw new ArgumentException(CodeAnalysisResources.InvalidCompilationOptions, nameof(options));
+            if (
+                options.CryptoKeyContainer != null
+                || options.CryptoKeyFile != null
+                || options.DelaySign != null
+                || !options.CryptoPublicKey.IsEmpty
+                || (options.DelaySign == true && options.PublicSign)
+            ) {
+                throw new ArgumentException(
+                    CodeAnalysisResources.InvalidCompilationOptions,
+                    nameof(options)
+                );
             }
         }
 
@@ -198,7 +233,9 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns a new compilation with a given semantic model provider.
         /// </summary>
-        internal abstract Compilation WithSemanticModelProvider(SemanticModelProvider semanticModelProvider);
+        internal abstract Compilation WithSemanticModelProvider(
+            SemanticModelProvider semanticModelProvider
+        );
 
         /// <summary>
         /// Gets a new <see cref="SemanticModel"/> for the specified syntax tree.
@@ -207,8 +244,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="ignoreAccessibility">
         /// True if the SemanticModel should ignore accessibility rules when answering semantic questions.
         /// </param>
-        public SemanticModel GetSemanticModel(SyntaxTree syntaxTree, bool ignoreAccessibility = false)
-            => CommonGetSemanticModel(syntaxTree, ignoreAccessibility);
+        public SemanticModel GetSemanticModel(
+            SyntaxTree syntaxTree,
+            bool ignoreAccessibility = false
+        ) => CommonGetSemanticModel(syntaxTree, ignoreAccessibility);
 
         /// <summary>
         /// Gets a <see cref="SemanticModel"/> for the given <paramref name="syntaxTree"/>.
@@ -218,7 +257,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="syntaxTree"></param>
         /// <param name="ignoreAccessibility"></param>
         /// <returns></returns>
-        protected abstract SemanticModel CommonGetSemanticModel(SyntaxTree syntaxTree, bool ignoreAccessibility);
+        protected abstract SemanticModel CommonGetSemanticModel(
+            SyntaxTree syntaxTree,
+            bool ignoreAccessibility
+        );
 
         /// <summary>
         /// Creates a new <see cref="SemanticModel"/> for the given <paramref name="syntaxTree"/>.
@@ -228,14 +270,20 @@ namespace Microsoft.CodeAnalysis
         /// <param name="syntaxTree"></param>
         /// <param name="ignoreAccessibility"></param>
         /// <returns></returns>
-        internal abstract SemanticModel CreateSemanticModel(SyntaxTree syntaxTree, bool ignoreAccessibility);
+        internal abstract SemanticModel CreateSemanticModel(
+            SyntaxTree syntaxTree,
+            bool ignoreAccessibility
+        );
 
         /// <summary>
         /// Returns a new INamedTypeSymbol representing an error type with the given name and arity
         /// in the given optional container.
         /// </summary>
-        public INamedTypeSymbol CreateErrorTypeSymbol(INamespaceOrTypeSymbol? container, string name, int arity)
-        {
+        public INamedTypeSymbol CreateErrorTypeSymbol(
+            INamespaceOrTypeSymbol? container,
+            string name,
+            int arity
+        ) {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -249,7 +297,11 @@ namespace Microsoft.CodeAnalysis
             return CommonCreateErrorTypeSymbol(container, name, arity);
         }
 
-        protected abstract INamedTypeSymbol CommonCreateErrorTypeSymbol(INamespaceOrTypeSymbol? container, string name, int arity);
+        protected abstract INamedTypeSymbol CommonCreateErrorTypeSymbol(
+            INamespaceOrTypeSymbol? container,
+            string name,
+            int arity
+        );
 
         /// <summary>
         /// Returns a new INamespaceSymbol representing an error (missing) namespace with the given name.
@@ -269,7 +321,10 @@ namespace Microsoft.CodeAnalysis
             return CommonCreateErrorNamespaceSymbol(container, name);
         }
 
-        protected abstract INamespaceSymbol CommonCreateErrorNamespaceSymbol(INamespaceSymbol container, string name);
+        protected abstract INamespaceSymbol CommonCreateErrorNamespaceSymbol(
+            INamespaceSymbol container,
+            string name
+        );
 
         #region Name
 
@@ -295,7 +350,12 @@ namespace Microsoft.CodeAnalysis
 
             if (this.AssemblyName != null)
             {
-                MetadataHelpers.CheckAssemblyOrModuleName(this.AssemblyName, MessageProvider, MessageProvider.ERR_BadAssemblyName, diagnostics);
+                MetadataHelpers.CheckAssemblyOrModuleName(
+                    this.AssemblyName,
+                    MessageProvider,
+                    MessageProvider.ERR_BadAssemblyName,
+                    diagnostics
+                );
             }
         }
 
@@ -306,8 +366,12 @@ namespace Microsoft.CodeAnalysis
 
         internal string MakeSourceModuleName()
         {
-            return Options.ModuleName ??
-                   (AssemblyName != null ? AssemblyName + Options.OutputKind.GetDefaultExtension() : UnspecifiedModuleAssemblyName);
+            return Options.ModuleName
+                ?? (
+                    AssemblyName != null
+                        ? AssemblyName + Options.OutputKind.GetDefaultExtension()
+                        : UnspecifiedModuleAssemblyName
+                );
         }
 
         /// <summary>
@@ -329,7 +393,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the options the compilation was created with.
         /// </summary>
-        public CompilationOptions Options { get { return CommonOptions; } }
+        public CompilationOptions Options
+        {
+            get { return CommonOptions; }
+        }
 
         protected abstract CompilationOptions CommonOptions { get; }
 
@@ -363,10 +430,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal bool IsSubmission
         {
-            get
-            {
-                return _lazySubmissionSlotIndex != SubmissionSlotIndexNotApplicable;
-            }
+            get { return _lazySubmissionSlotIndex != SubmissionSlotIndexNotApplicable; }
         }
 
         /// <summary>
@@ -374,10 +438,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private Compilation? PreviousSubmission
         {
-            get
-            {
-                return ScriptCompilationInfo?.PreviousScriptCompilation;
-            }
+            get { return ScriptCompilationInfo?.PreviousScriptCompilation; }
         }
 
         /// <summary>
@@ -389,7 +450,8 @@ namespace Microsoft.CodeAnalysis
             if (_lazySubmissionSlotIndex == SubmissionSlotIndexToBeAllocated)
             {
                 // TODO (tomat): remove recursion
-                int lastSlotIndex = ScriptCompilationInfo!.PreviousScriptCompilation?.GetSubmissionSlotIndex() ?? 0;
+                int lastSlotIndex =
+                    ScriptCompilationInfo!.PreviousScriptCompilation?.GetSubmissionSlotIndex() ?? 0;
                 _lazySubmissionSlotIndex = HasCodeToEmit() ? lastSlotIndex + 1 : lastSlotIndex;
             }
 
@@ -411,7 +473,9 @@ namespace Microsoft.CodeAnalysis
 
         internal static bool IsValidSubmissionReturnType(Type type)
         {
-            return !(type == typeof(void) || type.IsByRef || type.GetTypeInfo().ContainsGenericParameters);
+            return !(
+                type == typeof(void) || type.IsByRef || type.GetTypeInfo().ContainsGenericParameters
+            );
         }
 
         /// <summary>
@@ -422,12 +486,15 @@ namespace Microsoft.CodeAnalysis
         internal static bool IsValidHostObjectType(Type type)
         {
             var info = type.GetTypeInfo();
-            return !(info.IsValueType || info.IsPointer || info.IsByRef || info.ContainsGenericParameters);
+            return !(
+                info.IsValueType || info.IsPointer || info.IsByRef || info.ContainsGenericParameters
+            );
         }
 
         internal abstract bool HasSubmissionResult();
 
-        public Compilation WithScriptCompilationInfo(ScriptCompilationInfo? info) => CommonWithScriptCompilationInfo(info);
+        public Compilation WithScriptCompilationInfo(ScriptCompilationInfo? info) =>
+            CommonWithScriptCompilationInfo(info);
         protected abstract Compilation CommonWithScriptCompilationInfo(ScriptCompilationInfo? info);
 
         #endregion
@@ -437,7 +504,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the syntax trees (parsed from source code) that this compilation was created with.
         /// </summary>
-        public IEnumerable<SyntaxTree> SyntaxTrees { get { return CommonSyntaxTrees; } }
+        public IEnumerable<SyntaxTree> SyntaxTrees
+        {
+            get { return CommonSyntaxTrees; }
+        }
         protected abstract ImmutableArray<SyntaxTree> CommonSyntaxTrees { get; }
 
         /// <summary>
@@ -509,7 +579,10 @@ namespace Microsoft.CodeAnalysis
             return CommonReplaceSyntaxTree(oldTree, newTree);
         }
 
-        protected abstract Compilation CommonReplaceSyntaxTree(SyntaxTree oldTree, SyntaxTree newTree);
+        protected abstract Compilation CommonReplaceSyntaxTree(
+            SyntaxTree oldTree,
+            SyntaxTree newTree
+        );
 
         /// <summary>
         /// Returns true if this compilation contains the specified tree. False otherwise.
@@ -536,8 +609,9 @@ namespace Microsoft.CodeAnalysis
 
         #region References
 
-        internal static ImmutableArray<MetadataReference> ValidateReferences<T>(IEnumerable<MetadataReference>? references)
-            where T : CompilationReference
+        internal static ImmutableArray<MetadataReference> ValidateReferences<T>(
+            IEnumerable<MetadataReference>? references
+        ) where T : CompilationReference
         {
             var result = references.AsImmutableOrEmpty();
             for (int i = 0; i < result.Length; i++)
@@ -551,9 +625,17 @@ namespace Microsoft.CodeAnalysis
                 var peReference = reference as PortableExecutableReference;
                 if (peReference == null && !(reference is T))
                 {
-                    Debug.Assert(reference is UnresolvedMetadataReference || reference is CompilationReference);
-                    throw new ArgumentException(string.Format(CodeAnalysisResources.ReferenceOfTypeIsInvalid1, reference.GetType()),
-                                    $"{nameof(references)}[{i}]");
+                    Debug.Assert(
+                        reference is UnresolvedMetadataReference
+                            || reference is CompilationReference
+                    );
+                    throw new ArgumentException(
+                        string.Format(
+                            CodeAnalysisResources.ReferenceOfTypeIsInvalid1,
+                            reference.GetType()
+                        ),
+                        $"{nameof(references)}[{i}]"
+                    );
                 }
             }
 
@@ -585,7 +667,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Maps values of #r references to resolved metadata references.
         /// </summary>
-        internal abstract IDictionary<(string path, string content), MetadataReference> ReferenceDirectiveMap { get; }
+        internal abstract IDictionary<
+            (string path, string content),
+            MetadataReference
+        > ReferenceDirectiveMap { get; }
 
         /// <summary>
         /// All metadata references -- references passed to the compilation
@@ -617,7 +702,10 @@ namespace Microsoft.CodeAnalysis
         /// Embed the COM types from the reference so that the compiled
         /// application no longer requires a primary interop assembly (PIA).
         /// </param>
-        public abstract CompilationReference ToMetadataReference(ImmutableArray<string> aliases = default(ImmutableArray<string>), bool embedInteropTypes = false);
+        public abstract CompilationReference ToMetadataReference(
+            ImmutableArray<string> aliases = default(ImmutableArray<string>),
+            bool embedInteropTypes = false
+        );
 
         /// <summary>
         /// Creates a new compilation with the specified references.
@@ -644,7 +732,9 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a new compilation with the specified references.
         /// </summary>
-        protected abstract Compilation CommonWithReferences(IEnumerable<MetadataReference> newReferences);
+        protected abstract Compilation CommonWithReferences(
+            IEnumerable<MetadataReference> newReferences
+        );
 
         /// <summary>
         /// Creates a new compilation with additional metadata references.
@@ -712,8 +802,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (!refSet.Remove(r))
                 {
-                    throw new ArgumentException(string.Format(CodeAnalysisResources.MetadataRefNotFoundToRemove1, r),
-                                nameof(references));
+                    throw new ArgumentException(
+                        string.Format(CodeAnalysisResources.MetadataRefNotFoundToRemove1, r),
+                        nameof(references)
+                    );
                 }
             }
 
@@ -725,7 +817,9 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public Compilation RemoveAllReferences()
         {
-            return CommonWithReferences(SpecializedCollections.EmptyEnumerable<MetadataReference>());
+            return CommonWithReferences(
+                SpecializedCollections.EmptyEnumerable<MetadataReference>()
+            );
         }
 
         /// <summary>
@@ -735,8 +829,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="newReference">The new reference.</param>
         /// <param name="oldReference">The old reference.</param>
         /// <returns>A new compilation.</returns>
-        public Compilation ReplaceReference(MetadataReference oldReference, MetadataReference? newReference)
-        {
+        public Compilation ReplaceReference(
+            MetadataReference oldReference,
+            MetadataReference? newReference
+        ) {
             if (oldReference == null)
             {
                 throw new ArgumentNullException(nameof(oldReference));
@@ -774,7 +870,9 @@ namespace Microsoft.CodeAnalysis
             return CommonGetMetadataReference(assemblySymbol);
         }
 
-        private protected abstract MetadataReference? CommonGetMetadataReference(IAssemblySymbol assemblySymbol);
+        private protected abstract MetadataReference? CommonGetMetadataReference(
+            IAssemblySymbol assemblySymbol
+        );
 
         /// <summary>
         /// Assembly identities of all assemblies directly referenced by this compilation.
@@ -792,21 +890,30 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The <see cref="IAssemblySymbol"/> that represents the assembly being created.
         /// </summary>
-        public IAssemblySymbol Assembly { get { return CommonAssembly; } }
+        public IAssemblySymbol Assembly
+        {
+            get { return CommonAssembly; }
+        }
         protected abstract IAssemblySymbol CommonAssembly { get; }
 
         /// <summary>
         /// Gets the <see cref="IModuleSymbol"/> for the module being created by compiling all of
         /// the source code.
         /// </summary>
-        public IModuleSymbol SourceModule { get { return CommonSourceModule; } }
+        public IModuleSymbol SourceModule
+        {
+            get { return CommonSourceModule; }
+        }
         protected abstract IModuleSymbol CommonSourceModule { get; }
 
         /// <summary>
         /// The root namespace that contains all namespaces and types defined in source code or in
         /// referenced metadata, merged into a single namespace hierarchy.
         /// </summary>
-        public INamespaceSymbol GlobalNamespace { get { return CommonGlobalNamespace; } }
+        public INamespaceSymbol GlobalNamespace
+        {
+            get { return CommonGlobalNamespace; }
+        }
         protected abstract INamespaceSymbol CommonGlobalNamespace { get; }
 
         /// <summary>
@@ -817,7 +924,9 @@ namespace Microsoft.CodeAnalysis
             return CommonGetCompilationNamespace(namespaceSymbol);
         }
 
-        protected abstract INamespaceSymbol? CommonGetCompilationNamespace(INamespaceSymbol namespaceSymbol);
+        protected abstract INamespaceSymbol? CommonGetCompilationNamespace(
+            INamespaceSymbol namespaceSymbol
+        );
 
         internal abstract CommonAnonymousTypeManager CommonAnonymousTypeManager { get; }
 
@@ -851,7 +960,9 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal abstract bool IsSystemTypeReference(ITypeSymbolInternal type);
 
-        private protected abstract INamedTypeSymbolInternal CommonGetSpecialType(SpecialType specialType);
+        private protected abstract INamedTypeSymbolInternal CommonGetSpecialType(
+            SpecialType specialType
+        );
 
         /// <summary>
         /// Lookup member declaration in well known type used by this Compilation.
@@ -872,14 +983,20 @@ namespace Microsoft.CodeAnalysis
         /// The INamedTypeSymbol for the .NET System.Object type, which could have a TypeKind of
         /// Error if there was no COR Library in this Compilation.
         /// </summary>
-        public INamedTypeSymbol ObjectType { get { return CommonObjectType; } }
+        public INamedTypeSymbol ObjectType
+        {
+            get { return CommonObjectType; }
+        }
         protected abstract INamedTypeSymbol CommonObjectType { get; }
 
         /// <summary>
         /// The TypeSymbol for the type 'dynamic' in this Compilation.
         /// </summary>
         /// <exception cref="NotSupportedException">If the compilation is a VisualBasic compilation.</exception>
-        public ITypeSymbol DynamicType { get { return CommonDynamicType; } }
+        public ITypeSymbol DynamicType
+        {
+            get { return CommonDynamicType; }
+        }
         protected abstract ITypeSymbol CommonDynamicType { get; }
 
         /// <summary>
@@ -892,7 +1009,10 @@ namespace Microsoft.CodeAnalysis
         /// A symbol representing the implicit Script class. This is null if the class is not
         /// defined in the compilation.
         /// </summary>
-        public INamedTypeSymbol? ScriptClass { get { return CommonScriptClass; } }
+        public INamedTypeSymbol? ScriptClass
+        {
+            get { return CommonScriptClass; }
+        }
         protected abstract INamedTypeSymbol? CommonScriptClass { get; }
 
         /// <summary>
@@ -919,8 +1039,9 @@ namespace Microsoft.CodeAnalysis
                 container = next;
             }
 
-            foreach (INamedTypeSymbol candidate in container.GetTypeMembers(parts[parts.Length - 1]))
-            {
+            foreach (
+                INamedTypeSymbol candidate in container.GetTypeMembers(parts[parts.Length - 1])
+            ) {
                 if (candidate.IsScriptClass)
                 {
                     return candidate;
@@ -944,8 +1065,11 @@ namespace Microsoft.CodeAnalysis
         /// Returns a new ArrayTypeSymbol representing an array type tied to the base types of the
         /// COR Library in this Compilation.
         /// </summary>
-        public IArrayTypeSymbol CreateArrayTypeSymbol(ITypeSymbol elementType, int rank = 1, NullableAnnotation elementNullableAnnotation = NullableAnnotation.None)
-        {
+        public IArrayTypeSymbol CreateArrayTypeSymbol(
+            ITypeSymbol elementType,
+            int rank = 1,
+            NullableAnnotation elementNullableAnnotation = NullableAnnotation.None
+        ) {
             return CommonCreateArrayTypeSymbol(elementType, rank, elementNullableAnnotation);
         }
 
@@ -959,7 +1083,11 @@ namespace Microsoft.CodeAnalysis
             return CreateArrayTypeSymbol(elementType, rank, elementNullableAnnotation: default);
         }
 
-        protected abstract IArrayTypeSymbol CommonCreateArrayTypeSymbol(ITypeSymbol elementType, int rank, NullableAnnotation elementNullableAnnotation);
+        protected abstract IArrayTypeSymbol CommonCreateArrayTypeSymbol(
+            ITypeSymbol elementType,
+            int rank,
+            NullableAnnotation elementNullableAnnotation
+        );
 
         /// <summary>
         /// Returns a new IPointerTypeSymbol representing a pointer type tied to a type in this
@@ -971,8 +1099,9 @@ namespace Microsoft.CodeAnalysis
             return CommonCreatePointerTypeSymbol(pointedAtType);
         }
 
-        protected abstract IPointerTypeSymbol CommonCreatePointerTypeSymbol(ITypeSymbol elementType);
-
+        protected abstract IPointerTypeSymbol CommonCreatePointerTypeSymbol(
+            ITypeSymbol elementType
+        );
 
         /// <summary>
         /// Returns a new IFunctionPointerTypeSymbol representing a function pointer type tied to types in this
@@ -993,9 +1122,16 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ITypeSymbol> parameterTypes,
             ImmutableArray<RefKind> parameterRefKinds,
             SignatureCallingConvention callingConvention = SignatureCallingConvention.Default,
-            ImmutableArray<INamedTypeSymbol> callingConventionTypes = default)
-        {
-            return CommonCreateFunctionPointerTypeSymbol(returnType, returnRefKind, parameterTypes, parameterRefKinds, callingConvention, callingConventionTypes);
+            ImmutableArray<INamedTypeSymbol> callingConventionTypes = default
+        ) {
+            return CommonCreateFunctionPointerTypeSymbol(
+                returnType,
+                returnRefKind,
+                parameterTypes,
+                parameterRefKinds,
+                callingConvention,
+                callingConventionTypes
+            );
         }
 
         protected abstract IFunctionPointerTypeSymbol CommonCreateFunctionPointerTypeSymbol(
@@ -1004,7 +1140,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ITypeSymbol> parameterTypes,
             ImmutableArray<RefKind> parameterRefKinds,
             SignatureCallingConvention callingConvention,
-            ImmutableArray<INamedTypeSymbol> callingConventionTypes);
+            ImmutableArray<INamedTypeSymbol> callingConventionTypes
+        );
 
         /// <summary>
         /// Returns a new INamedTypeSymbol representing a native integer.
@@ -1056,8 +1193,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ITypeSymbol> elementTypes,
             ImmutableArray<string?> elementNames = default,
             ImmutableArray<Location?> elementLocations = default,
-            ImmutableArray<NullableAnnotation> elementNullableAnnotations = default)
-        {
+            ImmutableArray<NullableAnnotation> elementNullableAnnotations = default
+        ) {
             if (elementTypes.IsDefault)
             {
                 throw new ArgumentNullException(nameof(elementTypes));
@@ -1066,7 +1203,10 @@ namespace Microsoft.CodeAnalysis
             int n = elementTypes.Length;
             if (elementTypes.Length <= 1)
             {
-                throw new ArgumentException(CodeAnalysisResources.TuplesNeedAtLeastTwoElements, nameof(elementNames));
+                throw new ArgumentException(
+                    CodeAnalysisResources.TuplesNeedAtLeastTwoElements,
+                    nameof(elementNames)
+                );
             }
 
             elementNames = CheckTupleElementNames(n, elementNames);
@@ -1086,7 +1226,12 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return CommonCreateTupleTypeSymbol(elementTypes, elementNames, elementLocations, elementNullableAnnotations);
+            return CommonCreateTupleTypeSymbol(
+                elementTypes,
+                elementNames,
+                elementLocations,
+                elementNullableAnnotations
+            );
         }
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
@@ -1097,20 +1242,28 @@ namespace Microsoft.CodeAnalysis
         public INamedTypeSymbol CreateTupleTypeSymbol(
             ImmutableArray<ITypeSymbol> elementTypes,
             ImmutableArray<string?> elementNames,
-            ImmutableArray<Location?> elementLocations)
-        {
-            return CreateTupleTypeSymbol(elementTypes, elementNames, elementLocations, elementNullableAnnotations: default);
+            ImmutableArray<Location?> elementLocations
+        ) {
+            return CreateTupleTypeSymbol(
+                elementTypes,
+                elementNames,
+                elementLocations,
+                elementNullableAnnotations: default
+            );
         }
 
         protected static void CheckTupleElementNullableAnnotations(
             int cardinality,
-            ImmutableArray<NullableAnnotation> elementNullableAnnotations)
-        {
+            ImmutableArray<NullableAnnotation> elementNullableAnnotations
+        ) {
             if (!elementNullableAnnotations.IsDefault)
             {
                 if (elementNullableAnnotations.Length != cardinality)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.TupleElementNullableAnnotationCountMismatch, nameof(elementNullableAnnotations));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.TupleElementNullableAnnotationCountMismatch,
+                        nameof(elementNullableAnnotations)
+                    );
                 }
             }
         }
@@ -1119,20 +1272,28 @@ namespace Microsoft.CodeAnalysis
         /// Check that if any names are provided, and their number matches the expected cardinality.
         /// Returns a normalized version of the element names (empty array if all the names are null).
         /// </summary>
-        protected static ImmutableArray<string?> CheckTupleElementNames(int cardinality, ImmutableArray<string?> elementNames)
-        {
+        protected static ImmutableArray<string?> CheckTupleElementNames(
+            int cardinality,
+            ImmutableArray<string?> elementNames
+        ) {
             if (!elementNames.IsDefault)
             {
                 if (elementNames.Length != cardinality)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.TupleElementNameCountMismatch, nameof(elementNames));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.TupleElementNameCountMismatch,
+                        nameof(elementNames)
+                    );
                 }
 
                 for (int i = 0; i < elementNames.Length; i++)
                 {
                     if (elementNames[i] == "")
                     {
-                        throw new ArgumentException(CodeAnalysisResources.TupleElementNameEmpty, $"{nameof(elementNames)}[{i}]");
+                        throw new ArgumentException(
+                            CodeAnalysisResources.TupleElementNameEmpty,
+                            $"{nameof(elementNames)}[{i}]"
+                        );
                     }
                 }
 
@@ -1147,13 +1308,16 @@ namespace Microsoft.CodeAnalysis
 
         protected static void CheckTupleElementLocations(
             int cardinality,
-            ImmutableArray<Location?> elementLocations)
-        {
+            ImmutableArray<Location?> elementLocations
+        ) {
             if (!elementLocations.IsDefault)
             {
                 if (elementLocations.Length != cardinality)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.TupleElementLocationCountMismatch, nameof(elementLocations));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.TupleElementLocationCountMismatch,
+                        nameof(elementLocations)
+                    );
                 }
             }
         }
@@ -1162,7 +1326,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ITypeSymbol> elementTypes,
             ImmutableArray<string?> elementNames,
             ImmutableArray<Location?> elementLocations,
-            ImmutableArray<NullableAnnotation> elementNullableAnnotations);
+            ImmutableArray<NullableAnnotation> elementNullableAnnotations
+        );
 
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
         /// <summary>
@@ -1174,14 +1339,19 @@ namespace Microsoft.CodeAnalysis
             INamedTypeSymbol underlyingType,
             ImmutableArray<string?> elementNames = default,
             ImmutableArray<Location?> elementLocations = default,
-            ImmutableArray<NullableAnnotation> elementNullableAnnotations = default)
-        {
+            ImmutableArray<NullableAnnotation> elementNullableAnnotations = default
+        ) {
             if ((object)underlyingType == null)
             {
                 throw new ArgumentNullException(nameof(underlyingType));
             }
 
-            return CommonCreateTupleTypeSymbol(underlyingType, elementNames, elementLocations, elementNullableAnnotations);
+            return CommonCreateTupleTypeSymbol(
+                underlyingType,
+                elementNames,
+                elementLocations,
+                elementNullableAnnotations
+            );
         }
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
@@ -1193,16 +1363,22 @@ namespace Microsoft.CodeAnalysis
         public INamedTypeSymbol CreateTupleTypeSymbol(
             INamedTypeSymbol underlyingType,
             ImmutableArray<string?> elementNames,
-            ImmutableArray<Location?> elementLocations)
-        {
-            return CreateTupleTypeSymbol(underlyingType, elementNames, elementLocations, elementNullableAnnotations: default);
+            ImmutableArray<Location?> elementLocations
+        ) {
+            return CreateTupleTypeSymbol(
+                underlyingType,
+                elementNames,
+                elementLocations,
+                elementNullableAnnotations: default
+            );
         }
 
         protected abstract INamedTypeSymbol CommonCreateTupleTypeSymbol(
             INamedTypeSymbol underlyingType,
             ImmutableArray<string?> elementNames,
             ImmutableArray<Location?> elementLocations,
-            ImmutableArray<NullableAnnotation> elementNullableAnnotations);
+            ImmutableArray<NullableAnnotation> elementNullableAnnotations
+        );
 
         /// <summary>
         /// Returns a new anonymous type symbol with the given member types, names, source locations, and nullable annotations.
@@ -1215,8 +1391,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> memberNames,
             ImmutableArray<bool> memberIsReadOnly = default,
             ImmutableArray<Location> memberLocations = default,
-            ImmutableArray<NullableAnnotation> memberNullableAnnotations = default)
-        {
+            ImmutableArray<NullableAnnotation> memberNullableAnnotations = default
+        ) {
             if (memberTypes.IsDefault)
             {
                 throw new ArgumentNullException(nameof(memberTypes));
@@ -1229,26 +1405,48 @@ namespace Microsoft.CodeAnalysis
 
             if (memberTypes.Length != memberNames.Length)
             {
-                throw new ArgumentException(string.Format(CodeAnalysisResources.AnonymousTypeMemberAndNamesCountMismatch2,
-                                                    nameof(memberTypes), nameof(memberNames)));
+                throw new ArgumentException(
+                    string.Format(
+                        CodeAnalysisResources.AnonymousTypeMemberAndNamesCountMismatch2,
+                        nameof(memberTypes),
+                        nameof(memberNames)
+                    )
+                );
             }
 
             if (!memberLocations.IsDefault && memberLocations.Length != memberTypes.Length)
             {
-                throw new ArgumentException(string.Format(CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
-                                                    nameof(memberLocations), nameof(memberNames)));
+                throw new ArgumentException(
+                    string.Format(
+                        CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
+                        nameof(memberLocations),
+                        nameof(memberNames)
+                    )
+                );
             }
 
             if (!memberIsReadOnly.IsDefault && memberIsReadOnly.Length != memberTypes.Length)
             {
-                throw new ArgumentException(string.Format(CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
-                                                    nameof(memberIsReadOnly), nameof(memberNames)));
+                throw new ArgumentException(
+                    string.Format(
+                        CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
+                        nameof(memberIsReadOnly),
+                        nameof(memberNames)
+                    )
+                );
             }
 
-            if (!memberNullableAnnotations.IsDefault && memberNullableAnnotations.Length != memberTypes.Length)
-            {
-                throw new ArgumentException(string.Format(CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
-                                                    nameof(memberNullableAnnotations), nameof(memberNames)));
+            if (
+                !memberNullableAnnotations.IsDefault
+                && memberNullableAnnotations.Length != memberTypes.Length
+            ) {
+                throw new ArgumentException(
+                    string.Format(
+                        CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
+                        nameof(memberNullableAnnotations),
+                        nameof(memberNames)
+                    )
+                );
             }
 
             for (int i = 0, n = memberTypes.Length; i < n; i++)
@@ -1269,7 +1467,13 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return CommonCreateAnonymousTypeSymbol(memberTypes, memberNames, memberLocations, memberIsReadOnly, memberNullableAnnotations);
+            return CommonCreateAnonymousTypeSymbol(
+                memberTypes,
+                memberNames,
+                memberLocations,
+                memberIsReadOnly,
+                memberNullableAnnotations
+            );
         }
 
         /// <summary>
@@ -1283,9 +1487,15 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<ITypeSymbol> memberTypes,
             ImmutableArray<string> memberNames,
             ImmutableArray<bool> memberIsReadOnly,
-            ImmutableArray<Location> memberLocations)
-        {
-            return CreateAnonymousTypeSymbol(memberTypes, memberNames, memberIsReadOnly, memberLocations, memberNullableAnnotations: default);
+            ImmutableArray<Location> memberLocations
+        ) {
+            return CreateAnonymousTypeSymbol(
+                memberTypes,
+                memberNames,
+                memberIsReadOnly,
+                memberLocations,
+                memberNullableAnnotations: default
+            );
         }
 
         protected abstract INamedTypeSymbol CommonCreateAnonymousTypeSymbol(
@@ -1293,7 +1503,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> memberNames,
             ImmutableArray<Location> memberLocations,
             ImmutableArray<bool> memberIsReadOnly,
-            ImmutableArray<NullableAnnotation> memberNullableAnnotations);
+            ImmutableArray<NullableAnnotation> memberNullableAnnotations
+        );
 
         /// <summary>
         /// Classifies a conversion from <paramref name="source"/> to <paramref name="destination"/> according
@@ -1303,7 +1514,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="destination">Destination type of value to be converted</param>
         /// <returns>A <see cref="CommonConversion"/> that classifies the conversion from the
         /// <paramref name="source"/> type to the <paramref name="destination"/> type.</returns>
-        public abstract CommonConversion ClassifyCommonConversion(ITypeSymbol source, ITypeSymbol destination);
+        public abstract CommonConversion ClassifyCommonConversion(
+            ITypeSymbol source,
+            ITypeSymbol destination
+        );
 
         /// <summary>
         /// Returns true if there is an implicit (C#) or widening (VB) conversion from
@@ -1311,8 +1525,10 @@ namespace Microsoft.CodeAnalysis
         /// either <paramref name="fromType"/> or <paramref name="toType"/> is null, or
         /// if no such conversion exists.
         /// </summary>
-        public bool HasImplicitConversion(ITypeSymbol? fromType, ITypeSymbol? toType)
-            => fromType != null && toType != null && this.ClassifyCommonConversion(fromType, toType).IsImplicit;
+        public bool HasImplicitConversion(ITypeSymbol? fromType, ITypeSymbol? toType) =>
+            fromType != null
+            && toType != null
+            && this.ClassifyCommonConversion(fromType, toType).IsImplicit;
 
         /// <summary>
         /// Checks if <paramref name="symbol"/> is accessible from within <paramref name="within"/>. An optional qualifier of type
@@ -1334,8 +1550,8 @@ namespace Microsoft.CodeAnalysis
         public bool IsSymbolAccessibleWithin(
             ISymbol symbol,
             ISymbol within,
-            ITypeSymbol? throughType = null)
-        {
+            ITypeSymbol? throughType = null
+        ) {
             if (symbol is null)
             {
                 throw new ArgumentNullException(nameof(symbol));
@@ -1348,7 +1564,13 @@ namespace Microsoft.CodeAnalysis
 
             if (!(within is INamedTypeSymbol || within is IAssemblySymbol))
             {
-                throw new ArgumentException(string.Format(CodeAnalysisResources.IsSymbolAccessibleBadWithin, nameof(within)), nameof(within));
+                throw new ArgumentException(
+                    string.Format(
+                        CodeAnalysisResources.IsSymbolAccessibleBadWithin,
+                        nameof(within)
+                    ),
+                    nameof(within)
+                );
             }
 
             checkInCompilationReferences(symbol, nameof(symbol));
@@ -1364,7 +1586,13 @@ namespace Microsoft.CodeAnalysis
             {
                 if (!isContainingAssemblyInReferences(s))
                 {
-                    throw new ArgumentException(string.Format(CodeAnalysisResources.IsSymbolAccessibleWrongAssembly, parameterName), parameterName);
+                    throw new ArgumentException(
+                        string.Format(
+                            CodeAnalysisResources.IsSymbolAccessibleWrongAssembly,
+                            parameterName
+                        ),
+                        parameterName
+                    );
                 }
             }
 
@@ -1380,8 +1608,11 @@ namespace Microsoft.CodeAnalysis
                     // Submissions can reference symbols from previous submissions and their referenced assemblies, even
                     // though those references are missing from this.References. We work around that by digging in
                     // to find references of previous submissions. See https://github.com/dotnet/roslyn/issues/27356
-                    for (Compilation? c = this.PreviousSubmission; c != null; c = c.PreviousSubmission)
-                    {
+                    for (
+                        Compilation? c = this.PreviousSubmission;
+                        c != null;
+                        c = c.PreviousSubmission
+                    ) {
                         if (assemblyIsInCompilationReferences(a, c))
                         {
                             return true;
@@ -1463,9 +1694,14 @@ namespace Microsoft.CodeAnalysis
         private protected abstract bool IsSymbolAccessibleWithinCore(
             ISymbol symbol,
             ISymbol within,
-            ITypeSymbol? throughType);
+            ITypeSymbol? throughType
+        );
 
-        internal abstract IConvertibleConversion ClassifyConvertibleConversion(IOperation source, ITypeSymbol destination, out ConstantValue? constantValue);
+        internal abstract IConvertibleConversion ClassifyConvertibleConversion(
+            IOperation source,
+            ITypeSymbol destination,
+            out ConstantValue? constantValue
+        );
 
         #endregion
 
@@ -1476,26 +1712,39 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the diagnostics produced during the parsing stage.
         /// </summary>
-        public abstract ImmutableArray<Diagnostic> GetParseDiagnostics(CancellationToken cancellationToken = default(CancellationToken));
+        public abstract ImmutableArray<Diagnostic> GetParseDiagnostics(
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Gets the diagnostics produced during symbol declaration.
         /// </summary>
-        public abstract ImmutableArray<Diagnostic> GetDeclarationDiagnostics(CancellationToken cancellationToken = default(CancellationToken));
+        public abstract ImmutableArray<Diagnostic> GetDeclarationDiagnostics(
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Gets the diagnostics produced during the analysis of method bodies and field initializers.
         /// </summary>
-        public abstract ImmutableArray<Diagnostic> GetMethodBodyDiagnostics(CancellationToken cancellationToken = default(CancellationToken));
+        public abstract ImmutableArray<Diagnostic> GetMethodBodyDiagnostics(
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Gets all the diagnostics for the compilation, including syntax, declaration, and
         /// binding. Does not include any diagnostics that might be produced during emit, see
         /// <see cref="EmitResult"/>.
         /// </summary>
-        public abstract ImmutableArray<Diagnostic> GetDiagnostics(CancellationToken cancellationToken = default(CancellationToken));
+        public abstract ImmutableArray<Diagnostic> GetDiagnostics(
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
-        internal abstract void GetDiagnostics(CompilationStage stage, bool includeEarlierStages, DiagnosticBag diagnostics, CancellationToken cancellationToken = default);
+        internal abstract void GetDiagnostics(
+            CompilationStage stage,
+            bool includeEarlierStages,
+            DiagnosticBag diagnostics,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Unique metadata assembly references that are considered to be used by this compilation.
@@ -1504,7 +1753,9 @@ namespace Microsoft.CodeAnalysis
         /// The returned set is a subset of references returned by <see cref="References"/> API.
         /// The result is undefined if the compilation contains errors.
         /// </summary>
-        public abstract ImmutableArray<MetadataReference> GetUsedAssemblyReferences(CancellationToken cancellationToken = default(CancellationToken));
+        public abstract ImmutableArray<MetadataReference> GetUsedAssemblyReferences(
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         internal void EnsureCompilationEventQueueCompleted()
         {
@@ -1538,10 +1789,18 @@ namespace Microsoft.CodeAnalysis
         /// <param name="accumulator">Bag to which filtered diagnostics will be added.</param>
         /// <param name="incoming">Diagnostics to be filtered.</param>
         /// <returns>True if there are no unsuppressed errors (i.e., no errors which fail compilation).</returns>
-        internal bool FilterAndAppendAndFreeDiagnostics(DiagnosticBag accumulator, [DisallowNull] ref DiagnosticBag? incoming, CancellationToken cancellationToken)
-        {
+        internal bool FilterAndAppendAndFreeDiagnostics(
+            DiagnosticBag accumulator,
+            [DisallowNull] ref DiagnosticBag? incoming,
+            CancellationToken cancellationToken
+        ) {
             RoslynDebug.Assert(incoming is object);
-            bool result = FilterAndAppendDiagnostics(accumulator, incoming.AsEnumerableWithoutResolution(), exclude: null, cancellationToken);
+            bool result = FilterAndAppendDiagnostics(
+                accumulator,
+                incoming.AsEnumerableWithoutResolution(),
+                exclude: null,
+                cancellationToken
+            );
             incoming.Free();
             incoming = null;
             return result;
@@ -1551,8 +1810,12 @@ namespace Microsoft.CodeAnalysis
         /// Filter out warnings based on the compiler options (/nowarn, /warn and /warnaserror) and the pragma warning directives.
         /// </summary>
         /// <returns>True if there are no unsuppressed errors (i.e., no errors which fail compilation).</returns>
-        internal bool FilterAndAppendDiagnostics(DiagnosticBag accumulator, IEnumerable<Diagnostic> incoming, HashSet<int>? exclude, CancellationToken cancellationToken)
-        {
+        internal bool FilterAndAppendDiagnostics(
+            DiagnosticBag accumulator,
+            IEnumerable<Diagnostic> incoming,
+            HashSet<int>? exclude,
+            CancellationToken cancellationToken
+        ) {
             bool hasError = false;
             bool reportSuppressedDiagnostics = Options.ReportSuppressedDiagnostics;
 
@@ -1564,8 +1827,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var filtered = Options.FilterDiagnostic(d, cancellationToken);
-                if (filtered == null ||
-                    (!reportSuppressedDiagnostics && filtered.IsSuppressed))
+                if (filtered == null || (!reportSuppressedDiagnostics && filtered.IsSuppressed))
                 {
                     continue;
                 }
@@ -1587,8 +1849,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a stream filled with default win32 resources.
         /// </summary>
-        public Stream CreateDefaultWin32Resources(bool versionResource, bool noManifest, Stream? manifestContents, Stream? iconInIcoFormat)
-        {
+        public Stream CreateDefaultWin32Resources(
+            bool versionResource,
+            bool noManifest,
+            Stream? manifestContents,
+            Stream? iconInIcoFormat
+        ) {
             //Win32 resource encodings use a lot of 16bit values. Do all of the math checked with the
             //expectation that integer types are well-chosen with size in mind.
             checked
@@ -1608,7 +1874,10 @@ namespace Microsoft.CodeAnalysis
                         // Applications use a default manifest if one is not specified.
                         if (manifestContents == null)
                         {
-                            manifestContents = typeof(Compilation).GetTypeInfo().Assembly.GetManifestResourceStream("Microsoft.CodeAnalysis.Resources.default.win32manifest");
+                            manifestContents = typeof(Compilation).GetTypeInfo()
+                                .Assembly.GetManifestResourceStream(
+                                    "Microsoft.CodeAnalysis.Resources.default.win32manifest"
+                                );
                         }
                     }
                     else
@@ -1619,7 +1888,11 @@ namespace Microsoft.CodeAnalysis
 
                     if (manifestContents != null)
                     {
-                        Win32ResourceConversions.AppendManifestToResourceStream(result, manifestContents, !this.Options.OutputKind.IsApplication());
+                        Win32ResourceConversions.AppendManifestToResourceStream(
+                            result,
+                            manifestContents,
+                            !this.Options.OutputKind.IsApplication()
+                        );
                     }
                 }
 
@@ -1642,11 +1915,11 @@ namespace Microsoft.CodeAnalysis
             writer.Write((UInt16)0);
             writer.Write((UInt16)0xFFFF);
             writer.Write((UInt16)0);
-            writer.Write((UInt32)0);            //DataVersion
-            writer.Write((UInt16)0);            //MemoryFlags
-            writer.Write((UInt16)0);            //LanguageId
-            writer.Write((UInt32)0);            //Version
-            writer.Write((UInt32)0);            //Characteristics
+            writer.Write((UInt32)0); //DataVersion
+            writer.Write((UInt16)0); //MemoryFlags
+            writer.Write((UInt16)0); //LanguageId
+            writer.Write((UInt32)0); //Version
+            writer.Write((UInt32)0); //Characteristics
         }
 
         protected abstract void AppendDefaultVersionResource(Stream resourceStream);
@@ -1676,8 +1949,10 @@ namespace Microsoft.CodeAnalysis
                 return Win32ResourceForm.UNKNOWN;
         }
 
-        internal Cci.ResourceSection? MakeWin32ResourcesFromCOFF(Stream? win32Resources, DiagnosticBag diagnostics)
-        {
+        internal Cci.ResourceSection? MakeWin32ResourcesFromCOFF(
+            Stream? win32Resources,
+            DiagnosticBag diagnostics
+        ) {
             if (win32Resources == null)
             {
                 return null;
@@ -1691,25 +1966,45 @@ namespace Microsoft.CodeAnalysis
             }
             catch (BadImageFormatException ex)
             {
-                diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, Location.None, ex.Message));
+                diagnostics.Add(
+                    MessageProvider.CreateDiagnostic(
+                        MessageProvider.ERR_BadWin32Resource,
+                        Location.None,
+                        ex.Message
+                    )
+                );
                 return null;
             }
             catch (IOException ex)
             {
-                diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, Location.None, ex.Message));
+                diagnostics.Add(
+                    MessageProvider.CreateDiagnostic(
+                        MessageProvider.ERR_BadWin32Resource,
+                        Location.None,
+                        ex.Message
+                    )
+                );
                 return null;
             }
             catch (ResourceException ex)
             {
-                diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, Location.None, ex.Message));
+                diagnostics.Add(
+                    MessageProvider.CreateDiagnostic(
+                        MessageProvider.ERR_BadWin32Resource,
+                        Location.None,
+                        ex.Message
+                    )
+                );
                 return null;
             }
 
             return resources;
         }
 
-        internal List<Win32Resource>? MakeWin32ResourceList(Stream? win32Resources, DiagnosticBag diagnostics)
-        {
+        internal List<Win32Resource>? MakeWin32ResourceList(
+            Stream? win32Resources,
+            DiagnosticBag diagnostics
+        ) {
             if (win32Resources == null)
             {
                 return null;
@@ -1722,7 +2017,13 @@ namespace Microsoft.CodeAnalysis
             }
             catch (ResourceException ex)
             {
-                diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, Location.None, ex.Message));
+                diagnostics.Add(
+                    MessageProvider.CreateDiagnostic(
+                        MessageProvider.ERR_BadWin32Resource,
+                        Location.None,
+                        ex.Message
+                    )
+                );
                 return null;
             }
 
@@ -1753,8 +2054,12 @@ namespace Microsoft.CodeAnalysis
             return resourceList;
         }
 
-        internal void SetupWin32Resources(CommonPEModuleBuilder moduleBeingBuilt, Stream? win32Resources, bool useRawWin32Resources, DiagnosticBag diagnostics)
-        {
+        internal void SetupWin32Resources(
+            CommonPEModuleBuilder moduleBeingBuilt,
+            Stream? win32Resources,
+            bool useRawWin32Resources,
+            DiagnosticBag diagnostics
+        ) {
             if (win32Resources == null)
                 return;
 
@@ -1772,25 +2077,49 @@ namespace Microsoft.CodeAnalysis
             }
             catch (EndOfStreamException)
             {
-                diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, NoLocation.Singleton, CodeAnalysisResources.UnrecognizedResourceFileFormat));
+                diagnostics.Add(
+                    MessageProvider.CreateDiagnostic(
+                        MessageProvider.ERR_BadWin32Resource,
+                        NoLocation.Singleton,
+                        CodeAnalysisResources.UnrecognizedResourceFileFormat
+                    )
+                );
                 return;
             }
             catch (Exception ex)
             {
-                diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, NoLocation.Singleton, ex.Message));
+                diagnostics.Add(
+                    MessageProvider.CreateDiagnostic(
+                        MessageProvider.ERR_BadWin32Resource,
+                        NoLocation.Singleton,
+                        ex.Message
+                    )
+                );
                 return;
             }
 
             switch (resourceForm)
             {
                 case Win32ResourceForm.COFF:
-                    moduleBeingBuilt.Win32ResourceSection = MakeWin32ResourcesFromCOFF(win32Resources, diagnostics);
+                    moduleBeingBuilt.Win32ResourceSection = MakeWin32ResourcesFromCOFF(
+                        win32Resources,
+                        diagnostics
+                    );
                     break;
                 case Win32ResourceForm.RES:
-                    moduleBeingBuilt.Win32Resources = MakeWin32ResourceList(win32Resources, diagnostics);
+                    moduleBeingBuilt.Win32Resources = MakeWin32ResourceList(
+                        win32Resources,
+                        diagnostics
+                    );
                     break;
                 default:
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_BadWin32Resource, NoLocation.Singleton, CodeAnalysisResources.UnrecognizedResourceFileFormat));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_BadWin32Resource,
+                            NoLocation.Singleton,
+                            CodeAnalysisResources.UnrecognizedResourceFileFormat
+                        )
+                    );
                     break;
             }
         }
@@ -1799,10 +2128,12 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<ResourceDescription>? manifestResources,
             IEnumerable<string> addedModuleNames,
             IEnumerable<string> addedModuleResourceNames,
-            DiagnosticBag diagnostics)
-        {
-            if (Options.OutputKind == OutputKind.NetModule && !(manifestResources != null && manifestResources.Any()))
-            {
+            DiagnosticBag diagnostics
+        ) {
+            if (
+                Options.OutputKind == OutputKind.NetModule
+                && !(manifestResources != null && manifestResources.Any())
+            ) {
                 return;
             }
 
@@ -1815,14 +2146,26 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (!uniqueResourceNames.Add(resource.ResourceName))
                     {
-                        diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_ResourceNotUnique, Location.None, resource.ResourceName));
+                        diagnostics.Add(
+                            MessageProvider.CreateDiagnostic(
+                                MessageProvider.ERR_ResourceNotUnique,
+                                Location.None,
+                                resource.ResourceName
+                            )
+                        );
                     }
 
                     // file name could be null if resource is embedded
                     var fileName = resource.FileName;
                     if (fileName != null && !uniqueFileNames.Add(fileName))
                     {
-                        diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_ResourceFileNameNotUnique, Location.None, fileName));
+                        diagnostics.Add(
+                            MessageProvider.CreateDiagnostic(
+                                MessageProvider.ERR_ResourceFileNameNotUnique,
+                                Location.None,
+                                fileName
+                            )
+                        );
                     }
                 }
 
@@ -1830,7 +2173,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (!uniqueFileNames.Add(fileName))
                     {
-                        diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_ResourceFileNameNotUnique, Location.None, fileName));
+                        diagnostics.Add(
+                            MessageProvider.CreateDiagnostic(
+                                MessageProvider.ERR_ResourceFileNameNotUnique,
+                                Location.None,
+                                fileName
+                            )
+                        );
                     }
                 }
             }
@@ -1841,7 +2190,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (!uniqueResourceNames.Add(name))
                     {
-                        diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_ResourceNotUnique, Location.None, name));
+                        diagnostics.Add(
+                            MessageProvider.CreateDiagnostic(
+                                MessageProvider.ERR_ResourceNotUnique,
+                                Location.None,
+                                name
+                            )
+                        );
                     }
                 }
             }
@@ -1861,9 +2216,9 @@ namespace Microsoft.CodeAnalysis
         ///   - Do proper counter signature verification for AssemblySignatureKey attributes
         /// </summary>
         internal bool SignUsingBuilder =>
-            string.IsNullOrEmpty(StrongNameKeys.KeyContainer) &&
-            !StrongNameKeys.HasCounterSignature &&
-            !_features.ContainsKey("UseLegacyStrongNameProvider");
+            string.IsNullOrEmpty(StrongNameKeys.KeyContainer)
+            && !StrongNameKeys.HasCounterSignature
+            && !_features.ContainsKey("UseLegacyStrongNameProvider");
 
         /// <summary>
         /// Constructs the module serialization properties out of the compilation options of this compilation.
@@ -1871,8 +2226,8 @@ namespace Microsoft.CodeAnalysis
         internal Cci.ModulePropertiesForSerialization ConstructModuleSerializationProperties(
             EmitOptions emitOptions,
             string? targetRuntimeVersion,
-            Guid moduleVersionId = default(Guid))
-        {
+            Guid moduleVersionId = default(Guid)
+        ) {
             CompilationOptions compilationOptions = this.Options;
             Platform platform = compilationOptions.Platform;
             OutputKind outputKind = compilationOptions.OutputKind;
@@ -1891,8 +2246,10 @@ namespace Microsoft.CodeAnalysis
             bool requires32Bit = platform.Requires32Bit();
 
             ushort fileAlignment;
-            if (emitOptions.FileAlignment == 0 || !CompilationOptions.IsValidFileAlignment(emitOptions.FileAlignment))
-            {
+            if (
+                emitOptions.FileAlignment == 0
+                || !CompilationOptions.IsValidFileAlignment(emitOptions.FileAlignment)
+            ) {
                 fileAlignment = requires64Bit
                     ? Cci.ModulePropertiesForSerialization.DefaultFileAlignment64Bit
                     : Cci.ModulePropertiesForSerialization.DefaultFileAlignment32Bit;
@@ -1902,20 +2259,29 @@ namespace Microsoft.CodeAnalysis
                 fileAlignment = (ushort)emitOptions.FileAlignment;
             }
 
-            ulong baseAddress = unchecked(emitOptions.BaseAddress + 0x8000) & (requires64Bit ? 0xffffffffffff0000 : 0x00000000ffff0000);
+            ulong baseAddress =
+                unchecked(emitOptions.BaseAddress + 0x8000)
+                & (requires64Bit ? 0xffffffffffff0000 : 0x00000000ffff0000);
 
             // cover values smaller than 0x8000, overflow and default value 0):
             if (baseAddress == 0)
             {
-                if (outputKind == OutputKind.ConsoleApplication ||
-                    outputKind == OutputKind.WindowsApplication ||
-                    outputKind == OutputKind.WindowsRuntimeApplication)
-                {
-                    baseAddress = (requires64Bit) ? Cci.ModulePropertiesForSerialization.DefaultExeBaseAddress64Bit : Cci.ModulePropertiesForSerialization.DefaultExeBaseAddress32Bit;
+                if (
+                    outputKind == OutputKind.ConsoleApplication
+                    || outputKind == OutputKind.WindowsApplication
+                    || outputKind == OutputKind.WindowsRuntimeApplication
+                ) {
+                    baseAddress =
+                        (requires64Bit)
+                            ? Cci.ModulePropertiesForSerialization.DefaultExeBaseAddress64Bit
+                            : Cci.ModulePropertiesForSerialization.DefaultExeBaseAddress32Bit;
                 }
                 else
                 {
-                    baseAddress = (requires64Bit) ? Cci.ModulePropertiesForSerialization.DefaultDllBaseAddress64Bit : Cci.ModulePropertiesForSerialization.DefaultDllBaseAddress32Bit;
+                    baseAddress =
+                        (requires64Bit)
+                            ? Cci.ModulePropertiesForSerialization.DefaultDllBaseAddress64Bit
+                            : Cci.ModulePropertiesForSerialization.DefaultDllBaseAddress32Bit;
                 }
             }
 
@@ -1925,7 +2291,8 @@ namespace Microsoft.CodeAnalysis
 
             // Dev10 always uses the default value for 32bit for sizeOfHeapReserve.
             // check with link -dump -headers <filename>
-            const ulong sizeOfHeapReserve = Cci.ModulePropertiesForSerialization.DefaultSizeOfHeapReserve32Bit;
+            const ulong sizeOfHeapReserve =
+                Cci.ModulePropertiesForSerialization.DefaultSizeOfHeapReserve32Bit;
 
             ulong sizeOfStackReserve = requires64Bit
                 ? Cci.ModulePropertiesForSerialization.DefaultSizeOfStackReserve64Bit
@@ -1936,8 +2303,10 @@ namespace Microsoft.CodeAnalysis
                 : Cci.ModulePropertiesForSerialization.DefaultSizeOfStackCommit32Bit;
 
             SubsystemVersion subsystemVersion;
-            if (emitOptions.SubsystemVersion.Equals(SubsystemVersion.None) || !emitOptions.SubsystemVersion.IsValid)
-            {
+            if (
+                emitOptions.SubsystemVersion.Equals(SubsystemVersion.None)
+                || !emitOptions.SubsystemVersion.IsValid
+            ) {
                 subsystemVersion = SubsystemVersion.Default(outputKind, platform);
             }
             else
@@ -1979,7 +2348,11 @@ namespace Microsoft.CodeAnalysis
 
             return new Cci.ModulePropertiesForSerialization(
                 persistentIdentifier: moduleVersionId,
-                corFlags: GetCorHeaderFlags(machine, HasStrongName, prefers32Bit: platform == Platform.AnyCpu32BitPreferred),
+                corFlags: GetCorHeaderFlags(
+                    machine,
+                    HasStrongName,
+                    prefers32Bit: platform == Platform.AnyCpu32BitPreferred
+                ),
                 fileAlignment: fileAlignment,
                 sectionAlignment: Cci.ModulePropertiesForSerialization.DefaultSectionAlignment,
                 targetRuntimeVersion: targetRuntimeVersion,
@@ -1989,17 +2362,24 @@ namespace Microsoft.CodeAnalysis
                 sizeOfHeapCommit: sizeOfHeapCommit,
                 sizeOfStackReserve: sizeOfStackReserve,
                 sizeOfStackCommit: sizeOfStackCommit,
-                dllCharacteristics: GetDllCharacteristics(emitOptions.HighEntropyVirtualAddressSpace, compilationOptions.OutputKind == OutputKind.WindowsRuntimeApplication),
+                dllCharacteristics: GetDllCharacteristics(
+                    emitOptions.HighEntropyVirtualAddressSpace,
+                    compilationOptions.OutputKind == OutputKind.WindowsRuntimeApplication
+                ),
                 imageCharacteristics: GetCharacteristics(outputKind, requires32Bit),
                 subsystem: GetSubsystem(outputKind),
                 majorSubsystemVersion: (ushort)subsystemVersion.Major,
                 minorSubsystemVersion: (ushort)subsystemVersion.Minor,
                 linkerMajorVersion: this.LinkerMajorVersion,
-                linkerMinorVersion: 0);
+                linkerMinorVersion: 0
+            );
         }
 
-        private static CorFlags GetCorHeaderFlags(Machine machine, bool strongNameSigned, bool prefers32Bit)
-        {
+        private static CorFlags GetCorHeaderFlags(
+            Machine machine,
+            bool strongNameSigned,
+            bool prefers32Bit
+        ) {
             CorFlags result = CorFlags.ILOnly;
 
             if (machine == Machine.I386)
@@ -2020,13 +2400,15 @@ namespace Microsoft.CodeAnalysis
             return result;
         }
 
-        internal static DllCharacteristics GetDllCharacteristics(bool enableHighEntropyVA, bool configureToExecuteInAppContainer)
-        {
+        internal static DllCharacteristics GetDllCharacteristics(
+            bool enableHighEntropyVA,
+            bool configureToExecuteInAppContainer
+        ) {
             var result =
-                DllCharacteristics.DynamicBase |
-                DllCharacteristics.NxCompatible |
-                DllCharacteristics.NoSeh |
-                DllCharacteristics.TerminalServerAware;
+                DllCharacteristics.DynamicBase
+                | DllCharacteristics.NxCompatible
+                | DllCharacteristics.NoSeh
+                | DllCharacteristics.TerminalServerAware;
 
             if (enableHighEntropyVA)
             {
@@ -2148,7 +2530,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<ResourceDescription>? manifestResources,
             CompilationTestData? testData,
             DiagnosticBag diagnostics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Report declaration diagnostics and compile and synthesize method bodies.
@@ -2161,17 +2544,26 @@ namespace Microsoft.CodeAnalysis
             bool emitTestCoverageData,
             DiagnosticBag diagnostics,
             Predicate<ISymbolInternal>? filterOpt,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        internal bool CreateDebugDocuments(DebugDocumentsBuilder documentsBuilder, IEnumerable<EmbeddedText> embeddedTexts, DiagnosticBag diagnostics)
-        {
+        internal bool CreateDebugDocuments(
+            DebugDocumentsBuilder documentsBuilder,
+            IEnumerable<EmbeddedText> embeddedTexts,
+            DiagnosticBag diagnostics
+        ) {
             // Check that all syntax trees are debuggable:
             bool allTreesDebuggable = true;
             foreach (var tree in CommonSyntaxTrees)
             {
                 if (!string.IsNullOrEmpty(tree.FilePath) && tree.GetText().Encoding == null)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_EncodinglessSyntaxTree, tree.GetRoot().GetLocation()));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_EncodinglessSyntaxTree,
+                            tree.GetRoot().GetLocation()
+                        )
+                    );
                     allTreesDebuggable = false;
                 }
             }
@@ -2188,14 +2580,20 @@ namespace Microsoft.CodeAnalysis
                 foreach (var text in embeddedTexts)
                 {
                     Debug.Assert(!string.IsNullOrEmpty(text.FilePath));
-                    string normalizedPath = documentsBuilder.NormalizeDebugDocumentPath(text.FilePath, basePath: null);
-                    var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(normalizedPath);
+                    string normalizedPath = documentsBuilder.NormalizeDebugDocumentPath(
+                        text.FilePath,
+                        basePath: null
+                    );
+                    var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(
+                        normalizedPath
+                    );
                     if (existingDoc == null)
                     {
                         var document = new Cci.DebugSourceDocument(
                             normalizedPath,
                             DebugSourceDocumentLanguageId,
-                            () => text.GetDebugSourceInfo());
+                            () => text.GetDebugSourceInfo()
+                        );
 
                         documentsBuilder.AddDebugDocument(document);
                     }
@@ -2209,14 +2607,22 @@ namespace Microsoft.CodeAnalysis
                 {
                     // compilation does not guarantee that all trees will have distinct paths.
                     // Do not attempt adding a document for a particular path if we already added one.
-                    string normalizedPath = documentsBuilder.NormalizeDebugDocumentPath(tree.FilePath, basePath: null);
-                    var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(normalizedPath);
+                    string normalizedPath = documentsBuilder.NormalizeDebugDocumentPath(
+                        tree.FilePath,
+                        basePath: null
+                    );
+                    var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(
+                        normalizedPath
+                    );
                     if (existingDoc == null)
                     {
-                        documentsBuilder.AddDebugDocument(new Cci.DebugSourceDocument(
-                            normalizedPath,
-                            DebugSourceDocumentLanguageId,
-                            () => tree.GetDebugSourceInfo()));
+                        documentsBuilder.AddDebugDocument(
+                            new Cci.DebugSourceDocument(
+                                normalizedPath,
+                                DebugSourceDocumentLanguageId,
+                                () => tree.GetDebugSourceInfo()
+                            )
+                        );
                     }
                 }
             }
@@ -2235,7 +2641,11 @@ namespace Microsoft.CodeAnalysis
 
         internal abstract Guid DebugSourceDocumentLanguageId { get; }
 
-        internal abstract void AddDebugSourceDocumentsForChecksumDirectives(DebugDocumentsBuilder documentsBuilder, SyntaxTree tree, DiagnosticBag diagnostics);
+        internal abstract void AddDebugSourceDocumentsForChecksumDirectives(
+            DebugDocumentsBuilder documentsBuilder,
+            SyntaxTree tree,
+            DiagnosticBag diagnostics
+        );
 
         /// <summary>
         /// Update resources and generate XML documentation comments.
@@ -2248,7 +2658,8 @@ namespace Microsoft.CodeAnalysis
             bool useRawWin32Resources,
             string? outputNameOverride,
             DiagnosticBag diagnostics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Reports all unused imports/usings so far (and thus it must be called as a last step of Emit)
@@ -2256,7 +2667,8 @@ namespace Microsoft.CodeAnalysis
         internal abstract void ReportUnusedImports(
             SyntaxTree? filterTree,
             DiagnosticBag diagnostics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         internal static bool ReportUnusedImportsInTree(SyntaxTree tree)
         {
@@ -2279,8 +2691,8 @@ namespace Microsoft.CodeAnalysis
             bool emittingPdb,
             DiagnosticBag diagnostics,
             Predicate<ISymbolInternal>? filterOpt,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 return CompileMethods(
@@ -2290,8 +2702,10 @@ namespace Microsoft.CodeAnalysis
                     emitTestCoverageData: false,
                     diagnostics: diagnostics,
                     filterOpt: filterOpt,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
             }
+
             finally
             {
                 moduleBuilder.CompilationFinished();
@@ -2316,7 +2730,8 @@ namespace Microsoft.CodeAnalysis
                         embeddedTexts: null,
                         testData: null,
                         diagnostics: discardedDiagnostics,
-                        cancellationToken: cancellationToken);
+                        cancellationToken: cancellationToken
+                    );
 
                     if (moduleBeingBuilt != null)
                     {
@@ -2325,7 +2740,8 @@ namespace Microsoft.CodeAnalysis
                             diagnostics: discardedDiagnostics,
                             emittingPdb: false,
                             filterOpt: null,
-                            cancellationToken: cancellationToken);
+                            cancellationToken: cancellationToken
+                        );
                     }
 
                     discardedDiagnostics.Free();
@@ -2335,7 +2751,9 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                this.ScriptCompilationInfo?.PreviousScriptCompilation?.EnsureAnonymousTypeTemplates(cancellationToken);
+                this.ScriptCompilationInfo?.PreviousScriptCompilation?.EnsureAnonymousTypeTemplates(
+                    cancellationToken
+                );
             }
         }
 
@@ -2348,8 +2766,8 @@ namespace Microsoft.CodeAnalysis
             Stream? win32Resources,
             IEnumerable<ResourceDescription>? manifestResources,
             EmitOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2360,7 +2778,8 @@ namespace Microsoft.CodeAnalysis
                 debugEntryPoint: null,
                 sourceLinkStream: null,
                 embeddedTexts: null,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         // 1.3 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
@@ -2373,8 +2792,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions options,
             IMethodSymbol debugEntryPoint,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2385,7 +2804,8 @@ namespace Microsoft.CodeAnalysis
                 debugEntryPoint,
                 sourceLinkStream: null,
                 embeddedTexts: null,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         // 2.0 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
@@ -2399,8 +2819,8 @@ namespace Microsoft.CodeAnalysis
             IMethodSymbol? debugEntryPoint,
             Stream? sourceLinkStream,
             IEnumerable<EmbeddedText>? embeddedTexts,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2412,7 +2832,8 @@ namespace Microsoft.CodeAnalysis
                 sourceLinkStream,
                 embeddedTexts,
                 metadataPEStream: null,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -2461,8 +2882,8 @@ namespace Microsoft.CodeAnalysis
             Stream? sourceLinkStream = null,
             IEnumerable<EmbeddedText>? embeddedTexts = null,
             Stream? metadataPEStream = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             return Emit(
                 peStream,
                 pdbStream,
@@ -2476,7 +2897,8 @@ namespace Microsoft.CodeAnalysis
                 embeddedTexts,
                 metadataPEStream,
                 pdbOptionsBlobReader: null,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         internal EmitResult Emit(
@@ -2492,8 +2914,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<EmbeddedText>? embeddedTexts,
             Stream? metadataPEStream,
             BlobReader? pdbOptionsBlobReader,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             if (peStream == null)
             {
                 throw new ArgumentNullException(nameof(peStream));
@@ -2501,35 +2923,53 @@ namespace Microsoft.CodeAnalysis
 
             if (!peStream.CanWrite)
             {
-                throw new ArgumentException(CodeAnalysisResources.StreamMustSupportWrite, nameof(peStream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.StreamMustSupportWrite,
+                    nameof(peStream)
+                );
             }
 
             if (pdbStream != null)
             {
                 if (options?.DebugInformationFormat == DebugInformationFormat.Embedded)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.PdbStreamUnexpectedWhenEmbedding, nameof(pdbStream));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.PdbStreamUnexpectedWhenEmbedding,
+                        nameof(pdbStream)
+                    );
                 }
 
                 if (!pdbStream.CanWrite)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.StreamMustSupportWrite, nameof(pdbStream));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.StreamMustSupportWrite,
+                        nameof(pdbStream)
+                    );
                 }
 
                 if (options?.EmitMetadataOnly == true)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.PdbStreamUnexpectedWhenEmittingMetadataOnly, nameof(pdbStream));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.PdbStreamUnexpectedWhenEmittingMetadataOnly,
+                        nameof(pdbStream)
+                    );
                 }
             }
 
             if (metadataPEStream != null && options?.EmitMetadataOnly == true)
             {
-                throw new ArgumentException(CodeAnalysisResources.MetadataPeStreamUnexpectedWhenEmittingMetadataOnly, nameof(metadataPEStream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.MetadataPeStreamUnexpectedWhenEmittingMetadataOnly,
+                    nameof(metadataPEStream)
+                );
             }
 
             if (metadataPEStream != null && options?.IncludePrivateMembers == true)
             {
-                throw new ArgumentException(CodeAnalysisResources.IncludingPrivateMembersUnexpectedWhenEmittingToMetadataPeStream, nameof(metadataPEStream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.IncludingPrivateMembersUnexpectedWhenEmittingToMetadataPeStream,
+                    nameof(metadataPEStream)
+                );
             }
 
             if (metadataPEStream == null && options?.EmitMetadataOnly == false)
@@ -2538,21 +2978,31 @@ namespace Microsoft.CodeAnalysis
                 options = options.WithIncludePrivateMembers(true);
             }
 
-            if (options?.DebugInformationFormat == DebugInformationFormat.Embedded &&
-                options?.EmitMetadataOnly == true)
-            {
-                throw new ArgumentException(CodeAnalysisResources.EmbeddingPdbUnexpectedWhenEmittingMetadata, nameof(metadataPEStream));
+            if (
+                options?.DebugInformationFormat == DebugInformationFormat.Embedded
+                && options?.EmitMetadataOnly == true
+            ) {
+                throw new ArgumentException(
+                    CodeAnalysisResources.EmbeddingPdbUnexpectedWhenEmittingMetadata,
+                    nameof(metadataPEStream)
+                );
             }
 
             if (this.Options.OutputKind == OutputKind.NetModule)
             {
                 if (metadataPEStream != null)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.CannotTargetNetModuleWhenEmittingRefAssembly, nameof(metadataPEStream));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.CannotTargetNetModuleWhenEmittingRefAssembly,
+                        nameof(metadataPEStream)
+                    );
                 }
                 else if (options?.EmitMetadataOnly == true)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.CannotTargetNetModuleWhenEmittingRefAssembly, nameof(options.EmitMetadataOnly));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.CannotTargetNetModuleWhenEmittingRefAssembly,
+                        nameof(options.EmitMetadataOnly)
+                    );
                 }
             }
 
@@ -2560,21 +3010,31 @@ namespace Microsoft.CodeAnalysis
             {
                 if (!win32Resources.CanRead || !win32Resources.CanSeek)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.StreamMustSupportReadAndSeek, nameof(win32Resources));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.StreamMustSupportReadAndSeek,
+                        nameof(win32Resources)
+                    );
                 }
             }
 
             if (sourceLinkStream != null && !sourceLinkStream.CanRead)
             {
-                throw new ArgumentException(CodeAnalysisResources.StreamMustSupportRead, nameof(sourceLinkStream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.StreamMustSupportRead,
+                    nameof(sourceLinkStream)
+                );
             }
 
-            if (embeddedTexts != null &&
-                !embeddedTexts.IsEmpty() &&
-                pdbStream == null &&
-                options?.DebugInformationFormat != DebugInformationFormat.Embedded)
-            {
-                throw new ArgumentException(CodeAnalysisResources.EmbeddedTextsRequirePdb, nameof(embeddedTexts));
+            if (
+                embeddedTexts != null
+                && !embeddedTexts.IsEmpty()
+                && pdbStream == null
+                && options?.DebugInformationFormat != DebugInformationFormat.Embedded
+            ) {
+                throw new ArgumentException(
+                    CodeAnalysisResources.EmbeddedTextsRequirePdb,
+                    nameof(embeddedTexts)
+                );
             }
 
             return Emit(
@@ -2591,7 +3051,8 @@ namespace Microsoft.CodeAnalysis
                 embeddedTexts,
                 pdbOptionsBlobReader,
                 testData: null,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -2612,9 +3073,10 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<EmbeddedText>? embeddedTexts,
             BlobReader? pdbOptionsBlobReader,
             CompilationTestData? testData,
-            CancellationToken cancellationToken)
-        {
-            options = options ?? EmitOptions.Default.WithIncludePrivateMembers(metadataPEStream == null);
+            CancellationToken cancellationToken
+        ) {
+            options =
+                options ?? EmitOptions.Default.WithIncludePrivateMembers(metadataPEStream == null);
 
             bool embedPdb = options.DebugInformationFormat == DebugInformationFormat.Embedded;
             Debug.Assert(!embedPdb || pdbStream == null);
@@ -2630,7 +3092,8 @@ namespace Microsoft.CodeAnalysis
                 sourceLinkStream,
                 embeddedTexts,
                 testData,
-                cancellationToken);
+                cancellationToken
+            );
 
             bool success = false;
 
@@ -2645,21 +3108,24 @@ namespace Microsoft.CodeAnalysis
                         emitTestCoverageData: options.EmitTestCoverageData,
                         diagnostics: diagnostics,
                         filterOpt: null,
-                        cancellationToken: cancellationToken);
+                        cancellationToken: cancellationToken
+                    );
 
                     if (!options.EmitMetadataOnly)
                     {
                         // NOTE: We generate documentation even in presence of compile errors.
                         // https://github.com/dotnet/roslyn/issues/37996 tracks revisiting this behavior.
-                        if (!GenerateResourcesAndDocumentationComments(
-                            moduleBeingBuilt,
-                            xmlDocumentationStream,
-                            win32Resources,
-                            useRawWin32Resources,
-                            options.OutputNameOverride,
-                            diagnostics,
-                            cancellationToken))
-                        {
+                        if (
+                            !GenerateResourcesAndDocumentationComments(
+                                moduleBeingBuilt,
+                                xmlDocumentationStream,
+                                win32Resources,
+                                useRawWin32Resources,
+                                options.OutputNameOverride,
+                                diagnostics,
+                                cancellationToken
+                            )
+                        ) {
                             success = false;
                         }
 
@@ -2669,6 +3135,7 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
                 }
+
                 finally
                 {
                     moduleBeingBuilt.CompilationFinished();
@@ -2690,14 +3157,17 @@ namespace Microsoft.CodeAnalysis
                     success = SerializeToPeStream(
                         moduleBeingBuilt,
                         new SimpleEmitStreamProvider(peStream),
-                        (metadataPEStream != null) ? new SimpleEmitStreamProvider(metadataPEStream) : null,
+                        (metadataPEStream != null)
+                            ? new SimpleEmitStreamProvider(metadataPEStream)
+                            : null,
                         (pdbStream != null) ? new SimpleEmitStreamProvider(pdbStream) : null,
                         pdbOptionsBlobReader,
                         testData?.SymWriterFactory,
                         diagnostics,
                         emitOptions: options,
                         privateKeyOpt: privateKeyOpt,
-                        cancellationToken: cancellationToken);
+                        cancellationToken: cancellationToken
+                    );
                 }
             }
 
@@ -2718,9 +3188,18 @@ namespace Microsoft.CodeAnalysis
             Stream ilStream,
             Stream pdbStream,
             ICollection<MethodDefinitionHandle> updatedMethods,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return EmitDifference(baseline, edits, s => false, metadataStream, ilStream, pdbStream, updatedMethods, cancellationToken);
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
+            return EmitDifference(
+                baseline,
+                edits,
+                s => false,
+                metadataStream,
+                ilStream,
+                pdbStream,
+                updatedMethods,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -2738,8 +3217,8 @@ namespace Microsoft.CodeAnalysis
             Stream ilStream,
             Stream pdbStream,
             ICollection<MethodDefinitionHandle> updatedMethods,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             if (baseline == null)
             {
                 throw new ArgumentNullException(nameof(baseline));
@@ -2773,7 +3252,17 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentNullException(nameof(pdbStream));
             }
 
-            return this.EmitDifference(baseline, edits, isAddedSymbol, metadataStream, ilStream, pdbStream, updatedMethods, testData: null, cancellationToken);
+            return this.EmitDifference(
+                baseline,
+                edits,
+                isAddedSymbol,
+                metadataStream,
+                ilStream,
+                pdbStream,
+                updatedMethods,
+                testData: null,
+                cancellationToken
+            );
         }
 
         internal abstract EmitDifferenceResult EmitDifference(
@@ -2785,7 +3274,8 @@ namespace Microsoft.CodeAnalysis
             Stream pdbStream,
             ICollection<MethodDefinitionHandle> updatedMethodHandles,
             CompilationTestData? testData,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Check compilation options and create <see cref="CommonPEModuleBuilder"/>.
@@ -2799,8 +3289,8 @@ namespace Microsoft.CodeAnalysis
             Stream? sourceLinkStream,
             IEnumerable<EmbeddedText>? embeddedTexts,
             CompilationTestData? testData,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             options.ValidateOptions(diagnostics, MessageProvider, Options.Deterministic);
 
             if (debugEntryPoint != null)
@@ -2815,7 +3305,12 @@ namespace Microsoft.CodeAnalysis
                     if (res.FileName != null)
                     {
                         // Modules can have only embedded resources, not linked ones.
-                        diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_ResourceInModule, Location.None));
+                        diagnostics.Add(
+                            MessageProvider.CreateDiagnostic(
+                                MessageProvider.ERR_ResourceInModule,
+                                Location.None
+                            )
+                        );
                     }
                 }
             }
@@ -2842,10 +3337,14 @@ namespace Microsoft.CodeAnalysis
                 manifestResources,
                 testData,
                 diagnostics,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        internal abstract void ValidateDebugEntryPoint(IMethodSymbol debugEntryPoint, DiagnosticBag diagnostics);
+        internal abstract void ValidateDebugEntryPoint(
+            IMethodSymbol debugEntryPoint,
+            DiagnosticBag diagnostics
+        );
 
         internal bool IsEmitDeterministic => this.Options.Deterministic;
 
@@ -2859,8 +3358,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticBag diagnostics,
             EmitOptions emitOptions,
             RSAParameters? privateKeyOpt,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             Cci.PdbWriter? nativePdbWriter = null;
@@ -2870,21 +3369,29 @@ namespace Microsoft.CodeAnalysis
             bool deterministic = IsEmitDeterministic;
 
             // PDB Stream provider should not be given if PDB is to be embedded into the PE file:
-            Debug.Assert(moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.Embedded || pdbStreamProvider == null);
+            Debug.Assert(
+                moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.Embedded
+                    || pdbStreamProvider == null
+            );
 
             string? pePdbFilePath = emitOptions.PdbFilePath;
 
-            if (moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Embedded || pdbStreamProvider != null)
-            {
-                pePdbFilePath = pePdbFilePath ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb");
+            if (
+                moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Embedded
+                || pdbStreamProvider != null
+            ) {
+                pePdbFilePath =
+                    pePdbFilePath ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb");
             }
             else
             {
                 pePdbFilePath = null;
             }
 
-            if (moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Embedded && !RoslynString.IsNullOrEmpty(pePdbFilePath))
-            {
+            if (
+                moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Embedded
+                && !RoslynString.IsNullOrEmpty(pePdbFilePath)
+            ) {
                 pePdbFilePath = PathUtilities.GetFileName(pePdbFilePath);
             }
 
@@ -2893,53 +3400,87 @@ namespace Microsoft.CodeAnalysis
             try
             {
                 var signKind = IsRealSigned
-                    ? (SignUsingBuilder ? EmitStreamSignKind.SignedWithBuilder : EmitStreamSignKind.SignedWithFile)
+                    ? (
+                          SignUsingBuilder
+                              ? EmitStreamSignKind.SignedWithBuilder
+                              : EmitStreamSignKind.SignedWithFile
+                      )
                     : EmitStreamSignKind.None;
-                emitPeStream = new EmitStream(peStreamProvider, signKind, Options.StrongNameProvider);
-                emitMetadataStream = metadataPEStreamProvider == null
-                    ? null
-                    : new EmitStream(metadataPEStreamProvider, signKind, Options.StrongNameProvider);
+                emitPeStream = new EmitStream(
+                    peStreamProvider,
+                    signKind,
+                    Options.StrongNameProvider
+                );
+                emitMetadataStream =
+                    metadataPEStreamProvider == null
+                        ? null
+                        : new EmitStream(
+                              metadataPEStreamProvider,
+                              signKind,
+                              Options.StrongNameProvider
+                          );
                 metadataDiagnostics = DiagnosticBag.GetInstance();
 
-                if (moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Pdb && pdbStreamProvider != null)
-                {
+                if (
+                    moduleBeingBuilt.DebugInformationFormat == DebugInformationFormat.Pdb
+                    && pdbStreamProvider != null
+                ) {
                     // The algorithm must be specified for deterministic builds (checked earlier).
-                    Debug.Assert(!deterministic || moduleBeingBuilt.PdbChecksumAlgorithm.Name != null);
+                    Debug.Assert(
+                        !deterministic || moduleBeingBuilt.PdbChecksumAlgorithm.Name != null
+                    );
 
                     // The calls ISymUnmanagedWriter2.GetDebugInfo require a file name in order to succeed.  This is
                     // frequently used during PDB writing.  Ensure a name is provided here in the case we were given
                     // only a Stream value.
-                    nativePdbWriter = new Cci.PdbWriter(pePdbFilePath, testSymWriterFactory, deterministic ? moduleBeingBuilt.PdbChecksumAlgorithm : default);
+                    nativePdbWriter = new Cci.PdbWriter(
+                        pePdbFilePath,
+                        testSymWriterFactory,
+                        deterministic ? moduleBeingBuilt.PdbChecksumAlgorithm : default
+                    );
                 }
 
                 Func<Stream?>? getPortablePdbStream =
-                    moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.PortablePdb || pdbStreamProvider == null
-                    ? null
-                    : (Func<Stream?>)(() => ConditionalGetOrCreateStream(pdbStreamProvider, metadataDiagnostics));
+                    moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.PortablePdb
+                    || pdbStreamProvider == null
+                        ? null
+                        : (Func<Stream?>)(
+                              () =>
+                                  ConditionalGetOrCreateStream(
+                                      pdbStreamProvider,
+                                      metadataDiagnostics
+                                  )
+                          );
 
                 try
                 {
-                    if (SerializePeToStream(
-                        moduleBeingBuilt,
-                        metadataDiagnostics,
-                        MessageProvider,
-                        emitPeStream.GetCreateStreamFunc(metadataDiagnostics),
-                        emitMetadataStream?.GetCreateStreamFunc(metadataDiagnostics),
-                        getPortablePdbStream,
-                        nativePdbWriter,
-                        pePdbFilePath,
-                        pdbOptionsBlobReader,
-                        emitOptions.EmitMetadataOnly,
-                        emitOptions.IncludePrivateMembers,
-                        deterministic,
-                        emitOptions.EmitTestCoverageData,
-                        privateKeyOpt,
-                        cancellationToken))
-                    {
+                    if (
+                        SerializePeToStream(
+                            moduleBeingBuilt,
+                            metadataDiagnostics,
+                            MessageProvider,
+                            emitPeStream.GetCreateStreamFunc(metadataDiagnostics),
+                            emitMetadataStream?.GetCreateStreamFunc(metadataDiagnostics),
+                            getPortablePdbStream,
+                            nativePdbWriter,
+                            pePdbFilePath,
+                            pdbOptionsBlobReader,
+                            emitOptions.EmitMetadataOnly,
+                            emitOptions.IncludePrivateMembers,
+                            deterministic,
+                            emitOptions.EmitTestCoverageData,
+                            privateKeyOpt,
+                            cancellationToken
+                        )
+                    ) {
                         if (nativePdbWriter != null)
                         {
-                            var nativePdbStream = pdbStreamProvider!.GetOrCreateStream(metadataDiagnostics);
-                            Debug.Assert(nativePdbStream != null || metadataDiagnostics.HasAnyErrors());
+                            var nativePdbStream = pdbStreamProvider!.GetOrCreateStream(
+                                metadataDiagnostics
+                            );
+                            Debug.Assert(
+                                nativePdbStream != null || metadataDiagnostics.HasAnyErrors()
+                            );
 
                             if (nativePdbStream != null)
                             {
@@ -2950,35 +3491,70 @@ namespace Microsoft.CodeAnalysis
                 }
                 catch (SymUnmanagedWriterException ex)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_PdbWritingFailed, Location.None, ex.Message));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_PdbWritingFailed,
+                            Location.None,
+                            ex.Message
+                        )
+                    );
                     return false;
                 }
                 catch (Cci.PeWritingException e)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_PeWritingFailure, Location.None, e.InnerException?.ToString() ?? ""));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_PeWritingFailure,
+                            Location.None,
+                            e.InnerException?.ToString() ?? ""
+                        )
+                    );
                     return false;
                 }
                 catch (ResourceException e)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_CantReadResource, Location.None, e.Message, e.InnerException?.Message ?? ""));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_CantReadResource,
+                            Location.None,
+                            e.Message,
+                            e.InnerException?.Message ?? ""
+                        )
+                    );
                     return false;
                 }
                 catch (PermissionSetFileReadException e)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_PermissionSetAttributeFileReadError, Location.None, e.FileName, e.PropertyName, e.Message));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_PermissionSetAttributeFileReadError,
+                            Location.None,
+                            e.FileName,
+                            e.PropertyName,
+                            e.Message
+                        )
+                    );
                     return false;
                 }
 
                 // translate metadata errors.
-                if (!FilterAndAppendAndFreeDiagnostics(diagnostics, ref metadataDiagnostics, cancellationToken))
-                {
+                if (
+                    !FilterAndAppendAndFreeDiagnostics(
+                        diagnostics,
+                        ref metadataDiagnostics,
+                        cancellationToken
+                    )
+                ) {
                     return false;
                 }
 
-                return
-                    emitPeStream.Complete(StrongNameKeys, MessageProvider, diagnostics) &&
-                    (emitMetadataStream?.Complete(StrongNameKeys, MessageProvider, diagnostics) ?? true);
+                return emitPeStream.Complete(StrongNameKeys, MessageProvider, diagnostics)
+                    && (
+                        emitMetadataStream?.Complete(StrongNameKeys, MessageProvider, diagnostics)
+                        ?? true
+                    );
             }
+
             finally
             {
                 nativePdbWriter?.Dispose();
@@ -2989,8 +3565,10 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static Stream? ConditionalGetOrCreateStream(EmitStreamProvider metadataPEStreamProvider, DiagnosticBag metadataDiagnostics)
-        {
+        private static Stream? ConditionalGetOrCreateStream(
+            EmitStreamProvider metadataPEStreamProvider,
+            DiagnosticBag metadataDiagnostics
+        ) {
             if (metadataDiagnostics.HasAnyErrors())
             {
                 return null;
@@ -3016,26 +3594,35 @@ namespace Microsoft.CodeAnalysis
             bool isDeterministic,
             bool emitTestCoverageData,
             RSAParameters? privateKeyOpt,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             bool emitSecondaryAssembly = getMetadataPeStreamOpt != null;
 
             bool includePrivateMembersOnPrimaryOutput = metadataOnly ? includePrivateMembers : true;
-            bool deterministicPrimaryOutput = (metadataOnly && !includePrivateMembers) || isDeterministic;
-            if (!Cci.PeWriter.WritePeToStream(
-                new EmitContext(moduleBeingBuilt, null, metadataDiagnostics, metadataOnly, includePrivateMembersOnPrimaryOutput),
-                messageProvider,
-                getPeStream,
-                getPortablePdbStreamOpt,
-                nativePdbWriterOpt,
-                pdbOptionsBlobReader,
-                pdbPathOpt,
-                metadataOnly,
-                deterministicPrimaryOutput,
-                emitTestCoverageData,
-                privateKeyOpt,
-                cancellationToken))
-            {
+            bool deterministicPrimaryOutput =
+                (metadataOnly && !includePrivateMembers) || isDeterministic;
+            if (
+                !Cci.PeWriter.WritePeToStream(
+                    new EmitContext(
+                        moduleBeingBuilt,
+                        null,
+                        metadataDiagnostics,
+                        metadataOnly,
+                        includePrivateMembersOnPrimaryOutput
+                    ),
+                    messageProvider,
+                    getPeStream,
+                    getPortablePdbStreamOpt,
+                    nativePdbWriterOpt,
+                    pdbOptionsBlobReader,
+                    pdbPathOpt,
+                    metadataOnly,
+                    deterministicPrimaryOutput,
+                    emitTestCoverageData,
+                    privateKeyOpt,
+                    cancellationToken
+                )
+            ) {
                 return false;
             }
 
@@ -3045,20 +3632,28 @@ namespace Microsoft.CodeAnalysis
                 Debug.Assert(!metadataOnly);
                 Debug.Assert(!includePrivateMembers);
 
-                if (!Cci.PeWriter.WritePeToStream(
-                    new EmitContext(moduleBeingBuilt, null, metadataDiagnostics, metadataOnly: true, includePrivateMembers: false),
-                    messageProvider,
-                    getMetadataPeStreamOpt,
-                    getPortablePdbStreamOpt: null,
-                    nativePdbWriterOpt: null,
-                    pdbOptionsBlobReader: null,
-                    pdbPathOpt: null,
-                    metadataOnly: true,
-                    isDeterministic: true,
-                    emitTestCoverageData: false,
-                    privateKeyOpt: privateKeyOpt,
-                    cancellationToken: cancellationToken))
-                {
+                if (
+                    !Cci.PeWriter.WritePeToStream(
+                        new EmitContext(
+                            moduleBeingBuilt,
+                            null,
+                            metadataDiagnostics,
+                            metadataOnly: true,
+                            includePrivateMembers: false
+                        ),
+                        messageProvider,
+                        getMetadataPeStreamOpt,
+                        getPortablePdbStreamOpt: null,
+                        nativePdbWriterOpt: null,
+                        pdbOptionsBlobReader: null,
+                        pdbPathOpt: null,
+                        metadataOnly: true,
+                        isDeterministic: true,
+                        emitTestCoverageData: false,
+                        privateKeyOpt: privateKeyOpt,
+                        cancellationToken: cancellationToken
+                    )
+                ) {
                     return false;
                 }
             }
@@ -3078,17 +3673,27 @@ namespace Microsoft.CodeAnalysis
             DiagnosticBag diagnostics,
             Func<ISymWriterMetadataProvider, SymUnmanagedWriter>? testSymWriterFactory,
             string? pdbFilePath,
-            CancellationToken cancellationToken)
-        {
-            var nativePdbWriter = (moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.Pdb) ? null :
-                new Cci.PdbWriter(
-                    pdbFilePath ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb"),
-                    testSymWriterFactory,
-                    hashAlgorithmNameOpt: default);
+            CancellationToken cancellationToken
+        ) {
+            var nativePdbWriter =
+                (moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.Pdb)
+                    ? null
+                    : new Cci.PdbWriter(
+                          pdbFilePath
+                              ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb"),
+                          testSymWriterFactory,
+                          hashAlgorithmNameOpt: default
+                      );
 
             using (nativePdbWriter)
             {
-                var context = new EmitContext(moduleBeingBuilt, null, diagnostics, metadataOnly: false, includePrivateMembers: true);
+                var context = new EmitContext(
+                    moduleBeingBuilt,
+                    null,
+                    diagnostics,
+                    metadataOnly: false,
+                    includePrivateMembers: true
+                );
                 var encId = Guid.NewGuid();
 
                 try
@@ -3100,7 +3705,8 @@ namespace Microsoft.CodeAnalysis
                         encId,
                         definitionMap,
                         changes,
-                        cancellationToken);
+                        cancellationToken
+                    );
 
                     writer.WriteMetadataAndIL(
                         nativePdbWriter,
@@ -3108,27 +3714,50 @@ namespace Microsoft.CodeAnalysis
                         ilStream,
                         (nativePdbWriter == null) ? pdbStream : null,
                         pdbOptionsBlobReader: null,
-                        out MetadataSizes metadataSizes);
+                        out MetadataSizes metadataSizes
+                    );
 
                     writer.GetMethodTokens(updatedMethods);
 
                     nativePdbWriter?.WriteTo(pdbStream);
 
-                    return diagnostics.HasAnyErrors() ? null : writer.GetDelta(baseline, this, encId, metadataSizes);
+                    return diagnostics.HasAnyErrors()
+                        ? null
+                        : writer.GetDelta(baseline, this, encId, metadataSizes);
                 }
                 catch (SymUnmanagedWriterException e)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_PdbWritingFailed, Location.None, e.Message));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_PdbWritingFailed,
+                            Location.None,
+                            e.Message
+                        )
+                    );
                     return null;
                 }
                 catch (Cci.PeWritingException e)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_PeWritingFailure, Location.None, e.InnerException?.ToString() ?? ""));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_PeWritingFailure,
+                            Location.None,
+                            e.InnerException?.ToString() ?? ""
+                        )
+                    );
                     return null;
                 }
                 catch (PermissionSetFileReadException e)
                 {
-                    diagnostics.Add(MessageProvider.CreateDiagnostic(MessageProvider.ERR_PermissionSetAttributeFileReadError, Location.None, e.FileName, e.PropertyName, e.Message));
+                    diagnostics.Add(
+                        MessageProvider.CreateDiagnostic(
+                            MessageProvider.ERR_PermissionSetAttributeFileReadError,
+                            Location.None,
+                            e.FileName,
+                            e.PropertyName,
+                            e.Message
+                        )
+                    );
                     return null;
                 }
             }
@@ -3142,14 +3771,23 @@ namespace Microsoft.CodeAnalysis
 
         #endregion
 
-        private ConcurrentDictionary<SyntaxTree, SmallConcurrentSetOfInts>? _lazyTreeToUsedImportDirectivesMap;
-        private static readonly Func<SyntaxTree, SmallConcurrentSetOfInts> s_createSetCallback = t => new SmallConcurrentSetOfInts();
+        private ConcurrentDictionary<
+            SyntaxTree,
+            SmallConcurrentSetOfInts
+        >? _lazyTreeToUsedImportDirectivesMap;
+        private static readonly Func<SyntaxTree, SmallConcurrentSetOfInts> s_createSetCallback =
+            t => new SmallConcurrentSetOfInts();
 
-        private ConcurrentDictionary<SyntaxTree, SmallConcurrentSetOfInts> TreeToUsedImportDirectivesMap
+        private ConcurrentDictionary<
+            SyntaxTree,
+            SmallConcurrentSetOfInts
+        > TreeToUsedImportDirectivesMap
         {
             get
             {
-                return RoslynLazyInitializer.EnsureInitialized(ref _lazyTreeToUsedImportDirectivesMap);
+                return RoslynLazyInitializer.EnsureInitialized(
+                    ref _lazyTreeToUsedImportDirectivesMap
+                );
             }
         }
 
@@ -3177,9 +3815,9 @@ namespace Microsoft.CodeAnalysis
             }
 
             SmallConcurrentSetOfInts? usedImports;
-            return syntaxTree != null &&
-                TreeToUsedImportDirectivesMap.TryGetValue(syntaxTree, out usedImports) &&
-                usedImports.Contains(position);
+            return syntaxTree != null
+                && TreeToUsedImportDirectivesMap.TryGetValue(syntaxTree, out usedImports)
+                && usedImports.Contains(position);
         }
 
         /// <summary>
@@ -3267,8 +3905,16 @@ namespace Microsoft.CodeAnalysis
 
         internal string GetMessage(ITypeSymbol source, ITypeSymbol destination)
         {
-            if (source == null || destination == null) return this.AssemblyName ?? "";
-            return string.Format("{0}: {1} {2} -> {3} {4}", this.AssemblyName, source.TypeKind.ToString(), source.Name, destination.TypeKind.ToString(), destination.Name);
+            if (source == null || destination == null)
+                return this.AssemblyName ?? "";
+            return string.Format(
+                "{0}: {1} {2} -> {3} {4}",
+                this.AssemblyName,
+                source.TypeKind.ToString(),
+                source.Name,
+                destination.TypeKind.ToString(),
+                destination.Name
+            );
         }
 
         #endregion
@@ -3278,12 +3924,20 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Return true if there is a source declaration symbol name that meets given predicate.
         /// </summary>
-        public abstract bool ContainsSymbolsWithName(Func<string, bool> predicate, SymbolFilter filter = SymbolFilter.TypeAndMember, CancellationToken cancellationToken = default(CancellationToken));
+        public abstract bool ContainsSymbolsWithName(
+            Func<string, bool> predicate,
+            SymbolFilter filter = SymbolFilter.TypeAndMember,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Return source declaration symbols whose name meets given predicate.
         /// </summary>
-        public abstract IEnumerable<ISymbol> GetSymbolsWithName(Func<string, bool> predicate, SymbolFilter filter = SymbolFilter.TypeAndMember, CancellationToken cancellationToken = default(CancellationToken));
+        public abstract IEnumerable<ISymbol> GetSymbolsWithName(
+            Func<string, bool> predicate,
+            SymbolFilter filter = SymbolFilter.TypeAndMember,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
         /// <summary>
@@ -3292,7 +3946,11 @@ namespace Microsoft.CodeAnalysis
         /// SymbolFilter, CancellationToken)"/> when predicate is just a simple string check.
         /// <paramref name="name"/> is case sensitive or not depending on the target language.
         /// </summary>
-        public abstract bool ContainsSymbolsWithName(string name, SymbolFilter filter = SymbolFilter.TypeAndMember, CancellationToken cancellationToken = default(CancellationToken));
+        public abstract bool ContainsSymbolsWithName(
+            string name,
+            SymbolFilter filter = SymbolFilter.TypeAndMember,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Return source declaration symbols whose name matches the provided name.  This may be
@@ -3300,7 +3958,11 @@ namespace Microsoft.CodeAnalysis
         /// CancellationToken)"/> when predicate is just a simple string check.  <paramref
         /// name="name"/> is case sensitive or not depending on the target language.
         /// </summary>
-        public abstract IEnumerable<ISymbol> GetSymbolsWithName(string name, SymbolFilter filter = SymbolFilter.TypeAndMember, CancellationToken cancellationToken = default(CancellationToken));
+        public abstract IEnumerable<ISymbol> GetSymbolsWithName(
+            string name,
+            SymbolFilter filter = SymbolFilter.TypeAndMember,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         #endregion
@@ -3337,7 +3999,8 @@ namespace Microsoft.CodeAnalysis
 
         private bool IsMemberMissing(int member)
         {
-            return _lazyMakeMemberMissingMap != null && _lazyMakeMemberMissingMap.ContainsKey(member);
+            return _lazyMakeMemberMissingMap != null
+                && _lazyMakeMemberMissingMap.ContainsKey(member);
         }
 
         internal void MakeTypeMissing(SpecialType type)
@@ -3372,15 +4035,17 @@ namespace Microsoft.CodeAnalysis
 
         private bool IsTypeMissing(int type)
         {
-            return _lazyMakeWellKnownTypeMissingMap != null && _lazyMakeWellKnownTypeMissingMap.ContainsKey((int)type);
+            return _lazyMakeWellKnownTypeMissingMap != null
+                && _lazyMakeWellKnownTypeMissingMap.ContainsKey((int)type);
         }
 
         /// <summary>
         /// Given a <see cref="Diagnostic"/> reporting unreferenced <see cref="AssemblyIdentity"/>s, returns
         /// the actual <see cref="AssemblyIdentity"/> instances that were not referenced.
         /// </summary>
-        public ImmutableArray<AssemblyIdentity> GetUnreferencedAssemblyIdentities(Diagnostic diagnostic)
-        {
+        public ImmutableArray<AssemblyIdentity> GetUnreferencedAssemblyIdentities(
+            Diagnostic diagnostic
+        ) {
             if (diagnostic == null)
             {
                 throw new ArgumentNullException(nameof(diagnostic));

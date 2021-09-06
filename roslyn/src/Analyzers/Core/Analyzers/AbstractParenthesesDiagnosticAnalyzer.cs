@@ -12,20 +12,32 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
 {
-    internal abstract class AbstractParenthesesDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractParenthesesDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         protected AbstractParenthesesDiagnosticAnalyzer(
-            string descriptorId, EnforceOnBuild enforceOnBuild, LocalizableString title, LocalizableString message, bool isUnnecessary = false)
-            : base(descriptorId,
-                   enforceOnBuild,
-                   options: ImmutableHashSet.Create<IPerLanguageOption>(CodeStyleOptions2.ArithmeticBinaryParentheses, CodeStyleOptions2.RelationalBinaryParentheses, CodeStyleOptions2.OtherBinaryParentheses, CodeStyleOptions2.OtherParentheses),
-                   title,
-                   message,
-                   isUnnecessary: isUnnecessary)
-        {
-        }
+            string descriptorId,
+            EnforceOnBuild enforceOnBuild,
+            LocalizableString title,
+            LocalizableString message,
+            bool isUnnecessary = false
+        ) : base(
+            descriptorId,
+            enforceOnBuild,
+            options: ImmutableHashSet.Create<IPerLanguageOption>(
+                CodeStyleOptions2.ArithmeticBinaryParentheses,
+                CodeStyleOptions2.RelationalBinaryParentheses,
+                CodeStyleOptions2.OtherBinaryParentheses,
+                CodeStyleOptions2.OtherParentheses
+            ),
+            title,
+            message,
+            isUnnecessary: isUnnecessary
+        ) { }
 
-        protected static PerLanguageOption2<CodeStyleOption2<ParenthesesPreference>> GetLanguageOption(PrecedenceKind precedenceKind)
+        protected static PerLanguageOption2<
+            CodeStyleOption2<ParenthesesPreference>
+        > GetLanguageOption(PrecedenceKind precedenceKind)
         {
             switch (precedenceKind)
             {

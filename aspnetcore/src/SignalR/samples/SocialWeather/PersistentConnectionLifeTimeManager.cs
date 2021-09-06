@@ -47,7 +47,9 @@ namespace SocialWeather
             foreach (var connection in _connectionList)
             {
                 var context = connection.GetHttpContext();
-                var formatter = _formatterResolver.GetFormatter<T>((string)connection.Items["format"]);
+                var formatter = _formatterResolver.GetFormatter<T>(
+                    (string)connection.Items["format"]
+                );
                 var ms = new MemoryStream();
                 await formatter.WriteAsync(data, ms);
 

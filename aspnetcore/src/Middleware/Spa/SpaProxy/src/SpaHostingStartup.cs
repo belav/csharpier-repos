@@ -14,13 +14,15 @@ namespace Microsoft.AspNetCore.SpaProxy
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices(services =>
-            {
-                if (File.Exists(Path.Combine(AppContext.BaseDirectory, "spa.proxy.json")))
+            builder.ConfigureServices(
+                services =>
                 {
-                    services.AddHostedService<SpaProxyLaunchManager>();
+                    if (File.Exists(Path.Combine(AppContext.BaseDirectory, "spa.proxy.json")))
+                    {
+                        services.AddHostedService<SpaProxyLaunchManager>();
+                    }
                 }
-            });
+            );
         }
     }
 }

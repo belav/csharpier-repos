@@ -9,14 +9,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class IntermediateNodeCollection : IList<IntermediateNode>
     {
-        public static readonly IntermediateNodeCollection ReadOnly = new IntermediateNodeCollection(new List<IntermediateNode>().AsReadOnly());
+        public static readonly IntermediateNodeCollection ReadOnly = new IntermediateNodeCollection(
+            new List<IntermediateNode>().AsReadOnly()
+        );
 
         private readonly IList<IntermediateNode> _inner;
 
-        public IntermediateNodeCollection()
-            : this(new List<IntermediateNode>())
-        {
-        }
+        public IntermediateNodeCollection() : this(new List<IntermediateNode>()) { }
 
         private IntermediateNodeCollection(IList<IntermediateNode> inner)
         {
@@ -206,9 +205,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             object IEnumerator.Current => Current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

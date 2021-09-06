@@ -25,8 +25,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining($"The application to execute does not exist: '{assemblyName}'");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"The application to execute does not exist: '{assemblyName}'"
+                );
         }
 
         [Fact]
@@ -37,15 +40,22 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining($"The application to execute does not exist: '{assemblyName}'");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"The application to execute does not exist: '{assemblyName}'"
+                );
         }
 
         [Fact]
         public void MuxerExec_BadExtension_Fails()
         {
             // Get a valid file name, but not exe or dll
-            string fxDir = Path.Combine(sharedTestState.RepoDirectories.DotnetSDK, "shared", "Microsoft.NETCore.App");
+            string fxDir = Path.Combine(
+                sharedTestState.RepoDirectories.DotnetSDK,
+                "shared",
+                "Microsoft.NETCore.App"
+            );
             fxDir = new DirectoryInfo(fxDir).GetDirectories()[0].FullName;
             string assemblyName = Path.Combine(fxDir, "Microsoft.NETCore.App.deps.json");
 
@@ -53,8 +63,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining($"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'"
+                );
         }
 
         [Fact]
@@ -64,7 +77,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining($"Failed to parse supported options or their values:");
         }
 
@@ -77,7 +91,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining($"The application '{fileName}' does not exist")
                 .And.HaveStdErrContaining($"It was not possible to find any installed .NET SDKs");
         }
@@ -100,7 +115,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 RepoDirectories = new RepoDirectoriesProvider();
                 BuiltDotNet = new DotNetCli(RepoDirectories.BuiltDotnet);
 
-                BaseDirectory = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "argValidation"));
+                BaseDirectory = SharedFramework.CalculateUniqueTestDirectory(
+                    Path.Combine(TestArtifact.TestArtifactsPath, "argValidation")
+                );
 
                 // Create an empty global.json file
                 Directory.CreateDirectory(BaseDirectory);

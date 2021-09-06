@@ -165,12 +165,12 @@ namespace System.IO.Packaging
                     _disposed = true;
                 }
             }
+
             finally
             {
                 base.Dispose(disposing);
             }
         }
-
 
         #region Private Methods
 
@@ -186,7 +186,6 @@ namespace System.IO.Packaging
 
         private Stream _stream;
         private bool _disposed;
-
         #endregion Private Variables
     }
 }

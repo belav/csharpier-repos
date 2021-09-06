@@ -19,10 +19,7 @@ namespace System.Security.Cryptography.Xml
 
         internal bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         public virtual string Id

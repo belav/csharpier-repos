@@ -8,8 +8,11 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     /// Used to mark an Entity member as an association
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false,
-        Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     [Obsolete("This attribute is no longer in use and will be ignored if applied.")]
     public sealed class AssociationAttribute : Attribute
     {

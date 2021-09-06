@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved. 
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Concurrent;
@@ -22,8 +22,10 @@ namespace Microsoft.Extensions.Localization
     public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     {
         private readonly IResourceNamesCache _resourceNamesCache = new ResourceNamesCache();
-        private readonly ConcurrentDictionary<string, ResourceManagerStringLocalizer> _localizerCache =
-            new ConcurrentDictionary<string, ResourceManagerStringLocalizer>();
+        private readonly ConcurrentDictionary<
+            string,
+            ResourceManagerStringLocalizer
+        > _localizerCache = new ConcurrentDictionary<string, ResourceManagerStringLocalizer>();
         private readonly string _resourcesRelativePath;
         private readonly ILoggerFactory _loggerFactory;
 
@@ -34,8 +36,8 @@ namespace Microsoft.Extensions.Localization
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
         public ResourceManagerStringLocalizerFactory(
             IOptions<LocalizationOptions> localizationOptions,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             if (localizationOptions == null)
             {
                 throw new ArgumentNullException(nameof(localizationOptions));
@@ -51,8 +53,9 @@ namespace Microsoft.Extensions.Localization
 
             if (!string.IsNullOrEmpty(_resourcesRelativePath))
             {
-                _resourcesRelativePath = _resourcesRelativePath.Replace(Path.AltDirectorySeparatorChar, '.')
-                    .Replace(Path.DirectorySeparatorChar, '.') + ".";
+                _resourcesRelativePath =
+                    _resourcesRelativePath.Replace(Path.AltDirectorySeparatorChar, '.')
+                        .Replace(Path.DirectorySeparatorChar, '.') + ".";
             }
         }
 
@@ -68,7 +71,11 @@ namespace Microsoft.Extensions.Localization
                 throw new ArgumentNullException(nameof(typeInfo));
             }
 
-            return GetResourcePrefix(typeInfo, GetRootNamespace(typeInfo.Assembly), GetResourcePath(typeInfo.Assembly));
+            return GetResourcePrefix(
+                typeInfo,
+                GetRootNamespace(typeInfo.Assembly),
+                GetResourcePath(typeInfo.Assembly)
+            );
         }
 
         /// <summary>
@@ -82,8 +89,11 @@ namespace Microsoft.Extensions.Localization
         /// For the type "Sample.Controllers.Home" if there's a resourceRelativePath return
         /// "Sample.Resourcepath.Controllers.Home" if there isn't one then it would return "Sample.Controllers.Home".
         /// </remarks>
-        protected virtual string GetResourcePrefix(TypeInfo typeInfo, string? baseNamespace, string? resourcesRelativePath)
-        {
+        protected virtual string GetResourcePrefix(
+            TypeInfo typeInfo,
+            string? baseNamespace,
+            string? resourcesRelativePath
+        ) {
             if (typeInfo == null)
             {
                 throw new ArgumentNullException(nameof(typeInfo));
@@ -96,7 +106,9 @@ namespace Microsoft.Extensions.Localization
 
             if (string.IsNullOrEmpty(typeInfo.FullName))
             {
-                throw new ArgumentException(Resources.FormatLocalization_TypeMustHaveTypeName(typeInfo));
+                throw new ArgumentException(
+                    Resources.FormatLocalization_TypeMustHaveTypeName(typeInfo)
+                );
             }
 
             if (string.IsNullOrEmpty(resourcesRelativePath))
@@ -107,7 +119,10 @@ namespace Microsoft.Extensions.Localization
             {
                 // This expectation is defined by dotnet's automatic resource storage.
                 // We have to conform to "{RootNamespace}.{ResourceLocation}.{FullTypeName - RootNamespace}".
-                return baseNamespace + "." + resourcesRelativePath + TrimPrefix(typeInfo.FullName, baseNamespace + ".");
+                return baseNamespace
+                    + "."
+                    + resourcesRelativePath
+                    + TrimPrefix(typeInfo.FullName, baseNamespace + ".");
             }
         }
 
@@ -159,7 +174,10 @@ namespace Microsoft.Extensions.Localization
 
             var assembly = typeInfo.Assembly;
 
-            return _localizerCache.GetOrAdd(baseName, _ => CreateResourceManagerStringLocalizer(assembly, baseName));
+            return _localizerCache.GetOrAdd(
+                baseName,
+                _ => CreateResourceManagerStringLocalizer(assembly, baseName)
+            );
         }
 
         /// <summary>
@@ -180,14 +198,17 @@ namespace Microsoft.Extensions.Localization
                 throw new ArgumentNullException(nameof(location));
             }
 
-            return _localizerCache.GetOrAdd($"B={baseName},L={location}", _ =>
-            {
-                var assemblyName = new AssemblyName(location);
-                var assembly = Assembly.Load(assemblyName);
-                baseName = GetResourcePrefix(baseName, location);
+            return _localizerCache.GetOrAdd(
+                $"B={baseName},L={location}",
+                _ =>
+                {
+                    var assemblyName = new AssemblyName(location);
+                    var assembly = Assembly.Load(assemblyName);
+                    baseName = GetResourcePrefix(baseName, location);
 
-                return CreateResourceManagerStringLocalizer(assembly, baseName);
-            });
+                    return CreateResourceManagerStringLocalizer(assembly, baseName);
+                }
+            );
         }
 
         /// <summary>Creates a <see cref="ResourceManagerStringLocalizer"/> for the given input.</summary>
@@ -197,14 +218,15 @@ namespace Microsoft.Extensions.Localization
         /// <remarks>This method is virtual for testing purposes only.</remarks>
         protected virtual ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(
             Assembly assembly,
-            string baseName)
-        {
+            string baseName
+        ) {
             return new ResourceManagerStringLocalizer(
                 new ResourceManager(baseName, assembly),
                 assembly,
                 baseName,
                 _resourceNamesCache,
-                _loggerFactory.CreateLogger<ResourceManagerStringLocalizer>());
+                _loggerFactory.CreateLogger<ResourceManagerStringLocalizer>()
+            );
         }
 
         /// <summary>
@@ -214,8 +236,11 @@ namespace Microsoft.Extensions.Localization
         /// <param name="baseName">The base name of the resource.</param>
         /// <param name="resourceLocation">The location of the resource within <paramref name="location"/>.</param>
         /// <returns>The resource prefix used to look up the resource.</returns>
-        protected virtual string GetResourcePrefix(string location, string baseName, string resourceLocation)
-        {
+        protected virtual string GetResourcePrefix(
+            string location,
+            string baseName,
+            string resourceLocation
+        ) {
             // Re-root the base name if a resources path is set
             return location + "." + resourceLocation + TrimPrefix(baseName, location + ".");
         }
@@ -255,11 +280,11 @@ namespace Microsoft.Extensions.Localization
             var resourceLocationAttribute = GetResourceLocationAttribute(assembly);
 
             // If we don't have an attribute assume all assemblies use the same resource location.
-            var resourceLocation = resourceLocationAttribute == null
-                ? _resourcesRelativePath
-                : resourceLocationAttribute.ResourceLocation + ".";
-            resourceLocation = resourceLocation
-                .Replace(Path.DirectorySeparatorChar, '.')
+            var resourceLocation =
+                resourceLocationAttribute == null
+                    ? _resourcesRelativePath
+                    : resourceLocationAttribute.ResourceLocation + ".";
+            resourceLocation = resourceLocation.Replace(Path.DirectorySeparatorChar, '.')
                 .Replace(Path.AltDirectorySeparatorChar, '.');
 
             return resourceLocation;

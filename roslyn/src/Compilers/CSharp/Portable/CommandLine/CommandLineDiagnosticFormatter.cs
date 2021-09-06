@@ -17,35 +17,53 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly bool _displayFullPaths;
         private readonly bool _displayEndLocations;
 
-        internal CommandLineDiagnosticFormatter(string baseDirectory, bool displayFullPaths, bool displayEndLocations)
-        {
+        internal CommandLineDiagnosticFormatter(
+            string baseDirectory,
+            bool displayFullPaths,
+            bool displayEndLocations
+        ) {
             _baseDirectory = baseDirectory;
             _displayFullPaths = displayFullPaths;
             _displayEndLocations = displayEndLocations;
-            _lazyNormalizedBaseDirectory = new Lazy<string>(() => FileUtilities.TryNormalizeAbsolutePath(baseDirectory));
+            _lazyNormalizedBaseDirectory = new Lazy<string>(
+                () => FileUtilities.TryNormalizeAbsolutePath(baseDirectory)
+            );
         }
 
         internal override string FormatSourceSpan(LinePositionSpan span, IFormatProvider formatter)
         {
             if (_displayEndLocations)
             {
-                return string.Format(formatter, "({0},{1},{2},{3})",
+                return string.Format(
+                    formatter,
+                    "({0},{1},{2},{3})",
                     span.Start.Line + 1,
                     span.Start.Character + 1,
                     span.End.Line + 1,
-                    span.End.Character + 1);
+                    span.End.Character + 1
+                );
             }
             else
             {
-                return string.Format(formatter, "({0},{1})",
+                return string.Format(
+                    formatter,
+                    "({0},{1})",
                     span.Start.Line + 1,
-                    span.Start.Character + 1);
+                    span.Start.Character + 1
+                );
             }
         }
 
-        internal override string FormatSourcePath(string path, string basePath, IFormatProvider formatter)
-        {
-            var normalizedPath = FileUtilities.NormalizeRelativePath(path, basePath, _baseDirectory);
+        internal override string FormatSourcePath(
+            string path,
+            string basePath,
+            IFormatProvider formatter
+        ) {
+            var normalizedPath = FileUtilities.NormalizeRelativePath(
+                path,
+                basePath,
+                _baseDirectory
+            );
             if (normalizedPath == null)
             {
                 return path;
@@ -68,12 +86,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var normalizedDirectory = PathUtilities.GetDirectoryName(normalizedPath);
-            if (PathUtilities.IsSameDirectoryOrChildOf(normalizedDirectory, normalizedBaseDirectory))
-            {
+            if (
+                PathUtilities.IsSameDirectoryOrChildOf(normalizedDirectory, normalizedBaseDirectory)
+            ) {
                 return normalizedPath.Substring(
                     PathUtilities.IsDirectorySeparator(normalizedBaseDirectory.Last())
                         ? normalizedBaseDirectory.Length
-                        : normalizedBaseDirectory.Length + 1);
+                        : normalizedBaseDirectory.Length + 1
+                );
             }
 
             return normalizedPath;

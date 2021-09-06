@@ -142,13 +142,19 @@ namespace System.Net.Connections.Tests
         [InlineData(ConnectionCloseMethod.GracefulShutdown, true)]
         [InlineData(ConnectionCloseMethod.Abort, false)]
         [InlineData(ConnectionCloseMethod.Immediate, false)]
-        public async Task FromStream_CloseMethod_Flushed(ConnectionCloseMethod method, bool shouldFlush)
-        {
+        public async Task FromStream_CloseMethod_Flushed(
+            ConnectionCloseMethod method,
+            bool shouldFlush
+        ) {
             bool streamFlushed = false;
 
             var stream = new MockStream
             {
-                OnFlushAsync = _ => { streamFlushed = true; return Task.CompletedTask; }
+                OnFlushAsync = _ =>
+                {
+                    streamFlushed = true;
+                    return Task.CompletedTask;
+                }
             };
 
             var con = Connection.FromStream(stream, leaveOpen: true);
@@ -161,19 +167,22 @@ namespace System.Net.Connections.Tests
         [InlineData(ConnectionCloseMethod.GracefulShutdown, true)]
         [InlineData(ConnectionCloseMethod.Abort, false)]
         [InlineData(ConnectionCloseMethod.Immediate, false)]
-        public async Task FromPipe_CloseMethod_Flushed(ConnectionCloseMethod method, bool shouldFlush)
-        {
+        public async Task FromPipe_CloseMethod_Flushed(
+            ConnectionCloseMethod method,
+            bool shouldFlush
+        ) {
             bool pipeFlushed = false;
 
             var pipe = new MockPipe
             {
-                Input = new MockPipeReader()
-                {
-                    OnCompleteAsync = _ => default
-                },
+                Input = new MockPipeReader() { OnCompleteAsync = _ => default },
                 Output = new MockPipeWriter()
                 {
-                    OnFlushAsync = _ => { pipeFlushed = true; return default; },
+                    OnFlushAsync = _ =>
+                    {
+                        pipeFlushed = true;
+                        return default;
+                    },
                     OnCompleteAsync = _ => default
                 }
             };
@@ -192,7 +201,11 @@ namespace System.Net.Connections.Tests
             bool streamDisposed = false;
 
             var stream = new MockStream();
-            stream.OnDisposeAsync = delegate { streamDisposed = true; return default; };
+            stream.OnDisposeAsync = delegate
+            {
+                streamDisposed = true;
+                return default;
+            };
 
             var con = Connection.FromStream(stream, leaveOpen);
 
@@ -209,11 +222,12 @@ namespace System.Net.Connections.Tests
 
             var pipe = new MockPipe
             {
-                OnDisposeAsync = () => { pipeDisposed = true; return default; },
-                Input = new MockPipeReader()
+                OnDisposeAsync = () =>
                 {
-                    OnCompleteAsync = _ => default
+                    pipeDisposed = true;
+                    return default;
                 },
+                Input = new MockPipeReader() { OnCompleteAsync = _ => default },
                 Output = new MockPipeWriter()
                 {
                     OnFlushAsync = _ => default,
@@ -234,7 +248,13 @@ namespace System.Net.Connections.Tests
             var localEndPoint = new IPEndPoint(IPAddress.Any, 1);
             var remoteEndPoint = new IPEndPoint(IPAddress.Any, 2);
 
-            Connection c = Connection.FromStream(new MockStream(), leaveOpen: false, properties, localEndPoint, remoteEndPoint);
+            Connection c = Connection.FromStream(
+                new MockStream(),
+                leaveOpen: false,
+                properties,
+                localEndPoint,
+                remoteEndPoint
+            );
             Assert.Same(properties, c.ConnectionProperties);
             Assert.Same(localEndPoint, c.LocalEndPoint);
             Assert.Same(remoteEndPoint, c.RemoteEndPoint);
@@ -247,7 +267,13 @@ namespace System.Net.Connections.Tests
             var localEndPoint = new IPEndPoint(IPAddress.Any, 1);
             var remoteEndPoint = new IPEndPoint(IPAddress.Any, 2);
 
-            Connection c = Connection.FromPipe(new MockPipe(), leaveOpen: false, properties, localEndPoint, remoteEndPoint);
+            Connection c = Connection.FromPipe(
+                new MockPipe(),
+                leaveOpen: false,
+                properties,
+                localEndPoint,
+                remoteEndPoint
+            );
             Assert.Same(properties, c.ConnectionProperties);
             Assert.Same(localEndPoint, c.LocalEndPoint);
             Assert.Same(remoteEndPoint, c.RemoteEndPoint);

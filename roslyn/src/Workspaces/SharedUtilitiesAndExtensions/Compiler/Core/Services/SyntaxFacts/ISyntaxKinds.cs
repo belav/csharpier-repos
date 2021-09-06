@@ -137,7 +137,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         int Interpolation { get; }
         int InterpolatedStringText { get; }
-
         #endregion
     }
 }

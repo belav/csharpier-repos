@@ -10,8 +10,10 @@ namespace System.Composition.Hosting.Core
         private readonly CompositeActivator _activator;
         private readonly IDictionary<string, object> _metadata;
 
-        public DirectExportDescriptor(CompositeActivator activator, IDictionary<string, object> metadata)
-        {
+        public DirectExportDescriptor(
+            CompositeActivator activator,
+            IDictionary<string, object> metadata
+        ) {
             if (activator == null)
             {
                 throw new ArgumentNullException(nameof(activator));
@@ -24,8 +26,14 @@ namespace System.Composition.Hosting.Core
             _metadata = metadata;
         }
 
-        public override CompositeActivator Activator { get { return _activator; } }
+        public override CompositeActivator Activator
+        {
+            get { return _activator; }
+        }
 
-        public override IDictionary<string, object> Metadata { get { return _metadata; } }
+        public override IDictionary<string, object> Metadata
+        {
+            get { return _metadata; }
+        }
     }
 }

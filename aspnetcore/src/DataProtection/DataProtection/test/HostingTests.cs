@@ -29,14 +29,22 @@ namespace Microsoft.AspNetCore.DataProtection.Test
                 .Returns(Mock.Of<IKeyRing>())
                 .Callback(() => tcs.TrySetResult(null));
 
-            var builder = new WebHostBuilder()
-                .UseStartup<TestStartup>()
-                .ConfigureServices(s =>
-                    s.AddDataProtection()
-                    .Services
-                    .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                    .AddSingleton<IServer>(
-                        new FakeServer(onStart: () => tcs.TrySetException(new InvalidOperationException("Server was started before key ring was initialized")))));
+            var builder = new WebHostBuilder().UseStartup<TestStartup>()
+                .ConfigureServices(
+                    s =>
+                        s.AddDataProtection()
+                            .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                            .AddSingleton<IServer>(
+                                new FakeServer(
+                                    onStart: () =>
+                                        tcs.TrySetException(
+                                            new InvalidOperationException(
+                                                "Server was started before key ring was initialized"
+                                            )
+                                        )
+                                )
+                            )
+                );
 
             using (var host = builder.Build())
             {
@@ -56,13 +64,21 @@ namespace Microsoft.AspNetCore.DataProtection.Test
                 .Returns(Mock.Of<IKeyRing>())
                 .Callback(() => tcs.TrySetResult(null));
 
-            var builder = new HostBuilder()
-                .ConfigureServices(s =>
-                    s.AddDataProtection()
-                    .Services
-                    .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                    .AddSingleton<IServer>(
-                        new FakeServer(onStart: () => tcs.TrySetException(new InvalidOperationException("Server was started before key ring was initialized")))))
+            var builder = new HostBuilder().ConfigureServices(
+                    s =>
+                        s.AddDataProtection()
+                            .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                            .AddSingleton<IServer>(
+                                new FakeServer(
+                                    onStart: () =>
+                                        tcs.TrySetException(
+                                            new InvalidOperationException(
+                                                "Server was started before key ring was initialized"
+                                            )
+                                        )
+                                )
+                            )
+                )
                 .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
             using (var host = builder.Build())
@@ -79,33 +95,35 @@ namespace Microsoft.AspNetCore.DataProtection.Test
         {
             var mockKeyRing = new Mock<IKeyRingProvider>();
             mockKeyRing.Setup(m => m.GetCurrentKeyRing())
-                .Throws(new NotSupportedException("This mock doesn't actually work, but shouldn't kill the server"))
+                .Throws(
+                    new NotSupportedException(
+                        "This mock doesn't actually work, but shouldn't kill the server"
+                    )
+                )
                 .Verifiable();
 
             var mockServer = new Mock<IServer>();
             mockServer.Setup(m => m.Features).Returns(new FeatureCollection());
 
-            var builder = new HostBuilder()
-                .ConfigureServices(s =>
-                    s.AddDataProtection()
-                    .Services
-                    .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                    .AddSingleton(mockServer.Object))
-                    .ConfigureWebHost(b => b.UseStartup<TestStartup>());
+            var builder = new HostBuilder().ConfigureServices(
+                    s =>
+                        s.AddDataProtection()
+                            .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                            .AddSingleton(mockServer.Object)
+                )
+                .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
             using (var host = builder.Build())
             {
                 await host.StartAsync();
             }
-            
+
             mockKeyRing.VerifyAll();
         }
 
         private class TestStartup
         {
-            public void Configure(IApplicationBuilder app)
-            {
-            }
+            public void Configure(IApplicationBuilder app) { }
         }
 
         public class FakeServer : IServer
@@ -119,17 +137,17 @@ namespace Microsoft.AspNetCore.DataProtection.Test
 
             public IFeatureCollection Features => new FeatureCollection();
 
-            public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
-            {
+            public Task StartAsync<TContext>(
+                IHttpApplication<TContext> application,
+                CancellationToken cancellationToken
+            ) {
                 _onStart();
                 return Task.CompletedTask;
             }
 
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

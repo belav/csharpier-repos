@@ -23,55 +23,62 @@ namespace System.Net.Sockets.Tests
 
             int bytesReceived = 0;
             var receivedChecksum = new Fletcher32();
-            Task serverTask = Task.Run(async () =>
-            {
-                using (TcpClient remote = await listener.AcceptTcpClientAsync())
-                using (NetworkStream stream = remote.GetStream())
+            Task serverTask = Task.Run(
+                async () =>
                 {
-                    var recvBuffer = new byte[256];
-                    while (true)
+                    using (TcpClient remote = await listener.AcceptTcpClientAsync())
+                    using (NetworkStream stream = remote.GetStream())
                     {
-                        int received = await stream.ReadAsync(recvBuffer, 0, recvBuffer.Length);
-                        if (received == 0)
+                        var recvBuffer = new byte[256];
+                        while (true)
                         {
-                            break;
-                        }
+                            int received = await stream.ReadAsync(recvBuffer, 0, recvBuffer.Length);
+                            if (received == 0)
+                            {
+                                break;
+                            }
 
-                        bytesReceived += received;
-                        receivedChecksum.Add(recvBuffer, 0, received);
+                            bytesReceived += received;
+                            receivedChecksum.Add(recvBuffer, 0, received);
+                        }
                     }
                 }
-            });
+            );
 
             int bytesSent = 0;
             var sentChecksum = new Fletcher32();
-            Task clientTask = Task.Run(async () =>
-            {
-                var clientEndpoint = (IPEndPoint)listener.LocalEndpoint;
-
-                using (var client = new TcpClient(clientEndpoint.AddressFamily))
+            Task clientTask = Task.Run(
+                async () =>
                 {
-                    await client.ConnectAsync(clientEndpoint.Address, clientEndpoint.Port);
+                    var clientEndpoint = (IPEndPoint)listener.LocalEndpoint;
 
-                    using (NetworkStream stream = client.GetStream())
+                    using (var client = new TcpClient(clientEndpoint.AddressFamily))
                     {
-                        var random = new Random();
-                        var sendBuffer = new byte[512];
-                        for (int remaining = BytesToSend, sent = 0; remaining > 0; remaining -= sent)
+                        await client.ConnectAsync(clientEndpoint.Address, clientEndpoint.Port);
+
+                        using (NetworkStream stream = client.GetStream())
                         {
-                            random.NextBytes(sendBuffer);
+                            var random = new Random();
+                            var sendBuffer = new byte[512];
+                            for (
+                                int remaining = BytesToSend, sent = 0;
+                                remaining > 0;
+                                remaining -= sent
+                            ) {
+                                random.NextBytes(sendBuffer);
 
-                            sent = Math.Min(sendBuffer.Length, remaining);
-                            await stream.WriteAsync(sendBuffer, 0, sent);
+                                sent = Math.Min(sendBuffer.Length, remaining);
+                                await stream.WriteAsync(sendBuffer, 0, sent);
 
-                            bytesSent += sent;
-                            sentChecksum.Add(sendBuffer, 0, sent);
+                                bytesSent += sent;
+                                sentChecksum.Add(sendBuffer, 0, sent);
+                            }
+
+                            client.LingerState = new LingerOption(true, LingerTime);
                         }
-
-                        client.LingerState = new LingerOption(true, LingerTime);
                     }
                 }
-            });
+            );
 
             await (new[] { serverTask, clientTask }).WhenAllOrAnyFailed(TestTimeout);
 

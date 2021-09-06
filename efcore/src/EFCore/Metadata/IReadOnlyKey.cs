@@ -30,8 +30,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns the type of the key property for simple keys, or an object array for composite keys.
         /// </summary>
         /// <returns> The key type. </returns>
-        Type GetKeyType()
-            => Properties.Count > 1 ? typeof(object[]) : Properties.First().ClrType;
+        Type GetKeyType() => Properties.Count > 1 ? typeof(object[]) : Properties.First().ClrType;
 
         /// <summary>
         ///     Gets all foreign keys that target a given primary or alternate key.
@@ -43,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a value indicating whether the key is the primary key.
         /// </summary>
         /// <returns> <see langword="true" /> if the key is the primary key. </returns>
-        bool IsPrimaryKey()
-            => this == DeclaringEntityType.FindPrimaryKey();
+        bool IsPrimaryKey() => this == DeclaringEntityType.FindPrimaryKey();
 
         /// <summary>
         ///     <para>
@@ -58,8 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options"> Options for generating the string. </param>
         /// <param name="indent"> The number of indent spaces to use before each new line. </param>
         /// <returns> A human-readable representation. </returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
-        {
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        ) {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
@@ -72,10 +72,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             }
 
             builder.AppendJoin(
-                ", ", Properties.Select(
-                    p => singleLine
-                        ? p.DeclaringEntityType.DisplayName() + "." + p.Name
-                        : p.Name));
+                ", ",
+                Properties.Select(
+                    p => singleLine ? p.DeclaringEntityType.DisplayName() + "." + p.Name : p.Name
+                )
+            );
 
             if (IsPrimaryKey())
             {

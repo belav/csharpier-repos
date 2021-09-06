@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
         private const string MarkerStart = "/*MM";
         private const string MarkerEnd = "*/";
 
-        public IDictionary<string, DiagnosticLocation> MarkerLocations { get; }
-            = new Dictionary<string, DiagnosticLocation>(StringComparer.Ordinal);
+        public IDictionary<string, DiagnosticLocation> MarkerLocations { get; } =
+            new Dictionary<string, DiagnosticLocation>(StringComparer.Ordinal);
 
         public DiagnosticLocation DefaultMarkerLocation { get; private set; }
 
@@ -30,8 +30,15 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 var markerStartIndex = line.IndexOf(MarkerStart, StringComparison.Ordinal);
                 if (markerStartIndex != -1)
                 {
-                    var markerEndIndex = line.IndexOf(MarkerEnd, markerStartIndex, StringComparison.Ordinal);
-                    var markerName = line.Substring(markerStartIndex + 2, markerEndIndex - markerStartIndex - 2);
+                    var markerEndIndex = line.IndexOf(
+                        MarkerEnd,
+                        markerStartIndex,
+                        StringComparison.Ordinal
+                    );
+                    var markerName = line.Substring(
+                        markerStartIndex + 2,
+                        markerEndIndex - markerStartIndex - 2
+                    );
                     var markerLocation = new DiagnosticLocation(i + 1, markerStartIndex + 1);
                     if (testInput.DefaultMarkerLocation == null)
                     {
@@ -39,7 +46,9 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                     }
 
                     testInput.MarkerLocations.Add(markerName, markerLocation);
-                    line = line.Substring(0, markerStartIndex) + line.Substring(markerEndIndex + MarkerEnd.Length);
+                    line =
+                        line.Substring(0, markerStartIndex)
+                        + line.Substring(markerEndIndex + MarkerEnd.Length);
                 }
 
                 lines[i] = line;

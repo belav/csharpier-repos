@@ -55,8 +55,10 @@ namespace Microsoft.AspNetCore.Http
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void Initialize(DefaultHttpContext httpContext, IFeatureCollection featureCollection)
-        {
+        internal void Initialize(
+            DefaultHttpContext httpContext,
+            IFeatureCollection featureCollection
+        ) {
             Debug.Assert(featureCollection != null);
             Debug.Assert(httpContext != null);
 

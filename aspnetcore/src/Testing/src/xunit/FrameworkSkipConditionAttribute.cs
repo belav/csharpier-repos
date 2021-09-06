@@ -17,10 +17,7 @@ namespace Microsoft.AspNetCore.Testing
 
         public bool IsMet
         {
-            get
-            {
-                return CanRunOnThisFramework(_excludedFrameworks);
-            }
+            get { return CanRunOnThisFramework(_excludedFrameworks); }
         }
 
         public string SkipReason { get; set; } = "Test cannot run on this runtime framework.";
@@ -33,8 +30,7 @@ namespace Microsoft.AspNetCore.Testing
             }
 
 #if NET461 || NET46
-            if (excludedFrameworks.HasFlag(RuntimeFrameworks.Mono) &&
-                TestPlatformHelper.IsMono)
+            if (excludedFrameworks.HasFlag(RuntimeFrameworks.Mono) && TestPlatformHelper.IsMono)
             {
                 return false;
             }

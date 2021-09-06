@@ -21,13 +21,25 @@ namespace Microsoft.AspNetCore.Testing
             ITestCaseOrderer testCaseOrderer,
             ExceptionAggregator aggregator,
             CancellationTokenSource cancellationTokenSource,
-            IDictionary<Type, object> collectionFixtureMappings)
-            : base(testClass, @class, testCases, diagnosticMessageSink, messageBus, testCaseOrderer, aggregator, cancellationTokenSource, collectionFixtureMappings)
-        {
-        }
+            IDictionary<Type, object> collectionFixtureMappings
+        ) : base(
+            testClass,
+            @class,
+            testCases,
+            diagnosticMessageSink,
+            messageBus,
+            testCaseOrderer,
+            aggregator,
+            cancellationTokenSource,
+            collectionFixtureMappings
+        ) { }
 
-        protected override Task<RunSummary> RunTestMethodAsync(ITestMethod testMethod, IReflectionMethodInfo method, IEnumerable<IXunitTestCase> testCases, object[] constructorArguments)
-        {
+        protected override Task<RunSummary> RunTestMethodAsync(
+            ITestMethod testMethod,
+            IReflectionMethodInfo method,
+            IEnumerable<IXunitTestCase> testCases,
+            object[] constructorArguments
+        ) {
             var runner = new AspNetTestMethodRunner(
                 testMethod,
                 Class,
@@ -37,7 +49,8 @@ namespace Microsoft.AspNetCore.Testing
                 MessageBus,
                 new ExceptionAggregator(Aggregator),
                 CancellationTokenSource,
-                constructorArguments);
+                constructorArguments
+            );
             return runner.RunAsync();
         }
     }

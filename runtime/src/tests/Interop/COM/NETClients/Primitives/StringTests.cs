@@ -26,10 +26,12 @@ namespace NetClient
             Tuple.Create("a", "结合"),
             Tuple.Create("结合", "a"),
             Tuple.Create("结合", "结合"),
-
             // String marshalling is optimized where strings shorter than MAX_PATH are
             // allocated on the stack. Longer strings have memory allocated for them.
-            Tuple.Create("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901", "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
+            Tuple.Create(
+                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
+                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901"
+            )
         };
 
         private readonly IEnumerable<string> reversableStrings = new string[]
@@ -39,14 +41,14 @@ namespace NetClient
             "abc",
             "reversable string",
             "Unicode 相反 Unicode",
-
             // Long string optimization validation
             "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901"
         };
 
         public StringTests()
         {
-            this.server = (Server.Contract.Servers.StringTesting)new Server.Contract.Servers.StringTestingClass();
+            this.server =
+                (Server.Contract.Servers.StringTesting)new Server.Contract.Servers.StringTestingClass();
         }
 
         public void Run()
@@ -72,7 +74,7 @@ namespace NetClient
 
         private void Marshal_LPString()
         {
-            Console.WriteLine($"Marshal strings as { UnmanagedType.LPStr }");
+            Console.WriteLine($"Marshal strings as {UnmanagedType.LPStr}");
             foreach (var p in addPairs)
             {
                 if (!AllAscii(p.Item1) || !AllAscii(p.Item2))
@@ -163,7 +165,7 @@ namespace NetClient
 
         private void Marshal_LPWString()
         {
-            Console.WriteLine($"Marshal strings as { UnmanagedType.LPWStr }");
+            Console.WriteLine($"Marshal strings as {UnmanagedType.LPWStr}");
             foreach (var p in addPairs)
             {
                 string expected = p.Item1 + p.Item2;
@@ -192,7 +194,9 @@ namespace NetClient
                 Assert.AreEqual(expected, actual);
 
                 actual = local;
-                Assert.Throws<MarshalDirectiveException>( () => this.server.Reverse_LPWStr_OutAttr(local, actual));
+                Assert.Throws<MarshalDirectiveException>(
+                    () => this.server.Reverse_LPWStr_OutAttr(local, actual)
+                );
             }
 
             foreach (var s in reversableStrings)
@@ -235,7 +239,7 @@ namespace NetClient
 
         private void Marshal_BStrString()
         {
-            Console.WriteLine($"Marshal strings as { UnmanagedType.BStr }");
+            Console.WriteLine($"Marshal strings as {UnmanagedType.BStr}");
             foreach (var p in addPairs)
             {
                 string expected = p.Item1 + p.Item2;
@@ -290,6 +294,7 @@ namespace NetClient
                 this.server.Pass_Through_LCID(out int lcid);
                 Assert.AreEqual(englishCulture.LCID, lcid); // CLR->COM LCID marshalling is explicitly hardcoded to en-US as requested by VSTO instead of passing the current culture.
             }
+
             finally
             {
                 CultureInfo.CurrentCulture = oldCulture;

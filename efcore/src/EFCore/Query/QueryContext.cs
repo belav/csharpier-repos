@@ -26,7 +26,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     /// </summary>
     public abstract class QueryContext : IParameterValues
     {
-        private readonly IDictionary<string, object?> _parameterValues = new Dictionary<string, object?>();
+        private readonly IDictionary<string, object?> _parameterValues = new Dictionary<
+            string,
+            object?
+        >();
         private IStateManager? _stateManager;
 
         /// <summary>
@@ -39,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     </para>
         /// </summary>
         /// <param name="dependencies"> The dependencies to use. </param>
-        protected QueryContext(
-            QueryContextDependencies dependencies)
+        protected QueryContext(QueryContextDependencies dependencies)
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
@@ -50,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     The current DbContext in using while executing the query.
         /// </summary>
-        public virtual DbContext Context
-            => Dependencies.CurrentContext.Context;
+        public virtual DbContext Context => Dependencies.CurrentContext.Context;
 
         /// <summary>
         ///     Parameter object containing dependencies for this service.
@@ -76,20 +77,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     The query provider.
         /// </summary>
         [Obsolete("The service requiring IQueryProvider should inject it directly.")]
-        public virtual IQueryProvider QueryProvider
-            => Dependencies.QueryProvider;
+        public virtual IQueryProvider QueryProvider => Dependencies.QueryProvider;
 
         /// <summary>
         ///     The execution strategy factory to use while executing the query.
         /// </summary>
-        public virtual IExecutionStrategyFactory ExecutionStrategyFactory
-            => Dependencies.ExecutionStrategyFactory;
+        public virtual IExecutionStrategyFactory ExecutionStrategyFactory =>
+            Dependencies.ExecutionStrategyFactory;
 
         /// <summary>
         ///     The concurrency detector to use while executing the query.
         /// </summary>
-        public virtual IConcurrencyDetector ConcurrencyDetector
-            => Dependencies.ConcurrencyDetector;
+        public virtual IConcurrencyDetector ConcurrencyDetector => Dependencies.ConcurrencyDetector;
 
         /// <summary>
         ///     The cancellation token to use while executing the query.
@@ -99,20 +98,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     The command logger to use while executing the query.
         /// </summary>
-        public virtual IDiagnosticsLogger<DbLoggerCategory.Database.Command> CommandLogger
-            => Dependencies.CommandLogger;
+        public virtual IDiagnosticsLogger<DbLoggerCategory.Database.Command> CommandLogger =>
+            Dependencies.CommandLogger;
 
         /// <summary>
         ///     The query logger to use while executing the query.
         /// </summary>
-        public virtual IDiagnosticsLogger<DbLoggerCategory.Query> QueryLogger
-            => Dependencies.QueryLogger;
+        public virtual IDiagnosticsLogger<DbLoggerCategory.Query> QueryLogger =>
+            Dependencies.QueryLogger;
 
         /// <summary>
         ///     The parameter values to use while executing the query.
         /// </summary>
-        public virtual IReadOnlyDictionary<string, object?> ParameterValues
-            => (IReadOnlyDictionary<string, object?>)_parameterValues;
+        public virtual IReadOnlyDictionary<string, object?> ParameterValues =>
+            (IReadOnlyDictionary<string, object?>)_parameterValues;
 
         /// <summary>
         ///     Adds a parameter to <see cref="ParameterValues" /> for this query.
@@ -134,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.DebugAssert(
                 _stateManager == null,
-                "The 'InitializeStateManager' method has been called multiple times on the current query context. This method is intended to be called only once before query enumeration starts.");
+                "The 'InitializeStateManager' method has been called multiple times on the current query context. This method is intended to be called only once before query enumeration starts."
+            );
 
             _stateManager = standAlone
                 ? new StateManager(Dependencies.StateManager.Dependencies)
@@ -152,9 +152,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             IKey key,
             object[] keyValues,
             bool throwOnNullKey,
-            out bool hasNullKey)
+            out bool hasNullKey
+        )
             // InitializeStateManager will populate the field before calling here
-            => _stateManager!.TryGetEntry(key, keyValues, throwOnNullKey, out hasNullKey);
+            =>
+            _stateManager!.TryGetEntry(key, keyValues, throwOnNullKey, out hasNullKey);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -166,8 +168,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual InternalEntityEntry StartTracking(
             IEntityType entityType,
             object entity,
-            ValueBuffer valueBuffer)
+            ValueBuffer valueBuffer
+        )
             // InitializeStateManager will populate the field before calling here
-            => _stateManager!.StartTrackingFromQuery(entityType, entity, valueBuffer);
+            =>
+            _stateManager!.StartTrackingFromQuery(entityType, entity, valueBuffer);
     }
 }

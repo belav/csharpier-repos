@@ -31,8 +31,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             {
                 return ClassificationTypeNames.ControlKeyword;
             }
-            else if (SyntaxFacts.IsKeywordKind(token.Kind()) || token.IsKind(SyntaxKind.DiscardDesignation))
-            {
+            else if (
+                SyntaxFacts.IsKeywordKind(token.Kind())
+                || token.IsKind(SyntaxKind.DiscardDesignation)
+            ) {
                 // When classifying `_`, IsKeywordKind handles UnderscoreToken, but need to additional check for DiscardDesignation
                 return ClassificationTypeNames.Keyword;
             }
@@ -163,21 +165,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     return false;
 
                 case SyntaxKind.InterpolatedStringEndToken:
-                    {
-                        return token.Parent is InterpolatedStringExpressionSyntax interpolatedString
-                            && interpolatedString.StringStartToken.IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
-                    }
+                {
+                    return token.Parent is InterpolatedStringExpressionSyntax interpolatedString
+                        && interpolatedString.StringStartToken.IsKind(
+                            SyntaxKind.InterpolatedVerbatimStringStartToken
+                        );
+                }
 
                 case SyntaxKind.InterpolatedStringTextToken:
+                {
+                    if (!(token.Parent is InterpolatedStringTextSyntax interpolatedStringText))
                     {
-                        if (!(token.Parent is InterpolatedStringTextSyntax interpolatedStringText))
-                        {
-                            return false;
-                        }
-
-                        return interpolatedStringText.Parent is InterpolatedStringExpressionSyntax interpolatedString
-                            && interpolatedString.StringStartToken.IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
+                        return false;
                     }
+
+                    return interpolatedStringText.Parent
+                            is InterpolatedStringExpressionSyntax interpolatedString
+                        && interpolatedString.StringStartToken.IsKind(
+                            SyntaxKind.InterpolatedVerbatimStringStartToken
+                        );
+                }
             }
 
             return false;
@@ -185,59 +192,101 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
         private static string? GetClassificationForIdentifier(SyntaxToken token)
         {
-            if (token.Parent is BaseTypeDeclarationSyntax typeDeclaration && typeDeclaration.Identifier == token)
-            {
+            if (
+                token.Parent is BaseTypeDeclarationSyntax typeDeclaration
+                && typeDeclaration.Identifier == token
+            ) {
                 return GetClassificationForTypeDeclarationIdentifier(token);
             }
-            else if (token.Parent.IsKind(SyntaxKind.DelegateDeclaration, out DelegateDeclarationSyntax? delegateDecl) && delegateDecl.Identifier == token)
-            {
+            else if (
+                token.Parent.IsKind(
+                    SyntaxKind.DelegateDeclaration,
+                    out DelegateDeclarationSyntax? delegateDecl
+                )
+                && delegateDecl.Identifier == token
+            ) {
                 return ClassificationTypeNames.DelegateName;
             }
-            else if (token.Parent.IsKind(SyntaxKind.TypeParameter, out TypeParameterSyntax? typeParameter) && typeParameter.Identifier == token)
-            {
+            else if (
+                token.Parent.IsKind(
+                    SyntaxKind.TypeParameter,
+                    out TypeParameterSyntax? typeParameter
+                )
+                && typeParameter.Identifier == token
+            ) {
                 return ClassificationTypeNames.TypeParameterName;
             }
-            else if (token.Parent is MethodDeclarationSyntax methodDeclaration && methodDeclaration.Identifier == token)
-            {
-                return IsExtensionMethod(methodDeclaration) ? ClassificationTypeNames.ExtensionMethodName : ClassificationTypeNames.MethodName;
+            else if (
+                token.Parent is MethodDeclarationSyntax methodDeclaration
+                && methodDeclaration.Identifier == token
+            ) {
+                return IsExtensionMethod(methodDeclaration)
+                    ? ClassificationTypeNames.ExtensionMethodName
+                    : ClassificationTypeNames.MethodName;
             }
-            else if (token.Parent is ConstructorDeclarationSyntax constructorDeclaration && constructorDeclaration.Identifier == token)
-            {
-                return GetClassificationTypeForConstructorOrDestructorParent(constructorDeclaration.Parent!);
+            else if (
+                token.Parent is ConstructorDeclarationSyntax constructorDeclaration
+                && constructorDeclaration.Identifier == token
+            ) {
+                return GetClassificationTypeForConstructorOrDestructorParent(
+                    constructorDeclaration.Parent!
+                );
             }
-            else if (token.Parent is DestructorDeclarationSyntax destructorDeclaration && destructorDeclaration.Identifier == token)
-            {
-                return GetClassificationTypeForConstructorOrDestructorParent(destructorDeclaration.Parent!);
+            else if (
+                token.Parent is DestructorDeclarationSyntax destructorDeclaration
+                && destructorDeclaration.Identifier == token
+            ) {
+                return GetClassificationTypeForConstructorOrDestructorParent(
+                    destructorDeclaration.Parent!
+                );
             }
-            else if (token.Parent is LocalFunctionStatementSyntax localFunctionStatement && localFunctionStatement.Identifier == token)
-            {
+            else if (
+                token.Parent is LocalFunctionStatementSyntax localFunctionStatement
+                && localFunctionStatement.Identifier == token
+            ) {
                 return ClassificationTypeNames.MethodName;
             }
-            else if (token.Parent is PropertyDeclarationSyntax propertyDeclaration && propertyDeclaration.Identifier == token)
-            {
+            else if (
+                token.Parent is PropertyDeclarationSyntax propertyDeclaration
+                && propertyDeclaration.Identifier == token
+            ) {
                 return ClassificationTypeNames.PropertyName;
             }
-            else if (token.Parent is EnumMemberDeclarationSyntax enumMemberDeclaration && enumMemberDeclaration.Identifier == token)
-            {
+            else if (
+                token.Parent is EnumMemberDeclarationSyntax enumMemberDeclaration
+                && enumMemberDeclaration.Identifier == token
+            ) {
                 return ClassificationTypeNames.EnumMemberName;
             }
-            else if (token.Parent is CatchDeclarationSyntax catchDeclaration && catchDeclaration.Identifier == token)
-            {
+            else if (
+                token.Parent is CatchDeclarationSyntax catchDeclaration
+                && catchDeclaration.Identifier == token
+            ) {
                 return ClassificationTypeNames.LocalName;
             }
-            else if (token.Parent is VariableDeclaratorSyntax variableDeclarator && variableDeclarator.Identifier == token)
-            {
+            else if (
+                token.Parent is VariableDeclaratorSyntax variableDeclarator
+                && variableDeclarator.Identifier == token
+            ) {
                 var varDecl = variableDeclarator.Parent as VariableDeclarationSyntax;
                 return varDecl?.Parent switch
                 {
-                    FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword) ? ClassificationTypeNames.ConstantName : ClassificationTypeNames.FieldName,
-                    LocalDeclarationStatementSyntax localDeclarationStatement => localDeclarationStatement.IsConst ? ClassificationTypeNames.ConstantName : ClassificationTypeNames.LocalName,
+                    FieldDeclarationSyntax fieldDeclaration
+                      => fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
+                          ? ClassificationTypeNames.ConstantName
+                          : ClassificationTypeNames.FieldName,
+                    LocalDeclarationStatementSyntax localDeclarationStatement
+                      => localDeclarationStatement.IsConst
+                          ? ClassificationTypeNames.ConstantName
+                          : ClassificationTypeNames.LocalName,
                     EventFieldDeclarationSyntax _ => ClassificationTypeNames.EventName,
                     _ => ClassificationTypeNames.LocalName,
                 };
             }
-            else if (token.Parent is SingleVariableDesignationSyntax singleVariableDesignation && singleVariableDesignation.Identifier == token)
-            {
+            else if (
+                token.Parent is SingleVariableDesignationSyntax singleVariableDesignation
+                && singleVariableDesignation.Identifier == token
+            ) {
                 var parent = singleVariableDesignation.Parent;
 
                 // Handle nested Tuple deconstruction
@@ -253,40 +302,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 // Checking for DeclarationPattern covers the following cases:
                 // - Is patterns. `if (foo is Action action)`
                 // - Switch patterns. `case int x when x > 0:`
-                if (parent.IsKind(SyntaxKind.DeclarationExpression) ||
-                    parent.IsKind(SyntaxKind.DeclarationPattern))
-                {
+                if (
+                    parent.IsKind(SyntaxKind.DeclarationExpression)
+                    || parent.IsKind(SyntaxKind.DeclarationPattern)
+                ) {
                     return ClassificationTypeNames.LocalName;
                 }
 
                 return ClassificationTypeNames.Identifier;
             }
-            else if (token.Parent is ParameterSyntax parameterSyntax && parameterSyntax.Identifier == token)
-            {
+            else if (
+                token.Parent is ParameterSyntax parameterSyntax
+                && parameterSyntax.Identifier == token
+            ) {
                 return ClassificationTypeNames.ParameterName;
             }
-            else if (token.Parent is ForEachStatementSyntax forEachStatementSyntax && forEachStatementSyntax.Identifier == token)
-            {
+            else if (
+                token.Parent is ForEachStatementSyntax forEachStatementSyntax
+                && forEachStatementSyntax.Identifier == token
+            ) {
                 return ClassificationTypeNames.LocalName;
             }
-            else if (token.Parent is EventDeclarationSyntax eventDeclarationSyntax && eventDeclarationSyntax.Identifier == token)
-            {
+            else if (
+                token.Parent is EventDeclarationSyntax eventDeclarationSyntax
+                && eventDeclarationSyntax.Identifier == token
+            ) {
                 return ClassificationTypeNames.EventName;
             }
             else if (IsActualContextualKeyword(token))
             {
                 return ClassificationTypeNames.Keyword;
             }
-            else if (token.Parent is IdentifierNameSyntax identifierNameSyntax && IsNamespaceName(identifierNameSyntax))
-            {
+            else if (
+                token.Parent is IdentifierNameSyntax identifierNameSyntax
+                && IsNamespaceName(identifierNameSyntax)
+            ) {
                 return ClassificationTypeNames.NamespaceName;
             }
-            else if (token.Parent is ExternAliasDirectiveSyntax externAliasDirectiveSyntax && externAliasDirectiveSyntax.Identifier == token)
-            {
+            else if (
+                token.Parent is ExternAliasDirectiveSyntax externAliasDirectiveSyntax
+                && externAliasDirectiveSyntax.Identifier == token
+            ) {
                 return ClassificationTypeNames.NamespaceName;
             }
-            else if (token.Parent is LabeledStatementSyntax labledStatementSyntax && labledStatementSyntax.Identifier == token)
-            {
+            else if (
+                token.Parent is LabeledStatementSyntax labledStatementSyntax
+                && labledStatementSyntax.Identifier == token
+            ) {
                 return ClassificationTypeNames.LabelName;
             }
             else
@@ -295,8 +357,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             }
         }
 
-        private static string? GetClassificationTypeForConstructorOrDestructorParent(SyntaxNode parentNode)
-            => parentNode.Kind() switch
+        private static string? GetClassificationTypeForConstructorOrDestructorParent(
+            SyntaxNode parentNode
+        ) =>
+            parentNode.Kind() switch
             {
                 SyntaxKind.ClassDeclaration => ClassificationTypeNames.ClassName,
                 SyntaxKind.RecordDeclaration => ClassificationTypeNames.RecordClassName,
@@ -333,7 +397,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 // It's parent will be the declaration syntax node.
                 parentNode = parentNode!.Parent!.Parent;
 
-                // Check if this is a field constant declaration 
+                // Check if this is a field constant declaration
                 if (parentNode.GetModifiers().Any(SyntaxKind.ConstKeyword))
                 {
                     return true;
@@ -343,11 +407,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             return parentNode.GetModifiers().Any(SyntaxKind.StaticKeyword);
         }
 
-        private static bool IsExtensionMethod(MethodDeclarationSyntax methodDeclaration)
-            => methodDeclaration.ParameterList.Parameters.FirstOrDefault()?.Modifiers.Any(SyntaxKind.ThisKeyword) == true;
+        private static bool IsExtensionMethod(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ParameterList.Parameters.FirstOrDefault()?.Modifiers.Any(
+                SyntaxKind.ThisKeyword
+            ) == true;
 
-        private static string? GetClassificationForTypeDeclarationIdentifier(SyntaxToken identifier)
-            => identifier.Parent!.Kind() switch
+        private static string? GetClassificationForTypeDeclarationIdentifier(
+            SyntaxToken identifier
+        ) =>
+            identifier.Parent!.Kind() switch
             {
                 SyntaxKind.ClassDeclaration => ClassificationTypeNames.ClassName,
                 SyntaxKind.EnumDeclaration => ClassificationTypeNames.EnumName,
@@ -370,14 +438,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                         // list should be classified as punctuation; otherwise, they're operators.
                         if (token.Parent != null)
                         {
-                            if (token.Parent.Kind() == SyntaxKind.TypeParameterList ||
-                                token.Parent.Kind() == SyntaxKind.TypeArgumentList ||
-                                token.Parent.Kind() == SyntaxKind.FunctionPointerParameterList)
-                            {
+                            if (
+                                token.Parent.Kind() == SyntaxKind.TypeParameterList
+                                || token.Parent.Kind() == SyntaxKind.TypeArgumentList
+                                || token.Parent.Kind() == SyntaxKind.FunctionPointerParameterList
+                            ) {
                                 return ClassificationTypeNames.Punctuation;
                             }
                         }
-
                         break;
                     case SyntaxKind.ColonToken:
                         // the : for inheritance/implements or labels should be classified as
@@ -389,7 +457,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                                 return ClassificationTypeNames.Punctuation;
                             }
                         }
-
                         break;
                 }
 
@@ -455,9 +522,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
         private static bool IsActualContextualKeyword(SyntaxToken token)
         {
-            if (token.Parent.IsKind(SyntaxKind.LabeledStatement, out LabeledStatementSyntax? statement) &&
-                statement.Identifier == token)
-            {
+            if (
+                token.Parent.IsKind(
+                    SyntaxKind.LabeledStatement,
+                    out LabeledStatementSyntax? statement
+                )
+                && statement.Identifier == token
+            ) {
                 return false;
             }
 
@@ -483,18 +554,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
                     case VarKeyword:
                         // var
-                        if (token.Parent is IdentifierNameSyntax && token.Parent?.Parent is ExpressionStatementSyntax)
-                        {
+                        if (
+                            token.Parent is IdentifierNameSyntax
+                            && token.Parent?.Parent is ExpressionStatementSyntax
+                        ) {
                             return true;
                         }
 
                         // we allow var any time it looks like a variable declaration, and is not in a
                         // field or event field.
-                        return
-                            token.Parent is IdentifierNameSyntax &&
-                            token.Parent.Parent is VariableDeclarationSyntax &&
-                            !(token.Parent.Parent.Parent is FieldDeclarationSyntax) &&
-                            !(token.Parent.Parent.Parent is EventFieldDeclarationSyntax);
+                        return token.Parent is IdentifierNameSyntax
+                            && token.Parent.Parent is VariableDeclarationSyntax
+                            && !(token.Parent.Parent.Parent is FieldDeclarationSyntax)
+                            && !(token.Parent.Parent.Parent is EventFieldDeclarationSyntax);
 
                     case UnmanagedKeyword:
                     case NotNullKeyword:
@@ -507,18 +579,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             return false;
         }
 
-        internal static void AddLexicalClassifications(SourceText text, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
-        {
+        internal static void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) {
             var text2 = text.ToString(textSpan);
             var tokens = SyntaxFactory.ParseTokens(text2, initialTokenPosition: textSpan.Start);
 
             Worker.CollectClassifiedSpans(tokens, textSpan, result, cancellationToken);
         }
 
-        internal static ClassifiedSpan AdjustStaleClassification(SourceText rawText, ClassifiedSpan classifiedSpan)
-        {
+        internal static ClassifiedSpan AdjustStaleClassification(
+            SourceText rawText,
+            ClassifiedSpan classifiedSpan
+        ) {
             // If we marked this as an identifier and it should now be a keyword
-            // (or vice versa), then fix this up and return it. 
+            // (or vice versa), then fix this up and return it.
             var classificationType = classifiedSpan.ClassificationType;
 
             // Check if the token's type has changed.  Note: we don't check for "wasPPKeyword &&
@@ -537,7 +615,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 var text = rawText.ToString(span);
 
                 // Now, try to find the token that corresponds to that text.  If
-                // we get 0 or 2+ tokens, then we can't do anything with this.  
+                // we get 0 or 2+ tokens, then we can't do anything with this.
                 // Also, if that text includes trivia, then we can't do anything.
                 var token = SyntaxFactory.ParseToken(text);
                 if (token.Span.Length == span.Length)
@@ -548,21 +626,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     // So, we base on decision on what they were before.  i.e. if we had a keyword
                     // before, then assume it stays a keyword if we see 'var', 'dynamic', or 'unmanaged'.
                     var tokenString = token.ToString();
-                    var isKeyword = SyntaxFacts.IsKeywordKind(token.Kind())
-                        || (wasKeyword && SyntaxFacts.GetContextualKeywordKind(text) != SyntaxKind.None)
-                        || (wasKeyword && (tokenString == VarKeyword || tokenString == DynamicKeyword || tokenString == UnmanagedKeyword || tokenString == NotNullKeyword));
+                    var isKeyword =
+                        SyntaxFacts.IsKeywordKind(token.Kind())
+                        || (
+                            wasKeyword
+                            && SyntaxFacts.GetContextualKeywordKind(text) != SyntaxKind.None
+                        )
+                        || (
+                            wasKeyword
+                            && (
+                                tokenString == VarKeyword
+                                || tokenString == DynamicKeyword
+                                || tokenString == UnmanagedKeyword
+                                || tokenString == NotNullKeyword
+                            )
+                        );
 
                     var isIdentifier = token.Kind() == SyntaxKind.IdentifierToken;
 
                     // We only do this for identifiers/keywords.
                     if (isKeyword || isIdentifier)
                     {
-                        if ((wasKeyword && !isKeyword) ||
-                            (wasIdentifier && !isIdentifier))
+                        if ((wasKeyword && !isKeyword) || (wasIdentifier && !isIdentifier))
                         {
                             // It changed!  Return the new type of tagspan.
                             return new ClassifiedSpan(
-                                isKeyword ? ClassificationTypeNames.Keyword : ClassificationTypeNames.Identifier, span);
+                                isKeyword
+                                    ? ClassificationTypeNames.Keyword
+                                    : ClassificationTypeNames.Identifier,
+                                span
+                            );
                         }
                     }
                 }

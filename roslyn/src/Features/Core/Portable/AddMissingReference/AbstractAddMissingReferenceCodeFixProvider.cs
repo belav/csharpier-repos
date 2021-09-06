@@ -19,17 +19,16 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddMissingReference
 {
-    internal abstract partial class AbstractAddMissingReferenceCodeFixProvider : AbstractAddPackageCodeFixProvider
+    internal abstract partial class AbstractAddMissingReferenceCodeFixProvider
+        : AbstractAddPackageCodeFixProvider
     {
         /// <summary>
         /// Values for these parameters can be provided (during testing) for mocking purposes.
-        /// </summary> 
+        /// </summary>
         protected AbstractAddMissingReferenceCodeFixProvider(
             IPackageInstallerService packageInstallerService = null,
-            ISymbolSearchService symbolSearchService = null)
-            : base(packageInstallerService, symbolSearchService)
-        {
-        }
+            ISymbolSearchService symbolSearchService = null
+        ) : base(packageInstallerService, symbolSearchService) { }
 
         protected override bool IncludePrerelease => false;
 
@@ -46,30 +45,43 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             var uniqueIdentities = await GetUniqueIdentitiesAsync(context).ConfigureAwait(false);
 
             var assemblyNames = uniqueIdentities.Select(i => i.Name).ToSet();
-            var addPackageCodeActions = await GetAddPackagesCodeActionsAsync(context, assemblyNames).ConfigureAwait(false);
-            var addReferenceCodeActions = await GetAddReferencesCodeActionsAsync(context, uniqueIdentities).ConfigureAwait(false);
+            var addPackageCodeActions = await GetAddPackagesCodeActionsAsync(context, assemblyNames)
+                .ConfigureAwait(false);
+            var addReferenceCodeActions = await GetAddReferencesCodeActionsAsync(
+                    context,
+                    uniqueIdentities
+                )
+                .ConfigureAwait(false);
 
             context.RegisterFixes(addPackageCodeActions, context.Diagnostics);
             context.RegisterFixes(addReferenceCodeActions, context.Diagnostics);
         }
 
-        private static async Task<ImmutableArray<CodeAction>> GetAddReferencesCodeActionsAsync(CodeFixContext context, ISet<AssemblyIdentity> uniqueIdentities)
-        {
+        private static async Task<ImmutableArray<CodeAction>> GetAddReferencesCodeActionsAsync(
+            CodeFixContext context,
+            ISet<AssemblyIdentity> uniqueIdentities
+        ) {
             var result = ArrayBuilder<CodeAction>.GetInstance();
             foreach (var identity in uniqueIdentities)
             {
                 var codeAction = await AddMissingReferenceCodeAction.CreateAsync(
-                    context.Document.Project, identity, context.CancellationToken).ConfigureAwait(false);
+                        context.Document.Project,
+                        identity,
+                        context.CancellationToken
+                    )
+                    .ConfigureAwait(false);
                 result.Add(codeAction);
             }
 
             return result.ToImmutableAndFree();
         }
 
-        private static async Task<ISet<AssemblyIdentity>> GetUniqueIdentitiesAsync(CodeFixContext context)
-        {
+        private static async Task<ISet<AssemblyIdentity>> GetUniqueIdentitiesAsync(
+            CodeFixContext context
+        ) {
             var cancellationToken = context.CancellationToken;
-            var compilation = await context.Document.Project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await context.Document.Project.GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var uniqueIdentities = new HashSet<AssemblyIdentity>();
             foreach (var diagnostic in context.Diagnostics)
@@ -78,9 +90,13 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
                 uniqueIdentities.AddRange(assemblyIds);
 
                 var properties = diagnostic.Properties;
-                if (properties.TryGetValue(DiagnosticPropertyConstants.UnreferencedAssemblyIdentity, out var displayName) &&
-                    AssemblyIdentity.TryParseDisplayName(displayName, out var serializedIdentity))
-                {
+                if (
+                    properties.TryGetValue(
+                        DiagnosticPropertyConstants.UnreferencedAssemblyIdentity,
+                        out var displayName
+                    )
+                    && AssemblyIdentity.TryParseDisplayName(displayName, out var serializedIdentity)
+                ) {
                     uniqueIdentities.Add(serializedIdentity);
                 }
             }
