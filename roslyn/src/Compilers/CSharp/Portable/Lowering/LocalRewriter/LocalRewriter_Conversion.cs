@@ -980,7 +980,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Detect the unlowered nullable conversion from a tuple type T1 to Nullable<T2> for a tuple type T2.
                 case BoundConversion
                 {
-                    Conversion: {
+                    Conversion:
+                    {
                         Kind: ConversionKind.ImplicitNullable,
                         UnderlyingConversions: var underlying
                     },

@@ -6320,10 +6320,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 node is BoundForEachStatement
                 {
-                    EnumeratorInfoOpt: {
-                        GetEnumeratorInfo: {
-                            Method: { TypeArgumentsWithAnnotations: { IsEmpty: false } }
-                        }
+                    EnumeratorInfoOpt:
+                    {
+                        GetEnumeratorInfo:
+                        { Method: { TypeArgumentsWithAnnotations: { IsEmpty: false } } }
                     }
                 }
             ) {

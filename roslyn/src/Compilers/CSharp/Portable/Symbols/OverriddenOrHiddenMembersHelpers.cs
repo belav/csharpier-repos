@@ -181,9 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     GetMethod: PEMethodSymbol
                     {
-                        ExplicitlyOverriddenClassMethod: {
-                            AssociatedSymbol: PropertySymbol overriddenProperty
-                        }
+                        ExplicitlyOverriddenClassMethod:
+                        { AssociatedSymbol: PropertySymbol overriddenProperty }
                     }
                 }
                   => overriddenProperty,
@@ -191,9 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     GetMethod: RetargetingMethodSymbol
                     {
-                        ExplicitlyOverriddenClassMethod: {
-                            AssociatedSymbol: PropertySymbol overriddenProperty
-                        }
+                        ExplicitlyOverriddenClassMethod:
+                        { AssociatedSymbol: PropertySymbol overriddenProperty }
                     }
                 }
                   => overriddenProperty,

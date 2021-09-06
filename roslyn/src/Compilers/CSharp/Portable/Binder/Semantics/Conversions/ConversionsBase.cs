@@ -3635,10 +3635,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     is {
                         IsInterface: true,
                         Name: "IEquatable",
-                        ContainingNamespace: {
-                            Name: "System",
-                            ContainingNamespace: { IsGlobalNamespace: true }
-                        },
+                        ContainingNamespace:
+                        { Name: "System", ContainingNamespace: { IsGlobalNamespace: true } },
                         ContainingSymbol: { Kind: SymbolKind.Namespace },
                         TypeParameters: { Length: 1 }
                     };
