@@ -141,7 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // lower the decision dag.
                 ImmutableArray<BoundStatement> loweredDag = LowerDecisionDagCore(decisionDag);
                 resultBuilder.Add(_factory.Block(loweredDag));
-                Debug.Assert(node.Type is{ SpecialType: SpecialType.System_Boolean });
+                Debug.Assert(node.Type is { SpecialType: SpecialType.System_Boolean });
                 LocalSymbol resultTemp = _factory.SynthesizedLocal(
                     node.Type,
                     node.Syntax,

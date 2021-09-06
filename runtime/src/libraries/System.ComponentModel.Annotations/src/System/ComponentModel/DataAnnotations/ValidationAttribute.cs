@@ -393,7 +393,7 @@ namespace System.ComponentModel.DataAnnotations
             // call overridden method.
             if (!IsValid(value))
             {
-                string[]? memberNames = validationContext.MemberName is{ } memberName
+                string[]? memberNames = validationContext.MemberName is { } memberName
                     ? new[] { memberName }
                     : null;
                 result = new ValidationResult(

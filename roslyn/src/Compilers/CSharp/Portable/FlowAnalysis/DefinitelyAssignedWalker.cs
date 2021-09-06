@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     slot < variableBySlot.Count
                     && state2opt?.IsAssigned(slot) != false
-                    && variableBySlot[slot].Symbol is{ } symbol
+                    && variableBySlot[slot].Symbol is { } symbol
                     && symbol.Kind != SymbolKind.Field
                 ) {
                     definitelyAssigned.Add(symbol);

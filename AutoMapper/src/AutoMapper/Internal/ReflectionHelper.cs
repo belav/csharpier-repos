@@ -23,7 +23,7 @@ namespace AutoMapper.Internal
         public static bool CanBeSet(this MemberInfo member) =>
             member is PropertyInfo property ? property.CanWrite : !((FieldInfo)member).IsInitOnly;
         public static Expression GetDefaultValue(this ParameterInfo parameter) =>
-            parameter is{ DefaultValue: null, ParameterType: { IsValueType: true } type }
+            parameter is { DefaultValue: null, ParameterType: { IsValueType: true } type }
                 ? Default(type)
                 : Constant(parameter.DefaultValue);
         public static object MapMember(

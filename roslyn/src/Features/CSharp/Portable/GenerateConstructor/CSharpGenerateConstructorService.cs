@@ -252,7 +252,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             SyntaxToken token,
             CancellationToken cancellationToken
         ) =>
-            token.GetAncestor<ConstructorDeclarationSyntax>() is{ } constructor
+            token.GetAncestor<ConstructorDeclarationSyntax>() is { } constructor
                 ? semanticModel.GetDeclaredSymbol(constructor, cancellationToken)
                 : null;
 

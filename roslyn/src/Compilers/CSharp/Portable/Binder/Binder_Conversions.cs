@@ -484,7 +484,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             bool hasErrors = false
         ) {
-            bool targetTyped = conversionIfTargetTyped is{ };
+            bool targetTyped = conversionIfTargetTyped is { };
             Debug.Assert(
                 targetTyped
                     || destination.IsErrorType()
@@ -549,7 +549,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             bool hasErrors = false
         ) {
-            bool targetTyped = conversionIfTargetTyped is{ };
+            bool targetTyped = conversionIfTargetTyped is { };
             Conversion conversion = conversionIfTargetTyped ?? Conversion.Identity;
             Debug.Assert(
                 targetTyped

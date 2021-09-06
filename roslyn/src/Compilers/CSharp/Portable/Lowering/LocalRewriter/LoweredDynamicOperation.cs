@@ -88,7 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // TODO (tomat): we might be able to use SiteInvocation.Type instead of resultType once we stop using GetLoweredType
-            Debug.Assert(SiteInitialization is{ });
+            Debug.Assert(SiteInitialization is { });
             if (_temps.IsDefaultOrEmpty)
             {
                 return _factory.Sequence(new[] { SiteInitialization }, SiteInvocation, _resultType);

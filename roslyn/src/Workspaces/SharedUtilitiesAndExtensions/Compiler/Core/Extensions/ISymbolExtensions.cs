@@ -793,7 +793,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         x =>
                         {
                             return x
-                                is{
+                                is {
                                     Name: WellKnownMemberNames.MoveNextMethodName,
                                     ReturnType: { SpecialType: SpecialType.System_Boolean },
                                     Parameters: { Length: 0 },
@@ -885,7 +885,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 .Any(
                     x =>
                         x.AttributeClass
-                            is{
+                            is {
                                 MetadataName: nameof(ObsoleteAttribute),
                                 ContainingNamespace: { Name: nameof(System) },
                             }

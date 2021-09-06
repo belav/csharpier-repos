@@ -172,7 +172,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             internal bool CanGeneratePropertyOrField()
             {
                 return ContainingType
-                    is{
+                    is {
                         IsImplicitClass: false,
                         Name: not WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
                     };
@@ -189,8 +189,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 // !this.IsInMemberContext prevents us offering this fix for `x.goo` where `goo` does not exist
                 // Workaround: The compiler returns IsImplicitlyDeclared = false for <Main>$.
                 return ContainingMethod
-                        is
-                        {
+                        is {
                             IsImplicitlyDeclared: false,
                             Name: not WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                         }

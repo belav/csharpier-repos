@@ -2008,8 +2008,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !conversion.IsValid
                     && defaultConstantValue
-                        is
-                        {
+                        is {
                             SpecialType: SpecialType.System_Decimal or SpecialType.System_DateTime
                         }
                 ) {

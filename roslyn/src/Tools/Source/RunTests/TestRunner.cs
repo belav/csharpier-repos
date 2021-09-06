@@ -215,7 +215,7 @@ namespace RunTests
                 var setPrereleaseRollforward =
                     $"{(isUnix ? "export" : "set")} DOTNET_ROLL_FORWARD_TO_PRERELEASE=1";
                 var setTestIOperation = Environment.GetEnvironmentVariable("ROSLYN_TEST_IOPERATION")
-                    is{ } iop
+                    is { } iop
                     ? $"{(isUnix ? "export" : "set")} ROSLYN_TEST_IOPERATION={iop}"
                     : "";
                 var workItem =

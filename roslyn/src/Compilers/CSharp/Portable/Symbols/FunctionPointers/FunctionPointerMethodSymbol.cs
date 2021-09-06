@@ -672,7 +672,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 RefKind refKind,
                 CSharpCompilation compilation
             ) =>
-                GetCustomModifierForRefKind(refKind, compilation) is{ } modifier
+                GetCustomModifierForRefKind(refKind, compilation) is { } modifier
                     ? ImmutableArray.Create(modifier)
                     : ImmutableArray<CustomModifier>.Empty;
         }

@@ -247,7 +247,7 @@ namespace RunTests
                 return null;
             }
 
-            if (procDumpFilePath is{ } && !collectDumps)
+            if (procDumpFilePath is { } && !collectDumps)
             {
                 ConsoleUtil.WriteLine(
                     $"procdumppath was specified without collectdumps hence it will not be used"
@@ -273,7 +273,7 @@ namespace RunTests
                 HelixQueueName = helixQueueName,
                 IncludeHtml = includeHtml,
                 TestFilter = testFilter,
-                Timeout = timeout is{ } t ? TimeSpan.FromMinutes(t) : null,
+                Timeout = timeout is { } t ? TimeSpan.FromMinutes(t) : null,
                 Retry = retry,
             };
 

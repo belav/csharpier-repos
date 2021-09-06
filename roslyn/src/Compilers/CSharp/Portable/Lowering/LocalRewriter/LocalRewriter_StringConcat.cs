@@ -62,12 +62,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             loweredRight = ConvertConcatExprToString(syntax, loweredRight);
 
             Debug.Assert(
-                loweredLeft.Type is{ }
+                loweredLeft.Type is { }
                     && (loweredLeft.Type.IsStringType() || loweredLeft.Type.IsErrorType())
                     || loweredLeft.ConstantValue?.IsNull == true
             );
             Debug.Assert(
-                loweredRight.Type is{ }
+                loweredRight.Type is { }
                     && (loweredRight.Type.IsStringType() || loweredRight.Type.IsErrorType())
                     || loweredRight.ConstantValue?.IsNull == true
             );
@@ -332,7 +332,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!leftConst.IsDefaultValue && !rightConst.IsDefaultValue)
             {
-                Debug.Assert(leftVal is{ } && rightVal is{ });
+                Debug.Assert(leftVal is { } && rightVal is { });
                 if (leftVal.Length + rightVal.Length < 0)
                 {
                     return null;
@@ -372,11 +372,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             Debug.Assert(
                 loweredLeft.HasAnyErrors
-                    || loweredLeft.Type is{ } && loweredLeft.Type.IsStringType()
+                    || loweredLeft.Type is { } && loweredLeft.Type.IsStringType()
             );
             Debug.Assert(
                 loweredRight.HasAnyErrors
-                    || loweredRight.Type is{ } && loweredRight.Type.IsStringType()
+                    || loweredRight.Type is { } && loweredRight.Type.IsStringType()
             );
 
             var method = UnsafeGetSpecialTypeMethod(
@@ -402,15 +402,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             Debug.Assert(
                 loweredFirst.HasAnyErrors
-                    || loweredFirst.Type is{ } && loweredFirst.Type.IsStringType()
+                    || loweredFirst.Type is { } && loweredFirst.Type.IsStringType()
             );
             Debug.Assert(
                 loweredSecond.HasAnyErrors
-                    || loweredSecond.Type is{ } && loweredSecond.Type.IsStringType()
+                    || loweredSecond.Type is { } && loweredSecond.Type.IsStringType()
             );
             Debug.Assert(
                 loweredThird.HasAnyErrors
-                    || loweredThird.Type is{ } && loweredThird.Type.IsStringType()
+                    || loweredThird.Type is { } && loweredThird.Type.IsStringType()
             );
 
             var method = UnsafeGetSpecialTypeMethod(
@@ -436,19 +436,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             Debug.Assert(
                 loweredFirst.HasAnyErrors
-                    || loweredFirst.Type is{ } && loweredFirst.Type.IsStringType()
+                    || loweredFirst.Type is { } && loweredFirst.Type.IsStringType()
             );
             Debug.Assert(
                 loweredSecond.HasAnyErrors
-                    || loweredSecond.Type is{ } && loweredSecond.Type.IsStringType()
+                    || loweredSecond.Type is { } && loweredSecond.Type.IsStringType()
             );
             Debug.Assert(
                 loweredThird.HasAnyErrors
-                    || loweredThird.Type is{ } && loweredThird.Type.IsStringType()
+                    || loweredThird.Type is { } && loweredThird.Type.IsStringType()
             );
             Debug.Assert(
                 loweredFourth.HasAnyErrors
-                    || loweredFourth.Type is{ } && loweredFourth.Type.IsStringType()
+                    || loweredFourth.Type is { } && loweredFourth.Type.IsStringType()
             );
 
             var method = UnsafeGetSpecialTypeMethod(
@@ -471,7 +471,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             Debug.Assert(loweredArgs.Length > 4);
             Debug.Assert(
-                loweredArgs.All(a => a.HasErrors || a.Type is{ } && a.Type.IsStringType())
+                loweredArgs.All(a => a.HasErrors || a.Type is { } && a.Type.IsStringType())
             );
 
             var method = UnsafeGetSpecialTypeMethod(
@@ -536,7 +536,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            Debug.Assert(expr.Type is{ });
+            Debug.Assert(expr.Type is { });
 
             // Is the expression a constant char?  If so, we can
             // simply make it a literal string instead and avoid any

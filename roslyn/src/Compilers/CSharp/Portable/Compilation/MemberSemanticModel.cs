@@ -217,7 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 bindingOption == SpeculativeBindingOption.BindAsExpression
-                && GetSnapshotManager() is{ } snapshotManager
+                && GetSnapshotManager() is { } snapshotManager
             ) {
                 crefSymbols = default;
                 position = CheckAndAdjustPosition(position);

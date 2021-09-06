@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             [NotNullWhen(returnValue: true)] out DataFlowAnalysis? dataFlow
         ) {
             dataFlow = semanticModel.AnalyzeDataFlow(localFunction);
-            return dataFlow is{ Succeeded: true };
+            return dataFlow is { Succeeded: true };
         }
 
         private static bool CanBeCalledFromStaticContext(

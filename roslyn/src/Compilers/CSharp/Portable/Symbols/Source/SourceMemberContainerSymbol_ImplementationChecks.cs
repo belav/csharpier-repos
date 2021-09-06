@@ -1527,7 +1527,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         MessageID.IDS_FeatureCovariantReturnsForOverrides.GetFeatureAvailabilityDiagnosticInfo(
                                             this.DeclaringCompilation
                                         );
-                                    Debug.Assert(diagnosticInfo is{ });
+                                    Debug.Assert(diagnosticInfo is { });
                                     diagnostics.Add(diagnosticInfo, overridingMemberLocation);
                                 }
                             }

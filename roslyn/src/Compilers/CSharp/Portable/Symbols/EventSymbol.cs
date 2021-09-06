@@ -184,7 +184,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (object?)overridden == null
                     || (
-                        accessingTypeOpt is{ }
+                        accessingTypeOpt is { }
                         && !AccessCheck.IsSymbolAccessible(
                             overridden,
                             accessingTypeOpt,

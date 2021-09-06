@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
     {
         protected override bool CanFind(IMethodSymbol symbol) =>
             symbol
-                is
-                {
+                is {
                     MethodKind: MethodKind.Conversion,
                     Name: WellKnownMemberNames.ExplicitConversionName
                 }

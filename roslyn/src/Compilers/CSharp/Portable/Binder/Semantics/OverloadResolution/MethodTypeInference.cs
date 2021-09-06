@@ -1498,7 +1498,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _ => throw ExceptionUtilities.UnexpectedValue(delegateOrFunctionPointerType),
             };
             Debug.Assert(
-                method is{ HasUseSiteError: false },
+                method is { HasUseSiteError: false },
                 "This method should only be called for valid delegate or function pointer types"
             );
 

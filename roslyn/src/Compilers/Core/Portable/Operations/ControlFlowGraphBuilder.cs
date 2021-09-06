@@ -1817,7 +1817,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 // afterif:
                 // result = capture
 
-                Debug.Assert(operation is{ WhenTrue: not null, WhenFalse: not null });
+                Debug.Assert(operation is { WhenTrue: not null, WhenFalse: not null });
 
                 SpillEvalStack();
 
@@ -3868,7 +3868,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ITypeSymbol booleanType
         ) {
             Debug.Assert(ITypeSymbolHelpers.IsBooleanType(booleanType));
-            ConstantValue? constantValue = operand.GetConstantValue() is{ IsNull: var isNull }
+            ConstantValue? constantValue = operand.GetConstantValue() is { IsNull: var isNull }
                 ? ConstantValue.Create(isNull)
                 : null;
             return new IsNullOperation(operand.Syntax, operand, booleanType, constantValue);

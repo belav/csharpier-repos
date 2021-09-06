@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // transformedLHS = storeNonEvent + loweredRight
                 rewrittenAssignment = rewriteAssignment(lhsRead);
-                Debug.Assert(rewrittenAssignment.Type is{ });
+                Debug.Assert(rewrittenAssignment.Type is { });
 
                 // Final conditional
                 var condition = _factory.Conditional(
@@ -149,7 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenAssignment = rewriteAssignment(lhsRead);
             }
 
-            Debug.Assert(rewrittenAssignment.Type is{ });
+            Debug.Assert(rewrittenAssignment.Type is { });
             BoundExpression result =
                 (temps.Count == 0 && stores.Count == 0)
                     ? rewrittenAssignment
@@ -198,7 +198,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     isCompoundAssignment: true
                 );
 
-                Debug.Assert(node.Left.Type is{ });
+                Debug.Assert(node.Left.Type is { });
                 BoundExpression opFinal = MakeConversionNode(
                     syntax: syntax,
                     rewrittenOperand: operand,
@@ -271,7 +271,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC VIOLATION: in a case of unconstrained generic type parameter a runtime test (default(T) == null) would be needed
             // SPEC VIOLATION: However, for compatibility with Dev12 we will continue treating all generic type parameters, constrained or not,
             // SPEC VIOLATION: as value types.
-            Debug.Assert(rewrittenReceiver.Type is{ });
+            Debug.Assert(rewrittenReceiver.Type is { });
             var variableRepresentsLocation =
                 rewrittenReceiver.Type.IsValueType
                 || rewrittenReceiver.Type.Kind == SymbolKind.TypeParameter;
@@ -337,7 +337,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // SPEC VIOLATION: in a case of unconstrained generic type parameter a runtime test (default(T) == null) would be needed
                 // SPEC VIOLATION: However, for compatibility with Dev12 we will continue treating all generic type parameters, constrained or not,
                 // SPEC VIOLATION: as value types.
-                Debug.Assert(rewrittenReceiver.Type is{ });
+                Debug.Assert(rewrittenReceiver.Type is { });
                 var variableRepresentsLocation =
                     rewrittenReceiver.Type.IsValueType
                     || rewrittenReceiver.Type.Kind == SymbolKind.TypeParameter;
@@ -539,7 +539,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            Debug.Assert(receiver is{ Type: { } });
+            Debug.Assert(receiver is { Type: { } });
             if (!CanChangeValueBetweenReads(receiver))
             {
                 return true;
@@ -553,7 +553,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(receiver.Kind != BoundKind.TypeExpression);
             BoundExpression rewrittenReceiver = VisitExpression(receiver);
 
-            Debug.Assert(rewrittenReceiver.Type is{ });
+            Debug.Assert(rewrittenReceiver.Type is { });
             if (rewrittenReceiver.Type.IsTypeParameter())
             {
                 var memberContainingType = fieldOrEvent.ContainingType;
@@ -1065,7 +1065,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ObjectCreationExpression:
                     // common production of lowered conversions to nullable
                     // new S?(arg)
-                    Debug.Assert(expression.Type is{ });
+                    Debug.Assert(expression.Type is { });
                     if (expression.Type.IsNullableType())
                     {
                         var objCreation = (BoundObjectCreationExpression)expression;
@@ -1090,7 +1090,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                             || IsSpecialMember(method, SpecialMember.System_Nullable_T_get_HasValue)
                         ) {
-                            Debug.Assert(call.ReceiverOpt is{ });
+                            Debug.Assert(call.ReceiverOpt is { });
                             return ReadIsSideeffecting(call.ReceiverOpt);
                         }
                     }

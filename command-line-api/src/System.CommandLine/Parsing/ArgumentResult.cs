@@ -79,7 +79,7 @@ namespace System.CommandLine.Parsing
         {
             if (
                 ShouldCheckArity()
-                && Parent is{ }
+                && Parent is { }
                 && ArgumentArity.Validate(
                     Parent,
                     argument,

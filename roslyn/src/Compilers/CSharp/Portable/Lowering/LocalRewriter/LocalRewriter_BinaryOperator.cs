@@ -478,8 +478,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (loweredRight.ConstantValue == ConstantValue.True)
                             return loweredLeft;
 
-                        Debug.Assert(loweredLeft.Type is{ });
-                        Debug.Assert(loweredRight.Type is{ });
+                        Debug.Assert(loweredLeft.Type is { });
+                        Debug.Assert(loweredRight.Type is { });
                         if (loweredLeft.ConstantValue == ConstantValue.False)
                             return MakeUnaryOperator(
                                 UnaryOperatorKind.BoolLogicalNegation,
@@ -506,8 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (loweredRight.ConstantValue == ConstantValue.False)
                             return loweredLeft;
 
-                        Debug.Assert(loweredLeft.Type is{ });
-                        Debug.Assert(loweredRight.Type is{ });
+                        Debug.Assert(loweredLeft.Type is { });
+                        Debug.Assert(loweredRight.Type is { });
                         if (loweredLeft.ConstantValue == ConstantValue.True)
                             return MakeUnaryOperator(
                                 UnaryOperatorKind.BoolLogicalNegation,
@@ -534,8 +534,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (loweredRight.ConstantValue == ConstantValue.False)
                             return loweredLeft;
 
-                        Debug.Assert(loweredLeft.Type is{ });
-                        Debug.Assert(loweredRight.Type is{ });
+                        Debug.Assert(loweredLeft.Type is { });
+                        Debug.Assert(loweredRight.Type is { });
                         if (loweredLeft.ConstantValue == ConstantValue.True)
                             return MakeUnaryOperator(
                                 UnaryOperatorKind.BoolLogicalNegation,
@@ -838,7 +838,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     operatorKind.Operator() == BinaryOperatorKind.NotEqual
                     || operatorKind.Operator() == BinaryOperatorKind.Equal
                 ) {
-                    Debug.Assert(loweredLeft.Type is{ });
+                    Debug.Assert(loweredLeft.Type is { });
                     whenNullOpt = RewriteLiftedBinaryOperator(
                         syntax,
                         operatorKind,
@@ -1022,7 +1022,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (tempAssignment != null)
             {
-                Debug.Assert(temp is{ });
+                Debug.Assert(temp is { });
                 return _factory.Sequence(
                     ImmutableArray.Create(temp.LocalSymbol),
                     ImmutableArray.Create<BoundExpression>(tempAssignment),
@@ -1128,7 +1128,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // Otherwise, nothing special here.
-            Debug.Assert(method is{ });
+            Debug.Assert(method is { });
             Debug.Assert(
                 TypeSymbol.Equals(method.ReturnType, type, TypeCompareKind.ConsiderEverything2)
             );
@@ -1199,7 +1199,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 BoundExpression? nonNull = leftAlwaysNull ? rightNonNull : leftNonNull;
-                Debug.Assert(nonNull is{ });
+                Debug.Assert(nonNull is { });
 
                 if (ReadIsSideeffecting(nonNull))
                 {
@@ -1258,7 +1258,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BoundExpression expression
         ) {
-            Debug.Assert(expression.Type is{ });
+            Debug.Assert(expression.Type is { });
             // If the expression is of nullable type then call GetValueOrDefault. If not,
             // then just use its value.
 
@@ -1289,7 +1289,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression MakeOptimizedHasValue(SyntaxNode syntax, BoundExpression expression)
         {
-            Debug.Assert(expression.Type is{ });
+            Debug.Assert(expression.Type is { });
 
             // If the expression is of nullable type then call HasValue. If not, then it has a value,
             // so return constant true.
@@ -1303,7 +1303,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression MakeNullableHasValue(SyntaxNode syntax, BoundExpression expression)
         {
-            Debug.Assert(expression.Type is{ });
+            Debug.Assert(expression.Type is { });
             return BoundCall.Synthesized(
                 syntax,
                 expression,
@@ -2157,7 +2157,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression alwaysNull = leftAlwaysNull ? left : right;
             BoundExpression notAlwaysNull = leftAlwaysNull ? right : left;
             BoundExpression? neverNull = NullableAlwaysHasValue(notAlwaysNull);
-            Debug.Assert(alwaysNull.Type is{ });
+            Debug.Assert(alwaysNull.Type is { });
             BoundExpression nullBool = new BoundDefaultExpression(syntax, alwaysNull.Type);
 
             if (neverNull != null)
@@ -2210,7 +2210,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenType: alwaysNull.Type,
                 isRef: false
             );
-            Debug.Assert(conditionalExpression.Type is{ });
+            Debug.Assert(conditionalExpression.Type is { });
             return new BoundSequence(
                 syntax: syntax,
                 locals: ImmutableArray.Create<LocalSymbol>(boundTemp.LocalSymbol),
@@ -2459,7 +2459,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         ) {
             var nullableType2 = nullableType as NamedTypeSymbol;
-            Debug.Assert(nullableType2 is{ });
+            Debug.Assert(nullableType2 is { });
             return UnsafeGetSpecialTypeMethod(syntax, member, compilation, diagnostics)
                 .AsMember(nullableType2);
         }
@@ -2702,8 +2702,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight,
             BinaryOperatorKind operatorKind
         ) {
-            Debug.Assert(loweredLeft.Type is{ SpecialType: SpecialType.System_Decimal });
-            Debug.Assert(loweredRight.Type is{ SpecialType: SpecialType.System_Decimal });
+            Debug.Assert(loweredLeft.Type is { SpecialType: SpecialType.System_Decimal });
+            Debug.Assert(loweredRight.Type is { SpecialType: SpecialType.System_Decimal });
 
             SpecialMember member;
 
@@ -2855,7 +2855,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             SyntaxNode rightSyntax = loweredRight.Syntax;
             ConstantValue? rightConstantValue = loweredRight.ConstantValue;
-            Debug.Assert(loweredRight.Type is{ });
+            Debug.Assert(loweredRight.Type is { });
             TypeSymbol rightType = loweredRight.Type;
             Debug.Assert(rightType.SpecialType == SpecialType.System_Int32);
 
@@ -2922,7 +2922,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             if (isLeftPointer)
             {
-                Debug.Assert(loweredLeft.Type is{ TypeKind: TypeKind.Pointer });
+                Debug.Assert(loweredLeft.Type is { TypeKind: TypeKind.Pointer });
                 loweredRight = MakeSizeOfMultiplication(
                     loweredRight,
                     (PointerTypeSymbol)loweredLeft.Type,
@@ -2931,7 +2931,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                Debug.Assert(loweredRight.Type is{ TypeKind: TypeKind.Pointer });
+                Debug.Assert(loweredRight.Type is { TypeKind: TypeKind.Pointer });
                 loweredLeft = MakeSizeOfMultiplication(
                     loweredLeft,
                     (PointerTypeSymbol)loweredRight.Type,
@@ -2978,7 +2978,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isChecked
         ) {
             var sizeOfExpression = _factory.Sizeof(pointerType.PointedAtType);
-            Debug.Assert(sizeOfExpression.Type is{ SpecialType: SpecialType.System_Int32 });
+            Debug.Assert(sizeOfExpression.Type is { SpecialType: SpecialType.System_Int32 });
 
             // Common case: adding or subtracting one  (e.g. for ++)
             if (numericOperand.ConstantValue?.UInt64Value == 1)
@@ -2988,7 +2988,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return sizeOfExpression;
             }
 
-            Debug.Assert(numericOperand.Type is{ });
+            Debug.Assert(numericOperand.Type is { });
             var numericSpecialType = numericOperand.Type.SpecialType;
 
             // Optimization: the size is exactly one byte, then multiplication is unnecessary.
@@ -3168,8 +3168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight,
             TypeSymbol returnType
         ) {
-            Debug.Assert(loweredLeft.Type is{ TypeKind: TypeKind.Pointer });
-            Debug.Assert(loweredRight.Type is{ TypeKind: TypeKind.Pointer });
+            Debug.Assert(loweredLeft.Type is { TypeKind: TypeKind.Pointer });
+            Debug.Assert(loweredRight.Type is { TypeKind: TypeKind.Pointer });
             Debug.Assert(returnType.SpecialType == SpecialType.System_Int64);
 
             PointerTypeSymbol pointerType = (PointerTypeSymbol)loweredLeft.Type;

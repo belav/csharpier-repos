@@ -72,7 +72,7 @@ namespace Moq
                         if (resultType.IsAssignableFrom(body.Type) == false)
                         {
                             if (
-                                AwaitableFactory.TryGet(body.Type) is{ } awaitableHandler
+                                AwaitableFactory.TryGet(body.Type) is { } awaitableHandler
                                 && awaitableHandler.ResultType.IsAssignableFrom(resultType)
                             ) {
                                 // We are here because the current invocation cannot be chained onto the previous one,

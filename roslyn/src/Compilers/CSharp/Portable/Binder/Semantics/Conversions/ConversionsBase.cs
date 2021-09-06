@@ -3632,7 +3632,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             static bool isTypeIEquatable(NamedTypeSymbol type)
             {
                 return type
-                    is{
+                    is {
                         IsInterface: true,
                         Name: "IEquatable",
                         ContainingNamespace: {

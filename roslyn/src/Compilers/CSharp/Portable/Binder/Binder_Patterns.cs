@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 expression = BadExpression(expression.Syntax, expression);
             }
 
-            Debug.Assert(expression.Type is{ });
+            Debug.Assert(expression.Type is { });
             uint inputValEscape = GetValEscape(expression, LocalScopeDepth);
             BoundPattern pattern = BindPattern(
                 node.Pattern,
@@ -85,7 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !hasErrors
                 && getConstantResult(decisionDag, negated, whenTrueLabel, whenFalseLabel)
-                    is{ } constantResult
+                    is { } constantResult
             ) {
                 if (!constantResult)
                 {
@@ -133,7 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     !hasErrors
                     && getConstantResult(decisionDag, negated, whenTrueLabel, whenFalseLabel)
-                        is{ } simplifiedResult
+                        is { } simplifiedResult
                 ) {
                     if (!simplifiedResult)
                     {
@@ -203,9 +203,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             SwitchExpressionSyntax node,
             BindingDiagnosticBag diagnostics
         ) {
-            RoslynDebug.Assert(node is{ });
+            RoslynDebug.Assert(node is { });
             Binder? switchBinder = this.GetBinder(node);
-            RoslynDebug.Assert(switchBinder is{ });
+            RoslynDebug.Assert(switchBinder is { });
             return switchBinder.BindSwitchExpressionCore(node, switchBinder, diagnostics);
         }
 
@@ -214,7 +214,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder originalBinder,
             BindingDiagnosticBag diagnostics
         ) {
-            RoslynDebug.Assert(this.Next is{ });
+            RoslynDebug.Assert(this.Next is { });
             return this.Next.BindSwitchExpressionCore(node, originalBinder, diagnostics);
         }
 
@@ -424,7 +424,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                Debug.Assert(expression is{ Kind: BoundKind.TypeExpression, Type: { } });
+                Debug.Assert(expression is { Kind: BoundKind.TypeExpression, Type: { } });
                 hasErrors |= CheckValidPatternType(
                     patternExpression,
                     inputType,
@@ -570,7 +570,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        RoslynDebug.Assert(expression.Type is{ });
+                        RoslynDebug.Assert(expression.Type is { });
                         if (
                             ExpressionOfTypeMatchesPatternType(
                                 Conversions,
@@ -881,7 +881,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             ref bool hasErrors
         ) {
-            RoslynDebug.Assert(inputType is{ });
+            RoslynDebug.Assert(inputType is { });
             TypeWithAnnotations declType = BindType(
                 typeSyntax,
                 diagnostics,
@@ -927,7 +927,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (localSymbol is { })
                     {
-                        RoslynDebug.Assert(ContainingMemberOrLambda is{ });
+                        RoslynDebug.Assert(ContainingMemberOrLambda is { });
                         if (
                             (InConstructorInitializer || InFieldInitializer)
                             && ContainingMemberOrLambda.ContainingSymbol.Kind
@@ -1653,7 +1653,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         typeWithAnnotations: declType
                     ); // fake a type expression for the variable's type
                     // We continue to use a BoundDeclarationPattern for the var pattern, as they have more in common.
-                    Debug.Assert(node.Parent is{ });
+                    Debug.Assert(node.Parent is { });
                     return new BoundDeclarationPattern(
                         node.Parent.Kind() == SyntaxKind.VarPattern ? node.Parent : node, // for `var x` use whole pattern, otherwise use designation for the syntax
                         variableSymbol,
@@ -2023,7 +2023,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics.Add(ErrorCode.ERR_DefaultPattern, innerExpression.Location);
                 hasErrors = true;
             }
-            RoslynDebug.Assert(value.Type is{ });
+            RoslynDebug.Assert(value.Type is { });
             BinaryOperatorKind operation = tokenKindToBinaryOperatorKind(node.OperatorToken.Kind());
             if (operation == BinaryOperatorKind.Equal)
             {

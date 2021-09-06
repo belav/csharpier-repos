@@ -2498,7 +2498,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 enclosingSymbol = enclosingSymbol.ContainingSymbol;
             }
 
-            return enclosingSymbol is{ IsStatic: false };
+            return enclosingSymbol is { IsStatic: false };
         }
 
         public static bool IsPossibleCastTypeContext(

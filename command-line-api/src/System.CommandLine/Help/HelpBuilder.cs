@@ -396,7 +396,7 @@ namespace System.CommandLine.Help
             string descriptor;
             if (
                 Customizations.TryGetValue(symbol, out Customization customization)
-                && customization.GetDescriptor?.Invoke() is{ } setDescriptor
+                && customization.GetDescriptor?.Invoke() is { } setDescriptor
             ) {
                 descriptor = setDescriptor;
             }
@@ -475,13 +475,13 @@ namespace System.CommandLine.Help
             string? defaultValue;
             if (
                 Customizations.TryGetValue(parent, out Customization customization)
-                && customization.GetDefaultValue?.Invoke() is{ } parentSetDefaultValue
+                && customization.GetDefaultValue?.Invoke() is { } parentSetDefaultValue
             ) {
                 defaultValue = parentSetDefaultValue;
             }
             else if (
                 Customizations.TryGetValue(argument, out customization)
-                && customization.GetDefaultValue?.Invoke() is{ } setDefaultValue
+                && customization.GetDefaultValue?.Invoke() is { } setDefaultValue
             ) {
                 defaultValue = setDefaultValue;
             }
@@ -511,7 +511,7 @@ namespace System.CommandLine.Help
         {
             if (
                 Customizations.TryGetValue(argument, out Customization customization)
-                && customization.GetDescriptor?.Invoke() is{ } setDescriptor
+                && customization.GetDescriptor?.Invoke() is { } setDescriptor
             ) {
                 return setDescriptor;
             }

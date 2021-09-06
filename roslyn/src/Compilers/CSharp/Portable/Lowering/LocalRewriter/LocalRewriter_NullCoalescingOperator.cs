@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenLeft != null);
             Debug.Assert(rewrittenRight != null);
             Debug.Assert(leftConversion.IsValid);
-            Debug.Assert(rewrittenResultType is{ });
-            Debug.Assert(rewrittenRight.Type is{ });
+            Debug.Assert(rewrittenResultType is { });
+            Debug.Assert(rewrittenRight.Type is { });
             Debug.Assert(
                 rewrittenRight.Type.Equals(
                     rewrittenResultType,
@@ -53,7 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Because of Error CS0845 (An expression tree lambda may not contain a coalescing operator with a null or default literal left-hand side)
                 // we know that the left-hand-side has a type.
-                Debug.Assert(rewrittenLeft.Type is{ });
+                Debug.Assert(rewrittenLeft.Type is { });
                 TypeSymbol strippedLeftType = rewrittenLeft.Type.StrippedType();
                 Conversion rewrittenConversion = TryMakeConversion(
                     syntax,
@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var isUnconstrainedTypeParameter =
-                rewrittenLeft.Type is{ IsReferenceType: false, IsValueType: false };
+                rewrittenLeft.Type is { IsReferenceType: false, IsValueType: false };
 
             // first we can make a small optimization:
             // If left is a constant then we already know whether it is null or not. If it is null then we
@@ -121,7 +121,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // if left conversion is intrinsic implicit (always succeeds) and results in a reference type
             // we can apply conversion before doing the null check that allows for a more efficient IL emit.
-            Debug.Assert(rewrittenLeft.Type is{ });
+            Debug.Assert(rewrittenLeft.Type is { });
             if (
                 rewrittenLeft.Type.IsReferenceType
                 && leftConversion.IsImplicit
@@ -344,8 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol rewrittenResultType
         ) {
             Debug.Assert(rewrittenLeft != null);
-            Debug.Assert(rewrittenLeft.Type is{ });
-            Debug.Assert(rewrittenResultType is{ });
+            Debug.Assert(rewrittenLeft.Type is { });
+            Debug.Assert(rewrittenResultType is { });
             Debug.Assert(leftConversion.IsValid);
 
             TypeSymbol rewrittenLeftType = rewrittenLeft.Type;

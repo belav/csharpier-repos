@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && _factory.TopLevelMethod is { RequiresInstanceReceiver: false }
                     ) {
                         // Calling a static method defined on the current class via its simple name.
-                        Debug.Assert(_factory.CurrentType is{ });
+                        Debug.Assert(_factory.CurrentType is { });
                         loweredReceiver = new BoundTypeExpression(
                             node.Syntax,
                             null,
@@ -137,7 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
             // with the matching name of this dynamic invocation.
             var module = this.EmitModule;
-            if (module != null && receiver != null && receiver.Type is{ })
+            if (module != null && receiver != null && receiver.Type is { })
             {
                 var assembly = receiver.Type.ContainingAssembly;
 
@@ -775,7 +775,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var receiverNamedType = invokedAsExtensionMethod
                     ? ((MethodSymbol)methodOrIndexer).Parameters[0].Type as NamedTypeSymbol
                     : methodOrIndexer.ContainingType;
-                isComReceiver = receiverNamedType is{ IsComImport: true };
+                isComReceiver = receiverNamedType is { IsComImport: true };
             }
 
             return rewrittenArguments.Length == methodOrIndexer.GetParameterCount()
@@ -1240,7 +1240,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (correspondingStore != -1)
                     {
                         var value = tempStores[correspondingStore].Right;
-                        Debug.Assert(value.Type is{ });
+                        Debug.Assert(value.Type is { });
 
                         // the matched store will not need to go into side-effects, only ones before it will
                         // remove the store to signal that we are not using its temp.

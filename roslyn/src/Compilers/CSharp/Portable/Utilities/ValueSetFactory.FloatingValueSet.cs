@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (!_numbers.IsEmpty)
                     {
                         var sample = _numbers.Sample;
-                        Debug.Assert(sample is{ });
+                        Debug.Assert(sample is { });
                         return sample;
                     }
 

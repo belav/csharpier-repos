@@ -136,7 +136,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     && invocation.SemanticModel!.Compilation.GetTypeByMetadataName(
                         typeof(System.IFormattable).FullName!
                     )
-                        is{ } systemIFormattable
+                        is { } systemIFormattable
                     && invocation.Instance.Type.Implements(systemIFormattable)
                 ) {
                     unwrapped = invocation.Instance;
@@ -255,6 +255,6 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             invocation.Instance != null && !invocation.Instance.IsImplicit;
 
         private static bool IsSpaceChar(IArgumentOperation argument) =>
-            argument.Value.ConstantValue is{ HasValue: true, Value: ' ' };
+            argument.Value.ConstantValue is { HasValue: true, Value: ' ' };
     }
 }

@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNamedArguments
                 var argType = semanticModel.GetTypeInfo(GetArgumentExpression(argument)).Type;
                 if (
                     argType?.ContainingNamespace
-                        is
-                        {
+                        is {
                             Name: nameof(System),
                             ContainingNamespace: { IsGlobalNamespace: true }
                         }

@@ -127,7 +127,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (kind.IsUserDefined())
             {
-                Debug.Assert(method is{ });
+                Debug.Assert(method is { });
                 Debug.Assert(
                     TypeSymbol.Equals(type, method.ReturnType, TypeCompareKind.ConsiderEverything2)
                 );
@@ -148,7 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (kind == UnaryOperatorKind.EnumBitwiseComplement)
             {
                 var underlyingType = loweredOperand.Type.GetEnumUnderlyingType();
-                Debug.Assert(underlyingType is{ });
+                Debug.Assert(underlyingType is { });
                 var upconvertSpecialType = Binder.GetEnumPromotedType(underlyingType.SpecialType);
                 var upconvertType =
                     upconvertSpecialType == underlyingType.SpecialType
@@ -352,7 +352,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conditionalLeft!.WhenNotNull,
                     type
                 );
-                Debug.Assert(result.Type is{ });
+                Debug.Assert(result.Type is { });
 
                 return conditionalLeft.Update(
                     conditionalLeft.Receiver,
@@ -567,7 +567,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isDynamic
             );
             TypeSymbol? operandType = transformedLHS.Type; //type of the variable being incremented
-            Debug.Assert(operandType is{ });
+            Debug.Assert(operandType is { });
             Debug.Assert(
                 TypeSymbol.Equals(operandType, node.Type, TypeCompareKind.ConsiderEverything2)
             );
@@ -712,7 +712,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression newValue
         ) {
             var tempValue = isPrefix ? newValue : MakeRValue(operand);
-            Debug.Assert(tempValue.Type is{ });
+            Debug.Assert(tempValue.Type is { });
             var tempAssignment = MakeAssignmentOperator(
                 syntax,
                 boundTemp,
@@ -801,7 +801,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundIncrementOperator node,
             BoundExpression rewrittenValueToIncrement
         ) {
-            Debug.Assert(node.MethodOpt is{ });
+            Debug.Assert(node.MethodOpt is { });
             Debug.Assert(node.MethodOpt.ParameterCount == 1);
 
             bool isLifted = node.OperatorKind.IsLifted();
@@ -998,8 +998,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node.OperatorKind.OperandTypes() == UnaryOperatorKind.Pointer)
             {
                 Debug.Assert(binaryOperatorKind.OperandTypes() == BinaryOperatorKind.PointerAndInt);
-                Debug.Assert(binaryOperand.Type is{ TypeKind: TypeKind.Pointer });
-                Debug.Assert(boundOne.Type is{ SpecialType: SpecialType.System_Int32 });
+                Debug.Assert(binaryOperand.Type is { TypeKind: TypeKind.Pointer });
+                Debug.Assert(boundOne.Type is { SpecialType: SpecialType.System_Int32 });
                 return MakeBinaryOperator(
                     node.Syntax,
                     binaryOperatorKind,
@@ -1080,7 +1080,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BinaryOperatorKind oper,
             BoundExpression operand
         ) {
-            Debug.Assert(operand.Type is{ SpecialType: SpecialType.System_Decimal });
+            Debug.Assert(operand.Type is { SpecialType: SpecialType.System_Decimal });
             MethodSymbol method = GetDecimalIncDecOperator(oper);
             return BoundCall.Synthesized(syntax, receiverOpt: null, method, operand);
         }
@@ -1091,7 +1091,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand
         ) {
             Debug.Assert(
-                operand.Type is{ }
+                operand.Type is { }
                     && operand.Type.IsNullableType()
                     && operand.Type.GetNullableUnderlyingType().SpecialType
                         == SpecialType.System_Decimal
@@ -1328,14 +1328,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     {
                         TypeSymbol? underlyingType = node.Type;
-                        Debug.Assert(underlyingType is{ });
+                        Debug.Assert(underlyingType is { });
                         if (underlyingType.IsNullableType())
                         {
                             underlyingType = underlyingType.GetNullableUnderlyingType();
                         }
                         Debug.Assert(underlyingType.IsEnumType());
                         underlyingType = underlyingType.GetEnumUnderlyingType();
-                        Debug.Assert(underlyingType is{ });
+                        Debug.Assert(underlyingType is { });
 
                         // Operator overload resolution will not have chosen the enumerated type
                         // unless the operand actually is of the enumerated type (or nullable enum type.)

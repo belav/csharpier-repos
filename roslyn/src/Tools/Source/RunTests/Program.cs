@@ -288,7 +288,7 @@ namespace RunTests
                 }
             }
 
-            if (options.CollectDumps && GetProcDumpInfo(options) is{ } procDumpInfo)
+            if (options.CollectDumps && GetProcDumpInfo(options) is { } procDumpInfo)
             {
                 ConsoleUtil.WriteLine(
                     "Roslyn Error: test timeout exceeded, dumping remaining processes"

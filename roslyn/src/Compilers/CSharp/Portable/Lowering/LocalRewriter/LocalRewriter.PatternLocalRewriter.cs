@@ -230,7 +230,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundDagTypeEvaluation t:
                     {
                         TypeSymbol inputType = input.Type;
-                        Debug.Assert(inputType is{ });
+                        Debug.Assert(inputType is { });
                         if (inputType.IsDynamic())
                         {
                             // Avoid using dynamic conversions for pattern-matching.
@@ -310,7 +310,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _factory.Syntax = test.Syntax;
                 BoundExpression input = _tempAllocator.GetTemp(test.Input);
-                Debug.Assert(input.Type is{ });
+                Debug.Assert(input.Type is { });
                 switch (test)
                 {
                     case BoundDagNonNullTest d:
@@ -471,7 +471,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundExpression output = _tempAllocator.GetTemp(
                         new BoundDagTemp(evaluation.Syntax, typeEvaluation1.Type, evaluation)
                     );
-                    Debug.Assert(output.Type is{ });
+                    Debug.Assert(output.Type is { });
                     sideEffect = _factory.AssignmentExpression(
                         output,
                         _factory.As(input, typeEvaluation1.Type)
@@ -525,7 +525,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Action<BoundExpression> addCode,
                 out BoundExpression savedInputExpression
             ) {
-                Debug.Assert(loweredInput.Type is{ });
+                Debug.Assert(loweredInput.Type is { });
 
                 // We share input variables if there is no when clause (because a when clause might mutate them).
                 bool anyWhenClause = decisionDag.TopologicallySortedNodes.Any(

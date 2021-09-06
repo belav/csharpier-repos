@@ -483,7 +483,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             _returnTypesOpt = returnTypesOpt;
             _snapshotBuilderOpt = snapshotBuilderOpt;
             _isSpeculative = isSpeculative;
-            _hasInitialState = variables is{ };
+            _hasInitialState = variables is { };
         }
 
         public string GetDebuggerDisplay()
@@ -9704,7 +9704,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                     }
                     break;
-                case BoundExpression arg when arg.Type is{ TypeKind: TypeKind.Delegate } argType:
+                case BoundExpression arg when arg.Type is { TypeKind: TypeKind.Delegate } argType:
 
                     {
                         var argTypeWithAnnotations = TypeWithAnnotations.Create(
@@ -10861,7 +10861,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameterOpt: parameter
             );
 
-            if (argumentType.Type is{ } argType && IsNullabilityMismatch(paramType.Type, argType))
+            if (argumentType.Type is { } argType && IsNullabilityMismatch(paramType.Type, argType))
             {
                 ReportNullabilityMismatchInArgument(
                     argument.Syntax,
@@ -11317,7 +11317,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             bool reportedDiagnostic = node.EnumeratorInfoOpt?.GetEnumeratorInfo.Method
-                is{ IsExtensionMethod: true }
+                is { IsExtensionMethod: true }
                 ? false
                 : CheckPossibleNullReceiver(expr);
 
@@ -13014,7 +13014,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(Id == other.Id);
                 bool result = false;
-                if (_container is{ } && _container.Value.Join(in other._container!.Value))
+                if (_container is { } && _container.Value.Join(in other._container!.Value))
                 {
                     result = true;
                 }
@@ -13029,7 +13029,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(Id == other.Id);
                 bool result = false;
-                if (_container is{ } && _container.Value.Meet(in other._container!.Value))
+                if (_container is { } && _container.Value.Meet(in other._container!.Value))
                 {
                     result = true;
                 }

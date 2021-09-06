@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(node != null);
             var rewrittenCondition = VisitExpression(node.Condition);
             var rewrittenConsequence = VisitStatement(node.Consequence);
-            Debug.Assert(rewrittenConsequence is{ });
+            Debug.Assert(rewrittenConsequence is { });
             var rewrittenAlternative = VisitStatement(node.AlternativeOpt);
             var syntax = (IfStatementSyntax)node.Syntax;
 

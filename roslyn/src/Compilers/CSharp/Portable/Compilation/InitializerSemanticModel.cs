@@ -431,7 +431,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return SourceComplexParameterSymbol.GetDefaultValueSyntaxForIsNullableAnalysisEnabled(
                             Root as ParameterSyntax
                         )
-                            is{ } value
+                            is { } value
                         && Compilation.IsNullableAnalysisEnabledIn(value);
                 default:
                     throw ExceptionUtilities.UnexpectedValue(MemberSymbol.Kind);

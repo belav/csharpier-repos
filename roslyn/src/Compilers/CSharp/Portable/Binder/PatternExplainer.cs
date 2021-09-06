@@ -263,7 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     evaluations.Length == 1
                     && constraints.Length == 1
-                    && constraints[0] is(BoundDagTypeTest { Type: var constraintType }, true)
+                    && constraints[0] is (BoundDagTypeTest { Type: var constraintType }, true)
                     && evaluations[0] is BoundDagTypeEvaluation { Type: var evaluationType } te
                     && constraintType.Equals(evaluationType, TypeCompareKind.AllIgnoreOptions)
                 ) {
@@ -286,7 +286,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     evaluations.Length == 1
                     && constraints.Length == 1
-                    && constraints[0] is(BoundDagNonNullTest _, true)
+                    && constraints[0] is (BoundDagNonNullTest _, true)
                     && evaluations[0] is BoundDagTypeEvaluation { Type: var evaluationType } te
                     && input.Type.IsNullableType()
                     && input.Type.GetNullableUnderlyingType()
@@ -373,7 +373,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _ => false
                             }
                     )
-                    && ValueSetFactory.ForType(input.Type) is{ } fac
+                    && ValueSetFactory.ForType(input.Type) is { } fac
                 ) {
                     // All we have are numeric constraints. Process them to compute a value not covered.
                     var remainingValues = fac.AllValues;

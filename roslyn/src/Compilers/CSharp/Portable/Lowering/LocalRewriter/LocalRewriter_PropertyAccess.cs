@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var getMethod = getMethodOpt ?? property.GetOwnOrInheritedGetMethod();
 
-                Debug.Assert(getMethod is{ });
+                Debug.Assert(getMethod is { });
                 Debug.Assert(getMethod.ParameterCount == rewrittenArguments.Length);
                 Debug.Assert(getMethodOpt is null || ReferenceEquals(getMethod, getMethodOpt));
 

@@ -775,8 +775,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && _compilation.LanguageVersion
                     >= MessageID.IDS_FeatureNullableReferenceTypes.RequiredVersion()
                 && containingType
-                    is
-                    {
+                    is {
                         IsImplicitlyDeclared: false,
                         TypeKind: TypeKind.Class or TypeKind.Struct or TypeKind.Interface
                     }
@@ -1485,7 +1484,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SyntaxTreeSemanticModel semanticModelWithCachedBoundNodes = null;
                     if (
                         body != null
-                        && forSemanticModel.Syntax is{ } semanticModelSyntax
+                        && forSemanticModel.Syntax is { } semanticModelSyntax
                         && _compilation.SemanticModelProvider
                             is CachingSemanticModelProvider cachingSemanticModelProvider
                     ) {

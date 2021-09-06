@@ -771,7 +771,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                         && useNativeInteger == type.IsNativeIntegerType,
                     (object)null
                 )
-                    is{ };
+                    is { };
             }
 
             static Symbol getUnderlyingMember(Symbol nativeIntegerMember)

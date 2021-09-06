@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var operandType = rewrittenOperand.Type;
             var targetType = rewrittenTargetType.Type;
 
-            Debug.Assert(operandType is{ } || rewrittenOperand.ConstantValue!.IsNull);
-            Debug.Assert(targetType is{ });
+            Debug.Assert(operandType is { } || rewrittenOperand.ConstantValue!.IsNull);
+            Debug.Assert(targetType is { });
 
             // TODO: Handle dynamic operand type and target type
 

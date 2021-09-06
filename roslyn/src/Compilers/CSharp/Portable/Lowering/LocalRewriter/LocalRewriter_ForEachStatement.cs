@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
             TypeSymbol? nodeExpressionType = collectionExpression.Type;
-            Debug.Assert(nodeExpressionType is{ });
+            Debug.Assert(nodeExpressionType is { });
             if (nodeExpressionType.Kind == SymbolKind.ArrayType)
             {
                 ArrayTypeSymbol arrayType = (ArrayTypeSymbol)nodeExpressionType;
@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )?.SymbolAsMember(spanType);
             }
 
-            return lengthGet is{ } && indexerGet is{ };
+            return lengthGet is { } && indexerGet is { };
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
             BoundExpression rewrittenExpression = VisitExpression(collectionExpression);
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is{ });
+            Debug.Assert(rewrittenBody is { });
 
             MethodArgumentInfo getEnumeratorInfo = enumeratorInfo.GetEnumeratorInfo;
             TypeSymbol enumeratorType = getEnumeratorInfo.Method.ReturnType;
@@ -266,7 +266,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             if (isAsync)
             {
-                Debug.Assert(node.AwaitOpt is{ GetResult: { } });
+                Debug.Assert(node.AwaitOpt is { GetResult: { } });
                 rewrittenCondition = RewriteAwaitExpression(
                     forEachSyntax,
                     rewrittenCondition,
@@ -380,7 +380,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 idisposableTypeSymbol = disposeMethod.ContainingType;
-                Debug.Assert(_factory.CurrentFunction is{ });
+                Debug.Assert(_factory.CurrentFunction is { });
                 var conversions = new TypeConversions(
                     _factory.CurrentFunction.ContainingAssembly.CorLibrary
                 );
@@ -417,7 +417,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var disposeInfo = enumeratorInfo.PatternDisposeInfo;
                 if (disposeInfo is null)
                 {
-                    Debug.Assert(idisposableTypeSymbol is{ });
+                    Debug.Assert(idisposableTypeSymbol is { });
                     disposeInfo = MethodArgumentInfo.CreateParameterlessMethod(disposeMethod);
                     receiver = ConvertReceiverForInvocation(
                         forEachSyntax,
@@ -511,8 +511,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // and the loop isn't async, then we include a runtime check.
                 Debug.Assert(!enumeratorType.IsSealed);
                 Debug.Assert(!enumeratorInfo.IsAsync);
-                Debug.Assert(idisposableTypeSymbol is{ });
-                Debug.Assert(disposeMethod is{ });
+                Debug.Assert(idisposableTypeSymbol is { });
+                Debug.Assert(disposeMethod is { });
 
                 // IDisposable d
                 LocalSymbol disposableVar = _factory.SynthesizedLocal(idisposableTypeSymbol);
@@ -650,7 +650,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion receiverConversion,
             TypeSymbol convertedReceiverType
         ) {
-            Debug.Assert(receiver.Type is{ });
+            Debug.Assert(receiver.Type is { });
             if (!receiver.Type.IsReferenceType && method.ContainingType.IsInterface)
             {
                 Debug.Assert(receiverConversion.IsImplicit && !receiverConversion.IsUserDefined);
@@ -745,14 +745,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
             NamedTypeSymbol? collectionType = (NamedTypeSymbol?)collectionExpression.Type;
-            Debug.Assert(collectionType is{ });
+            Debug.Assert(collectionType is { });
 
             TypeSymbol intType = _compilation.GetSpecialType(SpecialType.System_Int32);
             TypeSymbol boolType = _compilation.GetSpecialType(SpecialType.System_Boolean);
 
             BoundExpression rewrittenExpression = VisitExpression(collectionExpression);
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is{ });
+            Debug.Assert(rewrittenBody is { });
 
             // Collection a
             LocalSymbol collectionTemp = _factory.SynthesizedLocal(
@@ -999,17 +999,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             var forEachSyntax = (CommonForEachStatementSyntax)node.Syntax;
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
-            Debug.Assert(collectionExpression.Type is{ TypeKind: TypeKind.Array });
+            Debug.Assert(collectionExpression.Type is { TypeKind: TypeKind.Array });
 
             ArrayTypeSymbol arrayType = (ArrayTypeSymbol)collectionExpression.Type;
-            Debug.Assert(arrayType is{ IsSZArray: true });
+            Debug.Assert(arrayType is { IsSZArray: true });
 
             TypeSymbol intType = _compilation.GetSpecialType(SpecialType.System_Int32);
             TypeSymbol boolType = _compilation.GetSpecialType(SpecialType.System_Boolean);
 
             BoundExpression rewrittenExpression = VisitExpression(collectionExpression);
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is{ });
+            Debug.Assert(rewrittenBody is { });
 
             // A[] a
             LocalSymbol arrayVar = _factory.SynthesizedLocal(
@@ -1161,7 +1161,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var forEachSyntax = (CommonForEachStatementSyntax)node.Syntax;
 
             BoundExpression collectionExpression = GetUnconvertedCollectionExpression(node);
-            Debug.Assert(collectionExpression.Type is{ TypeKind: TypeKind.Array });
+            Debug.Assert(collectionExpression.Type is { TypeKind: TypeKind.Array });
 
             ArrayTypeSymbol arrayType = (ArrayTypeSymbol)collectionExpression.Type;
 
@@ -1183,7 +1183,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression rewrittenExpression = VisitExpression(collectionExpression);
             BoundStatement? rewrittenBody = VisitStatement(node.Body);
-            Debug.Assert(rewrittenBody is{ });
+            Debug.Assert(rewrittenBody is { });
 
             // A[...] a
             LocalSymbol arrayVar = _factory.SynthesizedLocal(
@@ -1449,7 +1449,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 localSymbol: local,
                 rewrittenInitializer: rewrittenInitialValue
             );
-            Debug.Assert(result is{ });
+            Debug.Assert(result is { });
             return result;
         }
 
@@ -1550,7 +1550,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private BoundStatement MakeWhileTrueLoop(BoundForEachStatement loop, BoundBlock body)
         {
-            Debug.Assert(loop.EnumeratorInfoOpt is{ IsAsync: true });
+            Debug.Assert(loop.EnumeratorInfoOpt is { IsAsync: true });
             SyntaxNode syntax = loop.Syntax;
             GeneratedLabelSymbol startLabel = new GeneratedLabelSymbol("still-true");
             BoundStatement startLabelStatement = new BoundLabelStatement(syntax, startLabel);

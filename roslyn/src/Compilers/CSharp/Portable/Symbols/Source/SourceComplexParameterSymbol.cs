@@ -248,7 +248,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (
                             binder is not null
                             && GetDefaultValueSyntaxForIsNullableAnalysisEnabled(CSharpSyntaxNode)
-                                is{ } valueSyntax
+                                is { } valueSyntax
                         ) {
                             NullableWalker.AnalyzeIfNeeded(
                                 binder,

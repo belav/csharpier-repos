@@ -1121,7 +1121,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         RoslynDebug.Assert(state.TrueBranch == null);
-                        RoslynDebug.Assert(state.FalseBranch is{ });
+                        RoslynDebug.Assert(state.FalseBranch is { });
 
                         // The final state here does not need bindings, as they will be performed before evaluating the when clause (see below)
                         BoundDecisionDagNode whenTrue = finalState(
@@ -1130,7 +1130,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             default
                         );
                         BoundDecisionDagNode? whenFalse = state.FalseBranch.Dag;
-                        RoslynDebug.Assert(whenFalse is{ });
+                        RoslynDebug.Assert(whenFalse is { });
                         state.Dag = uniqifyDagNode(
                             new BoundWhenDecisionDagNode(
                                 first.Syntax,
@@ -1165,7 +1165,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                             {
                                 BoundDecisionDagNode? next = state.TrueBranch!.Dag;
-                                RoslynDebug.Assert(next is{ });
+                                RoslynDebug.Assert(next is { });
                                 RoslynDebug.Assert(state.FalseBranch == null);
                                 state.Dag = uniqifyDagNode(
                                     new BoundEvaluationDecisionDagNode(e.Syntax, e, next)
@@ -1177,8 +1177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 BoundDecisionDagNode? whenTrue = state.TrueBranch!.Dag;
                                 BoundDecisionDagNode? whenFalse = state.FalseBranch!.Dag;
-                                RoslynDebug.Assert(whenTrue is{ });
-                                RoslynDebug.Assert(whenFalse is{ });
+                                RoslynDebug.Assert(whenTrue is { });
+                                RoslynDebug.Assert(whenFalse is { });
                                 state.Dag = uniqifyDagNode(
                                     new BoundTestDecisionDagNode(d.Syntax, d, whenTrue, whenFalse)
                                 );
@@ -1968,8 +1968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public bool Equals(DagState? x, DagState? y)
             {
-                RoslynDebug.Assert(x is{ });
-                RoslynDebug.Assert(y is{ });
+                RoslynDebug.Assert(x is { });
+                RoslynDebug.Assert(y is { });
                 return x == y || x.Cases.SequenceEqual(y.Cases, (a, b) => a.Equals(b));
             }
 

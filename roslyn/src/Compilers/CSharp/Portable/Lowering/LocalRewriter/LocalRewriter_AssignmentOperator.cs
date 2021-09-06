@@ -447,7 +447,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             T newElement
         ) where T : notnull
         {
-            Debug.Assert(newElement is{ });
+            Debug.Assert(newElement is { });
             return possibleNull.NullToEmpty().Add(newElement);
         }
     }

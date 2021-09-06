@@ -5419,7 +5419,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 diagnostics.Add(node, useSiteInfo);
 
-                Debug.Assert(type is{ });
+                Debug.Assert(type is { });
                 Debug.Assert(Conversions.HasIdentityConversion(trueType, type));
                 Debug.Assert(Conversions.HasIdentityConversion(falseType, type));
             }

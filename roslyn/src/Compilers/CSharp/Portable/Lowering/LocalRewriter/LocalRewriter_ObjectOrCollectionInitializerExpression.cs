@@ -128,7 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? rewrittenReceiver,
             ImmutableArray<BoundExpression> initializers
         ) {
-            Debug.Assert(rewrittenReceiver is{ } || _inExpressionLambda);
+            Debug.Assert(rewrittenReceiver is { } || _inExpressionLambda);
 
             foreach (var initializer in initializers)
             {
@@ -340,7 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ObjectInitializerMember:
                 {
                     var memberInit = (BoundObjectInitializerMember?)rewrittenLeft;
-                    Debug.Assert(memberInit is{ });
+                    Debug.Assert(memberInit is { });
 
                     if (!memberInit.Arguments.IsDefaultOrEmpty)
                     {
@@ -384,7 +384,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 rewrittenRight
                             );
 
-                            Debug.Assert(setMember.SiteInitialization is{ });
+                            Debug.Assert(setMember.SiteInitialization is { });
                             dynamicSiteInitializers.Add(setMember.SiteInitialization);
                             result.Add(setMember.SiteInvocation);
                             return;
@@ -397,7 +397,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             memberInit.ArgumentRefKindsOpt
                         );
 
-                        Debug.Assert(getMember.SiteInitialization is{ });
+                        Debug.Assert(getMember.SiteInitialization is { });
                         dynamicSiteInitializers.Add(getMember.SiteInitialization);
                         rewrittenAccess = getMember.SiteInvocation;
                     }
@@ -435,7 +435,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         dynamicSiteInitializers = ArrayBuilder<BoundExpression>.GetInstance();
                     }
 
-                    Debug.Assert(rewrittenLeft is{ });
+                    Debug.Assert(rewrittenLeft is { });
                     var initializerMember = (BoundDynamicObjectInitializerMember)rewrittenLeft;
 
                     if (!isRhsNestedInitializer)
@@ -446,7 +446,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             initializerMember.MemberName,
                             rewrittenRight
                         );
-                        Debug.Assert(setMember.SiteInitialization is{ });
+                        Debug.Assert(setMember.SiteInitialization is { });
                         dynamicSiteInitializers.Add(setMember.SiteInitialization);
                         result.Add(setMember.SiteInvocation);
                         return;
@@ -457,7 +457,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         initializerMember.MemberName,
                         resultIndexed: false
                     );
-                    Debug.Assert(getMember.SiteInitialization is{ });
+                    Debug.Assert(getMember.SiteInitialization is { });
                     dynamicSiteInitializers.Add(getMember.SiteInitialization);
                     rewrittenAccess = getMember.SiteInvocation;
                     break;
@@ -465,7 +465,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.ArrayAccess:
                 {
-                    Debug.Assert(rewrittenLeft is{ });
+                    Debug.Assert(rewrittenLeft is { });
                     var arrayAccess = (BoundArrayAccess)rewrittenLeft;
                     var indices = EvaluateSideEffectingArgumentsToTemps(
                         arrayAccess.Indices,

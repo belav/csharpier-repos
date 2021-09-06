@@ -11196,7 +11196,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            Debug.Assert(lengthOrCountProperty is{ });
+            Debug.Assert(lengthOrCountProperty is { });
 
             if (argIsIndex)
             {

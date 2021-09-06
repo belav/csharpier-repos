@@ -823,7 +823,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 public CasesComparer(TypeSymbol type)
                 {
                     _fac = ValueSetFactory.ForType(type);
-                    Debug.Assert(_fac is{ });
+                    Debug.Assert(_fac is { });
                 }
 
                 int IComparer<(ConstantValue value, LabelSymbol label)>.Compare(

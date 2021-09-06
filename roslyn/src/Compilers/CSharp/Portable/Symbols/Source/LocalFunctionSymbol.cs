@@ -442,7 +442,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public bool IsUnsafe => (_declarationModifiers & DeclarationModifiers.Unsafe) != 0;
 
-        internal bool IsExpressionBodied => Syntax is{ Body: null, ExpressionBody: object _ };
+        internal bool IsExpressionBodied => Syntax is { Body: null, ExpressionBody: object _ };
 
         internal override bool IsDeclaredReadOnly => false;
 

@@ -190,7 +190,7 @@ namespace System.CommandLine.Parsing
                 throw new ArgumentNullException(nameof(parseResult));
             }
 
-            return parseResult.FindResultFor(option) is{ };
+            return parseResult.FindResultFor(option) is { };
         }
 
         public static bool HasOption(this ParseResult parseResult, string alias)

@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // NOTE: currently it can be null if only private implementation type methods are compiled.
                 // There should be no caller of this method in that case.
-                Debug.Assert(_typeOpt is{ });
+                Debug.Assert(_typeOpt is { });
                 return _typeOpt;
             }
         }

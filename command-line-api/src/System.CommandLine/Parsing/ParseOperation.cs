@@ -140,7 +140,7 @@ namespace System.CommandLine.Parsing
 
             for (var i = 0; i < commandNode.Command.Arguments.Count; i++)
             {
-                if (commandNode.Command.Arguments[i] is{ } arg && !IsFull(arg))
+                if (commandNode.Command.Arguments[i] is { } arg && !IsFull(arg))
                 {
                     argument = arg;
                     break;

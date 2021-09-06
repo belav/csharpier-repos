@@ -139,7 +139,7 @@ namespace AutoMapper.Execution
             }
             var destinationType = destinationParameter.Type;
             var isCollection = destinationType.IsCollection();
-            var mustUseDestination = memberMap is{ MustUseDestination: true };
+            var mustUseDestination = memberMap is { MustUseDestination: true };
             var ifSourceNull =
                 memberMap == null
                     ? destinationParameter.IfNullElse(
