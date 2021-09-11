@@ -88,9 +88,10 @@ namespace Microsoft.Data.Sqlite
             {
                 case SQLITE_BLOB:
                     var bytes = GetBlob(ordinal)!;
-                    return bytes.Length == 16
-                        ? new Guid(bytes)
-                        : new Guid(Encoding.UTF8.GetString(bytes, 0, bytes.Length));
+                    return
+                        bytes.Length == 16
+                      ? new Guid(bytes)
+                      : new Guid(Encoding.UTF8.GetString(bytes, 0, bytes.Length));
 
                 default:
                     return new Guid(GetString(ordinal));

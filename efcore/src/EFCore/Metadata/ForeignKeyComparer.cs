@@ -55,12 +55,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 x?.PrincipalEntityType,
                 y?.PrincipalEntityType
             );
-            return result != 0
-                ? result
-                : EntityTypeFullNameComparer.Instance.Compare(
-                      x?.DeclaringEntityType,
-                      y?.DeclaringEntityType
-                  );
+            return
+                result != 0
+              ? result
+              : EntityTypeFullNameComparer.Instance.Compare(
+                    x?.DeclaringEntityType,
+                    y?.DeclaringEntityType
+                );
         }
 
         /// <summary>

@@ -25,9 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 value = Convert.ToBoolean(htmlHelper.ViewData.Model, CultureInfo.InvariantCulture);
             }
 
-            return htmlHelper.ViewData.ModelMetadata.IsNullableValueType
-                ? BooleanTemplateDropDownList(value)
-                : BooleanTemplateCheckbox(value ?? false);
+            return
+                htmlHelper.ViewData.ModelMetadata.IsNullableValueType
+              ? BooleanTemplateDropDownList(value)
+              : BooleanTemplateCheckbox(value ?? false);
         }
 
         private static IHtmlContent BooleanTemplateCheckbox(bool value)

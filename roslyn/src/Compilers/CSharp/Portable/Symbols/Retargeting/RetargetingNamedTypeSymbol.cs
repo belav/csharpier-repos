@@ -110,12 +110,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 var underlying = _underlyingType.EnumUnderlyingType;
-                return (object)underlying == null
-                    ? null
-                    : this.RetargetingTranslator.Retarget(
-                          underlying,
-                          RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                      ); // comes from field's signature.
+                return
+                    (object)underlying == null
+                  ? null
+                  : this.RetargetingTranslator.Retarget(
+                        underlying,
+                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                    ); // comes from field's signature.
             }
         }
 
@@ -428,12 +429,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 NamedTypeSymbol coClass = _underlyingType.ComImportCoClass;
-                return (object)coClass == null
-                    ? null
-                    : this.RetargetingTranslator.Retarget(
-                          coClass,
-                          RetargetOptions.RetargetPrimitiveTypesByName
-                      );
+                return
+                    (object)coClass == null
+                  ? null
+                  : this.RetargetingTranslator.Retarget(
+                        coClass,
+                        RetargetOptions.RetargetPrimitiveTypesByName
+                    );
             }
         }
 

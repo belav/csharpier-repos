@@ -35,10 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         {
             Check.NotNull(binaryExpression, nameof(binaryExpression));
 
-            return binaryExpression.OperatorType == ExpressionType.Add
-            && binaryExpression.Type == typeof(string)
-                ? " || "
-                : base.GetOperator(binaryExpression);
+            return
+                binaryExpression.OperatorType == ExpressionType.Add
+                && binaryExpression.Type == typeof(string)
+              ? " || "
+              : base.GetOperator(binaryExpression);
         }
 
         /// <summary>

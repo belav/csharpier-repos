@@ -1284,9 +1284,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return (IsTupleType || IsRecord)
-                    ? GetMembers().Select(m => m.Name)
-                    : this.declaration.MemberNames;
+                return
+                    (IsTupleType || IsRecord)
+                  ? GetMembers().Select(m => m.Name)
+                  : this.declaration.MemberNames;
             }
         }
 
@@ -1398,9 +1399,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 Debug.Assert(s_emptyTypeMembers.Count == 0);
-                return symbols.Count > 0
-                    ? symbols.ToDictionary(s => s.Name, StringOrdinalComparer.Instance)
-                    : s_emptyTypeMembers;
+                return
+                    symbols.Count > 0
+                  ? symbols.ToDictionary(s => s.Name, StringOrdinalComparer.Instance)
+                  : s_emptyTypeMembers;
             }
 
             finally
@@ -1557,9 +1559,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)
         {
             ImmutableArray<Symbol> result;
-            return GetEarlyAttributeDecodingMembersDictionary().TryGetValue(name, out result)
-                ? result
-                : ImmutableArray<Symbol>.Empty;
+            return
+                GetEarlyAttributeDecodingMembersDictionary().TryGetValue(name, out result)
+              ? result
+              : ImmutableArray<Symbol>.Empty;
         }
 
         private Dictionary<
@@ -5687,9 +5690,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal bool IsNullableEnabledForConstructorsAndInitializers(bool useStatic)
         {
             var membersAndInitializers = GetMembersAndInitializers();
-            return useStatic
-                ? membersAndInitializers.IsNullableEnabledForStaticConstructorsAndFields
-                : membersAndInitializers.IsNullableEnabledForInstanceConstructorsAndFields;
+            return
+                useStatic
+              ? membersAndInitializers.IsNullableEnabledForStaticConstructorsAndFields
+              : membersAndInitializers.IsNullableEnabledForInstanceConstructorsAndFields;
         }
 
         internal override void AddSynthesizedAttributes(

@@ -318,9 +318,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node) where T : SyntaxNode
         {
-            return node == null
-                ? SpecializedCollections.EmptyEnumerable<T>()
-                : node.AncestorsAndSelf().OfType<T>();
+            return
+                node == null
+              ? SpecializedCollections.EmptyEnumerable<T>()
+              : node.AncestorsAndSelf().OfType<T>();
         }
 
         private IDictionary<INamespaceOrTypeSymbol, IAliasSymbol> AliasMap

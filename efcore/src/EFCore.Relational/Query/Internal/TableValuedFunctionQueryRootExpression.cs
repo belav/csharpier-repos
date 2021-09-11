@@ -71,9 +71,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 changed |= argument != newArgument;
             }
 
-            return changed
-                ? new TableValuedFunctionQueryRootExpression(EntityType, Function, arguments)
-                : this;
+            return
+                changed
+              ? new TableValuedFunctionQueryRootExpression(EntityType, Function, arguments)
+              : this;
         }
 
         /// <summary>

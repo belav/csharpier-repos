@@ -159,16 +159,17 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 InMemoryQueryExpression queryExpression,
                 ProjectionBindingExpression projectionBindingExpression
             ) {
-                return projectionBindingExpression.ProjectionMember != null
-                    ? queryExpression.GetMappedProjection(
-                              projectionBindingExpression.ProjectionMember
-                          )
-                          .GetConstantValue<object>()
-                    : (
-                          projectionBindingExpression.Index != null
-                              ? (object)projectionBindingExpression.Index
-                              : projectionBindingExpression.IndexMap!
-                      );
+                return
+                    projectionBindingExpression.ProjectionMember != null
+                  ? queryExpression.GetMappedProjection(
+                            projectionBindingExpression.ProjectionMember
+                        )
+                        .GetConstantValue<object>()
+                  : (
+                        projectionBindingExpression.Index != null
+                            ? (object)projectionBindingExpression.Index
+                            : projectionBindingExpression.IndexMap!
+                    );
             }
         }
     }

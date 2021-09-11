@@ -227,18 +227,20 @@ namespace System.Net.Http
             HttpResponseMessage response,
             bool isProxyAuth
         ) {
-            return isProxyAuth
-                ? response.StatusCode == HttpStatusCode.ProxyAuthenticationRequired
-                : response.StatusCode == HttpStatusCode.Unauthorized;
+            return
+                isProxyAuth
+              ? response.StatusCode == HttpStatusCode.ProxyAuthenticationRequired
+              : response.StatusCode == HttpStatusCode.Unauthorized;
         }
 
         private static HttpHeaderValueCollection<AuthenticationHeaderValue> GetResponseAuthenticationHeaderValues(
             HttpResponseMessage response,
             bool isProxyAuth
         ) {
-            return isProxyAuth
-                ? response.Headers.ProxyAuthenticate
-                : response.Headers.WwwAuthenticate;
+            return
+                isProxyAuth
+              ? response.Headers.ProxyAuthenticate
+              : response.Headers.WwwAuthenticate;
         }
 
         private static void SetRequestAuthenticationHeaderValue(
@@ -313,9 +315,10 @@ namespace System.Net.Http
             HttpConnectionPool pool,
             CancellationToken cancellationToken
         ) {
-            return isProxyAuth
-                ? pool.SendWithRetryAsync(request, async, doRequestAuth, cancellationToken)
-                : pool.SendWithProxyAuthAsync(request, async, doRequestAuth, cancellationToken);
+            return
+                isProxyAuth
+              ? pool.SendWithRetryAsync(request, async, doRequestAuth, cancellationToken)
+              : pool.SendWithProxyAuthAsync(request, async, doRequestAuth, cancellationToken);
         }
 
         private static async ValueTask<HttpResponseMessage> SendWithAuthAsync(

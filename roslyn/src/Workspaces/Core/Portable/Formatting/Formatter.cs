@@ -132,9 +132,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             CancellationToken cancellationToken = default
         ) {
             var formattingService = document.GetLanguageService<IFormattingService>();
-            return formattingService == null
-                ? SpecializedTasks.FromResult(document)
-                : formattingService.FormatAsync(document, spans, options, cancellationToken);
+            return
+                formattingService == null
+              ? SpecializedTasks.FromResult(document)
+              : formattingService.FormatAsync(document, spans, options, cancellationToken);
         }
 
         internal static async Task<Document> FormatAsync(
@@ -365,9 +366,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rules,
                 cancellationToken
             );
-            return formattingResult == null
-                ? node
-                : formattingResult.GetFormattedRoot(cancellationToken);
+            return
+                formattingResult == null
+              ? node
+              : formattingResult.GetFormattedRoot(cancellationToken);
         }
 
         internal static IFormattingResult? GetFormattingResult(
@@ -502,9 +504,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rules,
                 cancellationToken
             );
-            return formattingResult == null
-                ? SpecializedCollections.EmptyList<TextChange>()
-                : formattingResult.GetTextChanges(cancellationToken);
+            return
+                formattingResult == null
+              ? SpecializedCollections.EmptyList<TextChange>()
+              : formattingResult.GetTextChanges(cancellationToken);
         }
 
         /// <summary>

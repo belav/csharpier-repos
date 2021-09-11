@@ -64,9 +64,10 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 IValueProviderParameterBinding valueProviderParameterBinding =
                     InnerBinding as IValueProviderParameterBinding;
-                return valueProviderParameterBinding != null
-                    ? valueProviderParameterBinding.ValueProviderFactories
-                    : Enumerable.Empty<ValueProviderFactory>();
+                return
+                    valueProviderParameterBinding != null
+                  ? valueProviderParameterBinding.ValueProviderFactories
+                  : Enumerable.Empty<ValueProviderFactory>();
             }
         }
 

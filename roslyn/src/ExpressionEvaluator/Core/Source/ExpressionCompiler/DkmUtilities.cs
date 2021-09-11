@@ -127,9 +127,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 }
                 builder.Add(block);
             }
-            return builder == null
-                ? ImmutableArray<MetadataBlock>.Empty
-                : builder.ToImmutableAndFree();
+            return
+                builder == null
+              ? ImmutableArray<MetadataBlock>.Empty
+              : builder.ToImmutableAndFree();
         }
 
         internal static ImmutableArray<AssemblyReaders> MakeAssemblyReaders(

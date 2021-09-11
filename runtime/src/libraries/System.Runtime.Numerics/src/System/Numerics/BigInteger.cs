@@ -949,17 +949,19 @@ namespace System.Numerics
             if (trivialLeft)
             {
                 Debug.Assert(right._bits != null);
-                return left._sign != 0
-                    ? BigIntegerCalculator.Gcd(right._bits, NumericsHelpers.Abs(left._sign))
-                    : new BigInteger(right._bits, null, negative: false);
+                return
+                    left._sign != 0
+                  ? BigIntegerCalculator.Gcd(right._bits, NumericsHelpers.Abs(left._sign))
+                  : new BigInteger(right._bits, null, negative: false);
             }
 
             if (trivialRight)
             {
                 Debug.Assert(left._bits != null);
-                return right._sign != 0
-                    ? BigIntegerCalculator.Gcd(left._bits, NumericsHelpers.Abs(right._sign))
-                    : new BigInteger(left._bits, null, negative: false);
+                return
+                    right._sign != 0
+                  ? BigIntegerCalculator.Gcd(left._bits, NumericsHelpers.Abs(right._sign))
+                  : new BigInteger(left._bits, null, negative: false);
             }
 
             Debug.Assert(left._bits != null && right._bits != null);

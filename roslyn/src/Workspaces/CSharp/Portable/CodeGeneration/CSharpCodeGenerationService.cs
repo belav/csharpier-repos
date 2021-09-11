@@ -775,23 +775,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
             else if (destinationMember is LocalFunctionStatementSyntax localFunctionDeclaration)
             {
-                return (localFunctionDeclaration.Body == null)
-                    ? destinationMember
-                    : Cast<TDeclarationNode>(
-                          localFunctionDeclaration.AddBodyStatements(
-                              StatementGenerator.GenerateStatements(statements).ToArray()
-                          )
-                      );
+                return
+                    (localFunctionDeclaration.Body == null)
+                  ? destinationMember
+                  : Cast<TDeclarationNode>(
+                        localFunctionDeclaration.AddBodyStatements(
+                            StatementGenerator.GenerateStatements(statements).ToArray()
+                        )
+                    );
             }
             else if (destinationMember is AccessorDeclarationSyntax accessorDeclaration)
             {
-                return (accessorDeclaration.Body == null)
-                    ? destinationMember
-                    : Cast<TDeclarationNode>(
-                          accessorDeclaration.AddBodyStatements(
-                              StatementGenerator.GenerateStatements(statements).ToArray()
-                          )
-                      );
+                return
+                    (accessorDeclaration.Body == null)
+                  ? destinationMember
+                  : Cast<TDeclarationNode>(
+                        accessorDeclaration.AddBodyStatements(
+                            StatementGenerator.GenerateStatements(statements).ToArray()
+                        )
+                    );
             }
             else if (destinationMember is CompilationUnitSyntax compilationUnit && options is null)
             {
@@ -924,9 +926,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options
         ) {
-            return destination == CodeGenerationDestination.EnumType
-                ? EnumMemberGenerator.GenerateEnumMemberDeclaration(field, null, options)
-                : (SyntaxNode)FieldGenerator.GenerateFieldDeclaration(field, options);
+            return
+                destination == CodeGenerationDestination.EnumType
+              ? EnumMemberGenerator.GenerateEnumMemberDeclaration(field, null, options)
+              : (SyntaxNode)FieldGenerator.GenerateFieldDeclaration(field, options);
         }
 
         public override SyntaxNode CreateMethodDeclaration(

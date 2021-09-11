@@ -1024,20 +1024,21 @@ namespace Microsoft.EntityFrameworkCore
             EntityState entityState,
             CancellationToken cancellationToken
         ) {
-            return entry.EntityState == EntityState.Detached
-                ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
-                      entry,
-                      entityState,
-                      entityState,
-                      forceStateWhenUnknownKey: true,
-                      cancellationToken: cancellationToken
-                  )
-                : entry.SetEntityStateAsync(
-                      entityState,
-                      acceptChanges: true,
-                      forceStateWhenUnknownKey: entityState,
-                      cancellationToken: cancellationToken
-                  );
+            return
+                entry.EntityState == EntityState.Detached
+              ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
+                    entry,
+                    entityState,
+                    entityState,
+                    forceStateWhenUnknownKey: true,
+                    cancellationToken: cancellationToken
+                )
+              : entry.SetEntityStateAsync(
+                    entityState,
+                    acceptChanges: true,
+                    forceStateWhenUnknownKey: entityState,
+                    cancellationToken: cancellationToken
+                );
         }
 
         /// <summary>

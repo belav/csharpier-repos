@@ -13,9 +13,10 @@ namespace System.Configuration
                     PrivilegedConfigurationManager.GetSection(
                         BaseConfigurationRecord.ReservedSectionProtectedConfiguration
                     ) as ProtectedConfigurationSection;
-                return config == null
-                    ? new ProtectedConfigurationProviderCollection()
-                    : config.GetAllProviders();
+                return
+                    config == null
+                  ? new ProtectedConfigurationProviderCollection()
+                  : config.GetAllProviders();
             }
         }
 

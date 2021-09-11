@@ -292,9 +292,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 SynthesizedSealedPropertyAccessor synthesized =
                     sourceProperty.SynthesizedSealedAccessorOpt;
-                return (object)synthesized != null && synthesized.MethodKind == targetMethodKind
-                    ? synthesized.GetCciAdapter()
-                    : null;
+                return
+                    (object)synthesized != null && synthesized.MethodKind == targetMethodKind
+                  ? synthesized.GetCciAdapter()
+                  : null;
             }
 
             return null;

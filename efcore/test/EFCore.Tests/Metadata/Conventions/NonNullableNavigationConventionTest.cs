@@ -176,9 +176,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 relationshipBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
             );
             CreateNotNullNavigationConvention().ProcessNavigationAdded(navigation.Builder, context);
-            return context.ShouldStopProcessing()
-                ? (Navigation)context.Result?.Metadata
-                : navigation;
+            return
+                context.ShouldStopProcessing()
+              ? (Navigation)context.Result?.Metadata
+              : navigation;
         }
 
         private NonNullableNavigationConvention CreateNotNullNavigationConvention() =>

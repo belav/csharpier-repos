@@ -313,13 +313,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             LanguageVersion requiredVersion = feature.RequiredVersion();
-            return requiredVersion == LanguageVersion.Preview.MapSpecifiedToEffectiveVersion()
-                ? new CSDiagnosticInfo(ErrorCode.ERR_FeatureInPreview, feature.Localize())
-                : new CSDiagnosticInfo(
-                      availableVersion.GetErrorCode(),
-                      feature.Localize(),
-                      new CSharpRequiredLanguageVersion(requiredVersion)
-                  );
+            return
+                requiredVersion == LanguageVersion.Preview.MapSpecifiedToEffectiveVersion()
+              ? new CSDiagnosticInfo(ErrorCode.ERR_FeatureInPreview, feature.Localize())
+              : new CSDiagnosticInfo(
+                    availableVersion.GetErrorCode(),
+                    feature.Localize(),
+                    new CSharpRequiredLanguageVersion(requiredVersion)
+                );
         }
 
         internal static LanguageVersion RequiredVersion(this MessageID feature)

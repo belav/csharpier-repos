@@ -92,9 +92,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             int slot;
-            return TryGetVariable(new VariableIdentifier(symbol, containingSlot), out slot)
-                ? slot
-                : -1;
+            return
+                TryGetVariable(new VariableIdentifier(symbol, containingSlot), out slot)
+              ? slot
+              : -1;
         }
 
         protected virtual bool IsEmptyStructType(TypeSymbol type)
@@ -244,9 +245,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BoundKind.ThisReference:
                 case BoundKind.BaseReference:
-                    return (object)MethodThisParameter != null
-                        ? GetOrCreateSlot(MethodThisParameter)
-                        : -1;
+                    return
+                        (object)MethodThisParameter != null
+                      ? GetOrCreateSlot(MethodThisParameter)
+                      : -1;
                 case BoundKind.Local:
                     return GetOrCreateSlot(((BoundLocal)node).LocalSymbol);
                 case BoundKind.Parameter:

@@ -651,9 +651,10 @@ namespace System.Net.Http
 
         private static string GetIdentityIfDefaultCredentialsUsed(bool defaultCredentialsUsed)
         {
-            return defaultCredentialsUsed
-                ? CurrentUserIdentityProvider.GetIdentity()
-                : string.Empty;
+            return
+                defaultCredentialsUsed
+              ? CurrentUserIdentityProvider.GetIdentity()
+              : string.Empty;
         }
 
         internal readonly struct HttpConnectionKey : IEquatable<HttpConnectionKey>

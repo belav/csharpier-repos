@@ -481,9 +481,10 @@ namespace System.Reflection.Metadata.Tests
         private string GetStringHeapValue(string heapValue, int offset)
         {
             int heapEnd = heapValue.IndexOf('\0');
-            return (heapEnd < 0)
-                ? heapValue.Substring(offset)
-                : heapValue.Substring(offset, heapEnd - offset);
+            return
+                (heapEnd < 0)
+              ? heapValue.Substring(offset)
+              : heapValue.Substring(offset, heapEnd - offset);
         }
 
         [Fact]

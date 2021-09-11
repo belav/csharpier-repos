@@ -134,9 +134,10 @@ namespace System.IO
         ) {
             ValidateBufferArguments(buffer, offset, count);
             EnsureNotClosed();
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled<int>(cancellationToken)
-                : Task.FromResult(ReadBuffer(new Span<byte>(buffer, offset, count)));
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled<int>(cancellationToken)
+              : Task.FromResult(ReadBuffer(new Span<byte>(buffer, offset, count)));
         }
 
 #if !NETFRAMEWORK && !NETSTANDARD2_0
@@ -145,9 +146,10 @@ namespace System.IO
             CancellationToken cancellationToken = default(CancellationToken)
         ) {
             EnsureNotClosed();
-            return cancellationToken.IsCancellationRequested
-                ? ValueTask.FromCanceled<int>(cancellationToken)
-                : new ValueTask<int>(ReadBuffer(buffer.Span));
+            return
+                cancellationToken.IsCancellationRequested
+              ? ValueTask.FromCanceled<int>(cancellationToken)
+              : new ValueTask<int>(ReadBuffer(buffer.Span));
         }
 #endif
 
@@ -183,9 +185,10 @@ namespace System.IO
         ) {
             ValidateCopyToArguments(destination, bufferSize);
             EnsureNotClosed();
-            return _content.Length > _position
-                ? destination.WriteAsync(_content.Slice(_position), cancellationToken).AsTask()
-                : Task.CompletedTask;
+            return
+                _content.Length > _position
+              ? destination.WriteAsync(_content.Slice(_position), cancellationToken).AsTask()
+              : Task.CompletedTask;
         }
 #endif
 

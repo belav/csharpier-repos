@@ -90,10 +90,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     FindReferencesCascadeDirection.Up
                 );
 
-                return overriddenMember == null
-                    ? interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
-                    : interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
-                          .Concat(overriddenMemberWithDirection);
+                return
+                    overriddenMember == null
+                  ? interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
+                  : interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
+                        .Concat(overriddenMemberWithDirection);
             }
         }
 
@@ -111,9 +112,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
                 // the only accessor method referenced in a foreach-statement is the .Current's
                 // get-accessor
-                return symbols.CurrentProperty.GetMethod == null
-                    ? ImmutableArray<IMethodSymbol>.Empty
-                    : ImmutableArray.Create(symbols.CurrentProperty.GetMethod);
+                return
+                    symbols.CurrentProperty.GetMethod == null
+                  ? ImmutableArray<IMethodSymbol>.Empty
+                  : ImmutableArray.Create(symbols.CurrentProperty.GetMethod);
             }
 
             if (semanticFacts.IsWrittenTo(model, node, cancellationToken))
@@ -145,9 +147,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 );
                 var inStructuredTrivia = node.IsPartOfStructuredTrivia();
 
-                return inNameOf || inStructuredTrivia || property.GetMethod == null
-                    ? ImmutableArray<IMethodSymbol>.Empty
-                    : ImmutableArray.Create(property.GetMethod);
+                return
+                    inNameOf || inStructuredTrivia || property.GetMethod == null
+                  ? ImmutableArray<IMethodSymbol>.Empty
+                  : ImmutableArray.Create(property.GetMethod);
             }
         }
     }

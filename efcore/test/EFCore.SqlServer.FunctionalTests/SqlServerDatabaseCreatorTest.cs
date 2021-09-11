@@ -306,14 +306,13 @@ namespace Microsoft.EntityFrameworkCore
             bool ambientTransaction,
             bool file
         ) {
-            return TestEnvironment.IsSqlAzure
-                ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
-                      (true, async, ambientTransaction, file),
-                      Creates_physical_database_and_schema_test
-                  )
-                : Creates_physical_database_and_schema_test(
-                      (true, async, ambientTransaction, file)
-                  );
+            return
+                TestEnvironment.IsSqlAzure
+              ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+                    (true, async, ambientTransaction, file),
+                    Creates_physical_database_and_schema_test
+                )
+              : Creates_physical_database_and_schema_test((true, async, ambientTransaction, file));
         }
 
         [ConditionalTheory]
@@ -349,14 +348,13 @@ namespace Microsoft.EntityFrameworkCore
             bool ambientTransaction,
             bool file
         ) {
-            return TestEnvironment.IsSqlAzure
-                ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
-                      (false, async, ambientTransaction, file),
-                      Creates_physical_database_and_schema_test
-                  )
-                : Creates_physical_database_and_schema_test(
-                      (false, async, ambientTransaction, file)
-                  );
+            return
+                TestEnvironment.IsSqlAzure
+              ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+                    (false, async, ambientTransaction, file),
+                    Creates_physical_database_and_schema_test
+                )
+              : Creates_physical_database_and_schema_test((false, async, ambientTransaction, file));
         }
 
         private static async Task Creates_physical_database_and_schema_test(

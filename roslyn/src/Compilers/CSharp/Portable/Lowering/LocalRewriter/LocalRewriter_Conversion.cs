@@ -542,28 +542,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
             }
 
-            return oldNodeOpt != null
-                ? oldNodeOpt.Update(
-                      rewrittenOperand,
-                      conversion,
-                      isBaseConversion: oldNodeOpt.IsBaseConversion,
-                      @checked: @checked,
-                      explicitCastInCode: explicitCastInCode,
-                      conversionGroupOpt: oldNodeOpt.ConversionGroupOpt,
-                      constantValueOpt: constantValueOpt,
-                      type: rewrittenType
-                  )
-                : new BoundConversion(
-                      syntax,
-                      rewrittenOperand,
-                      conversion,
-                      isBaseConversion: false,
-                      @checked: @checked,
-                      explicitCastInCode: explicitCastInCode,
-                      conversionGroupOpt: null, // BoundConversion.ConversionGroup is not used in lowered tree
-                      constantValueOpt: constantValueOpt,
-                      type: rewrittenType
-                  );
+            return
+                oldNodeOpt != null
+              ? oldNodeOpt.Update(
+                    rewrittenOperand,
+                    conversion,
+                    isBaseConversion: oldNodeOpt.IsBaseConversion,
+                    @checked: @checked,
+                    explicitCastInCode: explicitCastInCode,
+                    conversionGroupOpt: oldNodeOpt.ConversionGroupOpt,
+                    constantValueOpt: constantValueOpt,
+                    type: rewrittenType
+                )
+              : new BoundConversion(
+                    syntax,
+                    rewrittenOperand,
+                    conversion,
+                    isBaseConversion: false,
+                    @checked: @checked,
+                    explicitCastInCode: explicitCastInCode,
+                    conversionGroupOpt: null, // BoundConversion.ConversionGroup is not used in lowered tree
+                    constantValueOpt: constantValueOpt,
+                    type: rewrittenType
+                );
         }
 
         // Determine if the conversion can actually overflow at runtime.  If not, no need to generate a checked instruction.

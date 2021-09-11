@@ -84,9 +84,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(match, nameof(match));
             Check.NotNull(pattern, nameof(pattern));
 
-            return match != Match || pattern != Pattern || escapeChar != EscapeChar
-                ? new LikeExpression(match, pattern, escapeChar, TypeMapping)
-                : this;
+            return
+                match != Match || pattern != Pattern || escapeChar != EscapeChar
+              ? new LikeExpression(match, pattern, escapeChar, TypeMapping)
+              : this;
         }
 
         /// <inheritdoc />

@@ -105,14 +105,15 @@ namespace Nerdbank.Streams
         /// <param name="sequence">The sequence to convert.</param>
         public static implicit operator ReadOnlySequence<T>(Sequence<T> sequence)
         {
-            return sequence.first != null
-                ? new ReadOnlySequence<T>(
-                      sequence.first,
-                      sequence.first.Start,
-                      sequence.last,
-                      sequence.last.End
-                  )
-                : ReadOnlySequence<T>.Empty;
+            return
+                sequence.first != null
+              ? new ReadOnlySequence<T>(
+                    sequence.first,
+                    sequence.first.Start,
+                    sequence.last,
+                    sequence.last.End
+                )
+              : ReadOnlySequence<T>.Empty;
         }
 
         /// <summary>

@@ -124,10 +124,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return null;
                 }
 
-                return info.Type == null
-                || info.Type.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
-                    ? info.Type
-                    : info.ConvertedType;
+                return
+                    info.Type == null
+                    || info.Type.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
+                  ? info.Type
+                  : info.ConvertedType;
             }
 
             protected override Tuple<SyntaxNode, SyntaxNode> GetFlowAnalysisNodeRange()

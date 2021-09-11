@@ -175,26 +175,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
                 {
                     // We want to see usings formatted as simply "Using", prefaced by the namespace they are in
                     var enclosingScopeString = GetEnclosingScopeString(node, semanticModel, Format);
-                    return string.IsNullOrEmpty(enclosingScopeString)
-                        ? "Using"
-                        : enclosingScopeString + " Using";
+                    return
+                        string.IsNullOrEmpty(enclosingScopeString)
+                      ? "Using"
+                      : enclosingScopeString + " Using";
                 }
 
                 case SyntaxKind.ExternAliasDirective:
                 {
                     // We want to see aliases formatted as "Alias", prefaced by their enclosing scope, if any
                     var enclosingScopeString = GetEnclosingScopeString(node, semanticModel, Format);
-                    return string.IsNullOrEmpty(enclosingScopeString)
-                        ? "Alias"
-                        : enclosingScopeString + " Alias";
+                    return
+                        string.IsNullOrEmpty(enclosingScopeString)
+                      ? "Alias"
+                      : enclosingScopeString + " Alias";
                 }
 
                 default:
                 {
                     var symbol = semanticModel.GetDeclaredSymbol(node);
-                    return symbol != null
-                        ? symbol.ToDisplayString(Format)
-                        : FeaturesResources.paren_Unknown_paren;
+                    return
+                        symbol != null
+                      ? symbol.ToDisplayString(Format)
+                      : FeaturesResources.paren_Unknown_paren;
                 }
             }
         }

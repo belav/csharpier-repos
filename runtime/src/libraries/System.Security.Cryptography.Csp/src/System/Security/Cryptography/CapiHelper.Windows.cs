@@ -206,10 +206,11 @@ namespace Internal.NativeCrypto
                 wszUpgrade = UpgradeDSS(dwType, providerNameString);
             }
 
-            return wszUpgrade != null
-                ? wszUpgrade
-                : // Overwrite the provider name with the upgraded provider name
-                  providerNameString;
+            return
+                wszUpgrade != null
+              ? wszUpgrade
+              : // Overwrite the provider name with the upgraded provider name
+                providerNameString;
         }
 
         /// <summary>

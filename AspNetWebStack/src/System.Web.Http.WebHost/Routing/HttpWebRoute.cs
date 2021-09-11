@@ -150,9 +150,10 @@ namespace System.Web.Http.WebHost.Routing
                     requestContext.HttpContext.GetOrCreateHttpRequestMessage();
                 IHttpVirtualPathData virtualPathData = HttpRoute.GetVirtualPath(request, values);
 
-                return virtualPathData == null
-                    ? null
-                    : new VirtualPathData(this, virtualPathData.VirtualPath);
+                return
+                    virtualPathData == null
+                  ? null
+                  : new VirtualPathData(this, virtualPathData.VirtualPath);
             }
         }
 

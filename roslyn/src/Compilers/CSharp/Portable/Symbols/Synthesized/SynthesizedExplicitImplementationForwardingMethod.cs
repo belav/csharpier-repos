@@ -43,9 +43,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return _implementingMethod.IsAccessor()
-                    ? _implementingMethod.MethodKind
-                    : MethodKind.ExplicitInterfaceImplementation;
+                return
+                    _implementingMethod.IsAccessor()
+                  ? _implementingMethod.MethodKind
+                  : MethodKind.ExplicitInterfaceImplementation;
             }
         }
     }

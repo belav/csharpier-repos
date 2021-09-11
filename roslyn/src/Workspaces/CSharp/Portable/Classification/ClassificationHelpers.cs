@@ -48,9 +48,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             }
             else if (IsStringToken(token))
             {
-                return IsVerbatimStringToken(token)
-                    ? ClassificationTypeNames.VerbatimStringLiteral
-                    : ClassificationTypeNames.StringLiteral;
+                return
+                    IsVerbatimStringToken(token)
+                  ? ClassificationTypeNames.VerbatimStringLiteral
+                  : ClassificationTypeNames.StringLiteral;
             }
             else if (token.Kind() == SyntaxKind.NumericLiteralToken)
             {
@@ -220,9 +221,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 token.Parent is MethodDeclarationSyntax methodDeclaration
                 && methodDeclaration.Identifier == token
             ) {
-                return IsExtensionMethod(methodDeclaration)
-                    ? ClassificationTypeNames.ExtensionMethodName
-                    : ClassificationTypeNames.MethodName;
+                return
+                    IsExtensionMethod(methodDeclaration)
+                  ? ClassificationTypeNames.ExtensionMethodName
+                  : ClassificationTypeNames.MethodName;
             }
             else if (
                 token.Parent is ConstructorDeclarationSyntax constructorDeclaration

@@ -61,9 +61,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
             INamedTypeSymbol typeSymbol,
             CompilationOptions compilationOptions
         ) {
-            return typeSymbol.ContainingNamespace.IsGlobalNamespace
-                ? string.Empty
-                : typeSymbol.ContainingNamespace.ToDisplayString();
+            return
+                typeSymbol.ContainingNamespace.IsGlobalNamespace
+              ? string.Empty
+              : typeSymbol.ContainingNamespace.ToDisplayString();
         }
 
         internal override bool IsExtractableMember(ISymbol m) =>

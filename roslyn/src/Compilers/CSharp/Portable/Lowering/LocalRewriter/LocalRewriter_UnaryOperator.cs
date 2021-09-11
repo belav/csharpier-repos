@@ -198,24 +198,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return (oldNode != null)
-                ? oldNode.Update(
-                      kind,
-                      loweredOperand,
-                      oldNode.ConstantValueOpt,
-                      method,
-                      oldNode.ResultKind,
-                      type
-                  )
-                : new BoundUnaryOperator(
-                      syntax,
-                      kind,
-                      loweredOperand,
-                      null,
-                      method,
-                      LookupResultKind.Viable,
-                      type
-                  );
+            return
+                (oldNode != null)
+              ? oldNode.Update(
+                    kind,
+                    loweredOperand,
+                    oldNode.ConstantValueOpt,
+                    method,
+                    oldNode.ResultKind,
+                    type
+                )
+              : new BoundUnaryOperator(
+                    syntax,
+                    kind,
+                    loweredOperand,
+                    null,
+                    method,
+                    LookupResultKind.Viable,
+                    type
+                );
         }
 
         private BoundExpression LowerLiftedUnaryOperator(

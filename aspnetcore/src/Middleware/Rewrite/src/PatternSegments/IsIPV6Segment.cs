@@ -16,10 +16,11 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             {
                 return "off";
             }
-            return context.HttpContext.Connection.RemoteIpAddress.AddressFamily
-            == AddressFamily.InterNetworkV6
-                ? "on"
-                : "off";
+            return
+                context.HttpContext.Connection.RemoteIpAddress.AddressFamily
+                == AddressFamily.InterNetworkV6
+              ? "on"
+              : "off";
         }
     }
 }

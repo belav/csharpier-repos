@@ -424,9 +424,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.ContainingSymbol?.OriginalDefinition
                 )
             );
-            return newOwner.IsDefinition
-                ? this
-                : new SubstitutedNestedErrorTypeSymbol(newOwner, this);
+            return
+                newOwner.IsDefinition
+              ? this
+              : new SubstitutedNestedErrorTypeSymbol(newOwner, this);
         }
 
         internal sealed override bool ShouldAddWinRTMembers

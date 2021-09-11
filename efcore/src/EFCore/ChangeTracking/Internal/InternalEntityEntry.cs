@@ -1405,9 +1405,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             var comparer = property.GetValueComparer();
 
-            return comparer != null
-                ? (Func<object?, object?, bool>)((l, r) => comparer.Equals(l, r))
-                : (l, r) => Equals(l, r);
+            return
+                comparer != null
+              ? (Func<object?, object?, bool>)((l, r) => comparer.Equals(l, r))
+              : (l, r) => Equals(l, r);
         }
 
         /// <summary>

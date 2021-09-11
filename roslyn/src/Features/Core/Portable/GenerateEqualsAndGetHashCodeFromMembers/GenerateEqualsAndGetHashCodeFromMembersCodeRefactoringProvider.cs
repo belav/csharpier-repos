@@ -360,25 +360,26 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             bool withDialog,
             CancellationToken cancellationToken
         ) {
-            return withDialog
-                ? CreateCodeActionWithDialogAsync(
-                      document,
-                      typeDeclaration,
-                      containingType,
-                      members,
-                      generateEquals,
-                      generateGetHashCode,
-                      cancellationToken
-                  )
-                : CreateCodeActionWithoutDialogAsync(
-                      document,
-                      typeDeclaration,
-                      containingType,
-                      members,
-                      generateEquals,
-                      generateGetHashCode,
-                      cancellationToken
-                  );
+            return
+                withDialog
+              ? CreateCodeActionWithDialogAsync(
+                    document,
+                    typeDeclaration,
+                    containingType,
+                    members,
+                    generateEquals,
+                    generateGetHashCode,
+                    cancellationToken
+                )
+              : CreateCodeActionWithoutDialogAsync(
+                    document,
+                    typeDeclaration,
+                    containingType,
+                    members,
+                    generateEquals,
+                    generateGetHashCode,
+                    cancellationToken
+                );
         }
 
         private async Task<CodeAction> CreateCodeActionWithDialogAsync(

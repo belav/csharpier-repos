@@ -137,14 +137,16 @@ namespace System.Formats.Cbor
                 case CborMajorType.NegativeInteger:
                     return CborReaderState.NegativeInteger;
                 case CborMajorType.ByteString:
-                    return (initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
-                        ? CborReaderState.StartIndefiniteLengthByteString
-                        : CborReaderState.ByteString;
+                    return
+                        (initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
+                      ? CborReaderState.StartIndefiniteLengthByteString
+                      : CborReaderState.ByteString;
 
                 case CborMajorType.TextString:
-                    return (initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
-                        ? CborReaderState.StartIndefiniteLengthTextString
-                        : CborReaderState.TextString;
+                    return
+                        (initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
+                      ? CborReaderState.StartIndefiniteLengthTextString
+                      : CborReaderState.TextString;
 
                 case CborMajorType.Array:
                     return CborReaderState.StartArray;

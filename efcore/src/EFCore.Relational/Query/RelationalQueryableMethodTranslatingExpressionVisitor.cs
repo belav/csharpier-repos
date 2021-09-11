@@ -335,9 +335,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             var projection = _sqlTranslator.TranslateAverage(translatedSelector);
-            return projection != null
-                ? AggregateResultShaper(source, projection, throwWhenEmpty: true, resultType)
-                : null;
+            return
+                projection != null
+              ? AggregateResultShaper(source, projection, throwWhenEmpty: true, resultType)
+              : null;
         }
 
         /// <inheritdoc />
@@ -348,11 +349,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
-            return source.ShaperExpression.Type != resultType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, resultType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != resultType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, resultType)
+                )
+              : source;
         }
 
         /// <inheritdoc />
@@ -554,11 +556,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1))!);
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         /// <inheritdoc />
@@ -681,9 +684,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return null;
                     }
 
-                    return translation.Type == expression.Type
-                        ? (Expression)translation
-                        : Expression.Convert(translation, expression.Type);
+                    return
+                        translation.Type == expression.Type
+                      ? (Expression)translation
+                      : Expression.Convert(translation, expression.Type);
             }
         }
 
@@ -875,11 +879,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             selectExpression.ReverseOrderings();
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1))!);
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         /// <inheritdoc />
@@ -1301,11 +1306,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 TranslateExpression(Expression.Constant(_subquery ? 1 : 2))!
             );
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         /// <inheritdoc />
@@ -1376,9 +1382,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             var projection = _sqlTranslator.TranslateSum(translatedSelector);
-            return projection != null
-                ? AggregateResultShaper(source, projection, throwWhenEmpty: false, resultType)
-                : null;
+            return
+                projection != null
+              ? AggregateResultShaper(source, projection, throwWhenEmpty: false, resultType)
+              : null;
         }
 
         /// <inheritdoc />
@@ -1593,10 +1600,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is EntityShaperExpression
-                || extensionExpression is ShapedQueryExpression
-                    ? extensionExpression
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is EntityShaperExpression
+                    || extensionExpression is ShapedQueryExpression
+                  ? extensionExpression
+                  : base.VisitExtension(extensionExpression);
             }
 
             private Expression? TryExpand(Expression? source, MemberIdentity member)
@@ -1911,9 +1919,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 case EntityShaperExpression entityShaperExpression1
                       when shaper2 is EntityShaperExpression entityShaperExpression2:
-                    return entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
-                        ? entityShaperExpression1.MakeNullable(makeNullable)
-                        : entityShaperExpression1;
+                    return
+                        entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
+                      ? entityShaperExpression1.MakeNullable(makeNullable)
+                      : entityShaperExpression1;
 
                 case NewExpression newExpression1 when shaper2 is NewExpression newExpression2:
                     var newArguments = new Expression[newExpression1.Arguments.Count];

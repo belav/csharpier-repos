@@ -196,9 +196,10 @@ namespace System
             long startTicks = start._ticks;
             long endTicks = end._ticks;
 
-            return startTicks <= endTicks
-                ? (startTicks <= _ticks && endTicks > _ticks)
-                : (startTicks <= _ticks || endTicks > _ticks);
+            return
+                startTicks <= endTicks
+              ? (startTicks <= _ticks && endTicks > _ticks)
+              : (startTicks <= _ticks || endTicks > _ticks);
         }
 
         /// <summary>

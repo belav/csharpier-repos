@@ -420,9 +420,10 @@ namespace System.Diagnostics.Tracing
                 null,
                 flags
             );
-            return (manifestBytes == null)
-                ? null
-                : Encoding.UTF8.GetString(manifestBytes, 0, manifestBytes.Length);
+            return
+                (manifestBytes == null)
+              ? null
+              : Encoding.UTF8.GetString(manifestBytes, 0, manifestBytes.Length);
         }
 
         // EventListener support

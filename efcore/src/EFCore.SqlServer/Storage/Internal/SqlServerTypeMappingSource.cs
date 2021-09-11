@@ -331,11 +331,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
                     if (size == null && storeTypeName == null)
                     {
-                        return isAnsi
-                            ? isFixedLength ? _fixedLengthAnsiString : _variableLengthMaxAnsiString
-                            : isFixedLength
-                                ? _fixedLengthUnicodeString
-                                : _variableLengthMaxUnicodeString;
+                        return
+                            isAnsi
+                          ? isFixedLength ? _fixedLengthAnsiString : _variableLengthMaxAnsiString
+                          : isFixedLength
+                              ? _fixedLengthUnicodeString
+                              : _variableLengthMaxUnicodeString;
                     }
 
                     return new SqlServerStringTypeMapping(
@@ -363,15 +364,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                         size = isFixedLength ? 8000 : (int?)null;
                     }
 
-                    return size == null
-                        ? _variableLengthMaxBinary
-                        : new SqlServerByteArrayTypeMapping(
-                              size: size,
-                              fixedLength: isFixedLength,
-                              storeTypePostfix: storeTypeName == null
-                                ? StoreTypePostfix.Size
-                                : StoreTypePostfix.None
-                          );
+                    return
+                        size == null
+                      ? _variableLengthMaxBinary
+                      : new SqlServerByteArrayTypeMapping(
+                            size: size,
+                            fixedLength: isFixedLength,
+                            storeTypePostfix: storeTypeName == null
+                              ? StoreTypePostfix.Size
+                              : StoreTypePostfix.None
+                        );
                 }
             }
 

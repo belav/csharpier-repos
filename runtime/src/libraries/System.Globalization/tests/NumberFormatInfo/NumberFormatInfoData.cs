@@ -28,21 +28,24 @@ namespace System.Globalization.Tests
             switch (localeName)
             {
                 case "en-US":
-                    return PlatformDetection.IsNlsGlobalization
-                        ? new int[] { 0 }
-                        : new int[] { 1, 0 };
+                    return
+                        PlatformDetection.IsNlsGlobalization
+                      ? new int[] { 0 }
+                      : new int[] { 1, 0 };
 
                 case "en-CA":
-                    return PlatformDetection.IsNlsGlobalization
-                        ? new int[] { 1 }
-                        : new int[] { 1, 0 };
+                    return
+                        PlatformDetection.IsNlsGlobalization
+                      ? new int[] { 1 }
+                      : new int[] { 1, 0 };
 
                 case "fa-IR":
                     if (PlatformDetection.IsNlsGlobalization)
                     {
-                        return (PlatformDetection.WindowsVersion < 10)
-                            ? new int[] { 3 }
-                            : new int[] { 6, 3 };
+                        return
+                            (PlatformDetection.WindowsVersion < 10)
+                          ? new int[] { 3 }
+                          : new int[] { 6, 3 };
                     }
                     if (
                         PlatformDetection.ICUVersion.Major == 59
@@ -62,9 +65,10 @@ namespace System.Globalization.Tests
                 case "fr-CD":
                     if (PlatformDetection.IsNlsGlobalization)
                     {
-                        return (PlatformDetection.WindowsVersion < 10)
-                            ? new int[] { 4 }
-                            : new int[] { 8 };
+                        return
+                            (PlatformDetection.WindowsVersion < 10)
+                          ? new int[] { 4 }
+                          : new int[] { 8 };
                     }
                     else
                     {
@@ -72,22 +76,25 @@ namespace System.Globalization.Tests
                     }
 
                 case "as":
-                    return PlatformDetection.IsNlsGlobalization
-                        ? new int[] { 12 }
-                        : new int[] { 9 };
+                    return
+                        PlatformDetection.IsNlsGlobalization
+                      ? new int[] { 12 }
+                      : new int[] { 9 };
 
                 case "es-BO":
-                    return (
-                        PlatformDetection.IsNlsGlobalization
-                        && PlatformDetection.WindowsVersion < 10
-                    )
-                        ? new int[] { 14 }
-                        : new int[] { 1 };
+                    return
+                        (
+                            PlatformDetection.IsNlsGlobalization
+                            && PlatformDetection.WindowsVersion < 10
+                        )
+                      ? new int[] { 14 }
+                      : new int[] { 1 };
 
                 case "fr-CA":
-                    return PlatformDetection.IsNlsGlobalization
-                        ? new int[] { 15 }
-                        : new int[] { 8, 15 };
+                    return
+                        PlatformDetection.IsNlsGlobalization
+                      ? new int[] { 15 }
+                      : new int[] { 8, 15 };
             }
 
             throw DateTimeFormatInfoData.GetCultureNotSupportedException(

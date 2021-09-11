@@ -222,18 +222,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return null;
                     }
 
-                    return (field.IsFixedSizeBuffer || ShouldIgnoreStructField(field, field.Type))
-                        ? null
-                        : field.AsMember(type);
+                    return
+                        (field.IsFixedSizeBuffer || ShouldIgnoreStructField(field, field.Type))
+                      ? null
+                      : field.AsMember(type);
 
                 case SymbolKind.Event:
                     var eventSymbol = (EventSymbol)member;
-                    return (
-                        !eventSymbol.HasAssociatedField
-                        || ShouldIgnoreStructField(eventSymbol, eventSymbol.Type)
-                    )
-                        ? null
-                        : eventSymbol.AssociatedField.AsMember(type);
+                    return
+                        (
+                            !eventSymbol.HasAssociatedField
+                            || ShouldIgnoreStructField(eventSymbol, eventSymbol.Type)
+                        )
+                      ? null
+                      : eventSymbol.AssociatedField.AsMember(type);
             }
 
             return null;

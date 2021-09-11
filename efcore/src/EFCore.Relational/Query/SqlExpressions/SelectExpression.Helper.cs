@@ -21,9 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is EntityShaperExpression entityShaper
-                    ? entityShaper.MakeNullable()
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is EntityShaperExpression entityShaper
+                  ? entityShaper.MakeNullable()
+                  : base.VisitExtension(extensionExpression);
             }
         }
 

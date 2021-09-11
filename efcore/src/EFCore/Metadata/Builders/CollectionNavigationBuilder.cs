@@ -223,21 +223,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 );
             }
 
-            return reference.MemberInfo == null || CollectionMember == null
-                ? Builder.HasNavigations(
-                      reference.Name,
-                      CollectionName,
-                      (EntityType)DeclaringEntityType,
-                      (EntityType)RelatedEntityType,
-                      ConfigurationSource.Explicit
-                  )!
-                : Builder.HasNavigations(
-                      reference.MemberInfo,
-                      CollectionMember,
-                      (EntityType)DeclaringEntityType,
-                      (EntityType)RelatedEntityType,
-                      ConfigurationSource.Explicit
-                  )!;
+            return
+                reference.MemberInfo == null || CollectionMember == null
+              ? Builder.HasNavigations(
+                    reference.Name,
+                    CollectionName,
+                    (EntityType)DeclaringEntityType,
+                    (EntityType)RelatedEntityType,
+                    ConfigurationSource.Explicit
+                )!
+              : Builder.HasNavigations(
+                    reference.MemberInfo,
+                    CollectionMember,
+                    (EntityType)DeclaringEntityType,
+                    (EntityType)RelatedEntityType,
+                    ConfigurationSource.Explicit
+                )!;
         }
 
         /// <summary>

@@ -226,20 +226,21 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 StoreCurrentGroupingPriority(window);
             }
 
-            return supportsReferences
-                ? StartSearchWithReferences(
-                      window,
-                      desiredGroupingPriority,
-                      includeContainingTypeAndMemberColumns,
-                      includeKindColumn,
-                      cancellationToken
-                  )
-                : StartSearchWithoutReferences(
-                      window,
-                      includeContainingTypeAndMemberColumns,
-                      includeKindColumn,
-                      cancellationToken
-                  );
+            return
+                supportsReferences
+              ? StartSearchWithReferences(
+                    window,
+                    desiredGroupingPriority,
+                    includeContainingTypeAndMemberColumns,
+                    includeKindColumn,
+                    cancellationToken
+                )
+              : StartSearchWithoutReferences(
+                    window,
+                    includeContainingTypeAndMemberColumns,
+                    includeKindColumn,
+                    cancellationToken
+                );
         }
 
         private AbstractTableDataSourceFindUsagesContext StartSearchWithReferences(

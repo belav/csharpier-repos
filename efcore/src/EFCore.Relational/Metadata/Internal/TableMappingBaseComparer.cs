@@ -101,9 +101,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             xc.Property.Name,
                             yc.Property.Name
                         );
-                        return columnResult != 0
-                            ? columnResult
-                            : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
+                        return
+                            columnResult != 0
+                          ? columnResult
+                          : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
                     }
                 )
                 .FirstOrDefault(r => r != 0);

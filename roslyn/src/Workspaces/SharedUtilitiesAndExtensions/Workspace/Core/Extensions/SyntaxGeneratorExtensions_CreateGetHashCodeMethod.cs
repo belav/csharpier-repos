@@ -235,9 +235,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string name,
             SyntaxNode initializer
         ) {
-            return generatorInternal.RequiresLocalDeclarationType()
-                ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
-                : generator.LocalDeclarationStatement(name, initializer);
+            return
+                generatorInternal.RequiresLocalDeclarationType()
+              ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
+              : generator.LocalDeclarationStatement(name, initializer);
         }
 
         private static SyntaxNode CreateLiteralExpression(SyntaxGenerator factory, int value) =>

@@ -21,9 +21,10 @@ namespace Castle.Components.DictionaryAdapter
         public static IVirtual AsVirtual(this IDictionaryAdapter dictionaryAdapter)
         {
             var descriptor = dictionaryAdapter.This.Descriptor;
-            return descriptor != null
-                ? descriptor.Getters.OfType<IVirtual>().FirstOrDefault()
-                : null;
+            return
+                descriptor != null
+              ? descriptor.Getters.OfType<IVirtual>().FirstOrDefault()
+              : null;
         }
     }
 }

@@ -54,11 +54,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
             Check.NotNull(property, nameof(property));
             Check.NotNull(entityType, nameof(entityType));
 
-            return property.GetValueGeneratorFactory() == null
-            && property.ClrType.IsInteger()
-            && property.ClrType.UnwrapNullableType() != typeof(char)
-                ? GetOrCreate(property)
-                : base.Select(property, entityType);
+            return
+                property.GetValueGeneratorFactory() == null
+                && property.ClrType.IsInteger()
+                && property.ClrType.UnwrapNullableType() != typeof(char)
+              ? GetOrCreate(property)
+              : base.Select(property, entityType);
         }
 
         /// <summary>

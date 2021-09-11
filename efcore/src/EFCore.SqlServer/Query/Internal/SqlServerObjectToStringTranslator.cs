@@ -72,18 +72,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return method.Name == nameof(ToString)
-            && arguments.Count == 0
-            && instance != null
-            && _typeMapping.TryGetValue(instance.Type, out var storeType)
-                ? _sqlExpressionFactory.Function(
-                      "CONVERT",
-                      new[] { _sqlExpressionFactory.Fragment(storeType), instance },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false, true },
-                      typeof(string)
-                  )
-                : null;
+            return
+                method.Name == nameof(ToString)
+                && arguments.Count == 0
+                && instance != null
+                && _typeMapping.TryGetValue(instance.Type, out var storeType)
+              ? _sqlExpressionFactory.Function(
+                    "CONVERT",
+                    new[] { _sqlExpressionFactory.Fragment(storeType), instance },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false, true },
+                    typeof(string)
+                )
+              : null;
         }
     }
 }

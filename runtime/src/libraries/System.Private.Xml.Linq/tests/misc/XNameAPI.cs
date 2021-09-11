@@ -53,13 +53,15 @@ namespace CoreXml.Test.XLinq
                         case GetNameType.TwoParamGet:
                             return XName.Get(name, ns);
                         case GetNameType.ExpandedName:
-                            return (ns == null || ns.Length == 0)
-                                ? XName.Get(name)
-                                : XName.Get("{" + ns + "}" + name);
+                            return
+                                (ns == null || ns.Length == 0)
+                              ? XName.Get(name)
+                              : XName.Get("{" + ns + "}" + name);
                         case GetNameType.XNamespacePlusOperator:
-                            return (ns == null || ns.Length == 0)
-                                ? XName.Get(name)
-                                : XNamespace.Get(ns) + name;
+                            return
+                                (ns == null || ns.Length == 0)
+                              ? XName.Get(name)
+                              : XNamespace.Get(ns) + name;
                         default:
                             TestLog.Compare(
                                 false,

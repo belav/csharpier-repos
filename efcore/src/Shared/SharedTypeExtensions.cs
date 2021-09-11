@@ -454,9 +454,10 @@ namespace System
             // A bit of perf code to avoid calling Activator.CreateInstance for common types and
             // to avoid boxing on every call. This is about 50% faster than just calling CreateInstance
             // for all value types.
-            return _commonTypeDictionary.TryGetValue(type, out var value)
-                ? value
-                : Activator.CreateInstance(type);
+            return
+                _commonTypeDictionary.TryGetValue(type, out var value)
+              ? value
+              : Activator.CreateInstance(type);
         }
 
         public static IEnumerable<TypeInfo> GetConstructibleTypes(this Assembly assembly) =>

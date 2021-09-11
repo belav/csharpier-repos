@@ -64,9 +64,10 @@ namespace System.DirectoryServices.Tests
 
         internal string GetLdapPath(string prefix) // like "ou=something"
         {
-            return string.IsNullOrEmpty(Port)
-                ? $"LDAP://{ServerName}/{prefix},{SearchDn}"
-                : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
+            return
+                string.IsNullOrEmpty(Port)
+              ? $"LDAP://{ServerName}/{prefix},{SearchDn}"
+              : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
         }
 
         private const string LDAP_CAP_ACTIVE_DIRECTORY_OID = "1.2.840.113556.1.4.800";

@@ -69,11 +69,12 @@ namespace Microsoft.CodeAnalysis.Differencing
 
         public bool Equals(Edit<TNode> other)
         {
-            return _kind == other._kind && (_oldNode == null)
-                ? other._oldNode == null
-                : _oldNode.Equals(other._oldNode) && (_newNode == null)
-                    ? other._newNode == null
-                    : _newNode.Equals(other._newNode);
+            return
+                _kind == other._kind && (_oldNode == null)
+              ? other._oldNode == null
+              : _oldNode.Equals(other._oldNode) && (_newNode == null)
+                  ? other._newNode == null
+                  : _newNode.Equals(other._newNode);
         }
 
         public override int GetHashCode()

@@ -590,21 +590,22 @@ namespace Microsoft.EntityFrameworkCore.Internal
             EntityState entityState,
             CancellationToken cancellationToken
         ) {
-            return entry.EntityState == EntityState.Detached
-                ? _context.GetDependencies()
-                      .EntityGraphAttacher.AttachGraphAsync(
-                          entry,
-                          entityState,
-                          entityState,
-                          forceStateWhenUnknownKey: true,
-                          cancellationToken: cancellationToken
-                      )
-                : entry.SetEntityStateAsync(
-                      entityState,
-                      acceptChanges: true,
-                      forceStateWhenUnknownKey: entityState,
-                      cancellationToken: cancellationToken
-                  );
+            return
+                entry.EntityState == EntityState.Detached
+              ? _context.GetDependencies()
+                    .EntityGraphAttacher.AttachGraphAsync(
+                        entry,
+                        entityState,
+                        entityState,
+                        forceStateWhenUnknownKey: true,
+                        cancellationToken: cancellationToken
+                    )
+              : entry.SetEntityStateAsync(
+                    entityState,
+                    acceptChanges: true,
+                    forceStateWhenUnknownKey: entityState,
+                    cancellationToken: cancellationToken
+                );
         }
     }
 }

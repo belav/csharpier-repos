@@ -60,9 +60,10 @@ namespace System.Web.Http.ModelBinding
             {
                 return prefix;
             }
-            return suffix.StartsWith("[", StringComparison.Ordinal)
-                ? prefix + suffix
-                : prefix + "." + suffix;
+            return
+                suffix.StartsWith("[", StringComparison.Ordinal)
+              ? prefix + suffix
+              : prefix + "." + suffix;
         }
 
         internal static IModelBinder GetPossibleBinderInstance(
@@ -74,11 +75,12 @@ namespace System.Web.Http.ModelBinding
                 closedModelType,
                 openModelType
             );
-            return (typeArguments != null)
-                ? (IModelBinder)Activator.CreateInstance(
-                      openBinderType.MakeGenericType(typeArguments)
-                  )
-                : null;
+            return
+                (typeArguments != null)
+              ? (IModelBinder)Activator.CreateInstance(
+                    openBinderType.MakeGenericType(typeArguments)
+                )
+              : null;
         }
 
         internal static object[] RawValueToObjectArray(object rawValue)

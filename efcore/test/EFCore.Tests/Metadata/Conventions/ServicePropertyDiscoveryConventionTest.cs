@@ -226,9 +226,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             CreateServicePropertyDiscoveryConvention()
                 .ProcessEntityTypeAdded(entityType.Builder, context);
 
-            return context.ShouldStopProcessing()
-                ? (EntityType)context.Result!.Metadata
-                : entityType;
+            return
+                context.ShouldStopProcessing()
+              ? (EntityType)context.Result!.Metadata
+              : entityType;
         }
 
         private ServicePropertyDiscoveryConvention CreateServicePropertyDiscoveryConvention()

@@ -235,19 +235,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 cancellationToken
             );
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            return TryGetNameWithoutAttributeSuffix(namedType.Name, syntaxFacts, out var simpleName)
-                ? FindReferencesInDocumentUsingIdentifierAsync(
-                      simpleName,
-                      document,
-                      semanticModel,
-                      symbolsMatch,
-                      docCommentId: null,
-                      findInGlobalSuppressions: false,
-                      cancellationToken
-                  )
-                : new ValueTask<ImmutableArray<FinderLocation>>(
-                      ImmutableArray<FinderLocation>.Empty
-                  );
+            return
+                TryGetNameWithoutAttributeSuffix(namedType.Name, syntaxFacts, out var simpleName)
+              ? FindReferencesInDocumentUsingIdentifierAsync(
+                    simpleName,
+                    document,
+                    semanticModel,
+                    symbolsMatch,
+                    docCommentId: null,
+                    findInGlobalSuppressions: false,
+                    cancellationToken
+                )
+              : new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
         }
     }
 }

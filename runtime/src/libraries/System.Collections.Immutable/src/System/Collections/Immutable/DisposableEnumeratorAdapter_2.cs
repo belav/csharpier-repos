@@ -57,9 +57,10 @@ namespace System.Collections.Immutable
         {
             get
             {
-                return _enumeratorObject != null
-                    ? _enumeratorObject.Current
-                    : _enumeratorStruct.Current;
+                return
+                    _enumeratorObject != null
+                  ? _enumeratorObject.Current
+                  : _enumeratorStruct.Current;
             }
         }
 
@@ -68,9 +69,10 @@ namespace System.Collections.Immutable
         /// </summary>
         public bool MoveNext()
         {
-            return _enumeratorObject != null
-                ? _enumeratorObject.MoveNext()
-                : _enumeratorStruct.MoveNext();
+            return
+                _enumeratorObject != null
+              ? _enumeratorObject.MoveNext()
+              : _enumeratorStruct.MoveNext();
         }
 
         /// <summary>

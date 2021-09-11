@@ -70,9 +70,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private string GetDisplayName()
         {
-            return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
-                ? string.Concat(Name, "...")
-                : Name;
+            return
+                NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+              ? string.Concat(Name, "...")
+              : Name;
         }
 
         private IEnumerable<RazorDiagnostic> Validate()

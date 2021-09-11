@@ -128,9 +128,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var leftValue = _prop.GetValue(left);
                 var rightValue = _prop.GetValue(right);
 
-                return _direction == ListSortDirection.Ascending
-                    ? _comparer.Compare(leftValue, rightValue)
-                    : _comparer.Compare(rightValue, leftValue);
+                return
+                    _direction == ListSortDirection.Ascending
+                  ? _comparer.Compare(leftValue, rightValue)
+                  : _comparer.Compare(rightValue, leftValue);
             }
 
             public static bool CanSort(Type type) =>

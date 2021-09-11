@@ -336,9 +336,10 @@ namespace System.Runtime.Serialization
                 }
 
                 string returnType = _baseType;
-                return _needsFixup && TypeArguments.Count > 0
-                    ? returnType + '`' + TypeArguments.Count.ToString(CultureInfo.InvariantCulture)
-                    : returnType;
+                return
+                    _needsFixup && TypeArguments.Count > 0
+                  ? returnType + '`' + TypeArguments.Count.ToString(CultureInfo.InvariantCulture)
+                  : returnType;
             }
             set
             {

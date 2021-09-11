@@ -77,14 +77,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol containingType
         ) {
             var substituted = containingType as SubstitutedNamedTypeSymbol;
-            return (object)substituted != null
-                ? new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
-                      substituted.TypeSubstitution.Mapping,
-                      ReferenceEqualityComparer.Instance
-                  )
-                : new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
-                      ReferenceEqualityComparer.Instance
-                  );
+            return
+                (object)substituted != null
+              ? new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
+                    substituted.TypeSubstitution.Mapping,
+                    ReferenceEqualityComparer.Instance
+                )
+              : new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
+                    ReferenceEqualityComparer.Instance
+                );
         }
 
         internal TypeMap(

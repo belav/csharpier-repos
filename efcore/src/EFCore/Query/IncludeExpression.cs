@@ -112,15 +112,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(entityExpression, nameof(entityExpression));
             Check.NotNull(navigationExpression, nameof(navigationExpression));
 
-            return entityExpression != EntityExpression
-            || navigationExpression != NavigationExpression
-                ? new IncludeExpression(
-                      entityExpression,
-                      navigationExpression,
-                      Navigation,
-                      SetLoaded
-                  )
-                : this;
+            return
+                entityExpression != EntityExpression || navigationExpression != NavigationExpression
+              ? new IncludeExpression(entityExpression, navigationExpression, Navigation, SetLoaded)
+              : this;
         }
 
         /// <inheritdoc />

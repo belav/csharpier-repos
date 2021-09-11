@@ -184,9 +184,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                             return f1.HasConstantValue ? 1 : -1;
                         }
 
-                        return f1.HasConstantValue
-                            ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
-                            : f1.Name.CompareTo(f2.Name);
+                        return
+                            f1.HasConstantValue
+                          ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
+                          : f1.Name.CompareTo(f2.Name);
                     }
                 )
                 .ToList();
@@ -199,11 +200,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         {
             Contract.ThrowIfNull(symbol);
 
-            return options != null
-            && options.ReuseSyntax
-            && symbol.DeclaringSyntaxReferences.Length == 1
-                ? symbol.DeclaringSyntaxReferences[0].GetSyntax() as T
-                : null;
+            return
+                options != null
+                && options.ReuseSyntax
+                && symbol.DeclaringSyntaxReferences.Length == 1
+              ? symbol.DeclaringSyntaxReferences[0].GetSyntax() as T
+              : null;
         }
 
         public static T? GetReuseableSyntaxNodeForAttribute<T>(
@@ -213,11 +215,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         {
             Contract.ThrowIfNull(attribute);
 
-            return options != null
-            && options.ReuseSyntax
-            && attribute.ApplicationSyntaxReference != null
-                ? attribute.ApplicationSyntaxReference.GetSyntax() as T
-                : null;
+            return
+                options != null
+                && options.ReuseSyntax
+                && attribute.ApplicationSyntaxReference != null
+              ? attribute.ApplicationSyntaxReference.GetSyntax() as T
+              : null;
         }
 
         public static int GetInsertionIndex<TDeclaration>(

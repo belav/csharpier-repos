@@ -101,9 +101,10 @@ namespace Tracing.Tests.GCEvents
                     "GCSuspendEEStartStopResult check: " + GCSuspendEEStartStopResult
                 );
 
-                return GCStartStopResult && GCRestartEEStartStopResult && GCSuspendEEStartStopResult
-                    ? 100
-                    : -1;
+                return
+                    GCStartStopResult && GCRestartEEStartStopResult && GCSuspendEEStartStopResult
+                  ? 100
+                  : -1;
             };
         };
     }

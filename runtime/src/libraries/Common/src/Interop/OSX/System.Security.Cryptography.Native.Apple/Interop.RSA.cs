@@ -259,22 +259,23 @@ internal static partial class Interop
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
                 ) {
-                    return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
-                        ? RsaEncryptPkcs(
-                              publicKey,
-                              innerSource,
-                              innerSource.Length,
-                              out outputHandle,
-                              out errorHandle
-                          )
-                        : RsaEncryptOaep(
-                              publicKey,
-                              innerSource,
-                              innerSource.Length,
-                              PalAlgorithmFromAlgorithmName(padding.OaepHashAlgorithm),
-                              out outputHandle,
-                              out errorHandle
-                          );
+                    return
+                        padding.Mode == RSAEncryptionPaddingMode.Pkcs1
+                      ? RsaEncryptPkcs(
+                            publicKey,
+                            innerSource,
+                            innerSource.Length,
+                            out outputHandle,
+                            out errorHandle
+                        )
+                      : RsaEncryptOaep(
+                            publicKey,
+                            innerSource,
+                            innerSource.Length,
+                            PalAlgorithmFromAlgorithmName(padding.OaepHashAlgorithm),
+                            out outputHandle,
+                            out errorHandle
+                        );
                 }
             );
         }
@@ -337,22 +338,23 @@ internal static partial class Interop
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
                 ) {
-                    return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
-                        ? RsaDecryptPkcs(
-                              privateKey,
-                              innerSource,
-                              innerSource.Length,
-                              out outputHandle,
-                              out errorHandle
-                          )
-                        : RsaDecryptOaep(
-                              privateKey,
-                              innerSource,
-                              innerSource.Length,
-                              PalAlgorithmFromAlgorithmName(padding.OaepHashAlgorithm),
-                              out outputHandle,
-                              out errorHandle
-                          );
+                    return
+                        padding.Mode == RSAEncryptionPaddingMode.Pkcs1
+                      ? RsaDecryptPkcs(
+                            privateKey,
+                            innerSource,
+                            innerSource.Length,
+                            out outputHandle,
+                            out errorHandle
+                        )
+                      : RsaDecryptOaep(
+                            privateKey,
+                            innerSource,
+                            innerSource.Length,
+                            PalAlgorithmFromAlgorithmName(padding.OaepHashAlgorithm),
+                            out outputHandle,
+                            out errorHandle
+                        );
                 }
             );
         }

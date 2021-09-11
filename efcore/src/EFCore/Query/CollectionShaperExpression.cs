@@ -94,9 +94,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
-            return projection != Projection || innerShaper != InnerShaper
-                ? new CollectionShaperExpression(projection, innerShaper, Navigation, ElementType)
-                : this;
+            return
+                projection != Projection || innerShaper != InnerShaper
+              ? new CollectionShaperExpression(projection, innerShaper, Navigation, ElementType)
+              : this;
         }
 
         /// <inheritdoc />

@@ -28,9 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxList<MemberDeclarationSyntax> members
         ) where TDeclarationSyntax : MemberDeclarationSyntax
         {
-            return members.Count == 1
-                ? result.WithAdditionalAnnotations(Formatter.Annotation)
-                : result;
+            return
+                members.Count == 1
+              ? result.WithAdditionalAnnotations(Formatter.Annotation)
+              : result;
         }
 
         internal static void AddAccessibilityModifiers(

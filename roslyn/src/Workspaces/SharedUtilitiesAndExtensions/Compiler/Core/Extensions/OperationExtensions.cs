@@ -128,9 +128,10 @@ namespace Microsoft.CodeAnalysis
                 operation.Parent is IAssignmentOperation assignmentOperation
                 && assignmentOperation.Target == operation
             ) {
-                return operation.Parent.IsAnyCompoundAssignment()
-                    ? ValueUsageInfo.ReadWrite
-                    : ValueUsageInfo.Write;
+                return
+                    operation.Parent.IsAnyCompoundAssignment()
+                  ? ValueUsageInfo.ReadWrite
+                  : ValueUsageInfo.Write;
             }
             else if (operation.Parent is IIncrementOrDecrementOperation)
             {
@@ -194,9 +195,10 @@ namespace Microsoft.CodeAnalysis
                 operation.Parent is IReDimClauseOperation reDimClauseOperation
                 && reDimClauseOperation.Operand == operation
             ) {
-                return (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
-                    ? ValueUsageInfo.ReadWrite
-                    : ValueUsageInfo.Write;
+                return
+                    (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
+                  ? ValueUsageInfo.ReadWrite
+                  : ValueUsageInfo.Write;
             }
             else if (operation.Parent is IDeclarationExpressionOperation declarationExpression)
             {

@@ -56,11 +56,12 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             string name
         ) {
             var matchesBoolean = MatchesBoolean(name);
-            return matchesBoolean
-                ? ImmutableArray.Create<ITypeSymbol>(
-                      semanticModel.Compilation.GetSpecialType(SpecialType.System_Boolean)
-                  )
-                : ImmutableArray<ITypeSymbol>.Empty;
+            return
+                matchesBoolean
+              ? ImmutableArray.Create<ITypeSymbol>(
+                    semanticModel.Compilation.GetSpecialType(SpecialType.System_Boolean)
+                )
+              : ImmutableArray<ITypeSymbol>.Empty;
         }
 
         private static bool MatchesBoolean(string name)

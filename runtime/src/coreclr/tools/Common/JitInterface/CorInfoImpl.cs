@@ -1094,9 +1094,10 @@ namespace Internal.JitInterface
         {
             if (contextStruct == contextFromMethodBeingCompiled())
             {
-                return MethodBeingCompiled.HasInstantiation
-                    ? (TypeSystemEntity)MethodBeingCompiled
-                    : (TypeSystemEntity)MethodBeingCompiled.OwningType;
+                return
+                    MethodBeingCompiled.HasInstantiation
+                  ? (TypeSystemEntity)MethodBeingCompiled
+                  : (TypeSystemEntity)MethodBeingCompiled.OwningType;
             }
 
             return (TypeSystemEntity)HandleToObject(
@@ -1415,9 +1416,10 @@ namespace Internal.JitInterface
 
         private MethodSignatureFlags PlatformDefaultUnmanagedCallingConvention()
         {
-            return _compilation.TypeSystemContext.Target.IsWindows
-                ? MethodSignatureFlags.UnmanagedCallingConventionStdCall
-                : MethodSignatureFlags.UnmanagedCallingConventionCdecl;
+            return
+                _compilation.TypeSystemContext.Target.IsWindows
+              ? MethodSignatureFlags.UnmanagedCallingConventionStdCall
+              : MethodSignatureFlags.UnmanagedCallingConventionCdecl;
         }
 
         private CorInfoCallConvExtension getUnmanagedCallConv(
@@ -2456,18 +2458,20 @@ namespace Internal.JitInterface
                     MethodBeingCompiled
                 );
 
-            return type.IsNullable
-                ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE
-                : CorInfoHelpFunc.CORINFO_HELP_BOX;
+            return
+                type.IsNullable
+              ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE
+              : CorInfoHelpFunc.CORINFO_HELP_BOX;
         }
 
         private CorInfoHelpFunc getUnBoxHelper(CORINFO_CLASS_STRUCT_* cls)
         {
             var type = HandleToObject(cls);
 
-            return type.IsNullable
-                ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE
-                : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
+            return
+                type.IsNullable
+              ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE
+              : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
         }
 
         private byte* getHelperName(CorInfoHelpFunc helpFunc)
@@ -4260,9 +4264,10 @@ namespace Internal.JitInterface
 #else
         private bool notifyInstructionSetUsage(InstructionSet instructionSet, bool supportEnabled)
         {
-            return supportEnabled
-                ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet)
-                : false;
+            return
+                supportEnabled
+              ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet)
+              : false;
         }
 #endif
     }

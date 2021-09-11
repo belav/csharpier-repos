@@ -42,12 +42,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             var function = _model.FindDbFunction(methodCallExpression.Method);
 
-            return function?.IsScalar == false
-                ? CreateTableValuedFunctionQueryRootExpression(
-                      function.StoreFunction,
-                      methodCallExpression.Arguments
-                  )
-                : base.VisitMethodCall(methodCallExpression);
+            return
+                function?.IsScalar == false
+              ? CreateTableValuedFunctionQueryRootExpression(
+                    function.StoreFunction,
+                    methodCallExpression.Arguments
+                )
+              : base.VisitMethodCall(methodCallExpression);
         }
 
         private Expression CreateTableValuedFunctionQueryRootExpression(

@@ -143,9 +143,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
                 }
 
-                return builder != null
-                    ? builder.ToImmutableAndFree()
-                    : ImmutableArray<DiagnosticAnalyzer>.Empty;
+                return
+                    builder != null
+                  ? builder.ToImmutableAndFree()
+                  : ImmutableArray<DiagnosticAnalyzer>.Empty;
             }
         }
 

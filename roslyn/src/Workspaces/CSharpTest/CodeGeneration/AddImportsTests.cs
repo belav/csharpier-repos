@@ -48,12 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
                     (o, c) =>
                     {
                         var symbol = model.GetSymbolInfo(o).Symbol;
-                        return symbol != null
-                            ? c.WithAdditionalAnnotations(
-                                  SymbolAnnotation.Create(symbol),
-                                  Simplifier.Annotation
-                              )
-                            : c;
+                        return
+                            symbol != null
+                          ? c.WithAdditionalAnnotations(
+                                SymbolAnnotation.Create(symbol),
+                                Simplifier.Annotation
+                            )
+                          : c;
                     }
                 );
                 doc = doc.WithSyntaxRoot(root);

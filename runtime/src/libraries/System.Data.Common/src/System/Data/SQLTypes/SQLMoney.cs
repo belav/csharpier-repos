@@ -272,9 +272,10 @@ namespace System.Data.SqlTypes
         {
             try
             {
-                return (x.IsNull || y.IsNull)
-                    ? Null
-                    : new SqlMoney(checked(x._value + y._value), 0);
+                return
+                    (x.IsNull || y.IsNull)
+                  ? Null
+                  : new SqlMoney(checked(x._value + y._value), 0);
             }
             catch (OverflowException)
             {
@@ -286,9 +287,10 @@ namespace System.Data.SqlTypes
         {
             try
             {
-                return (x.IsNull || y.IsNull)
-                    ? Null
-                    : new SqlMoney(checked(x._value - y._value), 0);
+                return
+                    (x.IsNull || y.IsNull)
+                  ? Null
+                  : new SqlMoney(checked(x._value - y._value), 0);
             }
             catch (OverflowException)
             {
@@ -298,16 +300,18 @@ namespace System.Data.SqlTypes
 
         public static SqlMoney operator *(SqlMoney x, SqlMoney y)
         {
-            return (x.IsNull || y.IsNull)
-                ? Null
-                : new SqlMoney(decimal.Multiply(x.ToDecimal(), y.ToDecimal()));
+            return
+                (x.IsNull || y.IsNull)
+              ? Null
+              : new SqlMoney(decimal.Multiply(x.ToDecimal(), y.ToDecimal()));
         }
 
         public static SqlMoney operator /(SqlMoney x, SqlMoney y)
         {
-            return (x.IsNull || y.IsNull)
-                ? Null
-                : new SqlMoney(decimal.Divide(x.ToDecimal(), y.ToDecimal()));
+            return
+                (x.IsNull || y.IsNull)
+              ? Null
+              : new SqlMoney(decimal.Divide(x.ToDecimal(), y.ToDecimal()));
         }
 
         // Implicit conversions
@@ -366,9 +370,10 @@ namespace System.Data.SqlTypes
         // Throws FormatException or OverflowException if necessary.
         public static explicit operator SqlMoney(SqlString x)
         {
-            return x.IsNull
-                ? Null
-                : new SqlMoney(decimal.Parse(x.Value, NumberStyles.Currency, null));
+            return
+                x.IsNull
+              ? Null
+              : new SqlMoney(decimal.Parse(x.Value, NumberStyles.Currency, null));
         }
 
         // Builtin functions

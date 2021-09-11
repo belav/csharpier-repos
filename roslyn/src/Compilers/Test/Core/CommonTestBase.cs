@@ -522,9 +522,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Compilation comp,
             bool useCompilationReference
         ) {
-            return useCompilationReference
-                ? comp.ToMetadataReference()
-                : comp.EmitToImageReference();
+            return
+                useCompilationReference
+              ? comp.ToMetadataReference()
+              : comp.EmitToImageReference();
         }
 
         public static string WithWindowsLineBreaks(string source) =>

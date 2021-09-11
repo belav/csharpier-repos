@@ -111,9 +111,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     _context.ContainingTypeOrEnumDeclaration!,
                     _cancellationToken
                 );
-                return symbol == null
-                    ? ImmutableArray<ISymbol>.Empty
-                    : ImmutableArray.Create<ISymbol>(symbol);
+                return
+                    symbol == null
+                  ? ImmutableArray<ISymbol>.Empty
+                  : ImmutableArray.Create<ISymbol>(symbol);
             }
             else if (_context.IsNamespaceDeclarationNameContext)
             {
@@ -662,13 +663,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             SemanticModel semanticModel,
             ExpressionSyntax originalExpression
         ) {
-            return ShouldBeTreatedAsTypeInsteadOfExpression(
-                originalExpression,
-                out _,
-                out var container
-            )
-                ? container
-                : semanticModel.GetTypeInfo(originalExpression, _cancellationToken).Type;
+            return
+                ShouldBeTreatedAsTypeInsteadOfExpression(
+                    originalExpression,
+                    out _,
+                    out var container
+                )
+              ? container
+              : semanticModel.GetTypeInfo(originalExpression, _cancellationToken).Type;
         }
 
         private void AddIndexers(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)

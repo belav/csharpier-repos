@@ -327,11 +327,12 @@ namespace System.Text.Json
 
             JsonTokenType type = TokenType;
 
-            return type == JsonTokenType.True
-                ? true
-                : type == JsonTokenType.False
-                    ? false
-                    : throw ThrowHelper.GetJsonElementWrongTypeException(nameof(Boolean), type);
+            return
+                type == JsonTokenType.True
+              ? true
+              : type == JsonTokenType.False
+                  ? false
+                  : throw ThrowHelper.GetJsonElementWrongTypeException(nameof(Boolean), type);
         }
 
         /// <summary>

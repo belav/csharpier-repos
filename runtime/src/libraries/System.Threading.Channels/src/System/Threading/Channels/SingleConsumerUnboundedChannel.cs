@@ -176,9 +176,10 @@ namespace System.Threading.Channels
                     // There aren't any items; if we're done writing, there never will be more items.
                     if (parent._doneWriting != null)
                     {
-                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
-                            : default;
+                        return
+                            parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                          ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                          : default;
                     }
 
                     // Try to use the singleton waiter.  If it's currently being used, then the channel
@@ -363,13 +364,14 @@ namespace System.Threading.Channels
             public override ValueTask<bool> WaitToWriteAsync(CancellationToken cancellationToken)
             {
                 Exception? doneWriting = _parent._doneWriting;
-                return cancellationToken.IsCancellationRequested
-                    ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
-                    : doneWriting == null
-                        ? new ValueTask<bool>(true)
-                        : doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
-                            : default;
+                return
+                    cancellationToken.IsCancellationRequested
+                  ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
+                  : doneWriting == null
+                      ? new ValueTask<bool>(true)
+                      : doneWriting != ChannelUtilities.s_doneWritingSentinel
+                          ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
+                          : default;
             }
 
             public override ValueTask WriteAsync(T item, CancellationToken cancellationToken) =>

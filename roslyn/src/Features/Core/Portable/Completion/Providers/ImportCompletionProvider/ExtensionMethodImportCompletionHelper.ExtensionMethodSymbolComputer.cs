@@ -246,15 +246,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     cancellationToken
                 );
 
-                return isOriginatingProject
-                    ? GetExtensionMethodsForSymbolsFromSameCompilation(
-                          matchingMethodSymbols,
-                          cancellationToken
-                      )
-                    : GetExtensionMethodsForSymbolsFromDifferentCompilation(
-                          matchingMethodSymbols,
-                          cancellationToken
-                      );
+                return
+                    isOriginatingProject
+                  ? GetExtensionMethodsForSymbolsFromSameCompilation(
+                        matchingMethodSymbols,
+                        cancellationToken
+                    )
+                  : GetExtensionMethodsForSymbolsFromDifferentCompilation(
+                        matchingMethodSymbols,
+                        cancellationToken
+                    );
             }
 
             private async ValueTask<ImmutableArray<IMethodSymbol>?> GetExtensionMethodSymbolsFromPeReferenceAsync(

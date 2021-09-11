@@ -1368,73 +1368,75 @@ namespace System.Text.RegularExpressions
 
                 case 'w':
                     MoveRight();
-                    return scanOnly
-                        ? null
-                        : new RegexNode(
-                              RegexNode.Set,
-                              _options,
-                              UseOptionE() ? RegexCharClass.ECMAWordClass : RegexCharClass.WordClass
-                          );
+                    return
+                        scanOnly
+                      ? null
+                      : new RegexNode(
+                            RegexNode.Set,
+                            _options,
+                            UseOptionE() ? RegexCharClass.ECMAWordClass : RegexCharClass.WordClass
+                        );
 
                 case 'W':
                     MoveRight();
-                    return scanOnly
-                        ? null
-                        : new RegexNode(
-                              RegexNode.Set,
-                              _options,
-                              UseOptionE()
-                                ? RegexCharClass.NotECMAWordClass
-                                : RegexCharClass.NotWordClass
-                          );
+                    return
+                        scanOnly
+                      ? null
+                      : new RegexNode(
+                            RegexNode.Set,
+                            _options,
+                            UseOptionE()
+                              ? RegexCharClass.NotECMAWordClass
+                              : RegexCharClass.NotWordClass
+                        );
 
                 case 's':
                     MoveRight();
-                    return scanOnly
-                        ? null
-                        : new RegexNode(
-                              RegexNode.Set,
-                              _options,
-                              UseOptionE()
-                                ? RegexCharClass.ECMASpaceClass
-                                : RegexCharClass.SpaceClass
-                          );
+                    return
+                        scanOnly
+                      ? null
+                      : new RegexNode(
+                            RegexNode.Set,
+                            _options,
+                            UseOptionE() ? RegexCharClass.ECMASpaceClass : RegexCharClass.SpaceClass
+                        );
 
                 case 'S':
                     MoveRight();
-                    return scanOnly
-                        ? null
-                        : new RegexNode(
-                              RegexNode.Set,
-                              _options,
-                              UseOptionE()
-                                ? RegexCharClass.NotECMASpaceClass
-                                : RegexCharClass.NotSpaceClass
-                          );
+                    return
+                        scanOnly
+                      ? null
+                      : new RegexNode(
+                            RegexNode.Set,
+                            _options,
+                            UseOptionE()
+                              ? RegexCharClass.NotECMASpaceClass
+                              : RegexCharClass.NotSpaceClass
+                        );
 
                 case 'd':
                     MoveRight();
-                    return scanOnly
-                        ? null
-                        : new RegexNode(
-                              RegexNode.Set,
-                              _options,
-                              UseOptionE()
-                                ? RegexCharClass.ECMADigitClass
-                                : RegexCharClass.DigitClass
-                          );
+                    return
+                        scanOnly
+                      ? null
+                      : new RegexNode(
+                            RegexNode.Set,
+                            _options,
+                            UseOptionE() ? RegexCharClass.ECMADigitClass : RegexCharClass.DigitClass
+                        );
 
                 case 'D':
                     MoveRight();
-                    return scanOnly
-                        ? null
-                        : new RegexNode(
-                              RegexNode.Set,
-                              _options,
-                              UseOptionE()
-                                ? RegexCharClass.NotECMADigitClass
-                                : RegexCharClass.NotDigitClass
-                          );
+                    return
+                        scanOnly
+                      ? null
+                      : new RegexNode(
+                            RegexNode.Set,
+                            _options,
+                            UseOptionE()
+                              ? RegexCharClass.NotECMADigitClass
+                              : RegexCharClass.NotDigitClass
+                        );
 
                 case 'p':
                 case 'P':
@@ -1523,14 +1525,15 @@ namespace System.Text.RegularExpressions
 
                 if (CharsRight() > 0 && RightCharMoveRight() == close)
                 {
-                    return scanOnly
-                        ? null
-                        : IsCaptureSlot(capnum)
-                            ? new RegexNode(RegexNode.Ref, _options, capnum)
-                            : throw MakeException(
-                                  RegexParseError.UndefinedNumberedReference,
-                                  SR.Format(SR.UndefinedNumberedReference, capnum.ToString())
-                              );
+                    return
+                        scanOnly
+                      ? null
+                      : IsCaptureSlot(capnum)
+                          ? new RegexNode(RegexNode.Ref, _options, capnum)
+                          : throw MakeException(
+                                RegexParseError.UndefinedNumberedReference,
+                                SR.Format(SR.UndefinedNumberedReference, capnum.ToString())
+                            );
                 }
             }
             // Try to parse backreference or octal: \1
@@ -1596,14 +1599,15 @@ namespace System.Text.RegularExpressions
 
                 if (CharsRight() > 0 && RightCharMoveRight() == close)
                 {
-                    return scanOnly
-                        ? null
-                        : IsCaptureName(capname)
-                            ? new RegexNode(RegexNode.Ref, _options, CaptureSlotFromName(capname))
-                            : throw MakeException(
-                                  RegexParseError.UndefinedNamedReference,
-                                  SR.Format(SR.UndefinedNamedReference, capname)
-                              );
+                    return
+                        scanOnly
+                      ? null
+                      : IsCaptureName(capname)
+                          ? new RegexNode(RegexNode.Ref, _options, CaptureSlotFromName(capname))
+                          : throw MakeException(
+                                RegexParseError.UndefinedNamedReference,
+                                SR.Format(SR.UndefinedNamedReference, capname)
+                            );
                 }
             }
 

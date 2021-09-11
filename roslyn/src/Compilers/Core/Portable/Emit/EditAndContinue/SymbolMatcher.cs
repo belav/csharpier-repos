@@ -20,9 +20,10 @@ namespace Microsoft.CodeAnalysis.Emit
         public ISymbolInternal? MapDefinitionOrNamespace(ISymbolInternal symbol)
         {
             var adapter = symbol.GetCciAdapter();
-            return (adapter is Cci.IDefinition definition)
-                ? MapDefinition(definition)?.GetInternalSymbol()
-                : MapNamespace((Cci.INamespace)adapter)?.GetInternalSymbol();
+            return
+                (adapter is Cci.IDefinition definition)
+              ? MapDefinition(definition)?.GetInternalSymbol()
+              : MapNamespace((Cci.INamespace)adapter)?.GetInternalSymbol();
         }
 
         public EmitBaseline MapBaselineToCompilation(

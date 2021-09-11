@@ -176,9 +176,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
 
                 batch.Dispose();
-                return foreignKeyReference.Object is null || !foreignKeyReference.Object.IsInModel
-                    ? null
-                    : foreignKeyReference.Object.Builder;
+                return
+                    foreignKeyReference.Object is null || !foreignKeyReference.Object.IsInModel
+                  ? null
+                  : foreignKeyReference.Object.Builder;
             }
 
             var invertible = true;
@@ -396,9 +397,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 .Count();
             if (foreignKey.Properties.SequenceEqual(foreignKeyProperties))
             {
-                return conflictingFKCount > 1
-                    ? ((ForeignKey)foreignKey).Builder.ReuniquifyImplicitProperties(true)
-                    : relationshipBuilder;
+                return
+                    conflictingFKCount > 1
+                  ? ((ForeignKey)foreignKey).Builder.ReuniquifyImplicitProperties(true)
+                  : relationshipBuilder;
             }
 
             if (conflictingFKCount > 0)
@@ -463,16 +465,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IReadOnlyList<IConventionProperty> propertiesToReference
         ) {
             var dependentPkProperties = dependentEntityType.FindPrimaryKey()?.Properties;
-            return dependentPkProperties != null
-            && ForeignKey.AreCompatible(
-                propertiesToReference,
-                dependentPkProperties,
-                principalEntityType,
-                dependentEntityType,
-                shouldThrow: false
-            )
-                ? dependentPkProperties
-                : null;
+            return
+                dependentPkProperties != null
+                && ForeignKey.AreCompatible(
+                    propertiesToReference,
+                    dependentPkProperties,
+                    principalEntityType,
+                    dependentEntityType,
+                    shouldThrow: false
+                )
+              ? dependentPkProperties
+              : null;
         }
 
         private bool TryFindMatchingProperties(

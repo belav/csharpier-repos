@@ -153,9 +153,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 ?? InternalEntry.EntityType.FindSkipNavigation(propertyName);
             if (navigation != null)
             {
-                return navigation.IsCollection
-                    ? (MemberEntry)new CollectionEntry(InternalEntry, propertyName)
-                    : new ReferenceEntry(InternalEntry, propertyName);
+                return
+                    navigation.IsCollection
+                  ? (MemberEntry)new CollectionEntry(InternalEntry, propertyName)
+                  : new ReferenceEntry(InternalEntry, propertyName);
             }
 
             throw new InvalidOperationException(
@@ -186,9 +187,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             if (navigation != null)
             {
-                return navigation.IsCollection
-                    ? (NavigationEntry)new CollectionEntry(InternalEntry, propertyName)
-                    : new ReferenceEntry(InternalEntry, propertyName);
+                return
+                    navigation.IsCollection
+                  ? (NavigationEntry)new CollectionEntry(InternalEntry, propertyName)
+                  : new ReferenceEntry(InternalEntry, propertyName);
             }
 
             if (InternalEntry.EntityType.FindProperty(propertyName) != null)

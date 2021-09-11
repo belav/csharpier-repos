@@ -49,18 +49,19 @@ namespace Microsoft.AspNetCore.Testing
             IAttributeInfo theoryAttribute
         ) {
             var skipReason = testMethod.EvaluateSkipConditions();
-            return skipReason != null
-                ? new[]
-                  {
-                      new SkippedTestCase(
-                          skipReason,
-                          DiagnosticMessageSink,
-                          discoveryOptions.MethodDisplayOrDefault(),
-                          TestMethodDisplayOptions.None,
-                          testMethod
-                      )
-                  }
-                : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
+            return
+                skipReason != null
+              ? new[]
+                {
+                    new SkippedTestCase(
+                        skipReason,
+                        DiagnosticMessageSink,
+                        discoveryOptions.MethodDisplayOrDefault(),
+                        TestMethodDisplayOptions.None,
+                        testMethod
+                    )
+                }
+              : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
         }
 
         protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(
@@ -84,20 +85,21 @@ namespace Microsoft.AspNetCore.Testing
                 }
             }
 
-            return skipReason != null
-                ? base.CreateTestCasesForSkippedDataRow(
-                      discoveryOptions,
-                      testMethod,
-                      theoryAttribute,
-                      dataRow,
-                      skipReason
-                  )
-                : base.CreateTestCasesForDataRow(
-                      discoveryOptions,
-                      testMethod,
-                      theoryAttribute,
-                      dataRow
-                  );
+            return
+                skipReason != null
+              ? base.CreateTestCasesForSkippedDataRow(
+                    discoveryOptions,
+                    testMethod,
+                    theoryAttribute,
+                    dataRow,
+                    skipReason
+                )
+              : base.CreateTestCasesForDataRow(
+                    discoveryOptions,
+                    testMethod,
+                    theoryAttribute,
+                    dataRow
+                );
         }
 
         protected override IEnumerable<IXunitTestCase> CreateTestCasesForSkippedDataRow(

@@ -220,9 +220,10 @@ namespace System.Runtime.Serialization
             if (serializerKnownDataContracts == null)
                 return null;
             DataContract? outDataContract;
-            return serializerKnownDataContracts.TryGetValue(qname, out outDataContract)
-                ? outDataContract
-                : null;
+            return
+                serializerKnownDataContracts.TryGetValue(qname, out outDataContract)
+              ? outDataContract
+              : null;
         }
 
         internal static DataContractDictionary? GetDataContractsForKnownTypes(

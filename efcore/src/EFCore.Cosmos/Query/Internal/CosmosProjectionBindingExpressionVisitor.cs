@@ -287,11 +287,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 }
 
                 case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
-                    return materializeCollectionNavigationExpression.Navigation
-                        is INavigation embeddableNavigation
-                    && embeddableNavigation.IsEmbedded()
-                        ? base.Visit(materializeCollectionNavigationExpression.Subquery)
-                        : base.VisitExtension(materializeCollectionNavigationExpression);
+                    return
+                        materializeCollectionNavigationExpression.Navigation
+                            is INavigation embeddableNavigation
+                        && embeddableNavigation.IsEmbedded()
+                      ? base.Visit(materializeCollectionNavigationExpression.Subquery)
+                      : base.VisitExtension(materializeCollectionNavigationExpression);
 
                 case IncludeExpression includeExpression:
                     if (!_clientEval)
@@ -838,13 +839,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             var operand = Visit(unaryExpression.Operand);
 
-            return (
-                unaryExpression.NodeType == ExpressionType.Convert
-                || unaryExpression.NodeType == ExpressionType.ConvertChecked
-            )
-            && unaryExpression.Type == operand.Type
-                ? operand
-                : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+            return
+                (
+                    unaryExpression.NodeType == ExpressionType.Convert
+                    || unaryExpression.NodeType == ExpressionType.ConvertChecked
+                )
+                && unaryExpression.Type == operand.Type
+              ? operand
+              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         // TODO: Debugging

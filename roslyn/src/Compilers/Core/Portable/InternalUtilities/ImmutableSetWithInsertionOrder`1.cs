@@ -58,9 +58,10 @@ namespace Roslyn.Utilities
                 return this;
             }
 
-            return this.Count == 1
-                ? Empty
-                : new ImmutableSetWithInsertionOrder<T>(modifiedMap, _nextElementValue);
+            return
+                this.Count == 1
+              ? Empty
+              : new ImmutableSetWithInsertionOrder<T>(modifiedMap, _nextElementValue);
         }
 
         public IEnumerable<T> InInsertionOrder

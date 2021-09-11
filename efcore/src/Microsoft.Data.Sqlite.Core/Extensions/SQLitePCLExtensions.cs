@@ -24,9 +24,10 @@ namespace SQLitePCL
         {
             libraryName = raw.GetNativeLibraryName();
 
-            return _knownLibraries.TryGetValue(libraryName, out var supported)
-                ? supported
-                : default(bool?);
+            return
+                _knownLibraries.TryGetValue(libraryName, out var supported)
+              ? supported
+              : default(bool?);
         }
     }
 }

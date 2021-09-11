@@ -235,9 +235,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     derivedTypeConversion
                 );
 
-                return navigation.IsCollection
-                    ? new MaterializeCollectionNavigationExpression(expansion, navigation)
-                    : expansion;
+                return
+                    navigation.IsCollection
+                  ? new MaterializeCollectionNavigationExpression(expansion, navigation)
+                  : expansion;
             }
 
             protected Expression ExpandSkipNavigation(
@@ -411,9 +412,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     }
                 }
 
-                return navigation.IsCollection
-                    ? new MaterializeCollectionNavigationExpression(secondaryExpansion, navigation)
-                    : secondaryExpansion;
+                return
+                    navigation.IsCollection
+                  ? new MaterializeCollectionNavigationExpression(secondaryExpansion, navigation)
+                  : secondaryExpansion;
             }
 
             private Expression ExpandForeignKey(
@@ -1343,13 +1345,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is QueryRootExpression queryRootExpression
-                && queryRootExpression.EntityType == _entityType
-                    ? _navigationExpandingExpressionVisitor.CreateNavigationExpansionExpression(
-                          queryRootExpression,
-                          _entityType
-                      )
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is QueryRootExpression queryRootExpression
+                    && queryRootExpression.EntityType == _entityType
+                  ? _navigationExpandingExpressionVisitor.CreateNavigationExpansionExpression(
+                        queryRootExpression,
+                        _entityType
+                    )
+                  : base.VisitExtension(extensionExpression);
             }
         }
 

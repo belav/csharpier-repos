@@ -42,9 +42,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     out var accessControlRequestMethod
                 )
             ) {
-                return HttpMethods.Equals(accessControlRequestMethod, _method)
-                    ? _corsPreflightDestination
-                    : _corsPreflightExitDestination;
+                return
+                    HttpMethods.Equals(accessControlRequestMethod, _method)
+                  ? _corsPreflightDestination
+                  : _corsPreflightExitDestination;
             }
 
             return HttpMethods.Equals(httpMethod, _method) ? _destination : _exitDestination;

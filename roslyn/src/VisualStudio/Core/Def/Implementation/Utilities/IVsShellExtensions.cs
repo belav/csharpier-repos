@@ -34,16 +34,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                                 SVsShell,
                                 IVsShell
                             >();
-                            return (shell != null)
-                            && ErrorHandler.Succeeded(
-                                shell.GetProperty(
-                                    (int)__VSSPROPID.VSSPROPID_IsInCommandLineMode,
-                                    out var result
+                            return
+                                (shell != null)
+                                && ErrorHandler.Succeeded(
+                                    shell.GetProperty(
+                                        (int)__VSSPROPID.VSSPROPID_IsInCommandLineMode,
+                                        out var result
+                                    )
                                 )
-                            )
-                            && (bool)result
-                                ? 1
-                                : -1;
+                                && (bool)result
+                              ? 1
+                              : -1;
                         }
                     );
                 }

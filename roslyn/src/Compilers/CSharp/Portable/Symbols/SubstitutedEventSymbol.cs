@@ -63,9 +63,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol? originalAddMethod = OriginalDefinition.AddMethod;
-                return (object?)originalAddMethod == null
-                    ? null
-                    : originalAddMethod.AsMember(_containingType);
+                return
+                    (object?)originalAddMethod == null
+                  ? null
+                  : originalAddMethod.AsMember(_containingType);
             }
         }
 
@@ -74,9 +75,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol? originalRemoveMethod = OriginalDefinition.RemoveMethod;
-                return (object?)originalRemoveMethod == null
-                    ? null
-                    : originalRemoveMethod.AsMember(_containingType);
+                return
+                    (object?)originalRemoveMethod == null
+                  ? null
+                  : originalRemoveMethod.AsMember(_containingType);
             }
         }
 
@@ -85,9 +87,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 FieldSymbol? originalAssociatedField = OriginalDefinition.AssociatedField;
-                return (object?)originalAssociatedField == null
-                    ? null
-                    : originalAssociatedField.AsMember(_containingType);
+                return
+                    (object?)originalAssociatedField == null
+                  ? null
+                  : originalAssociatedField.AsMember(_containingType);
             }
         }
 

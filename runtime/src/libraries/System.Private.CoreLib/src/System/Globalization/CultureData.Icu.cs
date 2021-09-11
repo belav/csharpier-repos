@@ -355,9 +355,10 @@ namespace System.Globalization
                 cultureName,
                 IcuLocaleDataParts.DigitSubstitutionOrListSeparator
             );
-            return digitSubstitution == -1
-                ? (int)DigitShapes.None
-                : (int)(digitSubstitution & DigitSubstitutionMask);
+            return
+                digitSubstitution == -1
+              ? (int)DigitShapes.None
+              : (int)(digitSubstitution & DigitSubstitutionMask);
         }
 
         private static string IcuGetListSeparator(string? cultureName)

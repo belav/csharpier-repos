@@ -35,9 +35,10 @@ namespace Microsoft.AspNetCore.DataProtection
         /// </summary>
         public static IActivator GetActivator(this IServiceProvider serviceProvider)
         {
-            return (serviceProvider != null)
-                ? (serviceProvider.GetService<IActivator>() ?? new SimpleActivator(serviceProvider))
-                : SimpleActivator.DefaultWithoutServices;
+            return
+                (serviceProvider != null)
+              ? (serviceProvider.GetService<IActivator>() ?? new SimpleActivator(serviceProvider))
+              : SimpleActivator.DefaultWithoutServices;
         }
     }
 }

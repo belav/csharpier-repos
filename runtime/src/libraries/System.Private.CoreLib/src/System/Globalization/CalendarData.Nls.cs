@@ -15,16 +15,17 @@ namespace System.Globalization
         {
             Debug.Assert(GlobalizationMode.UseNls);
 
-            return GlobalizationMode.Invariant
-                ? Invariant.iTwoDigitYearMax
-                : CallGetCalendarInfoEx(
-                      null,
-                      calendarId,
-                      CAL_ITWODIGITYEARMAX,
-                      out int twoDigitYearMax
-                  )
-                    ? twoDigitYearMax
-                    : -1;
+            return
+                GlobalizationMode.Invariant
+              ? Invariant.iTwoDigitYearMax
+              : CallGetCalendarInfoEx(
+                    null,
+                    calendarId,
+                    CAL_ITWODIGITYEARMAX,
+                    out int twoDigitYearMax
+                )
+                  ? twoDigitYearMax
+                  : -1;
         }
 
         private static bool NlsSystemSupportsTaiwaneseCalendar()

@@ -356,9 +356,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                         plusEqualsToken.SpanStart
                     ) as BaseTypeDeclarationSyntax;
 
-                return typeDeclaration != null
-                    ? typeDeclaration.Identifier.Text
-                    : eventSymbol.ContainingType.Name;
+                return
+                    typeDeclaration != null
+                  ? typeDeclaration.Identifier.Text
+                  : eventSymbol.ContainingType.Name;
             }
         }
     }

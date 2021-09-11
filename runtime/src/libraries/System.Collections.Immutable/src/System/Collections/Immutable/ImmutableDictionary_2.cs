@@ -836,9 +836,10 @@ namespace System.Collections.Immutable
             KeyValuePair<TKey, TValue>
         >.GetEnumerator()
         {
-            return this.IsEmpty
-                ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
-                : this.GetEnumerator();
+            return
+                this.IsEmpty
+              ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
+              : this.GetEnumerator();
         }
 
         #endregion
@@ -867,9 +868,10 @@ namespace System.Collections.Immutable
         {
             Requires.NotNull(comparers, nameof(comparers));
 
-            return Empty._comparers == comparers
-                ? Empty
-                : new ImmutableDictionary<TKey, TValue>(comparers);
+            return
+                Empty._comparers == comparers
+              ? Empty
+              : new ImmutableDictionary<TKey, TValue>(comparers);
         }
 
         /// <summary>
@@ -1122,13 +1124,14 @@ namespace System.Collections.Immutable
 
             if (_root != root)
             {
-                return root.IsEmpty
-                    ? this.Clear()
-                    : new ImmutableDictionary<TKey, TValue>(
-                          root,
-                          _comparers,
-                          adjustedCountIfDifferentRoot
-                      );
+                return
+                    root.IsEmpty
+                  ? this.Clear()
+                  : new ImmutableDictionary<TKey, TValue>(
+                        root,
+                        _comparers,
+                        adjustedCountIfDifferentRoot
+                    );
             }
 
             return this;

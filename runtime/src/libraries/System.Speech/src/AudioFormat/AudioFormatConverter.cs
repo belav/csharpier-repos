@@ -313,17 +313,18 @@ namespace System.Speech.Internal
                 }
             }
 
-            return waveEx != null
-                ? new SpeechAudioFormatInfo(
-                      (EncodingFormat)waveEx.wFormatTag,
-                      (int)waveEx.nSamplesPerSec,
-                      waveEx.wBitsPerSample,
-                      waveEx.nChannels,
-                      (int)waveEx.nAvgBytesPerSec,
-                      waveEx.nBlockAlign,
-                      extra
-                  )
-                : null;
+            return
+                waveEx != null
+              ? new SpeechAudioFormatInfo(
+                    (EncodingFormat)waveEx.wFormatTag,
+                    (int)waveEx.nSamplesPerSec,
+                    waveEx.wBitsPerSample,
+                    waveEx.nChannels,
+                    (int)waveEx.nAvgBytesPerSec,
+                    waveEx.nBlockAlign,
+                    extra
+                )
+              : null;
         }
 
         private enum StreamFormat

@@ -26,15 +26,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
             ) {
                 if (bool.TryParse(value, out var boolValue))
                 {
-                    return boolValue
-                        ? new CodeStyleOption2<ExpressionBodyPreference>(
-                              ExpressionBodyPreference.WhenPossible,
-                              notification
-                          )
-                        : new CodeStyleOption2<ExpressionBodyPreference>(
-                              ExpressionBodyPreference.Never,
-                              notification
-                          );
+                    return
+                        boolValue
+                      ? new CodeStyleOption2<ExpressionBodyPreference>(
+                            ExpressionBodyPreference.WhenPossible,
+                            notification
+                        )
+                      : new CodeStyleOption2<ExpressionBodyPreference>(
+                            ExpressionBodyPreference.Never,
+                            notification
+                        );
                 }
 
                 if (value == "when_on_single_line")
@@ -128,15 +129,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
             ) {
                 if (bool.TryParse(value, out var boolValue))
                 {
-                    return boolValue
-                        ? new CodeStyleOption2<PreferBracesPreference>(
-                              PreferBracesPreference.Always,
-                              notificationOption
-                          )
-                        : new CodeStyleOption2<PreferBracesPreference>(
-                              PreferBracesPreference.None,
-                              notificationOption
-                          );
+                    return
+                        boolValue
+                      ? new CodeStyleOption2<PreferBracesPreference>(
+                            PreferBracesPreference.Always,
+                            notificationOption
+                        )
+                      : new CodeStyleOption2<PreferBracesPreference>(
+                            PreferBracesPreference.None,
+                            notificationOption
+                        );
                 }
 
                 if (value == "when_multiline")

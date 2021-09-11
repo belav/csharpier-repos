@@ -658,11 +658,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? null
                     : (ConfigurationSource?)configurationSource.Max(_isUniqueConfigurationSource);
 
-            return IsUnique != oldUnique
-                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
-                      Builder
-                  )
-                : oldUnique;
+            return
+                IsUnique != oldUnique
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
+                    Builder
+                )
+              : oldUnique;
         }
 
         private const bool DefaultIsUnique = false;
@@ -707,11 +708,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? null
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
-            return IsRequired != oldRequired
-                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
-                      Builder
-                  )
-                : oldRequired;
+            return
+                IsRequired != oldRequired
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
+                    Builder
+                )
+              : oldRequired;
         }
 
         private bool DefaultIsRequired => !Properties.Any(p => p.IsNullable);
@@ -778,11 +780,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? null
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
-            return IsRequiredDependent != oldRequired
-                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
-                      Builder
-                  )
-                : oldRequired;
+            return
+                IsRequiredDependent != oldRequired
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
+                    Builder
+                )
+              : oldRequired;
         }
 
         private const bool DefaultIsRequiredDependent = false;
@@ -912,11 +915,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdateIsOwnershipConfigurationSource(configurationSource);
             }
 
-            return IsOwnership != oldIsOwnership
-                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyOwnershipChanged(
-                      Builder
-                  )
-                : oldIsOwnership;
+            return
+                IsOwnership != oldIsOwnership
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyOwnershipChanged(Builder)
+              : oldIsOwnership;
         }
 
         private const bool DefaultIsOwnership = false;

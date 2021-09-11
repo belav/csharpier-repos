@@ -1195,9 +1195,10 @@ namespace System.Runtime.Serialization
 
         internal IDictionary<string, string>? GetNamespacesInScope(XmlNamespaceScope scope)
         {
-            return (reader is IXmlNamespaceResolver)
-                ? ((IXmlNamespaceResolver)reader).GetNamespacesInScope(scope)
-                : null;
+            return
+                (reader is IXmlNamespaceResolver)
+              ? ((IXmlNamespaceResolver)reader).GetNamespacesInScope(scope)
+              : null;
         }
 
         // IXmlLineInfo members
@@ -1261,9 +1262,10 @@ namespace System.Runtime.Serialization
                 if (xmlTextReader == null)
                 {
                     IXmlTextParser? xmlTextParser = reader as IXmlTextParser;
-                    return (xmlTextParser == null)
-                        ? WhitespaceHandling.None
-                        : xmlTextParser.WhitespaceHandling;
+                    return
+                        (xmlTextParser == null)
+                      ? WhitespaceHandling.None
+                      : xmlTextParser.WhitespaceHandling;
                 }
                 else
                     return xmlTextReader.WhitespaceHandling;

@@ -302,17 +302,18 @@ namespace System.Diagnostics
                 }
 
                 Debug.Assert(pri >= -20 && pri <= 20);
-                return pri < -15
-                    ? ProcessPriorityClass.RealTime
-                    : pri < -10
-                        ? ProcessPriorityClass.High
-                        : pri < -5
-                            ? ProcessPriorityClass.AboveNormal
-                            : pri == 0
-                                ? ProcessPriorityClass.Normal
-                                : pri <= 10
-                                    ? ProcessPriorityClass.BelowNormal
-                                    : ProcessPriorityClass.Idle;
+                return
+                    pri < -15
+                  ? ProcessPriorityClass.RealTime
+                  : pri < -10
+                      ? ProcessPriorityClass.High
+                      : pri < -5
+                          ? ProcessPriorityClass.AboveNormal
+                          : pri == 0
+                              ? ProcessPriorityClass.Normal
+                              : pri <= 10
+                                  ? ProcessPriorityClass.BelowNormal
+                                  : ProcessPriorityClass.Idle;
             }
             set
             {

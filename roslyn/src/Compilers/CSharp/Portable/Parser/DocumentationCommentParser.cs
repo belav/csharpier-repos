@@ -1075,9 +1075,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         ) {
             // Don't attach any diagnostics to syntax nodes within a documentation comment if the DocumentationMode
             // is not at least Diagnose.
-            return Options.DocumentationMode >= DocumentationMode.Diagnose
-                ? base.WithAdditionalDiagnostics<TNode>(node, diagnostics)
-                : node;
+            return
+                Options.DocumentationMode >= DocumentationMode.Diagnose
+              ? base.WithAdditionalDiagnostics<TNode>(node, diagnostics)
+              : node;
         }
 
         #region Cref
@@ -1422,13 +1423,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 SyntaxToken close = EatToken(closeKind);
 
-                return useSquareBrackets
-                    ? (BaseCrefParameterListSyntax)SyntaxFactory.CrefBracketedParameterList(
-                          open,
-                          list,
-                          close
-                      )
-                    : SyntaxFactory.CrefParameterList(open, list, close);
+                return
+                    useSquareBrackets
+                  ? (BaseCrefParameterListSyntax)SyntaxFactory.CrefBracketedParameterList(
+                        open,
+                        list,
+                        close
+                    )
+                  : SyntaxFactory.CrefParameterList(open, list, close);
             }
 
             finally
@@ -1570,9 +1572,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 typeArgumentsMustBeIdentifiers,
                 checkForMember
             );
-            return typeArgumentsMustBeIdentifiers
-                ? typeWithoutSuffix
-                : ParseCrefTypeSuffix(typeWithoutSuffix);
+            return
+                typeArgumentsMustBeIdentifiers
+              ? typeWithoutSuffix
+              : ParseCrefTypeSuffix(typeWithoutSuffix);
         }
 
         /// <summary>

@@ -52,11 +52,12 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 closedModelType,
                 openModelType
             );
-            return (typeArguments != null)
-                ? (IExtensibleModelBinder)Activator.CreateInstance(
-                      openBinderType.MakeGenericType(typeArguments)
-                  )
-                : null;
+            return
+                (typeArguments != null)
+              ? (IExtensibleModelBinder)Activator.CreateInstance(
+                    openBinderType.MakeGenericType(typeArguments)
+                )
+              : null;
         }
 
         public static object[] RawValueToObjectArray(object rawValue)

@@ -1212,18 +1212,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             switch (feature)
             {
                 case MessageID.IDS_FeatureModuleAttrLoc:
-                    return availableVersion >= LanguageVersion.CSharp2
-                        ? node
-                        : this.AddError(node, ErrorCode.WRN_NonECMAFeature, feature.Localize());
+                    return
+                        availableVersion >= LanguageVersion.CSharp2
+                      ? node
+                      : this.AddError(node, ErrorCode.WRN_NonECMAFeature, feature.Localize());
 
                 case MessageID.IDS_FeatureAltInterpolatedVerbatimStrings:
-                    return availableVersion >= requiredVersion
-                        ? node
-                        : this.AddError(
-                              node,
-                              ErrorCode.ERR_AltInterpolatedVerbatimStringsNotAvailable,
-                              new CSharpRequiredLanguageVersion(requiredVersion)
-                          );
+                    return
+                        availableVersion >= requiredVersion
+                      ? node
+                      : this.AddError(
+                            node,
+                            ErrorCode.ERR_AltInterpolatedVerbatimStringsNotAvailable,
+                            new CSharpRequiredLanguageVersion(requiredVersion)
+                        );
             }
 
             var info = feature.GetFeatureAvailabilityDiagnosticInfo(this.Options);

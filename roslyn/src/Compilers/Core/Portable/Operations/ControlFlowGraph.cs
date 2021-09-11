@@ -116,9 +116,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             IOperation? operation = semanticModel.GetOperation(node, cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
-            return operation == null
-                ? null
-                : CreateCore(operation, nameof(operation), cancellationToken);
+            return
+                operation == null
+              ? null
+              : CreateCore(operation, nameof(operation), cancellationToken);
         }
 
         /// <summary>

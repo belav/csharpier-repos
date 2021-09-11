@@ -1087,10 +1087,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static string? DecodeNotNullIfNotNullAttribute(this CSharpAttributeData attribute)
         {
             var arguments = attribute.CommonConstructorArguments;
-            return arguments.Length == 1
-            && arguments[0].TryDecodeValue(SpecialType.System_String, out string? value)
-                ? value
-                : null;
+            return
+                arguments.Length == 1
+                && arguments[0].TryDecodeValue(SpecialType.System_String, out string? value)
+              ? value
+              : null;
         }
 
         internal static Location GetAttributeArgumentSyntaxLocation(

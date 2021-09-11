@@ -518,9 +518,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 }
             }
 
-            return partitionKey == null
-                ? PartitionKey.None
-                : new PartitionKey((string)partitionKey);
+            return
+                partitionKey == null
+              ? PartitionKey.None
+              : new PartitionKey((string)partitionKey);
         }
 
         private static void ProcessResponse(ResponseMessage response, IUpdateEntry entry)

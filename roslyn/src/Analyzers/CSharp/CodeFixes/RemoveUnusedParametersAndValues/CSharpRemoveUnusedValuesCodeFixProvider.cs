@@ -79,11 +79,12 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     );
 
                 case SyntaxKind.SingleVariableDesignation:
-                    return newName.ValueText
-                    == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                        ? SyntaxFactory.DiscardDesignation().WithTriviaFrom(node)
-                        : (SyntaxNode)SyntaxFactory.SingleVariableDesignation(newName)
-                              .WithTriviaFrom(node);
+                    return
+                        newName.ValueText
+                        == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                      ? SyntaxFactory.DiscardDesignation().WithTriviaFrom(node)
+                      : (SyntaxNode)SyntaxFactory.SingleVariableDesignation(newName)
+                            .WithTriviaFrom(node);
 
                 case SyntaxKind.CatchDeclaration:
                     var catchDeclaration = (CatchDeclarationSyntax)node;

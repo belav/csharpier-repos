@@ -247,9 +247,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
             Debug.Assert(addParameterViewModel.IsCallsiteRegularValue);
 
-            return addParameterViewModel.UseNamedArguments
-                ? CallSiteKind.ValueWithName
-                : CallSiteKind.Value;
+            return
+                addParameterViewModel.UseNamedArguments
+              ? CallSiteKind.ValueWithName
+              : CallSiteKind.Value;
         }
 
         private void SetFocusToSelectedRow(bool focusRow)

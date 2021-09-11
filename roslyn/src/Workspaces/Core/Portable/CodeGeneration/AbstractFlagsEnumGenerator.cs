@@ -268,9 +268,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ) {
             unchecked
             {
-                return (long)x.value < (long)y.value
-                    ? -1
-                    : (long)x.value > (long)y.value ? 1 : -x.field.Name.CompareTo(y.field.Name);
+                return
+                    (long)x.value < (long)y.value
+                  ? -1
+                  : (long)x.value > (long)y.value ? 1 : -x.field.Name.CompareTo(y.field.Name);
             }
         }
     }

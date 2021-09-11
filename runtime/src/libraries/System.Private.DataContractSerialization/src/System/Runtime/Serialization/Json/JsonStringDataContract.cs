@@ -23,9 +23,10 @@ namespace System.Runtime.Serialization.Json
         ) {
             if (context == null)
             {
-                return TryReadNullAtTopLevel(jsonReader)
-                    ? null
-                    : jsonReader.ReadElementContentAsString();
+                return
+                    TryReadNullAtTopLevel(jsonReader)
+                  ? null
+                  : jsonReader.ReadElementContentAsString();
             }
             else
             {

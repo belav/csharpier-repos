@@ -52,15 +52,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Function(
-                      "RAND",
-                      Array.Empty<SqlExpression>(),
-                      nullable: false,
-                      argumentsPropagateNullability: Array.Empty<bool>(),
-                      method.ReturnType
-                  )
-                : null;
+            return
+                _methodInfo.Equals(method)
+              ? _sqlExpressionFactory.Function(
+                    "RAND",
+                    Array.Empty<SqlExpression>(),
+                    nullable: false,
+                    argumentsPropagateNullability: Array.Empty<bool>(),
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

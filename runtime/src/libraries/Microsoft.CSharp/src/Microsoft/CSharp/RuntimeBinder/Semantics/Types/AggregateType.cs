@@ -265,9 +265,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             get
             {
                 AggregateSymbol agg = OwningAggregate;
-                return agg.IsPredefined()
-                    ? PredefinedTypeFacts.IsSimpleType(agg.GetPredefType())
-                    : agg.IsEnum();
+                return
+                    agg.IsPredefined()
+                  ? PredefinedTypeFacts.IsSimpleType(agg.GetPredefType())
+                  : agg.IsEnum();
             }
         }
 
@@ -381,9 +382,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 }
 
                 // Struct type could be predefined (int, long, etc.) or some other struct.
-                return sym.IsPredefined()
-                    ? PredefinedTypeFacts.GetFundType(sym.GetPredefType())
-                    : FUNDTYPE.FT_STRUCT;
+                return
+                    sym.IsPredefined()
+                  ? PredefinedTypeFacts.GetFundType(sym.GetPredefType())
+                  : FUNDTYPE.FT_STRUCT;
             }
         }
 
@@ -416,14 +418,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 || IsPredefined && PredefinedType == PredefinedType.PT_DECIMAL
                         );
 
-                        return IsPredefined && PredefinedType == PredefinedType.PT_DATETIME
-                            ? ConstValKind.Long
-                            : ConstValKind.Decimal;
+                        return
+                            IsPredefined && PredefinedType == PredefinedType.PT_DATETIME
+                          ? ConstValKind.Long
+                          : ConstValKind.Decimal;
 
                     case FUNDTYPE.FT_REF:
-                        return IsPredefined && PredefinedType == PredefinedType.PT_STRING
-                            ? ConstValKind.String
-                            : ConstValKind.IntPtr;
+                        return
+                            IsPredefined && PredefinedType == PredefinedType.PT_STRING
+                          ? ConstValKind.String
+                          : ConstValKind.IntPtr;
 
                     case FUNDTYPE.FT_R4:
                         return ConstValKind.Float;

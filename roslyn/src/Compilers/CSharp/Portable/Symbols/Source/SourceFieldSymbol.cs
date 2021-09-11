@@ -379,9 +379,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ConstantValue GetLazyConstantValue(bool earlyDecodingWellKnownAttributes)
         {
-            return earlyDecodingWellKnownAttributes
-                ? _lazyConstantEarlyDecodingValue
-                : _lazyConstantValue;
+            return
+                earlyDecodingWellKnownAttributes
+              ? _lazyConstantEarlyDecodingValue
+              : _lazyConstantValue;
         }
 
         private void SetLazyConstantValue(

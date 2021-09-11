@@ -51,9 +51,10 @@ namespace Roslyn.Utilities
 
             if (items is ImmutableArray<T> array)
             {
-                return array.IsDefaultOrEmpty
-                    ? SpecializedCollections.EmptyBoxedImmutableArray<T>()
-                    : (IReadOnlyList<T>)items;
+                return
+                    array.IsDefaultOrEmpty
+                  ? SpecializedCollections.EmptyBoxedImmutableArray<T>()
+                  : (IReadOnlyList<T>)items;
             }
 
             if (items is ICollection<T> collection && collection.Count == 0)

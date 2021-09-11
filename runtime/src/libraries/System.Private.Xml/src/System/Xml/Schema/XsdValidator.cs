@@ -803,9 +803,10 @@ namespace System.Xml.Schema
         {
             get
             {
-                return context!.ElementDecl != null
-                    ? context.ElementDecl.ContentValidator!.PreserveWhitespace
-                    : false;
+                return
+                    context!.ElementDecl != null
+                  ? context.ElementDecl.ContentValidator!.PreserveWhitespace
+                  : false;
             }
         }
 

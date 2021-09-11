@@ -2420,10 +2420,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 // IMPL CHANGE: Dev10 raises WRN_NubExprIsConstBool in some cases, but that really doesn't
                                 // make sense (why warn that a constant has a constant value?).
-                                return (leftIsNull == rightIsNull)
-                                == (op == BinaryOperatorKind.Equal)
-                                    ? ConstantValue.True
-                                    : ConstantValue.False;
+                                return
+                                    (leftIsNull == rightIsNull) == (op == BinaryOperatorKind.Equal)
+                                  ? ConstantValue.True
+                                  : ConstantValue.False;
                             }
                         }
                     }
@@ -2648,13 +2648,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // MinValue % -1 always overflows at runtime but never at compile time
                 case BinaryOperatorKind.IntRemainder:
-                    return (valueRight.Int32Value != -1)
-                        ? valueLeft.Int32Value % valueRight.Int32Value
-                        : 0;
+                    return
+                        (valueRight.Int32Value != -1)
+                      ? valueLeft.Int32Value % valueRight.Int32Value
+                      : 0;
                 case BinaryOperatorKind.LongRemainder:
-                    return (valueRight.Int64Value != -1)
-                        ? valueLeft.Int64Value % valueRight.Int64Value
-                        : 0;
+                    return
+                        (valueRight.Int64Value != -1)
+                      ? valueLeft.Int64Value % valueRight.Int64Value
+                      : 0;
                 case BinaryOperatorKind.UIntRemainder:
                 case BinaryOperatorKind.NUIntRemainder:
                     return valueLeft.UInt32Value % valueRight.UInt32Value;
@@ -2682,9 +2684,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Rope rightValue = valueRight.RopeValue ?? Rope.Empty;
 
                 long newLength = (long)leftValue.Length + (long)rightValue.Length;
-                return (newLength > int.MaxValue)
-                    ? ConstantValue.Bad
-                    : ConstantValue.CreateFromRope(Rope.Concat(leftValue, rightValue));
+                return
+                    (newLength > int.MaxValue)
+                  ? ConstantValue.Bad
+                  : ConstantValue.CreateFromRope(Rope.Concat(leftValue, rightValue));
             }
 
             return null;
@@ -4353,12 +4356,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     //    The value is always false.
 
                     Debug.Assert(targetType.IsNullableType());
-                    return operandType.Equals(
-                        targetType.GetNullableUnderlyingType(),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
-                        ? ConstantValue.True
-                        : ConstantValue.False;
+                    return
+                        operandType.Equals(
+                            targetType.GetNullableUnderlyingType(),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
+                      ? ConstantValue.True
+                      : ConstantValue.False;
 
                 default:
                 case ConversionKind.ImplicitDynamic:
@@ -5285,9 +5289,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CheckFeatureAvailability(node, MessageID.IDS_FeatureRefConditional, diagnostics);
             }
 
-            return isRef
-                ? BindRefConditionalOperator(node, whenTrue, whenFalse, diagnostics)
-                : BindValueConditionalOperator(node, whenTrue, whenFalse, diagnostics);
+            return
+                isRef
+              ? BindRefConditionalOperator(node, whenTrue, whenFalse, diagnostics)
+              : BindValueConditionalOperator(node, whenTrue, whenFalse, diagnostics);
         }
 
 #nullable enable

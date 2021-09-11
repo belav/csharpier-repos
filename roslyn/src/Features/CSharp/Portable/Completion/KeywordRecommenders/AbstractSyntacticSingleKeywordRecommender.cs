@@ -63,9 +63,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (!syntaxKind.HasValue)
                 return ImmutableArray<RecommendedKeyword>.Empty;
 
-            return ShouldPreselect(context, cancellationToken)
-                ? _keywordPriorityRecommendedKeywords
-                : _defaultPriorityRecommendedKeywords;
+            return
+                ShouldPreselect(context, cancellationToken)
+              ? _keywordPriorityRecommendedKeywords
+              : _defaultPriorityRecommendedKeywords;
         }
 
         protected virtual bool ShouldPreselect(

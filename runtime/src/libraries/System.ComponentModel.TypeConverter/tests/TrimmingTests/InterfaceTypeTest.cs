@@ -19,9 +19,9 @@ class Program
         string expectedObjTypeNamePrefix =
             "System.ComponentModel.TypeDescriptor+TypeDescriptorInterface, System.ComponentModel.TypeConverter, Version=";
 
-        return obj != null
-        && obj.GetType().AssemblyQualifiedName.StartsWith(expectedObjTypeNamePrefix)
-            ? 100
-            : -1;
+        return
+            obj != null && obj.GetType().AssemblyQualifiedName.StartsWith(expectedObjTypeNamePrefix)
+          ? 100
+          : -1;
     }
 }

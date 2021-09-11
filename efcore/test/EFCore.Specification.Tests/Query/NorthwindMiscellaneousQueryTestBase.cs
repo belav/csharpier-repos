@@ -1867,9 +1867,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return false;
                 }
 
-                return ReferenceEquals(this, obj)
-                    ? true
-                    : obj.GetType() == GetType() && Equals((OrderCountDTO)obj);
+                return
+                    ReferenceEquals(this, obj)
+                  ? true
+                  : obj.GetType() == GetType() && Equals((OrderCountDTO)obj);
             }
 
             private bool Equals(OrderCountDTO other)
@@ -5808,9 +5809,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return false;
                 }
 
-                return ReferenceEquals(this, obj)
-                    ? true
-                    : obj.GetType() == GetType() && Equals((DTO<T>)obj);
+                return
+                    ReferenceEquals(this, obj)
+                  ? true
+                  : obj.GetType() == GetType() && Equals((DTO<T>)obj);
             }
 
             private bool Equals(DTO<T> other)

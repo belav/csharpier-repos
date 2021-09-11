@@ -658,9 +658,10 @@ namespace System.IO
 
                     if (completeSynchronously)
                     {
-                        return (error == null)
-                            ? LastSyncCompletedReadTask(bytesFromBuffer)
-                            : Task.FromException<int>(error);
+                        return
+                            (error == null)
+                          ? LastSyncCompletedReadTask(bytesFromBuffer)
+                          : Task.FromException<int>(error);
                     }
                 }
 
@@ -1403,9 +1404,10 @@ namespace System.IO
             EnsureNotClosed();
             EnsureCanRead();
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled<int>(cancellationToken)
-                : CopyToAsyncCore(destination, bufferSize, cancellationToken);
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled<int>(cancellationToken)
+              : CopyToAsyncCore(destination, bufferSize, cancellationToken);
         }
 
         private async Task CopyToAsyncCore(

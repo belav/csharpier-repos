@@ -105,12 +105,13 @@ namespace System.Net.Security
             );
             using (sspiHandle)
             {
-                return success
-                    ? NegotiationInfoClass.GetAuthenticationPackageName(
-                          sspiHandle!,
-                          (int)ctx.NegotiationState
-                      )
-                    : null;
+                return
+                    success
+                  ? NegotiationInfoClass.GetAuthenticationPackageName(
+                        sspiHandle!,
+                        (int)ctx.NegotiationState
+                    )
+                  : null;
             }
         }
 

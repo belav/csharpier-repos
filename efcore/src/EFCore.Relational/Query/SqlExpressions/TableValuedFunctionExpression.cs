@@ -79,9 +79,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 changed |= arguments[i] != Arguments[i];
             }
 
-            return changed
-                ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
-                : this;
+            return
+                changed
+              ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
+              : this;
         }
 
         /// <summary>
@@ -94,9 +95,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(arguments, nameof(arguments));
 
-            return !arguments.SequenceEqual(Arguments)
-                ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
-                : this;
+            return
+                !arguments.SequenceEqual(Arguments)
+              ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
+              : this;
         }
 
         /// <inheritdoc />

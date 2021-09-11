@@ -135,18 +135,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ExtendedErrorTypeSymbol AsUnreported()
         {
-            return this.Unreported
-                ? this
-                : new ExtendedErrorTypeSymbol(
-                      _containingSymbol,
-                      _name,
-                      _arity,
-                      _errorInfo,
-                      true,
-                      VariableUsedBeforeDeclaration,
-                      _candidateSymbols,
-                      _resultKind
-                  );
+            return
+                this.Unreported
+              ? this
+              : new ExtendedErrorTypeSymbol(
+                    _containingSymbol,
+                    _name,
+                    _arity,
+                    _errorInfo,
+                    true,
+                    VariableUsedBeforeDeclaration,
+                    _candidateSymbols,
+                    _resultKind
+                );
         }
 
         private static ImmutableArray<Symbol> UnwrapErrorCandidates(
@@ -155,9 +156,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var candidate = candidateSymbols.IsEmpty
                 ? null
                 : candidateSymbols[0] as ErrorTypeSymbol;
-            return ((object?)candidate != null && !candidate.CandidateSymbols.IsEmpty)
-                ? candidate.CandidateSymbols
-                : candidateSymbols;
+            return
+                ((object?)candidate != null && !candidate.CandidateSymbols.IsEmpty)
+              ? candidate.CandidateSymbols
+              : candidateSymbols;
         }
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)

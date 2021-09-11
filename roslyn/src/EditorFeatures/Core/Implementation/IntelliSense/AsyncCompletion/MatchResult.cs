@@ -67,9 +67,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     {
                         var ret = matchX.Value.CompareTo(matchY.Value);
                         // We want to preserve the original order for items with same pattern match score.
-                        return ret == 0
-                            ? x._indexInOriginalSortedOrder - y._indexInOriginalSortedOrder
-                            : ret;
+                        return
+                            ret == 0
+                          ? x._indexInOriginalSortedOrder - y._indexInOriginalSortedOrder
+                          : ret;
                     }
 
                     return -1;

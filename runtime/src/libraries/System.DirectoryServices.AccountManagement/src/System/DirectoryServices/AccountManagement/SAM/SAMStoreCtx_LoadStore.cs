@@ -198,10 +198,11 @@ namespace System.DirectoryServices.AccountManagement
             if (index == Name.Length - 1)
                 return null;
 
-            return (index != -1)
-                ? Name.Substring(index + 1)
-                : // +1 to skip the '/'
-                  Name;
+            return
+                (index != -1)
+              ? Name.Substring(index + 1)
+              : // +1 to skip the '/'
+                Name;
         }
 
         // Given a underlying store object (e.g., DirectoryEntry), further narrowed down a discriminant
@@ -548,9 +549,10 @@ namespace System.DirectoryServices.AccountManagement
                     throw new MultipleMatchesException(SR.MultipleMatchingPrincipals);
 
                 // Return whichever one matched.  If neither matched, this will return null.
-                return (sidPrincipal != null)
-                    ? GetAsPrincipal(sidPrincipal, null)
-                    : ((nt4Principal != null) ? GetAsPrincipal(nt4Principal, null) : null);
+                return
+                    (sidPrincipal != null)
+                  ? GetAsPrincipal(sidPrincipal, null)
+                  : ((nt4Principal != null) ? GetAsPrincipal(nt4Principal, null) : null);
             }
             else
             {

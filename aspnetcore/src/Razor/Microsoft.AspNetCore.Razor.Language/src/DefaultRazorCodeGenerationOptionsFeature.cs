@@ -27,9 +27,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public RazorCodeGenerationOptions GetOptions()
         {
-            return _designTime
-                ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions)
-                : RazorCodeGenerationOptions.Create(ConfigureOptions);
+            return
+                _designTime
+              ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions)
+              : RazorCodeGenerationOptions.Create(ConfigureOptions);
         }
 
         private void ConfigureOptions(RazorCodeGenerationOptionsBuilder builder)

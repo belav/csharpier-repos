@@ -47,20 +47,21 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
         private SqlExpression ConvertToValue(SqlExpression sqlExpression, bool condition)
         {
-            return condition
-                ? _sqlExpressionFactory.Case(
-                      new[]
-                      {
-                          new CaseWhenClause(
-                              SimplifyNegatedBinary(sqlExpression),
-                              _sqlExpressionFactory.ApplyDefaultTypeMapping(
-                                  _sqlExpressionFactory.Constant(true)
-                              )
-                          )
-                      },
-                      _sqlExpressionFactory.Constant(false)
-                  )
-                : sqlExpression;
+            return
+                condition
+              ? _sqlExpressionFactory.Case(
+                    new[]
+                    {
+                        new CaseWhenClause(
+                            SimplifyNegatedBinary(sqlExpression),
+                            _sqlExpressionFactory.ApplyDefaultTypeMapping(
+                                _sqlExpressionFactory.Constant(true)
+                            )
+                        )
+                    },
+                    _sqlExpressionFactory.Constant(false)
+                )
+              : sqlExpression;
         }
 
         private SqlExpression BuildCompareToExpression(SqlExpression sqlExpression) =>
@@ -360,18 +361,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             _isSearchCondition = parentSearchCondition;
 
-            return changed
-                ? selectExpression.Update(
-                      projections,
-                      tables,
-                      predicate,
-                      groupBy,
-                      havingExpression,
-                      orderings,
-                      limit,
-                      offset
-                  )
-                : selectExpression;
+            return
+                changed
+              ? selectExpression.Update(
+                    projections,
+                    tables,
+                    predicate,
+                    groupBy,
+                    havingExpression,
+                    orderings,
+                    limit,
+                    offset
+                )
+              : selectExpression;
         }
 
         /// <summary>

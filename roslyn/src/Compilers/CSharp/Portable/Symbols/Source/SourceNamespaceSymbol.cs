@@ -156,9 +156,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
             ImmutableArray<NamespaceOrTypeSymbol> members;
-            return this.GetNameToMembersMap().TryGetValue(name, out members)
-                ? members.Cast<NamespaceOrTypeSymbol, Symbol>()
-                : ImmutableArray<Symbol>.Empty;
+            return
+                this.GetNameToMembersMap().TryGetValue(name, out members)
+              ? members.Cast<NamespaceOrTypeSymbol, Symbol>()
+              : ImmutableArray<Symbol>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetTypeMembersUnordered()
@@ -180,9 +181,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name)
         {
             ImmutableArray<NamedTypeSymbol> members;
-            return this.GetNameToTypeMembersMap().TryGetValue(name, out members)
-                ? members
-                : ImmutableArray<NamedTypeSymbol>.Empty;
+            return
+                this.GetNameToTypeMembersMap().TryGetValue(name, out members)
+              ? members
+              : ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity)

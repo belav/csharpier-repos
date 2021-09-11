@@ -322,9 +322,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             if (GetBindableNodeForTokenIndicatingLambda(token, out var lambdaSyntax))
             {
                 var symbol = semanticModel.GetSymbolInfo(lambdaSyntax, cancellationToken).Symbol;
-                return symbol != null
-                    ? ImmutableArray.Create(symbol)
-                    : ImmutableArray<ISymbol>.Empty;
+                return
+                    symbol != null
+                  ? ImmutableArray.Create(symbol)
+                  : ImmutableArray<ISymbol>.Empty;
             }
 
             if (

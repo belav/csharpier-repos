@@ -573,21 +573,22 @@ namespace System.Runtime.CompilerServices
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
         ) {
-            return withCovariantReturns
-                ? CreateCompilationWithCovariantReturns(
-                      source,
-                      references,
-                      assemblyName,
-                      options,
-                      parseOptions
-                  )
-                : CreateCompilationWithoutCovariantReturns(
-                      source,
-                      references,
-                      assemblyName,
-                      options,
-                      parseOptions
-                  );
+            return
+                withCovariantReturns
+              ? CreateCompilationWithCovariantReturns(
+                    source,
+                    references,
+                    assemblyName,
+                    options,
+                    parseOptions
+                )
+              : CreateCompilationWithoutCovariantReturns(
+                    source,
+                    references,
+                    assemblyName,
+                    options,
+                    parseOptions
+                );
         }
 
         private static CSharpCompilation SourceView(CSharpCompilation comp, string assignments)

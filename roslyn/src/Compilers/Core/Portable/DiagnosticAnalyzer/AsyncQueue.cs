@@ -259,9 +259,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (optionalResult.IsCompletedSuccessfully)
             {
                 var result = optionalResult.Result;
-                return result.HasValue
-                    ? Task.FromResult(result.Value)
-                    : Task.FromCanceled<TElement>(new CancellationToken(canceled: true));
+                return
+                    result.HasValue
+                  ? Task.FromResult(result.Value)
+                  : Task.FromCanceled<TElement>(new CancellationToken(canceled: true));
             }
 
             return dequeueSlowAsync(optionalResult);

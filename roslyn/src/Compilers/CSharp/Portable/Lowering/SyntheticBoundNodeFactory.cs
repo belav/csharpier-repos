@@ -1372,12 +1372,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression result
         ) {
             Debug.Assert(result.Type is { });
-            return locals.IsDefaultOrEmpty && sideEffects.IsDefaultOrEmpty
-                ? result
-                : new BoundSequence(Syntax, locals, sideEffects, result, result.Type)
-                  {
-                      WasCompilerGenerated = true
-                  };
+            return
+                locals.IsDefaultOrEmpty && sideEffects.IsDefaultOrEmpty
+              ? result
+              : new BoundSequence(Syntax, locals, sideEffects, result, result.Type)
+                {
+                    WasCompilerGenerated = true
+                };
         }
 
         public BoundSpillSequence SpillSequence(
@@ -1635,14 +1636,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 WasCompilerGenerated = true
             };
-            return type.IsPointerOrFunctionPointer()
-                ? BoundConversion.SynthesizedNonUserDefined(
-                      syntax,
-                      nullLiteral,
-                      Conversion.NullToPointer,
-                      type
-                  )
-                : nullLiteral;
+            return
+                type.IsPointerOrFunctionPointer()
+              ? BoundConversion.SynthesizedNonUserDefined(
+                    syntax,
+                    nullLiteral,
+                    Conversion.NullToPointer,
+                    type
+                )
+              : nullLiteral;
         }
 
         public BoundTypeExpression Type(TypeSymbol type)
@@ -2050,9 +2052,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static BoundExpression NullOrDefault(TypeSymbol typeSymbol, SyntaxNode syntax)
         {
-            return typeSymbol.IsReferenceType
-                ? Null(typeSymbol, syntax)
-                : Default(typeSymbol, syntax);
+            return
+                typeSymbol.IsReferenceType
+              ? Null(typeSymbol, syntax)
+              : Default(typeSymbol, syntax);
         }
 
         internal BoundExpression Not(BoundExpression expression)

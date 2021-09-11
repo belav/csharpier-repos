@@ -97,9 +97,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     return false;
             }
 
-            return node == null
-                ? source.Token != Token.PredicateStart
-                : ParsePredicateList(source, node);
+            return
+                node == null
+              ? source.Token != Token.PredicateStart
+              : ParsePredicateList(source, node);
         }
 
         private static bool ParsePredicateList(Tokenizer source, CompiledXPathNode parent)
@@ -146,9 +147,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 || source.Token == Token.AttributeStart
                 || source.Token == Token.SelfReference;
 
-            return (isLeftToRight)
-                ? ParseLeftToRightExpression(source, parent)
-                : ParseRightToLeftExpression(source, parent);
+            return
+                (isLeftToRight)
+              ? ParseLeftToRightExpression(source, parent)
+              : ParseRightToLeftExpression(source, parent);
         }
 
         private static bool ParseLeftToRightExpression(Tokenizer source, CompiledXPathNode parent)

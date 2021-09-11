@@ -412,9 +412,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 value = converter.ConvertToProvider(value);
             }
 
-            return value == null
-                ? null
-                : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
+            return
+                value == null
+              ? null
+              : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
         }
 
         /// <summary>

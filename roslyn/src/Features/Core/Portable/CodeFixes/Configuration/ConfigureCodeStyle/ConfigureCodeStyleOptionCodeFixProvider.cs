@@ -190,15 +190,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                     // If this is not a unique code style option for the diagnostic, use the optionName as the code action title.
                     // In that case, we will already have a containing top level action for the diagnostic.
                     // Otherwise, use the diagnostic information in the title.
-                    return hasMultipleOptions
-                        ? new TopLevelConfigureCodeStyleOptionCodeAction(
-                              optionName,
-                              nestedActions.ToImmutable()
-                          )
-                        : new TopLevelConfigureCodeStyleOptionCodeAction(
-                              diagnostic,
-                              nestedActions.ToImmutable()
-                          );
+                    return
+                        hasMultipleOptions
+                      ? new TopLevelConfigureCodeStyleOptionCodeAction(
+                            optionName,
+                            nestedActions.ToImmutable()
+                        )
+                      : new TopLevelConfigureCodeStyleOptionCodeAction(
+                            diagnostic,
+                            nestedActions.ToImmutable()
+                        );
                 }
 
                 return null;

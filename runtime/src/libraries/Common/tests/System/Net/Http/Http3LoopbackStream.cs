@@ -410,9 +410,10 @@ namespace System.Net.Test.Common
                     .ConfigureAwait(false);
                 if (bytesRead == 0)
                 {
-                    return bufferActiveLength == 1
-                        ? (long?)null
-                        : throw new Exception("Unable to read varint; unexpected end of stream.");
+                    return
+                        bufferActiveLength == 1
+                      ? (long?)null
+                      : throw new Exception("Unable to read varint; unexpected end of stream.");
                 }
                 Debug.Assert(bytesRead == 1);
             } while (

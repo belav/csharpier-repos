@@ -2460,9 +2460,10 @@ namespace System.Globalization
             if (GlobalizationMode.Invariant)
                 return null!;
 
-            return GlobalizationMode.UseNls
-                ? NlsGetLocaleInfo(localeName, type)
-                : IcuGetLocaleInfo(localeName, type);
+            return
+                GlobalizationMode.UseNls
+              ? NlsGetLocaleInfo(localeName, type)
+              : IcuGetLocaleInfo(localeName, type);
         }
 
         private int[] GetLocaleInfoCoreUserOverride(LocaleGroupingData type)

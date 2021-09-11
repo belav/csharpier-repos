@@ -25,25 +25,30 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
             switch (_operation)
             {
                 case StringOperationType.Equal:
-                    return string.Compare(input, _value, _stringComparison) == 0
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        string.Compare(input, _value, _stringComparison) == 0
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case StringOperationType.Greater:
-                    return string.Compare(input, _value, _stringComparison) > 0
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        string.Compare(input, _value, _stringComparison) > 0
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case StringOperationType.GreaterEqual:
-                    return string.Compare(input, _value, _stringComparison) >= 0
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        string.Compare(input, _value, _stringComparison) >= 0
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case StringOperationType.Less:
-                    return string.Compare(input, _value, _stringComparison) < 0
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        string.Compare(input, _value, _stringComparison) < 0
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case StringOperationType.LessEqual:
-                    return string.Compare(input, _value, _stringComparison) <= 0
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        string.Compare(input, _value, _stringComparison) <= 0
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 default:
                     throw new ArgumentOutOfRangeException("operation"); // Will never be thrown
             }

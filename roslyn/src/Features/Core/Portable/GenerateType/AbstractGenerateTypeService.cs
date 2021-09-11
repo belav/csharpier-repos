@@ -296,11 +296,12 @@ namespace Microsoft.CodeAnalysis.GenerateType
         {
             const string AttributeSuffix = "Attribute";
 
-            return state.IsAttribute
-            && !state.NameIsVerbatim
-            && !state.Name.EndsWith(AttributeSuffix, StringComparison.Ordinal)
-                ? state.Name + AttributeSuffix
-                : state.Name;
+            return
+                state.IsAttribute
+                && !state.NameIsVerbatim
+                && !state.Name.EndsWith(AttributeSuffix, StringComparison.Ordinal)
+              ? state.Name + AttributeSuffix
+              : state.Name;
         }
 
         protected static ImmutableArray<ITypeParameterSymbol> GetTypeParameters(

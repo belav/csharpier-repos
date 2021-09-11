@@ -68,9 +68,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 );
 
                 // Compiler generated methods (e.g. async kick-off methods) might not have debug information.
-                return symMethod == null
-                    ? default
-                    : MetadataTokens.StandaloneSignatureHandle(symMethod.GetLocalSignatureToken());
+                return
+                    symMethod == null
+                  ? default
+                  : MetadataTokens.StandaloneSignatureHandle(symMethod.GetLocalSignatureToken());
             }
 
             public override EditAndContinueMethodDebugInformation GetDebugInfo(

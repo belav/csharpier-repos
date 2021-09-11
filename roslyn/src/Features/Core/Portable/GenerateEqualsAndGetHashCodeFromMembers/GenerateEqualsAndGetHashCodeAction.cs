@@ -150,11 +150,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     && semanticModel.GetNullableContext(_typeDeclaration.SpanStart)
                         .AnnotationsEnabled();
 
-                return useNullableTypeArgument
-                    ? equatableType.Construct(
-                          _containingType.WithNullableAnnotation(NullableAnnotation.Annotated)
-                      )
-                    : equatableType.Construct(_containingType);
+                return
+                    useNullableTypeArgument
+                  ? equatableType.Construct(
+                        _containingType.WithNullableAnnotation(NullableAnnotation.Annotated)
+                    )
+                  : equatableType.Construct(_containingType);
             }
 
             private async Task<Document> UpdateDocumentAndAddImportsAsync(
@@ -277,18 +278,19 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             {
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
-                return _implementIEquatable
-                    ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(
-                          _document,
-                          _containingType,
-                          cancellationToken
-                      )
-                    : service.GenerateEqualsMethodAsync(
-                          _document,
-                          _containingType,
-                          _selectedMembers,
-                          cancellationToken
-                      );
+                return
+                    _implementIEquatable
+                  ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(
+                        _document,
+                        _containingType,
+                        cancellationToken
+                    )
+                  : service.GenerateEqualsMethodAsync(
+                        _document,
+                        _containingType,
+                        _selectedMembers,
+                        cancellationToken
+                    );
             }
 
             private async Task<IMethodSymbol> CreateIEquatableEqualsMethodAsync(

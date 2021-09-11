@@ -558,18 +558,19 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             int i = FirstCharToEscape(s, charEscapeFlags, stringEscapeHandling);
-            return i == -1
-                ? writer.WriteAsync(s, cancellationToken)
-                : WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(
-                      writer,
-                      s,
-                      i,
-                      charEscapeFlags,
-                      stringEscapeHandling,
-                      client,
-                      writeBuffer,
-                      cancellationToken
-                  );
+            return
+                i == -1
+              ? writer.WriteAsync(s, cancellationToken)
+              : WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(
+                    writer,
+                    s,
+                    i,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    client,
+                    writeBuffer,
+                    cancellationToken
+                );
         }
 
         private static async Task WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(

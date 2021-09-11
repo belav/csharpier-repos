@@ -96,9 +96,10 @@ internal static partial class Interop
                     Interop.NetSecurityNative.Status displayCallStatus = isMinor
                         ? DisplayMinorStatus(out minStat, status, ref displayBuffer)
                         : DisplayMajorStatus(out minStat, status, ref displayBuffer);
-                    return (Status.GSS_S_COMPLETE != displayCallStatus)
-                        ? null
-                        : Marshal.PtrToStringAnsi(displayBuffer._data);
+                    return
+                        (Status.GSS_S_COMPLETE != displayCallStatus)
+                      ? null
+                      : Marshal.PtrToStringAnsi(displayBuffer._data);
                 }
 
                 finally

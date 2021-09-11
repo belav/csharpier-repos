@@ -29,14 +29,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return y == null;
             }
 
-            return y == null
-                ? false
-                : x.Name == y.Name
-                  && (
-                      !_compareAnnotations
-                      || x.GetAnnotations()
-                          .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
-                  );
+            return
+                y == null
+              ? false
+              : x.Name == y.Name
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
         }
 
         public int GetHashCode(IReadOnlyNavigation obj) => obj.Name.GetHashCode();

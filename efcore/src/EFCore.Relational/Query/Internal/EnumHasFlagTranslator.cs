@@ -55,14 +55,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (Equals(method, _methodInfo) && instance != null)
             {
                 var argument = arguments[0];
-                return instance.Type != argument.Type
-                    ? null
-                    // TODO: If argument is SelectExpression, we need to clone it.
-                    // See issue#24460
-                    : (SqlExpression)_sqlExpressionFactory.Equal(
-                          _sqlExpressionFactory.And(instance, argument),
-                          argument
-                      );
+                return
+                    instance.Type != argument.Type
+                  ? null
+                  // TODO: If argument is SelectExpression, we need to clone it.
+                  // See issue#24460
+                  : (SqlExpression)_sqlExpressionFactory.Equal(
+                        _sqlExpressionFactory.And(instance, argument),
+                        argument
+                    );
             }
 
             return null;

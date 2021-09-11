@@ -3780,9 +3780,10 @@ namespace System.Xml
                 while (true)
                 {
                     if (!BinaryPrimitives.TryReadUInt16LittleEndian(data, out ushort value))
-                        return _xmlspacePreserve
-                            ? XmlNodeType.SignificantWhitespace
-                            : XmlNodeType.Whitespace;
+                        return
+                            _xmlspacePreserve
+                          ? XmlNodeType.SignificantWhitespace
+                          : XmlNodeType.Whitespace;
                     if (value > byte.MaxValue || !XmlCharType.IsWhiteSpace((char)value))
                         break;
                     data = data.Slice(2); // we consumed one ANSI whitespace char

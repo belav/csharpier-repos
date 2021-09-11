@@ -352,22 +352,23 @@ namespace System.Web.Mvc
             }
             else
             {
-                return nameRepresentsPath
-                    ? GetPathFromSpecificName(
-                          controllerContext,
-                          name,
-                          cacheKey,
-                          ref searchedLocations
-                      )
-                    : GetPathFromGeneralName(
-                          controllerContext,
-                          viewLocations,
-                          name,
-                          controllerName,
-                          areaName,
-                          cacheKey,
-                          ref searchedLocations
-                      );
+                return
+                    nameRepresentsPath
+                  ? GetPathFromSpecificName(
+                        controllerContext,
+                        name,
+                        cacheKey,
+                        ref searchedLocations
+                    )
+                  : GetPathFromGeneralName(
+                        controllerContext,
+                        viewLocations,
+                        name,
+                        controllerName,
+                        areaName,
+                        cacheKey,
+                        ref searchedLocations
+                    );
             }
         }
 

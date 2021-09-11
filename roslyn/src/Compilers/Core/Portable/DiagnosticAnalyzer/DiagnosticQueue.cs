@@ -39,9 +39,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public static DiagnosticQueue Create(bool categorized = false)
         {
-            return categorized
-                ? (DiagnosticQueue)new CategorizedDiagnosticQueue()
-                : new SimpleDiagnosticQueue();
+            return
+                categorized
+              ? (DiagnosticQueue)new CategorizedDiagnosticQueue()
+              : new SimpleDiagnosticQueue();
         }
 
         /// <summary>

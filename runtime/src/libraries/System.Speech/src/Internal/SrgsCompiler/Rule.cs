@@ -65,23 +65,26 @@ namespace System.Speech.Internal.SrgsCompiler
 
             if (rule1._cfgRule.Import)
             {
-                return (rule2._cfgRule.Import)
-                    ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset
-                    : -1;
+                return
+                    (rule2._cfgRule.Import)
+                  ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset
+                  : -1;
             }
             else if (rule1._cfgRule.Dynamic)
             {
-                return (rule2._cfgRule.Dynamic)
-                    ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset
-                    : 1;
+                return
+                    (rule2._cfgRule.Dynamic)
+                  ? rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset
+                  : 1;
             }
             else
             {
-                return (rule2._cfgRule.Import)
-                    ? 1
-                    : (rule2._cfgRule.Dynamic)
-                        ? -1
-                        : rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset;
+                return
+                    (rule2._cfgRule.Import)
+                  ? 1
+                  : (rule2._cfgRule.Dynamic)
+                      ? -1
+                      : rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset;
             }
         }
 

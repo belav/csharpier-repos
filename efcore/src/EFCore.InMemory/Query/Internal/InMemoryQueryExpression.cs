@@ -1339,14 +1339,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             var methodCallExpression = (MethodCallExpression)expression;
 
-            return methodCallExpression.Type.IsNullableType()
-                ? methodCallExpression
-                : Call(
-                      ExpressionExtensions.ValueBufferTryReadValueMethod.MakeGenericMethod(
-                          methodCallExpression.Type.MakeNullable()
-                      ),
-                      methodCallExpression.Arguments
-                  );
+            return
+                methodCallExpression.Type.IsNullableType()
+              ? methodCallExpression
+              : Call(
+                    ExpressionExtensions.ValueBufferTryReadValueMethod.MakeGenericMethod(
+                        methodCallExpression.Type.MakeNullable()
+                    ),
+                    methodCallExpression.Arguments
+                );
         }
 
         private sealed class ShaperRemappingExpressionVisitor : ExpressionVisitor
@@ -1372,20 +1373,21 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 projectionBindingExpression.ProjectionMember
                             ]
                         ).Value;
-                    return mappingValue is IReadOnlyDictionary<IProperty, int> indexMap
-                        ? new ProjectionBindingExpression(
-                              projectionBindingExpression.QueryExpression,
-                              indexMap
-                          )
-                        : mappingValue is int index
-                            ? new ProjectionBindingExpression(
-                                  projectionBindingExpression.QueryExpression,
-                                  index,
-                                  projectionBindingExpression.Type
-                              )
-                            : throw new InvalidOperationException(
-                                  CoreStrings.UnknownEntity("ProjectionMapping")
-                              );
+                    return
+                        mappingValue is IReadOnlyDictionary<IProperty, int> indexMap
+                      ? new ProjectionBindingExpression(
+                            projectionBindingExpression.QueryExpression,
+                            indexMap
+                        )
+                      : mappingValue is int index
+                          ? new ProjectionBindingExpression(
+                                projectionBindingExpression.QueryExpression,
+                                index,
+                                projectionBindingExpression.Type
+                            )
+                          : throw new InvalidOperationException(
+                                CoreStrings.UnknownEntity("ProjectionMapping")
+                            );
                 }
 
                 return base.Visit(expression);

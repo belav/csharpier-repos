@@ -1632,9 +1632,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
 
                     declarationInfoBuilder.Free();
-                    return generatedSymbolsBuilder != null
-                        ? generatedSymbolsBuilder.ToImmutable()
-                        : ImmutableHashSet<ISymbol>.Empty;
+                    return
+                        generatedSymbolsBuilder != null
+                      ? generatedSymbolsBuilder.ToImmutable()
+                      : ImmutableHashSet<ISymbol>.Empty;
                 }
             }
         }
@@ -1723,9 +1724,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
             }
 
-            return suppressedAnalyzersBuilder != null
-                ? suppressedAnalyzersBuilder.ToImmutable()
-                : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
+            return
+                suppressedAnalyzersBuilder != null
+              ? suppressedAnalyzersBuilder.ToImmutable()
+              : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
         }
 
         public bool IsInitialized => _lazyInitializeTask != null;
@@ -3106,9 +3108,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            return IsGeneratedCodeSymbolMap.TryGetValue(symbol, out bool isGeneratedCodeSymbol)
-                ? isGeneratedCodeSymbol
-                : IsGeneratedCodeSymbolMap.GetOrAdd(symbol, computeIsGeneratedCodeSymbol());
+            return
+                IsGeneratedCodeSymbolMap.TryGetValue(symbol, out bool isGeneratedCodeSymbol)
+              ? isGeneratedCodeSymbol
+              : IsGeneratedCodeSymbolMap.GetOrAdd(symbol, computeIsGeneratedCodeSymbol());
 
             bool computeIsGeneratedCodeSymbol()
             {

@@ -204,9 +204,10 @@ namespace System.Xml
         {
             get
             {
-                return ownerDoc.CanReportValidity
-                    ? (XmlSchemaValidity)(_flags & ValidityMask)
-                    : XmlSchemaValidity.NotKnown;
+                return
+                    ownerDoc.CanReportValidity
+                  ? (XmlSchemaValidity)(_flags & ValidityMask)
+                  : XmlSchemaValidity.NotKnown;
             }
         }
 

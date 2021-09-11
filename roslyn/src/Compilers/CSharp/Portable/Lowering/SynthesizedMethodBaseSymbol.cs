@@ -187,17 +187,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
             Debug.Assert(base.GetAttributes().IsEmpty);
-            return InheritsBaseMethodAttributes
-                ? BaseMethod.GetAttributes()
-                : ImmutableArray<CSharpAttributeData>.Empty;
+            return
+                InheritsBaseMethodAttributes
+              ? BaseMethod.GetAttributes()
+              : ImmutableArray<CSharpAttributeData>.Empty;
         }
 
         public sealed override ImmutableArray<CSharpAttributeData> GetReturnTypeAttributes()
         {
             Debug.Assert(base.GetReturnTypeAttributes().IsEmpty);
-            return InheritsBaseMethodAttributes
-                ? BaseMethod.GetReturnTypeAttributes()
-                : ImmutableArray<CSharpAttributeData>.Empty;
+            return
+                InheritsBaseMethodAttributes
+              ? BaseMethod.GetReturnTypeAttributes()
+              : ImmutableArray<CSharpAttributeData>.Empty;
         }
 
 #nullable enable

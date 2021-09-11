@@ -184,9 +184,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, CacheControlHeaderValue?>(
                     value =>
                     {
-                        return CacheControlHeaderValue.TryParse(value, out var result)
-                            ? result
-                            : null;
+                        return
+                            CacheControlHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
                     }
                 )
             },
@@ -195,9 +196,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, ContentDispositionHeaderValue?>(
                     value =>
                     {
-                        return ContentDispositionHeaderValue.TryParse(value, out var result)
-                            ? result
-                            : null;
+                        return
+                            ContentDispositionHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
                     }
                 )
             },
@@ -206,9 +208,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, ContentRangeHeaderValue?>(
                     value =>
                     {
-                        return ContentRangeHeaderValue.TryParse(value, out var result)
-                            ? result
-                            : null;
+                        return
+                            ContentRangeHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
                     }
                 )
             },
@@ -226,9 +229,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, RangeConditionHeaderValue?>(
                     value =>
                     {
-                        return RangeConditionHeaderValue.TryParse(value, out var result)
-                            ? result
-                            : null;
+                        return
+                            RangeConditionHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
                     }
                 )
             },
@@ -264,9 +268,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, long?>(
                     value =>
                     {
-                        return HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
-                            ? result
-                            : null;
+                        return
+                            HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
+                          ? result
+                          : null;
                     }
                 )
             },
@@ -279,9 +284,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<MediaTypeHeaderValue>>(
                     value =>
                     {
-                        return MediaTypeHeaderValue.TryParseList(value, out var result)
-                            ? result
-                            : Array.Empty<MediaTypeHeaderValue>();
+                        return
+                            MediaTypeHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<MediaTypeHeaderValue>();
                     }
                 )
             },
@@ -290,9 +296,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<StringWithQualityHeaderValue>>(
                     value =>
                     {
-                        return StringWithQualityHeaderValue.TryParseList(value, out var result)
-                            ? result
-                            : Array.Empty<StringWithQualityHeaderValue>();
+                        return
+                            StringWithQualityHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<StringWithQualityHeaderValue>();
                     }
                 )
             },
@@ -301,9 +308,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<CookieHeaderValue>>(
                     value =>
                     {
-                        return CookieHeaderValue.TryParseList(value, out var result)
-                            ? result
-                            : Array.Empty<CookieHeaderValue>();
+                        return
+                            CookieHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<CookieHeaderValue>();
                     }
                 )
             },
@@ -312,9 +320,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<EntityTagHeaderValue>>(
                     value =>
                     {
-                        return EntityTagHeaderValue.TryParseList(value, out var result)
-                            ? result
-                            : Array.Empty<EntityTagHeaderValue>();
+                        return
+                            EntityTagHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<EntityTagHeaderValue>();
                     }
                 )
             },
@@ -323,9 +332,10 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<SetCookieHeaderValue>>(
                     value =>
                     {
-                        return SetCookieHeaderValue.TryParseList(value, out var result)
-                            ? result
-                            : Array.Empty<SetCookieHeaderValue>();
+                        return
+                            SetCookieHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<SetCookieHeaderValue>();
                     }
                 )
             },

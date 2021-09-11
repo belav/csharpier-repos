@@ -43,9 +43,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private TItem GetOrCreate(TKey key)
         {
             object item;
-            return TryGetExistingItem(key, out item)
-                ? item as TItem ?? WaitForCreate(key, item)
-                : Create(key, item);
+            return
+                TryGetExistingItem(key, out item)
+              ? item as TItem ?? WaitForCreate(key, item)
+              : Create(key, item);
         }
 
         private bool TryGetExistingItem(TKey key, out object item)

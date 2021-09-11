@@ -89,19 +89,20 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return _supportedMethods.Contains(method)
-                ? _sqlExpressionFactory.Function(
-                      "CONVERT",
-                      new[]
-                      {
-                          _sqlExpressionFactory.Fragment(_typeMapping[method.Name]),
-                          arguments[0]
-                      },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false, true },
-                      method.ReturnType
-                  )
-                : null;
+            return
+                _supportedMethods.Contains(method)
+              ? _sqlExpressionFactory.Function(
+                    "CONVERT",
+                    new[]
+                    {
+                        _sqlExpressionFactory.Fragment(_typeMapping[method.Name]),
+                        arguments[0]
+                    },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false, true },
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

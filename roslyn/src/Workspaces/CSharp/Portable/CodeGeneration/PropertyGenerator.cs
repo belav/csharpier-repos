@@ -373,9 +373,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 ),
             };
 
-            return accessors[0] == null && accessors[1] == null
-                ? null
-                : SyntaxFactory.AccessorList(accessors.WhereNotNull().ToSyntaxList());
+            return
+                accessors[0] == null && accessors[1] == null
+              ? null
+              : SyntaxFactory.AccessorList(accessors.WhereNotNull().ToSyntaxList());
         }
 
         private static AccessorDeclarationSyntax GenerateAccessorDeclaration(
@@ -388,16 +389,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         ) {
             var hasBody =
                 options.GenerateMethodBodies && HasAccessorBodies(property, destination, accessor);
-            return accessor == null
-                ? null
-                : GenerateAccessorDeclaration(
-                      property,
-                      accessor,
-                      kind,
-                      hasBody,
-                      options,
-                      parseOptions
-                  );
+            return
+                accessor == null
+              ? null
+              : GenerateAccessorDeclaration(
+                    property,
+                    accessor,
+                    kind,
+                    hasBody,
+                    options,
+                    parseOptions
+                );
         }
 
         private static AccessorDeclarationSyntax GenerateAccessorDeclaration(

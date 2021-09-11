@@ -157,9 +157,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                 var symbol = PropertySymbol;
                 if (symbol.GetMethod != null)
                 {
-                    return symbol.SetMethod != null
-                        ? EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadWrite
-                        : EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadOnly;
+                    return
+                        symbol.SetMethod != null
+                      ? EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadWrite
+                      : EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadOnly;
                 }
                 else if (symbol.SetMethod != null)
                 {

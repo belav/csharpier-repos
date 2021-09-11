@@ -392,9 +392,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return false;
                 }
 
-                return ReferenceEquals(this, obj)
-                    ? true
-                    : obj.GetType() == GetType() && string.Equals(Id, ((CustomerDeets)obj).Id);
+                return
+                    ReferenceEquals(this, obj)
+                  ? true
+                  : obj.GetType() == GetType() && string.Equals(Id, ((CustomerDeets)obj).Id);
             }
 
             public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;

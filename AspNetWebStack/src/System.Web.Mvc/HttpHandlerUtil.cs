@@ -19,9 +19,10 @@ namespace System.Web.Mvc
             // Since Server.Execute() doesn't propagate HttpExceptions where the status code is
             // anything other than 500, we need to wrap these exceptions ourselves.
             IHttpAsyncHandler asyncHandler = httpHandler as IHttpAsyncHandler;
-            return (asyncHandler != null)
-                ? new ServerExecuteHttpHandlerAsyncWrapper(asyncHandler)
-                : new ServerExecuteHttpHandlerWrapper(httpHandler);
+            return
+                (asyncHandler != null)
+              ? new ServerExecuteHttpHandlerAsyncWrapper(asyncHandler)
+              : new ServerExecuteHttpHandlerWrapper(httpHandler);
         }
 
         private sealed class ServerExecuteHttpHandlerAsyncWrapper

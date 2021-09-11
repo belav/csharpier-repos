@@ -115,17 +115,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return default;
             }
 
-            return IsMapped
-                ? new(
-                      filePath,
-                      new(MappedStartLine, MappedStartColumn),
-                      new(MappedEndLine, MappedEndColumn)
-                  )
-                : new(
-                      filePath,
-                      new(OriginalStartLine, OriginalStartColumn),
-                      new(OriginalEndLine, OriginalEndColumn)
-                  );
+            return
+                IsMapped
+              ? new(
+                    filePath,
+                    new(MappedStartLine, MappedStartColumn),
+                    new(MappedEndLine, MappedEndColumn)
+                )
+              : new(
+                    filePath,
+                    new(OriginalStartLine, OriginalStartColumn),
+                    new(OriginalEndLine, OriginalEndColumn)
+                );
         }
 
         internal string? GetFilePath() => GetFilePath(OriginalFilePath, MappedFilePath);

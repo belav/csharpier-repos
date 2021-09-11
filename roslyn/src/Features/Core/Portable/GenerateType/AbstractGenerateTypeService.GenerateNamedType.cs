@@ -425,9 +425,10 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             private TypeKind DetermineTypeKind()
             {
-                return _state.IsStruct
-                    ? TypeKind.Struct
-                    : _state.IsInterface ? TypeKind.Interface : TypeKind.Class;
+                return
+                    _state.IsStruct
+                  ? TypeKind.Struct
+                  : _state.IsInterface ? TypeKind.Interface : TypeKind.Class;
             }
 
             protected IList<ITypeParameterSymbol> GetAvailableTypeParameters()

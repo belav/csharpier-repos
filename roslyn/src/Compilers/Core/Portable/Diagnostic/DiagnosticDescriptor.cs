@@ -255,9 +255,10 @@ namespace Microsoft.CodeAnalysis
                 Diagnostic.Create(this, Location.None),
                 CancellationToken.None
             );
-            return effectiveDiagnostic != null
-                ? MapSeverityToReport(effectiveDiagnostic.Severity)
-                : ReportDiagnostic.Suppress;
+            return
+                effectiveDiagnostic != null
+              ? MapSeverityToReport(effectiveDiagnostic.Severity)
+              : ReportDiagnostic.Suppress;
         }
 
         // internal for testing purposes.

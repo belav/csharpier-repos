@@ -76,30 +76,31 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
 
             if (_memberToFunctionName.TryGetValue(member, out var functionName) && instance != null)
             {
-                return returnType == typeof(bool)
-                    ? _sqlExpressionFactory.Case(
-                          new[]
-                          {
-                              new CaseWhenClause(
-                                  _sqlExpressionFactory.IsNotNull(instance),
-                                  _sqlExpressionFactory.Function(
-                                      functionName,
-                                      new[] { instance },
-                                      nullable: false,
-                                      argumentsPropagateNullability: new[] { false },
-                                      returnType
-                                  )
-                              )
-                          },
-                          null
-                      )
-                    : (SqlExpression)_sqlExpressionFactory.Function(
-                          functionName,
-                          new[] { instance },
-                          nullable: true,
-                          argumentsPropagateNullability: new[] { true },
-                          returnType
-                      );
+                return
+                    returnType == typeof(bool)
+                  ? _sqlExpressionFactory.Case(
+                        new[]
+                        {
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.IsNotNull(instance),
+                                _sqlExpressionFactory.Function(
+                                    functionName,
+                                    new[] { instance },
+                                    nullable: false,
+                                    argumentsPropagateNullability: new[] { false },
+                                    returnType
+                                )
+                            )
+                        },
+                        null
+                    )
+                  : (SqlExpression)_sqlExpressionFactory.Function(
+                        functionName,
+                        new[] { instance },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true },
+                        returnType
+                    );
             }
 
             return null;

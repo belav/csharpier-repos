@@ -252,12 +252,13 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ITextSnapshot snapshot,
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> tagTrees
             ) {
-                return tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
-                    ? tagTree
-                    : new TagSpanIntervalTree<TTag>(
-                          snapshot.TextBuffer,
-                          _dataSource.SpanTrackingMode
-                      );
+                return
+                    tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
+                  ? tagTree
+                  : new TagSpanIntervalTree<TTag>(
+                        snapshot.TextBuffer,
+                        _dataSource.SpanTrackingMode
+                    );
             }
 
             private static bool TryStealTagsFromRelatedTagSource(TextContentChangedEventArgs e)

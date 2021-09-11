@@ -55,12 +55,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     // either remove the block if it doesn't have any trivia, or return as it is if
                     // there are trivia attached to block
-                    return (
-                        block.OpenBraceToken.GetAllTrivia().IsEmpty()
-                        && block.CloseBraceToken.GetAllTrivia().IsEmpty()
-                    )
-                        ? ImmutableArray<StatementSyntax>.Empty
-                        : ImmutableArray.Create<StatementSyntax>(block);
+                    return
+                        (
+                            block.OpenBraceToken.GetAllTrivia().IsEmpty()
+                            && block.CloseBraceToken.GetAllTrivia().IsEmpty()
+                        )
+                      ? ImmutableArray<StatementSyntax>.Empty
+                      : ImmutableArray.Create<StatementSyntax>(block);
                 }
 
                 // okay transfer asset attached to block to statements

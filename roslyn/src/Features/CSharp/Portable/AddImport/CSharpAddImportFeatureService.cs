@@ -384,17 +384,19 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 return (usingDirectiveString, false);
             }
 
-            return externAlias != null
-                ? (externAliasString, hasExistingExtern)
-                : (usingDirectiveString, hasExistingUsing);
+            return
+                externAlias != null
+              ? (externAliasString, hasExistingExtern)
+              : (usingDirectiveString, hasExistingUsing);
         }
 
         private static string GetUsingDirectiveString(INamespaceOrTypeSymbol namespaceOrTypeSymbol)
         {
             var displayString = namespaceOrTypeSymbol.ToDisplayString();
-            return namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
-                ? $"using {displayString};"
-                : $"using static {displayString};";
+            return
+                namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
+              ? $"using {displayString};"
+              : $"using static {displayString};";
         }
 
         protected override async Task<Document> AddImportAsync(
@@ -518,12 +520,10 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             }
 
             var namePiece = SyntaxFactory.IdentifierName(part);
-            return index == 0
-                ? (NameSyntax)namePiece
-                : SyntaxFactory.QualifiedName(
-                      CreateNameSyntax(namespaceParts, index - 1),
-                      namePiece
-                  );
+            return
+                index == 0
+              ? (NameSyntax)namePiece
+              : SyntaxFactory.QualifiedName(CreateNameSyntax(namespaceParts, index - 1), namePiece);
         }
 
         private static (ExternAliasDirectiveSyntax, bool hasExistingImport) GetExternAliasDirective(

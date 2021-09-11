@@ -75,9 +75,10 @@ namespace System.Net.Http
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled(cancellationToken)
-                : Task.CompletedTask;
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled(cancellationToken)
+              : Task.CompletedTask;
         }
 
         public override Task CopyToAsync(

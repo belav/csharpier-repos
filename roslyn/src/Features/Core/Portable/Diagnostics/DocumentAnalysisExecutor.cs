@@ -88,11 +88,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (analyzer == FileContentLoadAnalyzer.Instance)
             {
-                return loadDiagnostic != null
-                    ? SpecializedCollections.SingletonEnumerable(
-                          DiagnosticData.Create(loadDiagnostic, textDocument)
-                      )
-                    : SpecializedCollections.EmptyEnumerable<DiagnosticData>();
+                return
+                    loadDiagnostic != null
+                  ? SpecializedCollections.SingletonEnumerable(
+                        DiagnosticData.Create(loadDiagnostic, textDocument)
+                    )
+                  : SpecializedCollections.EmptyEnumerable<DiagnosticData>();
             }
 
             if (loadDiagnostic != null)
@@ -307,12 +308,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Interlocked.CompareExchange(ref _lazySyntaxDiagnostics, syntaxDiagnostics, null);
             }
 
-            return _lazySyntaxDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
-                ? diagnosticAnalysisResult.GetDocumentDiagnostics(
-                      AnalysisScope.TextDocument.Id,
-                      AnalysisScope.Kind
-                  )
-                : ImmutableArray<DiagnosticData>.Empty;
+            return
+                _lazySyntaxDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
+              ? diagnosticAnalysisResult.GetDocumentDiagnostics(
+                    AnalysisScope.TextDocument.Id,
+                    AnalysisScope.Kind
+                )
+              : ImmutableArray<DiagnosticData>.Empty;
         }
 
         private async Task<ImmutableArray<DiagnosticData>> GetSemanticDiagnosticsAsync(
@@ -363,12 +365,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            return _lazySemanticDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
-                ? diagnosticAnalysisResult.GetDocumentDiagnostics(
-                      AnalysisScope.TextDocument.Id,
-                      AnalysisScope.Kind
-                  )
-                : ImmutableArray<DiagnosticData>.Empty;
+            return
+                _lazySemanticDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
+              ? diagnosticAnalysisResult.GetDocumentDiagnostics(
+                    AnalysisScope.TextDocument.Id,
+                    AnalysisScope.Kind
+                )
+              : ImmutableArray<DiagnosticData>.Empty;
 
             async Task<TextSpan?> GetAdjustedSpanForCompilerAnalyzerAsync()
             {

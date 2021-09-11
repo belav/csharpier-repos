@@ -148,15 +148,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string diagnosticId,
             string? diagnosticCategory
         ) {
-            return analyzerConfigOptions.TryGetSeverityFromConfiguration(
-                project,
-                tree,
-                diagnosticId,
-                diagnosticCategory,
-                out var reportSeverity
-            )
-                ? reportSeverity.ToSeverity()
-                : DiagnosticSeverity.Hidden;
+            return
+                analyzerConfigOptions.TryGetSeverityFromConfiguration(
+                    project,
+                    tree,
+                    diagnosticId,
+                    diagnosticCategory,
+                    out var reportSeverity
+                )
+              ? reportSeverity.ToSeverity()
+              : DiagnosticSeverity.Hidden;
         }
 
         /// <summary>

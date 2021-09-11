@@ -142,9 +142,10 @@ namespace Microsoft.JSInterop.WebAssembly
                         arg1,
                         arg2
                     );
-                    return exception != null
-                        ? throw new JSException(exception)
-                        : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
+                    return
+                        exception != null
+                      ? throw new JSException(exception)
+                      : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
                 default:
                     throw new InvalidOperationException($"Invalid result type '{resultType}'.");
             }

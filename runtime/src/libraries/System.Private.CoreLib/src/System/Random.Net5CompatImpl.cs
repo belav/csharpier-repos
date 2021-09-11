@@ -95,9 +95,10 @@ namespace System
             public override int Next(int minValue, int maxValue)
             {
                 long range = (long)maxValue - minValue;
-                return range <= int.MaxValue
-                    ? (int)(_parent.Sample() * range) + minValue
-                    : (int)((long)(GetSampleForLargeRange() * range) + minValue);
+                return
+                    range <= int.MaxValue
+                  ? (int)(_parent.Sample() * range) + minValue
+                  : (int)((long)(GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()

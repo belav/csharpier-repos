@@ -329,13 +329,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 x =>
                 {
                     Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
-                    return pDestType == pIntType
-                        ? pTemp
-                        : ExprFactoryCreateCastWithSuppressedMessage(
-                              EXPRFLAG.EXF_INDEXEXPR,
-                              pDestType,
-                              pTemp
-                          );
+                    return
+                        pDestType == pIntType
+                      ? pTemp
+                      : ExprFactoryCreateCastWithSuppressedMessage(
+                            EXPRFLAG.EXF_INDEXEXPR,
+                            pDestType,
+                            pTemp
+                        );
                 }
             );
 
@@ -954,9 +955,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private static ErrorCode GetStandardLvalueError(CheckLvalueKind kind)
         {
             Debug.Assert(kind >= CheckLvalueKind.Assignment && kind <= CheckLvalueKind.Increment);
-            return kind == CheckLvalueKind.Increment
-                ? ErrorCode.ERR_IncrementLvalueExpected
-                : ErrorCode.ERR_AssgLvalueExpected;
+            return
+                kind == CheckLvalueKind.Increment
+              ? ErrorCode.ERR_IncrementLvalueExpected
+              : ErrorCode.ERR_AssgLvalueExpected;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

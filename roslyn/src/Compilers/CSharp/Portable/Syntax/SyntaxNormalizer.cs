@@ -271,16 +271,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 case SyntaxKind.CloseParenToken:
                     // Note: the `where` case handles constraints on method declarations
                     //  and also `where` clauses (consistently with other LINQ cases below)
-                    return (
+                    return
                         (
-                            (currentToken.Parent is StatementSyntax)
-                            && nextToken.Parent != currentToken.Parent
+                            (
+                                (currentToken.Parent is StatementSyntax)
+                                && nextToken.Parent != currentToken.Parent
+                            )
+                            || nextToken.Kind() == SyntaxKind.OpenBraceToken
+                            || nextToken.Kind() == SyntaxKind.WhereKeyword
                         )
-                        || nextToken.Kind() == SyntaxKind.OpenBraceToken
-                        || nextToken.Kind() == SyntaxKind.WhereKeyword
-                    )
-                        ? 1
-                        : 0;
+                      ? 1
+                      : 0;
 
                 case SyntaxKind.CloseBracketToken:
                     if (
@@ -355,12 +356,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 case SyntaxKind.FinallyKeyword:
                     return 1;
                 case SyntaxKind.OpenBracketToken:
-                    return (
-                        nextToken.Parent is AttributeListSyntax
-                        && !(nextToken.Parent.Parent is ParameterSyntax)
-                    )
-                        ? 1
-                        : 0;
+                    return
+                        (
+                            nextToken.Parent is AttributeListSyntax
+                            && !(nextToken.Parent.Parent is ParameterSyntax)
+                        )
+                      ? 1
+                      : 0;
                 case SyntaxKind.WhereKeyword:
                     return currentToken.Parent is TypeParameterListSyntax ? 1 : 0;
             }

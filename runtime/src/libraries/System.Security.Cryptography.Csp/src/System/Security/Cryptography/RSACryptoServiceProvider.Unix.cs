@@ -69,12 +69,13 @@ namespace System.Security.Cryptography
             if (padding == null)
                 throw new ArgumentNullException(nameof(padding));
 
-            return padding == RSAEncryptionPadding.Pkcs1
-                ? Decrypt(data, fOAEP: false)
-                : padding == RSAEncryptionPadding.OaepSHA1
-                    ? Decrypt(data, fOAEP: true)
-                    : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
-                      throw PaddingModeNotSupported();
+            return
+                padding == RSAEncryptionPadding.Pkcs1
+              ? Decrypt(data, fOAEP: false)
+              : padding == RSAEncryptionPadding.OaepSHA1
+                  ? Decrypt(data, fOAEP: true)
+                  : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
+                    throw PaddingModeNotSupported();
         }
 
         public override bool TryDecrypt(
@@ -120,12 +121,13 @@ namespace System.Security.Cryptography
             if (padding == null)
                 throw new ArgumentNullException(nameof(padding));
 
-            return padding == RSAEncryptionPadding.Pkcs1
-                ? Encrypt(data, fOAEP: false)
-                : padding == RSAEncryptionPadding.OaepSHA1
-                    ? Encrypt(data, fOAEP: true)
-                    : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
-                      throw PaddingModeNotSupported();
+            return
+                padding == RSAEncryptionPadding.Pkcs1
+              ? Encrypt(data, fOAEP: false)
+              : padding == RSAEncryptionPadding.OaepSHA1
+                  ? Encrypt(data, fOAEP: true)
+                  : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
+                    throw PaddingModeNotSupported();
         }
 
         public override bool TryEncrypt(

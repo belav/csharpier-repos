@@ -109,10 +109,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 StoreObjectIdentifier,
                 IRelationalPropertyOverrides
             >?)property[RelationalAnnotationNames.RelationalOverrides];
-            return tableOverrides != null
-            && tableOverrides.TryGetValue(storeObject, out var overrides)
-                ? overrides
-                : null;
+            return
+                tableOverrides != null && tableOverrides.TryGetValue(storeObject, out var overrides)
+              ? overrides
+              : null;
         }
 
         /// <summary>

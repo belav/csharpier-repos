@@ -51,13 +51,15 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if (_reflectionContext != null)
             {
-                return (_definitionOrigin != null)
-                    ? new DirectoryCatalog(location, pattern, _reflectionContext, _definitionOrigin)
-                    : new DirectoryCatalog(location, pattern, _reflectionContext);
+                return
+                    (_definitionOrigin != null)
+                  ? new DirectoryCatalog(location, pattern, _reflectionContext, _definitionOrigin)
+                  : new DirectoryCatalog(location, pattern, _reflectionContext);
             }
-            return (_definitionOrigin != null)
-                ? new DirectoryCatalog(location, pattern, _definitionOrigin)
-                : new DirectoryCatalog(location, pattern);
+            return
+                (_definitionOrigin != null)
+              ? new DirectoryCatalog(location, pattern, _definitionOrigin)
+              : new DirectoryCatalog(location, pattern);
         }
 
         //  Note:

@@ -568,10 +568,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         var transactionManager = database.GetTransactionManager();
 
-                        return transactionManager
-                            is IRelationalTransactionManager relationalTransactionManager
-                            ? relationalTransactionManager.BeginTransaction(isolationLevel)
-                            : transactionManager.BeginTransaction();
+                        return
+                            transactionManager
+                                is IRelationalTransactionManager relationalTransactionManager
+                          ? relationalTransactionManager.BeginTransaction(isolationLevel)
+                          : transactionManager.BeginTransaction();
                     }
                 );
 
@@ -598,10 +599,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         var transactionManager = database.GetTransactionManager();
 
-                        return transactionManager
-                            is IRelationalTransactionManager relationalTransactionManager
-                            ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
-                            : transactionManager.BeginTransactionAsync(ct);
+                        return
+                            transactionManager
+                                is IRelationalTransactionManager relationalTransactionManager
+                          ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
+                          : transactionManager.BeginTransactionAsync(ct);
                     },
                     cancellationToken
                 );

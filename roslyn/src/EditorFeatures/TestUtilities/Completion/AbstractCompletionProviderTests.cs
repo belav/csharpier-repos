@@ -1214,19 +1214,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string referenceLanguage,
             bool isProjectReference
         ) {
-            return isProjectReference
-                ? CreateMarkupForProjectWithProjectReference(
-                      currentFile,
-                      referencedFile,
-                      sourceLanguage,
-                      referenceLanguage
-                  )
-                : CreateMarkupForProjectWithMetadataReference(
-                      currentFile,
-                      referencedFile,
-                      sourceLanguage,
-                      referenceLanguage
-                  );
+            return
+                isProjectReference
+              ? CreateMarkupForProjectWithProjectReference(
+                    currentFile,
+                    referencedFile,
+                    sourceLanguage,
+                    referenceLanguage
+                )
+              : CreateMarkupForProjectWithMetadataReference(
+                    currentFile,
+                    referencedFile,
+                    sourceLanguage,
+                    referenceLanguage
+                );
         }
 
         protected static string CreateMarkupForProjectWithMetadataReference(
@@ -2120,9 +2121,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 trigger
             );
 
-            return completionList == null
-                ? ImmutableArray<RoslynCompletion.CompletionItem>.Empty
-                : completionList.Items;
+            return
+                completionList == null
+              ? ImmutableArray<RoslynCompletion.CompletionItem>.Empty
+              : completionList.Items;
         }
     }
 }

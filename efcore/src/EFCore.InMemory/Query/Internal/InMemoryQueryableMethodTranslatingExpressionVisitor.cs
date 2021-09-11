@@ -292,11 +292,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
-            return source.ShaperExpression.Type != resultType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, resultType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != resultType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, resultType)
+                )
+              : source;
         }
 
         /// <summary>
@@ -628,9 +629,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         return null;
                     }
 
-                    return translation.Type == expression.Type
-                        ? translation
-                        : Expression.Convert(translation, expression.Type);
+                    return
+                        translation.Type == expression.Type
+                      ? translation
+                      : Expression.Convert(translation, expression.Type);
             }
         }
 
@@ -761,14 +763,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var leftExpressions = new List<Expression>();
             var rightExpressions = new List<Expression>();
 
-            return ProcessJoinCondition(joinCondition, leftExpressions, rightExpressions)
-                ? leftExpressions.Count == 1
-                    ? (leftExpressions[0], rightExpressions[0])
-                    : (
-                          CreateAnonymousObject(leftExpressions),
-                          CreateAnonymousObject(rightExpressions)
-                      )
-                : (null, null);
+            return
+                ProcessJoinCondition(joinCondition, leftExpressions, rightExpressions)
+              ? leftExpressions.Count == 1
+                  ? (leftExpressions[0], rightExpressions[0])
+                  : (
+                        CreateAnonymousObject(leftExpressions),
+                        CreateAnonymousObject(rightExpressions)
+                    )
+              : (null, null);
 
             // InMemory joins need to use AnonymousObject to perform correct key comparison for server side joins
             static Expression CreateAnonymousObject(List<Expression> expressions) =>
@@ -1558,14 +1561,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 preserveType
             );
 
-            return lambdaBody != null
-                ? Expression.Lambda(
-                      lambdaBody,
-                      (
-                          (InMemoryQueryExpression)shapedQueryExpression.QueryExpression
-                      ).CurrentParameter
-                  )
-                : null;
+            return
+                lambdaBody != null
+              ? Expression.Lambda(
+                    lambdaBody,
+                    (
+                        (InMemoryQueryExpression)shapedQueryExpression.QueryExpression
+                    ).CurrentParameter
+                )
+              : null;
         }
 
         private Expression RemapLambdaBody(
@@ -1664,10 +1668,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is EntityShaperExpression
-                || extensionExpression is ShapedQueryExpression
-                    ? extensionExpression
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is EntityShaperExpression
+                    || extensionExpression is ShapedQueryExpression
+                  ? extensionExpression
+                  : base.VisitExtension(extensionExpression);
             }
 
             private Expression? TryExpand(Expression? source, MemberIdentity member)
@@ -1941,11 +1946,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.ConvertToEnumerable();
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         private ShapedQueryExpression TranslateSetOperation(
@@ -1986,9 +1992,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 case EntityShaperExpression entityShaperExpression1
                       when shaper2 is EntityShaperExpression entityShaperExpression2:
-                    return entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
-                        ? entityShaperExpression1.MakeNullable(makeNullable)
-                        : entityShaperExpression1;
+                    return
+                        entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
+                      ? entityShaperExpression1.MakeNullable(makeNullable)
+                      : entityShaperExpression1;
 
                 case NewExpression newExpression1 when shaper2 is NewExpression newExpression2:
                     var newArguments = new Expression[newExpression1.Arguments.Count];

@@ -383,10 +383,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 return (EntityType)DeclaringEntityType;
             }
 
-            return RelatedEntityType.HasSharedClrType
-            && RelatedEntityType.ShortName() == entityTypeName
-                ? (EntityType)RelatedEntityType
-                : null;
+            return
+                RelatedEntityType.HasSharedClrType
+                && RelatedEntityType.ShortName() == entityTypeName
+              ? (EntityType)RelatedEntityType
+              : null;
         }
 
         /// <summary>

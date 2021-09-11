@@ -79,13 +79,15 @@ namespace System.IO
 
             ReadOnlySpan<char> subpath = path.AsSpan(0, subLength);
 #if MS_IO_REDIST
-            return extension.Length != 0 && extension[0] == '.'
-                ? StringExtensions.Concat(subpath, extension.AsSpan())
-                : StringExtensions.Concat(subpath, ".".AsSpan(), extension.AsSpan());
+            return
+                extension.Length != 0 && extension[0] == '.'
+              ? StringExtensions.Concat(subpath, extension.AsSpan())
+              : StringExtensions.Concat(subpath, ".".AsSpan(), extension.AsSpan());
 #else
-            return extension.StartsWith('.')
-                ? string.Concat(subpath, extension)
-                : string.Concat(subpath, ".", extension);
+            return
+                extension.StartsWith('.')
+              ? string.Concat(subpath, extension)
+              : string.Concat(subpath, ".", extension);
 #endif
         }
 
@@ -106,9 +108,10 @@ namespace System.IO
                 return null;
 
             int end = GetDirectoryNameOffset(path.AsSpan());
-            return end >= 0
-                ? PathInternal.NormalizeDirectorySeparators(path.Substring(0, end))
-                : null;
+            return
+                end >= 0
+              ? PathInternal.NormalizeDirectorySeparators(path.Substring(0, end))
+              : null;
         }
 
         /// <summary>
@@ -243,10 +246,11 @@ namespace System.IO
         {
             ReadOnlySpan<char> fileName = GetFileName(path);
             int lastPeriod = fileName.LastIndexOf('.');
-            return lastPeriod == -1
-                ? fileName
-                : // No extension was found
-                  fileName.Slice(0, lastPeriod);
+            return
+                lastPeriod == -1
+              ? fileName
+              : // No extension was found
+                fileName.Slice(0, lastPeriod);
         }
 
         /// <summary>
@@ -699,9 +703,10 @@ namespace System.IO
                 || PathInternal.IsDirectorySeparator(second[0]);
 
 #if !MS_IO_REDIST
-            return hasSeparator
-                ? string.Concat(first, second)
-                : string.Concat(first, PathInternal.DirectorySeparatorCharAsString, second);
+            return
+                hasSeparator
+              ? string.Concat(first, second)
+              : string.Concat(first, PathInternal.DirectorySeparatorCharAsString, second);
 #else
             fixed (
                 char* f = &MemoryMarshal.GetReference(first),

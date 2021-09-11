@@ -537,9 +537,10 @@ namespace System.Net.Sockets
             // The sockaddr is pinned with a GCHandle to avoid having to use the object array form of UnsafePack.
             PinSocketAddressBuffer();
 
-            return _bufferList == null
-                ? DoOperationReceiveFromSingleBuffer(handle, cancellationToken)
-                : DoOperationReceiveFromMultiBuffer(handle);
+            return
+                _bufferList == null
+              ? DoOperationReceiveFromSingleBuffer(handle, cancellationToken)
+              : DoOperationReceiveFromMultiBuffer(handle);
         }
 
         internal unsafe SocketError DoOperationReceiveFromSingleBuffer(
@@ -753,18 +754,19 @@ namespace System.Net.Sockets
                         IntPtr.Zero
                     );
 
-                    return _bufferList == null
-                        ? ProcessIOCPResultWithSingleBufferHandle(
-                              socketError,
-                              bytesTransferred,
-                              overlapped,
-                              cancellationToken
-                          )
-                        : ProcessIOCPResult(
-                              socketError == SocketError.Success,
-                              bytesTransferred,
-                              overlapped
-                          );
+                    return
+                        _bufferList == null
+                      ? ProcessIOCPResultWithSingleBufferHandle(
+                            socketError,
+                            bytesTransferred,
+                            overlapped,
+                            cancellationToken
+                        )
+                      : ProcessIOCPResult(
+                            socketError == SocketError.Success,
+                            bytesTransferred,
+                            overlapped
+                        );
                 }
                 catch
                 {
@@ -978,9 +980,10 @@ namespace System.Net.Sockets
             // The sockaddr is pinned with a GCHandle to avoid having to use the object array form of UnsafePack.
             PinSocketAddressBuffer();
 
-            return _bufferList == null
-                ? DoOperationSendToSingleBuffer(handle, cancellationToken)
-                : DoOperationSendToMultiBuffer(handle);
+            return
+                _bufferList == null
+              ? DoOperationSendToSingleBuffer(handle, cancellationToken)
+              : DoOperationSendToMultiBuffer(handle);
         }
 
         internal unsafe SocketError DoOperationSendToSingleBuffer(
@@ -1416,9 +1419,10 @@ namespace System.Net.Sockets
                     null,
                     0
                 );
-                return socketError == SocketError.SocketError
-                    ? SocketPal.GetLastSocketError()
-                    : socketError;
+                return
+                    socketError == SocketError.SocketError
+                  ? SocketPal.GetLastSocketError()
+                  : socketError;
             }
             catch (ObjectDisposedException)
             {

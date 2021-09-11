@@ -16,9 +16,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) {
-            return context.SyntaxTree.IsTypeParameterConstraintContext(position, context.LeftToken)
-                ? ImmutableArray.Create(new RecommendedKeyword("notnull"))
-                : ImmutableArray<RecommendedKeyword>.Empty;
+            return
+                context.SyntaxTree.IsTypeParameterConstraintContext(position, context.LeftToken)
+              ? ImmutableArray.Create(new RecommendedKeyword("notnull"))
+              : ImmutableArray<RecommendedKeyword>.Empty;
         }
     }
 }

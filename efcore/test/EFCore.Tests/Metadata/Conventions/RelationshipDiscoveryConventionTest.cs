@@ -1632,9 +1632,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityBuilder.Metadata.Model.ConventionDispatcher
             );
             CreateRelationshipDiscoveryConvention().ProcessEntityTypeAdded(entityBuilder, context);
-            return context.ShouldStopProcessing()
-                ? (InternalEntityTypeBuilder)context.Result
-                : entityBuilder;
+            return
+                context.ShouldStopProcessing()
+              ? (InternalEntityTypeBuilder)context.Result
+              : entityBuilder;
         }
 
         private RelationshipDiscoveryConvention CreateRelationshipDiscoveryConvention() =>

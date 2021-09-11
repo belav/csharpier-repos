@@ -64,9 +64,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var symbol = BindTypeOrAliasOrConstraintKeyword(syntax, diagnostics, out keyword);
             Debug.Assert((keyword != ConstraintContextualKeyword.None) == symbol.IsDefault);
-            return (keyword != ConstraintContextualKeyword.None)
-                ? default
-                : UnwrapAlias(symbol, diagnostics, syntax).TypeWithAnnotations;
+            return
+                (keyword != ConstraintContextualKeyword.None)
+              ? default
+              : UnwrapAlias(symbol, diagnostics, syntax).TypeWithAnnotations;
         }
 
         /// <summary>
@@ -1388,9 +1389,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //  SPEC:   such that its right-most identifier is a verbatim identifier (§2.4.2), then only
                 //  SPEC:   an attribute without a suffix is matched, thus enabling such an ambiguity to be resolved.
 
-                return isVerbatimIdentifier
-                    ? LookupOptions.VerbatimNameAttributeTypeOnly
-                    : LookupOptions.AttributeTypeOnly;
+                return
+                    isVerbatimIdentifier
+                  ? LookupOptions.VerbatimNameAttributeTypeOnly
+                  : LookupOptions.AttributeTypeOnly;
             }
             else
             {
@@ -2059,15 +2061,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax
         ) {
             Symbol memberSymbol;
-            return TryGetSpecialTypeMember(
-                this.Compilation,
-                member,
-                syntax,
-                diagnostics,
-                out memberSymbol
-            )
-                ? memberSymbol
-                : null;
+            return
+                TryGetSpecialTypeMember(
+                    this.Compilation,
+                    member,
+                    syntax,
+                    diagnostics,
+                    out memberSymbol
+                )
+              ? memberSymbol
+              : null;
         }
 
         internal static bool TryGetSpecialTypeMember<TSymbol>(
@@ -3142,15 +3145,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             var containingAssembly = symbol.ContainingAssembly;
             if (containingAssembly == compilation.SourceAssembly)
             {
-                return (symbol.ContainingModule == compilation.SourceModule)
-                    ? BestSymbolLocation.FromSourceModule
-                    : BestSymbolLocation.FromAddedModule;
+                return
+                    (symbol.ContainingModule == compilation.SourceModule)
+                  ? BestSymbolLocation.FromSourceModule
+                  : BestSymbolLocation.FromAddedModule;
             }
             else
             {
-                return (containingAssembly == containingAssembly.CorLibrary)
-                    ? BestSymbolLocation.FromCorLibrary
-                    : BestSymbolLocation.FromReferencedAssembly;
+                return
+                    (containingAssembly == containingAssembly.CorLibrary)
+                  ? BestSymbolLocation.FromCorLibrary
+                  : BestSymbolLocation.FromReferencedAssembly;
             }
         }
 
@@ -3225,19 +3230,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                             aliasOpt == null
                                 || aliasOpt == SyntaxFacts.GetText(SyntaxKind.GlobalKeyword)
                         );
-                        return (object)forwardedToAssembly == null
-                            ? diagnostics.Add(
-                                  ErrorCode.ERR_GlobalSingleTypeNameNotFound,
-                                  location,
-                                  whereText,
-                                  qualifierOpt
-                              )
-                            : diagnostics.Add(
-                                  ErrorCode.ERR_GlobalSingleTypeNameNotFoundFwd,
-                                  location,
-                                  whereText,
-                                  forwardedToAssembly
-                              );
+                        return
+                            (object)forwardedToAssembly == null
+                          ? diagnostics.Add(
+                                ErrorCode.ERR_GlobalSingleTypeNameNotFound,
+                                location,
+                                whereText,
+                                qualifierOpt
+                            )
+                          : diagnostics.Add(
+                                ErrorCode.ERR_GlobalSingleTypeNameNotFoundFwd,
+                                location,
+                                whereText,
+                                forwardedToAssembly
+                            );
                     }
                     else
                     {
@@ -3253,20 +3259,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                             container = aliasOpt;
                         }
 
-                        return (object)forwardedToAssembly == null
-                            ? diagnostics.Add(
-                                  ErrorCode.ERR_DottedTypeNameNotFoundInNS,
-                                  location,
-                                  whereText,
-                                  container
-                              )
-                            : diagnostics.Add(
-                                  ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd,
-                                  location,
-                                  whereText,
-                                  container,
-                                  forwardedToAssembly
-                              );
+                        return
+                            (object)forwardedToAssembly == null
+                          ? diagnostics.Add(
+                                ErrorCode.ERR_DottedTypeNameNotFoundInNS,
+                                location,
+                                whereText,
+                                container
+                            )
+                          : diagnostics.Add(
+                                ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd,
+                                location,
+                                whereText,
+                                container,
+                                forwardedToAssembly
+                            );
                     }
                 }
             }
@@ -3297,20 +3304,21 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if ((object)forwardedToAssembly != null)
             {
-                return qualifierOpt == null
-                    ? diagnostics.Add(
-                          ErrorCode.ERR_SingleTypeNameNotFoundFwd,
-                          location,
-                          whereText,
-                          forwardedToAssembly
-                      )
-                    : diagnostics.Add(
-                          ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd,
-                          location,
-                          whereText,
-                          qualifierOpt,
-                          forwardedToAssembly
-                      );
+                return
+                    qualifierOpt == null
+                  ? diagnostics.Add(
+                        ErrorCode.ERR_SingleTypeNameNotFoundFwd,
+                        location,
+                        whereText,
+                        forwardedToAssembly
+                    )
+                  : diagnostics.Add(
+                        ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd,
+                        location,
+                        whereText,
+                        qualifierOpt,
+                        forwardedToAssembly
+                    );
             }
 
             return diagnostics.Add(ErrorCode.ERR_SingleTypeNameNotFound, location, whereText);

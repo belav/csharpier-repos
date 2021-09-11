@@ -900,9 +900,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             get
             {
                 var syntaxTree = GetSyntaxTree();
-                return syntaxTree.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
-                    ? EnvDTE80.vsCMParseStatus.vsCMParseStatusError
-                    : EnvDTE80.vsCMParseStatus.vsCMParseStatusComplete;
+                return
+                    syntaxTree.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
+                  ? EnvDTE80.vsCMParseStatus.vsCMParseStatusError
+                  : EnvDTE80.vsCMParseStatus.vsCMParseStatusComplete;
             }
         }
 

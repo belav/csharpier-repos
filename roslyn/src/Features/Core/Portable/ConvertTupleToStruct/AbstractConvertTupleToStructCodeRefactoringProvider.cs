@@ -492,12 +492,13 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 );
             }
 
-            return typeParameters.IsEmpty
-                ? (TNameSyntax)generator.IdentifierName(structNameToken)
-                : (TNameSyntax)generator.GenericName(
-                      structNameToken,
-                      typeParameters.Select(tp => generator.IdentifierName(tp.Name))
-                  );
+            return
+                typeParameters.IsEmpty
+              ? (TNameSyntax)generator.IdentifierName(structNameToken)
+              : (TNameSyntax)generator.GenericName(
+                    structNameToken,
+                    typeParameters.Select(tp => generator.IdentifierName(tp.Name))
+                );
         }
 
         private static async Task<ImmutableArray<DocumentToUpdate>> GetDocumentsToUpdateAsync(

@@ -245,14 +245,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 )
                 .ConfigureAwait(false);
 
-            return location == null
-                ? null
-                : new LSP.LocationWithText
-                  {
-                      Uri = location.Uri,
-                      Range = location.Range,
-                      Text = text
-                  };
+            return
+                location == null
+              ? null
+              : new LSP.LocationWithText
+                {
+                    Uri = location.Uri,
+                    Range = location.Range,
+                    Text = text
+                };
         }
 
         /// <summary>

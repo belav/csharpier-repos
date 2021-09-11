@@ -147,13 +147,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 docCommentFormattingService
             );
 
-            return topLevelNamespaceSymbol.IsGlobalNamespace
-                ? wrappedType
-                : CodeGenerationSymbolFactory.CreateNamespaceSymbol(
-                      topLevelNamespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat),
-                      null,
-                      new[] { wrappedType }
-                  );
+            return
+                topLevelNamespaceSymbol.IsGlobalNamespace
+              ? wrappedType
+              : CodeGenerationSymbolFactory.CreateNamespaceSymbol(
+                    topLevelNamespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat),
+                    null,
+                    new[] { wrappedType }
+                );
         }
 
         private static CodeGenerationOptions CreateCodeGenerationOptions(

@@ -80,22 +80,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var propertyType = propertyBase?.ClrType ?? memberInfo.GetMemberType();
 
-            return propertyType.IsNullableType() && propertyType.UnwrapNullableType().IsEnum
-                ? new NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>(setter)
-                : (IClrPropertySetter)new ClrPropertySetter<TEntity, TValue>(setter);
+            return
+                propertyType.IsNullableType() && propertyType.UnwrapNullableType().IsEnum
+              ? new NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>(setter)
+              : (IClrPropertySetter)new ClrPropertySetter<TEntity, TValue>(setter);
 
             Expression CreateMemberAssignment(Expression parameter)
             {
-                return propertyBase?.IsIndexerProperty() == true
-                    ? Expression.Assign(
-                          Expression.MakeIndex(
-                              entityParameter,
-                              (PropertyInfo)memberInfo,
-                              new List<Expression> { Expression.Constant(propertyBase.Name) }
-                          ),
-                          convertedParameter
-                      )
-                    : Expression.MakeMemberAccess(parameter, memberInfo).Assign(convertedParameter);
+                return
+                    propertyBase?.IsIndexerProperty() == true
+                  ? Expression.Assign(
+                        Expression.MakeIndex(
+                            entityParameter,
+                            (PropertyInfo)memberInfo,
+                            new List<Expression> { Expression.Constant(propertyBase.Name) }
+                        ),
+                        convertedParameter
+                    )
+                  : Expression.MakeMemberAccess(parameter, memberInfo).Assign(convertedParameter);
             }
         }
     }

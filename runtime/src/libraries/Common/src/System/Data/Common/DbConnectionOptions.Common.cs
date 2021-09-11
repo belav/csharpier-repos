@@ -134,9 +134,10 @@ namespace System.Data.Common
         {
             string? value;
             // TODO: Is it possible for _parsetable to contain a null value here? If so there's a bug here, investigate.
-            return _parsetable.TryGetValue(keyName, out value)
-                ? ConvertValueToBooleanInternal(keyName, value!)
-                : defaultValue;
+            return
+                _parsetable.TryGetValue(keyName, out value)
+              ? ConvertValueToBooleanInternal(keyName, value!)
+              : defaultValue;
         }
 
         internal static bool ConvertValueToBooleanInternal(string keyName, string stringValue)

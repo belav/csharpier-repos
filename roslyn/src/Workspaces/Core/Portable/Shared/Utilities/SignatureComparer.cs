@@ -141,9 +141,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             string identifier2,
             bool caseSensitive
         ) {
-            return caseSensitive
-                ? identifier1 == identifier2
-                : string.Equals(identifier1, identifier2, StringComparison.OrdinalIgnoreCase);
+            return
+                caseSensitive
+              ? identifier1 == identifier2
+              : string.Equals(identifier1, identifier2, StringComparison.OrdinalIgnoreCase);
         }
 
         public bool HaveSameSignature(

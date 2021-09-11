@@ -1867,9 +1867,10 @@ namespace System.Data
                 }
             }
 
-            return (null == nestedParents) || (nestedParents.Count == 0)
-                ? Array.Empty<DataRelation>()
-                : nestedParents.ToArray();
+            return
+                (null == nestedParents) || (nestedParents.Count == 0)
+              ? Array.Empty<DataRelation>()
+              : nestedParents.ToArray();
         }
 
         internal int NestedParentsCount

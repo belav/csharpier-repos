@@ -135,13 +135,15 @@ namespace System.Text.Json.Node
         ) where TBinder : DynamicMetaObjectBinder
         {
             if (!ReferenceEquals(parameters, s_noArgs))
-                return arg1 != null
-                    ? new Expression[] { Constant(binder), arg0, arg1 }
-                    : new Expression[] { Constant(binder), arg0 };
+                return
+                    arg1 != null
+                  ? new Expression[] { Constant(binder), arg0, arg1 }
+                  : new Expression[] { Constant(binder), arg0 };
             else
-                return arg1 != null
-                    ? new Expression[] { Constant(binder), arg1 }
-                    : new Expression[] { Constant(binder) };
+                return
+                    arg1 != null
+                  ? new Expression[] { Constant(binder), arg1 }
+                  : new Expression[] { Constant(binder) };
         }
 
         private static ConstantExpression Constant<TBinder>(TBinder binder)

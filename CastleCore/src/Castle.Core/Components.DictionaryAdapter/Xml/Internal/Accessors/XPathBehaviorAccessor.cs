@@ -125,9 +125,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             bool orStub
         ) {
-            return SelectsNodes
-                ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
-                : Evaluate(parentNode);
+            return
+                SelectsNodes
+              ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
+              : Evaluate(parentNode);
         }
 
         private object GetDefaultPropertyValue(
@@ -136,9 +137,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             bool orStub
         ) {
-            return defaultAccessor != null
-                ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
-                : null;
+            return
+                defaultAccessor != null
+              ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
+              : null;
         }
 
         private object Evaluate(IXmlNode node)
@@ -198,9 +200,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(Type clrType, out IXmlIncludedType includedType)
         {
-            return clrType == this.ClrType
-                ? Try.Success(out includedType, this)
-                : includedTypes.TryGet(clrType, out includedType);
+            return
+                clrType == this.ClrType
+              ? Try.Success(out includedType, this)
+              : includedTypes.TryGet(clrType, out includedType);
         }
 
         private class DefaultAccessor : XPathBehaviorAccessor

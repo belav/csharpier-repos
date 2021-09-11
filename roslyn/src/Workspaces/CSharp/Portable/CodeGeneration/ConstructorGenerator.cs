@@ -137,10 +137,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     ? SyntaxKind.ThisConstructorInitializer
                     : SyntaxKind.BaseConstructorInitializer;
 
-            return arguments == null
-                ? null
-                : SyntaxFactory.ConstructorInitializer(kind)
-                      .WithArgumentList(GenerateArgumentList(arguments));
+            return
+                arguments == null
+              ? null
+              : SyntaxFactory.ConstructorInitializer(kind)
+                    .WithArgumentList(GenerateArgumentList(arguments));
         }
 
         private static ArgumentListSyntax GenerateArgumentList(

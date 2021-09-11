@@ -29,10 +29,11 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.second);
             }
 
-            return first is UnionIterator<TSource> union
-            && AreEqualityComparersEqual(comparer, union._comparer)
-                ? union.Union(second)
-                : new UnionIterator2<TSource>(first, second, comparer);
+            return
+                first is UnionIterator<TSource> union
+                && AreEqualityComparersEqual(comparer, union._comparer)
+              ? union.Union(second)
+              : new UnionIterator2<TSource>(first, second, comparer);
         }
 
         public static IEnumerable<TSource> UnionBy<TSource, TKey>(

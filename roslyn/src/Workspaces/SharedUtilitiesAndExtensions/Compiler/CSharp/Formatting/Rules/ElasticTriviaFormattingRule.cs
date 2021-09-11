@@ -344,15 +344,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     return LineBreaksAfterCloseBrace(currentToken);
 
                 case SyntaxKind.CloseParenToken:
-                    return (
+                    return
                         (
-                            (previousToken.Parent is StatementSyntax)
-                            && currentToken.Parent != previousToken.Parent
+                            (
+                                (previousToken.Parent is StatementSyntax)
+                                && currentToken.Parent != previousToken.Parent
+                            )
+                            || currentToken.Kind() == SyntaxKind.OpenBraceToken
                         )
-                        || currentToken.Kind() == SyntaxKind.OpenBraceToken
-                    )
-                        ? 1
-                        : 0;
+                      ? 1
+                      : 0;
 
                 case SyntaxKind.CloseBracketToken:
                     // Assembly and module-level attributes followed by non-attributes should have a blank line after

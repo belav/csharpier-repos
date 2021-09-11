@@ -154,33 +154,35 @@ namespace MS.Internal.Xml.XPath
                     case XPathResultType.Boolean:
                         if (_noPosition)
                         {
-                            return (
-                                (bool)_cond.Evaluate(
-                                    new XPathSingletonIterator(
-                                        current, /*moved:*/
-                                        true
-                                    )
-                                )
-                            )
-                                ? context
-                                : null;
-                        }
-                        break;
-                    case XPathResultType.String:
-                        if (_noPosition)
-                        {
-                            return (
+                            return
                                 (
-                                    (string)_cond.Evaluate(
+                                    (bool)_cond.Evaluate(
                                         new XPathSingletonIterator(
                                             current, /*moved:*/
                                             true
                                         )
                                     )
-                                ).Length != 0
-                            )
-                                ? context
-                                : null;
+                                )
+                              ? context
+                              : null;
+                        }
+                        break;
+                    case XPathResultType.String:
+                        if (_noPosition)
+                        {
+                            return
+                                (
+                                    (
+                                        (string)_cond.Evaluate(
+                                            new XPathSingletonIterator(
+                                                current, /*moved:*/
+                                                true
+                                            )
+                                        )
+                                    ).Length != 0
+                                )
+                              ? context
+                              : null;
                         }
                         break;
                     case XPathResultType_Navigator:

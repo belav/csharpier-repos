@@ -131,15 +131,16 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return count <= 0
-                ? source.Skip(0)
-                : TakeRangeFromEndIterator(
-                      source,
-                      isStartIndexFromEnd: false,
-                      startIndex: 0,
-                      isEndIndexFromEnd: true,
-                      endIndex: count
-                  );
+            return
+                count <= 0
+              ? source.Skip(0)
+              : TakeRangeFromEndIterator(
+                    source,
+                    isStartIndexFromEnd: false,
+                    startIndex: 0,
+                    isEndIndexFromEnd: true,
+                    endIndex: count
+                );
         }
     }
 }

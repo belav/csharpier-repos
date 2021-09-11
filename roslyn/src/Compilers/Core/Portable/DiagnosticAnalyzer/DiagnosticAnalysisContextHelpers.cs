@@ -228,13 +228,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         ) {
             IOperation rootOperation = operation.GetRootOperation();
-            return getControlFlowGraph != null
-                ? getControlFlowGraph(rootOperation)
-                : ControlFlowGraph.CreateCore(
-                      rootOperation,
-                      nameof(rootOperation),
-                      cancellationToken
-                  );
+            return
+                getControlFlowGraph != null
+              ? getControlFlowGraph(rootOperation)
+              : ControlFlowGraph.CreateCore(
+                    rootOperation,
+                    nameof(rootOperation),
+                    cancellationToken
+                );
         }
     }
 }

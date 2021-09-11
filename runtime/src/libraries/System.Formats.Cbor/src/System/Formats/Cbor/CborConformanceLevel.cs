@@ -128,9 +128,10 @@ namespace System.Formats.Cbor
 
         public static Encoding GetUtf8Encoding(CborConformanceMode conformanceMode)
         {
-            return conformanceMode == CborConformanceMode.Lax
-                ? s_utf8EncodingLax
-                : s_utf8EncodingStrict;
+            return
+                conformanceMode == CborConformanceMode.Lax
+              ? s_utf8EncodingLax
+              : s_utf8EncodingStrict;
         }
 
         public static bool RequiresDefiniteLengthItems(CborConformanceMode conformanceMode)

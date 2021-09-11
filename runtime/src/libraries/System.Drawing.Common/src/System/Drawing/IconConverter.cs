@@ -27,9 +27,10 @@ namespace System.Drawing
             CultureInfo culture,
             object value
         ) {
-            return value is byte[] bytes
-                ? new Icon(new MemoryStream(bytes))
-                : base.ConvertFrom(context, culture, value);
+            return
+                value is byte[] bytes
+              ? new Icon(new MemoryStream(bytes))
+              : base.ConvertFrom(context, culture, value);
         }
 
         public override object ConvertTo(

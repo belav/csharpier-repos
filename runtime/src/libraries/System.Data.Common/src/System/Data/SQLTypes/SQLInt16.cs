@@ -173,9 +173,10 @@ namespace System.Data.SqlTypes
 
         public static SqlInt16 operator |(SqlInt16 x, SqlInt16 y)
         {
-            return (x.IsNull || y.IsNull)
-                ? Null
-                : new SqlInt16(unchecked((short)((ushort)x.m_value | (ushort)y.m_value)));
+            return
+                (x.IsNull || y.IsNull)
+              ? Null
+              : new SqlInt16(unchecked((short)((ushort)x.m_value | (ushort)y.m_value)));
         }
 
         public static SqlInt16 operator ^(SqlInt16 x, SqlInt16 y)
@@ -272,9 +273,10 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlInt16 x, SqlInt16 y)
         {
-            return (x.IsNull || y.IsNull)
-                ? SqlBoolean.Null
-                : new SqlBoolean(x.m_value == y.m_value);
+            return
+                (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(x.m_value == y.m_value);
         }
 
         public static SqlBoolean operator !=(SqlInt16 x, SqlInt16 y)
@@ -294,16 +296,18 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <=(SqlInt16 x, SqlInt16 y)
         {
-            return (x.IsNull || y.IsNull)
-                ? SqlBoolean.Null
-                : new SqlBoolean(x.m_value <= y.m_value);
+            return
+                (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         public static SqlBoolean operator >=(SqlInt16 x, SqlInt16 y)
         {
-            return (x.IsNull || y.IsNull)
-                ? SqlBoolean.Null
-                : new SqlBoolean(x.m_value >= y.m_value);
+            return
+                (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------

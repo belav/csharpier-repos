@@ -1377,9 +1377,10 @@ namespace System.Data
                 throw ExceptionBuilder.RowOutOfRange(recordIndex);
             }
 
-            return recordIndex == _index!.RecordCount
-                ? _addNewRow!.GetDefaultRecord()
-                : _index.GetRecord(recordIndex);
+            return
+                recordIndex == _index!.RecordCount
+              ? _addNewRow!.GetDefaultRecord()
+              : _index.GetRecord(recordIndex);
         }
 
         /// <exception cref="IndexOutOfRangeException"></exception>

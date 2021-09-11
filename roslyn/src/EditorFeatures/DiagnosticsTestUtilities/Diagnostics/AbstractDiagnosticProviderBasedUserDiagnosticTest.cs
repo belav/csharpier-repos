@@ -52,9 +52,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Workspace workspace,
             TestParameters parameters
         ) {
-            return parameters.fixProviderData == null
-                ? _analyzerAndFixerMap.GetOrAdd(workspace, CreateDiagnosticProviderAndFixer)
-                : CreateDiagnosticProviderAndFixer(workspace, parameters);
+            return
+                parameters.fixProviderData == null
+              ? _analyzerAndFixerMap.GetOrAdd(workspace, CreateDiagnosticProviderAndFixer)
+              : CreateDiagnosticProviderAndFixer(workspace, parameters);
         }
 
         internal virtual bool ShouldSkipMessageDescriptionVerification(

@@ -93,9 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(operand, nameof(operand));
 
-            return operand != Operand
-                ? new SqlUnaryExpression(OperatorType, operand, Type, TypeMapping)
-                : this;
+            return
+                operand != Operand
+              ? new SqlUnaryExpression(OperatorType, operand, Type, TypeMapping)
+              : this;
         }
 
         /// <inheritdoc />

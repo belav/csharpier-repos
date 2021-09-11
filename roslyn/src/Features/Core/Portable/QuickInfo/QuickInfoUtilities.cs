@@ -245,9 +245,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             )
                 return default;
 
-            return sections.TryGetValue(SymbolDescriptionGroups.RemarksDocumentation, out var parts)
-                ? parts
-                : default;
+            return
+                sections.TryGetValue(SymbolDescriptionGroups.RemarksDocumentation, out var parts)
+              ? parts
+              : default;
         }
     }
 }

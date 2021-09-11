@@ -3183,12 +3183,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var result = Id.Length - ((ComparableBytesStructKey)other).Id.Length;
 
-                return result != 0
-                    ? result
-                    : StructuralComparisons.StructuralComparer.Compare(
-                          Id,
-                          ((ComparableBytesStructKey)other).Id
-                      );
+                return
+                    result != 0
+                  ? result
+                  : StructuralComparisons.StructuralComparer.Compare(
+                        Id,
+                        ((ComparableBytesStructKey)other).Id
+                    );
             }
         }
 
@@ -3232,9 +3233,10 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var result = Id.Length - other.Id.Length;
 
-                return result != 0
-                    ? result
-                    : StructuralComparisons.StructuralComparer.Compare(Id, other.Id);
+                return
+                    result != 0
+                  ? result
+                  : StructuralComparisons.StructuralComparer.Compare(Id, other.Id);
             }
         }
 

@@ -1190,10 +1190,11 @@ namespace System.Globalization
                 return true;
             }
 
-            return overflow
-                ? result.SetOverflowFailure()
-                : // we found at least one literal pattern match but the numbers just didn't fit
-                  result.SetBadTimeSpanFailure(); // we couldn't find a thing
+            return
+                overflow
+              ? result.SetOverflowFailure()
+              : // we found at least one literal pattern match but the numbers just didn't fit
+                result.SetBadTimeSpanFailure(); // we couldn't find a thing
         }
 
         /// <summary>Validate the ambiguous 3-number "Hours:Minutes:Seconds", "Days.Hours:Minutes", or "Hours:Minutes:.Fraction" terminal case.</summary>
@@ -1422,10 +1423,11 @@ namespace System.Globalization
                 return true;
             }
 
-            return overflow
-                ? result.SetOverflowFailure()
-                : // we found at least one literal pattern match but the numbers just didn't fit
-                  result.SetBadTimeSpanFailure(); // we couldn't find a thing
+            return
+                overflow
+              ? result.SetOverflowFailure()
+              : // we found at least one literal pattern match but the numbers just didn't fit
+                result.SetBadTimeSpanFailure(); // we couldn't find a thing
         }
 
         /// <summary>Validate the 2-number "Hours:Minutes" terminal case.</summary>

@@ -240,9 +240,10 @@ namespace System
         {
             if (value == System.DBNull.Value)
                 return true;
-            return value is IConvertible convertible
-                ? convertible.GetTypeCode() == TypeCode.DBNull
-                : false;
+            return
+                value is IConvertible convertible
+              ? convertible.GetTypeCode() == TypeCode.DBNull
+              : false;
         }
 
         // Converts the given object to the given type. In general, this method is
@@ -2397,9 +2398,10 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return value != null
-                ? ParseNumbers.StringToInt(value.AsSpan(), fromBase, ParseNumbers.IsTight)
-                : 0;
+            return
+                value != null
+              ? ParseNumbers.StringToInt(value.AsSpan(), fromBase, ParseNumbers.IsTight)
+              : 0;
         }
 
         // Parses value in base fromBase.  fromBase can only
@@ -2413,13 +2415,14 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return value != null
-                ? (uint)ParseNumbers.StringToInt(
-                      value.AsSpan(),
-                      fromBase,
-                      ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
-                  )
-                : 0;
+            return
+                value != null
+              ? (uint)ParseNumbers.StringToInt(
+                    value.AsSpan(),
+                    fromBase,
+                    ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
+                )
+              : 0;
         }
 
         // Parses value in base fromBase.  fromBase can only
@@ -2432,9 +2435,10 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return value != null
-                ? ParseNumbers.StringToLong(value.AsSpan(), fromBase, ParseNumbers.IsTight)
-                : 0;
+            return
+                value != null
+              ? ParseNumbers.StringToLong(value.AsSpan(), fromBase, ParseNumbers.IsTight)
+              : 0;
         }
 
         // Parses value in base fromBase.  fromBase can only
@@ -2448,13 +2452,14 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return value != null
-                ? (ulong)ParseNumbers.StringToLong(
-                      value.AsSpan(),
-                      fromBase,
-                      ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
-                  )
-                : 0;
+            return
+                value != null
+              ? (ulong)ParseNumbers.StringToLong(
+                    value.AsSpan(),
+                    fromBase,
+                    ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
+                )
+              : 0;
         }
 
         // Convert the byte value to a string in base fromBase

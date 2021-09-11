@@ -122,9 +122,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     var allMembersImplementedExplicitly =
                         state.MembersWithoutExplicitImplementation.Length == 0;
 
-                    return !allMembersImplementedExplicitly || !allMembersImplemented
-                        ? state
-                        : null;
+                    return
+                        !allMembersImplementedExplicitly || !allMembersImplemented
+                      ? state
+                      : null;
                 }
                 else
                 {

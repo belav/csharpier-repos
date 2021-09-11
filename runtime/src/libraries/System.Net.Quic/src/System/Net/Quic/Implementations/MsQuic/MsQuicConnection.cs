@@ -327,9 +327,10 @@ namespace System.Net.Quic.Implementations.MsQuic
                         $"Certificate validation for '${certificate?.Subject}' finished with ${sslPolicyErrors}"
                     );
 
-                return (sslPolicyErrors == SslPolicyErrors.None)
-                    ? MsQuicStatusCodes.Success
-                    : MsQuicStatusCodes.HandshakeFailure;
+                return
+                    (sslPolicyErrors == SslPolicyErrors.None)
+                  ? MsQuicStatusCodes.Success
+                  : MsQuicStatusCodes.HandshakeFailure;
             }
             catch (Exception ex)
             {

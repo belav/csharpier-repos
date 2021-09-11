@@ -145,13 +145,10 @@ namespace System
                 0
             );
 
-            return osvi.szCSDVersion[0] != '\0'
-                ? new OperatingSystem(
-                      PlatformID.Win32NT,
-                      version,
-                      new string(&osvi.szCSDVersion[0])
-                  )
-                : new OperatingSystem(PlatformID.Win32NT, version);
+            return
+                osvi.szCSDVersion[0] != '\0'
+              ? new OperatingSystem(PlatformID.Win32NT, version, new string(&osvi.szCSDVersion[0]))
+              : new OperatingSystem(PlatformID.Win32NT, version);
         }
 
         public static string SystemDirectory

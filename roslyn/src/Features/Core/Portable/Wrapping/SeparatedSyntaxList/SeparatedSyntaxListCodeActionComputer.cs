@@ -111,9 +111,10 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
 
             private SyntaxTrivia GetIndentationTrivia(WrappingStyle wrappingStyle)
             {
-                return wrappingStyle == WrappingStyle.UnwrapFirst_AlignRest
-                    ? _afterOpenTokenIndentationTrivia
-                    : _singleIndentationTrivia;
+                return
+                    wrappingStyle == WrappingStyle.UnwrapFirst_AlignRest
+                  ? _afterOpenTokenIndentationTrivia
+                  : _singleIndentationTrivia;
             }
 
             protected override async Task<

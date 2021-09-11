@@ -21,10 +21,11 @@ namespace Templates.Test.Helpers
             Project project,
             ProcessEx process
         ) {
-            return process.HasExited
-                ? $@"Project {project.ProjectArguments} failed to {step}.
+            return
+                process.HasExited
+              ? $@"Project {project.ProjectArguments} failed to {step}.
 {process.GetFormattedOutput()}"
-                : "";
+              : "";
         }
     }
 }

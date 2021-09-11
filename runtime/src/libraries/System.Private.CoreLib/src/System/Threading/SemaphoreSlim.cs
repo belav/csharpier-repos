@@ -445,9 +445,10 @@ namespace System.Threading
             // wait, and whether we successfully acquired the semaphore is
             // stored in waitSuccessful.
 
-            return (asyncWaitTask != null)
-                ? asyncWaitTask.GetAwaiter().GetResult()
-                : waitSuccessful;
+            return
+                (asyncWaitTask != null)
+              ? asyncWaitTask.GetAwaiter().GetResult()
+              : waitSuccessful;
         }
 
         /// <summary>
@@ -672,15 +673,17 @@ namespace System.Threading
                 {
                     Debug.Assert(m_currentCount == 0, "m_currentCount should never be negative");
                     TaskNode asyncWaiter = CreateAndAddAsyncWaiter();
-                    return (
-                        millisecondsTimeout == Timeout.Infinite && !cancellationToken.CanBeCanceled
-                    )
-                        ? asyncWaiter
-                        : WaitUntilCountOrTimeoutAsync(
-                              asyncWaiter,
-                              millisecondsTimeout,
-                              cancellationToken
-                          );
+                    return
+                        (
+                            millisecondsTimeout == Timeout.Infinite
+                            && !cancellationToken.CanBeCanceled
+                        )
+                      ? asyncWaiter
+                      : WaitUntilCountOrTimeoutAsync(
+                            asyncWaiter,
+                            millisecondsTimeout,
+                            cancellationToken
+                        );
                 }
             }
         }

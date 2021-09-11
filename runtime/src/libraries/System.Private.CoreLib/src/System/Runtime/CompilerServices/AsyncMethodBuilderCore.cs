@@ -134,11 +134,12 @@ namespace System.Runtime.CompilerServices
         internal static Action TryGetStateMachineForDebugger(Action action) // debugger depends on this exact name/signature
         {
             object? target = action.Target;
-            return target is IAsyncStateMachineBox sm
-                ? sm.GetStateMachineObject().MoveNext
-                : target is ContinuationWrapper cw
-                    ? TryGetStateMachineForDebugger(cw._continuation)
-                    : action;
+            return
+                target is IAsyncStateMachineBox sm
+              ? sm.GetStateMachineObject().MoveNext
+              : target is ContinuationWrapper cw
+                  ? TryGetStateMachineForDebugger(cw._continuation)
+                  : action;
         }
 
         internal static Task? TryGetContinuationTask(Action continuation) =>

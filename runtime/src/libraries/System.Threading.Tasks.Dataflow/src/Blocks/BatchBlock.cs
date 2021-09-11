@@ -716,9 +716,10 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     Common.ContractAssertMonitorStatus(IncomingLock, held: true);
 
-                    return _boundingState != null
-                        ? _dataflowBlockOptions.BoundedCapacity - _boundingState.CurrentCount
-                        : _batchSize;
+                    return
+                        _boundingState != null
+                      ? _dataflowBlockOptions.BoundedCapacity - _boundingState.CurrentCount
+                      : _batchSize;
                 }
             }
 
@@ -1672,9 +1673,10 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get
                     {
-                        return _target._nonGreedyState != null
-                            ? _target._nonGreedyState.TaskForInputProcessing
-                            : null;
+                        return
+                            _target._nonGreedyState != null
+                          ? _target._nonGreedyState.TaskForInputProcessing
+                          : null;
                     }
                 }
                 /// <summary>Gets the collection of postponed messages.</summary>
@@ -1682,9 +1684,10 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get
                     {
-                        return _target._nonGreedyState != null
-                            ? _target._nonGreedyState.PostponedMessages
-                            : null;
+                        return
+                            _target._nonGreedyState != null
+                          ? _target._nonGreedyState.PostponedMessages
+                          : null;
                     }
                 }
                 /// <summary>Gets whether the block is declining further messages.</summary>

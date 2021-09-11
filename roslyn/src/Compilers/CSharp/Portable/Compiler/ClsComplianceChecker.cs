@@ -1394,9 +1394,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // Don't bother caching methods, etc - they won't be reused.
-            return (symbol.Kind == SymbolKind.Assembly || symbol.Kind == SymbolKind.NamedType)
-                ? _declaredOrInheritedCompliance.GetOrAdd(symbol, compliance)
-                : compliance;
+            return
+                (symbol.Kind == SymbolKind.Assembly || symbol.Kind == SymbolKind.NamedType)
+              ? _declaredOrInheritedCompliance.GetOrAdd(symbol, compliance)
+              : compliance;
         }
 
         private Compliance GetInheritedCompliance(Symbol symbol)

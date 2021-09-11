@@ -306,11 +306,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string displayText,
             TSyntaxContext context
         ) {
-            return (displayText == symbol.Name)
-            || (displayText.Length > 0 && displayText[0] == '@')
-            || (context.IsAttributeNameContext && symbol.IsAttribute())
-                ? displayText
-                : symbol.Name;
+            return
+                (displayText == symbol.Name)
+                || (displayText.Length > 0 && displayText[0] == '@')
+                || (context.IsAttributeNameContext && symbol.IsAttribute())
+              ? displayText
+              : symbol.Name;
         }
 
         protected override Task<CompletionDescription> GetDescriptionWorkerAsync(
@@ -552,20 +553,21 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         ) {
             var syntaxFacts = syntaxContext.GetLanguageService<ISyntaxFactsService>();
-            return syntaxFacts.IsInInactiveRegion(
-                syntaxContext.SyntaxTree,
-                syntaxContext.Position,
-                cancellationToken
-            )
-                ? default
-                : await GetSymbolsAsync(
-                          completionContext,
-                          syntaxContext,
-                          syntaxContext.Position,
-                          options,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false);
+            return
+                syntaxFacts.IsInInactiveRegion(
+                    syntaxContext.SyntaxTree,
+                    syntaxContext.Position,
+                    cancellationToken
+                )
+              ? default
+              : await GetSymbolsAsync(
+                        completionContext,
+                        syntaxContext,
+                        syntaxContext.Position,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
 
         protected static async Task<TSyntaxContext> CreateContextAsync(
@@ -663,9 +665,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         private string GetInsertionText(CompletionItem item, char? ch)
         {
-            return ch == null
-                ? SymbolCompletionItem.GetInsertionText(item)
-                : GetInsertionText(item, ch.Value);
+            return
+                ch == null
+              ? SymbolCompletionItem.GetInsertionText(item)
+              : GetInsertionText(item, ch.Value);
         }
 
         /// <summary>

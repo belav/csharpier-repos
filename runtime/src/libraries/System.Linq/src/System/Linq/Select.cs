@@ -33,9 +33,10 @@ namespace System.Linq
             {
                 if (source is TSource[] array)
                 {
-                    return array.Length == 0
-                        ? Empty<TResult>()
-                        : new SelectArrayIterator<TSource, TResult>(array, selector);
+                    return
+                        array.Length == 0
+                      ? Empty<TResult>()
+                      : new SelectArrayIterator<TSource, TResult>(array, selector);
                 }
 
                 if (source is List<TSource> list)

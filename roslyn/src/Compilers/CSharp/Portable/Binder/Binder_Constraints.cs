@@ -478,9 +478,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeParameterSyntax typeParameterSyntax,
             bool isForOverride = false
         ) {
-            return isForOverride || AreNullableAnnotationsEnabled(typeParameterSyntax.Identifier)
-                ? TypeParameterConstraintClause.Empty
-                : TypeParameterConstraintClause.ObliviousNullabilityIfReferenceType;
+            return
+                isForOverride || AreNullableAnnotationsEnabled(typeParameterSyntax.Identifier)
+              ? TypeParameterConstraintClause.Empty
+              : TypeParameterConstraintClause.ObliviousNullabilityIfReferenceType;
         }
 
         /// <summary>

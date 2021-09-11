@@ -476,9 +476,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return MangleName
-                    ? MetadataHelpers.ComposeAritySuffixedMetadataName(Name, Arity)
-                    : Name;
+                return
+                    MangleName
+                  ? MetadataHelpers.ComposeAritySuffixedMetadataName(Name, Arity)
+                  : Name;
             }
         }
 
@@ -791,10 +792,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     var elementNames = TupleElementNames;
                     var otherElementNames = other.TupleElementNames;
-                    return elementNames.IsDefault
-                        ? otherElementNames.IsDefault
-                        : !otherElementNames.IsDefault
-                          && elementNames.SequenceEqual(otherElementNames);
+                    return
+                        elementNames.IsDefault
+                      ? otherElementNames.IsDefault
+                      : !otherElementNames.IsDefault
+                        && elementNames.SequenceEqual(otherElementNames);
                 }
 
                 return true;
@@ -1307,9 +1309,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.ContainingSymbol.OriginalDefinition
                 )
             );
-            return newOwner.IsDefinition
-                ? this
-                : new SubstitutedNestedTypeSymbol((SubstitutedNamedTypeSymbol)newOwner, this);
+            return
+                newOwner.IsDefinition
+              ? this
+              : new SubstitutedNestedTypeSymbol((SubstitutedNamedTypeSymbol)newOwner, this);
         }
 
         #region Use-Site Diagnostics

@@ -747,18 +747,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             SingleVariableDesignationSyntax designation,
             SyntaxNode nodeToBind
         ) {
-            return designation == null
-                ? null
-                : GlobalExpressionVariable.Create(
-                      _containingType,
-                      _modifiers,
-                      type,
-                      designation.Identifier.ValueText,
-                      designation,
-                      designation.GetLocation(),
-                      _containingFieldOpt,
-                      nodeToBind
-                  );
+            return
+                designation == null
+              ? null
+              : GlobalExpressionVariable.Create(
+                    _containingType,
+                    _modifiers,
+                    type,
+                    designation.Identifier.ValueText,
+                    designation,
+                    designation.GetLocation(),
+                    _containingFieldOpt,
+                    nodeToBind
+                );
         }
 
         protected override Symbol MakePatternVariable(

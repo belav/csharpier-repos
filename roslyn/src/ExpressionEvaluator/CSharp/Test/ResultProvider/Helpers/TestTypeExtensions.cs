@@ -36,13 +36,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     runtimeInstance: null
                 );
             }
-            return escapeKeywordIdentifiers
-                ? ((IDkmClrFullNameProvider)formatter).GetClrTypeName(
-                      inspectionContext,
-                      clrType,
-                      typeInfo
-                  )
-                : inspectionContext.GetTypeName(clrType, typeInfo, Formatter.NoFormatSpecifiers);
+            return
+                escapeKeywordIdentifiers
+              ? ((IDkmClrFullNameProvider)formatter).GetClrTypeName(
+                    inspectionContext,
+                    clrType,
+                    typeInfo
+                )
+              : inspectionContext.GetTypeName(clrType, typeInfo, Formatter.NoFormatSpecifiers);
         }
     }
 }

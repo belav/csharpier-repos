@@ -27,16 +27,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     .Select(a => TryGenerateAttribute(a, options))
                     .WhereNotNull()
                     .ToList();
-                return attributeNodes.Count == 0
-                    ? default
-                    : SyntaxFactory.SingletonList(
-                          SyntaxFactory.AttributeList(
-                              target.HasValue
-                                ? SyntaxFactory.AttributeTargetSpecifier(target.Value)
-                                : null,
-                              SyntaxFactory.SeparatedList(attributeNodes)
-                          )
-                      );
+                return
+                    attributeNodes.Count == 0
+                  ? default
+                  : SyntaxFactory.SingletonList(
+                        SyntaxFactory.AttributeList(
+                            target.HasValue
+                              ? SyntaxFactory.AttributeTargetSpecifier(target.Value)
+                              : null,
+                            SyntaxFactory.SeparatedList(attributeNodes)
+                        )
+                    );
             }
             else
             {
@@ -44,9 +45,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     .Select(a => TryGenerateAttributeDeclaration(a, target, options))
                     .WhereNotNull()
                     .ToList();
-                return attributeDeclarations.Count == 0
-                    ? default
-                    : SyntaxFactory.List<AttributeListSyntax>(attributeDeclarations);
+                return
+                    attributeDeclarations.Count == 0
+                  ? default
+                  : SyntaxFactory.List<AttributeListSyntax>(attributeDeclarations);
             }
         }
 
@@ -56,12 +58,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationOptions options
         ) {
             var attributeSyntax = TryGenerateAttribute(attribute, options);
-            return attributeSyntax == null
-                ? null
-                : SyntaxFactory.AttributeList(
-                      target.HasValue ? SyntaxFactory.AttributeTargetSpecifier(target.Value) : null,
-                      SyntaxFactory.SingletonSeparatedList(attributeSyntax)
-                  );
+            return
+                attributeSyntax == null
+              ? null
+              : SyntaxFactory.AttributeList(
+                    target.HasValue ? SyntaxFactory.AttributeTargetSpecifier(target.Value) : null,
+                    SyntaxFactory.SingletonSeparatedList(attributeSyntax)
+                );
         }
 
         private static AttributeSyntax? TryGenerateAttribute(
@@ -87,9 +90,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return null;
 
             var attributeArguments = GenerateAttributeArgumentList(attribute);
-            return attribute.AttributeClass.GenerateTypeSyntax() is NameSyntax nameSyntax
-                ? SyntaxFactory.Attribute(nameSyntax, attributeArguments)
-                : null;
+            return
+                attribute.AttributeClass.GenerateTypeSyntax() is NameSyntax nameSyntax
+              ? SyntaxFactory.Attribute(nameSyntax, attributeArguments)
+              : null;
         }
 
         private static bool IsCompilerInternalAttribute(AttributeData attribute)

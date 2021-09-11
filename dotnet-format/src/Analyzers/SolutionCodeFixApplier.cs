@@ -156,9 +156,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 Project project,
                 CancellationToken cancellationToken
             ) {
-                return _diagnosticsByProject.ContainsKey(project)
-                    ? Task.FromResult<IEnumerable<Diagnostic>>(_diagnosticsByProject[project])
-                    : EmptyDignosticResult;
+                return
+                    _diagnosticsByProject.ContainsKey(project)
+                  ? Task.FromResult<IEnumerable<Diagnostic>>(_diagnosticsByProject[project])
+                  : EmptyDignosticResult;
             }
         }
     }

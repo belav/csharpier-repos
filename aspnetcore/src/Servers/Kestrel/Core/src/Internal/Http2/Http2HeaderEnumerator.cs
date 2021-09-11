@@ -61,33 +61,36 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
             if (_headersType == HeadersType.Headers)
             {
-                return _headersEnumerator.MoveNext()
-                    ? SetCurrent(
-                          _headersEnumerator.Current.Key,
-                          _headersEnumerator.Current.Value,
-                          _headersEnumerator.CurrentKnownType
-                      )
-                    : false;
+                return
+                    _headersEnumerator.MoveNext()
+                  ? SetCurrent(
+                        _headersEnumerator.Current.Key,
+                        _headersEnumerator.Current.Value,
+                        _headersEnumerator.CurrentKnownType
+                    )
+                  : false;
             }
             else if (_headersType == HeadersType.Trailers)
             {
-                return _trailersEnumerator.MoveNext()
-                    ? SetCurrent(
-                          _trailersEnumerator.Current.Key,
-                          _trailersEnumerator.Current.Value,
-                          _trailersEnumerator.CurrentKnownType
-                      )
-                    : false;
+                return
+                    _trailersEnumerator.MoveNext()
+                  ? SetCurrent(
+                        _trailersEnumerator.Current.Key,
+                        _trailersEnumerator.Current.Value,
+                        _trailersEnumerator.CurrentKnownType
+                    )
+                  : false;
             }
             else
             {
-                return _genericEnumerator!.MoveNext()
-                    ? SetCurrent(
-                          _genericEnumerator.Current.Key,
-                          _genericEnumerator.Current.Value,
-                          default
-                      )
-                    : false;
+                return
+                    _genericEnumerator!.MoveNext()
+                  ? SetCurrent(
+                        _genericEnumerator.Current.Key,
+                        _genericEnumerator.Current.Value,
+                        default
+                    )
+                  : false;
             }
         }
 

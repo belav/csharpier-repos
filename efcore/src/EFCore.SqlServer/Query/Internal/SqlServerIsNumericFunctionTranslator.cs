@@ -52,18 +52,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Equal(
-                      _sqlExpressionFactory.Function(
-                          "ISNUMERIC",
-                          new[] { arguments[1] },
-                          nullable: false,
-                          argumentsPropagateNullability: new[] { false },
-                          typeof(int)
-                      ),
-                      _sqlExpressionFactory.Constant(1)
-                  )
-                : null;
+            return
+                _methodInfo.Equals(method)
+              ? _sqlExpressionFactory.Equal(
+                    _sqlExpressionFactory.Function(
+                        "ISNUMERIC",
+                        new[] { arguments[1] },
+                        nullable: false,
+                        argumentsPropagateNullability: new[] { false },
+                        typeof(int)
+                    ),
+                    _sqlExpressionFactory.Constant(1)
+                )
+              : null;
         }
     }
 }

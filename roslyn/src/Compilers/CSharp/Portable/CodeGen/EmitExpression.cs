@@ -1165,9 +1165,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // there are also cases where we must emit receiver as a reference
             if (FieldLoadMustUseRef(receiver) || FieldLoadPrefersRef(receiver))
             {
-                return EmitFieldLoadReceiverAddress(receiver)
-                    ? null
-                    : EmitReceiverRef(receiver, AddressKind.ReadOnly);
+                return
+                    EmitFieldLoadReceiverAddress(receiver)
+                  ? null
+                  : EmitReceiverRef(receiver, AddressKind.ReadOnly);
             }
 
             EmitExpression(receiver, true);

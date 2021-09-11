@@ -78,9 +78,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var isLanguageVersionGreaterOrEqualToCSharp8 =
                     (semanticModel.Compilation as CSharpCompilation)?.LanguageVersion
                     >= LanguageVersion.CSharp8;
-                return isLanguageVersionGreaterOrEqualToCSharp8
-                    ? !SyntaxFacts.IsAnonymousOrLocalFunction(node)
-                    : !SyntaxFacts.IsLocalFunctionStatement(node);
+                return
+                    isLanguageVersionGreaterOrEqualToCSharp8
+                  ? !SyntaxFacts.IsAnonymousOrLocalFunction(node)
+                  : !SyntaxFacts.IsLocalFunctionStatement(node);
             }
         }
 

@@ -2096,13 +2096,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             //   struct B { }
                                             //   if (a?.B != null) _ = ((A)a).B.Value; // no warning
                                             int containingSlot = MakeSlot(operand);
-                                            return containingSlot < 0
-                                                ? -1
-                                                : GetNullableOfTValueSlot(
-                                                      operandType,
-                                                      containingSlot,
-                                                      out _
-                                                  );
+                                            return
+                                                containingSlot < 0
+                                              ? -1
+                                              : GetNullableOfTValueSlot(
+                                                    operandType,
+                                                    containingSlot,
+                                                    out _
+                                                );
                                         }
                                     }
                                     break;
@@ -2245,20 +2246,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static object GetParameterAsDiagnosticArgument(ParameterSymbol? parameterOpt)
         {
-            return parameterOpt is null
-                ? (object)""
-                : new FormattedSymbol(parameterOpt, SymbolDisplayFormat.ShortFormat);
+            return
+                parameterOpt is null
+              ? (object)""
+              : new FormattedSymbol(parameterOpt, SymbolDisplayFormat.ShortFormat);
         }
 
         private static object GetContainingSymbolAsDiagnosticArgument(ParameterSymbol? parameterOpt)
         {
             var containingSymbol = parameterOpt?.ContainingSymbol;
-            return containingSymbol is null
-                ? (object)""
-                : new FormattedSymbol(
-                      containingSymbol,
-                      SymbolDisplayFormat.MinimallyQualifiedFormat
-                  );
+            return
+                containingSymbol is null
+              ? (object)""
+              : new FormattedSymbol(containingSymbol, SymbolDisplayFormat.MinimallyQualifiedFormat);
         }
 
         private enum AssignmentKind
@@ -5777,14 +5777,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             TypeWithAnnotations type
         ) {
-            return !type.HasType
-                ? expr
-                : new BoundExpressionWithNullability(
-                      expr.Syntax,
-                      expr,
-                      type.NullableAnnotation,
-                      type.Type
-                  );
+            return
+                !type.HasType
+              ? expr
+              : new BoundExpressionWithNullability(
+                    expr.Syntax,
+                    expr,
+                    type.NullableAnnotation,
+                    type.Type
+                );
         }
 
         public override BoundNode? VisitConditionalReceiver(BoundConditionalReceiver node)
@@ -6233,9 +6234,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Annotations are ignored when binding an attribute to avoid cycles. (Members used
             // in attributes are error scenarios, so missing warnings should not be important.)
-            return IsAnalyzingAttribute
-                ? FlowAnalysisAnnotations.None
-                : parameter.FlowAnalysisAnnotations;
+            return
+                IsAnalyzingAttribute
+              ? FlowAnalysisAnnotations.None
+              : parameter.FlowAnalysisAnnotations;
         }
 
         /// <summary>
@@ -7590,9 +7592,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.DefaultLiteral:
                     case BoundKind.DefaultExpression:
                     case BoundKind.Literal:
-                        return (expr.ConstantValue?.IsNull != false)
-                            ? NullableAnnotation.NotAnnotated
-                            : NullableAnnotation.Annotated;
+                        return
+                            (expr.ConstantValue?.IsNull != false)
+                          ? NullableAnnotation.NotAnnotated
+                          : NullableAnnotation.Annotated;
                     case BoundKind.ExpressionWithNullability:
                         return ((BoundExpressionWithNullability)expr).NullableAnnotation;
                     case BoundKind.MethodGroup:
@@ -7828,35 +7831,36 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ref discardedUseSiteInfo
                 );
             }
-            return useExpression
-                ? (
-                      fromExplicitCast
-                          ? conversions.ClassifyConversionFromExpression(
-                                sourceExpression,
-                                destinationType,
-                                ref discardedUseSiteInfo,
-                                forCast: true
-                            )
-                          : conversions.ClassifyImplicitConversionFromExpression(
-                                sourceExpression,
-                                destinationType,
-                                ref discardedUseSiteInfo
-                            )
-                  )
-                : (
-                      fromExplicitCast
-                          ? conversions.ClassifyConversionFromType(
-                                sourceType,
-                                destinationType,
-                                ref discardedUseSiteInfo,
-                                forCast: true
-                            )
-                          : conversions.ClassifyImplicitConversionFromType(
-                                sourceType,
-                                destinationType,
-                                ref discardedUseSiteInfo
-                            )
-                  );
+            return
+                useExpression
+              ? (
+                    fromExplicitCast
+                        ? conversions.ClassifyConversionFromExpression(
+                              sourceExpression,
+                              destinationType,
+                              ref discardedUseSiteInfo,
+                              forCast: true
+                          )
+                        : conversions.ClassifyImplicitConversionFromExpression(
+                              sourceExpression,
+                              destinationType,
+                              ref discardedUseSiteInfo
+                          )
+                )
+              : (
+                    fromExplicitCast
+                        ? conversions.ClassifyConversionFromType(
+                              sourceType,
+                              destinationType,
+                              ref discardedUseSiteInfo,
+                              forCast: true
+                          )
+                        : conversions.ClassifyImplicitConversionFromType(
+                              sourceType,
+                              destinationType,
+                              ref discardedUseSiteInfo
+                          )
+                );
         }
 
         /// <summary>
@@ -8574,9 +8578,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations destination,
             bool requireIdentity
         ) {
-            return requireIdentity
-                ? _conversions.HasTopLevelNullabilityIdentityConversion(source, destination)
-                : _conversions.HasTopLevelNullabilityImplicitConversion(source, destination);
+            return
+                requireIdentity
+              ? _conversions.HasTopLevelNullabilityIdentityConversion(source, destination)
+              : _conversions.HasTopLevelNullabilityImplicitConversion(source, destination);
         }
 
         /// <summary>
@@ -9108,9 +9113,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     out var annotation
                                 )
                             ) {
-                                return (annotation == NullableAnnotation.Annotated)
-                                    ? NullableFlowState.MaybeDefault
-                                    : NullableFlowState.MaybeNull;
+                                return
+                                    (annotation == NullableAnnotation.Annotated)
+                                  ? NullableFlowState.MaybeDefault
+                                  : NullableFlowState.MaybeNull;
                             }
                         }
                         break;
@@ -9155,9 +9161,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Debug.Assert(dependsOn); // If this case fails, add a corresponding test.
                         if (dependsOn)
                         {
-                            return (annotation == NullableAnnotation.Annotated)
-                                ? NullableFlowState.MaybeDefault
-                                : NullableFlowState.MaybeNull;
+                            return
+                                (annotation == NullableAnnotation.Annotated)
+                              ? NullableFlowState.MaybeDefault
+                              : NullableFlowState.MaybeNull;
                         }
                     }
                 }
@@ -9579,9 +9586,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations returnType,
             NullableFlowState operandState
         ) {
-            return isLifted
-                ? GetLiftedReturnType(returnType, operandState)
-                : returnType.ToTypeWithState();
+            return
+                isLifted
+              ? GetLiftedReturnType(returnType, operandState)
+              : returnType.ToTypeWithState();
         }
 
         private TypeSymbol MakeNullableOf(TypeWithAnnotations underlying)
@@ -10117,9 +10125,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             static FlowAnalysisAnnotations getFieldAnnotations(FieldSymbol field)
             {
-                return field.AssociatedSymbol is PropertySymbol property
-                    ? property.GetFlowAnalysisAnnotations()
-                    : field.FlowAnalysisAnnotations;
+                return
+                    field.AssociatedSymbol is PropertySymbol property
+                  ? property.GetFlowAnalysisAnnotations()
+                  : field.FlowAnalysisAnnotations;
             }
         }
 
@@ -10933,16 +10942,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private TypeWithAnnotations GetDeclaredLocalResult(LocalSymbol local)
         {
-            return _variables.TryGetType(local, out TypeWithAnnotations type)
-                ? type
-                : local.TypeWithAnnotations;
+            return
+                _variables.TryGetType(local, out TypeWithAnnotations type)
+              ? type
+              : local.TypeWithAnnotations;
         }
 
         private TypeWithAnnotations GetDeclaredParameterResult(ParameterSymbol parameter)
         {
-            return _variables.TryGetType(parameter, out TypeWithAnnotations type)
-                ? type
-                : parameter.TypeWithAnnotations;
+            return
+                _variables.TryGetType(parameter, out TypeWithAnnotations type)
+              ? type
+              : parameter.TypeWithAnnotations;
         }
 
         public override BoundNode? VisitBaseReference(BoundBaseReference node)
@@ -11168,13 +11179,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SpecialMember.System_Nullable_T_get_Value
             );
             valueProperty = getValue?.AsMember((NamedTypeSymbol)containingType)?.AssociatedSymbol;
-            return (valueProperty is null)
-                ? -1
-                : GetOrCreateSlot(
-                      valueProperty,
-                      containingSlot,
-                      forceSlotEvenIfEmpty: forceSlotEvenIfEmpty
-                  );
+            return
+                (valueProperty is null)
+              ? -1
+              : GetOrCreateSlot(
+                    valueProperty,
+                    containingSlot,
+                    forceSlotEvenIfEmpty: forceSlotEvenIfEmpty
+                );
         }
 
         protected override void VisitForEachExpression(BoundForEachStatement node)

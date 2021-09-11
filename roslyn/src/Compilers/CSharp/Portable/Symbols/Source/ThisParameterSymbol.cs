@@ -64,9 +64,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return (object)_containingMethod != null
-                    ? _containingMethod.Locations
-                    : ImmutableArray<Location>.Empty;
+                return
+                    (object)_containingMethod != null
+                  ? _containingMethod.Locations
+                  : ImmutableArray<Location>.Empty;
             }
         }
 

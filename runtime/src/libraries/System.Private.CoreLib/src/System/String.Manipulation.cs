@@ -841,9 +841,10 @@ namespace System
             // something changed concurrently to mutate the input array: fall back to
             // doing the concatenation again, but this time with a defensive copy. This
             // fall back should be extremely rare.
-            return copiedLength == totalLength
-                ? result
-                : JoinCore(separator, values.ToArray().AsSpan());
+            return
+                copiedLength == totalLength
+              ? result
+              : JoinCore(separator, values.ToArray().AsSpan());
         }
 
         public string PadLeft(int totalWidth) => PadLeft(totalWidth, ' ');
@@ -1520,12 +1521,13 @@ namespace System
                 {
                     candidate = candidate.Trim();
                 }
-                return (
-                    (candidate.Length == 0)
-                    && ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
-                )
-                    ? Array.Empty<string>()
-                    : new string[] { candidate };
+                return
+                    (
+                        (candidate.Length == 0)
+                        && ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
+                    )
+                  ? Array.Empty<string>()
+                  : new string[] { candidate };
             }
 
             string[] result =

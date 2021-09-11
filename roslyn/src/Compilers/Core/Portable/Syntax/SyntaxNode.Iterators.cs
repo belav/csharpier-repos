@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis
             bool descendIntoTrivia,
             bool includeSelf
         ) {
-            return descendIntoTrivia
-                ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
-                      .Where(e => e.IsNode)
-                      .Select(e => e.AsNode()!)
-                : DescendantNodesOnly(span, descendIntoChildren, includeSelf);
+            return
+                descendIntoTrivia
+              ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
+                    .Where(e => e.IsNode)
+                    .Select(e => e.AsNode()!)
+              : DescendantNodesOnly(span, descendIntoChildren, includeSelf);
         }
 
         private IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokensImpl(
@@ -33,9 +34,10 @@ namespace Microsoft.CodeAnalysis
             bool descendIntoTrivia,
             bool includeSelf
         ) {
-            return descendIntoTrivia
-                ? DescendantNodesAndTokensIntoTrivia(span, descendIntoChildren, includeSelf)
-                : DescendantNodesAndTokensOnly(span, descendIntoChildren, includeSelf);
+            return
+                descendIntoTrivia
+              ? DescendantNodesAndTokensIntoTrivia(span, descendIntoChildren, includeSelf)
+              : DescendantNodesAndTokensOnly(span, descendIntoChildren, includeSelf);
         }
 
         private IEnumerable<SyntaxTrivia> DescendantTriviaImpl(
@@ -43,9 +45,10 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
         ) {
-            return descendIntoTrivia
-                ? DescendantTriviaIntoTrivia(span, descendIntoChildren)
-                : DescendantTriviaOnly(span, descendIntoChildren);
+            return
+                descendIntoTrivia
+              ? DescendantTriviaIntoTrivia(span, descendIntoChildren)
+              : DescendantTriviaOnly(span, descendIntoChildren);
         }
 
         private static bool IsInSpan(in TextSpan span, TextSpan childSpan)

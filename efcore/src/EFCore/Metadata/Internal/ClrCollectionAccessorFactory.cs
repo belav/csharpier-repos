@@ -123,13 +123,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var propertyInfo = navigation.PropertyInfo!;
                 var fieldInfo = navigation.FieldInfo!;
 
-                return fieldInfo == null
-                    ? propertyInfo
-                    : propertyInfo == null
-                        ? fieldInfo
-                        : fieldInfo.FieldType.IsAssignableFrom(propertyInfo.PropertyType)
-                            ? (MemberInfo)propertyInfo
-                            : fieldInfo;
+                return
+                    fieldInfo == null
+                  ? propertyInfo
+                  : propertyInfo == null
+                      ? fieldInfo
+                      : fieldInfo.FieldType.IsAssignableFrom(propertyInfo.PropertyType)
+                          ? (MemberInfo)propertyInfo
+                          : fieldInfo;
             }
         }
 

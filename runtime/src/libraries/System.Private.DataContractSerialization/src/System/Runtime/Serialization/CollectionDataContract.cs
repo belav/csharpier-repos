@@ -1819,9 +1819,10 @@ namespace System.Runtime.Serialization
             string nestedMessage,
             string? param
         ) {
-            return (param == null)
-                ? SR.Format(message, nestedMessage)
-                : SR.Format(message, nestedMessage, param);
+            return
+                (param == null)
+              ? SR.Format(message, nestedMessage)
+              : SR.Format(message, nestedMessage, param);
         }
 
         private static void FindCollectionMethodsOnInterface(

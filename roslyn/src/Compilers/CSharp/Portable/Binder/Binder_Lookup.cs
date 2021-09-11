@@ -2181,9 +2181,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     throw ExceptionUtilities.UnexpectedValue(symbol.Kind);
             }
 
-            return (((object)method1 != null) && ((object)method2 != null))
-                ? new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp2, symbol, method1, method2)
-                : new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp1, symbol, method1 ?? method2);
+            return
+                (((object)method1 != null) && ((object)method2 != null))
+              ? new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp2, symbol, method1, method2)
+              : new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp1, symbol, method1 ?? method2);
         }
 
         internal void CheckViability<TSymbol>(
@@ -2296,9 +2297,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Normally, when we access a protected instance member, we need to know the type of the receiver so we
             // can determine whether the member is actually accessible in the containing type.  There is one exception:
             // If the receiver is "base", then it's okay if the receiver type isn't derived from the containing type.
-            return ((options & LookupOptions.UseBaseReferenceAccessibility) != 0)
-                ? null
-                : accessThroughType;
+            return
+                ((options & LookupOptions.UseBaseReferenceAccessibility) != 0)
+              ? null
+              : accessThroughType;
         }
 
         /// <summary>

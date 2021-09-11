@@ -101,11 +101,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             var elseResult = (SqlExpression?)visitor.Visit(ElseResult);
             changed |= elseResult != ElseResult;
 
-            return changed
-                ? operand == null
-                    ? new CaseExpression(whenClauses, elseResult)
-                    : new CaseExpression(operand, whenClauses, elseResult)
-                : this;
+            return
+                changed
+              ? operand == null
+                  ? new CaseExpression(whenClauses, elseResult)
+                  : new CaseExpression(operand, whenClauses, elseResult)
+              : this;
         }
 
         /// <summary>

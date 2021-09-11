@@ -101,12 +101,13 @@ namespace Microsoft.CodeAnalysis
             private string GetDebuggerDisplay()
             {
                 var displayName = ReferenceIdentity?.GetDisplayName() ?? "";
-                return IsBound
-                    ? displayName
-                      + " -> #"
-                      + DefinitionIndex
-                      + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "")
-                    : "unbound";
+                return
+                    IsBound
+                  ? displayName
+                    + " -> #"
+                    + DefinitionIndex
+                    + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "")
+                  : "unbound";
             }
         }
     }

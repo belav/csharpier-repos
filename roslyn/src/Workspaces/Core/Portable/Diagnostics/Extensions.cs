@@ -27,9 +27,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static string GetBingHelpMessage(this Diagnostic diagnostic, OptionSet options)
         {
             // We use the ENU version of the message for bing search.
-            return options.GetOption(InternalDiagnosticsOptions.PutCustomTypeInBingSearch)
-                ? diagnostic.GetMessage(USCultureInfo)
-                : diagnostic.Descriptor.GetBingHelpMessage();
+            return
+                options.GetOption(InternalDiagnosticsOptions.PutCustomTypeInBingSearch)
+              ? diagnostic.GetMessage(USCultureInfo)
+              : diagnostic.Descriptor.GetBingHelpMessage();
         }
 
         public static string GetBingHelpMessage(this DiagnosticDescriptor descriptor)

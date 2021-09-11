@@ -740,9 +740,10 @@ namespace System.Net
 
             if (cancellationToken.IsCancellationRequested)
             {
-                return justAddresses
-                    ? (Task)Task.FromCanceled<IPAddress[]>(cancellationToken)
-                    : Task.FromCanceled<IPHostEntry>(cancellationToken);
+                return
+                    justAddresses
+                  ? (Task)Task.FromCanceled<IPAddress[]>(cancellationToken)
+                  : Task.FromCanceled<IPHostEntry>(cancellationToken);
             }
 
             object asyncState;
@@ -761,14 +762,14 @@ namespace System.Net
 
                 if (justReturnParsedIp)
                 {
-                    return justAddresses
-                        ? (Task)Task.FromResult(
-                              family == AddressFamily.Unspecified
-                                  || ipAddress.AddressFamily == family
-                                ? new[] { ipAddress }
-                                : Array.Empty<IPAddress>()
-                          )
-                        : Task.FromResult(CreateHostEntryForAddress(ipAddress));
+                    return
+                        justAddresses
+                      ? (Task)Task.FromResult(
+                            family == AddressFamily.Unspecified || ipAddress.AddressFamily == family
+                              ? new[] { ipAddress }
+                              : Array.Empty<IPAddress>()
+                        )
+                      : Task.FromResult(CreateHostEntryForAddress(ipAddress));
                 }
 
                 asyncState =

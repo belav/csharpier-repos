@@ -45,9 +45,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             public ImmutableArray<ITypeParameterSymbol> DetermineTypeParameters(
                 CancellationToken cancellationToken
             ) {
-                return _typeParameters.IsDefault
-                    ? (_typeParameters = DetermineTypeParametersWorker(cancellationToken))
-                    : _typeParameters;
+                return
+                    _typeParameters.IsDefault
+                  ? (_typeParameters = DetermineTypeParametersWorker(cancellationToken))
+                  : _typeParameters;
             }
 
             protected abstract ImmutableArray<ITypeParameterSymbol> DetermineTypeParametersWorker(
@@ -259,11 +260,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     "System.NotImplementedException"
                 );
 
-                return isAbstract
-                || State.TypeToGenerateIn.TypeKind == TypeKind.Interface
-                || throwStatement == null
-                    ? default
-                    : ImmutableArray.Create(throwStatement);
+                return
+                    isAbstract
+                    || State.TypeToGenerateIn.TypeKind == TypeKind.Interface
+                    || throwStatement == null
+                  ? default
+                  : ImmutableArray.Create(throwStatement);
             }
 
             private async ValueTask<ImmutableArray<IParameterSymbol>> DetermineParametersAsync(

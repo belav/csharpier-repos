@@ -35,19 +35,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 )
             );
 
-            return prerendered
-                ? WebAssemblyComponentMarker.Prerendered(
-                      assembly,
-                      typeFullName,
-                      serializedDefinitions,
-                      serializedValues
-                  )
-                : WebAssemblyComponentMarker.NonPrerendered(
-                      assembly,
-                      typeFullName,
-                      serializedDefinitions,
-                      serializedValues
-                  );
+            return
+                prerendered
+              ? WebAssemblyComponentMarker.Prerendered(
+                    assembly,
+                    typeFullName,
+                    serializedDefinitions,
+                    serializedValues
+                )
+              : WebAssemblyComponentMarker.NonPrerendered(
+                    assembly,
+                    typeFullName,
+                    serializedDefinitions,
+                    serializedValues
+                );
         }
 
         internal IEnumerable<string> GetPreamble(WebAssemblyComponentMarker record)

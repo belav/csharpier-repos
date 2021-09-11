@@ -91,16 +91,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var limit = (SqlExpression)Visit(selectExpression.Limit);
             var offset = (SqlExpression)Visit(selectExpression.Offset);
 
-            return changed
-                ? selectExpression.Update(
-                      projections,
-                      fromExpression,
-                      predicate,
-                      orderings,
-                      limit,
-                      offset
-                  )
-                : selectExpression;
+            return
+                changed
+              ? selectExpression.Update(
+                    projections,
+                    fromExpression,
+                    predicate,
+                    orderings,
+                    limit,
+                    offset
+                )
+              : selectExpression;
         }
 
         private Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression)

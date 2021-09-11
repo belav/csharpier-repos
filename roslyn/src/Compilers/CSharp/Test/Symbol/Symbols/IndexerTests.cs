@@ -3025,11 +3025,12 @@ class C
         private static IEnumerable<ElementAccessExpressionSyntax> GetElementAccessExpressions(
             SyntaxNode node
         ) {
-            return node == null
-                ? SpecializedCollections.EmptyEnumerable<ElementAccessExpressionSyntax>()
-                : node.DescendantNodesAndSelf()
-                      .Where(s => s.IsKind(SyntaxKind.ElementAccessExpression))
-                      .Cast<ElementAccessExpressionSyntax>();
+            return
+                node == null
+              ? SpecializedCollections.EmptyEnumerable<ElementAccessExpressionSyntax>()
+              : node.DescendantNodesAndSelf()
+                    .Where(s => s.IsKind(SyntaxKind.ElementAccessExpression))
+                    .Cast<ElementAccessExpressionSyntax>();
         }
 
         [Fact]

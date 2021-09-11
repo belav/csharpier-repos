@@ -571,11 +571,12 @@ namespace System.Net.WebSockets
             // Similarly, it should be rare that there are multiple outstanding calls to SendFrameAsync, but if there are, again
             // fall back to the fallback path.
 #pragma warning disable CA1416 // Validate platform compatibility, will not wait because timeout equals 0
-            return cancellationToken.CanBeCanceled || !_sendFrameAsyncLock.Wait(0, default)
-                ?
+            return
+                cancellationToken.CanBeCanceled || !_sendFrameAsyncLock.Wait(0, default)
+              ?
 #pragma warning restore CA1416
-                  SendFrameFallbackAsync(opcode, endOfMessage, payloadBuffer, cancellationToken)
-                : SendFrameLockAcquiredNonCancelableAsync(opcode, endOfMessage, payloadBuffer);
+                SendFrameFallbackAsync(opcode, endOfMessage, payloadBuffer, cancellationToken)
+              : SendFrameLockAcquiredNonCancelableAsync(opcode, endOfMessage, payloadBuffer);
         }
 
         /// <summary>Sends a websocket frame to the network. The caller must hold the sending lock.</summary>

@@ -272,9 +272,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(entityType, nameof(entityType));
 
-            return entityType != EntityType
-                ? new EntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
-                : this;
+            return
+                entityType != EntityType
+              ? new EntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
+              : this;
         }
 
         /// <summary>
@@ -305,14 +306,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
 
-            return valueBufferExpression != ValueBufferExpression
-                ? new EntityShaperExpression(
-                      EntityType,
-                      valueBufferExpression,
-                      IsNullable,
-                      MaterializationCondition
-                  )
-                : this;
+            return
+                valueBufferExpression != ValueBufferExpression
+              ? new EntityShaperExpression(
+                    EntityType,
+                    valueBufferExpression,
+                    IsNullable,
+                    MaterializationCondition
+                )
+              : this;
         }
 
         /// <inheritdoc />

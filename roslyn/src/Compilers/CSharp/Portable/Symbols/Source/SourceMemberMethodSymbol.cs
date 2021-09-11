@@ -488,9 +488,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // then we will mark the method as newslot and specify the
             // override explicitly (see GetExplicitImplementationOverrides
             // in NamedTypeSymbolAdapter.cs).
-            return this.IsOverride
-                ? this.RequiresExplicitOverride(out _)
-                : this.IsMetadataVirtual(ignoreInterfaceImplementationChanges);
+            return
+                this.IsOverride
+              ? this.RequiresExplicitOverride(out _)
+              : this.IsMetadataVirtual(ignoreInterfaceImplementationChanges);
         }
 
         // TODO (tomat): sealed?
@@ -661,15 +662,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool ignoreAccessibility = false
         ) {
             Binder inMethod = TryGetInMethodBinder(binderFactoryOpt);
-            return inMethod == null
-                ? null
-                : new ExecutableCodeBinder(
-                      SyntaxNode,
-                      this,
-                      inMethod.WithAdditionalFlags(
-                          ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None
-                      )
-                  );
+            return
+                inMethod == null
+              ? null
+              : new ExecutableCodeBinder(
+                    SyntaxNode,
+                    this,
+                    inMethod.WithAdditionalFlags(
+                        ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None
+                    )
+                );
         }
 
         /// <summary>

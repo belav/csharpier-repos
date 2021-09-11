@@ -146,21 +146,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
         ) {
-            return _unbound
-                ? null
-                : Map.SubstituteNamedType(
-                      OriginalDefinition.GetDeclaredBaseType(basesBeingResolved)
-                  );
+            return
+                _unbound
+              ? null
+              : Map.SubstituteNamedType(OriginalDefinition.GetDeclaredBaseType(basesBeingResolved));
         }
 
         internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
         ) {
-            return _unbound
-                ? ImmutableArray<NamedTypeSymbol>.Empty
-                : Map.SubstituteNamedTypes(
-                      OriginalDefinition.GetDeclaredInterfaces(basesBeingResolved)
-                  );
+            return
+                _unbound
+              ? ImmutableArray<NamedTypeSymbol>.Empty
+              : Map.SubstituteNamedTypes(
+                    OriginalDefinition.GetDeclaredInterfaces(basesBeingResolved)
+                );
         }
 
         internal sealed override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
@@ -171,11 +171,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
         ) {
-            return _unbound
-                ? ImmutableArray<NamedTypeSymbol>.Empty
-                : Map.SubstituteNamedTypes(
-                      OriginalDefinition.InterfacesNoUseSiteDiagnostics(basesBeingResolved)
-                  );
+            return
+                _unbound
+              ? ImmutableArray<NamedTypeSymbol>.Empty
+              : Map.SubstituteNamedTypes(
+                    OriginalDefinition.InterfacesNoUseSiteDiagnostics(basesBeingResolved)
+                );
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfacesToEmit()
@@ -362,10 +363,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers()
         {
-            return _unbound
-                ? GetMembers()
-                : OriginalDefinition.GetEarlyAttributeDecodingMembers()
-                      .SelectAsArray(s_symbolAsMemberFunc, this);
+            return
+                _unbound
+              ? GetMembers()
+              : OriginalDefinition.GetEarlyAttributeDecodingMembers()
+                    .SelectAsArray(s_symbolAsMemberFunc, this);
         }
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)

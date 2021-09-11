@@ -31,9 +31,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var lhsRead = MakeRValue(transformedLHS);
             BoundExpression loweredRight = VisitExpression(node.RightOperand);
 
-            return node.IsNullableValueTypeAssignment
-                ? rewriteNullCoalescingAssignmentForValueType()
-                : rewriteNullCoalscingAssignmentStandard();
+            return
+                node.IsNullableValueTypeAssignment
+              ? rewriteNullCoalescingAssignmentForValueType()
+              : rewriteNullCoalscingAssignmentStandard();
 
             BoundExpression rewriteNullCoalscingAssignmentStandard()
             {
@@ -65,15 +66,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 Debug.Assert(conditionalExpression.Type is { });
 
-                return (temps.Count == 0 && stores.Count == 0)
-                    ? conditionalExpression
-                    : new BoundSequence(
-                          syntax,
-                          temps.ToImmutableAndFree(),
-                          stores.ToImmutableAndFree(),
-                          conditionalExpression,
-                          conditionalExpression.Type
-                      );
+                return
+                    (temps.Count == 0 && stores.Count == 0)
+                  ? conditionalExpression
+                  : new BoundSequence(
+                        syntax,
+                        temps.ToImmutableAndFree(),
+                        stores.ToImmutableAndFree(),
+                        conditionalExpression,
+                        conditionalExpression.Type
+                    );
             }
 
             // Rewrites the null coalescing operator in the case where the result type is the underlying

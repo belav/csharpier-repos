@@ -205,11 +205,13 @@ namespace System.Management
             get
             {
                 RefreshPropertyInfo();
-                return (
-                    (propertyFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_ORIGIN_PROPAGATED) != 0
-                )
-                    ? false
-                    : true;
+                return
+                    (
+                        (propertyFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_ORIGIN_PROPAGATED)
+                        != 0
+                    )
+                  ? false
+                  : true;
             }
         }
 

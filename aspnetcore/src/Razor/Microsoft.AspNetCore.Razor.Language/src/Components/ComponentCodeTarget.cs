@@ -27,9 +27,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         public override IntermediateNodeWriter CreateNodeWriter()
         {
-            return _options.DesignTime
-                ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter()
-                : new ComponentRuntimeNodeWriter();
+            return
+                _options.DesignTime
+              ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter()
+              : new ComponentRuntimeNodeWriter();
         }
 
         public override TExtension GetExtension<TExtension>()

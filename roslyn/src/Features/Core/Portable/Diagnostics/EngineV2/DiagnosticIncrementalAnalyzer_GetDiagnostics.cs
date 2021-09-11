@@ -331,9 +331,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     )
                     .ConfigureAwait(false);
 
-                return IncludeSuppressedDiagnostics
-                    ? diagnostics
-                    : diagnostics.WhereAsArray(d => !d.IsSuppressed);
+                return
+                    IncludeSuppressedDiagnostics
+                  ? diagnostics
+                  : diagnostics.WhereAsArray(d => !d.IsSuppressed);
             }
 
             private async Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(

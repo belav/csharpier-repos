@@ -87,9 +87,10 @@ namespace Microsoft.CodeAnalysis.Emit
                     )
                 );
 
-            return (pdbStream != null)
-                ? DebugInformationReaderProvider.CreateFromStream(pdbStream)
-                : null;
+            return
+                (pdbStream != null)
+              ? DebugInformationReaderProvider.CreateFromStream(pdbStream)
+              : null;
         }
 
         private static Stream? TryOpenFileStream(string? path)

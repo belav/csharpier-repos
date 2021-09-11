@@ -661,9 +661,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 )
                 .ConfigureAwait(false);
 
-            return result.HasValue
-                ? result.Value
-                : ImmutableArray<ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>>.Empty;
+            return
+                result.HasValue
+              ? result.Value
+              : ImmutableArray<ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>>.Empty;
         }
 
         public async ValueTask<

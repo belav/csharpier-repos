@@ -195,14 +195,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
+                )
+              : source;
         }
 
         internal static readonly MethodInfo AsSingleQueryMethodInfo =
@@ -231,14 +232,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
+                )
+              : source;
         }
 
         internal static readonly MethodInfo AsSplitQueryMethodInfo =

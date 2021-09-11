@@ -333,10 +333,11 @@ namespace System.Threading.Tasks.Dataflow
             // which for very high-throughput scenarios shows up as noticeable overhead on certain architectures.
             // We can eliminate that call for direct ActionBlock usage by providing the same method as an instance method.
 
-            return _defaultTarget != null
-                ? _defaultTarget.OfferMessage(Common.SingleMessageHeader, item, null, false)
-                  == DataflowMessageStatus.Accepted
-                : _spscTarget!.Post(item);
+            return
+                _defaultTarget != null
+              ? _defaultTarget.OfferMessage(Common.SingleMessageHeader, item, null, false)
+                == DataflowMessageStatus.Accepted
+              : _spscTarget!.Post(item);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
@@ -346,9 +347,10 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<TInput>? source,
             bool consumeToAccept
         ) {
-            return _defaultTarget != null
-                ? _defaultTarget.OfferMessage(messageHeader, messageValue, source, consumeToAccept)
-                : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
+            return
+                _defaultTarget != null
+              ? _defaultTarget.OfferMessage(messageHeader, messageValue, source, consumeToAccept)
+              : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
@@ -365,9 +367,10 @@ namespace System.Threading.Tasks.Dataflow
         {
             get
             {
-                return _defaultTarget != null
-                    ? _defaultTarget.GetDebuggingInformation().InputCount
-                    : _spscTarget!.InputCount;
+                return
+                    _defaultTarget != null
+                  ? _defaultTarget.GetDebuggingInformation().InputCount
+                  : _spscTarget!.InputCount;
             }
         }
 
@@ -426,9 +429,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _defaultDebugInfo != null
-                        ? _defaultDebugInfo.InputQueue
-                        : _spscDebugInfo!.InputQueue;
+                    return
+                        _defaultDebugInfo != null
+                      ? _defaultDebugInfo.InputQueue
+                      : _spscDebugInfo!.InputQueue;
                 }
             }
             /// <summary>Gets any postponed messages.</summary>
@@ -445,9 +449,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _defaultDebugInfo != null
-                        ? _defaultDebugInfo.CurrentDegreeOfParallelism
-                        : _spscDebugInfo!.CurrentDegreeOfParallelism;
+                    return
+                        _defaultDebugInfo != null
+                      ? _defaultDebugInfo.CurrentDegreeOfParallelism
+                      : _spscDebugInfo!.CurrentDegreeOfParallelism;
                 }
             }
 
@@ -456,9 +461,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _defaultDebugInfo != null
-                        ? _defaultDebugInfo.DataflowBlockOptions
-                        : _spscDebugInfo!.DataflowBlockOptions;
+                    return
+                        _defaultDebugInfo != null
+                      ? _defaultDebugInfo.DataflowBlockOptions
+                      : _spscDebugInfo!.DataflowBlockOptions;
                 }
             }
             /// <summary>Gets whether the block is declining further messages.</summary>
@@ -466,9 +472,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _defaultDebugInfo != null
-                        ? _defaultDebugInfo.IsDecliningPermanently
-                        : _spscDebugInfo!.IsDecliningPermanently;
+                    return
+                        _defaultDebugInfo != null
+                      ? _defaultDebugInfo.IsDecliningPermanently
+                      : _spscDebugInfo!.IsDecliningPermanently;
                 }
             }
             /// <summary>Gets whether the block is completed.</summary>
@@ -476,9 +483,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _defaultDebugInfo != null
-                        ? _defaultDebugInfo.IsCompleted
-                        : _spscDebugInfo!.IsCompleted;
+                    return
+                        _defaultDebugInfo != null
+                      ? _defaultDebugInfo.IsCompleted
+                      : _spscDebugInfo!.IsCompleted;
                 }
             }
             /// <summary>Gets the block's Id.</summary>

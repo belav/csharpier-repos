@@ -1139,9 +1139,10 @@ namespace System.Xml.Xsl
             {
                 get
                 {
-                    return TypeCode == XmlTypeCode.None
-                        ? XmlQueryCardinality.None
-                        : XmlQueryCardinality.One;
+                    return
+                        TypeCode == XmlTypeCode.None
+                      ? XmlQueryCardinality.None
+                      : XmlQueryCardinality.One;
                 }
             }
 

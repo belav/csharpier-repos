@@ -145,13 +145,14 @@ namespace System.CommandLine.Binding
                 ValueDescriptor,
                 EnforceExplicitBinding
             );
-            return bindingContext.TryBindToScalarValue(
-                ValueDescriptor,
-                valueSource,
-                out var boundValue
-            )
-                ? (true, boundValue?.Value, true)
-                : (false, (object?)null, false);
+            return
+                bindingContext.TryBindToScalarValue(
+                    ValueDescriptor,
+                    valueSource,
+                    out var boundValue
+                )
+              ? (true, boundValue?.Value, true)
+              : (false, (object?)null, false);
         }
 
         private (bool success, object? newInstance, bool anyNonDefaults) InstanceFromSpecificConstructor(

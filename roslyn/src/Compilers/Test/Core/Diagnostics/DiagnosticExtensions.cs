@@ -508,9 +508,10 @@ namespace Microsoft.CodeAnalysis
 
         public static DiagnosticAnalyzer GetCompilerDiagnosticAnalyzer(string languageName)
         {
-            return languageName == LanguageNames.CSharp
-                ? (DiagnosticAnalyzer)new Diagnostics.CSharp.CSharpCompilerDiagnosticAnalyzer()
-                : new Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer();
+            return
+                languageName == LanguageNames.CSharp
+              ? (DiagnosticAnalyzer)new Diagnostics.CSharp.CSharpCompilerDiagnosticAnalyzer()
+              : new Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer();
         }
 
         public static ImmutableDictionary<

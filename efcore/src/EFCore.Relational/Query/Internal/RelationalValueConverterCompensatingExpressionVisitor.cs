@@ -134,18 +134,19 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var limit = (SqlExpression?)Visit(selectExpression.Limit);
             changed |= limit != selectExpression.Limit;
 
-            return changed
-                ? selectExpression.Update(
-                      projections,
-                      tables,
-                      predicate,
-                      groupBy,
-                      having,
-                      orderings,
-                      limit,
-                      offset
-                  )
-                : selectExpression;
+            return
+                changed
+              ? selectExpression.Update(
+                    projections,
+                    tables,
+                    predicate,
+                    groupBy,
+                    having,
+                    orderings,
+                    limit,
+                    offset
+                )
+              : selectExpression;
         }
 
         private Expression VisitInnerJoin(InnerJoinExpression innerJoinExpression)

@@ -507,9 +507,10 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
         private IOperation RemoveImplicitConversion(IOperation collection)
         {
-            return (collection is IConversionOperation conversion && conversion.IsImplicit)
-                ? RemoveImplicitConversion(conversion.Operand)
-                : collection;
+            return
+                (collection is IConversionOperation conversion && conversion.IsImplicit)
+              ? RemoveImplicitConversion(conversion.Operand)
+              : collection;
         }
 
         private bool CheckIfForEachVariableIsWrittenInside(

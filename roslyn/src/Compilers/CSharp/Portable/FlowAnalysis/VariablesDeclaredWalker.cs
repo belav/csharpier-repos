@@ -37,9 +37,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 bool badRegion = false;
                 walker.Analyze(ref badRegion);
-                return badRegion
-                    ? SpecializedCollections.EmptyEnumerable<Symbol>()
-                    : walker._variablesDeclared;
+                return
+                    badRegion
+                  ? SpecializedCollections.EmptyEnumerable<Symbol>()
+                  : walker._variablesDeclared;
             }
 
             finally

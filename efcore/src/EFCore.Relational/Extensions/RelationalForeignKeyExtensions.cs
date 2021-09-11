@@ -40,9 +40,10 @@ namespace Microsoft.EntityFrameworkCore
             in StoreObjectIdentifier principalStoreObject
         ) {
             var annotation = foreignKey.FindAnnotation(RelationalAnnotationNames.Name);
-            return annotation != null
-                ? (string?)annotation.Value
-                : foreignKey.GetDefaultName(storeObject, principalStoreObject);
+            return
+                annotation != null
+              ? (string?)annotation.Value
+              : foreignKey.GetDefaultName(storeObject, principalStoreObject);
         }
 
         /// <summary>

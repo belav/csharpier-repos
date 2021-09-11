@@ -131,9 +131,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             out string prefix
         ) {
             var definedPrefix = node.LookupPrefix(namespaceUri);
-            return string.IsNullOrEmpty(definedPrefix)
-                ? Try.Failure(out prefix)
-                : Try.Success(out prefix, definedPrefix);
+            return
+                string.IsNullOrEmpty(definedPrefix)
+              ? Try.Failure(out prefix)
+              : Try.Success(out prefix, definedPrefix);
         }
 
         private bool TryGetPreferredPrefix(IXmlNode node, string namespaceUri, out string prefix)
@@ -143,9 +144,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 return Try.Failure(out prefix); // No preferred prefix
 
             namespaceUri = node.LookupNamespaceUri(prefix);
-            return string.IsNullOrEmpty(namespaceUri)
-                ? true // Can use preferred prefix
-                : Try.Failure(out prefix); // Preferred prefix already in use
+            return
+                string.IsNullOrEmpty(namespaceUri)
+              ? true // Can use preferred prefix
+              : Try.Failure(out prefix); // Preferred prefix already in use
         }
 
         private static string GeneratePrefix(IXmlNode node)
@@ -161,9 +163,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private bool ShouldDefineOnRoot(string prefix, string uri)
         {
-            return rootNamespaces != null
-                ? ShouldDefineOnRootCore(prefix, uri)
-                : parent.ShouldDefineOnRoot(prefix, uri);
+            return
+                rootNamespaces != null
+              ? ShouldDefineOnRootCore(prefix, uri)
+              : parent.ShouldDefineOnRoot(prefix, uri);
         }
 
         private bool ShouldDefineOnRootCore(string prefix, string uri)
@@ -252,9 +255,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override IXsltContextVariable ResolveVariable(string prefix, string name)
         {
-            return variables != null
-                ? ResolveVariableCore(prefix, name)
-                : parent != null ? parent.ResolveVariable(prefix, name) : null;
+            return
+                variables != null
+              ? ResolveVariableCore(prefix, name)
+              : parent != null ? parent.ResolveVariable(prefix, name) : null;
         }
 
         public override IXsltContextFunction ResolveFunction(
@@ -262,9 +266,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string name,
             XPathResultType[] argTypes
         ) {
-            return functions != null
-                ? ResolveFunctionCore(prefix, name, argTypes)
-                : parent != null ? parent.ResolveFunction(prefix, name, argTypes) : null;
+            return
+                functions != null
+              ? ResolveFunctionCore(prefix, name, argTypes)
+              : parent != null ? parent.ResolveFunction(prefix, name, argTypes) : null;
         }
 
         private IXsltContextVariable ResolveVariableCore(string prefix, string name)

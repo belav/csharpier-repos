@@ -577,9 +577,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
             var memberGroup = semanticModel.GetMemberGroup(expression, cancellationToken);
             if (memberGroup.Length != 0)
             {
-                return memberGroup.ElementAt(0).IsKind(SymbolKind.Method)
-                    ? (IMethodSymbol)memberGroup.ElementAt(0)
-                    : null;
+                return
+                    memberGroup.ElementAt(0).IsKind(SymbolKind.Method)
+                  ? (IMethodSymbol)memberGroup.ElementAt(0)
+                  : null;
             }
 
             var expressionType = semanticModel.GetTypeInfo(expression, cancellationToken).Type;

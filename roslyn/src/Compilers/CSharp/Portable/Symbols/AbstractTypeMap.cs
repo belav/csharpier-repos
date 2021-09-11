@@ -50,9 +50,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ImmutableArray<TypeWithAnnotations> oldFieldTypes =
                     AnonymousTypeManager.GetAnonymousTypePropertyTypesWithAnnotations(previous);
                 ImmutableArray<TypeWithAnnotations> newFieldTypes = SubstituteTypes(oldFieldTypes);
-                return (oldFieldTypes == newFieldTypes)
-                    ? previous
-                    : AnonymousTypeManager.ConstructAnonymousTypeSymbol(previous, newFieldTypes);
+                return
+                    (oldFieldTypes == newFieldTypes)
+                  ? previous
+                  : AnonymousTypeManager.ConstructAnonymousTypeSymbol(previous, newFieldTypes);
             }
 
             // TODO: we could construct the result's ConstructedFrom lazily by using a "deep"

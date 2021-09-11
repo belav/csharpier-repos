@@ -37,9 +37,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             {
                 count *= size;
             }
-            return (count > 0)
-                ? new ArrayExpansion(elementTypeAndInfo, sizes, lowerBounds, count)
-                : null;
+            return
+                (count > 0)
+              ? new ArrayExpansion(elementTypeAndInfo, sizes, lowerBounds, count)
+              : null;
         }
 
         private ArrayExpansion(

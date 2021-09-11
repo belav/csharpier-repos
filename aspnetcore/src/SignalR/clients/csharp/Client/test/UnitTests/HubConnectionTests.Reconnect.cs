@@ -255,9 +255,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             context =>
                             {
                                 retryContexts.Add(context);
-                                return context.PreviousRetryCount == 0
-                                    ? TimeSpan.Zero
-                                    : (TimeSpan?)null;
+                                return
+                                    context.PreviousRetryCount == 0
+                                  ? TimeSpan.Zero
+                                  : (TimeSpan?)null;
                             }
                         );
                     builder.WithAutomaticReconnect(mockReconnectPolicy.Object);

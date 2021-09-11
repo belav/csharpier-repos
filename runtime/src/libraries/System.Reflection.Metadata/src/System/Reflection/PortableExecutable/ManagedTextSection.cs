@@ -202,24 +202,27 @@ namespace System.Reflection.PortableExecutable
         public int GetEntryPointAddress(int rva)
         {
             // TODO: constants
-            return RequiresStartupStub
-                ? rva + CalculateOffsetToMappedFieldDataStream() - (Is32Bit ? 6 : 10)
-                : 0;
+            return
+                RequiresStartupStub
+              ? rva + CalculateOffsetToMappedFieldDataStream() - (Is32Bit ? 6 : 10)
+              : 0;
         }
 
         public DirectoryEntry GetImportAddressTableDirectoryEntry(int rva)
         {
-            return RequiresStartupStub
-                ? new DirectoryEntry(rva, SizeOfImportAddressTable)
-                : default(DirectoryEntry);
+            return
+                RequiresStartupStub
+              ? new DirectoryEntry(rva, SizeOfImportAddressTable)
+              : default(DirectoryEntry);
         }
 
         public DirectoryEntry GetImportTableDirectoryEntry(int rva)
         {
             // TODO: constants
-            return RequiresStartupStub
-                ? new DirectoryEntry(rva + ComputeOffsetToImportTable(), (Is32Bit ? 66 : 70) + 13)
-                : default(DirectoryEntry);
+            return
+                RequiresStartupStub
+              ? new DirectoryEntry(rva + ComputeOffsetToImportTable(), (Is32Bit ? 66 : 70) + 13)
+              : default(DirectoryEntry);
         }
 
         public DirectoryEntry GetCorHeaderDirectoryEntry(int rva)

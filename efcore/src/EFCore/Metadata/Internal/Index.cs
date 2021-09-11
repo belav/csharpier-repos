@@ -196,9 +196,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdateIsUniqueConfigurationSource(configurationSource);
             }
 
-            return isChanging
-                ? DeclaringEntityType.Model.ConventionDispatcher.OnIndexUniquenessChanged(Builder)
-                : oldIsUnique;
+            return
+                isChanging
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnIndexUniquenessChanged(Builder)
+              : oldIsUnique;
         }
 
         private static bool DefaultIsUnique => false;

@@ -64,9 +64,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
         protected static string GetSimpleDisplayText(INamedTypeSymbol namedTypeSymbol)
         {
-            return namedTypeSymbol.SpecialType.ToPredefinedType() != PredefinedType.None
-                ? namedTypeSymbol.ToDisplayString(s_simplePredefinedTypeDisplay)
-                : namedTypeSymbol.ToDisplayString(s_simpleNormalTypeDisplay);
+            return
+                namedTypeSymbol.SpecialType.ToPredefinedType() != PredefinedType.None
+              ? namedTypeSymbol.ToDisplayString(s_simplePredefinedTypeDisplay)
+              : namedTypeSymbol.ToDisplayString(s_simpleNormalTypeDisplay);
         }
 
         protected abstract string GetMemberDisplayString(ISymbol memberSymbol);

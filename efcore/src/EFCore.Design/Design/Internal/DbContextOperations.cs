@@ -293,12 +293,13 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ) {
             var factoryInterface = typeof(IDbContextFactory<>).MakeGenericType(contextType);
             var service = appServices.GetService(factoryInterface);
-            return service == null
-                ? (Func<DbContext>?)null
-                : () =>
-                      (DbContext)factoryInterface.GetMethod(
-                          nameof(IDbContextFactory<DbContext>.CreateDbContext)
-                      )!.Invoke(service, null)!;
+            return
+                service == null
+              ? (Func<DbContext>?)null
+              : () =>
+                    (DbContext)factoryInterface.GetMethod(
+                        nameof(IDbContextFactory<DbContext>.CreateDbContext)
+                    )!.Invoke(service, null)!;
         }
 
         private Func<DbContext>? FindContextFactory(Type contextType)
@@ -308,9 +309,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             );
             var factory = contextType.Assembly.GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
-            return factory == null
-                ? (Func<DbContext>?)null
-                : (() => CreateContextFromFactory(factory.AsType(), contextType));
+            return
+                factory == null
+              ? (Func<DbContext>?)null
+              : (() => CreateContextFromFactory(factory.AsType(), contextType));
         }
 
         private DbContext CreateContextFromFactory(Type factory, Type contextType)

@@ -792,9 +792,10 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled<string>(cancellationToken)
-                : InternalReadAllTextAsync(path, encoding, cancellationToken);
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled<string>(cancellationToken)
+              : InternalReadAllTextAsync(path, encoding, cancellationToken);
         }
 
         private static async Task<string> InternalReadAllTextAsync(
@@ -910,9 +911,10 @@ namespace System.IO
                 }
 
                 returningInternalTask = true;
-                return fileLength > 0
-                    ? InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken)
-                    : InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
+                return
+                    fileLength > 0
+                  ? InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken)
+                  : InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
             }
 
             finally
@@ -1021,9 +1023,10 @@ namespace System.IO
             if (bytes == null)
                 throw new ArgumentNullException(nameof(bytes));
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled(cancellationToken)
-                : InternalWriteAllBytesAsync(path, bytes, cancellationToken);
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled(cancellationToken)
+              : InternalWriteAllBytesAsync(path, bytes, cancellationToken);
         }
 
         private static async Task InternalWriteAllBytesAsync(
@@ -1072,9 +1075,10 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled<string[]>(cancellationToken)
-                : InternalReadAllLinesAsync(path, encoding, cancellationToken);
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled<string[]>(cancellationToken)
+              : InternalReadAllLinesAsync(path, encoding, cancellationToken);
         }
 
         private static async Task<string[]> InternalReadAllLinesAsync(
@@ -1121,13 +1125,14 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled(cancellationToken)
-                : InternalWriteAllLinesAsync(
-                      AsyncStreamWriter(path, encoding, append: false),
-                      contents,
-                      cancellationToken
-                  );
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled(cancellationToken)
+              : InternalWriteAllLinesAsync(
+                    AsyncStreamWriter(path, encoding, append: false),
+                    contents,
+                    cancellationToken
+                );
         }
 
         private static async Task InternalWriteAllLinesAsync(
@@ -1251,13 +1256,14 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled(cancellationToken)
-                : InternalWriteAllLinesAsync(
-                      AsyncStreamWriter(path, encoding, append: true),
-                      contents,
-                      cancellationToken
-                  );
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled(cancellationToken)
+              : InternalWriteAllLinesAsync(
+                    AsyncStreamWriter(path, encoding, append: true),
+                    contents,
+                    cancellationToken
+                );
         }
     }
 }

@@ -829,9 +829,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             try
             {
-                return canConvertFrom
-                    ? converter.ConvertFrom(null, culture, value)
-                    : converter.ConvertTo(null, culture, value, destinationType);
+                return
+                    canConvertFrom
+                  ? converter.ConvertFrom(null, culture, value)
+                  : converter.ConvertTo(null, culture, value, destinationType);
             }
             catch (FormatException)
             {

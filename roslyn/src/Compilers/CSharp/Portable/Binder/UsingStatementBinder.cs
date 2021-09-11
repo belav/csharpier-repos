@@ -395,26 +395,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol targetInterface,
                 ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
             ) {
-                return fromExpression
-                    ? originalBinder.Conversions.ClassifyImplicitConversionFromExpression(
-                          expressionOpt,
-                          targetInterface,
-                          ref useSiteInfo
-                      )
-                    : originalBinder.Conversions.ClassifyImplicitConversionFromType(
-                          declarationTypeOpt,
-                          targetInterface,
-                          ref useSiteInfo
-                      );
+                return
+                    fromExpression
+                  ? originalBinder.Conversions.ClassifyImplicitConversionFromExpression(
+                        expressionOpt,
+                        targetInterface,
+                        ref useSiteInfo
+                    )
+                  : originalBinder.Conversions.ClassifyImplicitConversionFromType(
+                        declarationTypeOpt,
+                        targetInterface,
+                        ref useSiteInfo
+                    );
             }
 
             TypeSymbol getDisposableInterface(bool isAsync)
             {
-                return isAsync
-                    ? originalBinder.Compilation.GetWellKnownType(
-                          WellKnownType.System_IAsyncDisposable
-                      )
-                    : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
+                return
+                    isAsync
+                  ? originalBinder.Compilation.GetWellKnownType(
+                        WellKnownType.System_IAsyncDisposable
+                    )
+                  : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
             }
         }
 

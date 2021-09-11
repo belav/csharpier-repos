@@ -110,9 +110,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static object GetItemSafe(Array array, int index)
         {
-            return array != null && index >= 0 && index < array.Length
-                ? array.GetValue(index)
-                : null;
+            return
+                array != null && index >= 0 && index < array.Length
+              ? array.GetValue(index)
+              : null;
         }
     }
 }

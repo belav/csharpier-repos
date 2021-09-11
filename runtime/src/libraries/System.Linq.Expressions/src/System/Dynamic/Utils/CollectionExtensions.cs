@@ -73,9 +73,10 @@ namespace System.Dynamic.Utils
             }
 
             T[] array = enumerable.ToArray();
-            return array.Length == 0
-                ? EmptyReadOnlyCollection<T>.Instance
-                : new TrueReadOnlyCollection<T>(array);
+            return
+                array.Length == 0
+              ? EmptyReadOnlyCollection<T>.Instance
+              : new TrueReadOnlyCollection<T>(array);
         }
 
         // We could probably improve the hashing here

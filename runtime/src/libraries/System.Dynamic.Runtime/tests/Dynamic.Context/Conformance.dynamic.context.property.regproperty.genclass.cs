@@ -104,11 +104,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public static int MainMethod()
         {
             Test t1 = new Test();
-            return t1.TestGetMethod(new MemberClass<bool>())
-                + t1.TestSetMethod(new MemberClass<bool>())
-            == 0
-                ? 0
-                : 1;
+            return
+                t1.TestGetMethod(new MemberClass<bool>())
+                    + t1.TestSetMethod(new MemberClass<bool>())
+                == 0
+              ? 0
+              : 1;
         }
 
         public int TestGetMethod(MemberClass<bool> mc)

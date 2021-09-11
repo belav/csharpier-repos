@@ -109,11 +109,12 @@ namespace Microsoft.EntityFrameworkCore.Update
                         return mainEntry.EntityState;
                     }
 
-                    return mainEntry.SharedIdentityEntry.EntityType == mainEntry.EntityType
-                    || mainEntry.SharedIdentityEntry.EntityType.GetTableMappings()
-                        .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
-                        ? EntityState.Modified
-                        : mainEntry.EntityState;
+                    return
+                        mainEntry.SharedIdentityEntry.EntityType == mainEntry.EntityType
+                        || mainEntry.SharedIdentityEntry.EntityType.GetTableMappings()
+                            .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
+                      ? EntityState.Modified
+                      : mainEntry.EntityState;
                 }
 
                 return EntityState.Modified;

@@ -242,9 +242,10 @@ namespace System.Linq
         private static Expression GetSourceExpression<TSource>(IEnumerable<TSource> source)
         {
             IQueryable<TSource>? q = source as IQueryable<TSource>;
-            return q != null
-                ? q.Expression
-                : Expression.Constant(source, typeof(IEnumerable<TSource>));
+            return
+                q != null
+              ? q.Expression
+              : Expression.Constant(source, typeof(IEnumerable<TSource>));
         }
 
         [DynamicDependency("Join`4", typeof(Enumerable))]

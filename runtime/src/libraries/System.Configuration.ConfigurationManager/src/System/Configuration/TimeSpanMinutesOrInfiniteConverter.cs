@@ -16,9 +16,10 @@ namespace System.Configuration
         ) {
             ValidateType(value, typeof(TimeSpan));
 
-            return (TimeSpan)value == TimeSpan.MaxValue
-                ? "Infinite"
-                : base.ConvertTo(ctx, ci, value, type);
+            return
+                (TimeSpan)value == TimeSpan.MaxValue
+              ? "Infinite"
+              : base.ConvertTo(ctx, ci, value, type);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)

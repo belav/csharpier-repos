@@ -150,13 +150,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             ITextBuffer subjectBuffer,
             [NotNullWhen(true)] out TagSource? tagSource
         ) {
-            return textViewOpt != null
-                ? textViewOpt.TryGetPerSubjectBufferProperty(
-                      subjectBuffer,
-                      _uniqueKey,
-                      out tagSource
-                  )
-                : subjectBuffer.Properties.TryGetProperty(_uniqueKey, out tagSource);
+            return
+                textViewOpt != null
+              ? textViewOpt.TryGetPerSubjectBufferProperty(subjectBuffer, _uniqueKey, out tagSource)
+              : subjectBuffer.Properties.TryGetProperty(_uniqueKey, out tagSource);
         }
 
         private void RemoveTagSource(ITextView textViewOpt, ITextBuffer subjectBuffer)
@@ -267,9 +264,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             SnapshotPoint? caretPosition,
             SnapshotSpan snapshotSpan
         ) {
-            return caretPosition.HasValue && caretPosition.Value.Snapshot == snapshotSpan.Snapshot
-                ? caretPosition.Value.Position
-                : (int?)null;
+            return
+                caretPosition.HasValue && caretPosition.Value.Snapshot == snapshotSpan.Snapshot
+              ? caretPosition.Value.Position
+              : (int?)null;
         }
 
         protected virtual Task ProduceTagsAsync(

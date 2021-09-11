@@ -946,9 +946,10 @@ namespace System.IO
                 }
                 Debug.Assert(lengthWithoutNullTerm <= nameLength); // should be null terminated or empty
 
-                return lengthWithoutNullTerm > 0
-                    ? Encoding.UTF8.GetString(_buffer, position, lengthWithoutNullTerm)
-                    : string.Empty;
+                return
+                    lengthWithoutNullTerm > 0
+                  ? Encoding.UTF8.GetString(_buffer, position, lengthWithoutNullTerm)
+                  : string.Empty;
             }
 
             /// <summary>An event read and translated from the inotify handle.</summary>

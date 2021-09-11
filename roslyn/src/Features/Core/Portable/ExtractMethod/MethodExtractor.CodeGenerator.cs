@@ -514,9 +514,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private static RefKind GetRefKind(ParameterBehavior parameterBehavior)
             {
-                return parameterBehavior == ParameterBehavior.Ref
-                    ? RefKind.Ref
-                    : parameterBehavior == ParameterBehavior.Out ? RefKind.Out : RefKind.None;
+                return
+                    parameterBehavior == ParameterBehavior.Ref
+                  ? RefKind.Ref
+                  : parameterBehavior == ParameterBehavior.Out ? RefKind.Out : RefKind.None;
             }
         }
     }

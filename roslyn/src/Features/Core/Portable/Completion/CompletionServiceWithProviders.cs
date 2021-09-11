@@ -701,9 +701,10 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken = default
         ) {
             var provider = GetProvider(item);
-            return provider != null
-                ? provider.GetDescriptionAsync(document, item, cancellationToken)
-                : Task.FromResult(CompletionDescription.Empty);
+            return
+                provider != null
+              ? provider.GetDescriptionAsync(document, item, cancellationToken)
+              : Task.FromResult(CompletionDescription.Empty);
         }
 
         public override bool ShouldTriggerCompletion(
@@ -790,17 +791,18 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken
         ) {
             var provider = GetProvider(item);
-            return provider != null
-                ? await provider.GetChangeAsync(
-                          document,
-                          item,
-                          completionListSpan,
-                          commitKey,
-                          disallowAddingImports,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : CompletionChange.Create(new TextChange(completionListSpan, item.DisplayText));
+            return
+                provider != null
+              ? await provider.GetChangeAsync(
+                        document,
+                        item,
+                        completionListSpan,
+                        commitKey,
+                        disallowAddingImports,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+              : CompletionChange.Create(new TextChange(completionListSpan, item.DisplayText));
         }
 
         bool IEqualityComparer<ImmutableHashSet<string>>.Equals(

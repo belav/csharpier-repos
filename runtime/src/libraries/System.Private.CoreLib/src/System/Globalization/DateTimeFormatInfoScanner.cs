@@ -547,12 +547,13 @@ namespace System.Globalization
             string[] genetiveAbbrevMonthNames
         ) {
             // If we have different names in regular and genitive month names, use genitive month flag.
-            return (
-                !EqualStringArrays(monthNames, genitveMonthNames)
-                || !EqualStringArrays(abbrevMonthNames, genetiveAbbrevMonthNames)
-            )
-                ? FORMATFLAGS.UseGenitiveMonth
-                : 0;
+            return
+                (
+                    !EqualStringArrays(monthNames, genitveMonthNames)
+                    || !EqualStringArrays(abbrevMonthNames, genetiveAbbrevMonthNames)
+                )
+              ? FORMATFLAGS.UseGenitiveMonth
+              : 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////
@@ -596,9 +597,10 @@ namespace System.Globalization
             string[] dayNames,
             string[] abbrevDayNames
         ) {
-            return (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
-                ? FORMATFLAGS.UseSpacesInDayNames
-                : 0;
+            return
+                (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
+              ? FORMATFLAGS.UseSpacesInDayNames
+              : 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////
@@ -608,9 +610,10 @@ namespace System.Globalization
         ////////////////////////////////////////////////////////////////////////////
         internal static FORMATFLAGS GetFormatFlagUseHebrewCalendar(int calID)
         {
-            return calID == (int)CalendarId.HEBREW
-                ? FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth
-                : 0;
+            return
+                calID == (int)CalendarId.HEBREW
+              ? FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth
+              : 0;
         }
 
         //-----------------------------------------------------------------------------

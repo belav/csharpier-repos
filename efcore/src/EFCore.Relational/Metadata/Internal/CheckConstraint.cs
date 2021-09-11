@@ -95,11 +95,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             var dataDictionary = GetConstraintsDictionary(entityType);
 
-            return dataDictionary == null
-                ? null
-                : dataDictionary.TryGetValue(name, out var checkConstraint)
-                    ? checkConstraint
-                    : null;
+            return
+                dataDictionary == null
+              ? null
+              : dataDictionary.TryGetValue(name, out var checkConstraint) ? checkConstraint : null;
         }
 
         /// <summary>

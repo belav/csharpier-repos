@@ -36,14 +36,15 @@ namespace Microsoft.CSharp.RuntimeBinder
             LocalVariableSymbol[] locals
         ) {
             Debug.Assert(arguments.Length == 1);
-            return Explicit
-                ? runtimeBinder.BindExplicitConversion(arguments, Type, locals)
-                : runtimeBinder.BindImplicitConversion(
-                      arguments,
-                      Type,
-                      locals,
-                      ConversionKind == CSharpConversionKind.ArrayCreationConversion
-                  );
+            return
+                Explicit
+              ? runtimeBinder.BindExplicitConversion(arguments, Type, locals)
+              : runtimeBinder.BindImplicitConversion(
+                    arguments,
+                    Type,
+                    locals,
+                    ConversionKind == CSharpConversionKind.ArrayCreationConversion
+                );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

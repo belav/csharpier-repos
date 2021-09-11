@@ -50,9 +50,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var candidateName = FindCandidateNavigationName(foreignKey.Properties);
 
-            return !string.IsNullOrEmpty(candidateName)
-                ? candidateName
-                : foreignKey.PrincipalEntityType.ShortName();
+            return
+                !string.IsNullOrEmpty(candidateName)
+              ? candidateName
+              : foreignKey.PrincipalEntityType.ShortName();
         }
 
         /// <summary>
@@ -75,9 +76,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 foreignKey.PrincipalEntityType?.GetReferencingForeignKeys()
                     .Where(fk => foreignKey.DeclaringEntityType == fk.DeclaringEntityType);
 
-            return allForeignKeysBetweenDependentAndPrincipal?.Count() > 1
-                ? foreignKey.DeclaringEntityType.ShortName() + dependentEndNavigationPropertyName
-                : foreignKey.DeclaringEntityType.ShortName();
+            return
+                allForeignKeysBetweenDependentAndPrincipal?.Count() > 1
+              ? foreignKey.DeclaringEntityType.ShortName() + dependentEndNavigationPropertyName
+              : foreignKey.DeclaringEntityType.ShortName();
         }
 
         private static string GenerateCandidateIdentifier(string originalIdentifier)

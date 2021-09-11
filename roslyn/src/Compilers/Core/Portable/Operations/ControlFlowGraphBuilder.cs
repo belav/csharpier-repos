@@ -230,24 +230,26 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ControlFlowBranch? getFallThroughSuccessor(BasicBlockBuilder blockBuilder)
             {
-                return blockBuilder.Kind != BasicBlockKind.Exit
-                    ? getBranch(
-                          in blockBuilder.FallThrough,
-                          blockBuilder,
-                          isConditionalSuccessor: false
-                      )
-                    : null;
+                return
+                    blockBuilder.Kind != BasicBlockKind.Exit
+                  ? getBranch(
+                        in blockBuilder.FallThrough,
+                        blockBuilder,
+                        isConditionalSuccessor: false
+                    )
+                  : null;
             }
 
             ControlFlowBranch? getConditionalSuccessor(BasicBlockBuilder blockBuilder)
             {
-                return blockBuilder.HasCondition
-                    ? getBranch(
-                          in blockBuilder.Conditional,
-                          blockBuilder,
-                          isConditionalSuccessor: true
-                      )
-                    : null;
+                return
+                    blockBuilder.HasCondition
+                  ? getBranch(
+                        in blockBuilder.Conditional,
+                        blockBuilder,
+                        isConditionalSuccessor: true
+                    )
+                  : null;
             }
 
             ControlFlowBranch getBranch(
@@ -3185,31 +3187,32 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             condition = VisitRequired(condition);
             if (!sense)
             {
-                return lastUnary != null
-                    ? new UnaryOperation(
-                          lastUnary.OperatorKind,
-                          condition,
-                          lastUnary.IsLifted,
-                          lastUnary.IsChecked,
-                          lastUnary.OperatorMethod,
-                          semanticModel: null,
-                          lastUnary.Syntax,
-                          lastUnary.Type,
-                          lastUnary.GetConstantValue(),
-                          IsImplicit(lastUnary)
-                      )
-                    : new UnaryOperation(
-                          UnaryOperatorKind.Not,
-                          condition,
-                          isLifted: false,
-                          isChecked: false,
-                          operatorMethod: null,
-                          semanticModel: null,
-                          condition.Syntax,
-                          condition.Type,
-                          constantValue: null,
-                          isImplicit: true
-                      );
+                return
+                    lastUnary != null
+                  ? new UnaryOperation(
+                        lastUnary.OperatorKind,
+                        condition,
+                        lastUnary.IsLifted,
+                        lastUnary.IsChecked,
+                        lastUnary.OperatorMethod,
+                        semanticModel: null,
+                        lastUnary.Syntax,
+                        lastUnary.Type,
+                        lastUnary.GetConstantValue(),
+                        IsImplicit(lastUnary)
+                    )
+                  : new UnaryOperation(
+                        UnaryOperatorKind.Not,
+                        condition,
+                        isLifted: false,
+                        isChecked: false,
+                        operatorMethod: null,
+                        semanticModel: null,
+                        condition.Syntax,
+                        condition.Type,
+                        constantValue: null,
+                        isImplicit: true
+                    );
             }
 
             return condition;
@@ -8307,9 +8310,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         out IOperation? captured
                     )
                 ) {
-                    return captured is IFlowCaptureReferenceOperation reference
-                        ? GetCaptureReference(reference.Id.Value, operation)
-                        : OperationCloner.CloneOperation(captured);
+                    return
+                        captured is IFlowCaptureReferenceOperation reference
+                      ? GetCaptureReference(reference.Id.Value, operation)
+                      : OperationCloner.CloneOperation(captured);
                 }
                 else
                 {

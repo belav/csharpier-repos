@@ -125,9 +125,10 @@ namespace Microsoft.CodeAnalysis.Completion
                 return match;
             }
 
-            return match.Value.CompareTo(enUSCultureMatch.Value) < 0
-                ? match.Value
-                : enUSCultureMatch.Value;
+            return
+                match.Value.CompareTo(enUSCultureMatch.Value) < 0
+              ? match.Value
+              : enUSCultureMatch.Value;
         }
 
         private PatternMatcher GetPatternMatcher(

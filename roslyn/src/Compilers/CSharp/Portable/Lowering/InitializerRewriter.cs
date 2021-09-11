@@ -104,10 +104,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal static BoundExpression GetTrailingScriptExpression(BoundStatement statement)
         {
-            return (statement.Kind == BoundKind.ExpressionStatement)
-            && ((ExpressionStatementSyntax)statement.Syntax).SemicolonToken.IsMissing
-                ? ((BoundExpressionStatement)statement).Expression
-                : null;
+            return
+                (statement.Kind == BoundKind.ExpressionStatement)
+                && ((ExpressionStatementSyntax)statement.Syntax).SemicolonToken.IsMissing
+              ? ((BoundExpressionStatement)statement).Expression
+              : null;
         }
 
         private static BoundStatement RewriteFieldInitializer(BoundFieldEqualsValue fieldInit)

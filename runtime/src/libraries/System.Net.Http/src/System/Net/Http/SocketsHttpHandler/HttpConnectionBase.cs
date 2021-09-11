@@ -26,16 +26,17 @@ namespace System.Net.Http
             ReadOnlySpan<byte> value,
             Encoding? valueEncoding
         ) {
-            return ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Date)
-                ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
-                : ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server)
-                    ? GetOrAddCachedValue(
-                          ref _lastServerHeaderValue,
-                          descriptor,
-                          value,
-                          valueEncoding
-                      )
-                    : descriptor.GetHeaderValue(value, valueEncoding);
+            return
+                ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Date)
+              ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
+              : ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server)
+                  ? GetOrAddCachedValue(
+                        ref _lastServerHeaderValue,
+                        descriptor,
+                        value,
+                        valueEncoding
+                    )
+                  : descriptor.GetHeaderValue(value, valueEncoding);
 
             static string GetOrAddCachedValue(
                 [NotNull] ref string? cache,

@@ -27,9 +27,10 @@ namespace System.Text
             // pmovmskb which we know are optimized, and (b) we can avoid downclocking the processor while
             // this method is running.
 
-            return (Sse2.IsSupported)
-                ? GetIndexOfFirstNonLatin1Char_Sse2(pBuffer, bufferLength)
-                : GetIndexOfFirstNonLatin1Char_Default(pBuffer, bufferLength);
+            return
+                (Sse2.IsSupported)
+              ? GetIndexOfFirstNonLatin1Char_Sse2(pBuffer, bufferLength)
+              : GetIndexOfFirstNonLatin1Char_Default(pBuffer, bufferLength);
         }
 
         private static unsafe nuint GetIndexOfFirstNonLatin1Char_Default(

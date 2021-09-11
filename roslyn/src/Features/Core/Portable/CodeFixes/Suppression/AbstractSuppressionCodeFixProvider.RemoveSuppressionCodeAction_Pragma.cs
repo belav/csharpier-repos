@@ -170,9 +170,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     bool isStartToken,
                     AbstractSuppressionCodeFixProvider fixer
                 ) {
-                    return isStartToken || fixer.IsEndOfFileToken(token)
-                        ? token.LeadingTrivia
-                        : token.TrailingTrivia;
+                    return
+                        isStartToken || fixer.IsEndOfFileToken(token)
+                      ? token.LeadingTrivia
+                      : token.TrailingTrivia;
                 }
 
                 private static SyntaxToken UpdateTriviaList(
@@ -181,9 +182,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     SyntaxTriviaList triviaList,
                     AbstractSuppressionCodeFixProvider fixer
                 ) {
-                    return isStartToken || fixer.IsEndOfFileToken(token)
-                        ? token.WithLeadingTrivia(triviaList)
-                        : token.WithTrailingTrivia(triviaList);
+                    return
+                        isStartToken || fixer.IsEndOfFileToken(token)
+                      ? token.WithLeadingTrivia(triviaList)
+                      : token.WithTrailingTrivia(triviaList);
                 }
 
                 private static bool CanRemovePragmaTrivia(
@@ -249,14 +251,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     int indexOfTriviaToRemoveOrToggle,
                     bool isStartToken
                 ) {
-                    return add
-                        ? GetNewTokenWithAddedPragma(token, currentDiagnosticSpan, isStartToken)
-                        : GetNewTokenWithRemovedOrToggledPragma(
-                              token,
-                              indexOfTriviaToRemoveOrToggle,
-                              isStartToken,
-                              toggle
-                          );
+                    return
+                        add
+                      ? GetNewTokenWithAddedPragma(token, currentDiagnosticSpan, isStartToken)
+                      : GetNewTokenWithRemovedOrToggledPragma(
+                            token,
+                            indexOfTriviaToRemoveOrToggle,
+                            isStartToken,
+                            toggle
+                        );
                 }
 
                 private SyntaxToken GetNewTokenWithAddedPragma(

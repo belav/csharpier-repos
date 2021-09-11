@@ -146,9 +146,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //
             //      not >= 0   ->    < 0
 
-            return syntaxFacts.IsAnyPattern(expressionOrPattern)
-                ? generatorInternal.NotPattern(expressionOrPattern)
-                : generator.LogicalNotExpression(expressionOrPattern);
+            return
+                syntaxFacts.IsAnyPattern(expressionOrPattern)
+              ? generatorInternal.NotPattern(expressionOrPattern)
+              : generator.LogicalNotExpression(expressionOrPattern);
         }
 
         private static SyntaxNode GetNegationOfBinaryExpression(
@@ -408,23 +409,27 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             switch (operationKind)
             {
                 case BinaryOperatorKind.Equals:
-                    return binaryOperation.LeftOperand.Type?.IsValueType == true
-                    && binaryOperation.RightOperand.Type?.IsValueType == true
-                        ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                        : generator.ReferenceEqualsExpression(leftOperand, rightOperand);
+                    return
+                        binaryOperation.LeftOperand.Type?.IsValueType == true
+                        && binaryOperation.RightOperand.Type?.IsValueType == true
+                      ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                      : generator.ReferenceEqualsExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.NotEquals:
-                    return binaryOperation.LeftOperand.Type?.IsValueType == true
-                    && binaryOperation.RightOperand.Type?.IsValueType == true
-                        ? generator.ValueNotEqualsExpression(leftOperand, rightOperand)
-                        : generator.ReferenceNotEqualsExpression(leftOperand, rightOperand);
+                    return
+                        binaryOperation.LeftOperand.Type?.IsValueType == true
+                        && binaryOperation.RightOperand.Type?.IsValueType == true
+                      ? generator.ValueNotEqualsExpression(leftOperand, rightOperand)
+                      : generator.ReferenceNotEqualsExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.LessThanOrEqual:
-                    return IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
-                        ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                        : generator.LessThanOrEqualExpression(leftOperand, rightOperand);
+                    return
+                        IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
+                      ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                      : generator.LessThanOrEqualExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.GreaterThanOrEqual:
-                    return IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
-                        ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                        : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand);
+                    return
+                        IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
+                      ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                      : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.LessThan:
                     return generator.LessThanExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.GreaterThan:
@@ -478,9 +483,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static IOperation RemoveImplicitConversion(IOperation operation)
         {
-            return operation is IConversionOperation conversion && conversion.IsImplicit
-                ? RemoveImplicitConversion(conversion.Operand)
-                : operation;
+            return
+                operation is IConversionOperation conversion && conversion.IsImplicit
+              ? RemoveImplicitConversion(conversion.Operand)
+              : operation;
         }
 
         private static bool CanSimplifyToLengthEqualsZeroExpression(

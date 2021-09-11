@@ -1183,9 +1183,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         ) {
             lock (_gate)
             {
-                return _allMetadataReferences.TryGetValue(fullPath, out var list)
-                    ? list
-                    : ImmutableArray<MetadataReferenceProperties>.Empty;
+                return
+                    _allMetadataReferences.TryGetValue(fullPath, out var list)
+                  ? list
+                  : ImmutableArray<MetadataReferenceProperties>.Empty;
             }
         }
 

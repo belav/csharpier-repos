@@ -2516,11 +2516,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             case SpecialType.System_Double:
                                 return (double)doubleValue;
                             case SpecialType.System_Decimal:
-                                return (
-                                    value.Discriminator == ConstantValueTypeDiscriminator.Single
-                                )
-                                    ? (decimal)(float)doubleValue
-                                    : (decimal)doubleValue;
+                                return
+                                    (value.Discriminator == ConstantValueTypeDiscriminator.Single)
+                                  ? (decimal)(float)doubleValue
+                                  : (decimal)doubleValue;
                             default:
                                 throw ExceptionUtilities.UnexpectedValue(destinationType);
                         }
@@ -2589,17 +2588,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             // error. We know that the constant will fit into either a double or a decimal, so
             // convert it to one of those and then check the bounds on that.
             var canonicalValue = CanonicalizeConstant(value);
-            return canonicalValue is decimal
-                ? CheckConstantBounds(
-                      destinationType,
-                      (decimal)canonicalValue,
-                      out maySucceedAtRuntime
-                  )
-                : CheckConstantBounds(
-                      destinationType,
-                      (double)canonicalValue,
-                      out maySucceedAtRuntime
-                  );
+            return
+                canonicalValue is decimal
+              ? CheckConstantBounds(
+                    destinationType,
+                    (decimal)canonicalValue,
+                    out maySucceedAtRuntime
+                )
+              : CheckConstantBounds(
+                    destinationType,
+                    (double)canonicalValue,
+                    out maySucceedAtRuntime
+                );
         }
 
         private static bool CheckConstantBounds(

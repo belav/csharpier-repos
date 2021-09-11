@@ -157,9 +157,10 @@ namespace System.Runtime.Serialization
         {
             get
             {
-                return IsXmlDataNode
-                    ? _xmlNodeReader[name, namespaceURI]
-                    : GetAttribute(name, namespaceURI);
+                return
+                    IsXmlDataNode
+                  ? _xmlNodeReader[name, namespaceURI]
+                  : GetAttribute(name, namespaceURI);
             }
         }
 
@@ -554,11 +555,10 @@ namespace System.Runtime.Serialization
         private ElementData? GetNextElement()
         {
             int nextDepth = _depth + 1;
-            return (
-                _elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null
-            )
-                ? new ElementData()
-                : _elements[nextDepth];
+            return
+                (_elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null)
+              ? new ElementData()
+              : _elements[nextDepth];
         }
 
         internal static string GetPrefix(string? ns)

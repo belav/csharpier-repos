@@ -198,9 +198,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
         protected Task SaveChanges(CancellationToken cancellationToken)
         {
-            return AutoSaveChanges
-                ? Context.SaveChangesAsync(cancellationToken)
-                : Task.CompletedTask;
+            return
+                AutoSaveChanges
+              ? Context.SaveChangesAsync(cancellationToken)
+              : Task.CompletedTask;
         }
 
         /// <summary>

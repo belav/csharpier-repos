@@ -150,12 +150,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Debug.Assert(kind != SyntaxKind.NumericLiteralToken);
 
             string defaultText = SyntaxFacts.GetText(kind);
-            return kind >= SyntaxToken.FirstTokenWithWellKnownText
-            && kind <= SyntaxToken.LastTokenWithWellKnownText
-            && text == defaultText
-            && valueText == defaultText
-                ? Token(leading, kind, trailing)
-                : SyntaxToken.WithValue(kind, leading, text, valueText, trailing);
+            return
+                kind >= SyntaxToken.FirstTokenWithWellKnownText
+                && kind <= SyntaxToken.LastTokenWithWellKnownText
+                && text == defaultText
+                && valueText == defaultText
+              ? Token(leading, kind, trailing)
+              : SyntaxToken.WithValue(kind, leading, text, valueText, trailing);
         }
 
         internal static SyntaxToken MissingToken(SyntaxKind kind)

@@ -52,15 +52,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Function(
-                      "NEWID",
-                      Array.Empty<SqlExpression>(),
-                      nullable: false,
-                      argumentsPropagateNullability: Array.Empty<bool>(),
-                      method.ReturnType
-                  )
-                : null;
+            return
+                _methodInfo.Equals(method)
+              ? _sqlExpressionFactory.Function(
+                    "NEWID",
+                    Array.Empty<SqlExpression>(),
+                    nullable: false,
+                    argumentsPropagateNullability: Array.Empty<bool>(),
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

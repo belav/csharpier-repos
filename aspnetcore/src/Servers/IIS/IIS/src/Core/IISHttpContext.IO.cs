@@ -83,9 +83,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 await _bodyOutput.WriteAsync(memory, cancellationToken);
             }
 
-            return !HasResponseStarted
-                ? WriteFirstAsync()
-                : _bodyOutput.WriteAsync(memory, cancellationToken);
+            return
+                !HasResponseStarted
+              ? WriteFirstAsync()
+              : _bodyOutput.WriteAsync(memory, cancellationToken);
         }
 
         /// <summary>
@@ -101,9 +102,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 await _bodyOutput.FlushAsync(cancellationToken);
             }
 
-            return !HasResponseStarted
-                ? FlushFirstAsync()
-                : _bodyOutput.FlushAsync(cancellationToken);
+            return
+                !HasResponseStarted
+              ? FlushFirstAsync()
+              : _bodyOutput.FlushAsync(cancellationToken);
         }
 
         private async Task ReadBody()

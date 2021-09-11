@@ -120,11 +120,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static int MainMethod()
         {
             Test t1 = new Test();
-            return t1.TestGetMethod<long>(1, new MemberClass())
-                + t1.TestSetMethod<Test, string>(string.Empty, new MemberClass())
-            == 0
-                ? 0
-                : 1;
+            return
+                t1.TestGetMethod<long>(1, new MemberClass())
+                    + t1.TestSetMethod<Test, string>(string.Empty, new MemberClass())
+                == 0
+              ? 0
+              : 1;
         }
 
         public int TestGetMethod<T>(T t, MemberClass mc)

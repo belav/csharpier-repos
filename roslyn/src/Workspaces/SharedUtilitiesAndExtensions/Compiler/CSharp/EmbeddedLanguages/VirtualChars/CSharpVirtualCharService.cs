@@ -44,14 +44,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             Debug.Assert(!token.ContainsDiagnostics);
             if (token.Kind() == SyntaxKind.StringLiteralToken)
             {
-                return token.IsVerbatimStringLiteral()
-                    ? TryConvertVerbatimStringToVirtualChars(
-                          token,
-                          "@\"",
-                          "\"",
-                          escapeBraces: false
-                      )
-                    : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
+                return
+                    token.IsVerbatimStringLiteral()
+                  ? TryConvertVerbatimStringToVirtualChars(token, "@\"", "\"", escapeBraces: false)
+                  : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
             }
 
             if (token.Kind() == SyntaxKind.CharacterLiteralToken)
@@ -65,10 +61,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
                 if (parent.Parent is InterpolatedStringExpressionSyntax interpolatedString)
                 {
-                    return interpolatedString.StringStartToken.Kind()
-                    == SyntaxKind.InterpolatedVerbatimStringStartToken
-                        ? TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true)
-                        : TryConvertStringToVirtualChars(token, "", "", escapeBraces: true);
+                    return
+                        interpolatedString.StringStartToken.Kind()
+                        == SyntaxKind.InterpolatedVerbatimStringStartToken
+                      ? TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true)
+                      : TryConvertStringToVirtualChars(token, "", "", escapeBraces: true);
                 }
             }
 

@@ -250,9 +250,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddPolicyHandlerFromRegistry(
                     (reg, req) =>
                     {
-                        return req.RequestUri.AbsolutePath == "/"
-                            ? reg.Get<IAsyncPolicy<HttpResponseMessage>>("retry")
-                            : reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
+                        return
+                            req.RequestUri.AbsolutePath == "/"
+                          ? reg.Get<IAsyncPolicy<HttpResponseMessage>>("retry")
+                          : reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
                     }
                 )
                 .ConfigureHttpMessageHandlerBuilder(

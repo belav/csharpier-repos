@@ -471,22 +471,23 @@ namespace System.Web.Http.WebHost
             // PrepareHeadersAsync already evaluated the buffer policy.
             bool isBuffered = httpResponseBase.BufferOutput;
 
-            return isBuffered
-                ? WriteBufferedResponseContentAsync(
-                      httpContextBase,
-                      request,
-                      response,
-                      exceptionLogger,
-                      exceptionHandler,
-                      cancellationToken
-                  )
-                : WriteStreamedResponseContentAsync(
-                      httpContextBase,
-                      request,
-                      response,
-                      exceptionLogger,
-                      cancellationToken
-                  );
+            return
+                isBuffered
+              ? WriteBufferedResponseContentAsync(
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    exceptionHandler,
+                    cancellationToken
+                )
+              : WriteStreamedResponseContentAsync(
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    cancellationToken
+                );
         }
 
         [SuppressMessage(

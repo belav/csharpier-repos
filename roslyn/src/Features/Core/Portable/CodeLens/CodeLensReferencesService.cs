@@ -372,13 +372,14 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 cancellationToken
             )?.ToDisplayString(MethodDisplayFormat);
 
-            return !string.IsNullOrEmpty(fullName)
-                ? new ReferenceMethodDescriptor(
-                      fullName,
-                      document.FilePath,
-                      document.Project.OutputFilePath
-                  )
-                : null;
+            return
+                !string.IsNullOrEmpty(fullName)
+              ? new ReferenceMethodDescriptor(
+                    fullName,
+                    document.FilePath,
+                    document.Project.OutputFilePath
+                )
+              : null;
         }
 
         public Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(

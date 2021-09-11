@@ -115,9 +115,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 Debug.Assert(pGroup != null);
 
-                return (pGroup.Flags & EXPRFLAG.EXF_CTOR) != 0
-                    ? pGroup.ParentType
-                    : pGroup.OptionalObject?.Type;
+                return
+                    (pGroup.Flags & EXPRFLAG.EXF_CTOR) != 0
+                  ? pGroup.ParentType
+                  : pGroup.OptionalObject?.Type;
             }
 
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -1421,18 +1422,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (_pInvalidSpecifiedName != null)
                 {
                     // Give a better message for delegate invoke.
-                    return _pGroup.OptionalObject?.Type is AggregateType agg
-                    && agg.OwningAggregate.IsDelegate()
-                        ? ErrorHandling.Error(
-                              ErrorCode.ERR_BadNamedArgumentForDelegateInvoke,
-                              agg.OwningAggregate.name,
-                              _pInvalidSpecifiedName
-                          )
-                        : ErrorHandling.Error(
-                              ErrorCode.ERR_BadNamedArgument,
-                              _pGroup.Name,
-                              _pInvalidSpecifiedName
-                          );
+                    return
+                        _pGroup.OptionalObject?.Type is AggregateType agg
+                        && agg.OwningAggregate.IsDelegate()
+                      ? ErrorHandling.Error(
+                            ErrorCode.ERR_BadNamedArgumentForDelegateInvoke,
+                            agg.OwningAggregate.name,
+                            _pInvalidSpecifiedName
+                        )
+                      : ErrorHandling.Error(
+                            ErrorCode.ERR_BadNamedArgument,
+                            _pGroup.Name,
+                            _pInvalidSpecifiedName
+                        );
                 }
 
                 if (_pNameUsedInPositionalArgument != null)

@@ -480,9 +480,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // non-dynamic:
                 Debug.Assert(receiver != null);
 
-                return methodSymbol.IsStatic
-                    ? F.StaticCall(methodSymbol.ContainingType, methodSymbol, receiver)
-                    : F.Call(receiver, methodSymbol);
+                return
+                    methodSymbol.IsStatic
+                  ? F.StaticCall(methodSymbol.ContainingType, methodSymbol, receiver)
+                  : F.Call(receiver, methodSymbol);
             }
 
             // dynamic:
@@ -781,9 +782,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSymbol first,
             LocalSymbol secondOpt
         ) {
-            return (secondOpt == null)
-                ? ImmutableArray.Create(first)
-                : ImmutableArray.Create(first, secondOpt);
+            return
+                (secondOpt == null)
+              ? ImmutableArray.Create(first)
+              : ImmutableArray.Create(first, secondOpt);
         }
 
         public sealed override BoundNode VisitReturnStatement(BoundReturnStatement node)

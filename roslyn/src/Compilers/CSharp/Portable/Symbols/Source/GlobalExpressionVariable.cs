@@ -52,25 +52,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             var syntaxReference = syntax.GetReference();
-            return (typeSyntax == null || typeSyntax.IsVar)
-                ? new InferrableGlobalExpressionVariable(
-                      containingType,
-                      modifiers,
-                      typeSyntax,
-                      name,
-                      syntaxReference,
-                      location,
-                      containingFieldOpt,
-                      nodeToBind
-                  )
-                : new GlobalExpressionVariable(
-                      containingType,
-                      modifiers,
-                      typeSyntax,
-                      name,
-                      syntaxReference,
-                      location
-                  );
+            return
+                (typeSyntax == null || typeSyntax.IsVar)
+              ? new InferrableGlobalExpressionVariable(
+                    containingType,
+                    modifiers,
+                    typeSyntax,
+                    name,
+                    syntaxReference,
+                    location,
+                    containingFieldOpt,
+                    nodeToBind
+                )
+              : new GlobalExpressionVariable(
+                    containingType,
+                    modifiers,
+                    typeSyntax,
+                    name,
+                    syntaxReference,
+                    location
+                );
         }
 
         protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>

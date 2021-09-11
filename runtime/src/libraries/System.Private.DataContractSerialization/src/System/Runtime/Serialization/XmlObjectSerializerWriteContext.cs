@@ -34,20 +34,21 @@ namespace System.Runtime.Serialization
             DataContract rootTypeDataContract,
             DataContractResolver? dataContractResolver
         ) {
-            return (
-                serializer.PreserveObjectReferences
-                || serializer.SerializationSurrogateProvider != null
-            )
-                ? new XmlObjectSerializerWriteContextComplex(
-                      serializer,
-                      rootTypeDataContract,
-                      dataContractResolver
-                  )
-                : new XmlObjectSerializerWriteContext(
-                      serializer,
-                      rootTypeDataContract,
-                      dataContractResolver
-                  );
+            return
+                (
+                    serializer.PreserveObjectReferences
+                    || serializer.SerializationSurrogateProvider != null
+                )
+              ? new XmlObjectSerializerWriteContextComplex(
+                    serializer,
+                    rootTypeDataContract,
+                    dataContractResolver
+                )
+              : new XmlObjectSerializerWriteContext(
+                    serializer,
+                    rootTypeDataContract,
+                    dataContractResolver
+                );
         }
 
         protected XmlObjectSerializerWriteContext(

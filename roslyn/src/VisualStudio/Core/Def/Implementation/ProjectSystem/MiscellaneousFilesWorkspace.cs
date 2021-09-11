@@ -463,13 +463,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return parseOptionsOpt.Kind;
             }
 
-            return string.Equals(
-                fileExtension,
-                languageInformation.ScriptExtension,
-                StringComparison.OrdinalIgnoreCase
-            )
-                ? SourceCodeKind.Script
-                : SourceCodeKind.Regular;
+            return
+                string.Equals(
+                    fileExtension,
+                    languageInformation.ScriptExtension,
+                    StringComparison.OrdinalIgnoreCase
+                )
+              ? SourceCodeKind.Script
+              : SourceCodeKind.Regular;
         }
 
         private void DetachFromDocument(string moniker)

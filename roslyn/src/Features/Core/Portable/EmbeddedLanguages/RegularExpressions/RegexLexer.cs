@@ -368,13 +368,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 Position++;
             }
 
-            return start == Position
-                ? (RegexToken?)null
-                : CreateToken(
-                      RegexKind.OptionsToken,
-                      ImmutableArray<RegexTrivia>.Empty,
-                      GetSubPatternToCurrentPos(start)
-                  );
+            return
+                start == Position
+              ? (RegexToken?)null
+              : CreateToken(
+                    RegexKind.OptionsToken,
+                    ImmutableArray<RegexTrivia>.Empty,
+                    GetSubPatternToCurrentPos(start)
+                );
         }
 
         private static bool IsOptionChar(VirtualChar ch)

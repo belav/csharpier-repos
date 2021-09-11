@@ -47,9 +47,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             var result = ParenthesizeWorker(expression, includeElasticTrivia);
-            return addSimplifierAnnotation
-                ? result.WithAdditionalAnnotations(Simplifier.Annotation)
-                : result;
+            return
+                addSimplifierAnnotation
+              ? result.WithAdditionalAnnotations(Simplifier.Annotation)
+              : result;
         }
 
         private static ExpressionSyntax ParenthesizeWorker(
@@ -99,9 +100,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                   );
 
             var result = parenthesized.WithTriviaFrom(pattern);
-            return addSimplifierAnnotation
-                ? result.WithAdditionalAnnotations(Simplifier.Annotation)
-                : result;
+            return
+                addSimplifierAnnotation
+              ? result.WithAdditionalAnnotations(Simplifier.Annotation)
+              : result;
         }
 
         public static CastExpressionSyntax Cast(

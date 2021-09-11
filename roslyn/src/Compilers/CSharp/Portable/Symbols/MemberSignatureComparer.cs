@@ -650,13 +650,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static TypeMap GetTypeMap(Symbol member)
         {
             var typeParameters = member.GetMemberTypeParameters();
-            return typeParameters.IsEmpty
-                ? null
-                : new TypeMap(
-                      typeParameters,
-                      IndexedTypeParameterSymbol.Take(member.GetMemberArity()),
-                      true
-                  );
+            return
+                typeParameters.IsEmpty
+              ? null
+              : new TypeMap(
+                    typeParameters,
+                    IndexedTypeParameterSymbol.Take(member.GetMemberArity()),
+                    true
+                );
         }
 
         private static bool HaveSameConstraints(
@@ -926,9 +927,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeMap typeMap,
             ImmutableArray<CustomModifier> customModifiers
         ) {
-            return typeMap == null
-                ? customModifiers
-                : typeMap.SubstituteCustomModifiers(customModifiers);
+            return
+                typeMap == null
+              ? customModifiers
+              : typeMap.SubstituteCustomModifiers(customModifiers);
         }
 
         private static Cci.CallingConvention GetCallingConvention(Symbol member)

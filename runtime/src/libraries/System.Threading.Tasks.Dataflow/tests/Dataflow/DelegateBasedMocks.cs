@@ -46,9 +46,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ISourceBlock<TInput> source,
             bool consumeToAccept
         ) {
-            return OfferMessageDelegate != null
-                ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
-                : DataflowMessageStatus.Accepted;
+            return
+                OfferMessageDelegate != null
+              ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
+              : DataflowMessageStatus.Accepted;
         }
 
         public Task Completion
@@ -70,9 +71,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions)
         {
-            return LinkToDelegate != null
-                ? LinkToDelegate(target, linkOptions)
-                : new DelegateDisposable();
+            return
+                LinkToDelegate != null
+              ? LinkToDelegate(target, linkOptions)
+              : new DelegateDisposable();
         }
 
         public TOutput ConsumeMessage(
@@ -81,18 +83,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
             out bool messageConsumed
         ) {
             messageConsumed = false;
-            return ConsumeMessageDelegate != null
-                ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
-                : default(TOutput);
+            return
+                ConsumeMessageDelegate != null
+              ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
+              : default(TOutput);
         }
 
         public bool ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
         ) {
-            return ReserveMessageDelegate != null
-                ? ReserveMessageDelegate(messageHeader, target)
-                : true;
+            return
+                ReserveMessageDelegate != null
+              ? ReserveMessageDelegate(messageHeader, target)
+              : true;
         }
 
         public void ReleaseReservation(
@@ -183,9 +187,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
-            return TryExecuteTaskInlineDelegate != null
-                ? TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued)
-                : false;
+            return
+                TryExecuteTaskInlineDelegate != null
+              ? TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued)
+              : false;
         }
 
         protected override Collections.Generic.IEnumerable<Task> GetScheduledTasks()

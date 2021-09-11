@@ -334,25 +334,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var diagnosticIds = ImmutableHashSet.Create(diagnostic.Id);
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(testDriver, diagnosticIds);
 
-            return diagnostic.Location.IsInSource
-                ? new FixAllState(
-                      fixAllProvider,
-                      document,
-                      fixer,
-                      scope,
-                      equivalenceKey,
-                      diagnosticIds,
-                      fixAllDiagnosticProvider
-                  )
-                : new FixAllState(
-                      fixAllProvider,
-                      document.Project,
-                      fixer,
-                      scope,
-                      equivalenceKey,
-                      diagnosticIds,
-                      fixAllDiagnosticProvider
-                  );
+            return
+                diagnostic.Location.IsInSource
+              ? new FixAllState(
+                    fixAllProvider,
+                    document,
+                    fixer,
+                    scope,
+                    equivalenceKey,
+                    diagnosticIds,
+                    fixAllDiagnosticProvider
+                )
+              : new FixAllState(
+                    fixAllProvider,
+                    document.Project,
+                    fixer,
+                    scope,
+                    equivalenceKey,
+                    diagnosticIds,
+                    fixAllDiagnosticProvider
+                );
         }
 
         private protected Task TestActionCountInAllFixesAsync(

@@ -97,9 +97,10 @@ namespace System.Globalization
             {
                 fixed (char* pUnicode = unicode)
                 {
-                    return GlobalizationMode.UseNls
-                        ? NlsGetAsciiCore(unicode, pUnicode + index, count)
-                        : IcuGetAsciiCore(unicode, pUnicode + index, count);
+                    return
+                        GlobalizationMode.UseNls
+                      ? NlsGetAsciiCore(unicode, pUnicode + index, count)
+                      : IcuGetAsciiCore(unicode, pUnicode + index, count);
                 }
             }
         }
@@ -145,9 +146,10 @@ namespace System.Globalization
             {
                 fixed (char* pAscii = ascii)
                 {
-                    return GlobalizationMode.UseNls
-                        ? NlsGetUnicodeCore(ascii, pAscii + index, count)
-                        : IcuGetUnicodeCore(ascii, pAscii + index, count);
+                    return
+                        GlobalizationMode.UseNls
+                      ? NlsGetUnicodeCore(ascii, pAscii + index, count)
+                      : IcuGetUnicodeCore(ascii, pAscii + index, count);
                 }
             }
         }

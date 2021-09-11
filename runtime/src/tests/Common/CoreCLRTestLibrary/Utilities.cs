@@ -313,22 +313,23 @@ namespace TestLibrary
                 const string Version = "Microsoft Windows";
                 if (RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi) == 0)
                 {
-                    return osvi.szCSDVersion[0] != '\0'
-                        ? string.Format(
-                              "{0} {1}.{2}.{3} {4}",
-                              Version,
-                              osvi.dwMajorVersion,
-                              osvi.dwMinorVersion,
-                              osvi.dwBuildNumber,
-                              new string(&(osvi.szCSDVersion[0]))
-                          )
-                        : string.Format(
-                              "{0} {1}.{2}.{3}",
-                              Version,
-                              osvi.dwMajorVersion,
-                              osvi.dwMinorVersion,
-                              osvi.dwBuildNumber
-                          );
+                    return
+                        osvi.szCSDVersion[0] != '\0'
+                      ? string.Format(
+                            "{0} {1}.{2}.{3} {4}",
+                            Version,
+                            osvi.dwMajorVersion,
+                            osvi.dwMinorVersion,
+                            osvi.dwBuildNumber,
+                            new string(&(osvi.szCSDVersion[0]))
+                        )
+                      : string.Format(
+                            "{0} {1}.{2}.{3}",
+                            Version,
+                            osvi.dwMajorVersion,
+                            osvi.dwMinorVersion,
+                            osvi.dwBuildNumber
+                        );
                 }
                 else
                 {
@@ -444,9 +445,10 @@ namespace TestLibrary
 
             alc.Unload();
 
-            return (a.EntryPoint.ReturnType == typeof(void))
-                ? Environment.ExitCode
-                : Convert.ToInt32(res);
+            return
+                (a.EntryPoint.ReturnType == typeof(void))
+              ? Environment.ExitCode
+              : Convert.ToInt32(res);
         }
 
         public static int ExecuteAndUnload(

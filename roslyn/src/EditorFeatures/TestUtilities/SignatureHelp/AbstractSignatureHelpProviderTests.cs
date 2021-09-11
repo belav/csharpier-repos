@@ -238,14 +238,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
                 triggerInfo,
                 CancellationToken.None
             );
-            return items == null
-                ? null
-                : new SignatureHelpState(
-                      items.ArgumentIndex,
-                      items.ArgumentCount,
-                      items.ArgumentName,
-                      null
-                  );
+            return
+                items == null
+              ? null
+              : new SignatureHelpState(
+                    items.ArgumentIndex,
+                    items.ArgumentCount,
+                    items.ArgumentName,
+                    null
+                );
         }
 
         private async Task VerifyCurrentParameterNameWorkerAsync(

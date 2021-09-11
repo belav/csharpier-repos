@@ -1967,16 +1967,17 @@ namespace Microsoft.CodeAnalysis
             CommandLineArguments arguments,
             DiagnosticBag diagnostics
         ) {
-            return outputKind.IsNetModule()
-                ? null
-                : OpenStream(
-                      fileSystem,
-                      messageProvider,
-                      arguments.Win32Manifest,
-                      arguments.BaseDirectory,
-                      messageProvider.ERR_CantOpenWin32Manifest,
-                      diagnostics
-                  );
+            return
+                outputKind.IsNetModule()
+              ? null
+              : OpenStream(
+                    fileSystem,
+                    messageProvider,
+                    arguments.Win32Manifest,
+                    arguments.BaseDirectory,
+                    messageProvider.ERR_CantOpenWin32Manifest,
+                    diagnostics
+                );
         }
 
         private static Stream? OpenStream(

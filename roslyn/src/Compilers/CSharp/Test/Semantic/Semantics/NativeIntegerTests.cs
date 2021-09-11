@@ -15899,9 +15899,10 @@ enum E {{ }}
                             )
                             .WithArguments(op, opType);
                     }
-                    return diagnostic != null
-                        ? new[] { diagnostic }
-                        : Array.Empty<DiagnosticDescription>();
+                    return
+                        diagnostic != null
+                      ? new[] { diagnostic }
+                      : Array.Empty<DiagnosticDescription>();
                 }
             }
 
@@ -16368,9 +16369,10 @@ class Program
                         diagnostic = Diagnostic(ErrorCode.ERR_BadUnaryOp, op + "operand")
                             .WithArguments(op, opType);
                     }
-                    return diagnostic != null
-                        ? new[] { diagnostic }
-                        : Array.Empty<DiagnosticDescription>();
+                    return
+                        diagnostic != null
+                      ? new[] { diagnostic }
+                      : Array.Empty<DiagnosticDescription>();
                 }
             }
 

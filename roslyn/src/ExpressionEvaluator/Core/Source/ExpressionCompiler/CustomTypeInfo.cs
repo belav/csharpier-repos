@@ -83,9 +83,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReadOnlyCollection<string> tupleElementNames,
             int index
         ) {
-            return tupleElementNames != null && index < tupleElementNames.Count
-                ? tupleElementNames[index]
-                : null;
+            return
+                tupleElementNames != null && index < tupleElementNames.Count
+              ? tupleElementNames[index]
+              : null;
         }
 
         // Encode in payload as a sequence of bytes {count}{dynamicFlags}{tupleNames}

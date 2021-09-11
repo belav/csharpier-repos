@@ -99,9 +99,10 @@ namespace Microsoft.Extensions.Configuration
                 prefixLength,
                 StringComparison.OrdinalIgnoreCase
             );
-            return indexOf < 0
-                ? key.Substring(prefixLength)
-                : key.Substring(prefixLength, indexOf - prefixLength);
+            return
+                indexOf < 0
+              ? key.Substring(prefixLength)
+              : key.Substring(prefixLength, indexOf - prefixLength);
         }
 
         /// <summary>

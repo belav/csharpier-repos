@@ -39,10 +39,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider.Execute<IEnumerable>(source.Expression)
-                is IQueryingEnumerable queryingEnumerable
-                ? queryingEnumerable.ToQueryString()
-                : CoreStrings.NotQueryingEnumerable;
+            return
+                source.Provider.Execute<IEnumerable>(source.Expression)
+                    is IQueryingEnumerable queryingEnumerable
+              ? queryingEnumerable.ToQueryString()
+              : CoreStrings.NotQueryingEnumerable;
         }
 
         #region Any/All
@@ -2655,16 +2656,17 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
             Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arg0: source.Expression,
-                          arg1: Expression.Constant(navigationPropertyPath)
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(navigationPropertyPath)
+                    )
+                )
+              : source;
         }
 
         #endregion
@@ -2688,15 +2690,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         #endregion
@@ -2721,15 +2724,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         #endregion
@@ -2770,15 +2774,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         internal static readonly MethodInfo AsNoTrackingWithIdentityResolutionMethodInfo =
@@ -2816,17 +2821,18 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
-                              typeof(TEntity)
-                          ),
-                          arguments: source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
+                            typeof(TEntity)
+                        ),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         internal static readonly MethodInfo AsTrackingMethodInfo =
@@ -2853,15 +2859,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         /// <summary>
@@ -2920,16 +2927,17 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
             Check.NotEmpty(tag, nameof(tag));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<T>(
-                      Expression.Call(
-                          instance: null,
-                          method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
-                          arg0: source.Expression,
-                          arg1: Expression.Constant(tag)
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<T>(
+                    Expression.Call(
+                        instance: null,
+                        method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(tag)
+                    )
+                )
+              : source;
         }
 
         #endregion

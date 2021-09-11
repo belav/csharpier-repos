@@ -23,15 +23,16 @@ namespace Microsoft.AspNetCore.Testing
             IAttributeInfo factAttribute
         ) {
             var skipReason = testMethod.EvaluateSkipConditions();
-            return skipReason != null
-                ? new SkippedTestCase(
-                      skipReason,
-                      _diagnosticMessageSink,
-                      discoveryOptions.MethodDisplayOrDefault(),
-                      TestMethodDisplayOptions.None,
-                      testMethod
-                  )
-                : base.CreateTestCase(discoveryOptions, testMethod, factAttribute);
+            return
+                skipReason != null
+              ? new SkippedTestCase(
+                    skipReason,
+                    _diagnosticMessageSink,
+                    discoveryOptions.MethodDisplayOrDefault(),
+                    TestMethodDisplayOptions.None,
+                    testMethod
+                )
+              : base.CreateTestCase(discoveryOptions, testMethod, factAttribute);
         }
     }
 }

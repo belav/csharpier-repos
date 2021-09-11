@@ -377,9 +377,10 @@ namespace System.Xml
                 switch (_state)
                 {
                     case State.Initial:
-                        return base.reader.ReadState == ReadState.Closed
-                            ? ReadState.Closed
-                            : ReadState.Initial;
+                        return
+                            base.reader.ReadState == ReadState.Closed
+                          ? ReadState.Closed
+                          : ReadState.Initial;
                     case State.Error:
                         return ReadState.Error;
                     case State.InReadBinary:

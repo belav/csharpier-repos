@@ -733,19 +733,20 @@ namespace System
                         && this.AsSpan(offset).SequenceEqual(value);
 
                 case StringComparison.OrdinalIgnoreCase:
-                    return this.Length < value.Length
-                        ? false
-                        : (
-                              Ordinal.CompareStringIgnoreCase(
-                                  ref Unsafe.Add(
-                                      ref this.GetRawStringData(),
-                                      this.Length - value.Length
-                                  ),
-                                  value.Length,
-                                  ref value.GetRawStringData(),
-                                  value.Length
-                              ) == 0
-                          );
+                    return
+                        this.Length < value.Length
+                      ? false
+                      : (
+                            Ordinal.CompareStringIgnoreCase(
+                                ref Unsafe.Add(
+                                    ref this.GetRawStringData(),
+                                    this.Length - value.Length
+                                ),
+                                value.Length,
+                                ref value.GetRawStringData(),
+                                value.Length
+                            ) == 0
+                        );
 
                 default:
                     throw new ArgumentException(
@@ -1236,14 +1237,15 @@ namespace System
                     {
                         return false;
                     }
-                    return (value.Length == 1)
-                        ? true
-                        : // First char is the same and thats all there is to compare
-                          SpanHelpers.SequenceEqual(
-                              ref Unsafe.As<char, byte>(ref this.GetRawStringData()),
-                              ref Unsafe.As<char, byte>(ref value.GetRawStringData()),
-                              ((nuint)value.Length) * 2
-                          );
+                    return
+                        (value.Length == 1)
+                      ? true
+                      : // First char is the same and thats all there is to compare
+                        SpanHelpers.SequenceEqual(
+                            ref Unsafe.As<char, byte>(ref this.GetRawStringData()),
+                            ref Unsafe.As<char, byte>(ref value.GetRawStringData()),
+                            ((nuint)value.Length) * 2
+                        );
 
                 case StringComparison.OrdinalIgnoreCase:
                     if (this.Length < value.Length)

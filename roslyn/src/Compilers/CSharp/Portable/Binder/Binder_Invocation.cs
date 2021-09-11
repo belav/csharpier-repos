@@ -2154,17 +2154,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var q = (BoundQueryClause)receiver;
                     var value = q.Value;
                     var replaced = ReplaceTypeOrValueReceiver(value, useType, diagnostics);
-                    return (value == replaced)
-                        ? q
-                        : q.Update(
-                              replaced,
-                              q.DefinedSymbol,
-                              q.Operation,
-                              q.Cast,
-                              q.Binder,
-                              q.UnoptimizedForm,
-                              q.Type
-                          );
+                    return
+                        (value == replaced)
+                      ? q
+                      : q.Update(
+                            replaced,
+                            q.DefinedSymbol,
+                            q.Operation,
+                            q.Cast,
+                            q.Binder,
+                            q.UnoptimizedForm,
+                            q.Type
+                        );
 
                 default:
                     return BindToNaturalType(receiver, diagnostics);

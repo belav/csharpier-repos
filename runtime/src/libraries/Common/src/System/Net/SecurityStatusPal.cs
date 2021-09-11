@@ -16,9 +16,10 @@ namespace System.Net
 
         public override string ToString()
         {
-            return Exception == null
-                ? $"{nameof(ErrorCode)}={ErrorCode}"
-                : $"{nameof(ErrorCode)}={ErrorCode}, {nameof(Exception)}={Exception}";
+            return
+                Exception == null
+              ? $"{nameof(ErrorCode)}={ErrorCode}"
+              : $"{nameof(ErrorCode)}={ErrorCode}, {nameof(Exception)}={Exception}";
         }
     }
 

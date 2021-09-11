@@ -202,9 +202,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         !_haveCustomModifierFlags,
                         "This shouldn't happen during decoding."
                     );
-                    return ConsumeFlag()
-                        ? type
-                        : _containingAssembly.GetSpecialType(SpecialType.System_Object);
+                    return
+                        ConsumeFlag()
+                      ? type
+                      : _containingAssembly.GetSpecialType(SpecialType.System_Object);
 
                 default:
                     ConsumeFlag();
@@ -368,30 +369,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return null;
             }
 
-            return TypeSymbol.Equals(
-                transformedElementType,
-                arrayType.ElementType,
-                TypeCompareKind.ConsiderEverything2
-            )
-                ? arrayType
-                : arrayType.IsSZArray
-                    ? ArrayTypeSymbol.CreateSZArray(
-                          _containingAssembly,
-                          arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                              transformedElementType,
-                              arrayType.ElementTypeWithAnnotations.CustomModifiers
-                          )
-                      )
-                    : ArrayTypeSymbol.CreateMDArray(
-                          _containingAssembly,
-                          arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                              transformedElementType,
-                              arrayType.ElementTypeWithAnnotations.CustomModifiers
-                          ),
-                          arrayType.Rank,
-                          arrayType.Sizes,
-                          arrayType.LowerBounds
-                      );
+            return
+                TypeSymbol.Equals(
+                    transformedElementType,
+                    arrayType.ElementType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+              ? arrayType
+              : arrayType.IsSZArray
+                  ? ArrayTypeSymbol.CreateSZArray(
+                        _containingAssembly,
+                        arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                            transformedElementType,
+                            arrayType.ElementTypeWithAnnotations.CustomModifiers
+                        )
+                    )
+                  : ArrayTypeSymbol.CreateMDArray(
+                        _containingAssembly,
+                        arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                            transformedElementType,
+                            arrayType.ElementTypeWithAnnotations.CustomModifiers
+                        ),
+                        arrayType.Rank,
+                        arrayType.Sizes,
+                        arrayType.LowerBounds
+                    );
         }
 
         private PointerTypeSymbol TransformPointerType(PointerTypeSymbol pointerType)
@@ -413,18 +415,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return null;
             }
 
-            return TypeSymbol.Equals(
-                transformedPointedAtType,
-                pointerType.PointedAtType,
-                TypeCompareKind.ConsiderEverything2
-            )
-                ? pointerType
-                : new PointerTypeSymbol(
-                      pointerType.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
-                          transformedPointedAtType,
-                          pointerType.PointedAtTypeWithAnnotations.CustomModifiers
-                      )
-                  );
+            return
+                TypeSymbol.Equals(
+                    transformedPointedAtType,
+                    pointerType.PointedAtType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+              ? pointerType
+              : new PointerTypeSymbol(
+                    pointerType.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
+                        transformedPointedAtType,
+                        pointerType.PointedAtTypeWithAnnotations.CustomModifiers
+                    )
+                );
         }
 
 #nullable enable

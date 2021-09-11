@@ -2827,17 +2827,19 @@ namespace System.Xml.Serialization
                 {
                     if (ns == null || ns.Length == 0)
                     {
-                        return schema.ElementFormDefault == XmlSchemaForm.None
-                            ? XmlSchemaForm.Unqualified
-                            : schema.ElementFormDefault;
+                        return
+                            schema.ElementFormDefault == XmlSchemaForm.None
+                          ? XmlSchemaForm.Unqualified
+                          : schema.ElementFormDefault;
                     }
                     else
                     {
                         XmlSchemas.Preprocess(schema);
-                        return element.QualifiedName.Namespace == null
-                        || element.QualifiedName.Namespace.Length == 0
-                            ? XmlSchemaForm.Unqualified
-                            : XmlSchemaForm.Qualified;
+                        return
+                            element.QualifiedName.Namespace == null
+                            || element.QualifiedName.Namespace.Length == 0
+                          ? XmlSchemaForm.Unqualified
+                          : XmlSchemaForm.Qualified;
                     }
                 }
                 return XmlSchemaForm.Qualified;
@@ -2859,17 +2861,19 @@ namespace System.Xml.Serialization
                 {
                     if (ns == null || ns.Length == 0)
                     {
-                        return schema.AttributeFormDefault == XmlSchemaForm.None
-                            ? XmlSchemaForm.Unqualified
-                            : schema.AttributeFormDefault;
+                        return
+                            schema.AttributeFormDefault == XmlSchemaForm.None
+                          ? XmlSchemaForm.Unqualified
+                          : schema.AttributeFormDefault;
                     }
                     else
                     {
                         XmlSchemas.Preprocess(schema);
-                        return attribute.QualifiedName.Namespace == null
-                        || attribute.QualifiedName.Namespace.Length == 0
-                            ? XmlSchemaForm.Unqualified
-                            : XmlSchemaForm.Qualified;
+                        return
+                            attribute.QualifiedName.Namespace == null
+                            || attribute.QualifiedName.Namespace.Length == 0
+                          ? XmlSchemaForm.Unqualified
+                          : XmlSchemaForm.Qualified;
                     }
                 }
                 return XmlSchemaForm.Unqualified;

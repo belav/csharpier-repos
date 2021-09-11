@@ -127,13 +127,14 @@ namespace System.Threading.Channels
                 ThrowIncorrectCurrentIdException();
             }
 
-            return !IsCompleted
-                ? ValueTaskSourceStatus.Pending
-                : _error == null
-                    ? ValueTaskSourceStatus.Succeeded
-                    : _error.SourceException is OperationCanceledException
-                        ? ValueTaskSourceStatus.Canceled
-                        : ValueTaskSourceStatus.Faulted;
+            return
+                !IsCompleted
+              ? ValueTaskSourceStatus.Pending
+              : _error == null
+                  ? ValueTaskSourceStatus.Succeeded
+                  : _error.SourceException is OperationCanceledException
+                      ? ValueTaskSourceStatus.Canceled
+                      : ValueTaskSourceStatus.Faulted;
         }
 
         /// <summary>Gets whether the operation has completed.</summary>

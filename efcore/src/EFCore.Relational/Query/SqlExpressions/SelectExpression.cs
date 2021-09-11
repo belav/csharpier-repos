@@ -1923,9 +1923,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     nullable
                 );
 
-                return propertyExpressions == null
-                    ? null
-                    : new EntityProjectionExpression(entityType, propertyExpressions);
+                return
+                    propertyExpressions == null
+                  ? null
+                  : new EntityProjectionExpression(entityType, propertyExpressions);
             }
 
             static TableReferenceExpression FindTableReference(

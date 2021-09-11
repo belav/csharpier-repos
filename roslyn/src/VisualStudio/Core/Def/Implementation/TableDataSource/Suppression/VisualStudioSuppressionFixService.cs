@@ -645,9 +645,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 }
             }
 
-            return builder != null
-                ? builder.ToImmutable()
-                : ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
+            return
+                builder != null
+              ? builder.ToImmutable()
+              : ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
         }
 
         private static ImmutableDictionary<
@@ -676,9 +677,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 }
             }
 
-            return projectDiagsBuilder != null
-                ? projectDiagsBuilder.ToImmutable()
-                : ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
+            return
+                projectDiagsBuilder != null
+              ? projectDiagsBuilder.ToImmutable()
+              : ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
         }
 
         private static CodeFixProvider GetSuppressionFixer(

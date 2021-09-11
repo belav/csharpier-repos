@@ -94,20 +94,21 @@ namespace System.Runtime.Serialization
             DataContract rootTypeDataContract,
             DataContractResolver? dataContractResolver
         ) {
-            return (
-                serializer.PreserveObjectReferences
-                || serializer.SerializationSurrogateProvider != null
-            )
-                ? new XmlObjectSerializerReadContextComplex(
-                      serializer,
-                      rootTypeDataContract,
-                      dataContractResolver
-                  )
-                : new XmlObjectSerializerReadContext(
-                      serializer,
-                      rootTypeDataContract,
-                      dataContractResolver
-                  );
+            return
+                (
+                    serializer.PreserveObjectReferences
+                    || serializer.SerializationSurrogateProvider != null
+                )
+              ? new XmlObjectSerializerReadContextComplex(
+                    serializer,
+                    rootTypeDataContract,
+                    dataContractResolver
+                )
+              : new XmlObjectSerializerReadContext(
+                    serializer,
+                    rootTypeDataContract,
+                    dataContractResolver
+                );
         }
 
         internal XmlObjectSerializerReadContext(
@@ -794,15 +795,16 @@ namespace System.Runtime.Serialization
         {
             Debug.Assert(attributes != null);
 
-            return (attributes.XsiTypeName == null)
-                ? null
-                : ResolveDataContractFromKnownTypes(
-                      attributes.XsiTypeName,
-                      attributes.XsiTypeNamespace,
-                      null /*memberTypeContract*/
-                      ,
-                      null
-                  );
+            return
+                (attributes.XsiTypeName == null)
+              ? null
+              : ResolveDataContractFromKnownTypes(
+                    attributes.XsiTypeName,
+                    attributes.XsiTypeNamespace,
+                    null /*memberTypeContract*/
+                    ,
+                    null
+                );
         }
 
         private ExtensionDataMember ReadExtensionDataMember(

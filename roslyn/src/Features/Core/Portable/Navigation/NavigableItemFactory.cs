@@ -59,9 +59,10 @@ namespace Microsoft.CodeAnalysis.Navigation
                 candidateLocationGroups.SingleOrDefault(g => !g.Key)
                 ?? SpecializedCollections.EmptyEnumerable<Location>();
 
-            return nonGeneratedSourceLocations.Any()
-                ? nonGeneratedSourceLocations
-                : generatedSourceLocations;
+            return
+                nonGeneratedSourceLocations.Any()
+              ? nonGeneratedSourceLocations
+              : generatedSourceLocations;
         }
 
         private static IEnumerable<Location> GetPreferredSourceLocations(ISymbol symbol)
@@ -71,9 +72,10 @@ namespace Microsoft.CodeAnalysis.Navigation
             // First return visible source locations if we have them.  Else, go to the non-visible
             // source locations.
             var visibleSourceLocations = locations.Where(loc => loc.IsVisibleSourceLocation());
-            return visibleSourceLocations.Any()
-                ? visibleSourceLocations
-                : locations.Where(loc => loc.IsInSource);
+            return
+                visibleSourceLocations.Any()
+              ? visibleSourceLocations
+              : locations.Where(loc => loc.IsInSource);
         }
     }
 }

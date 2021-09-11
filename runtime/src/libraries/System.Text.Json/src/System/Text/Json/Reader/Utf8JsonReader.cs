@@ -1865,9 +1865,10 @@ namespace System.Text.Json
                 {
                     if (marker == JsonConstants.Slash)
                     {
-                        return ConsumeComment()
-                            ? ConsumeTokenResult.Success
-                            : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        return
+                            ConsumeComment()
+                          ? ConsumeTokenResult.Success
+                          : ConsumeTokenResult.NotEnoughDataRollBackState;
                     }
                     if (_tokenType == JsonTokenType.Comment)
                     {
@@ -1929,9 +1930,10 @@ namespace System.Text.Json
                     && first == JsonConstants.Slash
                 ) {
                     _trailingCommaBeforeComment = true;
-                    return ConsumeComment()
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumeComment()
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
 
                 if (_inObject)
@@ -1956,9 +1958,10 @@ namespace System.Text.Json
                             first
                         );
                     }
-                    return ConsumePropertyName()
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumePropertyName()
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
                 else
                 {
@@ -1974,9 +1977,10 @@ namespace System.Text.Json
                             ExceptionResource.TrailingCommaNotAllowedBeforeArrayEnd
                         );
                     }
-                    return ConsumeValue(first)
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumeValue(first)
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
             }
             else if (marker == JsonConstants.CloseBrace)
@@ -2482,9 +2486,10 @@ namespace System.Text.Json
                             marker
                         );
                     }
-                    return ConsumePropertyName()
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumePropertyName()
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
                 else
                 {
@@ -2501,9 +2506,10 @@ namespace System.Text.Json
                         );
                     }
 
-                    return ConsumeValue(marker)
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumeValue(marker)
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
             }
             else if (marker == JsonConstants.CloseBrace)

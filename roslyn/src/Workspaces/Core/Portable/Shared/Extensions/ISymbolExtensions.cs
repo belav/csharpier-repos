@@ -357,9 +357,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 catch { }
             }
 
-            return RoslynString.IsNullOrEmpty(xmlText)
-                ? DocumentationComment.Empty
-                : DocumentationComment.FromXmlFragment(xmlText);
+            return
+                RoslynString.IsNullOrEmpty(xmlText)
+              ? DocumentationComment.Empty
+              : DocumentationComment.FromXmlFragment(xmlText);
 
             static bool IsEligibleForAutomaticInheritdoc(ISymbol symbol)
             {

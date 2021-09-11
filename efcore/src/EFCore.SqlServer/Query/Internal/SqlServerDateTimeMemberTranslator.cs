@@ -127,9 +127,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             returnType
                         );
 
-                        return declaringType == typeof(DateTime)
-                            ? (SqlExpression)serverTranslation
-                            : _sqlExpressionFactory.Convert(serverTranslation, returnType);
+                        return
+                            declaringType == typeof(DateTime)
+                          ? (SqlExpression)serverTranslation
+                          : _sqlExpressionFactory.Convert(serverTranslation, returnType);
 
                     case nameof(DateTime.Today):
                         return _sqlExpressionFactory.Function(

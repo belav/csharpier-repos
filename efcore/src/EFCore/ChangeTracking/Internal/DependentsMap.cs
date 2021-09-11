@@ -137,12 +137,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry)
         {
-            return _map.TryGetValue(
-                _principalKeyValueFactory.CreateFromCurrentValues(principalEntry),
-                out var dependents
-            )
-                ? dependents
-                : Enumerable.Empty<IUpdateEntry>();
+            return
+                _map.TryGetValue(
+                    _principalKeyValueFactory.CreateFromCurrentValues(principalEntry),
+                    out var dependents
+                )
+              ? dependents
+              : Enumerable.Empty<IUpdateEntry>();
         }
 
         /// <summary>
@@ -154,12 +155,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
             IUpdateEntry principalEntry
         ) {
-            return _map.TryGetValue(
-                _principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry),
-                out var dependents
-            )
-                ? dependents
-                : Enumerable.Empty<IUpdateEntry>();
+            return
+                _map.TryGetValue(
+                    _principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry),
+                    out var dependents
+                )
+              ? dependents
+              : Enumerable.Empty<IUpdateEntry>();
         }
     }
 }

@@ -128,9 +128,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private static string FormatRouteValues(RouteValueDictionary values)
         {
-            return values == null
-                ? "{}"
-                : "{" + string.Join(", ", values.Select(kvp => $"{kvp.Key} = '{kvp.Value}'")) + "}";
+            return
+                values == null
+              ? "{}"
+              : "{" + string.Join(", ", values.Select(kvp => $"{kvp.Key} = '{kvp.Value}'")) + "}";
         }
     }
 }

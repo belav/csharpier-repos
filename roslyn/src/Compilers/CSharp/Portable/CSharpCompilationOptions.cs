@@ -333,9 +333,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal CSharpCompilationOptions WithTopLevelBinderFlags(BinderFlags flags)
         {
-            return (flags == TopLevelBinderFlags)
-                ? this
-                : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
+            return
+                (flags == TopLevelBinderFlags)
+              ? this
+              : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
         }
 
         internal override ImmutableArray<string> GetImports() => Usings;

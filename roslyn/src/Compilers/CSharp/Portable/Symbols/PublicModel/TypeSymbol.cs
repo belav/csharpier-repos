@@ -109,10 +109,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ISymbol ITypeSymbol.FindImplementationForInterfaceMember(ISymbol interfaceMember)
         {
-            return interfaceMember is Symbol symbol
-                ? UnderlyingTypeSymbol.FindImplementationForInterfaceMember(symbol.UnderlyingSymbol)
-                      .GetPublicSymbol()
-                : null;
+            return
+                interfaceMember is Symbol symbol
+              ? UnderlyingTypeSymbol.FindImplementationForInterfaceMember(symbol.UnderlyingSymbol)
+                    .GetPublicSymbol()
+              : null;
         }
 
         bool ITypeSymbol.IsUnmanagedType => !UnderlyingTypeSymbol.IsManagedTypeNoUseSiteDiagnostics;

@@ -193,9 +193,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             SyntaxToken formatToken
         ) {
             var sequence = virtualCharService.TryConvertToVirtualChars(formatToken);
-            return sequence.IsDefaultOrEmpty
-                ? default
-                : TextSpan.FromBounds(sequence.First().Span.Start, sequence.Last().Span.End);
+            return
+                sequence.IsDefaultOrEmpty
+              ? default
+              : TextSpan.FromBounds(sequence.First().Span.Start, sequence.Last().Span.End);
         }
 
         private static void UnwrapAlignmentPadding<

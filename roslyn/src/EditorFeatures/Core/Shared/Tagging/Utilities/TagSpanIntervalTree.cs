@@ -105,11 +105,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
             // Special case the case where there is only one requested span.  In that case, we don't
             // need to allocate any intermediate collections
-            return requestedSpans.Count == 1
-                ? GetIntersectingSpans(requestedSpans[0])
-                : requestedSpans.Count < MaxNumberOfRequestedSpans
-                    ? GetTagsForSmallNumberOfSpans(requestedSpans)
-                    : GetTagsForLargeNumberOfSpans(requestedSpans);
+            return
+                requestedSpans.Count == 1
+              ? GetIntersectingSpans(requestedSpans[0])
+              : requestedSpans.Count < MaxNumberOfRequestedSpans
+                  ? GetTagsForSmallNumberOfSpans(requestedSpans)
+                  : GetTagsForLargeNumberOfSpans(requestedSpans);
         }
 
         private IEnumerable<ITagSpan<TTag>> GetTagsForSmallNumberOfSpans(

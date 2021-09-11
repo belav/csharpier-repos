@@ -460,16 +460,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundKind.TypeExpression => false,
                 _ => true
             };
-            return wasExpression
-                ? BindExpressionForPatternContinued(
-                      expression,
-                      inputType,
-                      patternExpression,
-                      ref hasErrors,
-                      diagnostics,
-                      out constantValueOpt
-                  )
-                : expression;
+            return
+                wasExpression
+              ? BindExpressionForPatternContinued(
+                    expression,
+                    inputType,
+                    patternExpression,
+                    ref hasErrors,
+                    diagnostics,
+                    out constantValueOpt
+                )
+              : expression;
         }
 
         private BoundExpression BindExpressionForPatternContinued(
@@ -827,13 +828,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 operandConstantValue,
                 operandCouldBeNull
             );
-            return (result == null)
-                ? (bool?)null
-                : (result == ConstantValue.True)
-                    ? true
-                    : (result == ConstantValue.False)
-                        ? false
-                        : throw ExceptionUtilities.UnexpectedValue(result);
+            return
+                (result == null)
+              ? (bool?)null
+              : (result == ConstantValue.True)
+                  ? true
+                  : (result == ConstantValue.False)
+                      ? false
+                      : throw ExceptionUtilities.UnexpectedValue(result);
         }
 
         private BoundPattern BindDeclarationPattern(

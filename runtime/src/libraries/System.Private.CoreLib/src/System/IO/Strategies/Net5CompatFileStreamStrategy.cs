@@ -143,11 +143,12 @@ namespace System.IO.Strategies
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return _useAsyncIO
-                ? ReadAsyncTask(buffer, offset, count, CancellationToken.None)
-                      .GetAwaiter()
-                      .GetResult()
-                : ReadSpan(new Span<byte>(buffer, offset, count));
+            return
+                _useAsyncIO
+              ? ReadAsyncTask(buffer, offset, count, CancellationToken.None)
+                    .GetAwaiter()
+                    .GetResult()
+              : ReadSpan(new Span<byte>(buffer, offset, count));
         }
 
         public override int Read(Span<byte> buffer)
@@ -203,19 +204,20 @@ namespace System.IO.Strategies
                 // Read is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
                 // internal helper that bypasses delegating to BeginRead, since we already know this is FileStream
                 // rather than something derived from it and what our BeginRead implementation is going to do.
-                return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
-                    ? new ValueTask<int>(
-                          (Task<int>)base.BeginReadInternal(
-                              segment.Array!,
-                              segment.Offset,
-                              segment.Count,
-                              null,
-                              null,
-                              serializeAsynchronously: true,
-                              apm: false
-                          )
-                      )
-                    : base.ReadAsync(buffer, cancellationToken);
+                return
+                    MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+                  ? new ValueTask<int>(
+                        (Task<int>)base.BeginReadInternal(
+                            segment.Array!,
+                            segment.Offset,
+                            segment.Count,
+                            null,
+                            null,
+                            serializeAsynchronously: true,
+                            apm: false
+                        )
+                    )
+                  : base.ReadAsync(buffer, cancellationToken);
             }
 
             Task<int>? t = ReadAsyncInternal(buffer, cancellationToken, out int synchronousResult);
@@ -328,19 +330,20 @@ namespace System.IO.Strategies
                 // Write is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
                 // internal helper that bypasses delegating to BeginWrite, since we already know this is FileStream
                 // rather than something derived from it and what our BeginWrite implementation is going to do.
-                return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
-                    ? new ValueTask(
-                          (Task)base.BeginWriteInternal(
-                              segment.Array!,
-                              segment.Offset,
-                              segment.Count,
-                              null,
-                              null,
-                              serializeAsynchronously: true,
-                              apm: false
-                          )
-                      )
-                    : base.WriteAsync(buffer, cancellationToken);
+                return
+                    MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+                  ? new ValueTask(
+                        (Task)base.BeginWriteInternal(
+                            segment.Array!,
+                            segment.Offset,
+                            segment.Count,
+                            null,
+                            null,
+                            serializeAsynchronously: true,
+                            apm: false
+                        )
+                    )
+                  : base.WriteAsync(buffer, cancellationToken);
             }
 
             return WriteAsyncInternal(buffer, cancellationToken);

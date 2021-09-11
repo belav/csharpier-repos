@@ -754,26 +754,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return (oldNode != null)
-                ? oldNode.Update(
-                      operatorKind,
-                      oldNode.ConstantValueOpt,
-                      oldNode.MethodOpt,
-                      oldNode.ResultKind,
-                      loweredLeft,
-                      loweredRight,
-                      type
-                  )
-                : new BoundBinaryOperator(
-                      syntax,
-                      operatorKind,
-                      null,
-                      null,
-                      LookupResultKind.Viable,
-                      loweredLeft,
-                      loweredRight,
-                      type
-                  );
+            return
+                (oldNode != null)
+              ? oldNode.Update(
+                    operatorKind,
+                    oldNode.ConstantValueOpt,
+                    oldNode.MethodOpt,
+                    oldNode.ResultKind,
+                    loweredLeft,
+                    loweredRight,
+                    type
+                )
+              : new BoundBinaryOperator(
+                    syntax,
+                    operatorKind,
+                    null,
+                    null,
+                    LookupResultKind.Viable,
+                    loweredLeft,
+                    loweredRight,
+                    type
+                );
         }
 
         private BoundExpression RewriteLiftedBinaryOperator(
@@ -2889,26 +2890,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            return oldNode == null
-                ? new BoundBinaryOperator(
-                      syntax,
-                      operatorKind,
-                      null,
-                      null,
-                      LookupResultKind.Viable,
-                      loweredLeft,
-                      loweredRight,
-                      type
-                  )
-                : oldNode.Update(
-                      operatorKind,
-                      null,
-                      null,
-                      oldNode.ResultKind,
-                      loweredLeft,
-                      loweredRight,
-                      type
-                  );
+            return
+                oldNode == null
+              ? new BoundBinaryOperator(
+                    syntax,
+                    operatorKind,
+                    null,
+                    null,
+                    LookupResultKind.Viable,
+                    loweredLeft,
+                    loweredRight,
+                    type
+                )
+              : oldNode.Update(
+                    operatorKind,
+                    null,
+                    null,
+                    oldNode.ResultKind,
+                    loweredLeft,
+                    loweredRight,
+                    type
+                );
         }
 
         private BoundExpression RewritePointerNumericOperator(
@@ -3042,13 +3044,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         throw ExceptionUtilities.UnexpectedValue(numericSpecialType);
                 }
 
-                return destinationType == numericSpecialType
-                    ? numericOperand
-                    : _factory.Convert(
-                          _factory.SpecialType(destinationType),
-                          numericOperand,
-                          Conversion.IntegerToPointer
-                      );
+                return
+                    destinationType == numericSpecialType
+                  ? numericOperand
+                  : _factory.Convert(
+                        _factory.SpecialType(destinationType),
+                        numericOperand,
+                        Conversion.IntegerToPointer
+                    );
             }
 
             BinaryOperatorKind multiplicationKind = BinaryOperatorKind.Multiplication;
@@ -3149,17 +3152,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 numericOperand,
                 sizeOfExpression
             );
-            return TypeSymbol.Equals(
-                convertedMultiplicationResultType,
-                multiplicationResultType,
-                TypeCompareKind.ConsiderEverything2
-            )
-                ? multiplication
-                : _factory.Convert(
-                      convertedMultiplicationResultType,
-                      multiplication,
-                      Conversion.IntegerToPointer
-                  ); // NOTE: for some reason, dev10 doesn't check this conversion.
+            return
+                TypeSymbol.Equals(
+                    convertedMultiplicationResultType,
+                    multiplicationResultType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+              ? multiplication
+              : _factory.Convert(
+                    convertedMultiplicationResultType,
+                    multiplication,
+                    Conversion.IntegerToPointer
+                ); // NOTE: for some reason, dev10 doesn't check this conversion.
         }
 
         private BoundExpression RewritePointerSubtraction(

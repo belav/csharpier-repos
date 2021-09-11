@@ -1319,9 +1319,10 @@ namespace System.Net
                     ? new Uri(_baseAddress, address)
                     : address;
 
-            return string.Equals(uri.Scheme, Uri.UriSchemeFtp, StringComparison.Ordinal)
-                ? "STOR"
-                : "POST";
+            return
+                string.Equals(uri.Scheme, Uri.UriSchemeFtp, StringComparison.Ordinal)
+              ? "STOR"
+              : "POST";
         }
 
         [return: NotNullIfNotNull("str")]

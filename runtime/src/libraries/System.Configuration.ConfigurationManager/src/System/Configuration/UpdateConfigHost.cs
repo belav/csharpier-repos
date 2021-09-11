@@ -75,17 +75,19 @@ namespace System.Configuration
         public override object GetStreamVersion(string streamName)
         {
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, false);
-            return streamUpdate != null
-                ? InternalConfigHost.StaticGetStreamVersion(streamUpdate.NewStreamname)
-                : Host.GetStreamVersion(streamName);
+            return
+                streamUpdate != null
+              ? InternalConfigHost.StaticGetStreamVersion(streamUpdate.NewStreamname)
+              : Host.GetStreamVersion(streamName);
         }
 
         public override Stream OpenStreamForRead(string streamName)
         {
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, false);
-            return streamUpdate != null
-                ? InternalConfigHost.StaticOpenStreamForRead(streamUpdate.NewStreamname)
-                : Host.OpenStreamForRead(streamName);
+            return
+                streamUpdate != null
+              ? InternalConfigHost.StaticOpenStreamForRead(streamUpdate.NewStreamname)
+              : Host.OpenStreamForRead(streamName);
         }
 
         public override Stream OpenStreamForWrite(
@@ -145,9 +147,10 @@ namespace System.Configuration
         public override bool IsFile(string streamName)
         {
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, false);
-            return streamUpdate != null
-                ? InternalConfigHost.StaticIsFile(streamUpdate.NewStreamname)
-                : Host.IsFile(streamName);
+            return
+                streamUpdate != null
+              ? InternalConfigHost.StaticIsFile(streamUpdate.NewStreamname)
+              : Host.IsFile(streamName);
         }
     }
 }

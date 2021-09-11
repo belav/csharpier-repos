@@ -24,9 +24,10 @@ namespace R2RTest
         {
             get
             {
-                return _options.CrossgenPath != null
-                    ? _options.CrossgenPath.FullName
-                    : base.CompilerPath;
+                return
+                    _options.CrossgenPath != null
+                  ? _options.CrossgenPath.FullName
+                  : base.CompilerPath;
             }
         }
 

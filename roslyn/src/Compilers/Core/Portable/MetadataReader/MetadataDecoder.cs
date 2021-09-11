@@ -1935,9 +1935,10 @@ namespace Microsoft.CodeAnalysis
 
         private static TypedConstantKind GetPrimitiveOrEnumTypedConstantKind(TypeSymbol type)
         {
-            return (type.TypeKind == TypeKind.Enum)
-                ? TypedConstantKind.Enum
-                : TypedConstantKind.Primitive;
+            return
+                (type.TypeKind == TypeKind.Enum)
+              ? TypedConstantKind.Enum
+              : TypedConstantKind.Primitive;
         }
 
         /// <exception cref="UnsupportedSignatureContent">If the encoded named argument is invalid.</exception>
@@ -2884,9 +2885,10 @@ namespace Microsoft.CodeAnalysis
             HandleKind type = memberToken.Kind;
             Debug.Assert(type == HandleKind.MethodDefinition || type == HandleKind.MemberReference);
 
-            return type == HandleKind.MethodDefinition
-                ? FindMethodSymbolInType(container, (MethodDefinitionHandle)memberToken)
-                : GetMethodSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
+            return
+                type == HandleKind.MethodDefinition
+              ? FindMethodSymbolInType(container, (MethodDefinitionHandle)memberToken)
+              : GetMethodSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
         }
 
         internal FieldSymbol GetFieldSymbolForFieldDefOrMemberRef(
@@ -2896,9 +2898,10 @@ namespace Microsoft.CodeAnalysis
             HandleKind type = memberToken.Kind;
             Debug.Assert(type == HandleKind.FieldDefinition || type == HandleKind.MemberReference);
 
-            return type == HandleKind.FieldDefinition
-                ? FindFieldSymbolInType(container, (FieldDefinitionHandle)memberToken)
-                : GetFieldSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
+            return
+                type == HandleKind.FieldDefinition
+              ? FindFieldSymbolInType(container, (FieldDefinitionHandle)memberToken)
+              : GetFieldSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
         }
 
         /// <summary>

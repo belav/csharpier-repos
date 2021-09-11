@@ -87,19 +87,20 @@ namespace System.Net.Http.HPack
             {
                 int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
-                return index == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(
-                          name,
-                          value,
-                          buffer,
-                          out bytesWritten
-                      )
-                    : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(
-                          index,
-                          value,
-                          buffer,
-                          out bytesWritten
-                      );
+                return
+                    index == -1
+                  ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(
+                        name,
+                        value,
+                        buffer,
+                        out bytesWritten
+                    )
+                  : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(
+                        index,
+                        value,
+                        buffer,
+                        out bytesWritten
+                    );
             }
 
             // No dynamic table. Only use the static table.
@@ -108,19 +109,20 @@ namespace System.Net.Http.HPack
                 || _maxHeaderTableSize == 0
                 || encodingHint == HeaderEncodingHint.IgnoreIndex
             ) {
-                return staticTableIndex == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
-                          name,
-                          value,
-                          buffer,
-                          out bytesWritten
-                      )
-                    : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
-                          staticTableIndex,
-                          value,
-                          buffer,
-                          out bytesWritten
-                      );
+                return
+                    staticTableIndex == -1
+                  ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                        name,
+                        value,
+                        buffer,
+                        out bytesWritten
+                    )
+                  : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                        staticTableIndex,
+                        value,
+                        buffer,
+                        out bytesWritten
+                    );
             }
 
             // Header is greater than the maximum table size.
@@ -129,19 +131,20 @@ namespace System.Net.Http.HPack
             {
                 int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
-                return index == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
-                          name,
-                          value,
-                          buffer,
-                          out bytesWritten
-                      )
-                    : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
-                          index,
-                          value,
-                          buffer,
-                          out bytesWritten
-                      );
+                return
+                    index == -1
+                  ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                        name,
+                        value,
+                        buffer,
+                        out bytesWritten
+                    )
+                  : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                        index,
+                        value,
+                        buffer,
+                        out bytesWritten
+                    );
             }
 
             return EncodeDynamicHeader(buffer, staticTableIndex, name, value, out bytesWritten);

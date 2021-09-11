@@ -655,9 +655,10 @@ namespace System.IO.Compression
             int count,
             CancellationToken cancellationToken
         ) {
-            return _mode == Mode.ReturnNullTasks
-                ? null
-                : base.WriteAsync(buffer, offset, count, cancellationToken);
+            return
+                _mode == Mode.ReturnNullTasks
+              ? null
+              : base.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override void Write(byte[] buffer, int offset, int count) { }

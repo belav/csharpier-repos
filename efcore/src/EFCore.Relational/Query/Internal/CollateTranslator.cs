@@ -39,12 +39,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return method.IsGenericMethod
-            && Equals(method.GetGenericMethodDefinition(), _methodInfo)
-            && arguments[2] is SqlConstantExpression constantExpression
-            && constantExpression.Value is string collation
-                ? new CollateExpression(arguments[1], collation)
-                : null;
+            return
+                method.IsGenericMethod
+                && Equals(method.GetGenericMethodDefinition(), _methodInfo)
+                && arguments[2] is SqlConstantExpression constantExpression
+                && constantExpression.Value is string collation
+              ? new CollateExpression(arguments[1], collation)
+              : null;
         }
     }
 }

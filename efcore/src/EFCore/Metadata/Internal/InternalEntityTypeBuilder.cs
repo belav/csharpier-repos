@@ -860,9 +860,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 detachedProperties?.Attach(this);
             }
 
-            return builder.Metadata.IsInModel
-                ? builder
-                : Metadata.FindProperty(propertyName)?.Builder;
+            return
+                builder.Metadata.IsInModel
+              ? builder
+              : Metadata.FindProperty(propertyName)?.Builder;
         }
 
         private bool IsCompatible(MemberInfo? newMemberInfo, Property existingProperty)
@@ -1177,9 +1178,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return builder.Metadata.IsInModel
-                ? builder
-                : Metadata.FindServiceProperty(propertyName)?.Builder;
+            return
+                builder.Metadata.IsInModel
+              ? builder
+              : Metadata.FindServiceProperty(propertyName)?.Builder;
         }
 
         /// <summary>
@@ -1193,15 +1195,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource? configurationSource
         ) {
             var existingProperty = Metadata.FindServiceProperty(memberInfo);
-            return existingProperty != null
-                ? existingProperty.DeclaringEntityType == Metadata
-                  || (
-                      configurationSource.HasValue
-                      && configurationSource.Value.Overrides(
-                          existingProperty.GetConfigurationSource()
-                      )
-                  )
-                : CanAddServiceProperty(memberInfo, configurationSource);
+            return
+                existingProperty != null
+              ? existingProperty.DeclaringEntityType == Metadata
+                || (
+                    configurationSource.HasValue
+                    && configurationSource.Value.Overrides(
+                        existingProperty.GetConfigurationSource()
+                    )
+                )
+              : CanAddServiceProperty(memberInfo, configurationSource);
         }
 
         private bool CanAddServiceProperty(
@@ -3038,19 +3041,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 configurationSource
             );
             var principalKey = principalTypeBuilder?.Metadata.FindPrimaryKey();
-            return principalTypeBuilder == null
-                ? null
-                : HasForeignKey(
-                      principalTypeBuilder.Metadata,
-                      GetOrCreateProperties(
-                          propertyNames,
-                          configurationSource,
-                          principalKey?.Properties,
-                          useDefaultType: principalKey == null
-                      ),
-                      null,
-                      configurationSource
-                  );
+            return
+                principalTypeBuilder == null
+              ? null
+              : HasForeignKey(
+                    principalTypeBuilder.Metadata,
+                    GetOrCreateProperties(
+                        propertyNames,
+                        configurationSource,
+                        principalKey?.Properties,
+                        useDefaultType: principalKey == null
+                    ),
+                    null,
+                    configurationSource
+                );
         }
 
         /// <summary>
@@ -3072,18 +3076,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 principalEntityTypeName,
                 configurationSource
             );
-            return principalTypeBuilder == null
-                ? null
-                : HasForeignKey(
-                      principalTypeBuilder.Metadata,
-                      GetOrCreateProperties(
-                          propertyNames,
-                          configurationSource,
-                          principalKey.Properties
-                      ),
-                      principalKey,
-                      configurationSource
-                  );
+            return
+                principalTypeBuilder == null
+              ? null
+              : HasForeignKey(
+                    principalTypeBuilder.Metadata,
+                    GetOrCreateProperties(
+                        propertyNames,
+                        configurationSource,
+                        principalKey.Properties
+                    ),
+                    principalKey,
+                    configurationSource
+                );
         }
 
         /// <summary>
@@ -3101,14 +3106,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(clrMembers, nameof(clrMembers));
 
             var principalTypeBuilder = ModelBuilder.Entity(principalClrType, configurationSource);
-            return principalTypeBuilder == null
-                ? null
-                : HasForeignKey(
-                      principalTypeBuilder.Metadata,
-                      GetOrCreateProperties(clrMembers, configurationSource),
-                      null,
-                      configurationSource
-                  );
+            return
+                principalTypeBuilder == null
+              ? null
+              : HasForeignKey(
+                    principalTypeBuilder.Metadata,
+                    GetOrCreateProperties(clrMembers, configurationSource),
+                    null,
+                    configurationSource
+                );
         }
 
         /// <summary>
@@ -3127,14 +3133,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(clrMembers, nameof(clrMembers));
 
             var principalTypeBuilder = ModelBuilder.Entity(principalClrType, configurationSource);
-            return principalTypeBuilder == null
-                ? null
-                : HasForeignKey(
-                      principalTypeBuilder.Metadata,
-                      GetOrCreateProperties(clrMembers, configurationSource),
-                      principalKey,
-                      configurationSource
-                  );
+            return
+                principalTypeBuilder == null
+              ? null
+              : HasForeignKey(
+                    principalTypeBuilder.Metadata,
+                    GetOrCreateProperties(clrMembers, configurationSource),
+                    principalKey,
+                    configurationSource
+                );
         }
 
         /// <summary>
@@ -4085,18 +4092,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             + "Owned types should only have ownership navigations point at it"
                     );
 
-                    return existingTargetType.HasSharedClrType
-                        ? ModelBuilder.SharedTypeEntity(
-                              existingTargetType.Name,
-                              existingTargetType.ClrType,
-                              configurationSource!.Value,
-                              targetShouldBeOwned
-                          )
-                        : ModelBuilder.Entity(
-                              existingTargetType.ClrType,
-                              configurationSource!.Value,
-                              targetShouldBeOwned
-                          );
+                    return
+                        existingTargetType.HasSharedClrType
+                      ? ModelBuilder.SharedTypeEntity(
+                            existingTargetType.Name,
+                            existingTargetType.ClrType,
+                            configurationSource!.Value,
+                            targetShouldBeOwned
+                        )
+                      : ModelBuilder.Entity(
+                            existingTargetType.ClrType,
+                            configurationSource!.Value,
+                            targetShouldBeOwned
+                        );
                 }
 
                 if (
@@ -4787,9 +4795,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return builder.Metadata.IsInModel
-                ? builder
-                : Metadata.FindSkipNavigation(navigationName)?.Builder;
+            return
+                builder.Metadata.IsInModel
+              ? builder
+              : Metadata.FindSkipNavigation(navigationName)?.Builder;
         }
 
         /// <summary>
@@ -5355,12 +5364,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 $"Either {nameof(name)} or {nameof(type)} should be non-null"
             );
 
-            return CanSetDiscriminator(name, type, configurationSource)
-                ? DiscriminatorBuilder(
-                      GetOrCreateDiscriminatorProperty(type, name, configurationSource),
-                      configurationSource
-                  )
-                : null;
+            return
+                CanSetDiscriminator(name, type, configurationSource)
+              ? DiscriminatorBuilder(
+                    GetOrCreateDiscriminatorProperty(type, name, configurationSource),
+                    configurationSource
+                )
+              : null;
         }
 
         /// <summary>
@@ -5891,14 +5901,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(properties, nameof(properties));
 
             var key = Metadata.FindDeclaredKey(properties);
-            return key != null
-                ? HasNoKey(
-                      key,
-                      fromDataAnnotation
-                        ? ConfigurationSource.DataAnnotation
-                        : ConfigurationSource.Convention
-                  )
-                : this;
+            return
+                key != null
+              ? HasNoKey(
+                    key,
+                    fromDataAnnotation
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
+                )
+              : this;
         }
 
         /// <summary>
@@ -6040,14 +6051,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(properties, nameof(properties));
 
             var index = Metadata.FindDeclaredIndex(properties);
-            return index != null
-                ? HasNoIndex(
-                      index,
-                      fromDataAnnotation
-                        ? ConfigurationSource.DataAnnotation
-                        : ConfigurationSource.Convention
-                  )
-                : this;
+            return
+                index != null
+              ? HasNoIndex(
+                    index,
+                    fromDataAnnotation
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
+                )
+              : this;
         }
 
         /// <summary>
@@ -6387,14 +6399,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 principalKey,
                 principalEntityType
             );
-            return foreignKey != null
-                ? HasNoRelationship(
-                      foreignKey,
-                      fromDataAnnotation
-                        ? ConfigurationSource.DataAnnotation
-                        : ConfigurationSource.Convention
-                  )
-                : this;
+            return
+                foreignKey != null
+              ? HasNoRelationship(
+                    foreignKey,
+                    fromDataAnnotation
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
+                )
+              : this;
         }
 
         /// <summary>

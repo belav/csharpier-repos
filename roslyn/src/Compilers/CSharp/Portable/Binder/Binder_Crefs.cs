@@ -1268,9 +1268,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static CrefSyntax GetRootCrefSyntax(MemberCrefSyntax syntax)
         {
             SyntaxNode? parentSyntax = syntax.Parent; // Could be null when speculating.
-            return parentSyntax == null || parentSyntax.IsKind(SyntaxKind.XmlCrefAttribute)
-                ? syntax
-                : (CrefSyntax)parentSyntax;
+            return
+                parentSyntax == null || parentSyntax.IsKind(SyntaxKind.XmlCrefAttribute)
+              ? syntax
+              : (CrefSyntax)parentSyntax;
         }
     }
 }

@@ -80,9 +80,10 @@ namespace System.Net.Http
 
                 try
                 {
-                    return async
-                        ? await base.SendAsync(request, cancellationToken).ConfigureAwait(false)
-                        : base.Send(request, cancellationToken);
+                    return
+                        async
+                      ? await base.SendAsync(request, cancellationToken).ConfigureAwait(false)
+                      : base.Send(request, cancellationToken);
                 }
 
                 finally

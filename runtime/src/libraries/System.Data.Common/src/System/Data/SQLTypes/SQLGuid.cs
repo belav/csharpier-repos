@@ -183,9 +183,10 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull)
-                ? SqlBoolean.Null
-                : new SqlBoolean(Compare(x, y) == EComparison.EQ);
+            return
+                (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(Compare(x, y) == EComparison.EQ);
         }
 
         public static SqlBoolean operator !=(SqlGuid x, SqlGuid y)
@@ -195,16 +196,18 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull)
-                ? SqlBoolean.Null
-                : new SqlBoolean(Compare(x, y) == EComparison.LT);
+            return
+                (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(Compare(x, y) == EComparison.LT);
         }
 
         public static SqlBoolean operator >(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull)
-                ? SqlBoolean.Null
-                : new SqlBoolean(Compare(x, y) == EComparison.GT);
+            return
+                (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(Compare(x, y) == EComparison.GT);
         }
 
         public static SqlBoolean operator <=(SqlGuid x, SqlGuid y)

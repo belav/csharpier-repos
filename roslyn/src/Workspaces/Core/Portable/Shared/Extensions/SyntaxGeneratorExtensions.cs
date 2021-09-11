@@ -749,9 +749,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var arguments = generator.CreateArguments(method.Parameters.As<IParameterSymbol>());
             var invocationExpression = generator.InvocationExpression(through, arguments);
 
-            return method.ReturnsVoid
-                ? generator.ExpressionStatement(invocationExpression)
-                : generator.ReturnStatement(invocationExpression);
+            return
+                method.ReturnsVoid
+              ? generator.ExpressionStatement(invocationExpression)
+              : generator.ReturnStatement(invocationExpression);
         }
 
         public static SyntaxNode CreateDelegateThroughExpression(
@@ -834,9 +835,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             static SyntaxNode GenerateContainerName(SyntaxGenerator factory, ISymbol throughMember)
             {
                 var classOrStructType = throughMember.ContainingType;
-                return classOrStructType.IsGenericType
-                    ? factory.GenericName(classOrStructType.Name, classOrStructType.TypeArguments)
-                    : factory.IdentifierName(classOrStructType.Name);
+                return
+                    classOrStructType.IsGenericType
+                  ? factory.GenericName(classOrStructType.Name, classOrStructType.TypeArguments)
+                  : factory.IdentifierName(classOrStructType.Name);
             }
         }
 
@@ -872,9 +874,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return ImmutableArray.Create(generator.ReturnStatement(expression));
             }
 
-            return preferAutoProperties
-                ? default
-                : generator.CreateThrowNotImplementedStatementBlock(compilation);
+            return
+                preferAutoProperties
+              ? default
+              : generator.CreateThrowNotImplementedStatementBlock(compilation);
         }
 
         public static ImmutableArray<SyntaxNode> GetSetAccessorStatements(
@@ -914,9 +917,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return ImmutableArray.Create(generator.ExpressionStatement(expression));
             }
 
-            return preferAutoProperties
-                ? default
-                : generator.CreateThrowNotImplementedStatementBlock(compilation);
+            return
+                preferAutoProperties
+              ? default
+              : generator.CreateThrowNotImplementedStatementBlock(compilation);
         }
     }
 }

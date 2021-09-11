@@ -179,9 +179,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             ) {
                 this.CancellationToken.ThrowIfCancellationRequested();
 
-                return token.HasAnnotation(Simplifier.Annotation)
-                    ? simplifier(token, this.SemanticModel, this.OptionSet, this.CancellationToken)
-                    : token;
+                return
+                    token.HasAnnotation(Simplifier.Annotation)
+                  ? simplifier(token, this.SemanticModel, this.OptionSet, this.CancellationToken)
+                  : token;
             }
 
             public override SyntaxNode VisitElementAccessExpression(

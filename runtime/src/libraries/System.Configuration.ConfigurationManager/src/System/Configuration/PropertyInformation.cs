@@ -38,9 +38,10 @@ namespace System.Configuration
             {
                 if (_thisElement.Values[Name] == null)
                     return PropertyValueOrigin.Default;
-                return _thisElement.Values.IsInherited(Name)
-                    ? PropertyValueOrigin.Inherited
-                    : PropertyValueOrigin.SetHere;
+                return
+                    _thisElement.Values.IsInherited(Name)
+                  ? PropertyValueOrigin.Inherited
+                  : PropertyValueOrigin.SetHere;
             }
         }
 

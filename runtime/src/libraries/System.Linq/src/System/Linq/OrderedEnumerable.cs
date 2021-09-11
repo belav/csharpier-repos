@@ -315,9 +315,10 @@ namespace System.Linq
         internal TElement ElementAt(TElement[] elements, int count, int idx)
         {
             int[] map = ComputeMap(elements, count);
-            return idx == 0
-                ? elements[Min(map, count)]
-                : elements[QuickSelect(map, count - 1, idx)];
+            return
+                idx == 0
+              ? elements[Min(map, count)]
+              : elements[QuickSelect(map, count - 1, idx)];
         }
 
         protected abstract void QuickSort(int[] map, int left, int right);

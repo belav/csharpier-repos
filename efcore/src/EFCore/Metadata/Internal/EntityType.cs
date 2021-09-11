@@ -704,10 +704,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return _baseType.FindPrimaryKey(properties);
             }
 
-            return _primaryKey != null
-            && PropertyListComparer.Instance.Compare(_primaryKey.Properties, properties) == 0
-                ? _primaryKey
-                : null;
+            return
+                _primaryKey != null
+                && PropertyListComparer.Instance.Compare(_primaryKey.Properties, properties) == 0
+              ? _primaryKey
+              : null;
         }
 
         /// <summary>
@@ -1153,12 +1154,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotEmpty(properties, nameof(properties));
 
-            return _baseType != null
-                ? _foreignKeys.Count == 0
-                    ? _baseType.FindForeignKeys(properties)
-                    : _baseType.FindForeignKeys(properties)
-                          .Concat(FindDeclaredForeignKeys(properties))
-                : FindDeclaredForeignKeys(properties);
+            return
+                _baseType != null
+              ? _foreignKeys.Count == 0
+                  ? _baseType.FindForeignKeys(properties)
+                  : _baseType.FindForeignKeys(properties)
+                        .Concat(FindDeclaredForeignKeys(properties))
+              : FindDeclaredForeignKeys(properties);
         }
 
         /// <summary>
@@ -1274,11 +1276,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             Check.NotEmpty(properties, nameof(properties));
 
-            return _foreignKeys.Count == 0
-                ? Enumerable.Empty<ForeignKey>()
-                : _foreignKeys.Where(
-                      fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
-                  );
+            return
+                _foreignKeys.Count == 0
+              ? Enumerable.Empty<ForeignKey>()
+              : _foreignKeys.Where(
+                    fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
+                );
         }
 
         /// <summary>
@@ -1703,11 +1706,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Check.NotNull(name, nameof(name));
 
-            return _directlyDerivedTypes.Count == 0
-                ? Enumerable.Empty<Navigation>()
-                : (IEnumerable<Navigation>)GetDerivedTypes()
-                      .Select(et => et.FindDeclaredNavigation(name))
-                      .Where(n => n != null);
+            return
+                _directlyDerivedTypes.Count == 0
+              ? Enumerable.Empty<Navigation>()
+              : (IEnumerable<Navigation>)GetDerivedTypes()
+                    .Select(et => et.FindDeclaredNavigation(name))
+                    .Where(n => n != null);
         }
 
         /// <summary>
@@ -1937,11 +1941,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Check.NotNull(name, nameof(name));
 
-            return _directlyDerivedTypes.Count == 0
-                ? Enumerable.Empty<SkipNavigation>()
-                : (IEnumerable<SkipNavigation>)GetDerivedTypes()
-                      .Select(et => et.FindDeclaredSkipNavigation(name))
-                      .Where(n => n != null);
+            return
+                _directlyDerivedTypes.Count == 0
+              ? Enumerable.Empty<SkipNavigation>()
+              : (IEnumerable<SkipNavigation>)GetDerivedTypes()
+                    .Select(et => et.FindDeclaredSkipNavigation(name))
+                    .Where(n => n != null);
         }
 
         /// <summary>
@@ -2665,11 +2670,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Check.NotNull(propertyName, nameof(propertyName));
 
-            return _directlyDerivedTypes.Count == 0
-                ? Enumerable.Empty<Property>()
-                : (IEnumerable<Property>)GetDerivedTypes()
-                      .Select(et => et.FindDeclaredProperty(propertyName))
-                      .Where(p => p != null);
+            return
+                _directlyDerivedTypes.Count == 0
+              ? Enumerable.Empty<Property>()
+              : (IEnumerable<Property>)GetDerivedTypes()
+                    .Select(et => et.FindDeclaredProperty(propertyName))
+                    .Where(p => p != null);
         }
 
         /// <summary>
@@ -3101,11 +3107,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             Check.NotNull(propertyName, nameof(propertyName));
 
-            return _directlyDerivedTypes.Count == 0
-                ? Enumerable.Empty<ServiceProperty>()
-                : (IEnumerable<ServiceProperty>)GetDerivedTypes()
-                      .Select(et => et.FindDeclaredServiceProperty(propertyName))
-                      .Where(p => p != null);
+            return
+                _directlyDerivedTypes.Count == 0
+              ? Enumerable.Empty<ServiceProperty>()
+              : (IEnumerable<ServiceProperty>)GetDerivedTypes()
+                    .Select(et => et.FindDeclaredServiceProperty(propertyName))
+                    .Where(p => p != null);
         }
 
         /// <summary>
@@ -3226,9 +3233,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var ignoredSource = FindDeclaredIgnoredConfigurationSource(name);
 
-            return BaseType == null
-                ? ignoredSource
-                : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
+            return
+                BaseType == null
+              ? ignoredSource
+              : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
         }
 
         /// <summary>
@@ -3620,15 +3628,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return (
-                (string?)SetAnnotation(
-                    CoreAnnotationNames.DiscriminatorProperty,
-                    property?.Name,
-                    configurationSource
-                )?.Value
-            ) == property?.Name
-                ? property
-                : (Property?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
+            return
+                (
+                    (string?)SetAnnotation(
+                        CoreAnnotationNames.DiscriminatorProperty,
+                        property?.Name,
+                        configurationSource
+                    )?.Value
+                ) == property?.Name
+              ? property
+              : (Property?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
         }
 
         private void CheckDiscriminatorProperty(Property? property)

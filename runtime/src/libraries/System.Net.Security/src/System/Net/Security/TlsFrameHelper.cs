@@ -457,10 +457,10 @@ namespace System.Net.Security
                 );
             }
 
-            return (TlsHandshakeType)sslHandshake[HandshakeTypeOffset]
-            == TlsHandshakeType.ClientHello
-                ? TryParseClientHello(helloData.Slice(0, helloLength), ref info, options, callback)
-                : TryParseServerHello(helloData.Slice(0, helloLength), ref info, options, callback);
+            return
+                (TlsHandshakeType)sslHandshake[HandshakeTypeOffset] == TlsHandshakeType.ClientHello
+              ? TryParseClientHello(helloData.Slice(0, helloLength), ref info, options, callback)
+              : TryParseServerHello(helloData.Slice(0, helloLength), ref info, options, callback);
         }
 
         private static bool TryParseClientHello(
@@ -891,9 +891,10 @@ namespace System.Net.Security
             ReadOnlySpan<byte> bytes,
             int numberOfBytesToSkip
         ) {
-            return (numberOfBytesToSkip < bytes.Length)
-                ? bytes.Slice(numberOfBytesToSkip)
-                : ReadOnlySpan<byte>.Empty;
+            return
+                (numberOfBytesToSkip < bytes.Length)
+              ? bytes.Slice(numberOfBytesToSkip)
+              : ReadOnlySpan<byte>.Empty;
         }
 
         // Opaque type is of structure:

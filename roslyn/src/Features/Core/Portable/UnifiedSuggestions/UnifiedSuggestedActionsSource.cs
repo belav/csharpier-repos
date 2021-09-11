@@ -546,11 +546,12 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             bool filterOutsideSelection
         ) {
             var actions = refactoring.CodeActions.WhereAsArray(IsActionAndSpanApplicable);
-            return actions.Length == 0
-                ? null
-                : actions.Length == refactoring.CodeActions.Length
-                    ? refactoring
-                    : new CodeRefactoring(refactoring.Provider, actions);
+            return
+                actions.Length == 0
+              ? null
+              : actions.Length == refactoring.CodeActions.Length
+                  ? refactoring
+                  : new CodeRefactoring(refactoring.Provider, actions);
 
             bool IsActionAndSpanApplicable(
                 (CodeAction action, TextSpan? applicableSpan) actionAndSpan
@@ -839,15 +840,16 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                 }
             }
 
-            return actions.Count == 0
-                ? null
-                : new UnifiedSuggestedActionSet(
-                      set.CategoryName,
-                      actions.ToImmutable(),
-                      set.Title,
-                      set.Priority,
-                      set.ApplicableToSpan
-                  );
+            return
+                actions.Count == 0
+              ? null
+              : new UnifiedSuggestedActionSet(
+                    set.CategoryName,
+                    actions.ToImmutable(),
+                    set.Title,
+                    set.Priority,
+                    set.ApplicableToSpan
+                );
         }
     }
 }

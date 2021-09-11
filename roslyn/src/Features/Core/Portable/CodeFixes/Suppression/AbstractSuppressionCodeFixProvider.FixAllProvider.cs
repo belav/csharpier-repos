@@ -40,21 +40,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ) {
                     // For global suppressions, we defer to the global suppression system to handle directly.
                     var title = fixAllContext.CodeActionEquivalenceKey;
-                    return fixAllContext.Document != null
-                        ? GlobalSuppressMessageFixAllCodeAction.Create(
-                              title,
-                              suppressionFixer,
-                              fixAllContext.Document,
-                              await fixAllContext.GetDocumentDiagnosticsToFixAsync()
-                                  .ConfigureAwait(false)
-                          )
-                        : GlobalSuppressMessageFixAllCodeAction.Create(
-                              title,
-                              suppressionFixer,
-                              fixAllContext.Project,
-                              await fixAllContext.GetProjectDiagnosticsToFixAsync()
-                                  .ConfigureAwait(false)
-                          );
+                    return
+                        fixAllContext.Document != null
+                      ? GlobalSuppressMessageFixAllCodeAction.Create(
+                            title,
+                            suppressionFixer,
+                            fixAllContext.Document,
+                            await fixAllContext.GetDocumentDiagnosticsToFixAsync()
+                                .ConfigureAwait(false)
+                        )
+                      : GlobalSuppressMessageFixAllCodeAction.Create(
+                            title,
+                            suppressionFixer,
+                            fixAllContext.Project,
+                            await fixAllContext.GetProjectDiagnosticsToFixAsync()
+                                .ConfigureAwait(false)
+                        );
                 }
 
                 if (

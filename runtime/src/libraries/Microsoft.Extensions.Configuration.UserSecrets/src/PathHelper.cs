@@ -60,9 +60,10 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
                 );
             }
 
-            return !string.IsNullOrEmpty(appData)
-                ? Path.Combine(root, "Microsoft", "UserSecrets", userSecretsId, SecretsFileName)
-                : Path.Combine(root, ".microsoft", "usersecrets", userSecretsId, SecretsFileName);
+            return
+                !string.IsNullOrEmpty(appData)
+              ? Path.Combine(root, "Microsoft", "UserSecrets", userSecretsId, SecretsFileName)
+              : Path.Combine(root, ".microsoft", "usersecrets", userSecretsId, SecretsFileName);
         }
     }
 }

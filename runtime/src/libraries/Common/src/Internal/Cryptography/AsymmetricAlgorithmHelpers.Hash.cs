@@ -38,20 +38,21 @@ namespace Internal.Cryptography
 #if NET5_0_OR_GREATER
             ReadOnlySpan<byte> source = data.AsSpan(offset, count);
 
-            return hashAlgorithm == HashAlgorithmName.SHA256
-                ? SHA256.HashData(source)
-                : hashAlgorithm == HashAlgorithmName.SHA1
-                    ? SHA1.HashData(source)
-                    : hashAlgorithm == HashAlgorithmName.SHA512
-                        ? SHA512.HashData(source)
-                        : hashAlgorithm == HashAlgorithmName.SHA384
-                            ? SHA384.HashData(source)
-                            : hashAlgorithm == HashAlgorithmName.MD5
-                                ? MD5.HashData(source)
-                                : throw new CryptographicException(
-                                      SR.Cryptography_UnknownHashAlgorithm,
-                                      hashAlgorithm.Name
-                                  );
+            return
+                hashAlgorithm == HashAlgorithmName.SHA256
+              ? SHA256.HashData(source)
+              : hashAlgorithm == HashAlgorithmName.SHA1
+                  ? SHA1.HashData(source)
+                  : hashAlgorithm == HashAlgorithmName.SHA512
+                      ? SHA512.HashData(source)
+                      : hashAlgorithm == HashAlgorithmName.SHA384
+                          ? SHA384.HashData(source)
+                          : hashAlgorithm == HashAlgorithmName.MD5
+                              ? MD5.HashData(source)
+                              : throw new CryptographicException(
+                                    SR.Cryptography_UnknownHashAlgorithm,
+                                    hashAlgorithm.Name
+                                );
 #else
             using (HashAlgorithm hasher = GetHashAlgorithm(hashAlgorithm))
             {
@@ -92,20 +93,21 @@ namespace Internal.Cryptography
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 
 #if NET5_0_OR_GREATER
-            return hashAlgorithm == HashAlgorithmName.SHA256
-                ? SHA256.TryHashData(source, destination, out bytesWritten)
-                : hashAlgorithm == HashAlgorithmName.SHA1
-                    ? SHA1.TryHashData(source, destination, out bytesWritten)
-                    : hashAlgorithm == HashAlgorithmName.SHA512
-                        ? SHA512.TryHashData(source, destination, out bytesWritten)
-                        : hashAlgorithm == HashAlgorithmName.SHA384
-                            ? SHA384.TryHashData(source, destination, out bytesWritten)
-                            : hashAlgorithm == HashAlgorithmName.MD5
-                                ? MD5.TryHashData(source, destination, out bytesWritten)
-                                : throw new CryptographicException(
-                                      SR.Cryptography_UnknownHashAlgorithm,
-                                      hashAlgorithm.Name
-                                  );
+            return
+                hashAlgorithm == HashAlgorithmName.SHA256
+              ? SHA256.TryHashData(source, destination, out bytesWritten)
+              : hashAlgorithm == HashAlgorithmName.SHA1
+                  ? SHA1.TryHashData(source, destination, out bytesWritten)
+                  : hashAlgorithm == HashAlgorithmName.SHA512
+                      ? SHA512.TryHashData(source, destination, out bytesWritten)
+                      : hashAlgorithm == HashAlgorithmName.SHA384
+                          ? SHA384.TryHashData(source, destination, out bytesWritten)
+                          : hashAlgorithm == HashAlgorithmName.MD5
+                              ? MD5.TryHashData(source, destination, out bytesWritten)
+                              : throw new CryptographicException(
+                                    SR.Cryptography_UnknownHashAlgorithm,
+                                    hashAlgorithm.Name
+                                );
 #else
             using (HashAlgorithm hasher = GetHashAlgorithm(hashAlgorithm))
             {

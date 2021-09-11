@@ -202,9 +202,10 @@ namespace System.Net
         public static bool IsRestricted(string headerName, bool response)
         {
             headerName = HttpValidationHelpers.CheckBadHeaderNameChars(headerName);
-            return response
-                ? HeaderInfo[headerName].IsResponseRestricted
-                : HeaderInfo[headerName].IsRequestRestricted;
+            return
+                response
+              ? HeaderInfo[headerName].IsResponseRestricted
+              : HeaderInfo[headerName].IsRequestRestricted;
         }
 
         public override string[]? GetValues(int index)

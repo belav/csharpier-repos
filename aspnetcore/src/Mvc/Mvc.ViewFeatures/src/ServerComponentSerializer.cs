@@ -31,9 +31,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 type,
                 parameters
             );
-            return prerendered
-                ? ServerComponentMarker.Prerendered(sequence, serverComponent)
-                : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
+            return
+                prerendered
+              ? ServerComponentMarker.Prerendered(sequence, serverComponent)
+              : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
         }
 
         private (int sequence, string payload) CreateSerializedServerComponent(

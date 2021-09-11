@@ -133,15 +133,16 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             var subPath = outputDir.Substring(_projectDir.Length);
 
-            return !string.IsNullOrWhiteSpace(subPath)
-                ? string.Join(
-                      ".",
-                      subPath.Split(
-                          new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
-                          StringSplitOptions.RemoveEmptyEntries
-                      )
-                  )
-                : null;
+            return
+                !string.IsNullOrWhiteSpace(subPath)
+              ? string.Join(
+                    ".",
+                    subPath.Split(
+                        new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
+              : null;
         }
 
         /// <summary>

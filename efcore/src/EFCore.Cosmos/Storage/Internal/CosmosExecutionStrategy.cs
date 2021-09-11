@@ -110,9 +110,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         protected override TimeSpan? GetNextDelay(Exception lastException)
         {
             var baseDelay = base.GetNextDelay(lastException);
-            return baseDelay == null
-                ? null
-                : CallOnWrappedException(lastException, GetDelayFromException) ?? baseDelay;
+            return
+                baseDelay == null
+              ? null
+              : CallOnWrappedException(lastException, GetDelayFromException) ?? baseDelay;
         }
 
         private static TimeSpan? GetDelayFromException(Exception? exception)

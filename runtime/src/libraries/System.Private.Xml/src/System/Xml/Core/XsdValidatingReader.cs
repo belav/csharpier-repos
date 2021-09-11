@@ -1817,9 +1817,10 @@ namespace System.Xml
         {
             get
             {
-                return (_validationState == ValidatingReaderState.Init)
-                    ? ReadState.Initial
-                    : _coreReader.ReadState;
+                return
+                    (_validationState == ValidatingReaderState.Init)
+                  ? ReadState.Initial
+                  : _coreReader.ReadState;
             }
         }
 
@@ -3208,9 +3209,10 @@ namespace System.Xml
                 XmlSchemaElement? schemaElem = _xmlSchemaInfo.SchemaElement;
                 if (schemaElem != null)
                 {
-                    return (schemaElem.DefaultValue != null)
-                        ? schemaElem.DefaultValue
-                        : schemaElem.FixedValue;
+                    return
+                        (schemaElem.DefaultValue != null)
+                      ? schemaElem.DefaultValue
+                      : schemaElem.FixedValue;
                 }
             }
             else

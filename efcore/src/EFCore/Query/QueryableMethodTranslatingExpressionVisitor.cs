@@ -821,11 +821,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             }
 
-            return _subquery
-                ? QueryCompilationContext.NotTranslatedExpression
-                : throw new InvalidOperationException(
-                      CoreStrings.TranslationFailed(methodCallExpression.Print())
-                  );
+            return
+                _subquery
+              ? QueryCompilationContext.NotTranslatedExpression
+              : throw new InvalidOperationException(
+                    CoreStrings.TranslationFailed(methodCallExpression.Print())
+                );
         }
 
         private sealed class EntityShaperNullableMarkingExpressionVisitor : ExpressionVisitor
@@ -834,9 +835,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is EntityShaperExpression entityShaper
-                    ? entityShaper.MakeNullable()
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is EntityShaperExpression entityShaper
+                  ? entityShaper.MakeNullable()
+                  : base.VisitExtension(extensionExpression);
             }
         }
 
@@ -953,15 +955,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression
-                    is ProjectionBindingExpression projectionBindingExpression
-                    ? new ProjectionBindingExpression(
-                          _queryExpression,
-                          // ProjectionMember would be non-null here as we are shifting members
-                          projectionBindingExpression.ProjectionMember!.Prepend(_memberShift),
-                          projectionBindingExpression.Type
-                      )
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is ProjectionBindingExpression projectionBindingExpression
+                  ? new ProjectionBindingExpression(
+                        _queryExpression,
+                        // ProjectionMember would be non-null here as we are shifting members
+                        projectionBindingExpression.ProjectionMember!.Prepend(_memberShift),
+                        projectionBindingExpression.Type
+                    )
+                  : base.VisitExtension(extensionExpression);
             }
         }
 

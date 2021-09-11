@@ -652,11 +652,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 member = ((MethodSymbol)member).AssociatedSymbol ?? member;
             }
 
-            return member.IsIndexer()
-                ? member.MetadataName
-                : member.IsExplicitInterfaceImplementation()
-                    ? ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name)
-                    : member.Name;
+            return
+                member.IsIndexer()
+              ? member.MetadataName
+              : member.IsExplicitInterfaceImplementation()
+                  ? ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name)
+                  : member.Name;
         }
     }
 }

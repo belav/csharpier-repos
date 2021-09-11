@@ -76,9 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         ) where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
-            return TryGetControllerCommandHandler(args, out var commandHandler)
-                ? commandHandler.GetCommandState(args, nextHandler)
-                : nextHandler();
+            return
+                TryGetControllerCommandHandler(args, out var commandHandler)
+              ? commandHandler.GetCommandState(args, nextHandler)
+              : nextHandler();
         }
 
         private void ExecuteCommandWorker<TCommandArgs>(

@@ -181,17 +181,19 @@ namespace System.IO.Packaging
 
         string? IXmlNamespaceResolver.LookupPrefix(string namespaceName)
         {
-            return (_readerAsResolver == null)
-                ? null
-                : _readerAsResolver.LookupPrefix(namespaceName);
+            return
+                (_readerAsResolver == null)
+              ? null
+              : _readerAsResolver.LookupPrefix(namespaceName);
         }
 
         IDictionary<string, string>? IXmlNamespaceResolver.GetNamespacesInScope(
             XmlNamespaceScope scope
         ) {
-            return (_readerAsResolver == null)
-                ? null
-                : _readerAsResolver.GetNamespacesInScope(scope);
+            return
+                (_readerAsResolver == null)
+              ? null
+              : _readerAsResolver.GetNamespacesInScope(scope);
         }
 
         public override void ResolveEntity()

@@ -1117,12 +1117,13 @@ namespace System.Xml.XmlDiff
         {
             get
             {
-                return (
-                    _currentNode is XmlDiffElement
-                    && ((XmlDiffElement)_currentNode).FirstAttribute != null
-                )
-                    ? true
-                    : false;
+                return
+                    (
+                        _currentNode is XmlDiffElement
+                        && ((XmlDiffElement)_currentNode).FirstAttribute != null
+                    )
+                  ? true
+                  : false;
             }
         }
         public bool HasChildren

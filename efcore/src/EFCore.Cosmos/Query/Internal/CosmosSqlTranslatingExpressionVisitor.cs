@@ -229,15 +229,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 _ => binaryExpression.NodeType
             };
 
-            return TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
-            || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
-                ? null
-                : _sqlExpressionFactory.MakeBinary(
-                      uncheckedNodeTypeVariant,
-                      sqlLeft,
-                      sqlRight,
-                      null
-                  );
+            return
+                TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
+                || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
+              ? null
+              : _sqlExpressionFactory.MakeBinary(uncheckedNodeTypeVariant, sqlLeft, sqlRight, null);
 
             static bool TryUnwrapConvertToObject(Expression expression, out Expression operand)
             {
@@ -272,11 +268,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var ifTrue = Visit(conditionalExpression.IfTrue);
             var ifFalse = Visit(conditionalExpression.IfFalse);
 
-            return TranslationFailed(conditionalExpression.Test, test, out var sqlTest)
-            || TranslationFailed(conditionalExpression.IfTrue, ifTrue, out var sqlIfTrue)
-            || TranslationFailed(conditionalExpression.IfFalse, ifFalse, out var sqlIfFalse)
-                ? null
-                : _sqlExpressionFactory.Condition(sqlTest, sqlIfTrue, sqlIfFalse);
+            return
+                TranslationFailed(conditionalExpression.Test, test, out var sqlTest)
+                || TranslationFailed(conditionalExpression.IfTrue, ifTrue, out var sqlIfTrue)
+                || TranslationFailed(conditionalExpression.IfFalse, ifFalse, out var sqlIfFalse)
+              ? null
+              : _sqlExpressionFactory.Condition(sqlTest, sqlIfTrue, sqlIfFalse);
         }
 
         /// <summary>
@@ -329,11 +326,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     return null;
 
                 case ProjectionBindingExpression projectionBindingExpression:
-                    return projectionBindingExpression.ProjectionMember != null
-                        ? (
-                              (SelectExpression)projectionBindingExpression.QueryExpression
-                          ).GetMappedProjection(projectionBindingExpression.ProjectionMember)
-                        : null;
+                    return
+                        projectionBindingExpression.ProjectionMember != null
+                      ? (
+                            (SelectExpression)projectionBindingExpression.QueryExpression
+                        ).GetMappedProjection(projectionBindingExpression.ProjectionMember)
+                      : null;
 
                 default:
                     return null;
@@ -726,21 +724,22 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     var concreteEntityTypes = derivedType.GetConcreteDerivedTypesInclusive()
                         .ToList();
 
-                    return concreteEntityTypes.Count == 1
-                        ? _sqlExpressionFactory.Equal(
-                              discriminatorColumn,
-                              _sqlExpressionFactory.Constant(
-                                  concreteEntityTypes[0].GetDiscriminatorValue()
-                              )
-                          )
-                        : (SqlExpression)_sqlExpressionFactory.In(
-                              discriminatorColumn,
-                              _sqlExpressionFactory.Constant(
-                                  concreteEntityTypes.Select(et => et.GetDiscriminatorValue())
-                                      .ToList()
-                              ),
-                              negated: false
-                          );
+                    return
+                        concreteEntityTypes.Count == 1
+                      ? _sqlExpressionFactory.Equal(
+                            discriminatorColumn,
+                            _sqlExpressionFactory.Constant(
+                                concreteEntityTypes[0].GetDiscriminatorValue()
+                            )
+                        )
+                      : (SqlExpression)_sqlExpressionFactory.In(
+                            discriminatorColumn,
+                            _sqlExpressionFactory.Constant(
+                                concreteEntityTypes.Select(et => et.GetDiscriminatorValue())
+                                    .ToList()
+                            ),
+                            negated: false
+                        );
                 }
             }
 
@@ -1082,9 +1081,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IProperty property
         ) {
             var baseParameter = context.ParameterValues[baseParameterName];
-            return baseParameter == null
-                ? (T)(object)null
-                : (T)property.GetGetter().GetClrValue(baseParameter);
+            return
+                baseParameter == null
+              ? (T)(object)null
+              : (T)property.GetGetter().GetClrValue(baseParameter);
         }
 
         private static List<TProperty> ParameterListValueExtractor<TEntity, TProperty>(
@@ -1192,10 +1192,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             public Expression Convert(Type type)
             {
-                return type == typeof(object) // Ignore object conversion
-                || type.IsAssignableFrom(Type) // Ignore conversion to base/interface
-                    ? this
-                    : new EntityReferenceExpression(ParameterEntity, type);
+                return
+                    type == typeof(object) // Ignore object conversion
+                    || type.IsAssignableFrom(Type) // Ignore conversion to base/interface
+                  ? this
+                  : new EntityReferenceExpression(ParameterEntity, type);
             }
         }
 

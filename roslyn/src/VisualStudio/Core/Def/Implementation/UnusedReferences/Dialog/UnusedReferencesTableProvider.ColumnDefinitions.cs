@@ -151,12 +151,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
-                return entry.TryGetValue(
-                    UnusedReferencesTableKeyNames.SolutionName,
-                    out string name
-                )
-                    ? new ImageEntryBucket(KnownMonikers.Solution, name)
-                    : null;
+                return
+                    entry.TryGetValue(UnusedReferencesTableKeyNames.SolutionName, out string name)
+                  ? new ImageEntryBucket(KnownMonikers.Solution, name)
+                  : null;
             }
         }
 
@@ -196,20 +194,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
-                return entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out string name)
-                    ? new ImageEntryBucket(GetImageMoniker(entry), name)
-                    : null;
+                return
+                    entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out string name)
+                  ? new ImageEntryBucket(GetImageMoniker(entry), name)
+                  : null;
             }
 
             private static ImageMoniker GetImageMoniker(ITableEntryHandle entry)
             {
-                return entry.TryGetValue(
-                    UnusedReferencesTableKeyNames.Language,
-                    out string languageName
-                )
-                && languageName == LanguageNames.VisualBasic
-                    ? KnownMonikers.VBProjectNode
-                    : KnownMonikers.CSProjectNode;
+                return
+                    entry.TryGetValue(
+                        UnusedReferencesTableKeyNames.Language,
+                        out string languageName
+                    )
+                    && languageName == LanguageNames.VisualBasic
+                  ? KnownMonikers.VBProjectNode
+                  : KnownMonikers.CSProjectNode;
             }
         }
 
@@ -263,15 +263,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
-                return entry.TryGetValue<ReferenceType>(
-                    UnusedReferencesTableKeyNames.ReferenceType,
-                    out var referenceType
-                )
-                    ? new ImageEntryBucket(
-                          GetReferenceTypeImageMoniker(referenceType),
-                          GetText(referenceType)
-                      )
-                    : null;
+                return
+                    entry.TryGetValue<ReferenceType>(
+                        UnusedReferencesTableKeyNames.ReferenceType,
+                        out var referenceType
+                    )
+                  ? new ImageEntryBucket(
+                        GetReferenceTypeImageMoniker(referenceType),
+                        GetText(referenceType)
+                    )
+                  : null;
             }
 
             private static string GetText(ReferenceType referenceType)
@@ -319,22 +320,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             private static ImageMoniker GetImageMoniker(ITableEntryHandle entry)
             {
-                return entry.TryGetValue(
-                    UnusedReferencesTableKeyNames.ReferenceType,
-                    out ReferenceType referenceType
-                )
-                    ? GetReferenceTypeImageMoniker(referenceType)
-                    : default;
+                return
+                    entry.TryGetValue(
+                        UnusedReferencesTableKeyNames.ReferenceType,
+                        out ReferenceType referenceType
+                    )
+                  ? GetReferenceTypeImageMoniker(referenceType)
+                  : default;
             }
 
             private static string GetText(ITableEntryHandle entry)
             {
-                return entry.TryGetValue(
-                    UnusedReferencesTableKeyNames.ReferenceName,
-                    out string text
-                )
-                    ? text
-                    : string.Empty;
+                return
+                    entry.TryGetValue(UnusedReferencesTableKeyNames.ReferenceName, out string text)
+                  ? text
+                  : string.Empty;
             }
         }
 

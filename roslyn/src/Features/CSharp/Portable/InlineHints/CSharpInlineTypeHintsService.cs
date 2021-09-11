@@ -80,19 +80,20 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     var type = local?.Type;
                     if (IsValidType(type))
                     {
-                        return node.Parent is VarPatternSyntax varPattern
-                            ? CreateTypeHint(
-                                  type,
-                                  displayAllOverride,
-                                  forImplicitVariableTypes,
-                                  varPattern.VarKeyword,
-                                  variableDesignation.Identifier
-                              )
-                            : new(
-                                  type,
-                                  new TextSpan(variableDesignation.Identifier.SpanStart, 0),
-                                  trailingSpace: true
-                              );
+                        return
+                            node.Parent is VarPatternSyntax varPattern
+                          ? CreateTypeHint(
+                                type,
+                                displayAllOverride,
+                                forImplicitVariableTypes,
+                                varPattern.VarKeyword,
+                                variableDesignation.Identifier
+                            )
+                          : new(
+                                type,
+                                new TextSpan(variableDesignation.Identifier.SpanStart, 0),
+                                trailingSpace: true
+                            );
                     }
                 }
                 else if (node is ForEachStatementSyntax { Type: { IsVar: true } } forEachStatement)

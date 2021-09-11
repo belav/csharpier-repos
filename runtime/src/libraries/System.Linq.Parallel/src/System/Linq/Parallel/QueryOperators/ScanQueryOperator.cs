@@ -101,9 +101,10 @@ namespace System.Linq.Parallel
         {
             get
             {
-                return _data is IList<TElement>
-                    ? OrdinalIndexState.Indexable
-                    : OrdinalIndexState.Correct;
+                return
+                    _data is IList<TElement>
+                  ? OrdinalIndexState.Indexable
+                  : OrdinalIndexState.Correct;
             }
         }
 

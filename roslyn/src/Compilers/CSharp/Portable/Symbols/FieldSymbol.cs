@@ -315,9 +315,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.ContainingSymbol.OriginalDefinition
                 )
             );
-            return newOwner.IsDefinition
-                ? this
-                : new SubstitutedFieldSymbol(newOwner as SubstitutedNamedTypeSymbol, this);
+            return
+                newOwner.IsDefinition
+              ? this
+              : new SubstitutedFieldSymbol(newOwner as SubstitutedNamedTypeSymbol, this);
         }
 
         #region Use-Site Diagnostics

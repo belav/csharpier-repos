@@ -382,9 +382,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // Fewer modopts wins.
             if (mpwi1.MethProp().modOptCount != mpwi2.MethProp().modOptCount)
             {
-                return mpwi1.MethProp().modOptCount < mpwi2.MethProp().modOptCount
-                    ? BetterType.Left
-                    : BetterType.Right;
+                return
+                    mpwi1.MethProp().modOptCount < mpwi2.MethProp().modOptCount
+                  ? BetterType.Left
+                  : BetterType.Right;
             }
 
             // Bona-fide tie.

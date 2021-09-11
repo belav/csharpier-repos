@@ -1818,9 +1818,10 @@ End Class
         {
             string fileName = language == LanguageNames.CSharp ? "Test.cs" : "Test.vb";
 
-            return language == LanguageNames.CSharp
-                ? CSharpSyntaxTree.ParseText(source, path: fileName)
-                : VisualBasicSyntaxTree.ParseText(source, path: fileName);
+            return
+                language == LanguageNames.CSharp
+              ? CSharpSyntaxTree.ParseText(source, path: fileName)
+              : VisualBasicSyntaxTree.ParseText(source, path: fileName);
         }
     }
 }

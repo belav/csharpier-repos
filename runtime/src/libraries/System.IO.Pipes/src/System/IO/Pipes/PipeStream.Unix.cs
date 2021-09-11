@@ -567,9 +567,10 @@ namespace System.IO.Pipes
 
             // If we have a handle, get the capacity of the pipe (there's no distinction between in/out direction).
             // If we don't, just return the buffer size that was passed to the constructor.
-            return _handle != null
-                ? CheckPipeCall(Interop.Sys.Fcntl.GetPipeSz(_handle))
-                : (int)_outBufferSize;
+            return
+                _handle != null
+              ? CheckPipeCall(Interop.Sys.Fcntl.GetPipeSz(_handle))
+              : (int)_outBufferSize;
         }
 
         internal static void ConfigureSocket(
@@ -612,14 +613,15 @@ namespace System.IO.Pipes
         internal static Exception CreateExceptionForLastError(string? pipeName = null)
         {
             Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
-            return error.Error == Interop.Error.ENOTSUP
-                ? new PlatformNotSupportedException(
-                      SR.Format(
-                          SR.PlatformNotSupported_OperatingSystemError,
-                          nameof(Interop.Error.ENOTSUP)
-                      )
-                  )
-                : Interop.GetExceptionForIoErrno(error, pipeName);
+            return
+                error.Error == Interop.Error.ENOTSUP
+              ? new PlatformNotSupportedException(
+                    SR.Format(
+                        SR.PlatformNotSupported_OperatingSystemError,
+                        nameof(Interop.Error.ENOTSUP)
+                    )
+                )
+              : Interop.GetExceptionForIoErrno(error, pipeName);
         }
     }
 }

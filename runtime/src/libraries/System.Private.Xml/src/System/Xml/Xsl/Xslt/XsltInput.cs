@@ -61,9 +61,10 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                return _nodeType == XmlNodeType.Element && 0 < _currentRecord
-                    ? XmlNodeType.Attribute
-                    : _nodeType;
+                return
+                    _nodeType == XmlNodeType.Element && 0 < _currentRecord
+                  ? XmlNodeType.Attribute
+                  : _nodeType;
             }
         }
         public string LocalName
@@ -797,9 +798,10 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                return _scopeManager.ForwardCompatibility
-                    ? XslVersion.ForwardsCompatible
-                    : XslVersion.Current;
+                return
+                    _scopeManager.ForwardCompatibility
+                  ? XslVersion.ForwardsCompatible
+                  : XslVersion.Current;
             }
         }
 

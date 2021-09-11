@@ -263,9 +263,10 @@ namespace Microsoft.AspNetCore.Components
             // the synchronous part of OnParametersSetAsync has run.
             StateHasChanged();
 
-            return shouldAwaitTask
-                ? CallStateHasChangedOnAsyncCompletion(task)
-                : Task.CompletedTask;
+            return
+                shouldAwaitTask
+              ? CallStateHasChangedOnAsyncCompletion(task)
+              : Task.CompletedTask;
         }
 
         private async Task CallStateHasChangedOnAsyncCompletion(Task task)
@@ -299,9 +300,10 @@ namespace Microsoft.AspNetCore.Components
             // at the end of every event callback.
             StateHasChanged();
 
-            return shouldAwaitTask
-                ? CallStateHasChangedOnAsyncCompletion(task)
-                : Task.CompletedTask;
+            return
+                shouldAwaitTask
+              ? CallStateHasChangedOnAsyncCompletion(task)
+              : Task.CompletedTask;
         }
 
         Task IHandleAfterRender.OnAfterRenderAsync()

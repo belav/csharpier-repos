@@ -149,9 +149,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 _projectPathToProjectIdsMap.Add(projectPath, projectIds);
             }
 
-            return projectIds.Count == 1
-                ? projectIds.Single()
-                : CreateProjectId(projectPath, outputFilePath: null, outputRefFilePath: null);
+            return
+                projectIds.Count == 1
+              ? projectIds.Single()
+              : CreateProjectId(projectPath, outputFilePath: null, outputRefFilePath: null);
         }
 
         internal ProjectId GetOrCreateProjectId(ProjectFileInfo projectFileInfo)

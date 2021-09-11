@@ -95,27 +95,21 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 var separated = this.SlotCount > 1 && HasNodeTokenPattern();
                 if (parent != null && parent.ShouldCreateWeakList())
                 {
-                    return separated
-                        ? new Syntax.SyntaxList.SeparatedWithManyWeakChildren(
-                              this,
-                              parent,
-                              position
-                          )
-                        : (SyntaxNode)new Syntax.SyntaxList.WithManyWeakChildren(
-                              this,
-                              parent,
-                              position
-                          );
+                    return
+                        separated
+                      ? new Syntax.SyntaxList.SeparatedWithManyWeakChildren(this, parent, position)
+                      : (SyntaxNode)new Syntax.SyntaxList.WithManyWeakChildren(
+                            this,
+                            parent,
+                            position
+                        );
                 }
                 else
                 {
-                    return separated
-                        ? new Syntax.SyntaxList.SeparatedWithManyChildren(this, parent, position)
-                        : (SyntaxNode)new Syntax.SyntaxList.WithManyChildren(
-                              this,
-                              parent,
-                              position
-                          );
+                    return
+                        separated
+                      ? new Syntax.SyntaxList.SeparatedWithManyChildren(this, parent, position)
+                      : (SyntaxNode)new Syntax.SyntaxList.WithManyChildren(this, parent, position);
                 }
             }
 

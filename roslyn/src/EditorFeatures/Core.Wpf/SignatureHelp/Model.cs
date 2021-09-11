@@ -62,38 +62,40 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
         public Model WithSelectedItem(SignatureHelpItem selectedItem, bool userSelected)
         {
-            return selectedItem == this.SelectedItem && userSelected == this.UserSelected
-                ? this
-                : new Model(
-                      _disconnectedBufferGraph,
-                      TextSpan,
-                      Provider,
-                      Items,
-                      selectedItem,
-                      ArgumentIndex,
-                      ArgumentCount,
-                      ArgumentName,
-                      SelectedParameter,
-                      userSelected
-                  );
+            return
+                selectedItem == this.SelectedItem && userSelected == this.UserSelected
+              ? this
+              : new Model(
+                    _disconnectedBufferGraph,
+                    TextSpan,
+                    Provider,
+                    Items,
+                    selectedItem,
+                    ArgumentIndex,
+                    ArgumentCount,
+                    ArgumentName,
+                    SelectedParameter,
+                    userSelected
+                );
         }
 
         public Model WithSelectedParameter(int? selectedParameter)
         {
-            return selectedParameter == this.SelectedParameter
-                ? this
-                : new Model(
-                      _disconnectedBufferGraph,
-                      TextSpan,
-                      Provider,
-                      Items,
-                      SelectedItem,
-                      ArgumentIndex,
-                      ArgumentCount,
-                      ArgumentName,
-                      selectedParameter,
-                      UserSelected
-                  );
+            return
+                selectedParameter == this.SelectedParameter
+              ? this
+              : new Model(
+                    _disconnectedBufferGraph,
+                    TextSpan,
+                    Provider,
+                    Items,
+                    SelectedItem,
+                    ArgumentIndex,
+                    ArgumentCount,
+                    ArgumentName,
+                    selectedParameter,
+                    UserSelected
+                );
         }
 
         public SnapshotSpan GetCurrentSpanInSubjectBuffer(ITextSnapshot bufferSnapshot)

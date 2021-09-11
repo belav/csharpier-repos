@@ -87,13 +87,14 @@ namespace System.Threading.Tasks.Sources
         public ValueTaskSourceStatus GetStatus(short token)
         {
             ValidateToken(token);
-            return _continuation == null || !_completed
-                ? ValueTaskSourceStatus.Pending
-                : _error == null
-                    ? ValueTaskSourceStatus.Succeeded
-                    : _error.SourceException is OperationCanceledException
-                        ? ValueTaskSourceStatus.Canceled
-                        : ValueTaskSourceStatus.Faulted;
+            return
+                _continuation == null || !_completed
+              ? ValueTaskSourceStatus.Pending
+              : _error == null
+                  ? ValueTaskSourceStatus.Succeeded
+                  : _error.SourceException is OperationCanceledException
+                      ? ValueTaskSourceStatus.Canceled
+                      : ValueTaskSourceStatus.Faulted;
         }
 
         /// <summary>Gets the result of the operation.</summary>

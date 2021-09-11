@@ -34,9 +34,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
         public static string GetMemberNavInfoNameOrEmpty(this ISymbol memberSymbol)
         {
-            return memberSymbol != null
-                ? memberSymbol.ToDisplayString(s_memberDisplayFormat)
-                : string.Empty;
+            return
+                memberSymbol != null
+              ? memberSymbol.ToDisplayString(s_memberDisplayFormat)
+              : string.Empty;
         }
 
         public static string GetNamespaceNavInfoNameOrEmpty(this INamespaceSymbol namespaceSymbol)
@@ -46,16 +47,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 return string.Empty;
             }
 
-            return !namespaceSymbol.IsGlobalNamespace
-                ? namespaceSymbol.ToDisplayString()
-                : string.Empty;
+            return
+                !namespaceSymbol.IsGlobalNamespace
+              ? namespaceSymbol.ToDisplayString()
+              : string.Empty;
         }
 
         public static string GetTypeNavInfoNameOrEmpty(this ITypeSymbol typeSymbol)
         {
-            return typeSymbol != null
-                ? typeSymbol.ToDisplayString(s_typeDisplayFormat)
-                : string.Empty;
+            return
+                typeSymbol != null
+              ? typeSymbol.ToDisplayString(s_typeDisplayFormat)
+              : string.Empty;
         }
 
         public static string GetProjectDisplayName(this Project project)

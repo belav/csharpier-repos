@@ -223,9 +223,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlNamespaceSource namespaces,
             CursorFlags flags
         ) {
-            return flags.SupportsMutation()
-                ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
-                : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);
+            return
+                flags.SupportsMutation()
+              ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
+              : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);
         }
 
         public virtual object Evaluate(CompiledXPath path)

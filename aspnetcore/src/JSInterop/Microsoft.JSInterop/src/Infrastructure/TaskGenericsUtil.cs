@@ -36,11 +36,12 @@ namespace Microsoft.JSInterop.Infrastructure
                 taskInstanceType =>
                 {
                     var resultType = GetTaskResultType(taskInstanceType);
-                    return resultType == null
-                        ? new VoidTaskResultGetter()
-                        : (ITaskResultGetter)Activator.CreateInstance(
-                              typeof(TaskResultGetter<>).MakeGenericType(resultType)
-                          )!;
+                    return
+                        resultType == null
+                      ? new VoidTaskResultGetter()
+                      : (ITaskResultGetter)Activator.CreateInstance(
+                            typeof(TaskResultGetter<>).MakeGenericType(resultType)
+                        )!;
                 }
             );
             return getter.GetResult(task);

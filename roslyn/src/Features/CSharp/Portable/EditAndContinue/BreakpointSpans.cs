@@ -159,9 +159,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
                     var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return (methodDeclaration.Body != null)
-                        ? CreateSpanForBlock(methodDeclaration.Body, position)
-                        : methodDeclaration.ExpressionBody?.Expression.Span;
+                    return
+                        (methodDeclaration.Body != null)
+                      ? CreateSpanForBlock(methodDeclaration.Body, position)
+                      : methodDeclaration.ExpressionBody?.Expression.Span;
 
                 case SyntaxKind.ConstructorDeclaration:
                     return CreateSpanForConstructorDeclaration((ConstructorDeclarationSyntax)node);
@@ -201,9 +202,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.CasePatternSwitchLabel:
                     var caseClause = (CasePatternSwitchLabelSyntax)node;
-                    return caseClause.WhenClause == null
-                        ? TryCreateSpanForSwitchLabel((SwitchLabelSyntax)node, position)
-                        : CreateSpan(caseClause.WhenClause);
+                    return
+                        caseClause.WhenClause == null
+                      ? TryCreateSpanForSwitchLabel((SwitchLabelSyntax)node, position)
+                      : CreateSpan(caseClause.WhenClause);
 
                 case SyntaxKind.SwitchExpressionArm:
                     var switchArm = (SwitchExpressionArmSyntax)node;
@@ -288,9 +290,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     // event Action P { add [|{|] ... } remove { ... } }
                     // event Action P { [|add;|] [|remove;|] }
                     var @event = (EventDeclarationSyntax)node;
-                    return @event.AccessorList != null
-                        ? CreateSpanForAccessors(@event.AccessorList.Accessors, position)
-                        : null;
+                    return
+                        @event.AccessorList != null
+                      ? CreateSpanForAccessors(@event.AccessorList.Accessors, position)
+                      : null;
 
                 case SyntaxKind.BaseConstructorInitializer:
                 case SyntaxKind.ThisConstructorInitializer:
@@ -320,9 +323,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.OrderByClause:
                     var orderByClause = (OrderByClauseSyntax)node;
-                    return orderByClause.Orderings.Count > 0
-                        ? TryCreateSpanForNode(orderByClause.Orderings.First().Expression, position)
-                        : null;
+                    return
+                        orderByClause.Orderings.Count > 0
+                      ? TryCreateSpanForNode(orderByClause.Orderings.First().Expression, position)
+                      : null;
 
                 case SyntaxKind.SelectClause:
                     var selectClause = (SelectClauseSyntax)node;
@@ -334,16 +338,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.LocalFunctionStatement:
                     var localFunction = (LocalFunctionStatementSyntax)node;
-                    return (localFunction.Body != null)
-                        ? TryCreateSpanForNode(localFunction.Body, position)
-                        : TryCreateSpanForNode(localFunction.ExpressionBody.Expression, position);
+                    return
+                        (localFunction.Body != null)
+                      ? TryCreateSpanForNode(localFunction.Body, position)
+                      : TryCreateSpanForNode(localFunction.ExpressionBody.Expression, position);
 
                 default:
                     if (node is ExpressionSyntax expression)
                     {
-                        return IsBreakableExpression(expression)
-                            ? CreateSpan(expression)
-                            : (TextSpan?)null;
+                        return
+                            IsBreakableExpression(expression)
+                          ? CreateSpan(expression)
+                          : (TextSpan?)null;
                     }
 
                     if (node is StatementSyntax statement)

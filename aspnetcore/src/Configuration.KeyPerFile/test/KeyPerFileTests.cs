@@ -436,9 +436,10 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
                 throw new InvalidOperationException("Cannot create stream from directory");
             }
 
-            return _contents == null
-                ? new MemoryStream()
-                : new MemoryStream(Encoding.UTF8.GetBytes(_contents));
+            return
+                _contents == null
+              ? new MemoryStream()
+              : new MemoryStream(Encoding.UTF8.GetBytes(_contents));
         }
     }
 }

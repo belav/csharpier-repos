@@ -1055,9 +1055,10 @@ namespace System.Xml.Serialization
                         values.Add(c[i].Name, ids[i]);
                     }
                     long val = XmlCustomFormatter.ToEnum((string)value, values, em.TypeName, false);
-                    return val != 0
-                        ? XmlCustomFormatter.FromEnum(val, names, ids, mapping.TypeDesc!.FullName)
-                        : null;
+                    return
+                        val != 0
+                      ? XmlCustomFormatter.FromEnum(val, names, ids, mapping.TypeDesc!.FullName)
+                      : null;
                 }
                 else
                 {

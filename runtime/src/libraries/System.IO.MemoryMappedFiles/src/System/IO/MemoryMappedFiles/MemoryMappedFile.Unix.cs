@@ -192,17 +192,18 @@ namespace System.IO.MemoryMappedFiles
         private static FileAccess TranslateProtectionsToFileAccess(
             Interop.Sys.MemoryMappedProtections protections
         ) {
-            return (
-                protections
-                & (
-                    Interop.Sys.MemoryMappedProtections.PROT_READ
-                    | Interop.Sys.MemoryMappedProtections.PROT_WRITE
-                )
-            ) != 0
-                ? FileAccess.ReadWrite
-                : (protections & (Interop.Sys.MemoryMappedProtections.PROT_WRITE)) != 0
-                    ? FileAccess.Write
-                    : FileAccess.Read;
+            return
+                (
+                    protections
+                    & (
+                        Interop.Sys.MemoryMappedProtections.PROT_READ
+                        | Interop.Sys.MemoryMappedProtections.PROT_WRITE
+                    )
+                ) != 0
+              ? FileAccess.ReadWrite
+              : (protections & (Interop.Sys.MemoryMappedProtections.PROT_WRITE)) != 0
+                  ? FileAccess.Write
+                  : FileAccess.Read;
         }
 
         private static FileStream CreateSharedBackingObject(

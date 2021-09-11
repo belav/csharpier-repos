@@ -526,9 +526,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             if (index == 0)
             {
-                return aliasQualifier == null
-                    ? (NameSyntax)namePiece
-                    : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
+                return
+                    aliasQualifier == null
+                  ? (NameSyntax)namePiece
+                  : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
             }
 
             return SyntaxFactory.QualifiedName(
@@ -549,9 +550,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             if (index == 0)
             {
-                return aliasQualifier == null
-                    ? (NameSyntax)namePiece
-                    : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
+                return
+                    aliasQualifier == null
+                  ? (NameSyntax)namePiece
+                  : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
             }
 
             return SyntaxFactory.MemberAccessExpression(

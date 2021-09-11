@@ -1038,9 +1038,10 @@ namespace System.Collections.Immutable
         /// <returns>The immutable sorted set instance.</returns>
         private static ImmutableSortedSet<T> Wrap(Node root, IComparer<T> comparer)
         {
-            return root.IsEmpty
-                ? ImmutableSortedSet<T>.Empty.WithComparer(comparer)
-                : new ImmutableSortedSet<T>(root, comparer);
+            return
+                root.IsEmpty
+              ? ImmutableSortedSet<T>.Empty.WithComparer(comparer)
+              : new ImmutableSortedSet<T>(root, comparer);
         }
 
         /// <summary>

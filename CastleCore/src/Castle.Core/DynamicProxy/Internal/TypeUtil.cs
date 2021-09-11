@@ -253,9 +253,10 @@ namespace Castle.DynamicProxy.Internal
                 // of `type.FullName` and `type.Assembly.FullName`. We can avoid this
                 // overhead by comparing the two properties separately.
                 int result = string.CompareOrdinal(x.FullName, y.FullName);
-                return result != 0
-                    ? result
-                    : string.CompareOrdinal(x.Assembly.FullName, y.Assembly.FullName);
+                return
+                    result != 0
+                  ? result
+                  : string.CompareOrdinal(x.Assembly.FullName, y.Assembly.FullName);
             }
         }
     }

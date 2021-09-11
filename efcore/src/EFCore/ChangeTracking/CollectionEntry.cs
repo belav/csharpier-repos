@@ -262,9 +262,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             EnsureInitialized();
 
-            return IsLoaded
-                ? Task.CompletedTask
-                : TargetLoader.LoadAsync(InternalEntry, cancellationToken);
+            return
+                IsLoaded
+              ? Task.CompletedTask
+              : TargetLoader.LoadAsync(InternalEntry, cancellationToken);
         }
 
         /// <summary>

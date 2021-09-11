@@ -343,22 +343,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var containingType = type.ContainingType;
-            return (object)containingType == null
-                ? IsNonNestedTypeAccessible(
-                      type.ContainingAssembly,
-                      type.DeclaredAccessibility,
-                      within
-                  )
-                : IsMemberAccessible(
-                      containingType,
-                      type.DeclaredAccessibility,
-                      within,
-                      null,
-                      out unused,
-                      compilation,
-                      ref useSiteInfo,
-                      basesBeingResolved
-                  );
+            return
+                (object)containingType == null
+              ? IsNonNestedTypeAccessible(
+                    type.ContainingAssembly,
+                    type.DeclaredAccessibility,
+                    within
+                )
+              : IsMemberAccessible(
+                    containingType,
+                    type.DeclaredAccessibility,
+                    within,
+                    null,
+                    out unused,
+                    compilation,
+                    ref useSiteInfo,
+                    basesBeingResolved
+                );
         }
 
         /// <summary>
@@ -875,9 +876,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static ErrorCode GetProtectedMemberInSealedTypeError(
             NamedTypeSymbol containingType
         ) {
-            return containingType.TypeKind == TypeKind.Struct
-                ? ErrorCode.ERR_ProtectedInStruct
-                : ErrorCode.WRN_ProtectedInSealed;
+            return
+                containingType.TypeKind == TypeKind.Struct
+              ? ErrorCode.ERR_ProtectedInStruct
+              : ErrorCode.WRN_ProtectedInSealed;
         }
     }
 }

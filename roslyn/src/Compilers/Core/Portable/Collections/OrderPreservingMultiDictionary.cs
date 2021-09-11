@@ -127,9 +127,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public Dictionary<K, ValueSet>.Enumerator GetEnumerator()
         {
-            return _dictionary is null
-                ? s_emptyDictionary.GetEnumerator()
-                : _dictionary.GetEnumerator();
+            return
+                _dictionary is null
+              ? s_emptyDictionary.GetEnumerator()
+              : _dictionary.GetEnumerator();
         }
 
         IEnumerator<KeyValuePair<K, ValueSet>> IEnumerable<
@@ -262,9 +263,10 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 Debug.Assert(this.Count >= 1);
                 var arrayBuilder = _value as ArrayBuilder<V>;
-                return arrayBuilder == null
-                    ? EqualityComparer<V>.Default.Equals(item, (V)_value)
-                    : arrayBuilder.Contains(item);
+                return
+                    arrayBuilder == null
+                  ? EqualityComparer<V>.Default.Equals(item, (V)_value)
+                  : arrayBuilder.Contains(item);
             }
 
             internal ImmutableArray<V> Items

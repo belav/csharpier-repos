@@ -414,9 +414,10 @@ namespace Microsoft.CodeAnalysis
         /// </returns>
         IEnumerator<SyntaxNodeOrToken> IEnumerable<SyntaxNodeOrToken>.GetEnumerator()
         {
-            return _node == null
-                ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
-                : this.GetEnumerator();
+            return
+                _node == null
+              ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
+              : this.GetEnumerator();
         }
 
         /// <summary>
@@ -427,9 +428,10 @@ namespace Microsoft.CodeAnalysis
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _node == null
-                ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
-                : this.GetEnumerator();
+            return
+                _node == null
+              ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
+              : this.GetEnumerator();
         }
 
         /// <summary>

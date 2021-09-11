@@ -47,9 +47,10 @@ namespace System.Xml
             get
             {
                 XPathNodeType xnt = _curNode.NodeType;
-                return xnt == XPathNodeType.Element || xnt == XPathNodeType.Root
-                    ? _curNode.InnerText
-                    : _curNode.Value!;
+                return
+                    xnt == XPathNodeType.Element || xnt == XPathNodeType.Root
+                  ? _curNode.InnerText
+                  : _curNode.Value!;
             }
         }
 
@@ -173,9 +174,10 @@ namespace System.Xml
 
             DataDocumentXPathNavigator? otherDataDocXPathNav = other as DataDocumentXPathNavigator;
 
-            return otherDataDocXPathNav == null || otherDataDocXPathNav.Document != _doc
-                ? XmlNodeOrder.Unknown
-                : _curNode.ComparePosition(otherDataDocXPathNav.CurNode);
+            return
+                otherDataDocXPathNav == null || otherDataDocXPathNav.Document != _doc
+              ? XmlNodeOrder.Unknown
+              : _curNode.ComparePosition(otherDataDocXPathNav.CurNode);
         }
     }
 }

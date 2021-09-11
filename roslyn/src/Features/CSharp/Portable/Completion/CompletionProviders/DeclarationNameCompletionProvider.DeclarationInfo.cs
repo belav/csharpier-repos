@@ -698,14 +698,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             private static ImmutableArray<SymbolKindOrTypeKind> GetPossibleLocalDeclarations(
                 DeclarationModifiers modifiers
             ) {
-                return modifiers.IsConst
-                    ? ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
-                    : modifiers.IsAsync || modifiers.IsUnsafe
-                        ? ImmutableArray.Create(new SymbolKindOrTypeKind(MethodKind.LocalFunction))
-                        : ImmutableArray.Create(
-                              new SymbolKindOrTypeKind(SymbolKind.Local),
-                              new SymbolKindOrTypeKind(MethodKind.LocalFunction)
-                          );
+                return
+                    modifiers.IsConst
+                  ? ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
+                  : modifiers.IsAsync || modifiers.IsUnsafe
+                      ? ImmutableArray.Create(new SymbolKindOrTypeKind(MethodKind.LocalFunction))
+                      : ImmutableArray.Create(
+                            new SymbolKindOrTypeKind(SymbolKind.Local),
+                            new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+                        );
             }
 
             private static DeclarationModifiers GetDeclarationModifiers(SyntaxTokenList modifiers)

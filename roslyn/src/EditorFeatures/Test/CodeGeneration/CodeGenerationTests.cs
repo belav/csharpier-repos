@@ -803,12 +803,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             string typeFullName,
             int arrayRank = 0
         ) {
-            return arrayRank == 0
-                ? (ITypeSymbol)compilation.GetTypeByMetadataName(typeFullName)
-                : compilation.CreateArrayTypeSymbol(
-                      compilation.GetTypeByMetadataName(typeFullName),
-                      arrayRank
-                  );
+            return
+                arrayRank == 0
+              ? (ITypeSymbol)compilation.GetTypeByMetadataName(typeFullName)
+              : compilation.CreateArrayTypeSymbol(
+                    compilation.GetTypeByMetadataName(typeFullName),
+                    arrayRank
+                );
         }
 
         internal static ImmutableArray<Func<SemanticModel, IParameterSymbol>> Parameters(
@@ -1158,9 +1159,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             public static string GetLanguage(string input)
             {
-                return ContainsVisualBasicKeywords(input)
-                    ? LanguageNames.VisualBasic
-                    : LanguageNames.CSharp;
+                return
+                    ContainsVisualBasicKeywords(input)
+                  ? LanguageNames.VisualBasic
+                  : LanguageNames.CSharp;
             }
 
             private static bool ContainsVisualBasicKeywords(string input)
@@ -1181,17 +1183,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 ParseOptions parseOptions,
                 CompilationOptions compilationOptions
             ) {
-                return isVisualBasic
-                    ? TestWorkspace.CreateVisualBasic(
-                          file,
-                          (VB.VisualBasicParseOptions)parseOptions,
-                          (VB.VisualBasicCompilationOptions)compilationOptions
-                      )
-                    : TestWorkspace.CreateCSharp(
-                          file,
-                          (CS.CSharpParseOptions)parseOptions,
-                          (CS.CSharpCompilationOptions)compilationOptions
-                      );
+                return
+                    isVisualBasic
+                  ? TestWorkspace.CreateVisualBasic(
+                        file,
+                        (VB.VisualBasicParseOptions)parseOptions,
+                        (VB.VisualBasicCompilationOptions)compilationOptions
+                    )
+                  : TestWorkspace.CreateCSharp(
+                        file,
+                        (CS.CSharpParseOptions)parseOptions,
+                        (CS.CSharpCompilationOptions)compilationOptions
+                    );
             }
         }
     }

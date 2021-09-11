@@ -78,12 +78,13 @@ namespace Roslyn.Test.Utilities
 
         public override string VisualizeLocalType(object type)
         {
-            return (
-                ((type as ISymbolInternal) ?? (type as Cci.IReference)?.GetInternalSymbol())
-                is ISymbolInternal symbol
-            )
-                ? symbol.GetISymbol().ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
-                : type.ToString();
+            return
+                (
+                    ((type as ISymbolInternal) ?? (type as Cci.IReference)?.GetInternalSymbol())
+                    is ISymbolInternal symbol
+                )
+              ? symbol.GetISymbol().ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+              : type.ToString();
         }
 
         /// <summary>

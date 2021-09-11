@@ -1435,13 +1435,14 @@ namespace Microsoft.CodeAnalysis
             ) {
                 // DO NOT expose declaration only compilation to outside since it can be held alive long time, we don't want to create any symbol from the declaration only compilation.
                 var state = this.ReadState();
-                return state.DeclarationOnlyCompilation == null
-                    ? (bool?)null
-                    : state.DeclarationOnlyCompilation.ContainsSymbolsWithName(
-                          name,
-                          filter,
-                          cancellationToken
-                      );
+                return
+                    state.DeclarationOnlyCompilation == null
+                  ? (bool?)null
+                  : state.DeclarationOnlyCompilation.ContainsSymbolsWithName(
+                        name,
+                        filter,
+                        cancellationToken
+                    );
             }
 
             /// <summary>
@@ -1454,13 +1455,14 @@ namespace Microsoft.CodeAnalysis
             ) {
                 // DO NOT expose declaration only compilation to outside since it can be held alive long time, we don't want to create any symbol from the declaration only compilation.
                 var state = this.ReadState();
-                return state.DeclarationOnlyCompilation == null
-                    ? (bool?)null
-                    : state.DeclarationOnlyCompilation.ContainsSymbolsWithName(
-                          predicate,
-                          filter,
-                          cancellationToken
-                      );
+                return
+                    state.DeclarationOnlyCompilation == null
+                  ? (bool?)null
+                  : state.DeclarationOnlyCompilation.ContainsSymbolsWithName(
+                        predicate,
+                        filter,
+                        cancellationToken
+                    );
             }
 
             /// <summary>
@@ -1493,9 +1495,10 @@ namespace Microsoft.CodeAnalysis
 
                 if (state.HasSuccessfullyLoaded.HasValue)
                 {
-                    return state.HasSuccessfullyLoaded.Value
-                        ? SpecializedTasks.True
-                        : SpecializedTasks.False;
+                    return
+                        state.HasSuccessfullyLoaded.Value
+                      ? SpecializedTasks.True
+                      : SpecializedTasks.False;
                 }
                 else
                 {
@@ -1539,9 +1542,10 @@ namespace Microsoft.CodeAnalysis
                 // If we are in FinalState, then we have correctly ran generators and then know the final contents of the
                 // Compilation. The GeneratedDocuments can be filled for intermediate states, but those aren't guaranteed to be
                 // correct and can be re-ran later.
-                return state is FinalState finalState
-                    ? finalState.GeneratedDocuments.GetState(documentId)
-                    : null;
+                return
+                    state is FinalState finalState
+                  ? finalState.GeneratedDocuments.GetState(documentId)
+                  : null;
             }
 
             #region Versions

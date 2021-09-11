@@ -27,9 +27,10 @@ namespace System.Data
                 throw new ArgumentNullException(nameof(destinationType));
             }
 
-            return destinationType == typeof(string)
-                ? Array.Empty<DataColumn>().GetType().Name
-                : base.ConvertTo(context, culture, value, destinationType);
+            return
+                destinationType == typeof(string)
+              ? Array.Empty<DataColumn>().GetType().Name
+              : base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

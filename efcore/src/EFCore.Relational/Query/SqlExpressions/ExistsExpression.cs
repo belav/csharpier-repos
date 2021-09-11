@@ -65,9 +65,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(subquery, nameof(subquery));
 
-            return subquery != Subquery
-                ? new ExistsExpression(subquery, IsNegated, TypeMapping)
-                : this;
+            return
+                subquery != Subquery
+              ? new ExistsExpression(subquery, IsNegated, TypeMapping)
+              : this;
         }
 
         /// <inheritdoc />

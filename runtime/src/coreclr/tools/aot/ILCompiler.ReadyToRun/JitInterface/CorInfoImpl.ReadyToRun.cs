@@ -1353,9 +1353,10 @@ namespace Internal.JitInterface
             ref CORINFO_RESOLVED_TOKEN pResolvedToken,
             bool fThrowing
         ) {
-            return fThrowing
-                ? CorInfoHelpFunc.CORINFO_HELP_CHKCASTANY
-                : CorInfoHelpFunc.CORINFO_HELP_ISINSTANCEOFANY;
+            return
+                fThrowing
+              ? CorInfoHelpFunc.CORINFO_HELP_CHKCASTANY
+              : CorInfoHelpFunc.CORINFO_HELP_ISINSTANCEOFANY;
         }
 
         private CorInfoHelpFunc getNewHelper(

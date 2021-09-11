@@ -315,9 +315,10 @@ namespace System.Net.Http.Headers
         private static string GetSegmentValue(string[] nameValuePair, string defaultValue)
         {
             Contract.Assert(nameValuePair != null);
-            return nameValuePair.Length > 1
-                ? FormattingUtilities.UnquoteToken(nameValuePair[1])
-                : defaultValue;
+            return
+                nameValuePair.Length > 1
+              ? FormattingUtilities.UnquoteToken(nameValuePair[1])
+              : defaultValue;
         }
     }
 }

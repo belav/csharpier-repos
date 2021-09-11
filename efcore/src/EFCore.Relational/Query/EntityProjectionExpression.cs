@@ -98,13 +98,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             var discriminatorExpression = (SqlExpression?)visitor.Visit(DiscriminatorExpression);
             changed |= discriminatorExpression != DiscriminatorExpression;
 
-            return changed
-                ? new EntityProjectionExpression(
-                      EntityType,
-                      propertyExpressionMap,
-                      discriminatorExpression
-                  )
-                : this;
+            return
+                changed
+              ? new EntityProjectionExpression(
+                    EntityType,
+                    propertyExpressionMap,
+                    discriminatorExpression
+                )
+              : this;
         }
 
         /// <summary>
@@ -260,9 +261,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
             }
 
-            return _ownedNavigationMap.TryGetValue(navigation, out var expression)
-                ? expression
-                : null;
+            return
+                _ownedNavigationMap.TryGetValue(navigation, out var expression)
+              ? expression
+              : null;
         }
     }
 }

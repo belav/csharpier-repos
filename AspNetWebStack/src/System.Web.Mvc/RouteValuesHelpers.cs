@@ -10,9 +10,10 @@ namespace System.Web.Mvc
     {
         public static RouteValueDictionary GetRouteValues(RouteValueDictionary routeValues)
         {
-            return (routeValues != null)
-                ? new RouteValueDictionary(routeValues)
-                : new RouteValueDictionary();
+            return
+                (routeValues != null)
+              ? new RouteValueDictionary(routeValues)
+              : new RouteValueDictionary();
         }
 
         public static RouteValueDictionary MergeRouteValues(

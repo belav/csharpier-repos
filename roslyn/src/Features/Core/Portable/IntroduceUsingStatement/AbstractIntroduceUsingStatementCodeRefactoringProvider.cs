@@ -269,13 +269,13 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             var trailingTrivia = node.GetTrailingTrivia();
             var lastIndex = trailingTrivia.Count - 1;
 
-            return lastIndex != -1
-            && syntaxFactsService.IsEndOfLineTrivia(trailingTrivia[lastIndex])
-                ? (
-                      sameLine: trailingTrivia.RemoveAt(lastIndex),
-                      endOfLine: new SyntaxTriviaList(trailingTrivia[lastIndex])
-                  )
-                : (sameLine: trailingTrivia, endOfLine: SyntaxTriviaList.Empty);
+            return
+                lastIndex != -1 && syntaxFactsService.IsEndOfLineTrivia(trailingTrivia[lastIndex])
+              ? (
+                    sameLine: trailingTrivia.RemoveAt(lastIndex),
+                    endOfLine: new SyntaxTriviaList(trailingTrivia[lastIndex])
+                )
+              : (sameLine: trailingTrivia, endOfLine: SyntaxTriviaList.Empty);
         }
 
         private static TStatementSyntax FindSiblingStatementContainingLastUsage(

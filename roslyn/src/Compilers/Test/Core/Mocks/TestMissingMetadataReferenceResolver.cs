@@ -53,9 +53,10 @@ namespace Roslyn.Test.Utilities
                         ? $", {referenceIdentity.Version}"
                         : ""
                 );
-            return _map.TryGetValue(nameAndVersion, out var reference)
-                ? (PortableExecutableReference)reference
-                : null;
+            return
+                _map.TryGetValue(nameAndVersion, out var reference)
+              ? (PortableExecutableReference)reference
+              : null;
         }
 
         public override bool ResolveMissingAssemblies => true;

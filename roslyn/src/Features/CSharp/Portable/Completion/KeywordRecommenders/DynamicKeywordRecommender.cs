@@ -34,9 +34,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) {
-            return IsValidContext(position, context, cancellationToken)
-                ? ImmutableArray.Create(new RecommendedKeyword("dynamic"))
-                : ImmutableArray<RecommendedKeyword>.Empty;
+            return
+                IsValidContext(position, context, cancellationToken)
+              ? ImmutableArray.Create(new RecommendedKeyword("dynamic"))
+              : ImmutableArray<RecommendedKeyword>.Empty;
         }
 
         protected static bool IsDynamicTypeContext(

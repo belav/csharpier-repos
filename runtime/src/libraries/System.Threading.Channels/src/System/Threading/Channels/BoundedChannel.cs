@@ -207,9 +207,10 @@ namespace System.Threading.Channels
                     // There were no items available, so if we're done writing, a read will never be possible.
                     if (parent._doneWriting != null)
                     {
-                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
-                            : default;
+                        return
+                            parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                          ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                          : default;
                     }
 
                     // There were no items available, but there could be in the future, so ensure
@@ -518,9 +519,10 @@ namespace System.Threading.Channels
                     // If we're done writing, no writes will ever succeed.
                     if (parent._doneWriting != null)
                     {
-                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
-                            : default;
+                        return
+                            parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                          ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                          : default;
                     }
 
                     // If there's space to write, a write is possible.

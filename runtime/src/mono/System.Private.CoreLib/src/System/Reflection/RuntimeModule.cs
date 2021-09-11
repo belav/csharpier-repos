@@ -131,9 +131,10 @@ namespace System.Reflection
                 return Array.Empty<FieldInfo>();
 
             Type globalType = GetGlobalType(_impl);
-            return (globalType != null)
-                ? globalType.GetFields(bindingFlags)
-                : Array.Empty<FieldInfo>();
+            return
+                (globalType != null)
+              ? globalType.GetFields(bindingFlags)
+              : Array.Empty<FieldInfo>();
         }
 
         public override int MetadataToken
@@ -175,9 +176,10 @@ namespace System.Reflection
                 return Array.Empty<MethodInfo>();
 
             Type globalType = GetGlobalType(_impl);
-            return (globalType != null)
-                ? globalType.GetMethods(bindingFlags)
-                : Array.Empty<MethodInfo>();
+            return
+                (globalType != null)
+              ? globalType.GetMethods(bindingFlags)
+              : Array.Empty<MethodInfo>();
         }
 
         public override void GetPEKind(

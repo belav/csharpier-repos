@@ -118,15 +118,16 @@ namespace AutoMapper.QueryableExtensions.Impl
                 letPropertyMaps,
                 out var typeMap
             );
-            return letPropertyMaps.Count > 0
-                ? letPropertyMaps.GetSubQueryExpression(
-                      this,
-                      projection,
-                      typeMap,
-                      request,
-                      instanceParameter
-                  )
-                : new QueryExpressions(projection, instanceParameter);
+            return
+                letPropertyMaps.Count > 0
+              ? letPropertyMaps.GetSubQueryExpression(
+                    this,
+                    projection,
+                    typeMap,
+                    request,
+                    instanceParameter
+                )
+              : new QueryExpressions(projection, instanceParameter);
         }
         public Expression CreateInnerProjection(
             in ProjectionRequest request,
@@ -237,9 +238,10 @@ namespace AutoMapper.QueryableExtensions.Impl
                         resolvedSource,
                         letPropertyMaps
                     );
-                    return mappedExpression == null
-                        ? null
-                        : memberMap.ApplyTransformers(mappedExpression);
+                    return
+                        mappedExpression == null
+                      ? null
+                      : memberMap.ApplyTransformers(mappedExpression);
                     Expression ResolveSource()
                     {
                         var customSource = memberMap.IncludedMember?.ProjectToCustomSource;
@@ -287,9 +289,10 @@ namespace AutoMapper.QueryableExtensions.Impl
                             {
                                 return instanceParameter;
                             }
-                            return customSource.IsMemberPath(out _)
-                                ? customSource.ReplaceParameters(instanceParameter)
-                                : letPropertyMaps.GetSubQueryMarker(customSource);
+                            return
+                                customSource.IsMemberPath(out _)
+                              ? customSource.ReplaceParameters(instanceParameter)
+                              : letPropertyMaps.GetSubQueryMarker(customSource);
                         }
                     }
                     IProjectionMapper GetProjectionMapper()
@@ -635,9 +638,10 @@ namespace AutoMapper.QueryableExtensions.Impl
             protected override Expression GetValue(string name)
             {
                 var matchingMember = _parameters.GetType().GetProperty(name);
-                return matchingMember != null
-                    ? Property(Constant(_parameters), matchingMember)
-                    : null;
+                return
+                    matchingMember != null
+                  ? Property(Constant(_parameters), matchingMember)
+                  : null;
             }
         }
         class ConstantExpressionReplacementVisitor : ParameterExpressionVisitor

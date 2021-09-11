@@ -150,10 +150,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     "System.NotImplementedException"
                 );
 
-                return _state.TypeToGenerateIn.TypeKind != TypeKind.Interface
-                && _refKind != RefKind.None
-                    ? ImmutableArray.Create(throwStatement)
-                    : default;
+                return
+                    _state.TypeToGenerateIn.TypeKind != TypeKind.Interface
+                    && _refKind != RefKind.None
+                  ? ImmutableArray.Create(throwStatement)
+                  : default;
             }
 
             private static Accessibility DetermineMaximalAccessibility(State state)

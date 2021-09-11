@@ -128,9 +128,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var entityType = FindEntityType(GetDisplayName(type));
             var result = entityType == null ? Array.Empty<SlimEntityType>() : new[] { entityType };
 
-            return _sharedTypes.TryGetValue(type, out var sharedTypes)
-                ? result.Concat(sharedTypes)
-                : result;
+            return
+                _sharedTypes.TryGetValue(type, out var sharedTypes)
+              ? result.Concat(sharedTypes)
+              : result;
         }
 
         private string GetDisplayName(Type type) =>

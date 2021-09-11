@@ -675,9 +675,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rule.Lines - GetTrailingLinesAtEndOfTrivia1(lineColumnAfterTrivia1)
             );
 
-            return (rule.LineOperation == LineColumnRule.LineOperations.Preserve)
-                ? Math.Max(adjustedRuleLines, existingWhitespaceBetween.Lines)
-                : adjustedRuleLines;
+            return
+                (rule.LineOperation == LineColumnRule.LineOperations.Preserve)
+              ? Math.Max(adjustedRuleLines, existingWhitespaceBetween.Lines)
+              : adjustedRuleLines;
         }
 
         private int GetIndentation()

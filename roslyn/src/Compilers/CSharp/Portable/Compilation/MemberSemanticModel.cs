@@ -1412,9 +1412,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             IOperation? guardedGetIOperation()
             {
                 _nodeMapLock.AssertCanRead();
-                return _guardedIOperationNodeMap.TryGetValue(node, out var operation)
-                    ? operation
-                    : null;
+                return
+                    _guardedIOperationNodeMap.TryGetValue(node, out var operation)
+                  ? operation
+                  : null;
             }
         }
 #nullable disable
@@ -1610,9 +1611,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return default(Optional<object>);
 
             ConstantValue constantValue = boundExpr.ConstantValue;
-            return constantValue == null || constantValue.IsBad
-                ? default(Optional<object>)
-                : new Optional<object>(constantValue.Value);
+            return
+                constantValue == null || constantValue.IsBad
+              ? default(Optional<object>)
+              : new Optional<object>(constantValue.Value);
         }
 
         internal override SymbolInfo GetCollectionInitializerSymbolInfoWorker(
@@ -1820,9 +1822,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(_nodeMapLock.IsWriteLockHeld || _nodeMapLock.IsReadLockHeld);
             ImmutableArray<BoundNode> result;
-            return _guardedBoundNodeMap.TryGetValue(node, out result)
-                ? result
-                : default(ImmutableArray<BoundNode>);
+            return
+                _guardedBoundNodeMap.TryGetValue(node, out result)
+              ? result
+              : default(ImmutableArray<BoundNode>);
         }
 
         /// <summary>
@@ -1831,9 +1834,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal ImmutableArray<BoundNode> TestOnlyTryGetBoundNodesFromMap(CSharpSyntaxNode node)
         {
             ImmutableArray<BoundNode> result;
-            return _guardedBoundNodeMap.TryGetValue(node, out result)
-                ? result
-                : default(ImmutableArray<BoundNode>);
+            return
+                _guardedBoundNodeMap.TryGetValue(node, out result)
+              ? result
+              : default(ImmutableArray<BoundNode>);
         }
 
         // Adds every syntax/bound pair in a tree rooted at the given bound node to the map, and the
@@ -1860,9 +1864,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             ImmutableArray<BoundNode> result;
-            return _guardedBoundNodeMap.TryGetValue(syntax, out result)
-                ? result
-                : default(ImmutableArray<BoundNode>);
+            return
+                _guardedBoundNodeMap.TryGetValue(syntax, out result)
+              ? result
+              : default(ImmutableArray<BoundNode>);
         }
 
         protected void UnguardedAddBoundTreeForStandaloneSyntax(

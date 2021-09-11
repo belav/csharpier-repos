@@ -87,22 +87,21 @@ namespace System.Configuration
                 string file = Filename;
                 if (!string.IsNullOrEmpty(file))
                 {
-                    return Line != 0
-                        ? BareMessage
-                          + " ("
-                          + file
-                          + " line "
-                          + Line.ToString(CultureInfo.InvariantCulture)
-                          + ")"
-                        : BareMessage + " (" + file + ")";
+                    return
+                        Line != 0
+                      ? BareMessage
+                        + " ("
+                        + file
+                        + " line "
+                        + Line.ToString(CultureInfo.InvariantCulture)
+                        + ")"
+                      : BareMessage + " (" + file + ")";
                 }
 
-                return Line != 0
-                    ? BareMessage
-                      + " (line "
-                      + Line.ToString("G", CultureInfo.InvariantCulture)
-                      + ")"
-                    : BareMessage;
+                return
+                    Line != 0
+                  ? BareMessage + " (line " + Line.ToString("G", CultureInfo.InvariantCulture) + ")"
+                  : BareMessage;
             }
         }
 

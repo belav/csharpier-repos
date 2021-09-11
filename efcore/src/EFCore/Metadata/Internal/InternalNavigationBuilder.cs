@@ -126,18 +126,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource
         ) {
             var foreignKey = Metadata.ForeignKey;
-            return foreignKey.IsUnique
-                ? foreignKey.GetPrincipalEndConfigurationSource() == null
-                    ? false
-                    : Metadata.IsOnDependent
-                        ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                        : foreignKey.Builder.CanSetIsRequiredDependent(
-                              required,
-                              configurationSource
-                          )
-                : Metadata.IsOnDependent
-                    ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                    : false;
+            return
+                foreignKey.IsUnique
+              ? foreignKey.GetPrincipalEndConfigurationSource() == null
+                  ? false
+                  : Metadata.IsOnDependent
+                      ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
+                      : foreignKey.Builder.CanSetIsRequiredDependent(required, configurationSource)
+              : Metadata.IsOnDependent
+                  ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
+                  : false;
         }
 
         /// <summary>
@@ -168,15 +166,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         );
                     }
 
-                    return Metadata.IsOnDependent
-                        ? foreignKey.Builder.IsRequired(
-                              required,
-                              configurationSource
-                          )!.Metadata.DependentToPrincipal!.Builder
-                        : foreignKey.Builder.IsRequiredDependent(
-                              required,
-                              configurationSource
-                          )!.Metadata.PrincipalToDependent!.Builder;
+                    return
+                        Metadata.IsOnDependent
+                      ? foreignKey.Builder.IsRequired(
+                            required,
+                            configurationSource
+                        )!.Metadata.DependentToPrincipal!.Builder
+                      : foreignKey.Builder.IsRequiredDependent(
+                            required,
+                            configurationSource
+                        )!.Metadata.PrincipalToDependent!.Builder;
                 }
 
                 if (Metadata.IsOnDependent)

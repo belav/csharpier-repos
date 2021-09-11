@@ -769,9 +769,10 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     else
                     {
                         var statementIndex = blockStatementOpt!.Operations.IndexOf(statement);
-                        return statementIndex > 0
-                            ? blockStatementOpt.Operations[statementIndex - 1].Syntax
-                            : null;
+                        return
+                            statementIndex > 0
+                          ? blockStatementOpt.Operations[statementIndex - 1].Syntax
+                          : null;
                     }
                 }
             }

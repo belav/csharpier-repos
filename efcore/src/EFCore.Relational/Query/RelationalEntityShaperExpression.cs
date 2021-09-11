@@ -192,13 +192,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(entityType, nameof(entityType));
 
-            return entityType != EntityType
-                ? new RelationalEntityShaperExpression(
-                      entityType,
-                      ValueBufferExpression,
-                      IsNullable
-                  )
-                : this;
+            return
+                entityType != EntityType
+              ? new RelationalEntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
+              : this;
         }
 
         /// <inheritdoc />
@@ -208,10 +205,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         public override EntityShaperExpression MakeNullable(bool nullable = true)
         {
-            return IsNullable != nullable
-                // Marking nullable requires recomputation of Discriminator condition
-                ? new RelationalEntityShaperExpression(EntityType, ValueBufferExpression, true)
-                : this;
+            return
+                IsNullable != nullable
+              // Marking nullable requires recomputation of Discriminator condition
+              ? new RelationalEntityShaperExpression(EntityType, ValueBufferExpression, true)
+              : this;
         }
 
         /// <inheritdoc />
@@ -219,14 +217,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
 
-            return valueBufferExpression != ValueBufferExpression
-                ? new RelationalEntityShaperExpression(
-                      EntityType,
-                      valueBufferExpression,
-                      IsNullable,
-                      MaterializationCondition
-                  )
-                : this;
+            return
+                valueBufferExpression != ValueBufferExpression
+              ? new RelationalEntityShaperExpression(
+                    EntityType,
+                    valueBufferExpression,
+                    IsNullable,
+                    MaterializationCondition
+                )
+              : this;
         }
     }
 }

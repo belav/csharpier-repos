@@ -174,10 +174,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         {
             var result = Visit(expression);
 
-            return result == QueryCompilationContext.NotTranslatedExpression
-            || _entityReferenceFindingExpressionVisitor.Find(result)
-                ? null
-                : result;
+            return
+                result == QueryCompilationContext.NotTranslatedExpression
+                || _entityReferenceFindingExpressionVisitor.Find(result)
+              ? null
+              : result;
         }
 
         /// <summary>
@@ -816,9 +817,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                         if (selector == null)
                         {
-                            return groupingElement.Selector is EntityShaperExpression
-                                ? groupingElement.Source
-                                : null;
+                            return
+                                groupingElement.Selector is EntityShaperExpression
+                              ? groupingElement.Source
+                              : null;
                         }
 
                         var result = Expression.Call(
@@ -1461,14 +1463,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 // if the result type change was just nullability change e.g from int to int?
                 // we want to preserve the new type for null propagation
-                return result.Type != type
-                && !(
-                    result.Type.IsNullableType()
-                    && !type.IsNullableType()
-                    && result.Type.UnwrapNullableType() == type
-                )
-                    ? Expression.Convert(result, type)
-                    : (Expression)result;
+                return
+                    result.Type != type
+                    && !(
+                        result.Type.IsNullableType()
+                        && !type.IsNullableType()
+                        && result.Type.UnwrapNullableType() == type
+                    )
+                  ? Expression.Convert(result, type)
+                  : (Expression)result;
             }
 
             if (entityReferenceExpression.SubqueryEntity != null)
@@ -1852,12 +1855,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                           mb => mb.Member.Name == property.Name
                       )
                           is MemberAssignment memberAssignment:
-                    return memberAssignment.Expression.Type.IsNullableType()
-                        ? memberAssignment.Expression
-                        : Expression.Convert(
-                              memberAssignment.Expression,
-                              property.ClrType.MakeNullable()
-                          );
+                    return
+                        memberAssignment.Expression.Type.IsNullableType()
+                      ? memberAssignment.Expression
+                      : Expression.Convert(
+                            memberAssignment.Expression,
+                            property.ClrType.MakeNullable()
+                        );
 
                 case NewExpression newExpression when CanEvaluate(newExpression):
                     return CreatePropertyAccessExpression(GetValue(newExpression), property);
@@ -1877,9 +1881,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             IProperty property
         ) {
             var baseParameter = context.ParameterValues[baseParameterName];
-            return baseParameter == null
-                ? (T?)(object?)null
-                : (T?)property.GetGetter().GetClrValue(baseParameter);
+            return
+                baseParameter == null
+              ? (T?)(object?)null
+              : (T?)property.GetGetter().GetClrValue(baseParameter);
         }
 
         private static List<TProperty?>? ParameterListValueExtractor<TEntity, TProperty>(
@@ -2141,9 +2146,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 var derivedEntityType = EntityType.GetDerivedTypes()
                     .FirstOrDefault(et => et.ClrType == type);
 
-                return derivedEntityType == null
-                    ? QueryCompilationContext.NotTranslatedExpression
-                    : new EntityReferenceExpression(this, derivedEntityType);
+                return
+                    derivedEntityType == null
+                  ? QueryCompilationContext.NotTranslatedExpression
+                  : new EntityReferenceExpression(this, derivedEntityType);
             }
         }
 

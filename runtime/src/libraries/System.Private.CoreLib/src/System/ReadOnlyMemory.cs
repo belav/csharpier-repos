@@ -413,9 +413,10 @@ namespace System
         {
             // We use RuntimeHelpers.GetHashCode instead of Object.GetHashCode because the hash
             // code is based on object identity and referential equality, not deep equality (as common with string).
-            return (_object != null)
-                ? HashCode.Combine(RuntimeHelpers.GetHashCode(_object), _index, _length)
-                : 0;
+            return
+                (_object != null)
+              ? HashCode.Combine(RuntimeHelpers.GetHashCode(_object), _index, _length)
+              : 0;
         }
 
         /// <summary>Gets the state of the memory as individual fields.</summary>

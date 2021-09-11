@@ -38,9 +38,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
                 return false;
             }
 
-            return ReferenceEquals(this, obj)
-                ? true
-                : obj.GetType() == GetType() && Equals((Level4)obj);
+            return
+                ReferenceEquals(this, obj)
+              ? true
+              : obj.GetType() == GetType() && Equals((Level4)obj);
         }
 
         protected bool Equals(Level4 other)

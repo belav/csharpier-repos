@@ -38,31 +38,33 @@ namespace System.Buffers.Text
                         value <= (long)Utf8Constants.BillionMaxUIntValue
                         && value >= -(long)Utf8Constants.BillionMaxUIntValue
                     ) {
-                        return value < 0
-                            ? TryFormatInt64MoreThanNegativeBillionMaxUInt(
-                                  -value,
-                                  destination,
-                                  out bytesWritten
-                              )
-                            : TryFormatUInt64LessThanBillionMaxUInt(
-                                  (ulong)value,
-                                  destination,
-                                  out bytesWritten
-                              );
+                        return
+                            value < 0
+                          ? TryFormatInt64MoreThanNegativeBillionMaxUInt(
+                                -value,
+                                destination,
+                                out bytesWritten
+                            )
+                          : TryFormatUInt64LessThanBillionMaxUInt(
+                                (ulong)value,
+                                destination,
+                                out bytesWritten
+                            );
                     }
                     else
                     {
-                        return value < 0
-                            ? TryFormatInt64LessThanNegativeBillionMaxUInt(
-                                  -value,
-                                  destination,
-                                  out bytesWritten
-                              )
-                            : TryFormatUInt64MoreThanBillionMaxUInt(
-                                  (ulong)value,
-                                  destination,
-                                  out bytesWritten
-                              );
+                        return
+                            value < 0
+                          ? TryFormatInt64LessThanNegativeBillionMaxUInt(
+                                -value,
+                                destination,
+                                out bytesWritten
+                            )
+                          : TryFormatUInt64MoreThanBillionMaxUInt(
+                                (ulong)value,
+                                destination,
+                                out bytesWritten
+                            );
                     }
                 }
             }

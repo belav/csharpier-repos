@@ -152,10 +152,11 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 )
                 .ConfigureAwait(false);
 
-            return !formattedSourceText.ContentEquals(originalSourceText)
-            || !formattedSourceText.Encoding?.Equals(originalSourceText.Encoding) == true
-                ? (originalSourceText, formattedSourceText)
-                : (originalSourceText, null);
+            return
+                !formattedSourceText.ContentEquals(originalSourceText)
+                || !formattedSourceText.Encoding?.Equals(originalSourceText.Encoding) == true
+              ? (originalSourceText, formattedSourceText)
+              : (originalSourceText, null);
         }
 
         /// <summary>

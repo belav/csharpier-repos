@@ -521,12 +521,13 @@ namespace System
                     false,
                     out succeeded
                 );
-                return succeeded
-                    ? ColorAttributeToConsoleColor(
-                          (Interop.Kernel32.Color)csbi.wAttributes
-                              & Interop.Kernel32.Color.BackgroundMask
-                      )
-                    : ConsoleColor.Black; // for code that may be used from Windows app w/ no console
+                return
+                    succeeded
+                  ? ColorAttributeToConsoleColor(
+                        (Interop.Kernel32.Color)csbi.wAttributes
+                            & Interop.Kernel32.Color.BackgroundMask
+                    )
+                  : ConsoleColor.Black; // for code that may be used from Windows app w/ no console
             }
             set
             {
@@ -567,12 +568,13 @@ namespace System
                 );
 
                 // For code that may be used from Windows app w/ no console
-                return succeeded
-                    ? ColorAttributeToConsoleColor(
-                          (Interop.Kernel32.Color)csbi.wAttributes
-                              & Interop.Kernel32.Color.ForegroundMask
-                      )
-                    : ConsoleColor.Gray;
+                return
+                    succeeded
+                  ? ColorAttributeToConsoleColor(
+                        (Interop.Kernel32.Color)csbi.wAttributes
+                            & Interop.Kernel32.Color.ForegroundMask
+                    )
+                  : ConsoleColor.Gray;
             }
             set
             {

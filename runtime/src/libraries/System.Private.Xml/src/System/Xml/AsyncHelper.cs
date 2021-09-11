@@ -76,9 +76,10 @@ namespace System.Xml
             Func<TArg, Task<bool>> func,
             TArg arg
         ) {
-            return task.IsSuccess()
-                ? func(arg)
-                : CallBoolTaskFuncWhenFinishCoreAsync(task, func, arg);
+            return
+                task.IsSuccess()
+              ? func(arg)
+              : CallBoolTaskFuncWhenFinishCoreAsync(task, func, arg);
         }
 
         private static async Task<bool> CallBoolTaskFuncWhenFinishCoreAsync<TArg>(

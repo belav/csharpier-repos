@@ -266,9 +266,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 return HttpProtocols.Http1;
             }
 
-            return http2Enabled && (!hasTls || Http2Id.SequenceEqual(applicationProtocol.Span))
-                ? HttpProtocols.Http2
-                : HttpProtocols.Http1;
+            return
+                http2Enabled && (!hasTls || Http2Id.SequenceEqual(applicationProtocol.Span))
+              ? HttpProtocols.Http2
+              : HttpProtocols.Http1;
         }
 
         private void Tick()

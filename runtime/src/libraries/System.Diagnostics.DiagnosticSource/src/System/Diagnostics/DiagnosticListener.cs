@@ -122,15 +122,16 @@ namespace System.Diagnostics
             IObserver<KeyValuePair<string, object?>> observer,
             Func<string, object?, object?, bool>? isEnabled
         ) {
-            return isEnabled == null
-                ? SubscribeInternal(observer, null, null, null, null)
-                : SubscribeInternal(
-                      observer,
-                      name => IsEnabled(name, null, null),
-                      isEnabled,
-                      null,
-                      null
-                  );
+            return
+                isEnabled == null
+              ? SubscribeInternal(observer, null, null, null, null)
+              : SubscribeInternal(
+                    observer,
+                    name => IsEnabled(name, null, null),
+                    isEnabled,
+                    null,
+                    null
+                );
         }
 
         /// <summary>

@@ -927,9 +927,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         {
                             // If we are design-time then we do not want to continue the build at
                             // this time.
-                            return hostObjectSuccessfullyInitialized
-                                ? HostObjectInitializationStatus.NoActionReturnSuccess
-                                : HostObjectInitializationStatus.NoActionReturnFailure;
+                            return
+                                hostObjectSuccessfullyInitialized
+                              ? HostObjectInitializationStatus.NoActionReturnSuccess
+                              : HostObjectInitializationStatus.NoActionReturnFailure;
                         }
 
                         if (!this.HostCompilerSupportsAllParameters)
@@ -959,9 +960,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         // and in that case, we will inform the caller that no further action is necessary.
                         if (hostObjectSuccessfullyInitialized)
                         {
-                            return cscHostObject.IsUpToDate()
-                                ? HostObjectInitializationStatus.NoActionReturnSuccess
-                                : HostObjectInitializationStatus.UseHostObjectToExecute;
+                            return
+                                cscHostObject.IsUpToDate()
+                              ? HostObjectInitializationStatus.NoActionReturnSuccess
+                              : HostObjectInitializationStatus.UseHostObjectToExecute;
                         }
                         else
                         {

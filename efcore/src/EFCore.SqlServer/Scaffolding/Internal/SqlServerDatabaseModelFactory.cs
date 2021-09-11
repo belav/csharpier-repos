@@ -245,19 +245,20 @@ WHERE name = '{connection.Database}';";
 
         private static Func<string, string>? GenerateSchemaFilter(IReadOnlyList<string> schemas)
         {
-            return schemas.Count > 0
-                ? (
-                      s =>
-                      {
-                          var schemaFilterBuilder = new StringBuilder();
-                          schemaFilterBuilder.Append(s);
-                          schemaFilterBuilder.Append(" IN (");
-                          schemaFilterBuilder.AppendJoin(", ", schemas.Select(EscapeLiteral));
-                          schemaFilterBuilder.Append(")");
-                          return schemaFilterBuilder.ToString();
-                      }
-                  )
-                : (Func<string, string>?)null;
+            return
+                schemas.Count > 0
+              ? (
+                    s =>
+                    {
+                        var schemaFilterBuilder = new StringBuilder();
+                        schemaFilterBuilder.Append(s);
+                        schemaFilterBuilder.Append(" IN (");
+                        schemaFilterBuilder.AppendJoin(", ", schemas.Select(EscapeLiteral));
+                        schemaFilterBuilder.Append(")");
+                        return schemaFilterBuilder.ToString();
+                    }
+                )
+              : (Func<string, string>?)null;
         }
 
         private static (string? Schema, string Table) Parse(string table)

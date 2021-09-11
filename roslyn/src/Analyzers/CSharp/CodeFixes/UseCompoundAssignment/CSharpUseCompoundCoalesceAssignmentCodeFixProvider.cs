@@ -98,9 +98,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                             assignment.Right
                         );
 
-                        return type == null || type.IsErrorType()
-                            ? finalAssignment
-                            : generator.CastExpression(type, finalAssignment);
+                        return
+                            type == null || type.IsErrorType()
+                          ? finalAssignment
+                          : generator.CastExpression(type, finalAssignment);
                     }
                 );
             }

@@ -335,21 +335,22 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 }
             }
 
-            return changed
-                ? new SqlFunctionExpression(
-                      instance,
-                      Schema,
-                      Name,
-                      IsNiladic,
-                      arguments,
-                      IsNullable,
-                      InstancePropagatesNullability,
-                      ArgumentsPropagateNullability,
-                      IsBuiltIn,
-                      Type,
-                      TypeMapping
-                  )
-                : this;
+            return
+                changed
+              ? new SqlFunctionExpression(
+                    instance,
+                    Schema,
+                    Name,
+                    IsNiladic,
+                    arguments,
+                    IsNullable,
+                    InstancePropagatesNullability,
+                    ArgumentsPropagateNullability,
+                    IsBuiltIn,
+                    Type,
+                    TypeMapping
+                )
+              : this;
         }
 
         /// <summary>
@@ -383,22 +384,23 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression? instance,
             IReadOnlyList<SqlExpression>? arguments
         ) {
-            return instance != Instance
-            || (arguments != null && Arguments != null && !arguments.SequenceEqual(Arguments))
-                ? new SqlFunctionExpression(
-                      instance,
-                      Schema,
-                      Name,
-                      IsNiladic,
-                      arguments,
-                      IsNullable,
-                      InstancePropagatesNullability,
-                      ArgumentsPropagateNullability,
-                      IsBuiltIn,
-                      Type,
-                      TypeMapping
-                  )
-                : this;
+            return
+                instance != Instance
+                || (arguments != null && Arguments != null && !arguments.SequenceEqual(Arguments))
+              ? new SqlFunctionExpression(
+                    instance,
+                    Schema,
+                    Name,
+                    IsNiladic,
+                    arguments,
+                    IsNullable,
+                    InstancePropagatesNullability,
+                    ArgumentsPropagateNullability,
+                    IsBuiltIn,
+                    Type,
+                    TypeMapping
+                )
+              : this;
         }
 
         /// <inheritdoc />

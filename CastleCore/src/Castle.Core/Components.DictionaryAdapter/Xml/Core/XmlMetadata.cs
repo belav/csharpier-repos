@@ -234,9 +234,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(IXmlIdentity xmlIdentity, out IXmlKnownType knownType)
         {
-            return IsMatch(xmlIdentity)
-                ? Try.Success(out knownType, this)
-                : Try.Failure(out knownType);
+            return
+                IsMatch(xmlIdentity)
+              ? Try.Success(out knownType, this)
+              : Try.Failure(out knownType);
         }
 
         public bool TryGet(Type clrType, out IXmlKnownType knownType)
@@ -246,16 +247,18 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(XmlName xsiType, out IXmlIncludedType includedType)
         {
-            return xsiType == XmlName.Empty || xsiType == this.XsiType
-                ? Try.Success(out includedType, this)
-                : Try.Failure(out includedType);
+            return
+                xsiType == XmlName.Empty || xsiType == this.XsiType
+              ? Try.Success(out includedType, this)
+              : Try.Failure(out includedType);
         }
 
         public bool TryGet(Type clrType, out IXmlIncludedType includedType)
         {
-            return clrType == this.clrType
-                ? Try.Success(out includedType, this)
-                : Try.Failure(out includedType);
+            return
+                clrType == this.clrType
+              ? Try.Success(out includedType, this)
+              : Try.Failure(out includedType);
         }
 
         private void AddPendingInclude(XmlIncludeAttribute attribute)
@@ -348,9 +351,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var kind = XmlTypeSerializer.For(clrType).Kind;
 
-            return kind == XmlTypeKind.Complex && clrType.IsInterface
-                ? Try.Success(out metadata, GetXmlMetadata(clrType))
-                : Try.Failure(out metadata);
+            return
+                kind == XmlTypeKind.Complex && clrType.IsInterface
+              ? Try.Success(out metadata, GetXmlMetadata(clrType))
+              : Try.Failure(out metadata);
         }
 
         private XmlMetadata GetXmlMetadata(Type clrType)

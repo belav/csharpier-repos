@@ -648,31 +648,32 @@ class Test34094
             Console.WriteLine("AVX is not supported");
         }
 
-        return TestSseCompareGreaterThan()
-        & TestSseCompareGreaterThanOrEqual()
-        & TestSseCompareNotGreaterThan()
-        & TestSseCompareNotGreaterThanOrEqual()
-        & TestSseCompareScalarGreaterThan()
-        & TestSseCompareScalarGreaterThanOrEqual()
-        & TestSseCompareScalarNotGreaterThan()
-        & TestSseCompareScalarNotGreaterThanOrEqual()
-        & TestSse2CompareGreaterThan()
-        & TestSse2CompareGreaterThanOrEqual()
-        & TestSse2CompareNotGreaterThan()
-        & TestSse2CompareNotGreaterThanOrEqual()
-        & TestSse2CompareScalarGreaterThan()
-        & TestSse2CompareScalarGreaterThanOrEqual()
-        & TestSse2CompareScalarNotGreaterThan()
-        & TestSse2CompareScalarNotGreaterThanOrEqual()
-        & TestAvxCompareGreaterThanSingle()
-        & TestAvxCompareGreaterThanOrEqualSingle()
-        & TestAvxCompareNotGreaterThanSingle()
-        & TestAvxCompareNotGreaterThanOrEqualSingle()
-        & TestAvxCompareGreaterThanDouble()
-        & TestAvxCompareGreaterThanOrEqualDouble()
-        & TestAvxCompareNotGreaterThanDouble()
-        & TestAvxCompareNotGreaterThanOrEqualDouble()
-            ? 100
-            : 0;
+        return
+            TestSseCompareGreaterThan()
+            & TestSseCompareGreaterThanOrEqual()
+            & TestSseCompareNotGreaterThan()
+            & TestSseCompareNotGreaterThanOrEqual()
+            & TestSseCompareScalarGreaterThan()
+            & TestSseCompareScalarGreaterThanOrEqual()
+            & TestSseCompareScalarNotGreaterThan()
+            & TestSseCompareScalarNotGreaterThanOrEqual()
+            & TestSse2CompareGreaterThan()
+            & TestSse2CompareGreaterThanOrEqual()
+            & TestSse2CompareNotGreaterThan()
+            & TestSse2CompareNotGreaterThanOrEqual()
+            & TestSse2CompareScalarGreaterThan()
+            & TestSse2CompareScalarGreaterThanOrEqual()
+            & TestSse2CompareScalarNotGreaterThan()
+            & TestSse2CompareScalarNotGreaterThanOrEqual()
+            & TestAvxCompareGreaterThanSingle()
+            & TestAvxCompareGreaterThanOrEqualSingle()
+            & TestAvxCompareNotGreaterThanSingle()
+            & TestAvxCompareNotGreaterThanOrEqualSingle()
+            & TestAvxCompareGreaterThanDouble()
+            & TestAvxCompareGreaterThanOrEqualDouble()
+            & TestAvxCompareNotGreaterThanDouble()
+            & TestAvxCompareNotGreaterThanOrEqualDouble()
+          ? 100
+          : 0;
     }
 }

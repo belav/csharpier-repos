@@ -90,17 +90,18 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal DataflowBlockOptions DefaultOrClone()
         {
-            return (this == Default)
-                ? this
-                : new DataflowBlockOptions
-                  {
-                      TaskScheduler = this.TaskScheduler,
-                      CancellationToken = this.CancellationToken,
-                      MaxMessagesPerTask = this.MaxMessagesPerTask,
-                      BoundedCapacity = this.BoundedCapacity,
-                      NameFormat = this.NameFormat,
-                      EnsureOrdered = this.EnsureOrdered
-                  };
+            return
+                (this == Default)
+              ? this
+              : new DataflowBlockOptions
+                {
+                    TaskScheduler = this.TaskScheduler,
+                    CancellationToken = this.CancellationToken,
+                    MaxMessagesPerTask = this.MaxMessagesPerTask,
+                    BoundedCapacity = this.BoundedCapacity,
+                    NameFormat = this.NameFormat,
+                    EnsureOrdered = this.EnsureOrdered
+                };
         }
 
         /// <summary>Initializes the <see cref="DataflowBlockOptions"/>.</summary>
@@ -268,19 +269,20 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal new ExecutionDataflowBlockOptions DefaultOrClone()
         {
-            return (this == Default)
-                ? this
-                : new ExecutionDataflowBlockOptions
-                  {
-                      TaskScheduler = this.TaskScheduler,
-                      CancellationToken = this.CancellationToken,
-                      MaxMessagesPerTask = this.MaxMessagesPerTask,
-                      BoundedCapacity = this.BoundedCapacity,
-                      NameFormat = this.NameFormat,
-                      EnsureOrdered = this.EnsureOrdered,
-                      MaxDegreeOfParallelism = this.MaxDegreeOfParallelism,
-                      SingleProducerConstrained = this.SingleProducerConstrained
-                  };
+            return
+                (this == Default)
+              ? this
+              : new ExecutionDataflowBlockOptions
+                {
+                    TaskScheduler = this.TaskScheduler,
+                    CancellationToken = this.CancellationToken,
+                    MaxMessagesPerTask = this.MaxMessagesPerTask,
+                    BoundedCapacity = this.BoundedCapacity,
+                    NameFormat = this.NameFormat,
+                    EnsureOrdered = this.EnsureOrdered,
+                    MaxDegreeOfParallelism = this.MaxDegreeOfParallelism,
+                    SingleProducerConstrained = this.SingleProducerConstrained
+                };
         }
 
         /// <summary>The maximum number of tasks that may be used concurrently to process messages.</summary>
@@ -333,9 +335,10 @@ namespace System.Threading.Tasks.Dataflow
         {
             get
             {
-                return (_maxDegreeOfParallelism == Unbounded)
-                    ? int.MaxValue
-                    : _maxDegreeOfParallelism;
+                return
+                    (_maxDegreeOfParallelism == Unbounded)
+                  ? int.MaxValue
+                  : _maxDegreeOfParallelism;
             }
         }
 
@@ -412,19 +415,20 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal new GroupingDataflowBlockOptions DefaultOrClone()
         {
-            return (this == Default)
-                ? this
-                : new GroupingDataflowBlockOptions
-                  {
-                      TaskScheduler = this.TaskScheduler,
-                      CancellationToken = this.CancellationToken,
-                      MaxMessagesPerTask = this.MaxMessagesPerTask,
-                      BoundedCapacity = this.BoundedCapacity,
-                      NameFormat = this.NameFormat,
-                      EnsureOrdered = this.EnsureOrdered,
-                      Greedy = this.Greedy,
-                      MaxNumberOfGroups = this.MaxNumberOfGroups
-                  };
+            return
+                (this == Default)
+              ? this
+              : new GroupingDataflowBlockOptions
+                {
+                    TaskScheduler = this.TaskScheduler,
+                    CancellationToken = this.CancellationToken,
+                    MaxMessagesPerTask = this.MaxMessagesPerTask,
+                    BoundedCapacity = this.BoundedCapacity,
+                    NameFormat = this.NameFormat,
+                    EnsureOrdered = this.EnsureOrdered,
+                    Greedy = this.Greedy,
+                    MaxNumberOfGroups = this.MaxNumberOfGroups
+                };
         }
 
         /// <summary>Whether the block should greedily consume offered messages.</summary>

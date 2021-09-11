@@ -376,18 +376,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             return _sqlExpressionFactory.Constant(true);
                         }
 
-                        return patternValue.Any(IsLikeWildChar)
-                            ? _sqlExpressionFactory.Like(
-                                  instance,
-                                  _sqlExpressionFactory.Constant(
-                                      $"%{EscapeLikePattern(patternValue)}%"
-                                  ),
-                                  _sqlExpressionFactory.Constant(LikeEscapeString)
-                              )
-                            : _sqlExpressionFactory.Like(
-                                  instance,
-                                  _sqlExpressionFactory.Constant($"%{patternValue}%")
-                              );
+                        return
+                            patternValue.Any(IsLikeWildChar)
+                          ? _sqlExpressionFactory.Like(
+                                instance,
+                                _sqlExpressionFactory.Constant(
+                                    $"%{EscapeLikePattern(patternValue)}%"
+                                ),
+                                _sqlExpressionFactory.Constant(LikeEscapeString)
+                            )
+                          : _sqlExpressionFactory.Like(
+                                instance,
+                                _sqlExpressionFactory.Constant($"%{patternValue}%")
+                            );
                     }
 
                     return _sqlExpressionFactory.OrElse(
@@ -510,22 +511,23 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     );
                 }
 
-                return patternValue.Any(IsLikeWildChar)
-                    ? _sqlExpressionFactory.Like(
-                          instance,
-                          _sqlExpressionFactory.Constant(
-                              startsWith
-                                ? EscapeLikePattern(patternValue) + '%'
-                                : '%' + EscapeLikePattern(patternValue)
-                          ),
-                          _sqlExpressionFactory.Constant(LikeEscapeString)
-                      )
-                    : _sqlExpressionFactory.Like(
-                          instance,
-                          _sqlExpressionFactory.Constant(
-                              startsWith ? patternValue + '%' : '%' + patternValue
-                          )
-                      );
+                return
+                    patternValue.Any(IsLikeWildChar)
+                  ? _sqlExpressionFactory.Like(
+                        instance,
+                        _sqlExpressionFactory.Constant(
+                            startsWith
+                              ? EscapeLikePattern(patternValue) + '%'
+                              : '%' + EscapeLikePattern(patternValue)
+                        ),
+                        _sqlExpressionFactory.Constant(LikeEscapeString)
+                    )
+                  : _sqlExpressionFactory.Like(
+                        instance,
+                        _sqlExpressionFactory.Constant(
+                            startsWith ? patternValue + '%' : '%' + patternValue
+                        )
+                    );
             }
 
             // The pattern is non-constant, we use LEFT or RIGHT to extract substring and compare.

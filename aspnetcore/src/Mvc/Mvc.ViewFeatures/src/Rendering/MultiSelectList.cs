@@ -159,9 +159,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         private IList<SelectListItem> GetListItems()
         {
-            return (!string.IsNullOrEmpty(DataValueField))
-                ? GetListItemsWithValueField()
-                : GetListItemsWithoutValueField();
+            return
+                (!string.IsNullOrEmpty(DataValueField))
+              ? GetListItemsWithValueField()
+              : GetListItemsWithoutValueField();
         }
 
         private IList<SelectListItem> GetListItemsWithValueField()

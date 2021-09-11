@@ -372,9 +372,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
         private static JToken? ConvertPropertyValue(IProperty property, IUpdateEntry entry)
         {
             var value = entry.GetCurrentProviderValue(property);
-            return value == null
-                ? null
-                : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
+            return
+                value == null
+              ? null
+              : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
         }
     }
 }

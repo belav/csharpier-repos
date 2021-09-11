@@ -187,13 +187,14 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 ArrayBuilder<AnalyzedSwitchSection> sections,
                 out IOperation? defaultBodyOpt
             ) {
-                return op is IBlockOperation block
-                    ? ParseIfStatementSequence(
-                          block.Operations.AsSpan(),
-                          sections,
-                          out defaultBodyOpt
-                      )
-                    : ParseIfStatement(op, sections, out defaultBodyOpt);
+                return
+                    op is IBlockOperation block
+                  ? ParseIfStatementSequence(
+                        block.Operations.AsSpan(),
+                        sections,
+                        out defaultBodyOpt
+                    )
+                  : ParseIfStatement(op, sections, out defaultBodyOpt);
             }
 
             private AnalyzedSwitchSection? ParseSwitchSection(IConditionalOperation operation)
@@ -484,9 +485,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             private static bool IsConstant(IOperation operation)
             {
                 // Constants do not propagate to conversions
-                return operation is IConversionOperation op
-                    ? IsConstant(op.Operand)
-                    : operation.ConstantValue.HasValue;
+                return
+                    operation is IConversionOperation op
+                  ? IsConstant(op.Operand)
+                  : operation.ConstantValue.HasValue;
             }
 
             private bool CheckTargetExpression(IOperation operation)

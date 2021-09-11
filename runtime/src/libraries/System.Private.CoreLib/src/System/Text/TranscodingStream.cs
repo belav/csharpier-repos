@@ -162,9 +162,10 @@ namespace System.Text
                 Stream innerStream = _innerStream;
                 _innerStream = null!;
 
-                return (_leaveOpen)
-                    ? default /* no work to do */
-                    : innerStream.DisposeAsync();
+                return
+                    (_leaveOpen)
+                  ? default /* no work to do */
+                  : innerStream.DisposeAsync();
             }
 
             // Slower path; need to perform an async write followed by an async dispose.
@@ -512,9 +513,10 @@ namespace System.Text
         {
             Span<byte> buffer = stackalloc byte[1];
             int bytesRead = Read(buffer);
-            return (bytesRead == 0)
-                ? -1 /* EOF */
-                : buffer[0];
+            return
+                (bytesRead == 0)
+              ? -1 /* EOF */
+              : buffer[0];
         }
 
         public override long Seek(long offset, SeekOrigin origin) =>

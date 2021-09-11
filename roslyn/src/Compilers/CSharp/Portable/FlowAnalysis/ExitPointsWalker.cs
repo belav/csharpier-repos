@@ -66,9 +66,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 walker.Analyze(ref badRegion);
                 var result = walker._branchesOutOf.ToImmutableAndFree();
                 walker._branchesOutOf = null;
-                return badRegion
-                    ? SpecializedCollections.EmptyEnumerable<StatementSyntax>()
-                    : result;
+                return
+                    badRegion
+                  ? SpecializedCollections.EmptyEnumerable<StatementSyntax>()
+                  : result;
             }
 
             finally

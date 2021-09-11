@@ -314,9 +314,10 @@ namespace CSharpSyntaxGenerator
 
         protected static string StripPost(string name, string post)
         {
-            return name.EndsWith(post, StringComparison.Ordinal)
-                ? name.Substring(0, name.Length - post.Length)
-                : name;
+            return
+                name.EndsWith(post, StringComparison.Ordinal)
+              ? name.Substring(0, name.Length - post.Length)
+              : name;
         }
 
         protected static bool IsKeyword(string name)

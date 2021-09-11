@@ -858,9 +858,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             get
             {
                 Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
-                return !_sharedResources._dataflowBlockOptions.Greedy
-                    ? _nonGreedy!.PostponedMessages.Count
-                    : _messages!.Count;
+                return
+                    !_sharedResources._dataflowBlockOptions.Greedy
+                  ? _nonGreedy!.PostponedMessages.Count
+                  : _messages!.Count;
             }
         }
 
@@ -1349,9 +1350,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             get
             {
-                return _messages != null
-                    ? _messages.Count
-                    : _nonGreedy!.ConsumedMessage.Key ? 1 : 0;
+                return
+                    _messages != null
+                  ? _messages.Count
+                  : _nonGreedy!.ConsumedMessage.Key ? 1 : 0;
             }
         }
 

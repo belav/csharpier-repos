@@ -2911,9 +2911,10 @@ namespace System.Threading.Tasks.Dataflow
                 Task? sourceCompletionTask = Common.GetPotentiallyNotSupportedCompletionTask(
                     _source
                 );
-                return sourceCompletionTask != null && sourceCompletionTask.IsFaulted
-                    ? sourceCompletionTask.Exception
-                    : null;
+                return
+                    sourceCompletionTask != null && sourceCompletionTask.IsFaulted
+                  ? sourceCompletionTask.Exception
+                  : null;
             }
 
             /// <summary>Subscribes the observer to the source.</summary>

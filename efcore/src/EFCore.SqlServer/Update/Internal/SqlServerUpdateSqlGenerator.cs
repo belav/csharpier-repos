@@ -93,9 +93,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                         AppendInsertOperation(commandStringBuilder, modification, commandPosition);
                     }
 
-                    return readOperations.Count == 0
-                        ? ResultSetMapping.NoResultSet
-                        : ResultSetMapping.LastInResultSet;
+                    return
+                        readOperations.Count == 0
+                      ? ResultSetMapping.NoResultSet
+                      : ResultSetMapping.LastInResultSet;
                 }
 
                 if (nonIdentityOperations.Count > 1)
@@ -434,13 +435,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         {
             var typeName = property.GetColumnType();
 
-            return property.ClrType == typeof(byte[])
-            && (
-                typeName.Equals("rowversion", StringComparison.OrdinalIgnoreCase)
-                || typeName.Equals("timestamp", StringComparison.OrdinalIgnoreCase)
-            )
-                ? property.IsNullable ? "varbinary(8)" : "binary(8)"
-                : typeName!;
+            return
+                property.ClrType == typeof(byte[])
+                && (
+                    typeName.Equals("rowversion", StringComparison.OrdinalIgnoreCase)
+                    || typeName.Equals("timestamp", StringComparison.OrdinalIgnoreCase)
+                )
+              ? property.IsNullable ? "varbinary(8)" : "binary(8)"
+              : typeName!;
         }
 
         // ReSharper disable once ParameterTypeCanBeEnumerable.Local

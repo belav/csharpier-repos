@@ -130,23 +130,24 @@ class T
 
     static int Main()
     {
-        return (
-            f0().Rank
-            + f1().Rank
-            + f2().Rank
-            + f3().Rank
-            + f4().Rank
-            + f5().Rank
-            + f6().Rank
-            + f7().Rank
-            + f8().Rank
-            + f9().Rank
-            + f10().Rank
-            + f11().Rank
-            + f12().Rank
-        ) == 76
-            ? 0
-            : 1;
+        return
+            (
+                f0().Rank
+                + f1().Rank
+                + f2().Rank
+                + f3().Rank
+                + f4().Rank
+                + f5().Rank
+                + f6().Rank
+                + f7().Rank
+                + f8().Rank
+                + f9().Rank
+                + f10().Rank
+                + f11().Rank
+                + f12().Rank
+            ) == 76
+          ? 0
+          : 1;
         // Matches desktop. FIXME: Verify more.
     }
 }

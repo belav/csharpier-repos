@@ -319,14 +319,15 @@ namespace System.Globalization
 
         internal int CompareOptionIgnoreCase(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2)
         {
-            return GlobalizationMode.Invariant
-                ? Ordinal.CompareIgnoreCaseInvariantMode(
-                      ref MemoryMarshal.GetReference(string1),
-                      string1.Length,
-                      ref MemoryMarshal.GetReference(string2),
-                      string2.Length
-                  )
-                : CompareStringCore(string1, string2, CompareOptions.IgnoreCase);
+            return
+                GlobalizationMode.Invariant
+              ? Ordinal.CompareIgnoreCaseInvariantMode(
+                    ref MemoryMarshal.GetReference(string1),
+                    string1.Length,
+                    ref MemoryMarshal.GetReference(string2),
+                    string2.Length
+                )
+              : CompareStringCore(string1, string2, CompareOptions.IgnoreCase);
         }
 
         /// <summary>

@@ -118,11 +118,12 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         {
             get
             {
-                return NativeRequest->pSslInfo == null
-                    ? SslStatus.Insecure
-                    : NativeRequest->pSslInfo->SslClientCertNegotiated == 0
-                        ? SslStatus.NoClientCert
-                        : SslStatus.ClientCert;
+                return
+                    NativeRequest->pSslInfo == null
+                  ? SslStatus.Insecure
+                  : NativeRequest->pSslInfo->SslClientCertNegotiated == 0
+                      ? SslStatus.NoClientCert
+                      : SslStatus.ClientCert;
             }
         }
 

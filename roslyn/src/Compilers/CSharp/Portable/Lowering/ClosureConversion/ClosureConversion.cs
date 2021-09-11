@@ -984,16 +984,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitBaseReference(BoundBaseReference node)
         {
-            return (
-                !_currentMethod.IsStatic
-                && TypeSymbol.Equals(
-                    _currentMethod.ContainingType,
-                    _topLevelMethod.ContainingType,
-                    TypeCompareKind.ConsiderEverything2
+            return
+                (
+                    !_currentMethod.IsStatic
+                    && TypeSymbol.Equals(
+                        _currentMethod.ContainingType,
+                        _topLevelMethod.ContainingType,
+                        TypeCompareKind.ConsiderEverything2
+                    )
                 )
-            )
-                ? node
-                : FramePointer(node.Syntax, _topLevelMethod.ContainingType); // technically, not the correct static type
+              ? node
+              : FramePointer(node.Syntax, _topLevelMethod.ContainingType); // technically, not the correct static type
         }
 
         /// <summary>

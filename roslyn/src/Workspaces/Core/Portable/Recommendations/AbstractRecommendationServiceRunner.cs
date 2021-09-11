@@ -55,14 +55,15 @@ namespace Microsoft.CodeAnalysis.Recommendations
             bool useBaseReferenceAccessibility
         ) {
             var symbols = TryGetMemberSymbolsForLambdaParameter(parameter, position);
-            return symbols.IsDefault
-                ? GetMemberSymbols(
-                      parameter.Type,
-                      position,
-                      excludeInstance: false,
-                      useBaseReferenceAccessibility
-                  )
-                : symbols;
+            return
+                symbols.IsDefault
+              ? GetMemberSymbols(
+                    parameter.Type,
+                    position,
+                    excludeInstance: false,
+                    useBaseReferenceAccessibility
+                )
+              : symbols;
         }
 
         private ImmutableArray<ISymbol> TryGetMemberSymbolsForLambdaParameter(
@@ -402,9 +403,10 @@ namespace Microsoft.CodeAnalysis.Recommendations
             if (container is not INamespaceOrTypeSymbol namespaceOrType)
                 return ImmutableArray<ISymbol>.Empty;
 
-            return useBaseReferenceAccessibility
-                ? _context.SemanticModel.LookupBaseMembers(position)
-                : LookupSymbolsInContainer(namespaceOrType, position, excludeInstance);
+            return
+                useBaseReferenceAccessibility
+              ? _context.SemanticModel.LookupBaseMembers(position)
+              : LookupSymbolsInContainer(namespaceOrType, position, excludeInstance);
         }
 
         protected ImmutableArray<ISymbol> LookupSymbolsInContainer(
@@ -412,16 +414,17 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             bool excludeInstance
         ) {
-            return excludeInstance
-                ? _context.SemanticModel.LookupStaticMembers(position, container)
-                : SuppressDefaultTupleElements(
-                      container,
-                      _context.SemanticModel.LookupSymbols(
-                          position,
-                          container,
-                          includeReducedExtensionMethods: true
-                      )
-                  );
+            return
+                excludeInstance
+              ? _context.SemanticModel.LookupStaticMembers(position, container)
+              : SuppressDefaultTupleElements(
+                    container,
+                    _context.SemanticModel.LookupSymbols(
+                        position,
+                        container,
+                        includeReducedExtensionMethods: true
+                    )
+                );
         }
 
         /// <summary>

@@ -19,9 +19,10 @@ namespace AutoMapper.UnitTests.Mappers
             // only needed for the xUnitRunner without AppDomains
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
-                return args.Name == typeof(CustomTypeConverter).Assembly.FullName
-                    ? typeof(CustomTypeConverter).Assembly
-                    : null;
+                return
+                    args.Name == typeof(CustomTypeConverter).Assembly.FullName
+                  ? typeof(CustomTypeConverter).Assembly
+                  : null;
             };
         }
 #endif
@@ -73,9 +74,10 @@ namespace AutoMapper.UnitTests.Mappers
                 ResolutionContext context
             ) {
                 var typeConverter = GetConverter(sourceType);
-                return typeConverter.CanConvertTo(destinationType)
-                    ? typeConverter.ConvertTo(source, destinationType)
-                    : GetConverter(destinationType).ConvertFrom(source);
+                return
+                    typeConverter.CanConvertTo(destinationType)
+                  ? typeConverter.ConvertTo(source, destinationType)
+                  : GetConverter(destinationType).ConvertFrom(source);
             }
         }
     }

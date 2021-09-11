@@ -1771,9 +1771,10 @@ namespace System.Text.Json
                 {
                     if (marker == JsonConstants.Slash)
                     {
-                        return SkipOrConsumeCommentMultiSegmentWithRollback()
-                            ? ConsumeTokenResult.Success
-                            : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        return
+                            SkipOrConsumeCommentMultiSegmentWithRollback()
+                          ? ConsumeTokenResult.Success
+                          : ConsumeTokenResult.NotEnoughDataRollBackState;
                     }
                     if (_tokenType == JsonTokenType.Comment)
                     {
@@ -1850,9 +1851,10 @@ namespace System.Text.Json
                     && first == JsonConstants.Slash
                 ) {
                     _trailingCommaBeforeComment = true;
-                    return SkipOrConsumeCommentMultiSegmentWithRollback()
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        SkipOrConsumeCommentMultiSegmentWithRollback()
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
 
                 if (_inObject)
@@ -1877,9 +1879,10 @@ namespace System.Text.Json
                             first
                         );
                     }
-                    return ConsumePropertyNameMultiSegment()
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumePropertyNameMultiSegment()
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
                 else
                 {
@@ -1895,9 +1898,10 @@ namespace System.Text.Json
                             ExceptionResource.TrailingCommaNotAllowedBeforeArrayEnd
                         );
                     }
-                    return ConsumeValueMultiSegment(first)
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumeValueMultiSegment(first)
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
             }
             else if (marker == JsonConstants.CloseBrace)
@@ -2440,9 +2444,10 @@ namespace System.Text.Json
                             marker
                         );
                     }
-                    return ConsumePropertyNameMultiSegment()
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumePropertyNameMultiSegment()
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
                 else
                 {
@@ -2458,9 +2463,10 @@ namespace System.Text.Json
                             ExceptionResource.TrailingCommaNotAllowedBeforeArrayEnd
                         );
                     }
-                    return ConsumeValueMultiSegment(marker)
-                        ? ConsumeTokenResult.Success
-                        : ConsumeTokenResult.NotEnoughDataRollBackState;
+                    return
+                        ConsumeValueMultiSegment(marker)
+                      ? ConsumeTokenResult.Success
+                      : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
             }
             else if (marker == JsonConstants.CloseBrace)

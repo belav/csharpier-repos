@@ -155,9 +155,10 @@ namespace Microsoft.AspNetCore.Http
                 var mapping = new IdnMapping();
                 var encoded = mapping.GetAscii(host.Buffer, host.Offset, host.Length);
 
-                return StringSegment.IsNullOrEmpty(port)
-                    ? encoded
-                    : string.Concat(encoded, ":", port.ToString());
+                return
+                    StringSegment.IsNullOrEmpty(port)
+                  ? encoded
+                  : string.Concat(encoded, ":", port.ToString());
             }
 
             return _value;

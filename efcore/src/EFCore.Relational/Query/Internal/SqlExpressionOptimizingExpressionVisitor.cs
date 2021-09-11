@@ -119,18 +119,19 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     changed = true;
                 }
 
-                return changed
-                    ? newSelectExpression.Update(
-                          newSelectExpression.Projection.ToList(),
-                          newSelectExpression.Tables.ToList(),
-                          newPredicate,
-                          newSelectExpression.GroupBy.ToList(),
-                          newHaving,
-                          newSelectExpression.Orderings.ToList(),
-                          newSelectExpression.Limit,
-                          newSelectExpression.Offset
-                      )
-                    : newSelectExpression;
+                return
+                    changed
+                  ? newSelectExpression.Update(
+                        newSelectExpression.Projection.ToList(),
+                        newSelectExpression.Tables.ToList(),
+                        newPredicate,
+                        newSelectExpression.GroupBy.ToList(),
+                        newHaving,
+                        newSelectExpression.Orderings.ToList(),
+                        newSelectExpression.Limit,
+                        newSelectExpression.Offset
+                    )
+                  : newSelectExpression;
             }
 
             return newExpression;
@@ -422,12 +423,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         // a is not null && a is not null -> a is not null
                         // a is null || a is not null -> true
                         // a is null && a is not null -> false
-                        return leftUnary.OperatorType == rightUnary.OperatorType
-                            ? (SqlExpression)leftUnary
-                            : _sqlExpressionFactory.Constant(
-                                  operatorType == ExpressionType.OrElse,
-                                  typeMapping
-                              );
+                        return
+                            leftUnary.OperatorType == rightUnary.OperatorType
+                          ? (SqlExpression)leftUnary
+                          : _sqlExpressionFactory.Constant(
+                                operatorType == ExpressionType.OrElse,
+                                typeMapping
+                            );
                     }
 
                     return SimplifyLogicalSqlBinaryExpression(
@@ -546,15 +548,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ) {
             if (leftBoolValue != null && rightBoolValue != null)
             {
-                return operatorType == ExpressionType.Equal
-                    ? _sqlExpressionFactory.Constant(
-                          leftBoolValue.Value == rightBoolValue.Value,
-                          typeMapping
-                      )
-                    : _sqlExpressionFactory.Constant(
-                          leftBoolValue.Value != rightBoolValue.Value,
-                          typeMapping
-                      );
+                return
+                    operatorType == ExpressionType.Equal
+                  ? _sqlExpressionFactory.Constant(
+                        leftBoolValue.Value == rightBoolValue.Value,
+                        typeMapping
+                    )
+                  : _sqlExpressionFactory.Constant(
+                        leftBoolValue.Value != rightBoolValue.Value,
+                        typeMapping
+                    );
             }
 
             if (rightBoolValue != null && CanOptimize(left))
@@ -564,23 +567,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // a != true -> !a
                 // a != false -> a
                 // only correct when f(x) can't be null
-                return operatorType == ExpressionType.Equal
-                    ? rightBoolValue.Value
-                        ? left
-                        : SimplifyUnaryExpression(
-                              ExpressionType.Not,
-                              left,
-                              typeof(bool),
-                              typeMapping
-                          )
-                    : rightBoolValue.Value
-                        ? SimplifyUnaryExpression(
-                              ExpressionType.Not,
-                              left,
-                              typeof(bool),
-                              typeMapping
-                          )
-                        : left;
+                return
+                    operatorType == ExpressionType.Equal
+                  ? rightBoolValue.Value
+                      ? left
+                      : SimplifyUnaryExpression(ExpressionType.Not, left, typeof(bool), typeMapping)
+                  : rightBoolValue.Value
+                      ? SimplifyUnaryExpression(ExpressionType.Not, left, typeof(bool), typeMapping)
+                      : left;
             }
 
             if (leftBoolValue != null && CanOptimize(right))
@@ -590,23 +584,24 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // true != a -> !a
                 // false != a -> a
                 // only correct when a can't be null
-                return operatorType == ExpressionType.Equal
-                    ? leftBoolValue.Value
-                        ? right
-                        : SimplifyUnaryExpression(
-                              ExpressionType.Not,
-                              right,
-                              typeof(bool),
-                              typeMapping
-                          )
-                    : leftBoolValue.Value
-                        ? SimplifyUnaryExpression(
-                              ExpressionType.Not,
-                              right,
-                              typeof(bool),
-                              typeMapping
-                          )
-                        : right;
+                return
+                    operatorType == ExpressionType.Equal
+                  ? leftBoolValue.Value
+                      ? right
+                      : SimplifyUnaryExpression(
+                            ExpressionType.Not,
+                            right,
+                            typeof(bool),
+                            typeMapping
+                        )
+                  : leftBoolValue.Value
+                      ? SimplifyUnaryExpression(
+                            ExpressionType.Not,
+                            right,
+                            typeof(bool),
+                            typeMapping
+                        )
+                      : right;
             }
 
             return _sqlExpressionFactory.MakeBinary(operatorType, left, right, typeMapping)!;
@@ -637,9 +632,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 left is SqlConstantExpression newLeftConstant
                 && newLeftConstant.Value is bool leftBoolValue
             ) {
-                return operatorType == ExpressionType.AndAlso
-                    ? leftBoolValue ? right : newLeftConstant
-                    : leftBoolValue ? newLeftConstant : right;
+                return
+                    operatorType == ExpressionType.AndAlso
+                  ? leftBoolValue ? right : newLeftConstant
+                  : leftBoolValue ? newLeftConstant : right;
             }
 
             if (
@@ -650,9 +646,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // a || true -> true
                 // a && false -> false
                 // a || false -> a
-                return operatorType == ExpressionType.AndAlso
-                    ? rightBoolValue ? left : newRightConstant
-                    : rightBoolValue ? newRightConstant : left;
+                return
+                    operatorType == ExpressionType.AndAlso
+                  ? rightBoolValue ? left : newRightConstant
+                  : rightBoolValue ? newRightConstant : left;
             }
 
             return _sqlExpressionFactory.MakeBinary(operatorType, left, right, typeMapping)!;

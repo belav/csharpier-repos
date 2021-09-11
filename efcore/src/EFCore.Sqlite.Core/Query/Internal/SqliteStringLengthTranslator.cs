@@ -47,15 +47,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            return instance?.Type == typeof(string) && member.Name == nameof(string.Length)
-                ? _sqlExpressionFactory.Function(
-                      "length",
-                      new[] { instance },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { true },
-                      returnType
-                  )
-                : null;
+            return
+                instance?.Type == typeof(string) && member.Name == nameof(string.Length)
+              ? _sqlExpressionFactory.Function(
+                    "length",
+                    new[] { instance },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { true },
+                    returnType
+                )
+              : null;
         }
     }
 }

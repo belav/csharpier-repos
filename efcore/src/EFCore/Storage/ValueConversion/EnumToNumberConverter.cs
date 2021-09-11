@@ -22,10 +22,11 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         {
             var underlyingModelType = typeof(TEnum).UnwrapEnumType();
 
-            return (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
-            && typeof(TNumber) == typeof(decimal)
-                ? new ConverterMappingHints(precision: 20, scale: 0)
-                : default;
+            return
+                (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
+                && typeof(TNumber) == typeof(decimal)
+              ? new ConverterMappingHints(precision: 20, scale: 0)
+              : default;
         }
 
         /// <summary>

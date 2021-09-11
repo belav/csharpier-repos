@@ -191,9 +191,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.CatchBlock:
                     {
                         var local = ((BoundCatchBlock)node).Locals.FirstOrDefault();
-                        return local?.DeclarationKind == LocalDeclarationKind.CatchVariable
-                            ? local
-                            : null;
+                        return
+                            local?.DeclarationKind == LocalDeclarationKind.CatchVariable
+                          ? local
+                          : null;
                     }
 
                     case BoundKind.RangeVariable:

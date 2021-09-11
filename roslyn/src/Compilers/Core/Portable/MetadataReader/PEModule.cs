@@ -1757,13 +1757,14 @@ namespace Microsoft.CodeAnalysis
                 case 1: // DeprecatedAttribute(String, DeprecationType, UInt32, Platform)
                 case 2: // DeprecatedAttribute(String, DeprecationType, UInt32, Type)
                 case 3: // DeprecatedAttribute(String, DeprecationType, UInt32, String)
-                    return TryExtractValueFromAttribute(
-                        attributeInfo.Handle,
-                        out var obsoleteData,
-                        s_attributeDeprecatedDataExtractor
-                    )
-                        ? obsoleteData
-                        : null;
+                    return
+                        TryExtractValueFromAttribute(
+                            attributeInfo.Handle,
+                            out var obsoleteData,
+                            s_attributeDeprecatedDataExtractor
+                        )
+                      ? obsoleteData
+                      : null;
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(attributeInfo.SignatureIndex);
@@ -3636,9 +3637,10 @@ namespace Microsoft.CodeAnalysis
                 var constantHandle = MetadataReader.GetParameter(param).GetDefaultValue();
 
                 // TODO: Error checking: Throw an error if the table entry cannot be found
-                return constantHandle.IsNil
-                    ? ConstantValue.Bad
-                    : GetConstantValueOrThrow(constantHandle);
+                return
+                    constantHandle.IsNil
+                  ? ConstantValue.Bad
+                  : GetConstantValueOrThrow(constantHandle);
             }
             catch (BadImageFormatException)
             {
@@ -3655,9 +3657,10 @@ namespace Microsoft.CodeAnalysis
                 var constantHandle = MetadataReader.GetFieldDefinition(fieldDef).GetDefaultValue();
 
                 // TODO: Error checking: Throw an error if the table entry cannot be found
-                return constantHandle.IsNil
-                    ? ConstantValue.Bad
-                    : GetConstantValueOrThrow(constantHandle);
+                return
+                    constantHandle.IsNil
+                  ? ConstantValue.Bad
+                  : GetConstantValueOrThrow(constantHandle);
             }
             catch (BadImageFormatException)
             {
@@ -3686,11 +3689,12 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private BlobHandle GetMarshallingDescriptorHandleOrThrow(EntityHandle fieldOrParameterToken)
         {
-            return fieldOrParameterToken.Kind == HandleKind.FieldDefinition
-                ? MetadataReader.GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
-                      .GetMarshallingDescriptor()
-                : MetadataReader.GetParameter((ParameterHandle)fieldOrParameterToken)
-                      .GetMarshallingDescriptor();
+            return
+                fieldOrParameterToken.Kind == HandleKind.FieldDefinition
+              ? MetadataReader.GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
+                    .GetMarshallingDescriptor()
+              : MetadataReader.GetParameter((ParameterHandle)fieldOrParameterToken)
+                    .GetMarshallingDescriptor();
         }
 
         internal UnmanagedType GetMarshallingType(EntityHandle fieldOrParameterToken)

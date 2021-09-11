@@ -137,16 +137,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var sourceText = document.GetTextSynchronously(cancellationToken);
 
-            return ShouldTriggerCompletion(trigger, triggerLocation, sourceText, document, service)
-                ? new AsyncCompletionData.CompletionStartData(
-                      participation: AsyncCompletionData.CompletionParticipation.ProvidesItems,
-                      applicableToSpan: new SnapshotSpan(
-                          triggerLocation.Snapshot,
-                          service.GetDefaultCompletionListSpan(sourceText, triggerLocation.Position)
-                              .ToSpan()
-                      )
-                  )
-                : AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
+            return
+                ShouldTriggerCompletion(trigger, triggerLocation, sourceText, document, service)
+              ? new AsyncCompletionData.CompletionStartData(
+                    participation: AsyncCompletionData.CompletionParticipation.ProvidesItems,
+                    applicableToSpan: new SnapshotSpan(
+                        triggerLocation.Snapshot,
+                        service.GetDefaultCompletionListSpan(sourceText, triggerLocation.Position)
+                            .ToSpan()
+                    )
+                )
+              : AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
 
             // For telemetry reporting purpose
             static void CheckForExperimentStatus(ITextView textView, Document document)

@@ -150,9 +150,10 @@ namespace System.Xml
         {
             get
             {
-                return _returnOriginalStringValues
-                    ? _cachedNode!.OriginalStringValue!
-                    : _cachedNode!.RawValue;
+                return
+                    _returnOriginalStringValues
+                  ? _cachedNode!.OriginalStringValue!
+                  : _cachedNode!.RawValue;
             }
         }
 

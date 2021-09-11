@@ -1942,9 +1942,10 @@ namespace System.Runtime.Serialization
 
         internal static string GetClrTypeFullName(Type type)
         {
-            return !type.IsGenericTypeDefinition && type.ContainsGenericParameters
-                ? type.Namespace + "." + type.Name
-                : type.FullName!;
+            return
+                !type.IsGenericTypeDefinition && type.ContainsGenericParameters
+              ? type.Namespace + "." + type.Name
+              : type.FullName!;
         }
 
         internal static void GetClrNameAndNamespace(
@@ -1970,12 +1971,10 @@ namespace System.Runtime.Serialization
 
         internal static string GetDataContractNamespaceFromUri(string uriString)
         {
-            return uriString.StartsWith(
-                Globals.DataContractXsdBaseNamespace,
-                StringComparison.Ordinal
-            )
-                ? uriString.Substring(Globals.DataContractXsdBaseNamespace.Length)
-                : uriString;
+            return
+                uriString.StartsWith(Globals.DataContractXsdBaseNamespace, StringComparison.Ordinal)
+              ? uriString.Substring(Globals.DataContractXsdBaseNamespace.Length)
+              : uriString;
         }
 
         private static string? GetGlobalDataContractNamespace(string clrNs, object[] nsAttributes)

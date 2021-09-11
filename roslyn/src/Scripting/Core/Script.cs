@@ -404,9 +404,10 @@ namespace Microsoft.CodeAnalysis.Scripting
 
         public new Script<T> WithOptions(ScriptOptions options)
         {
-            return (options == Options)
-                ? this
-                : new Script<T>(Compiler, Builder, SourceText, options, GlobalsType, Previous);
+            return
+                (options == Options)
+              ? this
+              : new Script<T>(Compiler, Builder, SourceText, options, GlobalsType, Previous);
         }
 
         internal override Script WithOptionsInternal(ScriptOptions options) => WithOptions(options);

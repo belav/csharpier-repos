@@ -61,11 +61,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             {
                 var containingNamespaceOrType = GetNamespaceOrTypeNode();
 
-                return containingNamespaceOrType != null
-                    ? (object)FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
-                          containingNamespaceOrType
-                      )
-                    : this.FileCodeModel;
+                return
+                    containingNamespaceOrType != null
+                  ? (object)FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
+                        containingNamespaceOrType
+                    )
+                  : this.FileCodeModel;
             }
         }
 
@@ -147,9 +148,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             {
                 var namespaceNode = GetNamespaceNode();
 
-                return namespaceNode != null
-                    ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeNamespace>(namespaceNode)
-                    : null;
+                return
+                    namespaceNode != null
+                  ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeNamespace>(namespaceNode)
+                  : null;
             }
         }
 

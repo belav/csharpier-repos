@@ -76,9 +76,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return Syntax.Kind() == SyntaxKind.AnonymousMethodExpression
-                    ? MessageID.IDS_AnonMethod
-                    : MessageID.IDS_Lambda;
+                return
+                    Syntax.Kind() == SyntaxKind.AnonymousMethodExpression
+                  ? MessageID.IDS_AnonMethod
+                  : MessageID.IDS_Lambda;
             }
         }
 
@@ -1652,9 +1653,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return this.UnboundLambda.Syntax.Kind() == SyntaxKind.AnonymousMethodExpression
-                    ? MessageID.IDS_AnonMethod
-                    : MessageID.IDS_Lambda;
+                return
+                    this.UnboundLambda.Syntax.Kind() == SyntaxKind.AnonymousMethodExpression
+                  ? MessageID.IDS_AnonMethod
+                  : MessageID.IDS_Lambda;
             }
         }
 
@@ -1706,9 +1708,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override RefKind RefKind(int index)
         {
             Debug.Assert(0 <= index && index < _parameterTypesWithAnnotations.Length);
-            return _parameterRefKinds.IsDefault
-                ? Microsoft.CodeAnalysis.RefKind.None
-                : _parameterRefKinds[index];
+            return
+                _parameterRefKinds.IsDefault
+              ? Microsoft.CodeAnalysis.RefKind.None
+              : _parameterRefKinds[index];
         }
 
         public override TypeWithAnnotations ParameterTypeWithAnnotations(int index)

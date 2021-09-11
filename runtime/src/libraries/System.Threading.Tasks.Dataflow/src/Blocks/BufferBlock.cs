@@ -595,9 +595,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _bufferBlock._boundingState != null
-                        ? _bufferBlock._boundingState.PostponedMessages
-                        : null;
+                    return
+                        _bufferBlock._boundingState != null
+                      ? _bufferBlock._boundingState.PostponedMessages
+                      : null;
                 }
             }
             /// <summary>Gets the messages in the buffer.</summary>
@@ -611,9 +612,10 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return _bufferBlock._boundingState != null
-                        ? _bufferBlock._boundingState.TaskForInputProcessing
-                        : null;
+                    return
+                        _bufferBlock._boundingState != null
+                      ? _bufferBlock._boundingState.TaskForInputProcessing
+                      : null;
                 }
             }
             /// <summary>Gets the task being used for output processing.</summary>

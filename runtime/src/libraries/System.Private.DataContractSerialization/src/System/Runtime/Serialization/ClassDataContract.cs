@@ -430,9 +430,10 @@ namespace System.Runtime.Serialization
 
         private static string GetGeneralTypeName(Type type)
         {
-            return type.IsGenericType && !type.IsGenericParameter
-                ? type.GetGenericTypeDefinition().FullName!
-                : type.FullName!;
+            return
+                type.IsGenericType && !type.IsGenericParameter
+              ? type.GetGenericTypeDefinition().FullName!
+              : type.FullName!;
         }
 
         internal static bool IsKnownSerializableType(Type type)

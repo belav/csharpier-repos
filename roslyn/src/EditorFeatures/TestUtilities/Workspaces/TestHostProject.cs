@@ -401,12 +401,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 outputFilePath = @"Z:\";
             }
 
-            return this.CompilationOptions == null
-                ? ""
-                : Path.Combine(
-                      outputFilePath,
-                      this.AssemblyName + GetDefaultExtension(this.CompilationOptions.OutputKind)
-                  );
+            return
+                this.CompilationOptions == null
+              ? ""
+              : Path.Combine(
+                    outputFilePath,
+                    this.AssemblyName + GetDefaultExtension(this.CompilationOptions.OutputKind)
+                );
         }
     }
 }

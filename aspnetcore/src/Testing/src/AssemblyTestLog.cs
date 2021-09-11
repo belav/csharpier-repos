@@ -48,9 +48,10 @@ namespace Microsoft.AspNetCore.Testing
                 MaxPathLengthEnvironmentVariableName
             );
             var defaultMaxPath = 245;
-            return string.IsNullOrEmpty(maxPathString)
-                ? defaultMaxPath
-                : int.Parse(maxPathString, CultureInfo.InvariantCulture);
+            return
+                string.IsNullOrEmpty(maxPathString)
+              ? defaultMaxPath
+              : int.Parse(maxPathString, CultureInfo.InvariantCulture);
         }
 
         private AssemblyTestLog(

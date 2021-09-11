@@ -112,11 +112,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !this.Flags.Includes(BinderFlags.UncheckedRegion | BinderFlags.CheckedRegion)
                 );
 
-                return this.Flags.Includes(BinderFlags.CheckedRegion)
-                    ? OverflowChecks.Enabled
-                    : this.Flags.Includes(BinderFlags.UncheckedRegion)
-                        ? OverflowChecks.Disabled
-                        : OverflowChecks.Implicit;
+                return
+                    this.Flags.Includes(BinderFlags.CheckedRegion)
+                  ? OverflowChecks.Enabled
+                  : this.Flags.Includes(BinderFlags.UncheckedRegion)
+                      ? OverflowChecks.Disabled
+                      : OverflowChecks.Implicit;
             }
         }
 
@@ -985,17 +986,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression
         ) {
             var locals = this.GetDeclaredLocalsForScope(scopeDesignator);
-            return (locals.IsEmpty)
-                ? expression
-                : new BoundSequence(
-                      scopeDesignator,
-                      locals,
-                      ImmutableArray<BoundExpression>.Empty,
-                      expression,
-                      getType()
-                  ) {
-                      WasCompilerGenerated = true
-                  };
+            return
+                (locals.IsEmpty)
+              ? expression
+              : new BoundSequence(
+                    scopeDesignator,
+                    locals,
+                    ImmutableArray<BoundExpression>.Empty,
+                    expression,
+                    getType()
+                ) {
+                    WasCompilerGenerated = true
+                };
 
             TypeSymbol getType()
             {

@@ -703,9 +703,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     _packedFlags.InitializeDoesNotReturn(doesNotReturn);
                 }
 
-                return _packedFlags.DoesNotReturn
-                    ? FlowAnalysisAnnotations.DoesNotReturn
-                    : FlowAnalysisAnnotations.None;
+                return
+                    _packedFlags.DoesNotReturn
+                  ? FlowAnalysisAnnotations.DoesNotReturn
+                  : FlowAnalysisAnnotations.None;
             }
         }
 
@@ -1137,12 +1138,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             else
             {
                 var attributeData = uncommonFields._lazyCustomAttributes;
-                return attributeData.IsDefault
-                    ? InterlockedOperations.Initialize(
-                          ref uncommonFields._lazyCustomAttributes,
-                          ImmutableArray<CSharpAttributeData>.Empty
-                      )
-                    : attributeData;
+                return
+                    attributeData.IsDefault
+                  ? InterlockedOperations.Initialize(
+                        ref uncommonFields._lazyCustomAttributes,
+                        ImmutableArray<CSharpAttributeData>.Empty
+                    )
+                  : attributeData;
             }
         }
 
@@ -1312,9 +1314,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         case WellKnownMemberNames.MultiplyOperatorName:
                         case WellKnownMemberNames.RightShiftOperatorName:
                         case WellKnownMemberNames.SubtractionOperatorName:
-                            return IsValidUserDefinedOperatorSignature(2)
-                                ? MethodKind.UserDefinedOperator
-                                : MethodKind.Ordinary;
+                            return
+                                IsValidUserDefinedOperatorSignature(2)
+                              ? MethodKind.UserDefinedOperator
+                              : MethodKind.Ordinary;
                         case WellKnownMemberNames.DecrementOperatorName:
                         case WellKnownMemberNames.FalseOperatorName:
                         case WellKnownMemberNames.IncrementOperatorName:
@@ -1323,14 +1326,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         case WellKnownMemberNames.TrueOperatorName:
                         case WellKnownMemberNames.UnaryNegationOperatorName:
                         case WellKnownMemberNames.UnaryPlusOperatorName:
-                            return IsValidUserDefinedOperatorSignature(1)
-                                ? MethodKind.UserDefinedOperator
-                                : MethodKind.Ordinary;
+                            return
+                                IsValidUserDefinedOperatorSignature(1)
+                              ? MethodKind.UserDefinedOperator
+                              : MethodKind.Ordinary;
                         case WellKnownMemberNames.ImplicitConversionName:
                         case WellKnownMemberNames.ExplicitConversionName:
-                            return IsValidUserDefinedOperatorSignature(1)
-                                ? MethodKind.Conversion
-                                : MethodKind.Ordinary;
+                            return
+                                IsValidUserDefinedOperatorSignature(1)
+                              ? MethodKind.Conversion
+                              : MethodKind.Ordinary;
                         //case WellKnownMemberNames.ConcatenateOperatorName:
                         //case WellKnownMemberNames.ExponentOperatorName:
                         //case WellKnownMemberNames.IntegerDivisionOperatorName:
@@ -1496,9 +1501,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return IsExplicitClassOverride
-                    ? AccessUncommonFields()._lazyExplicitClassOverride
-                    : null;
+                return
+                    IsExplicitClassOverride
+                  ? AccessUncommonFields()._lazyExplicitClassOverride
+                  : null;
             }
         }
 
@@ -1647,12 +1653,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             else
             {
                 var result = uncommonFields._lazyConditionalAttributeSymbols;
-                return result.IsDefault
-                    ? InterlockedOperations.Initialize(
-                          ref uncommonFields._lazyConditionalAttributeSymbols,
-                          ImmutableArray<string>.Empty
-                      )
-                    : result;
+                return
+                    result.IsDefault
+                  ? InterlockedOperations.Initialize(
+                        ref uncommonFields._lazyConditionalAttributeSymbols,
+                        ImmutableArray<string>.Empty
+                    )
+                  : result;
             }
         }
 
@@ -1693,13 +1700,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 else
                 {
                     var result = uncommonFields._lazyObsoleteAttributeData;
-                    return ReferenceEquals(result, ObsoleteAttributeData.Uninitialized)
-                        ? InterlockedOperations.Initialize(
-                              ref uncommonFields._lazyObsoleteAttributeData,
-                              null,
-                              ObsoleteAttributeData.Uninitialized
-                          )
-                        : result;
+                    return
+                        ReferenceEquals(result, ObsoleteAttributeData.Uninitialized)
+                      ? InterlockedOperations.Initialize(
+                            ref uncommonFields._lazyObsoleteAttributeData,
+                            null,
+                            ObsoleteAttributeData.Uninitialized
+                        )
+                      : result;
                 }
             }
         }

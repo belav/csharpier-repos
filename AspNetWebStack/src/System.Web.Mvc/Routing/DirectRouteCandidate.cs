@@ -208,9 +208,10 @@ namespace System.Web.Mvc.Routing
                 }
             }
 
-            return matchesWithActionSelectors.Any()
-                ? matchesWithActionSelectors
-                : matchesWithoutActionSelectors;
+            return
+                matchesWithActionSelectors.Any()
+              ? matchesWithActionSelectors
+              : matchesWithoutActionSelectors;
         }
 
         private static List<DirectRouteCandidate> FilterByOrder(

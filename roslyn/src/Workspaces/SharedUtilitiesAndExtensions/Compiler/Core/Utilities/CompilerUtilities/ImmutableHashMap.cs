@@ -535,9 +535,10 @@ namespace Roslyn.Collections.Immutable
 
             if (_root != root)
             {
-                return root.Count == 0
-                    ? this.Clear()
-                    : new ImmutableHashMap<TKey, TValue>(root, _keyComparer, _valueComparer);
+                return
+                    root.Count == 0
+                  ? this.Clear()
+                  : new ImmutableHashMap<TKey, TValue>(root, _keyComparer, _valueComparer);
             }
 
             return this;

@@ -694,9 +694,10 @@ namespace System.ComponentModel.Composition.Hosting
 
             try
             {
-                return (_reflectionContext != null)
-                    ? new AssemblyCatalog(assemblyFilePath, _reflectionContext, this)
-                    : new AssemblyCatalog(assemblyFilePath, this);
+                return
+                    (_reflectionContext != null)
+                  ? new AssemblyCatalog(assemblyFilePath, _reflectionContext, this)
+                  : new AssemblyCatalog(assemblyFilePath, this);
             }
             catch (FileNotFoundException ex)
             { // Files should always exists but don't blow up here if they don't

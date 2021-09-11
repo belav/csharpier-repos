@@ -2136,13 +2136,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             var leastOverridden = (EventSymbol)eventSymbol.GetLeastOverriddenMember(
                 this.ContainingType
             );
-            return leastOverridden.HasAssociatedField
-                ? new CSDiagnosticInfo(
-                      ErrorCode.ERR_BadEventUsage,
-                      leastOverridden,
-                      leastOverridden.ContainingType
-                  )
-                : new CSDiagnosticInfo(ErrorCode.ERR_BadEventUsageNoField, leastOverridden);
+            return
+                leastOverridden.HasAssociatedField
+              ? new CSDiagnosticInfo(
+                    ErrorCode.ERR_BadEventUsage,
+                    leastOverridden,
+                    leastOverridden.ContainingType
+                )
+              : new CSDiagnosticInfo(ErrorCode.ERR_BadEventUsageNoField, leastOverridden);
         }
 
         internal static bool AccessingAutoPropertyFromConstructor(
@@ -3474,9 +3475,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             declarations = declarationArray.AsImmutableOrNull();
 
-            return (count == 1)
-                ? (BoundStatement)declarations[0]
-                : new BoundMultipleLocalDeclarations(nodeOpt, declarations);
+            return
+                (count == 1)
+              ? (BoundStatement)declarations[0]
+              : new BoundMultipleLocalDeclarations(nodeOpt, declarations);
         }
 
         internal BoundStatement BindStatementExpressionList(

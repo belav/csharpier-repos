@@ -146,9 +146,10 @@ namespace System
                     return useDefaultConstructor ? NoneViaConstructor : NoneViaFactory;
 
                 case LazyThreadSafetyMode.PublicationOnly:
-                    return useDefaultConstructor
-                        ? PublicationOnlyViaConstructor
-                        : PublicationOnlyViaFactory;
+                    return
+                        useDefaultConstructor
+                      ? PublicationOnlyViaConstructor
+                      : PublicationOnlyViaFactory;
 
                 case LazyThreadSafetyMode.ExecutionAndPublication:
                     // we need to create an object for ExecutionAndPublication because we use Monitor-based locking
@@ -181,9 +182,10 @@ namespace System
 
         internal static LazyThreadSafetyMode GetModeFromIsThreadSafe(bool isThreadSafe)
         {
-            return isThreadSafe
-                ? LazyThreadSafetyMode.ExecutionAndPublication
-                : LazyThreadSafetyMode.None;
+            return
+                isThreadSafe
+              ? LazyThreadSafetyMode.ExecutionAndPublication
+              : LazyThreadSafetyMode.None;
         }
     }
 
@@ -470,10 +472,11 @@ namespace System
         /// </exception>
         public override string? ToString()
         {
-            return IsValueCreated
-                ? Value!.ToString()
-                : // Throws NullReferenceException as if caller called ToString on the value itself
-                  SR.Lazy_ToString_ValueNotCreated;
+            return
+                IsValueCreated
+              ? Value!.ToString()
+              : // Throws NullReferenceException as if caller called ToString on the value itself
+                SR.Lazy_ToString_ValueNotCreated;
         }
 
         /// <summary>Gets the value of the Lazy&lt;T&gt; for debugging display purposes.</summary>

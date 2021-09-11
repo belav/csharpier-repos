@@ -510,9 +510,10 @@ namespace Microsoft.DotNet.OpenApi.Commands
 
         internal string GetFullPath(string path)
         {
-            return Path.IsPathFullyQualified(path)
-                ? path
-                : Path.GetFullPath(path, WorkingDirectory);
+            return
+                Path.IsPathFullyQualified(path)
+              ? path
+              : Path.GetFullPath(path, WorkingDirectory);
         }
 
         private async Task<IDictionary<string, string>> LoadPackageVersionsFromURLAsync()

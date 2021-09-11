@@ -1585,9 +1585,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static string GetExpressionText(string expression)
         {
             // If it's exactly "model", then give them an empty string, to replicate the lambda behavior.
-            return string.Equals(expression, "model", StringComparison.OrdinalIgnoreCase)
-                ? string.Empty
-                : expression;
+            return
+                string.Equals(expression, "model", StringComparison.OrdinalIgnoreCase)
+              ? string.Empty
+              : expression;
         }
     }
 }

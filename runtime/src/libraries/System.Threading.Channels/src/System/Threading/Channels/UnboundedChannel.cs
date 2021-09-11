@@ -174,9 +174,10 @@ namespace System.Threading.Channels
                     // There are no items, so if we're done writing, there's never going to be data available.
                     if (parent._doneWriting != null)
                     {
-                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
-                            : default;
+                        return
+                            parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                          ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                          : default;
                     }
 
                     // If we're able to use the singleton waiter, do so.
@@ -321,14 +322,15 @@ namespace System.Threading.Channels
             public override ValueTask<bool> WaitToWriteAsync(CancellationToken cancellationToken)
             {
                 Exception? doneWriting = _parent._doneWriting;
-                return cancellationToken.IsCancellationRequested
-                    ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
-                    : doneWriting == null
-                        ? new ValueTask<bool>(true)
-                        : // unbounded writing can always be done if we haven't completed
-                          doneWriting != ChannelUtilities.s_doneWritingSentinel
-                            ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
-                            : default;
+                return
+                    cancellationToken.IsCancellationRequested
+                  ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
+                  : doneWriting == null
+                      ? new ValueTask<bool>(true)
+                      : // unbounded writing can always be done if we haven't completed
+                        doneWriting != ChannelUtilities.s_doneWritingSentinel
+                          ? new ValueTask<bool>(Task.FromException<bool>(doneWriting))
+                          : default;
             }
 
             public override ValueTask WriteAsync(T item, CancellationToken cancellationToken) =>

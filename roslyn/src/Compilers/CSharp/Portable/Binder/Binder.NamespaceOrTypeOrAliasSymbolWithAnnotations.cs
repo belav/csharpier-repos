@@ -61,11 +61,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return default;
                 }
                 var type = symbol as TypeSymbol;
-                return type is null
-                    ? new NamespaceOrTypeOrAliasSymbolWithAnnotations(symbol, isNullableEnabled)
-                    : new NamespaceOrTypeOrAliasSymbolWithAnnotations(
-                          TypeWithAnnotations.Create(isNullableEnabled, type)
-                      );
+                return
+                    type is null
+                  ? new NamespaceOrTypeOrAliasSymbolWithAnnotations(symbol, isNullableEnabled)
+                  : new NamespaceOrTypeOrAliasSymbolWithAnnotations(
+                        TypeWithAnnotations.Create(isNullableEnabled, type)
+                    );
             }
 
             public static implicit operator NamespaceOrTypeOrAliasSymbolWithAnnotations(

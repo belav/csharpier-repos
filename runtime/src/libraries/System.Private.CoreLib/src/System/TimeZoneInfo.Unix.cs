@@ -1876,9 +1876,10 @@ namespace System
         private static string TZif_GetZoneAbbreviation(string zoneAbbreviations, int index)
         {
             int lastIndex = zoneAbbreviations.IndexOf('\0', index);
-            return lastIndex > 0
-                ? zoneAbbreviations.Substring(index, lastIndex - index)
-                : zoneAbbreviations.Substring(index);
+            return
+                lastIndex > 0
+              ? zoneAbbreviations.Substring(index, lastIndex - index)
+              : zoneAbbreviations.Substring(index);
         }
 
         // Converts an array of bytes into an int - always using standard byte order (Big Endian)

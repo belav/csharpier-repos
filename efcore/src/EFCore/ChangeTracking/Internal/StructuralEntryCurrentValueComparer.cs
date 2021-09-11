@@ -51,11 +51,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var xValue = GetPropertyValue(x);
             var yValue = GetPropertyValue(y);
 
-            return xValue is Array xArray
-            && yValue is Array yArray
-            && xArray.Length != yArray.Length
-                ? xArray.Length - yArray.Length
-                : base.ComparePropertyValues(xValue, yValue);
+            return
+                xValue is Array xArray && yValue is Array yArray && xArray.Length != yArray.Length
+              ? xArray.Length - yArray.Length
+              : base.ComparePropertyValues(xValue, yValue);
         }
     }
 }

@@ -35,9 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return _conversion.Kind == ConversionKind.Deconstruction
-                    ? _conversion.MethodSymbol
-                    : null;
+                return
+                    _conversion.Kind == ConversionKind.Deconstruction
+                  ? _conversion.MethodSymbol
+                  : null;
             }
         }
 
@@ -48,9 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return _conversion.Kind == ConversionKind.Deconstruction
-                    ? null
-                    : (Conversion?)_conversion;
+                return
+                    _conversion.Kind == ConversionKind.Deconstruction
+                  ? null
+                  : (Conversion?)_conversion;
             }
         }
 
@@ -63,9 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var underlyingConversions = _conversion.UnderlyingConversions;
 
-                return underlyingConversions.IsDefault
-                    ? ImmutableArray<DeconstructionInfo>.Empty
-                    : underlyingConversions.SelectAsArray(c => new DeconstructionInfo(c));
+                return
+                    underlyingConversions.IsDefault
+                  ? ImmutableArray<DeconstructionInfo>.Empty
+                  : underlyingConversions.SelectAsArray(c => new DeconstructionInfo(c));
             }
         }
 

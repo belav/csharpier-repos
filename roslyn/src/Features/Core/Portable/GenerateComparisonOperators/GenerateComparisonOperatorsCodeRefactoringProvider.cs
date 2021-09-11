@@ -234,9 +234,10 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
                 && compareMethod.DeclaredAccessibility != Accessibility.Public
                 && compareMethod.Name != nameof(IComparable.CompareTo);
 
-            return generateCast
-                ? generator.CastExpression(comparableType, thisExpression)
-                : thisExpression;
+            return
+                generateCast
+              ? generator.CastExpression(comparableType, thisExpression)
+              : thisExpression;
         }
 
         private static ImmutableArray<IMethodSymbol> GenerateComparisonOperators(

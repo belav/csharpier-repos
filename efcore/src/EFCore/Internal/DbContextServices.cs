@@ -85,18 +85,19 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
                 var dependencies = _scopedProvider!.GetRequiredService<ModelCreationDependencies>();
                 var modelFromOptions = CoreOptions?.Model;
-                return modelFromOptions == null
-                || (designTime && modelFromOptions is not Metadata.Internal.Model)
-                    ? dependencies.ModelSource.GetModel(
-                          _currentContext!.Context,
-                          dependencies,
-                          designTime
-                      )
-                    : dependencies.ModelRuntimeInitializer.Initialize(
-                          modelFromOptions,
-                          designTime,
-                          dependencies.ValidationLogger
-                      );
+                return
+                    modelFromOptions == null
+                    || (designTime && modelFromOptions is not Metadata.Internal.Model)
+                  ? dependencies.ModelSource.GetModel(
+                        _currentContext!.Context,
+                        dependencies,
+                        designTime
+                    )
+                  : dependencies.ModelRuntimeInitializer.Initialize(
+                        modelFromOptions,
+                        designTime,
+                        dependencies.ValidationLogger
+                    );
             }
 
             finally

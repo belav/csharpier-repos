@@ -2041,9 +2041,10 @@ namespace System.Net.Http
             // If the caller provided buffer, and thus the amount of data desired to be read,
             // is larger than the internal buffer, there's no point going through the internal
             // buffer, so just do an unbuffered read.
-            return destination.Length >= _readBuffer.Length
-                ? ReadAsync(destination)
-                : ReadBufferedAsyncCore(destination);
+            return
+                destination.Length >= _readBuffer.Length
+              ? ReadAsync(destination)
+              : ReadBufferedAsyncCore(destination);
         }
 
         private async ValueTask<int> ReadBufferedAsyncCore(Memory<byte> destination)

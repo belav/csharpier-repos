@@ -432,9 +432,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private RefKind GetRefKind(int index)
         {
             Debug.Assert(0 <= index && index < _formalParameterTypes.Length);
-            return _formalParameterRefKinds.IsDefault
-                ? RefKind.None
-                : _formalParameterRefKinds[index];
+            return
+                _formalParameterRefKinds.IsDefault
+              ? RefKind.None
+              : _formalParameterRefKinds[index];
         }
 
         private ImmutableArray<TypeWithAnnotations> GetResults()

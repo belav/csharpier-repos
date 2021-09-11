@@ -115,9 +115,10 @@ namespace Moq.Expressions.Visitors
                 }
             }
 
-            return instance != node.Object || arguments != node.Arguments
-                ? Expression.Call(instance, node.Method, arguments)
-                : node;
+            return
+                instance != node.Object || arguments != node.Arguments
+              ? Expression.Call(instance, node.Method, arguments)
+              : node;
         }
     }
 }

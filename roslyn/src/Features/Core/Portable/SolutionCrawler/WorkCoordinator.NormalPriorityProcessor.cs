@@ -145,10 +145,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         //       To mitigate that, we will turn off cache if we have too many items in high priority queue
                         //       this shouldn't affect active file since we always enable active file cache from background compiler.
 
-                        return _higherPriorityDocumentsNotProcessed.Count
-                        <= MaxHighPriorityQueueCache
-                            ? Processor.EnableCaching(id.ProjectId)
-                            : null;
+                        return
+                            _higherPriorityDocumentsNotProcessed.Count <= MaxHighPriorityQueueCache
+                          ? Processor.EnableCaching(id.ProjectId)
+                          : null;
                     }
 
                     protected override Task WaitAsync(CancellationToken cancellationToken)

@@ -431,14 +431,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool allowReimplementation,
             CancellationToken cancellationToken
         ) {
-            return interfacesOrAbstractClasses.First().TypeKind == TypeKind.Interface
-                ? GetInterfacesToImplement(
-                      classOrStructType,
-                      interfacesOrAbstractClasses,
-                      allowReimplementation,
-                      cancellationToken
-                  )
-                : GetAbstractClassesToImplement(interfacesOrAbstractClasses);
+            return
+                interfacesOrAbstractClasses.First().TypeKind == TypeKind.Interface
+              ? GetInterfacesToImplement(
+                    classOrStructType,
+                    interfacesOrAbstractClasses,
+                    allowReimplementation,
+                    cancellationToken
+                )
+              : GetAbstractClassesToImplement(interfacesOrAbstractClasses);
         }
 
         private static ImmutableArray<INamedTypeSymbol> GetAbstractClassesToImplement(

@@ -211,9 +211,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             // change happened inside of the old member, check whether new member seems just delta of that change
             var lengthDelta = range.NewLength - range.Span.Length;
 
-            return (oldMember.Span.Length + lengthDelta) == newMember.Span.Length
-                ? newMember
-                : null;
+            return
+                (oldMember.Span.Length + lengthDelta) == newMember.Span.Length
+              ? newMember
+              : null;
         }
     }
 }

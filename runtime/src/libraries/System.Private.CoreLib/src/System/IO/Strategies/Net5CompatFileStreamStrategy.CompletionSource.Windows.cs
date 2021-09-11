@@ -270,16 +270,17 @@ namespace System.IO.Strategies
                 // which has a PreAllocatedOverlapped with the memory already pinned.  Otherwise, we use the derived
                 // MemoryFileStreamCompletionSource, which Retains the memory, which will result in less pinning in the case
                 // where the underlying memory is backed by pre-pinned buffers.
-                return preallocatedOverlapped != null
-                && MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> buffer)
-                && preallocatedOverlapped.IsUserObject(buffer.Array) // preallocatedOverlapped is allocated when BufferedStream|Net5CompatFileStreamStrategy allocates the buffer
-                    ? new CompletionSource(
-                          strategy,
-                          preallocatedOverlapped,
-                          numBufferedBytesRead,
-                          buffer.Array
-                      )
-                    : new MemoryFileStreamCompletionSource(strategy, numBufferedBytesRead, memory);
+                return
+                    preallocatedOverlapped != null
+                    && MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> buffer)
+                    && preallocatedOverlapped.IsUserObject(buffer.Array) // preallocatedOverlapped is allocated when BufferedStream|Net5CompatFileStreamStrategy allocates the buffer
+                  ? new CompletionSource(
+                        strategy,
+                        preallocatedOverlapped,
+                        numBufferedBytesRead,
+                        buffer.Array
+                    )
+                  : new MemoryFileStreamCompletionSource(strategy, numBufferedBytesRead, memory);
             }
         }
 

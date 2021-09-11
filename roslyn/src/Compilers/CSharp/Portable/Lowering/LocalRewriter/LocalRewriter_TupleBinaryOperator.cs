@@ -929,18 +929,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private BoundExpression LowerConversions(BoundExpression expr)
         {
-            return (expr is BoundConversion conv)
-                ? MakeConversionNode(
-                      oldNodeOpt: conv,
-                      syntax: conv.Syntax,
-                      rewrittenOperand: LowerConversions(conv.Operand),
-                      conversion: conv.Conversion,
-                      @checked: conv.Checked,
-                      explicitCastInCode: conv.ExplicitCastInCode,
-                      constantValueOpt: conv.ConstantValue,
-                      rewrittenType: conv.Type
-                  )
-                : expr;
+            return
+                (expr is BoundConversion conv)
+              ? MakeConversionNode(
+                    oldNodeOpt: conv,
+                    syntax: conv.Syntax,
+                    rewrittenOperand: LowerConversions(conv.Operand),
+                    conversion: conv.Conversion,
+                    @checked: conv.Checked,
+                    explicitCastInCode: conv.ExplicitCastInCode,
+                    constantValueOpt: conv.ConstantValue,
+                    rewrittenType: conv.Type
+                )
+              : expr;
         }
     }
 }

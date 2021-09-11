@@ -1223,9 +1223,10 @@ namespace System.Reflection
             Debug.Assert(caType != null);
 
             if (type.GetElementType() != null)
-                return (caType.IsValueType)
-                    ? Array.Empty<object>()
-                    : CreateAttributeArrayHelper(caType, 0);
+                return
+                    (caType.IsValueType)
+                  ? Array.Empty<object>()
+                  : CreateAttributeArrayHelper(caType, 0);
 
             if (type.IsGenericType && !type.IsGenericTypeDefinition)
                 type = (type.GetGenericTypeDefinition() as RuntimeType)!;

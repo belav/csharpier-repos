@@ -36,9 +36,10 @@ namespace System.Web.Mvc
 
         protected override bool ComputeConvertEmptyStringToNull()
         {
-            return PrototypeCache.DisplayFormat != null
-                ? PrototypeCache.DisplayFormat.ConvertEmptyStringToNull
-                : base.ComputeConvertEmptyStringToNull();
+            return
+                PrototypeCache.DisplayFormat != null
+              ? PrototypeCache.DisplayFormat.ConvertEmptyStringToNull
+              : base.ComputeConvertEmptyStringToNull();
         }
 
         protected override string ComputeDataTypeName()
@@ -58,16 +59,18 @@ namespace System.Web.Mvc
 
         protected override string ComputeDescription()
         {
-            return PrototypeCache.Display != null
-                ? PrototypeCache.Display.GetDescription()
-                : base.ComputeDescription();
+            return
+                PrototypeCache.Display != null
+              ? PrototypeCache.Display.GetDescription()
+              : base.ComputeDescription();
         }
 
         protected override string ComputeDisplayFormatString()
         {
-            return PrototypeCache.DisplayFormat != null
-                ? PrototypeCache.DisplayFormat.DataFormatString
-                : base.ComputeDisplayFormatString();
+            return
+                PrototypeCache.DisplayFormat != null
+              ? PrototypeCache.DisplayFormat.DataFormatString
+              : base.ComputeDisplayFormatString();
         }
 
         protected override string ComputeDisplayName()
@@ -131,16 +134,18 @@ namespace System.Web.Mvc
 
         protected override bool ComputeHideSurroundingHtml()
         {
-            return PrototypeCache.HiddenInput != null
-                ? !PrototypeCache.HiddenInput.DisplayValue
-                : base.ComputeHideSurroundingHtml();
+            return
+                PrototypeCache.HiddenInput != null
+              ? !PrototypeCache.HiddenInput.DisplayValue
+              : base.ComputeHideSurroundingHtml();
         }
 
         protected override bool ComputeHtmlEncode()
         {
-            return (PrototypeCache.DisplayFormat != null)
-                ? PrototypeCache.DisplayFormat.HtmlEncode
-                : base.ComputeHtmlEncode();
+            return
+                (PrototypeCache.DisplayFormat != null)
+              ? PrototypeCache.DisplayFormat.HtmlEncode
+              : base.ComputeHtmlEncode();
         }
 
         protected override bool ComputeIsReadOnly()
@@ -165,9 +170,10 @@ namespace System.Web.Mvc
 
         protected override string ComputeNullDisplayText()
         {
-            return PrototypeCache.DisplayFormat != null
-                ? PrototypeCache.DisplayFormat.NullDisplayText
-                : base.ComputeNullDisplayText();
+            return
+                PrototypeCache.DisplayFormat != null
+              ? PrototypeCache.DisplayFormat.NullDisplayText
+              : base.ComputeNullDisplayText();
         }
 
         protected override int ComputeOrder()
@@ -184,23 +190,26 @@ namespace System.Web.Mvc
 
         protected override string ComputeShortDisplayName()
         {
-            return PrototypeCache.Display != null
-                ? PrototypeCache.Display.GetShortName()
-                : base.ComputeShortDisplayName();
+            return
+                PrototypeCache.Display != null
+              ? PrototypeCache.Display.GetShortName()
+              : base.ComputeShortDisplayName();
         }
 
         protected override bool ComputeShowForDisplay()
         {
-            return PrototypeCache.ScaffoldColumn != null
-                ? PrototypeCache.ScaffoldColumn.Scaffold
-                : base.ComputeShowForDisplay();
+            return
+                PrototypeCache.ScaffoldColumn != null
+              ? PrototypeCache.ScaffoldColumn.Scaffold
+              : base.ComputeShowForDisplay();
         }
 
         protected override bool ComputeShowForEdit()
         {
-            return PrototypeCache.ScaffoldColumn != null
-                ? PrototypeCache.ScaffoldColumn.Scaffold
-                : base.ComputeShowForEdit();
+            return
+                PrototypeCache.ScaffoldColumn != null
+              ? PrototypeCache.ScaffoldColumn.Scaffold
+              : base.ComputeShowForEdit();
         }
 
         protected override string ComputeSimpleDisplayText()
@@ -252,9 +261,10 @@ namespace System.Web.Mvc
 
         protected override string ComputeWatermark()
         {
-            return PrototypeCache.Display != null
-                ? PrototypeCache.Display.GetPrompt()
-                : base.ComputeWatermark();
+            return
+                PrototypeCache.Display != null
+              ? PrototypeCache.Display.GetPrompt()
+              : base.ComputeWatermark();
         }
 
         private static void ValidateDisplayColumnAttribute(

@@ -38,9 +38,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return (_syntax.Kind() == SyntaxKind.ForEachStatement)
-                    ? (SourceLocalSymbol)this.Locals[0]
-                    : null;
+                return
+                    (_syntax.Kind() == SyntaxKind.ForEachStatement)
+                  ? (SourceLocalSymbol)this.Locals[0]
+                  : null;
             }
         }
 
@@ -2375,9 +2376,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var resolvedMember = (MethodSymbol)GetSpecialTypeMember(member, diagnostics, syntax);
             Debug.Assert(resolvedMember is null or { ParameterCount: 0 });
-            return resolvedMember is not null
-                ? MethodArgumentInfo.CreateParameterlessMethod(resolvedMember)
-                : null;
+            return
+                resolvedMember is not null
+              ? MethodArgumentInfo.CreateParameterlessMethod(resolvedMember)
+              : null;
         }
 
         /// <param name="extensionReceiverOpt">If method is an extension method, this must be non-null.</param>

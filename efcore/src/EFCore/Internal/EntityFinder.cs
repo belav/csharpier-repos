@@ -89,14 +89,15 @@ namespace Microsoft.EntityFrameworkCore.Internal
             }
 
             var tracked = FindTracked(keyValues!, out var keyProperties);
-            return tracked != null
-                ? new ValueTask<TEntity?>(tracked)
-                : new ValueTask<TEntity?>(
-                      _queryRoot.FirstOrDefaultAsync(
-                          BuildLambda(keyProperties, new ValueBuffer(keyValues)),
-                          cancellationToken
-                      )
-                  );
+            return
+                tracked != null
+              ? new ValueTask<TEntity?>(tracked)
+              : new ValueTask<TEntity?>(
+                    _queryRoot.FirstOrDefaultAsync(
+                        BuildLambda(keyProperties, new ValueBuffer(keyValues)),
+                        cancellationToken
+                    )
+                );
         }
 
         /// <summary>
@@ -115,14 +116,15 @@ namespace Microsoft.EntityFrameworkCore.Internal
             }
 
             var tracked = FindTracked(keyValues!, out var keyProperties);
-            return tracked != null
-                ? new ValueTask<object?>(tracked)
-                : new ValueTask<object?>(
-                      _queryRoot.FirstOrDefaultAsync(
-                          BuildObjectLambda(keyProperties, new ValueBuffer(keyValues)),
-                          cancellationToken
-                      )
-                  );
+            return
+                tracked != null
+              ? new ValueTask<object?>(tracked)
+              : new ValueTask<object?>(
+                    _queryRoot.FirstOrDefaultAsync(
+                        BuildObjectLambda(keyProperties, new ValueBuffer(keyValues)),
+                        cancellationToken
+                    )
+                );
         }
 
         /// <summary>

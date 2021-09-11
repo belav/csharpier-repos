@@ -19,9 +19,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var ySystemNamespace =
                 y != null && (y == "System" || y.StartsWith("System.", StringComparison.Ordinal));
 
-            return xSystemNamespace && !ySystemNamespace
-                ? -1
-                : !xSystemNamespace && ySystemNamespace ? 1 : string.CompareOrdinal(x, y);
+            return
+                xSystemNamespace && !ySystemNamespace
+              ? -1
+              : !xSystemNamespace && ySystemNamespace ? 1 : string.CompareOrdinal(x, y);
         }
     }
 }

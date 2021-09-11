@@ -339,9 +339,10 @@ namespace System.IO.Strategies
                 cancellationToken
             );
 
-            return readResult.IsCompletedSuccessfully
-                ? LastSyncCompletedReadTask(readResult.Result)
-                : readResult.AsTask();
+            return
+                readResult.IsCompletedSuccessfully
+              ? LastSyncCompletedReadTask(readResult.Result)
+              : readResult.AsTask();
 
             Task<int> LastSyncCompletedReadTask(int val)
             {
@@ -1001,9 +1002,10 @@ namespace System.IO.Strategies
             EnsureNotClosed();
             EnsureCanRead();
 
-            return cancellationToken.IsCancellationRequested
-                ? Task.FromCanceled<int>(cancellationToken)
-                : CopyToAsyncCore(destination, bufferSize, cancellationToken);
+            return
+                cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled<int>(cancellationToken)
+              : CopyToAsyncCore(destination, bufferSize, cancellationToken);
         }
 
         private async Task CopyToAsyncCore(

@@ -1043,9 +1043,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                return matchingRefParameters.Count > 0
-                    ? matchingRefParameters.ToImmutable()
-                    : allParameters.ToImmutable();
+                return
+                    matchingRefParameters.Count > 0
+                  ? matchingRefParameters.ToImmutable()
+                  : allParameters.ToImmutable();
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInArrayCreationExpression(
@@ -2282,12 +2283,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             private ITypeSymbol InferTypeForFirstParameterOfParenthesizedLambda(
                 ParenthesizedLambdaExpressionSyntax lambdaExpression
             ) {
-                return lambdaExpression.ParameterList.Parameters.Count == 0
-                    ? null
-                    : InferTypeForFirstParameterOfLambda(
-                          lambdaExpression,
-                          lambdaExpression.ParameterList.Parameters[0]
-                      );
+                return
+                    lambdaExpression.ParameterList.Parameters.Count == 0
+                  ? null
+                  : InferTypeForFirstParameterOfLambda(
+                        lambdaExpression,
+                        lambdaExpression.ParameterList.Parameters[0]
+                    );
             }
 
             private ITypeSymbol InferTypeForFirstParameterOfSimpleLambda(
@@ -2496,12 +2498,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // We don't care what the type is, as long as it has 1 type argument. This will work for IEnumerable, IEnumerator,
                 // IAsyncEnumerable, IAsyncEnumerator and it's also good for error recovery in case there is a missing using.
-                return memberType is INamedTypeSymbol namedType
-                && namedType.TypeArguments.Length == 1
-                    ? SpecializedCollections.SingletonEnumerable(
-                          new TypeInferenceInfo(namedType.TypeArguments[0])
-                      )
-                    : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
+                return
+                    memberType is INamedTypeSymbol namedType && namedType.TypeArguments.Length == 1
+                  ? SpecializedCollections.SingletonEnumerable(
+                        new TypeInferenceInfo(namedType.TypeArguments[0])
+                    )
+                  : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInRefExpression(
@@ -2541,9 +2543,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     n => n.IsReturnableConstruct()
                 );
 
-                return ancestor is AnonymousFunctionExpressionSyntax anonymousFunction
-                    ? InferTypeInAnonymousFunctionExpression(anonymousFunction)
-                    : InferTypeInMethodLikeDeclaration(ancestor);
+                return
+                    ancestor is AnonymousFunctionExpressionSyntax anonymousFunction
+                  ? InferTypeInAnonymousFunctionExpression(anonymousFunction)
+                  : InferTypeInMethodLikeDeclaration(ancestor);
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInArrowExpressionClause(
@@ -2559,11 +2562,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var type = symbol.GetMemberType();
                 var isAsync = symbol is IMethodSymbol methodSymbol && methodSymbol.IsAsync;
 
-                return type != null
-                    ? SpecializedCollections.SingletonEnumerable(
-                          new TypeInferenceInfo(UnwrapTaskLike(type, isAsync))
-                      )
-                    : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
+                return
+                    type != null
+                  ? SpecializedCollections.SingletonEnumerable(
+                        new TypeInferenceInfo(UnwrapTaskLike(type, isAsync))
+                    )
+                  : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
             }
 
             private ISymbol GetDeclaredMemberSymbolFromOriginalSemanticModel(
@@ -2584,12 +2588,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return originalSemanticModel.GetDeclaredSymbol(declaration, CancellationToken);
                 }
 
-                return declarationInCurrentTree != null
-                    ? currentSemanticModel.GetDeclaredSymbol(
-                          declarationInCurrentTree,
-                          CancellationToken
-                      )
-                    : null;
+                return
+                    declarationInCurrentTree != null
+                  ? currentSemanticModel.GetDeclaredSymbol(
+                        declarationInCurrentTree,
+                        CancellationToken
+                    )
+                  : null;
             }
 
             private IEnumerable<TypeInferenceInfo> InferTypeInSwitchLabel(

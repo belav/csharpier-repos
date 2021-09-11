@@ -98,9 +98,10 @@ namespace System.Net.Http
         {
             get
             {
-                return HttpRequestMessage != null
-                    ? HttpRequestMessage.Content
-                    : HttpResponseMessage.Content;
+                return
+                    HttpRequestMessage != null
+                  ? HttpRequestMessage.Content
+                  : HttpResponseMessage.Content;
             }
         }
 

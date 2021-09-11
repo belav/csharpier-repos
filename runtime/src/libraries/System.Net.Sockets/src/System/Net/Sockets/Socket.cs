@@ -553,12 +553,13 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.ExclusiveAddressUse
-                )! != 0
-                    ? true
-                    : false;
+                return
+                    (int)GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ExclusiveAddressUse
+                    )! != 0
+                  ? true
+                  : false;
             }
             set
             {
@@ -676,9 +677,10 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay)! != 0
-                    ? true
-                    : false;
+                return
+                    (int)GetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay)! != 0
+                  ? true
+                  : false;
             }
             set { SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, value ? 1 : 0); }
         }
@@ -735,12 +737,11 @@ namespace System.Net.Sockets
             {
                 if (_addressFamily == AddressFamily.InterNetwork)
                 {
-                    return (int)GetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.DontFragment
-                    )! != 0
-                        ? true
-                        : false;
+                    return
+                        (int)GetSocketOption(SocketOptionLevel.IP, SocketOptionName.DontFragment)!
+                        != 0
+                      ? true
+                      : false;
                 }
                 else
                 {
@@ -770,21 +771,23 @@ namespace System.Net.Sockets
             {
                 if (_addressFamily == AddressFamily.InterNetwork)
                 {
-                    return (int)GetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.MulticastLoopback
-                    )! != 0
-                        ? true
-                        : false;
+                    return
+                        (int)GetSocketOption(
+                            SocketOptionLevel.IP,
+                            SocketOptionName.MulticastLoopback
+                        )! != 0
+                      ? true
+                      : false;
                 }
                 else if (_addressFamily == AddressFamily.InterNetworkV6)
                 {
-                    return (int)GetSocketOption(
-                        SocketOptionLevel.IPv6,
-                        SocketOptionName.MulticastLoopback
-                    )! != 0
-                        ? true
-                        : false;
+                    return
+                        (int)GetSocketOption(
+                            SocketOptionLevel.IPv6,
+                            SocketOptionName.MulticastLoopback
+                        )! != 0
+                      ? true
+                      : false;
                 }
                 else
                 {
@@ -820,10 +823,10 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast)!
-                != 0
-                    ? true
-                    : false;
+                return
+                    (int)GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast)! != 0
+                  ? true
+                  : false;
             }
             set
             {
@@ -1393,9 +1396,10 @@ namespace System.Net.Sockets
         public int Send(ReadOnlySpan<byte> buffer, SocketFlags socketFlags)
         {
             int bytesTransferred = Send(buffer, socketFlags, out SocketError errorCode);
-            return errorCode == SocketError.Success
-                ? bytesTransferred
-                : throw new SocketException((int)errorCode);
+            return
+                errorCode == SocketError.Success
+              ? bytesTransferred
+              : throw new SocketException((int)errorCode);
         }
 
         public int Send(
@@ -1673,9 +1677,10 @@ namespace System.Net.Sockets
         public int Receive(Span<byte> buffer, SocketFlags socketFlags)
         {
             int bytesTransferred = Receive(buffer, socketFlags, out SocketError errorCode);
-            return errorCode == SocketError.Success
-                ? bytesTransferred
-                : throw new SocketException((int)errorCode);
+            return
+                errorCode == SocketError.Success
+              ? bytesTransferred
+              : throw new SocketException((int)errorCode);
         }
 
         public int Receive(Span<byte> buffer, SocketFlags socketFlags, out SocketError errorCode)
@@ -3919,11 +3924,12 @@ namespace System.Net.Sockets
         internal static int GetAddressSize(EndPoint endPoint)
         {
             AddressFamily fam = endPoint.AddressFamily;
-            return fam == AddressFamily.InterNetwork
-                ? SocketAddressPal.IPv4AddressSize
-                : fam == AddressFamily.InterNetworkV6
-                    ? SocketAddressPal.IPv6AddressSize
-                    : endPoint.Serialize().Size;
+            return
+                fam == AddressFamily.InterNetwork
+              ? SocketAddressPal.IPv4AddressSize
+              : fam == AddressFamily.InterNetworkV6
+                  ? SocketAddressPal.IPv6AddressSize
+                  : endPoint.Serialize().Size;
         }
 
         private Internals.SocketAddress Serialize(ref EndPoint remoteEP)

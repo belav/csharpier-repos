@@ -139,13 +139,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int characterPosition,
             OptionSet options
         ) {
-            return ShouldTriggerInArgumentLists(options)
-                ? CompletionUtilities.IsTriggerCharacterOrArgumentListCharacter(
-                      text,
-                      characterPosition,
-                      options
-                  )
-                : CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
+            return
+                ShouldTriggerInArgumentLists(options)
+              ? CompletionUtilities.IsTriggerCharacterOrArgumentListCharacter(
+                    text,
+                    characterPosition,
+                    options
+                )
+              : CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
         }
 
         internal override async Task<bool> IsSyntacticTriggerCharacterAsync(

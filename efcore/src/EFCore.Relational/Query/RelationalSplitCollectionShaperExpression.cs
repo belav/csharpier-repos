@@ -140,21 +140,22 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
-            return parentIdentifier != ParentIdentifier
-            || childIdentifier != ChildIdentifier
-            || selectExpression != SelectExpression
-            || innerShaper != InnerShaper
-                ? new RelationalSplitCollectionShaperExpression(
-                      CollectionId,
-                      parentIdentifier,
-                      childIdentifier,
-                      IdentifierValueComparers,
-                      selectExpression,
-                      innerShaper,
-                      Navigation,
-                      ElementType
-                  )
-                : this;
+            return
+                parentIdentifier != ParentIdentifier
+                || childIdentifier != ChildIdentifier
+                || selectExpression != SelectExpression
+                || innerShaper != InnerShaper
+              ? new RelationalSplitCollectionShaperExpression(
+                    CollectionId,
+                    parentIdentifier,
+                    childIdentifier,
+                    IdentifierValueComparers,
+                    selectExpression,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
+              : this;
         }
 
         /// <inheritdoc />

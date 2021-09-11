@@ -121,9 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return _isImplicitlyDeclared
-                    ? ImmutableArray<SyntaxReference>.Empty
-                    : GetDeclaringSyntaxReferenceHelper<CSharpSyntaxNode>(_locations);
+                return
+                    _isImplicitlyDeclared
+                  ? ImmutableArray<SyntaxReference>.Empty
+                  : GetDeclaringSyntaxReferenceHelper<CSharpSyntaxNode>(_locations);
             }
         }
 

@@ -337,21 +337,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 );
             }
 
-            return relationshipBuilder.HasNavigation(
-                (string?)null,
-                pointsToPrincipal: false,
-                fromDataAnnotation: true
-            )
-                is null
-                ? null
-                : foreignKey.PrincipalEntityType.Builder.HasRelationship(
-                      foreignKey.DeclaringEntityType,
-                      principalToDependentNavigationName,
-                      null,
-                      fromDataAnnotation: true
-                  ) == null
-                    ? null
-                    : relationshipBuilder;
+            return
+                relationshipBuilder.HasNavigation(
+                    (string?)null,
+                    pointsToPrincipal: false,
+                    fromDataAnnotation: true
+                )
+                    is null
+              ? null
+              : foreignKey.PrincipalEntityType.Builder.HasRelationship(
+                    foreignKey.DeclaringEntityType,
+                    principalToDependentNavigationName,
+                    null,
+                    fromDataAnnotation: true
+                ) == null
+                  ? null
+                  : relationshipBuilder;
         }
 
         private static ForeignKeyAttribute? GetForeignKeyAttribute(

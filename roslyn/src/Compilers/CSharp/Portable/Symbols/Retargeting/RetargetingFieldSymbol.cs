@@ -106,9 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 var associated = _underlyingField.AssociatedSymbol;
-                return (object)associated == null
-                    ? null
-                    : this.RetargetingTranslator.Retarget(associated);
+                return
+                    (object)associated == null
+                  ? null
+                  : this.RetargetingTranslator.Retarget(associated);
             }
         }
 

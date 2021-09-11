@@ -209,9 +209,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.IsStatic
-                    ? WellKnownMemberNames.StaticConstructorName
-                    : WellKnownMemberNames.InstanceConstructorName;
+                return
+                    this.IsStatic
+                  ? WellKnownMemberNames.StaticConstructorName
+                  : WellKnownMemberNames.InstanceConstructorName;
             }
         }
 

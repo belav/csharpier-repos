@@ -528,9 +528,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     );
                 }
 
-                return expressionNode == null
-                    ? new[] { valueNode, changeNode }
-                    : new[] { valueNode, changeNode, expressionNode };
+                return
+                    expressionNode == null
+                  ? new[] { valueNode, changeNode }
+                  : new[] { valueNode, changeNode, expressionNode };
             }
         }
 

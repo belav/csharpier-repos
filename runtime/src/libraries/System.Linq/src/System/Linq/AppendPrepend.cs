@@ -17,9 +17,10 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return source is AppendPrependIterator<TSource> appendable
-                ? appendable.Append(element)
-                : new AppendPrepend1Iterator<TSource>(source, element, appending: true);
+            return
+                source is AppendPrependIterator<TSource> appendable
+              ? appendable.Append(element)
+              : new AppendPrepend1Iterator<TSource>(source, element, appending: true);
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(
@@ -31,9 +32,10 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return source is AppendPrependIterator<TSource> appendable
-                ? appendable.Prepend(element)
-                : new AppendPrepend1Iterator<TSource>(source, element, appending: false);
+            return
+                source is AppendPrependIterator<TSource> appendable
+              ? appendable.Prepend(element)
+              : new AppendPrepend1Iterator<TSource>(source, element, appending: false);
         }
 
         /// <summary>

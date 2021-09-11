@@ -67,12 +67,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
 
-            return method.Name == nameof(ToString)
-            && arguments.Count == 0
-            && instance != null
-            && _typeMapping.Contains(instance.Type)
-                ? _sqlExpressionFactory.Convert(instance, typeof(string))
-                : null;
+            return
+                method.Name == nameof(ToString)
+                && arguments.Count == 0
+                && instance != null
+                && _typeMapping.Contains(instance.Type)
+              ? _sqlExpressionFactory.Convert(instance, typeof(string))
+              : null;
         }
     }
 }

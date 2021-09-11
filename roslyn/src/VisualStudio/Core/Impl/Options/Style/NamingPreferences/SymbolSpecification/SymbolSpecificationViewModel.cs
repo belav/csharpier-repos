@@ -378,13 +378,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
             internal SymbolKindOrTypeKind CreateSymbolOrTypeOrMethodKind()
             {
-                return _symbolKind.HasValue
-                    ? new SymbolKindOrTypeKind(_symbolKind.Value)
-                    : _typeKind.HasValue
-                        ? new SymbolKindOrTypeKind(_typeKind.Value)
-                        : _methodKind.HasValue
-                            ? new SymbolKindOrTypeKind(_methodKind.Value)
-                            : throw ExceptionUtilities.Unreachable;
+                return
+                    _symbolKind.HasValue
+                  ? new SymbolKindOrTypeKind(_symbolKind.Value)
+                  : _typeKind.HasValue
+                      ? new SymbolKindOrTypeKind(_typeKind.Value)
+                      : _methodKind.HasValue
+                          ? new SymbolKindOrTypeKind(_methodKind.Value)
+                          : throw ExceptionUtilities.Unreachable;
             }
         }
 

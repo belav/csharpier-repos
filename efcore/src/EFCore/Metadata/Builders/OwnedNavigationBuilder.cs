@@ -901,12 +901,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             Check.NotEmpty(navigationName, nameof(navigationName));
 
-            return DependentEntityType.ClrType == Model.DefaultPropertyBagType
-                ? HasOne(navigationName, null) // Path only used by pre 3.0 snapshots
-                : HasOne(
-                      DependentEntityType.GetNavigationMemberInfo(navigationName).GetMemberType(),
-                      navigationName
-                  );
+            return
+                DependentEntityType.ClrType == Model.DefaultPropertyBagType
+              ? HasOne(navigationName, null) // Path only used by pre 3.0 snapshots
+              : HasOne(
+                    DependentEntityType.GetNavigationMemberInfo(navigationName).GetMemberType(),
+                    navigationName
+                );
         }
 
         /// <summary>

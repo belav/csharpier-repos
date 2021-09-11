@@ -80,9 +80,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConsList<TypeParameterSymbol> inProgress
         ) {
             var bounds = this.GetBounds(inProgress);
-            return (bounds != null)
-                ? bounds.ConstraintTypes
-                : ImmutableArray<TypeWithAnnotations>.Empty;
+            return
+                (bounds != null)
+              ? bounds.ConstraintTypes
+              : ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
@@ -827,9 +828,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private TypeParameterConstraintKind GetConstraintKinds()
         {
             var constraintKinds = _owner.GetTypeParameterConstraintKinds();
-            return constraintKinds.IsEmpty
-                ? TypeParameterConstraintKind.None
-                : constraintKinds[Ordinal];
+            return
+                constraintKinds.IsEmpty
+              ? TypeParameterConstraintKind.None
+              : constraintKinds[Ordinal];
         }
     }
 
@@ -862,9 +864,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public TypeParameterSymbol GetOverriddenTypeParameter(int ordinal)
         {
             var overriddenMethod = this.OverriddenMethod;
-            return ((object)overriddenMethod != null)
-                ? overriddenMethod.TypeParameters[ordinal]
-                : null;
+            return
+                ((object)overriddenMethod != null)
+              ? overriddenMethod.TypeParameters[ordinal]
+              : null;
         }
 
         public TypeMap TypeMap
@@ -1059,9 +1062,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 TypeParameterSymbol typeParameter = this.OverriddenTypeParameter;
-                return ((object)typeParameter != null)
-                    ? typeParameter.ReferenceTypeConstraintIsNullable
-                    : false;
+                return
+                    ((object)typeParameter != null)
+                  ? typeParameter.ReferenceTypeConstraintIsNullable
+                  : false;
             }
         }
 

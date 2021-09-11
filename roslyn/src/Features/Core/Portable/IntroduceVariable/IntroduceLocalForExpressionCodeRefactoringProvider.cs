@@ -75,9 +75,10 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             var expressionStatement =
                 await context.TryGetRelevantNodeAsync<TExpressionStatementSyntax>()
                     .ConfigureAwait(false);
-            return expressionStatement != null && IsValid(expressionStatement, context.Span)
-                ? expressionStatement
-                : null;
+            return
+                expressionStatement != null && IsValid(expressionStatement, context.Span)
+              ? expressionStatement
+              : null;
         }
 
         private async Task<Document> IntroduceLocalAsync(

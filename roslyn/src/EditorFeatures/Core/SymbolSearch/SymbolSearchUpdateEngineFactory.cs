@@ -42,9 +42,10 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// </summary>
         public static ISymbolSearchUpdateEngine CreateEngineInProcess()
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? new SymbolSearchUpdateEngine()
-                : (ISymbolSearchUpdateEngine)new NoOpUpdateEngine();
+            return
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+              ? new SymbolSearchUpdateEngine()
+              : (ISymbolSearchUpdateEngine)new NoOpUpdateEngine();
         }
 
         private sealed class NoOpUpdateEngine : ISymbolSearchUpdateEngine
@@ -135,9 +136,10 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     )
                     .ConfigureAwait(false);
 
-                return result.HasValue
-                    ? result.Value
-                    : ImmutableArray<PackageWithAssemblyResult>.Empty;
+                return
+                    result.HasValue
+                  ? result.Value
+                  : ImmutableArray<PackageWithAssemblyResult>.Empty;
             }
 
             public async ValueTask<
@@ -160,9 +162,10 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     )
                     .ConfigureAwait(false);
 
-                return result.HasValue
-                    ? result.Value
-                    : ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty;
+                return
+                    result.HasValue
+                  ? result.Value
+                  : ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty;
             }
 
             public async ValueTask UpdateContinuouslyAsync(

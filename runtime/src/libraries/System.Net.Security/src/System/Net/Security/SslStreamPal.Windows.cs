@@ -165,19 +165,20 @@ namespace System.Net.Security
             bool isServer
         ) {
             // New crypto API supports TLS1.3 but it does not allow to force NULL encryption.
-            return !UseNewCryptoApi || policy == EncryptionPolicy.NoEncryption
-                ? AcquireCredentialsHandleSchannelCred(
-                      certificateContext?.Certificate,
-                      protocols,
-                      policy,
-                      isServer
-                  )
-                : AcquireCredentialsHandleSchCredentials(
-                      certificateContext?.Certificate,
-                      protocols,
-                      policy,
-                      isServer
-                  );
+            return
+                !UseNewCryptoApi || policy == EncryptionPolicy.NoEncryption
+              ? AcquireCredentialsHandleSchannelCred(
+                    certificateContext?.Certificate,
+                    protocols,
+                    policy,
+                    isServer
+                )
+              : AcquireCredentialsHandleSchCredentials(
+                    certificateContext?.Certificate,
+                    protocols,
+                    policy,
+                    isServer
+                );
         }
 
         // This is legacy crypto API used on .NET Framework and older Windows versions.

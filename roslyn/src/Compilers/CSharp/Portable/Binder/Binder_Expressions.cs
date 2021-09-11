@@ -4482,16 +4482,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ImmutableArray<BoundExpression> arraySizes = sizes.ToImmutableAndFree();
 
-            return node.Initializer == null
-                ? new BoundArrayCreation(node, arraySizes, null, type, hasErrors)
-                : BindArrayCreationWithInitializer(
-                      diagnostics,
-                      node,
-                      node.Initializer,
-                      type,
-                      arraySizes,
-                      hasErrors: hasErrors
-                  );
+            return
+                node.Initializer == null
+              ? new BoundArrayCreation(node, arraySizes, null, type, hasErrors)
+              : BindArrayCreationWithInitializer(
+                    diagnostics,
+                    node,
+                    node.Initializer,
+                    type,
+                    arraySizes,
+                    hasErrors: hasErrors
+                );
         }
 
         private BoundExpression BindArrayDimension(
@@ -5122,24 +5123,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors = true;
             }
 
-            return node.Initializer == null
-                ? new BoundStackAllocArrayCreation(
-                      node,
-                      elementType.Type,
-                      count,
-                      initializerOpt: null,
-                      type,
-                      hasErrors: hasErrors
-                  )
-                : BindStackAllocWithInitializer(
-                      node,
-                      node.Initializer,
-                      type,
-                      elementType.Type,
-                      count,
-                      diagnostics,
-                      hasErrors
-                  );
+            return
+                node.Initializer == null
+              ? new BoundStackAllocArrayCreation(
+                    node,
+                    elementType.Type,
+                    count,
+                    initializerOpt: null,
+                    type,
+                    hasErrors: hasErrors
+                )
+              : BindStackAllocWithInitializer(
+                    node,
+                    node.Initializer,
+                    type,
+                    elementType.Type,
+                    count,
+                    diagnostics,
+                    hasErrors
+                );
         }
 
         private bool ReportBadStackAllocPosition(SyntaxNode node, BindingDiagnosticBag diagnostics)
@@ -7286,14 +7288,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // virtual method might be. Nevertheless, that's what we do.
                 //
                 // A constructor is accessed through an instance of the type being constructed:
-                return allowProtectedConstructorsOfBaseType
-                    ? this.IsAccessible(constructor, ref useSiteInfo, null)
-                    : this.IsSymbolAccessibleConditional(
-                          constructor,
-                          containingType,
-                          ref useSiteInfo,
-                          constructor.ContainingType
-                      );
+                return
+                    allowProtectedConstructorsOfBaseType
+                  ? this.IsAccessible(constructor, ref useSiteInfo, null)
+                  : this.IsSymbolAccessibleConditional(
+                        constructor,
+                        containingType,
+                        ref useSiteInfo,
+                        constructor.ContainingType
+                    );
             }
             else
             {
@@ -10395,22 +10398,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ? arrayType
                     : arrayType.ElementType;
 
-            return hasErrors
-                ? new BoundArrayAccess(
-                      node,
-                      BindToTypeForErrorRecovery(expr),
-                      convertedArguments.Select(e => BindToTypeForErrorRecovery(e))
-                          .AsImmutableOrNull(),
-                      resultType,
-                      hasErrors: true
-                  )
-                : new BoundArrayAccess(
-                      node,
-                      expr,
-                      convertedArguments.AsImmutableOrNull(),
-                      resultType,
-                      hasErrors: false
-                  );
+            return
+                hasErrors
+              ? new BoundArrayAccess(
+                    node,
+                    BindToTypeForErrorRecovery(expr),
+                    convertedArguments.Select(e => BindToTypeForErrorRecovery(e))
+                        .AsImmutableOrNull(),
+                    resultType,
+                    hasErrors: true
+                )
+              : new BoundArrayAccess(
+                    node,
+                    expr,
+                    convertedArguments.AsImmutableOrNull(),
+                    resultType,
+                    hasErrors: false
+                );
         }
 
         private BoundExpression ConvertToArrayIndex(

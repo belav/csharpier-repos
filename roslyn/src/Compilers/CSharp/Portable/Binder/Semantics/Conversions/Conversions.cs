@@ -132,20 +132,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             // An interpolated string expression may be converted to the types
             // System.IFormattable and System.FormattableString
-            return (
-                TypeSymbol.Equals(
-                    destination,
-                    Compilation.GetWellKnownType(WellKnownType.System_IFormattable),
-                    TypeCompareKind.ConsiderEverything2
+            return
+                (
+                    TypeSymbol.Equals(
+                        destination,
+                        Compilation.GetWellKnownType(WellKnownType.System_IFormattable),
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                    || TypeSymbol.Equals(
+                        destination,
+                        Compilation.GetWellKnownType(WellKnownType.System_FormattableString),
+                        TypeCompareKind.ConsiderEverything2
+                    )
                 )
-                || TypeSymbol.Equals(
-                    destination,
-                    Compilation.GetWellKnownType(WellKnownType.System_FormattableString),
-                    TypeCompareKind.ConsiderEverything2
-                )
-            )
-                ? Conversion.InterpolatedString
-                : Conversion.NoConversion;
+              ? Conversion.InterpolatedString
+              : Conversion.NoConversion;
         }
 
         /// <summary>

@@ -18,9 +18,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static IEnumerable<Location> GetDefinitionLocationsToShow(this ISymbol definition)
         {
-            return definition.IsKind(SymbolKind.Namespace)
-                ? SpecializedCollections.SingletonEnumerable(definition.Locations.First())
-                : definition.Locations;
+            return
+                definition.IsKind(SymbolKind.Namespace)
+              ? SpecializedCollections.SingletonEnumerable(definition.Locations.First())
+              : definition.Locations;
         }
 
         public static ImmutableArray<ReferencedSymbol> FilterToItemsToShow(
@@ -120,9 +121,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Solution solution,
             ISymbol symbol
         ) {
-            return symbol.IsOrdinaryMethod()
-                ? FilterNonMatchingMethodNamesWorker(result, solution, symbol)
-                : result;
+            return
+                symbol.IsOrdinaryMethod()
+              ? FilterNonMatchingMethodNamesWorker(result, solution, symbol)
+              : result;
         }
 
         private static ImmutableArray<ReferencedSymbol> FilterNonMatchingMethodNamesWorker(

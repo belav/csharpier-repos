@@ -169,13 +169,14 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 (x, y) =>
                 {
                     var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
-                    return result == 0
-                        ? string.Compare(
-                              x.Entry.RouteTemplate.TemplateText,
-                              y.Entry.RouteTemplate.TemplateText,
-                              StringComparison.Ordinal
-                          )
-                        : result;
+                    return
+                        result == 0
+                      ? string.Compare(
+                            x.Entry.RouteTemplate.TemplateText,
+                            y.Entry.RouteTemplate.TemplateText,
+                            StringComparison.Ordinal
+                        )
+                      : result;
                 }
             );
         }

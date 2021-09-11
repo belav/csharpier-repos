@@ -73,11 +73,12 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 newInstanceType,
                 modelMetadata
             );
-            return (typeArguments != null)
-                ? (IExtensibleModelBinder)Activator.CreateInstance(
-                      openBinderType.MakeGenericType(typeArguments)
-                  )
-                : null;
+            return
+                (typeArguments != null)
+              ? (IExtensibleModelBinder)Activator.CreateInstance(
+                    openBinderType.MakeGenericType(typeArguments)
+                )
+              : null;
         }
 
         [SuppressMessage(

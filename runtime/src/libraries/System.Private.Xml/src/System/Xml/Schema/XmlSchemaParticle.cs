@@ -46,11 +46,12 @@ namespace System.Xml.Schema
         {
             get
             {
-                return (_flags & Occurs.Max) == 0
-                    ? null
-                    : (_maxOccurs == decimal.MaxValue)
-                        ? "unbounded"
-                        : XmlConvert.ToString(_maxOccurs);
+                return
+                    (_flags & Occurs.Max) == 0
+                  ? null
+                  : (_maxOccurs == decimal.MaxValue)
+                      ? "unbounded"
+                      : XmlConvert.ToString(_maxOccurs);
             }
             set
             {

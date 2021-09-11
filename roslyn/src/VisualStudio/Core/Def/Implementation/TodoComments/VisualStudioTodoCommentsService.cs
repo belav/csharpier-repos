@@ -231,9 +231,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             DocumentId documentId,
             CancellationToken cancellationToken
         ) {
-            return _documentToInfos.TryGetValue(documentId, out var values)
-                ? values
-                : ImmutableArray<TodoCommentData>.Empty;
+            return
+                _documentToInfos.TryGetValue(documentId, out var values)
+              ? values
+              : ImmutableArray<TodoCommentData>.Empty;
         }
 
         /// <summary>

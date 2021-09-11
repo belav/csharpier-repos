@@ -114,20 +114,22 @@ namespace System.Buffers
                     uint digit = format[srcIndex] - 48u; // '0'
                     if (digit > 9)
                     {
-                        return throws
-                            ? throw new FormatException(
-                                  SR.Format(SR.Argument_CannotParsePrecision, MaxPrecision)
-                              )
-                            : false;
+                        return
+                            throws
+                          ? throw new FormatException(
+                                SR.Format(SR.Argument_CannotParsePrecision, MaxPrecision)
+                            )
+                          : false;
                     }
                     parsedPrecision = parsedPrecision * 10 + digit;
                     if (parsedPrecision > MaxPrecision)
                     {
-                        return throws
-                            ? throw new FormatException(
-                                  SR.Format(SR.Argument_PrecisionTooLarge, MaxPrecision)
-                              )
-                            : false;
+                        return
+                            throws
+                          ? throw new FormatException(
+                                SR.Format(SR.Argument_PrecisionTooLarge, MaxPrecision)
+                            )
+                          : false;
                     }
                 }
 

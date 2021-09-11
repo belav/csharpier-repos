@@ -89,15 +89,16 @@ namespace System.Threading
             if (m_localValues == null || AsyncLocalValueMap.IsEmpty(m_localValues))
             {
 #pragma warning disable CA1825 // Avoid unnecessary zero-length array allocations
-                return isFlowSuppressed
-                    ? (
-                          s_defaultFlowSuppressed ??= new ExecutionContext(
-                              AsyncLocalValueMap.Empty,
-                              new IAsyncLocal[0],
-                              isFlowSuppressed: true
-                          )
-                      )
-                    : null; // implies the default context
+                return
+                    isFlowSuppressed
+                  ? (
+                        s_defaultFlowSuppressed ??= new ExecutionContext(
+                            AsyncLocalValueMap.Empty,
+                            new IAsyncLocal[0],
+                            isFlowSuppressed: true
+                        )
+                    )
+                  : null; // implies the default context
 #pragma warning restore CA1825
             }
 

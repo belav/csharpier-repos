@@ -261,9 +261,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     && ((IdentifierNameSyntax)assignmentExpression.Right).Identifier.ValueText
                         == "value"
                 ) {
-                    return CheckExpressionSyntactically(assignmentExpression.Left)
-                        ? assignmentExpression.Left
-                        : null;
+                    return
+                        CheckExpressionSyntactically(assignmentExpression.Left)
+                      ? assignmentExpression.Left
+                      : null;
                 }
             }
 
@@ -280,9 +281,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             FieldDeclarationSyntax fieldDeclaration,
             VariableDeclaratorSyntax variableDeclarator
         ) {
-            return fieldDeclaration.Declaration.Variables.Count == 1
-                ? fieldDeclaration
-                : (SyntaxNode)variableDeclarator;
+            return
+                fieldDeclaration.Declaration.Variables.Count == 1
+              ? fieldDeclaration
+              : (SyntaxNode)variableDeclarator;
         }
     }
 }

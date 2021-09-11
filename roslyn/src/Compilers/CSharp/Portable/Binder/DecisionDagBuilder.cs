@@ -1150,11 +1150,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BoundDecisionDagNode final = uniqifyDagNode(
                             new BoundLeafDecisionDagNode(syntax, label)
                         );
-                        return bindings.IsDefaultOrEmpty
-                            ? final
-                            : uniqifyDagNode(
-                                  new BoundWhenDecisionDagNode(syntax, bindings, null, final, null)
-                              );
+                        return
+                            bindings.IsDefaultOrEmpty
+                          ? final
+                          : uniqifyDagNode(
+                                new BoundWhenDecisionDagNode(syntax, bindings, null, final, null)
+                            );
                     }
                 }
                 else
@@ -1217,16 +1218,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             StateForCase makeNext(Tests remainingTests)
             {
-                return remainingTests.Equals(stateForCase.RemainingTests)
-                    ? stateForCase
-                    : new StateForCase(
-                          stateForCase.Index,
-                          stateForCase.Syntax,
-                          remainingTests,
-                          stateForCase.Bindings,
-                          stateForCase.WhenClause,
-                          stateForCase.CaseLabel
-                      );
+                return
+                    remainingTests.Equals(stateForCase.RemainingTests)
+                  ? stateForCase
+                  : new StateForCase(
+                        stateForCase.Index,
+                        stateForCase.Syntax,
+                        remainingTests,
+                        stateForCase.Bindings,
+                        stateForCase.WhenClause,
+                        stateForCase.CaseLabel
+                    );
             }
         }
 
@@ -1619,9 +1621,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref useSiteInfo,
                 out Conversion conversion
             );
-            return (!conversion.Exists && isRuntimeSimilar(expressionType, patternType))
-                ? null // runtime and compile-time test behavior differ. Pretend we don't know what happens.
-                : result;
+            return
+                (!conversion.Exists && isRuntimeSimilar(expressionType, patternType))
+              ? null // runtime and compile-time test behavior differ. Pretend we don't know what happens.
+              : result;
 
             static bool isRuntimeSimilar(TypeSymbol expressionType, TypeSymbol patternType)
             {
@@ -1766,11 +1769,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 >.GetInstance();
                 int tempIdentifier(BoundDagEvaluation? e)
                 {
-                    return (e == null)
-                        ? 0
-                        : tempIdentifierMap.TryGetValue(e, out int value)
-                            ? value
-                            : tempIdentifierMap[e] = ++nextTempNumber;
+                    return
+                        (e == null)
+                      ? 0
+                      : tempIdentifierMap.TryGetValue(e, out int value)
+                          ? value
+                          : tempIdentifierMap[e] = ++nextTempNumber;
                 }
 
                 string tempName(BoundDagTemp t)

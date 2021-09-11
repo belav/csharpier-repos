@@ -42,9 +42,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal MakeAssemblyReferencesKind GetMakeAssemblyReferencesKind()
         {
-            return _useReferencedAssembliesOnly
-                ? MakeAssemblyReferencesKind.AllReferences
-                : MakeAssemblyReferencesKind.AllAssemblies;
+            return
+                _useReferencedAssembliesOnly
+              ? MakeAssemblyReferencesKind.AllReferences
+              : MakeAssemblyReferencesKind.AllAssemblies;
         }
 
         internal abstract void AppendFullName(StringBuilder builder, TMethodSymbol method);

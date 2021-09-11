@@ -394,9 +394,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         }
                         else
                         {
-                            return stopped
-                                ? ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
-                                : ResponseUtils.CreateResponse(HttpStatusCode.OK);
+                            return
+                                stopped
+                              ? ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                              : ResponseUtils.CreateResponse(HttpStatusCode.OK);
                         }
                     }
                 );

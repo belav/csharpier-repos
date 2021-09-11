@@ -419,11 +419,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
-            return source.ShaperExpression.Type != resultType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, resultType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != resultType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, resultType)
+                )
+              : source;
         }
 
         /// <summary>
@@ -610,11 +611,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1)));
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         /// <summary>
@@ -723,11 +725,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             selectExpression.ReverseOrderings();
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1)));
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         /// <summary>
@@ -1121,11 +1124,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var selectExpression = (SelectExpression)source.QueryExpression;
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(2)));
 
-            return source.ShaperExpression.Type != returnType
-                ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, returnType)
-                  )
-                : source;
+            return
+                source.ShaperExpression.Type != returnType
+              ? source.UpdateShaperExpression(
+                    Expression.Convert(source.ShaperExpression, returnType)
+                )
+              : source;
         }
 
         /// <summary>

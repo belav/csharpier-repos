@@ -41,29 +41,35 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
             switch (_operation)
             {
                 case IntegerOperationType.Equal:
-                    return compValue == _value
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        compValue == _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.Greater:
-                    return compValue > _value
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        compValue > _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.GreaterEqual:
-                    return compValue >= _value
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        compValue >= _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.Less:
-                    return compValue < _value
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        compValue < _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.LessEqual:
-                    return compValue <= _value
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        compValue <= _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.NotEqual:
-                    return compValue != _value
-                        ? MatchResults.EmptySuccess
-                        : MatchResults.EmptyFailure;
+                    return
+                        compValue != _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 default:
                     throw new ArgumentOutOfRangeException("operation"); // Will never be thrown
             }

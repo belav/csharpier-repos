@@ -106,36 +106,38 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return serverEnumerable;
 
                     case ResultCardinality.Single:
-                        return QueryCompilationContext.IsAsync
-                            ? Expression.Call(
-                                  _singleAsyncMethodInfo.MakeGenericMethod(
-                                      serverEnumerable.Type.GetSequenceType()
-                                  ),
-                                  serverEnumerable,
-                                  _cancellationTokenParameter
-                              )
-                            : Expression.Call(
-                                  EnumerableMethods.SingleWithoutPredicate.MakeGenericMethod(
-                                      serverEnumerable.Type.GetSequenceType()
-                                  ),
-                                  serverEnumerable
-                              );
+                        return
+                            QueryCompilationContext.IsAsync
+                          ? Expression.Call(
+                                _singleAsyncMethodInfo.MakeGenericMethod(
+                                    serverEnumerable.Type.GetSequenceType()
+                                ),
+                                serverEnumerable,
+                                _cancellationTokenParameter
+                            )
+                          : Expression.Call(
+                                EnumerableMethods.SingleWithoutPredicate.MakeGenericMethod(
+                                    serverEnumerable.Type.GetSequenceType()
+                                ),
+                                serverEnumerable
+                            );
 
                     case ResultCardinality.SingleOrDefault:
-                        return QueryCompilationContext.IsAsync
-                            ? Expression.Call(
-                                  _singleOrDefaultAsyncMethodInfo.MakeGenericMethod(
-                                      serverEnumerable.Type.GetSequenceType()
-                                  ),
-                                  serverEnumerable,
-                                  _cancellationTokenParameter
-                              )
-                            : Expression.Call(
-                                  EnumerableMethods.SingleOrDefaultWithoutPredicate.MakeGenericMethod(
-                                      serverEnumerable.Type.GetSequenceType()
-                                  ),
-                                  serverEnumerable
-                              );
+                        return
+                            QueryCompilationContext.IsAsync
+                          ? Expression.Call(
+                                _singleOrDefaultAsyncMethodInfo.MakeGenericMethod(
+                                    serverEnumerable.Type.GetSequenceType()
+                                ),
+                                serverEnumerable,
+                                _cancellationTokenParameter
+                            )
+                          : Expression.Call(
+                                EnumerableMethods.SingleOrDefaultWithoutPredicate.MakeGenericMethod(
+                                    serverEnumerable.Type.GetSequenceType()
+                                ),
+                                serverEnumerable
+                            );
                 }
             }
 
@@ -298,10 +300,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is EntityShaperExpression
-                || extensionExpression is ProjectionBindingExpression
-                    ? extensionExpression
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is EntityShaperExpression
+                    || extensionExpression is ProjectionBindingExpression
+                  ? extensionExpression
+                  : base.VisitExtension(extensionExpression);
             }
 
             private static Expression? RemoveConvert(Expression? expression)
@@ -399,9 +402,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return extensionExpression is EntityShaperExpression entityShaperExpression
-                    ? ProcessEntityShaper(entityShaperExpression)
-                    : base.VisitExtension(extensionExpression);
+                return
+                    extensionExpression is EntityShaperExpression entityShaperExpression
+                  ? ProcessEntityShaper(entityShaperExpression)
+                  : base.VisitExtension(extensionExpression);
             }
 
             private Expression ProcessEntityShaper(EntityShaperExpression entityShaperExpression)

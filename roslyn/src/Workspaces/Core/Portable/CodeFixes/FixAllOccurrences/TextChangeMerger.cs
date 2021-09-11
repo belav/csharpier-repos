@@ -163,9 +163,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // one insertion then the other, or vice versa.  Because of this ambiguity
             // we conservatively disallow cases like this.
 
-            return IsPureInsertion(change)
-                ? PureInsertionChangeCanBeApplied(change, in overlappingSpans, in intersectingSpans)
-                : OverwriteChangeCanBeApplied(change, in overlappingSpans, in intersectingSpans);
+            return
+                IsPureInsertion(change)
+              ? PureInsertionChangeCanBeApplied(change, in overlappingSpans, in intersectingSpans)
+              : OverwriteChangeCanBeApplied(change, in overlappingSpans, in intersectingSpans);
         }
 
         private static bool IsPureInsertion(TextChange change) => change.Span.IsEmpty;

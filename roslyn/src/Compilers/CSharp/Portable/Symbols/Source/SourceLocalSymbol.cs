@@ -153,24 +153,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(nodeBinder != null);
 
             Debug.Assert(closestTypeSyntax.Kind() != SyntaxKind.RefType);
-            return closestTypeSyntax.IsVar
-                ? new DeconstructionLocalSymbol(
-                      containingSymbol,
-                      scopeBinder,
-                      nodeBinder,
-                      closestTypeSyntax,
-                      identifierToken,
-                      kind,
-                      deconstruction
-                  )
-                : new SourceLocalSymbol(
-                      containingSymbol,
-                      scopeBinder,
-                      false,
-                      closestTypeSyntax,
-                      identifierToken,
-                      kind
-                  );
+            return
+                closestTypeSyntax.IsVar
+              ? new DeconstructionLocalSymbol(
+                    containingSymbol,
+                    scopeBinder,
+                    nodeBinder,
+                    closestTypeSyntax,
+                    identifierToken,
+                    kind,
+                    deconstruction
+                )
+              : new SourceLocalSymbol(
+                    containingSymbol,
+                    scopeBinder,
+                    false,
+                    closestTypeSyntax,
+                    identifierToken,
+                    kind
+                );
         }
 
         /// <summary>
@@ -214,26 +215,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 !(nodeToBind.Kind() == SyntaxKind.SwitchExpressionArm)
                     || nodeBinder is SwitchExpressionArmBinder
             );
-            return typeSyntax?.IsVar != false
-            && kind != LocalDeclarationKind.DeclarationExpressionVariable
-                ? new LocalSymbolWithEnclosingContext(
-                      containingSymbol,
-                      scopeBinder,
-                      nodeBinder,
-                      typeSyntax,
-                      identifierToken,
-                      kind,
-                      nodeToBind,
-                      forbiddenZone
-                  )
-                : new SourceLocalSymbol(
-                      containingSymbol,
-                      scopeBinder,
-                      false,
-                      typeSyntax,
-                      identifierToken,
-                      kind
-                  );
+            return
+                typeSyntax?.IsVar != false
+                && kind != LocalDeclarationKind.DeclarationExpressionVariable
+              ? new LocalSymbolWithEnclosingContext(
+                    containingSymbol,
+                    scopeBinder,
+                    nodeBinder,
+                    typeSyntax,
+                    identifierToken,
+                    kind,
+                    nodeToBind,
+                    forbiddenZone
+                )
+              : new SourceLocalSymbol(
+                    containingSymbol,
+                    scopeBinder,
+                    false,
+                    typeSyntax,
+                    identifierToken,
+                    kind
+                );
         }
 
         /// <summary>
@@ -263,24 +265,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder initializerBinderOpt = null
         ) {
             Debug.Assert(declarationKind != LocalDeclarationKind.ForEachIterationVariable);
-            return (initializer != null)
-                ? new LocalWithInitializer(
-                      containingSymbol,
-                      scopeBinder,
-                      typeSyntax,
-                      identifierToken,
-                      initializer,
-                      initializerBinderOpt ?? scopeBinder,
-                      declarationKind
-                  )
-                : new SourceLocalSymbol(
-                      containingSymbol,
-                      scopeBinder,
-                      allowRefKind,
-                      typeSyntax,
-                      identifierToken,
-                      declarationKind
-                  );
+            return
+                (initializer != null)
+              ? new LocalWithInitializer(
+                    containingSymbol,
+                    scopeBinder,
+                    typeSyntax,
+                    identifierToken,
+                    initializer,
+                    initializerBinderOpt ?? scopeBinder,
+                    declarationKind
+                )
+              : new SourceLocalSymbol(
+                    containingSymbol,
+                    scopeBinder,
+                    allowRefKind,
+                    typeSyntax,
+                    identifierToken,
+                    declarationKind
+                );
         }
 
         internal override bool IsImportedFromMetadata
@@ -713,9 +716,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) {
                 Debug.Assert(boundInitValue != null);
                 MakeConstantTuple(inProgress: null, boundInitValue: boundInitValue);
-                return _constantTuple == null
-                    ? ImmutableBindingDiagnostic<AssemblySymbol>.Empty
-                    : _constantTuple.Diagnostics;
+                return
+                    _constantTuple == null
+                  ? ImmutableBindingDiagnostic<AssemblySymbol>.Empty
+                  : _constantTuple.Diagnostics;
             }
 
             internal override void SetRefEscape(uint value)

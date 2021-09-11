@@ -240,9 +240,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             private SyntaxKind AnalyzeNextStatement(StatementSyntax nextStatement)
             {
                 // Only the following "throw" and "return" can be moved into the switch expression.
-                return nextStatement.IsKind(SyntaxKind.ThrowStatement, SyntaxKind.ReturnStatement)
-                    ? Visit(nextStatement)
-                    : default;
+                return
+                    nextStatement.IsKind(SyntaxKind.ThrowStatement, SyntaxKind.ReturnStatement)
+                  ? Visit(nextStatement)
+                  : default;
             }
 
             private SyntaxKind AnalyzeSwitchSection(SwitchSectionSyntax section)
@@ -309,9 +310,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 // also can't convert a switch statement with ref-returns to a switch-expression
                 // (currently). Until the language supports ref-switch-expressions, we just disable
                 // things.
-                return node.Expression is null || node.Expression is RefExpressionSyntax
-                    ? default
-                    : SyntaxKind.ReturnStatement;
+                return
+                    node.Expression is null || node.Expression is RefExpressionSyntax
+                  ? default
+                  : SyntaxKind.ReturnStatement;
             }
 
             public override SyntaxKind VisitThrowStatement(ThrowStatementSyntax node)

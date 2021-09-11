@@ -169,24 +169,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 ? originalToken.ToString().Substring(1)
                 : originalToken.ToString();
 
-            return escape
-                ? originalToken.CopyAnnotationsTo(
-                      SyntaxFactory.VerbatimIdentifier(
-                          originalToken.LeadingTrivia,
-                          unescapedText,
-                          originalToken.ValueText,
-                          originalToken.TrailingTrivia
-                      )
-                  )
-                : originalToken.CopyAnnotationsTo(
-                      SyntaxFactory.Identifier(
-                          originalToken.LeadingTrivia,
-                          SyntaxKind.IdentifierToken,
-                          unescapedText,
-                          originalToken.ValueText,
-                          originalToken.TrailingTrivia
-                      )
-                  );
+            return
+                escape
+              ? originalToken.CopyAnnotationsTo(
+                    SyntaxFactory.VerbatimIdentifier(
+                        originalToken.LeadingTrivia,
+                        unescapedText,
+                        originalToken.ValueText,
+                        originalToken.TrailingTrivia
+                    )
+                )
+              : originalToken.CopyAnnotationsTo(
+                    SyntaxFactory.Identifier(
+                        originalToken.LeadingTrivia,
+                        SyntaxKind.IdentifierToken,
+                        unescapedText,
+                        originalToken.ValueText,
+                        originalToken.TrailingTrivia
+                    )
+                );
         }
     }
 }

@@ -107,12 +107,13 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         {
             var dotIndex = pattern.LastIndexOf('.');
             var containsDots = dotIndex >= 0;
-            return containsDots
-                ? (
-                      name: pattern.Substring(dotIndex + 1),
-                      containerOpt: pattern.Substring(0, dotIndex)
-                  )
-                : (name: pattern, containerOpt: null);
+            return
+                containsDots
+              ? (
+                    name: pattern.Substring(dotIndex + 1),
+                    containerOpt: pattern.Substring(0, dotIndex)
+                )
+              : (name: pattern, containerOpt: null);
         }
 
         public abstract bool AddMatches(string candidate, ArrayBuilder<PatternMatch> matches);
@@ -140,9 +141,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             bool punctuationStripped,
             bool fuzzyMatch
         ) {
-            return fuzzyMatch
-                ? FuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped)
-                : NonFuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped);
+            return
+                fuzzyMatch
+              ? FuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped)
+              : NonFuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped);
         }
 
         private static PatternMatch? FuzzyMatchPatternChunk(

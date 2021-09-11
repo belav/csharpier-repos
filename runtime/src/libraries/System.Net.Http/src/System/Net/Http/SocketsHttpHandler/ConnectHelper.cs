@@ -185,16 +185,14 @@ namespace System.Net.Http
             int port,
             CancellationToken cancellationToken
         ) {
-            return CancellationHelper.ShouldWrapInOperationCanceledException(
-                error,
-                cancellationToken
-            )
-                ? CancellationHelper.CreateOperationCanceledException(error, cancellationToken)
-                : new HttpRequestException(
-                      $"{error.Message} ({host}:{port})",
-                      error,
-                      RequestRetryType.RetryOnNextProxy
-                  );
+            return
+                CancellationHelper.ShouldWrapInOperationCanceledException(error, cancellationToken)
+              ? CancellationHelper.CreateOperationCanceledException(error, cancellationToken)
+              : new HttpRequestException(
+                    $"{error.Message} ({host}:{port})",
+                    error,
+                    RequestRetryType.RetryOnNextProxy
+                );
         }
     }
 }

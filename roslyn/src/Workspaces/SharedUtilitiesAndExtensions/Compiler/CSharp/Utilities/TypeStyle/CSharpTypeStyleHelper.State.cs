@@ -141,11 +141,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ) {
                 var typeSyntax = GetTypeSyntaxFromDeclaration(declarationStatement);
 
-                return typeSyntax != null
-                    ? IsMadeOfSpecialTypes(
-                          semanticModel.GetTypeInfo(typeSyntax.StripRefIfNeeded()).Type
-                      )
-                    : false;
+                return
+                    typeSyntax != null
+                  ? IsMadeOfSpecialTypes(
+                        semanticModel.GetTypeInfo(typeSyntax.StripRefIfNeeded()).Type
+                    )
+                  : false;
             }
 
             /// <summary>

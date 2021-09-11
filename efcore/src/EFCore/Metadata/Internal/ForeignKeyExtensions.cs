@@ -68,9 +68,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return foreignKey.IsSelfReferencing()
-                ? foreignKey.GetNavigations()
-                : foreignKey.FindNavigations(foreignKey.DeclaringEntityType == entityType);
+            return
+                foreignKey.IsSelfReferencing()
+              ? foreignKey.GetNavigations()
+              : foreignKey.FindNavigations(foreignKey.DeclaringEntityType == entityType);
         }
 
         /// <summary>
@@ -96,12 +97,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
-            || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
-                ? foreignKey.GetNavigations()
-                : foreignKey.FindNavigations(
-                      foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
-                  );
+            return
+                foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
+                || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
+              ? foreignKey.GetNavigations()
+              : foreignKey.FindNavigations(
+                    foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
+                );
         }
 
         /// <summary>
@@ -127,9 +129,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return foreignKey.IsSelfReferencing()
-                ? foreignKey.GetNavigations()
-                : foreignKey.FindNavigations(foreignKey.PrincipalEntityType == entityType);
+            return
+                foreignKey.IsSelfReferencing()
+              ? foreignKey.GetNavigations()
+              : foreignKey.FindNavigations(foreignKey.PrincipalEntityType == entityType);
         }
 
         /// <summary>
@@ -155,12 +158,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
-            || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
-                ? foreignKey.GetNavigations()
-                : foreignKey.FindNavigations(
-                      foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
-                  );
+            return
+                foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
+                || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
+              ? foreignKey.GetNavigations()
+              : foreignKey.FindNavigations(
+                    foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
+                );
         }
 
         private static IEnumerable<IReadOnlyNavigation> FindNavigations(
@@ -221,9 +225,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
-                ? foreignKey.PrincipalEntityType
-                : foreignKey.DeclaringEntityType;
+            return
+                foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
+              ? foreignKey.PrincipalEntityType
+              : foreignKey.DeclaringEntityType;
         }
 
         /// <summary>
@@ -264,9 +269,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
-                ? foreignKey.DeclaringEntityType
-                : foreignKey.PrincipalEntityType;
+            return
+                foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
+              ? foreignKey.DeclaringEntityType
+              : foreignKey.PrincipalEntityType;
         }
 
         /// <summary>

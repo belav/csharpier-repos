@@ -102,9 +102,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         token = token.WithLeadingTrivia(leading);
                     }
 
-                    return trailing.Node != trailingTrivia
-                        ? token.WithTrailingTrivia(trailing)
-                        : token;
+                    return
+                        trailing.Node != trailingTrivia
+                      ? token.WithTrailingTrivia(trailing)
+                      : token;
                 }
                 else
                 {

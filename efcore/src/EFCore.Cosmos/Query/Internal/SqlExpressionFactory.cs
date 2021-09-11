@@ -47,12 +47,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual SqlExpression ApplyDefaultTypeMapping(SqlExpression sqlExpression)
         {
-            return sqlExpression == null || sqlExpression.TypeMapping != null
-                ? sqlExpression
-                : ApplyTypeMapping(
-                      sqlExpression,
-                      _typeMappingSource.FindMapping(sqlExpression.Type)
-                  );
+            return
+                sqlExpression == null || sqlExpression.TypeMapping != null
+              ? sqlExpression
+              : ApplyTypeMapping(sqlExpression, _typeMappingSource.FindMapping(sqlExpression.Type));
         }
 
         /// <summary>

@@ -474,9 +474,10 @@ namespace System.Runtime.Serialization.Json
 
         internal static XmlDictionaryString? ConvertXmlNameToJsonName(XmlDictionaryString? xmlName)
         {
-            return (xmlName == null)
-                ? null
-                : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
+            return
+                (xmlName == null)
+              ? null
+              : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
         }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
@@ -858,9 +859,10 @@ namespace System.Runtime.Serialization.Json
 
         internal static bool CheckIfXmlNameRequiresMapping(string xmlName)
         {
-            return (xmlName == null)
-                ? false
-                : CheckIfJsonNameRequiresMapping(ConvertXmlNameToJsonName(xmlName));
+            return
+                (xmlName == null)
+              ? false
+              : CheckIfJsonNameRequiresMapping(ConvertXmlNameToJsonName(xmlName));
         }
 
         internal static bool CheckIfXmlNameRequiresMapping(XmlDictionaryString xmlName)
@@ -876,9 +878,10 @@ namespace System.Runtime.Serialization.Json
         [return: NotNullIfNotNull("xmlName")]
         internal static XmlDictionaryString? ConvertXmlNameToJsonName(XmlDictionaryString? xmlName)
         {
-            return (xmlName == null)
-                ? null
-                : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
+            return
+                (xmlName == null)
+              ? null
+              : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
         }
 
         internal static bool IsJsonLocalName(XmlReaderDelegator reader, string elementName)

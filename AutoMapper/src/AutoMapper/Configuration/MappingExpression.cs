@@ -247,9 +247,10 @@ namespace AutoMapper.Configuration
                 {
                     var bodyIsCastToObject =
                         e.Body.NodeType == ExpressionType.Convert && e.Body.Type == typeof(object);
-                    return bodyIsCastToObject
-                        ? Expression.Lambda(((UnaryExpression)e.Body).Operand, e.Parameters)
-                        : e;
+                    return
+                        bodyIsCastToObject
+                      ? Expression.Lambda(((UnaryExpression)e.Body).Operand, e.Parameters)
+                      : e;
                 }
             );
 

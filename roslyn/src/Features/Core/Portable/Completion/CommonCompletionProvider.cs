@@ -109,9 +109,10 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionItem item,
             CancellationToken cancellationToken
         ) {
-            return CommonCompletionItem.HasDescription(item)
-                ? Task.FromResult(CommonCompletionItem.GetDescription(item))
-                : Task.FromResult(CompletionDescription.Empty);
+            return
+                CommonCompletionItem.HasDescription(item)
+              ? Task.FromResult(CommonCompletionItem.GetDescription(item))
+              : Task.FromResult(CompletionDescription.Empty);
         }
 
         public override async Task<CompletionChange> GetChangeAsync(

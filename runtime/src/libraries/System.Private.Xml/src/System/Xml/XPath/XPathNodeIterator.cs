@@ -43,9 +43,10 @@ namespace System.Xml.XPath
         {
             get
             {
-                return Current == null
-                    ? null
-                    : (object)new XPathNavigator.DebuggerDisplayProxy(Current);
+                return
+                    Current == null
+                  ? null
+                  : (object)new XPathNavigator.DebuggerDisplayProxy(Current);
             }
         }
 

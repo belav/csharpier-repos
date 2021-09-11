@@ -10,9 +10,10 @@ internal static class Surfaces
     public static readonly Surface CheckerBoard = new Surface(
         delegate(Vector pos)
         {
-            return ((Math.Floor(pos.Z) + Math.Floor(pos.X)) % 2 != 0)
-                ? new Color(1, 1, 1)
-                : new Color(0.02, 0.0, 0.14);
+            return
+                ((Math.Floor(pos.Z) + Math.Floor(pos.X)) % 2 != 0)
+              ? new Color(1, 1, 1)
+              : new Color(0.02, 0.0, 0.14);
         },
         delegate(Vector pos)
         {

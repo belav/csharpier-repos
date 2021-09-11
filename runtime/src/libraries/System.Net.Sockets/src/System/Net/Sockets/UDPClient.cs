@@ -302,9 +302,10 @@ namespace System.Net.Sockets
         {
             ThrowIfDisposed();
 
-            return _active
-                ? _clientSocket.EndSend(asyncResult)
-                : _clientSocket.EndSendTo(asyncResult);
+            return
+                _active
+              ? _clientSocket.EndSend(asyncResult)
+              : _clientSocket.EndSendTo(asyncResult);
         }
 
         private void ValidateDatagram(byte[] datagram, int bytes, IPEndPoint? endPoint)

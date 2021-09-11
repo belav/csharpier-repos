@@ -22,9 +22,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
             var clientFactory = workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
             var client = await clientFactory.TryGetRemoteHostClientAsync(cancellationToken)
                 .ConfigureAwait(false);
-            return client == null
-                ? null
-                : new RazorLanguageServiceClient(client, GetServiceName(workspace));
+            return
+                client == null
+              ? null
+              : new RazorLanguageServiceClient(client, GetServiceName(workspace));
         }
 
         #region support a/b testing. after a/b testing, we can remove all this code

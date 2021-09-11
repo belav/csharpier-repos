@@ -187,23 +187,24 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(selfIdentifier, nameof(selfIdentifier));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
-            return parentIdentifier != ParentIdentifier
-            || outerIdentifier != OuterIdentifier
-            || selfIdentifier != SelfIdentifier
-            || innerShaper != InnerShaper
-                ? new RelationalCollectionShaperExpression(
-                      CollectionId,
-                      parentIdentifier,
-                      outerIdentifier,
-                      selfIdentifier,
-                      ParentIdentifierValueComparers,
-                      OuterIdentifierValueComparers,
-                      SelfIdentifierValueComparers,
-                      innerShaper,
-                      Navigation,
-                      ElementType
-                  )
-                : this;
+            return
+                parentIdentifier != ParentIdentifier
+                || outerIdentifier != OuterIdentifier
+                || selfIdentifier != SelfIdentifier
+                || innerShaper != InnerShaper
+              ? new RelationalCollectionShaperExpression(
+                    CollectionId,
+                    parentIdentifier,
+                    outerIdentifier,
+                    selfIdentifier,
+                    ParentIdentifierValueComparers,
+                    OuterIdentifierValueComparers,
+                    SelfIdentifierValueComparers,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
+              : this;
         }
 
         /// <inheritdoc />

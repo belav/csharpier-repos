@@ -573,9 +573,10 @@ namespace System.ComponentModel
 
             public static string GetCultureInfoName(string cultureInfoDisplayName)
             {
-                return s_cultureInfoNameMap.TryGetValue(cultureInfoDisplayName, out string name)
-                    ? name
-                    : cultureInfoDisplayName;
+                return
+                    s_cultureInfoNameMap.TryGetValue(cultureInfoDisplayName, out string name)
+                  ? name
+                  : cultureInfoDisplayName;
             }
         }
     }

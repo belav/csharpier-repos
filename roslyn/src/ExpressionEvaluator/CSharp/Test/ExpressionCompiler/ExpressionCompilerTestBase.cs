@@ -224,13 +224,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             Guid mvid = default
         ) {
             var assemblyContexts = appDomainContext.AssemblyContexts;
-            return assemblyContexts != null
-            && assemblyContexts.TryGetValue(
-                new MetadataContextId(mvid),
-                out CSharpMetadataContext context
-            )
-                ? context
-                : default;
+            return
+                assemblyContexts != null
+                && assemblyContexts.TryGetValue(
+                    new MetadataContextId(mvid),
+                    out CSharpMetadataContext context
+                )
+              ? context
+              : default;
         }
 
         internal static MetadataContext<CSharpMetadataContext> SetMetadataContext(

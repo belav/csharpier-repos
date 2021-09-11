@@ -959,11 +959,12 @@ namespace Microsoft.Win32
                 Win32Error(ret, null);
             }
 
-            return type == Interop.Advapi32.RegistryValues.REG_NONE
-                ? RegistryValueKind.None
-                : !Enum.IsDefined(typeof(RegistryValueKind), type)
-                    ? RegistryValueKind.Unknown
-                    : (RegistryValueKind)type;
+            return
+                type == Interop.Advapi32.RegistryValues.REG_NONE
+              ? RegistryValueKind.None
+              : !Enum.IsDefined(typeof(RegistryValueKind), type)
+                  ? RegistryValueKind.Unknown
+                  : (RegistryValueKind)type;
         }
 
         private unsafe void SetValueCore(string? name, object value, RegistryValueKind valueKind)

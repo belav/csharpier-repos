@@ -150,9 +150,10 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                             cancellationToken
                         )
                         .ConfigureAwait(false);
-                    return operations == null
-                        ? ImmutableArray<CodeActionOperation>.Empty
-                        : operations.ToImmutableArray();
+                    return
+                        operations == null
+                      ? ImmutableArray<CodeActionOperation>.Empty
+                      : operations.ToImmutableArray();
                 }
                 else
                 {

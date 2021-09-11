@@ -81,16 +81,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                         token = token.WithLeadingTrivia(leading);
                     }
 
-                    return trailing.Node.Green != trailingTrivia
-                        ? token.WithTrailingTrivia(trailing)
-                        : token;
+                    return
+                        trailing.Node.Green != trailingTrivia
+                      ? token.WithTrailingTrivia(trailing)
+                      : token;
                 }
                 else
                 {
                     // Leading trivia only
-                    return leading.Node.Green != leadingTrivia
-                        ? token.WithLeadingTrivia(leading)
-                        : token;
+                    return
+                        leading.Node.Green != leadingTrivia
+                      ? token.WithLeadingTrivia(leading)
+                      : token;
                 }
             }
             else if (trailingTrivia != null)
@@ -106,9 +108,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                         index: 0
                     )
                 );
-                return trailing.Node.Green != trailingTrivia
-                    ? token.WithTrailingTrivia(trailing)
-                    : token;
+                return
+                    trailing.Node.Green != trailingTrivia
+                  ? token.WithTrailingTrivia(trailing)
+                  : token;
             }
             else
             {

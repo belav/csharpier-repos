@@ -717,9 +717,10 @@ namespace System.Xml.Xsl.XsltOld
             if (objValue != null)
             {
                 XPathNavigator? nav = objValue as XPathNavigator;
-                return nav != null
-                    ? Convert.ToBoolean(nav.Value, CultureInfo.InvariantCulture)
-                    : Convert.ToBoolean(objValue, CultureInfo.InvariantCulture);
+                return
+                    nav != null
+                  ? Convert.ToBoolean(nav.Value, CultureInfo.InvariantCulture)
+                  : Convert.ToBoolean(objValue, CultureInfo.InvariantCulture);
             }
             else
             {

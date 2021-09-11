@@ -41,9 +41,10 @@ namespace System.Net.Http
         {
             Func<Type, bool> matchesInterface = t =>
                 t.IsGenericType() && t.GetGenericTypeDefinition() == interfaceType;
-            return (matchesInterface(queryType))
-                ? queryType
-                : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
+            return
+                (matchesInterface(queryType))
+              ? queryType
+              : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
         }
 
 #if NETFX_CORE

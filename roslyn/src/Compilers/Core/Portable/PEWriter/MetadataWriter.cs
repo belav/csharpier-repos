@@ -824,9 +824,10 @@ namespace Microsoft.Cci
                 methodDef = methodReference.GetResolvedMethod(Context);
             }
 
-            return methodDef != null
-                ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
-                : GetMemberReferenceHandle(methodReference);
+            return
+                methodDef != null
+              ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
+              : GetMemberReferenceHandle(methodReference);
         }
 
         public static EventAttributes GetEventAttributes(IEventDefinition eventDef)
@@ -931,9 +932,10 @@ namespace Microsoft.Cci
                 fieldDef = fieldReference.GetResolvedField(Context);
             }
 
-            return fieldDef != null
-                ? (EntityHandle)GetFieldDefinitionHandle(fieldDef)
-                : GetMemberReferenceHandle(fieldReference);
+            return
+                fieldDef != null
+              ? (EntityHandle)GetFieldDefinitionHandle(fieldDef)
+              : GetMemberReferenceHandle(fieldReference);
         }
 
         internal AssemblyFileHandle GetAssemblyFileHandle(IFileReference fileReference)
@@ -997,9 +999,10 @@ namespace Microsoft.Cci
 
             var mref = (IModuleReference)uref;
             aref = mref.GetContainingAssembly(Context);
-            return aref == null || ReferenceEquals(aref, this.module.GetContainingAssembly(Context))
-                ? (EntityHandle)GetAssemblyFileHandle(mref)
-                : GetAssemblyReferenceHandle(aref);
+            return
+                aref == null || ReferenceEquals(aref, this.module.GetContainingAssembly(Context))
+              ? (EntityHandle)GetAssemblyFileHandle(mref)
+              : GetAssemblyReferenceHandle(aref);
         }
 
         private static uint GetManagedResourceOffset(
@@ -1031,12 +1034,13 @@ namespace Microsoft.Cci
         {
             string unmangledName = namedType.Name;
 
-            return namedType.MangleName
-                ? MetadataHelpers.ComposeAritySuffixedMetadataName(
-                      unmangledName,
-                      namedType.GenericParameterCount
-                  )
-                : unmangledName;
+            return
+                namedType.MangleName
+              ? MetadataHelpers.ComposeAritySuffixedMetadataName(
+                    unmangledName,
+                    namedType.GenericParameterCount
+                )
+              : unmangledName;
         }
 
         internal MemberReferenceHandle GetMemberReferenceHandle(ITypeMemberReference memberRef)
@@ -1083,9 +1087,10 @@ namespace Microsoft.Cci
 
             // TODO: special treatment for global fields and methods. Object model support would be nice.
             var containingType = memberRef.GetContainingType(Context);
-            return containingType.IsTypeSpecification()
-                ? (EntityHandle)GetTypeSpecificationHandle(containingType)
-                : GetTypeReferenceHandle(containingType);
+            return
+                containingType.IsTypeSpecification()
+              ? (EntityHandle)GetTypeSpecificationHandle(containingType)
+              : GetTypeReferenceHandle(containingType);
         }
 
         internal EntityHandle GetMethodDefinitionOrReferenceHandle(IMethodReference methodReference)
@@ -1100,9 +1105,10 @@ namespace Microsoft.Cci
                 methodDef = methodReference.GetResolvedMethod(Context);
             }
 
-            return methodDef != null
-                ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
-                : GetMemberReferenceHandle(methodReference);
+            return
+                methodDef != null
+              ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
+              : GetMemberReferenceHandle(methodReference);
         }
 
         public static MethodAttributes GetMethodAttributes(IMethodDefinition methodDef)
@@ -1328,9 +1334,10 @@ namespace Microsoft.Cci
 
             IGenericMethodInstanceReference methodSpec =
                 methodReference.AsGenericMethodInstanceReference;
-            return methodSpec != null
-                ? (EntityHandle)GetMethodSpecificationHandle(methodSpec)
-                : GetMemberReferenceHandle(methodReference);
+            return
+                methodSpec != null
+              ? (EntityHandle)GetMethodSpecificationHandle(methodSpec)
+              : GetMemberReferenceHandle(methodReference);
         }
 
         internal EntityHandle GetStandaloneSignatureHandle(ISignature signature)
@@ -1656,9 +1663,10 @@ namespace Microsoft.Cci
 
         protected static Location GetSymbolLocation(ISymbolInternal symbolOpt)
         {
-            return symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty
-                ? symbolOpt.Locations[0]
-                : Location.None;
+            return
+                symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty
+              ? symbolOpt.Locations[0]
+              : Location.None;
         }
 
         internal TypeAttributes GetTypeAttributes(ITypeDefinition typeDef)
@@ -1877,9 +1885,10 @@ namespace Microsoft.Cci
                 return handle;
             }
 
-            return treatRefAsPotentialTypeSpec && typeReference.IsTypeSpecification()
-                ? (EntityHandle)GetTypeSpecificationHandle(typeReference)
-                : GetTypeReferenceHandle(typeReference);
+            return
+                treatRefAsPotentialTypeSpec && typeReference.IsTypeSpecification()
+              ? (EntityHandle)GetTypeSpecificationHandle(typeReference)
+              : GetTypeReferenceHandle(typeReference);
         }
 
         internal EntityHandle GetDefinitionHandle(IDefinition definition)

@@ -88,9 +88,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 
-            return _diagnostic == null
-                ? ImmutableArray<DiagnosticData>.Empty
-                : ImmutableArray.Create(_diagnostic);
+            return
+                _diagnostic == null
+              ? ImmutableArray<DiagnosticData>.Empty
+              : ImmutableArray.Create(_diagnostic);
         }
 
         public ImmutableArray<DiagnosticBucket> GetPullDiagnosticBuckets(
@@ -121,16 +122,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 
-            return _diagnostic == null
-                ? ImmutableArray<DiagnosticBucket>.Empty
-                : ImmutableArray.Create(
-                      new DiagnosticBucket(
-                          this,
-                          workspace,
-                          GetProjectId(workspace),
-                          GetDocumentId(workspace)
-                      )
-                  );
+            return
+                _diagnostic == null
+              ? ImmutableArray<DiagnosticBucket>.Empty
+              : ImmutableArray.Create(
+                    new DiagnosticBucket(
+                        this,
+                        workspace,
+                        GetProjectId(workspace),
+                        GetDocumentId(workspace)
+                    )
+                );
         }
 
         internal void CreateDiagnosticAndFireEvents(Workspace workspace, Location location)

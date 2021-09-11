@@ -36,16 +36,17 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
             Check.NotNull(partitionKey, nameof(partitionKey));
 
-            return source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          source.Expression,
-                          Expression.Constant(partitionKey)
-                      )
-                  )
-                : source;
+            return
+                source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression,
+                        Expression.Constant(partitionKey)
+                    )
+                )
+              : source;
         }
     }
 }

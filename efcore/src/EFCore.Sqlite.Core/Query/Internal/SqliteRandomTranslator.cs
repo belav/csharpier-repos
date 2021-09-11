@@ -55,27 +55,28 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(logger, nameof(logger));
 
             // Issue #15586: Query: TypeCompatibility chart for inference.
-            return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Function(
-                      "abs",
-                      new SqlExpression[]
-                      {
-                          _sqlExpressionFactory.Divide(
-                              _sqlExpressionFactory.Function(
-                                  "random",
-                                  Array.Empty<SqlExpression>(),
-                                  nullable: false,
-                                  argumentsPropagateNullability: Array.Empty<bool>(),
-                                  method.ReturnType
-                              ),
-                              _sqlExpressionFactory.Constant(9223372036854780000.0)
-                          )
-                      },
-                      nullable: false,
-                      argumentsPropagateNullability: Array.Empty<bool>(),
-                      method.ReturnType
-                  )
-                : null;
+            return
+                _methodInfo.Equals(method)
+              ? _sqlExpressionFactory.Function(
+                    "abs",
+                    new SqlExpression[]
+                    {
+                        _sqlExpressionFactory.Divide(
+                            _sqlExpressionFactory.Function(
+                                "random",
+                                Array.Empty<SqlExpression>(),
+                                nullable: false,
+                                argumentsPropagateNullability: Array.Empty<bool>(),
+                                method.ReturnType
+                            ),
+                            _sqlExpressionFactory.Constant(9223372036854780000.0)
+                        )
+                    },
+                    nullable: false,
+                    argumentsPropagateNullability: Array.Empty<bool>(),
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

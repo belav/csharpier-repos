@@ -73,9 +73,10 @@ namespace System.Web.Mvc
             // normal IValueProvider members.
 
             IUnvalidatedValueProvider unvalidatedProvider = provider as IUnvalidatedValueProvider;
-            return (unvalidatedProvider != null)
-                ? unvalidatedProvider.GetValue(key, skipValidation)
-                : provider.GetValue(key);
+            return
+                (unvalidatedProvider != null)
+              ? unvalidatedProvider.GetValue(key, skipValidation)
+              : provider.GetValue(key);
         }
 
         internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(
@@ -83,9 +84,10 @@ namespace System.Web.Mvc
             string prefix
         ) {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
-            return (enumeratedProvider != null)
-                ? enumeratedProvider.GetKeysFromPrefix(prefix)
-                : null;
+            return
+                (enumeratedProvider != null)
+              ? enumeratedProvider.GetKeysFromPrefix(prefix)
+              : null;
         }
 
         protected override void InsertItem(int index, IValueProvider item)

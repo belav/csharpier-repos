@@ -15,36 +15,38 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IParameterSymbol parameter,
             string parameterName
         ) {
-            return parameter.Name == parameterName
-                ? parameter
-                : CodeGenerationSymbolFactory.CreateParameterSymbol(
-                      parameter.GetAttributes(),
-                      parameter.RefKind,
-                      parameter.IsParams,
-                      parameter.Type,
-                      parameterName,
-                      parameter.IsOptional,
-                      parameter.HasExplicitDefaultValue,
-                      parameter.HasExplicitDefaultValue ? parameter.ExplicitDefaultValue : null
-                  );
+            return
+                parameter.Name == parameterName
+              ? parameter
+              : CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    parameter.GetAttributes(),
+                    parameter.RefKind,
+                    parameter.IsParams,
+                    parameter.Type,
+                    parameterName,
+                    parameter.IsOptional,
+                    parameter.HasExplicitDefaultValue,
+                    parameter.HasExplicitDefaultValue ? parameter.ExplicitDefaultValue : null
+                );
         }
 
         public static IParameterSymbol WithAttributes(
             this IParameterSymbol parameter,
             ImmutableArray<AttributeData> attributes
         ) {
-            return parameter.GetAttributes() == attributes
-                ? parameter
-                : CodeGenerationSymbolFactory.CreateParameterSymbol(
-                      attributes,
-                      parameter.RefKind,
-                      parameter.IsParams,
-                      parameter.Type,
-                      parameter.Name,
-                      parameter.IsOptional,
-                      parameter.HasExplicitDefaultValue,
-                      parameter.HasExplicitDefaultValue ? parameter.ExplicitDefaultValue : null
-                  );
+            return
+                parameter.GetAttributes() == attributes
+              ? parameter
+              : CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    attributes,
+                    parameter.RefKind,
+                    parameter.IsParams,
+                    parameter.Type,
+                    parameter.Name,
+                    parameter.IsOptional,
+                    parameter.HasExplicitDefaultValue,
+                    parameter.HasExplicitDefaultValue ? parameter.ExplicitDefaultValue : null
+                );
         }
 
         public static ImmutableArray<IParameterSymbol> RenameParameters(

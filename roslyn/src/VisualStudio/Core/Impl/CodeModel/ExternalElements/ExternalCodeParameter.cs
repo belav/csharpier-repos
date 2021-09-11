@@ -75,10 +75,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         {
             get
             {
-                return ParameterSymbol.HasExplicitDefaultValue
-                && ParameterSymbol.ExplicitDefaultValue != null
-                    ? ParameterSymbol.ExplicitDefaultValue.ToString()
-                    : null;
+                return
+                    ParameterSymbol.HasExplicitDefaultValue
+                    && ParameterSymbol.ExplicitDefaultValue != null
+                  ? ParameterSymbol.ExplicitDefaultValue.ToString()
+                  : null;
             }
             set { throw Exceptions.ThrowEFail(); }
         }

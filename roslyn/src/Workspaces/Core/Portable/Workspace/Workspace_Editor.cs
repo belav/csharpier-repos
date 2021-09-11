@@ -517,9 +517,10 @@ namespace Microsoft.CodeAnalysis
         ) {
             // if the supplied text is the same as the previous text, then also use same version
             // otherwise use new version
-            return oldText.ContentEquals(newText)
-                ? TextAndVersion.Create(newText, version, filePath)
-                : TextAndVersion.Create(newText, version.GetNewerVersion(), filePath);
+            return
+                oldText.ContentEquals(newText)
+              ? TextAndVersion.Create(newText, version, filePath)
+              : TextAndVersion.Create(newText, version.GetNewerVersion(), filePath);
         }
 
         private void SignupForTextChanges(

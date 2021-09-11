@@ -99,9 +99,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             RefKind rk2,
             bool distinguishRefFromOut
         ) {
-            return distinguishRefFromOut
-                ? rk1 == rk2
-                : (rk1 == RefKind.None) == (rk2 == RefKind.None);
+            return
+                distinguishRefFromOut
+              ? rk1 == rk2
+              : (rk1 == RefKind.None) == (rk2 == RefKind.None);
         }
     }
 }

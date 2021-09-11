@@ -235,21 +235,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     predicate: null,
                     stepInto: null
                 );
-                return initializerOpt == null
-                    ? position >= constructorDecl.ParameterList.CloseParenToken.Span.End
-                      && IsBeforeToken(position, nextToken)
-                    : IsBetweenTokens(position, initializerOpt.ColonToken, nextToken);
+                return
+                    initializerOpt == null
+                  ? position >= constructorDecl.ParameterList.CloseParenToken.Span.End
+                    && IsBeforeToken(position, nextToken)
+                  : IsBetweenTokens(position, initializerOpt.ColonToken, nextToken);
             }
 
-            return initializerOpt == null
-                ? IsInBody(position, constructorDecl)
-                : IsBetweenTokens(
-                      position,
-                      initializerOpt.ColonToken,
-                      constructorDecl.SemicolonToken.Kind() == SyntaxKind.None
-                        ? constructorDecl.Body!.CloseBraceToken
-                        : constructorDecl.SemicolonToken
-                  );
+            return
+                initializerOpt == null
+              ? IsInBody(position, constructorDecl)
+              : IsBetweenTokens(
+                    position,
+                    initializerOpt.ColonToken,
+                    constructorDecl.SemicolonToken.Kind() == SyntaxKind.None
+                      ? constructorDecl.Body!.CloseBraceToken
+                      : constructorDecl.SemicolonToken
+                );
         }
 
         internal static bool IsInMethodTypeParameterScope(

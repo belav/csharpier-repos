@@ -83,9 +83,10 @@ namespace System
             // So our best bet is to simply use the commandLine that was used to invoke the process.
             // in case it is present.
 
-            return s_commandLineArgs != null
-                ? (string[])s_commandLineArgs.Clone()
-                : GetCommandLineArgsNative();
+            return
+                s_commandLineArgs != null
+              ? (string[])s_commandLineArgs.Clone()
+              : GetCommandLineArgsNative();
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]

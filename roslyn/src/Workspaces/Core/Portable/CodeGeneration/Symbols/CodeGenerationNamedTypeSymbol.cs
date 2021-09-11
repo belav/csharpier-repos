@@ -109,11 +109,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         {
             get
             {
-                return this.TypeKind == TypeKind.Delegate
-                    ? this.GetMembers(WellKnownMemberNames.DelegateInvokeName)
-                          .OfType<IMethodSymbol>()
-                          .FirstOrDefault()
-                    : null;
+                return
+                    this.TypeKind == TypeKind.Delegate
+                  ? this.GetMembers(WellKnownMemberNames.DelegateInvokeName)
+                        .OfType<IMethodSymbol>()
+                        .FirstOrDefault()
+                  : null;
             }
         }
 

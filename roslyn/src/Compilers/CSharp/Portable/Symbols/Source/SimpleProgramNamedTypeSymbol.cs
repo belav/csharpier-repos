@@ -78,9 +78,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            return fallbackToMainEntryPoint
-                ? (SynthesizedSimpleProgramEntryPointSymbol)entryPoints[0]
-                : null;
+            return
+                fallbackToMainEntryPoint
+              ? (SynthesizedSimpleProgramEntryPointSymbol)entryPoints[0]
+              : null;
         }
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>

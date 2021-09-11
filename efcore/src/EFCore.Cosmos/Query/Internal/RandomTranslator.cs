@@ -53,13 +53,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Function(
-                      "RAND",
-                      Array.Empty<SqlExpression>(),
-                      method.ReturnType
-                  )
-                : null;
+            return
+                _methodInfo.Equals(method)
+              ? _sqlExpressionFactory.Function(
+                    "RAND",
+                    Array.Empty<SqlExpression>(),
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

@@ -529,9 +529,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var result = value.ToString("R", GetFormatCulture(cultureInfo));
 
-            return options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
-                ? result + "D"
-                : result;
+            return
+                options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
+              ? result + "D"
+              : result;
         }
 
         internal static string FormatLiteral(
@@ -541,9 +542,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var result = value.ToString("R", GetFormatCulture(cultureInfo));
 
-            return options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
-                ? result + "F"
-                : result;
+            return
+                options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
+              ? result + "F"
+              : result;
         }
 
         internal static string FormatLiteral(
@@ -553,9 +555,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var result = value.ToString(GetFormatCulture(cultureInfo));
 
-            return options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
-                ? result + "M"
-                : result;
+            return
+                options.IncludesOption(ObjectDisplayOptions.IncludeTypeSuffix)
+              ? result + "M"
+              : result;
         }
 
         private static CultureInfo GetFormatCulture(CultureInfo cultureInfo)

@@ -556,33 +556,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 builder = batch.Run(builder);
             }
 
-            return builder != null
-            && (
-                (
-                    navigationToPrincipal != null
-                    && builder.Metadata.DependentToPrincipal?.Name
-                        != navigationToPrincipal.Value.Name
+            return
+                builder != null
+                && (
+                    (
+                        navigationToPrincipal != null
+                        && builder.Metadata.DependentToPrincipal?.Name
+                            != navigationToPrincipal.Value.Name
+                    )
+                    || (
+                        navigationToDependent != null
+                        && builder.Metadata.PrincipalToDependent?.Name
+                            != navigationToDependent.Value.Name
+                    )
                 )
-                || (
-                    navigationToDependent != null
-                    && builder.Metadata.PrincipalToDependent?.Name
-                        != navigationToDependent.Value.Name
+                && (
+                    (
+                        navigationToDependent != null
+                        && builder.Metadata.DependentToPrincipal?.Name
+                            != navigationToDependent.Value.Name
+                    )
+                    || (
+                        navigationToPrincipal != null
+                        && builder.Metadata.PrincipalToDependent?.Name
+                            != navigationToPrincipal.Value.Name
+                    )
                 )
-            )
-            && (
-                (
-                    navigationToDependent != null
-                    && builder.Metadata.DependentToPrincipal?.Name
-                        != navigationToDependent.Value.Name
-                )
-                || (
-                    navigationToPrincipal != null
-                    && builder.Metadata.PrincipalToDependent?.Name
-                        != navigationToPrincipal.Value.Name
-                )
-            )
-                ? null
-                : builder;
+              ? null
+              : builder;
         }
 
         private static MemberInfo? FindCompatibleClrMember(
@@ -592,16 +593,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             bool shouldThrow
         ) {
             var navigationProperty = sourceType.GetNavigationMemberInfo(navigationName);
-            return !Navigation.IsCompatible(
-                navigationName,
-                navigationProperty,
-                sourceType,
-                targetType,
-                null,
-                shouldThrow
-            )
-                ? null
-                : navigationProperty;
+            return
+                !Navigation.IsCompatible(
+                    navigationName,
+                    navigationProperty,
+                    sourceType,
+                    targetType,
+                    null,
+                    shouldThrow
+                )
+              ? null
+              : navigationProperty;
         }
 
         /// <summary>
@@ -1749,14 +1751,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return builder;
             }
 
-            return dependentEntityType.IsAssignableFrom(Metadata.DeclaringEntityType)
-            || configurationSource == ConfigurationSource.Explicit
-                ? HasEntityTypes(
-                      Metadata.PrincipalEntityType,
-                      dependentEntityType,
-                      configurationSource
-                  )
-                : null;
+            return
+                dependentEntityType.IsAssignableFrom(Metadata.DeclaringEntityType)
+                || configurationSource == ConfigurationSource.Explicit
+              ? HasEntityTypes(
+                    Metadata.PrincipalEntityType,
+                    dependentEntityType,
+                    configurationSource
+                )
+              : null;
         }
 
         // Note: These will not invert relationships, use RelatedEntityTypes for that
@@ -1831,14 +1834,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return builder;
             }
 
-            return principalEntityType.IsAssignableFrom(Metadata.PrincipalEntityType)
-            || configurationSource == ConfigurationSource.Explicit
-                ? HasEntityTypes(
-                      principalEntityType,
-                      Metadata.DeclaringEntityType,
-                      configurationSource
-                  )
-                : null;
+            return
+                principalEntityType.IsAssignableFrom(Metadata.PrincipalEntityType)
+                || configurationSource == ConfigurationSource.Explicit
+              ? HasEntityTypes(
+                    principalEntityType,
+                    Metadata.DeclaringEntityType,
+                    configurationSource
+                )
+              : null;
         }
 
         /// <summary>
@@ -2259,12 +2263,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             if (properties == null)
             {
-                return !configurationSource.Overrides(Metadata.GetPropertiesConfigurationSource())
-                    ? null
-                    : ReplaceForeignKey(
-                          configurationSource,
-                          dependentProperties: Array.Empty<Property>()
-                      );
+                return
+                    !configurationSource.Overrides(Metadata.GetPropertiesConfigurationSource())
+                  ? null
+                  : ReplaceForeignKey(
+                        configurationSource,
+                        dependentProperties: Array.Empty<Property>()
+                    );
             }
 
             properties = dependentEntityType.Builder.GetActualProperties(
@@ -2528,12 +2533,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             if (properties == null)
             {
-                return !configurationSource.Overrides(Metadata.GetPrincipalKeyConfigurationSource())
-                    ? null
-                    : ReplaceForeignKey(
-                          configurationSource,
-                          principalProperties: Array.Empty<Property>()
-                      );
+                return
+                    !configurationSource.Overrides(Metadata.GetPrincipalKeyConfigurationSource())
+                  ? null
+                  : ReplaceForeignKey(
+                        configurationSource,
+                        principalProperties: Array.Empty<Property>()
+                    );
             }
 
             properties = Metadata.PrincipalEntityType.Builder.GetActualProperties(

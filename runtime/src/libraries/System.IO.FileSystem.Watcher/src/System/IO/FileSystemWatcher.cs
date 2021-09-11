@@ -645,9 +645,10 @@ namespace System.IO
             }
 
             // Return the results.
-            return tcs.Task.IsCompletedSuccessfully
-                ? tcs.Task.Result
-                : WaitForChangedResult.TimedOutResult;
+            return
+                tcs.Task.IsCompletedSuccessfully
+              ? tcs.Task.Result
+              : WaitForChangedResult.TimedOutResult;
         }
 
         /// <devdoc>

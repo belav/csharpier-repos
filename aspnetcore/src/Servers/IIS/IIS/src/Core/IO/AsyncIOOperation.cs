@@ -32,9 +32,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 return ValueTaskSourceStatus.Pending;
             }
 
-            return _exception != null
-                ? ValueTaskSourceStatus.Succeeded
-                : ValueTaskSourceStatus.Faulted;
+            return
+                _exception != null
+              ? ValueTaskSourceStatus.Succeeded
+              : ValueTaskSourceStatus.Faulted;
         }
 
         public void OnCompleted(

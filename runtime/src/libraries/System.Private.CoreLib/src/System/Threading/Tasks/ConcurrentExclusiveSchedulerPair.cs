@@ -715,9 +715,10 @@ namespace System.Threading.Tasks
                         // If we're targeting the default scheduler and taskWasPreviouslyQueued is false,
                         // we know the default scheduler will allow it, so we can just execute it here.
                         // Otherwise, delegate to the target scheduler's inlining.
-                        return (isDefaultScheduler && !taskWasPreviouslyQueued)
-                            ? TryExecuteTask(task)
-                            : TryExecuteTaskInlineOnTargetScheduler(task);
+                        return
+                            (isDefaultScheduler && !taskWasPreviouslyQueued)
+                          ? TryExecuteTask(task)
+                          : TryExecuteTaskInlineOnTargetScheduler(task);
                     }
                 }
 

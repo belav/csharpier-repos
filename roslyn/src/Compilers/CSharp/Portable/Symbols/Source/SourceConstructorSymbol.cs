@@ -231,11 +231,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsNullableAnalysisEnabled()
         {
-            return _hasThisInitializer
-                ? flags.IsNullableAnalysisEnabled
-                : (
-                      (SourceMemberContainerTypeSymbol)ContainingType
-                  ).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
+            return
+                _hasThisInitializer
+              ? flags.IsNullableAnalysisEnabled
+              : (
+                    (SourceMemberContainerTypeSymbol)ContainingType
+                ).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
         }
 
         protected override bool AllowRefOrOut

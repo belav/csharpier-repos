@@ -97,11 +97,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return collectionJoin!;
             }
 
-            return extensionExpression is ShapedQueryExpression shapedQueryExpression
-                ? shapedQueryExpression.UpdateShaperExpression(
-                      Visit(shapedQueryExpression.ShaperExpression)
-                  )
-                : base.VisitExtension(extensionExpression);
+            return
+                extensionExpression is ShapedQueryExpression shapedQueryExpression
+              ? shapedQueryExpression.UpdateShaperExpression(
+                    Visit(shapedQueryExpression.ShaperExpression)
+                )
+              : base.VisitExtension(extensionExpression);
         }
     }
 }

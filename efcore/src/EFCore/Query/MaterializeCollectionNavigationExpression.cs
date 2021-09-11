@@ -69,9 +69,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(subquery, nameof(subquery));
 
-            return subquery != Subquery
-                ? new MaterializeCollectionNavigationExpression(subquery, Navigation)
-                : this;
+            return
+                subquery != Subquery
+              ? new MaterializeCollectionNavigationExpression(subquery, Navigation)
+              : this;
         }
 
         /// <inheritdoc />

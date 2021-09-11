@@ -40,9 +40,10 @@ namespace System.Web.Http.WebHost.Routing
         private static RouteValueDictionary MakeRouteValueDictionary(
             IDictionary<string, object> dictionary
         ) {
-            return dictionary == null
-                ? new RouteValueDictionary()
-                : new RouteValueDictionary(dictionary);
+            return
+                dictionary == null
+              ? new RouteValueDictionary()
+              : new RouteValueDictionary(dictionary);
         }
     }
 }

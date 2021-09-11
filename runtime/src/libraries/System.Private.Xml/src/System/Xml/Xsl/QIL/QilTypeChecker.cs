@@ -488,9 +488,10 @@ namespace System.Xml.Xsl.Qil
             CheckNumericX(node.Left);
             CheckNumericX(node.Right);
             CheckNotDisjoint(node);
-            return node.Left.XmlType!.TypeCode == XmlTypeCode.None
-                ? node.Right.XmlType!
-                : node.Left.XmlType!;
+            return
+                node.Left.XmlType!.TypeCode == XmlTypeCode.None
+              ? node.Right.XmlType!
+              : node.Left.XmlType!;
         }
 
         public XmlQueryType CheckSubtract(QilBinary node)

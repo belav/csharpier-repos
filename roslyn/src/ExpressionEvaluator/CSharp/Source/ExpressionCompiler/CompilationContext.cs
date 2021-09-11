@@ -227,9 +227,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         out declaredLocals
                     );
 
-                    return (syntax is StatementSyntax statementSyntax)
-                        ? BindStatement(binder, statementSyntax, diags, out properties)
-                        : BindExpression(binder, (ExpressionSyntax)syntax, diags, out properties);
+                    return
+                        (syntax is StatementSyntax statementSyntax)
+                      ? BindStatement(binder, statementSyntax, diags, out properties)
+                      : BindExpression(binder, (ExpressionSyntax)syntax, diags, out properties);
                 }
             );
 
@@ -1520,9 +1521,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             // CONSIDER: We might want to prevent the user from modifying pinned locals -
             // that's pretty dangerous.
-            return local.IsConst
-                ? DkmClrCompilationResultFlags.ReadOnlyResult
-                : DkmClrCompilationResultFlags.None;
+            return
+                local.IsConst
+              ? DkmClrCompilationResultFlags.ReadOnlyResult
+              : DkmClrCompilationResultFlags.None;
         }
 
         /// <summary>
@@ -2117,11 +2119,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                             sourceMethodMustBeInstance
                         )
                     ) {
-                        return desiredTypeParameters.Length == 0
-                            ? candidateMethod
-                            : candidateMethod.Construct(
-                                  candidateSubstitutedSourceType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                              );
+                        return
+                            desiredTypeParameters.Length == 0
+                          ? candidateMethod
+                          : candidateMethod.Construct(
+                                candidateSubstitutedSourceType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                            );
                     }
                 }
 

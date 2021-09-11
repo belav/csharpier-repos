@@ -42,16 +42,18 @@ namespace Newtonsoft.Json.Utilities
 
         public static Task? CancelIfRequestedAsync(this CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested
-                ? FromCanceled(cancellationToken)
-                : null;
+            return
+                cancellationToken.IsCancellationRequested
+              ? FromCanceled(cancellationToken)
+              : null;
         }
 
         public static Task<T>? CancelIfRequestedAsync<T>(this CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested
-                ? FromCanceled<T>(cancellationToken)
-                : null;
+            return
+                cancellationToken.IsCancellationRequested
+              ? FromCanceled<T>(cancellationToken)
+              : null;
         }
 
         // From 4.6 on we could use Task.FromCanceled(), but we need an equivalent for
@@ -81,9 +83,10 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(writer != null);
-            return cancellationToken.IsCancellationRequested
-                ? FromCanceled(cancellationToken)
-                : writer.WriteAsync(value);
+            return
+                cancellationToken.IsCancellationRequested
+              ? FromCanceled(cancellationToken)
+              : writer.WriteAsync(value);
         }
 
         public static Task WriteAsync(
@@ -92,9 +95,10 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(writer != null);
-            return cancellationToken.IsCancellationRequested
-                ? FromCanceled(cancellationToken)
-                : writer.WriteAsync(value);
+            return
+                cancellationToken.IsCancellationRequested
+              ? FromCanceled(cancellationToken)
+              : writer.WriteAsync(value);
         }
 
         public static Task WriteAsync(
@@ -105,9 +109,10 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(writer != null);
-            return cancellationToken.IsCancellationRequested
-                ? FromCanceled(cancellationToken)
-                : writer.WriteAsync(value, start, count);
+            return
+                cancellationToken.IsCancellationRequested
+              ? FromCanceled(cancellationToken)
+              : writer.WriteAsync(value, start, count);
         }
 
         public static Task<int> ReadAsync(
@@ -118,9 +123,10 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(reader != null);
-            return cancellationToken.IsCancellationRequested
-                ? FromCanceled<int>(cancellationToken)
-                : reader.ReadAsync(buffer, index, count);
+            return
+                cancellationToken.IsCancellationRequested
+              ? FromCanceled<int>(cancellationToken)
+              : reader.ReadAsync(buffer, index, count);
         }
 
         public static bool IsCompletedSucessfully(this Task task)

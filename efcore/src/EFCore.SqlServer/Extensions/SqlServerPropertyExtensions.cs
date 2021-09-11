@@ -43,9 +43,10 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null
-                ? sharedTableRootProperty.GetHiLoSequenceName(storeObject)
-                : null;
+            return
+                sharedTableRootProperty != null
+              ? sharedTableRootProperty.GetHiLoSequenceName(storeObject)
+              : null;
         }
 
         /// <summary>
@@ -117,9 +118,10 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null
-                ? sharedTableRootProperty.GetHiLoSequenceSchema(storeObject)
-                : null;
+            return
+                sharedTableRootProperty != null
+              ? sharedTableRootProperty.GetHiLoSequenceSchema(storeObject)
+              : null;
         }
 
         /// <summary>
@@ -247,9 +249,10 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null
-                ? sharedTableRootProperty.GetIdentitySeed(storeObject)
-                : null;
+            return
+                sharedTableRootProperty != null
+              ? sharedTableRootProperty.GetIdentitySeed(storeObject)
+              : null;
         }
 
         /// <summary>
@@ -318,9 +321,10 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null
-                ? sharedTableRootProperty.GetIdentityIncrement(storeObject)
-                : null;
+            return
+                sharedTableRootProperty != null
+              ? sharedTableRootProperty.GetIdentityIncrement(storeObject)
+              : null;
         }
 
         /// <summary>
@@ -432,11 +436,12 @@ namespace Microsoft.EntityFrameworkCore
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             if (sharedTableRootProperty != null)
             {
-                return sharedTableRootProperty.GetValueGenerationStrategy(storeObject)
-                    == SqlServerValueGenerationStrategy.IdentityColumn
-                && !property.GetContainingForeignKeys().Any(fk => !fk.IsBaseLinking())
-                    ? SqlServerValueGenerationStrategy.IdentityColumn
-                    : SqlServerValueGenerationStrategy.None;
+                return
+                    sharedTableRootProperty.GetValueGenerationStrategy(storeObject)
+                        == SqlServerValueGenerationStrategy.IdentityColumn
+                    && !property.GetContainingForeignKeys().Any(fk => !fk.IsBaseLinking())
+                  ? SqlServerValueGenerationStrategy.IdentityColumn
+                  : SqlServerValueGenerationStrategy.None;
             }
 
             if (
@@ -464,10 +469,11 @@ namespace Microsoft.EntityFrameworkCore
                 return SqlServerValueGenerationStrategy.SequenceHiLo;
             }
 
-            return modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
-            && IsCompatibleWithValueGeneration(property)
-                ? SqlServerValueGenerationStrategy.IdentityColumn
-                : SqlServerValueGenerationStrategy.None;
+            return
+                modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
+                && IsCompatibleWithValueGeneration(property)
+              ? SqlServerValueGenerationStrategy.IdentityColumn
+              : SqlServerValueGenerationStrategy.None;
         }
 
         private static SqlServerValueGenerationStrategy GetDefaultValueGenerationStrategy(
@@ -484,10 +490,11 @@ namespace Microsoft.EntityFrameworkCore
                 return SqlServerValueGenerationStrategy.SequenceHiLo;
             }
 
-            return modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
-            && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource)
-                ? SqlServerValueGenerationStrategy.IdentityColumn
-                : SqlServerValueGenerationStrategy.None;
+            return
+                modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
+                && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource)
+              ? SqlServerValueGenerationStrategy.IdentityColumn
+              : SqlServerValueGenerationStrategy.None;
         }
 
         /// <summary>

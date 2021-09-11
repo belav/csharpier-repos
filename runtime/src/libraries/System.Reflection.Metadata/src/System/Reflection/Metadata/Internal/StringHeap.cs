@@ -173,16 +173,18 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal string GetString(StringHandle handle, MetadataStringDecoder utf8Decoder)
         {
-            return handle.IsVirtual
-                ? GetVirtualHandleString(handle, utf8Decoder)
-                : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
+            return
+                handle.IsVirtual
+              ? GetVirtualHandleString(handle, utf8Decoder)
+              : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
         }
 
         internal MemoryBlock GetMemoryBlock(StringHandle handle)
         {
-            return handle.IsVirtual
-                ? GetVirtualHandleMemoryBlock(handle)
-                : GetNonVirtualStringMemoryBlock(handle);
+            return
+                handle.IsVirtual
+              ? GetVirtualHandleMemoryBlock(handle)
+              : GetNonVirtualStringMemoryBlock(handle);
         }
 
         internal static string GetVirtualString(StringHandle.VirtualIndex index)

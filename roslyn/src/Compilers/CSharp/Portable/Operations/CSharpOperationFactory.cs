@@ -767,12 +767,13 @@ namespace Microsoft.CodeAnalysis.Operations
                         boundPropertyAccess.PropertySymbol
                     );
                 case BoundObjectInitializerMember boundObjectInitializerMember:
-                    return boundObjectInitializerMember.MemberSymbol?.IsStatic == true
-                        ? null
-                        : CreateImplicitReceiver(
-                              boundObjectInitializerMember.Syntax,
-                              boundObjectInitializerMember.ReceiverType
-                          );
+                    return
+                        boundObjectInitializerMember.MemberSymbol?.IsStatic == true
+                      ? null
+                      : CreateImplicitReceiver(
+                            boundObjectInitializerMember.Syntax,
+                            boundObjectInitializerMember.ReceiverType
+                        );
                 case BoundIndexerAccess boundIndexerAccess:
                     return CreateReceiverOperation(
                         boundIndexerAccess.ReceiverOpt,
@@ -1901,9 +1902,10 @@ namespace Microsoft.CodeAnalysis.Operations
         private IOperation CreateBoundAssignmentOperatorOrMemberInitializerOperation(
             BoundAssignmentOperator boundAssignmentOperator
         ) {
-            return IsMemberInitializer(boundAssignmentOperator)
-                ? (IOperation)CreateBoundMemberInitializerOperation(boundAssignmentOperator)
-                : CreateBoundAssignmentOperatorOperation(boundAssignmentOperator);
+            return
+                IsMemberInitializer(boundAssignmentOperator)
+              ? (IOperation)CreateBoundMemberInitializerOperation(boundAssignmentOperator)
+              : CreateBoundAssignmentOperatorOperation(boundAssignmentOperator);
         }
 
         private static bool IsMemberInitializer(BoundAssignmentOperator boundAssignmentOperator) =>

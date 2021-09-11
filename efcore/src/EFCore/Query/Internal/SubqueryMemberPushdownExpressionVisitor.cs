@@ -98,12 +98,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             memberExpression.Member
                         );
 
-                        return nullable && !memberAccessExpression.Type.IsNullableType()
-                            ? Expression.Convert(
-                                  memberAccessExpression,
-                                  memberAccessExpression.Type.MakeNullable()
-                              )
-                            : (Expression)memberAccessExpression;
+                        return
+                            nullable && !memberAccessExpression.Type.IsNullableType()
+                          ? Expression.Convert(
+                                memberAccessExpression,
+                                memberAccessExpression.Type.MakeNullable()
+                            )
+                          : (Expression)memberAccessExpression;
                     },
                     memberExpression.Type
                 );
@@ -181,12 +182,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 methodCallExpression.Arguments[0]
                             );
 
-                            return nullable && !indexerExpression.Type.IsNullableType()
-                                ? Expression.Convert(
-                                      indexerExpression,
-                                      indexerExpression.Type.MakeNullable()
-                                  )
-                                : (Expression)indexerExpression;
+                            return
+                                nullable && !indexerExpression.Type.IsNullableType()
+                              ? Expression.Convert(
+                                    indexerExpression,
+                                    indexerExpression.Type.MakeNullable()
+                                )
+                              : (Expression)indexerExpression;
                         },
                         methodCallExpression.Type
                     );

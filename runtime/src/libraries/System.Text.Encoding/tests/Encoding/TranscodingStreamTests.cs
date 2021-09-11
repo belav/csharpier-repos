@@ -1356,9 +1356,10 @@ namespace System.Text.Tests
 
                 public override char GetNextChar()
                 {
-                    return (_remainingIdx < _remaining.Length)
-                        ? _remaining[_remainingIdx++]
-                        : '\0' /* end of string reached */
+                    return
+                        (_remainingIdx < _remaining.Length)
+                      ? _remaining[_remainingIdx++]
+                      : '\0' /* end of string reached */
                     ;
                 }
 

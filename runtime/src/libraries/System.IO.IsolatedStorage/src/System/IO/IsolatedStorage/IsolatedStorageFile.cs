@@ -660,9 +660,10 @@ namespace System.IO.IsolatedStorage
             Type? applicationEvidenceType
         ) {
             // Scope MUST be Application
-            return (applicationEvidenceType == null)
-                ? GetStore(scope)
-                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return
+                (applicationEvidenceType == null)
+              ? GetStore(scope)
+              : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
         public static IsolatedStorageFile GetStore(
@@ -670,9 +671,10 @@ namespace System.IO.IsolatedStorage
             object? applicationIdentity
         ) {
             // Scope MUST be Application
-            return (applicationIdentity == null)
-                ? GetStore(scope)
-                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return
+                (applicationIdentity == null)
+              ? GetStore(scope)
+              : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
         public static IsolatedStorageFile GetStore(
@@ -681,9 +683,10 @@ namespace System.IO.IsolatedStorage
             Type? assemblyEvidenceType
         ) {
             // Scope MUST NOT be Application (assembly is assumed otherwise)
-            return (domainEvidenceType == null && assemblyEvidenceType == null)
-                ? GetStore(scope)
-                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return
+                (domainEvidenceType == null && assemblyEvidenceType == null)
+              ? GetStore(scope)
+              : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
         public static IsolatedStorageFile GetStore(
@@ -692,9 +695,10 @@ namespace System.IO.IsolatedStorage
             object? assemblyIdentity
         ) {
             // Scope MUST NOT be Application (assembly is assumed otherwise)
-            return (domainIdentity == null && assemblyIdentity == null)
-                ? GetStore(scope)
-                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return
+                (domainIdentity == null && assemblyIdentity == null)
+              ? GetStore(scope)
+              : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
         internal string GetFullPath(string partialPath)

@@ -334,18 +334,20 @@ namespace System.Net.Http
             HttpRequestMessage request,
             CancellationToken cancellationToken
         ) {
-            return DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
-                ? _diagnosticsHandler.Send(request, cancellationToken)
-                : _underlyingHandler.Send(request, cancellationToken);
+            return
+                DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
+              ? _diagnosticsHandler.Send(request, cancellationToken)
+              : _underlyingHandler.Send(request, cancellationToken);
         }
 
         protected internal override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
         ) {
-            return DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
-                ? _diagnosticsHandler.SendAsync(request, cancellationToken)
-                : _underlyingHandler.SendAsync(request, cancellationToken);
+            return
+                DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
+              ? _diagnosticsHandler.SendAsync(request, cancellationToken)
+              : _underlyingHandler.SendAsync(request, cancellationToken);
         }
 
         // lazy-load the validator func so it can be trimmed by the ILLinker if it isn't used.

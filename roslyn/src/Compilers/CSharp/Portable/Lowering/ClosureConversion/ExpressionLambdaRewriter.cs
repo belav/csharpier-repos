@@ -632,24 +632,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredLeft,
             BoundExpression loweredRight
         ) {
-            return ((object)methodOpt == null)
-                ? ExprFactory(opName, loweredLeft, loweredRight)
-                : requiresLifted
-                    ? ExprFactory(
-                          opName,
-                          loweredLeft,
-                          loweredRight,
-                          _bound.Literal(
-                              isLifted
-                                  && !TypeSymbol.Equals(
-                                      methodOpt.ReturnType,
-                                      type,
-                                      TypeCompareKind.ConsiderEverything2
-                                  )
-                          ),
-                          _bound.MethodInfo(methodOpt)
-                      )
-                    : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
+            return
+                ((object)methodOpt == null)
+              ? ExprFactory(opName, loweredLeft, loweredRight)
+              : requiresLifted
+                  ? ExprFactory(
+                        opName,
+                        loweredLeft,
+                        loweredRight,
+                        _bound.Literal(
+                            isLifted
+                                && !TypeSymbol.Equals(
+                                    methodOpt.ReturnType,
+                                    type,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
+                        ),
+                        _bound.MethodInfo(methodOpt)
+                    )
+                  : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
         }
 
         private TypeSymbol PromotedType(TypeSymbol underlying)
@@ -905,12 +906,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isChecked,
             bool isExplicit
         ) {
-            return (
-                TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
-                && !isExplicit
-            )
-                ? operand
-                : Convert(operand, newType, isChecked);
+            return
+                (
+                    TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
+                    && !isExplicit
+                )
+              ? operand
+              : Convert(operand, newType, isChecked);
         }
 
         private BoundExpression Convert(BoundExpression expr, TypeSymbol type, bool isChecked)
@@ -1432,9 +1434,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Demote(result, node.Type, isChecked);
             }
 
-            return ((object)node.MethodOpt == null)
-                ? ExprFactory(opname, loweredArg)
-                : ExprFactory(opname, loweredArg, _bound.MethodInfo(node.MethodOpt));
+            return
+                ((object)node.MethodOpt == null)
+              ? ExprFactory(opname, loweredArg)
+              : ExprFactory(opname, loweredArg, _bound.MethodInfo(node.MethodOpt));
         }
 
         // ======================================================

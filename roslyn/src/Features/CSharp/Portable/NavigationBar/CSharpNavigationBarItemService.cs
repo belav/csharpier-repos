@@ -148,9 +148,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                         (x, y) =>
                         {
                             var textComparison = x.Text.CompareTo(y.Text);
-                            return textComparison != 0
-                                ? textComparison
-                                : x.Grayed.CompareTo(y.Grayed);
+                            return
+                                textComparison != 0
+                              ? textComparison
+                              : x.Grayed.CompareTo(y.Grayed);
                         }
                     );
 

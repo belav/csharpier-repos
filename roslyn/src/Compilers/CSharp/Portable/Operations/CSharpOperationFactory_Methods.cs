@@ -131,16 +131,17 @@ namespace Microsoft.CodeAnalysis.Operations
         [return: NotNullIfNotNull("boundLocal")]
         internal IVariableDeclaratorOperation? CreateVariableDeclarator(BoundLocal? boundLocal)
         {
-            return boundLocal == null
-                ? null
-                : new VariableDeclaratorOperation(
-                      boundLocal.LocalSymbol.GetPublicSymbol(),
-                      initializer: null,
-                      ignoredArguments: ImmutableArray<IOperation>.Empty,
-                      semanticModel: _semanticModel,
-                      syntax: boundLocal.Syntax,
-                      isImplicit: false
-                  );
+            return
+                boundLocal == null
+              ? null
+              : new VariableDeclaratorOperation(
+                    boundLocal.LocalSymbol.GetPublicSymbol(),
+                    initializer: null,
+                    ignoredArguments: ImmutableArray<IOperation>.Empty,
+                    semanticModel: _semanticModel,
+                    syntax: boundLocal.Syntax,
+                    isImplicit: false
+                );
         }
 
         internal IOperation? CreateReceiverOperation(BoundNode? instance, Symbol? symbol)

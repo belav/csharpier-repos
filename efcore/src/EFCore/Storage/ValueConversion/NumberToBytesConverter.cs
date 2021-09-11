@@ -219,23 +219,24 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         {
             var type = typeof(TNumber).UnwrapNullableType();
 
-            return type == typeof(decimal)
-                ? 16
-                : (
-                      type == typeof(long) || type == typeof(ulong) || type == typeof(double)
-                          ? 8
-                          : (
-                                type == typeof(int) || type == typeof(uint) || type == typeof(float)
-                                    ? 4
-                                    : (
-                                          type == typeof(short)
-                                          || type == typeof(ushort)
-                                          || type == typeof(char)
-                                              ? 2
-                                              : 1
-                                      )
-                            )
-                  );
+            return
+                type == typeof(decimal)
+              ? 16
+              : (
+                    type == typeof(long) || type == typeof(ulong) || type == typeof(double)
+                        ? 8
+                        : (
+                              type == typeof(int) || type == typeof(uint) || type == typeof(float)
+                                  ? 4
+                                  : (
+                                        type == typeof(short)
+                                        || type == typeof(ushort)
+                                        || type == typeof(char)
+                                            ? 2
+                                            : 1
+                                    )
+                          )
+                );
         }
 
         private static byte[] EnsureEndianInt(byte[] bytes) =>

@@ -183,9 +183,10 @@ namespace System.Net.Sockets
             int* nameLen
         ) {
             SocketError errorCode = Interop.Winsock.getsockname(handle, buffer, nameLen);
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static SocketError GetAvailable(SafeSocketHandle handle, out int available)
@@ -197,9 +198,10 @@ namespace System.Net.Sockets
                 ref value
             );
             available = value;
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static unsafe SocketError GetPeerName(
@@ -210,9 +212,10 @@ namespace System.Net.Sockets
             fixed (byte* rawBuffer = buffer)
             {
                 SocketError errorCode = Interop.Winsock.getpeername(handle, rawBuffer, ref nameLen);
-                return errorCode == SocketError.SocketError
-                    ? GetLastSocketError()
-                    : SocketError.Success;
+                return
+                    errorCode == SocketError.SocketError
+                  ? GetLastSocketError()
+                  : SocketError.Success;
             }
         }
 
@@ -223,17 +226,19 @@ namespace System.Net.Sockets
             int nameLen
         ) {
             SocketError errorCode = Interop.Winsock.bind(handle, buffer, nameLen);
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static SocketError Listen(SafeSocketHandle handle, int backlog)
         {
             SocketError errorCode = Interop.Winsock.listen(handle, backlog);
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static SocketError Accept(
@@ -269,9 +274,10 @@ namespace System.Net.Sockets
                 IntPtr.Zero,
                 IntPtr.Zero
             );
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static SocketError Send(
@@ -785,9 +791,10 @@ namespace System.Net.Sockets
                 IntPtr.Zero,
                 IntPtr.Zero
             );
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static unsafe SocketError SetSockOpt(
@@ -817,9 +824,10 @@ namespace System.Net.Sockets
                     sizeof(int)
                 );
             }
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static unsafe SocketError SetSockOpt(
@@ -849,9 +857,10 @@ namespace System.Net.Sockets
                     optionValuePtr,
                     optionValue != null ? optionValue.Length : 0
                 );
-                return errorCode == SocketError.SocketError
-                    ? GetLastSocketError()
-                    : SocketError.Success;
+                return
+                    errorCode == SocketError.SocketError
+                  ? GetLastSocketError()
+                  : SocketError.Success;
             }
         }
 
@@ -870,9 +879,10 @@ namespace System.Net.Sockets
                     optionValuePtr,
                     optionValue.Length
                 );
-                return errorCode == SocketError.SocketError
-                    ? GetLastSocketError()
-                    : SocketError.Success;
+                return
+                    errorCode == SocketError.SocketError
+                  ? GetLastSocketError()
+                  : SocketError.Success;
             }
         }
 
@@ -921,9 +931,10 @@ namespace System.Net.Sockets
                 ref ipmr,
                 Interop.Winsock.IPMulticastRequest.Size
             );
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static SocketError SetIPv6MulticastOption(
@@ -944,9 +955,10 @@ namespace System.Net.Sockets
                 ref ipmr,
                 Interop.Winsock.IPv6MulticastRequest.Size
             );
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static SocketError SetLingerOption(SafeSocketHandle handle, LingerOption optionValue)
@@ -963,9 +975,10 @@ namespace System.Net.Sockets
                 ref lngopt,
                 4
             );
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static void SetIPProtectionLevel(
@@ -1009,9 +1022,10 @@ namespace System.Net.Sockets
             );
 
             optionValue = tmpOptionValue;
-            return errorCode == SocketError.SocketError
-                ? GetLastSocketError()
-                : SocketError.Success;
+            return
+                errorCode == SocketError.SocketError
+              ? GetLastSocketError()
+              : SocketError.Success;
         }
 
         public static unsafe SocketError GetSockOpt(
@@ -1041,9 +1055,10 @@ namespace System.Net.Sockets
                     optionValuePtr,
                     ref optionLength
                 );
-                return errorCode == SocketError.SocketError
-                    ? GetLastSocketError()
-                    : SocketError.Success;
+                return
+                    errorCode == SocketError.SocketError
+                  ? GetLastSocketError()
+                  : SocketError.Success;
             }
         }
 
@@ -1066,9 +1081,10 @@ namespace System.Net.Sockets
                     optionValuePtr,
                     ref optionLength
                 );
-                return errorCode == SocketError.SocketError
-                    ? GetLastSocketError()
-                    : SocketError.Success;
+                return
+                    errorCode == SocketError.SocketError
+                  ? GetLastSocketError()
+                  : SocketError.Success;
             }
         }
 

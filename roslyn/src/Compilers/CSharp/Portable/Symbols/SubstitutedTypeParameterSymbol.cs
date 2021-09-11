@@ -53,10 +53,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // A substituted type parameter symbol is used as a type parameter of a frame type for lambda-captured
                 // variables within a generic method.  In that case the frame's own type parameter is an original.
-                return ContainingSymbol.OriginalDefinition
-                != _underlyingTypeParameter.ContainingSymbol.OriginalDefinition
-                    ? this
-                    : _underlyingTypeParameter.OriginalDefinition;
+                return
+                    ContainingSymbol.OriginalDefinition
+                    != _underlyingTypeParameter.ContainingSymbol.OriginalDefinition
+                  ? this
+                  : _underlyingTypeParameter.OriginalDefinition;
             }
         }
 

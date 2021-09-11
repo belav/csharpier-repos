@@ -1056,13 +1056,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useSiteInfo: ref useSiteInfo
             );
 
-            return result.IsValid
-                ? MemberAnalysisResult.ExpandedForm(
-                      result.ArgsToParamsOpt,
-                      result.ConversionsOpt,
-                      hasAnyRefOmittedArgument: false
-                  )
-                : result;
+            return
+                result.IsValid
+              ? MemberAnalysisResult.ExpandedForm(
+                    result.ArgsToParamsOpt,
+                    result.ConversionsOpt,
+                    hasAnyRefOmittedArgument: false
+                )
+              : result;
         }
 
         private void AddMemberToCandidateSet<TMember>(
@@ -2863,15 +2864,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (refKind1 == RefKind.None)
                     {
-                        return conv1.Kind == ConversionKind.Identity
-                            ? BetterResult.Left
-                            : BetterResult.Neither;
+                        return
+                            conv1.Kind == ConversionKind.Identity
+                          ? BetterResult.Left
+                          : BetterResult.Neither;
                     }
                     else
                     {
-                        return conv2.Kind == ConversionKind.Identity
-                            ? BetterResult.Right
-                            : BetterResult.Neither;
+                        return
+                            conv2.Kind == ConversionKind.Identity
+                          ? BetterResult.Right
+                          : BetterResult.Neither;
                     }
                 }
                 else if (refKind1 == RefKind.Ref)
@@ -4094,17 +4097,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useSiteInfo: ref useSiteInfo
             );
 
-            return result.Result.IsValid
-                ? new MemberResolutionResult<TMember>(
-                      result.Member,
-                      result.LeastOverriddenMember,
-                      MemberAnalysisResult.ExpandedForm(
-                          result.Result.ArgsToParamsOpt,
-                          result.Result.ConversionsOpt,
-                          hasAnyRefOmittedArgument
-                      )
-                  )
-                : result;
+            return
+                result.Result.IsValid
+              ? new MemberResolutionResult<TMember>(
+                    result.Member,
+                    result.LeastOverriddenMember,
+                    MemberAnalysisResult.ExpandedForm(
+                        result.Result.ArgsToParamsOpt,
+                        result.Result.ConversionsOpt,
+                        hasAnyRefOmittedArgument
+                    )
+                )
+              : result;
         }
 
         private MemberResolutionResult<TMember> IsApplicable<TMember>(

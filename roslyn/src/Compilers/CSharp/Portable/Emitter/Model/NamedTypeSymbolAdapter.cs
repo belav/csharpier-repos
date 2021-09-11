@@ -308,13 +308,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
 
-            return ((object)baseType != null)
-                ? moduleBeingBuilt.Translate(
-                      baseType,
-                      syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                      diagnostics: context.Diagnostics
-                  )
-                : null;
+            return
+                ((object)baseType != null)
+              ? moduleBeingBuilt.Translate(
+                    baseType,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                )
+              : null;
         }
 
         IEnumerable<Cci.IEventDefinition> Cci.ITypeDefinition.GetEvents(EmitContext context)

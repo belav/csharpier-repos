@@ -65,9 +65,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(expression, nameof(expression));
 
-            return expression != Expression
-                ? new OrderingExpression(expression, IsAscending)
-                : this;
+            return
+                expression != Expression
+              ? new OrderingExpression(expression, IsAscending)
+              : this;
         }
 
         /// <inheritdoc />

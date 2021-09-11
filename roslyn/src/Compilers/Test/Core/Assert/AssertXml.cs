@@ -268,9 +268,10 @@ namespace Roslyn.Test.Utilities
                 Assert.NotNull(element1);
                 Assert.NotNull(element2);
 
-                return element1.Name == "customDebugInfo"
-                    ? element1.ToString() == element2.ToString()
-                    : AssertXml.NameAndAttributeComparer.Instance.Equals(element1, element2);
+                return
+                    element1.Name == "customDebugInfo"
+                  ? element1.ToString() == element2.ToString()
+                  : AssertXml.NameAndAttributeComparer.Instance.Equals(element1, element2);
             }
 
             public int GetHashCode(XElement element)

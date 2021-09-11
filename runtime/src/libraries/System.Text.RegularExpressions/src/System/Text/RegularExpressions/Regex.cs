@@ -375,9 +375,10 @@ namespace System.Text.RegularExpressions
             }
             else
             {
-                return caps != null && !caps.TryGetValue(i, out i)
-                    ? string.Empty
-                    : (uint)i < (uint)capslist.Length ? capslist[i] : string.Empty;
+                return
+                    caps != null && !caps.TryGetValue(i, out i)
+                  ? string.Empty
+                  : (uint)i < (uint)capslist.Length ? capslist[i] : string.Empty;
             }
         }
 
@@ -399,10 +400,11 @@ namespace System.Text.RegularExpressions
             else
             {
                 // Otherwise, try to parse it as a number.
-                return uint.TryParse(name, NumberStyles.None, provider: null, out uint result)
-                && result < capsize
-                    ? (int)result
-                    : -1;
+                return
+                    uint.TryParse(name, NumberStyles.None, provider: null, out uint result)
+                    && result < capsize
+                  ? (int)result
+                  : -1;
             }
         }
 

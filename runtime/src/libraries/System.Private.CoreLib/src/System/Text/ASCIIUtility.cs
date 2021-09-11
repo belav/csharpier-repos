@@ -95,9 +95,10 @@ namespace System.Text
             // pmovmskb which we know are optimized, and (b) we can avoid downclocking the processor while
             // this method is running.
 
-            return (Sse2.IsSupported || AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
-                ? GetIndexOfFirstNonAsciiByte_Intrinsified(pBuffer, bufferLength)
-                : GetIndexOfFirstNonAsciiByte_Default(pBuffer, bufferLength);
+            return
+                (Sse2.IsSupported || AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
+              ? GetIndexOfFirstNonAsciiByte_Intrinsified(pBuffer, bufferLength)
+              : GetIndexOfFirstNonAsciiByte_Default(pBuffer, bufferLength);
         }
 
         private static unsafe nuint GetIndexOfFirstNonAsciiByte_Default(
@@ -707,9 +708,10 @@ namespace System.Text
             // pmovmskb which we know are optimized, and (b) we can avoid downclocking the processor while
             // this method is running.
 
-            return (Sse2.IsSupported)
-                ? GetIndexOfFirstNonAsciiChar_Sse2(pBuffer, bufferLength)
-                : GetIndexOfFirstNonAsciiChar_Default(pBuffer, bufferLength);
+            return
+                (Sse2.IsSupported)
+              ? GetIndexOfFirstNonAsciiChar_Sse2(pBuffer, bufferLength)
+              : GetIndexOfFirstNonAsciiChar_Default(pBuffer, bufferLength);
         }
 
         private static unsafe nuint GetIndexOfFirstNonAsciiChar_Default(

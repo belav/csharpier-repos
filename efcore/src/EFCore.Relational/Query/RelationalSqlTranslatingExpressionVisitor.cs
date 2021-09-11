@@ -192,26 +192,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                       );
             }
 
-            return inputType == typeof(float)
-                ? _sqlExpressionFactory.Convert(
-                      _sqlExpressionFactory.Function(
-                          "AVG",
-                          new[] { sqlExpression },
-                          nullable: true,
-                          argumentsPropagateNullability: new[] { false },
-                          typeof(double)
-                      ),
-                      sqlExpression.Type,
-                      sqlExpression.TypeMapping
-                  )
-                : (SqlExpression)_sqlExpressionFactory.Function(
-                      "AVG",
-                      new[] { sqlExpression },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false },
-                      sqlExpression.Type,
-                      sqlExpression.TypeMapping
-                  );
+            return
+                inputType == typeof(float)
+              ? _sqlExpressionFactory.Convert(
+                    _sqlExpressionFactory.Function(
+                        "AVG",
+                        new[] { sqlExpression },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { false },
+                        typeof(double)
+                    ),
+                    sqlExpression.Type,
+                    sqlExpression.TypeMapping
+                )
+              : (SqlExpression)_sqlExpressionFactory.Function(
+                    "AVG",
+                    new[] { sqlExpression },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false },
+                    sqlExpression.Type,
+                    sqlExpression.TypeMapping
+                );
         }
 
         /// <summary>
@@ -263,16 +264,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(sqlExpression, nameof(sqlExpression));
 
-            return sqlExpression != null
-                ? _sqlExpressionFactory.Function(
-                      "MAX",
-                      new[] { sqlExpression },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false },
-                      sqlExpression.Type,
-                      sqlExpression.TypeMapping
-                  )
-                : null;
+            return
+                sqlExpression != null
+              ? _sqlExpressionFactory.Function(
+                    "MAX",
+                    new[] { sqlExpression },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false },
+                    sqlExpression.Type,
+                    sqlExpression.TypeMapping
+                )
+              : null;
         }
 
         /// <summary>
@@ -284,16 +286,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(sqlExpression, nameof(sqlExpression));
 
-            return sqlExpression != null
-                ? _sqlExpressionFactory.Function(
-                      "MIN",
-                      new[] { sqlExpression },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false },
-                      sqlExpression.Type,
-                      sqlExpression.TypeMapping
-                  )
-                : null;
+            return
+                sqlExpression != null
+              ? _sqlExpressionFactory.Function(
+                    "MIN",
+                    new[] { sqlExpression },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false },
+                    sqlExpression.Type,
+                    sqlExpression.TypeMapping
+                )
+              : null;
         }
 
         /// <summary>
@@ -307,26 +310,27 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var inputType = sqlExpression.Type;
 
-            return inputType == typeof(float)
-                ? _sqlExpressionFactory.Convert(
-                      _sqlExpressionFactory.Function(
-                          "SUM",
-                          new[] { sqlExpression },
-                          nullable: true,
-                          argumentsPropagateNullability: new[] { false },
-                          typeof(double)
-                      ),
-                      inputType,
-                      sqlExpression.TypeMapping
-                  )
-                : (SqlExpression)_sqlExpressionFactory.Function(
-                      "SUM",
-                      new[] { sqlExpression },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false },
-                      inputType,
-                      sqlExpression.TypeMapping
-                  );
+            return
+                inputType == typeof(float)
+              ? _sqlExpressionFactory.Convert(
+                    _sqlExpressionFactory.Function(
+                        "SUM",
+                        new[] { sqlExpression },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { false },
+                        typeof(double)
+                    ),
+                    inputType,
+                    sqlExpression.TypeMapping
+                )
+              : (SqlExpression)_sqlExpressionFactory.Function(
+                    "SUM",
+                    new[] { sqlExpression },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false },
+                    inputType,
+                    sqlExpression.TypeMapping
+                );
         }
 
         /// <inheritdoc />
@@ -399,17 +403,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _ => binaryExpression.NodeType
             };
 
-            return TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
-            || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
-                ? QueryCompilationContext.NotTranslatedExpression
-                : uncheckedNodeTypeVariant == ExpressionType.Coalesce
-                    ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
-                    : _sqlExpressionFactory.MakeBinary(
-                          uncheckedNodeTypeVariant,
-                          sqlLeft!,
-                          sqlRight!,
-                          null
-                      ) ?? QueryCompilationContext.NotTranslatedExpression;
+            return
+                TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
+                || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
+              ? QueryCompilationContext.NotTranslatedExpression
+              : uncheckedNodeTypeVariant == ExpressionType.Coalesce
+                  ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
+                  : _sqlExpressionFactory.MakeBinary(
+                        uncheckedNodeTypeVariant,
+                        sqlLeft!,
+                        sqlRight!,
+                        null
+                    ) ?? QueryCompilationContext.NotTranslatedExpression;
 
             static bool TryUnwrapConvertToObject(Expression expression, out Expression? operand)
             {
@@ -439,14 +444,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             var ifTrue = Visit(conditionalExpression.IfTrue);
             var ifFalse = Visit(conditionalExpression.IfFalse);
 
-            return TranslationFailed(conditionalExpression.Test, test, out var sqlTest)
-            || TranslationFailed(conditionalExpression.IfTrue, ifTrue, out var sqlIfTrue)
-            || TranslationFailed(conditionalExpression.IfFalse, ifFalse, out var sqlIfFalse)
-                ? QueryCompilationContext.NotTranslatedExpression
-                : _sqlExpressionFactory.Case(
-                      new[] { new CaseWhenClause(sqlTest!, sqlIfTrue!) },
-                      sqlIfFalse
-                  );
+            return
+                TranslationFailed(conditionalExpression.Test, test, out var sqlTest)
+                || TranslationFailed(conditionalExpression.IfTrue, ifTrue, out var sqlIfTrue)
+                || TranslationFailed(conditionalExpression.IfFalse, ifFalse, out var sqlIfFalse)
+              ? QueryCompilationContext.NotTranslatedExpression
+              : _sqlExpressionFactory.Case(
+                    new[] { new CaseWhenClause(sqlTest!, sqlIfTrue!) },
+                    sqlIfFalse
+                );
         }
 
         /// <inheritdoc />
@@ -1182,22 +1188,24 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     )
                                     .ToList();
 
-                                return matchingCaseWhenClauses.Count == 1
-                                    ? matchingCaseWhenClauses[0].Test
-                                    : matchingCaseWhenClauses.Select(e => e.Test)
-                                          .Aggregate((l, r) => _sqlExpressionFactory.OrElse(l, r));
+                                return
+                                    matchingCaseWhenClauses.Count == 1
+                                  ? matchingCaseWhenClauses[0].Test
+                                  : matchingCaseWhenClauses.Select(e => e.Test)
+                                        .Aggregate((l, r) => _sqlExpressionFactory.OrElse(l, r));
                             }
 
-                            return discriminatorValues.Count == 1
-                                ? _sqlExpressionFactory.Equal(
-                                      entityProjectionExpression.DiscriminatorExpression!,
-                                      _sqlExpressionFactory.Constant(discriminatorValues[0])
-                                  )
-                                : (SqlExpression)_sqlExpressionFactory.In(
-                                      entityProjectionExpression.DiscriminatorExpression!,
-                                      _sqlExpressionFactory.Constant(discriminatorValues),
-                                      negated: false
-                                  );
+                            return
+                                discriminatorValues.Count == 1
+                              ? _sqlExpressionFactory.Equal(
+                                    entityProjectionExpression.DiscriminatorExpression!,
+                                    _sqlExpressionFactory.Constant(discriminatorValues[0])
+                                )
+                              : (SqlExpression)_sqlExpressionFactory.In(
+                                    entityProjectionExpression.DiscriminatorExpression!,
+                                    _sqlExpressionFactory.Constant(discriminatorValues),
+                                    negated: false
+                                );
                         }
                     }
                     else
@@ -1215,23 +1223,24 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
                             if (discriminatorColumn != null)
                             {
-                                return concreteEntityTypes.Count == 1
-                                    ? _sqlExpressionFactory.Equal(
-                                          discriminatorColumn,
-                                          _sqlExpressionFactory.Constant(
-                                              concreteEntityTypes[0].GetDiscriminatorValue()
-                                          )
-                                      )
-                                    : (Expression)_sqlExpressionFactory.In(
-                                          discriminatorColumn,
-                                          _sqlExpressionFactory.Constant(
-                                              concreteEntityTypes.Select(
-                                                      et => et.GetDiscriminatorValue()
-                                                  )
-                                                  .ToList()
-                                          ),
-                                          negated: false
-                                      );
+                                return
+                                    concreteEntityTypes.Count == 1
+                                  ? _sqlExpressionFactory.Equal(
+                                        discriminatorColumn,
+                                        _sqlExpressionFactory.Constant(
+                                            concreteEntityTypes[0].GetDiscriminatorValue()
+                                        )
+                                    )
+                                  : (Expression)_sqlExpressionFactory.In(
+                                        discriminatorColumn,
+                                        _sqlExpressionFactory.Constant(
+                                            concreteEntityTypes.Select(
+                                                    et => et.GetDiscriminatorValue()
+                                                )
+                                                .ToList()
+                                        ),
+                                        negated: false
+                                    );
                             }
                         }
                         else
@@ -1612,9 +1621,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         )
                                     );
 
-                                    return nodeType == ExpressionType.Equal
-                                        ? (Expression)comparison
-                                        : Expression.Not(comparison);
+                                    return
+                                        nodeType == ExpressionType.Equal
+                                      ? (Expression)comparison
+                                      : Expression.Not(comparison);
                                 }
                             )
                             .Aggregate(
@@ -1651,9 +1661,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             )
                                         );
 
-                                        return nodeType == ExpressionType.Equal
-                                            ? (Expression)comparison
-                                            : Expression.Not(comparison);
+                                        return
+                                            nodeType == ExpressionType.Equal
+                                          ? (Expression)comparison
+                                          : Expression.Not(comparison);
                                     }
                                 )
                                 .Aggregate(
@@ -1716,9 +1727,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     )
                                 );
 
-                                return nodeType == ExpressionType.Equal
-                                    ? (Expression)comparison
-                                    : Expression.Not(comparison);
+                                return
+                                    nodeType == ExpressionType.Equal
+                                  ? (Expression)comparison
+                                  : Expression.Not(comparison);
                             }
                         )
                         .Aggregate(
@@ -1796,9 +1808,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 )
                             );
 
-                            return nodeType == ExpressionType.Equal
-                                ? (Expression)comparison
-                                : Expression.Not(comparison);
+                            return
+                                nodeType == ExpressionType.Equal
+                              ? (Expression)comparison
+                              : Expression.Not(comparison);
                         }
                     )
                     .Aggregate(
@@ -1868,9 +1881,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             IProperty property
         ) {
             var baseParameter = context.ParameterValues[baseParameterName];
-            return baseParameter == null
-                ? (T?)(object?)null
-                : (T?)property.GetGetter().GetClrValue(baseParameter);
+            return
+                baseParameter == null
+              ? (T?)(object?)null
+              : (T?)property.GetGetter().GetClrValue(baseParameter);
         }
 
         private static List<TProperty?>? ParameterListValueExtractor<TEntity, TProperty>(
@@ -1982,9 +1996,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var derivedEntityType = EntityType.GetDerivedTypes()
                     .FirstOrDefault(et => et.ClrType == type);
 
-                return derivedEntityType == null
-                    ? QueryCompilationContext.NotTranslatedExpression
-                    : new EntityReferenceExpression(this, derivedEntityType);
+                return
+                    derivedEntityType == null
+                  ? QueryCompilationContext.NotTranslatedExpression
+                  : new EntityReferenceExpression(this, derivedEntityType);
             }
         }
 

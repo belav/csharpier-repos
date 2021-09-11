@@ -891,9 +891,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (HasExplicitReferenceConversion(source, destination, ref useSiteInfo))
             {
-                return (source.Kind == SymbolKind.DynamicType)
-                    ? Conversion.ExplicitDynamic
-                    : Conversion.ExplicitReference;
+                return
+                    (source.Kind == SymbolKind.DynamicType)
+                  ? Conversion.ExplicitDynamic
+                  : Conversion.ExplicitReference;
             }
 
             if (HasUnboxingConversion(source, destination, ref useSiteInfo))
@@ -2075,9 +2076,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameterType,
                 ref useSiteInfo
             );
-            return IsValidExtensionMethodThisArgConversion(conversion)
-                ? conversion
-                : Conversion.NoConversion;
+            return
+                IsValidExtensionMethodThisArgConversion(conversion)
+              ? conversion
+              : Conversion.NoConversion;
         }
 
         // Spec 7.6.5.2: "An extension method ... is eligible if ... [an] implicit identity, reference,

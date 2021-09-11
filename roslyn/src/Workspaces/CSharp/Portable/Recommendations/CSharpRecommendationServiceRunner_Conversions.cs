@@ -154,9 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
         private static ITypeSymbol TryMakeNullable(Compilation compilation, ITypeSymbol container)
         {
-            return container.IsNonNullableValueType()
-                ? compilation.GetSpecialType(SpecialType.System_Nullable_T).Construct(container)
-                : container;
+            return
+                container.IsNonNullableValueType()
+              ? compilation.GetSpecialType(SpecialType.System_Nullable_T).Construct(container)
+              : container;
         }
 
         private void AddUserDefinedConversionsOfType(

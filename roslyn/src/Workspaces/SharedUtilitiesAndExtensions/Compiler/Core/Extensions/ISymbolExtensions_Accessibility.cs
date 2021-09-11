@@ -252,19 +252,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             var containingType = type.ContainingType;
-            return containingType == null
-                ? IsNonNestedTypeAccessible(
-                      type.ContainingAssembly,
-                      type.DeclaredAccessibility,
-                      within
-                  )
-                : IsMemberAccessible(
-                      type.ContainingType,
-                      type.DeclaredAccessibility,
-                      within,
-                      null,
-                      out _
-                  );
+            return
+                containingType == null
+              ? IsNonNestedTypeAccessible(
+                    type.ContainingAssembly,
+                    type.DeclaredAccessibility,
+                    within
+                )
+              : IsMemberAccessible(
+                    type.ContainingType,
+                    type.DeclaredAccessibility,
+                    within,
+                    null,
+                    out _
+                );
         }
 
         // Is a top-level type with accessibility "declaredAccessibility" inside assembly "assembly"

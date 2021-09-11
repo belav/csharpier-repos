@@ -242,10 +242,11 @@ namespace Microsoft.CodeAnalysis.Debugging
             var members = types.SelectMany(t => GetMembers(t, nameAndArity.Name))
                 .Select(s => GetPartialImplementationPartOrNull(s) ?? s);
 
-            return nameAndArity.Arity == 0
-                ? members
-                : members.OfType<IMethodSymbol>()
-                      .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
+            return
+                nameAndArity.Arity == 0
+              ? members
+              : members.OfType<IMethodSymbol>()
+                    .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
         }
 
         private async Task<IEnumerable<INamedTypeSymbol>> GetAllTypesAsync(

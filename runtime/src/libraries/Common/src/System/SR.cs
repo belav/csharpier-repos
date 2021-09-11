@@ -54,9 +54,10 @@ namespace System
         {
             string resourceString = GetResourceString(resourceKey);
 
-            return resourceKey == resourceString || resourceString == null
-                ? defaultString
-                : resourceString;
+            return
+                resourceKey == resourceString || resourceString == null
+              ? defaultString
+              : resourceString;
         }
 
         internal static string Format(string resourceFormat, object? p1)

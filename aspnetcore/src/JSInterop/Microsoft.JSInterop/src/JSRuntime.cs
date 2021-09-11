@@ -287,12 +287,13 @@ namespace Microsoft.JSInterop
 
         internal IDotNetObjectReference GetObjectReference(long dotNetObjectId)
         {
-            return _trackedRefsById.TryGetValue(dotNetObjectId, out var dotNetObjectRef)
-                ? dotNetObjectRef
-                : throw new ArgumentException(
-                      $"There is no tracked object with id '{dotNetObjectId}'. Perhaps the DotNetObjectReference instance was already disposed.",
-                      nameof(dotNetObjectId)
-                  );
+            return
+                _trackedRefsById.TryGetValue(dotNetObjectId, out var dotNetObjectRef)
+              ? dotNetObjectRef
+              : throw new ArgumentException(
+                    $"There is no tracked object with id '{dotNetObjectId}'. Perhaps the DotNetObjectReference instance was already disposed.",
+                    nameof(dotNetObjectId)
+                );
         }
 
         /// <summary>

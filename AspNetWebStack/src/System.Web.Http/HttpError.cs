@@ -113,9 +113,10 @@ namespace System.Web.Http
                                 }
                                 else
                                 {
-                                    return String.IsNullOrEmpty(error.ErrorMessage)
-                                        ? SRResources.ErrorOccurred
-                                        : error.ErrorMessage;
+                                    return
+                                        String.IsNullOrEmpty(error.ErrorMessage)
+                                      ? SRResources.ErrorOccurred
+                                      : error.ErrorMessage;
                                 }
                             }
                         )

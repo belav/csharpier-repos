@@ -79,9 +79,10 @@ namespace System.Net.NetworkInformation.Tests
                 );
             }
 
-            return addressFamily == AddressFamily.InterNetwork
-                ? IPAddress.Loopback
-                : IPAddress.IPv6Loopback;
+            return
+                addressFamily == AddressFamily.InterNetwork
+              ? IPAddress.Loopback
+              : IPAddress.IPv6Loopback;
         }
     }
 }

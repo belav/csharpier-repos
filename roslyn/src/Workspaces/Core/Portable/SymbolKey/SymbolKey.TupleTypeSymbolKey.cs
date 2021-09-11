@@ -56,9 +56,10 @@ namespace Microsoft.CodeAnalysis
             ) {
                 var isError = reader.ReadBoolean();
 
-                return isError
-                    ? ResolveErrorTuple(reader, out failureReason)
-                    : ResolveNormalTuple(reader, out failureReason);
+                return
+                    isError
+                  ? ResolveErrorTuple(reader, out failureReason)
+                  : ResolveNormalTuple(reader, out failureReason);
             }
 
             private static SymbolKeyResolution ResolveNormalTuple(

@@ -69,9 +69,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             result = StringComparer.Ordinal.Compare(x.PrincipalTable.Name, y.PrincipalTable.Name);
-            return result != 0
-                ? result
-                : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
+            return
+                result != 0
+              ? result
+              : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
         }
 
         /// <summary>

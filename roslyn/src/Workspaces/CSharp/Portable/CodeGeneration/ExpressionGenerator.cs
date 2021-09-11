@@ -35,23 +35,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     );
 
                 case TypedConstantKind.Type:
-                    return typedConstant.Value is ITypeSymbol
-                        ? SyntaxFactory.TypeOfExpression(
-                              ((ITypeSymbol)typedConstant.Value).GenerateTypeSyntax()
-                          )
-                        : GenerateNullLiteral();
+                    return
+                        typedConstant.Value is ITypeSymbol
+                      ? SyntaxFactory.TypeOfExpression(
+                            ((ITypeSymbol)typedConstant.Value).GenerateTypeSyntax()
+                        )
+                      : GenerateNullLiteral();
 
                 case TypedConstantKind.Array:
-                    return typedConstant.IsNull
-                        ? GenerateNullLiteral()
-                        : SyntaxFactory.ImplicitArrayCreationExpression(
-                              SyntaxFactory.InitializerExpression(
-                                  SyntaxKind.ArrayInitializerExpression,
-                                  SyntaxFactory.SeparatedList(
-                                      typedConstant.Values.Select(GenerateExpression)
-                                  )
-                              )
-                          );
+                    return
+                        typedConstant.IsNull
+                      ? GenerateNullLiteral()
+                      : SyntaxFactory.ImplicitArrayCreationExpression(
+                            SyntaxFactory.InitializerExpression(
+                                SyntaxKind.ArrayInitializerExpression,
+                                SyntaxFactory.SeparatedList(
+                                    typedConstant.Values.Select(GenerateExpression)
+                                )
+                            )
+                        );
 
                 default:
                     return GenerateNullLiteral();
@@ -451,9 +453,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 tokenFactory(stringValue, nonNegativeValue)
             );
 
-            return negative
-                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.UnaryMinusExpression, literal)
-                : (ExpressionSyntax)literal;
+            return
+                negative
+              ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.UnaryMinusExpression, literal)
+              : (ExpressionSyntax)literal;
         }
 
         private static ExpressionSyntax GenerateFieldReference<T>(

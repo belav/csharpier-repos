@@ -320,9 +320,10 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get
             {
-                return _mode == SrgsGrammarMode.Voice
-                    ? GrammarType.VoiceGrammar
-                    : GrammarType.DtmfGrammar;
+                return
+                    _mode == SrgsGrammarMode.Voice
+                  ? GrammarType.VoiceGrammar
+                  : GrammarType.DtmfGrammar;
             }
             set
             {

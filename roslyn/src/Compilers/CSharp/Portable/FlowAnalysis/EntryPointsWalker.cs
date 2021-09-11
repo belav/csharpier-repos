@@ -41,9 +41,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 walker.Analyze(ref badRegion);
                 var result = walker._entryPoints;
                 succeeded = !badRegion;
-                return badRegion
-                    ? SpecializedCollections.EmptyEnumerable<LabeledStatementSyntax>()
-                    : result;
+                return
+                    badRegion
+                  ? SpecializedCollections.EmptyEnumerable<LabeledStatementSyntax>()
+                  : result;
             }
 
             finally

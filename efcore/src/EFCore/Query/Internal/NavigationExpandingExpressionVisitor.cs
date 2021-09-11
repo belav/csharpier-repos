@@ -2206,18 +2206,19 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 expression = materializeCollectionNavigationExpression.Subquery;
             }
 
-            return expression is OwnedNavigationReference ownedNavigationReference
-            && ownedNavigationReference.Navigation.IsCollection
-                ? CreateNavigationExpansionExpression(
-                      Expression.Call(
-                          QueryableMethods.AsQueryable.MakeGenericMethod(
-                              ownedNavigationReference.Type.GetSequenceType()
-                          ),
-                          ownedNavigationReference
-                      ),
-                      ownedNavigationReference
-                  )
-                : expression;
+            return
+                expression is OwnedNavigationReference ownedNavigationReference
+                && ownedNavigationReference.Navigation.IsCollection
+              ? CreateNavigationExpansionExpression(
+                    Expression.Call(
+                        QueryableMethods.AsQueryable.MakeGenericMethod(
+                            ownedNavigationReference.Type.GetSequenceType()
+                        ),
+                        ownedNavigationReference
+                    ),
+                    ownedNavigationReference
+                )
+              : expression;
         }
 
         private string GetParameterName(string prefix)
@@ -2409,9 +2410,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         allDefault &= arguments[i].NodeType == ExpressionType.Default;
                     }
 
-                    return allDefault
-                        ? Expression.Default(newExpression.Type)
-                        : (Expression)newExpression.Update(arguments);
+                    return
+                        allDefault
+                      ? Expression.Default(newExpression.Type)
+                      : (Expression)newExpression.Update(arguments);
                 }
 
                 case OwnedNavigationReference ownedNavigationReference:

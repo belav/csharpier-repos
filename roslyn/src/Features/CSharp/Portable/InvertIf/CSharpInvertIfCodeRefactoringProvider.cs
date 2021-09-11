@@ -151,11 +151,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 statementArray[0] = statementArray[0].GetNodeWithoutLeadingBlankLines();
             }
 
-            return original is BlockSyntax block
-                ? block.WithStatements(SyntaxFactory.List(statementArray))
-                : statementArray.Length == 1
-                    ? statementArray[0]
-                    : SyntaxFactory.Block(statementArray);
+            return
+                original is BlockSyntax block
+              ? block.WithStatements(SyntaxFactory.List(statementArray))
+              : statementArray.Length == 1
+                  ? statementArray[0]
+                  : SyntaxFactory.Block(statementArray);
         }
 
         protected override IfStatementSyntax UpdateIf(
@@ -203,9 +204,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             // of all the different types of rewriting, we may need indentation fixed up and
             // whatnot.  Don't do this with single-line because we want to ensure as closely
             // as possible that we've kept things on that single line.
-            return isSingleLine
-                ? updatedIf
-                : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
+            return
+                isSingleLine
+              ? updatedIf
+              : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
         }
 
         protected override SyntaxNode WithStatements(
@@ -225,9 +227,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
 
         protected override IEnumerable<StatementSyntax> UnwrapBlock(StatementSyntax ifBody)
         {
-            return ifBody is BlockSyntax block
-                ? block.Statements
-                : SyntaxFactory.SingletonList(ifBody);
+            return
+                ifBody is BlockSyntax block
+              ? block.Statements
+              : SyntaxFactory.SingletonList(ifBody);
         }
 
         protected override bool IsSingleStatementStatementRange(StatementRange statementRange)

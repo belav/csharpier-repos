@@ -53,9 +53,10 @@ namespace Microsoft.Cci
 
         private string GetDebuggerDisplay()
         {
-            return IsHidden
-                ? "<hidden>"
-                : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
+            return
+                IsHidden
+              ? "<hidden>"
+              : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
         }
     }
 }

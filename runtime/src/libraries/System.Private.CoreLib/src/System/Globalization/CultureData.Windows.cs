@@ -268,9 +268,10 @@ namespace System.Globalization
 
             Debug.Assert(!string.IsNullOrEmpty(userOverride));
 
-            return userOverride != icuFormatString
-                ? new string[] { userOverride, icuFormatString }
-                : new string[] { userOverride };
+            return
+                userOverride != icuFormatString
+              ? new string[] { userOverride, icuFormatString }
+              : new string[] { userOverride };
         }
 
         private int GetAnsiCodePage(string cultureName) =>

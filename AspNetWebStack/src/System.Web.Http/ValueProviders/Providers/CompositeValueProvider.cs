@@ -69,9 +69,10 @@ namespace System.Web.Http.ValueProviders.Providers
             string prefix
         ) {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
-            return (enumeratedProvider != null)
-                ? enumeratedProvider.GetKeysFromPrefix(prefix)
-                : null;
+            return
+                (enumeratedProvider != null)
+              ? enumeratedProvider.GetKeysFromPrefix(prefix)
+              : null;
         }
 
         protected override void InsertItem(int index, IValueProvider item)

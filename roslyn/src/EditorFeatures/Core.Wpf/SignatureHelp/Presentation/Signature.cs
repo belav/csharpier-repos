@@ -74,9 +74,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             get
             {
                 EnsureInitialized();
-                return _parameterIndex >= 0 && _parameters != null
-                    ? _parameters[_parameterIndex]
-                    : null;
+                return
+                    _parameterIndex >= 0 && _parameters != null
+                  ? _parameters[_parameterIndex]
+                  : null;
             }
         }
 

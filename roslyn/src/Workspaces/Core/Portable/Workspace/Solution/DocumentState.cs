@@ -663,9 +663,10 @@ namespace Microsoft.CodeAnalysis
                 return newTextVersion;
             }
 
-            return oldRoot.IsEquivalentTo(newRoot, topLevel: true)
-                ? oldTreeAndVersion.Version
-                : newTextVersion;
+            return
+                oldRoot.IsEquivalentTo(newRoot, topLevel: true)
+              ? oldTreeAndVersion.Version
+              : newTextVersion;
         }
 
         // use static method so we don't capture references to this

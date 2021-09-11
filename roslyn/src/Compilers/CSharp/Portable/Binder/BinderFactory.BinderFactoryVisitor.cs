@@ -483,11 +483,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                             (OperatorDeclarationSyntax)baseMethodDeclarationSyntax
                         );
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return (
-                            (ConversionOperatorDeclarationSyntax)baseMethodDeclarationSyntax
-                        ).ImplicitOrExplicitKeyword.Kind() == SyntaxKind.ImplicitKeyword
-                            ? WellKnownMemberNames.ImplicitConversionName
-                            : WellKnownMemberNames.ExplicitConversionName;
+                        return
+                            (
+                                (ConversionOperatorDeclarationSyntax)baseMethodDeclarationSyntax
+                            ).ImplicitOrExplicitKeyword.Kind() == SyntaxKind.ImplicitKeyword
+                          ? WellKnownMemberNames.ImplicitConversionName
+                          : WellKnownMemberNames.ExplicitConversionName;
                     case SyntaxKind.MethodDeclaration:
                         MethodDeclarationSyntax methodDeclSyntax =
                             (MethodDeclarationSyntax)baseMethodDeclarationSyntax;

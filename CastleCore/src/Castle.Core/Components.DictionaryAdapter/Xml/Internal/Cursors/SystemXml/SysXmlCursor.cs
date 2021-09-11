@@ -141,9 +141,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private bool IsMatch()
         {
             IXmlKnownType knownType;
-            return knownTypes.TryGet(this, out knownType)
-                ? Try.Success(out type, knownType.ClrType)
-                : Try.Failure(out type);
+            return
+                knownTypes.TryGet(this, out knownType)
+              ? Try.Success(out type, knownType.ClrType)
+              : Try.Failure(out type);
         }
 
         private bool Advance()
@@ -499,9 +500,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var name = knownType.Name;
 
-            return name.NamespaceUri != null
-                ? name
-                : name.WithNamespaceUri(parent != null ? parent.NamespaceURI : string.Empty);
+            return
+                name.NamespaceUri != null
+              ? name
+              : name.WithNamespaceUri(parent != null ? parent.NamespaceURI : string.Empty);
         }
 
         public void RemoveAllNext()

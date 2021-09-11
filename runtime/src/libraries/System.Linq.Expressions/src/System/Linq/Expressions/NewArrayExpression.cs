@@ -73,9 +73,10 @@ namespace System.Linq.Expressions
                 return this;
             }
 
-            return NodeType == ExpressionType.NewArrayInit
-                ? NewArrayInit(Type.GetElementType()!, expressions)
-                : NewArrayBounds(Type.GetElementType()!, expressions);
+            return
+                NodeType == ExpressionType.NewArrayInit
+              ? NewArrayInit(Type.GetElementType()!, expressions)
+              : NewArrayBounds(Type.GetElementType()!, expressions);
         }
     }
 

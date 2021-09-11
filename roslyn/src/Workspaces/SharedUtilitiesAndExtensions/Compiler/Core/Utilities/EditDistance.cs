@@ -181,9 +181,10 @@ namespace Roslyn.Utilities
             ReadOnlySpan<char> target,
             int threshold = int.MaxValue
         ) {
-            return source.Length <= target.Length
-                ? GetEditDistanceWorker(source, target, threshold)
-                : GetEditDistanceWorker(target, source, threshold);
+            return
+                source.Length <= target.Length
+              ? GetEditDistanceWorker(source, target, threshold)
+              : GetEditDistanceWorker(target, source, threshold);
         }
 
         private static int GetEditDistanceWorker(

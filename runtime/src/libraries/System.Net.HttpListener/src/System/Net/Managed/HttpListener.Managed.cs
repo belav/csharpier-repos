@@ -348,9 +348,10 @@ namespace System.Net
 
         internal AuthenticationSchemes SelectAuthenticationScheme(HttpListenerContext context)
         {
-            return AuthenticationSchemeSelectorDelegate != null
-                ? AuthenticationSchemeSelectorDelegate(context.Request)
-                : _authenticationScheme;
+            return
+                AuthenticationSchemeSelectorDelegate != null
+              ? AuthenticationSchemeSelectorDelegate(context.Request)
+              : _authenticationScheme;
         }
 
         public HttpListenerContext GetContext()

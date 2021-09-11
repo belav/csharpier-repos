@@ -170,9 +170,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             LambdaExpressionSyntax currentDeclaration
         ) {
             var expressionBody = GetBodyAsExpression(currentDeclaration);
-            return expressionBody == null
-                ? WithExpressionBody(currentDeclaration)
-                : WithBlockBody(semanticModel, originalDeclaration, currentDeclaration);
+            return
+                expressionBody == null
+              ? WithExpressionBody(currentDeclaration)
+              : WithBlockBody(semanticModel, originalDeclaration, currentDeclaration);
         }
 
         private static LambdaExpressionSyntax WithExpressionBody(LambdaExpressionSyntax declaration)

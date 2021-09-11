@@ -1170,9 +1170,10 @@ namespace System.Xml
         protected Task RawTextAsync(string text)
         {
             int writeLen = RawTextNoFlush(text, 0, text.Length);
-            return writeLen >= 0
-                ? _RawTextAsync(text, writeLen, text.Length - writeLen)
-                : Task.CompletedTask;
+            return
+                writeLen >= 0
+              ? _RawTextAsync(text, writeLen, text.Length - writeLen)
+              : Task.CompletedTask;
         }
 
         protected Task RawTextAsync(

@@ -325,9 +325,10 @@ namespace Microsoft.AspNetCore
                         var filePath = i.Attribute("Path").Value;
                         var fileParts = filePath.Split('/');
                         var fileName = fileParts[fileParts.Length - 1];
-                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                            ? fileName.Substring(0, fileName.Length - 4)
-                            : fileName;
+                        return
+                            fileName.EndsWith(".dll", StringComparison.Ordinal)
+                          ? fileName.Substring(0, fileName.Length - 4)
+                          : fileName;
                     }
                 )
                 .ToHashSet();

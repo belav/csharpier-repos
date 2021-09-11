@@ -106,9 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         public ImmutableArray<CSharpAttributeData> GetFieldAttributes()
         {
-            return (object?)this.AssociatedField == null
-                ? ImmutableArray<CSharpAttributeData>.Empty
-                : this.AssociatedField.GetAttributes();
+            return
+                (object?)this.AssociatedField == null
+              ? ImmutableArray<CSharpAttributeData>.Empty
+              : this.AssociatedField.GetAttributes();
         }
 
         internal virtual FieldSymbol? AssociatedField
@@ -260,9 +261,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             );
             Debug.Assert(newOwner.IsDefinition || newOwner is SubstitutedNamedTypeSymbol);
-            return newOwner.IsDefinition
-                ? this
-                : new SubstitutedEventSymbol((newOwner as SubstitutedNamedTypeSymbol)!, this);
+            return
+                newOwner.IsDefinition
+              ? this
+              : new SubstitutedEventSymbol((newOwner as SubstitutedNamedTypeSymbol)!, this);
         }
 
         internal abstract bool MustCallMethodsDirectly { get; }

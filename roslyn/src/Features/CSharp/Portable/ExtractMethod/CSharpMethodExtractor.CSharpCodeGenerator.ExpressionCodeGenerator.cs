@@ -65,9 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             (
                                 (VariableDeclaratorSyntax)expression.Parent.Parent
                             ).Identifier.ValueText;
-                        return (name != null && name.Length > 0)
-                            ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
-                            : methodName;
+                        return
+                            (name != null && name.Length > 0)
+                          ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
+                          : methodName;
                     }
 
                     if (expression is MemberAccessExpressionSyntax memberAccess)
@@ -99,16 +100,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                         var unqualifiedNameIdentifierValueText =
                             unqualifiedName.Identifier.ValueText;
-                        return (
-                            unqualifiedNameIdentifierValueText != null
-                            && unqualifiedNameIdentifierValueText.Length > 0
-                        )
-                            ? MakeMethodName(
-                                  "Get",
-                                  unqualifiedNameIdentifierValueText,
-                                  methodName.Equals(NewMethodCamelCaseStr)
-                              )
-                            : methodName;
+                        return
+                            (
+                                unqualifiedNameIdentifierValueText != null
+                                && unqualifiedNameIdentifierValueText.Length > 0
+                            )
+                          ? MakeMethodName(
+                                "Get",
+                                unqualifiedNameIdentifierValueText,
+                                methodName.Equals(NewMethodCamelCaseStr)
+                            )
+                          : methodName;
                     }
 
                     return methodName;

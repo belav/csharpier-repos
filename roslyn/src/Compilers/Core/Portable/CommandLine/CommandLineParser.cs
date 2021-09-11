@@ -1041,9 +1041,10 @@ namespace Microsoft.CodeAnalysis
                 )
             );
 
-            return (options == StringSplitOptions.RemoveEmptyEntries)
-                ? result.Where(s => s.Length > 0)
-                : result;
+            return
+                (options == StringSplitOptions.RemoveEmptyEntries)
+              ? result.Where(s => s.Length > 0)
+              : result;
         }
 
         internal IEnumerable<string> ResolveRelativePaths(

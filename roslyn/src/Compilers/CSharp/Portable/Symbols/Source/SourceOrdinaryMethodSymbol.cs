@@ -567,9 +567,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return IsPartialDefinition
-                    ? _otherPartOfPartial?.IsExtern ?? false
-                    : HasExternModifier;
+                return
+                    IsPartialDefinition
+                  ? _otherPartOfPartial?.IsExtern ?? false
+                  : HasExternModifier;
             }
         }
 

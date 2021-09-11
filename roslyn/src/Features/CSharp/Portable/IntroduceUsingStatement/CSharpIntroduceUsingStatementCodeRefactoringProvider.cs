@@ -47,22 +47,24 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
         protected override SyntaxList<StatementSyntax> GetStatements(
             SyntaxNode parentOfStatementsToSurround
         ) {
-            return parentOfStatementsToSurround is BlockSyntax block
-                ? block.Statements
-                : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
-                    ? switchSection.Statements
-                    : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
+            return
+                parentOfStatementsToSurround is BlockSyntax block
+              ? block.Statements
+              : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
+                  ? switchSection.Statements
+                  : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
         }
 
         protected override SyntaxNode WithStatements(
             SyntaxNode parentOfStatementsToSurround,
             SyntaxList<StatementSyntax> statements
         ) {
-            return parentOfStatementsToSurround is BlockSyntax block
-                ? block.WithStatements(statements) as SyntaxNode
-                : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
-                    ? switchSection.WithStatements(statements)
-                    : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
+            return
+                parentOfStatementsToSurround is BlockSyntax block
+              ? block.WithStatements(statements) as SyntaxNode
+              : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
+                  ? switchSection.WithStatements(statements)
+                  : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
         }
 
         protected override StatementSyntax CreateUsingStatement(

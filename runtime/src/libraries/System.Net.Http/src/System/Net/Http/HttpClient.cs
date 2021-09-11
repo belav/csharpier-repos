@@ -325,11 +325,12 @@ namespace System.Net.Http
                     throw HttpContent.WrapStreamCopyException(e);
                 }
 
-                return buffer.Length == 0
-                    ? Array.Empty<byte>()
-                    : buffer is HttpContent.LimitMemoryStream lms
-                        ? lms.GetSizedBuffer()
-                        : ((HttpContent.LimitArrayPoolWriteStream)buffer).ToArray();
+                return
+                    buffer.Length == 0
+                  ? Array.Empty<byte>()
+                  : buffer is HttpContent.LimitMemoryStream lms
+                      ? lms.GetSizedBuffer()
+                      : ((HttpContent.LimitArrayPoolWriteStream)buffer).ToArray();
             }
             catch (Exception e)
             {

@@ -392,17 +392,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static string GetNoFieldErrorMessage(IPropertyBase propertyBase)
         {
             var constructorBinding = ((EntityType)propertyBase.DeclaringType).ConstructorBinding;
-            return constructorBinding?.ParameterBindings.OfType<ServiceParameterBinding>()
-                .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
-                ? CoreStrings.NoBackingFieldLazyLoading(
-                      propertyBase.Name,
-                      propertyBase.DeclaringType.DisplayName()
-                  )
-                : CoreStrings.NoBackingField(
-                      propertyBase.Name,
-                      propertyBase.DeclaringType.DisplayName(),
-                      nameof(PropertyAccessMode)
-                  );
+            return
+                constructorBinding?.ParameterBindings.OfType<ServiceParameterBinding>()
+                    .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
+              ? CoreStrings.NoBackingFieldLazyLoading(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName()
+                )
+              : CoreStrings.NoBackingField(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName(),
+                    nameof(PropertyAccessMode)
+                );
         }
     }
 }

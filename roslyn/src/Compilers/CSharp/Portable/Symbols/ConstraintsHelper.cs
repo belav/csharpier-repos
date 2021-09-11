@@ -1597,16 +1597,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 if (type.IsValueType)
                 {
-                    return type.IsNullableTypeOrTypeParameter()
-                        ? NullableFlowState.MaybeNull
-                        : NullableFlowState.NotNull;
+                    return
+                        type.IsNullableTypeOrTypeParameter()
+                      ? NullableFlowState.MaybeNull
+                      : NullableFlowState.NotNull;
                 }
                 switch (typeWithAnnotations.NullableAnnotation)
                 {
                     case NullableAnnotation.Annotated:
-                        return type.IsTypeParameterDisallowingAnnotationInCSharp8()
-                            ? NullableFlowState.MaybeDefault
-                            : NullableFlowState.MaybeNull;
+                        return
+                            type.IsTypeParameterDisallowingAnnotationInCSharp8()
+                          ? NullableFlowState.MaybeDefault
+                          : NullableFlowState.MaybeNull;
                     case NullableAnnotation.Oblivious:
                         return NullableFlowState.NotNull;
                 }

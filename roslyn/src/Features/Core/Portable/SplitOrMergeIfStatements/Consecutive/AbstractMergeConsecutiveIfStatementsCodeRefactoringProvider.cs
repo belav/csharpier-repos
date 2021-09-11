@@ -188,21 +188,22 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             CancellationToken cancellationToken,
             out SyntaxNode previousStatement
         ) {
-            return TryGetSiblingStatement(
-                syntaxFacts,
-                ifOrElseIf,
-                relativeIndex: -1,
-                out previousStatement
-            )
-                ? CanStatementsBeMergedAsync(
-                      document,
-                      syntaxFacts,
-                      ifGenerator,
-                      previousStatement,
-                      ifOrElseIf,
-                      cancellationToken
-                  )
-                : SpecializedTasks.False;
+            return
+                TryGetSiblingStatement(
+                    syntaxFacts,
+                    ifOrElseIf,
+                    relativeIndex: -1,
+                    out previousStatement
+                )
+              ? CanStatementsBeMergedAsync(
+                    document,
+                    syntaxFacts,
+                    ifGenerator,
+                    previousStatement,
+                    ifOrElseIf,
+                    cancellationToken
+                )
+              : SpecializedTasks.False;
         }
 
         private static Task<bool> CanBeMergedWithNextStatementAsync(
@@ -213,21 +214,17 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             CancellationToken cancellationToken,
             out SyntaxNode nextStatement
         ) {
-            return TryGetSiblingStatement(
-                syntaxFacts,
-                ifOrElseIf,
-                relativeIndex: 1,
-                out nextStatement
-            )
-                ? CanStatementsBeMergedAsync(
-                      document,
-                      syntaxFacts,
-                      ifGenerator,
-                      ifOrElseIf,
-                      nextStatement,
-                      cancellationToken
-                  )
-                : SpecializedTasks.False;
+            return
+                TryGetSiblingStatement(syntaxFacts, ifOrElseIf, relativeIndex: 1, out nextStatement)
+              ? CanStatementsBeMergedAsync(
+                    document,
+                    syntaxFacts,
+                    ifGenerator,
+                    ifOrElseIf,
+                    nextStatement,
+                    cancellationToken
+                )
+              : SpecializedTasks.False;
         }
 
         private static async Task<bool> CanStatementsBeMergedAsync(

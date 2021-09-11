@@ -298,13 +298,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     }
 
                     var translation = _sqlTranslator.Translate(expression);
-                    return translation == null
-                        ? base.Visit(expression)
-                        : new ProjectionBindingExpression(
-                              _selectExpression,
-                              _selectExpression.AddToProjection(translation),
-                              expression.Type.MakeNullable()
-                          );
+                    return
+                        translation == null
+                      ? base.Visit(expression)
+                      : new ProjectionBindingExpression(
+                            _selectExpression,
+                            _selectExpression.AddToProjection(translation),
+                            expression.Type.MakeNullable()
+                        );
                 }
                 else
                 {
@@ -451,14 +452,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
 
                 case IncludeExpression _:
-                    return _clientEval
-                        ? base.VisitExtension(extensionExpression)
-                        : QueryCompilationContext.NotTranslatedExpression;
+                    return
+                        _clientEval
+                      ? base.VisitExtension(extensionExpression)
+                      : QueryCompilationContext.NotTranslatedExpression;
 
                 case CollectionShaperExpression _:
-                    return _clientEval
-                        ? extensionExpression
-                        : QueryCompilationContext.NotTranslatedExpression;
+                    return
+                        _clientEval
+                      ? extensionExpression
+                      : QueryCompilationContext.NotTranslatedExpression;
 
                 default:
                     throw new InvalidOperationException(
@@ -702,13 +705,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             var operand = Visit(unaryExpression.Operand)!;
 
-            return (
-                unaryExpression.NodeType == ExpressionType.Convert
-                || unaryExpression.NodeType == ExpressionType.ConvertChecked
-            )
-            && unaryExpression.Type == operand.Type
-                ? operand
-                : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+            return
+                (
+                    unaryExpression.NodeType == ExpressionType.Convert
+                    || unaryExpression.NodeType == ExpressionType.ConvertChecked
+                )
+                && unaryExpression.Type == operand.Type
+              ? operand
+              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         [DebuggerStepThrough]

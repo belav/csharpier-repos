@@ -55,9 +55,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 moduleBuilder.Add(module);
             }
 
-            return (moduleBuilder != null)
-                ? moduleBuilder.ToImmutableAndFree()
-                : ImmutableArray.Create(manifestModule);
+            return
+                (moduleBuilder != null)
+              ? moduleBuilder.ToImmutableAndFree()
+              : ImmutableArray.Create(manifestModule);
         }
 
         internal Metadata GetMetadata(string fullPath, MetadataReferenceProperties properties)

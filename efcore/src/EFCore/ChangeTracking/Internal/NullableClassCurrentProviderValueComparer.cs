@@ -63,13 +63,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var xValue = x.GetCurrentValue<TModel>(_property);
             var yValue = y.GetCurrentValue<TModel>(_property);
 
-            return xValue == null && yValue == null
-                ? 0
-                : xValue == null
-                    ? -1
-                    : yValue == null
-                        ? 1
-                        : _underlyingComparer.Compare(_converter(xValue), _converter(yValue));
+            return
+                xValue == null && yValue == null
+              ? 0
+              : xValue == null
+                  ? -1
+                  : yValue == null
+                      ? 1
+                      : _underlyingComparer.Compare(_converter(xValue), _converter(yValue));
         }
     }
 }

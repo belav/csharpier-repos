@@ -763,9 +763,10 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             CheckNotNull(source, "source");
 
             var array = source as Array;
-            return array != null
-                ? array.LongLength
-                : source.Aggregate(0L, (count, item) => count + 1);
+            return
+                array != null
+              ? array.LongLength
+              : source.Aggregate(0L, (count, item) => count + 1);
         }
 
         /// <summary>

@@ -86,9 +86,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 
                     var span = new TextSpan(_firstVirtualCharPosition + index, length: 1);
                     var ch = _underlyingData[index];
-                    return char.IsSurrogate(ch)
-                        ? VirtualChar.Create(ch, span)
-                        : VirtualChar.Create(new Rune(ch), span);
+                    return
+                        char.IsSurrogate(ch)
+                      ? VirtualChar.Create(ch, span)
+                      : VirtualChar.Create(new Rune(ch), span);
                 }
             }
         }

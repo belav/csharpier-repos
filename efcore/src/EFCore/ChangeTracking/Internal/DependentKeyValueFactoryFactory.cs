@@ -56,19 +56,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 )!;
             }
 
-            return principalType.IsNullableType()
-                ? (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
-                      typeof(SimpleNullablePrincipalDependentKeyValueFactory<, >).MakeGenericType(
-                          typeof(TKey),
-                          typeof(TKey).UnwrapNullableType()
-                      ),
-                      dependentProperty,
-                      propertyAccessors
-                  )!
-                : new SimpleNonNullableDependentKeyValueFactory<TKey>(
-                      dependentProperty,
-                      propertyAccessors
-                  );
+            return
+                principalType.IsNullableType()
+              ? (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
+                    typeof(SimpleNullablePrincipalDependentKeyValueFactory<, >).MakeGenericType(
+                        typeof(TKey),
+                        typeof(TKey).UnwrapNullableType()
+                    ),
+                    dependentProperty,
+                    propertyAccessors
+                )!
+              : new SimpleNonNullableDependentKeyValueFactory<TKey>(
+                    dependentProperty,
+                    propertyAccessors
+                );
         }
 
         /// <summary>

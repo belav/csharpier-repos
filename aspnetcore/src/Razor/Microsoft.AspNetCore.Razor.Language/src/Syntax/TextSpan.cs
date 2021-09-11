@@ -114,9 +114,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             var overlapStart = Math.Max(Start, span.Start);
             var overlapEnd = Math.Min(End, span.End);
 
-            return overlapStart < overlapEnd
-                ? FromBounds(overlapStart, overlapEnd)
-                : (TextSpan?)null;
+            return
+                overlapStart < overlapEnd
+              ? FromBounds(overlapStart, overlapEnd)
+              : (TextSpan?)null;
         }
 
         /// <summary>
@@ -165,9 +166,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             var intersectStart = Math.Max(Start, span.Start);
             var intersectEnd = Math.Min(End, span.End);
 
-            return intersectStart <= intersectEnd
-                ? FromBounds(intersectStart, intersectEnd)
-                : (TextSpan?)null;
+            return
+                intersectStart <= intersectEnd
+              ? FromBounds(intersectStart, intersectEnd)
+              : (TextSpan?)null;
         }
 
         /// <summary>

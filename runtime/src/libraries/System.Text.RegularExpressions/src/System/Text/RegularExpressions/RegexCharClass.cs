@@ -1488,9 +1488,10 @@ namespace System.Text.RegularExpressions
                         !string.IsNullOrEmpty(set),
                         "Found a null/empty element in RegexCharClass prop table"
                     );
-                    return !invert
-                        ? set
-                        : set[0] == NullChar ? set.AsSpan(1) : NullCharString + set;
+                    return
+                        !invert
+                      ? set
+                      : set[0] == NullChar ? set.AsSpan(1) : NullCharString + set;
                 }
             }
 

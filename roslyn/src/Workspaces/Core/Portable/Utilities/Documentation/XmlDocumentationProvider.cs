@@ -97,9 +97,10 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return _docComments.TryGetValue(documentationMemberID, out var docComment)
-                ? docComment
-                : "";
+            return
+                _docComments.TryGetValue(documentationMemberID, out var docComment)
+              ? docComment
+              : "";
         }
 
         private static readonly XmlReaderSettings s_xmlSettings =

@@ -264,9 +264,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
 
         public static bool IsPredefinedType(TypeSyntax type)
         {
-            return type is PredefinedTypeSyntax predefinedType
-                ? SyntaxFacts.IsPredefinedType(predefinedType.Keyword.Kind())
-                : false;
+            return
+                type is PredefinedTypeSyntax predefinedType
+              ? SyntaxFacts.IsPredefinedType(predefinedType.Keyword.Kind())
+              : false;
         }
     }
 }

@@ -14,9 +14,10 @@ namespace System.Net.Security.Tests
             SslClientAuthenticationOptions clientOptions,
             CancellationToken cancellationToken = default
         ) {
-            return async
-                ? stream.AuthenticateAsClientAsync(clientOptions, cancellationToken)
-                : Task.Run(() => stream.AuthenticateAsClient(clientOptions));
+            return
+                async
+              ? stream.AuthenticateAsClientAsync(clientOptions, cancellationToken)
+              : Task.Run(() => stream.AuthenticateAsClient(clientOptions));
         }
         public static Task AuthenticateAsServerAsync(
             this SslStream stream,
@@ -24,9 +25,10 @@ namespace System.Net.Security.Tests
             SslServerAuthenticationOptions serverOptions,
             CancellationToken cancellationToken = default
         ) {
-            return async
-                ? stream.AuthenticateAsServerAsync(serverOptions, cancellationToken)
-                : Task.Run(() => stream.AuthenticateAsServer(serverOptions));
+            return
+                async
+              ? stream.AuthenticateAsServerAsync(serverOptions, cancellationToken)
+              : Task.Run(() => stream.AuthenticateAsServer(serverOptions));
         }
     }
 }

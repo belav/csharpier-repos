@@ -701,10 +701,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     var parent = body.Parent!;
                     // We could apply this change across all ArrowExpressionClause consistently not just for ones with LocalFunctionStatement parents
                     // but it would require an essential refactoring.
-                    return parent.IsKind(SyntaxKind.ArrowExpressionClause)
-                    && parent.Parent.IsKind(SyntaxKind.LocalFunctionStatement)
-                        ? parent.Parent
-                        : parent;
+                    return
+                        parent.IsKind(SyntaxKind.ArrowExpressionClause)
+                        && parent.Parent.IsKind(SyntaxKind.LocalFunctionStatement)
+                      ? parent.Parent
+                      : parent;
                 }
 
                 var oldRoot = GetMatchingRoot(oldBody);
@@ -2308,9 +2309,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.FieldDeclaration:
                     var declaration = (FieldDeclarationSyntax)node;
-                    return declaration.Modifiers.Any(SyntaxKind.ConstKeyword)
-                        ? FeaturesResources.const_field
-                        : FeaturesResources.field;
+                    return
+                        declaration.Modifiers.Any(SyntaxKind.ConstKeyword)
+                      ? FeaturesResources.const_field
+                      : FeaturesResources.field;
 
                 case SyntaxKind.EventFieldDeclaration:
                     return CSharpFeaturesResources.event_field;
@@ -2330,17 +2332,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.ConstructorDeclaration:
                     var ctor = (ConstructorDeclarationSyntax)node;
-                    return ctor.Modifiers.Any(SyntaxKind.StaticKeyword)
-                        ? FeaturesResources.static_constructor
-                        : FeaturesResources.constructor;
+                    return
+                        ctor.Modifiers.Any(SyntaxKind.StaticKeyword)
+                      ? FeaturesResources.static_constructor
+                      : FeaturesResources.constructor;
 
                 case SyntaxKind.DestructorDeclaration:
                     return CSharpFeaturesResources.destructor;
 
                 case SyntaxKind.PropertyDeclaration:
-                    return SyntaxUtilities.HasBackingField((PropertyDeclarationSyntax)node)
-                        ? FeaturesResources.auto_property
-                        : FeaturesResources.property_;
+                    return
+                        SyntaxUtilities.HasBackingField((PropertyDeclarationSyntax)node)
+                      ? FeaturesResources.auto_property
+                      : FeaturesResources.property_;
 
                 case SyntaxKind.IndexerDeclaration:
                     return CSharpFeaturesResources.indexer;
@@ -3663,9 +3667,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     newModifiers = newModifiers.RemoveAt(newIgnoredModifierIndex);
                 }
 
-                return ignore2 is null
-                    ? SyntaxFactory.AreEquivalent(oldModifiers, newModifiers)
-                    : AreModifiersEquivalent(oldModifiers, newModifiers, ignore2.Value);
+                return
+                    ignore2 is null
+                  ? SyntaxFactory.AreEquivalent(oldModifiers, newModifiers)
+                  : AreModifiersEquivalent(oldModifiers, newModifiers, ignore2.Value);
             }
 
             private void ClassifyMethodBodyRudeUpdate(

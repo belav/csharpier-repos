@@ -255,17 +255,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.IsTypeParameter()
-                    ? ((TypeParameterSymbol)this).EffectiveBaseClassNoUseSiteDiagnostics
-                    : this;
+                return
+                    this.IsTypeParameter()
+                  ? ((TypeParameterSymbol)this).EffectiveBaseClassNoUseSiteDiagnostics
+                  : this;
             }
         }
 
         internal TypeSymbol EffectiveType(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
         {
-            return this.IsTypeParameter()
-                ? ((TypeParameterSymbol)this).EffectiveBaseClass(ref useSiteInfo)
-                : this;
+            return
+                this.IsTypeParameter()
+              ? ((TypeParameterSymbol)this).EffectiveBaseClass(ref useSiteInfo)
+              : this;
         }
 
         /// <summary>

@@ -152,9 +152,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                 currentHash = CombineHashCodes(x.Parameters, currentHash, _parameterAggregator);
 
-                return IsConstructedFromSelf(x)
-                    ? currentHash
-                    : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
+                return
+                    IsConstructedFromSelf(x)
+                  ? currentHash
+                  : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }
 
             private int CombineHashCodes(IModuleSymbol x, int currentHash) =>
@@ -215,9 +216,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return CombineAnonymousTypeHashCode(x, currentHash);
                 }
 
-                return IsConstructedFromSelf(x) || x.IsUnboundGenericType
-                    ? currentHash
-                    : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
+                return
+                    IsConstructedFromSelf(x) || x.IsUnboundGenericType
+                  ? currentHash
+                  : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }
 
             private int CombineAnonymousTypeHashCode(INamedTypeSymbol x, int currentHash)

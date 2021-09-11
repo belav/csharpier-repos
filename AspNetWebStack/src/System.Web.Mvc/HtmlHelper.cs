@@ -302,9 +302,10 @@ namespace System.Web.Mvc
         )]
         public string AttributeEncode(string value)
         {
-            return (!String.IsNullOrEmpty(value))
-                ? HttpUtility.HtmlAttributeEncode(value)
-                : String.Empty;
+            return
+                (!String.IsNullOrEmpty(value))
+              ? HttpUtility.HtmlAttributeEncode(value)
+              : String.Empty;
         }
 
         public string AttributeEncode(object value)

@@ -14,9 +14,10 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return source is IIListProvider<TSource> arrayProvider
-                ? arrayProvider.ToArray()
-                : EnumerableHelpers.ToArray(source);
+            return
+                source is IIListProvider<TSource> arrayProvider
+              ? arrayProvider.ToArray()
+              : EnumerableHelpers.ToArray(source);
         }
 
         public static List<TSource> ToList<TSource>(this IEnumerable<TSource> source)
@@ -26,9 +27,10 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return source is IIListProvider<TSource> listProvider
-                ? listProvider.ToList()
-                : new List<TSource>(source);
+            return
+                source is IIListProvider<TSource> listProvider
+              ? listProvider.ToList()
+              : new List<TSource>(source);
         }
 
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(

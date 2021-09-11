@@ -312,9 +312,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal ImmutableArray<TypeWithAnnotations> GetTypeParameterConstraintTypes(int ordinal)
         {
             var constraintTypes = GetTypeParameterConstraintTypes();
-            return (constraintTypes.Length > 0)
-                ? constraintTypes[ordinal]
-                : ImmutableArray<TypeWithAnnotations>.Empty;
+            return
+                (constraintTypes.Length > 0)
+              ? constraintTypes[ordinal]
+              : ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
         private ImmutableArray<
@@ -348,9 +349,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal TypeParameterConstraintKind GetTypeParameterConstraintKind(int ordinal)
         {
             var constraintKinds = GetTypeParameterConstraintKinds();
-            return (constraintKinds.Length > 0)
-                ? constraintKinds[ordinal]
-                : TypeParameterConstraintKind.None;
+            return
+                (constraintKinds.Length > 0)
+              ? constraintKinds[ordinal]
+              : TypeParameterConstraintKind.None;
         }
 
         private ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds()
@@ -1288,9 +1290,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return data.AttributeUsageInfo;
             }
 
-            return ((object)this.BaseTypeNoUseSiteDiagnostics != null)
-                ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
-                : AttributeUsageInfo.Default;
+            return
+                ((object)this.BaseTypeNoUseSiteDiagnostics != null)
+              ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
+              : AttributeUsageInfo.Default;
         }
 
         /// <summary>
@@ -1793,9 +1796,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 var data = GetDecodedWellKnownAttributeData();
-                return (data != null && data.HasStructLayoutAttribute)
-                    ? data.MarshallingCharSet
-                    : DefaultMarshallingCharSet;
+                return
+                    (data != null && data.HasStructLayoutAttribute)
+                  ? data.MarshallingCharSet
+                  : DefaultMarshallingCharSet;
             }
         }
 
@@ -2076,9 +2080,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
         {
-            return t2 is NativeIntegerTypeSymbol nativeInteger
-                ? nativeInteger.Equals(this, comparison)
-                : base.Equals(t2, comparison);
+            return
+                t2 is NativeIntegerTypeSymbol nativeInteger
+              ? nativeInteger.Equals(this, comparison)
+              : base.Equals(t2, comparison);
         }
     }
 }

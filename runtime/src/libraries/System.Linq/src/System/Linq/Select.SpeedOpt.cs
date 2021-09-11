@@ -137,14 +137,15 @@ namespace System.Linq
             public IPartition<TResult> Take(int count)
             {
                 Debug.Assert(count > 0);
-                return count >= _source.Length
-                    ? (IPartition<TResult>)this
-                    : new SelectListPartitionIterator<TSource, TResult>(
-                          _source,
-                          _selector,
-                          0,
-                          count - 1
-                      );
+                return
+                    count >= _source.Length
+                  ? (IPartition<TResult>)this
+                  : new SelectListPartitionIterator<TSource, TResult>(
+                        _source,
+                        _selector,
+                        0,
+                        count - 1
+                    );
             }
 
             public TResult? TryGetElementAt(int index, out bool found)
@@ -800,28 +801,30 @@ namespace System.Linq
             {
                 Debug.Assert(count > 0);
                 int minIndex = _minIndexInclusive + count;
-                return (uint)minIndex > (uint)_maxIndexInclusive
-                    ? EmptyPartition<TResult>.Instance
-                    : new SelectListPartitionIterator<TSource, TResult>(
-                          _source,
-                          _selector,
-                          minIndex,
-                          _maxIndexInclusive
-                      );
+                return
+                    (uint)minIndex > (uint)_maxIndexInclusive
+                  ? EmptyPartition<TResult>.Instance
+                  : new SelectListPartitionIterator<TSource, TResult>(
+                        _source,
+                        _selector,
+                        minIndex,
+                        _maxIndexInclusive
+                    );
             }
 
             public IPartition<TResult> Take(int count)
             {
                 Debug.Assert(count > 0);
                 int maxIndex = _minIndexInclusive + count - 1;
-                return (uint)maxIndex >= (uint)_maxIndexInclusive
-                    ? this
-                    : new SelectListPartitionIterator<TSource, TResult>(
-                          _source,
-                          _selector,
-                          _minIndexInclusive,
-                          maxIndex
-                      );
+                return
+                    (uint)maxIndex >= (uint)_maxIndexInclusive
+                  ? this
+                  : new SelectListPartitionIterator<TSource, TResult>(
+                        _source,
+                        _selector,
+                        _minIndexInclusive,
+                        maxIndex
+                    );
             }
 
             public TResult? TryGetElementAt(int index, out bool found)

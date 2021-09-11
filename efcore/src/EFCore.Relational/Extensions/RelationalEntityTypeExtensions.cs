@@ -42,16 +42,21 @@ namespace Microsoft.EntityFrameworkCore
                 return entityType.GetRootType().GetTableName();
             }
 
-            return (entityType as IConventionEntityType)?.GetViewNameConfigurationSource() == null
-            && ((entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource() == null)
+            return
+                (entityType as IConventionEntityType)?.GetViewNameConfigurationSource() == null
+                && (
+                    (entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource()
+                    == null
+                )
 #pragma warning disable CS0618 // Type or member is obsolete
-            && (
-                (entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource() == null
-            )
+                && (
+                    (entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource()
+                    == null
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
-            && ((entityType as IConventionEntityType)?.GetSqlQueryConfigurationSource() == null)
-                ? GetDefaultTableName(entityType)
-                : null;
+                && ((entityType as IConventionEntityType)?.GetSqlQueryConfigurationSource() == null)
+              ? GetDefaultTableName(entityType)
+              : null;
         }
 
         /// <summary>
@@ -90,9 +95,10 @@ namespace Microsoft.EntityFrameworkCore
                         : $"{ownership.PrincipalToDependent.Name}_{name}";
             }
 
-            return truncate
-                ? Uniquifier.Truncate(name, entityType.Model.GetMaxIdentifierLength())
-                : name;
+            return
+                truncate
+              ? Uniquifier.Truncate(name, entityType.Model.GetMaxIdentifierLength())
+              : name;
         }
 
         /// <summary>
@@ -152,9 +158,10 @@ namespace Microsoft.EntityFrameworkCore
                 return (string?)schemaAnnotation.Value ?? GetDefaultSchema(entityType);
             }
 
-            return entityType.BaseType != null
-                ? entityType.GetRootType().GetSchema()
-                : GetDefaultSchema(entityType);
+            return
+                entityType.BaseType != null
+              ? entityType.GetRootType().GetSchema()
+              : GetDefaultSchema(entityType);
         }
 
         /// <summary>
@@ -303,15 +310,18 @@ namespace Microsoft.EntityFrameworkCore
                 return entityType.GetRootType().GetViewName();
             }
 
-            return (
-                (entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource() == null
-            )
+            return
+                (
+                    (entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource()
+                    == null
+                )
 #pragma warning disable CS0618 // Type or member is obsolete
-            && (entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource() == null
+                && (entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource()
+                    == null
 #pragma warning restore CS0618 // Type or member is obsolete
-            && ((entityType as IConventionEntityType)?.GetSqlQueryConfigurationSource() == null)
-                ? GetDefaultViewName(entityType)
-                : null;
+                && ((entityType as IConventionEntityType)?.GetSqlQueryConfigurationSource() == null)
+              ? GetDefaultViewName(entityType)
+              : null;
         }
 
         /// <summary>
@@ -322,9 +332,10 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetDefaultViewName(this IReadOnlyEntityType entityType)
         {
             var ownership = entityType.FindOwnership();
-            return ownership != null && ownership.IsUnique
-                ? ownership.PrincipalEntityType.GetViewName()
-                : null;
+            return
+                ownership != null && ownership.IsUnique
+              ? ownership.PrincipalEntityType.GetViewName()
+              : null;
         }
 
         /// <summary>
@@ -382,9 +393,10 @@ namespace Microsoft.EntityFrameworkCore
                 return (string?)schemaAnnotation.Value ?? GetDefaultViewSchema(entityType);
             }
 
-            return entityType.BaseType != null
-                ? entityType.GetRootType().GetViewSchema()
-                : GetDefaultViewSchema(entityType);
+            return
+                entityType.BaseType != null
+              ? entityType.GetRootType().GetViewSchema()
+              : GetDefaultViewSchema(entityType);
         }
 
         /// <summary>

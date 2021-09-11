@@ -388,9 +388,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     if (buffer.Count == 1)
                     {
                         var diagnostics = buffer[0].Diagnostics;
-                        return includeSuppressedDiagnostics
-                            ? diagnostics
-                            : diagnostics.NullToEmpty().WhereAsArray(d => !d.IsSuppressed);
+                        return
+                            includeSuppressedDiagnostics
+                          ? diagnostics
+                          : diagnostics.NullToEmpty().WhereAsArray(d => !d.IsSuppressed);
                     }
                 }
             }

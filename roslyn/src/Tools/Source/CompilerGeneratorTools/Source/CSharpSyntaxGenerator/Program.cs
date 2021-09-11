@@ -69,15 +69,16 @@ namespace CSharpSyntaxGenerator
                 }
             }
 
-            return writeGrammar
-                ? WriteGrammarFile(inputFile, outputFile)
-                : WriteCSharpSourceFiles(
-                      inputFile,
-                      writeSource,
-                      writeTests,
-                      writeSignatures,
-                      outputFile
-                  );
+            return
+                writeGrammar
+              ? WriteGrammarFile(inputFile, outputFile)
+              : WriteCSharpSourceFiles(
+                    inputFile,
+                    writeSource,
+                    writeTests,
+                    writeSignatures,
+                    outputFile
+                );
         }
 
         private static int WriteUsage()

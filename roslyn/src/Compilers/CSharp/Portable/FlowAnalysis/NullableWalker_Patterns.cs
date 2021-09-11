@@ -319,19 +319,21 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public static PossiblyConditionalState Create(NullableWalker nullableWalker)
             {
-                return nullableWalker.IsConditionalState
-                    ? new PossiblyConditionalState(
-                          nullableWalker.StateWhenTrue,
-                          nullableWalker.StateWhenFalse
-                      )
-                    : new PossiblyConditionalState(nullableWalker.State);
+                return
+                    nullableWalker.IsConditionalState
+                  ? new PossiblyConditionalState(
+                        nullableWalker.StateWhenTrue,
+                        nullableWalker.StateWhenFalse
+                    )
+                  : new PossiblyConditionalState(nullableWalker.State);
             }
 
             public PossiblyConditionalState Clone()
             {
-                return IsConditionalState
-                    ? new PossiblyConditionalState(StateWhenTrue, StateWhenFalse)
-                    : new PossiblyConditionalState(State);
+                return
+                    IsConditionalState
+                  ? new PossiblyConditionalState(StateWhenTrue, StateWhenFalse)
+                  : new PossiblyConditionalState(State);
             }
         }
 

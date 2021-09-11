@@ -247,10 +247,14 @@ namespace Microsoft.CodeAnalysis
             //
             // 2) The implementation of AssemblyName.CultureName on Mono incorrectly returns "neutral" for invariant culture identities.
 
-            return cultureName == null
-            || AssemblyIdentityComparer.CultureComparer.Equals(cultureName, InvariantCultureDisplay)
-                ? string.Empty
-                : cultureName;
+            return
+                cultureName == null
+                || AssemblyIdentityComparer.CultureComparer.Equals(
+                    cultureName,
+                    InvariantCultureDisplay
+                )
+              ? string.Empty
+              : cultureName;
         }
 
         private static void InitializeKey(

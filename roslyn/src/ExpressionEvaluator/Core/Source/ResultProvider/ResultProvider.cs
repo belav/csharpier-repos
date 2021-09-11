@@ -1331,13 +1331,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     declaredTypeAndInfo.Info?.PayloadTypeId != CustomTypeInfo.PayloadTypeId
                 );
                 var elementType = declaredType.GetElementType();
-                return value.IsNull || elementType.IsVoid()
-                    ? null
-                    : new PointerDereferenceExpansion(
-                          new TypeAndCustomInfo(
-                              DkmClrType.Create(declaredTypeAndInfo.ClrType.AppDomain, elementType)
-                          )
-                      );
+                return
+                    value.IsNull || elementType.IsVoid()
+                  ? null
+                  : new PointerDereferenceExpansion(
+                        new TypeAndCustomInfo(
+                            DkmClrType.Create(declaredTypeAndInfo.ClrType.AppDomain, elementType)
+                        )
+                    );
             }
 
             if (
@@ -1408,9 +1409,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     typeDeclaringMember.Info,
                     Formatter.NoFormatSpecifiers
                 );
-            return typeDeclaringMember.Type.IsInterface
-                ? $"{typeName}.{memberName}"
-                : $"{memberName} ({typeName})";
+            return
+                typeDeclaringMember.Type.IsInterface
+              ? $"{typeName}.{memberName}"
+              : $"{memberName} ({typeName})";
         }
 
         // Track remaining evaluations so that each subsequent evaluation

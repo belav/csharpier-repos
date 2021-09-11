@@ -1080,9 +1080,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get
                 {
-                    return _target._boundingState != null
-                        ? _target._boundingState.PostponedMessages
-                        : null;
+                    return
+                        _target._boundingState != null
+                      ? _target._boundingState.PostponedMessages
+                      : null;
                 }
             }
 

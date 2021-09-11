@@ -532,9 +532,10 @@ namespace Roslyn.Test.Utilities
             ) {
                 var typeDef = reader.GetTypeDefinition(handle);
                 var name = reader.GetString(typeDef.Name);
-                return typeDef.Namespace.IsNil
-                    ? name
-                    : reader.GetString(typeDef.Namespace) + "." + name;
+                return
+                    typeDef.Namespace.IsNil
+                  ? name
+                  : reader.GetString(typeDef.Namespace) + "." + name;
             }
 
             public string GetTypeFromReference(
@@ -544,9 +545,10 @@ namespace Roslyn.Test.Utilities
             ) {
                 var typeRef = reader.GetTypeReference(handle);
                 var name = reader.GetString(typeRef.Name);
-                return typeRef.Namespace.IsNil
-                    ? name
-                    : reader.GetString(typeRef.Namespace) + "." + name;
+                return
+                    typeRef.Namespace.IsNil
+                  ? name
+                  : reader.GetString(typeRef.Namespace) + "." + name;
             }
 
             public string GetTypeFromSpecification(

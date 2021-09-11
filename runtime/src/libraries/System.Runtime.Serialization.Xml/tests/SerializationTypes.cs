@@ -1181,12 +1181,13 @@ public class DefaultValuesSetToNaN
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToNaN;
-        return other == null
-            ? false
-            : other.DoubleProp == this.DoubleProp
-              && other.FloatProp == this.FloatProp
-              && other.DoubleField == this.DoubleField
-              && other.SingleField == this.SingleField;
+        return
+            other == null
+          ? false
+          : other.DoubleProp == this.DoubleProp
+            && other.FloatProp == this.FloatProp
+            && other.DoubleField == this.DoubleField
+            && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
@@ -1215,12 +1216,13 @@ public class DefaultValuesSetToPositiveInfinity
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToPositiveInfinity;
-        return other == null
-            ? false
-            : other.DoubleProp == this.DoubleProp
-              && other.FloatProp == this.FloatProp
-              && other.DoubleField == this.DoubleField
-              && other.SingleField == this.SingleField;
+        return
+            other == null
+          ? false
+          : other.DoubleProp == this.DoubleProp
+            && other.FloatProp == this.FloatProp
+            && other.DoubleField == this.DoubleField
+            && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
@@ -1249,12 +1251,13 @@ public class DefaultValuesSetToNegativeInfinity
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToNegativeInfinity;
-        return other == null
-            ? false
-            : other.DoubleProp == this.DoubleProp
-              && other.FloatProp == this.FloatProp
-              && other.DoubleField == this.DoubleField
-              && other.SingleField == this.SingleField;
+        return
+            other == null
+          ? false
+          : other.DoubleProp == this.DoubleProp
+            && other.FloatProp == this.FloatProp
+            && other.DoubleField == this.DoubleField
+            && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()

@@ -198,19 +198,19 @@ namespace AutoMapper.Execution
                     (isCollection && profileMap.AllowsNullCollectionsFor(memberMap))
                     || (!isCollection && profileMap.AllowsNullDestinationValuesFor(memberMap))
                 ) {
-                    return destinationParameter.NodeType == ExpressionType.Default
-                        ? destinationParameter
-                        : Default(destinationType);
+                    return
+                        destinationParameter.NodeType == ExpressionType.Default
+                      ? destinationParameter
+                      : Default(destinationType);
                 }
                 if (destinationType.IsArray)
                 {
                     var destinationElementType = destinationType.GetElementType();
                     var rank = destinationType.GetArrayRank();
-                    return rank == 1
-                        ? Expression.Call(
-                              ArrayEmptyMethod.MakeGenericMethod(destinationElementType)
-                          )
-                        : NewArrayBounds(destinationElementType, Enumerable.Repeat(Zero, rank));
+                    return
+                        rank == 1
+                      ? Expression.Call(ArrayEmptyMethod.MakeGenericMethod(destinationElementType))
+                      : NewArrayBounds(destinationElementType, Enumerable.Repeat(Zero, rank));
                 }
                 return ObjectFactory.GenerateConstructorExpression(destinationType);
             }
@@ -540,9 +540,10 @@ namespace AutoMapper.Execution
             var name = parameter.Name;
             int index = 0;
             var nullCheckedExpression = NullCheck(parameter);
-            return variables == null
-                ? nullCheckedExpression
-                : Block(variables, nullCheckedExpression);
+            return
+                variables == null
+              ? nullCheckedExpression
+              : Block(variables, nullCheckedExpression);
             Expression NullCheck(ParameterExpression variable)
             {
                 var member = chain.Pop();

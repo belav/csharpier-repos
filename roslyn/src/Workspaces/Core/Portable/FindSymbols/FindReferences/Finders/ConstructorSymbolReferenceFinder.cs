@@ -239,21 +239,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         ) {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            return TryGetNameWithoutAttributeSuffix(
-                symbol.ContainingType.Name,
-                syntaxFacts,
-                out var simpleName
-            )
-                ? FindReferencesInDocumentUsingIdentifierAsync(
-                      symbol,
-                      simpleName,
-                      document,
-                      semanticModel,
-                      cancellationToken
-                  )
-                : new ValueTask<ImmutableArray<FinderLocation>>(
-                      ImmutableArray<FinderLocation>.Empty
-                  );
+            return
+                TryGetNameWithoutAttributeSuffix(
+                    symbol.ContainingType.Name,
+                    syntaxFacts,
+                    out var simpleName
+                )
+              ? FindReferencesInDocumentUsingIdentifierAsync(
+                    symbol,
+                    simpleName,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
+              : new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
         }
 
         private Task<

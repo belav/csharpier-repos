@@ -191,9 +191,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return (dictionaryBehaviors != null)
-                    ? dictionaryBehaviors.OfType<IDictionaryKeyBuilder>()
-                    : Enumerable.Empty<IDictionaryKeyBuilder>();
+                return
+                    (dictionaryBehaviors != null)
+                  ? dictionaryBehaviors.OfType<IDictionaryKeyBuilder>()
+                  : Enumerable.Empty<IDictionaryKeyBuilder>();
             }
         }
 
@@ -205,9 +206,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return (dictionaryBehaviors != null)
-                    ? dictionaryBehaviors.OfType<IDictionaryPropertySetter>()
-                    : Enumerable.Empty<IDictionaryPropertySetter>();
+                return
+                    (dictionaryBehaviors != null)
+                  ? dictionaryBehaviors.OfType<IDictionaryPropertySetter>()
+                  : Enumerable.Empty<IDictionaryPropertySetter>();
             }
         }
 
@@ -219,9 +221,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return (dictionaryBehaviors != null)
-                    ? dictionaryBehaviors.OfType<IDictionaryPropertyGetter>()
-                    : Enumerable.Empty<IDictionaryPropertyGetter>();
+                return
+                    (dictionaryBehaviors != null)
+                  ? dictionaryBehaviors.OfType<IDictionaryPropertyGetter>()
+                  : Enumerable.Empty<IDictionaryPropertyGetter>();
             }
         }
 
@@ -233,9 +236,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return (dictionaryBehaviors != null)
-                    ? dictionaryBehaviors.OfType<IDictionaryInitializer>()
-                    : Enumerable.Empty<IDictionaryInitializer>();
+                return
+                    (dictionaryBehaviors != null)
+                  ? dictionaryBehaviors.OfType<IDictionaryInitializer>()
+                  : Enumerable.Empty<IDictionaryInitializer>();
             }
         }
 
@@ -247,9 +251,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return (dictionaryBehaviors != null)
-                    ? dictionaryBehaviors.OfType<IDictionaryMetaInitializer>()
-                    : Enumerable.Empty<IDictionaryMetaInitializer>();
+                return
+                    (dictionaryBehaviors != null)
+                  ? dictionaryBehaviors.OfType<IDictionaryMetaInitializer>()
+                  : Enumerable.Empty<IDictionaryMetaInitializer>();
             }
         }
 

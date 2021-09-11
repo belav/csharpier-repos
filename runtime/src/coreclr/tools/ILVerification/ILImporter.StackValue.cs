@@ -258,9 +258,10 @@ namespace Internal.IL
                         + "address of "
                         + TypeToStringForByRef(Type);
                 case StackValueKind.ObjRef:
-                    return (Type != null)
-                        ? "ref '" + Type.ToString() + "'"
-                        : "Nullobjref 'NullReference'";
+                    return
+                        (Type != null)
+                      ? "ref '" + Type.ToString() + "'"
+                      : "Nullobjref 'NullReference'";
                 case StackValueKind.ValueType:
                     return "value '" + Type.ToString() + "'";
                 default:

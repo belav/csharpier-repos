@@ -31,9 +31,10 @@ namespace Moq.Async
 
         public override string ToString()
         {
-            return this.awaitableFactory.ResultType == typeof(void)
-                ? $"await {this.operand}"
-                : $"(await {this.operand})";
+            return
+                this.awaitableFactory.ResultType == typeof(void)
+              ? $"await {this.operand}"
+              : $"(await {this.operand})";
         }
 
         protected override Expression VisitChildren(ExpressionVisitor visitor) => this;

@@ -245,11 +245,12 @@ namespace System.Net.Http
             ) {
                 ValidateCopyToArguments(destination, bufferSize);
 
-                return cancellationToken.IsCancellationRequested
-                    ? Task.FromCanceled(cancellationToken)
-                    : _connection == null
-                        ? Task.CompletedTask
-                        : CopyToAsyncCore(destination, cancellationToken);
+                return
+                    cancellationToken.IsCancellationRequested
+                  ? Task.FromCanceled(cancellationToken)
+                  : _connection == null
+                      ? Task.CompletedTask
+                      : CopyToAsyncCore(destination, cancellationToken);
             }
 
             private async Task CopyToAsyncCore(

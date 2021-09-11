@@ -40,9 +40,10 @@ namespace System.Configuration
             Exception e,
             IConfigErrorInfo errorInfo
         ) {
-            return errorInfo != null
-                ? WrapAsConfigException(outerMessage, e, errorInfo.Filename, errorInfo.LineNumber)
-                : WrapAsConfigException(outerMessage, e, null, 0);
+            return
+                errorInfo != null
+              ? WrapAsConfigException(outerMessage, e, errorInfo.Filename, errorInfo.LineNumber)
+              : WrapAsConfigException(outerMessage, e, null, 0);
         }
 
         internal static ConfigurationErrorsException WrapAsConfigException(

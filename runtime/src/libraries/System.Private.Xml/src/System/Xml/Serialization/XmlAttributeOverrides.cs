@@ -64,10 +64,11 @@ namespace System.Xml.Serialization
             {
                 Dictionary<string, XmlAttributes?>? members;
                 XmlAttributes? attributes;
-                return _types.TryGetValue(type, out members)
-                && members.TryGetValue(member, out attributes)
-                    ? attributes
-                    : null;
+                return
+                    _types.TryGetValue(type, out members)
+                    && members.TryGetValue(member, out attributes)
+                  ? attributes
+                  : null;
             }
         }
     }

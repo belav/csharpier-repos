@@ -187,9 +187,10 @@ namespace System.Net.Http
 
         public static bool operator ==(HttpMethod? left, HttpMethod? right)
         {
-            return left is null || right is null
-                ? ReferenceEquals(left, right)
-                : left.Equals(right);
+            return
+                left is null || right is null
+              ? ReferenceEquals(left, right)
+              : left.Equals(right);
         }
 
         public static bool operator !=(HttpMethod? left, HttpMethod? right)

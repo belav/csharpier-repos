@@ -80,9 +80,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 var map = _mapOrType as TypeMap;
-                return map != null
-                    ? map.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers)
-                    : this._underlyingParameter.RefCustomModifiers;
+                return
+                    map != null
+                  ? map.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers)
+                  : this._underlyingParameter.RefCustomModifiers;
             }
         }
 

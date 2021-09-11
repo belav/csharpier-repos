@@ -148,19 +148,20 @@ namespace System
 
         public int CompareTo(Version? value)
         {
-            return object.ReferenceEquals(value, this)
-                ? 0
-                : value is null
-                    ? 1
-                    : _Major != value._Major
-                        ? (_Major > value._Major ? 1 : -1)
-                        : _Minor != value._Minor
-                            ? (_Minor > value._Minor ? 1 : -1)
-                            : _Build != value._Build
-                                ? (_Build > value._Build ? 1 : -1)
-                                : _Revision != value._Revision
-                                    ? (_Revision > value._Revision ? 1 : -1)
-                                    : 0;
+            return
+                object.ReferenceEquals(value, this)
+              ? 0
+              : value is null
+                  ? 1
+                  : _Major != value._Major
+                      ? (_Major > value._Major ? 1 : -1)
+                      : _Minor != value._Minor
+                          ? (_Minor > value._Minor ? 1 : -1)
+                          : _Build != value._Build
+                              ? (_Build > value._Build ? 1 : -1)
+                              : _Revision != value._Revision
+                                  ? (_Revision > value._Revision ? 1 : -1)
+                                  : 0;
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj)
@@ -372,45 +373,48 @@ namespace System
                 if (buildEnd != -1)
                 {
                     // major.minor.build.revision
-                    return TryParseComponent(
-                        input.Slice(minorEnd + 1, buildEnd - minorEnd - 1),
-                        nameof(build),
-                        throwOnFailure,
-                        out build
-                    )
-                    && TryParseComponent(
-                        input.Slice(buildEnd + 1),
-                        nameof(revision),
-                        throwOnFailure,
-                        out revision
-                    )
-                        ? new Version(major, minor, build, revision)
-                        : null;
+                    return
+                        TryParseComponent(
+                            input.Slice(minorEnd + 1, buildEnd - minorEnd - 1),
+                            nameof(build),
+                            throwOnFailure,
+                            out build
+                        )
+                        && TryParseComponent(
+                            input.Slice(buildEnd + 1),
+                            nameof(revision),
+                            throwOnFailure,
+                            out revision
+                        )
+                      ? new Version(major, minor, build, revision)
+                      : null;
                 }
                 else
                 {
                     // major.minor.build
-                    return TryParseComponent(
-                        input.Slice(minorEnd + 1),
-                        nameof(build),
-                        throwOnFailure,
-                        out build
-                    )
-                        ? new Version(major, minor, build)
-                        : null;
+                    return
+                        TryParseComponent(
+                            input.Slice(minorEnd + 1),
+                            nameof(build),
+                            throwOnFailure,
+                            out build
+                        )
+                      ? new Version(major, minor, build)
+                      : null;
                 }
             }
             else
             {
                 // major.minor
-                return TryParseComponent(
-                    input.Slice(majorEnd + 1),
-                    nameof(input),
-                    throwOnFailure,
-                    out minor
-                )
-                    ? new Version(major, minor)
-                    : null;
+                return
+                    TryParseComponent(
+                        input.Slice(majorEnd + 1),
+                        nameof(input),
+                        throwOnFailure,
+                        out minor
+                    )
+                  ? new Version(major, minor)
+                  : null;
             }
         }
 

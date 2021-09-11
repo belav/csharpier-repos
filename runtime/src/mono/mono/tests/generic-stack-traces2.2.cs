@@ -12,9 +12,10 @@ namespace GetStackTrace
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public int foo()
         {
-            return new StackTrace().GetFrame(0).GetMethod().DeclaringType.IsGenericTypeDefinition
-                ? 1
-                : 0;
+            return
+                new StackTrace().GetFrame(0).GetMethod().DeclaringType.IsGenericTypeDefinition
+              ? 1
+              : 0;
         }
     }
 

@@ -8798,9 +8798,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             Debug.Assert(this.CurrentToken.ContextualKind == SyntaxKind.AwaitKeyword);
             SyntaxToken awaitToken = this.EatContextualToken(SyntaxKind.AwaitKeyword);
-            return feature != MessageID.None
-                ? CheckFeatureAvailability(awaitToken, feature)
-                : awaitToken;
+            return
+                feature != MessageID.None
+              ? CheckFeatureAvailability(awaitToken, feature)
+              : awaitToken;
         }
 
         private bool IsPossibleAwaitUsing() =>
@@ -10295,9 +10296,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             MessageID feature,
             bool permitTupleDesignation
         ) {
-            return IsPossibleDeclarationExpression(mode, permitTupleDesignation)
-                ? this.ParseDeclarationExpression(mode, feature)
-                : this.ParseSubExpression(Precedence.Expression);
+            return
+                IsPossibleDeclarationExpression(mode, permitTupleDesignation)
+              ? this.ParseDeclarationExpression(mode, feature)
+              : this.ParseSubExpression(Precedence.Expression);
         }
 
         private bool IsPossibleDeclarationExpression(
@@ -11913,9 +11915,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var result = ParseThrowExpression();
                 // we parse a throw expression even at the wrong precedence for better recovery
-                return (precedence <= Precedence.Coalescing)
-                    ? result
-                    : this.AddError(result, ErrorCode.ERR_InvalidExprTerm, SyntaxFacts.GetText(tk));
+                return
+                    (precedence <= Precedence.Coalescing)
+                  ? result
+                  : this.AddError(result, ErrorCode.ERR_InvalidExprTerm, SyntaxFacts.GetText(tk));
             }
             else if (this.IsPossibleDeconstructionLeft(precedence))
             {
@@ -13939,18 +13942,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 );
             }
 
-            return type is null
-                ? (ExpressionSyntax)_syntaxFactory.ImplicitObjectCreationExpression(
-                      @new,
-                      argumentList,
-                      initializer
-                  )
-                : (ExpressionSyntax)_syntaxFactory.ObjectCreationExpression(
-                      @new,
-                      type,
-                      argumentList,
-                      initializer
-                  );
+            return
+                type is null
+              ? (ExpressionSyntax)_syntaxFactory.ImplicitObjectCreationExpression(
+                    @new,
+                    argumentList,
+                    initializer
+                )
+              : (ExpressionSyntax)_syntaxFactory.ObjectCreationExpression(
+                    @new,
+                    type,
+                    argumentList,
+                    initializer
+                );
         }
 
         private bool IsImplicitObjectCreation()

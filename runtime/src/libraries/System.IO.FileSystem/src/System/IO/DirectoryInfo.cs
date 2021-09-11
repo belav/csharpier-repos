@@ -71,9 +71,10 @@ namespace System.IO
                       ? FullPath
                       : Path.TrimEndingDirectorySeparator(FullPath)
                 );
-                return parentName != null
-                    ? new DirectoryInfo(parentName, isNormalized: true)
-                    : null;
+                return
+                    parentName != null
+                  ? new DirectoryInfo(parentName, isNormalized: true)
+                  : null;
             }
         }
 

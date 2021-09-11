@@ -428,9 +428,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         {
             get
             {
-                return GetOption(CompletionOptions.SnippetsBehavior) == SnippetsRule.AlwaysInclude
-                    ? 1
-                    : 0;
+                return
+                    GetOption(CompletionOptions.SnippetsBehavior) == SnippetsRule.AlwaysInclude
+                  ? 1
+                  : 0;
             }
             set
             {

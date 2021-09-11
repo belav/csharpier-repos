@@ -1222,12 +1222,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             RoslynDebug.Assert(directive.SyntaxTree.FilePath is object);
 
             MetadataReference? reference;
-            return ReferenceDirectiveMap.TryGetValue(
-                (directive.SyntaxTree.FilePath, directive.File.ValueText),
-                out reference
-            )
-                ? reference
-                : null;
+            return
+                ReferenceDirectiveMap.TryGetValue(
+                    (directive.SyntaxTree.FilePath, directive.File.ValueText),
+                    out reference
+                )
+              ? reference
+              : null;
         }
 
         /// <summary>
@@ -1738,9 +1739,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal SynthesizedInteractiveInitializerMethod? GetSubmissionInitializer()
         {
-            return (IsSubmission && ScriptClass is object)
-                ? ScriptClass.GetScriptInitializer()
-                : null;
+            return
+                (IsSubmission && ScriptClass is object)
+              ? ScriptClass.GetScriptInitializer()
+              : null;
         }
 
         /// <summary>
@@ -2480,18 +2482,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol? within0 = within.EnsureCSharpSymbolOrNull(nameof(within));
             TypeSymbol? throughType0 = throughType.EnsureCSharpSymbolOrNull(nameof(throughType));
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return within0.Kind == SymbolKind.Assembly
-                ? AccessCheck.IsSymbolAccessible(
-                      symbol0,
-                      (AssemblySymbol)within0,
-                      ref discardedUseSiteInfo
-                  )
-                : AccessCheck.IsSymbolAccessible(
-                      symbol0,
-                      (NamedTypeSymbol)within0,
-                      ref discardedUseSiteInfo,
-                      throughType0
-                  );
+            return
+                within0.Kind == SymbolKind.Assembly
+              ? AccessCheck.IsSymbolAccessible(
+                    symbol0,
+                    (AssemblySymbol)within0,
+                    ref discardedUseSiteInfo
+                )
+              : AccessCheck.IsSymbolAccessible(
+                    symbol0,
+                    (NamedTypeSymbol)within0,
+                    ref discardedUseSiteInfo,
+                    throughType0
+                );
         }
 
         [Obsolete(

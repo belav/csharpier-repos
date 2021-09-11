@@ -55,10 +55,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             query = base.Process(query);
 
-            return _relationalQueryCompilationContext.QuerySplittingBehavior
-            == QuerySplittingBehavior.SplitQuery
-                ? new SplitIncludeRewritingExpressionVisitor().Visit(query)
-                : query;
+            return
+                _relationalQueryCompilationContext.QuerySplittingBehavior
+                == QuerySplittingBehavior.SplitQuery
+              ? new SplitIncludeRewritingExpressionVisitor().Visit(query)
+              : query;
         }
     }
 }

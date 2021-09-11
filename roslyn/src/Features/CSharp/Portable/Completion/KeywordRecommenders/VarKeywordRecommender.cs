@@ -32,9 +32,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) {
-            return IsValidContext(context)
-                ? ImmutableArray.Create(new RecommendedKeyword("var"))
-                : ImmutableArray<RecommendedKeyword>.Empty;
+            return
+                IsValidContext(context)
+              ? ImmutableArray.Create(new RecommendedKeyword("var"))
+              : ImmutableArray<RecommendedKeyword>.Empty;
         }
     }
 }

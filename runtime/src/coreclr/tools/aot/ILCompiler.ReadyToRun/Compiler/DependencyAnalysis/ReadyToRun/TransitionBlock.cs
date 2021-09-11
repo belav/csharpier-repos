@@ -24,9 +24,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     return X86TransitionBlock.Instance;
 
                 case TargetArchitecture.X64:
-                    return target.OperatingSystem == TargetOS.Windows
-                        ? X64WindowsTransitionBlock.Instance
-                        : X64UnixTransitionBlock.Instance;
+                    return
+                        target.OperatingSystem == TargetOS.Windows
+                      ? X64WindowsTransitionBlock.Instance
+                      : X64UnixTransitionBlock.Instance;
 
                 case TargetArchitecture.ARM:
                     if (target.Abi == TargetAbi.CoreRTArmel)

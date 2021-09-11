@@ -179,17 +179,18 @@ namespace Microsoft.Extensions.Logging.Console
                 }
             }
 
-            return _loggers.TryGetValue(name, out ConsoleLogger logger)
-                ? logger
-                : _loggers.GetOrAdd(
-                      name,
-                      new ConsoleLogger(name, _messageQueue)
-                      {
-                          Options = _options.CurrentValue,
-                          ScopeProvider = _scopeProvider,
-                          Formatter = logFormatter,
-                      }
-                  );
+            return
+                _loggers.TryGetValue(name, out ConsoleLogger logger)
+              ? logger
+              : _loggers.GetOrAdd(
+                    name,
+                    new ConsoleLogger(name, _messageQueue)
+                    {
+                        Options = _options.CurrentValue,
+                        ScopeProvider = _scopeProvider,
+                        Formatter = logFormatter,
+                    }
+                );
         }
 
 #pragma warning disable CS0618

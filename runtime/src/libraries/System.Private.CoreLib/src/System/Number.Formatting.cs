@@ -434,9 +434,10 @@ namespace System
         ) {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatDouble(ref sb, value, format, info);
-            return s != null
-                ? TryCopyTo(s, destination, out charsWritten)
-                : sb.TryCopyTo(destination, out charsWritten);
+            return
+                s != null
+              ? TryCopyTo(s, destination, out charsWritten)
+              : sb.TryCopyTo(destination, out charsWritten);
         }
 
         private static int GetFloatingPointMaxDigitsAndPrecision(
@@ -575,9 +576,10 @@ namespace System
                     return info.NaNSymbol;
                 }
 
-                return double.IsNegative(value)
-                    ? info.NegativeInfinitySymbol
-                    : info.PositiveInfinitySymbol;
+                return
+                    double.IsNegative(value)
+                  ? info.NegativeInfinitySymbol
+                  : info.PositiveInfinitySymbol;
             }
 
             char fmt = ParseFormatSpecifier(format, out int precision);
@@ -666,9 +668,10 @@ namespace System
         ) {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatSingle(ref sb, value, format, info);
-            return s != null
-                ? TryCopyTo(s, destination, out charsWritten)
-                : sb.TryCopyTo(destination, out charsWritten);
+            return
+                s != null
+              ? TryCopyTo(s, destination, out charsWritten)
+              : sb.TryCopyTo(destination, out charsWritten);
         }
 
         /// <summary>Formats the specified value according to the specified format and info.</summary>
@@ -689,9 +692,10 @@ namespace System
                     return info.NaNSymbol;
                 }
 
-                return float.IsNegative(value)
-                    ? info.NegativeInfinitySymbol
-                    : info.PositiveInfinitySymbol;
+                return
+                    float.IsNegative(value)
+                  ? info.NegativeInfinitySymbol
+                  : info.PositiveInfinitySymbol;
             }
 
             char fmt = ParseFormatSpecifier(format, out int precision);
@@ -789,9 +793,10 @@ namespace System
                     return info.NaNSymbol;
                 }
 
-                return Half.IsNegative(value)
-                    ? info.NegativeInfinitySymbol
-                    : info.PositiveInfinitySymbol;
+                return
+                    Half.IsNegative(value)
+                  ? info.NegativeInfinitySymbol
+                  : info.PositiveInfinitySymbol;
             }
 
             char fmt = ParseFormatSpecifier(format, out int precision);
@@ -872,9 +877,10 @@ namespace System
         ) {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatHalf(ref sb, value, format, info);
-            return s != null
-                ? TryCopyTo(s, destination, out charsWritten)
-                : sb.TryCopyTo(destination, out charsWritten);
+            return
+                s != null
+              ? TryCopyTo(s, destination, out charsWritten)
+              : sb.TryCopyTo(destination, out charsWritten);
         }
 
         private static bool TryCopyTo(string source, Span<char> destination, out int charsWritten)
@@ -907,13 +913,14 @@ namespace System
             // Fast path for default format
             if (string.IsNullOrEmpty(format))
             {
-                return value >= 0
-                    ? UInt32ToDecStr((uint)value)
-                    : NegativeInt32ToDecStr(
-                          value,
-                          digits: -1,
-                          NumberFormatInfo.GetInstance(provider).NegativeSign
-                      );
+                return
+                    value >= 0
+                  ? UInt32ToDecStr((uint)value)
+                  : NegativeInt32ToDecStr(
+                        value,
+                        digits: -1,
+                        NumberFormatInfo.GetInstance(provider).NegativeSign
+                    );
             }
 
             return FormatInt32Slow(value, hexMask, format, provider);
@@ -929,13 +936,14 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return value >= 0
-                        ? UInt32ToDecStr((uint)value, digits)
-                        : NegativeInt32ToDecStr(
-                              value,
-                              digits,
-                              NumberFormatInfo.GetInstance(provider).NegativeSign
-                          );
+                    return
+                        value >= 0
+                      ? UInt32ToDecStr((uint)value, digits)
+                      : NegativeInt32ToDecStr(
+                            value,
+                            digits,
+                            NumberFormatInfo.GetInstance(provider).NegativeSign
+                        );
                 }
                 else if (fmtUpper == 'X')
                 {
@@ -983,15 +991,16 @@ namespace System
             // Fast path for default format
             if (format.Length == 0)
             {
-                return value >= 0
-                    ? TryUInt32ToDecStr((uint)value, digits: -1, destination, out charsWritten)
-                    : TryNegativeInt32ToDecStr(
-                          value,
-                          digits: -1,
-                          NumberFormatInfo.GetInstance(provider).NegativeSign,
-                          destination,
-                          out charsWritten
-                      );
+                return
+                    value >= 0
+                  ? TryUInt32ToDecStr((uint)value, digits: -1, destination, out charsWritten)
+                  : TryNegativeInt32ToDecStr(
+                        value,
+                        digits: -1,
+                        NumberFormatInfo.GetInstance(provider).NegativeSign,
+                        destination,
+                        out charsWritten
+                    );
             }
 
             return TryFormatInt32Slow(
@@ -1015,15 +1024,16 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return value >= 0
-                        ? TryUInt32ToDecStr((uint)value, digits, destination, out charsWritten)
-                        : TryNegativeInt32ToDecStr(
-                              value,
-                              digits,
-                              NumberFormatInfo.GetInstance(provider).NegativeSign,
-                              destination,
-                              out charsWritten
-                          );
+                    return
+                        value >= 0
+                      ? TryUInt32ToDecStr((uint)value, digits, destination, out charsWritten)
+                      : TryNegativeInt32ToDecStr(
+                            value,
+                            digits,
+                            NumberFormatInfo.GetInstance(provider).NegativeSign,
+                            destination,
+                            out charsWritten
+                        );
                 }
                 else if (fmtUpper == 'X')
                 {
@@ -1197,13 +1207,14 @@ namespace System
             // Fast path for default format
             if (string.IsNullOrEmpty(format))
             {
-                return value >= 0
-                    ? UInt64ToDecStr((ulong)value, digits: -1)
-                    : NegativeInt64ToDecStr(
-                          value,
-                          digits: -1,
-                          NumberFormatInfo.GetInstance(provider).NegativeSign
-                      );
+                return
+                    value >= 0
+                  ? UInt64ToDecStr((ulong)value, digits: -1)
+                  : NegativeInt64ToDecStr(
+                        value,
+                        digits: -1,
+                        NumberFormatInfo.GetInstance(provider).NegativeSign
+                    );
             }
 
             return FormatInt64Slow(value, format, provider);
@@ -1218,13 +1229,14 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return value >= 0
-                        ? UInt64ToDecStr((ulong)value, digits)
-                        : NegativeInt64ToDecStr(
-                              value,
-                              digits,
-                              NumberFormatInfo.GetInstance(provider).NegativeSign
-                          );
+                    return
+                        value >= 0
+                      ? UInt64ToDecStr((ulong)value, digits)
+                      : NegativeInt64ToDecStr(
+                            value,
+                            digits,
+                            NumberFormatInfo.GetInstance(provider).NegativeSign
+                        );
                 }
                 else if (fmtUpper == 'X')
                 {
@@ -1271,15 +1283,16 @@ namespace System
             // Fast path for default format
             if (format.Length == 0)
             {
-                return value >= 0
-                    ? TryUInt64ToDecStr((ulong)value, digits: -1, destination, out charsWritten)
-                    : TryNegativeInt64ToDecStr(
-                          value,
-                          digits: -1,
-                          NumberFormatInfo.GetInstance(provider).NegativeSign,
-                          destination,
-                          out charsWritten
-                      );
+                return
+                    value >= 0
+                  ? TryUInt64ToDecStr((ulong)value, digits: -1, destination, out charsWritten)
+                  : TryNegativeInt64ToDecStr(
+                        value,
+                        digits: -1,
+                        NumberFormatInfo.GetInstance(provider).NegativeSign,
+                        destination,
+                        out charsWritten
+                    );
             }
 
             return TryFormatInt64Slow(value, format, provider, destination, out charsWritten);
@@ -1295,15 +1308,16 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return value >= 0
-                        ? TryUInt64ToDecStr((ulong)value, digits, destination, out charsWritten)
-                        : TryNegativeInt64ToDecStr(
-                              value,
-                              digits,
-                              NumberFormatInfo.GetInstance(provider).NegativeSign,
-                              destination,
-                              out charsWritten
-                          );
+                    return
+                        value >= 0
+                      ? TryUInt64ToDecStr((ulong)value, digits, destination, out charsWritten)
+                      : TryNegativeInt64ToDecStr(
+                            value,
+                            digits,
+                            NumberFormatInfo.GetInstance(provider).NegativeSign,
+                            destination,
+                            out charsWritten
+                        );
                 }
                 else if (fmtUpper == 'X')
                 {
@@ -1505,9 +1519,10 @@ namespace System
 
         public static string Int32ToDecStr(int value)
         {
-            return value >= 0
-                ? UInt32ToDecStr((uint)value)
-                : NegativeInt32ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
+            return
+                value >= 0
+              ? UInt32ToDecStr((uint)value)
+              : NegativeInt32ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
         }
 
         private static unsafe string NegativeInt32ToDecStr(int value, int digits, string sNegative)
@@ -1777,9 +1792,10 @@ namespace System
 
         public static string Int64ToDecStr(long value)
         {
-            return value >= 0
-                ? UInt64ToDecStr((ulong)value, -1)
-                : NegativeInt64ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
+            return
+                value >= 0
+              ? UInt64ToDecStr((ulong)value, -1)
+              : NegativeInt64ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
         }
 
         private static unsafe string NegativeInt64ToDecStr(long input, int digits, string sNegative)
@@ -2064,10 +2080,11 @@ namespace System
 
             // Default empty format to be "G"; custom format is signified with '\0'.
             digits = -1;
-            return format.Length == 0 || c == '\0'
-                ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
-                  'G'
-                : '\0';
+            return
+                format.Length == 0 || c == '\0'
+              ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
+                'G'
+              : '\0';
         }
 
         internal static unsafe void NumberToString(

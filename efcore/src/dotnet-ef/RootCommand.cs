@@ -255,9 +255,10 @@ namespace Microsoft.EntityFrameworkCore.Tools
 
             if (projectPath == null && startupProjectPath == null)
             {
-                return projects.Count == 0
-                    ? throw new CommandException(Resources.NoProject)
-                    : (projects[0], startupProjects[0]);
+                return
+                    projects.Count == 0
+                  ? throw new CommandException(Resources.NoProject)
+                  : (projects[0], startupProjects[0]);
             }
 
             if (projects.Count == 0)

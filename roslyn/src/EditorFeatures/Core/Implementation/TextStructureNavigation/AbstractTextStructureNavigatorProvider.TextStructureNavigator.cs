@@ -176,9 +176,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     node = GetEnclosingNode(node.Value);
                 }
 
-                return node == null
-                    ? activeSpan
-                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return
+                    node == null
+                  ? activeSpan
+                  : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             public SnapshotSpan GetSpanOfFirstChild(SnapshotSpan activeSpan)
@@ -223,9 +224,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return node == null
-                    ? activeSpan
-                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return
+                    node == null
+                  ? activeSpan
+                  : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             public SnapshotSpan GetSpanOfNextSibling(SnapshotSpan activeSpan)
@@ -285,9 +287,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return node == null
-                    ? activeSpan
-                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return
+                    node == null
+                  ? activeSpan
+                  : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             public SnapshotSpan GetSpanOfPreviousSibling(SnapshotSpan activeSpan)
@@ -348,9 +351,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return node == null
-                    ? activeSpan
-                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return
+                    node == null
+                  ? activeSpan
+                  : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             private static Document GetDocument(SnapshotPoint point)

@@ -46,11 +46,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return tree == null
-                ? default
-                : ImmutableArray.Create(
-                      new DocumentHighlights(document, GetHighlights(tree, position))
-                  );
+            return
+                tree == null
+              ? default
+              : ImmutableArray.Create(
+                    new DocumentHighlights(document, GetHighlights(tree, position))
+                );
         }
 
         private ImmutableArray<HighlightSpan> GetHighlights(RegexTree tree, int positionInDocument)

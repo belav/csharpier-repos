@@ -277,9 +277,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             {
                 return MakeAssemblyReferencesKind.DirectReferencesOnly;
             }
-            return _useReferencedAssembliesOnly
-                ? MakeAssemblyReferencesKind.AllReferences
-                : MakeAssemblyReferencesKind.AllAssemblies;
+            return
+                _useReferencedAssembliesOnly
+              ? MakeAssemblyReferencesKind.AllReferences
+              : MakeAssemblyReferencesKind.AllAssemblies;
         }
 
         /// <remarks>

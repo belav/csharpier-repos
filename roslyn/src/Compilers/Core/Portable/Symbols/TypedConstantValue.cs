@@ -53,9 +53,10 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return _value == null
-                    ? default(ImmutableArray<TypedConstant>)
-                    : (ImmutableArray<TypedConstant>)_value;
+                return
+                    _value == null
+                  ? default(ImmutableArray<TypedConstant>)
+                  : (ImmutableArray<TypedConstant>)_value;
             }
         }
 

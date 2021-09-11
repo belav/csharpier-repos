@@ -31,9 +31,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundLeafDecisionDagNode d:
                     return ImmutableArray<BoundDecisionDagNode>.Empty;
                 case BoundWhenDecisionDagNode w:
-                    return (w.WhenFalse != null)
-                        ? ImmutableArray.Create(w.WhenTrue, w.WhenFalse)
-                        : ImmutableArray.Create(w.WhenTrue);
+                    return
+                        (w.WhenFalse != null)
+                      ? ImmutableArray.Create(w.WhenTrue, w.WhenFalse)
+                      : ImmutableArray.Create(w.WhenTrue);
                 default:
                     throw ExceptionUtilities.UnexpectedValue(node.Kind);
             }
@@ -243,11 +244,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var tempIdentifierMap = PooledDictionary<BoundDagEvaluation, int>.GetInstance();
             int tempIdentifier(BoundDagEvaluation e)
             {
-                return (e == null)
-                    ? 0
-                    : tempIdentifierMap.TryGetValue(e, out int value)
-                        ? value
-                        : tempIdentifierMap[e] = ++nextTempNumber;
+                return
+                    (e == null)
+                  ? 0
+                  : tempIdentifierMap.TryGetValue(e, out int value)
+                      ? value
+                      : tempIdentifierMap[e] = ++nextTempNumber;
             }
 
             string tempName(BoundDagTemp t)

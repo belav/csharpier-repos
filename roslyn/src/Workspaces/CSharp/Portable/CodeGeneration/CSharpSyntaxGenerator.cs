@@ -64,15 +64,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             const string InterpolatedVerbatimText = "$@\"";
 
-            return isVerbatim
-                ? SyntaxFactory.Token(
-                      default,
-                      SyntaxKind.InterpolatedVerbatimStringStartToken,
-                      InterpolatedVerbatimText,
-                      InterpolatedVerbatimText,
-                      default
-                  )
-                : SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken);
+            return
+                isVerbatim
+              ? SyntaxFactory.Token(
+                    default,
+                    SyntaxKind.InterpolatedVerbatimStringStartToken,
+                    InterpolatedVerbatimText,
+                    InterpolatedVerbatimText,
+                    default
+                )
+              : SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken);
         }
 
         internal override SyntaxToken CreateInterpolatedStringEndToken() =>
@@ -140,11 +141,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private SyntaxList<UsingDirectiveSyntax> AsUsingDirectives(
             IEnumerable<SyntaxNode> declarations
         ) {
-            return declarations != null
-                ? SyntaxFactory.List(
-                      declarations.Select(this.AsUsingDirective).OfType<UsingDirectiveSyntax>()
-                  )
-                : default;
+            return
+                declarations != null
+              ? SyntaxFactory.List(
+                    declarations.Select(this.AsUsingDirective).OfType<UsingDirectiveSyntax>()
+                )
+              : default;
         }
 
         private SyntaxNode AsUsingDirective(SyntaxNode node)
@@ -160,11 +162,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxList<MemberDeclarationSyntax> AsNamespaceMembers(
             IEnumerable<SyntaxNode> declarations
         ) {
-            return declarations != null
-                ? SyntaxFactory.List(
-                      declarations.Select(AsNamespaceMember).OfType<MemberDeclarationSyntax>()
-                  )
-                : default;
+            return
+                declarations != null
+              ? SyntaxFactory.List(
+                    declarations.Select(AsNamespaceMember).OfType<MemberDeclarationSyntax>()
+                )
+              : default;
         }
 
         private static SyntaxNode AsNamespaceMember(SyntaxNode declaration)
@@ -379,11 +382,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static ParameterListSyntax AsParameterList(IEnumerable<SyntaxNode> parameters)
         {
-            return parameters != null
-                ? SyntaxFactory.ParameterList(
-                      SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
-                  )
-                : SyntaxFactory.ParameterList();
+            return
+                parameters != null
+              ? SyntaxFactory.ParameterList(
+                    SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
+                )
+              : SyntaxFactory.ParameterList();
         }
 
         public override SyntaxNode ConstructorDeclaration(
@@ -512,9 +516,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> accessorDeclarations
         ) {
             var list = SyntaxFactory.List(accessorDeclarations.Cast<AccessorDeclarationSyntax>());
-            return accessorListOpt == null
-                ? SyntaxFactory.AccessorList(list)
-                : accessorListOpt.WithAccessors(list);
+            return
+                accessorListOpt == null
+              ? SyntaxFactory.AccessorList(list)
+              : accessorListOpt.WithAccessors(list);
         }
 
         public override SyntaxNode IndexerDeclaration(
@@ -577,11 +582,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static BracketedParameterListSyntax AsBracketedParameterList(
             IEnumerable<SyntaxNode> parameters
         ) {
-            return parameters != null
-                ? SyntaxFactory.BracketedParameterList(
-                      SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
-                  )
-                : SyntaxFactory.BracketedParameterList();
+            return
+                parameters != null
+              ? SyntaxFactory.BracketedParameterList(
+                    SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
+                )
+              : SyntaxFactory.BracketedParameterList();
         }
 
         private static AccessorDeclarationSyntax AccessorDeclaration(
@@ -766,19 +772,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 case SyntaxKind.MethodDeclaration:
                     var method = (MethodDeclarationSyntax)declaration;
-                    return method.Body == null
-                        ? method.WithSemicolonToken(default).WithBody(CreateBlock(null))
-                        : method;
+                    return
+                        method.Body == null
+                      ? method.WithSemicolonToken(default).WithBody(CreateBlock(null))
+                      : method;
                 case SyntaxKind.OperatorDeclaration:
                     var op = (OperatorDeclarationSyntax)declaration;
-                    return op.Body == null
-                        ? op.WithSemicolonToken(default).WithBody(CreateBlock(null))
-                        : op;
+                    return
+                        op.Body == null
+                      ? op.WithSemicolonToken(default).WithBody(CreateBlock(null))
+                      : op;
                 case SyntaxKind.ConversionOperatorDeclaration:
                     var cop = (ConversionOperatorDeclarationSyntax)declaration;
-                    return cop.Body == null
-                        ? cop.WithSemicolonToken(default).WithBody(CreateBlock(null))
-                        : cop;
+                    return
+                        cop.Body == null
+                      ? cop.WithSemicolonToken(default).WithBody(CreateBlock(null))
+                      : cop;
                 case SyntaxKind.PropertyDeclaration:
                     var prop = (PropertyDeclarationSyntax)declaration;
                     return prop.WithAccessorList(WithBodies(prop.AccessorList));
@@ -870,11 +879,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             string className,
             IEnumerable<SyntaxNode> members
         ) {
-            return members != null
-                ? SyntaxFactory.List(
-                      members.Select(m => this.AsClassMember(m, className)).Where(m => m != null)
-                  )
-                : default;
+            return
+                members != null
+              ? SyntaxFactory.List(
+                    members.Select(m => this.AsClassMember(m, className)).Where(m => m != null)
+                )
+              : default;
         }
 
         private MemberDeclarationSyntax AsClassMember(SyntaxNode node, string className)
@@ -954,11 +964,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private SyntaxList<MemberDeclarationSyntax> AsInterfaceMembers(
             IEnumerable<SyntaxNode> members
         ) {
-            return members != null
-                ? SyntaxFactory.List(
-                      members.Select(this.AsInterfaceMember).OfType<MemberDeclarationSyntax>()
-                  )
-                : default;
+            return
+                members != null
+              ? SyntaxFactory.List(
+                    members.Select(this.AsInterfaceMember).OfType<MemberDeclarationSyntax>()
+                )
+              : default;
         }
 
         internal override SyntaxNode AsInterfaceMember(SyntaxNode m)
@@ -1138,13 +1149,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         public override SyntaxNode AttributeArgument(string name, SyntaxNode expression)
         {
-            return name != null
-                ? SyntaxFactory.AttributeArgument(
-                      SyntaxFactory.NameEquals(name.ToIdentifierName()),
-                      null,
-                      (ExpressionSyntax)expression
-                  )
-                : SyntaxFactory.AttributeArgument((ExpressionSyntax)expression);
+            return
+                name != null
+              ? SyntaxFactory.AttributeArgument(
+                    SyntaxFactory.NameEquals(name.ToIdentifierName()),
+                    null,
+                    (ExpressionSyntax)expression
+                )
+              : SyntaxFactory.AttributeArgument((ExpressionSyntax)expression);
         }
 
         private static AttributeArgumentListSyntax AsAttributeArgumentList(
@@ -2572,11 +2584,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public override IReadOnlyList<SyntaxNode> GetParameters(SyntaxNode declaration)
         {
             var list = declaration.GetParameterList();
-            return list != null
-                ? list.Parameters
-                : declaration is SimpleLambdaExpressionSyntax simpleLambda
-                    ? new[] { simpleLambda.Parameter }
-                    : SpecializedCollections.EmptyReadOnlyList<SyntaxNode>();
+            return
+                list != null
+              ? list.Parameters
+              : declaration is SimpleLambdaExpressionSyntax simpleLambda
+                  ? new[] { simpleLambda.Parameter }
+                  : SpecializedCollections.EmptyReadOnlyList<SyntaxNode>();
         }
 
         public override SyntaxNode InsertParameters(

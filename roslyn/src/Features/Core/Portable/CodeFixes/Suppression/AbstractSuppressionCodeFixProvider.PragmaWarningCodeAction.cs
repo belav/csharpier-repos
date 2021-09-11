@@ -89,27 +89,29 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         _suppressionTargetInfo,
                         (startToken, currentDiagnosticSpan) =>
                         {
-                            return includeStartTokenChange
-                                ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
-                                      startToken,
-                                      currentDiagnosticSpan,
-                                      _diagnostic,
-                                      Fixer,
-                                      FormatNode
-                                  )
-                                : startToken;
+                            return
+                                includeStartTokenChange
+                              ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
+                                    startToken,
+                                    currentDiagnosticSpan,
+                                    _diagnostic,
+                                    Fixer,
+                                    FormatNode
+                                )
+                              : startToken;
                         },
                         (endToken, currentDiagnosticSpan) =>
                         {
-                            return includeEndTokenChange
-                                ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
-                                      endToken,
-                                      currentDiagnosticSpan,
-                                      _diagnostic,
-                                      Fixer,
-                                      FormatNode
-                                  )
-                                : endToken;
+                            return
+                                includeEndTokenChange
+                              ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
+                                    endToken,
+                                    currentDiagnosticSpan,
+                                    _diagnostic,
+                                    Fixer,
+                                    FormatNode
+                                )
+                              : endToken;
                         },
                         cancellationToken
                     )

@@ -34,9 +34,10 @@ namespace Microsoft.CodeAnalysis.Host
             // MemoryMapped files which are used by the TemporaryStorageService are present in .NET Framework (including Mono)
             // and .NET Core Windows. For non-Windows .NET Core scenarios, we can return the TrivialTemporaryStorageService
             // until https://github.com/dotnet/runtime/issues/30878 is fixed.
-            return PlatformInformation.IsWindows || PlatformInformation.IsRunningOnMono
-                ? (ITemporaryStorageService)new TemporaryStorageService(textFactory)
-                : TrivialTemporaryStorageService.Instance;
+            return
+                PlatformInformation.IsWindows || PlatformInformation.IsRunningOnMono
+              ? (ITemporaryStorageService)new TemporaryStorageService(textFactory)
+              : TrivialTemporaryStorageService.Instance;
         }
 
         /// <summary>

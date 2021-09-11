@@ -52,15 +52,17 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         {
             if (string.IsNullOrEmpty(typeName))
             {
-                return isArray
-                    ? FindSymbols.Extensions.ComplexArrayReceiverTypeName
-                    : FindSymbols.Extensions.ComplexReceiverTypeName;
+                return
+                    isArray
+                  ? FindSymbols.Extensions.ComplexArrayReceiverTypeName
+                  : FindSymbols.Extensions.ComplexReceiverTypeName;
             }
             else
             {
-                return isArray
-                    ? typeName + FindSymbols.Extensions.ArrayReceiverTypeNameSuffix
-                    : typeName;
+                return
+                    isArray
+                  ? typeName + FindSymbols.Extensions.ArrayReceiverTypeNameSuffix
+                  : typeName;
             }
         }
 
@@ -124,12 +126,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public static string GetMetadataAritySuffix(int arity)
         {
             Debug.Assert(arity > 0);
-            return (arity <= s_aritySuffixesOneToNine.Length)
-                ? s_aritySuffixesOneToNine[arity - 1]
-                : string.Concat(
-                      GenericTypeNameManglingString,
-                      arity.ToString(CultureInfo.InvariantCulture)
-                  );
+            return
+                (arity <= s_aritySuffixesOneToNine.Length)
+              ? s_aritySuffixesOneToNine[arity - 1]
+              : string.Concat(
+                    GenericTypeNameManglingString,
+                    arity.ToString(CultureInfo.InvariantCulture)
+                );
         }
 
         public abstract bool TryGetDeclaredSymbolInfo(

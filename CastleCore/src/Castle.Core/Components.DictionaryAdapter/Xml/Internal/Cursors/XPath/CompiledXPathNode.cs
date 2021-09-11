@@ -98,11 +98,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private XPathExpression GetSelfReferenceValue()
         {
-            return dependencies != null
-            && dependencies.Count == 1
-            && dependencies[0].IsSelfReference
-                ? dependencies[0].value
-                : null;
+            return
+                dependencies != null && dependencies.Count == 1 && dependencies[0].IsSelfReference
+              ? dependencies[0].value
+              : null;
         }
 
         internal virtual void Prepare()

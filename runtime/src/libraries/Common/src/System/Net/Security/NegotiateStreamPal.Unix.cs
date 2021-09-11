@@ -35,9 +35,10 @@ namespace System.Net.Security
         internal static string QueryContextAuthenticationPackage(SafeDeleteContext securityContext)
         {
             SafeDeleteNegoContext negoContext = (SafeDeleteNegoContext)securityContext;
-            return negoContext.IsNtlmUsed
-                ? NegotiationInfoClass.NTLM
-                : NegotiationInfoClass.Kerberos;
+            return
+                negoContext.IsNtlmUsed
+              ? NegotiationInfoClass.NTLM
+              : NegotiationInfoClass.Kerberos;
         }
 
         private static byte[] GssWrap(
@@ -627,14 +628,15 @@ namespace System.Net.Security
 
             try
             {
-                return isEmptyCredential
-                    ? new SafeFreeNegoCredentials(false, string.Empty, string.Empty, string.Empty)
-                    : new SafeFreeNegoCredentials(
-                          ntlmOnly,
-                          credential.UserName,
-                          credential.Password,
-                          credential.Domain
-                      );
+                return
+                    isEmptyCredential
+                  ? new SafeFreeNegoCredentials(false, string.Empty, string.Empty, string.Empty)
+                  : new SafeFreeNegoCredentials(
+                        ntlmOnly,
+                        credential.UserName,
+                        credential.Password,
+                        credential.Domain
+                    );
             }
             catch (Exception ex)
             {

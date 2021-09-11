@@ -497,9 +497,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string language,
             HostLanguageServices languageServices
         ) {
-            return language == LanguageNames.CSharp || language == LanguageNames.VisualBasic
-                ? GetParseOptionsWorker(projectElement, language, languageServices)
-                : null;
+            return
+                language == LanguageNames.CSharp || language == LanguageNames.VisualBasic
+              ? GetParseOptionsWorker(projectElement, language, languageServices)
+              : null;
         }
 
         private static ParseOptions GetParseOptionsWorker(
@@ -667,11 +668,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var language = GetLanguage(workspace, projectElement);
 
             projectId++;
-            return language == LanguageNames.CSharp
-                ? "CSharpAssembly" + projectId
-                : language == LanguageNames.VisualBasic
-                    ? "VisualBasicAssembly" + projectId
-                    : language + "Assembly" + projectId;
+            return
+                language == LanguageNames.CSharp
+              ? "CSharpAssembly" + projectId
+              : language == LanguageNames.VisualBasic
+                  ? "VisualBasicAssembly" + projectId
+                  : language + "Assembly" + projectId;
         }
 
         private static string GetLanguage(TestWorkspace workspace, XElement projectElement)
@@ -728,14 +730,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ParseOptions parseOptions
         ) {
             var compilationOptionsElement = projectElement.Element(CompilationOptionsElementName);
-            return language == LanguageNames.CSharp || language == LanguageNames.VisualBasic
-                ? CreateCompilationOptions(
-                      workspace,
-                      language,
-                      compilationOptionsElement,
-                      parseOptions
-                  )
-                : null;
+            return
+                language == LanguageNames.CSharp || language == LanguageNames.VisualBasic
+              ? CreateCompilationOptions(
+                    workspace,
+                    language,
+                    compilationOptionsElement,
+                    parseOptions
+                )
+              : null;
         }
 
         private static CompilationOptions CreateCompilationOptions(
@@ -865,19 +868,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     }
 
                     // VB needs Compilation.ParseOptions set (we do the same at the VS layer)
-                    return language == LanguageNames.CSharp
-                        ? (CompilationOptions)new CSharpCompilationOptions(
-                              OutputKind.WindowsRuntimeMetadata,
-                              allowUnsafe: allowUnsafe
-                          )
-                        : new VisualBasicCompilationOptions(
-                              OutputKind.WindowsRuntimeMetadata
-                          ).WithGlobalImports(globalImports)
-                              .WithRootNamespace(rootNamespace)
-                              .WithParseOptions(
-                                  (VisualBasicParseOptions)parseOptions
-                                      ?? VisualBasicParseOptions.Default
-                              );
+                    return
+                        language == LanguageNames.CSharp
+                      ? (CompilationOptions)new CSharpCompilationOptions(
+                            OutputKind.WindowsRuntimeMetadata,
+                            allowUnsafe: allowUnsafe
+                        )
+                      : new VisualBasicCompilationOptions(
+                            OutputKind.WindowsRuntimeMetadata
+                        ).WithGlobalImports(globalImports)
+                            .WithRootNamespace(rootNamespace)
+                            .WithParseOptions(
+                                (VisualBasicParseOptions)parseOptions
+                                    ?? VisualBasicParseOptions.Default
+                            );
                 }
             }
             else

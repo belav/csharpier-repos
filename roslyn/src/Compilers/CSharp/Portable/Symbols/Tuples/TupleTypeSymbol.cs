@@ -774,9 +774,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TMember? underlyingMemberOpt
         ) where TMember : Symbol
         {
-            return IsTupleType
-                ? TupleData!.GetTupleMemberSymbolForUnderlyingMember(underlyingMemberOpt)
-                : null;
+            return
+                IsTupleType
+              ? TupleData!.GetTupleMemberSymbolForUnderlyingMember(underlyingMemberOpt)
+              : null;
         }
 
         protected ArrayBuilder<Symbol> AddOrWrapTupleMembers(ImmutableArray<Symbol> currentMembers)
@@ -1153,9 +1154,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 var elementLocation = elementLocations[tupleFieldIndex];
-                return elementLocation == null
-                    ? ImmutableArray<Location>.Empty
-                    : ImmutableArray.Create(elementLocation);
+                return
+                    elementLocation == null
+                  ? ImmutableArray<Location>.Empty
+                  : ImmutableArray.Create(elementLocation);
             }
         }
 
@@ -1186,15 +1188,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool namesUnchanged = mergedNames.IsDefault
                 ? TupleElementNames.IsDefault
                 : mergedNames.SequenceEqual(TupleElementNames);
-            return (namesUnchanged && this.Equals(mergedType, TypeCompareKind.ConsiderEverything))
-                ? this
-                : CreateTuple(
-                      mergedType,
-                      mergedNames,
-                      this.TupleErrorPositions,
-                      this.TupleElementLocations,
-                      this.Locations
-                  );
+            return
+                (namesUnchanged && this.Equals(mergedType, TypeCompareKind.ConsiderEverything))
+              ? this
+              : CreateTuple(
+                    mergedType,
+                    mergedNames,
+                    this.TupleErrorPositions,
+                    this.TupleElementLocations,
+                    this.Locations
+                );
         }
 
         /// <summary>

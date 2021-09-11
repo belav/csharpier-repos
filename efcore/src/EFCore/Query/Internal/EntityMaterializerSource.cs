@@ -139,16 +139,17 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 IPropertyBase property,
                 Expression value
             ) {
-                return property.IsIndexerProperty()
-                    ? Expression.Assign(
-                          Expression.MakeIndex(
-                              parameter,
-                              (PropertyInfo)memberInfo,
-                              new List<Expression> { Expression.Constant(property.Name) }
-                          ),
-                          value
-                      )
-                    : Expression.MakeMemberAccess(parameter, memberInfo).Assign(value);
+                return
+                    property.IsIndexerProperty()
+                  ? Expression.Assign(
+                        Expression.MakeIndex(
+                            parameter,
+                            (PropertyInfo)memberInfo,
+                            new List<Expression> { Expression.Constant(property.Name) }
+                        ),
+                        value
+                    )
+                  : Expression.MakeMemberAccess(parameter, memberInfo).Assign(value);
             }
         }
 

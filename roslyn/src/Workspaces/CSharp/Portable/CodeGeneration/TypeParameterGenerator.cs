@@ -18,13 +18,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ImmutableArray<ITypeParameterSymbol> typeParameters,
             CodeGenerationOptions options
         ) {
-            return typeParameters.Length == 0
-                ? null
-                : SyntaxFactory.TypeParameterList(
-                      SyntaxFactory.SeparatedList(
-                          typeParameters.Select(t => GenerateTypeParameter(t, options))
-                      )
-                  );
+            return
+                typeParameters.Length == 0
+              ? null
+              : SyntaxFactory.TypeParameterList(
+                    SyntaxFactory.SeparatedList(
+                        typeParameters.Select(t => GenerateTypeParameter(t, options))
+                    )
+                );
         }
 
         private static TypeParameterSyntax GenerateTypeParameter(

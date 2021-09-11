@@ -65,9 +65,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //   * Parameter types with type parameters are after those
             if (xParameters.IsDefault || yParameters.IsDefault)
             {
-                return xParameters.IsDefault && yParameters.IsDefault
-                    ? 0
-                    : xParameters.IsDefault ? -1 : 1;
+                return
+                    xParameters.IsDefault && yParameters.IsDefault
+                  ? 0
+                  : xParameters.IsDefault ? -1 : 1;
             }
 
             var diff = xParameters.Length - yParameters.Length;
@@ -208,45 +209,49 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (s1.Kind == SymbolKind.NamedType || s2.Kind == SymbolKind.NamedType)
             {
-                return s1.Kind == s2.Kind
-                    ? CompareNamedTypes((INamedTypeSymbol)s1, (INamedTypeSymbol)s2)
-                    : s1.Kind == SymbolKind.NamedType ? -1 : 1;
+                return
+                    s1.Kind == s2.Kind
+                  ? CompareNamedTypes((INamedTypeSymbol)s1, (INamedTypeSymbol)s2)
+                  : s1.Kind == SymbolKind.NamedType ? -1 : 1;
             }
 
             if (s1.Kind == SymbolKind.Method || s2.Kind == SymbolKind.Method)
             {
-                return s1.Kind == s2.Kind
-                    ? CompareMethods(
-                          (IMethodSymbol)s1,
-                          symbol1ParameterTypeNames,
-                          (IMethodSymbol)s2,
-                          symbol2ParameterTypeNames
-                      )
-                    : s1.Kind == SymbolKind.Method ? -1 : 1;
+                return
+                    s1.Kind == s2.Kind
+                  ? CompareMethods(
+                        (IMethodSymbol)s1,
+                        symbol1ParameterTypeNames,
+                        (IMethodSymbol)s2,
+                        symbol2ParameterTypeNames
+                    )
+                  : s1.Kind == SymbolKind.Method ? -1 : 1;
             }
 
             if (s1.Kind == SymbolKind.Property || s2.Kind == SymbolKind.Property)
             {
-                return s1.Kind == s2.Kind
-                    ? CompareProperties(
-                          (IPropertySymbol)s1,
-                          symbol1ParameterTypeNames,
-                          (IPropertySymbol)s2,
-                          symbol2ParameterTypeNames
-                      )
-                    : s1.Kind == SymbolKind.Property ? -1 : 1;
+                return
+                    s1.Kind == s2.Kind
+                  ? CompareProperties(
+                        (IPropertySymbol)s1,
+                        symbol1ParameterTypeNames,
+                        (IPropertySymbol)s2,
+                        symbol2ParameterTypeNames
+                    )
+                  : s1.Kind == SymbolKind.Property ? -1 : 1;
             }
 
             if (s1.Kind == SymbolKind.Event || s2.Kind == SymbolKind.Event)
             {
-                return s1.Kind == s2.Kind
-                    ? CompareEvents(
-                          (IEventSymbol)s1,
-                          symbol1ParameterTypeNames,
-                          (IEventSymbol)s2,
-                          symbol2ParameterTypeNames
-                      )
-                    : s1.Kind == SymbolKind.Event ? -1 : 1;
+                return
+                    s1.Kind == s2.Kind
+                  ? CompareEvents(
+                        (IEventSymbol)s1,
+                        symbol1ParameterTypeNames,
+                        (IEventSymbol)s2,
+                        symbol2ParameterTypeNames
+                    )
+                  : s1.Kind == SymbolKind.Event ? -1 : 1;
             }
 
             throw ExceptionUtilities.UnexpectedValue((s1.Kind, s2.Kind));

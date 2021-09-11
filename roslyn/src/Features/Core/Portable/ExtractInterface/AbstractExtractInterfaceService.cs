@@ -67,9 +67,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 )
                 .ConfigureAwait(false);
 
-            return typeAnalysisResult.CanExtractInterface
-                ? ImmutableArray.Create(new ExtractInterfaceCodeAction(this, typeAnalysisResult))
-                : ImmutableArray<ExtractInterfaceCodeAction>.Empty;
+            return
+                typeAnalysisResult.CanExtractInterface
+              ? ImmutableArray.Create(new ExtractInterfaceCodeAction(this, typeAnalysisResult))
+              : ImmutableArray<ExtractInterfaceCodeAction>.Empty;
         }
 
         public async Task<ExtractInterfaceResult> ExtractInterfaceAsync(

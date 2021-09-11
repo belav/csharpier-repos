@@ -55,9 +55,10 @@ namespace System.Linq
             }
             else if (!isEndIndexFromEnd)
             {
-                return startIndex >= endIndex
-                    ? Empty<TSource>()
-                    : TakeRangeIterator(source, startIndex, endIndex);
+                return
+                    startIndex >= endIndex
+                  ? Empty<TSource>()
+                  : TakeRangeIterator(source, startIndex, endIndex);
             }
 
             return TakeRangeFromEndIterator(
@@ -276,15 +277,16 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return count <= 0
-                ? Empty<TSource>()
-                : TakeRangeFromEndIterator(
-                      source,
-                      isStartIndexFromEnd: true,
-                      startIndex: count,
-                      isEndIndexFromEnd: true,
-                      endIndex: 0
-                  );
+            return
+                count <= 0
+              ? Empty<TSource>()
+              : TakeRangeFromEndIterator(
+                    source,
+                    isStartIndexFromEnd: true,
+                    startIndex: count,
+                    isEndIndexFromEnd: true,
+                    endIndex: 0
+                );
         }
     }
 }

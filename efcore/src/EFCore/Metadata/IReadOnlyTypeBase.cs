@@ -102,9 +102,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 }
             }
 
-            return shortName == Name
-                ? shortName + " (" + ClrType.ShortDisplayName() + ")"
-                : shortName;
+            return
+                shortName == Name
+              ? shortName + " (" + ClrType.ShortDisplayName() + ")"
+              : shortName;
         }
 
         /// <summary>

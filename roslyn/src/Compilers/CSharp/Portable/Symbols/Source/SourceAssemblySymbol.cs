@@ -245,9 +245,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ?? GetNetModuleDecodedWellKnownAttributeData();
 
                 // By default WrapNonExceptionThrows is considered to be true.
-                return (data != null)
-                    ? data.RuntimeCompatibilityWrapNonExceptionThrows
-                    : CommonAssemblyWellKnownAttributeData.WrapNonExceptionThrowsDefault;
+                return
+                    (data != null)
+                  ? data.RuntimeCompatibilityWrapNonExceptionThrows
+                  : CommonAssemblyWellKnownAttributeData.WrapNonExceptionThrowsDefault;
             }
         }
 
@@ -430,13 +431,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 var attributeValue = AssemblyVersionAttributeSetting;
-                return (object)attributeValue == null
-                || (
-                    attributeValue.Build != ushort.MaxValue
-                    && attributeValue.Revision != ushort.MaxValue
-                )
-                    ? null
-                    : attributeValue;
+                return
+                    (object)attributeValue == null
+                    || (
+                        attributeValue.Build != ushort.MaxValue
+                        && attributeValue.Revision != ushort.MaxValue
+                    )
+                  ? null
+                  : attributeValue;
             }
         }
 
@@ -2417,9 +2419,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _lazyInternalsVisibleToMap.TryGetValue(simpleName, out result);
 
-            return (result != null)
-                ? result.Keys
-                : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+            return
+                (result != null)
+              ? result.Keys
+              : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
         }
 
         internal override bool AreInternalsVisibleToThisAssembly(
@@ -2487,9 +2490,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static Location GetAssemblyAttributeLocationForDiagnostic(
             AttributeSyntax attributeSyntaxOpt
         ) {
-            return (object)attributeSyntaxOpt != null
-                ? attributeSyntaxOpt.Location
-                : NoLocation.Singleton;
+            return
+                (object)attributeSyntaxOpt != null
+              ? attributeSyntaxOpt.Location
+              : NoLocation.Singleton;
         }
 
         private void DecodeTypeForwardedToAttribute(
@@ -2702,9 +2706,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return IsInteractive
-                    ? AttributeLocation.None
-                    : AttributeLocation.Assembly | AttributeLocation.Module;
+                return
+                    IsInteractive
+                  ? AttributeLocation.None
+                  : AttributeLocation.Assembly | AttributeLocation.Module;
             }
         }
 

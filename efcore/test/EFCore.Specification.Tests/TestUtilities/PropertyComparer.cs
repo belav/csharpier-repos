@@ -29,21 +29,22 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return y == null;
             }
 
-            return y == null
-                ? false
-                : x.Name == y.Name
-                  && x.ClrType == y.ClrType
-                  && x.IsShadowProperty() == y.IsShadowProperty()
-                  && x.IsNullable == y.IsNullable
-                  && x.IsConcurrencyToken == y.IsConcurrencyToken
-                  && x.ValueGenerated == y.ValueGenerated
-                  && x.GetBeforeSaveBehavior() == y.GetBeforeSaveBehavior()
-                  && x.GetAfterSaveBehavior() == y.GetAfterSaveBehavior()
-                  && (
-                      !_compareAnnotations
-                      || x.GetAnnotations()
-                          .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
-                  );
+            return
+                y == null
+              ? false
+              : x.Name == y.Name
+                && x.ClrType == y.ClrType
+                && x.IsShadowProperty() == y.IsShadowProperty()
+                && x.IsNullable == y.IsNullable
+                && x.IsConcurrencyToken == y.IsConcurrencyToken
+                && x.ValueGenerated == y.ValueGenerated
+                && x.GetBeforeSaveBehavior() == y.GetBeforeSaveBehavior()
+                && x.GetAfterSaveBehavior() == y.GetAfterSaveBehavior()
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
         }
 
         public int GetHashCode(IReadOnlyProperty obj) => obj.Name.GetHashCode();

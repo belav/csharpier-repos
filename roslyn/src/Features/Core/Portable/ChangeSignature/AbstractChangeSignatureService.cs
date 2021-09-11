@@ -113,12 +113,13 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 )
                 .ConfigureAwait(false);
 
-            return context
-                is ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
-                ? ImmutableArray.Create(
-                      new ChangeSignatureCodeAction(this, changeSignatureAnalyzedSucceedContext)
-                  )
-                : ImmutableArray<ChangeSignatureCodeAction>.Empty;
+            return
+                context
+                    is ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
+              ? ImmutableArray.Create(
+                    new ChangeSignatureCodeAction(this, changeSignatureAnalyzedSucceedContext)
+                )
+              : ImmutableArray<ChangeSignatureCodeAction>.Empty;
         }
 
         internal async Task<ChangeSignatureAnalyzedContext> GetChangeSignatureContextAsync(

@@ -319,9 +319,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override NamedTypeSymbol SubstituteTypeDeclaration(NamedTypeSymbol previous)
             {
-                return previous.SpecialType == _specialType
-                    ? _type
-                    : base.SubstituteTypeDeclaration(previous);
+                return
+                    previous.SpecialType == _specialType
+                  ? _type
+                  : base.SubstituteTypeDeclaration(previous);
             }
 
             internal override ImmutableArray<CustomModifier> SubstituteCustomModifiers(

@@ -459,10 +459,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                             findInsideTrivia: true
                         );
 
-                        return syntaxFacts.IsGenericName(token.Parent)
-                        || syntaxFacts.IsIndexerMemberCRef(token.Parent)
-                            ? new DocumentSpan(document, token.Span)
-                            : new DocumentSpan(document, location.SourceSpan);
+                        return
+                            syntaxFacts.IsGenericName(token.Parent)
+                            || syntaxFacts.IsIndexerMemberCRef(token.Parent)
+                          ? new DocumentSpan(document, token.Span)
+                          : new DocumentSpan(document, location.SourceSpan);
                     }
                 }
             }

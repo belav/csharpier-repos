@@ -123,9 +123,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocation: null,
                     diagnostics: null
                 );
-                return !elementType.IsDefault
-                    ? elementType
-                    : TypeWithAnnotations.Create(CreateErrorType());
+                return
+                    !elementType.IsDefault
+                  ? elementType
+                  : TypeWithAnnotations.Create(CreateErrorType());
             }
 
             if (_iteratorElementType is null)

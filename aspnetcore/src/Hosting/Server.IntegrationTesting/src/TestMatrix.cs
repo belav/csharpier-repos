@@ -268,18 +268,20 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (arch == RuntimeArchitecture.x64)
             {
                 // Can't run x64 on a x86 OS.
-                return (
-                    RuntimeInformation.OSArchitecture == Architecture.Arm
-                    || RuntimeInformation.OSArchitecture == Architecture.X86
-                )
-                    ? $"Cannot run {arch} on your current system."
-                    : null;
+                return
+                    (
+                        RuntimeInformation.OSArchitecture == Architecture.Arm
+                        || RuntimeInformation.OSArchitecture == Architecture.X86
+                    )
+                  ? $"Cannot run {arch} on your current system."
+                  : null;
             }
 
             // No x86 runtimes available on MacOS or Linux.
-            return OperatingSystem.IsWindows()
-                ? null
-                : $"No {arch} available for non-Windows systems.";
+            return
+                OperatingSystem.IsWindows()
+              ? null
+              : $"No {arch} available for non-Windows systems.";
         }
 
         private bool IsArchitectureSupportedOnServer(RuntimeArchitecture arch, ServerType server)

@@ -1194,23 +1194,25 @@ namespace System.Reflection.Metadata
 
         internal string GetDebuggerDisplay()
         {
-            return IsHead
-                ? string.Join(
-                      "->",
-                      GetChunks().Select(chunk => $"[{Display(chunk._buffer, chunk.Length)}]")
-                  )
-                : $"<{Display(_buffer, Length)}>";
+            return
+                IsHead
+              ? string.Join(
+                    "->",
+                    GetChunks().Select(chunk => $"[{Display(chunk._buffer, chunk.Length)}]")
+                )
+              : $"<{Display(_buffer, Length)}>";
         }
 
         private static string Display(byte[] bytes, int length)
         {
             const int MaxDisplaySize = 64;
 
-            return (length <= MaxDisplaySize)
-                ? BitConverter.ToString(bytes, 0, length)
-                : BitConverter.ToString(bytes, 0, MaxDisplaySize / 2)
-                  + "-...-"
-                  + BitConverter.ToString(bytes, length - MaxDisplaySize / 2, MaxDisplaySize / 2);
+            return
+                (length <= MaxDisplaySize)
+              ? BitConverter.ToString(bytes, 0, length)
+              : BitConverter.ToString(bytes, 0, MaxDisplaySize / 2)
+                + "-...-"
+                + BitConverter.ToString(bytes, length - MaxDisplaySize / 2, MaxDisplaySize / 2);
         }
     }
 }

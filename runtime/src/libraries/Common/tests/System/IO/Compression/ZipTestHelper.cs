@@ -299,9 +299,10 @@ namespace System.IO.Compression.Tests
         private static string FlipSlashes(string name)
         {
             Debug.Assert(!(name.Contains("\\") && name.Contains("/")));
-            return name.Contains("\\")
-                ? name.Replace("\\", "/")
-                : name.Contains("/") ? name.Replace("/", "\\") : name;
+            return
+                name.Contains("\\")
+              ? name.Replace("\\", "/")
+              : name.Contains("/") ? name.Replace("/", "\\") : name;
         }
 
         public static void DirsEqual(string actual, string expected)

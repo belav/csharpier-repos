@@ -60,9 +60,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
             else
             {
-                return Enum.TryParse<TEnum>(value, ignoreCase, out var result)
-                    ? result
-                    : (TEnum?)null;
+                return
+                    Enum.TryParse<TEnum>(value, ignoreCase, out var result)
+                  ? result
+                  : (TEnum?)null;
             }
         }
     }

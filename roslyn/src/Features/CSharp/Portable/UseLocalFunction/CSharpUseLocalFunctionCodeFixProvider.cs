@@ -335,26 +335,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var parameterList = TryGetOrCreateParameterList(anonymousFunction);
             var i = 0;
 
-            return parameterList != null
-                ? parameterList.ReplaceNodes(
-                      parameterList.Parameters,
-                      (parameterNode, _) =>
-                          PromoteParameter(
-                              parameterNode,
-                              delegateMethod.Parameters.ElementAtOrDefault(i++)
-                          )
-                  )
-                : SyntaxFactory.ParameterList(
-                      SyntaxFactory.SeparatedList(
-                          delegateMethod.Parameters.Select(
-                              parameter =>
-                                  PromoteParameter(
-                                      SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken()),
-                                      parameter
-                                  )
-                          )
-                      )
-                  );
+            return
+                parameterList != null
+              ? parameterList.ReplaceNodes(
+                    parameterList.Parameters,
+                    (parameterNode, _) =>
+                        PromoteParameter(
+                            parameterNode,
+                            delegateMethod.Parameters.ElementAtOrDefault(i++)
+                        )
+                )
+              : SyntaxFactory.ParameterList(
+                    SyntaxFactory.SeparatedList(
+                        delegateMethod.Parameters.Select(
+                            parameter =>
+                                PromoteParameter(
+                                    SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken()),
+                                    parameter
+                                )
+                        )
+                    )
+                );
 
             static ParameterSyntax PromoteParameter(
                 ParameterSyntax parameterNode,

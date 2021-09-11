@@ -1365,9 +1365,10 @@ namespace System.Net.Sockets
             int* nameLen
         ) {
             Interop.Error err = Interop.Sys.GetSockName(handle, buffer, nameLen);
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetAvailable(SafeSocketHandle handle, out int available)
@@ -1376,9 +1377,10 @@ namespace System.Net.Sockets
             Interop.Error err = Interop.Sys.GetBytesAvailable(handle, &value);
             available = value;
 
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetAtOutOfBandMark(
@@ -1389,9 +1391,10 @@ namespace System.Net.Sockets
             Interop.Error err = Interop.Sys.GetAtOutOfBandMark(handle, &value);
             atOutOfBandMark = value;
 
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetPeerName(
@@ -1407,9 +1410,10 @@ namespace System.Net.Sockets
             }
 
             nameLen = addrLen;
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError Bind(
@@ -1424,17 +1428,19 @@ namespace System.Net.Sockets
                 err = Interop.Sys.Bind(handle, socketProtocolType, rawBuffer, nameLen);
             }
 
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static SocketError Listen(SafeSocketHandle handle, int backlog)
         {
             Interop.Error err = Interop.Sys.Listen(handle, backlog);
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static SocketError Accept(
@@ -2248,9 +2254,10 @@ namespace System.Net.Sockets
                     &socketError
                 );
                 optionValue = (int)GetSocketErrorForErrorCode(socketError);
-                return getErrorError == Interop.Error.SUCCESS
-                    ? SocketError.Success
-                    : GetSocketErrorForErrorCode(getErrorError);
+                return
+                    getErrorError == Interop.Error.SUCCESS
+                  ? SocketError.Success
+                  : GetSocketErrorForErrorCode(getErrorError);
             }
 
             int value = 0;
@@ -2264,9 +2271,10 @@ namespace System.Net.Sockets
             );
 
             optionValue = value;
-            return err == Interop.Error.SUCCESS
-                ? SocketError.Success
-                : GetSocketErrorForErrorCode(err);
+            return
+                err == Interop.Error.SUCCESS
+              ? SocketError.Success
+              : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetSockOpt(

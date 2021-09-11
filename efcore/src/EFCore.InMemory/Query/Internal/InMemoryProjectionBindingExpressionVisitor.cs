@@ -204,13 +204,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     }
 
                     var translation = _expressionTranslatingExpressionVisitor.Translate(expression);
-                    return translation == null
-                        ? base.Visit(expression)
-                        : new ProjectionBindingExpression(
-                              _queryExpression,
-                              _queryExpression.AddToProjection(translation),
-                              expression.Type.MakeNullable()
-                          );
+                    return
+                        translation == null
+                      ? base.Visit(expression)
+                      : new ProjectionBindingExpression(
+                            _queryExpression,
+                            _queryExpression.AddToProjection(translation),
+                            expression.Type.MakeNullable()
+                        );
                 }
                 else
                 {
@@ -336,9 +337,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             if (extensionExpression is IncludeExpression includeExpression)
             {
-                return _clientEval
-                    ? base.VisitExtension(includeExpression)
-                    : QueryCompilationContext.NotTranslatedExpression;
+                return
+                    _clientEval
+                  ? base.VisitExtension(includeExpression)
+                  : QueryCompilationContext.NotTranslatedExpression;
             }
 
             throw new InvalidOperationException(
@@ -577,13 +579,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         {
             var operand = Visit(unaryExpression.Operand);
 
-            return (
-                unaryExpression.NodeType == ExpressionType.Convert
-                || unaryExpression.NodeType == ExpressionType.ConvertChecked
-            )
-            && unaryExpression.Type == operand.Type
-                ? operand
-                : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+            return
+                (
+                    unaryExpression.NodeType == ExpressionType.Convert
+                    || unaryExpression.NodeType == ExpressionType.ConvertChecked
+                )
+                && unaryExpression.Type == operand.Type
+              ? operand
+              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         private CollectionShaperExpression AddCollectionProjection(

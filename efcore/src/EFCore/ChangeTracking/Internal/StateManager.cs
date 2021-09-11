@@ -538,9 +538,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 return _identityMap1;
             }
 
-            return _identityMaps == null || !_identityMaps.TryGetValue(key, out var identityMap)
-                ? null
-                : identityMap;
+            return
+                _identityMaps == null || !_identityMaps.TryGetValue(key, out var identityMap)
+              ? null
+              : identityMap;
         }
 
         /// <summary>
@@ -933,10 +934,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var dependentIdentityMap = FindIdentityMap(
                 foreignKey.DeclaringEntityType.FindPrimaryKey()
             );
-            return dependentIdentityMap != null
-            && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
-                ? dependentIdentityMap.GetDependentsMap(foreignKey).GetDependents(principalEntry)
-                : Enumerable.Empty<IUpdateEntry>();
+            return
+                dependentIdentityMap != null
+                && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
+              ? dependentIdentityMap.GetDependentsMap(foreignKey).GetDependents(principalEntry)
+              : Enumerable.Empty<IUpdateEntry>();
         }
 
         /// <summary>
@@ -952,10 +954,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var dependentIdentityMap = FindIdentityMap(
                 foreignKey.DeclaringEntityType.FindPrimaryKey()
             );
-            return dependentIdentityMap != null
-                ? dependentIdentityMap.GetDependentsMap(foreignKey)
-                      .GetDependentsUsingRelationshipSnapshot(principalEntry)
-                : Enumerable.Empty<IUpdateEntry>();
+            return
+                dependentIdentityMap != null
+              ? dependentIdentityMap.GetDependentsMap(foreignKey)
+                    .GetDependentsUsingRelationshipSnapshot(principalEntry)
+              : Enumerable.Empty<IUpdateEntry>();
         }
 
         /// <summary>
@@ -984,9 +987,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 var dependentEntry = TryGetEntry(navigationValue, foreignKey.DeclaringEntityType);
 
-                return dependentEntry != null
-                    ? new[] { dependentEntry }
-                    : Enumerable.Empty<InternalEntityEntry>();
+                return
+                    dependentEntry != null
+                  ? new[] { dependentEntry }
+                  : Enumerable.Empty<InternalEntityEntry>();
             }
 
             return ((IEnumerable<object>)navigationValue)

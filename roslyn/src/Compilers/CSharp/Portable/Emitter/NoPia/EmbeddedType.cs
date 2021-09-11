@@ -101,9 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         ) {
             NamedTypeSymbol baseType =
                 UnderlyingNamedType.AdaptedNamedTypeSymbol.BaseTypeNoUseSiteDiagnostics;
-            return (object)baseType != null
-                ? moduleBuilder.Translate(baseType, syntaxNodeOpt, diagnostics)
-                : null;
+            return
+                (object)baseType != null
+              ? moduleBuilder.Translate(baseType, syntaxNodeOpt, diagnostics)
+              : null;
         }
 
         protected override IEnumerable<FieldSymbolAdapter> GetFieldsToEmit()

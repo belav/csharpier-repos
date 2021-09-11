@@ -28,9 +28,10 @@ namespace System.Resources.Extensions
             // the runtime doesn't tolerate anything between type name and comma
             int comma = assemblyQualifiedTypeName.IndexOf(',');
 
-            return comma == -1
-                ? assemblyQualifiedTypeName
-                : assemblyQualifiedTypeName.Slice(0, comma);
+            return
+                comma == -1
+              ? assemblyQualifiedTypeName
+              : assemblyQualifiedTypeName.Slice(0, comma);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -38,9 +39,10 @@ namespace System.Resources.Extensions
         {
             int comma = assemblyName.IndexOf(',');
 
-            return comma == -1
-                ? assemblyName
-                : assemblyName.Slice(0, comma).TrimEnd(s_whiteSpaceChars);
+            return
+                comma == -1
+              ? assemblyName
+              : assemblyName.Slice(0, comma).TrimEnd(s_whiteSpaceChars);
         }
 
         private static bool IsMscorlib(ReadOnlySpan<char> assemblyName)

@@ -254,9 +254,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 return null;
             }
 
-            return node.AncestorsAndSelf().Any(n => n == nodeContainingOriginal)
-                ? matchingNode
-                : null;
+            return
+                node.AncestorsAndSelf().Any(n => n == nodeContainingOriginal)
+              ? matchingNode
+              : null;
         }
 
         private static SyntaxNode? GetNodeContainingTargetNode(SyntaxNode matchingNode)

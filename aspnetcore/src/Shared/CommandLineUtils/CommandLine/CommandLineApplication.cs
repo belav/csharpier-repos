@@ -684,14 +684,15 @@ namespace Microsoft.Extensions.CommandLineUtils
 
         public string GetFullNameAndVersion()
         {
-            return ShortVersionGetter == null
-                ? FullName
-                : string.Format(
-                      CultureInfo.InvariantCulture,
-                      "{0} {1}",
-                      FullName,
-                      ShortVersionGetter()
-                  );
+            return
+                ShortVersionGetter == null
+              ? FullName
+              : string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} {1}",
+                    FullName,
+                    ShortVersionGetter()
+                );
         }
 
         public void ShowRootCommandFullNameAndVersion()

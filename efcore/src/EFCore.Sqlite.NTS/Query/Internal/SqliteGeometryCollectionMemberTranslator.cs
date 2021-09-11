@@ -50,15 +50,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            return Equals(member, _count)
-                ? _sqlExpressionFactory.Function(
-                      "NumGeometries",
-                      new[] { instance! },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { true },
-                      returnType
-                  )
-                : null;
+            return
+                Equals(member, _count)
+              ? _sqlExpressionFactory.Function(
+                    "NumGeometries",
+                    new[] { instance! },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { true },
+                    returnType
+                )
+              : null;
         }
     }
 }
